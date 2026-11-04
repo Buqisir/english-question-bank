@@ -404,7 +404,7 @@ async function assertActualPaperSurface() {
       (option) => ({ ...option, text: `LEGACY POISON ${option.label}` }),
     )
   const analysis = JSON.parse(await (await import('node:fs/promises')).readFile(
-    'app/public/paper-assets/paper-2026-i/latest/analyses/seven-choices-analysis-v1.json',
+    'test-fixtures/retired-paper-assets/paper-2026-i/latest/analyses/seven-choices-analysis-v1.json',
     'utf8',
   ))
   const vite = await import('../app/node_modules/vite/dist/node/index.js')

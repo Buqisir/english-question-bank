@@ -10,7 +10,7 @@ import { normalizePaperGroup } from '../shared/paper-normalization/normalizePape
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const proofAssetRelativePath =
-  'app/public/paper-assets/paper-2026-i/latest/paper-asset.json'
+  'test-fixtures/retired-paper-assets/paper-2026-i/latest/paper-asset.json'
 const proofAssetPath = path.join(rootDir, proofAssetRelativePath)
 const proofAssetBuffer = readFileSync(proofAssetPath)
 const proofAssetSha256 = createHash('sha256').update(proofAssetBuffer).digest('hex')

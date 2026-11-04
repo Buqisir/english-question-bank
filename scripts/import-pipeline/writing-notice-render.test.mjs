@@ -89,7 +89,7 @@ for (const paperId of ['paper-zj-2021-jun', 'paper-zj-2022-jun']) {
   for (const [index, family] of ['application', 'continuation'].entries()) {
     test(`${paperId} ${family}: published notice Print and Screen bytes stay unchanged`, () => {
       const asset = JSON.parse(readFileSync(new URL(
-        `../../app/public/paper-assets/${paperId}/latest/paper-asset.json`, import.meta.url)))
+        `../../test-fixtures/retired-paper-assets/${paperId}/latest/paper-asset.json`, import.meta.url)))
       const notices = asset.content.blocks.filter(block => block.type === 'instruction' && block.text.startsWith('注意'))
       assert.equal(notices.length, 2)
       const fixture = writingNoticeFixture({ family, texts: [notices[index].text] })

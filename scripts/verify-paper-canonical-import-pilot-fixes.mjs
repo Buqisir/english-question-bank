@@ -314,15 +314,15 @@ function buildPilotRequest(overrides = {}) {
     ),
     listeningQuestionsBytes: readFileSync(path.join(
       repositoryRoot,
-      'app/public/paper-assets/paper-2026-i/latest/listening/questions.json',
+      'test-fixtures/retired-paper-assets/paper-2026-i/latest/listening/questions.json',
     )),
     listeningAnswersBytes: readFileSync(path.join(
       repositoryRoot,
-      'app/public/paper-assets/paper-2026-i/latest/listening/answers.json',
+      'test-fixtures/retired-paper-assets/paper-2026-i/latest/listening/answers.json',
     )),
     listeningTranscriptBytes: readFileSync(path.join(
       repositoryRoot,
-      'app/public/paper-assets/paper-2026-i/latest/listening/transcript.json',
+      'test-fixtures/retired-paper-assets/paper-2026-i/latest/listening/transcript.json',
     )),
     listeningInventoryBytes: readFileSync(path.join(
       repositoryRoot,
@@ -337,7 +337,7 @@ function buildPilotRequest(overrides = {}) {
     ),
     tableVisualProofBytes: readFileSync(path.join(
       repositoryRoot,
-      'app/public/paper-assets/paper-2026-i/latest/figures/reading-a-table-1.png',
+      'test-fixtures/retired-paper-assets/paper-2026-i/latest/figures/reading-a-table-1.png',
     )),
     applicationWritingCaptureBytes: readFileSync(path.join(
       repositoryRoot,
@@ -1316,7 +1316,7 @@ async function assertPaperBrowseSelectionModes() {
           contentType: 'application/json',
           body: readFileSync(path.join(
             repositoryRoot,
-            'app/public/paper-assets/paper-2026-i/latest/analyses/reading-choice-analysis-v1.json',
+            'test-fixtures/retired-paper-assets/paper-2026-i/latest/analyses/reading-choice-analysis-v1.json',
           )),
         })
       }

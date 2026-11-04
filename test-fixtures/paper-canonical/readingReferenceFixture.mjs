@@ -185,7 +185,7 @@ function removeReadingProofSlots(source) {
 export const readingReferenceHashes = hashes
 
 export function makeReadingCanonicalReferenceFixture() {
-  const baseUrl = new URL('../../app/public/paper-assets/paper-2026-i/latest/', import.meta.url)
+  const baseUrl = new URL('../retired-paper-assets/paper-2026-i/latest/', import.meta.url)
   const paperAsset = readHashBoundBytes(new URL('paper-asset.json', baseUrl), hashes.paperAsset)
   const answerKey = readHashBoundBytes(new URL('answer-key.json', baseUrl), hashes.answerKey)
   const sourcePdf = readHashBoundBytes(new URL('../../scripts/import-pipeline/papers/paper-2026-i/source/paper.pdf', import.meta.url), hashes.sourcePdf)

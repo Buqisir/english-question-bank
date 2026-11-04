@@ -115,7 +115,7 @@ function applicationSurface(consumption) {
 function applicationExportItem(paperId, groupId) {
   const asset = JSON.parse(readFileSync(
     new URL(
-      `../app/public/paper-assets/${paperId}/latest/paper-asset.json`,
+      `../test-fixtures/retired-paper-assets/${paperId}/latest/paper-asset.json`,
       import.meta.url,
     ),
     'utf8',
@@ -830,7 +830,7 @@ const providedScreenBox = providedScreen.pageModel.blocks.find(
 )
 const providedAsset = JSON.parse(readFileSync(
   new URL(
-    '../app/public/paper-assets/paper-2026-i/latest/paper-asset.json',
+    '../test-fixtures/retired-paper-assets/paper-2026-i/latest/paper-asset.json',
     import.meta.url,
   ),
   'utf8',
@@ -1235,7 +1235,7 @@ async function assertActualPaperSurfaceArtifacts() {
       const canonical = applicationGroup(consumption)
       const asset = JSON.parse(readFileSync(
         new URL(
-          `../app/public/paper-assets/${consumption.paperId}/latest/paper-asset.json`,
+          `../test-fixtures/retired-paper-assets/${consumption.paperId}/latest/paper-asset.json`,
           import.meta.url,
         ),
         'utf8',
@@ -1439,7 +1439,7 @@ async function assertActualPaperSurfaceArtifacts() {
       const canonical = applicationGroup(consumption)
       const asset = JSON.parse(readFileSync(
         new URL(
-          '../app/public/paper-assets/paper-2026-i/latest/paper-asset.json',
+          '../test-fixtures/retired-paper-assets/paper-2026-i/latest/paper-asset.json',
           import.meta.url,
         ),
         'utf8',

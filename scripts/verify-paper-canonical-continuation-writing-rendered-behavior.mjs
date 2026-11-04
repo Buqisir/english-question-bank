@@ -3001,7 +3001,7 @@ async function assertBrowserArtifacts() {
     {
       const asset = JSON.parse(readFileSync(
         new URL(
-          '../app/public/paper-assets/paper-2026-i/latest/paper-asset.json',
+          '../test-fixtures/retired-paper-assets/paper-2026-i/latest/paper-asset.json',
           import.meta.url,
         ),
         'utf8',
@@ -3263,7 +3263,7 @@ async function assertBrowserArtifacts() {
     {
       const asset = JSON.parse(readFileSync(
         new URL(
-          '../app/public/paper-assets/paper-zj-2020-jul/latest/paper-asset.json',
+          '../test-fixtures/retired-paper-assets/paper-zj-2020-jul/latest/paper-asset.json',
           import.meta.url,
         ),
         'utf8',
@@ -3770,7 +3770,7 @@ async function assertBrowserArtifacts() {
     for (const { label, consumption, canonical } of cases) {
       const asset = JSON.parse(readFileSync(
         new URL(
-          `../app/public/paper-assets/${consumption.paperId}/latest/paper-asset.json`,
+          `../test-fixtures/retired-paper-assets/${consumption.paperId}/latest/paper-asset.json`,
           import.meta.url,
         ),
         'utf8',

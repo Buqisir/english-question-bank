@@ -75,11 +75,11 @@ const compilation = compileCanonicalPaper(fixture.request)
 assert.equal(compilation.disposition, 'ready')
 const asset = JSON.parse(new TextDecoder().decode(fixture.sourceAsset))
 const clozeAnalysis = JSON.parse(readFileSync(
-  'app/public/paper-assets/paper-2026-i/latest/analyses/cloze-analysis-v1.json',
+  'test-fixtures/retired-paper-assets/paper-2026-i/latest/analyses/cloze-analysis-v1.json',
   'utf8',
 ))
 const grammarFillAnalysisPath =
-  'app/public/paper-assets/paper-2026-i/latest/analyses/grammar-fill-analysis-v1.json'
+  'test-fixtures/retired-paper-assets/paper-2026-i/latest/analyses/grammar-fill-analysis-v1.json'
 const grammarFillAnalysisBytes = readFileSync(grammarFillAnalysisPath)
 const grammarFillAnalysis = JSON.parse(grammarFillAnalysisBytes)
 const officialAnswers = JSON.parse(readFileSync(

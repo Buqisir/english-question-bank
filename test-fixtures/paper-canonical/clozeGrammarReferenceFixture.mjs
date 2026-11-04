@@ -6,8 +6,8 @@ import {
   makeReadyCanonicalFixture,
 } from './foundationFixture.mjs'
 
-const paperAssetUrl = new URL('../../app/public/paper-assets/paper-2026-i/latest/paper-asset.json', import.meta.url)
-const answerKeyUrl = new URL('../../app/public/paper-assets/paper-2026-i/latest/answer-key.json', import.meta.url)
+const paperAssetUrl = new URL('../retired-paper-assets/paper-2026-i/latest/paper-asset.json', import.meta.url)
+const answerKeyUrl = new URL('../retired-paper-assets/paper-2026-i/latest/answer-key.json', import.meta.url)
 const questionPdfUrl = new URL('../paper-import/paper-2026-i-canonical-pilot/paper.pdf', import.meta.url)
 const grammarFillPromptCaptureUrl = new URL(
   '../paper-import/paper-2026-i-canonical-pilot/reviewed-evidence/grammar-fill-prompt-source-capture.json',

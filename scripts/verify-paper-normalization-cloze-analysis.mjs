@@ -5,14 +5,14 @@ import { createServer } from '../app/node_modules/vite/dist/node/index.js'
 
 const asset = JSON.parse(
   await readFile(
-    new URL('../app/public/paper-assets/paper-2026-i/latest/paper-asset.json', import.meta.url),
+    new URL('../test-fixtures/retired-paper-assets/paper-2026-i/latest/paper-asset.json', import.meta.url),
     'utf8',
   ),
 )
 const analysis = JSON.parse(
   await readFile(
     new URL(
-      '../app/public/paper-assets/paper-2026-i/latest/analyses/cloze-analysis-v1.json',
+      '../test-fixtures/retired-paper-assets/paper-2026-i/latest/analyses/cloze-analysis-v1.json',
       import.meta.url,
     ),
     'utf8',

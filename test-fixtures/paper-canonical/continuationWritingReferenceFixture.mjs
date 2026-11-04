@@ -94,7 +94,7 @@ export const continuationWritingReferenceHashes = references
 export function makeContinuationWritingReferenceFixture(paperId) {
   const reference = references[paperId]
   if (!reference?.source) throw new Error(`Unknown ready Continuation Writing reference paper ${paperId}`)
-  const assetBaseUrl = new URL(`../../app/public/paper-assets/${paperId}/latest/`, import.meta.url)
+  const assetBaseUrl = new URL(`../retired-paper-assets/${paperId}/latest/`, import.meta.url)
   readHashBoundBytes(new URL('paper-asset.json', assetBaseUrl), reference.asset, `${paperId} paper asset`)
   const importMeta = readHashBoundBytes(new URL('import-meta.json', assetBaseUrl), reference.importMeta, `${paperId} import meta`)
   const meta = JSON.parse(new TextDecoder().decode(importMeta))

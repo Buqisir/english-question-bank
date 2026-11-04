@@ -187,7 +187,7 @@ function canonicalExportItem(canonicalGroup) {
 function makeWholePaperSurfaceAsset(consumption) {
   const asset = JSON.parse(
     readFileSync(
-      'app/public/paper-assets/paper-2026-i/latest/paper-asset.json',
+      'test-fixtures/retired-paper-assets/paper-2026-i/latest/paper-asset.json',
       'utf8',
     ),
   )

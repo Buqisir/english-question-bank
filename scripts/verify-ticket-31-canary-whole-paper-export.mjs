@@ -108,7 +108,7 @@ function prepareBrowsableStore(sourceRoot, targetRoot) {
       cpSync(path.join(sourceRoot, row.paper_id, 'versions', row.version_name, 'paper-asset.json'), path.join(versionDir, 'canonical/source-asset.bin'))
       // Same layout as production backfill: sealed source separate from the
       // existing browser JSON. Never rewrite the immutable publication fixture.
-      const mirror = path.join('app/public/paper-assets', row.paper_id, 'latest/paper-asset.json')
+      const mirror = path.join(row.paper_id === 'paper-960d0f8d' ? 'app/public/paper-assets' : 'test-fixtures/retired-paper-assets', row.paper_id, 'latest/paper-asset.json')
       cpSync(mirror, path.join(versionDir, 'paper-asset.json'))
       cpSync(mirror, path.join(latestDir, 'paper-asset.json'))
     }

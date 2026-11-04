@@ -25,10 +25,10 @@ const predecessorBatch = JSON.parse(await readFile(new URL('test-fixtures/paper-
 const batch = JSON.parse(await readFile(new URL('test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v2/batch-evidence.json', root), 'utf8'))
 const paper2026CapturePath = 'test-fixtures/paper-import/paper-canonical-source-captures/ticket-26-v2/paper-2026-i/source-capture-v1.json'
 const paper2026CaptureBytes = new Uint8Array(await readFile(new URL(paper2026CapturePath, root)))
-const paper2026FrozenAssetBytes = new Uint8Array(await readFile(new URL('app/public/paper-assets/paper-2026-i/latest/paper-asset.json', root)))
+const paper2026FrozenAssetBytes = new Uint8Array(await readFile(new URL('test-fixtures/retired-paper-assets/paper-2026-i/latest/paper-asset.json', root)))
 const paper2026FrozenAsset = JSON.parse(new TextDecoder().decode(paper2026FrozenAssetBytes))
-const paper2026FrozenAnswers = JSON.parse(await readFile(new URL('app/public/paper-assets/paper-2026-i/latest/answer-key.json', root), 'utf8'))
-const paper2026FrozenFigures = JSON.parse(await readFile(new URL('app/public/paper-assets/paper-2026-i/latest/figures/manifest.json', root), 'utf8'))
+const paper2026FrozenAnswers = JSON.parse(await readFile(new URL('test-fixtures/retired-paper-assets/paper-2026-i/latest/answer-key.json', root), 'utf8'))
+const paper2026FrozenFigures = JSON.parse(await readFile(new URL('test-fixtures/retired-paper-assets/paper-2026-i/latest/figures/manifest.json', root), 'utf8'))
 const semanticOracles = JSON.parse(await readFile(new URL('test-fixtures/paper-import/paper-canonical-legacy-source-adapter/semantic-oracles-v1.json', root), 'utf8'))
 const { confirmCanonicalCandidate, importCanonicalCandidate } = trustedImport
 

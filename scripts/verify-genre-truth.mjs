@@ -65,13 +65,15 @@ console.log('=== Req 1+2: decisions artifact coverage + enum ===')
     const ids = new Set(decisions.map((d) => d.passageId))
     assert('Req1: no duplicate passageIds', ids.size === decisions.length, `${decisions.length - ids.size} duplicates`)
 
-    const assetRoot = path.join(rootDir, 'app/public/paper-assets')
+    const assetRoots = ['app/public/paper-assets', 'test-fixtures/retired-paper-assets'].map((dir) => path.join(rootDir, dir))
     const assetIds = new Set()
-    for (const entry of readdirSync(assetRoot, { withFileTypes: true }).filter((entry) => entry.isDirectory())) {
-      const latest = path.join(assetRoot, entry.name, 'latest/paper-asset.json')
-      const asset = JSON.parse(readFileSync(existsSync(latest) ? latest : path.join(assetRoot, entry.name, 'paper-asset.json'), 'utf8'))
-      for (const groupId of Object.keys(asset.content.groups)) {
-        assetIds.add(`passage-${groupId.replace(/^group-/, '').replace(/[^a-zA-Z0-9-]/g, '-')}`)
+    for (const assetRoot of assetRoots) {
+      for (const entry of readdirSync(assetRoot, { withFileTypes: true }).filter((entry) => entry.isDirectory())) {
+        const latest = path.join(assetRoot, entry.name, 'latest/paper-asset.json')
+        const asset = JSON.parse(readFileSync(existsSync(latest) ? latest : path.join(assetRoot, entry.name, 'paper-asset.json'), 'utf8'))
+        for (const groupId of Object.keys(asset.content.groups)) {
+          assetIds.add(`passage-${groupId.replace(/^group-/, '').replace(/[^a-zA-Z0-9-]/g, '-')}`)
+        }
       }
     }
     const missing = [...ids].filter((id) => !assetIds.has(id))

@@ -412,7 +412,7 @@ function assetProjectionBytes(root, paperId, versionName, oracle) {
     capture = JSON.parse(sourceAssetBytes)
   } catch {
     assert.equal(sourceAssetBytes.subarray(0, 4).toString('hex'), '504b0304', `${paperId} non-JSON Screen source must be an immutable DOCX/ZIP asset`)
-    const publicAssetPath = path.join('app/public/paper-assets', paperId, 'latest', 'paper-asset.json')
+    const publicAssetPath = path.join(paperId === 'paper-960d0f8d' ? 'app/public/paper-assets' : 'test-fixtures/retired-paper-assets', paperId, 'latest', 'paper-asset.json')
     const publicAssetBytes = bytes(publicAssetPath)
     const publicAsset = JSON.parse(publicAssetBytes)
     assert.equal(publicAsset.paper?.paperId, paperId, `${paperId} existing Screen asset identity must close`)

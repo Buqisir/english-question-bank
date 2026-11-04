@@ -298,7 +298,7 @@ const railViewSrc = read('app/src/features/paper-browse/SimilarQuestionsRailView
 const similarServiceSrc = read('app/src/services/similarQuestions.ts')
 const designSrc = read('DESIGN.md')
 const asset = JSON.parse(
-  read('app/public/paper-assets/paper-2026-i/latest/paper-asset.json'),
+  read('test-fixtures/retired-paper-assets/paper-2026-i/latest/paper-asset.json'),
 )
 const lecturePrototypeAsset = JSON.parse(
   read('app/public/paper-assets/paper-mock-gd-2026-m1/latest/paper-asset.json'),
@@ -985,7 +985,7 @@ const { buildSevenChoicesSurfaceModel } = await import(
   '../app/src/features/paper-intelligence/sevenChoicesSurfaceAdapter.ts'
 )
 const sevenChoicesAnalysis2026i = JSON.parse(
-  read('app/public/paper-assets/paper-2026-i/latest/analyses/seven-choices-analysis-v1.json'),
+  read('test-fixtures/retired-paper-assets/paper-2026-i/latest/analyses/seven-choices-analysis-v1.json'),
 )
 const sevenChoicesModel2026i = buildSevenChoicesSurfaceModel({
   asset,
@@ -1200,13 +1200,13 @@ assert(
 // paper-2026-i analysis fixtures (proves the 按需补拉 call has real data
 // to run against, not just a source-shape match).
 const cloze2026iAsset = JSON.parse(
-  read('app/public/paper-assets/paper-2026-i/latest/paper-asset.json'),
+  read('test-fixtures/retired-paper-assets/paper-2026-i/latest/paper-asset.json'),
 )
 const cloze2026iAnalysis = JSON.parse(
-  read('app/public/paper-assets/paper-2026-i/latest/analyses/cloze-analysis-v1.json'),
+  read('test-fixtures/retired-paper-assets/paper-2026-i/latest/analyses/cloze-analysis-v1.json'),
 )
 const grammarFill2026iAnalysis = JSON.parse(
-  read('app/public/paper-assets/paper-2026-i/latest/analyses/grammar-fill-analysis-v1.json'),
+  read('test-fixtures/retired-paper-assets/paper-2026-i/latest/analyses/grammar-fill-analysis-v1.json'),
 )
 try {
   const { buildClozeAnalysisSurfaceModel } = await import(
@@ -1511,7 +1511,7 @@ assert(
     const readingModel2026i = buildPaperAssetSurfaceModel({
       asset,
       analysis: JSON.parse(
-        read('app/public/paper-assets/paper-2026-i/latest/analyses/reading-choice-analysis-v1.json'),
+        read('test-fixtures/retired-paper-assets/paper-2026-i/latest/analyses/reading-choice-analysis-v1.json'),
       ),
       groupId: 'group-2026-i-reading-a',
     })

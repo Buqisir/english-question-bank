@@ -23,9 +23,9 @@ const proofs = [
   {
     paperId: 'paper-2026-i',
     groupId: 'group-2026-i-grammar-fill',
-    assetPath: '../app/public/paper-assets/paper-2026-i/latest/paper-asset.json',
+    assetPath: '../test-fixtures/retired-paper-assets/paper-2026-i/latest/paper-asset.json',
     analysisPath:
-      '../app/public/paper-assets/paper-2026-i/latest/analyses/grammar-fill-analysis-v1.json',
+      '../test-fixtures/retired-paper-assets/paper-2026-i/latest/analyses/grammar-fill-analysis-v1.json',
   },
   {
     paperId: 'paper-960d0f8d',
@@ -133,7 +133,7 @@ try {
   const sevenChoicesAnalysis = JSON.parse(
     await readFile(
       new URL(
-        '../app/public/paper-assets/paper-2026-i/latest/analyses/seven-choices-analysis-v1.json',
+        '../test-fixtures/retired-paper-assets/paper-2026-i/latest/analyses/seven-choices-analysis-v1.json',
         import.meta.url,
       ),
       'utf8',

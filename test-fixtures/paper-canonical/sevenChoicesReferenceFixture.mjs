@@ -44,7 +44,7 @@ export const sevenChoicesReferenceHashes = references
 export function makeSevenChoicesCanonicalReferenceFixture(paperId) {
   const hashes = references[paperId]
   if (!hashes) throw new Error(`Unknown Seven Choices reference paper ${paperId}`)
-  const baseUrl = new URL(`../../app/public/paper-assets/${paperId}/latest/`, import.meta.url)
+  const baseUrl = new URL(`${paperId === 'paper-960d0f8d' ? '../../app/public/paper-assets' : '../retired-paper-assets'}/${paperId}/latest/`, import.meta.url)
   const paperAsset = readHashBoundBytes(new URL('paper-asset.json', baseUrl), hashes.paperAsset)
   const answerKey = readHashBoundBytes(new URL('answer-key.json', baseUrl), hashes.answerKey)
   const importMeta = readHashBoundBytes(new URL('import-meta.json', baseUrl), hashes.importMeta)

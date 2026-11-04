@@ -15,7 +15,7 @@ import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
 
 const asset = JSON.parse(
   await readFile(
-    new URL('../app/public/paper-assets/paper-2026-i/latest/paper-asset.json', import.meta.url),
+    new URL('../test-fixtures/retired-paper-assets/paper-2026-i/latest/paper-asset.json', import.meta.url),
     'utf8',
   ),
 )

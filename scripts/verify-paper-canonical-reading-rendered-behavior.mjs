@@ -61,7 +61,7 @@ function sourceDocumentArtifactId(bytes) {
 function makeCanonicalFigureFixture() {
   const fixture = makeReadyCanonicalFixture()
   const mediaBytes = new Uint8Array(readFileSync(new URL(
-    '../app/public/paper-assets/paper-2026-i/latest/figures/reading-a-table-1.png',
+    '../test-fixtures/retired-paper-assets/paper-2026-i/latest/figures/reading-a-table-1.png',
     import.meta.url,
   )))
   const { mediaDigest, artifactId } = sourceDocumentArtifactId(mediaBytes)

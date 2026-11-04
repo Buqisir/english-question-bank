@@ -442,7 +442,7 @@ const corpusFiles = frozenCorpusManifest.membership.paperIds
   .map((paperId) => ({
     paperId,
     assetPath: path.join(
-      'app/public/paper-assets',
+      paperId === 'paper-960d0f8d' ? 'app/public/paper-assets' : 'test-fixtures/retired-paper-assets',
       paperId,
       'latest/paper-asset.json',
     ),

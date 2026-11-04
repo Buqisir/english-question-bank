@@ -21,7 +21,7 @@ const env = {
 const previous = Object.fromEntries(Object.keys(env).map(key => [key, process.env[key]]))
 try {
   cpSync(path.join(root, 'data/question-bank.sqlite'), env.QUESTION_BANK_DB)
-  cpSync(path.join(root, 'app/public/paper-assets', paperId), path.join(assetRoot, paperId), { recursive: true })
+  cpSync(path.join(root, 'test-fixtures/retired-paper-assets', paperId), path.join(assetRoot, paperId), { recursive: true })
   Object.assign(process.env, env)
   const { getQuestionGroupDetail, getPrintReadyByGroupId, isGroupPrintReady } = await import('../server/api.mjs')
   const meta = JSON.parse(readFileSync(metaPath, 'utf8'))
