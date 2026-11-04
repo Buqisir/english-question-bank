@@ -161,6 +161,7 @@ const groupTypeLabels = {
   cloze: '完形填空',
   seven_choices: '七选五',
   grammar_cloze: '语法填空',
+  errorCorrection: '短文改错',
   writing: '写作',
   continuation: '读后续写',
   listening: '听力',

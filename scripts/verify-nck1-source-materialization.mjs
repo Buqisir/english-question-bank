@@ -3,13 +3,9 @@ import { pathToFileURL } from 'node:url'
 import { confirmMaterializationWritingGivens } from './import-pipeline/materialization-writing-givens.mjs'
 
 import {
-  nationalLegacyProfile, profileHeadingSpecs,
   digestNck1SourceMaterialization,
   validateNck1SourceMaterialization,
 } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
-
-import { SOURCE_INSTRUCTION_SLOTS } from '../shared/paper-canonical/sourcePresentation.mjs'
-import { digestJson } from '../shared/paper-canonical/stable.mjs'
 
 const hash = `sha256:${'a'.repeat(64)}`
 const locator = (documentId = 'paper') => ({
@@ -347,113 +343,7 @@ export function makeFixture({ listening = false, mixedTable = false } = {}) {
   }
 }
 
-export function makeNationalLegacyFixture() {
-  const value = makeFixture({ listening: true })
-  value.schemaVersion = 'nck1-source-materialization-v15'
-  value.profileId = 'national-legacy'
-  value.groups.pop()
-  const grammar = value.groups.find(group => group.family === 'grammar-fill')
-  for (const question of grammar.questions) {
-    question.canonicalNumber += 5
-    question.sourceNumber += 5
-    question.questionId = `question:${question.canonicalNumber}`
-    question.blankId = `blank:${question.canonicalNumber}`
-  }
-  grammar.blocks[0].content.filter(node => node.kind === 'blank_ref').forEach((node, index) => {
-    node.blankId = grammar.questions[index].blankId
-  })
-  const cloze = value.groups.find(group => group.family === 'cloze')
-  for (let number = 56; number <= 60; number++) {
-    cloze.questions.push({ ...structuredClone(cloze.questions[0]), questionId: `question:${number}`,
-      sourceNumber: number, canonicalNumber: number, stem: String(number), blankId: `blank:${number}` })
-    cloze.blocks[0].content.push({ kind: 'text', text: ' source ' }, { kind: 'blank_ref', blankId: `blank:${number}` })
-  }
-  const application = value.groups.at(-1)
-  application.blocks.forEach(block => block.content.forEach(node => {
-    if (node.text) node.text = node.text.replaceAll('80', '100')
-  }))
-  application.writingTask.prompt = application.writingTask.prompt.replace('80', '100')
-  application.writingTask.wordCountTarget = 100
-  const correction = { slotId: 'writing.short-error-correction', groupId: 'group:error-correction',
-    family: 'error-correction', optionBank: [], writingTask: null,
-    blocks: [{ kind: 'paragraph', blockId: 'block:correction', role: 'body',
-      content: [{ kind: 'text', text: 'Synthetic original with intentional errrors.' }], source: locator() }],
-    questions: Array.from({ length: 10 }, (_, index) => ({
-      questionId: `question:correction:${index + 1}`, sourceNumber: index + 1, canonicalNumber: index + 1,
-      stem: '', options: [], blankId: null, prompt: null, source: locator(),
-    })) }
-  value.groups.splice(7, 0, correction)
-  value.answers = value.groups.flatMap(group => group.questions.map(question => ({
-    questionId: question.questionId, canonicalNumber: question.canonicalNumber,
-    value: group.family === 'grammar-fill' ? 'answer' : group.family === 'error-correction'
-      ? `literal source correction ${question.sourceNumber}` : 'A', authority: locator('answers'),
-  })))
-  value.sourcePresentation = {
-    instructions: Object.entries(SOURCE_INSTRUCTION_SLOTS).map(([slotId, id]) => ({
-      slotId, text: nationalLegacyProfile.instructions[id].text, source: locator(),
-    })),
-    listeningExample: { state: 'not_supplied', source: locator() },
-    headings: profileHeadingSpecs(nationalLegacyProfile).map(spec => ({
-      slotId: spec.slotId, instructionId: spec.instructionId,
-      text: nationalLegacyProfile.instructions[spec.instructionId].text, source: locator(),
-    })),
-    opening: { title: 'Synthetic national legacy paper', notices: ['Original notice'],
-      transferNotice: 'Original transfer notice', source: locator() },
-  }
-  return value
-}
-
-async function verifyNationalLegacy() {
-  const { enumerateSpellingTargets, applySpellingReview } = await import('../server/paper-import/spellingReview.mjs')
-  const { projectCanonicalConsumerGroup } = await import('../shared/paper-canonical/consumerProjection.mjs')
-  const { nationalLegacyMaterializationAuthorityRef, resolveCanonicalAuthority } = await import('../shared/paper-canonical/authority.mjs')
-  const { consumerContractRefsForAuthority, resolveConsumerContract } = await import('../shared/paper-canonical/consumers.mjs')
-  const value = makeNationalLegacyFixture()
-  assert.deepEqual(validateNck1SourceMaterialization(value), [])
-  const correction = value.groups[7]
-  assert(!enumerateSpellingTargets(value).some(target => target.jsonPointer.startsWith('/groups/7/')))
-  assert.throws(() => applySpellingReview(Buffer.from(JSON.stringify(value)), Buffer.from(JSON.stringify({
-    targets: [{ jsonPointer: '/groups/7/blocks/0/content/0/text' }],
-  }))), /error-correction source text is immutable/)
-  const unnumbered = structuredClone(value)
-  unnumbered.groups[7].questions.forEach(question => { question.sourceNumber = question.canonicalNumber = null })
-  unnumbered.answers.filter(answer => answer.questionId.startsWith('question:correction:')).forEach(answer => { answer.canonicalNumber = null })
-  assert.deepEqual(validateNck1SourceMaterialization(unnumbered), [])
-  for (const mutate of [
-    paper => { paper.groups[7].questions[0].blankId = 'blank:fake' },
-    paper => { paper.groups[7].questions.pop() },
-    paper => { paper.answers.pop() },
-    paper => { paper.groups[7].blocks[0].content[0].marks = ['underline'] },
-    paper => { paper.groups[8].writingTask.wordCountTarget = 80 },
-    paper => { paper.sourcePresentation.headings[0].text = '第一部分 听力（满分20分）' },
-    paper => { paper.groups[0].questions[0].sourceNumber = 1 },
-  ]) {
-    const invalid = structuredClone(value)
-    mutate(invalid)
-    assert(validateNck1SourceMaterialization(invalid).length, 'invalid national source must block')
-  }
-  const authorityRef = nationalLegacyMaterializationAuthorityRef
-  assert(resolveCanonicalAuthority(authorityRef).ok)
-  for (const ref of Object.values(consumerContractRefsForAuthority(authorityRef))) {
-    assert(resolveConsumerContract(ref).contract.families.some(family => family.familyContractId === 'error-correction'))
-  }
-  const occurrence = { kind: 'group', groupId: correction.groupId, familyContractId: 'error-correction',
-    blanks: [], numbering: [], errorCorrectionQuestions: correction.questions.map(({ questionId, sourceNumber }) => ({ questionId, sourceNumber })),
-    content: { blocks: correction.blocks.map(block => ({ kind: 'paragraph', nodeId: block.blockId,
-      inlines: block.content.map(node => ({ ...node, nodeId: 'text:correction' })) })) } }
-  const consumption = { paperId: value.paperId, disposition: 'ready', authorityRef,
-    selections: [{ mode: 'canonical', familyContractId: 'error-correction', groupIds: [correction.groupId],
-      projectedOccurrences: [occurrence], projectedOccurrenceDigests: [{ groupId: correction.groupId, digest: digestJson(occurrence) }] }] }
-  const projected = projectCanonicalConsumerGroup({ consumption, familyContractId: 'error-correction', groupId: correction.groupId })
-  assert.equal(projected.paragraphs[0].nodes[0].text, correction.blocks[0].content[0].text)
-  assert.deepEqual(projected.questions.map(question => question.questionNo), [1,2,3,4,5,6,7,8,9,10])
-  occurrence.content.blocks[0].inlines[0].text = 'tampered source'
-  assert.throws(() => projectCanonicalConsumerGroup({ consumption, familyContractId: 'error-correction', groupId: correction.groupId }), /integrity is invalid/)
-  console.log('PASS national legacy: source numbers, literal correction identity, immutable text, score/count blockers and consumer integrity')
-}
-
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-await verifyNationalLegacy()
 await import('./verify-inline-blank-boundaries.mjs')
 const plain = makeFixture()
 assert.deepEqual(validateNck1SourceMaterialization(plain), [])

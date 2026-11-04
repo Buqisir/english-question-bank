@@ -1697,10 +1697,14 @@ export function createDraftPaperStore({
       let rendered
       if (edition === 'answerOnly') {
         const paperName = draftPaper.title || '未命名英语练习卷'
+        const fullSource = sourceByPaper.size === 1 ? [...sourceByPaper.values()][0] : null
+        const sourceGroupCount = fullSource ? fullSource.materialization.groups.length
+          + (fullSource.materialization.listening.state === 'captured' ? 2 : 0) : 0
         const wholePaper = (draftPaper.questionNumberStart ?? 1) === 1
+          && selected.length === sourceGroupCount
           && ownsCompletePaperOpening(canonicalConsumption, selected.map(item => item.groupId))
-        const html = wholePaper && sourceByPaper.size === 1 && [...sourceByPaper.values()][0]
-          ? buildAnswerOnlyHtml({ ...[...sourceByPaper.values()][0], paperName })
+        const html = wholePaper && fullSource
+          ? buildAnswerOnlyHtml({ ...fullSource, paperName })
           : buildAssembledAnswerOnlyHtml({ paperName, questionNumberStart: draftPaper.questionNumberStart ?? 1,
             items: exportItems.map(item => {
               const consumption = canonicalSourceConsumptionForGroup(canonicalConsumption, item.detail.id)

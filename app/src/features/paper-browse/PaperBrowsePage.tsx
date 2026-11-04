@@ -537,6 +537,7 @@ function canonicalRailLabel(
     'reading.seven-choices': '七选五',
     'language.cloze': '完形',
     'language.grammar-fill': '语法',
+    'writing.short-error-correction': '短文改错',
     'writing.application': '应用文',
     'writing.continuation': '续写',
   }
