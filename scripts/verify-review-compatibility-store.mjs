@@ -226,9 +226,12 @@ try {
   try {
     process.env.PATH = path.join(root, 'no-executables')
     mkdirSync(process.env.PATH)
-    // RSS supervision needs only the OS process inventory. Content comparison
+    // Supervision needs OS process inventory and boot identity. Content comparison
     // must still succeed without pdfinfo, rendering or conversion executables.
     symlinkSync('/bin/ps', path.join(process.env.PATH, 'ps'))
+    if (process.platform === 'darwin') {
+      symlinkSync('/usr/sbin/sysctl', path.join(process.env.PATH, 'sysctl'))
+    }
     resultA = await compatibility.compute(a)
   } finally { process.env.PATH = oldPath }
   assert.equal(resultA.comparison.result, 'equal', JSON.stringify(resultA.comparison))
