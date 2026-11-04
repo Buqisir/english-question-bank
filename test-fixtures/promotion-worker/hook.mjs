@@ -21,6 +21,8 @@ const replacements = {
       "        __promotionFault('supervisor-ack-before-recheck');\n        operations.acknowledge(row.id, outcome)"],
     ["  send(canRelease ? 'outcome' : 'unknown'", "  if (canRelease) __promotionFault('supervisor-before-outcome');\n  send(canRelease ? 'outcome' : 'unknown'"],
     ["  if (canRelease && process.connected) {", "  if (canRelease) __promotionFault('supervisor-after-outcome');\n  if (canRelease && process.connected) {"],
+    ["  } else if (process.connected) {\n    phase = 'done'",
+      "  } else if (process.connected) {\n    __promotionFault('supervisor-unknown-before-disconnect');\n    phase = 'done'"],
     ["      phase = 'launch'\n      send('ready')", "      phase = 'launch'\n      __promotionFault('supervisor-ready');\n      send('ready')"],
     ["      phase = 'running'\n      executor.send(", "      phase = 'running'\n      __promotionFault('supervisor-before-go');\n      executor.send("],
   ],

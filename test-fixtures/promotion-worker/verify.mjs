@@ -72,7 +72,7 @@ function query(file, sql, parameters = []) {
   const db = new DatabaseSync(file, { readOnly: true })
   try { return db.prepare(sql).all(...parameters) } finally { db.close() }
 }
-async function until(predicate, label, timeout = 20_000) {
+export async function until(predicate, label, timeout = 20_000) {
   const end = Date.now() + timeout
   while (Date.now() < end) {
     try { const value = await predicate(); if (value) return value } catch {}

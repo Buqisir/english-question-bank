@@ -9,10 +9,11 @@ import { DatabaseSync } from 'node:sqlite'
 import { createImportReviewStore } from '../server/import-review/importReviewStore.mjs'
 import { createPromotionWorkerService } from '../server/import-review/runPromotionWorker.mjs'
 import { createPromotionOperationStore, ensurePromotionOperationShape } from '../server/import-review/promotionOperationStore.mjs'
+import { inspectPromotionReservation } from '../server/import-review/reviewCompatibilityScheduling.mjs'
 import { reviewProcessIdentity, matchingReviewProcess, reviewProcessGroupMembers } from '../server/import-review/reviewProcessTree.mjs'
 import { freezeReviewFixture, finalizeReviewFixture } from './lib/reviewPublicationFixture.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
-import { verifyPromotionWorkerMatrix } from '../test-fixtures/promotion-worker/verify.mjs'
+import { until, verifyPromotionWorkerMatrix } from '../test-fixtures/promotion-worker/verify.mjs'
 import { verifyProcessExitSampling } from '../test-fixtures/promotion-worker/process-exit-sampling.mjs'
 
 const onDemandOnly = process.argv.includes('--on-demand-only')
@@ -98,6 +99,7 @@ try {
     await assert.rejects(service.promote(third.manifest.paperId,
       { ...approval, intent: 'ship' }, 'synthetic-ship'), error => {
       assert.equal(error.compatibility.result, 'unknown')
+      assert.equal(error.compatibility.reasonCode, 'MISSING_BASELINE')
       assert.equal(error.retryable, true)
       assert.equal(error.status, 503)
       return true
@@ -176,11 +178,13 @@ try {
     const seed = new DatabaseSync(seedDb, { readOnly: true })
     const subject = seed.prepare('SELECT * FROM review_subject WHERE revision_id=?').get(third.revision.id)
     seed.close()
+    assert.ok(subject, 'the legacy retry fixture must retain its original frozen baseline')
     const reviewDb = new DatabaseSync(process.env.QUESTION_BANK_IMPORT_OPS_DB)
     try {
       reviewDb.prepare(`INSERT INTO review_subject (${Object.keys(subject).join(',')})
         VALUES (${Object.keys(subject).map(() => '?').join(',')})`).run(...Object.values(subject))
       reviewDb.prepare('DELETE FROM review_compatibility WHERE revision_id=?').run(third.revision.id)
+      assert.deepEqual(reviewDb.prepare('SELECT * FROM review_subject WHERE revision_id=?').get(third.revision.id), subject)
     } finally { reviewDb.close() }
     assert.equal(store.compatibilityForRevision(third.revision.id).pending, true)
     const approval = store.agentPaperStatus(third.manifest.paperId).approval
@@ -188,13 +192,38 @@ try {
     const journal = path.join(process.env.QUESTION_BANK_PAPER_ASSET_ROOT, third.manifest.paperId, '.latest-swap.json')
     mkdirSync(path.dirname(journal), { recursive: true })
     writeFileSync(journal, '{}')
-    await assert.rejects(service.promote(third.manifest.paperId, { ...approval, intent: 'retry_ship' }, 'synthetic-ship'),
-      { code: 'IMPORT_REVIEW_PROMOTION_UNKNOWN' })
+    // UNKNOWN may reach the API before its supervisor disconnects. Force that
+    // legitimate interval instead of depending on the host's exit timing.
+    const faultEnv = {
+      NODE_OPTIONS: `${process.env.NODE_OPTIONS || ''} --import=${new URL('../test-fixtures/promotion-worker/hook.mjs', import.meta.url).pathname}`,
+      EQB_PROMOTION_FAULT_STAGE: 'supervisor-unknown-before-disconnect',
+      EQB_PROMOTION_FAULT_ACTION: 'pause',
+      EQB_PROMOTION_FAULT_MARKER: path.join(root, 'legacy-unknown-exit.json'),
+    }
+    const savedEnv = Object.fromEntries(Object.keys(faultEnv).map(key => [key, process.env[key]]))
+    Object.assign(process.env, faultEnv)
+    try {
+      await assert.rejects(service.promote(third.manifest.paperId, { ...approval, intent: 'retry_ship' }, 'synthetic-ship'),
+        { code: 'IMPORT_REVIEW_PROMOTION_UNKNOWN' })
+    } finally {
+      for (const [key, value] of Object.entries(savedEnv)) {
+        if (value === undefined) delete process.env[key]
+        else process.env[key] = value
+      }
+    }
     assert.equal(readFileSync(journal, 'utf8'), '{}')
     assert.equal(store.latestPromotion(third.manifest.paperId).state, 'publishing')
     assert.equal(operations.unresolved().length, 1)
     assert.equal(operations.unresolved()[0].state, 'unknown')
     console.log('PASS ambiguous legacy journal retains publishing, evidence and the unresolved operation')
+    const interrupted = operations.unresolved()[0]
+    // UNKNOWN intentionally retains the reservation. Reconcile must prove the
+    // exact old process trees are dead before this fixture attempts a handoff.
+    await until(async () => (await service.reconcile()).recoverable === interrupted.id,
+      'ambiguous legacy supervisor exit and explicit recovery readiness')
+    assert.equal(inspectPromotionReservation().state, 'reserved')
+    assert.equal(inspectPromotionReservation().operationId, interrupted.id)
+    assert.equal(readFileSync(journal, 'utf8'), '{}')
     // Remove only the synthetic ambiguous evidence to exercise proven no-write recovery.
     rmSync(journal)
     const stopped = await service.promote(third.manifest.paperId, { ...approval, intent: 'retry_ship' }, 'synthetic-ship')
