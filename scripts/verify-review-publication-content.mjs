@@ -503,6 +503,7 @@ try {
     assert.throws(() => publish('changed-sealed-pdf'), { reasonCode: 'SEALED_FILE_CHANGED' })
   } finally { writeFileSync(frozenPath, frozenBytes) }
   pass('replaced sealed PDF is rejected before publisher projection or writing')
+  }
 
   if (!process.argv.includes('--references-only') || scoringFigures) {
     const sealedRoot = path.join(store.revisionDirectory(revision.id), 'sealed-publication')
@@ -665,6 +666,7 @@ try {
     assert.match(output, /PASS all rebuild entries throw/)
     pass('all rebuilding/normalizing entries disabled; sealed v7 publication and committed retry succeed')
   }
+  if (!process.argv.includes('--references-only')) {
   // Remaining race/comparison probes deliberately retain #668 behavior.
   dbRun(db => db.prepare(`UPDATE import_review_product_previews
     SET sealed_publication_manifest_digest=NULL WHERE revision_id=?`).run(revision.id))
