@@ -35,6 +35,8 @@ import { ensureMySpaceDatabaseShape, ensureMySpaceFilesRoot } from './my-space/m
 import { createMySpaceRoutes } from './my-space/mySpaceRoutes.mjs'
 import { countUsers, ensureAuthDatabaseShape, readSession, readSessionTokenFromRequest, renewSession, resolveDataUserId, sessionNeedsRenewal } from './auth/auth.mjs'
 import { createAuthRoutes } from './auth/authRoutes.mjs'
+import { createAgentRoutes } from './agent-api/agentRoutes.mjs'
+import { createAgentAuthGate, ensureAgentTokenShape } from './agent-api/agentTokens.mjs'
 import { createPaperSurfaceAnalysisAvailability } from './search/paperSurfaceAvailability.mjs'
 import { listCanonicalPaperCatalog } from './search/canonicalPaperCatalog.mjs'
 import { createTeachingFacetIndex, createTeachingFacetRoutes } from './search/teachingFacets.mjs'
@@ -492,6 +494,7 @@ serverContext.vocabularyNotebook = vocabularyNotebookRuntime
 const serverRoutes = [
   ...h1Routes,
   ...createAuthRoutes(),
+  ...createAgentRoutes(),
   ...createMySpaceRoutes(),
   ...createDraftPaperRoutes(),
   ...createExportRoutes(exportImplementation),
@@ -670,6 +673,7 @@ export function ensureUserDatabaseShape(db) {
   `)
   ensureMySpaceDatabaseShape(db)
   ensureAuthDatabaseShape(db)
+  ensureAgentTokenShape(db)
   ensureUserVocabularyShape(db)
 
   const userVersionRow = db.prepare('PRAGMA user_version').get()
@@ -3927,7 +3931,9 @@ function isAuthPublicRoute(method, pathname) {
 // owner-only route gate in server/router/index.mjs never has to infer "open mode"
 // from an absent session — a whitelisted auth route with no cookie also has a null
 // session, and that must NOT read as bootstrap-open.
+const agentAuthGate = createAgentAuthGate({ openUserDatabase, sendJson })
 function applyAuthGate(request, response, pathname) {
+  if (pathname.startsWith('/api/agent/v1/')) return agentAuthGate(request, response)
   const isPublic = isAuthPublicRoute(request.method, pathname)
 
   const readDb = openUserDatabase({ readOnly: true })
@@ -4013,7 +4019,7 @@ const server = createServer(async (request, response) => {
     return
   }
 
-  if (request.method === 'OPTIONS') {
+  if (request.method === 'OPTIONS' && !request.url.split('?')[0].startsWith('/api/agent/v1/')) {
     sendJson(response, 204, {})
     return
   }
@@ -4058,7 +4064,7 @@ const server = createServer(async (request, response) => {
         url,
         context: authResult.session
           ? { ...serverContext, session: authResult.session, authMode: authResult.authMode }
-          : { ...serverContext, authMode: authResult.authMode },
+          : { ...serverContext, authMode: authResult.authMode, ...(authResult.agent ? { agent: authResult.agent } : {}) },
       }, { beforeHandle: ownerGateBeforeHandle })
     ) {
       return
