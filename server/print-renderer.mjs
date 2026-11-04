@@ -103,7 +103,7 @@ import { continuationWritingPresentation } from '../shared/paper-canonical/writi
 import { blankPresentationParagraphs } from '../shared/paper-canonical/blankPresentation.mjs'
 import { resolveConsumerPresentation } from '../shared/paper-canonical/consumers.mjs'
 import {
-  listeningOpening,
+  paperOpeningForConsumption,
   mockPaperCoverName,
   ownsCompletePaperOpening,
   projectListeningGroupPresentation,
@@ -1185,6 +1185,7 @@ export function buildPrintHtml({
       .filter((block) => block.type === 'question_group')
       .map((block) => block.questionGroupId)
     : items.map((item) => item.detail.id)
+  const listeningOpening = paperOpeningForConsumption(canonicalConsumption)
   const canonicalListeningOwnsOpening = ownsCompletePaperOpening(
     canonicalConsumption,
     renderedGroupIds,
@@ -3240,7 +3241,7 @@ ${isTeacher ? `
 </style>
 </head>
 <body class="${densityClass} paper-print">
-${canonicalListeningOwnsOpening ? `<header class="canonical-paper-opening" data-canonical-paper-opening>${mockPaperCoverName(canonicalConsumption?.paperSourceType, title, canonicalConsumption?.paperHeaderTitle) ? `<p class="canonical-paper-mock-name" data-canonical-mock-name>${escapeHtml(mockPaperCoverName(canonicalConsumption.paperSourceType, title, canonicalConsumption.paperHeaderTitle))}</p>` : ''}<h1 class="canonical-paper-cover-title" data-canonical-cover-title>${listeningOpening.title}</h1><div class="canonical-paper-cover-notices" data-canonical-cover-notices><strong>注意事项：</strong><ol>${listeningOpening.notices.map((notice) => `<li>${escapeHtml(notice)}</li>`).join('')}</ol></div></header>` : canonicalWritingChromeOwnsDocument ? '' : `
+${canonicalListeningOwnsOpening ? `<header class="canonical-paper-opening" data-canonical-paper-opening>${mockPaperCoverName(canonicalConsumption?.paperSourceType, title, canonicalConsumption?.paperHeaderTitle) ? `<p class="canonical-paper-mock-name" data-canonical-mock-name>${escapeHtml(mockPaperCoverName(canonicalConsumption.paperSourceType, title, canonicalConsumption.paperHeaderTitle))}</p>` : ''}<h1 class="canonical-paper-cover-title" data-canonical-cover-title>${escapeHtml(listeningOpening.title)}</h1><div class="canonical-paper-cover-notices" data-canonical-cover-notices>${listeningOpening.notices.length ? '<strong>注意事项：</strong>' : ''}<ol>${listeningOpening.notices.map((notice) => `<li>${escapeHtml(notice)}</li>`).join('')}</ol></div></header>` : canonicalWritingChromeOwnsDocument ? '' : `
 <div class="paper-header">
   <h1>${escapeHtml(title || '英语试题')}</h1>
   ${versionLabel ? `<p class="version-label">${escapeHtml(versionLabel)}</p>` : ''}

@@ -24,6 +24,20 @@ export function validSourceExample(example, evidenceKey) {
 // This is semantic, source-backed chrome, not renderer-authored exam content.
 // Source Capture validation remains responsible for resolving the references.
 export function validCanonicalSourcePresentation(value) {
+  if (isRecordValue(value) && (value.headings !== undefined || value.opening !== undefined)) {
+    const { headings, opening, ...original } = value
+    const instruction = Object.hasOwn(original, 'instruction')
+    return (instruction ? validCanonicalSourcePresentation(original) : exactKeys(original, []))
+      && (headings === undefined || (Array.isArray(headings) && headings.length > 0
+        && headings.every(entry => isRecordValue(entry)
+          && exactKeys(entry, ['instructionId', 'text', 'authorityObservationRef'])
+          && /^(?:part|section)\./u.test(entry.instructionId)
+          && text(entry.text) && text(entry.authorityObservationRef))))
+      && (opening === undefined || (isRecordValue(opening)
+        && exactKeys(opening, ['title', 'notices', 'transferNotice', 'authorityObservationRef'])
+        && text(opening.title) && text(opening.transferNotice) && text(opening.authorityObservationRef)
+        && Array.isArray(opening.notices) && opening.notices.every(text)))
+  }
   return isRecordValue(value)
     && exactKeys(value, ['instruction', ...(value.example === undefined ? [] : ['example'])])
     && isRecordValue(value.instruction)
@@ -37,7 +51,10 @@ export function validCanonicalSourcePresentation(value) {
 
 export function sourcePresentationMatchesCapture(value, capture) {
   if (!validCanonicalSourcePresentation(value)) return false
-  return [[value.instruction, 'source_instruction'], ...(value.example ? [[value.example, 'source_listening_example']] : [])]
+  return [...(value.instruction ? [[value.instruction, 'source_instruction']] : []),
+    ...(value.example ? [[value.example, 'source_listening_example']] : []),
+    ...(value.headings || []).map(entry => [entry, 'source_heading']),
+    ...(value.opening ? [[value.opening, 'source_paper_opening']] : [])]
     .every(([entry, kind]) => {
       const { authorityObservationRef, ...expected } = entry
       const observation = capture.observations.find(item => item.observationId === authorityObservationRef)

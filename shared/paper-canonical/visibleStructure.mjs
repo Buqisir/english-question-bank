@@ -1,3 +1,5 @@
+import manifestV82 from '../../standards/paper-canonical/manifest-v82.json' with { type: 'json' }
+import zhejiangLegacyV16 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v16.json' with { type: 'json' }
 import manifestV79 from '../../standards/paper-canonical/manifest-v79.json' with { type: 'json' }
 import manifestV80 from '../../standards/paper-canonical/manifest-v80.json' with { type: 'json' }
 import manifestV81 from '../../standards/paper-canonical/manifest-v81.json' with { type: 'json' }
@@ -64,7 +66,7 @@ import { digestJson } from './stable.mjs'
 import { validCanonicalSourcePresentation } from './sourcePresentation.mjs'
 
 const registeredProfiles = new Map([
-  ...[nck1V18, nationalLegacyV5, zhejiangLegacyV15, nck1V17, zhejiangLegacyV14].map(profile => [`${profile.profileId}@${profile.version}`, profile]),
+  ...[zhejiangLegacyV16, nck1V18, nationalLegacyV5, zhejiangLegacyV15, nck1V17, zhejiangLegacyV14].map(profile => [`${profile.profileId}@${profile.version}`, profile]),
   ...[nck1V16, nationalLegacyV4, zhejiangLegacyV13].map((profile) => [
     `${profile.profileId}@${profile.version}`, profile,
   ]),
@@ -178,6 +180,9 @@ const manifestV50Profiles = new Map([
   },
 ]))
 const registeredManifestProfiles = new Map([
+  [`${manifestV82.manifestId}@${manifestV82.version}@${digestJson(manifestV82)}`,
+    new Map([nck1V18, nationalLegacyV5, zhejiangLegacyV16].map(profile => [profile.profileId,
+      { profileId: profile.profileId, profileVersion: profile.version, profileDigest: digestJson(profile) }]))],
   [
     `${manifestV81.manifestId}@${manifestV81.version}@${digestJson(manifestV81)}`,
     new Map([nck1V18, nationalLegacyV5, zhejiangLegacyV15].map((profile) => [
@@ -434,7 +439,9 @@ function profileVisibleStructure(profile, expectedGroups, instructionOverrides) 
         slot.activation === 'canonical_group'
         && groupBySlotId.has(slot.slotId)))
     if (visibleSections.length === 0) continue
-    const partInstruction = profile.instructions[part.titleInstructionRef]
+    const partInstruction = { ...profile.instructions[part.titleInstructionRef] }
+    const partKey = `heading\0${part.titleInstructionRef}`
+    if (instructionOverrides.has(partKey)) { partInstruction.text = instructionOverrides.get(partKey); instructionOverrides.delete(partKey) }
     nodes.push({
       kind: 'part',
       partId: part.partId,
@@ -448,8 +455,9 @@ function profileVisibleStructure(profile, expectedGroups, instructionOverrides) 
       renderPolicy: partInstruction.renderPolicy ?? 'render',
     })
     for (const section of visibleSections) {
-      const sectionInstruction =
-        profile.instructions[section.titleInstructionRef]
+      const sectionInstruction = { ...profile.instructions[section.titleInstructionRef] }
+      const sectionKey = `heading\0${section.titleInstructionRef}`
+      if (instructionOverrides.has(sectionKey)) { sectionInstruction.text = instructionOverrides.get(sectionKey); instructionOverrides.delete(sectionKey) }
       nodes.push({
         kind: 'section',
         sectionId: section.sectionId,
@@ -531,7 +539,7 @@ function sourceInstructionOverrides(consumption) {
   for (const selection of consumption.selections) {
     const occurrences = selection?.projectedOccurrences || []
     const continuationV49 =
-      ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(consumption.authorityRef?.manifestVersion)
+      ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(consumption.authorityRef?.manifestVersion)
       && selection?.mode === 'canonical'
       && selection?.familyContractId === 'continuation-writing'
     const digestByGroupId = new Map(
@@ -544,14 +552,24 @@ function sourceInstructionOverrides(consumption) {
       if (occurrence.sourcePresentation !== undefined) {
         const presentation = occurrence.sourcePresentation
         const instruction = presentation?.instruction
-        if (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81'].includes(consumption.authorityRef?.manifestVersion) || selection.mode !== 'canonical'
+        if (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(consumption.authorityRef?.manifestVersion) || selection.mode !== 'canonical'
           || !validCanonicalSourcePresentation(presentation)
           || digestByGroupId.get(occurrence.groupId) !== digestJson(occurrence)) {
           reject('source-backed presentation proof is invalid')
         }
-        const key = `${occurrence.slotId}\0${instruction.instructionId}`
-        if (overrides.has(key)) reject('source-backed presentation proof is duplicated')
-        overrides.set(key, instruction.text)
+        if (instruction) {
+          const key = `${occurrence.slotId}\0${instruction.instructionId}`
+          if (overrides.has(key)) reject('source-backed presentation proof is duplicated')
+          overrides.set(key, instruction.text)
+        }
+        if ((presentation.headings || presentation.opening) && consumption.authorityRef?.manifestVersion !== '82') {
+          reject('source headings and opening require the legacy successor')
+        }
+        for (const heading of presentation.headings || []) {
+          const key = `heading\0${heading.instructionId}`
+          if (overrides.has(key)) reject('source heading is duplicated')
+          overrides.set(key, heading.text)
+        }
       }
       const sourceInstruction = occurrence?.sourceInstruction
       if (!continuationV49 && sourceInstruction === undefined) continue

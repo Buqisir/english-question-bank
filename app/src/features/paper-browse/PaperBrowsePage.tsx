@@ -183,7 +183,7 @@ import type { ListeningAnalysisV1 } from '../../domain/listeningAnalysis.ts'
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
 import {
-  listeningOpening,
+  paperOpeningForConsumption,
   mockPaperCoverName,
   ownsCompletePaperOpening,
 } from '../../../../shared/paper-canonical/listeningPresentation.mjs'
@@ -4088,6 +4088,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
 
   const openingGroupIds = asset.content.blocks.flatMap((block) =>
     block.type === 'group' ? [block.groupId] : [])
+  const listeningOpening = paperOpeningForConsumption(canonicalConsumption)
   const showListeningOpening = ownsCompletePaperOpening(
     canonicalConsumption,
     openingGroupIds,
@@ -4157,7 +4158,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 )}
                 <h1 className="canonical-paper-cover-title" data-canonical-cover-title="">{listeningOpening.title}</h1>
                 <div className="canonical-paper-cover-notices" data-canonical-cover-notices="">
-                  <strong>注意事项：</strong>
+                  {listeningOpening.notices.length > 0 && <strong>注意事项：</strong>}
                   <ol>{listeningOpening.notices.map((notice) => <li key={notice}>{notice}</li>)}</ol>
                 </div>
               </header>
