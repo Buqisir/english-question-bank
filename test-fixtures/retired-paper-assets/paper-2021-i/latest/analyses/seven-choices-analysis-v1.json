@@ -1,0 +1,371 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2021-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2021-i-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-05",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2021-i-seven-choices": {
+      "overview": "本文是一篇记叙性随笔，作者夫妇在巴黎住了一周，想体验真正巴黎人的生活。文章围绕公寓、食物、生活质量、咖啡馆文化展开，赞美法国人重视生活质量胜过效率。七选五考查段首主旨句、段中承接句与上下文衔接。",
+      "discourseStructure": {
+        "summary": "首段交代旅行目的（像真正巴黎人一样生活）并描述狭小公寓；第二段写公寓设施与法语电梯；第三段写法国人吃得好却不发胖、食物美味；第四段以买水果的经历引出法国人吃得少的另一原因；随后点明法国重视生活质量；末段以咖啡馆总是满座引出法国人的工作时间问题。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "Renting a tiny Parisian apartment",
+            "paragraphIds": [
+              "para-2021-i-seven-title",
+              "para-2021-i-seven-p1"
+            ],
+            "summary": "交代旅行目的——像真正的巴黎人那样生活，并描述昂贵狭小的公寓及其设施。"
+          },
+          {
+            "unitId": "unit-food",
+            "heading": "French food and quality of life",
+            "paragraphIds": [
+              "para-2021-i-seven-p2",
+              "para-2021-i-seven-p3",
+              "para-2021-i-seven-p4"
+            ],
+            "summary": "法国人吃得好却不发胖，食物美味量少即满足；买水果经历引出吃得少的另一原因，并点明法国重视生活质量。"
+          },
+          {
+            "unitId": "unit-cafe",
+            "heading": "Café culture and work hours",
+            "paragraphIds": [
+              "para-2021-i-seven-p5"
+            ],
+            "summary": "以咖啡馆总是满座为例，引出法国人何时工作的疑问及其35小时工作制。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2021-i-036": {
+      "blankId": "blank-2021-i-036",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "spent a week in Paris",
+        "rent a fantastically expensive sixth-floor apartment",
+        "like real Parisians",
+        "live"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-i-seven-title",
+        "beforeQuote": "My husband and I just spent a week in Paris.",
+        "afterQuote": "So the first thing we did was rent a fantastically expensive sixth-floor apartment"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "like real Parisians",
+          "signalSide": "option",
+          "targetText": "spent a week in Paris",
+          "relation": "选项 like real Parisians 与上文 Paris 同属巴黎话题场，点明此次旅行的目的。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "So the first thing we did",
+          "signalSide": "context-after",
+          "targetText": "Our aim was to see if we could live",
+          "relation": "空后 So the first thing we did 承接空格所述目标，租房是为实现该目标采取的首个行动。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Our aim was to see if we could live",
+          "signalSide": "option",
+          "targetText": "the first thing we did",
+          "relation": "选项 aim 点出目的，与空后 the first thing we did 形成目的—行动衔接。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "F 项点明此行目的是体验真正巴黎人的生活，与上文身处巴黎、空后租房这一首个行动构成目的—行动的逻辑衔接。",
+        "matchedClues": [
+          {
+            "contextSide": "spent a week in Paris",
+            "optionSide": "like real Parisians",
+            "relation": "Paris 与 real Parisians 同一话题场，呼应旅行地点。"
+          },
+          {
+            "contextSide": "So the first thing we did was rent",
+            "optionSide": "Our aim was to see if we could live",
+            "relation": "先述目标（aim/live），再述为实现目标采取的首个行动（rent），逻辑顺承。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 项讲房间内有厨房和床，属于公寓设施，更适合下文描述设施处，不能充当首段交代旅行目的的主旨句。"
+        }
+      ],
+      "teachingNote": "段首空格常为主旨句，需找与下文行动构成目的—行动关系且呼应全段话题场的选项。"
+    },
+    "q-2021-i-037": {
+      "blankId": "blank-2021-i-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "Unlike a normal Parisian apartment",
+        "the plumbing",
+        "worked",
+        "Our building even had a tiny lift"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-i-seven-p1",
+        "beforeQuote": "Unlike a normal Parisian apartment, the plumbing (水管) worked.",
+        "afterQuote": "Our building even had a tiny lift with a female voice"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a nice kitchen and a comfortable bed",
+          "signalSide": "option",
+          "targetText": "the plumbing (水管) worked",
+          "relation": "选项列举厨房、床等公寓设施，与上文 plumbing worked 同属公寓设施话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "even had a tiny lift",
+          "signalSide": "context-after",
+          "targetText": "nice kitchen and a comfortable bed",
+          "relation": "空后 even had 在设施清单上继续递加，承接空格所列厨房、床等设施。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the plumbing",
+          "signalSide": "context-before",
+          "targetText": "kitchen / bed / lift",
+          "relation": "plumbing 与厨房、床、电梯同属公寓设施话题场，提示空格应继续描述设施。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "C 项罗列厨房和舒适的床，与上文水管正常、空后还有电梯共同构成公寓设施清单，由空后 even had 的递加衔接确认。",
+        "matchedClues": [
+          {
+            "contextSide": "the plumbing (水管) worked / even had a tiny lift",
+            "optionSide": "a nice kitchen and a comfortable bed",
+            "relation": "水管、电梯、厨房、床同为公寓设施，构成并列递加的设施描写。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B 项谈法国生活质量，属抽象主题，与本段具体设施描写话题场不符。"
+        }
+      ],
+      "teachingNote": "段中空格看前后是否在同一清单上罗列同类信息，并由 even had 等递加词确认承接。"
+    },
+    "q-2021-i-038": {
+      "blankId": "blank-2021-i-038",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "eat great food",
+        "never gain weight",
+        "French strawberries",
+        "explode in your mouth like little flavor bombs"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-i-seven-p2",
+        "beforeQuote": "they eat great food and never gain weight.",
+        "afterQuote": "French strawberries do not taste like cardboard."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "so delicious",
+          "signalSide": "option",
+          "targetText": "explode in your mouth like little flavor bombs",
+          "relation": "选项 so delicious 与空后草莓在口中爆开如风味炸弹同属食物美味话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "don’t need much of it",
+          "signalSide": "option",
+          "targetText": "never gain weight",
+          "relation": "选项 don’t need much of it（量少即满足）解释上文 never gain weight（不发胖）的原因。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "eat great food",
+          "signalSide": "context-before",
+          "targetText": "The food is so delicious",
+          "relation": "上文 eat great food 与选项 food is so delicious 同指美味食物，话题场一致。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "G 项指出食物太美味以至无需多吃即可满足，既承接上文吃得好不发胖，又引出空后对草莓美味的具体描写。",
+        "matchedClues": [
+          {
+            "contextSide": "eat great food and never gain weight",
+            "optionSide": "so delicious that you don’t need much of it",
+            "relation": "美味但量少正解释了吃得好却不发胖。"
+          },
+          {
+            "contextSide": "explode in your mouth like little flavor bombs",
+            "optionSide": "The food is so delicious",
+            "relation": "空后用草莓风味炸弹的比喻印证选项所说的美味。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 项 That’s not the only reason 暗示前文已给出一个原因，但本空前并未先给出原因，逻辑不衔接，更适合第三段。"
+        }
+      ],
+      "teachingNote": "段中空格要既能承上（不发胖）又能启下（草莓美味），抓住食物美味这一共同话题场即可定位。"
+    },
+    "q-2021-i-039": {
+      "blankId": "blank-2021-i-039",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "best fruit we had ever eaten",
+        "perfectly ripe small strawberries",
+        "they cost 18",
+        "pick up some groceries"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-i-seven-p3",
+        "beforeQuote": "On our first morning in Paris, I went around the corner to the food market",
+        "afterQuote": "My husband and I agreed they were the best fruit we had ever eaten. But they cost 18!"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "That’s not the only reason",
+          "signalSide": "option",
+          "targetText": "The food is so delicious",
+          "relation": "选项中 That’s 回指上一段食物太美味无需多吃这一原因，引出吃得少的另一原因。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the French eat less than we do",
+          "signalSide": "option",
+          "targetText": "they cost 18",
+          "relation": "选项 eat less 与空后高昂价格（cost 18）构成话题衔接：价格贵也使法国人吃得少。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "But they cost 18",
+          "signalSide": "context-after",
+          "targetText": "another reason the French eat less",
+          "relation": "空后强调水果虽好但价格高昂，正是选项所说吃得少的另一个原因。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "E 项用 That’s 回指上段美味无需多吃的原因，并以 not the only reason 引出价格高昂这一吃得少的另一原因，承上启下。",
+        "matchedClues": [
+          {
+            "contextSide": "But they cost 18",
+            "optionSide": "the French eat less than we do",
+            "relation": "价格高昂解释了为何吃得少，与选项所说另一原因吻合。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 项强调食物美味，与本段下文聚焦价格高昂这一原因不符，且 G 更适合上一段。"
+        }
+      ],
+      "teachingNote": "段首过渡句常含 That’s/not the only 等回指词，需判断它指代上段哪一原因并引出新原因。"
+    },
+    "q-2021-i-040": {
+      "blankId": "blank-2021-i-040",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "French cafés are always crowded",
+        "When do these people work",
+        "cafés life",
+        "35-hour workweek"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-i-seven-p5",
+        "beforeQuote": "French cafés are always crowded.",
+        "afterQuote": "When do these people work?"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the customers",
+          "signalSide": "option",
+          "targetText": "French cafés are always crowded",
+          "relation": "选项 the customers 与上文 cafés 总是满座同属咖啡馆顾客话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "these people",
+          "signalSide": "context-after",
+          "targetText": "the customers",
+          "relation": "空后 these people 回指选项中的 the customers，指坐满咖啡馆的本地顾客。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "tourists",
+          "signalSide": "option",
+          "targetText": "When do these people work",
+          "relation": "选项指出顾客并非都是游客，正好引出空后疑问：这些本地人何时工作。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "A 项指出咖啡馆顾客并非都是游客，承接上文咖啡馆总是满座，并由空后 these people 回指 customers，引出他们何时工作的疑问。",
+        "matchedClues": [
+          {
+            "contextSide": "French cafés are always crowded / these people",
+            "optionSide": "Not all the customers are tourists",
+            "relation": "满座的顾客中有本地人（非游客），故下文才追问 these people 何时工作。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B 项谈生活质量，与本段咖啡馆顾客构成、何时工作的话题场无关。"
+        }
+      ],
+      "teachingNote": "段中空格借空后代词 these people 回指选项里的 customers，按指代链锁定话题一致的选项。"
+    }
+  }
+}

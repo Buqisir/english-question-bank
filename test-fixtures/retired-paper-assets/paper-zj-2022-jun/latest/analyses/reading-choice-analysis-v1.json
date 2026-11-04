@@ -1,0 +1,983 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-zj-2022-jun",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2022-jun-reading-a",
+    "group-zj-2022-jun-reading-b",
+    "group-zj-2022-jun-reading-c"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "import-pipeline-agent",
+    "reviewedAt": "2026-06-18T00:00:00Z"
+  },
+  "groups": {
+    "group-zj-2022-jun-reading-a": {
+      "overview": "记叙文。作者是一名来自意大利的移民女孩，回忆自己初到布鲁克林上幼儿园时因语言和文化差异而手足无措，长大后在纽约政府机构做暑期工担任意大利语翻译，帮助新移民，从而体会到掌握双语的幸运并学会欣赏这座多元文化城市的多样性。",
+      "discourseStructure": {
+        "summary": "全文按时间顺序展开：童年初到布鲁克林感受到人和食物的多样与语言障碍（第一段）→ 多年后做暑期工当翻译、由己及人体会双语之幸运（第二段）→ 在多元都市中成长、视野超越课堂、最终从困惑到欣赏多样性（第三段）。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2022-jun-reading-a-1",
+            "summary": "作者对比意大利单一的午餐与人群，和布鲁克林幼儿园里肤色各异的同学、五花八门的食物，因不懂英语想求人推荐却受阻于语言障碍。",
+            "function": "开篇设景，通过今昔对比引出多样性主题，并埋下语言障碍这一伏笔。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jun-reading-a-2",
+            "summary": "作者讲述近三年暑假在纽约政府机构工作、为说意大利语的新移民当翻译，看到老年意大利人因语言不通而挣扎，由此回想自己当年的窘境，意识到自己精通双语何其幸运。",
+            "function": "由童年经历过渡到成年实践，借暑期工经历呼应开篇语言障碍，点出感悟。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jun-reading-a-3",
+            "summary": "作者总结在多元文化的纽约与多样人群共事的收获：通过翻译了解了原先不知道的社会项目，视野得到课堂内无法获得的拓展，如今走在布鲁克林街头不再困惑，而是享受这座城市的多样性。",
+            "function": "升华主题，揭示暑期工带来的视野拓展与心态转变，首尾呼应收束全文。"
+          }
+        ]
+      }
+    },
+    "group-zj-2022-jun-reading-b": {
+      "overview": "本文是一篇说明文，介绍了在世界各地兴起的“微型森林”（Tiny Forest）运动：它的现状与意义、起源与传播、运作方式与目标，以及微型森林中树木的种植特点和生态价值。",
+      "discourseStructure": {
+        "summary": "全文按“现象引入—起源传播—运作目标—构成与价值”的逻辑展开：先描述微型森林正在各地悄然出现的现象，再追溯其概念起源与全球传播，接着借项目负责人之口说明运作方式与核心目标，最后说明微型森林的构成特点及其多重生态与健康效益。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2022-jun-reading-b-1",
+            "summary": "在世界各地的路边、操场后和闲置土地上，网球场大小的微型森林正在出现，既造福野生动物也造福平时难以亲近自然的当地人。这就是“微型森林”运动，旨在证明生活中最美好的事物确实蕴含在小小的包装里。",
+            "function": "引入主题，以现象描述点出“微型森林”运动及其宗旨。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jun-reading-b-2",
+            "summary": "微型森林这一概念由日本植物学家宫胁博士于20世纪70年代首创，随后这一理念在印度等国流行，最终传到欧洲，在法国、比利时和荷兰等地颇受欢迎。",
+            "function": "追溯微型森林概念的起源与全球传播路径。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jun-reading-b-3",
+            "summary": "英国项目负责人Louise Hartley解释其运作方式：先确定微型森林能发挥最大影响的区域，重点关注亲近自然不易的城市地区，把它看作弥合人与自然日益疏离的机会。",
+            "function": "通过项目负责人之口说明运作方式，并点明项目目标。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jun-reading-b-4",
+            "summary": "微型森林至少有600棵树，种植得更密、不用化肥，通常约有30种全部为本土的树种；这种多样性加上其生长速度比普通森林快十倍，使其吸引大量野生动物，并有助于减少洪灾风险、固碳、应对气候变化以及改善当地居民的心理健康。",
+            "function": "说明微型森林的构成特点及其多重生态与健康价值。"
+          }
+        ]
+      }
+    },
+    "group-zj-2022-jun-reading-c": {
+      "overview": "本文为说明/议论性文章，主旨是：在职场上，凡事做到极致并非成功的唯一秘诀，适度（moderation）同样能带来好结果。文章先提出适度观点，再用哈佛研究证明适度练习效果最好，接着讨论午餐、社交互动对工作的积极影响，最后引用专家观点说明脱离任务的活动和积极情绪能提升工作效率与创造力。",
+      "discourseStructure": {
+        "summary": "总—分结构。第一段提出中心论点（适度也能出成绩）；第二段用Langer的研究及相关发现为论点提供实验与事实支撑；第三段转向时间使用方式，指出社交化的午餐有益工作；第四段引用Markman观点，论证脱离任务的时间与积极情绪能提升效率和创造力，呼应并强化适度/平衡的主旨。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-zj-2022-jun-reading-c-1",
+            "summary": "很多人认为全力以赴是成功的秘诀，但研究发现适度也能在工作中出成绩。",
+            "function": "引出全文中心论点：moderation 同样有效，奠定全文基调。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jun-reading-c-2",
+            "summary": "Langer的研究显示，适度练习造句的人犯错最少；过高的知识水平会使人固守传统思路，过高的尽责性反而降低简单工作的表现。",
+            "function": "用实验证据和相关研究支撑'适度最优'的论点，反驳'越极致越好'。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jun-reading-c-3",
+            "summary": "工作时长与时间使用方式受到关注：在办公桌前独自吃午餐被视为拼命三郎，而轻松的会议室共餐却遭白眼；专家指出社交互动能提升情绪、激发新思路。",
+            "function": "由练习转入时间使用与社交，说明社交化用餐对工作有益，进一步支撑平衡/适度主张。"
+          },
+          {
+            "paragraphId": "para-zj-2022-jun-reading-c-4",
+            "summary": "Markman主张安排脱离任务的时间，认为体验看似无关的事物能带来新灵感，积极情绪能提高生产力和创造力，提升生活满意度也会让人工作更高效。",
+            "function": "引用专家观点收束全文，论证脱离任务的时间与积极情绪的价值，强化适度/平衡的主旨。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-zj-2022-jun-021": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查作者进入布鲁克林学校后所意识到的核心事实，需定位第一段中作者的领悟句。",
+      "stemTranslationZh": "作者进入布鲁克林的学校后意识到了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "时间过得很快。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "A few years later",
+            "optionText": "Time passed quickly.",
+            "matchType": "wordFamily",
+            "relationNote": "选项利用原文 A few years later 这一时间表达，诱导考生联想到“时间流逝”，但原文只是交代时间推移的背景，作者意识到的并非时间过得快。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-a-1",
+              "quote": "A few years later, as I stood in the lunch line with my kindergarten class in a school in Brooklyn, I realized things were no longer that simple.",
+              "anchor": "A few years later 只是时间背景"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "英语很难学。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "English was hard to learn.",
+            "explanation": "原文提到语言障碍（the barrier of language）使作者无法与人交流，但并未说英语“难学”；难学与有障碍不是一回事，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "食物很糟糕。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Fearing that I would pick out something awful, I desperately tried to ask the boy ahead of me for a recommendation.",
+            "sourceHighlight": "Fearing that I would pick out something awful",
+            "optionText": "The food was terrible",
+            "optionHighlight": "The food was terrible",
+            "explanation": "原文只说作者“担心自己会挑到难吃的东西”，是主观担忧，并非断定食物糟糕；选项把假设性的 fearing...something awful 夸大为既成事实 The food was terrible。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-a-1",
+              "quote": "Fearing that I would pick out something awful, I desperately tried to ask the boy ahead of me for a recommendation.",
+              "anchor": "fearing 是担忧而非定论"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "人们各不相同。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jun-reading-a-1",
+              "quote": "My classmates ranged from those kids with pale skin and large blue eyes to those with rich brown skin and dark hair.",
+              "anchor": "同学肤色发色各异"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-zj-2022-jun-reading-a-1",
+              "quote": "I realized things were no longer that simple.",
+              "anchor": "意识到不再简单"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "People were very different.",
+          "sourceRole": "correctOption",
+          "targetText": "My classmates ranged from those kids with pale skin and large blue eyes to those with rich brown skin and dark hair.",
+          "targetParagraphId": "para-zj-2022-jun-reading-a-1",
+          "relationType": "paraphrase",
+          "note": "选项 People were very different 是对原文 ranged from...to... 描述同学肤色、眼睛、头发差异的概括性同义替换。"
+        },
+        {
+          "sourceText": "realize",
+          "sourceRole": "stem",
+          "targetText": "I realized things were no longer that simple.",
+          "targetParagraphId": "para-zj-2022-jun-reading-a-1",
+          "relationType": "locationCue",
+          "note": "题干 realize 直接对应原文 I realized things were no longer that simple，为定位作者领悟内容的线索。"
+        }
+      ]
+    },
+    "q-zj-2022-jun-022": {
+      "skill": {
+        "primary": "detail",
+        "secondary": "inference"
+      },
+      "questionFocus": "考查第二段中代词性短语 the little girl in the lunch line 的指代对象，需结合上下文判断其回指第一段的人物。",
+      "stemTranslationZh": "第二段中的“the little girl”指的是谁？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一位意大利语教师。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "the Italian-speaking ones",
+            "optionText": "An Italian teacher.",
+            "matchType": "wordFamily",
+            "relationNote": "选项借用第二段反复出现的 Italian / Italian-speaking 词族干扰，但 the little girl 指代的是排队领午餐的小女孩，文中并无意大利语教师这一角色。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-a-2",
+              "quote": "I often had to be an interpreter for the Italian-speaking ones.",
+              "anchor": "Italian-speaking 是被服务的移民"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一位政府官员。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "I have worked in a government agency in New York",
+            "optionText": "A government official.",
+            "matchType": "wordFamily",
+            "relationNote": "选项利用原文 government agency 的 government 词族设钩，但作者只是在政府机构工作的翻译，the little girl 指的是当年排队的作者自己，并非政府官员。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-a-2",
+              "quote": "For the past three summers, I have worked in a government agency in New York.",
+              "anchor": "在政府机构工作不等于官员"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "作者本人。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jun-reading-a-2",
+              "quote": "New immigrants much like the little girl in the lunch line flooded our office seeking help.",
+              "anchor": "the little girl in the lunch line"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-zj-2022-jun-reading-a-1",
+              "quote": "as I stood in the lunch line with my kindergarten class in a school in Brooklyn",
+              "anchor": "作者当年也站在午餐队列里"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "作者的同学。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "as I stood in the lunch line with my kindergarten class in a school in Brooklyn",
+            "sourceEntity": "I (the author, standing in the lunch line)",
+            "optionText": "The author's classmate.",
+            "optionEntity": "the author's classmate",
+            "explanation": "the little girl in the lunch line 对应第一段中排队的“我”（作者本人），而非她的同学；选项把指代对象错配给了 classmate。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-a-1",
+              "quote": "as I stood in the lunch line with my kindergarten class in a school in Brooklyn",
+              "anchor": "排队的是“我”不是同学"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the little girl in the lunch line",
+          "sourceRole": "stem",
+          "targetText": "as I stood in the lunch line with my kindergarten class in a school in Brooklyn",
+          "targetParagraphId": "para-zj-2022-jun-reading-a-1",
+          "relationType": "locationCue",
+          "note": "题干中的 the little girl in the lunch line 回指第一段 I stood in the lunch line 的“我”，in the lunch line 是定位线索，据此判定指代作者本人。"
+        },
+        {
+          "sourceText": "The author herself.",
+          "sourceRole": "correctOption",
+          "targetText": "As I served the role of vital communication link, I was reminded of my desperate struggle to converse before I learned English.",
+          "targetParagraphId": "para-zj-2022-jun-reading-a-2",
+          "relationType": "paraphrase",
+          "note": "作者由 the little girl 联想到自己当年 my desperate struggle to converse，印证 the little girl 即作者本人。"
+        }
+      ]
+    },
+    "q-zj-2022-jun-023": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查暑期工作给作者带来的益处，需定位第三段中关于视野拓展、超越课堂、了解真实世界的表述。",
+      "stemTranslationZh": "这份暑期工作如何让作者受益？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它增强了她对学校的热爱。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "This work expanded my mind in ways that are impossible inside the four walls of a classroom.",
+            "sourceHighlight": "impossible inside the four walls of a classroom",
+            "optionText": "It strengthened her love for school.",
+            "optionHighlight": "strengthened her love for school",
+            "explanation": "原文强调这份工作带来的拓展是课堂（教室四壁之内）做不到的，是对课堂学习局限的反衬；选项却说它增强了对学校的热爱，与原文倾向相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-a-3",
+              "quote": "This work expanded my mind in ways that are impossible inside the four walls of a classroom.",
+              "anchor": "课堂之内做不到"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它帮助增强了她的方向感。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Walking through the streets of Brooklyn today, I am no longer confused by this city’s sounds and smells.",
+            "optionText": "It helped sharpen her sense of direction.",
+            "matchType": "wordFamily",
+            "relationNote": "选项借 Walking through the streets 与 no longer confused 的字面联想，把“不再被城市的声音气味所困惑”曲解为“方向感增强”；原文 confused 指对多元文化的迷惘，而非辨别方向，sense of direction 属偷换。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-a-3",
+              "quote": "Walking through the streets of Brooklyn today, I am no longer confused by this city’s sounds and smells.",
+              "anchor": "不再困惑指文化迷惘非方向"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它让她看到了真实的世界。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jun-reading-a-3",
+              "quote": "This work expanded my mind in ways that are impossible inside the four walls of a classroom.",
+              "anchor": "拓展视野超越课堂"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-zj-2022-jun-reading-a-3",
+              "quote": "In my English to Italian translations, I’ve learned about social programs that I didn’t know existed.",
+              "anchor": "了解到原先不知的社会项目"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它让她童年的梦想成真。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It made her childhood dream come true.",
+            "explanation": "原文虽回忆了作者的童年经历，但从未提及任何“童年梦想”，更未说这份工作让梦想成真，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It opened her eyes to the real world",
+          "sourceRole": "correctOption",
+          "targetText": "This work expanded my mind in ways that are impossible inside the four walls of a classroom.",
+          "targetParagraphId": "para-zj-2022-jun-reading-a-3",
+          "relationType": "paraphrase",
+          "note": "正确选项 opened her eyes to the real world 是对原文 expanded my mind...impossible inside the four walls of a classroom（视野拓展、超越课堂书本）的同义替换。"
+        },
+        {
+          "sourceText": "benefit",
+          "sourceRole": "stem",
+          "targetText": "In my English to Italian translations, I’ve learned about social programs that I didn’t know existed.",
+          "targetParagraphId": "para-zj-2022-jun-reading-a-3",
+          "relationType": "locationCue",
+          "note": "题干问 benefit（益处），原文以 I’ve learned about social programs that I didn’t know existed 等具体收获作答，是定位益处的线索。"
+        }
+      ]
+    },
+    "q-zj-2022-jun-024": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对微型森林运动整体状况的细节理解，需在全文范围内对四个选项逐一比对核实。",
+      "stemTranslationZh": "关于微型森林运动，我们可以了解到什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它已取得了显著的成功。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jun-reading-b-2",
+              "quote": "the idea soon took off in India and other countries before eventually reaching Europe, where it became popular in places like France, Belgium and the Netherlands",
+              "anchor": "理念迅速流行并传遍多国，最终在欧洲走红"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2022-jun-reading-b-1",
+              "quote": "tiny forests barely the size of tennis courts are appearing",
+              "anchor": "微型森林正在各地不断出现"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它由许多学校领导。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Louise Hartley, who is leading the Tiny Forest project in the UK",
+            "sourceEntity": "Louise Hartley",
+            "optionText": "It is led by number of schools.",
+            "optionEntity": "schools",
+            "explanation": "原文说英国项目由Louise Hartley这位个人负责，并非由“学校”领导；第一段虽提及school playgrounds（操场），只是微型森林出现的地点之一，被错配成了领导主体。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-b-3",
+              "quote": "Louise Hartley, who is leading the Tiny Forest project in the UK",
+              "anchor": "项目由Hartley个人负责"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它于20世纪70年代始于欧洲。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "Tiny forests were first pioneered as a concept in the 1970s by Dr Miyawaki, a Japanese botanist.",
+            "sourceEntity": "Dr Miyawaki, a Japanese botanist",
+            "optionText": "It began in Europe in the 1970s.",
+            "optionEntity": "Europe",
+            "explanation": "原文明确该概念在20世纪70年代由日本植物学家首创，欧洲是后来才传到的地方（eventually reaching Europe）；选项把“起源地”错配成欧洲，时间正确而地点错误。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-b-2",
+              "quote": "before eventually reaching Europe",
+              "anchor": "欧洲是后来才传到的，并非起源地"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它将会传播到乡村地区。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "It will spread to the countryside.",
+            "explanation": "原文未提及该运动将向乡村扩展；恰恰相反，第三段强调聚焦城市地区（We focus on urban areas），“传播到乡村”属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "It has achieved notable success.",
+          "sourceRole": "correctOption",
+          "targetText": "the idea soon took off in India and other countries before eventually reaching Europe, where it became popular",
+          "targetParagraphId": "para-zj-2022-jun-reading-b-2",
+          "relationType": "paraphrase",
+          "note": "正确项的 achieved notable success 是对原文 took off ... became popular（迅速流行、广受欢迎）的概括同义替换，体现该运动取得的成功。"
+        }
+      ]
+    },
+    "q-zj-2022-jun-025": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对Hartley所负责的英国项目目标的细节定位，定位句在第三段引语中。",
+      "stemTranslationZh": "Hartley在英国负责的项目的目的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "促进生态旅游。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To promote eco-tourism.",
+            "explanation": "原文谈的是让城市居民亲近自然、弥合人与自然的疏离，从未提及发展或促进“生态旅游”，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "改进林业研究。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To improve forestry research.",
+            "explanation": "原文虽提到该概念最初由植物学家提出，但项目目标在于改善人与自然的关系，并未提及要“改进林业研究”，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "普及园艺。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "To popularise gardening.",
+            "explanation": "原文讲的是营造微型森林以连接人与自然，从未提及推广“园艺”这一活动，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "让人们亲近自然。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jun-reading-b-3",
+              "quote": "We see it as a chance to try to break the growing disconnect between people and nature.",
+              "anchor": "把它视为弥合人与自然日益疏离的机会"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-zj-2022-jun-reading-b-3",
+              "quote": "We focus on urban areas where access to nature is often not that easy",
+              "anchor": "聚焦亲近自然不易的城市地区"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "To get people close to nature.",
+          "sourceRole": "correctOption",
+          "targetText": "break the growing disconnect between people and nature",
+          "targetParagraphId": "para-zj-2022-jun-reading-b-3",
+          "relationType": "paraphrase",
+          "note": "正确项 get people close to nature（让人亲近自然）是对原文 break the growing disconnect between people and nature（打破人与自然日益加深的隔阂）的正向同义替换。"
+        }
+      ]
+    },
+    "q-zj-2022-jun-026": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对微型森林中树木种植特点这一细节的精确理解，定位句在第四段对种植方式的描述。",
+      "stemTranslationZh": "微型森林中的树木有什么特别之处？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "它们体型很小。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "tiny forests barely the size of tennis courts",
+            "optionText": "They are small in size.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 tiny / size 指的是“森林”整体面积小（仅网球场大小），并非指“树木”小；选项借 small in size 与原文 size 制造词钩干扰，把森林的小偷换成树木的小。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-b-1",
+              "quote": "tiny forests barely the size of tennis courts",
+              "anchor": "小的是森林面积，而非树木本身"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "它们种植得很密。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jun-reading-b-4",
+              "quote": "the trees are planted much closer together",
+              "anchor": "树木种植得密集得多"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "它们是外来物种。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "There are usually around 30 different kinds of all-native tree species",
+            "sourceHighlight": "all-native",
+            "optionText": "They are foreign species.",
+            "optionHighlight": "foreign",
+            "explanation": "原文说树种全部为本土的（all-native），选项却称是“外来物种”（foreign），与原文意思完全相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-b-4",
+              "quote": "There are usually around 30 different kinds of all-native tree species",
+              "anchor": "树种全部为本土，而非外来"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "它们被大量施肥。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "negationReversal",
+            "sourceQuote": "the trees are planted much closer together and without chemicals or fertilisers",
+            "sourceHighlight": "without chemicals or fertilisers",
+            "optionText": "They are heavily fertilised.",
+            "optionHighlight": "heavily fertilised",
+            "explanation": "原文明确种植时不使用化学品或化肥（without chemicals or fertilisers），选项却称被“大量施肥”，与原文恰好相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-b-4",
+              "quote": "without chemicals or fertilisers",
+              "anchor": "不施化肥，与“大量施肥”相反"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "They are thickly planted.",
+          "sourceRole": "correctOption",
+          "targetText": "the trees are planted much closer together",
+          "targetParagraphId": "para-zj-2022-jun-reading-b-4",
+          "relationType": "paraphrase",
+          "note": "正确项 thickly planted（种植密集）是对原文 planted much closer together（种得更靠近）的同义替换。"
+        }
+      ]
+    },
+    "q-zj-2022-jun-027": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对Ellen Langer研究结论的细节理解：哪种练习程度的人表现最好。",
+      "stemTranslationZh": "Ellen Langer的研究表明了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "做一个完美主义者是值得的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "High conscientiousness is related to lower job performance, especially in simple jobs where it doesn’t pay to be a perfectionist.",
+            "sourceHighlight": "it doesn’t pay to be a perfectionist",
+            "optionText": "It is worthwhile to be a perfectionist.",
+            "optionHighlight": "It is worthwhile to be a perfectionist",
+            "explanation": "原文明说在简单工作中'做完美主义者并不划算'(doesn’t pay)，选项却说'做完美主义者值得'(worthwhile)，态度完全颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-c-2",
+              "quote": "it doesn’t pay to be a perfectionist",
+              "anchor": "doesn’t pay to be a perfectionist"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "翻译使人变得知识渊博。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "researchers asked people to translate sentences into a new made-up language",
+            "optionText": "Translation makes people knowledgeable.",
+            "matchType": "wordFamily",
+            "relationNote": "选项借用原文实验任务中的 translate（translation 与之同词族）制造干扰，但原文只把翻译当作实验任务，从未说翻译能让人'知识渊博'(knowledgeable)。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-c-2",
+              "quote": "researchers asked people to translate sentences into a new made-up language",
+              "anchor": "translate sentences"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "更简单的工作需要更多的谨慎。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "High conscientiousness is related to lower job performance, especially in simple jobs where it doesn’t pay to be a perfectionist.",
+            "sourceHighlight": "in simple jobs where it doesn’t pay to be a perfectionist",
+            "optionText": "Simpler jobs require greater caution.",
+            "optionHighlight": "Simpler jobs require greater caution",
+            "explanation": "原文指出在简单工作中过度谨慎/尽责(High conscientiousness)反而降低表现、不划算；选项却说简单工作需要更多谨慎，结论方向相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-c-2",
+              "quote": "especially in simple jobs where it doesn’t pay to be a perfectionist",
+              "anchor": "simple jobs"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "适度的努力产生最好的结果。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jun-reading-c-2",
+              "quote": "Subjects who practiced the language moderately beforehand made fewer errors than those who practiced extensively or not at all.",
+              "anchor": "moderately → made fewer errors"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Moderate effort produces the best result.",
+          "sourceRole": "correctOption",
+          "targetText": "Subjects who practiced the language moderately beforehand made fewer errors than those who practiced extensively or not at all.",
+          "targetParagraphId": "para-zj-2022-jun-reading-c-2",
+          "relationType": "paraphrase",
+          "note": "选项 Moderate effort produces the best result 是对原文 practiced ... moderately ... made fewer errors than those who practiced extensively or not at all 的同义概括：moderate 对应 moderately，best result 对应 made fewer errors（错误最少即结果最好）。"
+        }
+      ]
+    },
+    "q-zj-2022-jun-028": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查根据上下文推断画线词 go-getter 的词义。",
+      "stemTranslationZh": "第三段中画线词 \"go-getter\" 指的是怎样的人？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "善于应对压力的人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "is good at handling pressure",
+            "explanation": "原文只说在办公桌前吃午餐的银行职员被看作 go-getter，并未提及此人善于'应对压力'(handling pressure)，原文未提及。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "努力工作以求成功的人。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jun-reading-c-3",
+              "quote": "The young banker who eats lunch at his desk is probably seen as a go-getter, while his colleagues who chat over a relaxed conference-room meal get dirty looks from the corner office.",
+              "anchor": "eats lunch at his desk = go-getter"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "对自己的工作有天赋的人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "has a natural talent for his job",
+            "explanation": "go-getter 强调的是努力进取的态度，原文用'在办公桌前吃午餐'体现勤奋，未涉及天生'才能/天赋'(natural talent)，原文未提及。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "与同事相处融洽的人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "his colleagues who chat over a relaxed conference-room meal get dirty looks from the corner office",
+            "sourceEntity": "his colleagues who chat over a relaxed conference-room meal",
+            "optionText": "gets on well with his co-workers",
+            "optionEntity": "gets on well with his co-workers",
+            "explanation": "与同事社交（chat over a meal）说的是与 go-getter 形成对比的'同事们'，而 go-getter 本人是独自在办公桌前吃饭的银行职员；把'与同事相处融洽'安到 go-getter 身上属于对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-c-3",
+              "quote": "his colleagues who chat over a relaxed conference-room meal",
+              "anchor": "colleagues who chat"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "go-getter",
+          "sourceRole": "stem",
+          "targetText": "The young banker who eats lunch at his desk is probably seen as a go-getter",
+          "targetParagraphId": "para-zj-2022-jun-reading-c-3",
+          "relationType": "locationCue",
+          "note": "画线词 go-getter 的语境是 The young banker who eats lunch at his desk（在办公桌前吃午餐的年轻银行职员），借'牺牲午休拼命工作'这一形象推断 go-getter 指努力进取、力求成功(works hard to become successful)的人。"
+        }
+      ]
+    },
+    "q-zj-2022-jun-029": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查对末段内容的推断，重点把握'积极情绪—创造力'之间的关系。",
+      "stemTranslationZh": "从最后一段可以推断出什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "好的思考者能够激励他人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "A good thinker is able to inspire other people.",
+            "explanation": "末段说优秀思考者会去体验看似无关的事物以获得新灵感，是自己获得 fresh ideas，并未提到能'激励他人'(inspire other people)，原文未提及。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "与工作无关的经历是无用的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Part of being a good thinker is experiencing things that are seemingly unrelated to what you are working on at the moment but give you fresh ideas about your work",
+            "sourceHighlight": "seemingly unrelated to what you are working on at the moment but give you fresh ideas about your work",
+            "optionText": "Experience unrelated to your job is useless.",
+            "optionHighlight": "Experience unrelated to your job is useless",
+            "explanation": "原文强调看似与工作无关的经历恰恰能带来新灵感、是有益的；选项却说'无关的经历无用'(useless)，评价完全相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-c-4",
+              "quote": "experiencing things that are seemingly unrelated to what you are working on at the moment but give you fresh ideas about your work",
+              "anchor": "unrelated things give fresh ideas"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "愉快的心情有助于造就富有创造力的头脑。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jun-reading-c-4",
+              "quote": "there is a lot of research showing that a positive mood leads to higher levels of productivity and creativity",
+              "anchor": "positive mood → creativity"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "专注于所做之事能提高生产力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "a positive mood leads to higher levels of productivity and creativity",
+            "optionText": "Focusing on what you do raises productivity.",
+            "matchType": "wordFamily",
+            "relationNote": "选项借用原文 productivity（与 raises productivity 同词族）制造干扰，但原文说提高生产力靠的是'积极情绪'(positive mood)以及脱离任务的体验，而非'专注于所做之事'(Focusing on what you do)；末段恰恰提倡 off-task time，与'一味专注'方向相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-c-4",
+              "quote": "a positive mood leads to higher levels of productivity and creativity",
+              "anchor": "positive mood → productivity"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "A cheerful mood helps make a creative mind.",
+          "sourceRole": "correctOption",
+          "targetText": "a positive mood leads to higher levels of productivity and creativity",
+          "targetParagraphId": "para-zj-2022-jun-reading-c-4",
+          "relationType": "paraphrase",
+          "note": "选项 A cheerful mood helps make a creative mind 是对原文 a positive mood leads to higher levels of ... creativity 的同义转述：cheerful mood 对应 positive mood，creative mind 对应 higher levels of creativity。"
+        }
+      ]
+    },
+    "q-zj-2022-jun-030": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "questionFocus": "考查对全文主旨/作者主张的把握：文章倡导的是什么。",
+      "stemTranslationZh": "本文似乎倡导什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "中庸/不走极端的工作习惯。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-zj-2022-jun-reading-c-1",
+              "quote": "Many people believe that working to the maximum is the secret to success, but research has found that moderation (适度) also gets results on the job.",
+              "anchor": "moderation also gets results"
+            },
+            {
+              "role": "supporting",
+              "paragraphId": "para-zj-2022-jun-reading-c-2",
+              "quote": "Subjects who practiced the language moderately beforehand made fewer errors than those who practiced extensively or not at all.",
+              "anchor": "moderately → fewer errors"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "工作与家庭之间的平衡。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Balance between work and family.",
+            "explanation": "文章谈的是工作中适度用力、安排脱离任务时间与社交，全文未涉及'家庭'(family)这一维度，工作—家庭平衡属原文未提及。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "长期形成的文化传统。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "People from cultures that value relationships more than ours does",
+            "optionText": "Long-standing cultural traditions.",
+            "matchType": "wordFamily",
+            "relationNote": "选项借用原文 cultures（与 cultural 同词族）设钩，但原文只是用'更重视人际关系的文化'来说明社交化用餐的价值，并非倡导'长期文化传统'(Long-standing cultural traditions)，并不是文章主张。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-c-3",
+              "quote": "People from cultures that value relationships more than ours does",
+              "anchor": "cultures that value relationships"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "工作环境中的和谐。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Social interaction has been shown to lift mood (情绪) and get people thinking in new directions and in ways that could help improve any post-lunch effort.",
+            "sourceHighlight": "Social interaction has been shown to lift mood",
+            "optionText": "Harmony in the work environment.",
+            "optionHighlight": "Harmony in the work environment",
+            "explanation": "原文提到社交互动能提升情绪、激发新思路，但这只是支撑'适度'主旨的一个分论点；把全文主张拔高概括为'营造工作环境的和谐'(Harmony in the work environment)超出了文章范围，偷换了主旨。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-zj-2022-jun-reading-c-3",
+              "quote": "Social interaction has been shown to lift mood",
+              "anchor": "social interaction lifts mood"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Middle-of-the-road work habits.",
+          "sourceRole": "correctOption",
+          "targetText": "research has found that moderation (适度) also gets results on the job",
+          "targetParagraphId": "para-zj-2022-jun-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "选项 Middle-of-the-road work habits（中庸的工作习惯）是对全文主旨词 moderation（适度）的同义替换；首段 moderation also gets results on the job 与后文'适度练习效果最好''脱离任务时间有益'共同指向不走极端、适度行事的工作方式。"
+        }
+      ]
+    }
+  }
+}

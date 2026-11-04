@@ -1,0 +1,850 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2021-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2021-jia-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2021-jia-cloze": {
+      "overview": "记叙文。Nick Burchill 多年前出差住酒店时把辣香肠放窗边冷却，结果引来一群海鸥冲进房间制造混乱，他因此被酒店终身拉黑；多年后他写信道歉，请求解除禁令并最终成功。",
+      "affectiveArc": "故事走向为'闯祸—混乱—多年后反省道歉—和解'，由轻松幽默的麻烦逐步转向诚恳致歉与圆满收场。"
+    }
+  },
+  "blanks": {
+    "q-2021-jia-041": {
+      "blankId": "blank-2021-jia-041",
+      "blankNo": 41,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "stay at the hotel 表示'住在酒店里'，与后文 my room（我的房间）、住宿场景呼应；on business 说明他是出差入住。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "studying",
+          "meaning": "在酒店学习"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "looking",
+          "meaning": "在酒店看／张望"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "packing",
+          "meaning": "在酒店打包行李"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "at the hotel on business",
+          "signalSide": "context-after",
+          "targetText": "staying at the hotel",
+          "relation": "stay at the hotel 固定搭配，宾语是 the hotel，表示出差住宿。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the door to my room",
+          "signalSide": "context-after",
+          "targetText": "staying",
+          "relation": "下文'我的房间'呼应他住在酒店里。"
+        }
+      ],
+      "teachingNote": "锁定动词与地点名词的搭配：人 + stay at + 酒店 表示入住。"
+    },
+    "q-2021-jia-042": {
+      "blankId": "blank-2021-jia-042",
+      "blankNo": 42,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "visit some friends 表示'拜访朋友'，宾语是 some friends in the area（当地的朋友），施受搭配自然，也照应他出差到该地区顺道看朋友。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "help",
+          "meaning": "帮助一些朋友"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "follow",
+          "meaning": "跟随一些朋友"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "make",
+          "meaning": "结交一些朋友"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "some friends in the area",
+          "signalSide": "context-after",
+          "targetText": "visit some friends",
+          "relation": "visit 的宾语是 some friends，'拜访当地朋友'施受关系成立。"
+        }
+      ],
+      "teachingNote": "看动词宾语：visit + 人 表示拜访某人。"
+    },
+    "q-2021-jia-043": {
+      "blankId": "blank-2021-jia-043",
+      "blankNo": 43,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "bring some pepperoni from back east 表示'从东部带些辣香肠来'，与 from back east（从东部）方向搭配，朋友请他帮忙捎带东西，故后文他装了一箱辣香肠。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sell",
+          "meaning": "卖些辣香肠"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "have",
+          "meaning": "有些辣香肠"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "taste",
+          "meaning": "尝些辣香肠"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "some pepperoni",
+          "signalSide": "context-after",
+          "targetText": "bring some pepperoni",
+          "relation": "bring 的宾语是 some pepperoni，'带香肠'施受关系成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "from back east",
+          "signalSide": "context-after",
+          "targetText": "bring",
+          "relation": "from back east 表方向来源，与 bring（带过来）搭配。"
+        }
+      ],
+      "teachingNote": "结合方向短语 from...：朋友请人 bring 东西 from 某地，意为捎带。"
+    },
+    "q-2021-jia-044": {
+      "blankId": "blank-2021-jia-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "fill a suitcase full of pepperoni 表示'装满一箱辣香肠'，与 a suitcase full of pepperoni 中的 full（满）呼应，承接上文朋友让他带香肠。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "locked",
+          "meaning": "锁上一个装满香肠的箱子"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "abandoned",
+          "meaning": "丢弃一个装满香肠的箱子"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "lost",
+          "meaning": "弄丢一个装满香肠的箱子"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a suitcase full of pepperoni",
+          "signalSide": "context-after",
+          "targetText": "filled a suitcase",
+          "relation": "fill 的宾语是 a suitcase，与 full of（装满）语义呼应。"
+        }
+      ],
+      "teachingNote": "动词与 full of 呼应：fill a suitcase full of... 表示装满。"
+    },
+    "q-2021-jia-045": {
+      "blankId": "blank-2021-jia-045",
+      "blankNo": 45,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "worried that it would be too warm 表示'担心香肠会太热（变质）'，这种担忧与下文他把香肠摊在靠窗桌上冷却的举动情感一致、逻辑顺承。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "surprised",
+          "meaning": "对会太热感到惊讶"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "pleased",
+          "meaning": "对会太热感到高兴"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "excited",
+          "meaning": "对会太热感到兴奋"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "it would be too warm",
+          "signalSide": "context-after",
+          "targetText": "worried",
+          "relation": "be worried that... 后接担忧的内容'香肠会太热'，形容词与从句搭配。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "near an open window",
+          "signalSide": "context-after",
+          "targetText": "worried",
+          "relation": "因担心太热才放到开着的窗边降温，情感与举动一致。"
+        }
+      ],
+      "teachingNote": "形容词情感要与后续行为一致：因担心变热，才采取降温措施。"
+    },
+    "q-2021-jia-046": {
+      "blankId": "blank-2021-jia-046",
+      "blankNo": 46,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "laid it out on the table 表示'把它（香肠）摊放在桌上'，lay out 与 on the table near an open window 搭配，承接上文担心太热而摊开降温。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "dug",
+          "meaning": "把它挖出来放在桌上"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "cleared",
+          "meaning": "把它清理到桌上"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "cut",
+          "meaning": "把它切开放在桌上"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "out on the table",
+          "signalSide": "context-after",
+          "targetText": "laid it out",
+          "relation": "lay...out on the table 表示把东西摊开放在桌上，施受与地点搭配成立。"
+        }
+      ],
+      "teachingNote": "动词与 out on the table 搭配：lay out 表示摊开放置。"
+    },
+    "q-2021-jia-047": {
+      "blankId": "blank-2021-jia-047",
+      "blankNo": 47,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "his pepperoni was safe and well chilled 表示香肠'安然无恙且充分冷却'，safe 与并列的 well chilled 情感一致，都说明他自认为处理妥当、放心了。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "delicious",
+          "meaning": "香肠很美味"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "soft",
+          "meaning": "香肠很软"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "ready",
+          "meaning": "香肠准备好了"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "and well chilled",
+          "signalSide": "context-after",
+          "targetText": "was safe",
+          "relation": "safe 与并列形容词 well chilled 共同修饰 pepperoni，语义一致表示妥当无恙。"
+        }
+      ],
+      "teachingNote": "并列形容词要语义协调：safe and well chilled 都表妥当放心。"
+    },
+    "q-2021-jia-048": {
+      "blankId": "blank-2021-jia-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "he left 表示'他（放心地）离开了'，承接上句他认为香肠安全冷却好了，便离开房间外出，为下文回来发现海鸥制造混乱埋下伏笔。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "nodded",
+          "meaning": "他点头"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "waited",
+          "meaning": "他等待"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "regretted",
+          "meaning": "他后悔"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "opening the door to my room to find",
+          "signalSide": "context-after",
+          "targetText": "left",
+          "relation": "下文他'打开房门回来发现'，说明此处他先离开了房间。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "well chilled",
+          "signalSide": "context-before",
+          "targetText": "left",
+          "relation": "认为香肠已冷却妥当，故放心离开。"
+        }
+      ],
+      "teachingNote": "由前后情节推动作：放心后离开，才有回来撞见混乱。"
+    },
+    "q-2021-jia-049": {
+      "blankId": "blank-2021-jia-049",
+      "blankNo": 49,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "things went wrong 表示'事情出了岔子'，go wrong 固定搭配，引出下文回房发现一群海鸥的混乱场面，与故事由顺到乱的转折一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "far",
+          "meaning": "事情走远了"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "funny",
+          "meaning": "事情变得有趣"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "blind",
+          "meaning": "事情变盲目"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "things went",
+          "signalSide": "context-before",
+          "targetText": "went wrong",
+          "relation": "go wrong 为固定搭配，主语 things 与 wrong 构成'事情出错'。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "That’s when",
+          "signalSide": "context-before",
+          "targetText": "went wrong",
+          "relation": "That's when 引出转折时刻，暗示局面变糟。"
+        }
+      ],
+      "teachingNote": "记住 go wrong 表示'出岔子'，常用于情节转折。"
+    },
+    "q-2021-jia-050": {
+      "blankId": "blank-2021-jia-050",
+      "blankNo": 50,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "walking down the long hall and opening the door to my room 表示'走过长长的走廊去开房门'，hall（走廊）与 opening the door to my room 在酒店室内场景里搭配自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "beach",
+          "meaning": "沿着海滩走"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "driveway",
+          "meaning": "沿着车道走"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "table",
+          "meaning": "沿着桌子走"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "opening the door to my room",
+          "signalSide": "context-after",
+          "targetText": "the long hall",
+          "relation": "走过走廊去开房门，hall 与室内开门动作搭配。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "the door to my room",
+          "signalSide": "context-after",
+          "targetText": "hall",
+          "relation": "走廊—房门同属酒店室内空间语义场。"
+        }
+      ],
+      "teachingNote": "用相邻动作锁名词：走过 hall 才到 room 的门，符合室内动线。"
+    },
+    "q-2021-jia-051": {
+      "blankId": "blank-2021-jia-051",
+      "blankNo": 51,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "a recent letter of apology 表示'一封近期的致歉信'，与下文 to apologize for the damage（为损失道歉）以及全文道歉主线呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "application",
+          "meaning": "申请信"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "request",
+          "meaning": "请求信"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "invitation",
+          "meaning": "邀请信"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "recent letter of",
+          "signalSide": "context-before",
+          "targetText": "letter of apology",
+          "relation": "letter of + 名词 搭配，apology 作 of 的宾语构成'致歉信'。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "to apologize for the damage",
+          "signalSide": "context-after",
+          "targetText": "letter of apology",
+          "relation": "下文明确 apologize（道歉），与 letter of apology 同一语义场。"
+        }
+      ],
+      "teachingNote": "用全文主旨词锁名词：信的内容是道歉，故为 letter of apology。"
+    },
+    "q-2021-jia-052": {
+      "blankId": "blank-2021-jia-052",
+      "blankNo": 52,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "the seagulls went wild 表示'海鸥们发狂了'，go wild 搭配描写海鸥疯狂行为，与下文它们冲向窗户、30-40只一起乱飞的混乱场面一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hungry",
+          "meaning": "海鸥变饿了"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "dead",
+          "meaning": "海鸥死了"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "missing",
+          "meaning": "海鸥不见了"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "They rushed to the window",
+          "signalSide": "context-after",
+          "targetText": "went wild",
+          "relation": "go wild 与下文'冲向窗户、乱飞'的疯狂动作搭配一致。"
+        }
+      ],
+      "teachingNote": "形容词要与后续动作匹配：发狂 wild 才有疯狂乱飞。"
+    },
+    "q-2021-jia-053": {
+      "blankId": "blank-2021-jia-053",
+      "blankNo": 53,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "get out 表示'逃出去'，30-40只海鸥都冲向窗户想同时'出去'，与 rushed to the window（冲向窗户）方向一致，符合它们想从房间逃出的情境。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "wake up",
+          "meaning": "醒来"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "take off",
+          "meaning": "起飞"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "break in",
+          "meaning": "闯入"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "rushed to the window",
+          "signalSide": "context-before",
+          "targetText": "get out",
+          "relation": "海鸥冲向窗户，是想从房间出去，与 get out 方向一致。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "out",
+          "signalSide": "option",
+          "targetText": "get out",
+          "relation": "out 表示向外，合成'出去'之义。"
+        }
+      ],
+      "teachingNote": "短语可拆词猜义：get + out 合成'出去'，与冲向窗户方向一致。"
+    },
+    "q-2021-jia-054": {
+      "blankId": "blank-2021-jia-054",
+      "blankNo": 54,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "a real mess 表示'真是一团糟'，与上文窗帘掉落、台灯倒下、香肠到处都是的狼藉场面呼应，mess 总结混乱。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "puzzle",
+          "meaning": "一个难题"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "fight",
+          "meaning": "一场打斗"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "challenge",
+          "meaning": "一项挑战"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "It was a real",
+          "signalSide": "context-before",
+          "targetText": "a real mess",
+          "relation": "a real + 名词 搭配，mess 作中心词构成'一团糟'。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "The curtains were falling down, the lamps were falling down",
+          "signalSide": "context-before",
+          "targetText": "a real mess",
+          "relation": "窗帘台灯纷纷倒落的狼藉景象，与 mess（一团糟）同语义场。"
+        }
+      ],
+      "teachingNote": "用前文乱象总结名词：到处狼藉即 a real mess。"
+    },
+    "q-2021-jia-055": {
+      "blankId": "blank-2021-jia-055",
+      "blankNo": 55,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "I have matured 表示'我已经成熟了'，与上文 Older and wiser now（如今年长且更明智）呼应，并引出他承认责任、为当年莽撞道歉。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "recovered",
+          "meaning": "我已康复"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "retired",
+          "meaning": "我已退休"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "escaped",
+          "meaning": "我已逃脱"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "Older and wiser now",
+          "signalSide": "context-before",
+          "targetText": "have matured",
+          "relation": "'更年长更明智'与 matured（成熟）同义呼应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "I admit responsibility",
+          "signalSide": "context-after",
+          "targetText": "have matured",
+          "relation": "成熟之后才会承担责任，前后语义衔接。"
+        }
+      ],
+      "teachingNote": "抓同义复现：older and wiser 等价于 matured。"
+    },
+    "q-2021-jia-056": {
+      "blankId": "blank-2021-jia-056",
+      "blankNo": 56,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "responsibility for my actions 表示'为我的行为负责'，actions 指他当年的所作所为，与下文为造成的损失道歉、承认责任一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "suffering",
+          "meaning": "为我的苦难负责"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "plans",
+          "meaning": "为我的计划负责"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "madness",
+          "meaning": "为我的疯狂负责"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I admit responsibility for my",
+          "signalSide": "context-before",
+          "targetText": "actions",
+          "relation": "admit responsibility for my actions 搭配，为自己的行为负责。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "the damage I had",
+          "signalSide": "context-after",
+          "targetText": "actions",
+          "relation": "下文 the damage（造成的损害）由他的 actions 引起，语义呼应。"
+        }
+      ],
+      "teachingNote": "承担责任的对象是行为：responsibility for one's actions。"
+    },
+    "q-2021-jia-057": {
+      "blankId": "blank-2021-jia-057",
+      "blankNo": 57,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "hat in hand 意为'谦卑恳求地（脱帽相求）'，与下文 to apologize（道歉）、to ask you to...（请求）的谦卑求情语气一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hands in pockets",
+          "meaning": "双手插兜（漫不经心）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "nose in the air",
+          "meaning": "趾高气扬"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "feet on the ground",
+          "meaning": "脚踏实地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "to apologize for the damage",
+          "signalSide": "context-after",
+          "targetText": "hat in hand",
+          "relation": "道歉求情的谦卑语气，与 hat in hand（脱帽相求）一致。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "hat",
+          "signalSide": "option",
+          "targetText": "hat in hand",
+          "relation": "hat in hand 字面'手拿帽子'，引申为谦卑恳求。"
+        }
+      ],
+      "teachingNote": "习语随语境定调：道歉求情用 hat in hand 表谦卑。"
+    },
+    "q-2021-jia-058": {
+      "blankId": "blank-2021-jia-058",
+      "blankNo": 58,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "the damage I had indirectly caused 表示'我间接造成的损害'，损害实由海鸥所为、并非他亲手破坏，故用 indirectly 修饰 caused 最贴切。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "deliberately",
+          "meaning": "故意造成的损害"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "cautiously",
+          "meaning": "谨慎地造成的损害"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "secretly",
+          "meaning": "秘密地造成的损害"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the damage I had",
+          "signalSide": "context-before",
+          "targetText": "indirectly caused",
+          "relation": "副词修饰 caused，说明损害是间接造成的。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "an entire flock of seagulls",
+          "signalSide": "context-before",
+          "targetText": "indirectly",
+          "relation": "破坏是海鸥所致，他只是间接原因，故 indirectly。"
+        }
+      ],
+      "teachingNote": "副词要贴合事实：损害由海鸥造成，他是 indirectly。"
+    },
+    "q-2021-jia-059": {
+      "blankId": "blank-2021-jia-059",
+      "blankNo": 59,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "ask you to reconsider my lifetime ban 表示'请您重新考虑对我的终身禁令'，reconsider 与 my lifetime ban 搭配，表达请求酒店重新斟酌、解除禁令的诉求。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "replace",
+          "meaning": "替换我的终身禁令"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "remember",
+          "meaning": "记住我的终身禁令"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "renew",
+          "meaning": "续延我的终身禁令"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my lifetime ban from the hotel",
+          "signalSide": "context-after",
+          "targetText": "reconsider",
+          "relation": "reconsider 的宾语是 my lifetime ban，请求重新考虑禁令。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "to apologize",
+          "signalSide": "context-before",
+          "targetText": "reconsider",
+          "relation": "道歉的目的之一是请酒店重新考虑禁令。"
+        }
+      ],
+      "teachingNote": "动词与宾语 ban 搭配：reconsider a ban 表示重新考虑禁令。"
+    },
+    "q-2021-jia-060": {
+      "blankId": "blank-2021-jia-060",
+      "blankNo": 60,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "His letter worked 表示'他的信奏效了'，与下文酒店欢迎他回去、解除禁令的结果一致，work 在此意为'起作用、见效'。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "arrived",
+          "meaning": "他的信寄到了"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "ended",
+          "meaning": "他的信结束了"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "disappeared",
+          "meaning": "他的信消失了"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "is now welcome to come back",
+          "signalSide": "context-after",
+          "targetText": "worked",
+          "relation": "信奏效，故他现在被欢迎回来，结果印证 work（见效）。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Burchill is now welcome to come back",
+          "signalSide": "context-after",
+          "targetText": "His letter worked",
+          "relation": "禁令解除的结果证明信起了作用。"
+        }
+      ],
+      "teachingNote": "由结果反推动词：禁令解除说明信 worked（奏效）。"
+    }
+  }
+}

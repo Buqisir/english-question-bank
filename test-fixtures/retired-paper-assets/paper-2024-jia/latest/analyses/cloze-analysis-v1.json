@@ -1,0 +1,886 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2024-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2024-jia-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2024-jia-cloze": {
+      "overview": "记叙文。作者回忆某次家庭聚餐时帮祖母洗碗、听祖母讲她战前出生、重男轻女、靠旁听偷学认字、周末在海边练习水下久坐等童年往事，借此对比自己安逸的成长经历，表达对祖母的钦佩与感激。",
+      "affectiveArc": "情感主线由对祖母艰苦童年的同情与惊叹，转向对自身幸运处境的感恩，最终落在对祖母的钦佩与亲近——整体温暖向上。"
+    }
+  },
+  "blanks": {
+    "q-2024-jia-041": {
+      "blankId": "blank-2024-jia-041",
+      "blankNo": 41,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "下文紧接 help my grandmother wash dishes，洗碗这一动作发生在厨房，kitchen 与 wash dishes 构成同一语义场，地点搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sitting room",
+          "meaning": "起居室、客厅"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "yard",
+          "meaning": "院子"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "dining hall",
+          "meaning": "餐厅、饭厅"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "help my grandmother wash dishes",
+          "signalSide": "context-after",
+          "targetText": "wash dishes",
+          "relation": "洗碗在厨房进行，kitchen 与该动作地点呼应。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "wash dishes",
+          "signalSide": "context-after",
+          "targetText": "kitchen",
+          "relation": "dishes 属厨房语义场，锁定 kitchen。"
+        }
+      ],
+      "teachingNote": "用最近的动词搭配（wash dishes）反推空格的地点名词。"
+    },
+    "q-2024-jia-042": {
+      "blankId": "blank-2024-jia-042",
+      "blankNo": 42,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "前句是一次具体洗碗场景，本句说祖母会讲她童年的故事，As always 表示“一如既往、每次都这样”，说明这是惯常情形，与下文反复回忆的叙事基调一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "By the way",
+          "meaning": "顺便说一句"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "For example",
+          "meaning": "例如"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Here and now",
+          "meaning": "此时此地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "would tell me stories about her childhood",
+          "signalSide": "context-after",
+          "targetText": "would tell me stories",
+          "relation": "would 表示过去反复发生的习惯，与 As always 的“一如既往”呼应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "always",
+          "signalSide": "option",
+          "targetText": "As always",
+          "relation": "always 表“总是、每次”，合成“一如既往”之义。"
+        }
+      ],
+      "teachingNote": "看 would 这一习惯性助动词，判断短语应表“一向如此”。"
+    },
+    "q-2024-jia-043": {
+      "blankId": "blank-2024-jia-043",
+      "blankNo": 43,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "宾语是 an entirely different childhood lifestyle，experience a lifestyle 表示“经历某种生活方式”，施受关系成立；祖母过的是与“我”不同的童年，用 experienced 最贴切。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "adjusted",
+          "meaning": "调整、适应"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "promoted",
+          "meaning": "促进、提升"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "achieved",
+          "meaning": "实现、取得"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "an entirely different childhood lifestyle from mine",
+          "signalSide": "context-after",
+          "targetText": "childhood lifestyle",
+          "relation": "experience 的宾语是 lifestyle，“经历某种生活方式”搭配成立。"
+        }
+      ],
+      "teachingNote": "动词与抽象宾语 lifestyle 搭配时，优先考虑 experience。"
+    },
+    "q-2024-jia-044": {
+      "blankId": "blank-2024-jia-044",
+      "blankNo": 44,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "go to school 是固定搭配，下文 had to stay at home、her brother was having Chinese lessons 等都围绕“上学/读书”展开，school 与教育语义场一致，说明祖母没有上学机会。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "work",
+          "meaning": "去上班、工作"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "court",
+          "meaning": "法庭"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "press",
+          "meaning": "新闻界、出版社"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "did not have a chance to go to",
+          "signalSide": "context-before",
+          "targetText": "go to school",
+          "relation": "go to school 固定搭配，宾语锁定 school。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "having Chinese",
+          "signalSide": "context-after",
+          "targetText": "school",
+          "relation": "下文 Chinese lessons、tutor 同属教育语义场，呼应 school。"
+        }
+      ],
+      "teachingNote": "go to ___ 后接最常见的“上学”搭配，再用下文教育词印证。"
+    },
+    "q-2024-jia-045": {
+      "blankId": "blank-2024-jia-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "boys were ___ much more than girls 表示在典型家庭里男孩比女孩更受“偏爱”，favor 表“偏袒、偏爱”，与下文 my grandma had to stay at home（女孩被留在家干活）的重男轻女语境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "tolerated",
+          "meaning": "被容忍"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "trusted",
+          "meaning": "被信任"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "acknowledged",
+          "meaning": "被承认、被认可"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "boys were",
+          "signalSide": "stem",
+          "targetText": "much more than girls",
+          "relation": "boys 被“更多地……”对待，favor（偏爱）与 much more 程度搭配。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "my grandma had to stay at home to do",
+          "signalSide": "context-after",
+          "targetText": "stay at home",
+          "relation": "女孩被留家干活，反衬男孩受偏爱，呼应 favored。"
+        }
+      ],
+      "teachingNote": "抓住重男轻女对比，男孩对应“被偏爱”的动词。"
+    },
+    "q-2024-jia-046": {
+      "blankId": "blank-2024-jia-046",
+      "blankNo": 46,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "do housework 是固定搭配；前文说女孩 had to stay at home（留在家里），在家做的事是“家务”，housework 与 stay at home 语义场一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "gardening",
+          "meaning": "园艺、做园艺活"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "homework",
+          "meaning": "家庭作业"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "business",
+          "meaning": "生意、商务"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "stay at home to do",
+          "signalSide": "context-before",
+          "targetText": "do housework",
+          "relation": "do housework 固定搭配，留在家里做家务。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "stay at home",
+          "signalSide": "context-before",
+          "targetText": "housework",
+          "relation": "home 与 housework 同属家庭劳务语义场。"
+        }
+      ],
+      "teachingNote": "do + 名词搭配里，“留在家”对应 housework。"
+    },
+    "q-2024-jia-047": {
+      "blankId": "blank-2024-jia-047",
+      "blankNo": 47,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "下文说她抓住机会，趁哥哥跟家庭教师上中文课时坐在桌边偷听，这一机会是用来“学习”的，study 与下文 Chinese lessons、This training taught her to read and write 呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "exercise",
+          "meaning": "锻炼、做运动"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "explore",
+          "meaning": "探索"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "teach",
+          "meaning": "教、授课"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "The only opportunity",
+          "signalSide": "context-before",
+          "targetText": "opportunity to study",
+          "relation": "opportunity to study 表“学习的机会”，与偷听上课呼应。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "This training taught her to read and write",
+          "signalSide": "context-after",
+          "targetText": "read and write",
+          "relation": "下文“学会读写”证明此机会用于 study。"
+        }
+      ],
+      "teachingNote": "用下文结果（学会读写）回推这是“学习”的机会。"
+    },
+    "q-2024-jia-048": {
+      "blankId": "blank-2024-jia-048",
+      "blankNo": 48,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "her brother was having Chinese ___ with the family tutor，与 family tutor（家庭教师）搭配的是 Chinese lessons（中文课），have lessons 固定搭配，与上文 study、下文 read and write 的学习语义场一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "food",
+          "meaning": "中餐、食物"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "guests",
+          "meaning": "客人"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "tea",
+          "meaning": "中国茶"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with the family tutor",
+          "signalSide": "context-after",
+          "targetText": "Chinese lessons",
+          "relation": "tutor（家教）带的是 lessons（课程），搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "listening",
+          "signalSide": "context-after",
+          "targetText": "Chinese lessons",
+          "relation": "她在旁听课，lessons 属上课语义场。"
+        }
+      ],
+      "teachingNote": "看搭配伙伴 tutor，确定与之搭配的“课程”名词。"
+    },
+    "q-2024-jia-049": {
+      "blankId": "blank-2024-jia-049",
+      "blankNo": 49,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "她坐在长桌远端安静地偷听，listen closely 表“专心、仔细地听”，与下文 This training taught her to read and write（靠认真听学会读写）的结果一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "directly",
+          "meaning": "直接地"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "nervously",
+          "meaning": "紧张地"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "freely",
+          "meaning": "自由地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "listening",
+          "signalSide": "stem",
+          "targetText": "listening closely",
+          "relation": "listen closely 表“专心听”，副词修饰 listening。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "This training taught her to read and write",
+          "signalSide": "context-after",
+          "targetText": "read and write",
+          "relation": "靠认真听才学会读写，证明 closely。"
+        }
+      ],
+      "teachingNote": "副词须与所修饰动词 listen 及其学习结果绑定。"
+    },
+    "q-2024-jia-050": {
+      "blankId": "blank-2024-jia-050",
+      "blankNo": 50,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "破折号后举例 especially whenever we share the newspaper，说明倒着认字这一技能在分享报纸时很“实用”，practical 表“实用的”，与举例的实际用途一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "professional",
+          "meaning": "专业的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "awkward",
+          "meaning": "尴尬的、别扭的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "simple",
+          "meaning": "简单的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a skill that has turned out to be quite",
+          "signalSide": "context-before",
+          "targetText": "practical",
+          "relation": "skill 被评价为 quite practical（很实用），形容词修饰 skill。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "especially whenever we share the newspaper",
+          "signalSide": "context-after",
+          "targetText": "share the newspaper",
+          "relation": "举出实际用途，证明这一技能“实用”。"
+        }
+      ],
+      "teachingNote": "破折号后的具体用途说明该技能“实用”。"
+    },
+    "q-2024-jia-051": {
+      "blankId": "blank-2024-jia-051",
+      "blankNo": 51,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "下文 walk through deep water、sit down cross-legged underwater、on the seabed 都指向有水、有海床的地方，beach（海边）与这些水下活动的语义场一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "market",
+          "meaning": "市场、集市"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "mountain",
+          "meaning": "山"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "class",
+          "meaning": "课堂"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "walk through deep water",
+          "signalSide": "context-after",
+          "targetText": "beach",
+          "relation": "deep water 表明去的是海边，与 beach 搭配。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "on the seabed",
+          "signalSide": "context-after",
+          "targetText": "beach",
+          "relation": "seabed（海床）锁定地点为海边。"
+        }
+      ],
+      "teachingNote": "用下文 water、seabed 等水域线索锁定地点名词。"
+    },
+    "q-2024-jia-052": {
+      "blankId": "blank-2024-jia-052",
+      "blankNo": 52,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "hold one's breath 是固定搭配，表示“屏住呼吸”；她们坐在水下盘腿观察周围，需要屏息，与 sit down cross-legged underwater 的水下情境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "secret",
+          "meaning": "秘密"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "view",
+          "meaning": "看法、视野"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "tongue",
+          "meaning": "舌头"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "hold their",
+          "signalSide": "stem",
+          "targetText": "hold their breath",
+          "relation": "hold one's breath 固定搭配，宾语为 breath。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "sit down cross-legged underwater",
+          "signalSide": "context-before",
+          "targetText": "underwater",
+          "relation": "水下活动需要屏息，呼应 breath。"
+        }
+      ],
+      "teachingNote": "hold one's ___ 在水下情境里固定为 breath。"
+    },
+    "q-2024-jia-053": {
+      "blankId": "blank-2024-jia-053",
+      "blankNo": 53,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "破折号后说明这是祖母 open her eyes underwater and still sit comfortably 的本领，作者对这一能力表示“钦佩、赞叹”，admire 与下文展示的非凡本领搭配，表达羡慕之情。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "notice",
+          "meaning": "注意到"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "adopt",
+          "meaning": "采用、收养"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "value",
+          "meaning": "重视、看重"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "This is something I",
+          "signalSide": "stem",
+          "targetText": "something I admire",
+          "relation": "宾语是后文那项非凡本领，admire（钦佩）与之搭配。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "her ability to open her",
+          "signalSide": "context-after",
+          "targetText": "ability",
+          "relation": "her ability 表明这是值得钦佩的本领，指向 admire。"
+        }
+      ],
+      "teachingNote": "面对他人非凡 ability 时，作者态度多为 admire。"
+    },
+    "q-2024-jia-054": {
+      "blankId": "blank-2024-jia-054",
+      "blankNo": 54,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "open one's eyes underwater 表示“在水下睁眼”，与上文 watched all action going on around them（观察周围）一致；open eyes 搭配合理，说明她能在水下睁眼观察。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hands",
+          "meaning": "手"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "mouth",
+          "meaning": "嘴"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "arms",
+          "meaning": "胳膊"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "her ability to open her",
+          "signalSide": "stem",
+          "targetText": "open her eyes",
+          "relation": "open one's eyes 固定搭配，宾语为 eyes。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "watched all action going on around them",
+          "signalSide": "context-before",
+          "targetText": "watched",
+          "relation": "上文 watched（观看）呼应水下睁眼 open her eyes。"
+        }
+      ],
+      "teachingNote": "open ___ underwater 与“观看”呼应，宾语是 eyes。"
+    },
+    "q-2024-jia-055": {
+      "blankId": "blank-2024-jia-055",
+      "blankNo": 55,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "句中 compared with hers（与祖母的童年相比），下文说作者无需经历那些苦难、never faced hardships，故自己的童年是“幸福的”，happy 与下文 grateful、无苦难的对比一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "difficult",
+          "meaning": "艰难的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "complex",
+          "meaning": "复杂的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "similar",
+          "meaning": "相似的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "My childhood is quite",
+          "signalSide": "stem",
+          "targetText": "quite happy",
+          "relation": "childhood 被形容为 quite happy，形容词修饰 childhood。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "I did not need to",
+          "signalSide": "context-after",
+          "targetText": "did not need to go through the hardships",
+          "relation": "无需经历苦难，说明童年是幸福的，呼应 happy。"
+        }
+      ],
+      "teachingNote": "用“无需经历苦难”的对比定形容词的情感色彩为 happy。"
+    },
+    "q-2024-jia-056": {
+      "blankId": "blank-2024-jia-056",
+      "blankNo": 56,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "I am ___ that I did not need to go through the hardships，作者庆幸自己不必像祖母那样吃苦，grateful（感激、庆幸）与无苦难处境的正面情感一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "surprised",
+          "meaning": "惊讶的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "convinced",
+          "meaning": "确信的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "regretful",
+          "meaning": "后悔的、遗憾的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "I did not need to",
+          "signalSide": "context-after",
+          "targetText": "did not need to go through the hardships",
+          "relation": "不必吃苦让作者心怀感激，呼应 grateful。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "I am",
+          "signalSide": "stem",
+          "targetText": "grateful that",
+          "relation": "grateful that 引导宾语从句，搭配成立。"
+        }
+      ],
+      "teachingNote": "庆幸自己免于苦难，情感词应取 grateful。"
+    },
+    "q-2024-jia-057": {
+      "blankId": "blank-2024-jia-057",
+      "blankNo": 57,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "宾语是 the hardships，go through the hardships 表“经历苦难”，与 like she did（像她那样）的“经历过”一致，搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "reflect upon",
+          "meaning": "反思、回顾"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "ask about",
+          "meaning": "询问"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "prepare for",
+          "meaning": "为……做准备"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the hardships like she did",
+          "signalSide": "context-after",
+          "targetText": "the hardships",
+          "relation": "go through 的宾语是 hardships，“经历苦难”搭配成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "through",
+          "signalSide": "option",
+          "targetText": "go through",
+          "relation": "go through 表“经历、度过”。"
+        }
+      ],
+      "teachingNote": "宾语 hardships 决定短语为 go through（经历）。"
+    },
+    "q-2024-jia-058": {
+      "blankId": "blank-2024-jia-058",
+      "blankNo": 58,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "与祖母 did not have a chance to go to school 形成呼应，作者说自己从未面临 education（受教育）的问题，education 与上文“上学”语义场对应，体现两代人在教育上的反差。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "unemployment",
+          "meaning": "失业"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "health",
+          "meaning": "健康"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "communication",
+          "meaning": "沟通、交流"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "did not have a chance to go to",
+          "signalSide": "context-before",
+          "targetText": "go to school",
+          "relation": "祖母没机会上学，作者无 education 之忧，正反呼应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "never faced the problem of",
+          "signalSide": "context-before",
+          "targetText": "the problem of education",
+          "relation": "the problem of education 表“受教育的问题”，搭配成立。"
+        }
+      ],
+      "teachingNote": "用祖母“没机会上学”的反差，定作者无忧的领域为 education。"
+    },
+    "q-2024-jia-059": {
+      "blankId": "blank-2024-jia-059",
+      "blankNo": 59,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "an amazing person to ___ to，talk to（与之交谈）搭配合理；祖母讲述往事让作者愿意与她交谈，与下文 her stories（她的故事）一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "attend",
+          "meaning": "出席、照料"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "refer",
+          "meaning": "提及、参考"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "lead",
+          "meaning": "带领、引导"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "such an amazing person to",
+          "signalSide": "stem",
+          "targetText": "person to talk to",
+          "relation": "talk to 表“与之交谈”，person to talk to 搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "her stories always make my history textbooks",
+          "signalSide": "context-after",
+          "targetText": "her stories",
+          "relation": "祖母善于讲故事，因而是值得交谈 talk to 的人。"
+        }
+      ],
+      "teachingNote": "person to ___ to 在“讲故事/交流”语境里取 talk。"
+    },
+    "q-2024-jia-060": {
+      "blankId": "blank-2024-jia-060",
+      "blankNo": 60,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "her stories always make my history textbooks ___，祖母的故事让历史课本“鲜活起来”，come alive 表“变得生动、栩栩如生”，与 stories 让枯燥课本有了生命的语境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "come true",
+          "meaning": "成真、实现"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "come round",
+          "meaning": "苏醒、顺道来访"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "come out",
+          "meaning": "出版、显露"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "make my history textbooks",
+          "signalSide": "stem",
+          "targetText": "make my history textbooks come alive",
+          "relation": "make textbooks come alive 表“让课本鲜活起来”，搭配成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "alive",
+          "signalSide": "option",
+          "targetText": "come alive",
+          "relation": "alive 表“有生命的、生动的”，合成“鲜活起来”。"
+        }
+      ],
+      "teachingNote": "故事让课本“活起来”，短语取 come alive。"
+    }
+  }
+}

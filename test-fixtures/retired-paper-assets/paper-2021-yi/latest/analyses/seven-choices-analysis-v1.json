@@ -1,0 +1,379 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2021-yi",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2021-yi-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-19",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2021-yi-seven-choices": {
+      "overview": "本文围绕《How to Be Interesting》作者 Jessica Hagy 的观点，讲述如何在晚宴上把自己变成一个有趣的人。文章按「行动—提问—应对话痨—化解尴尬沉默」四个小建议层层展开，是典型的建议技巧类七选五说明文。五个空覆盖段首主题句、段中衔接句与段末收束句。",
+      "discourseStructure": {
+        "summary": "首句提出总论点：在晚宴上变有趣并不难。随后给出四条具体策略：迈出第一步去探索、用开放式问题打开话匣、把话痨从场子里支开、用赞美化解尴尬沉默。末段重申总论点收束全文。",
+        "units": [
+          {
+            "unitId": "unit-2021-yi-seven-intro",
+            "heading": null,
+            "paragraphIds": [
+              "para-2021-yi-seven-title"
+            ],
+            "summary": "引出全文总论点：让自己在晚宴上变有趣并不难。"
+          },
+          {
+            "unitId": "unit-2021-yi-seven-explore",
+            "heading": null,
+            "paragraphIds": [
+              "para-2021-yi-seven-p1"
+            ],
+            "summary": "第一条建议：迈出第一步去探索，勇于尝试不同食物、与陌生人交谈。"
+          },
+          {
+            "unitId": "unit-2021-yi-seven-question",
+            "heading": null,
+            "paragraphIds": [
+              "para-2021-yi-seven-p2"
+            ],
+            "summary": "第二条建议：用「What do you do for a living?」以外的开放式问题打开话题，让对方多聊。"
+          },
+          {
+            "unitId": "unit-2021-yi-seven-talker",
+            "heading": null,
+            "paragraphIds": [
+              "para-2021-yi-seven-p3"
+            ],
+            "summary": "第三条建议：应对喝多了或喋喋不休的人，把他从场面中支开或转移话题。"
+          },
+          {
+            "unitId": "unit-2021-yi-seven-silence",
+            "heading": null,
+            "paragraphIds": [
+              "para-2021-yi-seven-p4",
+              "para-2021-yi-seven-p5"
+            ],
+            "summary": "第四条建议：用赞美主人化解尴尬沉默，并以「变有趣并不难」收尾。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2021-yi-036": {
+      "blankId": "blank-2021-yi-036",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "out of your comfort zone",
+        "wandering into somebody's house for the first time",
+        "show up and be adventurous",
+        "trying different foods",
+        "talking to strangers"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-yi-seven-p1",
+        "headingAnchor": null,
+        "beforeQuote": "",
+        "afterQuote": "if you’re out of your comfort zone or if you’re wandering into somebody’s house for the first time. So the main thing is just to show up and be adventurous"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "go exploring",
+          "signalSide": "option",
+          "targetText": "be adventurous / trying different foods / talking to strangers",
+          "relation": "选项 go exploring 与空后 be adventurous、trying different foods 同属探索冒险话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "be adventurous",
+          "signalSide": "context-after",
+          "targetText": "go exploring",
+          "relation": "空后 be adventurous 与选项 go exploring 语义呼应，确认本空为第一步去探索。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "The first step",
+          "signalSide": "option",
+          "targetText": "the main thing is just to show up",
+          "relation": "选项 The first step 作段首总起，引出后文具体做法 show up、be adventurous。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "B 作段首主题句，提出第一步是去探索，与空后勇于冒险、尝试不同食物、与陌生人交谈的具体探索行为完全吻合。",
+        "matchedClues": [
+          {
+            "contextSide": "be adventurous / trying different foods / talking to strangers",
+            "optionSide": "The first step is to go exploring",
+            "relation": "go exploring 是上义概括，空后各项是其具体展开，构成总分关系。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A How do you know the host 是疑问句，与空后逗号引导的条件状语 if 从句无法衔接，且本段未谈如何认识主人。"
+        }
+      ],
+      "teachingNote": "段首空抓总起句：先找空后被概括的具体行为，再选能统领它们的上义句。"
+    },
+    "q-2021-yi-037": {
+      "blankId": "blank-2021-yi-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "start the conversation with a question",
+        "What do you do for a living?",
+        "more interesting conversation",
+        "It just opens up conversation"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-yi-seven-p2",
+        "headingAnchor": null,
+        "beforeQuote": "you’ll be able to get a lot more interesting conversation out of whomever it is you’re talking to.",
+        "afterQuote": "it can bring in “I have this old, broken-down vehicle” or “I rode the bus with these crazy people"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "it",
+          "signalSide": "context-after",
+          "targetText": "the question How did you get here?",
+          "relation": "空后 it can bring in 中的 it 指代选项 C 中提出的问题 How did you get here?。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "How did you get here?",
+          "signalSide": "option",
+          "targetText": "I have this old, broken-down vehicle / I rode the bus",
+          "relation": "选项中你怎么来的这一问，正好引出空后关于交通工具或坐公交的回答。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "a question",
+          "signalSide": "context-before",
+          "targetText": "If you ask the question",
+          "relation": "空前 start the conversation with a question 与选项 If you ask the question 同属提问话题场。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "C 提出具体问题 How did you get here?，空后用 it 回指该问题，并给出破旧车、坐公交等正是回答怎么来的内容，前后构成提问与回答示例链。",
+        "matchedClues": [
+          {
+            "contextSide": "it can bring in I have this old, broken-down vehicle / I rode the bus",
+            "optionSide": "If you ask the question How did you get here?",
+            "relation": "破旧车、坐公交都是对 How did you get here? 的回答，验证 it 的指代对象。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 同为疑问句且含 host，但空后回答的是怎么来的内容，与如何认识主人不对应，故排除。"
+        }
+      ],
+      "teachingNote": "段中空盯回指词：用空后代词 it 锁定它指代的对象，再回选能被回答内容验证的提问句。"
+    },
+    "q-2021-yi-038": {
+      "blankId": "blank-2021-yi-038",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "take their wine away",
+        "take away their soapbox",
+        "remove them from the situation",
+        "ask them to help you in the kitchen"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-yi-seven-p3",
+        "headingAnchor": null,
+        "beforeQuote": "",
+        "afterQuote": "If you can’t take their wine away, you should certainly try to take away their soapbox"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "their",
+          "signalSide": "context-after",
+          "targetText": "that person who has had too much to drink or won't stop talking",
+          "relation": "空后 their wine、their soapbox 中的 their 指代选项 F 中的 that person，确立本段话题对象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "too much to drink",
+          "signalSide": "option",
+          "targetText": "take their wine away",
+          "relation": "选项 too much to drink 喝多了与空后 take their wine away 把酒拿走话题呼应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "won’t stop talking",
+          "signalSide": "option",
+          "targetText": "take away their soapbox",
+          "relation": "选项 won't stop talking 说个不停与空后 take away their soapbox 撤掉讲台对应，soapbox 即说教平台。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "F 以问句段首引出本段话题人物喝多了或喋喋不休的人，空后 their wine、their soapbox 中的 their 正回指此人，且拿酒与撤讲台分别对应喝多与话痨两种情况。",
+        "matchedClues": [
+          {
+            "contextSide": "take their wine away / take away their soapbox",
+            "optionSide": "that person who has had too much to drink or won't stop talking",
+            "relation": "拿走酒对应喝多了，撤掉讲台对应说个不停，一一吻合。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 也是问句可填段首，但与空后拿酒、撤讲台、支开的应对措施毫无指代或话题关联，故排除。"
+        }
+      ],
+      "teachingNote": "段首问句空看后文代词归属：用空后 their 找出它所指的人物，再选引入该人物的问句。"
+    },
+    "q-2021-yi-039": {
+      "blankId": "blank-2021-yi-039",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "take away their soapbox",
+        "ask them to help you in the kitchen",
+        "remove them from the situation",
+        "won't stop talking"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-yi-seven-p3",
+        "headingAnchor": null,
+        "beforeQuote": "you can ask them to help you in the kitchen with something and just remove them from the situation.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Or",
+          "signalSide": "option",
+          "targetText": "remove them from the situation",
+          "relation": "选项以 Or 开头，与空前把他支开并列，提供第二种处理话痨的替代办法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "turn the conversation into a topic where they have little to say",
+          "signalSide": "option",
+          "targetText": "take away their soapbox / won't stop talking",
+          "relation": "选项把话题转到他们没话说的领域与前文撤掉讲台、让话痨闭嘴同属让话痨少说话话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "remove them from the situation",
+          "signalSide": "context-before",
+          "targetText": "turn the conversation into a topic where they have little to say",
+          "relation": "空前 remove them from the situation 与选项的转移话题办法同属应对话痨手段，由 Or 并列。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "E 以 Or 与空前把他支开并列，给出处理话痨的另一招把话题转到他们无话可说的领域，逻辑上是并列的替代方案，恰当收束本段。",
+        "matchedClues": [
+          {
+            "contextSide": "ask them to help you in the kitchen and just remove them from the situation",
+            "optionSide": "Or turn the conversation into a topic where they have little to say",
+            "relation": "Or 把物理支开与话题转移并列为两种应对话痨的办法。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 谈感受尴尬最深的人，属下一段尴尬沉默话题，与本段应对话痨不符，故排除。"
+        }
+      ],
+      "teachingNote": "段末并列空抓连接词 Or：识别它把前后两种平行办法连成一组，即可锁定并列项。"
+    },
+    "q-2021-yi-040": {
+      "blankId": "blank-2021-yi-040",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "awkward silence",
+        "give the host a compliment",
+        "the only thing that always gets everyone talking again",
+        "turn around and say"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-yi-seven-p4",
+        "headingAnchor": null,
+        "beforeQuote": "the only thing that always gets everyone talking again is to give the host a compliment (赞扬) .",
+        "afterQuote": "Just quickly turn around and say, “This cake is extremely delicious"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "He or she",
+          "signalSide": "option",
+          "targetText": "the host",
+          "relation": "选项 He or she 回指空前 the host 主人，把赞美对象与感受尴尬最深的人绑定。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the weight of that awkwardness",
+          "signalSide": "option",
+          "targetText": "awkward silence",
+          "relation": "选项 awkwardness 与空前 awkward silence 同根呼应，紧扣本段尴尬沉默话题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "give the host a compliment",
+          "signalSide": "context-before",
+          "targetText": "He or she is the person",
+          "relation": "空前点明要赞美 host，空处用 He or she 解释为何赞美主人，因为他正是最受尴尬煎熬的人。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "G 用 He or she 回指空前 the host，解释为什么要赞美主人，因为主人正是最能感受到这份尴尬的人，承上启下并自然引出后面对蛋糕的赞美。",
+        "matchedClues": [
+          {
+            "contextSide": "give the host a compliment / awkward silence",
+            "optionSide": "He or she is the person who is feeling the weight of that awkwardness the most",
+            "relation": "He or she 指 host，that awkwardness 回指 awkward silence，双重回指锁定 G。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 谈把话题转到对方没话说的领域，属上一段应对话痨的办法，与本段赞美主人化解沉默无关，故排除。"
+        }
+      ],
+      "teachingNote": "段中解释空抓回指：用选项里的 He or she 锁定空前的 the host，确认这是对为何赞美主人的补充说明。"
+    }
+  }
+}

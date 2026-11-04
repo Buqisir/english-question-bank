@@ -1,0 +1,388 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-zj-2025-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2025-jan-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8[1m]",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-08",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2025-jan-seven-choices": {
+      "overview": "本文是一篇说明文，围绕\"如何更有效地沟通\"给出若干建议。开篇指出沟通中最常见的错误是想表达太多，强调清晰简洁的重要性；随后以小标题加正文的形式列举多条实用技巧：心系听众、用词精简、让听众参与、选择合适的传递方式等，最后总结培养沟通能力虽费时但值得。七选五考查对小标题概括、段内衔接句以及转折/递进逻辑关系的把握。",
+      "discourseStructure": {
+        "summary": "全文先提出问题与核心主张（清晰简洁），再分点给出沟通技巧，每个技巧多采用\"小标题+解释\"结构，结尾回扣主题进行总结。",
+        "units": [
+          {
+            "unitId": "unit-zj-2025-jan-seven-intro",
+            "heading": null,
+            "paragraphIds": [
+              "para-zj-2025-jan-seven-title",
+              "para-zj-2025-jan-seven-p1"
+            ],
+            "summary": "引出话题：沟通中最常见的错误是想表达太多，最好的信息往往简单；并引出下文将给出的有效沟通技巧。"
+          },
+          {
+            "unitId": "unit-zj-2025-jan-seven-audience",
+            "heading": "Keep your audience in mind.",
+            "paragraphIds": [
+              "para-zj-2025-jan-seven-p2",
+              "para-zj-2025-jan-seven-p3"
+            ],
+            "summary": "技巧一：心系听众，针对听众的兴趣量身定制沟通内容，直接谈他们关心的事，从而激发其理解与互动的愿望。"
+          },
+          {
+            "unitId": "unit-zj-2025-jan-seven-brevity",
+            "heading": "Don’t use ten words when one will do.",
+            "paragraphIds": [
+              "para-zj-2025-jan-seven-p4",
+              "para-zj-2025-jan-seven-p5"
+            ],
+            "summary": "技巧二：用词精简，保持信息简单清晰；提醒说话者虽对内容熟悉，但听众是第一次听到，故应保持简单。"
+          },
+          {
+            "unitId": "unit-zj-2025-jan-seven-involve",
+            "heading": null,
+            "paragraphIds": [
+              "para-zj-2025-jan-seven-p6",
+              "para-zj-2025-jan-seven-p7"
+            ],
+            "summary": "技巧三：让听众参与，邀请其贡献想法、向他人讲解新概念、主持讨论，以教促学、提升沟通能力。"
+          },
+          {
+            "unitId": "unit-zj-2025-jan-seven-method",
+            "heading": "Consider the best method to deliver your message.",
+            "paragraphIds": [
+              "para-zj-2025-jan-seven-p8",
+              "para-zj-2025-jan-seven-p9"
+            ],
+            "summary": "技巧四：选择最佳传递方式，非紧急信息可用邮件，给听众更多时间审阅、思考、跟进，并留下可供回查的记录。"
+          },
+          {
+            "unitId": "unit-zj-2025-jan-seven-conclusion",
+            "heading": null,
+            "paragraphIds": [
+              "para-zj-2025-jan-seven-p10"
+            ],
+            "summary": "总结：培养有效沟通能力需要时间，但其效果值得付出努力。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-zj-2025-jan-036": {
+      "blankId": "blank-zj-2025-jan-036",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "trying to do too much",
+        "come across clearly",
+        "Being clear and brief",
+        "high-level communication skill"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2025-jan-seven-title",
+        "headingAnchor": null,
+        "beforeQuote": "One of the most common mistakes in communication is trying to do too much.",
+        "afterQuote": "There’s no value in delivering any kind of communication, whether written, spoken, formal, or informal, if the message doesn’t come across clearly."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "simple",
+          "signalSide": "option",
+          "targetText": "Being clear and brief",
+          "relation": "选项中 simple 与空后 clear、brief 同属\"简洁明了\"话题场，承接前句对\"想表达太多\"这一错误的纠正。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "trying to do too much",
+          "signalSide": "context-before",
+          "targetText": "The best messages are often simple",
+          "relation": "前句指出错误是\"想表达太多\"，与选项\"最好的信息往往简单\"形成问题—对策式衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Being clear and brief",
+          "signalSide": "context-after",
+          "targetText": "simple",
+          "relation": "空后\"清晰简洁\"呼应选项 simple，证明本空主张正是简洁。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "前句指出最常见的沟通错误是\"想表达太多\"，本空作为承上启下句给出正面主张——最好的信息往往简单，自然引出下文对\"清晰简洁\"的强调。",
+        "matchedClues": [
+          {
+            "contextSide": "trying to do too much / Being clear and brief",
+            "optionSide": "The best messages are often simple",
+            "relation": "\"做太多\"是错误，\"简单\"是对策，与前后文\"清晰简洁才有价值\"语义一致。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A\"Be patient.\"是祈使句小标题式表达，与本段强调\"简洁\"的话题不符，且本空处于段中而非小标题位置。"
+        }
+      ],
+      "teachingNote": "段中过渡句要承接前句的\"错误\"并给出对应\"对策\"，抓住 too much 与 simple 的反义对照即可定位。"
+    },
+    "q-zj-2025-jan-037": {
+      "blankId": "blank-zj-2025-jan-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "tailor your communications to their interests",
+        "more interested and engaged",
+        "engage their desire to understand",
+        "interact with the information"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2025-jan-seven-p3",
+        "headingAnchor": "Keep your audience in mind.",
+        "beforeQuote": "Your audience will naturally be more interested and engaged when you tailor your communications to their interests.",
+        "afterQuote": "This will engage their desire to understand and interact with the information."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "This",
+          "signalSide": "context-after",
+          "targetText": "Speak directly to what matters to them",
+          "relation": "空后 This 指代本空所述做法\"直接谈听众关心的事\"，构成代词回指衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "to them",
+          "signalSide": "option",
+          "targetText": "their interests",
+          "relation": "选项 to them 与前句 their interests、本段标题 your audience 中的听众指向一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "tailor your communications to their interests",
+          "signalSide": "context-before",
+          "targetText": "Speak directly to what matters to them",
+          "relation": "前句\"按兴趣量身定制沟通\"与选项\"直接谈他们关心的事\"是同义复述式衔接。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "前句讲要按听众兴趣定制沟通，本空进一步具体化为\"直接谈他们关心的事\"，空后用 This 回指本空做法并说明其效果，前后衔接顺畅。",
+        "matchedClues": [
+          {
+            "contextSide": "tailor your communications to their interests / their desire to understand",
+            "optionSide": "Speak directly to what matters to them",
+            "relation": "\"what matters to them\"正是\"their interests\"的同义改写，且被空后 This 所回指。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B\"Get the audience involved.\"是另一条技巧的小标题（对应39题），与本段\"按兴趣定制\"的主题不一致，且无法被空后 This 顺畅回指。"
+        }
+      ],
+      "teachingNote": "看空后代词 This 指什么，回填能被其回指、又与前句同义复述的句子即可锁定答案。"
+    },
+    "q-zj-2025-jan-038": {
+      "blankId": "blank-zj-2025-jan-038",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Keeping your message simple and clear",
+        "easier for people to understand",
+        "hearing it for the first time",
+        "Keep it simple"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2025-jan-seven-p5",
+        "headingAnchor": "Don’t use ten words when one will do.",
+        "beforeQuote": "Keeping your message simple and clear will make it easier for people to understand.",
+        "afterQuote": "However, they’re hearing it for the first time. Keep it simple."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "However",
+          "signalSide": "context-after",
+          "targetText": "you already know what you’re going to say",
+          "relation": "空后 However 引出转折，与本空\"说话者已知道要说什么\"形成\"你已熟悉 vs 听众第一次听\"的对比关系。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "they’re hearing it for the first time",
+          "signalSide": "context-after",
+          "targetText": "you already know",
+          "relation": "However 连接的逻辑对象：空后\"听众第一次听\"与本空\"你已知道\"构成对照。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the speaker",
+          "signalSide": "option",
+          "targetText": "your message",
+          "relation": "选项 the speaker 与本段 your message、Keep it simple 等沟通话题场一致，指向说话者视角。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "空后用 However 转折强调\"听众是第一次听到\"，故本空应给出与之对照的另一面——\"作为说话者，你早已知道要说什么\"，转折前后形成熟悉度的对比，引出\"保持简单\"的建议。",
+        "matchedClues": [
+          {
+            "contextSide": "However / they’re hearing it for the first time",
+            "optionSide": "As the speaker, you already know what you’re going to say",
+            "relation": "\"你已知道\"与\"他们第一次听\"经 However 构成对比，逻辑严密。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C\"The best messages are often simple.\"虽与\"简单\"话题相关，但无法与空后 However 形成\"说话者 vs 听众\"的对比，逻辑不衔接（且已用于36题）。"
+        }
+      ],
+      "teachingNote": "见空后转折词 However，须在空内填入与其后内容相对立的一面，紧扣\"已知/初闻\"的对比即可。"
+    },
+    "q-zj-2025-jan-039": {
+      "blankId": "blank-zj-2025-jan-039",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Ask the audience to contribute their ideas",
+        "take a role in explaining new concepts",
+        "Allow them to lead discussions and meetings",
+        "ways to learn new information than to teach it"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2025-jan-seven-p7",
+        "headingAnchor": null,
+        "beforeQuote": "If you’ve ever worked as an instructor, manager, trainer or coach, you’ll know that there are few better ways to learn new information than to teach it.",
+        "afterQuote": "Ask the audience to contribute their ideas or to take a role in explaining new concepts and policies to others."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Get the audience involved",
+          "signalSide": "option",
+          "targetText": "Ask the audience to contribute their ideas",
+          "relation": "选项\"让听众参与\"与下文\"请听众贡献想法、主持讨论\"为主题句与展开关系，audience 一词直接对应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Allow them to lead discussions and meetings",
+          "signalSide": "context-after",
+          "targetText": "involved",
+          "relation": "下文\"让他们主持讨论与会议\"正是\"参与\"的具体体现，支撑本空为该段小标题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "to take a role in explaining",
+          "signalSide": "context-after",
+          "targetText": "involved",
+          "relation": "\"让听众扮演讲解角色\"是\"参与\"的具体方式，与选项 involved 同属参与话题场。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "本空为整段开头的小标题，下文反复说明要让听众贡献想法、扮演讲解角色、主持讨论会议，均是\"让听众参与\"的具体做法，故选 B 作总领。",
+        "matchedClues": [
+          {
+            "contextSide": "Ask the audience to contribute / Allow them to lead discussions",
+            "optionSide": "Get the audience involved",
+            "relation": "整段都在讲让 audience 参与，选项是对全段做法的概括小标题。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E\"You may be surprised by what your listeners offer.\"虽与听众相关，但只是一句感想，无法概括\"参与\"这一整段做法，不适合作小标题。"
+        }
+      ],
+      "teachingNote": "独立成段的空多为小标题，需用一句祈使式短句概括全段反复出现的做法（此处为\"让听众参与\"）。"
+    },
+    "q-zj-2025-jan-040": {
+      "blankId": "blank-zj-2025-jan-040",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "consider sending an email",
+        "Written communication",
+        "more time to review it",
+        "follow up with questions"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2025-jan-seven-p9",
+        "headingAnchor": "Consider the best method to deliver your message.",
+        "beforeQuote": "Written communication will give your audience more time to review it, think it over, and follow up with questions.",
+        "afterQuote": null
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "option",
+          "targetText": "give your audience more time to review it",
+          "relation": "选项中 also 表递进，承接前句书面沟通的第一项好处，再补充第二项好处（留存可回查的记录）。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It",
+          "signalSide": "option",
+          "targetText": "Written communication",
+          "relation": "选项句首 It 回指前句主语 Written communication，构成代词回指衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Written communication will give",
+          "signalSide": "context-before",
+          "targetText": "It will also give them",
+          "relation": "前句\"书面沟通会给…\"与选项\"它还会给他们…\"句式平行，借 also 形成好处的并列递进。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "前句说书面沟通给听众更多时间审阅、思考、跟进，本空作段末补充——它还能留下方便日后回查的记录，选项用 It 回指、also 递进，与前句句式平行衔接自然。",
+        "matchedClues": [
+          {
+            "contextSide": "Written communication will give your audience more time",
+            "optionSide": "It will also give them a handy record to refer back to",
+            "relation": "前后均为\"书面沟通带来的好处\"，It 回指、also 递进，句式平行。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E\"You may be surprised by what your listeners offer.\"与书面沟通的好处无关，既无 It 的回指对象衔接，也无递进逻辑，不合段末补充语境。"
+        }
+      ],
+      "teachingNote": "段末补充句常含 also/It 等递进与回指信号，回填能与前句句式平行、补充同类好处的选项即可。"
+    }
+  }
+}

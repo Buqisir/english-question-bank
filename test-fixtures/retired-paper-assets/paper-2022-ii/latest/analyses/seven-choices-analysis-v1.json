@@ -1,0 +1,389 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2022-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2022-ii-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude",
+    "reviewedAt": "2026-06-05",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2022-ii-seven-choices": {
+      "overview": "本篇说明文介绍写好一篇文章的三种简单技巧：不停笔自由写作、快速写初稿不求完美、用三倍行距打印留白以便修改。全文为总分结构，每段开头点出一种技巧，七选五考查段首主题句、段中衔接句与上下文指代/话题呼应。",
+      "discourseStructure": {
+        "summary": "首段提出全文论点：掌握三种技巧可让写作变容易。随后三段分别展开第一、第二、第三种技巧，段首多为主题句，段中句与前后内容形成对比或指代衔接。",
+        "units": [
+          {
+            "unitId": "unit-2022-ii-seven-intro",
+            "heading": "三种技巧总起",
+            "paragraphIds": [
+              "para-2022-ii-seven-title"
+            ],
+            "summary": "提出写作虽难，但练习三种简单技巧可使其变容易。"
+          },
+          {
+            "unitId": "unit-2022-ii-seven-tech1",
+            "heading": "技巧一：不停笔写作",
+            "paragraphIds": [
+              "para-2022-ii-seven-p1"
+            ],
+            "summary": "第一种技巧是不停笔自由书写，让笔随思绪流动，不必顾虑语法拼写，以积累大量想法。"
+          },
+          {
+            "unitId": "unit-2022-ii-seven-tech2",
+            "heading": "技巧二：快速写初稿不求完美",
+            "paragraphIds": [
+              "para-2022-ii-seven-p2"
+            ],
+            "summary": "第二种技巧是快速写初稿、容忍不完美，把初稿当作探索而非成品。"
+          },
+          {
+            "unitId": "unit-2022-ii-seven-tech3",
+            "heading": "技巧三：三倍行距留白修改",
+            "paragraphIds": [
+              "para-2022-ii-seven-p3"
+            ],
+            "summary": "第三种技巧是用三倍行距打印留出修改空间，反复修改后再录入电脑并重新打印新稿。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2022-ii-036": {
+      "blankId": "blank-2022-ii-036",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "three simple techniques",
+        "write nonstop",
+        "without letting your pen leave the paper",
+        "think of ideas for an essay"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-ii-seven-p1",
+        "headingAnchor": "技巧一：不停笔写作",
+        "beforeQuote": "When you are first trying to think of ideas for an essay",
+        "afterQuote": "write nonstop for ten or fifteen minutes without letting your pen leave the paper"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the technique of nonstop writing",
+          "signalSide": "option",
+          "targetText": "write nonstop ... without letting your pen leave the paper",
+          "relation": "选项中的 nonstop writing 正是本段下文 write nonstop 所展开的技巧，构成段首主题句与正文的话题呼应。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "write nonstop",
+          "signalSide": "context-after",
+          "targetText": "nonstop writing",
+          "relation": "空后 write nonstop 与选项 nonstop writing 同属不停笔写作话题场，验证段首主题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "First of all",
+          "signalSide": "option",
+          "targetText": "three simple techniques",
+          "relation": "First of all 表明这是首段所列三种技巧中的第一种，符合段首主题句身份。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "本空为段首主题句，D 项点明第一种技巧是不停笔写作，与本段下文 write nonstop、without letting your pen leave the paper 完全对应。",
+        "matchedClues": [
+          {
+            "contextSide": "write nonstop / without letting your pen leave the paper",
+            "optionSide": "learn the technique of nonstop writing",
+            "relation": "选项概括了本段反复强调的不停笔书写动作。"
+          },
+          {
+            "contextSide": "three simple techniques",
+            "optionSide": "First of all",
+            "relation": "First of all 对应首段所说三种技巧的第一种。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 提到 handwriting is neat（字迹工整），与本段强调的不停笔、不顾语法拼写相矛盾，且非本段技巧主题。"
+        }
+      ],
+      "teachingNote": "段首空格优先找能统领全段、与正文反复出现的核心动作相呼应的主题句。"
+    },
+    "q-2022-ii-037": {
+      "blankId": "blank-2022-ii-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "put your pen to your paper",
+        "without letting your pen leave the paper",
+        "Stay loose and free",
+        "Don’t worry about grammar or spelling"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-ii-seven-p1",
+        "headingAnchor": "技巧一：不停笔写作",
+        "beforeQuote": "Stay loose and free.",
+        "afterQuote": "Don’t worry about grammar or spelling."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "your pen",
+          "signalSide": "option",
+          "targetText": "put your pen to your paper / your pen leave the paper",
+          "relation": "选项 Let your pen ... 与空前反复出现的 pen/paper 书写意象同场，承接不停笔动作。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Stay loose and free",
+          "signalSide": "context-before",
+          "targetText": "follow the waves of thought",
+          "relation": "空前 Stay loose and free 强调放松随性，与选项让笔随思绪流动语义连贯。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "follow the waves of thought",
+          "signalSide": "option",
+          "targetText": "Stay loose and free",
+          "relation": "选项让笔随思绪起伏，正是对空前放松自由状态的具体化延续。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "本空承接段中放松书写的指令，B 项让笔跟随思绪的波动，与空前 put your pen to your paper、Stay loose and free 在书写意象和放松基调上紧密衔接。",
+        "matchedClues": [
+          {
+            "contextSide": "Stay loose and free",
+            "optionSide": "follow the waves of thought",
+            "relation": "放松自由对应让笔顺思绪流动。"
+          },
+          {
+            "contextSide": "put your pen to your paper",
+            "optionSide": "Let your pen",
+            "relation": "选项与上文共用 pen 这一书写主体，保持话题连贯。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 要求 handwriting is neat，与上文不停笔、不顾语法拼写的放松基调冲突，是利用 pen/paper 表层词制造的干扰项。"
+        }
+      ],
+      "teachingNote": "段中空格抓住前后句的共同意象（此处 pen 与放松自由）来锁定语气与话题一致的衔接句。"
+    },
+    "q-2022-ii-038": {
+      "blankId": "blank-2022-ii-038",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "write your draft rapidly without worrying about being perfect",
+        "learning to live with imperfection",
+        "your first draft",
+        "not as a complete highway"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-ii-seven-p2",
+        "headingAnchor": "技巧二：快速写初稿不求完美",
+        "beforeQuote": "The next technique is to write your draft rapidly without worrying about being perfect.",
+        "afterQuote": "Yet, by learning to live with imperfection, you will save yourself headaches"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Yet",
+          "signalSide": "context-after",
+          "targetText": "Too many writers try to get their drafts right the first time",
+          "relation": "空后 Yet 表转折，要求空格句陈述一种与下文相反的常见做法，E 项正是这种被否定的错误倾向。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "their drafts right the first time",
+          "signalSide": "option",
+          "targetText": "write your draft rapidly without worrying about being perfect",
+          "relation": "选项 get their drafts right the first time 与上文初稿、追求完美话题同场，构成对比对象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "without worrying about being perfect",
+          "signalSide": "context-before",
+          "targetText": "get their drafts right the first time",
+          "relation": "空前主张不必求完美，与选项一次写对完美初稿的执念形成对照。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "本空与空后 Yet 形成转折链：E 项指出太多作者想一次就把初稿写完美，正是被 Yet 后学会接受不完美所反驳的错误做法。",
+        "matchedClues": [
+          {
+            "contextSide": "Yet, by learning to live with imperfection",
+            "optionSide": "Too many writers try to get their drafts right the first time",
+            "relation": "Yet 前后构成错误做法与正确建议的转折对比。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 谈 second draft should be better，引入第二稿话题，与本段聚焦的第一稿求完美心态及 Yet 转折逻辑不符。"
+        }
+      ],
+      "teachingNote": "见到空后转折词 Yet，先判断空格应填与下文相反的内容，再据话题场选定具体选项。"
+    },
+    "q-2022-ii-039": {
+      "blankId": "blank-2022-ii-039",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "allow space for revision",
+        "As a result",
+        "crossing out chunks",
+        "writing revisions in the blank space"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-ii-seven-p3",
+        "headingAnchor": "技巧三：三倍行距留白修改",
+        "beforeQuote": "to try printing out a triple-spaced (三倍行距) copy to allow space for revision.",
+        "afterQuote": "As a result, these writers never get in the habit of crossing out chunks"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "these writers",
+          "signalSide": "context-after",
+          "targetText": "Many beginning writers",
+          "relation": "空后 these writers 是回指，指代空格句中引入的 Many beginning writers，确立 F 为先行成分。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "As a result",
+          "signalSide": "context-after",
+          "targetText": "never get in the habit of crossing out chunks",
+          "relation": "空后 As a result 表因果，要求空格句给出原因——F 项不留修改空间正是导致下文结果的起因。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "leave enough space to revise",
+          "signalSide": "option",
+          "targetText": "allow space for revision / the blank space",
+          "relation": "选项 leave enough space to revise 与上文 allow space for revision 及下文 blank space 同属留白修改话题场。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "本空需引入 these writers 的先行词并充当 As a result 的原因，F 项指出许多初学者不留足修改空间，既被下文 these writers 回指，又是不修改习惯的成因。",
+        "matchedClues": [
+          {
+            "contextSide": "these writers",
+            "optionSide": "Many beginning writers",
+            "relation": "these writers 回指 F 项中的 beginning writers。"
+          },
+          {
+            "contextSide": "allow space for revision",
+            "optionSide": "leave enough space to revise",
+            "relation": "选项与上下文共用留白修改话题。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E 中的 writers 也能被 these writers 形式回指，但 E 讲一次写完美初稿，与本段留修改空间话题及 As a result 的因果不符。"
+        }
+      ],
+      "teachingNote": "段中空后出现 these writers 这类回指词时，空格句必须先引入其指代的人群，并满足 As a result 的因果方向。"
+    },
+    "q-2022-ii-040": {
+      "blankId": "blank-2022-ii-040",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "enter your changes into your word processor",
+        "triple-spaced (三倍行距) copy",
+        "The resulting blank space",
+        "invites you to revise"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-ii-seven-p3",
+        "headingAnchor": "技巧三：三倍行距留白修改",
+        "beforeQuote": "you can enter your changes into your word processor.",
+        "afterQuote": "The resulting blank space invites you to revise."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "setting your text on triple-space",
+          "signalSide": "option",
+          "targetText": "The resulting blank space",
+          "relation": "选项重新设置三倍行距打印，正好产生空后 The resulting blank space（由此而来的空白），两者话题与因果衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "The resulting blank space",
+          "signalSide": "context-after",
+          "targetText": "print out a fresh draft ... on triple-space",
+          "relation": "空后 The resulting blank space 指代由选项打印三倍行距新稿所产生的空白，构成回指衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Then",
+          "signalSide": "option",
+          "targetText": "enter your changes into your word processor",
+          "relation": "选项以 Then 承接空前录入电脑这一步骤，表明随后再打印新稿的先后顺序。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "本空承接空前把修改录入电脑的步骤，G 项说接着可打印出重新设三倍行距的新稿，恰好生成空后 The resulting blank space，前后步骤与因果完整。",
+        "matchedClues": [
+          {
+            "contextSide": "enter your changes into your word processor",
+            "optionSide": "Then you can print out a fresh draft",
+            "relation": "录入电脑后接着打印新稿，步骤顺承。"
+          },
+          {
+            "contextSide": "The resulting blank space",
+            "optionSide": "setting your text on triple-space",
+            "relation": "三倍行距打印产生了下文所说的空白。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 谈 second draft should be better，虽涉及新稿概念，但未提供三倍行距留白，无法解释空后 The resulting blank space 的来源。"
+        }
+      ],
+      "teachingNote": "段尾空格要让填入句既承接前一步骤，又能为空后出现的结果（如 blank space）提供来源。"
+    }
+  }
+}

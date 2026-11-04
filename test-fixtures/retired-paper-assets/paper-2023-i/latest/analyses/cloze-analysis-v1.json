@@ -1,0 +1,665 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2023-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2023-i-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2023-i-cloze": {
+      "overview": "记叙文：在一场越野赛中，Melanie Bailey 背着一位受伤的对手跑过终点线，讲述人性善意的故事。",
+      "affectiveArc": "由赛场上的意外受伤转向温暖救助，最终两位陌生人成为朋友，情感由紧张转为温情。"
+    }
+  },
+  "blanks": {
+    "q-2023-i-041": {
+      "blankId": "blank-2023-i-041",
+      "blankNo": 41,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "finish the course 是固定搭配，指“跑完赛程”；与后文 finish line（终点线）呼应，说明她本该更早跑完。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "designed",
+          "meaning": "设计赛程"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "followed",
+          "meaning": "沿着赛程走"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "changed",
+          "meaning": "改变赛程"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the course earlier than she did",
+          "signalSide": "context-after",
+          "targetText": "finished the course",
+          "relation": "finish 的宾语是 the course，构成“跑完赛程”的施受搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "finish line",
+          "signalSide": "context-after",
+          "relation": "finish line 与 finish 同根呼应，提示“跑完终点”。"
+        }
+      ],
+      "teachingNote": "锁定动词宾语 the course，并借同根词 finish line 验证“跑完赛程”之义。"
+    },
+    "q-2023-i-042": {
+      "blankId": "blank-2023-i-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "首句说她本该更早跑完却没有，说明产生了“延误”；delay 与 came because 搭配，解释她为何用时更久。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "chance",
+          "meaning": "机会"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "preference",
+          "meaning": "偏好"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "warning",
+          "meaning": "警告"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "earlier than she did",
+          "signalSide": "context-before",
+          "targetText": "delay came because",
+          "relation": "“本应更早跑完”意味着实际延误，故主语为 delay。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "came because she was carrying",
+          "signalSide": "context-after",
+          "relation": "because 引出延误的原因——背人过线，呼应 delay。"
+        }
+      ],
+      "teachingNote": "由“本该更早完成”反推产生了延误，再用 because 因果句验证。"
+    },
+    "q-2023-i-043": {
+      "blankId": "blank-2023-i-043",
+      "blankNo": 43,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "文章是越野赛场景，她背过终点线的是同场比赛的“对手”；competitor 与 race、runner 同属赛事语义场。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "judge",
+          "meaning": "裁判"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "volunteer",
+          "meaning": "志愿者"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "classmate",
+          "meaning": "同学"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "carrying a",
+          "signalSide": "context-before",
+          "targetText": "carrying a competitor",
+          "relation": "carry 的宾语是被背的人 competitor，施受关系成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "fellow runner",
+          "signalSide": "context-after",
+          "relation": "后文称对方为 fellow runner（参赛选手），与 competitor 同指赛事语义场。"
+        }
+      ],
+      "teachingNote": "在越野赛语义场里，被背过线的人就是同场 competitor。"
+    },
+    "q-2023-i-044": {
+      "blankId": "blank-2023-i-044",
+      "blankNo": 44,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "全文围绕一场越野赛，two-thirds of the way through her race 指她跑到赛程三分之二处；race 与 cross-country race 呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "school",
+          "meaning": "学校"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "town",
+          "meaning": "城镇"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "training",
+          "meaning": "训练"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "two-thirds of the way through her",
+          "signalSide": "context-before",
+          "targetText": "through her race",
+          "relation": "the way through her race 指“赛程过了三分之二”，race 作介词宾语。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "cross-country race",
+          "signalSide": "context-before",
+          "relation": "开篇 cross-country race 点明事件即一场赛跑，呼应 race。"
+        }
+      ],
+      "teachingNote": "用开篇 cross-country race 锁定她正跑的是这场 race。"
+    },
+    "q-2023-i-045": {
+      "blankId": "blank-2023-i-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "看到前方选手疼哭，她“停下”脚步去帮忙；stop to do 表示停下来去做某事，符合先停再助的情节。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "agreed",
+          "meaning": "同意"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "returned",
+          "meaning": "返回"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "promised",
+          "meaning": "承诺"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to help her fellow runner",
+          "signalSide": "context-after",
+          "targetText": "stopped to help",
+          "relation": "stop to help 构成“停下来去帮忙”，动词与不定式目的语搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "began crying in pain",
+          "signalSide": "context-before",
+          "relation": "前方选手疼哭促使她停下施助，因果衔接 stopped。"
+        }
+      ],
+      "teachingNote": "stop to do = 停下来去做，由“疼哭”这一触发因找到停下的动作。"
+    },
+    "q-2023-i-046": {
+      "blankId": "blank-2023-i-046",
+      "blankNo": 46,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "Bailey 扶着她的胳膊试探能否在“帮助”下往前走；with aid 表示“在援助下”，与下文 She couldn’t 形成对照。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "courage",
+          "meaning": "勇气"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "patience",
+          "meaning": "耐心"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "advice",
+          "meaning": "建议"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "walk forward with",
+          "signalSide": "context-before",
+          "targetText": "walk forward with aid",
+          "relation": "with aid 修饰 walk forward，表示“在搀扶帮助下行走”。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "took her arm to see if she could",
+          "signalSide": "context-before",
+          "relation": "扶住胳膊正是提供 aid 的动作，呼应“在帮助下行走”。"
+        }
+      ],
+      "teachingNote": "由“扶住胳膊试走”推出 with aid，即“在援助下行走”。"
+    },
+    "q-2023-i-047": {
+      "blankId": "blank-2023-i-047",
+      "blankNo": 47,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "要让 Lenoue 爬到背上，Bailey 必须先“弯下身子”；bend down 由 bend（弯）+ down（向下）合成，与“让人爬上背”衔接。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "went away",
+          "meaning": "走开"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "stood up",
+          "meaning": "站起来"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "stepped aside",
+          "meaning": "让到一边"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to let Lenoue climb onto her back",
+          "signalSide": "context-after",
+          "targetText": "bent down to let",
+          "relation": "弯腰是让人爬上背的前置动作，bend down 与 climb onto her back 衔接。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "bent",
+          "signalSide": "option",
+          "targetText": "bent down",
+          "relation": "bent 表示“弯（身）”，提供向下的弯腰义。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "down",
+          "signalSide": "option",
+          "targetText": "bent down",
+          "relation": "down 表示“向下”，与 bent 合成“弯下身子”。"
+        }
+      ],
+      "teachingNote": "由“让人爬上背”推出需先弯下身子，拆解 bend + down 合成义。"
+    },
+    "q-2023-i-048": {
+      "blankId": "blank-2023-i-048",
+      "blankNo": 48,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "她又多背了 300 英尺到能获得救治的地点，随后被送医；medical attention 指“医疗救治”，与 hospital、injuries 呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "public",
+          "meaning": "公众的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "constant",
+          "meaning": "持续的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "equal",
+          "meaning": "平等的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "attention",
+          "signalSide": "context-after",
+          "targetText": "medical attention",
+          "relation": "medical 修饰 attention，构成“医疗救治”这一固定搭配。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "taken to a hospital",
+          "signalSide": "context-after",
+          "relation": "后文送医、查出膝伤，与 medical attention 同属医疗语义场。"
+        }
+      ],
+      "teachingNote": "medical attention 为固定搭配，借送医、膝伤的医疗语境验证。"
+    },
+    "q-2023-i-049": {
+      "blankId": "blank-2023-i-049",
+      "blankNo": 49,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "到达救助点后先被“检查评估”再送医；evaluate 指现场对伤情作评估，与 later taken to a hospital 的先后逻辑相合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "founded",
+          "meaning": "创立"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "identified",
+          "meaning": "辨认出"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "appreciated",
+          "meaning": "感激"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "later taken to a hospital",
+          "signalSide": "context-after",
+          "targetText": "evaluated and later taken",
+          "relation": "先在救助点被评估，再送医，evaluate 与后续送医衔接。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Once there",
+          "signalSide": "context-before",
+          "relation": "Once there 表示一到救助点便被评估，提供动作触发点。"
+        }
+      ],
+      "teachingNote": "救助点先评估伤情再送医，由 later taken to a hospital 锁定 evaluated。"
+    },
+    "q-2023-i-050": {
+      "blankId": "blank-2023-i-050",
+      "blankNo": 50,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "她膝盖受重伤，若无人帮助须忍着剧痛走到救助点；extreme pain 与前文 crying in pain、serious injuries 呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "hunger",
+          "meaning": "饥饿"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "cold",
+          "meaning": "寒冷"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "tiredness",
+          "meaning": "疲惫"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "struggled with extreme",
+          "signalSide": "context-before",
+          "targetText": "extreme pain",
+          "relation": "extreme 修饰 pain，构成“极度疼痛”，与 struggle with 搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "serious injuries in one of her knees",
+          "signalSide": "context-before",
+          "relation": "膝盖重伤呼应剧痛，pain 与前文 crying in pain 同义复现。"
+        }
+      ],
+      "teachingNote": "膝盖重伤对应剧痛，用 injuries、crying in pain 锁定 pain。"
+    },
+    "q-2023-i-051": {
+      "blankId": "blank-2023-i-051",
+      "blankNo": 51,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "她不明白自己的举动为何被当成大事，觉得只是做了该做的事；confused 表示“困惑”，与她“I feel like I was just doing the right thing”的态度一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "worried",
+          "meaning": "担心的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "ashamed",
+          "meaning": "羞愧的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "discouraged",
+          "meaning": "气馁的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "about why her act is considered",
+          "signalSide": "context-after",
+          "targetText": "confused about why",
+          "relation": "be confused about why 表示“对……为何如此感到不解”，介词与从句搭配。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "I feel like I was just doing the right thing",
+          "signalSide": "context-after",
+          "relation": "她认为只是做了应做之事，正与“困惑别人为何小题大做”的情感一致。"
+        }
+      ],
+      "teachingNote": "be confused about why 表困惑，与她“只是做对的事”的口吻情感一致。"
+    },
+    "q-2023-i-052": {
+      "blankId": "blank-2023-i-052",
+      "blankNo": 52,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "a big deal 是固定短语，意为“大不了的事”；她困惑自己的举动为何被视为大事，与 confused 的语气相合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "game",
+          "meaning": "游戏"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "crime",
+          "meaning": "罪行"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "potential",
+          "meaning": "潜力"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "considered a big",
+          "signalSide": "context-before",
+          "targetText": "a big deal",
+          "relation": "big 修饰 deal，构成固定短语 a big deal（了不起的大事）。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "just doing the right thing",
+          "signalSide": "context-after",
+          "relation": "她觉得只是做对的事，呼应“为何被当成大事”的不解。"
+        }
+      ],
+      "teachingNote": "记住固定短语 a big deal，配合她“没什么大不了”的口吻。"
+    },
+    "q-2023-i-053": {
+      "blankId": "blank-2023-i-053",
+      "blankNo": 53,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "看到对方在哭，她说“我没法丢下她不管”；leave her 表示“抛下她”，与她随后施助、不忍离开的情节一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "cure",
+          "meaning": "治愈"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "bother",
+          "meaning": "打扰"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "understand",
+          "meaning": "理解"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "She was just crying.",
+          "signalSide": "context-before",
+          "targetText": "couldn’t leave her",
+          "relation": "对方在哭，她“没法丢下她”，leave 的宾语是 her，施受成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "doing the right thing",
+          "signalSide": "context-after",
+          "relation": "“不丢下她”正是她所说做对的事，逻辑呼应 leave。"
+        }
+      ],
+      "teachingNote": "由“她在哭”推出“没法丢下她”，leave her 即抛下不管。"
+    },
+    "q-2023-i-054": {
+      "blankId": "blank-2023-i-054",
+      "blankNo": 54,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "两人在这场比赛“相遇”前互不相识，赛后成了朋友；the meet 指这场运动赛事，承接前文 race 的赛场相遇语义。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ride",
+          "meaning": "搭乘"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "test",
+          "meaning": "测验"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "show",
+          "meaning": "展示"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "strangers before the",
+          "signalSide": "context-before",
+          "targetText": "before the meet",
+          "relation": "before the meet 指“在这场赛事相遇之前”，meet 作时间状语核心名词。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "won the race",
+          "signalSide": "context-after",
+          "relation": "后文 won the race 与 the meet 同指这场赛事，呼应赛场相遇。"
+        }
+      ],
+      "teachingNote": "the meet 指这场运动赛事，借“赛前是陌生人”锁定相遇场合。"
+    },
+    "q-2023-i-055": {
+      "blankId": "blank-2023-i-055",
+      "blankNo": 55,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "没人赢得比赛，但人性善意的“展现”赢得了这一天；the display of human kindness 指善意的体现，呼应全文背人过线的善举。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "secret",
+          "meaning": "秘密"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "benefit",
+          "meaning": "好处"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "exchange",
+          "meaning": "交换"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of human kindness won the day",
+          "signalSide": "context-after",
+          "targetText": "display of human kindness",
+          "relation": "display of human kindness 表示“人性善意的展现”，display 与 of 短语搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Neither won the race, but",
+          "signalSide": "context-before",
+          "relation": "but 转折：虽无人赢比赛，却是善意的展现赢得这一天。"
+        }
+      ],
+      "teachingNote": "display of kindness 指善意的展现，借 but 转折承接“无人赢赛却善意取胜”。"
+    }
+  }
+}

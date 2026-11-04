@@ -1,0 +1,401 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2023-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2023-jia-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-19",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2023-jia-seven-choices": {
+      "overview": "本文是一篇说明文，主题为如何成为更有耐心的人（Tricks To Becoming A More Patient Person）。文章先以谜语点出交通堵塞、排长队、等待假期开始这些场景的共同点——都需要一点额外的耐心，随后在数字时代背景下分小标题给出培养耐心的几个技巧：练习感恩、让自己学会等待、接受不适。七选五考查在小标题和段落内填入能与上下文衔接的句子。",
+      "discourseStructure": {
+        "summary": "篇章先用谜语引出主题句（36），再点明数字时代人们习惯即时满足、但耐心更有益处，接着以三个并列小标题展开技巧：练习感恩（37 承接感恩益处并引出与耐心的关联）、让自己等待（38 给出从小处入手的练习方式）、接受不适（39 为小标题、40 为段内自我对话句）。",
+        "units": [
+          {
+            "unitId": "unit-2023-jia-seven-intro",
+            "heading": "Tricks To Becoming A More Patient Person",
+            "paragraphIds": [
+              "para-2023-jia-seven-p1",
+              "para-2023-jia-seven-p2"
+            ],
+            "summary": "用谜语引出主题：交通堵塞、排长队、等待假期都需要额外的耐心；数字时代人们习惯即时满足，但研究表明练习耐心会让人更好，下面给出几个技巧。"
+          },
+          {
+            "unitId": "unit-2023-jia-seven-gratitude",
+            "heading": "Practice gratitude (感激)",
+            "paragraphIds": [
+              "para-2023-jia-seven-p3",
+              "para-2023-jia-seven-p4"
+            ],
+            "summary": "练习感恩：感恩让人更幸福、压力更小、更乐观，并且也能帮助练习耐心，研究者指出表达感恩能增强自控力。"
+          },
+          {
+            "unitId": "unit-2023-jia-seven-wait",
+            "heading": "Make yourself wait",
+            "paragraphIds": [
+              "para-2023-jia-seven-p5",
+              "para-2023-jia-seven-p6"
+            ],
+            "summary": "让自己等待：即时满足看似最爽，但等待长远来看更让人幸福；养成等待习惯的唯一办法是练习，从小任务做起，逐渐把耐心迁移到更烦人的情境。"
+          },
+          {
+            "unitId": "unit-2023-jia-seven-uncomfortable",
+            "heading": "Accept the uncomfortable",
+            "paragraphIds": [
+              "para-2023-jia-seven-p7",
+              "para-2023-jia-seven-p8"
+            ],
+            "summary": "接受不适：许多人只能忍受舒适，一旦走出舒适区就变得不耐烦；要学会对自己说这只是不适、并非无法忍受，从而逐渐变得更有耐心。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2023-jia-036": {
+      "blankId": "blank-2023-jia-036",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "traffic jams",
+        "long lines",
+        "waiting for a vacation to start",
+        "have in common",
+        "one answer"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-jia-seven-p1",
+        "beforeQuote": "What do traffic jams, long lines and waiting for a vacation to start all have in common? There’s one answer:",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "They’re all situations",
+          "signalSide": "option",
+          "targetText": "traffic jams, long lines and waiting for a vacation to start",
+          "relation": "选项中的 They 指代空前问句列举的 traffic jams、long lines、waiting for a vacation to start。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "traffic jams, long lines",
+          "signalSide": "context-before",
+          "targetText": "They’re",
+          "relation": "空前的并列名词构成选项 They 的指代对象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "extra patience",
+          "signalSide": "option",
+          "targetText": "More Patient Person",
+          "relation": "选项 extra patience 紧扣全文耐心主题，回应谜底。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "one answer",
+          "signalSide": "context-before",
+          "targetText": "They’re all situations where we could use a little extra patience",
+          "relation": "空前 one answer 提示此空即谜底，选项正是给出的唯一答案。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "空前以谜语提问三种场景的共同点并预告“只有一个答案”，G 项用 They 回指这三种场景，并点明它们都是需要一点额外耐心的情境，正好充当谜底。",
+        "matchedClues": [
+          {
+            "contextSide": "traffic jams / long lines / waiting for a vacation to start",
+            "optionSide": "They’re all situations",
+            "relation": "They 复指空前并列的三种场景。"
+          },
+          {
+            "contextSide": "There’s one answer",
+            "optionSide": "a little extra patience",
+            "relation": "选项给出谜题的唯一答案，并引出全文耐心主题。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 项 All this adds up to a state of hurry 也用回指词且含“匆忙”语义，但谜底应落在“耐心”而非“匆忙”，与文章主题及下文方向不符。"
+        }
+      ],
+      "teachingNote": "段末谜底空优先找能回指前文列举项、又点题的句子。"
+    },
+    "q-2023-jia-037": {
+      "blankId": "blank-2023-jia-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Thankfulness has a lot of benefits",
+        "happier, less stressed",
+        "more optimistic",
+        "foster self-control",
+        "Showing thankfulness"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-jia-seven-p4",
+        "headingAnchor": "Practice gratitude (感激)",
+        "beforeQuote": "Research shows it makes us happier, less stressed and even more optimistic.",
+        "afterQuote": "“Showing thankfulness can foster self-control,” said Ye Li"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It can also",
+          "signalSide": "option",
+          "targetText": "Thankfulness",
+          "relation": "选项 It 回指本段主语 Thankfulness（感恩）。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "option",
+          "targetText": "happier, less stressed and even more optimistic",
+          "relation": "also 把感恩的又一益处（练习耐心）追加到空前列举的诸多益处之上。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "practice more patience",
+          "signalSide": "option",
+          "targetText": "foster self-control",
+          "relation": "选项 practice more patience 与空后 foster self-control 同属自控/耐心话题场，并扣 patience 主题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "self-control",
+          "signalSide": "context-after",
+          "targetText": "practice more patience",
+          "relation": "空后 self-control 与选项 patience 呼应，构成由感恩到耐心的衔接。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "空前列举感恩使人更幸福、更乐观等益处，E 项用 It 回指 Thankfulness 并以 also 追加“还能帮我们练习更多耐心”这一益处，与空后“感恩能增强自控力”的引用顺承。",
+        "matchedClues": [
+          {
+            "contextSide": "Thankfulness has a lot of benefits",
+            "optionSide": "It can also help",
+            "relation": "It 回指感恩，also 续加益处。"
+          },
+          {
+            "contextSide": "foster self-control",
+            "optionSide": "practice more patience",
+            "relation": "耐心与自控同场，承上启下到引用句。"
+          }
+        ]
+      },
+      "keyDistractors": [],
+      "teachingNote": "段中过渡空看回指词与 also 等追加连词，找能续接前文同类益处的句子。"
+    },
+    "q-2023-jia-038": {
+      "blankId": "blank-2023-jia-038",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "the only way for us to get into the habit of waiting is to practice",
+        "Put off watching your favorite show",
+        "wait 10 extra minutes",
+        "the more patience you practice"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-jia-seven-p6",
+        "headingAnchor": "Make yourself wait",
+        "beforeQuote": "And the only way for us to get into the habit of waiting is to practice.",
+        "afterQuote": "Put off watching your favorite show until the weekend or wait 10 extra minutes before going for that cake."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "small tasks",
+          "signalSide": "option",
+          "targetText": "Put off watching your favorite show / wait 10 extra minutes",
+          "relation": "选项 small tasks 概括空后列举的“推迟看节目、多等十分钟”等小事。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Put off watching your favorite show",
+          "signalSide": "context-after",
+          "targetText": "small tasks",
+          "relation": "空后的具体小事是选项 small tasks 的例证。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Start with",
+          "signalSide": "option",
+          "targetText": "to practice",
+          "relation": "选项 Start with 紧承空前“练习”的方法，指出从小处开始。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "is to practice",
+          "signalSide": "context-before",
+          "targetText": "Start with small tasks",
+          "relation": "空前点出唯一办法是练习，选项给出练习的入手方式。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "空前指出养成等待习惯的唯一办法是练习，空后举出推迟看节目、多等十分钟等具体小事，B 项 Start with small tasks 承上启下，把抽象的“练习”落实为从小任务做起。",
+        "matchedClues": [
+          {
+            "contextSide": "the only way ... is to practice",
+            "optionSide": "Start with",
+            "relation": "选项给出练习的起点。"
+          },
+          {
+            "contextSide": "Put off watching your favorite show / wait 10 extra minutes",
+            "optionSide": "small tasks",
+            "relation": "空后小事是 small tasks 的具体化。"
+          }
+        ]
+      },
+      "keyDistractors": [],
+      "teachingNote": "概括类空依据空后的具体例子，选能统摄这些例子的上义概括句。"
+    },
+    "q-2023-jia-039": {
+      "blankId": "blank-2023-jia-039",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "being comfortable is the only state we will tolerate",
+        "outside of our comfort zone",
+        "get impatient about the circumstances",
+        "more patient"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-jia-seven-p8",
+        "beforeQuote": "So many of us have the belief that being comfortable is the only state we will tolerate, and when we experience something outside of our comfort zone, we get impatient",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the uncomfortable",
+          "signalSide": "option",
+          "targetText": "outside of our comfort zone",
+          "relation": "选项 the uncomfortable 与下文 outside of our comfort zone（走出舒适区）同属“不适”话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "outside of our comfort zone",
+          "signalSide": "context-after",
+          "targetText": "the uncomfortable",
+          "relation": "下文走出舒适区即小标题 Accept the uncomfortable 所概括的不适。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Accept",
+          "signalSide": "option",
+          "targetText": "we get impatient about the circumstances",
+          "relation": "选项 Accept（接受）与下文“面对不适会不耐烦”相对，提出应学会接受的解决方向。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "comfortable",
+          "signalSide": "context-after",
+          "targetText": "the uncomfortable",
+          "relation": "下文反复出现 comfortable / comfort zone，与小标题 uncomfortable 同根呼应。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "此空为第三个并列小标题，下文谈到人们只能忍受舒适、走出舒适区就不耐烦，应学会接受这种不适，C 项 Accept the uncomfortable 正是该段的主题概括。",
+        "matchedClues": [
+          {
+            "contextSide": "outside of our comfort zone / get impatient",
+            "optionSide": "Accept the uncomfortable",
+            "relation": "小标题概括“接受不适”的全段主旨。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A 项 Find your causes 形式上同为动词短语可作小标题，但与下文“舒适区/不适/不耐烦”话题场毫无衔接。"
+        }
+      ],
+      "teachingNote": "小标题空读其下整段，选与全段话题场一致的动词短语作概括。"
+    },
+    "q-2023-jia-040": {
+      "blankId": "blank-2023-jia-040",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "say to yourself",
+        "outside of our comfort zone",
+        "get impatient about the circumstances",
+        "become more patient"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-jia-seven-p8",
+        "beforeQuote": "You should learn to say to yourself,",
+        "afterQuote": "You’ll then gradually become more patient."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "uncomfortable, not intolerable",
+          "signalSide": "option",
+          "targetText": "the only state we will tolerate",
+          "relation": "选项 uncomfortable / intolerable 与空前 tolerate（忍受）同根同场，正面回应“只能忍受舒适”的信念。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "say to yourself",
+          "signalSide": "context-before",
+          "targetText": "This is merely uncomfortable, not intolerable",
+          "relation": "空前 say to yourself 后接引号，选项是要对自己说的那句话。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "become more patient",
+          "signalSide": "context-after",
+          "targetText": "merely uncomfortable, not intolerable",
+          "relation": "空后“逐渐变得更有耐心”是接受“只是不适并非不可忍”这一自我对话的结果。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "空前 You should learn to say to yourself 后是直接引语的位置，F 项正是要对自己说的那句话——“这只是不适，并非无法忍受”，与本段“接受不适”的主旨及空后“逐渐更有耐心”顺承。",
+        "matchedClues": [
+          {
+            "contextSide": "say to yourself, “…”",
+            "optionSide": "This is merely uncomfortable, not intolerable",
+            "relation": "引号内容即对自己说的话。"
+          },
+          {
+            "contextSide": "the only state we will tolerate",
+            "optionSide": "uncomfortable, not intolerable",
+            "relation": "tolerate 与 intolerable 同根呼应。"
+          }
+        ]
+      },
+      "keyDistractors": [],
+      "teachingNote": "引号内的空找语气与人称匹配、且回应本段不适主题的自我对话句。"
+    }
+  }
+}

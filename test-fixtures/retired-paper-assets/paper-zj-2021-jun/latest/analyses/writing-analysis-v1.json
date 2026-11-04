@@ -1,0 +1,34 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-zj-2021-jun",
+  "groups": {
+    "group-zj-2021-jun-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "A Feast of Traditional Chinese Painting\n\nYesterday afternoon, our school held an exhibition of students' traditional Chinese paintings in the library hall, and I was lucky enough to be among the visitors.\n\nWhat impressed me most was a painting of bamboo standing in the wind. As I stepped closer, the thin black lines seemed to come alive, and I could almost feel the breeze passing through the leaves. Created entirely by my schoolmates, the works left me amazed at how much patience and creativity went into every single stroke.\n\nIf you have not visited it yet, don't miss this chance. The exhibition is still open this week, and I'm sure you will walk away with a deeper love for our traditional culture, just as I did.",
+        "highlightExpressions": [
+          {
+            "text": "Yesterday afternoon, our school held an exhibition of students' traditional Chinese paintings in the library hall, and I was lucky enough to be among the visitors.",
+            "note": "开头点明事件（时间+地点+活动）并交代自己的身份，一句话把宣传稿/报道的背景立住。迁移：任何报道、投稿、通讯的首句都可套用「时间 + 主体 + held/organized + 活动 + and I was lucky enough to...」，自然引出下文。"
+          },
+          {
+            "text": "What impressed me most was a painting of bamboo standing in the wind.",
+            "note": "用 What 引导的主语从句聚焦最打动自己的细节，是「够得着的高级句」之一。迁移：写观展、观赛、参加活动的感受时，用「What impressed/struck me most was...」从泛泛的场面收束到一个具体画面，避免空泛。"
+          },
+          {
+            "text": "As I stepped closer, the thin black lines seemed to come alive, and I could almost feel the breeze passing through the leaves.",
+            "note": "用过程中的一个具体动作（stepped closer）带出画面感与感官体验，让感受从过程里长出来。迁移：描写现场体验时，用「As I + 动作, ...seemed to..., and I could almost feel...」把读者带入瞬间，比直接写「很美/很震撼」更有感染力。"
+          },
+          {
+            "text": "Created entirely by my schoolmates, the works left me amazed at how much patience and creativity went into every single stroke.",
+            "note": "-ed 分词作状语 + leave sb amazed at... 表达由衷的感受与领悟，是必修级较高结构的自信运用。迁移：评价他人作品/付出时，用「Created/Organized by..., it left me amazed at how much... went into...」表态，得体又有分量。"
+          },
+          {
+            "text": "If you have not visited it yet, don't miss this chance.",
+            "note": "条件句 + 祈使句发出诚恳的邀请，是宣传稿收尾推荐的得体落点。迁移：任何需要呼吁、推荐、号召的应用文结尾都可用「If you have not... yet, don't miss this chance.」，自然过渡到具体的推荐信息。"
+          }
+        ]
+      }
+    }
+  }
+}

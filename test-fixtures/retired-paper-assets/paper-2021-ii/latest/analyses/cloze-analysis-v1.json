@@ -1,0 +1,670 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2021-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2021-ii-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2021-ii-cloze": {
+      "overview": "记叙文。介绍年届六旬的王先生并非演员，而是一名乔装侦查的便衣警察，38 年来多次假扮他人、学说方言混入罪犯群体获取情报，最终因功获多项荣誉。",
+      "affectiveArc": "全文以钦佩、赞赏的基调推进，从他出色的伪装本领写到屡破案件，最后落到所获荣誉，情感始终正面、敬佩。"
+    }
+  },
+  "blanks": {
+    "q-2021-ii-041": {
+      "blankId": "blank-2021-ii-041",
+      "blankNo": 41,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "宾语是 different dialects（不同方言），与动词构成 speak different dialects（说不同方言）的施受搭配，正与下文“令人称其为奥斯卡影帝”的伪装本领呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "teach",
+          "meaning": "教（方言）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "compare",
+          "meaning": "比较（方言）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "assess",
+          "meaning": "评估（方言）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "different dialects",
+          "signalSide": "context-after",
+          "targetText": "speak different dialects",
+          "relation": "speak 的宾语是 different dialects，说方言这一施受搭配成立。"
+        }
+      ],
+      "teachingNote": "动词填空先看宾语：能与“方言”这一宾语自然搭配的动词是 speak。"
+    },
+    "q-2021-ii-042": {
+      "blankId": "blank-2021-ii-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "下文反复出现 thieves、criminal、disguised、judo master 等执法侦查语义场词，且全文讲他乔装抓捕罪犯，故其真实身份是 policeman（警察），与 not an actor 形成对比。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "lawyer",
+          "meaning": "律师"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "doctor",
+          "meaning": "医生"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "businessman",
+          "meaning": "商人"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "is not an actor, but a",
+          "signalSide": "context-before",
+          "targetText": "not an actor, but a policeman",
+          "relation": "not...but... 结构表明空格是与“演员”相对的真实职业。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "no criminal can",
+          "signalSide": "context-after",
+          "targetText": "criminal",
+          "relation": "下文 criminal、thieves 等执法语义场词指向警察身份。"
+        }
+      ],
+      "teachingNote": "名词填空结合全文话题词（罪犯、抓捕、柔道）锁定职业身份。"
+    },
+    "q-2021-ii-043": {
+      "blankId": "blank-2021-ii-043",
+      "blankNo": 43,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "上句说他不是演员而是警察，此处把假扮身份比作演员的 role（角色），说他比真正演员更投入于自己的“角色”，与 actor 这一比喻一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "study",
+          "meaning": "学习/研究"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "family",
+          "meaning": "家庭"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "audience",
+          "meaning": "观众"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "than any real actor",
+          "signalSide": "context-after",
+          "targetText": "more devoted to his role than any real actor",
+          "relation": "与 actor 对应，演员投入的对象是 role（角色），呼应成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "more devoted to his",
+          "signalSide": "context-before",
+          "targetText": "devoted to his role",
+          "relation": "be devoted to one's role 表示投入于自己的角色，搭配合理。"
+        }
+      ],
+      "teachingNote": "把伪装身份比作演员的“角色”，由 actor 的比喻回填 role。"
+    },
+    "q-2021-ii-044": {
+      "blankId": "blank-2021-ii-044",
+      "blankNo": 44,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "前句描述一伙窃贼借乞丐销赃，look into the case 表示“调查此案”，case 与前文犯罪情节构成案件语义搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "mirror",
+          "meaning": "镜子"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "future",
+          "meaning": "未来"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "question",
+          "meaning": "问题"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "To look into the",
+          "signalSide": "context-before",
+          "targetText": "look into the case",
+          "relation": "look into the case 是“调查案件”的固定搭配，宾语为 case。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "a group of thieves often sold stolen goods",
+          "signalSide": "context-before",
+          "targetText": "case",
+          "relation": "前句的窃贼销赃情节即“案件”，与 case 呼应。"
+        }
+      ],
+      "teachingNote": "look into the case 调查案件，由前句犯罪情节锁定 case。"
+    },
+    "q-2021-ii-045": {
+      "blankId": "blank-2021-ii-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "他乔装后混入乞丐群体进行调查，joined the beggars 表示“加入乞丐之中”，与 disguised himself 的卧底逻辑搭配一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "interviewed",
+          "meaning": "采访（乞丐）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "arrested",
+          "meaning": "逮捕（乞丐）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "assisted",
+          "meaning": "协助（乞丐）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the beggars",
+          "signalSide": "context-after",
+          "targetText": "joined the beggars",
+          "relation": "join 的宾语是 the beggars，加入乞丐群体这一施受搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Wang disguised (伪装) himself and",
+          "signalSide": "context-before",
+          "targetText": "disguised himself and joined the beggars",
+          "relation": "and 连接乔装与混入，乔装的目的就是加入乞丐之中。"
+        }
+      ],
+      "teachingNote": "卧底先乔装后“加入”目标群体，由 disguised himself 的逻辑锁定 joined。"
+    },
+    "q-2021-ii-046": {
+      "blankId": "blank-2021-ii-046",
+      "blankNo": 46,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "脏短裤和旧鞋是外在装扮，give him the appearance of a real beggar 表示“让他外表像个真乞丐”，appearance 与衣着搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "challenge",
+          "meaning": "挑战"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "experience",
+          "meaning": "经历/经验"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "freedom",
+          "meaning": "自由"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Dirty shorts and old shoes gave him the",
+          "signalSide": "context-before",
+          "targetText": "appearance of a real beggar",
+          "relation": "脏短裤旧鞋这些衣着给他的是“外表”，与 appearance 搭配。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "of a real beggar",
+          "signalSide": "context-after",
+          "targetText": "the appearance of a real beggar",
+          "relation": "the appearance of a real beggar 表示真乞丐的外表，搭配成立。"
+        }
+      ],
+      "teachingNote": "衣着对应“外表”，由 dirty shorts and old shoes 锁定 appearance。"
+    },
+    "q-2021-ii-047": {
+      "blankId": "blank-2021-ii-047",
+      "blankNo": 47,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "令人信服的方言让他赢得了乞丐们的 trust（信任），won the trust of 表示“赢得……的信任”，与卧底获取信任的逻辑搭配一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "vote",
+          "meaning": "投票"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "sympathy",
+          "meaning": "同情"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "permission",
+          "meaning": "许可"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "convincing dialect soon won him the",
+          "signalSide": "context-before",
+          "targetText": "won him the trust of the beggars",
+          "relation": "令人信服的方言赢得的是乞丐的 trust，win the trust of 搭配成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "of the beggars",
+          "signalSide": "context-after",
+          "targetText": "the trust of the beggars",
+          "relation": "the trust of the beggars 表示乞丐们的信任，搭配合理。"
+        }
+      ],
+      "teachingNote": "win the trust of 赢得信任，由 convincing dialect 的取信逻辑锁定 trust。"
+    },
+    "q-2021-ii-048": {
+      "blankId": "blank-2021-ii-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "下句说一旦他们喝醉就开始多话，故此处是他常“请/邀”他们喝酒，invited them to drink 表示请他们喝酒，与套话的卧底手段一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "forced",
+          "meaning": "强迫（他们喝酒）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "helped",
+          "meaning": "帮助（他们喝酒）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "expected",
+          "meaning": "期望（他们喝酒）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "them to drink alcohol",
+          "signalSide": "context-after",
+          "targetText": "invited them to drink alcohol",
+          "relation": "invite sb to drink 表示请某人喝酒，宾语与不定式搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "they began to talk a lot",
+          "signalSide": "context-after",
+          "targetText": "Once they were drunk, they began to talk a lot",
+          "relation": "请其喝酒、待其醉后多话，是为套取情报的连贯手段。"
+        }
+      ],
+      "teachingNote": "invite sb to drink 请人喝酒，由套话动机锁定 invited。"
+    },
+    "q-2021-ii-049": {
+      "blankId": "blank-2021-ii-049",
+      "blankNo": 49,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "承接上句请他们喝酒，Once they were drunk 表示“一旦他们喝醉了”，drunk 与 drink alcohol 直接呼应，且“喝醉”才会多话。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "deserted",
+          "meaning": "被抛弃的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "bored",
+          "meaning": "无聊的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "lost",
+          "meaning": "迷失的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "to drink alcohol",
+          "signalSide": "context-before",
+          "targetText": "drunk",
+          "relation": "上句 drink alcohol 喝酒，醉后状态即 drunk，同源呼应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "they began to talk a lot",
+          "signalSide": "context-after",
+          "targetText": "Once they were drunk, they began to talk a lot",
+          "relation": "“喝醉”才会开始多话，drunk 与“多话”因果搭配成立。"
+        }
+      ],
+      "teachingNote": "由 drink alcohol 同源回填“喝醉了”的 drunk。"
+    },
+    "q-2021-ii-050": {
+      "blankId": "blank-2021-ii-050",
+      "blankNo": 50,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "excuse myself to use the toilet 是“借口去厕所而离席”的固定表达，反身宾语 myself 与不定式搭配，正合他借故离开记录情报的情节。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "guide",
+          "meaning": "引导（自己）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "persuade",
+          "meaning": "说服（自己）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "allow",
+          "meaning": "允许（自己）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "myself to use the toilet",
+          "signalSide": "context-after",
+          "targetText": "excuse myself to use the toilet",
+          "relation": "excuse oneself to do 借故离开去做某事，反身宾语搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "and send the",
+          "signalSide": "context-after",
+          "targetText": "excuse myself... and send the information",
+          "relation": "借故离席正是为了记录并把情报发给同伴，逻辑连贯。"
+        }
+      ],
+      "teachingNote": "excuse oneself 借故离席，由“去厕所”的反身搭配锁定 excuse。"
+    },
+    "q-2021-ii-051": {
+      "blankId": "blank-2021-ii-051",
+      "blankNo": 51,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "宾语是 what the beggars said（乞丐说的话），note down 表示“记下”，把听到的话记录下来再发给同伴，语境合成义成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "refer to",
+          "meaning": "提及/查阅（乞丐说的话）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "ask about",
+          "meaning": "询问（乞丐说的话）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "miss out",
+          "meaning": "遗漏（乞丐说的话）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "what the beggars said",
+          "signalSide": "context-after",
+          "targetText": "note down what the beggars said",
+          "relation": "note down 的宾语是 what the beggars said，把所说之话记下来。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "note",
+          "signalSide": "option",
+          "targetText": "note down",
+          "relation": "note 表示“记下、记录”。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "down",
+          "signalSide": "option",
+          "targetText": "note down",
+          "relation": "down 强化“记下来”的落到纸面之义，合成为 note down。"
+        }
+      ],
+      "teachingNote": "短语可拆解猜义：note down 把听到的话记下来，再发给同伴。"
+    },
+    "q-2021-ii-052": {
+      "blankId": "blank-2021-ii-052",
+      "blankNo": 52,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "记下乞丐所说后发给同伴的正是 information（情报/信息），send the information to 表示“把情报发给”，与记录套话的卧底目的搭配一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "plan",
+          "meaning": "计划"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "agreement",
+          "meaning": "协议"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "direction",
+          "meaning": "方向/指示"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "send the",
+          "signalSide": "context-before",
+          "targetText": "send the information to my teammates",
+          "relation": "send 的宾语是 information，把情报发给同伴，搭配成立。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "to my teammates",
+          "signalSide": "context-after",
+          "targetText": "send the information to my teammates",
+          "relation": "发给队友的内容即所记录的“情报”，与 information 呼应。"
+        }
+      ],
+      "teachingNote": "记录套话后发给同伴的就是 information，由 note down 的内容锁定。"
+    },
+    "q-2021-ii-053": {
+      "blankId": "blank-2021-ii-053",
+      "blankNo": 53,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "下句说他是柔道高手、罪犯无法逃脱，说明他常处于 dangerous situations（危险处境），dangerous 与擒捕罪犯的语境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "awkward",
+          "meaning": "尴尬的（处境）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "unfortunate",
+          "meaning": "不幸的（处境）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "strange",
+          "meaning": "奇怪的（处境）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "situations",
+          "signalSide": "context-after",
+          "targetText": "dangerous situations",
+          "relation": "dangerous 修饰 situations，构成“危险处境”的修饰搭配。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "is also a judo (柔道) master",
+          "signalSide": "context-after",
+          "targetText": "dangerous",
+          "relation": "他兼习柔道、面对罪犯，正因处境危险，与 dangerous 呼应。"
+        }
+      ],
+      "teachingNote": "由柔道、擒捕罪犯的语境锁定“危险处境”dangerous。"
+    },
+    "q-2021-ii-054": {
+      "blankId": "blank-2021-ii-054",
+      "blankNo": 54,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "只要靠得够近，就没有罪犯能 escape from me（从我手里逃脱），escape from 表示“从……逃脱”，与柔道擒拿的语境搭配一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "separate",
+          "meaning": "分开/分离"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "recover",
+          "meaning": "恢复"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "hear",
+          "meaning": "听见"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "from me",
+          "signalSide": "context-after",
+          "targetText": "escape from me",
+          "relation": "escape from 表示从某人手中逃脱，与介词 from 搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "As long as I get close enough, no criminal can",
+          "signalSide": "context-before",
+          "targetText": "no criminal can escape from me",
+          "relation": "只要靠近，罪犯就无法逃脱，因果逻辑指向 escape。"
+        }
+      ],
+      "teachingNote": "escape from 从某人手里逃脱，由 no criminal can 的语境锁定 escape。"
+    },
+    "q-2021-ii-055": {
+      "blankId": "blank-2021-ii-055",
+      "blankNo": 55,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "全文写他乔装卧底、面对危险罪犯仍勇于擒捕，赢得多项荣誉，故 courage（勇气）最能概括其品质，与冒险擒贼的语义场呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "honesty",
+          "meaning": "诚实"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "kindness",
+          "meaning": "善良"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "optimism",
+          "meaning": "乐观"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "won him several honors",
+          "signalSide": "context-after",
+          "targetText": "courage won him several honors",
+          "relation": "为他赢得荣誉的品质，由其冒险擒贼的事迹可知是 courage。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "no criminal can",
+          "signalSide": "context-before",
+          "targetText": "courage",
+          "relation": "面对危险处境与罪犯仍迎难而上，属于“勇气”的语义场。"
+        }
+      ],
+      "teachingNote": "概括人物品质要回到事迹：冒险擒贼对应 courage。"
+    }
+  }
+}

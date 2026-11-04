@@ -1,0 +1,669 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2022-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2022-i-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2022-i-cloze": {
+      "overview": "记叙文。作者回忆一家人十年来的露营经历，讲述孩子年幼时的趣事和湖上遇险被救的故事，最后表达对未来露营的期待。",
+      "affectiveArc": "整体温暖怀旧：先是有惊无险的童趣、湖上遇险时的无助，最终化险为夷、心怀感激与期待，是先抑后扬的温情回忆。"
+    }
+  },
+  "blanks": {
+    "q-2022-i-041": {
+      "blankId": "blank-2022-i-041",
+      "blankNo": 41,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "全文是对过去十年露营往事的回忆，开篇说“我们的某些……很有趣”，与后文“early years when our children were little”呼应，memories（回忆）最贴合主题。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ideas",
+          "meaning": "想法、主意"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "jokes",
+          "meaning": "笑话"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "discoveries",
+          "meaning": "发现"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "are funny",
+          "signalSide": "context-after",
+          "targetText": "Some of our",
+          "relation": "空格作主语，谓语是 are funny，指“某些回忆是有趣的”。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "wonderful camping experiences over the past ten years",
+          "signalSide": "context-before",
+          "targetText": "memories",
+          "relation": "上文“过去十年美好的露营经历”确立了“回忆”这一语义场。"
+        }
+      ],
+      "teachingNote": "名词空先回到全文主题，选与话题（回忆往事）呼应的词。"
+    },
+    "q-2022-i-042": {
+      "blankId": "blank-2022-i-042",
+      "blankNo": 42,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "全文主题是露营（camping），此处“Once, we ___ along Chalk Creek”指有一次沿着白垩溪露营，camped 与下文“keep him near to our spot”“campground”相呼应，搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "drove",
+          "meaning": "开车"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "walked",
+          "meaning": "步行"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "cycled",
+          "meaning": "骑车"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "along Chalk Creek",
+          "signalSide": "context-after",
+          "targetText": "we",
+          "relation": "动词的地点状语是 along Chalk Creek，指沿溪露营。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "campground",
+          "signalSide": "context-after",
+          "targetText": "camped",
+          "relation": "下文出现 campground（露营地），回指此处的露营活动。"
+        }
+      ],
+      "teachingNote": "动词空结合全文活动主题，露营文里优先考虑 camp 类动词。"
+    },
+    "q-2022-i-043": {
+      "blankId": "blank-2022-i-043",
+      "blankNo": 43,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "后接 that 从句“our 15-month-old boy would fall into the creek”，担心孩子掉进小溪，所以用了绳子拴住他，worried（担心的）与“怕孩子落水”的情感一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "annoyed",
+          "meaning": "恼怒的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "surprised",
+          "meaning": "惊讶的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "disappointed",
+          "meaning": "失望的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "would fall into the creek",
+          "signalSide": "context-after",
+          "targetText": "worried that",
+          "relation": "worried that 引导担心的内容：孩子可能掉进溪里。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "I tied a rope around his waist to keep him near",
+          "signalSide": "context-after",
+          "targetText": "worried",
+          "relation": "用绳子拴住孩子的举动，印证“担心”的情绪。"
+        }
+      ],
+      "teachingNote": "形容词空看后文行为反应，定位说话人的真实情绪。"
+    },
+    "q-2022-i-044": {
+      "blankId": "blank-2022-i-044",
+      "blankNo": 44,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "孩子被绳子拴住只持续了约十分钟，紧接着“his crying let the whole campground know it”——他大哭，说明被拴着很难受，uncomfortable（不舒服的）与哭闹一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "unhurt",
+          "meaning": "没受伤的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "unfortunate",
+          "meaning": "不幸的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "unafraid",
+          "meaning": "不害怕的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "He was",
+          "signalSide": "context-before",
+          "targetText": "uncomfortable",
+          "relation": "He was 后接表语形容词，描述孩子被拴住时的状态：不舒服。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "his crying let the whole campground know it",
+          "signalSide": "context-after",
+          "targetText": "uncomfortable",
+          "relation": "孩子大哭让全营地都知道，说明被拴得很不舒服。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "That lasted about ten minutes",
+          "signalSide": "context-before",
+          "targetText": "uncomfortable",
+          "relation": "拴绳只维持十分钟，暗示孩子无法忍受，因为不舒服。"
+        }
+      ],
+      "teachingNote": "形容词空借助前后因果（哭闹）反推被描述对象的感受。"
+    },
+    "q-2022-i-045": {
+      "blankId": "blank-2022-i-045",
+      "blankNo": 45,
+      "pos": "other",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "前文拴绳让孩子不舒服大哭，于是“___ tying him up, I just kept a close eye on him”——不再拴他，改为密切看护，instead of（而不是）表示用看护取代拴绳，逻辑成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "due to",
+          "meaning": "由于"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "apart from",
+          "meaning": "除……之外"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "as for",
+          "meaning": "至于"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I just kept a close eye on him",
+          "signalSide": "context-after",
+          "targetText": "tying him up",
+          "relation": "“密切看护”取代了“拴住他”，两种做法形成替代关系。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "So",
+          "signalSide": "context-before",
+          "targetText": "instead of",
+          "relation": "So 承接上文哭闹，引出改用看护替代拴绳的决定。"
+        }
+      ],
+      "teachingNote": "介词短语空抓前后两个做法的关系，替代关系用 instead of。"
+    },
+    "q-2022-i-046": {
+      "blankId": "blank-2022-i-046",
+      "blankNo": 46,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "破折号后“he didn’t end up in the creek”说明改用看护的办法奏效了，It worked（这办法管用/奏效）与下文结果一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "happened",
+          "meaning": "发生"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "mattered",
+          "meaning": "要紧、有关系"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "changed",
+          "meaning": "改变"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "he didn’t end up in the creek",
+          "signalSide": "context-after",
+          "targetText": "It",
+          "relation": "It 指代看护的办法，破折号后说明孩子没落水，证明办法奏效。"
+        }
+      ],
+      "teachingNote": "动词空看破折号/结果句，验证某做法是否“管用”。"
+    },
+    "q-2022-i-047": {
+      "blankId": "blank-2022-i-047",
+      "blankNo": 47,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "上文“we rented a boat in Vallecito Lake. The sky was clear when we ___”指租船出发时天空晴朗，head off 意为“出发、动身”，与租船游湖的情节合成义吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "signed up",
+          "meaning": "报名"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "calmed down",
+          "meaning": "平静下来"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "checked out",
+          "meaning": "结账离开、查看"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "The sky was clear when we",
+          "signalSide": "context-before",
+          "targetText": "headed off",
+          "relation": "出发时天空晴朗，head off 指动身游湖。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "off",
+          "signalSide": "option",
+          "targetText": "headed off",
+          "relation": "head off 中的 off 表示离开、出发。"
+        }
+      ],
+      "teachingNote": "短语空靠语境合成义猜词，出发情境用 head off。"
+    },
+    "q-2022-i-048": {
+      "blankId": "blank-2022-i-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "前面“storms move in fast in the mountains”，暴风雨突袭，“this one quickly ___ our peaceful morning trip”——风暴打断了原本平静的清晨出游，interrupted（打断）与 but 后的转折和宾语 peaceful morning trip 搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "arranged",
+          "meaning": "安排"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "completed",
+          "meaning": "完成"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "recorded",
+          "meaning": "记录"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "our peaceful morning trip",
+          "signalSide": "context-after",
+          "targetText": "interrupted",
+          "relation": "动词宾语是“平静的清晨出游”，风暴打断它，施受关系成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "this one quickly",
+          "signalSide": "context-before",
+          "targetText": "interrupted",
+          "relation": "but 转折后“this one（指风暴）quickly”暗示风暴打断了出游。"
+        }
+      ],
+      "teachingNote": "动词空看转折信号 but，恶劣天气常“打断/interrupt”活动。"
+    },
+    "q-2022-i-049": {
+      "blankId": "blank-2022-i-049",
+      "blankNo": 49,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "“The ___ picked up and thunder rolled”描写暴风雨来临，wind picked up（起风/风变大）是固定搭配，与 thunder rolled（雷声滚滚）同属风暴语义场。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "noise",
+          "meaning": "噪音"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "temperature",
+          "meaning": "温度"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "speed",
+          "meaning": "速度"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "picked up and thunder rolled",
+          "signalSide": "context-after",
+          "targetText": "The",
+          "relation": "wind picked up 是“起风”的固定搭配，与雷声并列描写风暴。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "storms move",
+          "signalSide": "context-before",
+          "targetText": "wind",
+          "relation": "上文暴风雨来袭确立了风、雷的天气语义场。"
+        }
+      ],
+      "teachingNote": "名词空配合谓语固定搭配（pick up）并锁定天气语义场。"
+    },
+    "q-2022-i-050": {
+      "blankId": "blank-2022-i-050",
+      "blankNo": 50,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "丈夫停止钓鱼去“___ the motor”，下文“Nothing. He tried again. No ___”说明马达没反应，故是想启动发动机，start the motor（启动马达）搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "find",
+          "meaning": "找到"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "hide",
+          "meaning": "藏起来"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fix",
+          "meaning": "修理"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the motor",
+          "signalSide": "context-after",
+          "targetText": "stopped fishing to",
+          "relation": "动词宾语是 the motor，start the motor 指启动马达。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "We were stuck in the middle of the lake with a dead motor",
+          "signalSide": "context-after",
+          "targetText": "start",
+          "relation": "下文“马达熄火被困”说明此处是尝试启动马达却失败。"
+        }
+      ],
+      "teachingNote": "动词空结合下文结果（dead motor）回推此处动作是“启动”。"
+    },
+    "q-2022-i-051": {
+      "blankId": "blank-2022-i-051",
+      "blankNo": 51,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "丈夫一再尝试启动马达，“He tried again. No ___”，紧接“stuck in the middle of the lake with a dead motor”，No luck（没好运/不走运）表示再试仍未成功，搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "answer",
+          "meaning": "回答"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "wonder",
+          "meaning": "奇迹、惊奇"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "signal",
+          "meaning": "信号"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "He tried again",
+          "signalSide": "context-before",
+          "targetText": "No",
+          "relation": "再次尝试后 No luck，表示仍没成功、不走运。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "stuck in the middle of the lake with a dead motor",
+          "signalSide": "context-after",
+          "targetText": "luck",
+          "relation": "下文被困、马达彻底熄火，印证“没好运”。"
+        }
+      ],
+      "teachingNote": "名词空看 No + 名词的固定表达，反复失败用 No luck。"
+    },
+    "q-2022-i-052": {
+      "blankId": "blank-2022-i-052",
+      "blankNo": 52,
+      "pos": "adverb",
+      "signatureFacet": "cloze.signature.adverb.affective-consistency",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "上文“stuck in the middle of the lake with a dead motor”，一家人困在湖中央束手无策，“As we all sat there ___”修饰干坐着的状态，helplessly（无助地）与被困无策的处境情感一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "patiently",
+          "meaning": "耐心地"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "tirelessly",
+          "meaning": "不知疲倦地"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "doubtfully",
+          "meaning": "怀疑地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "stuck in the middle of the lake with a dead motor",
+          "signalSide": "context-before",
+          "targetText": "helplessly",
+          "relation": "被困湖心、马达熄火的处境，烘托出“无助”的情绪。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "As we all sat there",
+          "signalSide": "context-before",
+          "targetText": "helplessly",
+          "relation": "副词修饰“干坐着”，描绘无计可施地坐着等待。"
+        }
+      ],
+      "teachingNote": "副词空与所修饰动作及困境绑定，束手无策选 helplessly。"
+    },
+    "q-2022-i-053": {
+      "blankId": "blank-2022-i-053",
+      "blankNo": 53,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "上文一位渔民“threw us a rope and towed us back”把他们拖回岸边，脱离了困在湖心的险境，We were safe（我们安全了）与获救结果一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sorry",
+          "meaning": "抱歉的、遗憾的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "brave",
+          "meaning": "勇敢的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "right",
+          "meaning": "正确的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "threw us a rope and towed",
+          "signalSide": "context-before",
+          "targetText": "safe",
+          "relation": "渔民抛绳拖船回岸，脱险后一家人安全了。"
+        }
+      ],
+      "teachingNote": "形容词空看救援结果，获救脱险后用 safe。"
+    },
+    "q-2022-i-054": {
+      "blankId": "blank-2022-i-054",
+      "blankNo": 54,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "结尾每年取出露营车时“filled with a sense of ___, wondering what camping fun and ___ we will experience next”，对下一次露营趣事充满期盼，a sense of excitement（兴奋激动之感）与 camping fun 的期待情感呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "relief",
+          "meaning": "宽慰、解脱"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "duty",
+          "meaning": "责任、义务"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "pride",
+          "meaning": "自豪"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "wondering what camping fun",
+          "signalSide": "context-after",
+          "targetText": "a sense of",
+          "relation": "期待下次露营乐趣，呼应“兴奋之感”。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "we will experience next",
+          "signalSide": "context-after",
+          "targetText": "excitement",
+          "relation": "对“接下来要体验什么”的期盼，构成兴奋、向往的语义场。"
+        }
+      ],
+      "teachingNote": "名词空看 a sense of 后的情感词，期待新体验用 excitement。"
+    },
+    "q-2022-i-055": {
+      "blankId": "blank-2022-i-055",
+      "blankNo": 55,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "“what camping fun and ___ we will experience next”与 camping fun 并列，全文记述了拴绳、湖上遇险等惊险有趣的经历，adventure（冒险）与“露营乐趣”同属期待体验的语义场。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "failure",
+          "meaning": "失败"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "performance",
+          "meaning": "表演、表现"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "conflict",
+          "meaning": "冲突"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "camping fun and",
+          "signalSide": "context-before",
+          "targetText": "adventure",
+          "relation": "与 camping fun 用 and 并列，需选与“乐趣”同向的褒义体验词。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "wondering what camping fun",
+          "signalSide": "context-before",
+          "targetText": "adventure",
+          "relation": "期待露营乐趣与冒险，构成正面体验语义场。"
+        }
+      ],
+      "teachingNote": "名词空看 and 并列结构，与 fun 同向选 adventure。"
+    }
+  }
+}

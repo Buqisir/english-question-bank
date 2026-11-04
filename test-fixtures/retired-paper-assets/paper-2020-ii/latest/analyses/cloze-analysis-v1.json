@@ -1,0 +1,673 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2020-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2020-ii-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2020-ii-cloze": {
+      "overview": "记叙文：Jim Grant 在上班路上发现一栋楼起火，冲进火场逐户敲门，救出一名坐轮椅的女子和两个孩子，最终与警察一起救出全家并因勇气受表彰。",
+      "affectiveArc": "故事走向由紧张危急到化险为夷：发现火情—冒险救人—成功脱险受表彰，全程突出主人公的果敢与勇敢。"
+    }
+  },
+  "blanks": {
+    "q-2020-ii-041": {
+      "blankId": "blank-2020-ii-041",
+      "blankNo": 41,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "他要打 911 报警，必须先把车停下来，stop one's car to call 搭配自然，符合“停车—打电话”的动作逻辑。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "drove",
+          "meaning": "驾驶（汽车）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "reached",
+          "meaning": "到达、伸手够到"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "abandoned",
+          "meaning": "抛弃、丢下"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "his car to call 911",
+          "signalSide": "context-after",
+          "targetText": "his car to call 911",
+          "relation": "为了打 911 必须先停车，stop 与 his car 构成施受搭配。"
+        }
+      ],
+      "teachingNote": "用紧随其后的目的状语 to call 911 判断动作：要打电话先停车。"
+    },
+    "q-2020-ii-042": {
+      "blankId": "blank-2020-ii-042",
+      "blankNo": 42,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "make a U-turn 是固定搭配，意为“掉头”，与后文 circling back 回到原地再看一眼一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "saw",
+          "meaning": "看见"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "missed",
+          "meaning": "错过、想念"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "crossed",
+          "meaning": "穿过、越过"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a U﹣turn",
+          "signalSide": "context-after",
+          "targetText": "made a U﹣turn",
+          "relation": "make a U-turn 为固定搭配，宾语是 a U-turn。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "circling back",
+          "signalSide": "context-after",
+          "targetText": "circling back to take another look",
+          "relation": "circling back 印证“掉头折返”的动作。"
+        }
+      ],
+      "teachingNote": "记住 make a U-turn 这一动宾固定搭配。"
+    },
+    "q-2020-ii-043": {
+      "blankId": "blank-2020-ii-043",
+      "blankNo": 43,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "没看到也没听到消防车“正在赶来”，approaching 与 fire engines 搭配，解释了他随后亲自冲进去救人的原因。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "burning",
+          "meaning": "燃烧"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "leaving",
+          "meaning": "离开"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "waiting",
+          "meaning": "等待"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "any fire engines",
+          "signalSide": "context-before",
+          "targetText": "any fire engines approaching",
+          "relation": "approaching 修饰 fire engines，表示消防车正在靠近。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Not seeing or hearing",
+          "signalSide": "context-before",
+          "targetText": "Not seeing or hearing any fire engines",
+          "relation": "“没看到没听到（消防车赶来）”引出他自己上楼救人的原因。"
+        }
+      ],
+      "teachingNote": "用 Grant rushed 这一后续行动反推：因为没有救援车赶来。"
+    },
+    "q-2020-ii-044": {
+      "blankId": "blank-2020-ii-044",
+      "blankNo": 44,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "他要进楼上楼，必须经由入口，a side entrance（侧门入口）与随后 ran up the stairs 进楼上楼的语义场一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "road",
+          "meaning": "道路"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "building",
+          "meaning": "建筑物"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "window",
+          "meaning": "窗户"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "ran up the stairs",
+          "signalSide": "context-after",
+          "targetText": "ran up the stairs",
+          "relation": "从侧门入口进去才能上楼梯，entrance 与上楼动作衔接。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "rushed to a side",
+          "signalSide": "context-before",
+          "targetText": "a side entrance",
+          "relation": "a side entrance 属于建筑出入口语义场，呼应进楼救人的情节。"
+        }
+      ],
+      "teachingNote": "用 ran up the stairs 锁定他先要从入口进入大楼。"
+    },
+    "q-2020-ii-045": {
+      "blankId": "blank-2020-ii-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "为唤醒每户人，他逐一“踢”每扇公寓门，kicked every apartment door 与后文 kicked it wide open 的动作一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "locked",
+          "meaning": "锁上"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "counted",
+          "meaning": "数、清点"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "repaired",
+          "meaning": "修理"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "every apartment door",
+          "signalSide": "context-after",
+          "targetText": "kicked every apartment door",
+          "relation": "kick 的宾语是 every apartment door，逐户踢门叫人。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "He kicked it wide open",
+          "signalSide": "context-after",
+          "targetText": "He kicked it wide open",
+          "relation": "后文 kicked it wide open 重复了同一“踢门”动作。"
+        }
+      ],
+      "teachingNote": "用下文重复出现的 kicked 同义动作回指本空。"
+    },
+    "q-2020-ii-046": {
+      "blankId": "blank-2020-ii-046",
+      "blankNo": 46,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "他喊“Get out!”后没人“回应”，No one responded 与他随后判断人已逃走的推断衔接。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "agreed",
+          "meaning": "同意"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "cared",
+          "meaning": "在意、关心"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "understood",
+          "meaning": "理解"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "No one",
+          "signalSide": "context-before",
+          "targetText": "No one responded",
+          "relation": "respond 的主语是 No one，表示无人回应他的呼喊。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "and he assumed that people had already",
+          "signalSide": "context-after",
+          "targetText": "he assumed that people had already escaped",
+          "relation": "“无人回应”才让他推断人都已离开，前后因果一致。"
+        }
+      ],
+      "teachingNote": "用其后的 assumed people had already... 反推“没人回应”。"
+    },
+    "q-2020-ii-047": {
+      "blankId": "blank-2020-ii-047",
+      "blankNo": 47,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "无人回应让他以为人们“已经逃离”了火场，had already escaped 与火灾逃生语境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "arrived",
+          "meaning": "到达"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "returned",
+          "meaning": "返回"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hidden",
+          "meaning": "躲藏"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "people had already",
+          "signalSide": "context-before",
+          "targetText": "people had already escaped",
+          "relation": "escaped 的主语是 people，表示人们已逃出火场。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "No one",
+          "signalSide": "context-before",
+          "targetText": "No one responded",
+          "relation": "无人回应回指人都已逃走的推断。"
+        }
+      ],
+      "teachingNote": "结合火灾情景与“无人回应”，判定人已逃离。"
+    },
+    "q-2020-ii-048": {
+      "blankId": "blank-2020-ii-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "走到走廊尽头时他“注意到”一扇半开的门，noticed a half-open door 与他随即踢门进入的动作衔接。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "skipped",
+          "meaning": "跳过、略过"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "closed",
+          "meaning": "关闭"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "remembered",
+          "meaning": "记得"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a half﹣open door",
+          "signalSide": "context-after",
+          "targetText": "noticed a half﹣open door",
+          "relation": "notice 的宾语是 a half-open door，表示他发现了这扇门。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Reaching the end of the hallway, though",
+          "signalSide": "context-before",
+          "targetText": "Reaching the end of the hallway, though",
+          "relation": "though 转折，走到尽头却注意到一扇半开的门。"
+        }
+      ],
+      "teachingNote": "用其后 kicked it wide open 反推他先“注意到”这扇门。"
+    },
+    "q-2020-ii-049": {
+      "blankId": "blank-2020-ii-049",
+      "blankNo": 49,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "火灾中坐在轮椅上、带着两个幼儿的女子应当是“受惊吓的”，frightened 与危急火场的情感氛围一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "curious",
+          "meaning": "好奇的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "patient",
+          "meaning": "有耐心的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "grateful",
+          "meaning": "感激的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "woman in a wheelchair",
+          "signalSide": "context-after",
+          "targetText": "a frightened woman in a wheelchair",
+          "relation": "frightened 修饰 woman，描写她在火场中的惊恐状态。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "flames",
+          "signalSide": "context-before",
+          "targetText": "flames",
+          "relation": "火焰营造危急氛围，女子情绪应为受惊。"
+        }
+      ],
+      "teachingNote": "用火灾危急氛围判断人物情感，应为受惊吓而非好奇/平静。"
+    },
+    "q-2020-ii-050": {
+      "blankId": "blank-2020-ii-050",
+      "blankNo": 50,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "在火场中他催促众人“出去”逃生，get out 与前文 “Get out!” 的呼喊及随后冲下走廊的动作一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "turn back",
+          "meaning": "返回、往回走"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "go up",
+          "meaning": "上去、往上走"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "lie down",
+          "meaning": "躺下"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "Get out!",
+          "signalSide": "context-before",
+          "targetText": "Get out!",
+          "relation": "前文已喊 Get out，本空再次催促“出去”。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "get",
+          "signalSide": "option",
+          "targetText": "get out",
+          "relation": "get 与 out 合成“出去”之意。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "out",
+          "signalSide": "option",
+          "targetText": "get out",
+          "relation": "out 表示向外，构成“离开/出去”。"
+        }
+      ],
+      "teachingNote": "用前文已出现的 Get out 呼喊回指本空的短语义。"
+    },
+    "q-2020-ii-051": {
+      "blankId": "blank-2020-ii-051",
+      "blankNo": 51,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "他一手抱着婴儿，另一手“拖拽”着旁边的小男孩快跑，dragging the boy alongside 与紧急逃生的情景相符。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "following",
+          "meaning": "跟随"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "examining",
+          "meaning": "检查"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "passing",
+          "meaning": "经过、传递"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the boy alongside",
+          "signalSide": "context-after",
+          "targetText": "dragging the boy alongside",
+          "relation": "drag 的宾语是 the boy，表示拽着男孩在身旁同行。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "Clutching",
+          "signalSide": "context-before",
+          "targetText": "Clutching the baby to his chest",
+          "relation": "一手紧抱婴儿，另一手拖拽男孩，动作并列。"
+        }
+      ],
+      "teachingNote": "结合 Clutching the baby 的并列动作，判断另一手是拖拽男孩。"
+    },
+    "q-2020-ii-052": {
+      "blankId": "blank-2020-ii-052",
+      "blankNo": 52,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "他把人带到“安全地”到达室外，safely outside 与后文一家人 was saved from the fire 的脱险结果一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "secretly",
+          "meaning": "秘密地"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "suddenly",
+          "meaning": "突然地"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "previously",
+          "meaning": "先前地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "outside",
+          "signalSide": "context-after",
+          "targetText": "safely outside",
+          "relation": "safely 修饰 outside，表示安全地到达室外。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a family was saved from the fire",
+          "signalSide": "context-after",
+          "targetText": "a family was saved from the fire",
+          "relation": "结尾的获救结果印证“安全脱险”。"
+        }
+      ],
+      "teachingNote": "用结尾 was saved from the fire 回指脱险时的“安全”。"
+    },
+    "q-2020-ii-053": {
+      "blankId": "blank-2020-ii-053",
+      "blankNo": 53,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "到了外面唯一能提供“援助”的人只有一名警察，the only help in sight 与随后两人一起冲进楼救人衔接。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "witness",
+          "meaning": "目击者"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "guide",
+          "meaning": "向导"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "service",
+          "meaning": "服务"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in sight was a policeman",
+          "signalSide": "context-after",
+          "targetText": "the only help in sight was a policeman",
+          "relation": "help 指可提供援助者，与 a policeman 同指，构成主系表。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "they rushed into the smoky building",
+          "signalSide": "context-after",
+          "targetText": "they rushed into the smoky building",
+          "relation": "警察作为援助一起冲进楼，属于“救援”语义场。"
+        }
+      ],
+      "teachingNote": "用 was a policeman 这一表语锁定 help 指“能帮忙的人”。"
+    },
+    "q-2020-ii-054": {
+      "blankId": "blank-2020-ii-054",
+      "blankNo": 54,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "之前那名坐轮椅、要换衣服没出来的女子还困在楼里，Grant 告诉警察关于“那名女子”的情况，woman 呼应前文情节。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "door",
+          "meaning": "门"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "car",
+          "meaning": "汽车"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "baby",
+          "meaning": "婴儿"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Grant told him about the",
+          "signalSide": "context-before",
+          "targetText": "told him about the woman",
+          "relation": "told ... about the woman，介词 about 的宾语是 the woman。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "something about changing her clothes",
+          "signalSide": "context-before",
+          "targetText": "changing her clothes",
+          "relation": "前文女子要换衣服未离开，回指仍困在楼里的 woman。"
+        }
+      ],
+      "teachingNote": "用前文女子要换衣服未出来的情节，确定他告知的是 the woman。"
+    },
+    "q-2020-ii-055": {
+      "blankId": "blank-2020-ii-055",
+      "blankNo": 55,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "两人冒火救人因其“勇气”受表彰，courage 与全文冒险冲进火场的英勇行为呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "wisdom",
+          "meaning": "智慧"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "generosity",
+          "meaning": "慷慨"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "honesty",
+          "meaning": "诚实"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "were honored for their",
+          "signalSide": "context-before",
+          "targetText": "honored for their courage",
+          "relation": "be honored for their courage，表彰的内容是勇气。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "rushed into the smoky building",
+          "signalSide": "context-before",
+          "targetText": "rushed into the smoky building",
+          "relation": "冲进火场救人属于“勇敢”语义场，呼应 courage。"
+        }
+      ],
+      "teachingNote": "用全文冒火救人的英勇行为锁定表彰的品质是 courage。"
+    }
+  }
+}

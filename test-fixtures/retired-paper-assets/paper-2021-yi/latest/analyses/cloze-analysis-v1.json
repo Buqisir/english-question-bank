@@ -1,0 +1,879 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2021-yi",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2021-yi-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2021-yi-cloze": {
+      "overview": "夹叙夹议：作者作为护士，借一位康复出院的病人执意为“做头发”而非“救命护理”付小费的故事，反思“谢谢”一词有时不足以表达谢意，以及人们对救命与额外服务价值的不同看法。",
+      "affectiveArc": "情感由日常思考转入紧张抢救，再到病人康复出院时的喜悦与感激，最后落到护士谢绝小费、病人解释缘由的温暖而略带幽默的反转。"
+    }
+  },
+  "blanks": {
+    "q-2021-yi-041": {
+      "blankId": "blank-2021-yi-041",
+      "blankNo": 41,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "下文反复出现 nursing team、each of us in the nursing team，点明作者职业是护士；working as a nurse 与全文医疗护理语义场呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cleaner",
+          "meaning": "清洁工"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "chemist",
+          "meaning": "药剂师"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "doctor",
+          "meaning": "医生"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "working as a",
+          "signalSide": "context-before",
+          "targetText": "working as a nurse",
+          "relation": "work as a 后接职业名词，nurse 与全文护理身份吻合。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "nursing team",
+          "signalSide": "context-after",
+          "targetText": "the medical and nursing team",
+          "relation": "后文 nursing team 反复指认作者的护士身份。"
+        }
+      ],
+      "teachingNote": "职业类空可由全文反复出现的同语义场词回指来锁定。"
+    },
+    "q-2021-yi-042": {
+      "blankId": "blank-2021-yi-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "上文说 thank you 不足以表达谢意，作者希望有一系列词表达不同“程度/等级”的感谢，grades of gratitude 指感激的不同层级，搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "meanings",
+          "meaning": "（感谢的）含义"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "needs",
+          "meaning": "（感谢的）需求"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "expectations",
+          "meaning": "（感谢的）期望"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "different",
+          "signalSide": "context-before",
+          "targetText": "different grades of gratitude",
+          "relation": "different ___ of gratitude 指感激的不同等级，grades 与之搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Simply saying thank you doesn’t seem enough",
+          "signalSide": "context-before",
+          "targetText": "a range of words that express different grades",
+          "relation": "上文“仅说谢谢不够”引出需要表达不同程度感谢的词。"
+        }
+      ],
+      "teachingNote": "抓 different…of 结构，判断空格名词是否表示可分等级的概念。"
+    },
+    "q-2021-yi-043": {
+      "blankId": "blank-2021-yi-043",
+      "blankNo": 43,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "下文随即叙述一次突发抢救，正是对作者“感谢需分级”想法的现实检验；My thoughts were soon put to the test 指想法很快受到考验，语境合成义成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "brushed aside",
+          "meaning": "被搁置、不予理会"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "brought under discussion",
+          "meaning": "被提交讨论"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "taken into account",
+          "meaning": "被考虑在内"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "My thoughts were soon",
+          "signalSide": "context-before",
+          "targetText": "My thoughts were soon put to the test",
+          "relation": "主语 thoughts 与 put to the test（受到检验）构成施受关系。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "We had a woman patient",
+          "signalSide": "context-after",
+          "targetText": "put to the test",
+          "relation": "紧接着的真实病例正是对前述想法的检验。"
+        }
+      ],
+      "teachingNote": "短语空看下文是否提供“检验/印证”情节来合成短语义。"
+    },
+    "q-2021-yi-044": {
+      "blankId": "blank-2021-yi-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "病人做了膝关节置换手术，正处于术后“康复”阶段，recovering from a knee replacement operation 搭配合理，且与后文 she recovered 呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "departing",
+          "meaning": "离开、出发"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "escaping",
+          "meaning": "逃脱"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "retiring",
+          "meaning": "退休"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "from a knee replacement operation",
+          "signalSide": "context-after",
+          "targetText": "recovering from a knee replacement operation",
+          "relation": "recover from + 手术，表示术后康复，搭配固定。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "she recovered",
+          "signalSide": "context-after",
+          "targetText": "recovering",
+          "relation": "后文 she recovered 同词回指，确认康复义。"
+        }
+      ],
+      "teachingNote": "recover from + 疾病/手术 是固定搭配，下文同词复现可印证。"
+    },
+    "q-2021-yi-045": {
+      "blankId": "blank-2021-yi-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "while attempting to get into bed 指她正“试图”上床时倒下，attempt to do 表示努力尝试某动作，与随后 collapsed 的突发情节衔接合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "choosing",
+          "meaning": "选择"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "pausing",
+          "meaning": "暂停"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "promising",
+          "meaning": "承诺"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to get into bed",
+          "signalSide": "context-after",
+          "targetText": "attempting to get into bed",
+          "relation": "attempt to get into bed，表示努力上床这一动作。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "she collapsed",
+          "signalSide": "context-after",
+          "targetText": "attempting",
+          "relation": "正试图上床时倒下，动作进行中突发意外，语境吻合。"
+        }
+      ],
+      "teachingNote": "while + doing 描述正在进行的动作，结合后续突发情节判断动词。"
+    },
+    "q-2021-yi-046": {
+      "blankId": "blank-2021-yi-046",
+      "blankNo": 46,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "当时倒下，经过诊断“最终”查明是心脏病发作，what was eventually discovered 表示经过过程后终于查清，时间逻辑合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "fortunately",
+          "meaning": "幸运地"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "casually",
+          "meaning": "随意地"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "secretly",
+          "meaning": "秘密地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "discovered to be a heart attack",
+          "signalSide": "context-after",
+          "targetText": "eventually discovered",
+          "relation": "eventually 修饰 discovered，表示最终查明，副词与动词搭配。"
+        }
+      ],
+      "teachingNote": "倒下到确诊有过程，副词须体现“最终查明”的时间推进。"
+    },
+    "q-2021-yi-047": {
+      "blankId": "blank-2021-yi-047",
+      "blankNo": 47,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "心脏病发作的崩溃情况很危急，因而“需要”急救团队和良好协作，requiring the emergency medical team 搭配合理，承接 disastrous 的紧急性。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "assessing",
+          "meaning": "评估"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "forming",
+          "meaning": "组建、形成"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "proving",
+          "meaning": "证明"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the emergency medical team and good teamwork",
+          "signalSide": "context-after",
+          "targetText": "requiring the emergency medical team",
+          "relation": "require + 急救团队/协作，表示危急情形需要救援，施受成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "The collapse was disastrous",
+          "signalSide": "context-before",
+          "targetText": "requiring",
+          "relation": "崩溃极其严重，故需要急救，因果衔接。"
+        }
+      ],
+      "teachingNote": "由前句“危急”推断动词须表达“需要救援”的因果关系。"
+    },
+    "q-2021-yi-048": {
+      "blankId": "blank-2021-yi-048",
+      "blankNo": 48,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "though slowly 与 recovered 构成让步，强调她虽然康复但过程“缓慢”，且与下文住院四周才出院相印证。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "slightly",
+          "meaning": "轻微地"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "accidentally",
+          "meaning": "意外地"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "happily",
+          "meaning": "高兴地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "she recovered, though",
+          "signalSide": "context-before",
+          "targetText": "recovered, though slowly",
+          "relation": "though slowly 修饰 recovered，表示康复但缓慢。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "ready for discharge (出院) after four weeks",
+          "signalSide": "context-after",
+          "targetText": "slowly",
+          "relation": "四周后才出院印证恢复缓慢。"
+        }
+      ],
+      "teachingNote": "though + 副词的让步结构，结合住院时长判断恢复速度。"
+    },
+    "q-2021-yi-049": {
+      "blankId": "blank-2021-yi-049",
+      "blankNo": 49,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "病人对医护团队为她所做的一切心怀感激，grateful for everything 搭配合理，且呼应全文 gratitude、eager to say goodbye 致谢的情感主线。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "thoughtful",
+          "meaning": "体贴的、深思的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "sorrowful",
+          "meaning": "悲伤的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "fearful",
+          "meaning": "害怕的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for everything that the medical and nursing team had done",
+          "signalSide": "context-after",
+          "targetText": "grateful for everything",
+          "relation": "grateful for + 所做之事，表示对帮助心存感激。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "eager to say",
+          "signalSide": "context-after",
+          "targetText": "grateful",
+          "relation": "急于道别致谢印证感激的正面情感基调。"
+        }
+      ],
+      "teachingNote": "情感形容词须与上下文致谢、感激的正面基调一致。"
+    },
+    "q-2021-yi-050": {
+      "blankId": "blank-2021-yi-050",
+      "blankNo": 50,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "出院日大家一同分享她康复的“喜悦”，shared in her delight at her recovery 搭配合理，与康复出院的正面情感语义场一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "surprise",
+          "meaning": "惊讶"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "curiosity",
+          "meaning": "好奇"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "disappointment",
+          "meaning": "失望"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "at her recovery",
+          "signalSide": "context-after",
+          "targetText": "her delight at her recovery",
+          "relation": "delight at + 康复，表示因康复而欣喜，搭配自然。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "shared in her",
+          "signalSide": "context-before",
+          "targetText": "shared in her delight",
+          "relation": "共同分享的应是康复的喜悦，正面情感语义场。"
+        }
+      ],
+      "teachingNote": "康复出院的正面语境锁定表示喜悦的名词。"
+    },
+    "q-2021-yi-051": {
+      "blankId": "blank-2021-yi-051",
+      "blankNo": 51,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "As she was leaving 指她正离开（出院）之际急于向每位护士道别，与下文 say goodbye、discharge 出院情节衔接，搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "operating",
+          "meaning": "做手术、操作"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "thinking",
+          "meaning": "思考"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hesitating",
+          "meaning": "犹豫"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "she was eager to say",
+          "signalSide": "context-after",
+          "targetText": "As she was leaving",
+          "relation": "离开之际急于道别，leaving 与 say goodbye 动作衔接。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "On her day of discharge",
+          "signalSide": "context-before",
+          "targetText": "leaving",
+          "relation": "出院日离开医院，与 leaving 呼应。"
+        }
+      ],
+      "teachingNote": "出院日的离别场景锁定“离开”这一动作。"
+    },
+    "q-2021-yi-052": {
+      "blankId": "blank-2021-yi-052",
+      "blankNo": 52,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "她离开时急于向护理团队每个人“道别”，say goodbye to each of us 搭配固定，与 As she was leaving 离开情景一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "sorry",
+          "meaning": "说抱歉"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "hello",
+          "meaning": "问好"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "yes",
+          "meaning": "说好、同意"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to each of us in the nursing team",
+          "signalSide": "context-after",
+          "targetText": "say goodbye to each of us",
+          "relation": "say goodbye to sb 道别，搭配固定。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "As she was",
+          "signalSide": "context-before",
+          "targetText": "goodbye",
+          "relation": "离开之际所说应为道别用语。"
+        }
+      ],
+      "teachingNote": "离开场景中 say goodbye to sb 是固定告别表达。"
+    },
+    "q-2021-yi-053": {
+      "blankId": "blank-2021-yi-053",
+      "blankNo": 53,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "When she reached one nurse 指她道别时走到/挨到某位护士跟前，随即把钱塞进其手里，reached 表示靠近、接触到某人，与下文 press a note into her hand 衔接合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "consulted",
+          "meaning": "咨询"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "introduced",
+          "meaning": "介绍"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "persuaded",
+          "meaning": "说服"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "one nurse",
+          "signalSide": "context-after",
+          "targetText": "reached one nurse",
+          "relation": "reach sb 表示走到某人跟前，宾语为 one nurse。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "she tried to press a five-pound note into her hand",
+          "signalSide": "context-after",
+          "targetText": "reached",
+          "relation": "走到护士跟前后随即塞钱，动作顺承。"
+        }
+      ],
+      "teachingNote": "结合下一动作（塞钱）判断前一动作是“走到跟前”。"
+    },
+    "q-2021-yi-054": {
+      "blankId": "blank-2021-yi-054",
+      "blankNo": 54,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "护士说大家只是在做本职工作，因而“拒绝”收下这五镑，refused to accept it 搭配合理，与 saying that we were all just doing our job 的理由一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "wished",
+          "meaning": "希望"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "pretended",
+          "meaning": "假装"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "failed",
+          "meaning": "未能"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to accept it",
+          "signalSide": "context-after",
+          "targetText": "refused to accept it",
+          "relation": "refuse to accept，表示拒绝收下，搭配自然。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "saying that we were all just",
+          "signalSide": "context-after",
+          "targetText": "refused",
+          "relation": "以“只是做本职”为由拒收，因果一致。"
+        }
+      ],
+      "teachingNote": "由谢绝小费的理由判断动词应表“拒绝”。"
+    },
+    "q-2021-yi-055": {
+      "blankId": "blank-2021-yi-055",
+      "blankNo": 55,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "护士谢绝小费，理由是大家只是在“做”本职工作，doing our job 搭配固定，与 refused to accept 谦辞一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "enjoying",
+          "meaning": "享受"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "securing",
+          "meaning": "获得、保住"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "starting",
+          "meaning": "开始"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "our job",
+          "signalSide": "context-after",
+          "targetText": "doing our job",
+          "relation": "do one's job 做本职工作，固定搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "is part of the job",
+          "signalSide": "context-after",
+          "targetText": "doing our job",
+          "relation": "末段 part of the job 回指做本职工作的主旨。"
+        }
+      ],
+      "teachingNote": "do one's job 是“做本职工作”的固定表达。"
+    },
+    "q-2021-yi-056": {
+      "blankId": "blank-2021-yi-056",
+      "blankNo": 56,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "病人面露困惑，随后开口解释，then replied 引出她接下来所说的话（直接引语），表示“回答、答道”，搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "repeated",
+          "meaning": "重复"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "recited",
+          "meaning": "背诵"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "reported",
+          "meaning": "报告"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "and then",
+          "signalSide": "context-before",
+          "targetText": "and then replied",
+          "relation": "then replied 引出病人随后的话语，reply 表答道。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "“Oh this isn’t for the",
+          "signalSide": "context-after",
+          "targetText": "replied",
+          "relation": "后接直接引语，正是她“回答”的内容。"
+        }
+      ],
+      "teachingNote": "后接直接引语解释时，常用 reply 表示“答道”。"
+    },
+    "q-2021-yi-057": {
+      "blankId": "blank-2021-yi-057",
+      "blankNo": 57,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "病人说这钱不是为我所受的“护理”，this isn’t for the care I had 中 care 指医护照料，与下文 saving lives is part of the job 把救命护理视为本职相呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "courage",
+          "meaning": "勇气"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "patience",
+          "meaning": "耐心"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "duty",
+          "meaning": "职责"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I had",
+          "signalSide": "context-after",
+          "targetText": "the care I had",
+          "relation": "the care I had 指我所受到的护理照料，搭配自然。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "lives is part of the job",
+          "signalSide": "context-after",
+          "targetText": "care",
+          "relation": "末段把救命护理视为本职，呼应所受的 care。"
+        }
+      ],
+      "teachingNote": "结合末段“护理是本职”定位病人所指的“照料”。"
+    },
+    "q-2021-yi-058": {
+      "blankId": "blank-2021-yi-058",
+      "blankNo": 58,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "病人把护理照料当作“理所当然之事”，I take that as a given 中 given 指既定、理所当然的事，与她随后强调小费是为做头发而非护理的逻辑一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "goal",
+          "meaning": "目标"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "push",
+          "meaning": "推动、督促"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "greeting",
+          "meaning": "问候"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I take that as a",
+          "signalSide": "context-before",
+          "targetText": "take that as a given",
+          "relation": "take sth as a given 把某事视为理所当然，搭配固定。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "this is for setting my hair yesterday",
+          "signalSide": "context-after",
+          "targetText": "given",
+          "relation": "护理视为理所当然，故小费另为做头发，逻辑衔接。"
+        }
+      ],
+      "teachingNote": "take sth as a given 表示“视为理所当然”，由上下文逻辑确认。"
+    },
+    "q-2021-yi-059": {
+      "blankId": "blank-2021-yi-059",
+      "blankNo": 59,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "末段点题：对许多人而言“救命”是本职的一部分，saving lives is part of the job 搭配固定，呼应前文心脏病抢救的救治情节。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "risking",
+          "meaning": "冒……的风险"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "changing",
+          "meaning": "改变"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "building",
+          "meaning": "建立"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "lives is part of the job",
+          "signalSide": "context-after",
+          "targetText": "saving lives is part of the job",
+          "relation": "save lives 救命，作主语短语，搭配固定。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "heart attack",
+          "signalSide": "context-before",
+          "targetText": "saving lives",
+          "relation": "前文心脏病抢救情节印证救命主旨。"
+        }
+      ],
+      "teachingNote": "save lives 是“救死扶伤”的固定搭配，呼应抢救情节。"
+    },
+    "q-2021-yi-060": {
+      "blankId": "blank-2021-yi-060",
+      "blankNo": 60,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "与“救命属本职”相对，做头发是分外/额外的服务，an extra and should be rewarded 中 extra 作名词指额外之事，与 should be rewarded 应予回报的逻辑一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "honour",
+          "meaning": "荣誉"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "ability",
+          "meaning": "能力"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "opening",
+          "meaning": "空缺、开口"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "and should be rewarded",
+          "signalSide": "context-after",
+          "targetText": "an extra and should be rewarded",
+          "relation": "an extra 指额外之事，故应被回报，搭配与逻辑一致。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "is part of the job but styling hair",
+          "signalSide": "context-before",
+          "targetText": "an extra",
+          "relation": "but 转折将做头发与本职对立，凸显其“额外”。"
+        }
+      ],
+      "teachingNote": "but 转折对比下，分外服务用名词 an extra 表示“额外之事”。"
+    }
+  }
+}

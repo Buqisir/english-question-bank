@@ -1,0 +1,69 @@
+{
+  "schemaVersion": "writing-analysis-v1",
+  "paperId": "paper-zj-2026-jan",
+  "groups": {
+    "group-zj-2026-jan-writing-application": {
+      "writing": {
+        "taskType": "application",
+        "modelAnswer": "Last week, while looking for a novel in our school library, I was sad to find many books badly damaged. Pages were filled with pencil marks, careless notes and even silly drawings, which made the words hard to read. Some pages had been torn, leaving the stories incomplete for the next reader.\n\nLibrary books do not belong to one person; they are shared by all of us. Once they are spoiled, everyone loses the joy of reading them. Therefore, I sincerely call on each of you to treat every book with care. Let us keep our pages clean so that knowledge can be passed on, page by page, to those who come after us.",
+        "highlightExpressions": [
+          {
+            "text": "I was sad to find many books badly damaged",
+            "note": "\"主语 + be + 情感形容词 + to find/see + 宾语 + 过去分词\"句式，开篇带情感地引出问题现象。可迁移到任何'反映问题/说明情况'类投稿、报道：如 I was glad to see…, I was surprised to find…，自然带出所见所感。"
+          },
+          {
+            "text": "which made the words hard to read",
+            "note": "非限制性定语从句 which 指代前一整句，补充说明造成的后果。可迁移到说明类写作中点明某现象带来的影响，如 …, which caused much trouble / which made things worse。"
+          },
+          {
+            "text": "Library books do not belong to one person; they are shared by all of us",
+            "note": "用分号连接两个对照短句，点明'公共/共享'属性，为下文呼吁做铺垫。可迁移到任何涉及公共资源/集体利益的呼吁文：把 Library books 换成 The campus / These facilities 等即可。"
+          },
+          {
+            "text": "Therefore, I sincerely call on each of you to treat every book with care",
+            "note": "\"Therefore, I sincerely call on sb. to do sth.\"是公开呼吁的标准句型，礼貌而有力度。可迁移到所有倡议/呼吁类投稿，替换 call on 的对象和具体行动即可。"
+          },
+          {
+            "text": "Let us keep our pages clean so that knowledge can be passed on",
+            "note": "\"Let us do … so that …\"用祈使+目的状语作结尾，把行动与美好结果绑定，号召力强。可迁移到各类倡议文的收尾，替换具体行动和愿景即可。"
+          }
+        ]
+      }
+    },
+    "group-zj-2026-jan-writing-continuation": {
+      "writing": {
+        "taskType": "continuation",
+        "modelAnswer": "As I turned to leave, two police officers pulled up in a patrol car. They stepped out slowly, clearly unsure how to handle the nervous animal. Seeing them hesitate, I knew I could not just drive away. \"I grew up on a dairy farm,\" I said, walking over with my voice low and calm. The cow lifted its head, and for a moment its gentle eyes met mine. Speaking softly, I reached for the thick rope around its neck. To my great relief, the cow did not pull back, but stood there quietly, trusting me.\nWe tied the rope to a tree and discussed what to do with the cow. One officer made some calls, while I gently touched its neck to keep it calm. Soon a worried farmer arrived in a truck; the cow had run off from a market nearby. Thanking us again and again, he led it gently onto the truck. As it left, the cow turned its head, as if waving goodbye. Driving back to the pool, I smiled, thinking how Lila was right after all.",
+        "continuationDesign": {
+          "theme": "城市里一位有农场经验的普通母亲挺身而出，安抚并护送一头走失的胆怯小牛，传递对弱小生命的善意与担当。",
+          "paragraphs": [
+            "承接 starter1：把'两名警察到来'当成既成事实，紧跟一句评价——警察也手足无措，制造'谁能稳住这头胆怯的牛'的转折；顺势让'我'凭原文埋下的农场经验出手（沿用 dairy farm / Grandpa / 低而稳的 voice 这些原文线索），并回扣原文'温柔大眼睛'与'脖子上的粗绳'意象，用动作链(walk over / reach for / lift head)推进，制造人与牛之间初步的信任。",
+            "承接 starter2：把'系绳到树上、商量办法'接住，给出合理稳妥的解决——警察打电话、'我'安抚，附近市场的主人开车来认领，让走失之谜自然收束；结尾用小牛回头'像在挥手告别'呼应原文 Lila 与牛互相挥手的细节，再用'Lila 说得对'点题升华，回扣'你什么都能搞定'的母女信任与善意主旨。"
+          ]
+        },
+        "highlightExpressions": [
+          {
+            "text": "They stepped out slowly, clearly unsure how to handle the nervous animal",
+            "note": "心理/神态描写+形容词作状语(clearly unsure...)。迁移：续写中刻画配角的犹豫无措，用'动作+clearly/obviously+形容词'一笔带出心理状态，为主角出手做铺垫。"
+          },
+          {
+            "text": "walking over with my voice low and calm",
+            "note": "非谓语(walking...)作伴随状语 + with 独立结构带出语气描写。迁移：人物边动作边说话/安抚时，用'walking/smiling..., with + 名词 + 形容词'让动作与情绪同时落地，比单句更细腻。"
+          },
+          {
+            "text": "The cow lifted its head, and for a moment its gentle eyes met mine",
+            "note": "动作链+眼神交流的细节描写。迁移：写人与动物/人与人建立信任的瞬间，用'抬头—四目相对'的小动作传情，比直接写'感动'更有画面感。"
+          },
+          {
+            "text": "Speaking softly, I reached for the thick rope around its neck",
+            "note": "非谓语(Speaking softly)作状语前置 + 动作链。迁移：靠近受惊对象时，用'轻声+伸手'的连续小动作放慢节奏，制造紧张又温柔的氛围。"
+          },
+          {
+            "text": "the cow turned its head, as if waving goodbye",
+            "note": "动作+as if 比喻的拟人描写。迁移：结尾收束时用'as if + 非谓语/从句'给一个温暖画面，呼应前文意象、点题升华，是续写结尾的家常高分句式。"
+          }
+        ]
+      }
+    }
+  }
+}

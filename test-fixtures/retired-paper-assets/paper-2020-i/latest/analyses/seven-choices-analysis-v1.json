@@ -1,0 +1,395 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2020-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2020-i-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-05",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2020-i-seven-choices": {
+      "overview": "本篇为一篇说明文式的演讲技巧指南，围绕“如何成为一名优秀的公众演讲者”展开，逐段给出具体原则：放松自然地面对听众、出错不必停下道歉、通过练习成为高效演讲者、以及演讲宜短不宜长。七选五的五个空分别考查首段主旨衔接、段中对比衔接、段末补充说明、段中目标转折和段首主题句。",
+      "discourseStructure": {
+        "summary": "文章先用“有人天生擅长演讲”引出多数人靠训练成才的观点，确立全文“演讲可学”的基调；随后分段给出四条原则：聚焦“说”而非“公开”、出错继续讲、以练习追求高效、控制时长。每段多为“主题句 + 解释/举例”结构，空格分布在段首主题、段中转折与段末补充处。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "Do you want to be a good public speaker?",
+            "paragraphIds": [
+              "para-2020-i-seven-title"
+            ],
+            "summary": "引入段：先说有人天生有演讲天赋，再用空格引出“多数人靠训练”的转折，最后提出全文将给出的若干原则。"
+          },
+          {
+            "unitId": "unit-focus",
+            "heading": "Focus on the speaking",
+            "paragraphIds": [
+              "para-2020-i-seven-p1"
+            ],
+            "summary": "原则一：不要过分在意“公开”而忽视“说”本身，应反其道而行，直接与听众交流、做自己。"
+          },
+          {
+            "unitId": "unit-mistakes",
+            "heading": "Even the most successful public speaker will make mistakes",
+            "paragraphIds": [
+              "para-2020-i-seven-p2"
+            ],
+            "summary": "原则二：人人都会出错，听众注意力有限，出小错时不必停下，更不必道歉。"
+          },
+          {
+            "unitId": "unit-practice",
+            "heading": "Your goal is not to be a perfect public speaker",
+            "paragraphIds": [
+              "para-2020-i-seven-p3"
+            ],
+            "summary": "原则三：目标不是完美而是高效，而高效来自持续练习，正如世界冠军也坚持训练。"
+          },
+          {
+            "unitId": "unit-less-is-more",
+            "heading": "When it comes to public speaking, less is usually more",
+            "paragraphIds": [
+              "para-2020-i-seven-p4"
+            ],
+            "summary": "原则四：演讲宜短不宜长，让听众意犹未尽好过让其坐立不安地等待结束。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2020-i-036": {
+      "blankId": "blank-2020-i-036",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "born with a gift for public speaking",
+        "Do you want to be a good public speaker",
+        "principles you must master"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-i-seven-title",
+        "headingAnchor": "Do you want to be a good public speaker?",
+        "beforeQuote": "Some individuals are born with a gift for public speaking.",
+        "afterQuote": "Do you want to be a good public speaker?"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "However",
+          "signalSide": "option",
+          "targetText": "born with a gift for public speaking",
+          "relation": "However 与空前“天生有天赋”构成转折，引出“多数人靠训练”的对立观点。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "born with a gift for public speaking",
+          "signalSide": "context-before",
+          "targetText": "the majority of people are effective speakers because they train to be",
+          "relation": "空前“天生”与选项“靠训练”形成天赋vs努力的话题对照，由 However 衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "they train to be",
+          "signalSide": "option",
+          "targetText": "principles you must master",
+          "relation": "选项“靠训练成才”呼应空后“必须掌握的原则”，为下文给出可学原则做铺垫。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "空前说有人天生会演讲，G 用 However 转折指出“多数人是靠训练才成为高效演讲者”，自然过渡到下文要给出的若干训练原则。",
+        "matchedClues": [
+          {
+            "contextSide": "born with a gift for public speaking",
+            "optionSide": "the majority of people are effective speakers because they train to be",
+            "relation": "天生有天赋 vs 多数人靠训练，构成对比转折。"
+          },
+          {
+            "contextSide": "principles you must master",
+            "optionSide": "they train to be",
+            "relation": "靠训练成才呼应下文“必须掌握的原则”，引出全文主旨。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B“你想成为高效演讲者”是直接陈述，缺少与空前“天生天赋”的转折关系，无法承接 However 所需的对立逻辑。"
+        }
+      ],
+      "teachingNote": "首段空看是否需要转折词承接前句立场，遇到 However/天赋与努力对照时优先选含转折连接词的选项。"
+    },
+    "q-2020-i-037": {
+      "blankId": "blank-2020-i-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "focus on the “public” at the expense of the “speaking.”",
+        "Focus on the speaking",
+        "be yourself and make a connection"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-i-seven-p1",
+        "beforeQuote": "you focus on the “public” at the expense of the “speaking.”",
+        "afterQuote": "Focus on the speaking."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "the opposite",
+          "signalSide": "option",
+          "targetText": "focus on the “public” at the expense of the “speaking.”",
+          "relation": "the opposite 回指空前“为公开而牺牲说”的错误做法，提示应反其道而行。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Focus on the speaking",
+          "signalSide": "context-after",
+          "targetText": "Do the opposite",
+          "relation": "空后“聚焦于说”正是“反其道而行”的具体内容，与选项构成总—分关系。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "be yourself and make a connection",
+          "signalSide": "context-after",
+          "targetText": "Do the opposite",
+          "relation": "做自己、与听众建立连接也是“反向操作”的延伸说明，支持选项的指代落点。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "空前指出常见错误是为“公开”牺牲“说”，A“反其道而行”用 the opposite 回指该错误，空后紧接“聚焦于说”正是其具体做法。",
+        "matchedClues": [
+          {
+            "contextSide": "focus on the “public” at the expense of the “speaking.”",
+            "optionSide": "Do the opposite",
+            "relation": "the opposite 指代空前所述的错误做法。"
+          },
+          {
+            "contextSide": "Focus on the speaking.",
+            "optionSide": "Do the opposite",
+            "relation": "空后给出“反向操作”的具体内容，与选项呼应。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F“通过关注听众消除恐惧”虽与演讲话题相关，但无法回指空前的具体错误，也不能与空后“聚焦于说”形成总分对应。"
+        }
+      ],
+      "teachingNote": "段中空遇到含 the opposite/such 等回指词的选项时，定位它所指代的前文行为，再用空后内容验证。"
+    },
+    "q-2020-i-038": {
+      "blankId": "blank-2020-i-038",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "make mistakes",
+        "don’t stop speaking when you make a mistake",
+        "unless it’s a truly serious one"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-i-seven-p2",
+        "beforeQuote": "don’t stop speaking when you make a mistake unless it’s a truly serious one.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "minor slip",
+          "signalSide": "option",
+          "targetText": "make a mistake unless it’s a truly serious one",
+          "relation": "选项 minor slip（小失误）与空前“出错但非严重”同属一个话题场，构成同义概括。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "make a mistake",
+          "signalSide": "context-before",
+          "targetText": "minor slip",
+          "relation": "空前 make a mistake 与选项 minor slip 对应，承接“出小错”的话题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "truly serious one",
+          "signalSide": "context-before",
+          "targetText": "minor slip / apologize",
+          "relation": "空前“除非真的严重”与选项“小失误不必道歉”互补，形成段末总结。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "本段讲出错不必停讲，空在段末作总结：C 进一步指出“小失误无需道歉”，minor slip 正与空前“出错但非真正严重”对应。",
+        "matchedClues": [
+          {
+            "contextSide": "make a mistake unless it’s a truly serious one",
+            "optionSide": "a minor slip",
+            "relation": "minor slip 概括前文非严重的小错误。"
+          },
+          {
+            "contextSide": "don’t stop speaking",
+            "optionSide": "don’t need to apologize",
+            "relation": "不停讲与不道歉构成对待小错的一致建议。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A“反其道而行”需要回指一段具体错误做法，而本段末尾需要的是对“出小错”态度的总结，A 在此缺乏指代落点。"
+        }
+      ],
+      "teachingNote": "段末空多作总结或补充，抓住本段核心话题词（如 mistake/serious）选与之同义递进的选项。"
+    },
+    "q-2020-i-039": {
+      "blankId": "blank-2020-i-039",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "not to be a perfect public speaker",
+        "that takes practice",
+        "world champion athletes practice their skills"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-i-seven-p3",
+        "beforeQuote": "Your goal is not to be a perfect public speaker.",
+        "afterQuote": "And like everything else in life, that takes practice."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "that takes practice",
+          "signalSide": "context-after",
+          "targetText": "to be an effective public speaker",
+          "relation": "空后 that 回指空格所设的目标，即“成为高效演讲者”这一需要练习达成的目标。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "not to be a perfect public speaker",
+          "signalSide": "context-before",
+          "targetText": "an effective public speaker",
+          "relation": "空前“目标不是完美”与选项“想成为高效演讲者”构成 not...but 式的目标对照。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "effective public speaker",
+          "signalSide": "option",
+          "targetText": "that takes practice",
+          "relation": "选项“高效演讲者”正是空后 that 所指、需要靠练习实现的目标。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "空前说目标不是“完美”，B 紧接给出真正目标——成为“高效”演讲者；空后的 that 回指这一目标，并指出它需要练习。",
+        "matchedClues": [
+          {
+            "contextSide": "not to be a perfect public speaker",
+            "optionSide": "an effective public speaker",
+            "relation": "完美 vs 高效，形成目标的修正与对照。"
+          },
+          {
+            "contextSide": "that takes practice",
+            "optionSide": "You want to be an effective public speaker.",
+            "relation": "that 回指“成为高效演讲者”这一目标。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 含 However 与“多数人靠训练”，更适合首段天赋vs努力的转折，此处空后 that 需要回指一个单一目标，B 比 G 更贴切。"
+        }
+      ],
+      "teachingNote": "看空后代词 that/it 回指什么，再结合空前 not...的否定，选出被修正后的正确目标。"
+    },
+    "q-2020-i-040": {
+      "blankId": "blank-2020-i-040",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "I wish that speaker had spoken longer",
+        "make your presentation just a bit shorter than anticipated",
+        "leave your listeners wishing for more"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2020-i-seven-p4",
+        "afterQuote": "Always make your presentation just a bit shorter than anticipated.",
+        "beforeQuote": "It’s rare to hear someone say"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "less is usually more",
+          "signalSide": "option",
+          "targetText": "make your presentation just a bit shorter than anticipated",
+          "relation": "选项“少即是多”是本段主题，空后“把演讲弄得比预期略短”正是其具体落实。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "shorter than anticipated",
+          "signalSide": "context-after",
+          "targetText": "less is usually more",
+          "relation": "空后“略短于预期”与选项“少即是多”同属“宜短”的话题场，验证主题句。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "leave your listeners wishing for more",
+          "signalSide": "context-after",
+          "targetText": "less is usually more",
+          "relation": "让听众意犹未尽进一步印证“少即是多”，支撑段首主题句。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "本段位于段首，需要一句主题句统领全段；D“就公众演讲而言，少即是多”正概括了下文“演讲宜短、让人意犹未尽”的全部论述。",
+        "matchedClues": [
+          {
+            "contextSide": "make your presentation just a bit shorter than anticipated",
+            "optionSide": "less is usually more",
+            "relation": "略短于预期是“少即是多”的具体做法。"
+          },
+          {
+            "contextSide": "leave your listeners wishing for more",
+            "optionSide": "less is usually more",
+            "relation": "意犹未尽印证宜短的主题。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E“多数演讲的目的是让听众受益”虽含 audience，但无法统领本段关于“时长宜短”的具体内容，不能作为该段主题句。"
+        }
+      ],
+      "teachingNote": "段首主题空要选能概括全段的句子，用段内反复出现的话题词（如 shorter/wishing for more）反向验证主题。"
+    }
+  }
+}

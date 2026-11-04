@@ -1,0 +1,642 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2023-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2023-ii-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2023-ii-cloze": {
+      "overview": "记叙文：作者通过 PNP 飞行义务组织，帮一户搬家的家庭把爱犬 Tiffy 从堪萨斯城运送到弗吉尼亚，最终让一家团聚。",
+      "affectiveArc": "情感主线由主人离别时的紧张不舍，逐渐转为顺利送达后的感激与温暖，整体走向是先紧张后欣慰。"
+    }
+  },
+  "blanks": {
+    "q-2023-ii-041": {
+      "blankId": "blank-2023-ii-041",
+      "blankNo": 41,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "tight 与 budget 构成固定搭配 a tight budget（预算紧张），下文说他们付不起宠物运费，正是预算紧的体现。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "turn",
+          "meaning": "轮到、转向"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "schedule",
+          "meaning": "日程安排"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "connection",
+          "meaning": "联系、关联"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "tight",
+          "signalSide": "context-before",
+          "targetText": "a very tight",
+          "relation": "形容词 tight 修饰 budget，构成 a tight budget 这一固定搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "could not afford to pay",
+          "signalSide": "context-after",
+          "relation": "下句说付不起费用，呼应预算紧张。"
+        }
+      ],
+      "teachingNote": "抓住固定搭配 a tight budget，并用下文付不起钱的信息验证。"
+    },
+    "q-2023-ii-042": {
+      "blankId": "blank-2023-ii-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "全文核心是把狗从一地运到另一地，pay for transportation 指支付运输费用，与搬家、飞行运送的话题场一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "food",
+          "meaning": "食物"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "shelter",
+          "meaning": "住所、庇护"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "medicine",
+          "meaning": "药物"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "pay for",
+          "signalSide": "context-before",
+          "targetText": "pay for",
+          "relation": "pay for transportation，付运输费用，搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "move to Virginia",
+          "signalSide": "context-before",
+          "relation": "搬家话题指向运输这一语义场。"
+        }
+      ],
+      "teachingNote": "锁定运送话题场，transportation 与搬家、飞行运狗呼应。"
+    },
+    "q-2023-ii-043": {
+      "blankId": "blank-2023-ii-043",
+      "blankNo": 43,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "尽管付不起运费，他们仍 desperately wanted to take her with them，desperately 强调极其迫切地想带上狗，与前后转折语气一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "temporarily",
+          "meaning": "暂时地"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "secretly",
+          "meaning": "秘密地"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "originally",
+          "meaning": "起初、原本"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "wanted to take her with them",
+          "signalSide": "context-after",
+          "targetText": "wanted to take her with them",
+          "relation": "副词修饰 wanted，desperately wanted 表达迫切的想要。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "could not afford",
+          "signalSide": "context-before",
+          "relation": "付不起却仍迫切想带走，形成情感对比。"
+        }
+      ],
+      "teachingNote": "副词与所修饰动词绑定，迫切之情用 desperately 表达。"
+    },
+    "q-2023-ii-044": {
+      "blankId": "blank-2023-ii-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "It just happened that... 是固定句型，表示碰巧、正好发生，与作者恰好在计划另一次飞行的巧合相符。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "appeared",
+          "meaning": "出现、显得"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "proved",
+          "meaning": "证明是"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "showed",
+          "meaning": "显示、展示"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "It just",
+          "signalSide": "context-before",
+          "targetText": "It just",
+          "relation": "It just happened that 句型成立，主语 it 与 happened 搭配。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "that I was planning another PNP flight",
+          "signalSide": "context-after",
+          "relation": "happened 后接 that 从句，表示碰巧发生某事。"
+        }
+      ],
+      "teachingNote": "识别 it (just) happened that 巧合句型。"
+    },
+    "q-2023-ii-045": {
+      "blankId": "blank-2023-ii-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "另一位飞行员 Karen offered to take Tiffy，offer to do 表示主动提出帮忙，符合义务运送的语境。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "waited",
+          "meaning": "等待"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hurried",
+          "meaning": "匆忙"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "failed",
+          "meaning": "失败、未能"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to take Tiffy from Kansas City to Virginia",
+          "signalSide": "context-after",
+          "targetText": "to take Tiffy from Kansas City to Virginia",
+          "relation": "offered to take，offer to do sth 搭配，表示主动提出做某事。"
+        }
+      ],
+      "teachingNote": "offer to do 表主动提出帮忙，与志愿运送呼应。"
+    },
+    "q-2023-ii-046": {
+      "blankId": "blank-2023-ii-046",
+      "blankNo": 46,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "作者飞到 Topeka 去 pick up Tiffy（接上狗），pick up 表示去接走、载上，与随后把狗带去堪萨斯城的动作链一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "see off",
+          "meaning": "送别"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "look for",
+          "meaning": "寻找"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "hand over",
+          "meaning": "移交、交出"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "fly to Topeka to",
+          "signalSide": "context-before",
+          "targetText": "fly to Topeka to",
+          "relation": "飞到 Topeka 去做某事，pick up Tiffy 即去接走狗。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "pick",
+          "signalSide": "option",
+          "targetText": "pick up",
+          "relation": "pick 表示接、取，与 up 合成去接走的含义。"
+        }
+      ],
+      "teachingNote": "由动作链合成短语义：先飞去接狗 pick up，再运送。"
+    },
+    "q-2023-ii-047": {
+      "blankId": "blank-2023-ii-047",
+      "blankNo": 47,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "主人要把爱犬交给陌生人，seemed very nervous（显得很紧张），与下文丈夫强作镇定的描写情感一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "confused",
+          "meaning": "困惑的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "annoyed",
+          "meaning": "恼怒的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "curious",
+          "meaning": "好奇的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "they seemed very",
+          "signalSide": "context-before",
+          "targetText": "they seemed very",
+          "relation": "系动词 seemed 后接形容词作表语，描述主人的状态。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "trying to be calm",
+          "signalSide": "context-after",
+          "relation": "丈夫努力保持镇定，反衬其内心紧张。"
+        }
+      ],
+      "teachingNote": "形容词情感与上下文一致：强作镇定即内心紧张 nervous。"
+    },
+    "q-2023-ii-048": {
+      "blankId": "blank-2023-ii-048",
+      "blankNo": 48,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "把狗交给陌生人对他来说 this was hard（这很艰难），与不得不离开爱犬的情感一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "fine",
+          "meaning": "没问题的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "common",
+          "meaning": "常见的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "lucky",
+          "meaning": "幸运的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "this was",
+          "signalSide": "context-before",
+          "targetText": "this was",
+          "relation": "this was hard for him，形容词作表语描述此事的难度。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "having to leave his dog",
+          "signalSide": "context-after",
+          "relation": "不得不离开爱犬，表明此事艰难。"
+        }
+      ],
+      "teachingNote": "情感一致：离别爱犬令人难受，故选 hard。"
+    },
+    "q-2023-ii-049": {
+      "blankId": "blank-2023-ii-049",
+      "blankNo": 49,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "主人把狗交给的是初次见面的作者，leave his dog to a stranger（交给一个陌生人），与初识、需要信任的语境吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "coworker",
+          "meaning": "同事"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "passenger",
+          "meaning": "乘客"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "neighbor",
+          "meaning": "邻居"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "having to leave his dog to a",
+          "signalSide": "context-before",
+          "targetText": "having to leave his dog to a",
+          "relation": "leave his dog to a stranger，把狗托付给一个陌生人。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "trust that everything would",
+          "signalSide": "context-after",
+          "relation": "需要信任，正因对方是陌生人才更需信任。"
+        }
+      ],
+      "teachingNote": "由需要信任这一线索推断对方身份是陌生人 stranger。"
+    },
+    "q-2023-ii-050": {
+      "blankId": "blank-2023-ii-050",
+      "blankNo": 50,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "主人信任 everything would work out（一切都会顺利解决），work out 表示妥善解决，符合他寄望事情圆满的心理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "speed up",
+          "meaning": "加速"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "come back",
+          "meaning": "回来"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "take off",
+          "meaning": "起飞、脱下"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "trust that everything would",
+          "signalSide": "context-before",
+          "targetText": "trust that everything would",
+          "relation": "everything would work out，一切都会顺利解决。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "work",
+          "signalSide": "option",
+          "targetText": "work out",
+          "relation": "work 与 out 合成顺利解决之义。"
+        }
+      ],
+      "teachingNote": "短语合成义：work out 表示事情顺利解决。"
+    },
+    "q-2023-ii-051": {
+      "blankId": "blank-2023-ii-051",
+      "blankNo": 51,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "请主人帮忙把狗 load into the plane（装进飞机），load sth into 表示把东西装载入交通工具，符合登机前的动作。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "feed",
+          "meaning": "喂食"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "follow",
+          "meaning": "跟随"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "change",
+          "meaning": "改变、更换"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "into the plane",
+          "signalSide": "context-after",
+          "targetText": "into the plane",
+          "relation": "load Tiffy into the plane，把狗装入飞机，搭配成立。"
+        }
+      ],
+      "teachingNote": "load sth into 表示把……装入交通工具。"
+    },
+    "q-2023-ii-052": {
+      "blankId": "blank-2023-ii-052",
+      "blankNo": 52,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "作者承诺照顾好狗并 call them as soon as we got to Kansas City（一到就打电话给他们），call 表示打电话联系，符合报平安的承诺。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "join",
+          "meaning": "加入"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "leave",
+          "meaning": "离开"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "serve",
+          "meaning": "服务、招待"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "as soon as we got to Kansas City",
+          "signalSide": "context-after",
+          "targetText": "as soon as we got to Kansas City",
+          "relation": "一到堪萨斯城就 call them，call 以他们为宾语，报平安。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "promised to take care of Tiffy",
+          "signalSide": "context-before",
+          "relation": "承诺照看并联系主人，call them 报告进展。"
+        }
+      ],
+      "teachingNote": "由报平安语境锁定 call them 打电话联系。"
+    },
+    "q-2023-ii-053": {
+      "blankId": "blank-2023-ii-053",
+      "blankNo": 53,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "The flight was uneventful（飞行平安无事），and Tiffy was a great passenger，uneventful 与狗表现很好的顺利氛围一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "unnecessary",
+          "meaning": "不必要的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "unexpected",
+          "meaning": "意外的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "unavoidable",
+          "meaning": "不可避免的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "The flight was",
+          "signalSide": "context-before",
+          "targetText": "The flight was",
+          "relation": "形容词作表语描述 flight，uneventful 表示平稳无事。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "Tiffy was a great passenger",
+          "signalSide": "context-after",
+          "relation": "狗表现极佳，印证飞行顺利平稳。"
+        }
+      ],
+      "teachingNote": "由狗表现好推断飞行平安无波折 uneventful。"
+    },
+    "q-2023-ii-054": {
+      "blankId": "blank-2023-ii-054",
+      "blankNo": 54,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "第二天她 flew with Karen（与 Karen 乘机飞行），fly with 与下文 made it back to George 的飞行运送链一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "returned",
+          "meaning": "返回"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "fought",
+          "meaning": "争斗"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "agreed",
+          "meaning": "同意"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "with Karen and made it back to George",
+          "signalSide": "context-after",
+          "targetText": "with Karen and made it back to George",
+          "relation": "flew with Karen，与飞行员一起乘机飞行，符合接力运送。"
+        }
+      ],
+      "teachingNote": "由飞行运送链锁定 flew with Karen。"
+    },
+    "q-2023-ii-055": {
+      "blankId": "blank-2023-ii-055",
+      "blankNo": 55,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "狗安全送达后 George was so thankful（非常感激），并发来感谢邮件附照片，thankful 与他的感激之情一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "generous",
+          "meaning": "慷慨的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "proud",
+          "meaning": "自豪的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "sympathetic",
+          "meaning": "同情的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "He was so",
+          "signalSide": "context-before",
+          "targetText": "He was so",
+          "relation": "形容词作表语描述 George 的情绪，thankful 表示感激。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "sent me a nice e-mail with pictures",
+          "signalSide": "context-after",
+          "relation": "发来感谢邮件，印证 George 的感激之情。"
+        }
+      ],
+      "teachingNote": "由发感谢邮件这一行为锁定情感词 thankful。"
+    }
+  }
+}

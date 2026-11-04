@@ -1,0 +1,662 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2022-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2022-ii-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2022-ii-cloze": {
+      "overview": "记叙文。讲述年轻女子 Jessica 和丈夫通过做“看房人”(house sitter) 的方式实现低成本环球旅行，照看宠物和植物以换取免费住宿。",
+      "affectiveArc": "整体基调积极正面：从介绍这种新奇的省钱旅行方式，到展现夫妻俩的尽心尽责，最后落到让房主满意、自己也乐在其中，呈现温暖向上的故事走向。"
+    }
+  },
+  "blanks": {
+    "q-2022-ii-041": {
+      "blankId": "blank-2022-ii-041",
+      "blankNo": 41,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "下文说他们“花了过去两年时间环游世界”，说明旅行是持续不间断、全身心投入的状态，full-time（全职/全身心）与这种长期旅行的方式相符。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "indoors",
+          "meaning": "在室内地"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "online",
+          "meaning": "在线地"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "single-handed",
+          "meaning": "单枪匹马地、独自地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "have spent the last two years traveling the world",
+          "signalSide": "context-after",
+          "targetText": "doing it",
+          "relation": "“过去两年一直在环游世界”说明这是长期、全职式的旅行，呼应 full-time。"
+        }
+      ],
+      "teachingNote": "抓住后文表示时间跨度和持续性的词组，判断这是长期投入而非短暂行为。"
+    },
+    "q-2022-ii-042": {
+      "blankId": "blank-2022-ii-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "前文一直在谈 travel（旅行），这里 one long, expensive ___ 指代这段旅行本身，vacation（假期/度假）与旅行话题一致，且与下文 make their travel affordable 的省钱话题相呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "game",
+          "meaning": "游戏"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "service",
+          "meaning": "服务"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "procedure",
+          "meaning": "程序、手续"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "semantic-field",
+          "signalText": "make their travel",
+          "signalSide": "context-after",
+          "targetText": "expensive",
+          "relation": "travel 是话题词，vacation 与旅行同属一个语义场。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "one long, expensive",
+          "signalSide": "context-before",
+          "targetText": "vacation",
+          "relation": "long, expensive 修饰 vacation，构成“漫长又昂贵的度假”，搭配合理。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "teachingNote": "名词空先看上下文话题词，选与全文主题同属一个语义场的词。"
+    },
+    "q-2022-ii-043": {
+      "blankId": "blank-2022-ii-043",
+      "blankNo": 43,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "前文说看似是一笔“昂贵”的开销，转折后说夫妻有不寻常的办法 make their travel ___，与 expensive 形成对照，affordable（负担得起的）最贴切，下文 no-cost stays 也证实他们让旅行变便宜。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "safe",
+          "meaning": "安全的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "busy",
+          "meaning": "繁忙的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "helpful",
+          "meaning": "有帮助的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "repetition-echo",
+          "signalText": "expensive",
+          "signalSide": "context-before",
+          "targetText": "make their travel",
+          "relation": "前文 expensive 与空格形成反义对照，提示要把昂贵变为负担得起。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "make their travel",
+          "signalSide": "context-before",
+          "targetText": "affordable",
+          "relation": "make their travel affordable 构成 make + 宾语 + 形容词补足语，搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "no-cost stays",
+          "signalSide": "context-after",
+          "targetText": "affordable",
+          "relation": "下文“零成本入住”印证旅行变得负担得起。"
+        }
+      ],
+      "teachingNote": "遇到 but 转折，要找前文被对照的词，由反义关系锁定形容词。"
+    },
+    "q-2022-ii-044": {
+      "blankId": "blank-2022-ii-044",
+      "blankNo": 44,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "空格修饰 economy，后文 an online group of house sitters 说明这是陌生人之间互相提供资源的模式，正是 sharing economy（共享经济）这一固定说法。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "local",
+          "meaning": "本地的（经济）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "private",
+          "meaning": "私人的（经济）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "agricultural",
+          "meaning": "农业的（经济）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "economy",
+          "signalSide": "context-after",
+          "targetText": "sharing",
+          "relation": "sharing economy 是固定搭配“共享经济”，与后文互助式入住相符。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "an online group of house sitters",
+          "signalSide": "context-after",
+          "targetText": "economy",
+          "relation": "线上看房人群体正是共享经济的典型形态。"
+        }
+      ],
+      "teachingNote": "名词作定语修饰中心词时，先想固定术语搭配，再用下文释义验证。"
+    },
+    "q-2022-ii-045": {
+      "blankId": "blank-2022-ii-045",
+      "blankNo": 45,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "他们是通过线上群组接活的看房人，住进的是素不相识的房主的家，strangers’（陌生人的）与“an online group of house sitters”这种与陌生房主对接的模式一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "parents’",
+          "meaning": "父母的（家）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "co-workers’",
+          "meaning": "同事的（家）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "neighbors’",
+          "meaning": "邻居的（家）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "homes",
+          "signalSide": "context-after",
+          "targetText": "strangers’",
+          "relation": "strangers’ homes 表示“陌生人的家”，与他们入住房主家的语境吻合。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "an online group of house sitters",
+          "signalSide": "context-before",
+          "targetText": "homes",
+          "relation": "线上接活说明房主是互不相识的陌生人。"
+        }
+      ],
+      "teachingNote": "结合人物身份和接洽方式推断所属关系名词，看房人面对的多是陌生房主。"
+    },
+    "q-2022-ii-046": {
+      "blankId": "blank-2022-ii-046",
+      "blankNo": 46,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "看房人之所以替房主喂宠物、浇花，是因为房主不在家，in the homeowner’s absence（在房主不在期间）构成固定搭配，符合看房代管的逻辑。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "favor",
+          "meaning": "恩惠、帮忙"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "defense",
+          "meaning": "防御"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "honor",
+          "meaning": "荣誉"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in the homeowner’s",
+          "signalSide": "context-before",
+          "targetText": "absence",
+          "relation": "in one’s absence 是固定短语“在某人不在时”，absence 与之搭配。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "feed pets and water plants",
+          "signalSide": "context-before",
+          "targetText": "absence",
+          "relation": "代喂宠物、浇花正是房主离家不在时的代管行为。"
+        }
+      ],
+      "teachingNote": "in one’s absence 是高频短语，结合“代为照看”的语境即可锁定 absence。"
+    },
+    "q-2022-ii-047": {
+      "blankId": "blank-2022-ii-047",
+      "blankNo": 47,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "后文 scheduling their days around the pets 说明他们要围绕宠物安排日程，carefully plan their trips（精心计划行程）与这种提前安排的动作一致，plan 的宾语 trips 搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "explain",
+          "meaning": "解释（行程）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "compare",
+          "meaning": "比较（行程）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "complete",
+          "meaning": "完成（行程）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "their trips",
+          "signalSide": "context-after",
+          "targetText": "carefully",
+          "relation": "plan their trips 构成“计划行程”的动宾搭配。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "scheduling their days around the pets",
+          "signalSide": "context-after",
+          "targetText": "their trips",
+          "relation": "“围绕宠物安排日程”是 plan（计划）的具体体现。"
+        }
+      ],
+      "teachingNote": "动词空看宾语和后续动作，scheduling 等同义动作提示“计划”。"
+    },
+    "q-2022-ii-048": {
+      "blankId": "blank-2022-ii-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "前文说要围绕宠物安排日程，因为有些宠物 difficult to ___，结合后文 house sitting offers comfort 和让宠物开心的主旨，please（取悦、使满意）最贴切——有些宠物很难讨好。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "buy",
+          "meaning": "购买（宠物）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "transport",
+          "meaning": "运送（宠物）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "choose",
+          "meaning": "选择（宠物）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the pets that are sometimes difficult to",
+          "signalSide": "context-before",
+          "targetText": "please",
+          "relation": "difficult to please 表示“难以取悦”，宠物作受事，搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "pictures of happy pets",
+          "signalSide": "context-after",
+          "targetText": "please",
+          "relation": "后文“快乐宠物的照片”呼应让宠物满意，印证 please。"
+        }
+      ],
+      "teachingNote": "difficult to + 动词时要联系全文目标，让宠物满意即 please。"
+    },
+    "q-2022-ii-049": {
+      "blankId": "blank-2022-ii-049",
+      "blankNo": 49,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "下文 It’s like staying at a friend’s house 说明住别人家有酒店没有的“家的舒适感”，comfort（舒适、惬意）与“像在朋友家一样”的温馨感受一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "support",
+          "meaning": "支持"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "control",
+          "meaning": "控制"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "attention",
+          "meaning": "关注"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "affective-cue",
+          "signalText": "like",
+          "signalSide": "context-after",
+          "targetText": "at a friend’s house",
+          "relation": "“像在朋友家一样”传递温馨惬意的情感，呼应 comfort。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "they can’t find in a hotel",
+          "signalSide": "context-after",
+          "targetText": "comfort",
+          "relation": "酒店里找不到的正是家一般的舒适感，offers a level of comfort 搭配合理。"
+        }
+      ],
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "teachingNote": "名词空借下文比喻定调，“像在朋友家”指向 comfort 的舒适语义场。"
+    },
+    "q-2022-ii-050": {
+      "blankId": "blank-2022-ii-050",
+      "blankNo": 50,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "句子把住房主家比作 at a friend’s house，谈的是“住宿”体验，staying at a friend’s house（住在朋友家）与全文 stays、house sitting 的住宿主题一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cooking",
+          "meaning": "做饭"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "waiting",
+          "meaning": "等待"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "studying",
+          "meaning": "学习"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "at a friend’s house",
+          "signalSide": "context-after",
+          "targetText": "staying",
+          "relation": "staying at a friend’s house 表示“住在朋友家”，动词与地点搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "no-cost stays",
+          "signalSide": "context-before",
+          "targetText": "staying",
+          "relation": "前文 stays 与 staying 同根复现，确认住宿主题。"
+        }
+      ],
+      "teachingNote": "动名词空回扣全文动作主线，stays 复现锁定 staying。"
+    },
+    "q-2022-ii-051": {
+      "blankId": "blank-2022-ii-051",
+      "blankNo": 51,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "下文 getting accepted as house sitters 说明谈的是被录用的比率，a high success rate（高成功率）与“成功被接受”相呼应，success 与 rate 搭配自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "survival",
+          "meaning": "生存（率）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "growth",
+          "meaning": "增长（率）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "unemployment",
+          "meaning": "失业（率）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "rate in getting accepted as house sitters",
+          "signalSide": "context-after",
+          "targetText": "high",
+          "relation": "success rate 表示“成功率”，与“被接受为看房人”的语境一致。"
+        }
+      ],
+      "teachingNote": "名词 + rate 时由后文事件性质判断，“被录用”指向 success。"
+    },
+    "q-2022-ii-052": {
+      "blankId": "blank-2022-ii-052",
+      "blankNo": 52,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "they always go beyond the homeowner’s ___，下文列举他们额外做的事（拍照、保持整洁、留小礼物），go beyond expectations（超出预期）是固定表达，expectations 与“做得比要求更多”相符。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "budget",
+          "meaning": "预算"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "abilities",
+          "meaning": "能力"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "understanding",
+          "meaning": "理解"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "go beyond the homeowner’s",
+          "signalSide": "context-before",
+          "targetText": "expectations",
+          "relation": "go beyond one’s expectations 是固定搭配“超出某人预期”。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "leaving a nice small gift",
+          "signalSide": "context-after",
+          "targetText": "expectations",
+          "relation": "留小礼物等额外举动正是超出房主预期的体现。"
+        }
+      ],
+      "teachingNote": "go beyond 后接 expectations 是高频搭配，下文额外付出即证据。"
+    },
+    "q-2022-ii-053": {
+      "blankId": "blank-2022-ii-053",
+      "blankNo": 53,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "为了让房主放心，他们会把 plenty of pictures of happy pets 发给房主，sending plenty of pictures（发送大量照片）与向房主汇报宠物状况的行为一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "admiring",
+          "meaning": "欣赏（照片）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "donating",
+          "meaning": "捐赠（照片）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "borrowing",
+          "meaning": "借（照片）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "plenty of pictures of happy pets",
+          "signalSide": "context-after",
+          "targetText": "sending",
+          "relation": "send pictures 表示“发送照片”，动宾搭配合理，是向房主报平安的方式。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "make the homeowner feel",
+          "signalSide": "context-after",
+          "targetText": "sending",
+          "relation": "发照片正是为让房主安心、感到选对了人。"
+        }
+      ],
+      "teachingNote": "动词空看宾语并联系目的，给房主发照片用 send。"
+    },
+    "q-2022-ii-054": {
+      "blankId": "blank-2022-ii-054",
+      "blankNo": 54,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "与“拍快乐宠物照”“留小礼物”并列，都是让房主满意的尽责之举，keeping the house clean（保持房子整洁）符合看房人维护房屋的常理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "open",
+          "meaning": "开着的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "simple",
+          "meaning": "简单的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "empty",
+          "meaning": "空的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "keeping the house",
+          "signalSide": "context-before",
+          "targetText": "clean",
+          "relation": "keep the house clean 构成 keep + 宾语 + 形容词“保持房子整洁”，搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "leaving a nice small gift",
+          "signalSide": "context-after",
+          "targetText": "clean",
+          "relation": "保持整洁与留小礼物并列，都是讨房主欢心的细心之举。"
+        }
+      ],
+      "teachingNote": "keep + 宾语 + 形容词补足语时，结合“尽责让房主满意”选 clean。"
+    },
+    "q-2022-ii-055": {
+      "blankId": "blank-2022-ii-055",
+      "blankNo": 55,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "房主挑选看房人是一种选择，make the right decision（做了正确的决定）是固定搭配，指房主选对了他们这对看房人，与 getting accepted 的录用语境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "guess",
+          "meaning": "猜测"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "response",
+          "meaning": "回应"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "impression",
+          "meaning": "印象"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "they made the right",
+          "signalSide": "context-before",
+          "targetText": "decision",
+          "relation": "make the right decision 是固定搭配“做出正确决定”，decision 与 made the right 搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "getting accepted as house sitters",
+          "signalSide": "context-before",
+          "targetText": "decision",
+          "relation": "房主接受他们正是房主做出的那个正确决定。"
+        }
+      ],
+      "teachingNote": "make the right decision 是高频搭配，结合“房主选人”的语境锁定 decision。"
+    }
+  }
+}

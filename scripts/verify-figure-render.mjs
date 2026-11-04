@@ -50,6 +50,7 @@ const root = repoRootFrom(import.meta.url)
 const { assert, section, summary } = createVerifier('figure-render (fig-token P0)')
 
 const paperAssetsDir = path.join(root, 'app/public/paper-assets')
+const paperAssetRoots = [paperAssetsDir, path.join(root, 'test-fixtures/retired-paper-assets')]
 const FIGURE_TOKEN_ANYWHERE = /\[(?:表|图):\s*fig-/
 
 function readJson(p) {
@@ -62,18 +63,19 @@ function paperAssetParagraphText(group) {
 }
 
 // ─── Discover every published paper + its manifest (zero hardcode) ──────
-const paperIds = readdirSync(paperAssetsDir, { withFileTypes: true })
-  .filter((e) => e.isDirectory())
-  .map((e) => e.name)
-
 const papers = [] // { paperId, assetPath, asset, manifestPath, figures }
-for (const paperId of paperIds) {
-  const assetPath = path.join(paperAssetsDir, paperId, 'latest', 'paper-asset.json')
-  if (!existsSync(assetPath)) continue
-  const asset = readJson(assetPath)
-  const manifestPath = path.join(paperAssetsDir, paperId, 'latest', 'figures', 'manifest.json')
-  const figures = existsSync(manifestPath) ? (readJson(manifestPath).figures || []) : []
-  papers.push({ paperId, assetPath, asset, manifestPath, figures })
+for (const assetRoot of paperAssetRoots) {
+  const paperIds = readdirSync(assetRoot, { withFileTypes: true })
+    .filter((e) => e.isDirectory())
+    .map((e) => e.name)
+  for (const paperId of paperIds) {
+    const assetPath = path.join(assetRoot, paperId, 'latest', 'paper-asset.json')
+    if (!existsSync(assetPath)) continue
+    const asset = readJson(assetPath)
+    const manifestPath = path.join(assetRoot, paperId, 'latest', 'figures', 'manifest.json')
+    const figures = existsSync(manifestPath) ? (readJson(manifestPath).figures || []) : []
+    papers.push({ paperId, assetPath, asset, manifestPath, figures, paperAssetsDir: assetRoot })
+  }
 }
 
 const papersWithManifest = papers.filter((p) => p.figures.length > 0)
@@ -110,7 +112,7 @@ for (const { paperId, asset, figures } of papersWithManifest) {
 section('2. Client — paperAssetSurfaceAdapter.ts (整卷卷面 + 讲评栏 harness)')
 {
   const { buildPaperAssetSurfaceModel } = await import('../app/src/features/paper-intelligence/paperAssetSurfaceAdapter.ts')
-  for (const { paperId, asset, figures, assetPath } of papersWithManifest) {
+  for (const { paperId, asset, figures, assetPath, paperAssetsDir } of papersWithManifest) {
     for (const entry of figures) {
       const group = asset.content.groups[entry.groupId]
       if (!group || group.groupType !== 'reading') continue // adapter only wired for reading groups this cut
@@ -192,7 +194,7 @@ section('3. Client — detail-page passage (<pre> path, passageFigureSegments.ts
 section('4. Server — print-renderer.mjs (web + file imageMode)')
 {
   const { buildPrintHtml } = await import('../server/print-renderer.mjs')
-  for (const { paperId, asset, figures } of papersWithManifest) {
+  for (const { paperId, asset, figures, paperAssetsDir } of papersWithManifest) {
     for (const entry of figures) {
       const group = asset.content.groups[entry.groupId]
       if (!group) continue
@@ -290,7 +292,7 @@ section('4. Server — print-renderer.mjs (web + file imageMode)')
     const detail = { id: group.groupId, title: group.title, groupType: 'reading', passage: { materialText, summary: materialText }, questions: [] }
     const items = [{ detail, note: '', score: 1, sectionTitle: '' }]
     const blocks = [{ type: 'question_group', questionGroupId: group.groupId, score: 1 }]
-    const html = buildPrintHtml({ title: 'T', versionType: 'student', printStyle: 'exam', items, blocks, questionNumberStart: 1, paperAssetsDir, imageMode: 'web' })
+    const html = buildPrintHtml({ title: 'T', versionType: 'student', printStyle: 'exam', items, blocks, questionNumberStart: 1, paperAssetsDir: noManifestPaper.paperAssetsDir, imageMode: 'web' })
     assert(html.includes('print-figure-placeholder'), `${noManifestPaper.paperId}: an unresolvable bracket token renders the placeholder card`)
     assert(html.includes('〔表格：见原卷〕'), `${noManifestPaper.paperId}: placeholder card carries the exact plan.md copy`)
     assert(!html.includes('[表: fig-does-not-exist-anywhere]'), `${noManifestPaper.paperId}: the unresolvable raw token itself never reaches the output`)
@@ -304,7 +306,7 @@ section('5. Whole-library anti-pattern sweep (no render output contains a raw fi
 
   let sweptGroups = 0
   let markerBearingGroups = 0
-  for (const { paperId, asset } of papers) {
+  for (const { paperId, asset, paperAssetsDir } of papers) {
     for (const [groupId, group] of Object.entries(asset.content.groups || {})) {
       if (!group?.passage?.paragraphs) continue
       const materialText = paperAssetParagraphText(group)

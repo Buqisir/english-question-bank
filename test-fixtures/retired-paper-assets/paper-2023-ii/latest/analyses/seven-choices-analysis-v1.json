@@ -1,0 +1,331 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2023-ii",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2023-ii-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "opus",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus",
+    "reviewedAt": "2026-06-05",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2023-ii-seven-choices": {
+      "overview": "本文是一位在社交媒体分享创作历程的画家写给艺术初学者的建议短文，以若干条分点小贴士（start small、paint often、challenge yourself、share your work 等）展开。七选五的五个空分布在各条建议内部或开头，需要根据每条建议的话题场与前后句的衔接关系，选出概括或承接的句子。",
+      "discourseStructure": {
+        "summary": "首段提出主题：作者常被问如何开始艺术之旅，于是整理了一些建议。随后用分点列出几条具体建议，每条由一个要点句加补充说明构成。结尾段对整个艺术旅程做收束鼓励。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "开篇引入",
+            "paragraphIds": [
+              "para-2023-ii-seven-title"
+            ],
+            "summary": "作者作为分享创作的画家，常被问如何开启艺术之旅，于是给出几条入门建议。"
+          },
+          {
+            "unitId": "unit-tips",
+            "heading": "分点建议",
+            "paragraphIds": [
+              "para-2023-ii-seven-p1",
+              "para-2023-ii-seven-p2",
+              "para-2023-ii-seven-p3",
+              "para-2023-ii-seven-p4"
+            ],
+            "summary": "依次给出从小处入手、勤画且写生、不断挑战自我、分享作品获取反馈等具体建议，每条都有补充说明。"
+          },
+          {
+            "unitId": "unit-close",
+            "heading": "结尾鼓励",
+            "paragraphIds": [
+              "para-2023-ii-seven-p5"
+            ],
+            "summary": "提醒艺术之路并非坦途，要坚持、给时间、付出努力，终将收获回报。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2023-ii-036": {
+      "blankId": "blank-2023-ii-036",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Start small",
+        "small studies",
+        "look back on your journey",
+        "to see how far you’ve come"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-ii-seven-p1",
+        "headingAnchor": "Start small.",
+        "beforeQuote": "may be a springboard for more complex works in the future.",
+        "afterQuote": "You’ll want to look back on your journey to see how far you’ve come."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "beginner art",
+          "signalSide": "option",
+          "targetText": "small studies / Start small",
+          "relation": "选项中的 beginner art 与本条 Start small、small studies 同属“初学者作品”话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "look back on your journey",
+          "signalSide": "context-after",
+          "targetText": "Don’t throw away your beginner art",
+          "relation": "空后“回看自己的历程”说明要保留早期作品，与“别扔掉初学作品”逻辑一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "throw away",
+          "signalSide": "option",
+          "targetText": "look back / how far you’ve come",
+          "relation": "Don’t throw away 与空后要“回看进步”呼应：留着旧作才能对比成长。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "本条主题是“从小处入手、画小幅习作”，空后说要回看历程、看自己走了多远，因此应保留初学者的作品，选项 C“别扔掉你初学时的作品”正好承上启下。",
+        "matchedClues": [
+          {
+            "contextSide": "look back on your journey to see how far you’ve come",
+            "optionSide": "Don’t throw away your beginner art",
+            "relation": "想回看成长就必须留着旧作，两句构成“保留—回看”的因果衔接。"
+          }
+        ]
+      },
+      "keyDistractors": [],
+      "teachingNote": "锁定空后“回看历程/看进步”这一线索，反推出前面要保留早期作品。"
+    },
+    "q-2023-ii-037": {
+      "blankId": "blank-2023-ii-037",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Paint often",
+        "put in those brush miles",
+        "paint from life as much as possible",
+        "no better way to improve"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-ii-seven-p2",
+        "headingAnchor": "Paint often and paint from life.",
+        "beforeQuote": "paint from life as much as possible.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "repetition",
+          "signalSide": "option",
+          "targetText": "Paint often / as much as possible",
+          "relation": "选项 repetition（反复练习）与本条 Paint often、as much as possible 同一话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "put in those brush miles",
+          "signalSide": "context-before",
+          "targetText": "painting muscle memory",
+          "relation": "“多积累运笔里程”正是练出 painting muscle memory（绘画肌肉记忆）的方式。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "muscle memory",
+          "signalSide": "option",
+          "targetText": "brush miles / Paint often",
+          "relation": "muscle memory 概括前文反复运笔的结果，是“多画”这条建议的收束句。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "本条强调多画、多写生、多积累运笔里程，空在段末作收束。选项 G“你会练出只有反复练习才能获得的绘画肌肉记忆”正好点明“多画”的成果。",
+        "matchedClues": [
+          {
+            "contextSide": "put in those brush miles / paint from life as much as possible",
+            "optionSide": "painting muscle memory that only comes with repetition",
+            "relation": "反复大量练习 → 形成肌肉记忆，option 是 context 的自然结果与总结。"
+          }
+        ]
+      },
+      "keyDistractors": [],
+      "teachingNote": "段末空常作收束句，抓住“反复练习”这一话题场，选出概括其成果的句子。"
+    },
+    "q-2023-ii-038": {
+      "blankId": "blank-2023-ii-038",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "challenge yourself to try something new",
+        "Artistic growth can be a bit painful",
+        "taking on challenges",
+        "took up a challenge"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-ii-seven-p3",
+        "headingAnchor": "Continually challenge yourself to try something new.",
+        "beforeQuote": "Continually challenge yourself to try something new.",
+        "afterQuote": "Artistic growth can be a bit painful."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "comfort zone",
+          "signalSide": "option",
+          "targetText": "challenge yourself / try something new",
+          "relation": "Get out of your comfort zone 与本条“challenge yourself、try something new”是同义话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "challenge yourself to try something new",
+          "signalSide": "context-before",
+          "targetText": "Get out of your comfort zone",
+          "relation": "“不断挑战自我、尝试新事物”就是“走出舒适区”的具体说法。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Artistic growth can be a bit painful",
+          "signalSide": "context-after",
+          "targetText": "Get out of your comfort zone",
+          "relation": "空后“成长会有点痛苦”正解释走出舒适区为何不易，与选项衔接。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "本条要点是“不断挑战自我、尝试新事物”，空后说艺术成长会有点痛苦。选项 A“走出你的舒适区”与挑战自我同义，且为后文“成长有点痛苦”做铺垫。",
+        "matchedClues": [
+          {
+            "contextSide": "Continually challenge yourself to try something new / Artistic growth can be a bit painful",
+            "optionSide": "Get out of your comfort zone",
+            "relation": "走出舒适区 = 挑战自我，且自然引出“成长伴随痛苦”的说明。"
+          }
+        ]
+      },
+      "keyDistractors": [],
+      "teachingNote": "把“挑战自我、尝试新事物”与“走出舒适区”识别为同义话题场即可定位答案。"
+    },
+    "q-2023-ii-039": {
+      "blankId": "blank-2023-ii-039",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Seeking and accepting constructive feedback",
+        "I post my work on social media",
+        "met some of the kindest people",
+        "feel valued and respected"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-ii-seven-p4",
+        "headingAnchor": "",
+        "beforeQuote": "",
+        "afterQuote": "Seeking and accepting constructive feedback (反馈) is crucial to growth."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Share your work",
+          "signalSide": "option",
+          "targetText": "I post my work on social media",
+          "relation": "选项 Share your work 与空后 I post my work on social media 同指“分享/展示作品”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "constructive feedback",
+          "signalSide": "context-after",
+          "targetText": "Share your work",
+          "relation": "本条要点是“分享作品”，分享后才能寻求并接受建设性反馈，二者构成话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "I post my work on social media",
+          "signalSide": "context-after",
+          "targetText": "Share your work if you feel comfortable",
+          "relation": "空后“我把作品发到社交媒体”正是“分享作品”这一要点的具体落实。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "本空位于该建议条目的开头，作要点句。空后讲寻求并接受反馈、把作品发到社交媒体，选项 D“如果你觉得自在就分享你的作品”正是这条建议的主题句。",
+        "matchedClues": [
+          {
+            "contextSide": "Seeking and accepting constructive feedback / I post my work on social media",
+            "optionSide": "Share your work if you feel comfortable doing so",
+            "relation": "“分享作品”是要点，后文“寻求反馈、发到社交媒体”是其展开与例证。"
+          }
+        ]
+      },
+      "keyDistractors": [],
+      "teachingNote": "段首空多为要点句，用空后展开内容（发作品、求反馈）反推这条建议的主题。"
+    },
+    "q-2023-ii-040": {
+      "blankId": "blank-2023-ii-040",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "won’t follow a straight path",
+        "Push through",
+        "give it time and put in the effort",
+        "harvest the rewards"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2023-ii-seven-p5",
+        "headingAnchor": "",
+        "beforeQuote": "The journey you’re on won’t follow a straight path.",
+        "afterQuote": "Push through, give it time and put in the effort."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "won’t follow a straight path",
+          "signalSide": "context-before",
+          "targetText": "hit roadblocks / feel discouraged",
+          "relation": "“旅程不会是一条直路”与选项“会遇到障碍、有时感到气馁”同属“受挫”话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "roadblocks",
+          "signalSide": "option",
+          "targetText": "won’t follow a straight path",
+          "relation": "roadblocks（障碍）正是“路不平直”的具体表现，承接前句。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Push through",
+          "signalSide": "context-after",
+          "targetText": "discouraged at times",
+          "relation": "空后“坚持挺过去”正是针对“遇阻、气馁”给出的应对，前后呼应。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "结尾段先说旅程不会一帆风顺，空后说要坚持挺过去、给时间、肯付出。选项 E“你会遇到障碍，有时会感到气馁”正好衔接前句的“不平直”并引出后文的“坚持”劝勉。",
+        "matchedClues": [
+          {
+            "contextSide": "won’t follow a straight path / Push through, give it time",
+            "optionSide": "You’ll hit roadblocks, and you’ll feel discouraged at times",
+            "relation": "“不平直”→“遇阻气馁”→“坚持挺过去”，三句构成连贯的转折与劝勉链。"
+          }
+        ]
+      },
+      "keyDistractors": [],
+      "teachingNote": "夹在“路不平直”与“坚持挺过去”之间的空，要选描述具体困难与气馁感受的句子来承上启下。"
+    }
+  }
+}

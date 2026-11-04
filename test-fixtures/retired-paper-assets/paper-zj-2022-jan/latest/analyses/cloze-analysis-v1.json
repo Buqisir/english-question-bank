@@ -1,0 +1,889 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-zj-2022-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2022-jan-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2022-jan-cloze": {
+      "overview": "记叙文。七十四岁的 Beverley Burdeyney 因眼睛干涩不适而深受困扰，发现许多老人也默默忍受同样的眼疾却羞于启齿；她转而为以色列特拉维夫大学的一项干细胞眼科研究筹款，并呼吁人们正视而非忽视衰老带来的眼部问题。",
+      "affectiveArc": "由个人的无助与困扰起笔，转入对他人沉默忍受的同情，最终走向积极行动与希望，是先抑后扬、由困境到担当的走向。"
+    }
+  },
+  "blanks": {
+    "q-zj-2022-jan-036": {
+      "blankId": "blank-zj-2022-jan-036",
+      "blankNo": 36,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "全文反复出现 eye research、eye care、bring light into people's eyes，主题词锁定眼睛；dryness and discomfort（干涩与不适）正是眼睛出问题的典型症状，故选 eyes。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "throat",
+          "meaning": "喉咙，与全文眼科主题不呼应"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "skin",
+          "meaning": "皮肤"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "lungs",
+          "meaning": "肺"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "dryness and discomfort",
+          "signalSide": "context-after",
+          "targetText": "problems with her eyes",
+          "relation": "干涩与不适是眼睛的典型症状，与 eyes 构成器官—症状搭配。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "eye research",
+          "signalSide": "context-after",
+          "targetText": "eyes",
+          "relation": "后文 eye research、eye care 反复点题，主题词场锁定 eyes。"
+        }
+      ],
+      "teachingNote": "完形首句的器官/话题词常被后文反复出现的同场词反向锁定，读到 eye care 即可回填首空。"
+    },
+    "q-zj-2022-jan-037": {
+      "blankId": "blank-zj-2022-jan-037",
+      "blankNo": 37,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "go through 意为“经历（痛苦/困难）”，与宾语 a terrible experience 构成固定搭配；结合下句 felt so helpless（感到无助）说明她正身处糟糕经历之中。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "getting over",
+          "meaning": "克服、从……中恢复，指经历已过去"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "holding on",
+          "meaning": "坚持、握住不放"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "passing down",
+          "meaning": "把……传下去（给后代）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a terrible experience",
+          "signalSide": "context-after",
+          "targetText": "going through a terrible experience",
+          "relation": "go through 直接搭配 experience，表示“经历”。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "I felt so helpless and insecure",
+          "signalSide": "context-after",
+          "targetText": "going through",
+          "relation": "无助不安说明她正处于而非已走出这段经历。"
+        }
+      ],
+      "teachingNote": "动词短语题先看宾语：experience 与 go through 是高频固定搭配，再用情感线验证时态语义。"
+    },
+    "q-zj-2022-jan-038": {
+      "blankId": "blank-zj-2022-jan-038",
+      "blankNo": 38,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "the quality of my life 即“生活质量”，是固定搭配；眼疾让她感到无助不安，正是因为生活质量受到影响，语义连贯。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "story",
+          "meaning": "故事"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "treatment",
+          "meaning": "治疗、处理"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "relationship",
+          "meaning": "（人际）关系"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the quality of my",
+          "signalSide": "context-before",
+          "targetText": "quality of my life",
+          "relation": "quality of life（生活质量）为固定搭配，quality 直接限定 life。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "so helpless and insecure",
+          "signalSide": "context-before",
+          "targetText": "life",
+          "relation": "无助不安源于生活质量下降，指向 life。"
+        }
+      ],
+      "teachingNote": "quality of ___ 这类抽象搭配优先想 quality of life，是中英共有的高频表达。"
+    },
+    "q-zj-2022-jan-039": {
+      "blankId": "blank-zj-2022-jan-039",
+      "blankNo": 39,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "她找的是“有同样问题”的朋友才会发现彼此都在默默忍受，similar problems（类似问题）与下文 suffering、more and more are suffering 的同病相怜逻辑一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "various",
+          "meaning": "各种各样的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "personal",
+          "meaning": "私人的、个人的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "special",
+          "meaning": "特殊的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "friends who had",
+          "signalSide": "context-before",
+          "targetText": "similar problems",
+          "relation": "修饰 problems，与说话人自身的眼疾相对照，需为“类似的”。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "more and more are suffering",
+          "signalSide": "context-after",
+          "targetText": "similar",
+          "relation": "越来越多人遭受同样困扰，回应 similar 的同病逻辑。"
+        }
+      ],
+      "teachingNote": "形容词修饰名词时回看说话人处境：要与自身情况“同类”才能引出共同遭遇，故选 similar。"
+    },
+    "q-zj-2022-jan-040": {
+      "blankId": "blank-zj-2022-jan-040",
+      "blankNo": 40,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "suffer in silence 意为“默默忍受、不声张”，与紧接的 Nobody chooses to talk about it（没人愿意谈论）形成同义呼应，故选 silence。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "turn",
+          "meaning": "（in turn）依次、转而"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "peace",
+          "meaning": "（in peace）平静地"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "vain",
+          "meaning": "（in vain）徒劳地"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "suffering in",
+          "signalSide": "context-before",
+          "targetText": "suffering in silence",
+          "relation": "suffer in silence 为固定搭配，表示默默承受。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "Nobody chooses to talk about it",
+          "signalSide": "context-after",
+          "targetText": "silence",
+          "relation": "没人愿意谈论正是“沉默”的具体化，回扣 silence。"
+        }
+      ],
+      "teachingNote": "介词短语题用紧邻的下一句解释：talk about it 的否定即 silence，互为注脚。"
+    },
+    "q-zj-2022-jan-041": {
+      "blankId": "blank-zj-2022-jan-041",
+      "blankNo": 41,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "前句说大家默默忍受、没人愿谈，because it seems so insignificant 给出原因——人们觉得这事“微不足道”才羞于或懒于启齿，与 only neglect（只是被忽视）的主旨一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "unbearable",
+          "meaning": "无法忍受的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "abnormal",
+          "meaning": "反常的、不正常的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "disturbing",
+          "meaning": "令人不安的、扰人的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "it seems so",
+          "signalSide": "context-before",
+          "targetText": "seems so insignificant",
+          "relation": "系表结构 seems so + 形容词，描述这件事给人的印象。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "there’s only neglect",
+          "signalSide": "context-after",
+          "targetText": "insignificant",
+          "relation": "后文 only neglect（只是被忽视）呼应“微不足道”，故被人轻视而不谈。"
+        }
+      ],
+      "teachingNote": "解释“没人愿谈”的原因要找贬低性的形容词，insignificant 与全文 neglect 主旨同向。"
+    },
+    "q-zj-2022-jan-042": {
+      "blankId": "blank-zj-2022-jan-042",
+      "blankNo": 42,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "lives are being compromised 意为“生活（质量）正受到损害/打折扣”，与前文 quality of life was affected、more and more are suffering 的负面影响一脉相承。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "forgotten",
+          "meaning": "被遗忘"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "substituted",
+          "meaning": "被替代"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "separated",
+          "meaning": "被分开、被隔离"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "lives are being",
+          "signalSide": "context-before",
+          "targetText": "lives are being compromised",
+          "relation": "主语 lives 与 compromise 构成“生活受损”的施受关系。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the quality of my",
+          "signalSide": "context-before",
+          "targetText": "compromised",
+          "relation": "前文生活质量受影响，此处升级为 lives are being compromised。"
+        }
+      ],
+      "teachingNote": "主语是 lives 且全文基调为受害时，compromise（损害）比“遗忘/替代”更贴合施受逻辑。"
+    },
+    "q-zj-2022-jan-043": {
+      "blankId": "blank-zj-2022-jan-043",
+      "blankNo": 43,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "后文 The research team、raising money for the project 反复称之为 project/team，说明这是一个持续的研究“项目”，an eye research program 与之呼应，故选 program。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "course",
+          "meaning": "课程"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "paper",
+          "meaning": "论文"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "conference",
+          "meaning": "会议"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "semantic-field",
+          "signalText": "the project",
+          "signalSide": "context-after",
+          "targetText": "research program",
+          "relation": "后文 the project 指代此空，program 与 project 同指一个研究项目。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "eye research",
+          "signalSide": "context-before",
+          "targetText": "eye research program",
+          "relation": "research program 为固定搭配，指研究项目/计划。"
+        }
+      ],
+      "teachingNote": "名词空看后文怎么复指：被 project/team 反复指代的，就是一个长期 program 而非一次性 conference。"
+    },
+    "q-zj-2022-jan-044": {
+      "blankId": "blank-zj-2022-jan-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "The research team included Canadian doctor… 意为研究团队“包含/吸纳”了这位加拿大医生，下文盛赞他在干细胞眼科上的开创性工作，说明他是团队的得力成员，故选 included。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "informed",
+          "meaning": "通知、告知（某人）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "doubted",
+          "meaning": "怀疑"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "dismissed",
+          "meaning": "解雇、不予理会"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "The research team",
+          "signalSide": "context-before",
+          "targetText": "team included … doctor",
+          "relation": "主语 team 与宾语 doctor 之间，include 表示“团队成员包含某人”。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "Seeing a ray of hope",
+          "signalSide": "context-after",
+          "targetText": "included",
+          "relation": "团队纳入这位专家后她看到一线希望，说明他被吸纳进团队而非被怀疑或解雇。"
+        }
+      ],
+      "teachingNote": "“团队 + 某专家”之间的动词，配合后文对专家的肯定评价，应取正面的 include。"
+    },
+    "q-zj-2022-jan-045": {
+      "blankId": "blank-zj-2022-jan-045",
+      "blankNo": 45,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "紧接的 Seeing a ray of hope（看到一线希望）说明这位医生的工作令人振奋，ground-breaking work（开创性的工作）用干细胞做眼科治疗，正是带来希望的突破性研究。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "part-time",
+          "meaning": "兼职的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "controversial",
+          "meaning": "有争议的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "voluntary",
+          "meaning": "自愿的、志愿的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "work on eye care using stem cells",
+          "signalSide": "context-after",
+          "targetText": "ground-breaking work",
+          "relation": "用干细胞做眼科治疗的工作，与 ground-breaking（开创性）相配。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "Seeing a ray of hope",
+          "signalSide": "context-after",
+          "targetText": "ground-breaking",
+          "relation": "一线希望表明该工作令人振奋，须为积极的“突破性”而非“有争议”。"
+        }
+      ],
+      "teachingNote": "形容词的褒贬要与紧邻情感线一致：a ray of hope 锁定积极义，排除 controversial。"
+    },
+    "q-zj-2022-jan-046": {
+      "blankId": "blank-zj-2022-jan-046",
+      "blankNo": 46,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "raise money for the project（为项目筹款）是固定搭配，下文 she has raised ＄110,000 with another ＄40,000 用具体金额证实她筹的是钱，故选 money。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "standards",
+          "meaning": "标准"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "awareness",
+          "meaning": "意识、关注"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "questions",
+          "meaning": "问题、疑问"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "began raising",
+          "signalSide": "context-before",
+          "targetText": "raising money for the project",
+          "relation": "raise money 为固定搭配，宾语为 money。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "she has raised ＄110,000",
+          "signalSide": "context-after",
+          "targetText": "money",
+          "relation": "后文具体美元金额证实所筹之物是钱。"
+        }
+      ],
+      "teachingNote": "raise + ___ 看后文有无金额：出现具体￥/$数字即锁定 money。"
+    },
+    "q-zj-2022-jan-047": {
+      "blankId": "blank-zj-2022-jan-047",
+      "blankNo": 47,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "So far（到目前为止）引出阶段性成果，与现在完成时 she has raised ＄110,000 时态呼应，并为后句 There is still a long way to go（仍有很长的路）埋下对比，故选 So far。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "As ever",
+          "meaning": "一如既往地"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "In return",
+          "meaning": "作为回报"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Once again",
+          "meaning": "再一次"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "she has raised",
+          "signalSide": "context-after",
+          "targetText": "So far, she has raised",
+          "relation": "So far 与现在完成时 has raised 固定搭配，表示“迄今为止”的成果。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "There is still a long way to go",
+          "signalSide": "context-after",
+          "targetText": "So far",
+          "relation": "末段“仍有很长的路”与“目前已筹得”形成阶段—前路对比，呼应 So far。"
+        }
+      ],
+      "teachingNote": "句首连接副词盯时态：has done 常与 so far 搭配，表“截至目前”的进展。"
+    },
+    "q-zj-2022-jan-048": {
+      "blankId": "blank-zj-2022-jan-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "句意为已筹得￥110,000，另有￥40,000 仍“预期/有望到账”；with another ＄40,000 expected 用过去分词作后置定语，表示这笔钱尚未到手但在预期之中，与 So far 的进行中状态一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "wasted",
+          "meaning": "被浪费的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "donated",
+          "meaning": "已被捐出的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "earned",
+          "meaning": "（靠劳动）赚得的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "another ＄40,000",
+          "signalSide": "context-before",
+          "targetText": "＄40,000 expected",
+          "relation": "another ＄40,000 与 expected 构成“另有四万有望到账”的修饰关系。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "she has raised ＄110,000",
+          "signalSide": "context-before",
+          "targetText": "expected",
+          "relation": "“已筹得￥110,000” + “另有一笔可期”，expected 表明这笔尚未到位。"
+        }
+      ],
+      "teachingNote": "已得款项之外的 another 数额，用 expected 表“预期到账”，区别于已完成的 donated。"
+    },
+    "q-zj-2022-jan-049": {
+      "blankId": "blank-zj-2022-jan-049",
+      "blankNo": 49,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "get more people to understand that there are solutions（让更多人明白存在解决办法），understand 与 that 引导的事实宾语从句搭配自然，呼应她唤起认知、号召行动的主旨。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "imagine",
+          "meaning": "想象"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "confirm",
+          "meaning": "证实、确认"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "remember",
+          "meaning": "记住"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "that there are solutions",
+          "signalSide": "context-after",
+          "targetText": "understand that there are solutions",
+          "relation": "understand 接 that 从句，表示“明白存在解决办法”这一事实。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "Don’t stand",
+          "signalSide": "context-after",
+          "targetText": "understand",
+          "relation": "下文号召别旁观、要行动，前提是让人先“明白”有办法可解。"
+        }
+      ],
+      "teachingNote": "get sb to ___ that…（既成事实）优先用 understand/realize，而非表臆测的 imagine。"
+    },
+    "q-zj-2022-jan-050": {
+      "blankId": "blank-zj-2022-jan-050",
+      "blankNo": 50,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "她已七十四岁，still working as a personal trainer after retirement（退休后仍在做私人教练）才与“高龄仍工作”及全文 no old age, only neglect 的不服老主旨吻合，故选 retirement。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "childbirth",
+          "meaning": "分娩、生育"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "graduation",
+          "meaning": "毕业"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "marriage",
+          "meaning": "结婚"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "still working as a personal trainer after",
+          "signalSide": "context-before",
+          "targetText": "working after retirement",
+          "relation": "“退休后仍在工作”是固定语义搭配，after retirement 与 still working 呼应。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "there is no old",
+          "signalSide": "context-after",
+          "targetText": "retirement",
+          "relation": "“没有所谓衰老”的不服老主旨支持“退休后仍在工作”。"
+        }
+      ],
+      "teachingNote": "高龄人物 still working after ___，结合年龄即可锁定 retirement。"
+    },
+    "q-zj-2022-jan-051": {
+      "blankId": "blank-zj-2022-jan-051",
+      "blankNo": 51,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "there is no old age, there’s only neglect（没有所谓的衰老，只有忽视）是她的核心金句；old age（年老）与 neglect 形成“不是老，而是被忽视”的对照，故选 age。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "time",
+          "meaning": "时间"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "rule",
+          "meaning": "规则"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "tale",
+          "meaning": "故事、传说"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "there is no old",
+          "signalSide": "context-before",
+          "targetText": "no old age",
+          "relation": "old 直接修饰 age，old age（年老）为固定搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "there’s only neglect",
+          "signalSide": "context-after",
+          "targetText": "age",
+          "relation": "“只有忽视”与“没有衰老”对举，凸显问题不在年龄而在被忽视。"
+        }
+      ],
+      "teachingNote": "old + ___ 的固定搭配优先 old age，再用对举句 only neglect 验证主旨。"
+    },
+    "q-zj-2022-jan-052": {
+      "blankId": "blank-zj-2022-jan-052",
+      "blankNo": 52,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "Don't stand still, do something about it（别站着不动，要采取行动）中 stand still 意为“站着不动、无所作为”，与 do something 形成“别旁观，要行动”的鲜明对照，故选 still。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "straight",
+          "meaning": "（stand straight）站直"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "firm",
+          "meaning": "（stand firm）立场坚定"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "alone",
+          "meaning": "（stand alone）独自站立、孤立"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Don’t stand",
+          "signalSide": "context-before",
+          "targetText": "stand still",
+          "relation": "stand still 表示“静止不动、无所作为”，still 修饰 stand。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "do something about it",
+          "signalSide": "context-after",
+          "targetText": "still",
+          "relation": "“去做点什么”与“别站着不动”相对，stand still 反衬行动号召。"
+        }
+      ],
+      "teachingNote": "Don't … , do something 的对照结构里，前半须表“无所作为”，stand still 正合此意。"
+    },
+    "q-zj-2022-jan-053": {
+      "blankId": "blank-zj-2022-jan-053",
+      "blankNo": 53,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "末段在前文引语之外又补充新内容，Ms. Burdeyney added that she was hoping to do more（补充说她希望做更多），add that… 表示“补充说”，与随后追加的话语吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "commented",
+          "meaning": "评论"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "learned",
+          "meaning": "得知、学到"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "reminded",
+          "meaning": "提醒"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "hoping to do more",
+          "signalSide": "context-after",
+          "targetText": "added that she was hoping to do more",
+          "relation": "add that 引导宾语从句，表示在已有表述上“补充说”。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "I just want to bring",
+          "signalSide": "context-after",
+          "targetText": "added",
+          "relation": "后续又一句直接引语是新追加的表态，呼应 add“补充”。"
+        }
+      ],
+      "teachingNote": "在前文已有引语后再添新话，引述动词用 add（补充说），区别于首次表态的 say。"
+    },
+    "q-zj-2022-jan-054": {
+      "blankId": "blank-zj-2022-jan-054",
+      "blankNo": 54,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "宾语是 into people's eyes，bring light into people's eyes（为人们的眼睛带来光明）既照应眼科治疗的主题，又承接 a ray of hope 的“光”意象，故选 light。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "joy",
+          "meaning": "欢乐"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "color",
+          "meaning": "色彩"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "beauty",
+          "meaning": "美"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "into people’s eyes",
+          "signalSide": "context-after",
+          "targetText": "bring light into people’s eyes",
+          "relation": "宾语为 eyes，bring light into one's eyes 喻指“带来光明”，与眼科主题相配。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "a ray of hope",
+          "signalSide": "context-before",
+          "targetText": "light",
+          "relation": "前文 a ray of hope（一线希望）的光意象延续到 bring light。"
+        }
+      ],
+      "teachingNote": "结尾升华句看宾语与已出现的意象：eyes + 前文 a ray of hope 共同锁定 light。"
+    },
+    "q-zj-2022-jan-055": {
+      "blankId": "blank-zj-2022-jan-055",
+      "blankNo": 55,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "this is just the beginning（这只是个开始），与紧接的 There is still a long way to go（还有很长的路要走）构成“才刚起步、前路尚远”的呼应，故选 beginning。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "future",
+          "meaning": "未来"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "truth",
+          "meaning": "真相"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "meaning",
+          "meaning": "意义"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "logical-connector",
+          "signalText": "There is still a long way to go",
+          "signalSide": "context-after",
+          "targetText": "the beginning",
+          "relation": "“还有很长的路要走”说明现在仅是起点，呼应 beginning。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "this is just the",
+          "signalSide": "context-before",
+          "targetText": "just the beginning",
+          "relation": "this is just the beginning 为固定表达，表示“仅仅是个开始”。"
+        }
+      ],
+      "teachingNote": "结尾 this is just the ___ 配 a long way to go，固定锁定 beginning（起步）。"
+    }
+  }
+}

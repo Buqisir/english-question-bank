@@ -1,0 +1,368 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2021-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2021-jia-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-19",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2021-jia-seven-choices": {
+      "overview": "本文是一篇说明文，主题为以旧换新的“换衣派对”（clothing swap），主张通过交换衣物代替购物来环保地处理旧衣。全文先点明换衣派对的概念与好处，再以要点形式给出举办换衣派对的若干操作建议。五个空均出现在“建议清单”结构中，需要依据指代关系与话题场来选择恰当的整句。",
+      "discourseStructure": {
+        "summary": "文章先用回收话题引出旧衣处理难题并给出对策（换衣派对），再说明换衣派对成功的要素，随后以圆点条目逐条给出具体操作建议：邀请人数、自带衣物、衣物分类摆放与试穿、设定开始时间与气氛营造。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "Swap. Don’t Shop!",
+            "paragraphIds": [
+              "para-2021-jia-seven-title",
+              "para-2021-jia-seven-p1",
+              "para-2021-jia-seven-p2"
+            ],
+            "summary": "由回收话题引出买卖新衣不环保的问题，提出“举办换衣派对”这一对策，并指出成功换衣派对取决于选衣、组织和趣味性。"
+          },
+          {
+            "unitId": "unit-tips",
+            "heading": "Here are a few pointers.",
+            "paragraphIds": [
+              "para-2021-jia-seven-p3",
+              "para-2021-jia-seven-p4",
+              "para-2021-jia-seven-p5",
+              "para-2021-jia-seven-p6"
+            ],
+            "summary": "以圆点条目给出操作建议：控制邀请人数、让大家带干净好衣并备袋、按类摆放并试穿、设定开始时间并持续放音乐营造派对气氛。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2021-jia-036": {
+      "blankId": "blank-2021-jia-036",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "what to do with all those perfectly-good-but-you’re-maybe-a-little-sick-of-them clothes",
+        "get rid of your used clothes",
+        "score clothes from your friends",
+        "have a party"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-jia-seven-p1",
+        "beforeQuote": "So what to do with all those perfectly-good-but-you’re-maybe-a-little-sick-of-them clothes piled on your bedroom floor?",
+        "afterQuote": "It’s the best way to get rid of your used clothes, score clothes from your friends, and have a party all at the same time."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "It",
+          "signalSide": "context-after",
+          "targetText": "Hold a clothing swap",
+          "relation": "空后 It 回指所选答案“Hold a clothing swap”，It 即指这个换衣派对。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "swap",
+          "signalSide": "option",
+          "targetText": "It’s the best way",
+          "relation": "选项中的 clothing swap 是空后 It 的指代对象，构成先行词—代词的指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "get rid of your used clothes",
+          "signalSide": "context-after",
+          "targetText": "Hold a clothing swap",
+          "relation": "空后“处理旧衣、和朋友互换、办派对”正是换衣派对的功能，与选项话题场一致。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "空前用问句问“这些旧衣怎么办”，B 给出答案“举办一个换衣派对”，且空后的 It 正回指这个派对，前后衔接自然。",
+        "matchedClues": [
+          {
+            "contextSide": "what to do with ... clothes piled on your bedroom floor?",
+            "optionSide": "Hold a clothing swap",
+            "relation": "B 直接回答“旧衣怎么办”的设问。"
+          },
+          {
+            "contextSide": "It’s the best way to get rid of your used clothes",
+            "optionSide": "clothing swap",
+            "relation": "空后 It 指代换衣派对，并列出其三大好处。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E（捐掉剩余衣物）也涉及处理旧衣，但它是结尾善后步骤，无法被空后 It 回指为“最好的办法”，且不能回答设问。"
+        }
+      ],
+      "teachingNote": "段末空若紧跟代词 It，应先确定 It 的指代对象，选能被其回指且回答上文设问的整句。"
+    },
+    "q-2021-jia-037": {
+      "blankId": "blank-2021-jia-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.logical-connector"
+      ],
+      "topicClues": [
+        "Invite 5-10 people",
+        "a nice selection",
+        "not be enough things to choose from",
+        "more than that"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-jia-seven-p3",
+        "beforeQuote": "Invite 5-10 people so you have a nice selection.",
+        "afterQuote": ", and there may not be enough things to choose from; more than that, and it becomes uncontrollable."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "that",
+          "signalSide": "option",
+          "targetText": "5-10 people",
+          "relation": "选项中的 that 回指空前的“5-10 people”这一人数，构成指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "more than that",
+          "signalSide": "context-after",
+          "targetText": "Less people than that",
+          "relation": "空后“more than that”与选项“Less people than that”构成“少于/多于该人数”的对称指代，that 同指 5-10 人。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "and",
+          "signalSide": "context-after",
+          "targetText": "there may not be enough things to choose from",
+          "relation": "空后 and 引出“人太少”的后果，与选项“Less people than that”构成条件—结果关系。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "空前给出 5-10 人的建议人数，A 用“Less people than that（比这少）”承接，与空后“more than that（比这多）”形成人数过少/过多的两面对照。",
+        "matchedClues": [
+          {
+            "contextSide": "more than that, and it becomes uncontrollable",
+            "optionSide": "Less people than that",
+            "relation": "“少于该数”对“多于该数”，两句结构对称，分述人数过少与过多的弊端。"
+          },
+          {
+            "contextSide": "there may not be enough things to choose from",
+            "optionSide": "Less people than that",
+            "relation": "人太少导致可选衣物不足，因果衔接。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C（如果两人在竞争）含 people，但与“人数多少导致选择多寡”的逻辑无关，无法与空后 more than that 形成对照。"
+        }
+      ],
+      "teachingNote": "句中空若空后出现 more than that 一类对比短语，应选与之构成数量对称（less/more）的指代句。"
+    },
+    "q-2021-jia-038": {
+      "blankId": "blank-2021-jia-038",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "They should also prepare",
+        "plenty of reusable bags",
+        "to carry their “new” clothes home"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-jia-seven-p4",
+        "beforeQuote": "•",
+        "afterQuote": "They should also prepare plenty of reusable bags to carry their “new” clothes home."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "everyone",
+          "signalSide": "option",
+          "targetText": "They",
+          "relation": "选项主语 everyone 是空后 They 的先行词，They 复指 everyone。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "They",
+          "signalSide": "context-after",
+          "targetText": "Tell everyone to bring clean clothes",
+          "relation": "空后 They 指代空内被要求的 everyone（所有参加者），代词回指确定答案主语。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "also",
+          "signalSide": "context-after",
+          "targetText": "bring clean clothes / prepare reusable bags",
+          "relation": "空后 also 表示“还应……”，要求空内已先提出一项让大家做的准备（带干净衣物），二者并列递进。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "作为条目首句，G“让大家带状况良好的干净衣物来”提出第一项准备，空后 They should also prepare bags 用 They 复指 everyone 并以 also 追加第二项准备，前后并列衔接。",
+        "matchedClues": [
+          {
+            "contextSide": "They should also prepare plenty of reusable bags",
+            "optionSide": "Tell everyone to bring clean clothes in good condition",
+            "relation": "also 表明本条还有另一项准备，空内须先有一项“带衣物”的准备，且 They 指代 everyone。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "F",
+          "reason": "F（让大家把衣物放到正确位置）也以 everyone 开头，但属于现场摆放环节，与空后“准备袋子带衣物回家”的带衣/装袋话题不衔接。"
+        }
+      ],
+      "teachingNote": "条目首句空可由空后代词（They）和 also 递进信号锁定：选主语能被 They 复指、且能与空后并列的整句。"
+    },
+    "q-2021-jia-039": {
+      "blankId": "blank-2021-jia-039",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "Put different types of clothing on different surfaces",
+        "try them on",
+        "must try on the clothes before they take them"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-jia-seven-p5",
+        "beforeQuote": "Put different types of clothing on different surfaces in the room.",
+        "afterQuote": "Place a few mirrors around your room so people can see how things look when they try them on."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "the right spots",
+          "signalSide": "option",
+          "targetText": "different surfaces in the room",
+          "relation": "选项 right spots（正确位置）与空前 different surfaces（不同台面）同属“按类摆放衣物”的位置话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "different surfaces",
+          "signalSide": "context-before",
+          "targetText": "put their clothes in the right spots",
+          "relation": "空前“把不同类衣物放到不同台面”正对应选项“把衣物放到正确位置”，承接摆放安排。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "put their clothes",
+          "signalSide": "option",
+          "targetText": "Put different types of clothing",
+          "relation": "选项 put ... clothes 与空前 Put ... clothing 用词呼应，延续“摆放衣物”的动作。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "空前安排“把不同类衣物放到不同台面”，F“让每个人把自己的衣物放到正确位置”延续这一摆放话题，使衣物各归其位后再试穿。",
+        "matchedClues": [
+          {
+            "contextSide": "Put different types of clothing on different surfaces",
+            "optionSide": "put their clothes in the right spots",
+            "relation": "different surfaces 与 right spots 都指按类划定的摆放位置，话题场一致。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 涉及“带干净衣物来”，属事前准备而非现场摆放，与空前“放到不同台面”的就位话题不衔接。"
+        }
+      ],
+      "teachingNote": "句中空可据“同话题场用词呼应”锁定：空前讲分类摆放（different surfaces），就选讲放到正确位置（right spots）的句子。"
+    },
+    "q-2021-jia-040": {
+      "blankId": "blank-2021-jia-040",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "turn on a certain song",
+        "Set a starting time",
+        "it’s a party",
+        "put out some cookies and fruits"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2021-jia-seven-p6",
+        "beforeQuote": "Maybe you say “go”, or turn on a certain song, or whatever.",
+        "afterQuote": "And don’t forget to put out some cookies and fruits. Remember, it’s a party!"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "music",
+          "signalSide": "option",
+          "targetText": "turn on a certain song",
+          "relation": "选项 music 与空前 song 同属音乐话题场，承接“开始时放歌”的话题。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "song",
+          "signalSide": "context-before",
+          "targetText": "keep music playing",
+          "relation": "空前用 song 开场，选项 keep music playing throughout 把这首歌延展为“全程持续放音乐”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "throughout",
+          "signalSide": "option",
+          "targetText": "it’s a party",
+          "relation": "throughout（全程）呼应空后“别忘了备点心水果……记住这是派对”，持续音乐营造派对气氛。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "空前提到开始时可“放一首歌”作为信号，D“只管全程一直放着音乐”顺势把这首开场歌延伸为持续音乐，与空后“记住这是派对”的气氛相呼应。",
+        "matchedClues": [
+          {
+            "contextSide": "turn on a certain song",
+            "optionSide": "keep music playing throughout",
+            "relation": "song 到 keep music playing，由开场一首歌延伸为全程音乐，话题场一致。"
+          },
+          {
+            "contextSide": "Remember, it’s a party!",
+            "optionSide": "keep music playing throughout",
+            "relation": "持续音乐服务于“这是派对”的气氛，前后呼应。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E（捐掉剩余衣物）是活动结束后的善后步骤，与空前“开始时放歌”的开场气氛话题不衔接。"
+        }
+      ],
+      "teachingNote": "句中空可据音乐话题场延展锁定：空前讲开场放一首歌，就选讲全程持续放音乐、营造派对气氛的句子。"
+    }
+  }
+}

@@ -1,0 +1,366 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-zj-2024-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2024-jan-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "import-pipeline-agent",
+    "reviewedAt": "2026-06-08",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2024-jan-seven-choices": {
+      "overview": "本文是一篇说明文，围绕“在线学习（online learning）是否适合你、如何上好在线课程”给出建议。首段引出在线学习的普及并设问，随后三段分别从“在线学习的优势与自律风险”“把在线课纳入每周日程”“在线课缺乏人际互动及其应对”三方面展开。七选五要求在首段（两空）和各正文段中补入最贴合上下文逻辑与话题场的句子。",
+      "discourseStructure": {
+        "summary": "首段先说在线学习已成为大学经历的重要部分，并以一组设问引出全文：你怎么知道在线学习适不适合你、怎样才能拿到最好的成绩，文末说明作者采访了学生和教授来征求建议。其后三段各谈一点：第一段讲在线学习随时随地的优势，但提醒要自律、别落后；第二段强调把在线课像面授课一样排进每周日程，并以 Davidson 教授为例说明不自律会拉低成绩；第三段指出在线课最大的不足是缺乏人际互动，并给出结伴学习、组建学习小组、约见教授等弥补办法。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "导入与设问",
+            "paragraphIds": [
+              "para-zj-2024-jan-seven-title"
+            ],
+            "summary": "在线学习已成为大学经历的重要部分，并用一项调查数据加以印证；随后连续设问——它是否适合你、如何确保拿到好成绩，并说明作者采访了学生与教授获取建议。"
+          },
+          {
+            "unitId": "unit-anywhere-anytime",
+            "heading": "优势与自律风险",
+            "paragraphIds": [
+              "para-zj-2024-jan-seven-p1"
+            ],
+            "summary": "在线学习最明显的优势是随时随地学习，但这并不意味着没有截止期限，容易落后于进度，故选课前要先衡量自己是否自律、内容是否够吸引人。"
+          },
+          {
+            "unitId": "unit-schedule",
+            "heading": "纳入每周日程",
+            "paragraphIds": [
+              "para-zj-2024-jan-seven-p2"
+            ],
+            "summary": "最常见的建议是把在线课像面授课一样排进每周日程；以同时教面授与在线课的 Davidson 教授为例，指出在线学生成绩往往更低，提醒要固定时间看课、读材料、参与讨论区。"
+          },
+          {
+            "unitId": "unit-interaction",
+            "heading": "缺乏人际互动及应对",
+            "paragraphIds": [
+              "para-zj-2024-jan-seven-p3"
+            ],
+            "summary": "在线课最大的不足是缺乏人际互动，而社交连接对学习很重要；可以与朋友一起选课互相督促、在讨论区组建学习小组，或约见教授当面探讨课程内容。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-zj-2024-jan-036": {
+      "blankId": "blank-zj-2024-jan-036",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "online learning has become a significant part",
+        "university and college experience",
+        "all online courses created equal"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2024-jan-seven-title",
+        "headingAnchor": "导入与设问",
+        "beforeQuote": "online learning has become a significant part of the university and college experience.",
+        "afterQuote": "But are all online courses created equal?"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "29 percent of college students registered for online courses",
+          "signalSide": "option",
+          "targetText": "online learning has become a significant part of the university and college experience",
+          "relation": "选项以“29% 大学生注册在线课程”这一数据，具体印证空前“在线学习已成为大学经历的重要部分”的概括。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "online learning has become a significant part",
+          "signalSide": "context-before",
+          "targetText": "29 percent of college students registered for online courses",
+          "relation": "空前“在线学习占重要部分”与选项的注册比例数据同属“在线学习普及程度”话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "all online courses created equal",
+          "signalSide": "context-after",
+          "targetText": "online courses",
+          "relation": "空后再次出现 online courses，与选项末尾的 online courses 词汇复现，保持话题连贯。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "空前概括“在线学习已成为大学经历的重要部分”，G 句用“一项调查发现 29% 的大学生注册了在线课程”这一具体数据加以佐证，由概述到数据，衔接自然。",
+        "matchedClues": [
+          {
+            "contextSide": "online learning has become a significant part of the university and college experience",
+            "optionSide": "A survey found that 29 percent of college students registered for online courses",
+            "relation": "概括性陈述之后补入具体调查数据，是说明文常见的“总—数据”展开。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 是一个设问“你知道在线课程也是教育的一部分吗”，语义与空前“在线学习已是大学经历重要部分”重复且突兀，不如数据句承接自然。"
+        }
+      ],
+      "teachingNote": "段首概括之后常补一句具体数据印证，抓住“significant part”与“29 percent”的总—数对应即可定位。"
+    },
+    "q-zj-2024-jan-037": {
+      "blankId": "blank-zj-2024-jan-037",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.grammatical.referential-cohesion"
+      ],
+      "topicClues": [
+        "How can you be sure that digital learning is right for you?",
+        "We interviewed students and professors",
+        "get their advice about online courses"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2024-jan-seven-title",
+        "headingAnchor": "导入与设问",
+        "beforeQuote": "How can you be sure that digital learning is right for you?",
+        "afterQuote": "We interviewed students and professors to get their advice about online courses."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "what can you do to ensure the best possible grade",
+          "signalSide": "option",
+          "targetText": "How can you be sure that digital learning is right for you?",
+          "relation": "选项是又一个以 what can you do 形式提出的设问，与空前 How can you be sure 的设问并列，同属“引出建议”的设问链。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "to ensure the best possible grade",
+          "signalSide": "option",
+          "targetText": "get their advice about online courses",
+          "relation": "选项问“怎样确保最好的成绩”，与空后“采访学生教授获取建议”所要解决的问题一致，统领下文建议。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "If you take an online course",
+          "signalSide": "option",
+          "targetText": "online courses",
+          "relation": "选项中的 online course 与空后 online courses 词汇复现，紧扣同一话题。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "空前以“你怎么确定在线学习适合你”设问，F 句再以“如果你选了在线课，怎样才能确保拿到最好的成绩”设问，与之并列，并引出空后“采访学生与教授获取建议”，问题—解决衔接顺畅。",
+        "matchedClues": [
+          {
+            "contextSide": "How can you be sure that digital learning is right for you?",
+            "optionSide": "If you take an online course, what can you do to ensure the best possible grade?",
+            "relation": "两句都是面向读者的设问，构成连续发问，共同引出下文的建议。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B“你的学习动力应是主要关切”是陈述句，且 motivation 话题更贴合第一段自律内容，放在此处无法与空前的连续设问形成并列。"
+        }
+      ],
+      "teachingNote": "首段连续设问处，应选与上一问句式、话题一致的另一设问，构成“发问—下文给建议”的引导结构。"
+    },
+    "q-zj-2024-jan-038": {
+      "blankId": "blank-zj-2024-jan-038",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.bridge",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "study anywhere and anytime",
+        "how easy it can be to fall behind schedule",
+        "self-motivated learner"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2024-jan-seven-p1",
+        "headingAnchor": "优势与自律风险",
+        "beforeQuote": "you can study anywhere and anytime.",
+        "afterQuote": "“I think a point that many people lose sight of is how easy it can be to fall behind schedule,”"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "But",
+          "signalSide": "option",
+          "targetText": "you can study anywhere and anytime",
+          "relation": "选项以 But 转折，从空前“随时随地学习”的优势转向“但仍有截止期限”的提醒。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "there aren’t deadlines",
+          "signalSide": "option",
+          "targetText": "how easy it can be to fall behind schedule",
+          "relation": "选项的 deadlines 与空后“容易落后于进度”同属“时间安排/拖延”话题场，是其原因。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "fall behind schedule",
+          "signalSide": "context-after",
+          "targetText": "deadlines",
+          "relation": "空后“落后于进度”正呼应选项强调的“有截止期限”，构成因果衔接。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "空前讲在线学习随时随地的优势，A 句用 But 转折指出“这并不意味着没有截止期限”，恰好引出空后“很容易落后于进度”的提醒，转折与因果衔接自然。",
+        "matchedClues": [
+          {
+            "contextSide": "how easy it can be to fall behind schedule",
+            "optionSide": "But that doesn’t mean there aren’t deadlines",
+            "relation": "正因为仍有截止期限，所以一旦松懈就会落后于进度。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B“你的学习动力应是主要关切”虽与本段自律话题相关，但缺少与空前优势句的转折关系，无法引出空后的“落后进度”因果。"
+        }
+      ],
+      "teachingNote": "优势陈述之后空格常用 But 转折引出隐患，抓住选项 But 与空后“fall behind schedule”的因果即可定位。"
+    },
+    "q-zj-2024-jan-039": {
+      "blankId": "blank-zj-2024-jan-039",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "build online courses into your weekly schedule",
+        "just like what you would do with in person courses",
+        "his online students usually end up with lower grades"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2024-jan-seven-p2",
+        "headingAnchor": "纳入每周日程",
+        "beforeQuote": "just like what you would do with in person courses.",
+        "afterQuote": "He noted that his online students usually end up with lower grades."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "Professor Alex Davidson",
+          "signalSide": "option",
+          "targetText": "He noted",
+          "relation": "选项引入 Professor Alex Davidson，正是空后代词 He 的先行词，构成人称回指。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "teaches the same course in person and online",
+          "signalSide": "option",
+          "targetText": "his online students usually end up with lower grades",
+          "relation": "选项说他同时教面授与在线课，与空后“他的在线学生成绩往往更低”形成对比依据，同属“面授 vs 在线”话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "He noted",
+          "signalSide": "context-after",
+          "targetText": "Professor Alex Davidson",
+          "relation": "空后 He 指代选项中刚引入的 Professor Alex Davidson，无 He 的先行词则全段人称断裂。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "空后突然出现代词 He，必须先有男性先行词；D 句引入“Professor Alex Davidson 同时教面授和在线课”，既提供 He 的指代对象，又为空后“他的在线学生成绩更低”的对比作铺垫。",
+        "matchedClues": [
+          {
+            "contextSide": "He noted that his online students usually end up with lower grades",
+            "optionSide": "Professor Alex Davidson teaches the same course in person and online",
+            "relation": "因为他同教两种课，才能比较出在线学生成绩更低，He 即指 Davidson 教授。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B“你的学习动力应是主要关切”无法为空后代词 He 提供先行词，人称无法衔接，故不合适。"
+        }
+      ],
+      "teachingNote": "见空后出现无指代对象的代词 He，应回选能引入该男性人物（Davidson 教授）的句子补全先行词。"
+    },
+    "q-zj-2024-jan-040": {
+      "blankId": "blank-zj-2024-jan-040",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "A social connection is often a big part of learning",
+        "things you can do to ease this problem",
+        "motivate each other to stay on track"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2024-jan-seven-p3",
+        "headingAnchor": "缺乏人际互动及应对",
+        "beforeQuote": "A social connection is often a big part of learning.",
+        "afterQuote": "There are things you can do to ease this problem."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "this problem",
+          "signalSide": "context-after",
+          "targetText": "they lack human interaction",
+          "relation": "空后 this problem 回指选项点出的“缺乏人际互动”这一不足，是本段主题句指代的对象。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "lack human interaction",
+          "signalSide": "option",
+          "targetText": "A social connection is often a big part of learning",
+          "relation": "选项的 human interaction 与空后 social connection 属同一“人际互动”话题场，由“缺失”引出“社交对学习重要”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "motivate each other to stay on track",
+          "signalSide": "context-after",
+          "targetText": "lack human interaction",
+          "relation": "下文“结伴互相督促”等正是为弥补选项所说“缺乏人际互动”而给出的办法。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "本段为段首主题空，E 句指出“对在线课最主要的抱怨是缺乏人际互动”，正好被空后 this problem 回指，并统领下文“结伴选课、组建学习小组、约见教授”等弥补办法。",
+        "matchedClues": [
+          {
+            "contextSide": "There are things you can do to ease this problem",
+            "optionSide": "The chief complaint about online courses is that they lack human interaction",
+            "relation": "this problem 即指“缺乏人际互动”，下文随即给出缓解该问题的具体做法。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 是一个泛泛的设问“你知道在线课程也是教育的一部分吗”，既不能被空后 this problem 回指，也无法统领下文的弥补办法，不宜作段首主题句。"
+        }
+      ],
+      "teachingNote": "段首空后若出现 this problem 等回指词，应选能被其指代、且能统领全段对策的“问题陈述”主题句。"
+    }
+  }
+}

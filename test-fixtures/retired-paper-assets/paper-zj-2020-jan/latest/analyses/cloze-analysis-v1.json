@@ -1,0 +1,879 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-zj-2020-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2020-jan-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2020-jan-cloze": {
+      "overview": "夹叙夹议文。作者天生法律意义上失明，借两岁时撞树却不哭、爬起来继续奔跑的童年故事，引出人生要敢于冒险、跌倒后再爬起来的人生哲理。",
+      "affectiveArc": "由童年撞树的小插曲（看似挫折）转入积极昂扬的基调：跌倒不哭、爬起继续，象征面对人生挫折时勇敢、坚韧、不放弃的态度，全文情感积极向上。"
+    }
+  },
+  "blanks": {
+    "q-zj-2020-jan-036": {
+      "blankId": "blank-zj-2020-jan-036",
+      "blankNo": 36,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "下文整段故事的核心是作者撞上一棵大枫树，故母亲最爱讲的这个故事是关于“一棵树”。tree 与后文 a large maple tree、that tree 形成同词复现。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "trip",
+          "meaning": "旅行（下文只是说刚旅行回来，故事核心不是旅行）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "race",
+          "meaning": "赛跑、比赛"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "driver",
+          "meaning": "司机（仅为故事背景人物）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a large maple tree",
+          "signalSide": "context-after",
+          "targetText": "the one about a tree",
+          "relation": "下文撞上 a large maple tree，与本空 tree 同词复现，锁定话题词。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "into that tree",
+          "signalSide": "context-after",
+          "targetText": "tree",
+          "relation": "结尾 never again into that tree 再次复现 tree，确认全文围绕“树”展开。"
+        }
+      ],
+      "teachingNote": "首句话题词常由下文反复出现的同一名词确定，找复现词即可定位。"
+    },
+    "q-zj-2020-jan-037": {
+      "blankId": "blank-zj-2020-jan-037",
+      "blankNo": 37,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "下文叙述的是作者两岁时撞树这一突发小事件，incident（小事件、事故）与“撞树”这一具体经过相搭配，呼应首段的 story。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "change",
+          "meaning": "变化"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "illness",
+          "meaning": "疾病（撞树并非生病）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "problem",
+          "meaning": "问题、难题"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "occurred",
+          "signalSide": "context-after",
+          "targetText": "incident",
+          "relation": "occur 的主语是 incident，“事件发生”搭配自然成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "hit a large maple tree",
+          "signalSide": "context-after",
+          "targetText": "incident",
+          "relation": "下文 hit a large maple tree 正是这个 incident 的具体内容。"
+        }
+      ],
+      "teachingNote": "用谓语 occur 反推主语，“事件发生”这一搭配优先于“疾病/问题发生”。"
+    },
+    "q-zj-2020-jan-038": {
+      "blankId": "blank-zj-2020-jan-038",
+      "blankNo": 38,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "turn to do sth 表示“转过身去做某事”，妈妈把我抱下车后转身去和司机说话，与后文 to speak to the driver 构成固定搭配。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "feared",
+          "meaning": "害怕（害怕和司机说话）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "refused",
+          "meaning": "拒绝（拒绝和司机说话）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "forgot",
+          "meaning": "忘记"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to speak to the driver",
+          "signalSide": "context-after",
+          "targetText": "turned",
+          "relation": "turn to speak to sb（转身去和某人说话）搭配成立，引出妈妈的下一动作。"
+        }
+      ],
+      "teachingNote": "锁定后接的 to do 结构，turn to do 表“转身去做”，是叙事中的连贯动作。"
+    },
+    "q-zj-2020-jan-039": {
+      "blankId": "blank-zj-2020-jan-039",
+      "blankNo": 39,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "妈妈转身和司机说话时无人看管，作者趁着这短暂的“自由”冲过草坪，brief freedom（短暂的自由）与“趁机奔跑”因果呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "delay",
+          "meaning": "延误、耽搁"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "absence",
+          "meaning": "缺席、不在场"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "rest",
+          "meaning": "休息"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to dash across the lawn",
+          "signalSide": "context-after",
+          "targetText": "freedom",
+          "relation": "take advantage of my brief freedom to dash，趁“短暂自由”冲过草坪，搭配通顺。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "took advantage of",
+          "signalSide": "context-before",
+          "targetText": "freedom",
+          "relation": "take advantage of（趁机利用）提示后接的是一个可被利用的有利状态——自由。"
+        }
+      ],
+      "teachingNote": "由 take advantage of … to do 判断空格是被利用的“有利时机”，自由最贴合“无人看管”。"
+    },
+    "q-zj-2020-jan-040": {
+      "blankId": "blank-zj-2020-jan-040",
+      "blankNo": 40,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "撞树后从树干弹回，最终“屁股着地”，land on one's backside（一屁股摔坐在地上）搭配成立，符合撞树后的物理结果。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "slept",
+          "meaning": "睡觉"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "laughed",
+          "meaning": "笑（在屁股上笑不通）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "wept",
+          "meaning": "哭泣"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "on my backside",
+          "signalSide": "context-after",
+          "targetText": "landed",
+          "relation": "land on my backside（屁股着地）搭配成立，是 bounced off the trunk 之后的落地结果。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "bounced off the trunk",
+          "signalSide": "context-before",
+          "targetText": "landed",
+          "relation": "从树干弹开（bounced off）后顺势落地，land 承接这一连贯动作。"
+        }
+      ],
+      "teachingNote": "看介词搭配 on one's backside，落点用 land，符合撞击—弹开—着地的动作链。"
+    },
+    "q-zj-2020-jan-041": {
+      "blankId": "blank-zj-2020-jan-041",
+      "blankNo": 41,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "expect sb to do sth（预料某人会做某事）搭配成立；妈妈本以为我会哭，但下文 but I just sat there 用 but 转折，正说明这是预期而非事实。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "promised",
+          "meaning": "承诺（promise me to cry 不合逻辑）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "encouraged",
+          "meaning": "鼓励（鼓励我哭不合常理）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "allowed",
+          "meaning": "允许、准许"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to start crying",
+          "signalSide": "context-after",
+          "targetText": "expected",
+          "relation": "expect me to start crying（预料我会哭起来）搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "but I just sat there",
+          "signalSide": "context-after",
+          "targetText": "expected",
+          "relation": "but 转折表明结果与预期相反，故空格为“预料”而非事实发生。"
+        }
+      ],
+      "teachingNote": "后文 but 转折提示空格是“与事实相反的预期”，expect 表料想最贴切。"
+    },
+    "q-zj-2020-jan-042": {
+      "blankId": "blank-zj-2020-jan-042",
+      "blankNo": 42,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "pick oneself up（自己爬起来）为固定搭配，承接 sat there 之后“我自己站起来继续跑”，照应全文“跌倒后爬起”的主题。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "woke",
+          "meaning": "醒来（wake oneself up 此处不通）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "warmed",
+          "meaning": "热身（warm oneself up 取暖/热身，与情境不符）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "gave",
+          "meaning": "给（give oneself up 自首/放弃，与下文继续跑矛盾）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "myself up and kept right on going",
+          "signalSide": "context-after",
+          "targetText": "picked",
+          "relation": "pick myself up（自己爬起来）后接 kept right on going，搭配与逻辑都成立。"
+        }
+      ],
+      "teachingNote": "记牢 pick oneself up=自己爬起来，与“跌倒后继续”主题绑定。"
+    },
+    "q-zj-2020-jan-043": {
+      "blankId": "blank-zj-2020-jan-043",
+      "blankNo": 43,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "妈妈在讲完上文故事后又补充一个细节（此后我再没撞过那棵树），add here that …（在此补充说）搭配自然，表示追加信息。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "replies",
+          "meaning": "回答、回复（无人发问，无可回复）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "admits",
+          "meaning": "承认（并非承认错误或事实）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "supposes",
+          "meaning": "认为、假定"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "here that",
+          "signalSide": "context-after",
+          "targetText": "adds",
+          "relation": "add … that 引出补充内容，与 here（在此处、讲到这儿）连用表“补充说”。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "never again",
+          "signalSide": "context-after",
+          "targetText": "adds",
+          "relation": "其后补充“此后再没撞过树”是对故事的追加说明，故用 add。"
+        }
+      ],
+      "teachingNote": "讲故事时追加新细节用 add（补充说），区别于回答 reply、承认 admit。"
+    },
+    "q-zj-2020-jan-044": {
+      "blankId": "blank-zj-2020-jan-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "signatureFacet": "cloze.signature.verb.action-sequence",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "zoom across the lawn 表“飞快地冲过草坪”，与上文 running so fast、tearing full-speed 的高速奔跑同义复现；as many times as I zoomed 与后文 never again crashed 构成“多次冲过却再没撞树”的先后对照。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "drove",
+          "meaning": "驾车（两岁孩童横穿草坪并非开车）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "lived",
+          "meaning": "居住、生活"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "stood",
+          "meaning": "站立（与“多次冲过”矛盾）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "across the lawn after that",
+          "signalSide": "context-after",
+          "targetText": "zoomed",
+          "relation": "zoom across the lawn（飞速冲过草坪）搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "running so fast",
+          "signalSide": "context-before",
+          "targetText": "zoomed",
+          "relation": "上文 running so fast 与下文 tearing full-speed 反复强调高速，zoom 同义复现。"
+        }
+      ],
+      "teachingNote": "as many times as … 后接“多次冲过”与“再没撞树”形成先后动作对照，速度词复现锁定 zoom。"
+    },
+    "q-zj-2020-jan-045": {
+      "blankId": "blank-zj-2020-jan-045",
+      "blankNo": 45,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "crash into sth 表“撞上某物”，与前文撞树事件呼应；never again crashed into that tree（此后再没撞上那棵树）搭配与逻辑都成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "broke",
+          "meaning": "打破、折断（break into 闯入，与撞树不符）"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "climbed",
+          "meaning": "爬、攀登（climb into 爬进）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "looked",
+          "meaning": "看（look into 调查/向内看）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "into that tree",
+          "signalSide": "context-after",
+          "targetText": "crashed",
+          "relation": "crash into that tree（撞上那棵树）搭配成立，与开头撞树情节呼应。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "hit a large maple tree",
+          "signalSide": "context-before",
+          "targetText": "crashed",
+          "relation": "上文 hit a large maple tree 即“撞树”，crash 为其同义复现。"
+        }
+      ],
+      "teachingNote": "撞上某物用 crash into，结合 into that tree 与开头撞树同义复现定位。"
+    },
+    "q-zj-2020-jan-046": {
+      "blankId": "blank-zj-2020-jan-046",
+      "blankNo": 46,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "下文“它提醒她孩子天生敢于冒险、跌倒后愿再尝试”，妈妈把这个故事当作说明人生道理的“例子/例证”，use this story as an example 搭配自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "answer",
+          "meaning": "答案"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "excuse",
+          "meaning": "借口"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "order",
+          "meaning": "命令、顺序"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "use this story as an",
+          "signalSide": "stem",
+          "targetText": "example",
+          "relation": "use sth as an example（把某事用作例子）搭配成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "It reminds her that",
+          "signalSide": "context-after",
+          "targetText": "example",
+          "relation": "下文用故事来说明一个道理，正是把它当作 example 的体现。"
+        }
+      ],
+      "teachingNote": "用一件事来佐证道理时，as an example 是固定表达，看后文“它说明了……”。"
+    },
+    "q-zj-2020-jan-047": {
+      "blankId": "blank-zj-2020-jan-047",
+      "blankNo": 47,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "本句强调孩子天生敢冒险，afraid to take risks（害怕冒险）前有否定 don't enter life，意为“孩子并非生来就害怕冒险”，与全文勇敢、不畏惧的积极基调一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "able",
+          "meaning": "有能力的（able to take risks 不合“天生不……”逻辑）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "ashamed",
+          "meaning": "羞愧的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "anxious",
+          "meaning": "焦虑的（anxious to do 渴望做，方向相反）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to take risks",
+          "signalSide": "context-after",
+          "targetText": "afraid",
+          "relation": "be afraid to take risks（害怕冒险）搭配成立。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "don’t enter life",
+          "signalSide": "context-before",
+          "targetText": "afraid",
+          "relation": "前置否定 don't enter life … afraid，意为“并非生来就害怕”，与勇敢基调一致。"
+        }
+      ],
+      "teachingNote": "be afraid to do=害怕做，配合句首否定，凸显“孩子天生不畏冒险”的积极态度。"
+    },
+    "q-zj-2020-jan-048": {
+      "blankId": "blank-zj-2020-jan-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "与上句“敢冒险”并列，try again（跌倒后再次尝试）呼应全文“跌倒—爬起—再来”的主题；unwilling to try again when they fall down 逻辑顺畅。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ask",
+          "meaning": "询问、请求"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "share",
+          "meaning": "分享"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "learn",
+          "meaning": "学习"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "again when they fall down",
+          "signalSide": "context-after",
+          "targetText": "try",
+          "relation": "try again when they fall down（跌倒后再次尝试）搭配与逻辑成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "kept right on going",
+          "signalSide": "context-before",
+          "targetText": "try",
+          "relation": "上文“爬起来继续”与此处“跌倒后再尝试”主题呼应。"
+        }
+      ],
+      "teachingNote": "跌倒后 again 紧跟，“再次尝试”用 try，扣住全文“跌倒再来”母题。"
+    },
+    "q-zj-2020-jan-049": {
+      "blankId": "blank-zj-2020-jan-049",
+      "blankNo": 49,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "前文强调孩子敢冒险、跌倒后再尝试，这种品质即“坚韧”；妈妈不愿我长大后失去这份 toughness（坚韧），与上文勇敢不放弃的特质对应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "honesty",
+          "meaning": "诚实"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "kindness",
+          "meaning": "善良"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "curiosity",
+          "meaning": "好奇心"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to lose that",
+          "signalSide": "context-before",
+          "targetText": "toughness",
+          "relation": "lose that toughness（失去那份坚韧），that 回指上文敢冒险、跌倒再起的品质。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "again when they fall down",
+          "signalSide": "context-before",
+          "targetText": "toughness",
+          "relation": "上文“跌倒后再尝试”正是 toughness 的具体表现，语义呼应。"
+        }
+      ],
+      "teachingNote": "that 回指上文品质，敢冒险、跌倒再起对应的抽象名词是 toughness（坚韧）。"
+    },
+    "q-zj-2020-jan-050": {
+      "blankId": "blank-zj-2020-jan-050",
+      "blankNo": 50,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "make decisions（做决定）为固定搭配；作者在做人生重大决定时仍像那个全速冲过草坪的小女孩，make my major life decisions 通顺。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "regretted",
+          "meaning": "后悔（regret decisions 与下文积极形象矛盾）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "reviewed",
+          "meaning": "回顾、复审"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "explained",
+          "meaning": "解释"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "my major life decisions",
+          "signalSide": "context-after",
+          "targetText": "made",
+          "relation": "make decisions（做决定）固定搭配，宾语为 my major life decisions。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "When I",
+          "signalSide": "context-before",
+          "targetText": "made",
+          "relation": "When I made … 引导时间状语，“当我做出重大人生决定时”。"
+        }
+      ],
+      "teachingNote": "make decisions 是高频固定搭配，宾语为 decisions 时优先选 make。"
+    },
+    "q-zj-2020-jan-051": {
+      "blankId": "blank-zj-2020-jan-051",
+      "blankNo": 51,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "作者离家外出寻找的是事业方向，下文 I have become a respected teacher（成为受人尊敬的老师）正是 look for a job 的结果，呼应职业线索。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "friend",
+          "meaning": "朋友"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "fortune",
+          "meaning": "财富、运气"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "house",
+          "meaning": "房子（已 moved away，并非找房）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to look for a",
+          "signalSide": "context-before",
+          "targetText": "job",
+          "relation": "look for a job（找工作）搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "become a respected teacher",
+          "signalSide": "context-after",
+          "targetText": "job",
+          "relation": "下文成为受尊敬的老师，是寻找 job（工作）的结果，语义场呼应。"
+        }
+      ],
+      "teachingNote": "由下文“成为一名老师”反推所寻为 job（工作），职业结果回扣职业目标。"
+    },
+    "q-zj-2020-jan-052": {
+      "blankId": "blank-zj-2020-jan-052",
+      "blankNo": 52,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "经过多年的努力才成为受尊敬的老师，through years of efforts（历经多年努力）与“跌倒再起、全速奋进”的奋斗主题一致，强调付出。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "memories",
+          "meaning": "回忆"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "research",
+          "meaning": "研究"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "experience",
+          "meaning": "经验、经历"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I have become a respected teacher",
+          "signalSide": "context-after",
+          "targetText": "efforts",
+          "relation": "through years of efforts 导出“成为受尊敬的老师”这一成果，努力与成果相配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "keep on going",
+          "signalSide": "context-after",
+          "targetText": "efforts",
+          "relation": "全文反复强调坚持奋进，efforts（努力）与奋斗母题呼应。"
+        }
+      ],
+      "teachingNote": "由成果（成为好老师）反推过程，多年“努力”efforts 扣住全文奋斗基调。"
+    },
+    "q-zj-2020-jan-053": {
+      "blankId": "blank-zj-2020-jan-053",
+      "blankNo": 53,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "knock down 表“击倒、打倒”，get knocked down（被击倒）与后文 don't sit in the grass、get up（爬起来）构成“跌倒—爬起”呼应，照应开头撞树摔坐的画面。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "mixed up",
+          "meaning": "搞混、弄乱"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "fed up",
+          "meaning": "厌烦、受够"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "settled down",
+          "meaning": "安顿下来、平静下来"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Just get up and keep on going",
+          "signalSide": "context-after",
+          "targetText": "knocked down",
+          "relation": "get knocked down 后接 get up（爬起来），“被击倒后爬起”逻辑成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "when they fall down",
+          "signalSide": "context-before",
+          "targetText": "knocked down",
+          "relation": "上文 fall down 与此处 knocked down 同义复现，均指“跌倒/被击倒”。"
+        }
+      ],
+      "teachingNote": "短语可拆解：knock=击打、down=向下，合成“被击倒”，与“爬起来”形成对照。"
+    },
+    "q-zj-2020-jan-054": {
+      "blankId": "blank-zj-2020-jan-054",
+      "blankNo": 54,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "与开头“撞树摔坐却不哭”首尾呼应，劝诫读者受挫时别坐在草地上哭，don't sit in the grass and cry 与全文“跌倒不哭、爬起继续”一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "play",
+          "meaning": "玩耍"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "relax",
+          "meaning": "放松"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "dream",
+          "meaning": "做梦、幻想"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "sit in the grass and",
+          "signalSide": "context-before",
+          "targetText": "cry",
+          "relation": "cry 与 sit in the grass 由 and 并列，“坐在草地上哭”施动者同为受挫者，搭配成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "to start crying",
+          "signalSide": "context-before",
+          "targetText": "cry",
+          "relation": "开头 start crying 与此处 cry 同词复现，首尾呼应“跌倒不哭”母题。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Just get up and keep on going",
+          "signalSide": "context-after",
+          "targetText": "cry",
+          "relation": "下句“爬起来继续”与“别坐着哭”形成对照，凸显积极态度。"
+        }
+      ],
+      "teachingNote": "首尾呼应：开头“摔倒不哭”，结尾劝“别坐着哭”，cry 与全文母题闭环。"
+    },
+    "q-zj-2020-jan-055": {
+      "blankId": "blank-zj-2020-jan-055",
+      "blankNo": 55,
+      "pos": "phrase",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "in the end（最终、到头来）表结果，全文劝勉历经挫折坚持下去，到最后一切努力都是值得的，与奋斗后终见回报的逻辑相符。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "all at once",
+          "meaning": "突然、同时"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "in either case",
+          "meaning": "无论哪种情况"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "as a result",
+          "meaning": "因此、结果（侧重直接因果，不强调时间终点）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "It will all be worth it",
+          "signalSide": "context-before",
+          "targetText": "in the end",
+          "relation": "It will all be worth it in the end（一切到最后都值得），in the end 收束全文结论。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "keep on going",
+          "signalSide": "context-before",
+          "targetText": "in the end",
+          "relation": "前文“坚持下去”，in the end 指向坚持之后的最终回报。"
+        }
+      ],
+      "teachingNote": "结尾点题用 in the end（最终），呼应“坚持到最后终有回报”的劝勉。"
+    }
+  }
+}

@@ -1,0 +1,410 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-zj-2020-jan",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2020-jan-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-18",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2020-jan-seven-choices": {
+      "overview": "本文是一篇说明文，主题为水资源的重要性与全球缺水问题。文章先指出人体需要水、可直接饮用洁净水，再引出我们也间接用水（农业、发电），随后转折说明世界上许多人喝不到洁净水所带来的疾病与失学问题，最后介绍“世界水日”及英国学校通过负重步行募捐帮助他人获得洁净水的活动。五个空分别考查段首主旨/过渡句、指代衔接和逻辑因果衔接。",
+      "discourseStructure": {
+        "summary": "文章按“引入用水—直接与间接用水—缺水带来的健康与教育问题—世界水日与公益行动”四个层次展开，由个人日常用水推及全球缺水困境，再落到呼吁与行动。",
+        "units": [
+          {
+            "unitId": "unit-zj-2020-jan-seven-intro",
+            "heading": null,
+            "paragraphIds": [
+              "para-zj-2020-jan-seven-title",
+              "para-zj-2020-jan-seven-p1"
+            ],
+            "summary": "引入主题：人体大量需水、口渴可随手取洁净水（直接用水）；并补充我们也间接用水，如农业种植和发电。"
+          },
+          {
+            "unitId": "unit-zj-2020-jan-seven-problem",
+            "heading": null,
+            "paragraphIds": [
+              "para-zj-2020-jan-seven-p2"
+            ],
+            "summary": "转折指出全球许多人没有洁净水：约7.5亿人缺水，饮用脏水致病致死，儿童因长途取水而失学。"
+          },
+          {
+            "unitId": "unit-zj-2020-jan-seven-action",
+            "heading": null,
+            "paragraphIds": [
+              "para-zj-2020-jan-seven-p3"
+            ],
+            "summary": "介绍“世界水日”及相关宣传活动，并以英国学校学生负重步行募捐为例，帮助更多人获得洁净水。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-zj-2020-jan-031": {
+      "blankId": "blank-zj-2020-jan-031",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "drink lots of water",
+        "fill a glass with clean water",
+        "For example, farmers",
+        "use water to make the plants grow",
+        "produce this energy"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2020-jan-seven-p1",
+        "headingAnchor": null,
+        "beforeQuote": "",
+        "afterQuote": "For example, farmers, who produce the food we eat, use water to make the plants grow."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "indirectly",
+          "signalSide": "option",
+          "targetText": "farmers ... use water / produce this energy",
+          "relation": "选项 indirectly（间接地）概括空后农业用水、发电用水等非直接饮用的用水方式。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "For example",
+          "signalSide": "context-after",
+          "targetText": "We use water indirectly too.",
+          "relation": "空后以 For example 举例，正是对空格这一概括句“间接用水”的具体例证。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "use water to make the plants grow",
+          "signalSide": "context-after",
+          "targetText": "indirectly",
+          "relation": "用水种庄稼属于间接用水的典型例子，与选项 indirectly 呼应。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "A",
+        "fitSummary": "空格是本段的主旨概括句，A 项“我们也间接用水”概括了空后用水种庄稼、发电等例子，且 too 承接上文“直接饮水”，形成直接—间接的递进。",
+        "matchedClues": [
+          {
+            "contextSide": "farmers ... use water to make the plants grow / produce this energy",
+            "optionSide": "We use water indirectly too.",
+            "relation": "空后所举农业与能源用水正是“间接用水”的实例，与 indirectly 对应。"
+          },
+          {
+            "contextSide": "drink lots of water / fill a glass with clean water",
+            "optionSide": "too",
+            "relation": "上文讲直接饮水，A 项中的 too 表示“也”，把话题从直接用水拓展到间接用水。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "B",
+          "reason": "B 项“身体每个系统都依赖水运转”虽与首段“人体需水”话题相关，但它无法概括空后农业、发电等间接用水的例子，与 For example 的举例方向不符。"
+        }
+      ],
+      "teachingNote": "段首空遇到空后 For example 举例时，要找能被这些例子概括的主旨句。"
+    },
+    "q-zj-2020-jan-032": {
+      "blankId": "blank-zj-2020-jan-032",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "this is not the case for many people",
+        "around one in 10 people",
+        "drink dirty water",
+        "catch diseases",
+        "become ill"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2020-jan-seven-p2",
+        "headingAnchor": null,
+        "beforeQuote": "but this is not the case for many people around the world.",
+        "afterQuote": "That’s around one in 10 people in the world."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "That’s",
+          "signalSide": "context-after",
+          "targetText": "around 750 million people",
+          "relation": "空后 That’s（那相当于）回指空格句给出的数字，That 指代选项中的 750 million people。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "750 million people",
+          "signalSide": "option",
+          "targetText": "around one in 10 people",
+          "relation": "选项给出7.5亿这一具体数字，空后用 one in 10 people（十分之一）对其换算说明，前后构成数字—比例的指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "do not have clean water",
+          "signalSide": "option",
+          "targetText": "this is not the case for many people",
+          "relation": "选项“没有洁净水可喝”正承接空前“对许多人而言并非如此（指有洁净水）”，话题一致。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "drink dirty water",
+          "signalSide": "context-after",
+          "targetText": "do not have clean water to drink",
+          "relation": "空后“喝脏水”与选项“没有洁净水可喝”同属缺水话题场，互为因果。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "E",
+        "fitSummary": "E 项给出“约7.5亿人没有洁净水喝”这一数据，恰好被空后 That’s around one in 10 people 回指换算，并承接空前“许多人并非如此”，引出下文喝脏水致病。",
+        "matchedClues": [
+          {
+            "contextSide": "That’s around one in 10 people in the world",
+            "optionSide": "around 750 million people do not have clean water",
+            "relation": "空后用 That’s 把7.5亿换算成“十分之一”，构成数字与比例的指代衔接。"
+          },
+          {
+            "contextSide": "this is not the case for many people",
+            "optionSide": "do not have clean water to drink",
+            "relation": "空前说许多人并非（随手有洁净水），选项正具体说明这些人没有洁净水可喝。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 项也涉及儿童取水，但其落点是“不能上学”，无法被空后 That’s around one in 10 people 这一人口比例回指，数字指代对不上。"
+        }
+      ],
+      "teachingNote": "空后出现 That’s + 数字/比例时，要在选项中找被它回指换算的原始数据。"
+    },
+    "q-zj-2020-jan-033": {
+      "blankId": "blank-zj-2020-jan-033",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "walk many kilometres every day to get water",
+        "don’t have time to learn how to read or write",
+        "don’t get an education",
+        "children"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2020-jan-seven-p2",
+        "headingAnchor": null,
+        "beforeQuote": "in some countries children walk many kilometres every day to get water.",
+        "afterQuote": "Therefore, they don’t have time to learn how to read or write and don’t get an education."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "Therefore",
+          "signalSide": "context-after",
+          "targetText": "they can’t go to school",
+          "relation": "空后 Therefore（因此）引出结果，承接空格句的因，构成因果衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "If",
+          "signalSide": "option",
+          "targetText": "they can’t go to school",
+          "relation": "选项 If 引出条件“若孩子每天要走数小时取水”，与空后 Therefore 的结果“没时间读写、得不到教育”构成条件—结果链。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "walk many kilometres every day to get water",
+          "signalSide": "context-before",
+          "targetText": "walk many hours a day to get water",
+          "relation": "空前“每天步行数公里取水”与选项“每天走数小时取水”几乎同义复现。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "don’t get an education",
+          "signalSide": "context-after",
+          "targetText": "can’t go to school",
+          "relation": "空后“得不到教育”与选项“不能上学”同属教育话题场，互相印证。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "D 项“若孩子每天走数小时取水就不能上学”承接空前长途取水之因，又被空后 Therefore 引出的“没时间读写、得不到教育”这一结果强化，构成完整的因果链。",
+        "matchedClues": [
+          {
+            "contextSide": "children walk many kilometres every day to get water",
+            "optionSide": "If children walk many hours a day to get water",
+            "relation": "空前与选项对“儿童长途取水”这一情境同义复现，话题承接。"
+          },
+          {
+            "contextSide": "Therefore, they ... don’t get an education",
+            "optionSide": "they can’t go to school",
+            "relation": "空后 Therefore 引出结果，与选项“不能上学”因果对应、语义递进。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "G",
+          "reason": "G 项也含“walk a long distance carrying heavy bottles”，看似与长途取水相关，但它强调“体会步行之苦”，与空后 Therefore 引出的“失学/受教育”结果无因果关系。"
+        }
+      ],
+      "teachingNote": "空后用 Therefore 引出结果时，应在选项中找与该结果构成因果链的原因句。"
+    },
+    "q-zj-2020-jan-034": {
+      "blankId": "blank-zj-2020-jan-034",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "On this day every year",
+        "countries around the world hold events",
+        "educate people about the problems of dirty water",
+        "clean water is something that everyone should have"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2020-jan-seven-p3",
+        "headingAnchor": null,
+        "beforeQuote": "",
+        "afterQuote": "On this day every year, countries around the world hold events to educate people about the problems of dirty water"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "this day",
+          "signalSide": "context-after",
+          "targetText": "March 22nd is the World Day for Water",
+          "relation": "空后 On this day 中的 this day 回指选项设立的具体日期 March 22nd（世界水日）。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "March 22nd",
+          "signalSide": "option",
+          "targetText": "On this day every year",
+          "relation": "选项给出 March 22nd 这一日期，空后用 this day 指代它，构成日期—指示代词的指代衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "World Day for Water",
+          "signalSide": "option",
+          "targetText": "hold events to educate people about the problems of dirty water",
+          "relation": "选项“世界水日”与空后各国举办水问题宣传活动话题一致，奠定本段主题。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "本段以介绍“世界水日”为主题，F 项指出1993年联合国把3月22日定为世界水日，恰好被空后 On this day 回指，引出当天各国的宣传活动。",
+        "matchedClues": [
+          {
+            "contextSide": "On this day every year, countries around the world hold events",
+            "optionSide": "March 22nd is the World Day for Water",
+            "relation": "空后 this day 回指选项设立的日期，承接自然。"
+          },
+          {
+            "contextSide": "educate people about the problems of dirty water",
+            "optionSide": "World Day for Water",
+            "relation": "世界水日的宗旨正是宣传水问题，与空后内容主题一致。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "C",
+          "reason": "C 项“目的是激励人们了解涉水问题”是对某事目的的解释，句首 It 缺乏先行词，无法被空后 this day 指代，作段首主旨句指代落空。"
+        }
+      ],
+      "teachingNote": "段首空后出现 this day / this 等指示词时，要在选项中找它所回指的具体名词（如某个日期或事件）。"
+    },
+    "q-zj-2020-jan-035": {
+      "blankId": "blank-zj-2020-jan-035",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "walk 6km with six litres of water",
+        "People give them money to do this",
+        "helps get clean water to as many people as possible",
+        "children between the ages of 10 and 15"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-zj-2020-jan-seven-p3",
+        "headingAnchor": null,
+        "beforeQuote": "children between the ages of 10 and 15 walk 6km with six litres of water.",
+        "afterQuote": "People give them money to do this and all the money helps get clean water"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "In this way",
+          "signalSide": "option",
+          "targetText": "walk 6km with six litres of water",
+          "relation": "选项 In this way 回指空前学生“负重6升水步行6公里”这一做法，承上启下。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "do this",
+          "signalSide": "context-after",
+          "targetText": "walk a long distance carrying heavy bottles",
+          "relation": "空后 People give them money to do this 中的 do this 指代选项所述的负重步行行为。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "walk 6km with six litres of water",
+          "signalSide": "context-before",
+          "targetText": "walk a long distance carrying heavy bottles",
+          "relation": "空前“负重6升水走6公里”与选项“负重水瓶走长路”同义复现，描述同一活动。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "carrying heavy bottles",
+          "signalSide": "option",
+          "targetText": "six litres of water",
+          "relation": "选项“背着沉重水瓶”对应空前“六升水”的负重，呼应取水艰辛的话题。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "G 项以 In this way 回指空前学生负重步行的做法，说明此举让他们体会长途取水之苦，又被空后 do this 进一步指代，前后衔接紧密。",
+        "matchedClues": [
+          {
+            "contextSide": "walk 6km with six litres of water",
+            "optionSide": "In this way ... walk a long distance carrying heavy bottles",
+            "relation": "选项 In this way 回指空前的负重步行活动，并点明其用意。"
+          },
+          {
+            "contextSide": "People give them money to do this",
+            "optionSide": "they know how it feels to walk a long distance carrying heavy bottles",
+            "relation": "空后 do this 指代选项所述行为，三句围绕同一募捐活动衔接。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "D",
+          "reason": "D 项虽含 walk ... to get water，话题相近，但其句意是“孩子取水就不能上学”，与空前英国学生体验式负重步行募捐的情境不符，也无法被空后 do this 指代。"
+        }
+      ],
+      "teachingNote": "空格夹在两句之间且前后出现 this way / do this 等回指词时，选 In this way 之类承上启下、回指前一做法的句子。"
+    }
+  }
+}

@@ -1,0 +1,897 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2020-bing",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2020-bing-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2020-bing-cloze": {
+      "overview": "作者作为一名服装店女商人，讲述顾客有时会把店员逼疯，并通过一位起初极难缠后来道歉的“常客”悟出待客之道：顾客的无礼往往源于其私人烦恼，不要往心里去。夹叙夹议。",
+      "affectiveArc": "情感主线由“顾客令人抓狂的无奈”转向“理解与释然”——先抑后扬，最终落到豁达待客的领悟。"
+    }
+  },
+  "blanks": {
+    "q-2020-bing-041": {
+      "blankId": "blank-2020-bing-041",
+      "blankNo": 41,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "首句 I care deeply about my customers 已点明对象是顾客，空格延续“like anyone for whom you feel affection, ___ can also drive you mad”，仍指那些让你又爱又恼的顾客，customers 与上文话题词呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "shopkeepers",
+          "meaning": "店主，与“我”同侧，不是让我抓狂的对象。"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "salespersons",
+          "meaning": "售货员、店员。"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "receptionists",
+          "meaning": "接待员。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "I care deeply about my customers",
+          "signalSide": "context-before",
+          "targetText": "customers",
+          "relation": "前句直接点出关心的对象是 customers，空格指代同一群人。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "my customers",
+          "signalSide": "context-before",
+          "targetText": "customers",
+          "relation": "customers 在前文复现，构成同词呼应。"
+        }
+      ],
+      "teachingNote": "找首句已点明的话题词，空格往往是它的同义复现。"
+    },
+    "q-2020-bing-042": {
+      "blankId": "blank-2020-bing-042",
+      "blankNo": 42,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "They'll come rushing in, ___ their handbag's been stolen，顾客冲进来口头声称手提包被偷了，saying 后接宾语从句表示“说、声称”，与“冲进店”这一情境搭配自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "pretending",
+          "meaning": "假装（包被偷），暗示故意撒谎。"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "guessing",
+          "meaning": "猜测。"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "replying",
+          "meaning": "回答、回复。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "their handbag’s been stolen",
+          "signalSide": "context-after",
+          "targetText": "saying",
+          "relation": "saying 后接“手提包被偷了”的内容从句，构成“说……”的动宾呼应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "come rushing in",
+          "signalSide": "context-before",
+          "targetText": "saying",
+          "relation": "顾客冲进店里同时口头声称，saying 与“冲进来”动作顺承。"
+        }
+      ],
+      "teachingNote": "动词后跟内容从句、转述顾客的话时，优先考虑表“说”的 saying。"
+    },
+    "q-2020-bing-043": {
+      "blankId": "blank-2020-bing-043",
+      "blankNo": 43,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "They'll ___ that they left it in the changing room，与后文 then ___ it had been in their car 形成对照：顾客先“信誓旦旦地说”包落在试衣间，swear that 意为“发誓、笃定地断言”，与制造混乱、随后又改口的夸张表现一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "agree",
+          "meaning": "同意。"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "promise",
+          "meaning": "承诺、保证。"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "imagine",
+          "meaning": "想象、设想。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "they left it in the changing room",
+          "signalSide": "context-after",
+          "targetText": "swear",
+          "relation": "swear that 后接“落在试衣间”，表示笃定断言，构成动宾搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "it had been in their car all the time",
+          "signalSide": "context-after",
+          "targetText": "swear",
+          "relation": "随后真相是包一直在车里，反衬先前的“发誓”是言之凿凿却出错。"
+        }
+      ],
+      "teachingNote": "顾客“言之凿凿却随即被推翻”的对照语境，选表强烈断言的 swear。"
+    },
+    "q-2020-bing-044": {
+      "blankId": "blank-2020-bing-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "and then ___ it had been in their car all the time，制造一番混乱之后顾客才“发现”包其实一直在车里，discover 表示意外得知真相，与 then、all the time 的时间反差相合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "forget",
+          "meaning": "忘记。"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "decide",
+          "meaning": "决定。"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "assume",
+          "meaning": "（无据地）假定、认为。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "it had been in their car all the time",
+          "signalSide": "context-after",
+          "targetText": "discover",
+          "relation": "discover 后接“包一直在车里”这一被发现的事实，构成动宾搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "and then",
+          "signalSide": "context-before",
+          "targetText": "discover",
+          "relation": "then 表先制造混乱、后才发现真相的时间承接。"
+        }
+      ],
+      "teachingNote": "“折腾一番后才得知真相”的语境，选表意外发现的 discover。"
+    },
+    "q-2020-bing-045": {
+      "blankId": "blank-2020-bing-045",
+      "blankNo": 45,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "They'll have out half the ___ in the shop，顾客把店里一半的“商品”都翻出来，goods 指店铺出售的货物，与 in the shop、后文 the only style 的购物语义场吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "foods",
+          "meaning": "食物（与服装店语境不符）。"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "catalogues",
+          "meaning": "商品目录册。"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "belongings",
+          "meaning": "（个人）随身物品。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in the shop",
+          "signalSide": "context-after",
+          "targetText": "goods",
+          "relation": "店里陈列的是出售的 goods，构成“商品在店里”的搭配。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "the only style you don’t have left",
+          "signalSide": "context-after",
+          "targetText": "goods",
+          "relation": "下文谈款式与颜色，属购物商品语义场，呼应 goods。"
+        }
+      ],
+      "teachingNote": "服装店里被顾客翻出来的，归到商品语义场选 goods。"
+    },
+    "q-2020-bing-046": {
+      "blankId": "blank-2020-bing-046",
+      "blankNo": 46,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "want the only style you don’t have left in a ___ colour，顾客偏偏要某个“特定的”颜色，particular colour 表示“某一指定颜色”，与 the only style 强调的“唯独那一种”相呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "different",
+          "meaning": "不同的、另一种的。"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "matching",
+          "meaning": "相配的、相称的。"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "natural",
+          "meaning": "自然的。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "colour",
+          "signalSide": "context-after",
+          "targetText": "particular colour",
+          "relation": "particular 修饰 colour，构成“某一特定颜色”的修饰搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "the only style you don’t have left",
+          "signalSide": "context-before",
+          "targetText": "particular",
+          "relation": "the only style 强调“唯独那一种”，与 particular（特定的）语义呼应。"
+        }
+      ],
+      "teachingNote": "顾客“偏要那唯一一种”的强调语境，选 particular。"
+    },
+    "q-2020-bing-047": {
+      "blankId": "blank-2020-bing-047",
+      "blankNo": 47,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "I do know how upset the shop staff can get, but I try to persuade them to keep ___，转折 but 后“我”劝店员尽管心烦也要保持微笑面对顾客，keep smiling 是固定搭配，与待客之道的主题一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "fighting",
+          "meaning": "（继续）争斗、对抗。"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "waiting",
+          "meaning": "（继续）等待。"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "changing",
+          "meaning": "（继续）改变。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "keep",
+          "signalSide": "context-before",
+          "targetText": "keep smiling",
+          "relation": "keep + V-ing 与 smiling 构成“保持微笑”的固定搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "but I try to persuade them",
+          "signalSide": "context-before",
+          "targetText": "smiling",
+          "relation": "but 转折：虽心烦，仍劝店员保持微笑，对照 upset。"
+        }
+      ],
+      "teachingNote": "劝店员面对难缠顾客的态度，keep smiling 是固定且正向的搭配。"
+    },
+    "q-2020-bing-048": {
+      "blankId": "blank-2020-bing-048",
+      "blankNo": 48,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "the first really ___ customer，后文 nothing was right、she became a “regular” 之前“我”很意外，描述这是个极“难缠”的顾客，difficult 表示难对付，与下文 rude or difficult 复现一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "generous",
+          "meaning": "慷慨的。"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "polite",
+          "meaning": "有礼貌的。"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "careless",
+          "meaning": "粗心的、马虎的。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "customer",
+          "signalSide": "context-after",
+          "targetText": "difficult customer",
+          "relation": "difficult 修饰 customer，构成“难缠的顾客”这一形修名搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "If a customer is rude or difficult",
+          "signalSide": "context-after",
+          "targetText": "difficult",
+          "relation": "后文 rude or difficult 复现 difficult，确认此处描述难缠顾客。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "nothing was right",
+          "signalSide": "context-after",
+          "targetText": "difficult",
+          "relation": "“样样都不满意”渲染负面、难伺候的情感基调，呼应 difficult。"
+        }
+      ],
+      "teachingNote": "后文 rude or difficult 的复现就是首段空格的答案锚点。"
+    },
+    "q-2020-bing-049": {
+      "blankId": "blank-2020-bing-049",
+      "blankNo": 49,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "She was ___ absolutely everything, nothing was right，她对样样都不满意，be displeased with 表示“对……不满”，与 nothing was right 的负面评价完全吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "curious about",
+          "meaning": "对……好奇。"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "patient with",
+          "meaning": "对……有耐心。"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "uncertain about",
+          "meaning": "对……不确定。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "nothing was right",
+          "signalSide": "context-after",
+          "targetText": "displeased with",
+          "relation": "“样样都不对”表明她对一切不满，与 displeased with 语义一致。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "displeased",
+          "signalSide": "option",
+          "targetText": "displeased with",
+          "relation": "displeased 表“不满的”，与 absolutely everything 构成“对一切不满”。"
+        }
+      ],
+      "teachingNote": "由 nothing was right 锁定情感方向，选表“不满”的 displeased with。"
+    },
+    "q-2020-bing-050": {
+      "blankId": "blank-2020-bing-050",
+      "blankNo": 50,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "I was rather ___ that she became a “regular”，一个样样不满的顾客竟成了常客，出乎“我”意料，surprised 表示惊讶，与这一反差结果一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "relaxed",
+          "meaning": "放松的。"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "delighted",
+          "meaning": "高兴的、欣喜的。"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "embarrassed",
+          "meaning": "尴尬的。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "she became a “regular”",
+          "signalSide": "context-after",
+          "targetText": "surprised",
+          "relation": "难缠顾客竟成常客，这一意外结果令“我”surprised。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "nothing was right",
+          "signalSide": "context-before",
+          "targetText": "surprised",
+          "relation": "前文她样样不满，与“成了常客”形成反差，触发惊讶情绪。"
+        }
+      ],
+      "teachingNote": "前后结果出人意料时，情感词选 surprised。"
+    },
+    "q-2020-bing-051": {
+      "blankId": "blank-2020-bing-051",
+      "blankNo": 51,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "After a while, she ___ for the way she behaved at the beginning，她为自己起初的言行“道歉”，apologize for 是固定搭配，与后文解释她当时处境困难的内容相承。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "searched",
+          "meaning": "搜寻、寻找。"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "argued",
+          "meaning": "争辩、争论。"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "prayed",
+          "meaning": "祈祷、祈求。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for the way she behaved at the beginning",
+          "signalSide": "context-after",
+          "targetText": "apologized",
+          "relation": "apologize for 后接“起初的所作所为”，构成“为……道歉”的固定搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "After a while",
+          "signalSide": "context-before",
+          "targetText": "apologized",
+          "relation": "“过了一阵”引出态度转变，为道歉做铺垫。"
+        }
+      ],
+      "teachingNote": "空格后接 for + 行为，且语境是事后态度转好，选 apologize。"
+    },
+    "q-2020-bing-052": {
+      "blankId": "blank-2020-bing-052",
+      "blankNo": 52,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "She had split up with her husband the week before, was living in a flat ___，刚和丈夫分手，所以“独自”住在公寓里，by herself 表示“独自一人”，与 split up with her husband 的处境吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "by chance",
+          "meaning": "偶然地。"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "on purpose",
+          "meaning": "故意地。"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "on duty",
+          "meaning": "值班、值勤。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "split up with her husband",
+          "signalSide": "context-before",
+          "targetText": "by herself",
+          "relation": "刚与丈夫分手，故独自居住，by herself 与之因果呼应。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "herself",
+          "signalSide": "option",
+          "targetText": "by herself",
+          "relation": "by + herself 合成“独自一人”，回指 she 一人居住。"
+        }
+      ],
+      "teachingNote": "由“刚分手、一人住”的处境，合成出 by herself（独自）。"
+    },
+    "q-2020-bing-053": {
+      "blankId": "blank-2020-bing-053",
+      "blankNo": 53,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "she'd taken it out on ___ people，她因难以应对而把情绪发泄到“别人”身上，take it out on other people 指迁怒于他人，other 与泛指的旁人语义吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "rude",
+          "meaning": "无礼的（人）。"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "such",
+          "meaning": "这样的、如此的。"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "lonely",
+          "meaning": "孤独的。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "people",
+          "signalSide": "context-after",
+          "targetText": "other people",
+          "relation": "other 修饰 people，构成“其他人/别人”的修饰搭配。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "she’d taken it out on",
+          "signalSide": "context-before",
+          "targetText": "other people",
+          "relation": "take it out on other people 指把怨气撒到别人身上，宾语是泛指的旁人。"
+        }
+      ],
+      "teachingNote": "“迁怒于”的对象是无关旁人，泛指用 other people。"
+    },
+    "q-2020-bing-054": {
+      "blankId": "blank-2020-bing-054",
+      "blankNo": 54,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "That taught me a valuable ___，那件事教给“我”宝贵的一课，teach somebody a lesson 是固定搭配，learn/teach a lesson 表示“得到/传授经验教训”，与后文 I pass it on 相承。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "trick",
+          "meaning": "诀窍、把戏。"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "skill",
+          "meaning": "技能、技巧。"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "trade",
+          "meaning": "行业、生意、交易。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "That taught me a valuable",
+          "signalSide": "context-before",
+          "targetText": "lesson",
+          "relation": "teach me a valuable lesson 是“教给我宝贵一课”的固定搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "I pass it on to the people",
+          "signalSide": "context-after",
+          "targetText": "lesson",
+          "relation": "把这一“教训”传给别人，it 回指 lesson。"
+        }
+      ],
+      "teachingNote": "teach somebody a lesson 是固定搭配，表“给……一个教训”。"
+    },
+    "q-2020-bing-055": {
+      "blankId": "blank-2020-bing-055",
+      "blankNo": 55,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "I pass it on to the people who ___ in the market，“我”把经验传给在市场里“工作”的人，work in the market 表示在集市做生意/打工，与待客经验的传授对象一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "shop",
+          "meaning": "购物。"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "meet",
+          "meaning": "见面、相遇。"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "quarrel",
+          "meaning": "争吵。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "in the market",
+          "signalSide": "context-after",
+          "targetText": "work in the market",
+          "relation": "work in the market 指在市场里干活/做生意，构成搭配。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "I pass it on to the people",
+          "signalSide": "context-before",
+          "targetText": "work",
+          "relation": "传授待客经验的对象是同行从业者，即在市场工作的人。"
+        }
+      ],
+      "teachingNote": "把经验传给“同行”，定位为在市场里 work 的人。"
+    },
+    "q-2020-bing-056": {
+      "blankId": "blank-2020-bing-056",
+      "blankNo": 56,
+      "pos": "adverb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "Don't take it ___，紧承下文“顾客可能与丈夫吵架、孩子不舒服”，劝人别把顾客的无礼当成针对自己，take it personally 是固定搭配，意为“往心里去、当成针对个人”。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "kindly",
+          "meaning": "友善地。"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "secretly",
+          "meaning": "秘密地。"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "casually",
+          "meaning": "随意地、漫不经心地。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "Don’t take it",
+          "signalSide": "context-before",
+          "targetText": "take it personally",
+          "relation": "take it personally 是“把……当成针对个人”的固定搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Maybe she’s had a row with her husband",
+          "signalSide": "context-after",
+          "targetText": "personally",
+          "relation": "后文解释顾客有自己的烦恼，正是劝人“别往心里去”的理由。"
+        }
+      ],
+      "teachingNote": "劝人“别把别人的坏脾气当成冲自己来”，固定说法 take it personally。"
+    },
+    "q-2020-bing-057": {
+      "blankId": "blank-2020-bing-057",
+      "blankNo": 57,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "Maybe her child's not ___，与前句“她可能和丈夫吵了架”并列，推测顾客烦躁的另一种缘由是孩子身体“不舒服”，not well 表示身体欠佳，符合体谅顾客的语境。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "ready",
+          "meaning": "准备好的。"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "away",
+          "meaning": "离开的、不在的。"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "up",
+          "meaning": "起床的、醒着的。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "her child’s not",
+          "signalSide": "context-before",
+          "targetText": "well",
+          "relation": "be not well 指“身体不舒服”，主语是 her child，构成搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "Maybe she’s had a row with her husband",
+          "signalSide": "context-before",
+          "targetText": "well",
+          "relation": "与“和丈夫吵架”并列，再举一种顾客烦恼的可能：孩子生病。"
+        }
+      ],
+      "teachingNote": "be well 表“身体好”，not well 即“身体不舒服”，是体谅顾客的合理缘由。"
+    },
+    "q-2020-bing-058": {
+      "blankId": "blank-2020-bing-058",
+      "blankNo": 58,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "don't let your ego get ___，劝人别让自尊心“碍事”，get in the way 表示“妨碍、阻碍”，与后文“否则就处理不好、场面变僵”的因果一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "out of sight",
+          "meaning": "看不见、在视线外。"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "behind the scene",
+          "meaning": "在幕后。"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "above the law",
+          "meaning": "凌驾于法律之上。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "don’t let your ego",
+          "signalSide": "context-before",
+          "targetText": "in the way",
+          "relation": "let your ego get in the way 指“让自尊心从中作梗、碍事”。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "If you do, you won’ be able to",
+          "signalSide": "context-after",
+          "targetText": "in the way",
+          "relation": "后文“若如此就处理不了”说明自尊心“碍事”的后果，呼应 in the way。"
+        }
+      ],
+      "teachingNote": "劝人别让自尊心“掺和进来妨事”，固定短语 get in the way。"
+    },
+    "q-2020-bing-059": {
+      "blankId": "blank-2020-bing-059",
+      "blankNo": 59,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "you won' be able to ___ it and the whole thing develops into an unpleasant scene，如果让自尊作祟就“应付”不了局面，handle it 表示处理、应对，与上文 cope with、下文 unpleasant scene 的处理失败语义相承。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "stress",
+          "meaning": "强调；使紧张。"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "expect",
+          "meaning": "期待、预料。"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "blame",
+          "meaning": "责备、归咎。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the whole thing develops into an unpleasant scene",
+          "signalSide": "context-after",
+          "targetText": "handle",
+          "relation": "处理不了（can't handle it）才会演变成不快的场面，构成因果。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "won’ be able to",
+          "signalSide": "context-before",
+          "targetText": "handle it",
+          "relation": "be able to handle it 表示“能够应对它（局面）”，构成动宾搭配。"
+        }
+      ],
+      "teachingNote": "“应付/处理局面”用 handle it，处理不好才酿成不快场面。"
+    },
+    "q-2020-bing-060": {
+      "blankId": "blank-2020-bing-060",
+      "blankNo": 60,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "the whole thing develops into an unpleasant scene and that ___ everyone's day，演变成不愉快的场面会“毁掉”大家的一天，ruin one's day 表示破坏、糟蹋了某人的一天，与 unpleasant scene 的负面结果一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "makes",
+          "meaning": "成就、使……美好。"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "starts",
+          "meaning": "开始。"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "saves",
+          "meaning": "拯救、挽救。"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "everyone’s day",
+          "signalSide": "context-after",
+          "targetText": "ruins everyone's day",
+          "relation": "ruin one's day 指“毁掉某人的一天”，宾语是 everyone's day。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "an unpleasant scene",
+          "signalSide": "context-before",
+          "targetText": "ruins",
+          "relation": "不愉快的场面是负面诱因，其结果是毁掉大家的一天，呼应 ruins。"
+        }
+      ],
+      "teachingNote": "负面场面带来的结果，选 ruin one's day（毁掉一天）。"
+    }
+  }
+}

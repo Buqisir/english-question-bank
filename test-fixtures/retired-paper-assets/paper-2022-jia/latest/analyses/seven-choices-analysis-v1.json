@@ -1,0 +1,393 @@
+{
+  "schemaVersion": "seven-choices-analysis-v1",
+  "paperId": "paper-2022-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2022-jia-seven-choices"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "model": "claude-opus-4-8",
+    "promptVersion": "seven-choices-analysis-v1",
+    "reviewStatus": "reviewed",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-19",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2022-jia-seven-choices": {
+      "overview": "本文是一篇说明文，介绍世界各地外出就餐时需要了解的文化餐桌礼节。文章用小标题分块，分别讲筷子礼节、用手还是用餐具、提出要求三类情境，最后落到一条总规律。七选五的五个空分布在引言句、各分项段落与结尾，分别考查主旨概括、指代衔接、并列转折与“the more…the more”结构。",
+      "discourseStructure": {
+        "summary": "全文以“各地餐桌礼节差异大、了解一些技巧就能愉快用餐”开篇，随后用三个小标题（筷子礼节、用手还是用餐具、提出要求）分类列举不同国家的具体禁忌，结尾段落点出这些规则虽看似随意却很重要，并给出“在一个国家待得越久，就越能适应其文化习俗”的总结。",
+        "units": [
+          {
+            "unitId": "unit-intro",
+            "heading": "Important Things to Know When Dining Out",
+            "paragraphIds": [
+              "para-2022-jia-seven-title",
+              "para-2022-jia-seven-p1"
+            ],
+            "summary": "引言：各国餐桌礼节规则可能出乎意料，掌握一些技巧就能在任何地方愉快用餐。"
+          },
+          {
+            "unitId": "unit-chopstick",
+            "heading": "Chopstick Rules",
+            "paragraphIds": [
+              "para-2022-jia-seven-p2",
+              "para-2022-jia-seven-p3"
+            ],
+            "summary": "筷子礼节：放下筷子要并拢、与桌沿平行，且不可竖插食物或交叉摆放。"
+          },
+          {
+            "unitId": "unit-utensils",
+            "heading": "Hands or Utensils",
+            "paragraphIds": [
+              "para-2022-jia-seven-p4",
+              "para-2022-jia-seven-p5"
+            ],
+            "summary": "用手还是用餐具：印度、中东忌用左手，法国双手各持餐具，墨西哥认为用餐具不妥而偏好用手，智利忌用手指碰食物，泰国用叉把食物推到勺上。"
+          },
+          {
+            "unitId": "unit-requests",
+            "heading": "Making Requests",
+            "paragraphIds": [
+              "para-2022-jia-seven-p6",
+              "para-2022-jia-seven-p7"
+            ],
+            "summary": "提出要求：要盐和胡椒看似简单，但在葡萄牙是大忌，在意大利也绝不要额外加奶酪。"
+          },
+          {
+            "unitId": "unit-conclusion",
+            "paragraphIds": [
+              "para-2022-jia-seven-p8"
+            ],
+            "summary": "结尾：这些规则看似随意却很重要，在一个国家待得越久，就越能适应其异域文化习俗。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2022-jia-036": {
+      "blankId": "blank-2022-jia-036",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+      "supportingMechanismFacets": [],
+      "topicClues": [
+        "Cultural dining etiquette",
+        "important rules",
+        "Knowing some tips",
+        "enjoyable meal",
+        "no matter where you are in the world"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-jia-seven-p1",
+        "beforeQuote": "might surprise you with some of its important rules.",
+        "afterQuote": "Knowing some tips will help ensure that you have an enjoyable meal with friends or family"
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "embarrassing mistake at a restaurant",
+          "signalSide": "option",
+          "targetText": "Cultural dining etiquette / important rules",
+          "relation": "选项中 mistake at a restaurant 与空前 dining etiquette、important rules 同属外出就餐礼节话题场。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "important rules",
+          "signalSide": "context-before",
+          "targetText": "Don't get caught making an embarrassing mistake",
+          "relation": "空前 important rules 提示“违反规则会出错”，引出选项的“别犯尴尬错误”这一主旨提醒。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "Knowing some tips",
+          "signalSide": "context-after",
+          "targetText": "Don't get caught making an embarrassing mistake",
+          "relation": "空后 Knowing some tips 承接“别出错”的提醒，构成“别犯错→掌握技巧即可避免”的话题衔接。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "D",
+        "fitSummary": "空前指出各国餐桌礼节有重要规则，空后说掌握技巧就能愉快用餐，选项D“别在餐厅犯尴尬错误”正好充当承上启下的主旨提醒，与前后话题严密对接。",
+        "matchedClues": [
+          {
+            "contextSide": "important rules / dining etiquette",
+            "optionSide": "an embarrassing mistake at a restaurant",
+            "relation": "违反 dining etiquette 的 rules 即会在餐厅犯下令人尴尬的错误，话题一致。"
+          },
+          {
+            "contextSide": "Knowing some tips will help ensure",
+            "optionSide": "Don't get caught making an embarrassing mistake",
+            "relation": "空后用 tips 来“避免出错”，正回应选项提出的“别犯尴尬错误”。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A“一生中结交的朋友越多”是 the more…the more 结构，且话题为交友，与本段就餐礼节、空后非比较句均不符。"
+        }
+      ],
+      "teachingNote": "引言段空格常是全文主旨句，应抓前后核心话题词（dining etiquette / rules / tips）锁定与之同场的选项。"
+    },
+    "q-2022-jia-037": {
+      "blankId": "blank-2022-jia-037",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "handle chopsticks",
+        "put them down",
+        "parallel with the edge of the table",
+        "Chopstick Rules"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-jia-seven-p3",
+        "headingAnchor": "Chopstick Rules",
+        "beforeQuote": "always put them down together so they are parallel with the edge of the table in front of you.",
+        "afterQuote": ""
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "them",
+          "signalSide": "option",
+          "targetText": "chopsticks",
+          "relation": "选项中两个 them 均指代本段反复出现的 chopsticks，靠代词回指完成衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "chopsticks",
+          "signalSide": "context-before",
+          "targetText": "them / them",
+          "relation": "空前 chopsticks 是选项中 them 的先行词。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "put them down together",
+          "signalSide": "context-before",
+          "targetText": "Never stick them upright / cross them",
+          "relation": "空前讲正确摆放筷子的方式，选项以 Never…upright / cross 补充禁忌摆法，同属筷子摆放话题。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "F",
+        "fitSummary": "本段在讲筷子的正确摆放方式，选项F“切勿把筷子竖插食物或交叉摆放”用代词them回指chopsticks，正好补充该话题下的禁忌，置于段末顺理成章。",
+        "matchedClues": [
+          {
+            "contextSide": "The way you handle chopsticks / put them down together",
+            "optionSide": "Never stick them upright in your food or cross them",
+            "relation": "前句给出该怎样摆，选项给出不该怎样摆，正反互补于同一话题。"
+          },
+          {
+            "contextSide": "chopsticks",
+            "optionSide": "them",
+            "relation": "选项的 them 必须有复数先行词，唯有本段 chopsticks 满足。"
+          }
+        ]
+      },
+      "keyDistractors": [],
+      "teachingNote": "段末空若选项含代词them/they，先回头找复数先行词，本段唯一的复数名词chopsticks即锁定答案。"
+    },
+    "q-2022-jia-038": {
+      "blankId": "blank-2022-jia-038",
+      "positionFacet": "seven-choices.position.paragraph-middle",
+      "roleFacet": "seven-choices.role.cohesion",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "eat with your left hand",
+        "a utensil in each hand",
+        "use their hands",
+        "touch any food with your fingers"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-jia-seven-p5",
+        "headingAnchor": "Hands or Utensils",
+        "beforeQuote": "People in France expect you to eat with a utensil in each hand.",
+        "afterQuote": "instead preferring to use their hands."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "instead",
+          "signalSide": "context-after",
+          "targetText": "inappropriate to eat with utensils",
+          "relation": "空后 instead 表示“反而、转而”，要求空格句先否定用餐具，选项C正给出“认为用餐具不妥”这一被替代项。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "with utensils",
+          "signalSide": "option",
+          "targetText": "use their hands",
+          "relation": "选项 with utensils 与空后 use their hands 形成餐具—用手的对立，正是 instead 所连接的两端。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "use their hands",
+          "signalSide": "context-after",
+          "targetText": "inappropriate to eat with utensils",
+          "relation": "空后“偏好用手”与选项“认为用餐具不妥”话题对应，且 their 与选项主语 Mexicans 一致。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "C",
+        "fitSummary": "空后用instead preferring to use their hands，要求前面先说“某国人不用餐具”，选项C“墨西哥人认为用餐具不妥”恰为被instead替代的对象，逻辑连接严密。",
+        "matchedClues": [
+          {
+            "contextSide": "instead preferring to use their hands",
+            "optionSide": "Mexicans consider it inappropriate to eat with utensils",
+            "relation": "instead 连接“反对用餐具”与“转而用手”，两端话题正好对立互补。"
+          },
+          {
+            "contextSide": "their",
+            "optionSide": "Mexicans",
+            "relation": "空后物主代词 their 需以复数群体作先行词，选项主语 Mexicans 满足且语义连贯。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "E",
+          "reason": "E谈“弄乱盘子周围对厨师是好兆头”，与本段“用手还是用餐具”话题及 instead 的逻辑都不搭。"
+        }
+      ],
+      "teachingNote": "看到空后的 instead，要在空格句里找出被它替代、与空后形成对立的那一项，据此锁定选项。"
+    },
+    "q-2022-jia-039": {
+      "blankId": "blank-2022-jia-039",
+      "positionFacet": "seven-choices.position.paragraph-start",
+      "roleFacet": "seven-choices.role.topic",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "Making Requests",
+        "this would be a serious mistake",
+        "your seasoning skills",
+        "ask for extra cheese"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-jia-seven-p7",
+        "headingAnchor": "Making Requests",
+        "beforeQuote": "",
+        "afterQuote": "In Portugal, this would be a serious mistake, because it shows the chef that you don’t like their seasoning skills."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.referential-cohesion",
+          "signalText": "this",
+          "signalSide": "context-after",
+          "targetText": "to ask for salt and pepper at a meal",
+          "relation": "空后 this 指代选项中“要盐和胡椒”这一请求，靠指示代词回指完成段首衔接。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "ask for salt and pepper",
+          "signalSide": "option",
+          "targetText": "your seasoning skills",
+          "relation": "选项 salt and pepper 属于调味 seasoning 话题场，正解释空后“嫌厨师调味不好”。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "seasoning skills",
+          "signalSide": "context-after",
+          "targetText": "ask for salt and pepper at a meal",
+          "relation": "空后 seasoning skills 与选项加盐加胡椒同属调味话题，呼应小标题 Making Requests。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "G",
+        "fitSummary": "本段以小标题Making Requests开头，空后用this指代某个请求并说在葡萄牙是大忌，选项G“在用餐时要盐和胡椒看似是个简单请求”正是this的所指，且salt and pepper对应seasoning skills。",
+        "matchedClues": [
+          {
+            "contextSide": "this would be a serious mistake / seasoning skills",
+            "optionSide": "to ask for salt and pepper at a meal",
+            "relation": "要盐和胡椒即对厨师调味提出异议，正是空后所说的“严重错误”，this 回指该请求。"
+          },
+          {
+            "contextSide": "Making Requests",
+            "optionSide": "It may seem like a simple request",
+            "relation": "选项中的 request 直接呼应小标题 Making Requests，作段首主题句。"
+          }
+        ]
+      },
+      "keyDistractors": [],
+      "teachingNote": "段首空可借空后的指示代词this反向定位——找出this具体指代的那个请求/动作，对应选项即为答案。"
+    },
+    "q-2022-jia-040": {
+      "blankId": "blank-2022-jia-040",
+      "positionFacet": "seven-choices.position.paragraph-end",
+      "roleFacet": "seven-choices.role.summary",
+      "primaryMechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+      "supportingMechanismFacets": [
+        "seven-choices.cohesion.lexical.topic-field-alignment"
+      ],
+      "topicClues": [
+        "important in various countries",
+        "the more comfortable you'll begin to feel",
+        "its foreign cultural practices"
+      ],
+      "contextEvidence": {
+        "paragraphId": "para-2022-jia-seven-p8",
+        "beforeQuote": "but they are important in various countries.",
+        "afterQuote": "the more comfortable you’ll begin to feel with its foreign cultural practices."
+      },
+      "mechanismSignals": [
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "The more",
+          "signalSide": "option",
+          "targetText": "the more comfortable you'll begin to feel",
+          "relation": "选项以 The more 开头，与空后 the more comfortable 构成“the more…the more…”比较结构，前后两半必须配套。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.grammatical.logical-connector",
+          "signalText": "the more comfortable",
+          "signalSide": "context-after",
+          "targetText": "The more time you spend in any given country",
+          "relation": "空后 the more comfortable 是结构后半句，要求空格填入以 The more 引导的前半句。"
+        },
+        {
+          "mechanismFacet": "seven-choices.cohesion.lexical.topic-field-alignment",
+          "signalText": "any given country",
+          "signalSide": "option",
+          "targetText": "its foreign cultural practices",
+          "relation": "选项 country 与空后 its foreign cultural practices 中的 its 指代一致，话题对接到“某国的文化习俗”。"
+        }
+      ],
+      "optionFit": {
+        "correctOptionLabel": "B",
+        "fitSummary": "空后是the more comfortable you'll begin to feel，构成“the more…the more…”句式的后半句，选项B“你在某个国家待得越久”正是配套的前半句，且country与its foreign cultural practices语义一致。",
+        "matchedClues": [
+          {
+            "contextSide": "the more comfortable you'll begin to feel",
+            "optionSide": "The more time you spend in any given country",
+            "relation": "待的时间越久（因）→ 越自在（果），完整组成 the more…the more 越…越…结构。"
+          },
+          {
+            "contextSide": "its foreign cultural practices",
+            "optionSide": "in any given country",
+            "relation": "空后 its 指代选项中的 country，文化习俗归属于该国，指代连贯。"
+          }
+        ]
+      },
+      "keyDistractors": [
+        {
+          "optionLabel": "A",
+          "reason": "A“你一生结交的朋友越多”同为 The more 结构，但话题是交友，与空后“越发适应某国文化习俗”因果不通，故排除。"
+        }
+      ],
+      "teachingNote": "看到空后是 the more + 形容词，立即判定为“the more…the more…”句式，从含 The more 的选项中按话题（待得越久→越适应该国文化）择优。"
+    }
+  }
+}

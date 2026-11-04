@@ -1,0 +1,1501 @@
+{
+  "schemaVersion": "reading-choice-analysis-v1",
+  "paperId": "paper-2020-jia",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2020-jia-reading-a",
+    "group-2020-jia-reading-b",
+    "group-2020-jia-reading-c",
+    "group-2020-jia-reading-d"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "reading-choice-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai",
+    "model": "claude-opus-4-8",
+    "reviewedBy": "claude-opus-4-8",
+    "reviewedAt": "2026-06-19T00:00:00Z"
+  },
+  "groups": {
+    "group-2020-jia-reading-a": {
+      "overview": "本文是一篇对小说《The Snake-Stone》(作者 Berlie Doherty) 的书评。作者按照故事要素——背景、主题、人物、转折点、旅程——分条目介绍这部讲述少年 James 寻找生母、完成自我发现之旅的小说。",
+      "discourseStructure": {
+        "summary": "书评以分项标签 (The setting / The theme / The characters / The turning point / The journey) 的结构逐条展开，先交代故事背景与核心主题，再介绍主要人物，随后点明推动情节的转折点，最后概述主人公的寻母旅程及圆满结局。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2020-jia-reading-a-1",
+            "summary": "标题行：对 Berlie Doherty 所著《The Snake-Stone》的书评。",
+            "function": "点明文章体裁为书评并给出书名与作者。"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-a-2",
+            "summary": "介绍故事背景：既有英国城市，也有包括偏远村庄在内的乡村。",
+            "function": "交代小说的空间背景 (setting)。"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-a-3",
+            "summary": "点明核心主题是少年的自我发现之旅——寻找早年与之分离的生母，并引用游泳教练的话点出 James 的成长。",
+            "function": "阐明小说主题 (theme) 并以教练之言佐证主人公的转变。"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-a-4",
+            "summary": "介绍主人公 James——一名跳水冠军，与养父母生活舒适，却具备踏上寻母长旅的品质；其他人物刻画真实。",
+            "function": "介绍小说人物 (characters)。"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-a-5",
+            "summary": "点明转折点：养父母赴伦敦期间，James 凭借生母留下的化石蛇石和一张写有地址残片的字条开始追寻身世。",
+            "function": "交代推动情节的转折点 (turning point)。"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-a-6",
+            "summary": "概述 James 的寻母旅程：在地理老师帮助下前往偏远村庄，历经艰辛终于见到生母 Anne，理解了被弃缘由，并获得圆满结局。",
+            "function": "概述主人公的旅程 (journey) 与小说结局。"
+          }
+        ]
+      }
+    },
+    "group-2020-jia-reading-b": {
+      "overview": "一篇关于德国北部某城市匿名捐款者的新闻报道。神秘捐款者把装着现金的白色信封连同当地报纸的相关报道一起寄给需要帮助的人，引发全城猜测，被比作劫富济贫的罗宾汉。",
+      "discourseStructure": {
+        "summary": "文章按事件发展顺序展开：先引出神秘捐款者的现象并设悬念，再列举几次捐款，重点叙述寄给残疾男孩 Tom 一家的捐款及其母亲的反应，最后由报社编辑收尾、点出不愿寻找捐款者以免捐款停止。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2020-jia-reading-b-1",
+            "summary": "引出神秘捐款者：有人认为是罗宾汉，有人认为是富人临终散财，他寄现金信封连同当地报纸文章给值得帮助的人，让一座德国北部城市相信了童话。",
+            "function": "引入话题并设置悬念"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-b-2",
+            "summary": "第一个信封寄给受害者援助组织，内含1000欧元和报纸剪报；随后类似的匿名白色信封各装10000欧元寄到幼儿园和教堂。",
+            "function": "举例说明捐款的方式与去向"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-b-3",
+            "summary": "信封不断寄来，已累计发放至少19万欧元；上月一封寄到报社办公室，源于此前报道残疾男孩 Tom，信中装有20张500欧元钞票和文章副本，家庭姓名被划线。",
+            "function": "推进事件，引出 Tom 一家的捐款"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-b-4",
+            "summary": "Tom 的母亲 Claudia Neumann 回忆听到消息时正在开车，不得不靠边停车，惊讶得说不出话。",
+            "function": "通过母亲的直接引语呈现当事人反应"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-b-5",
+            "summary": "这笔钱将用于把住宅入口改造成轮椅可通行，以及支付保险公司拒绝承担的一个疗程的治疗费用。",
+            "function": "说明捐款的具体用途"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-b-6",
+            "summary": "Neumann 太太感叹在人人为己的社会里有人如此无私令人惊讶；家人猜测捐款者是劫富济贫式的罗宾汉。",
+            "function": "通过评论深化主题并呼应开头猜测"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-b-7",
+            "summary": "报社编辑 Henning Noske 推测捐款者也许是行将就木的老人，但他叮嘱记者不要去寻找这位城市英雄，唯恐曝光会令捐款停止。",
+            "function": "收束全文并点出对捐款持续的态度"
+          }
+        ]
+      }
+    },
+    "group-2020-jia-reading-c": {
+      "overview": "本文是一篇关于纪录片《Eye of the Pangolin》的说明性文章。穿山甲是世界上被贩卖最多的哺乳动物，濒临灭绝。该纪录片旨在唤起公众对穿山甲保护的关注，号召人们行动起来制止非法贩卖。",
+      "discourseStructure": {
+        "summary": "文章先介绍纪录片的制作背景与意图（唤起关注、激励保护行动），再讲述摄制过程与拍摄团队对穿山甲的了解，接着说明穿山甲被非法猎杀的严峻现状，最后重申纪录片的主旨——聚焦自然栖息地中的穿山甲并呼吁行动。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2020-jia-reading-c-1",
+            "summary": "介绍穿山甲是世界上被贩卖最多、濒临灭绝的哺乳动物，新纪录片《Eye of the Pangolin》试图以独特方式激励人们行动与保护，2019年5月在YouTube上线，意在触及互联网可及的社区，尤其是穿山甲栖息地附近的非洲社区。",
+            "function": "引出纪录片及其制作意图，点明保护主旨。"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-c-2",
+            "summary": "摄制组历时两年前往南非、加纳、中非共和国和加蓬寻找四种独特的穿山甲，这是前所未有的壮举。两位制片人起初对穿山甲了解甚少，但逐渐尊重并欣赏这些动物，还发现它们其实是相当挑食的食客。",
+            "function": "叙述拍摄过程及对穿山甲习性的了解。"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-c-3",
+            "summary": "说明穿山甲因鳞片（用于传统医药）和肉而在非洲遭非法猎杀。2019年4月新加坡海关两次查获共24吨穿山甲鳞片，相当于6.9万只穿山甲死亡。",
+            "function": "用数据展现穿山甲遭非法贩卖的严峻现状。"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-c-4",
+            "summary": "指出尽管纪录片较少关注贩卖问题、更多聚焦自然栖息地中的穿山甲，但其目的是激励全球观众呼吁行动，终结贩卖并保护这些独特生物。",
+            "function": "重申纪录片侧重点与主旨。"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-c-5",
+            "summary": "总结这部在南非、加纳、中非共和国和加蓬实地拍摄的有力纪录片，讲述了两个人首次将全部四种非洲穿山甲拍上镜头的使命故事。",
+            "function": "收束全文，总括纪录片的核心内容。"
+          }
+        ]
+      }
+    },
+    "group-2020-jia-reading-d": {
+      "overview": "本文是一篇科普说明文，介绍哈佛与麻省理工研究者关于“人对自身年龄的感知会影响健康”这一身心假说的研究。文章先引出俗语并点明研究结论，再列举多项研究证据，最后归纳总体结论与机制。",
+      "discourseStructure": {
+        "summary": "全文按“引出话题—交代研究来源—列举证据—补充证据—归纳结论”的顺序展开，由具体研究逐步推向身心假说的总体结论。",
+        "paragraphs": [
+          {
+            "paragraphId": "para-2020-jia-reading-d-1",
+            "summary": "用俗语“你觉得自己多年轻就有多年轻”引出话题，并指出哈佛与麻省理工的研究者认为这句话或许有其道理。",
+            "function": "引入话题，点出全文核心观点。"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-d-2",
+            "summary": "介绍主导研究的哈佛心理学家 Ellen Langer 及其团队，他们梳理文献寻找年龄感知影响健康的证据，并在期刊上发表结果。",
+            "function": "交代研究者身份与研究来源，增强可信度。"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-d-3",
+            "summary": "列举多项研究：做发型后自觉变年轻的女性看起来更年轻且血压下降；过早秃顶的男性更易患癌症和心脏病。研究者认为“觉得自己比实际年龄老”与这些健康后果相关。",
+            "function": "用具体研究数据支撑核心观点。"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-d-4",
+            "summary": "补充研究：晚育的女性更健康长寿（被归因于多与年轻女性相处），与年轻伴侣结婚的人比与年长伴侣结婚的人更长寿。",
+            "function": "继续以证据强化年龄感知与健康的关联。"
+          },
+          {
+            "paragraphId": "para-2020-jia-reading-d-5",
+            "summary": "综合各研究，支持身心假说：当心态年轻时，身体也可随之年轻；并指出与衰老相关的暗示可能引发一系列影响健康的生理过程。",
+            "function": "总结归纳，提出总体结论与机制。"
+          }
+        ]
+      }
+    }
+  },
+  "questions": {
+    "q-2020-jia-021": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "questionFocus": "考查对整部小说核心主题的把握。",
+      "stemTranslationZh": "这部小说的主题是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "与养父母一起的生活。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "He is a championship diver, and has a comfortable life with his foster parents (养父母) .",
+            "sourceHighlight": "a comfortable life with his foster parents",
+            "optionText": "Life with foster parents.",
+            "optionHighlight": "Life with foster parents",
+            "explanation": "原文仅把与养父母的舒适生活作为人物背景细节提及，并非全书主题；把次要细节当主题属于以偏概全。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-a-4",
+              "quote": "He is a championship diver, and has a comfortable life with his foster parents (养父母) .",
+              "anchor": "与养父母生活只是背景细节"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "跳水世界里的生活。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "James is the hero of the story. He is a championship diver",
+            "sourceHighlight": "He is a championship diver",
+            "optionText": "Life in the world of diving.",
+            "optionHighlight": "Life in the world of diving",
+            "explanation": "跳水冠军只是主人公的身份设定，并非小说主题；将人物身份细节拔高为全书主题属于范围偷换。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-a-4",
+              "quote": "James is the hero of the story. He is a championship diver",
+              "anchor": "跳水身份只是人物设定"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一段自我发现之旅。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-jia-reading-a-3",
+              "quote": "The main theme is a teenage search of self-discovery, in this case the search for a mother from whom the hero was separated at an early age.",
+              "anchor": "原文明确点出主题是自我发现"
+            },
+            {
+              "role": "support",
+              "paragraphId": "para-2020-jia-reading-a-6",
+              "quote": "As a joumey of self-discovery, The Snake-Stone also provides its readers with a happy ending.",
+              "anchor": "结尾再次以自我发现之旅定性全书"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一次环游全国的旅行。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The novel's theme is a travel around the country.",
+            "explanation": "原文将故事定性为自我发现之旅，主人公前往偏远村庄是为寻母，并非环游全国的观光旅行，原文未提及以观光为主题。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the main theme of the novel",
+          "sourceRole": "stem",
+          "targetText": "The main theme is a teenage search of self-discovery",
+          "targetParagraphId": "para-2020-jia-reading-a-3",
+          "relationType": "locationCue",
+          "note": "题干问 main theme，原文 The theme 段落直接用 The main theme is... self-discovery 给出主题定位。"
+        },
+        {
+          "sourceText": "A journey of self-discovery.",
+          "sourceRole": "correctOption",
+          "targetText": "a teenage search of self-discovery",
+          "targetParagraphId": "para-2020-jia-reading-a-3",
+          "relationType": "paraphrase",
+          "note": "正确项 journey of self-discovery 与原文 search of self-discovery 为同义替换 (search ≈ journey)。"
+        }
+      ]
+    },
+    "q-2020-jia-022": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查对教练所说话语隐含意义的推断。",
+      "stemTranslationZh": "第二段中教练的话暗示了什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "James 是一名成功的跳水运动员。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "You are not like a kid obeying instructions any more. You are diving like young man who knows where he is going.",
+            "sourceHighlight": "not like a kid obeying instructions any more",
+            "optionText": "James is a successful diver.",
+            "optionHighlight": "a successful diver",
+            "explanation": "教练强调的是 James 不再像听指令的孩子、变得有主见，重点在心智的独立成长，而非跳水成绩好坏；把话语理解为评价跳水成功偏离了原意。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-a-3",
+              "quote": "You are not like a kid obeying instructions any more. You are diving like young man who knows where he is going.",
+              "anchor": "教练强调心智独立而非跳水成绩"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "James 是一个独立的年轻人。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-jia-reading-a-3",
+              "quote": "You are not like a kid obeying instructions any more. You are diving like young man who knows where he is going.",
+              "anchor": "不再听命于人、知道自己方向，暗示独立"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "James 是一个外向的年轻人。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "James is an outgoing young man.",
+            "explanation": "教练的话谈的是 James 不再盲从、知道方向的独立心态，原文未提及其性格是否外向。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "James 是一个有希望的游泳运动员。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "You are diving like young man who knows where he is going.",
+            "sourceEntity": "diving / a young man who knows where he is going",
+            "optionText": "James is a hopeful swimmer.",
+            "optionEntity": "a hopeful swimmer",
+            "explanation": "原文说的是 diving (跳水) 且重点在心智独立，选项却换成 swimmer (游泳运动员) 并强调有前途，既错配了运动项目，也偏离教练话语的本意。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-a-3",
+              "quote": "You are diving like young man who knows where he is going.",
+              "anchor": "原文为 diving 而非 swimmer"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the coach's words in Paragraph 2",
+          "sourceRole": "stem",
+          "targetText": "James’ swimming coach says to him, “You are not like a kid obeying instructions any more. You are diving like young man who knows where he is going.”",
+          "targetParagraphId": "para-2020-jia-reading-a-3",
+          "relationType": "locationCue",
+          "note": "题干指向教练在该段所说的话，原文用 swimming coach says to him 引出直接引语，据此定位。"
+        },
+        {
+          "sourceText": "an independent young man",
+          "sourceRole": "correctOption",
+          "targetText": "not like a kid obeying instructions any more",
+          "targetParagraphId": "para-2020-jia-reading-a-3",
+          "relationType": "paraphrase",
+          "note": "正确项 independent (独立的) 是对原文 not like a kid obeying instructions / knows where he is going (不再听命、知道自己方向) 的推断式同义概括。"
+        }
+      ]
+    },
+    "q-2020-jia-023": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对小说中 snake stone 这一物件身份的细节理解。",
+      "stemTranslationZh": "小说中的蛇石是          。",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一块上面刻有地址的石头。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "It was written on a tom envelope with parts of an address still there.",
+            "sourceEntity": "a torn envelope with parts of an address",
+            "optionText": "a stone with an address on it.",
+            "optionEntity": "a stone with an address on it",
+            "explanation": "带有部分地址的是那张写在残破信封上的字条，而非蛇石本身；选项把地址错配到了石头上，对象张冠李戴。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-a-5",
+              "quote": "It was written on a tom envelope with parts of an address still there.",
+              "anchor": "地址在信封上而非蛇石上"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "养父母留下的一块化石。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The only clue he has is a fossil, “the snake stone” which she left behind",
+            "sourceEntity": "she (the birth mother) left behind",
+            "optionText": "a fossil left by the foster parents.",
+            "optionEntity": "left by the foster parents",
+            "explanation": "蛇石确为化石 (fossil)，但原文明确是生母 she 留下的，选项却说成养父母留下，留下者对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-a-5",
+              "quote": "The only clue he has is a fossil, “the snake stone” which she left behind",
+              "anchor": "化石由生母留下，非养父母"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "游泳教练送的礼物。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "The snake stone is a gift from the swimming coach.",
+            "explanation": "原文说蛇石是生母留下的唯一线索，从未提及它是游泳教练所赠的礼物。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "生母留下的一条线索。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-jia-reading-a-5",
+              "quote": "The only clue he has is a fossil, “the snake stone” which she left behind along with a note which she had written, “Take good care of Sammie.”",
+              "anchor": "蛇石是生母留下的唯一线索"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The snake stone in the novel",
+          "sourceRole": "stem",
+          "targetText": "The only clue he has is a fossil, “the snake stone” which she left behind",
+          "targetParagraphId": "para-2020-jia-reading-a-5",
+          "relationType": "locationCue",
+          "note": "题干以 the snake stone 为定位词，原文在转折点段落用引号 “the snake stone” 直接界定其身份。"
+        },
+        {
+          "sourceText": "a clue left by the birth mother",
+          "sourceRole": "correctOption",
+          "targetText": "The only clue he has is a fossil, “the snake stone” which she left behind",
+          "targetParagraphId": "para-2020-jia-reading-a-5",
+          "relationType": "paraphrase",
+          "note": "正确项 a clue left by the birth mother 与原文 the only clue ... which she (生母) left behind 同义替换，she 即指代生母。"
+        }
+      ]
+    },
+    "q-2020-jia-024": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对 Braunschueiger Zeitung 这一专有名词所指对象的细节理解。",
+      "stemTranslationZh": "Braunschueiger Zeitung 是一个______的名称。",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "一座教堂",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "then arived at a kindergarten and a church",
+            "sourceEntity": "a church",
+            "optionText": "a church",
+            "optionEntity": "a church",
+            "explanation": "原文中 a church 是收到捐款信封的对象之一，并非 Braunschueiger Zeitung 所指对象，属对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-b-2",
+              "quote": "then arived at a kindergarten and a church",
+              "anchor": "教堂是收信封对象"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一家银行",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "Braunschueiger Zeitung 是一家银行",
+            "explanation": "原文未提及 Braunschueiger Zeitung 是银行；bank 仅出现在家人猜测捐款者像罗宾汉从银行取钱的语境中。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "一份报纸",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-jia-reading-b-3",
+              "quote": "The receptionist at the Braunschiceiger Zeitung opened an anonymous white envelope",
+              "anchor": "报社前台拆信封"
+            },
+            {
+              "paragraphId": "para-2020-jia-reading-b-7",
+              "quote": "Henning Noske, the editor of the Braunschve Zeitung",
+              "anchor": "Zeitung 的编辑"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "一本杂志",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "told Der Spiegel magazine",
+            "sourceEntity": "Der Spiegel magazine",
+            "optionText": "a magazine",
+            "optionEntity": "a magazine",
+            "explanation": "原文中的杂志是 Der Spiegel magazine，是母亲讲述经历的对象，并非 Braunschueiger Zeitung，属对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-b-4",
+              "quote": "told Der Spiegel magazine",
+              "anchor": "Der Spiegel 才是杂志"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "newspaper",
+          "sourceRole": "correctOption",
+          "targetText": "one of them was sent to the newspaper’s own office",
+          "targetParagraphId": "para-2020-jia-reading-b-3",
+          "relationType": "locationCue",
+          "note": "由 newspaper’s own office 与下一句报社前台 The receptionist at the Braunschiceiger Zeitung 的指代关系可定位 Braunschueiger Zeitung 就是这家 newspaper（报纸）。"
+        }
+      ]
+    },
+    "q-2020-jia-025": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对寄给 Tom 一家这笔捐款相关细节（金额、寄送方式、用途、母亲反应）的判断。",
+      "stemTranslationZh": "关于给 Tom 的那笔捐款，下列哪一项是正确的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "这笔捐款总计达19万欧元。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "so far at least €190,000 has been distributed",
+            "sourceHighlight": "at least €190,000 has been distributed",
+            "optionText": "The donation amounted to €190,000.",
+            "optionHighlight": "amounted to €190,000",
+            "explanation": "19万欧元是迄今所有信封发放的总额，并非寄给 Tom 一家这一笔；选项把总额偷换成单笔捐款，属范围夸大。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-b-3",
+              "quote": "so far at least €190,000 has been distributed",
+              "anchor": "19万是累计总额"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "这笔捐款被直接寄到了他家。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "one of them was sent to the newspaper’s own office",
+            "sourceEntity": "the newspaper’s own office",
+            "optionText": "The donation was sent directly to his house.",
+            "optionEntity": "his house",
+            "explanation": "信封是寄到报社办公室，而非直接寄到 Tom 家，寄达对象被错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-b-3",
+              "quote": "one of them was sent to the newspaper’s own office",
+              "anchor": "寄到的是报社"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "这笔钱将用于他的教育。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "The money will be used to make the entrance to their house wheelchair-accessible and for a course of treatment",
+            "sourceEntity": "wheelchair-accessible entrance and a course of treatment",
+            "optionText": "The money will be used for his education.",
+            "optionEntity": "his education",
+            "explanation": "原文说钱用于改造轮椅入口和治疗，并非用于教育，用途对象被错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-b-5",
+              "quote": "The money will be used to make the entrance to their house wheelchair-accessible and for a course of treatment",
+              "anchor": "钱用于无障碍改造与治疗"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "他的母亲对这笔捐款感到惊讶。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-jia-reading-b-6",
+              "quote": "for this to happen in such a society in which evervone thinks of himself was astonishing,” Mrs. Neumann said",
+              "anchor": "母亲称感到惊讶"
+            },
+            {
+              "paragraphId": "para-2020-jia-reading-b-4",
+              "quote": "I had to park on the side of the road; was speechless.",
+              "anchor": "惊讶到说不出话"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "His mother felt astonished",
+          "sourceRole": "correctOption",
+          "targetText": "was astonishing,” Mrs. Neumann said",
+          "targetParagraphId": "para-2020-jia-reading-b-6",
+          "relationType": "wordFamily",
+          "note": "选项 felt astonished 与原文 Mrs. Neumann 所说的 was astonishing 同源（astonish 词族），对应母亲对捐款的惊讶之情。"
+        }
+      ]
+    },
+    "q-2020-jia-026": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查根据全文（尤其结尾）推断捐款是否会继续。",
+      "stemTranslationZh": "从文章中可以推断出______。",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "捐款者是一位富有的老人",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Maybe it is an old person who is about to die. We just do not know.",
+            "sourceHighlight": "Maybe it is an old person",
+            "optionText": "the donator is a rich old man",
+            "optionHighlight": "is a rich old man",
+            "explanation": "原文仅以 Maybe 推测可能是行将就木的老人，并明说 We just do not know，把不确定的猜测说成确定的“富有老人”属过度断言。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-b-7",
+              "quote": "Maybe it is an old person who is about to die. We just do not know.",
+              "anchor": "只是不确定的猜测"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "捐款将继续到来",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-jia-reading-b-3",
+              "quote": "The envelopes keep coming",
+              "anchor": "信封不断寄来"
+            },
+            {
+              "paragraphId": "para-2020-jia-reading-b-7",
+              "quote": "for fear that discovery may stop the donations",
+              "anchor": "避免曝光以免捐款停止"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "捐款来自这家报纸",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "one of them was sent to the newspaper’s own office",
+            "sourceEntity": "the newspaper (recipient)",
+            "optionText": "the donation comes from the newspaper",
+            "optionEntity": "the newspaper (source)",
+            "explanation": "报纸是收到信封的对象之一，而非捐款来源，选项把接收方错配成出资方。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-b-3",
+              "quote": "one of them was sent to the newspaper’s own office",
+              "anchor": "报纸是收件方"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "捐款者很快会被找出来",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAction",
+            "sourceQuote": "he has told his reporters not to look for the city’s hero, for fear that discovery may stop the donations",
+            "sourceHighlight": "not to look for the city’s hero",
+            "optionText": "the donator will soon be found out",
+            "optionHighlight": "will soon be found out",
+            "explanation": "编辑特意叮嘱记者不要去寻找这位英雄、唯恐曝光使捐款停止，与“很快被找出来”的方向相反，属黑白颠倒。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-b-7",
+              "quote": "he has told his reporters not to look for the city’s hero, for fear that discovery may stop the donations",
+              "anchor": "刻意不去寻找捐款者"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "the donation will continue to come",
+          "sourceRole": "correctOption",
+          "targetText": "The envelopes keep coming",
+          "targetParagraphId": "para-2020-jia-reading-b-3",
+          "relationType": "paraphrase",
+          "note": "选项 will continue to come 是对原文 The envelopes keep coming 的同义替换，再结合结尾 stop the donations 的担忧可推断捐款会持续。"
+        }
+      ]
+    },
+    "q-2020-jia-027": {
+      "skill": {
+        "primary": "title"
+      },
+      "questionFocus": "考查对全文主旨的概括，选出最贴切的标题。",
+      "stemTranslationZh": "本文最佳标题是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "报纸筹得善款",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "one of them was sent to the newspaper’s own office",
+            "sourceEntity": "the newspaper (recipient)",
+            "optionText": "Money Is Raised by the Newspaper.",
+            "optionEntity": "the Newspaper (fund-raiser)",
+            "explanation": "报纸是收到捐款的对象之一，并未筹款；标题把接收方错配为筹款方。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-b-3",
+              "quote": "one of them was sent to the newspaper’s own office",
+              "anchor": "报纸是收款方"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "报纸把钱分发给有需要的人",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "the donator who started sending envelopes with cash to deserving causes",
+            "sourceEntity": "the donator",
+            "optionText": "Newspaper Distributes Money to the Needy.",
+            "optionEntity": "Newspaper",
+            "explanation": "把钱寄给值得帮助者的是匿名捐款者，不是报纸；标题把发放主体错配为报纸。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-b-1",
+              "quote": "the donator who started sending envelopes with cash to deserving causes",
+              "anchor": "发钱的是捐款者"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "无名英雄在信封里传递爱心",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-jia-reading-b-1",
+              "quote": "the donator who started sending envelopes with cash to deserving causes",
+              "anchor": "匿名者用信封送现金"
+            },
+            {
+              "paragraphId": "para-2020-jia-reading-b-7",
+              "quote": "he has told his reporters not to look for the city’s hero",
+              "anchor": "无名的城市英雄"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "罗宾汉重返该城",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Some people believe that a Robin Hood is at work",
+            "sourceHighlight": "Some people believe",
+            "optionText": "Robin Hood Returns to the City",
+            "optionHighlight": "Robin Hood Returns",
+            "explanation": "罗宾汉只是部分人和家人的猜测，文中并未确证，把一种揣测当作事实作标题属过度断言。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-b-1",
+              "quote": "Some people believe that a Robin Hood is at work",
+              "anchor": "罗宾汉仅是猜测"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Unknown Hero",
+          "sourceRole": "correctOption",
+          "targetText": "not to look for the city’s hero",
+          "targetParagraphId": "para-2020-jia-reading-b-7",
+          "relationType": "paraphrase",
+          "note": "标题 Unknown Hero 对应原文匿名（anonymous）且被称为 the city’s hero 却无人知晓身份，Spreads Love in Envelopes 概括 sending envelopes with cash 的善举。"
+        }
+      ]
+    },
+    "q-2020-jia-028": {
+      "skill": {
+        "primary": "authorPurpose"
+      },
+      "questionFocus": "考查制作这部纪录片的目的。",
+      "stemTranslationZh": "这部纪录片的目的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "研究穿山甲的处境。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "a new wildlife documentary, Eye of the Pangolin, is attempting a unique way to inspire action and conservation.",
+            "sourceHighlight": "inspire action and conservation",
+            "optionText": "To study the situation of pangolins.",
+            "optionHighlight": "To study the situation",
+            "explanation": "原文目的是激励行动与保护（inspire action and conservation），而非仅仅“研究处境”；选项把唤起保护行动的目的缩小为单纯的研究，偷换了范围。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-c-1",
+              "quote": "is attempting a unique way to inspire action and conservation",
+              "anchor": "目的是 inspire action and conservation"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "提高对穿山甲保护的意识。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-jia-reading-c-1",
+              "quote": "is attempting a unique way to inspire action and conservation",
+              "anchor": "激励行动与保护"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2020-jia-reading-c-1",
+              "quote": "To draw attention to these scaly (有鳞片的) , anteater-like-animals",
+              "anchor": "唤起对穿山甲的关注"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "筹集资金以保护穿山甲。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "纪录片的目的是筹集资金保护穿山甲。",
+            "explanation": "原文未提及任何筹款（collect fund）相关内容，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "提议建立穿山甲保护区。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "纪录片的目的是提议建立穿山甲保护区。",
+            "explanation": "原文未提及设立保护区（pangolin reserves）的提议，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "purpose of the documentary",
+          "sourceRole": "stem",
+          "targetText": "is attempting a unique way to inspire action and conservation",
+          "targetParagraphId": "para-2020-jia-reading-c-1",
+          "relationType": "paraphrase",
+          "note": "题干问 purpose（目的），原文用 to inspire action and conservation 表达纪录片意图；raise awareness of protection 是对 inspire conservation / draw attention 的同义替换。"
+        }
+      ]
+    },
+    "q-2020-jia-029": {
+      "skill": {
+        "primary": "wordMeaning"
+      },
+      "questionFocus": "考查第二段画线词 fussy 的词义推测。",
+      "stemTranslationZh": "第二段中画线词 “fussy” 的意思是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "挑剔的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-jia-reading-c-2",
+              "quote": "You would think they would eat any type of ant, but they all prefer a specific type ant.",
+              "anchor": "本以为什么蚂蚁都吃，实则只偏好特定一种"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "邋遢的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "fussy 意为邋遢的（messy）。",
+            "explanation": "原文以“只偏好某一特定种类的蚂蚁”界定 fussy，意为挑食/挑剔，未涉及邋遢、脏乱之意，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "爱炫耀的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "fussy 意为爱炫耀的（showy）。",
+            "explanation": "原文语境讲穿山甲的进食偏好，与炫耀、招摇毫无关联，属无中生有。"
+          }
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "笨重的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "fussy 意为笨重的（heavy）。",
+            "explanation": "原文用 fussy 描述穿山甲挑食的进食习性，与体重或重量无关，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "fussy",
+          "sourceRole": "stem",
+          "targetText": "they all prefer a specific type ant",
+          "targetParagraphId": "para-2020-jia-reading-c-2",
+          "relationType": "locationCue",
+          "note": "画线词 fussy eaters 由后文 prefer a specific type ant（只偏好某一特定种类的蚂蚁）解释，可推断 fussy = picky（挑剔/挑食）。"
+        }
+      ]
+    },
+    "q-2020-jia-030": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "questionFocus": "考查纪录片主要内容/主题。",
+      "stemTranslationZh": "这部纪录片主要讲的是什么？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "穿山甲的非法交易。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeTrend",
+            "sourceQuote": "Though the documentary focuses less on the trafficking of pangolins, and more on the animals in their natural habitat",
+            "sourceHighlight": "focuses less on the trafficking of pangolins",
+            "optionText": "The illegal trade of pangolins.",
+            "optionHighlight": "The illegal trade of pangolins",
+            "explanation": "原文明确说纪录片“较少”关注贩卖（focuses less on the trafficking），选项却把非法交易当作主要内容，与原文侧重点相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-c-4",
+              "quote": "the documentary focuses less on the trafficking of pangolins, and more on the animals in their natural habitat",
+              "anchor": "纪录片较少关注贩卖，更多关注自然栖息地"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "穿山甲鳞片的医药功能。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "their scales, which are used for traditional medicine",
+            "optionText": "The medical function of pangolin's scales.",
+            "matchType": "wordFamily",
+            "relationNote": "原文 traditional medicine 只是说明鳞片被非法猎杀的用途，与 medical（medicine 的同词族）形成词钩干扰，但鳞片的医药功能并非纪录片的主要内容。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-c-3",
+              "quote": "their scales, which are used for traditional medicine",
+              "anchor": "鳞片用于传统医药"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "Pangolin Africa 拯救穿山甲的努力。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "sourceLexicalTrap",
+            "sourceText": "Partnering with the non-profit organization Pangolin Africa",
+            "optionText": "The efforts of Pangolin Africa to save pangolins.",
+            "matchType": "exact",
+            "relationNote": "原文仅提到与非营利组织 Pangolin Africa 合作制作纪录片，选项借用原文中出现的 Pangolin Africa 一词设钩，但该组织的拯救努力并非纪录片的主要内容。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-c-1",
+              "quote": "Partnering with the non-profit organization Pangolin Africa",
+              "anchor": "与 Pangolin Africa 合作"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "穿山甲在其自然栖息地中的生活。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-jia-reading-c-4",
+              "quote": "more on the animals in their natural habitat",
+              "anchor": "更多关注自然栖息地中的动物"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "The life of pangolins in their natural habital.",
+          "sourceRole": "correctOption",
+          "targetText": "more on the animals in their natural habitat",
+          "targetParagraphId": "para-2020-jia-reading-c-4",
+          "relationType": "paraphrase",
+          "note": "正确项 the life of pangolins in their natural habitat 是对原文 more on the animals in their natural habitat 的同义替换，对应纪录片的主要内容。"
+        }
+      ]
+    },
+    "q-2020-jia-031": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查文章最可能的出处（文体/来源推断）。",
+      "stemTranslationZh": "这篇文章最有可能出自哪里？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "宣传册。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "文章出自宣传册（brochure）。",
+            "explanation": "文章客观报道一部纪录片的制作背景、拍摄过程与穿山甲现状，语气中立、信息性强，不具备宣传册的推销/号召性体裁特征，属无中生有。"
+          }
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "日记。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "文章出自日记（diary）。",
+            "explanation": "全文为第三人称客观叙述，没有日记特有的第一人称私人记录、日期与个人感受，属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "杂志。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-jia-reading-c-1",
+              "quote": "To draw attention to these scaly (有鳞片的) , anteater-like-animals, a new wildlife documentary, Eye of the Pangolin, is attempting a unique way to inspire action and conservation.",
+              "anchor": "客观报道纪录片，具杂志特写文风"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "小说。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "文章出自小说（novel）。",
+            "explanation": "文章是基于真实事件与数据的信息类报道，没有虚构情节与人物塑造，不具备小说的叙事特征，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Where is the passage most likely from",
+          "sourceRole": "stem",
+          "targetText": "a new wildlife documentary, Eye of the Pangolin, is attempting a unique way to inspire action and conservation.",
+          "targetParagraphId": "para-2020-jia-reading-c-1",
+          "relationType": "locationCue",
+          "note": "题干问出处，需综合全文判断；文章以客观第三人称报道野生动物纪录片与穿山甲保护现状，信息性、时效性强，符合杂志（magazine）特写报道的体裁。"
+        }
+      ]
+    },
+    "q-2020-jia-032": {
+      "skill": {
+        "primary": "attitude"
+      },
+      "questionFocus": "考查作者对研究结果所持的态度。",
+      "stemTranslationZh": "作者对研究结果持什么态度？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "否定的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "oppositeAttitude",
+            "sourceQuote": "Taken together, the research supports the general mind-body hypothesis (假说) that when a younger mind is prepared, a younger body can accompany it”.",
+            "sourceHighlight": "the research supports",
+            "optionText": "Negative.",
+            "optionHighlight": "Negative",
+            "explanation": "作者中立地转述研究结论并称其“支持”该假说，并无否定批评之意，“否定”与原文呈现的客观态度相反。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-d-5",
+              "quote": "Taken together, the research supports the general mind-body hypothesis",
+              "anchor": "research supports（研究支持假说）"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "漠不关心的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "作者对研究结果漠不关心。",
+            "explanation": "原文未提及作者冷淡或不关心，作者通篇认真转述研究内容，“漠不关心”属无中生有。"
+          }
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "赞成支持的。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "Taken together, the research supports the general mind-body hypothesis (假说) that when a younger mind is prepared, a younger body can accompany it”.",
+            "sourceHighlight": "the research supports",
+            "optionText": "Supportive.",
+            "optionHighlight": "Supportive",
+            "explanation": "原文只是客观转述“研究支持假说”，并未表明作者个人持赞成立场；把研究的支持夸大为作者本人“赞成”属态度强度的拔高。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-d-5",
+              "quote": "While the mechanism (机制) remains unclear",
+              "anchor": "mechanism remains unclear（机制仍不清楚）"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "客观的。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-jia-reading-d-5",
+              "quote": "While the mechanism (机制) remains unclear",
+              "anchor": "mechanism remains unclear（坦承机制未明）"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2020-jia-reading-d-2",
+              "quote": "reviewed the scientific literature for evidence",
+              "anchor": "reviewed the scientific literature（基于文献证据）"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Objective.",
+          "sourceRole": "correctOption",
+          "targetText": "While the mechanism (机制) remains unclear",
+          "targetParagraphId": "para-2020-jia-reading-d-5",
+          "relationType": "locationCue",
+          "note": "作者既转述研究“supports”假说，又坦承 mechanism remains unclear，不夸大、不否定，体现 Objective（客观）的态度。"
+        }
+      ]
+    },
+    "q-2020-jia-033": {
+      "skill": {
+        "primary": "detail"
+      },
+      "questionFocus": "考查对第三段细节信息的准确理解与判断。",
+      "stemTranslationZh": "根据第三段，下列哪项陈述是正确的？",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "血压与发型高度相关。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "The women who thought they looked younger also showed a drop in blood pressure.",
+            "sourceHighlight": "showed a drop in blood pressure",
+            "optionText": "Blood pressure is highly related to hairdos.",
+            "optionHighlight": "highly related",
+            "explanation": "原文只说自觉变年轻的女性血压有所下降，起作用的是“自觉年轻”的感知，并未说血压与发型“高度相关”，选项夸大了关联强度。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-d-3",
+              "quote": "The women who thought they looked younger also showed a drop in blood pressure.",
+              "anchor": "thought they looked younger → drop in blood pressure"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "患癌症或心脏病是脱发的原因。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "polarityReversal",
+            "subtype": "causeEffectReversal",
+            "sourceQuote": "Another study involving 4421 men found that those who became bald at relatively young age were more likely to get cancer and heart disease than men who did not.",
+            "sourceHighlight": "those who became bald at relatively young age were more likely to get cancer and heart disease",
+            "optionText": "Getting cancer or heart disease is the cause of hair losing.",
+            "optionHighlight": "the cause of hair losing",
+            "explanation": "原文是“过早秃顶（脱发）的人更易患癌症和心脏病”，方向是脱发关联到疾病；选项把因果颠倒成“患病导致脱发”。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-d-3",
+              "quote": "those who became bald at relatively young age were more likely to get cancer and heart disease",
+              "anchor": "bald → more likely to get cancer and heart disease"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "觉得自己比实际年龄老可能与健康问题有关。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-jia-reading-d-3",
+              "quote": "“We believe that the feelings associated with being older than one’s real age account for some of these health outcomes,” the researchers wrote.",
+              "anchor": "feelings of being older → account for health outcomes"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "喜欢做发型的女性比不喜欢做发型的女性看起来更年轻。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overgeneralization",
+            "sourceQuote": "The women who thought their new hairdos made them look younger did look younger to objective observers, who were shown before-and-after pictures.",
+            "sourceHighlight": "The women who thought their new hairdos made them look younger",
+            "optionText": "The women who love hairdos look younger than those don't.",
+            "optionHighlight": "The women who love hairdos",
+            "explanation": "原文限定的是“自认为新发型让自己显年轻”的女性看起来更年轻，关键在“自觉变年轻”的感知；选项偷换为“喜欢做发型”并与“不喜欢的人”比较，扩大并改变了范围。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-d-3",
+              "quote": "The women who thought their new hairdos made them look younger did look younger to objective observers",
+              "anchor": "thought hairdos made them look younger → did look younger"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "Feeling older than real age may be tied to health problems.",
+          "sourceRole": "correctOption",
+          "targetText": "“We believe that the feelings associated with being older than one’s real age account for some of these health outcomes,” the researchers wrote.",
+          "targetParagraphId": "para-2020-jia-reading-d-3",
+          "relationType": "paraphrase",
+          "note": "选项 Feeling older than real age 对应原文 feelings associated with being older than one’s real age；be tied to health problems 同义替换 account for some of these health outcomes。"
+        }
+      ]
+    },
+    "q-2020-jia-034": {
+      "skill": {
+        "primary": "inference"
+      },
+      "questionFocus": "考查根据第四段进行合理推断的能力。",
+      "stemTranslationZh": "从第四段可以推断出________。",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "经常与更年轻的人相处有益于人的健康。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-jia-reading-d-4",
+              "quote": "women who had children later in life were more likely to be healthier and live longer than those who had children early, which they attributed to the fact that these mothers tend to spend more time with younger women",
+              "anchor": "更健康长寿 ← 多与年轻女性相处"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2020-jia-reading-d-4",
+              "quote": "people who marry younger partners tend to live longer than those who marry older partners",
+              "anchor": "与年轻伴侣结婚 → 更长寿"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "一对夫妻中更年轻的那一个活得长得多。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "overstatement",
+            "sourceQuote": "people who marry younger partners tend to live longer than those who marry older partners, according to other studies.",
+            "sourceHighlight": "people who marry younger partners tend to live longer",
+            "optionText": "the younger one of a couple lives much longer",
+            "optionHighlight": "lives much longer",
+            "explanation": "原文说的是“娶/嫁年轻伴侣的人”倾向于更长寿，主语是选择年轻伴侣的一方，且用 tend to 表倾向；选项偷换为“夫妻中更年轻的那一个”并夸大为 much longer。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-d-4",
+              "quote": "people who marry younger partners tend to live longer than those who marry older partners",
+              "anchor": "marry younger partners → live longer"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "更年轻的母亲更有可能活得更久。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "entityMismatch",
+            "sourceQuote": "women who had children later in life were more likely to be healthier and live longer than those who had children early",
+            "sourceEntity": "women who had children later in life（晚育的女性）",
+            "optionText": "a younger mother is more likely to live longer",
+            "optionEntity": "a younger mother（更年轻的母亲）",
+            "explanation": "原文是“晚育（较晚生孩子）的女性”更长寿，对象是生育年龄较晚者；选项偷换为“更年轻的母亲”，对象错配。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-d-4",
+              "quote": "women who had children later in life were more likely to be healthier and live longer than those who had children early",
+              "anchor": "had children later in life → live longer"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "想活得更久的人需要结婚。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "unsupportedClaim",
+            "claim": "想活得更久的人需要结婚。",
+            "explanation": "原文只比较“与年轻伴侣 vs 年长伴侣结婚”者的寿命，并未说“想长寿就必须结婚”，原文未提及，属无中生有。"
+          }
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "often staying with younger people can benefit people's health",
+          "sourceRole": "correctOption",
+          "targetText": "these mothers tend to spend more time with younger women",
+          "targetParagraphId": "para-2020-jia-reading-d-4",
+          "relationType": "paraphrase",
+          "note": "选项 staying with younger people 对应原文 spend more time with younger women；benefit people's health 由原文“晚育女性 healthier and live longer 且归因于多与年轻女性相处”推断得出。"
+        }
+      ]
+    },
+    "q-2020-jia-035": {
+      "skill": {
+        "primary": "mainIdea"
+      },
+      "questionFocus": "考查对全文主旨大意的概括。",
+      "stemTranslationZh": "本文主要告诉我们________。",
+      "optionAnalysis": [
+        {
+          "label": "A",
+          "optionTranslationZh": "过早秃顶对健康不利。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "Another study involving 4421 men found that those who became bald at relatively young age were more likely to get cancer and heart disease than men who did not.",
+            "sourceHighlight": "those who became bald at relatively young age were more likely to get cancer and heart disease",
+            "optionText": "getting bald too early is not good for health",
+            "optionHighlight": "getting bald too early",
+            "explanation": "过早秃顶只是文中支撑主旨的一个具体例证，并非全文主旨；以偏概全、以局部细节冒充主旨。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-d-3",
+              "quote": "those who became bald at relatively young age were more likely to get cancer and heart disease",
+              "anchor": "bald early → cancer and heart disease（仅为例证）"
+            }
+          ]
+        },
+        {
+          "label": "B",
+          "optionTranslationZh": "人们对自己年龄的感受可能会影响他们自身的健康。",
+          "status": "correct",
+          "evidence": [
+            {
+              "role": "primary",
+              "paragraphId": "para-2020-jia-reading-d-2",
+              "quote": "person’s perception of their age might influence their health",
+              "anchor": "perception of age → influence health"
+            },
+            {
+              "role": "secondary",
+              "paragraphId": "para-2020-jia-reading-d-5",
+              "quote": "the research supports the general mind-body hypothesis (假说) that when a younger mind is prepared, a younger body can accompany it”",
+              "anchor": "身心假说：younger mind → younger body"
+            }
+          ]
+        },
+        {
+          "label": "C",
+          "optionTranslationZh": "对一对夫妻来说，感觉更年轻对他们的健康非常重要。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "people who marry younger partners tend to live longer than those who marry older partners, according to other studies.",
+            "sourceHighlight": "people who marry younger partners tend to live longer",
+            "optionText": "feeling younger to a couple is very important to their health",
+            "optionHighlight": "feeling younger to a couple",
+            "explanation": "夫妻/伴侣只是第四段的一个分例，并非全文主旨；用局部细节冒充主旨，范围过窄。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-d-4",
+              "quote": "people who marry younger partners tend to live longer than those who marry older partners",
+              "anchor": "marry younger partners（仅为分例）"
+            }
+          ]
+        },
+        {
+          "label": "D",
+          "optionTranslationZh": "女性最好晚一点生孩子。",
+          "status": "wrong",
+          "trap": {
+            "primaryType": "scopeShift",
+            "subtype": "understatement",
+            "sourceQuote": "women who had children later in life were more likely to be healthier and live longer than those who had children early",
+            "sourceHighlight": "women who had children later in life were more likely to be healthier and live longer",
+            "optionText": "women had better give birth later in their life",
+            "optionHighlight": "give birth later in their life",
+            "explanation": "晚育只是第四段中的一个例证，且原文是客观陈述而非建议；以偏概全，且把陈述拔高为“最好这样做”的建议，均偏离主旨。"
+          },
+          "trapEvidence": [
+            {
+              "paragraphId": "para-2020-jia-reading-d-4",
+              "quote": "women who had children later in life were more likely to be healthier and live longer",
+              "anchor": "had children later in life（仅为例证）"
+            }
+          ]
+        }
+      ],
+      "locationParaphrases": [
+        {
+          "sourceText": "people's feeling of their age may have an effect on their own health.",
+          "sourceRole": "correctOption",
+          "targetText": "person’s perception of their age might influence their health",
+          "targetParagraphId": "para-2020-jia-reading-d-2",
+          "relationType": "paraphrase",
+          "note": "选项 feeling of their age 对应原文 perception of their age；have an effect on their own health 同义替换 influence their health，正是全文反复论证的核心主旨。"
+        }
+      ]
+    }
+  }
+}

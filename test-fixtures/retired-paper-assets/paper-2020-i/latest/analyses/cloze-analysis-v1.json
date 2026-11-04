@@ -1,0 +1,663 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-2020-i",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-2020-i-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-2020-i-cloze": {
+      "overview": "记叙文：印度少年 Molai 自幼喜爱村边湿地，洪灾后动物锐减，他独自在荒岛年复一年种树，37 年后造出 1360 英亩林地，成为众多动植物的家园。",
+      "affectiveArc": "情感主线由忧到喜：先写生态恶化、独自种树的艰辛，再写坚持多年终结硕果，呈先抑后扬、励志向上的走向。"
+    }
+  },
+  "blanks": {
+    "q-2020-i-041": {
+      "blankId": "blank-2020-i-041",
+      "blankNo": 41,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "湿地紧邻村庄、他自幼在此学习，故湿地成了他的“第二个家”；second home 搭配自然，呼应下文长期相伴。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "dream",
+          "meaning": "梦想"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "job",
+          "meaning": "工作"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "choice",
+          "meaning": "选择"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "his second",
+          "signalSide": "context-before",
+          "targetText": "his second home",
+          "relation": "second 与 home 搭配，指湿地是他的“第二个家”。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "lay near some wetlands",
+          "signalSide": "context-before",
+          "targetText": "near some wetlands",
+          "relation": "湿地紧邻村庄，所以成了他亲近常往之地，对应 home。"
+        }
+      ],
+      "teachingNote": "名词题先看与限定词的固定搭配，second home 是常见组合。"
+    },
+    "q-2020-i-042": {
+      "blankId": "blank-2020-i-042",
+      "blankNo": 42,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "他在湿地里学到的是“自然”的价值与美；value and beauty of nature 与 wetlands 这一自然话题场呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "youth",
+          "meaning": "青春"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "culture",
+          "meaning": "文化"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "knowledge",
+          "meaning": "知识"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "value and beauty of",
+          "signalSide": "context-before",
+          "targetText": "value and beauty of nature",
+          "relation": "value and beauty of 后接 nature，构成“自然的价值与美”。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "wetlands",
+          "signalSide": "context-before",
+          "targetText": "wetlands",
+          "relation": "湿地属于自然界，与 nature 同处自然语义场。"
+        }
+      ],
+      "teachingNote": "名词题看话题场：湿地这一自然背景指向 nature。"
+    },
+    "q-2020-i-043": {
+      "blankId": "blank-2020-i-043",
+      "blankNo": 43,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "下文写洪灾使鸟兽减少，是令人不安的变化，disturbing 与这种负面情境一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "precious",
+          "meaning": "珍贵的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "interesting",
+          "meaning": "有趣的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "awkward",
+          "meaning": "尴尬的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "began to notice something",
+          "signalSide": "context-before",
+          "targetText": "something disturbing",
+          "relation": "something + 形容词后置，something disturbing 指“令人不安的事”。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "driven away a number of birds",
+          "signalSide": "context-after",
+          "targetText": "driven away a number of birds",
+          "relation": "鸟类被赶走是负面信号，与 disturbing 的不安情绪一致。"
+        }
+      ],
+      "teachingNote": "形容词题看上下文情绪：后文负面变化锁定 disturbing。"
+    },
+    "q-2020-i-044": {
+      "blankId": "blank-2020-i-044",
+      "blankNo": 44,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "洪水造成的是“破坏”，正是这种 damage 赶走了鸟类；the damage it caused 搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "waste",
+          "meaning": "浪费"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "tension",
+          "meaning": "紧张"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "pain",
+          "meaning": "痛苦"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "it caused had driven away",
+          "signalSide": "context-after",
+          "targetText": "the damage it caused",
+          "relation": "damage 作主语，它造成并赶走了鸟类，施受关系成立。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "A flood had hit the area",
+          "signalSide": "context-before",
+          "targetText": "A flood had hit the area",
+          "relation": "洪水来袭是因，所造成的 damage 是果。"
+        }
+      ],
+      "teachingNote": "名词题看因果：洪水带来的后果是 damage。"
+    },
+    "q-2020-i-045": {
+      "blankId": "blank-2020-i-045",
+      "blankNo": 45,
+      "pos": "other",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "鸟减少之外蛇也减少，是同向追加信息，Besides 表“此外、而且”，符合并列递进逻辑。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "However",
+          "meaning": "然而"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "Therefore",
+          "meaning": "因此"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Otherwise",
+          "meaning": "否则"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the number of snakes had declined as well",
+          "signalSide": "context-after",
+          "targetText": "as well",
+          "relation": "句末 as well 与句首 Besides 同向呼应，构成追加并列搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "driven away a number of birds",
+          "signalSide": "context-before",
+          "targetText": "a number of birds",
+          "relation": "前句鸟减少、后句蛇也减少，是同类信息叠加。"
+        }
+      ],
+      "teachingNote": "连接词题看前后是否同向叠加：再加一条用 Besides。"
+    },
+    "q-2020-i-046": {
+      "blankId": "blank-2020-i-046",
+      "blankNo": 46,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "他“意识到”动物减少是因缺树；realized that 引出他经过思考得出的原因判断，搭配自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "agreed",
+          "meaning": "同意"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "remembered",
+          "meaning": "记得"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "predicted",
+          "meaning": "预测"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "that it was because",
+          "signalSide": "context-after",
+          "targetText": "realized that it was because",
+          "relation": "realize that 引出他得出的原因解释，主谓宾关系成立。"
+        }
+      ],
+      "teachingNote": "动词题看宾语从句内容：得出原因结论用 realized。"
+    },
+    "q-2020-i-047": {
+      "blankId": "blank-2020-i-047",
+      "blankNo": 47,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "树木能为动物遮挡的是白天的“高温”，下文 seek shelter during the daytime 印证；protect them from the heat 搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "noise",
+          "meaning": "噪音"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "disease",
+          "meaning": "疾病"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "dust",
+          "meaning": "灰尘"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to protect them from the",
+          "signalSide": "context-before",
+          "targetText": "protect them from the heat",
+          "relation": "protect ... from the heat，树木遮挡的对象是高温。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "during the daytime",
+          "signalSide": "context-after",
+          "targetText": "during the daytime",
+          "relation": "白天最需遮挡的是炎热，与 heat 呼应。"
+        }
+      ],
+      "teachingNote": "名词题借后文呼应：白天躲避的是 heat。"
+    },
+    "q-2020-i-048": {
+      "blankId": "blank-2020-i-048",
+      "blankNo": 48,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "种树是为了让动物白天能寻“庇护、遮蔽”，seek shelter during the daytime 搭配地道，且与上文遮挡高温对应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "directions",
+          "meaning": "方向"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "partners",
+          "meaning": "伙伴"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "help",
+          "meaning": "帮助"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the animals could seek",
+          "signalSide": "context-before",
+          "targetText": "seek shelter",
+          "relation": "seek shelter 表“寻求庇护”，动宾搭配成立。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "to plant trees",
+          "signalSide": "context-before",
+          "targetText": "plant trees",
+          "relation": "种树正是为动物提供 shelter，逻辑呼应。"
+        }
+      ],
+      "teachingNote": "名词题看动宾搭配：树下躲避用 seek shelter。"
+    },
+    "q-2020-i-049": {
+      "blankId": "blank-2020-i-049",
+      "blankNo": 49,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "种树相关求助应找“林业”部门，forest department 搭配合理，且对方答以“那里什么都长不出”正切林业话题。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "labor",
+          "meaning": "劳动（部门）"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "police",
+          "meaning": "警察（部门）"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "finance",
+          "meaning": "财政（部门）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "department for help",
+          "signalSide": "context-after",
+          "targetText": "forest department",
+          "relation": "forest 修饰 department，构成“林业部门”。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "nothing would grow there",
+          "signalSide": "context-after",
+          "targetText": "nothing would grow there",
+          "relation": "答复围绕植物能否生长，正属林业部门的话题场。"
+        }
+      ],
+      "teachingNote": "名词题看话题场：种树求助对口 forest 部门。"
+    },
+    "q-2020-i-050": {
+      "blankId": "blank-2020-i-050",
+      "blankNo": 50,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "他自行寻找，最终“发现”了一座可以种树的近岛；discovered a nearby island 动宾搭配自然。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "rebuilt",
+          "meaning": "重建"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "left",
+          "meaning": "离开"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "managed",
+          "meaning": "管理/设法"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "a nearby island where he began to plant trees",
+          "signalSide": "context-after",
+          "targetText": "a nearby island",
+          "relation": "discover 的宾语是 a nearby island，发现后在岛上开始种树。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "went looking on his own",
+          "signalSide": "context-before",
+          "targetText": "went looking on his own",
+          "relation": "自己去找，结果是 discovered（发现）一座岛。"
+        }
+      ],
+      "teachingNote": "动词题看动宾与上文动作：去找的结果是 discovered。"
+    },
+    "q-2020-i-051": {
+      "blankId": "blank-2020-i-051",
+      "blankNo": 51,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "旱季里给幼苗“浇水”最费力，下文用陶罐滴水正说明浇水之难；Watering young plants 动宾搭配合理。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "Decorating",
+          "meaning": "装饰"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "Observing",
+          "meaning": "观察"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "Guarding",
+          "meaning": "守护"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "young plants in the dry season",
+          "signalSide": "context-after",
+          "targetText": "Watering young plants",
+          "relation": "Watering 的宾语是 young plants，旱季给幼苗浇水。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "drip",
+          "signalSide": "context-after",
+          "targetText": "drip on the plants",
+          "relation": "下文用陶罐让水滴落浇灌，正呼应 Watering。"
+        }
+      ],
+      "teachingNote": "动词题借下文动作链：滴水浇灌呼应 Watering。"
+    },
+    "q-2020-i-052": {
+      "blankId": "blank-2020-i-052",
+      "blankNo": 52,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "对一个孤身少年来说旱季浇水是“艰难”的，tough 与后文搭平台、置陶罐取水的辛苦一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "illegal",
+          "meaning": "非法的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "fantastic",
+          "meaning": "极好的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "beneficial",
+          "meaning": "有益的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for a lone boy",
+          "signalSide": "context-after",
+          "targetText": "tough for a lone boy",
+          "relation": "tough for a lone boy，对独自一人的男孩来说很艰难。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "in the dry season",
+          "signalSide": "context-before",
+          "targetText": "in the dry season",
+          "relation": "旱季缺水更难浇灌，营造艰难基调，指向 tough。"
+        }
+      ],
+      "teachingNote": "形容词题看情境难度：独自旱季浇水之苦锁定 tough。"
+    },
+    "q-2020-i-053": {
+      "blankId": "blank-2020-i-053",
+      "blankNo": 53,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "他在每棵幼树“顶部”搭竹台放陶罐，水才能向下滴落到下方植株；at the top of 与后文 drip on the plants below 形成上下逻辑。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "back",
+          "meaning": "背面/后部"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "foot",
+          "meaning": "底部"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "side",
+          "meaning": "侧面"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "of each sapling",
+          "signalSide": "context-after",
+          "targetText": "at the top of each sapling",
+          "relation": "at the top of each sapling，平台搭在每棵幼树的顶部。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "drip",
+          "signalSide": "context-after",
+          "targetText": "drip on the plants below",
+          "relation": "水向下滴到下方植株，说明陶罐置于上方即顶部。"
+        }
+      ],
+      "teachingNote": "名词题靠空间逻辑：水往下滴，平台在 top。"
+    },
+    "q-2020-i-054": {
+      "blankId": "blank-2020-i-054",
+      "blankNo": 54,
+      "pos": "phrase",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "带小孔的陶罐是用来“收集”雨水，再让水慢慢滴落浇灌；collect rainwater 动宾搭配地道。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "cool down",
+          "meaning": "使冷却"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "keep off",
+          "meaning": "挡开/远离"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "purify",
+          "meaning": "净化"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "earthen pots with small holes to",
+          "signalSide": "context-before",
+          "targetText": "collect rainwater",
+          "relation": "collect 的宾语是 rainwater，陶罐用来收集雨水。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "The water would then drip",
+          "signalSide": "context-after",
+          "targetText": "The water would then drip",
+          "relation": "先收集雨水，水再滴落浇灌，逻辑链对应 collect。"
+        }
+      ],
+      "teachingNote": "短语题看动宾与流程：先收集雨水才能滴灌，选 collect。"
+    },
+    "q-2020-i-055": {
+      "blankId": "blank-2020-i-055",
+      "blankNo": 55,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "他在此后 37 年里“持续”种树，continued to plant trees 与 for the next 37 years 的长期跨度搭配一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "returned",
+          "meaning": "返回"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "learned",
+          "meaning": "学会"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "failed",
+          "meaning": "失败"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to plant trees for the next 37 years",
+          "signalSide": "context-after",
+          "targetText": "continued to plant trees",
+          "relation": "continued to plant trees，持续做某事接动词不定式，与 37 年时间跨度搭配。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "His efforts have resulted in 1,360 acres",
+          "signalSide": "context-after",
+          "targetText": "1,360 acres",
+          "relation": "长期努力造出大片林地，印证他一直持续种树。"
+        }
+      ],
+      "teachingNote": "动词题看时间跨度：跟 for the next 37 years 搭配的是 continued。"
+    }
+  }
+}

@@ -1,0 +1,868 @@
+{
+  "schemaVersion": "cloze-analysis-v1",
+  "paperId": "paper-zj-2021-jun",
+  "sourceAssetVersion": 1,
+  "targetGroups": [
+    "group-zj-2021-jun-cloze"
+  ],
+  "meta": {
+    "generatedBy": "external-ai",
+    "promptVersion": "cloze-analysis-v1",
+    "reviewStatus": "reviewed",
+    "importMode": "paper-import-ai"
+  },
+  "groups": {
+    "group-zj-2021-jun-cloze": {
+      "overview": "记叙文。作者每周照顾92岁的母亲；母亲在小店购物时现金不够，被迫放下两件商品，一位陌生女士默默替她付了钱并送还。母亲深受感动，决定回店里留下五美元，帮助下一个遇到同样困境的人。",
+      "affectiveArc": "情感主线由窘迫（现金不足、被迫减货）转为温暖与感动（陌生人善举），最后升华为爱心传递；全文积极向善，是先抑后扬的暖心走向。"
+    }
+  },
+  "blanks": {
+    "q-zj-2021-jun-036": {
+      "blankId": "blank-zj-2021-jun-036",
+      "blankNo": 36,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "do one's shopping 是固定搭配，意为“采购、买东西”；下文反复出现 store、groceries、pay 等购物语义词，与 shopping 呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "exercise",
+          "meaning": "锻炼，运动"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "housework",
+          "meaning": "家务活"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "cooking",
+          "meaning": "做饭，烹饪"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "do her",
+          "signalSide": "context-before",
+          "targetText": "do her shopping",
+          "relation": "do one's shopping 固定搭配，宾语为 shopping。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "groceries",
+          "signalSide": "context-after",
+          "relation": "后文 groceries、store 等购物词构成语义场，呼应 shopping。"
+        }
+      ],
+      "teachingNote": "遇到 do one's ___ 结构，优先匹配能与全文话题（此处为购物）呼应的名词。"
+    },
+    "q-zj-2021-jun-037": {
+      "blankId": "blank-zj-2021-jun-037",
+      "blankNo": 37,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "providing company and transportation 中，company 意为“陪伴”，与作者“each week I take my mother”亲自带母亲外出的陪伴行为一致；transportation 指交通，两者并列指作者提供的帮助。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "reward",
+          "meaning": "奖励，回报"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "medicine",
+          "meaning": "药物"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "shelter",
+          "meaning": "住所，庇护"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "providing",
+          "signalSide": "context-before",
+          "targetText": "providing company and transportation",
+          "relation": "providing 的宾语 company 与 transportation 并列，指作者提供的陪伴与交通。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "I take my mother",
+          "signalSide": "context-before",
+          "relation": "作者亲自带母亲外出，正是 company（陪伴）的体现。"
+        }
+      ],
+      "teachingNote": "并列结构中，空格词义要与已知并列项及上文行为共同构成同一语义场。"
+    },
+    "q-zj-2021-jun-038": {
+      "blankId": "blank-zj-2021-jun-038",
+      "blankNo": 38,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "go to a store to buy some small things 中 buy 与 store、things 搭配自然，指到店购买所需小物件；下文 pay for her groceries 也印证是买东西。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "return",
+          "meaning": "退还，归还"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "collect",
+          "meaning": "收集，领取"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "order",
+          "meaning": "订购，点（餐）"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "some small things she needs",
+          "signalSide": "context-after",
+          "targetText": "buy some small things",
+          "relation": "buy 的宾语是 some small things she needs，到店购买所需之物，施受关系成立。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "pay for her groceries",
+          "signalSide": "context-after",
+          "relation": "后文付钱买货印证此处动作是“买”。"
+        }
+      ],
+      "teachingNote": "动词空格先看与宾语的搭配，再用后文同义动作（pay for）确认。"
+    },
+    "q-zj-2021-jun-039": {
+      "blankId": "blank-zj-2021-jun-039",
+      "blankNo": 39,
+      "pos": "adjective",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "be short about three dollars 意为“差大约三美元”，short 表示“短缺、不足”，与后文“现金不够、只能放下商品”的情节完全吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "cautious",
+          "meaning": "谨慎的，小心的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "wrong",
+          "meaning": "错误的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "concerned",
+          "meaning": "担心的，关切的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "about three dollars",
+          "signalSide": "context-after",
+          "targetText": "short about three dollars",
+          "relation": "be short + 金额，表示差/短缺该金额，与 about three dollars 搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "take off the",
+          "signalSide": "context-after",
+          "relation": "因为钱不够（short），所以要放下部分商品，因果一致。"
+        }
+      ],
+      "teachingNote": "be short + 钱数 = 差多少钱；结合后文“被迫减货”可锁定“短缺”义。"
+    },
+    "q-zj-2021-jun-040": {
+      "blankId": "blank-zj-2021-jun-040",
+      "blankNo": 40,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "the only way to pay for the groceries 中 way to do sth. 表示“做某事的办法”，此处指唯一的付款办法就是放下可不要的商品，搭配与语境都成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "aim",
+          "meaning": "目标，目的"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "advice",
+          "meaning": "建议"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "reason",
+          "meaning": "原因，理由"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to pay for the groceries",
+          "signalSide": "context-after",
+          "targetText": "the only way to pay",
+          "relation": "way to do sth. 固定搭配，后接动词不定式 to pay，指付款的办法。"
+        },
+        {
+          "type": "collocation-partner",
+          "signalText": "was to take off",
+          "signalSide": "context-after",
+          "relation": "表语 to take off... 解释这个“办法”的具体内容，呼应 way。"
+        }
+      ],
+      "teachingNote": "the only ___ to do sth. 后接不定式、表“做某事的办法”时多用 way。"
+    },
+    "q-zj-2021-jun-041": {
+      "blankId": "blank-zj-2021-jun-041",
+      "blankNo": 41,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "take off the things she could do without 指拿掉那些“可以不要的东西”；冒号后举例 a bottle of rubbing alcohol and a bar of soap 正是这些 things 的具体所指。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "weight",
+          "meaning": "重量，分量"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "mask",
+          "meaning": "口罩，面具"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "glasses",
+          "meaning": "眼镜"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "she could do without",
+          "signalSide": "context-after",
+          "targetText": "the things she could do without",
+          "relation": "定语从句修饰 things，指“可以不要的东西”。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "a bottle of rubbing alcohol",
+          "signalSide": "context-after",
+          "relation": "冒号后所举的酒精和肥皂正是 things 的具体内容。"
+        }
+      ],
+      "teachingNote": "冒号后的举例若是多类物品，被概括的名词应是上义词 things。"
+    },
+    "q-zj-2021-jun-042": {
+      "blankId": "blank-zj-2021-jun-042",
+      "blankNo": 42,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "bring the new total to the amount of cash 中 bring ... to ... 表示“把……降到/达到（某数额）”；放下商品后把总价降到手头现金数额，搭配与逻辑一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "raise",
+          "meaning": "提高，举起"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "add",
+          "meaning": "增加，添加"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "switch",
+          "meaning": "转换，切换"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the new total to the amount of cash",
+          "signalSide": "context-after",
+          "targetText": "bring the new total to",
+          "relation": "bring ... to ... 把总价降至现金数额，与宾语和介词 to 搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "By taking off these",
+          "signalSide": "context-before",
+          "relation": "通过拿掉商品这一手段，使总价下降到现金数额，bring...to 表结果。"
+        }
+      ],
+      "teachingNote": "bring sth. to + 数额，表示把某物调整到某个数值；注意介词 to 锁定该搭配。"
+    },
+    "q-zj-2021-jun-043": {
+      "blankId": "blank-zj-2021-jun-043",
+      "blankNo": 43,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "check out 意为“结账、付款”；句中说人们结账后再到一旁装自己的商品，check out 与 go off to the side to bag their own groceries 的先后流程吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "show up",
+          "meaning": "出现，露面"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "call in",
+          "meaning": "顺便来访，打电话"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "sit down",
+          "meaning": "坐下"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "go off to the side to",
+          "signalSide": "context-after",
+          "targetText": "check out and then go off to the side",
+          "relation": "and then 表先结账后装袋，check out（结账）与后续装袋动作顺承。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "cashier",
+          "signalSide": "context-after",
+          "relation": "下文收银员 cashier 印证此处是结账场景。"
+        }
+      ],
+      "teachingNote": "购物场景中 check out 表结账；用 and then 后的动作判断先后流程。"
+    },
+    "q-zj-2021-jun-044": {
+      "blankId": "blank-zj-2021-jun-044",
+      "blankNo": 44,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "bag their own groceries 中 bag 作动词意为“把……装袋”，与紧随其后的 was putting her groceries into shopping bags 完全呼应，指顾客自己把货物装进袋子。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "store",
+          "meaning": "储存，存放"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "select",
+          "meaning": "挑选"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "deliver",
+          "meaning": "递送，配送"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "their own groceries",
+          "signalSide": "context-after",
+          "targetText": "bag their own groceries",
+          "relation": "bag 的宾语是 their own groceries，把自己的货物装袋。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "putting her groceries into shopping bags",
+          "signalSide": "context-after",
+          "relation": "下句“把货物放进购物袋”同义复现，印证 bag（装袋）。"
+        }
+      ],
+      "teachingNote": "名词转动词时（bag=装袋），可借助下文同义表达（into shopping bags）确认词义。"
+    },
+    "q-zj-2021-jun-045": {
+      "blankId": "blank-zj-2021-jun-045",
+      "blankNo": 45,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "下文母亲向这位女士询问姓名地址、且最后作者称呼“whoever you are”，说明这是一个不相识的人；stranger（陌生人）与情节相符。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "cashier",
+          "meaning": "收银员"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "friend",
+          "meaning": "朋友"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "doctor",
+          "meaning": "医生"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "came up to her",
+          "signalSide": "context-after",
+          "targetText": "a stranger came up to her",
+          "relation": "a + stranger 作主语走近母亲，是这位陌生女士。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "for the woman’s name and address",
+          "signalSide": "context-after",
+          "relation": "母亲需问对方姓名地址，说明此前并不相识，呼应 stranger。"
+        }
+      ],
+      "teachingNote": "若文中需要询问对方姓名地址、且结尾不知其身份，多指 stranger。"
+    },
+    "q-zj-2021-jun-046": {
+      "blankId": "blank-zj-2021-jun-046",
+      "blankNo": 46,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "D",
+        "reason": "put back 意为“放回去”；女士递还酒精和肥皂时说“这些是你 put back 的东西”，正对应母亲先前为凑钱而 take off（放下/放回）的商品。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "looked for",
+          "meaning": "寻找"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "talked about",
+          "meaning": "谈论"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "threw away",
+          "meaning": "扔掉"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "handing her the rubbing alcohol",
+          "signalSide": "context-after",
+          "targetText": "the things that you put back",
+          "relation": "女士把母亲放回货架的酒精肥皂递还，put back 指此前放回的物品。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "take off the",
+          "signalSide": "context-before",
+          "relation": "前文 take off（放下/放回）这些商品，与 put back 同指。"
+        }
+      ],
+      "teachingNote": "短语义靠语境合成：女士递还被放回货架的商品，故为 put back。"
+    },
+    "q-zj-2021-jun-047": {
+      "blankId": "blank-zj-2021-jun-047",
+      "blankNo": 47,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "handing her the rubbing alcohol and the soap 与前文母亲放下的 a bottle of rubbing alcohol and a bar of soap 一一对应；递还的第二件正是 soap（肥皂）。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "receipt",
+          "meaning": "收据"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "cash",
+          "meaning": "现金"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "bottle",
+          "meaning": "瓶子"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "handing her the rubbing alcohol and the",
+          "signalSide": "context-before",
+          "targetText": "the rubbing alcohol and the soap",
+          "relation": "与 rubbing alcohol 并列递还的另一件物品，对应放下的肥皂。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a bar of",
+          "signalSide": "context-before",
+          "relation": "前文 a bar of soap 明确母亲放下的是酒精和肥皂，故此处复现 soap。"
+        }
+      ],
+      "teachingNote": "前文列出的具体物品在后文复现时，按一一对应关系回填同一名词。"
+    },
+    "q-zj-2021-jun-048": {
+      "blankId": "blank-zj-2021-jun-048",
+      "blankNo": 48,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "ask for sb.'s name and address 是固定搭配，意为“索要某人的姓名地址”；母亲想要回报对方，故向她要联系方式，搭配与逻辑都成立。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "waited",
+          "meaning": "等待"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "cared",
+          "meaning": "关心，在乎"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "searched",
+          "meaning": "搜寻，搜查"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for the woman’s name and address",
+          "signalSide": "context-after",
+          "targetText": "asked for the woman’s name and address",
+          "relation": "ask for + 姓名地址，固定搭配，介词 for 锁定 asked。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "so that she could",
+          "signalSide": "context-after",
+          "relation": "so that 引出目的：要到地址是为了回报对方。"
+        }
+      ],
+      "teachingNote": "介词 for 提示动词，ask for sth. 表“索要”，与目的状语 so that 配合。"
+    },
+    "q-zj-2021-jun-049": {
+      "blankId": "blank-zj-2021-jun-049",
+      "blankNo": 49,
+      "pos": "verb",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "so that she could repay her 指母亲想“报答”这位女士；女士替母亲付了钱，母亲索要地址正是为了回报，repay 与善举的情节呼应。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "trust",
+          "meaning": "信任"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "recognize",
+          "meaning": "认出，辨认"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "help",
+          "meaning": "帮助"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "so that she could",
+          "signalSide": "context-before",
+          "targetText": "so that she could repay her",
+          "relation": "repay 的宾语 her 指那位女士，表示报答对方。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "name and address",
+          "signalSide": "context-before",
+          "relation": "母亲先要对方的姓名地址，目的就是事后回报，故选 repay。"
+        }
+      ],
+      "teachingNote": "受人恩惠后索要联系方式，常是为了 repay（报答）。"
+    },
+    "q-zj-2021-jun-050": {
+      "blankId": "blank-zj-2021-jun-050",
+      "blankNo": 50,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "the woman told her it was her gift 中 gift 意为“礼物、心意”，女士婉拒回报，表示这是她送给母亲的一份心意；与下文母亲“被这一举动感动”一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "luck",
+          "meaning": "运气"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "chance",
+          "meaning": "机会，偶然"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "turn",
+          "meaning": "轮到，转弯"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "told her it was her",
+          "signalSide": "context-before",
+          "targetText": "it was her gift",
+          "relation": "表语 gift 指女士把替付的钱当作送给母亲的心意。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "by her gesture",
+          "signalSide": "context-after",
+          "relation": "母亲被这份举动感动，印证那是一份 gift。"
+        }
+      ],
+      "teachingNote": "婉拒回报、称“这是我的一份心意”时，多用 gift。"
+    },
+    "q-zj-2021-jun-051": {
+      "blankId": "blank-zj-2021-jun-051",
+      "blankNo": 51,
+      "pos": "adjective",
+      "signatureFacet": "cloze.signature.adjective.affective-consistency",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "be touched by her gesture 意为“被她的举动感动”；母亲随后决定回店帮助下一个有需要的人，正是受感动后的善意传递，touched 与全文暖心基调一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "surprised",
+          "meaning": "惊讶的"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "amused",
+          "meaning": "觉得好笑的"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "convinced",
+          "meaning": "被说服的，确信的"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "by her gesture",
+          "signalSide": "context-after",
+          "targetText": "so touched by her gesture",
+          "relation": "be touched by 表“被……感动”，gesture 为感动的来源。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "decided to go back to the store",
+          "signalSide": "context-after",
+          "relation": "被感动后决定回店帮助他人，传递善意，与 touched 情感一致。"
+        }
+      ],
+      "teachingNote": "受人善举后做出善意之举，情感词应选 touched（被感动）。"
+    },
+    "q-zj-2021-jun-052": {
+      "blankId": "blank-zj-2021-jun-052",
+      "blankNo": 52,
+      "pos": "other",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "in case 引导“以防、万一”，母亲留下五美元以备“万一同样的事发生在别人身上”，与“to keep on hand（备用）”的目的完全吻合。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "even if",
+          "meaning": "即使，纵然"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "as though",
+          "meaning": "好像，仿佛"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "so that",
+          "meaning": "以便，结果"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "to keep on hand",
+          "signalSide": "context-before",
+          "targetText": "the same happened to someone else",
+          "relation": "in case 把主句“留钱备用 keep on hand”与从句“同样的事发生”连接起来，构成“以防万一”的条件搭配。"
+        },
+        {
+          "type": "logical-connector",
+          "signalText": "the same happened to someone else",
+          "signalSide": "context-after",
+          "relation": "后接的假设情形正是“万一”的内容，呼应 in case。"
+        }
+      ],
+      "teachingNote": "“备用以防某事发生”用 in case 引导预防性的假设。"
+    },
+    "q-zj-2021-jun-053": {
+      "blankId": "blank-zj-2021-jun-053",
+      "blankNo": 53,
+      "pos": "noun",
+      "correctFit": {
+        "optionLabel": "B",
+        "reason": "didn't have enough money for all of their groceries 中 money 与全文“现金不够、差三美元”的主线呼应；留下五美元正是为了补别人购物时短缺的钱。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "energy",
+          "meaning": "精力，能量"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "space",
+          "meaning": "空间"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "time",
+          "meaning": "时间"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "for all of their groceries",
+          "signalSide": "context-after",
+          "targetText": "enough money for all of their groceries",
+          "relation": "enough money for + 货物，指买齐货物的钱不够。"
+        },
+        {
+          "type": "repetition-echo",
+          "signalText": "a five-dollar bill",
+          "signalSide": "context-before",
+          "relation": "母亲留下五美元正是补别人短缺的钱，呼应 money。"
+        }
+      ],
+      "teachingNote": "买东西付不起时缺的是 money；用上文金额（five-dollar bill）确认。"
+    },
+    "q-zj-2021-jun-054": {
+      "blankId": "blank-zj-2021-jun-054",
+      "blankNo": 54,
+      "pos": "noun",
+      "signatureFacet": "cloze.signature.noun.semantic-field",
+      "correctFit": {
+        "optionLabel": "C",
+        "reason": "the random act of kindness 是固定表达“随手行善之举”；全文讲陌生人无偿替付、母亲又传递善意，kindness（善意）正是主旨词。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "A",
+          "optionText": "faith",
+          "meaning": "信念，信仰"
+        },
+        {
+          "optionLabel": "B",
+          "optionText": "courage",
+          "meaning": "勇气"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "honor",
+          "meaning": "荣誉，敬重"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "the random act of",
+          "signalSide": "context-before",
+          "targetText": "the random act of kindness",
+          "relation": "random act of kindness 固定搭配，指随手行善。"
+        },
+        {
+          "type": "semantic-field",
+          "signalText": "helped my mother out",
+          "signalSide": "context-after",
+          "relation": "帮助母亲的善举正体现 kindness，构成同一语义场。"
+        }
+      ],
+      "teachingNote": "陌生人无偿相助的主旨词是 kindness；记牢 act of kindness 这一表达。"
+    },
+    "q-zj-2021-jun-055": {
+      "blankId": "blank-zj-2021-jun-055",
+      "blankNo": 55,
+      "pos": "phrase",
+      "signatureFacet": "cloze.signature.phrase.contextual-composition",
+      "correctFit": {
+        "optionLabel": "A",
+        "reason": "make one's day 意为“让某人开心、温暖某人一整天”；句中 not only helped my mother out, but made her day too 表示这份善举不仅帮了忙，还让作者深感温暖，与全文感动基调一致。"
+      },
+      "distractorGlosses": [
+        {
+          "optionLabel": "B",
+          "optionText": "changed her mind",
+          "meaning": "改变了她的主意"
+        },
+        {
+          "optionLabel": "C",
+          "optionText": "caught her eye",
+          "meaning": "吸引了她的注意"
+        },
+        {
+          "optionLabel": "D",
+          "optionText": "met her demand",
+          "meaning": "满足了她的要求"
+        }
+      ],
+      "evidence": [
+        {
+          "type": "collocation-partner",
+          "signalText": "not only helped my mother out, but",
+          "signalSide": "context-before",
+          "targetText": "helped my mother out",
+          "relation": "not only...but...too 并列框架的前一分句是 helped my mother out，空格需填一个与之并列的积极动作短语，故为 made her day。"
+        },
+        {
+          "type": "affective-cue",
+          "signalText": "thank you",
+          "signalSide": "context-before",
+          "relation": "作者致谢的暖心语气印证善举令人开心，故为 made her day。"
+        }
+      ],
+      "teachingNote": "make one's day 表“让某人开心”；用 not only...but... 的递进锁定积极含义。"
+    }
+  }
+}

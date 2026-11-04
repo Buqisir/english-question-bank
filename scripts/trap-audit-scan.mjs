@@ -39,7 +39,8 @@ import {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
-const paperAssetsDir = path.join(rootDir, 'app', 'public', 'paper-assets')
+const paperAssetRoots = ['app/public/paper-assets', 'test-fixtures/retired-paper-assets']
+  .map((dir) => path.join(rootDir, dir))
 const cutDir = path.join(rootDir, 'docs', 'cuts', 'r2-trap-audit')
 const findingsPath = path.join(cutDir, 'scan-findings.json')
 const reportPath = path.join(cutDir, 'scan-report.md')
@@ -58,14 +59,15 @@ function isAdjudicated(finding) {
 }
 
 function listPaperIds() {
-  return readdirSync(paperAssetsDir, { withFileTypes: true })
+  return paperAssetRoots.flatMap((dir) => readdirSync(dir, { withFileTypes: true })
     .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name)
+    .map((entry) => entry.name))
     .sort()
 }
 
 function readAnalysis(paperId) {
-  const analysisPath = path.join(paperAssetsDir, paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
+  const assetRoot = paperAssetRoots.find((dir) => existsSync(path.join(dir, paperId)))
+  const analysisPath = path.join(assetRoot, paperId, 'latest', 'analyses', 'reading-choice-analysis-v1.json')
   if (!existsSync(analysisPath)) return null
   try {
     return JSON.parse(readFileSync(analysisPath, 'utf8'))
