@@ -5,7 +5,56 @@ import { compileSemanticTables } from './ocr-semantic-tables.mjs'
 import { buildSourceReferences, joinTranscriptTurns } from './ocr-proofread.mjs'
 import { validateSourceReferences } from '../../server/paper-import/sourceReferences.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
-import { resolveOcrContentVisual } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
+import { resolveOcrContentVisual, semanticTableGrid } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
+import { replayConfirmedScoringTable } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
+
+test('Jinan merged table keeps ID arrays, resolves spans and rejects invalid coverage', () => {
+  const texts = [['Accessible Vehicles', 'Seating', 'Time Frame', 'Rate / hour'],
+    ['E-bikes & e-scooters', '1', 'Off season', '$6'], ['Peak season', '$8'],
+    ['Other types of vehicles', '4', 'Off season', '$25'], ['Peak season', '$40']]
+  const items = texts.flat().map((text, i) => ({ text, cell: `c${i}`, itemId: `i${i}`, observationIds: [`w${i}`] }))
+  let offset = 0
+  const declaration = { name: 'jinan', region: { x: 0, y: 0, width: 100, height: 100 },
+    rows: texts.map((row, r) => ({ header: r === 0, cells: row.map(() => [items[offset++].cell]) })),
+    merges: [1, 3].flatMap(row => [0, 1].map(column => ({ row, column, rowSpan: 2, columnSpan: 1 }))) }
+  const [table] = compileSemanticTables({ semanticTables: [declaration] }, items,
+    { documentId: 'source', page: 1, width: 100, height: 100 })
+  const page = { page: 1, orderedItems: items, furnitureObservationIds: [], visualClassifications: [table.visual],
+    observations: items.map((item, i) => ({ observationId: item.observationIds[0],
+      region: { x: .1, y: .01 + i * .04, width: .1, height: .02 } })) }
+  const input = { paperId: 'paper-jinan', document: { documentId: 'source', role: 'question_source' },
+    page, visual: table.visual, region: table, claimedItems: new Set() }
+  const resolved = resolveOcrContentVisual(input).item
+  assert.equal(resolved.columnCount, 4)
+  assert.deepEqual(resolved.rows.map(row => row.cells.map(cell => [cell.columnStart, cell.columnSpan, cell.rowSpan])),
+    [[[0, 1, 1], [1, 1, 1], [2, 1, 1], [3, 1, 1]],
+      [[0, 1, 2], [1, 1, 2], [2, 1, 1], [3, 1, 1]], [[2, 1, 1], [3, 1, 1]],
+      [[0, 1, 2], [1, 1, 2], [2, 1, 1], [3, 1, 1]], [[2, 1, 1], [3, 1, 1]]])
+  assert.deepEqual(table.visual.rows.flatMap(row => row.cells.flat()), items.map(item => item.itemId))
+  for (const mutate of [
+    t => { t.merges[0].rowSpan = 9 }, t => { t.merges[0].columnSpan = 5 },
+    t => { t.merges.push({ ...t.merges[0] }) }, t => { t.merges[0].rowSpan = 0 },
+    t => { t.merges.push({ row: 2, column: 0, rowSpan: 1, columnSpan: 1 }) },
+    t => { t.rows[2].cells.pop() }, t => { t.rows[2].cells.push(['extra']) },
+    t => { t.merges[0].column = -1 }, t => { t.merges[0].row = 1.5 },
+    t => { t.merges[0].row = 2; t.merges[0].column = 2; t.merges[0].columnSpan = 2 },
+  ]) {
+    const invalid = structuredClone(table.visual)
+    mutate(invalid)
+    assert.throws(() => semanticTableGrid(invalid))
+  }
+  const horizontal = { rows: [{ header: true, cells: [['a'], ['b']] }],
+    merges: [{ row: 0, column: 0, rowSpan: 1, columnSpan: 2 }] }
+  assert.deepEqual(semanticTableGrid(horizontal), { columnCount: 3,
+    geometry: [[{ columnStart: 0, columnSpan: 2, rowSpan: 1 }, { columnStart: 2, columnSpan: 1, rowSpan: 1 }]] })
+  assert.throws(() => resolveOcrContentVisual({ ...input, document: { role: 'official_answers' } }), /评分\/答案表暂不支持合并单元格/)
+  const referenceInput = rubricHeadingFixture(1)
+  referenceInput[2].documents[0].pages[1].visualClassifications[0].merges = []
+  assert.throws(() => buildSourceReferences(...referenceInput), /评分\/答案表暂不支持合并单元格/)
+  assert.throws(() => replayConfirmedScoringTable({ document: { role: 'official_answers', mediaType: 'application/pdf' },
+    confirmationPage: page, evidencePage: page, table: { tableId: `source-${table.regionId.replace(/:/gu, '-')}` } }),
+  /评分\/答案表暂不支持合并单元格/)
+})
 
 function rubricHeadingFixture(headingPage, intervening = false) {
   const line = (text, id) => ({ text, itemId: id, observationIds: [`w-${id}`] })
@@ -382,6 +431,15 @@ test('compiles explicit 7 by 2 cells to the existing semantic table confirmation
   assert.equal(table.visual.rows.length, 7)
   assert.deepEqual(table.visual.rows[6], { header: false, cells: [['item-12'], ['item-13']] })
   assert.deepEqual(table.region, { x: .1, y: .2, width: .8, height: .6 })
+  const value = geometricFixture(draft.semanticTables[0].region, { left: 120, top: 220, width: 10, height: 10 })
+  const [plain] = compileSemanticTables(value.draft, value.items, value.context)
+  const output = resolveGeometry(value, plain).item
+  assert.equal(JSON.stringify(output.rows), JSON.stringify(draft.semanticTables[0].rows.map(row => ({
+    header: row.header, cells: row.cells.map(cell => ({
+      text: items.find(item => item.cell === cell[0]).text, columnSpan: 1,
+      verticalMerge: null, containsDrawing: false, containsNestedTable: false,
+    })),
+  }))), 'ordinary table rows retain byte-identical output without geometry fields')
 })
 
 test('rejects missing, repeated, orphaned or reordered cell identities', () => {
