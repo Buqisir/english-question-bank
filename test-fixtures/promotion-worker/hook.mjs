@@ -35,6 +35,8 @@ const replacements = {
       "        linkPromotionOperation(db, operation, promotion)\n        if(operation)__promotionFault('begin-before-commit');\n        db.exec('COMMIT');\n        if(operation)__promotionFault('begin-after-commit')"],
   ],
   '/server/import-review/singlePaperPromotion.mjs': [
+    ["          uncommitted = recovery.recovered === true",
+      "          uncommitted = recovery.recovered === true;\n          if (uncommitted) __promotionFault('after-promotion-rollback')"],
     ["              return write()", "              __promotionFault('guard-write-lock');\n              return write()"],
     ["          return archiveReviewFiles(", "          __promotionFault('before-archive');\n          return archiveReviewFiles("],
     [".then(storage => execute(paperId, begun, storage, binding))", ".then(storage => { __promotionFault('after-archive'); return execute(paperId, begun, storage, binding) })"],

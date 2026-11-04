@@ -113,6 +113,28 @@ function originalPromotionEvidence(store, revision) {
   }
 }
 
+function promotionTargetAbsent({ db, paperAssetsDir, promotion }) {
+  if (!Number.isSafeInteger(promotion.assetVersion) || promotion.assetVersion < 1
+    || promotion.versionName !== `v${promotion.assetVersion}`) return false
+  const paperDir = path.join(paperAssetsDir, promotion.paperId)
+  if (existsSync(path.join(paperDir, '.latest-swap.json'))
+    || existsSync(path.join(paperDir, 'versions', promotion.versionName))) return false
+  for (const [table, column] of [
+    ['paper_asset_versions', 'asset_version'],
+    ['canonical_paper_publications', 'source_asset_version'],
+  ]) {
+    if (tableExists(db, table) && db.prepare(`
+      SELECT 1 FROM ${table} WHERE paper_id = ? AND (${column} = ? OR version_name = ?)
+    `).get(promotion.paperId, promotion.assetVersion, promotion.versionName)) return false
+  }
+  const latestDir = path.join(paperDir, 'latest')
+  if (!existsSync(latestDir)) return true
+  const latest = readJson(path.join(latestDir, 'paper-asset.json'), 'previous latest paper asset')?.paper
+  return latest?.paperId === promotion.paperId
+    && Number.isSafeInteger(latest.assetVersion) && latest.assetVersion > 0
+    && latest.assetVersion < promotion.assetVersion
+}
+
 function inspectCommittedPromotion({ db, paperAssetsDir, promotion, packageData }) {
   if (
     promotion.assetVersion === null
@@ -330,8 +352,8 @@ export function createSinglePaperPromotionService({
       const reviewRootDir = store.revisionDirectory(revision.id)
       const db = openDatabase({ readOnly: false })
       try {
-        // The durable target is recorded before publisher writes. Otherwise
-        // only the original journal's successful rollback proves no commit.
+        // The durable target is recorded before publisher writes. Bound targets
+        // are also reconciled when a previous rollback already removed its journal.
         let uncommitted = promotion.assetVersion === null
           && !existsSync(path.join(paperAssetsDir, paperId, '.latest-swap.json'))
         const evidence = promotion.assetVersion !== null ? originalPromotionEvidence(store, revision) : null
@@ -389,7 +411,10 @@ export function createSinglePaperPromotionService({
           const receipt = store.markPromotionPublished(paperId, promotion.promotionId, committed)
           return { status: 'idempotent', promotion: receipt, consumers: committed.consumers }
         }
-        if (begun.action === 'resume' && begun.requireCurrentEqual && uncommitted) {
+        if (begun.action === 'resume' && begun.requireCurrentEqual
+          && (uncommitted || promotionTargetAbsent({ db, paperAssetsDir, promotion }))) {
+          // beginPromotion matched the guard and linked this worker operation;
+          // markPromotionFailed rechecks that same guard before releasing it.
           const compatibility = store.compatibilityForRevision(revision.id)
           if (compatibility.result !== 'equal' || compatibility.pending) {
             const failure = { failureCode: compatibility.reasonCode || 'NOT_CHECKED',

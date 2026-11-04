@@ -1032,6 +1032,48 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       assert.equal((await running).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
       assert.equal(t.promotions().length, 1)
     })
+  await trial('SIGKILL after rollback cleanup can terminate pending promotion and compare on explicit retry',
+    'after-version-rename', 'block', async t => {
+      const a = await t.client()
+      const first = a.call(shipMessage)
+      const prepared = await t.checkpoint('after-version-rename', first, { flow: 'publication', transport: 'ipc' })
+      const original = t.promotions()[0]
+      const paperDir = path.join(t.env.QUESTION_BANK_PAPER_ASSET_ROOT, ship.paperId)
+      const journal = path.join(paperDir, '.latest-swap.json')
+      const versionDir = path.join(paperDir, 'versions', original.version_name)
+      assert.ok(existsSync(journal))
+      assert.ok(existsSync(versionDir))
+      process.kill(prepared.pid, 'SIGKILL')
+      assert.equal((await first).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
+      const review = new DatabaseSync(t.dbPath)
+      try { review.prepare('DELETE FROM review_compatibility WHERE revision_id=?').run(ship.revisionId) }
+      finally { review.close() }
+      t.plan({ 'after-promotion-rollback': 'block' })
+      const recovering = a.call(retryMessage)
+      const rolledBack = await t.checkpoint('after-promotion-rollback', recovering, { flow: 'recovery', transport: 'ipc' })
+      assert.equal(existsSync(journal), false)
+      assert.equal(existsSync(versionDir), false)
+      assert.equal(t.promotions()[0].state, 'publishing')
+      process.kill(rolledBack.pid, 'SIGKILL')
+      assert.equal((await recovering).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
+      t.plan({})
+      const stopped = await a.call(retryMessage)
+      assert.equal(stopped.result?.status, 'failed', JSON.stringify(stopped))
+      assert.equal(t.promotions()[0].id, original.id)
+      assert.equal(t.promotions()[0].state, 'failed')
+      assert.equal(t.rows().at(-1).state, 'rejected')
+      assert.equal(query(t.dbPath, 'SELECT count(*) n FROM import_review_shipping_guards')[0].n, 0)
+      const retried = await a.call(retryMessage)
+      assert.equal(retried.result?.status, 'published', JSON.stringify(retried))
+      assert.equal(retried.result.promotion.promotionId, original.id)
+      assert.equal(retried.result.promotion.assetVersion, original.asset_version)
+      assert.equal(query(t.dbPath, 'SELECT result FROM review_compatibility WHERE revision_id=?',
+        [ship.revisionId])[0].result, 'equal')
+      assert.equal(query(t.env.QUESTION_BANK_DB, 'SELECT count(*) n FROM paper_asset_versions')[0].n, 1)
+      assert.equal(t.rows().at(-1).state, 'completed')
+      assert.ok(t.rows().every(row => ['completed', 'rejected'].includes(row.state)))
+      await t.deadWorker(t.rows().at(-1))
+    })
   // Archive checkpoints already include full content preparation. Only launch
   // and begin controls use the short budget.
   const killCheckpoints = [
