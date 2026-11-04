@@ -2,7 +2,7 @@
 import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, realpathSync, rmSync, writeFileSync } from 'node:fs'
 import { deserialize } from 'node:v8'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -366,7 +366,7 @@ try {
       else delete entry.figures
     }))
   }
-  if (!process.argv.includes('--references-only')) {
+  if (!process.argv.includes('--references-only') || scoringFigures) {
   rejected('preview unchanged but actual admission consumer changes a question', ({ admission }) => {
     const selection = admission.consumers.screen.selections.find(item => item.familyContractId === 'reading')
     assert.equal(changeText(selection.projectedOccurrences[0].questions[0].stem), true)
@@ -503,6 +503,171 @@ try {
     assert.throws(() => publish('changed-sealed-pdf'), { reasonCode: 'SEALED_FILE_CHANGED' })
   } finally { writeFileSync(frozenPath, frozenBytes) }
   pass('replaced sealed PDF is rejected before publisher projection or writing')
+
+  if (!process.argv.includes('--references-only') || scoringFigures) {
+    const sealedRoot = path.join(store.revisionDirectory(revision.id), 'sealed-publication')
+    const sealedManifestPath = path.join(sealedRoot, 'manifest.json')
+    const originalSeal = readFileSync(sealedManifestPath)
+    const seal = JSON.parse(originalSeal)
+    assert.equal(store.sealedPublicationCommitmentForRevision(revision.id).commitment, sha256(originalSeal))
+    const sealedService = label => {
+      label = label.replace(/[^a-z0-9-]/gi, '-')
+      const dbPath = path.join(root, `${label}-review.sqlite`)
+      copyFileSync(reviewDb, dbPath)
+      const copy = createImportReviewStore({ dbPath, filesRoot: path.join(root, 'revisions'), rendererBuildId: 'changed-renderer' })
+      const bank = path.join(root, `${label}-bank.sqlite`)
+      const db = new DatabaseSync(bank)
+      db.exec(readFileSync(new URL('../data/sql/schema.sql', import.meta.url), 'utf8'))
+      db.close()
+      const assets = path.join(root, `${label}-assets`)
+      return { dbPath, bank, assets, store: copy, service: createSinglePaperPromotionService({
+        getStore: () => copy, openDatabase: () => new DatabaseSync(bank), paperAssetsDir: assets, blobStore,
+      }) }
+    }
+    const rejectedSeal = async (label, change) => {
+      const fixture = sealedService(label)
+      const cleanup = change(fixture)
+      try {
+        const result = await fixture.service.promote(projection.paperId,
+          { ...approval, intent: 'ship' }, 'fixture-owner')
+        assert.equal(result.status, 'failed')
+        assert.ok(['IMPORT_REVIEW_SEALED_PUBLICATION_INVALID', 'CANONICAL_IMPORT_CONSUMER_UNAVAILABLE']
+          .includes(result.failure.failureCode))
+        if (result.failure.failureCode === 'CANONICAL_IMPORT_CONSUMER_UNAVAILABLE') {
+          assert.match(result.failure.failureMessage, /print_pdf.*unavailable/)
+        }
+        assert.equal(existsSync(fixture.assets), false)
+        const db = new DatabaseSync(fixture.bank)
+        assert.equal(db.prepare('SELECT COUNT(*) n FROM sources').get().n, 0)
+        const versions = db.prepare("SELECT 1 FROM sqlite_master WHERE name='paper_asset_versions'").get()
+        assert.equal(versions ? db.prepare('SELECT COUNT(*) n FROM paper_asset_versions').get().n : 0, 0)
+        db.close()
+        pass(label)
+      } finally { cleanup() }
+    }
+    const sourceAssetPath = path.join(sealedRoot, 'canonical/source-asset.bin')
+    const sourceAssetBytes = readFileSync(sourceAssetPath)
+    await rejectedSeal('sealed source bytes tampered cannot fall back or write', () => {
+      writeFileSync(sourceAssetPath, 'tampered')
+      return () => writeFileSync(sourceAssetPath, sourceAssetBytes)
+    })
+    await rejectedSeal('sealed source file missing cannot fall back or write', () => {
+      rmSync(sourceAssetPath)
+      return () => writeFileSync(sourceAssetPath, sourceAssetBytes)
+    })
+    await rejectedSeal('unsupported sealed print contract rejects before any bank/version write', fixture => {
+      const changed = structuredClone(seal)
+      changed.consumerRefs.print_pdf.version = 'unavailable'
+      writeFileSync(sealedManifestPath, JSON.stringify(changed))
+      const db = new DatabaseSync(fixture.dbPath)
+      db.prepare('UPDATE import_review_product_previews SET sealed_publication_manifest_digest=? WHERE revision_id=?')
+        .run(sha256(readFileSync(sealedManifestPath)), revision.id)
+      db.close()
+      return () => writeFileSync(sealedManifestPath, originalSeal)
+    })
+    const fixture = sealedService('sealed-no-rebuild')
+    // Allocate an actual version different from Review's v1 without copying
+    // any paper data. The existing allocator treats this directory as v6.
+    mkdirSync(path.join(fixture.assets, projection.paperId, 'versions/v6'), { recursive: true })
+    const program = `
+      import assert from 'node:assert/strict';
+      import { registerHooks } from 'node:module';
+      import { DatabaseSync } from 'node:sqlite';
+      import { readFileSync, readdirSync } from 'node:fs';
+      import path from 'node:path';
+      const forbidden = {
+        'revisionProjection.mjs': ['buildNck1ReviewProjection', 'buildNck1SealedReviewProjection', 'buildNck1CompatibilityPackage'],
+        'nck1MaterializationCanonicalRequest.mjs': ['materializeNck1CanonicalRequest'],
+        'compiler.mjs': ['compileCanonicalPaper', 'compileNck1MaterializationCandidatePreview', 'importCanonicalCandidate'],
+        'normalization.mjs': ['buildPaperNormalizedGroupsSidecar', 'validatePaperNormalizedGroupsSidecar'],
+      };
+      let trapped = 0;
+      registerHooks({ load(url, context, next) {
+        const loaded = next(url, context);
+        const names = forbidden[url.split('/').at(-1)];
+        if (!names) return loaded;
+        let source = String(loaded.source);
+        for (const name of names) {
+          const pattern = new RegExp('(function ' + name + '\\\\([^]*?\\\\)\\\\s*\\\\{)');
+          assert(pattern.test(source), 'missing rebuild trap: ' + name);
+          source = source.replace(pattern, '$1 throw new Error("REBUILD_FORBIDDEN:' + name + '");');
+          trapped++;
+        }
+        return { ...loaded, source };
+      } });
+      const { createImportReviewStore } = await import(${JSON.stringify(new URL('../server/import-review/importReviewStore.mjs', import.meta.url).href)});
+      const { createSinglePaperPromotionService } = await import(${JSON.stringify(new URL('../server/import-review/singlePaperPromotion.mjs', import.meta.url).href)});
+      const { createBlobStore } = await import(${JSON.stringify(new URL('../server/paper-import/blobStore.mjs', import.meta.url).href)});
+      const { printConsumption } = await import(${JSON.stringify(new URL('../server/import-review/revisionProjection.mjs', import.meta.url).href)});
+      const { canonicalConsumptionPrintPayload } = await import(${JSON.stringify(new URL('./import-pipeline/canonical-consumption-print-payload.mjs', import.meta.url).href)});
+      const { buildPrintHtml } = await import(${JSON.stringify(new URL('../server/print-renderer.mjs', import.meta.url).href)});
+      const { createReviewCompatibilityStore } = await import(${JSON.stringify(new URL('../server/import-review/reviewCompatibilityStore.mjs', import.meta.url).href)});
+      const [dbPath, filesRoot, bank, assets, blobs, revisionId] = process.argv.slice(1);
+      const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'changed-with-rebuild-disabled' });
+      const revision = store.getRevision(revisionId);
+      const review = store.productPreviewForRevision(revisionId).preview;
+      const reviewDb = new DatabaseSync(dbPath);
+      reviewDb.exec('DELETE FROM review_compatibility');
+      reviewDb.close();
+      assert.equal(store.compatibilityForRevision(revisionId).reasonCode, 'SEALED_PUBLICATION');
+      assert.equal(store.listPapers()[0].compatibility.reasonCode, 'SEALED_PUBLICATION');
+      assert.deepEqual(await createReviewCompatibilityStore({ dbPath, filesRoot }).checkRevision(revisionId),
+        { committed: false, reasonCode: 'SEALED_PUBLICATION' });
+      const make = crash => createSinglePaperPromotionService({ getStore: () => store,
+        openDatabase: () => new DatabaseSync(bank), paperAssetsDir: assets,
+        blobStore: createBlobStore({ rootDir: blobs }),
+        afterPublish: crash ? () => { throw new Error('sealed-receipt-loss'); } : null });
+      await assert.rejects(async () => make(true).promote(revision.paperId,
+        { ...revision.approval, intent: 'ship' }, 'owner'), /sealed-receipt-loss/);
+      const result = await make(false).promote(revision.paperId,
+        { ...revision.approval, intent: 'retry_ship' }, 'owner');
+      assert.equal(result.status, 'idempotent');
+      assert.equal(result.promotion.assetVersion, 7);
+      assert.equal(trapped, 9);
+      const versionDir = path.join(assets, revision.paperId, 'versions/v7');
+      const read = file => JSON.parse(readFileSync(path.join(versionDir, file)));
+      assert.equal(read('paper-asset.json').paper.assetVersion, 7);
+      assert.equal(read('answer-key.json').sourceAssetVersion, 7);
+      assert.equal(read('paper-normalized-groups-v1.json').sourceAssetVersion, 7);
+      assert.deepEqual(read('answer-key.json').answers, review.paperAsset.answerKey.answers);
+      for (const [file, expected] of Object.entries(review.analysisSidecars)) {
+        const actual = read('analyses/' + file);
+        if (file !== 'writing-analysis-v1.json') assert.equal(actual.sourceAssetVersion, 7);
+        for (const group of Object.values(actual.groups || {})) {
+          if (group.teachingContent?.schemaVersion === 'objective-teaching-content-v1') {
+            assert.equal(group.teachingContent.sourceAssetVersion, 7);
+          }
+        }
+      }
+      assert.equal(result.consumers.screen.sourceAssetVersion, 7);
+      assert.equal(result.consumers.print_pdf.sourceAssetVersion, 7);
+      assert.match(result.consumers.screen.listeningAudio.url, /versions\\/v7\\//);
+      assert.deepEqual(result.consumers.screen.listeningAudio.segments, review.consumption.listeningAudio.segments);
+      const printHtml = consumption => {
+        const payload = canonicalConsumptionPrintPayload(consumption, revision.manifest.paperName);
+        const items = payload.items.map(({ questionGroupId }) => ({ detail: payload.details.get(questionGroupId) }));
+        return buildPrintHtml({ ...payload, items, canonicalConsumption: consumption, versionType: 'student' });
+      };
+      assert.equal(printHtml(result.consumers.print_pdf), printHtml(printConsumption(review.consumption)),
+        'real Print HTML must match the reviewed content at a different publication version');
+      for (const file of revision.manifest.files.filter(file => file.path.startsWith('products/'))) {
+        assert.deepEqual(readFileSync(path.join(versionDir, file.path)), readFileSync(path.join(filesRoot, revisionId, file.path)));
+      }
+      const db = new DatabaseSync(bank);
+      assert.equal(db.prepare('SELECT COUNT(*) n FROM paper_asset_versions').get().n, 1);
+      db.close();
+      assert.deepEqual(readdirSync(path.join(assets, revision.paperId, 'versions')).sort(), ['v6', 'v7']);
+      console.log('PASS all rebuild entries throw; approved Screen/Print loaders, v7 binding, exact PDFs and interrupted retry remain correct');
+    `
+    const output = execFileSync(process.execPath, ['--input-type=module', '-e', program,
+      fixture.dbPath, path.join(root, 'revisions'), fixture.bank, fixture.assets, path.join(root, 'blobs'), revision.id],
+    { encoding: 'utf8', timeout: 120_000 })
+    assert.match(output, /PASS all rebuild entries throw/)
+    pass('all rebuilding/normalizing entries disabled; sealed v7 publication and committed retry succeed')
+  }
+  // Remaining race/comparison probes deliberately retain #668 behavior.
+  dbRun(db => db.prepare(`UPDATE import_review_product_previews
+    SET sealed_publication_manifest_digest=NULL WHERE revision_id=?`).run(revision.id))
 
   // Promotion exercises the real store guard around the same publisher.
   const intent = { ...approval, intent: 'ship' }

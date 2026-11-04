@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
-import { copyFileSync, mkdtempSync, mkdirSync, readFileSync, rmSync, statfsSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, mkdtempSync, mkdirSync, readFileSync, rmSync, statfsSync, writeFileSync } from 'node:fs'
 import { randomUUID } from 'node:crypto'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -61,6 +61,13 @@ try {
   const thirdFixture = makeReviewRoot(path.join(root, 'source-c'), 'paper-promotion-worker-c')
   const thirdProjection = freezeReviewFixture(thirdFixture.reviewRoot)
   const third = finalizeReviewFixture({ directory: thirdFixture.reviewRoot, output: root, projection: thirdProjection, store, approve: false })
+  // Preserve #668 different/unknown and interrupted historical-retry coverage.
+  {
+    const db = new DatabaseSync(process.env.QUESTION_BANK_IMPORT_OPS_DB)
+    db.prepare(`UPDATE import_review_product_previews SET sealed_publication_manifest_digest=NULL
+      WHERE revision_id IN (?, ?)`).run(second.revision.id, third.revision.id)
+    db.close()
+  }
   const requestId = `publication-request-${randomUUID()}`
   const secretHash = sha256('synthetic-scoped-capability')
   store.registerPublicationRequest(second.manifest.paperId, { requestId, secretHash,
@@ -68,12 +75,37 @@ try {
   store.grantPublicationRequest(requestId, 'synthetic-owner')
   const seedDb = path.join(root, 'seed.sqlite')
   copyFileSync(process.env.QUESTION_BANK_IMPORT_OPS_DB, seedDb)
+  {
+    const db = new DatabaseSync(seedDb)
+    // The existing fault matrix asserts historical compare-after-rollback.
+    db.exec('UPDATE import_review_product_previews SET sealed_publication_manifest_digest=NULL')
+    db.close()
+  }
   const db = new DatabaseSync(process.env.QUESTION_BANK_DB)
   db.exec(readFileSync(new URL('../data/sql/schema.sql', import.meta.url), 'utf8'))
   db.close()
   mkdirSync(process.env.QUESTION_BANK_PAPER_ASSET_ROOT)
   let invalidations = 0
   service = createPromotionWorkerService({ getStore: () => store, afterPublish() { invalidations++ } })
+  {
+    const invalidFixture = makeReviewRoot(path.join(root, 'source-invalid'), 'paper-promotion-worker-invalid-seal')
+    const invalidProjection = freezeReviewFixture(invalidFixture.reviewRoot)
+    const invalid = finalizeReviewFixture({ directory: invalidFixture.reviewRoot, output: root,
+      projection: invalidProjection, store })
+    rmSync(path.join(store.revisionDirectory(invalid.revision.id), 'sealed-publication/canonical/source-asset.bin'))
+    const rejected = await service.promote(invalid.manifest.paperId,
+      { ...invalid.approval, intent: 'ship' }, 'synthetic-ship')
+    assert.equal(rejected.status, 'failed')
+    assert.equal(rejected.failure.failureCode, 'IMPORT_REVIEW_SEALED_PUBLICATION_INVALID')
+    assert.equal(createPromotionOperationStore({ dbPath: process.env.QUESTION_BANK_IMPORT_OPS_DB })
+      .get(rejected.operationId).state, 'rejected')
+    assert.equal(existsSync(path.join(process.env.QUESTION_BANK_PAPER_ASSET_ROOT, invalid.manifest.paperId)), false)
+    const bank = new DatabaseSync(process.env.QUESTION_BANK_DB, { readOnly: true })
+    assert.equal(bank.prepare('SELECT count(*) n FROM sources').get().n, 0)
+    bank.close()
+    assert.equal(invalidations, 0)
+    console.log('PASS corrupt committed seal returns a durable rejection with its diagnostic and no publication')
+  }
   {
     const reviewDb = new DatabaseSync(process.env.QUESTION_BANK_IMPORT_OPS_DB)
     reviewDb.prepare('DELETE FROM review_compatibility WHERE revision_id IN (?, ?, ?)')
@@ -132,7 +164,8 @@ try {
   assert.equal(result.status, 'published')
   assert.equal(invalidations, 1)
   assert.equal(store.compatibilityForRevision(reviewed.revision.id).result, 'equal')
-  console.log('PASS on-demand equal continues through the original publisher')
+  assert.equal(store.compatibilityForRevision(reviewed.revision.id).reasonCode, 'SEALED_PUBLICATION')
+  console.log('PASS sealed commitment bypasses missing compatibility and continues through the atomic publisher')
   const operations = createPromotionOperationStore({ dbPath: process.env.QUESTION_BANK_IMPORT_OPS_DB })
   const operation = operations.get(result.operationId)
   assert.equal(operation.state, 'completed')
@@ -166,7 +199,7 @@ try {
     assert.equal(recovered.promotion.promotionId, result.promotion.promotionId)
     assert.equal(recovered.promotion.assetVersion, result.promotion.assetVersion)
     assert.equal(operations.get(recovered.operationId).state, 'completed')
-    assert.equal(store.compatibilityForRevision(reviewed.revision.id).pending, true)
+    assert.equal(store.compatibilityForRevision(reviewed.revision.id).reasonCode, 'SEALED_PUBLICATION')
     const bank = new DatabaseSync(process.env.QUESTION_BANK_DB, { readOnly: true })
     try { assert.equal(bank.prepare('SELECT count(*) n FROM paper_asset_versions').get().n, 1) }
     finally { bank.close() }

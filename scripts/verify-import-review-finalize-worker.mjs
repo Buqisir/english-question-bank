@@ -10,7 +10,8 @@ import { createImportReviewStore, reviewBundleDigest } from '../server/import-re
 import { buildImportReviewProjection, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
 import { finalizeContentSubject, finalizeInventory } from '../server/import-review/finalizeComputation.mjs'
 import { runFinalizeWorker } from '../server/import-review/runFinalizeWorker.mjs'
-import { sha256 } from '../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import { freezeReviewFixture, reviewFixtureManifest } from './lib/reviewPublicationFixture.mjs'
 import { buildProductPreviewPayload } from '../server/import-review/reviewSubject.mjs'
 import { saveProductPreview as legacySaveProductPreview } from '../test-fixtures/review-compatibility/legacy-preview-6dc7530b.mjs'
 
@@ -203,6 +204,36 @@ try {
   syncPreview.consumption.listeningAudio.url = syncPreview.consumption.listeningAudio.url
     .replace(syncResult.id, asyncResult.id)
   assert.deepEqual(asyncPreview, syncPreview)
+  const sealedSource = makeReviewRoot(path.join(root, 'sealed-source'), 'paper-finalize-sealed', undefined, { listening: true })
+  const sealedProjection = freezeReviewFixture(sealedSource.reviewRoot)
+  const sealedManifest = reviewFixtureManifest(sealedSource.reviewRoot, sealedProjection)
+  const sealedDb = path.join(root, 'sealed.sqlite')
+  const sealedStore = createImportReviewStore({ dbPath: sealedDb, filesRoot: path.join(root, 'sealed-files'),
+    rendererBuildId: 'finalize-worker-test' })
+  const sealedDraft = sealedStore.createRevision(sealedManifest).revision
+  for (const file of sealedManifest.files) {
+    const { destination } = sealedStore.fileForUpload(sealedDraft.id, file.path)
+    mkdirSync(path.dirname(destination), { recursive: true })
+    writeFileSync(destination, readFileSync(path.join(sealedSource.reviewRoot, file.path)))
+    sealedStore.completeFileUpload(sealedDraft.id, file.path, file)
+  }
+  await sealedStore.finalizeUploadedRevision(sealedDraft.id)
+  const sealedCommitment = sealedStore.sealedPublicationCommitmentForRevision(sealedDraft.id)
+  const sealedDirectory = path.join(sealedStore.revisionDirectory(sealedDraft.id), 'sealed-publication')
+  const sealedBytes = readFileSync(path.join(sealedDirectory, 'manifest.json'))
+  const sealed = JSON.parse(sealedBytes)
+  assert.equal(sha256(sealedBytes), sealedCommitment.commitment)
+  assert.equal(sealed.payloadDigest, digestJson(sealedStore.productPreviewForRevision(sealedDraft.id).preview))
+  assert.equal(sealedStore.getRevision(sealedDraft.id).state, 'awaiting_review')
+  for (const file of sealed.files.filter(file => file.origin === 'sealed')) {
+    const bytes = readFileSync(path.join(sealedDirectory, file.path))
+    assert.equal(sha256(bytes), file.sha256)
+    assert.equal(bytes.length, file.byteLength)
+  }
+  assert(sealed.files.some(file => file.origin === 'revision' && file.path === 'products/manifest-v1.json'))
+  assert(sealed.files.some(file => file.path === 'canonical/source-asset.bin'))
+  assert(sealed.files.some(file => file.path === 'listening/playback.mp3'))
+  console.log('PASS worker finalize atomically commits complete sealed bytes, preview digest and awaiting_review without duplicating PDFs')
 
   // A valid hash with an invalid inventory must never partially finalize.
   writeFileSync(path.join(directory, 'extra.json'), '{}')
