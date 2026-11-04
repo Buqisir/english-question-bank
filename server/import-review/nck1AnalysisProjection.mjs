@@ -369,7 +369,8 @@ export function buildNck1AnalysisProjection({
   const presentCount = NCK1_STAGED_ANALYSIS_FILES.filter(({ path: relativePath }) =>
     existsSync(path.join(rootDir, relativePath))).length
   const listeningPresent = existsSync(path.join(rootDir, NCK1_LISTENING_STAGED_ANALYSIS.path))
-  if (presentCount === 0 && !required && !listeningPresent) return null
+  if (presentCount === 0 && !required && !listeningPresent
+    && analysisProfile !== LISTENING_ANALYSIS_PROFILE) return null
   if (presentCount !== NCK1_STAGED_ANALYSIS_FILES.length) {
     const missing = NCK1_STAGED_ANALYSIS_FILES
       .filter(({ path: relativePath }) => !existsSync(path.join(rootDir, relativePath)))
