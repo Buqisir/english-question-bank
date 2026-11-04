@@ -5,7 +5,7 @@ import {
   nck1ListeningInstructionAuthorityRef,
   nck1DrawingAreaAuthorityRef,
   nck1ReadingStemFiguresAuthorityRef,
-  nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef,
+  nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, nationalLegacyMaterializationAuthorityRef,
   closureAdmitsReadingStemFigures, closureAdmitsInImageOptionLabelMeasurements,
   nck1MaterializationHistoricalAuthorityRef54,
   nck1MaterializationHistoricalAuthorityRef57,
@@ -1057,6 +1057,7 @@ function appendContinuationWritingReferenceGroup({
   ruleVersion = '2',
 }) {
   if (source.groups.some((candidate) => candidate.slotId === 'writing.continuation')) return
+  if (source.profileId === 'national-legacy' && source.groups.some(group => group.family === 'error-correction')) return
   if (!continuationEntry) {
     diagnostics.push(diagnostic('CONTINUATION_SOURCE_CAPTURE_INCOMPLETE', 'incomplete_source', '$.evidence.documents', 'Continuation Writing requires one reviewed structured source capture'))
     return
@@ -2859,7 +2860,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     content,
     new Set(sourceGroup.blankIds),
     mediaIds,
-    ['46', '47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(closure.authorityRef.manifestVersion),
+    ['46', '47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(closure.authorityRef.manifestVersion),
     (family.familyContractId === 'reading' && ['2', '3', '4', '5'].includes(closure.artifacts['rich-content']?.version))
       || (['application-writing', 'continuation-writing'].includes(family.familyContractId)
         && ['4', '5'].includes(closure.artifacts['rich-content']?.version)),
@@ -2869,8 +2870,10 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
   }
   diagnostics.push(...validateReferenceBlankClosure(family.familyContractId, sourceGroup.questionIds, sourceGroup.blankIds, content))
   const variant = cloneJson(sourceGroup.variant || {})
-  const variantKeys = family.familyContractId === 'seven-choices'
-    ? ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(closure.authorityRef.manifestVersion)
+  const variantKeys = family.familyContractId === 'error-correction'
+    ? ['family', 'questions', 'choiceOwnership']
+    : family.familyContractId === 'seven-choices'
+    ? ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(closure.authorityRef.manifestVersion)
       ? ['family', 'passageBlockRoles', 'members', 'choiceOwnership']
       : ['family', 'members', 'choiceOwnership']
     : family.familyContractId === 'reading'
@@ -2909,6 +2912,17 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     diagnostics.push(...variantSchemaIssues.map((item) => diagnostic(item.code, 'needs_review', item.path, item.message)))
   }
   diagnostics.push(...validateChoiceOwnership(variant.choiceOwnership, sourceGroup.questionIds, family.choiceOwnership))
+  if (family.familyContractId === 'error-correction' && (
+    sourceGroup.questionIds.length !== 10 || sourceGroup.blankIds.length !== 0
+    || content.blocks.length === 0 || content.blocks.some(block => block.kind !== 'paragraph'
+      || block.inlines.some(node => node.kind !== 'text' || node.marks?.length))
+    || !Array.isArray(variant.questions) || variant.questions.length !== 10
+    || variant.questions.some((question, index) => !exactKeys(question, ['questionId', 'sourceNumber'])
+      || question.questionId !== sourceGroup.questionIds[index]
+      || !(question.sourceNumber === null || Number.isInteger(question.sourceNumber) && question.sourceNumber > 0)))) {
+    diagnostics.push(diagnostic('ERROR_CORRECTION_IDENTITY_INVALID', 'needs_review', '$.groups', 'Correction identities must preserve source order without blanks'))
+  }
+
   if (family.familyContractId === 'grammar-fill' && Number(family.version) >= 2) {
     diagnostics.push(
       ...validateGrammarFillPromptBindings(
@@ -2929,7 +2943,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       variant,
       assertions: capture.assertions,
       allowPassageBlockRoles:
-        ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(closure.authorityRef.manifestVersion),
+        ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(closure.authorityRef.manifestVersion),
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
   if (family.familyContractId === 'reading') {
@@ -2982,9 +2996,9 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     }).map((item) => diagnostic(item.code, item.disposition, item.path, item.message)))
   }
   if (sourceGroup.sourcePresentation !== undefined
-    && (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(closure.authorityRef.manifestVersion)
+    && (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(closure.authorityRef.manifestVersion)
       || !sourcePresentationMatchesCapture(sourceGroup.sourcePresentation, capture)
-      || ((sourceGroup.sourcePresentation.headings || sourceGroup.sourcePresentation.opening) && closure.authorityRef.manifestVersion !== '82'))) {
+      || ((sourceGroup.sourcePresentation.headings || sourceGroup.sourcePresentation.opening) && !['82', '83'].includes(closure.authorityRef.manifestVersion)))) {
     diagnostics.push(diagnostic('SOURCE_PRESENTATION_INVALID', 'incomplete_source', '$.sourcePresentation',
       'Source presentation must match captured source observations under a registered source-presentation authority'))
   }
@@ -3325,7 +3339,7 @@ function makeReport({
   diagnostics = [],
 }) {
   // v71 is the first raw successor after the presentation-only v70 manifest.
-  const reportVersion = ['71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(authority?.manifestVersion) ? '70' : authority?.manifestVersion || '2'
+  const reportVersion = ['71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(authority?.manifestVersion) ? '70' : authority?.manifestVersion || '2'
   const legacyAuthority = authority?.manifestVersion === '1'
   const closureDigests = inactiveSourceClosures.map(
     (closure) => closure.closureDigest,
@@ -3416,13 +3430,13 @@ export function compileCanonicalPaper(
     && closure.authorityRef.manifestDigest
       === trustedDocxCandidateAuthorityRef.manifestDigest
   const acceptsNck1MaterializationCandidate = request?.[nck1MaterializationCandidateCompile] === true
-    && [nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
+    && [nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, nationalLegacyMaterializationAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
       .some(authority => closure.authorityRef.manifestDigest === authority.manifestDigest)
   const acceptsNck1AnalyzedPackageCandidate = request?.[nck1AnalyzedPackageCandidateCompile] === true
     && closure.authorityRef.manifestDigest
       === nck1AnalyzedPackageCandidateAuthorityRef55.manifestDigest
   const acceptsConfirmedNck1MaterializationRequest =
-    [nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
+    [nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, nationalLegacyMaterializationAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
       .some(authority => closure.authorityRef.manifestDigest === authority.manifestDigest)
     && isConfirmedNck1MaterializationRequest(request)
   const acceptsConfirmedNck1AnalyzedPackageRequest =
@@ -4350,7 +4364,7 @@ export function importCanonicalCandidate(sourceBytes, operatorChoices, { materia
       nck1ListeningInstructionAuthorityRef,
       nck1DrawingAreaAuthorityRef,
       nck1ReadingStemFiguresAuthorityRef,
-      nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef,
+      nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, nationalLegacyMaterializationAuthorityRef,
       nck1MaterializationHistoricalAuthorityRef58,
       nck1MaterializationHistoricalAuthorityRef59,
       nck1MaterializationHistoricalAuthorityRef61,

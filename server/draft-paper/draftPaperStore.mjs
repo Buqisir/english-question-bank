@@ -1697,8 +1697,7 @@ export function createDraftPaperStore({
       let rendered
       if (edition === 'answerOnly') {
         const paperName = draftPaper.title || '未命名英语练习卷'
-        const wholePaper = selected.length === 11
-          && (draftPaper.questionNumberStart ?? 1) === 1
+        const wholePaper = (draftPaper.questionNumberStart ?? 1) === 1
           && ownsCompletePaperOpening(canonicalConsumption, selected.map(item => item.groupId))
         const html = wholePaper && sourceByPaper.size === 1 && [...sourceByPaper.values()][0]
           ? buildAnswerOnlyHtml({ ...[...sourceByPaper.values()][0], paperName })

@@ -78,6 +78,7 @@ const groupTypeMap = {
   cloze: 'cloze',
   sevenChoices: 'seven_choices',
   grammarFill: 'grammar_cloze',
+  errorCorrection: 'errorCorrection',
   listening: 'listening',
   writing: 'writing',
 }
@@ -124,6 +125,7 @@ function getQuestionType(groupType) {
   if (groupType === 'cloze') return '完形填空'
   if (groupType === 'sevenChoices') return '七选五'
   if (groupType === 'grammarFill') return '语法填空'
+  if (groupType === 'errorCorrection') return '短文改错'
   if (groupType === 'listening') return '听力'
   if (groupType === 'writing') return '写作'
   return '其他'
@@ -460,7 +462,7 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
       ).run(
         question.questionId,
         group.groupId,
-        String(question.questionNo),
+        group.groupType === 'errorCorrection' && question.questionNo === null ? '' : String(question.questionNo),
         getQuestionType(group.groupType),
         question.stem || '',
         answer,
@@ -553,6 +555,7 @@ function importedFamily(group, paperAsset) {
   if (group.groupType === 'sevenChoices') return 'seven-choices'
   if (group.groupType === 'cloze') return 'cloze'
   if (group.groupType === 'grammarFill') return 'grammar-fill'
+  if (group.groupType === 'errorCorrection') return 'error-correction'
   if (group.groupType === 'listening') return 'listening'
   if (group.groupType !== 'writing') return null
   const task = paperAsset.content.writingTasks?.[group.writingTaskId]

@@ -1249,7 +1249,8 @@ export function buildNck1ReviewConsumption(candidate, compilation) {
         'seven-choices',
         'cloze',
         'grammar-fill',
-        ...(['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(
+        'error-correction',
+        ...(['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(
           canonicalPaper.paperPlan.authorityRef.manifestVersion,
         )
           ? ['continuation-writing']
@@ -1328,6 +1329,7 @@ export function buildNck1CompatibilityPaperAsset({
     'seven-choices': 'sevenChoices',
     cloze: 'cloze',
     'grammar-fill': 'grammarFill',
+    'error-correction': 'errorCorrection',
     'application-writing': 'writing',
     'continuation-writing': 'writing',
   }
@@ -1416,6 +1418,7 @@ export function buildNck1CompatibilityPaperAsset({
         questionId: question.questionId,
         questionNo: question.canonicalNumber,
         groupId: group.groupId,
+        ...(group.family === 'error-correction' ? { family: group.family } : {}),
         stem: question.stem,
         ...(question.options.length > 0
           ? { options: question.options.map(({ label, text }) => ({ label, text })) }

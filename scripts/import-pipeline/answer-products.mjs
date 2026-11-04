@@ -135,7 +135,7 @@ try {
       if (existsSync(output)) throw new Error('QA output must be a new directory; preserve previous evidence')
       const includeScoring = process.argv.includes('--include-scoring')
       const html = buildAnswerOnlyHtml({ ...binding, sourceReferences,
-        ...(loaded.materialization.profileId === 'zhejiang-legacy'
+        ...(['zhejiang-legacy', 'national-legacy'].includes(loaded.materialization.profileId)
           ? { canonicalPlan: compileNck1MaterializationCandidatePreview(imported.candidate).compilation?.artifacts?.canonicalPaper?.paperPlan } : {}),
         paperName: loaded.config.provenance.paperName, includeScoring })
       mkdirSync(output, { recursive: true })

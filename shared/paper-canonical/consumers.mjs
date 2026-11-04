@@ -1,3 +1,5 @@
+import screenV50 from '../../standards/paper-canonical/consumers/screen-v50.json' with { type: 'json' }
+import printPdfV51 from '../../standards/paper-canonical/consumers/print-pdf-v51.json' with { type: 'json' }
 import screenV49 from '../../standards/paper-canonical/consumers/screen-v49.json' with { type: 'json' }
 import printPdfV50 from '../../standards/paper-canonical/consumers/print-pdf-v50.json' with { type: 'json' }
 import screenV48 from '../../standards/paper-canonical/consumers/screen-v48.json' with { type: 'json' }
@@ -27,7 +29,8 @@ import { digestJson, withoutKey } from './stable.mjs'
 const historicalContracts = [screen, printPdf, screenV40, printPdfV41, screenV41, printPdfV42, screenV42, printPdfV43, screenV43, printPdfV44, screenV44, printPdfV45, screenV45, printPdfV46, screenV46, printPdfV47, screenV47, printPdfV48]
 const contracts = [screenV48, printPdfV49]
 const stemFigureContracts = [screenV49, printPdfV50]
-const allContracts = [...historicalContracts, ...contracts, ...stemFigureContracts]
+const nationalContracts = [screenV50, printPdfV51]
+const allContracts = [...historicalContracts, ...contracts, ...stemFigureContracts, ...nationalContracts]
 
 function validateContract(contract) {
   const authorityRef = authorityRefForManifestDigest(contract.authorityManifestDigest)
@@ -59,6 +62,8 @@ export const consumerContractRefs = Object.freeze(Object.fromEntries(contracts.m
 // existing consumer identities and historical byte output.
 export function consumerContractRefsForAuthority(authorityRef) {
   const authority = resolveCanonicalAuthority(authorityRef)
+  if (authority.ok && authority.closure.families.has('error-correction')) return Object.fromEntries(
+    nationalContracts.map(contract => [contract.consumerId, refFor(contract)]))
   return authority.ok && closureAdmitsReadingStemFigures(authority.closure)
     ? Object.fromEntries(stemFigureContracts.map(contract => [contract.consumerId,
       { id: contract.consumerId, version: contract.version, digest: contract.contractDigest }]))
@@ -134,6 +139,7 @@ export const reviewConsumerPairs = Object.freeze([
   Object.freeze({ screen: refFor(screenV47), print_pdf: refFor(printPdfV48) }),
   Object.freeze({ screen: refFor(screenV48), print_pdf: refFor(printPdfV49) }),
   Object.freeze({ screen: refFor(screenV49), print_pdf: refFor(printPdfV50), ...stemFigureEvidence }),
+  Object.freeze({ screen: refFor(screenV50), print_pdf: refFor(printPdfV51) }),
 ])
 
 // Validate declarations at startup. This does not grant callers permission to

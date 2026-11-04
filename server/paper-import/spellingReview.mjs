@@ -120,6 +120,8 @@ export function enumerateSpellingTargets(materialization) {
       return
     }
     if (!node || typeof node !== 'object') return
+    // Exam errors are intentional task content, excluded from editorial overlays.
+    if (node.family === 'error-correction') return
     const source = node.source ?? node.authority ?? inheritedSource
     for (const [key, value] of Object.entries(node)) {
       const child = `${pointer}/${key}`
@@ -155,6 +157,10 @@ export function prepareSpellingReview(materializationBytes, policy = SPELLING_RE
 export function applySpellingReview(materializationBytes, reportBytes) {
   const original = JSON.parse(new TextDecoder().decode(materializationBytes))
   const report = JSON.parse(new TextDecoder().decode(reportBytes))
+  if (report.targets?.some(target => {
+    const match = /^\/groups\/(\d+)\//u.exec(target.jsonPointer ?? '')
+    return match && original.groups?.[Number(match[1])]?.family === 'error-correction'
+  })) fail('error-correction source text is immutable')
   const targets = enumerateSpellingTargets(original)
   if (!exactKeys(report, ['schemaVersion', 'materializationSha256', 'reviewedBy', 'reviewedAt', 'targets'])
     || !reviewPolicies.includes(report.schemaVersion)

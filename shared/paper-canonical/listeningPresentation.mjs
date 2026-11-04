@@ -1,4 +1,4 @@
-import { zhejiangLegacyProfile } from './nck1SourceMaterialization.mjs'
+import { nationalLegacyProfile, zhejiangLegacyProfile } from './nck1SourceMaterialization.mjs'
 import profile from '../../standards/paper-canonical/profiles/nck1-v16.json' with { type: 'json' }
 
 const instructions = profile.instructions
@@ -78,14 +78,16 @@ export function projectListeningGroupPresentation(group) {
 }
 
 export function ownsCompletePaperOpening(consumption, renderedGroupIds) {
+  const national = consumption?.authorityRef?.manifestVersion === '83'
+    && consumption.profileRef?.profileId === 'national-legacy' && consumption.profileRef.profileVersion === '6'
   const legacy = consumption?.authorityRef?.manifestVersion === '82'
     && consumption.profileRef?.profileId === 'zhejiang-legacy' && consumption.profileRef.profileVersion === '16'
   if (!Array.isArray(renderedGroupIds) || !(legacy ? [8, 10] : [9, 11]).includes(renderedGroupIds.length)) return false
   const occurrences = consumption?.selections?.flatMap((selection) =>
     selection?.mode === 'canonical' ? selection.projectedOccurrences ?? [] : [])
     .filter((occurrence) => renderedGroupIds.includes(occurrence.groupId)) ?? []
-  const expectedSlots = legacy ? zhejiangLegacyProfile.parts.flatMap(part => part.sections.flatMap(section => section.slots))
-    .filter(slot => renderedGroupIds.length === 10 || slot.familyContractRef.id !== 'listening').map(slot => slot.slotId) : [
+  const expectedSlots = legacy || national ? (national ? nationalLegacyProfile : zhejiangLegacyProfile).parts.flatMap(part => part.sections.flatMap(section => section.slots))
+    .filter(slot => renderedGroupIds.length === (national ? 11 : 10) || slot.familyContractRef.id !== 'listening').map(slot => slot.slotId) : [
     ...(renderedGroupIds.length === 11 ? ['listening.short-dialogue', 'listening.long-form'] : []),
     'reading.a', 'reading.b', 'reading.c', 'reading.d',
     'reading.seven-choices', 'language.cloze', 'language.grammar-fill',
@@ -99,7 +101,8 @@ export function ownsCompletePaperOpening(consumption, renderedGroupIds) {
 }
 
 export function paperOpeningForConsumption(consumption) {
-  if (consumption?.authorityRef?.manifestVersion !== '82' || consumption.profileRef?.profileId !== 'zhejiang-legacy') return listeningOpening
+  if (!(consumption?.authorityRef?.manifestVersion === '82' && consumption.profileRef?.profileId === 'zhejiang-legacy')
+    && !(consumption?.authorityRef?.manifestVersion === '83' && consumption.profileRef?.profileId === 'national-legacy')) return listeningOpening
   const opening = consumption.selections.flatMap(selection => selection.mode === 'canonical' ? selection.projectedOccurrences : [])
     .find(occurrence => occurrence.sourcePresentation?.opening)?.sourcePresentation.opening
   if (!opening) throw new Error('Legacy paper requires its source opening')

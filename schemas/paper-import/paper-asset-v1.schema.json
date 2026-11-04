@@ -57,7 +57,7 @@
               "groupId": { "type": "string" },
               "groupType": {
                 "type": "string",
-                "enum": ["reading", "cloze", "sevenChoices", "grammarFill", "listening", "writing"]
+                "enum": ["reading", "cloze", "sevenChoices", "grammarFill", "listening", "writing", "errorCorrection"]
               },
               "title": { "type": "string" },
               "questionIds": { "type": "array", "items": { "type": "string" } },
@@ -71,9 +71,11 @@
             "type": "object",
             "additionalProperties": true,
             "required": ["questionId", "questionNo", "groupId", "stem"],
+            "if": { "required": ["family"], "properties": { "family": { "const": "error-correction" } } },
+            "else": { "properties": { "questionNo": { "type": "integer" } } },
             "properties": {
               "questionId": { "type": "string" },
-              "questionNo": { "type": "integer" },
+              "questionNo": { "type": ["integer", "null"] },
               "groupId": { "type": "string" },
               "stem": { "type": "string" },
               "options": { "type": "array" }

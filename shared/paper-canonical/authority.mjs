@@ -1,3 +1,8 @@
+import manifestV83 from '../../standards/paper-canonical/manifest-v83.json' with { type: 'json' }
+import sourceAdaptersV36 from '../../standards/paper-canonical/adapters/source-adapters-v36.json' with { type: 'json' }
+import nationalLegacyV6 from '../../standards/paper-canonical/profiles/national-legacy-v6.json' with { type: 'json' }
+import errorCorrectionV1 from '../../standards/paper-canonical/families/error-correction-v1.json' with { type: 'json' }
+import materializationV15Schema from '../../schemas/paper-canonical/nck1-source-materialization-v15.schema.json' with { type: 'json' }
 import manifestV82 from '../../standards/paper-canonical/manifest-v82.json' with { type: 'json' }
 import sourceAdaptersV35 from '../../standards/paper-canonical/adapters/source-adapters-v35.json' with { type: 'json' }
 import materializationV14Schema from '../../schemas/paper-canonical/nck1-source-materialization-v14.schema.json' with { type: 'json' }
@@ -1523,7 +1528,7 @@ export function validateAuthorityClosure({
   const issues = []
   // Universal v46-v52 and their renderer/package successors derive from v37. Their identities must
   // not make paper-specific v38-v45 successor rules part of this closure.
-  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(candidateManifest?.version)
+  const semanticManifestVersion = ['46', '47', '48', '49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(candidateManifest?.version)
     ? '37'
     : candidateManifest?.version
   const schemaById = new Map(Object.entries(schemas || {}))
@@ -1583,7 +1588,7 @@ export function validateAuthorityClosure({
     const family = familyArtifacts.get(familyId)
     if (!family || family.choiceOwnership !== ownership) issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', `Missing or invalid ${familyId} family contract`))
   }
-  if (['50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(candidateManifest?.version)) {
+  if (['50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(candidateManifest?.version)) {
     const family = familyArtifacts.get('listening')
     if (!family || family.choiceOwnership !== 'per_question') {
       issues.push(issue('AUTHORITY_FAMILY_CLOSURE', '$.artifacts', 'Missing or invalid listening family contract'))
@@ -1759,7 +1764,7 @@ export function validateAuthorityClosure({
       ))
     }
     if (
-      coreArtifact?.groupSchemaId !== (['62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(candidateManifest.version) ? 'canonical-question-group-v3' : 'canonical-question-group-v2')
+      coreArtifact?.groupSchemaId !== (['62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(candidateManifest.version) ? 'canonical-question-group-v3' : 'canonical-question-group-v2')
       || !schemaById.has(coreArtifact.groupSchemaId)
     ) {
       issues.push(issue(
@@ -1778,7 +1783,7 @@ export function validateAuthorityClosure({
   }
   if (Number(semanticManifestVersion) >= 29) {
     const continuationFamily = familyArtifacts.get('continuation-writing')
-    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82'].includes(candidateManifest?.version)
+    const expectedContinuationFamily = ['49', '50', '51', '52', '53', '54', '55', '56', '57', '58', '59', '60', '61', '62', '63', '64', '65', '66', '67', '68', '69', '70', '71', '72', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(candidateManifest?.version)
       ? continuationWritingV5
       : Number(semanticManifestVersion) >= 39
         ? continuationWritingV4
@@ -2927,6 +2932,8 @@ const schemasV81 = { ...schemasV80, 'nck1-source-materialization-v13': materiali
   'reading-source-layout-measurement-v2': measurementV2Schema }
 const artifactsV82 = { ...artifactsV81, adapter: sourceAdaptersV35, 'profile-zhejiang-legacy': zhejiangLegacyV16 }
 const schemasV82 = { ...schemasV81, 'nck1-source-materialization-v14': materializationV14Schema }
+const artifactsV83 = { ...artifactsV82, adapter: sourceAdaptersV36, 'profile-national-legacy': nationalLegacyV6, 'family-error-correction': errorCorrectionV1 }
+const schemasV83 = { ...schemasV82, 'nck1-source-materialization-v15': materializationV15Schema }
 const validationV1 = validateAuthorityClosure({ manifest: manifestV1, artifacts: artifactsV1, schemas: schemasV1 })
 const validationV2 = validateAuthorityClosure({ manifest: manifestV2, artifacts: artifactsV2, schemas: schemasV2 })
 const validationV3 = validateAuthorityClosure({ manifest: manifestV3, artifacts: artifactsV3, schemas: schemasV3 })
@@ -3066,6 +3073,7 @@ const validations = [
   validateAuthorityClosure({ manifest: manifestV80, artifacts: artifactsV80, schemas: schemasV80 }),
   validateAuthorityClosure({ manifest: manifestV81, artifacts: artifactsV81, schemas: schemasV81 }),
   validateAuthorityClosure({ manifest: manifestV82, artifacts: artifactsV82, schemas: schemasV82 }),
+  validateAuthorityClosure({ manifest: manifestV83, artifacts: artifactsV83, schemas: schemasV83 }),
 ]
 if (validations.some((validation) => !validation.ok)) {
   throw new Error(`Invalid checked-in canonical authority: ${JSON.stringify(validations.flatMap((validation) => validation.issues))}`)
@@ -3163,6 +3171,7 @@ const authorities = [
   { manifest: manifestV80, artifacts: artifactsV80, schemas: schemasV80 },
   { manifest: manifestV81, artifacts: artifactsV81, schemas: schemasV81 },
   { manifest: manifestV82, artifacts: artifactsV82, schemas: schemasV82 },
+  { manifest: manifestV83, artifacts: artifactsV83, schemas: schemasV83 },
 ].map((authority) => ({
   ...authority,
   authorityRef: authorityRef(authority.manifest),
@@ -3336,3 +3345,5 @@ export function closureAdmitsInImageOptionLabelMeasurements(closure) {
       adapter.adapterId === 'nck1-source-materialization' && adapter.version === '19'
       && adapter.capabilities?.includes('reading_in_image_label_measurement_v2')) === true
 }
+
+export const nationalLegacyMaterializationAuthorityRef = authorities.find(authority => authority.manifest.version === '83').authorityRef

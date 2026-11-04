@@ -1,4 +1,5 @@
 import {
+  nationalLegacyMaterializationAuthorityRef,
   zhejiangLegacyMaterializationAuthorityRef,
   nck1InImageOptionLabelsV2AuthorityRef,
   nck1AnalyzedPackageCandidateAuthorityRef55,
@@ -82,7 +83,7 @@ function sameAuthority(left, right) {
 }
 
 export function isNck1MaterializationCanonicalImportRequest(request) {
-  if (![zhejiangLegacyMaterializationAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
+  if (![nationalLegacyMaterializationAuthorityRef, zhejiangLegacyMaterializationAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1MaterializationHistoricalAuthorityRef54, nck1MaterializationHistoricalAuthorityRef57, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
     .some(authority => sameAuthority(request?.authority, authority))) return false
   const documents = request?.evidence?.documents
   if (!Array.isArray(documents)) return false
@@ -233,6 +234,7 @@ function isLiveConfirmedNck1Admission({
 }
 
 export function isLiveConfirmedNck1MaterializationAdmission(admission) {
+  if (isLiveConfirmedNck1Admission(admission, nationalLegacyMaterializationAuthorityRef)) return true
   if (isLiveConfirmedNck1Admission(admission, zhejiangLegacyMaterializationAuthorityRef)) return true
   return isLiveConfirmedNck1Admission(
     admission,

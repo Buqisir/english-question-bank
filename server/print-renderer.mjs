@@ -321,6 +321,7 @@ function canonicalGroupMatchesPrintDetail(canonicalGroup, detail) {
 }
 
 function canonicalFamilyForPrintDetail(detail, selectedFamilyContractId) {
+  if (detail.groupType === 'errorCorrection') return 'error-correction'
   if (detail.groupType === 'listening') return 'listening'
   if (detail.groupType === 'cloze') return 'cloze'
   if (['grammarFill', 'grammar_cloze'].includes(detail.groupType)) {
@@ -341,6 +342,7 @@ function canonicalFamilyForPrintDetail(detail, selectedFamilyContractId) {
 
 function requiresCanonicalPrintConsumption(detail) {
   return [
+    'errorCorrection',
     'listening',
     'cloze',
     'grammarFill',
@@ -1922,6 +1924,9 @@ export function buildPrintHtml({
             // The same Canonical Question projection as PaperSurface; no
             // passage/transcript block belongs in the student question area.
             groupHtml += `<header class="canonical-listening-chrome" data-canonical-listening-chrome>${listeningPresentation.partHeading ? `<h2 class="canonical-listening-part">${escapeHtml(listeningPresentation.partHeading)}</h2>` : ''}${listeningPresentation.transferNotice ? `<p class="canonical-listening-transfer-notice">${escapeHtml(listeningPresentation.transferNotice)}</p>` : ''}<h3 class="canonical-listening-section">${escapeHtml(listeningPresentation.sectionHeading)}</h3><p class="canonical-listening-instruction">${escapeHtml(listeningPresentation.instruction)}</p>${listeningPresentation.example ? `<div class="canonical-listening-example" data-canonical-listening-example><p>例：${escapeHtml(listeningPresentation.example.stem)}</p><div class="canonical-listening-example-options">${listeningPresentation.example.options.map((option) => `<span>${option.label}. ${escapeHtml(option.text)}</span>`).join('')}</div><p class="canonical-listening-example-answer">答案是 ${escapeHtml(listeningPresentation.example.answer)}。</p></div>` : ''}</header>`
+          } else if (canonicalGroup.groupType === 'errorCorrection') {
+            groupHtml += groupLeadHtml + `<div class="canonical-error-correction">${canonicalGroup.paragraphs.map(paragraph =>
+              `<p data-canonical-paragraph-id="${escapeHtml(paragraph.paragraphId)}">${paragraph.nodes.map(node => escapeHtml(node.text)).join('')}</p>`).join('')}</div>`
           } else if (canonicalGroup.groupType === 'reading') {
             groupHtml += renderCanonicalReadingBlocks(canonicalGroup, Boolean(roleLayoutAttribute(canonicalGroup.groupId)))
           } else if (canonicalGroup.groupType === 'writing') {
@@ -2060,7 +2065,7 @@ export function buildPrintHtml({
         const lastGrammarFillQuestionId = isCanonicalGrammarFill
           ? canonicalGroup.questions.at(-1)?.questionId
           : undefined
-        for (const question of detail.questions) {
+        for (const question of canonicalGroup?.groupType === 'errorCorrection' ? [] : detail.questions) {
           const canonicalQuestion = canonicalQuestionById?.get(question.id)
           const listeningCue = listeningPresentation?.segmentCues.find((cue) =>
             cue.beforeQuestionId === canonicalQuestion?.questionId)

@@ -237,6 +237,7 @@ type GroupModel =
         }>
       }
     }
+  | { kind: 'errorCorrection'; paragraphs: Array<{ paragraphId: string; nodes: Array<{ type: 'text'; text: string }> }> }
   | { kind: 'unsupported'; groupType: string }
   | { kind: 'error'; message: string }
 
@@ -1265,7 +1266,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             continue
           }
           try {
-            if (group.groupType === 'listening') {
+            if (selectedFamilyContractIdForGroup({ consumption: canonicalConsumption, groupId: block.groupId }) === 'error-correction') {
+              const correction = projectCanonicalConsumerGroup({ consumption: canonicalConsumption,
+                groupId: block.groupId, familyContractId: 'error-correction' }) as { paragraphs: Extract<GroupModel, { kind: 'errorCorrection' }>['paragraphs'] }
+              models[block.groupId] = { kind: 'errorCorrection', paragraphs: correction.paragraphs }
+            } else if (group.groupType === 'listening') {
               const selectedModel = selectedModels.get(block.groupId)
               if (!selectedModel) throw new Error('听力消费计划不完整')
               models[block.groupId] = selectedModel
@@ -2454,6 +2459,13 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     if (entry.kind === 'error') {
       return <div className="paper-browse-placeholder">该题组暂不可预览：{entry.message}</div>
     }
+    if (entry.kind === 'errorCorrection') return (
+      <div className="canonical-error-correction" data-canonical-group-id={groupId}>
+        {entry.paragraphs.map(paragraph => <p key={paragraph.paragraphId} data-canonical-paragraph-id={paragraph.paragraphId}>
+          {paragraph.nodes.map(node => node.text).join('')}
+        </p>)}
+      </div>
+    )
     if (entry.kind === 'unsupported') {
       return (
         <div className="paper-browse-placeholder">
