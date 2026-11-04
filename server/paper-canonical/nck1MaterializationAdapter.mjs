@@ -2572,7 +2572,7 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
       }
       const expectedTables = expectedGroups.flatMap(group => flatten(group.blocks)).filter(block => block.kind === 'table')
       const cells = table => table?.rows.map(row => row.cells.map(cell => ({
-        content: cell.content, role: cell.role, columnSpan: cell.columnSpan, rowSpan: cell.rowSpan,
+        content: cell.content, role: cell.role, columnStart: cell.columnStart, columnSpan: cell.columnSpan, rowSpan: cell.rowSpan,
       })))
       for (const document of raw.documents.filter(document => document.role === 'question_source')) {
         for (const table of resolved.structures.get(document.documentId)?.tables || []) {

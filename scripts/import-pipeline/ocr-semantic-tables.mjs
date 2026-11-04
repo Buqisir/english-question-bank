@@ -1,3 +1,5 @@
+import { semanticTableGrid } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
+
 // Eight 144-dpi draft failures (Qiangji, Jiangsu eight cities, Zhejiang four schools,
 // Zhengzhou, 2026-10-22) exceeded an edge by 2,5,3,3,2,4,5,5px.
 // Five pixels is the smallest whole-pixel bound covering those observed cases.
@@ -43,7 +45,8 @@ export function compileSemanticTables(draft, items, { documentId, page, width, h
       || region.x + region.width > width || region.y + region.height > height) {
       throw new Error('Table region must lie within the source page image')
     }
-    if (!Array.isArray(table.rows) || !table.rows.length
+    if (table.merges !== undefined) semanticTableGrid({ rows: table.rows, merges: table.merges })
+    else if (!Array.isArray(table.rows) || !table.rows.length
       || table.rows.some(row => typeof row.header !== 'boolean'
         || !Array.isArray(row.cells) || !row.cells.length
         || row.cells.length !== table.rows[0].cells.length)) {
@@ -69,7 +72,8 @@ export function compileSemanticTables(draft, items, { documentId, page, width, h
     region = fitTableRegion(region, boxes, width, height)
     const regionId = `${documentId}:page-${page}:table-${names.size}`
     return {
-      visual: { regionId, classification: 'semantic_table', rows },
+      visual: { regionId, classification: 'semantic_table', rows,
+        ...(table.merges === undefined ? {} : { merges: structuredClone(table.merges) }) },
       regionId, pixels: { ...region },
       region: { x: region.x / width, y: region.y / height,
         width: region.width / width, height: region.height / height },

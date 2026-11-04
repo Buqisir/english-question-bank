@@ -14,6 +14,12 @@ const overlaps = (a, b) => a.x < b.x + b.width - 1e-6 && a.x + a.width > b.x + 1
 // Use the unfiltered orderedItems, before furniture, tables or image consumption.
 // Main-task completeness is checked by the writing lifecycle at this boundary.
 export function resolveAlternateAnswerScope(materialization, confirmation, { producerVersion, evidence } = {}) {
+  const answerIds = new Set((materialization.documents ?? []).filter(document =>
+    ['official_answers', 'question_and_answers'].includes(document.role)).map(document => document.documentId))
+  if (confirmation.documents.some(document => answerIds.has(document.documentId) && document.pages.some(page =>
+    (page.visualClassifications ?? []).some(visual => visual.classification === 'semantic_table' && Object.hasOwn(visual, 'merges'))))) {
+    reject('评分/答案表暂不支持合并单元格，请拆成普通表或按图片处理')
+  }
   if (!usesAlternateAnswerScope(producerVersion)) return null
   const answers = (materialization.documents ?? []).filter(document =>
     ['official_answers', 'question_and_answers'].includes(document.role))

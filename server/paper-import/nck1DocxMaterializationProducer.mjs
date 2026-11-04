@@ -414,45 +414,58 @@ function tableBlock({ paperId, slotId, item, index, documentId, issues }) {
   if (
     item.nestedTableCount > 0
     || item.rows.length === 0
-    || item.rows.some((row) => row.cells.length === 0 || row.cells.some((cell) =>
+    || item.rows.some((row) => (!item.source && row.cells.length === 0) || row.cells.some((cell) =>
       (cell.containsDrawing && !cell.materializedMedia)
       || cell.containsNestedTable
-      || cell.verticalMerge !== null
-      || (normalized(cell.text).length === 0 && !cell.materializedMedia)))
+      || ![null, 'restart', 'continue'].includes(cell.verticalMerge)
+      || (cell.verticalMerge !== 'continue' && normalized(cell.text).length === 0 && !cell.materializedMedia)))
   ) {
     addIssue(issues, 'NCK1_DOCX_TABLE_REVIEW_REQUIRED',
       `groups.${slotId}.blocks[${index}]`,
-      'Nested, drawn, vertically merged, or empty table cells require Agent confirmation',
+      'Nested, drawn, invalidly merged, or empty table cells require Agent confirmation',
       sourceRef(documentId))
   }
+  let activeMerges = new Map()
   return {
     kind: 'table',
     blockId: `block:${paperId}:${slotId.replaceAll('.', '-')}:table-${item.tableIndex}`,
     columnCount: item.columnCount,
     rows: item.rows.map((row, rowIndex) => {
       let columnStart = 0
+      const nextMerges = new Map()
+      const cells = row.cells.flatMap((cell, cellIndex) => {
+        const start = cell.columnStart ?? columnStart
+        columnStart = start + cell.columnSpan
+        if (cell.verticalMerge === 'continue') {
+          const anchor = activeMerges.get(start)
+          if (anchor && anchor.columnSpan === cell.columnSpan && !normalized(cell.text)
+            && !cell.containsDrawing && !cell.containsNestedTable) {
+            anchor.rowSpan++
+            nextMerges.set(start, anchor)
+            return []
+          }
+          addIssue(issues, 'NCK1_DOCX_TABLE_REVIEW_REQUIRED', `groups.${slotId}.blocks[${index}]`,
+            'A vertical continuation needs an adjacent matching anchor and no independent content', sourceRef(documentId))
+        }
+        const value = {
+          cellId: `cell:${paperId}:${slotId.replaceAll('.', '-')}:${item.tableIndex}:${rowIndex + 1}:${cellIndex + 1}`,
+          columnStart: start,
+          columnSpan: cell.columnSpan,
+          rowSpan: cell.rowSpan ?? 1,
+          role: row.header ? 'header' : 'data',
+          content: cell.materializedMedia
+            ? [{ kind: 'media_ref', mediaId: cell.materializedMedia.mediaId, alt: '' }]
+            : normalized(cell.text)
+              ? [{ kind: 'text', text: trimEdgeSpaces(cell.text) }]
+              : [{ kind: 'text', text: '[Agent confirmation required]' }],
+        }
+        if (cell.verticalMerge === 'restart') nextMerges.set(start, value)
+        return [value]
+      })
+      activeMerges = nextMerges
       return {
         rowId: `row:${paperId}:${slotId.replaceAll('.', '-')}:${item.tableIndex}:${rowIndex + 1}`,
-        cells: row.cells.map((cell, cellIndex) => {
-          const value = {
-            cellId: `cell:${paperId}:${slotId.replaceAll('.', '-')}:${item.tableIndex}:${rowIndex + 1}:${cellIndex + 1}`,
-            columnStart,
-            columnSpan: cell.columnSpan,
-            rowSpan: 1,
-            role: row.header ? 'header' : 'data',
-            content: cell.materializedMedia
-              ? [{
-                  kind: 'media_ref',
-                  mediaId: cell.materializedMedia.mediaId,
-                  alt: '',
-                }]
-              : normalized(cell.text)
-                ? [{ kind: 'text', text: trimEdgeSpaces(cell.text) }]
-                : [{ kind: 'text', text: '[Agent confirmation required]' }],
-          }
-          columnStart += cell.columnSpan
-          return value
-        }),
+        cells,
       }
     }),
     source: item.source
@@ -2170,6 +2183,11 @@ export function produceNck1MaterializationFromStructures({
 }) {
   const body = questionStructure.body
   const answerBody = answerStructure.body
+  if (answerBody.some(item => item.kind === 'table' && item.rows.some(row =>
+    row.cells.some(cell => cell.columnSpan !== 1 || cell.verticalMerge != null || (cell.rowSpan ?? 1) !== 1)))) {
+    addIssue(issues, 'NCK1_DOCX_ANSWER_TABLE_REVIEW_REQUIRED', 'documents.official_answers',
+      '评分/答案表暂不支持合并单元格，请拆成普通表或按图片处理', sourceRef(answer?.documentId))
+  }
   const readingStart = exactPosition(body, /^第二部分\s*阅读/u, 'sections.reading', issues, question?.documentId)
   const languageStart = exactPosition(body, /^第三部分\s*语言(?:知识)?运用/u, 'sections.language', issues, question?.documentId)
   const writingStart = exactPosition(body, /^第四部分\s*写作/u, 'sections.writing', issues, question?.documentId)

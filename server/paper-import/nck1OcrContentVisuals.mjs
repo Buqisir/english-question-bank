@@ -2,6 +2,53 @@ import { digestJson, exactKeys, isRecordValue } from '../../shared/paper-canonic
 
 function reject(message) { throw new Error(message) }
 
+// Rows contain only anchor cells; merges use logical, zero-based grid positions.
+export function semanticTableGrid({ rows, merges }) {
+  if (!Array.isArray(rows) || !rows.length || rows.some(row =>
+    !isRecordValue(row) || !exactKeys(row, ['header', 'cells'])
+    || typeof row.header !== 'boolean' || !Array.isArray(row.cells)
+    || row.cells.some(cell => !Array.isArray(cell) || !cell.length)
+    || (merges === undefined && (!row.cells.length || row.cells.length !== rows[0].cells.length)))) {
+    reject('OCR tables require explicit rows of confirmed item IDs')
+  }
+  if (merges !== undefined && !Array.isArray(merges)) reject('Table merges must be an array')
+  const anchors = new Map()
+  for (const merge of merges || []) {
+    if (!isRecordValue(merge) || !exactKeys(merge, ['row', 'column', 'rowSpan', 'columnSpan'])
+      || !Object.values(merge).every(Number.isSafeInteger)
+      || merge.row < 0 || merge.column < 0 || merge.rowSpan < 1 || merge.columnSpan < 1
+      || merge.row + merge.rowSpan > rows.length || anchors.has(`${merge.row}:${merge.column}`)) {
+      reject('Invalid or duplicate table merge anchor')
+    }
+    anchors.set(`${merge.row}:${merge.column}`, merge)
+  }
+  const occupied = rows.map(() => new Set())
+  const used = new Set()
+  let columnCount = 0
+  const geometry = rows.map((row, r) => {
+    let column = 0
+    const cells = row.cells.map(() => {
+      while (occupied[r].has(column)) column++
+      const key = `${r}:${column}`, merge = anchors.get(key)
+      if (merge) used.add(key)
+      const columnSpan = merge?.columnSpan ?? 1, rowSpan = merge?.rowSpan ?? 1
+      if (r && column + columnSpan > columnCount) reject('Table cell exceeds the declared grid')
+      for (let y = r; y < r + rowSpan; y++) for (let x = column; x < column + columnSpan; x++) {
+        if (occupied[y].has(x)) reject('Table cells overlap')
+        occupied[y].add(x)
+      }
+      const cell = { columnStart: column, columnSpan, rowSpan }
+      column += columnSpan
+      return cell
+    })
+    if (!r) columnCount = column
+    if (!columnCount || occupied[r].size !== columnCount) reject('Table grid has uncovered positions')
+    return cells
+  })
+  if (used.size !== anchors.size) reject('Table merge anchor must be an actual cell')
+  return { columnCount, geometry }
+}
+
 function contains(outer, inner) {
   return inner.x >= outer.x - 0.000001 && inner.y >= outer.y - 0.000001
     && inner.x + inner.width <= outer.x + outer.width + 0.000001
@@ -16,7 +63,7 @@ export function resolveOcrContentVisual({ paperId, document, page, visual, regio
   const image = visual.classification === 'content_media'
   if (!isRecordValue(visual) || !(table || image)
     || !exactKeys(visual, table
-      ? ['regionId', 'classification', 'rows']
+      ? ['regionId', 'classification', 'rows', ...(Object.hasOwn(visual, 'merges') ? ['merges'] : [])]
       : ['regionId', 'classification', 'itemIds', 'afterItemId'])) {
     reject('Content visual requires a closed table or source-image placement')
   }
@@ -26,13 +73,10 @@ export function resolveOcrContentVisual({ paperId, document, page, visual, regio
   if (table && document.role === 'question_and_answers') {
     reject('Content tables currently require separate question/answer sources to keep scoring out of student content')
   }
-  if (table && (!Array.isArray(visual.rows) || visual.rows.length === 0
-    || visual.rows.some(row => !isRecordValue(row) || !exactKeys(row, ['header', 'cells'])
-      || typeof row.header !== 'boolean' || !Array.isArray(row.cells) || row.cells.length === 0
-      || row.cells.length !== visual.rows[0].cells.length
-      || row.cells.some(cell => !Array.isArray(cell) || cell.length === 0)))) {
-    reject('OCR tables require nonempty rectangular rows of confirmed item IDs')
+  if (table && Object.hasOwn(visual, 'merges') && document.role !== 'question_source') {
+    reject('评分/答案表暂不支持合并单元格，请拆成普通表或按图片处理')
   }
+  const grid = table ? semanticTableGrid(visual) : null
   const ids = table ? visual.rows.flatMap(row => row.cells.flat()) : visual.itemIds
   const items = new Map(page.orderedItems.map((item, index) => [item.itemId, { item, index }]))
   if (!Array.isArray(ids) || new Set(ids).size !== ids.length
@@ -83,10 +127,11 @@ export function resolveOcrContentVisual({ paperId, document, page, visual, regio
   const suffix = `ocr-${digestJson([document.documentId, page.page, region.regionId]).slice(7, 23)}`
   if (table) {
     return { itemIds: ids, insertAt: indexes[0], item: {
-      kind: 'table', tableIndex: suffix, columnCount: visual.rows[0].cells.length,
+      kind: 'table', tableIndex: suffix, columnCount: grid.columnCount,
       nestedTableCount: 0, source,
-      rows: visual.rows.map(row => ({ header: row.header, cells: row.cells.map(cell => ({
+      rows: visual.rows.map((row, r) => ({ header: row.header, cells: row.cells.map((cell, c) => ({
         text: cell.map(id => items.get(id).item.text).join('\n'), columnSpan: 1,
+        ...(visual.merges === undefined ? {} : grid.geometry[r][c]),
         verticalMerge: null, containsDrawing: false, containsNestedTable: false,
       })) })),
     } }

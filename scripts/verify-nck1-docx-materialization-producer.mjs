@@ -51,6 +51,34 @@ const produced = produceNck1DocxMaterialization({
 })
 
 assert.equal(produced.disposition, 'ready_for_verification')
+{
+  const rows = [['Accessible Vehicles', 'Seating', 'Time Frame', 'Rate / hour'],
+    ['E-bikes & e-scooters', '1', 'Off season', '$6'], ['', '', 'Peak season', '$8'],
+    ['Other types of vehicles', '4', 'Off season', '$25'], ['', '', 'Peak season', '$40']]
+  const tableXml = `<w:tbl><w:tblGrid>${'<w:gridCol/>'.repeat(4)}</w:tblGrid>` + rows.map((row, r) =>
+    `<w:tr>${r === 0 ? '<w:trPr><w:tblHeader/></w:trPr>' : ''}` + row.map((text, c) =>
+      `<w:tc><w:tcPr>${c < 2 && r > 0 ? r % 2 ? '<w:vMerge w:val="restart"/>' : '<w:vMerge/>' : ''}</w:tcPr>`
+      + `<w:p><w:r><w:t>${text.replaceAll('&', '&amp;')}</w:t></w:r></w:p></w:tc>`).join('') + '</w:tr>').join('') + '</w:tbl>'
+  const mergedFixture = makeSyntheticNck1DocxFixture({ transformXml: xml => xml.includes('A passage keeps')
+    ? xml.replace(/<w:tbl\b[\s\S]*?<\/w:tbl>/u, tableXml) : xml })
+  const merged = produceNck1DocxMaterialization({ paperId: mergedFixture.paperId, documents: mergedFixture.sourceDocuments })
+  assert.equal(merged.disposition, 'ready_for_verification', JSON.stringify(merged.review.required))
+  const block = merged.materialization.groups[0].blocks.find(block => block.kind === 'table')
+  assert.equal(block.columnCount, 4)
+  assert.deepEqual(block.rows.map(row => row.cells.length), [4, 4, 2, 4, 2])
+  assert.deepEqual(block.rows.map(row => row.cells.map(cell => cell.columnStart)), [[0, 1, 2, 3], [0, 1, 2, 3], [2, 3], [0, 1, 2, 3], [2, 3]])
+  assert.deepEqual(block.rows.map(row => row.cells.map(cell => cell.rowSpan)), [[1, 1, 1, 1], [2, 2, 1, 1], [1, 1], [2, 2, 1, 1], [1, 1]])
+  assert.deepEqual(block.rows.flatMap(row => row.cells.map(cell => cell.content[0].text)), rows.flat().filter(Boolean))
+  assert.deepEqual(validateNck1SourceMaterialization(merged.materialization), [])
+  const badFixture = makeSyntheticNck1DocxFixture({ transformXml: xml => xml.includes('A passage keeps')
+    ? xml.replace(/<w:tbl\b[\s\S]*?<\/w:tbl>/u, tableXml.replaceAll('w:val="restart"', 'w:val="continue"')) : xml })
+  assert.equal(produceNck1DocxMaterialization({ paperId: badFixture.paperId, documents: badFixture.sourceDocuments }).disposition, 'needs_agent_review')
+  const answerFixture = makeSyntheticNck1DocxFixture({ answerFormat: 'gridTable', transformXml: xml =>
+    xml.includes('序号') ? xml.replace(/<w:tbl\b[\s\S]*?<\/w:tbl>/u, tableXml) : xml })
+  const answerResult = produceNck1DocxMaterialization({ paperId: answerFixture.paperId, documents: answerFixture.sourceDocuments })
+  assert(answerResult.review.required.some(issue => /评分\/答案表暂不支持合并单元格/u.test(issue.message)))
+  console.log('PASS DOCX Jinan vMerge spans, missing anchors and merged-answer rejection')
+}
 const responseTitle = '<w:p><w:r><w:t xml:space="preserve">Should We Join the Reading Club?</w:t></w:r></w:p>'
 const materialParagraph = '<w:p><w:r><w:t>Animal clue one.</w:t></w:r></w:p>'
 const boxFixture = makeSyntheticNck1DocxFixture({ transformXml: xml => xml.includes('Write a short notice')

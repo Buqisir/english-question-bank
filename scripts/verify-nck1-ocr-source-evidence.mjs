@@ -396,7 +396,8 @@ for (const documentIndex of [0, 1]) {
 
 // Exercise actual producer -> immutable crop/table -> Canonical preview, not
 // only the layout resolver. The source region contains one passage paragraph.
-for (const classification of ['semantic_table', 'content_media']) {
+for (const variant of ['semantic_table', 'merged_table', 'content_media']) {
+  const classification = variant === 'merged_table' ? 'semantic_table' : variant
   const evidence = cloneJson(fixture.evidence)
   const confirmation = cloneJson(fixture.confirmation)
   confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v3'
@@ -416,12 +417,35 @@ for (const classification of ['semantic_table', 'content_media']) {
     ...(classification === 'semantic_table'
       ? { rows: [{ header: false, cells: [[item.itemId]] }] }
       : { itemIds: [item.itemId], afterItemId: page.orderedItems[index - 1].itemId }) })
+  if (variant === 'merged_table') {
+    const texts = [['Accessible Vehicles', 'Seating', 'Time Frame', 'Rate / hour'],
+      ['E-bikes & e-scooters', '1', 'Off season', '$6'], ['Peak season', '$8'],
+      ['Other types of vehicles', '4', 'Off season', '$25'], ['Peak season', '$40']]
+    const cellItems = texts.flat().map((text, i) => ({
+      itemId: `jinan-cell-${i}`, observationIds: [`jinan-word-${i}`], text,
+    }))
+    const cellObservations = cellItems.map((cell, i) => ({ ...cloneJson(observation),
+      observationId: cell.observationIds[0], regionId: cell.observationIds[0], text: cell.text,
+      region: { ...observation.region, y: observation.region.y + observation.region.height * i / cellItems.length,
+        height: observation.region.height / cellItems.length } }))
+    page.orderedItems.splice(index, 1, ...cellItems)
+    observed.observations.splice(observed.observations.indexOf(observation), 1, ...cellObservations)
+    observed.regions.splice(observed.regions.findIndex(region => region.regionId === observation.regionId), 1,
+      ...cellObservations.map(cell => ({ regionId: cell.regionId, kind: 'text', region: cell.region })))
+    observed.readingOrderEdges = observed.observations.slice(1).map((cell, i) =>
+      ({ before: observed.observations[i].observationId, after: cell.observationId }))
+    let offset = 0
+    Object.assign(page.visualClassifications.at(-1), {
+      rows: texts.map((row, r) => ({ header: r === 0, cells: row.map(() => [cellItems[offset++].itemId]) })),
+      merges: [1, 3].flatMap(row => [0, 1].map(column => ({ row, column, rowSpan: 2, columnSpan: 1 }))),
+    })
+  }
   rebound(evidence)
   confirmation.evidenceDigest = evidence.evidenceDigest
   const produced = produceNck1OcrMaterialization({ paperId, documents: fixture.sourceDocuments, evidence, confirmation })
   assert.deepEqual(produced.review.required, [], JSON.stringify(produced.review.required))
   assert.equal(produced.review.producerVersion, 'nck1-ocr-materialization-producer-v31')
-  if (classification === 'semantic_table') {
+  if (variant === 'semantic_table') {
     assert.equal(produced.materialization.groups.find(group => group.slotId === 'reading.c')
       .blocks.find(block => block.kind === 'table').rows[0].cells[0].content[0].text,
     '\tC passage keeps one small promise.\n', 'cell edge tabs/newlines follow the producer, not a second trim policy')
@@ -434,6 +458,16 @@ for (const classification of ['semantic_table', 'content_media']) {
   assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
   const content = preview.compilation.artifacts.canonicalPaper.questionGroups.find(group => group.identity.groupId.endsWith('reading-c')).content
   assert(content.blocks.some(block => block.kind === (classification === 'semantic_table' ? 'table' : 'figure')))
+  if (variant === 'merged_table') {
+    const table = produced.materialization.groups.find(group => group.slotId === 'reading.c').blocks.find(block => block.kind === 'table')
+    assert.equal(table.columnCount, 4)
+    assert.deepEqual(table.rows.map(row => row.cells.length), [4, 4, 2, 4, 2])
+    assert.deepEqual(table.rows[1].cells.map(cell => cell.rowSpan), [2, 2, 1, 1])
+    assert.deepEqual(table.rows[2].cells.map(cell => cell.columnStart), [2, 3])
+    assert.deepEqual(content.blocks.find(block => block.kind === 'table').rows.map(row => row.cells.map(cell => cell.rowSpan)),
+      table.rows.map(row => row.cells.map(cell => cell.rowSpan)))
+    console.log('PASS OCR Jinan merged table producer -> admission -> Canonical preview')
+  }
   const tampered = cloneJson(produced.materialization)
   const blocks = tampered.groups.find(group => group.slotId === 'reading.c').blocks
   if (classification === 'semantic_table') blocks.find(block => block.kind === 'table').rows[0].cells[0].content[0].text = 'Invented cell'

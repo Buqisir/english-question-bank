@@ -66,11 +66,13 @@
 
 ## 图片与图表
 
-未合并、未嵌套、无单元格强调的语义表格用独立文字 item 逐格转写，给每个 item 唯一的
+未嵌套、无单元格强调的语义表格用独立文字 item 逐格转写，给每个 item 唯一的
 `cell` 名称；不要标 `figure`。页面顶层 `semanticTables` 显式声明像素区域、行列和表头：
 `[{"name":"scoring","region":{"x":100,"y":200,"width":600,"height":300},"rows":[{"header":true,"cells":[["r0c0"],["r0c1"]]},{"header":false,"cells":[["r1c0"],["r1c1"]]}]}]`。
 `cells` 中是该格 item 的 `cell` 名称数组，按行再按列排列；所有表格 item 必须连续，
 每个名称只出现一次。每个 item 仍须绑定本格真实 OCR 词号，不借用相邻格的词。
+正文合并格在表级加 `"merges":[{"row":1,"column":0,"rowSpan":2,"columnSpan":1}]`（行列从 0 起），`rows` 仅列锚点格，覆盖位置不重复写；每个网格位置须恰好覆盖一次。
+评分/答案表暂不支持合并单元格，请拆成普通表或按图片处理。
 漏识别整格时先补真实 OCR 证据，不能凭空造词坐标。
 答案表格仅作为答案证据，由 `references` 生成 `source-references-v2` 逐格定位；
 不进入学生题组，默认 `answerOnly` 不显示评分。

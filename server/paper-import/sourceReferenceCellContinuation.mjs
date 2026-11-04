@@ -31,6 +31,7 @@ export function replayConfirmedScoringTable({ document, confirmationPage, eviden
     && `source-${visual.regionId.replace(/:/gu, '-')}` === table.tableId)
   if (visuals.length !== 1) fail('base table must match one confirmed semantic table')
   const visual = visuals[0]
+  if (Object.hasOwn(visual, 'merges')) fail('评分/答案表暂不支持合并单元格，请拆成普通表或按图片处理')
   const items = new Map(confirmationPage.orderedItems.map(item => [item.itemId, item]))
   const observations = new Map(evidencePage.observations.map(item => [item.observationId, item]))
   const rows = visual.rows.map((row, r) => row.cells.map((ids, c) => {
