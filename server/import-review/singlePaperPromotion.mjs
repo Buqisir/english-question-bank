@@ -330,6 +330,10 @@ export function createSinglePaperPromotionService({
       const reviewRootDir = store.revisionDirectory(revision.id)
       const db = openDatabase({ readOnly: false })
       try {
+        // The durable target is recorded before publisher writes. Otherwise
+        // only the original journal's successful rollback proves no commit.
+        let uncommitted = promotion.assetVersion === null
+          && !existsSync(path.join(paperAssetsDir, paperId, '.latest-swap.json'))
         const evidence = promotion.assetVersion !== null ? originalPromotionEvidence(store, revision) : null
         if (promotion.assetVersion !== null) {
           const recovery = recoverInterruptedPaperImportPublish({
@@ -373,6 +377,7 @@ export function createSinglePaperPromotionService({
               'Recovered publisher journal differs from the durable promotion target',
             )
           }
+          uncommitted = recovery.recovered === true
         }
         const committed = inspectCommittedPromotion({
           db,
@@ -383,6 +388,15 @@ export function createSinglePaperPromotionService({
         if (committed) {
           const receipt = store.markPromotionPublished(paperId, promotion.promotionId, committed)
           return { status: 'idempotent', promotion: receipt, consumers: committed.consumers }
+        }
+        if (begun.action === 'resume' && begun.requireCurrentEqual && uncommitted) {
+          const compatibility = store.compatibilityForRevision(revision.id)
+          if (compatibility.result !== 'equal' || compatibility.pending) {
+            const failure = { failureCode: compatibility.reasonCode || 'NOT_CHECKED',
+              failureMessage: '旧发布未提交或已安全回滚。请再次明确重试，核验当前内容后发布。' }
+            const receipt = store.markPromotionFailed(paperId, promotion.promotionId, failure)
+            return { status: 'failed', promotion: receipt, failure }
+          }
         }
         // Reconciliation cannot authorize a new write. Require current content
         // eligibility before running any current projection or compiler.

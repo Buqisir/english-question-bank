@@ -171,15 +171,50 @@ try {
     console.log('PASS legacy unlinked publishing reconciles exact committed target before pending compatibility without a new version')
   }
   {
+    // Keep the original frozen baseline and simulate a deployed target whose
+    // compatibility has not been checked, with an interrupted pre-write legacy attempt.
+    const seed = new DatabaseSync(seedDb, { readOnly: true })
+    const subject = seed.prepare('SELECT * FROM review_subject WHERE revision_id=?').get(third.revision.id)
+    seed.close()
+    const reviewDb = new DatabaseSync(process.env.QUESTION_BANK_IMPORT_OPS_DB)
+    try {
+      reviewDb.prepare(`INSERT INTO review_subject (${Object.keys(subject).join(',')})
+        VALUES (${Object.keys(subject).map(() => '?').join(',')})`).run(...Object.values(subject))
+      reviewDb.prepare('DELETE FROM review_compatibility WHERE revision_id=?').run(third.revision.id)
+    } finally { reviewDb.close() }
+    assert.equal(store.compatibilityForRevision(third.revision.id).pending, true)
     const approval = store.agentPaperStatus(third.manifest.paperId).approval
     const legacy = store.beginPromotion(third.manifest.paperId, { ...approval, intent: 'ship' }, 'legacy-ship')
-    await assert.rejects(service.promote(third.manifest.paperId, { ...approval, intent: 'retry_ship' }, 'synthetic-ship'))
-    assert.equal(store.latestPromotion(third.manifest.paperId).promotionId, legacy.promotion.promotionId)
+    const journal = path.join(process.env.QUESTION_BANK_PAPER_ASSET_ROOT, third.manifest.paperId, '.latest-swap.json')
+    mkdirSync(path.dirname(journal), { recursive: true })
+    writeFileSync(journal, '{}')
+    await assert.rejects(service.promote(third.manifest.paperId, { ...approval, intent: 'retry_ship' }, 'synthetic-ship'),
+      { code: 'IMPORT_REVIEW_PROMOTION_UNKNOWN' })
+    assert.equal(readFileSync(journal, 'utf8'), '{}')
     assert.equal(store.latestPromotion(third.manifest.paperId).state, 'publishing')
+    assert.equal(operations.unresolved().length, 1)
+    assert.equal(operations.unresolved()[0].state, 'unknown')
+    console.log('PASS ambiguous legacy journal retains publishing, evidence and the unresolved operation')
+    // Remove only the synthetic ambiguous evidence to exercise proven no-write recovery.
+    rmSync(journal)
+    const stopped = await service.promote(third.manifest.paperId, { ...approval, intent: 'retry_ship' }, 'synthetic-ship')
+    assert.equal(stopped.status, 'failed')
+    assert.equal(operations.get(stopped.operationId).state, 'rejected')
+    assert.deepEqual(operations.unresolved(), [])
+    assert.equal(store.latestPromotion(third.manifest.paperId).promotionId, legacy.promotion.promotionId)
+    assert.equal(store.latestPromotion(third.manifest.paperId).state, 'failed')
     const bank = new DatabaseSync(process.env.QUESTION_BANK_DB, { readOnly: true })
     try { assert.equal(bank.prepare('SELECT count(*) n FROM paper_asset_versions').get().n, 1) }
     finally { bank.close() }
-    console.log('PASS uncommitted legacy recovery cannot use renderer fallback to write without current equal')
+    console.log('PASS proven uncommitted legacy recovery terminates without a write and releases its guard and operation slot')
+    const retried = await service.promote(third.manifest.paperId, { ...approval, intent: 'retry_ship' }, 'synthetic-ship')
+    assert.equal(retried.status, 'published')
+    assert.equal(retried.promotion.promotionId, legacy.promotion.promotionId)
+    assert.equal(retried.promotion.assetVersion, 1)
+    assert.equal(store.compatibilityForRevision(third.revision.id).result, 'equal')
+    assert.equal(operations.get(retried.operationId).state, 'completed')
+    assert.deepEqual(operations.unresolved(), [])
+    console.log('PASS subsequent explicit retry compares equal and publishes the same promotion as v1')
   }
   if (!onDemandOnly) await verifyPromotionWorkerMatrix({ root, seedDb, ship: reviewed.approval,
     scoped: { paperId: second.manifest.paperId, requestId, secretHash },
