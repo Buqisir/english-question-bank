@@ -299,14 +299,16 @@ function makeVersionedArtifacts(packageData, version) {
     }
   }
 
-  const normalization = buildPaperNormalizedGroupsSidecar(paperAsset)
+  const normalization = packageData.normalizedGroupsSidecar
+    ? { status: 'ready', sidecar: { ...structuredClone(packageData.normalizedGroupsSidecar), sourceAssetVersion: version } }
+    : buildPaperNormalizedGroupsSidecar(paperAsset)
   if (normalization.status !== 'ready') {
     throw new Error(
       `Versioned paper normalization failed: ${JSON.stringify(normalization.issues)}`,
     )
   }
   const normalizedGroupsSidecar = normalization.sidecar
-  const sidecarValidation = validatePaperNormalizedGroupsSidecar({
+  const sidecarValidation = packageData.normalizedGroupsSidecar ? { ok: true } : validatePaperNormalizedGroupsSidecar({
     paperAsset,
     sidecar: normalizedGroupsSidecar,
   })

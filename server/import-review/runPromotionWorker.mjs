@@ -266,7 +266,8 @@ export function createPromotionWorkerService({ getStore, afterPublish }) {
       // first reconciles its exact target. The publisher guards any new write.
       const recoveringPublishing = mode === 'retry_ship' && prior?.state === 'publishing'
         && prior.revisionId === expected.revisionId && prior.approvalId === expected.approvalId
-      if (!replacesOperationId && !recoveringPublishing) {
+      if (!replacesOperationId && !recoveringPublishing
+        && !store.sealedPublicationCommitmentForRevision(expected.revisionId)) {
         let compatibility
         try {
           await compatibilityStore.ready()

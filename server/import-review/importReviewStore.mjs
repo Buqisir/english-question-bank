@@ -1,4 +1,5 @@
 import { reviewCompatibilityEligibility } from './reviewRecoveryPolicy.mjs'
+import { sealReviewPublication } from './sealedPublication.mjs'
 import { ensurePromotionOperationShape, linkPromotionOperation, operationForExecution,
   promotionOperationError } from './promotionOperationStore.mjs'
 import { createHash, randomUUID } from 'node:crypto'
@@ -48,6 +49,11 @@ const MAX_FILES = 200
 const SURFACES = new Set(['paper', 'screen', 'student_print', 'teacher_print', 'pdf', 'source'])
 const UNRESOLVED_ISSUE_STATES = new Set(['open', 'fixed_pending_review'])
 const liveExternalListeningReviewProofs = new WeakMap()
+const liveSealedPublicationProofs = new WeakMap()
+
+export function sealedPublicationProofIdentity(proof) {
+  return liveSealedPublicationProofs.get(proof) || null
+}
 
 export function externalListeningReviewProofIdentity(proof) {
   return liveExternalListeningReviewProofs.get(proof) || null
@@ -512,6 +518,7 @@ function ensureShape(db) {
       bundle_digest TEXT NOT NULL,
       renderer_build_id TEXT NOT NULL,
       payload_digest TEXT NOT NULL,
+      sealed_publication_manifest_digest TEXT,
       payload_json TEXT NOT NULL
     );
     CREATE TABLE IF NOT EXISTS import_review_issues (
@@ -638,6 +645,10 @@ function ensureShape(db) {
   const paperColumns = new Set(db.prepare('PRAGMA table_info(import_review_papers)').all().map(column => column.name))
   if (!paperColumns.has('discussion_thread_id')) {
     db.exec('ALTER TABLE import_review_papers ADD COLUMN discussion_thread_id TEXT')
+  }
+  if (!db.prepare('PRAGMA table_info(import_review_product_previews)').all()
+    .some(column => column.name === 'sealed_publication_manifest_digest')) {
+    db.exec('ALTER TABLE import_review_product_previews ADD COLUMN sealed_publication_manifest_digest TEXT')
   }
   ensureReviewCompatibilityShape(db)
   ensurePromotionOperationShape(db)
@@ -886,6 +897,14 @@ export function createImportReviewStore({
     if (!revision) return { result: 'unknown', reasonCode: 'NOT_FOUND', pending: false }
     if (revision.reviewKind === 'ocr') return {
       result: 'unknown', reasonCode: 'OCR_NOT_APPLICABLE', pending: false,
+    }
+    const sealed = db.prepare(`SELECT sealed_publication_manifest_digest FROM import_review_product_previews
+      WHERE revision_id = ?`).get(revision.id)?.sealed_publication_manifest_digest
+    if (sealed != null) {
+      const baseline = checkedStoredReviewSubject(db.prepare('SELECT * FROM review_subject WHERE revision_id = ?').get(revision.id))
+      return { result: 'equal', reasonCode: 'SEALED_PUBLICATION', pending: false,
+        sealedPublicationManifestDigest: sealed, subjectDigest: baseline?.row.subject_digest,
+        targetBuildId: sealed, comparatorVersion: REVIEW_COMPARATOR_VERSION }
     }
     const difference = retainedReviewDifference(db, revision.id)
     const finish = value => enforceRetainedReviewDifference(db, revision.id, difference, value, target)
@@ -1458,6 +1477,8 @@ export function createImportReviewStore({
     const comparison = baseline ? compareReviewSubjects({
       baseline, target: baseline, targetBuildId: prepared?.targetBuildId || targetBuild().targetBuildId,
     }) : null
+    const sealedPublicationManifestDigest = baseline?.ok && projectRevision === buildImportReviewProjection
+      ? prepared?.sealedPublicationManifestDigest || sealReviewPublication(directory, finalizedIdentity, projection) : null
     withDb(true, (db) => {
       db.exec('BEGIN IMMEDIATE')
       try {
@@ -1527,7 +1548,7 @@ export function createImportReviewStore({
           }
         }
         if (current.reviewKind === 'candidate') {
-          saveProductPreview(db, current, rendererId, projection)
+          saveProductPreview(db, current, rendererId, projection, sealedPublicationManifestDigest)
           appendReviewCompatibility(db, finalizedIdentity, baseline, comparison)
         }
         db.exec('COMMIT')
@@ -1553,7 +1574,7 @@ export function createImportReviewStore({
       const rows = db.prepare(`
       SELECT p.paper_id, p.paper_name, p.latest_revision_id, p.updated_at,
              r.revision_number, r.state, r.bundle_digest, r.manifest_json,
-             r.approval_receipt_json, r.renderer_build_id,
+             r.approval_receipt_json, r.renderer_build_id, v.sealed_publication_manifest_digest,
              (SELECT pr.state FROM import_review_promotions pr
               WHERE pr.paper_id = p.paper_id
               ORDER BY pr.requested_at DESC, pr.rowid DESC LIMIT 1) AS promotion_state,
@@ -1564,6 +1585,7 @@ export function createImportReviewStore({
               WHERE i.paper_id = p.paper_id AND i.state IN ('open', 'fixed_pending_review')) AS unresolved_count
       FROM import_review_papers p
       LEFT JOIN import_review_revisions r ON r.id = p.latest_revision_id
+      LEFT JOIN import_review_product_previews v ON v.revision_id = r.id
       ORDER BY
         CASE r.state WHEN 'changes_requested' THEN 0 WHEN 'awaiting_review' THEN 1 WHEN 'approved' THEN 2 ELSE 3 END,
         p.updated_at DESC
@@ -1579,7 +1601,9 @@ export function createImportReviewStore({
           result: compatibilities.get(row.latest_revision_id).pending ? 'pending' : compatibilities.get(row.latest_revision_id).result,
           targetBuildId: target.targetBuildId, comparatorVersion: REVIEW_COMPARATOR_VERSION }
           : unavailable
-      const compatibility = eligibility({ rendererBuildId: row.renderer_build_id, reviewKind: kind, manifest },
+      const compatibility = row.sealed_publication_manifest_digest != null
+        ? compatibilityFor(db, { id: row.latest_revision_id, rendererBuildId: row.renderer_build_id, reviewKind: kind, manifest })
+        : eligibility({ rendererBuildId: row.renderer_build_id, reviewKind: kind, manifest },
         kind === 'ocr' ? rawCompatibility : enforceRetainedReviewDifference(db, row.latest_revision_id,
           retainedReviewDifference(db, row.latest_revision_id), rawCompatibility, target))
       return {
@@ -1739,15 +1763,25 @@ export function createImportReviewStore({
     return { revision, projection: projectionCache.get(revisionId) }
   }
 
-  function saveProductPreview(db, revision, rendererId, projection) {
+  function saveProductPreview(db, revision, rendererId, projection, sealedPublicationManifestDigest = null) {
     const payload = buildProductPreviewPayload(revision, projection)
     // Small derived Screen data only: no original documents, MP3/PDF bytes,
     // source rasters or new approval authority. Keep it in the same DB snapshot.
     const json = JSON.stringify(payload)
     db.prepare(`INSERT INTO import_review_product_previews
-      (revision_id, bundle_digest, renderer_build_id, payload_digest, payload_json)
-      VALUES (?, ?, ?, ?, ?)`).run(revision.id, revision.bundleDigest, rendererId,
-      digestJson(JSON.parse(json)), json)
+      (revision_id, bundle_digest, renderer_build_id, payload_digest, payload_json, sealed_publication_manifest_digest)
+      VALUES (?, ?, ?, ?, ?, ?)`).run(revision.id, revision.bundleDigest, rendererId,
+      digestJson(JSON.parse(json)), json, sealedPublicationManifestDigest)
+  }
+
+  function sealedPublicationCommitmentForRevision(revisionId) {
+    return withDb(false, db => {
+      const row = db.prepare(`SELECT sealed_publication_manifest_digest, payload_digest
+        FROM import_review_product_previews WHERE revision_id = ?`).get(revisionId)
+      return row?.sealed_publication_manifest_digest == null ? null : {
+        commitment: row.sealed_publication_manifest_digest, previewDigest: row.payload_digest,
+      }
+    })
   }
 
   function prepareProductPreview(revisionId) {
@@ -3075,7 +3109,8 @@ export function createImportReviewStore({
           throw Object.assign(storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Publication guard mode changed'),
             { reasonCode: 'CAS_CHANGED' })
         }
-        const target = targetBuild()
+        const target = compatibility.sealedPublicationManifestDigest
+          ? { targetBuildId: compatibility.sealedPublicationManifestDigest } : targetBuild()
         if (expected && target.targetBuildId !== expected.targetBuildId) {
           const error = storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Publication target changed during preparation')
           error.reasonCode = 'TARGET_CHANGED'
@@ -3120,7 +3155,17 @@ export function createImportReviewStore({
           error.reasonCode = binding.targetBuildId !== expected.targetBuildId ? 'TARGET_CHANGED' : 'CAS_CHANGED'
           throw error
         }
-        const value = callback({ subject: baseline.subject, binding, revision, promotion })
+        let sealedPublicationProof = null
+        if (compatibility.sealedPublicationManifestDigest) {
+          sealedPublicationProof = Object.freeze({})
+          liveSealedPublicationProofs.set(sealedPublicationProof, {
+            manifestDigest: compatibility.sealedPublicationManifestDigest,
+            previewDigest: preview.payload_digest, revisionId: revision.id,
+            paperId: revision.paperId, approvalId: promotion.approvalId,
+            bundleDigest: revision.bundleDigest, sourceDigest: revision.sourceDigest, candidateDigest: revision.candidateDigest,
+          })
+        }
+        const value = callback({ subject: baseline.subject, binding, revision, promotion, sealedPublicationProof })
         if (value instanceof Promise) throw storeError('REVIEW_TRANSACTION_ASYNC', 'Publication guard must remain synchronous')
         db.exec('COMMIT')
         return value
@@ -3547,6 +3592,7 @@ export function createImportReviewStore({
     prepareProductPreview,
     productPreviewForRevision,
     originalReviewEvidenceForRevision,
+    sealedPublicationCommitmentForRevision,
     projectionForRevision,
     publishedReview,
     publicationRequest,

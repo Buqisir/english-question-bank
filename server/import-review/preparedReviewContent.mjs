@@ -109,14 +109,22 @@ function assertPreparedReviewContentInternal({
   } })
   const expectedConsumers = Object.keys(consumerContractRefs).sort()
   if (!same(Object.keys(admission.consumers).sort(), expectedConsumers)) reject('UNSUPPORTED_PUBLICATION_MAPPING')
-  const compiled = buildNck1ReviewConsumption(preparedFacts.candidate, admission.compilation)
-  for (const [label, consumers] of [['admission', admission.consumers], ['writer', writtenConsumers],
-    ['compilation', { compilation: compiled }]]) {
+  const consumerSets = [['admission', admission.consumers], ['writer', writtenConsumers]]
+  if (preparedFacts.sealedCompatibility) {
+    const actual = outputInventory.artifacts.normalizedGroupsSidecar
+    const expected = { ...preparedFacts.sealedCompatibility.normalizedGroupsSidecar, sourceAssetVersion: version }
+    if (!same(actual, expected)) reject('SUBJECT_CHANGED', ['/normalizedGroupsSidecar'])
+  } else {
+    const compiled = buildNck1ReviewConsumption(preparedFacts.candidate, admission.compilation)
+    consumerSets.push(['compilation', { compilation: compiled }])
+  }
+  for (const [label, consumers] of consumerSets) {
     for (const [consumerId, consumption] of Object.entries(consumers)) {
       const comparison = compareReviewPublicationContent({
         subject, packageData, consumption: decorate(consumption, consumerId),
         sealedManifest: manifest, sourceAsset: sealed.sourceAsset, version, approvedIdentity, approvedManifest,
         materializationDigest: preparedFacts.materializationDigest,
+        sealedCompatibility: preparedFacts.sealedCompatibility,
         // The subject stores commitments, not duplicate JSON. These current
         // source facts are usable only after the mapper matches each digest.
         sidecarContents: {

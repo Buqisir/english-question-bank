@@ -164,10 +164,12 @@ export const REVIEW_PUBLICATION_PACKAGE_FIELDS = Object.freeze([
   'paragraphSummariesBytes', 'publicSearchMetadataBytes', 'sourceReferencesBytes',
   'paginationPlan', 'frozenProducts', 'importMeta', 'sourceAssetDigest', 'paperHeader',
   'sourceReferenceApproval', 'pdfProductApproval', 'fileStorage', 'paginationPlanBinding',
+  'normalizedGroupsSidecar',
 ])
 
 export function compareReviewPublicationContent({ subject, packageData, consumption, sealedManifest, version,
   sourceAsset = null, approvedIdentity = null, approvedManifest = null, materializationDigest = null, sidecarContents,
+  sealedCompatibility = null,
 }) {
   const result = { mappingVersion: REVIEW_PUBLICATION_CONTENT_VERSION, result: 'unknown',
     reasonCode: 'UNSUPPORTED_PUBLICATION_MAPPING', differences: [], coverage: [] }
@@ -257,19 +259,26 @@ export function compareReviewPublicationContent({ subject, packageData, consumpt
     exactKeys(meta, ['schemaVersion', 'paperId', 'sourceFileName', 'sourceFileSha256',
       ...(facts.external ? ['sourceProvenance'] : []), 'paper', 'groups'], '/packageData/importMeta')
     if (meta.schemaVersion !== 'import-meta-v1' || meta.paperId !== subject.components.identity.paperId) unknown('/importMeta')
-    const expectedMeta = expectedImportMeta(subject, sidecarContents)
+    const expectedMeta = sealedCompatibility?.importMeta || expectedImportMeta(subject, sidecarContents)
     if (!same(meta.paper, expectedMeta.paper)) result.differences.push('/packageData/importMeta/paper')
     if (!same(meta.groups, expectedMeta.groups)) result.differences.push('/packageData/importMeta/groups')
     if (meta.sourceFileName !== path.posix.basename(facts.document.path)
       || meta.sourceFileSha256 !== facts.document.sha256.replace(/^sha256:/, '')
       || (facts.external && !same(meta.sourceProvenance, provenance))
-      || packageData.sourceAssetDigest !== facts.document.sha256.replace(/^sha256:/, '')) {
+      || packageData.sourceAssetDigest !== (sealedCompatibility
+        ? byteDigest(sourceAsset) : facts.document.sha256).replace(/^sha256:/, '')) {
       result.differences.push('/packageData/importMeta/source')
     }
     const config = sidecarJson(subject, sidecarContents, 'config.json')
     if (!same(packageData.paperHeader ?? null, configuredPaperHeader(config) ?? null)
       || !same(sealedManifest.paperHeader ?? null, packageData.paperHeader ?? null)) result.differences.push('/paperHeader')
     result.coverage.push('importMeta', 'sourceAssetDigest', 'paperHeader')
+    if (sealedCompatibility) {
+      if (!same(packageData.normalizedGroupsSidecar, sealedCompatibility.normalizedGroupsSidecar)) {
+        result.differences.push('/packageData/normalizedGroupsSidecar')
+      }
+      result.coverage.push('normalizedGroupsSidecar')
+    } else if (packageData.normalizedGroupsSidecar != null) unknown('/packageData/normalizedGroupsSidecar')
     if (!approvedIdentity || !approvedManifest || approvedIdentity.revisionId !== subject.revisionId
       || approvedIdentity.bundleDigest !== subject.bundleDigest
       || approvedManifest.bundleDigest !== subject.bundleDigest

@@ -200,6 +200,7 @@ function revisionValue(row) {
     visibleStructureDigest: row.visible_structure_digest, manifest }
 }
 const eligible = value => value && value.paper.latest_revision_id === value.revision.id
+  && value.preview?.sealed_publication_manifest_digest == null
   && ['awaiting_review', 'changes_requested', 'approved'].includes(value.revision.state)
   && !value.shipping_guards.length && !value.promotions.some(row => row.state === 'publishing')
   && revisionValue(value.revision).reviewKind === 'candidate'
@@ -293,6 +294,11 @@ export function createReviewCompatibilityStore({ dbPath, filesRoot, repoRoot, pr
   }
   async function checkRevision(revisionId, options = {}) {
     try {
+      const preview = withDb(false, db => db.prepare(
+        'SELECT * FROM import_review_product_previews WHERE revision_id = ?').get(revisionId))
+      if (preview?.sealed_publication_manifest_digest != null) {
+        return { committed: false, reasonCode: 'SEALED_PUBLICATION' }
+      }
       await descriptor.ready(options)
       const job = prepare(revisionId)
       if (!job) return { committed: false, reasonCode: 'NOT_ELIGIBLE' }

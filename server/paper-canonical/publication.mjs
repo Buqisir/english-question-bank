@@ -9,6 +9,7 @@ import {
   writeFileSync,
 } from 'node:fs'
 import path from 'node:path'
+import { sealedPublicationProofIdentity } from '../import-review/importReviewStore.mjs'
 
 import { isBase64String } from '../../shared/paper-canonical/base64.mjs'
 import { validatedPaperHeaderTitle } from '../../shared/paper-canonical/headerTitle.mjs'
@@ -473,7 +474,7 @@ export function sealCanonicalPublication({
 }) {
   if (compilation?.disposition !== 'ready') throw publicationError('CANONICAL_PUBLICATION_BLOCKED', 'Only a complete ready compilation may be published')
   if (!(sourceAsset instanceof Uint8Array) || !Number.isInteger(sourceAssetVersion) || sourceAssetVersion < 1) throw publicationError('CANONICAL_PUBLICATION_INPUT_INVALID', 'Publication needs immutable source asset bytes and a positive version')
-  const { sourceCapture, canonicalPaper, normalizationReport } = compilation.artifacts
+  const { sourceCapture, canonicalPaper } = compilation.artifacts
   const authority = resolveCanonicalAuthority(canonicalPaper?.paperPlan?.authorityRef)
   if (!authority.ok) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_INVALID', 'Compilation does not bind a known authority')
   const closure = authority.closure
@@ -505,7 +506,6 @@ export function sealCanonicalPublication({
       sourceAsset,
     })
   ) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_RETIRED', 'Only the current canonical authority or one exact live Teacher-Confirmed import chain may create a new publication')
-  const artifactPaths = artifactPathsFor(closure.authorityRef)
   assertPaperId(canonicalPaper?.paperPlan?.paperId)
   validateSourceCaptureIntegrity(sourceCapture)
   const sourceEvidence = sourceEvidenceDescriptors(sourceCapture)
@@ -525,6 +525,30 @@ export function sealCanonicalPublication({
       'External Listening publication requires exact live proof from the server-validated Owner playback review',
     )
   }
+  return buildPublicationArtifacts({ compilation, sourceAssetVersion, sourceAsset,
+    listeningAudioBytes, paperHeader, closure, sourceEvidence, listeningAudio })
+}
+
+// Finalize snapshots a strict server projection before Owner approval. This
+// constructs bytes only; it grants no publication admission or write capability.
+export function snapshotCanonicalReviewCompilation({ compilation, sourceAssetVersion, sourceAsset,
+  listeningAudioBytes = null, paperHeader }) {
+  if (compilation?.disposition !== 'ready' || !(sourceAsset instanceof Uint8Array)) {
+    throw publicationError('CANONICAL_PUBLICATION_BLOCKED', 'Review requires a complete ready compilation')
+  }
+  const { sourceCapture, canonicalPaper } = compilation.artifacts
+  const authority = resolveCanonicalAuthority(canonicalPaper.paperPlan.authorityRef)
+  if (!authority.ok) throw publicationError('CANONICAL_PUBLICATION_AUTHORITY_INVALID', 'Unknown Review authority')
+  validateSourceCaptureIntegrity(sourceCapture)
+  return buildPublicationArtifacts({ compilation, sourceAssetVersion, sourceAsset, listeningAudioBytes, paperHeader,
+    closure: authority.closure, sourceEvidence: sourceEvidenceDescriptors(sourceCapture),
+    listeningAudio: capturedListeningAudio(sourceCapture, canonicalPaper.questionGroups, authority.closure) })
+}
+
+function buildPublicationArtifacts({ compilation, sourceAssetVersion, sourceAsset,
+  listeningAudioBytes, paperHeader, closure, sourceEvidence, listeningAudio }) {
+  const { sourceCapture, canonicalPaper, normalizationReport } = compilation.artifacts
+  const artifactPaths = artifactPathsFor(closure.authorityRef)
   if (listeningAudio) assertPlaybackBytes(listeningAudio, listeningAudioBytes)
   else if (listeningAudioBytes) throw publicationError('LISTENING_AUDIO_UNBOUND', 'Audio requires active Listening')
   const sourceAssetDigest = sha256(sourceAsset)
@@ -565,6 +589,44 @@ export function sealCanonicalPublication({
       ...(listeningAudio ? { [listeningAudio.relativePath]: new Uint8Array(listeningAudioBytes) } : {}),
     },
   }
+}
+
+// Internal server entrance for an already approved, digest-verified Review
+// snapshot. Historical live-compilation admission above remains unchanged.
+export function admitApprovedSealedCanonicalPublication({ sealed, sourceAssetVersion, approval, consumerRefs,
+  proof, manifestDigest, previewDigest }) {
+  const identity = sealedPublicationProofIdentity(proof)
+  if (!identity || identity.manifestDigest !== manifestDigest || identity.previewDigest !== previewDigest
+    || ['paperId', 'revisionId', 'approvalId', 'bundleDigest', 'sourceDigest', 'candidateDigest']
+      .some(key => identity[key] !== approval?.[key])
+    || !approval?.approvalId || !approval.revisionId || approval.paperId !== sealed.manifest.paperId
+    || !Number.isSafeInteger(sourceAssetVersion) || sourceAssetVersion < 1) {
+    throw publicationError('CANONICAL_PUBLICATION_APPROVAL_INVALID', 'Exact approved Review identity is required')
+  }
+  const { publicationDigest: _digest, ...base } = sealed.manifest
+  const manifestBase = { ...base, sourceAssetVersion, sourceAssetDigest: sha256(sealed.sourceAsset) }
+  const rebound = { ...sealed, manifest: { ...manifestBase, publicationDigest: digestJson(manifestBase) } }
+  const readArtifact = file => rebound.artifacts[file] || rebound.sourceEvidence[file] || rebound.playbackDerivatives?.[file]
+  validateCanonicalPublicationBundle({ manifest: rebound.manifest, sourceAsset: rebound.sourceAsset, readArtifact })
+  for (const id of ['screen', 'print_pdf']) {
+    const resolved = resolveConsumerContract(consumerRefs?.[id])
+    if (!resolved.ok || consumerRefs[id].id !== id) {
+      const error = publicationError('CANONICAL_IMPORT_CONSUMER_UNAVAILABLE',
+        `${id}: ${JSON.stringify(consumerRefs?.[id])}: ${JSON.stringify(resolved.issues)}`)
+      error.diagnostics = [{ code: error.code, consumerRef: consumerRefs?.[id], message: error.message }]
+      throw error
+    }
+  }
+  const ref = { paperId: rebound.manifest.paperId, sourceAssetVersion,
+    versionName: `v${sourceAssetVersion}`, publicationDigest: rebound.manifest.publicationDigest }
+  const consumers = loadCanonicalOnlyConsumers({ ref, store: candidateStore(rebound, ref) })
+  for (const [id, consumer] of Object.entries(consumers)) {
+    if (digestJson(consumer.consumerContractRef) !== digestJson(consumerRefs[id])) {
+      throw publicationError('CANONICAL_IMPORT_CONSUMER_UNAVAILABLE',
+        `${id}: sealed consumer ${JSON.stringify(consumerRefs[id])} differs from loader ${JSON.stringify(consumer.consumerContractRef)}`)
+    }
+  }
+  return { ok: true, sealed: rebound, consumers }
 }
 
 export function validateCanonicalPublicationBundle({ manifest, sourceAsset, readArtifact }) {
