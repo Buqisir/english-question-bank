@@ -36,7 +36,7 @@ import {
   NCK1_LISTENING_STAGED_ANALYSIS,
   NCK1_STAGED_ANALYSIS_FILES,
 } from './nck1AnalysisProjection.mjs'
-import { LEGACY_NCK1_ANALYSIS_PROFILE } from '../paper-import-ai/analyzeListening.mjs'
+import { LEGACY_NCK1_ANALYSIS_PROFILE, LISTENING_ANALYSIS_PROFILE } from '../paper-import-ai/analyzeListening.mjs'
 import { validateParagraphSummaries } from '../paper-import-ai/paragraphSummaries.mjs'
 import { validatePublicSearchMetadata } from '../paper-import-ai/publicSearchMetadata.mjs'
 import { applySpellingReview, loadSpellingReview, summarizeSpellingReview, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
@@ -656,8 +656,10 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
       rootDir,
       materialization,
       paperAsset,
-      required: !importProfile,
-      requireTeachingContent: Boolean(loaded.analyzedPackage),
+      required: !importProfile || loaded.config.withTeachingAnalyses === true,
+      analysisProfile: loaded.config.withTeachingAnalyses === true
+        ? LISTENING_ANALYSIS_PROFILE : LEGACY_NCK1_ANALYSIS_PROFILE,
+      requireTeachingContent: Boolean(loaded.analyzedPackage) || loaded.config.withTeachingAnalyses === true,
     })
   }
   const sourceFiles = loaded.analyzedPackage
@@ -1846,9 +1848,9 @@ function buildNck1ReviewProjectionUncached(rootDir, {
     materialization: loaded.materialization,
     paperAsset,
     sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
-    required: requireAnalyses && !importProfile,
-    analysisProfile,
-    requireTeachingContent: Boolean(loaded.analyzedPackage),
+    required: (requireAnalyses && !importProfile) || loaded.config.withTeachingAnalyses === true,
+    analysisProfile: loaded.config.withTeachingAnalyses === true ? LISTENING_ANALYSIS_PROFILE : analysisProfile,
+    requireTeachingContent: Boolean(loaded.analyzedPackage) || loaded.config.withTeachingAnalyses === true,
   })
   const sourceVisuals = sourceVisualProjection(loaded)
   const paragraphSummaries = importProfile

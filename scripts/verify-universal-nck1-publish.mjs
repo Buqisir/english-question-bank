@@ -2249,8 +2249,90 @@ for (const enabled of [false, true]) {
 }
 }
 
+export async function verifyPublicPaperTeachingAnalyses() {
+  const tempRoot = mkdtempSync(path.join(tmpdir(), 'public-paper-teaching-'))
+  const fixtureId = `paper-public-teaching-${randomUUID()}`
+  const cliDir = path.join(root, 'scripts/import-pipeline/papers', fixtureId)
+  try {
+    const { reviewRoot, projection } = makeReviewRoot(tempRoot, fixtureId, undefined, { listening: true })
+    const configPath = path.join(reviewRoot, 'config.json')
+    const config = { ...JSON.parse(readFileSync(configPath, 'utf8')), importProfile: 'public-paper-v1' }
+    writeJson(configPath, config)
+    const targets = enumerateParagraphSummaryTargets(projection.materialization)
+    writeJson(path.join(reviewRoot, 'paragraph-summaries-v1.json'), {
+      schemaVersion: 'paragraph-summaries-v1', paperId: fixtureId,
+      sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest,
+      groups: [...Map.groupBy(targets, ({ groupId }) => groupId)].map(([groupId, paragraphs]) => ({
+        groupId, paragraphs: paragraphs.map(({ paragraphId }) => ({ paragraphId, summary: '当前段落的摘要。' })),
+      })),
+    })
+    writeJson(path.join(reviewRoot, 'public-search-metadata-v1.json'),
+      publicMetadataFixture(projection.materialization, projection.sourceDigest, projection.candidateDigest))
+    const staged = new Map([...NCK1_STAGED_ANALYSIS_FILES.map(({ path: file }) => file), 'analysis-listening.json']
+      .map(file => [file, readFileSync(path.join(reviewRoot, file))]))
+    for (const file of staged.keys()) rmSync(path.join(reviewRoot, file))
+    assert.equal(buildNck1ReviewProjection(reviewRoot, { requireAnalyses: true }).analysisDigest, null,
+      'without opt-in public papers still permit no analyses')
+    for (const [file, bytes] of staged) writeFileSync(path.join(reviewRoot, file), bytes)
+    assert.equal(existsSync(cliDir), false)
+    symlinkSync(reviewRoot, cliDir, 'dir')
+    await assert.rejects(runReviewCommand(['verify-analyses', fixtureId]),
+      /does not use teaching analyses/u, 'without opt-in the CLI still rejects public analyses')
+    const first = JSON.parse((await runReviewCommand([
+      'verify-analyses', fixtureId, '--with-teaching-analyses',
+    ])).stdout)
+    assert.equal(JSON.parse(readFileSync(configPath, 'utf8')).withTeachingAnalyses, true)
+    assert.equal(first.previewSidecars.length, 6, 'opt-in projects all nine shards plus listening')
+    const retried = JSON.parse((await runReviewCommand(['verify-analyses', fixtureId])).stdout)
+    assert.equal(retried.analysisDigest, first.analysisDigest, 'retry without the flag retains the profile')
+    const inventory = reviewBundleFilePaths(reviewRoot)
+    assert.ok(inventory.some(file => file.path === 'config.json'), 'the opt-in config is sealed with the revision')
+    for (const file of staged.keys()) assert.ok(inventory.some(item => item.path === file))
+    function rejectChanged(file, change, pattern) {
+      const original = staged.get(file)
+      try {
+        if (change === null) rmSync(path.join(reviewRoot, file))
+        else {
+          const value = JSON.parse(original)
+          change(value)
+          writeJson(path.join(reviewRoot, file), value)
+        }
+        assert.throws(() => buildNck1ReviewProjection(reviewRoot), pattern)
+      } finally { writeFileSync(path.join(reviewRoot, file), original) }
+    }
+    rejectChanged('analysis-listening.json', null, { code: 'NCK1_ANALYSIS_INCOMPLETE' })
+    try {
+      for (const file of staged.keys()) rmSync(path.join(reviewRoot, file))
+      assert.throws(() => buildNck1ReviewProjection(reviewRoot), { code: 'NCK1_ANALYSIS_INCOMPLETE' })
+      await assert.rejects(runReviewCommand(['verify-analyses', fixtureId]), /NCK1_ANALYSIS_INCOMPLETE/u)
+    } finally {
+      for (const [file, bytes] of staged) writeFileSync(path.join(reviewRoot, file), bytes)
+    }
+    rejectChanged('analysis-reading-a.json', value => {
+      delete value.questions[Object.keys(value.questions)[0]]
+    }, /question|Question/u)
+    rejectChanged('analysis-reading-a.json', value => {
+      const options = Object.values(value.questions)[0].optionAnalysis
+      const correct = options.find(item => item.status === 'correct')
+      const wrong = options.find(item => item.status === 'wrong')
+      correct.status = 'wrong'
+      correct.trap = { explanation: '测试中的错误选项。' }
+      wrong.status = 'correct'
+      delete wrong.trap
+    }, /官方|authoritative answer/u)
+    rejectChanged('analysis-continuation.json', value => {
+      value.continuationAnalysis.storyUnderstanding.centralSituation.evidence[0].excerpt = 'EXCERPT FROM ANOTHER PAPER'
+    }, /evidence excerpt must be an exact substring/u)
+    console.log('PASS public teaching analyses: opt-in, sealed config, retry, completeness, question/answer closure and continuation evidence')
+  } finally {
+    rmSync(cliDir, { force: true })
+    rmSync(tempRoot, { recursive: true, force: true })
+  }
+}
+
 if (process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY !== '1') {
 await reviewBuildIdentityProvider().ready()
+await verifyPublicPaperTeachingAnalyses()
 verifyHistoricalAuthorityReplay()
 verifyPaperHeaderTitlePublication()
 for (const legacy of [true, false]) {

@@ -144,6 +144,12 @@ assert.deepEqual(
 
 const profileRoot = mkdtempSync(path.join(tmpdir(), 'listening-analysis-profile-'))
 try {
+  const emptyProjection = { rootDir: profileRoot, materialization, paperAsset: {}, required: false }
+  assert.equal(buildNck1AnalysisProjection(emptyProjection), null, 'legacy optional analyses remain optional')
+  for (const options of [{ required: true }, { analysisProfile: LISTENING_ANALYSIS_PROFILE }]) {
+    assert.throws(() => buildNck1AnalysisProjection({ ...emptyProjection, ...options }),
+      { code: 'NCK1_ANALYSIS_INCOMPLETE' }, 'required/profile-required analyses cannot silently disappear')
+  }
   for (const descriptor of NCK1_STAGED_ANALYSIS_FILES) {
     writeFileSync(path.join(profileRoot, descriptor.path), '{}')
   }

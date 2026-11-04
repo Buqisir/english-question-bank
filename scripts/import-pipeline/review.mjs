@@ -1009,7 +1009,7 @@ async function preflight(paperId) {
 
 function verifyAnalyses(paperId) {
   const config = requiredJson(path.join(paperDirectory(paperId), 'config.json'), 'config.json')
-  if (config.importProfile === 'public-paper-v1') {
+  if (config.importProfile === 'public-paper-v1' && config.withTeachingAnalyses !== true) {
     fail('public-paper-v1 does not use teaching analyses; run verify-summaries instead')
   }
   const projection = buildNck1ReviewProjection(
@@ -1760,6 +1760,17 @@ async function redeemPublication(paperId) {
 async function main() {
   const [command, paperId, issueId] = process.argv.slice(2)
   if (!['promote', 'request-publication', 'publication-status', 'redeem-publication'].includes(command)) assertNotNck1SourceOnly(paperId, command)
+  if (process.argv.includes('--with-teaching-analyses')) {
+    if (!['push', 'verify-analyses'].includes(command)) fail('--with-teaching-analyses requires push or verify-analyses')
+    const configPath = path.join(paperDirectory(paperId), 'config.json')
+    const config = requiredJson(configPath, 'config.json')
+    if (config.importProfile !== 'public-paper-v1') fail('--with-teaching-analyses requires public-paper-v1')
+    // config.json is uploaded and sealed with the revision; retries and server
+    // replay must retain the complete profile even when the flag is omitted.
+    if (config.withTeachingAnalyses !== true) {
+      writeFileSync(configPath, `${JSON.stringify({ ...config, withTeachingAnalyses: true }, null, 2)}\n`)
+    }
+  }
   if (command === 'push') await pushRevision(paperId)
   else if (['prepare-listening-instruction-correction', 'finalize-listening-instruction-correction', 'verify-listening-instruction-correction'].includes(command)) listeningInstructionCorrection(paperId, command)
   else if (['prepare-listening-review', 'finalize-listening-review', 'verify-listening-review'].includes(command)) listeningReview(paperId, command)
@@ -1793,7 +1804,7 @@ async function main() {
   else if (command === 'redeem-publication') await redeemPublication(paperId)
   else if (command === 'release-ship-guard') await releaseShipGuard(paperId, issueId)
   else fail(
-    'Usage: review.mjs push <paperId> [--resolves issue-1,issue-2] | '
+    'Usage: review.mjs push <paperId> [--with-teaching-analyses] [--resolves issue-1,issue-2] | '
       + 'prepare-listening-review <paperId> --output <request.json> | finalize-listening-review <paperId> --input <review.json> | verify-listening-review <paperId> | '
       + 'prepare-listening-instruction-correction <paperId> --slot <listening slot> --count 1|2 --output <request.json> | finalize-listening-instruction-correction <paperId> --input <correction.json> | verify-listening-instruction-correction <paperId> | '
       + 'pagination-qa <paperId> --edition largeComplete|largeNoListening|economy8 [--auto | --break-slots a,b] [--large-complete-page-limit 13 | --large-no-listening-page-limit 11 (Owner 2026-10-24 BUB-138)] [--economy-page-limit 9 --product-layout layout.json (explicit Owner-permitted economy ceiling)] [--save-plan] [--output dir] (historical friendly8|friendly10|long10|long12 still supported) | hydrate <paperId> [--revision rev-id] | '
@@ -1804,7 +1815,7 @@ async function main() {
       + 'finalize-ocr-correction-report <paperId> --input <entries.json> | '
       + 'prepare-spelling <paperId> --output <request.json> | finalize-spelling <paperId> --input <review.json> | verify-spelling <paperId> | '
       + 'preprocessing-report <paperId> --evidence <evidence.json> --output <report.md> | '
-      + 'preflight <paperId> | verify-analyses <paperId> | prepare-summaries <paperId> --output <request.json> | verify-summaries <paperId> | prepare-search-metadata <paperId> --output <request.json> | finalize-search-metadata <paperId> --input <authored.json> | verify-search-metadata <paperId> | status <paperId> | '
+      + 'preflight <paperId> | verify-analyses <paperId> [--with-teaching-analyses] | prepare-summaries <paperId> --output <request.json> | verify-summaries <paperId> | prepare-search-metadata <paperId> --output <request.json> | finalize-search-metadata <paperId> --input <authored.json> | verify-search-metadata <paperId> | status <paperId> | '
       + 'reply <paperId> <issueId> --message <text> | '
       + 'accept <paperId> | publish <paperId> | '
       + 'promote <paperId> --owner-said-ship|--owner-said-retry-ship | '
