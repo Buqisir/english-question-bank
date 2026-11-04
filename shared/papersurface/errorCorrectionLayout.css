@@ -1,0 +1,10 @@
+/* Source errors remain unmarked; generous leading supplies correction space. */
+.canonical-error-correction {
+  font-family: var(--paper-font-family, var(--ps-font-family, 'EQB Termes', 'EQB Source Han Serif', serif));
+  font-size: 12pt;
+}
+.canonical-error-correction p {
+  margin: 0;
+  line-height: 2.5;
+  white-space: pre-wrap;
+}

@@ -119,6 +119,10 @@ const paperLayoutCss = readFileSync(
   new URL('../shared/papersurface/paperLayout.css', import.meta.url),
   'utf8',
 )
+const errorCorrectionLayoutCss = readFileSync(
+  new URL('../shared/papersurface/errorCorrectionLayout.css', import.meta.url),
+  'utf8',
+)
 const fontRenderingCss = readFileSync(
   new URL('../shared/papersurface/fontRendering.css', import.meta.url),
   'utf8',
@@ -2700,7 +2704,7 @@ body {
 }
 
 ${readingLayoutCss}
-${paperLayoutCss}
+${paperLayoutCss}${items.some(item => item.detail.groupType === 'errorCorrection') ? `\n${errorCorrectionLayoutCss}` : ''}
 
 /* Print calibration and page breaks only; layout is shared with PaperSurface. */
 .canonical-reading-body,
