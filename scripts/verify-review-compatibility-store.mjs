@@ -140,6 +140,9 @@ try {
   store.finalizeRevision(revision.id)
   assert.equal(JSON.stringify(newRows()), atomicRows)
   pass('finalize preview/subject/self equal rollback together; replay is byte-stable')
+  // The remaining comparison/CAS cases exercise historical, unsealed revisions.
+  dbRun(db => db.prepare(`UPDATE import_review_product_previews
+    SET sealed_publication_manifest_digest=NULL WHERE revision_id=?`).run(revision.id))
   await verifyReviewListScale({ dbPath, destination: path.join(root, 'scale.sqlite'), filesRoot })
   pass('100 papers with 365 KiB subjects list below 100ms without delaying timers; mismatched bindings fail closed')
 
@@ -343,6 +346,8 @@ try {
     store.completeFileUpload(next.id, file.path, file)
   }
   await store.finalizeUploadedRevision(next.id)
+  dbRun(db => db.prepare(`UPDATE import_review_product_previews
+    SET sealed_publication_manifest_digest=NULL WHERE revision_id=?`).run(next.id))
   const afterNext = JSON.stringify(historical())
   assert.equal((await compatibility.commit(revisionJob, revisionResult)).reasonCode, 'CAS_CHANGED')
   assert.equal(store.getRevision(revision.id).state, 'superseded')

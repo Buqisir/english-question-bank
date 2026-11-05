@@ -1492,6 +1492,7 @@ function publishUniversalNck1ImportFacts({
     paperAssetsDir,
     packageData,
     publicValidation,
+    sealedNormalizedGroupsSidecar: preparedFacts.sealedCompatibility?.normalizedGroupsSidecar,
     forceDbFailure,
     failurePoint,
     onPrepared,
@@ -1618,6 +1619,7 @@ function publishPreparedPaperImport({
   validatePrepared = null,
   requireCompleteAnalyses = false,
   requireParagraphSummaries = false,
+  sealedNormalizedGroupsSidecar = null,
 }) {
   const paperId = packageData.paperAsset.paper.paperId
   const preflightVersion = computeNextPublishVersion({
@@ -1787,6 +1789,7 @@ function publishPreparedPaperImport({
       version,
       canonicalPublication: admission.sealed,
       outputInventory,
+      sealedNormalizedGroupsSidecar,
       forceFailureAt: failurePoint,
       beforeVersionCommit({ tempDir, versionName }) {
         beginPaperImportPublish({

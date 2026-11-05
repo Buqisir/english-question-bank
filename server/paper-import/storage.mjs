@@ -17,6 +17,7 @@ import { SOURCE_REFERENCES_FILE } from './sourceReferences.mjs'
 import { PRODUCT_MANIFEST, readFrozenProducts } from './frozenProducts.mjs'
 import {
   buildPaperNormalizedGroupsSidecar,
+  rebindPaperNormalizedGroupsSidecar,
   PAPER_NORMALIZED_GROUPS_FILE_NAME,
   validatePaperNormalizedGroupsSidecar,
 } from './normalization.mjs'
@@ -280,7 +281,7 @@ function makeVersionedAnalysisSidecars(packageData, version) {
   return result
 }
 
-function makeVersionedArtifacts(packageData, version) {
+function makeVersionedArtifacts(packageData, version, sealedNormalizedGroupsSidecar) {
   const paperAsset = JSON.parse(JSON.stringify(packageData.paperAsset))
   const answerKey = JSON.parse(JSON.stringify(packageData.answerKey))
   const importMeta = JSON.parse(JSON.stringify(packageData.importMeta))
@@ -299,8 +300,8 @@ function makeVersionedArtifacts(packageData, version) {
     }
   }
 
-  const normalization = packageData.normalizedGroupsSidecar
-    ? { status: 'ready', sidecar: { ...structuredClone(packageData.normalizedGroupsSidecar), sourceAssetVersion: version } }
+  const normalization = sealedNormalizedGroupsSidecar
+    ? { status: 'ready', sidecar: rebindPaperNormalizedGroupsSidecar(paperAsset, sealedNormalizedGroupsSidecar) }
     : buildPaperNormalizedGroupsSidecar(paperAsset)
   if (normalization.status !== 'ready') {
     throw new Error(
@@ -308,7 +309,7 @@ function makeVersionedArtifacts(packageData, version) {
     )
   }
   const normalizedGroupsSidecar = normalization.sidecar
-  const sidecarValidation = packageData.normalizedGroupsSidecar ? { ok: true } : validatePaperNormalizedGroupsSidecar({
+  const sidecarValidation = sealedNormalizedGroupsSidecar ? { ok: true } : validatePaperNormalizedGroupsSidecar({
     paperAsset,
     sidecar: normalizedGroupsSidecar,
   })
@@ -352,8 +353,9 @@ function outputRejected(reasonCode, relativePath) {
 // The visitor sees current bytes one at a time; only small metadata is retained.
 function enumeratePaperImportOutputs({
   packageData, version, validationReport, publishReport, canonicalPublication = null,
+  sealedNormalizedGroupsSidecar = null,
 }, visit, ownBytes = false) {
-  const artifacts = makeVersionedArtifacts(packageData, version)
+  const artifacts = makeVersionedArtifacts(packageData, version, sealedNormalizedGroupsSidecar)
   const files = []
   const paths = new Map()
   function add(relativePath, bytes, source) {
@@ -570,11 +572,12 @@ export function writePaperImportVersion({
   version,
   canonicalPublication = null,
   outputInventory = null,
+  sealedNormalizedGroupsSidecar = null,
   forceFailureAt = null,
   beforeVersionCommit = null,
 }) {
   // Validate the complete namespace before creating even a staging directory.
-  const input = { packageData, validationReport, publishReport, version, canonicalPublication }
+  const input = { packageData, validationReport, publishReport, version, canonicalPublication, sealedNormalizedGroupsSidecar }
   let artifacts
   let files
   if (outputInventory) {

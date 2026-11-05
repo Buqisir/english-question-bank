@@ -4,6 +4,7 @@ import { validatedPaperHeaderTitle } from '../../shared/paper-canonical/headerTi
 import { PUBLISHED_LISTENING_PLAYBACK_UI_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { loadCanonicalOnlyConsumers } from '../paper-canonical/publication.mjs'
 import { buildPaperImportOutputInventory } from '../paper-import/storage.mjs'
+import { rebindPaperNormalizedGroupsSidecar } from '../paper-import/normalization.mjs'
 import { buildNck1ReviewConsumption } from './revisionProjection.mjs'
 import { compareReviewPublicationContent } from './reviewPublicationContent.mjs'
 import { reviewConsumptionForTrustedBaseline } from './reviewComparisonProjection.mjs'
@@ -47,6 +48,7 @@ function assertPreparedReviewContentInternal({
   }
   const outputInventory = buildPaperImportOutputInventory({
     packageData, version, canonicalPublication: sealed, publishReport, validationReport,
+    sealedNormalizedGroupsSidecar: preparedFacts.sealedCompatibility?.normalizedGroupsSidecar,
   })
   const outputFiles = new Map(outputInventory.files.map(file => [file.path, file.bytes]))
   const consumerContractRefs = consumerContractRefsForAuthority(manifest.authority)
@@ -112,7 +114,8 @@ function assertPreparedReviewContentInternal({
   const consumerSets = [['admission', admission.consumers], ['writer', writtenConsumers]]
   if (preparedFacts.sealedCompatibility) {
     const actual = outputInventory.artifacts.normalizedGroupsSidecar
-    const expected = { ...preparedFacts.sealedCompatibility.normalizedGroupsSidecar, sourceAssetVersion: version }
+    const expected = rebindPaperNormalizedGroupsSidecar(
+      outputInventory.artifacts.paperAsset, preparedFacts.sealedCompatibility.normalizedGroupsSidecar)
     if (!same(actual, expected)) reject('SUBJECT_CHANGED', ['/normalizedGroupsSidecar'])
   } else {
     const compiled = buildNck1ReviewConsumption(preparedFacts.candidate, admission.compilation)

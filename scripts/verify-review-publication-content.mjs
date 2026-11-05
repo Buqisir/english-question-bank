@@ -15,7 +15,7 @@ import { nck1MaterializationHistoricalAuthorityRef58 } from '../shared/paper-can
 import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
 import { createReviewCompatibilityStore } from '../server/import-review/reviewCompatibilityStore.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
-import { buildPaperImportOutputInventory, writePaperImportVersion } from '../server/paper-import/storage.mjs'
+import { buildPaperImportOutputInventory, readPaperAssetNormalizationBundle, writePaperImportVersion } from '../server/paper-import/storage.mjs'
 import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
 import { archiveReviewFiles, createBlobStore } from '../server/paper-import/blobStore.mjs'
 import { manifestProductFiles } from '../server/paper-import/pdfProductSet.mjs'
@@ -664,6 +664,8 @@ try {
       fixture.dbPath, path.join(root, 'revisions'), fixture.bank, fixture.assets, path.join(root, 'blobs'), revision.id],
     { encoding: 'utf8', timeout: 120_000 })
     assert.match(output, /PASS all rebuild entries throw/)
+    assert.equal(readPaperAssetNormalizationBundle(fixture.assets, projection.paperId, 'v7')
+      .normalizedGroupsSidecar.sourceAssetVersion, 7)
     pass('all rebuilding/normalizing entries disabled; sealed v7 publication and committed retry succeed')
   }
   if (!process.argv.includes('--references-only')) {

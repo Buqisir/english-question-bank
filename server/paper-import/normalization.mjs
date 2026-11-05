@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { isDeepStrictEqual } from 'node:util'
 import { fileURLToPath } from 'node:url'
+import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 
 import {
   buildExactPaperGroupSourceSlice,
@@ -48,6 +49,17 @@ function supportedGroups(paperAsset) {
   return Object.values(paperAsset?.content?.groups || {})
     .filter((group) => supportedGroupTypes.has(group?.groupType))
     .sort((left, right) => left.groupId.localeCompare(right.groupId))
+}
+
+// Publication identity changes the source fingerprint, never the sealed meaning.
+export function rebindPaperNormalizedGroupsSidecar(paperAsset, sidecar) {
+  const rebound = structuredClone(sidecar)
+  rebound.sourceAssetVersion = paperAsset.paper.assetVersion
+  for (const [groupId, entry] of Object.entries(rebound.groups)) {
+    entry.sourceFingerprint = digestJson(buildExactPaperGroupSourceSlice(paperAsset, groupId))
+      .replace(/^sha256:/, '')
+  }
+  return rebound
 }
 
 export function buildPaperNormalizedGroupsSidecar(paperAsset) {
