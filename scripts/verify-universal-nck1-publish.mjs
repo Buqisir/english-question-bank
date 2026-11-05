@@ -4627,6 +4627,9 @@ try {
   let remoteOcrReceipt = null
   let submittedRepair = null
   reviewServer = createServer(async (request, response) => {
+    // hydrate runs a long synchronous projection between requests; a kept-alive
+    // socket can be closed by the stub meanwhile and then reused by fetch.
+    response.setHeader('Connection', 'close')
     const url = new URL(request.url || '/', 'http://127.0.0.1')
     if (request.headers.authorization !== 'Bearer verifier-token') {
       response.writeHead(404, { 'content-type': 'application/json' })
