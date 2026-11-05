@@ -17,8 +17,23 @@ export function buildOcrVisualTable({ declaration, confirmation, source, blockId
   const visual = page?.visualClassifications.find(v => v.regionId === declaration.regionId)
   if (visual?.classification !== 'content_media' || !visual.itemIds.length) fail('requires an existing text-bearing content_media region')
   const items = new Map(page.orderedItems.filter(i => visual.itemIds.includes(i.itemId)).map(i => [i.itemId, i]))
+  const itemOrder = new Map(page.orderedItems.map((item, index) => [item.itemId, index]))
   const used = new Map([...items].map(([id, item]) => [id, new Set()]))
-  const grid = semanticTableGrid(declaration)
+  const readAtRows = new Map()
+  const merges = Array.isArray(declaration.merges) ? declaration.merges.map(merge => {
+    if (!merge || !Object.hasOwn(merge, 'readAtRow')) return merge
+    if (!exactKeys(merge, ['row', 'column', 'rowSpan', 'columnSpan', 'readAtRow'])
+      || !Number.isSafeInteger(merge.readAtRow) || merge.readAtRow < merge.row
+      || merge.readAtRow >= merge.row + merge.rowSpan) fail('readAtRow must lie within its merged cell span')
+    const { readAtRow, ...geometry } = merge
+    readAtRows.set(`${merge.row}:${merge.column}`, readAtRow)
+    return geometry
+  }) : declaration.merges
+  const grid = semanticTableGrid({ rows: declaration.rows, merges })
+  const readingCells = declaration.rows.flatMap((row, r) => row.cells.map((fragments, c) => ({
+    keyRow: readAtRows.get(`${r}:${grid.geometry[r][c].columnStart}`) ?? r,
+    column: grid.geometry[r][c].columnStart, fragments,
+  }))).sort((a, b) => a.keyRow - b.keyRow || a.column - b.column)
   const rows = declaration.rows.map((row, r) => ({
     rowId: `${blockId}:row-${r + 1}`,
     cells: row.cells.map((fragments, c) => ({
@@ -40,6 +55,14 @@ export function buildOcrVisualTable({ declaration, confirmation, source, blockId
       }).join('\n') }],
     })),
   }))
+  let previous = { index: -1, end: 0 }
+  for (const cell of readingCells) for (const fragment of cell.fragments) {
+    const index = itemOrder.get(fragment.itemId)
+    if (index < previous.index || (index === previous.index && fragment.start < previous.end)) {
+      fail('cell fragments must retain confirmed source order')
+    }
+    previous = { index, end: fragment.end }
+  }
   for (const [id, item] of items) {
     if (Array.from({ length: item.text.length }, (_, i) => i)
         .some(i => !/\s/u.test(item.text[i]) && !used.get(id).has(i))) fail('every confirmed non-whitespace character must survive exactly once')

@@ -32,6 +32,7 @@ schema/digest通过不能替代源对照，合成HTML测试不能替代真实产
 UTF-16 `[start, end)` 片段数组。同一个 OCR item 可拆到多格；每个非空白字符
 必须保留且只用一次，多片段之间用 LF 连接。不得添加文本、改答案或把其他区域
 文字搬入表格。`basis` 写明原页、行列和合并依据，不能只写“通过”。
+片段按 `(keyRow, column)` 检查源顺序：普通格的 `keyRow` 为所在行，跨行合并格可在 merge 上声明零基 `readAtRow`（仅限 `[row, row + rowSpan - 1]`，默认起始行），格内片段和普通格仍须单调递增。
 
 用 `server/paper-import/ocrVisualTableReclassification.mjs` 的
 `buildOcrVisualTable({ declaration, confirmation, source, blockId })` 生成表格，
