@@ -96,6 +96,11 @@ try {
   await store.ready()
   const fixture = finalizeReviewFixture({ directory: source.reviewRoot, output,
     projection: freezeReviewFixture(source.reviewRoot), store })
+  // Cold identity and compatibility scheduling apply to revisions predating sealing.
+  const historicalDb = new DatabaseSync(dbPath)
+  historicalDb.prepare(`UPDATE import_review_product_previews
+    SET sealed_publication_manifest_digest=NULL WHERE revision_id=?`).run(fixture.revision.id)
+  historicalDb.close()
   const release = makeReviewRelease(path.join(root, 'release'))
   const program = `
     import assert from 'node:assert/strict';

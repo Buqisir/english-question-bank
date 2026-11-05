@@ -1,4 +1,5 @@
 import { withSealedReviewSnapshot } from '../import-review/sealedReviewFiles.mjs'
+import { restoreSealedReviewPublication } from '../import-review/sealedPublication.mjs'
 import { assertPreparedReviewContent } from '../import-review/preparedReviewContent.mjs'
 import { buildProductPreviewPayload } from '../import-review/reviewSubject.mjs'
 import { reviewProjectionForTrustedBaseline } from '../import-review/reviewComparisonProjection.mjs'
@@ -35,6 +36,7 @@ import {
 import { captureDocxSourceMedia } from './docxSourceMedia.mjs'
 import {
   admitCanonicalPaperImport,
+  admitApprovedSealedCanonicalPublication,
   createFileSystemCanonicalPublicationStore,
   loadCanonicalOnlyConsumers,
   recordCanonicalPublicationCurrent,
@@ -1251,6 +1253,42 @@ export function publishUniversalNck1Import(options) {
       code: 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', reasonCode: 'MISSING_BASELINE', status: 409,
     })
   }
+  if (options.sealedPublicationCommitment) {
+    const restored = restoreSealedReviewPublication({
+      directory: options.reviewRootDir,
+      revision: { ...options.approvedIdentity, id: options.approvedIdentity.revisionId, manifest: options.approvedManifest },
+      ...options.sealedPublicationCommitment,
+    })
+    const { packageData, preparedFacts, manifest } = restored
+    const identity = options.approvedIdentity
+    if (!options.approvedReviewSubject || digestJson(options.approvedReviewSubject.components.consumer) !== manifest.payloadDigest) {
+      throw Object.assign(new Error('Sealed publication differs from the approved preview'), {
+        code: 'IMPORT_REVIEW_SEALED_PUBLICATION_INVALID', reasonCode: 'BASELINE_UNTRUSTED', publicationNotWritten: true,
+      })
+    }
+    if (packageData.sourceReferencesBytes) packageData.sourceReferenceApproval = {
+      schemaVersion: 'source-reference-publication-v1', paperName: options.approvedManifest.paperName,
+      approvalId: identity.approvalId, revisionId: identity.revisionId, bundleDigest: identity.bundleDigest,
+      sourceDigest: identity.sourceDigest, candidateDigest: identity.candidateDigest,
+      materializationDigest: manifest.materializationDigest, sourceReferencesDigest: `sha256:${createHash('sha256')
+        .update(packageData.sourceReferencesBytes).digest('hex')}`,
+    }
+    if (packageData.frozenProducts) packageData.pdfProductApproval = {
+      manifestDigest: packageData.frozenProducts.digest, approvalId: identity.approvalId,
+      revisionId: identity.revisionId, bundleDigest: identity.bundleDigest,
+    }
+    packageData.fileStorage = options.fileStorage
+    return publishUniversalNck1ImportFacts(options, {
+      packageData, preparedFacts, importProfile: manifest.importProfile, paperId: identity.paperId,
+      sealedReviewPublication: restored,
+      publicValidation: { ok: true, paperId: identity.paperId, assetVersion: packageData.paperAsset.paper.assetVersion,
+        acceptedFiles: [], rejectedFiles: [], warnings: [], blockingIssues: [], structurePreview: [],
+        readingGroups: getReadingChoiceGroups(packageData.paperAsset).map(group => ({
+          groupId: group.groupId, title: group.title, questionIds: group.questionIds,
+          defaultQuestionId: group.questionIds?.[0] || null,
+        })), normalizationGroups: [], limits: {}, generatedAt: new Date().toISOString() },
+    })
+  }
   return withSealedReviewSnapshot(options.reviewRootDir, options.approvedManifest.files, snapshot => {
     const changed = snapshot.fileEvidence.find(file => {
       const expected = options.approvedManifest.files.find(item => item.path === file.path)
@@ -1445,14 +1483,16 @@ function publishUniversalNck1ImportSnapshot(options) {
 function publishUniversalNck1ImportFacts({
   approvedReviewSubject, withPreparedReviewSubject, approvedIdentity, approvedManifest = null,
   canonicalRequest, db, paperAssetsDir, forceDbFailure = false, failurePoint = null,
-  onPrepared = null, externalListeningReviewProof = null,
+  onPrepared = null, externalListeningReviewProof = null, sealedPublicationProof = null,
+  sealedPublicationCommitment = null,
 }, { packageData, publicValidation, preparedFacts, importProfile, paperId,
-  visibleStructureDigest, listeningAudioBytes, playbackUi }) {
+  visibleStructureDigest, listeningAudioBytes, playbackUi, sealedReviewPublication }) {
   return publishPreparedPaperImport({
     db,
     paperAssetsDir,
     packageData,
     publicValidation,
+    sealedNormalizedGroupsSidecar: preparedFacts.sealedCompatibility?.normalizedGroupsSidecar,
     forceDbFailure,
     failurePoint,
     onPrepared,
@@ -1471,6 +1511,19 @@ function publishUniversalNck1ImportFacts({
     requireCompleteAnalyses: !importProfile,
     requireParagraphSummaries: Boolean(importProfile),
     admitPackage(version) {
+      if (sealedReviewPublication) {
+        try {
+          return { admission: admitApprovedSealedCanonicalPublication({
+            sealed: sealedReviewPublication.sealed, sourceAssetVersion: version,
+            approval: approvedIdentity, consumerRefs: sealedReviewPublication.manifest.consumerRefs,
+            proof: sealedPublicationProof, manifestDigest: sealedPublicationCommitment?.commitment,
+            previewDigest: sealedPublicationCommitment?.previewDigest,
+          }) }
+        } catch (error) {
+          return { failure: canonicalAdmissionFailure({ disposition: 'blocked',
+            diagnostics: error.diagnostics || [{ code: error.code, message: error.message }] }) }
+        }
+      }
       return admitBoundUniversalNck1Package({
         canonicalRequest,
         version,
@@ -1566,6 +1619,7 @@ function publishPreparedPaperImport({
   validatePrepared = null,
   requireCompleteAnalyses = false,
   requireParagraphSummaries = false,
+  sealedNormalizedGroupsSidecar = null,
 }) {
   const paperId = packageData.paperAsset.paper.paperId
   const preflightVersion = computeNextPublishVersion({
@@ -1735,6 +1789,7 @@ function publishPreparedPaperImport({
       version,
       canonicalPublication: admission.sealed,
       outputInventory,
+      sealedNormalizedGroupsSidecar,
       forceFailureAt: failurePoint,
       beforeVersionCommit({ tempDir, versionName }) {
         beginPaperImportPublish({

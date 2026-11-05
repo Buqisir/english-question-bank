@@ -73,6 +73,9 @@ try {
   const projection = freezeReviewFixture(reviewRoot)
   const output = path.join(root, 'base')
   const fixture = finalizeReviewFixture({ directory: reviewRoot, output, projection, approve: false })
+  // All recovery cases below model historical revisions without a sealed promise.
+  dbRun(fixture.dbPath, db => db.prepare(`UPDATE import_review_product_previews
+    SET sealed_publication_manifest_digest=NULL WHERE revision_id=?`).run(fixture.revision.id))
   const filesRoot = path.join(output, 'files')
   const target = reviewBuildIdentityProvider()()
   const revision = fixture.revision

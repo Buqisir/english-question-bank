@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
+import { restoreSealedReviewPublication } from './sealedPublication.mjs'
 
 import {
   createFileSystemCanonicalPublicationStore,
@@ -60,6 +61,10 @@ function readJson(filePath, label) {
 // This is evidence for reconciling an existing target, never a new publish
 // package. It uses the original preview/subject and exact sealed bytes only.
 function originalPromotionEvidence(store, revision) {
+  const commitment = store.sealedPublicationCommitmentForRevision(revision.id)
+  if (commitment) return restoreSealedReviewPublication({
+    directory: store.revisionDirectory(revision.id), revision, ...commitment,
+  }).packageData
   let original
   try { original = store.originalReviewEvidenceForRevision(revision.id) } catch (error) {
     const compatibility = store.compatibilityForRevision(revision.id)
@@ -272,6 +277,21 @@ function failureFromResult(result) {
 // End the complete projection/materialization activation before archiving or
 // entering publisher. Only the second (or non-archiving) pass owns write inputs.
 function preparePromotionContent({ store, paperId, promotion, revision, reviewRootDir, contentBinding, fileStorage }) {
+  const sealedPublicationCommitment = store.sealedPublicationCommitmentForRevision(revision.id)
+  if (sealedPublicationCommitment) {
+    return store.withPromotionContentGuard(paperId, promotion.promotionId, contentBinding, context => {
+      const restored = restoreSealedReviewPublication({
+        directory: reviewRootDir, revision, ...sealedPublicationCommitment,
+      })
+      const archiveRequired = Boolean(restored.packageData.frozenProducts && !fileStorage)
+      return { context, binding: context.binding, archiveRequired, packageData: restored.packageData,
+        sealedPublicationCommitment, profileIdentity: restored.manifest.importProfile ? {
+          importProfile: restored.manifest.importProfile,
+          paragraphSummariesDigest: revision.manifest.paragraphSummariesDigest,
+          publicSearchMetadataDigest: revision.manifest.publicSearchMetadataDigest,
+        } : {} }
+    })
+  }
   const projection = buildNck1SealedReviewProjection(reviewRootDir, revision, {
     requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest,
   })
@@ -431,10 +451,12 @@ export function createSinglePaperPromotionService({
               '本次核验未完成，未发布。请稍后重试。', 503), { compatibility, retryable: true })
           }
         })
-        const { context, binding, archiveRequired, packageData, canonicalRequest, profileIdentity } = preparePromotionContent({
+        const { context, binding, archiveRequired, packageData, canonicalRequest, profileIdentity,
+          sealedPublicationCommitment } = preparePromotionContent({
           store, paperId, promotion, revision, reviewRootDir, contentBinding, fileStorage,
         })
-        const externalListeningReviewProof = store.mintExternalListeningPublicationProof(paperId, promotion)
+        const externalListeningReviewProof = sealedPublicationCommitment ? null
+          : store.mintExternalListeningPublicationProof(paperId, promotion)
         // The first context is captured before the asynchronous archive. A
         // second pass must match it exactly, including target and confirmations.
         if (archiveRequired) {
@@ -443,6 +465,7 @@ export function createSinglePaperPromotionService({
             .then(storage => execute(paperId, begun, storage, binding))
         }
         const result = publish({
+          sealedPublicationProof: context.sealedPublicationProof,
           approvedReviewSubject: context.subject,
           legacyRendererBuildId: context.binding.guard === 'legacy_renderer' ? context.binding.rendererBuildId : null,
           withPreparedReviewSubject(snapshot, write) {
@@ -466,6 +489,7 @@ export function createSinglePaperPromotionService({
             ...profileIdentity,
           },
           canonicalRequest,
+          sealedPublicationCommitment,
           externalListeningReviewProof,
           db,
           paperAssetsDir,
@@ -510,6 +534,12 @@ export function createSinglePaperPromotionService({
           consumers: committedAfterPublish.consumers,
         }
       } catch (error) {
+        if (error.code === 'IMPORT_REVIEW_SEALED_PUBLICATION_INVALID'
+          && error.publicationNotWritten === true && promotion.assetVersion === null) {
+          const failure = { failureCode: error.code, failureMessage: error.message }
+          const receipt = store.markPromotionFailed(paperId, promotion.promotionId, failure)
+          return { status: 'failed', promotion: receipt, failure }
+        }
         // Only a comparator's explicit pre-write rejection proves this attempt
         // wrote no assets. Races, I/O failures and lost responses retain the
         // publishing state/guard for reconciliation.

@@ -58,6 +58,10 @@ try {
   const projection = freezeReviewFixture(native.reviewRoot)
   const fixture = finalizeReviewFixture({ directory: native.reviewRoot, output, projection, store })
   const { revision, approval } = fixture
+  assert.equal(store.compatibilityForRevision(revision.id).reasonCode, 'SEALED_PUBLICATION')
+  // This section exercises the #668 historical path deliberately.
+  dbRun(dbPath, db => db.prepare(`UPDATE import_review_product_previews
+    SET sealed_publication_manifest_digest=NULL WHERE revision_id=?`).run(revision.id))
   const opsRoot = path.join(root, 'ops')
   const opsPaper = path.join(opsRoot, 'scripts/import-pipeline/papers', revision.paperId)
   cpSync(native.reviewRoot, opsPaper, { recursive: true })
@@ -276,6 +280,8 @@ try {
     rendererBuildId: 'historical-recovery-renderer' })
   const recoveryFixture = finalizeReviewFixture({ directory: native.reviewRoot,
     output: recoveryOutput, projection, store: recoveryStore })
+  dbRun(recoveryDb, db => db.prepare(`UPDATE import_review_product_previews
+    SET sealed_publication_manifest_digest=NULL WHERE revision_id=?`).run(recoveryFixture.revision.id))
   const recoveryBank = path.join(recoveryOutput, 'bank.sqlite')
   dbRun(recoveryBank, db => db.exec(readFileSync(path.join(repository, 'data/sql/schema.sql'), 'utf8')))
   const { createSinglePaperPromotionService: createReleasePromotion } = await module('singlePaperPromotion')
@@ -317,7 +323,8 @@ try {
 
   const apiOutput = path.join(root, 'api')
   const apiFixture = finalizeReviewFixture({ directory: native.reviewRoot, output: apiOutput, projection })
-  dbRun(apiFixture.dbPath, db => db.exec('DELETE FROM review_compatibility'))
+  dbRun(apiFixture.dbPath, db => db.exec(`DELETE FROM review_compatibility;
+    UPDATE import_review_product_previews SET sealed_publication_manifest_digest=NULL`))
   assert.equal(apiFixture.store.compatibilityForRevision(apiFixture.revision.id).result, 'pending')
   const bankPath = path.join(apiOutput, 'bank.sqlite')
   dbRun(bankPath, db => db.exec(readFileSync(path.join(repository, 'data/sql/schema.sql'), 'utf8')))

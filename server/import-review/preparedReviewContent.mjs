@@ -4,6 +4,7 @@ import { validatedPaperHeaderTitle } from '../../shared/paper-canonical/headerTi
 import { PUBLISHED_LISTENING_PLAYBACK_UI_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { loadCanonicalOnlyConsumers } from '../paper-canonical/publication.mjs'
 import { buildPaperImportOutputInventory } from '../paper-import/storage.mjs'
+import { rebindPaperNormalizedGroupsSidecar } from '../paper-import/normalization.mjs'
 import { buildNck1ReviewConsumption } from './revisionProjection.mjs'
 import { compareReviewPublicationContent } from './reviewPublicationContent.mjs'
 import { reviewConsumptionForTrustedBaseline } from './reviewComparisonProjection.mjs'
@@ -47,6 +48,7 @@ function assertPreparedReviewContentInternal({
   }
   const outputInventory = buildPaperImportOutputInventory({
     packageData, version, canonicalPublication: sealed, publishReport, validationReport,
+    sealedNormalizedGroupsSidecar: preparedFacts.sealedCompatibility?.normalizedGroupsSidecar,
   })
   const outputFiles = new Map(outputInventory.files.map(file => [file.path, file.bytes]))
   const consumerContractRefs = consumerContractRefsForAuthority(manifest.authority)
@@ -109,14 +111,23 @@ function assertPreparedReviewContentInternal({
   } })
   const expectedConsumers = Object.keys(consumerContractRefs).sort()
   if (!same(Object.keys(admission.consumers).sort(), expectedConsumers)) reject('UNSUPPORTED_PUBLICATION_MAPPING')
-  const compiled = buildNck1ReviewConsumption(preparedFacts.candidate, admission.compilation)
-  for (const [label, consumers] of [['admission', admission.consumers], ['writer', writtenConsumers],
-    ['compilation', { compilation: compiled }]]) {
+  const consumerSets = [['admission', admission.consumers], ['writer', writtenConsumers]]
+  if (preparedFacts.sealedCompatibility) {
+    const actual = outputInventory.artifacts.normalizedGroupsSidecar
+    const expected = rebindPaperNormalizedGroupsSidecar(
+      outputInventory.artifacts.paperAsset, preparedFacts.sealedCompatibility.normalizedGroupsSidecar)
+    if (!same(actual, expected)) reject('SUBJECT_CHANGED', ['/normalizedGroupsSidecar'])
+  } else {
+    const compiled = buildNck1ReviewConsumption(preparedFacts.candidate, admission.compilation)
+    consumerSets.push(['compilation', { compilation: compiled }])
+  }
+  for (const [label, consumers] of consumerSets) {
     for (const [consumerId, consumption] of Object.entries(consumers)) {
       const comparison = compareReviewPublicationContent({
         subject, packageData, consumption: decorate(consumption, consumerId),
         sealedManifest: manifest, sourceAsset: sealed.sourceAsset, version, approvedIdentity, approvedManifest,
         materializationDigest: preparedFacts.materializationDigest,
+        sealedCompatibility: preparedFacts.sealedCompatibility,
         // The subject stores commitments, not duplicate JSON. These current
         // source facts are usable only after the mapper matches each digest.
         sidecarContents: {
