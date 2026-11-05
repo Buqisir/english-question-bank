@@ -7,6 +7,109 @@ import { validateSourceReferences } from '../../server/paper-import/sourceRefere
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { resolveOcrContentVisual, semanticTableGrid } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
 import { replayConfirmedScoringTable } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
+import { buildOcrVisualTable, reclassifyOcrVisualTables } from '../../server/paper-import/ocrVisualTableReclassification.mjs'
+
+function visualTableFixture() {
+  const paperId = 'paper-test-visual-table', documentId = 'question-source-1', regionId = 'table-region'
+  const source = { kind: 'page_region', documentId, page: 3, region: { x: .1, y: .2, width: .8, height: .3 } }
+  const mediaId = `media:${paperId}:ocr-${digestJson([documentId, 3, regionId]).slice(7, 23)}`
+  const confirmation = { schemaVersion: 'nck1-ocr-source-confirmation-v3', confirmed: true,
+    documents: [{ documentId, pages: [{ page: 3, orderedItems: [{ itemId: 'one-item', text: 'A B C' }],
+      visualClassifications: [{ regionId, classification: 'content_media', itemIds: ['one-item'] }] }] }] }
+  const declaration = { regionId, confirmationDigest: digestJson(confirmation), basis: '原页第 3 页：左格跨两行',
+    rows: [{ header: false, cells: [[{ itemId: 'one-item', start: 0, end: 1 }], [{ itemId: 'one-item', start: 2, end: 3 }]] },
+      { header: false, cells: [[{ itemId: 'one-item', start: 4, end: 5 }]] }],
+    merges: [{ row: 0, column: 0, rowSpan: 2, columnSpan: 1 }] }
+  const figure = { kind: 'figure', blockId: 'table', source, mediaId }
+  const visual = { visualId: 'visual-table', page: 3, region: source.region, disposition: 'content_media', targetId: mediaId }
+  const expected = { groups: [{ groupId: 'reading-a', slotId: 'reading.a', family: 'reading', blocks: [figure] }],
+    sourceCoverage: { documentId, visuals: [visual] } }
+  const table = buildOcrVisualTable({ declaration, confirmation, source, blockId: 'table' })
+  const raw = structuredClone({ paperId, ...expected, media: [] })
+  raw.groups[0].blocks = [table]
+  Object.assign(raw.sourceCoverage.visuals[0], { disposition: 'semantic_table', targetId: 'table', ocrReclassification: declaration })
+  return { raw, expected, resolved: { contentMedia: [{ mediaId, source }] }, confirmation, declaration, source }
+}
+
+test('declared image table splits one sealed item, preserves merge geometry and historical inputs', () => {
+  const f = visualTableFixture(), historical = JSON.stringify(f.confirmation)
+  const replacements = reclassifyOcrVisualTables(f.raw, f.expected, f.resolved, f.confirmation)
+  assert.equal(replacements.size, 1)
+  assert.deepEqual(f.expected.groups, f.raw.groups)
+  assert.deepEqual(f.expected.sourceCoverage, f.raw.sourceCoverage)
+  assert.equal(f.raw.groups[0].blocks[0].rows[0].cells[0].rowSpan, 2)
+  assert.equal(f.raw.groups[0].blocks[0].rows[1].cells[0].columnStart, 1)
+  assert.equal(JSON.stringify(f.confirmation), historical)
+})
+
+test('only exact declared cells and source identity may replace the original figure', () => {
+  for (const change of [
+    f => { f.declaration.confirmationDigest = digestJson({}) },
+    f => { f.declaration.regionId = 'other-region' },
+    f => { f.declaration.basis = '' },
+    f => { f.declaration.rows[0].cells[0][0].itemId = 'foreign' },
+    f => { f.declaration.rows[0].cells[0][0].end = 3 },
+    f => { Object.assign(f.declaration.rows[1].cells[0][0], { start: 3, end: 4 }) },
+    f => { f.declaration.merges[0].rowSpan = 3 },
+    f => { f.raw.groups[0].blocks[0].rows[0].cells[0].content[0].text = 'invented' },
+    f => { f.raw.groups[0].slotId = 'reading.b' },
+    f => { f.raw.groups[0].blocks[0].source.page = 4 },
+    f => { f.raw.media.push({ mediaId: f.resolved.contentMedia[0].mediaId }) },
+  ]) {
+    const f = visualTableFixture(); change(f)
+    assert.throws(() => reclassifyOcrVisualTables(f.raw, f.expected, f.resolved, f.confirmation))
+  }
+  const f = visualTableFixture()
+  delete f.raw.sourceCoverage.visuals[0].ocrReclassification
+  assert.equal(reclassifyOcrVisualTables(f.raw, f.expected, f.resolved, f.confirmation).size, 0)
+  assert.equal(f.expected.groups[0].blocks[0].kind, 'figure', 'unmentioned regions keep the ordinary strict comparison')
+})
+
+for (const splitItems of [false, true]) test(`declared table cannot swap Adults/Children prices across ${splitItems ? 'ordered items' : 'one item'}`, () => {
+  const { declaration, confirmation, source } = visualTableFixture()
+  const page = confirmation.documents[0].pages[0]
+  const texts = ['Adults', '$10', 'Children', '$5']
+  page.orderedItems = splitItems ? texts.map((text, i) => ({ itemId: `price-${i}`, text }))
+    : [{ itemId: 'prices', text: texts.join(' ') }]
+  page.visualClassifications[0].itemIds = page.orderedItems.map(item => item.itemId)
+  declaration.confirmationDigest = digestJson(confirmation)
+  const fragment = i => ({ itemId: splitItems ? `price-${i}` : 'prices',
+    start: splitItems ? 0 : page.orderedItems[0].text.indexOf(texts[i]),
+    end: splitItems ? texts[i].length : page.orderedItems[0].text.indexOf(texts[i]) + texts[i].length })
+  declaration.rows = [{ header: false, cells: [[fragment(0), fragment(3)], [fragment(2), fragment(1)]] }]
+  declaration.merges = []
+  assert.throws(() => buildOcrVisualTable({ declaration, confirmation, source, blockId: 'prices' }), /source order/u)
+})
+
+test('a merged cell may read within its span without moving ordinary cells', () => {
+  const { declaration, confirmation, source } = visualTableFixture()
+  const [a, b] = declaration.rows[0].cells, [c] = declaration.rows[1].cells
+  declaration.rows = [{ header: false, cells: [a, c] }, { header: false, cells: [b] }]
+  declaration.merges = [{ row: 0, column: 1, rowSpan: 2, columnSpan: 1, readAtRow: 1 }]
+  const build = () => buildOcrVisualTable({ declaration, confirmation, source, blockId: 'table' })
+  const table = build()
+  assert.equal(table.rows[0].cells[1].rowSpan, 2)
+  assert.equal(table.rows[0].cells[1].content[0].text, 'C')
+  for (const readAtRow of [-1, 2, .5, null, '1']) {
+    declaration.merges[0].readAtRow = readAtRow
+    assert.throws(build, /readAtRow/u)
+  }
+  delete declaration.merges[0].readAtRow
+  assert.throws(build, /source order/u, 'default stays at the starting row')
+  Object.assign(declaration.merges[0], { rowSpan: 1, readAtRow: 1 })
+  assert.throws(build, /readAtRow/u, 'an ordinary cell cannot move to another row')
+})
+
+test('ordinary cells cannot reorder sealed text across rows', () => {
+  const { declaration, confirmation, source } = visualTableFixture()
+  confirmation.documents[0].pages[0].orderedItems[0].text = 'A B C D'
+  declaration.confirmationDigest = digestJson(confirmation)
+  const fragment = start => [{ itemId: 'one-item', start, end: start + 1 }]
+  declaration.rows = [0, 1].map((_, r) => ({ header: false,
+    cells: (r ? [6, 4] : [0, 2]).map(fragment) }))
+  declaration.merges = []
+  assert.throws(() => buildOcrVisualTable({ declaration, confirmation, source, blockId: 'table' }), /source order/u)
+})
 
 test('Jinan merged table keeps ID arrays, resolves spans and rejects invalid coverage', () => {
   const texts = [['Accessible Vehicles', 'Seating', 'Time Frame', 'Rate / hour'],
