@@ -51,6 +51,7 @@ import { resolveConfirmedNck1OcrEvidence, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V
 import { produceNck1MaterializationFromStructures } from '../paper-import/nck1DocxMaterializationProducer.mjs'
 import { resolveListeningSourceDecision } from '../paper-import/listeningSourceDecision.mjs'
 import { verifyCrossPageParagraphJoinEvidence } from '../paper-import/crossPageParagraphJoinEvidence.mjs'
+import { reclassifyOcrVisualTables } from '../paper-import/ocrVisualTableReclassification.mjs'
 import { rasterPdfRegion } from './pdfRegionRaster.mjs'
 import { applySpellingReview, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
 import { applyListeningInstructionCorrection, LISTENING_INSTRUCTION_CORRECTION_FILE } from '../paper-import/listeningInstructionCorrection.mjs'
@@ -589,6 +590,9 @@ function validateBundle(materialization, input, options) {
   const pendingImageLabelMeasurements = []
   const issues = validateNck1SourceMaterialization(materialization, options)
     .map((item) => adapterIssue(item.code, item.message, item.path))
+  if (Array.isArray(materialization?.sourceCoverage?.visuals)
+    && materialization.sourceCoverage.visuals.some(v => v && Object.hasOwn(v, 'ocrReclassification'))
+    && !input.ocrSourceBytes) issues.push(adapterIssue('MATERIALIZATION_OCR_EVIDENCE_REQUIRED', 'OCR visual reclassification requires sealed OCR source bytes'))
   const documentsById = new Map(input.documents.map((entry) => [entry.documentId, entry]))
   const mediaById = new Map(input.media.map((entry) => [entry.mediaId, entry]))
   const hasImageLabelMeasurements = (Array.isArray(materialization?.groups) ? materialization.groups : [])
@@ -2533,6 +2537,10 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
     if (![NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3].includes(confirmation.schemaVersion)) {
       throw new Error('OCR source evidence requires version 2 or 3 transcription closure')
     }
+    if (raw.sourceCoverage.visuals.some(v => Object.hasOwn(v, 'ocrReclassification'))
+      && confirmation.schemaVersion !== NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3) {
+      throw new Error('OCR visual reclassification requires a sealed v3 content visual')
+    }
     const resolved = resolveConfirmedNck1OcrEvidence({
       paperId: raw.paperId,
       documents: raw.documents.map(document => ({ ...document, bytes: documentsById.get(document.documentId).bytes })),
@@ -2585,6 +2593,9 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
         ? block.columns.flatMap(column => flatten(column.blocks)) : [block])
       const blocks = raw.groups.flatMap(group => flatten(group.blocks))
       const replacement = replaceOcrStructuredAnswerRegions(raw, expected, resolved, confirmation, evidence)
+      for (const [id, parent] of reclassifyOcrVisualTables(raw, expected, resolved, confirmation)) {
+        replacement.replacements.set(id, parent)
+      }
       restoredParagraphs = replacement.paragraphs
       const expectedGroups = expected.groups
       const hasTrimCandidate = resolved.contentMedia.some(parent => raw.media.some(media =>

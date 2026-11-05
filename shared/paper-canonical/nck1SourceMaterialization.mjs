@@ -1063,6 +1063,7 @@ function validateSourceCoverage(sourceCoverage, groups, media, documents, issues
     const visualKeys = visual?.region === undefined
       ? ['visualId', 'page', 'disposition', 'targetId']
       : ['visualId', 'page', 'region', 'disposition', 'targetId']
+    if (Object.hasOwn(visual || {}, 'ocrReclassification')) visualKeys.push('ocrReclassification')
     if (
       !isRecordValue(visual)
       || !exactKeys(visual, visualKeys)
@@ -1073,6 +1074,8 @@ function validateSourceCoverage(sourceCoverage, groups, media, documents, issues
       || visual.page > (document?.pageCount || 0)
       || !['semantic_table', 'content_media', 'furniture',
         ...(allowStructuredAnswerRegion ? ['structured_answer_region'] : [])].includes(visual.disposition)
+      || (Object.hasOwn(visual, 'ocrReclassification')
+        && (visual.disposition !== 'semantic_table' || !isRecordValue(visual.ocrReclassification)))
       || (visual.disposition === 'furniture'
         ? visual.targetId !== null
         : !nonEmptyString(visual.targetId))

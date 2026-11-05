@@ -6,6 +6,45 @@
 适用版本的manifest闭包。源角色/答案正确与实际三面排版正确是两类证据，
 schema/digest通过不能替代源对照，合成HTML测试不能替代真实产物验收。
 
+## 退回返修：已确认图片改原生表格
+
+此声明用于既有 feedback-fix 返修事务。修改工作 Materialization，
+封存 OCR evidence、confirmation 和 Agent receipt 原样保留，无需重新
+`plan-ocr-generation`。
+
+在对应 `sourceCoverage.visuals[]` 上添加 `ocrReclassification`：
+
+```js
+{
+  regionId: "question-source-1:page-3:figure-1",
+  confirmationDigest: digestJson(confirmation),
+  basis: "原 PDF 第 3 页阅读 A：第 2、4 行前两格各纵向跨 2 行",
+  rows: [{ header: true, cells: [
+    [{ itemId: "question-source-1:item-66", start: 0, end: 19 }],
+    // 其余单元格及数据行按原页完整填写
+  ] }],
+  merges: [1, 3].flatMap(row => [0, 1].map(column =>
+    ({ row, column, rowSpan: 2, columnSpan: 1 })))
+}
+```
+
+`rows` 和 `merges` 复用现有 semantic_table 网格；`cells` 改为原确认文本的
+UTF-16 `[start, end)` 片段数组。同一个 OCR item 可拆到多格；每个非空白字符
+必须保留且只用一次，多片段之间用 LF 连接。不得添加文本、改答案或把其他区域
+文字搬入表格。`basis` 写明原页、行列和合并依据，不能只写“通过”。
+
+用 `server/paper-import/ocrVisualTableReclassification.mjs` 的
+`buildOcrVisualTable({ declaration, confirmation, source, blockId })` 生成表格，
+替换该 Reading 组原 figure；`source` 取 evidence 中该 `regionId` 的完整封存区域
+（旧图片若做过顶边裁切，不沿用裁切边界），`blockId` 可保留原块 ID。
+该 visual 保留原 `visualId`，把 `disposition` 设为 `semantic_table`、
+`targetId` 设为表格 `blockId`、`region` 设为封存区域；从工作 `media` 移除旧图片。
+其余 visual、组归属和相邻锚点必须原样保留。声明随新 Candidate 的
+Materialization digest 封存，旧 revision 不变。修改后运行既有
+`fast-import.mjs finish <paperId> --feedback-fix <issueId> --redo-from spelling`；
+若已进入该事务，继续 `finish` 即可。完成 Screen/PDF 检查后，使用既有
+`submit --resolves <issueId>` 送新 revision 给 Owner 审阅。
+
 ## Current isolated rehearsal agreement
 
 The Owner's 2026-09-20 agreement is recorded in
