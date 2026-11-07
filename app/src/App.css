@@ -3446,11 +3446,17 @@ button:disabled {
   outline-offset: 2px;
 }
 
+/* 没输入时不亮：灰底灰箭头，有字才变成实色（参照 Factory / ChatGPT 的发送键）。 */
 .concierge-intent-submit:disabled {
-  background: var(--action);
-  color: #FFFFFF;
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text-faint);
   opacity: 1;
   cursor: not-allowed;
+}
+
+.concierge-intent-submit.is-loading:disabled {
+  background: var(--action);
+  color: #FFFFFF;
 }
 
 /* home-editorial round 2 — rides inline in .concierge-command-bar now
