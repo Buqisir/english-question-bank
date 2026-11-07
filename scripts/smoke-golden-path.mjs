@@ -154,7 +154,7 @@ async function waitForConciergeDeskReady(page) {
 
 async function searchAndOpenGroupCard(page, searchText, groupId) {
   await page.getByPlaceholder(/找一道|正在连接|比如/).fill(searchText)
-  await page.getByRole('button', { name: '搜索' }).click()
+  await page.getByRole('button', { name: '搜索', exact: true }).click()
   // The two smoke fixture groups share one source/paper, so a matching search
   // always returns exactly one paper row, which useConciergeDesk auto-expands
   // (no click needed — clicking "展开题组" here would race the auto-expand
@@ -198,7 +198,7 @@ async function verifySearchResetRaces(page) {
     routed.catch(() => {})
     try {
       await input.fill(query)
-      await page.getByRole('button', { name: '搜索' }).click()
+      await page.getByRole('button', { name: '搜索', exact: true }).click()
       const route = await routed
       await page.locator('.concierge-loading').waitFor({ timeout: 10_000 })
       return route
