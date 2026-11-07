@@ -3406,10 +3406,10 @@ button:disabled {
   height: 28px;
   align-self: center;
   border: none;
-  border-radius: 50%;
+  border-radius: 8px;
   padding: 0;
-  background: var(--action);
-  color: #FFFFFF;
+  background: transparent;
+  color: var(--action);
   font-size: 13px;
   line-height: 1;
   font-family: inherit;
@@ -3430,7 +3430,7 @@ button:disabled {
 }
 
 .concierge-intent-submit:hover:not(:disabled) {
-  background: var(--action-hover);
+  background: var(--eqb-color-desk);
 }
 
 /* emil-processing: press feedback — 一天按几十次的搜索提交应确认"听到了". */
@@ -3443,17 +3443,19 @@ button:disabled {
   outline-offset: 2px;
 }
 
-/* 没输入时不亮：灰底灰箭头，有字才变成实色（参照 Factory / ChatGPT 的发送键）。 */
+/* 发送键是一个回车符号，不再是实心圆：没输入时是灰色回车，打了字整个回车
+   变成强调色（参照 Factory / ChatGPT：没东西可发就不亮）。 */
 .concierge-intent-submit:disabled {
-  background: var(--eqb-color-desk);
+  background: transparent;
   color: var(--eqb-color-text-faint);
   opacity: 1;
   cursor: not-allowed;
 }
 
 .concierge-intent-submit.is-loading:disabled {
-  background: var(--action);
-  color: #FFFFFF;
+  width: auto;
+  padding: 0 6px;
+  color: var(--eqb-color-text-muted);
 }
 
 /* home-editorial round 2 — rides inline in .concierge-command-bar now

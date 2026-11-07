@@ -16,7 +16,7 @@
  */
 
 import { useEffect, useId, useMemo, useState, type FormEvent, type ReactNode } from 'react'
-import { ArrowRight, Sliders, X } from '../icons'
+import { CornerDownLeft, Sliders, X } from '../icons'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
@@ -596,7 +596,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 aria-label="搜索"
                 title="搜索"
               >
-                {state.kind === 'loading' || dataLoading ? '搜索中…' : <ArrowRight size={14} aria-hidden="true" />}
+                {state.kind === 'loading' || dataLoading ? '搜索中…' : <CornerDownLeft size={18} aria-hidden="true" />}
               </button>
             </form>
             {isHomeScreen && onEnterBrowse && (
