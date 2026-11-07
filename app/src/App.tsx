@@ -1170,7 +1170,7 @@ function App() {
       >
         <BoardList size={16} />
         <span>
-          草稿卷 · {currentDraftGroupCount} 题组
+          草稿卷（{currentDraftGroupCount} 组）
         </span>
       </button>
       )}

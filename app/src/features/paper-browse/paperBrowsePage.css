@@ -2286,3 +2286,8 @@
 @media print {
   .ps-text-trail { display: none; }
 }
+
+.paper-browse-error-back {
+  margin-top: 8px;
+  border: 1px solid var(--eqb-color-border);
+}

@@ -798,7 +798,7 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
     !/chipTick|prevDraftCountRef|\.animate\(/.test(app) &&
       !/basket-count-in-(?:up|down)/.test(css), '')
   assert('basket chip renders the current count directly',
-    /草稿卷 · \{currentDraftGroupCount\} 题组/.test(app), '')
+    /草稿卷（\{currentDraftGroupCount\} 组）/.test(app), '')
 }
 
 // ------------------------------------------------------------------ Test 15

@@ -1522,17 +1522,17 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
         {programLoadState === 'error' ? (
           <section className="vocabulary-run-setup" aria-labelledby="vocabulary-program-error-title">
             <BookMarked size={32} aria-hidden="true" />
-            <h2 id="vocabulary-program-error-title">完整词库没有加载成功</h2>
-            <p>这次不会退回 30 词校准样本继续判断，避免把正式进度记错。重新加载完整词库后再开始。</p>
-            <button className="primary-button" type="button" onClick={() => window.location.reload()}>重新加载完整词库</button>
+            <h2 id="vocabulary-program-error-title">词库没有加载出来</h2>
+            <p>为了不把进度记错，要等词库加载完才能开始。</p>
+            <button className="primary-button" type="button" onClick={() => window.location.reload()}>重新加载</button>
             {requestError && <p className="vocabulary-request-error" role="alert">{requestError}</p>}
           </section>
         ) : studentsState === 'error' ? (
           <section className="vocabulary-run-setup" aria-labelledby="vocabulary-student-error-title">
             <BookMarked size={32} aria-hidden="true" />
-            <h2 id="vocabulary-student-error-title">学生档案没有加载成功</h2>
-            <p>不会把不同学生的进度混在一起。重新加载档案后再继续过词。</p>
-            <button className="primary-button" type="button" onClick={() => window.location.reload()}>重新加载学生档案</button>
+            <h2 id="vocabulary-student-error-title">学生档案没有加载出来</h2>
+            <p>为了不把不同学生的进度混在一起，要等档案加载完才能继续。</p>
+            <button className="primary-button" type="button" onClick={() => window.location.reload()}>重新加载</button>
             {requestError && <p className="vocabulary-request-error" role="alert">{requestError}</p>}
           </section>
         ) : programLoadState === 'loading' || studentsState === 'loading' || runState === 'loading' ? (

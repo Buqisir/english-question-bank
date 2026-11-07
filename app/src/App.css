@@ -3695,6 +3695,12 @@ button:disabled {
   position: relative;
 }
 
+/* Rows without a leading icon (e.g. 今天翻到) must not leave their text in
+   the 16px icon track. */
+.home-row--no-icon {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
 .home-row:focus-visible {
   background: var(--desk-hover);
 }
@@ -3727,6 +3733,7 @@ button:disabled {
 
 .home-row-title-line {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   gap: 8px;
   min-width: 0;
@@ -3753,9 +3760,6 @@ button:disabled {
   font-size: 13px;
   line-height: 1.5;
   color: var(--desk-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .home-row-aside {
@@ -5207,9 +5211,8 @@ button:disabled {
   font-weight: 500;
   color: var(--eqb-color-text);
   letter-spacing: 0.02em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* Paper names wrap instead of truncating: a teacher must read the whole name. */
+  overflow-wrap: anywhere;
   min-width: 0;
 }
 
@@ -5644,3 +5647,17 @@ button:disabled {
 /* Ghost-style 查看文本 / 解析 DOCX button. */
 
 /* Quiet icon button — only shows danger color on hover. */
+
+/* Phones: the fixed draft-paper chip must not cover the last list row,
+   and filter chips get a finger-sized target. */
+@media (max-width: 640px) {
+  .app-shell:has(.basket-chip) {
+    padding-bottom: 72px;
+  }
+}
+
+@media (pointer: coarse) {
+  .concierge-browse-chip {
+    height: 36px;
+  }
+}

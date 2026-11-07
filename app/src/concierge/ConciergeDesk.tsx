@@ -593,10 +593,10 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 type="submit"
                 className={`concierge-intent-submit${state.kind === 'loading' ? ' is-loading' : ''}`}
                 disabled={submitDisabled}
-                aria-label="开始取题"
-                title="开始取题"
+                aria-label="搜索"
+                title="搜索"
               >
-                {state.kind === 'loading' || dataLoading ? '取题中…' : <ArrowRight size={14} aria-hidden="true" />}
+                {state.kind === 'loading' || dataLoading ? '搜索中…' : <ArrowRight size={14} aria-hidden="true" />}
               </button>
             </form>
             {isHomeScreen && onEnterBrowse && (
@@ -607,7 +607,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 disabled={dataLoading}
               >
                 <Sliders size={16} aria-hidden="true" />
-                浏览题库与筛选 · {catalogPaperCount} 套卷
+                浏览全部 {catalogPaperCount} 套卷
               </button>
             )}
             {isBrowseScreen && !dataLoading && state.kind === 'empty' && (
@@ -847,9 +847,9 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
 
       {state.kind === 'error' && (
         <div className="concierge-error" role="alert">
-          <span>取题台暂时没连上，原来的描述已经保留。</span>
+          <span>搜索暂时连不上，你输入的内容还在。</span>
           <button type="button" onClick={() => void actions.submit(state.query)}>
-            重新取题
+            重试
           </button>
         </div>
       )}
