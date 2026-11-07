@@ -1169,6 +1169,10 @@ function App() {
         disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
       >
         <BoardList size={16} />
+        {currentDraftGroupCount > 0 && (
+          // key 随组数变：每加一组就重挂一次，小圆点跳一下，告诉老师"落袋了"。
+          <span key={currentDraftGroupCount} className="basket-chip-dot" aria-hidden="true" />
+        )}
         <span>
           草稿卷（{currentDraftGroupCount} 组）
         </span>

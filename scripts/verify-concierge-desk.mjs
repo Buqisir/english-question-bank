@@ -717,8 +717,8 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone; STARTER_CHIPS 
   assert('browse chip text uses muted ink token', /color:\s*var\(--eqb-color-text-muted\)/i.test(chipRule), '')
 
   const chipSelectedRule = css.match(/\.concierge-browse-chip\[aria-pressed='true'\]\s*\{[^}]*\}/)?.[0] || ''
-  assert('selected chip is action-filled (墨做动作)', /background:\s*var\(--action\)/i.test(chipSelectedRule), chipSelectedRule)
-  assert('selected chip text is white', /color:\s*#fff/i.test(chipSelectedRule), chipSelectedRule)
+  assert('selected chip is grey-filled, not accent (全站灰阶)', /background:\s*var\(--eqb-color-desk\)/i.test(chipSelectedRule), chipSelectedRule)
+  assert('selected chip text is body ink', /color:\s*var\(--eqb-color-text\)/i.test(chipSelectedRule), chipSelectedRule)
   assert('selected chip is NOT oxblood #B8323C', !/#B8323C/i.test(chipSelectedRule), chipSelectedRule)
 
   // Intent bar resting + focus.

@@ -16,6 +16,14 @@
   --eqb-color-text-faint: #94a4ac;
   --eqb-color-action: #29424d;
   --eqb-color-action-hover: #3a5561;
+  /* 点睛色（2026-11-07 Owner 定，BRAND.md §1.5）：取自獭獭的雾薄荷色阶。
+     全站灰阶，强调色每页最多一处，只给"现在最该点的那一下"。
+     accent-fill = 雾薄荷，獭獭本色，给实心主按钮（配墨字 7.9）；
+     accent = 同色相更纯更深的纯薄荷，给回车键、草稿卷小圆点这类细线和小点（对白 3.8）。 */
+  --eqb-color-accent: #11957a;
+  --eqb-color-accent-fill: #72bfa4;
+  --eqb-color-accent-fill-hover: #63b497;
+  --eqb-color-accent-fill-ink: #191d18;
   --eqb-color-identity: #2c6e56;
   --eqb-color-primary: #2c6e56;
   --eqb-color-primary-text: #1e4a3a;

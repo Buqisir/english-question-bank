@@ -208,9 +208,9 @@
 
 .draft-export-menu-trigger {
   align-items: center;
-  background: var(--action);
+  background: var(--eqb-color-accent-fill);
   border-radius: 8px;
-  color: #ffffff;
+  color: var(--eqb-color-accent-fill-ink);
   display: inline-flex;
   gap: 6px;
   min-height: 32px;
@@ -221,7 +221,7 @@
 }
 
 .draft-export-menu-trigger:hover:not(:disabled) {
-  background: var(--action-hover);
+  background: var(--eqb-color-accent-fill-hover);
 }
 
 /* emil-processing: press feedback for the export trigger. */
