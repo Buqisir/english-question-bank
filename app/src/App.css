@@ -3368,14 +3368,11 @@ button:disabled {
   }
 }
 
+/* 聚焦时不再套一圈深色框：输入框本身就是页面主角，闪动的光标已经说明
+   "可以打字了"。边线只比平时深一档，像 Factory / ChatGPT 的输入框。 */
 .concierge-intent-bar:focus-within {
-  border-color: var(--desk-muted);
+  border-color: var(--eqb-color-border-strong);
   outline: none;
-}
-
-.concierge-intent-bar:has(:focus-visible) {
-  outline: 2px solid var(--desk-muted);
-  outline-offset: 2px;
 }
 
 .concierge-intent-input {
