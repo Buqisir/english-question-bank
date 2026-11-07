@@ -95,6 +95,11 @@
   font-variant-numeric: tabular-nums;
 }
 
+.peek-unavailable-note {
+  font-size: 13px;
+  color: var(--muted);
+}
+
 .peek-actions {
   display: flex;
   flex-wrap: wrap;
@@ -187,7 +192,8 @@ a.peek-btn:focus-visible {
   overflow: visible;
 }
 
-.peek-paper:not(.peek-paper--expanded) .peek-paper-clip::after {
+/* Fade only real, clipped paper; a short loading/error line must stay readable. */
+.peek-paper--ready:not(.peek-paper--expanded) .peek-paper-clip::after {
   content: '';
   position: absolute;
   left: 0;
@@ -301,6 +307,10 @@ a.peek-btn:focus-visible {
   .peek-actions {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .peek-unavailable-note {
+    grid-column: 1 / -1;
   }
 
   .peek-actions-menu {

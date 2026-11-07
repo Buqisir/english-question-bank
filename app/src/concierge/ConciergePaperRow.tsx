@@ -360,7 +360,7 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
         ) : variant === 'feed' ? (
           <span className="concierge-paper-hitcount">{paper.hitCount} 篇章</span>
         ) : null}
-        {!rowPaperId && <span className="concierge-paper-hitcount">完整卷面尚未就绪</span>}
+        {!rowPaperId && <span className="concierge-paper-hitcount">整卷未上线</span>}
         {rowPaperId && (
           <button
             type="button"

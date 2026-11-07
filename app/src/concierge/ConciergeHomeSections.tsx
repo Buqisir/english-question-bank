@@ -62,7 +62,7 @@ type HomeRowProps = {
 function HomeRow({ icon: Icon, title, meta, detail, aside, action, onOpen, ariaLabel }: HomeRowProps) {
   return (
     <li>
-      <button type="button" className="home-row" onClick={onOpen} aria-label={ariaLabel}>
+      <button type="button" className={Icon ? 'home-row' : 'home-row home-row--no-icon'} onClick={onOpen} aria-label={ariaLabel}>
         {Icon && <span className="home-row-icon" aria-hidden="true"><Icon size={16} /></span>}
         <span className="home-row-text">
           <span className="home-row-title-line">

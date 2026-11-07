@@ -193,6 +193,9 @@ export const generic = {
   // Owner 同日逐枚确认：与返回镜像配对。
   'arrow-right': { zh: '前往', lucide: 'arrow-right', line: `<path d="M4 12h16"/><path d="M14.5 6.5 20 12 14.5 17.5"/>` },
   // Owner 同日逐枚确认上下两枚：两翼宽度 12 → 11，箭尖和竖杆不动，互为镜像。
+  // 2026-11-07 Owner 提出：搜索框发送键改成回车。翼长与单向箭头同为 5.5、45°；
+  // 竖杆 + 圆角转弯取 lucide corner-down-left 的结构，整体上下居中（y 4–20）。待 Owner 逐枚确认。
+  'corner-down-left': { zh: '回车', lucide: 'corner-down-left', line: `<path d="M20 4V10.5a4 4 0 0 1-4 4H4"/><path d="M9.5 9 4 14.5 9.5 20"/>` },
   'arrow-up': { zh: '上移', lucide: 'arrow-up', line: `<path d="M12 20V4"/><path d="M6.5 9.5 12 4 17.5 9.5"/>` },
   'arrow-down': { zh: '下移', lucide: 'arrow-down', line: `<path d="M12 4v16"/><path d="M6.5 14.5 12 20 17.5 14.5"/>` },
   // Owner 2026-09-30 选定 B：两端箭翼横纵各收 0.5，横杆、箭尖与 45° 方向保持。

@@ -189,7 +189,7 @@ console.log('\nTest 6: 4-paper home additions cap + full catalog entry')
   // size (see Test 24), so the old slice assertion is retired.
   // 首页是归来 (2026-09-15): the catalog count folds into the single browse
   // entry under the search; no second 「查看全部」 action beside the heading.
-  assert('browse entry carries the catalog count', /浏览题库与筛选\s*·\s*\{catalogPaperCount\}\s*套卷/.test(desk), '')
+  assert('browse entry carries the catalog count', /浏览全部\s*\{catalogPaperCount\}\s*套卷/.test(desk), '')
   assert('no duplicate see-all action on home', !/查看全部\s*\{catalogPaperCount\}/.test(desk), '')
   assert('home recent feed is capped at DEFAULT_FEED_PAGE_SIZE via buildRecentFeed', /buildRecentFeed\(questionGroups,\s*DEFAULT_FEED_PAGE_SIZE\)/.test(desk), '')
 }
@@ -479,7 +479,7 @@ console.log('\nTest 28: home-blank — pure-blank stage markup: no feed/chip DOM
   // of its sections and mounts only when a ready paper exists.
   assert('home desk has a named region', /role="region" aria-label=\{isBrowseScreen \? '题库浏览' : '备课桌'\}/.test(desk), '')
   assert('最近上新 section is gated and labelled without redundant sorting copy', /homeRecentFeed\.length > 0 && \(\s*<section className="home-section" aria-label="最近上新">\s*<h2 className="concierge-feed-label home-section-label">最近上新<\/h2>/.test(desk) && !/按入库时间排列/.test(desk), '')
-  assert('home has a dedicated full-catalog browse/filter entry before browse chips', /isHomeScreen && onEnterBrowse[\s\S]{0,200}className="concierge-browse-entry"[\s\S]{0,180}onClick=\{handleEnterBrowse\}[\s\S]{0,220}浏览题库与筛选/.test(desk), '')
+  assert('home has a dedicated full-catalog browse/filter entry before browse chips', /isHomeScreen && onEnterBrowse[\s\S]{0,200}className="concierge-browse-entry"[\s\S]{0,180}onClick=\{handleEnterBrowse\}[\s\S]{0,220}浏览全部/.test(desk), '')
   assert('home sections: 接着做 / 最近上新 / 今天翻到 render from ConciergeHomeSections', /<HomeContinueSection[\s\S]{0,2400}<HomeDailyPassage/.test(desk), '')
   assert('list surface mounts for home feed or search', /\{\(showListSurface \|\| showFeed\) && \(\s*<div className="concierge-list-surface">/.test(desk), '')
   assert('browse chips live in concierge-browse-chips', /concierge-browse-chips/.test(desk), '')

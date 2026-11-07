@@ -3368,14 +3368,11 @@ button:disabled {
   }
 }
 
+/* 聚焦时不再套一圈深色框：输入框本身就是页面主角，闪动的光标已经说明
+   "可以打字了"。边线只比平时深一档，像 Factory / ChatGPT 的输入框。 */
 .concierge-intent-bar:focus-within {
-  border-color: var(--desk-muted);
+  border-color: var(--eqb-color-border-strong);
   outline: none;
-}
-
-.concierge-intent-bar:has(:focus-visible) {
-  outline: 2px solid var(--desk-muted);
-  outline-offset: 2px;
 }
 
 .concierge-intent-input {
@@ -3409,10 +3406,10 @@ button:disabled {
   height: 28px;
   align-self: center;
   border: none;
-  border-radius: 50%;
+  border-radius: 8px;
   padding: 0;
-  background: var(--action);
-  color: #FFFFFF;
+  background: transparent;
+  color: var(--action);
   font-size: 13px;
   line-height: 1;
   font-family: inherit;
@@ -3433,7 +3430,7 @@ button:disabled {
 }
 
 .concierge-intent-submit:hover:not(:disabled) {
-  background: var(--action-hover);
+  background: var(--eqb-color-desk);
 }
 
 /* emil-processing: press feedback — 一天按几十次的搜索提交应确认"听到了". */
@@ -3446,11 +3443,19 @@ button:disabled {
   outline-offset: 2px;
 }
 
+/* 发送键是一个回车符号，不再是实心圆：没输入时是灰色回车，打了字整个回车
+   变成强调色（参照 Factory / ChatGPT：没东西可发就不亮）。 */
 .concierge-intent-submit:disabled {
-  background: var(--action);
-  color: #FFFFFF;
+  background: transparent;
+  color: var(--eqb-color-text-faint);
   opacity: 1;
   cursor: not-allowed;
+}
+
+.concierge-intent-submit.is-loading:disabled {
+  width: auto;
+  padding: 0 6px;
+  color: var(--eqb-color-text-muted);
 }
 
 /* home-editorial round 2 — rides inline in .concierge-command-bar now
@@ -3695,6 +3700,12 @@ button:disabled {
   position: relative;
 }
 
+/* Rows without a leading icon (e.g. 今天翻到) must not leave their text in
+   the 16px icon track. */
+.home-row--no-icon {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
 .home-row:focus-visible {
   background: var(--desk-hover);
 }
@@ -3727,6 +3738,7 @@ button:disabled {
 
 .home-row-title-line {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
   gap: 8px;
   min-width: 0;
@@ -3753,9 +3765,6 @@ button:disabled {
   font-size: 13px;
   line-height: 1.5;
   color: var(--desk-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .home-row-aside {
@@ -5207,9 +5216,8 @@ button:disabled {
   font-weight: 500;
   color: var(--eqb-color-text);
   letter-spacing: 0.02em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* Paper names wrap instead of truncating: a teacher must read the whole name. */
+  overflow-wrap: anywhere;
   min-width: 0;
 }
 
@@ -5644,3 +5652,17 @@ button:disabled {
 /* Ghost-style 查看文本 / 解析 DOCX button. */
 
 /* Quiet icon button — only shows danger color on hover. */
+
+/* Phones: the fixed draft-paper chip must not cover the last list row,
+   and filter chips get a finger-sized target. */
+@media (max-width: 640px) {
+  .app-shell:has(.basket-chip) {
+    padding-bottom: 72px;
+  }
+}
+
+@media (pointer: coarse) {
+  .concierge-browse-chip {
+    height: 36px;
+  }
+}

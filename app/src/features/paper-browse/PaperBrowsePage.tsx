@@ -2448,7 +2448,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     onAddGroupsToBasket(cards)
     setSimilarSelectedGroupIds(new Set())
     if (similarToastTimeoutRef.current != null) window.clearTimeout(similarToastTimeoutRef.current)
-    setSimilarToast(`已加入草稿卷 · ${cards.length} 篇（含各自题目）`)
+    setSimilarToast(`已把 ${cards.length} 篇加入草稿卷，题目一并带上`)
     similarToastTimeoutRef.current = window.setTimeout(() => setSimilarToast(null), 2200)
   }
 
@@ -4096,7 +4096,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />
         <div className="paper-browse-error" role="main">
           <h2>没找到这份卷面</h2>
-          <p>{error || '卷面数据为空，回到找题页重新打开吧。'}</p>
+          {/* Lead with plain copy; keep a non-Chinese server diagnostic as a small
+              secondary line so it can still be reported (and fail-closed checks can read it). */}
+          <p>{error && /[\u4e00-\u9fff]/.test(error) ? error : '这份卷可能还没上线或已被移除，回到找题页换一份看看。'}</p>
+          {error && !/[\u4e00-\u9fff]/.test(error) && <p className="paper-browse-error-detail">错误信息：{error}</p>}
+          <button type="button" className="ghost-button paper-browse-error-back" onClick={onBackToWorkbench}>返回找题</button>
         </div>
       </div>
     )
@@ -4273,7 +4277,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
         >
           <BoardList size={16} />
-          <span>草稿卷 · {currentDraftGroupCount} 题组</span>
+          <span>草稿卷（{currentDraftGroupCount} 组）</span>
         </button>
       )}
     </div>

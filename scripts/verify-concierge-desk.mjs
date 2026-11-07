@@ -725,9 +725,8 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone; STARTER_CHIPS 
   const barRule = css.match(/\.concierge-intent-bar\s*\{[^}]*\}/)?.[0] || ''
   assert('intent-bar rest border uses desk palette', /border:\s*1px solid var\(--desk-border\)/.test(barRule), '')
   const focusRule = css.match(/\.concierge-intent-bar:focus-within\s*\{[^}]*\}/)?.[0] || ''
-  assert('focus border uses muted desk ink', /border-color:\s*var\(--desk-muted\)/.test(focusRule), '')
-  const keyboardFocusRule = css.match(/\.concierge-intent-bar:has\(:focus-visible\)\s*\{[^}]*\}/)?.[0] || ''
-  assert('keyboard focus retains an explicit outline', /outline:\s*2px solid var\(--desk-muted\)/.test(keyboardFocusRule), '')
+  assert('focus border only steps up one shade (no accent frame)', /border-color:\s*var\(--eqb-color-border-strong\)/.test(focusRule), focusRule)
+  assert('focus does not draw an outer ring around the intent bar', !/\.concierge-intent-bar:has\(:focus-visible\)/.test(css), '')
 }
 
 // ------------------------------------------------------------------ Test 13
@@ -798,7 +797,7 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
     !/chipTick|prevDraftCountRef|\.animate\(/.test(app) &&
       !/basket-count-in-(?:up|down)/.test(css), '')
   assert('basket chip renders the current count directly',
-    /草稿卷 · \{currentDraftGroupCount\} 题组/.test(app), '')
+    /草稿卷（\{currentDraftGroupCount\} 组）/.test(app), '')
 }
 
 // ------------------------------------------------------------------ Test 15

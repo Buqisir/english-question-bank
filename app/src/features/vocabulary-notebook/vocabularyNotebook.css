@@ -14,6 +14,33 @@
 }
 
 .notebook-empty { color: var(--desk-muted, #6b6e68); }
+/* Same empty-state shape as 个人空间, so every empty page reads alike. */
+.notebook-empty-state {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  min-height: 250px;
+  align-content: center;
+  padding: 36px 20px;
+  text-align: center;
+  background: var(--desk-surface);
+  border: 1px solid var(--eqb-color-border-subtle);
+  border-radius: 12px;
+}
+.notebook-empty-state .notebook-empty { margin: 0; }
+.notebook-empty-cta {
+  min-height: 36px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--action);
+  color: var(--desk-raised);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.notebook-empty-cta:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
 .notebook-main .home-row:hover { background: var(--desk-hover, #e9ece6); }
 .notebook-main .home-row:hover .home-row-icon { color: var(--desk-ink, #1f1f1d); }
 
