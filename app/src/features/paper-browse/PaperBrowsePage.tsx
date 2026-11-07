@@ -4096,8 +4096,10 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />
         <div className="paper-browse-error" role="main">
           <h2>没找到这份卷面</h2>
-          {/* Server diagnostics (e.g. PUBLICATION_NOT_FOUND) are for the console, not for teachers. */}
+          {/* Lead with plain copy; keep a non-Chinese server diagnostic as a small
+              secondary line so it can still be reported (and fail-closed checks can read it). */}
           <p>{error && /[\u4e00-\u9fff]/.test(error) ? error : '这份卷可能还没上线或已被移除，回到找题页换一份看看。'}</p>
+          {error && !/[\u4e00-\u9fff]/.test(error) && <p className="paper-browse-error-detail">错误信息：{error}</p>}
           <button type="button" className="ghost-button paper-browse-error-back" onClick={onBackToWorkbench}>返回找题</button>
         </div>
       </div>
