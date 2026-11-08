@@ -312,7 +312,8 @@
   padding: 0 8px;
   border-radius: 8px;
   font-size: 13px;
-  color: var(--eqb-color-text-muted, #6B6E68);
+  /* 淡墨不是次要灰：次要灰和雾海底同一种蓝灰，导航字和图标会"朦"（Owner 2026-11-08 选第二档）。 */
+  color: var(--eqb-color-text-secondary, #3F525B);
 }
 
 .topbar .ghost-button {
@@ -4103,7 +4104,7 @@ button:disabled {
   min-height: 36px;
   height: 36px;
   font-size: 14px;
-  color: var(--desk-muted);
+  color: var(--eqb-color-text-secondary);
 }
 
 .app-shell:has(.concierge-desk) .topbar .ghost-button[data-fluid-hover-active]:not(:disabled),
