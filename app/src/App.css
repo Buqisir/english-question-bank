@@ -5679,7 +5679,7 @@ button:disabled {
   border-radius: 50%;
   background: var(--eqb-color-accent);
   flex: none;
-  animation: basket-chip-dot-pop 320ms var(--ease-out, ease-out);
+  animation: basket-chip-dot-pop var(--motion-entrance) var(--ease-out);
 }
 
 @keyframes basket-chip-dot-pop {
