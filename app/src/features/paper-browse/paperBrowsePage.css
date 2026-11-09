@@ -1618,12 +1618,12 @@
 }
 
 .similar-btn--primary {
-  background: var(--action);
-  color: #ffffff;
+  background: var(--eqb-color-accent-fill);
+  color: var(--eqb-color-accent-fill-ink);
 }
 
 .similar-btn--primary:hover {
-  background: var(--action-hover);
+  background: var(--eqb-color-accent-fill-hover);
 }
 
 .similar-btn[disabled] {

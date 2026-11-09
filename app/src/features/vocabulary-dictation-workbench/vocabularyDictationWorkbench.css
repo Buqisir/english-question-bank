@@ -997,9 +997,9 @@
 
 /* Overrides the shared neutral button colors because date export is this toolbar's primary action. */
 .dictation-task-selection-panel button.is-primary {
-  border-color: var(--action);
-  background: var(--action);
-  color: var(--eqb-color-paper);
+  border-color: transparent;
+  background: var(--eqb-color-accent-fill);
+  color: var(--eqb-color-accent-fill-ink);
 }
 
 .dictation-task-date-heading button:focus-visible,

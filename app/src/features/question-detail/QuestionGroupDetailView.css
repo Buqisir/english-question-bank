@@ -148,12 +148,12 @@ a.peek-btn:focus-visible {
 .peek-btn--primary {
   margin-right: 8px;
   padding: 0 12px;
-  background: var(--action);
-  color: #fff;
+  background: var(--eqb-color-accent-fill);
+  color: var(--eqb-color-accent-fill-ink);
 }
 
 .peek-btn--primary:hover:not(:disabled) {
-  background: var(--action-hover);
+  background: var(--eqb-color-accent-fill-hover);
 }
 
 .peek-btn--primary:disabled {
