@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar.tsx'
-import { ChevronRight, Paper } from '../../icons'
+import { ChevronRight, Paper, VocabularyNotebook } from '../../icons'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate.tsx'
 import { fetchQuestionGroups } from '../../services/questionGroups.ts'
 import {
@@ -197,7 +197,13 @@ export function VocabularyNotebookPage({
       ) : (
         <main className="notebook-main">
           {error ? <p className="notebook-empty">{error}</p> : null}
-          {papers && papers.length === 0 ? <p className="notebook-empty">在试卷中选中单词，点击加入生词本</p> : null}
+          {papers && papers.length === 0 ? (
+            <div className="notebook-empty-state">
+              <VocabularyNotebook size={24} aria-hidden="true" />
+              <p className="notebook-empty">看卷时选中单词，点「加入生词本」，就会收到这里。</p>
+              <button type="button" className="notebook-empty-cta" onClick={onBack}>去找题</button>
+            </div>
+          ) : null}
           {papers && papers.length > 0 ? (
             <section className="home-section" aria-label="已收藏的卷">
               <h2 className="home-section-label">已收藏</h2>

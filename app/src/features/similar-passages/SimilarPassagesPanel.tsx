@@ -72,7 +72,7 @@ export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNod
   function handleAdd(card: QuestionGroupCard): void {
     onAdd(card)
     if (toastTimeoutRef.current != null) window.clearTimeout(toastTimeoutRef.current)
-    setToastMessage(`已加入草稿卷 · ${card.title || card.id}`)
+    setToastMessage(`已把「${card.title || card.id}」加入草稿卷`)
     toastTimeoutRef.current = window.setTimeout(() => setToastMessage(null), 2200)
   }
 

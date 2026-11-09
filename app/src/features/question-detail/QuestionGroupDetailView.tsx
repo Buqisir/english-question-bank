@@ -323,7 +323,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     if (!selectedDetail) return
     const detail = selectedDetail
     if (!paperId) {
-      setLoad({ status: 'error', message: '完整卷面尚未就绪，请返回题库选择其他试卷。' })
+      setLoad({ status: 'error', message: '这份卷还没上线，回到题库换一份看看。' })
       return
     }
     const resolvedPaperId = paperId
@@ -585,6 +585,9 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                   ? '暂不可组卷'
                   : '加入草稿卷'}
             </button>
+            {selectedDetail.draftPaperButtonState === 'disabled' && (
+              <span className="peek-unavailable-note">这组题还在整理，整理好就能加入草稿卷</span>
+            )}
             {selectedDetail.canonicalPaperId && (
               <button className="peek-btn" type="button" onClick={() => onOpenPaperBrowse(selectedDetail)}>
                 <Eye size={16} />
@@ -657,7 +660,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
           />
         )}
 
-        <div className={`peek-paper${expanded ? ' peek-paper--expanded' : ''}`} style={psTokenStyle}>
+        <div className={`peek-paper${load.status === 'ready' ? ' peek-paper--ready' : ''}${expanded ? ' peek-paper--expanded' : ''}`} style={psTokenStyle}>
           <div className="peek-paper-clip">
             {paperBody}
           </div>

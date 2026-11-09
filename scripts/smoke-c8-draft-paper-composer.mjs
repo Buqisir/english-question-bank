@@ -202,7 +202,7 @@ async function main() {
     }
     pass('Paper-asset detail feeds draft preview with real material and options')
     await page.getByPlaceholder(/找一道|正在连接|比如/).fill('分页建议压力测试')
-    await page.getByRole('button', { name: '开始取题' }).click()
+    await page.getByRole('button', { name: '搜索', exact: true }).click()
     await expandFirstPaperIfNeeded(page)
     const pageBreakCard = page.locator('[data-group-id="g-c8-smoke-pagebreak"]').first()
     await pageBreakCard.waitFor({ timeout: 10_000 })

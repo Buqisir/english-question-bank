@@ -20,15 +20,17 @@ export function AgentTokens() {
   const [notice, setNotice] = useState('')
   const [busy, setBusy] = useState(false)
   const [loading, setLoading] = useState(true)
+  const [loadFailed, setLoadFailed] = useState(false)
+  const [loadAttempt, setLoadAttempt] = useState(0)
   const [revoking, setRevoking] = useState<AgentToken | null>(null)
   const dialog = useModalDialog(Boolean(revoking))
   useEffect(() => {
     let active = true
-    request().then(data => { if (active) setTokens(data.tokens) })
-      .catch(() => { if (active) setError('加载口令失败，刷新页面后重试。') })
+    request().then(data => { if (active) { setTokens(data.tokens); setLoadFailed(false) } })
+      .catch(() => { if (active) setLoadFailed(true) })
       .finally(() => { if (active) setLoading(false) })
     return () => { active = false }
-  }, [])
+  }, [loadAttempt])
 
   async function mutate(action: () => Promise<void>) {
     setBusy(true); setError(''); setNotice('')
@@ -49,7 +51,7 @@ export function AgentTokens() {
       })
     }}>
       <label>名称<input required maxLength={100} value={name} onChange={event => setName(event.target.value)} placeholder="例如：组卷 Agent" /></label>
-      <button className="ghost-button" type="submit" disabled={busy || !name.trim()}>{busy ? '保存中…' : '新建口令'}</button>
+      <button className="ghost-button agent-token-submit" type="submit" disabled={busy || !name.trim()}>{busy ? '保存中…' : '新建口令'}</button>
     </form>
     {secret && <div className="agent-token-secret">
       <p>口令只显示这一次，请妥善保存。离开页面后无法再次查看。</p>
@@ -62,7 +64,10 @@ export function AgentTokens() {
     </div>}
     <p role="alert" className="admin-backfill-error">{error}</p>
     <p role="status">{notice}</p>
-    {loading ? <p>加载中…</p> : tokens.length === 0 ? <p>还没有口令。填写名称并新建口令即可开始。</p> :
+    {loading ? <p>加载中…</p> : loadFailed ? <p className="agent-token-load-failed">
+      口令列表没有加载出来。
+      <button type="button" className="ghost-button" onClick={() => { setLoading(true); setLoadAttempt(n => n + 1) }}>重试</button>
+    </p> : tokens.length === 0 ? <p>还没有口令。</p> :
       <ul>{tokens.map(item => <li key={item.id}>
         <div><strong>{item.name}</strong><span>{item.revokedAt ? '已作废' : '有效'}</span>
           <small>创建于 {new Date(item.createdAt).toLocaleDateString()} · {item.lastUsedAt ? `最近使用 ${new Date(item.lastUsedAt).toLocaleString()}` : '尚未使用'}</small></div>
