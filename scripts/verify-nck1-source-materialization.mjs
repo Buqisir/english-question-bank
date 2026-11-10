@@ -348,11 +348,17 @@ export function makeFixture({ listening = false, mixedTable = false } = {}) {
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
 await import('./verify-inline-blank-boundaries.mjs')
 const { SOURCE_INSTRUCTION_SLOTS } = await import('../shared/paper-canonical/sourcePresentation.mjs')
-for (const offset of [0, 20]) {
+for (const counts of [[3, 3, 4], [4, 3, 3], [3, 4, 3]]) for (const offset of [0, 20]) {
   const legacy = makeFixture({ listening: true })
   legacy.schemaVersion = 'nck1-source-materialization-v14'
   legacy.profileId = 'zhejiang-legacy'
-  const ranges = materializationSlotSpecs('zhejiang-legacy')
+  let next = 21
+  const ranges = materializationSlotSpecs('zhejiang-legacy').map(([slotId, family, from, to], index) => {
+    if (family !== 'reading') return [slotId, family, from, to]
+    const start = next
+    next += counts[index]
+    return [slotId, family, start, next - 1]
+  })
   const originals = legacy.groups
   legacy.groups = ranges.map(([slotId, family, from, to]) => {
     const group = structuredClone(originals.find(group => group.family === family))
@@ -384,12 +390,24 @@ for (const offset of [0, 20]) {
     opening: { title: 'Synthetic Zhejiang paper', notices: [], transferNotice: 'Use the answer sheet.', source: locator() },
   }
   assert.deepEqual(validateNck1SourceMaterialization(legacy), [], `Zhejiang source offset ${offset}`)
+  assert.equal(validateNck1SourceMaterialization(legacy, { zhejiangProfileVersion: '16' }).length === 0,
+    counts.join() === '3,3,4', 'historical v16 keeps its fixed ranges')
+  for (const [name, corrupt] of [
+    ['duplicate number', value => { value.groups[0].questions[1].canonicalNumber = 21 }],
+    ['cross-passage order', value => { [value.groups[0], value.groups[1]] = [value.groups[1], value.groups[0]] }],
+    ['answer binding', value => { value.answers[0].canonicalNumber = 22 }],
+  ]) {
+    const invalid = structuredClone(legacy)
+    corrupt(invalid)
+    assert(validateNck1SourceMaterialization(invalid).length, name)
+  }
   const mixed = structuredClone(legacy)
   mixed.groups[0].questions[0].sourceNumber += 20
   assert(validateNck1SourceMaterialization(mixed).some(issue => issue.code === 'MATERIALIZATION_SOURCE_NUMBER_MISMATCH'))
   const missing = structuredClone(legacy)
   missing.groups[1].questions.pop()
-  assert(validateNck1SourceMaterialization(missing).some(issue => issue.code === 'MATERIALIZATION_GROUP_QUESTION_COUNT_INVALID'))
+  assert(validateNck1SourceMaterialization(missing).some(issue =>
+    ['MATERIALIZATION_GROUP_QUESTION_COUNT_INVALID', 'MATERIALIZATION_SOURCE_NUMBER_MISMATCH'].includes(issue.code)))
 }
 console.log('PASS Zhejiang legacy: complete source offsets and rejection of mixed/incomplete numbering')
 const plain = makeFixture()

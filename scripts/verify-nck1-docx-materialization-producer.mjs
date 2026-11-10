@@ -51,16 +51,16 @@ const produced = produceNck1DocxMaterialization({
 })
 
 assert.equal(produced.disposition, 'ready_for_verification')
-for (const offset of [0, 20]) {
+for (const counts of [[3, 3, 4], [4, 3, 3], [3, 4, 3]]) for (const offset of [0, 20]) {
   const legacyFixture = makeSyntheticNck1DocxFixture({ listening: true })
   const [question, coverage, answer] = legacyFixture.sourceDocuments
   const range = (from, to) => Array.from({ length: to - from + 1 }, (_, index) => from + index)
   const number = n => n - offset
   const choice = n => [`${number(n)}. Which written choice fits?`, 'A. Written answer.',
     'B. Other answer.', 'C. Other choice.', 'D. Last choice.']
-  const paragraphs = ['第二部分 阅读理解', '第一节', 'A', 'A source passage.', ...range(21, 23).flatMap(choice),
-    'B', 'Another source passage.', ...range(24, 26).flatMap(choice),
-    'C', 'The last source passage.', ...range(27, 30).flatMap(choice), '第二节', 'Read the following material.',
+  const paragraphs = ['第二部分 阅读理解', '第一节', 'A', 'A source passage.', ...range(21, 20 + counts[0]).flatMap(choice),
+    'B', 'Another source passage.', ...range(21 + counts[0], 20 + counts[0] + counts[1]).flatMap(choice),
+    'C', 'The last source passage.', ...range(21 + counts[0] + counts[1], 30).flatMap(choice), '第二节', 'Read the following material.',
     ...range(31, 35).map(n => `Before __${number(n)}__ after.`),
     ...range(1, 7).map(n => `${String.fromCharCode(64 + n)}. A source option.`),
     '第三部分 语言运用', '第一节', 'Read this cloze.',
@@ -87,6 +87,8 @@ for (const offset of [0, 20]) {
     sourceDigest: nck1DocxProducerSourceDigest(legacyFixture.sourceDocuments),
   })
   const written = result.materialization.groups.flatMap(group => group.questions)
+  assert.deepEqual(result.materialization.groups.filter(group => group.family === 'reading')
+    .map(group => group.questions.length), counts)
   assert.equal(written.length, 45)
   assert(written.every((question, index) =>
     question.sourceNumber === number(index + 21) && question.canonicalNumber === index + 21))

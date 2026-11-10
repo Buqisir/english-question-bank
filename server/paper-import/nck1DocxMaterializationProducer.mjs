@@ -631,7 +631,7 @@ function readMcqQuestions({ paperId, body, from, to, rangeStart, rangeEnd, famil
   }))
 }
 
-function readingGroups({ paperId, body, firstStart, secondStart, documentId, issues, specs = SLOT_SPECS }) {
+function readingGroups({ paperId, body, firstStart, secondStart, documentId, issues, specs = SLOT_SPECS, flexible = false }) {
   const letters = specs.map((_, index) => String.fromCharCode(65 + index)).map((letter) => exactPosition(
     body,
     new RegExp(`^${letter}$`, 'u'),
@@ -640,10 +640,26 @@ function readingGroups({ paperId, body, firstStart, secondStart, documentId, iss
     documentId,
     [firstStart + 1, secondStart],
   ))
-  return specs.map(([slotId, family, from, to], slotIndex) => {
+  let nextNumber = specs[0][2]
+  return specs.map(([slotId, family, fixedFrom, fixedTo], slotIndex) => {
     const start = letters[slotIndex]
     const end = letters[slotIndex + 1] ?? secondStart
     if (start === null || end === null) return emptyGroup(paperId, slotId, family)
+    const numbers = flexible ? body.slice(start + 1, end).flatMap(item => {
+      const match = item.kind === 'paragraph' && /^(\d{1,3})[.．、]/u.exec(normalized(item.text))
+      return match ? [Number(match[1])] : []
+    }) : []
+    const from = flexible ? nextNumber : fixedFrom
+    const to = flexible ? from + numbers.length - 1 : fixedTo
+    nextNumber = to + 1
+    if (flexible && (![3, 4].includes(numbers.length)
+      || numbers.some((number, index) => number !== from + index)
+      || slotIndex === specs.length - 1 && to !== specs.at(-1)[3])) {
+      addIssue(issues, 'NCK1_DOCX_QUESTION_SEQUENCE_INCOMPLETE', slotId,
+        'Zhejiang reading A/B/C must continuously cover ten source Questions with 3 or 4 per passage',
+        sourceRef(documentId))
+      return emptyGroup(paperId, slotId, family)
+    }
     const questions = readMcqQuestions({
       paperId, body, from, to, rangeStart: start + 1, rangeEnd: end,
       family, documentId, issues,
@@ -2320,7 +2336,7 @@ export function produceNck1MaterializationFromStructures({
     .every((position) => position !== null)) {
     groups = readingGroups({
       paperId, body, firstStart: readingFirst, secondStart: readingSecond,
-      ...(legacy ? { specs: sourceSpecs.filter(slot => slot[1] === 'reading') } : {}),
+      ...(legacy ? { specs: sourceSpecs.filter(slot => slot[1] === 'reading'), flexible: profileId === 'zhejiang-legacy' } : {}),
       documentId: question.documentId, issues,
     })
     groups.push(sevenChoices({

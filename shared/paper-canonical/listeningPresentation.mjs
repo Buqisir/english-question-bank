@@ -80,8 +80,9 @@ export function projectListeningGroupPresentation(group) {
 export function ownsCompletePaperOpening(consumption, renderedGroupIds) {
   const national = consumption?.authorityRef?.manifestVersion === '83'
     && consumption.profileRef?.profileId === 'national-legacy' && consumption.profileRef.profileVersion === '6'
-  const legacy = consumption?.authorityRef?.manifestVersion === '82'
-    && consumption.profileRef?.profileId === 'zhejiang-legacy' && consumption.profileRef.profileVersion === '16'
+  const legacy = consumption?.profileRef?.profileId === 'zhejiang-legacy'
+    && ((consumption?.authorityRef?.manifestVersion === '82' && consumption.profileRef.profileVersion === '16')
+      || (consumption?.authorityRef?.manifestVersion === '84' && consumption.profileRef.profileVersion === '17'))
   if (!Array.isArray(renderedGroupIds) || !(legacy ? [8, 10] : [9, 11]).includes(renderedGroupIds.length)) return false
   const occurrences = consumption?.selections?.flatMap((selection) =>
     selection?.mode === 'canonical' ? selection.projectedOccurrences ?? [] : [])
@@ -101,7 +102,7 @@ export function ownsCompletePaperOpening(consumption, renderedGroupIds) {
 }
 
 export function paperOpeningForConsumption(consumption) {
-  if (!(consumption?.authorityRef?.manifestVersion === '82' && consumption.profileRef?.profileId === 'zhejiang-legacy')
+  if (!(['82', '84'].includes(consumption?.authorityRef?.manifestVersion) && consumption.profileRef?.profileId === 'zhejiang-legacy')
     && !(consumption?.authorityRef?.manifestVersion === '83' && consumption.profileRef?.profileId === 'national-legacy')) return listeningOpening
   const opening = consumption.selections.flatMap(selection => selection.mode === 'canonical' ? selection.projectedOccurrences : [])
     .find(occurrence => occurrence.sourcePresentation?.opening)?.sourcePresentation.opening

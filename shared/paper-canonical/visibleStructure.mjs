@@ -1,3 +1,5 @@
+import manifestV84 from '../../standards/paper-canonical/manifest-v84.json' with { type: 'json' }
+import zhejiangLegacyV17 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v17.json' with { type: 'json' }
 import manifestV83 from '../../standards/paper-canonical/manifest-v83.json' with { type: 'json' }
 import nationalLegacyV6 from '../../standards/paper-canonical/profiles/national-legacy-v6.json' with { type: 'json' }
 import manifestV82 from '../../standards/paper-canonical/manifest-v82.json' with { type: 'json' }
@@ -68,7 +70,7 @@ import { digestJson } from './stable.mjs'
 import { validCanonicalSourcePresentation } from './sourcePresentation.mjs'
 
 const registeredProfiles = new Map([
-  ...[nationalLegacyV6, zhejiangLegacyV16, nck1V18, nationalLegacyV5, zhejiangLegacyV15, nck1V17, zhejiangLegacyV14].map(profile => [`${profile.profileId}@${profile.version}`, profile]),
+  ...[zhejiangLegacyV17, nationalLegacyV6, zhejiangLegacyV16, nck1V18, nationalLegacyV5, zhejiangLegacyV15, nck1V17, zhejiangLegacyV14].map(profile => [`${profile.profileId}@${profile.version}`, profile]),
   ...[nck1V16, nationalLegacyV4, zhejiangLegacyV13].map((profile) => [
     `${profile.profileId}@${profile.version}`, profile,
   ]),
@@ -182,6 +184,9 @@ const manifestV50Profiles = new Map([
   },
 ]))
 const registeredManifestProfiles = new Map([
+  [`${manifestV84.manifestId}@${manifestV84.version}@${digestJson(manifestV84)}`,
+    new Map([nck1V18, nationalLegacyV5, zhejiangLegacyV17].map(profile => [profile.profileId,
+      { profileId: profile.profileId, profileVersion: profile.version, profileDigest: digestJson(profile) }]))],
   [`${manifestV82.manifestId}@${manifestV82.version}@${digestJson(manifestV82)}`,
     new Map([nck1V18, nationalLegacyV5, zhejiangLegacyV16].map(profile => [profile.profileId,
       { profileId: profile.profileId, profileVersion: profile.version, profileDigest: digestJson(profile) }]))],
@@ -548,7 +553,7 @@ function sourceInstructionOverrides(consumption) {
   for (const selection of consumption.selections) {
     const occurrences = selection?.projectedOccurrences || []
     const continuationV49 =
-      ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(consumption.authorityRef?.manifestVersion)
+      ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'].includes(consumption.authorityRef?.manifestVersion)
       && selection?.mode === 'canonical'
       && selection?.familyContractId === 'continuation-writing'
     const digestByGroupId = new Map(
@@ -561,7 +566,7 @@ function sourceInstructionOverrides(consumption) {
       if (occurrence.sourcePresentation !== undefined) {
         const presentation = occurrence.sourcePresentation
         const instruction = presentation?.instruction
-        if (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(consumption.authorityRef?.manifestVersion) || selection.mode !== 'canonical'
+        if (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'].includes(consumption.authorityRef?.manifestVersion) || selection.mode !== 'canonical'
           || !validCanonicalSourcePresentation(presentation)
           || digestByGroupId.get(occurrence.groupId) !== digestJson(occurrence)) {
           reject('source-backed presentation proof is invalid')
@@ -571,7 +576,7 @@ function sourceInstructionOverrides(consumption) {
           if (overrides.has(key)) reject('source-backed presentation proof is duplicated')
           overrides.set(key, instruction.text)
         }
-        if ((presentation.headings || presentation.opening) && !['82', '83'].includes(consumption.authorityRef?.manifestVersion)) {
+        if ((presentation.headings || presentation.opening) && !['82', '83', '84'].includes(consumption.authorityRef?.manifestVersion)) {
           reject('source headings and opening require the legacy successor')
         }
         for (const heading of presentation.headings || []) {
