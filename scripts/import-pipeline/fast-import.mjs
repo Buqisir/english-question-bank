@@ -7,7 +7,7 @@
 // agent judgement is required. Finished steps are skipped on rerun.
 //
 //   prep <paperId> [--audio <file>] [--proofreaders 7] [-- <universal-nck1 init args>]
-//   after-proofread <paperId> [--issues-resolved]
+//   after-proofread <paperId> [--issues-resolved] [--redo-from materialize --profile-version 17]
 //   finish <paperId> [--large-complete-page-limit 13] [--large-no-listening-page-limit 11] [--economy-page-limit 9] through frozen PDFs and their contact sheets
 //   submit <paperId>                 after PDF QA: push the Candidate, then Screen tiles
 //   report <paperId> --screen "<what was checked>" --pdf "<what was checked>"
@@ -358,8 +358,9 @@ async function prep(ctx, args) {
   const initArgs = separator === -1 ? [] : args.slice(separator + 1)
   const own = separator === -1 ? args : args.slice(0, separator)
   const profileId = option(own, '--profile') || 'nck1'
-  const formatProfileBinding = importFormatBinding(profileId)
   const configPath = path.join(ctx.paperDir, 'config.json')
+  const savedBinding = existsSync(configPath) ? readJson(configPath).formatProfileBinding : ctx.state.data.formatProfileBinding
+  const formatProfileBinding = importFormatBinding(profileId, savedBinding?.version)
   if (existsSync(configPath)
     && stableStringify(readJson(configPath).formatProfileBinding ?? null) !== stableStringify(formatProfileBinding)) {
     fail('已有任务的 profile 与本次 --profile 不同；拒绝覆盖或续跑')
@@ -1619,7 +1620,18 @@ async function feedbackFix(ctx, args, readStatus) {
   await requestedRedo(ctx, name)
 }
 
-export async function requestedRedo(ctx, name) {
+export async function requestedRedo(ctx, name, profileVersion) {
+  let profileUpdate
+  if (profileVersion !== undefined) {
+    const configPath = path.join(ctx.paperDir, 'config.json')
+    const manifestPath = path.join(ctx.paperDir, 'universal-source-manifest.json')
+    const config = readJson(configPath)
+    const manifest = readJson(manifestPath)
+    if (name !== 'materialize' || config.formatProfileBinding?.profileId !== 'zhejiang-legacy'
+      || manifest.profileId !== 'zhejiang-legacy') fail('--profile-version requires Zhejiang --redo-from materialize')
+    const binding = importFormatBinding('zhejiang-legacy', profileVersion)
+    profileUpdate = { configPath, manifestPath, config, manifest, binding }
+  }
   // An explicit redo must not erase submission evidence before finish sees it.
   if (STEP_ORDER.includes(name) && (!referencesCurrent(ctx)
     || STEP_ORDER.indexOf(name) <= STEP_ORDER.indexOf('pdf-qa')
@@ -1627,6 +1639,13 @@ export async function requestedRedo(ctx, name) {
     assertReferencesMutable(ctx)
   }
   redoFrom(ctx, name)
+  if (profileUpdate) {
+    const { configPath, manifestPath, config, manifest, binding } = profileUpdate
+    writeJson(configPath, { ...config, formatProfileBinding: binding })
+    writeJson(manifestPath, { ...manifest, formatProfileBinding: binding })
+    ctx.state.data.formatProfileBinding = binding
+    save(ctx)
+  }
 }
 
 export async function startOcrGeneration(ctx, planPath, checkPlan = async () => run(ctx, 'check-ocr-generation',
@@ -1723,6 +1742,11 @@ export async function invalidateExplanationFigureDownstream(paperId, expectedMat
 const [command, paperId, ...args] = process.argv.slice(2)
 if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try {
   const ctx = context(paperId)
+  if (args.includes('--profile-version') && (command !== 'after-proofread'
+    || option(args, '--redo-from') !== 'materialize' || args.includes('--feedback-fix')
+    || !option(args, '--profile-version') || option(args, '--profile-version').startsWith('--'))) {
+    fail('--profile-version <16|17> requires after-proofread --redo-from materialize')
+  }
   if (args.includes('--feedback-fix') && command !== 'finish') fail('--feedback-fix 仅用于 finish')
   if (args.includes('--ocr-generation-plan') && (command !== 'after-proofread' || args.includes('--redo-from'))) {
     fail('--ocr-generation-plan 仅用于 after-proofread，不能与 --redo-from 合用')
@@ -1737,7 +1761,8 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
     || (existsSync(operationPath) && !readJson(operationPath).completedAt)) && !['status', 'reconcile-ocr-generation'].includes(command)) {
     fail('OCR_GENERATION_RECONCILIATION_REQUIRED: 新代操作未闭合；仅可只读 status 对账，禁止重放或 redo')
   }
-  if (option(args, '--redo-from') && !args.includes('--feedback-fix')) await requestedRedo(ctx, option(args, '--redo-from'))
+  if (option(args, '--redo-from') && !args.includes('--feedback-fix')) await requestedRedo(ctx,
+    option(args, '--redo-from'), option(args, '--profile-version') ?? undefined)
   if (command === 'prep') await prep(ctx, args)
   else if (command === 'after-proofread') await afterProofread(ctx, args)
   else if (command === 'plan-ocr-generation') {

@@ -52,7 +52,7 @@ function textContent(nodes) {
 
 function projectListeningConsumerGroup(input, occurrence) {
   const { groupId } = input
-  const questionOnly = ['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(input.consumption.authorityRef?.manifestVersion)
+  const questionOnly = ['51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'].includes(input.consumption.authorityRef?.manifestVersion)
   if (
     !Array.isArray(occurrence.blanks)
     || occurrence.blanks.length !== 0
@@ -1406,11 +1406,11 @@ function selectOccurrence(input) {
     || familyContractId === 'grammar-fill'
     || (
       familyContractId === 'continuation-writing'
-      && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(authorityRef?.manifestVersion)
+      && ['49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'].includes(authorityRef?.manifestVersion)
     )
     || (
       familyContractId === 'seven-choices'
-      && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(authorityRef?.manifestVersion)
+      && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'].includes(authorityRef?.manifestVersion)
     )
   if (requiresOccurrenceIntegrity) {
     const consumptionDigest = sha256(`${stableStringify(consumption)}\n`)
@@ -1484,9 +1484,9 @@ export function projectCanonicalConsumerGroup(input) {
     throw rejected(`Canonical occurrence ${groupId} belongs to another family`)
   }
   if (occurrence.sourcePresentation !== undefined
-    && (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(input.consumption.authorityRef?.manifestVersion)
+    && (!['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'].includes(input.consumption.authorityRef?.manifestVersion)
       || !validCanonicalSourcePresentation(occurrence.sourcePresentation)
-      || ((occurrence.sourcePresentation.headings || occurrence.sourcePresentation.opening) && !['82', '83'].includes(input.consumption.authorityRef?.manifestVersion)))) {
+      || ((occurrence.sourcePresentation.headings || occurrence.sourcePresentation.opening) && !['82', '83', '84'].includes(input.consumption.authorityRef?.manifestVersion)))) {
     throw rejected(`Canonical occurrence ${groupId} has invalid source presentation`)
   }
   if (familyContractId === 'error-correction') {
@@ -1586,7 +1586,7 @@ export function projectCanonicalConsumerGroup(input) {
 
   const seenBlanks = new Set()
   const passageRoles = familyContractId === 'seven-choices'
-    && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(input.consumption?.authorityRef?.manifestVersion)
+    && ['47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'].includes(input.consumption?.authorityRef?.manifestVersion)
     ? resolvePassageBlockRoles(
         occurrence.content?.blocks,
         occurrence.passageBlockRoles,

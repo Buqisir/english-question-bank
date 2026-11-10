@@ -9,6 +9,7 @@ import path from 'node:path'
 import {
   nationalLegacyMaterializationAuthorityRef,
   zhejiangLegacyMaterializationAuthorityRef,
+  zhejiangLegacyReadingRangesAuthorityRef,
   resolveCanonicalAuthority,
   nck1MaterializationCandidateAuthorityRef,
   nck1ListeningInstructionAuthorityRef,
@@ -2808,7 +2809,7 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
           'source_cross_page_paragraph_fragment', fragment.source,
           { relation: structuredClone(join), fragmentIndex, text: join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 ? confirmedItems[fragmentIndex].text : blocks[fragmentIndex].content.map(part => part.text).join('') },
           documentsById)
-        observation.extraction.version = join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 ? ([nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, nationalLegacyMaterializationAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest) ? '17' : '16') : '12'
+        observation.extraction.version = join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 ? ([nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, zhejiangLegacyReadingRangesAuthorityRef, nationalLegacyMaterializationAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest) ? '17' : '16') : '12'
         source.observations.push(observation)
         const ref = `source-span:${observation.observationId}`
         const paragraph = fragmentIndex === 0 ? left : right
@@ -2843,7 +2844,7 @@ export function withNck1MaterializationSourceCache(callback) {
 export function nck1MaterializationAuthorityForInput(input) {
   const raw = parseMaterialization(input.materializationBytes)
   if (raw?.schemaVersion === 'nck1-source-materialization-v15') return nationalLegacyMaterializationAuthorityRef
-  if (raw?.schemaVersion === 'nck1-source-materialization-v14') return zhejiangLegacyMaterializationAuthorityRef
+  if (raw?.schemaVersion === 'nck1-source-materialization-v14') return zhejiangLegacyReadingRangesAuthorityRef
   if (raw?.schemaVersion === 'nck1-source-materialization-v13') return nck1InImageOptionLabelsV2AuthorityRef
   if (/^nck1-source-materialization-v(?:[7-9]|1[012])$/u.test(raw?.schemaVersion)
     && Array.isArray(raw.groups) && raw.groups.some(group => group?.family === 'application-writing'
@@ -2876,7 +2877,8 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     return { input: cloneNck1MaterializationInput(rawInput), sourceDigest, materialization: null,
       source: null, request: null, issues: authority.issues }
   }
-  const options = { allowMultipleApplicationNotices: closureAdmitsMultipleWritingNotices(authority.closure),
+  const options = { zhejiangProfileVersion: authority.closure.profiles.get('zhejiang-legacy')?.version,
+    allowMultipleApplicationNotices: closureAdmitsMultipleWritingNotices(authority.closure),
     allowInImageLabelMeasurement: closureAdmitsInImageOptionLabelMeasurements(authority.closure) }
   const cacheKey = `${sourceDigest}:${authorityRef.manifestDigest}`
   let prepared = sourceCache?.get(cacheKey)
@@ -2908,7 +2910,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     || (materialization.schemaVersion === 'nck1-source-materialization-v15' && !input.ocrSourceBytes)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'National legacy requires its exact OCR successor authority'))
   }
-  if ((materialization.schemaVersion === 'nck1-source-materialization-v14') !== (authorityRef.manifestDigest === zhejiangLegacyMaterializationAuthorityRef.manifestDigest)
+  if ((materialization.schemaVersion === 'nck1-source-materialization-v14') !== ([zhejiangLegacyMaterializationAuthorityRef, zhejiangLegacyReadingRangesAuthorityRef].some(ref => authorityRef.manifestDigest === ref.manifestDigest))
     || (materialization.schemaVersion === 'nck1-source-materialization-v14' && !input.ocrSourceBytes)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Legacy OCR requires its exact profile successor authority and confirmed OCR bytes'))
   }
@@ -2924,12 +2926,12 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Materialization v13 requires the image-option v2 schema and behavior authority'))
   }
   if (materialization.schemaVersion === 'nck1-source-materialization-v12'
-    && (!input.ocrSourceBytes || ![nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, nationalLegacyMaterializationAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest)
+    && (!input.ocrSourceBytes || ![nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, zhejiangLegacyReadingRangesAuthorityRef, nationalLegacyMaterializationAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest)
       || !closureAdmitsCrossPageJoinV2(resolveCanonicalAuthority(authorityRef).closure))) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Materialization v12 requires the cross-page join v2 successor authority and verified OCR bytes'))
   }
   if (materialization.schemaVersion === 'nck1-source-materialization-v11'
-    && (!input.ocrSourceBytes || ![nck1OcrOptionEmphasisAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, nationalLegacyMaterializationAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest))) {
+    && (!input.ocrSourceBytes || ![nck1OcrOptionEmphasisAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, zhejiangLegacyReadingRangesAuthorityRef, nationalLegacyMaterializationAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest))) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Materialization v11 requires the OCR option emphasis successor authority and verified OCR bytes'))
   }
   if ((materialization.schemaVersion === 'nck1-source-materialization-v9' || Object.hasOwn(materialization, 'inImageOptionLabels'))
@@ -2968,7 +2970,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
   }
   if ((['nck1-source-materialization-v4', 'nck1-source-materialization-v5', 'nck1-source-materialization-v6', 'nck1-source-materialization-v7', 'nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12', 'nck1-source-materialization-v13', 'nck1-source-materialization-v14', 'nck1-source-materialization-v15'].includes(materialization.schemaVersion)
     || (input.ocrSourceBytes && parseMaterialization(input.ocrSourceBytes.confirmationBytes)?.schemaVersion === NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3))
-    && !['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83'].includes(authorityRef.manifestVersion)) {
+    && !['62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'].includes(authorityRef.manifestVersion)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Source presentation and OCR content visuals require a registered source-presentation closure'))
   }
   if ((materialization.schemaVersion === 'nck1-source-materialization-v5'
@@ -2976,7 +2978,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
     && !closureAdmitsApplicationDrawingArea(resolveCanonicalAuthority(authorityRef).closure)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_DRAWING_AREA_UNSUPPORTED', 'Application drawing areas require their registered successor authority'))
   }
-  if (input.listeningInstructionCorrectionBytes && ![nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, nationalLegacyMaterializationAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest)) {
+  if (input.listeningInstructionCorrectionBytes && ![nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, zhejiangLegacyReadingRangesAuthorityRef, nationalLegacyMaterializationAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest)) {
     validation.issues.push(adapterIssue('MATERIALIZATION_AUTHORITY_UNSUPPORTED', 'Listening instruction correction requires its registered successor authority'))
   }
   if (validation.issues.length > 0) {
@@ -3034,7 +3036,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
         || observation.kind?.startsWith('application_')) observation.extraction.version = '18'
     }
   }
-  if ([nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, nationalLegacyMaterializationAuthorityRef, nck1MaterializationHistoricalAuthorityRef58,
+  if ([nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, zhejiangLegacyReadingRangesAuthorityRef, nationalLegacyMaterializationAuthorityRef, nck1MaterializationHistoricalAuthorityRef58,
     nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
     .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
     appendReadingSourceEmphasis(source, rawMaterialization, validation.documentsById,
@@ -3042,14 +3044,14 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
       derivationIssues, authority.closure)
   }
   if (input.ocrSourceBytes) {
-    if (![nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, nationalLegacyMaterializationAuthorityRef, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
+    if (![nck1MaterializationCandidateAuthorityRef, nck1ListeningInstructionAuthorityRef, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef, nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1InImageOptionLabelsAuthorityRef, nck1ListeningSourceDecisionAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, zhejiangLegacyReadingRangesAuthorityRef, nationalLegacyMaterializationAuthorityRef, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66]
       .some(ref => authorityRef.manifestDigest === ref.manifestDigest)) {
       derivationIssues.push(adapterIssue('MATERIALIZATION_SOURCE_EMPHASIS_UNSUPPORTED', 'Historical authorities do not accept OCR source emphasis'))
     } else {
       appendOcrReadingSourceEmphasis(source, rawMaterialization, validation.documentsById, input.ocrSourceBytes,
         input.spellingReviewBytes ? JSON.parse(textDecoder.decode(input.spellingReviewBytes)) : null, derivationIssues,
         ['4', '5'].includes(resolveCanonicalAuthority(authorityRef).closure.artifacts['rich-content']?.version),
-        [nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, nationalLegacyMaterializationAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest), authorityRef, authority.closure, pendingMeasurements,
+        [nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, zhejiangLegacyMaterializationAuthorityRef, zhejiangLegacyReadingRangesAuthorityRef, nationalLegacyMaterializationAuthorityRef].some(ref => ref.manifestDigest === authorityRef.manifestDigest), authorityRef, authority.closure, pendingMeasurements,
         // Only the current authority may soften dropped emphasis to warnings;
         // replays under any historical authority keep the hard issue.
         authorityRef.manifestDigest === nck1InImageOptionLabelsV2AuthorityRef.manifestDigest

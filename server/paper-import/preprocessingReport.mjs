@@ -83,8 +83,9 @@ export function buildPreprocessingReport(projection, evidence, { baseDirectory =
   const noListening = pdfs.find(pdf => pdf.edition === 'largeNoListening')
   const economy = pdfs.find(pdf => pdf.edition === 'economy8')
   const sameLegacyNaturalPages = fourProducts && pdfs.length === 4
-    && plan?.authorityRef.manifestVersion === '82'
-    && plan.profileRef.profileId === 'zhejiang-legacy' && plan.profileRef.profileVersion === '16'
+    && plan?.profileRef?.profileId === 'zhejiang-legacy'
+    && ((plan?.authorityRef.manifestVersion === '82' && plan.profileRef.profileVersion === '16')
+      || (plan?.authorityRef.manifestVersion === '84' && plan.profileRef.profileVersion === '17'))
     && noListening?.sha256 === economy?.sha256
     && new Set(pdfs.map(pdf => pdf.sha256)).size === pdfs.length - 1
   if ((longPaper || products) && new Set(pdfs.map(pdf => pdf.sha256)).size !== pdfs.length

@@ -1,5 +1,6 @@
+import zhejiang from '../../standards/paper-canonical/profiles/zhejiang-legacy-v17.json' with { type: 'json' }
 import national from '../../standards/paper-canonical/profiles/national-legacy-v6.json' with { type: 'json' }
-import zhejiang from '../../standards/paper-canonical/profiles/zhejiang-legacy-v16.json' with { type: 'json' }
+import zhejiangV16 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v16.json' with { type: 'json' }
 import { resolveInImageOptionLabels } from './inImageOptionLabels.mjs'
 import { resolveCrossPageParagraphJoins } from './crossPageParagraphJoin.mjs'
 import { validateListeningSourceDecision } from './listeningSourceDecision.mjs'
@@ -22,24 +23,34 @@ export const zhejiangLegacyBinding = Object.freeze({
   profileId: zhejiang.profileId, version: zhejiang.version, sha256: digestJson(zhejiang),
 })
 
-export function importFormatBinding(profileId = 'nck1') {
+export function importFormatBinding(profileId = 'nck1', version) {
   if (profileId === 'nck1') return null
-  if (profileId === national.profileId) return Object.freeze({ profileId, version: national.version, sha256: digestJson(national) })
-  if (profileId !== zhejiang.profileId) throw new Error(`Unsupported import profile: ${profileId}`)
-  return zhejiangLegacyBinding
+  const profile = [national, zhejiang, zhejiangV16].find(profile => profile.profileId === profileId
+    && profile.version === (version ?? (profileId === zhejiang.profileId ? zhejiang.version : national.version)))
+  if (!profile) throw new Error(`Unsupported import profile: ${profileId}@${version ?? 'default'}`)
+  return profile === zhejiang ? zhejiangLegacyBinding
+    : Object.freeze({ profileId, version: profile.version, sha256: digestJson(profile) })
 }
 
-export function materializationSlotSpecs(profileId) {
-  const profile = profileId === national.profileId ? national : profileId === zhejiang.profileId ? zhejiang : null
+export function materializationSlotSpecs(profileId, { zhejiangProfileVersion = '17', groups = [] } = {}) {
+  const profile = profileId === national.profileId ? national : profileId === zhejiang.profileId
+    ? (zhejiangProfileVersion === '16' ? zhejiangV16 : zhejiang) : null
   if (!profile) throw new Error(`Unsupported materialization profile: ${profileId}`)
+  let nextReadingNumber = 21
   return profile.parts.flatMap(part => part.sections.flatMap(section => section.slots))
     .filter(slot => slot.familyContractRef.id !== 'listening')
-    .map(slot => [
-      ({ 'reading.seven-choices': 'seven-choices', 'language.cloze': 'cloze',
-        'language.grammar-fill': 'grammar-fill' })[slot.slotId] ?? slot.slotId,
-      slot.familyContractRef.id,
-      slot.numberingRule.start ?? null, slot.numberingRule.end ?? null,
-    ])
+    .map(slot => {
+      const count = groups.find(group => group.slotId === slot.slotId)?.questions?.length
+      const flexible = profile === zhejiang && slot.familyContractRef.id === 'reading' && Number.isInteger(count)
+      const from = flexible ? nextReadingNumber : slot.numberingRule.start ?? null
+      const to = flexible ? from + count - 1 : slot.numberingRule.end ?? null
+      if (flexible) nextReadingNumber = to + 1
+      return [
+        ({ 'reading.seven-choices': 'seven-choices', 'language.cloze': 'cloze',
+          'language.grammar-fill': 'grammar-fill' })[slot.slotId] ?? slot.slotId,
+        slot.familyContractRef.id, from, to,
+      ]
+    })
 }
 
 export function profileHeadingSpecs(profile = zhejiang) {
@@ -48,7 +59,7 @@ export function profileHeadingSpecs(profile = zhejiang) {
     return [
       ...(index === 0 ? [{ slotId, instructionId: part.titleInstructionRef, score: part.score }] : []),
       { slotId, instructionId: section.titleInstructionRef, score: section.score,
-        count: section.slots.reduce((sum, slot) => sum + slot.questionCardinality.count, 0),
+        count: section.slots.reduce((sum, slot) => sum + (slot.questionCardinality.count ?? slot.numberingRule.end - slot.numberingRule.start + 1), 0),
         points: section.slots[0].scoringRule.points },
     ]
   }))
@@ -1254,8 +1265,8 @@ function validateListening(listening, documents, sourceCoverage, issues) {
   }
 }
 
-export function validateNck1SourceMaterialization(value, { allowMultipleApplicationNotices = false } = {}) {
-  return validateMaterialization(value, { allowMultipleApplicationNotices })
+export function validateNck1SourceMaterialization(value, { allowMultipleApplicationNotices = false, zhejiangProfileVersion = '17' } = {}) {
+  return validateMaterialization(value, { allowMultipleApplicationNotices, zhejiangProfileVersion })
 }
 
 
@@ -1303,14 +1314,14 @@ function validateErrorCorrection(value, documents) {
 
 // This context is derived only from successfully resolved v13 decisions. Public
 // callers cannot grant a question or a legacy envelope the new measurement path.
-function validateMaterialization(value, { allowMultipleApplicationNotices = false, profileId = 'nck1', slotSpecs = null } = {}, inImageQuestionIds = new Set()) {
+function validateMaterialization(value, { allowMultipleApplicationNotices = false, profileId = 'nck1', slotSpecs = null, zhejiangProfileVersion = '17' } = {}, inImageQuestionIds = new Set()) {
   if (['nck1-source-materialization-v14', 'nck1-source-materialization-v15'].includes(value?.schemaVersion)) {
     const nationalLegacy = value.schemaVersion === 'nck1-source-materialization-v15'
     if (value.profileId !== (nationalLegacy ? 'national-legacy' : 'zhejiang-legacy')) return [issue('MATERIALIZATION_ROOT_INVALID', '$.profileId', 'Legacy v14 binds zhejiang-legacy')]
     const issues = []
     const documents = new Map((value.documents || []).map(document => [document.documentId, document]))
     const presentation = value.sourcePresentation
-    const specs = profileHeadingSpecs(nationalLegacy ? national : zhejiang)
+    const specs = profileHeadingSpecs(nationalLegacy ? national : zhejiangProfileVersion === '16' ? zhejiangV16 : zhejiang)
     if (!isRecordValue(presentation) || !exactKeys(presentation, ['instructions', 'listeningExample', 'headings', 'opening'])
       || !Array.isArray(presentation.headings) || presentation.headings.length !== specs.length
       || !isRecordValue(presentation.opening) || !exactKeys(presentation.opening, ['title', 'notices', 'transferNotice', 'source'])
@@ -1349,6 +1360,15 @@ function validateMaterialization(value, { allowMultipleApplicationNotices = fals
           `Legacy written Questions require canonical 21-${count + 20} in order and one complete source mapping: 21-${count + 20} or 1-${count}`))
       }
     }
+    if (!nationalLegacy && zhejiangProfileVersion === '17') {
+      const reading = (value.groups || []).filter(group => group.family === 'reading')
+      if (reading.length !== 3 || reading.some((group, index) =>
+        group.slotId !== ['reading.a', 'reading.b', 'reading.c'][index]
+        || ![3, 4].includes(group.questions?.length))) {
+        issues.push(issue('MATERIALIZATION_GROUP_QUESTION_COUNT_INVALID', '$.groups',
+          'Zhejiang reading A/B/C require three ordered passages with 3 or 4 Questions each'))
+      }
+    }
     if (value.listening?.state !== 'captured') issues.push(issue('MATERIALIZATION_LISTENING_INCOMPLETE', '$.listening', 'This profile requires all listening questions'))
     const correction = nationalLegacy ? value.groups?.find(group => group.family === 'error-correction') : null
     if (nationalLegacy) issues.push(...validateErrorCorrection(value, documents))
@@ -1362,7 +1382,7 @@ function validateMaterialization(value, { allowMultipleApplicationNotices = fals
     } : {}), schemaVersion: Object.hasOwn(value, 'inImageOptionLabels') && value.inImageOptionLabels.some(item => item.schemaVersion === 'reading-in-image-option-labels-v2')
       ? 'nck1-source-materialization-v13' : Object.hasOwn(value, 'paragraphJoins') ? 'nck1-source-materialization-v12' : 'nck1-source-materialization-v11', sourcePresentation: original }
     return [...issues, ...validateMaterialization(legacy, { allowMultipleApplicationNotices, profileId: value.profileId,
-      slotSpecs: materializationSlotSpecs(value.profileId).filter(slot => slot[1] !== 'error-correction') }, inImageQuestionIds)]
+      slotSpecs: materializationSlotSpecs(value.profileId, { zhejiangProfileVersion, groups: value.groups }).filter(slot => slot[1] !== 'error-correction') }, inImageQuestionIds)]
   }
   if (value?.schemaVersion === 'nck1-source-materialization-v13') {
     const issues = []

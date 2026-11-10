@@ -175,7 +175,7 @@ function selectProducer(paperDir, documents) {
   const configPath = path.join(paperDir, 'config.json')
   const config = existsSync(configPath) ? JSON.parse(readFileSync(configPath, 'utf8')) : {}
   if (config.formatProfileBinding) {
-    if (digestJson(config.formatProfileBinding) !== digestJson(importFormatBinding(config.formatProfileBinding.profileId))
+    if (digestJson(config.formatProfileBinding) !== digestJson(importFormatBinding(config.formatProfileBinding.profileId, config.formatProfileBinding.version))
       || documents.some(document => document.mediaType !== 'application/pdf')) {
       throw new Error('Legacy profile requires its exact version binding and PDF OCR sources')
     }
@@ -210,11 +210,12 @@ export function inspectNck1Materialization({ paperDir, manifest }) {
   const producer = selectProducer(paperDir, documents)
   const producerInputs = producer.loadInputs?.(paperDir) || {}
   if (manifest.profileId !== 'nck1' && manifest.profileId !== undefined) {
-    const binding = importFormatBinding(manifest.profileId)
+    const binding = importFormatBinding(manifest.profileId, manifest.formatProfileBinding?.version)
     if (producer !== OCR_PRODUCER || digestJson(manifest.formatProfileBinding) !== digestJson(binding)) {
       throw new Error('Legacy source manifest profile/version is not bound to the OCR route')
     }
     producerInputs.profileId = manifest.profileId
+    producerInputs.profileVersion = binding.version
   }
   const producerVersion = producer === OCR_PRODUCER ? nck1OcrProducerVersion(producerInputs.confirmation) : producer.version
   const outputPath = path.join(paperDir, manifest.materializationPath)
@@ -373,11 +374,12 @@ export function runNck1MaterializationJobUnlocked({ paperDir, manifest }) {
   const producer = selectProducer(paperDir, documents)
   const producerInputs = producer.loadInputs?.(paperDir) || {}
   if (manifest.profileId !== 'nck1' && manifest.profileId !== undefined) {
-    const binding = importFormatBinding(manifest.profileId)
+    const binding = importFormatBinding(manifest.profileId, manifest.formatProfileBinding?.version)
     if (producer !== OCR_PRODUCER || digestJson(manifest.formatProfileBinding) !== digestJson(binding)) {
       throw new Error('Legacy source manifest profile/version is not bound to the OCR route')
     }
     producerInputs.profileId = manifest.profileId
+    producerInputs.profileVersion = binding.version
   }
   const producerVersion = producer === OCR_PRODUCER ? nck1OcrProducerVersion(producerInputs.confirmation) : producer.version
   const sourceDigest = producer.sourceDigest(documents, producerInputs)
