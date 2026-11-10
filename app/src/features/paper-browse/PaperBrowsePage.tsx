@@ -539,7 +539,9 @@ function canonicalRailLabel(
     'language.cloze': '完形',
     'language.grammar-fill': '语法',
     'writing.short-error-correction': '短文改错',
-    'writing.application': '应用文',
+    'writing.application': consumption?.profileRef?.profileId === 'national-legacy'
+      ? '书面表达'
+      : '应用文',
     'writing.continuation': '续写',
   }
   return labels[node.slotId] ?? null
@@ -3962,9 +3964,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               {part.groups.map((g) => {
                 const isActive = g.anchor === effectiveActiveAnchor
                 const card = questionGroupById.get(g.anchor)
-                // Writing groups read 「应用文 / 续写」 in both rail widths
-                // (owner 2026-09-15: one name, not 「第一节 / 第二节」 wide
-                // and 「应用文 / 续写」 narrow).
+                // Use the same task name in both rail widths, with
+                // 「书面表达」 for the national-legacy application slot.
                 const canonicalTitle = canonicalRailLabel(canonicalConsumption, g.anchor)
                 const fullTitle = canonicalTitle
                   ?? (card && railWritingLabel(card)) ?? railGroupLabel(g.title)
