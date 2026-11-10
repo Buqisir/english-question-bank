@@ -35,6 +35,9 @@ const textResult = (value, isError = false) => ({
 
 function createServer({ base, token }) {
   const server = new McpServer({ name: 'eqb-agent', version: '1.0.0' })
+  // Clients may omit `arguments` for tools whose fields are all optional; the SDK rejects undefined.
+  const validateToolInput = server.validateToolInput.bind(server)
+  server.validateToolInput = (tool, args, name) => validateToolInput(tool, args ?? {}, name)
   async function get(path, query = {}) {
     const url = new URL(`/api/agent/v1/${path}`, base)
     for (const [key, value] of Object.entries(query)) {
