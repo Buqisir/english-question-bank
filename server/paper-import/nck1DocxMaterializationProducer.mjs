@@ -2299,7 +2299,8 @@ export function produceNck1MaterializationFromStructures({
     body, /^第二节/u, 'sections.writing.second', issues, question?.documentId,
     [writingStart + 1, body.length],
   )
-  const writtenNumberOffset = national && readingFirst !== null && readingSecond !== null
+  const writtenCount = national ? 50 : 45
+  const writtenNumberOffset = legacy && readingFirst !== null && readingSecond !== null
     && questionPositions(body, 1, readingFirst + 1, readingSecond).length === 1 ? 20 : 0
   const sourceSpecs = writtenNumberOffset
     ? specs.map(([slotId, family, from, to]) => [slotId, family,
@@ -2340,10 +2341,10 @@ export function produceNck1MaterializationFromStructures({
     }))
     if (writtenNumberOffset) {
       const writtenQuestions = groups.flatMap(group => group.questions)
-      if (writtenQuestions.length !== 50 || writtenQuestions.some((question, index) =>
+      if (writtenQuestions.length !== writtenCount || writtenQuestions.some((question, index) =>
         question.canonicalNumber !== index + 1 || question.sourceNumber !== index + 1)) {
         addIssue(issues, 'NCK1_DOCX_SOURCE_NUMBER_MISMATCH', 'groups',
-          'National written renumbering requires all source Questions 1-50 exactly in order', sourceRef(question.documentId))
+          `Legacy written renumbering requires all source Questions 1-${writtenCount} exactly in order`, sourceRef(question.documentId))
       } else {
         const blankIds = new Map()
         for (const question of writtenQuestions) {
@@ -2526,17 +2527,17 @@ export function produceNck1MaterializationFromStructures({
     materialization.sourcePresentation = legacySourcePresentation({ body, positions: { readingStart, languageStart, writingStart,
       readingFirst, readingSecond, languageFirst, languageSecond, writingFirst, writingSecond },
       question, issues, profileId })
-    if (national) {
+    {
       const writtenQuestions = groups.filter(group => group.family !== 'error-correction').flatMap(group => group.questions)
-      if (writtenQuestions.length !== 50 || writtenQuestions.some((question, index) =>
+      if (writtenQuestions.length !== writtenCount || writtenQuestions.some((question, index) =>
         question.canonicalNumber !== index + 21 || question.sourceNumber !== question.canonicalNumber - writtenNumberOffset)) {
         addIssue(issues, `${codePrefix}_SOURCE_NUMBER_MISMATCH`, 'groups',
-          'National written Questions must map source 1-50 to 21-70, or retain source 21-70 throughout',
+          `Legacy written Questions must map source 1-${writtenCount} to 21-${writtenCount + 20}, or retain source 21-${writtenCount + 20} throughout`,
           sourceRef(question.documentId))
       }
     }
     for (const group of groups) for (const question of group.questions) {
-      if ((!national || group.family === 'error-correction') && question.sourceNumber !== question.canonicalNumber) {
+      if (group.family === 'error-correction' && question.sourceNumber !== question.canonicalNumber) {
         addIssue(issues, `${codePrefix}_SOURCE_NUMBER_MISMATCH`,
           `questions.${question.canonicalNumber}`, 'Legacy source numbering must be retained exactly', question.source)
       }

@@ -51,6 +51,58 @@ const produced = produceNck1DocxMaterialization({
 })
 
 assert.equal(produced.disposition, 'ready_for_verification')
+for (const offset of [0, 20]) {
+  const legacyFixture = makeSyntheticNck1DocxFixture({ listening: true })
+  const [question, coverage, answer] = legacyFixture.sourceDocuments
+  const range = (from, to) => Array.from({ length: to - from + 1 }, (_, index) => from + index)
+  const number = n => n - offset
+  const choice = n => [`${number(n)}. Which written choice fits?`, 'A. Written answer.',
+    'B. Other answer.', 'C. Other choice.', 'D. Last choice.']
+  const paragraphs = ['第二部分 阅读理解', '第一节', 'A', 'A source passage.', ...range(21, 23).flatMap(choice),
+    'B', 'Another source passage.', ...range(24, 26).flatMap(choice),
+    'C', 'The last source passage.', ...range(27, 30).flatMap(choice), '第二节', 'Read the following material.',
+    ...range(31, 35).map(n => `Before __${number(n)}__ after.`),
+    ...range(1, 7).map(n => `${String.fromCharCode(64 + n)}. A source option.`),
+    '第三部分 语言运用', '第一节', 'Read this cloze.',
+    range(36, 55).map(n => `Before __${number(n)}__ after`).join(' '), ...range(36, 55).flatMap(choice),
+    '第二节', 'Read this grammar material.', range(56, 65).map(n => `Before __${number(n)}__ (word) after`).join(' '),
+    '第四部分 写作', '第一节', 'Write an application.', '注意：', '1. 词数80左右；',
+    '第二节', 'Continue the story.', '注意：', '1. 词数150左右；']
+  const answers = ['第一部分 听力', ...range(1, 20).map(n => `${n}. B`),
+    '第二部分 阅读理解', ...range(21, 55).map(n => `${number(n)}. A`),
+    '第三部分 语言运用', ...range(56, 65).map(n => `${number(n)}. word`), '第四部分 写作']
+  const body = lines => lines.map((text, index) => ({
+    kind: 'paragraph', text, sourceIndex: index + 1000, containsDrawing: false,
+  }))
+  const questionStructure = extractDocxDocumentStructure(question.bytes)
+  questionStructure.body = [...questionStructure.body.slice(0,
+    questionStructure.body.findIndex(item => /^第二部分/u.test(item.text))), ...body(paragraphs)]
+  const result = produceNck1MaterializationFromStructures({
+    paperId: legacyFixture.paperId, documents: legacyFixture.sourceDocuments, profileId: 'zhejiang-legacy',
+    question, coverage, answer, questionStructure,
+    answerStructure: { ...extractDocxDocumentStructure(answer.bytes), body: body(answers) },
+    issues: [], sourceVisuals: [], mediaInventory: [], mediaFiles: [], codePrefix: 'NCK1_DOCX',
+    producerVersion: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
+    reviewSchemaVersion: 'nck1-docx-materialization-review-v1',
+    sourceDigest: nck1DocxProducerSourceDigest(legacyFixture.sourceDocuments),
+  })
+  const written = result.materialization.groups.flatMap(group => group.questions)
+  assert.equal(written.length, 45)
+  assert(written.every((question, index) =>
+    question.sourceNumber === number(index + 21) && question.canonicalNumber === index + 21))
+  assert(!result.review.required.some(issue => issue.code.endsWith('_SOURCE_NUMBER_MISMATCH')))
+  assert.equal(result.materialization.answers.length, 45)
+  assert(result.materialization.answers.every(answer => answer.value === (answer.canonicalNumber < 56 ? 'A' : 'word')))
+  assert.equal(result.materialization.listening.answers.length, 20)
+  assert(result.materialization.listening.answers.every(answer => answer.value === 'B'))
+  const blankIds = written.filter(question => question.blankId).map(question => question.blankId)
+  assert.equal(blankIds.length, 35)
+  assert(written.filter(question => question.blankId).every(question =>
+    question.blankId.endsWith(`:${question.canonicalNumber}`)))
+  assert.deepEqual(result.materialization.groups.flatMap(group => group.blocks.flatMap(block =>
+    (block.content ?? []).filter(run => run.kind === 'blank_ref').map(run => run.blankId))), blankIds)
+}
+console.log('PASS Zhejiang producer: complete offsets, canonical blanks and separate listening/written answers')
 {
   const rows = [['Accessible Vehicles', 'Seating', 'Time Frame', 'Rate / hour'],
     ['E-bikes & e-scooters', '1', 'Off season', '$6'], ['', '', 'Peak season', '$8'],

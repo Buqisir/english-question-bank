@@ -4,6 +4,8 @@ import { confirmMaterializationWritingGivens } from './import-pipeline/materiali
 
 import {
   digestNck1SourceMaterialization,
+  materializationSlotSpecs,
+  profileHeadingSpecs,
   validateNck1SourceMaterialization,
 } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
 
@@ -345,6 +347,51 @@ export function makeFixture({ listening = false, mixedTable = false } = {}) {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
 await import('./verify-inline-blank-boundaries.mjs')
+const { SOURCE_INSTRUCTION_SLOTS } = await import('../shared/paper-canonical/sourcePresentation.mjs')
+for (const offset of [0, 20]) {
+  const legacy = makeFixture({ listening: true })
+  legacy.schemaVersion = 'nck1-source-materialization-v14'
+  legacy.profileId = 'zhejiang-legacy'
+  const ranges = materializationSlotSpecs('zhejiang-legacy')
+  const originals = legacy.groups
+  legacy.groups = ranges.map(([slotId, family, from, to]) => {
+    const group = structuredClone(originals.find(group => group.family === family))
+    group.slotId = slotId
+    group.groupId = `group:${slotId}`
+    if (from === null) return group
+    const template = group.questions[0]
+    group.questions = Array.from({ length: to - from + 1 }, (_, index) => {
+      const number = from + index
+      return { ...structuredClone(template), questionId: `question:${number}`,
+        canonicalNumber: number, sourceNumber: number - offset,
+        blankId: family === 'reading' ? null : `blank:${number}` }
+    })
+    group.blocks = [{ kind: 'paragraph', blockId: `block:${slotId}`, role: 'body', source: locator(),
+      content: family === 'reading' ? [{ kind: 'text', text: 'A complete source passage.' }]
+        : group.questions.flatMap(question => [{ kind: 'blank_ref', blankId: question.blankId },
+            { kind: 'text', text: question.prompt ? ` (${question.prompt}) after ` : ' after ' }]) }]
+    return group
+  })
+  legacy.answers = legacy.groups.flatMap(group => group.questions.map(question => ({
+    questionId: question.questionId, canonicalNumber: question.canonicalNumber,
+    value: question.canonicalNumber < 56 ? 'A' : 'answer', authority: locator('answers'),
+  })))
+  legacy.sourcePresentation = {
+    instructions: Object.keys(SOURCE_INSTRUCTION_SLOTS).map(slotId => ({ slotId, text: 'Source instruction.', source: locator() })),
+    listeningExample: { state: 'not_supplied', source: locator() },
+    headings: profileHeadingSpecs().map(spec => ({ slotId: spec.slotId,
+      instructionId: spec.instructionId, text: 'Source heading.', source: locator() })),
+    opening: { title: 'Synthetic Zhejiang paper', notices: [], transferNotice: 'Use the answer sheet.', source: locator() },
+  }
+  assert.deepEqual(validateNck1SourceMaterialization(legacy), [], `Zhejiang source offset ${offset}`)
+  const mixed = structuredClone(legacy)
+  mixed.groups[0].questions[0].sourceNumber += 20
+  assert(validateNck1SourceMaterialization(mixed).some(issue => issue.code === 'MATERIALIZATION_SOURCE_NUMBER_MISMATCH'))
+  const missing = structuredClone(legacy)
+  missing.groups[1].questions.pop()
+  assert(validateNck1SourceMaterialization(missing).some(issue => issue.code === 'MATERIALIZATION_GROUP_QUESTION_COUNT_INVALID'))
+}
+console.log('PASS Zhejiang legacy: complete source offsets and rejection of mixed/incomplete numbering')
 const plain = makeFixture()
 assert.deepEqual(validateNck1SourceMaterialization(plain), [])
 for (const text of [

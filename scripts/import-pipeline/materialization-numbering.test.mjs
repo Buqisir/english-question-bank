@@ -128,3 +128,18 @@ test('report entries locate the normalized full source run and finalizer recompu
   wrongPage.groups[0].blocks[0].source.page = 8
   assert.equal(buildOcrReportEntries(receipt, wrongPage).entries.length, 0)
 })
+
+test('a unique matching stem in another document or page is not an OCR report target', () => {
+  const materialization = { groups: [{ questions: [{
+    stem: 'Which answer is correct?', source,
+  }] }] }
+  for (const location of [{ documentId: 'answers', page: 7 }, { ...source, page: 8 }]) {
+    const receipt = { correctionReport: { entries: [{
+      itemId: 'answer-item', kind: 'ocr_repair', ocrText: 'raw OCR',
+      correctedText: '21. Which answer is correct?', ...location, reason: '核对原页',
+    }] } }
+    const report = buildOcrReportEntries(receipt, materialization)
+    assert.deepEqual(report.entries, [])
+    assert.equal(report.skipped.length, 1)
+  }
+})

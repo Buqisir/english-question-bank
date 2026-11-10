@@ -1349,7 +1349,9 @@ export async function finish(ctx, args, { referenceStages = {}, readStatus } = {
   if (hasListening(ctx)) await step(ctx, 'listening-review', () => installListening(ctx))
   await step(ctx, 'ocr-correction-report', async () => {
     const reportFile = path.join(ctx.paperDir, 'agent-ocr-correction-report-v2.json')
-    if (ctx.state.data.formatProfileBinding?.profileId === 'national-legacy' && existsSync(reportFile)) {
+    const profileId = (ctx.state.data.formatProfileBinding
+      ?? readJson(path.join(ctx.paperDir, 'config.json')).formatProfileBinding)?.profileId
+    if (['national-legacy', 'zhejiang-legacy'].includes(profileId) && existsSync(reportFile)) {
       // Retain source-authored entries only after the existing exact-bound projection validates them.
       buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true })
       return { entries: readJson(reportFile).entries.length, retained: true }
