@@ -1337,19 +1337,16 @@ function validateMaterialization(value, { allowMultipleApplicationNotices = fals
       }
     }
     validateLocator(presentation.opening.source, '$.sourcePresentation.opening.source', documents, issues)
-    if (nationalLegacy) {
+    {
       const writtenQuestions = (value.groups || []).filter(group => group.family !== 'error-correction')
         .flatMap(group => group.questions || [])
-      if (writtenQuestions.length !== 50
+      const count = nationalLegacy ? 50 : 45
+      if (writtenQuestions.length !== count
         || writtenQuestions.some((question, index) => question.canonicalNumber !== index + 21)
         || ![0, 20].some(offset => writtenQuestions.every(question =>
           question.sourceNumber === question.canonicalNumber - offset))) {
         issues.push(issue('MATERIALIZATION_SOURCE_NUMBER_MISMATCH', '$.groups',
-          'National written Questions require canonical 21-70 in order and one complete source mapping: 21-70 or 1-50'))
-      }
-    } else {
-      for (const question of [...(value.groups || []).flatMap(group => group.questions || [])]) {
-        if (question.sourceNumber !== question.canonicalNumber) issues.push(issue('MATERIALIZATION_SOURCE_NUMBER_MISMATCH', '$.groups', 'Legacy question numbers must match the original source'))
+          `Legacy written Questions require canonical 21-${count + 20} in order and one complete source mapping: 21-${count + 20} or 1-${count}`))
       }
     }
     if (value.listening?.state !== 'captured') issues.push(issue('MATERIALIZATION_LISTENING_INCOMPLETE', '$.listening', 'This profile requires all listening questions'))

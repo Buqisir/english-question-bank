@@ -130,6 +130,25 @@ test('producer and driver import the same pure version constant; current results
   assertReferenceProductsReady(ctx)
 })
 
+for (const profileId of ['national-legacy', 'zhejiang-legacy']) for (const bindingIn of ['state', 'config']) {
+  test(`${profileId} authored OCR report from ${bindingIn} requires exact projection before reuse`, async t => {
+    const { ctx, calls, options } = fixture(t)
+    delete ctx.state.steps['ocr-correction-report']
+    if (bindingIn === 'state') ctx.state.data.formatProfileBinding = { profileId }
+    else json(path.join(ctx.paperDir, 'config.json'), {
+      listening: 'absent-by-exam-design', formatProfileBinding: { profileId },
+    })
+    const report = path.join(ctx.paperDir, 'agent-ocr-correction-report-v2.json')
+    json(report, { entries: [{ category: 'source_layout_error', before: '24.', after: '25.' }] })
+    const before = readFileSync(report)
+    // The intentionally incomplete source must fail projection, preserving the authored report.
+    await assert.rejects(() => finish(ctx, [], options), /universal-source-manifest\.json is missing/u)
+    assert.deepEqual(readFileSync(report), before)
+    assert.deepEqual(calls, [])
+    assert.equal(ctx.state.steps['ocr-correction-report'].finishedAt, undefined)
+  })
+}
+
 for (const artifact of ['draft', 'finalized']) for (const [shape, value] of [
   ['old group content', { groups: ['OLD_REFERENCE_CONTENT'] }],
   ['missing section', { groups: [{ essays: { entries: [] } }] }],

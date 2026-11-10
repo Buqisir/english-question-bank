@@ -1014,7 +1014,7 @@ export function buildOcrReportEntries(receipt, materialization) {
     const blocks = samePage.filter(({ pointer }) => /\/blocks\/\d+\//u.test(pointer))
     const located = samePage.length === 1 ? samePage[0]
       : blocks.length === 1 ? blocks[0]
-        : (candidates.length === 1 ? candidates[0] : null)
+        : null
     if (!located) {
       skipped.push({
         itemId: note.itemId,
