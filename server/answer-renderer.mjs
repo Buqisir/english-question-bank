@@ -169,7 +169,12 @@ function legacyAnswerSections({ canonicalPlan, materialization, authorityRef, so
       for (const slot of section.slots) {
         const binding = canonicalPlan.slotBindings.find(binding => binding.slotId === slot.slotId && binding.state === 'bound')
         const assignments = canonicalPlan.numberingAssignments.filter(assignment => assignment.slotId === slot.slotId)
-        if (!binding || assignments.length !== slot.questionCardinality.count
+        const cardinality = slot.questionCardinality
+        const countMatches = cardinality.count !== undefined
+          ? assignments.length === cardinality.count
+          : cardinality.kind === 'one_of' && Array.isArray(cardinality.counts)
+            && cardinality.counts.includes(assignments.length)
+        if (!binding || !countMatches
           || assignments.some(assignment => assignment.groupId !== binding.groupRef.groupId)) {
           throw new Error('Answer question range is not bound to the Plan')
         }

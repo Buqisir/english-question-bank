@@ -10,7 +10,10 @@ import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
 import { makeSyntheticNck1DocxFixture } from '../test-fixtures/paper-import/nck1-docx-materialization-v1/fixture.mjs'
-import { sha256 } from '../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import { materializationSlotSpecs, profileHeadingSpecs } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
+import { SOURCE_INSTRUCTION_SLOTS } from '../shared/paper-canonical/sourcePresentation.mjs'
+import { resolveCanonicalAuthority, zhejiangLegacyReadingRangesAuthorityRef } from '../shared/paper-canonical/authority.mjs'
 import { prepareSourceReferences, validateSourceReferences, sourceReferenceBlocks } from '../server/paper-import/sourceReferences.mjs'
 import { buildAnswerOnlyHtml, buildAssembledAnswerOnlyHtml } from '../server/answer-renderer.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
@@ -287,7 +290,93 @@ function answerLabelChecks() {
   console.log('PASS v1/v2 source labels, single/multiple essay numbering and whole/assembled transcript headings')
 }
 
+export function legacyAnswerFixture(counts = [4, 3, 3], authorityRef = zhejiangLegacyReadingRangesAuthorityRef) {
+  const input = fixture({ listening: true })
+  const materialization = input.materialization
+  materialization.schemaVersion = 'nck1-source-materialization-v14'
+  materialization.profileId = 'zhejiang-legacy'
+  const source = structuredClone(materialization.groups[0].blocks[0].source)
+  const originals = materialization.groups
+  let next = 21
+  materialization.groups = materializationSlotSpecs('zhejiang-legacy').map(([slotId, family, from, to], index) => {
+    const group = structuredClone(originals.find(group => group.family === family))
+    group.slotId = slotId
+    if (from === null) return group
+    group.groupId = `group:${slotId}`
+    if (family === 'reading') {
+      from = next
+      next += counts[index]
+      to = next - 1
+    }
+    const template = group.questions[0]
+    group.questions = Array.from({ length: to - from + 1 }, (_, index) => {
+      const number = from + index
+      return { ...structuredClone(template), questionId: `question:${number}`,
+        canonicalNumber: number, sourceNumber: number, blankId: family === 'reading' ? null : `blank:${number}` }
+    })
+    group.blocks = [{ kind: 'paragraph', blockId: `block:${slotId}`, role: 'body', source,
+      content: family === 'reading' ? [{ kind: 'text', text: 'A complete source passage.' }]
+        : group.questions.flatMap(question => [{ kind: 'blank_ref', blankId: question.blankId },
+          { kind: 'text', text: question.prompt ? ` (${question.prompt}) after ` : ' after ' }]) }]
+    return group
+  })
+  materialization.answers = materialization.groups.flatMap(group => group.questions.map(question => ({
+    questionId: question.questionId, canonicalNumber: question.canonicalNumber,
+    value: question.canonicalNumber < 56 ? 'ABCD'[question.canonicalNumber % 4] : 'answer', authority: { ...source, documentId: 'answers' },
+  })))
+  const profile = resolveCanonicalAuthority(authorityRef).closure.profiles.get('zhejiang-legacy')
+  materialization.sourcePresentation = {
+    instructions: Object.keys(SOURCE_INSTRUCTION_SLOTS).map(slotId => ({ slotId, text: 'Source instruction.', source })),
+    listeningExample: { state: 'not_supplied', source },
+    headings: profileHeadingSpecs(profile).map(spec => ({
+      slotId: spec.slotId, instructionId: spec.instructionId, text: 'Source heading.', source,
+    })),
+    opening: { title: 'Synthetic Zhejiang paper', notices: [], transferNotice: 'Use the answer sheet.', source },
+  }
+  const slots = profile.parts.flatMap(part => part.sections.flatMap(section => section.slots))
+  const groupFor = slot => materialization.groups.find(group => group.slotId === ({
+    'reading.seven-choices': 'seven-choices', 'language.cloze': 'cloze', 'language.grammar-fill': 'grammar-fill',
+  }[slot.slotId] ?? slot.slotId))
+  const canonicalPlan = { paperId: materialization.paperId, authorityRef,
+    profileRef: { profileId: profile.profileId, profileVersion: profile.version, profileDigest: digestJson(profile) },
+    slotBindings: slots.map(slot => ({ slotId: slot.slotId, state: 'bound', groupRef: { groupId:
+      groupFor(slot)?.groupId ?? `group:${slot.slotId}` } })),
+    numberingAssignments: slots.flatMap(slot => {
+      const group = groupFor(slot)
+      return (group?.questions ?? materialization.listening.answers.filter(answer =>
+        answer.canonicalNumber >= slot.numberingRule.start && answer.canonicalNumber <= slot.numberingRule.end)
+        .map(answer => ({ ...answer, questionId: `question:listening:${answer.canonicalNumber}` })))
+        .map(question => ({ slotId: slot.slotId, groupId: group?.groupId ?? `group:${slot.slotId}`,
+          questionId: question.questionId, canonicalNumber: question.canonicalNumber }))
+    }) }
+  const references = input.sourceReferences.groups
+  input.sourceReferences = { ...prepareSourceReferences(input), groups: references }
+  return { ...input, authorityRef, canonicalPlan }
+}
+
+function legacyCardinalityChecks() {
+  for (const counts of [[3, 3, 4], [4, 3, 3], [3, 4, 3]]) {
+    const input = legacyAnswerFixture(counts)
+    const html = buildAnswerOnlyHtml(input)
+    let next = 21
+    for (const count of counts) {
+      assert(html.includes(`data-answer-range="${next}-${next + count - 1}"`))
+      next += count
+    }
+    assert.deepEqual([...html.matchAll(/data-answer-number="(\d+)"/gu)].map(match => Number(match[1])),
+      Array.from({ length: 65 }, (_, index) => index + 1))
+    for (const answer of input.materialization.answers.filter(answer => answer.canonicalNumber <= 30)) {
+      assert(html.includes(`aria-label="第${answer.canonicalNumber}题 ${answer.value}">${answer.value}</span>`))
+    }
+    input.canonicalPlan.numberingAssignments = input.canonicalPlan.numberingAssignments.filter(assignment =>
+      assignment.canonicalNumber !== 22 && assignment.canonicalNumber !== 23)
+    assert.throws(() => buildAnswerOnlyHtml(input), /Answer question range is not bound to the Plan/)
+  }
+  console.log('PASS Zhejiang v17 one_of answer ranges, source values and rejected invalid cardinality')
+}
+
 function contractChecks() {
+  legacyCardinalityChecks()
   answerLabelChecks()
   continuationContractChecks()
   const input = fixture()
