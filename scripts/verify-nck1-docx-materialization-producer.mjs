@@ -8,6 +8,7 @@ import {
   mkdirSync,
   mkdtempSync,
   readFileSync,
+  readdirSync,
   rmSync,
   writeFileSync,
 } from 'node:fs'
@@ -17,7 +18,12 @@ import path from 'node:path'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../shared/paper-canonical/compiler.mjs'
 import { nck1MaterializationHistoricalAuthorityRef62 } from '../shared/paper-canonical/authority.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
-import { validateNck1SourceMaterialization } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
+import { importFormatBinding, validateNck1SourceMaterialization } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
+import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import zhejiangV16 from '../standards/paper-canonical/profiles/zhejiang-legacy-v16.json' with { type: 'json' }
+import { nck1OcrProducerSourceDigest, nck1OcrProducerVersion } from '../server/paper-import/nck1OcrMaterializationProducer.mjs'
+import { nck1OcrSourceSetDigest } from '../server/paper-import/nck1OcrSourceEvidence.mjs'
+import { requestedRedo } from './import-pipeline/fast-import.mjs'
 import { buildNck1ReviewConsumption } from '../server/import-review/revisionProjection.mjs'
 import historicalScreen from '../standards/paper-canonical/consumers/screen-v46.json' with { type: 'json' }
 import {
@@ -36,6 +42,7 @@ import {
   inspectNck1Materialization,
   paperWriterLockPath,
   runNck1DocxMaterializationJob,
+  runNck1MaterializationJob,
   withPaperWriterLock,
 } from './import-pipeline/nck1-docx-materialize.mjs'
 import {
@@ -984,6 +991,74 @@ try {
   )
 } finally {
   rmSync(tempRoot, { recursive: true, force: true })
+}
+
+const legacyRoot = mkdtempSync(path.join(tmpdir(), 'eqb-zhejiang-saved-binding-'))
+try {
+  const paperId = 'paper-synthetic-zhejiang-saved-binding'
+  const binding = { profileId: 'zhejiang-legacy', version: '16', sha256: digestJson(zhejiangV16) }
+  const current = importFormatBinding('zhejiang-legacy')
+  assert.equal(current.version, '17', 'new Zhejiang imports default to v17')
+  assert.deepEqual(importFormatBinding('zhejiang-legacy', '16'), binding)
+  const save = (file, value) => { mkdirSync(path.dirname(file), { recursive: true }); writeFileSync(file, JSON.stringify(value)) }
+  const documents = ['question_source', 'official_answers'].map((role, index) => {
+    const bytes = Buffer.from(`%PDF-1.4\n% Synthetic retained ${role}`)
+    const document = { documentId: `source-${index}`, role, mediaType: 'application/pdf', pageCount: 1,
+      path: `source-${index}.pdf`, sha256: sha256(bytes), byteLength: bytes.length, bytes }
+    writeFileSync(path.join(legacyRoot, document.path), bytes)
+    return document
+  })
+  const manifest = { schemaVersion: 'universal-nck1-source-manifest-v3', paperId,
+    profileId: 'zhejiang-legacy', formatProfileBinding: binding,
+    materializationPath: 'materialization/nck1-source-materialization-v1.json',
+    documents: documents.map(({ bytes, ...record }) => record) }
+  const evidence = { evidenceDigest: `sha256:${'a'.repeat(64)}` }
+  const confirmation = { schemaVersion: 'nck1-ocr-source-confirmation-v1' }
+  const producerVersion = nck1OcrProducerVersion(confirmation)
+  // Reconstruct the saved v16 receipt independently of today's default binding.
+  const sourceDigest = digestJson({ producerVersion, sourceSetDigest: nck1OcrSourceSetDigest(documents),
+    evidenceDigest: evidence.evidenceDigest, confirmationDigest: digestJson(confirmation), formatProfileBinding: binding })
+  assert.equal(nck1OcrProducerSourceDigest(documents, { evidence, confirmation,
+    profileId: 'zhejiang-legacy', profileVersion: '16' }), sourceDigest)
+  assert.equal(nck1OcrProducerSourceDigest(documents, { evidence, confirmation, profileId: 'zhejiang-legacy' }),
+    nck1OcrProducerSourceDigest(documents, { evidence, confirmation, profileId: 'zhejiang-legacy', profileVersion: '17' }))
+  const output = { issues: [], media: [] }
+  const outputDigest = sha256(Buffer.from(JSON.stringify(output)))
+  const partition = { schemaVersion: 'nck1-listening-source-partition-v1', paperId, producerVersion,
+    producerSourceDigest: sourceDigest, originalMaterializationOutputDigest: outputDigest }
+  const receipt = { schemaVersion: 'nck1-ocr-materialization-producer-receipt-v1', paperId, producerVersion,
+    sourceDigest, outputDigest, disposition: 'needs_agent_review', mediaFiles: [],
+    listeningSourcePartitionDigest: digestJson(partition) }
+  const paths = ['materialization/nck1-source-materialization-v1.json',
+    'materialization/nck1-ocr-materialization-producer-receipt-v1.json',
+    'materialization/nck1-ocr-materialization-review-v1.json'].map(file => path.join(legacyRoot, file))
+  save(path.join(legacyRoot, 'config.json'), { paperId, formatProfileBinding: binding })
+  save(path.join(legacyRoot, 'universal-source-manifest.json'), manifest)
+  save(path.join(legacyRoot, 'materialization/nck1-ocr-source-evidence-v1.json'), evidence)
+  save(path.join(legacyRoot, 'materialization/nck1-ocr-source-confirmation-v1.json'), confirmation)
+  ;[output, receipt, { schemaVersion: 'nck1-ocr-materialization-review-v1', paperId, producerVersion,
+    sourceDigest, required: [], listeningSourcePartition: partition }].forEach((value, index) => save(paths[index], value))
+  const retained = paths.map(file => readFileSync(file))
+  const job = { paperDir: legacyRoot, manifest }
+  assert.equal(inspectNck1Materialization(job).sourceDigest, sourceDigest)
+  assert.equal(runNck1MaterializationJob(job).cached, true, 'saved v16 binding resumes its original receipt')
+  paths.forEach((file, index) => assert.deepEqual(readFileSync(file), retained[index]))
+  const work = path.join(legacyRoot, 'work')
+  const ctx = { paperId, paperDir: legacyRoot, work, fast: path.join(work, 'fast'),
+    statePath: path.join(work, 'fast/state.json'), state: { steps: {}, background: {}, data: { formatProfileBinding: binding } } }
+  await requestedRedo(ctx, 'materialize', '17')
+  for (const file of ['config.json', 'universal-source-manifest.json', 'work/fast/state.json']) {
+    const value = JSON.parse(readFileSync(path.join(legacyRoot, file)))
+    assert.deepEqual(value.formatProfileBinding ?? value.data.formatProfileBinding, current)
+  }
+  paths.forEach((file, index) => {
+    assert(!existsSync(file))
+    const archived = readdirSync(path.join(work, 'superseded')).find(name => name.endsWith(path.basename(file)))
+    assert.deepEqual(readFileSync(path.join(work, 'superseded', archived)), retained[index])
+  })
+  console.log('PASS saved Zhejiang v16 receipt resumes unchanged, new imports default to v17, explicit redo updates bindings and archives old outputs')
+} finally {
+  rmSync(legacyRoot, { recursive: true, force: true })
 }
 
 console.log('verify-nck1-docx-materialization-producer: PASS')

@@ -23,11 +23,13 @@ export const zhejiangLegacyBinding = Object.freeze({
   profileId: zhejiang.profileId, version: zhejiang.version, sha256: digestJson(zhejiang),
 })
 
-export function importFormatBinding(profileId = 'nck1') {
+export function importFormatBinding(profileId = 'nck1', version) {
   if (profileId === 'nck1') return null
-  if (profileId === national.profileId) return Object.freeze({ profileId, version: national.version, sha256: digestJson(national) })
-  if (profileId !== zhejiang.profileId) throw new Error(`Unsupported import profile: ${profileId}`)
-  return zhejiangLegacyBinding
+  const profile = [national, zhejiang, zhejiangV16].find(profile => profile.profileId === profileId
+    && profile.version === (version ?? (profileId === zhejiang.profileId ? zhejiang.version : national.version)))
+  if (!profile) throw new Error(`Unsupported import profile: ${profileId}@${version ?? 'default'}`)
+  return profile === zhejiang ? zhejiangLegacyBinding
+    : Object.freeze({ profileId, version: profile.version, sha256: digestJson(profile) })
 }
 
 export function materializationSlotSpecs(profileId, { zhejiangProfileVersion = '17', groups = [] } = {}) {
