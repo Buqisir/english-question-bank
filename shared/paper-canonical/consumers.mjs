@@ -94,13 +94,17 @@ export function resolveConsumerPresentation(ref) {
   return { policy, ref: { id: 'paper-presentation', version: policy.version, digest: digestJson(policy) } }
 }
 
-// A figure-bearing Application Writing prompt is consumable only by a consumer
-// whose own closure registers the renderer-owned prompt-figure capability.
+// National contracts bind the raw closure for error correction, while sharing
+// the preceding consumers' Application Writing renderer and its capability.
+// Resolve the exact consumer first; historical and unknown refs gain nothing.
 export function consumerRendersApplicationPromptFigures(ref) {
   if (!ref) return false
   const resolved = resolveConsumerContract(ref)
   if (!resolved.ok) return false
-  const authority = resolveCanonicalAuthority(authorityRefForManifestDigest(resolved.contract.authorityManifestDigest))
+  const rendererContract = nationalContracts.includes(resolved.contract)
+    ? stemFigureContracts.find(contract => contract.consumerId === resolved.contract.consumerId)
+    : resolved.contract
+  const authority = resolveCanonicalAuthority(authorityRefForManifestDigest(rendererContract.authorityManifestDigest))
   return authority.ok && closureRendersApplicationPromptFigures(authority.closure)
 }
 

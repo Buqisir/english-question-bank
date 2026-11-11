@@ -1,9 +1,23 @@
 import assert from 'node:assert/strict'
+import test from 'node:test'
 import {
-  consumerContractRefs, proveReviewConsumerComparison, reviewConsumerPairs,
+  consumerContractRefs, consumerContractRefsForAuthority, consumerRendersApplicationPromptFigures,
+  proveReviewConsumerComparison, reviewConsumerPairs,
   reviewConsumerSuccessions, validateReviewConsumerRelations,
 } from '../shared/paper-canonical/consumers.mjs'
-import { nck1MaterializationHistoricalAuthorityRef66, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef } from '../shared/paper-canonical/authority.mjs'
+import { nck1MaterializationHistoricalAuthorityRef66, nck1DrawingAreaAuthorityRef, nck1ReadingStemFiguresAuthorityRef,
+  nationalLegacyMaterializationAuthorityRef } from '../shared/paper-canonical/authority.mjs'
+
+test('national consumers bind existing application prompt figures without admitting unknown or old consumers', async () => {
+  const { default: paragraphOnly } = await import('../standards/paper-canonical/consumers/screen-v46.json', { with: { type: 'json' } })
+  const national = consumerContractRefsForAuthority(nationalLegacyMaterializationAuthorityRef)
+  for (const id of ['screen', 'print_pdf']) {
+    assert.equal(consumerRendersApplicationPromptFigures(national[id]), true, id)
+    assert.equal(consumerRendersApplicationPromptFigures({ ...national[id], digest: 'sha256:unknown' }), false)
+  }
+  assert.equal(consumerRendersApplicationPromptFigures({ id: paragraphOnly.consumerId, version: paragraphOnly.version,
+    digest: paragraphOnly.contractDigest }), false, 'valid paragraph-only historical consumer stays rejected')
+})
 
 const old = reviewConsumerPairs[0]
 const current = consumerContractRefs
