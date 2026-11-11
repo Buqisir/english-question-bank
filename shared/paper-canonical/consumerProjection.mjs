@@ -918,7 +918,7 @@ function projectApplicationWritingConsumerGroup(input, occurrence) {
   }
 
   // Prompt figures exist only when the raw authority admitted them and this
-  // consumer's own closure registers the renderer-owned capability.
+  // exact consumer's renderer binding registers the capability.
   const hasPromptFigures = occurrence.content.blocks.some((block) => block?.kind === 'figure')
   if (hasPromptFigures && (
     !authorityAdmitsApplicationPromptFigures(input.consumption.authorityRef)
