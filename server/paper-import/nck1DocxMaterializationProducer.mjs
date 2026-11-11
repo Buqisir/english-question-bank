@@ -2294,9 +2294,17 @@ export function produceNck1MaterializationFromStructures({
     writing: national ? /^(?:(?:第[一二三四]部分|[一二三四][、.．])\s*)?写作\s*(?:[（(][^()（）\r\n]*\d\s*分[)）])?$/u : /^第四部分\s*写作/u,
     listening: national ? /^(?:第一部分\s*听力|听力部分)/u : /^第一部分\s*听力/u,
   }
-  let readingStart = exactPosition(body, sectionMarkers.reading, 'sections.reading', issues, question?.documentId)
-  let languageStart = exactPosition(body, sectionMarkers.language, 'sections.language', issues, question?.documentId)
-  let writingStart = exactPosition(body, sectionMarkers.writing, 'sections.writing', issues, question?.documentId)
+  const sectionPosition = (key, title) => {
+    const strict = sectionMarkers[key]
+    const pattern = profileId === 'nck1' && !body.some(item =>
+      item.kind === 'paragraph' && strict.test(normalized(item.text)))
+      ? new RegExp(`^(?:(?:第[一二三四]部分|[一二三四][、.．])\\s*)?${title}\\s*(?:[（(][^()（）\\r\\n]*\\d\\s*分[)）])?$`, 'u')
+      : strict
+    return exactPosition(body, pattern, `sections.${key}`, issues, question?.documentId)
+  }
+  let readingStart = sectionPosition('reading', '阅读(?:理解)?')
+  let languageStart = sectionPosition('language', '语言(?:知识)?运用')
+  let writingStart = sectionPosition('writing', '写作')
   if (national && [readingStart, languageStart, writingStart].every(position => position !== null)
     && !(readingStart < languageStart && languageStart < writingStart)) {
     addIssue(issues, 'NCK1_DOCX_SECTION_AMBIGUOUS', 'sections',

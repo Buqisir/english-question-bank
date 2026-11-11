@@ -58,6 +58,15 @@ const produced = produceNck1DocxMaterialization({
 })
 
 assert.equal(produced.disposition, 'ready_for_verification')
+for (const prefixes of [['第二部分 '], ['第二部分 ', '第三部分 ', '第四部分 ']]) {
+  const bareTitles = makeSyntheticNck1DocxFixture({ transformXml: xml => xml.includes('A passage keeps')
+    ? prefixes.reduce((source, prefix) => source.replace(prefix, ''), xml) : xml })
+  const result = produceNck1DocxMaterialization({ paperId: bareTitles.paperId, documents: bareTitles.sourceDocuments })
+  assert.equal(result.disposition, 'ready_for_verification')
+  assert.deepEqual(result.materialization.groups, produced.materialization.groups)
+  assert.deepEqual(result.materialization.answers, produced.materialization.answers)
+}
+console.log('PASS NCK1 unprefixed complete section titles preserve every group and answer')
 for (const counts of [[3, 3, 4], [4, 3, 3], [3, 4, 3]]) for (const offset of [0, 20]) {
   const legacyFixture = makeSyntheticNck1DocxFixture({ listening: true })
   const [question, coverage, answer] = legacyFixture.sourceDocuments
