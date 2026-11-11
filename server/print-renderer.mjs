@@ -278,7 +278,9 @@ function renderCanonicalParagraph(canonicalGroup, paragraph, displayNumberByQues
       ? 'print-blank--seven'
       : 'print-blank--short'
   return paragraph.nodes.map((node) => {
-    if (node.type === 'text') return escapeHtml(node.text)
+    if (node.type === 'text') return node.marks
+      ? `<span data-source-marks="${escapeHtml(node.marks.join(' '))}">${escapeHtml(node.text)}</span>`
+      : escapeHtml(node.text)
     const displayNumber = displayNumberByQuestionId.get(node.questionId)
     if (displayNumber === undefined) {
       throw new Error(

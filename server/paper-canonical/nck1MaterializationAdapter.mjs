@@ -330,6 +330,29 @@ function paragraphSelectorText(value) {
 const PARAGRAPH_BLANK_SENTINEL = '\u0000blank\u0000'
 const SOURCE_BLANK_TOKEN_PATTERN = /(?:\d{1,3}[.．、]?\p{Zs}*)?_{2,}\d{0,3}_{0,}/gu
 
+// Reinsert only the source's exact blank tokens for UTF-16 range accounting.
+// The Canonical blank_ref itself is retained, never styled or reconstructed.
+export function sourceEmphasisParagraphParts(content, sourceText) {
+  const blanks = [...sourceText.matchAll(SOURCE_BLANK_TOKEN_PATTERN)]
+  let offset = 0
+  let blankIndex = 0
+  const parts = content.map(item => {
+    let text = item.text
+    if (item.kind === 'blank_ref') {
+      const token = blanks[blankIndex++]
+      if (!token || token.index !== offset) throw new Error('OCR emphasis does not match the exact materialized text')
+      text = token[0]
+    }
+    if (typeof text !== 'string' || sourceText.slice(offset, offset + text.length) !== text) {
+      throw new Error('OCR emphasis does not match the exact materialized text')
+    }
+    offset += text.length
+    return { ...item, text }
+  })
+  if (offset !== sourceText.length) throw new Error('OCR emphasis does not match the exact materialized text')
+  return parts
+}
+
 function trimParagraphEdgeSpaces(value) {
   return value.replace(/^\p{Zs}+|\p{Zs}+$/gu, '')
 }
@@ -2691,6 +2714,13 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
       let offset = 0
       const replacements = new Map()
       const inlines = parts.flatMap((part, index) => {
+        if (part.kind === 'blank_ref') {
+          if (derived[index]?.kind !== 'blank_ref' || derived[index].blankId !== part.blankId) {
+            throw new Error('OCR emphasis blank differs from the effective paragraph')
+          }
+          offset += part.text.length
+          return [derived[index]]
+        }
         const localRanges = ranges.flatMap(range => {
           const start = Math.max(range.start - offset, 0)
           const end = Math.min(range.end - offset, part.text.length)
@@ -2712,34 +2742,38 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
         remap(derivedGroup.variant)
       }
       const observation = observationForLocator(`observation:source-emphasis:${targetId}`,
-        derivedGroup.family === 'reading' ? 'source_reading_emphasis' : 'source_writing_emphasis', locator,
+        ['reading', 'seven-choices'].includes(derivedGroup.family) ? 'source_reading_emphasis' : 'source_writing_emphasis', locator,
         { targetId, ranges: paragraph.sourceEmphasis, evidenceDigest: evidence.evidenceDigest,
           confirmationSha256: sha256(ocrSourceBytes.confirmationBytes) }, documentsById)
       observation.extraction.version = '4'
       source.observations.push(observation)
-      for (const inline of inlines) derivedGroup.sourceSpanRefsByTarget[`content_node:${inline.nodeId}`] = [`source-span:${observation.observationId}`]
+      for (const inline of inlines.filter(node => node.kind === 'text')) derivedGroup.sourceSpanRefsByTarget[`content_node:${inline.nodeId}`] = [`source-span:${observation.observationId}`]
       consumed.add(key)
       return inlines
     }
     for (const [groupIndex, group] of raw.groups.entries()) {
-      if (group.family !== 'reading'
+      if (!['reading', 'seven-choices'].includes(group.family)
         && !(writingEmphasis && ['application-writing', 'continuation-writing'].includes(group.family))) continue
       const derivedGroup = source.groups.find(item => item.groupId === group.groupId)
       const derivedBlocks = new Map(sourceOrderedParagraphEntries(derivedGroup.content.blocks, '')
         .map(({ block }) => [block.nodeId, block]))
       for (const { block, path: blockPath } of sourceOrderedParagraphEntries(group.blocks, `/groups/${groupIndex}/blocks`)) {
-        if (block.content.some(item => item.kind !== 'text')) continue
+        if (block.content.some(item => item.kind !== 'text' && !(group.family === 'seven-choices' && item.kind === 'blank_ref'))) continue
         if (!marked.has(digestJson(block.source))) continue
         const pointer = blockPath.replace(/\[(\d+)\]/gu, '/$1').replaceAll('.', '/')
         const derived = derivedBlocks.get(block.blockId)
         if (!derived) throw new Error('OCR emphasis targets a source instruction without a rich-text paragraph')
         // A mapping failure on a body paragraph the input already consumes
         // stays blocking: dropping the underline could hide a referenced word.
-        const inlines = apply(block.source, block.content.map((item, index) => ({
-          text: item.text, pointer: `${pointer}/content/${index}/text`,
+        const parts = group.family === 'seven-choices'
+          ? sourceEmphasisParagraphParts(block.content, marked.get(digestJson(block.source)).text) : block.content
+        const inlines = apply(block.source, parts.map((item, index) => ({
+          ...item, pointer: `${pointer}/content/${index}/text`,
         })), derived.inlines, block.blockId, derivedGroup)
         if (inlines) derived.inlines = inlines
       }
+      // Seven-choice questions share their body locator and have no stem.
+      if (group.family === 'seven-choices') continue
       for (const [index, question] of group.questions.entries()) {
         const derived = derivedGroup.variant.questions[index]
         if (optionEmphasis && group.family === 'reading' && question.options.every(option => !option.figure)) {
@@ -2781,7 +2815,7 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
       }
     }
     if (consumed.size !== marked.size) {
-      // OCR emphasis no surface consumes (e.g. bolded seven-choices subheads or
+      // OCR emphasis no surface consumes (e.g. standalone source headings or
       // answer-document marks) loses the style only; the text stays literal and
       // each dropped mark is reported for review instead of blocking.
       if (!warnings) throw new Error('OCR source emphasis has an unmatched or unsupported target')

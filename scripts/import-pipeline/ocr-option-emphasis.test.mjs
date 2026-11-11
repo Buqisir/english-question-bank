@@ -14,9 +14,11 @@ import { sealCanonicalPublication, validateCanonicalPublicationBundle, publishCa
 import { upgradeOcrOptionEmphasis } from './materialization-option-emphasis.mjs'
 import { reviewPrintHtml } from '../../server/import-review/reviewPagination.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
-import { buildCanonicalReadingConsumptionSurfaceData } from '../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
+import { buildCanonicalReadingConsumptionSurfaceData, buildCanonicalConsumptionSurfaceData } from '../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
+import { loadSpellingSourceEmphasis } from './spelling-source-emphasis.mjs'
+import { prepareSpellingReview } from '../../server/paper-import/spellingReview.mjs'
 import path from 'node:path'
-import { mkdtempSync, rmSync } from 'node:fs'
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { DatabaseSync } from 'node:sqlite'
 
@@ -45,6 +47,69 @@ async function assertScreenMarkup(model) {
 }
 
 const source = { kind: 'page_region', documentId: 'question', page: 1, region: { x: .1, y: .1, width: .8, height: .1 } }
+test('seven-choice source emphasis maps around blank refs without changing their identity', async () => {
+  const f = await makeSyntheticNck1OcrFixture()
+  const confirmation = structuredClone(f.confirmation)
+  confirmation.schemaVersion = 'nck1-ocr-source-confirmation-v2'
+  const paragraph = confirmation.documents[0].pages.flatMap(page => page.orderedItems)
+    .find(item => item.text.startsWith('A short guide has 36.'))
+  assert(paragraph)
+  paragraph.sourceEmphasis = [
+    { start: 0, end: 13, marks: ['bold'] },
+    { start: paragraph.text.indexOf('learners'), end: paragraph.text.indexOf('learners') + 8, marks: ['bold'] },
+  ]
+  const produced = produceNck1OcrMaterialization({ paperId: f.paperId, documents: f.sourceDocuments,
+    evidence: f.evidence, confirmation })
+  assert.equal(produced.disposition, 'ready_for_verification', JSON.stringify(produced.issues))
+  const encode = value => Buffer.from(JSON.stringify(value))
+  const input = { kind: 'nck1-source-materialization', materializationBytes: encode(produced.materialization),
+    documents: f.sourceDocuments.map(({ documentId, bytes }) => ({ documentId, bytes })),
+    media: produced.mediaFiles || [], ocrSourceBytes: { evidenceBytes: encode(f.evidence), confirmationBytes: encode(confirmation) } }
+  const imported = importCanonicalCandidate(input)
+  assert.deepEqual(imported.issues, [])
+  const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+  assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
+  const group = imported.candidate.interpretation.groups.find(group => group.family === 'seven-choices')
+  const inlines = group.content.blocks[0].inlines
+  assert.deepEqual(inlines.filter(node => node.marks?.includes('bold')).map(node => node.text), ['A short guide', 'learners'])
+  assert.deepEqual(inlines.filter(node => node.kind === 'blank_ref'), [{
+    kind: 'blank_ref', nodeId: `blank-ref:blank:${f.paperId}:36`, blankId: `blank:${f.paperId}:36`,
+  }])
+  const consumption = buildNck1ReviewConsumption(imported.candidate, preview.compilation)
+  const screen = buildCanonicalConsumptionSurfaceData({ consumption, familyContractId: 'seven-choices', groupId: group.groupId })
+  assert.deepEqual(screen.surfaceData.semanticParagraphs[0].sentences.flatMap(sentence => sentence.nodes)
+    .filter(node => node.marks?.includes('bold')).map(node => node.text), ['A short guide', 'learners'])
+  const html = reviewPrintHtml({ consumption, paperId: f.paperId, paperName: 'Synthetic seven choices', paperAsset: {} }, 'student', buildPrintHtml)
+  assert(html.includes('data-source-marks="bold">A short guide</span>'))
+  assert(html.includes('data-source-marks="bold">learners</span>'))
+  const dir = mkdtempSync(path.join(tmpdir(), 'eqb-seven-emphasis-spelling-'))
+  try {
+    const write = (name, bytes) => {
+      const file = path.join(dir, name)
+      mkdirSync(path.dirname(file), { recursive: true })
+      writeFileSync(file, bytes)
+    }
+    write('config.json', encode({ paperId: f.paperId }))
+    write('universal-source-manifest.json', encode(f.manifest))
+    write(f.manifest.materializationPath, input.materializationBytes)
+    for (const document of f.sourceDocuments) write(document.path, document.bytes)
+    write('materialization/nck1-ocr-source-evidence-v1.json', input.ocrSourceBytes.evidenceBytes)
+    write('materialization/nck1-ocr-source-confirmation-v1.json', input.ocrSourceBytes.confirmationBytes)
+    const emphasis = loadSpellingSourceEmphasis(dir, { materialization: produced.materialization,
+      report: prepareSpellingReview(input.materializationBytes) })
+    const groupIndex = produced.materialization.groups.findIndex(group => group.family === 'seven-choices')
+    assert.deepEqual(emphasis.get(`/groups/${groupIndex}/blocks/0/content/2/text`), [
+      { start: 5, end: 13, marks: ['bold'] },
+    ])
+  } finally { rmSync(dir, { recursive: true, force: true }) }
+  const mismatched = structuredClone(confirmation)
+  mismatched.documents[0].pages.flatMap(page => page.orderedItems)
+    .find(item => item.itemId === paragraph.itemId).text += ' changed'
+  const rejected = deriveNck1MaterializationBundle({ ...input,
+    ocrSourceBytes: { ...input.ocrSourceBytes, confirmationBytes: encode(mismatched) } })
+  assert(rejected.issues.some(issue => /exact materialized text/u.test(issue.message)), JSON.stringify(rejected.issues))
+})
+
 test('OCR body and option splits use their authority typography version while preserving historical boundaries', async () => {
   const f = await makeSyntheticNck1OcrFixture()
   for (const [text, start, end, accepted] of [

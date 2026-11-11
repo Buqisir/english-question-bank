@@ -1630,6 +1630,7 @@ export function projectCanonicalConsumerGroup(input) {
             text:
               grammarFollowingTextByIndex.get(inlineIndex)
               ?? inline.text,
+            ...(inline.marks ? { marks: [...inline.marks] } : {}),
           }
         }
         if (inline?.kind !== 'blank_ref' || !questionIdByBlankId.has(inline.blankId) || seenBlanks.has(inline.blankId)) {
