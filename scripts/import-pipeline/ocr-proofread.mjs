@@ -1136,7 +1136,8 @@ function presentation(paperId) {
 
 // The OCR producer emits every figure at widthRatio 1. Restore the source size the way the DOCX
 // adapter does (image width / body width), measuring the body as the extent of that page's text
-// observations; --body-width-ratio supplies an explicitly measured width for image-heavy pages.
+// observations; --body-width-ratio supplies an explicitly measured width only for image-heavy pages
+// that lack enough text to measure.
 // Full-width banners stay at 1.
 function figureSizes(paperId) {
   const explicitWidth = option('--body-width-ratio')
@@ -1156,12 +1157,13 @@ function figureSizes(paperId) {
     if (media.usage !== 'content' || crop?.kind !== 'pdf_crop') continue
     const page = evidence.documents.find((document) => document.documentId === crop.documentId)?.pages[crop.page - 1]
     const text = (page?.observations || []).filter((item) => String(item.text || '').trim().length > 3)
-    if (bodyWidthOverride === null && text.length < 10) {
+    const measured = text.length >= 10
+    if (!measured && bodyWidthOverride === null) {
       fail(`Too few text observations to measure the body width of ${crop.documentId} page ${crop.page}`)
     }
     const left = Math.min(...text.map((item) => item.region.x))
     const right = Math.max(...text.map((item) => item.region.x + item.region.width))
-    const bodyWidth = bodyWidthOverride ?? (right - left)
+    const bodyWidth = measured ? right - left : bodyWidthOverride
     const widthRatio = Math.min(1, Number((crop.region.width / bodyWidth).toFixed(4)))
     if (media.presentation.widthRatio === widthRatio) continue
     changes.push({ mediaId: media.mediaId, page: crop.page, from: media.presentation.widthRatio, to: widthRatio,
