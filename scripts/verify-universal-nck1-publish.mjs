@@ -3428,6 +3428,7 @@ try {
 await verifyUniversalSourceReferencePublication()
 await verifyUniversalOwnerPromotion()
 await verifyUniversalCliPromotion()
+await verifyUniversalCliHistoricalSourceReferenceHydration()
 await verifyUniversalCliHydration()
 console.log('verify-universal-nck1-publish: PASS')
 }
@@ -4507,6 +4508,71 @@ export async function verifyUniversalCliPromotion() {
   console.log('PASS universal CLI promotion through genuine Review API and live transaction guard')
 }
 
+export async function verifyUniversalCliHistoricalSourceReferenceHydration() {
+  const tempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-hydrate-legacy-references-'))
+  const paperId = `paper-mock-contract-2026-hydrate-legacy-${process.pid}`
+  const paperDir = path.join(root, 'scripts/import-pipeline/papers', paperId)
+  let server
+  try {
+    assert(!existsSync(paperDir))
+    const { reviewRoot, projection } = makeReviewRoot(tempRoot, paperId)
+    const referencesPath = path.join(reviewRoot, SOURCE_REFERENCES_FILE)
+    const references = JSON.parse(readFileSync(referencesPath, 'utf8'))
+    delete references.producerVersion
+    writeJson(referencesPath, references)
+    const sealedBytes = readFileSync(referencesPath)
+    assert.throws(() => buildNck1ReviewProjection(reviewRoot, {
+      expectedCandidateDigest: projection.candidateDigest,
+    }), { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+    const files = reviewBundleFilePaths(reviewRoot).map(file => {
+      const bytes = readFileSync(resolveReviewFile(reviewRoot, file.path))
+      return { ...file, sha256: sha256(bytes), byteLength: bytes.byteLength }
+    })
+    const manifest = {
+      schemaVersion: 'web-import-review-bundle-v1', paperId, paperName: projection.paperName,
+      sourceDigest: projection.sourceDigest, candidateDigest: projection.candidateDigest,
+      visibleStructureDigest: projection.visibleStructureDigest, analysisDigest: projection.analysisDigest,
+      producerBuildId: 'historical-references-fixture', files, resolvesIssueIds: [],
+    }
+    manifest.bundleDigest = reviewBundleDigest(manifest)
+    const revision = { ...manifest, id: `rev-${randomUUID()}`, reviewKind: 'candidate',
+      state: 'changes_requested', finalizedAt: '2026-08-28T00:00:00.000Z', manifest }
+    server = createServer((request, response) => {
+      const url = new URL(request.url, 'http://127.0.0.1')
+      if (request.method !== 'GET' || request.headers.authorization !== 'Bearer verifier-token') {
+        response.writeHead(404).end()
+      } else if (url.pathname === `/api/import-agent-reviews/papers/${paperId}`) {
+        response.writeHead(200, { 'content-type': 'application/json' })
+        response.end(JSON.stringify({ latest: { id: 'rev-newer-uploading', state: 'uploading' },
+          revisions: [revision], files: [] }))
+      } else if (url.pathname === `/api/import-agent-reviews/revisions/${revision.id}/files`) {
+        const file = files.find(item => item.path === url.searchParams.get('path'))
+        if (!file) response.writeHead(404).end()
+        else response.end(readFileSync(resolveReviewFile(reviewRoot, file.path)))
+      } else response.writeHead(404).end()
+    })
+    await new Promise(resolve => server.listen(0, '127.0.0.1', resolve))
+    const result = JSON.parse((await runReviewCommand(
+      ['hydrate', paperId, '--revision', revision.id],
+      { QUESTION_BANK_IMPORT_OPS_ORIGIN: `http://127.0.0.1:${server.address().port}`,
+        QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: 'verifier-token' },
+    )).stdout)
+    assert.equal(result.state, 'hydrated')
+    assert.equal(result.revisionId, revision.id)
+    assert.deepEqual(readFileSync(path.join(paperDir, SOURCE_REFERENCES_FILE)), sealedBytes,
+      'hydration preserves sealed legacy bytes without assigning a new producer')
+    assert.throws(() => buildNck1ReviewProjection(paperDir, {
+      expectedCandidateDigest: projection.candidateDigest,
+    }), { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' },
+    'restoring a sealed revision must not relax first admission')
+  } finally {
+    if (server) await new Promise(resolve => server.close(resolve))
+    rmSync(paperDir, { recursive: true, force: true })
+    rmSync(tempRoot, { recursive: true, force: true })
+  }
+  console.log('PASS historical CLI hydration preserves unversioned sealed references and strict first admission')
+}
+
 export async function verifyUniversalCliHydration() {
 await reviewBuildIdentityProvider().ready()
 const cliTempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-universal-publish-cli-'))
@@ -4617,6 +4683,8 @@ try {
       reviewKind: 'candidate',
       state: 'approved',
       finalizedAt: '2026-08-28T00:00:00.000Z',
+      sourceDigest: projection.sourceDigest,
+      candidateDigest: projection.candidateDigest,
       bundleDigest,
       manifest: { ...manifestBase, bundleDigest },
     },
