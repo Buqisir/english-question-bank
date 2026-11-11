@@ -3,7 +3,7 @@ import { existsSync, linkSync, mkdirSync, readFileSync, unlinkSync, writeFileSyn
 import { randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { buildSourceReferences } from './ocr-proofread.mjs'
+import { buildSourceReferences, readSourceReferenceWritingRoles } from './ocr-proofread.mjs'
 import { confirmSourceReferenceFigureExclusion } from '../../server/paper-import/sourceReferenceFigureExclusions.mjs'
 import { resolveConfirmedNck1OcrEvidence } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
@@ -52,23 +52,25 @@ export async function excludeExplanationFigure(paperId, {
     .map(document => ({ ...document, bytes: bytes(path.join(paperDir, document.path)) }))
   const resolved = resolveConfirmedNck1OcrEvidence({ paperId, documents, evidence, confirmation })
   if (resolved.issues.length) fail(`Invalid source evidence: ${resolved.issues[0].message}`)
-  const declarations = requested.map(declaration => confirmSourceReferenceFigureExclusion(materialization, evidence, confirmation,
-    resolved.referenceFigures, { ...declaration, confirmed }))
   const draftFile = path.join(work, 'source-references-draft.json')
   // External paper previews never borrow this checkout's authored decisions.
   const retainedFile = paperDir === local && existsSync(draftFile) ? draftFile
     : path.join(paperDir, 'source-references-v1.json')
   const retained = existsSync(retainedFile) ? json(retainedFile) : null
   if (retained && retained.paperId !== paperId) fail('Retained reference paper identity differs')
+  const writingRoleDeclarations = readSourceReferenceWritingRoles(sourceWork, { materialization, confirmation }, json)
+  const declarations = requested.map(declaration => confirmSourceReferenceFigureExclusion(materialization, evidence, confirmation,
+    resolved.referenceFigures, { ...declaration, confirmed }, { writingRoleDeclarations }))
   const figureExclusions = [...(retained?.figureExclusions ?? []), ...declarations]
   const captured = buildSourceReferences(materialization, evidence, confirmation,
-    { sourceDocuments: documents, paperName: manifest.provenance?.paperName, figureExclusions })
+    { sourceDocuments: documents, paperName: manifest.provenance?.paperName, figureExclusions, writingRoleDeclarations })
   // Prove the same figure/text admission as finalize, without claiming a new
   // Candidate or rebinding any upstream report. Draft digests remain unset.
   const binding = { sourceDigest: sha256('unbound source preview'), candidateDigest: sha256('unbound candidate preview') }
   const sidecar = { schemaVersion: captured.schemaVersion, paperId, ...binding,
     materializationDigest: digestJson(materialization), groups: captured.groups,
-    producerVersion: captured.producerVersion, figureExclusions }
+    producerVersion: captured.producerVersion, figureExclusions,
+    ...(captured.writingRoleDeclarations ? { writingRoleDeclarations: captured.writingRoleDeclarations } : {}) }
   assertSourceReferenceAdmission({ ...binding, sidecar, materialization,
     sourceInput: { documents, ocrSourceBytes: {
       evidenceBytes: originals.get(evidenceFile), confirmationBytes: originals.get(confirmationFile),

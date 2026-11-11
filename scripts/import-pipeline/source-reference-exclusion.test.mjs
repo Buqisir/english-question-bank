@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
+import { tmpdir } from 'node:os'
 import test from 'node:test'
 import { execFileSync, spawnSync } from 'node:child_process'
 import { makeFixture } from '../verify-nck1-source-materialization.mjs'
@@ -18,8 +19,16 @@ import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const json = (file, value) => { mkdirSync(path.dirname(file), { recursive: true }); writeFileSync(file, JSON.stringify(value)) }
-function fixture(paperId, { figurePages = [0], figureText = 'A source diagram' } = {}) {
+function fixture(paperId, { figurePages = [0], figureText = 'A source diagram', declaredSample = false } = {}) {
   const input = scoringFiguresFixture(paperId ? { materialization: { ...makeFixture({ listening: false }), paperId } } : {})
+  if (declaredSample) {
+    const item = input.confirmation.documents[1].pages[2].orderedItems.find(item => item.text === '参考范文')
+    item.text = '【答案】'
+    input.evidence.documents[1].pages[2].observations.find(observation =>
+      item.observationIds.includes(observation.observationId)).text = item.text
+    input.writingRoleDeclarations = [{ itemId: item.itemId, page: 3, quote: item.text,
+      role: 'sample-heading', taskType: 'application', reason: 'Original page identifies the application sample.' }]
+  }
   // A chart in the source index, outside every essay/scoring scope. The
   // wording deliberately carries no exclusion authority.
   for (const pageIndex of figurePages) {
@@ -146,8 +155,8 @@ test('confirmed scoring titles and standalone sample labels inside a figure cann
   assertSourceReferenceAdmission({ ...commentary, sidecar: capture(commentary, [declaration(commentary)]) })
 })
 
-test('CLI atomically initializes two explanation declarations together; either single and mismatched per-figure bindings reject without a draft', t => {
-  const paperId = `paper-synthetic-explanation-multiple-${process.pid}`
+for (const declaredSample of [false, true]) test(`CLI atomically initializes two explanation declarations with declared sample=${declaredSample}; invalid bindings reject without a draft`, t => {
+  const paperId = `paper-synthetic-explanation-multiple-${declaredSample}-${process.pid}`
   const paperDir = path.join(root, 'scripts/import-pipeline/papers', paperId)
   const work = path.join(root, 'imports/ocr-proofread', paperId)
   assert(!existsSync(paperDir) && !existsSync(work))
@@ -191,17 +200,50 @@ test('CLI atomically initializes two explanation declarations together; either s
   assert.match(missing.stderr, /requires its own --anchor/u)
   assert(!existsSync(draftFile))
   const before = JSON.stringify({ evidence: input.evidence, confirmation: input.confirmation })
+  if (declaredSample) {
+    // Keep figure identities stable; the source role file is the only extra
+    // authority the exclusion CLI, producer and admission may consume.
+    const declared = fixture(paperId, { figurePages: [0, 1], declaredSample })
+    for (const d of declarations) {
+      d.evidenceDigest = digestJson(declared.evidence)
+      d.confirmationDigest = digestJson(declared.confirmation)
+    }
+    Object.assign(input, declared)
+    json(path.join(paperDir, 'materialization/nck1-ocr-source-evidence-v1.json'), input.evidence)
+    json(path.join(paperDir, 'materialization/nck1-ocr-source-confirmation-v1.json'), input.confirmation)
+    const preview = path.join(tmpdir(), `${paperId}-roles-preview.json`)
+    t.after(() => rmSync(preview, { force: true }))
+    for (const retainedFile of [draftFile, path.join(paperDir, 'source-references-v1.json')]) {
+      json(retainedFile, { paperId, writingRoleDeclarations: input.writingRoleDeclarations })
+      const retained = readFileSync(retainedFile)
+      const rejected = run([...declarations.flatMap(flags), '--output', preview])
+      assert.notEqual(rejected.status, 0, 'Sidecar-only roles must not authorize exclusion')
+      assert.match(rejected.stderr, /Unresolved writing reference title/u)
+      assert(!existsSync(preview))
+      assert.deepEqual(readFileSync(retainedFile), retained)
+      rmSync(retainedFile)
+    }
+    json(path.join(work, 'source-reference-roles.json'), { entries: input.writingRoleDeclarations })
+  }
   const result = run(declarations.flatMap(flags))
   assert.equal(result.status, 0, result.stderr)
   const draft = JSON.parse(readFileSync(draftFile))
   assert.equal(draft.sourceDigest, null)
   assert.deepEqual(draft.figureExclusions, declarations)
+  assert.deepEqual(draft.writingRoleDeclarations, input.writingRoleDeclarations)
+  if (declaredSample) {
+    const installed = readFileSync(draftFile)
+    execFileSync(process.execPath, [path.join(root, 'scripts/import-pipeline/ocr-proofread.mjs'),
+      'references', paperId], { cwd: root, stdio: 'pipe' })
+    assert.deepEqual(readFileSync(draftFile), installed)
+  }
   assertSourceReferenceAdmission({ ...input, sidecar: { ...draft, sourceDigest: input.sourceDigest,
     candidateDigest: input.candidateDigest, materializationDigest: digestJson(input.materialization) } })
   assert.deepEqual(readdirSync(work).filter(name => name.includes('source-references-draft')), ['source-references-draft.json'])
   const sealed = ['nck1-ocr-source-evidence-v1.json', 'nck1-ocr-source-confirmation-v1.json']
     .map(file => JSON.parse(readFileSync(path.join(paperDir, 'materialization', file))))
-  assert.equal(JSON.stringify({ evidence: sealed[0], confirmation: sealed[1] }), before)
+  assert.equal(JSON.stringify({ evidence: sealed[0], confirmation: sealed[1] }),
+    declaredSample ? JSON.stringify({ evidence: input.evidence, confirmation: input.confirmation }) : before)
 })
 
 test('explanation redo retains upstream authoring but archives references and products; Candidate and UNKNOWN reject before writes', async t => {

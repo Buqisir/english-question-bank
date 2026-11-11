@@ -1215,7 +1215,8 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     ? referenceSourceDocuments.filter(document => document.documentId === answerDocument.documentId
       || document.renditionOf === answerDocument.documentId)
     : null
-  const explanationFigures = sourceReferenceExplanationFigures(materialization, evidence, confirmation, referenceFigures, figureExclusions, { producerVersion })
+  const explanationFigures = sourceReferenceExplanationFigures(materialization, evidence, confirmation, referenceFigures, figureExclusions,
+    { producerVersion, writingRoleDeclarations: source.roleDeclarations.declarations })
   const { sections, furniture, review } = lifecycle
   const wholeAbsence = absenceSidecar?.wholeDocumentWritingAbsence
     ? wholeDocumentAbsenceSubject({ sidecar: absenceSidecar, materialization, sourceInput, sourceDigest, candidateDigest }) : null
@@ -1498,6 +1499,13 @@ export function buildSourceReferences(materialization, evidence, confirmation,
   return result
 }
 
+export function readSourceReferenceWritingRoles(work, context, read = readJson) {
+  const rolePath = path.join(work, 'source-reference-roles.json')
+  if (!existsSync(rolePath)) return undefined
+  const roleFile = read(rolePath, 'Writing role declarations')
+  return roleFile ? validateWritingRoleDeclarations(roleFile.entries ?? roleFile, context) : undefined
+}
+
 // Captures writing references from the confirmed answer-document OCR lines. Paragraphs are rebuilt
 // from line geometry (first-line indent or a short previous line), never from the Materialization,
 // so the sidecar stays a source capture. Doubtful joins are listed for visual review before finalize.
@@ -1543,11 +1551,7 @@ function references(paperId) {
   const referenceSourceManifest = readJson(path.join(paperDir, 'universal-source-manifest.json'), 'Source manifest')
   // Optional agent-declared writing roles, retained with the sealed artifact
   // so sealed replay and admission consume the same declared transitions.
-  const rolePath = path.join(work, 'source-reference-roles.json')
-  const roleFile = existsSync(rolePath) ? readJson(rolePath, 'Writing role declarations') : null
-  const writingRoleDeclarations = roleFile
-    ? validateWritingRoleDeclarations(roleFile.entries ?? roleFile, { materialization, confirmation })
-    : undefined
+  const writingRoleDeclarations = readSourceReferenceWritingRoles(work, { materialization, confirmation })
   const referenceDocuments = confirmation.schemaVersion === 'nck1-ocr-source-confirmation-v1'
     ? referenceSourceManifest.documents.map(document => ({ ...document,
       bytes: new Uint8Array(readFileSync(path.join(paperDir, document.path))) })) : documents

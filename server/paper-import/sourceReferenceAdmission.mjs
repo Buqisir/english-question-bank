@@ -358,7 +358,7 @@ function assertSourceReferenceContent({
   if (resolved.issues.length) reject(`Invalid sealed OCR confirmation: ${resolved.issues[0].message}`)
   const allExpected = resolved.referenceFigures ?? []
   const explanationFigures = sourceReferenceExplanationFigures(materialization, evidence, confirmation, allExpected,
-    sidecar?.figureExclusions ?? [], { producerVersion })
+    sidecar?.figureExclusions ?? [], { producerVersion, writingRoleDeclarations: roleDeclarations(confirmation).declarations })
   if (figures.some(({ figure }) => allExpected.some(reference =>
     explanationFigures.has(sourceReferenceFigureIdentity(reference)) && reference.sourceRegionId === figure.sourceRegionId))) {
     reject('An excluded explanation figure cannot also appear in writing references')

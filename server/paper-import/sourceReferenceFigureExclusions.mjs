@@ -2,6 +2,7 @@ import { digestJson, exactKeys } from '../../shared/paper-canonical/stable.mjs'
 import { sourceReferenceFigureIdentity, sourceReferenceScoringScopes } from './sourceReferenceScoringScope.mjs'
 import { sourceReferenceEssayTaskStates } from './sourceReferenceWritingTask.mjs'
 import { isSourceReferenceSampleLabel } from './sourceReferenceWritingRules.mjs'
+import { validateWritingRoleDeclarations, resolveWritingRoleDeclarations } from './sourceReferenceRoleDeclarations.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../../scripts/import-pipeline/ocr-source-references-version.mjs'
 
 const keys = ['figureId', 'figureIdentitySha256', 'anchorItemId', 'sourceDocumentSha256',
@@ -11,14 +12,17 @@ const reject = message => { throw new Error(`Invalid explanation figure exclusio
 // These are authored source-role decisions, carried by the existing reference
 // sidecar. Never infer them from wording, coordinates or the current task.
 export function sourceReferenceExplanationFigures(materialization, evidence, confirmation, figures, exclusions = [],
-  { producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION } = {}) {
+  { producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, writingRoleDeclarations } = {}) {
   if (!Array.isArray(exclusions) || exclusions.length > 128) reject('expected a bounded declaration list')
   const excluded = new Set()
   if (!exclusions.length) return excluded
   const answerIds = new Set(materialization.documents.filter(document => document.role === 'official_answers')
     .map(document => document.documentId))
-  const scoring = sourceReferenceScoringScopes(confirmation, answerIds, { producerVersion, materialization })
-  const essays = sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence, { producerVersion })
+  const roleDeclarations = resolveWritingRoleDeclarations(
+    validateWritingRoleDeclarations(writingRoleDeclarations, { materialization, confirmation }))
+  const scoring = sourceReferenceScoringScopes(confirmation, answerIds, { producerVersion, materialization, roleDeclarations })
+  const essays = sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence,
+    { producerVersion, writingRoleDeclarations: roleDeclarations.declarations })
   const confirmedItems = new Map(confirmation.documents.filter(document => answerIds.has(document.documentId))
     .flatMap(document => document.pages.flatMap(page => page.orderedItems))
     .map(item => [item.itemId, item]))
@@ -54,11 +58,11 @@ export function sourceReferenceExplanationFigures(materialization, evidence, con
 
 export function confirmSourceReferenceFigureExclusion(materialization, evidence, confirmation, figures, {
   figureId, figureIdentitySha256, anchorItemId, reason, confirmed,
-}) {
+}, options = {}) {
   const figure = figures.find(figure => figure.sourceRegionId === figureId)
   const declaration = { figureId, figureIdentitySha256, anchorItemId,
     sourceDocumentSha256: materialization.documents.find(document => document.documentId === figure?.source.documentId)?.sha256,
     evidenceDigest: digestJson(evidence), confirmationDigest: digestJson(confirmation), reason, confirmed }
-  sourceReferenceExplanationFigures(materialization, evidence, confirmation, figures, [declaration])
+  sourceReferenceExplanationFigures(materialization, evidence, confirmation, figures, [declaration], options)
   return declaration
 }
