@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
+import { tmpdir } from 'node:os'
 import test from 'node:test'
 import { execFileSync, spawnSync } from 'node:child_process'
 import { makeFixture } from '../verify-nck1-source-materialization.mjs'
@@ -210,6 +211,18 @@ for (const declaredSample of [false, true]) test(`CLI atomically initializes two
     Object.assign(input, declared)
     json(path.join(paperDir, 'materialization/nck1-ocr-source-evidence-v1.json'), input.evidence)
     json(path.join(paperDir, 'materialization/nck1-ocr-source-confirmation-v1.json'), input.confirmation)
+    const preview = path.join(tmpdir(), `${paperId}-roles-preview.json`)
+    t.after(() => rmSync(preview, { force: true }))
+    for (const retainedFile of [draftFile, path.join(paperDir, 'source-references-v1.json')]) {
+      json(retainedFile, { paperId, writingRoleDeclarations: input.writingRoleDeclarations })
+      const retained = readFileSync(retainedFile)
+      const rejected = run([...declarations.flatMap(flags), '--output', preview])
+      assert.notEqual(rejected.status, 0, 'Sidecar-only roles must not authorize exclusion')
+      assert.match(rejected.stderr, /Unresolved writing reference title/u)
+      assert(!existsSync(preview))
+      assert.deepEqual(readFileSync(retainedFile), retained)
+      rmSync(retainedFile)
+    }
     json(path.join(work, 'source-reference-roles.json'), { entries: input.writingRoleDeclarations })
   }
   const result = run(declarations.flatMap(flags))
@@ -218,6 +231,12 @@ for (const declaredSample of [false, true]) test(`CLI atomically initializes two
   assert.equal(draft.sourceDigest, null)
   assert.deepEqual(draft.figureExclusions, declarations)
   assert.deepEqual(draft.writingRoleDeclarations, input.writingRoleDeclarations)
+  if (declaredSample) {
+    const installed = readFileSync(draftFile)
+    execFileSync(process.execPath, [path.join(root, 'scripts/import-pipeline/ocr-proofread.mjs'),
+      'references', paperId], { cwd: root, stdio: 'pipe' })
+    assert.deepEqual(readFileSync(draftFile), installed)
+  }
   assertSourceReferenceAdmission({ ...input, sidecar: { ...draft, sourceDigest: input.sourceDigest,
     candidateDigest: input.candidateDigest, materializationDigest: digestJson(input.materialization) } })
   assert.deepEqual(readdirSync(work).filter(name => name.includes('source-references-draft')), ['source-references-draft.json'])

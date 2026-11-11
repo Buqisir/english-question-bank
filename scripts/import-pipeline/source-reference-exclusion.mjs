@@ -3,11 +3,10 @@ import { existsSync, linkSync, mkdirSync, readFileSync, unlinkSync, writeFileSyn
 import { randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { buildSourceReferences } from './ocr-proofread.mjs'
+import { buildSourceReferences, readSourceReferenceWritingRoles } from './ocr-proofread.mjs'
 import { confirmSourceReferenceFigureExclusion } from '../../server/paper-import/sourceReferenceFigureExclusions.mjs'
 import { resolveConfirmedNck1OcrEvidence } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
-import { validateWritingRoleDeclarations } from '../../server/paper-import/sourceReferenceRoleDeclarations.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
@@ -59,10 +58,7 @@ export async function excludeExplanationFigure(paperId, {
     : path.join(paperDir, 'source-references-v1.json')
   const retained = existsSync(retainedFile) ? json(retainedFile) : null
   if (retained && retained.paperId !== paperId) fail('Retained reference paper identity differs')
-  const rolePath = path.join(sourceWork, 'source-reference-roles.json')
-  const roleFile = existsSync(rolePath) ? json(rolePath) : null
-  const writingRoleDeclarations = validateWritingRoleDeclarations(
-    roleFile ? roleFile.entries ?? roleFile : retained?.writingRoleDeclarations, { materialization, confirmation })
+  const writingRoleDeclarations = readSourceReferenceWritingRoles(sourceWork, { materialization, confirmation }, json)
   const declarations = requested.map(declaration => confirmSourceReferenceFigureExclusion(materialization, evidence, confirmation,
     resolved.referenceFigures, { ...declaration, confirmed }, { writingRoleDeclarations }))
   const figureExclusions = [...(retained?.figureExclusions ?? []), ...declarations]

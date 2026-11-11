@@ -115,6 +115,8 @@ console.log('PASS Zhejiang producer: complete offsets, canonical blanks and sepa
 for (const titles of [
   ['第一部分 阅读理解', '第二部分 语言知识运用', '第三部分 写作'],
   ['第二部分 阅读理解', '语言知识运用', '第四部分 写作'],
+  ['第二部分 阅读理解', '第三部分 语言知识运用', '三、写作（共两节，满分35分）'],
+  ['第二部分 阅读理解', '第三部分 语言知识运用', '写作（满分35分）'],
 ]) for (const offset of [0, 20]) {
   const nationalFixture = makeSyntheticNck1DocxFixture({ listening: true })
   const [question, coverage, answer] = nationalFixture.sourceDocuments
@@ -130,7 +132,8 @@ for (const titles of [
     range(41, 60).map(n => `Before __${number(n)}__ after`).join(' '), ...range(41, 60).flatMap(choice),
     '第二节', 'Read this grammar material.', range(61, 70).map(n => `Before __${number(n)}__ (word) after`).join(' '),
     titles[2], '第一节 短文改错', 'A source correction passage.',
-    '第二节 书面表达', 'Write an application.', '注意：', '1. 词数100左右；']
+    '第二节 书面表达', 'Write an application.', '写作要求：内容完整，语句连贯。',
+    '写作（要求：内容完整，语句连贯）', '注意：', '1. 词数100左右；']
   const answers = ['听力部分', ...range(1, 20).map(n => `${n}. B`),
     titles[0], ...range(21, 60).map(n => `${number(n)}. A`),
     titles[1], ...range(61, 70).map(n => `${number(n)}. word`),
