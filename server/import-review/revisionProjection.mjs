@@ -1496,7 +1496,7 @@ export function buildNck1CompatibilityPaperAsset({
   }
 }
 
-function listeningReviewProjection(
+export function listeningReviewProjection(
   materialization,
   listeningAudioEvidence,
   listeningAnalysis = null,
@@ -1506,13 +1506,15 @@ function listeningReviewProjection(
   if (materialization.listening.state !== 'captured') return null
   const answers = new Map(materialization.listening.answers.map((answer) => [
     answer.canonicalNumber,
-    answer.value,
+    answer,
   ]))
   return {
     questions: materialization.listening.questions.map((question) => ({
       questionId: `question:listening:${question.canonicalNumber}`,
       questionNo: question.canonicalNumber,
-      officialAnswer: answers.get(question.canonicalNumber),
+      ...(answers.get(question.canonicalNumber)?.provenance === 'unofficial'
+        ? { answer: answers.get(question.canonicalNumber).value, provenance: 'unofficial' }
+        : { officialAnswer: answers.get(question.canonicalNumber)?.value }),
       transcriptSegments: materialization.listening.transcript
         .filter((segment) => segment.questionNumbers.includes(question.canonicalNumber))
         .map((segment) => ({

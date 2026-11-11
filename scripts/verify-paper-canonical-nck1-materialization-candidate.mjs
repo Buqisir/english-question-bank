@@ -21,6 +21,7 @@ import {
   compileNck1MaterializationCandidatePreview,
   importCanonicalCandidate,
   rederiveConfirmedCanonicalCandidate,
+  validateAnswerCoverage,
 } from '../shared/paper-canonical/compiler.mjs'
 import { validateInlineBlankTextBoundaries } from '../shared/paper-canonical/inlineBlankBoundaries.mjs'
 import { projectCanonicalConsumerGroup } from '../shared/paper-canonical/consumerProjection.mjs'
@@ -49,11 +50,15 @@ import {
 import { extractDocxDocumentParagraphs } from '../server/paper-canonical/docxSourceAdapter.mjs'
 import { mapSourceEmphasisEdits } from '../server/paper-canonical/sourceEmphasis.mjs'
 import { applySpellingReview, enumerateSpellingTargets, loadSpellingReview, prepareSpellingReview, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY_V4 } from '../server/paper-import/spellingReview.mjs'
-import { buildNck1ReviewConsumption, loadNck1ReviewSource } from '../server/import-review/revisionProjection.mjs'
+import { buildNck1ReviewConsumption, loadNck1ReviewSource, printConsumption, listeningReviewProjection } from '../server/import-review/revisionProjection.mjs'
+import { buildPrintHtml } from '../server/print-renderer.mjs'
+import { studentProductPolicy, applyStudentProductLayout } from '../server/draft-paper/studentProductPdf.mjs'
+import { convertRepresentableNck1ReviewSourceToAnalyzedPackageFiles } from '../server/paper-import/analyzedPackageExport.mjs'
+import { nck1OcrSourceDocuments, nck1OcrSourceSetDigest } from '../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { buildPreprocessingReport } from '../server/paper-import/preprocessingReport.mjs'
 import { canonicalizeVisibleEnglishTypography as typography } from '../shared/paper-canonical/visibleTypography.mjs'
 import { replayCanonicalVisibleTypography as replayTypography } from '../shared/paper-canonical/visibleTypographyReplay.mjs'
-import { makeFixture } from './verify-nck1-source-materialization.mjs'
+import { makeFixture, addUnofficialListening } from './verify-nck1-source-materialization.mjs'
 import { makeSyntheticNck1DocxFixture } from '../test-fixtures/paper-import/nck1-docx-materialization-v1/fixture.mjs'
 
 const textEncoder = new TextEncoder()
@@ -333,6 +338,89 @@ assert.equal(resolveCanonicalAuthority({
   manifestDigest: digestJson(manifestV46),
 }).ok, true, 'immutable NCK1 Candidate authority v46 remains resolvable')
 const first = importCanonicalCandidate(input)
+for (const tamper of ['none', 'answer', 'transcript', 'audio']) {
+  const unofficialInput = sourceInput({ mixedTable: false })
+  const materialization = JSON.parse(new TextDecoder().decode(unofficialInput.materializationBytes))
+  const { listeningAudio, ...document } = addUnofficialListening(materialization, paragraphs => {
+    if (tamper === 'answer') paragraphs[14] = paragraphs[14].replace('1. A', '1. B')
+    if (tamper === 'transcript') paragraphs[4] += ' altered'
+    if (tamper === 'audio') paragraphs[1] = `录音 SHA-256：sha256:${'b'.repeat(64)}`
+    return paragraphs
+  })
+  unofficialInput.listeningAudio = listeningAudio
+  unofficialInput.documents.push(document)
+  unofficialInput.materializationBytes = textEncoder.encode(JSON.stringify(materialization))
+  const imported = importCanonicalCandidate(unofficialInput)
+  if (tamper !== 'none') {
+    assert(imported.issues.some(issue => issue.code === 'MATERIALIZATION_UNOFFICIAL_LISTENING_SOURCE_INVALID'))
+    continue
+  }
+  assert.deepEqual(imported.issues, [])
+  assert.equal(nck1OcrSourceDocuments(materialization.documents).length, 2)
+  assert.equal(nck1OcrSourceSetDigest(materialization.documents),
+    nck1OcrSourceSetDigest(materialization.documents.filter(document => document.role !== 'unofficial_listening')))
+  const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+  assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
+  const assertions = imported.candidate.interpretation.assertions.filter(answer => answer.authority === 'unofficial')
+  assert.equal(assertions.length, 20)
+  assert(!imported.candidate.interpretation.assertions.some(answer =>
+    answer.questionId.startsWith('question:listening:') && answer.authority === 'official'))
+  const source = deriveNck1MaterializationBundle(unofficialInput).source
+  const originalCapture = preview.compilation.artifacts.sourceCapture
+  for (const [name, mutate] of [
+    ['missing declaration', capture => { capture.observations.find(entry => entry.kind === 'listening_unofficial_answer').value.provenance = null }],
+    ['wrong question', capture => { capture.observations.find(entry => entry.kind === 'listening_unofficial_answer').value.canonicalNumber = 2 }],
+    ['duplicate', capture => { capture.assertions.push({ ...capture.assertions.find(entry => entry.authority === 'unofficial'), assertionId: 'duplicate' }) }],
+    ['official and unofficial', capture => { capture.assertions.push({ ...capture.assertions.find(entry => entry.authority === 'unofficial'), assertionId: 'official', authority: 'official' }) }],
+    ['wrong answer', capture => { capture.assertions.find(entry => entry.authority === 'unofficial').answer = 'D' }],
+    ['missing', capture => { capture.assertions = capture.assertions.filter(entry => entry.questionId !== 'question:listening:1') }],
+  ]) {
+    const capture = structuredClone(originalCapture), diagnostics = []
+    mutate(capture)
+    validateAnswerCoverage(source, capture, diagnostics)
+    assert(diagnostics.length, name)
+    if (name === 'missing declaration' || name === 'missing') assert(diagnostics.some(issue => issue.code === 'OFFICIAL_ANSWER_MISSING'))
+  }
+  const notListening = structuredClone(source)
+  notListening.groups.find(group => group.family === 'listening').family = 'reading'
+  const diagnostics = []
+  validateAnswerCoverage(notListening, originalCapture, diagnostics)
+  assert(diagnostics.some(issue => issue.code === 'UNOFFICIAL_LISTENING_ANSWER_CONFLICT'))
+  const student = buildNck1ReviewConsumption(imported.candidate, preview.compilation)
+  const review = listeningReviewProjection(materialization, { segments: { candidates: [] } })
+  assert(review.questions.every(question => question.provenance === 'unofficial'
+    && ['A', 'B', 'C'].includes(question.answer) && !Object.hasOwn(question, 'officialAnswer')))
+  assert.throws(() => convertRepresentableNck1ReviewSourceToAnalyzedPackageFiles('', { materialization }),
+    /非官方听力答案不能转换/)
+  const printable = printConsumption(student)
+  const items = printable.selections.filter(selection => ['listening', 'reading'].includes(selection.familyContractId))
+    .flatMap(selection => selection.groupIds.map(groupId => {
+      const projected = projectCanonicalConsumerGroup({ consumption: printable,
+        familyContractId: selection.familyContractId, groupId })
+      if (selection.familyContractId === 'listening') {
+        assert(!JSON.stringify(projected).includes('correctOptionId'))
+        assert(!JSON.stringify(projected).includes('transcriptSegments'))
+      }
+      return { detail: { id: groupId, paperId: materialization.paperId, groupType: projected.groupType, passage: {},
+        questions: projected.questions.map(question => ({ id: question.questionId, answer: 'A' })) } }
+    }))
+  for (const edition of ['largeComplete', 'largeNoListening', 'economy8']) {
+    const policy = studentProductPolicy(edition, 2)
+    const selectedItems = items.filter(item => policy.includeListening || item.detail.groupType !== 'listening')
+    const html = buildPrintHtml({ title: 'Unofficial listening fixture', versionType: 'student', printStyle: 'exam',
+      canonicalConsumption: printable, items: selectedItems,
+      blocks: selectedItems.map(item => ({ type: 'question_group', questionGroupId: item.detail.id })) })
+    const product = applyStudentProductLayout(html, { profile: 'student-friendly-v1', fontSizePt: 12,
+      figureLayout: 'natural', answerBoxHeightsMm: { application: 65, continuation: 57 } }, edition)
+    assert(!product.includes('非官方，据录音整理'))
+    assert(!product.includes('Short listening transcript'))
+    assert(!product.includes('Long listening transcript'))
+    assert(!product.includes('data-answer-number='))
+    assert(!product.includes('【答案】'))
+    assert(!product.includes('class="answer"'))
+  }
+  console.log('PASS unofficial listening: 20 source-bound answers, conflicts/missing/misbinding rejected, student projection isolated')
+}
 const second = importCanonicalCandidate(input)
 const historical = importCanonicalCandidate(input, undefined, {
   materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef58,

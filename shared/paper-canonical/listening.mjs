@@ -129,14 +129,16 @@ export function validateListeningContract({
   } else {
     for (const [index, question] of variant.questions.entries()) {
       const set = choiceSets[index]
-      const answer = assertions.find((assertion) => assertion.questionId === question.questionId)
+      const answers = assertions.filter((assertion) => assertion.questionId === question.questionId)
+      const answer = answers[0]
       const correct = set.options.find((option) => option.optionId === question.correctOptionId)
-      if (!correct || answer?.answer !== correct.label) {
+      if (!correct || answer?.answer !== correct.label
+        || (answers.some(assertion => assertion.authority === 'unofficial') && answers.length !== 1)) {
         issues.push(issue(
           'LISTENING_ANSWER_MISMATCH',
           'answer_conflict',
           `$.variant.questions[${index}].correctOptionId`,
-          'Listening correct Option must agree with the official answer assertion',
+          'Listening correct Option must agree with its source-bound answer assertion',
         ))
       }
     }

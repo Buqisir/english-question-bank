@@ -8,7 +8,7 @@ import assert from 'node:assert/strict'
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { makeFixture } from './verify-nck1-source-materialization.mjs'
+import { makeFixture, addUnofficialListening } from './verify-nck1-source-materialization.mjs'
 import { makeSyntheticNck1DocxFixture } from '../test-fixtures/paper-import/nck1-docx-materialization-v1/fixture.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { materializationSlotSpecs, profileHeadingSpecs } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
@@ -300,6 +300,16 @@ function answerLabelChecks() {
     const listeningHtml = buildAssembledAnswerOnlyHtml({ paperName: input.paperName, items: [listeningItem] })
     assert.match(listeningHtml, /aria-label="听力原文"><h2>听力原文<\/h2><article[^>]+><h3 class="transcript-label">Text 1<\/h3>/u)
     assert.equal((listeningHtml.match(/<h2>听力原文<\/h2>/gu) || []).length, 1)
+    addUnofficialListening(input.materialization)
+    input.sourceReferences.materializationDigest = digestJson(input.materialization)
+    const unofficialHtml = buildAnswerOnlyHtml(input)
+    assert.match(unofficialHtml, /听力答案（非官方，据录音整理）/)
+    assert.match(unofficialHtml, /听力稿（非官方，据录音整理）/)
+    const numbered = buildAssembledAnswerOnlyHtml({ paperName: input.paperName,
+      items: [listeningItem], questionNumberStart: 31 })
+    assert.match(numbered, /听力答案（非官方，据录音整理）/)
+    assert.match(numbered, /听力稿（非官方，据录音整理）/)
+    assert.deepEqual([...numbered.matchAll(/data-answer-number="(\d+)"/g)].map(match => Number(match[1])), [31, 32, 33, 34, 35])
   }
   assert(!buildAnswerOnlyHtml(fixture({ listening: false })).includes('<h2>听力原文</h2>'))
   console.log('PASS v1/v2 source labels, single/multiple essay numbering and whole/assembled transcript headings')

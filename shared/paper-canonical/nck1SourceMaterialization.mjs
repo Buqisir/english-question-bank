@@ -1207,13 +1207,20 @@ function validateListening(listening, documents, sourceCoverage, issues) {
     }
     if (
       !isRecordValue(answer)
-      || !exactKeys(answer, ['canonicalNumber', 'value', 'authority'])
+      || !exactKeys(answer, ['canonicalNumber', 'value', 'authority',
+        ...(answer.provenance === 'unofficial' ? ['provenance'] : [])])
       || answer.canonicalNumber !== number
       || !['A', 'B', 'C'].includes(answer.value)
     ) {
       issues.push(issue('MATERIALIZATION_LISTENING_ANSWER_INVALID', `$.listening.answers[${index}]`, `Listening answer ${number} is incomplete`))
     } else {
       validateLocator(answer.authority, `$.listening.answers[${index}].authority`, documents, issues)
+      const unofficialDocument = documents.get(answer.authority?.documentId)?.role === 'unofficial_listening'
+      if (unofficialDocument !== (answer.provenance === 'unofficial')
+        || (unofficialDocument && (answer.authority.kind !== 'docx_part'
+          || listening.answers.some(entry => entry?.provenance !== 'unofficial')))) {
+        issues.push(issue(unofficialDocument && answer.provenance !== 'unofficial' ? 'OFFICIAL_ANSWER_MISSING' : 'MATERIALIZATION_LISTENING_ANSWER_INVALID', `$.listening.answers[${index}]`, 'Unofficial listening requires an explicit declaration and its supplemental DOCX for all 20 answers'))
+      }
     }
   }
   const transcriptIds = new Set()
@@ -1235,6 +1242,12 @@ function validateListening(listening, documents, sourceCoverage, issues) {
       transcriptIds.add(segment.segmentId)
       transcriptQuestionNumbers.push(...segment.questionNumbers)
       validateLocator(segment.source, `$.listening.transcript[${index}].source`, documents, issues)
+      const unofficial = listening.answers.some(answer => answer?.provenance === 'unofficial')
+      if ((documents.get(segment.source?.documentId)?.role === 'unofficial_listening') !== unofficial
+        || (unofficial && (segment.source?.kind !== 'docx_part'
+          || segment.source.documentId !== listening.answers[0]?.authority?.documentId))) {
+        issues.push(issue('MATERIALIZATION_LISTENING_TRANSCRIPT_INVALID', `$.listening.transcript[${index}]`, 'Unofficial transcripts must bind the same supplemental DOCX as the answers'))
+      }
     }
   }
   const shortSegments = listening.transcript.filter((segment) =>
@@ -1484,7 +1497,9 @@ function validateMaterialization(value, { allowMultipleApplicationNotices = fals
         || !exactKeys(document, ['documentId', 'role', 'mediaType', 'sha256', 'byteLength', 'pageCount'])
         || !idPattern.test(document.documentId || '')
         || documents.has(document.documentId)
-        || !['question_source', 'official_answers', 'question_and_answers'].includes(document.role)
+        || !['question_source', 'official_answers', 'question_and_answers', 'unofficial_listening'].includes(document.role)
+        || (document.role === 'unofficial_listening'
+          && document.mediaType !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')
         || ![
           'application/pdf',
           'application/vnd.openxmlformats-officedocument.wordprocessingml.document',

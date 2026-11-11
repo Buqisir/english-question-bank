@@ -226,7 +226,7 @@ function replayPdfPage(document, page) {
 }
 
 export function nck1OcrSourceDocuments(documents) {
-  return (documents || []).filter((document) => !document.renditionOf)
+  return (documents || []).filter((document) => !document.renditionOf && document.role !== 'unofficial_listening')
 }
 
 // Reference-only identity proof. The manifest already travels in the Review

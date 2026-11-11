@@ -7,6 +7,10 @@ import { deriveNck1AnalyzedPackageBundle } from './paper-canonical/nck1AnalyzedP
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import { sourceReferenceFigurePresentation, sourceReferenceFigureItemPresentation } from './paper-import/sourceReferencePresentation.mjs'
 
+const unofficialListeningLabel = '听力答案（非官方，据录音整理）'
+const unofficialTranscriptLabel = '听力稿（非官方，据录音整理）'
+const hasUnofficialListening = materialization => materialization.listening.answers?.some(answer => answer.provenance === 'unofficial')
+
 function assertAnswerSource(materialization, sourceInput, authorityRef) {
   if (materialization.documents) {
     const issues = validateNck1SourceMaterialization(materialization, { allowMultipleApplicationNotices: authorityAdmitsMultipleWritingNotices(authorityRef) })
@@ -190,7 +194,7 @@ function legacyAnswerSections({ canonicalPlan, materialization, authorityRef, so
       return `<h3 class="key-section">${title(section.titleInstructionRef)}</h3>\n`
         + (grammar ? keyTable(ranges.flat(), 5) : rangeTable(ranges))
     }).join('\n')
-    keys += `<section data-answer-section="keys"><h2>${title(part.titleInstructionRef)}</h2>\n${sections}</section>`
+    keys += `<section data-answer-section="keys"><h2>${part.partId === 'listening' && hasUnofficialListening(materialization) ? unofficialListeningLabel : title(part.titleInstructionRef)}</h2>\n${sections}</section>`
   }
   return { keys, references }
 }
@@ -211,7 +215,7 @@ export function buildAnswerOnlyHtml({
   const listeningAnswers = listening.state === 'captured'
     ? [...listening.answers].sort((a, b) => a.canonicalNumber - b.canonicalNumber) : []
   let keys = ['zhejiang-legacy', 'national-legacy'].includes(materialization.profileId) ? '' : `${listening.state === 'captured' ? `<section data-answer-section="keys">
-<h2>第一部分　听力（共两节，满分30分）</h2>
+<h2>${hasUnofficialListening(materialization) ? unofficialListeningLabel : '第一部分　听力（共两节，满分30分）'}</h2>
 ${rangeTable([0, 5, 10, 15].map(start => listeningAnswers.slice(start, start + 5)))}</section>` : ''}
 <section data-answer-section="keys"><h2>第二部分　阅读理解（共两节，满分50分）</h2>
 <h3 class="key-section">第一节（共15小题；每小题2.5分，满分37.5分）</h3>
@@ -235,7 +239,7 @@ ${keyTable(slice(56, 65), 5)}</section>`
       sourceReferences, sourceDigest, candidateDigest, includeScoring }))
   }
   const transcripts = listening.state === 'captured'
-    ? `<section data-answer-section="transcripts" aria-label="听力原文"><h2>听力原文</h2>${listening.transcript.map((segment, index) =>
+    ? `<section data-answer-section="transcripts" aria-label="${hasUnofficialListening(materialization) ? unofficialTranscriptLabel : '听力原文'}"><h2>${hasUnofficialListening(materialization) ? unofficialTranscriptLabel : '听力原文'}</h2>${listening.transcript.map((segment, index) =>
       `<article data-transcript-segment="${escapeHtml(segment.segmentId)}"><h3 class="transcript-label">Text ${index + 1}</h3><p class="transcript">${textHtml(segment.text)}</p></article>`,
     ).join('\n')}</section>`
     : ''
@@ -299,18 +303,19 @@ export function buildAssembledAnswerOnlyHtml({ paperName, items, questionNumberS
       if (!answer) throw new Error('选中的问题没有精确源答案')
       if (listening) for (const segment of materialization.listening.transcript) {
         if (segment.questionNumbers.includes(answer.canonicalNumber)) {
-          transcripts.set(`${materialization.paperId}:${segment.segmentId}`, segment)
+          transcripts.set(`${materialization.paperId}:${segment.segmentId}`, { ...segment,
+            ...(answer.provenance === 'unofficial' ? { provenance: 'unofficial' } : {}) })
         }
       }
       return { ...answer, canonicalNumber: number++ }
     })
     const ranges = []
     for (let start = 0; start < selected.length; start += 5) ranges.push(selected.slice(start, start + 5))
-    return `<section data-answer-section="keys" data-group-id="${escapeHtml(detail.id)}"><h2>第${index + 1}题组　${labels[listening ? 'listening' : group.family]}</h2>`
+    return `<section data-answer-section="keys" data-group-id="${escapeHtml(detail.id)}"><h2>第${index + 1}题组　${listening && selected.some(answer => answer.provenance === 'unofficial') ? unofficialListeningLabel : labels[listening ? 'listening' : group.family]}</h2>`
       + (group?.family === 'grammar-fill' ? keyTable(selected, 5) : rangeTable(ranges)) + '</section>'
   }).join('\n')
   const transcriptHtml = [...transcripts.values()].map((segment, index) =>
-    `<article data-transcript-segment="${escapeHtml(segment.segmentId)}"><h3 class="transcript-label">Text ${index + 1}</h3><p class="transcript">${textHtml(segment.text)}</p></article>`,
+    `<article data-transcript-segment="${escapeHtml(segment.segmentId)}"><h3 class="transcript-label">Text ${index + 1}${segment.provenance === 'unofficial' ? ` · ${unofficialTranscriptLabel}` : ''}</h3><p class="transcript">${textHtml(segment.text)}</p></article>`,
   ).join('\n')
   return answerDocument(paperName, content + (transcriptHtml
     ? `<section data-answer-section="transcripts" aria-label="听力原文"><h2>听力原文</h2>${transcriptHtml}</section>` : ''))

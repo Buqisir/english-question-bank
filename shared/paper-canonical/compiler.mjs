@@ -2306,7 +2306,7 @@ function validateAnswerAssertions(capture, diagnostics) {
   }
 }
 
-function validateAnswerCoverage(source, capture, diagnostics) {
+export function validateAnswerCoverage(source, capture, diagnostics) {
   const officialQuestionIds = new Set(
     capture.assertions
       .filter((assertion) => assertion.authority === 'official')
@@ -2314,7 +2314,23 @@ function validateAnswerCoverage(source, capture, diagnostics) {
   )
   for (const group of source.groups || []) {
     for (const questionId of group.questionIds || []) {
-      if (!officialQuestionIds.has(questionId)) {
+      const unofficial = capture.assertions.filter(assertion => assertion.questionId === questionId && assertion.authority === 'unofficial')
+      const assertion = unofficial[0]
+      const observation = capture.observations.find(entry => entry.sourceSpanId === assertion?.sourceSpanId)
+      const validUnofficial = group.family === 'listening' && unofficial.length === 1
+        && !officialQuestionIds.has(questionId)
+        && observation?.kind === 'listening_unofficial_answer'
+        && observation.value?.provenance === 'unofficial'
+        && observation.value.value === assertion.answer
+        && questionId === `question:listening:${observation.value.canonicalNumber}`
+        && group.variant?.choiceOwnership?.sets?.find(set => set.questionId === questionId)?.options
+          ?.some(option => option.label === assertion.answer
+            && option.optionId === group.variant.questions?.find(question => question.questionId === questionId)?.correctOptionId)
+        && capture.documents.find(document => document.documentId === observation.documentId)?.roles.join(',') === 'source_provenance'
+      if (unofficial.length && !validUnofficial) {
+        diagnostics.push(diagnostic('UNOFFICIAL_LISTENING_ANSWER_CONFLICT', 'answer_conflict', '$.assertions', `Unofficial listening evidence is ambiguous or misbound for ${questionId}`))
+      }
+      if (!officialQuestionIds.has(questionId) && !validUnofficial) {
         diagnostics.push(diagnostic('OFFICIAL_ANSWER_MISSING', 'incomplete_source', '$.assertions', `Missing official answer evidence for ${questionId}`))
       }
     }

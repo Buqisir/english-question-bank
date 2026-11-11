@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict'
 import { pathToFileURL } from 'node:url'
 import { confirmMaterializationWritingGivens } from './import-pipeline/materialization-writing-givens.mjs'
+import { makeSyntheticNck1DocxFixture } from '../test-fixtures/paper-import/nck1-docx-materialization-v1/fixture.mjs'
+import { sha256 } from '../shared/paper-canonical/stable.mjs'
 
 import {
   digestNck1SourceMaterialization,
@@ -345,6 +347,33 @@ export function makeFixture({ listening = false, mixedTable = false } = {}) {
   }
 }
 
+export function addUnofficialListening(materialization, transform = value => value) {
+  const listeningAudio = { relativePath: 'listening/playback.mp3', sha256: hash,
+    byteLength: 100, durationSeconds: 100, mediaType: 'audio/mpeg' }
+  const paragraphs = ['非官方听力稿及答案（据录音 ASR 整理）', `录音 SHA-256：${hash}`,
+    'ASR attempt：attempt-1', `evidence.json：${hash}；摘要：完整录音 ASR，人工对照题目整理`]
+  const locator = index => ({ kind: 'docx_part', documentId: 'unofficial-listening',
+    part: 'word/document.xml', selector: `(/w:document/w:body//w:p)[${index}]` })
+  for (const [index, segment] of materialization.listening.transcript.entries()) {
+    paragraphs.push(`Text ${index + 1} | 题号：${segment.questionNumbers.join(',')} | 非官方，据录音整理 | ${segment.text}`)
+    segment.source = locator(paragraphs.length)
+  }
+  for (const answer of materialization.listening.answers) {
+    const segment = materialization.listening.transcript.find(segment => segment.questionNumbers.includes(answer.canonicalNumber))
+    paragraphs.push(`${answer.canonicalNumber}. ${answer.value} | 非官方，据录音整理 | ASR 行号：1-2 | 证据：${segment.text}`)
+    answer.authority = locator(paragraphs.length)
+    answer.provenance = 'unofficial'
+  }
+  const escape = text => text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;')
+  const source = makeSyntheticNck1DocxFixture({ transformXml: () =>
+    `<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${transform(paragraphs).map(text =>
+      `<w:p><w:r><w:t>${escape(text)}</w:t></w:r></w:p>`).join('')}</w:body></w:document>`,
+  }).sourceDocuments.find(document => document.role === 'official_answers')
+  materialization.documents.push({ documentId: 'unofficial-listening', role: 'unofficial_listening',
+    mediaType: source.mediaType, sha256: sha256(source.bytes), byteLength: source.bytes.length, pageCount: 1 })
+  return { documentId: 'unofficial-listening', bytes: source.bytes, listeningAudio }
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
 await import('./verify-inline-blank-boundaries.mjs')
 const { SOURCE_INSTRUCTION_SLOTS } = await import('../shared/paper-canonical/sourcePresentation.mjs')
@@ -446,6 +475,22 @@ assert.equal(
 
 const withListening = makeFixture({ listening: true })
 assert.deepEqual(validateNck1SourceMaterialization(withListening), [])
+
+const unofficialListening = structuredClone(withListening)
+addUnofficialListening(unofficialListening)
+assert.deepEqual(validateNck1SourceMaterialization(unofficialListening), [])
+for (const change of [
+  value => value.listening.answers.pop(),
+  value => value.listening.answers.push(value.listening.answers[0]),
+  value => { value.listening.answers[0].canonicalNumber = 2 },
+  value => { value.listening.answers[0].value = 'D' },
+  value => { delete value.listening.answers[0].provenance },
+  value => { value.listening.transcript[0].source.documentId = 'answers' },
+]) {
+  const invalid = structuredClone(unofficialListening)
+  change(invalid)
+  assert(validateNck1SourceMaterialization(invalid).length, 'invalid unofficial listening is rejected')
+}
 
 const withMixedTable = makeFixture({ mixedTable: true })
 assert.deepEqual(validateNck1SourceMaterialization(withMixedTable), [])
