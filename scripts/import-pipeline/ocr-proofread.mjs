@@ -1136,8 +1136,16 @@ function presentation(paperId) {
 
 // The OCR producer emits every figure at widthRatio 1. Restore the source size the way the DOCX
 // adapter does (image width / body width), measuring the body as the extent of that page's text
-// observations; full-width banners stay at 1.
+// observations; --body-width-ratio supplies an explicitly measured width only for image-heavy pages
+// that lack enough text to measure.
+// Full-width banners stay at 1.
 function figureSizes(paperId) {
+  const explicitWidth = option('--body-width-ratio')
+  const bodyWidthOverride = explicitWidth === null ? null : Number(explicitWidth)
+  if (process.argv.includes('--body-width-ratio')
+    && (!Number.isFinite(bodyWidthOverride) || bodyWidthOverride <= 0 || bodyWidthOverride > 1)) {
+    fail('--body-width-ratio must be a number greater than 0 and at most 1')
+  }
   const { paperDir } = context(paperId)
   const directory = path.join(paperDir, 'materialization')
   const materializationPath = path.join(directory, 'nck1-source-materialization-v1.json')
@@ -1149,13 +1157,17 @@ function figureSizes(paperId) {
     if (media.usage !== 'content' || crop?.kind !== 'pdf_crop') continue
     const page = evidence.documents.find((document) => document.documentId === crop.documentId)?.pages[crop.page - 1]
     const text = (page?.observations || []).filter((item) => String(item.text || '').trim().length > 3)
-    if (text.length < 10) fail(`Too few text observations to measure the body width of ${crop.documentId} page ${crop.page}`)
+    const measured = text.length >= 10
+    if (!measured && bodyWidthOverride === null) {
+      fail(`Too few text observations to measure the body width of ${crop.documentId} page ${crop.page}`)
+    }
     const left = Math.min(...text.map((item) => item.region.x))
     const right = Math.max(...text.map((item) => item.region.x + item.region.width))
-    const widthRatio = Math.min(1, Number((crop.region.width / (right - left)).toFixed(4)))
+    const bodyWidth = measured ? right - left : bodyWidthOverride
+    const widthRatio = Math.min(1, Number((crop.region.width / bodyWidth).toFixed(4)))
     if (media.presentation.widthRatio === widthRatio) continue
     changes.push({ mediaId: media.mediaId, page: crop.page, from: media.presentation.widthRatio, to: widthRatio,
-      cropWidth: crop.region.width, bodyWidth: Number((right - left).toFixed(4)) })
+      cropWidth: crop.region.width, bodyWidth: Number(bodyWidth.toFixed(4)) })
     media.presentation = { ...media.presentation, widthRatio }
   }
   if (changes.length) writeJson(materializationPath, materialization)
@@ -1593,7 +1605,7 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
   else if (command === 'numbering') numbering(paperId)
   else if (command === 'references') references(paperId)
   else if (command === 'figure-sizes') figureSizes(paperId)
-  else fail('Usage: ocr-proofread.mjs <evidence|worksheets|compile|numbering|presentation|writing-givens|paragraph-join-plan|paragraph-join-apply|exclude-explanation-figure|figure-sizes|references|report-entries> <paperId> [--reset-drafts] [--work <dir>] [--regions <requests.json>] [--region-psm 6|13] [--lang chi_sim+eng] [--jobs N]')
+  else fail('Usage: ocr-proofread.mjs <evidence|worksheets|compile|numbering|presentation|writing-givens|paragraph-join-plan|paragraph-join-apply|exclude-explanation-figure|figure-sizes|references|report-entries> <paperId> [--reset-drafts] [--work <dir>] [--regions <requests.json>] [--region-psm 6|13] [--lang chi_sim+eng] [--jobs N] [--body-width-ratio <0..1>]')
 } catch (error) {
   console.error(error.stack || String(error))
   process.exitCode = 1

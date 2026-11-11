@@ -53,22 +53,36 @@ function fixture(paperId, { figurePages = [0], figureText = 'A source diagram', 
   return input
 }
 function declaration(input, figureId = 'answers:explanation-figure') {
-  const figures = prepareSourceReferenceWritingItems(input.materialization, input.evidence, input.confirmation).referenceFigures
+  const options = { writingRoleDeclarations: input.writingRoleDeclarations }
+  const figures = prepareSourceReferenceWritingItems(input.materialization, input.evidence, input.confirmation, options).referenceFigures
   const figure = figures.find(figure => figure.sourceRegionId === figureId)
   return confirmSourceReferenceFigureExclusion(input.materialization, input.evidence, input.confirmation, figures, {
     figureId: figure.sourceRegionId, figureIdentitySha256: sourceReferenceFigureIdentity(figure),
     anchorItemId: figure.afterItem.itemId, reason: 'Original page reviewed: diagram explains the source, outside model answers and rubrics.',
     confirmed: true,
-  })
+  }, options)
 }
 function capture(input, exclusions) {
   const result = buildSourceReferences(input.materialization, input.evidence, input.confirmation,
-    { sourceDocuments: input.sourceDocuments, figureExclusions: exclusions })
+    { sourceDocuments: input.sourceDocuments, figureExclusions: exclusions, writingRoleDeclarations: input.writingRoleDeclarations })
   return { schemaVersion: result.schemaVersion, paperId: input.materialization.paperId,
     producerVersion: result.producerVersion,
     sourceDigest: input.sourceDigest, candidateDigest: input.candidateDigest,
-    materializationDigest: digestJson(input.materialization), groups: result.groups, figureExclusions: result.figureExclusions }
+    materializationDigest: digestJson(input.materialization), groups: result.groups, figureExclusions: result.figureExclusions,
+    ...(result.writingRoleDeclarations ? { writingRoleDeclarations: result.writingRoleDeclarations } : {}) }
 }
+
+test('declared bare answer sample survives explanation exclusion through producer and admission', () => {
+  const input = fixture(undefined, { declaredSample: true })
+  const sidecar = capture(input, [declaration(input)])
+  assert.equal(sidecar.groups.find(group => group.taskType === 'application').essays.state, 'captured')
+  assert.deepEqual(sidecar.writingRoleDeclarations, input.writingRoleDeclarations)
+  assertSourceReferenceAdmission({ ...input, sidecar })
+  const undeclared = structuredClone(sidecar)
+  delete undeclared.writingRoleDeclarations
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: undeclared }),
+    /Unresolved writing reference title/u)
+})
 
 test('explicit explanation figure exclusion closes producer/admission and preserves all essay/scoring content and source evidence', () => {
   const input = fixture()

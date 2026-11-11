@@ -1,5 +1,8 @@
 import assert from 'node:assert/strict'
 import { test, after } from 'node:test'
+import { spawnSync } from 'node:child_process'
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import path from 'node:path'
 import { checkedSourceReferences as buildSourceReferences, writingOwnershipChecks } from './ocr-writing-ownership-test-helpers.mjs'
 import { joinTranscriptTurns, isAnswerFurniture, referenceLineBoundary, writingSectionAfterPart,
   buildTranscriptJoinDocuments } from './ocr-proofread.mjs'
@@ -9,6 +12,35 @@ import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle } from '../../server/paper-import/sourceReferenceWritingTask.mjs'
 
 after(() => console.log(`Writing ownership differential: ${JSON.stringify(writingOwnershipChecks)}`))
+
+test('figure-sizes accepts explicit body width for a page without text observations', t => {
+  const paperId = `paper-synthetic-body-width-${process.pid}`
+  const directory = path.resolve(import.meta.dirname, 'papers', paperId)
+  const staged = path.join(directory, 'materialization')
+  assert(!existsSync(directory))
+  mkdirSync(staged, { recursive: true })
+  t.after(() => rmSync(directory, { recursive: true, force: true }))
+  const json = (file, value) => writeFileSync(path.join(directory, file), JSON.stringify(value))
+  json('universal-source-manifest.json', { documents: [] })
+  json('materialization/nck1-source-materialization-v1.json', { media: [{
+    mediaId: 'chart', usage: 'content', presentation: { widthRatio: 1 },
+    extraction: { kind: 'pdf_crop', documentId: 'questions', page: 12, region: { width: .4 } },
+  }] })
+  json('materialization/nck1-ocr-source-evidence-v1.json', { documents: [] })
+  const run = args => spawnSync(process.execPath, [path.join(import.meta.dirname, 'ocr-proofread.mjs'),
+    'figure-sizes', paperId, ...args], { encoding: 'utf8' })
+  assert.match(run([]).stderr, /Too few text observations/u)
+  for (const value of ['0', '-1', '1.1', 'NaN', 'Infinity', '']) {
+    const invalid = run(['--body-width-ratio', value])
+    assert.notEqual(invalid.status, 0)
+    assert.match(invalid.stderr, /body-width-ratio/u)
+  }
+  const result = run(['--body-width-ratio', '0.785894'])
+  assert.equal(result.status, 0, result.stderr)
+  const materialization = JSON.parse(readFileSync(path.join(staged, 'nck1-source-materialization-v1.json')))
+  assert.equal(materialization.media[0].presentation.widthRatio, .509)
+  assert.equal(JSON.parse(result.stdout).changes[0].bodyWidth, .7859)
+})
 
 function fixture(texts, lefts = []) {
   const items = texts.map((text, i) => ({ lines: `L${i + 1}`, text }))
