@@ -14,7 +14,7 @@ import { sealedPublicationProofIdentity } from '../import-review/importReviewSto
 import { isBase64String } from '../../shared/paper-canonical/base64.mjs'
 import { validatedPaperHeaderTitle } from '../../shared/paper-canonical/headerTitle.mjs'
 import { assertListeningPlaybackUi, PUBLISHED_LISTENING_PLAYBACK_UI_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
-import { authorityRefForManifestDigest, canonicalAuthorityRef, closureRendersApplicationPromptFigures, closureRendersApplicationDrawingArea, resolveCanonicalAuthority, validateJsonSchema } from '../../shared/paper-canonical/authority.mjs'
+import { authorityRefForManifestDigest, canonicalAuthorityRef, closureRendersApplicationDrawingArea, resolveCanonicalAuthority, validateJsonSchema } from '../../shared/paper-canonical/authority.mjs'
 import {
   compileCanonicalPaper,
   validateExactTransformationRecords,
@@ -47,6 +47,7 @@ import {
   consumerContractRefs,
   consumerContractRefsForAuthority,
   consumerRendersReadingStemFigures,
+  consumerRendersApplicationPromptFigures,
   resolveConsumerContract,
 } from '../../shared/paper-canonical/consumers.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
@@ -1680,8 +1681,9 @@ function canonicalSelections(validated, contract, sourceAsset) {
   }
   if (validated.groups.some(group => group.contractRef.familyContractId === 'application-writing'
     && group.content.blocks.some(block => block.kind === 'figure'))
-    && !closureRendersApplicationPromptFigures(resolveCanonicalAuthority(
-      authorityRefForManifestDigest(contract.authorityManifestDigest)).closure)) {
+    && !consumerRendersApplicationPromptFigures({
+      id: contract.consumerId, version: contract.version, digest: contract.contractDigest,
+    })) {
     throw publicationError(
       'CANONICAL_CONSUMER_APPLICATION_PROMPT_FIGURE_UNAVAILABLE',
       'This paper requires a consumer that renders source-backed Application Writing prompt figures',
