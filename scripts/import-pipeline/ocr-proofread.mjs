@@ -1215,7 +1215,8 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     ? referenceSourceDocuments.filter(document => document.documentId === answerDocument.documentId
       || document.renditionOf === answerDocument.documentId)
     : null
-  const explanationFigures = sourceReferenceExplanationFigures(materialization, evidence, confirmation, referenceFigures, figureExclusions, { producerVersion })
+  const explanationFigures = sourceReferenceExplanationFigures(materialization, evidence, confirmation, referenceFigures, figureExclusions,
+    { producerVersion, writingRoleDeclarations: source.roleDeclarations.declarations })
   const { sections, furniture, review } = lifecycle
   const wholeAbsence = absenceSidecar?.wholeDocumentWritingAbsence
     ? wholeDocumentAbsenceSubject({ sidecar: absenceSidecar, materialization, sourceInput, sourceDigest, candidateDigest }) : null
