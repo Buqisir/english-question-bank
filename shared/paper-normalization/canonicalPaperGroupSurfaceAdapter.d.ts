@@ -18,6 +18,7 @@ import type {
 export type CanonicalSurfaceTextNode = {
   readonly type: 'text'
   readonly text: string
+  readonly marks?: ReadonlyArray<'bold' | 'underline'>
 }
 
 export type CanonicalSurfaceBlankNode = {

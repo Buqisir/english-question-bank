@@ -65,14 +65,14 @@ export function renderCanonicalPaperSentenceContent(
         || activeEvidence.range.end <= nodeStart
         || activeEvidence.range.start >= nodeEnd
       ) {
-        return [<span key={`${keyPrefix}-semantic-text-${index}`}>{node.text}</span>]
+        return [<span key={`${keyPrefix}-semantic-text-${index}`} data-source-marks={node.marks?.join(' ')}>{node.text}</span>]
       }
       const activeStart = Math.max(activeEvidence.range.start, nodeStart) - nodeStart
       const activeEnd = Math.min(activeEvidence.range.end, nodeEnd) - nodeStart
       const renderedText: ReactElement[] = []
       if (node.text.slice(0, activeStart)) {
         renderedText.push(
-          <span key={`${keyPrefix}-semantic-text-${index}-pre`}>
+          <span key={`${keyPrefix}-semantic-text-${index}-pre`} data-source-marks={node.marks?.join(' ')}>
             {node.text.slice(0, activeStart)}
           </span>,
         )
@@ -81,6 +81,7 @@ export function renderCanonicalPaperSentenceContent(
         <mark
           key={`${keyPrefix}-semantic-text-${index}-active`}
           className="ps-evidence-anchor ps-evidence-anchor--active"
+          data-source-marks={node.marks?.join(' ')}
           {...{
             [paperSurfaceAnchorAttrs.evidenceId]: activeEvidence.id,
             [paperSurfaceAnchorAttrs.evidenceKind]: activeEvidence.kind,
@@ -91,7 +92,7 @@ export function renderCanonicalPaperSentenceContent(
       )
       if (node.text.slice(activeEnd)) {
         renderedText.push(
-          <span key={`${keyPrefix}-semantic-text-${index}-post`}>
+          <span key={`${keyPrefix}-semantic-text-${index}-post`} data-source-marks={node.marks?.join(' ')}>
             {node.text.slice(activeEnd)}
           </span>,
         )

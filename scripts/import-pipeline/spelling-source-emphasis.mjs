@@ -1,7 +1,7 @@
 import { loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { resolveConfirmedNck1OcrEvidence } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { extractDocxParagraphEmphasis } from '../../server/paper-canonical/docxSourceAdapter.mjs'
-import { resolveDocxParagraphSelector, sourceOrderedParagraphEntries } from '../../server/paper-canonical/nck1MaterializationAdapter.mjs'
+import { resolveDocxParagraphSelector, sourceOrderedParagraphEntries, sourceEmphasisParagraphParts } from '../../server/paper-canonical/nck1MaterializationAdapter.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { resolveOcrQuestionTextEmphasis } from '../../server/paper-canonical/ocrQuestionTextEmphasis.mjs'
 
@@ -42,9 +42,9 @@ export function loadSpellingSourceEmphasis(paperDir, request) {
     }))
   }
   for (const [groupIndex, group] of raw.groups.entries()) {
-    if (!['reading', 'application-writing', 'continuation-writing'].includes(group.family)) continue
+    if (!['reading', 'seven-choices', 'application-writing', 'continuation-writing'].includes(group.family)) continue
     for (const { block, path } of sourceOrderedParagraphEntries(group.blocks, `/groups/${groupIndex}/blocks`)) {
-      if (block.content.some(item => item.kind !== 'text')) continue
+      if (block.content.some(item => item.kind !== 'text' && !(group.family === 'seven-choices' && item.kind === 'blank_ref'))) continue
       let paragraph = ocrParagraphs.get(digestJson(block.source))
       let leading = 0
       let ranges = paragraph?.sourceEmphasis
@@ -58,18 +58,21 @@ export function loadSpellingSourceEmphasis(paperDir, request) {
         leading = paragraph.text.length - paragraph.text.replace(/^\p{Zs}+/u, '').length
       }
       if (!ranges?.length) continue
-      const text = block.content.map(item => item.text).join('')
+      const parts = group.family === 'seven-choices'
+        ? sourceEmphasisParagraphParts(block.content, paragraph.text) : block.content
+      const text = parts.map(item => item.text).join('')
       const expected = paragraph.text.slice(leading)
       if ((leading || block.source.kind === 'docx_part' ? expected.replace(/\p{Zs}+$/u, '') : expected) !== text) {
         throw new Error('Source emphasis paragraph cannot map to literal text')
       }
       let offset = leading
       const pointer = path.replace(/\[(\d+)\]/gu, '/$1').replaceAll('.', '/')
-      for (const [index, item] of block.content.entries()) {
-        clip(`${pointer}/content/${index}/text`, ranges, offset, item.text.length)
+      for (const [index, item] of parts.entries()) {
+        if (item.kind === 'text') clip(`${pointer}/content/${index}/text`, ranges, offset, item.text.length)
         offset += item.text.length
       }
     }
+    if (group.family === 'seven-choices') continue
     for (const [index, question] of group.questions.entries()) {
       if (['nck1-source-materialization-v11', 'nck1-source-materialization-v12'].includes(raw.schemaVersion) && group.family === 'reading'
         && question.options.every(option => !option.figure)) {

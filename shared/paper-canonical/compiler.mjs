@@ -2861,7 +2861,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     new Set(sourceGroup.blankIds),
     mediaIds,
     ['46', '47', '48', '49', '50', '51', '52', '54', '55', '57', '58', '59', '61', '62', '64', '66', '67', '68', '69', '71', '73', '74', '75', '76', '77', '78', '79', '80', '81', '82', '83', '84'].includes(closure.authorityRef.manifestVersion),
-    (family.familyContractId === 'reading' && ['2', '3', '4', '5'].includes(closure.artifacts['rich-content']?.version))
+    (['reading', 'seven-choices'].includes(family.familyContractId) && ['2', '3', '4', '5'].includes(closure.artifacts['rich-content']?.version))
       || (['application-writing', 'continuation-writing'].includes(family.familyContractId)
         && ['4', '5'].includes(closure.artifacts['rich-content']?.version)),
   ))

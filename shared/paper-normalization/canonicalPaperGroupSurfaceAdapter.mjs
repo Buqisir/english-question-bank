@@ -63,6 +63,7 @@ function sliceSemanticNodes(displaySegments, start, end) {
         overlapStart - segment.start,
         overlapEnd - segment.start,
       ),
+      ...(segment.node.marks ? { marks: segment.node.marks } : {}),
     })
   }
   return nodes
@@ -93,7 +94,7 @@ function buildParagraphModels(canonicalGroup) {
         visibleText,
         node:
           node.type === 'text'
-            ? { type: 'text', text: node.text }
+            ? { type: 'text', text: node.text, ...(node.marks ? { marks: node.marks } : {}) }
             : {
                 type: 'blank',
                 questionId: node.questionId,
