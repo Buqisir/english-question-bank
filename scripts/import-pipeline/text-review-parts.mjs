@@ -182,7 +182,7 @@ function normalizePunctuation(text) {
     .replace(/” *(?=[A-Za-z0-9])/gu, '” ')
     .replace(/“ +/gu, '“')
     .replace(/ +”/gu, '”')
-    .replace(/([A-Za-z]) *['’] *(t|s|re|ll|ve|d|m)\b/giu, '$1’$2')
+    .replace(/([A-Za-z]) *['’] *(t|s|re|ll|ve|d|m)(?![\p{L}\p{N}'’-])/giu, '$1’$2')
 }
 
 const PUNCTUATION_SPANS = [
@@ -191,7 +191,7 @@ const PUNCTUATION_SPANS = [
   /” *[A-Za-z0-9]/gu,
   /“ +/gu,
   / +”/gu,
-  /[A-Za-z] *['’] *(?:t|s|re|ll|ve|d|m)\b/giu,
+  /[A-Za-z] *['’] *(?:t|s|re|ll|ve|d|m)(?![\p{L}\p{N}'’-])/giu,
 ]
 const GRAMMAR_WORDS = /^[A-Za-z]+(?:['’][A-Za-z]+)*['’]?(?: [A-Za-z]+(?:['’][A-Za-z]+)*['’]?)*$/u
 const WORD_CHAR = /[\p{L}\p{N}'’_-]/u

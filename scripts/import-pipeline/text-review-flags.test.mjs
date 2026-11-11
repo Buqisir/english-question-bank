@@ -119,6 +119,32 @@ test('retained punctuation reports replay byte-identically without adopting new 
     "Don't – worry.")
 })
 
+test('apostrophe boundaries preserve quoted letters and possessives before hyphenated words', () => {
+  const text = "The letter 's' is silent. I bought the boys' T-shirts. boys' sake; rock 'n' roll; didn ’ t."
+  const after = text.replace('didn ’ t', 'didn’t')
+  autoFixture(text, undefined, undefined, ({ result, output, bytes }) => {
+    assert.equal(result.status, 0, result.stderr)
+    const reviewBytes = readFileSync(output)
+    assert.deepEqual(applySpellingReview(bytes, reviewBytes).groups[0].writingTask.material, [after, after])
+    for (const target of JSON.parse(reviewBytes).targets) {
+      assert.equal(target.corrections.length, 1)
+      assert.equal(target.corrections[0].before, 'n ’ t')
+    }
+  })
+})
+
+test('apostrophe admission rejects a truncated suffix boundary in the full source target', () => {
+  const bytes = Buffer.from(JSON.stringify({ groups: [{ questions: [{ stem: "A word 'stable' appears here." }] }] }))
+  const report = prepareSpellingReview(bytes, TEXT_REVIEW_POLICY)
+  report.reviewedBy = 'import_agent'
+  report.reviewedAt = '2026-10-24T00:00:00Z'
+  Object.assign(report.targets[0], { decision: 'correct', corrections: [
+    { start: 5, before: "d 's", after: 'd’s', category: 'punctuation',
+      certainty: 'unambiguous', reason: '伪造截短的后缀边界。' },
+  ] })
+  assert.throws(() => applySpellingReview(bytes, Buffer.from(JSON.stringify(report))), /only exact/)
+})
+
 test('terminal possessive source flags survive auto and admission for spelling and grammar', () => {
   for (const apostrophe of ["'", '’']) for (const category of ['spelling', 'grammar']) {
     const quote = `second${apostrophe}s`, after = `seconds${apostrophe}`

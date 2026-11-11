@@ -94,7 +94,7 @@ function normalizeReviewedPunctuation(text, apostrophes = true) {
     .replace(/” *(?=[A-Za-z0-9])/gu, '” ')
     .replace(/“ +/gu, '“')
     .replace(/ +”/gu, '”')
-  return apostrophes ? normalized.replace(/([A-Za-z]) *['’] *(t|s|re|ll|ve|d|m)\b/giu, '$1’$2') : normalized
+  return apostrophes ? normalized.replace(/([A-Za-z]) *['’] *(t|s|re|ll|ve|d|m)(?![\p{L}\p{N}'’-])/giu, '$1’$2') : normalized
 }
 
 function fail(message) {
@@ -222,8 +222,9 @@ export function applySpellingReview(materializationBytes, reportBytes) {
         || (terminalWhitespace ? false
           : punctuation ? !correction.before.length
             // Retained reports keep the exact typography accepted before apostrophe normalization.
-            || normalizeReviewedPunctuation(correction.before) !== correction.after
-              && normalizeReviewedPunctuation(correction.before, false) !== correction.after
+            || normalizeReviewedPunctuation(correction.before, false) !== correction.after
+              && (normalizeReviewedPunctuation(correction.before) !== correction.after
+                || /^[\p{L}\p{N}'’-]/u.test(target.before.slice(correction.start + correction.before.length)))
           : whitespace ? !/^ {2,}$/.test(correction.before) || correction.after !== ' '
           : grammar ? !words.test(correction.before) || !words.test(correction.after)
           : !isSpellingTokenCorrection(correction.before, correction.after))
