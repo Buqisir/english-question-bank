@@ -2289,7 +2289,7 @@ export function produceNck1MaterializationFromStructures({
       '评分/答案表暂不支持合并单元格，请拆成普通表或按图片处理', sourceRef(answer?.documentId))
   }
   const sectionMarkers = {
-    reading: national ? /^(?:第[一二三四]部分\s*)?阅读理解/u : /^第二部分\s*阅读/u,
+    reading: national ? /^(?:第[一二三四]部分\s*)?阅读(?:理解|(?=\s*(?:[（(]|$)))/u : /^第二部分\s*阅读/u,
     language: national ? /^(?:第[一二三四]部分\s*)?语言(?:知识)?运用/u : /^第三部分\s*语言(?:知识)?运用/u,
     writing: national ? /^(?:(?:第[一二三四]部分|[一二三四][、.．])\s*)?写作\s*(?:[（(][^()（）\r\n]*\d\s*分[)）])?$/u : /^第四部分\s*写作/u,
     listening: national ? /^(?:第一部分\s*听力|听力部分)/u : /^第一部分\s*听力/u,
