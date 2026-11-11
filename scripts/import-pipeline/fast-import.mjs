@@ -628,7 +628,8 @@ async function afterProofread(ctx, args) {
   }
   await step(ctx, 'presentation', () => run(ctx, 'presentation', cli('ocr-proofread.mjs', 'presentation', ctx.paperId)))
   await step(ctx, 'figure-sizes', async () => {
-    const { changes } = await run(ctx, 'figure-sizes', cli('ocr-proofread.mjs', 'figure-sizes', ctx.paperId))
+    const { changes } = await run(ctx, 'figure-sizes', cli('ocr-proofread.mjs', 'figure-sizes', ctx.paperId,
+      ...(args.includes('--body-width-ratio') ? ['--body-width-ratio', option(args, '--body-width-ratio') ?? ''] : [])))
     if (changes.length) {
       const logPath = path.join(ctx.work, 'materialization-edits.json')
       const log = existsSync(logPath) ? readJson(logPath) : { paperId: ctx.paperId, edits: [] }
