@@ -155,15 +155,16 @@ for (const titles of [
       if (/^[16][.．]/u.test(item.text)) return [{ ...item, text: item.text.startsWith('1') ? '第一节' : '第二节' }, item]
       return [item]
     }), ...body(paragraphs)]
-  const result = produceNck1MaterializationFromStructures({
+  const produceAnswers = answerLines => produceNck1MaterializationFromStructures({
     paperId: nationalFixture.paperId, documents: nationalFixture.sourceDocuments, profileId: 'national-legacy',
     question, coverage, answer, questionStructure,
-    answerStructure: { ...extractDocxDocumentStructure(answer.bytes), body: body(answers) },
+    answerStructure: { ...extractDocxDocumentStructure(answer.bytes), body: body(answerLines) },
     issues: [], sourceVisuals: [], mediaInventory: [], mediaFiles: [], codePrefix: 'NCK1_DOCX',
     producerVersion: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
     reviewSchemaVersion: 'nck1-docx-materialization-review-v1',
     sourceDigest: nck1DocxProducerSourceDigest(nationalFixture.sourceDocuments),
   })
+  const result = produceAnswers(answers)
   assert.equal(result.materialization.groups.length, 9)
   assert(!result.review.required.some(issue => issue.code.endsWith('_SECTION_AMBIGUOUS')), JSON.stringify(result.review.required))
   const written = result.materialization.groups.filter(group => group.family !== 'error-correction').flatMap(group => group.questions)
@@ -173,6 +174,57 @@ for (const titles of [
   assert(result.materialization.answers.slice(0, 50).every(answer => answer.value === (answer.canonicalNumber < 61 ? 'A' : 'word')))
   assert.equal(result.materialization.listening.answers.length, 20)
   assert(result.materialization.listening.answers.every(answer => answer.value === 'B'))
+  if (titles[0] === '第一部分 阅读理解') {
+    // Plain correction heading, including ten literal entries across page/paragraph boundaries.
+    const plain = answers.flatMap(text => text === '【答案】' ? ['短文改错：']
+      : /^\d+\. token→word$/u.test(text) ? [`${Number(text.split('.')[0]) - 70}. token→word`] : [text])
+    const corrected = produceAnswers(plain)
+    assert.equal(corrected.materialization.answers.filter(a => a.questionId.includes('error-correction')).length, 10)
+    assert(!corrected.review.required.some(i => i.code.includes('ERROR_CORRECTION_ANSWERS_INCOMPLETE')))
+    assert(produceAnswers(plain.filter(text => text !== '10. token→word')).review.required
+      .some(i => i.code.includes('ERROR_CORRECTION_ANSWERS_INCOMPLETE')))
+    assert.equal(produceAnswers(plain.filter(text => text !== '第一节 短文改错')).materialization.answers
+      .filter(a => a.questionId.includes('error-correction')).length, 10)
+    console.log('PASS literal short-error-correction heading; incomplete list stays blocked')
+
+    const listening = ['听力部分', '[答案]' + range(1, 20).map(n => `${n}. B`).join(' ')]
+    const sectioned = listeningLines => [...listeningLines, titles[0], '第一节',
+      '1. Which reading option fits?', 'A. Decoy answer.', '[答案]' + range(1, 20).map(n => `${n}. A`).join(' '),
+      '[解析]', '第二节', titles[1], '第一节（共20小题）',
+      '21. A. decoy B. decoy C. decoy D. decoy',
+      '[答案]' + range(21, 36).map(n => `${n}. D`).join(' ') + ' 37.',
+      'D 38. D 39. D 40. D', '[解析]', '第二节（共10小题）',
+      '答案：' + range(41, 50).map(n => `${n}. word`).join(' '), '[解析]',
+      ...plain.slice(plain.indexOf(titles[2]))]
+    const mapped = produceAnswers(sectioned(listening))
+    assert.equal(mapped.materialization.answers.length, 60)
+    assert(mapped.materialization.answers.slice(0, 50).every(a =>
+      a.value === (a.canonicalNumber < 41 ? 'A' : a.canonicalNumber < 61 ? 'D' : 'word')))
+    assert(!mapped.review.required.some(i => /ANSWER_CONFLICT|ANSWER_RANGE_AMBIGUOUS/.test(i.code)))
+    const incomplete = produceAnswers(sectioned(listening).map(text => text.replace(' 40. D', '')))
+    assert(incomplete.review.required.some(i => i.code.endsWith('_ANSWER_RANGE_AMBIGUOUS')))
+    assert(!incomplete.materialization.answers.some(a => a.canonicalNumber >= 41 && a.canonicalNumber <= 60))
+    const shifted = produceAnswers(sectioned(listening).map(text =>
+      text.startsWith('[答案]21.') || text.startsWith('D 38.')
+        ? text.replace(/(\d+)\./gu, (_, n) => `${Number(n) + 1}.`) : text))
+    assert(shifted.review.required.some(i => i.code.endsWith('_ANSWER_RANGE_AMBIGUOUS')))
+    console.log('PASS titled local answer sequences map by family; incomplete sequence stays blocked')
+
+    const expected = ['A', 'C', 'C', 'B', 'B']
+    const singles = ['听力部分', ...expected.flatMap((value, i) =>
+      [`${i + 1}. What does the speaker mean?`, 'A. 8. B. 10. C. 12.', `[答案]${value}`, '[解析]']),
+      '[答案]' + range(6, 20).map(n => `${n}. B`).join(' ')]
+    const singleResult = produceAnswers(sectioned(singles))
+    assert.deepEqual(singleResult.materialization.listening.answers.slice(0, 5).map(a => a.value), expected)
+    const missing = produceAnswers(sectioned(singles.filter((text, i) =>
+      !(text === '[答案]C' && singles[i - 2]?.startsWith('2.')))))
+    assert(!missing.materialization.listening.answers.some(a => a.canonicalNumber === 2))
+    assert(missing.review.required.some(i => i.path === 'listening.answers.2'))
+    assert.equal(missing.materialization.listening.answers.find(a => a.canonicalNumber === 3).value, 'C')
+    const conflict = produceAnswers(sectioned(singles.flatMap(text => text === '[答案]A' ? [text, '[答案]B'] : [text])))
+    assert(conflict.review.required.some(i => i.code.endsWith('_ANSWER_CONFLICT')))
+    console.log('PASS unnumbered listening labels bind to explicit questions; missing answer never shifts')
+  }
 }
 console.log('PASS National producer: written part numbering, bare language heading and separate listening/written answers')
 {

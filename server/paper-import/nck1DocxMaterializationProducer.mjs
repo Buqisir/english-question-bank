@@ -1010,6 +1010,86 @@ function writingAnswerSectionHeading(text) {
   return NUMBERED_WRITING_ANSWER_SECTION.test(text) || BARE_WRITING_ANSWER_SECTION.test(text)
 }
 
+const EXPLICIT_ANSWER_LABEL = /^(?:【答案】|\[答案\]|答案[:：])\s*/u
+
+function officialKeyItems(body, listening = false) {
+  const keys = []
+  let collecting = false
+  let questionNumber = null
+  for (const item of body) {
+    if (item.kind !== 'paragraph') continue
+    for (const raw of item.text.split('\n')) {
+      let text = normalized(raw)
+      const question = /^(\d{1,2})[.．、]\s*[A-Za-z].*[?？]$/u.exec(text)
+      if (question) { questionNumber = Number(question[1]); collecting = false }
+      const label = EXPLICIT_ANSWER_LABEL.exec(text)
+      if (label) {
+        collecting = true
+        text = text.slice(label[0].length)
+        if (listening && /^[A-G]$/u.test(text)) {
+          if (questionNumber !== null) keys.push({ ...item, text: `${questionNumber}. ${text}` })
+          collecting = false
+          continue
+        }
+      } else if (/[\p{Script=Han}【\[]/u.test(text)) collecting = false
+      if (!collecting || !text) continue
+      // A physical OCR line can break between a number and its answer.
+      const previous = keys.at(-1)
+      if (!label && previous && /\d+[.．、]\s*$/u.test(previous.text) && /^[A-G](?=\s|$)/u.test(text)) {
+        previous.text += ` ${text}`
+        const a = previous.sourceIndex
+        const b = item.sourceIndex
+        if (a?.kind === 'page_region' && b?.kind === 'page_region' && a.page === b.page) {
+          const x = Math.min(a.region.x, b.region.x), y = Math.min(a.region.y, b.region.y)
+          a.region = { x, y, width: Math.max(a.region.x + a.region.width, b.region.x + b.region.width) - x,
+            height: Math.max(a.region.y + a.region.height, b.region.y + b.region.height) - y }
+        }
+      } else keys.push({ ...item, sourceIndex: structuredClone(item.sourceIndex), text })
+    }
+  }
+  return keys
+}
+
+function sectionedOfficialAnswers(body, documentId, issues, markers, specs) {
+  if (!body.some(item => EXPLICIT_ANSWER_LABEL.test(normalized(item.text)))) return null
+  const positions = pattern => body.flatMap((item, i) =>
+    item.kind === 'paragraph' && pattern.test(normalized(item.text)) ? [i] : [])
+  const [listening, reading, language, writing] = ['listening', 'reading', 'language', 'writing']
+    .map(key => positions(markers[key]))
+  if ([listening, reading, language, writing].some(found => found.length !== 1)) return null
+  const [l, r, g, w] = [listening[0], reading[0], language[0], writing[0]]
+  const grammar = positions(/^第二节/u).filter(i => i > g && i < w)
+  if (!(l < r && r < g && g < w) || grammar.length !== 1) return null
+  const answers = new Map()
+  let writtenOffset = 0
+  const sections = [
+    [r + 1, g, specs.filter(slot => ['reading', 'seven-choices'].includes(slot[1])), true],
+    [g + 1, grammar[0], specs.filter(slot => slot[1] === 'cloze'), true],
+    [grammar[0] + 1, w, specs.filter(slot => slot[1] === 'grammar-fill'), false],
+  ]
+  if (sections.some(([from, to]) => !body.slice(from, to)
+    .some(item => EXPLICIT_ANSWER_LABEL.test(normalized(item.text))))) return null
+  for (const [from, to, slots, choice] of sections) {
+    const numbers = slots.flatMap(slot => Array.from({ length: slot[3] - slot[2] + 1 }, (_, i) => slot[2] + i))
+    const parsed = [...parseOfficialAnswers(officialKeyItems(body.slice(from, to)), documentId, issues,
+      { first: 1, last: 99, lastChoice: choice ? 99 : 0 })].sort(([a], [b]) => a - b)
+    // Accept canonical labels, the complete written-paper offset established
+    // by reading, or numbering restarted at 1 inside this titled section.
+    if (parsed.length !== numbers.length || ![1, numbers[0], numbers[0] - writtenOffset].includes(parsed[0]?.[0])
+      || parsed.some(([n], i) => n !== parsed[0][0] + i)) {
+      addIssue(issues, 'NCK1_DOCX_ANSWER_RANGE_AMBIGUOUS', `answers.${numbers[0]}-${numbers.at(-1)}`,
+        'A titled answer section must contain exactly one complete consecutive answer sequence', sourceRef(documentId))
+      continue
+    }
+    if (from === r + 1) writtenOffset = numbers[0] - parsed[0][0]
+    parsed.forEach(([, value], i) => answers.set(numbers[i], value))
+  }
+  const listeningBody = body.slice(l + 1, r)
+  return { answers, listening: parseOfficialAnswers(listeningBody.some(item => EXPLICIT_ANSWER_LABEL.test(normalized(item.text)))
+    ? officialKeyItems(listeningBody, true) : listeningBody,
+    documentId, issues, { first: 1, last: 20, lastChoice: 20 }) }
+}
+
 export function parseOfficialAnswers(answerBody, answerDocumentId, issues, { first = 21, last = 65, lastChoice = 55 } = {}) {
   const answers = new Map()
   const locate = (item) => sourceLocator(answerDocumentId, item.kind === 'table'
@@ -2230,11 +2310,12 @@ function errorCorrectionGroup({ paperId, items, answerBody, documentId, answerDo
   const start = answerBody.findIndex(item => /短文改错/u.test(item.text ?? ''))
   const end = answerBody.findIndex((item, index) => index > start && /第二节.*书面表达/u.test(item.text ?? ''))
   const selected = []
-  let collecting = false
+  let collecting = /^短文改错[:：]\s*$/u.test(answerBody[start]?.text?.trim() ?? '')
   for (const item of answerBody.slice(start + 1, end < 0 ? undefined : end)) {
     for (let line of (item.text ?? '').split('\n')) {
-      if (/【答案】|^答案[:：]/u.test(line)) { collecting = true; line = line.replace(/^.*?(?:【答案】|答案[:：])/u, '') }
-      if (/【解析】|【详解】|^解析[:：]/u.test(line)) collecting = false
+      if (/^短文改错[:：]\s*$/u.test(line.trim())) { collecting = true; continue }
+      if (/【答案】|\[答案\]|^答案[:：]/u.test(line)) { collecting = true; line = line.replace(/^.*?(?:【答案】|\[答案\]|答案[:：])/u, '') }
+      if (/【解析】|【详解】|\[解析\]|\[详解\]|^解析[:：]/u.test(line)) collecting = false
       if (!collecting || !line.trim()) continue
       const match = /^\s*(?:(\d+)[.．、]\s*)?(.+?)\s*$/u.exec(line)
       if (match) selected.push({ sourceNumber: match[1] ? Number(match[1]) : null, value: match[2],
@@ -2428,7 +2509,11 @@ export function produceNck1MaterializationFromStructures({
   }
   let answerMap
   let listeningAnswerMap
-  if (writtenNumberOffset) {
+  const sectioned = legacy ? sectionedOfficialAnswers(answerBody, answer?.documentId, issues, sectionMarkers, specs) : null
+  if (sectioned) {
+    answerMap = sectioned.answers
+    listeningAnswerMap = sectioned.listening
+  } else if (writtenNumberOffset) {
     const answerReadingStart = exactPosition(answerBody, sectionMarkers.reading,
       'answers.sections.reading', issues, answer?.documentId)
     const answerWritingStart = exactPosition(answerBody, sectionMarkers.writing,
