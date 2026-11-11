@@ -1017,6 +1017,7 @@ function officialKeyItems(body, listening = false) {
   let collecting = false
   let questionNumber = null
   for (const item of body) {
+    if (item.kind === 'table' && collecting) keys.push(item)
     if (item.kind !== 'paragraph') continue
     for (const raw of item.text.split('\n')) {
       let text = normalized(raw)
@@ -2309,16 +2310,21 @@ function errorCorrectionGroup({ paperId, items, answerBody, documentId, answerDo
   })
   const start = answerBody.findIndex(item => /短文改错/u.test(item.text ?? ''))
   const end = answerBody.findIndex((item, index) => index > start && /第二节.*书面表达/u.test(item.text ?? ''))
+  const answerItems = answerBody.slice(start + 1, end < 0 ? undefined : end)
+  const hasAnswerLabel = answerItems.some(item => (item.text ?? '').split('\n')
+    .some(line => /【答案】|\[答案\]|^答案[:：]/u.test(line)))
   const selected = []
-  let collecting = /^短文改错[:：]\s*$/u.test(answerBody[start]?.text?.trim() ?? '')
-  for (const item of answerBody.slice(start + 1, end < 0 ? undefined : end)) {
+  let collecting = !hasAnswerLabel && /^短文改错[:：]\s*$/u.test(answerBody[start]?.text?.trim() ?? '')
+  for (const item of answerItems) {
     for (let line of (item.text ?? '').split('\n')) {
-      if (/^短文改错[:：]\s*$/u.test(line.trim())) { collecting = true; continue }
+      if (/^短文改错[:：]\s*$/u.test(line.trim())) { collecting = !hasAnswerLabel; continue }
       if (/【答案】|\[答案\]|^答案[:：]/u.test(line)) { collecting = true; line = line.replace(/^.*?(?:【答案】|\[答案\]|答案[:：])/u, '') }
       if (/【解析】|【详解】|\[解析\]|\[详解\]|^解析[:：]/u.test(line)) collecting = false
       if (!collecting || !line.trim()) continue
       const match = /^\s*(?:(\d+)[.．、]\s*)?(.+?)\s*$/u.exec(line)
-      if (match) selected.push({ sourceNumber: match[1] ? Number(match[1]) : null, value: match[2],
+      if (match && (hasAnswerLabel || (/[A-Za-z]/u.test(match[2])
+        && /→|->|改为|删除|删去|去掉|加/u.test(match[2])))) selected.push({
+        sourceNumber: match[1] ? Number(match[1]) : null, value: match[2],
         authority: sourceLocator(answerDocumentId, item.sourceIndex) })
     }
   }

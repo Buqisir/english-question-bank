@@ -147,7 +147,8 @@ for (const titles of [
     titles[0], ...range(21, 60).map(n => `${number(n)}. A`),
     titles[1], ...range(61, 70).map(n => `${number(n)}. word`),
     titles[2], '第一节 短文改错', '【答案】', ...range(71, 80).map(n => `${n}. token→word`), '第二节 书面表达']
-  const body = lines => lines.map((text, i) => ({ kind: 'paragraph', text, sourceIndex: i + 1000, containsDrawing: false }))
+  const body = lines => lines.map((text, i) => typeof text === 'string'
+    ? { kind: 'paragraph', text, sourceIndex: i + 1000, containsDrawing: false } : text)
   const questionStructure = extractDocxDocumentStructure(question.bytes)
   questionStructure.body = [...questionStructure.body.slice(0,
     questionStructure.body.findIndex(item => /^第二部分/u.test(item.text))).flatMap(item => {
@@ -224,6 +225,37 @@ for (const titles of [
     const conflict = produceAnswers(sectioned(singles.flatMap(text => text === '[答案]A' ? [text, '[答案]B'] : [text])))
     assert(conflict.review.required.some(i => i.code.endsWith('_ANSWER_CONFLICT')))
     console.log('PASS unnumbered listening labels bind to explicit questions; missing answer never shifts')
+
+    const introduction = plain.flatMap(text => text === '短文改错：'
+      ? [text, '每处错误及其修改均仅限一词。', '【答案】'] : [text])
+    const withIntroduction = produceAnswers(introduction)
+    const missingCorrection = produceAnswers(introduction.filter(text => text !== '10. token→word'))
+    const answerTable = {
+      kind: 'table', selector: '/w:document/w:body/w:tbl[1]',
+      rows: [['题号', ...range(21, 40).map(String)], ['答案', ...range(21, 40).map(() => 'A')]]
+        .map(cells => ({ cells: cells.map(text => ({ text, columnSpan: 1, rowSpan: 1, verticalMerge: null })) })),
+    }
+    const tableAnswers = ['听力部分', '[答案]' + range(1, 20).map(n => `${n}. B`).join(' '),
+      titles[0], '第一节', '【答案】', answerTable, '[解析]', '第二节',
+      titles[1], '第一节', '[答案]' + range(41, 60).map(n => `${n}. D`).join(' '), '[解析]',
+      '第二节', '答案：' + range(61, 70).map(n => `${n}. word`).join(' '), '[解析]',
+      ...plain.slice(plain.indexOf(titles[2]))]
+    const tableResult = produceAnswers(tableAnswers)
+    const correctionAnswers = result => result.materialization.answers.filter(a => a.questionId.includes('error-correction'))
+    assert.deepEqual({
+      completeCorrections: correctionAnswers(withIntroduction).map(a => a.value),
+      unlabelledCorrections: correctionAnswers(produceAnswers(introduction.filter(text => text !== '【答案】'))).map(a => a.value),
+      incompleteCorrections: correctionAnswers(missingCorrection).length,
+      missingCorrectionBlocked: missingCorrection.review.required.some(i => i.code.includes('ERROR_CORRECTION_ANSWERS_INCOMPLETE')),
+      tableReading: tableResult.materialization.answers.filter(a => a.canonicalNumber >= 21 && a.canonicalNumber <= 40).map(a => a.value),
+      tableAnswerIssues: tableResult.review.required.filter(i => /ANSWER/.test(i.code)).map(i => i.code),
+    }, {
+      completeCorrections: Array(10).fill('token→word'),
+      unlabelledCorrections: Array(10).fill('token→word'),
+      incompleteCorrections: 9, missingCorrectionBlocked: true,
+      tableReading: Array(20).fill('A'), tableAnswerIssues: [],
+    })
+    console.log('PASS explicit correction labels exclude instructions; sectioned answer grids retain all answers')
   }
 }
 console.log('PASS National producer: written part numbering, bare language heading and separate listening/written answers')
