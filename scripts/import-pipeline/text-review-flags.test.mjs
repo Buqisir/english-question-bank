@@ -57,7 +57,7 @@ function autoFixture(text, quote, after, run, category = 'spelling') {
     save('universal-source-manifest.json', { schemaVersion: 'universal-nck1-source-manifest-v1',
       paperId: materialization.paperId, documents: [], materializationPath: 'materialization.json' })
     save('request.json', { paperId: materialization.paperId, materialization, report })
-    save('flags/source.json', { flags: [{ quote, after, category, reason: '原印拼写有误，更正完整词形。' }] })
+    save('flags/source.json', { flags: quote === undefined ? [] : [{ quote, after, category, reason: '原印拼写有误，更正完整词形。' }] })
     const output = path.join(dir, 'review.json')
     const result = spawnSync(process.execPath, [
       fileURLToPath(new URL('./text-review-parts.mjs', import.meta.url)), 'auto',
@@ -69,6 +69,81 @@ function autoFixture(text, quote, after, run, category = 'spelling') {
     rmSync(dir, { recursive: true, force: true })
   }
 }
+
+test('apostrophe typography survives auto and admission with exact original correction records', () => {
+  const text = "😀 won’ t Grandma’ s you' re I ' ve else 's we ' ll he’ d I ' m don't."
+  const after = '😀 won’t Grandma’s you’re I’ve else’s we’ll he’d I’m don’t.'
+  autoFixture(text, undefined, undefined, ({ result, output, bytes }) => {
+    assert.equal(result.status, 0, result.stderr)
+    const review = JSON.parse(readFileSync(output))
+    for (const target of review.targets) {
+      assert.equal(target.decision, 'correct')
+      assert.equal(target.corrections.length, 9)
+      for (const correction of target.corrections) {
+        assert.equal(correction.category, 'punctuation')
+        assert.equal(correction.certainty, 'unambiguous')
+        assert.match(correction.reason, /撇号/u)
+        assert.equal(text.slice(correction.start, correction.start + correction.before.length), correction.before)
+      }
+    }
+    assert.deepEqual(applySpellingReview(bytes, Buffer.from(JSON.stringify(review))).groups[0].writingTask.material,
+      [after, after])
+  })
+})
+
+test('apostrophe automation leaves other tokens and existing punctuation behavior byte-identical', () => {
+  const unchanged = 'We won’t change Grandma’s text, ’90s, 7’ s, ’ s, x’ tree or x’ starter.'
+  for (const [text, after] of [[unchanged, unchanged], ['word—word “ inside ”next  word', 'word – word “inside” next word']]) {
+    autoFixture(text, undefined, undefined, ({ result, output, bytes }) => {
+      assert.equal(result.status, 0, result.stderr)
+      const reviewBytes = readFileSync(output)
+      assert.deepEqual(applySpellingReview(bytes, reviewBytes).groups[0].writingTask.material, [after, after])
+      if (text === unchanged) {
+        assert.equal(JSON.parse(reviewBytes).targets[0].decision, 'unchanged')
+        assert.equal(JSON.stringify(applySpellingReview(bytes, reviewBytes)), bytes.toString())
+      }
+    })
+  }
+})
+
+test('retained punctuation reports replay byte-identically without adopting new apostrophe typography', () => {
+  const bytes = Buffer.from(JSON.stringify({ groups: [{ questions: [{ stem: "Don't—worry." }] }] }))
+  const report = prepareSpellingReview(bytes, TEXT_REVIEW_POLICY)
+  report.reviewedBy = 'import_agent'
+  report.reviewedAt = '2026-10-24T00:00:00Z'
+  Object.assign(report.targets[0], { decision: 'correct', corrections: [
+    { start: 0, before: "Don't—worry", after: "Don't – worry", category: 'punctuation',
+      certainty: 'unambiguous', reason: '只规范英文破折号。' },
+  ] })
+  assert.equal(applySpellingReview(bytes, Buffer.from(JSON.stringify(report))).groups[0].questions[0].stem,
+    "Don't – worry.")
+})
+
+test('apostrophe boundaries preserve quoted letters and possessives before hyphenated words', () => {
+  const text = "The letter 's' is silent. I bought the boys' T-shirts. boys' sake; rock 'n' roll; didn ’ t."
+  const after = text.replace('didn ’ t', 'didn’t')
+  autoFixture(text, undefined, undefined, ({ result, output, bytes }) => {
+    assert.equal(result.status, 0, result.stderr)
+    const reviewBytes = readFileSync(output)
+    assert.deepEqual(applySpellingReview(bytes, reviewBytes).groups[0].writingTask.material, [after, after])
+    for (const target of JSON.parse(reviewBytes).targets) {
+      assert.equal(target.corrections.length, 1)
+      assert.equal(target.corrections[0].before, 'n ’ t')
+    }
+  })
+})
+
+test('apostrophe admission rejects a truncated suffix boundary in the full source target', () => {
+  const bytes = Buffer.from(JSON.stringify({ groups: [{ questions: [{ stem: "A word 'stable' appears here." }] }] }))
+  const report = prepareSpellingReview(bytes, TEXT_REVIEW_POLICY)
+  report.reviewedBy = 'import_agent'
+  report.reviewedAt = '2026-10-24T00:00:00Z'
+  Object.assign(report.targets[0], { decision: 'correct', corrections: [
+    { start: 5, before: "d 's", after: 'd’s', category: 'punctuation',
+      certainty: 'unambiguous', reason: '伪造截短的后缀边界。' },
+  ] })
+  assert.throws(() => applySpellingReview(bytes, Buffer.from(JSON.stringify(report))), /only exact/)
+})
 
 test('terminal possessive source flags survive auto and admission for spelling and grammar', () => {
   for (const apostrophe of ["'", '’']) for (const category of ['spelling', 'grammar']) {

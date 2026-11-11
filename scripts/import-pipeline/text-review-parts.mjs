@@ -182,6 +182,7 @@ function normalizePunctuation(text) {
     .replace(/” *(?=[A-Za-z0-9])/gu, '” ')
     .replace(/“ +/gu, '“')
     .replace(/ +”/gu, '”')
+    .replace(/([A-Za-z]) *['’] *(t|s|re|ll|ve|d|m)(?![\p{L}\p{N}'’-])/giu, '$1’$2')
 }
 
 const PUNCTUATION_SPANS = [
@@ -190,6 +191,7 @@ const PUNCTUATION_SPANS = [
   /” *[A-Za-z0-9]/gu,
   /“ +/gu,
   / +”/gu,
+  /[A-Za-z] *['’] *(?:t|s|re|ll|ve|d|m)(?![\p{L}\p{N}'’-])/giu,
 ]
 const GRAMMAR_WORDS = /^[A-Za-z]+(?:['’][A-Za-z]+)*['’]?(?: [A-Za-z]+(?:['’][A-Za-z]+)*['’]?)*$/u
 const WORD_CHAR = /[\p{L}\p{N}'’_-]/u
@@ -213,6 +215,7 @@ function mechanicalCorrections(text) {
     corrections.push({ start, before, after, category: 'punctuation', certainty: 'unambiguous',
       reason: /[—–]/u.test(before)
         ? `“${before}”的破折号两侧均为英文词语，按规则改为两侧各一空格的 en dash。`
+        : /['’]/u.test(before) ? `“${before}”的缩写或所有格统一用弯撇号，撇号前后不留空格。`
         : `“${before}”的弯引号与相邻英文词之间的空格按规则统一。` })
   }
   for (const match of text.matchAll(/(?<=\S) {2,}(?=\S)/gu)) {
@@ -314,6 +317,9 @@ function auto(requestPath) {
     const slot = applied.get(target.jsonPointer)
     const ranges = emphasis.get(target.jsonPointer) || []
     const mechanicalCorrectionsKept = mechanicalCorrections(target.before).filter(correction => {
+      // A whole-token source correction owns any intersecting typography.
+      if (slot.corrections.some(edit => correction.start < edit.start + edit.before.length
+        && edit.start < correction.start + correction.before.length)) return false
       if (!crossesSourceEmphasis(correction, ranges)) return true
       skippedMechanical.push({ jsonPointer: target.jsonPointer, correction, ranges })
       return false

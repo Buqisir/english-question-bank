@@ -62,8 +62,10 @@ export const TEXT_REVIEW_INSTRUCTIONS = TEXT_REVIEW_INSTRUCTIONS_V2
   .replace('Categories are spelling, grammar, whitespace;', 'Categories are spelling, grammar, whitespace, punctuation;')
   + `\nAdditionally review English punctuation in context. Category punctuation permits only English dash typography
 (em dash to en dash with one ASCII space on each side), spacing between a word and an exterior curly double quote,
-and removal of ordinary spaces immediately inside a curly double quote. Preserve all letters, digits and other marks.
-Do not change hyphens, numeric ranges, Chinese punctuation, apostrophes, names or meaning. A closing quote before
+and removal of ordinary spaces immediately inside a curly double quote. Also join an English letter, a straight
+or curly apostrophe and a whole suffix (t, s, re, ll, ve, d, m), removing adjacent ASCII spaces and using ’.
+Preserve all letters, digits and other marks. Do not change hyphens, numeric ranges, Chinese punctuation,
+other apostrophes, names or meaning. A closing quote before
 comma, period, question mark or other punctuation takes no inserted space. Do not guess at ambiguous quote/dash usage.
 Use a minimal nonempty source span with sufficient neighboring context; never insert an empty before span.
 Record exact original offsets, Chinese reasons and unambiguous certainty, as for every other correction.`
@@ -80,8 +82,8 @@ Preserve the original source and prior review. Record a Chinese reason for each 
 
 // Only permit the declared typography operations. The agent still establishes
 // English context; this validator does not infer semantics or author reviews.
-function normalizeReviewedPunctuation(text) {
-  return text.replace(/ *[—–] */gu, (match, offset, original) => {
+function normalizeReviewedPunctuation(text, apostrophes = true) {
+  const normalized = text.replace(/ *[—–] */gu, (match, offset, original) => {
     const left = original.slice(0, offset).match(/(?<![\p{L}\p{N}])([A-Za-z0-9]+)[)”’']?$/u)?.[1]
     const right = original.slice(offset + match.length).match(/^[(“‘']?([A-Za-z0-9]+)(?![\p{L}\p{N}])/u)?.[1]
     // Require neighboring English/numeric tokens inside the evidence span,
@@ -92,6 +94,7 @@ function normalizeReviewedPunctuation(text) {
     .replace(/” *(?=[A-Za-z0-9])/gu, '” ')
     .replace(/“ +/gu, '“')
     .replace(/ +”/gu, '”')
+  return apostrophes ? normalized.replace(/([A-Za-z]) *['’] *(t|s|re|ll|ve|d|m)(?![\p{L}\p{N}'’-])/giu, '$1’$2') : normalized
 }
 
 function fail(message) {
@@ -218,7 +221,10 @@ export function applySpellingReview(materializationBytes, reportBytes) {
         || typeof correction.before !== 'string' || typeof correction.after !== 'string'
         || (terminalWhitespace ? false
           : punctuation ? !correction.before.length
-            || normalizeReviewedPunctuation(correction.before) !== correction.after
+            // Retained reports keep the exact typography accepted before apostrophe normalization.
+            || normalizeReviewedPunctuation(correction.before, false) !== correction.after
+              && (normalizeReviewedPunctuation(correction.before) !== correction.after
+                || /^[\p{L}\p{N}'’-]/u.test(target.before.slice(correction.start + correction.before.length)))
           : whitespace ? !/^ {2,}$/.test(correction.before) || correction.after !== ' '
           : grammar ? !words.test(correction.before) || !words.test(correction.after)
           : !isSpellingTokenCorrection(correction.before, correction.after))
