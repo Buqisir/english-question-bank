@@ -479,6 +479,18 @@ assert.deepEqual(validateNck1SourceMaterialization(withListening), [])
 const unofficialListening = structuredClone(withListening)
 addUnofficialListening(unofficialListening)
 assert.deepEqual(validateNck1SourceMaterialization(unofficialListening), [])
+const forgedOfficialAnswer = structuredClone(unofficialListening)
+const readingAnswer = forgedOfficialAnswer.answers.find(answer => answer.canonicalNumber === 21)
+readingAnswer.value = 'B'
+readingAnswer.authority = structuredClone(forgedOfficialAnswer.listening.answers[0].authority)
+assert(validateNck1SourceMaterialization(forgedOfficialAnswer).some(issue =>
+  issue.code === 'MATERIALIZATION_ANSWER_INVALID' && issue.path.endsWith('.authority')),
+  'Reading answer 21 cannot claim the unofficial DOCX paragraph for listening answer 1 as official evidence')
+const undeclaredListeningAnswer = structuredClone(unofficialListening)
+delete undeclaredListeningAnswer.listening.answers[0].provenance
+assert(validateNck1SourceMaterialization(undeclaredListeningAnswer).some(issue =>
+  issue.code === 'OFFICIAL_ANSWER_MISSING' && issue.path === '$.listening.answers[0]'),
+  'Listening answers cannot claim the unofficial DOCX without explicit unofficial provenance')
 for (const change of [
   value => value.listening.answers.pop(),
   value => value.listening.answers.push(value.listening.answers[0]),

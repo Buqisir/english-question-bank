@@ -873,6 +873,9 @@ function validateAnswers(answers, questionIds, documents, issues) {
     }
     seenNumbers.add(answer.canonicalNumber)
     validateLocator(answer.authority, `${path}.authority`, documents, issues)
+    if (documents.get(answer.authority?.documentId)?.role === 'unofficial_listening') {
+      issues.push(issue('MATERIALIZATION_ANSWER_INVALID', `${path}.authority`, 'Official answers cannot use an unofficial listening document as authority'))
+    }
   }
   for (const { number } of questionIds.values()) {
     if (!seenNumbers.has(number)) issues.push(issue('MATERIALIZATION_ANSWER_MISSING', '$.answers', `Missing official answer ${number}`))
