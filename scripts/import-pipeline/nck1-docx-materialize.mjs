@@ -172,6 +172,7 @@ function loadDocuments(paperDir, manifest) {
 }
 
 function selectProducer(paperDir, documents) {
+  documents = documents.filter(document => document.role !== 'unofficial_listening')
   const configPath = path.join(paperDir, 'config.json')
   const config = existsSync(configPath) ? JSON.parse(readFileSync(configPath, 'utf8')) : {}
   if (config.formatProfileBinding) {
