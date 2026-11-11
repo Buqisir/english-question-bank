@@ -3,6 +3,8 @@ import { readFileSync } from 'node:fs'
 import { listCanonicalPaperCatalog } from '../search/canonicalPaperCatalog.mjs'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 
+const reviewPaperCaches = new WeakMap()
+
 function paperEntry(paperId, asset, meta) {
   return {
     paperId, title: meta?.paperName || asset.paper.title, year: meta?.year ?? null,
@@ -12,7 +14,7 @@ function paperEntry(paperId, asset, meta) {
   }
 }
 
-export function listAgentPapers(context) {
+export function listAgentPapers(context, reviewStore) {
   const db = context.openDatabase({ readOnly: true })
   let published
   try { published = listCanonicalPaperCatalog({ db, rootDir: context.paperAssetsDir }) }
@@ -21,14 +23,38 @@ export function listAgentPapers(context) {
     const { baseDir } = resolvePaperAssetReadPaths(context.paperAssetsDir, paperId)
     let meta
     try { meta = JSON.parse(readFileSync(path.join(baseDir, 'import-meta.json'), 'utf8')).paper } catch { /* Unknown metadata stays null. */ }
-    return paperEntry(paperId, asset, meta)
+    return { ...paperEntry(paperId, asset, meta), status: 'published' }
   })
+  const publishedIds = new Set(papers.map(paper => paper.paperId))
+  if (reviewStore) {
+    const cache = reviewPaperCaches.get(reviewStore) || new Map()
+    reviewPaperCaches.set(reviewStore, cache)
+    const activeKeys = new Set()
+    for (const revision of reviewStore.listAwaitingCandidateRevisions()) {
+      if (publishedIds.has(revision.paperId)) continue
+      const key = `${revision.id}:${revision.bundleDigest}`
+      activeKeys.add(key)
+      const paper = cache.get(key) || { paperId: revision.paperId, title: revision.paperName,
+        year: null, type: null,
+        status: 'awaiting_review', revisionId: revision.id }
+      paper.load = () => {
+        if (!paper.asset) {
+          const { paperAsset, meta } = reviewStore.agentPaperAssetForRevision(revision.id)
+          Object.assign(paper, paperEntry(revision.paperId, paperAsset, meta))
+          cache.set(key, paper)
+        }
+        return paper
+      }
+      papers.push(paper)
+    }
+    for (const key of cache.keys()) if (!activeKeys.has(key)) cache.delete(key)
+  }
   return papers.sort((a, b) => a.paperId.localeCompare(b.paperId))
 }
 
 export function paperSummary(paper) {
-  const { asset, groupIds, ...summary } = paper
-  return { ...summary, groupCount: groupIds.length }
+  const { asset, groupIds, load, ...summary } = paper
+  return { ...summary, groupCount: groupIds?.length ?? null }
 }
 
 export function agentGroup(paper, groupId) {
@@ -54,6 +80,7 @@ export function agentGroup(paper, groupId) {
 }
 
 export function matchesPaper(paper, params) {
+  if (params.has('type') || params.has('year')) paper.load?.()
   return (!params.has('type') || paper.type === params.get('type'))
     && (!params.has('year') || String(paper.year) === params.get('year'))
 }
