@@ -2,7 +2,7 @@ import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigures, sourceRe
 import { sourceReferenceExplanationFigures } from './sourceReferenceFigureExclusions.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures,
-  SOURCE_REFERENCE_REGION_TOLERANCE, parseSourceReferencesBytes } from './sourceReferences.mjs'
+  SOURCE_REFERENCE_REGION_TOLERANCE, parseSourceReferencesBytes, sourceReferenceSourceView } from './sourceReferences.mjs'
 import { resolveConfirmedNck1OcrEvidence, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION,
   NCK1_OCR_EVIDENCE_SCHEMA_VERSION, nck1ReferenceOcrSourceDocuments, resolveReferenceSourceDocuments } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
@@ -121,6 +121,11 @@ function assertSourceReferenceContent({
 }, producerVersion) {
   let sourceInput = canonicalSourceInput
   let referenceSourceDocuments
+  if (sidecar?.schemaVersion === 'source-references-v7') {
+    assertSourceReferences({ sidecar, materialization, sourceDigest, candidateDigest,
+      sourceDocuments: sourceInput.documents, sourceInput })
+    sidecar = sourceReferenceSourceView(sidecar)
+  }
   const sealedRoleDeclarations = sidecar?.writingRoleDeclarations
   let resolvedRoleDeclarations = null
   const roleDeclarations = confirmation => resolvedRoleDeclarations ??= resolveWritingRoleDeclarations(

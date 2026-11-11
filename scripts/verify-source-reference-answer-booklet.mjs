@@ -14,7 +14,7 @@ import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { materializationSlotSpecs, profileHeadingSpecs } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { SOURCE_INSTRUCTION_SLOTS } from '../shared/paper-canonical/sourcePresentation.mjs'
 import { resolveCanonicalAuthority, zhejiangLegacyReadingRangesAuthorityRef } from '../shared/paper-canonical/authority.mjs'
-import { prepareSourceReferences, validateSourceReferences, sourceReferenceBlocks } from '../server/paper-import/sourceReferences.mjs'
+import { prepareSourceReferences, validateSourceReferences, sourceReferenceBlocks, sourceReferenceSourceView } from '../server/paper-import/sourceReferences.mjs'
 import { buildAnswerOnlyHtml, buildAssembledAnswerOnlyHtml } from '../server/answer-renderer.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
@@ -244,6 +244,21 @@ function answerLabelChecks() {
     const input = fixture({ structuredScoring })
     const original = structuredClone(input.sourceReferences)
     const html = buildAnswerOnlyHtml(input)
+    const supplemented = structuredClone(input)
+    supplemented.sourceReferences.sourceSchemaVersion = supplemented.sourceReferences.schemaVersion
+    supplemented.sourceReferences.schemaVersion = 'source-references-v7'
+    assert.equal(buildAnswerOnlyHtml(supplemented), html, 'source essay HTML bytes stay unchanged in v7')
+    supplemented.sourceReferences.groups[1].essays.entries.push({
+      referenceId: 'unofficial:sample', provenance: 'unofficial',
+      paragraphs: [{ paragraphId: 'unofficial:sample:p1', role: 'body', text: 'A supplemental writing sample.' }],
+    })
+    assert.deepEqual(sourceReferenceSourceView(supplemented.sourceReferences), original)
+    assert.deepEqual(labels(buildAnswerOnlyHtml(supplemented)),
+      ['For the proposal', 'Against the proposal', '参考范文', '非官方参考范文'])
+    const scoringSupplement = structuredClone(supplemented)
+    scoringSupplement.sourceReferences.groups[0].scoring.entries.push(
+      supplemented.sourceReferences.groups[1].essays.entries.at(-1))
+    assert.throws(() => buildAnswerOnlyHtml(scoringSupplement), /SCHEMA_INVALID/u)
     assert.deepEqual(labels(html), ['For the proposal', 'Against the proposal', '参考范文'],
       'source-printed labels stay exact; a single unlabeled essay gets no number')
     assert.deepEqual(input.sourceReferences, original, 'display labels do not rewrite source fields')

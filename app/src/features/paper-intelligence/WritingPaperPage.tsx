@@ -32,6 +32,12 @@ import './writingPaperPage.css'
  */
 type WritingPageStyle = CSSProperties & Record<`--${string}`, string | number>
 
+export type UnofficialReferenceEssay = {
+  referenceId: string
+  provenance: 'unofficial'
+  paragraphs: { paragraphId: string; role: string; text: string }[]
+}
+
 /**
  * Inject shared paper-surface tokens as CSS custom properties, same
  * mechanism as `PaperSurface.tsx`. This page wraps PaperSurface as a
@@ -194,6 +200,7 @@ function WritingPaperPageContent({
   children,
   retainedModelAnswer,
   retainedOfficialModelAnswer,
+  unofficialReferenceEssays,
   onAnswerBoxActivate,
   grammarFillPredecessorGroupId,
   applicationWritingPredecessorGroupId,
@@ -202,6 +209,7 @@ function WritingPaperPageContent({
   children: ReactNode
   retainedModelAnswer?: string
   retainedOfficialModelAnswer?: string
+  unofficialReferenceEssays?: UnofficialReferenceEssay[]
   onAnswerBoxActivate?: () => void
   grammarFillPredecessorGroupId?: string
   applicationWritingPredecessorGroupId?: string
@@ -376,8 +384,8 @@ function WritingPaperPageContent({
                       )
                     })
             return (
+              <Fragment key={index}>
                 <div
-                  key={index}
                   className={[
                     'pi-writing-answer-box',
                     block.drawingArea ? 'pi-writing-answer-box--drawing' : '',
@@ -469,6 +477,18 @@ function WritingPaperPageContent({
                     </div>
                   )}
                 </div>
+                {unofficialReferenceEssays?.map(essay => (
+                  <section key={essay.referenceId} className="retained-writing-answer-section"
+                    style={{ marginTop: 16 }} data-model-answer-source="unofficial">
+                    <h4 className="retained-writing-answer-label">非官方参考范文</h4>
+                    <div className="retained-writing-answer-copy">
+                      {essay.paragraphs.map(paragraph => (
+                        <p key={paragraph.paragraphId} className="retained-writing-answer-line">{paragraph.text}</p>
+                      ))}
+                    </div>
+                  </section>
+                ))}
+              </Fragment>
             )
           }
           default:
