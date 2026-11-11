@@ -49,6 +49,9 @@ const validateV3 = ajv.compile(figureSourceReferencesSchema)
 const validateV4 = ajv.compile(scoringFigureSourceReferencesSchema)
 const validateV5 = ajv.compile(exclusionSourceReferencesSchema)
 const validateV6 = ajv.compile(cellContinuationSourceReferencesSchema)
+const validateV7 = ajv.compile(JSON.parse(readFileSync(
+  new URL('../../schemas/paper-import/source-references-v7.schema.json', import.meta.url), 'utf8',
+)))
 const validateV24 = ajv.compile(v24SourceReferencesSchema)
 const validateV26 = ajv.compile(v26SourceReferencesSchema)
 const validateV25 = ajv.compile(v25SourceReferencesSchema)
@@ -94,6 +97,17 @@ export function sourceReferenceBlocks(entry) {
   return entry.blocks ?? entry.paragraphs.map(paragraph => ({ kind: 'paragraph', paragraph }))
 }
 
+// The original source state/evidence and every source entry survive supplements.
+export function sourceReferenceSourceView(sidecar) {
+  if (sidecar?.schemaVersion !== 'source-references-v7') return sidecar
+  const { sourceSchemaVersion, ...source } = structuredClone(sidecar)
+  source.schemaVersion = sourceSchemaVersion
+  for (const group of source.groups) {
+    group.essays.entries = group.essays.entries.filter(entry => entry.provenance !== 'unofficial')
+  }
+  return source
+}
+
 // One inventory for admission, integrity budgets and published consumers.
 export function sourceReferenceFigures(sidecar) {
   return sidecar?.groups.flatMap(group => ['essays', 'scoring'].flatMap(kind =>
@@ -125,6 +139,13 @@ export function prepareSourceReferences({ materialization, sourceDigest, candida
 export function validateSourceReferences({
   sidecar, materialization, sourceDigest, candidateDigest, requireComplete = true, sourceDocuments = null, sourceInput = null,
 }) {
+  const supplemented = sidecar?.schemaVersion === 'source-references-v7' ? sidecar : null
+  if (supplemented) {
+    if (!validateV7(sidecar)) return validateV7.errors.map(error => ({
+      code: 'SOURCE_REFERENCES_SCHEMA_INVALID', path: error.instancePath, message: error.message,
+    }))
+    sidecar = sourceReferenceSourceView(sidecar)
+  }
   const validateSchema = sidecar && Object.hasOwn(sidecar, 'producerVersion')
     ? sidecar.producerVersion === 'ocr-source-references-producer-v17' ? validateDeclaredLegacy
       : sidecar.producerVersion === 'ocr-source-references-producer-v18' ? validatePrevious
@@ -385,6 +406,12 @@ export function validateSourceReferences({
   }
   for (const owner of writingGroups) {
     if (!seenGroups.has(owner.groupId)) issue('SOURCE_REFERENCES_GROUP_MISSING', '$.groups', `Missing Writing Task: ${owner.groupId}`)
+  }
+  for (const group of supplemented?.groups ?? []) {
+    for (const entry of group.essays.entries.filter(entry => entry.provenance === 'unofficial')) {
+      unique(entry.referenceId, '$.groups.essays.entries.referenceId')
+      for (const paragraph of entry.paragraphs) unique(paragraph.paragraphId, '$.groups.essays.entries.paragraphs.paragraphId')
+    }
   }
   return issues
 }

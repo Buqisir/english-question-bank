@@ -1070,6 +1070,11 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     match,
   }) => {
     if (!requireReviewer(response, context)) return
+    if (match[2] === 'source-references-v1.json') {
+      const { projection } = candidateProjectionForRevision(store, match[1])
+      context.sendJson(response, 200, projection.sourceReferences)
+      return
+    }
     const { preview, compatibility } = store.productPreviewForRevision(match[1])
     response.setHeader?.('x-eqb-review-compatibility', compatibility.result)
     response.setHeader?.('x-eqb-review-reason', compatibility.reasonCode)

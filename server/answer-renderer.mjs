@@ -2,7 +2,7 @@ import { authorityAdmitsMultipleWritingNotices, resolveCanonicalAuthority } from
 import { embeddedPaperFontCss } from './paper-fonts.mjs'
 import { paperSurfaceTokens } from '../shared/papersurface/tokens.mjs'
 import { validateNck1SourceMaterialization } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
-import { assertSourceReferences, sourceReferenceBlocks } from './paper-import/sourceReferences.mjs'
+import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceSourceView } from './paper-import/sourceReferences.mjs'
 import { deriveNck1AnalyzedPackageBundle } from './paper-canonical/nck1AnalyzedPackageAdapter.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import { sourceReferenceFigurePresentation, sourceReferenceFigureItemPresentation } from './paper-import/sourceReferencePresentation.mjs'
@@ -57,6 +57,7 @@ function referenceFigureHtml(figure) {
 
 function referenceSection(group, kind, starters = [], labelOverride = null, namespace = null) {
   const section = group[kind]
+  const sourceEntries = section.entries.filter(entry => entry.provenance !== 'unofficial')
   const label = labelOverride ?? (kind === 'essays'
     ? group.taskType === 'application' ? '第一节（满分15分）' : '第二节（满分25分）'
     : `${group.taskType === 'application' ? '应用文' : '读后续写'}源评分参考`)
@@ -66,14 +67,14 @@ function referenceSection(group, kind, starters = [], labelOverride = null, name
   const heading = kind === 'essays' && sectionPrefix(section.entries[0]?.sourceLabel)
     ? '' : `<h3 class="writing-section">${label}</h3>`
   let joinedHeading = false
-  const content = section.state === 'not_supplied'
+  const content = section.state === 'not_supplied' && !section.entries.length
     ? '<p class="source-absent">源未提供。</p>'
     : section.entries.map((entry, index) => {
       const prefix = sectionPrefix(entry.sourceLabel)
-      const sourceLabel = prefix
+      const sourceLabel = entry.provenance === 'unofficial' ? '非官方参考范文' : prefix
         ? `<span class="writing-section-source">${textHtml(prefix[1])}</span><span>${textHtml(prefix[2])}</span>`
         : textHtml(entry.sourceLabel ?? (kind === 'essays'
-          ? `参考范文${section.entries.length > 1 ? referenceNumber(index + 1) : ''}`
+          ? `参考范文${sourceEntries.length > 1 ? referenceNumber(sourceEntries.indexOf(entry) + 1) : ''}`
           : `源参考${section.entries.length > 1 ? ` ${index + 1}` : ''}`))
       const labelHtml = `<h3 class="reference-label" data-reference-label="${escapeHtml(entry.referenceId)}">${sourceLabel}</h3>`
       const blocks = sourceReferenceBlocks(entry)
@@ -239,7 +240,7 @@ ${keyTable(slice(56, 65), 5)}</section>`
     ).join('\n')}</section>`
     : ''
   return answerDocument(paperName, `${keys}${references}${transcripts}`,
-    includeScoring && ['source-references-v4', 'source-references-v5'].includes(sourceReferences.schemaVersion))
+    includeScoring && ['source-references-v4', 'source-references-v5'].includes(sourceReferenceSourceView(sourceReferences).schemaVersion))
 }
 
 // Assembly numbering is the question renderer's continuous item/question order.

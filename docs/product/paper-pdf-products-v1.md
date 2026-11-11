@@ -217,20 +217,29 @@ inline，长度472912／432259／427368／198177；错摘要与异卷HEAD均400�
    不重新做题，不从解析推答案；听力已 captured 时包含1–20，其余21–65完整覆盖。
 2. **写作源范文**：附着在零 Questions 的 Writing Task / groupId，不造写作 questionId。
    保留源给的全部范文、源标签（包括正反立场）、顺序、标题、段落、称呼和落款。
-   使用“源参考范文”身份，不凭答案文件角色冒称命题机构官方；不读取 AI modelAnswer。
+   使用“源参考范文”身份，不凭答案文件角色冒称命题机构官方。
+   Owner 2026-11-11 允许另收 AI 撰写的写作范文，Screen 与答案卷逐篇明确标「非官方参考范文」。
+   这类条目使用 `provenance: "unofficial"`，只附着于 Writing Task，显式录入段落。
 3. **评分参考**：源给的细则单独捕获，不由 AI 归纳或推导。是否打印尚待 Owner 决定；
    本地样张默认不打印，但捕获数据不丢弃，不另造第五款产品。
 4. **听力原文**：复用 captured listening 的源 transcriptSegments、题号关联和顺序，
    不打印播放器、波形、音频核对 receipt 或 ASR。样张默认包含源卷全部听力答案与原文，
    不随上一款无听力题卷改变；这个默认仍待 Owner 验样确认。
 5. **缺失必须诚实**：`not_supplied` 必须有源审查位置；`unprocessed` 是未完成，
-   不能当成源没有。源缺范文不编；未完成捕获不导出答案版。
+   不能当成源没有。补充非官方范文时仍保留原源缺失证据，未完成捕获不导出答案版。
 
 写作使用独立 `source-references-v1.json`，绑定 paperId、sourceDigest、candidateDigest、
-materializationDigest；每段有稳定ID和角色，每篇有 source-reference 身份及原文定位，
+materializationDigest。源范文每段有稳定 ID 和角色，每篇有 source-reference 身份及原文定位，
 定位绑定原文档SHA。不向既有材料化 schema 插字段或重算已审 Candidate。
 该文件不代替 OCR/源忠实核对：schema、位置、SHA 只能证明结构与来源绑定，不能证明
 作者转录正确，也不能把 layout-only Owner Review 扩成语义审核。
+
+`source-references-v7` 在同一文件中追加非官方写作条目，`sourceSchemaVersion`
+保留原 schema。源条目及捕获状态、证据经原版本完整校验，源捕获的 producerVersion
+继续沿用。非官方条目只有稳定 ID、来源标记和分角色段落，无原文定位。
+离线 `answer-products.mjs finalize --unofficial-essays <json>` 接收
+`[{ "taskType": "application", "paragraphs": [{ "role": "body", "text": "..." }] }]`，
+续写用 `continuation`。已有源条目、顺序和源缺失记录完整保留。
 
 ### 源范文配图（source-references-v3）
 

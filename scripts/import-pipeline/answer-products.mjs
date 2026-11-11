@@ -53,7 +53,7 @@ try {
   const referencePath = command === 'prepare' ? path.join(paperDir, SOURCE_REFERENCES_FILE)
     : option(command === 'finalize' ? '--input' : '--references')
   const referenceBytes = existsSync(referencePath) ? readFileSync(referencePath) : null
-  const sourceReferences = referenceBytes ? JSON.parse(referenceBytes.toString('utf8')) : null
+  let sourceReferences = referenceBytes ? JSON.parse(referenceBytes.toString('utf8')) : null
   const imported = importNck1ReviewCandidate(paperDir, loaded, sourceReferences?.candidateDigest)
   if (!imported.candidate || imported.issues.length) throw new Error(`Invalid source candidate: ${imported.issues[0]?.code}`)
   const binding = {
@@ -64,6 +64,23 @@ try {
     sourceDocuments: loaded.sourceInput.documents,
   }
   const output = command === 'verify' ? null : option('--output')
+  if (command === 'finalize' && process.argv.includes('--unofficial-essays')) {
+    const samples = JSON.parse(readFileSync(option('--unofficial-essays'), 'utf8'))
+    if (!Array.isArray(samples) || !samples.length) throw new Error('Unofficial essays require a nonempty taskType/paragraphs array')
+    if (sourceReferences.schemaVersion !== 'source-references-v7') {
+      sourceReferences.sourceSchemaVersion = sourceReferences.schemaVersion
+      sourceReferences.schemaVersion = 'source-references-v7'
+    }
+    for (const [index, sample] of samples.entries()) {
+      const group = sourceReferences.groups.find(group => group.taskType === sample.taskType)
+      if (!group) throw new Error(`Unknown writing task: ${sample.taskType}`)
+      const referenceId = `unofficial:${group.groupId}:${index + 1}`
+      group.essays.entries.push({ referenceId, provenance: 'unofficial',
+        paragraphs: sample.paragraphs.map((paragraph, n) => ({
+          ...paragraph, paragraphId: `${referenceId}:p${n + 1}`,
+        })) })
+    }
+  }
   if (command === 'prepare') {
     const structuredScoring = process.argv.includes('--structured-scoring')
     const figures = process.argv.includes('--figures')
@@ -245,8 +262,9 @@ try {
         for (const writingGroup of binding.materialization.groups.filter(group => group.writingTask)) {
           const group = sourceReferences.groups.find(group => group.groupId === writingGroup.groupId)
           for (const entry of group[kind].entries) {
-            if (entry.sourceLabel !== null
-              && normalize(rendered.inspection.labels[entry.referenceId] || '') !== normalize(entry.sourceLabel)) {
+            const expectedLabel = entry.provenance === 'unofficial' ? '非官方参考范文' : entry.sourceLabel
+            if (expectedLabel !== null
+              && normalize(rendered.inspection.labels[entry.referenceId] || '') !== normalize(expectedLabel)) {
               throw new Error(`Rendered source label changed: ${entry.referenceId}`)
             }
             for (const block of sourceReferenceBlocks(entry)) {

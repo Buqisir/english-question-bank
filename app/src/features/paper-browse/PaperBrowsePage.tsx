@@ -92,7 +92,7 @@ import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { DisclosureIcon, DownloadFeedbackIcon, DraftAddIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
-import { WritingPaperPage } from '../paper-intelligence/WritingPaperPage'
+import { WritingPaperPage, type UnofficialReferenceEssay } from '../paper-intelligence/WritingPaperPage'
 import {
   buildPaperAssetSurfaceModel,
   type PaperAssetSurfaceModel,
@@ -745,6 +745,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   } = props
   const [asset, setAsset] = useState<PaperAssetV1 | null>(null)
   const [assetBase, setAssetBase] = useState<string | null>(null)
+  const [unofficialEssays, setUnofficialEssays] = useState<Record<string, UnofficialReferenceEssay[]>>({})
   const [canonicalConsumption, setCanonicalConsumption] =
     useState<WholePaperConsumption | null>(null)
   const activeAudioRef = useRef<HTMLAudioElement | null>(null)
@@ -966,6 +967,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     setAnalysisFontError('')
     setAsset(null)
     setAssetBase(null)
+    setUnofficialEssays({})
     setCanonicalConsumption(null)
     setGroupModels({})
     setLectureAnalysisByGroupId({})
@@ -1004,6 +1006,20 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         const groupTypes = new Set(
           groupBlocks.map((block) => loadedAsset.content.groups[block.groupId]?.groupType),
         )
+        let unofficialByGroup: Record<string, UnofficialReferenceEssay[]> = {}
+        if (groupTypes.has('writing') && (reviewRevision || publishedVersion)) {
+          try {
+            const response = await fetch(`${resolvedBase}/source-references-v1.json`)
+            const references = response.ok ? await response.json() : null
+            if (references?.schemaVersion === 'source-references-v7' && references.paperId === paperId) {
+              unofficialByGroup = Object.fromEntries(references.groups.map(
+                (group: { groupId: string; essays: { entries: UnofficialReferenceEssay[] } }) => [
+                  group.groupId, group.essays.entries.filter(essay => essay.provenance === 'unofficial'),
+                ],
+              ))
+            }
+          } catch { /* Optional writing supplements follow the same exact asset version. */ }
+        }
 
         let readingAnalysis: ReviewedReadingChoiceAnalysisV1 | null = null
         if (groupTypes.has('reading')) {
@@ -1309,10 +1325,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         }
 
         if (cancelled) return
-        await ensurePaperFonts([loadedAsset, canonicalConsumption, models])
+        await ensurePaperFonts([loadedAsset, canonicalConsumption, models, unofficialByGroup])
         if (cancelled) return
         setAsset(loadedAsset)
         setAssetBase(resolvedBase)
+        setUnofficialEssays(unofficialByGroup)
         setCanonicalConsumption(canonicalConsumption)
         setGroupModels(models)
         setLoading(false)
@@ -2688,18 +2705,19 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     if (entry.kind === 'writing') {
       const answerBoxOpensLecture = (
         !lectureOpen
-        && hasCompleteApplicationLecturePayload({
+        && ((unofficialEssays[groupId]?.length ?? 0) > 0 || hasCompleteApplicationLecturePayload({
           sourceTaskType,
           analysis: writingLectureEntry?.kind === 'writing'
             ? writingLectureEntry.analysis
             : undefined,
-        })
+        }))
       )
       return (
         <WritingPaperPage
           pageModel={entry.model.pageModel}
           retainedModelAnswer={retainedLecture?.modelAnswer}
           retainedOfficialModelAnswer={retainedLecture?.officialModelAnswer}
+          unofficialReferenceEssays={isPanelGroup ? unofficialEssays[groupId] : undefined}
           onAnswerBoxActivate={
             lectureOpen || answerBoxOpensLecture
               ? () => {
