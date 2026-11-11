@@ -87,27 +87,30 @@ async function expectStatus(route, options, status) {
   assert.equal(result.status, status, `${route}: ${JSON.stringify(result.data)}`)
   return result.data
 }
-function seedReview() {
+function seedReview(paperId = pendingId, { state = 'awaiting_review', number = 1, ocr = false } = {}) {
   const db = new DatabaseSync(reviewPath)
   const timestamp = new Date().toISOString()
   const id = `rev-${randomUUID()}`
-  const config = { paperId: pendingId, provenance: { year: 2026, sourceType: '模拟题', paperName: '待审测试卷' } }
+  const config = { paperId, provenance: { year: 2026, sourceType: '模拟题', paperName: '待审测试卷' } }
   const bytes = Buffer.from(JSON.stringify(config))
   jsonFile(path.join(files, id, 'config.json'), config)
-  const manifest = { schemaVersion: 'web-import-review-bundle-v1', paperId: pendingId, paperName: '待审测试卷',
+  const manifest = { schemaVersion: ocr ? 'web-import-ocr-review-bundle-v1' : 'web-import-review-bundle-v1', paperId, paperName: '待审测试卷',
     files: [{ path: 'config.json', sha256: sha256(bytes), byteLength: bytes.length, mediaType: 'application/json', role: 'config' }] }
   db.prepare(`INSERT INTO import_review_papers (paper_id, paper_name, latest_revision_id, created_at, updated_at)
-    VALUES (?, '待审测试卷', ?, ?, ?)`).run(pendingId, id, timestamp, timestamp)
+    VALUES (?, '待审测试卷', ?, ?, ?)
+    ON CONFLICT(paper_id) DO UPDATE SET latest_revision_id = excluded.latest_revision_id`)
+    .run(paperId, id, timestamp, timestamp)
   db.prepare(`INSERT INTO import_review_revisions
     (id,paper_id,revision_number,state,source_digest,candidate_digest,visible_structure_digest,bundle_digest,
      producer_build_id,renderer_build_id,manifest_json,created_at,finalized_at,updated_at)
-    VALUES (?, ?, 1, 'awaiting_review', 'source', 'candidate', 'visible', 'bundle', 'fixture', 'fixture', ?, ?, ?, ?)`)
-    .run(id, pendingId, JSON.stringify(manifest), timestamp, timestamp, timestamp)
-  const preview = { paperAsset: assetFor(pendingId) }
+    VALUES (?, ?, ?, ?, 'source', 'candidate', 'visible', 'bundle', 'fixture', 'fixture', ?, ?, ?, ?)`)
+    .run(id, paperId, number, state, JSON.stringify(manifest), timestamp, timestamp, timestamp)
+  const preview = { paperAsset: assetFor(paperId) }
   db.prepare(`INSERT INTO import_review_product_previews
     (revision_id,bundle_digest,renderer_build_id,payload_digest,payload_json) VALUES (?, 'bundle', 'fixture', ?, ?)`)
     .run(id, digestJson(preview), JSON.stringify(preview))
   db.close()
+  return id
 }
 
 try {
@@ -127,6 +130,12 @@ try {
   }
   assert(ready, logs)
   seedReview()
+  const pendingRevisionId = seedReview(pendingId, { number: 2 })
+  seedReview(publishedId)
+  for (const state of ['changes_requested', 'uploading', 'approved', 'superseded']) {
+    seedReview(`paper-agent-${state}`, { state })
+  }
+  seedReview('paper-agent-ocr', { ocr: true })
 
   await expectStatus(`${api}/papers`, {}, 401)
   await expectStatus(`${api}/papers`, { token: `eqb_agent_${'x'.repeat(43)}` }, 401)
@@ -155,13 +164,26 @@ try {
   console.log('PASS token creation, digest-only storage, redaction, GET-only access')
 
   const list = await expectStatus(`${api}/papers`, { token: credential.token }, 200)
-  assert.deepEqual(list.papers.map(item => item.paperId), [publishedId])
-  assert.equal(list.papers[0].title, '正式测试卷')
-  assert.equal(list.papers[0].type, 'real')
-  assert(!('status' in list.papers[0]) && !('revision' in list.papers[0]))
-  await expectStatus(`${api}/papers/${pendingId}`, { token: credential.token }, 404)
-  await expectStatus(`${api}/groups/group-${pendingId}`, { token: credential.token }, 404)
-  assert.equal((await expectStatus(`${api}/papers?type=mock&year=2026`, { token: credential.token }, 200)).papers.length, 0)
+  assert.deepEqual(list.papers.map(item => item.paperId), [pendingId, publishedId])
+  const pending = list.papers[0]
+  assert.equal(pending.status, 'awaiting_review')
+  assert.equal(pending.revisionId, pendingRevisionId)
+  assert.equal(pending.title, '待审测试卷')
+  assert.equal(list.papers[1].title, '正式测试卷')
+  assert.equal(list.papers[1].type, 'real')
+  assert.equal(list.papers[1].status, 'published')
+  assert(!('revisionId' in list.papers[1]))
+  const pendingDetail = await expectStatus(`${api}/papers/${pendingId}`, { token: credential.token }, 200)
+  assert.equal(pendingDetail.groups[0].questions[0].answer, 'A')
+  assert.equal(pendingDetail.revisionId, pendingRevisionId)
+  assert.equal((await expectStatus(`${api}/groups/group-${pendingId}`, { token: credential.token }, 200)).questions[0].answer, 'A')
+  assert.equal((await expectStatus(`${api}/papers?type=mock&year=2026`, { token: credential.token }, 200)).papers.length, 1)
+  const pendingGroups = await expectStatus(`${api}/groups?type=mock&year=2026`, { token: credential.token }, 200)
+  assert.deepEqual(pendingGroups.groups.map(group => group.paperId), [pendingId])
+  for (const id of ['paper-agent-changes_requested', 'paper-agent-ocr']) {
+    await expectStatus(`${api}/papers/${id}`, { token: credential.token }, 404)
+    await expectStatus(`${api}/groups/group-${id}`, { token: credential.token }, 404)
+  }
   const filtered = await expectStatus(`${api}/papers?type=real&year=2026`, { token: credential.token }, 200)
   assert.equal(filtered.papers.length, 1)
   const detail = await expectStatus(`${api}/papers/${publishedId}`, { token: credential.token }, 200)
@@ -169,7 +191,8 @@ try {
   assert.equal(detail.groups[0].questions[0].number, 21)
   assert.deepEqual(detail.groups[0].questions[0].options[0], { label: 'A', content: 'A lesson.' })
   assert.equal(detail.groups[0].passage.paragraphs[0].text, 'A teacher prepares a lesson.')
-  assert(!('status' in detail) && !('revision' in detail))
+  assert.equal(detail.status, 'published')
+  assert(!('revisionId' in detail))
   const groups = await expectStatus(`${api}/groups?section=${encodeURIComponent('阅读理解')}&type=real&year=2026&limit=1&offset=0`, { token: credential.token }, 200)
   assert.equal(groups.total, 1)
   assert.equal(groups.groups[0].preview, 'A teacher prepares a lesson.')
@@ -178,7 +201,15 @@ try {
   assert.equal(group.questions[0].answer, 'A')
   assert(!('status' in group) && !('revision' in group))
   await expectStatus(`${api}/groups?limit=-1`, { token: credential.token }, 400)
-  console.log('PASS published-only catalog, pending-only detail 404, provenance, filters, passage/options/answers')
+  seedReview(pendingId, { number: 3 })
+  const refreshed = await expectStatus(`${api}/papers/${pendingId}`, { token: credential.token }, 200)
+  assert.notEqual(refreshed.revisionId, pendingRevisionId)
+  const reviewDb = new DatabaseSync(reviewPath)
+  reviewDb.prepare("UPDATE import_review_revisions SET state = 'changes_requested' WHERE paper_id = ?").run(pendingId)
+  reviewDb.close()
+  assert.equal((await expectStatus(`${api}/papers?type=mock`, { token: credential.token }, 200)).papers.length, 0)
+  await expectStatus(`${api}/papers/${pendingId}`, { token: credential.token }, 404)
+  console.log('PASS published priority, latest awaiting Candidate, status exclusion, cache refresh, filters and answers')
   console.log('EXAMPLES', JSON.stringify({ papers: filtered, paper: detail, groups, group }))
 
   const rate = await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '限流' } }, 201)

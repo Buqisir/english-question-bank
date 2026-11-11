@@ -495,7 +495,7 @@ serverContext.vocabularyNotebook = vocabularyNotebookRuntime
 const serverRoutes = [
   ...h1Routes,
   ...createAuthRoutes(),
-  ...createAgentRoutes(),
+  ...createAgentRoutes({ getReviewStore: getImportReviewStore }),
   ...createMySpaceRoutes(),
   ...createDraftPaperRoutes(),
   ...createExportRoutes(exportImplementation),

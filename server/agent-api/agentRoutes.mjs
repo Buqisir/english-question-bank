@@ -2,7 +2,7 @@ import { defineRoute } from '../router/index.mjs'
 import { createAgentToken, listAgentTokens, revokeAgentToken } from './agentTokens.mjs'
 import { agentGroup, groupPreview, listAgentPapers, matchesPaper, paperSummary } from './agentCatalog.mjs'
 
-export function createAgentRoutes() {
+export function createAgentRoutes({ getReviewStore } = {}) {
   const admin = (method, pattern, action) => defineRoute(method, pattern, async input => {
     const { context, response } = input
     // Unlike existing bootstrap-open tools, token administration always needs a
@@ -18,7 +18,7 @@ export function createAgentRoutes() {
   }, { ownerOnly: true })
   const read = (pattern, action) => defineRoute('GET', pattern, input => {
     if (!input.context.agent) { input.context.sendJson(input.response, 401, { error: 'not_authenticated' }); return }
-    const papers = listAgentPapers(input.context)
+    const papers = listAgentPapers(input.context, getReviewStore?.())
     action(input, papers)
   })
   const notFound = ({ context, response }) => context.sendJson(response, 404, { error: 'not_found' })

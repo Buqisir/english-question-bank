@@ -1561,6 +1561,21 @@ export function createImportReviewStore({
     return getRevision(revisionId)
   }
 
+  function listAwaitingCandidateRevisions() {
+    return withDb(false, db => {
+      const latest = new Map()
+      for (const row of db.prepare(`SELECT id, paper_id, bundle_digest FROM import_review_revisions
+        WHERE state = 'awaiting_review'
+          AND json_extract(manifest_json, '$.schemaVersion') != 'web-import-ocr-review-bundle-v1'
+        ORDER BY revision_number DESC`).all()) {
+        if (!latest.has(row.paper_id)) {
+          latest.set(row.paper_id, { id: row.id, paperId: row.paper_id, bundleDigest: row.bundle_digest })
+        }
+      }
+      return [...latest.values()]
+    })
+  }
+
   function listPapers() {
     let target
     let unavailable
@@ -3583,6 +3598,7 @@ export function createImportReviewStore({
     getRevision,
     latestPromotion,
     linkDiscussionThread,
+    listAwaitingCandidateRevisions,
     listPapers,
     markPromotionFailed,
     markPromotionPublished,

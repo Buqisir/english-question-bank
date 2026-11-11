@@ -4,12 +4,14 @@ Owner 登录网站，打开「管理 → 数据维护 → Agent 口令」，填�
 明文只显示一次，请保存到 Agent 的私有环境变量，勿提交到代码库。Owner 可随时作废口令。
 
 每次请求携带 `Authorization: Bearer <口令>`。只接受 GET，不接受登录 cookie。
-所有口令只读已发布卷，包含来源答案，不写入题库或教师个人数据。
-待审卷不出现在列表中，访问其卷或题组详情返回 404。
+所有口令都可只读已发布卷和每套卷最新的 `awaiting_review` Candidate revision，包含来源答案，不写入题库或教师个人数据。
+同一 `paperId` 已发布时优先返回已发布卷，不重复；`changes_requested`、OCR 等其他状态不出现。
+卷列表和详情的 `status` 为 `published` 或 `awaiting_review`，待审卷另带 `revisionId`。
+待审卷同样支持卷详情、题组详情和筛选；不按口令区分范围。
 
 | 接口 | 返回 |
 | --- | --- |
-| `GET /api/agent/v1/papers?type=real&year=2026` | `{papers:[{paperId,title,year,type,groupCount}]}` |
+| `GET /api/agent/v1/papers?type=real&year=2026` | `{papers:[{paperId,title,year,type,status,revisionId?,groupCount}]}` |
 | `GET /api/agent/v1/papers/:paperId` | 卷信息与 `groups`，各组保留原文结构、题目、选项和 `answer` |
 | `GET /api/agent/v1/groups?section=&type=&year=&limit=50&offset=0` | `{groups:[摘要],total,limit,offset}`，预览最多 80 字 |
 | `GET /api/agent/v1/groups/:groupId` | 完整题组与 `paperId/paperTitle` |

@@ -3,6 +3,8 @@ import { readFileSync } from 'node:fs'
 import { listCanonicalPaperCatalog } from '../search/canonicalPaperCatalog.mjs'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 
+const reviewPaperCaches = new WeakMap()
+
 function paperEntry(paperId, asset, meta) {
   return {
     paperId, title: meta?.paperName || asset.paper.title, year: meta?.year ?? null,
@@ -12,7 +14,7 @@ function paperEntry(paperId, asset, meta) {
   }
 }
 
-export function listAgentPapers(context) {
+export function listAgentPapers(context, reviewStore) {
   const db = context.openDatabase({ readOnly: true })
   let published
   try { published = listCanonicalPaperCatalog({ db, rootDir: context.paperAssetsDir }) }
@@ -21,8 +23,29 @@ export function listAgentPapers(context) {
     const { baseDir } = resolvePaperAssetReadPaths(context.paperAssetsDir, paperId)
     let meta
     try { meta = JSON.parse(readFileSync(path.join(baseDir, 'import-meta.json'), 'utf8')).paper } catch { /* Unknown metadata stays null. */ }
-    return paperEntry(paperId, asset, meta)
+    return { ...paperEntry(paperId, asset, meta), status: 'published' }
   })
+  const publishedIds = new Set(papers.map(paper => paper.paperId))
+  if (reviewStore) {
+    const cache = reviewPaperCaches.get(reviewStore) || new Map()
+    reviewPaperCaches.set(reviewStore, cache)
+    const activeKeys = new Set()
+    for (const revision of reviewStore.listAwaitingCandidateRevisions()) {
+      if (publishedIds.has(revision.paperId)) continue
+      const key = `${revision.id}:${revision.bundleDigest}`
+      activeKeys.add(key)
+      if (!cache.has(key)) {
+        const { preview, revision: storedRevision } = reviewStore.productPreviewForRevision(revision.id)
+        const configFile = storedRevision.manifest.files.find(file => file.role === 'config')
+        const config = configFile
+          ? JSON.parse(readFileSync(reviewStore.verifiedFileForRead(revision.id, configFile.path).filePath, 'utf8')) : null
+        cache.set(key, { ...paperEntry(revision.paperId, preview.paperAsset, config?.provenance),
+          status: 'awaiting_review', revisionId: revision.id })
+      }
+      papers.push(cache.get(key))
+    }
+    for (const key of cache.keys()) if (!activeKeys.has(key)) cache.delete(key)
+  }
   return papers.sort((a, b) => a.paperId.localeCompare(b.paperId))
 }
 
