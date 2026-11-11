@@ -119,6 +119,42 @@ function fixture(t, referencesVersion = version) {
   return { dir, ctx, calls, options: { referenceStages } }
 }
 
+test('after-proofread forwards explicit body width to figure-sizes on resume', t => {
+  const paperId = `paper-synthetic-fast-body-width-${process.pid}`
+  const paperDir = path.join(import.meta.dirname, 'papers', paperId)
+  const work = path.resolve(import.meta.dirname, '../../imports/ocr-proofread', paperId)
+  assert(!fs.existsSync(paperDir) && !fs.existsSync(work))
+  t.after(() => {
+    rmSync(paperDir, { recursive: true, force: true })
+    rmSync(work, { recursive: true, force: true })
+  })
+  json(path.join(paperDir, 'config.json'), { listening: 'absent-by-exam-design' })
+  json(path.join(paperDir, 'universal-source-manifest.json'), { documents: [] })
+  const materializationPath = path.join(paperDir, 'materialization/nck1-source-materialization-v1.json')
+  json(materializationPath, { groups: [], media: [{
+    mediaId: 'chart', usage: 'content', presentation: { widthRatio: 1 },
+    extraction: { kind: 'pdf_crop', documentId: 'questions', page: 12, region: { width: .4 } },
+  }] })
+  json(path.join(paperDir, 'materialization/nck1-ocr-source-evidence-v1.json'), { documents: [] })
+  const statePath = path.join(work, 'fast/state.json')
+  const state = { paperId, steps: Object.fromEntries([
+    'flags-present', 'compile', 'ocr-review', 'materialize', 'chinese-numbering', 'presentation',
+    'subtitles-watermarks', 'spelling', 'verify', 'answer-check', 'build', 'round2-requests',
+  ].map(name => [name, completed({})])), background: {}, data: { summaryParts: [] } }
+  json(statePath, state)
+  const run = args => spawnSync(process.execPath, [path.join(import.meta.dirname, 'fast-import.mjs'),
+    'after-proofread', paperId, ...args], { encoding: 'utf8' })
+  const missing = run([])
+  assert.notEqual(missing.status, 0)
+  assert.match(missing.stderr, /Too few text observations/u)
+  const result = run(['--body-width-ratio', '0.785894'])
+  assert.equal(result.status, 0, result.stderr)
+  assert.equal(JSON.parse(readFileSync(materializationPath)).media[0].presentation.widthRatio, .509)
+  assert(JSON.parse(readFileSync(statePath)).steps['figure-sizes'].finishedAt)
+  assert.match(readFileSync(path.join(work, 'fast/logs/figure-sizes.log'), 'utf8'),
+    /--body-width-ratio 0\.785894/u)
+})
+
 test('producer and driver import the same pure version constant; current results remain cache hits', async t => {
   assert.equal(version, 'ocr-source-references-producer-v27')
   assert.equal(producerVersion, version)
