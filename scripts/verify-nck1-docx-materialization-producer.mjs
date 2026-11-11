@@ -112,6 +112,57 @@ for (const counts of [[3, 3, 4], [4, 3, 3], [3, 4, 3]]) for (const offset of [0,
     (block.content ?? []).filter(run => run.kind === 'blank_ref').map(run => run.blankId))), blankIds)
 }
 console.log('PASS Zhejiang producer: complete offsets, canonical blanks and separate listening/written answers')
+for (const titles of [
+  ['第一部分 阅读理解', '第二部分 语言知识运用', '第三部分 写作'],
+  ['第二部分 阅读理解', '语言知识运用', '第四部分 写作'],
+]) for (const offset of [0, 20]) {
+  const nationalFixture = makeSyntheticNck1DocxFixture({ listening: true })
+  const [question, coverage, answer] = nationalFixture.sourceDocuments
+  const range = (from, to) => Array.from({ length: to - from + 1 }, (_, i) => from + i)
+  const number = n => n - offset
+  const choice = n => [`${number(n)}. Which written choice fits?`, 'A. Written answer.',
+    'B. Other answer.', 'C. Other choice.', 'D. Last choice.']
+  const paragraphs = [titles[0], '第一节', ...[[21, 23], [24, 27], [28, 31], [32, 35]].flatMap(([from, to], i) =>
+    [String.fromCharCode(65 + i), 'A source passage.', ...range(from, to).flatMap(choice)]),
+    '第二节', 'Read the following material.', ...range(36, 40).map(n => `Before __${number(n)}__ after.`),
+    ...range(1, 7).map(n => `${String.fromCharCode(64 + n)}. A source option.`),
+    titles[1], '第一节', 'Read this cloze.',
+    range(41, 60).map(n => `Before __${number(n)}__ after`).join(' '), ...range(41, 60).flatMap(choice),
+    '第二节', 'Read this grammar material.', range(61, 70).map(n => `Before __${number(n)}__ (word) after`).join(' '),
+    titles[2], '第一节 短文改错', 'A source correction passage.',
+    '第二节 书面表达', 'Write an application.', '注意：', '1. 词数100左右；']
+  const answers = ['听力部分', ...range(1, 20).map(n => `${n}. B`),
+    titles[0], ...range(21, 60).map(n => `${number(n)}. A`),
+    titles[1], ...range(61, 70).map(n => `${number(n)}. word`),
+    titles[2], '第一节 短文改错', '【答案】', ...range(71, 80).map(n => `${n}. token→word`), '第二节 书面表达']
+  const body = lines => lines.map((text, i) => ({ kind: 'paragraph', text, sourceIndex: i + 1000, containsDrawing: false }))
+  const questionStructure = extractDocxDocumentStructure(question.bytes)
+  questionStructure.body = [...questionStructure.body.slice(0,
+    questionStructure.body.findIndex(item => /^第二部分/u.test(item.text))).flatMap(item => {
+      if (/^第一部分/u.test(item.text)) return [{ ...item, text: '听力部分（共两节，满分30分）' }]
+      if (/^[16][.．]/u.test(item.text)) return [{ ...item, text: item.text.startsWith('1') ? '第一节' : '第二节' }, item]
+      return [item]
+    }), ...body(paragraphs)]
+  const result = produceNck1MaterializationFromStructures({
+    paperId: nationalFixture.paperId, documents: nationalFixture.sourceDocuments, profileId: 'national-legacy',
+    question, coverage, answer, questionStructure,
+    answerStructure: { ...extractDocxDocumentStructure(answer.bytes), body: body(answers) },
+    issues: [], sourceVisuals: [], mediaInventory: [], mediaFiles: [], codePrefix: 'NCK1_DOCX',
+    producerVersion: NCK1_DOCX_MATERIALIZATION_PRODUCER_VERSION,
+    reviewSchemaVersion: 'nck1-docx-materialization-review-v1',
+    sourceDigest: nck1DocxProducerSourceDigest(nationalFixture.sourceDocuments),
+  })
+  assert.equal(result.materialization.groups.length, 9)
+  assert(!result.review.required.some(issue => issue.code.endsWith('_SECTION_AMBIGUOUS')), JSON.stringify(result.review.required))
+  const written = result.materialization.groups.filter(group => group.family !== 'error-correction').flatMap(group => group.questions)
+  assert.equal(written.length, 50)
+  assert(written.every((question, i) => question.sourceNumber === number(i + 21) && question.canonicalNumber === i + 21))
+  assert.equal(result.materialization.answers.length, 60)
+  assert(result.materialization.answers.slice(0, 50).every(answer => answer.value === (answer.canonicalNumber < 61 ? 'A' : 'word')))
+  assert.equal(result.materialization.listening.answers.length, 20)
+  assert(result.materialization.listening.answers.every(answer => answer.value === 'B'))
+}
+console.log('PASS National producer: written part numbering, bare language heading and separate listening/written answers')
 {
   const rows = [['Accessible Vehicles', 'Seating', 'Time Frame', 'Rate / hour'],
     ['E-bikes & e-scooters', '1', 'Off season', '$6'], ['', '', 'Peak season', '$8'],

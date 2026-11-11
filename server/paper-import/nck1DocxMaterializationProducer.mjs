@@ -1517,7 +1517,7 @@ function closesWritingSampleWordCount(answerBody, index, answerDocumentId) {
   })
 }
 
-function listeningMaterialization({ paperId, questionBody, readingStart, answerBody, answerMap, questionDocumentId, answerDocumentId, coverageDocumentId, issues, listeningSource = null }) {
+function listeningMaterialization({ paperId, questionBody, readingStart, answerBody, answerMap, questionDocumentId, answerDocumentId, coverageDocumentId, issues, listeningSource = null, listeningMarker }) {
   if (listeningSource) answerBody = listeningSource.body
   // OCR may split a fixed broadcast across a heading and two printed lines.
   // Match the complete anchored cue; retain each original item and locator in the partition.
@@ -1568,7 +1568,7 @@ function listeningMaterialization({ paperId, questionBody, readingStart, answerB
     : wrappedCues.get(item) || listeningCue(item?.text)
   const listeningHeading = optionalExactPosition(
     questionBody,
-    /^第一部分\s*听力/u,
+    listeningMarker,
     'sections.listening',
     issues,
     questionDocumentId,
@@ -2178,10 +2178,10 @@ function carrierIssues(issues, codePrefix) {
   }))
 }
 
-function legacySourcePresentation({ body, positions, question, issues, profileId }) {
+function legacySourcePresentation({ body, positions, question, issues, profileId, listeningMarker }) {
   const { readingStart, languageStart, writingStart, readingFirst, readingSecond,
     languageFirst, languageSecond, writingFirst, writingSecond } = positions
-  const listeningStart = exactPosition(body, /^第一部分\s*听力/u, 'sections.listening', issues, question.documentId)
+  const listeningStart = exactPosition(body, listeningMarker, 'sections.listening', issues, question.documentId)
   const short = exactPosition(body, /^第一节/u, 'sections.listening.first', issues,
     question.documentId, [listeningStart + 1, readingStart])
   const long = exactPosition(body, /^第二节/u, 'sections.listening.second', issues,
@@ -2288,9 +2288,21 @@ export function produceNck1MaterializationFromStructures({
     addIssue(issues, 'NCK1_DOCX_ANSWER_TABLE_REVIEW_REQUIRED', 'documents.official_answers',
       '评分/答案表暂不支持合并单元格，请拆成普通表或按图片处理', sourceRef(answer?.documentId))
   }
-  const readingStart = exactPosition(body, /^第二部分\s*阅读/u, 'sections.reading', issues, question?.documentId)
-  const languageStart = exactPosition(body, /^第三部分\s*语言(?:知识)?运用/u, 'sections.language', issues, question?.documentId)
-  const writingStart = exactPosition(body, /^第四部分\s*写作/u, 'sections.writing', issues, question?.documentId)
+  const sectionMarkers = {
+    reading: national ? /^(?:第[一二三四]部分\s*)?阅读理解/u : /^第二部分\s*阅读/u,
+    language: national ? /^(?:第[一二三四]部分\s*)?语言(?:知识)?运用/u : /^第三部分\s*语言(?:知识)?运用/u,
+    writing: national ? /^(?:第[一二三四]部分\s*)?写作/u : /^第四部分\s*写作/u,
+    listening: national ? /^(?:第一部分\s*听力|听力部分)/u : /^第一部分\s*听力/u,
+  }
+  let readingStart = exactPosition(body, sectionMarkers.reading, 'sections.reading', issues, question?.documentId)
+  let languageStart = exactPosition(body, sectionMarkers.language, 'sections.language', issues, question?.documentId)
+  let writingStart = exactPosition(body, sectionMarkers.writing, 'sections.writing', issues, question?.documentId)
+  if (national && [readingStart, languageStart, writingStart].every(position => position !== null)
+    && !(readingStart < languageStart && languageStart < writingStart)) {
+    addIssue(issues, 'NCK1_DOCX_SECTION_AMBIGUOUS', 'sections',
+      'National legacy sections must follow reading, language, writing order', sourceRef(question?.documentId))
+    readingStart = languageStart = writingStart = null
+  }
   const readingFirst = readingStart === null || languageStart === null ? null : exactPosition(
     body, /^第一节/u, 'sections.reading.first', issues, question?.documentId,
     [readingStart + 1, languageStart],
@@ -2409,12 +2421,12 @@ export function produceNck1MaterializationFromStructures({
   let answerMap
   let listeningAnswerMap
   if (writtenNumberOffset) {
-    const answerReadingStart = exactPosition(answerBody, /^第二部分\s*阅读/u,
+    const answerReadingStart = exactPosition(answerBody, sectionMarkers.reading,
       'answers.sections.reading', issues, answer?.documentId)
-    const answerWritingStart = exactPosition(answerBody, /^第四部分\s*写作/u,
+    const answerWritingStart = exactPosition(answerBody, sectionMarkers.writing,
       'answers.sections.writing', issues, answer?.documentId)
     const answerListeningStart = answerReadingStart === null ? null : exactPosition(
-      answerBody, /^第一部分\s*听力/u, 'answers.sections.listening', issues, answer?.documentId,
+      answerBody, sectionMarkers.listening, 'answers.sections.listening', issues, answer?.documentId,
       [0, answerReadingStart],
     )
     const writtenAnswerBody = answerReadingStart !== null && answerWritingStart !== null
@@ -2510,7 +2522,7 @@ export function produceNck1MaterializationFromStructures({
         paperId, questionBody: body, readingStart, answerBody, answerMap: listeningAnswerMap,
         questionDocumentId: question.documentId, answerDocumentId: answer.documentId,
         coverageDocumentId: sourceCoverage.documentId, issues,
-        listeningSource,
+        listeningSource, listeningMarker: sectionMarkers.listening,
       })
   const listening = listeningResult.materialization
   // Writing samples are optional. Keep their source/reason in
@@ -2542,7 +2554,7 @@ export function produceNck1MaterializationFromStructures({
   if (legacy && groups.length) {
     materialization.sourcePresentation = legacySourcePresentation({ body, positions: { readingStart, languageStart, writingStart,
       readingFirst, readingSecond, languageFirst, languageSecond, writingFirst, writingSecond },
-      question, issues, profileId })
+      question, issues, profileId, listeningMarker: sectionMarkers.listening })
     {
       const writtenQuestions = groups.filter(group => group.family !== 'error-correction').flatMap(group => group.questions)
       if (writtenQuestions.length !== writtenCount || writtenQuestions.some((question, index) =>
