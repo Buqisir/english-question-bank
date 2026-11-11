@@ -1564,12 +1564,15 @@ export function createImportReviewStore({
   function listAwaitingCandidateRevisions() {
     return withDb(false, db => {
       const latest = new Map()
-      for (const row of db.prepare(`SELECT id, paper_id, bundle_digest FROM import_review_revisions
-        WHERE state = 'awaiting_review'
-          AND json_extract(manifest_json, '$.schemaVersion') != 'web-import-ocr-review-bundle-v1'
-        ORDER BY revision_number DESC`).all()) {
+      for (const row of db.prepare(`SELECT r.id, r.paper_id, r.bundle_digest,
+          json_extract(r.manifest_json, '$.paperName') AS paper_name
+        FROM import_review_revisions r
+        WHERE r.state = 'awaiting_review'
+          AND json_extract(r.manifest_json, '$.schemaVersion') != 'web-import-ocr-review-bundle-v1'
+        ORDER BY r.revision_number DESC`).all()) {
         if (!latest.has(row.paper_id)) {
-          latest.set(row.paper_id, { id: row.id, paperId: row.paper_id, bundleDigest: row.bundle_digest })
+          latest.set(row.paper_id, { id: row.id, paperId: row.paper_id, bundleDigest: row.bundle_digest,
+            paperName: row.paper_name })
         }
       }
       return [...latest.values()]
@@ -1808,7 +1811,26 @@ export function createImportReviewStore({
     productPreviewForRevision(revisionId)
   }
 
-  function productPreviewForRevision(revisionId) {
+  // The stored JSON has its own digest; Agent reads never inspect bundle media.
+  function agentRevisionIdsForGroup(groupId) {
+    return withDb(false, db => db.prepare(`SELECT v.revision_id
+      FROM import_review_product_previews v JOIN import_review_revisions r ON r.id = v.revision_id
+      WHERE r.state = 'awaiting_review' AND EXISTS (
+        SELECT 1 FROM json_each(v.payload_json, '$.paperAsset.content.blocks') b
+        WHERE json_extract(b.value, '$.type') = 'group'
+          AND json_extract(b.value, '$.groupId') = ?
+      )`).all(groupId).map(row => row.revision_id))
+  }
+
+  function agentPaperAssetForRevision(revisionId) {
+    const { revision, preview } = storedProductPreviewForRevision(revisionId)
+    const configFile = revision.manifest.files.find(file => file.role === 'config')
+    const config = configFile
+      ? JSON.parse(readFileSync(verifiedFileForRead(revisionId, configFile.path).filePath, 'utf8')) : null
+    return { paperAsset: preview.paperAsset, meta: config?.provenance }
+  }
+
+  function storedProductPreviewForRevision(revisionId) {
     const revision = getRevision(revisionId)
     if (!revision || revision.state === 'uploading' || revision.reviewKind !== 'candidate') {
       throw storeError('IMPORT_REVIEW_CANDIDATE_REQUIRED', 'A finalized Candidate is required')
@@ -1823,6 +1845,11 @@ export function createImportReviewStore({
       || digestJson(preview) !== row.payload_digest) {
       throw storeError('IMPORT_REVIEW_PREVIEW_IDENTITY_INVALID', 'Stored preview identity differs from the finalized revision')
     }
+    return { revision, preview }
+  }
+
+  function productPreviewForRevision(revisionId) {
+    const { revision, preview } = storedProductPreviewForRevision(revisionId)
     assertStoredRevisionFiles(revision)
     return { revision, preview, compatibility: withDb(false, db => compatibilityFor(db, revision)) }
   }
@@ -3599,6 +3626,8 @@ export function createImportReviewStore({
     latestPromotion,
     linkDiscussionThread,
     listAwaitingCandidateRevisions,
+    agentPaperAssetForRevision,
+    agentRevisionIdsForGroup,
     listPapers,
     markPromotionFailed,
     markPromotionPublished,

@@ -36,6 +36,7 @@ export function createAgentRoutes({ getReviewStore } = {}) {
     read(/^\/api\/agent\/v1\/papers\/([^/]+)$/, (input, papers) => {
       const paper = papers.find(paper => paper.paperId === decodeURIComponent(input.match[1]))
       if (!paper) return notFound(input)
+      paper.load?.()
       input.context.sendJson(input.response, 200, { ...paperSummary(paper), groups: paper.groupIds.map(id => agentGroup(paper, id)) })
     }),
     read(/^\/api\/agent\/v1\/groups$/, ({ context, response, url }, papers) => {
@@ -45,17 +46,25 @@ export function createAgentRoutes({ getReviewStore } = {}) {
       if (!Number.isSafeInteger(limit) || limit < 1 || limit > 200 || !Number.isSafeInteger(offset) || offset < 0) {
         context.sendJson(response, 400, { error: 'limit must be 1–200; offset must be a nonnegative integer' }); return
       }
-      const groups = papers.filter(paper => matchesPaper(paper, params)).flatMap(paper => paper.groupIds.map(id => {
-        const group = agentGroup(paper, id)
-        return { groupId: id, paperId: paper.paperId, paperTitle: paper.title, year: paper.year, type: paper.type,
-          section: group.section, questionCount: group.questions.length, preview: groupPreview(group) }
-      })).filter(group => !params.has('section') || group.section === params.get('section'))
+      const groups = papers.filter(paper => matchesPaper(paper, params)).flatMap(paper => {
+        paper.load?.()
+        return paper.groupIds.map(id => {
+          const group = agentGroup(paper, id)
+          return { groupId: id, paperId: paper.paperId, paperTitle: paper.title, year: paper.year, type: paper.type,
+            section: group.section, questionCount: group.questions.length, preview: groupPreview(group) }
+        })
+      }).filter(group => !params.has('section') || group.section === params.get('section'))
       context.sendJson(response, 200, { groups: groups.slice(offset, offset + limit), total: groups.length, limit, offset })
     }),
     read(/^\/api\/agent\/v1\/groups\/([^/]+)$/, (input, papers) => {
       const id = decodeURIComponent(input.match[1])
-      const paper = papers.find(paper => paper.groupIds.includes(id))
+      let paper = papers.find(paper => paper.groupIds?.includes(id))
+      if (!paper) {
+        const revisionIds = new Set(getReviewStore?.().agentRevisionIdsForGroup(id) || [])
+        paper = papers.find(paper => revisionIds.has(paper.revisionId))
+      }
       if (!paper) return notFound(input)
+      paper.load?.()
       input.context.sendJson(input.response, 200, { ...agentGroup(paper, id), paperId: paper.paperId,
         paperTitle: paper.title })
     }),

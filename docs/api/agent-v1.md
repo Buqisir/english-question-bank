@@ -8,6 +8,8 @@ Owner 登录网站，打开「管理 → 数据维护 → Agent 口令」，填�
 同一 `paperId` 已发布时优先返回已发布卷，不重复；`changes_requested`、OCR 等其他状态不出现。
 卷列表和详情的 `status` 为 `published` 或 `awaiting_review`，待审卷另带 `revisionId`。
 待审卷同样支持卷详情、题组详情和筛选；不按口令区分范围。
+待审卷列表优先使用 DB 摘要，冷缓存下年份、类型和 `groupCount` 可能为 `null`；按年份/类型筛选时补读轻量 JSON。
+卷详情和题组详情仅加载目标卷；题组列表逐套读取轻量 JSON，不读取或校验 PDF、音频、图片。
 
 | 接口 | 返回 |
 | --- | --- |

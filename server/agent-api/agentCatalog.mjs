@@ -34,15 +34,18 @@ export function listAgentPapers(context, reviewStore) {
       if (publishedIds.has(revision.paperId)) continue
       const key = `${revision.id}:${revision.bundleDigest}`
       activeKeys.add(key)
-      if (!cache.has(key)) {
-        const { preview, revision: storedRevision } = reviewStore.productPreviewForRevision(revision.id)
-        const configFile = storedRevision.manifest.files.find(file => file.role === 'config')
-        const config = configFile
-          ? JSON.parse(readFileSync(reviewStore.verifiedFileForRead(revision.id, configFile.path).filePath, 'utf8')) : null
-        cache.set(key, { ...paperEntry(revision.paperId, preview.paperAsset, config?.provenance),
-          status: 'awaiting_review', revisionId: revision.id })
+      const paper = cache.get(key) || { paperId: revision.paperId, title: revision.paperName,
+        year: null, type: null,
+        status: 'awaiting_review', revisionId: revision.id }
+      paper.load = () => {
+        if (!paper.asset) {
+          const { paperAsset, meta } = reviewStore.agentPaperAssetForRevision(revision.id)
+          Object.assign(paper, paperEntry(revision.paperId, paperAsset, meta))
+          cache.set(key, paper)
+        }
+        return paper
       }
-      papers.push(cache.get(key))
+      papers.push(paper)
     }
     for (const key of cache.keys()) if (!activeKeys.has(key)) cache.delete(key)
   }
@@ -50,8 +53,8 @@ export function listAgentPapers(context, reviewStore) {
 }
 
 export function paperSummary(paper) {
-  const { asset, groupIds, ...summary } = paper
-  return { ...summary, groupCount: groupIds.length }
+  const { asset, groupIds, load, ...summary } = paper
+  return { ...summary, groupCount: groupIds?.length ?? null }
 }
 
 export function agentGroup(paper, groupId) {
@@ -77,6 +80,7 @@ export function agentGroup(paper, groupId) {
 }
 
 export function matchesPaper(paper, params) {
+  if (params.has('type') || params.has('year')) paper.load?.()
   return (!params.has('type') || paper.type === params.get('type'))
     && (!params.has('year') || String(paper.year) === params.get('year'))
 }
