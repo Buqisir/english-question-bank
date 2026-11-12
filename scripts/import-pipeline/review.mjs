@@ -17,6 +17,7 @@ import {
   writeFileSync,
 } from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
 import { addOcrNumberingProjections } from '../../shared/ocrNumberingProjection.mjs'
 import { tmpdir } from 'node:os'
@@ -282,7 +283,7 @@ async function uploadReviewBundle(paperDir, manifest) {
   })
 }
 
-function reviewManifest(paperDir, projection, resolvesIssueIds = [], buildId = producerBuildId(), approvedBaseRevisionId) {
+export function reviewManifest(paperDir, projection, resolvesIssueIds = [], buildId = producerBuildId(), approvedBaseRevisionId) {
   const initializationPath = path.join(paperDir, 'signals', 'source-intake-initialization.json')
   const initialization = existsSync(initializationPath)
     ? JSON.parse(readFileSync(initializationPath, 'utf8'))
@@ -1847,7 +1848,7 @@ async function main() {
   )
 }
 
-main().catch((error) => {
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) main().catch((error) => {
   console.error(error.code ? `${error.code}: ${error.message}` : error.message)
   process.exitCode = 1
 })
