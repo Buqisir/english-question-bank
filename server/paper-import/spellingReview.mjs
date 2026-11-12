@@ -32,8 +32,12 @@ export function isSourceMarkCorrection(before, after) {
     && sameNumbers(before, after)
 }
 
+const MONTH_DAY_YEAR = /\b((?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|June?|July?|Aug(?:ust)?|Sept?(?:ember)?|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?)\.? \d{1,2}), ?(\d{4})(?!\d)/gu
+
 function sameNumbers(before, after) {
-  const numbers = (text) => JSON.stringify(text.match(/[-+−±$£€¥]?\d+(?:[.,:]\d+)*(?:%|°[CF]?)?/gu) ?? [])
+  // Only an English month-day date may gain a space after its comma (June 1,1989).
+  const dates = (text) => text.replace(MONTH_DAY_YEAR, '$1,$2')
+  const numbers = (text) => JSON.stringify(dates(text).match(/[-+−±$£€¥]?\d+(?:[.,:]\d+)*(?:%|°[CF]?)?/gu) ?? [])
   return numbers(before) === numbers(after)
 }
 
