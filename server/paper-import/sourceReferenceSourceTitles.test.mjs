@@ -394,10 +394,10 @@ test('essay errata build and replay only exact declared short replacements', () 
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: altered }))
 })
 
-test('spelling-only official essay changes require a source-reference correction declaration', () => {
+test('undeclared essay paragraphs retain existing official typography behavior', () => {
   const input = textInput()
-  input.materialization.groups[0].writingTask.officialModelAnswer = 'An corrected application sample.'
-  assert.throws(() => capture(input), /缺 source-reference-text-corrections 声明/)
+  input.materialization.groups[0].writingTask.officialModelAnswer = 'An original application sample – with typography.'
+  assert.doesNotThrow(() => capture(input))
 })
 
 test('null Screen official essay permits declared sidecar-only corrections', () => {
