@@ -907,7 +907,9 @@ function approvalHtml() {
       <p class="muted">当前 R${escapeHtml(latest.revisionNumber)} · ${escapeHtml(state.detail.unresolvedCount)} 个未决问题</p>
       <label class="approval-check">
         <input id="approval-check" type="checkbox" ${blocked ? 'disabled' : ''} />
-        <span>${publicPaper
+        <span>${publicPaper && latest.manifest?.analysisDigest
+          ? '我已检查 Screen 与 PDF，认可当前版式，并已审阅讲评，将其选为精选官方参考。'
+          : publicPaper
           ? '我已检查 Screen 与 PDF，认可当前版本的版式。'
           : '我已检查 Screen 与 PDF，认可当前版本。'}</span>
       </label>
@@ -1519,7 +1521,7 @@ function bind() {
           body: JSON.stringify({
             bundleDigest: state.detail.latest.bundleDigest,
             ...(state.detail.importProfile === 'public-paper-v1'
-              ? { approvalScope: 'layout_only' }
+              ? { approvalScope: state.detail.latest.manifest?.analysisDigest ? 'layout_and_analysis' : 'layout_only' }
               : {}),
           }),
         },

@@ -1283,9 +1283,7 @@ export function createImportReviewStore({
           [projection.sourceDigest, revision.sourceDigest, 'sourceDigest'],
           [projection.candidateDigest, revision.candidateDigest, 'candidateDigest'],
           [projection.visibleStructureDigest, revision.visibleStructureDigest, 'visibleStructureDigest'],
-          ...(revision.manifest.analysisDigest
-            ? [[projection.analysisDigest, revision.manifest.analysisDigest, 'analysisDigest']]
-            : []),
+          [projection.analysisDigest || null, revision.manifest.analysisDigest || null, 'analysisDigest'],
           ...(revision.manifest.paragraphSummariesDigest
             ? [
                 [projection.importProfile, revision.manifest.importProfile, 'importProfile'],
@@ -1632,6 +1630,7 @@ export function createImportReviewStore({
         state: row.state || 'uploading',
         reviewKind: kind,
         bundleDigest: row.bundle_digest,
+        hasTeachingAnalyses: Boolean(manifest.analysisDigest),
         hasMediaCandidates: Array.isArray(manifest.files)
           && manifest.files.some(file => file?.role === 'content_media_candidate'),
         rendererBuildId: row.renderer_build_id,
@@ -2299,10 +2298,11 @@ export function createImportReviewStore({
         if (input?.bundleDigest !== revision.bundleDigest) {
           throw storeError('IMPORT_REVIEW_STALE_REVISION', 'Browser revision digest is stale')
         }
-        if (revision.manifest.importProfile && input?.approvalScope !== 'layout_only') {
+        const approvalScope = revision.manifest.analysisDigest ? 'layout_and_analysis' : 'layout_only'
+        if (revision.manifest.importProfile && input?.approvalScope !== approvalScope) {
           throw storeError(
             'IMPORT_REVIEW_APPROVAL_SCOPE_INVALID',
-            'Public-paper approval requires approvalScope layout_only',
+            `Public-paper approval requires approvalScope ${approvalScope}`,
             400,
           )
         }
@@ -2390,7 +2390,7 @@ export function createImportReviewStore({
                 importProfile: revision.manifest.importProfile,
                 paragraphSummariesDigest: revision.manifest.paragraphSummariesDigest,
                 publicSearchMetadataDigest: revision.manifest.publicSearchMetadataDigest,
-                approvalScope: 'layout_only',
+                approvalScope,
               }
             : {}),
           bundleDigest: revision.bundleDigest,

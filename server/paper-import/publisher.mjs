@@ -1398,6 +1398,7 @@ function prepareUniversalNck1ImportSnapshot({
           importProfile: projection.importProfile,
           paragraphSummariesDigest: projection.paragraphSummariesDigest,
           publicSearchMetadataDigest: projection.publicSearchMetadataDigest,
+          ...(projection.analysisDigest ? { analysisDigest: projection.analysisDigest } : {}),
         }
       : { analysisDigest: projection.analysisDigest }),
   }
@@ -1508,7 +1509,7 @@ function publishUniversalNck1ImportFacts({
         return write(outputInventory)
       })
     },
-    requireCompleteAnalyses: !importProfile,
+    requireCompleteAnalyses: !importProfile || Boolean(packageData.readingAnalysis),
     requireParagraphSummaries: Boolean(importProfile),
     admitPackage(version) {
       if (sealedReviewPublication) {
