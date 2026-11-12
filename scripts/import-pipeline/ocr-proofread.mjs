@@ -1492,10 +1492,11 @@ export function buildSourceReferences(materialization, evidence, confirmation,
   const joined = text => text.normalize('NFKC').replace(/-\s+/gu, '-').replace(/\s+/gu, '')
   for (const group of groups) for (const entry of group.essays.entries) {
     for (const block of sourceReferenceBlocks(entry)) {
-      if (block.kind !== 'paragraph' || !essayTextCorrections.some(c => c.paragraphId === block.paragraph.paragraphId)) continue
+      if (block.kind !== 'paragraph') continue
       const answer = materialization.groups.find(item => item.groupId === group.groupId)?.writingTask?.officialModelAnswer
+      if (answer == null) continue
       if (typeof answer !== 'string' || !joined(answer).includes(joined(block.paragraph.text))) {
-        throw new Error('Essay correction differs from Screen officialModelAnswer; apply the same spelling-review corrections before rebuilding references')
+        throw new Error('Essay text differs from Screen officialModelAnswer: 官方范文已在 spelling-review 更正但缺 source-reference-text-corrections 声明，或反之；请同步两侧更正')
       }
     }
   }
@@ -1585,7 +1586,8 @@ function references(paperId) {
     evidenceBytes: readFileSync(path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME)),
     confirmationBytes: readFileSync(path.join(directory, 'nck1-ocr-source-confirmation-v1.json')),
   } }
-  const referenceMaterialization = essayTextCorrections.length ? loadNck1ReviewSource(paperDir).materialization : materialization
+  const referenceMaterialization = essayTextCorrections.length || existsSync(path.join(paperDir, 'spelling-review-v1.json'))
+    ? loadNck1ReviewSource(paperDir).materialization : materialization
   const { groups, review, structuredScoring, schemaVersion, figureExclusions, producerVersion, alternateAnswerScope } = buildSourceReferences(referenceMaterialization, evidence, confirmation,
     { sourceDocuments: referenceDocuments, sourceInput, paperName, referenceSourceManifest,
       figureExclusions: retained?.figureExclusions ?? [], writingRoleDeclarations, essayTextCorrections })

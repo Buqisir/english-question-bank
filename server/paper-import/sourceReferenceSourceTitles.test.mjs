@@ -351,7 +351,8 @@ test('essay errata build and replay only exact declared short replacements', () 
   const input = textInput([historicalTexts.map(text => text === 'An original application sample.'
     ? sample : text)])
   input.materialization.groups[0].writingTask.officialModelAnswer = sample
-  const paragraphId = capture(input).groups[0].essays.entries[0].paragraphs[0].paragraphId
+  const raw = capture(input)
+  const paragraphId = raw.groups[0].essays.entries[0].paragraphs[0].paragraphId
   const entries = [{ paragraphId, before: 'popcom', after: 'popcorn', reason: '流传版 rn 误印为 m' },
     { paragraphId, before: 'Bemard', after: 'Bernard', reason: '上下文人名 Bernard' }]
   const build = essayTextCorrections => buildSourceReferences(input.materialization, input.evidence, input.confirmation,
@@ -363,8 +364,7 @@ test('essay errata build and replay only exact declared short replacements', () 
     corrections: entries.map(({ before, after, reason }) => ({ start: target.before.indexOf(before),
       before, after, reason, category: 'spelling', certainty: 'unambiguous' })).sort((a, b) => a.start - b.start) }))
   input.materialization = applySpellingReview(bytes, Buffer.from(JSON.stringify(report)))
-  const raw = capture(input)
-  const sidecar = { ...raw, groups: build(entries).groups, essayTextCorrections: entries }
+  const sidecar = { ...raw, ...prepareSourceReferences(input), groups: build(entries).groups, essayTextCorrections: entries }
   const corrected = sample.replace('Bemard', 'Bernard').replace('popcom', 'popcorn')
   assert.equal(sidecar.groups[0].essays.entries[0].paragraphs[0].text, corrected)
   const screen = buildNck1CompatibilityPaperAsset({ config: { provenance: { paperName: '范文更正测试' } },
@@ -392,6 +392,23 @@ test('essay errata build and replay only exact declared short replacements', () 
   const altered = structuredClone(sidecar)
   altered.groups[0].scoring.entries[0].paragraphs[0].text += 'modified'
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: altered }))
+})
+
+test('spelling-only official essay changes require a source-reference correction declaration', () => {
+  const input = textInput()
+  input.materialization.groups[0].writingTask.officialModelAnswer = 'An corrected application sample.'
+  assert.throws(() => capture(input), /缺 source-reference-text-corrections 声明/)
+})
+
+test('null Screen official essay permits declared sidecar-only corrections', () => {
+  const input = textInput(), raw = capture(input)
+  input.materialization.groups[0].writingTask.officialModelAnswer = null
+  const essayTextCorrections = [{ paragraphId: raw.groups[0].essays.entries[0].paragraphs[0].paragraphId,
+    before: 'sample', after: 'sampled', reason: '流传版错字' }]
+  const output = buildSourceReferences(input.materialization, input.evidence, input.confirmation, { essayTextCorrections })
+  assert.equal(output.groups[0].essays.entries[0].paragraphs[0].text, 'An original application sampled.')
+  assertSourceReferenceAdmission({ ...input, sidecar: { ...raw, ...prepareSourceReferences(input),
+    groups: output.groups, essayTextCorrections } })
 })
 
 test('essay correction budget accumulates all declarations against the original paragraph', () => {

@@ -94,7 +94,8 @@ Screen 的官方范文来自 `groups[*].writingTask.officialModelAnswer`，须�
 在 `source-flags/<页码>.json` 添加 `{"flags":[{"quote":"popcom","after":"popcorn","category":"spelling","reason":"流传版 rn 误印为 m"}]}`；
 多处命中同一 target 时分别用 context/occurrence 定位，语法漏词用 category `grammar`。
 `after-proofread <id> --redo-from spelling` 会生成并 finalize 拼写审查，修正 materialization 的范文投影。
-构建与 admission 都要求更正后的完整段落与 Screen 官方范文对应文字一致，否则拒绝只改 PDF。
+构建与 admission 检查所有有 Screen 官方范文的段落，无论有无声明，拒绝任一侧单独更正；
+`officialModelAnswer` 为 null 时跳过两面一致性检查，只更正 sidecar。非官方补充范文（v7）不支持此声明入口，本 PR 不扩展。
 已送审卷先用下述 `finish --feedback-fix ... --redo-from source-references` 对账并归档；
 若尚未同步 spelling，首次 finish 会停在上述一致性检查。完成 spelling 重做后用普通 `finish <id>` 续跑，
 重新目检 Screen/PDF，再 `submit --resolves ...`；保留反馈事务，不重复启动 feedback-fix。
