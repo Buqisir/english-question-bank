@@ -5,7 +5,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { findSourceFlagTargets } from './text-review-parts.mjs'
-import { applySpellingReview, prepareSpellingReview, TEXT_REVIEW_POLICY } from '../../server/paper-import/spellingReview.mjs'
+import { applySpellingReview, prepareSpellingReview, SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4 } from '../../server/paper-import/spellingReview.mjs'
 import { mapSourceEmphasisEdits } from '../../server/paper-canonical/sourceEmphasis.mjs'
 
 const at = (text, flag) => findSourceFlagTargets([{ before: text }], flag).flatMap(hit => hit.at)
@@ -209,4 +209,55 @@ test('compound corrections still cannot cross source emphasis', () => {
   const correction = { start: 0, before, after: 'lemon-flavoured' }
   assert.throws(() => mapSourceEmphasisEdits(before,
     [{ start: 6, end: before.length, marks: ['underline'] }], [correction]), /crosses a mark boundary/)
+})
+
+test('source_mark accepts circulated-source fixes through auto and v3/v4 admission', () => {
+  for (const [before, after] of [
+    ['Sometimes.students', 'Sometimes, students'], ['mother-in -law', 'mother-in-law'],
+    ['snow—covered', 'snow-covered'], ['Seniors£', 'Seniors £'], ['Children£', 'Children £'],
+    ['Children £5. Seniors £8', 'Children £5, Seniors £8'],
+  ]) {
+    autoFixture(`😀 ${before}20`, before, after, ({ result, output, bytes }) => {
+      assert.equal(result.status, 0, result.stderr)
+      const report = JSON.parse(readFileSync(output))
+      for (const policy of [TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4]) {
+        report.schemaVersion = policy
+        assert.deepEqual(applySpellingReview(bytes, Buffer.from(JSON.stringify(report))).groups[0].writingTask.material,
+          Array(2).fill(`😀 ${after}20`))
+      }
+    }, 'source_mark')
+  }
+})
+
+test('source_mark rejects letter/case drift, legacy policies and invalid evidence', () => {
+  const before = 'Sometimes.students', after = 'Sometimes, students'
+  const bytes = Buffer.from(JSON.stringify({ groups: [{ questions: [{ stem: before }] }] }))
+  for (const [policy, edit] of [
+    [SPELLING_REVIEW_POLICY, {}], [TEXT_REVIEW_POLICY_V2, {}],
+    [TEXT_REVIEW_POLICY, { after: 'Sometimes, student' }],
+    [TEXT_REVIEW_POLICY, { after: 'sometimes, students' }],
+    [TEXT_REVIEW_POLICY, { reason: 'Fix punctuation' }],
+    [TEXT_REVIEW_POLICY, { after: 'Sometimes,  students' }],
+    [TEXT_REVIEW_POLICY, { after: 'Sometimes,\nstudents' }],
+    [TEXT_REVIEW_POLICY, { after: `Sometimes,${' '.repeat(30)}students` }],
+    [TEXT_REVIEW_POLICY, { start: 1 }], [TEXT_REVIEW_POLICY, { certainty: 'uncertain' }],
+  ]) {
+    const report = prepareSpellingReview(bytes, policy)
+    report.reviewedBy = 'import_agent'
+    report.reviewedAt = '2026-11-11T00:00:00Z'
+    Object.assign(report.targets[0], { decision: 'correct', corrections: [
+      { start: 0, before, after, category: 'source_mark', certainty: 'unambiguous', reason: '修正流传标点', ...edit },
+    ] })
+    assert.throws(() => applySpellingReview(bytes, Buffer.from(JSON.stringify(report))), /only exact/)
+  }
+})
+
+test('source_mark keeps an enclosing underline aligned at UTF-16 offsets', () => {
+  const before = 'Sometimes.students', after = 'Sometimes, students'
+  const text = `😀 ${before} end`
+  const mapped = mapSourceEmphasisEdits(text, [{ start: 3, end: 3 + before.length, marks: ['underline'] }],
+    [{ start: 3, before, after, category: 'source_mark' }])
+  assert.equal(mapped.text, `😀 ${after} end`)
+  assert.deepEqual(mapped.ranges, [{ start: 3, end: 3 + after.length, marks: ['underline'] }])
+  assert.equal(mapped.text.slice(mapped.ranges[0].start, mapped.ranges[0].end), after)
 })
