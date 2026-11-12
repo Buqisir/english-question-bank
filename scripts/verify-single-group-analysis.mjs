@@ -5,8 +5,10 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
 import { buildNck1AnalysisProjection, validateNck1StagedAnalysis } from '../server/import-review/nck1AnalysisProjection.mjs'
-import { buildNck1CompatibilityPaperAsset } from '../server/import-review/revisionProjection.mjs'
+import { buildNck1CompatibilityPaperAsset, buildNck1ReviewConsumption } from '../server/import-review/revisionProjection.mjs'
 import { buildListeningAnalysisAgentRequest } from '../server/paper-import-ai/analyzeListening.mjs'
+import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../shared/paper-canonical/compiler.mjs'
+import { sha256, digestJson } from '../shared/paper-canonical/stable.mjs'
 
 // Reuse existing synthetic publication fixtures without running its DB/HTTP suite.
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
@@ -18,6 +20,8 @@ else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
 const root = mkdtempSync(path.join(tmpdir(), 'single-group-analysis-'))
 try {
   const source = makeFixture({ listening: true })
+  // Small prototype of the 2023 I full-width/ASCII parentheses mismatch.
+  source.groups.find(g => g.slotId === 'seven-choices').blocks[1].content[0].text += ' To err（犯错）is human. '
   writeStagedAnalyses(root, source)
   const paper = { paperId: source.paperId, sourceAssetVersion: 1 }
   const answers = new Map(source.answers.map(({ questionId, value }) => [questionId, value]))
@@ -67,6 +71,42 @@ try {
     assert.equal(readFileSync(candidatePath, 'utf8'), JSON.stringify(analysis))
     assert.equal(readFileSync(requestPath, 'utf8'), JSON.stringify(request))
     assert.deepEqual(readdirSync(root).sort(), files)
+
+    if (key === 'seven') {
+      const canonicalSource = structuredClone(source)
+      const documents = canonicalSource.documents.map(document => {
+        const bytes = new TextEncoder().encode(`%PDF-1.7 synthetic ${document.documentId}`.padEnd(100, 'x'))
+        document.sha256 = sha256(bytes)
+        return { documentId: document.documentId, bytes }
+      })
+      const imported = importCanonicalCandidate({ kind: 'nck1-source-materialization', documents, media: [],
+        materializationBytes: new TextEncoder().encode(JSON.stringify(canonicalSource)) })
+      assert.deepEqual(imported.issues, [])
+      const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+      assert.ok(preview.compilation, JSON.stringify(preview.unresolvedIssues))
+      const consumption = buildNck1ReviewConsumption(preview.candidate, preview.compilation)
+      const consumptionPath = path.join(root, 'consumption.json')
+      const runWithConsumption = () => spawnSync(process.execPath,
+        ['scripts/import-pipeline/validate-analysis.mjs', requestPath, candidatePath, '--consumption', consumptionPath],
+        { cwd: path.resolve(import.meta.dirname, '..'), encoding: 'utf8' })
+      writeFileSync(consumptionPath, JSON.stringify(consumption))
+      const mismatch = runWithConsumption()
+      assert.equal(mismatch.status, 1, mismatch.stdout)
+      assert.match(mismatch.stderr, /source paragraph .* does not match TextMap/)
+      const selection = consumption.selections.find(s => s.familyContractId === 'seven-choices')
+      const occurrence = selection.projectedOccurrences.find(o => o.groupId === group.groupId)
+      const paragraph = occurrence.content.blocks.find(b => b.nodeId === 'block:seven-choices')
+      paragraph.inlines[0].text = paragraph.inlines[0].text
+        .replace('To err (犯错) is human.', 'To err（犯错）is human.')
+      selection.projectedOccurrenceDigests.find(d => d.groupId === group.groupId).digest = digestJson(occurrence)
+      writeFileSync(consumptionPath, JSON.stringify(consumption))
+      const aligned = runWithConsumption()
+      assert.equal(aligned.status, 0, aligned.stderr)
+      rmSync(consumptionPath)
+      assert.equal(readFileSync(requestPath, 'utf8'), JSON.stringify(request))
+      assert.equal(readFileSync(candidatePath, 'utf8'), JSON.stringify(analysis))
+      console.log('PASS TextMap: aligned canonical blanks accepted; 2023 I parentheses drift rejected')
+    }
 
     const wrong = structuredClone(analysis)
     if (key.startsWith('reading-')) {
