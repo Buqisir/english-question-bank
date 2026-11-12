@@ -257,8 +257,16 @@ For each reading group:
   underline offsets are local to `displayText`. Repeated text must use the intended occurrence's offsets;
   many questions and overlapping ranges are valid. Source answer evidence must
   reference original passage text. Do not derive offsets by first substring.
-  Figure/table evidence keeps its existing object reference; never invent text
-  offsets for it. Non-key difficult sentences use empty `relatedQuestionIds` and
+  Native table cells are included in the source text address space: their
+  existing `cellId` is supplied as `paragraphId`. Use that exact ID in evidence,
+  trapEvidence, locationParaphrases.targetParagraphId, and teachingContent
+  sourceRanges.paragraphId. Quotes and code-point offsets are local to the cell,
+  including when two cells have the same price or other repeated text.
+  Cells do not require individual paragraph summaries or discourseStructure
+  entries, nor a separate translation paragraph for every cell; related cells
+  may share one translation paragraph linked through sourceParagraphIds.
+  Image-only figure/table evidence keeps its existing object reference; never
+  invent text offsets for it. Non-key difficult sentences use empty `relatedQuestionIds` and
   empty sentence-structure `questionIds`, rather than inventing a question link.
 - `underlineRanges` locates the words that reveal the trunk or a decisive relation
   in `displayText`. Use Unicode code-point offsets, start inclusive/end exclusive,

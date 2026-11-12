@@ -8,6 +8,8 @@ import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { resolveOcrContentVisual, semanticTableGrid } from '../../server/paper-import/nck1OcrContentVisuals.mjs'
 import { replayConfirmedScoringTable } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
 import { buildOcrVisualTable, reclassifyOcrVisualTables } from '../../server/paper-import/ocrVisualTableReclassification.mjs'
+import { validateNck1SourceMaterialization } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
+import { makeFixture } from '../verify-nck1-source-materialization.mjs'
 
 function visualTableFixture() {
   const paperId = 'paper-test-visual-table', documentId = 'question-source-1', regionId = 'table-region'
@@ -40,6 +42,51 @@ test('declared image table splits one sealed item, preserves merge geometry and 
   assert.equal(f.raw.groups[0].blocks[0].rows[0].cells[0].rowSpan, 2)
   assert.equal(f.raw.groups[0].blocks[0].rows[1].cells[0].columnStart, 1)
   assert.equal(JSON.stringify(f.confirmation), historical)
+})
+
+test('an empty header corner preserves explicit blank text and all sealed characters', () => {
+  const { declaration, confirmation, source } = visualTableFixture()
+  const [a, b] = declaration.rows[0].cells, [c] = declaration.rows[1].cells
+  declaration.rows = [{ header: true, cells: [[], a] }, { header: false, cells: [b, c] }]
+  declaration.merges = []
+  const build = () => buildOcrVisualTable({ declaration, confirmation, source, blockId: 'table' })
+  const table = build()
+  assert.deepEqual(table.rows[0].cells[0].content, [{ kind: 'text', text: '' }])
+  assert.deepEqual(table.rows.map(row => row.cells.map(cell => cell.content[0].text)), [['', 'A'], ['B', 'C']])
+  const materialization = makeFixture({ mixedTable: true })
+  const target = materialization.groups[0].blocks.find(block => block.kind === 'table')
+  target.rows[0].cells[0].content = table.rows[0].cells[0].content
+  assert.deepEqual(validateNck1SourceMaterialization(materialization), [])
+  for (const cell of target.rows[0].cells) cell.content = [{ kind: 'text', text: '' }]
+  assert(validateNck1SourceMaterialization(materialization).some(issue => issue.code === 'MATERIALIZATION_TABLE_ROW_INVALID'))
+  declaration.rows[1].cells = [c, b]
+  assert.throws(build, /source order/u)
+  declaration.rows[1].cells = [b, []]
+  assert.throws(build, /every confirmed non-whitespace character/u)
+  declaration.rows[1].cells = [b, b]
+  assert.throws(build, /overlap/u)
+  for (const rows of [[{ header: true, cells: [[], []] }],
+    [{ header: true, cells: [[], []] }, { header: false, cells: [b, c] }]]) {
+    declaration.rows = rows
+    assert.throws(build, /explicit rows/u)
+  }
+})
+
+test('ordinary semantic tables retain source identity and order checks with an empty corner', () => {
+  const items = ['A', 'B', 'C'].map(text => ({ itemId: text, text, observationIds: [text] }))
+  const visual = { regionId: 'corner', classification: 'semantic_table',
+    rows: [{ header: true, cells: [[], ['A']] }, { header: false, cells: [['B'], ['C']] }] }
+  const input = { paperId: 'paper-corner', document: { documentId: 'source', role: 'question_source' },
+    visual, claimedItems: new Set(), region: { regionId: 'corner', region: { x: 0, y: 0, width: 1, height: 1 } },
+    page: { page: 1, orderedItems: items, furnitureObservationIds: [],
+      observations: items.map(item => ({ observationId: item.itemId, region: { x: .1, y: .1, width: .1, height: .1 } })) } }
+  assert.equal(resolveOcrContentVisual(input).item.rows[0].cells[0].text, '')
+  visual.rows[1].cells = [['C'], ['B']]
+  assert.throws(() => resolveOcrContentVisual(input), /source-order/u)
+  visual.rows[1].cells = [['B'], ['B']]
+  assert.throws(() => resolveOcrContentVisual(input), /unique/u)
+  visual.rows[1].cells = [['B'], []]
+  assert.throws(() => resolveOcrContentVisual(input), /Every text observation/u)
 })
 
 test('only exact declared cells and source identity may replace the original figure', () => {

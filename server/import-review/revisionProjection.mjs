@@ -1395,7 +1395,22 @@ export function buildNck1CompatibilityPaperAsset({
       ...(blankIds.length > 0 ? { blankIds } : {}),
       ...(writingTaskId ? { writingTaskId } : {}),
       passage: {
-        paragraphs: group.blocks
+        // Reuse the existing text address space for native cell evidence.
+        // Summary targets still come from materialization paragraph blocks.
+        paragraphs: group.blocks.flatMap(function textBlocks(block) {
+          if (group.family !== 'reading') return [block]
+          if (block.kind === 'framed_columns') {
+            return block.columns.flatMap((column) => column.blocks.flatMap(textBlocks))
+          }
+          if (block.kind === 'table') {
+            return block.rows.flatMap((row) => row.cells.map((cell) => ({
+              kind: 'paragraph',
+              blockId: cell.cellId,
+              content: cell.content.filter((inline) => inline.kind === 'text'),
+            })))
+          }
+          return [block]
+        })
           .filter((block) => block.kind === 'paragraph')
           .map((block) => ({
             paragraphId: block.blockId,
