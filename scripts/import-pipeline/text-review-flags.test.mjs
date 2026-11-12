@@ -5,7 +5,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { findSourceFlagTargets } from './text-review-parts.mjs'
-import { applySpellingReview, prepareSpellingReview, SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4 } from '../../server/paper-import/spellingReview.mjs'
+import { applySpellingReview, isSourceMarkCorrection, prepareSpellingReview, SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4 } from '../../server/paper-import/spellingReview.mjs'
 import { mapSourceEmphasisEdits } from '../../server/paper-canonical/sourceEmphasis.mjs'
 
 const at = (text, flag) => findSourceFlagTargets([{ before: text }], flag).flatMap(hit => hit.at)
@@ -250,6 +250,15 @@ test('source_mark rejects letter/case drift, legacy policies and invalid evidenc
     ] })
     assert.throws(() => applySpellingReview(bytes, Buffer.from(JSON.stringify(report))), /only exact/)
   }
+})
+
+test('source_mark keeps numeric values, blanks and bracketed labels intact', () => {
+  for (const [before, after] of [
+    ['costs £5.20 now', 'costs £520 now'], ['about 5,000 people', 'about 5000 people'],
+    ['at 10:30 am', 'at 1030 am'], ['word ___ here', 'word __ here'], ['word ___ here', 'word here'],
+    ['(A) word', 'A word'], ['.', ','],
+  ]) assert.equal(isSourceMarkCorrection(before, after), false, before)
+  assert.equal(isSourceMarkCorrection('Children £5. Seniors', 'Children £5, Seniors'), true)
 })
 
 test('source_mark keeps an enclosing underline aligned at UTF-16 offsets', () => {

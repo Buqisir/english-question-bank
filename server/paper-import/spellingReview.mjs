@@ -25,6 +25,15 @@ export function isSourceMarkCorrection(before, after) {
     && before.length > 0 && before !== after && before.length <= 40 && after.length <= 40
     && !/[\r\n\u2028\u2029]/u.test(before + after) && !/ {2}/u.test(after)
     && before.replace(/[^\p{L}\p{N}]/gu, '') === after.replace(/[^\p{L}\p{N}]/gu, '')
+    && /[A-Za-z]/u.test(before)
+    // Numeric values (£5.20, 5,000, 10:30), blanks and bracketed labels stay intact.
+    && sameMatches(before, after, /\d+(?:[.,:]\d+)*/gu)
+    && sameMatches(before, after, /_+/gu)
+    && sameMatches(before, after, /[()[\]（）]/gu)
+}
+
+function sameMatches(before, after, pattern) {
+  return JSON.stringify(before.match(pattern) ?? []) === JSON.stringify(after.match(pattern) ?? [])
 }
 
 export const SPELLING_REVIEW_INSTRUCTIONS = `Review every supplied text target in its full group context against the immutable source.
