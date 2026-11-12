@@ -592,6 +592,7 @@ function mountCanonicalReadingEvidenceAnchor(
     evidenceId: string
     kind: 'support' | 'trap' | null
     quote: string
+    paragraphId?: string | null
   },
 ): (() => void) | null {
   const compact = (value: string) => value.replace(/\s+/g, ' ').trim()
@@ -604,7 +605,18 @@ function mountCanonicalReadingEvidenceAnchor(
   const blockCandidates = [...card.querySelectorAll<HTMLElement>(
     '.ps-canonical-reading [data-canonical-block-id]',
   )]
-  const anchor = [...inlineCandidates, ...blockCandidates]
+  const source = input.paragraphId
+    ? [...card.querySelectorAll<HTMLElement>(
+        '.ps-canonical-reading [data-canonical-cell-id], .ps-canonical-reading [data-canonical-block-id]',
+      )].find((element) =>
+        element.dataset.canonicalCellId === input.paragraphId
+        || element.dataset.canonicalBlockId === input.paragraphId)
+    : null
+  // Cell quotes often repeat (prices, dates). Scope before matching text.
+  const candidates = source
+    ? [...source.querySelectorAll<HTMLElement>('[data-canonical-content-node-id]'), source]
+    : [...inlineCandidates, ...blockCandidates]
+  const anchor = candidates
     .find((element) => compact(element.textContent ?? '').includes(target))
   if (!anchor) return null
 
@@ -2197,6 +2209,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     evidenceId: string | null
     kind: 'support' | 'trap' | null
     quote: string | null
+    paragraphId: string | null
   } => {
     const empty = {
       groupId: null,
@@ -2204,6 +2217,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       evidenceId: null,
       kind: null,
       quote: null,
+      paragraphId: null,
     } as const
     if (!lectureOpen) return empty
     if (!lectureSelection?.questionId) return empty
@@ -2218,13 +2232,15 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           ...analysis.options.flatMap((option) => option.trapEvidenceRows),
         ]
       : []
-    const quote = evidenceRows.find((row) => row.evidenceId === evidenceId)?.quote ?? null
+    const row = evidenceRows.find((row) => row.evidenceId === evidenceId)
+    const quote = row?.quote ?? null
     return {
       groupId: lectureSelection.groupId,
       questionId: lectureSelection.questionId,
       evidenceId,
       kind,
       quote,
+      paragraphId: row?.paragraphId ?? null,
     }
   }, [lectureOpen, lectureSelection, panelGroupId, panelGroupModel])
 
@@ -2252,6 +2268,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       evidenceId,
       kind: readingEvidenceLineContext.kind,
       quote,
+      paragraphId: readingEvidenceLineContext.paragraphId,
     })
     if (!releaseAnchor) return
     setReadingEvidenceAnchorReadyId(evidenceId)
