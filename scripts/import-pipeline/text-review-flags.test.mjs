@@ -260,6 +260,10 @@ test('source_mark keeps numeric values, blanks and bracketed labels intact', () 
   ]) assert.equal(isSourceMarkCorrection(before, after), false, before)
   assert.equal(isSourceMarkCorrection('Children £5. Seniors', 'Children £5, Seniors'), true)
   assert.equal(isSourceMarkCorrection('Fill ___ with', 'Fill with ___'), false)
+  assert.equal(isSourceMarkCorrection('It was -5°C.', 'It was 5°C.'), false)
+  assert.equal(isSourceMarkCorrection('Save 50% today.', 'Save 50 today.'), false)
+  assert.equal(isSourceMarkCorrection('costs£5 each', 'costs 5 each'), false)
+  assert.equal(isSourceMarkCorrection('Children£20', 'Children £20'), true)
 })
 
 test('source_mark rechecks numeric values on the whole corrected target', () => {
