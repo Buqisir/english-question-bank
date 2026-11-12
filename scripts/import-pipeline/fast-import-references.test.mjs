@@ -5,11 +5,12 @@ import { appendFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSy
 import { syncBuiltinESMExports } from 'node:module'
 import path from 'node:path'
 import test from 'node:test'
-import { assertReferenceProductsReady, finish, reconcilePush, requestedRedo, submit } from './fast-import.mjs'
+import { assertReferenceProductsReady, finish, rebindRejectedIssue, reconcilePush, requestedRedo, submit } from './fast-import.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as version } from './ocr-source-references-version.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as producerVersion } from './ocr-proofread.mjs'
 import { PAPER_PAGINATION_PLAN_FILE_NAME } from '../../server/paper-import/paginationPlan.mjs'
 import { uploadReviewBundle } from './lib-review-upload.mjs'
+import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
 
 const downstream = ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']
 const oldTime = '2026-01-01T00:00:00.000Z'
@@ -460,6 +461,86 @@ test('feedback fix submit requires the exact --resolves issue set before any wri
     assert.deepEqual(snapshot(dir), before)
     assert(ctx.state.data.feedbackFix)
   }
+})
+
+test('rebind rejected issue requires exact rejection evidence and live base issue, retaining products and history', async t => {
+  fakeReviewOrigin(t)
+  for (const invalid of ['receipt', 'code', 'http', 'tampered', 'transaction', 'paper', 'base', 'state', 'issue-revision', 'issue-paper', 'closed', 'pending', 'empty', 'none']) {
+    const { dir, ctx } = fixture(t)
+    ctx.state.data.feedbackFix = { baseRevisionId: 'rev-returned', issues: ['issue-old'], at: oldTime }
+    const message = invalid === 'code' ? '409 OTHER_ERROR rejected'
+      : invalid === 'http' ? '500 IMPORT_REVIEW_ISSUE_RESOLUTION_INVALID rejected'
+        : '409 IMPORT_REVIEW_ISSUE_RESOLUTION_INVALID rejected'
+    const file = failedPush(ctx, undefined, message)
+    const status = JSON.parse(fakeStatus(ctx, [
+      { id: 'rev-returned', state: 'changes_requested', finalizedAt: oldTime },
+      { id: 'rev-uploading', state: 'uploading', bundleDigest: `sha256:${'1'.repeat(64)}` },
+    ]))
+    status.latestRevisionId = 'rev-returned'
+    status.latest = status.revisions[0]
+    status.issues = [{ id: 'issue-new', paperId: ctx.paperId, revisionId: 'rev-returned', state: 'open' }]
+    if (invalid !== 'receipt') await reconcilePush(ctx, file, { readStatus: async () => JSON.stringify(status) })
+    if (invalid === 'tampered') appendFileSync(file, 'changed')
+    if (invalid === 'transaction') delete ctx.state.data.feedbackFix
+    if (invalid === 'paper') status.paperId = 'paper-other'
+    if (invalid === 'base') { status.latestRevisionId = 'rev-other'; status.latest.id = 'rev-other' }
+    if (invalid === 'state') status.latest.state = 'awaiting_review'
+    if (invalid === 'issue-revision') status.issues[0].revisionId = 'rev-other'
+    if (invalid === 'issue-paper') status.issues[0].paperId = 'paper-other'
+    if (invalid === 'closed') status.issues[0].state = 'closed'
+    if (invalid === 'pending') status.issues[0].state = 'fixed_pending_review'
+    json(ctx.statePath, ctx.state)
+    const before = snapshot(dir), state = structuredClone(ctx.state)
+    const action = () => rebindRejectedIssue(ctx, invalid === 'empty' ? '' : 'issue-new',
+      { readStatus: async () => JSON.stringify(status), getBundleDigest: () => `sha256:${'2'.repeat(64)}` })
+    if (invalid !== 'none') {
+      await assert.rejects(action)
+      assert.deepEqual(snapshot(dir), before)
+      assert.deepEqual(ctx.state, state)
+      continue
+    }
+    await action()
+    assert.deepEqual(ctx.state.data.feedbackFix.issues, ['issue-new'])
+    assert.equal(ctx.state.data.feedbackFix.baseRevisionId, 'rev-returned')
+    assert.deepEqual(ctx.state.steps, state.steps)
+    const archived = snapshot(path.join(ctx.work, 'superseded'))
+    assert(Object.entries(archived).some(([name, bytes]) => name.includes('rebind-rejected-issue-')
+      && name.endsWith('state.json') && bytes === before['work/fast/state.json']))
+    const after = snapshot(dir)
+    for (const [name, bytes] of Object.entries(before).filter(([name]) => name !== 'work/fast/state.json')) {
+      assert.equal(after[name], bytes, name)
+    }
+  }
+})
+
+test('rebind rejects unchanged bundle even with different resolves and accepts a new producer build', async t => {
+  fakeReviewOrigin(t)
+  const { dir, ctx } = fixture(t)
+  ctx.state.data.feedbackFix = { baseRevisionId: 'rev-returned', issues: ['issue-old'], at: oldTime }
+  const file = failedPush(ctx, undefined, '409 IMPORT_REVIEW_ISSUE_RESOLUTION_INVALID rejected')
+  const manifest = { schemaVersion: 'web-import-review-bundle-v3', paperId: ctx.paperId,
+    paperName: 'Synthetic', sourceDigest: 'source', candidateDigest: 'candidate',
+    visibleStructureDigest: 'structure', producerBuildId: 'old-head', files: [], resolvesIssueIds: ['issue-old'] }
+  const bundleDigest = reviewBundleDigest(manifest)
+  const status = JSON.parse(fakeStatus(ctx, [
+    { id: 'rev-returned', state: 'changes_requested', finalizedAt: oldTime },
+    { id: 'rev-uploading', state: 'uploading', bundleDigest },
+  ]))
+  status.latest = status.revisions[0]
+  status.latestRevisionId = status.latest.id
+  status.issues = [{ id: 'issue-new', paperId: ctx.paperId, revisionId: 'rev-returned', state: 'open' }]
+  await reconcilePush(ctx, file, { readStatus: async () => JSON.stringify(status) })
+  const before = snapshot(dir), state = structuredClone(ctx.state)
+  const options = { readStatus: async () => JSON.stringify(status),
+    getBundleDigest: () => reviewBundleDigest({ ...manifest, resolvesIssueIds: ['issue-new'] }) }
+  assert.equal(options.getBundleDigest(), bundleDigest)
+  await assert.rejects(() => rebindRejectedIssue(ctx, 'issue-new', options), /同一 bundle.*旧 uploading revision.*finish .*--redo-from freeze.*rebind/)
+  assert.deepEqual(snapshot(dir), before)
+  assert.deepEqual(ctx.state, state)
+  options.getBundleDigest = () => reviewBundleDigest({ ...manifest, producerBuildId: 'new-head', resolvesIssueIds: ['issue-new'] })
+  assert.notEqual(options.getBundleDigest(), bundleDigest)
+  await rebindRejectedIssue(ctx, 'issue-new', options)
+  assert.deepEqual(ctx.state.data.feedbackFix.issues, ['issue-new'])
 })
 
 test('active pagination retains all state and artifacts until the job exits', async t => {
