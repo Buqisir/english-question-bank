@@ -7,7 +7,8 @@ export function semanticTableGrid({ rows, merges }) {
   if (!Array.isArray(rows) || !rows.length || rows.some(row =>
     !isRecordValue(row) || !exactKeys(row, ['header', 'cells'])
     || typeof row.header !== 'boolean' || !Array.isArray(row.cells)
-    || row.cells.some(cell => !Array.isArray(cell) || !cell.length)
+    || row.cells.some(cell => !Array.isArray(cell))
+    || (row.cells.length > 0 && row.cells.every(cell => !cell.length))
     || (merges === undefined && (!row.cells.length || row.cells.length !== rows[0].cells.length)))) {
     reject('OCR tables require explicit rows of confirmed item IDs')
   }

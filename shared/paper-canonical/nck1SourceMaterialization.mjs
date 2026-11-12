@@ -215,6 +215,10 @@ function validateCellContent(content, path, mediaReferences, issues) {
     issues.push(issue('MATERIALIZATION_TABLE_CELL_EMPTY', path, 'Table cells need ordered text or media content'))
     return
   }
+  // A captured blank cell is explicit empty text, not missing cell content.
+  if (content.length === 1 && isRecordValue(content[0])
+    && exactKeys(content[0], ['kind', 'text'])
+    && content[0].kind === 'text' && content[0].text === '') return
   for (const [index, item] of content.entries()) {
     const itemPath = `${path}[${index}]`
     if (
@@ -281,6 +285,11 @@ function validateTable(block, path, documents, mediaReferences, issues) {
     if (!isRecordValue(row) || !exactKeys(row, ['rowId', 'cells']) || !nonEmptyString(row.rowId) || !Array.isArray(row.cells)) {
       issues.push(issue('MATERIALIZATION_TABLE_ROW_INVALID', rowPath, 'Table rows are closed and identified'))
       continue
+    }
+    if (row.cells.length > 0 && row.cells.every(cell => Array.isArray(cell?.content)
+      && cell.content.every(item => item?.kind === 'text'
+        && typeof item.text === 'string' && !item.text.trim()))) {
+      issues.push(issue('MATERIALIZATION_TABLE_ROW_INVALID', rowPath, 'Table rows cannot contain only empty text cells'))
     }
     const occupied = new Set(activeRowSpans.keys())
     for (const [cellIndex, cell] of row.cells.entries()) {
