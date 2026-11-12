@@ -40,7 +40,7 @@ import { prepareSourceReferenceCellContinuations, replaySourceReferenceCellConti
 import { importNck1ReviewCandidate, loadNck1ReviewSource, buildNck1OcrReviewProjection } from '../../server/import-review/revisionProjection.mjs'
 import { deriveOcrConfirmationRevision } from '../../server/import-review/finalizeComputation.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
-import { SOURCE_REFERENCE_REGION_TOLERANCE } from '../../server/paper-import/sourceReferences.mjs'
+import { SOURCE_REFERENCE_REGION_TOLERANCE, applyEssayTextCorrections } from '../../server/paper-import/sourceReferences.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import {
   NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2,
@@ -1200,7 +1200,7 @@ export function buildSourceReferences(materialization, evidence, confirmation,
   { sourceDocuments = [], paperName = materialization.paperName, onWritingCapture, figureExclusions = [],
     producerVersion = OCR_SOURCE_REFERENCES_PRODUCER_VERSION, absenceSidecar, sourceInput, sourceDigest, candidateDigest,
     cellContinuations = [], continuationSidecar, referenceSourceManifest, referenceSourceDocuments,
-    writingRoleDeclarations } = {}) {
+    writingRoleDeclarations, essayTextCorrections = [] } = {}) {
   const retainedImages = ['ocr-source-references-producer-v26', OCR_SOURCE_REFERENCES_PRODUCER_VERSION].includes(producerVersion)
     && confirmation.schemaVersion === 'nck1-ocr-source-confirmation-v1'
     && materialization.documents.some(document => document.mediaType === 'application/vnd.eqb.nck1-image-source-bundle+json')
@@ -1488,6 +1488,7 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     const unresolved = referenceFigures.filter(figure => !assignedFigures.has(figure) && !excludedFigures.includes(figure))
     throw new Error(`Reference figure has no surviving essay anchor or explicit scoring entry: ${unresolved.map(figure => figure.sourceRegionId).join(', ')}. Submit all explanation declarations together using repeated --figure with its own --figure-sha256, --anchor and --reason.`)
   }
+  applyEssayTextCorrections(groups, essayTextCorrections)
   const result = { groups, review, structuredScoring, ...(alternateAnswerScope ? { alternateAnswerScope } : {}),
     ...(source.roleDeclarations.declarations.length
       ? { writingRoleDeclarations: source.roleDeclarations.declarations } : {}),
@@ -1564,6 +1565,9 @@ function references(paperId) {
   // Optional agent-declared writing roles, retained with the sealed artifact
   // so sealed replay and admission consume the same declared transitions.
   const writingRoleDeclarations = readSourceReferenceWritingRoles(work, { materialization, confirmation })
+  const correctionsPath = path.join(work, 'source-reference-text-corrections.json')
+  const essayTextCorrections = existsSync(correctionsPath)
+    ? readJson(correctionsPath, 'Essay text corrections').entries : []
   const referenceDocuments = confirmation.schemaVersion === 'nck1-ocr-source-confirmation-v1'
     ? referenceSourceManifest.documents.map(document => ({ ...document,
       bytes: new Uint8Array(readFileSync(path.join(paperDir, document.path))) })) : documents
@@ -1573,10 +1577,11 @@ function references(paperId) {
   } }
   const { groups, review, structuredScoring, schemaVersion, figureExclusions, producerVersion, alternateAnswerScope } = buildSourceReferences(materialization, evidence, confirmation,
     { sourceDocuments: referenceDocuments, sourceInput, paperName, referenceSourceManifest,
-      figureExclusions: retained?.figureExclusions ?? [], writingRoleDeclarations })
+      figureExclusions: retained?.figureExclusions ?? [], writingRoleDeclarations, essayTextCorrections })
   writeJson(output, { schemaVersion: schemaVersion || (structuredScoring ? 'source-references-v2' : 'source-references-v1'), paperId, sourceDigest: null, candidateDigest: null,
     materializationDigest: null, groups, producerVersion, ...(figureExclusions ? { figureExclusions } : {}),
     ...(writingRoleDeclarations?.length ? { writingRoleDeclarations } : {}),
+    ...(essayTextCorrections.length ? { essayTextCorrections } : {}),
     ...(alternateAnswerScope ? { alternateAnswerScope } : {}) })
   console.log(JSON.stringify({
     ok: true,

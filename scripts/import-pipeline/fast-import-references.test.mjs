@@ -166,6 +166,21 @@ test('producer and driver import the same pure version constant; current results
   assertReferenceProductsReady(ctx)
 })
 
+test('essay errata changes invalidate finalized reference cache until declarations match', t => {
+  const { ctx } = fixture(t)
+  const file = path.join(ctx.work, 'source-reference-text-corrections.json')
+  const finalized = path.join(ctx.paperDir, 'source-references-v1.json')
+  const entries = [{ paragraphId: 'sample-p1', before: 'popcom', after: 'popcorn', reason: '流传版错字' }]
+  json(file, { entries })
+  assert.throws(() => assertReferenceProductsReady(ctx), { code: 'SOURCE_REFERENCES_FINISH_REQUIRED' })
+  json(finalized, { ...JSON.parse(readFileSync(finalized)), essayTextCorrections: entries })
+  assertReferenceProductsReady(ctx)
+  json(file, { entries: [{ ...entries[0], reason: '补充原页依据' }] })
+  assert.throws(() => assertReferenceProductsReady(ctx), { code: 'SOURCE_REFERENCES_FINISH_REQUIRED' })
+  json(file, { entries: [] })
+  assert.throws(() => assertReferenceProductsReady(ctx), { code: 'SOURCE_REFERENCES_FINISH_REQUIRED' })
+})
+
 for (const profileId of ['national-legacy', 'zhejiang-legacy']) for (const bindingIn of ['state', 'config']) {
   test(`${profileId} authored OCR report from ${bindingIn} requires exact projection before reuse`, async t => {
     const { ctx, calls, options } = fixture(t)

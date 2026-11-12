@@ -2,7 +2,7 @@ import { sourceReferenceScoringScopes, sourceReferenceObjectiveFigures, sourceRe
 import { sourceReferenceExplanationFigures } from './sourceReferenceFigureExclusions.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceFigures,
-  SOURCE_REFERENCE_REGION_TOLERANCE, parseSourceReferencesBytes, sourceReferenceSourceView } from './sourceReferences.mjs'
+  SOURCE_REFERENCE_REGION_TOLERANCE, parseSourceReferencesBytes, sourceReferenceSourceView, correctedEssayText } from './sourceReferences.mjs'
 import { resolveConfirmedNck1OcrEvidence, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION,
   NCK1_OCR_EVIDENCE_SCHEMA_VERSION, nck1ReferenceOcrSourceDocuments, resolveReferenceSourceDocuments } from './nck1OcrSourceEvidence.mjs'
 import { assertSourceReferenceFigureReplay } from './sourceReferenceImages.mjs'
@@ -127,6 +127,12 @@ function assertSourceReferenceContent({
     sidecar = sourceReferenceSourceView(sidecar)
   }
   const sealedRoleDeclarations = sidecar?.writingRoleDeclarations
+  const essayTextCorrections = sidecar?.essayTextCorrections ?? []
+  if (essayTextCorrections.length && (producerVersion !== OCR_SOURCE_REFERENCES_PRODUCER_VERSION
+    || sidecar.wholeDocumentWritingAbsence || sourceReferenceCellContinuations(sidecar).length
+    || !canonicalSourceInput.ocrSourceBytes?.confirmationBytes && !referenceOcrSourceBytes?.confirmationBytes)) {
+    reject('Essay text corrections require current confirmed OCR without absence or cell continuation')
+  }
   let resolvedRoleDeclarations = null
   const roleDeclarations = confirmation => resolvedRoleDeclarations ??= resolveWritingRoleDeclarations(
     validateWritingRoleDeclarations(sealedRoleDeclarations, { materialization, confirmation }))
@@ -165,7 +171,7 @@ function assertSourceReferenceContent({
     sourceInput = { ...canonicalSourceInput, ocrSourceBytes: referenceOcrSourceBytes }
     const baseline = buildSourceReferences(materialization, evidence, confirmation, {
       producerVersion, sourceInput, sourceDocuments: supplied, sourceDigest, candidateDigest, referenceSourceDocuments,
-      writingRoleDeclarations: sealedRoleDeclarations,
+      writingRoleDeclarations: sealedRoleDeclarations, essayTextCorrections,
     })
     if (baseline.alternateAnswerScope || digestJson(sidecar?.groups ?? null) !== digestJson(baseline.groups)) {
       reject('Reference-only v1 groups must exactly replay the current producer')
@@ -207,7 +213,7 @@ function assertSourceReferenceContent({
         const baseline = buildSourceReferences(materialization, evidence, confirmation, {
           producerVersion, sourceInput, sourceDocuments: sourceInput.documents, sourceDigest, candidateDigest,
           figureExclusions: sidecar.figureExclusions ?? [],
-          writingRoleDeclarations: sealedRoleDeclarations,
+          writingRoleDeclarations: sealedRoleDeclarations, essayTextCorrections,
         })
         // v6's subsequent replay independently rebuilds and compares all groups
         // after the reviewed cell transformation; ordinary content compares here.
@@ -310,7 +316,7 @@ function assertSourceReferenceContent({
     const baseline = buildSourceReferences(materialization, evidence, confirmation, {
       producerVersion, sourceInput, sourceDocuments: sourceInput.documents, sourceDigest, candidateDigest,
       figureExclusions: sidecar.figureExclusions ?? [],
-      writingRoleDeclarations: sealedRoleDeclarations,
+      writingRoleDeclarations: sealedRoleDeclarations, essayTextCorrections,
     })
     // Preserve the established prose whitespace/hyphen matching view. Labels,
     // ownership, ordering, paragraph roles and every source locator stay exact.
@@ -443,8 +449,10 @@ function assertSourceReferenceContent({
       && owner?.capturing && owner.labelItemId === surviving[0].itemId
       && owner.task === text.group.taskType
       ? sourceReferenceWritingTaskHeading(surviving, 0, { producerVersion, inWriting: true }) : null
-    const replayText = merged?.bare && merged.started === owner.task && merged.mergedLabel
+    let replayText = merged?.bare && merged.started === owner.task && merged.mergedLabel
       ? merged.mergedLabel : surviving.map(item => item.text).join(' ')
+    if (text.kind === 'essays' && text.paragraphId) replayText = correctedEssayText(replayText,
+      essayTextCorrections.filter(correction => correction.paragraphId === text.paragraphId))
     if (fragments.some(fragment => !fragment.length) || new Set(surviving).size !== surviving.length
       || joinedText(replayText) !== joinedText(text.text)) {
       reject('Reference text must replay surviving confirmed OCR items; image observations cannot reappear as prose, labels or table cells')

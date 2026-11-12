@@ -344,6 +344,35 @@ function v2ReplayFixture() {
   return { input, v1, v2 }
 }
 
+test('essay errata build and replay only exact declared short replacements', () => {
+  const input = textInput([historicalTexts.map(text => text === 'An original application sample.'
+    ? 'Bemard sold popcom.' : text)])
+  const raw = capture(input)
+  const paragraphId = raw.groups[0].essays.entries[0].paragraphs[0].paragraphId
+  const entries = [{ paragraphId, before: 'popcom', after: 'popcorn', reason: '流传版 rn 误印为 m' },
+    { paragraphId, before: 'Bemard', after: 'Bernard', reason: '上下文人名 Bernard' }]
+  const build = essayTextCorrections => buildSourceReferences(input.materialization, input.evidence, input.confirmation,
+    { sourceDocuments: input.sourceInput.documents, sourceInput: input.sourceInput, essayTextCorrections })
+  const sidecar = { ...raw, groups: build(entries).groups, essayTextCorrections: entries }
+  assert.equal(sidecar.groups[0].essays.entries[0].paragraphs[0].text, 'Bernard sold popcorn.')
+  assertSourceReferenceAdmission({ ...input, sidecar })
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: { ...sidecar, essayTextCorrections: [] } }))
+  for (const change of [
+    { before: 'absent' }, { before: 'o' }, { before: 'x'.repeat(81) },
+    { after: 'x'.repeat(81) }, { reason: ' ' },
+    { paragraphId: raw.groups[0].scoring.entries[0].paragraphs[0].paragraphId },
+    { paragraphId: 'foreign-paragraph' },
+  ]) {
+    const invalid = [{ ...entries[0], ...change }]
+    assert.throws(() => build(invalid))
+    assert.throws(() => assertSourceReferenceAdmission({ ...input,
+      sidecar: { ...sidecar, essayTextCorrections: invalid } }))
+  }
+  const altered = structuredClone(sidecar)
+  altered.groups[0].scoring.entries[0].paragraphs[0].text += 'modified'
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: altered }))
+})
+
 test('current admission collapses exactly two reprints of a sample paragraph without changing inputs', () => {
   const sample = 'An original application sample.'
   const continuation = 'An original continuation sample.'

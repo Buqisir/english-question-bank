@@ -97,6 +97,36 @@ export function sourceReferenceBlocks(entry) {
   return entry.blocks ?? entry.paragraphs.map(paragraph => ({ kind: 'paragraph', paragraph }))
 }
 
+// Exact circulated-source errata only; callers supply the uncorrected OCR replay.
+export function correctedEssayText(text, corrections) {
+  const original = text
+  for (const { before, after } of corrections) {
+    if (original.indexOf(before) < 0 || original.indexOf(before) !== original.lastIndexOf(before)
+      || text.indexOf(before) < 0 || text.indexOf(before) !== text.lastIndexOf(before)) {
+      throw new Error('Essay correction before must occur exactly once in the original paragraph')
+    }
+    text = text.replace(before, () => after)
+  }
+  return text
+}
+
+export function applyEssayTextCorrections(groups, corrections = []) {
+  if (!Array.isArray(corrections)) throw new Error('Essay corrections must be an array')
+  const paragraphs = groups.flatMap(group => group.essays.entries.flatMap(entry =>
+    sourceReferenceBlocks(entry).filter(block => block.kind === 'paragraph').map(block => block.paragraph)))
+  for (const correction of corrections) {
+    if (!correction || Object.keys(correction).sort().join(',') !== 'after,before,paragraphId,reason'
+      || !['before', 'after'].every(key => typeof correction[key] === 'string'
+        && correction[key].trim() && correction[key].length <= 80)
+      || typeof correction.reason !== 'string' || !correction.reason.trim()
+      || paragraphs.filter(p => p.paragraphId === correction.paragraphId).length !== 1) {
+      throw new Error('Essay correction requires an essay paragraphId, short before/after and reason')
+    }
+  }
+  for (const paragraph of paragraphs) paragraph.text = correctedEssayText(paragraph.text,
+    corrections.filter(correction => correction.paragraphId === paragraph.paragraphId))
+}
+
 // The original source state/evidence and every source entry survive supplements.
 export function sourceReferenceSourceView(sidecar) {
   if (sidecar?.schemaVersion !== 'source-references-v7') return sidecar
