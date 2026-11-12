@@ -1128,7 +1128,7 @@ function reconciliationReceipt(ctx, origin) {
         zeroCandidateAttempt(ctx, push, receipt.failurePath, statusReceipt.observedAt)
         if (observation.candidates.length !== 0) continue
       } else if (stableStringify(attemptFailure(ctx, push, receipt.failurePath, failure)) !== stableStringify(receipt.failure)) continue
-      return true
+      return receipt
     }
   } catch { return false }
   return false
@@ -1136,6 +1136,37 @@ function reconciliationReceipt(ctx, origin) {
 
 function reconciledPush(ctx) {
   try { return reconciliationReceipt(ctx, reconciliationOrigin()) } catch { return false }
+}
+
+export async function rebindRejectedIssue(ctx, resolves, { readStatus, origin } = {}) {
+  const fix = ctx.state.data.feedbackFix
+  origin ||= reconciliationOrigin()
+  const receipt = reconciliationReceipt(ctx, origin)
+  const issues = [...new Set(String(resolves || '').split(',').map(id => id.trim()).filter(Boolean))]
+  if (!fix?.baseRevisionId || !issues.length || issues.some(id => id.startsWith('--'))
+    || receipt?.failure?.httpStatus !== 409
+    || receipt.failure.errorCode !== 'IMPORT_REVIEW_ISSUE_RESOLUTION_INVALID') {
+    fail('rebind-rejected-issue：需要 feedback-fix 和最新 push 的 409 IMPORT_REVIEW_ISSUE_RESOLUTION_INVALID 对账收据')
+  }
+  if (!readStatus && target.local) fail('rebind-rejected-issue：需要生产 Review 绑定')
+  const raw = await (readStatus || (() => {
+    const result = spawnSync(process.execPath, cli('review.mjs', 'status', ctx.paperId, '--raw-response'),
+      { cwd: root, env: reviewEnv, encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 })
+    if (result.error || result.status !== 0 || result.signal) fail('rebind-rejected-issue：Review status 读取失败')
+    return result.stdout
+  }))()
+  const status = JSON.parse(raw)
+  statusObservation(raw, ctx.paperId, ctx.state.steps.push.startedAt)
+  if (status.latestRevisionId !== fix.baseRevisionId || status.latest?.id !== fix.baseRevisionId
+    || status.latest.state !== 'changes_requested' || !Array.isArray(status.issues)
+    || issues.some(id => !status.issues.some(issue => issue.id === id && issue.paperId === ctx.paperId
+      && issue.revisionId === fix.baseRevisionId && issue.state === 'open'))
+    || digestJson(reconciliationReceipt(ctx, origin)) !== digestJson(receipt)) {
+    fail('rebind-rejected-issue：最新修订须仍为原 changes_requested，issue 须属于该修订且为 open')
+  }
+  archive(ctx, ctx.statePath, 'rebind-rejected-issue-')
+  ctx.state.data.feedbackFix = { ...fix, issues, reboundAt: new Date().toISOString() }
+  save(ctx)
 }
 
 export async function reconcilePush(ctx, failurePath, { readStatus, origin } = {}) {
@@ -1400,6 +1431,10 @@ export async function finish(ctx, args, { referenceStages = {}, readStatus } = {
 // blocking; `--resolves` carries Owner issues fixed by this revision.
 export async function submit(ctx, args) {
   const resolves = option(args, '--resolves')
+  if (args.includes('--rebind-rejected-issue')) {
+    if (args.includes('--local-preview')) fail('rebind-rejected-issue 不允许 local-preview')
+    await rebindRejectedIssue(ctx, resolves)
+  }
   if (ctx.state.data.feedbackFix) {
     const supplied = new Set(String(resolves || '').split(',').map(id => id.trim()).filter(Boolean))
     const expected = ctx.state.data.feedbackFix.issues
