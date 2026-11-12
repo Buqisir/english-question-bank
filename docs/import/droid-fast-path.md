@@ -83,6 +83,24 @@ Owner 仅授权本地完成时，必须先把 Review 绑定到已核实的隔离
 
 ### 辅助命令
 
+范文流传版的明显错字可写入 `imports/ocr-proofread/<id>/source-reference-text-corrections.json`：
+`{"entries":[{"paragraphId":"<原范文 paragraphId>","before":"popcom","after":"popcorn","reason":"2020 新高考 II 续写：上下文为爆米花，流传版 rn 误印为 m"}]}`。
+从本卷 `source-references-v1.json` 的 essays 段落复制稳定 `paragraphId`，每段单独声明；
+`before` 必须在原段恰好出现一次，before/after 各不超过 80 字符，reason 写明原文→改后及依据。
+同一段所有 before 的长度之和不得超过 `min(80, 原段长度 × 20%)`，不能拆成多条绕过。
+只用于 essays，不改评分表、题文或答案；不与整卷缺失声明、跨页单元格续接混用。
+声明随 source references 封存并受既有摘要绑定，声明变化使缓存失效；不要修改封存 OCR。
+Screen 的官方范文来自 `groups[*].writingTask.officialModelAnswer`。改官方范文字母时，spelling-review
+和 source-reference-text-corrections 两处都要写；只改 spelling 漏写声明不由代码拦截。
+在 `source-flags/<页码>.json` 添加 `{"flags":[{"quote":"popcom","after":"popcorn","category":"spelling","reason":"流传版 rn 误印为 m"}]}`；
+多处命中同一 target 时分别用 context/occurrence 定位，语法漏词用 category `grammar`。
+`after-proofread <id> --redo-from spelling` 会生成并 finalize 拼写审查，修正 materialization 的范文投影。
+构建与 admission 只检查写了声明的段落与 Screen 官方范文对应文字一致；未声明段落保持原有行为，
+`officialModelAnswer` 为 null 时跳过两面一致性检查，只更正 sidecar。非官方补充范文（v7）不支持此声明入口，本 PR 不扩展。
+已送审卷先用下述 `finish --feedback-fix ... --redo-from source-references` 对账并归档；
+若尚未同步 spelling，首次 finish 会停在上述一致性检查。完成 spelling 重做后用普通 `finish <id>` 续跑，
+重新目检 Screen/PDF，再 `submit --resolves ...`；保留反馈事务，不重复启动 feedback-fix。
+
 - 网页退回后在原 paperId 修复：`fast-import.mjs finish <id> --feedback-fix <issueId[,issueId]> --redo-from <步骤>`。
   先只读确认生产最新 revision 正是本地送审的 `changes_requested`，且 issue 均未解决，再归档旧送审证据并重做。
   PDF 目检后用 `submit <id> --resolves <同一组issueId>` 重送；缺少或多出 issue 均拒绝。

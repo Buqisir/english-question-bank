@@ -994,6 +994,9 @@ function referencesCurrent(ctx) {
     const roleFile = existsSync(rolePath) ? readJson(rolePath) : null
     const declaredRoles = roleFile ? (roleFile.entries ?? roleFile) : []
     if (digestJson(declaredRoles) !== digestJson(finalized.writingRoleDeclarations ?? [])) return false
+    const correctionsPath = path.join(ctx.work, 'source-reference-text-corrections.json')
+    const corrections = existsSync(correctionsPath) ? readJson(correctionsPath).entries : []
+    if (digestJson(corrections) !== digestJson(finalized.essayTextCorrections ?? [])) return false
     // Any supported historical producer version is a cache hit as generated;
     // only missing/unsupported versions or a changed binding force a rebuild.
     // The draft/finalized pair keeps its declared version; the step marker
