@@ -40,7 +40,7 @@ import { prepareSourceReferenceCellContinuations, replaySourceReferenceCellConti
 import { importNck1ReviewCandidate, loadNck1ReviewSource, buildNck1OcrReviewProjection } from '../../server/import-review/revisionProjection.mjs'
 import { deriveOcrConfirmationRevision } from '../../server/import-review/finalizeComputation.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
-import { SOURCE_REFERENCE_REGION_TOLERANCE, applyEssayTextCorrections } from '../../server/paper-import/sourceReferences.mjs'
+import { SOURCE_REFERENCE_REGION_TOLERANCE, applyEssayTextCorrections, sourceReferenceBlocks } from '../../server/paper-import/sourceReferences.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import {
   NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2,
@@ -1489,6 +1489,16 @@ export function buildSourceReferences(materialization, evidence, confirmation,
     throw new Error(`Reference figure has no surviving essay anchor or explicit scoring entry: ${unresolved.map(figure => figure.sourceRegionId).join(', ')}. Submit all explanation declarations together using repeated --figure with its own --figure-sha256, --anchor and --reason.`)
   }
   applyEssayTextCorrections(groups, essayTextCorrections)
+  const joined = text => text.normalize('NFKC').replace(/-\s+/gu, '-').replace(/\s+/gu, '')
+  for (const group of groups) for (const entry of group.essays.entries) {
+    for (const block of sourceReferenceBlocks(entry)) {
+      if (block.kind !== 'paragraph' || !essayTextCorrections.some(c => c.paragraphId === block.paragraph.paragraphId)) continue
+      const answer = materialization.groups.find(item => item.groupId === group.groupId)?.writingTask?.officialModelAnswer
+      if (typeof answer !== 'string' || !joined(answer).includes(joined(block.paragraph.text))) {
+        throw new Error('Essay correction differs from Screen officialModelAnswer; apply the same spelling-review corrections before rebuilding references')
+      }
+    }
+  }
   const result = { groups, review, structuredScoring, ...(alternateAnswerScope ? { alternateAnswerScope } : {}),
     ...(source.roleDeclarations.declarations.length
       ? { writingRoleDeclarations: source.roleDeclarations.declarations } : {}),
@@ -1575,7 +1585,8 @@ function references(paperId) {
     evidenceBytes: readFileSync(path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME)),
     confirmationBytes: readFileSync(path.join(directory, 'nck1-ocr-source-confirmation-v1.json')),
   } }
-  const { groups, review, structuredScoring, schemaVersion, figureExclusions, producerVersion, alternateAnswerScope } = buildSourceReferences(materialization, evidence, confirmation,
+  const referenceMaterialization = essayTextCorrections.length ? loadNck1ReviewSource(paperDir).materialization : materialization
+  const { groups, review, structuredScoring, schemaVersion, figureExclusions, producerVersion, alternateAnswerScope } = buildSourceReferences(referenceMaterialization, evidence, confirmation,
     { sourceDocuments: referenceDocuments, sourceInput, paperName, referenceSourceManifest,
       figureExclusions: retained?.figureExclusions ?? [], writingRoleDeclarations, essayTextCorrections })
   writeJson(output, { schemaVersion: schemaVersion || (structuredScoring ? 'source-references-v2' : 'source-references-v1'), paperId, sourceDigest: null, candidateDigest: null,

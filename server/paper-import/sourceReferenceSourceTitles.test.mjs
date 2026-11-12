@@ -3,13 +3,15 @@ import { readFileSync } from 'node:fs'
 import { test } from 'node:test'
 import { textInput, historicalTexts, qingdaoTexts } from '../../test-fixtures/paper-import/source-title-compat/fixture.mjs'
 import { buildSourceReferences } from '../../scripts/import-pipeline/ocr-proofread.mjs'
-import { prepareSourceReferences, sourceReferenceBlocks, validateSourceReferences } from './sourceReferences.mjs'
+import { prepareSourceReferences, sourceReferenceBlocks, validateSourceReferences, correctedEssayText } from './sourceReferences.mjs'
+import { prepareSpellingReview, applySpellingReview } from './spellingReview.mjs'
+import { buildNck1CompatibilityPaperAsset } from '../import-review/revisionProjection.mjs'
 import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from './sourceReferenceAdmission.mjs'
 import { prepareSourceReferenceWritingItems, sourceReferenceWritingLifecycle } from './sourceReferenceWritingTask.mjs'
 import { isAnnotatedScoringLabel, isTaskLocalSampleOmission, isSourceTitleTranscriptCandidate } from './sourceReferenceWritingRules.mjs'
 import { usesAlternateAnswerScope, usesCellContinuation, usesV23WritingCapabilities,
   usesExplicitWritingTitles, usesGivenTitleWritingSamples, usesComposedWritingLabels, usesTitleAbbreviation } from './sourceReferenceSemantics.mjs'
-import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { sha256, digestJson } from '../../shared/paper-canonical/stable.mjs'
 
 const v26 = 'ocr-source-references-producer-v26'
 const capture = (input, producerVersion) => {
@@ -345,17 +347,36 @@ function v2ReplayFixture() {
 }
 
 test('essay errata build and replay only exact declared short replacements', () => {
+  const sample = 'Bemard sold popcom to his neighbors and worked carefully to help their family.'
   const input = textInput([historicalTexts.map(text => text === 'An original application sample.'
-    ? 'Bemard sold popcom.' : text)])
-  const raw = capture(input)
-  const paragraphId = raw.groups[0].essays.entries[0].paragraphs[0].paragraphId
+    ? sample : text)])
+  input.materialization.groups[0].writingTask.officialModelAnswer = sample
+  const paragraphId = capture(input).groups[0].essays.entries[0].paragraphs[0].paragraphId
   const entries = [{ paragraphId, before: 'popcom', after: 'popcorn', reason: '流传版 rn 误印为 m' },
     { paragraphId, before: 'Bemard', after: 'Bernard', reason: '上下文人名 Bernard' }]
   const build = essayTextCorrections => buildSourceReferences(input.materialization, input.evidence, input.confirmation,
     { sourceDocuments: input.sourceInput.documents, sourceInput: input.sourceInput, essayTextCorrections })
+  assert.throws(() => build(entries), /differs from Screen officialModelAnswer/)
+  const bytes = Buffer.from(JSON.stringify(input.materialization))
+  const report = { ...prepareSpellingReview(bytes), reviewedBy: 'import_agent', reviewedAt: '2026-11-12T00:00:00Z' }
+  report.targets = report.targets.map(target => ({ ...target, decision: 'correct',
+    corrections: entries.map(({ before, after, reason }) => ({ start: target.before.indexOf(before),
+      before, after, reason, category: 'spelling', certainty: 'unambiguous' })).sort((a, b) => a.start - b.start) }))
+  input.materialization = applySpellingReview(bytes, Buffer.from(JSON.stringify(report)))
+  const raw = capture(input)
   const sidecar = { ...raw, groups: build(entries).groups, essayTextCorrections: entries }
-  assert.equal(sidecar.groups[0].essays.entries[0].paragraphs[0].text, 'Bernard sold popcorn.')
+  const corrected = sample.replace('Bemard', 'Bernard').replace('popcom', 'popcorn')
+  assert.equal(sidecar.groups[0].essays.entries[0].paragraphs[0].text, corrected)
+  const screen = buildNck1CompatibilityPaperAsset({ config: { provenance: { paperName: '范文更正测试' } },
+    materialization: { ...input.materialization, answers: [], listening: { state: 'absent' },
+      groups: input.materialization.groups.map(group => ({ ...group, family: `${group.groupId}-writing`,
+        slotId: group.groupId, blocks: [], questions: [], optionBank: [],
+        writingTask: { ...group.writingTask, material: [], starters: [] } })) }, sourceAssetVersion: 'test' })
+  assert.equal(screen.content.writingTasks['writing-task:application'].officialModelAnswer, corrected)
   assertSourceReferenceAdmission({ ...input, sidecar })
+  const uncorrected = JSON.parse(bytes)
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, materialization: uncorrected,
+    sidecar: { ...sidecar, materializationDigest: digestJson(uncorrected) } }), /differs from Screen officialModelAnswer/)
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: { ...sidecar, essayTextCorrections: [] } }))
   for (const change of [
     { before: 'absent' }, { before: 'o' }, { before: 'x'.repeat(81) },
@@ -371,6 +392,12 @@ test('essay errata build and replay only exact declared short replacements', () 
   const altered = structuredClone(sidecar)
   altered.groups[0].scoring.entries[0].paragraphs[0].text += 'modified'
   assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: altered }))
+})
+
+test('essay correction budget accumulates all declarations against the original paragraph', () => {
+  const chunks = ['a'.repeat(68), 'b'.repeat(71), 'c'.repeat(71)]
+  assert.throws(() => correctedEssayText(chunks.join(''), chunks.map(before => ({ before, after: 'new' }))), /budget exceeded/)
+  assert.throws(() => correctedEssayText(chunks.join(''), [{ before: 'a'.repeat(50), after: 'new' }]), /budget exceeded/)
 })
 
 test('current admission collapses exactly two reprints of a sample paragraph without changing inputs', () => {

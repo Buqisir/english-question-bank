@@ -100,6 +100,9 @@ export function sourceReferenceBlocks(entry) {
 // Exact circulated-source errata only; callers supply the uncorrected OCR replay.
 export function correctedEssayText(text, corrections) {
   const original = text
+  if (corrections.reduce((sum, correction) => sum + correction.before.length, 0) > Math.min(80, original.length * .2)) {
+    throw new Error('Essay correction budget exceeded: per paragraph min(80 characters, 20% of original length)')
+  }
   for (const { before, after } of corrections) {
     if (original.indexOf(before) < 0 || original.indexOf(before) !== original.lastIndexOf(before)
       || text.indexOf(before) < 0 || text.indexOf(before) !== text.lastIndexOf(before)) {
