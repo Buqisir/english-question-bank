@@ -166,7 +166,7 @@ export function buildPreprocessingReport(projection, evidence, { baseDirectory =
     ['PDF 可视检查', ...checked('pdfVisual')],
     ['OCR', ...checked('ocr')],
   ]
-  const categories = { spelling: '拼写', grammar: '明确语法', whitespace: '重复空格', punctuation: '英文标点与空格', terminal_whitespace: '选项尾部空白' }
+  const categories = { spelling: '拼写', grammar: '明确语法', whitespace: '重复空格', punctuation: '英文标点与空格', source_mark: '流传版标点与空格', terminal_whitespace: '选项尾部空白' }
   const correctionTable = corrections.length
     ? '| 文本定位 | 类别 | 原文 | 修正 | 原因 |\n| --- | --- | --- | --- | --- |\n' + corrections.map(c => `| ${[c.jsonPointer, categories[c.category], c.before.replaceAll(' ', '␠').replaceAll('\t', '⇥'), c.after.replaceAll(' ', '␠').replaceAll('\t', '⇥'), c.sourceParagraphLocator ? `${c.reason}（源段 ${c.sourceParagraphLocator}）` : c.reason].map(cell).join(' | ')} |`).join('\n') + '\n\n表中 ␠ 表示普通空格，⇥ 表示 tab，仅用于显示差异，不写入试卷。'
     : spelling ? '本次审校未应用文本修正。' : '尚未运行，不能据此断言没有错误。'
