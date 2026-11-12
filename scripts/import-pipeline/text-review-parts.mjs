@@ -18,7 +18,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { crossesSourceEmphasis, loadSpellingSourceEmphasis } from './spelling-source-emphasis.mjs'
-import { isSpellingTokenCorrection } from '../../server/paper-import/spellingReview.mjs'
+import { isSourceMarkCorrection, isSpellingTokenCorrection } from '../../server/paper-import/spellingReview.mjs'
 
 function fail(message) {
   console.error(message)
@@ -253,7 +253,7 @@ function occurrences(text, flag, wholeWords, allowWrapped = false) {
 export function findSourceFlagTargets(targets, flag) {
   const uncertain = flag.decision === 'uncertain'
   const locate = (allowWrapped) => targets
-    .map((target) => ({ target, at: occurrences(target.before, flag, !uncertain, allowWrapped) }))
+    .map((target) => ({ target, at: occurrences(target.before, flag, !uncertain && flag.category !== 'source_mark', allowWrapped) }))
     .filter(({ at }) => at.length)
   const exact = locate(false)
   // Preserve every existing literal binding. Only rescue an otherwise missing
@@ -285,8 +285,10 @@ function auto(requestPath) {
       if (!String(flag.note || '').trim()) { problems.push(`${label}: uncertain flag needs a Chinese note`); continue }
     } else {
       const spelling = flag.category === 'spelling'
-      if (!spelling && flag.category !== 'grammar') { problems.push(`${label}: category must be spelling or grammar`); continue }
-      if (spelling ? !isSpellingTokenCorrection(flag.quote, flag.after)
+      const sourceMark = flag.category === 'source_mark'
+      if (!spelling && !sourceMark && flag.category !== 'grammar') { problems.push(`${label}: category must be spelling, grammar or source_mark`); continue }
+      if (sourceMark ? !isSourceMarkCorrection(flag.quote, flag.after) || !/\p{Script=Han}/u.test(flag.reason ?? '')
+        : spelling ? !isSpellingTokenCorrection(flag.quote, flag.after)
         : !GRAMMAR_WORDS.test(flag.quote) || !GRAMMAR_WORDS.test(String(flag.after))) {
         problems.push(`${label}: ${flag.category} quote/after must be ${spelling ? 'one whole spelling token with unchanged digit strings' : 'English words and spaces only'}`)
         continue
