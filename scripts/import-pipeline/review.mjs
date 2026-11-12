@@ -39,6 +39,7 @@ import {
 import {
   buildNck1OcrReviewProjection,
   buildNck1ReviewProjection,
+  buildNck1SealedReviewProjection,
   loadNck1ReviewSource,
   importNck1ReviewCandidate,
   ocrReviewBundleFilePaths,
@@ -670,7 +671,7 @@ async function hydrate(paperId) {
       mkdirSync(path.dirname(filePath), { recursive: true })
       writeFileSync(filePath, downloaded.bytes)
     }
-    const projection = buildNck1ReviewProjection(temporary, { requireAnalyses: false, expectedCandidateDigest: revision.candidateDigest })
+    const projection = buildNck1SealedReviewProjection(temporary, revision, { requireAnalyses: false })
     const identity = {
       sourceDigest: projection.sourceDigest,
       candidateDigest: projection.candidateDigest,
