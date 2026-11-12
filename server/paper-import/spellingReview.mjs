@@ -33,7 +33,7 @@ export function isSourceMarkCorrection(before, after) {
 }
 
 function sameNumbers(before, after) {
-  const numbers = (text) => JSON.stringify(text.match(/[-+−±$£€¥]?\d+(?:[.,:]\d+)*(?:%|°[CF]?)?/gu) ?? [])
+  const numbers = (text) => JSON.stringify(text.match(/[-+−±$£€¥]?\d+(?:[.:]\d+|,\d{3}(?!\d))*(?:%|°[CF]?)?/gu) ?? [])
   return numbers(before) === numbers(after)
 }
 

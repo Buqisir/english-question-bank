@@ -264,6 +264,9 @@ test('source_mark keeps numeric values, blanks and bracketed labels intact', () 
   assert.equal(isSourceMarkCorrection('Save 50% today.', 'Save 50 today.'), false)
   assert.equal(isSourceMarkCorrection('costs£5 each', 'costs 5 each'), false)
   assert.equal(isSourceMarkCorrection('Children£20', 'Children £20'), true)
+  // A comma before four digits is a date separator, not a thousands group.
+  assert.equal(isSourceMarkCorrection('June 1,1989 in', 'June 1, 1989 in'), true)
+  assert.equal(isSourceMarkCorrection('about 1,198 people', 'about 1, 198 people'), false)
 })
 
 test('source_mark rechecks numeric values on the whole corrected target', () => {
