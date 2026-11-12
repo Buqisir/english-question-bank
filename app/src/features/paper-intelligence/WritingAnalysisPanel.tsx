@@ -35,7 +35,7 @@ export function WritingAnalysisPanel({ analysis }: WritingAnalysisPanelProps): R
     return (
       <div className="pi-writing-panel">
         {/* 范文 / Model Answer */}
-        <div className="pi-writing-section">
+        {analysis.modelAnswer && <div className="pi-writing-section">
           <h4 className="pi-writing-section-title">范文 / Model Answer</h4>
           <div className="pi-writing-model-answer">
             {analysis.modelAnswer.split('\n').map((line, i) => (
@@ -44,7 +44,7 @@ export function WritingAnalysisPanel({ analysis }: WritingAnalysisPanelProps): R
               </p>
             ))}
           </div>
-        </div>
+        </div>}
 
         {/* 情节设计思路 / Continuation Design */}
         <div className="pi-writing-section">
@@ -85,7 +85,7 @@ export function WritingAnalysisPanel({ analysis }: WritingAnalysisPanelProps): R
   return (
     <div className="pi-writing-panel">
       {/* 范文 / Model Answer */}
-      <div className="pi-writing-section">
+      {analysis.modelAnswer && <div className="pi-writing-section">
         <h4 className="pi-writing-section-title">范文 / Model Answer</h4>
         <div className="pi-writing-model-answer">
           {analysis.modelAnswer.split('\n').map((line, i) => (
@@ -94,7 +94,7 @@ export function WritingAnalysisPanel({ analysis }: WritingAnalysisPanelProps): R
             </p>
           ))}
         </div>
-      </div>
+      </div>}
 
     </div>
   )

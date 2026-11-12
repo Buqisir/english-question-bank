@@ -337,8 +337,8 @@ export function validateWritingAnalysisCandidate(candidate) {
     throw new Error(`taskType must be 'application' or 'continuation', got: ${candidate.taskType}`)
   }
 
-  // Hard: modelAnswer non-empty
-  if (!candidate.modelAnswer || typeof candidate.modelAnswer !== 'string' || !candidate.modelAnswer.trim()) {
+  // A lecture may omit the generated essay; supplied essays retain the legacy checks.
+  if (candidate.modelAnswer !== undefined && (typeof candidate.modelAnswer !== 'string' || !candidate.modelAnswer.trim())) {
     throw new Error('modelAnswer is empty or missing.')
   }
   assertValidOfficialModelAnswer(candidate)
@@ -416,7 +416,7 @@ export function validateWritingAnalysisCandidate(candidate) {
     }
 
     // Hard: each item text non-empty + is substring of modelAnswer; note non-empty
-    const normAnswer = normalizeForSubstring(candidate.modelAnswer)
+    const normAnswer = candidate.modelAnswer === undefined ? null : normalizeForSubstring(candidate.modelAnswer)
     for (let i = 0; i < highlightExpressions.length; i++) {
       const item = highlightExpressions[i]
       if (!item || typeof item !== 'object') {
@@ -429,7 +429,7 @@ export function validateWritingAnalysisCandidate(candidate) {
         throw new Error(`highlightExpressions[${i}].note is empty or missing.`)
       }
       const normText = normalizeForSubstring(item.text)
-      if (!normAnswer.includes(normText)) {
+      if (normAnswer !== null && !normAnswer.includes(normText)) {
         throw new Error(
           `highlightExpressions[${i}].text not found in modelAnswer after normalization.\n` +
             `  text:   ${JSON.stringify(item.text)}\n` +
@@ -439,7 +439,8 @@ export function validateWritingAnalysisCandidate(candidate) {
     }
   }
 
-  // Soft: word count warning (SW-2: continuation floor = 120, application floor = 60)
+  // Soft: word count applies only to a supplied essay.
+  if (candidate.modelAnswer === undefined) return
   const wc = wordCount(candidate.modelAnswer)
   if (candidate.taskType === 'continuation') {
     if (wc < 120 || wc > 200) {

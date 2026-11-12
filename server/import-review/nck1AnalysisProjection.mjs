@@ -204,7 +204,8 @@ export function projectNck1StagedWritingAnalysis(raw) {
       fail('New-paper application analysis must not include retired highlightExpressions')
     }
     exactKeys(raw, [
-      'taskType', 'modelAnswer', 'reviewCard',
+      'taskType', 'reviewCard',
+      ...(raw.modelAnswer === undefined ? [] : ['modelAnswer']),
       ...(raw.officialModelAnswer === undefined ? [] : ['officialModelAnswer']),
     ], 'application staged analysis')
     if (!isApplicationReviewCardV2(raw.reviewCard)) {
@@ -212,7 +213,7 @@ export function projectNck1StagedWritingAnalysis(raw) {
     }
     return {
       taskType: 'application',
-      modelAnswer: raw.modelAnswer,
+      ...(raw.modelAnswer === undefined ? {} : { modelAnswer: raw.modelAnswer }),
       reviewCard: structuredClone(raw.reviewCard),
       ...(typeof raw.officialModelAnswer === 'string' && raw.officialModelAnswer.trim()
         ? { officialModelAnswer: raw.officialModelAnswer }
@@ -221,7 +222,8 @@ export function projectNck1StagedWritingAnalysis(raw) {
   }
   if (raw.taskType === 'continuation') {
     exactKeys(raw, [
-      'taskType', 'modelAnswer', 'continuationAnalysis',
+      'taskType', 'continuationAnalysis',
+      ...(raw.modelAnswer === undefined ? [] : ['modelAnswer']),
       ...(raw.officialModelAnswer === undefined ? [] : ['officialModelAnswer']),
     ], 'continuation staged analysis')
     if (!raw.continuationAnalysis || typeof raw.continuationAnalysis !== 'object') {
@@ -235,7 +237,7 @@ export function projectNck1StagedWritingAnalysis(raw) {
     }
     return {
       taskType: 'continuation',
-      modelAnswer: raw.modelAnswer,
+      ...(raw.modelAnswer === undefined ? {} : { modelAnswer: raw.modelAnswer }),
       ...(typeof raw.officialModelAnswer === 'string' && raw.officialModelAnswer.trim()
         ? { officialModelAnswer: raw.officialModelAnswer }
         : {}),
@@ -318,7 +320,7 @@ export function validateNck1StagedAnalysis(request, raw) {
     if (!validateWritingSchema(envelope)) fail(`Writing analysis schema invalid: ${formatSchemaErrors(validateWritingSchema.errors)}`)
     validateWritingAnalysisCandidate(writing)
     if (key === 'continuation') validateNarrativeContinuationAnalysis(writing.continuationAnalysis, { writingTask })
-    else validateApplicationModelAnswer({ modelAnswer: writing.modelAnswer, writingTask, groupPassage: group })
+    else if (writing.modelAnswer !== undefined) validateApplicationModelAnswer({ modelAnswer: writing.modelAnswer, writingTask, groupPassage: group })
     return { ok: true, warnings: [] }
   }
   const answers = Object.values(authority)

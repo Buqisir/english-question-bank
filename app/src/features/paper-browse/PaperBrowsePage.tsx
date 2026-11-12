@@ -262,7 +262,7 @@ function isRenderableWritingAnalysis(value: unknown): value is WritingAnalysis {
   const analysis = value as Record<string, unknown>
   if (
     !['application', 'continuation'].includes(String(analysis.taskType ?? ''))
-    || typeof analysis.modelAnswer !== 'string'
+    || (analysis.modelAnswer !== undefined && typeof analysis.modelAnswer !== 'string')
   ) return false
   if (analysis.taskType === 'application') {
     return (
@@ -1023,10 +1023,10 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           try {
             const response = await fetch(`${resolvedBase}/source-references-v1.json`)
             const references = response.ok ? await response.json() : null
-            if (references?.schemaVersion === 'source-references-v7' && references.paperId === paperId) {
+            if (/^source-references-v[1-7]$/.test(references?.schemaVersion ?? '') && references.paperId === paperId) {
               unofficialByGroup = Object.fromEntries(references.groups.map(
                 (group: { groupId: string; essays: { entries: UnofficialReferenceEssay[] } }) => [
-                  group.groupId, group.essays.entries.filter(essay => essay.provenance === 'unofficial'),
+                  group.groupId, group.essays.entries.filter(essay => essay.provenance === 'unofficial' || essay.authority === 'source_reference'),
                 ],
               ))
             }
@@ -2720,9 +2720,16 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       />
     )
     if (entry.kind === 'writing') {
+      // Historical analysis keeps its original answer display; source essays
+      // supply lectures that omit a generated/retained official essay.
+      const referenceEssays = unofficialEssays[groupId]?.filter(essay =>
+        essay.provenance === 'unofficial'
+        || !(writingLectureEntry?.kind === 'writing'
+          && (writingLectureEntry.analysis.modelAnswer !== undefined
+            || writingLectureEntry.analysis.officialModelAnswer !== undefined)))
       const answerBoxOpensLecture = (
         !lectureOpen
-        && ((unofficialEssays[groupId]?.length ?? 0) > 0 || hasCompleteApplicationLecturePayload({
+        && ((referenceEssays?.length ?? 0) > 0 || hasCompleteApplicationLecturePayload({
           sourceTaskType,
           analysis: writingLectureEntry?.kind === 'writing'
             ? writingLectureEntry.analysis
@@ -2734,7 +2741,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           pageModel={entry.model.pageModel}
           retainedModelAnswer={retainedLecture?.modelAnswer}
           retainedOfficialModelAnswer={retainedLecture?.officialModelAnswer}
-          unofficialReferenceEssays={isPanelGroup ? unofficialEssays[groupId] : undefined}
+          unofficialReferenceEssays={isPanelGroup ? referenceEssays : undefined}
           onAnswerBoxActivate={
             lectureOpen || answerBoxOpensLecture
               ? () => {

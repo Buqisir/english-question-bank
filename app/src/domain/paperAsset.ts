@@ -263,7 +263,7 @@ export type WritingAnalysis = ApplicationWritingAnalysis | ContinuationWritingAn
 
 export type ApplicationWritingAnalysis = {
   taskType: 'application'
-  modelAnswer: string
+  modelAnswer?: string
   officialModelAnswer?: string
   reviewCard?: ReviewCard
   highlightExpressions?: HighlightExpression[]
@@ -277,14 +277,14 @@ export type ContinuationWritingAnalysis =
 
 export type ContinuationWritingAnalysisV1 = {
   taskType: 'continuation'
-  modelAnswer: string
+  modelAnswer?: string
   officialModelAnswer?: string
   continuationAnalysis: ContinuationAnalysis
 }
 
 export type ContinuationWritingAnalysisLegacy = {
   taskType: 'continuation'
-  modelAnswer: string
+  modelAnswer?: string
   officialModelAnswer?: string
   continuationDesign: ContinuationDesign
   highlightExpressions: HighlightExpression[]

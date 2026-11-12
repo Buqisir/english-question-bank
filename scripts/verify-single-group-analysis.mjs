@@ -139,10 +139,34 @@ try {
     assert.throws(() => validateNck1StagedAnalysis(drift, analysis), /authority disagree/)
 
     if (sourceGroup?.writingTask) {
+      const withoutModel = structuredClone(analysis)
+      delete withoutModel.modelAnswer
+      assert.equal(validateNck1StagedAnalysis(request, withoutModel).ok, true)
+      writeFileSync(candidatePath, JSON.stringify(withoutModel))
+      const noModelResult = run()
+      assert.equal(noModelResult.status, 0, `${key} without modelAnswer: ${noModelResult.stderr}`)
+      assert.equal(noModelResult.stderr, '', 'no absent-essay word-count warning')
+      for (const modelAnswer of ['', ' ', null, 42]) {
+        assert.throws(() => validateNck1StagedAnalysis(request, { ...withoutModel, modelAnswer }))
+      }
+      assert.throws(() => validateNck1StagedAnalysis(request,
+        { ...withoutModel, officialModelAnswer: 'Invented official answer' }), /source authority/)
+      if (key === 'application') {
+        assert.throws(() => validateNck1StagedAnalysis(request,
+          { ...analysis, modelAnswer: 'Dear Chris, Too short. Yours, Li Hua' }), /word count/)
+        const missingCard = structuredClone(withoutModel)
+        delete missingCard.reviewCard
+        assert.throws(() => validateNck1StagedAnalysis(request, missingCard), /keys|reviewCard/)
+      } else {
+        const badEvidence = structuredClone(withoutModel)
+        badEvidence.continuationAnalysis.storyUnderstanding.centralSituation.evidence[0].excerpt = 'FORGED'
+        assert.throws(() => validateNck1StagedAnalysis(request, badEvidence), /evidence excerpt/)
+      }
       const officialRequest = structuredClone(request)
       officialRequest.authoritativeAnswers.officialModelAnswer = 'A source-owned official sample.'
       officialRequest.sourceGroup.material.writingTask.officialModelAnswer = 'A source-owned official sample.'
       assert.equal(validateNck1StagedAnalysis(officialRequest, analysis).ok, true)
+      assert.equal(validateNck1StagedAnalysis(officialRequest, withoutModel).ok, true)
       assert.throws(() => validateNck1StagedAnalysis(officialRequest, { ...analysis, officialModelAnswer: 'FORGED' }), /does not match/)
       if (key === 'application') {
         assert.throws(() => validateNck1StagedAnalysis(request, { ...analysis, modelAnswer: analysis.modelAnswer.replace('Dear Chris,', 'Dear Robin,') }), /required given text/)
