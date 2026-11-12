@@ -259,6 +259,19 @@ test('source_mark keeps numeric values, blanks and bracketed labels intact', () 
     ['(A) word', 'A word'], ['.', ','],
   ]) assert.equal(isSourceMarkCorrection(before, after), false, before)
   assert.equal(isSourceMarkCorrection('Children £5. Seniors', 'Children £5, Seniors'), true)
+  assert.equal(isSourceMarkCorrection('Fill ___ with', 'Fill with ___'), false)
+})
+
+test('source_mark rechecks numeric values on the whole corrected target', () => {
+  const text = 'Children £5.20 each'
+  const bytes = Buffer.from(JSON.stringify({ groups: [{ questions: [{ stem: text }] }] }))
+  const report = prepareSpellingReview(bytes, TEXT_REVIEW_POLICY)
+  report.reviewedBy = 'import_agent'
+  report.reviewedAt = '2026-11-11T00:00:00Z'
+  Object.assign(report.targets[0], { decision: 'correct', corrections: [
+    { start: 0, before: 'Children £5.', after: 'Children £5', category: 'source_mark', certainty: 'unambiguous', reason: '修正流传标点' },
+  ] })
+  assert.throws(() => applySpellingReview(bytes, Buffer.from(JSON.stringify(report))), /numeric value/)
 })
 
 test('source_mark keeps an enclosing underline aligned at UTF-16 offsets', () => {

@@ -26,14 +26,15 @@ export function isSourceMarkCorrection(before, after) {
     && !/[\r\n\u2028\u2029]/u.test(before + after) && !/ {2}/u.test(after)
     && before.replace(/[^\p{L}\p{N}]/gu, '') === after.replace(/[^\p{L}\p{N}]/gu, '')
     && /[A-Za-z]/u.test(before)
-    // Numeric values (£5.20, 5,000, 10:30), blanks and bracketed labels stay intact.
-    && sameMatches(before, after, /\d+(?:[.,:]\d+)*/gu)
-    && sameMatches(before, after, /_+/gu)
-    && sameMatches(before, after, /[()[\]（）]/gu)
+    // Blanks and bracketed labels are never touched; numeric values are also
+    // rechecked on the whole corrected target in applySpellingReview.
+    && !/[_()[\]（）]/u.test(before + after)
+    && sameNumbers(before, after)
 }
 
-function sameMatches(before, after, pattern) {
-  return JSON.stringify(before.match(pattern) ?? []) === JSON.stringify(after.match(pattern) ?? [])
+function sameNumbers(before, after) {
+  const numbers = (text) => JSON.stringify(text.match(/\d+(?:[.,:]\d+)*/gu) ?? [])
+  return numbers(before) === numbers(after)
 }
 
 export const SPELLING_REVIEW_INSTRUCTIONS = `Review every supplied text target in its full group context against the immutable source.
@@ -259,6 +260,10 @@ export function applySpellingReview(materializationBytes, reportBytes) {
       end = correction.start + correction.before.length
     }
     corrected += target.before.slice(end)
+    if (target.corrections.some((correction) => correction.category === 'source_mark')
+      && !sameNumbers(target.before, corrected)) {
+      fail(`source_mark corrections must keep every numeric value at ${expected.jsonPointer}`)
+    }
     const keys = expected.jsonPointer.slice(1).split('/')
     const key = keys.pop()
     keys.reduce((node, part) => node[part], effective)[key] = corrected
