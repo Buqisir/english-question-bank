@@ -34,7 +34,8 @@ type WritingPageStyle = CSSProperties & Record<`--${string}`, string | number>
 
 export type UnofficialReferenceEssay = {
   referenceId: string
-  provenance: 'unofficial'
+  provenance?: 'unofficial'
+  authority?: 'source_reference'
   paragraphs: { paragraphId: string; role: string; text: string }[]
 }
 
@@ -323,7 +324,7 @@ function WritingPaperPageContent({
           case 'passage':
             return <div key={index} className="pi-writing-passage">{children}</div>
           case 'answerBox': {
-            const lectureOpenInBox = retainedModelAnswer !== undefined
+            const lectureOpenInBox = retainedModelAnswer !== undefined || retainedOfficialModelAnswer !== undefined
             const givenTop = block.givenTop.map((part, lineIndex) => {
                       const partKey = typeof part === 'string'
                         ? `t${lineIndex}`
@@ -479,8 +480,8 @@ function WritingPaperPageContent({
                 </div>
                 {unofficialReferenceEssays?.map(essay => (
                   <section key={essay.referenceId} className="retained-writing-answer-section"
-                    style={{ marginTop: 16 }} data-model-answer-source="unofficial">
-                    <h4 className="retained-writing-answer-label">非官方参考范文</h4>
+                    style={{ marginTop: 16 }} data-model-answer-source={essay.provenance === 'unofficial' ? 'unofficial' : 'official'}>
+                    <h4 className="retained-writing-answer-label">{essay.provenance === 'unofficial' ? '非官方参考范文' : '官方参考范文'}</h4>
                     <div className="retained-writing-answer-copy">
                       {essay.paragraphs.map(paragraph => (
                         <p key={paragraph.paragraphId} className="retained-writing-answer-line">{paragraph.text}</p>

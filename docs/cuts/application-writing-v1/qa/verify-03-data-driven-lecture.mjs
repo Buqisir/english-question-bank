@@ -132,6 +132,84 @@ try {
     })
   }
 
+  check('review-card-only application opens without a model answer', () => {
+    const { modelAnswer: omitted, ...analysis } = completeApplication
+    assert.equal(retained.getRetainedWritingLecture({
+      lectureOpen: true, panelGroupId: 'group-fixture-application',
+      groupId: 'group-fixture-application', sourceTaskType: 'application', analysis,
+    }), analysis)
+    const html = renderToStaticMarkup(createElement(retained.RetainedModelAnswer, {}))
+    assert.doesNotMatch(html, /AI 参考范文|data-model-answer-source/)
+  })
+
+  const pageProps = {
+    pageModel: { blocks: [{
+      kind: 'answerBox', label: '应用文答题区',
+      givenTop: ['Dear fellow students,'], givenBottom: ['The Student Council'],
+    }] },
+    children: null,
+  }
+  check('official-only retained answer stays visible without an AI answer', () => {
+    const html = renderToStaticMarkup(createElement(writingPaperPage.WritingPaperPage, {
+      ...pageProps, retainedOfficialModelAnswer: officialModelAnswer,
+    }))
+    assert.match(html, /pi-writing-answer-box--lecture-open/)
+    assert.match(html, /data-writing-answer-supplement[\s\S]*官方范文/)
+    assert.match(html, /sorting rubbish carefully/)
+    assert.doesNotMatch(html, /AI 参考范文|data-model-answer-source="ai"/)
+  })
+  check('source references retain official and unofficial provenance labels without AI essays', () => {
+    const html = renderToStaticMarkup(createElement(writingPaperPage.WritingPaperPage, {
+      ...pageProps,
+      unofficialReferenceEssays: [
+        { referenceId: 'source', authority: 'source_reference',
+          paragraphs: [{ paragraphId: 'source-p1', role: 'body', text: 'SOURCE-ESSAY' }] },
+        { referenceId: 'supplement', provenance: 'unofficial',
+          paragraphs: [{ paragraphId: 'supplement-p1', role: 'body', text: 'UNOFFICIAL-ESSAY' }] },
+      ],
+    }))
+    assert.match(html, /data-model-answer-source="official"[\s\S]*官方参考范文[\s\S]*SOURCE-ESSAY/)
+    assert.match(html, /data-model-answer-source="unofficial"[\s\S]*非官方参考范文[\s\S]*UNOFFICIAL-ESSAY/)
+    assert.doesNotMatch(html, /AI 参考范文|data-model-answer-source="ai"/)
+  })
+
+  const continuation = await vite.ssrLoadModule('/src/features/paper-browse/ContinuationAnalysisPanel.tsx')
+  const continuationDomain = await vite.ssrLoadModule('/src/domain/continuationAnalysis.ts')
+  const grounded = { statement: 'Source-grounded lecture', evidence: [] }
+  const continuationAnalysis = {
+    schemaVersion: 'continuation-analysis-v2',
+    storyUnderstanding: {
+      centralSituation: grounded, sourceEndState: grounded, narrativePerspective: grounded,
+      timeAndPlaceFrame: grounded, characters: [], relationships: [], causalChain: [],
+      unresolvedProblem: grounded, usableClues: [],
+      meaningDirection: { ...grounded, confidence: 'explicit' }, sourceStyle: grounded,
+    },
+    continuationContract: {
+      hardConstraints: [], softAffordances: [], openChoices: [],
+      forbiddenContradictions: [], paragraphs: [], closureRequirements: [],
+    },
+    developmentPlan: { selectedRoute: 'Source-grounded route', routeRationale: [], paragraphs: [] },
+  }
+  for (const analysis of [
+    { taskType: 'continuation', continuationAnalysis },
+    { taskType: 'continuation', continuationDesign: { theme: 'care', paragraphs: ['one', 'two'] },
+      highlightExpressions: [] },
+  ]) {
+    check(`continuation ${'continuationAnalysis' in analysis ? 'narrative' : 'legacy'} hides absent essay and retains official-only essay`, () => {
+      const html = renderToStaticMarkup(createElement(continuation.ContinuationAnalysisPanel, { analysis }))
+      assert.doesNotMatch(html, /data-continuation-section="modelAnswer"|生成参考范文/)
+      if ('continuationAnalysis' in analysis) {
+        assert.equal(continuationDomain.isNarrativeContinuationWritingAnalysis(analysis), true)
+        assert.match(html, /原文理解[\s\S]*续写约束[\s\S]*两段发展方案/)
+      }
+      const officialHtml = renderToStaticMarkup(createElement(continuation.ContinuationAnalysisPanel, {
+        analysis: { ...analysis, officialModelAnswer },
+      }))
+      assert.match(officialHtml, /官方参考范文[\s\S]*sorting rubbish carefully/)
+      assert.doesNotMatch(officialHtml, /生成参考范文/)
+    })
+  }
+
   const dualAnswerHtml = renderToStaticMarkup(
     createElement(retained.RetainedModelAnswer, {
       modelAnswer,
@@ -193,10 +271,10 @@ try {
   const cardHtml = renderToStaticMarkup(
     createElement(retained.RetainedReviewCard, { reviewCard }),
   )
-  check('the right side remains exactly the existing four-section review card', () => {
+  check('the right side remains exactly the existing three-section review card', () => {
     assert.deepEqual(
       [...cardHtml.matchAll(/data-review-section="([^"]+)"/g)].map((match) => match[1]),
-      ['basics', 'points', 'reader', 'value'],
+      ['basics', 'points', 'reader'],
     )
     assert.doesNotMatch(cardHtml, /AI 参考范文|官方范文|HIDDEN-HIGHLIGHT-EXPRESSION|亮点表达/)
   })

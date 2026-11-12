@@ -178,7 +178,7 @@ export function ContinuationAnalysisPanel({
   if (!display) {
     return (
       <div className="retained-writing-card continuation-analysis-card">
-        <section className="retained-writing-card-section" data-continuation-section="modelAnswer">
+        {(modelAnswer || officialModelAnswer) && <section className="retained-writing-card-section" data-continuation-section="modelAnswer">
           <h5>完整范文</h5>
           {officialModelAnswer && <h6 className="continuation-analysis-role">官方参考范文</h6>}
           {officialModelAnswer && (
@@ -186,11 +186,11 @@ export function ContinuationAnalysisPanel({
               {officialModelAnswer.split('\n').filter(Boolean).map((line, index) => <p key={index}>{line}</p>)}
             </div>
           )}
-          <h6 className="continuation-analysis-role">生成参考范文</h6>
+          {modelAnswer && <h6 className="continuation-analysis-role">生成参考范文</h6>}
           <div className="continuation-analysis-model-answer">
-            {modelAnswer.split('\n').filter(Boolean).map((line, index) => <p key={index}>{line}</p>)}
+            {modelAnswer?.split('\n').filter(Boolean).map((line, index) => <p key={index}>{line}</p>)}
           </div>
-        </section>
+        </section>}
       </div>
     )
   }
@@ -368,7 +368,7 @@ export function ContinuationAnalysisPanel({
         </dl>
       </section>
 
-      <section className="retained-writing-card-section" data-continuation-section="modelAnswer">
+      {(modelAnswer || officialModelAnswer) && <section className="retained-writing-card-section" data-continuation-section="modelAnswer">
         <h5>完整范文</h5>
         {officialModelAnswer && <h6 className="continuation-analysis-role">官方参考范文</h6>}
         {officialModelAnswer && (
@@ -376,13 +376,13 @@ export function ContinuationAnalysisPanel({
             {officialModelAnswer.split('\n').filter(Boolean).map((line, index) => <p key={index}>{line}</p>)}
           </div>
         )}
-        <h6 className="continuation-analysis-role">生成参考范文</h6>
+        {modelAnswer && <h6 className="continuation-analysis-role">生成参考范文</h6>}
         <div className="continuation-analysis-model-answer">
-          {modelAnswer.split('\n').filter(Boolean).map((line, index) => (
+          {modelAnswer?.split('\n').filter(Boolean).map((line, index) => (
             <p key={index}>{line}</p>
           ))}
         </div>
-      </section>
+      </section>}
     </div>
   )
 }
