@@ -637,16 +637,19 @@ function listeningReviewSectionHtml() {
   if (!question) {
     return `<section class="rail-section listening-review-section" id="listening-review-section">
       <h2>听力核对</h2>
-      <p class="empty-state">在 Screen 点一道听力题，这里会显示听力原文、官方答案和音频检查结果。</p>
+      <p class="empty-state">在 Screen 点一道听力题，这里会显示${review.questions.some(question => question.provenance === 'unofficial') ? '听力稿及听力答案（非官方，据录音整理）' : '听力原文、官方答案'}和音频检查结果。</p>
     </section>`
   }
   const audio = review.audio
+  const unofficial = question.provenance === 'unofficial'
+  const answerLabel = unofficial ? '听力答案（非官方，据录音整理）' : '官方答案'
+  const answer = unofficial ? question.answer : question.officialAnswer
   if (['pending_external_playback_review', 'included_in_candidate_review'].includes(audio.state)) {
     return `<section class="rail-section listening-review-section" id="listening-review-section">
       <h2>听力核对 · 第 ${escapeHtml(question.questionNo)} 题</h2>
-      <div class="listening-review-answer"><span>官方答案</span><strong>${escapeHtml(question.officialAnswer)}</strong></div>
+      <div class="listening-review-answer"><span>${answerLabel}</span><strong>${escapeHtml(answer)}</strong></div>
       <div class="listening-review-transcript">
-        <h3>外部提交听力原文</h3>
+        <h3>${unofficial ? '听力稿（非官方，据录音整理）' : '外部提交听力原文'}</h3>
         ${question.transcriptSegments.map((segment) => `<div class="listening-transcript-segment"><p>${escapeHtml(segment.text)}</p><span>覆盖第 ${escapeHtml(segment.questionNumbers.join('、'))} 题</span></div>`).join('')}
       </div>
       <div class="listening-audio-evidence">
@@ -658,15 +661,15 @@ function listeningReviewSectionHtml() {
       </div>
     </section>`
   }
-  const basisLabel = audio.comparison.basis === 'authoritative_transcript'
+  const basisLabel = unofficial ? '听力稿（非官方，据录音整理）' : audio.comparison.basis === 'authoritative_transcript'
     ? '官方听力原文'
     : '听力题目'
   const quick = audio.scope?.kind === 'first_dialogue'
   return `<section class="rail-section listening-review-section" id="listening-review-section">
     <h2>听力核对 · 第 ${escapeHtml(question.questionNo)} 题</h2>
-    <div class="listening-review-answer"><span>官方答案</span><strong>${escapeHtml(question.officialAnswer)}</strong></div>
+    <div class="listening-review-answer"><span>${answerLabel}</span><strong>${escapeHtml(answer)}</strong></div>
     <div class="listening-review-transcript">
-      <h3>听力原文</h3>
+      <h3>${unofficial ? '听力稿（非官方，据录音整理）' : '听力原文'}</h3>
       ${question.transcriptSegments.map((segment) => `<div class="listening-transcript-segment"><p>${escapeHtml(segment.text)}</p><span>覆盖第 ${escapeHtml(segment.questionNumbers.join('、'))} 题</span></div>`).join('')}
     </div>
     <div class="listening-audio-evidence">

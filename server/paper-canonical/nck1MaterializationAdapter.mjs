@@ -175,6 +175,7 @@ function canonicalSlotId(slotId) {
 }
 
 function sourceRoles(role) {
+  if (role === 'unofficial_listening') return ['source_provenance']
   if (role === 'question_source') return ['question_source', 'source_provenance']
   if (role === 'official_answers') return ['official_answer_source', 'source_provenance']
   return ['question_source', 'official_answer_source', 'source_provenance']
@@ -508,7 +509,7 @@ export function sourceOrderedParagraphEntries(blocks, path) {
   })
 }
 
-function validateDocxParagraphBoundaries(materialization, documentsById) {
+function validateDocxParagraphBoundaries(materialization, documentsById, listeningAudio) {
   const issues = []
   const paragraphsByDocumentId = new Map()
   const entriesByDocumentId = new Map()
@@ -550,6 +551,44 @@ function validateDocxParagraphBoundaries(materialization, documentsById) {
       entries,
       paragraphsByDocumentId.get(documentId),
     ))
+  }
+  for (const document of materialization.documents || []) {
+    if (document.role !== 'unofficial_listening') continue
+    try {
+      const paragraphs = extractDocxDocumentParagraphs(documentsById.get(document.documentId).bytes)
+      const text = paragraphs.map(paragraph => paragraph.text)
+      if (text[0] !== '非官方听力稿及答案（据录音 ASR 整理）'
+        || !listeningAudio || text[1] !== `录音 SHA-256：${listeningAudio.sha256}`
+        || !/^ASR attempt：\S.*$/u.test(text[2] || '')
+        || !/^evidence\.json：sha256:[a-f0-9]{64}；摘要：.+$/u.test(text[3] || '')) {
+        throw new Error('Supplemental DOCX must declare its audio digest, ASR attempt and evidence.json summary')
+      }
+      const claimed = new Set()
+      const resolve = locator => {
+        if (locator?.documentId !== document.documentId || locator.kind !== 'docx_part'
+          || locator.part !== 'word/document.xml') throw new Error('Unofficial source must bind the supplemental DOCX')
+        const matches = resolveDocxParagraphSelector(locator.selector, paragraphs)
+        if (matches.length !== 1 || claimed.has(matches[0].sourceIndex)) throw new Error('Unofficial paragraph must resolve uniquely')
+        claimed.add(matches[0].sourceIndex)
+        return matches[0].text
+      }
+      for (const [index, segment] of (materialization.listening.transcript || []).entries()) {
+        if (resolve(segment.source) !== `Text ${index + 1} | 题号：${segment.questionNumbers.join(',')} | 非官方，据录音整理 | ${segment.text}`) {
+          throw new Error('Unofficial transcript text or question binding differs from its DOCX paragraph')
+        }
+      }
+      for (const answer of materialization.listening.answers || []) {
+        const prefix = `${answer.canonicalNumber}. ${answer.value} | 非官方，据录音整理 | ASR 行号：`
+        const paragraph = resolve(answer.authority)
+        const evidence = paragraph.slice(prefix.length).match(/^([1-9]\d*)(?:-([1-9]\d*))? \| 证据：(.+)$/u)
+        const transcript = materialization.listening.transcript.find(segment => segment.questionNumbers.includes(answer.canonicalNumber))
+        if (answer.provenance !== 'unofficial' || !paragraph.startsWith(prefix) || !evidence
+          || Number(evidence[2] || evidence[1]) < Number(evidence[1])
+          || !transcript?.text.includes(evidence[3])) throw new Error('Unofficial answer number, value or quoted evidence differs from its DOCX')
+      }
+    } catch (error) {
+      issues.push(adapterIssue('MATERIALIZATION_UNOFFICIAL_LISTENING_SOURCE_INVALID', error.message, '$.listening'))
+    }
   }
   return issues
 }
@@ -660,7 +699,7 @@ function validateBundle(materialization, input, options) {
   if (documentsById.size !== (materialization?.documents || []).length) {
     issues.push(adapterIssue('MATERIALIZATION_SOURCE_DOCUMENT_SET_MISMATCH', 'Supplied source documents must exactly equal the materialization inventory', '$.documents'))
   }
-  issues.push(...validateDocxParagraphBoundaries(materialization, documentsById))
+  issues.push(...validateDocxParagraphBoundaries(materialization, documentsById, input.listeningAudio))
   for (const group of materialization?.groups || []) {
     for (const question of group.questions || []) {
       if (!question.figureLayout) continue
@@ -1362,7 +1401,7 @@ function appendListeningGroups(source, materialization, documentsById, listening
     for (const answer of relevantAnswers) {
       const observation = observationForLocator(
         `observation:listening:answer:${answer.canonicalNumber}`,
-        'listening_official_answer',
+        answer.provenance === 'unofficial' ? 'listening_unofficial_answer' : 'listening_official_answer',
         answer.authority,
         answer,
         documentsById,
@@ -1372,7 +1411,7 @@ function appendListeningGroups(source, materialization, documentsById, listening
         assertionId: `answer:listening:${answer.canonicalNumber}`,
         questionId: `question:listening:${answer.canonicalNumber}`,
         answer: answer.value,
-        authority: 'official',
+        authority: answer.provenance === 'unofficial' ? 'unofficial' : 'official',
         sourceSpanId: `source-span:${observation.observationId}`,
       })
     }

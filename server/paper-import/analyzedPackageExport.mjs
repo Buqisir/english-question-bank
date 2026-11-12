@@ -121,6 +121,9 @@ export function convertRepresentableNck1ReviewSourceToAnalyzedPackageFiles(
   loaded,
   { includeOriginalAttachments = false } = {},
 ) {
+  if (loaded.materialization.listening?.answers?.some(answer => answer.provenance === 'unofficial')) {
+    fail('listening.answers', '非官方听力答案不能转换为 official-answers.json', 'ANALYZED_PACKAGE_EXPORT_UNSUPPORTED')
+  }
   if (!Number.isInteger(Number(loaded.config.provenance?.year))) {
     fail('config.json/provenance/year', 'Raw Review cannot be faithfully converted without an integer year', 'ANALYZED_PACKAGE_EXPORT_UNSUPPORTED')
   }

@@ -35,6 +35,8 @@ const variants = [
 // The immediately preceding identities must remain inspectable, but may not
 // return stale contaminated transcripts as current producer cache hits.
 variants.push(
+  { ...variants[1], name: 'PDF with unofficial listening DOCX', unofficialListening: true },
+  { ...variants[2], name: 'OCR with unofficial listening DOCX', unofficialListening: true },
   { ...variants[0], name: 'DOCX previous v21', oldVersion: 'nck1-docx-materialization-producer-v21' },
   { ...variants[1], name: 'PDF previous v18', oldVersion: 'nck1-pdf-materialization-producer-v18' },
   ...[1, 2, 3].map(confirmationVersion => ({
@@ -45,7 +47,11 @@ variants.push(
 )
 
 function sourceWindow(root, variant) {
-  const documents = variant.carrier === 'docx' ? docx.sourceDocuments : pdfDocuments
+  const documents = [...(variant.carrier === 'docx' ? docx.sourceDocuments : pdfDocuments)]
+  if (variant.unofficialListening) documents.push({
+    ...docx.sourceDocuments.find(document => document.role === 'official_answers'),
+    documentId: 'unofficial-listening', role: 'unofficial_listening', path: 'unofficial-listening.docx',
+  })
   const manifest = variant.carrier === 'docx' ? docx.manifest : {
     schemaVersion: 'universal-nck1-source-manifest-v1', paperId: 'paper-synthetic-retained-receipt',
     materializationPath: 'materialization/nck1-source-materialization-v1.json',
