@@ -25,7 +25,7 @@ import {
   reviewBundleDigest,
 } from '../server/import-review/importReviewStore.mjs'
 import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
-import { reviewPrintHtml } from '../server/import-review/reviewPagination.mjs'
+import { reviewPrintHtml, renderReviewPdfProduct } from '../server/import-review/reviewPagination.mjs'
 import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
 import { NCK1_STAGED_ANALYSIS_FILES } from '../server/import-review/nck1AnalysisProjection.mjs'
 import {
@@ -1120,6 +1120,7 @@ function makeOnlinePromotionContext(
     analyzedPackage = false,
     publicPaper = false,
     preservePublicAnalyses = false,
+    ownerApproval = false,
     retainedAuthorityRef = null,
   } = {},
 ) {
@@ -1204,8 +1205,10 @@ function makeOnlinePromotionContext(
     })
   }
   const revision = reviewStore.finalizeRevision(created.revision.id)
+  const expectedScope = fixture.projection.analysisDigest ? 'layout_and_analysis' : 'layout_only'
   if (fixture.projection.importProfile) {
-    for (const [label, approvalScope] of [['omitted', undefined], ['mismatched', 'full_content']]) {
+    for (const [label, approvalScope] of [['omitted', undefined], ['mismatched', 'full_content'],
+      ['opposite', expectedScope === 'layout_only' ? 'layout_and_analysis' : 'layout_only']]) {
       assert.throws(
         () => reviewStore.approveRevision(
           fixturePaperId,
@@ -1218,17 +1221,17 @@ function makeOnlinePromotionContext(
       )
     }
   }
-  const approval = reviewStore.approveRevision(
+  const approval = ownerApproval ? null : reviewStore.approveRevision(
     fixturePaperId,
     revision.id,
     {
       bundleDigest: revision.bundleDigest,
-      ...(fixture.projection.importProfile ? { approvalScope: 'layout_only' } : {}),
+      ...(fixture.projection.importProfile ? { approvalScope: expectedScope } : {}),
     },
     'synthetic-owner',
   )
-  if (fixture.projection.importProfile) {
-    assert.equal(approval.approvalScope, 'layout_only', 'public approval receipt records exact layout-only scope')
+  if (fixture.projection.importProfile && approval) {
+    assert.equal(approval.approvalScope, expectedScope, 'public approval scope binds actual analyses')
   }
   const dbPath = path.join(tempRoot, 'question-bank.sqlite')
   const setupDb = new DatabaseSync(dbPath)
@@ -2300,7 +2303,12 @@ export async function verifyPublicPaperTeachingAnalyses() {
         assert.throws(() => buildNck1ReviewProjection(reviewRoot), pattern)
       } finally { writeFileSync(path.join(reviewRoot, file), original) }
     }
-    rejectChanged('analysis-listening.json', null, { code: 'NCK1_ANALYSIS_INCOMPLETE' })
+    rmSync(path.join(reviewRoot, 'analysis-listening.json'))
+    assert.equal(buildNck1ReviewProjection(reviewRoot).analysisSidecars['listening-analysis-v1.json'], undefined)
+    assert.equal(JSON.parse((await runReviewCommand(['verify-analyses', fixtureId])).stdout).previewSidecars.length, 5)
+    writeFileSync(path.join(reviewRoot, 'analysis-listening.json'), staged.get('analysis-listening.json'))
+    rejectChanged('analysis-listening.json', value => { value.paperId = 'another-paper' }, /paperId|paper/u)
+    rejectChanged('analysis-reading-a.json', null, { code: 'NCK1_ANALYSIS_INCOMPLETE' })
     try {
       for (const file of staged.keys()) rmSync(path.join(reviewRoot, file))
       assert.throws(() => buildNck1ReviewProjection(reviewRoot), { code: 'NCK1_ANALYSIS_INCOMPLETE' })
@@ -2323,8 +2331,26 @@ export async function verifyPublicPaperTeachingAnalyses() {
     rejectChanged('analysis-continuation.json', value => {
       value.continuationAnalysis.storyUnderstanding.centralSituation.evidence[0].excerpt = 'EXCERPT FROM ANOTHER PAPER'
     }, /evidence excerpt must be an exact substring/u)
+    const sentinel = 'LECTURE_ONLY_SENTINEL_20261112'
+    const lectureProjection = buildNck1ReviewProjection(reviewRoot)
+    const reading = lectureProjection.analysisSidecars['reading-choice-analysis-v1.json']
+    Object.values(reading.groups)[0].overview = sentinel
+    assert.match(buildCompanionAnalysisHtml({ paperAsset: lectureProjection.paperAsset,
+      analyses: { reading } }), new RegExp(sentinel))
+    for (const edition of ['largeComplete', 'largeNoListening', 'economy8', 'answerOnly']) {
+      const result = await renderReviewPdfProduct(lectureProjection, edition, buildPrintHtml)
+      const text = execFileSync('pdftotext', ['-', '-'], { input: result.pdfBytes, encoding: 'utf8' })
+      assert.doesNotMatch(text, new RegExp(sentinel), `${edition} must exclude teaching prose`)
+    }
+    const frozen = freezeReviewFixture(reviewRoot)
+    const unbound = reviewManifestFor(reviewRoot, frozen)
+    delete unbound.analysisDigest
+    unbound.bundleDigest = reviewBundleDigest(unbound)
+    assert.throws(() => finalizeReviewFixture({ directory: reviewRoot, output: path.join(tempRoot, 'unbound'),
+      manifest: unbound, approve: false }), { code: 'IMPORT_REVIEW_PROJECTION_MISMATCH' })
     console.log('PASS public teaching analyses: opt-in, sealed config, retry, completeness, question/answer closure and continuation evidence')
   } finally {
+    await closeChromiumPool()
     rmSync(cliDir, { force: true })
     rmSync(tempRoot, { recursive: true, force: true })
   }
@@ -3665,7 +3691,7 @@ try {
   const reviewRow = reviewPage.locator(`[data-review-paper="${paperId}"]`)
   await reviewRow.getByText('已批准', { exact: true }).waitFor()
   assert.equal(await reviewPage.locator('iframe, #approval-check').count(), 0)
-  assert.match(await reviewRow.locator('.owner-review-name a').getAttribute('href'),
+  assert.match(await reviewRow.getByRole('link', { name: online.projection.paperName, exact: true }).getAttribute('href'),
     new RegExp(`reviewRevision=${online.revision.id}`))
   const pathname = `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}/promotions`
   let body = JSON.stringify(promotionRequest(online.approval))
@@ -4321,10 +4347,19 @@ const publicOptionalAnalyses = makeOnlinePromotionContext(
   'public-optional-analyses',
   paperId,
   null,
-  { publicPaper: true, preservePublicAnalyses: true },
+  { publicPaper: true, preservePublicAnalyses: true, ownerApproval: true },
 )
 try {
   assert(publicOptionalAnalyses.projection.analysisDigest, 'fixture has complete optional analyses')
+  const service = createSinglePaperPromotionService({ getStore: () => publicOptionalAnalyses.reviewStore,
+    openDatabase: publicOptionalAnalyses.openDatabase, paperAssetsDir: publicOptionalAnalyses.paperAssetsDir })
+  const published = await service.promoteOwner(paperId, publicOptionalAnalyses.revision.id, {
+    intent: 'publish', bundleDigest: publicOptionalAnalyses.revision.bundleDigest,
+    rendererBuildId: publicOptionalAnalyses.revision.rendererBuildId,
+  }, 'synthetic-owner')
+  assert.equal(published.status, 'published')
+  publicOptionalAnalyses.approval = publicOptionalAnalyses.reviewStore.getRevision(publicOptionalAnalyses.revision.id).approval
+  assert.equal(publicOptionalAnalyses.approval.approvalScope, 'layout_and_analysis')
   assert.equal(
     publicOptionalAnalyses.revision.manifest.analysisDigest,
     publicOptionalAnalyses.projection.analysisDigest,
@@ -4335,12 +4370,16 @@ try {
     publicOptionalAnalyses.projection.analysisDigest,
     'v2 approval preserves optional analysis identity',
   )
-  const begun = publicOptionalAnalyses.reviewStore.beginPromotion(
-    paperId,
-    promotionRequest(publicOptionalAnalyses.approval),
-    'ship-authorizer-token',
-  )
+  const begun = { promotion: publicOptionalAnalyses.reviewStore.latestPromotion(paperId) }
   assert.equal(begun.promotion.analysisDigest, publicOptionalAnalyses.projection.analysisDigest)
+  for (const baseDir of ['versions/v1', 'latest']) {
+    const file = path.join(publicOptionalAnalyses.paperAssetsDir, paperId, baseDir, 'analyses/writing-analysis-v1.json')
+    const bytes = readFileSync(file)
+    rmSync(file)
+    assert.throws(() => service.inspectReceipt(paperId, begun.promotion.promotionId), /Published analysis sidecar is missing/u)
+    writeFileSync(file, bytes)
+  }
+  assert.equal(service.inspectReceipt(paperId, begun.promotion.promotionId).status, 'idempotent')
   const identityDb = new DatabaseSync(publicOptionalAnalyses.importReviewDbPath)
   const originalManifest = publicOptionalAnalyses.revision.manifest
   const writeManifest = (manifest) => identityDb.prepare(`

@@ -142,6 +142,7 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
         <div class="owner-review-name">
           <a href="${escapeHtml(screenUrl(paper))}" target="_blank" rel="noopener noreferrer">${escapeHtml(paper.paperName)}</a>
           <span>R${escapeHtml(paper.revisionNumber)} · Screen</span>
+          ${paper.hasTeachingAnalyses ? `<a href="${escapeHtml(screenUrl(paper))}&amp;lecture=1" target="_blank" rel="noopener noreferrer">查看讲评</a>` : ''}
           ${paper.hasMediaCandidates && !frozen ? `<button class="owner-review-media-link" type="button" data-media-review="${escapeHtml(paper.paperId)}" aria-expanded="${expanded === paper.paperId && expandedKind === 'media'}" ${busy || !fresh ? 'disabled' : ''}>核对候选图</button>` : ''}
         </div>
         <span class="owner-review-state">${escapeHtml(labels[state] || state)}</span>
@@ -170,7 +171,7 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
         <div class="owner-review-heading"><h1>试卷审核</h1>
           <button type="button" id="owner-review-refresh" ${busy ? 'disabled' : ''}>刷新状态</button>
         </div>
-        <p class="owner-review-intro">点击卷名直接看 Screen。发布即认可这一版，并向用户公开。</p>
+        <p class="owner-review-intro">点击卷名直接看 Screen。发布即认可这一版，并向用户公开；附带讲评时，一并认可为精选官方参考。</p>
         ${error ? `<p class="owner-review-error" role="alert">${escapeHtml(error)}</p>` : ''}
         ${notice ? `<p role="status">${escapeHtml(notice)}</p>` : ''}
         ${papers.length ? `<ul class="owner-review-list" aria-label="送审试卷">${papers.map(rowHtml).join('')}</ul>`

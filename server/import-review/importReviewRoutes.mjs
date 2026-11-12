@@ -309,6 +309,7 @@ export function createImportReviewRoutes({
     if (!scopedPublicationEnabled) throw reviewError('IMPORT_REVIEW_SCOPED_PUBLICATION_DISABLED', 'Scoped publication is disabled', 404)
     if (!requireOwner(response, context)) return
     const request = store.publicationRequest(match[1])
+    const hasAnalyses = Boolean(request.analysisDigest)
     const expired = Date.parse(request.expiresAt) <= Date.now()
     const disabled = expired || request.state !== 'pending'
     const preview = `/?view=paper-browse&paperId=${encodeURIComponent(request.paperId)}&reviewRevision=${encodeURIComponent(request.revisionId)}`
@@ -318,9 +319,10 @@ export function createImportReviewRoutes({
 </head><body><main class="page"><div class="eyebrow">单卷确认</div><section class="sheet">
 <h1>${escapeHtml(request.paperName || request.paperId)}</h1>
 <p>R${escapeHtml(request.revisionNumber || request.revisionId)} · <a href="${escapeHtml(preview)}" target="_blank" rel="noopener">查看这个精确预览</a></p>
-<p class="muted">查看不会写入。版式认可与发布委托是两项独立确认。</p>
-<div class="steps"><section class="step"><h2>1. 认可版式</h2><p>确认网页预览与 PDF 中的这一版布局。</p>
-<button id="approve" ${request.approvalId || disabled ? 'disabled' : ''}>认可这个版式</button></section>
+<p class="muted">查看不会写入。审阅认可与发布委托是两项独立确认。</p>
+${hasAnalyses ? `<p><a href="${escapeHtml(preview)}&amp;lecture=1" target="_blank" rel="noopener">查看这版讲评</a>。认可时一并将讲评选为精选官方参考。</p>` : ''}
+<div class="steps"><section class="step"><h2>1. ${hasAnalyses ? '认可版式与讲评' : '认可版式'}</h2><p>确认网页预览与 PDF 中的这一版布局${hasAnalyses ? '，并已审阅附带讲评' : ''}。</p>
+<button id="approve" ${request.approvalId || disabled ? 'disabled' : ''}>${hasAnalyses ? '认可版式与讲评' : '认可这个版式'}</button></section>
 <section class="step"><h2>2. 委托发布</h2><p>另行允许导题 Agent 仅发布上面这一份精确版本。</p>
 <button id="grant" ${!request.approvalId || disabled ? 'disabled' : ''}>授予这一次发布权限</button></section></div>
 <p class="state" id="result" role="status">${request.state === 'consumed' ? `权限已使用。发布状态：${escapeHtml(request.promotion?.state || '待核实')}。` : request.state === 'revoked' ? '权限已撤销。' : expired ? '请求已过期，不能再确认。' : request.state === 'granted' ? '发布权限已授予，等待 Agent 兑换。' : request.approvalId ? '版式已认可，等待单独的发布委托。' : '等待确认。'}</p>
@@ -345,7 +347,8 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
     if (!requireOwner(response, context) || !requireSameOrigin(request, response, context, trustedPublicOrigin)) return
     const pending = store.publicationRequest(match[1])
     const approval = store.approveRevision(pending.paperId, pending.revisionId,
-      { bundleDigest: pending.bundleDigest, approvalScope: 'layout_only' }, context.session.username, pending.requestId)
+      { bundleDigest: pending.bundleDigest, approvalScope: pending.analysisDigest ? 'layout_and_analysis' : 'layout_only' },
+      context.session.username, pending.requestId)
     context.sendJson(response, 200, { approval, compatibility: store.compatibilityForRevision(pending.revisionId) })
   })))
 

@@ -411,7 +411,7 @@ for (const name of ['source-references', 'pagination-run', 'pdf-qa']) {
   }
 }
 
-test('feedback fix redoes a returned Candidate and archives its submission evidence', async t => {
+for (const redo of ['source-references', 'freeze']) test(`feedback fix from ${redo} retains staged lectures and archives submission evidence`, async t => {
   const { ctx, calls, options } = fixture(t)
   ctx.state.steps.push = completed({ revisionId: 'rev-returned' })
   ctx.state.steps.screen = completed({ url: 'old-screen' })
@@ -419,11 +419,14 @@ test('feedback fix redoes a returned Candidate and archives its submission evide
   json(path.join(ctx.work, 'handoff/evidence.json'), { revisionId: 'rev-returned' })
   json(ctx.statePath, ctx.state)
   const before = readFileSync(ctx.statePath)
+  const analysis = path.join(ctx.paperDir, 'analysis-reading-a.json')
+  json(analysis, { retained: 'new staged lecture' })
   const status = { ...JSON.parse(fakeStatus(ctx, [{ id: 'rev-returned', state: 'changes_requested' }])),
     issues: [{ id: 'issue-1', paperId: ctx.paperId, state: 'open' }] }
-  await finish(ctx, ['--feedback-fix', 'issue-1', '--redo-from', 'source-references'],
+  await finish(ctx, ['--feedback-fix', 'issue-1', '--redo-from', redo],
     { ...options, readStatus: async () => JSON.stringify(status) })
-  assert.deepEqual(calls, downstream)
+  assert.deepEqual(calls, downstream.slice(downstream.indexOf(redo)))
+  assert.equal(JSON.parse(readFileSync(analysis)).retained, 'new staged lecture')
   assert.equal(ctx.state.data.feedbackFix.baseRevisionId, 'rev-returned')
   assert.deepEqual(ctx.state.data.feedbackFix.issues, ['issue-1'])
   for (const name of ['candidateRevisionId', 'revisionId', 'localReport', 'status']) assert(!ctx.state.data[name], name)

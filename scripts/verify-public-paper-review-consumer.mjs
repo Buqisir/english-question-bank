@@ -69,8 +69,9 @@ const server = createServer((request, response) => {
   if (url.pathname === '/ops/clipboard.js') return send(200, 'text/javascript', clipboard)
   if (url.pathname === '/api/auth/me') return send(200, 'application/json', JSON.stringify({ authRequired: true, user: { username: 'fixture-owner', role: 'owner', accountKind: 'human' } }))
   if (url.pathname === '/api/import-reviews') return send(200, 'application/json', JSON.stringify({ papers: [{
-    paperId: mode === 'public' ? 'public-paper' : 'old-analyzed',
-    paperName: mode === 'public' ? baseDetail.paperName : oldDetail.paperName,
+    paperId: mode === 'old' ? 'old-analyzed' : 'public-paper',
+    paperName: mode === 'old' ? oldDetail.paperName : baseDetail.paperName,
+    hasTeachingAnalyses: mode === 'teaching',
     latestRevisionId: 'revision-public', revisionNumber: 1, reviewKind: 'candidate',
     state: 'awaiting_review', bundleDigest: summaryDigest, rendererBuildId: 'fixture-renderer',
     rendererStale: false, unresolvedCount: 0, promotionState: null,
@@ -93,6 +94,13 @@ try {
   assert.equal(await page.locator('iframe, [role="tab"], .approval-check').count(), 0)
   assert.equal(await page.getByRole('button', { name: '发布到题库' }).isEnabled(), true)
   assert.match(await page.getByRole('link', { name: baseDetail.paperName }).getAttribute('href'), /reviewRevision=revision-public/)
+  assert.equal(await page.getByRole('link', { name: '查看讲评' }).count(), 0)
+  mode = 'teaching'
+  await page.reload()
+  const lecture = page.getByRole('link', { name: '查看讲评' })
+  await lecture.waitFor()
+  assert.match(await lecture.getAttribute('href'), /reviewRevision=revision-public&lecture=1/u)
+  assert.match(await page.locator('.owner-review-intro').textContent(), /一并认可为精选官方参考/u)
   if (process.env.EQB_REVIEW_SCREENSHOT) await page.screenshot({ path: process.env.EQB_REVIEW_SCREENSHOT, fullPage: true })
 
   mode = 'old'

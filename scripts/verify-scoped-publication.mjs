@@ -232,9 +232,16 @@ try {
   assert.equal(responseLoss.promotion.state, 'publishing')
   assert.equal(store.latestPromotion('paper-scoped-a').attemptCount, 1)
   for (const [suffix, analyses] of [['4', false], ['5', true]]) {
-    const publicApproval = seed(`paper-public-${analyses ? 'with' : 'without'}-analysis`, suffix, 'approved',
+    const awaitingPublic = seed(`paper-public-${analyses ? 'with' : 'without'}-analysis`, suffix, 'awaiting_review',
       { publicPaper: true, analyses })
-    const publicRequest = store.registerPublicationRequest(publicApproval.paperId, input(publicApproval, 'public-secret'), 'agent-a')
+    const publicRequest = store.registerPublicationRequest(awaitingPublic.paperId, input(awaitingPublic, 'public-secret'), 'agent-a')
+    const approvedPublic = await routeRequest(proxiedRoutes,
+      `/api/import-reviews/publication-requests/${publicRequest.requestId}/approve`, {
+        session: { role: 'owner', username: 'owner' }, origin: 'https://review.example', csrf: true,
+      })
+    assert.equal(approvedPublic.status, 200)
+    const publicApproval = approvedPublic.body.approval
+    assert.equal(publicApproval.approvalScope, analyses ? 'layout_and_analysis' : 'layout_only')
     store.grantPublicationRequest(publicRequest.requestId, 'owner')
     const publicPromotion = store.beginScopedPromotion(publicApproval.paperId, publicRequest.requestId, sha256('public-secret'), 'agent-a')
     assert.equal(publicPromotion.promotion.importProfile, 'public-paper-v1')
