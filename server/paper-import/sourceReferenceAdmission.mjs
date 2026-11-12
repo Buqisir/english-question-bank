@@ -337,9 +337,25 @@ function assertSourceReferenceContent({
         delete figure.raster.sha256
         delete figure.raster.byteLength
       }
-      return digestJson(result)
+      return result
     }
-    if (comparable(sidecar.groups) !== comparable(baseline.groups)) {
+    const submittedGroups = comparable(sidecar.groups)
+    const baselineGroups = comparable(baseline.groups)
+    // A circulated sample may reprint one complete paragraph twice. Collapse
+    // only its text at the same position; all other content/metadata stays exact.
+    for (const [groupIndex, group] of baselineGroups.entries()) {
+      for (const [entryIndex, entry] of (group.essays?.entries ?? []).entries()) {
+        const submitted = submittedGroups[groupIndex]?.essays?.entries?.[entryIndex]
+        for (const [blockIndex, block] of (entry.blocks ?? []).entries()) {
+          const other = submitted?.blocks?.[blockIndex]
+          if (block.kind === 'paragraph' && other?.kind === 'paragraph'
+            && other.paragraph.text && block.paragraph.text === other.paragraph.text.repeat(2)) {
+            block.paragraph.text = other.paragraph.text
+          }
+        }
+      }
+    }
+    if (digestJson(submittedGroups) !== digestJson(baselineGroups)) {
       reject('Current references must preserve every confirmed sample, scoring paragraph, label, task and source locator')
     }
   }

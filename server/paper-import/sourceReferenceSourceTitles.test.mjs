@@ -344,6 +344,72 @@ function v2ReplayFixture() {
   return { input, v1, v2 }
 }
 
+test('current admission collapses exactly two reprints of a sample paragraph without changing inputs', () => {
+  const sample = 'An original application sample.'
+  const continuation = 'An original continuation sample.'
+  const input = textInput([historicalTexts.map(text => [sample, continuation].includes(text)
+    ? `${text}\n ${text.normalize('NFKC').replace('original', 'ｏｒｉｇｉｎａｌ')}` : text)])
+  const sidecar = capture(input)
+  for (const group of sidecar.groups) group.essays.entries[0].paragraphs[0].text =
+    group.taskType === 'application' ? sample : continuation
+  const before = structuredClone({ input, sidecar })
+  assertSourceReferenceAdmission({ ...input, sidecar })
+  assert.deepEqual(structuredClone({ input, sidecar }), before)
+  // A structured scoring container must not interfere with essay deduplication.
+  const blocked = structuredClone(sidecar)
+  blocked.schemaVersion = 'source-references-v2'
+  for (const group of blocked.groups) {
+    for (const entry of group.scoring.entries) {
+      entry.blocks = sourceReferenceBlocks(entry)
+      delete entry.paragraphs
+    }
+  }
+  assertSourceReferenceAdmission({ ...input, sidecar: blocked })
+})
+
+test('a group without essays retains the original schema rejection instead of a TypeError', () => {
+  const input = textInput()
+  const sidecar = capture(input)
+  delete sidecar.groups[0].essays
+  assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), {
+    code: 'SOURCE_REFERENCES_SCHEMA_INVALID',
+  })
+})
+
+test('sample reprint allowance rejects partial, unequal, triple and non-essay reductions', () => {
+  const sample = 'An original application sample.'
+  const replayError = {
+    code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID',
+    message: 'Current references must preserve every confirmed sample, scoring paragraph, label, task and source locator',
+  }
+  for (const [name, original, submitted] of [
+    ['half paragraph deleted', sample, 'An original'],
+    ['different second copy', `${sample} An altered application sample.`, sample],
+    ['three copies', `${sample} ${sample} ${sample}`, sample],
+  ]) {
+    const input = textInput([historicalTexts.map(text => text === sample ? original : text)])
+    const sidecar = capture(input)
+    sidecar.groups[0].essays.entries[0].paragraphs[0].text = submitted
+    assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar }), replayError, name)
+  }
+  const input = textInput([historicalTexts.map(text =>
+    [sample, '应用文评分正文。'].includes(text) ? `${text} ${text}` : text)])
+  const sidecar = capture(input)
+  for (const [name, change] of [
+    ['scoring paragraph', s => { s.groups[0].scoring.entries[0].paragraphs[0].text = '应用文评分正文。' }],
+    ['task ownership', s => { s.groups[0].taskType = 'continuation' }],
+    ['paragraph role', s => { s.groups[0].essays.entries[0].paragraphs[0].role = 'title' }],
+    ['source locator', s => { s.groups[0].essays.entries[0].paragraphs[0].source.locator.region.x += .01 }],
+    ['label', s => { s.groups[0].essays.entries[0].sourceLabel += '字' }],
+    ['paragraph removed', s => { s.groups[0].essays.entries[0].paragraphs = [] }],
+  ]) {
+    const changed = structuredClone(sidecar)
+    changed.groups[0].essays.entries[0].paragraphs[0].text = sample
+    change(changed)
+    assert.throws(() => assertSourceReferenceAdmission({ ...input, sidecar: changed }), undefined, name)
+  }
+})
+
 test('v1 prose and v2 paragraph blocks retain identical source meaning at first admission', () => {
   const { input, v1, v2 } = v2ReplayFixture()
   const before = structuredClone({ input, v1, v2 })
