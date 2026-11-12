@@ -47,6 +47,14 @@ reused by ID, so do not redispatch workers.
   `GET /api/import-agent-reviews/papers/<id>` for other papers, and do not retry a
   slow read. For source dedup read `universal-source-manifest.json` through
   `GET /api/import-agent-reviews/revisions/<id>/files?path=…`.
+- Sources are circulated copies, not the exam's original print (Owner 2026-11-11).
+  Correct obvious circulation errors (stray punctuation, glued or split words,
+  misspellings, OCR-like character slips, a plainly missing word) to the intended
+  text and log each in the proofread report as original → corrected with the
+  reason. Keep the source wording only when the fix is genuinely ambiguous or could
+  change an answer, and record why. An answer that the passage, the original article
+  or other circulated keys clearly contradict is corrected the same way, with its
+  evidence.
 - No formal verification suites before the Owner says Ship.
 
 ## Deliver
