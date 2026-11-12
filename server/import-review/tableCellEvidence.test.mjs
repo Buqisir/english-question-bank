@@ -63,7 +63,7 @@ try {
   const requireApp = createRequire(new URL('../../app/package.json', import.meta.url))
   const { transpile } = requireApp('typescript')
   const { chromium } = requireApp('playwright')
-  const browser = await chromium.launch({ headless: true })
+  const browser = await chromium.launch({ channel: 'chromium', headless: true })
   try {
     const tab = await browser.newPage()
     await tab.setContent('<div class="ps-canonical-reading"><table><tr>'
