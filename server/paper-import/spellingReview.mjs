@@ -36,7 +36,7 @@ const MONTH_DAY_YEAR = /\b((?:Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|M
 
 function sameNumbers(before, after) {
   // Only an English month-day date may gain a space after its comma (June 1,1989).
-  const dates = (text) => text.replace(MONTH_DAY_YEAR, '$1 $2')
+  const dates = (text) => text.replace(MONTH_DAY_YEAR, '$1,$2')
   const numbers = (text) => JSON.stringify(dates(text).match(/[-+−±$£€¥]?\d+(?:[.,:]\d+)*(?:%|°[CF]?)?/gu) ?? [])
   return numbers(before) === numbers(after)
 }

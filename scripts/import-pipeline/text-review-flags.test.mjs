@@ -270,6 +270,7 @@ test('source_mark keeps numeric values, blanks and bracketed labels intact', () 
   assert.equal(isSourceMarkCorrection('in 2018,2020 we', 'in 2018–2020 we'), false)
   assert.equal(isSourceMarkCorrection('in 2018,2020 we', 'in 2018, 2020 we'), false)
   assert.equal(isSourceMarkCorrection('on 1,1989 we', 'on 1, 1989 we'), false)
+  assert.equal(isSourceMarkCorrection('June 1,1989 in', 'June 1–1989 in'), false)
 })
 
 test('source_mark rechecks numeric values on the whole corrected target', () => {
