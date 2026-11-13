@@ -5,6 +5,9 @@
  * Every border-radius value in app/src CSS must come from the radius ladder
  * {0, 4px, 8px, 12px, 16px, 999px} plus 50% (circular controls only).
  * Northstar 2026-09-03 authorised 12 / 16 into the family (cards / hero search).
+ * Owner 2026-11-13: 6px removed from FAMILY so this gate matches DESIGN.md §5
+ * (it had been allowed here by mistake); the 77 existing 6px literals are
+ * grandfathered below and migrate to 4px / 8px by element height.
  * Directional shorthand is legal when every component is in-family; var()
  * indirection is legal (token wins by definition).
  *
@@ -20,13 +23,25 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const srcDir = path.join(rootDir, 'app', 'src')
 
-const FAMILY = new Set(['0', '4px', '6px', '8px', '12px', '16px', '999px', '50%'])
+const FAMILY = new Set(['0', '4px', '8px', '12px', '16px', '999px', '50%'])
 
 // file (relative to app/src) → { offFamilyValue → grandfathered count }
 const BASELINE = {
   // ui-northstar 草稿卷: 5px rail-acts / 7px group-action stickers → 4 / 8.
-  'features/paper-intelligence/paperIntelligence.css': { '10px': 2, '2px': 1, '3px': 5 },
+  'features/paper-intelligence/paperIntelligence.css': { '10px': 2, '2px': 1, '3px': 5, '6px': 6 },
   'features/paper-intelligence/paperSurfaceLectureHighlights.css': { '3px': 1 },
+  // texture 2026-11-13: 6px left the family. Migration list (→4px / →8px by
+  // element height): design/texture-2026-11-13/radius-6px-migration.md
+  'App.css': { '6px': 16 },
+  'features/draft-paper/DraftPaperWorkbench.css': { '6px': 3 },
+  'features/paper-browse/paperBrowsePage.css': { '6px': 2 },
+  'features/paper-intelligence/lectureAnalysisPanels.css': { '6px': 3 },
+  'features/vocabulary-dictation/vocabularyDictationPage.css': { '6px': 2 },
+  'features/vocabulary-dictation-workbench/vocabularyDictationWorkbench.css': { '6px': 12, '6px 0 0 6px': 4, '0 6px 6px 0': 4 },
+  'features/vocabulary-listen/vocabularyListenPage.css': { '6px': 2 },
+  'features/vocabulary-practice/vocabularyHandwriting.css': { '6px': 1 },
+  'features/vocabulary-practice/vocabularyPracticePage.css': { '6px': 4 },
+  'features/vocabulary-review/vocabularyReviewPage.css': { '6px': 18 },
 }
 // reading-analysis-retire (2026-07-16): the two baseline entries above for
 // `paperIntelligencePaperSurfaceHarness.css` and
