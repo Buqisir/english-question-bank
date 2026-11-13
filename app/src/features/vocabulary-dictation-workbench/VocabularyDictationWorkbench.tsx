@@ -1,6 +1,5 @@
 import {
   Card,
-  Check,
   ChevronLeft,
   ChevronRight,
   Download,
@@ -241,8 +240,8 @@ export function VocabularyDictationWorkbench({
   const [tab, setTab] = useState<WorkspaceTab>('sets')
   const [library, setLibrary] = useState<VocabularySetLibraryDto>({ items: [], page: 1, pageSize: 20, total: 0, hasMore: false })
   const [tasks, setTasks] = useState<VocabularyDictationTaskDto[]>([])
-  // 空状态只在读完之后出现，免得插图在加载时闪一下。
-  const [tasksLoadedFor, setTasksLoadedFor] = useState<string | null>(null)
+  // 空状态只在读完之后出现，免得插图或灰字在加载时闪一下。
+  const [studentDataLoadedFor, setStudentDataLoadedFor] = useState<string | null>(null)
   const [libraryLoadedFor, setLibraryLoadedFor] = useState<string | null>(null)
   const [records, setRecords] = useState<VocabularyDictationRecordDto[]>([])
   const [meaningRecords, setMeaningRecords] = useState<VocabularyMeaningRecallRecordDto[]>([])
@@ -357,7 +356,7 @@ export function VocabularyDictationWorkbench({
     ])
     if (requestedVersion !== studentDataVersionRef.current || studentId !== activeStudentIdRef.current) return
     setTasks(nextTasks)
-    setTasksLoadedFor(studentId)
+    setStudentDataLoadedFor(studentId)
     setRecords(nextRecords)
     setMeaningRecords(nextMeaningRecords)
     setMeaningStates(nextMeaningStates)
@@ -1168,7 +1167,7 @@ export function VocabularyDictationWorkbench({
                     })}</div>
                   </section>
                 )
-              })}</div> : tasksLoadedFor !== activeStudentId ? null : <div className="dictation-empty-state is-blank"><EmptyIllustration kind="paper-lined" onCard /><p>还没有听写。先到「词组」里选好单词。</p><button type="button" className="dictation-empty-cta" onClick={() => { void switchWorkbenchTab('sets') }}>去选词组</button></div>}
+              })}</div> : studentDataLoadedFor !== activeStudentId ? null : <div className="dictation-empty-state is-blank"><EmptyIllustration kind="paper-lined" onCard /><p>还没有听写。先到「词组」里选好单词。</p><button type="button" className="dictation-empty-cta" onClick={() => { void switchWorkbenchTab('sets') }}>去选词组</button></div>}
             </div>
 
             {selectedTasks.length > 0 && (
@@ -1234,7 +1233,7 @@ export function VocabularyDictationWorkbench({
                   </details>
                 </article>
               )
-            }) : <div className="dictation-empty-state"><PaperCheck size={32} /><h2>{historyFilter === 'meaning' ? '还没有认词记录' : '还没有历史听写'}</h2><p>{historyFilter === 'meaning' ? '完成认词后会自动保留。' : '旧听写结果会只读保留在这里。'}</p></div>}
+            }) : studentDataLoadedFor !== activeStudentId ? null : <p className="dictation-empty-line">{historyFilter === 'meaning' ? '还没有认词记录。完成认词后会自动保留。' : '还没有历史听写。旧听写结果会只读保留在这里。'}</p>}
           </section>
         )}
 
@@ -1286,7 +1285,7 @@ export function VocabularyDictationWorkbench({
                     </div>
                 ))}
               </div>
-            ) : <div className="dictation-empty-state"><Check size={32} /><h2>{reviewMode === 'all' ? '现在没有待复习单词' : '现在没有常错词'}</h2><p>认词时忘记的词会自动出现在这里。</p></div>}
+            ) : studentDataLoadedFor !== activeStudentId ? null : <p className="dictation-empty-line">{reviewMode === 'all' ? '现在没有待复习单词。' : '现在没有常错词。'}认词时忘记的词会自动出现在这里。</p>}
           </section>
         )}
       </main>

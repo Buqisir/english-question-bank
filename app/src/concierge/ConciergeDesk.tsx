@@ -16,7 +16,7 @@
  */
 
 import { useEffect, useId, useMemo, useState, type FormEvent, type ReactNode } from 'react'
-import { CornerDownLeft, InfoCircle, QuestionBank, X } from '../icons'
+import { AlertTriangle, CornerDownLeft, InfoCircle, QuestionBank, X } from '../icons'
 import { EmptyIllustration } from '../components/EmptyIllustration'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
@@ -849,10 +849,13 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
 
       {state.kind === 'error' && (
         <div className="concierge-error" role="alert">
-          <span>搜索暂时连不上，你输入的内容还在。</span>
-          <button type="button" onClick={() => void actions.submit(state.query)}>
-            重试
-          </button>
+          <AlertTriangle size={16} aria-hidden="true" />
+          <span>
+            搜索暂时连不上，你输入的内容还在。
+            <button type="button" onClick={() => void actions.submit(state.query)}>
+              重试
+            </button>
+          </span>
         </div>
       )}
 

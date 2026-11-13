@@ -3588,27 +3588,31 @@ button:disabled {
 }
 
 .concierge-error {
-  align-items: center;
-  color: #dc2626;
+  align-items: flex-start;
   display: flex;
-  gap: 10px;
-  justify-content: space-between;
+  gap: 6px;
+  line-height: 20px;
+}
+/* 迁移（Owner 2026-11-13）：连不上搜索不会丢东西（输入还在），所以不用危险色，
+   和提示条同一种写法：弱墨一行 + 16px 图标；重试是句子里的行内按钮（同「清除筛选」）。 */
+.concierge-error > svg {
+  flex: none;
+  margin-top: 2px;
 }
 
 .concierge-error button {
   background: transparent;
-  border: 1px solid currentColor;
-  border-radius: 8px;
-  color: inherit;
+  border: 0;
+  color: var(--desk-ink);
   cursor: pointer;
-  flex: 0 0 auto;
   font: inherit;
-  min-height: 34px;
-  padding: 5px 10px;
+  padding: 0 0 0 6px;
+  text-decoration: underline;
 }
 
-.concierge-error button:hover {
-  background: color-mix(in srgb, currentColor 8%, transparent);
+.concierge-error button:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
 }
 
 /* Result list */
