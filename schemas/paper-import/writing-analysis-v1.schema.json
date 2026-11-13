@@ -18,7 +18,7 @@
         "properties": {
           "writing": {
             "type": "object",
-            "required": ["taskType", "modelAnswer"],
+            "required": ["taskType"],
             "additionalProperties": true,
             "properties": {
               "taskType": { "enum": ["application", "continuation"] },
