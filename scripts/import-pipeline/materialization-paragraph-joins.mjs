@@ -12,7 +12,7 @@ function context(input, receiptBytes) {
   const evidence = parse(input.ocrSourceBytes?.evidenceBytes)
   const confirmation = parse(input.ocrSourceBytes?.confirmationBytes)
   const receipt = parse(receiptBytes)
-  if (!/^nck1-source-materialization-v(?:[1-9]|1[012])$/u.test(materialization.schemaVersion)
+  if (!/^nck1-source-materialization-v(?:[1-9]|1[0-5])$/u.test(materialization.schemaVersion)
     || !['nck1-ocr-source-confirmation-v2', 'nck1-ocr-source-confirmation-v3'].includes(confirmation.schemaVersion) || confirmation.confirmed !== true
     || materialization.paperId !== evidence.paperId || materialization.paperId !== confirmation.paperId
     || materialization.paperId !== receipt.paperId || receipt.reviewerKind !== 'import_agent'
@@ -83,7 +83,7 @@ export function applyMaterializationParagraphJoinPlan(input, receiptBytes, plan,
   })
   if (!same(plan, regenerated)) throw new Error('Paragraph join plan differs from its bound complete source fragments')
   const result = structuredClone(materialization)
-  result.schemaVersion = 'nck1-source-materialization-v12'
+  if (!/^nck1-source-materialization-v1[3-5]$/u.test(result.schemaVersion)) result.schemaVersion = 'nck1-source-materialization-v12'
   result.paragraphJoins = [...(result.paragraphJoins || []), structuredClone(plan.relation)]
   const issues = validateNck1SourceMaterialization(result)
   if (issues.length) throw new Error(`Paragraph join Materialization is invalid: ${JSON.stringify(issues)}`)
