@@ -16,7 +16,7 @@
  */
 
 import { useEffect, useId, useMemo, useState, type FormEvent, type ReactNode } from 'react'
-import { CornerDownLeft, Sliders, X } from '../icons'
+import { CornerDownLeft, QuestionBank, X } from '../icons'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
@@ -606,7 +606,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 onClick={handleEnterBrowse}
                 disabled={dataLoading}
               >
-                <Sliders size={16} aria-hidden="true" />
+                <QuestionBank size={16} aria-hidden="true" />
                 浏览全部 {catalogPaperCount} 套卷
               </button>
             )}
