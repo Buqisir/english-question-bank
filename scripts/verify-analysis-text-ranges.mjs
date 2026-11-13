@@ -271,9 +271,9 @@ for (const [raw, visible, hint] of [
   ['__36__ (go)', '36(go)', 'go'],
   ['36._____(go)', '36(go)', 'go'],
 ]) {
-  const sourceText = `😀 before ${raw} repeat repeat.`
-  const displayText = `😀 before ${visible} repeat repeat.`
-  const start = Array.from(`😀 before ${raw} repeat `).length
+  const sourceText = `😀 feedback(反馈)${raw} To err（犯错）is human. repeat repeat.`
+  const displayText = `😀 feedback (反馈)${visible} To err (犯错) is human. repeat repeat.`
+  const start = Array.from(sourceText.slice(0, sourceText.lastIndexOf('repeat'))).length
   const analysis = { teachingContent: {
     schemaVersion: 'objective-teaching-content-v1', sourceTextId: 'original',
     annotations: [{ annotationId: 'after-blank', kind: 'answer-evidence', questionIds: ['q36'],
@@ -285,7 +285,7 @@ for (const [raw, visible, hint] of [
     nodes: [{ type: 'blank', questionNo: '36', questionId: 'q36', blankId: 'b36', hint }] }] }]
   const projected = projectObjectiveTeachingSource(analysis, [{ id: 'p', text: sourceText }], textMap, semantic)
   assert.deepEqual(projected.evidence[0].range, { sentenceId: 'p-s0',
-    start: `😀 before ${visible} repeat `.length, end: `😀 before ${visible} repeat repeat`.length },
+    start: displayText.lastIndexOf('repeat'), end: displayText.lastIndexOf('repeat') + 6 },
   'source offset after a canonical blank and emoji still marks the second occurrence')
   assert.equal(sourceText.slice(-14), 'repeat repeat.', 'source text remains unmodified')
   assert.throws(() => projectObjectiveTeachingSource(analysis, [{ id: 'p', text: sourceText }],
@@ -295,6 +295,31 @@ for (const [raw, visible, hint] of [
     assert.throws(() => projectObjectiveTeachingSource(analysis,
       [{ id: 'p', text: sourceText.replace('(go)', '(WRONG)') }], textMap, semantic),
     /hint does not match source/, 'canonical label replacement must not conceal a changed source hint')
+  }
+}
+
+for (const [raw, visible, quote] of [
+  ...['feedback', '反馈', 'err', '犯错', 'is', 'repeat'].map(quote => [
+    '😀 feedback(反馈) To err（犯错）is human. repeat repeat.',
+    '😀 feedback (反馈) To err (犯错) is human. repeat repeat.', quote]),
+  ["Don't panic. Don’t panic.", 'Don’t panic. Don’t panic.', 'panic'],
+  ['Use feedback(反馈). Use feedback (反馈).', 'Use feedback (反馈). Use feedback (反馈).', 'feedback'],
+]) {
+  const start = Array.from(raw.slice(0, raw.lastIndexOf(quote))).length
+  const analysis = { teachingContent: {
+    schemaVersion: 'objective-teaching-content-v1', sourceTextId: 'original',
+    annotations: [{ annotationId: quote, kind: 'answer-evidence', questionIds: ['q'],
+      sourceRanges: [{ textId: 'original', paragraphId: 'p', start, end: start + quote.length, quote }] }],
+  } }
+  for (const text of [raw, visible]) {
+    const sentences = text.split(/(?<=\.)\s+/).map((text, index) => ({ id: `p-s${index}`, text, tokens: [] }))
+    const textMap = { paperId: 'gloss-range', paragraphs: [{ id: 'p', section: '七选五',
+      sentences }] }
+    const projected = projectObjectiveTeachingSource(analysis, [{ id: 'p', text: raw }], textMap)
+    const target = sentences.findLast(sentence => sentence.text.includes(quote))
+    assert.deepEqual(projected.evidence[0].range, { sentenceId: target.id,
+      start: target.text.lastIndexOf(quote), end: target.text.lastIndexOf(quote) + quote.length },
+    'raw coordinates preserve the exact word/gloss/repeated occurrence in historical and v4 TextMaps')
   }
 }
 

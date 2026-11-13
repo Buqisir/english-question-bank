@@ -9,6 +9,7 @@ import { buildNck1CompatibilityPaperAsset, buildNck1ReviewConsumption } from '..
 import { buildListeningAnalysisAgentRequest } from '../server/paper-import-ai/analyzeListening.mjs'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../shared/paper-canonical/compiler.mjs'
 import { sha256, digestJson } from '../shared/paper-canonical/stable.mjs'
+import { buildSevenChoicesSurfaceModel } from '../app/src/features/paper-intelligence/sevenChoicesSurfaceAdapter.ts'
 
 // Reuse existing synthetic publication fixtures without running its DB/HTTP suite.
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
@@ -20,8 +21,10 @@ else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
 const root = mkdtempSync(path.join(tmpdir(), 'single-group-analysis-'))
 try {
   const source = makeFixture({ listening: true })
-  // Small prototype of the 2023 I full-width/ASCII parentheses mismatch.
-  source.groups.find(g => g.slotId === 'seven-choices').blocks[1].content[0].text += ' To err（犯错）is human. '
+  // Published compatibility assets and teaching coordinates both retain raw text.
+  source.groups.find(g => g.slotId === 'seven-choices').blocks[1].content[0].text +=
+    ' To err（犯错）is human. feedback(反馈) portrayed(描绘) coding (编码)experiences. feedback(反馈)'
+  source.groups.find(g => g.slotId === 'seven-choices').optionBank[0].text += " Don't discard feedback(反馈)."
   writeStagedAnalyses(root, source)
   const paper = { paperId: source.paperId, sourceAssetVersion: 1 }
   const answers = new Map(source.answers.map(({ questionId, value }) => [questionId, value]))
@@ -47,6 +50,11 @@ try {
     }
     const filename = `analysis-${key === 'listening-unit' ? 'listening' : key}.json`
     const analysis = JSON.parse(readFileSync(path.join(root, filename), 'utf8'))
+    if (key === 'seven') {
+      Object.values(analysis.questions)[0].contextEvidence.afterQuote = 'feedback(反馈)'
+      Object.values(analysis.questions)[0].mechanismSignals[1].signalText = "Don't discard feedback(反馈)."
+      writeFileSync(path.join(root, filename), JSON.stringify(analysis))
+    }
     if (key === 'application') {
       // The publication fixture has placeholder English instructions, not a
       // recoverable writing task. Supply an explicit synthetic given skeleton.
@@ -90,22 +98,58 @@ try {
         ['scripts/import-pipeline/validate-analysis.mjs', requestPath, candidatePath, '--consumption', consumptionPath],
         { cwd: path.resolve(import.meta.dirname, '..'), encoding: 'utf8' })
       writeFileSync(consumptionPath, JSON.stringify(consumption))
-      const mismatch = runWithConsumption()
-      assert.equal(mismatch.status, 1, mismatch.stdout)
-      assert.match(mismatch.stderr, /source paragraph .* does not match TextMap/)
+      const aligned = runWithConsumption()
+      assert.equal(aligned.status, 0, aligned.stderr)
+      const paperAsset = buildNck1CompatibilityPaperAsset({
+        config: { provenance: { paperName: 'Gloss fixture', source: 'Verifier', year: 2026 } },
+        materialization: source, sourceAssetVersion: 1,
+      })
+      const authorityBefore = JSON.stringify({ source, paperAsset })
+      const full = () => buildNck1AnalysisProjection({ rootDir: root,
+        materialization: source, paperAsset, requireTeachingContent: true })
+      assert.ok(full().sidecars['seven-choices-analysis-v1.json'])
+      const screen = buildSevenChoicesSurfaceModel({
+        asset: paperAsset, analysis, groupId: group.groupId, canonicalConsumption: consumption,
+      })
+      assert.ok(screen.surfaceData.annotations.length, 'real Screen builder projects teaching annotations')
+      const forgedRange = structuredClone(analysis)
+      forgedRange.groups[group.groupId].teachingContent.annotations[0].sourceRanges[0].quote += 'FORGED'
+      assert.throws(() => buildSevenChoicesSurfaceModel({ asset: paperAsset, analysis: forgedRange,
+        groupId: group.groupId, canonicalConsumption: consumption }), /exact text range/)
+      assert.throws(() => validateNck1StagedAnalysis(request, forgedRange), /exact text range/)
+      writeFileSync(candidatePath, JSON.stringify(forgedRange))
+      const rejectedRange = runWithConsumption()
+      assert.equal(rejectedRange.status, 1, rejectedRange.stdout)
+      assert.match(rejectedRange.stderr, /exact text range/)
+      writeFileSync(path.join(root, filename), JSON.stringify(forgedRange))
+      assert.throws(full, /exact text range/)
+      const forged = structuredClone(analysis)
+      Object.values(forged.questions)[0].contextEvidence.afterQuote = 'FORGED (伪造)'
+      writeFileSync(candidatePath, JSON.stringify(forged))
+      writeFileSync(path.join(root, filename), JSON.stringify(forged))
+      for (const runCheck of [run, runWithConsumption]) {
+        const rejected = runCheck()
+        assert.equal(rejected.status, 1, rejected.stdout)
+        assert.match(rejected.stderr, /afterQuote 必须精确匹配原文/)
+      }
+      assert.throws(full, /afterQuote 必须精确匹配原文/)
+      writeFileSync(candidatePath, JSON.stringify(analysis))
+      writeFileSync(path.join(root, filename), JSON.stringify(analysis))
+      assert.equal(JSON.stringify({ source, paperAsset }), authorityBefore)
       const selection = consumption.selections.find(s => s.familyContractId === 'seven-choices')
       const occurrence = selection.projectedOccurrences.find(o => o.groupId === group.groupId)
       const paragraph = occurrence.content.blocks.find(b => b.nodeId === 'block:seven-choices')
       paragraph.inlines[0].text = paragraph.inlines[0].text
-        .replace('To err (犯错) is human.', 'To err（犯错）is human.')
+        .replace('To err (犯错) is human.', 'Invented sentence.')
       selection.projectedOccurrenceDigests.find(d => d.groupId === group.groupId).digest = digestJson(occurrence)
       writeFileSync(consumptionPath, JSON.stringify(consumption))
-      const aligned = runWithConsumption()
-      assert.equal(aligned.status, 0, aligned.stderr)
+      const mismatch = runWithConsumption()
+      assert.equal(mismatch.status, 1, mismatch.stdout)
+      assert.match(mismatch.stderr, /source paragraph .* does not match TextMap/)
       rmSync(consumptionPath)
       assert.equal(readFileSync(requestPath, 'utf8'), JSON.stringify(request))
       assert.equal(readFileSync(candidatePath, 'utf8'), JSON.stringify(analysis))
-      console.log('PASS TextMap: aligned canonical blanks accepted; 2023 I parentheses drift rejected')
+      console.log('PASS raw gloss coordinates: single/freeze/CLI/real Screen; legacy profile accepted; forged quotes and TextMap drift rejected; source unchanged')
     }
 
     const wrong = structuredClone(analysis)
