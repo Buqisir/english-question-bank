@@ -4,7 +4,9 @@ import './emptyIllustration.css'
 /*
  * 空状态插图（迁移第 12 条，样张 design/texture-2026-11-13/empty-states-sample.html）。
  * 只给「还没东西」的 5 处：插图 = 这一页图标的平涂版，坐标取自 icons-v3.mjs，
- * 线换成色块；前后挡住处留白缝。搜了没结果、还没选、暂时没有只写一行灰字，不用它。
+ * 线换成色块；前后挡住处留白缝。
+ * 例外：线稿里纸在笔周围断开的那道缝（G9）平涂时不照搬：挖开会露出底色，像一块影子；
+ * 平涂的笔本来就盖在纸上（Owner 2026-11-13 指出）。搜了没结果、还没选、暂时没有只写一行灰字，不用它。
  */
 export type EmptyIllustrationKind = 'archive' | 'vocabulary-notebook' | 'paper-lined' | 'question-bank' | 'board-list'
 
@@ -51,7 +53,7 @@ export function EmptyIllustration({ kind, onCard = false }: { kind: EmptyIllustr
       )}
       {kind === 'board-list' && (
         <>
-          <path className="ill-paper" d="M6.805 4.726 H14.296 L8.083 10.94 L11.241 14.099 L17.455 7.885 V17.975 Q17.455 21.352 14.078 21.352 H6.805 Q3.428 21.352 3.428 17.975 V8.103 Q3.428 4.726 6.805 4.726 Z" />
+          <path className="ill-paper" d="M6.805 4.726 H14.078 Q17.455 4.726 17.455 8.103 V17.975 Q17.455 21.352 14.078 21.352 H6.805 Q3.428 21.352 3.428 17.975 V8.103 Q3.428 4.726 6.805 4.726 Z" />
           <path className="ill-mid-line" d="M7.324 12.52 H9.662" />
           <path className="ill-deep" d="M9.662 12.52 L10.441 8.893 L16.478 2.866 A2.011 2.011 0 0 1 19.315 5.703 L13.288 11.74 Z" />
         </>
