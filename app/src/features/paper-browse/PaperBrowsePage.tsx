@@ -3480,6 +3480,12 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       : []
     let lectureTitle: string | null = group.title
     if (group.groupType === 'reading') lectureTitle = readingLectureLabel(group.title)
+    if (group.groupType !== 'writing') {
+      const canonicalTitle = canonicalRailLabel(canonicalConsumption, groupId)
+      if (canonicalTitle) {
+        lectureTitle = group.groupType === 'listening' ? `听力 ${canonicalTitle}` : canonicalTitle
+      }
+    }
     if (group.groupType === 'writing' && canonicalConsumption) {
       lectureTitle = canonicalWritingNavigationChrome({
         consumption: canonicalConsumption,
