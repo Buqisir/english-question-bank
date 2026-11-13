@@ -114,6 +114,7 @@ export function isSupportedCleftThatAnswer(answer) {
 }
 
 function answerMatchesKey(aiAnswer, answerKey) {
+  if (aiAnswer === answerKey) return true
   const normalizedAi = normalizeAnswerBranch(aiAnswer)
   const branches = String(answerKey).split('/').map(normalizeAnswerBranch)
   return branches.some((branch) => normalizedAi === branch)
@@ -613,6 +614,8 @@ export function stampGrammarFillDerivedFields(analysis) {
   if (!blanks || typeof blanks !== 'object') return analysis
   for (const blank of Object.values(blanks)) {
     if (!blank || typeof blank !== 'object') continue
+    // Preserve the official key for display; derive only from its first alternative.
+    const answer = String(blank.answer || '').split('/')[0].replace(/\([^()]+\)\s*$/, '').trim()
     const nounToVerbRoute = blank.facetKey === NOUN_TO_VERB_FACET
       ? blank.similarityProfile?.route
       : null
@@ -620,7 +623,7 @@ export function stampGrammarFillDerivedFields(analysis) {
       blank.facetKey === 'grammar-fill.given.verb.finite'
       || nounToVerbRoute === 'finite-result'
     ) {
-      const axes = deriveVerbAxes({ hint: blank.hint, answer: blank.answer })
+      const axes = deriveVerbAxes({ hint: blank.hint, answer })
       blank.tense = axes?.tense ?? null
       blank.voice = axes?.voice ?? null
       blank.agreementSensitive = axes ? axes.agreementSensitive : null
@@ -628,8 +631,8 @@ export function stampGrammarFillDerivedFields(analysis) {
       blank.facetKey === NON_FINITE_FACET
       || nounToVerbRoute === 'non-finite-result'
     ) {
-      blank.form = deriveNonFiniteForm(blank.answer)
-      blank.similarityForm = deriveNonFiniteSimilarityForm(blank.answer)
+      blank.form = deriveNonFiniteForm(answer)
+      blank.similarityForm = deriveNonFiniteSimilarityForm(answer)
     }
   }
   return analysis

@@ -336,6 +336,34 @@ function stubProvider(payload) {
 async function assertAnalysisValidation() {
   const input = gfFixtureInput()
 
+  for (const [answer, hint, tense] of [
+    ['that/which', null, null],
+    ['were(are)', 'be', 'past'],
+    ['were/are', 'be', 'past'],
+  ]) {
+    const authority = structuredClone(input)
+    Object.assign(authority.group.questions[0], { answerKey: answer, prompt: hint })
+    const analysis = validGfAnalysis(authority)
+    const blank = analysis.blanks[authority.group.questions[0].id]
+    if (tense) blank.similarityProfile = { route: 'past-context-cue', features: [] }
+    stampGrammarFillDerivedFields(analysis)
+    validateGrammarFillShape(analysis, authority)
+    assert(`complete official answer ${answer} is retained`, blank.answer === answer)
+    if (tense) assert(`${answer} derives from its first branch`, blank.tense === tense)
+    await assertRejects(`${answer} rejects a different complete answer`, () => {
+      blank.answer = `${answer}/wrong`
+      validateGrammarFillShape(analysis, authority)
+    }, /AI 答案与答案解析版不一致/)
+  }
+
+  for (const answer of ['learning/chosen', 'learning(chosen)']) {
+    const analysis = { blanks: { q: { facetKey: 'grammar-fill.given.verb.non-finite', answer } } }
+    stampGrammarFillDerivedFields(analysis)
+    assert(`${answer} derives non-finite forms from its first branch`,
+      analysis.blanks.q.form === 'doing' && analysis.blanks.q.similarityForm === 'doing'
+        && analysis.blanks.q.answer === answer)
+  }
+
   // Independent synthetic sources: the hint/answer remain adjective pairs.
   for (const [hint, answer, route, before, after, signal] of [
     ['distinct', 'distinctive', 'suffix-derivation', 'The exhibit features ', ' treasures.', 'treasures'],
