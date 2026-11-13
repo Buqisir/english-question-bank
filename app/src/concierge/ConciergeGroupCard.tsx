@@ -18,7 +18,7 @@ import { DraftAddIcon } from '../icons/MotionIcons'
 import { iconMotionInput } from '../icons/motionInput'
 import { type QuestionGroupCard } from '../domain/questionBank.ts'
 import { buildTopicText, compactPassageTitle, compactSummary } from './passageText.ts'
-import { ConciergeGroupRowMenu, type ConciergeGroupRowMenuItem } from './ConciergeGroupRowMenu.tsx'
+import { Menu, type MenuAction } from '../shared-ui/Menu.tsx'
 import { buildPaperBrowseLectureHref } from './paperSurfaceHref.ts'
 import {
   SimilarPassagesPanel,
@@ -122,14 +122,13 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
     onOpenDetail(group)
   }
 
-  const menuItems: ConciergeGroupRowMenuItem[] = []
+  const menuItems: MenuAction[] = []
   if (similarEligible) {
     menuItems.push({
       key: 'similar',
       label: '相似篇章',
       icon: <Papers size={16} aria-hidden="true" />,
-      dataRaEntry: 'group-card-similar',
-      dataRaGroupId: group.id,
+      data: { 'data-ra-entry': 'group-card-similar', 'data-ra-group-id': group.id },
       onSelect: () => onToggleSimilar(group.id),
     })
   }
@@ -139,7 +138,7 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
       label: '详情',
       icon: <Paper size={16} aria-hidden="true" />,
       href: `?view=detail&groupId=${encodeURIComponent(group.id)}`,
-      onClick: (event) => {
+      onSelect: (event) => {
         event.preventDefault()
         onOpenDetail(group)
       },
@@ -151,8 +150,7 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
       label: group.paperSurfaceLabel || '阅读解析',
       icon: <ReadingAnalysis size={16} aria-hidden="true" />,
       href: paperSurfaceAnalysisHref,
-      dataRaEntry: 'group-card',
-      dataRaGroupId: group.id,
+      data: { 'data-ra-entry': 'group-card', 'data-ra-group-id': group.id },
     })
   }
 
@@ -202,7 +200,7 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
               <DraftAddIcon size={16} done={draftState === 'in_current_draft'} />
             </span>
           </button>
-          <ConciergeGroupRowMenu items={menuItems} />
+          <Menu items={menuItems} label="更多操作" triggerClassName="concierge-group-row-menu-trigger" />
         </div>
       </div>
 

@@ -42,7 +42,7 @@ import type { QuestionGroupCard, QuestionGroupDetail, ReadingParseQuestionGroupR
 import { sourceTypeLabel } from '../../domain/questionBank'
 import { compactGroupMeta } from './detailHelpers'
 import { buildPaperBrowseLectureHref } from '../../concierge/paperSurfaceHref'
-import { ConciergeGroupRowMenu } from '../../concierge/ConciergeGroupRowMenu'
+import { Menu } from '../../shared-ui/Menu.tsx'
 import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import {
   SimilarPassagesPanel,
@@ -627,18 +627,19 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
             )}
             {isOwnerView && selectedDetail.canEdit && (
               <div className="peek-actions-menu">
-                <ConciergeGroupRowMenu
+                <Menu
+                  label="更多操作"
                   items={[
                     {
                       key: 'edit',
                       label: '编辑',
-                      icon: <Pencil size={14} aria-hidden="true" />,
+                      icon: <Pencil size={16} aria-hidden="true" />,
                       onSelect: () => onEdit(selectedDetail),
                     },
                     {
                       key: 'delete',
                       label: '删除',
-                      icon: <Trash size={14} aria-hidden="true" />,
+                      icon: <Trash size={16} aria-hidden="true" />,
                       tone: 'danger',
                       onSelect: () => onDelete(selectedDetail),
                     },

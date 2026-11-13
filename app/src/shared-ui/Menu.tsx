@@ -11,6 +11,13 @@
  * - Esc、Tab、选中一项：关上，焦点回到触发键；
  * - 点外面、外面滚动：关上，焦点不抢；
  * - 面板挂在 body 上，贴着触发键放，下面放不下就翻到上面，左右不出屏。
+ *
+ * 换首页和个人空间的行菜单时（构件厂第 4 步第四页）补了四样，都是那两处原来就有的：
+ * - onSelect 拿到点击事件和触发键：链接项要 preventDefault 走站内跳转（首页「详情」），
+ *   打开确认框的项要把触发键交给确认框，关了以后焦点回到它（个人空间「删除文件」）；
+ * - restoreFocus：选中后焦点回不回触发键，默认回；打开对话框的项设 false，焦点交给对话框；
+ * - data：项上的 data-* 属性（首页的 data-ra-entry / data-ra-group-id，阅读解析入口统计用）；
+ * - triggerClassName、triggerDisabled：触发键的选择器钩子和禁用（个人空间文件下载中禁用）。
  */
 
 import {
@@ -38,7 +45,12 @@ export type MenuAction = {
   disabled?: boolean
   /** 有 href 时是链接（去别的页），否则是按钮。 */
   href?: string
-  onSelect?: () => void
+  /** event 是项上的点击；trigger 是触发键（菜单关上以前取的）。 */
+  onSelect?: (event: MouseEvent<HTMLElement>, trigger: HTMLButtonElement | null) => void
+  /** 选中后焦点回触发键，默认 true。项会打开对话框时设 false，焦点交给对话框。 */
+  restoreFocus?: boolean
+  /** 项上的 data-* 属性。 */
+  data?: Record<`data-${string}`, string | undefined>
 }
 
 export type MenuSeparator = { key: string; separator: true }
@@ -54,6 +66,9 @@ export type MenuProps = {
   triggerIcon?: ReactNode
   triggerTone?: ButtonTone
   triggerSize?: ButtonSize
+  /** 挂在触发键上的类名，只当选择器钩子用。 */
+  triggerClassName?: string
+  triggerDisabled?: boolean
   /** 面板和触发键哪一边对齐：end 右边对齐（默认），start 左边对齐。 */
   align?: 'start' | 'end'
   className?: string
@@ -82,6 +97,8 @@ export function Menu({
   triggerIcon,
   triggerTone = 'subtle',
   triggerSize = 'sm',
+  triggerClassName,
+  triggerDisabled,
   align = 'end',
   className,
 }: MenuProps) {
@@ -186,6 +203,8 @@ export function Menu({
 
   const triggerProps = {
     ref: triggerRef,
+    className: triggerClassName,
+    disabled: triggerDisabled,
     tone: triggerTone,
     size: triggerSize,
     'aria-haspopup': 'menu' as const,
@@ -218,7 +237,12 @@ export function Menu({
           >
             {items.map((entry) => {
               if (isSeparator(entry)) return <div key={entry.key} className="eqb-menu-separator" role="separator" />
+              const select = (event: MouseEvent<HTMLElement>) => {
+                entry.onSelect?.(event, triggerRef.current)
+                close(entry.restoreFocus !== false)
+              }
               const common = {
+                ...entry.data,
                 className: 'eqb-menu-item',
                 role: 'menuitem',
                 'data-tone': entry.tone,
@@ -237,10 +261,7 @@ export function Menu({
                     key={entry.key}
                     {...common}
                     href={entry.href}
-                    onClick={() => {
-                      entry.onSelect?.()
-                      close(true)
-                    }}
+                    onClick={select}
                   >
                     {body}
                   </a>
@@ -251,10 +272,8 @@ export function Menu({
                   key={entry.key}
                   type="button"
                   {...common}
-                  onClick={() => {
-                    if (entry.disabled) return
-                    entry.onSelect?.()
-                    close(true)
+                  onClick={(event) => {
+                    if (!entry.disabled) select(event)
                   }}
                 >
                   {body}

@@ -1,4 +1,4 @@
-import { Ellipsis, Folder, Paper, Save, Trash } from '../../icons'
+import { Folder, Paper, Save, Trash } from '../../icons'
 import { EmptyIllustration } from '../../components/EmptyIllustration'
 import { DownloadFeedbackIcon } from '../../icons/MotionIcons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
@@ -6,20 +6,17 @@ import { FluidHoverList } from '../../components/FluidHoverList'
 import {
   useCallback,
   useEffect,
-  useId,
   useMemo,
   useRef,
   useState,
-  type KeyboardEvent,
-  type MouseEvent,
   type ReactNode,
 } from 'react'
-import { createPortal } from 'react-dom'
 import type { MySpaceArtifact, MySpaceFolder } from '../../domain/questionBank'
 import { deleteMySpaceArtifact, downloadMySpaceArtifact, fetchMySpace } from '../../services/mySpace'
 import { prepareFileSaveTarget, type FileSaveMode } from '../../services/fileDownload.ts'
 import { describeError } from '../shared/errorCopy'
 import { useToastPresence } from '../shared/useToastPresence.ts'
+import { Menu } from '../../shared-ui/Menu.tsx'
 import './MySpacePage.css'
 
 export type MySpacePageProps = {
@@ -79,8 +76,6 @@ function groupArtifactsByMonth(items: MySpaceArtifact[]): MonthGroup[] {
   }))
 }
 
-let activeFileMenuCloser: ((restoreFocus?: boolean) => void) | null = null
-
 function ArtifactMenu({
   artifact,
   disabled,
@@ -92,138 +87,28 @@ function ArtifactMenu({
   onSaveAs: () => void
   onDelete: (trigger: HTMLButtonElement) => void
 }) {
-  const [open, setOpen] = useState(false)
-  const [position, setPosition] = useState({ top: 0, left: 0 })
-  const triggerRef = useRef<HTMLButtonElement>(null)
-  const menuRef = useRef<HTMLDivElement>(null)
-  const menuId = useId()
-
-  const close = useCallback((restoreFocus = true) => {
-    setOpen(false)
-    if (restoreFocus) requestAnimationFrame(() => triggerRef.current?.focus())
-  }, [])
-
-  useEffect(() => {
-    if (!open) return
-    if (activeFileMenuCloser && activeFileMenuCloser !== close) activeFileMenuCloser(false)
-    activeFileMenuCloser = close
-
-    const onPointerDown = (event: PointerEvent) => {
-      const target = event.target as Node
-      if (triggerRef.current?.contains(target) || menuRef.current?.contains(target)) return
-      close(false)
-    }
-    const onKeyDown = (event: globalThis.KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault()
-        close(true)
-      }
-    }
-    const onViewportChange = () => close(false)
-    document.addEventListener('pointerdown', onPointerDown)
-    document.addEventListener('keydown', onKeyDown)
-    window.addEventListener('resize', onViewportChange)
-    window.addEventListener('scroll', onViewportChange, true)
-    const focusFrame = requestAnimationFrame(() => menuRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus({ preventScroll: true }))
-
-    return () => {
-      cancelAnimationFrame(focusFrame)
-      if (activeFileMenuCloser === close) activeFileMenuCloser = null
-      document.removeEventListener('pointerdown', onPointerDown)
-      document.removeEventListener('keydown', onKeyDown)
-      window.removeEventListener('resize', onViewportChange)
-      window.removeEventListener('scroll', onViewportChange, true)
-    }
-  }, [close, open])
-
-  function placeMenu() {
-    const rect = triggerRef.current?.getBoundingClientRect()
-    if (!rect) return
-    const width = 168
-    const height = 92
-    const gutter = 8
-    const top = rect.bottom + 6 + height > window.innerHeight
-      ? Math.max(gutter, rect.top - height - 6)
-      : rect.bottom + 6
-    const left = Math.min(window.innerWidth - width - gutter, Math.max(gutter, rect.right - width))
-    setPosition({ top, left })
-  }
-
-  function toggle(event: MouseEvent<HTMLButtonElement>) {
-    event.stopPropagation()
-    if (open) {
-      close(false)
-      return
-    }
-    placeMenu()
-    setOpen(true)
-  }
-
-  function onMenuKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    const items = menuRef.current ? [...menuRef.current.querySelectorAll<HTMLElement>('[role="menuitem"]')] : []
-    if (!items.length) return
-    const index = items.indexOf(document.activeElement as HTMLElement)
-    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-      event.preventDefault()
-      const step = event.key === 'ArrowDown' ? 1 : -1
-      items[(index + step + items.length) % items.length].focus()
-    } else if (event.key === 'Home' || event.key === 'End') {
-      event.preventDefault()
-      items[event.key === 'Home' ? 0 : items.length - 1].focus()
-    } else if (event.key === 'Tab') {
-      event.preventDefault()
-      close(true)
-    }
-  }
-
   return (
-    <>
-      <button
-        ref={triggerRef}
-        type="button"
-        className="my-space-row-menu-trigger"
-        aria-label={`更多操作：${artifact.title || artifact.fileName}`}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-controls={open ? menuId : undefined}
-        disabled={disabled}
-        onClick={toggle}
-      >
-        <Ellipsis size={16} aria-hidden="true" />
-      </button>
-      {open && createPortal(
-        <FluidHoverList
-          as="div"
-          ref={menuRef}
-          id={menuId}
-          className="my-space-row-menu"
-          itemSelector=".my-space-row-menu-item"
-          role="menu"
-          gapClick={false}
-          style={position}
-          onKeyDown={onMenuKeyDown}
-          onClick={(event) => event.stopPropagation()}
-        >
-          <button type="button" className="my-space-row-menu-item" role="menuitem" onClick={() => { close(true); onSaveAs() }}>
-            <Save size={16} aria-hidden="true" />另存为…
-          </button>
-          <button
-            type="button"
-            className="my-space-row-menu-item my-space-row-menu-item-danger"
-            role="menuitem"
-            onClick={() => {
-              const trigger = triggerRef.current
-              close(false)
-              if (trigger) onDelete(trigger)
-            }}
-          >
-            <Trash size={16} aria-hidden="true" />删除文件
-          </button>
-        </FluidHoverList>,
-        // Keep the page's theme tokens while escaping the clipped file list.
-        triggerRef.current?.closest('.my-space-page') ?? document.body,
-      )}
-    </>
+    <Menu
+      label={`更多操作：${artifact.title || artifact.fileName}`}
+      triggerClassName="my-space-row-menu-trigger"
+      triggerDisabled={disabled}
+      // 和同一行的「下载」「打开原草稿」一样高（36，窄屏 34 见 MySpacePage.css）。
+      triggerSize="lg"
+      items={[
+        { key: 'save-as', label: '另存为…', icon: <Save size={16} aria-hidden="true" />, onSelect: () => onSaveAs() },
+        {
+          key: 'delete',
+          label: '删除文件',
+          icon: <Trash size={16} aria-hidden="true" />,
+          tone: 'danger',
+          // 确认框接焦点；关掉确认框时焦点回这个触发键（requestDeleteArtifact 记下它）。
+          restoreFocus: false,
+          onSelect: (_event, trigger) => {
+            if (trigger) onDelete(trigger)
+          },
+        },
+      ]}
+    />
   )
 }
 
@@ -268,7 +153,6 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
   useEffect(() => { void load() }, [load])
 
   function selectFolder(folderId: string | null) {
-    activeFileMenuCloser?.(false)
     setSelectedFolderId(folderId)
   }
 

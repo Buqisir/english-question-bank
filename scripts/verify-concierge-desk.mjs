@@ -279,7 +279,8 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   const groupCardSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeGroupCard.tsx'), 'utf8')
   // 2026-09-15: compactPassageTitle & friends moved to passageText.ts (shared with home rows).
   const passageTextSource = readFileSync(path.join(srcRoot, 'concierge', 'passageText.ts'), 'utf8')
-  const rowMenuSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeGroupRowMenu.tsx'), 'utf8')
+  // 构件厂第 4 步（2026-11-13）：行「…」菜单换成共用 Menu，ConciergeGroupRowMenu.tsx 删掉；下面菜单行为几条改读 Menu.tsx。
+  const rowMenuSource = readFileSync(path.join(srcRoot, 'shared-ui', 'Menu.tsx'), 'utf8')
   const appSource = readFileSync(path.join(srcRoot, 'App.tsx'), 'utf8')
   const aggSource = readFileSync(path.join(srcRoot, 'concierge', 'aggregatePaperResults.ts'), 'utf8')
 
@@ -482,21 +483,21 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Group card has no 找类似 <button> (retired text-search-fill flow)',
     !/>\s*找类似\s*<\/button>/.test(groupCardSource), '')
   assert('Group card renders 相似篇章 as a menu button (no deep-link <a>)',
-    /dataRaEntry:\s*['"]group-card-similar['"]/.test(groupCardSource) &&
+    /['"]data-ra-entry['"]:\s*['"]group-card-similar['"]/.test(groupCardSource) &&
     /label:\s*['"]相似篇章['"]/.test(groupCardSource) &&
     !/<a[^>]*>\s*相似篇章\s*<\/a>/.test(groupCardSource), '')
   assert('Group card gates 相似篇章 on the four v2-supported groupTypes',
     /SIMILAR_SUPPORTED_GROUP_TYPES/.test(groupCardSource) && /similarEligible/.test(groupCardSource), '')
   assert('Group card keeps 详情 href and 阅读解析 data-ra-entry',
-    /view=detail&groupId=/.test(groupCardSource) && /dataRaEntry:\s*['"]group-card['"]/.test(groupCardSource), '')
+    /view=detail&groupId=/.test(groupCardSource) && /['"]data-ra-entry['"]:\s*['"]group-card['"]/.test(groupCardSource), '')
   assert('Group card uses always-visible + / … trail (hover-reveal cluster gone)',
     /concierge-group-row-trail/.test(groupCardSource) &&
     /concierge-action-add/.test(groupCardSource) &&
     !/concierge-group-row-actions/.test(groupCardSource), '')
   assert('Group card has no 预览 button', !/['"]预览['"]/.test(groupCardSource), '')
   assert('Group card has no per-question add UI', !/加入小题|加入单题|onAddQuestion/.test(groupCardSource), '')
-  assert('Row menu is a role=menu with menuitem children', /role=['"]menu['"]/.test(rowMenuSource) && /role=['"]menuitem['"]/.test(rowMenuSource), '')
-  assert('Row menu trigger has aria-haspopup=menu and aria-expanded', /aria-haspopup=['"]menu['"]/.test(rowMenuSource) && /aria-expanded=\{open\}/.test(rowMenuSource), '')
+  assert('Row menu is a role=menu with menuitem children', /role=['"]menu['"]/.test(rowMenuSource) && /role[=:]\s*['"]menuitem['"]/.test(rowMenuSource), '')
+  assert('Row menu trigger has aria-haspopup=menu and aria-expanded', /['"]?aria-haspopup['"]?[=:]\s*['"]menu['"]/.test(rowMenuSource) && /['"]?aria-expanded['"]?(=\{|:\s*)open\b/.test(rowMenuSource), '')
   assert('Row menu moves focus with ArrowDown/ArrowUp', /ArrowDown/.test(rowMenuSource) && /ArrowUp/.test(rowMenuSource), '')
   assert('Row menu closes on Esc, outside click, and scroll', /Escape/.test(rowMenuSource) && /pointerdown/.test(rowMenuSource) && /scroll/.test(rowMenuSource), '')
   assert('hover-reveal .concierge-group-row-actions CSS is gone', !/\.concierge-group-row-actions/.test(readFileSync(path.join(srcRoot, 'App.css'), 'utf8')), '')

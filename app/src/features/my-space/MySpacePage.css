@@ -208,8 +208,8 @@ button.my-space-folder-button { cursor: pointer; }
   gap: 3px;
 }
 
-.my-space-row-actions button,
-.my-space-row-menu-item {
+/* :where(:not(.eqb-button))：「…」触发键是共用 Button，不吃这几条手写按钮规则（特异度不变）。 */
+.my-space-row-actions button:where(:not(.eqb-button)) {
   align-items: center;
   background: transparent;
   border: 0;
@@ -225,33 +225,17 @@ button.my-space-folder-button { cursor: pointer; }
   white-space: nowrap;
 }
 
-.my-space-row-actions button:hover:not(:disabled),
-.my-space-row-actions button:focus-visible { color: var(--eqb-color-text); }
+.my-space-row-actions button:where(:not(.eqb-button)):hover:not(:disabled),
+.my-space-row-actions button:where(:not(.eqb-button)):focus-visible { color: var(--eqb-color-text); }
 
-.my-space-row-actions button:disabled { cursor: not-allowed; opacity: 0.55; }
-.my-space-row-menu-trigger { justify-content: center; padding-inline: 8px !important; width: 36px; }
+.my-space-row-actions button:where(:not(.eqb-button)):disabled { cursor: not-allowed; opacity: 0.55; }
 
-.my-space-row-menu {
-  --fh-radius: 8px;
-  background: var(--desk-raised);
-  border: 1px solid transparent;
-  border-radius: 12px;
-  box-shadow: var(--elev-3);
-  box-sizing: border-box;
-  display: grid;
-  gap: 2px;
-  padding: 6px;
-  position: fixed;
-  width: 168px;
-  z-index: 70;
-}
-
-.my-space-row-menu-item { color: var(--desk-ink); position: relative; width: 100%; }
-.my-space-row-menu-item-danger { color: var(--eqb-color-danger); }
+/* 文件行「…」菜单：2026-11-13 换成共用 Menu（app/src/shared-ui/Menu.tsx + menu.css），原来的
+ * .my-space-row-menu、-menu-item、-menu-item-danger、-menu-trigger 几条删掉。触发键是 Button 大号（36），
+ * 和同一行「下载」「打开原草稿」一样高。 */
 
 .my-space-folder-button:focus-visible,
-.my-space-row-actions button:focus-visible,
-.my-space-row-menu-item:focus-visible,
+.my-space-row-actions button:where(:not(.eqb-button)):focus-visible,
 .my-space-empty-cta:focus-visible,
 .my-space-confirm-actions button:focus-visible {
   outline: var(--focus-ring);
@@ -368,8 +352,11 @@ button.my-space-folder-button { cursor: pointer; }
   .my-space-file-row { align-items: start; gap: 10px; grid-template-columns: 24px minmax(0, 1fr); padding: 14px 12px; }
   .my-space-file-icon { margin-top: 2px; }
   .my-space-row-actions { grid-column: 2; justify-content: flex-end; margin-top: 2px; }
-  .my-space-row-actions button { min-height: 34px; }
-  .my-space-row-actions button:nth-child(2) { padding-inline: 6px; }
+  .my-space-row-actions button:where(:not(.eqb-button)) { min-height: 34px; }
+  .my-space-row-actions button:where(:not(.eqb-button)):nth-child(2) { padding-inline: 6px; }
+  /* 窄屏这一行的键都是 34 高（上一条）。本条覆盖 button.css 里 .eqb-button[data-size='lg'] 的 36，让「…」跟着一样高；
+   * 宽仍是 36，和原来一样。 */
+  .my-space-row-actions .eqb-button.my-space-row-menu-trigger { height: 34px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
