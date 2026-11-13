@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>空状态样张</title>
+<!--
+  空状态样张 · 2026-11-13 · 提案 · 单一来源（只看了代码，没问过老师）
+  插图形状取自 app/src/icons 的图标坐标；颜色深浅目测，待测量。
+  颜色只用桌面色阶（DESIGN.md §2），插图里不用薄荷（BRAND.md 第 72 条），平涂（BRAND.md 第 86 条）。
+-->
+<style>
+  :root {
+    --desk-page: #F1F5F7;
+    --desk-surface: #FFFFFF;
+    --desk-border: #DCE6EB;
+    --desk-line: #E6EDF1;
+    --desk-ink: #1B2B33;
+    --desk-muted: #5A6C75;
+    --ill-deep: #C9D6DD;
+    --ill-mid: #DCE6EB;
+    --ill-light: #E6EDF1;
+    --accent: #6FBFA2;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--desk-page);
+    color: var(--desk-ink);
+    font: 14px/1.5 Inter, "PingFang SC", "Microsoft YaHei", "WenQuanYi Zen Hei", system-ui, sans-serif;
+    padding: 32px 16px 56px;
+  }
+  main { max-width: 1120px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 600; margin: 0 0 4px; }
+  h2 { font-size: 17px; font-weight: 600; margin: 40px 0 4px; }
+  .lead, .sec-lead { color: var(--desk-muted); margin: 0 0 16px; }
+  .tag {
+    display: inline-block; font-size: 12px; color: var(--desk-muted);
+    border: 1px solid var(--desk-border); border-radius: 4px; padding: 0 6px; margin-left: 6px;
+    vertical-align: 2px; font-weight: 400;
+  }
+
+  /* 大空状态 */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 16px; }
+  .board {
+    background: var(--desk-surface);
+    border: 1px solid var(--desk-border);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .board-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .board-title { font-size: 15px; font-weight: 600; margin: 0; }
+  .where { font-size: 12px; color: var(--desk-muted); }
+  .empty {
+    margin-top: 12px;
+    background: var(--desk-page);
+    border-radius: 8px;
+    min-height: 260px;
+    display: grid; place-items: center; align-content: center; gap: 12px;
+    text-align: center; padding: 24px 20px;
+  }
+  .empty .ill { width: 88px; height: 88px; display: block; }
+  .from { display: flex; gap: 10px; align-items: flex-start; margin: 10px 0 0; font-size: 12px; color: var(--desk-muted); }
+  .from b { font-weight: 500; color: var(--desk-ink); }
+  .icos { display: flex; gap: 4px; flex: none; }
+  .ico { width: 24px; height: 24px; display: block; }
+  .empty p { margin: 0; color: var(--desk-muted); font-size: 13px; max-width: 280px; }
+  .btn {
+    height: 32px; padding: 0 14px; border-radius: 8px; border: 0;
+    background: var(--accent); color: var(--desk-ink); font: inherit; font-size: 13px;
+  }
+  .now { margin: 10px 0 0; font-size: 12px; color: var(--desk-muted); }
+  .now b { font-weight: 500; color: var(--desk-ink); }
+
+  /* 小空状态 */
+  .small-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 760px) { .small-grid { grid-template-columns: 1fr; } }
+  .line-empty { margin: 12px 0 0; color: var(--desk-muted); font-size: 13px; padding: 6px 4px; }
+  .inline-btn {
+    border: 0; background: none; padding: 0; font: inherit; color: var(--desk-ink);
+    text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--desk-border);
+    cursor: pointer;
+  }
+  .search {
+    height: 36px; border: 1px solid var(--desk-border); border-radius: 12px;
+    display: flex; align-items: center; padding: 0 12px; color: var(--desk-ink); font-size: 13px;
+  }
+  .lecture {
+    margin-top: 12px; min-height: 120px; border-radius: 8px; background: var(--desk-surface);
+    display: grid; place-items: center; color: var(--desk-muted); font-size: 13px;
+    border: 1px solid var(--desk-line);
+  }
+
+  /* 完成态 */
+  .done { display: grid; justify-items: center; gap: 8px; padding: 24px 12px 8px; text-align: center; }
+  .done-title { font-size: 16px; font-weight: 600; margin: 0; }
+  .done-nums { display: flex; gap: 24px; margin: 4px 0 0; }
+  .done-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
+  .ghost { height: 32px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--desk-border); background: var(--desk-surface); color: var(--desk-ink); font: inherit; font-size: 13px; }
+  .num { display: grid; justify-items: center; }
+  .num b { font-size: 22px; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .num span { font-size: 12px; color: var(--desk-muted); }
+
+  /* 规矩 */
+  table { width: 100%; border-collapse: collapse; background: var(--desk-surface); border: 1px solid var(--desk-border); border-radius: 12px; overflow: hidden; }
+  th, td { text-align: left; padding: 10px 12px; border-top: 1px solid var(--desk-line); vertical-align: top; font-size: 13px; }
+  th { border-top: 0; font-weight: 600; background: var(--desk-surface); }
+  td:first-child { white-space: nowrap; font-weight: 500; }
+  .table-wrap { overflow-x: auto; }
+  .fine { color: var(--desk-muted); font-size: 12px; margin-top: 24px; }
+  .fix { background: var(--desk-surface); border: 1px solid var(--desk-border); border-radius: 12px; padding: 16px; }
+  .fix-row { display: grid; grid-template-columns: 90px 1fr; gap: 8px; margin-top: 6px; font-size: 13px; }
+  .fix-row span:first-child { color: var(--desk-muted); }
+</style>
+</head>
+<body>
+<main>
+  <h1>空状态样张 <span class="tag">提案 · 单一来源</span></h1>
+  <p class="lead">只有「第一次来、还没东西」的地方放平涂插图；搜索没结果、还没选、暂时没有，都只写一行灰字；做完了不算空。插图的形状取自图标，颜色深浅是目测，待测量。</p>
+
+  <!-- ───────────── A 类：大空状态 ───────────── -->
+  <h2>一、还没东西：插图 + 一句话 + 最多一个按钮</h2>
+  <p class="sec-lead">每张插图就是这一页图标的大号平涂版：坐标直接取自 <code>app/src/icons</code>，只把线换成色块。下面一行是对应的 24px 图标，用来核对是不是一家。</p>
+
+  <div class="grid">
+    <figure class="board" style="margin:0">
+      <div class="board-head"><p class="board-title">全部文件</p><span class="where">个人空间</span></div>
+      <div class="empty">
+        <svg class="ill" viewBox="0 0 24 24" aria-hidden="true"><defs><clipPath id="bTop"><rect x="0" y="0" width="24" height="13.813"/></clipPath></defs>
+<path d="M8.869 7.854 V4.975 A1.768 1.768 0 0 1 10.636 3.208 H13.364 A1.768 1.768 0 0 1 15.131 4.975 V7.854" fill="none" stroke="#C9D6DD" stroke-width="1.5"/>
+<path d="M6.445 7.854 H17.555 A3.283 3.283 0 0 1 20.837 11.136 V17.499 A3.283 3.283 0 0 1 17.555 20.782 H6.445 A3.283 3.283 0 0 1 3.162 17.499 V11.136 A3.283 3.283 0 0 1 6.445 7.854 Z" fill="#DCE6EB"/>
+<path d="M6.445 7.854 H17.555 A3.283 3.283 0 0 1 20.837 11.136 V17.499 A3.283 3.283 0 0 1 17.555 20.782 H6.445 A3.283 3.283 0 0 1 3.162 17.499 V11.136 A3.283 3.283 0 0 1 6.445 7.854 Z" fill="#C9D6DD" clip-path="url(#bTop)"/>
+<rect x="3" y="13.4" width="18" height="0.8" fill="#FFFFFF"/></svg>
+        <p>试卷导出为 PDF 后，可以保存在这里。</p>
+        <button class="btn" type="button">去找题</button>
+      </div>
+      <div class="from"><span class="icos"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#1B2B33" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.445 7.854 H17.555 A3.283 3.283 0 0 1 20.837 11.136 V17.499 A3.283 3.283 0 0 1 17.555 20.782 H6.445 A3.283 3.283 0 0 1 3.162 17.499 V11.136 A3.283 3.283 0 0 1 6.445 7.854 Z"/><path d="M3.162 13.813 H20.837"/><path d="M8.869 7.854 V4.975 A1.768 1.768 0 0 1 10.636 3.208 H13.364 A1.768 1.768 0 0 1 15.131 4.975 V7.854"/></svg></span><span><b>照图标</b>：公文包（Archive，个人空间）。上半盖深、下半身浅，中间那道横线变成白缝；提手和图标同一支笔。</span></div>
+    </figure>
+    <figure class="board" style="margin:0">
+      <div class="board-head"><p class="board-title">生词本</p><span class="where">生词本</span></div>
+      <div class="empty">
+        <svg class="ill" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.365 18.617 Q4.365 20.653 6.91 20.653 H19.635 V16.326 C18.108 16.632 16.581 16.835 13.527 16.835 H6.91 Q4.365 16.835 4.365 18.617 Z" fill="#FFFFFF"/>
+<path d="M19.635 16.326 V3.347 H6.91 Q4.365 3.347 4.365 5.892 V18.617 Q4.365 16.835 6.91 16.835 H13.527 C16.581 16.835 18.108 16.632 19.635 16.326 Z" fill="#C9D6DD"/>
+<path d="M8.183 13.527 L11.287 6.401 H12.713 L15.817 13.527 H14.189 L13.527 11.898 H10.473 L9.811 13.527 ZM11.023 10.524 H12.977 L12 8.03 Z" fill="#FFFFFF" fill-rule="evenodd"/></svg>
+        <p>看卷时选中单词，点「加入生词本」，就会收到这里。</p>
+        <button class="btn" type="button">去找题</button>
+      </div>
+      <div class="from"><span class="icos"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#1B2B33" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.635 16.326 V3.347 H6.91 Q4.365 3.347 4.365 5.892 V18.617 Q4.365 20.653 6.91 20.653 H19.635"/><path d="M4.365 18.617 Q4.365 16.835 6.91 16.835 H13.527 C16.581 16.835 18.108 16.632 19.635 16.326"/><path d="M8.183 13.527 L11.287 6.401 H12.713 L15.817 13.527 H14.189 L13.527 11.898 H10.473 L9.811 13.527 ZM11.023 10.524 H12.977 L12 8.03 Z" fill="#1B2B33" stroke="none" fill-rule="evenodd"/></svg></span><span><b>照图标</b>：生词本（实心 A）。封面深，书口白，实心 A 反白在封面上。</span></div>
+    </figure>
+    <figure class="board" style="margin:0">
+      <div class="board-head"><p class="board-title">听写</p><span class="where">听写工作台</span></div>
+      <div class="empty">
+        <svg class="ill" viewBox="0 0 24 24" aria-hidden="true"><defs><clipPath id="lP"><path d="M7.383 3.009 H16.617 Q19.776 3.009 19.776 6.168 V14.819 H16.52 Q13.458 14.819 13.458 17.881 V20.991 H7.383 Q4.224 20.991 4.224 17.832 V6.168 Q4.224 3.009 7.383 3.009 Z"/></clipPath></defs>
+<path d="M7.383 3.009 H16.617 Q19.776 3.009 19.776 6.168 V14.819 H16.52 Q13.458 14.819 13.458 17.881 V20.991 H7.383 Q4.224 20.991 4.224 17.832 V6.168 Q4.224 3.009 7.383 3.009 Z" fill="#FFFFFF"/>
+<g clip-path="url(#lP)" stroke="#DCE6EB" stroke-width="1.5"><path d="M4 8.598 H20 M4 12.729 H11.903 M4 16.86 H9.327"/></g>
+<path d="M19.776 14.819 H16.52 Q13.458 14.819 13.458 17.881 V20.991 C16.957 20.991 19.776 18.415 19.776 14.819 Z" fill="#C9D6DD"/></svg>
+        <p>还没有听写。先到「词组」里选好单词。</p>
+        <button class="btn" type="button">去选词组</button>
+      </div>
+      <div class="from"><span class="icos"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#1B2B33" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.383 3.009 H16.617 Q19.776 3.009 19.776 6.168 V14.819 C19.776 18.415 16.957 20.991 13.458 20.991 H7.383 Q4.224 20.991 4.224 17.832 V6.168 Q4.224 3.009 7.383 3.009 Z"/><path d="M19.776 14.819 H16.52 Q13.458 14.819 13.458 17.881 V20.991"/><path d="M4.224 8.598 H19.776 M4.224 12.729 H11.903 M4.224 16.86 H9.327"/></svg></span><span><b>照图标</b>：横线纸（paper-lined，卷角在右下）。白纸、浅色横线通到纸边，右下卷角深。</span></div>
+    </figure>
+    <figure class="board" style="margin:0">
+      <div class="board-head"><p class="board-title">浏览全部</p><span class="where">找题首页</span></div>
+      <div class="empty">
+        <svg class="ill" viewBox="0 0 24 24" aria-hidden="true"><g transform="translate(4.8 2.69) scale(0.6)">
+<path d="M7.383 3.009 H16.617 Q19.776 3.009 19.776 6.168 V14.819 H16.52 Q13.458 14.819 13.458 17.881 V20.991 H7.383 Q4.224 20.991 4.224 17.832 V6.168 Q4.224 3.009 7.383 3.009 Z" fill="#FFFFFF"/>
+<path d="M19.776 14.819 H16.52 Q13.458 14.819 13.458 17.881 V20.991 C16.957 20.991 19.776 18.415 19.776 14.819 Z" fill="#C9D6DD"/>
+<path d="M8.404 7.723 H15.596 M8.404 11.757 H12.583" stroke="#DCE6EB" stroke-width="2.50" stroke-linecap="round"/></g>
+<path d="M3.5 14.25 L4.6 17.55 Q5.2 19.4 7.25 19.6 Q12 20.3 16.75 19.6 Q18.8 19.4 19.4 17.55 L20.5 14.25" fill="none" stroke="#C9D6DD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <p>题库还没有题目。先导入一套卷，这里就能按卷浏览。</p>
+      </div>
+      <div class="from"><span class="icos"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#1B2B33" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 14.25 L4.6 17.55 Q5.2 19.4 7.25 19.6 Q12 20.3 16.75 19.6 Q18.8 19.4 19.4 17.55 L20.5 14.25"/></svg><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#1B2B33" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.383 3.009 H16.617 Q19.776 3.009 19.776 6.168 V14.819 C19.776 18.415 16.957 20.991 13.458 20.991 H7.383 Q4.224 20.991 4.224 17.832 V6.168 Q4.224 3.009 7.383 3.009 Z"/><path d="M19.776 14.819 H16.52 Q13.458 14.819 13.458 17.881 V20.991"/><path d="M8.404 7.723 H15.596 M8.404 11.757 H12.583"/></svg></span><span><b>照图标</b>：卷 + 托盘（两个家族部件拼成，没有现成图标）。一张卷落进托盘：托盘在图标里表示「收进来」，同「过生词」的 A 落进托盘。</span></div>
+    </figure>
+    <figure class="board" style="margin:0">
+      <div class="board-head"><p class="board-title">草稿卷预览</p><span class="where">草稿卷</span></div>
+      <div class="empty">
+        <svg class="ill" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.805 4.726 H14.296 L8.083 10.94 L11.241 14.099 L17.455 7.885 V17.975 Q17.455 21.352 14.078 21.352 H6.805 Q3.428 21.352 3.428 17.975 V8.103 Q3.428 4.726 6.805 4.726 Z" fill="#FFFFFF"/>
+<path d="M7.324 12.52 H9.662" stroke="#DCE6EB" stroke-width="1.5" stroke-linecap="round"/>
+<path d="M9.662 12.52 L10.441 8.893 L16.478 2.866 A2.011 2.011 0 0 1 19.315 5.703 L13.288 11.74 Z" fill="#C9D6DD"/></svg>
+        <p>还没有题组。在找题结果里点「加入草稿卷」，题就会排进这张纸。</p>
+        <button class="btn" type="button">去找题</button>
+      </div>
+      <div class="from"><span class="icos"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#1B2B33" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.727 4.726 H6.805 Q3.428 4.726 3.428 8.103 V17.975 Q3.428 21.352 6.805 21.352 H14.078 Q17.455 21.352 17.455 17.975 V13.455"/><path d="M7.324 12.52 H9.662"/><path d="M9.662 12.52 L10.441 8.893 L16.478 2.866 A2.011 2.011 0 0 1 19.315 5.703 L13.288 11.74 Z"/></svg></span><span><b>照图标</b>：草稿卷（竖纸 B1+）。白纸让出笔的位置，一行字写到笔尖，笔身深。</span></div>
+    </figure>
+  </div>
+
+  <!-- ───────────── B / D / E：小空状态 ───────────── -->
+  <h2>二、搜了没结果、还没选、暂时没有：只写一行灰字</h2>
+  <p class="sec-lead">没有插图，没有底和边，和提示条同一种写法。能一步解决的，就在句子里放一个行内按钮。</p>
+
+  <div class="small-grid">
+    <div class="board">
+      <div class="board-head"><p class="board-title">搜了没结果</p><span class="where">找题</span></div>
+      <div class="search" style="margin-top:12px">2019 全国卷 七选五 环保</div>
+      <p class="line-empty">没找到匹配。可以换个说法，或 <button class="inline-btn" type="button">返回浏览全部 24 套卷</button></p>
+    </div>
+
+    <div class="board">
+      <div class="board-head"><p class="board-title">筛得太严</p><span class="where">找题</span></div>
+      <div class="search" style="margin-top:12px">阅读 C · 2026 · 主旨大意</div>
+      <p class="line-empty">筛选条件太严格，没有匹配的结果。<button class="inline-btn" type="button">清除筛选</button></p>
+    </div>
+
+    <div class="board">
+      <div class="board-head"><p class="board-title">还没选</p><span class="where">看卷 · 讲评栏</span></div>
+      <div class="lecture">点左边的题目后，这里显示讲评</div>
+    </div>
+
+    <div class="board">
+      <div class="board-head"><p class="board-title">暂时没有</p><span class="where">看卷 · 讲评栏</span></div>
+      <div class="lecture">解析未发布</div>
+    </div>
+  </div>
+
+  <!-- ───────────── C：完成态 ───────────── -->
+  <h2>三、做完了：不算空状态</h2>
+  <p class="sec-lead">这里是结果页，不是空页：照现在的写法，不加插图，不改。下面照代码画（过生词，VocabularyReviewPage.tsx:1847），数字是示例。</p>
+
+  <div class="small-grid">
+    <div class="board">
+      <div class="board-head"><p class="board-title">过生词</p><span class="where">本轮结束</span></div>
+      <div class="done">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1B2B33" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v8l3-3 3 3V2"/><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>
+        <p class="done-title">当前词汇已过完</p>
+        <p style="margin:0;color:var(--desk-muted);font-size:13px">本轮共判断 48 词：认识 36 词，收下 12 词。</p>
+        <div class="done-actions"><button class="btn" type="button">生成固定生词组</button><button class="ghost" type="button">开始下一轮</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────────── 顺手修 ───────────── -->
+  <h2>四、顺手要修的一句话</h2>
+  <div class="fix">
+    <p style="margin:0">听写工作台「词组」页：一个词组都没有时，现在显示的是「没有符合条件的词组 · 换一个搜索词或日期范围」，这是写给「搜了没结果」的。应该分成两种：</p>
+    <div class="fix-row"><span>一个都没有</span><span>（一、大空状态）还没有词组。在看卷时把生词收进生词本，就能在这里组成词组。</span></div>
+    <div class="fix-row"><span>搜了没结果</span><span>（二、一行灰字）没有符合条件的词组。<button class="inline-btn" type="button">清除搜索和日期</button></span></div>
+  </div>
+
+  <!-- ───────────── 规矩 ───────────── -->
+  <h2>五、规矩（提案）</h2>
+  <div class="table-wrap">
+  <table>
+    <tr><th>项</th><th>大空状态（还没东西）</th><th>小空状态（没结果、还没选、暂时没有）</th></tr>
+    <tr><td>插图</td><td>这一页图标的平涂版，88 × 88 方画布（同图标的 24 格放大）</td><td>不放</td></tr>
+    <tr><td>颜色</td><td>只用三个角色：深 #C9D6DD（后片、封面、笔、卷角）、浅 #DCE6EB（前片、纸上的字）、白（纸），不用薄荷</td><td>字用 <code>--desk-muted</code></td></tr>
+    <tr><td>底</td><td>桌面色 <code>--desk-page</code>，圆角 8px</td><td>无底无边</td></tr>
+    <tr><td>文字</td><td>一句话：东西会在这里，和怎么让它出现</td><td>一句话；能一步解决的放行内按钮</td></tr>
+    <tr><td>按钮</td><td>最多一个，主键（薄荷）</td><td>行内文字按钮</td></tr>
+    <tr><td>数量</td><td>5 张：个人空间、生词本、听写、题库、草稿卷</td><td>其余约 16 处都用这种</td></tr>
+    <tr><td>骨架</td><td colspan="2">照图标 G1–G9：同一支笔（线状部件 1.5 格，和 32px 起的图标一样）、外圆角 = 短边 × 0.25、正面平视、最多 3 个形 + 1 处细节、前后挡住处留白缝、家族部件（卷角、实心 A、托盘、公文包）不换形</td></tr>
+  </table>
+  </div>
+
+  <p class="fine">怎么从图标翻成平涂（颜色角色、线换色块、白缝）是这次新定的，提案 · 单一来源。依据：代码里大约 21 处空状态，9 套各自的写法（2026-11-13 盘点）。新写的文案和按钮（「去选词组」等）都是提案，没问过老师。听写用横线纸（Owner 2026-11-13 选），不用耳朵。</p>
+</main>
+</body>
+</html>
