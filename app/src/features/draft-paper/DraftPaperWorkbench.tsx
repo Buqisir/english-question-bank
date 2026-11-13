@@ -194,19 +194,25 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // quiet, real-dry-run-verified 排序建议 card — fetched only after a
   // pagination response comes back with pageBreakSuggestions.length > 0 (see
   // the effect below), never polled/timered on its own (Forbidden: 无后台
-  // 轮询). `reorderUndoSnapshot` holds the pre-apply item order so 撤销 can
-  // PATCH straight back to it; it is cleared both by its own 8s timer and by
-  // any OTHER item mutation in the meantime (moveItem/handleDrop/deleteItem/
-  // undoDelete/togglePageBreak below all call clearReorderUndo() first — the
-  // snapshot is stale the instant a different edit lands, 施工契约 3 边界).
+  // 轮询). `reorderUndoSnapshot` holds the pre-apply item order so 撤回 can
+  // PATCH straight back to it; it is cleared by any OTHER item mutation
+  // (moveItem/handleDrop/deleteItem/undoDelete/togglePageBreak below all call
+  // clearReorderUndo() first — the snapshot is stale the instant a different
+  // edit lands, 施工契约 3 边界).
+  // 提议和决定（DESIGN.md §5 Proposal → Decision，Owner 2026-11-13 定）：采用后
+  // 卡片留在原处变成「已采用 · 撤回」，不再弹底部提示条；撤回失效（别的编辑、
+  // 换草稿卷、离开页面）时卡片一起收起，所以去掉了原来 8 秒的计时。
+  // `text` 是采用那一刻卡上的话（采用后断篇消失，建议本身会被清掉）；`ready`
+  // 在保存成功前为 false，这期间点撤回先记下，保存成功后再撤。
   const [reorderSuggestion, setReorderSuggestion] = useState<ReorderSuggestion>(null)
-  const [reorderUndoSnapshot, setReorderUndoSnapshot] = useState<{ generation: number; items: DraftPaperItem[] } | null>(null)
-  const reorderUndoTimerRef = useRef<number | null>(null)
+  const [reorderUndoSnapshot, setReorderUndoSnapshot] = useState<{ generation: number; items: DraftPaperItem[]; text: string; ready: boolean } | null>(null)
+  // 撤回后到新建议回来之前，卡片按原话留在「建议」状态，不闪一下消失。
+  const [reorderRestoredText, setReorderRestoredText] = useState<string | null>(null)
+  const reorderCardRef = useRef<HTMLDivElement | null>(null)
+  const reorderFocusPendingRef = useRef(false)
+  // 保存还没回来时点了「撤回」：先记下，保存成功后马上撤回，不悄悄吞掉这一下。
+  const reorderUndoQueuedRef = useRef(false)
   const reorderRequestIdRef = useRef(0)
-  // Same delayed-unmount toast pattern as removedItemToast above — driven by
-  // presence of reorderUndoSnapshot rather than a payload value, since the
-  // toast's own text is static.
-  const reorderUndoToastPresence = usePresence(reorderUndoSnapshot !== null, 120)
   // draft-desk-b step3 (MF-5, plan.md "步3"): per-group persistent overlay
   // button anchors — replaces the retired hover-only sticker (裁点1 in
   // draft-desk-a) with one always-visible button per question group. Keyed by
@@ -257,12 +263,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setSaveError('')
     if (undoTimerRef.current) window.clearTimeout(undoTimerRef.current)
     undoTimerRef.current = null
-    if (reorderUndoTimerRef.current) window.clearTimeout(reorderUndoTimerRef.current)
-    reorderUndoTimerRef.current = null
     if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
     replaceUndoTimerRef.current = null
     setRemovedItem(null)
     setReorderUndoSnapshot(null)
+    setReorderRestoredText(null)
     setReplaceUndoSnapshot(null)
     setSwapSeedItemId(null)
     setSwapRequest(null)
@@ -329,7 +334,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       if (titleSaveTimerRef.current) window.clearTimeout(titleSaveTimerRef.current)
       if (undoTimerRef.current) window.clearTimeout(undoTimerRef.current)
       if (savedToastTimerRef.current) window.clearTimeout(savedToastTimerRef.current)
-      if (reorderUndoTimerRef.current) window.clearTimeout(reorderUndoTimerRef.current)
       if (swapAddToastTimerRef.current) window.clearTimeout(swapAddToastTimerRef.current)
       if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
     }
@@ -440,8 +444,28 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         ? `把「${titleFor(reorderSuggestion.move.itemId)}」和「${titleFor(reorderSuggestion.move.otherItemId)}」调换顺序即可消除。`
         : `把「${titleFor(reorderSuggestion.move.itemId)}」移到卷${reorderSuggestion.move.kind === 'front' ? '首' : '尾'}即可消除。`
     const reasonText = pageBreakSuggestions.find((entry) => entry.groupId === reorderSuggestion.brokenGroupId)?.reason || ''
-    return { text: `${reasonText}${moveText}` }
+    return { text: reasonText ? `${reasonText}，${moveText}` : moveText }
   }, [draftPaper, reorderSuggestion, pageBreakSuggestions])
+
+  // 提议和决定：卡片只有两种状态。已采用优先（采用后建议本身会被清掉）；
+  // 撤回后新建议回来前，用原话撑住「建议」状态。
+  const reorderDecided = reorderUndoSnapshot && reorderUndoSnapshot.generation === draftGeneration ? reorderUndoSnapshot : null
+  const reorderCard: { state: 'proposal' | 'decided'; text: string } | null = reorderDecided
+    ? { state: 'decided', text: reorderDecided.text }
+    : reorderSuggestionCard
+      ? { state: 'proposal', text: reorderSuggestionCard.text }
+      : reorderRestoredText
+        ? { state: 'proposal', text: reorderRestoredText }
+        : null
+  const reorderCardState = reorderCard?.state ?? null
+
+  // 点「采用」「撤回」后按钮换了一个，焦点跟到新按钮上，键盘用户不丢位置。
+  useEffect(() => {
+    if (!reorderFocusPendingRef.current) return
+    reorderFocusPendingRef.current = false
+    if (!reorderCardState) return
+    reorderCardRef.current?.querySelector<HTMLButtonElement>('button')?.focus()
+  }, [reorderCardState])
 
   // draft-desk-b step3 (MF-3): the exact fields draftPaperPaginationSignature
   // (server/draft-paper/draftPaperStore.mjs) treats as layout — item identity/
@@ -523,6 +547,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     const requestId = (reorderRequestIdRef.current += 1)
     if (!draftPaper || renderedPaginationKey !== paginationKey || pageBreakSuggestions.length === 0) {
       setReorderSuggestion(null)
+      // 分页已经出结果且没有断篇：撤回后留着的原话也该收起了。
+      if (!draftPaper || renderedPaginationKey === paginationKey) setReorderRestoredText(null)
       return
     }
     const draftPaperId = draftPaper.id
@@ -530,6 +556,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       .then((suggestion) => {
         if (reorderRequestIdRef.current !== requestId) return
         setReorderSuggestion(suggestion)
+        setReorderRestoredText(null)
       })
       .catch(() => {
         // Quiet by design (plan.md "安静常驻卡"): a failed fetch here just
@@ -537,6 +564,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         // The next pagination fetch (any subsequent edit) tries again.
         if (reorderRequestIdRef.current !== requestId) return
         setReorderSuggestion(null)
+        setReorderRestoredText(null)
       })
   }, [draftPaper?.id, pageBreakSuggestions, edition, renderedPaginationKey, paginationKey])
 
@@ -926,9 +954,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // "other" mutation handler below (never inside applyReorderSuggestion /
   // undoReorderSuggestion themselves, which own the snapshot's lifecycle).
   function clearReorderUndo() {
-    if (reorderUndoTimerRef.current) window.clearTimeout(reorderUndoTimerRef.current)
-    reorderUndoTimerRef.current = null
+    reorderUndoQueuedRef.current = false
     setReorderUndoSnapshot(null)
+    setReorderRestoredText(null)
   }
 
   // similar-workbench-swap (E7): 替换's own undo-snapshot clearer, same
@@ -1037,9 +1065,10 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // coming back from that real render is the natural second check (no
   // separate re-verification step needed here).
   async function applyReorderSuggestion() {
-    if (!draftPaper || !isCurrentDraft() || !reorderSuggestion) return
+    if (!draftPaper || !isCurrentDraft() || !reorderSuggestion || !reorderSuggestionCard) return
     clearReplaceUndo()
     const snapshot = draftPaper.items
+    const cardText = reorderSuggestionCard.text
     const byId = new Map(draftPaper.items.map((item) => [item.id, item]))
     const orderedItems = reorderSuggestion.order
       .map((id) => byId.get(id))
@@ -1051,18 +1080,39 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     const coveredIds = new Set(orderedItems.map((item) => item.id))
     const nextItems = [...orderedItems, ...draftPaper.items.filter((item) => !coveredIds.has(item.id))]
     setDraftPaper({ ...draftPaper, items: nextItems })
-    if (!await persistItems(nextItems) || !isCurrentDraft()) return
-    setReorderUndoSnapshot({ generation: draftGeneration, items: snapshot })
-    if (reorderUndoTimerRef.current) window.clearTimeout(reorderUndoTimerRef.current)
-    reorderUndoTimerRef.current = window.setTimeout(() => setReorderUndoSnapshot(null), 8000)
+    // 先在原处变成「已采用」，保存在后台走；保存失败就收起（报错走 saveError）。
+    setReorderRestoredText(null)
+    setReorderUndoSnapshot({ generation: draftGeneration, items: snapshot, text: cardText, ready: false })
+    reorderFocusPendingRef.current = true
+    reorderUndoQueuedRef.current = false
+    const saved = await persistItems(nextItems)
+    if (!isCurrentDraft()) return
+    if (saved && reorderUndoQueuedRef.current) {
+      reorderUndoQueuedRef.current = false
+      setReorderUndoSnapshot(null)
+      setReorderRestoredText(cardText)
+      reorderFocusPendingRef.current = true
+      setDraftPaper((current) => (current ? { ...current, items: snapshot } : current))
+      await persistItems(snapshot)
+      return
+    }
+    reorderUndoQueuedRef.current = false
+    setReorderUndoSnapshot((current) => (current && current.items === snapshot ? (saved ? { ...current, ready: true } : null) : current))
   }
 
   async function undoReorderSuggestion() {
     if (!draftPaper || !isCurrentDraft() || !reorderUndoSnapshot || reorderUndoSnapshot.generation !== draftGeneration) return
-    const snapshot = reorderUndoSnapshot.items
-    if (reorderUndoTimerRef.current) window.clearTimeout(reorderUndoTimerRef.current)
-    reorderUndoTimerRef.current = null
+    if (!reorderUndoSnapshot.ready) {
+      reorderUndoQueuedRef.current = true
+      return
+    }
+    const { items: snapshot, text } = reorderUndoSnapshot
     setReorderUndoSnapshot(null)
+    // 保险：草稿卷里的题组和采用时不是同一批了，就不按旧顺序写回去。
+    const sameItems = snapshot.length === draftPaper.items.length && snapshot.every((item) => draftPaper.items.some((entry) => entry.id === item.id))
+    if (!sameItems) return
+    setReorderRestoredText(text)
+    reorderFocusPendingRef.current = true
     setDraftPaper({ ...draftPaper, items: snapshot })
     await persistItems(snapshot)
   }
@@ -1545,12 +1595,28 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
 
       {/* reorder-suggest (plan.md 施工契约 3 "卡"): 卷头行之下、纸面之上 —
           same slot as the notices above, ahead of <main>'s preview desk. */}
-      {reorderSuggestionCard && (
-        <div className="draft-reorder-suggestion" role="status">
-          <span>{reorderSuggestionCard.text}</span>
-          <button type="button" className="draft-reorder-suggestion-act" onClick={() => void applyReorderSuggestion()}>
-            调整顺序 →
-          </button>
+      {reorderCard && (
+        <div className="draft-reorder-slot">
+        <div ref={reorderCardRef} className="draft-reorder-suggestion" data-state={reorderCard.state} role="status">
+          <div className="draft-reorder-suggestion-head">
+            <span>{reorderCard.state === 'decided' ? '已采用' : '建议'}</span>
+            {reorderCard.state === 'decided' ? (
+              <button type="button" className="draft-reorder-suggestion-undo" onClick={() => void undoReorderSuggestion()}>
+                撤回
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="draft-reorder-suggestion-act"
+                aria-disabled={reorderSuggestionCard ? undefined : true}
+                onClick={() => void applyReorderSuggestion()}
+              >
+                采用
+              </button>
+            )}
+          </div>
+          <p>{reorderCard.text}</p>
+        </div>
         </div>
       )}
 
@@ -1683,7 +1749,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       title={suggestion.reason}
                       onClick={() => void togglePageBreak(item, true)}
                     >
-                      建议前置分页 · 跨页断篇
+                      建议前置分页
                     </button>
                   )}
                   {/* similar-workbench-swap (E7, plan.md 施工要点 2 "⇄ 入口
@@ -1827,20 +1893,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           </button>
         </div>
       )}
-      {/* reorder-suggest (plan.md 施工契约 3 "应用"): 复用 undo-toast 组件
-          模式 — same fixed-position toast + RotateCcw 撤销 button shape as
-          removedItemToast above, keyed off reorderUndoSnapshot's own presence
-          instead of a payload value. */}
-      {reorderUndoToastPresence.mounted && (
-        <div className="draft-undo-toast" role="status" data-visible={reorderUndoToastPresence.visible}>
-          <span>顺序已调整</span>
-          <button type="button" onClick={() => void undoReorderSuggestion()}>
-            <RotateCcw size={14} /> 撤销
-          </button>
-        </div>
-      )}
       {/* similar-workbench-swap (E7, plan.md "替换这篇...可撤销"): same
-          undo-toast shape as reorderUndoToastPresence above, keyed off
+          undo-toast shape as removedItemToast above, keyed off
           replaceUndoSnapshot's own presence. */}
       {replaceUndoToastPresence.mounted && (
         <div className="draft-undo-toast" role="status" data-visible={replaceUndoToastPresence.visible}>
