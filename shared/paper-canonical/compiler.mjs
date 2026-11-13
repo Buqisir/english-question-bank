@@ -91,6 +91,7 @@ import {
   isQuestionLikeRichBlock,
   readingCaptureHasUnregisteredBlock,
   someRichBlocks,
+  displayVariantArtifact,
   validTableColumnWidths,
   validTableMarks,
 } from './richContent.mjs'
@@ -2862,7 +2863,7 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     const captured = capturedArtifacts.get(item?.sourceArtifactRef?.artifactId)
     if (
       !isRecordValue(item)
-      || !exactKeys(item, ['mediaId', 'mimeType', 'sha256', 'pixelWidth', 'pixelHeight', 'sourceArtifactRef'])
+      || !exactKeys(item, ['mediaId', 'mimeType', 'sha256', 'pixelWidth', 'pixelHeight', 'sourceArtifactRef', ...(Object.hasOwn(item, 'displayVariant') ? ['displayVariant'] : [])])
       || mediaIds.has(item.mediaId)
       || typeof item.mimeType !== 'string'
       || typeof item.sha256 !== 'string'
@@ -2873,6 +2874,11 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       || !captured
       || captured.sha256 !== item.sha256
     ) diagnostics.push(diagnostic('MEDIA_INVALID', 'incomplete_source', `$.groups.media[${index}]`, 'Media must close immutable bytes, digest, dimensions, and source artifact identity'))
+    try {
+      displayVariantArtifact(item, capturedArtifacts)
+    } catch {
+      diagnostics.push(diagnostic('MEDIA_DISPLAY_VARIANT_INVALID', 'incomplete_source', `$.groups.media[${index}]`, 'Display variant must close captured immutable bytes'))
+    }
     mediaIds.add(item.mediaId)
   }
   const content = cloneJson(sourceGroup.content || { blocks: [] })
@@ -4192,6 +4198,9 @@ function isConfirmedNck1MaterializationRequest(request) {
     media: (materialization.media || []).map((media) => ({
       mediaId: media.mediaId,
       bytes: byInputKey.get(nck1InputKey('source_media', media.mediaId))?.bytes,
+      ...(media.displayVariant ? {
+        displayVariantBytes: byInputKey.get(`display_variant_${media.mediaId.replace(/[^a-z0-9]+/gi, '_')}`)?.bytes,
+      } : {}),
       // Rebuild the same immutable input for every allowed raw authority.
       // The adapter validates these bytes; confirmation and evidence fingerprints
       // below still bind the complete candidate, source, and document order.

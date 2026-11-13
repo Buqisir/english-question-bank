@@ -697,7 +697,8 @@ function renderCanonicalReadingBlock(block) {
 
 // Shared source-backed figure presentation for every canonical prompt stream.
 function renderCanonicalSourceFigure(block, stemFigure = false) {
-  const src = `data:${block.mediaArtifact.mimeType};base64,${block.mediaArtifact.encodedBytes}`
+  const displayArtifact = block.mediaArtifact.displayVariant ?? block.mediaArtifact
+  const src = `data:${displayArtifact.mimeType};base64,${displayArtifact.encodedBytes}`
   const caption = block.caption
     ? `<figcaption>${renderCanonicalInlineNodes(block.captionInlines)}</figcaption>`
     : ''

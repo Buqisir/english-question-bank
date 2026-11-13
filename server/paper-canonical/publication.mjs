@@ -1,4 +1,5 @@
 import { randomUUID } from 'node:crypto'
+import { displayVariantArtifact } from '../../shared/paper-canonical/richContent.mjs'
 import {
   existsSync,
   mkdirSync,
@@ -1835,6 +1836,7 @@ function canonicalMediaArtifacts(validated) {
         pixelHeight: media.pixelHeight,
         sourceArtifactRef: media.sourceArtifactRef,
         encodedBytes: document.encodedBytes,
+        ...(media.displayVariant ? { displayVariant: displayVariantArtifact(media, documentsByArtifactId) } : {}),
       }
       if (existing && stableStringify(existing) !== stableStringify(artifact)) {
         throw publicationError(
