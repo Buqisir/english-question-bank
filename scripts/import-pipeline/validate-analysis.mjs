@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs'
-import { validateNck1StagedAnalysis } from '../../server/import-review/nck1AnalysisProjection.mjs'
+import { projectNck1AnalysisSourceGroup, validateNck1StagedAnalysis } from '../../server/import-review/nck1AnalysisProjection.mjs'
 import {
   buildCanonicalConsumptionSurfaceData,
   buildCanonicalReadingConsumptionSurfaceData,
@@ -28,7 +28,7 @@ if (!requestPath || !analysisPath || (extra.length && !consumptionPath)) {
       const { surfaceData } = familyContractId === 'reading'
         ? buildCanonicalReadingConsumptionSurfaceData(input)
         : buildCanonicalConsumptionSurfaceData(input)
-      projectObjectiveTeachingSource(analysis.groups[group.groupId], group.paragraphs,
+      projectObjectiveTeachingSource(analysis.groups[group.groupId], projectNck1AnalysisSourceGroup(group).paragraphs,
         surfaceData.textMap, surfaceData.semanticParagraphs)
     }
     for (const warning of result.warnings) console.warn('WARNING', JSON.stringify(warning))

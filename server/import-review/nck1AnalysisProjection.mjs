@@ -19,6 +19,7 @@ import { validateWritingAnalysisCandidate } from '../writing-analysis/writingAna
 import { validateApplicationModelAnswer } from '../paper-import-ai/applicationWritingWorkflow.mjs'
 import { isApplicationReviewCardV2 } from '../../shared/writing/applicationReviewCard.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { canonicalizeVisibleEnglishTypography } from '../../shared/paper-canonical/visibleTypography.mjs'
 import {
   LEGACY_NCK1_ANALYSIS_PROFILE,
   LISTENING_ANALYSIS_FILE_NAME,
@@ -96,6 +97,23 @@ function readAnalysis(rootDir, descriptor) {
 
 function optionsObject(options = []) {
   return Object.fromEntries(options.map(({ label, text }) => [label, text]))
+}
+
+// Staged NCK1 analyses quote the current visible typography (v4), while the
+// compatibility asset retains source bytes. Keep blank markers and IDs intact.
+export function projectNck1AnalysisSourceGroup(group) {
+  const text = value => canonicalizeVisibleEnglishTypography(value, '4')
+  return {
+    ...group,
+    paragraphs: group.paragraphs.map(paragraph => ({ ...paragraph, text: text(paragraph.text) })),
+    optionBank: group.optionBank?.map(option => ({ ...option, text: text(option.text) })),
+    questions: group.questions.map(question => ({
+      ...question,
+      options: Object.fromEntries(Object.entries(question.options || {}).map(
+        ([label, value]) => [label, text(value)],
+      )),
+    })),
+  }
 }
 
 function legacyGroup(paperAsset, materializationGroup, order) {
@@ -299,7 +317,8 @@ export function validateNck1StagedAnalysis(request, raw) {
     return validateListeningAnalysisInput(analysis, material)
   }
   if (!NCK1_STAGED_ANALYSIS_FILES.some((item) => item.key === key)) fail(`Unsupported staged group: ${key}`)
-  const { paper, group } = material
+  const { paper } = material
+  let { group } = material
   if (!paper?.paperId || !Number.isInteger(paper.sourceAssetVersion) || paper.sourceAssetVersion < 1 || !group?.groupId) {
     fail('Request requires paper identity, sourceAssetVersion and groupId')
   }
@@ -323,6 +342,7 @@ export function validateNck1StagedAnalysis(request, raw) {
     else if (writing.modelAnswer !== undefined) validateApplicationModelAnswer({ modelAnswer: writing.modelAnswer, writingTask, groupPassage: group })
     return { ok: true, warnings: [] }
   }
+  group = projectNck1AnalysisSourceGroup(group)
   const answers = Object.values(authority)
   exactKeys(Object.fromEntries(answers.map((answer) => [answer.questionId, true])),
     group.questions.map(({ id }) => id), 'objective authority')
@@ -411,7 +431,9 @@ export function buildNck1AnalysisProjection({
   const getGroup = (slotId, order) => {
     const group = groupsBySlot.get(slotId)
     if (!group) fail(`Materialization is missing ${slotId}`)
-    return legacyGroup(paperAsset, group, order)
+    const projected = legacyGroup(paperAsset, group, order)
+    return group.writingTask ? projected
+      : projectNck1AnalysisSourceGroup(projected)
   }
   const readingGroups = ['a', 'b', 'c', 'd'].map((letter, index) =>
     getGroup(`reading.${letter}`, index + 1))
