@@ -114,8 +114,24 @@ try {
       assert.ok(screen.surfaceData.annotations.length, 'real Screen builder projects teaching annotations')
       const forgedRange = structuredClone(analysis)
       forgedRange.groups[group.groupId].teachingContent.annotations[0].sourceRanges[0].quote += 'FORGED'
-      assert.throws(() => buildSevenChoicesSurfaceModel({ asset: paperAsset, analysis: forgedRange,
-        groupId: group.groupId, canonicalConsumption: consumption }), /exact text range/)
+      const warnings = []
+      const originalWarn = console.warn
+      let degradedScreen
+      try {
+        console.warn = (...args) => warnings.push(args)
+        degradedScreen = buildSevenChoicesSurfaceModel({ asset: paperAsset, analysis: forgedRange,
+          groupId: group.groupId, canonicalConsumption: consumption })
+      } finally {
+        console.warn = originalWarn
+      }
+      assert.equal(degradedScreen.teachingContent.unavailable, true)
+      assert.equal(warnings.length, 1)
+      assert.match(warnings[0][1].message, /exact text range/)
+      assert.deepEqual(degradedScreen.surfaceData.textMap, screen.surfaceData.textMap)
+      assert.deepEqual(degradedScreen.surfaceData.questions, screen.surfaceData.questions)
+      assert.deepEqual(degradedScreen.surfaceData.annotations, [])
+      assert.deepEqual(degradedScreen.options, screen.options)
+      assert.deepEqual(degradedScreen.chains, screen.chains)
       assert.throws(() => validateNck1StagedAnalysis(request, forgedRange), /exact text range/)
       writeFileSync(candidatePath, JSON.stringify(forgedRange))
       const rejectedRange = runWithConsumption()

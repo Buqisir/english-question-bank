@@ -79,6 +79,7 @@ export type ObjectiveTeachingGroup = {
 }
 
 export type ObjectiveTeachingView = {
+  unavailable?: boolean
   discourseSummary: string
   discourseItems: Array<{ id: string; label: string; summary: string; functionText: string }>
   translationParagraphs: Array<{
@@ -101,7 +102,7 @@ export type ObjectiveTeachingView = {
 export type ObjectiveTeachingSourceProjection = {
   annotations: PaperAnnotation[]
   evidence: PaperEvidence[]
-  figureEvidence: FigureTeachingEvidence[]
+  figureEvidence?: FigureTeachingEvidence[]
 }
 
 type SourceParagraph = { paragraphId?: string; id?: string; text: string }

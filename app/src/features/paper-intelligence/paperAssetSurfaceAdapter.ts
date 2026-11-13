@@ -237,16 +237,27 @@ export function buildPaperAssetSurfaceModel(
   const questions = buildQuestions(asset, analysis, group, paperSection)
   const textMap = buildTextMap(asset, group, paperSection, figures, assetBase)
   const evidence = buildEvidence(analysis, group, textMap)
-  const teachingSource = projectObjectiveTeachingSource(
-    groupAnalysis,
-    group.passage?.paragraphs ?? [],
-    textMap,
-    undefined,
-    input.canonicalFigures,
-  )
+  let teachingSource: ReturnType<typeof projectObjectiveTeachingSource> = { annotations: [], evidence: [], figureEvidence: [] }
+  let teachingContent: ObjectiveTeachingView | null
+  try {
+    const source = projectObjectiveTeachingSource(groupAnalysis, group.passage.paragraphs, textMap, undefined, input.canonicalFigures)
+    teachingContent = buildObjectiveTeachingView(groupAnalysis, Object.fromEntries(
+      group.questionIds.map((questionId) => [
+        questionId,
+        String(asset.content.questions[questionId]?.questionNo ?? ''),
+      ]),
+    ))
+    teachingSource = source
+  } catch (error) {
+    console.warn(`[paper-asset] teaching unavailable for ${groupId}`, error)
+    teachingContent = {
+      unavailable: true,
+      discourseSummary: '', discourseItems: [], translationParagraphs: [], longSentences: [],
+    }
+  }
   const analysisByQuestionId = buildAnalysisViews(asset, analysis, group, evidence, teachingSource.figureEvidence)
   const evidenceKindById = Object.fromEntries(
-    [...evidence, ...teachingSource.figureEvidence].map((item) => [item.id, item.kind === 'trap' ? 'trap' : 'support'] as const),
+    [...evidence, ...(teachingSource.figureEvidence ?? [])].map((item) => [item.id, item.kind === 'trap' ? 'trap' : 'support'] as const),
   )
 
   return {
@@ -266,12 +277,7 @@ export function buildPaperAssetSurfaceModel(
       annotations: teachingSource.annotations,
     },
     overview: typeof groupAnalysis?.overview === 'string' ? groupAnalysis.overview.trim() : '',
-    teachingContent: buildObjectiveTeachingView(groupAnalysis, Object.fromEntries(
-      group.questionIds.map((questionId) => [
-        questionId,
-        String(asset.content.questions[questionId]?.questionNo ?? ''),
-      ]),
-    )),
+    teachingContent,
     analysisByQuestionId,
     evidenceKindById,
     defaultQuestionId: group.questionIds[0] ?? null,
