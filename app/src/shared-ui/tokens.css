@@ -41,7 +41,13 @@
   --eqb-color-success: #1FA062;
   --eqb-color-success-soft: rgba(31, 160, 98, 0.10);
   --eqb-color-success-rgb: 31, 160, 98; /* 供 rgba() alpha 叠层复用；不单独当色值使用 */
-  --eqb-shadow-floating: 0 8px 24px rgba(0, 0, 0, 0.12);
+  /* 四档高度（DESIGN.md §4，Owner 2026-11-13 定；数值目测，待测量）。一盏顶光，
+     影子只用墨 rgb(27 43 51)：墨圈给边、接触影贴桌、主影偏移 h 模糊 3h。
+     e0 贴桌 = none；e1 放着（纸、首页搜索）；e2 拿起来（草稿丸等一直在屏上的浮件）；
+     e3 浮着（菜单、弹层、toast、弹窗——只给临时的东西）。 */
+  --elev-1: 0 0 0 1px rgb(27 43 51 / 0.08), 0 1px 2px rgb(27 43 51 / 0.05);
+  --elev-2: 0 0 0 1px rgb(27 43 51 / 0.08), 0 1px 2px rgb(27 43 51 / 0.05), 0 2px 6px rgb(27 43 51 / 0.06);
+  --elev-3: 0 0 0 1px rgb(27 43 51 / 0.08), 0 1px 2px rgb(27 43 51 / 0.05), 0 6px 18px rgb(27 43 51 / 0.1);
 
   --eqb-font-size-xs: 12px;
   --eqb-font-size-sm: 14px;

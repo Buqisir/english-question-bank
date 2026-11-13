@@ -127,10 +127,10 @@ a {
 .public-vocabulary-boot > div {
   width: min(360px, 100%);
   padding: 32px 24px;
-  border: 1px solid #dfe2d9;
+  border: 1px solid transparent;
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 18px 50px rgba(35, 52, 45, 0.08);
+  box-shadow: var(--elev-1);
 }
 
 .public-vocabulary-boot span {

@@ -66,8 +66,3 @@ token 的扩展用法。
 - **临时方案**：`.login-brand`、`.login-subtitle`、`.login-submit` 用 15px 字面量。若收编，候选名 `--eqb-font-size-brand-body`。
 - **想要的值**：手机输入框的字号下限。iOS Safari 在输入框字号小于 16px 时聚焦会放大页面。
 - **临时方案**：≤760px 时 `.login-field input` 用 16px 字面量。若日后全站表单都需要，候选名 `--eqb-font-size-input-mobile`。
-
-## 2026-11-13 质感规范的四档高度（DESIGN.md §4）
-
-- **想要的值**：三个高度变量 `--elev-1` / `--elev-2` / `--elev-3`（e0 是 `none`，不设变量）。具体是：影子墨 `rgb(27 43 51)`；墨圈 `0 0 0 1px` 透明度 0.08；接触影 `0 1px 2px` 透明度 0.05；e2 主影 `0 2px 6px` 透明度 0.06；e3 主影 `0 6px 18px` 透明度 0.10。Owner 2026-11-13 同意写进 DESIGN.md。都是目测，待在真实设备上测量。
-- **临时方案**：`app/src/shared-ui/tokens.css` 现在只有 `--eqb-shadow-floating`（`0 8px 24px rgba(0,0,0,0.12)`）。迁移前页面照旧；新写的影子直接用上面的值，迁移时收进 `--elev-*`，再从本文件删掉这一条。提议变成决定的 120ms 就是现有的 `--motion-fast`（`App.css:10`），不算新值。

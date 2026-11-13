@@ -19,7 +19,7 @@
   min-height: 36px;
   padding: 6px 10px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
   font: inherit;
@@ -111,7 +111,7 @@
   box-sizing: border-box;
   padding: 8px 12px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 12px;
   background: var(--panel);
   color: var(--ink);
   font: inherit;
@@ -157,7 +157,7 @@
   height: 142px;
   padding: 0;
   border: 0;
-  border-radius: 6px;
+  border-radius: 12px;
   background: transparent;
   color: var(--ink-strong);
   font: inherit;
@@ -202,7 +202,7 @@
   gap: 8px;
   padding: 16px;
   border: 1px solid var(--line-strong);
-  border-radius: 6px;
+  border-radius: 8px;
   backface-visibility: hidden;
 }
 

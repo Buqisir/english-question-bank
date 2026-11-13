@@ -74,7 +74,7 @@
 .dictation-number-entry input,
 .dictation-suggestion-control input {
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-paper);
   color: var(--eqb-color-text);
   padding: 8px 12px;
@@ -133,7 +133,7 @@
   margin-bottom: 16px;
   padding: 12px 16px;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 12px;
   background: var(--eqb-color-desk);
   color: var(--eqb-color-text);
   font-size: 14px;
@@ -207,7 +207,7 @@
   gap: 6px;
   min-height: 36px;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-paper);
   padding: 6px 12px;
   cursor: pointer;
@@ -241,7 +241,7 @@
   border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  box-shadow: none;
 }
 
 .dictation-set-row {
@@ -349,10 +349,10 @@
   z-index: 10;
   bottom: 16px;
   margin-top: 24px;
-  border: 1px solid var(--eqb-color-border-strong);
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: var(--eqb-shadow-floating);
+  box-shadow: var(--elev-2);
   outline: none;
 }
 
@@ -463,12 +463,12 @@
 }
 
 .dictation-combine-settings fieldset button:first-of-type {
-  border-radius: 6px 0 0 6px;
+  border-radius: 8px 0 0 8px;
 }
 
 .dictation-combine-settings fieldset button:last-of-type {
   border-left: 0;
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 8px 8px 0;
 }
 
 .dictation-combine-settings fieldset button.is-selected {
@@ -519,10 +519,10 @@
   gap: 8px;
   width: 380px;
   padding: 12px;
-  border: 1px solid var(--eqb-color-border);
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: var(--eqb-shadow-floating);
+  box-shadow: var(--elev-3);
 }
 
 .dictation-selection-actions .dictation-error-materials-menu > div {
@@ -540,7 +540,7 @@
 .dictation-selection-actions details button {
   min-height: 34px;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-desk);
   cursor: pointer;
   font-size: 12px;
@@ -581,7 +581,7 @@
   border: 1px solid var(--eqb-color-border-strong);
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: var(--eqb-shadow-card);
+  box-shadow: none;
 }
 
 .dictation-created-results:focus-visible {
@@ -619,7 +619,7 @@
 .dictation-created-header-actions button {
   min-height: 32px;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-paper);
   padding: 5px 10px;
   cursor: pointer;
@@ -689,7 +689,7 @@
   gap: 6px;
   min-height: 36px;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 6px 10px;
   background: var(--eqb-color-paper);
   cursor: pointer;
@@ -711,7 +711,7 @@
 }
 
 .dictation-download-items {
-  --fh-radius: 6px;
+  --fh-radius: 8px;
 }
 
 .dictation-download-menu > div {
@@ -725,10 +725,10 @@
   overflow-y: auto;
   gap: 2px;
   padding: 6px;
-  border: 1px solid var(--eqb-color-border);
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: var(--eqb-shadow-floating);
+  box-shadow: var(--elev-3);
 }
 
 .dictation-download-option,
@@ -776,7 +776,7 @@
   border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  box-shadow: none;
 }
 
 .dictation-task-queue > header,
@@ -920,10 +920,10 @@
   gap: 12px;
   margin-top: 16px;
   padding: 12px 16px;
-  border: 1px solid var(--eqb-color-border-strong);
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: var(--eqb-shadow-floating);
+  box-shadow: var(--elev-2);
 }
 
 .dictation-task-selection-panel > div {
@@ -980,12 +980,12 @@
 }
 
 .dictation-task-selection-panel fieldset button:first-of-type {
-  border-radius: 6px 0 0 6px;
+  border-radius: 8px 0 0 8px;
 }
 
 .dictation-task-selection-panel fieldset button:last-of-type {
   border-left: 0;
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 8px 8px 0;
 }
 
 /* Overrides the shared neutral button colors because this is the current accent selection. */
@@ -1116,9 +1116,9 @@
   align-items: center;
   gap: 6px;
   padding: 10px 16px;
-  border-bottom: 1px solid var(--eqb-color-border);
+  border-bottom: 1px solid transparent;
   background: var(--eqb-color-paper);
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  box-shadow: var(--elev-2);
 }
 
 .dictation-review-actions > span {
@@ -1229,7 +1229,7 @@
 
 .dictation-workbench-message button {
   border: 1px solid var(--action);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--action);
   color: var(--eqb-color-paper);
   padding: 8px 16px;
@@ -1244,7 +1244,7 @@
 .dictation-history-filter {
   display: inline-flex;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 12px;
   overflow: hidden;
 }
 
@@ -1284,7 +1284,7 @@
   box-sizing: border-box;
   padding: 6px 10px;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-paper);
   cursor: pointer;
   font-size: 12px;
@@ -1310,11 +1310,11 @@
   width: min(360px, calc(100vw - 48px));
   max-height: 320px;
   overflow: auto;
-  border: 1px solid var(--eqb-color-border-strong);
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--eqb-color-paper);
   padding: 8px 12px;
-  box-shadow: var(--eqb-shadow-floating);
+  box-shadow: var(--elev-3);
 }
 
 .dictation-history-details p {
@@ -1343,7 +1343,7 @@
   border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  box-shadow: none;
 }
 
 .meaning-recall-heading,
@@ -1380,7 +1380,7 @@
   gap: 6px;
   min-height: 36px;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-paper);
   padding: 6px 12px;
   color: var(--eqb-color-text);
@@ -1455,7 +1455,7 @@
 .meaning-recall-suggestion input {
   width: 64px;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-paper);
   padding: 8px;
   color: var(--eqb-color-text);
@@ -1486,13 +1486,13 @@
 
 .meaning-recall-start-row fieldset button:first-of-type,
 .meaning-recall-result-list fieldset button:first-of-type {
-  border-radius: 6px 0 0 6px;
+  border-radius: 8px 0 0 8px;
 }
 
 .meaning-recall-start-row fieldset button:last-of-type,
 .meaning-recall-result-list fieldset button:last-of-type {
   border-right: 1px solid var(--eqb-color-border);
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 8px 8px 0;
 }
 
 .meaning-recall-start-row fieldset button.is-selected,
@@ -1667,7 +1667,7 @@
 .meaning-recall-export-name input {
   width: 240px;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 8px 12px;
   outline: none;
   background: var(--eqb-color-paper);
@@ -1702,12 +1702,12 @@
 }
 
 .meaning-recall-result-actions fieldset button:first-of-type {
-  border-radius: 6px 0 0 6px;
+  border-radius: 8px 0 0 8px;
 }
 
 .meaning-recall-result-actions fieldset button:last-of-type {
   border-right: 1px solid var(--eqb-color-border);
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 8px 8px 0;
 }
 
 .meaning-recall-result-actions fieldset button.is-selected {

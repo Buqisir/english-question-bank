@@ -55,9 +55,9 @@
   scrollbar-gutter: stable;
   overscroll-behavior: contain;
   padding: 12px 20px 14px;
-  border: 1px solid var(--desk-border, #d5dacf);
+  border: 1px solid transparent;
   border-radius: 12px;
-  box-shadow: 0 2px 4px #191d1808, 0 12px 28px -12px #191d1829;
+  box-shadow: var(--elev-3);
   background: var(--sa-surface);
   color: var(--sa-ink);
 }
@@ -425,10 +425,10 @@
   height: auto;
   width: max-content;
   padding: 0 9px 0 11px;
-  border: 1px solid var(--sa-detail-edge);
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--sa-detail-bg);
-  box-shadow: 0 3px 8px #191d1814;
+  box-shadow: var(--elev-2);
   color: var(--sa-ink);
   font-family: var(--sa-sans);
   font-size: 13px;

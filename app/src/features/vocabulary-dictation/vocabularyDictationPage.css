@@ -255,7 +255,7 @@
   flex: 1;
   min-height: 36px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--muted);
   font-size: 12px;
@@ -354,7 +354,7 @@
   min-height: 40px;
   padding: 8px 14px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
   font: inherit;
@@ -492,7 +492,7 @@
 .vocabulary-dictation-page button:focus-visible,
 .vocabulary-dictation-page a:focus-visible,
 .vocabulary-dictation-page input:focus-visible {
-  box-shadow: 0 0 0 3px rgba(31, 31, 29, 0.12); outline: none;
+  box-shadow: 0 0 0 3px rgb(27 43 51 / 0.12);
   outline-offset: 2px;
 }
 

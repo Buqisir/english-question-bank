@@ -723,7 +723,9 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone; STARTER_CHIPS 
 
   // Intent bar resting + focus.
   const barRule = css.match(/\.concierge-intent-bar\s*\{[^}]*\}/)?.[0] || ''
-  assert('intent-bar rest border uses desk palette', /border:\s*1px solid var\(--desk-border\)/.test(barRule), '')
+  // texture 2026-11-13 (DESIGN.md §4): home search is paper at e1 — the elev ring
+  // is its only edge, so the 1px border stays for layout but goes transparent.
+  assert('intent-bar rest edge is the e1 ring (border transparent, no double line)', /border:\s*1px solid transparent/.test(barRule) && /box-shadow:\s*var\(--elev-1\)/.test(barRule), barRule)
   const focusRule = css.match(/\.concierge-intent-bar:focus-within\s*\{[^}]*\}/)?.[0] || ''
   assert('focus border only steps up one shade (no accent frame)', /border-color:\s*var\(--eqb-color-border-strong\)/.test(focusRule), focusRule)
   assert('focus does not draw an outer ring around the intent bar', !/\.concierge-intent-bar:has\(:focus-visible\)/.test(css), '')
@@ -819,7 +821,8 @@ console.log('\nTest 15: Avoid sample-data race — ConciergeDesk waits for live 
 
   const noticeRule = css.match(/\.concierge-data-loading\s*\{[^}]*\}/)?.[0] || ''
   assert('.concierge-data-loading rule exists', noticeRule.length > 0, '')
-  assert('notice uses muted ink #6A6A64 (AA-compliant status text)', /color:\s*#6A6A64/i.test(noticeRule), '')
+  // texture 2026-11-13: warm #6A6A64 retired for the desk scale; --desk-muted #5A6C75 is still AA on white and desk.
+  assert('notice uses muted ink var(--desk-muted) (AA-compliant status text)', /color:\s*var\(--desk-muted\)/i.test(noticeRule), noticeRule)
 }
 
 // ------------------------------------------------------------------ Test 16

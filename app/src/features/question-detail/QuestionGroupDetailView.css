@@ -269,11 +269,11 @@ a.peek-btn:focus-visible {
   font-size: 13px;
   padding: 6px 14px;
   border-radius: 999px;
-  border: 1px solid var(--line);
+  border: 1px solid transparent;
   background: #fff;
   color: var(--ink);
   cursor: pointer;
-  box-shadow: var(--eqb-shadow-floating);
+  box-shadow: var(--elev-2);
   pointer-events: auto;
 }
 

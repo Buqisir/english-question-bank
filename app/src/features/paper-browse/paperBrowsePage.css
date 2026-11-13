@@ -50,7 +50,7 @@
   margin: 0 24px;
   padding: 8px 12px;
   border: 1px solid var(--eqb-color-danger);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-danger-soft);
   color: var(--eqb-color-danger);
   font-size: 14px;
@@ -147,7 +147,7 @@
   z-index: 0;
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 1px 3px rgb(25 29 24 / 9%);
+  box-shadow: var(--elev-1);
   pointer-events: none;
 }
 
@@ -859,13 +859,13 @@
 .paper-browse-error {
   padding: 48px 24px;
   text-align: center;
-  color: var(--eqb-color-text-muted, #6a6a64);
+  color: var(--eqb-color-text-muted, #5A6C75);
 }
 
 .paper-browse-placeholder {
   padding: 24px;
   font-size: 12px;
-  color: var(--eqb-color-text-muted, #6a6a64);
+  color: var(--eqb-color-text-muted, #5A6C75);
 }
 
 /* ─── 讲评栏（组级速览） ─── */
@@ -900,7 +900,7 @@
 .paper-browse-lecture-empty {
   margin: 0;
   font-size: var(--pb-lecture-font-body);
-  color: var(--eqb-color-text-muted, #6a6a64);
+  color: var(--eqb-color-text-muted, #5A6C75);
 }
 
 .paper-browse-lecture-body {
@@ -994,7 +994,7 @@
  * transient hover surface: selection stays visible while hover still glides. */
 .paper-browse-reading-question-nav button[aria-pressed='true'] {
   background: var(--eqb-color-paper);
-  box-shadow: 0 0 0 1px rgba(30, 30, 28, 0.05), 0 1px 2px rgba(30, 30, 28, 0.06);
+  box-shadow: var(--elev-1);
   color: var(--paper-ink-strong);
   font-weight: 600;
 }
@@ -1130,7 +1130,7 @@
   border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: 0 1px 2px color-mix(in srgb, var(--eqb-color-text-strong) 6%, transparent);
+  box-shadow: none;
   color: var(--eqb-color-text);
   font-size: 14px;
   line-height: 1.55;
@@ -1333,7 +1333,7 @@
 .continuation-analysis-subcard {
   padding: 10px 12px;
   border: 1px solid var(--eqb-color-border-subtle);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-paper);
 }
 
@@ -1405,17 +1405,17 @@
 @media (hover: hover) and (pointer: fine) {
   .paper-browse-page .pi-writing-answer-box--lecture-trigger:hover {
     border-color: var(--line-strong);
-    box-shadow: inset 0 0 0 1px rgba(31, 31, 29, 0.12);
+    box-shadow: inset 0 0 0 1px rgb(27 43 51 / 0.12);
   }
 }
 
 .paper-browse-page .pi-writing-answer-box--lecture-trigger:active {
   border-color: var(--line-strong);
-  box-shadow: inset 0 0 0 1px rgba(31, 31, 29, 0.12);
+  box-shadow: inset 0 0 0 1px rgb(27 43 51 / 0.12);
 }
 
 .paper-browse-page .pi-writing-answer-box--lecture-trigger:focus-visible {
-  box-shadow: 0 0 0 3px rgba(31, 31, 29, 0.12); outline: none;
+  box-shadow: 0 0 0 3px rgb(27 43 51 / 0.12);
   outline-offset: 3px;
 }
 
@@ -1433,7 +1433,7 @@
     height: 100vh;
     z-index: 30;
     border-radius: 0;
-    box-shadow: -4px 0 16px rgba(30, 30, 28, 0.18);
+    box-shadow: var(--elev-3);
     overflow-y: auto;
   }
 
@@ -1445,7 +1445,7 @@
     inset: 0;
     border: none;
     padding: 0;
-    background: rgba(30, 30, 28, 0.18);
+    background: rgb(27 43 51 / 0.18);
     z-index: 29;
     pointer-events: none;
   }
@@ -1610,11 +1610,11 @@
   cursor: pointer;
   border: 0;
   background: transparent;
-  color: #1e1e1c;
+  color: var(--desk-ink);
 }
 
 .similar-btn:hover {
-  background: #ededea;
+  background: var(--desk-hover);
 }
 
 .similar-btn--primary {
@@ -1662,12 +1662,12 @@
 
 .similar-seed-line {
   font-size: 12px;
-  color: #6a6a64;
+  color: var(--desk-muted);
   margin: 0;
 }
 
 .similar-seed-line b {
-  color: #1e1e1c;
+  color: var(--desk-ink);
 }
 
 .similar-rail-error {
@@ -1724,12 +1724,12 @@
 .similar-rcard-title {
   font-weight: 600;
   font-size: 14px;
-  color: #1e1e1c;
+  color: var(--desk-ink);
 }
 
 .similar-rcard-source {
   font-size: 11.5px;
-  color: #6a6a64;
+  color: var(--desk-muted);
   margin: 1px 0 6px;
 }
 
@@ -1743,8 +1743,8 @@
   font-size: 12px;
   border-radius: 999px;
   padding: 2px 8px;
-  background: #ededea;
-  color: #6a6a64;
+  background: var(--desk-hover);
+  color: var(--desk-muted);
 }
 
 .similar-chip--hit {
@@ -1755,7 +1755,7 @@
 
 .similar-pool-note {
   font-size: 12px;
-  color: #6a6a64;
+  color: var(--desk-muted);
   text-align: center;
   padding: 6px 0 2px;
   margin: 0;
@@ -1771,7 +1771,7 @@
 
 .similar-count {
   font-size: 12.5px;
-  color: #6a6a64;
+  color: var(--desk-muted);
   flex: 1;
 }
 
@@ -1780,7 +1780,7 @@
   left: 50%;
   bottom: 26px;
   transform: translateX(-50%) translateY(8px);
-  background: #1e1e1c;
+  background: var(--desk-ink);
   color: #ffffff;
   font-size: 12.5px;
   border-radius: 8px;
@@ -1843,7 +1843,7 @@
 .similar-passages-sub {
   flex: 1;
   font-size: 12px;
-  color: #6a6a64;
+  color: var(--desk-muted);
 }
 
 .similar-rcard-actions {
@@ -1890,7 +1890,7 @@
 }
 
 .listening-analysis-topic {
-  color: var(--eqb-color-text-muted, #6a6a64);
+  color: var(--eqb-color-text-muted, #5A6C75);
   font-size: 12px;
 }
 
@@ -1907,7 +1907,7 @@
 }
 
 .listening-analysis-text h6 {
-  color: var(--eqb-color-text-muted, #6a6a64);
+  color: var(--eqb-color-text-muted, #5A6C75);
   font-size: 12px;
   font-weight: 600;
   line-height: 1.5;
@@ -2018,10 +2018,10 @@
   align-items: center;
   gap: 10px;
   padding: 8px 14px 8px 8px;
-  border: 1px solid var(--paper-border);
+  border: 1px solid transparent;
   border-radius: 12px;
   background: var(--paper-bg);
-  box-shadow: 0 1px 2px rgba(var(--paper-ink-strong-rgb), 0.06), 0 10px 28px rgba(var(--paper-ink-strong-rgb), 0.12);
+  box-shadow: var(--elev-3);
   color: var(--paper-ink-strong);
   white-space: nowrap;
   transition:

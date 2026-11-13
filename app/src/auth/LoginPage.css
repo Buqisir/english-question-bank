@@ -229,7 +229,7 @@
   border: 1px solid var(--login-border);
   border-radius: 12px;
   background: var(--login-surface);
-  box-shadow: 0 1px 2px rgba(41, 66, 77, 0.05);
+  box-shadow: 0 1px 2px rgb(27 43 51 / 0.05);
   color: var(--login-ink);
   caret-color: var(--login-action);
   font: inherit;
@@ -272,7 +272,7 @@
   border: 0;
   border-radius: 999px;
   background: var(--login-action);
-  box-shadow: 0 8px 24px rgba(41, 66, 77, 0.18);
+  box-shadow: 0 8px 24px rgb(27 43 51 / 0.18);
   color: #FFFFFF;
   cursor: pointer;
   font: inherit;

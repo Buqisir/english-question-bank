@@ -97,7 +97,7 @@ button.my-space-folder-button { cursor: pointer; }
 
 .my-space-folder-button.is-selected {
   background: var(--desk-raised);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--eqb-color-text) 7%, transparent);
+  box-shadow: var(--elev-1);
 }
 
 .my-space-folder-count {
@@ -234,9 +234,9 @@ button.my-space-folder-button { cursor: pointer; }
 .my-space-row-menu {
   --fh-radius: 8px;
   background: var(--desk-raised);
-  border: 1px solid var(--desk-line);
+  border: 1px solid transparent;
   border-radius: 12px;
-  box-shadow: 0 10px 28px color-mix(in srgb, var(--desk-ink) 13%, transparent);
+  box-shadow: var(--elev-3);
   box-sizing: border-box;
   display: grid;
   gap: 2px;
@@ -316,7 +316,7 @@ button.my-space-folder-button { cursor: pointer; }
 .my-space-confirm-dialog {
   background: var(--desk-raised);
   border-radius: 12px;
-  box-shadow: 0 8px 24px color-mix(in srgb, var(--eqb-color-text) 12%, transparent);
+  box-shadow: var(--elev-3);
   display: grid;
   gap: 16px;
   max-width: 360px;

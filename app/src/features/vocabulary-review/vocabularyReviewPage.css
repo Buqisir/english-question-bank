@@ -83,7 +83,7 @@
   min-height: 38px;
   padding: 7px 30px 7px 10px;
   border: 1px solid var(--line-strong);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink-strong);
   font: inherit;
@@ -95,7 +95,7 @@
   box-sizing: border-box;
   min-height: 38px;
   border: 1px solid var(--line-strong);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink-strong);
   font: inherit;
@@ -112,7 +112,7 @@
   min-height: 38px;
   padding: 7px 11px;
   border: 1px solid var(--line-strong);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
   font: inherit;
@@ -124,7 +124,7 @@
 .vocabulary-student-create {
   padding: 10px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--surface);
 }
 
@@ -255,7 +255,7 @@
   justify-content: flex-start;
   margin-top: 20px;
   padding: 14px 16px;
-  border-radius: 6px;
+  border-radius: 12px;
   background: var(--surface);
 }
 
@@ -285,7 +285,7 @@
   flex: 0 0 auto;
   padding: 7px 12px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--muted);
   font: inherit;
@@ -345,7 +345,7 @@
   min-height: 44px;
   padding: 7px 9px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
   font: inherit;
@@ -406,10 +406,10 @@
   z-index: 3;
   margin-bottom: 8px;
   padding: 16px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--panel);
-  box-shadow: var(--eqb-shadow-floating);
+  box-shadow: var(--elev-2);
 }
 
 .vocabulary-progress-selection > div {
@@ -496,7 +496,7 @@
   gap: 10px;
   min-height: 48px;
   padding: 8px;
-  border-radius: 6px;
+  border-radius: 12px;
   color: var(--muted);
 }
 
@@ -587,7 +587,7 @@
   min-height: 32px;
   padding: 5px 8px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: transparent;
   color: var(--muted);
   font: inherit;
@@ -625,7 +625,7 @@
   min-height: 36px;
   padding: 6px 8px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--muted);
   font: inherit;
@@ -720,7 +720,7 @@
   gap: 8px;
   padding: 7px 10px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--muted);
   font-size: 14px;
@@ -871,7 +871,7 @@
   min-height: 48px;
   padding: 0 12px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
   font-size: 14px;
@@ -1025,10 +1025,10 @@
   display: grid;
   width: 360px;
   padding: 6px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--panel);
-  box-shadow: var(--eqb-shadow-floating);
+  box-shadow: var(--elev-3);
   transform: translateX(-50%);
 }
 
@@ -1163,7 +1163,7 @@
   min-height: 38px;
   padding: 7px 10px;
   border: 1px solid var(--line-strong);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink-strong);
   font: inherit;
@@ -1184,7 +1184,7 @@
   margin: 0;
   padding: 0 8px 0 10px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--muted);
   font-size: 12px;
@@ -1291,7 +1291,7 @@
   display: inline-flex;
   padding: 2px;
   border: 1px solid var(--line-strong);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--surface);
 }
 
@@ -1328,7 +1328,7 @@
   min-height: 44px;
   padding: 8px 12px;
   border: 1px solid var(--line-strong);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink-strong);
   font: inherit;
@@ -1444,7 +1444,7 @@
 }
 
 .vocabulary-recent-set-list {
-  --fh-radius: 6px;
+  --fh-radius: 8px;
   display: grid;
   gap: 6px;
   margin: 12px 0 0;
@@ -1461,7 +1461,7 @@
   width: 100%;
   padding: 12px 14px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--surface);
   color: var(--muted);
   text-align: left;

@@ -2034,7 +2034,7 @@ assert(
     /trimmed\.replace\(\/\\s\*\[（\(\][\s\S]*满分[\s\S]*\$\/, ''\)/.test(pageSrc) &&
     !pageSrc.includes('PointingHand') &&
     pageSrc.includes('paper-browse-rail-current') &&
-    /\.paper-browse-rail-current\s*\{[^}]*background:\s*#fff[^}]*box-shadow:\s*0 1px 3px rgb\(25 29 24 \/ 9%\)/.test(pageCssSrc) &&
+    /\.paper-browse-rail-current\s*\{[^}]*background:\s*#fff[^}]*box-shadow:\s*var\(--elev-1\)/.test(pageCssSrc) &&
     /\.paper-browse-rail-group-list\.fluid-hover-list\s*\{[^}]*--fh-radius:\s*8px/.test(pageCssSrc) &&
     /\.paper-browse-rail-group-list:has\(\.paper-browse-rail-group--active\[data-fluid-hover-active\]\)::before\s*\{[^}]*opacity:\s*0/.test(pageCssSrc) &&
     pageSrc.includes('itemSelector=".paper-browse-rail-group"') &&
