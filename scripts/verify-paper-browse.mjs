@@ -1047,6 +1047,39 @@ const canonicalSevenChoicesModel2026i = buildSevenChoicesSurfaceModel({
   groupId: canonicalSevenChoicesOccurrence.groupId,
   canonicalConsumption: canonicalSevenChoicesConsumption,
 })
+for (const canonicalMode of [false, true]) {
+  const input = {
+    asset: canonicalMode
+      ? JSON.parse(new TextDecoder().decode(canonicalSevenChoicesFixture.sourceAsset)) : asset,
+    analysis: structuredClone(sevenChoicesAnalysis2026i),
+    groupId: canonicalMode ? canonicalSevenChoicesOccurrence.groupId : 'group-2026-i-seven-choices',
+    ...(canonicalMode ? { canonicalConsumption: canonicalSevenChoicesConsumption } : {}),
+  }
+  input.analysis.groups ??= {}
+  input.analysis.groups[input.groupId] = {
+    selectedLongSentences: [{
+      displayText: 'A sentence.', relatedQuestionIds: [], translationZh: '', analysisZh: '',
+      underlineRanges: [{ start: 0, end: 1, quote: 'wrong quote' }],
+    }],
+  }
+  const originalWarn = console.warn
+  const warnings = []
+  let degraded
+  try {
+    console.warn = (...args) => warnings.push(args)
+    degraded = buildSevenChoicesSurfaceModel(input)
+  } finally {
+    console.warn = originalWarn
+  }
+  const healthy = canonicalMode ? canonicalSevenChoicesModel2026i : sevenChoicesModel2026i
+  assert(`sevenChoices bad teaching preserves exam, options and answers (${canonicalMode ? 'canonical' : 'legacy'})`,
+    degraded.teachingContent?.unavailable === true && warnings.length === 1
+      && JSON.stringify(degraded.surfaceData.textMap) === JSON.stringify(healthy.surfaceData.textMap)
+      && JSON.stringify(degraded.surfaceData.questions) === JSON.stringify(healthy.surfaceData.questions)
+      && JSON.stringify(degraded.options) === JSON.stringify(healthy.options)
+      && JSON.stringify(degraded.chains) === JSON.stringify(healthy.chains)
+      && degraded.surfaceData.annotations.length === 0)
+}
 assert(
   'paper-2026-i canonical Seven Choices model exposes the projected shared-bank identity',
   canonicalSevenChoicesModel2026i.bankIdentity?.bankId
