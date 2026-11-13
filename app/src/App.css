@@ -3476,9 +3476,11 @@ button:disabled {
   width: 32px;
   height: 18px;
   margin: 0;
-  border: 1px solid var(--line, #D8D8D2);
+  /* 迁移第 10 条（2026-11-13）：关着时轨道原来是桌色 + 最淡的线，和页面几乎一样，
+     只看得见白色圆钮，像被切掉一半。轨道改用控件强边线色平涂，整只开关看得出来（目测）。 */
+  border: 1px solid transparent;
   border-radius: 999px;
-  background: var(--surface-strong, var(--desk-hover));
+  background: var(--eqb-color-border-strong);
   cursor: pointer;
 }
 
@@ -3570,6 +3572,19 @@ button:disabled {
   font-size: 13px;
   color: var(--desk-muted);
   padding: 6px 4px;
+}
+
+/* 迁移（DESIGN.md §5 Notices）：提示条是一行弱墨字，前面一个 16px 图标，没有底和边。
+   图标和字同色（currentColor），顶对齐第一行，折行时字不绕到图标下面。 */
+.concierge-notice {
+  align-items: flex-start;
+  display: flex;
+  gap: 6px;
+  line-height: 20px;
+}
+.concierge-notice > svg {
+  flex: none;
+  margin-top: 2px;
 }
 
 .concierge-error {

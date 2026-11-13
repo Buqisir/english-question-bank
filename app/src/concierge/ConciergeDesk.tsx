@@ -16,7 +16,7 @@
  */
 
 import { useEffect, useId, useMemo, useState, type FormEvent, type ReactNode } from 'react'
-import { CornerDownLeft, QuestionBank, X } from '../icons'
+import { CornerDownLeft, InfoCircle, QuestionBank, X } from '../icons'
 import { EmptyIllustration } from '../components/EmptyIllustration'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
@@ -830,7 +830,8 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
 
       {state.kind === 'results' && state.usedFallback && (
         <p className="concierge-notice">
-          {pickResultsNoticeLine(isAllWeakResultsState(state), state.assistantMessage, state.fallbackReason)}
+          <InfoCircle size={16} aria-hidden="true" />
+          <span>{pickResultsNoticeLine(isAllWeakResultsState(state), state.assistantMessage, state.fallbackReason)}</span>
         </p>
       )}
 
