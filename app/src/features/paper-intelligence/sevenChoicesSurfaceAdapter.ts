@@ -275,12 +275,27 @@ export function buildSevenChoicesSurfaceModel(
   }))
 
   const groupAnalysis = enrichmentAnalysis?.groups?.[groupId]
-  const teachingSource = projectObjectiveTeachingSource(
-    groupAnalysis,
-    group.passage?.paragraphs ?? [],
-    (canonical?.surfaceData ?? { textMap }).textMap,
-    canonical?.surfaceData.semanticParagraphs,
-  )
+  let teachingSource: ReturnType<typeof projectObjectiveTeachingSource> = { annotations: [], evidence: [] }
+  let teachingContent: ObjectiveTeachingView | null
+  try {
+    const source = projectObjectiveTeachingSource(
+      groupAnalysis,
+      group.passage?.paragraphs ?? [],
+      textMap,
+      canonical?.surfaceData.semanticParagraphs,
+    )
+    teachingContent = buildObjectiveTeachingView(
+      groupAnalysis,
+      Object.fromEntries(questionOrder.map(({ questionId, questionNo }) => [questionId, questionNo])),
+    )
+    teachingSource = source
+  } catch (error) {
+    console.warn(`[paper-asset] teaching unavailable for ${groupId}`, error)
+    teachingContent = {
+      unavailable: true,
+      discourseSummary: '', discourseItems: [], translationParagraphs: [], longSentences: [],
+    }
+  }
   const baseSurfaceData = canonical?.surfaceData ?? {
     textMap,
     questions: [],
@@ -296,10 +311,7 @@ export function buildSevenChoicesSurfaceModel(
     },
     paperSection: SEVEN_CHOICES_SECTION,
     overview: enrichmentAnalysis?.groups?.[groupId]?.overview?.trim() ?? '',
-    teachingContent: buildObjectiveTeachingView(
-      groupAnalysis,
-      Object.fromEntries(questionOrder.map(({ questionId, questionNo }) => [questionId, questionNo])),
-    ),
+    teachingContent,
     options,
     ...(canonical?.optionBank && canonical.occurrenceSignature
       ? {
