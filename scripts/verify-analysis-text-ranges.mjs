@@ -298,9 +298,13 @@ for (const [raw, visible, hint] of [
   }
 }
 
-for (const quote of ['feedback', '反馈', 'err', '犯错', 'is', 'repeat']) {
-  const raw = '😀 feedback(反馈) To err（犯错）is human. repeat repeat.'
-  const visible = '😀 feedback (反馈) To err (犯错) is human. repeat repeat.'
+for (const [raw, visible, quote] of [
+  ...['feedback', '反馈', 'err', '犯错', 'is', 'repeat'].map(quote => [
+    '😀 feedback(反馈) To err（犯错）is human. repeat repeat.',
+    '😀 feedback (反馈) To err (犯错) is human. repeat repeat.', quote]),
+  ["Don't panic. Don’t panic.", 'Don’t panic. Don’t panic.', 'panic'],
+  ['Use feedback(反馈). Use feedback (反馈).', 'Use feedback (反馈). Use feedback (反馈).', 'feedback'],
+]) {
   const start = Array.from(raw.slice(0, raw.lastIndexOf(quote))).length
   const analysis = { teachingContent: {
     schemaVersion: 'objective-teaching-content-v1', sourceTextId: 'original',
@@ -308,11 +312,13 @@ for (const quote of ['feedback', '反馈', 'err', '犯错', 'is', 'repeat']) {
       sourceRanges: [{ textId: 'original', paragraphId: 'p', start, end: start + quote.length, quote }] }],
   } }
   for (const text of [raw, visible]) {
+    const sentences = text.split(/(?<=\.)\s+/).map((text, index) => ({ id: `p-s${index}`, text, tokens: [] }))
     const textMap = { paperId: 'gloss-range', paragraphs: [{ id: 'p', section: '七选五',
-      sentences: [{ id: 'p-s0', text, tokens: [] }] }] }
+      sentences }] }
     const projected = projectObjectiveTeachingSource(analysis, [{ id: 'p', text: raw }], textMap)
-    assert.deepEqual(projected.evidence[0].range, { sentenceId: 'p-s0',
-      start: text.lastIndexOf(quote), end: text.lastIndexOf(quote) + quote.length },
+    const target = sentences.findLast(sentence => sentence.text.includes(quote))
+    assert.deepEqual(projected.evidence[0].range, { sentenceId: target.id,
+      start: target.text.lastIndexOf(quote), end: target.text.lastIndexOf(quote) + quote.length },
     'raw coordinates preserve the exact word/gloss/repeated occurrence in historical and v4 TextMaps')
   }
 }

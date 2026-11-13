@@ -165,7 +165,14 @@ function sourceRangeToTextMapRanges(
     displayText = displayText.slice(0, replacement.start) + replacement.text + displayText.slice(replacement.end)
   }
   // Historical TextMaps that already match keep their original coordinates.
-  if (paragraph.sentences.some((sentence) => !displayText.includes(sentence.text))) {
+  let matchCursor = 0
+  const matches = paragraph.sentences.every(({ text }) => {
+    while (/\s/u.test(displayText[matchCursor] ?? '')) matchCursor++
+    if (!displayText.startsWith(text, matchCursor)) return false
+    matchCursor += text.length
+    return true
+  })
+  if (!matches) {
     // Match the compiler's text-inline boundaries around canonical blanks.
     let sourceCursor = 0
     const normalized = replacements.map((replacement) => {
