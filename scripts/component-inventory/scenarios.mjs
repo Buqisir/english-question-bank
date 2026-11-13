@@ -74,4 +74,3 @@ export const SCENARIOS = [
   { id: 'reading-analysis', mainline: false, skip: '这个页面 2026-07-16 已下线（App.tsx reading-analysis-retire），打开只会回到首页，会重复计首页',  go: async (p, b) => { await p.goto(b + '/?view=reading-analysis'); await settle(p, 2000) } },
   { id: 'paper-intelligence', mainline: false, skip: '同上，2026-07-16 已下线',  go: async (p, b) => { await p.goto(b + '/?view=paper-intelligence'); await settle(p, 2000) } },
 ]
-

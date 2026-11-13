@@ -133,5 +133,5 @@ p(`| 撤销 | ${B.undo.length} | ${md(comps(B.undo))} |`, `| 计时器（毫秒�
   `| 读屏播报（aria-live / role=alert/status） | ${B.ariaLive.length} | ${md([...new Set(B.ariaLive.map((x) => x.live))].map((l) => `${l} ${B.ariaLive.filter((x) => x.live === l).length}`).join('、'))} |`,
   `| 加载占位（aria-busy / loading 类） | ${B.loading.length} | — |`, '')
 
-writeFileSync(path.join(OUT, 'inventory.md'), L.join('\n') + '\n')
+writeFileSync(path.join(OUT, 'inventory.md'), L.join('\n').trimEnd() + '\n')
 console.log('inventory.md', L.length, '行；priority', prio.length, '行')
