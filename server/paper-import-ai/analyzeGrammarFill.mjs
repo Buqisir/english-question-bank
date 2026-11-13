@@ -605,6 +605,14 @@ export function isSupportedAppositiveGerundAnswer(answer) {
   })
 }
 
+export function grammarFillAnswerAlternatives(answer) {
+  return String(answer || '').split('/').flatMap(branch => {
+    const parenthetical = branch.match(/\(([^()]+)\)\s*$/)
+    const first = branch.replace(/\([^()]+\)\s*$/, '').trim()
+    return parenthetical ? [first, parenthetical[1].trim()] : [first]
+  })
+}
+
 /** Stamp tense/voice/agreementSensitive (finite) or form (non-finite) onto
  * every blank, deterministically from answer/hint — never AI-authored. When
  * the deterministic rule cannot decide (should not happen on real data; see
@@ -615,7 +623,7 @@ export function stampGrammarFillDerivedFields(analysis) {
   for (const blank of Object.values(blanks)) {
     if (!blank || typeof blank !== 'object') continue
     // Preserve the official key for display; derive only from its first alternative.
-    const answer = String(blank.answer || '').split('/')[0].replace(/\([^()]+\)\s*$/, '').trim()
+    const answer = grammarFillAnswerAlternatives(blank.answer)[0]
     const nounToVerbRoute = blank.facetKey === NOUN_TO_VERB_FACET
       ? blank.similarityProfile?.route
       : null
