@@ -17,6 +17,7 @@
 
 import { useEffect, useId, useMemo, useState, type FormEvent, type ReactNode } from 'react'
 import { CornerDownLeft, QuestionBank, X } from '../icons'
+import { EmptyIllustration } from '../components/EmptyIllustration'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
@@ -938,9 +939,10 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       {showFeed && (
         <div className="concierge-default-feed" role="region" aria-label={isBrowseScreen ? '题库浏览' : '备课桌'}>
           {questionGroups.length === 0 ? (
-            <p className="concierge-feed-empty-corpus">
-              题库还没有题目。先导入一套卷，题库会在这里展开浏览。
-            </p>
+            <div className="concierge-feed-empty-corpus">
+              <EmptyIllustration kind="question-bank" />
+              <p>题库还没有题目。先导入一套卷，这里就能按卷浏览。</p>
+            </div>
           ) : hasActiveFilters && feedPaperCount === 0 ? (
             <p className="concierge-empty">
               筛选条件太严格，题库里没有匹配的卷。

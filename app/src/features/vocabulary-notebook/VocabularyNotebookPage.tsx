@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar.tsx'
-import { ChevronRight, Paper, VocabularyNotebook } from '../../icons'
+import { ChevronRight, Paper } from '../../icons'
+import { EmptyIllustration } from '../../components/EmptyIllustration'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate.tsx'
 import { fetchQuestionGroups } from '../../services/questionGroups.ts'
 import {
@@ -199,7 +200,7 @@ export function VocabularyNotebookPage({
           {error ? <p className="notebook-empty">{error}</p> : null}
           {papers && papers.length === 0 ? (
             <div className="notebook-empty-state">
-              <VocabularyNotebook size={24} aria-hidden="true" />
+              <EmptyIllustration kind="vocabulary-notebook" onCard />
               <p className="notebook-empty">看卷时选中单词，点「加入生词本」，就会收到这里。</p>
               <button type="button" className="notebook-empty-cta" onClick={onBack}>去找题</button>
             </div>

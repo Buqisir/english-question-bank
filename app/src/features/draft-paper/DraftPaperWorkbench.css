@@ -563,6 +563,33 @@
   justify-content: center;
 }
 
+/* 迁移第 12 条：草稿卷还没有题组 = 「还没东西」，插图照图标 BoardList（草稿卷）。
+   插图放在纸上，纸本身就是白卡片，不另加底。 */
+.draft-a4-empty.is-blank {
+  align-content: center;
+  display: grid;
+  font-size: 13px;
+  gap: 12px;
+  justify-items: center;
+  line-height: 1.5;
+  padding: 36px 20px;
+  text-align: center;
+}
+.draft-a4-empty.is-blank p { margin: 0; max-width: 26em; }
+.draft-a4-empty-cta {
+  background: var(--eqb-color-accent-fill);
+  border: 0;
+  border-radius: 8px;
+  color: var(--eqb-color-accent-fill-ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  min-height: 36px;
+  padding: 0 16px;
+}
+.draft-a4-empty-cta:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+
 /* One persistent tool strip per group. Its paper-relative anchor stays stable
    while scrolling; wide A4 places the strip on the desk outside the paper. */
 .draft-group-actions {

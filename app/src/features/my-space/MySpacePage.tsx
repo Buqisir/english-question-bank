@@ -1,4 +1,5 @@
 import { Ellipsis, Folder, Paper, Save, Trash } from '../../icons'
+import { EmptyIllustration } from '../../components/EmptyIllustration'
 import { DownloadFeedbackIcon } from '../../icons/MotionIcons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
@@ -410,7 +411,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
             )}
             {loadState === 'loaded' && artifacts.length === 0 && (
               <div className="my-space-empty-state">
-                <Paper size={24} aria-hidden="true" />
+                <EmptyIllustration kind="archive" onCard />
                 <p className="my-space-empty">试卷导出为 PDF 后，可以保存在这里。</p>
                 <button type="button" className="my-space-empty-cta" onClick={onBackToWorkbench}>去找题</button>
               </div>

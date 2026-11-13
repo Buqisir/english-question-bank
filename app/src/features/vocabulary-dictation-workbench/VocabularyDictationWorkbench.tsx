@@ -9,7 +9,6 @@ import {
   PaperLined,
   PaperStudent,
   Link,
-  ListChecks,
   PauseCircle,
   Printer,
   QrCode,
@@ -24,6 +23,7 @@ import { iconMotionInput } from '../../icons/motionInput'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
+import { EmptyIllustration } from '../../components/EmptyIllustration'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
   createVocabularyDictationTask,
@@ -241,6 +241,9 @@ export function VocabularyDictationWorkbench({
   const [tab, setTab] = useState<WorkspaceTab>('sets')
   const [library, setLibrary] = useState<VocabularySetLibraryDto>({ items: [], page: 1, pageSize: 20, total: 0, hasMore: false })
   const [tasks, setTasks] = useState<VocabularyDictationTaskDto[]>([])
+  // 空状态只在读完之后出现，免得插图在加载时闪一下。
+  const [tasksLoadedFor, setTasksLoadedFor] = useState<string | null>(null)
+  const [libraryLoadedFor, setLibraryLoadedFor] = useState<string | null>(null)
   const [records, setRecords] = useState<VocabularyDictationRecordDto[]>([])
   const [meaningRecords, setMeaningRecords] = useState<VocabularyMeaningRecallRecordDto[]>([])
   const [meaningStates, setMeaningStates] = useState<StudentVocabularyMeaningStateDto[]>([])
@@ -354,6 +357,7 @@ export function VocabularyDictationWorkbench({
     ])
     if (requestedVersion !== studentDataVersionRef.current || studentId !== activeStudentIdRef.current) return
     setTasks(nextTasks)
+    setTasksLoadedFor(studentId)
     setRecords(nextRecords)
     setMeaningRecords(nextMeaningRecords)
     setMeaningStates(nextMeaningStates)
@@ -399,7 +403,9 @@ export function VocabularyDictationWorkbench({
       from: fromDate,
       to: toDate,
     }).then((nextLibrary) => {
-      if (!cancelled) setLibrary(nextLibrary)
+      if (cancelled) return
+      setLibrary(nextLibrary)
+      setLibraryLoadedFor(activeStudentId)
     }).catch((nextError: unknown) => {
       if (!cancelled) setError(nextError instanceof Error ? nextError.message : '词组加载失败。')
     })
@@ -1052,7 +1058,11 @@ export function VocabularyDictationWorkbench({
                     </span>
                   </label>
                 )
-              }) : <div className="dictation-empty-state"><Card size={32} /><h2>没有符合条件的词组</h2><p>换一个搜索词或日期范围。</p></div>}
+              }) : libraryLoadedFor !== activeStudentId ? null : (query || fromDate || toDate) ? (
+                <p className="dictation-empty-line">没有符合条件的词组。<button type="button" className="dictation-empty-inline" onClick={() => { setSearchInput(''); setQuery(''); setFromDate(''); setToDate('') }}>清除搜索和日期</button></p>
+              ) : (
+                <div className="dictation-empty-state is-blank"><EmptyIllustration kind="paper-lined" onCard /><p>还没有词组。在看卷时把生词收进生词本，就能在这里组成词组。</p></div>
+              )}
             </FluidHoverList>
 
             {library.total > library.pageSize && (
@@ -1158,7 +1168,7 @@ export function VocabularyDictationWorkbench({
                     })}</div>
                   </section>
                 )
-              })}</div> : <div className="dictation-empty-state"><ListChecks size={32} /><h2>还没有听写</h2><p>先到“词组”选择单词。</p></div>}
+              })}</div> : tasksLoadedFor !== activeStudentId ? null : <div className="dictation-empty-state is-blank"><EmptyIllustration kind="paper-lined" onCard /><p>还没有听写。先到「词组」里选好单词。</p><button type="button" className="dictation-empty-cta" onClick={() => { void switchWorkbenchTab('sets') }}>去选词组</button></div>}
             </div>
 
             {selectedTasks.length > 0 && (

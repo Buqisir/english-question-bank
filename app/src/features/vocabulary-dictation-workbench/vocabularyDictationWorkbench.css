@@ -1034,6 +1034,41 @@
   font-size: 13px;
 }
 
+/* 迁移第 12 条：还没有听写 / 还没有词组 = 「还没东西」，插图照图标 PaperLined（Owner 选横线纸）。 */
+.dictation-empty-state.is-blank { gap: 12px; line-height: 1.5; }
+.dictation-empty-state.is-blank p { max-width: 24em; }
+.dictation-empty-state .dictation-empty-cta {
+  background: var(--eqb-color-accent-fill);
+  border: 0;
+  border-radius: 8px;
+  color: var(--eqb-color-accent-fill-ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  min-height: 36px;
+  padding: 0 16px;
+}
+.dictation-empty-state .dictation-empty-cta:focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
+
+/* 搜了没结果：一行灰字，能一步解决的放行内按钮（同首页「清除筛选」）。 */
+.dictation-empty-line {
+  color: var(--desk-muted);
+  font-size: 13px;
+  margin: 0;
+  padding: 12px 4px;
+}
+.dictation-empty-line .dictation-empty-inline {
+  background: transparent;
+  border: 0;
+  color: var(--desk-ink);
+  cursor: pointer;
+  font: inherit;
+  padding: 0 0 0 6px;
+  text-decoration: underline;
+}
+.dictation-empty-line .dictation-empty-inline:focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
+
 .dictation-review-heading {
   align-items: flex-end;
 }
