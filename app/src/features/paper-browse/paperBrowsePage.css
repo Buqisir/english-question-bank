@@ -259,19 +259,14 @@
   white-space: nowrap;
 }
 
-.paper-browse-lecture-toggle--pressed {
-  background: var(--action, #1F1F1D);
-  color: #fff;
-}
-
 .paper-browse-page .paper-browse-lecture-toggle {
+  /* 讲评开关已换成 Button（构件厂第 4 步），Button 本来就是 13px，这条现在和它一样、不改变什么。
+   * 留着是因为 scripts/verify-paper-browse.mjs 第 81 条把它列在拍板过的字号表里。 */
   font-size: 13px;
 }
 
-.paper-browse-lecture-toggle--pressed:hover:not(:disabled) {
-  background: var(--action-hover, #3A3A37);
-  color: #fff;
-}
+/* 原 `.paper-browse-lecture-toggle--pressed`（石板墨底、白字）和它的 :hover 删了：按下态改由 Button 的
+ * solid 语气画（button.css）。原来那条的白字其实被 App.css `.topbar .ghost-button` 的字色盖掉了。 */
 
 .paper-browse-content {
   --pb-block-gap: 16px;
@@ -1595,41 +1590,11 @@
    * 正好把动作接住。 */
 }
 
-.similar-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  /* quiet-chrome（2026-08-28）：摘白底描边盒，透明底 + hover 浮中性底；
-     字体不再硬编码 -apple-system，跟随全站 UI 字道（Inter 栈）。 */
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1;
-  border-radius: 8px;
-  padding: 9px 14px;
-  cursor: pointer;
-  border: 0;
-  background: transparent;
-  color: var(--desk-ink);
-}
-
-.similar-btn:hover {
-  background: var(--desk-hover);
-}
-
-.similar-btn--primary {
-  background: var(--eqb-color-accent-fill);
-  color: var(--eqb-color-accent-fill-ink);
-}
-
-.similar-btn--primary:hover {
-  background: var(--eqb-color-accent-fill-hover);
-}
-
-.similar-btn[disabled] {
-  opacity: 0.45;
-  cursor: default;
-}
+/* `.similar-btn` / `.similar-btn--primary` 的样子删了（构件厂第 4 步，2026-11-13，提案 · 单一来源）：
+ * 「配相似 / 相似篇章」、相似栏的「重试 / 加入草稿卷」、相似篇章面板和草稿卷换篇栏的键都换成了
+ * Button（app/src/shared-ui/Button.tsx）：普通的用 strong sm（墨字、高 28），带底的用 primary sm
+ * （雾薄荷、高 28）。字 12/600 → 13/500（primary 13/600），高 30 / 34 → 28，左右内边距 14 → 8。
+ * `similar-btn` 这个类名还挂在 Button 上，只当选择器钩子，不再带样式。 */
 
 .similar-rail {
   display: flex;
@@ -1819,7 +1784,7 @@
  * this file's own PaperBrowsePage). Kept in this stylesheet — not a new
  * per-component CSS file — because it's the single existing home for the
  * `.similar-*` token language (no new color literal introduced here; every
- * rule below reuses `.similar-rcard` / `.similar-chip` / `.similar-btn` /
+ * rule below reuses `.similar-rcard` / `.similar-chip` / `.similar-btn`（现为 Button，见上）/
  * `.similar-pool-note` / `.similar-backlink` / `.similar-toast` already
  * defined above, plus `.paper-browse-lecture-title` /
  * `.paper-browse-lecture-empty`).
@@ -2289,7 +2254,7 @@
 
 .paper-browse-error-back {
   margin-top: 8px;
-  border: 1px solid var(--eqb-color-border);
+  /* 原来的 1px 描边去掉了：返回键换成 Button（墨字 lg），Button 没有描边的语气（构件厂第 4 步）。 */
 }
 
 .paper-browse-error-detail {

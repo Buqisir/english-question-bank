@@ -1,6 +1,7 @@
 import { ArrowDown, ArrowUp, Grip, Trash } from '../../icons'
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import { FluidHoverList } from '../../components/FluidHoverList'
+import { Button } from '../../shared-ui/Button.tsx'
 import { groupTypeLabel, type DraftPaperItem, type QuestionGroupCard } from '../../domain/questionBank'
 import type { SimilarPassagesRequestState } from '../similar-passages/SimilarPassagesPanel'
 
@@ -51,9 +52,9 @@ export function DraftPaperSwapDrawer(props: DraftPaperSwapDrawerProps): ReactNod
       {request.status === 'error' && (
         <div className="similar-rail-error">
           <p className="paper-browse-lecture-empty">{request.message}</p>
-          <button type="button" className="similar-btn" onClick={onRetry}>
+          <Button tone="strong" size="sm" className="similar-btn" onClick={onRetry}>
             重试
-          </button>
+          </Button>
         </div>
       )}
 
@@ -88,24 +89,26 @@ export function DraftPaperSwapDrawer(props: DraftPaperSwapDrawerProps): ReactNod
                       </div>
                     </div>
                     <div className="similar-rcard-actions">
-                      <button
-                        type="button"
-                        className="similar-btn similar-btn--primary"
+                      <Button
+                        tone="primary"
+                        size="sm"
+                        className="similar-btn"
                         disabled={disabled}
                         title={title}
                         onClick={() => onReplace(result.groupId)}
                       >
                         ⇄ 替换这篇
-                      </button>
-                      <button
-                        type="button"
+                      </Button>
+                      <Button
+                        tone="strong"
+                        size="sm"
                         className="similar-btn"
                         disabled={disabled}
                         title={title}
                         onClick={() => onAdd(result.groupId)}
                       >
                         ＋ 加入
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 )

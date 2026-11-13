@@ -1089,7 +1089,7 @@ assert(
   'PaperBrowsePage renders a 讲评 toggle in the topbar actionsSlot unconditionally, including Review Screen',
   /paper-browse-lecture-toggle/.test(pageSrc) &&
     /actionsSlot=\{topbarActionsSlot\}/.test(pageSrc) &&
-    /Presentation size=\{14\}/.test(pageSrc) &&
+    /Presentation size=\{16\}/.test(pageSrc) &&
     !/paper-browse-lecture-handle/.test(pageSrc),
   'topbar lecture toggle missing, or the retired right-edge handle remains',
 )

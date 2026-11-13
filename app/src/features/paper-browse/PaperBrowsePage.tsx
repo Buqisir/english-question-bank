@@ -57,7 +57,8 @@
  * out of scope per aggregatePaperResults.ts:8-11).
  */
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { BoardList, Presentation, RefreshCw, Scissors } from '../../icons'
+import { ArrowLeft, BoardList, Presentation, RefreshCw, Scissors } from '../../icons'
+import { Button } from '../../shared-ui/Button.tsx'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { ensurePaperFonts, PaperFontError } from '../../shared-ui/papersurface/paperFontLoader'
@@ -3584,9 +3585,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         {!reviewRevision && hasActiveQuestion && activeQuestionId && SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType) && (
           <div className="similar-cta">
             {/* owner 拍板 2026-07-10：按钮在最左，说明文字跟在右边 */}
-            <button
-              type="button"
-              className="similar-btn similar-btn--primary"
+            <Button
+              tone="primary"
+              size="sm"
+              className="similar-btn"
+              icon={<RefreshCw aria-hidden="true" size={16} />}
               onClick={() => {
                 const mode = SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? 'passages' : 'questions'
                 // 篇章模式种子=整个题组，不带题号（CR SW-2）
@@ -3602,9 +3605,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 })
               }}
             >
-              <RefreshCw aria-hidden="true" size={16} />
               {SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? '相似篇章' : '配相似'}
-            </button>
+            </Button>
             <span className="similar-cta-why">——从库里配同配方的相似题</span>
           </div>
         )}
@@ -4046,19 +4048,21 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
 
   const topbarActionsSlot = !reviewRevision ? (
     <>
-      <button
-        type="button"
+      {/* 构件厂第 4 步（2026-11-13，提案 · 单一来源）：讲评开关换成 Button。关着淡墨（和顶栏导航一样），
+          开着石板墨填充（solid，纸白字）。原来按下态的白字被 App.css `.topbar .ghost-button` 的字色盖掉，
+          深底深字几乎看不清；换构件后这个问题没了。图标 14 → 16，和顶栏其余图标一样。 */}
+      <Button
         ref={lectureToggleRef}
-        className={`ghost-button paper-browse-lecture-toggle${
-          lectureOpen ? ' paper-browse-lecture-toggle--pressed' : ''
-        }`}
+        className="paper-browse-lecture-toggle"
+        tone={lectureOpen ? 'solid' : 'quiet'}
+        size="sm"
+        icon={<Presentation size={16} aria-hidden="true" />}
         onClick={toggleLecturePanel}
         aria-pressed={lectureOpen}
         aria-expanded={lectureOpen}
       >
-        <Presentation size={14} aria-hidden="true" />
         讲评
-      </button>
+      </Button>
       <select className="ghost-button" aria-label="PDF 版本" value={pdfEdition ?? ''} disabled={analysisPdfBusy || !pdfEdition} onChange={(event) => {
         setPdfEdition(event.target.value as PaperPdfEdition)
         setAnalysisPdfError('')
@@ -4066,33 +4070,33 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         {pdfEditions.map((edition) => <option key={edition} value={edition}>{PAPER_PDF_PRODUCTS[edition]}</option>)}
       </select>
       {pdfEdition && canonicalConsumption?.publicationDigest && <a className="ghost-button" href={paperProductPdfUrl(paperId, pdfEdition, canonicalConsumption.publicationDigest)} target="_blank" rel="noopener noreferrer">PDF Screen</a>}
-      <button
-        className="ghost-button"
-        type="button"
-        disabled={analysisPdfBusy || !pdfEdition}
+      {/* 生成中用 Button 的 busy（保持原样、点了不触发、读屏念「忙」），不再整键变淡；没有版本时才禁用。 */}
+      <Button
+        size="sm"
+        busy={analysisPdfBusy}
+        disabled={!pdfEdition}
+        icon={<DownloadFeedbackIcon size={16} icon="paper" working={analysisPdfBusy} />}
         onClick={() => void downloadPaperProduct()}
       >
-        <DownloadFeedbackIcon size={16} icon="paper" working={analysisPdfBusy} />
         {analysisPdfBusy ? '生成 PDF 中…' : '下载 PDF'}
-      </button>
+      </Button>
       {pdfProductsError && <span role="alert">{pdfProductsError}{' '}
-        <button className="ghost-button" type="button" onClick={retryPdfProducts}>刷新 PDF 版本</button>
+        <Button size="sm" onClick={retryPdfProducts}>刷新 PDF 版本</Button>
       </span>}
     </>
   ) : (
-    <button
-      type="button"
+    <Button
       ref={lectureToggleRef}
-      className={`ghost-button paper-browse-lecture-toggle${
-        lectureOpen ? ' paper-browse-lecture-toggle--pressed' : ''
-      }`}
+      className="paper-browse-lecture-toggle"
+      tone={lectureOpen ? 'solid' : 'quiet'}
+      size="sm"
+      icon={<Presentation size={16} aria-hidden="true" />}
       onClick={toggleLecturePanel}
       aria-pressed={lectureOpen}
       aria-expanded={lectureOpen}
     >
-      <Presentation size={14} aria-hidden="true" />
       讲评
-    </button>
+    </Button>
   )
 
   async function downloadPaperProduct(): Promise<void> {
@@ -4136,7 +4140,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               secondary line so it can still be reported (and fail-closed checks can read it). */}
           <p>{error && /[\u4e00-\u9fff]/.test(error) ? error : '这份卷可能还没上线或已被移除，回到找题页换一份看看。'}</p>
           {error && !/[\u4e00-\u9fff]/.test(error) && <p className="paper-browse-error-detail">错误信息：{error}</p>}
-          <button type="button" className="ghost-button paper-browse-error-back" onClick={onBackToWorkbench}>返回找题</button>
+          {/* 构件厂第 4 步：换成 Button（墨字、高 36）。原来的 1px 描边去掉（Button 没有描边的语气），
+              补一个和顶栏返回键一样的左箭头，让它一眼看得出是键。提案 · 单一来源。 */}
+          <Button className="paper-browse-error-back" tone="strong" size="lg" icon={<ArrowLeft size={16} />} onClick={onBackToWorkbench}>
+            返回找题
+          </Button>
         </div>
       </div>
     )

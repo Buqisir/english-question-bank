@@ -1,0 +1,190 @@
+{
+ "draft-swap.png": {
+  "size": [
+   [
+    416,
+    456
+   ],
+   [
+    416,
+    452
+   ]
+  ]
+ },
+ "error-390.png": {
+  "pixels": 3212,
+  "bbox_2x": [
+   312,
+   496,
+   468,
+   568
+  ]
+ },
+ "error-back-focus.png": {
+  "pixels": 5293,
+  "bbox_2x": [
+   1334,
+   414,
+   1546,
+   502
+  ]
+ },
+ "error-back-hover.png": {
+  "pixels": 6088,
+  "bbox_2x": [
+   1342,
+   422,
+   1538,
+   494
+  ]
+ },
+ "error.png": {
+  "pixels": 3212,
+  "bbox_2x": [
+   1362,
+   422,
+   1518,
+   494
+  ]
+ },
+ "similar-cta-390.png": {
+  "size": [
+   [
+    712,
+    166
+   ],
+   [
+    712,
+    154
+   ]
+  ]
+ },
+ "similar-cta-focus.png": {
+  "size": [
+   [
+    876,
+    166
+   ],
+   [
+    876,
+    154
+   ]
+  ]
+ },
+ "similar-cta-hover.png": {
+  "size": [
+   [
+    876,
+    166
+   ],
+   [
+    876,
+    154
+   ]
+  ]
+ },
+ "similar-cta.png": {
+  "size": [
+   [
+    876,
+    166
+   ],
+   [
+    876,
+    154
+   ]
+  ]
+ },
+ "similar-rail-head-390.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "similar-rail-head.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "similar-rail.png": {
+  "size": [
+   [
+    812,
+    264
+   ],
+   [
+    812,
+    260
+   ]
+  ]
+ },
+ "topbar-390.png": {
+  "pixels": 3304,
+  "bbox_2x": [
+   54,
+   138,
+   445,
+   166
+  ]
+ },
+ "topbar-download-focus.png": {
+  "pixels": 412,
+  "bbox_2x": [
+   882,
+   35,
+   910,
+   62
+  ]
+ },
+ "topbar-download-hover.png": {
+  "pixels": 412,
+  "bbox_2x": [
+   882,
+   35,
+   910,
+   62
+  ]
+ },
+ "topbar-lecture-hover.png": {
+  "pixels": 733,
+  "bbox_2x": [
+   864,
+   20,
+   2396,
+   76
+  ]
+ },
+ "topbar-lecture-on-390.png": {
+  "pixels": 161,
+  "bbox_2x": [
+   54,
+   140,
+   62,
+   166
+  ]
+ },
+ "topbar-lecture-on-hover.png": {
+  "pixels": 1315,
+  "bbox_2x": [
+   864,
+   20,
+   2396,
+   76
+  ]
+ },
+ "topbar-lecture-on.png": {
+  "pixels": 1307,
+  "bbox_2x": [
+   864,
+   20,
+   976,
+   76
+  ]
+ },
+ "topbar.png": {
+  "pixels": 412,
+  "bbox_2x": [
+   882,
+   35,
+   910,
+   62
+  ]
+ }
+}

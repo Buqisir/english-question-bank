@@ -30,6 +30,7 @@
  */
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { ChevronUp } from '../../icons'
+import { Button } from '../../shared-ui/Button.tsx'
 import type { QuestionGroupCard, SimilarPassagesResponse } from '../../domain/questionBank'
 
 export type SimilarPassagesRequestState =
@@ -91,9 +92,9 @@ export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNod
       {request.status === 'error' && (
         <div className="similar-rail-error">
           <p className="paper-browse-lecture-empty">{request.message}</p>
-          <button type="button" className="similar-btn" onClick={onRetry}>
+          <Button tone="strong" size="sm" className="similar-btn" onClick={onRetry}>
             重试
-          </button>
+          </Button>
         </div>
       )}
 
@@ -122,15 +123,16 @@ export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNod
                       </div>
                     </div>
                     <div className="similar-rcard-actions">
-                      <button
-                        type="button"
-                        className="similar-btn similar-btn--primary"
+                      <Button
+                        tone="primary"
+                        size="sm"
+                        className="similar-btn"
                         disabled={isThin}
                         title={isThin ? '该卷未入库存，暂不能加入' : undefined}
                         onClick={() => card && handleAdd(card)}
                       >
                         ＋ 加入草稿卷
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 )

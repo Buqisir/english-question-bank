@@ -31,6 +31,7 @@
  */
 import type { ReactNode } from 'react'
 import { FluidHoverList } from '../../components/FluidHoverList'
+import { Button } from '../../shared-ui/Button.tsx'
 import type {
   QuestionGroupCard,
   SimilarPassagesResponse,
@@ -140,9 +141,9 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
       {request.status === 'error' && (
         <div className="similar-rail-error">
           <p className="paper-browse-lecture-empty">{request.message}</p>
-          <button type="button" className="similar-btn" onClick={onRetry}>
+          <Button tone="strong" size="sm" className="similar-btn" onClick={onRetry}>
             重试
-          </button>
+          </Button>
         </div>
       )}
 
@@ -199,9 +200,9 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
           <span className="similar-count">
             {selectedGroupIds.size > 0 ? `已选 ${selectedGroupIds.size} 篇` : '未选择'}
           </span>
-          <button type="button" className="similar-btn similar-btn--primary" disabled={selectedGroupIds.size === 0} onClick={onAddToDraft}>
+          <Button tone="primary" size="sm" className="similar-btn" disabled={selectedGroupIds.size === 0} onClick={onAddToDraft}>
             加入草稿卷
-          </button>
+          </Button>
         </div>
       )}
 
