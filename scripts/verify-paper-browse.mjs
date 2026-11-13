@@ -462,14 +462,16 @@ assert(
 // 预览指引") legitimately says "看整卷" a few more times as user-facing
 // guidance text in error messages, not as additional buttons. Narrowed to
 // counting the actual button JSX.
+// 构件厂第 4 步（2026-11-13）：换成共用的 Button，图标走 icon 属性，写法是
+// <Button tone="strong" icon={<Eye size={16} />} …>看整卷；两种写法都认。
 assert(
   'QuestionGroupDetailView renders exactly one 看整卷 button',
-  (detailViewSrc.match(/<button[\s\S]{0,120}?>\s*<Eye[^/]*\/>\s*看整卷/g) || []).length === 1,
+  (detailViewSrc.match(/<button[\s\S]{0,120}?>\s*<Eye[^/]*\/>\s*看整卷|<Button\b[^>]*icon=\{<Eye[^/]*\/>\}[\s\S]{0,120}?\}>\s*看整卷/g) || []).length === 1,
   'expected exactly one 看整卷 button element',
 )
 assert(
   '看整卷 button is gated on selectedDetail.canonicalPaperId',
-  /\{selectedDetail\.canonicalPaperId\s*&&\s*\(\s*<button[\s\S]*?看整卷/.test(detailViewSrc),
+  /\{selectedDetail\.canonicalPaperId\s*&&\s*\(\s*<[bB]utton[\s\S]*?看整卷/.test(detailViewSrc),
   '看整卷 button is not gated on Screen admission',
 )
 assert(

@@ -1,0 +1,266 @@
+{
+ "actions-added-390.png": {
+  "pixels": 56,
+  "bbox_2x": [
+   24,
+   24,
+   440,
+   143
+  ]
+ },
+ "actions-added-hover.png": {
+  "pixels": 6960,
+  "bbox_2x": [
+   299,
+   41,
+   847,
+   71
+  ]
+ },
+ "actions-added.png": {
+  "pixels": 6960,
+  "bbox_2x": [
+   299,
+   41,
+   847,
+   71
+  ]
+ },
+ "actions-disabled-390.png": {
+  "pixels": 18113,
+  "bbox_2x": [
+   24,
+   24,
+   310,
+   88
+  ]
+ },
+ "actions-disabled-hover.png": {
+  "pixels": 15586,
+  "bbox_2x": [
+   24,
+   24,
+   907,
+   88
+  ]
+ },
+ "actions-disabled.png": {
+  "pixels": 15586,
+  "bbox_2x": [
+   24,
+   24,
+   907,
+   88
+  ]
+ },
+ "actions-focus-0.png": {
+  "pixels": 12724,
+  "bbox_2x": [
+   16,
+   16,
+   847,
+   96
+  ]
+ },
+ "actions-focus-1.png": {
+  "pixels": 11676,
+  "bbox_2x": [
+   270,
+   16,
+   847,
+   96
+  ]
+ },
+ "actions-focus-2.png": {
+  "pixels": 11534,
+  "bbox_2x": [
+   299,
+   16,
+   847,
+   96
+  ]
+ },
+ "actions-focus-3.png": {
+  "pixels": 12165,
+  "bbox_2x": [
+   299,
+   16,
+   880,
+   96
+  ]
+ },
+ "actions-hover-0.png": {
+  "pixels": 6960,
+  "bbox_2x": [
+   299,
+   41,
+   847,
+   71
+  ]
+ },
+ "actions-hover-1.png": {
+  "pixels": 7522,
+  "bbox_2x": [
+   299,
+   24,
+   847,
+   88
+  ]
+ },
+ "actions-hover-2.png": {
+  "pixels": 8596,
+  "bbox_2x": [
+   299,
+   24,
+   847,
+   88
+  ]
+ },
+ "actions-hover-3.png": {
+  "pixels": 9619,
+  "bbox_2x": [
+   299,
+   24,
+   872,
+   88
+  ]
+ },
+ "back-focus.png": {
+  "size": [
+   [
+    208,
+    100
+   ],
+   [
+    244,
+    120
+   ]
+  ]
+ },
+ "back-hover.png": {
+  "size": [
+   [
+    208,
+    100
+   ],
+   [
+    244,
+    120
+   ]
+  ]
+ },
+ "collapse-390.png": {
+  "pixels": 12502,
+  "bbox_2x": [
+   0,
+   7,
+   400,
+   208
+  ]
+ },
+ "collapse-hover.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "collapse.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "error-390.png": {
+  "size": [
+   [
+    700,
+    266
+   ],
+   [
+    700,
+    270
+   ]
+  ]
+ },
+ "error.png": {
+  "size": [
+   [
+    1760,
+    298
+   ],
+   [
+    1760,
+    302
+   ]
+  ]
+ },
+ "expand-390.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "expand-focus.png": {
+  "pixels": 81,
+  "bbox_2x": [
+   6,
+   34,
+   396,
+   81
+  ]
+ },
+ "expand-hover.png": {
+  "pixels": 81,
+  "bbox_2x": [
+   6,
+   34,
+   396,
+   81
+  ]
+ },
+ "expand.png": {
+  "pixels": 81,
+  "bbox_2x": [
+   6,
+   34,
+   396,
+   81
+  ]
+ },
+ "head-390.png": {
+  "size": [
+   [
+    636,
+    586
+   ],
+   [
+    652,
+    598
+   ]
+  ]
+ },
+ "head.png": {
+  "size": [
+   [
+    1664,
+    434
+   ],
+   [
+    1680,
+    446
+   ]
+  ]
+ },
+ "page-390.png": {
+  "pixels": 122055,
+  "bbox_2x": [
+   45,
+   230,
+   735,
+   1445
+  ]
+ },
+ "page.png": {
+  "pixels": 267248,
+  "bbox_2x": [
+   581,
+   148,
+   2299,
+   1211
+  ]
+ }
+}

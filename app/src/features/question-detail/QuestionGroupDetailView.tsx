@@ -42,6 +42,7 @@ import type { QuestionGroupCard, QuestionGroupDetail, ReadingParseQuestionGroupR
 import { sourceTypeLabel } from '../../domain/questionBank'
 import { compactGroupMeta } from './detailHelpers'
 import { buildPaperBrowseLectureHref } from '../../concierge/paperSurfaceHref'
+import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
 import { Menu } from '../../shared-ui/Menu.tsx'
 import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import {
@@ -500,9 +501,9 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
   if (!selectedDetail) {
     return (
       <div className="detail-view">
-        <button className="back-button" type="button" onClick={onBack}>
-          <ArrowLeft size={14} aria-hidden="true" /> 返回找题
-        </button>
+        <Button className="detail-back" tone="subtle" size="sm" icon={<ArrowLeft size={16} aria-hidden="true" />} onClick={onBack}>
+          返回找题
+        </Button>
         {detailStatus === 'loading' && <p className="detail-message">正在读取题组详情...</p>}
         {detailStatus === 'error' && <p className="detail-message error">{detailError}</p>}
       </div>
@@ -524,9 +525,9 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
 
   return (
     <div className="detail-view">
-      <button className="back-button" type="button" onClick={onBack}>
-        <ArrowLeft size={14} aria-hidden="true" /> 返回找题
-      </button>
+      <Button className="detail-back" tone="subtle" size="sm" icon={<ArrowLeft size={16} aria-hidden="true" />} onClick={onBack}>
+        返回找题
+      </Button>
 
       <section className="peek-root" aria-label="题组速览">
         <header className="peek-hero">
@@ -565,9 +566,9 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
           )}
 
           <div className="peek-actions">
-            <button
-              className="peek-btn peek-btn--primary"
-              type="button"
+            <Button
+              className="peek-add"
+              tone="primary"
               {...iconMotionInput}
               onClick={() => onAddToBasket(selectedDetail)}
               disabled={selectedDetail.draftPaperButtonState === 'disabled'}
@@ -577,28 +578,28 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                   ? selectedDetail.printUnavailableReason || '暂不可组卷'
                   : undefined
               }
+              icon={<DraftAddIcon size={16} done={selectedDetail.draftPaperButtonState === 'in_current_draft'} />}
             >
-              <DraftAddIcon size={16} done={selectedDetail.draftPaperButtonState === 'in_current_draft'} />
               {selectedDetail.draftPaperButtonState === 'in_current_draft'
                 ? '已在草稿卷'
                 : selectedDetail.draftPaperButtonState === 'disabled'
                   ? '暂不可组卷'
                   : '加入草稿卷'}
-            </button>
+            </Button>
             {selectedDetail.draftPaperButtonState === 'disabled' && (
               <span className="peek-unavailable-note">这组题还在整理，整理好就能加入草稿卷</span>
             )}
             {selectedDetail.canonicalPaperId && (
-              <button className="peek-btn" type="button" onClick={() => onOpenPaperBrowse(selectedDetail)}>
-                <Eye size={16} />
+              <Button tone="strong" icon={<Eye size={16} />} onClick={() => onOpenPaperBrowse(selectedDetail)}>
                 看整卷
-              </button>
+              </Button>
             )}
             {selectedDetail.hasPaperSurfaceAnalysis &&
               selectedDetail.paperSurfaceHref &&
               selectedDetail.paperSurfaceLabel && (
-              <a
-                className="peek-btn"
+              <ButtonLink
+                tone="strong"
+                icon={<ReadingAnalysis size={16} />}
                 href={buildPaperBrowseLectureHref(selectedDetail.paperSurfaceHref) || selectedDetail.paperSurfaceHref}
                 data-ra-entry="detail-view"
                 data-ra-group-id={selectedDetail.id}
@@ -609,21 +610,19 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                   onOpenPaperBrowseLecture(selectedDetail)
                 }}
               >
-                <ReadingAnalysis size={16} />
                 {selectedDetail.paperSurfaceLabel}
-              </a>
+              </ButtonLink>
             )}
             {SIMILAR_SUPPORTED_GROUP_TYPES.has(selectedDetail.groupType) && selectedDetail.paperSurfaceHref && (
-              <button
-                className="peek-btn"
-                type="button"
+              <Button
+                tone="strong"
+                icon={<Papers size={16} />}
                 data-ra-entry="detail-view-similar"
                 data-ra-group-id={selectedDetail.id}
                 onClick={handleToggleSimilarPassages}
               >
-                <Papers size={16} />
                 相似篇章
-              </button>
+              </Button>
             )}
             {isOwnerView && selectedDetail.canEdit && (
               <div className="peek-actions-menu">

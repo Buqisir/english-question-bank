@@ -350,7 +350,6 @@ button:disabled {
 .ghost-button,
 .add-button,
 .detail-button,
-.back-button,
 .save-button,
 .export-button {
   display: inline-flex;
@@ -417,8 +416,7 @@ button:disabled {
   background: var(--surface-strong);
 }
 
-.detail-button,
-.back-button {
+.detail-button {
   color: var(--muted);
   background: transparent;
   border: 0;
@@ -429,15 +427,13 @@ button:disabled {
 .ghost-button:focus-visible,
 .add-button:focus-visible,
 .detail-button:focus-visible,
-.back-button:focus-visible,
 .save-button:focus-visible,
 .export-button:focus-visible {
   outline: var(--focus-ring);
   outline-offset: 2px;
 }
 
-.detail-button:hover,
-.back-button:hover {
+.detail-button:hover {
   color: var(--ink);
   background: var(--surface-strong);
 }
@@ -797,19 +793,8 @@ button:disabled {
   gap: 0;
 }
 
-.detail-view > .back-button {
-  justify-self: start;
-  min-height: 0;
-  margin: 0 0 12px;
-  padding: 0;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.detail-view > .back-button:hover {
-  color: var(--ink);
-  background: transparent;
-}
+/* 详情页「返回找题」原来的 .back-button 换成了 Button（构件厂第 4 步，2026-11-13），
+ * 排布写在 QuestionGroupDetailView.css 的 .detail-view > .detail-back。 */
 
 .detail-message {
   margin: 0;

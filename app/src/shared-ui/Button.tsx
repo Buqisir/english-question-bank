@@ -10,9 +10,13 @@
  * - 图标：带图标 + 字（71%）、只有字（23%）、只有图标（6%）。只有图标时必须给 label，
  *   读屏才念得出名字（清点里 axe 报过名字对不上的按钮）。
  * 圆角一律 8px（DESIGN.md §5 按高度选档：28–44px 的控件用 8，不做胶囊按钮）。
+ *
+ * ButtonLink（构件厂第 4 步换详情页时加）：长得和 Button 一样、但点了是去别的地址的 <a>。
+ * 详情页「阅读解析」原来就是链接（能中键开新标签、能复制地址），换成 <button> 会丢这些，所以单出一个。
+ * 链接没有 disabled 和 busy，这两项不提供。
  */
 
-import type { ButtonHTMLAttributes, MouseEvent, ReactNode, Ref } from 'react'
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, MouseEvent, ReactNode, Ref } from 'react'
 import './button.css'
 
 export type ButtonTone = 'quiet' | 'subtle' | 'strong' | 'primary' | 'solid' | 'danger'
@@ -76,5 +80,29 @@ export function Button({
       {icon}
       {iconOnly ? null : <span className="eqb-button-label">{children}</span>}
     </button>
+  )
+}
+
+type ButtonLinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'children'> & {
+  href: string
+  tone?: ButtonTone
+  size?: ButtonSize
+  icon?: ReactNode
+  children: ReactNode
+  ref?: Ref<HTMLAnchorElement>
+}
+
+export function ButtonLink({ tone = 'quiet', size = 'md', icon, children, className, ref, ...rest }: ButtonLinkProps) {
+  return (
+    <a
+      ref={ref}
+      className={className ? `eqb-button ${className}` : 'eqb-button'}
+      data-tone={tone}
+      data-size={size}
+      {...rest}
+    >
+      {icon}
+      <span className="eqb-button-label">{children}</span>
+    </a>
   )
 }

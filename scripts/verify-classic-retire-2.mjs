@@ -168,9 +168,11 @@ assert(
 // onAddToBasket(selectedDetail), still unconditional (not isOwnerView-gated).
 // icon-motion round 4 (2026-11-03): the button may carry `{...iconMotionInput}`
 // (pointer vs keyboard motion source) between type and onClick.
+// 构件厂第 4 步（2026-11-13）：换成共用的 Button（tone="primary"，类名钩子 peek-add），
+// 不再写 type="button"（Button 默认就是）。
 assert(
   '加入草稿卷 button stays visible to member (not gated by isOwnerView)',
-  /<button\s*\n\s*className="peek-btn peek-btn--primary"\s*\n\s*type="button"\s*\n(?:\s*\{\.\.\.iconMotionInput\}\s*\n)?\s*onClick=\{\(\) => onAddToBasket\(selectedDetail\)\}/.test(
+  /<Button\s*\n\s*className="peek-add"\s*\n\s*tone="primary"\s*\n(?:\s*\{\.\.\.iconMotionInput\}\s*\n)?\s*onClick=\{\(\) => onAddToBasket\(selectedDetail\)\}/.test(
     detailView,
   ),
 )
