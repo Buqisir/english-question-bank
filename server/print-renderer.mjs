@@ -591,14 +591,17 @@ function canonicalMediaPresentationAttributes(media, extraStyle = '') {
   return ` data-canonical-media-alignment="${presentation.alignment}" data-canonical-media-spacing-before="${presentation.spacingBefore}" data-canonical-media-spacing-after="${presentation.spacingAfter}" style="--canonical-media-width-ratio:${presentation.widthRatio}${extraStyle ? `;${extraStyle}` : ''}"`
 }
 
-function renderCanonicalInlineNodes(nodes) {
+function renderCanonicalInlineNodes(nodes, tableCell = false) {
   return nodes.map((node) => {
     if (node.kind === 'media_ref') {
       const src = `data:${node.mediaArtifact.mimeType};base64,${node.mediaArtifact.encodedBytes}`
       return `<img class="canonical-reading-table-media" data-canonical-content-node-id="${escapeHtml(node.nodeId)}" data-canonical-media-id="${escapeHtml(node.mediaId)}"${canonicalMediaPresentationAttributes(node.media)} src="${escapeHtml(src)}" alt="${escapeHtml(node.alt)}">`
     }
     const marks = node.marks ? ` data-source-marks="${escapeHtml(node.marks.join(' '))}"` : ''
-    return `<span data-canonical-content-node-id="${escapeHtml(node.nodeId)}"${marks}>${escapeHtml(node.text)}</span>`
+    let text = escapeHtml(node.text)
+    if (tableCell && node.marks?.includes('italic')) text = `<em>${text}</em>`
+    if (tableCell && node.marks?.includes('bold')) text = `<strong>${text}</strong>`
+    return `<span data-canonical-content-node-id="${escapeHtml(node.nodeId)}"${marks}>${text}</span>`
   }).join('')
 }
 
@@ -660,7 +663,11 @@ function renderCanonicalReadingParagraph(block, { columnHeading = false } = {}) 
 }
 
 function renderCanonicalReadingTable(block) {
-  return `<table class="canonical-reading-table" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="table" data-canonical-reading-rhythm-role="native_table_line" data-canonical-table-columns="${block.columnCount}"><tbody>${block.rows.map((row) => `<tr data-canonical-row-id="${escapeHtml(row.rowId)}">${row.cells.map((cell) => `<td colspan="${cell.columnSpan}" rowspan="${cell.rowSpan}" data-canonical-cell-id="${escapeHtml(cell.cellId)}" data-canonical-column-start="${cell.columnStart}">${renderCanonicalInlineNodes(cell.inlines)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
+  const widths = block.columnWidths
+  const colgroup = widths
+    ? `<colgroup>${widths.map(width => `<col style="width:${width / widths.reduce((sum, share) => sum + share, 0) * 100}%">`).join('')}</colgroup>` : ''
+
+  return `<table class="canonical-reading-table" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="table" data-canonical-reading-rhythm-role="native_table_line" data-canonical-table-columns="${block.columnCount}"${widths ? ' data-canonical-table-widths="" style="table-layout:fixed"' : ''}>${colgroup}<tbody>${block.rows.map((row) => `<tr data-canonical-row-id="${escapeHtml(row.rowId)}">${row.cells.map((cell) => `<td colspan="${cell.columnSpan}" rowspan="${cell.rowSpan}" data-canonical-cell-id="${escapeHtml(cell.cellId)}" data-canonical-column-start="${cell.columnStart}">${renderCanonicalInlineNodes(cell.inlines, true)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
 }
 
 function renderCanonicalReadingColumnChild(block, columnHeadingId) {

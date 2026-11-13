@@ -730,6 +730,7 @@ function CanonicalApplicationWritingPrompt({
 function renderCanonicalReadingInlines(
   inlines: CanonicalReadingSurfaceTableBlock['rows'][number]['cells'][number]['inlines']
     | CanonicalReadingSurfaceParagraphBlock['inlines'],
+  tableCell = false,
 ): ReactNode {
   return inlines.map((inline) => {
     if (inline.kind === 'media_ref') {
@@ -758,7 +759,9 @@ function renderCanonicalReadingInlines(
         data-canonical-content-node-id={inline.nodeId}
         data-source-marks={inline.marks?.join(' ')}
       >
-        {inline.text}
+        {tableCell && inline.marks?.includes('bold')
+          ? <strong>{inline.marks.includes('italic') ? <em>{inline.text}</em> : inline.text}</strong>
+          : tableCell && inline.marks?.includes('italic') ? <em>{inline.text}</em> : inline.text}
       </span>
     )
   })
@@ -815,7 +818,12 @@ function CanonicalReadingTable({
       data-canonical-block-kind="table"
       data-canonical-reading-rhythm-role="native_table_line"
       data-canonical-table-columns={block.columnCount}
+      data-canonical-table-widths={block.columnWidths ? '' : undefined}
+      style={block.columnWidths ? { tableLayout: 'fixed' } : undefined}
     >
+      {block.columnWidths && <colgroup>{block.columnWidths.map((width, index) => (
+        <col key={index} style={{ width: `${width / block.columnWidths!.reduce((sum, share) => sum + share, 0) * 100}%` }} />
+      ))}</colgroup>}
       <tbody>
         {block.rows.map((row) => (
           <tr key={row.rowId} data-canonical-row-id={row.rowId}>
@@ -827,7 +835,7 @@ function CanonicalReadingTable({
                 data-canonical-cell-id={cell.cellId}
                 data-canonical-column-start={cell.columnStart}
               >
-                {renderCanonicalReadingInlines(cell.inlines)}
+                {renderCanonicalReadingInlines(cell.inlines, true)}
               </td>
             ))}
           </tr>

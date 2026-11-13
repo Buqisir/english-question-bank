@@ -91,6 +91,8 @@ import {
   isQuestionLikeRichBlock,
   readingCaptureHasUnregisteredBlock,
   someRichBlocks,
+  validTableColumnWidths,
+  validTableMarks,
 } from './richContent.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringify, withoutKey } from './stable.mjs'
@@ -2592,6 +2594,7 @@ function validateInlines(inlines, blankIds, path, diagnostics, ids, {
   allowMediaRefs = false,
   mediaIds = new Set(),
   allowSourceMarks = false,
+  allowTableMarks = false,
 } = {}) {
   if (!Array.isArray(inlines)) {
     diagnostics.push(diagnostic('RICH_INLINE_INVALID', 'needs_review', path, 'Inlines must be ordered'))
@@ -2604,8 +2607,9 @@ function validateInlines(inlines, blankIds, path, diagnostics, ids, {
       && (
         (inline.kind === 'text'
           && (exactKeys(inline, ['kind', 'nodeId', 'text'])
-            || (allowSourceMarks && exactKeys(inline, ['kind', 'nodeId', 'text', 'marks'])
-              && ['["bold"]', '["underline"]', '["bold","underline"]'].includes(JSON.stringify(inline.marks))))
+            || ((allowSourceMarks || allowTableMarks) && exactKeys(inline, ['kind', 'nodeId', 'text', 'marks'])
+              && (allowTableMarks ? validTableMarks(inline.marks)
+                : ['["bold"]', '["underline"]', '["bold","underline"]'].includes(JSON.stringify(inline.marks)))))
           && typeof inline.text === 'string')
         || (inline.kind === 'blank_ref'
           && exactKeys(inline, ['kind', 'nodeId', 'blankId'])
@@ -2662,7 +2666,7 @@ function validateRichBlock(block, path, blankIds, mediaIds, diagnostics, ids, al
     return
   }
   if (block.kind === 'table') {
-    if (!exactKeys(block, ['kind', 'nodeId', 'columnCount', 'rows']) || !Number.isInteger(block.columnCount) || block.columnCount < 1 || !Array.isArray(block.rows)) {
+    if (!exactKeys(block, ['kind', 'nodeId', 'columnCount', 'rows', ...(Object.hasOwn(block, 'columnWidths') ? ['columnWidths'] : [])]) || !validTableColumnWidths(block) || !Number.isInteger(block.columnCount) || block.columnCount < 1 || !Array.isArray(block.rows)) {
       diagnostics.push(diagnostic('RICH_TABLE_INVALID', 'needs_review', path, 'Tables need a rectangular semantic grid'))
       return
     }
@@ -2690,7 +2694,7 @@ function validateRichBlock(block, path, blankIds, mediaIds, diagnostics, ids, al
           `${path}.rows[${rowIndex}].cells[${cellIndex}].inlines`,
           diagnostics,
           ids,
-          { allowMediaRefs: richTableV1, mediaIds },
+          { allowMediaRefs: richTableV1, mediaIds, allowTableMarks: true },
         )
       }
       if (occupied.size !== block.columnCount) diagnostics.push(diagnostic('RICH_TABLE_NOT_RECTANGULAR', 'needs_review', `${path}.rows[${rowIndex}]`, 'Cells do not cover the declared columns'))

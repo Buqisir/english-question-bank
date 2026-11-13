@@ -862,6 +862,7 @@ function canonicalTableInline(item, cellId, index) {
     kind: 'text',
     nodeId: `text:${cellId}:${index + 1}`,
     text: item.text,
+    ...(item.marks ? { marks: [...item.marks] } : {}),
   }
 }
 
@@ -879,6 +880,7 @@ function canonicalBlock(block) {
       kind: 'table',
       nodeId: block.blockId,
       columnCount: block.columnCount,
+      ...(block.columnWidths ? { columnWidths: [...block.columnWidths] } : {}),
       rows: block.rows.map((row) => ({
         rowId: row.rowId,
         cells: row.cells.map((cell) => ({

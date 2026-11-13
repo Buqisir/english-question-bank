@@ -1,5 +1,19 @@
 import { exactKeys, isRecordValue } from './stable.mjs'
 
+// Optional source-backed table presentation; absence preserves historical output.
+export function validTableColumnWidths(block) {
+  if (!Object.hasOwn(block, 'columnWidths')) return true
+  return Array.isArray(block.columnWidths) && block.columnWidths.length === block.columnCount
+    && block.columnWidths.every(width => Number.isFinite(width) && width > 0)
+    && Number.isFinite(block.columnWidths.reduce((sum, width) => sum + width, 0))
+}
+
+export function validTableMarks(marks) {
+  return Array.isArray(marks) && marks.length > 0
+    && new Set(marks).size === marks.length
+    && marks.every(mark => ['bold', 'italic', 'underline'].includes(mark))
+}
+
 export const FRAMED_COLUMNS_KIND = 'framed_columns'
 export const FRAMED_COLUMNS_COLUMN_COUNT = 2
 export const FRAMED_COLUMNS_CHILD_KINDS = Object.freeze(['paragraph', 'table'])
