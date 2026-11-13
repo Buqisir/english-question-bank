@@ -1,24 +1,6 @@
 @import '../../../../shared/papersurface/readingLayout.css';
 @import '../../../../shared/papersurface/paperLayout.css';
 
-.ps-figure-original-toggle {
-  border: 0;
-  background: transparent;
-  color: var(--desk-muted);
-  font-family: Inter, 'PingFang SC', sans-serif;
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.ps-figure-original-toggle:focus-visible {
-  outline: 2px solid var(--eqb-color-action);
-  outline-offset: 2px;
-}
-
-@media print {
-  .ps-figure-original-toggle { display: none; }
-}
-
 /*
  * PaperSurface.css — Production paper surface styles (Issue #21-B3).
  *
