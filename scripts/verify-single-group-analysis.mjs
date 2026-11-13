@@ -9,7 +9,7 @@ import { buildNck1CompatibilityPaperAsset, buildNck1ReviewConsumption } from '..
 import { buildListeningAnalysisAgentRequest } from '../server/paper-import-ai/analyzeListening.mjs'
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../shared/paper-canonical/compiler.mjs'
 import { sha256, digestJson } from '../shared/paper-canonical/stable.mjs'
-import { canonicalizeVisibleEnglishTypography } from '../shared/paper-canonical/visibleTypography.mjs'
+import { buildSevenChoicesSurfaceModel } from '../app/src/features/paper-intelligence/sevenChoicesSurfaceAdapter.ts'
 
 // Reuse existing synthetic publication fixtures without running its DB/HTTP suite.
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
@@ -21,20 +21,11 @@ else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
 const root = mkdtempSync(path.join(tmpdir(), 'single-group-analysis-'))
 try {
   const source = makeFixture({ listening: true })
-  // Raw 2023 I/II gloss typography; analyses use the teacher-visible spelling.
+  // Published compatibility assets and teaching coordinates both retain raw text.
   source.groups.find(g => g.slotId === 'seven-choices').blocks[1].content[0].text +=
-    ' To err（犯错）is human. feedback(反馈) portrayed(描绘) coding (编码)experiences. '
+    ' To err（犯错）is human. feedback(反馈) portrayed(描绘) coding (编码)experiences. feedback(反馈)'
   source.groups.find(g => g.slotId === 'seven-choices').optionBank[0].text += " Don't discard feedback(反馈)."
-  const displaySource = structuredClone(source)
-  for (const group of displaySource.groups) {
-    for (const option of group.optionBank) option.text = canonicalizeVisibleEnglishTypography(option.text, '4')
-    for (const block of group.blocks.filter(b => b.kind === 'paragraph')) {
-      for (const inline of block.content.filter(i => i.kind === 'text')) {
-        inline.text = canonicalizeVisibleEnglishTypography(inline.text, '4')
-      }
-    }
-  }
-  writeStagedAnalyses(root, displaySource)
+  writeStagedAnalyses(root, source)
   const paper = { paperId: source.paperId, sourceAssetVersion: 1 }
   const answers = new Map(source.answers.map(({ questionId, value }) => [questionId, value]))
   const slots = { 'reading-a': 'reading.a', 'reading-b': 'reading.b',
@@ -60,8 +51,8 @@ try {
     const filename = `analysis-${key === 'listening-unit' ? 'listening' : key}.json`
     const analysis = JSON.parse(readFileSync(path.join(root, filename), 'utf8'))
     if (key === 'seven') {
-      Object.values(analysis.questions)[0].contextEvidence.afterQuote = 'feedback (反馈)'
-      Object.values(analysis.questions)[0].mechanismSignals[1].signalText = 'Don’t discard feedback (反馈).'
+      Object.values(analysis.questions)[0].contextEvidence.afterQuote = 'feedback(反馈)'
+      Object.values(analysis.questions)[0].mechanismSignals[1].signalText = "Don't discard feedback(反馈)."
       writeFileSync(path.join(root, filename), JSON.stringify(analysis))
     }
     if (key === 'application') {
@@ -117,6 +108,21 @@ try {
       const full = () => buildNck1AnalysisProjection({ rootDir: root,
         materialization: source, paperAsset, requireTeachingContent: true })
       assert.ok(full().sidecars['seven-choices-analysis-v1.json'])
+      const screen = buildSevenChoicesSurfaceModel({
+        asset: paperAsset, analysis, groupId: group.groupId, canonicalConsumption: consumption,
+      })
+      assert.ok(screen.surfaceData.annotations.length, 'real Screen builder projects teaching annotations')
+      const forgedRange = structuredClone(analysis)
+      forgedRange.groups[group.groupId].teachingContent.annotations[0].sourceRanges[0].quote += 'FORGED'
+      assert.throws(() => buildSevenChoicesSurfaceModel({ asset: paperAsset, analysis: forgedRange,
+        groupId: group.groupId, canonicalConsumption: consumption }), /exact text range/)
+      assert.throws(() => validateNck1StagedAnalysis(request, forgedRange), /exact text range/)
+      writeFileSync(candidatePath, JSON.stringify(forgedRange))
+      const rejectedRange = runWithConsumption()
+      assert.equal(rejectedRange.status, 1, rejectedRange.stdout)
+      assert.match(rejectedRange.stderr, /exact text range/)
+      writeFileSync(path.join(root, filename), JSON.stringify(forgedRange))
+      assert.throws(full, /exact text range/)
       const forged = structuredClone(analysis)
       Object.values(forged.questions)[0].contextEvidence.afterQuote = 'FORGED (伪造)'
       writeFileSync(candidatePath, JSON.stringify(forged))
@@ -143,7 +149,7 @@ try {
       rmSync(consumptionPath)
       assert.equal(readFileSync(requestPath, 'utf8'), JSON.stringify(request))
       assert.equal(readFileSync(candidatePath, 'utf8'), JSON.stringify(analysis))
-      console.log('PASS gloss quotes: raw 2023 I/II source accepted at single/freeze/TextMap seams; forged quote and TextMap drift rejected; source unchanged')
+      console.log('PASS raw gloss coordinates: single/freeze/CLI/real Screen; legacy profile accepted; forged quotes and TextMap drift rejected; source unchanged')
     }
 
     const wrong = structuredClone(analysis)
@@ -224,7 +230,7 @@ try {
   // Accept the complete official key or a legacy single branch, never a
   // different joined answer. Exercise both public seams with immutable authority.
   for (const answerKey of ['which/that', 'that']) {
-    const alternatives = structuredClone(displaySource)
+    const alternatives = structuredClone(source)
     const grammarSource = alternatives.groups.find((group) => group.slotId === 'grammar-fill')
     const questionId = grammarSource.questions.find((question) => question.canonicalNumber === 57).questionId
     alternatives.answers.find((answer) => answer.questionId === questionId).value = answerKey
