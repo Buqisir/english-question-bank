@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { Archive, ArrowLeft, BookMarked, VocabularyNotebook, LogOut, Pencil, Settings } from '../icons'
+import { Button, type ButtonSize } from '../shared-ui/Button.tsx'
 import { FluidHoverList } from './FluidHoverList.tsx'
 
 function userInitials(username: string): string {
@@ -74,10 +75,15 @@ export type AppTopbarProps = AppTopbarNav & {
      AppTopbar does not interpret this content. undefined (every page but
      the draft workbench) = no divider, no extra markup, zero change. */
   actionsSlot?: ReactNode
+  /* 构件厂第 4 步（2026-11-13，提案 · 单一来源）：全站导航按钮的大小。首页找题台
+     （题组列表）用 lg（高 36），其余页面 sm（高 28），对应原先
+     `.app-shell:has(.concierge-desk) .topbar .ghost-button` 那条加高规则。 */
+  navSize?: ButtonSize
 }
 
 export function AppTopbar(props: AppTopbarProps): ReactNode {
   const variant = props.variant ?? 'sub'
+  const navSize = props.navSize ?? 'sm'
   const [editingTitle, setEditingTitle] = useState(false)
   // Uncommitted edit buffer — only meaningful while editingTitle is true.
   // Seeded from props.pageTitle at the moment editing starts (startTitleEdit
@@ -111,9 +117,9 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
     <header className={variant === 'home' ? 'topbar' : 'topbar topbar-sub'}>
       <div className="topbar-brand">
         {props.onBack && variant === 'sub' && (
-          <button className="topbar-back" type="button" onClick={props.onBack}>
-            <ArrowLeft size={16} /> 返回找题
-          </button>
+          <Button className="topbar-back" tone="subtle" size="sm" icon={<ArrowLeft size={16} />} onClick={props.onBack}>
+            返回找题
+          </Button>
         )}
         {variant === 'home' ? (
           !props.hideBrand && (
@@ -176,7 +182,9 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
           </div>
         )}
       </div>
-      <FluidHoverList as="div" axis="x" className="topbar-actions" itemSelector=".ghost-button" gapClick={false}>
+      {/* 页面塞进来的按钮（actionsSlot）还是 .ghost-button，等那些页面迁移时再换；
+          所以滑动高亮两种都认。 */}
+      <FluidHoverList as="div" axis="x" className="topbar-actions" itemSelector=".ghost-button, .eqb-button" gapClick={false}>
         {props.actionsSlot && (
           <>
             <span className="topbar-actions-page">{props.actionsSlot}</span>
@@ -184,33 +192,29 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
           </>
         )}
         {props.onOpenVocabularyNotebook && (
-          <button className="ghost-button" type="button" onClick={props.onOpenVocabularyNotebook}>
-            <VocabularyNotebook size={16} />
+          <Button size={navSize} icon={<VocabularyNotebook size={16} />} onClick={props.onOpenVocabularyNotebook}>
             生词本
-          </button>
+          </Button>
         )}
         {props.onOpenVocabularyReview && (
-          <button className="ghost-button" type="button" onClick={props.onOpenVocabularyReview}>
-            <BookMarked size={16} />
+          <Button size={navSize} icon={<BookMarked size={16} />} onClick={props.onOpenVocabularyReview}>
             过生词
-          </button>
+          </Button>
         )}
         {props.onOpenMySpace && (
-          <button className="ghost-button" type="button" onClick={props.onOpenMySpace}>
-            <Archive size={16} />
+          <Button size={navSize} icon={<Archive size={16} />} onClick={props.onOpenMySpace}>
             个人空间
-          </button>
+          </Button>
         )}
         {props.showAdmin && props.onToggleAdmin && (
-          <button
-            className="ghost-button"
-            type="button"
+          <Button
+            size={navSize}
+            icon={<Settings size={16} variant={props.adminActive ? 'fill' : 'line'} />}
             onClick={props.onToggleAdmin}
             aria-pressed={props.adminActive}
           >
-            <Settings size={16} variant={props.adminActive ? 'fill' : 'line'} />
             {props.adminActive ? '退出管理' : '管理'}
-          </button>
+          </Button>
         )}
         {props.user && (
           <span className="topbar-user-group">
@@ -218,10 +222,9 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
               {userInitials(props.user.username)}
             </span>
             <span className="topbar-username">{props.user.username}</span>
-            <button className="ghost-button" type="button" onClick={props.onLogout}>
-              <LogOut size={16} />
+            <Button size={navSize} icon={<LogOut size={16} />} onClick={props.onLogout}>
               退出
-            </button>
+            </Button>
           </span>
         )}
       </FluidHoverList>

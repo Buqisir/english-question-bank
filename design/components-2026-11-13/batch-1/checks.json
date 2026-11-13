@@ -451,9 +451,9 @@
   },
   {
    "cell": "quiet|focus",
-   "color": "#3F525B",
+   "color": "#1B2B33",
    "bg": "#F1F5F7",
-   "ratio": 7.45,
+   "ratio": 13.29,
    "need": 4.5,
    "pass": true
   },
@@ -491,9 +491,9 @@
   },
   {
    "cell": "subtle|focus",
-   "color": "#5A6C75",
+   "color": "#1B2B33",
    "bg": "#F1F5F7",
-   "ratio": 4.99,
+   "ratio": 13.29,
    "need": 4.5,
    "pass": true
   },
@@ -1856,9 +1856,14 @@
    "detail": "none none"
   },
   {
+   "name": "按钮和菜单项的字标签框高 ≥ 字号 × 1.2（不裁中文字形）",
+   "pass": true,
+   "detail": "81 个，最矮 1.38；不够的 []"
+  },
+  {
    "name": "会滑的列表里：按钮的字画在列表高亮上面，没被盖住",
    "pass": true,
-   "detail": "字框里深色像素 461 个"
+   "detail": "字框里深色像素 467 个"
   },
   {
    "name": "会滑的列表里：悬停底由列表画（列表高亮可见），按钮自己不垫底、字提到墨色",
@@ -1888,7 +1893,7 @@
   {
    "cell": "quiet|focus",
    "bg": "transparent",
-   "color": "#3F525B",
+   "color": "#1B2B33",
    "outline": "2px #29424D @2",
    "opacity": "1",
    "transform": "none",
@@ -1942,7 +1947,7 @@
   {
    "cell": "subtle|focus",
    "bg": "transparent",
-   "color": "#5A6C75",
+   "color": "#1B2B33",
    "outline": "2px #29424D @2",
    "opacity": "1",
    "transform": "none",
@@ -2226,6 +2231,6 @@
    "region×1"
   ],
   "behaviorFail": [],
-  "behaviorTotal": 24
+  "behaviorTotal": 25
  }
 }

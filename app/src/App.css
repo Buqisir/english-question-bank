@@ -144,26 +144,11 @@
   min-width: 0;
 }
 
+/* 「返回找题」是共用按钮构件（shared-ui/Button，次要灰小号），样子归构件管；这里只管它在顶栏里的位置。
+ * 构件左边有 8px 内边距，往左让出同样多，箭头仍和页面内容左边对齐，悬停底伸到对齐线外面。 */
 .topbar-back {
   flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: none;
-  border: none;
-  padding: 0 8px 0 0;
-  margin: 0;
-  min-height: 28px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--muted);
-  cursor: pointer;
-  transition: color var(--motion-fast) var(--ease-hover);
-}
-
-.topbar-back:hover:not(:disabled) {
-  color: var(--ink);
+  margin-inline-start: calc(-1 * var(--eqb-space-2));
 }
 
 .topbar-sub .topbar-brand-title {
@@ -4122,25 +4107,10 @@ div.concierge-feed-empty-corpus p { margin: 0; }
   color: var(--desk-ink);
 }
 
-.app-shell:has(.concierge-desk) .topbar .ghost-button {
-  min-height: 36px;
-  height: 36px;
-  font-size: 14px;
-  color: var(--eqb-color-text-secondary);
-}
-
-.app-shell:has(.concierge-desk) .topbar .ghost-button[data-fluid-hover-active]:not(:disabled),
-.app-shell:has(.concierge-desk) .topbar .ghost-button:focus-visible:not(:disabled) {
-  color: var(--desk-ink);
-}
+/* 找题台顶栏的导航按钮加高到 36，现在由 AppTopbar 的 navSize="lg" 给共用按钮构件，这里不再写。 */
 
 .app-shell:has(.concierge-desk) .topbar-actions.fluid-hover-list::before {
   background: var(--desk-hover);
-}
-
-.app-shell:has(.concierge-desk) .topbar .ghost-button svg {
-  width: 16px;
-  height: 16px;
 }
 
 .app-shell.home-mode-ai > .topbar {

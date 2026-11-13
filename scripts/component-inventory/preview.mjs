@@ -193,6 +193,11 @@ try {
   ok('打开时触发键 aria-expanded=true、aria-controls 指向菜单', exp === 'true' && ctl === menuId, `${exp} ${ctl} ${menuId}`)
   const panel = (await page.evaluate(measure, '.eqb-menu'))[0]
   const items = await page.evaluate(measure, '.eqb-menu .eqb-menu-item')
+  // 字标签框够不够高：标签为了省略号 overflow: hidden，框比字形矮就会裁掉中文的顶和底（行高 1 时出过）。
+  const labelBoxes = await page.evaluate(() => [...document.querySelectorAll('.eqb-button-label, .eqb-menu-item-label')].map((e) => {
+    const fs = parseFloat(getComputedStyle(e).fontSize); return { text: e.textContent, ratio: Math.round((e.getBoundingClientRect().height / fs) * 100) / 100 }
+  }))
+  const shortLabels = labelBoxes.filter((l) => l.ratio < 1.2)
   await page.keyboard.press('ArrowDown'); await page.keyboard.press('ArrowDown'); await page.keyboard.press('ArrowDown')
   const at3 = await active()
   // 键盘焦点在「删除这份卷」上时拍一张：焦点环 + 危险项
@@ -309,6 +314,7 @@ try {
   writeFileSync(path.join(BATCH, 'mapping.json'), JSON.stringify(mapping, null, 1) + '\n')
   checks.states = states.map((s) => ({ cell: s.cell, bg: hex(s.bg), color: hex(s.color), outline: s.outline ? `${s.outline.w}px ${hex(s.outline.color)} @${s.outline.offset}` : null, opacity: s.opacity, transform: s.transform, cursor: s.cursor }))
   checks.fluid = { buttons: fluid.map((m) => ({ text: m.text, bg: hex(m.bg), color: hex(m.color) })), highlight: { ...fluidRow, bg: hex(fluidRow.bg) } }
+  ok('按钮和菜单项的字标签框高 ≥ 字号 × 1.2（不裁中文字形）', labelBoxes.length > 0 && shortLabels.length === 0, `${labelBoxes.length} 个，最矮 ${Math.min(...labelBoxes.map((l) => l.ratio))}；不够的 ${JSON.stringify(shortLabels.slice(0, 3))}`)
   ok('会滑的列表里：按钮的字画在列表高亮上面，没被盖住', fluidOnTop, `字框里深色像素 ${fluidDark} 个`)
   ok('会滑的列表里：悬停底由列表画（列表高亮可见），按钮自己不垫底、字提到墨色', Number(fluidRow.opacity) > 0.5 && fluid[1].bg === 'rgba(0, 0, 0, 0)' && hex(fluid[1].color) === '#1B2B33', `${JSON.stringify(fluidRow)} ${fluid[1].bg} ${hex(fluid[1].color)}`)
   const summary = {

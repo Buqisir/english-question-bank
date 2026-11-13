@@ -57,7 +57,7 @@
   font: inherit;
   font-size: 13px;
   font-weight: 400;
-  line-height: 1;
+  /* 行高继承，不写 1：理由同 button.css（标签 overflow: hidden 时行高 1 会裁掉中文字形的顶和底）。 */
   text-align: left;
   text-decoration: none;
   white-space: nowrap;

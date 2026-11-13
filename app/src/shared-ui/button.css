@@ -22,7 +22,9 @@
   font: inherit;
   font-size: 13px;
   font-weight: 500;
-  line-height: 1;
+  /* 行高不写，照 font: inherit 继承页面的（和原 .ghost-button 一样）。写成 1 时字的标签框只有
+   * 字号那么高，又因省略号要 overflow: hidden，中文字形顶上、底下各被裁掉约半像素（顶栏换构件前后逐像素对出来的）。
+   * 按钮高度是写死的，行高不影响它。 */
   white-space: nowrap;
   text-decoration: none;
   cursor: pointer;
@@ -126,6 +128,12 @@
 .eqb-button:focus-visible {
   outline: 2px solid var(--eqb-color-action);
   outline-offset: 2px;
+}
+
+/* 键盘焦点和悬停一样把淡墨、次要灰的字提到墨色（原顶栏 .topbar .ghost-button:focus-visible 就是这样）；
+ * 底不垫，靠焦点环。 */
+.eqb-button:is([data-tone='quiet'], [data-tone='subtle']):focus-visible:not(:disabled) {
+  color: var(--eqb-color-text);
 }
 
 .eqb-button:active:not(:disabled, [aria-disabled='true']) {

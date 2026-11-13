@@ -1088,6 +1088,8 @@ function App() {
         adminActive={adminRouteActive}
         onToggleAdmin={toggleAdminRoute}
         hideBrand={false}
+        // 找题台（题组列表，下面渲染 ConciergeDesk 的那个条件）顶栏导航用大号。
+        navSize={!adminRouteActive && viewMode === 'list' ? 'lg' : 'sm'}
       />
 
       {adminRouteActive && (
