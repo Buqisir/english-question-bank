@@ -1,3 +1,5 @@
+import { resolveFigureTextRegion } from '../../../../shared/paper-canonical/richContent.mjs'
+import type { CanonicalReadingSurfaceFigureBlock } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import { assertAnalysisTextRanges, partitionAnalysisText } from '../../../../shared/analysis/analysisTextRanges.mjs'
 import { canonicalizeVisibleEnglishTypography } from '../../../../shared/paper-canonical/visibleTypography.mjs'
 import { formatCanonicalBlankVisibleText } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
@@ -17,11 +19,24 @@ export type TeachingRange = {
   quote: string
 }
 
+export type FigureTeachingRange = ({ figureId: string; mediaId?: never } | { mediaId: string; figureId?: never }) & {
+  regionId: string
+  quote?: string
+}
+
+export type FigureTeachingEvidence = {
+  id: string
+  questionId: string
+  kind: 'support'
+  target: FigureTeachingRange
+  quote: string
+}
+
 export type TeachingAnnotation = {
   annotationId: string
   kind: 'answer-evidence' | 'answer-insertion' | 'sentence-structure'
   questionIds: string[]
-  sourceRanges: TeachingRange[]
+  sourceRanges: Array<TeachingRange | FigureTeachingRange>
   translationRanges: TeachingRange[]
   blankId?: string
   selectedSentenceId?: string
@@ -87,6 +102,7 @@ export type ObjectiveTeachingView = {
 export type ObjectiveTeachingSourceProjection = {
   annotations: PaperAnnotation[]
   evidence: PaperEvidence[]
+  figureEvidence?: FigureTeachingEvidence[]
 }
 
 type SourceParagraph = { paragraphId?: string; id?: string; text: string }
@@ -215,10 +231,11 @@ export function projectObjectiveTeachingSource(
   sourceParagraphs: ReadonlyArray<SourceParagraph>,
   textMap: PaperTextMap,
   semanticParagraphs?: ReadonlyArray<CanonicalSurfaceParagraph>,
+  figures: ReadonlyArray<CanonicalReadingSurfaceFigureBlock> = [],
 ): ObjectiveTeachingSourceProjection {
   const teaching = group?.teachingContent
   if (teaching?.schemaVersion !== 'objective-teaching-content-v1') {
-    return { annotations: [], evidence: [] }
+    return { annotations: [], evidence: [], figureEvidence: [] }
   }
   const sourceById = new Map(sourceParagraphs.flatMap((paragraph) => {
     const paragraphId = paragraph.paragraphId ?? paragraph.id
@@ -226,8 +243,18 @@ export function projectObjectiveTeachingSource(
   }))
   const annotations: PaperAnnotation[] = []
   const evidence: PaperEvidence[] = []
+  const figureEvidence: FigureTeachingEvidence[] = []
   for (const relationship of teaching.annotations) {
     relationship.sourceRanges.forEach((sourceRange, sourceRangeIndex) => {
+      if ('regionId' in sourceRange) {
+        if (relationship.kind !== 'answer-evidence') throw new Error('Figure regions require answer evidence')
+        const region = resolveFigureTextRegion(sourceRange, figures)
+        relationship.questionIds.forEach(questionId => figureEvidence.push({
+          id: `${relationship.annotationId}:region:${sourceRangeIndex}:${questionId}`,
+          questionId, kind: 'support', target: sourceRange, quote: sourceRange.quote ?? region.text,
+        }))
+        return
+      }
       // Completed-source answer insertions are intentionally absent from the
       // original exam TextMap. Their relationship remains visible in the
       // teaching panel and companion output, without rewriting a blank.
@@ -270,7 +297,7 @@ export function projectObjectiveTeachingSource(
         })
     })
   }
-  return { annotations, evidence }
+  return { annotations, evidence, figureEvidence }
 }
 
 export function buildObjectiveTeachingView(

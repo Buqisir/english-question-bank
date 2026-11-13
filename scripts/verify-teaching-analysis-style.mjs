@@ -134,6 +134,22 @@ assert.doesNotThrow(() => assertFullTranslationZh(
   { requireBlankMarkers: true },
 ))
 const translationAnalysis = buildObjectiveTeachingFixture(translationGroup)
+const figureGroup = {
+  groupId: 'figure-group', paragraphs: [{ id: 'p1', text: 'Read the figure.' }],
+  questions: [{ id: 'q1', stem: 'Which mode?', answerKey: 'C' }],
+  figures: [{ figureId: 'f1', mediaId: 'm1', textRegions: [
+    { id: 'trains', text: 'Trains can be made electric.', box: { x: 0, y: .5, w: .4, h: .4 } },
+  ] }],
+}
+const figureAnalysis = buildObjectiveTeachingFixture(figureGroup)
+const figureEvidence = figureAnalysis.teachingContent.annotations.find(item => item.kind === 'answer-evidence')
+figureEvidence.sourceRanges = [{ figureId: 'f1', regionId: 'trains', quote: 'made electric' }]
+assert.doesNotThrow(() => assertObjectiveTeachingAnnotations(figureAnalysis, figureGroup, { sourceAssetVersion: 1 }))
+figureEvidence.sourceRanges[0].regionId = 'missing'
+assert.throws(() => assertObjectiveTeachingAnnotations(figureAnalysis, figureGroup, { sourceAssetVersion: 1 }), /Unknown figure region/)
+figureEvidence.sourceRanges[0].regionId = 'trains'
+figureEvidence.sourceRanges[0].quote = 'Read the figure.'
+assert.throws(() => assertObjectiveTeachingAnnotations(figureAnalysis, figureGroup, { sourceAssetVersion: 1 }), /quote outside/)
 const annotationOptions = { sourceAssetVersion: 1, requireAnswerInsertions: true }
 assert.doesNotThrow(() => assertObjectiveTeachingAnnotations(translationAnalysis, translationGroup, annotationOptions))
 const missingInsertion = structuredClone(translationAnalysis)

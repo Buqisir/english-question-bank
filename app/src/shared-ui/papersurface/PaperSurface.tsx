@@ -20,7 +20,7 @@
  *   - No evidence paint, no popover, no right panel.
  */
 
-import { createContext, useContext, Fragment, useMemo, useCallback, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import { Fragment, useMemo, useCallback, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import './PaperSurface.css'
 import { PaperFontGate } from './PaperFontGate'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
@@ -145,10 +145,8 @@ type BlankFocusContext = LegacyBlankFocusContext
  */
 type PaperSurfaceBlankFocusMode = 'rail' | 'in-passage' | 'paper-blank'
 type ClozeConsumerRef = Parameters<typeof resolveConsumerClozeGeometry>[0]
-const ReviewFiguresContext = createContext(false)
 
 type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
-  readonly reviewFigures?: boolean
   readonly clozeConsumerRef?: ClozeConsumerRef
   readonly blankFocusMode?: PaperSurfaceBlankFocusMode
   /** Derived from the exact consumer binding, absent on historical surfaces. */
@@ -218,7 +216,7 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
 }
 
 export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
-  return <ReviewFiguresContext value={Boolean(props.reviewFigures)}><PaperFontGate><PaperSurfaceContent {...props} /></PaperFontGate></ReviewFiguresContext>
+  return <PaperFontGate><PaperSurfaceContent {...props} /></PaperFontGate>
 }
 
 function PaperSurfaceContent(props: PaperSurfaceComponentProps): ReactNode {
@@ -914,12 +912,33 @@ function CanonicalSourceFigure({
   block: CanonicalReadingSurfaceFigureBlock
   stemFigure?: boolean
 }): ReactNode {
-  const reviewFigures = useContext(ReviewFiguresContext)
-  const [showOriginal, setShowOriginal] = useState(false)
-  const displayArtifact = !showOriginal && block.mediaArtifact.displayVariant
-    ? block.mediaArtifact.displayVariant : block.mediaArtifact
+  const displayArtifact = block.mediaArtifact.displayVariant ?? block.mediaArtifact
   const src = `data:${displayArtifact.mimeType};base64,${displayArtifact.encodedBytes}`
   const presentation = block.media.presentation
+  const imageRef = useRef<HTMLImageElement>(null)
+  const regions = block.media.textRegions
+  const [imageRect, setImageRect] = useState<{ left: number; top: number; width: number; height: number } | null>(null)
+  const measureImage = useCallback(() => {
+    const image = imageRef.current
+    if (!regions?.length || !image?.naturalWidth || !image.naturalHeight) return
+    // object-fit:contain may leave space inside the img element. Coordinates
+    // use the actual image content, in untransformed local CSS pixels.
+    const scale = Math.min(image.clientWidth / image.naturalWidth, image.clientHeight / image.naturalHeight)
+    const width = image.naturalWidth * scale, height = image.naturalHeight * scale
+    const rect = { left: image.offsetLeft + (image.clientWidth - width) / 2,
+      top: image.offsetTop + (image.clientHeight - height) / 2, width, height }
+    setImageRect(previous => previous && Object.keys(rect).every(key =>
+      previous[key as keyof typeof rect] === rect[key as keyof typeof rect]) ? previous : rect)
+  }, [regions])
+  useLayoutEffect(() => {
+    const image = imageRef.current
+    if (!regions?.length || !image) return
+    measureImage()
+    const observer = new ResizeObserver(measureImage)
+    observer.observe(image)
+    if (image.parentElement) observer.observe(image.parentElement)
+    return () => observer.disconnect()
+  }, [measureImage, regions, src])
   return (
     <figure
       className="ps-canonical-reading-figure"
@@ -927,12 +946,16 @@ function CanonicalSourceFigure({
       data-canonical-block-kind="figure"
       data-canonical-media-id={block.mediaId}
       data-canonical-content-node-id={stemFigure ? block.nodeId : undefined}
-      style={stemFigure ? { maxHeight: 'none' } : undefined}
+      style={regions?.length
+        ? { position: 'relative', ...(stemFigure ? { maxHeight: 'none' } : {}) }
+        : stemFigure ? { maxHeight: 'none' } : undefined}
       data-canonical-media-alignment={presentation?.alignment}
       data-canonical-media-spacing-before={presentation?.spacingBefore}
       data-canonical-media-spacing-after={presentation?.spacingAfter}
     >
       <img
+        ref={imageRef}
+        onLoad={regions?.length ? measureImage : undefined}
         src={src}
         alt=""
         style={presentation || stemFigure
@@ -940,12 +963,17 @@ function CanonicalSourceFigure({
             ...(stemFigure ? { flexShrink: 0 } : {}) } as CSSProperties)
           : undefined}
       />
-      {reviewFigures && block.mediaArtifact.displayVariant && (
-        <button type="button" className="ps-figure-original-toggle" aria-pressed={showOriginal}
-          onClick={() => setShowOriginal(!showOriginal)}>
-          {showOriginal ? '看清晰版' : '看原图'}
-        </button>
-      )}
+      {regions?.map(region => (
+        <span key={region.id} className="ps-figure-region" aria-hidden="true"
+          data-canonical-figure-region-id={region.id}
+          hidden={!imageRect}
+          style={imageRect ? {
+            left: imageRect.left + region.box.x * imageRect.width,
+            top: imageRect.top + region.box.y * imageRect.height,
+            width: region.box.w * imageRect.width, height: region.box.h * imageRect.height,
+          } : undefined}
+        />
+      ))}
       {block.caption && (
         <figcaption>
           {block.captionInlines.map((inline) => (

@@ -98,13 +98,21 @@ function optionsObject(options = []) {
   return Object.fromEntries(options.map(({ label, text }) => [label, text]))
 }
 
-function legacyGroup(paperAsset, materializationGroup, order) {
+function legacyGroup(paperAsset, materializationGroup, order, media = []) {
   const group = paperAsset.content.groups[materializationGroup.groupId]
   if (!group) fail(`Paper projection is missing group ${materializationGroup.groupId}`)
   return {
     groupId: materializationGroup.groupId,
     title: materializationGroup.slotId,
     order,
+    ...(materializationGroup.blocks.some(block => block.kind === 'figure'
+      && media.some(item => item.mediaId === block.mediaId && item.textRegions)) ? {
+      figures: materializationGroup.blocks.filter(block => block.kind === 'figure')
+        .flatMap(block => {
+          const item = media.find(item => item.mediaId === block.mediaId && item.textRegions)
+          return item ? [{ figureId: block.blockId, mediaId: item.mediaId, textRegions: structuredClone(item.textRegions) }] : []
+        }),
+    } : {}),
     paragraphs: (group.passage?.paragraphs || []).map((paragraph) => ({
       id: paragraph.paragraphId,
       text: paragraph.text,
@@ -411,7 +419,7 @@ export function buildNck1AnalysisProjection({
   const getGroup = (slotId, order) => {
     const group = groupsBySlot.get(slotId)
     if (!group) fail(`Materialization is missing ${slotId}`)
-    return legacyGroup(paperAsset, group, order)
+    return legacyGroup(paperAsset, group, order, materialization.media)
   }
   const readingGroups = ['a', 'b', 'c', 'd'].map((letter, index) =>
     getGroup(`reading.${letter}`, index + 1))

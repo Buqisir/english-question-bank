@@ -1,3 +1,4 @@
+import { resolveFigureTextRegion } from '../paper-canonical/richContent.mjs'
 import { assertAnalysisTextRanges } from './analysisTextRanges.mjs'
 
 const KINDS = new Set(['answer-evidence', 'answer-insertion', 'sentence-structure'])
@@ -18,12 +19,16 @@ function nonBlank(value, location) {
   return value
 }
 
-function assertLocatedRanges(ranges, texts, location) {
+function assertLocatedRanges(ranges, texts, location, figures) {
   if (!Array.isArray(ranges) || ranges.length === 0) {
     throw new Error(`${location}: expected non-empty ranges`)
   }
   for (const [index, range] of ranges.entries()) {
     const label = `${location}/${index}`
+    if (figures && (Object.hasOwn(range, 'figureId') || Object.hasOwn(range, 'mediaId'))) {
+      resolveFigureTextRegion(range, figures)
+      continue
+    }
     exactKeys(range, ['textId', 'paragraphId', 'start', 'end', 'quote'], label)
     const key = `${range.textId}\u0000${range.paragraphId}`
     const text = texts.get(key)
@@ -159,13 +164,13 @@ export function assertObjectiveTeachingContent(groupAnalysis, group, {
       || annotation.questionIds.some((id) => !questions.has(id))) {
       throw new Error(`${label}.questionIds: must reference current group questions`)
     }
-    assertLocatedRanges(annotation.sourceRanges, texts, `${label}.sourceRanges`)
+    assertLocatedRanges(annotation.sourceRanges, texts, `${label}.sourceRanges`, annotation.kind === 'answer-evidence' ? group.figures || [] : undefined)
     assertLocatedRanges(annotation.translationRanges, texts, `${label}.translationRanges`)
     if (annotation.translationRanges.some((range) => range.textId !== translationTextId)) {
       throw new Error(`${label}.translationRanges: must reference the declared translation text`)
     }
     if (annotation.kind === 'answer-evidence') {
-      if (annotation.sourceRanges.some((range) => range.textId !== sourceTextId)) {
+      if (annotation.sourceRanges.some((range) => !Object.hasOwn(range, 'regionId') && range.textId !== sourceTextId)) {
         throw new Error(`${label}.sourceRanges: answer evidence must reference original exam text`)
       }
     } else if (annotation.kind === 'answer-insertion') {

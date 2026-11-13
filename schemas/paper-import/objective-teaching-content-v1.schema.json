@@ -58,6 +58,17 @@
       ],
       "unevaluatedProperties": false
     },
+    "figureRegion": {
+      "type": "object", "additionalProperties": false,
+      "required": ["regionId"],
+      "oneOf": [{ "required": ["figureId"] }, { "required": ["mediaId"] }],
+      "properties": {
+        "figureId": { "$ref": "#/$defs/id" },
+        "mediaId": { "$ref": "#/$defs/id" },
+        "regionId": { "$ref": "#/$defs/id" },
+        "quote": { "type": "string", "minLength": 1 }
+      }
+    },
     "translationParagraph": {
       "allOf": [
         { "$ref": "#/$defs/baseRange" },
@@ -100,10 +111,14 @@
         },
         "blankId": { "$ref": "#/$defs/id" },
         "selectedSentenceId": { "$ref": "#/$defs/id" },
-        "sourceRanges": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/range" } },
+        "sourceRanges": { "type": "array", "minItems": 1, "items": { "anyOf": [{ "$ref": "#/$defs/range" }, { "$ref": "#/$defs/figureRegion" }] } },
         "translationRanges": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/range" } }
       },
       "allOf": [
+        {
+          "if": { "properties": { "kind": { "enum": ["answer-insertion", "sentence-structure"] } } },
+          "then": { "properties": { "sourceRanges": { "items": { "$ref": "#/$defs/range" } } } }
+        },
         {
           "if": { "properties": { "kind": { "enum": ["answer-evidence", "answer-insertion"] } } },
           "then": { "properties": { "questionIds": { "minItems": 1 } } }

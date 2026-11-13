@@ -593,8 +593,26 @@ function mountCanonicalReadingEvidenceAnchor(
     kind: 'support' | 'trap' | null
     quote: string
     paragraphId?: string | null
+    figureRegion?: { figureId?: string; mediaId?: string; regionId: string } | null
   },
 ): (() => void) | null {
+  if (input.figureRegion) {
+    const reference = input.figureRegion
+    const figure = [...card.querySelectorAll<HTMLElement>('[data-canonical-block-kind="figure"]')]
+      .find(element => reference.figureId ? element.dataset.canonicalBlockId === reference.figureId
+        : element.dataset.canonicalMediaId === reference.mediaId)
+    const anchor = figure && [...figure.querySelectorAll<HTMLElement>('[data-canonical-figure-region-id]')]
+      .find(element => element.dataset.canonicalFigureRegionId === reference.regionId)
+    if (!anchor) return null // A region reference never falls back to a quote.
+    anchor.setAttribute('data-paper-evidence-id', input.evidenceId)
+    anchor.setAttribute('data-paper-browse-evidence-line-anchor', input.evidenceId)
+    if (input.kind) anchor.setAttribute('data-paper-evidence-kind', input.kind)
+    return () => {
+      anchor.removeAttribute('data-paper-evidence-id')
+      anchor.removeAttribute('data-paper-browse-evidence-line-anchor')
+      anchor.removeAttribute('data-paper-evidence-kind')
+    }
+  }
   const compact = (value: string) => value.replace(/\s+/g, ' ').trim()
   const target = compact(input.quote)
   if (!target) return null
@@ -1171,6 +1189,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                     analysis: readingAnalysis,
                     groupId: block.groupId,
                     figures: loadedFigures,
+                    canonicalFigures: canonicalReading.richBlocks.filter(block => block.kind === 'figure'),
                     assetBase: resolvedBase,
                   })
                 : null
@@ -2210,6 +2229,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     kind: 'support' | 'trap' | null
     quote: string | null
     paragraphId: string | null
+    figureRegion?: { figureId?: string; mediaId?: string; regionId: string } | null
   } => {
     const empty = {
       groupId: null,
@@ -2241,6 +2261,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       kind,
       quote,
       paragraphId: row?.paragraphId ?? null,
+      figureRegion: row?.figureRegion ?? null,
     }
   }, [lectureOpen, lectureSelection, panelGroupId, panelGroupModel])
 
@@ -2269,10 +2290,26 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       kind: readingEvidenceLineContext.kind,
       quote,
       paragraphId: readingEvidenceLineContext.paragraphId,
+      figureRegion: readingEvidenceLineContext.figureRegion,
     })
     if (!releaseAnchor) return
     setReadingEvidenceAnchorReadyId(evidenceId)
-    return releaseAnchor
+    if (!readingEvidenceLineContext.figureRegion) return releaseAnchor
+    const target = [...card.querySelectorAll<HTMLElement>('[data-paper-evidence-id]')]
+      .find(node => node.dataset.paperEvidenceId === evidenceId)
+    if (!target) return releaseAnchor
+    const syncRegionGeometry = () => {
+      const rect = target.getBoundingClientRect()
+      setReadingEvidenceAnchorReadyId(rect.width && rect.height ? evidenceId : null)
+      setPaperPositionVersion(version => version + 1)
+    }
+    syncRegionGeometry()
+    const resize = new ResizeObserver(syncRegionGeometry)
+    resize.observe(target)
+    if (target.parentElement) resize.observe(target.parentElement)
+    const mutation = new MutationObserver(syncRegionGeometry)
+    mutation.observe(target, { attributes: true, attributeFilter: ['style', 'hidden'] })
+    return () => { resize.disconnect(); mutation.disconnect(); releaseAnchor() }
   }, [readingEvidenceLineContext])
 
   function scrollToAnchor(anchor: string): void {
@@ -2528,7 +2565,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       return (
         <div className="paper-browse-listening canonical-listening-surface">
           <PaperSurface
-            reviewFigures={Boolean(reviewRevision)}
             {...entry.model.surfaceData}
             listeningPlayers={listeningPlayers}
             listeningSectionPlayer={audio && firstSection && (
@@ -2625,7 +2661,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
 
     const surfaceEl = (
       <PaperSurface
-            reviewFigures={Boolean(reviewRevision)}
         roleLayout={'roleLayout' in surfaceData && surfaceData.roleLayout === 'golden_reference_v1'
           ? surfaceData.roleLayout : undefined}
         textMap={surfaceData.textMap}

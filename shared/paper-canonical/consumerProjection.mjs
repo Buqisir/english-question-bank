@@ -15,7 +15,7 @@ import { resolvePassageBlockRoles } from './passageBlockRoles.mjs'
 import { readingPassageLetterBySlotId } from './readingPassageLetter.mjs'
 import { digestJson, exactKeys, sha256, stableStringify } from './stable.mjs'
 import { validateReadingFigureLayout } from './readingFigureLayout.mjs'
-import { displayVariantArtifact, validTableColumnWidths } from './richContent.mjs'
+import { validFigureTextRegions, displayVariantArtifact, validTableColumnWidths } from './richContent.mjs'
 import { validCanonicalSourcePresentation } from './sourcePresentation.mjs'
 
 const SUPPORTED_FAMILIES = new Set([
@@ -209,6 +209,7 @@ function projectReadingConsumerGroup(input, occurrence) {
     if (
       !media
       || typeof media.mediaId !== 'string'
+      || (Object.hasOwn(media, 'textRegions') && !validFigureTextRegions(media.textRegions))
       || typeof media.sha256 !== 'string'
       || typeof media.mimeType !== 'string'
       || !Number.isInteger(media.pixelWidth)
@@ -809,6 +810,7 @@ function applicationPromptFigureResolver(input, occurrence) {
     if (
       !media
       || typeof media.mediaId !== 'string'
+      || (Object.hasOwn(media, 'textRegions') && !validFigureTextRegions(media.textRegions))
       || typeof media.sha256 !== 'string'
       || typeof media.mimeType !== 'string'
       || !Number.isInteger(media.pixelWidth)
