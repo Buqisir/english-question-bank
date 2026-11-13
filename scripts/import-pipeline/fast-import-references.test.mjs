@@ -438,6 +438,51 @@ for (const redo of ['source-references', 'freeze']) test(`feedback fix from ${re
   }
 })
 
+test('feedback fix restores an exact hydrated Candidate without fast state and fails closed on mismatches', async t => {
+  fakeReviewOrigin(t)
+  for (const invalid of [null, 'bundle', 'revision', 'paper', 'origin', 'schema', 'kind', 'state', 'issue', 'unknown', 'local-base', 'missing-digest']) {
+    const { dir, ctx, calls, options } = fixture(t)
+    ctx.state = { paperId: ctx.paperId, steps: {}, background: {}, data: {} }
+    rmSync(ctx.statePath)
+    const restore = { schemaVersion: 'review-restore-v1', paperId: ctx.paperId, origin: 'http://127.0.0.1:18890',
+      revisionId: 'rev-returned', bundleDigest: `sha256:${'1'.repeat(64)}` }
+    const status = { ...JSON.parse(fakeStatus(ctx, [{ id: 'rev-returned', state: 'changes_requested',
+      bundleDigest: restore.bundleDigest }])), issues: [{ id: 'issue-1', paperId: ctx.paperId, state: 'open' }] }
+    if (invalid === 'bundle') restore.bundleDigest = `sha256:${'2'.repeat(64)}`
+    if (invalid === 'revision') restore.revisionId = 'rev-stale'
+    if (invalid === 'paper') restore.paperId = 'paper-other'
+    if (invalid === 'origin') restore.origin = 'https://other.example'
+    if (invalid === 'schema') restore.schemaVersion = 'unknown'
+    if (invalid === 'kind') status.latest.reviewKind = 'ocr'
+    if (invalid === 'state') status.latest.state = 'awaiting_review'
+    if (invalid === 'issue') status.issues[0].paperId = 'paper-other'
+    if (invalid === 'unknown') ctx.state.steps.push = { startedAt: oldTime }
+    if (invalid === 'local-base') ctx.state.data.candidateRevisionId = 'rev-other'
+    if (invalid === 'missing-digest') delete restore.bundleDigest
+    const restorePath = path.join(ctx.paperDir, 'signals/review-restore.json')
+    json(restorePath, restore)
+    const before = snapshot(dir), state = structuredClone(ctx.state)
+    const run = () => finish(ctx, ['--feedback-fix', 'issue-1', '--redo-from', 'source-references'],
+      { ...options, readStatus: async () => JSON.stringify(status) })
+    if (invalid) {
+      await assert.rejects(run, /feedback-fix|RECONCILIATION_REQUIRED/)
+      assert.deepEqual(snapshot(dir), before)
+      assert.deepEqual(ctx.state, state)
+    } else {
+      // No fast state also means no authored-summary cache; stop at the first rebuild input.
+      await assert.rejects(run, { code: 'ENOENT', path: path.join(ctx.fast, 'summaries-request.json') })
+      assert.deepEqual(calls, [])
+      assert.equal(ctx.state.data.feedbackFix.baseRevisionId, restore.revisionId)
+      assert.equal(ctx.state.data.feedbackFix.bundleDigest, restore.bundleDigest)
+      assert.deepEqual(JSON.parse(readFileSync(restorePath)), restore)
+      await requestedRedo(ctx, 'source-references')
+      json(restorePath, { ...restore, bundleDigest: `sha256:${'3'.repeat(64)}` })
+      await assert.rejects(() => requestedRedo(ctx, 'source-references'),
+        { code: 'SOURCE_REFERENCES_RECONCILIATION_REQUIRED' })
+    }
+  }
+})
+
 test('feedback fix rejects wrong state, revision, issue or UNKNOWN push without local changes', async t => {
   for (const invalid of ['state', 'revision', 'issue', 'unknown', 'missing-redo']) {
     const { dir, ctx, options } = fixture(t)
