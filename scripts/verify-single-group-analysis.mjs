@@ -183,47 +183,50 @@ try {
     console.log(`PASS ${key}: CLI acceptance/rejection, source authority, immutable inputs`)
   }
 
-  // Official alternatives are a set of accepted answers, not one literal AI
-  // answer. Exercise both public seams with the same immutable authority.
-  const alternatives = structuredClone(source)
-  const grammarSource = alternatives.groups.find((group) => group.slotId === 'grammar-fill')
-  const questionId = grammarSource.questions.find((question) => question.canonicalNumber === 57).questionId
-  alternatives.answers.find((answer) => answer.questionId === questionId).value = 'which/that'
-  writeStagedAnalyses(root, alternatives)
-  const group = objectiveFixtureGroup(grammarSource,
-    new Map(alternatives.answers.map(({ questionId, value }) => [questionId, value])))
-  const request = { group: 'grammar', sourceGroup: { groupKey: 'grammar', material: { paper, group } },
-    authoritativeAnswers: Object.fromEntries(group.questions.map(({ id, answerKey }) => [id, { questionId: id, answer: answerKey }])) }
-  const paperAsset = buildNck1CompatibilityPaperAsset({
-    config: { provenance: { paperName: 'Alternatives fixture', source: 'Verifier', year: 2026 } },
-    materialization: alternatives, sourceAssetVersion: 1,
-  })
-  const grammarPath = path.join(root, 'analysis-grammar.json')
-  const grammar = JSON.parse(readFileSync(grammarPath, 'utf8'))
-  const authorityBefore = JSON.stringify({ alternatives, request, paperAsset })
-  for (const [answer, accepted] of [
-    ['which', true], ['that', true], ['  ThAt  ', true],
-    ['who', false], ['which/that', false], ['that.', false], ['whiches', false], ['', false],
-  ]) {
-    const candidate = structuredClone(grammar)
-    candidate.blanks[questionId].answer = answer
-    const bytes = JSON.stringify(candidate)
-    writeFileSync(grammarPath, bytes)
-    const single = () => validateNck1StagedAnalysis(request, candidate)
-    const full = () => buildNck1AnalysisProjection({ rootDir: root,
-      materialization: alternatives, paperAsset, requireTeachingContent: true })
-    if (accepted) {
-      assert.equal(single().ok, true, `single grammar accepts ${JSON.stringify(answer)}`)
-      assert.equal(full().sidecars['grammar-fill-analysis-v1.json'].blanks[questionId].answer, answer)
-    } else {
-      assert.throws(single, `single grammar rejects ${JSON.stringify(answer)}`)
-      assert.throws(full, `full grammar rejects ${JSON.stringify(answer)}`)
+  // Accept the complete official key or a legacy single branch, never a
+  // different joined answer. Exercise both public seams with immutable authority.
+  for (const answerKey of ['which/that', 'that']) {
+    const alternatives = structuredClone(source)
+    const grammarSource = alternatives.groups.find((group) => group.slotId === 'grammar-fill')
+    const questionId = grammarSource.questions.find((question) => question.canonicalNumber === 57).questionId
+    alternatives.answers.find((answer) => answer.questionId === questionId).value = answerKey
+    writeStagedAnalyses(root, alternatives)
+    const group = objectiveFixtureGroup(grammarSource,
+      new Map(alternatives.answers.map(({ questionId, value }) => [questionId, value])))
+    const request = { group: 'grammar', sourceGroup: { groupKey: 'grammar', material: { paper, group } },
+      authoritativeAnswers: Object.fromEntries(group.questions.map(({ id, answerKey }) => [id, { questionId: id, answer: answerKey }])) }
+    const paperAsset = buildNck1CompatibilityPaperAsset({
+      config: { provenance: { paperName: 'Alternatives fixture', source: 'Verifier', year: 2026 } },
+      materialization: alternatives, sourceAssetVersion: 1,
+    })
+    const grammarPath = path.join(root, 'analysis-grammar.json')
+    const grammar = JSON.parse(readFileSync(grammarPath, 'utf8'))
+    const authorityBefore = JSON.stringify({ alternatives, request, paperAsset })
+    for (const [answer, accepted] of [
+      ['which', answerKey === 'which/that'], ['that', true], ['  ThAt  ', true],
+      ['who', false], ['which/that', answerKey === 'which/that'], ['that/which', false],
+      ['that.', false], ['whiches', false], ['', false],
+    ]) {
+      const candidate = structuredClone(grammar)
+      candidate.blanks[questionId].answer = answer
+      const bytes = JSON.stringify(candidate)
+      writeFileSync(grammarPath, bytes)
+      const single = () => validateNck1StagedAnalysis(request, candidate)
+      const full = () => buildNck1AnalysisProjection({ rootDir: root,
+        materialization: alternatives, paperAsset, requireTeachingContent: true })
+      if (accepted) {
+        assert.equal(single().ok, true, `single grammar accepts ${JSON.stringify(answer)}`)
+        assert.equal(full().sidecars['grammar-fill-analysis-v1.json'].blanks[questionId].answer, answer)
+      } else {
+        assert.throws(single, `single grammar rejects ${JSON.stringify(answer)}`)
+        assert.throws(full, `full grammar rejects ${JSON.stringify(answer)}`)
+      }
+      assert.equal(JSON.stringify(candidate), bytes)
+      assert.equal(readFileSync(grammarPath, 'utf8'), bytes)
+      assert.equal(JSON.stringify({ alternatives, request, paperAsset }), authorityBefore)
     }
-    assert.equal(JSON.stringify(candidate), bytes)
-    assert.equal(readFileSync(grammarPath, 'utf8'), bytes)
-    assert.equal(JSON.stringify({ alternatives, request, paperAsset }), authorityBefore)
   }
-  console.log('PASS grammar alternatives: both branches/case/whitespace accepted; invalid, joined, punctuation, stemming and empty rejected at single/full seams; authority unchanged')
+  console.log('PASS grammar alternatives: exact complete key and legacy branches accepted; different joined answers, invalid, punctuation, stemming and empty rejected at single/full seams; authority unchanged')
 
   const usage = spawnSync(process.execPath, ['scripts/import-pipeline/validate-analysis.mjs'], { encoding: 'utf8' })
   assert.equal(usage.status, 2)
