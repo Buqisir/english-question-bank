@@ -232,16 +232,21 @@ function bundleDigest(materializationBytes, documents, media, listeningAudio, sp
 }
 
 function identifyImage(bytes) {
-  const [pixelWidth, pixelHeight, mimeType] = execFileSync(
-    'magick', ['identify', '-format', '%w,%h,%m', '-'], {
-      encoding: 'utf8',
-      input: bytes,
-    },
-  ).split(',')
-  return {
-    pixelWidth: Number(pixelWidth),
-    pixelHeight: Number(pixelHeight),
-    mimeType: ({ PNG: 'image/png', JPEG: 'image/jpeg', WEBP: 'image/webp' })[mimeType],
+  // Parallel freezes can stall synchronous stdin delivery; identify the same bytes on disk.
+  const directory = mkdtempSync(path.join(tmpdir(), 'eqb-identify-'))
+  try {
+    const file = path.join(directory, 'image')
+    writeFileSync(file, bytes)
+    const [pixelWidth, pixelHeight, mimeType] = execFileSync(
+      'magick', ['identify', '-format', '%w,%h,%m', file], { encoding: 'utf8' },
+    ).split(',')
+    return {
+      pixelWidth: Number(pixelWidth),
+      pixelHeight: Number(pixelHeight),
+      mimeType: ({ PNG: 'image/png', JPEG: 'image/jpeg', WEBP: 'image/webp' })[mimeType],
+    }
+  } finally {
+    rmSync(directory, { recursive: true, force: true })
   }
 }
 
