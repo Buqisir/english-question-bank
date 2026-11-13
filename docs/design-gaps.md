@@ -66,3 +66,8 @@ token 的扩展用法。
 - **临时方案**：`.login-brand`、`.login-subtitle`、`.login-submit` 用 15px 字面量。若收编，候选名 `--eqb-font-size-brand-body`。
 - **想要的值**：手机输入框的字号下限。iOS Safari 在输入框字号小于 16px 时聚焦会放大页面。
 - **临时方案**：≤760px 时 `.login-field input` 用 16px 字面量。若日后全站表单都需要，候选名 `--eqb-font-size-input-mobile`。
+
+## 2026-11-13 危险色写小字（`app/src/shared-ui/button.css` `[data-tone='danger']`、`menu.css` 危险菜单项）
+
+- **想要的值**：危险色的文字档，和 `--eqb-color-warning-text` 对称，在桌面底 `#F1F5F7` 和悬停底 `#E6EDF0` 上也达到 WCAG AA（≥ 4.5:1）。构件厂第一批实测（`design/components-2026-11-13/batch-1/checks.json`）：`--eqb-color-danger #DC2626` 对白 4.83，对桌面底 4.40，对悬停底 4.08，axe 报 color-contrast。若收编，候选名 `--eqb-color-danger-text`。
+- **临时方案**：构件里危险字仍用 `--eqb-color-danger`，不现场编深一档的红；放在白底（菜单、纸）上静止时达标，放在桌面底或悬停 / 键盘焦点时不达标。等 Owner 定色。

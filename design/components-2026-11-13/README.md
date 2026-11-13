@@ -160,6 +160,8 @@ node scripts/component-inventory/compare.mjs
 node scripts/component-inventory/static.mjs --check
 ```
 
+第 2 步起，共用构件本身（`app/src/shared-ui/` 下一层的 `.tsx` / `.css`，`tokens.css` 除外）不算页面手写，不进统计和基线（`lib.mjs` 的 `isComponentSource`）；见 `batch-1/README.md`。
+
 重跑一致性（在全新的本地网站上再拍一轮，和第一轮逐项对）：
 
 ```bash

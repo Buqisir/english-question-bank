@@ -1,0 +1,104 @@
+/* 菜单构件（Menu.tsx）。DESIGN.md §5：下拉菜单 8px、内边距 4px、菜单项 4px（同心）；
+ * §4：浮着的东西白底加 e3，不加边线，不用玻璃。只用 tokens.css 里的变量。 */
+
+.eqb-menu {
+  position: fixed;
+  z-index: 70;
+  box-sizing: border-box;
+  display: grid;
+  min-width: 148px;
+  max-width: calc(100vw - 16px);
+  max-height: calc(100dvh - 16px);
+  overflow-y: auto;
+  padding: var(--eqb-space-1);
+  border: 0;
+  border-radius: 8px;
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-3);
+  color: var(--eqb-color-text);
+  animation: eqb-menu-in var(--motion-fast) var(--ease-out);
+}
+
+.eqb-menu.fluid-hover-list {
+  --fh-radius: 4px;
+}
+
+@keyframes eqb-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.eqb-menu[data-side='above'] {
+  animation-name: eqb-menu-in-above;
+}
+
+@keyframes eqb-menu-in-above {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+.eqb-menu-item {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--eqb-space-2);
+  width: 100%;
+  height: 32px;
+  padding: 0 var(--eqb-space-2);
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--eqb-color-text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.eqb-menu-item > svg {
+  flex: 0 0 auto;
+}
+
+.eqb-menu-item-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.eqb-menu-item[data-tone='danger'] {
+  color: var(--eqb-color-danger);
+}
+
+/* 键盘焦点：桌色底（和悬停一样）加 2px 石板墨焦点环，环收在项里面，免得盖到相邻项。 */
+.eqb-menu-item:focus-visible {
+  background: var(--eqb-color-desk);
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: -2px;
+}
+
+.eqb-menu-item[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.eqb-menu-separator {
+  height: 1px;
+  margin: var(--eqb-space-1) 0;
+  background: var(--eqb-color-border-subtle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eqb-menu,
+  .eqb-menu[data-side='above'] {
+    animation: none;
+  }
+}

@@ -24,6 +24,9 @@ export function loadPostcss() {
 // 不算的范围：卷面（PaperSurface）和打印样式
 export const EXCLUDED_DIRS = ['shared-ui/papersurface']
 export const isExcluded = (rel) => EXCLUDED_DIRS.some((d) => rel.startsWith(d))
+// 共用构件本身（app/src/shared-ui/ 下一层的 .tsx / .css，色值表 tokens.css 除外）：按钮、圆角、字号就该写在这里，
+// 不算「页面手写」，不进源码统计和基线。页面里用到构件时，实拍照样会拍到。
+export const isComponentSource = (rel) => /^shared-ui\/[^/]+\.(tsx|css)$/.test(rel) && rel !== 'shared-ui/tokens.css'
 
 export function walk(dir) {
   return readdirSync(dir).sort().flatMap((f) => {

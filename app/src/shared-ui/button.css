@@ -1,0 +1,160 @@
+/* 按钮构件（Button.tsx）。只用 tokens.css 里的变量，不写字面色值和影子。
+ * 状态：悬停垫一层桌色（DESIGN.md 整块响应）；键盘焦点走 2px 石板墨焦点环；
+ * 按下缩到 0.97（减少动态效果时不缩）；禁用、忙。 */
+
+.eqb-button {
+  /* 放进 FluidHoverList 时，列表的滑动高亮是 z-index auto 的绝对定位 ::before，
+   * 按钮要有定位才按文档顺序画在它上面，否则字被高亮盖住（App.css .fluid-hover-list 注释）。 */
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* 6px 是现有 .ghost-button / .primary-button 的图标间距，照搬，迁移时样子不变。 */
+  gap: 6px;
+  height: 32px;
+  min-width: 32px;
+  padding: 0 var(--eqb-space-3);
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--eqb-color-text-secondary);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast) var(--ease-hover),
+    color var(--motion-fast) var(--ease-hover),
+    transform var(--motion-fast) var(--ease-out);
+}
+
+.eqb-button > svg {
+  flex: 0 0 auto;
+}
+
+.eqb-button-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── 大小 ─────────────────────────────────────────────── */
+
+.eqb-button[data-size='sm'] {
+  height: 28px;
+  min-width: 28px;
+  padding: 0 var(--eqb-space-2);
+}
+
+.eqb-button[data-size='lg'] {
+  height: 36px;
+  min-width: 36px;
+}
+
+/* 只有图标：正方形，宽 = 高。 */
+.eqb-button[data-icon-only] {
+  padding: 0;
+}
+
+.eqb-button[data-size='sm'][data-icon-only] { width: 28px; }
+.eqb-button[data-size='md'][data-icon-only] { width: 32px; }
+.eqb-button[data-size='lg'][data-icon-only] { width: 36px; }
+
+/* ── 语气 ─────────────────────────────────────────────── */
+
+.eqb-button[data-tone='subtle'] {
+  color: var(--eqb-color-text-muted);
+}
+
+.eqb-button[data-tone='strong'] {
+  color: var(--eqb-color-text);
+}
+
+.eqb-button[data-tone='danger'] {
+  color: var(--eqb-color-danger);
+}
+
+.eqb-button[data-tone='quiet']:hover:not(:disabled, [aria-disabled='true']),
+.eqb-button[data-tone='subtle']:hover:not(:disabled, [aria-disabled='true']),
+.eqb-button[data-tone='strong']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
+}
+
+.eqb-button[data-tone='danger']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-desk);
+}
+
+/* 雾薄荷主键：每页一处（DESIGN.md §2 Accent）。 */
+.eqb-button[data-tone='primary'] {
+  background: var(--eqb-color-accent-fill);
+  color: var(--eqb-color-accent-fill-ink);
+  font-weight: 600;
+}
+
+.eqb-button[data-tone='primary']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-accent-fill-hover);
+}
+
+/* 石板墨填充：只给短标签（DESIGN.md §2 Ink-Action Rule）。 */
+.eqb-button[data-tone='solid'] {
+  background: var(--eqb-color-action);
+  color: var(--eqb-color-paper);
+  font-weight: 600;
+}
+
+.eqb-button[data-tone='solid']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-action-hover);
+}
+
+/* 放在会滑动悬停底的列表里（FluidHoverList，比如顶栏）时，底由列表画，按钮自己不再垫，
+ * 只把字提到墨色。本条覆盖上面透明底几种语气的 :hover 底色，因为两层底会叠出深一档的块。 */
+.fluid-hover-list .eqb-button:is([data-tone='quiet'], [data-tone='subtle'], [data-tone='strong'], [data-tone='danger']):hover:not(:disabled) {
+  background: transparent;
+}
+
+.fluid-hover-list .eqb-button:is([data-tone='quiet'], [data-tone='subtle'])[data-fluid-hover-active]:not(:disabled) {
+  color: var(--eqb-color-text);
+}
+
+/* ── 焦点、按下、禁用、忙 ──────────────────────────────── */
+
+.eqb-button:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+.eqb-button:active:not(:disabled, [aria-disabled='true']) {
+  transform: scale(0.97);
+}
+
+.eqb-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* 填充的两种禁用时换成桌色底、次要灰字，不靠变淡（和现有 .primary-button 一样）。
+ * 本条覆盖上面 :disabled 的 opacity，因为填充底变淡后会像另一种颜色的按钮。 */
+.eqb-button:is([data-tone='primary'], [data-tone='solid']):disabled {
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text-muted);
+  opacity: 1;
+}
+
+.eqb-button[aria-busy='true'] {
+  cursor: progress;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eqb-button {
+    transition: background-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+  }
+
+  .eqb-button:active:not(:disabled, [aria-disabled='true']) {
+    transform: none;
+  }
+}

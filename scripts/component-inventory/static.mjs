@@ -7,7 +7,7 @@
 // 确定性：同一份源码，同样的结果。
 import { readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
-import { SRC, DATA, RAW, walk, rel, isExcluded, loadPostcss, requireFromApp, HOST_WRAPPERS } from './lib.mjs'
+import { SRC, DATA, RAW, walk, rel, isExcluded, isComponentSource, loadPostcss, requireFromApp, HOST_WRAPPERS } from './lib.mjs'
 
 const postcss = loadPostcss()
 const ts = requireFromApp('typescript')
@@ -18,7 +18,7 @@ const KEY_PROPS = ['background', 'background-color', 'border', 'border-color', '
   'font-size', 'font-weight', 'color', 'padding', 'height', 'min-height', 'text-decoration', 'position', 'z-index']
 const COLOR_RE = /#[0-9a-fA-F]{3,8}\b|\b(rgba?|hsla?)\(/g
 const LENGTH_RE = /(^|[\s(,])-?\d*\.?\d+(px|rem|em|%)/
-const cssFiles = files.filter((f) => f.endsWith('.css') && !isExcluded(rel(f)))
+const cssFiles = files.filter((f) => f.endsWith('.css') && !isExcluded(rel(f)) && !isComponentSource(rel(f)))
 const cssRules = []
 const baselineCss = { shadows: [], radii: [], colors: [], fontSizes: [] }
 for (const file of cssFiles) {
@@ -48,7 +48,7 @@ for (const file of cssFiles) {
 }
 
 // ---------- TSX ----------
-const tsxFiles = files.filter((f) => f.endsWith('.tsx') && !isExcluded(rel(f)))
+const tsxFiles = files.filter((f) => f.endsWith('.tsx') && !isExcluded(rel(f)) && !isComponentSource(rel(f)))
 const jsx = []
 const behaviors = []
 const textOf = (sf, n) => n.getText(sf).replace(/\s+/g, ' ').trim()
