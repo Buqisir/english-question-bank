@@ -667,7 +667,7 @@ function renderCanonicalReadingTable(block) {
   const colgroup = widths
     ? `<colgroup>${widths.map(width => `<col style="width:${width / widths.reduce((sum, share) => sum + share, 0) * 100}%">`).join('')}</colgroup>` : ''
 
-  return `<table class="canonical-reading-table" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="table" data-canonical-reading-rhythm-role="native_table_line" data-canonical-table-columns="${block.columnCount}"${widths ? ' data-canonical-table-widths=""' : ''}>${colgroup}<tbody>${block.rows.map((row) => `<tr data-canonical-row-id="${escapeHtml(row.rowId)}">${row.cells.map((cell) => `<td colspan="${cell.columnSpan}" rowspan="${cell.rowSpan}" data-canonical-cell-id="${escapeHtml(cell.cellId)}" data-canonical-column-start="${cell.columnStart}">${renderCanonicalInlineNodes(cell.inlines, true)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
+  return `<table class="canonical-reading-table" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="table" data-canonical-reading-rhythm-role="native_table_line" data-canonical-table-columns="${block.columnCount}"${widths ? ' data-canonical-table-widths="" style="table-layout:fixed"' : ''}>${colgroup}<tbody>${block.rows.map((row) => `<tr data-canonical-row-id="${escapeHtml(row.rowId)}">${row.cells.map((cell) => `<td colspan="${cell.columnSpan}" rowspan="${cell.rowSpan}" data-canonical-cell-id="${escapeHtml(cell.cellId)}" data-canonical-column-start="${cell.columnStart}">${renderCanonicalInlineNodes(cell.inlines, true)}</td>`).join('')}</tr>`).join('')}</tbody></table>`
 }
 
 function renderCanonicalReadingColumnChild(block, columnHeadingId) {

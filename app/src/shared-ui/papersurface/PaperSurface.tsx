@@ -819,6 +819,7 @@ function CanonicalReadingTable({
       data-canonical-reading-rhythm-role="native_table_line"
       data-canonical-table-columns={block.columnCount}
       data-canonical-table-widths={block.columnWidths ? '' : undefined}
+      style={block.columnWidths ? { tableLayout: 'fixed' } : undefined}
     >
       {block.columnWidths && <colgroup>{block.columnWidths.map((width, index) => (
         <col key={index} style={{ width: `${width / block.columnWidths!.reduce((sum, share) => sum + share, 0) * 100}%` }} />
