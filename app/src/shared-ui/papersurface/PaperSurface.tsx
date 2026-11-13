@@ -20,7 +20,7 @@
  *   - No evidence paint, no popover, no right panel.
  */
 
-import { Fragment, useMemo, useCallback, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import { createContext, useContext, Fragment, useMemo, useCallback, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import './PaperSurface.css'
 import { PaperFontGate } from './PaperFontGate'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
@@ -145,7 +145,10 @@ type BlankFocusContext = LegacyBlankFocusContext
  */
 type PaperSurfaceBlankFocusMode = 'rail' | 'in-passage' | 'paper-blank'
 type ClozeConsumerRef = Parameters<typeof resolveConsumerClozeGeometry>[0]
+const ReviewFiguresContext = createContext(false)
+
 type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
+  readonly reviewFigures?: boolean
   readonly clozeConsumerRef?: ClozeConsumerRef
   readonly blankFocusMode?: PaperSurfaceBlankFocusMode
   /** Derived from the exact consumer binding, absent on historical surfaces. */
@@ -215,7 +218,7 @@ type PaperSurfaceComponentProps = Omit<PaperSurfaceProps, 'blankFocusMode'> & {
 }
 
 export function PaperSurface(props: PaperSurfaceComponentProps): ReactNode {
-  return <PaperFontGate><PaperSurfaceContent {...props} /></PaperFontGate>
+  return <ReviewFiguresContext value={Boolean(props.reviewFigures)}><PaperFontGate><PaperSurfaceContent {...props} /></PaperFontGate></ReviewFiguresContext>
 }
 
 function PaperSurfaceContent(props: PaperSurfaceComponentProps): ReactNode {
@@ -911,9 +914,11 @@ function CanonicalSourceFigure({
   block: CanonicalReadingSurfaceFigureBlock
   stemFigure?: boolean
 }): ReactNode {
-  const src =
-    `data:${block.mediaArtifact.mimeType};base64,`
-    + block.mediaArtifact.encodedBytes
+  const reviewFigures = useContext(ReviewFiguresContext)
+  const [showOriginal, setShowOriginal] = useState(false)
+  const displayArtifact = !showOriginal && block.mediaArtifact.displayVariant
+    ? block.mediaArtifact.displayVariant : block.mediaArtifact
+  const src = `data:${displayArtifact.mimeType};base64,${displayArtifact.encodedBytes}`
   const presentation = block.media.presentation
   return (
     <figure
@@ -935,6 +940,12 @@ function CanonicalSourceFigure({
             ...(stemFigure ? { flexShrink: 0 } : {}) } as CSSProperties)
           : undefined}
       />
+      {reviewFigures && block.mediaArtifact.displayVariant && (
+        <button type="button" className="ps-figure-original-toggle" aria-pressed={showOriginal}
+          onClick={() => setShowOriginal(!showOriginal)}>
+          {showOriginal ? '看清晰版' : '看原图'}
+        </button>
+      )}
       {block.caption && (
         <figcaption>
           {block.captionInlines.map((inline) => (

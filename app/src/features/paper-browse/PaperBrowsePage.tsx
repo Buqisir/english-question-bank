@@ -2528,6 +2528,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       return (
         <div className="paper-browse-listening canonical-listening-surface">
           <PaperSurface
+            reviewFigures={Boolean(reviewRevision)}
             {...entry.model.surfaceData}
             listeningPlayers={listeningPlayers}
             listeningSectionPlayer={audio && firstSection && (
@@ -2624,6 +2625,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
 
     const surfaceEl = (
       <PaperSurface
+            reviewFigures={Boolean(reviewRevision)}
         roleLayout={'roleLayout' in surfaceData && surfaceData.roleLayout === 'golden_reference_v1'
           ? surfaceData.roleLayout : undefined}
         textMap={surfaceData.textMap}

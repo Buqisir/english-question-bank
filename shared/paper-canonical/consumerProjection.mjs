@@ -15,7 +15,7 @@ import { resolvePassageBlockRoles } from './passageBlockRoles.mjs'
 import { readingPassageLetterBySlotId } from './readingPassageLetter.mjs'
 import { digestJson, exactKeys, sha256, stableStringify } from './stable.mjs'
 import { validateReadingFigureLayout } from './readingFigureLayout.mjs'
-import { validTableColumnWidths } from './richContent.mjs'
+import { displayVariantArtifact, validTableColumnWidths } from './richContent.mjs'
 import { validCanonicalSourcePresentation } from './sourcePresentation.mjs'
 
 const SUPPORTED_FAMILIES = new Set([
@@ -251,6 +251,7 @@ function projectReadingConsumerGroup(input, occurrence) {
     ) {
       throw rejected(`Canonical Reading occurrence ${groupId} has unresolved ${context} media`)
     }
+    if (media.displayVariant) displayVariantArtifact(media, new Map([[artifact.displayVariant?.sourceArtifactRef?.artifactId, artifact.displayVariant]]))
     seenMediaIds.add(mediaId)
     return {
       media: structuredClone(media),
@@ -846,6 +847,7 @@ function applicationPromptFigureResolver(input, occurrence) {
     ) {
       throw rejected(`Canonical Application Writing occurrence ${groupId} has unresolved prompt figure media`)
     }
+    if (media.displayVariant) displayVariantArtifact(media, new Map([[artifact.displayVariant?.sourceArtifactRef?.artifactId, artifact.displayVariant]]))
     seen.add(block.mediaId)
     const caption = media.presentation ? block.caption : []
     return {

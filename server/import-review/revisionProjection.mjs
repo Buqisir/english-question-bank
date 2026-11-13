@@ -14,6 +14,7 @@ import { nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistori
 import { consumerContractRefsForAuthority } from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
+import { displayVariantArtifact } from '../../shared/paper-canonical/richContent.mjs'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { LEGACY_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview, readSealedListeningReview } from '../paper-import/listeningReview.mjs'
@@ -387,8 +388,14 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
       )
       const mediaPath = resolveReviewFile(rootDir, relativePath)
       if (!existsSync(mediaPath)) fail(`Materialized media is unavailable: ${media.mediaId}`)
+      const displayVariant = media.displayVariant
+      if (displayVariant && (!/^materialization\/media\/[^/]+$/.test(displayVariant.path)
+        || displayVariant.path.includes('..'))) fail('Display variant must be inside this paper materialization/media')
+      const displayBytes = displayVariant
+        ? { displayVariantBytes: readReviewBytes(resolveReviewFile(rootDir, normalizedRelativePath(displayVariant.path, 'displayVariant'))) }
+        : {}
       if (!media.publication?.candidate) {
-        return { mediaId: media.mediaId, bytes: readReviewBytes(mediaPath) }
+        return { mediaId: media.mediaId, bytes: readReviewBytes(mediaPath), ...displayBytes }
       }
       const renditionPath = resolveReviewFile(
         rootDir,
@@ -404,6 +411,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
         mediaId: media.mediaId,
         bytes: readReviewBytes(mediaPath),
         renditionBytes: readReviewBytes(renditionPath),
+        ...displayBytes,
       }
     }),
   }
@@ -709,7 +717,12 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
           ),
           mediaType: media.mimeType,
           role: 'content_media',
-        }, ...(media.publication?.candidate
+        }, ...(media.displayVariant ? [{
+          path: normalizedRelativePath(media.displayVariant.path, 'displayVariant'),
+          mediaType: path.extname(media.displayVariant.path).toLowerCase() === '.webp' ? 'image/webp'
+            : /\.jpe?g$/i.test(media.displayVariant.path) ? 'image/jpeg' : 'image/png',
+          role: 'content_media_display_variant',
+        }] : []), ...(media.publication?.candidate
           ? [{
               path: path.posix.join(
                 normalizedRelativePath(manifest.mediaDirectory, 'mediaDirectory'),
@@ -1142,6 +1155,7 @@ function mediaArtifacts(projected, sourceCapture) {
         pixelHeight: media.pixelHeight,
         sourceArtifactRef: media.sourceArtifactRef,
         encodedBytes: document.encodedBytes,
+        ...(media.displayVariant ? { displayVariant: displayVariantArtifact(media, documents) } : {}),
       }
       const existing = artifacts.get(media.mediaId)
       if (existing && stableStringify(existing) !== stableStringify(artifact)) {

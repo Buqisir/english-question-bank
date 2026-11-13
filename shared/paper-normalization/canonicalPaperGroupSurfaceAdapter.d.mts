@@ -108,6 +108,18 @@ export type CanonicalReadingSurfaceTableBlock = {
   }>
 }
 
+export type CanonicalFigureDisplayVariant = {
+  readonly path: string
+  readonly sha256: string
+  readonly byteLength: number
+  readonly generator: 'codex-cli'
+  readonly textCheck: 'verified'
+  readonly mimeType: string
+  readonly pixelWidth: number
+  readonly pixelHeight: number
+  readonly sourceArtifactRef: { readonly artifactId: string }
+}
+
 export type CanonicalReadingSurfaceFigureBlock = {
   readonly kind: 'figure'
   readonly nodeId: string
@@ -119,11 +131,13 @@ export type CanonicalReadingSurfaceFigureBlock = {
     readonly sha256: string
     readonly sourceArtifactRef: { readonly artifactId: string }
     readonly presentation?: CanonicalMediaPresentation
+    readonly displayVariant?: CanonicalFigureDisplayVariant
   }
   readonly mediaArtifact: {
     readonly mimeType: string
     readonly sha256: string
     readonly encodedBytes: string
+    readonly displayVariant?: CanonicalFigureDisplayVariant & { readonly encodedBytes: string }
   }
 }
 

@@ -1,4 +1,5 @@
-import { exactKeys, isRecordValue } from './stable.mjs'
+import { exactKeys, isRecordValue, sha256 } from './stable.mjs'
+import { isBase64String } from './base64.mjs'
 
 // Optional source-backed table presentation; absence preserves historical output.
 export function validTableColumnWidths(block) {
@@ -215,4 +216,32 @@ export function exactFramedColumnsBlock(block) {
     && Array.isArray(block.columns)
     && block.columns.length === FRAMED_COLUMNS_COLUMN_COUNT
     && block.columns.every((column) => exactFramedColumnsColumn(column))
+}
+
+/** A display rendition supplements, and never replaces, the captured source. */
+export function validDisplayVariant(value) {
+  return isRecordValue(value)
+    && exactKeys(value, ['path', 'sha256', 'byteLength', 'generator', 'textCheck'])
+    && typeof value.path === 'string'
+    && /^materialization\/media\/[a-zA-Z0-9][a-zA-Z0-9._-]*\.(?:png|jpe?g|webp)$/.test(value.path)
+    && !value.path.includes('..')
+    && /^sha256:[a-f0-9]{64}$/.test(value.sha256)
+    && Number.isSafeInteger(value.byteLength) && value.byteLength > 0
+    && value.generator === 'codex-cli' && value.textCheck === 'verified'
+}
+
+export function displayVariantArtifact(media, documents) {
+  if (!media.displayVariant) return undefined
+  const variant = media.displayVariant
+  const { mimeType, pixelWidth, pixelHeight, sourceArtifactRef, ...declaration } = variant
+  if (!validDisplayVariant(declaration) || !/^image\/(?:png|jpeg|webp)$/.test(mimeType)
+    || !Number.isInteger(pixelWidth) || pixelWidth < 1 || !Number.isInteger(pixelHeight) || pixelHeight < 1
+    || !exactKeys(sourceArtifactRef, ['artifactId'])) throw new Error('Invalid display variant declaration')
+  const document = documents.get(variant.sourceArtifactRef?.artifactId)
+  const bytes = isBase64String(document?.encodedBytes)
+    ? Uint8Array.from(atob(document.encodedBytes), character => character.charCodeAt(0)) : null
+  if (!document || !bytes || document.sha256 !== variant.sha256
+    || (document.mediaType ?? document.mimeType) !== variant.mimeType || bytes.byteLength !== variant.byteLength
+    || sha256(bytes) !== variant.sha256) throw new Error('Display variant does not close immutable bytes')
+  return { ...structuredClone(variant), encodedBytes: document.encodedBytes }
 }

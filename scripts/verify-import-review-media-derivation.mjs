@@ -181,6 +181,28 @@ const firstInventory = produced.materialization.media[0]
 const firstBytes = produced.mediaFiles[0].bytes
 const renditionById = new Map()
 
+// Display bytes are independently bound; the source recipe remains mandatory.
+const displayMaterialization = clone(produced.materialization)
+const displayBytes = deterministicEnhancement(firstBytes)
+displayMaterialization.media[0].displayVariant = {
+  path: 'materialization/media/display.png', sha256: sha256(displayBytes),
+  byteLength: displayBytes.byteLength, generator: 'codex-cli', textCheck: 'verified',
+}
+const displayInput = makeInput(displayMaterialization, produced, fixture)
+displayInput.media[0].displayVariantBytes = displayBytes
+const displayResult = compile(displayInput)
+assert.equal(displayResult.consumption.mediaArtifacts[0].sha256, firstInventory.sha256)
+assert.equal(displayResult.consumption.mediaArtifacts[0].displayVariant.sha256, sha256(displayBytes))
+const displayTampered = clone(displayInput)
+displayTampered.media[0].displayVariantBytes = firstBytes
+assertImportIssue(displayTampered, 'MATERIALIZATION_DISPLAY_VARIANT_MISMATCH')
+const displaySourceTampered = clone(displayInput)
+displaySourceTampered.media[0].bytes = displayBytes
+assertImportIssue(displaySourceTampered, 'MATERIALIZATION_SOURCE_MEDIA_MISMATCH')
+const displayPathTampered = clone(displayMaterialization)
+displayPathTampered.media[0].displayVariant.path = '../display.png'
+assertImportIssue(makeInput(displayPathTampered, produced, fixture), 'MATERIALIZATION_MEDIA_ITEM_INVALID')
+
 // The fixed ImageMagick recipe is replayed, not trusted from metadata.
 const deterministicBytes = deterministicEnhancement(firstBytes)
 const deterministicMaterialization = clone(produced.materialization)
