@@ -44,6 +44,41 @@ test('declared image table splits one sealed item, preserves merge geometry and 
   assert.equal(JSON.stringify(f.confirmation), historical)
 })
 
+test('explicit column shares and source marks preserve text, while undeclared cells keep their original shape', () => {
+  const { declaration, confirmation, source } = visualTableFixture()
+  const [a, b] = declaration.rows[0].cells, [c] = declaration.rows[1].cells
+  declaration.rows = [{ header: false, cells: [[...a, ...b], c] }]
+  declaration.merges = []
+  const build = () => buildOcrVisualTable({ declaration, confirmation, source, blockId: 'table' })
+  const old = build()
+  assert(!Object.hasOwn(old, 'columnWidths'))
+  assert.deepEqual(old.rows[0].cells[0].content, [{ kind: 'text', text: 'A\nB' }])
+  declaration.columnWidths = [1, 3]
+  a[0].marks = ['bold']; b[0].marks = ['italic']
+  const table = build()
+  assert.deepEqual(table.columnWidths, [1, 3])
+  assert.deepEqual(table.rows[0].cells[0].content, [
+    { kind: 'text', text: 'A', marks: ['bold'] },
+    { kind: 'text', text: '\nB', marks: ['italic'] },
+  ])
+  const materialization = makeFixture({ mixedTable: true })
+  const target = materialization.groups[0].blocks.find(block => block.kind === 'table')
+  target.columnWidths = table.columnWidths
+  target.rows[0].cells[0].content = table.rows[0].cells[0].content
+  assert.deepEqual(validateNck1SourceMaterialization(materialization), [])
+  for (const widths of [[1], [1, 0], [1, -1], [1, Infinity], ['1', 3], null]) {
+    declaration.columnWidths = widths
+    assert.throws(build, /columnWidths/u)
+    target.columnWidths = widths
+    assert(validateNck1SourceMaterialization(materialization).some(i => i.code === 'MATERIALIZATION_TABLE_INVALID'))
+  }
+  declaration.columnWidths = [1, 3]
+  for (const marks of [[], ['bold', 'bold'], ['unknown'], ['underline']]) {
+    a[0].marks = marks
+    assert.throws(build, /cell fragments/u)
+  }
+})
+
 test('an empty header corner preserves explicit blank text and all sealed characters', () => {
   const { declaration, confirmation, source } = visualTableFixture()
   const [a, b] = declaration.rows[0].cells, [c] = declaration.rows[1].cells
@@ -70,6 +105,34 @@ test('an empty header corner preserves explicit blank text and all sealed charac
     declaration.rows = rows
     assert.throws(build, /explicit rows/u)
   }
+})
+
+test('marked table cells and column shares survive materialization and Canonical compilation', async () => {
+  const { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } = await import('../../shared/paper-canonical/compiler.mjs')
+  const { sha256 } = await import('../../shared/paper-canonical/stable.mjs')
+  const raw = makeFixture({ mixedTable: true })
+  const table = raw.groups[0].blocks.find(b => b.kind === 'table')
+  table.columnWidths = [1, 3]
+  table.rows[0].cells[0].content = [{ kind: 'text', text: 'Name', marks: ['bold', 'italic'] }]
+  table.rows[0].cells[1].content = [{ kind: 'text', text: 'Book', marks: ['italic'] }]
+  raw.media = []
+  raw.sourceCoverage.visuals = raw.sourceCoverage.visuals.filter(v => v.disposition === 'semantic_table')
+  const documents = ['paper', 'answers'].map(documentId => {
+    const bytes = new TextEncoder().encode(`%PDF-1.7 source ${documentId}`.padEnd(100, 'x'))
+    Object.assign(raw.documents.find(d => d.documentId === documentId), { sha256: sha256(bytes), byteLength: bytes.length })
+    return { documentId, bytes }
+  })
+  const imported = importCanonicalCandidate({ kind: 'nck1-source-materialization',
+    materializationBytes: new TextEncoder().encode(JSON.stringify(raw)), documents, media: [] })
+  assert.deepEqual(imported.issues, [])
+  const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+  assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
+  const compiled = preview.compilation
+  const output = compiled.artifacts.canonicalPaper.questionGroups.find(g => g.contractRef.familyContractId === 'reading')
+    .content.blocks.find(b => b.kind === 'table')
+  assert.deepEqual(output.columnWidths, [1, 3])
+  assert.deepEqual(output.rows[0].cells[0].inlines[0].marks, ['bold', 'italic'])
+  assert.deepEqual(output.rows[0].cells[1].inlines[0].marks, ['italic'])
 })
 
 test('ordinary semantic tables retain source identity and order checks with an empty corner', () => {

@@ -1,6 +1,7 @@
 import zhejiang from '../../standards/paper-canonical/profiles/zhejiang-legacy-v17.json' with { type: 'json' }
 import national from '../../standards/paper-canonical/profiles/national-legacy-v6.json' with { type: 'json' }
 import zhejiangV16 from '../../standards/paper-canonical/profiles/zhejiang-legacy-v16.json' with { type: 'json' }
+import { validTableColumnWidths, validTableMarks } from './richContent.mjs'
 import { resolveInImageOptionLabels } from './inImageOptionLabels.mjs'
 import { resolveCrossPageParagraphJoins } from './crossPageParagraphJoin.mjs'
 import { validateListeningSourceDecision } from './listeningSourceDecision.mjs'
@@ -223,7 +224,8 @@ function validateCellContent(content, path, mediaReferences, issues) {
     const itemPath = `${path}[${index}]`
     if (
       isRecordValue(item)
-      && exactKeys(item, ['kind', 'text'])
+      && exactKeys(item, ['kind', 'text', ...(Object.hasOwn(item, 'marks') ? ['marks'] : [])])
+      && (!Object.hasOwn(item, 'marks') || validTableMarks(item.marks))
       && item.kind === 'text'
       && nonEmptyString(item.text)
     ) continue
@@ -269,7 +271,8 @@ function validateParagraphContent(content, path, blankReferences, issues) {
 
 function validateTable(block, path, documents, mediaReferences, issues) {
   if (
-    !exactKeys(block, ['kind', 'blockId', 'columnCount', 'rows', 'source'])
+    !exactKeys(block, ['kind', 'blockId', 'columnCount', 'rows', 'source', ...(Object.hasOwn(block, 'columnWidths') ? ['columnWidths'] : [])])
+    || !validTableColumnWidths(block)
     || !Number.isInteger(block.columnCount)
     || block.columnCount < 1
     || !Array.isArray(block.rows)

@@ -53,7 +53,7 @@ export type CanonicalReadingSurfaceTextInline = {
   readonly kind: 'text'
   readonly nodeId: string
   readonly text: string
-  readonly marks?: ReadonlyArray<'bold' | 'underline'>
+  readonly marks?: ReadonlyArray<'bold' | 'underline' | 'italic'>
 }
 
 export type CanonicalMediaPresentation = {
@@ -93,6 +93,7 @@ export type CanonicalReadingSurfaceTableBlock = {
   readonly kind: 'table'
   readonly nodeId: string
   readonly columnCount: number
+  readonly columnWidths?: ReadonlyArray<number>
   readonly rows: ReadonlyArray<{
     readonly rowId: string
     readonly cells: ReadonlyArray<{

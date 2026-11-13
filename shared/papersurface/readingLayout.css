@@ -15,6 +15,15 @@
   font-weight: 700;
 }
 
+/* Explicit source column ratios override content-driven gold-reference widths. */
+table:is(.ps-canonical-reading-table, .canonical-reading-table)[data-canonical-table-widths] {
+  table-layout: fixed;
+}
+
+:is(.ps-canonical-reading-table, .canonical-reading-table) em {
+  font-style: italic;
+}
+
 [data-source-marks~="underline"] {
   text-decoration-line: underline;
   text-decoration-skip-ink: none;

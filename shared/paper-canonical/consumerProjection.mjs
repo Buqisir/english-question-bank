@@ -15,6 +15,7 @@ import { resolvePassageBlockRoles } from './passageBlockRoles.mjs'
 import { readingPassageLetterBySlotId } from './readingPassageLetter.mjs'
 import { digestJson, exactKeys, sha256, stableStringify } from './stable.mjs'
 import { validateReadingFigureLayout } from './readingFigureLayout.mjs'
+import { validTableColumnWidths } from './richContent.mjs'
 import { validCanonicalSourcePresentation } from './sourcePresentation.mjs'
 
 const SUPPORTED_FAMILIES = new Set([
@@ -265,7 +266,8 @@ function projectReadingConsumerGroup(input, occurrence) {
   })
   const projectReadingTable = (block) => {
     if (
-      !Number.isInteger(block.columnCount)
+      !validTableColumnWidths(block)
+      || !Number.isInteger(block.columnCount)
       || block.columnCount < 1
       || !Array.isArray(block.rows)
       || block.rows.length === 0
@@ -355,6 +357,7 @@ function projectReadingConsumerGroup(input, occurrence) {
       kind: 'table',
       nodeId: block.nodeId,
       columnCount: block.columnCount,
+      ...(block.columnWidths ? { columnWidths: [...block.columnWidths] } : {}),
       rows,
     }
   }
