@@ -5,6 +5,7 @@ import { iconMotionInput } from '../../icons/motionInput'
 
 export function ObjectiveTeachingContent({ content }: { content: ObjectiveTeachingView | null }): ReactNode {
   if (!content) return null
+  if (content.unavailable) return <p className="pi-ps-analysis-empty">这组讲评暂不可用</p>
   return (
     <div className="pi-objective-teaching">
       {(content.discourseSummary || content.discourseItems.length > 0) && (

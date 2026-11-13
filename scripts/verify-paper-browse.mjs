@@ -2235,6 +2235,49 @@ try {
     onSelectOption() {},
     onSelectEvidence() {},
   }
+  const isolatedAsset = structuredClone(lecturePrototypeAsset)
+  const isolatedAnalysis = structuredClone(lecturePrototypeAnalysis)
+  const goodId = 'group-mock-gd-2026-m1-reading-a'
+  const badId = 'reading-bad-teaching'
+  isolatedAsset.content.groups[badId] = structuredClone(isolatedAsset.content.groups[goodId])
+  isolatedAnalysis.groups[goodId] = { fullTranslationZh: '正常译文' }
+  isolatedAnalysis.groups[badId] = {
+    selectedLongSentences: [{
+      displayText: 'A sentence.', relatedQuestionIds: [], translationZh: '', analysisZh: '',
+      underlineRanges: [{ start: 0, end: 1, quote: 'wrong quote' }],
+    }],
+  }
+  const warnings = []
+  const originalWarn = console.warn
+  let isolatedModels
+  try {
+    console.warn = (...args) => warnings.push(args)
+    isolatedModels = [badId, goodId].map((groupId) => buildPaperAssetSurfaceModel({
+      asset: isolatedAsset, analysis: isolatedAnalysis, groupId,
+    }))
+  } finally {
+    console.warn = originalWarn
+  }
+  const [badModel, goodModel] = isolatedModels
+  assert('bad teaching group degrades once while the next group and exam content survive',
+    badModel.teachingContent?.unavailable === true && warnings.length === 1
+      && goodModel.teachingContent.translationParagraphs[0].segments[0].text === '正常译文'
+      && JSON.stringify(badModel.surfaceData.questions) === JSON.stringify(goodModel.surfaceData.questions)
+      && JSON.stringify(goodModel.surfaceData.questions) === JSON.stringify(model.surfaceData.questions)
+      && badModel.surfaceData.textMap.paragraphs.length > 0
+      && badModel.surfaceData.annotations.length === 0)
+  assert('unavailable teaching renders its honest group message',
+    renderToStaticMarkup(createElement(PaperAssetAnalysisPanel, {
+      ...props, teachingContent: badModel.teachingContent,
+    })).includes('这组讲评暂不可用'))
+  isolatedAsset.content.groups[badId].passage.paragraphs = []
+  let sourceError = false
+  try {
+    buildPaperAssetSurfaceModel({ asset: isolatedAsset, analysis: isolatedAnalysis, groupId: badId })
+  } catch (error) {
+    sourceError = /no confirmed passage paragraphs/.test(error.message)
+  }
+  assert('missing exam passage still throws instead of becoming unavailable teaching', sourceError)
   const markup = renderToStaticMarkup(createElement(PaperAssetAnalysisPanel, props))
   // Encode fixture text independently of the panel; truncating to keywords or
   // swapping source/target must fail, including punctuation and full notes.
