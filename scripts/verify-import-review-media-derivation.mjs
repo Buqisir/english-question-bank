@@ -198,7 +198,10 @@ for (const ref of [
 assert.equal(validFigureTextRegions([...regions, ...regions]), false)
 assert.equal(validFigureTextRegions([{ ...regions[0], text: ' ' }]), false)
 assert.equal(validFigureTextRegions([{ ...regions[0], box: { x: .9, y: 0, w: .2, h: .1 } }]), false)
-const displayBytes = deterministicEnhancement(firstBytes)
+const displayBytes = new Uint8Array(execFileSync('magick', [
+  '-size', '1024x512', 'xc:', '-seed', '42', '+noise', 'Random', 'png24:-',
+], { maxBuffer: 4 * 1024 * 1024 }))
+assert(displayBytes.byteLength > 1024 * 1024, 'Exercise large Uint8Array stdin writes')
 displayMaterialization.media[0].displayVariant = {
   path: 'materialization/media/display.png', sha256: sha256(displayBytes),
   byteLength: displayBytes.byteLength, generator: 'codex-cli', textCheck: 'verified',
