@@ -411,7 +411,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
             )}
             {loadState === 'loaded' && artifacts.length === 0 && (
               <div className="my-space-empty-state">
-                <EmptyIllustration kind="archive" onCard />
+                <EmptyIllustration kind="archive" />
                 <p className="my-space-empty">试卷导出为 PDF 后，可以保存在这里。</p>
                 <button type="button" className="my-space-empty-cta" onClick={onBackToWorkbench}>去找题</button>
               </div>

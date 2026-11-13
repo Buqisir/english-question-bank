@@ -8,9 +8,6 @@
 .eqb-empty-ill .ill-deep { fill: var(--eqb-color-ill-deep); }
 .eqb-empty-ill .ill-mid { fill: var(--eqb-color-ill-mid); }
 .eqb-empty-ill .ill-paper { fill: var(--eqb-color-ill-paper); }
-/* 放在白卡片上时（个人空间、生词本、听写，底色先不换）：白纸会和卡片融在一起，
-   「纸」这个角色降一档用页面底色，仍是平涂，不加描边。（提案 · 单一来源，目测） */
-.eqb-empty-ill.is-on-card .ill-paper { fill: var(--desk-page, #f1f5f7); }
 /* 线状部件和 32px 起的图标同一支笔：1.5 格。 */
 .eqb-empty-ill .ill-deep-line,
 .eqb-empty-ill .ill-mid-line {

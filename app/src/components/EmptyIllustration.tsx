@@ -13,10 +13,10 @@ export type EmptyIllustrationKind = 'archive' | 'vocabulary-notebook' | 'paper-l
 const LINED_PAPER = 'M7.383 3.009 H16.617 Q19.776 3.009 19.776 6.168 V14.819 H16.52 Q13.458 14.819 13.458 17.881 V20.991 H7.383 Q4.224 20.991 4.224 17.832 V6.168 Q4.224 3.009 7.383 3.009 Z'
 const BANK_FRONT = 'M8.445 5.077 H15.555 Q17.988 5.077 17.988 7.509 V13.06 C17.988 16.478 15.311 18.923 11.985 18.923 H8.445 Q6.012 18.923 6.012 16.491 V7.509 Q6.012 5.077 8.445 5.077 Z'
 
-export function EmptyIllustration({ kind, onCard = false }: { kind: EmptyIllustrationKind; onCard?: boolean }) {
+export function EmptyIllustration({ kind }: { kind: EmptyIllustrationKind }) {
   const clipId = useId()
   return (
-    <svg className={onCard ? 'eqb-empty-ill is-on-card' : 'eqb-empty-ill'} viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-kind={kind}>
+    <svg className="eqb-empty-ill" viewBox="0 0 24 24" aria-hidden="true" focusable="false" data-kind={kind}>
       {kind === 'archive' && (
         <>
           <defs><clipPath id={clipId}><rect x="0" y="0" width="24" height="13.813" /></clipPath></defs>

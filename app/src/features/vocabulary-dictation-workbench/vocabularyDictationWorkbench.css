@@ -1034,7 +1034,13 @@
   font-size: 13px;
 }
 
-/* 迁移第 12 条：还没有听写 / 还没有词组 = 「还没东西」，插图照图标 PaperLined（Owner 选横线纸）。 */
+/* 迁移第 12 条：还没有听写 / 还没有词组 = 「还没东西」，插图照图标 PaperLined（Owner 选横线纸）。
+   列表里只剩这个空状态时，外面的白框去掉，插图直接放在桌色上（Owner 2026-11-13 选 B）。 */
+.dictation-set-list:has(.dictation-empty-state.is-blank),
+.dictation-task-queue:has(.dictation-empty-state.is-blank) {
+  background: transparent;
+  border-color: transparent;
+}
 .dictation-empty-state.is-blank { gap: 12px; line-height: 1.5; }
 .dictation-empty-state.is-blank p { max-width: 24em; }
 .dictation-empty-state .dictation-empty-cta {

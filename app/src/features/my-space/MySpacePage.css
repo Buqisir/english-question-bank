@@ -268,11 +268,12 @@ button.my-space-folder-button { cursor: pointer; }
 
 .my-space-error { color: var(--eqb-color-danger); margin: 0; }
 
+/* 空状态不放白卡片：插图和一句话直接放在桌色上（DESIGN.md §5 Empty states，Owner 2026-11-13 选 B）。 */
 .my-space-empty-state {
   align-content: center;
   align-items: center;
-  background: var(--desk-surface);
-  border: 1px solid var(--eqb-color-border-subtle);
+  background: transparent;
+  border: 1px solid transparent;
   border-radius: 12px;
   display: grid;
   gap: 12px;

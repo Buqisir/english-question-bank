@@ -23,11 +23,12 @@
   align-content: center;
   padding: 36px 20px;
   text-align: center;
-  background: var(--desk-surface);
-  border: 1px solid var(--eqb-color-border-subtle);
+  /* 不放白卡片，直接放在桌色上（DESIGN.md §5 Empty states，Owner 2026-11-13 选 B）。 */
+  background: transparent;
+  border: 1px solid transparent;
   border-radius: 12px;
 }
-.notebook-empty-state .notebook-empty { margin: 0; }
+.notebook-empty-state .notebook-empty { font-size: 13px; line-height: 1.5; margin: 0; } /* 和其他空状态同字号 */
 .notebook-empty-cta {
   min-height: 36px;
   padding: 0 16px;

@@ -1060,7 +1060,7 @@ export function VocabularyDictationWorkbench({
               }) : libraryLoadedFor !== activeStudentId ? null : (query || fromDate || toDate) ? (
                 <p className="dictation-empty-line">没有符合条件的词组。<button type="button" className="dictation-empty-inline" onClick={() => { setSearchInput(''); setQuery(''); setFromDate(''); setToDate('') }}>清除搜索和日期</button></p>
               ) : (
-                <div className="dictation-empty-state is-blank"><EmptyIllustration kind="paper-lined" onCard /><p>还没有词组。在看卷时把生词收进生词本，就能在这里组成词组。</p></div>
+                <div className="dictation-empty-state is-blank"><EmptyIllustration kind="paper-lined" /><p>还没有词组。在看卷时把生词收进生词本，就能在这里组成词组。</p></div>
               )}
             </FluidHoverList>
 
@@ -1167,7 +1167,7 @@ export function VocabularyDictationWorkbench({
                     })}</div>
                   </section>
                 )
-              })}</div> : studentDataLoadedFor !== activeStudentId ? null : <div className="dictation-empty-state is-blank"><EmptyIllustration kind="paper-lined" onCard /><p>还没有听写。先到「词组」里选好单词。</p><button type="button" className="dictation-empty-cta" onClick={() => { void switchWorkbenchTab('sets') }}>去选词组</button></div>}
+              })}</div> : studentDataLoadedFor !== activeStudentId ? null : <div className="dictation-empty-state is-blank"><EmptyIllustration kind="paper-lined" /><p>还没有听写。先到「词组」里选好单词。</p><button type="button" className="dictation-empty-cta" onClick={() => { void switchWorkbenchTab('sets') }}>去选词组</button></div>}
             </div>
 
             {selectedTasks.length > 0 && (
