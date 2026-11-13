@@ -4,6 +4,8 @@ import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { EmptyIllustration } from '../../components/EmptyIllustration'
 import { useModalDialog } from '../../components/useModalDialog'
+import { Button } from '../../shared-ui/Button.tsx'
+import { Menu } from '../../shared-ui/Menu.tsx'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, GroupType, MySpaceFolder, QuestionGroupCard } from '../../domain/questionBank'
 import {
   addGroupToDraftPaper,
@@ -143,23 +145,21 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const removedItemToast = useToastPresence(removedItem, 120)
   const savedToastPresence = useToastPresence(savedToastMessage, 120)
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null)
-  const [openGroupActionsItemId, setOpenGroupActionsItemId] = useState<string | null>(null)
-  const [exportMenuOpen, setExportMenuOpen] = useState(false)
+  // 构件厂第 4 步（2026-11-13）：「导出」菜单和题组「⋯」菜单换成 shared-ui/Menu，
+  // 开关、点外面关、Esc 关并还焦点都由构件自己管，这里不再存它们的开关状态。
   // workbench-header-unify Locked Decision 2: the retired `.draft-toolbar`'s
   // 学生（可选）/ 最近草稿卷 / 自动保存状态 三项 now live behind this quiet
-  // "⋯" menu in the head row — same disclosure pattern as exportMenuOpen
-  // above (outside-click + Escape dismiss effect below).
+  // "⋯" panel in the head row (outside-click + Escape dismiss effect below).
+  // 它里面是表单字段，不是菜单项，所以不换 Menu，仍是自己的弹出面板。
   const [moreMenuOpen, setMoreMenuOpen] = useState(false)
   // 复评工艺账（2026-07-17 C 路）：菜单入场有 keyframe、关闭裸卸载=可感的
   // 不对称。与 toast/模态同走 usePresence——退（motion-micro）快于入
   // （motion-fast），播完 exit 再卸载。
-  const exportMenuPresence = usePresence(exportMenuOpen, 80)
   const moreMenuPresence = usePresence(moreMenuOpen, 80)
   const titleSaveTimerRef = useRef<number | null>(null)
   const undoTimerRef = useRef<number | null>(null)
   const focusedOnceRef = useRef(false)
   const a4SheetRef = useRef<HTMLDivElement | null>(null)
-  const exportMenuRef = useRef<HTMLDivElement | null>(null)
   const moreMenuRef = useRef<HTMLDivElement | null>(null)
   const [previewScale, setPreviewScale] = useState(1)
   // draft-desk-a: iframe now grows to its full rendered height (read from
@@ -343,28 +343,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     focusedOnceRef.current = false
   }, [draftPaperId, focusGroupId])
 
-  // D5: close the export menu on outside click or Escape, mirroring the
-  // dismiss behavior native disclosure widgets give you for free.
-  useEffect(() => {
-    if (!exportMenuOpen) return
-    function handlePointerDown(event: MouseEvent) {
-      if (exportMenuRef.current && !exportMenuRef.current.contains(event.target as Node)) {
-        setExportMenuOpen(false)
-      }
-    }
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') setExportMenuOpen(false)
-    }
-    document.addEventListener('mousedown', handlePointerDown)
-    document.addEventListener('keydown', handleKeyDown)
-    return () => {
-      document.removeEventListener('mousedown', handlePointerDown)
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [exportMenuOpen])
-
-  // workbench-header-unify: same dismiss pattern as the export menu effect
-  // above, for the "⋯" menu.
+  // workbench-header-unify: outside-click / Escape dismiss for the "⋯" panel
+  // (D5 原先给导出菜单写的同一套；导出菜单换成 Menu 后只剩这一处用).
   useEffect(() => {
     if (!moreMenuOpen) return
     function handlePointerDown(event: MouseEvent) {
@@ -1434,58 +1414,35 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     </FluidHoverList>
   )
 
+  // 构件厂第 4 步：导出菜单换成 shared-ui/Menu（雾薄荷主键做触发键，每页一处）。
+  // 「保存 PDF 到个人空间」选中后 Menu 先把焦点还给「导出」，模态框关上时再还回这里。
+  const exportBlocked = draftPaper.items.length === 0 || exportStatus === 'exporting'
   const exportMenuControl = (
-    <div className="draft-export-menu" ref={exportMenuRef}>
-      <button
-        type="button"
-        className="draft-export-menu-trigger"
-        aria-haspopup="true"
-        aria-expanded={exportMenuOpen}
-        onClick={() => setExportMenuOpen((open) => !open)}
-      >
-        导出
-      </button>
-      {exportMenuPresence.mounted && (
-        <FluidHoverList as="div" axis="y" className="draft-export-menu-panel" itemSelector="button" role="menu" data-visible={exportMenuPresence.visible}>
-          <button
-            type="button"
-            role="menuitem"
-            disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'}
-            onClick={() => {
-              setExportMenuOpen(false)
-              void exportPdf()
-            }}
-          >
-            {edition === 'answerOnly' ? <PaperCheck size={16} /> : <PaperStudent size={16} />} 下载 PDF（{PAPER_PDF_PRODUCTS[edition]}）
-          </button>
-          <span className="draft-export-menu-divider" role="separator" />
-          <button
-            type="button"
-            role="menuitem"
-            disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'}
-            onClick={() => {
-              setExportMenuOpen(false)
-              void exportPdf('save-as')
-            }}
-          >
-            <Save size={16} /> 另存为 PDF…
-          </button>
-          <button
-            type="button"
-            role="menuitem"
-            disabled={draftPaper.items.length === 0 || spaceStatus === 'saving'}
-            onClick={() => {
-              setExportMenuOpen(false)
-              // The menu item unmounts; restore focus to the persistent trigger.
-              exportMenuRef.current?.querySelector<HTMLButtonElement>('.draft-export-menu-trigger')?.focus()
-              void openSpaceDialog()
-            }}
-          >
-            <Archive size={16} /> 保存 PDF 到个人空间
-          </button>
-        </FluidHoverList>
-      )}
-    </div>
+    <Menu
+      label="导出"
+      triggerText="导出"
+      triggerTone="primary"
+      triggerSize="md"
+      className="draft-export-menu-panel"
+      items={[
+        {
+          key: 'download',
+          label: `下载 PDF（${PAPER_PDF_PRODUCTS[edition]}）`,
+          icon: edition === 'answerOnly' ? <PaperCheck size={16} /> : <PaperStudent size={16} />,
+          disabled: exportBlocked,
+          onSelect: () => void exportPdf(),
+        },
+        { key: 'sep', separator: true },
+        { key: 'save-as', label: '另存为 PDF…', icon: <Save size={16} />, disabled: exportBlocked, onSelect: () => void exportPdf('save-as') },
+        {
+          key: 'space',
+          label: '保存 PDF 到个人空间',
+          icon: <Archive size={16} />,
+          disabled: draftPaper.items.length === 0 || spaceStatus === 'saving',
+          onSelect: () => void openSpaceDialog(),
+        },
+      ]}
+    />
   )
 
   const pagesMetaText = draftPaper.printForm === 'a3'
@@ -1509,19 +1466,19 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         <>
           {/* Low-frequency document fields remain in More; save status stays by the title. */}
           <div className="draft-more-menu" ref={moreMenuRef}>
-            <button
-              type="button"
+            <Button
+              tone="subtle"
+              size="sm"
+              icon={<Ellipsis size={16} />}
               // CR SW-1: save errors must stay visible with the menu closed —
               // the trigger wears a danger dot while saveStatus is 'error'.
               className={`draft-more-menu-trigger${saveStatus === 'error' ? ' has-save-error' : ''}`}
               aria-expanded={moreMenuOpen}
               aria-controls="draft-more-information"
-              aria-label={saveStatus === 'error' ? `草稿卷更多信息（保存出错：${saveError}）` : '草稿卷更多信息'}
+              label={saveStatus === 'error' ? `草稿卷更多信息（保存出错：${saveError}）` : '草稿卷更多信息'}
               title={saveStatus === 'error' ? `保存出错：${saveError}` : '学生 / 最近草稿卷'}
               onClick={() => setMoreMenuOpen((open) => !open)}
-            >
-              <Ellipsis size={16} />
-            </button>
+            />
             {moreMenuPresence.mounted && (
               <div id="draft-more-information" className="draft-more-menu-panel" role="group" aria-label="草稿卷更多信息" data-visible={moreMenuPresence.visible} inert={!moreMenuOpen}>
                 <label className="draft-student-field">
@@ -1661,7 +1618,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 <div className="draft-a4-empty is-blank">
                   <EmptyIllustration kind="board-list" />
                   <p>还没有题组。在找题结果里点「加入草稿卷」，题就会排进这张纸。</p>
-                  <button type="button" className="draft-a4-empty-cta" onClick={onBackToWorkbench}>去找题</button>
+                  <Button tone="primary" size="lg" className="draft-a4-empty-cta" onClick={onBackToWorkbench}>去找题</Button>
                 </div>
               ) : previewHtml ? (
                 <>
@@ -1769,87 +1726,28 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       <span className="draft-group-actions-label">换篇</span>
                     </button>
                   )}
-                  <div
-                    className="draft-group-actions-menu"
-                    onBlur={(event) => {
-                      if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-                        setOpenGroupActionsItemId(null)
-                      }
-                    }}
-                    onKeyDown={(event) => {
-                      if (event.key === 'Escape') {
-                        setOpenGroupActionsItemId(null)
-                        event.currentTarget.querySelector<HTMLButtonElement>('.draft-group-actions-menu-trigger')?.focus()
-                      }
-                    }}
-                  >
-                    <button
-                      type="button"
-                      className="draft-group-actions-menu-trigger"
-                      aria-label="更多题组操作"
-                      title="更多题组操作"
-                      aria-expanded={openGroupActionsItemId === item.id}
-                      aria-controls={`draft-group-actions-${item.id}`}
-                      onClick={() => setOpenGroupActionsItemId((openId) => openId === item.id ? null : item.id)}
-                    >
-                      <Ellipsis size={16} aria-hidden="true" />
-                    </button>
-                    {openGroupActionsItemId === item.id && (
-                      <div
-                        id={`draft-group-actions-${item.id}`}
-                        className="draft-group-actions-menu-panel"
-                        role="group"
-                        aria-label="题组操作"
-                      >
-                        <button
-                          type="button"
-                          disabled={fullIndex <= 0}
-                          onClick={() => {
-                            setOpenGroupActionsItemId(null)
-                            moveItem(item.id, -1)
-                          }}
-                        >
-                          <ArrowUp size={16} aria-hidden="true" />
-                          上移
-                        </button>
-                        <button
-                          type="button"
-                          disabled={fullIndex >= draftPaper.items.length - 1}
-                          onClick={() => {
-                            setOpenGroupActionsItemId(null)
-                            moveItem(item.id, 1)
-                          }}
-                        >
-                          <ArrowDown size={16} aria-hidden="true" />
-                          下移
-                        </button>
-                        {canPageBreakBefore && (
-                          <button
-                            type="button"
-                            aria-pressed={item.pageBreakBefore}
-                            onClick={() => {
-                              setOpenGroupActionsItemId(null)
-                              void togglePageBreak(item, !item.pageBreakBefore)
-                            }}
-                          >
-                            <PageBreak size={16} aria-hidden="true" />
-                            {item.pageBreakBefore ? '取消分页' : '前置分页'}
-                          </button>
-                        )}
-                        <button
-                          type="button"
-                          className="danger"
-                          onClick={() => {
-                            setOpenGroupActionsItemId(null)
-                            void deleteItem(item)
-                          }}
-                        >
-                          <Trash size={16} aria-hidden="true" />
-                          移除
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                  {/* 构件厂第 4 步：题组「⋯」换成 shared-ui/Menu。面板挂到 body 上，不再被工具条
+                      的层级和纸面裁住；↑ ↓ 在项之间走。「前置分页 / 取消分页」原来是带
+                      aria-pressed 的开关键，菜单项没有按下态，靠字本身翻转说明当前状态。 */}
+                  <Menu
+                    label="更多题组操作"
+                    triggerTone="strong"
+                    triggerSize="md"
+                    items={[
+                      { key: 'up', label: '上移', icon: <ArrowUp size={16} aria-hidden="true" />, disabled: fullIndex <= 0, onSelect: () => moveItem(item.id, -1) },
+                      { key: 'down', label: '下移', icon: <ArrowDown size={16} aria-hidden="true" />, disabled: fullIndex >= draftPaper.items.length - 1, onSelect: () => moveItem(item.id, 1) },
+                      ...(canPageBreakBefore
+                        ? [{
+                            key: 'page-break',
+                            label: item.pageBreakBefore ? '取消分页' : '前置分页',
+                            icon: <PageBreak size={16} aria-hidden="true" />,
+                            onSelect: () => void togglePageBreak(item, !item.pageBreakBefore),
+                          }]
+                        : []),
+                      { key: 'sep', separator: true },
+                      { key: 'remove', label: '移除', tone: 'danger', icon: <Trash size={16} aria-hidden="true" />, onSelect: () => void deleteItem(item) },
+                    ]}
+                  />
                 </div>
               )
             })}

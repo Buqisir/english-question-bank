@@ -9,7 +9,7 @@ export async function login(page, base) {
   await page.locator('#login-username').fill(OWNER.username); await page.locator('#login-password').fill(OWNER.password)
   await page.locator('.login-submit').click(); await page.locator('.login-card').waitFor({ state: 'detached', timeout: 30000 }); await settle(page, 600)
 }
-async function addDraftItems(page) {
+export async function addDraftItems(page) {
   return page.evaluate(async () => {
     let d = await (await fetch('/api/draft-papers/current?create=1')).json()
     if ((d.draftPaper?.items || []).length < 3) {
@@ -57,9 +57,9 @@ export const SCENARIOS = [
   { id: 'draft', mainline: true, go: async (p, b, ctx) => { ctx.items = await addDraftItems(p); await suggestRoutes(p, ctx.items); await p.goto(b + '/?view=draft-paper'); await p.locator('.draft-reorder-suggestion').waitFor({ timeout: 120000 }); await settle(p, 1500) } },
   { id: 'draft-decided', mainline: true, go: async (p) => { await p.locator('.draft-reorder-suggestion-act').click(); await sleep(1200) } },
   { id: 'draft-group-actions', mainline: true, go: async (p) => { const t = p.locator('[aria-label="更多题组操作"]').first(); await t.waitFor({ timeout: 150000 }); await t.click({ timeout: 8000 }); await sleep(500) } },
-  { id: 'draft-export-menu', mainline: true, go: async (p) => { await p.keyboard.press('Escape'); await p.locator('.draft-export-menu-trigger').click({ timeout: 8000 }); await sleep(500) } },
+  { id: 'draft-export-menu', mainline: true, go: async (p) => { await p.keyboard.press('Escape'); await p.locator('header.topbar').getByRole('button', { name: '导出', exact: true }).click({ timeout: 8000 }); await sleep(500) } },
   { id: 'draft-more-menu', mainline: true, go: async (p) => { await p.keyboard.press('Escape'); await p.locator('.draft-more-menu-trigger').first().click({ timeout: 8000 }); await sleep(500) } },
-  { id: 'draft-space-dialog', mainline: false, go: async (p) => { await p.keyboard.press('Escape'); await p.locator('.draft-export-menu-trigger').click(); await sleep(300); await clickText(p, /个人空间/); await sleep(1500) } },
+  { id: 'draft-space-dialog', mainline: false, go: async (p) => { await p.keyboard.press('Escape'); await p.locator('header.topbar').getByRole('button', { name: '导出', exact: true }).click(); await sleep(300); await clickText(p, /个人空间/); await sleep(1500) } },
   { id: 'draft-saved', mainline: false, go: async (p) => { await p.locator('.draft-save-space-dialog button[type=submit]').click({ timeout: 8000 }); await p.locator('.draft-save-space-dialog').waitFor({ state: 'detached', timeout: 150000 }); await sleep(800) } },
   { id: 'draft-removed-toast', mainline: true, go: async (p) => { await p.keyboard.press('Escape'); const t = p.locator('[aria-label="更多题组操作"]').first(); await t.waitFor({ timeout: 150000 }); await t.click(); await sleep(300); await clickText(p, /移除/); await p.locator('.draft-undo-toast[data-visible="true"]').first().waitFor({ timeout: 15000 }); await sleep(600) } },
   { id: 'my-space', mainline: false, go: async (p, b) => { await p.unrouteAll({ behavior: 'ignoreErrors' }); await p.goto(b + '/?view=my-space'); await settle(p, 2000) } },

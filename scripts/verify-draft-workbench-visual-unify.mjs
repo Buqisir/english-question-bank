@@ -17,7 +17,8 @@
  *      a literal hex (D3 — page-base token).
  *   4. The export menu is no longer a native `<details>`/`<summary>` (D5) —
  *      it is a custom floating panel wired for aria-expanded, outside-click
- *      dismiss, and Escape dismiss.
+ *      dismiss, and Escape dismiss. Since 构件厂第 4 步 (2026-11-13) that
+ *      panel is the shared `app/src/shared-ui/Menu.tsx`; the checks read it.
  *   5. The save-space dialog's primary "保存" action opts into the shared
  *      `.primary-button` accent treatment (D2), and the generic ghost-button
  *      selector explicitly excludes it so specificity doesn't clobber it.
@@ -120,38 +121,49 @@ assert(
   !/<summary[\s>]/.test(tsxSrcNoLineComments),
   '<summary found — export menu still native',
 )
+// 构件厂第 4 步（2026-11-13）：导出菜单换成 shared-ui/Menu，aria-expanded、Esc 关、点外面关、
+// 贴右边、e3 影子、宽度不出屏都由构件给，这里改成核对「用的是 Menu」和构件里的这几条。
+const MENU_TSX_REL = 'app/src/shared-ui/Menu.tsx'
+const MENU_CSS_REL = 'app/src/shared-ui/menu.css'
+const menuTsxSrc = readSrc(MENU_TSX_REL)
+const menuCssSrc = readSrc(MENU_CSS_REL)
 assert(
-  'export menu trigger has aria-expanded wired to open state',
-  /aria-expanded=\{exportMenuOpen\}/.test(tsxSrc),
-  'aria-expanded={exportMenuOpen} not found on trigger',
+  'export menu is the shared Menu component',
+  /const exportMenuControl = \(\s*<Menu\b/.test(tsxSrc) && /label="导出"/.test(tsxSrc),
+  'exportMenuControl is not a <Menu label="导出">',
 )
 assert(
-  'export menu closes on Escape',
-  /event\.key === 'Escape'/.test(tsxSrc) && /setExportMenuOpen\(false\)/.test(tsxSrc),
+  'Menu trigger has aria-expanded wired to open state',
+  /'aria-expanded':\s*open/.test(menuTsxSrc),
+  `'aria-expanded': open not found in ${MENU_TSX_REL}`,
+)
+assert(
+  'Menu closes on Escape',
+  /event\.key === 'Escape'/.test(menuTsxSrc),
   'Escape-dismiss wiring not found',
 )
 assert(
-  'export menu closes on outside click (ref containment check)',
-  /exportMenuRef\.current\s*&&\s*!exportMenuRef\.current\.contains\(/.test(tsxSrc),
+  'Menu closes on outside click (ref containment check)',
+  /menuRef\.current\?\.contains\(target\)/.test(menuTsxSrc),
   'outside-click dismiss wiring not found',
 )
+assert(
+  'Menu is right-anchored to its trigger by default (align end)',
+  /align = 'end'/.test(menuTsxSrc) && /align === 'end' \? rect\.right - width/.test(menuTsxSrc),
+  'right anchoring not found',
+)
 
-const exportPanelBlockMatch = cssSrc.match(/\.draft-export-menu-panel\s*\{([^}]*)\}/)
-assert('.draft-export-menu-panel rule block found', Boolean(exportPanelBlockMatch), 'selector not found')
-if (exportPanelBlockMatch) {
-  const block = exportPanelBlockMatch[1]
+const menuBlockMatch = menuCssSrc.match(/\.eqb-menu\s*\{([^}]*)\}/)
+assert('.eqb-menu rule block found', Boolean(menuBlockMatch), 'selector not found')
+if (menuBlockMatch) {
+  const block = menuBlockMatch[1]
   assert(
-    '.draft-export-menu-panel has a Floating-tier box-shadow',
-    /box-shadow\s*:/.test(block),
+    '.eqb-menu has a Floating-tier box-shadow',
+    /box-shadow\s*:\s*var\(--elev-3\)/.test(block),
     `block: ${block.trim()}`,
   )
   assert(
-    '.draft-export-menu-panel is right-anchored to its trigger (right: 0)',
-    /right\s*:\s*0\b/.test(block),
-    `block: ${block.trim()}`,
-  )
-  assert(
-    '.draft-export-menu-panel clamps its width to the viewport (no unbounded overflow)',
+    '.eqb-menu clamps its width to the viewport (no unbounded overflow)',
     /max-width\s*:\s*calc\(100vw/.test(block),
     `block: ${block.trim()}`,
   )

@@ -104,7 +104,8 @@ async function scenario(kind, switchPath, timing) {
     await page.getByRole('button', { name: '更多题组操作', exact: true }).first().waitFor()
     if (kind === 'delete') {
       await page.getByRole('button', { name: '更多题组操作', exact: true }).first().click()
-      await page.getByRole('button', { name: '移除', exact: true }).click()
+      // 构件厂第 4 步：题组「⋯」换成 shared-ui/Menu，「移除」是 menuitem。
+      await page.getByRole('menuitem', { name: '移除', exact: true }).click()
     }
     if (kind === 'reorder') await page.locator('.draft-reorder-suggestion-act').click()
     if (kind === 'replace') {

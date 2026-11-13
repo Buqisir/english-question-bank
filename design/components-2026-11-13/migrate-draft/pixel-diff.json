@@ -1,0 +1,276 @@
+{
+ "draft-390.png": {
+  "pixels": 1270,
+  "bbox_2x": [
+   55,
+   124,
+   194,
+   188
+  ]
+ },
+ "draft.png": {
+  "pixels": 11312,
+  "bbox_2x": [
+   1165,
+   14,
+   1980,
+   85
+  ]
+ },
+ "empty-390.png": {
+  "pixels": 2545,
+  "bbox_2x": [
+   55,
+   124,
+   424,
+   992
+  ]
+ },
+ "empty-cta-focus.png": {
+  "size": [
+   [
+    238,
+    168
+   ],
+   [
+    222,
+    168
+   ]
+  ]
+ },
+ "empty-cta-hover.png": {
+  "size": [
+   [
+    238,
+    168
+   ],
+   [
+    222,
+    168
+   ]
+  ]
+ },
+ "empty.png": {
+  "pixels": 12587,
+  "bbox_2x": [
+   1165,
+   14,
+   1980,
+   824
+  ]
+ },
+ "export-menu-390.png": {
+  "size": [
+   [
+    576,
+    502
+   ],
+   [
+    462,
+    362
+   ]
+  ]
+ },
+ "export-menu-item-hover-390.png": {
+  "size": [
+   [
+    576,
+    502
+   ],
+   [
+    462,
+    362
+   ]
+  ]
+ },
+ "export-menu-item-hover.png": {
+  "size": [
+   [
+    576,
+    422
+   ],
+   [
+    478,
+    346
+   ]
+  ]
+ },
+ "export-menu-keyboard-390.png": {
+  "size": [
+   [
+    576,
+    502
+   ],
+   [
+    462,
+    362
+   ]
+  ]
+ },
+ "export-menu-keyboard.png": {
+  "size": [
+   [
+    576,
+    342
+   ],
+   [
+    478,
+    346
+   ]
+  ]
+ },
+ "export-menu.png": {
+  "size": [
+   [
+    576,
+    422
+   ],
+   [
+    478,
+    346
+   ]
+  ]
+ },
+ "group-menu-390.png": {
+  "size": [
+   [
+    372,
+    508
+   ],
+   [
+    368,
+    462
+   ]
+  ]
+ },
+ "group-menu-item-hover-390.png": {
+  "size": [
+   [
+    372,
+    508
+   ],
+   [
+    368,
+    462
+   ]
+  ]
+ },
+ "group-menu-item-hover.png": {
+  "size": [
+   [
+    396,
+    448
+   ],
+   [
+    400,
+    402
+   ]
+  ]
+ },
+ "group-menu-keyboard-390.png": {
+  "size": [
+   [
+    372,
+    508
+   ],
+   [
+    368,
+    462
+   ]
+  ]
+ },
+ "group-menu-keyboard.png": {
+  "size": [
+   [
+    396,
+    448
+   ],
+   [
+    400,
+    402
+   ]
+  ]
+ },
+ "group-menu.png": {
+  "size": [
+   [
+    396,
+    448
+   ],
+   [
+    400,
+    402
+   ]
+  ]
+ },
+ "more-open-390.png": {
+  "pixels": 2267,
+  "bbox_2x": [
+   34,
+   28,
+   190,
+   92
+  ]
+ },
+ "more-open.png": {
+  "pixels": 3593,
+  "bbox_2x": [
+   30,
+   23,
+   504,
+   420
+  ]
+ },
+ "strip-390.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "strip-more-hover-390.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "strip-more-hover.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "strip.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "topbar-390.png": {
+  "pixels": 1270,
+  "bbox_2x": [
+   55,
+   124,
+   194,
+   188
+  ]
+ },
+ "topbar-more-hover-390.png": {
+  "pixels": 10729,
+  "bbox_2x": [
+   38,
+   124,
+   394,
+   188
+  ]
+ },
+ "topbar-more-hover.png": {
+  "pixels": 21080,
+  "bbox_2x": [
+   1148,
+   14,
+   2180,
+   85
+  ]
+ },
+ "topbar.png": {
+  "pixels": 11312,
+  "bbox_2x": [
+   1165,
+   14,
+   1980,
+   85
+  ]
+ }
+}

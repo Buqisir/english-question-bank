@@ -91,6 +91,13 @@
   background: var(--eqb-color-desk);
 }
 
+/* 打开着的触发键（菜单、弹出面板开着时 aria-expanded=true）：保持悬停的样子——桌色底、墨字，
+ * 让人看得出面板是从哪里出来的（原草稿卷两个「⋯」键就是这样，构件厂第 4 步收进构件）。 */
+.eqb-button:is([data-tone='quiet'], [data-tone='subtle'], [data-tone='strong'])[aria-expanded='true'] {
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
+}
+
 /* 雾薄荷主键：每页一处（DESIGN.md §2 Accent）。 */
 .eqb-button[data-tone='primary'] {
   background: var(--eqb-color-accent-fill);

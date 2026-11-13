@@ -45,10 +45,9 @@
    they held (title, student, recent-drafts, save-status, version toggle,
    export menu) now live in AppTopbar's actionsSlot / "⋯" menu (see
    DraftPaperWorkbench.tsx). Their own field/control CSS below
-   (.draft-title-field 起 .draft-export-menu-panel 止) is reused verbatim in
+   (.draft-title-field 起 .draft-more-menu-panel 止) is reused verbatim in
    the new location, only the container it sat in is gone. */
 
-.draft-export-menu-panel button,
 .draft-outline-actions button,
 .draft-suggestions button,
 .draft-undo-toast button,
@@ -66,11 +65,6 @@
   gap: 6px;
   min-height: 34px;
   padding: 7px 10px;
-}
-
-.draft-export-menu-panel button:disabled {
-  color: var(--muted);
-  cursor: not-allowed;
 }
 
 /* workbench-header-unify: .draft-title-field itself retired — the title
@@ -199,129 +193,37 @@
   font-weight: 500;
 }
 
-/* D5: custom floating export menu replacing native <details>/<summary> —
-   anchored to the trigger's right edge so the panel never grows past the
-   viewport's right side, with a Floating-tier shadow per DESIGN.md. */
-.draft-export-menu {
-  position: relative;
-}
+/* 构件厂第 4 步（2026-11-13，提案 · 单一来源）：「导出」触发键和菜单面板换成
+   shared-ui/Button（primary）和 shared-ui/Menu，样子全由 button.css / menu.css 定；
+   原来这里的 .draft-export-menu(-trigger/-panel/-divider) 规则删掉。
+   面板上留着 .draft-export-menu-panel 这个类名，只给脚本认，不挂样式。 */
 
-.draft-export-menu-trigger {
-  align-items: center;
-  background: var(--eqb-color-accent-fill);
-  border-radius: 8px;
-  color: var(--eqb-color-accent-fill-ink);
-  display: inline-flex;
-  gap: 6px;
-  min-height: 32px;
-  padding: 0 14px;
-  font-size: 13px;
-  font-weight: 600;
-  transition: background var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
-}
-
-.draft-export-menu-trigger:hover:not(:disabled) {
-  background: var(--eqb-color-accent-fill-hover);
-}
-
-/* emil-processing: press feedback for the export trigger. */
-.draft-export-menu-trigger:active:not(:disabled) {
-  transform: scale(0.97);
-}
-
-/* 复评工艺账 keyframe→transition：入退同轴（data-visible + usePresence
-   延迟卸载），退出（本规则 motion-micro）快于入场（[data-visible='true']
-   覆盖成 motion-fast）。Origin sits at the trigger's right edge (panel is
-   right-anchored via `right: 0`). */
-.draft-export-menu-panel {
-  --fh-radius: 8px;
-  opacity: 0;
-  transform: translateY(-2px) scale(0.98);
-  transition: opacity var(--motion-micro) var(--ease-out), transform var(--motion-micro) var(--ease-out);
-  background: var(--panel);
-  border: 0;
-  border-radius: 12px;
-  box-shadow: var(--elev-3);
-  display: grid;
-  gap: 2px;
-  margin-top: 6px;
-  max-width: calc(100vw - 32px);
-  min-width: 256px;
-  padding: 8px;
-  position: absolute;
-  right: 0;
-  top: 100%;
-  transform-origin: top right;
-  z-index: 20;
-}
-
-.draft-export-menu-panel[data-visible='true'] {
-  opacity: 1;
-  transform: scale(1);
-  transition-duration: var(--motion-fast);
-}
-
-.draft-export-menu-panel button {
-  background: transparent;
-  border: 0;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 400;
-  gap: 9px;
-  justify-content: flex-start;
-  min-height: 38px;
-  position: relative;
-  padding: 0 10px;
-  white-space: nowrap;
-  width: 100%;
-}
-
-.draft-export-menu-panel button:first-of-type {
-  font-weight: 500;
-}
-
-.draft-export-menu-divider {
-  background: var(--line);
-  height: 1px;
-  margin: 6px 10px;
-}
-
-/* workbench-header-unify Locked Decision 2: the "⋯" menu — same floating-
-   panel chrome/entrance as .draft-export-menu(-panel) above (D5 convention),
-   holding form fields instead of menuitem buttons. */
+/* workbench-header-unify Locked Decision 2: the "⋯" menu — floating-panel
+   chrome/entrance from the D5 export menu convention, holding form fields
+   instead of menuitem buttons (so it stays its own panel, not shared-ui/Menu). */
 .draft-more-menu {
   position: relative;
 }
 
-.draft-more-menu-trigger {
-  align-items: center;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  color: var(--muted);
-  cursor: pointer;
-  display: inline-flex;
-  justify-content: center;
-  min-height: 28px;
-  min-width: 28px;
-  padding: 0;
-  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
-}
-
-.draft-more-menu-trigger:hover,
-.draft-more-menu-trigger[aria-expanded='true'] {
-  background: var(--surface-strong);
-  color: var(--ink-strong);
-}
+/* 构件厂第 4 步：触发键换成 shared-ui/Button（subtle、sm、只有图标），大小、颜色、悬停、
+   打开时的底都由 button.css 定。 */
 
 /* workbench-header-unify CR SW-1: autosave/save errors must not go silent
    now that save-status lives inside the "⋯" panel — while saveStatus is
    'error' the trigger wears a danger dot + border so the failure is
    visible without opening the menu. */
 .draft-more-menu-trigger.has-save-error {
-  border-color: var(--eqb-color-danger);
-  color: var(--eqb-color-danger);
   position: relative;
+}
+
+/* 显式层叠：Button 自己是 border: 0，次要灰字悬停 / 焦点 / 打开时提到墨色
+   （button.css `.eqb-button[data-tone='subtle']:hover:not(…)` 等，特异度 0,4,0）。
+   出错时这枚键要一直是危险色加一圈危险色边，所以这里加上 .eqb-button[data-tone]
+   把特异度抬到 0,5,0 压过它们。边框 1px 在 border-box 里，键仍是 28×28。 */
+.eqb-button[data-tone].draft-more-menu-trigger.has-save-error,
+.eqb-button[data-tone].draft-more-menu-trigger.has-save-error:is(:hover, :focus-visible, [aria-expanded='true']) {
+  border: 1px solid var(--eqb-color-danger);
+  color: var(--eqb-color-danger);
 }
 
 .draft-more-menu-trigger.has-save-error::after {
@@ -352,7 +254,7 @@
   top: 100%;
   transform-origin: top right;
   z-index: 20;
-  /* 复评工艺账：同 .draft-export-menu-panel 的入退对称制 */
+  /* 复评工艺账：入退对称制（原先和 D5 导出菜单面板同一套；导出菜单已换成 Menu） */
   opacity: 0;
   transform: translateY(-2px) scale(0.98);
   transition: opacity var(--motion-micro) var(--ease-out), transform var(--motion-micro) var(--ease-out);
@@ -655,19 +557,8 @@
   text-align: center;
 }
 .draft-a4-empty.is-blank p { margin: 0; max-width: 26em; }
-.draft-a4-empty-cta {
-  background: var(--eqb-color-accent-fill);
-  border: 0;
-  border-radius: 8px;
-  color: var(--eqb-color-accent-fill-ink);
-  cursor: pointer;
-  font: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  min-height: 36px;
-  padding: 0 16px;
-}
-.draft-a4-empty-cta:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+/* 构件厂第 4 步：「去找题」换成 shared-ui/Button（primary、lg），原来这里的
+   .draft-a4-empty-cta 规则删掉，类名留着给脚本认。 */
 
 /* One persistent tool strip per group. Its paper-relative anchor stays stable
    while scrolling; wide A4 places the strip on the desk outside the paper. */
@@ -687,7 +578,11 @@
   z-index: 5;
 }
 
-.draft-group-actions button {
+/* 构件厂第 4 步：题组「⋯」换成 shared-ui/Menu 后，它的触发键（.eqb-button）也在这条
+   工具条里。下面这些宽泛的 `.draft-group-actions button` 规则只管还没换的「换篇」开关键和
+   分页小签，所以都加了 :where(:not(.eqb-button))——:where 不加特异度，原来压人和被压的
+   关系（比如 .draft-group-actions .draft-group-suggestion 压过这里）一条不变。 */
+.draft-group-actions button:where(:not(.eqb-button)) {
   align-items: center;
   background: transparent;
   border: 0;
@@ -700,21 +595,21 @@
   width: 32px;
 }
 
-.draft-group-actions button:hover:not(:disabled) {
+.draft-group-actions button:where(:not(.eqb-button)):hover:not(:disabled) {
   background: var(--surface-strong);
   color: var(--ink);
 }
 
-.draft-group-actions button:active {
+.draft-group-actions button:where(:not(.eqb-button)):active {
   transform: scale(0.94);
 }
 
-.draft-group-actions button[aria-pressed='true'] {
+.draft-group-actions button:where(:not(.eqb-button))[aria-pressed='true'] {
   background: var(--surface-strong);
   color: var(--ink);
 }
 
-.draft-group-actions > button:not(.draft-group-suggestion) {
+.draft-group-actions > button:not(.draft-group-suggestion, .eqb-button) {
   gap: 6px;
   min-width: 66px;
   padding: 0 7px;
@@ -733,7 +628,7 @@
   padding: 2px;
 }
 
-.draft-paper-col.is-a3 .draft-group-actions > button:not(.draft-group-suggestion) {
+.draft-paper-col.is-a3 .draft-group-actions > button:not(.draft-group-suggestion, .eqb-button) {
   min-width: 32px;
   padding: 0;
   width: 32px;
@@ -741,10 +636,6 @@
 
 .draft-paper-col.is-a3 .draft-group-actions-label {
   display: none;
-}
-
-.draft-group-actions button.danger:hover {
-  color: var(--eqb-color-danger);
 }
 
 /* The optional page-break hint sits above the strip, without shifting the
@@ -1116,7 +1007,7 @@
 /* workbench-header-unify Locked Decision 5 窄屏退化补充: ≤980px 时 A4/A3
    与版本切换一并被「⋯」吸收——hide the wide-row toggle mounts, reveal their
    .draft-more-menu-narrow-controls twins inside the "⋯" panel instead.
-   导出 (.draft-export-menu) is never touched here — always visible. */
+   导出 (shared-ui/Menu 的触发键) is never touched here — always visible. */
 @media (max-width: 980px) {
   .draft-topbar-wide-toggle {
     display: none;
@@ -1148,7 +1039,7 @@
     padding: 2px;
   }
 
-  .draft-paper-col:not(.is-a3) .draft-group-actions > button:not(.draft-group-suggestion) {
+  .draft-paper-col:not(.is-a3) .draft-group-actions > button:not(.draft-group-suggestion, .eqb-button) {
     min-width: 32px;
     padding: 0;
     width: 32px;
@@ -1186,56 +1077,17 @@
   }
 }
 
-.draft-group-actions-menu {
-  position: relative;
-}
-
-.draft-group-actions button:focus-visible,
-.draft-group-actions-menu-trigger:focus-visible {
+.draft-group-actions button:where(:not(.eqb-button)):focus-visible {
   outline: 2px solid var(--action);
   outline-offset: 2px;
 }
 
-.draft-group-actions-menu-trigger[aria-expanded='true'] {
-  background: var(--surface-strong);
-  color: var(--ink);
-}
-
-.draft-group-actions-menu-panel {
-  background: var(--panel);
-  border: 0;
-  border-radius: 12px;
-  box-shadow: var(--elev-3);
-  display: grid;
-  gap: 3px;
-  min-width: 150px;
-  padding: 6px;
-  position: absolute;
-  left: auto;
-  right: 0;
-  top: calc(100% + 10px);
-}
-
-.draft-group-actions .draft-group-actions-menu-panel button {
-  box-shadow: none;
-  gap: 8px;
-  height: 36px;
-  justify-content: flex-start;
-  padding: 0 10px;
-  width: 100%;
-}
-
-.draft-group-actions .draft-group-actions-menu-panel button:disabled {
-  color: var(--muted);
-  cursor: default;
-  opacity: 0.45;
-}
-
-.draft-group-actions .draft-group-actions-menu-panel button.danger {
-  border-radius: 0 0 8px 8px;
-  border-top: 1px solid var(--line);
-  color: var(--eqb-color-danger);
-  margin-top: 4px;
+/* 显式层叠：题组「⋯」是 shared-ui/Button（strong、md、32×32），本身 8px 圆角；在这条
+   8px 圆角、4px 内边距的工具条里按 DESIGN.md §5 同心规则改成 4px（和旁边「换篇」键一样）。
+   .draft-group-actions .eqb-button（0,2,0）压过 button.css 的 .eqb-button（0,1,0）。
+   原来的 .draft-group-actions-menu(-trigger/-panel) 规则随菜单换成 Menu 一起删掉。 */
+.draft-group-actions .eqb-button {
+  border-radius: 4px;
 }
 
 @media (max-width: 560px) {
@@ -1255,13 +1107,11 @@
     flex: 1;
   }
 
-  .draft-more-menu,
-  .draft-export-menu {
+  .draft-more-menu {
     position: static;
   }
 
-  .draft-more-menu-panel,
-  .draft-export-menu-panel {
+  .draft-more-menu-panel {
     left: 0;
     right: auto;
     max-width: 100%;
@@ -1282,10 +1132,5 @@
 
   .draft-paper-col:not(.is-a3) .draft-group-actions {
     right: -111px;
-  }
-
-  .draft-paper-col:not(.is-a3) .draft-group-actions-menu-panel {
-    left: -78px;
-    right: auto;
   }
 }

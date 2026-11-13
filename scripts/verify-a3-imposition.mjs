@@ -569,7 +569,8 @@ async function runPhaseB(browser) {
       { timeout: 10_000 },
     )
     await firstGroupActions.getByRole('button', { name: '更多题组操作' }).click()
-    await firstGroupActions.getByRole('button', { name: '下移' }).click()
+    // 构件厂第 4 步：题组「⋯」换成 shared-ui/Menu，面板挂在 body 上、项是 menuitem，不在工具条里找。
+    await page.getByRole('menuitem', { name: '下移', exact: true }).click()
     const reorderResponse = await reorderMutation
     assert('real click on 下移 menu action in A3 mode triggers a successful PATCH', reorderResponse.ok(), String(reorderResponse.status()))
     await waitForRevisedA3Preview(reorderPatch, reorderDeadline)
