@@ -1,0 +1,576 @@
+[
+ {
+  "tier": "P1",
+  "kind": "button",
+  "job": "去别的页（导航）",
+  "sites": 14,
+  "pages": 29,
+  "count": 122,
+  "mainlinePages": 14,
+  "variants": [
+   "button-03",
+   "button-07",
+   "button-01",
+   "button-32",
+   "button-05",
+   "button-18",
+   "button-25",
+   "button-27",
+   "button-22",
+   "button-10",
+   "button-37",
+   "button-13",
+   "button-38",
+   "button-19"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "notice",
+  "job": "说明",
+  "sites": 6,
+  "pages": 15,
+  "count": 24,
+  "mainlinePages": 11,
+  "variants": [
+   "notice-01",
+   "notice-03",
+   "notice-04",
+   "notice-06",
+   "notice-07",
+   "notice-02"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "button",
+  "job": "展开 / 收起 / 更多",
+  "sites": 5,
+  "pages": 15,
+  "count": 42,
+  "mainlinePages": 11,
+  "variants": [
+   "button-21",
+   "button-04",
+   "button-24",
+   "button-09",
+   "button-02",
+   "button-10"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "button",
+  "job": "导出 / 存 PDF",
+  "sites": 5,
+  "pages": 11,
+  "count": 13,
+  "mainlinePages": 7,
+  "variants": [
+   "button-11",
+   "button-13",
+   "button-26",
+   "button-10"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "dialog",
+  "job": "菜单",
+  "sites": 5,
+  "pages": 5,
+  "count": 5,
+  "mainlinePages": 4,
+  "variants": [
+   "dialog-03",
+   "dialog-01",
+   "dialog-02",
+   "dialog-04"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "button",
+  "job": "登录 / 退出",
+  "sites": 2,
+  "pages": 30,
+  "count": 30,
+  "mainlinePages": 14,
+  "variants": [
+   "button-29",
+   "button-03",
+   "button-01",
+   "button-19"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "field",
+  "job": "搜索",
+  "sites": 2,
+  "pages": 5,
+  "count": 5,
+  "mainlinePages": 4,
+  "variants": [
+   "field-08",
+   "field-05",
+   "field-09",
+   "field-11"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "field",
+  "job": "下拉选择",
+  "sites": 4,
+  "pages": 10,
+  "count": 11,
+  "mainlinePages": 7,
+  "variants": [
+   "field-01",
+   "field-02",
+   "field-10"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "surface",
+  "job": "底色分区",
+  "sites": 3,
+  "pages": 13,
+  "count": 13,
+  "mainlinePages": 10,
+  "variants": [
+   "surface-07",
+   "surface-03",
+   "surface-01"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "surface",
+  "job": "放在桌上的一张纸",
+  "sites": 3,
+  "pages": 6,
+  "count": 7,
+  "mainlinePages": 6,
+  "variants": [
+   "surface-02",
+   "surface-04",
+   "surface-05"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "button",
+  "job": "筛选 / 分页签",
+  "sites": 5,
+  "pages": 5,
+  "count": 8,
+  "mainlinePages": 4,
+  "variants": [
+   "button-17",
+   "button-20"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "button",
+  "job": "清除搜索 / 筛选",
+  "sites": 2,
+  "pages": 4,
+  "count": 5,
+  "mainlinePages": 4,
+  "variants": [
+   "button-15",
+   "button-31"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "button",
+  "job": "采用建议",
+  "sites": 2,
+  "pages": 6,
+  "count": 7,
+  "mainlinePages": 4,
+  "variants": [
+   "button-33",
+   "button-12"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "button",
+  "job": "撤销 / 撤回",
+  "sites": 2,
+  "pages": 6,
+  "count": 6,
+  "mainlinePages": 4,
+  "variants": [
+   "button-14",
+   "button-22"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "button",
+  "job": "加入草稿卷",
+  "sites": 1,
+  "pages": 3,
+  "count": 11,
+  "mainlinePages": 3,
+  "variants": [
+   "button-04",
+   "button-24"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "chip",
+  "job": "去草稿卷（带数量）",
+  "sites": 1,
+  "pages": 3,
+  "count": 3,
+  "mainlinePages": 3,
+  "variants": [
+   "chip-03",
+   "chip-04"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "row",
+  "job": "打开一项（整行可点）",
+  "sites": 2,
+  "pages": 4,
+  "count": 12,
+  "mainlinePages": 4,
+  "variants": [
+   "row-01"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "chip",
+  "job": "状态标记（不可点）",
+  "sites": 1,
+  "pages": 29,
+  "count": 29,
+  "mainlinePages": 14,
+  "variants": [
+   "chip-01"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "button",
+  "job": "改名",
+  "sites": 1,
+  "pages": 9,
+  "count": 9,
+  "mainlinePages": 7,
+  "variants": [
+   "button-08"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "button",
+  "job": "切换版式 / 版本",
+  "sites": 1,
+  "pages": 9,
+  "count": 9,
+  "mainlinePages": 7,
+  "variants": [
+   "button-07"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "button",
+  "job": "跳到某个题组",
+  "sites": 1,
+  "pages": 8,
+  "count": 16,
+  "mainlinePages": 6,
+  "variants": [
+   "button-06"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "button",
+  "job": "搜索",
+  "sites": 1,
+  "pages": 4,
+  "count": 4,
+  "mainlinePages": 4,
+  "variants": [
+   "button-16"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "field",
+  "job": "勾选 / 开关",
+  "sites": 1,
+  "pages": 4,
+  "count": 4,
+  "mainlinePages": 4,
+  "variants": [
+   "field-04"
+  ]
+ },
+ {
+  "tier": "P1",
+  "kind": "button",
+  "job": "换篇",
+  "sites": 1,
+  "pages": 6,
+  "count": 18,
+  "mainlinePages": 4,
+  "variants": [
+   "button-02"
+  ]
+ },
+ {
+  "tier": "P2",
+  "kind": "field",
+  "job": "文字输入",
+  "sites": 8,
+  "pages": 7,
+  "count": 11,
+  "mainlinePages": 1,
+  "variants": [
+   "field-03",
+   "field-02",
+   "field-06",
+   "field-07"
+  ]
+ },
+ {
+  "tier": "P2",
+  "kind": "empty",
+  "job": "还没东西",
+  "sites": 5,
+  "pages": 3,
+  "count": 5,
+  "mainlinePages": 1,
+  "variants": [
+   "empty-01",
+   "empty-03",
+   "empty-02"
+  ]
+ },
+ {
+  "tier": "P2",
+  "kind": "button",
+  "job": "移出 / 删除",
+  "sites": 5,
+  "pages": 4,
+  "count": 5,
+  "mainlinePages": 1,
+  "variants": [
+   "button-35",
+   "button-28",
+   "button-13"
+  ]
+ },
+ {
+  "tier": "P2",
+  "kind": "chip",
+  "job": "筛选 / 切换",
+  "sites": 3,
+  "pages": 1,
+  "count": 3,
+  "mainlinePages": 1,
+  "variants": [
+   "chip-02"
+  ]
+ },
+ {
+  "tier": "P2",
+  "kind": "toast",
+  "job": "带撤销的反馈",
+  "sites": 2,
+  "pages": 2,
+  "count": 2,
+  "mainlinePages": 1,
+  "variants": [
+   "toast-01"
+  ]
+ },
+ {
+  "tier": "P2",
+  "kind": "empty",
+  "job": "加载中（占位文字）",
+  "sites": 1,
+  "pages": 2,
+  "count": 2,
+  "mainlinePages": 2,
+  "variants": [
+   "empty-02"
+  ]
+ },
+ {
+  "tier": "P2",
+  "kind": "button",
+  "job": "打开 / 查看",
+  "sites": 1,
+  "pages": 1,
+  "count": 1,
+  "mainlinePages": 1,
+  "variants": [
+   "button-30"
+  ]
+ },
+ {
+  "tier": "P2",
+  "kind": "empty",
+  "job": "搜了没结果",
+  "sites": 1,
+  "pages": 1,
+  "count": 1,
+  "mainlinePages": 1,
+  "variants": [
+   "empty-01"
+  ]
+ },
+ {
+  "tier": "P2",
+  "kind": "button",
+  "job": "调整顺序",
+  "sites": 1,
+  "pages": 1,
+  "count": 1,
+  "mainlinePages": 1,
+  "variants": [
+   "button-34"
+  ]
+ },
+ {
+  "tier": "P3",
+  "kind": "notice",
+  "job": "报错",
+  "sites": 2,
+  "pages": 3,
+  "count": 3,
+  "mainlinePages": 0,
+  "variants": [
+   "notice-05",
+   "notice-04"
+  ]
+ },
+ {
+  "tier": "P3",
+  "kind": "dialog",
+  "job": "对话框",
+  "sites": 2,
+  "pages": 2,
+  "count": 2,
+  "mainlinePages": 0,
+  "variants": [
+   "dialog-02",
+   "dialog-05"
+  ]
+ },
+ {
+  "tier": "P3",
+  "kind": "button",
+  "job": "关闭 / 不做了",
+  "sites": 2,
+  "pages": 2,
+  "count": 2,
+  "mainlinePages": 0,
+  "variants": [
+   "button-22",
+   "button-13"
+  ]
+ },
+ {
+  "tier": "P3",
+  "kind": "surface",
+  "job": "装一组东西的板",
+  "sites": 2,
+  "pages": 3,
+  "count": 3,
+  "mainlinePages": 0,
+  "variants": [
+   "surface-06",
+   "surface-08"
+  ]
+ },
+ {
+  "tier": "P3",
+  "kind": "row",
+  "job": "列表里的一项（不可点）",
+  "sites": 2,
+  "pages": 3,
+  "count": 3,
+  "mainlinePages": 0,
+  "variants": [
+   "row-01"
+  ]
+ },
+ {
+  "tier": "P3",
+  "kind": "button",
+  "job": "保存",
+  "sites": 1,
+  "pages": 1,
+  "count": 1,
+  "mainlinePages": 0,
+  "variants": [
+   "button-36"
+  ]
+ },
+ {
+  "tier": "P3",
+  "kind": "dialog",
+  "job": "确认危险操作",
+  "sites": 1,
+  "pages": 1,
+  "count": 1,
+  "mainlinePages": 0,
+  "variants": [
+   "dialog-01"
+  ]
+ },
+ {
+  "tier": "P3",
+  "kind": "button",
+  "job": "重试",
+  "sites": 1,
+  "pages": 1,
+  "count": 1,
+  "mainlinePages": 0,
+  "variants": [
+   "button-23"
+  ]
+ },
+ {
+  "tier": "P3",
+  "kind": "button",
+  "job": "运行维护任务",
+  "sites": 1,
+  "pages": 2,
+  "count": 2,
+  "mainlinePages": 0,
+  "variants": [
+   "button-23"
+  ]
+ },
+ {
+  "tier": "P3",
+  "kind": "button",
+  "job": "复制",
+  "sites": 1,
+  "pages": 1,
+  "count": 1,
+  "mainlinePages": 0,
+  "variants": [
+   "button-13"
+  ]
+ }
+]

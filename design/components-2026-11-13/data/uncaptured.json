@@ -1,0 +1,5897 @@
+[
+ {
+  "kind": "button",
+  "at": "concierge/ConciergeDesk.tsx:779:23",
+  "tag": "button",
+  "classes": "concierge-starter-chip* is-selected is-zero",
+  "text": "{option.label} {option.count}",
+  "reason": "展开或打开之后才出现（[列表] visibleFilterDims）",
+  "conditions": [
+   "[列表] filterOptions[dimension]",
+   "[列表] visibleFilterDims",
+   "!dataLoading && (state.kind === 'empty' || state.kind === 'results') && filterP…",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "concierge/ConciergeDesk.tsx:801:17",
+  "tag": "button",
+  "classes": "concierge-filter-more",
+  "text": "{filtersExpanded ? '收起筛选' : '更多筛选'}",
+  "reason": "空 / 非空某一种情况才出现（!dataLoading && (state.kind === 'empty' || state.kind === 'r）",
+  "conditions": [
+   "canToggleFilters",
+   "(canToggleFilters || hasActiveFilters)",
+   "!dataLoading && (state.kind === 'empty' || state.kind === 'results') && filterP…",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "concierge/ConciergeDesk.tsx:811:17",
+  "tag": "button",
+  "classes": "concierge-filter-clear",
+  "text": "清除筛选",
+  "reason": "空 / 非空某一种情况才出现（!dataLoading && (state.kind === 'empty' || state.kind === 'r）",
+  "conditions": [
+   "hasActiveFilters",
+   "(canToggleFilters || hasActiveFilters)",
+   "!dataLoading && (state.kind === 'empty' || state.kind === 'results') && filterP…",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "concierge/ConciergeDesk.tsx:855:13",
+  "tag": "button",
+  "classes": "",
+  "text": "重试",
+  "reason": "出错时才出现（state.kind === 'error'）",
+  "conditions": [
+   "state.kind === 'error'",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "concierge/ConciergeDesk.tsx:904:15",
+  "tag": "button",
+  "classes": "concierge-filter-clear-inline",
+  "text": "清除筛选",
+  "reason": "空 / 非空某一种情况才出现（state.kind === 'results' && paperResults.length > 0 && filte）",
+  "conditions": [
+   "state.kind === 'results' && paperResults.length > 0 && filteredPaperResults.len…",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "concierge/ConciergeDesk.tsx:953:15",
+  "tag": "button",
+  "classes": "concierge-filter-clear-inline",
+  "text": "清除筛选",
+  "reason": "空 / 非空某一种情况才出现（hasActiveFilters && feedPaperCount === 0）",
+  "conditions": [
+   "hasActiveFilters && feedPaperCount === 0",
+   "!(questionGroups.length === 0)",
+   "showFeed",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "concierge/ConciergePaperRow.tsx:300:15",
+  "tag": "button",
+  "classes": "concierge-recent-title",
+  "text": "{paper.year && <span className=\"concierg",
+  "reason": "条件没满足（recentAddition）",
+  "conditions": [
+   "recentAddition"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "concierge/ConciergePaperRow.tsx:365:11",
+  "tag": "button",
+  "classes": "concierge-action",
+  "text": "看整卷",
+  "reason": "条件没满足（rowPaperId）",
+  "conditions": [
+   "rowPaperId"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/admin/AgentTokens.tsx:69:7",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "重试",
+  "reason": "管理页的这个状态没走到",
+  "conditions": [
+   "loadFailed",
+   "!(loading)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/draft-paper/DraftPaperRail.tsx:43:9",
+  "tag": "button",
+  "classes": "similar-backlink",
+  "text": "返回目录",
+  "reason": "这个组件这次没渲染（DraftPaperSwapDrawer）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/draft-paper/DraftPaperRail.tsx:54:11",
+  "tag": "button",
+  "classes": "similar-btn",
+  "text": "重试",
+  "reason": "出错时才出现（request.status === 'error'）",
+  "conditions": [
+   "request.status === 'error'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/draft-paper/DraftPaperRail.tsx:91:23",
+  "tag": "button",
+  "classes": "similar-btn similar-btn--primary",
+  "text": "⇄ 替换这篇",
+  "reason": "空 / 非空某一种情况才出现（!(request.data.results.length === 0)）",
+  "conditions": [
+   "[列表] request.data.results",
+   "!(request.data.results.length === 0)",
+   "request.status === 'ready'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/draft-paper/DraftPaperRail.tsx:100:23",
+  "tag": "button",
+  "classes": "similar-btn",
+  "text": "＋ 加入",
+  "reason": "空 / 非空某一种情况才出现（!(request.data.results.length === 0)）",
+  "conditions": [
+   "[列表] request.data.results",
+   "!(request.data.results.length === 0)",
+   "request.status === 'ready'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/draft-paper/DraftPaperRail.tsx:301:17",
+  "tag": "button",
+  "classes": "",
+  "text": "<ArrowUp/>",
+  "reason": "条件没满足（isMissing）",
+  "conditions": [
+   "isMissing",
+   "[列表] items"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/draft-paper/DraftPaperRail.tsx:312:17",
+  "tag": "button",
+  "classes": "",
+  "text": "<ArrowDown/>",
+  "reason": "条件没满足（isMissing）",
+  "conditions": [
+   "isMissing",
+   "[列表] items"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/draft-paper/DraftPaperRail.tsx:323:17",
+  "tag": "button",
+  "classes": "danger",
+  "text": "<Trash/>",
+  "reason": "条件没满足（isMissing）",
+  "conditions": [
+   "isMissing",
+   "[列表] items"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/draft-paper/DraftPaperWorkbench.tsx:1827:27",
+  "tag": "button",
+  "classes": "",
+  "text": "<PageBreak/> {item.pageBreakBefore ? '取消",
+  "reason": "展开或打开之后才出现（openGroupActionsItemId === item.id）",
+  "conditions": [
+   "canPageBreakBefore",
+   "openGroupActionsItemId === item.id",
+   "[列表] nonMissingItems",
+   "edition !== 'answerOnly'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/draft-paper/DraftPaperWorkbench.tsx:1869:19",
+  "tag": "button",
+  "classes": "draft-seam-suggestion",
+  "text": "{suggestion.reason} · 建议前置分页",
+  "reason": "A3 拼版时才出现（draftPaper.printForm === 'a3'）",
+  "conditions": [
+   "[列表] pageBreakSuggestions",
+   "draftPaper.printForm === 'a3'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/draft-paper/DraftPaperWorkbench.tsx:1902:11",
+  "tag": "button",
+  "classes": "",
+  "text": "<RotateCcw/> 撤销",
+  "reason": "操作之后才出现（replaceUndoToastPresence.mounted）",
+  "conditions": [
+   "replaceUndoToastPresence.mounted"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/my-space/MySpacePage.tsx:375:17",
+  "tag": "button",
+  "classes": "my-space-folder-button* is-selected",
+  "text": "<Paper/> 全部文件",
+  "reason": "空 / 非空某一种情况才出现（folders.length > 0）",
+  "conditions": [
+   "folders.length > 0"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/my-space/MySpacePage.tsx:380:19",
+  "tag": "button",
+  "classes": "my-space-folder-button* is-selected",
+  "text": "<Folder/> {folder.name} {folder.artifact",
+  "reason": "空 / 非空某一种情况才出现（folders.length > 0）",
+  "conditions": [
+   "[列表] folders",
+   "folders.length > 0"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/my-space/MySpacePage.tsx:409:17",
+  "tag": "button",
+  "classes": "my-space-empty-cta",
+  "text": "重新加载",
+  "reason": "出错时才出现（loadState === 'error'）",
+  "conditions": [
+   "loadState === 'error'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/my-space/MySpacePage.tsx:416:17",
+  "tag": "button",
+  "classes": "my-space-empty-cta",
+  "text": "去找题",
+  "reason": "空 / 非空某一种情况才出现（loadState === 'loaded' && artifacts.length === 0）",
+  "conditions": [
+   "loadState === 'loaded' && artifacts.length === 0"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/ListeningSegmentPlayer.tsx:245:5",
+  "tag": "button",
+  "classes": "listening-player-trigger",
+  "text": "<Headphones/>",
+  "reason": "这个组件这次没渲染（ListeningSegmentPlayer）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/ListeningSegmentPlayer.tsx:252:7",
+  "tag": "button",
+  "classes": "listening-player-play",
+  "text": "<PlaybackIcon/>",
+  "reason": "展开或打开之后才出现（open）",
+  "conditions": [
+   "open"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/ListeningSegmentPlayer.tsx:258:34",
+  "tag": "button",
+  "classes": "listening-player-mark",
+  "text": "{mark.showLabel && <span className=\"list",
+  "reason": "空 / 非空某一种情况才出现（markItems.length > 0）",
+  "conditions": [
+   "[列表] markItems",
+   "markItems.length > 0",
+   "open"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/ListeningSegmentPlayer.tsx:304:7",
+  "tag": "button",
+  "classes": "listening-player-speed",
+  "text": "<path/> <path/> <circle/>",
+  "reason": "展开或打开之后才出现（open）",
+  "conditions": [
+   "open"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:3167:15",
+  "tag": "button",
+  "classes": "paper-browse-gutter-add* in_current_draft paper-browse-gutter-add--in-draft",
+  "text": "{card.draftPaperButtonState !== 'disable",
+  "reason": "条件没满足（!reviewRevision && card）",
+  "conditions": [
+   "!reviewRevision && card"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:3500:17",
+  "tag": "button",
+  "classes": "paper-browse-reading-overview-toggle",
+  "text": "文章简介 <DisclosureIcon/>",
+  "reason": "某种模式下才出现（readingOverview）",
+  "conditions": [
+   "readingOverview",
+   "group.groupType === 'reading'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:3541:21",
+  "tag": "button",
+  "classes": "",
+  "text": "{question.questionNo} {answer && <span c",
+  "reason": "空 / 非空某一种情况才出现（readingQuestions.length > 0）",
+  "conditions": [
+   "[列表] readingQuestions",
+   "readingQuestions.length > 0",
+   "group.groupType === 'reading'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:3587:13",
+  "tag": "button",
+  "classes": "similar-btn similar-btn--primary",
+  "text": "<RefreshCw/> {SIMILAR_PASSAGES_MODE_GROU",
+  "reason": "条件没满足（!reviewRevision && hasActiveQuestion && activeQuestionId && ）",
+  "conditions": [
+   "!reviewRevision && hasActiveQuestion && activeQuestionId && SIMILAR_SUPPORTED_G…"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:3983:15",
+  "tag": "button",
+  "classes": "paper-browse-rail-part-head",
+  "text": "{part.name}",
+  "reason": "条件没满足（part.name）",
+  "conditions": [
+   "part.name",
+   "[列表] railParts"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:4013:19",
+  "tag": "button",
+  "classes": "paper-browse-rail-group* paper-browse-rail-group--active",
+  "text": "{displayTitle} {inCurrentDraft && ( <spa",
+  "reason": "条件没满足（[列表] part.groups）",
+  "conditions": [
+   "[列表] part.groups",
+   "[列表] railParts"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:4049:7",
+  "tag": "button",
+  "classes": "ghost-button paper-browse-lecture-toggle* paper-browse-lecture-toggle--pressed",
+  "text": "<Presentation/> 讲评",
+  "reason": "条件没满足（!reviewRevision）",
+  "conditions": [
+   "!reviewRevision"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:4068:65",
+  "tag": "a",
+  "classes": "ghost-button",
+  "text": "PDF Screen",
+  "reason": "条件没满足（pdfEdition && canonicalConsumption?.publicationDigest）",
+  "conditions": [
+   "pdfEdition && canonicalConsumption?.publicationDigest",
+   "!reviewRevision"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:4069:7",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "<DownloadFeedbackIcon/> {analysisPdfBusy",
+  "reason": "条件没满足（!reviewRevision）",
+  "conditions": [
+   "!reviewRevision"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:4079:9",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "刷新 PDF 版本",
+  "reason": "出错时才出现（pdfProductsError）",
+  "conditions": [
+   "pdfProductsError",
+   "!reviewRevision"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:4083:5",
+  "tag": "button",
+  "classes": "ghost-button paper-browse-lecture-toggle* paper-browse-lecture-toggle--pressed",
+  "text": "<Presentation/> 讲评",
+  "reason": "条件没满足（!(!reviewRevision)）",
+  "conditions": [
+   "!(!reviewRevision)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperReviewControls.tsx:118:18",
+  "tag": "a",
+  "classes": "ghost-button",
+  "text": "查看 PDF",
+  "reason": "条件没满足（pdfUrl）",
+  "conditions": [
+   "pdfUrl",
+   "revisionId"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperReviewControls.tsx:119:7",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "{busy ? '复制中…' : threadUrl ? '去 Amp 聊这份卷",
+  "reason": "这个组件这次没渲染（PaperReviewControls）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperReviewControls.tsx:126:7",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "刷新 PDF 版本",
+  "reason": "出错时才出现（revisionId && productError）",
+  "conditions": [
+   "revisionId && productError"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperReviewControls.tsx:129:7",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "刷新",
+  "reason": "出错时才出现（error）",
+  "conditions": [
+   "error"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/PaperReviewControls.tsx:133:24",
+  "tag": "a",
+  "classes": "",
+  "text": "打开对应 Amp 线程",
+  "reason": "条件没满足（continueUrl）",
+  "conditions": [
+   "continueUrl"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/SimilarQuestionsRailView.tsx:127:9",
+  "tag": "button",
+  "classes": "similar-backlink",
+  "text": "← 返回解析",
+  "reason": "这个组件这次没渲染（SimilarQuestionsRailView）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/SimilarQuestionsRailView.tsx:143:11",
+  "tag": "button",
+  "classes": "similar-btn",
+  "text": "重试",
+  "reason": "出错时才出现（request.status === 'error'）",
+  "conditions": [
+   "request.status === 'error'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/SimilarQuestionsRailView.tsx:202:11",
+  "tag": "button",
+  "classes": "similar-btn similar-btn--primary",
+  "text": "加入草稿卷",
+  "reason": "条件没满足（request.status === 'ready'）",
+  "conditions": [
+   "request.status === 'ready'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:115:15",
+  "tag": "button",
+  "classes": "paper-dictionary-play",
+  "text": "{label ? <span className=\"paper-dictiona",
+  "reason": "本地四组测试题跑不出这一块（PronunciationRow）",
+  "conditions": [
+   "[列表] group.items",
+   "[列表] groupByIpa(pronunciations)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:276:9",
+  "tag": "button",
+  "classes": "paper-dictionary-more paper-dictionary-rare-toggle",
+  "text": "{rareOpen ? '收起' : `更多义项 ${folded.length",
+  "reason": "空 / 非空某一种情况才出现（folded.length > 0）",
+  "conditions": [
+   "folded.length > 0"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:380:13",
+  "tag": "button",
+  "classes": "paper-dictionary-analyze",
+  "text": "<SentenceAnalysis/> 分析所在句",
+  "reason": "本地四组测试题跑不出这一块（DictionaryCard）",
+  "conditions": [
+   "onAnalyzeSentence"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:390:11",
+  "tag": "button",
+  "classes": "paper-selection-action-btn",
+  "text": "<CopyFeedbackIcon/>",
+  "reason": "本地四组测试题跑不出这一块（DictionaryCard）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:402:13",
+  "tag": "button",
+  "classes": "paper-selection-action-btn",
+  "text": "<X/>",
+  "reason": "本地四组测试题跑不出这一块（DictionaryCard）",
+  "conditions": [
+   "onClose"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:446:13",
+  "tag": "button",
+  "classes": "paper-dictionary-sense-retry",
+  "text": "重试",
+  "reason": "出错时才出现（sense.status === 'error'）",
+  "conditions": [
+   "sense.status === 'error'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:493:9",
+  "tag": "button",
+  "classes": "paper-dictionary-more paper-dictionary-detail-toggle",
+  "text": "<DisclosureIcon/> {explainAll ? '收起解释' :",
+  "reason": "本地四组测试题跑不出这一块（DictionaryCard）",
+  "conditions": [
+   "hasExplanations"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:508:9",
+  "tag": "button",
+  "classes": "paper-dictionary-more paper-dictionary-credits-toggle",
+  "text": "署名与隐私 <DisclosureIcon/>",
+  "reason": "本地四组测试题跑不出这一块（DictionaryCard）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:532:19",
+  "tag": "a",
+  "classes": "",
+  "text": "原文件",
+  "reason": "本地四组测试题跑不出这一块（DictionaryCard）",
+  "conditions": [
+   "pronunciation.audio?.sourceUrl",
+   "[列表] audioCredits"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:538:19",
+  "tag": "a",
+  "classes": "",
+  "text": "许可",
+  "reason": "本地四组测试题跑不出这一块（DictionaryCard）",
+  "conditions": [
+   "pronunciation.audio?.licenseUrl",
+   "[列表] audioCredits"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/SelectionOverlay.tsx:181:13",
+  "tag": "button",
+  "classes": "paper-selection-lookup",
+  "text": "<DictionaryLookup/> 查词",
+  "reason": "本地四组测试题跑不出这一块（SelectionOverlay）",
+  "conditions": [
+   "phase === 'lookup'",
+   "phase === 'toolbar' || phase === 'lookup'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/SelectionOverlay.tsx:191:13",
+  "tag": "button",
+  "classes": "paper-selection-translate",
+  "text": "<Translate/> 翻译",
+  "reason": "本地四组测试题跑不出这一块（SelectionOverlay）",
+  "conditions": [
+   "showTranslate",
+   "!(phase === 'lookup')",
+   "phase === 'toolbar' || phase === 'lookup'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/SelectionOverlay.tsx:201:13",
+  "tag": "button",
+  "classes": "paper-selection-analyze",
+  "text": "<SentenceAnalysis/> {analyzeLabel}",
+  "reason": "本地四组测试题跑不出这一块（SelectionOverlay）",
+  "conditions": [
+   "showAnalyze",
+   "phase === 'toolbar' || phase === 'lookup'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/SelectionOverlay.tsx:221:17",
+  "tag": "button",
+  "classes": "paper-selection-action-btn",
+  "text": "<CopyFeedbackIcon/>",
+  "reason": "本地四组测试题跑不出这一块（SelectionOverlay）",
+  "conditions": [
+   "canCopy",
+   "!(phase === 'dictionary')",
+   "!(phase === 'sentence-analysis')",
+   "!(phase === 'toolbar' || phase === 'lookup')"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/SelectionOverlay.tsx:235:17",
+  "tag": "button",
+  "classes": "paper-selection-action-btn",
+  "text": "<X/>",
+  "reason": "本地四组测试题跑不出这一块（SelectionOverlay）",
+  "conditions": [
+   "onClose",
+   "!(phase === 'dictionary')",
+   "!(phase === 'sentence-analysis')",
+   "!(phase === 'toolbar' || phase === 'lookup')"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/SelectionOverlay.tsx:289:13",
+  "tag": "button",
+  "classes": "paper-selection-retry",
+  "text": "<RefreshCw/> {partial ? '重试失败段落' : '重试'}",
+  "reason": "出错时才出现（phase !== 'loading' && (hasErrors || phase === 'error')）",
+  "conditions": [
+   "phase !== 'loading' && (hasErrors || phase === 'error')",
+   "!(phase === 'dictionary')",
+   "!(phase === 'sentence-analysis')",
+   "!(phase === 'toolbar' || phase === 'lookup')"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/AnnotatedSentence.tsx:481:15",
+  "tag": "button",
+  "classes": "sa-flag",
+  "text": "{flag.label}",
+  "reason": "空 / 非空某一种情况才出现（tokenFlags.length > 0）",
+  "conditions": [
+   "[列表] tokenFlags",
+   "tokenFlags.length > 0"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/AnnotatedSentence.tsx:509:9",
+  "tag": "button",
+  "classes": "sa-local-action",
+  "text": "{capsuleLabel(analysis, localScope, true",
+  "reason": "本地四组测试题跑不出这一块（AnnotatedSentence）",
+  "conditions": [
+   "localScope"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/AnnotatedSentence.tsx:511:50",
+  "tag": "button",
+  "classes": "sa-local-action",
+  "text": "看内部 →",
+  "reason": "本地四组测试题跑不出这一块（AnnotatedSentence）",
+  "conditions": [
+   "canEnterUnit(analysis, localScope.id)",
+   "localScope"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/AnnotatedSentence.tsx:513:9",
+  "tag": "button",
+  "classes": "sa-local-action",
+  "text": "← 原句",
+  "reason": "本地四组测试题跑不出这一块（AnnotatedSentence）",
+  "conditions": [
+   "localScope"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/AnnotatedSentence.tsx:527:9",
+  "tag": "button",
+  "classes": "sa-local-action",
+  "text": "{item.text}",
+  "reason": "本地四组测试题跑不出这一块（AnnotatedSentence）",
+  "conditions": [
+   "[列表] fallbackLines",
+   "!(detail.model.body)",
+   "detail"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/AnnotatedSentence.tsx:532:9",
+  "tag": "button",
+  "classes": "sa-bubble-action",
+  "text": "{detail.restored ? (detail.model.restore",
+  "reason": "某种模式下才出现（detail.model.restore）",
+  "conditions": [
+   "detail.model.restore",
+   "detail"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/AnnotatedSentence.tsx:543:9",
+  "tag": "button",
+  "classes": "sa-bubble-action sa-subject-action",
+  "text": "逻辑主语： {logicalSubjectText}",
+  "reason": "本地四组测试题跑不出这一块（AnnotatedSentence）",
+  "conditions": [
+   "subjectAction && !detail.flagId",
+   "detail"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/AnnotatedSentence.tsx:655:15",
+  "tag": "button",
+  "classes": "sa-bubble-action sa-layer-btn sa-enter-action",
+  "text": "看内部 →",
+  "reason": "本地四组测试题跑不出这一块（AnnotatedSentence）",
+  "conditions": [
+   "enterAction",
+   "layerNav",
+   "detailHost"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/AnnotatedSentence.tsx:662:15",
+  "tag": "button",
+  "classes": "sa-bubble-action sa-layer-btn sa-back-action",
+  "text": "← 返回",
+  "reason": "本地四组测试题跑不出这一块（AnnotatedSentence）",
+  "conditions": [
+   "scopeId",
+   "layerNav",
+   "detailHost"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/CapsuleGroup.tsx:25:26",
+  "tag": "button",
+  "classes": "sa-shared-label",
+  "text": "<LabelParts/> 并列",
+  "reason": "本地四组测试题跑不出这一块（CapsuleGroup）",
+  "conditions": [
+   "group.sharedLabel"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/CapsuleGroup.tsx:33:7",
+  "tag": "button",
+  "classes": "sa-label",
+  "text": "{group.numbers ? <span className=\"sa-mem",
+  "reason": "本地四组测试题跑不出这一块（CapsuleGroup）",
+  "conditions": [
+   "[列表] group.units"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/ConnectorMarker.tsx:12:10",
+  "tag": "button",
+  "classes": "sa-ink-connector",
+  "text": "<path/> <path/>",
+  "reason": "本地四组测试题跑不出这一块（ConnectorMarker）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/GrammarLegend.tsx:23:33",
+  "tag": "button",
+  "classes": "sa-legend-item sa-legend-trunk",
+  "text": "主语 <SampleLine/> 谓语 <SampleLine/>",
+  "reason": "本地四组测试题跑不出这一块（GrammarLegend）",
+  "conditions": [
+   "inSentence.has('trunk')"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/GrammarLegend.tsx:34:14",
+  "tag": "button",
+  "classes": "sa-legend-item",
+  "text": "{label} <SampleLine/>",
+  "reason": "本地四组测试题跑不出这一块（GrammarLegend）",
+  "conditions": [
+   "[列表] (['object', 'adverbial', 'attributive', 'compleme…"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:140:37",
+  "tag": "button",
+  "classes": "",
+  "text": "原句",
+  "reason": "空 / 非空某一种情况才出现（scopePath.length > 0）",
+  "conditions": [
+   "scopePath.length > 0",
+   "ready && scopePath.length > 0"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:143:72",
+  "tag": "button",
+  "classes": "",
+  "text": "{unit ? unitDisplayLabel(ready, unit) : ",
+  "reason": "空 / 非空某一种情况才出现（ready && scopePath.length > 0）",
+  "conditions": [
+   "[列表] scopePath",
+   "ready && scopePath.length > 0"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:160:13",
+  "tag": "button",
+  "classes": "sa-single-difficulty",
+  "text": "难点 · {flags[0].label}",
+  "reason": "本地四组测试题跑不出这一块（SentenceAnalysisCard）",
+  "conditions": [
+   "ready && flags.length === 1"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:167:15",
+  "tag": "button",
+  "classes": "sa-icon-btn",
+  "text": "<ChevronLeft/>",
+  "reason": "本地四组测试题跑不出这一块（SentenceAnalysisCard）",
+  "conditions": [
+   "ready && flags.length > 1",
+   "!(ready && flags.length === 1)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:171:15",
+  "tag": "button",
+  "classes": "sa-icon-btn",
+  "text": "<ChevronRight/>",
+  "reason": "本地四组测试题跑不出这一块（SentenceAnalysisCard）",
+  "conditions": [
+   "ready && flags.length > 1",
+   "!(ready && flags.length === 1)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:177:13",
+  "tag": "button",
+  "classes": "sa-main-btn",
+  "text": "<Target/> 定位主句",
+  "reason": "本地四组测试题跑不出这一块（SentenceAnalysisCard）",
+  "conditions": [
+   "ready"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:188:11",
+  "tag": "button",
+  "classes": "sa-icon-btn",
+  "text": "<CopyFeedbackIcon/>",
+  "reason": "本地四组测试题跑不出这一块（SentenceAnalysisCard）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:194:13",
+  "tag": "button",
+  "classes": "sa-icon-btn",
+  "text": "<X/>",
+  "reason": "本地四组测试题跑不出这一块（SentenceAnalysisCard）",
+  "conditions": [
+   "onClose"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:216:22",
+  "tag": "button",
+  "classes": "paper-selection-retry",
+  "text": "重试",
+  "reason": "出错时才出现（status === 'error'）",
+  "conditions": [
+   "onRetry",
+   "status === 'error'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-intelligence/ClozeAnalysisPanel.tsx:143:23",
+  "tag": "button",
+  "classes": "pi-cloze-evidence pi-cloze-evidence--selected",
+  "text": "{row.typeLabel} {row.signalText} {row.re",
+  "reason": "空 / 非空某一种情况才出现（analysis.evidenceRows.length > 0）",
+  "conditions": [
+   "!(row.isOptionSide)",
+   "[列表] analysis.evidenceRows",
+   "analysis.evidenceRows.length > 0",
+   "hasActiveQuestion && analysis"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-intelligence/GrammarFillAnalysisPanel.tsx:115:21",
+  "tag": "button",
+  "classes": "pi-gf-evidence pi-gf-evidence--selected",
+  "text": "{row.typeLabel} {row.signalText} {row.re",
+  "reason": "空 / 非空某一种情况才出现（analysis.evidenceRows.length > 0）",
+  "conditions": [
+   "[列表] analysis.evidenceRows",
+   "analysis.evidenceRows.length > 0",
+   "hasActiveQuestion && analysis"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-intelligence/PaperAssetAnalysisPanel.tsx:99:15",
+  "tag": "button",
+  "classes": "pi-ps-analysis-option-row",
+  "text": "{option.label} . {option.text} {option.t",
+  "reason": "本地四组测试题跑不出这一块（PaperAssetAnalysisPanel）",
+  "conditions": [
+   "[列表] analysis.options"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-intelligence/PaperAssetAnalysisPanel.tsx:130:25",
+  "tag": "button",
+  "classes": "pi-ps-analysis-evidence pi-ps-analysis-evidence--selected",
+  "text": "{row.quote}",
+  "reason": "本地四组测试题跑不出这一块（PaperAssetAnalysisPanel）",
+  "conditions": [
+   "[列表] analysis.supportEvidenceRows",
+   "isCorrect",
+   "isActive",
+   "[列表] analysis.options"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-intelligence/PaperAssetAnalysisPanel.tsx:176:25",
+  "tag": "button",
+  "classes": "pi-ps-analysis-distractor pi-ps-analysis-distractor--selected",
+  "text": "{row.quote}",
+  "reason": "本地四组测试题跑不出这一块（PaperAssetAnalysisPanel）",
+  "conditions": [
+   "[列表] option.trapEvidenceRows",
+   "!(hideTrapDetailEntirely)",
+   "!(isCorrect)",
+   "isActive"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-intelligence/SevenChoicesAnalysisPanel.tsx:108:9",
+  "tag": "button",
+  "classes": "",
+  "text": "全部显示",
+  "reason": "本地四组测试题跑不出这一块（SevenChoicesAnalysisPanel）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-intelligence/SevenChoicesAnalysisPanel.tsx:111:9",
+  "tag": "button",
+  "classes": "",
+  "text": "全部隐藏",
+  "reason": "本地四组测试题跑不出这一块（SevenChoicesAnalysisPanel）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-intelligence/SevenChoicesAnalysisPanel.tsx:161:15",
+  "tag": "button",
+  "classes": "pi-seven-option-main",
+  "text": "{option.label} {chain && isOpen ? render",
+  "reason": "本地四组测试题跑不出这一块（SevenChoicesAnalysisPanel）",
+  "conditions": [
+   "[列表] options"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/paper-intelligence/SevenChoicesAnalysisPanel.tsx:186:19",
+  "tag": "button",
+  "classes": "pi-seven-details-toggle",
+  "text": "{detailsOpen ? '收起细节' : '展开细节'}",
+  "reason": "展开或打开之后才出现（isOpen && chain）",
+  "conditions": [
+   "isOpen && chain",
+   "[列表] options"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/question-detail/QuestionGroupDetailView.tsx:503:9",
+  "tag": "button",
+  "classes": "back-button",
+  "text": "<ArrowLeft/> 返回找题",
+  "reason": "条件没满足（!selectedDetail）",
+  "conditions": [
+   "!selectedDetail"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/question-detail/QuestionGroupDetailView.tsx:592:15",
+  "tag": "button",
+  "classes": "peek-btn",
+  "text": "<Eye/> 看整卷",
+  "reason": "条件没满足（selectedDetail.canonicalPaperId）",
+  "conditions": [
+   "selectedDetail.canonicalPaperId"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/question-detail/QuestionGroupDetailView.tsx:600:15",
+  "tag": "a",
+  "classes": "peek-btn",
+  "text": "<ReadingAnalysis/> {selectedDetail.paper",
+  "reason": "条件没满足（selectedDetail.hasPaperSurfaceAnalysis && selectedDetail.pap）",
+  "conditions": [
+   "selectedDetail.hasPaperSurfaceAnalysis && selectedDetail.paperSurfaceHref && se…"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/question-detail/QuestionGroupDetailView.tsx:617:15",
+  "tag": "button",
+  "classes": "peek-btn",
+  "text": "<Papers/> 相似篇章",
+  "reason": "某种模式下才出现（SIMILAR_SUPPORTED_GROUP_TYPES.has(selectedDetail.groupType) ）",
+  "conditions": [
+   "SIMILAR_SUPPORTED_GROUP_TYPES.has(selectedDetail.groupType) && selectedDetail.p…"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/question-detail/QuestionGroupDetailView.tsx:669:15",
+  "tag": "button",
+  "classes": "peek-expand",
+  "text": "<ChevronDown/> 展开卷面",
+  "reason": "条件没满足（load.status === 'ready' && !expanded）",
+  "conditions": [
+   "load.status === 'ready' && !expanded"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/question-detail/QuestionGroupDetailView.tsx:677:15",
+  "tag": "button",
+  "classes": "peek-expand peek-expand--collapse",
+  "text": "<ChevronUp/> 收起卷面",
+  "reason": "展开或打开之后才出现（load.status === 'ready' && expanded）",
+  "conditions": [
+   "load.status === 'ready' && expanded"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/similar-passages/SimilarPassagesPanel.tsx:84:9",
+  "tag": "button",
+  "classes": "similar-backlink",
+  "text": "收起 <ChevronUp/>",
+  "reason": "本地四组测试题跑不出这一块（SimilarPassagesPanel）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/similar-passages/SimilarPassagesPanel.tsx:94:11",
+  "tag": "button",
+  "classes": "similar-btn",
+  "text": "重试",
+  "reason": "出错时才出现（request.status === 'error'）",
+  "conditions": [
+   "request.status === 'error'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/similar-passages/SimilarPassagesPanel.tsx:125:23",
+  "tag": "button",
+  "classes": "similar-btn similar-btn--primary",
+  "text": "＋ 加入草稿卷",
+  "reason": "空 / 非空某一种情况才出现（!(request.data.results.length === 0)）",
+  "conditions": [
+   "[列表] request.data.results",
+   "!(request.data.results.length === 0)",
+   "request.status === 'ready'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:62:30",
+  "tag": "button",
+  "classes": "",
+  "text": "<RefreshCw/> 重新加载",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "kind === 'error'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:407:9",
+  "tag": "a",
+  "classes": "",
+  "text": "EQBank",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:418:15",
+  "tag": "button",
+  "classes": "primary",
+  "text": "继续上次听写",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "resumePrompt"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:419:15",
+  "tag": "button",
+  "classes": "",
+  "text": "从头开始",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "resumePrompt"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:452:17",
+  "tag": "button",
+  "classes": "",
+  "text": "<ChevronLeft/>",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(resumePrompt)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:453:17",
+  "tag": "button",
+  "classes": "primary-control",
+  "text": "{status === 'error' || status === 'ended",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(resumePrompt)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:463:17",
+  "tag": "button",
+  "classes": "",
+  "text": "<ChevronRight/>",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(resumePrompt)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:466:15",
+  "tag": "button",
+  "classes": "vocabulary-dictation-replay",
+  "text": "<RotateCcw/> 重播本题",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(resumePrompt)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:475:21",
+  "tag": "button",
+  "classes": "is-selected",
+  "text": "{count} 遍",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] ([1, 2, 3] as const)",
+   "!(resumePrompt)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:481:21",
+  "tag": "button",
+  "classes": "is-selected",
+  "text": "{seconds} 秒",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] [3, 5, 8]",
+   "!(resumePrompt)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:541:19",
+  "tag": "button",
+  "classes": "",
+  "text": "<RotateCcw/> 再听一遍",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "status === 'ended'",
+   "!(resumePrompt)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:542:19",
+  "tag": "button",
+  "classes": "primary",
+  "text": "<Eye/> 查看答案",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "status === 'ended'",
+   "!(resumePrompt)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:554:19",
+  "tag": "button",
+  "classes": "",
+  "text": "暂不查看",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "answerConfirmOpen && !showAnswers",
+   "!(resumePrompt)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:555:19",
+  "tag": "button",
+  "classes": "primary",
+  "text": "确认查看",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "answerConfirmOpen && !showAnswers",
+   "!(resumePrompt)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:106:7",
+  "tag": "button",
+  "classes": "",
+  "text": "{children}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:107:7",
+  "tag": "button",
+  "classes": "dictation-save-as-button",
+  "text": "<Save/> 另存为…",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:934:78",
+  "tag": "button",
+  "classes": "",
+  "text": "重新加载",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "loadState === 'error'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:983:13",
+  "tag": "button",
+  "classes": "",
+  "text": "<X/>",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "(message || error)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:995:17",
+  "tag": "button",
+  "classes": "",
+  "text": "去听写查看",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "createdTasks.length > 0"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:996:17",
+  "tag": "button",
+  "classes": "",
+  "text": "<X/>",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "createdTasks.length > 0"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1008:38",
+  "tag": "a",
+  "classes": "",
+  "text": "<Link/> 打开听写",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "publicHref",
+   "[列表] createdTasks",
+   "createdTasks.length > 0"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1032:49",
+  "tag": "button",
+  "classes": "",
+  "text": "清除筛选",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "(query || fromDate || toDate)",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1061:63",
+  "tag": "button",
+  "classes": "dictation-empty-inline",
+  "text": "清除搜索和日期",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "(query || fromDate || toDate)",
+   "!(libraryLoadedFor !== activeStudentId)",
+   "!(library.items.length)",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1069:17",
+  "tag": "button",
+  "classes": "",
+  "text": "<ChevronLeft/> 上一页",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "library.total > library.pageSize",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1071:17",
+  "tag": "button",
+  "classes": "",
+  "text": "下一页 <ChevronRight/>",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "library.total > library.pageSize",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1079:19",
+  "tag": "button",
+  "classes": "",
+  "text": "清空",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedSets.length > 0",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1087:50",
+  "tag": "button",
+  "classes": "american is-selected",
+  "text": "美音",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedSets.length > 0",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1087:176",
+  "tag": "button",
+  "classes": "british is-selected",
+  "text": "英音",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedSets.length > 0",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1092:19",
+  "tag": "button",
+  "classes": "",
+  "text": "<Eye/> 开始认词",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedSets.length > 0",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1105:19",
+  "tag": "button",
+  "classes": "",
+  "text": "<QrCode/> 生成扫码听写",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedSets.length > 0",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1145:23",
+  "tag": "button",
+  "classes": "",
+  "text": "{allSelected ? '取消当天' : '全选当天'}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] taskDateGroups",
+   "tasks.length",
+   "tab === 'tasks'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1156:44",
+  "tag": "a",
+  "classes": "",
+  "text": "<Link/> 打开听写",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "publicHref",
+   "[列表] group.tasks",
+   "[列表] taskDateGroups",
+   "tasks.length"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1161:33",
+  "tag": "button",
+  "classes": "dictation-download-action",
+  "text": "{publicHref ? '撤销二维码' : <><QrCode size={",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] group.tasks",
+   "[列表] taskDateGroups",
+   "tasks.length",
+   "tab === 'tasks'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1170:190",
+  "tag": "button",
+  "classes": "dictation-empty-cta",
+  "text": "去选词组",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(studentDataLoadedFor !== activeStudentId)",
+   "!(tasks.length)",
+   "tab === 'tasks'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1179:46",
+  "tag": "button",
+  "classes": "american is-selected",
+  "text": "美音",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedTasks.length > 0",
+   "tab === 'tasks'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1179:209",
+  "tag": "button",
+  "classes": "british is-selected",
+  "text": "英音",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedTasks.length > 0",
+   "tab === 'tasks'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1181:19",
+  "tag": "button",
+  "classes": "is-primary",
+  "text": "<QrCode/> 合并导出听写纸",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedTasks.length > 0",
+   "tab === 'tasks'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1182:19",
+  "tag": "button",
+  "classes": "",
+  "text": "<Save/> 另存到文件夹…",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedTasks.length > 0",
+   "tab === 'tasks'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1184:17",
+  "tag": "button",
+  "classes": "",
+  "text": "取消选择",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedTasks.length > 0",
+   "tab === 'tasks'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1193:15",
+  "tag": "button",
+  "classes": "meaning is-selected",
+  "text": "认词记录",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "tab === 'history'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1194:15",
+  "tag": "button",
+  "classes": "dictation is-selected",
+  "text": "历史听写",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "tab === 'history'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1205:52",
+  "tag": "button",
+  "classes": "",
+  "text": "{record.status === 'draft' ? '继续' : '查看结",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "record.status !== 'void'",
+   "item.kind === 'meaning'",
+   "[列表] detectionHistory",
+   "detectionHistory.length"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1219:57",
+  "tag": "button",
+  "classes": "",
+  "text": "作废",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "record.status === 'completed'",
+   "item.kind === 'meaning'",
+   "[列表] detectionHistory",
+   "detectionHistory.length"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1244:17",
+  "tag": "button",
+  "classes": "all is-selected",
+  "text": "全部 {reviewWords.filter((word) => !word.p",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1245:17",
+  "tag": "button",
+  "classes": "frequent is-selected",
+  "text": "常错 {reviewWords.filter((word) => word.st",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1250:41",
+  "tag": "button",
+  "classes": "",
+  "text": "{showPausedReview ? '隐藏' : '显示'} 已暂停（ {p",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "pausedReviewCount > 0",
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1252:15",
+  "tag": "button",
+  "classes": "",
+  "text": "<Sparkles/> 选出单词",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1259:22",
+  "tag": "button",
+  "classes": "is-primary",
+  "text": "<Eye/> 开始认词复习",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "suggestion.length > 0",
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1259:146",
+  "tag": "button",
+  "classes": "",
+  "text": "<QrCode/> 生成听写",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "suggestion.length > 0",
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1259:262",
+  "tag": "button",
+  "classes": "",
+  "text": "收起",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "suggestion.length > 0",
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1266:17",
+  "tag": "button",
+  "classes": "is-primary",
+  "text": "<Eye/> 开始认词复习",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedReviewWords.length > 0",
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1267:17",
+  "tag": "button",
+  "classes": "",
+  "text": "<QrCode/> 生成听写",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedReviewWords.length > 0",
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1268:17",
+  "tag": "button",
+  "classes": "",
+  "text": "取消",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedReviewWords.length > 0",
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1284:28",
+  "tag": "button",
+  "classes": "is-active",
+  "text": "<PinFeedbackIcon/> 重点",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] visibleReviewWords",
+   "visibleReviewWords.length",
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1284:266",
+  "tag": "button",
+  "classes": "is-active",
+  "text": "<PauseCircle/> 暂停",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] visibleReviewWords",
+   "visibleReviewWords.length",
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:479:11",
+  "tag": "button",
+  "classes": "",
+  "text": "结束本轮",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "stageRecord?.status === 'draft' && currentEntry"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:489:15",
+  "tag": "button",
+  "classes": "",
+  "text": "<VolumeFeedbackIcon/> 播放 {accent === 'am",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(!revealWrong)",
+   "stageRecord?.status === 'draft' && currentEntry"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:494:11",
+  "tag": "button",
+  "classes": "",
+  "text": "<RotateCcw/> 撤销 Delete",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "stageRecord?.status === 'draft' && currentEntry"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:496:13",
+  "tag": "button",
+  "classes": "is-wrong",
+  "text": "<X/> 答错 Shift",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!revealWrong",
+   "stageRecord?.status === 'draft' && currentEntry"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:497:13",
+  "tag": "button",
+  "classes": "is-correct",
+  "text": "<Check/> 答对 Enter",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!revealWrong",
+   "stageRecord?.status === 'draft' && currentEntry"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:498:17",
+  "tag": "button",
+  "classes": "is-primary",
+  "text": "已讲清，继续 Enter",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(!revealWrong)",
+   "stageRecord?.status === 'draft' && currentEntry"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:510:11",
+  "tag": "button",
+  "classes": "",
+  "text": "返回认词",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:534:13",
+  "tag": "button",
+  "classes": "american is-selected",
+  "text": "美音",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:535:13",
+  "tag": "button",
+  "classes": "british is-selected",
+  "text": "英音",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:547:19",
+  "tag": "button",
+  "classes": "",
+  "text": "{icon} {label}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] ([ ['cards', '单词卡', <Card size={14} key=\"cards\" /…",
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:548:19",
+  "tag": "button",
+  "classes": "dictation-save-as-button",
+  "text": "<Save/> 另存为…",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] ([ ['cards', '单词卡', <Card size={14} key=\"cards\" /…",
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:552:17",
+  "tag": "button",
+  "classes": "",
+  "text": "<PaperLined/> 练字纸（每词写1遍）",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:553:17",
+  "tag": "button",
+  "classes": "dictation-save-as-button",
+  "text": "<Save/> 另存为…",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:557:17",
+  "tag": "button",
+  "classes": "",
+  "text": "<Download/> 下载全套（4份）",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:558:17",
+  "tag": "button",
+  "classes": "dictation-save-as-button",
+  "text": "<Save/> 另存为…",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:562:11",
+  "tag": "button",
+  "classes": "is-primary",
+  "text": "<QrCode/> 生成错词听写",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:570:17",
+  "tag": "button",
+  "classes": "correct is-selected",
+  "text": "对",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] activeRecord.entries",
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:571:17",
+  "tag": "button",
+  "classes": "wrong is-selected is-wrong",
+  "text": "错",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] activeRecord.entries",
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:572:17",
+  "tag": "button",
+  "classes": "untested is-selected",
+  "text": "未测",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] activeRecord.entries",
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:586:25",
+  "tag": "button",
+  "classes": "",
+  "text": "<Play/> 继续上次",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "latestDraft"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:596:38",
+  "tag": "button",
+  "classes": "random is-selected",
+  "text": "<Shuffle/> 随机",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:596:187",
+  "tag": "button",
+  "classes": "source is-selected",
+  "text": "原顺序",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:598:13",
+  "tag": "button",
+  "classes": "is-primary",
+  "text": "<Eye/> 开始",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedSets.length"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:599:13",
+  "tag": "button",
+  "classes": "",
+  "text": "<EyeOff/> 选择词组",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(selectedSets.length)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:605:9",
+  "tag": "button",
+  "classes": "",
+  "text": "<Sparkles/> 选出单词",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!selectedSets.length"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:609:14",
+  "tag": "button",
+  "classes": "is-primary",
+  "text": "<Play/> 开始这一轮",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!selectedSets.length && suggestion.length > 0"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:609:201",
+  "tag": "button",
+  "classes": "",
+  "text": "收起",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!selectedSets.length && suggestion.length > 0"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-listen/VocabularyListenPage.tsx:58:11",
+  "tag": "button",
+  "classes": "",
+  "text": "<RefreshCw/> 重新加载",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "(kind === 'error' || kind === 'loading') && kind !== 'loading'"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-listen/VocabularyListenPage.tsx:333:9",
+  "tag": "a",
+  "classes": "",
+  "text": "EQBank",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-listen/VocabularyListenPage.tsx:374:13",
+  "tag": "button",
+  "classes": "",
+  "text": "<ChevronLeft/>",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-listen/VocabularyListenPage.tsx:377:13",
+  "tag": "button",
+  "classes": "vocabulary-listen-primary-control",
+  "text": "{status === 'ended' || status === 'error",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-listen/VocabularyListenPage.tsx:380:13",
+  "tag": "button",
+  "classes": "",
+  "text": "<ChevronRight/>",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-listen/VocabularyListenPage.tsx:391:17",
+  "tag": "button",
+  "classes": "american is-selected",
+  "text": "美音",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "britishAudioReady",
+   "!(set.accent)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-listen/VocabularyListenPage.tsx:392:17",
+  "tag": "button",
+  "classes": "british is-selected",
+  "text": "英音",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "britishAudioReady",
+   "!(set.accent)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-listen/VocabularyListenPage.tsx:398:17",
+  "tag": "button",
+  "classes": "is-selected",
+  "text": "{count} 遍",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] ([1, 2, 3] as const)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-listen/VocabularyListenPage.tsx:417:17",
+  "tag": "button",
+  "classes": "is-current",
+  "text": "{index + 1} {entry.headword} {entry.teac",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] entries"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-listen/VocabularyListenPage.tsx:431:9",
+  "tag": "button",
+  "classes": "",
+  "text": "{status === 'ended' || status === 'error",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-listen/VocabularyListenPage.tsx:441:9",
+  "tag": "button",
+  "classes": "",
+  "text": "<ChevronRight/>",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-notebook/NotebookAddButton.tsx:72:7",
+  "tag": "button",
+  "classes": "paper-dictionary-more",
+  "text": "{state === 'occurrence-exists' ? <CheckR",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-notebook/VocabularyNotebookPage.tsx:217:23",
+  "tag": "button",
+  "classes": "home-row",
+  "text": "<Paper/> {title} {paper.entryCount} 个生词 ",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] papers",
+   "papers && papers.length > 0",
+   "!(paperId)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-practice/VocabularyHandwritingSelector.tsx:112:11",
+  "tag": "button",
+  "classes": "",
+  "text": "<X/>",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-practice/VocabularyHandwritingSelector.tsx:120:13",
+  "tag": "button",
+  "classes": "",
+  "text": "全选",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-practice/VocabularyHandwritingSelector.tsx:121:13",
+  "tag": "button",
+  "classes": "",
+  "text": "清空",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-practice/VocabularyHandwritingSelector.tsx:172:13",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "取消",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-practice/VocabularyHandwritingSelector.tsx:173:13",
+  "tag": "button",
+  "classes": "primary-button",
+  "text": "{busy ? '正在生成…' : `生成 ${selectedCount} 词",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-practice/VocabularyPracticePage.tsx:216:21",
+  "tag": "button",
+  "classes": "vocabulary-match-card* is-revealed is-confirming-match",
+  "text": "<Card/> 翻开 {confirmingMatch && ( <span c",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] game.cards",
+   "loadState === 'ready' && vocabularySet && game"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-practice/VocabularyPracticePage.tsx:265:23",
+  "tag": "button",
+  "classes": "primary-button",
+  "text": "下一轮 <ArrowRight/>",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!allComplete",
+   "roundComplete",
+   "loadState === 'ready' && vocabularySet && game"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-practice/VocabularyPracticePage.tsx:269:21",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "<RotateCcw/> 再玩一次",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "roundComplete",
+   "loadState === 'ready' && vocabularySet && game"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-practice/VocabularyPracticePage.tsx:272:21",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "返回生词组",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "roundComplete",
+   "loadState === 'ready' && vocabularySet && game"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyProgressExplorer.tsx:69:9",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "<ChevronUp/> {closeLabel}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyProgressExplorer.tsx:83:11",
+  "tag": "button",
+  "classes": "is-selected",
+  "text": "第 {week} 周",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] weeks"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyProgressExplorer.tsx:112:11",
+  "tag": "button",
+  "classes": "primary-button",
+  "text": "{selectionIsCurrent ? '这里已是下一词' : hasUnf",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedEntry"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyProgressExplorer.tsx:155:21",
+  "tag": "button",
+  "classes": "",
+  "text": "{isProcessed ? <Check size={12} aria-hid",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] entries",
+   "[列表] groups"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1298:9",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "保存名称",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "vocabularySet"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1324:7",
+  "tag": "button",
+  "classes": "primary-button",
+  "text": "<DownloadFeedbackIcon/> {pdfDownloadBusy",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "vocabularySet"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1339:15",
+  "tag": "button",
+  "classes": "",
+  "text": "{option.label} {option.description}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] VOCABULARY_DOWNLOAD_OPTIONS",
+   "downloadMenuOpen",
+   "vocabularySet"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1342:15",
+  "tag": "button",
+  "classes": "vocabulary-download-save-as",
+  "text": "<Save/> 另存为…",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] VOCABULARY_DOWNLOAD_OPTIONS",
+   "downloadMenuOpen",
+   "vocabularySet"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1353:13",
+  "tag": "button",
+  "classes": "",
+  "text": "下载全套 四份 PDF 打包为一个 ZIP",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "downloadMenuOpen",
+   "vocabularySet"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1356:13",
+  "tag": "button",
+  "classes": "vocabulary-download-save-as",
+  "text": "<Save/> 另存为…",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "downloadMenuOpen",
+   "vocabularySet"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1376:9",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "取消",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "pendingShareDownload"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1377:9",
+  "tag": "button",
+  "classes": "primary-button",
+  "text": "{pendingShareDownload.mode === 'save-as'",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "pendingShareDownload"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1435:17",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "<BoardCheck/> 单词复习",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!printRequest",
+   "programLoadState === 'ready' && studentsState === 'ready' && activeStudent"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1464:17",
+  "tag": "button",
+  "classes": "vocabulary-student-add-button",
+  "text": "{studentCreateOpen ? '取消' : '新建学生'}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "programLoadState === 'ready' && studentsState === 'ready' && activeStudent"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1490:21",
+  "tag": "button",
+  "classes": "",
+  "text": "保存",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "studentCreateOpen",
+   "programLoadState === 'ready' && studentsState === 'ready' && activeStudent"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1507:19",
+  "tag": "button",
+  "classes": "vocabulary-progress-toggle",
+  "text": "{progressExplorerOpen ? '收起进度' : '查看 / 调",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!printRequest",
+   "programLoadState === 'ready' && studentsState === 'ready' && activeStudent"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1535:13",
+  "tag": "button",
+  "classes": "primary-button",
+  "text": "重新加载",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "studentsState === 'error'",
+   "!(programLoadState === 'error')"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1578:17",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "生成公开二维码",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!shareId",
+   "runState === 'setup' && vocabularySet",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1580:17",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "撤销公开分享",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(!shareId)",
+   "runState === 'setup' && vocabularySet",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1583:17",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "<CopyFeedbackIcon/> {shareCopyStatus ===",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "shareId",
+   "runState === 'setup' && vocabularySet",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1587:15",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "<CopyFeedbackIcon/> {copyStatus === 'cop",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "runState === 'setup' && vocabularySet",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…",
+   "!(studentsState === 'error')"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1591:15",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "<Grid2X2/> 趣味练习",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "runState === 'setup' && vocabularySet",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…",
+   "!(studentsState === 'error')"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1594:15",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "<WordBubble/> 看词说义",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "runState === 'setup' && vocabularySet",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…",
+   "!(studentsState === 'error')"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1597:15",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "返回",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "runState === 'setup' && vocabularySet",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…",
+   "!(studentsState === 'error')"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1630:19",
+  "tag": "button",
+  "classes": "american is-selected",
+  "text": "美音",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "runState === 'setup' || runState === 'error'",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1631:19",
+  "tag": "button",
+  "classes": "british is-selected",
+  "text": "英音",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "runState === 'setup' || runState === 'error'",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1634:15",
+  "tag": "button",
+  "classes": "primary-button",
+  "text": "{runId ? '继续过词' : '开始过词'}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "runState === 'setup' || runState === 'error'",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1668:15",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "生成固定词组",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "runState === 'setup' || runState === 'error'",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1684:23",
+  "tag": "button",
+  "classes": "",
+  "text": "{set.title} {set.entryCount} 词 · {set.en",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] recentSets.slice(0, 6)",
+   "recentSets.length > 0",
+   "runState === 'setup' || runState === 'error'",
+   "!(runState === 'setup' && vocabularySet)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1741:21",
+  "tag": "button",
+  "classes": "",
+  "text": "<ArrowLeft/> 暂停并返回",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "completion === 'active' && currentEntry",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1750:19",
+  "tag": "button",
+  "classes": "vocabulary-word-replay",
+  "text": "<VolumeFeedbackIcon/> 重播 空格",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "completion === 'active' && currentEntry",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1761:23",
+  "tag": "button",
+  "classes": "vocabulary-pronunciation",
+  "text": "<VolumeFeedbackIcon/> {currentEntry.phon",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "reviewState.revealed",
+   "completion === 'active' && currentEntry",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1815:19",
+  "tag": "button",
+  "classes": "vocabulary-reveal-prompt",
+  "text": "<Eye/> 先让孩子认词 按 → 再查看图片、音标和常见义",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(reviewState.revealed)",
+   "completion === 'active' && currentEntry",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1823:19",
+  "tag": "button",
+  "classes": "vocabulary-control vocabulary-control-back",
+  "text": "<RotateCcw/> 上一个 Delete",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "completion === 'active' && currentEntry",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1828:19",
+  "tag": "button",
+  "classes": "vocabulary-control vocabulary-control-known",
+  "text": "<Check/> 认识 Enter",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "completion === 'active' && currentEntry",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1833:19",
+  "tag": "button",
+  "classes": "vocabulary-control vocabulary-control-unfamiliar",
+  "text": "<BookMarked/> 不认识，收下 Shift",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "completion === 'active' && currentEntry",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1838:19",
+  "tag": "button",
+  "classes": "vocabulary-control vocabulary-control-reveal",
+  "text": "<Eye/> 看提示 →",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "completion === 'active' && currentEntry",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1856:37",
+  "tag": "button",
+  "classes": "primary-button",
+  "text": "<BookMarked/> 生成固定生词组",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!vocabularySet",
+   "!(completion === 'active' && currentEntry)",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1860:49",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "生成公开二维码",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "vocabularySet && !shareId",
+   "!(completion === 'active' && currentEntry)",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1861:31",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "<CopyFeedbackIcon/> {shareCopyStatus ===",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "shareId",
+   "!(completion === 'active' && currentEntry)",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1863:21",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "<Grid2X2/> 趣味练习",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "vocabularySet",
+   "!(completion === 'active' && currentEntry)",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1867:19",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "<CopyFeedbackIcon/> {copyStatus === 'cop",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(completion === 'active' && currentEntry)",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1871:19",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "<RotateCcw/> 开始下一轮",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(completion === 'active' && currentEntry)",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1912:15",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "<CopyFeedbackIcon/> {copyStatus === 'cop",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1916:15",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "<DownloadFeedbackIcon/> {pdfDownloadBusy",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "workbench/EntryModal.tsx:260:11",
+  "tag": "button",
+  "classes": "icon-button",
+  "text": "<X/>",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "workbench/EntryModal.tsx:407:15",
+  "tag": "button",
+  "classes": "detail-button",
+  "text": "<Plus/> 添加小题",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "workbench/EntryModal.tsx:417:19",
+  "tag": "button",
+  "classes": "icon-button",
+  "text": "<Trash/>",
+  "reason": "条件没满足（[列表] entryForm.questions）",
+  "conditions": [
+   "[列表] entryForm.questions"
+  ]
+ },
+ {
+  "kind": "button",
+  "at": "workbench/EntryModal.tsx:497:13",
+  "tag": "button",
+  "classes": "ghost-button",
+  "text": "取消",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "button",
+  "at": "workbench/EntryModal.tsx:500:13",
+  "tag": "button",
+  "classes": "primary-button",
+  "text": "{entryStatus === 'saving' ? '保存中' : entr",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "chip",
+  "at": "concierge/ConciergeDesk.tsx:655:19",
+  "tag": "button",
+  "classes": "concierge-browse-chip",
+  "text": "更早",
+  "reason": "空 / 非空某一种情况才出现（isBrowseScreen && !dataLoading && state.kind === 'empty'）",
+  "conditions": [
+   "browseYears.length > 4 && browseOlderCutoff !== undefined",
+   "isBrowseScreen && !dataLoading && state.kind === 'empty'"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "concierge/ConciergeDesk.tsx:668:17",
+  "tag": "button",
+  "classes": "concierge-browse-chip",
+  "text": "全部月份",
+  "reason": "空 / 非空某一种情况才出现（isBrowseScreen && !dataLoading && state.kind === 'empty' && ）",
+  "conditions": [
+   "isBrowseScreen && !dataLoading && state.kind === 'empty' && filters.year !== un…"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "concierge/ConciergeDesk.tsx:670:19",
+  "tag": "button",
+  "classes": "concierge-browse-chip",
+  "text": "{option.label}",
+  "reason": "空 / 非空某一种情况才出现（isBrowseScreen && !dataLoading && state.kind === 'empty' && ）",
+  "conditions": [
+   "[列表] browseMonths",
+   "isBrowseScreen && !dataLoading && state.kind === 'empty' && filters.year !== un…"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "concierge/ConciergeDesk.tsx:711:17",
+  "tag": "button",
+  "classes": "concierge-active-filter-chip",
+  "text": "{FILTER_DIM_LABEL[entry.key]} ： {entry.t",
+  "reason": "空 / 非空某一种情况才出现（!dataLoading && (state.kind === 'empty' || state.kind === 'r）",
+  "conditions": [
+   "[列表] activeFilterEntries",
+   "!dataLoading && (state.kind === 'empty' || state.kind === 'results') && !filter…",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "concierge/ConciergeDesk.tsx:735:15",
+  "tag": "li",
+  "classes": "concierge-skeleton-chip",
+  "text": "",
+  "reason": "加载或进行中才出现（dataLoading）",
+  "conditions": [
+   "[列表] Array.from({ length: 6 })",
+   "dataLoading",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/draft-paper/DraftPaperRail.tsx:84:27",
+  "tag": "span",
+  "classes": "similar-chip similar-chip--hit",
+  "text": "{reason.label}",
+  "reason": "空 / 非空某一种情况才出现（!(request.data.results.length === 0)）",
+  "conditions": [
+   "[列表] result.reasons",
+   "[列表] request.data.results",
+   "!(request.data.results.length === 0)",
+   "request.status === 'ready'"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:4308:9",
+  "tag": "button",
+  "classes": "basket-chip",
+  "text": "<BoardList/> 草稿卷（ {currentDraftGroupCoun",
+  "reason": "条件没满足（!reviewRevision）",
+  "conditions": [
+   "!reviewRevision"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/paper-browse/SimilarQuestionsRailView.tsx:102:9",
+  "tag": "span",
+  "classes": "similar-chip similar-chip--hit",
+  "text": "含 {matchedQuestionIds.length} 题",
+  "reason": "空 / 非空某一种情况才出现（matchedQuestionIds.length > 0）",
+  "conditions": [
+   "matchedQuestionIds.length > 0"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/paper-browse/SimilarQuestionsRailView.tsx:105:9",
+  "tag": "span",
+  "classes": "similar-chip similar-chip--hit",
+  "text": "{reason.label}",
+  "reason": "条件没满足（[列表] reasons）",
+  "conditions": [
+   "[列表] reasons"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:65:5",
+  "tag": "span",
+  "classes": "paper-dictionary-badge",
+  "text": "{GAOKAO_STAGE_LABELS[stage]}",
+  "reason": "本地四组测试题跑不出这一块（GaokaoBadge）",
+  "conditions": []
+ },
+ {
+  "kind": "chip",
+  "at": "features/paper-intelligence/ClozeAnalysisPanel.tsx:77:13",
+  "tag": "span",
+  "classes": "pi-cloze-tag pi-cloze-tag--pos",
+  "text": "{analysis.pos}",
+  "reason": "本地四组测试题跑不出这一块（ClozeAnalysisPanel）",
+  "conditions": [
+   "hasActiveQuestion && analysis"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/paper-intelligence/ClozeAnalysisPanel.tsx:79:15",
+  "tag": "span",
+  "classes": "pi-cloze-tag pi-cloze-tag--sig",
+  "text": "{analysis.signatureLabel}",
+  "reason": "本地四组测试题跑不出这一块（ClozeAnalysisPanel）",
+  "conditions": [
+   "analysis.signatureLabel",
+   "hasActiveQuestion && analysis"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/paper-intelligence/ClozeAnalysisPanel.tsx:88:17",
+  "tag": "span",
+  "classes": "pi-cloze-answer-badge",
+  "text": "{analysis.correctFit.optionLabel}",
+  "reason": "本地四组测试题跑不出这一块（ClozeAnalysisPanel）",
+  "conditions": [
+   "analysis.correctFit.optionLabel",
+   "hasActiveQuestion && analysis"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/paper-intelligence/GrammarFillAnalysisPanel.tsx:76:13",
+  "tag": "span",
+  "classes": "pi-gf-tag pi-gf-tag--type",
+  "text": "{analysis.blankType === 'given' ? '有提示词'",
+  "reason": "本地四组测试题跑不出这一块（GrammarFillAnalysisPanel）",
+  "conditions": [
+   "hasActiveQuestion && analysis"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/paper-intelligence/GrammarFillAnalysisPanel.tsx:82:13",
+  "tag": "span",
+  "classes": "pi-gf-tag pi-gf-tag--facet",
+  "text": "{analysis.labelZh}",
+  "reason": "本地四组测试题跑不出这一块（GrammarFillAnalysisPanel）",
+  "conditions": [
+   "hasActiveQuestion && analysis"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/paper-intelligence/GrammarFillAnalysisPanel.tsx:88:13",
+  "tag": "span",
+  "classes": "pi-gf-answer-badge",
+  "text": "{analysis.answer}",
+  "reason": "本地四组测试题跑不出这一块（GrammarFillAnalysisPanel）",
+  "conditions": [
+   "hasActiveQuestion && analysis"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/paper-intelligence/GrammarFillAnalysisPanel.tsx:100:15",
+  "tag": "span",
+  "classes": "pi-gf-badge pi-gf-badge--role",
+  "text": "{ROLE_LABELS[analysis.role] ?? analysis.",
+  "reason": "本地四组测试题跑不出这一块（GrammarFillAnalysisPanel）",
+  "conditions": [
+   "analysis.role",
+   "hasActiveQuestion && analysis"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/paper-intelligence/PaperAssetAnalysisPanel.tsx:114:19",
+  "tag": "span",
+  "classes": "pi-ps-analysis-option-badge pi-ps-analysis-option-badge--correct",
+  "text": "<Check/>",
+  "reason": "本地四组测试题跑不出这一块（PaperAssetAnalysisPanel）",
+  "conditions": [
+   "isCorrect",
+   "[列表] analysis.options"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/paper-intelligence/PaperAssetAnalysisPanel.tsx:118:19",
+  "tag": "span",
+  "classes": "pi-ps-analysis-option-badge pi-ps-analysis-option-badge--trap",
+  "text": "{option.trapLabel}",
+  "reason": "本地四组测试题跑不出这一块（PaperAssetAnalysisPanel）",
+  "conditions": [
+   "!hideTypeBadgeAndMeta && option.trapLabel",
+   "!(isCorrect)",
+   "[列表] analysis.options"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/paper-intelligence/SevenChoicesAnalysisPanel.tsx:127:13",
+  "tag": "button",
+  "classes": "pi-seven-option-jump-chip",
+  "text": "{option.label}",
+  "reason": "本地四组测试题跑不出这一块（SevenChoicesAnalysisPanel）",
+  "conditions": [
+   "[列表] options"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/paper-intelligence/SevenChoicesAnalysisPanel.tsx:175:19",
+  "tag": "span",
+  "classes": "pi-seven-blank-tag",
+  "text": "{chain.questionNo}",
+  "reason": "展开或打开之后才出现（isOpen && chain）",
+  "conditions": [
+   "isOpen && chain",
+   "[列表] options"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/question-detail/QuestionGroupDetailView.tsx:91:12",
+  "tag": "span",
+  "classes": "peek-meta-badge",
+  "text": "{label}",
+  "reason": "条件没满足（sourceType === 'real_exam'）",
+  "conditions": [
+   "sourceType === 'real_exam'"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/question-detail/QuestionGroupDetailView.tsx:543:17",
+  "tag": "span",
+  "classes": "peek-chip",
+  "text": "{chip.label} {chip.count !== undefined &",
+  "reason": "空 / 非空某一种情况才出现（chips.length > 0）",
+  "conditions": [
+   "[列表] chips",
+   "chips.length > 0"
+  ]
+ },
+ {
+  "kind": "chip",
+  "at": "features/similar-passages/SimilarPassagesPanel.tsx:118:27",
+  "tag": "span",
+  "classes": "similar-chip similar-chip--hit",
+  "text": "{reason.label}",
+  "reason": "空 / 非空某一种情况才出现（!(request.data.results.length === 0)）",
+  "conditions": [
+   "[列表] result.reasons",
+   "[列表] request.data.results",
+   "!(request.data.results.length === 0)",
+   "request.status === 'ready'"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "concierge/ConciergeDesk.tsx:733:11",
+  "tag": "ul",
+  "classes": "concierge-skeleton-chip-row",
+  "text": "{Array.from({ length: 6 }).map((_, index",
+  "reason": "加载或进行中才出现（dataLoading）",
+  "conditions": [
+   "dataLoading",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "concierge/ConciergeDesk.tsx:742:17",
+  "tag": "div",
+  "classes": "concierge-skeleton-line concierge-skeleton-feed-row",
+  "text": "",
+  "reason": "加载或进行中才出现（dataLoading）",
+  "conditions": [
+   "[列表] Array.from({ length: 3 })",
+   "dataLoading",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "concierge/ConciergeDesk.tsx:743:17",
+  "tag": "div",
+  "classes": "concierge-skeleton-line concierge-skeleton-feed-row short",
+  "text": "",
+  "reason": "加载或进行中才出现（dataLoading）",
+  "conditions": [
+   "[列表] Array.from({ length: 3 })",
+   "dataLoading",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "concierge/ConciergeDesk.tsx:758:9",
+  "tag": "div",
+  "classes": "concierge-filter-row",
+  "text": "{visibleFilterDims.map((dimension) => ( ",
+  "reason": "空 / 非空某一种情况才出现（!dataLoading && (state.kind === 'empty' || state.kind === 'r）",
+  "conditions": [
+   "!dataLoading && (state.kind === 'empty' || state.kind === 'results') && filterP…",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "concierge/ConciergeDesk.tsx:765:13",
+  "tag": "div",
+  "classes": "concierge-filter-dim-row",
+  "text": "{FILTER_DIM_LABEL[dimension]} {filterOpt",
+  "reason": "展开或打开之后才出现（[列表] visibleFilterDims）",
+  "conditions": [
+   "[列表] visibleFilterDims",
+   "!dataLoading && (state.kind === 'empty' || state.kind === 'results') && filterP…",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "concierge/ConciergeDesk.tsx:878:19",
+  "tag": "div",
+  "classes": "concierge-skeleton-line concierge-skeleton-feed-row",
+  "text": "",
+  "reason": "加载或进行中才出现（state.kind === 'loading'）",
+  "conditions": [
+   "[列表] Array.from({ length: 3 })",
+   "state.kind === 'loading'",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "concierge/ConciergeDesk.tsx:879:19",
+  "tag": "div",
+  "classes": "concierge-skeleton-line concierge-skeleton-feed-row short",
+  "text": "",
+  "reason": "加载或进行中才出现（state.kind === 'loading'）",
+  "conditions": [
+   "[列表] Array.from({ length: 3 })",
+   "state.kind === 'loading'",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:3566:27",
+  "tag": "p",
+  "classes": "paper-browse-answer-row",
+  "text": "{answerRow}",
+  "reason": "条件没满足（answerRow）",
+  "conditions": [
+   "answerRow",
+   "!(group.groupType === 'reading')"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/paper-browse/PaperReviewControls.tsx:113:5",
+  "tag": "div",
+  "classes": "paper-review-controls-row",
+  "text": "{revisionId && <><select className=\"ghos",
+  "reason": "这个组件这次没渲染（PaperReviewControls）",
+  "conditions": []
+ },
+ {
+  "kind": "row",
+  "at": "features/paper-browse/RetainedWritingLecture.tsx:101:5",
+  "tag": "div",
+  "classes": "retained-writing-card-row",
+  "text": "{label} {values.map((value, index) => <s",
+  "reason": "这个组件这次没渲染（ReviewCardRow）",
+  "conditions": []
+ },
+ {
+  "kind": "row",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:374:9",
+  "tag": "div",
+  "classes": "paper-dictionary-title-row",
+  "text": "{title} {single ? <GaokaoBadge entry={si",
+  "reason": "本地四组测试题跑不出这一块（DictionaryCard）",
+  "conditions": []
+ },
+ {
+  "kind": "row",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:430:11",
+  "tag": "span",
+  "classes": "paper-dictionary-sense-skeleton-row",
+  "text": "<span/>",
+  "reason": "加载或进行中才出现（sense.status === 'loading'）",
+  "conditions": [
+   "sense.status === 'loading'"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:465:9",
+  "tag": "section",
+  "classes": "paper-dictionary-entry",
+  "text": "{!single ? ( <div className=\"paper-dicti",
+  "reason": "本地四组测试题跑不出这一块（DictionaryCard）",
+  "conditions": [
+   "[列表] entries"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/paper-browse/selection/SelectionOverlay.tsx:262:13",
+  "tag": "div",
+  "classes": "paper-selection-segment-row",
+  "text": "{item.selectedText ? ( <p className=\"pap",
+  "reason": "本地四组测试题跑不出这一块（SelectionOverlay）",
+  "conditions": [
+   "[列表] results",
+   "!(phase === 'dictionary')",
+   "!(phase === 'sentence-analysis')",
+   "!(phase === 'toolbar' || phase === 'lookup')"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/paper-browse/selection/sentence-analysis/CapsuleGroup.tsx:31:39",
+  "tag": "span",
+  "classes": "sa-label-entry",
+  "text": "{group.kind === 'nested' && index > 0 ? ",
+  "reason": "本地四组测试题跑不出这一块（CapsuleGroup）",
+  "conditions": [
+   "[列表] group.units"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:254:11",
+  "tag": "div",
+  "classes": "sa-detail-row",
+  "text": "<div/> <GrammarLegend/>",
+  "reason": "本地四组测试题跑不出这一块（SentenceAnalysisCard）",
+  "conditions": [
+   "ready"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/paper-intelligence/ClozeAnalysisPanel.tsx:86:13",
+  "tag": "div",
+  "classes": "pi-cloze-answer-row",
+  "text": "{analysis.correctFit.optionLabel && ( <s",
+  "reason": "本地四组测试题跑不出这一块（ClozeAnalysisPanel）",
+  "conditions": [
+   "hasActiveQuestion && analysis"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/paper-intelligence/ClozeAnalysisPanel.tsx:102:19",
+  "tag": "li",
+  "classes": "pi-cloze-distractor-item",
+  "text": "{gloss.optionLabel} . {gloss.optionText}",
+  "reason": "空 / 非空某一种情况才出现（analysis.distractorGlosses.length > 0）",
+  "conditions": [
+   "[列表] analysis.distractorGlosses",
+   "analysis.distractorGlosses.length > 0",
+   "hasActiveQuestion && analysis"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/paper-intelligence/WritingAnalysisPanel.tsx:55:15",
+  "tag": "li",
+  "classes": "pi-writing-continuation-paragraph-item",
+  "text": "{i === 0 ? '第1段' : '第2段'} {para}",
+  "reason": "本地四组测试题跑不出这一块（WritingAnalysisPanel）",
+  "conditions": [
+   "[列表] analysis.continuationDesign.paragraphs",
+   "analysis.taskType === 'continuation'"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/paper-intelligence/WritingAnalysisPanel.tsx:71:17",
+  "tag": "li",
+  "classes": "pi-writing-highlight-item",
+  "text": "{expr.text} {expr.note}",
+  "reason": "本地四组测试题跑不出这一块（WritingAnalysisPanel）",
+  "conditions": [
+   "[列表] analysis.highlightExpressions",
+   "(analysis.highlightExpressions?.length ?? 0) > 0",
+   "analysis.taskType === 'continuation'"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/paper-intelligence/WritingPaperPage.tsx:371:25",
+  "tag": "div",
+  "classes": "pi-writing-continuation-row",
+  "text": "{given} <span/>",
+  "reason": "某种模式下才出现（[列表] pageModel.blocks）",
+  "conditions": [
+   "[列表] block.givenTop",
+   "[列表] pageModel.blocks"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:425:15",
+  "tag": "div",
+  "classes": "vocabulary-dictation-title-row",
+  "text": "{set.title} {currentIndex + 1} / {entrie",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(resumePrompt)"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1047:19",
+  "tag": "label",
+  "classes": "dictation-set-row is-selected",
+  "text": "<input/> {selectedIndex >= 0 ? selectedI",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] library.items",
+   "library.items.length",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1249:13",
+  "tag": "div",
+  "classes": "dictation-suggestion-control dictation-suggestion-control-row",
+  "text": "{pausedReviewCount > 0 && <button type=\"",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1276:21",
+  "tag": "div",
+  "classes": "dictation-review-row is-paused",
+  "text": "<input/> {reviewMode === 'frequent' ? in",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] visibleReviewWords",
+   "visibleReviewWords.length",
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:507:7",
+  "tag": "section",
+  "classes": "meaning-recall-result",
+  "text": "本轮认词 {displayDate(activeRecord.recallDat",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:590:7",
+  "tag": "div",
+  "classes": "meaning-recall-start-row",
+  "text": "{selectedSets.length === 1 ? selectedSet",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "row",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:607:57",
+  "tag": "div",
+  "classes": "meaning-recall-suggestion-result",
+  "text": "{suggestion.map((entry) => <li key={entr",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!selectedSets.length && suggestion.length > 0"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/vocabulary-listen/VocabularyListenPage.tsx:373:11",
+  "tag": "div",
+  "classes": "vocabulary-listen-control-row",
+  "text": "<ChevronLeft/> {status === 'ended' || st",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "row",
+  "at": "features/vocabulary-practice/VocabularyHandwritingPrint.tsx:59:13",
+  "tag": "section",
+  "classes": "vocabulary-handwriting-row",
+  "text": "<HandwritingGuide/> {mode === 'standard'",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] page.entries",
+   "[列表] pages"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1626:13",
+  "tag": "div",
+  "classes": "vocabulary-run-start-row",
+  "text": "过词读音 美音 英音 {runId ? '继续过词' : '开始过词'}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "runState === 'setup' || runState === 'error'",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1972:25",
+  "tag": "div",
+  "classes": "vocabulary-dictation-print-row",
+  "text": "{number} {printRequest.kind === 'answer'",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] columnEntries",
+   "[列表] splitVocabularyDictationColumns(pageEntries)",
+   "printRequest?.kind === 'dictation' || printRequest?.kind === 'answer'",
+   "[列表] printPages"
+  ]
+ },
+ {
+  "kind": "row",
+  "at": "workbench/EntryModal.tsx:254:7",
+  "tag": "section",
+  "classes": "entry-panel",
+  "text": "Manual Entry {entryMode === 'edit' ? '编辑",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "surface",
+  "at": "concierge/ConciergeDesk.tsx:701:11",
+  "tag": "div",
+  "classes": "concierge-list-surface",
+  "text": "{!dataLoading && (state.kind === 'empty'",
+  "reason": "条件没满足（(showListSurface || showFeed)）",
+  "conditions": [
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/draft-paper/DraftPaperRail.tsx:40:5",
+  "tag": "div",
+  "classes": "draft-swap-drawer",
+  "text": "相似篇章 · {seedTitle} 返回目录 {recipeSummary} ",
+  "reason": "这个组件这次没渲染（DraftPaperSwapDrawer）",
+  "conditions": []
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-browse/ContinuationAnalysisPanel.tsx:180:7",
+  "tag": "div",
+  "classes": "retained-writing-card continuation-analysis-card",
+  "text": "完整范文 {officialModelAnswer && <h6 classNa",
+  "reason": "条件没满足（!display）",
+  "conditions": [
+   "!display"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-browse/ContinuationAnalysisPanel.tsx:205:5",
+  "tag": "div",
+  "classes": "retained-writing-card continuation-analysis-card",
+  "text": "原文理解 原文已经建立了什么故事世界 <Grounded/> <Grounded",
+  "reason": "这个组件这次没渲染（ContinuationAnalysisPanel）",
+  "conditions": []
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-browse/ListeningAnalysisPanel.tsx:18:5",
+  "tag": "div",
+  "classes": "listening-analysis-panel",
+  "text": "{materials.map((material) => { const que",
+  "reason": "这个组件这次没渲染（ListeningAnalysisPanel）",
+  "conditions": []
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-browse/ListeningSegmentPlayer.tsx:250:14",
+  "tag": "div",
+  "classes": "listening-player-card",
+  "text": "<PlaybackIcon/> {markItems.length > 0 &&",
+  "reason": "展开或打开之后才出现（open）",
+  "conditions": [
+   "open"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:2529:9",
+  "tag": "div",
+  "classes": "paper-browse-listening canonical-listening-surface",
+  "text": "<PaperSurface/>",
+  "reason": "某种模式下才出现（entry.kind === 'listening'）",
+  "conditions": [
+   "entry.kind === 'listening'"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:4266:11",
+  "tag": "aside",
+  "classes": "paper-browse-lecture-panel",
+  "text": "{renderLecturePanel()}",
+  "reason": "展开或打开之后才出现（lectureOpen）",
+  "conditions": [
+   "lectureOpen"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-browse/RetainedWritingLecture.tsx:114:5",
+  "tag": "div",
+  "classes": "retained-writing-card",
+  "text": "基本审题 <ReviewCardRow/> <ReviewCardRow/> <",
+  "reason": "这个组件这次没渲染（RetainedReviewCard）",
+  "conditions": []
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:372:5",
+  "tag": "div",
+  "classes": "paper-selection-card paper-dictionary-card",
+  "text": "{title} {single ? <GaokaoBadge entry={si",
+  "reason": "本地四组测试题跑不出这一块（DictionaryCard）",
+  "conditions": []
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:414:13",
+  "tag": "span",
+  "classes": "paper-dictionary-surface",
+  "text": "原文 {surface} {morphology.length > 0 ? ` ",
+  "reason": "空 / 非空某一种情况才出现（showSurface || singlePronunciations.length > 0）",
+  "conditions": [
+   "showSurface",
+   "showSurface || singlePronunciations.length > 0"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:431:13",
+  "tag": "span",
+  "classes": "paper-dictionary-sense-skeleton",
+  "text": "",
+  "reason": "加载或进行中才出现（sense.status === 'loading'）",
+  "conditions": [
+   "sense.status === 'loading'"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-browse/selection/SelectionOverlay.tsx:213:9",
+  "tag": "div",
+  "classes": "paper-selection-card",
+  "text": "<Translate/> {kicker} {canCopy && ( <but",
+  "reason": "本地四组测试题跑不出这一块（SelectionOverlay）",
+  "conditions": [
+   "!(phase === 'dictionary')",
+   "!(phase === 'sentence-analysis')",
+   "!(phase === 'toolbar' || phase === 'lookup')"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:127:5",
+  "tag": "div",
+  "classes": "paper-selection-card paper-sentence-analysis",
+  "text": "<SentenceAnalysis/> 句子分析 {ready && scope",
+  "reason": "本地四组测试题跑不出这一块（SentenceAnalysisCard）",
+  "conditions": []
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:205:13",
+  "tag": "span",
+  "classes": "sa-skeleton",
+  "text": "",
+  "reason": "加载或进行中才出现（status === 'loading'）",
+  "conditions": [
+   "status === 'loading'"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:206:13",
+  "tag": "span",
+  "classes": "sa-skeleton",
+  "text": "",
+  "reason": "加载或进行中才出现（status === 'loading'）",
+  "conditions": [
+   "status === 'loading'"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-intelligence/ClozeAnalysisPanel.tsx:45:5",
+  "tag": "div",
+  "classes": "pi-cloze-panel",
+  "text": "{groupView && ( // Passage-level intro: ",
+  "reason": "本地四组测试题跑不出这一块（ClozeAnalysisPanel）",
+  "conditions": []
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-intelligence/GrammarFillAnalysisPanel.tsx:48:5",
+  "tag": "div",
+  "classes": "pi-gf-panel",
+  "text": "{groupView && ( // Same intro-collapse b",
+  "reason": "本地四组测试题跑不出这一块（GrammarFillAnalysisPanel）",
+  "conditions": []
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-intelligence/SevenChoicesAnalysisPanel.tsx:99:5",
+  "tag": "section",
+  "classes": "pi-seven-panel",
+  "text": "七选五解析 A-G 选项池 {openCount} / {chains.leng",
+  "reason": "本地四组测试题跑不出这一块（SevenChoicesAnalysisPanel）",
+  "conditions": []
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-intelligence/SevenChoicesAnalysisPanel.tsx:149:13",
+  "tag": "article",
+  "classes": "pi-seven-option-card pi-seven-option-card--correct pi-seven-option-card--open",
+  "text": "{option.label} {chain && isOpen ? render",
+  "reason": "本地四组测试题跑不出这一块（SevenChoicesAnalysisPanel）",
+  "conditions": [
+   "[列表] options"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-intelligence/WritingAnalysisPanel.tsx:36:7",
+  "tag": "div",
+  "classes": "pi-writing-panel",
+  "text": "范文 / Model Answer {analysis.modelAnswer.",
+  "reason": "本地四组测试题跑不出这一块（WritingAnalysisPanel）",
+  "conditions": [
+   "analysis.taskType === 'continuation'"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/paper-intelligence/WritingAnalysisPanel.tsx:86:5",
+  "tag": "div",
+  "classes": "pi-writing-panel",
+  "text": "范文 / Model Answer {analysis.modelAnswer.",
+  "reason": "本地四组测试题跑不出这一块（WritingAnalysisPanel）",
+  "conditions": []
+ },
+ {
+  "kind": "surface",
+  "at": "features/question-detail/QuestionGroupDetailView.tsx:257:9",
+  "tag": "div",
+  "classes": "canonical-listening-surface",
+  "text": "{surfaceEl}",
+  "reason": "某种模式下才出现（entry.kind === 'listening'）",
+  "conditions": [
+   "entry.kind === 'listening'",
+   "!(entry.kind === 'writing')"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/similar-passages/SimilarPassagesPanel.tsx:80:5",
+  "tag": "div",
+  "classes": "similar-passages-panel",
+  "text": "相似篇章 {recipeSummary} 收起 <ChevronUp/> {re",
+  "reason": "本地四组测试题跑不出这一块（SimilarPassagesPanel）",
+  "conditions": []
+ },
+ {
+  "kind": "surface",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1076:15",
+  "tag": "aside",
+  "classes": "dictation-selection-panel",
+  "text": "已选 {selectedSets.length} 组 {rawSelectedC",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedSets.length > 0",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1174:15",
+  "tag": "aside",
+  "classes": "dictation-task-selection-panel",
+  "text": "已选 {selectedTasks.length} 份听写 {selectedT",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedTasks.length > 0",
+   "tab === 'tasks'"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1256:15",
+  "tag": "aside",
+  "classes": "dictation-suggestion-panel",
+  "text": "推荐 {suggestion.length} 词 确认名单后直接开始认词复习。 ",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "suggestion.length > 0",
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:602:32",
+  "tag": "div",
+  "classes": "meaning-recall-suggestion",
+  "text": "直接推荐一轮 优先选择重点、常错和较久没检查的词。 <input/> 词 <Sp",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!selectedSets.length"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/vocabulary-listen/VocabularyListenPage.tsx:338:9",
+  "tag": "section",
+  "classes": "vocabulary-listen-card",
+  "text": "{set.title} {currentIndex + 1} / {entrie",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "surface",
+  "at": "features/vocabulary-notebook/VocabularyNotebookPage.tsx:85:5",
+  "tag": "article",
+  "classes": "notebook-sheet",
+  "text": "{title} {detail.revisions.map((revision)",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "surface",
+  "at": "features/vocabulary-practice/VocabularyPracticePage.tsx:208:15",
+  "tag": "div",
+  "classes": "vocabulary-match-board",
+  "text": "{game.cards.map((card, cardIndex) => { c",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "loadState === 'ready' && vocabularySet && game"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1758:19",
+  "tag": "div",
+  "classes": "vocabulary-revealed-card",
+  "text": "<VocabularyVisual/> <VolumeFeedbackIcon/",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "reviewState.revealed",
+   "completion === 'active' && currentEntry",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)"
+  ]
+ },
+ {
+  "kind": "surface",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1927:7",
+  "tag": "section",
+  "classes": "vocabulary-print-sheet is-* cards",
+  "text": "{printRequest?.kind === 'handwriting' ? ",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "surface",
+  "at": "workbench/EntryModal.tsx:414:15",
+  "tag": "section",
+  "classes": "entry-question-card wide",
+  "text": "小题 {index + 1} <Trash/> 题号 <input/> 小题题型",
+  "reason": "条件没满足（[列表] entryForm.questions）",
+  "conditions": [
+   "[列表] entryForm.questions"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "concierge/ConciergeDesk.tsx:726:11",
+  "tag": "p",
+  "classes": "concierge-data-loading",
+  "text": "正在连接本地题库，稍候即可搜索。",
+  "reason": "加载或进行中才出现（dataLoading）",
+  "conditions": [
+   "dataLoading",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "concierge/ConciergeDesk.tsx:821:9",
+  "tag": "div",
+  "classes": "concierge-clarification",
+  "text": "{pickClarificationLine(state.pendingQuer",
+  "reason": "某种模式下才出现（state.kind === 'clarification'）",
+  "conditions": [
+   "state.kind === 'clarification'",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "concierge/ConciergeDesk.tsx:851:9",
+  "tag": "div",
+  "classes": "concierge-error",
+  "text": "<AlertTriangle/> 搜索暂时连不上，你输入的内容还在。 重试",
+  "reason": "出错时才出现（state.kind === 'error'）",
+  "conditions": [
+   "state.kind === 'error'",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/admin/AdminWorkbench.tsx:40:9",
+  "tag": "p",
+  "classes": "admin-backfill-summary",
+  "text": "{backfillStatus === 'loading' ? <span cl",
+  "reason": "管理页的这个状态没走到",
+  "conditions": []
+ },
+ {
+  "kind": "notice",
+  "at": "features/admin/AdminWorkbench.tsx:52:9",
+  "tag": "p",
+  "classes": "admin-backfill-error",
+  "text": "{backfillError ? `${backfillError} 可再试一次",
+  "reason": "管理页的这个状态没走到",
+  "conditions": []
+ },
+ {
+  "kind": "notice",
+  "at": "features/admin/AgentTokens.tsx:65:5",
+  "tag": "p",
+  "classes": "admin-backfill-error",
+  "text": "{error}",
+  "reason": "管理页的这个状态没走到",
+  "conditions": []
+ },
+ {
+  "kind": "notice",
+  "at": "features/admin/AgentTokens.tsx:66:5",
+  "tag": "p",
+  "classes": "",
+  "text": "{notice}",
+  "reason": "管理页的这个状态没走到",
+  "conditions": []
+ },
+ {
+  "kind": "notice",
+  "at": "features/admin/AgentTokens.tsx:79:7",
+  "tag": "p",
+  "classes": "admin-backfill-error",
+  "text": "{error}",
+  "reason": "管理页的这个状态没走到",
+  "conditions": [
+   "revoking"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/draft-paper/DraftPaperRail.tsx:52:9",
+  "tag": "div",
+  "classes": "similar-rail-error",
+  "text": "{request.message} 重试",
+  "reason": "出错时才出现（request.status === 'error'）",
+  "conditions": [
+   "request.status === 'error'"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/draft-paper/DraftPaperWorkbench.tsx:1386:49",
+  "tag": "p",
+  "classes": "draft-loading",
+  "text": "正在打开草稿卷…",
+  "reason": "加载或进行中才出现（loadStatus === 'loading'）",
+  "conditions": [
+   "loadStatus === 'loading'"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/draft-paper/DraftPaperWorkbench.tsx:1396:11",
+  "tag": "p",
+  "classes": "draft-error",
+  "text": "{loadError || '没找到这份草稿卷，可能已被删除。回到找题页重新组一",
+  "reason": "出错时才出现（loadStatus === 'error' || !draftPaper）",
+  "conditions": [
+   "loadStatus === 'error' || !draftPaper"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/draft-paper/DraftPaperWorkbench.tsx:1571:44",
+  "tag": "p",
+  "classes": "draft-error",
+  "text": "{saveError}",
+  "reason": "出错时才出现（saveStatus === 'error'）",
+  "conditions": [
+   "saveStatus === 'error'",
+   "moreMenuPresence.mounted"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/draft-paper/DraftPaperWorkbench.tsx:1592:27",
+  "tag": "p",
+  "classes": "draft-warning",
+  "text": "{migrationNotice}",
+  "reason": "条件没满足（migrationNotice）",
+  "conditions": [
+   "migrationNotice"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/draft-paper/DraftPaperWorkbench.tsx:1593:36",
+  "tag": "p",
+  "classes": "draft-error",
+  "text": "{exportError}",
+  "reason": "出错时才出现（exportStatus === 'error'）",
+  "conditions": [
+   "exportStatus === 'error'"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/draft-paper/DraftPaperWorkbench.tsx:1693:21",
+  "tag": "div",
+  "classes": "draft-a4-repaginating",
+  "text": "重新排版中…",
+  "reason": "加载或进行中才出现（paginationStatus === 'loading'）",
+  "conditions": [
+   "paginationStatus === 'loading'",
+   "previewHtml",
+   "!(draftPaper.items.length === 0)"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/draft-paper/DraftPaperWorkbench.tsx:1705:21",
+  "tag": "div",
+  "classes": "draft-a4-repaginating draft-a4-repaginating--error",
+  "text": "{paginationError || '重新排版失败，当前显示旧版预览'}",
+  "reason": "出错时才出现（paginationStatus === 'error'）",
+  "conditions": [
+   "paginationStatus === 'error'",
+   "previewHtml",
+   "!(draftPaper.items.length === 0)"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/draft-paper/DraftPaperWorkbench.tsx:1980:41",
+  "tag": "p",
+  "classes": "draft-error",
+  "text": "{spaceMessage}",
+  "reason": "出错时才出现（spaceStatus === 'error'）",
+  "conditions": [
+   "spaceStatus === 'error'",
+   "spaceDialogPresence.mounted"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/my-space/MySpacePage.tsx:368:46",
+  "tag": "p",
+  "classes": "my-space-message",
+  "text": "{message}",
+  "reason": "出错时才出现（message && loadState !== 'error'）",
+  "conditions": [
+   "message && loadState !== 'error'"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/my-space/MySpacePage.tsx:408:17",
+  "tag": "p",
+  "classes": "my-space-error",
+  "text": "{message || '个人空间读取失败。'}",
+  "reason": "出错时才出现（loadState === 'error'）",
+  "conditions": [
+   "loadState === 'error'"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/ListeningSegmentPlayer.tsx:325:17",
+  "tag": "span",
+  "classes": "listening-player-error",
+  "text": "录音未能播放，点 ▶ 重试",
+  "reason": "出错时才出现（error）",
+  "conditions": [
+   "error",
+   "open"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:4078:28",
+  "tag": "span",
+  "classes": "",
+  "text": "{pdfProductsError}   刷新 PDF 版本",
+  "reason": "出错时才出现（pdfProductsError）",
+  "conditions": [
+   "pdfProductsError",
+   "!reviewRevision"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:4124:9",
+  "tag": "div",
+  "classes": "paper-browse-loading",
+  "text": "正在打开整卷…",
+  "reason": "加载或进行中才出现（loading）",
+  "conditions": [
+   "loading"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:4185:28",
+  "tag": "p",
+  "classes": "paper-browse-export-error",
+  "text": "{analysisPdfError}",
+  "reason": "出错时才出现（analysisPdfError）",
+  "conditions": [
+   "analysisPdfError"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:4186:45",
+  "tag": "p",
+  "classes": "paper-browse-export-error",
+  "text": "{analysisFontError}",
+  "reason": "出错时才出现（analysisFontError && !lectureOpen）",
+  "conditions": [
+   "analysisFontError && !lectureOpen"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/PaperReviewControls.tsx:124:16",
+  "tag": "p",
+  "classes": "",
+  "text": "{notice}",
+  "reason": "操作之后才出现（notice）",
+  "conditions": [
+   "notice"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/PaperReviewControls.tsx:125:36",
+  "tag": "p",
+  "classes": "",
+  "text": "{productError}   刷新 PDF 版本",
+  "reason": "出错时才出现（revisionId && productError）",
+  "conditions": [
+   "revisionId && productError"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/PaperReviewControls.tsx:128:15",
+  "tag": "p",
+  "classes": "",
+  "text": "{error}   刷新",
+  "reason": "出错时才出现（error）",
+  "conditions": [
+   "error"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/SimilarQuestionsRailView.tsx:141:9",
+  "tag": "div",
+  "classes": "similar-rail-error",
+  "text": "{request.message} 重试",
+  "reason": "出错时才出现（request.status === 'error'）",
+  "conditions": [
+   "request.status === 'error'"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:409:21",
+  "tag": "p",
+  "classes": "paper-selection-card-error",
+  "text": "{copyError}",
+  "reason": "出错时才出现（copyError）",
+  "conditions": [
+   "copyError"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/selection/DictionaryCard.tsx:444:11",
+  "tag": "span",
+  "classes": "paper-dictionary-sense-note paper-dictionary-sense-error",
+  "text": "{sense.message} 重试",
+  "reason": "出错时才出现（sense.status === 'error'）",
+  "conditions": [
+   "sense.status === 'error'"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/selection/SelectionOverlay.tsx:248:31",
+  "tag": "p",
+  "classes": "paper-selection-card-error",
+  "text": "{clipboard.error}",
+  "reason": "出错时才出现（clipboard.error）",
+  "conditions": [
+   "clipboard.error",
+   "!(phase === 'dictionary')",
+   "!(phase === 'sentence-analysis')",
+   "!(phase === 'toolbar' || phase === 'lookup')"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/selection/SelectionOverlay.tsx:251:13",
+  "tag": "p",
+  "classes": "paper-selection-card-status",
+  "text": "<span/> 正在翻译…",
+  "reason": "加载或进行中才出现（phase === 'loading'）",
+  "conditions": [
+   "phase === 'loading'",
+   "!(phase === 'dictionary')",
+   "!(phase === 'sentence-analysis')",
+   "!(phase === 'toolbar' || phase === 'lookup')"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/selection/SelectionOverlay.tsx:258:13",
+  "tag": "p",
+  "classes": "paper-selection-card-error",
+  "text": "部分内容未完成，请重试失败段落。",
+  "reason": "本地四组测试题跑不出这一块（SelectionOverlay）",
+  "conditions": [
+   "partial",
+   "!(phase === 'dictionary')",
+   "!(phase === 'sentence-analysis')",
+   "!(phase === 'toolbar' || phase === 'lookup')"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/selection/SelectionOverlay.tsx:273:17",
+  "tag": "p",
+  "classes": "paper-selection-card-error",
+  "text": "第 {item.segmentIndex + 1} 段： {item.messa",
+  "reason": "本地四组测试题跑不出这一块（SelectionOverlay）",
+  "conditions": [
+   "!(item.status === 'ok')",
+   "[列表] results",
+   "!(phase === 'dictionary')",
+   "!(phase === 'sentence-analysis')"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/selection/SelectionOverlay.tsx:285:13",
+  "tag": "p",
+  "classes": "paper-selection-card-error",
+  "text": "{errorMessage}",
+  "reason": "出错时才出现（results.length === 0 && phase === 'error'）",
+  "conditions": [
+   "results.length === 0 && phase === 'error'",
+   "!(phase === 'dictionary')",
+   "!(phase === 'sentence-analysis')",
+   "!(phase === 'toolbar' || phase === 'lookup')"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:211:32",
+  "tag": "p",
+  "classes": "sa-status",
+  "text": "{REJECT_TEXT[rejectReason || 'cross-sent",
+  "reason": "本地四组测试题跑不出这一块（SentenceAnalysisCard）",
+  "conditions": [
+   "status === 'rejected'"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:214:9",
+  "tag": "div",
+  "classes": "sa-status",
+  "text": "{errorMessage || '分析失败，请重试'} {onRetry ? ",
+  "reason": "出错时才出现（status === 'error'）",
+  "conditions": [
+   "status === 'error'"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:215:11",
+  "tag": "p",
+  "classes": "paper-selection-card-error",
+  "text": "{errorMessage || '分析失败，请重试'}",
+  "reason": "出错时才出现（status === 'error'）",
+  "conditions": [
+   "status === 'error'"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:251:13",
+  "tag": "p",
+  "classes": "sa-status",
+  "text": "部分结构未能分析： {ready.gaps.join('、')}",
+  "reason": "空 / 非空某一种情况才出现（status === 'partial' && ready.gaps && ready.gaps.length > 0）",
+  "conditions": [
+   "status === 'partial' && ready.gaps && ready.gaps.length > 0",
+   "ready"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-browse/selection/sentence-analysis/SentenceAnalysisCard.tsx:266:11",
+  "tag": "p",
+  "classes": "sa-status",
+  "text": "{status === 'invalid' ? '分析数据无效' : (anal",
+  "reason": "本地四组测试题跑不出这一块（SentenceAnalysisCard）",
+  "conditions": [
+   "status === 'unavailable' || status === 'invalid'"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/paper-intelligence/GrammarFillAnalysisPanel.tsx:80:15",
+  "tag": "span",
+  "classes": "pi-gf-blank-hint",
+  "text": "提示词： {analysis.hint}",
+  "reason": "本地四组测试题跑不出这一块（GrammarFillAnalysisPanel）",
+  "conditions": [
+   "analysis.blankType === 'given' && analysis.hint",
+   "hasActiveQuestion && analysis"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/question-detail/QuestionGroupDetailView.tsx:507:38",
+  "tag": "p",
+  "classes": "detail-message error",
+  "text": "{detailError}",
+  "reason": "出错时才出现（detailStatus === 'error'）",
+  "conditions": [
+   "detailStatus === 'error'",
+   "!selectedDetail"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/similar-passages/SimilarPassagesPanel.tsx:92:9",
+  "tag": "div",
+  "classes": "similar-rail-error",
+  "text": "{request.message} 重试",
+  "reason": "出错时才出现（request.status === 'error'）",
+  "conditions": [
+   "request.status === 'error'"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:435:15",
+  "tag": "p",
+  "classes": "error vocabulary-dictation-status is-error",
+  "text": "{statusText}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(resumePrompt)"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:981:11",
+  "tag": "div",
+  "classes": "dictation-notice is-error",
+  "text": "{error || message} <X/>",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "(message || error)"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1081:44",
+  "tag": "p",
+  "classes": "dictation-volume-warning",
+  "text": "这次合集超过 120 词，打印会自动分页；二维码听写仍按 60 词拆分。",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "rawSelectedCount > 120",
+   "selectedSets.length > 0",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:515:19",
+  "tag": "p",
+  "classes": "meaning-recall-error",
+  "text": "{error}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "error",
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:588:17",
+  "tag": "p",
+  "classes": "meaning-recall-error",
+  "text": "{error}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "error"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-listen/VocabularyListenPage.tsx:384:11",
+  "tag": "p",
+  "classes": "error is-error",
+  "text": "{statusText}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-notebook/VocabularyNotebookPage.tsx:194:22",
+  "tag": "p",
+  "classes": "notebook-status",
+  "text": "{error}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "error",
+   "paperId"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-notebook/VocabularyNotebookPage.tsx:195:75",
+  "tag": "p",
+  "classes": "notebook-status",
+  "text": "正在打开这张纸…",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(detail)",
+   "paperId"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-practice/VocabularyPracticePage.tsx:172:11",
+  "tag": "section",
+  "classes": "vocabulary-practice-status",
+  "text": "<Card/> 正在准备卡片…",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "loadState === 'loading'"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-practice/VocabularyPracticePage.tsx:254:30",
+  "tag": "p",
+  "classes": "vocabulary-practice-audio-error",
+  "text": "{audioError}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "audioError",
+   "loadState === 'ready' && vocabularySet && game"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-review/VocabularyProgressExplorer.tsx:182:25",
+  "tag": "p",
+  "classes": "vocabulary-progress-status",
+  "text": "{statusMessage}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "statusMessage"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-review/VocabularyProgressExplorer.tsx:183:24",
+  "tag": "p",
+  "classes": "vocabulary-request-error",
+  "text": "{errorMessage}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "errorMessage"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1492:40",
+  "tag": "p",
+  "classes": "",
+  "text": "{studentFormError}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "studentFormError",
+   "studentCreateOpen",
+   "programLoadState === 'ready' && studentsState === 'ready' && activeStudent"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1528:30",
+  "tag": "p",
+  "classes": "vocabulary-request-error",
+  "text": "{requestError}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "requestError",
+   "programLoadState === 'error'"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1536:30",
+  "tag": "p",
+  "classes": "vocabulary-request-error",
+  "text": "{requestError}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "requestError",
+   "studentsState === 'error'",
+   "!(programLoadState === 'error')"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1601:30",
+  "tag": "p",
+  "classes": "vocabulary-request-error",
+  "text": "{requestError}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "requestError",
+   "runState === 'setup' && vocabularySet",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1665:44",
+  "tag": "small",
+  "classes": "",
+  "text": "一次最多生成 60 词，分成两次即可。",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "directInputOverLimit",
+   "directVocabularyInput.trim()",
+   "runState === 'setup' || runState === 'error'",
+   "!(runState === 'setup' && vocabularySet)"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1677:30",
+  "tag": "p",
+  "classes": "vocabulary-request-error",
+  "text": "{requestError}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "requestError",
+   "runState === 'setup' || runState === 'error'",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1844:34",
+  "tag": "p",
+  "classes": "vocabulary-request-error",
+  "text": "{requestError}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "requestError",
+   "completion === 'active' && currentEntry",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1878:34",
+  "tag": "p",
+  "classes": "vocabulary-request-error",
+  "text": "{requestError}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "requestError",
+   "!(completion === 'active' && currentEntry)",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)"
+  ]
+ },
+ {
+  "kind": "notice",
+  "at": "main.tsx:102:5",
+  "tag": "main",
+  "classes": "public-vocabulary-boot",
+  "text": "EQ 页面暂时无法打开 请检查网络后重新打开链接。",
+  "reason": "这个组件这次没渲染（BootstrapError）",
+  "conditions": []
+ },
+ {
+  "kind": "notice",
+  "at": "workbench/EntryModal.tsx:494:39",
+  "tag": "p",
+  "classes": "form-error",
+  "text": "{entryError}",
+  "reason": "出错时才出现（entryStatus === 'error'）",
+  "conditions": [
+   "entryStatus === 'error'"
+  ]
+ },
+ {
+  "kind": "toast",
+  "at": "features/draft-paper/DraftPaperWorkbench.tsx:1900:9",
+  "tag": "div",
+  "classes": "draft-undo-toast",
+  "text": "已替换这篇 <RotateCcw/> 撤销",
+  "reason": "操作之后才出现（replaceUndoToastPresence.mounted）",
+  "conditions": [
+   "replaceUndoToastPresence.mounted"
+  ]
+ },
+ {
+  "kind": "toast",
+  "at": "features/draft-paper/DraftPaperWorkbench.tsx:1911:9",
+  "tag": "div",
+  "classes": "draft-undo-toast",
+  "text": "{swapAddToastPresence.rendered}",
+  "reason": "操作之后才出现（swapAddToastPresence.rendered）",
+  "conditions": [
+   "swapAddToastPresence.rendered"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "concierge/ConciergeDesk.tsx:902:13",
+  "tag": "p",
+  "classes": "concierge-empty",
+  "text": "筛选条件太严格，没有匹配的结果。 清除筛选",
+  "reason": "空 / 非空某一种情况才出现（state.kind === 'results' && paperResults.length > 0 && filte）",
+  "conditions": [
+   "state.kind === 'results' && paperResults.length > 0 && filteredPaperResults.len…",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "concierge/ConciergeDesk.tsx:951:13",
+  "tag": "p",
+  "classes": "concierge-empty",
+  "text": "筛选条件太严格，题库里没有匹配的卷。 清除筛选",
+  "reason": "空 / 非空某一种情况才出现（hasActiveFilters && feedPaperCount === 0）",
+  "conditions": [
+   "hasActiveFilters && feedPaperCount === 0",
+   "!(questionGroups.length === 0)",
+   "showFeed",
+   "(showListSurface || showFeed)"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/draft-paper/DraftPaperRail.tsx:49:40",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "加载中…",
+  "reason": "加载或进行中才出现（request.status === 'loading'）",
+  "conditions": [
+   "request.status === 'loading'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/draft-paper/DraftPaperRail.tsx:53:11",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "{request.message}",
+  "reason": "出错时才出现（request.status === 'error'）",
+  "conditions": [
+   "request.status === 'error'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/draft-paper/DraftPaperRail.tsx:63:13",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "{request.data.notice || '库里暂时没有匹配的相似篇章。'",
+  "reason": "空 / 非空某一种情况才出现（request.data.results.length === 0）",
+  "conditions": [
+   "request.data.results.length === 0",
+   "request.status === 'ready'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/my-space/MySpacePage.tsx:405:41",
+  "tag": "p",
+  "classes": "my-space-empty",
+  "text": "正在读取个人空间…",
+  "reason": "加载或进行中才出现（loadState === 'loading'）",
+  "conditions": [
+   "loadState === 'loading'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/my-space/MySpacePage.tsx:407:15",
+  "tag": "div",
+  "classes": "my-space-empty-state",
+  "text": "{message || '个人空间读取失败。'} 重新加载",
+  "reason": "出错时才出现（loadState === 'error'）",
+  "conditions": [
+   "loadState === 'error'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/my-space/MySpacePage.tsx:413:15",
+  "tag": "div",
+  "classes": "my-space-empty-state",
+  "text": "<EmptyIllustration/> 试卷导出为 PDF 后，可以保存在这里",
+  "reason": "空 / 非空某一种情况才出现（loadState === 'loaded' && artifacts.length === 0）",
+  "conditions": [
+   "loadState === 'loaded' && artifacts.length === 0"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/my-space/MySpacePage.tsx:415:17",
+  "tag": "p",
+  "classes": "my-space-empty",
+  "text": "试卷导出为 PDF 后，可以保存在这里。",
+  "reason": "空 / 非空某一种情况才出现（loadState === 'loaded' && artifacts.length === 0）",
+  "conditions": [
+   "loadState === 'loaded' && artifacts.length === 0"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-browse/ListeningAnalysisPanel.tsx:15:38",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "解析未发布",
+  "reason": "空 / 非空某一种情况才出现（materials.length === 0）",
+  "conditions": [
+   "materials.length === 0"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:3298:14",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "{analysisFontError}",
+  "reason": "出错时才出现（analysisFontError && !lectureEntry && ['listening', 'writing）",
+  "conditions": [
+   "analysisFontError && !lectureEntry && ['listening', 'writing', 'cloze', 'gramma…"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:3311:14",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "解析未发布",
+  "reason": "某种模式下才出现（group.groupType === 'listening'）",
+  "conditions": [
+   "group.groupType === 'listening'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:3317:16",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "解析未发布",
+  "reason": "空 / 非空某一种情况才出现（chains.length === 0）",
+  "conditions": [
+   "chains.length === 0",
+   "group.groupType === 'sevenChoices' && entry?.kind === 'sevenChoices'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:3372:9",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "{lectureAnalysisLoading ? '解析加载中…' : '解析",
+  "reason": "某种模式下才出现（group.groupType === 'cloze'）",
+  "conditions": [
+   "group.groupType === 'cloze'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:3392:9",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "{lectureAnalysisLoading ? '解析加载中…' : '解析",
+  "reason": "某种模式下才出现（group.groupType === 'grammarFill'）",
+  "conditions": [
+   "group.groupType === 'grammarFill'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:3414:18",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "解析未发布",
+  "reason": "某种模式下才出现（lectureEntry?.kind === 'writing'）",
+  "conditions": [
+   "sourceTaskType === 'application' || lectureEntry.analysis.taskType === 'applica…",
+   "lectureEntry?.kind === 'writing'",
+   "group.groupType === 'writing'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:3419:9",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "{lectureAnalysisLoading ? '解析加载中…' : '解析",
+  "reason": "某种模式下才出现（group.groupType === 'writing'）",
+  "conditions": [
+   "group.groupType === 'writing'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:3423:12",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "解析未发布",
+  "reason": "这个组件这次没渲染（PaperBrowsePageContent）",
+  "conditions": []
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:3455:14",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "点左边的题目后，这里显示讲评",
+  "reason": "条件没满足（!groupId || !group）",
+  "conditions": [
+   "!groupId || !group"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-browse/SimilarQuestionsRailView.tsx:138:40",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "{headLabel} 加载中…",
+  "reason": "加载或进行中才出现（request.status === 'loading'）",
+  "conditions": [
+   "request.status === 'loading'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-browse/SimilarQuestionsRailView.tsx:142:11",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "{request.message}",
+  "reason": "出错时才出现（request.status === 'error'）",
+  "conditions": [
+   "request.status === 'error'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-browse/SimilarQuestionsRailView.tsx:156:15",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "{notice || '库里暂时没有匹配的相似题。'}",
+  "reason": "空 / 非空某一种情况才出现（results.length === 0）",
+  "conditions": [
+   "results.length === 0",
+   "request.status === 'ready'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-intelligence/ClozeAnalysisPanel.tsx:61:9",
+  "tag": "div",
+  "classes": "pi-ps-analysis-empty",
+  "text": "点击左侧空格查看解析",
+  "reason": "本地四组测试题跑不出这一块（ClozeAnalysisPanel）",
+  "conditions": [
+   "!hasActiveQuestion"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-intelligence/ClozeAnalysisPanel.tsx:67:9",
+  "tag": "div",
+  "classes": "pi-ps-analysis-empty pi-ps-analysis-empty--unpublished",
+  "text": "解析未发布",
+  "reason": "本地四组测试题跑不出这一块（ClozeAnalysisPanel）",
+  "conditions": [
+   "hasActiveQuestion && !analysis"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-intelligence/ClozeAnalysisPanel.tsx:73:9",
+  "tag": "div",
+  "classes": "pi-cloze-blank-card",
+  "text": "第 {analysis.blankNo} 题 {analysis.pos} {a",
+  "reason": "本地四组测试题跑不出这一块（ClozeAnalysisPanel）",
+  "conditions": [
+   "hasActiveQuestion && analysis"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-intelligence/GrammarFillAnalysisPanel.tsx:60:9",
+  "tag": "div",
+  "classes": "pi-ps-analysis-empty",
+  "text": "点击左侧空格查看解析",
+  "reason": "本地四组测试题跑不出这一块（GrammarFillAnalysisPanel）",
+  "conditions": [
+   "!hasActiveQuestion"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-intelligence/GrammarFillAnalysisPanel.tsx:66:9",
+  "tag": "div",
+  "classes": "pi-ps-analysis-empty pi-ps-analysis-empty--unpublished",
+  "text": "解析未发布",
+  "reason": "本地四组测试题跑不出这一块（GrammarFillAnalysisPanel）",
+  "conditions": [
+   "hasActiveQuestion && !analysis"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-intelligence/GrammarFillAnalysisPanel.tsx:72:9",
+  "tag": "div",
+  "classes": "pi-gf-blank-card",
+  "text": "第 {analysis.blankNo} 题 {analysis.blankTy",
+  "reason": "本地四组测试题跑不出这一块（GrammarFillAnalysisPanel）",
+  "conditions": [
+   "hasActiveQuestion && analysis"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-intelligence/PaperAssetAnalysisPanel.tsx:37:7",
+  "tag": "div",
+  "classes": "pi-ps-analysis-empty",
+  "text": "<ObjectiveTeachingContent/> 点击左侧题目查看解析",
+  "reason": "本地四组测试题跑不出这一块（PaperAssetAnalysisPanel）",
+  "conditions": [
+   "!hasActiveQuestion"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/paper-intelligence/PaperAssetAnalysisPanel.tsx:46:7",
+  "tag": "div",
+  "classes": "pi-ps-analysis-empty pi-ps-analysis-empty--unpublished",
+  "text": "<ObjectiveTeachingContent/> 解析未发布",
+  "reason": "本地四组测试题跑不出这一块（PaperAssetAnalysisPanel）",
+  "conditions": [
+   "!analysis"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/similar-passages/SimilarPassagesPanel.tsx:89:40",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "加载中…",
+  "reason": "加载或进行中才出现（request.status === 'loading'）",
+  "conditions": [
+   "request.status === 'loading'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/similar-passages/SimilarPassagesPanel.tsx:93:11",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "{request.message}",
+  "reason": "出错时才出现（request.status === 'error'）",
+  "conditions": [
+   "request.status === 'error'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/similar-passages/SimilarPassagesPanel.tsx:103:13",
+  "tag": "p",
+  "classes": "paper-browse-lecture-empty",
+  "text": "{request.data.notice || '库里暂时没有匹配的相似篇章。'",
+  "reason": "空 / 非空某一种情况才出现（request.data.results.length === 0）",
+  "conditions": [
+   "request.data.results.length === 0",
+   "request.status === 'ready'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1170:77",
+  "tag": "div",
+  "classes": "dictation-empty-state is-blank",
+  "text": "<EmptyIllustration/> 还没有听写。先到「词组」里选好单词。 ",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(studentDataLoadedFor !== activeStudentId)",
+   "!(tasks.length)",
+   "tab === 'tasks'"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/vocabulary-notebook/VocabularyNotebookPage.tsx:200:20",
+  "tag": "p",
+  "classes": "notebook-empty",
+  "text": "{error}",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "error",
+   "!(paperId)"
+  ]
+ },
+ {
+  "kind": "empty",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1905:15",
+  "tag": "div",
+  "classes": "vocabulary-collection-empty",
+  "text": "<BookMarked/> 按 Shift 判断“不认识”，生词会依次收在这里。",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(unfamiliarEntries.length)",
+   "!(runState === 'setup' || runState === 'error')",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)"
+  ]
+ },
+ {
+  "kind": "dialog",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:4248:15",
+  "tag": "div",
+  "classes": "paper-browse-seven-blank-overlay",
+  "text": "{sevenChoiceOverlay.marks.map((mark) => ",
+  "reason": "展开或打开之后才出现（lectureOpen && panelGroupModel?.kind === 'sevenChoices' && s）",
+  "conditions": [
+   "lectureOpen && panelGroupModel?.kind === 'sevenChoices' && sevenChoiceOverlay.m…"
+  ]
+ },
+ {
+  "kind": "dialog",
+  "at": "features/paper-browse/selection/SelectionOverlay.tsx:164:5",
+  "tag": "div",
+  "classes": "paper-selection-overlay",
+  "text": "{liveMessage} {phase === 'toolbar' || ph",
+  "reason": "本地四组测试题跑不出这一块（SelectionOverlay）",
+  "conditions": []
+ },
+ {
+  "kind": "dialog",
+  "at": "features/paper-intelligence/preview/paperIntelligenceEvidenceLine.tsx:318:7",
+  "tag": "svg",
+  "classes": "pi-line-overlay",
+  "text": "",
+  "reason": "本地四组测试题跑不出这一块（PaperIntelligenceEvidenceLine）",
+  "conditions": [
+   "!geometry || !drawnEvidenceId"
+  ]
+ },
+ {
+  "kind": "dialog",
+  "at": "features/paper-intelligence/preview/paperIntelligenceEvidenceLine.tsx:341:5",
+  "tag": "svg",
+  "classes": "pi-line-overlay",
+  "text": "<path/>",
+  "reason": "本地四组测试题跑不出这一块（PaperIntelligenceEvidenceLine）",
+  "conditions": []
+ },
+ {
+  "kind": "dialog",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1009:23",
+  "tag": "details",
+  "classes": "dictation-download-menu",
+  "text": "<DownloadFeedbackIcon/> 下载资料 <Disclosure",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] createdTasks",
+   "createdTasks.length > 0"
+  ]
+ },
+ {
+  "kind": "dialog",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1157:29",
+  "tag": "details",
+  "classes": "dictation-download-menu",
+  "text": "<DownloadFeedbackIcon/> 下载资料 <Disclosure",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] group.tasks",
+   "[列表] taskDateGroups",
+   "tasks.length",
+   "tab === 'tasks'"
+  ]
+ },
+ {
+  "kind": "dialog",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1207:25",
+  "tag": "details",
+  "classes": "dictation-download-menu",
+  "text": "<DownloadFeedbackIcon/> 下载本轮错词 <Disclosu",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "record.status === 'completed' && counts.wrong > 0",
+   "item.kind === 'meaning'",
+   "[列表] detectionHistory",
+   "detectionHistory.length"
+  ]
+ },
+ {
+  "kind": "dialog",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:537:11",
+  "tag": "details",
+  "classes": "dictation-download-menu meaning-recall-download-menu",
+  "text": "<DownloadFeedbackIcon/> 下载本轮错词 <Disclosu",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "dialog",
+  "at": "features/vocabulary-practice/VocabularyHandwritingSelector.tsx:100:7",
+  "tag": "section",
+  "classes": "vocabulary-handwriting-selector",
+  "text": "选择练字单词 {title} · 保持原词序 <X/> 已选 {selected",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "dialog",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1323:5",
+  "tag": "div",
+  "classes": "vocabulary-download-menu",
+  "text": "<DownloadFeedbackIcon/> {pdfDownloadBusy",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "vocabularySet"
+  ]
+ },
+ {
+  "kind": "dialog",
+  "at": "workbench/EntryModal.tsx:245:5",
+  "tag": "dialog",
+  "classes": "entry-backdrop",
+  "text": "Manual Entry {entryMode === 'edit' ? '编辑",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "components/AppTopbar.tsx:133:19",
+  "tag": "input",
+  "classes": "topbar-page-title-input",
+  "text": "",
+  "reason": "某种模式下才出现（props.pageTitleEditable）",
+  "conditions": [
+   "editingTitle",
+   "props.pageTitleEditable",
+   "!(variant === 'home')"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/paper-browse/PaperBrowsePage.tsx:4062:7",
+  "tag": "select",
+  "classes": "ghost-button",
+  "text": "{pdfEditions.map((edition) => <option ke",
+  "reason": "条件没满足（!reviewRevision）",
+  "conditions": [
+   "!reviewRevision"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/paper-browse/PaperReviewControls.tsx:114:24",
+  "tag": "select",
+  "classes": "ghost-button",
+  "text": "{editions.map(edition => <option key={ed",
+  "reason": "条件没满足（revisionId）",
+  "conditions": [
+   "revisionId"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/paper-browse/PaperReviewControls.tsx:131:20",
+  "tag": "textarea",
+  "classes": "",
+  "text": "",
+  "reason": "条件没满足（manualCopy）",
+  "conditions": [
+   "manualCopy"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/paper-browse/SimilarQuestionsRailView.tsx:173:23",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "空 / 非空某一种情况才出现（!(results.length === 0)）",
+  "conditions": [
+   "[列表] results",
+   "!(results.length === 0)",
+   "request.status === 'ready'"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:496:21",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(resumePrompt)"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-dictation/VocabularyDictationPage.tsx:528:19",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!(resumePrompt)"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1048:21",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] library.items",
+   "library.items.length",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1085:45",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedSets.length > 0",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1086:45",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedSets.length > 0",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1088:64",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedSets.length > 0",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1096:30",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedSets.length > 0",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1097:30",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "selectedSets.length > 0",
+   "tab === 'sets'"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1153:68",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] group.tasks",
+   "[列表] taskDateGroups",
+   "tasks.length",
+   "tab === 'tasks'"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1251:28",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-dictation-workbench/VocabularyDictationWorkbench.tsx:1277:30",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] visibleReviewWords",
+   "visibleReviewWords.length",
+   "tab === 'review'"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:519:13",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "activeRecord?.status === 'completed' && counts"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:595:18",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-dictation-workbench/VocabularyMeaningRecallPanel.tsx:604:16",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "!selectedSets.length"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-listen/VocabularyListenPage.tsx:404:15",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-practice/VocabularyHandwritingSelector.tsx:128:13",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-practice/VocabularyHandwritingSelector.tsx:139:13",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-practice/VocabularyHandwritingSelector.tsx:156:17",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "[列表] entries"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1292:9",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "vocabularySet"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1312:7",
+  "tag": "select",
+  "classes": "",
+  "text": "美式 英式",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "vocabularySet"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1442:19",
+  "tag": "select",
+  "classes": "",
+  "text": "{programs.map((item) => <option value={i",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "programs.length > 1",
+   "programLoadState === 'ready' && studentsState === 'ready' && activeStudent"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1455:19",
+  "tag": "select",
+  "classes": "",
+  "text": "{students.map((student) => <option value",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "programLoadState === 'ready' && studentsState === 'ready' && activeStudent"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1481:21",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "studentCreateOpen",
+   "programLoadState === 'ready' && studentsState === 'ready' && activeStudent"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1615:17",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "runState === 'setup' || runState === 'error'",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "features/vocabulary-review/VocabularyReviewPage.tsx:1645:17",
+  "tag": "textarea",
+  "classes": "",
+  "text": "",
+  "reason": "需要生词或学生数据（本地测试数据里没有）",
+  "conditions": [
+   "runState === 'setup' || runState === 'error'",
+   "!(runState === 'setup' && vocabularySet)",
+   "!(progressExplorerOpen && activeStudent)",
+   "!(programLoadState === 'loading' || studentsState === 'loading' || runState ===…"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:270:15",
+  "tag": "select",
+  "classes": "",
+  "text": "真题 模拟题 自建 其他",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:282:15",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:291:15",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:295:15",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:303:15",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:311:15",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:319:15",
+  "tag": "textarea",
+  "classes": "",
+  "text": "",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:328:15",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:332:15",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:339:15",
+  "tag": "textarea",
+  "classes": "",
+  "text": "",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:351:15",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:359:15",
+  "tag": "select",
+  "classes": "",
+  "text": "阅读理解 完形填空 七选五 语法填空 写作 读后续写 听力 其他",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:375:15",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:382:15",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:393:15",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:431:21",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "条件没满足（[列表] entryForm.questions）",
+  "conditions": [
+   "[列表] entryForm.questions"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:439:21",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "条件没满足（[列表] entryForm.questions）",
+  "conditions": [
+   "[列表] entryForm.questions"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:446:21",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "条件没满足（[列表] entryForm.questions）",
+  "conditions": [
+   "[列表] entryForm.questions"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:453:21",
+  "tag": "textarea",
+  "classes": "",
+  "text": "",
+  "reason": "条件没满足（[列表] entryForm.questions）",
+  "conditions": [
+   "[列表] entryForm.questions"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:462:21",
+  "tag": "textarea",
+  "classes": "",
+  "text": "",
+  "reason": "条件没满足（[列表] entryForm.questions）",
+  "conditions": [
+   "[列表] entryForm.questions"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:471:21",
+  "tag": "textarea",
+  "classes": "",
+  "text": "",
+  "reason": "条件没满足（[列表] entryForm.questions）",
+  "conditions": [
+   "[列表] entryForm.questions"
+  ]
+ },
+ {
+  "kind": "field",
+  "at": "workbench/EntryModal.tsx:486:15",
+  "tag": "input",
+  "classes": "",
+  "text": "",
+  "reason": "这个组件这次没渲染（EntryModal）",
+  "conditions": []
+ }
+]

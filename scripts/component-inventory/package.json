@@ -1,0 +1,9 @@
+{
+  "name": "eqb-component-inventory",
+  "private": true,
+  "description": "构件清点脚本的独立依赖（不进网站构建）。重跑前：npm ci --prefix scripts/component-inventory",
+  "type": "module",
+  "devDependencies": {
+    "axe-core": "4.14.0"
+  }
+}

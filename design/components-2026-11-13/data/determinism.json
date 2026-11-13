@@ -1,0 +1,132 @@
+{
+ "identical": true,
+ "scenariosFailed": [
+  [],
+  []
+ ],
+ "candidates": [
+  829,
+  829
+ ],
+ "classified": [
+  527,
+  527
+ ],
+ "seedPass": [
+  true,
+  true
+ ],
+ "perKind": [
+  {
+   "kind": "button",
+   "label": "按钮",
+   "variants": [
+    38,
+    38
+   ],
+   "count": [
+    314,
+    314
+   ]
+  },
+  {
+   "kind": "chip",
+   "label": "标签 / 小签",
+   "variants": [
+    4,
+    4
+   ],
+   "count": [
+    35,
+    35
+   ]
+  },
+  {
+   "kind": "row",
+   "label": "行",
+   "variants": [
+    1,
+    1
+   ],
+   "count": [
+    15,
+    15
+   ]
+  },
+  {
+   "kind": "surface",
+   "label": "卡片 / 板 / 纸",
+   "variants": [
+    8,
+    8
+   ],
+   "count": [
+    23,
+    23
+   ]
+  },
+  {
+   "kind": "notice",
+   "label": "提示条 / 报错",
+   "variants": [
+    7,
+    7
+   ],
+   "count": [
+    27,
+    27
+   ]
+  },
+  {
+   "kind": "toast",
+   "label": "底部提示 / 撤销",
+   "variants": [
+    1,
+    1
+   ],
+   "count": [
+    2,
+    2
+   ]
+  },
+  {
+   "kind": "empty",
+   "label": "空状态",
+   "variants": [
+    3,
+    3
+   ],
+   "count": [
+    8,
+    8
+   ]
+  },
+  {
+   "kind": "dialog",
+   "label": "对话框 / 菜单 / 抽屉",
+   "variants": [
+    5,
+    5
+   ],
+   "count": [
+    8,
+    8
+   ]
+  },
+  {
+   "kind": "field",
+   "label": "输入框 / 搜索",
+   "variants": [
+    11,
+    11
+   ],
+   "count": [
+    31,
+    31
+   ]
+  }
+ ],
+ "onlyFirst": [],
+ "onlySecond": [],
+ "countDiff": []
+}
