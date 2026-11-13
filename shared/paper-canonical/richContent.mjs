@@ -245,3 +245,36 @@ export function displayVariantArtifact(media, documents) {
     || sha256(bytes) !== variant.sha256) throw new Error('Display variant does not close immutable bytes')
   return { ...structuredClone(variant), encodedBytes: document.encodedBytes }
 }
+
+export function validFigureTextRegions(regions) {
+  if (!Array.isArray(regions)) return false
+  const ids = new Set()
+  return regions.every(region => {
+    if (!isRecordValue(region) || !exactKeys(region, ['id', 'text', 'box'])
+      || typeof region.id !== 'string' || !region.id.trim() || region.id.includes('\u0000')
+      || ids.has(region.id) || typeof region.text !== 'string' || !region.text.trim()
+      || !isRecordValue(region.box) || !exactKeys(region.box, ['x', 'y', 'w', 'h'])) return false
+    ids.add(region.id)
+    const { x, y, w, h } = region.box
+    return [x, y, w, h].every(Number.isFinite) && x >= 0 && y >= 0
+      && w > 0 && h > 0 && x + w <= 1 && y + h <= 1
+  })
+}
+
+/** Resolves only an exact figure/media + region identity, never a quote search. */
+export function resolveFigureTextRegion(reference, figures) {
+  const key = Object.hasOwn(reference, 'figureId') ? 'figureId' : 'mediaId'
+  if (!exactKeys(reference, [key, 'regionId', ...(Object.hasOwn(reference, 'quote') ? ['quote'] : [])])
+    || typeof reference[key] !== 'string' || !reference[key].trim()
+    || typeof reference.regionId !== 'string' || !reference.regionId.trim()) throw new Error('Invalid figure-region reference')
+  const matches = figures.filter(figure => reference[key] === (key === 'mediaId'
+    ? figure.mediaId : figure.nodeId ?? figure.blockId ?? figure.figureId))
+  const regions = matches.length === 1 ? matches[0].textRegions ?? matches[0].media?.textRegions : undefined
+  if (!validFigureTextRegions(regions)) throw new Error('Unknown figure text table')
+  const region = regions.find(item => item.id === reference.regionId)
+  if (!region || (Object.hasOwn(reference, 'quote')
+    && (typeof reference.quote !== 'string' || !reference.quote.trim() || !region.text.includes(reference.quote)))) {
+    throw new Error('Unknown figure region or quote outside its exact text')
+  }
+  return region
+}

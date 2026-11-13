@@ -108,6 +108,12 @@ export type CanonicalReadingSurfaceTableBlock = {
   }>
 }
 
+export type CanonicalFigureTextRegion = {
+  readonly id: string
+  readonly text: string
+  readonly box: { readonly x: number; readonly y: number; readonly w: number; readonly h: number }
+}
+
 export type CanonicalFigureDisplayVariant = {
   readonly path: string
   readonly sha256: string
@@ -132,6 +138,7 @@ export type CanonicalReadingSurfaceFigureBlock = {
     readonly sourceArtifactRef: { readonly artifactId: string }
     readonly presentation?: CanonicalMediaPresentation
     readonly displayVariant?: CanonicalFigureDisplayVariant
+    readonly textRegions?: ReadonlyArray<CanonicalFigureTextRegion>
   }
   readonly mediaArtifact: {
     readonly mimeType: string

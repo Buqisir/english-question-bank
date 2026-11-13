@@ -1691,6 +1691,7 @@ export function deriveNck1SemanticSource(
         pixelWidth: selected.pixelWidth,
         pixelHeight: selected.pixelHeight,
         sourceArtifactRef: { artifactId: stableArtifactId(selected.bytes) },
+        ...(media.textRegions ? { textRegions: structuredClone(media.textRegions) } : {}),
         ...(media.displayVariant ? { displayVariant: {
           ...structuredClone(media.displayVariant),
           ...identifyImage(mediaById.get(mediaId).displayVariantBytes),

@@ -92,6 +92,7 @@ import {
   readingCaptureHasUnregisteredBlock,
   someRichBlocks,
   displayVariantArtifact,
+  validFigureTextRegions,
   validTableColumnWidths,
   validTableMarks,
 } from './richContent.mjs'
@@ -2863,7 +2864,8 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     const captured = capturedArtifacts.get(item?.sourceArtifactRef?.artifactId)
     if (
       !isRecordValue(item)
-      || !exactKeys(item, ['mediaId', 'mimeType', 'sha256', 'pixelWidth', 'pixelHeight', 'sourceArtifactRef', ...(Object.hasOwn(item, 'displayVariant') ? ['displayVariant'] : [])])
+      || !exactKeys(item, ['mediaId', 'mimeType', 'sha256', 'pixelWidth', 'pixelHeight', 'sourceArtifactRef', ...(Object.hasOwn(item, 'displayVariant') ? ['displayVariant'] : []), ...(Object.hasOwn(item, 'textRegions') ? ['textRegions'] : [])])
+      || (Object.hasOwn(item, 'textRegions') && !validFigureTextRegions(item.textRegions))
       || mediaIds.has(item.mediaId)
       || typeof item.mimeType !== 'string'
       || typeof item.sha256 !== 'string'

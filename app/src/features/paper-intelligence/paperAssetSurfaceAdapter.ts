@@ -12,6 +12,7 @@
  * - only the requested group is rendered in C6a-4
  */
 
+import type { CanonicalReadingSurfaceFigureBlock } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import { segmentPaperText } from '../../../../shared/papersurface/segmentPaperText.mjs'
 import { resolveFigureMarker } from '../../../../shared/figures/resolveFigureMarker.mjs'
 import type {
@@ -42,6 +43,8 @@ import {
   projectObjectiveTeachingSource,
   type ObjectiveTeachingGroup,
   type ObjectiveTeachingView,
+  type FigureTeachingEvidence,
+  type FigureTeachingRange,
 } from './objectiveTeachingContentAdapter.ts'
 
 export type ReviewedReadingChoiceAnalysisV1 = {
@@ -72,6 +75,7 @@ export type PaperAssetEvidenceRowView = {
   role: 'primary' | 'supporting' | 'trap'
   paragraphId: string
   quote: string
+  figureRegion?: FigureTeachingRange
 }
 
 export type PaperAssetOptionAnalysisView = {
@@ -150,6 +154,7 @@ export type BuildPaperAssetSurfaceModelInput = {
    * figures/manifest.json `figures` array, fetched by the caller
    * (PaperBrowsePage.tsx) — this adapter stays pure (no fetch, I12).
    */
+  canonicalFigures?: ReadonlyArray<CanonicalReadingSurfaceFigureBlock>
   figures?: ReadonlyArray<PaperFigureManifestEntry>
   /**
    * figure-render cut: OPTIONAL — the resolved asset base
@@ -236,10 +241,12 @@ export function buildPaperAssetSurfaceModel(
     groupAnalysis,
     group.passage?.paragraphs ?? [],
     textMap,
+    undefined,
+    input.canonicalFigures,
   )
-  const analysisByQuestionId = buildAnalysisViews(asset, analysis, group, evidence)
+  const analysisByQuestionId = buildAnalysisViews(asset, analysis, group, evidence, teachingSource.figureEvidence)
   const evidenceKindById = Object.fromEntries(
-    evidence.map((item) => [item.id, item.kind === 'trap' ? 'trap' : 'support'] as const),
+    [...evidence, ...teachingSource.figureEvidence].map((item) => [item.id, item.kind === 'trap' ? 'trap' : 'support'] as const),
   )
 
   return {
@@ -435,6 +442,7 @@ function buildAnalysisViews(
   analysis: ReviewedReadingChoiceAnalysisV1,
   group: PaperContentGroup,
   evidence: PaperEvidence[],
+  figureEvidence: FigureTeachingEvidence[] = [],
 ): Record<string, PaperAssetQuestionAnalysisView> {
   const evidenceIdSet = new Set(evidence.map((item) => item.id))
 
@@ -459,6 +467,9 @@ function buildAnalysisViews(
       },
     )
 
+    supportEvidenceRows.push(...figureEvidence.filter(item => item.questionId === questionId).map(item => ({
+      evidenceId: item.id, role: 'supporting' as const, paragraphId: '', quote: item.quote, figureRegion: item.target,
+    })))
     out[questionId] = {
       questionId,
       questionNo: String(question.questionNo),

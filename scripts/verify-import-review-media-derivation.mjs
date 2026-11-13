@@ -36,6 +36,7 @@ import {
   mediaPresentationDigest,
 } from '../shared/paper-canonical/mediaPresentation.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
+import { resolveFigureTextRegion, validFigureTextRegions } from '../shared/paper-canonical/richContent.mjs'
 import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-consumption-print-payload.mjs'
 import {
   makeSyntheticNck1DocxFixture,
@@ -183,6 +184,20 @@ const renditionById = new Map()
 
 // Display bytes are independently bound; the source recipe remains mandatory.
 const displayMaterialization = clone(produced.materialization)
+const regions = [{ id: 'trains', text: 'TRAINS — Electricity', box: { x: .1, y: .2, w: .4, h: .3 } }]
+displayMaterialization.media[0].textRegions = regions
+const regionFigures = [{ figureId: 'figure-1', mediaId: firstInventory.mediaId, textRegions: regions }]
+assert.equal(resolveFigureTextRegion({ figureId: 'figure-1', regionId: 'trains', quote: 'Electricity' }, regionFigures), regions[0])
+assert.equal(resolveFigureTextRegion({ mediaId: firstInventory.mediaId, regionId: 'trains' }, regionFigures), regions[0])
+for (const ref of [
+  { figureId: 'missing', regionId: 'trains', quote: 'Electricity' },
+  { figureId: 'figure-1', regionId: 'missing', quote: 'Electricity' },
+  { figureId: 'figure-1', regionId: 'trains', quote: 'Batteries' },
+  { figureId: 'figure-1', mediaId: firstInventory.mediaId, regionId: 'trains' },
+]) assert.throws(() => resolveFigureTextRegion(ref, regionFigures))
+assert.equal(validFigureTextRegions([...regions, ...regions]), false)
+assert.equal(validFigureTextRegions([{ ...regions[0], text: ' ' }]), false)
+assert.equal(validFigureTextRegions([{ ...regions[0], box: { x: .9, y: 0, w: .2, h: .1 } }]), false)
 const displayBytes = deterministicEnhancement(firstBytes)
 displayMaterialization.media[0].displayVariant = {
   path: 'materialization/media/display.png', sha256: sha256(displayBytes),
@@ -191,6 +206,7 @@ displayMaterialization.media[0].displayVariant = {
 const displayInput = makeInput(displayMaterialization, produced, fixture)
 displayInput.media[0].displayVariantBytes = displayBytes
 const displayResult = compile(displayInput)
+assert.match(JSON.stringify(displayResult.consumption), /"textRegions":\[\{"id":"trains","text":"TRAINS — Electricity"/)
 assert.equal(displayResult.consumption.mediaArtifacts[0].sha256, firstInventory.sha256)
 assert.equal(displayResult.consumption.mediaArtifacts[0].displayVariant.sha256, sha256(displayBytes))
 const displayTampered = clone(displayInput)

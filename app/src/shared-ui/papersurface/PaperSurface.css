@@ -521,6 +521,24 @@ button.ps-paper-blank.ps-paper-blank--clickable {
   border-bottom: 1.5px dotted rgba(232, 144, 26, 0.8);
 }
 
+/* Region boxes use the same evidence palette above, with a complete outline. */
+.ps-figure-region {
+  position: absolute;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+.ps-figure-region[data-paper-evidence-kind="support"] {
+  background: rgba(31, 160, 98, 0.10);
+  border: 1.5px solid rgba(31, 160, 98, 0.7);
+}
+.ps-figure-region[data-paper-evidence-kind="trap"] {
+  background: rgba(232, 144, 26, 0.10);
+  border: 1.5px dotted rgba(232, 144, 26, 0.8);
+}
+@media print {
+  .ps-figure-region { display: none; }
+}
+
 /* ─── Annotation anchors (neutral, invisible in B3) ────────────── */
 
 .ps-annotation-anchor {
