@@ -2169,6 +2169,29 @@ assert('canonical rail preserves fallback for absent and unknown slots',
   canonicalRailLabel({ visibleStructure: [{ kind: 'group', groupId: 'x', slotId: 'future.slot' }] }, 'x') === null)
 assert('canonical rail labels take precedence over incomplete search cards',
   pageSrc.includes('const displayTitle = canonicalTitle ?? railLectureShortLabel(fullTitle, card)'))
+const lectureTitleSelection = pageSrc.match(/    let lectureTitle: string \| null = group\.title[\s\S]*?(?=    if \(group\.groupType === 'writing' && canonicalConsumption\))/)?.[0]
+const readingLabelFunction = pageSrc.match(/function readingLectureLabel\([\s\S]*?\n\}/)?.[0]
+const railGroupLabelFunction = pageSrc.match(/function railGroupLabel\([\s\S]*?\n\}/)?.[0]
+const selectLectureTitle = new Function('group', 'canonicalConsumption', 'groupId',
+  `${stripTypeScriptTypes(railGroupLabelFunction)}
+   ${stripTypeScriptTypes(readingLabelFunction)}
+   ${stripTypeScriptTypes(railLabelFunction)}
+   ${stripTypeScriptTypes(lectureTitleSelection)}
+   return lectureTitle`)
+for (const [groupType, title, slotId, expected] of [
+  ['reading', 'reading.a', 'reading.a', 'A篇'],
+  ['sevenChoices', 'seven-choices', 'reading.seven-choices', '七选五'],
+  ['listening', 'listening.long-form', 'listening.long-form', '听力 第二节'],
+  ['writing', '第一节（满分 15 分）', 'writing.application', '第一节（满分 15 分）'],
+]) {
+  assert(`lecture title uses canonical labels and preserves writing: ${groupType}`,
+    selectLectureTitle({ groupType, title }, { visibleStructure: [
+      { kind: 'group', groupId: 'opaque-id', slotId },
+    ] }, 'opaque-id') === expected)
+}
+assert('lecture titles retain original reading and general fallbacks without canonical labels',
+  selectLectureTitle({ groupType: 'reading', title: 'Reading A' }, null, 'missing') === '阅读 A' &&
+  selectLectureTitle({ groupType: 'sevenChoices', title: '原题组标题' }, { visibleStructure: [] }, 'missing') === '原题组标题')
 const titleFunction = pageSrc.match(/function paperBrowseDisplayTitle\([\s\S]*?\n\}/)?.[0]
 const displayTitle = new Function(`${stripTypeScriptTypes(titleFunction)}; return paperBrowseDisplayTitle`)()
 const titleAsset = {
