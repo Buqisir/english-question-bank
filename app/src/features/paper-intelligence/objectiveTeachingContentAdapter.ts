@@ -64,6 +64,7 @@ export type ObjectiveTeachingGroup = {
 }
 
 export type ObjectiveTeachingView = {
+  unavailable?: boolean
   discourseSummary: string
   discourseItems: Array<{ id: string; label: string; summary: string; functionText: string }>
   translationParagraphs: Array<{
