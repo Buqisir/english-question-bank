@@ -1,0 +1,577 @@
+{
+ "back-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "back-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "confirm-390.png": {
+  "pixels": 6,
+  "maxChannelDiff": 83,
+  "bbox_2x": [
+   177,
+   265,
+   178,
+   286
+  ]
+ },
+ "confirm-cancel-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "confirm-cancel-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "confirm-go-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "confirm-go-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "confirm.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "copy-link-focus.png": {
+  "pixels": 9,
+  "maxChannelDiff": 122,
+  "bbox_2x": [
+   533,
+   182,
+   1382,
+   209
+  ]
+ },
+ "copy-link-hover.png": {
+  "pixels": 9,
+  "maxChannelDiff": 122,
+  "bbox_2x": [
+   533,
+   182,
+   1382,
+   209
+  ]
+ },
+ "copy-list-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "copy-list-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "create-share-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "create-share-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "dictation-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "dictation-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "direct-390.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "direct-filled-390.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "direct-filled.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "direct-generate-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "direct-generate-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "direct.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "done-390.png": {
+  "pixels": 6,
+  "maxChannelDiff": 117,
+  "bbox_2x": [
+   181,
+   54,
+   472,
+   148
+  ]
+ },
+ "done.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "download-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "download-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "download-open-390.png": {
+  "pixels": 7,
+  "maxChannelDiff": 110,
+  "bbox_2x": [
+   53,
+   256,
+   556,
+   350
+  ]
+ },
+ "download-open.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "error-program-390.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "error-program.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "error-students-390.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "error-students.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "explorer-close-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "explorer-close-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "explorer-confirm-focus.png": {
+  "pixels": 1,
+  "maxChannelDiff": 3,
+  "bbox_2x": [
+   2467,
+   123,
+   2468,
+   124
+  ]
+ },
+ "explorer-confirm-hover.png": {
+  "pixels": 1,
+  "maxChannelDiff": 3,
+  "bbox_2x": [
+   2467,
+   123,
+   2468,
+   124
+  ]
+ },
+ "explorer-head-390.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "explorer-head.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "explorer-pick-390.png": {
+  "pixels": 5,
+  "maxChannelDiff": 168,
+  "bbox_2x": [
+   260,
+   246,
+   262,
+   250
+  ]
+ },
+ "explorer-pick.png": {
+  "pixels": 1,
+  "maxChannelDiff": 3,
+  "bbox_2x": [
+   2467,
+   123,
+   2468,
+   124
+  ]
+ },
+ "generate-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "generate-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "heading-390.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "heading.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "look-say-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "look-say-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "next-round-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "next-round-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "practice-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "practice-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "rail-390.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "rail-copy-focus.png": {
+  "pixels": 4,
+  "maxChannelDiff": 64,
+  "bbox_2x": [
+   139,
+   78,
+   394,
+   85
+  ]
+ },
+ "rail-copy-hover.png": {
+  "pixels": 4,
+  "maxChannelDiff": 64,
+  "bbox_2x": [
+   139,
+   78,
+   394,
+   85
+  ]
+ },
+ "rail-download-focus.png": {
+  "pixels": 4,
+  "maxChannelDiff": 115,
+  "bbox_2x": [
+   139,
+   78,
+   394,
+   85
+  ]
+ },
+ "rail-download-hover.png": {
+  "pixels": 4,
+  "maxChannelDiff": 102,
+  "bbox_2x": [
+   139,
+   78,
+   394,
+   85
+  ]
+ },
+ "rail-set-390.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "rail-set.png": {
+  "pixels": 4,
+  "maxChannelDiff": 115,
+  "bbox_2x": [
+   139,
+   78,
+   394,
+   85
+  ]
+ },
+ "rail.png": {
+  "pixels": 4,
+  "maxChannelDiff": 64,
+  "bbox_2x": [
+   139,
+   78,
+   394,
+   85
+  ]
+ },
+ "reload-program-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "reload-program-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "reload-students-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "reload-students-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "reopen-390.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "reopen-copy-link-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "reopen-copy-link-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "reopen-copy-list-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "reopen-copy-list-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "reopen-create-share-focus.png": {
+  "pixels": 12,
+  "maxChannelDiff": 122,
+  "bbox_2x": [
+   424,
+   43,
+   1423,
+   70
+  ]
+ },
+ "reopen-create-share-hover.png": {
+  "pixels": 12,
+  "maxChannelDiff": 122,
+  "bbox_2x": [
+   424,
+   43,
+   1423,
+   70
+  ]
+ },
+ "reopen-page-390.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "reopen-page.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "reopen-practice-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "reopen-practice-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "reopen-unshared-390.png": {
+  "pixels": 3,
+  "maxChannelDiff": 110,
+  "bbox_2x": [
+   123,
+   142,
+   414,
+   149
+  ]
+ },
+ "reopen-unshared.png": {
+  "pixels": 12,
+  "maxChannelDiff": 122,
+  "bbox_2x": [
+   424,
+   43,
+   1423,
+   70
+  ]
+ },
+ "reopen.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "revoke-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "revoke-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "save-title-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "save-title-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "set-390.png": {
+  "pixels": 7,
+  "maxChannelDiff": 110,
+  "bbox_2x": [
+   53,
+   280,
+   556,
+   374
+  ]
+ },
+ "set-renamed-390.png": {
+  "pixels": 7,
+  "maxChannelDiff": 110,
+  "bbox_2x": [
+   53,
+   256,
+   556,
+   350
+  ]
+ },
+ "set-renamed.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "set.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "setup-390.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "setup.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "shared-390.png": {
+  "pixels": 4,
+  "maxChannelDiff": 25,
+  "bbox_2x": [
+   207,
+   368,
+   420,
+   374
+  ]
+ },
+ "shared.png": {
+  "pixels": 9,
+  "maxChannelDiff": 122,
+  "bbox_2x": [
+   533,
+   182,
+   1382,
+   209
+  ]
+ },
+ "start-390.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "start-focus.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "start-hover.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ },
+ "start.png": {
+  "pixels": 0,
+  "maxChannelDiff": 0,
+  "bbox_2x": null
+ }
+}

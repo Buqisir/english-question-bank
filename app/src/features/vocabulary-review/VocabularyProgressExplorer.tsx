@@ -1,4 +1,5 @@
 import { Check, ChevronUp } from '../../icons'
+import { Button } from '../../shared-ui/Button.tsx'
 import type { RefObject } from 'react'
 import type { VocabularyEntry, VocabularyProgram, VocabularyStage } from '../../domain/vocabulary'
 
@@ -66,9 +67,10 @@ export function VocabularyProgressExplorer({
           <h2 id="vocabulary-progress-explorer-title">选择下一词</h2>
           <p>按 Week 和 Day 找到实体书上的位置。确认后，下一轮从所选单词开始。</p>
         </div>
-        <button className="ghost-button" type="button" onClick={onClose}>
-          <ChevronUp size={16} aria-hidden="true" />{closeLabel}
-        </button>
+        {/* 构件厂第 4 步第十页：原 .ghost-button = strong lg；下面「确认从这里开始」原 .primary-button（高 32）= solid md。 */}
+        <Button tone="strong" size="lg" icon={<ChevronUp size={16} aria-hidden="true" />} onClick={onClose}>
+          {closeLabel}
+        </Button>
       </div>
 
       <div className="vocabulary-progress-current" ref={currentPositionRef} tabIndex={-1} aria-live="polite">
@@ -109,9 +111,8 @@ export function VocabularyProgressExplorer({
               <small>确认后会放弃当前未结束轮次及本轮判断；已生成的生词组不受影响。</small>
             )}
           </div>
-          <button
-            className="primary-button"
-            type="button"
+          <Button
+            tone="solid"
             disabled={busy || selectionIsCurrent}
             onClick={() => onConfirm(selectedEntry)}
           >
@@ -120,7 +121,7 @@ export function VocabularyProgressExplorer({
               : hasUnfinishedRun
                 ? '放弃当前轮并从这里开始'
                 : '确认从这里开始'}
-          </button>
+          </Button>
         </div>
       )}
 

@@ -422,7 +422,9 @@
   font-size: 14px;
 }
 
-.vocabulary-progress-selection span,
+/* 只管左边说明文字里的 span。原来写成 .vocabulary-progress-selection span（0,1,1），会压过 button.css 的
+ * .eqb-button-label（0,1,0），把「确认从这里开始」的字改成 12px 次要灰；构件厂第 4 步第十页收窄到左边那块。 */
+.vocabulary-progress-selection > div span,
 .vocabulary-progress-selection small,
 .vocabulary-progress-status {
   color: var(--muted);
@@ -975,10 +977,6 @@
   border-top: 1px solid var(--line);
 }
 
-.vocabulary-collection-actions .ghost-button {
-  min-width: 0;
-}
-
 .vocabulary-completion-state {
   display: flex;
   align-items: center;
@@ -1129,7 +1127,9 @@
   font-size: 14px;
 }
 
-.vocabulary-share-download-confirmation span {
+/* 只管说明文字。原来写成 .vocabulary-share-download-confirmation span（0,1,1），会压过 .eqb-button-label（0,1,0），
+ * 把右边两个键的字改成 12px 次要灰；构件厂第 4 步第十页收窄到左边那块。 */
+.vocabulary-share-download-confirmation > div:first-child span {
   color: var(--muted);
   font-size: 12px;
   line-height: 1.5;
@@ -1588,8 +1588,9 @@
     flex-direction: column;
   }
 
-  .vocabulary-progress-explorer-heading .ghost-button,
-  .vocabulary-progress-selection .primary-button {
+  /* 两个键是共用按钮（.eqb-button）；button.css 不给有字的按钮定宽，这里撑满不和它抢。 */
+  .vocabulary-progress-explorer-heading .eqb-button,
+  .vocabulary-progress-selection .eqb-button {
     width: 100%;
   }
 
@@ -1697,7 +1698,7 @@
     justify-content: space-between;
   }
 
-  .vocabulary-run-start-row > .primary-button {
+  .vocabulary-run-start-row > .eqb-button {
     width: 100%;
   }
 

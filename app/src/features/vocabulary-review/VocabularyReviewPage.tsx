@@ -17,6 +17,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
+import { Button } from '../../shared-ui/Button.tsx'
 import {
   countVocabularyDecisions,
   createVocabularyReviewState,
@@ -1295,6 +1296,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           maxLength={30}
           onChange={(event) => setSetTitleInput(event.target.value)}
         />
+        {/* 构件厂第 4 步第十页没换：这个键被旁边高 38 的输入框拉成 38，不在 Button 三档高度里。 */}
         <button
           className="ghost-button"
           type="button"
@@ -1321,17 +1323,17 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   ) : null
   const downloadControl = vocabularySet ? (
     <div className="vocabulary-download-menu" ref={downloadMenuRef}>
-      <button
-        className="primary-button"
-        type="button"
+      {/* 构件厂第 4 步第十页：原 .primary-button（石板墨填充、高 32）= solid md。仍是整键禁用，没改成 busy。 */}
+      <Button
+        tone="solid"
         aria-expanded={downloadMenuOpen}
         aria-controls="vocabulary-download-options"
         onClick={() => setDownloadMenuOpen((open) => !open)}
         disabled={pdfDownloadBusy}
+        icon={<DownloadFeedbackIcon size={16} working={pdfDownloadBusy} />}
       >
-        <DownloadFeedbackIcon size={16} working={pdfDownloadBusy} />
         {pdfDownloadBusy ? '正在生成…' : '下载'}
-      </button>
+      </Button>
       {downloadMenuOpen && (
         <FluidHoverList as="div" id="vocabulary-download-options" role="group" aria-label="选择下载内容" axis="y" itemSelector=".vocabulary-download-option">
           {VOCABULARY_DOWNLOAD_OPTIONS.map((option) => (
@@ -1373,16 +1375,17 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
         <span>继续后会生成同一个匿名分享：单词卡扫码听音频，听写纸扫码自动听写；只有拿到二维码的人可以打开，你也可以随时撤销。</span>
       </div>
       <div>
-        <button type="button" className="ghost-button" onClick={() => setPendingShareDownload(null)}>取消</button>
-        <button
-          type="button"
-          className="primary-button"
+        {/* 构件厂第 4 步第十页：两个键原来都被这一排拉成高 36，所以石板墨那个也用 lg。 */}
+        <Button tone="strong" size="lg" onClick={() => setPendingShareDownload(null)}>取消</Button>
+        <Button
+          tone="solid"
+          size="lg"
           onClick={() => void (pendingShareDownload.kind === 'bundle'
             ? downloadVocabularyBundle(pendingShareDownload.mode, { shareConfirmed: true })
             : downloadVocabularySheet(pendingShareDownload.kind, pendingShareDownload.mode, { shareConfirmed: true }))}
         >
           {pendingShareDownload.mode === 'save-as' ? '生成链接并另存为…' : '生成链接并下载'}
-        </button>
+        </Button>
       </div>
     </div>
   ) : null
@@ -1432,9 +1435,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           {programLoadState === 'ready' && studentsState === 'ready' && activeStudent && (
             <div className="vocabulary-heading-actions">
               {!printRequest && (
-                <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyDictationWorkbench()}>
-                  <BoardCheck size={16} />单词复习
-                </button>
+                <Button tone="strong" size="lg" icon={<BoardCheck size={16} />} onClick={() => props.onOpenVocabularyDictationWorkbench()}>
+                  单词复习
+                </Button>
               )}
               {programs.length > 1 && (
                 <label className="vocabulary-program-switcher">
@@ -1524,7 +1527,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             <BookMarked size={32} aria-hidden="true" />
             <h2 id="vocabulary-program-error-title">词库没有加载出来</h2>
             <p>为了不把进度记错，要等词库加载完才能开始。</p>
-            <button className="primary-button" type="button" onClick={() => window.location.reload()}>重新加载</button>
+            <Button tone="solid" onClick={() => window.location.reload()}>重新加载</Button>
             {requestError && <p className="vocabulary-request-error" role="alert">{requestError}</p>}
           </section>
         ) : studentsState === 'error' ? (
@@ -1532,7 +1535,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             <BookMarked size={32} aria-hidden="true" />
             <h2 id="vocabulary-student-error-title">学生档案没有加载出来</h2>
             <p>为了不把不同学生的进度混在一起，要等档案加载完才能继续。</p>
-            <button className="primary-button" type="button" onClick={() => window.location.reload()}>重新加载</button>
+            <Button tone="solid" onClick={() => window.location.reload()}>重新加载</Button>
             {requestError && <p className="vocabulary-request-error" role="alert">{requestError}</p>}
           </section>
         ) : programLoadState === 'loading' || studentsState === 'loading' || runState === 'loading' ? (
@@ -1574,27 +1577,28 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             <div className="vocabulary-completion-actions">
               {printAccentControl}
               {downloadControl}
+              {/* 构件厂第 4 步第十页：原 .ghost-button（透明底墨字、高 36）= strong lg。
+                  两个复制键沿用原来的整键禁用和 aria-busy 写法，没改成 busy。 */}
               {!shareId ? (
-                <button className="ghost-button" type="button" onClick={() => void createShare()} disabled={requestBusy}>生成公开二维码</button>
+                <Button tone="strong" size="lg" onClick={() => void createShare()} disabled={requestBusy}>生成公开二维码</Button>
               ) : (
-                <button className="ghost-button" type="button" onClick={() => void revokeShare()} disabled={requestBusy}>撤销公开分享</button>
+                <Button tone="strong" size="lg" onClick={() => void revokeShare()} disabled={requestBusy}>撤销公开分享</Button>
               )}
               {shareId && (
-                <button className="ghost-button" type="button" disabled={shareClipboard.state === 'pending'} aria-busy={shareClipboard.state === 'pending'} onClick={() => void copyShareLink()}>
-                  <CopyFeedbackIcon size={16} state={shareClipboard.state} />{shareCopyStatus === 'copied' ? '链接已复制' : shareCopyStatus === 'error' ? '复制失败' : '复制公开链接'}
-                </button>
+                <Button tone="strong" size="lg" disabled={shareClipboard.state === 'pending'} aria-busy={shareClipboard.state === 'pending'} onClick={() => void copyShareLink()} icon={<CopyFeedbackIcon size={16} state={shareClipboard.state} />}>
+                  {shareCopyStatus === 'copied' ? '链接已复制' : shareCopyStatus === 'error' ? '复制失败' : '复制公开链接'}
+                </Button>
               )}
-              <button className="ghost-button" type="button" onClick={() => void copyVocabularySet()} disabled={listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'}>
-                <CopyFeedbackIcon size={16} state={listClipboard.state} />
+              <Button tone="strong" size="lg" onClick={() => void copyVocabularySet()} disabled={listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'} icon={<CopyFeedbackIcon size={16} state={listClipboard.state} />}>
                 {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制清单'}
-              </button>
-              <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyPractice(vocabularySet.id)}>
-                <Grid2X2 size={16} />趣味练习
-              </button>
-              <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyDictationWorkbench(vocabularySet.id)}>
-                <WordBubble size={16} />看词说义
-              </button>
-              <button className="ghost-button" type="button" onClick={closeVocabularySet}>返回</button>
+              </Button>
+              <Button tone="strong" size="lg" icon={<Grid2X2 size={16} />} onClick={() => props.onOpenVocabularyPractice(vocabularySet.id)}>
+                趣味练习
+              </Button>
+              <Button tone="strong" size="lg" icon={<WordBubble size={16} />} onClick={() => props.onOpenVocabularyDictationWorkbench(vocabularySet.id)}>
+                看词说义
+              </Button>
+              <Button tone="strong" size="lg" onClick={closeVocabularySet}>返回</Button>
             </div>
             {shareDownloadConfirmation}
             {shareId && <p className="vocabulary-share-ready">当前公开二维码有效：单词卡扫码听音频，听写纸扫码自动听写。</p>}
@@ -1631,9 +1635,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                   <button type="button" className={reviewAccent === 'british' ? 'is-selected' : undefined} aria-pressed={reviewAccent === 'british'} onClick={() => chooseReviewAccent('british')}>英音</button>
                 </div>
               </fieldset>
-              <button className="primary-button" type="button" onClick={() => void startReview()} disabled={requestBusy || (!runId && mainProgressCursor >= program.entries.length)}>
+              <Button tone="solid" onClick={() => void startReview()} disabled={requestBusy || (!runId && mainProgressCursor >= program.entries.length)}>
                 {runId ? '继续过词' : '开始过词'}
-              </button>
+              </Button>
             </div>
             <div className="vocabulary-direct-set">
               <div className="vocabulary-direct-set-heading">
@@ -1665,14 +1669,14 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                   {directInputOverLimit && <small role="alert">一次最多生成 60 词，分成两次即可。</small>}
                 </div>
               )}
-              <button
-                className="ghost-button"
-                type="button"
+              <Button
+                tone="strong"
+                size="lg"
                 onClick={() => void generateVocabularySetFromInput()}
                 disabled={requestBusy || !directInputResult.matchedEntries.length || directInputOverLimit}
               >
                 生成固定词组
-              </button>
+              </Button>
             </div>
             {requestError && <p className="vocabulary-request-error" role="alert">{requestError}</p>}
             {recentSets.length > 0 && (
@@ -1853,25 +1857,24 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 <div className="vocabulary-completion-actions">
                   {vocabularySetTitleControl}
                   {printAccentControl}
-                  {!vocabularySet ? <button className="primary-button" type="button" onClick={() => void generateVocabularySet()} disabled={!unfamiliarEntries.length || requestBusy}>
-                    <BookMarked size={16} />
+                  {/* 构件厂第 4 步第十页：「生成固定生词组」原是 .primary-button，在这一排里被旁边高 36 的键拉高到 36，
+                      所以用 solid lg；其余原 .ghost-button = strong lg。 */}
+                  {!vocabularySet ? <Button tone="solid" size="lg" icon={<BookMarked size={16} />} onClick={() => void generateVocabularySet()} disabled={!unfamiliarEntries.length || requestBusy}>
                     生成固定生词组
-                  </button> : downloadControl}
-                  {vocabularySet && !shareId && <button className="ghost-button" type="button" onClick={() => void createShare()} disabled={requestBusy}>生成公开二维码</button>}
-                  {shareId && <button className="ghost-button" type="button" disabled={shareClipboard.state === 'pending'} aria-busy={shareClipboard.state === 'pending'} onClick={() => void copyShareLink()}><CopyFeedbackIcon size={16} state={shareClipboard.state} />{shareCopyStatus === 'copied' ? '链接已复制' : shareCopyStatus === 'error' ? '复制失败' : '复制公开链接'}</button>}
+                  </Button> : downloadControl}
+                  {vocabularySet && !shareId && <Button tone="strong" size="lg" onClick={() => void createShare()} disabled={requestBusy}>生成公开二维码</Button>}
+                  {shareId && <Button tone="strong" size="lg" disabled={shareClipboard.state === 'pending'} aria-busy={shareClipboard.state === 'pending'} onClick={() => void copyShareLink()} icon={<CopyFeedbackIcon size={16} state={shareClipboard.state} />}>{shareCopyStatus === 'copied' ? '链接已复制' : shareCopyStatus === 'error' ? '复制失败' : '复制公开链接'}</Button>}
                   {vocabularySet && (
-                    <button className="ghost-button" type="button" onClick={() => props.onOpenVocabularyPractice(vocabularySet.id)}>
-                      <Grid2X2 size={16} />趣味练习
-                    </button>
+                    <Button tone="strong" size="lg" icon={<Grid2X2 size={16} />} onClick={() => props.onOpenVocabularyPractice(vocabularySet.id)}>
+                      趣味练习
+                    </Button>
                   )}
-                  <button className="ghost-button" type="button" onClick={() => void copyVocabularySet()} disabled={!unfamiliarEntries.length || listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'}>
-                    <CopyFeedbackIcon size={16} state={listClipboard.state} />
+                  <Button tone="strong" size="lg" onClick={() => void copyVocabularySet()} disabled={!unfamiliarEntries.length || listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'} icon={<CopyFeedbackIcon size={16} state={listClipboard.state} />}>
                     {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制清单'}
-                  </button>
-                  <button className="ghost-button" type="button" onClick={() => void startAnotherReview()} disabled={requestBusy}>
-                    <RotateCcw size={16} />
+                  </Button>
+                  <Button tone="strong" size="lg" icon={<RotateCcw size={16} />} onClick={() => void startAnotherReview()} disabled={requestBusy}>
                     开始下一轮
-                  </button>
+                  </Button>
                 </div>
                 {shareDownloadConfirmation}
                 {shareId && <p className="vocabulary-share-ready">公开二维码已固定：单词卡扫码听音频，听写纸扫码自动听写。</p>}
@@ -1909,14 +1912,12 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             )}
 
             <div className="vocabulary-collection-actions">
-              <button className="ghost-button" type="button" onClick={() => void copyVocabularySet()} disabled={!unfamiliarEntries.length || listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'}>
-                <CopyFeedbackIcon size={16} state={listClipboard.state} />
+              <Button tone="strong" size="lg" onClick={() => void copyVocabularySet()} disabled={!unfamiliarEntries.length || listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'} icon={<CopyFeedbackIcon size={16} state={listClipboard.state} />}>
                 {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制'}
-              </button>
-              <button className="ghost-button" type="button" onClick={() => setDownloadMenuOpen(true)} disabled={!vocabularySet || pdfDownloadBusy}>
-                <DownloadFeedbackIcon size={16} working={pdfDownloadBusy} />
+              </Button>
+              <Button tone="strong" size="lg" onClick={() => setDownloadMenuOpen(true)} disabled={!vocabularySet || pdfDownloadBusy} icon={<DownloadFeedbackIcon size={16} working={pdfDownloadBusy} />}>
                 {pdfDownloadBusy ? '生成中…' : '下载'}
-              </button>
+              </Button>
             </div>
           </aside>
         </div>}
