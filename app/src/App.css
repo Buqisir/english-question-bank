@@ -3172,38 +3172,15 @@ button:disabled {
   gap: 8px;
 }
 
+/* 构件厂第 4 步第八页：「浏览全部 N 套卷」换成 shared-ui/Button（次要灰中号带图标）。高、字号、
+   颜色、悬停、键盘焦点、禁用都交给 button.css；这里只留它在首页这一列里的摆法。
+   margin-left 用负的按钮左内边距（--eqb-space-3，12px），让图标和上面搜索框的左边对齐（原来
+   是 -8px 抵 8px 内边距）。本条和 .eqb-button 都是一个类名（0,1,0），button.css 不设 margin，
+   不冲突。 */
 .concierge-browse-entry {
-  display: inline-flex;
-  align-items: center;
   align-self: flex-start;
-  gap: 8px;
-  min-height: 32px;
-  padding: 4px 8px;
-  margin-left: -8px;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--desk-muted);
-  font: inherit;
-  font-size: 13px;
+  margin-left: calc(-1 * var(--eqb-space-3));
   font-variant-numeric: tabular-nums;
-  cursor: pointer;
-  transition: background-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
-}
-
-.concierge-browse-entry:hover:not(:disabled) {
-  background: var(--desk-hover);
-  color: var(--desk-ink);
-}
-
-.concierge-browse-entry:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
-}
-
-.concierge-browse-entry:disabled {
-  opacity: .6;
-  cursor: not-allowed;
 }
 
 .concierge-desk[data-surface='home'] .concierge-list-surface {
@@ -3305,6 +3282,8 @@ button:disabled {
   height: 32px;
 }
 
+/* 构件厂第 4 步第八页：✕ 现在是 Button，button.css 的 .eqb-button 设了 position: relative（0,1,0）；
+   本条两个类名（0,2,0）压过它，✕ 仍浮在输入框右边。 */
 .concierge-desk .concierge-intent-clear {
   position: absolute;
   right: 48px;
@@ -4551,40 +4530,11 @@ div.concierge-feed-empty-corpus p { margin: 0; }
    count. Quiet, no border chrome except a hairline (the search input is the
    one framed control on this row — 结构编码真相: don't invent a second
    frame that competes with it). */
+/* 构件厂第 4 步第八页：「筛选」开关换成 shared-ui/Button（墨字大号）。原来的细描边（#D8D8D2）、
+   悬停、按下缩放、展开时的石板墨描边、键盘焦点都删了，交给 button.css；展开时用构件的「打开着」
+   样子（aria-expanded=true：桌色底、墨字）。只留不被挤窄这一条。 */
 .concierge-command-filter-toggle {
   flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  height: 36px;
-  padding: 0 12px;
-  background: transparent;
-  border: 1px solid #D8D8D2;
-  border-radius: 8px;
-  color: var(--desk-ink);
-  font-family: inherit;
-  font-size: 13px;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
-}
-
-.concierge-command-filter-toggle:hover {
-  background: var(--eqb-color-desk);
-  border-color: var(--eqb-color-border);
-}
-
-.concierge-command-filter-toggle:active {
-  transform: scale(0.97);
-}
-
-.concierge-command-filter-toggle[aria-expanded='true'] {
-  border-color: var(--action);
-  color: var(--eqb-color-text);
-}
-
-.concierge-command-filter-toggle:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
 }
 
 .concierge-command-count {
@@ -4768,8 +4718,7 @@ div.concierge-feed-empty-corpus p { margin: 0; }
   .export-button:active:not(:disabled),
   .concierge-intent-submit:active:not(:disabled),
   .concierge-action:active:not(:disabled),
-  .basket-chip:active:not(:disabled),
-  .concierge-command-filter-toggle:active {
+  .basket-chip:active:not(:disabled) {
     transform: scale(0.995);
   }
 }

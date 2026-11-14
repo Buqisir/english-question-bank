@@ -25,6 +25,7 @@ import { pickClarificationLine, pickResultsNoticeLine } from './clarificationCop
 import { buildDefaultFeed, buildRecentFeed } from './defaultFeed.ts'
 import { HomeContinueSection, HomeDailyPassage } from './ConciergeHomeSections.tsx'
 import { FluidHoverList } from '../components/FluidHoverList.tsx'
+import { Button } from '../shared-ui/Button.tsx'
 
 /** Fluid hover: an expanded paper row's open body still belongs to its head,
  *  so the highlight stays on that head instead of jumping to the next paper. */
@@ -580,15 +581,17 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 aria-busy={dataLoading || undefined}
               />
               {intent.length > 0 && !dataLoading && (
-                <button
-                  type="button"
+                // 构件厂第 4 步第八页：✕ 换成 shared-ui/Button 次要灰小号、只有图标（高 28，原来也是 28）；
+                // 圆角 999 → 8（按钮不做胶囊）。位置仍由 App.css 的 .concierge-desk .concierge-intent-clear 定。
+                <Button
                   className="concierge-intent-clear"
-                  onClick={() => actions.reset()}
-                  aria-label="清除搜索"
+                  tone="subtle"
+                  size="sm"
+                  label="清除搜索"
                   title="清除搜索"
-                >
-                  <X size={16} aria-hidden="true" />
-                </button>
+                  icon={<X size={16} aria-hidden="true" />}
+                  onClick={() => actions.reset()}
+                />
               )}
               <button
                 type="submit"
@@ -601,15 +604,16 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
               </button>
             </form>
             {isHomeScreen && onEnterBrowse && (
-              <button
-                type="button"
+              // 构件厂第 4 步第八页：换成 shared-ui/Button 次要灰中号带图标（高 32，原来也是 32）。
+              <Button
                 className="concierge-browse-entry"
+                tone="subtle"
+                icon={<QuestionBank size={16} aria-hidden="true" />}
                 onClick={handleEnterBrowse}
                 disabled={dataLoading}
               >
-                <QuestionBank size={16} aria-hidden="true" />
                 浏览全部 {catalogPaperCount} 套卷
-              </button>
+              </Button>
             )}
             {isBrowseScreen && !dataLoading && state.kind === 'empty' && (
               <FluidHoverList as="div" axis="xy" className="concierge-browse-chips" itemSelector=".concierge-browse-chip" gapClick={false} role="group" aria-label="筛选">
@@ -685,15 +689,18 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
             </label>
           )}
           {state.kind === 'results' && !dataLoading && (
-            <button
-              type="button"
+            // 构件厂第 4 步第八页：换成 shared-ui/Button 墨字大号（高 36，原来也是 36）。展开时用构件的
+            // 「打开着」样子（桌色底、墨字），原来是把细描边换成石板墨色。
+            <Button
               className="concierge-command-filter-toggle"
+              tone="strong"
+              size="lg"
               aria-expanded={filterPanelExpanded}
               aria-controls={filterPanelId}
               onClick={() => setFilterPanelExpanded((value) => !value)}
             >
               筛选{activeFilterCount > 0 ? ` · ${activeFilterCount}` : ''}
-            </button>
+            </Button>
           )}
         </div>
 
