@@ -1,0 +1,3412 @@
+{
+  "note": "对比稿 · 等复核。坐标：图里坐标 = 这张 SVG 自己的坐标；母版坐标 = 换算回 otter-head.svg 的坐标（除以缩放、反转角度）。",
+  "master": {
+    "eyeGap": 345.7,
+    "eyeMid": [
+      512,
+      375.5
+    ],
+    "eyeScale": 1.16,
+    "eyeShiftOutUp": [
+      3.05,
+      4.25
+    ],
+    "idwPower": 2,
+    "field": [
+      {
+        "at": [
+          860,
+          558.5
+        ],
+        "delta": [
+          0,
+          0
+        ]
+      },
+      {
+        "at": [
+          860,
+          516.5
+        ],
+        "delta": [
+          0,
+          0
+        ]
+      },
+      {
+        "at": [
+          832.5,
+          479.5
+        ],
+        "delta": [
+          0,
+          0
+        ]
+      },
+      {
+        "at": [
+          785.5,
+          450.5
+        ],
+        "delta": [
+          0,
+          0
+        ]
+      },
+      {
+        "at": [
+          860,
+          627
+        ],
+        "delta": [
+          0,
+          -16.5
+        ]
+      },
+      {
+        "at": [
+          795.5,
+          669.5
+        ],
+        "delta": [
+          -25.5,
+          -2.5
+        ]
+      },
+      {
+        "at": [
+          702,
+          669.5
+        ],
+        "delta": [
+          -12,
+          -2.5
+        ]
+      },
+      {
+        "at": [
+          623.5,
+          669.5
+        ],
+        "delta": [
+          -12,
+          -2.5
+        ]
+      },
+      {
+        "at": [
+          550,
+          641.5
+        ],
+        "delta": [
+          0,
+          -30
+        ]
+      },
+      {
+        "at": [
+          164,
+          558.5
+        ],
+        "delta": [
+          0,
+          0
+        ]
+      },
+      {
+        "at": [
+          164,
+          516.5
+        ],
+        "delta": [
+          0,
+          0
+        ]
+      },
+      {
+        "at": [
+          191.5,
+          479.5
+        ],
+        "delta": [
+          0,
+          0
+        ]
+      },
+      {
+        "at": [
+          238.5,
+          450.5
+        ],
+        "delta": [
+          0,
+          0
+        ]
+      },
+      {
+        "at": [
+          164,
+          627
+        ],
+        "delta": [
+          0,
+          -16.5
+        ]
+      },
+      {
+        "at": [
+          228.5,
+          669.5
+        ],
+        "delta": [
+          25.5,
+          -2.5
+        ]
+      },
+      {
+        "at": [
+          322,
+          669.5
+        ],
+        "delta": [
+          12,
+          -2.5
+        ]
+      },
+      {
+        "at": [
+          400.5,
+          669.5
+        ],
+        "delta": [
+          12,
+          -2.5
+        ]
+      },
+      {
+        "at": [
+          474,
+          641.5
+        ],
+        "delta": [
+          0,
+          -30
+        ]
+      },
+      {
+        "at": [
+          512,
+          593
+        ],
+        "delta": [
+          0,
+          -30
+        ]
+      }
+    ],
+    "referenceInMaster": {
+      "eyeToMuzzle": 12.69,
+      "eyeToNose": 51.52,
+      "notchToNose": 54.7
+    }
+  },
+  "files": [
+    {
+      "name": "otter-front",
+      "file": "design/brand-2026-10-13/mascot/otter-front.svg",
+      "muzzlePath": "_LAA-0__c3nwgm5",
+      "lowerSegments": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pinnedSideAnchors": [
+        4,
+        9
+      ],
+      "transform": {
+        "scale": 0.4689,
+        "angleDeg": -8.8,
+        "eyeMid": [
+          249.6,
+          169.2
+        ]
+      },
+      "eyesClosed": false,
+      "eyes": [
+        {
+          "id": "_LAA-0__c3nwgm9",
+          "tag": "ellipse",
+          "from": {
+            "cx": 169.5,
+            "cy": 181.6,
+            "rx": 13.8,
+            "ry": 14.2
+          },
+          "to": {
+            "cx": 167.78,
+            "cy": 179.85,
+            "rx": 16.01,
+            "ry": 16.47
+          },
+          "shiftInImage": [
+            -1.72,
+            -1.75
+          ]
+        },
+        {
+          "id": "_LAA-0__c3nwgm10",
+          "tag": "ellipse",
+          "from": {
+            "cx": 329.7,
+            "cy": 156.8,
+            "rx": 13.9,
+            "ry": 14.1
+          },
+          "to": {
+            "cx": 330.81,
+            "cy": 154.61,
+            "rx": 16.12,
+            "ry": 16.36
+          },
+          "shiftInImage": [
+            1.11,
+            -2.19
+          ]
+        }
+      ],
+      "muzzleMoved": [
+        {
+          "seg": 5,
+          "point": "把手1",
+          "from": [
+            427,
+            240
+          ],
+          "to": [
+            426.58,
+            238.4
+          ],
+          "masterDelta": [
+            -0.36,
+            -3.51
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "把手2",
+          "from": [
+            413,
+            257
+          ],
+          "to": [
+            410.32,
+            252.86
+          ],
+          "masterDelta": [
+            -4.3,
+            -9.61
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "锚点",
+          "from": [
+            392,
+            268
+          ],
+          "to": [
+            385.25,
+            266.69
+          ],
+          "masterDelta": [
+            -13.79,
+            -4.95
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "把手1",
+          "from": [
+            351,
+            290
+          ],
+          "to": [
+            345.41,
+            289.21
+          ],
+          "masterDelta": [
+            -11.52,
+            -3.49
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "把手2",
+          "from": [
+            304,
+            286
+          ],
+          "to": [
+            300.85,
+            278.06
+          ],
+          "masterDelta": [
+            -4.06,
+            -17.77
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "锚点",
+          "from": [
+            265,
+            262
+          ],
+          "to": [
+            262.96,
+            248.88
+          ],
+          "masterDelta": [
+            -0.01,
+            -28.31
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "把手1",
+          "from": [
+            251,
+            285
+          ],
+          "to": [
+            249.25,
+            272.4
+          ],
+          "masterDelta": [
+            0.42,
+            -27.13
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "把手2",
+          "from": [
+            225,
+            300
+          ],
+          "to": [
+            228.19,
+            295.72
+          ],
+          "masterDelta": [
+            8.11,
+            -7.98
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "锚点",
+          "from": [
+            197,
+            308
+          ],
+          "to": [
+            201.23,
+            304.88
+          ],
+          "masterDelta": [
+            9.92,
+            -5.19
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "把手1",
+          "from": [
+            166,
+            316
+          ],
+          "to": [
+            171.58,
+            314.11
+          ],
+          "masterDelta": [
+            12.37,
+            -2.15
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "把手2",
+          "from": [
+            134,
+            314
+          ],
+          "to": [
+            142.3,
+            309.45
+          ],
+          "masterDelta": [
+            18.98,
+            -6.88
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "锚点",
+          "from": [
+            115,
+            302
+          ],
+          "to": [
+            115.3,
+            296.59
+          ],
+          "masterDelta": [
+            2.4,
+            -11.29
+          ]
+        },
+        {
+          "seg": 9,
+          "point": "把手1",
+          "from": [
+            100,
+            293
+          ],
+          "to": [
+            100.42,
+            289.92
+          ],
+          "masterDelta": [
+            1.89,
+            -6.35
+          ]
+        },
+        {
+          "seg": 9,
+          "point": "把手2",
+          "from": [
+            95,
+            279
+          ],
+          "to": [
+            95.07,
+            278.68
+          ],
+          "masterDelta": [
+            0.25,
+            -0.66
+          ]
+        }
+      ],
+      "lowerAnchors": [
+        {
+          "anchor": 5,
+          "smooth": true,
+          "kinkDeg": 1
+        },
+        {
+          "anchor": 6,
+          "smooth": false,
+          "kinkDeg": 90
+        },
+        {
+          "anchor": 7,
+          "smooth": true,
+          "kinkDeg": 1
+        },
+        {
+          "anchor": 8,
+          "smooth": true,
+          "kinkDeg": 1
+        }
+      ],
+      "clearance": [
+        {
+          "eye": "左眼",
+          "shape": "_LAA-0__c3nwgm3",
+          "role": "头轮廓",
+          "before": 87.4,
+          "after": 83.12,
+          "beforeMaster": 186.38,
+          "afterMaster": 177.25,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_LAA-0__c3nwgm5",
+          "role": "脸斑",
+          "before": 1.49,
+          "after": 1.37,
+          "beforeMaster": 3.18,
+          "afterMaster": 2.92,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_LAA-0__c3nwgm8",
+          "role": "鼻子",
+          "before": 21.88,
+          "after": 21.88,
+          "beforeMaster": 46.66,
+          "afterMaster": 46.67,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_LAA-0__c3nwgm11",
+          "role": "胡须点",
+          "before": 23.87,
+          "after": 23.29,
+          "beforeMaster": 50.9,
+          "afterMaster": 49.67,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_LAA-0__c3nwgm3",
+          "role": "头轮廓",
+          "before": 88.87,
+          "after": 84.97,
+          "beforeMaster": 189.52,
+          "afterMaster": 181.2,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_LAA-0__c3nwgm5",
+          "role": "脸斑",
+          "before": 5.52,
+          "after": 5.44,
+          "beforeMaster": 11.77,
+          "afterMaster": 11.61,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_LAA-0__c3nwgm8",
+          "role": "鼻子",
+          "before": 22.31,
+          "after": 22.31,
+          "beforeMaster": 47.58,
+          "afterMaster": 47.57,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_LAA-0__c3nwgm14",
+          "role": "胡须点",
+          "before": 23.39,
+          "after": 22.93,
+          "beforeMaster": 49.89,
+          "afterMaster": 48.89,
+          "touches": false
+        }
+      ],
+      "notchToNose_master": {
+        "before": 66.02,
+        "after": 37.73,
+        "afterInsideNose": false,
+        "notchMasterY": [
+          576.09,
+          547.78
+        ]
+      },
+      "whiskerDotMarginToMuzzleEdge_master": {
+        "before": 33.3,
+        "after": 33.3
+      }
+    },
+    {
+      "name": "state-01-idle",
+      "file": "design/brand-2026-10-13/mascot/states/state-01-idle.svg",
+      "muzzlePath": "_LAE-0__ogofof6",
+      "lowerSegments": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pinnedSideAnchors": [
+        3,
+        9
+      ],
+      "transform": {
+        "scale": 0.4601,
+        "angleDeg": -7.9,
+        "eyeMid": [
+          253.37,
+          167.36
+        ]
+      },
+      "eyesClosed": false,
+      "eyes": [
+        {
+          "id": "_LAE-0__ogofof9",
+          "tag": "path",
+          "from": {
+            "cx": 174.6,
+            "cy": 178.3,
+            "rx": 13.5,
+            "ry": 13.67
+          },
+          "to": {
+            "cx": 172.94,
+            "cy": 176.55,
+            "rx": 15.66,
+            "ry": 15.86
+          },
+          "shiftInImage": [
+            -1.66,
+            -1.74
+          ]
+        },
+        {
+          "id": "_LAE-0__ogofof10",
+          "tag": "path",
+          "from": {
+            "cx": 332.14,
+            "cy": 156.43,
+            "rx": 13.62,
+            "ry": 14.09
+          },
+          "to": {
+            "cx": 333.26,
+            "cy": 154.3,
+            "rx": 15.8,
+            "ry": 16.34
+          },
+          "shiftInImage": [
+            1.12,
+            -2.13
+          ]
+        }
+      ],
+      "muzzleMoved": [
+        {
+          "seg": 4,
+          "point": "把手1",
+          "from": [
+            419,
+            208
+          ],
+          "to": [
+            418.98,
+            207.98
+          ],
+          "masterDelta": [
+            -0.04,
+            -0.06
+          ]
+        },
+        {
+          "seg": 4,
+          "point": "把手2",
+          "from": [
+            421,
+            225
+          ],
+          "to": [
+            421.11,
+            225.04
+          ],
+          "masterDelta": [
+            0.23,
+            0.12
+          ]
+        },
+        {
+          "seg": 4,
+          "point": "锚点",
+          "from": [
+            411,
+            239
+          ],
+          "to": [
+            409.92,
+            237.45
+          ],
+          "masterDelta": [
+            -1.86,
+            -3.65
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "把手1",
+          "from": [
+            397,
+            260
+          ],
+          "to": [
+            392.33,
+            258.29
+          ],
+          "masterDelta": [
+            -9.54,
+            -5.08
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "把手2",
+          "from": [
+            363,
+            269
+          ],
+          "to": [
+            358.1,
+            268.83
+          ],
+          "masterDelta": [
+            -10.51,
+            -1.84
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "锚点",
+          "from": [
+            336,
+            270
+          ],
+          "to": [
+            331.88,
+            267.08
+          ],
+          "masterDelta": [
+            -7.99,
+            -7.51
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "把手1",
+          "from": [
+            307,
+            272
+          ],
+          "to": [
+            304.05,
+            266.12
+          ],
+          "masterDelta": [
+            -4.59,
+            -13.54
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "把手2",
+          "from": [
+            282,
+            265
+          ],
+          "to": [
+            280.16,
+            253.32
+          ],
+          "masterDelta": [
+            -0.47,
+            -25.7
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "锚点",
+          "from": [
+            264,
+            249
+          ],
+          "to": [
+            262.47,
+            237.88
+          ],
+          "masterDelta": [
+            0.02,
+            -24.39
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "把手1",
+          "from": [
+            246,
+            275
+          ],
+          "to": [
+            244.93,
+            263.91
+          ],
+          "masterDelta": [
+            1.01,
+            -24.21
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "把手2",
+          "from": [
+            217,
+            290
+          ],
+          "to": [
+            220.13,
+            286.25
+          ],
+          "masterDelta": [
+            7.87,
+            -7.14
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "锚点",
+          "from": [
+            184,
+            296
+          ],
+          "to": [
+            188.26,
+            293.17
+          ],
+          "masterDelta": [
+            10.03,
+            -4.81
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "把手1",
+          "from": [
+            151,
+            303
+          ],
+          "to": [
+            157.74,
+            300.74
+          ],
+          "masterDelta": [
+            15.19,
+            -2.85
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "把手2",
+          "from": [
+            122,
+            300
+          ],
+          "to": [
+            122.45,
+            294.81
+          ],
+          "masterDelta": [
+            2.52,
+            -11.05
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "锚点",
+          "from": [
+            110,
+            284
+          ],
+          "to": [
+            110.24,
+            282.19
+          ],
+          "masterDelta": [
+            1.06,
+            -3.83
+          ]
+        },
+        {
+          "seg": 9,
+          "point": "把手1",
+          "from": [
+            102,
+            274
+          ],
+          "to": [
+            101.83,
+            274.02
+          ],
+          "masterDelta": [
+            -0.37,
+            -0.01
+          ]
+        },
+        {
+          "seg": 9,
+          "point": "把手2",
+          "from": [
+            102,
+            260
+          ],
+          "to": [
+            102.06,
+            259.8
+          ],
+          "masterDelta": [
+            0.18,
+            -0.41
+          ]
+        }
+      ],
+      "lowerAnchors": [
+        {
+          "anchor": 4,
+          "smooth": true,
+          "kinkDeg": 2
+        },
+        {
+          "anchor": 5,
+          "smooth": true,
+          "kinkDeg": 2
+        },
+        {
+          "anchor": 6,
+          "smooth": false,
+          "kinkDeg": 97
+        },
+        {
+          "anchor": 7,
+          "smooth": true,
+          "kinkDeg": 2
+        },
+        {
+          "anchor": 8,
+          "smooth": true,
+          "kinkDeg": 2
+        }
+      ],
+      "clearance": [
+        {
+          "eye": "左眼",
+          "shape": "_LAE-0__ogofof2",
+          "role": "头轮廓",
+          "before": 91.88,
+          "after": 87.32,
+          "beforeMaster": 199.7,
+          "afterMaster": 189.81,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_LAE-0__ogofof6",
+          "role": "脸斑",
+          "before": 3.79,
+          "after": 3.71,
+          "beforeMaster": 8.23,
+          "afterMaster": 8.07,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_LAE-0__ogofof8",
+          "role": "鼻子",
+          "before": 21.98,
+          "after": 21.98,
+          "beforeMaster": 47.78,
+          "afterMaster": 47.78,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_LAE-0__ogofof11",
+          "role": "胡须点",
+          "before": 21,
+          "after": 20.48,
+          "beforeMaster": 45.65,
+          "afterMaster": 44.51,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_LAE-0__ogofof2",
+          "role": "头轮廓",
+          "before": 86.78,
+          "after": 83,
+          "beforeMaster": 188.62,
+          "afterMaster": 180.41,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_LAE-0__ogofof6",
+          "role": "脸斑",
+          "before": 0.53,
+          "after": 0.41,
+          "beforeMaster": 1.15,
+          "afterMaster": 0.89,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_LAE-0__ogofof8",
+          "role": "鼻子",
+          "before": 20.95,
+          "after": 20.86,
+          "beforeMaster": 45.53,
+          "afterMaster": 45.35,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_LAE-0__ogofof14",
+          "role": "胡须点",
+          "before": 19.43,
+          "after": 19.01,
+          "beforeMaster": 42.22,
+          "afterMaster": 41.31,
+          "touches": false
+        }
+      ],
+      "notchToNose_master": {
+        "before": 50.72,
+        "after": 26.38,
+        "afterInsideNose": false,
+        "notchMasterY": [
+          554.44,
+          530.05
+        ]
+      },
+      "whiskerDotMarginToMuzzleEdge_master": {
+        "before": 31.38,
+        "after": 31.38
+      }
+    },
+    {
+      "name": "state-02-searching",
+      "file": "design/brand-2026-10-13/mascot/states/state-02-searching.svg",
+      "muzzlePath": "_LD8-0__qeeo3612",
+      "lowerSegments": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "pinnedSideAnchors": [
+        4,
+        10
+      ],
+      "transform": {
+        "scale": 0.4664,
+        "angleDeg": -9.14,
+        "eyeMid": [
+          250.9,
+          164.3
+        ]
+      },
+      "eyesClosed": false,
+      "eyes": [
+        {
+          "id": "_LD8-0__qeeo3615",
+          "tag": "circle",
+          "from": {
+            "cx": 171.3,
+            "cy": 177.1,
+            "rx": 14.3,
+            "ry": 14.3
+          },
+          "to": {
+            "cx": 169.58,
+            "cy": 175.37,
+            "rx": 16.59,
+            "ry": 16.59
+          },
+          "shiftInImage": [
+            -1.72,
+            -1.73
+          ]
+        },
+        {
+          "id": "_LD8-0__qeeo3616",
+          "tag": "circle",
+          "from": {
+            "cx": 330.5,
+            "cy": 151.5,
+            "rx": 14.3,
+            "ry": 14.3
+          },
+          "to": {
+            "cx": 331.59,
+            "cy": 149.32,
+            "rx": 16.59,
+            "ry": 16.59
+          },
+          "shiftInImage": [
+            1.09,
+            -2.18
+          ]
+        }
+      ],
+      "muzzleMoved": [
+        {
+          "seg": 5,
+          "point": "把手1",
+          "from": [
+            422,
+            224
+          ],
+          "to": [
+            421.97,
+            223.91
+          ],
+          "masterDelta": [
+            -0.04,
+            -0.19
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "把手2",
+          "from": [
+            409,
+            244
+          ],
+          "to": [
+            406.4,
+            240.91
+          ],
+          "masterDelta": [
+            -4.45,
+            -7.43
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "锚点",
+          "from": [
+            389,
+            256
+          ],
+          "to": [
+            383.77,
+            254.35
+          ],
+          "masterDelta": [
+            -10.51,
+            -5.28
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "把手1",
+          "from": [
+            368,
+            268
+          ],
+          "to": [
+            362.59,
+            266.33
+          ],
+          "masterDelta": [
+            -10.89,
+            -5.39
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "把手2",
+          "from": [
+            342,
+            274
+          ],
+          "to": [
+            336.82,
+            274.35
+          ],
+          "masterDelta": [
+            -11.09,
+            -1.02
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "锚点",
+          "from": [
+            318,
+            273
+          ],
+          "to": [
+            313.98,
+            268.72
+          ],
+          "masterDelta": [
+            -7.05,
+            -10.44
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "把手1",
+          "from": [
+            294,
+            272
+          ],
+          "to": [
+            290.94,
+            263.03
+          ],
+          "masterDelta": [
+            -3.43,
+            -20.03
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "把手2",
+          "from": [
+            276,
+            264
+          ],
+          "to": [
+            273.87,
+            251.17
+          ],
+          "masterDelta": [
+            -0.14,
+            -27.88
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "锚点",
+          "from": [
+            262,
+            250
+          ],
+          "to": [
+            260.15,
+            238.28
+          ],
+          "masterDelta": [
+            0.07,
+            -25.44
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "把手1",
+          "from": [
+            249,
+            274
+          ],
+          "to": [
+            247.48,
+            262.35
+          ],
+          "masterDelta": [
+            0.74,
+            -25.19
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "把手2",
+          "from": [
+            224,
+            291
+          ],
+          "to": [
+            226.91,
+            286.75
+          ],
+          "masterDelta": [
+            7.61,
+            -8.01
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "锚点",
+          "from": [
+            193,
+            298
+          ],
+          "to": [
+            197.16,
+            294.91
+          ],
+          "masterDelta": [
+            9.85,
+            -5.13
+          ]
+        },
+        {
+          "seg": 9,
+          "point": "把手1",
+          "from": [
+            164,
+            305
+          ],
+          "to": [
+            169.52,
+            302.93
+          ],
+          "masterDelta": [
+            12.4,
+            -2.51
+          ]
+        },
+        {
+          "seg": 9,
+          "point": "把手2",
+          "from": [
+            135,
+            302
+          ],
+          "to": [
+            140.26,
+            297.35
+          ],
+          "masterDelta": [
+            12.71,
+            -8.05
+          ]
+        },
+        {
+          "seg": 9,
+          "point": "锚点",
+          "from": [
+            119,
+            293
+          ],
+          "to": [
+            119.64,
+            288.72
+          ],
+          "masterDelta": [
+            2.82,
+            -8.83
+          ]
+        },
+        {
+          "seg": 10,
+          "point": "把手1",
+          "from": [
+            105,
+            286
+          ],
+          "to": [
+            105.39,
+            283.56
+          ],
+          "masterDelta": [
+            1.66,
+            -5.03
+          ]
+        },
+        {
+          "seg": 10,
+          "point": "把手2",
+          "from": [
+            99,
+            269
+          ],
+          "to": [
+            99.05,
+            268.69
+          ],
+          "masterDelta": [
+            0.21,
+            -0.64
+          ]
+        }
+      ],
+      "lowerAnchors": [
+        {
+          "anchor": 5,
+          "smooth": true,
+          "kinkDeg": 1
+        },
+        {
+          "anchor": 6,
+          "smooth": true,
+          "kinkDeg": 0
+        },
+        {
+          "anchor": 7,
+          "smooth": false,
+          "kinkDeg": 107
+        },
+        {
+          "anchor": 8,
+          "smooth": true,
+          "kinkDeg": 1
+        },
+        {
+          "anchor": 9,
+          "smooth": true,
+          "kinkDeg": 3
+        }
+      ],
+      "clearance": [
+        {
+          "eye": "左眼",
+          "shape": "_LD8-0__qeeo3611",
+          "role": "头轮廓",
+          "before": 89.46,
+          "after": 84.87,
+          "beforeMaster": 191.8,
+          "afterMaster": 181.96,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_LD8-0__qeeo3612",
+          "role": "脸斑",
+          "before": 1.66,
+          "after": 1.5,
+          "beforeMaster": 3.57,
+          "afterMaster": 3.21,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_LD8-0__qeeo3614",
+          "role": "鼻子",
+          "before": 19.41,
+          "after": 19.4,
+          "beforeMaster": 41.61,
+          "afterMaster": 41.6,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_LD8-0__qeeo3617",
+          "role": "胡须点",
+          "before": 23.13,
+          "after": 22.54,
+          "beforeMaster": 49.59,
+          "afterMaster": 48.33,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_LD8-0__qeeo3611",
+          "role": "头轮廓",
+          "before": 86.55,
+          "after": 82.26,
+          "beforeMaster": 185.57,
+          "afterMaster": 176.36,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_LD8-0__qeeo3612",
+          "role": "脸斑",
+          "before": 2.25,
+          "after": 2.12,
+          "beforeMaster": 4.83,
+          "afterMaster": 4.55,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_LD8-0__qeeo3614",
+          "role": "鼻子",
+          "before": 26.05,
+          "after": 25.91,
+          "beforeMaster": 55.86,
+          "afterMaster": 55.55,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_LD8-0__qeeo3620",
+          "role": "胡须点",
+          "before": 18.36,
+          "after": 18.05,
+          "beforeMaster": 39.37,
+          "afterMaster": 38.69,
+          "touches": false
+        }
+      ],
+      "notchToNose_master": {
+        "before": 47.29,
+        "after": 21.85,
+        "afterInsideNose": false,
+        "notchMasterY": [
+          560.68,
+          535.24
+        ]
+      },
+      "whiskerDotMarginToMuzzleEdge_master": {
+        "before": 33.27,
+        "after": 33.27
+      }
+    },
+    {
+      "name": "state-03-offer",
+      "file": "design/brand-2026-10-13/mascot/states/state-03-offer.svg",
+      "muzzlePath": "_LDA-0__6m489x7",
+      "lowerSegments": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "pinnedSideAnchors": [
+        2,
+        8
+      ],
+      "transform": {
+        "scale": 0.899,
+        "angleDeg": 0,
+        "eyeMid": [
+          422.6,
+          236.8
+        ]
+      },
+      "eyesClosed": false,
+      "eyes": [
+        {
+          "id": "_LDA-0__6m489x5",
+          "tag": "ellipse",
+          "from": {
+            "cx": 267.2,
+            "cy": 236.8,
+            "rx": 27.8,
+            "ry": 27.7
+          },
+          "to": {
+            "cx": 264.46,
+            "cy": 232.98,
+            "rx": 32.25,
+            "ry": 32.13
+          },
+          "shiftInImage": [
+            -2.74,
+            -3.82
+          ]
+        },
+        {
+          "id": "_LDA-0__6m489x6",
+          "tag": "ellipse",
+          "from": {
+            "cx": 578,
+            "cy": 236.8,
+            "rx": 27.8,
+            "ry": 27.7
+          },
+          "to": {
+            "cx": 580.74,
+            "cy": 232.98,
+            "rx": 32.25,
+            "ry": 32.13
+          },
+          "shiftInImage": [
+            2.74,
+            -3.82
+          ]
+        }
+      ],
+      "muzzleMoved": [
+        {
+          "seg": 3,
+          "point": "把手1",
+          "from": [
+            133.9,
+            424.2
+          ],
+          "to": [
+            133.9,
+            420.03
+          ],
+          "masterDelta": [
+            0,
+            -4.64
+          ]
+        },
+        {
+          "seg": 3,
+          "point": "把手2",
+          "from": [
+            147.2,
+            446.6
+          ],
+          "to": [
+            152.37,
+            439.01
+          ],
+          "masterDelta": [
+            5.75,
+            -8.45
+          ]
+        },
+        {
+          "seg": 3,
+          "point": "锚点",
+          "from": [
+            173.8,
+            461.1
+          ],
+          "to": [
+            184.89,
+            456.27
+          ],
+          "masterDelta": [
+            12.33,
+            -5.38
+          ]
+        },
+        {
+          "seg": 4,
+          "point": "把手1",
+          "from": [
+            212.7,
+            482.4
+          ],
+          "to": [
+            224.61,
+            477.45
+          ],
+          "masterDelta": [
+            13.25,
+            -5.51
+          ]
+        },
+        {
+          "seg": 4,
+          "point": "把手2",
+          "from": [
+            268.1,
+            484.4
+          ],
+          "to": [
+            280.06,
+            486.93
+          ],
+          "masterDelta": [
+            13.31,
+            2.81
+          ]
+        },
+        {
+          "seg": 4,
+          "point": "锚点",
+          "from": [
+            317.6,
+            473.1
+          ],
+          "to": [
+            325.62,
+            466.67
+          ],
+          "masterDelta": [
+            8.92,
+            -7.15
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "把手1",
+          "from": [
+            361.8,
+            463.1
+          ],
+          "to": [
+            366.54,
+            448.57
+          ],
+          "masterDelta": [
+            5.28,
+            -16.16
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "把手2",
+          "from": [
+            399.6,
+            443
+          ],
+          "to": [
+            399.89,
+            419.02
+          ],
+          "masterDelta": [
+            0.32,
+            -26.68
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "锚点",
+          "from": [
+            423,
+            418.2
+          ],
+          "to": [
+            423,
+            392.56
+          ],
+          "masterDelta": [
+            0,
+            -28.52
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "把手1",
+          "from": [
+            446.3,
+            443
+          ],
+          "to": [
+            446,
+            419.09
+          ],
+          "masterDelta": [
+            -0.34,
+            -26.59
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "把手2",
+          "from": [
+            484.5,
+            463.1
+          ],
+          "to": [
+            479.71,
+            448.8
+          ],
+          "masterDelta": [
+            -5.33,
+            -15.91
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "锚点",
+          "from": [
+            528.2,
+            473.1
+          ],
+          "to": [
+            520.16,
+            466.71
+          ],
+          "masterDelta": [
+            -8.94,
+            -7.11
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "把手1",
+          "from": [
+            577.9,
+            484.4
+          ],
+          "to": [
+            565.94,
+            486.89
+          ],
+          "masterDelta": [
+            -13.3,
+            2.77
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "把手2",
+          "from": [
+            633.1,
+            482.4
+          ],
+          "to": [
+            621.14,
+            477.49
+          ],
+          "masterDelta": [
+            -13.3,
+            -5.46
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "锚点",
+          "from": [
+            671.9,
+            461.1
+          ],
+          "to": [
+            660.83,
+            456.25
+          ],
+          "masterDelta": [
+            -12.31,
+            -5.4
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "把手1",
+          "from": [
+            698.8,
+            446.6
+          ],
+          "to": [
+            693.77,
+            438.95
+          ],
+          "masterDelta": [
+            -5.6,
+            -8.51
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "把手2",
+          "from": [
+            711.2,
+            424.2
+          ],
+          "to": [
+            711.2,
+            420.02
+          ],
+          "masterDelta": [
+            0,
+            -4.65
+          ]
+        }
+      ],
+      "lowerAnchors": [
+        {
+          "anchor": 3,
+          "smooth": true,
+          "kinkDeg": 0
+        },
+        {
+          "anchor": 4,
+          "smooth": true,
+          "kinkDeg": 0
+        },
+        {
+          "anchor": 5,
+          "smooth": false,
+          "kinkDeg": 93
+        },
+        {
+          "anchor": 6,
+          "smooth": true,
+          "kinkDeg": 0
+        },
+        {
+          "anchor": 7,
+          "smooth": true,
+          "kinkDeg": 0
+        }
+      ],
+      "clearance": [
+        {
+          "eye": "左眼",
+          "shape": "_LDA-0__6m489x1",
+          "role": "头轮廓",
+          "before": 130.64,
+          "after": 121.59,
+          "beforeMaster": 145.31,
+          "afterMaster": 135.25,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_LDA-0__6m489x7",
+          "role": "脸斑",
+          "before": 9.31,
+          "after": 9.29,
+          "beforeMaster": 10.36,
+          "afterMaster": 10.34,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_LDA-0__6m489x8",
+          "role": "鼻子",
+          "before": 47.35,
+          "after": 46.98,
+          "beforeMaster": 52.67,
+          "afterMaster": 52.26,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "(ellipse#6)",
+          "role": "胡须点",
+          "before": 47.17,
+          "after": 46.3,
+          "beforeMaster": 52.47,
+          "afterMaster": 51.5,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_LDA-0__6m489x1",
+          "role": "头轮廓",
+          "before": 130.3,
+          "after": 121.27,
+          "beforeMaster": 144.93,
+          "afterMaster": 134.88,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_LDA-0__6m489x7",
+          "role": "脸斑",
+          "before": 9.25,
+          "after": 9.22,
+          "beforeMaster": 10.28,
+          "afterMaster": 10.26,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_LDA-0__6m489x8",
+          "role": "鼻子",
+          "before": 47.35,
+          "after": 46.98,
+          "beforeMaster": 52.67,
+          "afterMaster": 52.26,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "(ellipse#9)",
+          "role": "胡须点",
+          "before": 47.24,
+          "after": 46.35,
+          "beforeMaster": 52.55,
+          "afterMaster": 51.56,
+          "touches": false
+        }
+      ],
+      "notchToNose_master": {
+        "before": 84.31,
+        "after": 55.79,
+        "afterInsideNose": false,
+        "notchMasterY": [
+          577.27,
+          548.75
+        ]
+      },
+      "whiskerDotMarginToMuzzleEdge_master": {
+        "before": 33.68,
+        "after": 33.68
+      }
+    },
+    {
+      "name": "state-04-done",
+      "file": "design/brand-2026-10-13/mascot/states/state-04-done.svg",
+      "muzzlePath": "_LDC-0__w0h4vk4",
+      "lowerSegments": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pinnedSideAnchors": [
+        3,
+        9
+      ],
+      "transform": {
+        "scale": 0.4771,
+        "angleDeg": -8.24,
+        "eyeMid": [
+          244.9,
+          141.84
+        ]
+      },
+      "eyesClosed": true,
+      "eyes": [
+        {
+          "id": "_LDC-0__w0h4vk8",
+          "unchanged": true,
+          "center": [
+            163.29,
+            153.66
+          ]
+        },
+        {
+          "id": "_LDC-0__w0h4vk9",
+          "unchanged": true,
+          "center": [
+            326.52,
+            130.01
+          ]
+        }
+      ],
+      "muzzleMoved": [
+        {
+          "seg": 4,
+          "point": "把手1",
+          "from": [
+            412,
+            185
+          ],
+          "to": [
+            411.85,
+            184.88
+          ],
+          "masterDelta": [
+            -0.27,
+            -0.29
+          ]
+        },
+        {
+          "seg": 4,
+          "point": "把手2",
+          "from": [
+            421,
+            202
+          ],
+          "to": [
+            421.25,
+            202.05
+          ],
+          "masterDelta": [
+            0.5,
+            0.18
+          ]
+        },
+        {
+          "seg": 4,
+          "point": "锚点",
+          "from": [
+            417,
+            218
+          ],
+          "to": [
+            416.01,
+            215.97
+          ],
+          "masterDelta": [
+            -1.44,
+            -4.52
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "把手1",
+          "from": [
+            412,
+            239
+          ],
+          "to": [
+            409.27,
+            234.52
+          ],
+          "masterDelta": [
+            -4.32,
+            -10.12
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "把手2",
+          "from": [
+            385,
+            251
+          ],
+          "to": [
+            377.12,
+            250.4
+          ],
+          "masterDelta": [
+            -16.17,
+            -3.61
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "锚点",
+          "from": [
+            355,
+            258
+          ],
+          "to": [
+            349.4,
+            257.17
+          ],
+          "masterDelta": [
+            -11.36,
+            -3.4
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "把手1",
+          "from": [
+            318,
+            267
+          ],
+          "to": [
+            312.54,
+            266.55
+          ],
+          "masterDelta": [
+            -11.19,
+            -2.58
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "把手2",
+          "from": [
+            280,
+            258
+          ],
+          "to": [
+            277.93,
+            244.65
+          ],
+          "masterDelta": [
+            -0.28,
+            -28.32
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "锚点",
+          "from": [
+            256,
+            243
+          ],
+          "to": [
+            253.99,
+            229.07
+          ],
+          "masterDelta": [
+            0.01,
+            -29.5
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "把手1",
+          "from": [
+            234,
+            267
+          ],
+          "to": [
+            232.94,
+            255.18
+          ],
+          "masterDelta": [
+            1.35,
+            -24.84
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "把手2",
+          "from": [
+            202,
+            282
+          ],
+          "to": [
+            206.57,
+            279.58
+          ],
+          "masterDelta": [
+            10.2,
+            -3.65
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "锚点",
+          "from": [
+            169,
+            286
+          ],
+          "to": [
+            174.17,
+            283.62
+          ],
+          "masterDelta": [
+            11.44,
+            -3.39
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "把手1",
+          "from": [
+            140,
+            289
+          ],
+          "to": [
+            148.4,
+            286.37
+          ],
+          "masterDelta": [
+            18.22,
+            -2.93
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "把手2",
+          "from": [
+            114,
+            285
+          ],
+          "to": [
+            117.4,
+            278.85
+          ],
+          "masterDelta": [
+            8.91,
+            -11.74
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "锚点",
+          "from": [
+            101,
+            274
+          ],
+          "to": [
+            100.89,
+            268.33
+          ],
+          "masterDelta": [
+            1.48,
+            -11.79
+          ]
+        },
+        {
+          "seg": 9,
+          "point": "把手1",
+          "from": [
+            88,
+            263
+          ],
+          "to": [
+            88.71,
+            260.57
+          ],
+          "masterDelta": [
+            2.21,
+            -4.82
+          ]
+        },
+        {
+          "seg": 9,
+          "point": "把手2",
+          "from": [
+            90,
+            239
+          ],
+          "to": [
+            90.08,
+            238.81
+          ],
+          "masterDelta": [
+            0.23,
+            -0.38
+          ]
+        }
+      ],
+      "lowerAnchors": [
+        {
+          "anchor": 4,
+          "smooth": true,
+          "kinkDeg": 1
+        },
+        {
+          "anchor": 5,
+          "smooth": true,
+          "kinkDeg": 1
+        },
+        {
+          "anchor": 6,
+          "smooth": false,
+          "kinkDeg": 79
+        },
+        {
+          "anchor": 7,
+          "smooth": true,
+          "kinkDeg": 1
+        },
+        {
+          "anchor": 8,
+          "smooth": true,
+          "kinkDeg": 0
+        }
+      ],
+      "clearance": [],
+      "notchToNose_master": {
+        "before": 61.64,
+        "after": 32.3,
+        "afterInsideNose": false,
+        "notchMasterY": [
+          588.68,
+          559.18
+        ]
+      },
+      "whiskerDotMarginToMuzzleEdge_master": {
+        "before": 38.91,
+        "after": 38.91
+      }
+    },
+    {
+      "name": "state-05-not-found",
+      "file": "design/brand-2026-10-13/mascot/states/state-05-not-found.svg",
+      "muzzlePath": "_KZA-0__mhu05b5",
+      "lowerSegments": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "pinnedSideAnchors": [
+        3,
+        9
+      ],
+      "transform": {
+        "scale": 0.7154,
+        "angleDeg": 0,
+        "eyeMid": [
+          412.85,
+          310
+        ]
+      },
+      "eyesClosed": false,
+      "eyes": [
+        {
+          "id": "_KZA-0__mhu05b7",
+          "tag": "ellipse",
+          "from": {
+            "cx": 289.2,
+            "cy": 310,
+            "rx": 18.8,
+            "ry": 18.7
+          },
+          "to": {
+            "cx": 287.02,
+            "cy": 306.96,
+            "rx": 21.81,
+            "ry": 21.69
+          },
+          "shiftInImage": [
+            -2.18,
+            -3.04
+          ]
+        },
+        {
+          "id": "_KZA-0__mhu05b8",
+          "tag": "ellipse",
+          "from": {
+            "cx": 536.5,
+            "cy": 310,
+            "rx": 18.7,
+            "ry": 18.8
+          },
+          "to": {
+            "cx": 538.68,
+            "cy": 306.96,
+            "rx": 21.69,
+            "ry": 21.81
+          },
+          "shiftInImage": [
+            2.18,
+            -3.04
+          ]
+        }
+      ],
+      "muzzleMoved": [
+        {
+          "seg": 4,
+          "point": "把手1",
+          "from": [
+            174,
+            457
+          ],
+          "to": [
+            174.19,
+            454.48
+          ],
+          "masterDelta": [
+            0.26,
+            -3.53
+          ]
+        },
+        {
+          "seg": 4,
+          "point": "把手2",
+          "from": [
+            183,
+            479
+          ],
+          "to": [
+            185.33,
+            471.63
+          ],
+          "masterDelta": [
+            3.26,
+            -10.3
+          ]
+        },
+        {
+          "seg": 4,
+          "point": "锚点",
+          "from": [
+            204,
+            494
+          ],
+          "to": [
+            213.47,
+            489.83
+          ],
+          "masterDelta": [
+            13.24,
+            -5.83
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "把手1",
+          "from": [
+            226,
+            510
+          ],
+          "to": [
+            239.91,
+            507.25
+          ],
+          "masterDelta": [
+            19.45,
+            -3.84
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "把手2",
+          "from": [
+            253,
+            517
+          ],
+          "to": [
+            261.72,
+            514.6
+          ],
+          "masterDelta": [
+            12.19,
+            -3.35
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "锚点",
+          "from": [
+            285,
+            517
+          ],
+          "to": [
+            293.37,
+            514.92
+          ],
+          "masterDelta": [
+            11.7,
+            -2.9
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "把手1",
+          "from": [
+            339,
+            517
+          ],
+          "to": [
+            347.24,
+            515.47
+          ],
+          "masterDelta": [
+            11.52,
+            -2.14
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "把手2",
+          "from": [
+            382,
+            492
+          ],
+          "to": [
+            382.2,
+            471.57
+          ],
+          "masterDelta": [
+            0.28,
+            -28.56
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "锚点",
+          "from": [
+            413,
+            456
+          ],
+          "to": [
+            413,
+            435.34
+          ],
+          "masterDelta": [
+            0,
+            -28.88
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "把手1",
+          "from": [
+            443,
+            492
+          ],
+          "to": [
+            442.82,
+            471.51
+          ],
+          "masterDelta": [
+            -0.25,
+            -28.65
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "把手2",
+          "from": [
+            487,
+            517
+          ],
+          "to": [
+            478.73,
+            515.51
+          ],
+          "masterDelta": [
+            -11.56,
+            -2.08
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "锚点",
+          "from": [
+            541,
+            517
+          ],
+          "to": [
+            532.61,
+            514.94
+          ],
+          "masterDelta": [
+            -11.72,
+            -2.88
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "把手1",
+          "from": [
+            572,
+            517
+          ],
+          "to": [
+            563.33,
+            514.62
+          ],
+          "masterDelta": [
+            -12.12,
+            -3.33
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "把手2",
+          "from": [
+            601,
+            509
+          ],
+          "to": [
+            586.96,
+            506.27
+          ],
+          "masterDelta": [
+            -19.62,
+            -3.82
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "锚点",
+          "from": [
+            622,
+            493
+          ],
+          "to": [
+            612.93,
+            488.72
+          ],
+          "masterDelta": [
+            -12.68,
+            -5.98
+          ]
+        },
+        {
+          "seg": 9,
+          "point": "把手1",
+          "from": [
+            643,
+            477
+          ],
+          "to": [
+            640.76,
+            469.92
+          ],
+          "masterDelta": [
+            -3.14,
+            -9.9
+          ]
+        },
+        {
+          "seg": 9,
+          "point": "把手2",
+          "from": [
+            651,
+            456
+          ],
+          "to": [
+            650.91,
+            453.68
+          ],
+          "masterDelta": [
+            -0.12,
+            -3.24
+          ]
+        }
+      ],
+      "lowerAnchors": [
+        {
+          "anchor": 4,
+          "smooth": true,
+          "kinkDeg": 0
+        },
+        {
+          "anchor": 5,
+          "smooth": true,
+          "kinkDeg": 0
+        },
+        {
+          "anchor": 6,
+          "smooth": false,
+          "kinkDeg": 99
+        },
+        {
+          "anchor": 7,
+          "smooth": true,
+          "kinkDeg": 0
+        },
+        {
+          "anchor": 8,
+          "smooth": true,
+          "kinkDeg": 0
+        }
+      ],
+      "clearance": [
+        {
+          "eye": "左眼",
+          "shape": "_KZA-0__mhu05b4",
+          "role": "头轮廓",
+          "before": 114.56,
+          "after": 108.03,
+          "beforeMaster": 160.15,
+          "afterMaster": 151.01,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_KZA-0__mhu05b5",
+          "role": "脸斑",
+          "before": 5.7,
+          "after": 6.03,
+          "beforeMaster": 7.97,
+          "afterMaster": 8.43,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_KZA-0__mhu05b9",
+          "role": "鼻子",
+          "before": 36.8,
+          "after": 37.16,
+          "beforeMaster": 51.44,
+          "afterMaster": 51.94,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_KZA-0__mhu05b11",
+          "role": "胡须点",
+          "before": 34.83,
+          "after": 34.66,
+          "beforeMaster": 48.69,
+          "afterMaster": 48.44,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_KZA-0__mhu05b4",
+          "role": "头轮廓",
+          "before": 116.43,
+          "after": 110.03,
+          "beforeMaster": 162.76,
+          "afterMaster": 153.81,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_KZA-0__mhu05b5",
+          "role": "脸斑",
+          "before": 5.56,
+          "after": 5.87,
+          "beforeMaster": 7.77,
+          "afterMaster": 8.2,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_KZA-0__mhu05b9",
+          "role": "鼻子",
+          "before": 37.23,
+          "after": 37.59,
+          "beforeMaster": 52.05,
+          "afterMaster": 52.54,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_KZA-0__mhu05b14",
+          "role": "胡须点",
+          "before": 34.74,
+          "after": 34.55,
+          "beforeMaster": 48.57,
+          "afterMaster": 48.29,
+          "touches": false
+        }
+      ],
+      "notchToNose_master": {
+        "before": 74.09,
+        "after": 45.21,
+        "afterInsideNose": false,
+        "notchMasterY": [
+          579.59,
+          550.71
+        ]
+      },
+      "whiskerDotMarginToMuzzleEdge_master": {
+        "before": 36.67,
+        "after": 36.67
+      }
+    },
+    {
+      "name": "peek-login",
+      "file": "design/brand-2026-10-13/mascot/states/peek-login.svg",
+      "muzzlePath": "_L5H-0__eoyclv3",
+      "lowerSegments": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "pinnedSideAnchors": [
+        2,
+        10
+      ],
+      "transform": {
+        "scale": 0.7689,
+        "angleDeg": 0,
+        "eyeMid": [
+          412.9,
+          270.7
+        ]
+      },
+      "eyesClosed": false,
+      "eyes": [
+        {
+          "id": "_L5H-0__eoyclv5",
+          "tag": "ellipse",
+          "from": {
+            "cx": 280,
+            "cy": 270.7,
+            "rx": 21.7,
+            "ry": 21.8
+          },
+          "to": {
+            "cx": 277.65,
+            "cy": 267.43,
+            "rx": 25.17,
+            "ry": 25.29
+          },
+          "shiftInImage": [
+            -2.35,
+            -3.27
+          ]
+        },
+        {
+          "id": "_L5H-0__eoyclv6",
+          "tag": "ellipse",
+          "from": {
+            "cx": 545.8,
+            "cy": 270.7,
+            "rx": 21.6,
+            "ry": 21.8
+          },
+          "to": {
+            "cx": 548.15,
+            "cy": 267.43,
+            "rx": 25.06,
+            "ry": 25.29
+          },
+          "shiftInImage": [
+            2.35,
+            -3.27
+          ]
+        }
+      ],
+      "muzzleMoved": [
+        {
+          "seg": 3,
+          "point": "把手1",
+          "from": [
+            144,
+            386
+          ],
+          "to": [
+            144.09,
+            385.87
+          ],
+          "masterDelta": [
+            0.12,
+            -0.17
+          ]
+        },
+        {
+          "seg": 3,
+          "point": "把手2",
+          "from": [
+            141,
+            412
+          ],
+          "to": [
+            141.23,
+            411.8
+          ],
+          "masterDelta": [
+            0.29,
+            -0.26
+          ]
+        },
+        {
+          "seg": 3,
+          "point": "锚点",
+          "from": [
+            150,
+            436
+          ],
+          "to": [
+            151.09,
+            431.31
+          ],
+          "masterDelta": [
+            1.42,
+            -6.1
+          ]
+        },
+        {
+          "seg": 4,
+          "point": "把手1",
+          "from": [
+            158,
+            460
+          ],
+          "to": [
+            159.33,
+            449.22
+          ],
+          "masterDelta": [
+            1.73,
+            -14.02
+          ]
+        },
+        {
+          "seg": 4,
+          "point": "把手2",
+          "from": [
+            179,
+            478
+          ],
+          "to": [
+            190.59,
+            471.95
+          ],
+          "masterDelta": [
+            15.07,
+            -7.88
+          ]
+        },
+        {
+          "seg": 4,
+          "point": "锚点",
+          "from": [
+            208,
+            489
+          ],
+          "to": [
+            224.66,
+            486.43
+          ],
+          "masterDelta": [
+            21.67,
+            -3.35
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "把手1",
+          "from": [
+            240,
+            502
+          ],
+          "to": [
+            250.03,
+            497.91
+          ],
+          "masterDelta": [
+            13.04,
+            -5.31
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "把手2",
+          "from": [
+            273,
+            505
+          ],
+          "to": [
+            282.37,
+            504.33
+          ],
+          "masterDelta": [
+            12.18,
+            -0.87
+          ]
+        },
+        {
+          "seg": 5,
+          "point": "锚点",
+          "from": [
+            308,
+            499
+          ],
+          "to": [
+            316.07,
+            495.48
+          ],
+          "masterDelta": [
+            10.5,
+            -4.57
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "把手1",
+          "from": [
+            351,
+            492
+          ],
+          "to": [
+            356.95,
+            485.12
+          ],
+          "masterDelta": [
+            7.74,
+            -8.95
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "把手2",
+          "from": [
+            389,
+            467
+          ],
+          "to": [
+            389.14,
+            444.93
+          ],
+          "masterDelta": [
+            0.18,
+            -28.71
+          ]
+        },
+        {
+          "seg": 6,
+          "point": "锚点",
+          "from": [
+            413,
+            429
+          ],
+          "to": [
+            413,
+            406.6
+          ],
+          "masterDelta": [
+            0,
+            -29.13
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "把手1",
+          "from": [
+            437,
+            467
+          ],
+          "to": [
+            436.86,
+            444.91
+          ],
+          "masterDelta": [
+            -0.18,
+            -28.73
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "把手2",
+          "from": [
+            475,
+            492
+          ],
+          "to": [
+            469.01,
+            485.17
+          ],
+          "masterDelta": [
+            -7.79,
+            -8.88
+          ]
+        },
+        {
+          "seg": 7,
+          "point": "锚点",
+          "from": [
+            518,
+            499
+          ],
+          "to": [
+            509.94,
+            495.47
+          ],
+          "masterDelta": [
+            -10.48,
+            -4.59
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "把手1",
+          "from": [
+            553,
+            506
+          ],
+          "to": [
+            543.63,
+            505.25
+          ],
+          "masterDelta": [
+            -12.19,
+            -0.98
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "把手2",
+          "from": [
+            586,
+            502
+          ],
+          "to": [
+            575.95,
+            497.91
+          ],
+          "masterDelta": [
+            -13.07,
+            -5.32
+          ]
+        },
+        {
+          "seg": 8,
+          "point": "锚点",
+          "from": [
+            618,
+            489
+          ],
+          "to": [
+            601.29,
+            486.44
+          ],
+          "masterDelta": [
+            -21.73,
+            -3.33
+          ]
+        },
+        {
+          "seg": 9,
+          "point": "把手1",
+          "from": [
+            647,
+            478
+          ],
+          "to": [
+            635.49,
+            471.9
+          ],
+          "masterDelta": [
+            -14.97,
+            -7.93
+          ]
+        },
+        {
+          "seg": 9,
+          "point": "把手2",
+          "from": [
+            668,
+            460
+          ],
+          "to": [
+            666.71,
+            449.18
+          ],
+          "masterDelta": [
+            -1.68,
+            -14.08
+          ]
+        },
+        {
+          "seg": 9,
+          "point": "锚点",
+          "from": [
+            676,
+            436
+          ],
+          "to": [
+            674.91,
+            431.31
+          ],
+          "masterDelta": [
+            -1.41,
+            -6.1
+          ]
+        },
+        {
+          "seg": 10,
+          "point": "把手1",
+          "from": [
+            685,
+            412
+          ],
+          "to": [
+            684.77,
+            411.79
+          ],
+          "masterDelta": [
+            -0.29,
+            -0.27
+          ]
+        },
+        {
+          "seg": 10,
+          "point": "把手2",
+          "from": [
+            682,
+            386
+          ],
+          "to": [
+            681.91,
+            385.87
+          ],
+          "masterDelta": [
+            -0.12,
+            -0.17
+          ]
+        }
+      ],
+      "lowerAnchors": [
+        {
+          "anchor": 3,
+          "smooth": true,
+          "kinkDeg": 2
+        },
+        {
+          "anchor": 4,
+          "smooth": true,
+          "kinkDeg": 1
+        },
+        {
+          "anchor": 5,
+          "smooth": true,
+          "kinkDeg": 0
+        },
+        {
+          "anchor": 6,
+          "smooth": false,
+          "kinkDeg": 115
+        },
+        {
+          "anchor": 7,
+          "smooth": true,
+          "kinkDeg": 2
+        },
+        {
+          "anchor": 8,
+          "smooth": true,
+          "kinkDeg": 1
+        },
+        {
+          "anchor": 9,
+          "smooth": true,
+          "kinkDeg": 2
+        }
+      ],
+      "clearance": [
+        {
+          "eye": "左眼",
+          "shape": "_L5H-0__eoyclv2",
+          "role": "头轮廓",
+          "before": 132.31,
+          "after": 124.93,
+          "beforeMaster": 172.08,
+          "afterMaster": 162.48,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_L5H-0__eoyclv3",
+          "role": "脸斑",
+          "before": 7.43,
+          "after": 7.49,
+          "beforeMaster": 9.66,
+          "afterMaster": 9.74,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_L5H-0__eoyclv7",
+          "role": "鼻子",
+          "before": 40.89,
+          "after": 41,
+          "beforeMaster": 53.18,
+          "afterMaster": 53.32,
+          "touches": false
+        },
+        {
+          "eye": "左眼",
+          "shape": "_L5H-0__eoyclv9",
+          "role": "胡须点",
+          "before": 41.83,
+          "after": 41.22,
+          "beforeMaster": 54.41,
+          "afterMaster": 53.61,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_L5H-0__eoyclv2",
+          "role": "头轮廓",
+          "before": 132.52,
+          "after": 125.15,
+          "beforeMaster": 172.36,
+          "afterMaster": 162.77,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_L5H-0__eoyclv3",
+          "role": "脸斑",
+          "before": 7.41,
+          "after": 7.47,
+          "beforeMaster": 9.63,
+          "afterMaster": 9.71,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_L5H-0__eoyclv7",
+          "role": "鼻子",
+          "before": 40.87,
+          "after": 40.98,
+          "beforeMaster": 53.16,
+          "afterMaster": 53.3,
+          "touches": false
+        },
+        {
+          "eye": "右眼",
+          "shape": "_L5H-0__eoyclv12",
+          "role": "胡须点",
+          "before": 42.12,
+          "after": 41.47,
+          "beforeMaster": 54.78,
+          "afterMaster": 53.93,
+          "touches": false
+        }
+      ],
+      "notchToNose_master": {
+        "before": 74.07,
+        "after": 44.94,
+        "afterInsideNose": false,
+        "notchMasterY": [
+          581.39,
+          552.25
+        ]
+      },
+      "whiskerDotMarginToMuzzleEdge_master": {
+        "before": 39.49,
+        "after": 39.49
+      }
+    }
+  ]
+}
