@@ -581,20 +581,8 @@
 }
 
 /* 迁移第 12 条：草稿卷还没有题组 = 「还没东西」，插图照图标 BoardList（草稿卷）。
-   插图放在纸上，纸本身就是白卡片，不另加底。 */
-.draft-a4-empty.is-blank {
-  align-content: center;
-  display: grid;
-  font-size: 13px;
-  gap: 12px;
-  justify-items: center;
-  line-height: 1.5;
-  padding: 36px 20px;
-  text-align: center;
-}
-.draft-a4-empty.is-blank p { margin: 0; max-width: 26em; }
-/* 构件厂第 4 步：「去找题」换成 shared-ui/Button（primary、lg），原来这里的
-   .draft-a4-empty-cta 规则删掉，类名留着给脚本认。 */
+   插图放在纸上，纸本身就是白卡片，不另加底。2026-11-14 起整块换成共用的 EmptyState
+   （shared-ui/emptyState.css），放在上面 .draft-a4-empty 的居中框里；原来的 .is-blank 两条删掉。 */
 
 /* One persistent tool strip per group. Its paper-relative anchor stays stable
    while scrolling; wide A4 places the strip on the desk outside the paper. */

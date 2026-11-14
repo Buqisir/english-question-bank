@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar.tsx'
 import { ChevronRight, Paper } from '../../icons'
-import { EmptyIllustration } from '../../components/EmptyIllustration'
+import { EmptyState } from '../../shared-ui/EmptyState.tsx'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate.tsx'
 import { fetchQuestionGroups } from '../../services/questionGroups.ts'
 import {
@@ -199,11 +199,9 @@ export function VocabularyNotebookPage({
         <main className="notebook-main">
           {error ? <p className="notebook-empty">{error}</p> : null}
           {papers && papers.length === 0 ? (
-            <div className="notebook-empty-state">
-              <EmptyIllustration kind="vocabulary-notebook" />
-              <p className="notebook-empty">看卷时选中单词，点「加入生词本」，就会收到这里。</p>
-              <button type="button" className="notebook-empty-cta" onClick={onBack}>去找题</button>
-            </div>
+            <EmptyState className="notebook-empty-state" illustration="vocabulary-notebook" action={{ label: '去找题', onClick: onBack }}>
+              看卷时选中单词，点「加入生词本」，就会收到这里。
+            </EmptyState>
           ) : null}
           {papers && papers.length > 0 ? (
             <section className="home-section" aria-label="已收藏的卷">

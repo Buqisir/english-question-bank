@@ -1011,51 +1011,16 @@
   outline-offset: 2px;
 }
 
-.dictation-empty-state {
-  display: grid;
-  min-height: 220px;
-  place-items: center;
-  align-content: center;
-  gap: 8px;
-  padding: 32px;
-  color: var(--eqb-color-text-muted);
-  text-align: center;
-}
-
-.dictation-empty-state h2 {
-  margin: 0;
-  color: var(--eqb-color-text);
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.dictation-empty-state p {
-  margin: 0;
-  font-size: 13px;
-}
-
 /* 迁移第 12 条：还没有听写 / 还没有词组 = 「还没东西」，插图照图标 PaperLined（Owner 选横线纸）。
-   列表里只剩这个空状态时，外面的白框去掉，插图直接放在桌色上（Owner 2026-11-13 选 B）。 */
-.dictation-set-list:has(.dictation-empty-state.is-blank),
-.dictation-task-queue:has(.dictation-empty-state.is-blank) {
+   2026-11-14 起换成共用的 EmptyState（样子在 shared-ui/emptyState.css），这里只剩两条：
+   列表里只剩这个空状态时，外面的白框去掉，插图直接放在桌色上（Owner 2026-11-13 选 B）；空态至少 220 高（照原来）。 */
+.dictation-set-list:has(.dictation-empty-state),
+.dictation-task-queue:has(.dictation-empty-state) {
   background: transparent;
   border-color: transparent;
 }
-.dictation-empty-state.is-blank { gap: 12px; line-height: 1.5; }
-.dictation-empty-state.is-blank p { max-width: 24em; }
-.dictation-empty-state .dictation-empty-cta {
-  background: var(--eqb-color-accent-fill);
-  border: 0;
-  border-radius: 8px;
-  color: var(--eqb-color-accent-fill-ink);
-  cursor: pointer;
-  font: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  min-height: 36px;
-  padding: 0 16px;
-}
-.dictation-empty-state .dictation-empty-cta:focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
+/* 覆盖：本条 (0,2,0) 和 .eqb-empty-state (0,1,0) 不冲突属性，写成两个类只是为了不依赖样式表的先后。 */
+.eqb-empty-state.dictation-empty-state { min-height: 220px; }
 
 /* 搜了没结果、暂时没有、还没有记录：一行灰字，能一步解决的放行内按钮（同首页「清除筛选」）。 */
 .dictation-empty-line {

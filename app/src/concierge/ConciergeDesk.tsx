@@ -18,7 +18,6 @@
 
 import { useEffect, useId, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react'
 import { CornerDownLeft, QuestionBank, RotateCcw, X } from '../icons'
-import { EmptyIllustration } from '../components/EmptyIllustration'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
@@ -29,6 +28,7 @@ import { FluidHoverList } from '../components/FluidHoverList.tsx'
 import { Button } from '../shared-ui/Button.tsx'
 import { ChipToggle } from '../shared-ui/Chip.tsx'
 import { Notice } from '../shared-ui/Notice.tsx'
+import { EmptyState } from '../shared-ui/EmptyState.tsx'
 
 /** Fluid hover: an expanded paper row's open body still belongs to its head,
  *  so the highlight stays on that head instead of jumping to the next paper. */
@@ -936,12 +936,16 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
         )}
 
         {state.kind === 'results' && paperResults.length === 0 && (
-          <p className="concierge-empty">
-            没找到匹配。可以换个说法，或
-            <button type="button" className="concierge-filter-clear-inline" onClick={() => actions.reset()}>
-              返回浏览全部 {catalogPaperCount} 套卷
-            </button>
-          </p>
+          // 「没找到」做成卡片，摊手獭獭从卡片上沿露出半身（BRAND.md 第 118、119、31 条）。话照原来那一行：
+          // 两条出路，「换个说法」留在句子里，「返回浏览全部 N 套卷」原来是行内墨字链接，现在是卡片里的墨字键。
+          // 类名 concierge-empty 留着给 smoke 脚本认。
+          <EmptyState
+            className="concierge-empty"
+            otter="not-found"
+            action={{ label: `返回浏览全部 ${catalogPaperCount} 套卷`, tone: 'strong', onClick: () => actions.reset() }}
+          >
+            没找到匹配。可以换个说法。
+          </EmptyState>
         )}
 
         {/* C4: honest empty handling — when the search itself found hits but
@@ -994,10 +998,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       {showFeed && (
         <div className="concierge-default-feed" role="region" aria-label={isBrowseScreen ? '题库浏览' : '备课桌'}>
           {questionGroups.length === 0 ? (
-            <div className="concierge-feed-empty-corpus">
-              <EmptyIllustration kind="question-bank" />
-              <p>题库还没有题目。先导入一套卷，这里就能按卷浏览。</p>
-            </div>
+            <EmptyState className="concierge-feed-empty-corpus" illustration="question-bank">题库还没有题目。先导入一套卷，这里就能按卷浏览。</EmptyState>
           ) : hasActiveFilters && feedPaperCount === 0 ? (
             <p className="concierge-empty">
               筛选条件太严格，题库里没有匹配的卷。

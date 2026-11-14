@@ -2,9 +2,9 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, typ
 import { Archive, ArrowDown, ArrowLeftRight, ArrowUp, ChevronDown, Ellipsis, FolderPlus, PageBreak, PaperCheck, PaperStudent, RotateCcw, Save, Trash } from '../../icons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
-import { EmptyIllustration } from '../../components/EmptyIllustration'
 import { useModalDialog } from '../../components/useModalDialog'
 import { Button } from '../../shared-ui/Button.tsx'
+import { EmptyState } from '../../shared-ui/EmptyState.tsx'
 import { Menu } from '../../shared-ui/Menu.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, GroupType, MySpaceFolder, QuestionGroupCard } from '../../domain/questionBank'
@@ -1824,10 +1824,10 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               style={{ height: `${nativeContentHeight * previewScale}px` }}
             >
               {draftPaper.items.length === 0 ? (
-                <div className="draft-a4-empty is-blank">
-                  <EmptyIllustration kind="board-list" />
-                  <p>还没有题组。在找题结果里点「加入草稿卷」，题就会排进这张纸。</p>
-                  <Button tone="primary" size="lg" className="draft-a4-empty-cta" onClick={onBackToWorkbench}>去找题</Button>
+                <div className="draft-a4-empty">
+                  <EmptyState illustration="board-list" action={{ label: '去找题', onClick: onBackToWorkbench }}>
+                    还没有题组。在找题结果里点「加入草稿卷」，题就会排进这张纸。
+                  </EmptyState>
                 </div>
               ) : previewHtml ? (
                 <>

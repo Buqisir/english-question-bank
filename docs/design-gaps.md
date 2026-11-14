@@ -77,3 +77,8 @@ token 的扩展用法。
 
 - **想要的值**：一层「旧内容还在、正在换新」的遮罩色，盖在纸上能看出底下的字，又一眼看出这一页不是最新的。tokens.css 里没有遮罩一类的 token。若收编，候选名 `--eqb-color-scrim`。
 - **临时方案**：`color-mix(in srgb, var(--eqb-color-desk) 60%, transparent)`，比例目测，只用在草稿卷卷面重排等待时（走查卡点 2，`design/ux-2026-11-14/find-compose-export/fix-waiting/`）。不加模糊。
+
+## 2026-11-14 空状态构件的尺寸（`app/src/shared-ui/emptyState.css` 文件头 `:root` 三个局部变量）
+
+- **想要的值**：空状态里图的尺寸档和说明的行宽，tokens.css 里没有这一类。一是坐石獭獭的图框 150 × 150（BRAND.md §4.7 空态 150px 高）；二是「没找到」摊手獭獭的宽 128（另外三张半身 110 宽 × 第 119 条的 1.17）；三是说明一行最多 26em（原来草稿卷空态的值）。另外平涂插图 88 × 88 还写在 `components/emptyIllustration.css` 里，没动。若收编，候选名 `--eqb-empty-art-otter-sit`、`--eqb-empty-art-otter-half`、`--eqb-measure-empty-text`。
+- **临时方案**：先写成 emptyState.css 里的局部变量 `--eqb-empty-otter-sit-size`、`--eqb-empty-otter-not-found-width`、`--eqb-empty-text-measure`，每个注明出处。说明文字用的是 `--eqb-font-size-control`（13px，DESIGN.md §3 的 UI Compact 档），名字说的是控件，空态借用；若要分开，候选名 `--eqb-font-size-compact`。记录在 `design/components-2026-11-13/migrate-empty/README.md`「缺的变量」。

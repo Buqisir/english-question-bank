@@ -1,5 +1,4 @@
 import { Folder, Paper, Save, Trash } from '../../icons'
-import { EmptyIllustration } from '../../components/EmptyIllustration'
 import { DownloadFeedbackIcon } from '../../icons/MotionIcons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
@@ -17,6 +16,7 @@ import { prepareFileSaveTarget, type FileSaveMode } from '../../services/fileDow
 import { describeError } from '../shared/errorCopy'
 import { useToastPresence } from '../shared/useToastPresence.ts'
 import { Button } from '../../shared-ui/Button.tsx'
+import { EmptyState } from '../../shared-ui/EmptyState.tsx'
 import { Menu } from '../../shared-ui/Menu.tsx'
 import './MySpacePage.css'
 
@@ -297,11 +297,10 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
               </div>
             )}
             {loadState === 'loaded' && artifacts.length === 0 && (
-              <div className="my-space-empty-state">
-                <EmptyIllustration kind="archive" />
-                <p className="my-space-empty">试卷导出为 PDF 后，可以保存在这里。</p>
-                <Button className="my-space-empty-cta" tone="primary" size="lg" onClick={onBackToWorkbench}>去找题</Button>
-              </div>
+              // 个人空间空态用坐石獭獭（BRAND.md §7 第 118 条），换掉原来的平涂文件夹插图。
+              <EmptyState className="my-space-empty-placed" otter="otter-sit" action={{ label: '去找题', onClick: onBackToWorkbench }}>
+                试卷导出为 PDF 后，可以保存在这里。
+              </EmptyState>
             )}
             {loadState === 'loaded' && artifacts.length > 0 && monthGroups.map((group) => (
               <section className="my-space-month-group" key={group.key} aria-label={group.label}>

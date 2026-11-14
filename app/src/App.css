@@ -3483,8 +3483,10 @@ button:disabled {
    .concierge-notice / .concierge-error / .concierge-loading / .concierge-data-loading 换成了共用提示行
    shared-ui/Notice（字色、字号、图标、行尾的「重试」键都由 notice.css 和 Button 给），这里只剩
    还是段落的两种。 */
+/* 「没找到」那一行 2026-11-14 换成了 EmptyState 卡片（类名 concierge-empty 留着给 smoke 脚本认，是 div）；
+   这里只管还是段落的「筛选条件太严格」，所以写 p.concierge-empty，不碰卡片。 */
 .concierge-assistant,
-.concierge-empty {
+p.concierge-empty {
   margin: 0;
   font-size: 13px;
   color: var(--desk-muted);
@@ -3723,24 +3725,9 @@ button:disabled {
   padding: 0 4px;
 }
 
-.concierge-feed-empty-corpus {
-  margin: 0;
-  font-size: 13px;
-  color: var(--desk-muted);
-  padding: 6px 4px;
-}
-
 /* 迁移第 12 条：题库一套卷都没有 = 「还没东西」，放题库插图（照图标 QuestionBank）。
-   不加底和边：首页本来就是桌面，插图 + 一句话就够。间距目测。 */
-div.concierge-feed-empty-corpus {
-  align-items: center;
-  display: grid;
-  gap: 12px;
-  justify-items: center;
-  padding: 48px 20px;
-  text-align: center;
-}
-div.concierge-feed-empty-corpus p { margin: 0; }
+   2026-11-14 起换成共用的 EmptyState（shared-ui/emptyState.css），原来这里的三条删掉；
+   类名 concierge-feed-empty-corpus 留在元素上，只当钩子。 */
 
 /* home-editorial round 2 (方向 C) — 年份分组档案. 组头是真序列 + 真计数
    (结构编码真相: 除年份和「N 套」外不加编号/eyebrow/分割装饰). */

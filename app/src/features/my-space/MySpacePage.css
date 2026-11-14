@@ -230,7 +230,8 @@ button.my-space-folder-button { cursor: pointer; }
 
 .my-space-error { color: var(--eqb-color-danger); margin: 0; }
 
-/* 空状态不放白卡片：插图和一句话直接放在桌色上（DESIGN.md §5 Empty states，Owner 2026-11-13 选 B）。 */
+/* 出错态（「个人空间读取失败」加「重新加载」）还用这一块排版。空态换成了共用的 EmptyState（见下面
+ * .my-space-empty-placed），原来的 .my-space-empty-state .my-space-empty 一条随之删掉。 */
 .my-space-empty-state {
   align-content: center;
   align-items: center;
@@ -246,7 +247,12 @@ button.my-space-folder-button { cursor: pointer; }
   text-align: center;
 }
 
-.my-space-empty-state .my-space-empty { margin: 0; }
+/* 空态（shared-ui/EmptyState，坐石獭獭）在这一页的位置：离上面分区标题和原来一样远，至少和原来一样高。
+ * 覆盖：本条 (0,2,0) 盖过 emptyState.css 里 .eqb-empty-state (0,1,0) 的 margin: 0，因为位置由放它的那一处给。 */
+.eqb-empty-state.my-space-empty-placed {
+  margin-top: 26px;
+  min-height: 250px;
+}
 
 /* 空态「去找题」、出错态「重新加载」换成 Button 主键大号（36），原来的 .my-space-empty-cta 一块删掉；
  * 类名还挂着，只当选择器钩子（verify-error-copy-mainline.mjs 认它）。 */

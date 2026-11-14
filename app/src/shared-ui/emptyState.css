@@ -1,0 +1,90 @@
+/* 空状态（EmptyState.tsx）。颜色、间距、圆角、字号只用 tokens.css 里的变量；tokens.css 里没有的尺寸
+ * （插图和獭獭多大、说明的行宽）先写成本文件里的局部变量，每个注明出处，缺口记在
+ * docs/design-gaps.md 和 design/components-2026-11-13/migrate-empty/README.md「缺的变量」。
+ * DESIGN.md §5「Empty states」：桌色底、不放白卡片（Owner 2026-11-13 选 B），图 → 一句话 → 一个动作。
+ * 留白按 §8「空态允许且鼓励奢侈留白」：组内 12px，四周 24px。外面要多高、离上面多远由那一处给
+ * （和 Notice 的 inline 一样，构件不管自己在页面里的位置）。
+ * 獭獭不加动画（BRAND.md 第 118 条「演完就停」，静态最稳），所以这里没有 transition 和 animation，
+ * 减少动态效果时也不用另写。 */
+
+:root {
+  /* 坐石全身像的图框：150 × 150（文件是方形 viewBox，画出来约 144 高、112 宽）。照 BRAND.md §4.7 空态 150px 高、
+   * 和 design/brand-2026-10-13/evidence/states-2026-11-14/ 第 5 处试放的大小。 */
+  --eqb-empty-otter-sit-size: 150px;
+  /* 「没找到」摊手图的宽。另外三张半身图按 110 宽放；摊手的 viewBox 宽 576、另外三张 494，
+   * 同宽放头脸会小约 14%，要放大到约 1.17 倍（BRAND.md 第 119 条）：110 × 576 / 494 ≈ 128。 */
+  --eqb-empty-otter-not-found-width: 128px;
+  /* 说明一行最多多宽：照原来草稿卷空态的 26em（单词复习原来是 24em，并成一种）。 */
+  --eqb-empty-text-measure: 26em;
+}
+
+.eqb-empty-state {
+  box-sizing: border-box;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: var(--eqb-space-3);
+  margin: 0;
+  padding: var(--eqb-space-5);
+  text-align: center;
+}
+
+.eqb-empty-state-art {
+  display: block;
+}
+
+.eqb-empty-state-otter {
+  display: block;
+}
+
+.eqb-empty-state-text {
+  max-width: var(--eqb-empty-text-measure);
+  margin: 0;
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-control);
+  line-height: 1.5;
+}
+
+/* ── 坐石全身像（个人空间空态） ───────────────────────────
+ * 石头下沿离图框底约 2px（目测）；平涂插图下面本来就有一截空白（88px 画布里约 11px），
+ * 獭獭图下再加 8px，图到字的空白和插图那几处差不多（目测）。 */
+.eqb-empty-state[data-art='otter-sit'] .eqb-empty-state-art {
+  padding-bottom: var(--eqb-space-2);
+}
+
+.eqb-empty-state[data-art='otter-sit'] .eqb-empty-state-otter {
+  width: var(--eqb-empty-otter-sit-size);
+  height: var(--eqb-empty-otter-sit-size);
+}
+
+/* ── 「没找到」卡片 ──────────────────────────────────────
+ * 卡片边就是水面（BRAND.md 第 31 条）：白底、一圈 1px 发丝边、12px 圆角，和下面结果列表那种板同一个样子
+ * （板不投影，DESIGN.md §4）。獭獭放在卡片上沿外面，只露水面以上那一截：
+ * 摊手图 viewBox 是 270 12 576 715，水面条上沿在 y = 670，所以露出的高 = 宽 × (670 − 12) / 576。
+ * 图下面的水面条和身体的平切口在卡片边后面，看不见。卡片上面留出这一截的高，再加 24px 给上面那一行。
+ * 獭獭的下沿压在边线外侧，边线留在身子前面，就是水面。 */
+.eqb-empty-state[data-art='not-found'] {
+  position: relative;
+  width: 100%;
+  margin-top: calc(var(--eqb-empty-otter-not-found-width) * 658 / 576 + var(--eqb-space-5));
+  border: 1px solid var(--eqb-color-border);
+  border-radius: var(--eqb-radius-card);
+  background: var(--eqb-color-paper);
+}
+
+.eqb-empty-state[data-art='not-found'] .eqb-empty-state-art {
+  position: absolute;
+  /* 卡片的定位框从边线里侧算起，往上再让出边线那 1px，獭獭不盖住边线。 */
+  bottom: calc(100% + 1px);
+  left: 50%;
+  width: var(--eqb-empty-otter-not-found-width);
+  height: calc(var(--eqb-empty-otter-not-found-width) * 658 / 576);
+  overflow: hidden;
+  transform: translateX(-50%);
+}
+
+.eqb-empty-state[data-art='not-found'] .eqb-empty-state-otter {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 576 / 715;
+}
