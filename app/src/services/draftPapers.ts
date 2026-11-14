@@ -127,6 +127,14 @@ export async function fetchDraftPaperPagination(
   }
 }
 
+export async function fetchDraftEconomyFeasibility(id: string): Promise<{ insufficient: boolean }> {
+  const response = await fetch(apiPath(`/api/draft-papers/${encodeURIComponent(id)}/pagination?check=economy8`))
+  if (!response.ok) {
+    throw new Error(await readError(response, `Failed to check draft paper economy feasibility: ${response.status}`))
+  }
+  return (await response.json()) as { insufficient: boolean }
+}
+
 // reorder-suggest (docs/cuts/reorder-suggest/plan.md 施工契约 2/3): the
 // verified-order verdict `getReorderSuggestion` (draftPaperStore.mjs)
 // produces — null means "no candidate order zeroed out every 跨页断篇",

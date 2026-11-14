@@ -10,6 +10,7 @@ import {
   downloadDraftPaperPdf,
   fetchCurrentDraftPaper,
   fetchDraftPaper,
+  fetchDraftEconomyFeasibility,
   fetchDraftPaperPagination,
   fetchDraftPapers,
   fetchReorderSuggestion,
@@ -482,9 +483,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       || economyCheckKey.current === contentKey) return
     const key = contentKey
     economyCheckKey.current = key
-    fetch(`/api/draft-papers/${encodeURIComponent(draftPaper.id)}/pagination?check=economy8`).then(async response => {
-      if (!response.ok) return
-      const { insufficient } = await response.json()
+    fetchDraftEconomyFeasibility(draftPaper.id).then(({ insufficient }) => {
       if (economyCheckKey.current === key) setEconomyAvailability({ key, insufficient })
     }).catch(() => { /* A failed check cannot prove insufficient content. */ })
   }
