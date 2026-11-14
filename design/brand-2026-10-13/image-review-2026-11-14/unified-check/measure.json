@@ -1,0 +1,656 @@
+{
+  "note": "对比稿 · 提案 · 单一来源。scripts/brand/unified-check.mjs 量的；量法见脚本开头。edge 是 48px 下离外沿的像素，narrow 是窄于约 2px 的面积占比。",
+  "headPx": 160,
+  "face": {
+    "墨": {
+      "head": 11061,
+      "body": 11061,
+      "same": 11061,
+      "iou": 1
+    },
+    "雾白": {
+      "head": 51526,
+      "body": 51526,
+      "same": 51526,
+      "iou": 1
+    },
+    "浅雾薄荷": {
+      "head": 57860,
+      "body": 58730,
+      "same": 46677,
+      "iou": 0.6676440719179552
+    },
+    "雾薄荷": {
+      "head": 147760,
+      "body": 155287,
+      "same": 138474,
+      "iou": 0.841413840666452
+    }
+  },
+  "items": [
+    {
+      "key": "body",
+      "label": "全身像主姿势",
+      "src": "design/brand-2026-10-13/image-review-2026-11-14/body-f6-round3/body-f6.svg",
+      "relWidth": 2.53,
+      "allowedColorsOk": true,
+      "vb": "16.99322509765625 22.07398796081543 990.0760498046875 990.0760498046875",
+      "w240": 3.1830729166666667,
+      "used": [
+        "雾薄荷",
+        "石色",
+        "浅雾薄荷",
+        "雾白",
+        "墨"
+      ],
+      "unknown": 0,
+      "partial": 0,
+      "colors": [
+        {
+          "name": "雾薄荷",
+          "hex": "#72BFA4",
+          "share": 0.49477064424770867,
+          "narrow": 0.06386622797133457,
+          "edge": 0.1,
+          "edgeAt": [
+            544,
+            27.2
+          ],
+          "pieces": 1
+        },
+        {
+          "name": "石色",
+          "hex": "#6E828C",
+          "share": 0.24146466561113217,
+          "narrow": 0.03878832656076838,
+          "edge": 0.1,
+          "edgeAt": [
+            818.3,
+            829.6
+          ],
+          "pieces": 1
+        },
+        {
+          "name": "浅雾薄荷",
+          "hex": "#DDF1E8",
+          "share": 0.22244274468701916,
+          "narrow": 0.009273182957393484,
+          "edge": 0.5385164807134504,
+          "edgeAt": [
+            684.3,
+            516.1
+          ],
+          "pieces": 2
+        },
+        {
+          "name": "雾白",
+          "hex": "#F2FAF6",
+          "share": 0.03399638739602614,
+          "narrow": 0.8963594621187274,
+          "edge": 0.7071067811865476,
+          "edgeAt": [
+            447.1,
+            177.8
+          ],
+          "pieces": 1
+        },
+        {
+          "name": "墨",
+          "hex": "#191D18",
+          "share": 0.007325558058113864,
+          "narrow": 1,
+          "edge": 2.247220505424423,
+          "edgeAt": [
+            640.9,
+            171.6
+          ],
+          "pieces": 9
+        }
+      ],
+      "main": "雾薄荷",
+      "silNarrow": 0.0014383515821867405
+    },
+    {
+      "key": "head",
+      "label": "头像母版",
+      "src": "design/brand-2026-10-13/mascot/otter-head.svg",
+      "relWidth": 1,
+      "allowedColorsOk": true,
+      "vb": "45.5 82.25 934 934",
+      "w240": 3.8583333333333334,
+      "used": [
+        "雾薄荷",
+        "浅雾薄荷",
+        "雾白",
+        "墨"
+      ],
+      "unknown": 0,
+      "partial": 0,
+      "colors": [
+        {
+          "name": "雾薄荷",
+          "hex": "#72BFA4",
+          "share": 0.550894015989759,
+          "narrow": 0.01654581836177034,
+          "edge": 0.1,
+          "edgeAt": [
+            476.5,
+            106.6
+          ],
+          "pieces": 1
+        },
+        {
+          "name": "浅雾薄荷",
+          "hex": "#DDF1E8",
+          "share": 0.21577284822767331,
+          "narrow": 0.001043726653482751,
+          "edge": 0.1,
+          "edgeAt": [
+            431.7,
+            991.9
+          ],
+          "pieces": 1
+        },
+        {
+          "name": "雾白",
+          "hex": "#F2FAF6",
+          "share": 0.19208453592361896,
+          "narrow": 0.0023140291876214865,
+          "edge": 2.1840329667841556,
+          "edgeAt": [
+            165.2,
+            567.7
+          ],
+          "pieces": 3
+        },
+        {
+          "name": "墨",
+          "hex": "#191D18",
+          "share": 0.041248599858948756,
+          "narrow": 0.17255747126436782,
+          "edge": 7.158910531638176,
+          "edgeAt": [
+            760.6,
+            556.1
+          ],
+          "pieces": 9
+        }
+      ],
+      "main": "雾薄荷",
+      "silNarrow": 0.00028447310247550864
+    },
+    {
+      "key": "stone-otter",
+      "label": "獭獭的石头",
+      "src": "design/brand-2026-10-13/image-review-2026-11-14/ecosystem-round2/svg/stone-otter.svg",
+      "relWidth": 0.49,
+      "allowedColorsOk": true,
+      "vb": "63.628814697265625 60.15380096435547 124.65946960449219 124.65946960449219",
+      "w240": 0.4860811233520508,
+      "used": [
+        "石色",
+        "石面"
+      ],
+      "unknown": 0,
+      "partial": 0,
+      "colors": [
+        {
+          "name": "石色",
+          "hex": "#6E828C",
+          "share": 0.8123481813940768,
+          "narrow": 0.007327022852390194,
+          "edge": 0.1,
+          "edgeAt": [
+            120.1,
+            75.9
+          ],
+          "pieces": 1
+        },
+        {
+          "name": "石面",
+          "hex": "#8FA3AC",
+          "share": 0.18765181860592314,
+          "narrow": 0.0007715387912558937,
+          "edge": 0.1,
+          "edgeAt": [
+            104,
+            80
+          ],
+          "pieces": 1
+        }
+      ],
+      "main": "石色",
+      "silNarrow": 0
+    },
+    {
+      "key": "stone-long",
+      "label": "石头 · 扁长卵",
+      "src": "design/brand-2026-10-13/image-review-2026-11-14/ecosystem-round5/svg/stone-long.svg",
+      "relWidth": 0.57,
+      "allowedColorsOk": true,
+      "vb": "47.412940979003906 53.32489013671875 144.2320556640625 144.2320556640625",
+      "w240": 0.5676335652669271,
+      "used": [
+        "石色",
+        "石面"
+      ],
+      "unknown": 0,
+      "partial": 0,
+      "colors": [
+        {
+          "name": "石色",
+          "hex": "#6E828C",
+          "share": 0.7705614030654149,
+          "narrow": 0,
+          "edge": 0.1,
+          "edgeAt": [
+            129.3,
+            93.4
+          ],
+          "pieces": 1
+        },
+        {
+          "name": "石面",
+          "hex": "#8FA3AC",
+          "share": 0.2294385969345851,
+          "narrow": 0.00038550501156515033,
+          "edge": 2.4698178070456938,
+          "edgeAt": [
+            88.7,
+            106.4
+          ],
+          "pieces": 1
+        }
+      ],
+      "main": "石色",
+      "silNarrow": 0
+    },
+    {
+      "key": "stone-round",
+      "label": "石头 · 圆墩",
+      "src": "design/brand-2026-10-13/image-review-2026-11-14/ecosystem-round2/svg/stone-round.svg",
+      "relWidth": 0.4,
+      "allowedColorsOk": true,
+      "vb": "68.23817443847656 74.0471305847168 104.52890014648438 104.52890014648438",
+      "w240": 0.4022037506103516,
+      "used": [
+        "石色",
+        "石面"
+      ],
+      "unknown": 0,
+      "partial": 0,
+      "colors": [
+        {
+          "name": "石色",
+          "hex": "#6E828C",
+          "share": 0.7391297118438337,
+          "narrow": 0.017794474939260327,
+          "edge": 0.1,
+          "edgeAt": [
+            120.6,
+            90.3
+          ],
+          "pieces": 1
+        },
+        {
+          "name": "石面",
+          "hex": "#8FA3AC",
+          "share": 0.26087028815616636,
+          "narrow": 0.0000318694626808592,
+          "edge": 1.74928556845359,
+          "edgeAt": [
+            97.7,
+            100.9
+          ],
+          "pieces": 1
+        }
+      ],
+      "main": "石色",
+      "silNarrow": 0
+    },
+    {
+      "key": "stone-flat",
+      "label": "石头 · 小扁片",
+      "src": "design/brand-2026-10-13/image-review-2026-11-14/ecosystem-round5/svg/stone-flat.svg",
+      "relWidth": 0.3,
+      "allowedColorsOk": true,
+      "vb": "80.85162353515625 79.96097183227539 80.25489807128906 80.25489807128906",
+      "w240": 0.30106207529703777,
+      "used": [
+        "石色",
+        "石面"
+      ],
+      "unknown": 0,
+      "partial": 0,
+      "colors": [
+        {
+          "name": "石色",
+          "hex": "#6E828C",
+          "share": 0.7328768947971335,
+          "narrow": 0,
+          "edge": 0.1,
+          "edgeAt": [
+            126.6,
+            101.8
+          ],
+          "pieces": 1
+        },
+        {
+          "name": "石面",
+          "hex": "#8FA3AC",
+          "share": 0.26712310520286653,
+          "narrow": 0.0002991921811110003,
+          "edge": 2.4041630560342613,
+          "edgeAt": [
+            103.2,
+            110
+          ],
+          "pieces": 1
+        }
+      ],
+      "main": "石色",
+      "silNarrow": 0
+    },
+    {
+      "key": "clam",
+      "label": "合着的蛤",
+      "src": "design/brand-2026-10-13/image-review-2026-11-14/ecosystem-round5/svg/clam.svg",
+      "relWidth": 0.53,
+      "allowedColorsOk": true,
+      "vb": "52.57142639160156 52.94196319580078 136.11607360839844 136.11607360839844",
+      "w240": 0.5338169733683268,
+      "used": [
+        "雾薄荷",
+        "浅雾薄荷"
+      ],
+      "unknown": 0,
+      "partial": 0,
+      "colors": [
+        {
+          "name": "雾薄荷",
+          "hex": "#72BFA4",
+          "share": 0.7488642695907592,
+          "narrow": 0,
+          "edge": 0.1,
+          "edgeAt": [
+            107.2,
+            78
+          ],
+          "pieces": 1
+        },
+        {
+          "name": "浅雾薄荷",
+          "hex": "#DDF1E8",
+          "share": 0.25113573040924075,
+          "narrow": 0.0004136893569010906,
+          "edge": 2.7730849247724096,
+          "edgeAt": [
+            174.4,
+            118
+          ],
+          "pieces": 2
+        }
+      ],
+      "main": "雾薄荷",
+      "silNarrow": 0
+    },
+    {
+      "key": "clam-open-on-stone",
+      "label": "敲开的蛤 a",
+      "src": "design/brand-2026-10-13/image-review-2026-11-14/ecosystem-round4/svg/clam-open-on-stone.svg",
+      "relWidth": 0.53,
+      "allowedColorsOk": true,
+      "vb": "51.8581428527832 50.664093017578125 134.2517547607422 134.2517547607422",
+      "w240": 0.5260489781697592,
+      "used": [
+        "雾薄荷",
+        "雾白",
+        "浅雾薄荷"
+      ],
+      "unknown": 0,
+      "partial": 0,
+      "colors": [
+        {
+          "name": "雾薄荷",
+          "hex": "#72BFA4",
+          "share": 0.6925266555805537,
+          "narrow": 0.00002824978459539246,
+          "edge": 0.1,
+          "edgeAt": [
+            126.1,
+            55.8
+          ],
+          "pieces": 1
+        },
+        {
+          "name": "雾白",
+          "hex": "#F2FAF6",
+          "share": 0.1694610192702729,
+          "narrow": 0.010217039944585546,
+          "edge": 2.6870057685088806,
+          "edgeAt": [
+            71,
+            130.2
+          ],
+          "pieces": 1
+        },
+        {
+          "name": "浅雾薄荷",
+          "hex": "#DDF1E8",
+          "share": 0.13801232514917344,
+          "narrow": 0.02374370968885109,
+          "edge": 2.0223748416156684,
+          "edgeAt": [
+            99.3,
+            171.9
+          ],
+          "pieces": 2
+        }
+      ],
+      "main": "雾薄荷",
+      "silNarrow": 0.000019563728846718183
+    },
+    {
+      "key": "scallop",
+      "label": "扇贝",
+      "src": "design/brand-2026-10-13/image-review-2026-11-14/ecosystem-round5/svg/scallop.svg",
+      "relWidth": 0.68,
+      "allowedColorsOk": true,
+      "vb": "34.516361236572266 38.312076568603516 170.96726989746094 170.96726989746094",
+      "w240": 0.6790302912394206,
+      "used": [
+        "雾薄荷",
+        "浅雾薄荷"
+      ],
+      "unknown": 0,
+      "partial": 0,
+      "colors": [
+        {
+          "name": "雾薄荷",
+          "hex": "#72BFA4",
+          "share": 0.8544108886398287,
+          "narrow": 0.00003545261167572678,
+          "edge": 0.1,
+          "edgeAt": [
+            96,
+            63.8
+          ],
+          "pieces": 1
+        },
+        {
+          "name": "浅雾薄荷",
+          "hex": "#DDF1E8",
+          "share": 0.14558911136017125,
+          "narrow": 0.0009015881822595187,
+          "edge": 2.7,
+          "edgeAt": [
+            119.8,
+            83.4
+          ],
+          "pieces": 3
+        }
+      ],
+      "main": "雾薄荷",
+      "silNarrow": 0.000030291097446460486
+    },
+    {
+      "key": "urchin",
+      "label": "海胆 L",
+      "src": "design/brand-2026-10-13/image-review-2026-11-14/ecosystem-round5/svg/urchin.svg",
+      "relWidth": 0.54,
+      "allowedColorsOk": true,
+      "vb": "48.68947982788086 50.4677734375 137.5037078857422 137.5037078857422",
+      "w240": 0.5395987828572592,
+      "used": [
+        "石色",
+        "石面"
+      ],
+      "unknown": 0,
+      "partial": 0,
+      "colors": [
+        {
+          "name": "石色",
+          "hex": "#6E828C",
+          "share": 0.9122119472423711,
+          "narrow": 0.0002386754767228601,
+          "edge": 0.1,
+          "edgeAt": [
+            118.4,
+            61.8
+          ],
+          "pieces": 1
+        },
+        {
+          "name": "石面",
+          "hex": "#8FA3AC",
+          "share": 0.08778805275762888,
+          "narrow": 0.009267719618848714,
+          "edge": 2.5553864678361276,
+          "edgeAt": [
+            140.2,
+            103
+          ],
+          "pieces": 1
+        }
+      ],
+      "main": "石色",
+      "silNarrow": 0.00021772262138036142
+    },
+    {
+      "key": "kelp-blade",
+      "label": "巨藻一段",
+      "src": "design/brand-2026-10-13/image-review-2026-11-14/ecosystem-round5/svg/kelp-blade.svg",
+      "relWidth": 0.77,
+      "allowedColorsOk": true,
+      "vb": "17.01970672607422 26.5 212 212",
+      "w240": 0.7707845052083333,
+      "used": [
+        "深薄荷"
+      ],
+      "unknown": 0,
+      "partial": 0,
+      "colors": [
+        {
+          "name": "深薄荷",
+          "hex": "#2C6E56",
+          "share": 1,
+          "narrow": 0.0002342618621688389,
+          "edge": 0.1,
+          "edgeAt": [
+            58.3,
+            30.7
+          ],
+          "pieces": 1
+        }
+      ],
+      "main": "深薄荷",
+      "silNarrow": 0.0002342618621688389
+    },
+    {
+      "key": "starfish",
+      "label": "海星",
+      "src": "design/brand-2026-10-13/image-review-2026-11-14/ecosystem-round2/svg/starfish.svg",
+      "relWidth": 0.5,
+      "allowedColorsOk": true,
+      "vb": "51.531124114990234 51 138.6699676513672 138.6699676513672",
+      "w240": 0.4979379653930664,
+      "used": [
+        "雾薄荷",
+        "浅雾薄荷"
+      ],
+      "unknown": 0,
+      "partial": 0,
+      "colors": [
+        {
+          "name": "雾薄荷",
+          "hex": "#72BFA4",
+          "share": 0.8249394225858678,
+          "narrow": 0.0012776606954689146,
+          "edge": 0.1,
+          "edgeAt": [
+            117.8,
+            55.2
+          ],
+          "pieces": 1
+        },
+        {
+          "name": "浅雾薄荷",
+          "hex": "#DDF1E8",
+          "share": 0.1750605774141322,
+          "narrow": 0.0006827633294022717,
+          "edge": 4.031128874149275,
+          "edgeAt": [
+            101.1,
+            143
+          ],
+          "pieces": 1
+        }
+      ],
+      "main": "雾薄荷",
+      "silNarrow": 0.000032597711640642824
+    },
+    {
+      "key": "bubbles",
+      "label": "一串气泡",
+      "src": "design/brand-2026-10-13/image-review-2026-11-14/ecosystem-round2/svg/bubbles.svg",
+      "relWidth": 0.33,
+      "allowedColorsOk": true,
+      "vb": "50.5 51 131 131",
+      "w240": 0.3333333333333333,
+      "used": [
+        "雾薄荷",
+        "浅雾薄荷"
+      ],
+      "unknown": 0,
+      "partial": 0,
+      "colors": [
+        {
+          "name": "雾薄荷",
+          "hex": "#72BFA4",
+          "share": 0.9099582335107173,
+          "narrow": 0.031383970177073624,
+          "edge": 0.1,
+          "edgeAt": [
+            115.9,
+            55.2
+          ],
+          "pieces": 3
+        },
+        {
+          "name": "浅雾薄荷",
+          "hex": "#DDF1E8",
+          "share": 0.09004176648928276,
+          "narrow": 0.0030609842241582294,
+          "edge": 0.5,
+          "edgeAt": [
+            110.1,
+            60.4
+          ],
+          "pieces": 3
+        }
+      ],
+      "main": "雾薄荷",
+      "silNarrow": 0
+    }
+  ]
+}
