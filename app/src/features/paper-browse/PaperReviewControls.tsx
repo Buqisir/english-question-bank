@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
 import { usePaperPdfProducts } from './usePaperPdfProducts'
 import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
+import { ExternalLink } from '../../icons'
 import './paperReviewControls.css'
 
 type ReviewDetail = {
@@ -119,7 +120,8 @@ export function PaperReviewControls({ paperId, paperName, revisionId, publicatio
       {/* 构件厂第 4 步第九页（2026-11-14，提案 · 单一来源）：这一排的链接和按钮换成 ButtonLink / Button。
           原来的全站 .ghost-button 是透明底墨字、高 36，对上 strong lg；这一行 44 的最小高度仍由 paperReviewControls.css 给。
           「复制中…」沿用原来的整键禁用，没改成 busy：禁用条件里还有「线程信息没回来」，两件事分不开。 */}
-      {pdfUrl && <ButtonLink tone="strong" size="lg" href={pdfUrl} target="_blank" rel="noopener noreferrer">查看 PDF</ButtonLink>}</>}
+      {/* Owner 2026-11-14 决定 #13：会开新标签，加外链图标（对读屏隐藏），读屏名字补「在新标签页打开」；不恢复下划线。 */}
+      {pdfUrl && <ButtonLink tone="strong" size="lg" icon={<ExternalLink size={16} aria-hidden="true" />} href={pdfUrl} target="_blank" rel="noopener noreferrer">查看 PDF<span className="visually-hidden">（在新标签页打开）</span></ButtonLink>}</>}
       <Button tone="strong" size="lg" disabled={busy || (!detail && !error)} onClick={() => void discuss()}>
         {busy ? '复制中…' : threadUrl ? '去 Amp 聊这份卷' : '复制试卷信息'}
       </Button>

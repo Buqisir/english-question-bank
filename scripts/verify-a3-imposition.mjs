@@ -641,7 +641,7 @@ async function runPhaseB(browser) {
       toolsDoNotOverlap ? '' : JSON.stringify(await page.locator('.draft-group-actions').evaluateAll((tools) => tools.map((el) => ({
         id: el.dataset.draftToolsGroupId, top: el.style.top, shift: getComputedStyle(el).translate, rect: el.getBoundingClientRect().toJSON(),
       })))))
-    const swapButton = page.getByRole('button', { name: '换一篇相似篇章', exact: true }).first()
+    const swapButton = page.getByRole('button', { name: '换篇：换一篇相似篇章', exact: true }).first()
     await page.route('**/api/similar-passages', (route) => route.fulfill({ status: 503, json: { error: 'QA: unavailable' } }))
     await swapButton.click()
     const drawer = page.locator('.draft-paper-rail--swap')

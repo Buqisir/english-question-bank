@@ -1817,6 +1817,17 @@
   gap: 6px;
 }
 
+/* Owner 2026-11-14 决定 #17：相似篇章面板卡片上的键从雾薄荷 primary 换成墨字 strong。
+ * 首页的面板挂在题组卡里，整个在 FluidHoverList 里面，但不在任何一行里（滑块不会停到它下面），
+ * button.css 那条「.fluid-hover-list .eqb-button…:hover 透明」(0,5,0) 会让 strong 键悬停时什么都不变；
+ * 改前 primary 不归那条管，悬停变深一档。这里让卡片上的键照列表外的普通键垫桌色，
+ * 和详情页、草稿卷换篇栏里同一个键一个样子（提案 · 单一来源）。
+ * 覆盖：本条 (0,7,0) 盖过那条透明 (0,5,0)，也盖过「嵌在被选中行里的键垫 border 色」(0,6,0)（面板眼下不在行里，碰不上）。
+ * 面板头上的「重试」不在 .similar-rcard-actions 里，不归本条管，悬停仍然没有底（A1 README 第 5 节第 3 问，待 Owner 定）。 */
+.fluid-hover-list .similar-passages-panel .similar-rcard-actions > .eqb-button[data-tone='strong']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-desk);
+}
+
 .paper-browse-listening {
   padding: 0;
 }

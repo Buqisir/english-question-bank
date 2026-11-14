@@ -15,7 +15,7 @@
  * the Assembly Basket layer, not Retrieval.
  */
 
-import { useEffect, useId, useMemo, useState, type FormEvent, type ReactNode } from 'react'
+import { useEffect, useId, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react'
 import { AlertTriangle, CornerDownLeft, InfoCircle, QuestionBank, X } from '../icons'
 import { EmptyIllustration } from '../components/EmptyIllustration'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
@@ -210,6 +210,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   const { intent, state, paperResults, expandedPaperKey } = retrieval
   const { setIntent, submit, togglePaper } = actions
   const inputId = useId()
+  const inputRef = useRef<HTMLInputElement>(null)
   const dataLoading = dataStatus === 'loading'
 
   // similar-passages-entry (E6): full corpus lookup for resolving a「相似
@@ -567,6 +568,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 自然语言搜索
               </label>
               <input
+                ref={inputRef}
                 id={inputId}
                 className="concierge-intent-input"
                 value={intent}
@@ -583,6 +585,8 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
               {intent.length > 0 && !dataLoading && (
                 // 构件厂第 4 步第八页：✕ 换成 shared-ui/Button 次要灰小号、只有图标（高 28，原来也是 28）；
                 // 圆角 999 → 8（按钮不做胶囊）。位置仍由 App.css 的 .concierge-desk .concierge-intent-clear 定。
+                // Owner 2026-11-14 决定 #14：清完把焦点放回输入框。不放的话 ✕ 跟着空字一起卸掉，焦点掉到 body，
+                // 键盘用户要从页首重新 Tab，鼠标用户也得再点一次输入框才能接着打字。
                 <Button
                   className="concierge-intent-clear"
                   tone="subtle"
@@ -590,7 +594,10 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                   label="清除搜索"
                   title="清除搜索"
                   icon={<X size={16} aria-hidden="true" />}
-                  onClick={() => actions.reset()}
+                  onClick={() => {
+                    actions.reset()
+                    inputRef.current?.focus()
+                  }}
                 />
               )}
               <button

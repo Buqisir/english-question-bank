@@ -123,8 +123,10 @@ export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNod
                       </div>
                     </div>
                     <div className="similar-rcard-actions">
+                      {/* Owner 2026-11-14 决定 #17：每张卡片一个键，一页会有好几个，不用雾薄荷主键（每页一处），
+                          改成墨字键 strong。详情页上方「加入草稿卷」仍是那一页唯一的主键。 */}
                       <Button
-                        tone="primary"
+                        tone="strong"
                         size="sm"
                         className="similar-btn"
                         disabled={isThin}

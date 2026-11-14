@@ -1,0 +1,802 @@
+{
+ "shots/clear-after-click-results-390.png": {
+  "before": [
+   732,
+   156
+  ],
+  "after": [
+   732,
+   156
+  ],
+  "changedPixels": 3196,
+  "changedRatio": 0.02799,
+  "bbox": [
+   24,
+   25,
+   708,
+   133
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-clear-after-click-results-390.png"
+ },
+ "shots/clear-after-click-results.png": {
+  "before": [
+   1760,
+   156
+  ],
+  "after": [
+   1760,
+   156
+  ],
+  "changedPixels": 7307,
+  "changedRatio": 0.02661,
+  "bbox": [
+   24,
+   24,
+   1736,
+   132
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-clear-after-click-results.png"
+ },
+ "shots/clear-after-click-typed-390.png": {
+  "before": [
+   732,
+   156
+  ],
+  "after": [
+   732,
+   156
+  ],
+  "changedPixels": 3196,
+  "changedRatio": 0.02799,
+  "bbox": [
+   24,
+   25,
+   708,
+   133
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-clear-after-click-typed-390.png"
+ },
+ "shots/clear-after-click-typed.png": {
+  "before": [
+   1760,
+   156
+  ],
+  "after": [
+   1760,
+   156
+  ],
+  "changedPixels": 7307,
+  "changedRatio": 0.02661,
+  "bbox": [
+   24,
+   24,
+   1736,
+   132
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-clear-after-click-typed.png"
+ },
+ "shots/clear-after-enter-390.png": {
+  "before": [
+   732,
+   156
+  ],
+  "after": [
+   732,
+   156
+  ],
+  "changedPixels": 3196,
+  "changedRatio": 0.02799,
+  "bbox": [
+   24,
+   25,
+   708,
+   133
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-clear-after-enter-390.png"
+ },
+ "shots/clear-after-enter.png": {
+  "before": [
+   1760,
+   156
+  ],
+  "after": [
+   1760,
+   156
+  ],
+  "changedPixels": 7307,
+  "changedRatio": 0.02661,
+  "bbox": [
+   24,
+   24,
+   1736,
+   132
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-clear-after-enter.png"
+ },
+ "shots/clear-key-focus-390.png": {
+  "before": [
+   732,
+   156
+  ],
+  "after": [
+   732,
+   156
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true,
+  "compare": "compare/compare-shots-clear-key-focus-390.png"
+ },
+ "shots/clear-key-focus.png": {
+  "before": [
+   1760,
+   156
+  ],
+  "after": [
+   1760,
+   156
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true,
+  "compare": "compare/compare-shots-clear-key-focus.png"
+ },
+ "shots/clear-typed-390.png": {
+  "before": [
+   732,
+   156
+  ],
+  "after": [
+   732,
+   156
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true,
+  "compare": "compare/compare-shots-clear-typed-390.png"
+ },
+ "shots/clear-typed.png": {
+  "before": [
+   1760,
+   156
+  ],
+  "after": [
+   1760,
+   156
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true,
+  "compare": "compare/compare-shots-clear-typed.png"
+ },
+ "shots/detail-page-390.png": {
+  "before": [
+   780,
+   1688
+  ],
+  "after": [
+   780,
+   1688
+  ],
+  "changedPixels": 21370,
+  "changedRatio": 0.01623,
+  "bbox": [
+   458,
+   870,
+   652,
+   1114
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-detail-page-390.png"
+ },
+ "shots/detail-page.png": {
+  "before": [
+   2880,
+   1800
+  ],
+  "after": [
+   2880,
+   1800
+  ],
+  "changedPixels": 21370,
+  "changedRatio": 0.00412,
+  "bbox": [
+   994,
+   684,
+   1188,
+   928
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-detail-page.png"
+ },
+ "shots/detail-similar-390.png": {
+  "before": [
+   636,
+   600
+  ],
+  "after": [
+   636,
+   600
+  ],
+  "changedPixels": 21370,
+  "changedRatio": 0.056,
+  "bbox": [
+   386,
+   172,
+   580,
+   416
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-detail-similar-390.png"
+ },
+ "shots/detail-similar.png": {
+  "before": [
+   1664,
+   568
+  ],
+  "after": [
+   1664,
+   568
+  ],
+  "changedPixels": 21370,
+  "changedRatio": 0.02261,
+  "bbox": [
+   386,
+   140,
+   580,
+   384
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-detail-similar.png"
+ },
+ "shots/home-similar-390.png": {
+  "before": [
+   684,
+   600
+  ],
+  "after": [
+   684,
+   600
+  ],
+  "changedPixels": 21370,
+  "changedRatio": 0.05207,
+  "bbox": [
+   386,
+   171,
+   580,
+   415
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-home-similar-390.png"
+ },
+ "shots/home-similar-key-focus-390.png": {
+  "before": [
+   684,
+   216
+  ],
+  "after": [
+   684,
+   216
+  ],
+  "changedPixels": 10685,
+  "changedRatio": 0.07232,
+  "bbox": [
+   386,
+   45,
+   580,
+   101
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-home-similar-key-focus-390.png"
+ },
+ "shots/home-similar-key-focus.png": {
+  "before": [
+   1712,
+   216
+  ],
+  "after": [
+   1712,
+   216
+  ],
+  "changedPixels": 10685,
+  "changedRatio": 0.02889,
+  "bbox": [
+   386,
+   46,
+   580,
+   102
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-home-similar-key-focus.png"
+ },
+ "shots/home-similar-key-hover-390.png": {
+  "before": [
+   684,
+   216
+  ],
+  "after": [
+   684,
+   216
+  ],
+  "changedPixels": 10688,
+  "changedRatio": 0.07234,
+  "bbox": [
+   386,
+   45,
+   580,
+   101
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-home-similar-key-hover-390.png"
+ },
+ "shots/home-similar-key-hover.png": {
+  "before": [
+   1712,
+   216
+  ],
+  "after": [
+   1712,
+   216
+  ],
+  "changedPixels": 10688,
+  "changedRatio": 0.0289,
+  "bbox": [
+   386,
+   46,
+   580,
+   102
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-home-similar-key-hover.png"
+ },
+ "shots/home-similar.png": {
+  "before": [
+   1712,
+   568
+  ],
+  "after": [
+   1712,
+   568
+  ],
+  "changedPixels": 21370,
+  "changedRatio": 0.02198,
+  "bbox": [
+   386,
+   140,
+   580,
+   384
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-home-similar.png"
+ },
+ "shots/pdf-screen-focus-390.png": {
+  "before": [
+   780,
+   452
+  ],
+  "after": [
+   780,
+   452
+  ],
+  "changedPixels": 3346,
+  "changedRatio": 0.00949,
+  "bbox": [
+   450,
+   116,
+   662,
+   188
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-pdf-screen-focus-390.png"
+ },
+ "shots/pdf-screen-focus.png": {
+  "before": [
+   2880,
+   128
+  ],
+  "after": [
+   2880,
+   128
+  ],
+  "changedPixels": 5865,
+  "changedRatio": 0.01591,
+  "bbox": [
+   1202,
+   12,
+   1640,
+   84
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-pdf-screen-focus.png"
+ },
+ "shots/pdf-screen-hover-390.png": {
+  "before": [
+   780,
+   452
+  ],
+  "after": [
+   780,
+   452
+  ],
+  "changedPixels": 4528,
+  "changedRatio": 0.01284,
+  "bbox": [
+   450,
+   124,
+   654,
+   180
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-pdf-screen-hover-390.png"
+ },
+ "shots/pdf-screen-hover.png": {
+  "before": [
+   2880,
+   128
+  ],
+  "after": [
+   2880,
+   128
+  ],
+  "changedPixels": 6820,
+  "changedRatio": 0.0185,
+  "bbox": [
+   1202,
+   20,
+   1637,
+   76
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-pdf-screen-hover.png"
+ },
+ "shots/review-preview-390.png": {
+  "before": [
+   780,
+   298
+  ],
+  "after": [
+   780,
+   298
+  ],
+  "changedPixels": 4939,
+  "changedRatio": 0.02125,
+  "bbox": [
+   332,
+   62,
+   705,
+   89
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-review-preview-390.png"
+ },
+ "shots/review-preview.png": {
+  "before": [
+   2880,
+   256
+  ],
+  "after": [
+   2880,
+   256
+  ],
+  "changedPixels": 4939,
+  "changedRatio": 0.0067,
+  "bbox": [
+   332,
+   62,
+   705,
+   89
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-review-preview.png"
+ },
+ "shots/swap-drawer-390.png": {
+  "before": [
+   696,
+   660
+  ],
+  "after": [
+   696,
+   660
+  ],
+  "changedPixels": 17186,
+  "changedRatio": 0.03741,
+  "bbox": [
+   394,
+   216,
+   550,
+   508
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-swap-drawer-390.png"
+ },
+ "shots/swap-drawer-key-focus-390.png": {
+  "before": [
+   664,
+   200
+  ],
+  "after": [
+   664,
+   200
+  ],
+  "changedPixels": 8605,
+  "changedRatio": 0.0648,
+  "bbox": [
+   378,
+   38,
+   534,
+   142
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-swap-drawer-key-focus-390.png"
+ },
+ "shots/swap-drawer-key-focus.png": {
+  "before": [
+   416,
+   312
+  ],
+  "after": [
+   416,
+   310
+  ],
+  "changedPixels": 16225,
+  "changedRatio": 0.12501,
+  "bbox": [
+   16,
+   38,
+   400,
+   296
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-swap-drawer-key-focus.png"
+ },
+ "shots/swap-drawer-key-hover-390.png": {
+  "before": [
+   664,
+   200
+  ],
+  "after": [
+   664,
+   200
+  ],
+  "changedPixels": 8608,
+  "changedRatio": 0.06482,
+  "bbox": [
+   378,
+   38,
+   534,
+   142
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-swap-drawer-key-hover-390.png"
+ },
+ "shots/swap-drawer-key-hover.png": {
+  "before": [
+   416,
+   312
+  ],
+  "after": [
+   416,
+   310
+  ],
+  "changedPixels": 16228,
+  "changedRatio": 0.12503,
+  "bbox": [
+   16,
+   38,
+   400,
+   296
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-swap-drawer-key-hover.png"
+ },
+ "shots/swap-drawer.png": {
+  "before": [
+   448,
+   920
+  ],
+  "after": [
+   448,
+   916
+  ],
+  "changedPixels": 42057,
+  "changedRatio": 0.10204,
+  "bbox": [
+   0,
+   306,
+   448,
+   920
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-swap-drawer.png"
+ },
+ "shots/swap-key-390.png": {
+  "before": [
+   104,
+   168
+  ],
+  "after": [
+   104,
+   168
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true,
+  "compare": "compare/compare-shots-swap-key-390.png"
+ },
+ "shots/swap-key-expanded-390.png": {
+  "before": [
+   104,
+   168
+  ],
+  "after": [
+   104,
+   168
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true,
+  "compare": "compare/compare-shots-swap-key-expanded-390.png"
+ },
+ "shots/swap-key-expanded.png": {
+  "before": [
+   248,
+   112
+  ],
+  "after": [
+   248,
+   112
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true,
+  "compare": "compare/compare-shots-swap-key-expanded.png"
+ },
+ "shots/swap-key.png": {
+  "before": [
+   248,
+   112
+  ],
+  "after": [
+   248,
+   112
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true,
+  "compare": "compare/compare-shots-swap-key.png"
+ },
+ "shots/topbar-390.png": {
+  "before": [
+   780,
+   452
+  ],
+  "after": [
+   780,
+   452
+  ],
+  "changedPixels": 2270,
+  "changedRatio": 0.00644,
+  "bbox": [
+   450,
+   139,
+   636,
+   165
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-topbar-390.png"
+ },
+ "shots/topbar.png": {
+  "before": [
+   2880,
+   128
+  ],
+  "after": [
+   2880,
+   128
+  ],
+  "changedPixels": 4822,
+  "changedRatio": 0.01308,
+  "bbox": [
+   1202,
+   33,
+   1625,
+   62
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-topbar.png"
+ },
+ "shots/view-pdf-focus-390.png": {
+  "before": [
+   780,
+   298
+  ],
+  "after": [
+   780,
+   298
+  ],
+  "changedPixels": 6188,
+  "changedRatio": 0.02662,
+  "bbox": [
+   309,
+   24,
+   705,
+   128
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-view-pdf-focus-390.png"
+ },
+ "shots/view-pdf-focus.png": {
+  "before": [
+   2880,
+   256
+  ],
+  "after": [
+   2880,
+   256
+  ],
+  "changedPixels": 6188,
+  "changedRatio": 0.00839,
+  "bbox": [
+   309,
+   24,
+   705,
+   128
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-view-pdf-focus.png"
+ },
+ "shots/view-pdf-hover-390.png": {
+  "before": [
+   780,
+   298
+  ],
+  "after": [
+   780,
+   298
+  ],
+  "changedPixels": 8621,
+  "changedRatio": 0.03709,
+  "bbox": [
+   332,
+   32,
+   705,
+   120
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-view-pdf-hover-390.png"
+ },
+ "shots/view-pdf-hover.png": {
+  "before": [
+   2880,
+   256
+  ],
+  "after": [
+   2880,
+   256
+  ],
+  "changedPixels": 8621,
+  "changedRatio": 0.01169,
+  "bbox": [
+   332,
+   32,
+   705,
+   120
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-view-pdf-hover.png"
+ }
+}

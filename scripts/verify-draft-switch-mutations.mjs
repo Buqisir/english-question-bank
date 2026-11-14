@@ -109,7 +109,7 @@ async function scenario(kind, switchPath, timing) {
     }
     if (kind === 'reorder') await page.locator('.draft-reorder-suggestion-act').click()
     if (kind === 'replace') {
-      await page.getByRole('button', { name: '换一篇相似篇章', exact: true }).first().click()
+      await page.getByRole('button', { name: '换篇：换一篇相似篇章', exact: true }).first().click()
       await page.getByRole('button', { name: '⇄ 替换这篇', exact: true }).click()
     }
     await mutationStarted.promise

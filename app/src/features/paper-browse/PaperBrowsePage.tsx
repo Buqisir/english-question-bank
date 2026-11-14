@@ -57,7 +57,7 @@
  * out of scope per aggregatePaperResults.ts:8-11).
  */
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { ArrowLeft, BoardList, Presentation, RefreshCw, Scissors } from '../../icons'
+import { ArrowLeft, BoardList, ExternalLink, Presentation, RefreshCw, Scissors } from '../../icons'
 import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
@@ -4070,8 +4070,10 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         {pdfEditions.map((edition) => <option key={edition} value={edition}>{PAPER_PDF_PRODUCTS[edition]}</option>)}
       </select>
       {/* 构件厂第 4 步第九页（2026-11-14，提案 · 单一来源）：「PDF Screen」换成 ButtonLink（淡墨小号，和旁边「下载 PDF」一样）。
-          仍是 <a>，中键开新标签、复制地址都还在。原来 .ghost-button 没去掉链接的下划线，换了以后没有下划线。 */}
-      {pdfEdition && canonicalConsumption?.publicationDigest && <ButtonLink size="sm" href={paperProductPdfUrl(paperId, pdfEdition, canonicalConsumption.publicationDigest)} target="_blank" rel="noopener noreferrer">PDF Screen</ButtonLink>}
+          仍是 <a>，中键开新标签、复制地址都还在。原来 .ghost-button 没去掉链接的下划线，换了以后没有下划线。
+          Owner 2026-11-14 决定 #13：会开新标签，前面加图标库的外链图标（对读屏隐藏），不恢复下划线；
+          读屏名字靠只给读屏看的一句补上「在新标签页打开」，看得见的字不变。 */}
+      {pdfEdition && canonicalConsumption?.publicationDigest && <ButtonLink size="sm" icon={<ExternalLink size={16} aria-hidden="true" />} href={paperProductPdfUrl(paperId, pdfEdition, canonicalConsumption.publicationDigest)} target="_blank" rel="noopener noreferrer">PDF Screen<span className="visually-hidden">（在新标签页打开）</span></ButtonLink>}
       {/* 生成中用 Button 的 busy（保持原样、点了不触发、读屏念「忙」），不再整键变淡；没有版本时才禁用。 */}
       <Button
         size="sm"

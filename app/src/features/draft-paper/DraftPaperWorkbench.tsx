@@ -1715,10 +1715,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       hides it entirely, same 隐藏式降级 convention as E6's
                       own CTA. */}
                   {item.questionGroup && SWAP_SUPPORTED_GROUP_TYPES.has(item.questionGroup.groupType) && (
+                    // Owner 2026-11-14 决定 #5：读屏名字以看得见的「换篇」开头（WCAG 2.5.3 名字含可见文字），
+                    // 收着念「换篇：换一篇相似篇章」，展开念「换篇：收起」。看得见的字仍是「换篇」；
+                    // 悬停提示和改前一样跟读屏名字用同一句。
                     <button
                       type="button"
-                      aria-label={swapSeedItemId === item.id ? '收起换篇' : '换一篇相似篇章'}
-                      title={swapSeedItemId === item.id ? '收起换篇' : '换一篇相似篇章'}
+                      aria-label={swapSeedItemId === item.id ? '换篇：收起' : '换篇：换一篇相似篇章'}
+                      title={swapSeedItemId === item.id ? '换篇：收起' : '换篇：换一篇相似篇章'}
                       aria-pressed={swapSeedItemId === item.id}
                       onClick={() => handleSwapToggle(item)}
                     >

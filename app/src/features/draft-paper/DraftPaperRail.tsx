@@ -89,8 +89,10 @@ export function DraftPaperSwapDrawer(props: DraftPaperSwapDrawerProps): ReactNod
                       </div>
                     </div>
                     <div className="similar-rcard-actions">
+                      {/* Owner 2026-11-14 决定 #17：「替换这篇」每张卡片都有，不用雾薄荷主键（草稿卷页的主键是「导出」），
+                          改成墨字键 strong，和下面「加入」同一档。 */}
                       <Button
-                        tone="primary"
+                        tone="strong"
                         size="sm"
                         className="similar-btn"
                         disabled={disabled}
