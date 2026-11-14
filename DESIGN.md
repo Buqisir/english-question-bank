@@ -1,5 +1,5 @@
 ---
-name: 英语题库工作台
+name: 獭石
 description: 一张熟悉而心爱的备课桌
 # 色值是 08 雾海桌面色阶（2026-10-15，§2），App.css 的 --desk-* 与 shared-ui/tokens.css 取同一组值。
 colors:
@@ -89,7 +89,9 @@ components:
     padding: "8px 12px"
 ---
 
-# Design System: 英语题库工作台
+# Design System: 獭石
+
+> 「獭石」是 2026-11-14 定的工作名（BRAND.md §2，第 88 条），商标还没确认。原名「英语题库工作台」。
 
 本文件只管界面执行：token、组件、间距、字号、动效和文案格式。品牌（北极星、性格、语气、标志、颜色的差事、海獭和插画）见 [BRAND.md](BRAND.md)，产品（为谁、做什么、主线和边界）见 [PRODUCT.md](PRODUCT.md)。三份文件的分工是 Owner 2026-10-13 定的；旧条款逐条去了哪里，见清点表 `design/brand-2026-10-13/canon-audit.md`。
 
