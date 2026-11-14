@@ -43,7 +43,7 @@ try {
   const u = (b) => 'data:image/png;base64,' + b.toString('base64')
   const big = 'data:image/svg+xml;base64,' + readFileSync(path.join(ROOT, 'app/public/brand/avatar.svg')).toString('base64')
   const p = await browser.newPage({ viewport: { width: 1200, height: 600 }, deviceScaleFactor: 1 })
-  await p.setContent(`<style>body{margin:0;padding:24px;background:#F1F5F7;font:14px system-ui;color:#1B2B33}h2{font-size:14px;margin:18px 0 8px}img.s{display:block;border:1px solid #D5DEE3}.r{display:flex;gap:16px;align-items:center}.c{border-radius:50%}</style>
+  await p.setContent(`<style>body{margin:0;padding:24px;background:#F1F5F7;font:14px system-ui;color:#1B2B33}h2{font-size:14px;margin:18px 0 8px}img.s{display:block;border:1px solid #D5DEE3}.r{display:flex;gap:16px;align-items:center}.c{border-radius:22%}</style>
   <h2>顶栏右半边 · 改之前（普通屏、高清屏）</h2><img class="s" src="${u(shots['before-1x'])}" width="520"><img class="s" src="${u(shots['before-2x'])}" width="1040" style="margin-top:6px">
   <h2>改之后（普通屏、高清屏）</h2><img class="s" src="${u(shots['after-1x'])}" width="520"><img class="s" src="${u(shots['after-2x'])}" width="1040" style="margin-top:6px">
   <h2>头像放大看：28、56、112 像素</h2><div class="r"><img class="c" src="${big}" width="28"><img class="c" src="${big}" width="56"><img class="c" src="${big}" width="112"></div>`)

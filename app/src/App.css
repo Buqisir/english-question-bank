@@ -120,7 +120,8 @@
 .topbar-avatar {
   width: 28px;
   height: 28px;
-  border-radius: 50%;
+  /* 圆角方块，和浏览器图标一个形状（BRAND.md §7 第 105 条）：28px 的 22% 约 6px。 */
+  border-radius: 6px;
   display: block;
   flex-shrink: 0;
   object-fit: cover;
