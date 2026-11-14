@@ -1,22 +1,26 @@
 #!/usr/bin/env node
-// 生态物件第一轮 · 出对比图（对比稿，提案 · 单一来源，2026-11-14）。
+// 生态物件 · 出对比图（对比稿，提案 · 单一来源，2026-11-14）。第一轮、第二轮共用这一个脚本。
 //
-// 做什么：读 ecosystem-round1/svg/ 下手写的物件 SVG（viewBox 0 0 240 240，240 = 獭獭头宽 1.0），
+// 做什么：读 ecosystem-<轮次>/svg/ 下手写的物件 SVG（viewBox 0 0 240 240，240 = 獭獭头宽 1.0），
 // 出三张图：
 //   sheet.png      全套总图：浅雾底 #F1F5F7 和白底各一排；每样三个格子：160px 原框、48px 原框、48px 贴边裁
 //   with-otter.png 全套按相对大小和獭獭头像（mascot/otter-head.svg）摆在同一条底线上
 //   mono.png       全套转成墨色剪影，只看轮廓认不认得出
+//   compare.png    （只有第二轮）石头三档颜色并排比、气泡两版并排比
 // 物件 SVG 和母版都只读，不改。
 //
-// 用法：node scripts/brand/ecosystem-sheet.mjs
-// 输出：design/brand-2026-10-13/image-review-2026-11-14/ecosystem-round1/ 下的三张 PNG
+// 用法：node scripts/brand/ecosystem-sheet.mjs [round1|round2]   不写参数就是 round1
+// 输出：design/brand-2026-10-13/image-review-2026-11-14/ecosystem-<轮次>/ 下的 PNG
 import { readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
-const OUT = path.join(ROOT, 'design/brand-2026-10-13/image-review-2026-11-14/ecosystem-round1')
+const ROUND = process.argv[2] || 'round1'
+if (!['round1', 'round2'].includes(ROUND)) throw new Error(`不认识的轮次：${ROUND}（只有 round1、round2）`)
+const ROUND_NAME = { round1: '第一轮', round2: '第二轮' }[ROUND]
+const OUT = path.join(ROOT, `design/brand-2026-10-13/image-review-2026-11-14/ecosystem-${ROUND}`)
 const SVG_DIR = path.join(OUT, 'svg')
 const OTTER_PATH = path.join(ROOT, 'design/brand-2026-10-13/mascot/otter-head.svg')
 const requireFromApp = createRequire(path.join(ROOT, 'app/package.json'))
@@ -32,7 +36,7 @@ const ITEMS = [
   ['clam-open-on-stone', '敲开的蛤'],
   ['scallop', '扇贝'],
   ['urchin', '海胆'],
-  ['kelp-blade', '巨藻叶带气囊'],
+  ['kelp-blade', ROUND === 'round1' ? '巨藻叶带气囊' : '巨藻一段'],
   ['starfish', '海星'],
   ['bubbles', '一串气泡'],
 ].map(([file, label]) => ({ file, label, svg: readFileSync(path.join(SVG_DIR, `${file}.svg`), 'utf8') }))
@@ -71,7 +75,7 @@ try {
   const cell = (it, svg) => `<figure><div class="r"><img src="${uri(svg)}" width="160" height="160"><div class="s"><img src="${uri(svg)}" width="48" height="48"><img src="${uri(withViewBox(svg, it.tight))}" width="48" height="48"></div></div><figcaption>${it.label}<br><small>相对宽 ${(it.box.w / 240).toFixed(2)}</small></figcaption></figure>`
   const band = (bg, name) => `<section style="background:${bg}"><h2>${name}</h2><div class="g">${ITEMS.map((it) => cell(it, it.svg)).join('')}</div></section>`
   const sheetHtml = `<style>${css}section{padding:16px 16px 8px;margin-bottom:16px;border-radius:8px;outline:1px solid #E3E9EC}h2{font-size:14px;margin:0 0 8px;color:#29424D}.g{display:grid;grid-template-columns:repeat(6,226px);gap:12px 16px}figure{margin:0}.r{display:flex;gap:6px;align-items:flex-end}.s{display:flex;flex-direction:column;gap:6px}figcaption{padding-top:4px;font-size:13px}small{color:#29424D}</style>
-<h1>生态物件 · 第一轮矢量（对比稿 · 提案）</h1><p class="sub">每样三格：160px 原框（240 = 獭獭头宽，物件按相对大小留白）、48px 原框、48px 贴边裁（当图标用时的大小）。只用品牌色，无描边、无渐变、无阴影。</p>
+<h1>生态物件 · ${ROUND_NAME}矢量（对比稿 · 提案）</h1><p class="sub">每样三格：160px 原框（240 = 獭獭头宽，物件按相对大小留白）、48px 原框、48px 贴边裁（当图标用时的大小）。${ROUND === 'round1' ? '只用品牌色' : '石头、海胆和石砧用提案的新石色，其余只用品牌色'}，无描边、无渐变、无阴影。</p>
 ${band('#F1F5F7', '浅雾底 #F1F5F7（网站桌面）')}${band('#FFFFFF', '白底')}`
   await page.setViewportSize({ width: 1500, height: 900 })
   await page.setContent(sheetHtml)
@@ -107,7 +111,7 @@ ${band('#F1F5F7', '浅雾底 #F1F5F7（网站桌面）')}${band('#FFFFFF', '白�
   }
   const W = Math.ceil(x + 20)
   const otterHtml = `<style>${css}.stage{position:relative;height:440px;width:${W}px}.stage img{position:absolute}.lab{position:absolute;top:${BASE + 14}px;text-align:center;font-size:13px}.lab small{color:#29424D}.ruler{position:absolute;top:${BASE + 4}px;height:4px;background:#29424D;border-radius:2px}.line{position:absolute;left:0;right:0;top:${BASE}px;height:1px;background:#C9D3D8}</style>
-<h1>和獭獭摆在一起 · 按相对大小</h1><p class="sub">獭獭头宽（含耳朵）= 200px，物件按 README 里的相对宽度画；都落在同一条底线上。对比稿 · 提案。</p>
+<h1>和獭獭摆在一起 · 按相对大小（${ROUND_NAME}）</h1><p class="sub">獭獭头宽（含耳朵）= 200px，物件按 README 里的相对宽度画；都落在同一条底线上。对比稿 · 提案。</p>
 <div class="stage"><div class="line"></div>${placed.join('')}</div>`
   await page.setViewportSize({ width: W + 56, height: 600 })
   await page.setContent(otterHtml)
@@ -119,11 +123,37 @@ ${band('#F1F5F7', '浅雾底 #F1F5F7（网站桌面）')}${band('#FFFFFF', '白�
     return `<figure><div class="r"><img src="${uri(withViewBox(m, it.tight))}" width="120" height="120"><img src="${uri(withViewBox(m, it.tight))}" width="48" height="48"><img src="${uri(withViewBox(m, it.tight))}" width="24" height="24"></div><figcaption>${it.label}</figcaption></figure>`
   }
   const monoHtml = `<style>${css}.g{display:grid;grid-template-columns:repeat(6,1fr);gap:20px 16px}figure{margin:0}.r{display:flex;gap:10px;align-items:flex-end}figcaption{padding-top:4px;font-size:13px}</style>
-<h1>单色剪影 · 只看轮廓</h1><p class="sub">所有颜色换成墨 ${INK}，里面的浅色细节全部消失。贴边裁，120 / 48 / 24px。对比稿 · 提案。</p><div class="g">${ITEMS.map(monoCell).join('')}</div>`
+<h1>单色剪影 · 只看轮廓（${ROUND_NAME}）</h1><p class="sub">所有颜色换成墨 ${INK}，里面的浅色细节全部消失。贴边裁，120 / 48 / 24px。对比稿 · 提案。</p><div class="g">${ITEMS.map(monoCell).join('')}</div>`
   await page.setViewportSize({ width: 1500, height: 600 })
   await page.setContent(monoHtml)
   await page.screenshot({ path: path.join(OUT, 'mono.png'), fullPage: true })
+
+  // ---- compare.png（只有第二轮）：石头三档颜色、气泡两版 ----
+  if (ROUND === 'round2') {
+    // SVG 里写的是推荐档（石色）；另两档在出图时整串替换，主体和顶面各换一个色
+    const TIERS = [
+      { name: '墨', main: '#191D18', face: '#333B35', note: '主体墨（色板已有）；顶面 #333B35 是为了比较临时调的，不在色板里' },
+      { name: '石板墨', main: '#29424D', face: '#3E5A66', note: '主体石板墨（色板已有）；顶面 #3E5A66 临时调的，不在色板里' },
+      { name: '石色（推荐）', main: '#6E828C', face: '#8FA3AC', note: '主体石色、顶面石面，两个都是新色，提案，要 Owner 定才进色板' },
+    ]
+    const STONE_ITEMS = ITEMS.filter((it) => /^(stone-|urchin|clam-open)/.test(it.file))
+    const NEIGHBOURS = ITEMS.filter((it) => ['clam', 'scallop'].includes(it.file))
+    const recolor = (svg, t) => svg.replaceAll('#6E828C', t.main).replaceAll('#8FA3AC', t.face)
+    const tierRow = (t) => `<section><h2>${t.name}　<small>${t.main} / ${t.face}　${t.note}</small></h2><div class="row">${[...STONE_ITEMS, ...NEIGHBOURS]
+      .map((it) => { const svg = recolor(it.svg, t); return `<figure><div class="r"><img src="${uri(withViewBox(svg, it.tight))}" width="120" height="120"><img src="${uri(withViewBox(svg, it.tight))}" width="48" height="48"></div><figcaption>${it.label}</figcaption></figure>` })
+      .join('')}</div></section>`
+    const ring = readFileSync(path.join(SVG_DIR, 'alt/bubbles-ring.svg'), 'utf8')
+    const bub = ITEMS.find((it) => it.file === 'bubbles')
+    const bubCell = (svg, label) => `<figure><div class="r"><img src="${uri(svg)}" width="160" height="160"><img src="${uri(withViewBox(svg, bub.tight))}" width="48" height="48"><img src="${uri(withViewBox(svg, bub.tight))}" width="24" height="24"></div><figcaption>${label}</figcaption></figure>`
+    const compareHtml = `<style>${css}body{background:#F1F5F7}section{background:#F1F5F7;margin-bottom:10px}h2{font-size:15px;margin:0 0 6px}h2 small{font-weight:400;color:#29424D;font-size:12px}.row{display:flex;gap:14px;flex-wrap:nowrap}figure{margin:0}.r{display:flex;gap:8px;align-items:flex-end}figcaption{font-size:12px;padding-top:2px}</style>
+<h1>石头三档颜色 · 第二轮（底色 #F1F5F7）</h1><p class="sub">同一组形状，只换主体和顶面两个颜色；最右两样是薄荷色的蛤和扇贝，看放在一起压不压。贴边裁 120 / 48px。对比稿 · 提案。</p>
+${TIERS.map(tierRow).join('')}
+<h1 style="margin-top:22px">气泡两版</h1><p class="sub">左：实心加浅色透光点（进套的这版）；右：加厚圆环（备选，不进套）。160px 原框、48、24px 贴边裁。</p><div class="row">${bubCell(bub.svg, '实心 + 透光点')}${bubCell(ring, '加厚圆环')}</div>`
+    await page.setViewportSize({ width: 1720, height: 600 })
+    await page.setContent(compareHtml)
+    await page.screenshot({ path: path.join(OUT, 'compare.png'), fullPage: true })
+  }
 } finally {
   await browser.close()
 }
-console.log(`出了 sheet.png、with-otter.png、mono.png：${path.relative(ROOT, OUT)}`)
+console.log(`出了 sheet.png、with-otter.png、mono.png${ROUND === 'round2' ? '、compare.png' : ''}：${path.relative(ROOT, OUT)}`)
