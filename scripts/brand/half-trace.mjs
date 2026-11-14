@@ -19,11 +19,23 @@
 //   7. 登录页探头：水面抬到肚皮上沿，只露头和一截脖子；爪子整体往上挪，只留拳头一截，下沿按高斯模糊再取阈值收圆，
 //      画在水带前面搭在水面线上；压在脖子上的那一点，脖子和头在爪尖四周让出同样 7 像素的缝。
 //
-// 用法：node scripts/brand/half-trace.mjs
-//   可选环境变量：INVENTORY_CHROMIUM（chromium 路径）、HALF_SIGMA（平滑，默认 4）、HALF_EPS（抽稀，默认 0.45）、
-//   HALF_HOLD_K（物件公共系数，默认 0.6）、HALF_HOLD_ANCHOR（top | grip，物件靠肚皮上沿还是对拳头高度，默认 top）、
-//   HALF_SPREAD（爪子外挪像素，默认 28）、HALF_WATER_END（round | square，水带两端，默认 round）。
-// 输出：design/brand-2026-10-13/image-review-2026-11-14/half-round1/ 下的
+// 第二轮（--round 2，默认）在上面这套上改五处，第一轮的做法原样留着（--round 1 复现第一轮）：
+//   a. 描之前先把草图像素变形：脖子按坐姿量出来的肩线拉长（逐个宽度级别对齐坐姿「下巴往下多远到这个宽度」），
+//      每一行再横向收到不比坐姿同一深度宽；草图水面以下照水面上 5 行往下补身体，直到新的水面。
+//      新水面 = 头顶往下「头的可见高度 / 0.40」。
+//   b. 肚皮在水面上方 0.1 头宽处收成圆底，肚皮底和水之间露一道雾薄荷；水带画在最前面，身体在水带后面接着往下。
+//   c. 物件整形不切，画在爪子前面；只在爪子上按物件外形往外 7 像素让缝，爪子只托物件下沿两角。
+//   d. 登录页：头上不切缝；水面在下巴下面一点，露一小截脖子；爪子取半身爪子的前一截，放在脖子宽度外面、
+//      搭在水带上沿，画在水带前面。
+//   e. states.png 只出 96 和 64 两档小图。
+//
+// 用法：node scripts/brand/half-trace.mjs [--round 1|2]
+//   可选环境变量：INVENTORY_CHROMIUM（chromium 路径）、HALF_OUT（输出目录，默认 half-round1 或 half-round2）、
+//   HALF_SIGMA（平滑，默认 4）、HALF_EPS（抽稀，默认 0.45）、
+//   HALF_HOLD_K（物件公共系数，默认 0.6）、HALF_HOLD_ANCHOR（第一轮：top | grip，默认 top）、
+//   HALF_SPREAD（爪子外挪像素，第一轮默认 28，第二轮默认 0）、HALF_WATER_END（round | square，水带两端，默认 round）、
+//   HALF_HEAD_SHARE（第二轮：头占可见高度，默认 0.40）、HALF_ROUND（同 --round）、HALF_DUMP（第二轮调试：变形后的像素存成这个 PNG）。
+// 输出：design/brand-2026-10-13/image-review-2026-11-14/half-round1/ 或 half-round2/ 下的
 //   otter-half.svg、state-searching.svg、state-offer.svg、state-not-found.svg、state-login.svg、
 //   compare.png、states.png、with-sit.png（截图 deviceScaleFactor 2）。母版和物件文件不改。
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
@@ -33,7 +45,11 @@ import { fileURLToPath } from 'node:url'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const BRAND = path.join(ROOT, 'design/brand-2026-10-13')
-const OUT = path.join(BRAND, 'image-review-2026-11-14/half-round1')
+const argRound = process.argv.indexOf('--round')
+const ROUND = Number(argRound > 0 ? process.argv[argRound + 1] : process.env.HALF_ROUND || 2)
+if (ROUND !== 1 && ROUND !== 2) throw new Error('--round 只能是 1 或 2')
+const IS2 = ROUND === 2
+const OUT = process.env.HALF_OUT ? path.resolve(process.env.HALF_OUT) : path.join(BRAND, `image-review-2026-11-14/half-round${ROUND}`)
 const SKETCH = path.join(BRAND, 'image-review-2026-11-14/sketches-batch5/source-M2-half.png')
 const HEAD_MASTER = readFileSync(path.join(BRAND, 'mascot/otter-head.svg'), 'utf8')
 const SIT = readFileSync(path.join(BRAND, 'mascot/otter-sit.svg'), 'utf8')
@@ -82,28 +98,33 @@ async function pixelsOf(html, w, h) {
   await p.close()
   return { ...out, px: Buffer.from(out.b64, 'base64') }
 }
-const { W, H, px } = await pixelsOf(`<img id="i" src="${uriPng(SKETCH)}">`, 1024, 1024)
-const N = W * H
+let { W, H, px } = await pixelsOf(`<img id="i" src="${uriPng(SKETCH)}">`, 1024, 1024)
+let N = W * H
 
 // —— 2. 按颜色分类（中心色从草图上量的，目测取点） ——
 const at = (x, y) => [px[(y * W + x) * 4], px[(y * W + x) * 4 + 1], px[(y * W + x) * 4 + 2]]
 const CENTER = { bg: at(40, 40), mint: at(250, 700), pale: at(512, 780), muzzle: at(330, 420), rock: at(512, 600), ink: [26, 29, 23] }
 const NAMES = Object.keys(CENTER)
 const K = Object.fromEntries(NAMES.map((n, k) => [n, k]))
-const cls = new Uint8Array(N)
-for (let i = 0; i < N; i++) {
-  let best = 0
-  let bd = Infinity
-  for (let k = 0; k < NAMES.length; k++) {
-    const c = CENTER[NAMES[k]]
-    const d = (px[i * 4] - c[0]) ** 2 + (px[i * 4 + 1] - c[1]) ** 2 + (px[i * 4 + 2] - c[2]) ** 2
-    if (d < bd) { bd = d; best = k }
+function classify() {
+  const out = new Uint8Array(N)
+  for (let i = 0; i < N; i++) {
+    let best = 0
+    let bd = Infinity
+    for (let k = 0; k < NAMES.length; k++) {
+      const c = CENTER[NAMES[k]]
+      const d = (px[i * 4] - c[0]) ** 2 + (px[i * 4 + 1] - c[1]) ** 2 + (px[i * 4 + 2] - c[2]) ** 2
+      if (d < bd) { bd = d; best = k }
+    }
+    out[i] = best
   }
-  cls[i] = best
+  return out
 }
+let cls = classify()
 // 水带：左边空白处那一列第一次变成浅色的那一行
 let WATER_Y = 0
 for (let y = H - 1; y > 0; y--) { const [r] = at(30, y); if (r > 240) { WATER_Y = y + 1; break } }
+const WATER_SKETCH = WATER_Y
 const maskOf = (fn) => { const m = new Uint8Array(N); for (let i = 0; i < N; i++) m[i] = fn(cls[i], i) ? 1 : 0; return m }
 const rowOf = (i) => Math.floor(i / W)
 
@@ -192,6 +213,104 @@ const TY = SK_EYE.cy - MASTER_EYE.cy * S
 const toSketchY = (my) => TY + my * S
 const CUT_Y = Math.round(toSketchY(670))
 const STUB = 8
+const headBox = await (async () => {
+  const p = await browser.newPage()
+  await p.setContent(`<svg xmlns="http://www.w3.org/2000/svg">${HEAD_SHAPE}</svg>`)
+  const b = await p.evaluate(() => { const r = document.querySelector('path').getBBox(); return { x: r.x, y: r.y, w: r.width, h: r.height } })
+  await p.close()
+  return b
+})()
+const HEAD_W = headBox.w * S // 草图像素里的头宽（含耳朵）
+const CHIN_Y = toSketchY(MUZZLE_BOTTOM) // 下巴切线（母版脸斑下沿）
+const headTop = Math.floor(toSketchY(headBox.y))
+const headVisH = (HEAD_CLIP_Y - headBox.y) * S // 头顶到母版裁切线（下巴下面）
+const SIT_S = Number((SIT.match(/<g transform="translate\([^)]*\) scale\(([\d.]+)\)">/) || [])[1])
+const SIT_TY = Number((SIT.match(/<g transform="translate\([\d.-]+ ([\d.-]+)\) scale/) || [])[1])
+
+// —— 2b. 第二轮：照坐姿把脖子拉长、肩宽收窄，水面往下挪（在像素上变形，后面照常描） ——
+let WARP = null
+if (IS2) {
+  const HEAD_SHARE = Number(process.env.HALF_HEAD_SHARE || 0.4)
+  // 坐姿剪影：otter-sit.svg 按 1024 栅格化，不透明且不是石头色（#6E828C）的像素；深度从坐姿下巴切线往下量，单位坐姿头宽
+  const sit = await pixelsOf(`<img id="i" src="${uriSvg(SIT.replace('<svg ', '<svg width="1024" height="1024" '))}">`, 1024, 1024)
+  const sitFig = (i) => sit.px[i * 4 + 3] > 127 && !(Math.abs(sit.px[i * 4] - 110) < 14 && Math.abs(sit.px[i * 4 + 1] - 130) < 14 && Math.abs(sit.px[i * 4 + 2] - 140) < 14)
+  const sitChin = SIT_TY + MUZZLE_BOTTOM * SIT_S
+  const sitHW = headBox.w * SIT_S
+  const span = (fig, w, y) => { let x0 = -1; let x1 = -1; for (let x = 0; x < w; x++) if (fig(y * w + x)) { if (x0 < 0) x0 = x; x1 = x } return x0 < 0 ? 0 : x1 - x0 + 1 }
+  const sitProf = [] // [深度, 宽]，都按头宽
+  for (let y = Math.ceil(sitChin); y < 1024; y++) { const d = (y - sitChin) / sitHW; if (d > 0.75) break; sitProf.push([d, span(sitFig, 1024, y) / sitHW]) }
+  const halfFig = (i) => cls[i] !== K.bg && cls[i] !== K.rock
+  const halfProf = []
+  for (let y = Math.ceil(CHIN_Y); y < WATER_SKETCH - 5; y++) halfProf.push([(y - CHIN_Y) / HEAD_W, span(halfFig, W, y) / HEAD_W])
+  const firstAt = (prof, lv) => { for (const [d, w] of prof) if (d >= 0.04 && w >= lv) return d; return NaN }
+  // 逐个宽度级别对齐：草图在深度 dh 宽到 lv，坐姿在深度 ds 宽到 lv，就把草图的 dh 挪到 ds。0.04 头宽以上（下巴根）不动。
+  const pts = [[0.04, 0.04]]
+  for (let lv = 0.74; lv <= 0.9001; lv += 0.01) {
+    const dh = firstAt(halfProf, lv); const ds = firstAt(sitProf, lv)
+    const last = pts[pts.length - 1]
+    if (dh > last[0] + 0.002 && ds > last[1] + 0.002) pts.push([dh, ds])
+  }
+  const [dh90, ds90] = pts[pts.length - 1]
+  const finv = (d) => { // 变形后的深度 → 草图里的深度
+    if (d <= 0.04) return d
+    for (let k = 1; k < pts.length; k++) if (d <= pts[k][1]) { const [a0, b0] = pts[k - 1]; const [a1, b1] = pts[k]; return a0 + ((d - b0) / (b1 - b0)) * (a1 - a0) }
+    return d - (ds90 - dh90)
+  }
+  // 宽度上限：坐姿在同一深度的宽（往下取累计最大，不让下面比上面窄），再封顶在坐姿 0.75 头宽以内的最宽处
+  const sitMax = Math.max(...sitProf.map((p) => p[1]))
+  const sitCum = []
+  { let m = 0; for (const [d, w] of sitProf) { m = Math.max(m, w); sitCum.push([d, m]) } }
+  const sitEnv = (d) => { if (d <= sitCum[0][0]) return sitCum[0][1]; for (const [dd, w] of sitCum) if (dd >= d) return w; return sitMax }
+  const yw = headTop + headVisH / HEAD_SHARE // 新水面
+  const H2 = Math.ceil(yw) + 84 + 120
+  const srcRow = new Float64Array(H2)
+  const scaleRaw = new Float64Array(H2).fill(1)
+  const srcWidth = (ys) => span(halfFig, W, ys)
+  for (let y = 0; y < H2; y++) {
+    const d = (y - CHIN_Y) / HEAD_W
+    let ys = d <= 0.04 ? y : CHIN_Y + finv(d) * HEAD_W
+    ys = Math.min(ys, WATER_SKETCH - 5) // 草图水面以下：照水面上 5 行往下补
+    srcRow[y] = ys
+    if (d > 0.04) { const w = srcWidth(Math.round(ys)); if (w) scaleRaw[y] = Math.min(1, (sitEnv(d) * HEAD_W) / w) }
+  }
+  // 横向系数先取 ±25 行内的最小值，再高斯平滑（σ 12 行），所以平滑后不会比坐姿宽
+  const scale = new Float64Array(H2)
+  const mn = scaleRaw.map((_, y) => { let m = 1; for (let k = -25; k <= 25; k++) { const v = scaleRaw[Math.min(H2 - 1, Math.max(0, y + k))]; if (v < m) m = v } return m })
+  for (let y = 0; y < H2; y++) { let a = 0; let s = 0; for (let k = -36; k <= 36; k++) { const w = Math.exp(-(k * k) / 288); a += mn[Math.min(H2 - 1, Math.max(0, y + k))] * w; s += w } scale[y] = a / s }
+  // 按分类后的标签变形：目标像素反算回草图的小数坐标，周围四个像素按双线性权重给各自的类投票，取票最多的类。
+  // 这样拉长和收窄后的边是顺的，不会出现最近邻那种台阶，也不会混出中间色。
+  const CX = SK_EYE.cx
+  const out = new Uint8Array(W * H2)
+  const vote = new Float64Array(NAMES.length)
+  for (let y = 0; y < H2; y++) {
+    const fy = Math.min(srcRow[y], WATER_SKETCH - 5)
+    const y0 = Math.floor(fy); const ty = fy - y0; const y1 = Math.min(y0 + 1, WATER_SKETCH - 5)
+    for (let x = 0; x < W; x++) {
+      const fx = CX + (x + 0.5 - CX) / scale[y] - 0.5
+      const x0 = Math.floor(fx); const tx = fx - x0
+      vote.fill(0)
+      for (const [xx, yy, w] of [[x0, y0, (1 - tx) * (1 - ty)], [x0 + 1, y0, tx * (1 - ty)], [x0, y1, (1 - tx) * ty], [x0 + 1, y1, tx * ty]]) {
+        vote[xx < 0 || xx >= W ? K.bg : cls[yy * W + xx]] += w
+      }
+      let best = 0
+      for (let k = 1; k < NAMES.length; k++) if (vote[k] > vote[best]) best = k
+      out[y * W + x] = best
+    }
+  }
+  WARP = { sitProf, halfProf, pts, dh90, ds90, sitMax, yw, scale, srcRow, sitChin, sitHW }
+  H = H2; N = W * H
+  cls = out
+  px = Buffer.alloc(N * 4) // 变形后不再读原色，只留给调试图
+  for (let i = 0; i < N; i++) { const c = CENTER[NAMES[cls[i]]]; px[i * 4] = c[0]; px[i * 4 + 1] = c[1]; px[i * 4 + 2] = c[2]; px[i * 4 + 3] = 255 }
+  WATER_Y = Math.round(yw)
+  if (process.env.HALF_DUMP) { // 调试：把变形后的像素存成 PNG
+    const p = await browser.newPage({ viewport: { width: W, height: H } })
+    const b64 = px.toString('base64')
+    await p.evaluate(({ b64, W, H }) => { const c = document.createElement('canvas'); c.width = W; c.height = H; const bin = atob(b64); const d = new Uint8ClampedArray(bin.length); for (let i = 0; i < bin.length; i++) d[i] = bin.charCodeAt(i); c.getContext('2d').putImageData(new ImageData(d, W, H), 0, 0); document.body.style.margin = 0; document.body.appendChild(c) }, { b64, W, H })
+    await p.screenshot({ path: process.env.HALF_DUMP, fullPage: true })
+    await p.close()
+  }
+}
 
 // —— 3. 身体、肚皮、石头、爪子 ——
 const below = (y0) => maskOf((_, i) => rowOf(i) >= y0)
@@ -212,6 +331,8 @@ for (let y = WATER_Y - 4; y < WATER_Y + SINK; y++) body.set(body.subarray((WATER
   for (let y = 0; y < CUT_Y; y++) for (let x = 0; x < W; x++) if (y < CUT_Y - 40 || x < x0 + STUB || x > x1 - STUB) body[y * W + x] = 0
 }
 body = largest(body)
+// 第二轮：草图胳膊和身体交界处的小台阶在拉长以后更显眼，先闭运算（21 像素见方）填掉凹口，再按高斯收顺
+if (IS2) body = largest(roundOff(close(body, 10), 6))
 const headMask = await (async () => {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><rect width="${W}" height="${H}" fill="#fff"/><g transform="translate(${TX} ${TY}) scale(${S})"><clipPath id="c"><rect x="-200" y="-200" width="1500" height="${HEAD_CLIP_Y + 200}"/></clipPath><g clip-path="url(#c)">${HEAD_SHAPE.replace(/fill="[^"]+"/, 'fill="#000"')}</g></g></svg>`
   const r = await pixelsOf(`<img id="i" src="${uriSvg(svg)}">`, W, H)
@@ -268,19 +389,38 @@ bellyEnv = or(bellyEnv, pale0)
 const mintPx = maskOf((c) => c === K.mint)
 const paws0 = keep(open(and(and(mintPx, bellyEnv), aboveWater), 3), (c) => c.area > 3000)
 const pawGrown = fill(open(and(morph(paws0, 6, false), or(mintPx, not(bellyEnv))), 1))
-const pawParts = components(and(pawGrown, aboveWater)).list.filter((c) => c.area > 3000).sort((a, b) => a.cx - b.cx)
+// 取面积最大的两块（第二轮肚皮上沿那道弧拉长以后，弧下面会多出一条雾薄荷细条，不算爪子）
+const pawParts = components(and(pawGrown, aboveWater)).list.filter((c) => c.area > 3000).sort((a, b) => b.area - a.area).slice(0, 2).sort((a, b) => a.cx - b.cx)
 if (pawParts.length !== 2) throw new Error(`爪子应该是两块，量到 ${pawParts.length} 块`)
 const pawLab = components(and(pawGrown, aboveWater)).lab
 // 两只爪子各往外平移 SPREAD 像素：草图里两拳之间只有一指宽，扇贝、蛤夹在中间几乎全被挡住。
 // 平移后爪子朝外那一头仍落在胳膊的雾薄荷上，腾出来的地方是补齐过的肚皮，身体剪影不动。
-const SPREAD = Number(process.env.HALF_SPREAD ?? 28)
+const SPREAD = Number(process.env.HALF_SPREAD ?? (IS2 ? 0 : 28))
 const shiftX = (m, dx) => { const o = new Uint8Array(N); for (let i = 0; i < N; i++) if (m[i]) { const x = (i % W) + dx; if (x >= 0 && x < W) o[i + dx] = 1 } return o }
 const pawL = shiftX(pawLab.map((v) => (v === pawParts[0].id ? 1 : 0)), -SPREAD)
 const pawR = shiftX(pawLab.map((v) => (v === pawParts[1].id ? 1 : 0)), SPREAD)
 for (const [k, d] of [[0, -SPREAD], [1, SPREAD]]) { pawParts[k].minX += d; pawParts[k].maxX += d; pawParts[k].cx += d }
 // 肚皮 = 露出来的浅色 + 被爪子和石头挡住的那一片（只在这些地方用补齐的范围，肚皮上沿那道弧照草图）
 const bellyRaw = or(and(pale0, maskOf((_, i) => rowOf(i) < WATER_Y - 5)), and(bellyEnv, or(morph(or(pawGrown, rock), 3, false), maskOf((_, i) => rowOf(i) >= WATER_Y - 5))))
-const belly = largest(and(roundOff(close(bellyRaw, 2), 3), body)) // 收一下肚皮上沿两个尖角
+// 收一下肚皮上沿两个尖角（第二轮肚皮上沿被拉长成平顶，角更方，收得多一点：σ 14）
+let belly = largest(and(roundOff(close(bellyRaw, 2), IS2 ? 14 : 3), body))
+// 第二轮：肚皮在水面上方 BAND（0.1 头宽）处收成圆底。最下面 RR 行按半个椭圆收：
+// 横半轴 = 肚皮在圆底起点那一行的半宽，竖半轴 RR = 横半轴的 0.75 倍（目测取的，圆而不尖）
+const BAND = Math.round(0.1 * HEAD_W)
+const BELLY_BOTTOM = WATER_Y - BAND
+let BELLY_RR = 0
+if (IS2) {
+  const rowSpan = (m, y) => { let x0 = -1; let x1 = -1; for (let x = 0; x < W; x++) if (m[y * W + x]) { if (x0 < 0) x0 = x; x1 = x } return [x0, x1] }
+  let a = 0
+  let cx = 0
+  for (let it = 0; it < 3; it++) { // 起点那一行取决于 RR，迭代几次就稳了
+    const [x0, x1] = rowSpan(belly, BELLY_BOTTOM - BELLY_RR)
+    a = (x1 - x0 + 1) / 2; cx = (x0 + x1 + 1) / 2
+    BELLY_RR = Math.round(0.75 * a)
+  }
+  const y0 = BELLY_BOTTOM - BELLY_RR
+  belly = belly.map((v, i) => { if (!v) return 0; const y = rowOf(i); if (y < y0) return 1; if (y > BELLY_BOTTOM) return 0; const x = (i % W) + 0.5; return ((x - cx) / a) ** 2 + ((y + 0.5 - y0) / BELLY_RR) ** 2 <= 1 ? 1 : 0 })
+}
 const GAP = 7 // 物件在爪子四周让出的缝（草图像素）
 const pawGap = morph(or(pawL, pawR), GAP, false)
 
@@ -374,7 +514,9 @@ const tGap = trace(pawGap)
 // —— 5. 登录页探头：水面抬到下巴下面，爪子往上挪，只留爪尖 ——
 const pawTop = Math.min(pawParts[0].minY, pawParts[1].minY)
 const chinY = toSketchY(MUZZLE_BOTTOM)
-const LOGIN_WATER_Y = BELLY_TOP - 2 // 水面抬到肚皮上沿，只露头和一截脖子
+// 第二轮：水面在下巴切线下面 LOGIN_NECK（0.07 头宽），露一小截脖子
+const LOGIN_NECK = Math.round(0.07 * HEAD_W)
+const LOGIN_WATER_Y = IS2 ? Math.round(chinY + LOGIN_NECK) : BELLY_TOP - 2 // 第一轮：水面抬到肚皮上沿，只露头和一截脖子
 const ABOVE = 18 // 爪尖露在水面线以上的高度（这一截压在脖子上，靠下面那道缝分开）
 const DIP = 38 // 爪子在水面线以下、画在水带前面的高度
 const LOGIN_PAW_TOP = LOGIN_WATER_Y - ABOVE
@@ -385,19 +527,36 @@ const tipOf = (m, part, inner) => {
   const cut = s.map((v, i) => { const x = i % W; return v && rowOf(i) < LOGIN_WATER_Y + DIP && (inner === 'right' ? x > part.maxX - FIST_W : x < part.minX + FIST_W) ? 1 : 0 })
   return largest(roundOff(cut, 13))
 }
-const tipL = tipOf(pawL, pawParts[0], 'right')
-const tipR = tipOf(pawR, pawParts[1], 'left')
+// 第二轮的爪子：半身爪子朝里那一头的一截（离最里面那一点 FIST_R 以内），切口本来就是圆弧，只轻轻收一下角（σ 7）；
+// 横向挪到脖子宽度外面（离脖子边 LOGIN_GAP），纵向让下沿压进水带 LOGIN_DIP、上面露在水带上沿以上
+const FIST_R = Math.round(0.13 * HEAD_W)
+const LOGIN_GAP = Math.round(0.03 * HEAD_W)
+const LOGIN_DIP_K = 0.55 // 爪子高度里压进水带的比例
+function loginFist(m, side) {
+  let ti = -1
+  for (let i = 0; i < N; i++) if (m[i]) { const x = i % W; if (ti < 0 || (side === 'left' ? x > ti % W : x < ti % W)) ti = i }
+  const tx = ti % W; const ty = rowOf(ti)
+  const seg = largest(roundOff(m.map((v, i) => (v && Math.hypot((i % W) - tx, rowOf(i) - ty) <= FIST_R ? 1 : 0)), 7))
+  const box = components(seg).list[0]
+  // 脖子在水面这一行的左右边
+  // 脖子和头在爪子所占的那几行里的左右边（爪子不能压在头上，否则雾薄荷连成一片）
+  const h = box.maxY - box.minY + 1
+  const dy = Math.round(LOGIN_WATER_Y + LOGIN_DIP_K * h - box.maxY)
+  let n0 = W; let n1 = -1
+  for (let y = box.minY + dy; y <= Math.min(LOGIN_WATER_Y, box.maxY + dy); y++) for (let x = 0; x < W; x++) if (bodyOnly[y * W + x] || headMask[y * W + x]) { if (x < n0) n0 = x; if (x > n1) n1 = x }
+  const dx = side === 'left' ? n0 - LOGIN_GAP - box.maxX - 1 : n1 + LOGIN_GAP - box.minX + 1
+  const o = new Uint8Array(N)
+  for (let i = 0; i < N; i++) if (seg[i]) { const x = (i % W) + dx; const y = rowOf(i) + dy; if (x >= 0 && x < W && y >= 0 && y < H) o[y * W + x] = 1 }
+  return o
+}
+const tipL = IS2 ? loginFist(pawL, 'left') : tipOf(pawL, pawParts[0], 'right')
+const tipR = IS2 ? loginFist(pawR, 'right') : tipOf(pawR, pawParts[1], 'left')
 const tTipL = trace(tipL)
 const tTipR = trace(tipR)
 const tTipGap = trace(morph(or(tipL, tipR), GAP, false))
 
 // —— 6. 量头宽（含耳朵）、物件外框 ——
 const measurePage = await browser.newPage()
-const headBox = await (async () => {
-  await measurePage.setContent(`<svg xmlns="http://www.w3.org/2000/svg">${HEAD_SHAPE}</svg>`)
-  return measurePage.evaluate(() => { const b = document.querySelector('path').getBBox(); return { x: b.x, y: b.y, w: b.width, h: b.height } })
-})()
-const HEAD_W = headBox.w * S // 草图像素里的头宽
 const UNIT = HEAD_W / 240 // 物件画框 1 单位 = 多少草图像素
 const objects = {}
 for (const name of ['stone-round', 'scallop', 'clam']) {
@@ -421,12 +580,26 @@ const HOLD_ANCHOR = process.env.HALF_HOLD_ANCHOR || "top"
 const HOLD_TOP = 6
 const innerY = (m, sideRight) => { let best = sideRight ? -1 : W; let by = 0; for (let i = 0; i < N; i++) if (m[i]) { const x = i % W; if (sideRight ? x > best : x < best) { best = x; by = rowOf(i) } } return by }
 const GRIP_Y = (innerY(pawL, true) + innerY(pawR, false)) / 2
+// 第二轮：每样东西可以单独定系数（HOLD_K2），物件下沿两角落在拳头上：
+// 取物件下沿两角（物件宽的 ±CORNER 处）正下方两只爪子的最高点，物件下沿压进爪子 OVER × 物件高。
+const HOLD_K2 = { 'stone-round': HOLD_K, scallop: HOLD_K, clam: HOLD_K }
+const CORNER = 0.38
+const OVER = 0.22
+const pawsAll = or(pawL, pawR)
+const pawTopAt = (x) => { x = Math.round(x); for (let y = 0; y < H; y++) if (pawsAll[y * W + x]) return y; return H }
+const placed = {}
 function heldGroup(name) {
   const { inner, box } = objects[name]
-  const s = UNIT * HOLD_K
+  const s = UNIT * (IS2 ? HOLD_K2[name] : HOLD_K)
   const cx = box.x0 + box.w / 2
   const tx = HOLD_X - cx * s
-  const top = HOLD_ANCHOR === "top" ? BELLY_TOP_MID + HOLD_TOP : Math.max(BELLY_TOP_MID + HOLD_TOP, GRIP_Y - (box.h * s) / 2)
+  let top = HOLD_ANCHOR === "top" ? BELLY_TOP_MID + HOLD_TOP : Math.max(BELLY_TOP_MID + HOLD_TOP, GRIP_Y - (box.h * s) / 2)
+  if (IS2) {
+    const w = box.w * s; const h = box.h * s
+    const rest = Math.max(pawTopAt(HOLD_X - CORNER * w), pawTopAt(HOLD_X + CORNER * w))
+    top = rest + OVER * h - h
+    placed[name] = { k: IS2 ? HOLD_K2[name] : HOLD_K, w: f1(w), h: f1(h), top: f1(top), bottom: f1(top + h), rest }
+  }
   const ty = top - box.y0 * s
   return `<g transform="translate(${f1(tx)} ${f1(ty)}) scale(${s.toFixed(4)})">\n${inner.replace(/^\s+/gm, '  ')}\n</g>`
 }
@@ -437,13 +610,14 @@ const WATER_END = process.env.HALF_WATER_END || 'round'
 const bodyBox = components(bodyOnly).list[0]
 const WATER = { x: bodyBox.minX - 46, w: bodyBox.maxX - bodyBox.minX + 92, h: 84 }
 const waterRect = (y) => `<rect id="water" x="${WATER.x}" y="${y}" width="${WATER.w}" height="${WATER.h}" rx="${WATER_END === 'round' ? WATER.h / 2 : 0}" fill="${COLOR.pale}"/>`
-const headTop = Math.floor(toSketchY(headBox.y))
-const VB = { x: WATER.x - PAD, y: headTop - PAD, w: WATER.w + 2 * PAD, h: WATER_Y + WATER.h + PAD - (headTop - PAD) }
+const VB ={ x: WATER.x - PAD, y: headTop - PAD, w: WATER.w + 2 * PAD, h: WATER_Y + WATER.h + PAD - (headTop - PAD) }
 const VB_LOGIN = { ...VB, h: LOGIN_WATER_Y + WATER.h + PAD - VB.y }
 const vbStr = (v) => `${v.x} ${v.y} ${v.w} ${v.h}`
 const headXf = `translate(${f1(TX)} ${f1(TY)}) scale(${S.toFixed(4)})`
 const head = `<g id="head" transform="${headXf}"><clipPath id="half-chin"><rect x="-200" y="-200" width="1500" height="${HEAD_CLIP_Y + 200}"/></clipPath><g clip-path="url(#half-chin)">${HEAD_SHAPE}</g>${MUZZLE}${EYES}${NOSE}${DOTS}</g>`
-const NOTE = '<!-- 对比稿，不是母版：半身像第一轮，身体、肚皮、爪子照 M2 半身草图的轮廓描（scripts/brand/half-trace.mjs），头是头像母版原样缩放，物件是 mascot/objects/ 的定稿形原样缩放。提案 · 单一来源。 -->'
+const NOTE = IS2
+  ? '<!-- 对比稿，不是母版：半身像第二轮，身体、肚皮、爪子照 M2 半身草图的轮廓描，描之前按坐姿把脖子拉长、肩宽收窄、身体补到新水面（scripts/brand/half-trace.mjs 第二轮模式），头是头像母版原样缩放，物件是 mascot/objects/ 的定稿形原样缩放。提案 · 单一来源。 -->'
+  : '<!-- 对比稿，不是母版：半身像第一轮，身体、肚皮、爪子照 M2 半身草图的轮廓描（scripts/brand/half-trace.mjs），头是头像母版原样缩放，物件是 mascot/objects/ 的定稿形原样缩放。提案 · 单一来源。 -->'
 const STATES = {
   half: { title: '獭獭 · 半身像（底稿，手里空着）', held: null },
   searching: { title: '獭獭 · 半身像 · 找题中（拿圆墩石头）', held: 'stone-round' },
@@ -456,9 +630,15 @@ function build(key, crumbs = '') {
   if (st.login) {
     const clipH = LOGIN_WATER_Y + 12 - VB.y
     const v = VB_LOGIN
+    if (IS2) return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vbStr(v)}">\n${NOTE}\n<title>${st.title}</title>\n<clipPath id="half-above-water"><rect x="${v.x}" y="${v.y}" width="${v.w}" height="${clipH}"/></clipPath>\n<g id="figure" clip-path="url(#half-above-water)">\n<path id="body" d="${tBody.d}" fill="${COLOR.mint}"/>\n<path id="belly" d="${tBelly.d}" fill="${COLOR.pale}"/>\n${head}\n</g>\n${waterRect(LOGIN_WATER_Y)}\n<g id="paws">\n<path id="paw-left" d="${tTipL.d}" fill="${COLOR.mint}"/>\n<path id="paw-right" d="${tTipR.d}" fill="${COLOR.mint}"/>\n</g>\n</svg>\n`
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vbStr(v)}">\n${NOTE}\n<title>${st.title}</title>\n<clipPath id="half-above-water"><rect x="${v.x}" y="${v.y}" width="${v.w}" height="${clipH}"/></clipPath>\n<mask id="half-tip-gap" maskUnits="userSpaceOnUse" x="${v.x}" y="${v.y}" width="${v.w}" height="${v.h}"><rect x="${v.x}" y="${v.y}" width="${v.w}" height="${v.h}" fill="#fff"/><path d="${tTipGap.d}" fill="#000"/></mask>\n<g id="figure" clip-path="url(#half-above-water)">\n<g mask="url(#half-tip-gap)">\n<path id="body" d="${tBody.d}" fill="${COLOR.mint}"/>\n<path id="belly" d="${tBelly.d}" fill="${COLOR.pale}"/>\n${head}\n</g>\n</g>\n${waterRect(LOGIN_WATER_Y)}\n<g id="paws">\n<path id="paw-left" d="${tTipL.d}" fill="${COLOR.mint}"/>\n<path id="paw-right" d="${tTipR.d}" fill="${COLOR.mint}"/>\n</g>\n</svg>\n`
   }
   const held = st.held ? heldGroup(st.held) : ''
+  if (IS2) {
+    const g = gap2[key]
+    const mask = g ? `<mask id="half-paw-gap" maskUnits="userSpaceOnUse" x="${VB.x}" y="${VB.y}" width="${VB.w}" height="${VB.h}"><rect x="${VB.x}" y="${VB.y}" width="${VB.w}" height="${VB.h}" fill="#fff"/><path d="${g.gapD}" fill="#000"/>${g.crumbD ? `<path d="${g.crumbD}" fill="#000"/>` : ''}</mask>\n` : ''
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vbStr(VB)}">\n${NOTE}\n<title>${st.title}</title>\n${mask}<path id="body" d="${tBody.d}" fill="${COLOR.mint}"/>\n<path id="belly" d="${tBelly.d}" fill="${COLOR.pale}"/>\n${head}\n<g id="paws"${g ? ' mask="url(#half-paw-gap)"' : ''}>\n<path id="paw-left" d="${tPawL.d}" fill="${COLOR.mint}"/>\n<path id="paw-right" d="${tPawR.d}" fill="${COLOR.mint}"/>\n</g>\n<g id="held">${held ? `\n${held}\n` : ''}</g>\n${waterRect(WATER_Y)}\n</svg>\n`
+  }
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vbStr(VB)}">\n${NOTE}\n<title>${st.title}</title>\n<mask id="half-paw-gap" maskUnits="userSpaceOnUse" x="${VB.x}" y="${VB.y}" width="${VB.w}" height="${VB.h}"><rect x="${VB.x}" y="${VB.y}" width="${VB.w}" height="${VB.h}" fill="#fff"/><path d="${tGap.d}" fill="#000"/>${crumbs ? `<path d="${crumbs}" fill="#000"/>` : ''}</mask>\n<path id="body" d="${tBody.d}" fill="${COLOR.mint}"/>\n<path id="belly" d="${tBelly.d}" fill="${COLOR.pale}"/>\n${head}\n<g id="held" mask="url(#half-paw-gap)">${held ? `\n${held}\n` : ''}</g>\n<g id="paws">\n<path id="paw-left" d="${tPawL.d}" fill="${COLOR.mint}"/>\n<path id="paw-right" d="${tPawR.d}" fill="${COLOR.mint}"/>\n</g>\n${waterRect(WATER_Y)}\n</svg>\n`
 }
 const FILES = { half: 'otter-half.svg', searching: 'state-searching.svg', offer: 'state-offer.svg', 'not-found': 'state-not-found.svg', login: 'state-login.svg' }
@@ -466,8 +646,30 @@ const FILES = { half: 'otter-half.svg', searching: 'state-searching.svg', offer:
 // 面积小于 CRUMB 的碎块往外扩 3 像素，描成路径并进蒙版里一起挖掉。物件本身的路径不动。
 const CRUMB = 900
 const crumbsOf = {}
-for (const k of Object.keys(FILES)) {
+// 第二轮：物件整形不动，缝只切在爪子上。物件单独栅格化 → 往外扩 GAP → 描成蒙版路径挖爪子；
+// 爪子被挖以后剩下的碎块（面积小于 CRUMB，或开运算去掉的、贴着缝的尖角）扩 3 像素一起挖掉。
+const gap2 = {}
+if (IS2) for (const k of Object.keys(FILES)) {
   if (!STATES[k].held) continue
+  const big = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">${heldGroup(STATES[k].held)}</svg>`
+  const r = await pixelsOf(`<body style="margin:0"><img id="i" src="${uriSvg(big)}">`, W, H)
+  const obj = new Uint8Array(N)
+  for (let i = 0; i < N; i++) obj[i] = r.px[i * 4 + 3] > 127 ? 1 : 0
+  const gapM = morph(obj, GAP, false)
+  const cut = and(pawsAll, not(gapM))
+  const resid = and(cut, not(open(cut, 4)))
+  const near = morph(gapM, 3, false)
+  const { lab, list } = components(resid)
+  const hit = new Set()
+  for (let i = 0; i < N; i++) if (lab[i] && near[i]) hit.add(lab[i])
+  const okIds = new Set(list.filter((c) => c.area >= 40 && hit.has(c.id)).map((c) => c.id))
+  const small = or(keep(cut, (c) => c.area < CRUMB), lab.map((v) => (okIds.has(v) ? 1 : 0)))
+  const tc = trace(morph(small, 3, false), 1, 4)
+  gap2[k] = { gapD: trace(gapM, 2, 50).d, crumbD: tc.d }
+  crumbsOf[k] = { d: '', pieces: tc.loops }
+}
+for (const k of Object.keys(FILES)) {
+  if (IS2 || !STATES[k].held) continue
   const only = build(k).replace(/<path id="body"[^>]*\/>|<path id="belly"[^>]*\/>|<g id="head"[\s\S]*?<\/g><\/g>|<g id="paws">[\s\S]*?<\/g>|<rect id="water"[^>]*\/>/g, '')
   const big = only.replace(/viewBox="[^"]*"/, `viewBox="0 0 ${W} ${H}" width="${W}" height="${H}"`)
   const r = await pixelsOf(`<body style="margin:0;background:#fff"><img id="i" src="${uriSvg(big)}">`, W, H)
@@ -498,12 +700,16 @@ const CSS = `body{margin:0;padding:28px;background:${COLOR.page};font:15px/1.5 s
 // 草图和矢量都按草图像素对齐：矢量的 viewBox 是草图坐标的一段
 const sk = 560 / 1024
 const vbImg = (s, v) => `<img src="${uriSvg(s)}" style="left:${v.x * sk}px;top:${v.y * sk}px;width:${v.w * sk}px;height:${v.h * sk}px">`
-await shot(`<style>${CSS}</style><h1>半身像 · 第一轮：照 M2 半身草图描</h1><p>对比稿 · 提案。左：M2 草图（图像生成）。中：描出来的底稿，头换成头像母版，颜色换成品牌色，手里空着。右：两张叠在一起（矢量半透明），同一个坐标；两只爪子各往外挪了 ${SPREAD} 像素，叠看里能看到错开。</p><div class="g"><figure><img src="${uriPng(SKETCH)}" width="560" height="560"><figcaption>M2 草图</figcaption></figure><figure><div class="ov">${vbImg(svgs.half, VB)}</div><figcaption>otter-half.svg</figcaption></figure><figure><div class="ov"><img src="${uriPng(SKETCH)}" style="left:0;top:0" width="560" height="560"><div style="opacity:.55">${vbImg(svgs.half, VB)}</div></div><figcaption>叠看</figcaption></figure></div>`, 'compare.png', 1840)
-const cell = (k, label) => `<figure style="width:400px"><img src="${uriSvg(svgs[k])}" width="400"><div class="g" style="gap:20px;margin-top:14px;align-items:flex-end"><img src="${uriSvg(svgs[k])}" width="96"><img src="${uriSvg(svgs[k])}" width="64"><img src="${uriSvg(svgs[k])}" width="48"></div><figcaption>${label} · 400 / 96 / 64 / 48 像素宽</figcaption></figure>`
-await shot(`<style>${CSS}.g{align-items:flex-start}</style><h1>半身像 · 四种状态</h1><p>对比稿 · 提案。身体同一份；只换手里的东西。物件是定稿形，按 240 = 头宽，再统一乘 ${HOLD_K}。</p><div class="g">${cell('searching', '找题中 · 圆墩石头')}${cell('offer', '递出结果 · 扇贝')}${cell('not-found', '没找到 · 合着的蛤')}${cell('login', '登录页探头 · 空手')}</div>`, 'states.png', 1840)
+const cmpNote = IS2
+  ? `右：两张叠在一起（矢量半透明）。第二轮在描之前把草图变了形：脖子照坐姿拉长、肩和胳膊收到不比坐姿宽、身体往下补到新水面，所以叠看里下巴以下整体错开，这是有意的。`
+  : `右：两张叠在一起（矢量半透明），同一个坐标；两只爪子各往外挪了 ${SPREAD} 像素，叠看里能看到错开。`
+const SKB = IS2 ? Math.max(1024, VB.y + VB.h) : 1024 // 第二轮矢量比草图长，框子跟着加高
+await shot(`<style>${CSS}.ov{height:${f1(SKB * sk)}px}</style><h1>半身像 · 第${IS2 ? '二' : '一'}轮：照 M2 半身草图描</h1><p>对比稿 · 提案。左：M2 草图（图像生成）。中：描出来的底稿，头换成头像母版，颜色换成品牌色，手里空着。${cmpNote}</p><div class="g"><figure><img src="${uriPng(SKETCH)}" width="560" height="560"><figcaption>M2 草图</figcaption></figure><figure><div class="ov">${vbImg(svgs.half, VB)}</div><figcaption>otter-half.svg</figcaption></figure><figure><div class="ov"><img src="${uriPng(SKETCH)}" style="left:0;top:0" width="560" height="560"><div style="opacity:.55">${vbImg(svgs.half, VB)}</div></div><figcaption>叠看</figcaption></figure></div>`, 'compare.png', 1840)
+const SIZES = IS2 ? [96, 64] : [96, 64, 48]
+const cell = (k, label) => `<figure style="width:400px"><img src="${uriSvg(svgs[k])}" width="400"><div class="g" style="gap:20px;margin-top:14px;align-items:flex-end">${SIZES.map((s) => `<img src="${uriSvg(svgs[k])}" width="${s}">`).join('')}</div><figcaption>${label} · 400 / ${SIZES.join(' / ')} 像素宽</figcaption></figure>`
+const kNote = IS2 ? `各自的系数：石头 ${HOLD_K2['stone-round']}、扇贝 ${HOLD_K2.scallop}、蛤 ${HOLD_K2.clam}；物件画在爪子前面，缝只切在爪子上` : `再统一乘 ${HOLD_K}`
+await shot(`<style>${CSS}.g{align-items:flex-start}</style><h1>半身像 · 四种状态${IS2 ? ' · 第二轮' : ''}</h1><p>对比稿 · 提案。身体同一份；只换手里的东西。物件是定稿形，按 240 = 头宽，${kNote}。</p><div class="g">${cell('searching', '找题中 · 圆墩石头')}${cell('offer', '递出结果 · 扇贝')}${cell('not-found', '没找到 · 合着的蛤')}${cell('login', '登录页探头 · 空手')}</div>`, 'states.png', 1840)
 // 同头宽并排：坐姿的头缩放 0.3261（otter-sit.svg 里头的 transform），viewBox 1024
-const SIT_S = Number((SIT.match(/<g transform="translate\([^)]*\) scale\(([\d.]+)\)">/) || [])[1])
-const SIT_TY = Number((SIT.match(/<g transform="translate\([\d.-]+ ([\d.-]+)\) scale/) || [])[1])
 const HEAD_PX = 220
 const sitW = (HEAD_PX * 1024) / (headBox.w * SIT_S)
 const halfW = (HEAD_PX * VB.w) / HEAD_W
@@ -515,7 +721,6 @@ await browser.close()
 
 // —— 9. 量数 ——
 const visibleH = WATER_Y - toSketchY(headBox.y)
-const headVisH = (HEAD_CLIP_Y - headBox.y) * S // 头顶到母版裁切线（下巴下面）
 const widthAt = (y) => { let x0 = -1; let x1 = -1; for (let x = 0; x < W; x++) if (bodyOnly[y * W + x]) { if (x0 < 0) x0 = x; x1 = x } return x1 - x0 + 1 }
 const f2 = (n) => Math.round(n * 100) / 100
 // 身体宽 / 头宽：脖子下 40、80、120、160、200 行，和水面上 10 行
@@ -531,6 +736,21 @@ console.log(JSON.stringify({
   widthOverHead: widths, widestOverHead: f2(widest / HEAD_W), headOfVisibleExact: f2(headVisH / visibleH),
   crumbs: Object.fromEntries(Object.entries(crumbsOf).map(([k, v]) => [k, v.pieces])), holdK: HOLD_K, stoneKSketch: f1(STONE_K_SKETCH * 100) / 100, gripY: GRIP_Y, bellyTopMid: BELLY_TOP_MID, spread: SPREAD, objects: objScale,
   login: { pawDy: LOGIN_DY, waterY: LOGIN_WATER_Y },
+  round2: IS2 ? (() => {
+    const at = (prof, d) => { let best = prof[0]; for (const p of prof) if (Math.abs(p[0] - d) < Math.abs(best[0] - d)) best = p; return f2(best[1]) }
+    const halfNow = (d) => f2(widthAt(Math.round(CHIN_Y + d * HEAD_W)) / HEAD_W)
+    const cx = Math.round(HOLD_X)
+    let bb = 0
+    for (let y = 0; y < H; y++) if (belly[y * W + cx]) bb = y
+    const tipBox = (m) => { const c = components(m).list[0]; return { x: [c.minX, c.maxX], y: [c.minY, c.maxY], w: c.maxX - c.minX + 1, h: c.maxY - c.minY + 1 } }
+    return {
+      matchPoints: WARP.pts.map(([a, b]) => [f2(a), f2(b)]), d90: { sketch: f2(WARP.dh90), sit: f2(WARP.ds90), insertedPx: f1((WARP.ds90 - WARP.dh90) * HEAD_W) },
+      widthByDepth: Object.fromEntries([0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7].map((d) => [d, { sit: at(WARP.sitProf, d), sketch: at(WARP.halfProf, d), half: halfNow(d) }])),
+      sitMaxW: f2(WARP.sitMax), minScale: f2(Math.min(...WARP.scale)),
+      bellyBottomAtCenter: bb, furBandPx: WATER_Y - 1 - bb, furBandOverHead: f2((WATER_Y - 1 - bb) / HEAD_W), bellyRR: BELLY_RR,
+      placed, loginNeckPx: f1(LOGIN_WATER_Y - chinY), fistR: FIST_R, tipL: tipBox(tipL), tipR: tipBox(tipR),
+    }
+  })() : null,
   nodes: { body: tBody.nodes, belly: tBelly.nodes, pawL: tPawL.nodes, pawR: tPawR.nodes, gap: tGap.nodes, tipL: tTipL.nodes, tipR: tTipR.nodes },
   loops: { body: tBody.loops, belly: tBelly.loops, pawL: tPawL.loops, pawR: tPawR.loops },
   bytes: Object.fromEntries(Object.entries(svgs).map(([k, s]) => [k, s.length])),
