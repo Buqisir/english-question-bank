@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T15:14:41.073Z",
+  "generatedAt": "2026-11-14T15:23:30.834Z",
   "src": "design/brand-2026-10-13/manual/src",
   "out": "design/brand-2026-10-13/manual/视觉规范手册-草案0.7-预览.pdf",
   "font": {
@@ -239,10 +239,10 @@
         }
       ],
       "compare": {
-        "diffPct": 10.75,
+        "diffPct": 10.8,
         "headerPct": 0.42,
-        "bodyPct": 13.01,
-        "footerPct": 2.6
+        "bodyPct": 13.06,
+        "footerPct": 2.63
       }
     },
     {

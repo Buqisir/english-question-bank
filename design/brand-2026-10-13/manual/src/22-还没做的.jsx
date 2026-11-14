@@ -197,7 +197,7 @@
                 重画和重做
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                「完成」已定用 L1 仰躺抱石（第 116 条），没放进 mascot/、没替换 otter-front.svg 和旧状态图 04；半身四张仍是候选、没定稿（第 115 条）；三张巨藻中图停用待重做（第 114 条）；更多原语插画等真有首次空态再做。
+                「完成」已定用 L1 仰躺抱石、眯眼（第 116 条），没放进 mascot/、没替换 otter-front.svg 和旧状态图 04；半身四张仍是候选、没定稿（第 115 条）；巨藻中图停用待重做（第 114 条）；更多原语插画等真有首次空态再做。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>
