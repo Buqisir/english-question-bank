@@ -21,7 +21,7 @@ createRoot(document.getElementById('root')!).render(
       search.get('grammarFillGeometryVariant') ?? undefined
     }
     questionGroupById={new Map()}
-    onAddGroupsToBasket={() => {}}
+    onAddGroupsToBasket={async () => ({ kind: 'none' })}
     currentDraftPaperId={null}
     currentDraftGroupCount={0}
     onOpenDraftPaperWorkbench={() => {}}

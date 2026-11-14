@@ -809,6 +809,13 @@
   color: var(--eqb-color-text-muted, #5A6C75);
 }
 
+/* 里面那一行共用提示行（shared-ui/Notice）居中，宽度跟着字走，窄屏时最多占满一行再截断。 */
+.paper-browse-loading .eqb-notice,
+.paper-browse-error .eqb-notice {
+  margin: 0 auto;
+  width: fit-content;
+}
+
 .paper-browse-placeholder {
   padding: 24px;
   font-size: 12px;
@@ -1691,25 +1698,12 @@
   flex: 1;
 }
 
-.similar-toast {
-  position: fixed;
-  left: 50%;
-  bottom: 26px;
-  transform: translateX(-50%) translateY(8px);
-  background: var(--desk-ink);
-  color: #ffffff;
-  font-size: 12.5px;
-  border-radius: 8px;
-  padding: 9px 16px;
-  opacity: 0;
-  transition: opacity var(--motion-base) var(--ease-out), transform var(--motion-base) var(--ease-out);
-  pointer-events: none;
+/* 「加入草稿卷」之后那一行（.similar-toast）换成了共用提示行 shared-ui/Notice 的 floating 放法：
+   原来的黑底白字条去掉，白底、e3、位置和入退场都由 notice.css 给。
+   覆盖：本条 (0,3,0) 盖过 notice.css floating 那条 (0,2,0) 的 z-index: 30，只改这一项，
+   因为原来这条提示就在 32 层（整卷预览里有 30、31 层的东西，不能被它们压住）。 */
+.similar-rail .eqb-notice.similar-toast {
   z-index: 32;
-}
-
-.similar-toast--on {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1721,11 +1715,7 @@
     transition: none;
   }
 
-  .similar-toast,
-  .similar-toast--on {
-    transform: translateX(-50%);
-    transition: opacity var(--motion-micro) var(--ease-hover);
-  }
+  /* .similar-toast 的减少动态效果由 notice.css 管（只淡入淡出，不挪位置）。 */
 }
 
 /* ─── similar-passages-entry (E6) — shared「相似篇章」候选面板 ───
@@ -2236,12 +2226,5 @@
   .ps-text-trail { display: none; }
 }
 
-.paper-browse-error-back {
-  margin-top: 8px;
-  /* 原来的 1px 描边去掉了：返回键换成 Button（墨字 lg），Button 没有描边的语气（构件厂第 4 步）。 */
-}
-
-.paper-browse-error-detail {
-  font-size: 12px;
-  overflow-wrap: anywhere;
-}
+/* .paper-browse-error-back / .paper-browse-error-detail：整卷预览打不开那一块换成了共用提示行
+   （「返回找题」是行尾的键，原话接在「：」后面），这两条规则拿掉。 */

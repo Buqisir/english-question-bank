@@ -4,7 +4,6 @@ import {
 } from './icons'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
-import { questionGroups as sampleQuestionGroups } from './data/sampleQuestionGroups'
 import {
   type QuestionGroupCard,
   type QuestionGroupDetail,
@@ -29,7 +28,7 @@ import {
   backfillTopicLabels,
   type BackfillTopicLabelsResult,
 } from './services/questionGroups'
-import { PaperBrowsePage } from './features/paper-browse/PaperBrowsePage'
+import { PaperBrowsePage, type AddGroupsOutcome } from './features/paper-browse/PaperBrowsePage'
 import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
 import { MySpacePage } from './features/my-space/MySpacePage'
 import { AdminWorkbench } from './features/admin/AdminWorkbench'
@@ -38,7 +37,7 @@ import { VocabularyPracticePage } from './features/vocabulary-practice/Vocabular
 import { VocabularyDictationWorkbench } from './features/vocabulary-dictation-workbench/VocabularyDictationWorkbench'
 import { VocabularyNotebookPage } from './features/vocabulary-notebook/VocabularyNotebookPage.tsx'
 import { AppTopbar, type AppTopbarNav } from './components/AppTopbar'
-import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest, deleteDraftPaperItem } from './services/draftPapers'
+import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest, deleteDraftPaperItem, fetchCurrentDraftPaper } from './services/draftPapers'
 import { DraftAddContext, type DraftAddActions, type DraftAddReceipt } from './shared-ui/draftAddContext.ts'
 import { useCurrentUser, useIsOwnerView } from './auth/AuthGate.tsx'
 import { logout } from './auth/session.ts'
@@ -192,7 +191,12 @@ function App() {
     }
   })
   const [questionGroups, setQuestionGroups] = useState<QuestionGroupCard[]>([])
-  const [dataStatus, setDataStatus] = useState<'loading' | 'sqlite' | 'sample'>('loading')
+  // 走查第四节第 7 条（Owner 2026-11-14）：题库没拿到时不再悄悄换成仓库里的样例题（原来退到
+  // data/sampleQuestionGroups，首页看着像有题，草稿丸却变成 0 组），改成 'error' + 原话，首页说「题库没连上」给「重试」。
+  const [dataStatus, setDataStatus] = useState<'loading' | 'sqlite' | 'error'>('loading')
+  const [dataError, setDataError] = useState<string | null>(null)
+  // 题库没拿到时草稿丸的数：单独问一次当前草稿卷（不新建）拿真数；问不到就是不知道（不写 0）。
+  const [draftFallback, setDraftFallback] = useState<{ id: string; count: number } | null>(null)
   // Edit-status orchestration is forwarded into usePaperDraft via a ref so the
   // hook can be created BEFORE paperExports / saveStatus / previewStatus
   // setters exist in this scope. The ref is wired up below as soon as the
@@ -253,14 +257,26 @@ function App() {
       if (ignore?.()) return
       setQuestionGroups(groups)
       setDataStatus('sqlite')
-    } catch {
+      setDataError(null)
+    } catch (error) {
       if (ignore?.()) return
-      // Offline fallback only: keep any real data already loaded; show repo
-      // samples only when we have nothing at all to render.
-      setQuestionGroups((current) => (current.length ? current : sampleQuestionGroups))
-      setDataStatus((status) => (status === 'sqlite' ? status : 'sample'))
+      // 已经拿到过真题就留着（状态仍是 sqlite，草稿丸照旧按真题算）；一次都没拿到才算没连上。
+      setDataStatus((status) => (status === 'sqlite' ? status : 'error'))
+      setDataError(error instanceof Error ? error.message : String(error))
+      try {
+        const draft = await fetchCurrentDraftPaper(false)
+        if (ignore?.()) return
+        setDraftFallback({ id: draft.id, count: draft.items.length })
+      } catch (draftError) {
+        // 草稿卷也问不到：草稿丸留着上一次知道的数（没有就不写数）。
+        console.error('读取当前草稿卷', draftError)
+      }
     }
   }, [])
+  const retryQuestionGroups = useCallback(() => {
+    setDataStatus((status) => (status === 'error' ? 'loading' : status))
+    void refreshQuestionGroups()
+  }, [refreshQuestionGroups])
   // Paper export flow hook — manages the supported Print HTML/PDF state and actions.
   const paperExports = usePaperExports({
     basket,
@@ -310,19 +326,17 @@ function App() {
     setSelectedDetail((detail) => (detail && patchesByGroupId.has(detail.id) ? { ...detail, ...patchesByGroupId.get(detail.id) } : detail))
   }
 
-  async function addGroupsToBasket(groups: QuestionGroupCard[]) {
+  // 加入结果交回调用处，由它用共用提示行说（不再弹浏览器警告框，走查「路上的构件」第 1 名）。
+  async function addGroupsToBasket(groups: QuestionGroupCard[]): Promise<AddGroupsOutcome> {
     const addableGroups = groups.filter((group) => group.draftPaperButtonState === 'add' && group.canAddToDraftPaper)
     if (addableGroups.length === 0) {
       const existing = groups.find((group) => group.draftPaperButtonState === 'in_current_draft')
       if (existing) {
         openDraftPaperWorkbench(existing.currentDraftPaperId, existing.id)
-        return
+        return { kind: 'opened' }
       }
       const blocked = groups.find((group) => group.printUnavailableReason)
-      if (blocked) {
-        window.alert(blocked.printUnavailableReason || '该题组暂不可加入草稿卷。')
-      }
-      return
+      return blocked?.printUnavailableReason ? { kind: 'blocked', reason: blocked.printUnavailableReason } : { kind: 'none' }
     }
 
     // Optimistic feedback (docs/cuts/add-to-draft-feel/plan.md): flip each
@@ -367,14 +381,20 @@ function App() {
       }
     }
     if (confirmedPatches.size) patchDraftButtonState(confirmedPatches)
-    if (rollbackPatches.size) {
-      patchDraftButtonState(rollbackPatches)
-      window.alert(firstError instanceof Error ? firstError.message : String(firstError))
-    }
+    if (rollbackPatches.size) patchDraftButtonState(rollbackPatches)
 
     // Background reconciliation only (fire-and-forget) — must not block the
     // button feedback applied above.
     void refreshQuestionGroups()
+    if (rollbackPatches.size) {
+      return {
+        kind: 'failed',
+        addedIds: [...confirmedPatches.keys()],
+        failedIds: [...rollbackPatches.keys()],
+        message: firstError instanceof Error ? firstError.message : String(firstError),
+      }
+    }
+    return { kind: 'added', addedIds: [...confirmedPatches.keys()] }
   }
 
   // 加入键（shared-ui/DraftAddButton）用的加入和撤回，走查第四节第 6 条。
@@ -550,8 +570,14 @@ function App() {
 
   // Derived on render; React Compiler memoizes this (manual useMemo here
   // trips react-hooks/preserve-manual-memoization).
-  const currentDraftPaperId = questionGroups.find((group) => group.currentDraftPaperId)?.currentDraftPaperId || null
-  const currentDraftGroupCount = questionGroups.filter((group) => group.draftPaperButtonState === 'in_current_draft').length
+  // 第 7 条：题库拿到了就按题组算（真数）；没拿到用单独问来的草稿卷；都没有就不知道（草稿丸不写数，不写 0）。
+  const draftCountKnown = dataStatus === 'sqlite' || draftFallback !== null
+  const currentDraftPaperId = dataStatus === 'sqlite'
+    ? questionGroups.find((group) => group.currentDraftPaperId)?.currentDraftPaperId || null
+    : draftFallback?.id ?? null
+  const currentDraftGroupCount = dataStatus === 'sqlite'
+    ? questionGroups.filter((group) => group.draftPaperButtonState === 'in_current_draft').length
+    : draftFallback?.count ?? 0
   // Detail fetch (GET /api/question-groups/:id) omits draftContext, so
   // selectedDetail.draftPaperButtonState lags the list cards that
   // addGroupsToBasket patches via questionGroups. Mirror ConciergeGroupCard:
@@ -1100,7 +1126,7 @@ function App() {
         lecture={paperBrowseRoute.lecture}
         similar={paperBrowseRoute.similar}
         questionGroupById={questionGroupById}
-        onAddGroupsToBasket={(groups) => void addGroupsToBasket(groups)}
+        onAddGroupsToBasket={addGroupsToBasket}
         currentDraftPaperId={currentDraftPaperId}
         currentDraftGroupCount={currentDraftGroupCount}
         onOpenDraftPaperWorkbench={(draftPaperId) => openDraftPaperWorkbench(draftPaperId)}
@@ -1166,6 +1192,8 @@ function App() {
                 onOpenPaperBrowse={(paperId) => openPaperBrowse(paperId)}
                 questionGroups={questionGroups}
                 dataStatus={dataStatus}
+                dataError={dataError}
+                onRetryData={retryQuestionGroups}
                 thinkingMode={aiThinkingMode}
                 onThinkingModeChange={(value) => {
                   setAiThinkingMode(value)
@@ -1201,8 +1229,8 @@ function App() {
         type="button"
         className="basket-chip"
         onClick={() => openDraftPaperWorkbench(currentDraftPaperId)}
-        aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
-        disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
+        aria-label={draftCountKnown ? `打开草稿卷，已选 ${currentDraftGroupCount} 个题组` : '打开草稿卷'}
+        disabled={!currentDraftPaperId || (draftCountKnown && currentDraftGroupCount === 0)}
       >
         <BoardList size={16} />
         {currentDraftGroupCount > 0 && (
@@ -1210,7 +1238,7 @@ function App() {
           <span key={currentDraftGroupCount} className="basket-chip-dot" aria-hidden="true" />
         )}
         <span>
-          草稿卷（{currentDraftGroupCount} 组）
+          {draftCountKnown ? `草稿卷（${currentDraftGroupCount} 组）` : '草稿卷'}
         </span>
       </button>
       )}

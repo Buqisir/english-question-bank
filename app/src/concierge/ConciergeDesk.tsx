@@ -17,7 +17,7 @@
  */
 
 import { useEffect, useId, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react'
-import { AlertTriangle, CornerDownLeft, InfoCircle, QuestionBank, X } from '../icons'
+import { CornerDownLeft, QuestionBank, RotateCcw, X } from '../icons'
 import { EmptyIllustration } from '../components/EmptyIllustration'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
@@ -27,6 +27,7 @@ import { buildDefaultFeed, buildRecentFeed } from './defaultFeed.ts'
 import { HomeContinueSection, HomeDailyPassage } from './ConciergeHomeSections.tsx'
 import { FluidHoverList } from '../components/FluidHoverList.tsx'
 import { Button } from '../shared-ui/Button.tsx'
+import { Notice } from '../shared-ui/Notice.tsx'
 
 /** Fluid hover: an expanded paper row's open body still belongs to its head,
  *  so the highlight stays on that head instead of jumping to the next paper. */
@@ -65,11 +66,15 @@ export type ConciergeDeskProps = {
 
   /**
    * App-level data connection status. While 'loading', the local question bank
-   * is still being fetched and the in-memory list is the bundled sample fixture.
-   * Searching against sample groups can return ids that don't exist in the live
-   * SQLite. We disable submit + show a calm notice until real data is in.
+   * is still being fetched; 'error' means it never loaded (走查第四节第 7 条，Owner 2026-11-14：
+   * 不再悄悄换成仓库里的样例题，直说「题库没连上」并给「重试」）。两种情况下手里都没有真题，
+   * 搜索、浏览都先关着。
    */
-  dataStatus?: 'loading' | 'sqlite' | 'sample'
+  dataStatus?: 'loading' | 'sqlite' | 'error'
+  /** dataStatus 为 'error' 时服务器（或浏览器）的原话，照登在「题库没连上」后面。 */
+  dataError?: string | null
+  /** 「题库没连上」那一行的「重试」。 */
+  onRetryData?: () => void
 
   /** Whether thinking mode is currently enabled for AI search. */
   thinkingMode?: boolean
@@ -197,6 +202,8 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
     onOpenPaperBrowse,
     questionGroups,
     dataStatus,
+    dataError = null,
+    onRetryData,
     thinkingMode,
     onThinkingModeChange,
     browseActive,
@@ -210,7 +217,10 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   const { setIntent, submit, togglePaper } = actions
   const inputId = useId()
   const inputRef = useRef<HTMLInputElement>(null)
-  const dataLoading = dataStatus === 'loading'
+  // dataLoading：手里还没有真题（在连，或没连上），搜索、浏览、默认列表都先关着。
+  const dataLoading = dataStatus === 'loading' || dataStatus === 'error'
+  const dataConnecting = dataStatus === 'loading'
+  const dataDown = dataStatus === 'error'
 
   // similar-passages-entry (E6): full corpus lookup for resolving a「相似
   // 篇章」candidate's groupId to a full QuestionGroupCard — same map App.tsx
@@ -544,11 +554,12 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   }, [showListSurface, dataLoading, inputFocused])
 
   const placeholder = useMemo(() => {
+    if (dataDown) return '题库没连上，暂时搜不了'
     if (dataLoading) return '正在连接本地题库…'
     if (state.kind === 'clarification') return '换个说法，比如：偏说明文 / 主旨概括'
     if (!showListSurface) return ROTATING_PLACEHOLDERS[placeholderIndex]
     return ROTATING_PLACEHOLDERS[0]
-  }, [dataLoading, state, showListSurface, placeholderIndex])
+  }, [dataLoading, dataDown, state, showListSurface, placeholderIndex])
 
   const submitDisabled = dataLoading || state.kind === 'loading' || intent.trim().length === 0
 
@@ -605,11 +616,15 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 disabled={submitDisabled}
                 aria-label="搜索"
                 title="搜索"
+                aria-busy={state.kind === 'loading' || dataConnecting || undefined}
               >
-                {state.kind === 'loading' || dataLoading ? '搜索中…' : <CornerDownLeft size={18} aria-hidden="true" />}
+                {/* 原来等的时候键上换成「搜索中…」，键窄、两行挤着；现在键上始终是图标，
+                    在等什么由下面的提示行说（共用提示行 shared-ui/Notice）。 */}
+                <CornerDownLeft size={18} aria-hidden="true" />
               </button>
             </form>
-            {isHomeScreen && onEnterBrowse && (
+            {/* 题库还没拿到（在连或没连上）时不出这个键：原来会写成「浏览全部 0 套卷」，像是题库空了。 */}
+            {isHomeScreen && onEnterBrowse && !dataLoading && (
               // 构件厂第 4 步第八页：换成 shared-ui/Button 次要灰中号带图标（高 32，原来也是 32）。
               <Button
                 className="concierge-browse-entry"
@@ -684,6 +699,24 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
               </FluidHoverList>
             )}
           </div>
+          {/* 题库的连接状态：命令行下面固定一处，一行（共用提示行）。
+              没连上时不悄悄换成样例题（走查第四节第 7 条），直说并给「重试」；草稿卷在服务器上，不受影响。 */}
+          {(dataConnecting || dataDown) && (
+            <div className="concierge-status-slot">
+              {dataDown ? (
+                <Notice
+                  kind="error"
+                  className="concierge-data-error"
+                  detail={dataError}
+                  action={onRetryData ? { label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: onRetryData } : undefined}
+                >
+                  题库没连上，草稿卷里的题还在
+                </Notice>
+              ) : (
+                <Notice kind="waiting" className="concierge-data-loading">正在连接本地题库，连上就能搜</Notice>
+              )}
+            </div>
+          )}
           {state.kind !== 'empty' && onThinkingModeChange && (
             <label className="concierge-thinking-toggle">
               <input
@@ -737,13 +770,10 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           </ul>
         )}
 
-      {dataLoading && (
+      {dataConnecting && (
         <>
-          <p className="concierge-data-loading" role="status">
-            正在连接本地题库，稍候即可搜索。
-          </p>
           {/* ui-search-feel 刀⑤ #1 — dataLoading skeleton. The status line
-              above carries the a11y state; these blocks are pure visual
+              (.concierge-status-slot under the command bar) carries the a11y state; these blocks are pure visual
               placeholders (aria-hidden) so the first paint isn't a blank
               page while the local SQLite connects. */}
           <ul className="concierge-skeleton-chip-row" aria-hidden="true">
@@ -848,10 +878,9 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       )}
 
       {state.kind === 'results' && state.usedFallback && (
-        <p className="concierge-notice">
-          <InfoCircle size={16} aria-hidden="true" />
-          <span>{pickResultsNoticeLine(isAllWeakResultsState(state), state.assistantMessage, state.fallbackReason)}</span>
-        </p>
+        <Notice kind="info" className="concierge-notice">
+          {pickResultsNoticeLine(isAllWeakResultsState(state), state.assistantMessage, state.fallbackReason)}
+        </Notice>
       )}
 
       {/* C2 (trust-cracks) — 前端空态一个声音: a steward-source (non-fallback)
@@ -867,21 +896,21 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       )}
 
       {state.kind === 'error' && (
-        <div className="concierge-error" role="alert">
-          <AlertTriangle size={16} aria-hidden="true" />
-          <span>
-            搜索暂时连不上，你输入的内容还在。
-            <button type="button" onClick={() => void actions.submit(state.query)}>
-              重试
-            </button>
-          </span>
-        </div>
+        // 连不上搜索不会丢东西（输入还在），不上危险色；后面照登原话（No-Literal-Fallback）。
+        <Notice
+          kind="error"
+          className="concierge-error"
+          detail={state.message}
+          action={{ label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: () => void actions.submit(state.query) }}
+        >
+          搜索没连上，你输入的内容还在
+        </Notice>
       )}
 
       <div className="concierge-results" aria-live="polite">
         {state.kind === 'loading' && (
           <>
-            <p className="concierge-loading">正在为「{state.query}」找题…</p>
+            <Notice kind="waiting" className="concierge-loading">{`正在为「${state.query}」找题…`}</Notice>
             {/* ui-p1-panels #7 — 找题主面状态三缺: an AI search in flight
                 used to blank straight to this one line with nothing else
                 on screen (audit 62 "取题中整屏白屏"). Reuse the same

@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { AlertTriangle, Archive, ArrowDown, ArrowLeftRight, ArrowUp, ChevronDown, Ellipsis, FolderPlus, Loader, PageBreak, PaperCheck, PaperStudent, RotateCcw, Save, Trash } from '../../icons'
+import { Archive, ArrowDown, ArrowLeftRight, ArrowUp, ChevronDown, Ellipsis, FolderPlus, PageBreak, PaperCheck, PaperStudent, RotateCcw, Save, Trash } from '../../icons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { EmptyIllustration } from '../../components/EmptyIllustration'
 import { useModalDialog } from '../../components/useModalDialog'
 import { Button } from '../../shared-ui/Button.tsx'
 import { Menu } from '../../shared-ui/Menu.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, GroupType, MySpaceFolder, QuestionGroupCard } from '../../domain/questionBank'
 import {
   addGroupToDraftPaper,
@@ -71,6 +72,25 @@ type RemovedDraftItem = {
   pageBreakBefore: boolean
 }
 
+// 提示行（shared-ui/Notice）用的出错：自己的话（哪里没成功、东西还在不在）加服务器原话，
+// 不另写兜底的话（No-Literal-Fallback）。describeError 照旧把错打到 console。
+type Failure = { lead: string; detail: string; retry?: () => void }
+
+function errorText(error: unknown): string {
+  return error instanceof Error ? error.message : String(error)
+}
+
+function failure(task: string, error: unknown, keep?: string): Failure {
+  describeError(task, error)
+  return { lead: keep ? `${task}没成功，${keep}` : `${task}没成功`, detail: errorText(error) }
+}
+
+// 只放得下一个字符串的地方（保存状态的 title、读屏名字、⋯ 面板那一行）用。
+function failureLine(task: string, error: unknown): string {
+  const { lead, detail } = failure(task, error)
+  return `${lead}：${detail}`
+}
+
 // 走查卡点 4（Owner 2026-11-14 第四节第 4 条）：「PDF 版本」菜单里用不了的版本写一行原因。
 // 判定和原话都来自服务器（preparePaperProduct，和预览、下载同一套）；这里只把认得的那几条
 // 判定（按 code）换成老师的话，各句只说那条判定真正查的东西。认不得的 code 照登服务器原话。
@@ -99,6 +119,14 @@ function clearLegacyBasket() {
   window.localStorage.removeItem(ASSEMBLY_BASKET_STORAGE_KEY)
 }
 
+// 一次挪动只发一次分页请求（Owner 2026-11-14，fix-waiting/README.md「为什么要等一两分钟」第 3 条）：
+// 服务器保存题组表时把 order_index 按新顺序重编成 1..n（server/draft-paper/draftPaperStore.mjs
+// updateDraftPaper + normalizeDraftItemOrder）。乐观更新这边也照样重编，PATCH 回来的题组表和
+// 乐观的那份 itemsLayoutKey 一样，就不会因为编号不同再触发一次分页请求。
+function renumberItems(items: DraftPaperItem[]): DraftPaperItem[] {
+  return items.map((item, index) => (item.orderIndex === index + 1 ? item : { ...item, orderIndex: index + 1 }))
+}
+
 function reorderItems(items: DraftPaperItem[], itemId: string, direction: -1 | 1) {
   const index = items.findIndex((item) => item.id === itemId)
   const nextIndex = index + direction
@@ -106,7 +134,7 @@ function reorderItems(items: DraftPaperItem[], itemId: string, direction: -1 | 1
   const next = [...items]
   const [item] = next.splice(index, 1)
   next.splice(nextIndex, 0, item)
-  return next
+  return renumberItems(next)
 }
 
 function moveItemTo(items: DraftPaperItem[], draggedId: string, targetId: string) {
@@ -117,7 +145,7 @@ function moveItemTo(items: DraftPaperItem[], draggedId: string, targetId: string
   const next = [...items]
   const [item] = next.splice(from, 1)
   next.splice(to, 0, item)
-  return next
+  return renumberItems(next)
 }
 
 export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode {
@@ -132,11 +160,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [titleDraft, setTitleDraft] = useState('')
   const [studentLabelDraft, setStudentLabelDraft] = useState('')
   const [loadStatus, setLoadStatus] = useState<'loading' | 'loaded' | 'error'>('loading')
-  const [loadError, setLoadError] = useState('')
+  const [loadError, setLoadError] = useState<Failure | null>(null)
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [saveError, setSaveError] = useState('')
   const [exportStatus, setExportStatus] = useState<'idle' | 'exporting' | 'exported' | 'error'>('idle')
-  const [exportError, setExportError] = useState('')
+  const [exportError, setExportError] = useState<Failure | null>(null)
   const [exportSuccessMessage, setExportSuccessMessage] = useState('')
   const [spaceDialogOpen, setSpaceDialogOpen] = useState(false)
   // motion-press-exit #2: 弹层退出 ~120ms（var(--motion-fast)）播完再卸载。
@@ -212,7 +240,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // 也算「正在重排」，卷面先盖上遮罩，不让老师点完看不到任何变化。
   const [layoutSavesPending, setLayoutSavesPending] = useState(0)
   const [paginationStatus, setPaginationStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
-  const [paginationError, setPaginationError] = useState('')
+  const [paginationError, setPaginationError] = useState<Failure | null>(null)
   // print-form (plan.md Must Do 5, PO-1 收账): real, pagination-derived
   // page-break suggestions, refreshed on every pagination fetch (including a
   // print-form toggle alone — see the pagination-fetch effect's dependency
@@ -313,7 +341,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
 
   const loadDraft = useCallback(async () => {
     setLoadStatus('loading')
-    setLoadError('')
+    setLoadError(null)
     setMigrationNotice('')
     // popstate switch path (parent-prop change re-runs loadDraft): the
     // [loadDraft] effect cleanup clears the undo TIMERS but not the undo
@@ -353,7 +381,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (generation !== draftGenerationRef.current) return
       setLoadStatus('error')
-      setLoadError(describeError('打开草稿卷', error))
+      setLoadError(failure('打开草稿卷', error, '卷里的题组没动'))
     }
   }, [draftPaperId, loadRecentDrafts, resetTransientStateForDraftSwitch])
 
@@ -523,6 +551,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     [editionAvailability, availabilitySurface],
   )
   const paginationKey = JSON.stringify([draftGeneration, draftPaper?.id, draftPaper?.title, itemsLayoutKey, edition, draftPaper?.printForm, paginationRetry])
+  // 一次挪动只发一次分页请求（fix-waiting/README.md「为什么要等一两分钟」第 3 条）：题组表的保存
+  // （persistItems、withLayoutSave 包着的那几处）还没回来时不发分页请求，等服务器回了题组表再按它发一次。
+  const layoutSaveInFlight = layoutSavesPending > 0
 
   // Debounce layout edits, invalidating in-flight results before the delay.
   useEffect(() => {
@@ -538,13 +569,16 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       paginationRequestIdRef.current += 1
       setPaginatedHtml('')
       setPaginationStatus('idle')
-      setPaginationError('')
+      setPaginationError(null)
       setPageBreakSuggestions([])
     }
     if (!draftPaper || draftPaper.items.length === 0) {
       resetPagination()
       return
     }
+    if (layoutSaveInFlight) return
+    // 保存回来、题组表和已经排好的那份一样（比如保存失败退回原样）：不用再排一次。
+    if (renderedPaginationKey === paginationKey && paginationStatus === 'ready') return
     const draftPaperId = draftPaper.id
     paginationDebounceRef.current = window.setTimeout(() => {
       if (generation !== draftGenerationRef.current) return
@@ -556,7 +590,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           setRenderedPaginationKey(paginationKey)
           setRenderedSurfaceKey(surfaceKey)
           setPaginationStatus('ready')
-          setPaginationError('')
+          setPaginationError(null)
           setPageBreakSuggestions(result.pageBreakSuggestions)
         })
         .catch((error) => {
@@ -566,8 +600,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           setRenderedPaginationKey(paginationKey)
           setPaginationStatus('error')
           setPaginationError(edition === 'answerOnly'
-            ? `纯答案版不可用：${error instanceof Error ? error.message : '无法读取同版本源参考答案。'}`
-            : describeError('生成分页预览', error))
+            ? { lead: '纯答案版不可用', detail: errorText(error) }
+            : failure('排卷面', error))
         })
     }, 400)
     return () => {
@@ -580,7 +614,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     // is deliberately excluded from the render signature, see
     // draftPaperStore.mjs's getDraftPaperPagination doc comment).
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paginationKey])
+  }, [paginationKey, layoutSaveInFlight])
 
   // reorder-suggest (plan.md 施工契约 3 "拉取策略"): fires only once the
   // pagination fetch above has resolved with real breakage — never on its
@@ -916,7 +950,12 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     return () => observer.disconnect()
   }, [previewHtml, draftPaper?.printForm])
 
-  async function persistItems(nextItems: DraftPaperItem[]) {
+  // 题组表的保存也算「正在重排」（withLayoutSave）：卷面先盖遮罩，分页请求等它回来再发。
+  function persistItems(nextItems: DraftPaperItem[]) {
+    return withLayoutSave(() => persistItemsNow(nextItems))
+  }
+
+  async function persistItemsNow(nextItems: DraftPaperItem[]) {
     if (!draftPaper || !isCurrentDraft()) return false
     setSaveStatus('saving')
     setSaveError('')
@@ -933,7 +972,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (!isCurrentDraft()) return false
       setSaveStatus('error')
-      setSaveError(describeError('保存草稿卷', error))
+      setSaveError(failureLine('保存草稿卷', error))
       return false
     }
   }
@@ -954,7 +993,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       } catch (error) {
         if (!isCurrentDraft()) return
         setSaveStatus('error')
-        setSaveError(describeError('保存标题', error))
+        setSaveError(failureLine('保存标题', error))
       }
     }, 450)
   }
@@ -978,7 +1017,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (!isCurrentDraft()) return
       setSaveStatus('error')
-      setSaveError(describeError('保存学生', error))
+      setSaveError(failureLine('保存学生', error))
     }
   }
 
@@ -1004,7 +1043,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       if (!isCurrentDraft()) return
       setDraftPaper(previous)
       setSaveStatus('error')
-      setSaveError(describeError('切换打印形态', error))
+      setSaveError(failureLine('切换打印形态', error))
     }
   }
 
@@ -1073,7 +1112,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (!isCurrentDraft()) return
       setSaveStatus('error')
-      setSaveError(describeError('更新分页设置', error))
+      setSaveError(failureLine('更新分页设置', error))
     }
   }
 
@@ -1104,7 +1143,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (!isCurrentDraft()) return
       setSaveStatus('error')
-      setSaveError(describeError('删除题组', error))
+      setSaveError(failureLine('删除题组', error))
     }
   }
 
@@ -1129,7 +1168,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (!isCurrentDraft()) return
       setSaveStatus('error')
-      setSaveError(describeError('撤销删除', error))
+      setSaveError(failureLine('撤销删除', error))
     }
   }
 
@@ -1154,7 +1193,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     // draft changed underneath it, tack on anything the order missed rather
     // than silently dropping an item.
     const coveredIds = new Set(orderedItems.map((item) => item.id))
-    const nextItems = [...orderedItems, ...draftPaper.items.filter((item) => !coveredIds.has(item.id))]
+    const nextItems = renumberItems([...orderedItems, ...draftPaper.items.filter((item) => !coveredIds.has(item.id))])
     setDraftPaper({ ...draftPaper, items: nextItems })
     // 先在原处变成「已采用」，保存在后台走；保存失败就收起（报错走 saveError）。
     setReorderRestoredText(null)
@@ -1270,7 +1309,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         setDraftPaper(inserted)
         setTitleDraft(inserted.title)
         setSaveStatus('error')
-        setSaveError(describeError('替换第二步（移除原篇）', error) + '——新篇已加入，原篇仍在卷中，可手动移除原篇完成替换')
+        setSaveError(failureLine('替换第二步（移除原篇）', error) + '——新篇已加入，原篇仍在卷中，可手动移除原篇完成替换')
         onDraftChanged?.()
         setSwapSeedItemId(null)
         setSwapRequest(null)
@@ -1308,7 +1347,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (!isCurrentDraft()) return
       setSaveStatus('error')
-      setSaveError(describeError('替换题组', error))
+      setSaveError(failureLine('替换题组', error))
     }
   }
 
@@ -1336,7 +1375,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (!isCurrentDraft()) return
       setSaveStatus('error')
-      setSaveError(describeError('撤销替换', error))
+      setSaveError(failureLine('撤销替换', error))
     }
   }
 
@@ -1370,14 +1409,14 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (!isCurrentDraft()) return
       setSaveStatus('error')
-      setSaveError(describeError('加入草稿卷', error))
+      setSaveError(failureLine('加入草稿卷', error))
     }
   }
 
   async function exportPdf(mode: FileSaveMode = 'download') {
     if (!draftPaper || draftPaper.items.length === 0) return
     setExportStatus('idle')
-    setExportError('')
+    setExportError(null)
     setExportSuccessMessage('')
     try {
       const target = await prepareFileSaveTarget({
@@ -1387,23 +1426,22 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       })
       if (!target) return
       setExportStatus('exporting')
-      const { crossingGroupCount, splitOptionBankCount, fontSizePt } = await downloadDraftPaperPdf(draftPaper.id, edition, target)
+      // 走查第四节第 8 条（Owner 2026-11-14）：下载成功只说「已下载：文件名」。原来接在后面的排版检查
+      // （字号、跨 A3 正反面的题组数、跨页的选项组数）不在这里说了；放到卷面上对应那一页要改卷面，
+      // 等 Owner 定（fix-notice/README.md「第 8 条」）。服务器照旧在响应头里给这几个数。
+      const { fileName } = await downloadDraftPaperPdf(draftPaper.id, edition, target)
       setExportStatus('exported')
-      const savedMessage = target.kind === 'download'
-        ? target.fallbackFromSaveAs ? '当前浏览器不支持系统另存为，已改为普通下载。' : 'PDF 已开始下载。'
-        : 'PDF 已保存到所选位置。'
-      const longPaper = edition === 'largeComplete' || edition === 'largeNoListening'
-      setExportSuccessMessage(savedMessage + (fontSizePt ? ` 本卷采用${fontSizePt === 12 ? '小四（12pt）' : '五号（10.5pt）'}。` : '') + (crossingGroupCount > 0
-        ? ` ${longPaper ? '已满足长卷页数上限' : '已保持指定页数'}和正文版式，仍有 ${crossingGroupCount} 个题组跨 A3 正反面，请检查分页。` : '')
-        + (splitOptionBankCount > 0 ? ` ${longPaper ? '' : '为保持指定页数，'}有 ${splitOptionBankCount} 个选项组跨页，单条选项保持完整，请检查。` : ''))
+      setExportSuccessMessage(target.kind === 'download' ? `已下载：${fileName}` : `已保存：${fileName}`)
     } catch (error) {
       setExportStatus('error')
       const fixedLayoutMessage = error instanceof Error
         && /^(未在有界搜索内找到|大字完整版需要|无法生成指定页数的友好 PDF：|长卷版未找到|长卷版：|定页版需要|10 页友好版需要完整|12 页长卷版需要完整|试卷内容超出排版区域：)/.test(error.message)
-        ? error.message : null
+      // 版本用不了、版式凑不出来，再点一次结果一样，不给「重试」。
       setExportError(edition === 'answerOnly'
-        ? `纯答案版不可用：${error instanceof Error ? error.message : '无法读取同版本源参考答案。'}`
-        : fixedLayoutMessage || describeError(mode === 'save-as' ? '另存为 PDF' : '导出 PDF', error))
+        ? { lead: '纯答案版不可用', detail: errorText(error) }
+        : fixedLayoutMessage
+          ? { lead: `${PAPER_PDF_PRODUCTS[edition]}出不来，草稿卷没动`, detail: errorText(error) }
+          : { ...failure(mode === 'save-as' ? '另存为 PDF' : '导出 PDF', error, '草稿卷没动'), retry: () => void exportPdf(mode) })
     }
   }
 
@@ -1420,7 +1458,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setSpaceStatus('idle')
     } catch (error) {
       setSpaceStatus('error')
-      setSpaceMessage(describeError('读取个人空间文件夹', error))
+      setSpaceMessage(failureLine('读取个人空间文件夹', error))
     }
   }
 
@@ -1437,7 +1475,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setSpaceStatus('idle')
     } catch (error) {
       setSpaceStatus('error')
-      setSpaceMessage(describeError('新建文件夹', error))
+      setSpaceMessage(failureLine('新建文件夹', error))
     }
   }
 
@@ -1457,13 +1495,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setSpaceDialogOpen(false)
       setSpaceStatus('idle')
       if (savedToastTimerRef.current) window.clearTimeout(savedToastTimerRef.current)
-      setSavedToastMessage('已保存到个人空间。')
+      setSavedToastMessage('已保存到个人空间')
       savedToastTimerRef.current = window.setTimeout(() => setSavedToastMessage(null), 6000)
     } catch (error) {
       setSpaceStatus('error')
       setSpaceMessage(edition === 'answerOnly'
-        ? `纯答案版保存失败：${error instanceof Error ? error.message : '无法读取同版本源参考答案。'}`
-        : describeError('保存到个人空间', error))
+        ? `纯答案版没保存：${errorText(error)}`
+        : failureLine('保存到个人空间', error))
     }
   }
 
@@ -1471,7 +1509,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     return (
       <>
         <AppTopbar {...props.shellNav} pageTitle="草稿卷" onBack={onBackToWorkbench} />
-        <main className="draft-workbench-shell"><p className="draft-loading" role="status" aria-live="polite">正在打开草稿卷…</p></main>
+        <main className="draft-workbench-shell">
+          <div className="draft-notice-slot is-page">
+            <Notice kind="waiting" className="draft-loading">正在打开草稿卷…</Notice>
+          </div>
+        </main>
       </>
     )
   }
@@ -1481,7 +1523,18 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       <>
         <AppTopbar {...props.shellNav} pageTitle="草稿卷" onBack={onBackToWorkbench} />
         <main className="draft-workbench-shell">
-          <p className="draft-error">{loadError || '没找到这份草稿卷，可能已被删除。回到找题页重新组一份吧。'}</p>
+          <div className="draft-notice-slot is-page">
+            {loadError ? (
+              <Notice kind="error" className="draft-error" detail={loadError.detail} action={{ label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: () => void loadDraft() }}>
+                {loadError.lead}
+              </Notice>
+            ) : (
+              // 打开成功但没拿到草稿卷：不是出错，是真没有。
+              <Notice kind="info" className="draft-error" action={{ label: '回找题页', onClick: onBackToWorkbench }}>
+                没找到这份草稿卷，可能已被删除
+              </Notice>
+            )}
+          </div>
         </main>
       </>
     )
@@ -1519,7 +1572,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             description: unavailable ? editionUnavailableText(verdict) || undefined : undefined,
             onSelect: () => {
               setEdition(value)
-              setExportError('')
+              setExportError(null)
               setExportSuccessMessage('')
             },
           }
@@ -1653,7 +1706,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       }).catch((error) => {
                         if (generation !== draftGenerationRef.current) return
                         setSaveStatus('error')
-                        setSaveError(describeError('切换草稿卷', error))
+                        setSaveError(failureLine('切换草稿卷', error))
                       })
                     }}
                   >
@@ -1662,7 +1715,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                     ))}
                   </select>
                 </label>
-                {saveStatus === 'error' && <p className="draft-error">{saveError}</p>}
+                {/* 保存出错是「没保存」，按 DESIGN.md §5 Notices 上危险色。 */}
+                {saveStatus === 'error' && <Notice kind="error" danger className="draft-error">{saveError}</Notice>}
                 {/* Locked Decision 5 窄屏退化补充: ≤980px 时 A4/A3 与版本切换
                     一并被「⋯」吸收——duplicated mounts of the same controls,
                     shown only at that breakpoint (see CSS). */}
@@ -1680,12 +1734,30 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       }
     />
     <div className="draft-workbench-shell">
-      {draftPaper.items.length === 0 && (
-        <p className="draft-empty-export" role="status">请先添加题组，再下载 PDF 用于打印。</p>
+      {/* 共用提示行（shared-ui/Notice）：卷头行之下、纸面之上一个固定位置，左右边距和下面的排序建议卡一样
+          （.draft-notice-slot）。一次只出一条：导出的结果（出错 / 生成中 / 已下载）排在前面。 */}
+      {(draftPaper.items.length === 0 || migrationNotice || exportStatus !== 'idle') && (
+        <div className="draft-notice-slot">
+          {exportStatus === 'error' && exportError ? (
+            <Notice
+              kind="error"
+              className="draft-error"
+              detail={exportError.detail}
+              action={exportError.retry ? { label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: exportError.retry } : undefined}
+            >
+              {exportError.lead}
+            </Notice>
+          ) : exportStatus === 'exporting' ? (
+            <Notice kind="waiting">正在生成 PDF…</Notice>
+          ) : exportStatus === 'exported' ? (
+            <Notice kind="success" className="draft-success">{exportSuccessMessage}</Notice>
+          ) : draftPaper.items.length === 0 ? (
+            <Notice kind="info" className="draft-empty-export">先加题组，才能下载 PDF</Notice>
+          ) : migrationNotice ? (
+            <Notice kind="info" className="draft-warning">{migrationNotice}</Notice>
+          ) : null}
+        </div>
       )}
-      {migrationNotice && <p className="draft-warning" role="status">{migrationNotice}</p>}
-      {exportStatus === 'error' && <p className="draft-error">{exportError}</p>}
-      {exportStatus === 'exported' && <p className="draft-success">{exportSuccessMessage}</p>}
 
       {/* reorder-suggest (plan.md 施工契约 3 "卡"): 卷头行之下、纸面之上 —
           same slot as the notices above, ahead of <main>'s preview desk. */}
@@ -1785,27 +1857,36 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       一行原因和「重试」。遮罩挂在 .draft-a4-sheet 上、iframe 外面，
                       不进卷面，也不进服务器出的打印稿和 PDF。 */}
                   <div className={`draft-a4-wait${previewStale ? ' is-waiting' : ''}`} hidden={!previewStale && !previewFailed}>
-                    <p className="draft-a4-wait-line" role="status">
-                      {previewStale ? (
-                        <>
-                          <Loader size={16} aria-hidden="true" />
-                          <span>正在重排卷面，旧卷面先留着…</span>
-                        </>
-                      ) : previewFailed ? (
-                        <>
-                          <AlertTriangle size={16} aria-hidden="true" />
-                          <span>{paginationError}下面还是改之前的卷面。</span>
-                          <Button tone="strong" size="sm" icon={<RotateCcw size={16} aria-hidden="true" />} onClick={() => setPaginationRetry((count) => count + 1)}>
-                            重试
-                          </Button>
-                        </>
-                      ) : null}
-                    </p>
+                    {/* 共用提示行的 over 放法（垫桌色、e1）；sticky 的位置仍由 .draft-a4-wait-line 给。 */}
+                    {previewStale ? (
+                      <Notice kind="waiting" placement="over" className="draft-a4-wait-line">正在重排卷面，旧卷面先留着…</Notice>
+                    ) : previewFailed && paginationError ? (
+                      <Notice
+                        kind="error"
+                        placement="over"
+                        className="draft-a4-wait-line"
+                        detail={paginationError.detail}
+                        action={{ label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: () => setPaginationRetry((count) => count + 1) }}
+                      >
+                        {`${paginationError.lead}，下面还是改之前的卷面`}
+                      </Notice>
+                    ) : null}
                   </div>
                 </>
               ) : (
                 <div className="draft-a4-empty">
-                  {renderedPaginationKey === paginationKey && paginationStatus === 'error' ? paginationError || '分页预览生成失败，请稍后重试。' : '正在生成分页预览…'}
+                  {renderedPaginationKey === paginationKey && paginationStatus === 'error' && paginationError ? (
+                    <Notice
+                      kind="error"
+                      detail={paginationError.detail}
+                      // 纯答案版不可用时再排一次结果一样，不给「重试」。
+                      action={edition === 'answerOnly' ? undefined : { label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: () => setPaginationRetry((count) => count + 1) }}
+                    >
+                      {paginationError.lead}
+                    </Notice>
+                  ) : (
+                    <Notice kind="waiting">正在生成分页预览…</Notice>
+                  )}
                 </div>
               )}
             </div>
@@ -1926,51 +2007,54 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         </section>
       </main>
 
+      {/* 撤销、刚保存这类临时提示：共用提示行的 floating 放法（白底、e3、视口底部正中），
+          入场退场照旧由 useToastPresence / usePresence 给 data-visible。类名 draft-undo-toast 留作挂钩。 */}
       {removedItemToast.rendered && (
-        <div className="draft-undo-toast" role="status" data-visible={removedItemToast.visible}>
-          {/* C8 (trust-cracks) — 措辞更新: 动作按钮本就叫"移除"；题组仍在
-              题库里，undo 只是撤回本卷的移出动作，旧文案"删除"二字读起来
-              像题目本身被销毁了，故改为下面这句。 */}
-          <span>题组已移出</span>
-          <button type="button" onClick={undoDelete}>
-            <RotateCcw size={14} /> 撤销
-          </button>
-        </div>
+        // C8 (trust-cracks) — 措辞：题组仍在题库里，撤销只是撤回本卷的移出动作，不说「删除」。
+        <Notice
+          kind="undo"
+          placement="floating"
+          className="draft-undo-toast"
+          data-visible={removedItemToast.visible}
+          action={{ label: '撤销', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: undoDelete }}
+        >
+          题组已移出
+        </Notice>
       )}
-      {/* similar-workbench-swap (E7, plan.md "替换这篇...可撤销"): same
-          undo-toast shape as removedItemToast above, keyed off
-          replaceUndoSnapshot's own presence. */}
+      {/* similar-workbench-swap (E7, plan.md "替换这篇...可撤销"). */}
       {replaceUndoToastPresence.mounted && (
-        <div className="draft-undo-toast" role="status" data-visible={replaceUndoToastPresence.visible}>
-          <span>已替换这篇</span>
-          <button type="button" onClick={() => void undoSwapReplace()}>
-            <RotateCcw size={14} /> 撤销
-          </button>
-        </div>
+        <Notice
+          kind="undo"
+          placement="floating"
+          className="draft-undo-toast"
+          data-visible={replaceUndoToastPresence.visible}
+          action={{ label: '撤销', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: () => void undoSwapReplace() }}
+        >
+          已替换这篇
+        </Notice>
       )}
-      {/* similar-workbench-swap (E7, plan.md "加入...沿用「已加入」语言，
-          无撤销"): plain toast, no action button — mirrors
-          SimilarPassagesPanel's own handleAdd toast shape/timer (2200ms). */}
+      {/* similar-workbench-swap (E7, plan.md "加入...沿用「已加入」语言，无撤销"). */}
       {swapAddToastPresence.rendered && (
-        <div className="draft-undo-toast" role="status" data-visible={swapAddToastPresence.visible}>
-          <span>{swapAddToastPresence.rendered}</span>
-        </div>
+        <Notice kind="success" placement="floating" className="draft-undo-toast" data-visible={swapAddToastPresence.visible}>
+          {swapAddToastPresence.rendered}
+        </Notice>
       )}
       {savedToastPresence.rendered && (
-        <div className="draft-undo-toast" role="status" data-visible={savedToastPresence.visible}>
-          <span>{savedToastPresence.rendered}</span>
-          {shellNav.onOpenMySpace && (
-            <button
-              type="button"
-              onClick={() => {
-                setSavedToastMessage(null)
-                shellNav.onOpenMySpace?.()
-              }}
-            >
-              查看个人空间
-            </button>
-          )}
-        </div>
+        <Notice
+          kind="success"
+          placement="floating"
+          className="draft-undo-toast"
+          data-visible={savedToastPresence.visible}
+          action={shellNav.onOpenMySpace ? {
+            label: '查看个人空间',
+            onClick: () => {
+              setSavedToastMessage(null)
+              shellNav.onOpenMySpace?.()
+            },
+          } : undefined}
+        >
+          {savedToastPresence.rendered}
+        </Notice>
       )}
       {spaceDialogPresence.mounted && (
         <dialog
@@ -2029,8 +2113,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 新建
               </Button>
             </div>
-            {spaceStatus === 'loading' && <p className="draft-dialog-note">正在读取文件夹...</p>}
-            {spaceStatus === 'error' && <p className="draft-error">{spaceMessage}</p>}
+            {spaceStatus === 'loading' && <Notice kind="waiting" className="draft-dialog-note">正在读取文件夹…</Notice>}
+            {spaceStatus === 'error' && <Notice kind="error" className="draft-error">{spaceMessage}</Notice>}
             <div className="draft-dialog-actions">
               <Button tone="strong" size="lg" onClick={() => setSpaceDialogOpen(false)}>取消</Button>
               <Button

@@ -22,7 +22,8 @@ export async function fetchQuestionGroups() {
   const response = await fetch(apiPath('/api/question-groups'))
 
   if (!response.ok) {
-    throw new Error(`Failed to load question groups: ${response.status}`)
+    // 首页「题库没连上」后面照登服务器原话（走查第四节第 7 条）；服务器没给原话才用这句带状态码的。
+    throw new Error(await readErrorMessage(response, `Failed to load question groups: ${response.status}`))
   }
 
   const data = (await response.json()) as QuestionGroupsResponse

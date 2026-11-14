@@ -59,6 +59,7 @@
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { ArrowLeft, BoardList, ExternalLink, Presentation, RefreshCw, Scissors } from '../../icons'
 import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { ensurePaperFonts, PaperFontError } from '../../shared-ui/papersurface/paperFontLoader'
@@ -198,6 +199,7 @@ import { fetchSimilarPassages, fetchSimilarQuestions } from '../../services/simi
 import {
   SimilarQuestionsRailView,
   type SimilarRailRequestState,
+  type SimilarToast,
 } from './SimilarQuestionsRailView'
 import { applyPaperSurfaceFocusIntent } from './paperBrowseFocusIntent'
 import { usePaperSelectionTranslation } from './selection/usePaperSelectionTranslation'
@@ -371,6 +373,14 @@ type SimilarSeedSnapshot = {
   recipeSummary: string
 }
 
+/** App.addGroupsToBasket 的结果。 */
+export type AddGroupsOutcome =
+  | { kind: 'added'; addedIds: string[] }
+  | { kind: 'failed'; addedIds: string[]; failedIds: string[]; message: string }
+  | { kind: 'blocked'; reason: string }
+  | { kind: 'opened' }
+  | { kind: 'none' }
+
 export type PaperBrowsePageProps = {
   paperId: string
   /** Import review only: read the immutable Candidate revision through the
@@ -397,7 +407,8 @@ export type PaperBrowsePageProps = {
   grammarFillGeometryVariantId?: string
   /** App's loaded questionGroups, keyed by id (== paper-asset groupId). */
   questionGroupById: Map<string, QuestionGroupCard>
-  onAddGroupsToBasket: (groups: QuestionGroupCard[]) => void
+  /** 加入草稿卷；结果交回来，由「配相似」栏用共用提示行说（成功、没加入的原话），不弹浏览器警告框。 */
+  onAddGroupsToBasket: (groups: QuestionGroupCard[]) => Promise<AddGroupsOutcome>
   currentDraftPaperId: string | null
   currentDraftGroupCount: number
   onOpenDraftPaperWorkbench: (draftPaperId?: string | null) => void
@@ -821,7 +832,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const [similarSeed, setSimilarSeed] = useState<SimilarSeedSnapshot | null>(null)
   const [similarRequest, setSimilarRequest] = useState<SimilarRailRequestState>({ status: 'loading' })
   const [similarSelectedGroupIds, setSimilarSelectedGroupIds] = useState<Set<string>>(new Set())
-  const [similarToast, setSimilarToast] = useState<string | null>(null)
+  const [similarToast, setSimilarToast] = useState<SimilarToast | null>(null)
   const scrollerRef = useRef<HTMLDivElement | null>(null)
   const paperSelection = usePaperSelectionTranslation({
     paperId,
@@ -2478,15 +2489,35 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     })
   }
 
-  function handleSimilarAddToDraft(): void {
+  // 原来不等加入结果就说「已把 N 篇加入草稿卷」，加入失败时另弹一个浏览器警告框（两句互相打架）。
+  // 现在等结果：成功说加入了几篇（2.2 秒后收起）；没加入的照登原话、留着勾选、给「重试」，不自动收起。
+  async function handleSimilarAddToDraft(): Promise<void> {
     const cards = [...similarSelectedGroupIds]
       .map((groupId) => questionGroupById.get(groupId))
       .filter((card): card is QuestionGroupCard => Boolean(card))
     if (cards.length === 0) return
-    onAddGroupsToBasket(cards)
-    setSimilarSelectedGroupIds(new Set())
     if (similarToastTimeoutRef.current != null) window.clearTimeout(similarToastTimeoutRef.current)
-    setSimilarToast(`已把 ${cards.length} 篇加入草稿卷，题目一并带上`)
+    setSimilarToast(null)
+    const outcome = await onAddGroupsToBasket(cards)
+    if (outcome.kind === 'failed') {
+      setSimilarSelectedGroupIds(new Set(outcome.failedIds))
+      setSimilarToast({
+        kind: 'error',
+        text: outcome.addedIds.length > 0
+          ? `加入了 ${outcome.addedIds.length} 篇，${outcome.failedIds.length} 篇没加入，还勾着`
+          : `${outcome.failedIds.length} 篇没加入草稿卷，还勾着`,
+        detail: outcome.message,
+        retry: () => void handleSimilarAddToDraft(),
+      })
+      return
+    }
+    if (outcome.kind === 'blocked') {
+      setSimilarToast({ kind: 'error', text: '没加入草稿卷', detail: outcome.reason })
+      return
+    }
+    setSimilarSelectedGroupIds(new Set())
+    if (outcome.kind !== 'added') return
+    setSimilarToast({ kind: 'success', text: `已把 ${outcome.addedIds.length} 篇加入草稿卷，题目一并带上` })
     similarToastTimeoutRef.current = window.setTimeout(() => setSimilarToast(null), 2200)
   }
 
@@ -4102,7 +4133,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     return (
       <div className="paper-browse-page">
         <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />
-        <div className="paper-browse-loading" role="status" aria-live="polite">正在打开整卷…</div>
+        <div className="paper-browse-loading">
+          <Notice kind="waiting">正在打开整卷…</Notice>
+        </div>
       </div>
     )
   }
@@ -4111,18 +4144,17 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     return (
       <div className="paper-browse-page">
         <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />
-        <div className="paper-browse-error" role="main">
-          <h2>没找到这份卷面</h2>
-          {/* Lead with plain copy; keep a non-Chinese server diagnostic as a small
-              secondary line so it can still be reported (and fail-closed checks can read it). */}
-          <p>{error && /[\u4e00-\u9fff]/.test(error) ? error : '这份卷可能还没上线或已被移除，回到找题页换一份看看。'}</p>
-          {error && !/[\u4e00-\u9fff]/.test(error) && <p className="paper-browse-error-detail">错误信息：{error}</p>}
-          {/* 构件厂第 4 步：换成 Button（墨字、高 36）。原来的 1px 描边去掉（Button 没有描边的语气），
-              补一个和顶栏返回键一样的左箭头，让它一眼看得出是键。提案 · 单一来源。 */}
-          <Button className="paper-browse-error-back" tone="strong" size="lg" icon={<ArrowLeft size={16} />} onClick={onBackToWorkbench}>
-            返回找题
-          </Button>
-        </div>
+        <main className="paper-browse-error">
+          {/* 共用提示行：哪里没成功、东西还在不在（自己的话），后面照登原话（No-Literal-Fallback，
+              原来没原话时补的「这份卷可能还没上线或已被移除…」去掉），行尾「返回找题」。 */}
+          <Notice
+            kind="error"
+            detail={error || null}
+            action={{ label: '返回找题', icon: <ArrowLeft size={16} aria-hidden="true" />, onClick: onBackToWorkbench }}
+          >
+            整卷预览没打开，题库和草稿卷都没动
+          </Notice>
+        </main>
       </div>
     )
   }

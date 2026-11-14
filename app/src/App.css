@@ -3509,57 +3509,27 @@ button:disabled {
   color: var(--desk-muted);
 }
 
-/* 提示条不是一种材料：一行次要灰字，没有底和边，不用薄荷（DESIGN.md §5 Notices，Owner 2026-11-13）。 */
-.concierge-notice,
+/* 提示条不是一种材料：一行次要灰字，没有底和边，不用薄荷（DESIGN.md §5 Notices，Owner 2026-11-13）。
+   .concierge-notice / .concierge-error / .concierge-loading / .concierge-data-loading 换成了共用提示行
+   shared-ui/Notice（字色、字号、图标、行尾的「重试」键都由 notice.css 和 Button 给），这里只剩
+   还是段落的两种。 */
 .concierge-assistant,
-.concierge-error,
-.concierge-empty,
-.concierge-loading {
+.concierge-empty {
   margin: 0;
   font-size: 13px;
   color: var(--desk-muted);
   padding: 6px 4px;
 }
 
-/* 迁移（DESIGN.md §5 Notices）：提示条是一行弱墨字，前面一个 16px 图标，没有底和边。
-   图标和字同色（currentColor），顶对齐第一行，折行时字不绕到图标下面。 */
-.concierge-notice {
-  align-items: flex-start;
-  display: flex;
-  gap: 6px;
-  line-height: 20px;
-}
-.concierge-notice > svg {
-  flex: none;
-  margin-top: 2px;
+/* 共用提示行在找题页里左边让出 4px，和上面两种段落的字对齐（原来的 padding: 6px 4px）。
+   只给 inline 放法（notice.css 的 inline 没写 padding，不算覆盖）；找题页里没有 over / floating 的提示行。 */
+.concierge-desk .eqb-notice[data-placement='inline'] {
+  padding-inline: 4px;
 }
 
-.concierge-error {
-  align-items: flex-start;
-  display: flex;
-  gap: 6px;
-  line-height: 20px;
-}
-/* 迁移（Owner 2026-11-13）：连不上搜索不会丢东西（输入还在），所以不用危险色，
-   和提示条同一种写法：弱墨一行 + 16px 图标；重试是句子里的行内按钮（同「清除筛选」）。 */
-.concierge-error > svg {
-  flex: none;
-  margin-top: 2px;
-}
-
-.concierge-error button {
-  background: transparent;
-  border: 0;
-  color: var(--desk-ink);
-  cursor: pointer;
-  font: inherit;
-  padding: 0 0 0 6px;
-  text-decoration: underline;
-}
-
-.concierge-error button:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
+/* 题库连接状态那一行：命令行下面，离命令行 12px（目测，和「浏览全部」那一行的间距差不多）。 */
+.concierge-status-slot {
+  margin-top: var(--eqb-space-3);
 }
 
 /* Result list */
@@ -4766,13 +4736,8 @@ div.concierge-feed-empty-corpus p { margin: 0; }
   color: var(--desk-muted);
 }
 
-/* Concierge: connecting-to-local-bank notice while data is in flight. */
-.concierge-data-loading {
-  margin: 8px 0 0;
-  font-size: 12.5px;
-  color: var(--desk-muted);
-  text-align: center;
-}
+/* Concierge: connecting-to-local-bank notice — 换成共用提示行，放在命令行下面的 .concierge-status-slot 里，
+   原来这条居中小字的规则拿掉。 */
 
 .concierge-intent-input:disabled {
   background: transparent;

@@ -32,6 +32,9 @@
 import type { ReactNode } from 'react'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
+import { RotateCcw } from '../../icons'
+import { useToastPresence } from '../shared/useToastPresence.ts'
 import type {
   QuestionGroupCard,
   SimilarPassagesResponse,
@@ -93,8 +96,13 @@ export type SimilarQuestionsRailViewProps = {
    * `similarToast` state) so there is one source of truth for the fade
    * timing instead of splitting it between parent-set and component-local
    * clocks. */
-  toastMessage: string | null
+  toastMessage: SimilarToast | null
 }
+
+/** 「加入草稿卷」之后那一行：成功（父组件 2.2 秒后收起）或没加入（原话照登，带「重试」时行尾一个键，不自动收起）。 */
+export type SimilarToast =
+  | { kind: 'success'; text: string }
+  | { kind: 'error'; text: string; detail: string; retry?: () => void }
 
 function renderChips(matchedQuestionIds: string[], reasons: SimilarQuestionReason[]): ReactNode {
   return (
@@ -114,6 +122,9 @@ function renderChips(matchedQuestionIds: string[], reasons: SimilarQuestionReaso
 export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): ReactNode {
   const { seed, request, questionGroupById, selectedGroupIds, onToggleGroup, onBack, onRetry, onAddToDraft, toastMessage } =
     props
+
+  // 退场照旧淡出：值清掉以后再挂 120ms（--motion-fast，notice.css floating 的退场时长）播完退场，同草稿卷的提示。
+  const toast = useToastPresence(toastMessage, 120)
 
   const questionLabel = seed.questionNo != null ? `第${seed.questionNo}题` : ''
   const seedLine = [seed.groupTitle, questionLabel].filter(Boolean).join(' · ')
@@ -206,7 +217,21 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
         </div>
       )}
 
-      <div className={`similar-toast${toastMessage ? ' similar-toast--on' : ''}`}>{toastMessage}</div>
+      {/* 共用提示行的 floating 放法（白底、e3、视口底部正中）；类名 similar-toast 留作挂钩。 */}
+      {toast.rendered && (
+        <Notice
+          kind={toast.rendered.kind}
+          placement="floating"
+          className="similar-toast"
+          data-visible={toast.visible}
+          detail={toast.rendered.kind === 'error' ? toast.rendered.detail : null}
+          action={toast.rendered.kind === 'error' && toast.rendered.retry
+            ? { label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: toast.rendered.retry }
+            : undefined}
+        >
+          {toast.rendered.text}
+        </Notice>
+      )}
     </div>
   )
 }
