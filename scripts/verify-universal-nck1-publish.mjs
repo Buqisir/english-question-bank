@@ -265,7 +265,7 @@ export function objectiveFixtureGroup(group, answerByQuestionId) {
 export function writeStagedAnalyses(reviewRoot, materialization) {
   const bySlot = new Map(materialization.groups.map((group) => [group.slotId, group]))
   const answerByQuestionId = new Map(materialization.answers.map(({ questionId, value }) => [questionId, value]))
-  for (const letter of ['a', 'b', 'c', 'd']) {
+  for (const letter of ['a', 'b', 'c', 'd'].filter(letter => bySlot.has(`reading.${letter}`))) {
     const group = bySlot.get(`reading.${letter}`)
     const teaching = buildObjectiveTeachingFixture(objectiveFixtureGroup(group, answerByQuestionId))
     writeJson(path.join(reviewRoot, `analysis-reading-${letter}.json`), {

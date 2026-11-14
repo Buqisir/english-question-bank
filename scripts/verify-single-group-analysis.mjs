@@ -288,6 +288,42 @@ try {
   }
   console.log('PASS grammar alternatives: exact complete key and legacy branches accepted; different joined answers, invalid, punctuation, stemming and empty rejected at single/full seams; authority unchanged')
 
+  const slotRanges = source.groups.filter(g => g.slotId !== 'reading.d').map(g => {
+    const range = { 'reading.c': [28, 30], 'seven-choices': [31, 35], cloze: [36, 55] }[g.slotId]
+      || (g.questions.length ? [g.questions[0].canonicalNumber, g.questions.at(-1).canonicalNumber] : [null, null])
+    return [g.slotId, g.family, ...range]
+  })
+  const zhejiang = makeFixture({ listening: true, slotRanges })
+  rmSync(path.join(root, 'analysis-reading-d.json'))
+  writeStagedAnalyses(root, zhejiang)
+  const paperAsset = buildNck1CompatibilityPaperAsset({
+    config: { provenance: { paperName: 'Zhejiang fixture', source: 'Verifier', year: 2021 } },
+    materialization: zhejiang, sourceAssetVersion: 1,
+  })
+  const projected = buildNck1AnalysisProjection({ rootDir: root,
+    materialization: zhejiang, paperAsset, requireTeachingContent: true })
+  assert.equal(Object.keys(projected.sidecars['reading-choice-analysis-v1.json'].questions).length, 10)
+  assert.deepEqual(Object.keys(projected.sidecars['seven-choices-analysis-v1.json'].questions),
+    Array.from({ length: 5 }, (_, i) => `question:${31 + i}`))
+  assert.deepEqual(Object.keys(projected.sidecars['cloze-analysis-v1.json'].blanks),
+    Array.from({ length: 20 }, (_, i) => `question:${36 + i}`))
+  const zjAnswers = new Map(zhejiang.answers.map(({ questionId, value }) => [questionId, value]))
+  for (const [key, slot] of Object.entries(slots).filter(([key]) =>
+    ['reading-a', 'reading-b', 'reading-c', 'seven', 'cloze'].includes(key))) {
+    const group = objectiveFixtureGroup(zhejiang.groups.find(g => g.slotId === slot), zjAnswers)
+    const request = { group: key, sourceGroup: { groupKey: key, material: { paper, group } },
+      authoritativeAnswers: Object.fromEntries(group.questions.map(q => [q.id, { questionId: q.id, answer: q.answerKey }])) }
+    assert.equal(validateNck1StagedAnalysis(request, projected.inputs[key]).ok, true)
+  }
+  const missing = structuredClone(paperAsset)
+  delete missing.answerKey.answers['question:36']
+  assert.throws(() => buildNck1AnalysisProjection({ rootDir: root,
+    materialization: zhejiang, paperAsset: missing }), /authoritative objective answers/)
+  rmSync(path.join(root, 'analysis-reading-c.json'))
+  assert.throws(() => buildNck1AnalysisProjection({ rootDir: root,
+    materialization: zhejiang, paperAsset }), /analysis-reading-c.json/)
+  console.log('PASS Zhejiang: reading A–C/10, seven 31–35, cloze 36–55/20; single/full validation; missing analysis/answer rejected')
+
   const usage = spawnSync(process.execPath, ['scripts/import-pipeline/validate-analysis.mjs'], { encoding: 'utf8' })
   assert.equal(usage.status, 2)
   assert.throws(() => validateNck1StagedAnalysis({ group: 'unknown', sourceGroup: { groupKey: 'unknown', material: {} }, authoritativeAnswers: {} }, {}), /Unsupported/)
