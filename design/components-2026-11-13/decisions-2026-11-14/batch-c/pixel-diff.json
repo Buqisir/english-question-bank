@@ -1,0 +1,726 @@
+{
+  "threshold": "any channel diff > 3",
+  "layout": "left before / middle after / right diff (red)",
+  "shots": {
+    "pause-390.png": {
+      "sizeBefore": [
+        712,
+        200
+      ],
+      "sizeAfter": [
+        712,
+        200
+      ],
+      "changedPixels": 3270,
+      "changedRatio": 0.02296
+    },
+    "pause-focus-390.png": {
+      "sizeBefore": [
+        712,
+        200
+      ],
+      "sizeAfter": [
+        712,
+        200
+      ],
+      "changedPixels": 4376,
+      "changedRatio": 0.03073
+    },
+    "pause-focus.png": {
+      "sizeBefore": [
+        1668,
+        112
+      ],
+      "sizeAfter": [
+        1668,
+        112
+      ],
+      "changedPixels": 4907,
+      "changedRatio": 0.02627
+    },
+    "pause-hover-390.png": {
+      "sizeBefore": [
+        712,
+        200
+      ],
+      "sizeAfter": [
+        712,
+        200
+      ],
+      "changedPixels": 12823,
+      "changedRatio": 0.09005
+    },
+    "pause-hover.png": {
+      "sizeBefore": [
+        1668,
+        112
+      ],
+      "sizeAfter": [
+        1668,
+        112
+      ],
+      "changedPixels": 14393,
+      "changedRatio": 0.07704
+    },
+    "pause.png": {
+      "sizeBefore": [
+        1668,
+        112
+      ],
+      "sizeAfter": [
+        1668,
+        112
+      ],
+      "changedPixels": 4907,
+      "changedRatio": 0.02627
+    },
+    "pron-390.png": {
+      "sizeBefore": [
+        708,
+        662
+      ],
+      "sizeAfter": [
+        708,
+        660
+      ],
+      "changedPixels": 37787,
+      "changedRatio": 0.08062
+    },
+    "pron-focus-390.png": {
+      "sizeBefore": [
+        708,
+        662
+      ],
+      "sizeAfter": [
+        708,
+        660
+      ],
+      "changedPixels": 37787,
+      "changedRatio": 0.08062
+    },
+    "pron-focus.png": {
+      "sizeBefore": [
+        936,
+        768
+      ],
+      "sizeAfter": [
+        936,
+        768
+      ],
+      "changedPixels": 23285,
+      "changedRatio": 0.03239
+    },
+    "pron-hover-390.png": {
+      "sizeBefore": [
+        708,
+        662
+      ],
+      "sizeAfter": [
+        708,
+        660
+      ],
+      "changedPixels": 37834,
+      "changedRatio": 0.08072
+    },
+    "pron-hover.png": {
+      "sizeBefore": [
+        936,
+        768
+      ],
+      "sizeAfter": [
+        936,
+        768
+      ],
+      "changedPixels": 23342,
+      "changedRatio": 0.03247
+    },
+    "pron.png": {
+      "sizeBefore": [
+        936,
+        768
+      ],
+      "sizeAfter": [
+        936,
+        768
+      ],
+      "changedPixels": 23285,
+      "changedRatio": 0.03239
+    },
+    "replay-390.png": {
+      "sizeBefore": [
+        712,
+        310
+      ],
+      "sizeAfter": [
+        712,
+        310
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "replay-focus-390.png": {
+      "sizeBefore": [
+        712,
+        310
+      ],
+      "sizeAfter": [
+        712,
+        310
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "replay-focus.png": {
+      "sizeBefore": [
+        1668,
+        200
+      ],
+      "sizeAfter": [
+        1668,
+        200
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "replay-hover-390.png": {
+      "sizeBefore": [
+        712,
+        310
+      ],
+      "sizeAfter": [
+        712,
+        310
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "replay-hover.png": {
+      "sizeBefore": [
+        1668,
+        200
+      ],
+      "sizeAfter": [
+        1668,
+        200
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "replay.png": {
+      "sizeBefore": [
+        1668,
+        200
+      ],
+      "sizeAfter": [
+        1668,
+        200
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "sa-retry-390.png": {
+      "sizeBefore": [
+        764,
+        310
+      ],
+      "sizeAfter": [
+        764,
+        310
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "sa-retry-focus-390.png": {
+      "sizeBefore": [
+        764,
+        310
+      ],
+      "sizeAfter": [
+        764,
+        310
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "sa-retry-focus.png": {
+      "sizeBefore": [
+        1552,
+        318
+      ],
+      "sizeAfter": [
+        1552,
+        318
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "sa-retry-hover-390.png": {
+      "sizeBefore": [
+        764,
+        310
+      ],
+      "sizeAfter": [
+        764,
+        310
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "sa-retry-hover.png": {
+      "sizeBefore": [
+        1552,
+        318
+      ],
+      "sizeAfter": [
+        1552,
+        318
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "sa-retry.png": {
+      "sizeBefore": [
+        1552,
+        318
+      ],
+      "sizeAfter": [
+        1552,
+        318
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "sel-retry-390.png": {
+      "sizeBefore": [
+        692,
+        434
+      ],
+      "sizeAfter": [
+        692,
+        434
+      ],
+      "changedPixels": 2276,
+      "changedRatio": 0.00758
+    },
+    "sel-retry-focus-390.png": {
+      "sizeBefore": [
+        692,
+        434
+      ],
+      "sizeAfter": [
+        692,
+        434
+      ],
+      "changedPixels": 4504,
+      "changedRatio": 0.015
+    },
+    "sel-retry-focus.png": {
+      "sizeBefore": [
+        692,
+        434
+      ],
+      "sizeAfter": [
+        692,
+        434
+      ],
+      "changedPixels": 4501,
+      "changedRatio": 0.01499
+    },
+    "sel-retry-hover-390.png": {
+      "sizeBefore": [
+        692,
+        434
+      ],
+      "sizeAfter": [
+        692,
+        434
+      ],
+      "changedPixels": 3072,
+      "changedRatio": 0.01023
+    },
+    "sel-retry-hover.png": {
+      "sizeBefore": [
+        692,
+        434
+      ],
+      "sizeAfter": [
+        692,
+        434
+      ],
+      "changedPixels": 3071,
+      "changedRatio": 0.01023
+    },
+    "sel-retry.png": {
+      "sizeBefore": [
+        692,
+        434
+      ],
+      "sizeAfter": [
+        692,
+        434
+      ],
+      "changedPixels": 2275,
+      "changedRatio": 0.00758
+    },
+    "sense-retry-390.png": {
+      "sizeBefore": [
+        644,
+        68
+      ],
+      "sizeAfter": [
+        644,
+        68
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "sense-retry-focus-390.png": {
+      "sizeBefore": [
+        644,
+        68
+      ],
+      "sizeAfter": [
+        644,
+        68
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "sense-retry-focus.png": {
+      "sizeBefore": [
+        644,
+        68
+      ],
+      "sizeAfter": [
+        644,
+        68
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "sense-retry-hover-390.png": {
+      "sizeBefore": [
+        644,
+        68
+      ],
+      "sizeAfter": [
+        644,
+        68
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "sense-retry-hover.png": {
+      "sizeBefore": [
+        644,
+        68
+      ],
+      "sizeAfter": [
+        644,
+        68
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "sense-retry.png": {
+      "sizeBefore": [
+        644,
+        68
+      ],
+      "sizeAfter": [
+        644,
+        68
+      ],
+      "changedPixels": 0,
+      "changedRatio": 0.0
+    },
+    "stage-390.png": {
+      "sizeBefore": [
+        724,
+        1592
+      ],
+      "sizeAfter": [
+        724,
+        1592
+      ],
+      "changedPixels": 3270,
+      "changedRatio": 0.00284
+    },
+    "stage-revealed-390.png": {
+      "sizeBefore": [
+        724,
+        2030
+      ],
+      "sizeAfter": [
+        724,
+        2028
+      ],
+      "changedPixels": 75247,
+      "changedRatio": 0.0512
+    },
+    "stage-revealed.png": {
+      "sizeBefore": [
+        1720,
+        1240
+      ],
+      "sizeAfter": [
+        1720,
+        1240
+      ],
+      "changedPixels": 28192,
+      "changedRatio": 0.01322
+    },
+    "stage.png": {
+      "sizeBefore": [
+        1720,
+        1240
+      ],
+      "sizeAfter": [
+        1720,
+        1240
+      ],
+      "changedPixels": 4907,
+      "changedRatio": 0.0023
+    },
+    "student-add-390.png": {
+      "sizeBefore": [
+        772,
+        398
+      ],
+      "sizeAfter": [
+        772,
+        398
+      ],
+      "changedPixels": 12883,
+      "changedRatio": 0.04193
+    },
+    "student-add-focus-390.png": {
+      "sizeBefore": [
+        772,
+        398
+      ],
+      "sizeAfter": [
+        772,
+        398
+      ],
+      "changedPixels": 14736,
+      "changedRatio": 0.04796
+    },
+    "student-add-focus.png": {
+      "sizeBefore": [
+        688,
+        398
+      ],
+      "sizeAfter": [
+        688,
+        398
+      ],
+      "changedPixels": 14738,
+      "changedRatio": 0.05382
+    },
+    "student-add-hover-390.png": {
+      "sizeBefore": [
+        772,
+        398
+      ],
+      "sizeAfter": [
+        772,
+        398
+      ],
+      "changedPixels": 12888,
+      "changedRatio": 0.04195
+    },
+    "student-add-hover.png": {
+      "sizeBefore": [
+        688,
+        398
+      ],
+      "sizeAfter": [
+        688,
+        398
+      ],
+      "changedPixels": 12890,
+      "changedRatio": 0.04707
+    },
+    "student-add.png": {
+      "sizeBefore": [
+        688,
+        398
+      ],
+      "sizeAfter": [
+        688,
+        398
+      ],
+      "changedPixels": 12885,
+      "changedRatio": 0.04706
+    },
+    "student-cancel-390.png": {
+      "sizeBefore": [
+        772,
+        584
+      ],
+      "sizeAfter": [
+        772,
+        584
+      ],
+      "changedPixels": 16493,
+      "changedRatio": 0.03658
+    },
+    "student-cancel-focus-390.png": {
+      "sizeBefore": [
+        772,
+        584
+      ],
+      "sizeAfter": [
+        772,
+        584
+      ],
+      "changedPixels": 16493,
+      "changedRatio": 0.03658
+    },
+    "student-cancel-focus.png": {
+      "sizeBefore": [
+        688,
+        584
+      ],
+      "sizeAfter": [
+        688,
+        584
+      ],
+      "changedPixels": 16499,
+      "changedRatio": 0.04106
+    },
+    "student-cancel-hover-390.png": {
+      "sizeBefore": [
+        772,
+        584
+      ],
+      "sizeAfter": [
+        772,
+        584
+      ],
+      "changedPixels": 16493,
+      "changedRatio": 0.03658
+    },
+    "student-cancel-hover.png": {
+      "sizeBefore": [
+        688,
+        584
+      ],
+      "sizeAfter": [
+        688,
+        584
+      ],
+      "changedPixels": 16499,
+      "changedRatio": 0.04106
+    },
+    "student-cancel.png": {
+      "sizeBefore": [
+        688,
+        584
+      ],
+      "sizeAfter": [
+        688,
+        584
+      ],
+      "changedPixels": 16499,
+      "changedRatio": 0.04106
+    },
+    "student-save-390.png": {
+      "sizeBefore": [
+        772,
+        214
+      ],
+      "sizeAfter": [
+        772,
+        214
+      ],
+      "changedPixels": 8566,
+      "changedRatio": 0.05185
+    },
+    "student-save-disabled-390.png": {
+      "sizeBefore": [
+        772,
+        214
+      ],
+      "sizeAfter": [
+        772,
+        214
+      ],
+      "changedPixels": 8536,
+      "changedRatio": 0.05167
+    },
+    "student-save-disabled.png": {
+      "sizeBefore": [
+        688,
+        214
+      ],
+      "sizeAfter": [
+        688,
+        214
+      ],
+      "changedPixels": 8541,
+      "changedRatio": 0.05801
+    },
+    "student-save-focus-390.png": {
+      "sizeBefore": [
+        772,
+        214
+      ],
+      "sizeAfter": [
+        772,
+        214
+      ],
+      "changedPixels": 8566,
+      "changedRatio": 0.05185
+    },
+    "student-save-focus.png": {
+      "sizeBefore": [
+        688,
+        214
+      ],
+      "sizeAfter": [
+        688,
+        214
+      ],
+      "changedPixels": 8573,
+      "changedRatio": 0.05823
+    },
+    "student-save-hover-390.png": {
+      "sizeBefore": [
+        772,
+        214
+      ],
+      "sizeAfter": [
+        772,
+        214
+      ],
+      "changedPixels": 8567,
+      "changedRatio": 0.05186
+    },
+    "student-save-hover.png": {
+      "sizeBefore": [
+        688,
+        214
+      ],
+      "sizeAfter": [
+        688,
+        214
+      ],
+      "changedPixels": 8574,
+      "changedRatio": 0.05823
+    },
+    "student-save.png": {
+      "sizeBefore": [
+        688,
+        214
+      ],
+      "sizeAfter": [
+        688,
+        214
+      ],
+      "changedPixels": 8573,
+      "changedRatio": 0.05823
+    }
+  }
+}

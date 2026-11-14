@@ -6,6 +6,7 @@ import { Translate, DictionaryLookup, X, RefreshCw, SentenceAnalysis } from '../
 import { CopyFeedbackIcon } from '../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../icons/motionInput'
 import { useClipboardCopy } from '../../../hooks/useClipboardCopy'
+import { Button } from '../../../shared-ui/Button.tsx'
 
 export type SelectionOverlayPhase = 'toolbar' | 'lookup' | 'loading' | 'result' | 'error' | 'dictionary' | 'sentence-analysis'
 
@@ -286,10 +287,16 @@ export function SelectionOverlay({
           ) : null}
 
           {phase !== 'loading' && (hasErrors || phase === 'error') ? (
-            <button type="button" className="paper-selection-retry" onClick={onRetry}>
-              <RefreshCw size={16} className="paper-selection-retry-icon" />
-              <span>{partial ? '重试失败段落' : '重试'}</span>
-            </button>
+            // 描边键不再单做一种（Owner 2026-11-14 决定 #2）：墨字小号，类名留着给 CSS 和检查脚本当挂钩。
+            <Button
+              tone="strong"
+              size="sm"
+              className="paper-selection-retry"
+              icon={<RefreshCw size={16} className="paper-selection-retry-icon" />}
+              onClick={onRetry}
+            >
+              {partial ? '重试失败段落' : '重试'}
+            </Button>
           ) : null}
 
           {phase !== 'loading' ? (

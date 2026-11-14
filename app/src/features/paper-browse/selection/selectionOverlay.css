@@ -257,9 +257,16 @@
 }
 
 .paper-selection-retry {
-  appearance: none;
   margin: 10px 0 0;
   align-self: flex-start;
+}
+
+/* 下面这几条手写的描边样子只剩句子分析卡出错时的「重试」（SentenceAnalysisCard.tsx）在用：句子分析卡这次不换（等它自己那批）。
+ * 选词浮条翻译卡的「重试」已换成 Button 墨字小号（Owner 2026-11-14 决定 #2），所以这里加 :not(.eqb-button) 让开它。
+ * 覆盖：加了 :not(.eqb-button) 以后这几条特指度从 (0,1,0)/(0,2,0) 变成 (0,2,0)/(0,3,0)，管的元素只有句子分析卡那一个，
+ * 它不挂 .eqb-button，button.css 碰不到它，所以只是让开，不盖谁。 */
+.paper-selection-retry:not(.eqb-button) {
+  appearance: none;
   border: 1px solid var(--desk-border, #D5DACF);
   background: transparent;
   color: var(--eqb-color-text-strong, #1f1f1d);
@@ -275,15 +282,15 @@
   transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), transform var(--motion-micro) var(--ease-out);
 }
 
-.paper-selection-retry:hover {
+.paper-selection-retry:not(.eqb-button):hover {
   background: var(--desk-hover, #E5EAE1);
 }
 
-.paper-selection-retry:active {
+.paper-selection-retry:not(.eqb-button):active {
   transform: scale(0.96);
 }
 
-.paper-selection-retry:focus-visible {
+.paper-selection-retry:not(.eqb-button):focus-visible {
   outline: 2px solid var(--eqb-color-text-strong, #1f1f1d);
   outline-offset: 2px;
 }

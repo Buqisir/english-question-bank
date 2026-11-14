@@ -1464,9 +1464,11 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                     {students.map((student) => <option value={student.id} key={student.id}>{student.displayName}</option>)}
                   </select>
                 </label>
-                <button
+                {/* 描边键不再单做一种（Owner 2026-11-14 决定 #2）：墨字大号，类名留着当挂钩。 */}
+                <Button
+                  tone="strong"
+                  size="lg"
                   className="vocabulary-student-add-button"
-                  type="button"
                   aria-expanded={studentCreateOpen}
                   onClick={() => {
                     setStudentCreateOpen((current) => !current)
@@ -1475,7 +1477,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                   }}
                 >
                   {studentCreateOpen ? '取消' : '新建学生'}
-                </button>
+                </Button>
               </div>
               {studentCreateOpen && (
                 <form className="vocabulary-student-create" onSubmit={(event) => { event.preventDefault(); void createStudentProfile() }}>
@@ -1490,7 +1492,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                       placeholder="例如：小林"
                       onChange={(event) => setStudentNameInput(event.target.value)}
                     />
-                    <button type="submit" disabled={requestBusy || !studentNameInput.trim()}>保存</button>
+                    <Button tone="strong" size="lg" type="submit" className="vocabulary-student-save" disabled={requestBusy || !studentNameInput.trim()}>保存</Button>
                   </div>
                   {studentFormError && <p role="alert">{studentFormError}</p>}
                 </form>
@@ -1743,10 +1745,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                   <span>第{currentEntry.source.week}周 · {currentEntry.source.sourceLabel}</span>
                   <div>
                     <span>词序 {currentGlobalOrder} / {program.entries.length}</span>
-                    <button type="button" onClick={pauseReview} disabled={requestBusy}>
-                      <ArrowLeft size={14} aria-hidden="true" />
+                    <Button tone="subtle" size="md" className="vocabulary-stage-pause" icon={<ArrowLeft size={14} aria-hidden="true" />} onClick={pauseReview} disabled={requestBusy}>
                       暂停并返回
-                    </button>
+                    </Button>
                   </div>
                 </div>
                 <div className="vocabulary-word-block">
@@ -1763,15 +1764,16 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                   <div className="vocabulary-revealed-card">
                     <VocabularyVisual entry={currentEntry} />
                     <div className="vocabulary-sense-block">
-                      <button
+                      <Button
+                        tone="subtle"
+                        size="md"
                         className="vocabulary-pronunciation"
-                        type="button"
+                        icon={<VolumeFeedbackIcon size={16} state={audioIcon.stateFor(currentEntry.id)} />}
                         onClick={playCurrentEntry}
                         title={`播放${reviewAccent === 'american' ? '美音' : '英音'}`}
                       >
-                        <VolumeFeedbackIcon size={16} state={audioIcon.stateFor(currentEntry.id)} />
                         {currentEntry.phonetics?.[reviewAccent] ?? currentEntry.phonetic}
-                      </button>
+                      </Button>
                       <div className="vocabulary-core-meanings">
                         <span>{currentEntry.partOfSpeech}</span>
                         <p>{formatCoreMeanings(currentEntry)}</p>
