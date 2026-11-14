@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
 import { usePaperPdfProducts } from './usePaperPdfProducts'
+import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
 import './paperReviewControls.css'
 
 type ReviewDetail = {
@@ -115,18 +116,21 @@ export function PaperReviewControls({ paperId, paperName, revisionId, publicatio
         disabled={!edition} onChange={event => setEdition(event.target.value as PaperPdfEdition)}>
         {editions.map(edition => <option key={edition} value={edition}>{PAPER_PDF_PRODUCTS[edition]}</option>)}
       </select>
-      {pdfUrl && <a className="ghost-button" href={pdfUrl} target="_blank" rel="noopener noreferrer">查看 PDF</a>}</>}
-      <button className="ghost-button" type="button" disabled={busy || (!detail && !error)} onClick={() => void discuss()}>
+      {/* 构件厂第 4 步第九页（2026-11-14，提案 · 单一来源）：这一排的链接和按钮换成 ButtonLink / Button。
+          原来的全站 .ghost-button 是透明底墨字、高 36，对上 strong lg；这一行 44 的最小高度仍由 paperReviewControls.css 给。
+          「复制中…」沿用原来的整键禁用，没改成 busy：禁用条件里还有「线程信息没回来」，两件事分不开。 */}
+      {pdfUrl && <ButtonLink tone="strong" size="lg" href={pdfUrl} target="_blank" rel="noopener noreferrer">查看 PDF</ButtonLink>}</>}
+      <Button tone="strong" size="lg" disabled={busy || (!detail && !error)} onClick={() => void discuss()}>
         {busy ? '复制中…' : threadUrl ? '去 Amp 聊这份卷' : '复制试卷信息'}
-      </button>
+      </Button>
     </div>
     {revisionId && detail && !current && <p>你正在看旧版，复制的信息会保留这一版。</p>}
     {notice && <p role="status">{notice}</p>}
     {revisionId && productError && <p role="alert">{productError}{' '}
-      <button className="ghost-button" type="button" onClick={retryProducts}>刷新 PDF 版本</button>
+      <Button tone="strong" size="lg" onClick={retryProducts}>刷新 PDF 版本</Button>
     </p>}
     {error && <p role="alert">{error}{' '}
-      <button className="ghost-button" type="button" onClick={() => setRefresh(value => value + 1)}>刷新</button>
+      <Button tone="strong" size="lg" onClick={() => setRefresh(value => value + 1)}>刷新</Button>
     </p>}
     {manualCopy && <textarea aria-label="手动复制试卷信息" value={manualCopy} readOnly rows={7}
       onFocus={event => event.currentTarget.select()} />}
