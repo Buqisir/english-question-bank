@@ -1711,79 +1711,9 @@ button:disabled {
   border: 1px solid var(--line);
 }
 
-/* Native modal focus/inert behavior, retaining the existing full-screen
-   backdrops and their individual surface/entrance styles. */
-.entry-backdrop,
-.draft-modal-backdrop {
-  box-sizing: border-box;
-  border: 0;
-  color: inherit;
-  height: 100%;
-  margin: 0;
-  max-height: none;
-  max-width: none;
-  width: 100%;
-}
-
-.entry-backdrop::backdrop,
-.draft-modal-backdrop::backdrop {
-  background: transparent;
-}
-
-.entry-backdrop:not([open]),
-.draft-modal-backdrop:not([open]) {
-  display: none;
-}
-
-.entry-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 30;
-  padding: 0;
-  display: flex;
-  justify-content: flex-end;
-  background: rgb(27 43 51 / 0.3);
-}
-
-.entry-panel {
-  display: flex;
-  flex-direction: column;
-  width: min(780px, 100vw);
-  height: 100vh;
-  background: var(--panel);
-  box-shadow: var(--elev-3);
-}
-
-.entry-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 22px 24px;
-  border-bottom: 1px solid var(--line);
-}
-
-.entry-header-hint {
-  display: block;
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 400;
-}
-
-.entry-header-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.entry-header h2 {
-  margin: 0;
-  color: var(--ink-strong);
-  font-size: 22px;
-  letter-spacing: 0;
-}
+/* 录题面板（.entry-backdrop / .entry-panel / .entry-header*）和草稿卷「保存 PDF 到个人空间」（.draft-modal-backdrop）
+   换成共用 Dialog（shared-ui/Dialog.tsx，构件厂 2026-11-14）：原生 <dialog> 的铺满、遮罩、面板、标题行这几条删掉，
+   录题面板正文的 .entry-form 留下 fieldset 那几条，滚动和内边距归 dialog.css 的 .eqb-dialog-body。 */
 
 .icon-button {
   display: grid;
@@ -1800,11 +1730,6 @@ button:disabled {
 .icon-button:hover {
   color: var(--ink);
   background: var(--surface-strong);
-}
-
-.entry-form {
-  overflow: auto;
-  padding: 20px 24px 24px;
 }
 
 .entry-form fieldset {
@@ -2356,17 +2281,6 @@ button:disabled {
   margin: 0;
   padding: 8px 10px;
   font-size: 12px;
-}
-
-.entry-footer {
-  position: sticky;
-  bottom: 0;
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  padding: 14px 0 0;
-  border-top: 1px solid var(--line);
-  background: var(--panel);
 }
 
 @media (max-width: 1180px) {

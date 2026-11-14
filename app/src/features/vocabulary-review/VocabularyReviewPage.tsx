@@ -1396,6 +1396,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       title={setTitleInput.trim() || vocabularySet.title}
       entries={printEntries}
       busy={pdfDownloadBusy}
+      // 打开它的是下载菜单里的项，菜单这时已收起；关上后焦点回到「下载」键。
+      returnFocus={() => downloadMenuRef.current?.querySelector<HTMLElement>('button')}
       onCancel={() => setHandwritingSelectionMode(null)}
       onConfirm={(selectedEntryIds, practiceMode) => {
         const saveMode = handwritingSelectionMode

@@ -1,0 +1,955 @@
+{
+ "label": "after",
+ "sites": {
+  "draft-save-space": {
+   "title": "草稿卷「保存 PDF 到个人空间」",
+   "missing": [],
+   "w1440": {
+    "dialog": {
+     "tag": "dialog",
+     "role": null,
+     "native": true
+    },
+    "openFocus": {
+     "desc": "input[text] 1114 英语草稿卷-大字无听力版.pdf",
+     "inside": true,
+     "isOpener": false
+    },
+    "ax": {
+     "role": "dialog",
+     "name": "保存 PDF 到个人空间",
+     "description": null
+    },
+    "focusables": 6,
+    "tab": [
+     {
+      "desc": "select 未归档 高三一班 期中复习",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 新建文件夹",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 取消",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 保存",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 关闭",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 1114 英语草稿卷-大字无听力版.pdf",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "select 未归档 高三一班 期中复习",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 新建文件夹",
+      "inside": true,
+      "isOpener": false
+     }
+    ],
+    "shiftTab": [
+     {
+      "desc": "select 未归档 高三一班 期中复习",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 1114 英语草稿卷-大字无听力版.pdf",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 关闭",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 保存",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 取消",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 新建文件夹",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "select 未归档 高三一班 期中复习",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 1114 英语草稿卷-大字无听力版.pdf",
+      "inside": true,
+      "isOpener": false
+     }
+    ],
+    "tabStaysInside": true,
+    "scroll": {
+     "paddedPage": false,
+     "htmlOverflow": "hidden",
+     "bodyOverflow": "visible",
+     "scrollYBefore": 0,
+     "scrollYAfter": 0,
+     "pageScrolled": false
+    },
+    "escCloses": true,
+    "focusAfterEsc": {
+     "desc": "button 导出",
+     "inside": false,
+     "isOpener": true
+    },
+    "backdropCloses": false,
+    "closedAtEnd": true
+   },
+   "w390": {
+    "dialog": {
+     "tag": "dialog",
+     "role": null,
+     "native": true
+    },
+    "openFocus": {
+     "desc": "input[text] 1114 英语草稿卷-大字无听力版.pdf",
+     "inside": true,
+     "isOpener": false
+    },
+    "ax": {
+     "role": "dialog",
+     "name": "保存 PDF 到个人空间",
+     "description": null
+    },
+    "focusables": 6,
+    "scroll": {
+     "paddedPage": false,
+     "htmlOverflow": "hidden",
+     "bodyOverflow": "visible",
+     "scrollYBefore": 0,
+     "scrollYAfter": 0,
+     "pageScrolled": false
+    },
+    "escCloses": true,
+    "focusAfterEsc": {
+     "desc": "button 导出",
+     "inside": false,
+     "isOpener": true
+    },
+    "backdropCloses": false,
+    "closedAtEnd": true
+   }
+  },
+  "my-space-delete": {
+   "title": "个人空间「删除草稿卷 PDF」",
+   "missing": [],
+   "w1440": {
+    "dialog": {
+     "tag": "dialog",
+     "role": "alertdialog",
+     "native": true
+    },
+    "openFocus": {
+     "desc": "button 取消",
+     "inside": true,
+     "isOpener": false
+    },
+    "ax": {
+     "role": "alertdialog",
+     "name": "删除草稿卷 PDF",
+     "description": "删除「2026 一卷阅读 A 篇练习」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。"
+    },
+    "focusables": 2,
+    "tab": [
+     {
+      "desc": "button 删除 PDF",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 取消",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 删除 PDF",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 取消",
+      "inside": true,
+      "isOpener": false
+     }
+    ],
+    "shiftTab": [
+     {
+      "desc": "button 删除 PDF",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 取消",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 删除 PDF",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 取消",
+      "inside": true,
+      "isOpener": false
+     }
+    ],
+    "tabStaysInside": true,
+    "scroll": {
+     "paddedPage": true,
+     "htmlOverflow": "hidden",
+     "bodyOverflow": "visible",
+     "scrollYBefore": 0,
+     "scrollYAfter": 0,
+     "pageScrolled": false
+    },
+    "escCloses": true,
+    "focusAfterEsc": {
+     "desc": "button 更多操作：2026 一卷阅读 A 篇练习",
+     "inside": false,
+     "isOpener": true
+    },
+    "backdropCloses": false,
+    "closedAtEnd": true
+   },
+   "w390": {
+    "dialog": {
+     "tag": "dialog",
+     "role": "alertdialog",
+     "native": true
+    },
+    "openFocus": {
+     "desc": "button 取消",
+     "inside": true,
+     "isOpener": false
+    },
+    "ax": {
+     "role": "alertdialog",
+     "name": "删除草稿卷 PDF",
+     "description": "删除「2026 一卷阅读 A 篇练习」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。"
+    },
+    "focusables": 2,
+    "scroll": {
+     "paddedPage": true,
+     "htmlOverflow": "hidden",
+     "bodyOverflow": "visible",
+     "scrollYBefore": 0,
+     "scrollYAfter": 0,
+     "pageScrolled": false
+    },
+    "escCloses": true,
+    "focusAfterEsc": {
+     "desc": "button 更多操作：2026 一卷阅读 A 篇练习",
+     "inside": false,
+     "isOpener": true
+    },
+    "backdropCloses": false,
+    "closedAtEnd": true
+   }
+  },
+  "agent-token-revoke": {
+   "title": "后台「作废 Agent 口令」",
+   "missing": [],
+   "w1440": {
+    "dialog": {
+     "tag": "dialog",
+     "role": "alertdialog",
+     "native": true
+    },
+    "openFocus": {
+     "desc": "button 保留口令",
+     "inside": true,
+     "isOpener": false
+    },
+    "ax": {
+     "role": "alertdialog",
+     "name": "作废「清点用口令」？",
+     "description": "使用这条口令的 Agent 将立即失去访问权限，作废后无法恢复。"
+    },
+    "focusables": 2,
+    "tab": [
+     {
+      "desc": "button 作废「清点用口令」",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 保留口令",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 作废「清点用口令」",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 保留口令",
+      "inside": true,
+      "isOpener": false
+     }
+    ],
+    "shiftTab": [
+     {
+      "desc": "button 作废「清点用口令」",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 保留口令",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 作废「清点用口令」",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 保留口令",
+      "inside": true,
+      "isOpener": false
+     }
+    ],
+    "tabStaysInside": true,
+    "scroll": {
+     "paddedPage": true,
+     "htmlOverflow": "hidden",
+     "bodyOverflow": "visible",
+     "scrollYBefore": 0,
+     "scrollYAfter": 0,
+     "pageScrolled": false
+    },
+    "escCloses": true,
+    "focusAfterEsc": {
+     "desc": "button 作废口令",
+     "inside": false,
+     "isOpener": true
+    },
+    "backdropCloses": false,
+    "closedAtEnd": true
+   },
+   "w390": {
+    "dialog": {
+     "tag": "dialog",
+     "role": "alertdialog",
+     "native": true
+    },
+    "openFocus": {
+     "desc": "button 保留口令",
+     "inside": true,
+     "isOpener": false
+    },
+    "ax": {
+     "role": "alertdialog",
+     "name": "作废「清点用口令」？",
+     "description": "使用这条口令的 Agent 将立即失去访问权限，作废后无法恢复。"
+    },
+    "focusables": 2,
+    "scroll": {
+     "paddedPage": true,
+     "htmlOverflow": "hidden",
+     "bodyOverflow": "visible",
+     "scrollYBefore": 0,
+     "scrollYAfter": 0,
+     "pageScrolled": false
+    },
+    "escCloses": true,
+    "focusAfterEsc": {
+     "desc": "button 作废口令",
+     "inside": false,
+     "isOpener": true
+    },
+    "backdropCloses": false,
+    "closedAtEnd": true
+   }
+  },
+  "entry-edit": {
+   "title": "题组详情「编辑题组」（录题面板）",
+   "missing": [],
+   "w1440": {
+    "dialog": {
+     "tag": "dialog",
+     "role": null,
+     "native": true
+    },
+    "openFocus": {
+     "desc": "select 真题 模拟题 自建 其他",
+     "inside": true,
+     "isOpener": false
+    },
+    "ax": {
+     "role": "dialog",
+     "name": "编辑题组",
+     "description": null
+    },
+    "focusables": 26,
+    "tab": [
+     {
+      "desc": "input[number] 2026",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 校本",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 课堂训练",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 阅读",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 清点用篇章",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "textarea 清点用摘要",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 人与自我",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 记叙文",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "textarea A short passage for the",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 清点用题组",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "select 阅读理解 完形填空 七选五 语法填空 写作 读后",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 1",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[number] 2",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text]",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 添加小题",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 1",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 细节理解",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] A",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "textarea What is it about?",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "textarea A. ...\\nB. ...\\nC. ...\\n",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "textarea",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 用逗号分隔，如 真实生活，兴趣驱动",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 取消",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 保存修改",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 关闭录题面板",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "select 真题 模拟题 自建 其他",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[number] 2026",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 校本",
+      "inside": true,
+      "isOpener": false
+     }
+    ],
+    "shiftTab": [
+     {
+      "desc": "input[number] 2026",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "select 真题 模拟题 自建 其他",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 关闭录题面板",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 保存修改",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 取消",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 用逗号分隔，如 真实生活，兴趣驱动",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "textarea",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "textarea A. ...\\nB. ...\\nC. ...\\n",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "textarea What is it about?",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] A",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 细节理解",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 1",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 添加小题",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text]",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[number] 2",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 1",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "select 阅读理解 完形填空 七选五 语法填空 写作 读后",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 清点用题组",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "textarea A short passage for the",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 记叙文",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 人与自我",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "textarea 清点用摘要",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 清点用篇章",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 阅读",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 课堂训练",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[text] 校本",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[number] 2026",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "select 真题 模拟题 自建 其他",
+      "inside": true,
+      "isOpener": false
+     }
+    ],
+    "tabStaysInside": true,
+    "scroll": {
+     "paddedPage": true,
+     "htmlOverflow": "hidden",
+     "bodyOverflow": "visible",
+     "scrollYBefore": 0,
+     "scrollYAfter": 0,
+     "pageScrolled": false
+    },
+    "escCloses": true,
+    "focusAfterEsc": {
+     "desc": "button 更多操作",
+     "inside": false,
+     "isOpener": true
+    },
+    "backdropCloses": false,
+    "closedAtEnd": true
+   },
+   "w390": {
+    "dialog": {
+     "tag": "dialog",
+     "role": null,
+     "native": true
+    },
+    "openFocus": {
+     "desc": "select 真题 模拟题 自建 其他",
+     "inside": true,
+     "isOpener": false
+    },
+    "ax": {
+     "role": "dialog",
+     "name": "编辑题组",
+     "description": null
+    },
+    "focusables": 26,
+    "scroll": {
+     "paddedPage": true,
+     "htmlOverflow": "hidden",
+     "bodyOverflow": "visible",
+     "scrollYBefore": 0,
+     "scrollYAfter": 0,
+     "pageScrolled": false
+    },
+    "escCloses": true,
+    "focusAfterEsc": {
+     "desc": "button 更多操作",
+     "inside": false,
+     "isOpener": true
+    },
+    "backdropCloses": false,
+    "closedAtEnd": true
+   }
+  },
+  "vocab-handwriting": {
+   "title": "过生词「选择练字单词」",
+   "missing": [],
+   "w1440": {
+    "dialog": {
+     "tag": "dialog",
+     "role": null,
+     "native": true
+    },
+    "openFocus": {
+     "desc": "button 全选",
+     "inside": true,
+     "isOpener": false
+    },
+    "ax": {
+     "role": "dialog",
+     "name": "选择练字单词",
+     "description": "中考词汇一轮 · 2词 · 保持原词序"
+    },
+    "focusables": 9,
+    "tab": [
+     {
+      "desc": "button 清空",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[radio] vocabulary-handwriting-m",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[checkbox] on",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[checkbox] on",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 取消",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 生成 2 词练字纸",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 关闭练字单词选择",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 全选",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 清空",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[radio] vocabulary-handwriting-m",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[checkbox] on",
+      "inside": true,
+      "isOpener": false
+     }
+    ],
+    "shiftTab": [
+     {
+      "desc": "input[radio] vocabulary-handwriting-m",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 清空",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 全选",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 关闭练字单词选择",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 生成 2 词练字纸",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 取消",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[checkbox] on",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[checkbox] on",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "input[radio] vocabulary-handwriting-m",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 清空",
+      "inside": true,
+      "isOpener": false
+     },
+     {
+      "desc": "button 全选",
+      "inside": true,
+      "isOpener": false
+     }
+    ],
+    "tabStaysInside": true,
+    "scroll": {
+     "paddedPage": true,
+     "htmlOverflow": "hidden",
+     "bodyOverflow": "visible",
+     "scrollYBefore": 0,
+     "scrollYAfter": 0,
+     "pageScrolled": false
+    },
+    "escCloses": true,
+    "focusAfterEsc": {
+     "desc": "button 下载",
+     "inside": false,
+     "isOpener": true
+    },
+    "backdropCloses": true,
+    "closedAtEnd": true
+   },
+   "w390": {
+    "dialog": {
+     "tag": "dialog",
+     "role": null,
+     "native": true
+    },
+    "openFocus": {
+     "desc": "button 全选",
+     "inside": true,
+     "isOpener": false
+    },
+    "ax": {
+     "role": "dialog",
+     "name": "选择练字单词",
+     "description": "中考词汇一轮 · 2词 · 保持原词序"
+    },
+    "focusables": 9,
+    "scroll": {
+     "paddedPage": false,
+     "htmlOverflow": "hidden",
+     "bodyOverflow": "visible",
+     "scrollYBefore": 0,
+     "scrollYAfter": 0,
+     "pageScrolled": false
+    },
+    "escCloses": true,
+    "focusAfterEsc": {
+     "desc": "button 下载",
+     "inside": false,
+     "isOpener": true
+    },
+    "backdropCloses": true,
+    "closedAtEnd": true
+   }
+  }
+ },
+ "errors": [],
+ "motion": {
+  "no-preference": {
+   "transitionDuration": "0.16s",
+   "transitionProperty": "opacity, transform",
+   "animationName": "none",
+   "animationDuration": "0s"
+  },
+  "reduce": {
+   "transitionDuration": "0.16s",
+   "transitionProperty": "none",
+   "animationName": "none",
+   "animationDuration": "0s"
+  }
+ }
+}

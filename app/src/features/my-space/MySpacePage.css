@@ -257,39 +257,8 @@ button.my-space-folder-button { cursor: pointer; }
 /* 空态「去找题」、出错态「重新加载」换成 Button 主键大号（36），原来的 .my-space-empty-cta 一块删掉；
  * 类名还挂着，只当选择器钩子（verify-error-copy-mainline.mjs 认它）。 */
 
-.my-space-modal-backdrop {
-  align-items: center;
-  background: color-mix(in srgb, var(--eqb-color-text) 28%, transparent);
-  display: flex;
-  inset: 0;
-  justify-content: center;
-  opacity: 0;
-  padding: 24px;
-  position: fixed;
-  transition: opacity var(--motion-fast) var(--ease-out);
-  z-index: 80;
-}
-
-.my-space-modal-backdrop[data-visible='true'] { opacity: 1; }
-
-.my-space-confirm-dialog {
-  background: var(--desk-raised);
-  border-radius: 12px;
-  box-shadow: var(--elev-3);
-  display: grid;
-  gap: 16px;
-  max-width: 360px;
-  opacity: 0;
-  padding: 18px;
-  transform: scale(0.97);
-  transition: opacity var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
-  width: 100%;
-}
-
-.my-space-confirm-dialog[data-visible='true'] { opacity: 1; transform: scale(1); }
-.my-space-confirm-dialog h3 { font-size: 15px; margin: 0; }
-.my-space-confirm-dialog p { color: var(--eqb-color-text-muted); font-size: 13px; line-height: 1.55; margin: 0; }
-.my-space-confirm-actions { display: flex; gap: 8px; justify-content: flex-end; }
+/* 删除确认框（.my-space-modal-backdrop / .my-space-confirm-dialog / .my-space-confirm-actions）换成共用 Dialog，
+ * 样式在 shared-ui/dialog.css；.my-space-confirm-dialog 还挂在 <dialog> 上，只当选择器钩子。 */
 
 /* 确认框「取消」（墨字）、「删除 PDF」（危险字）换成 Button 大号（36），原来三条手写规则删掉。 */
 
@@ -317,9 +286,4 @@ button.my-space-folder-button { cursor: pointer; }
    * 多带一个 .my-space-row-actions 才赢得过它。「…」宽仍是 36。原来「打开原草稿」窄屏左右内边距收到 6，
    * 换成 Button 后不再单独收（12），这一行在 390 宽下放得下。 */
   .my-space-row-actions .eqb-button[data-size='lg'] { height: 34px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .my-space-modal-backdrop,
-  .my-space-confirm-dialog { transition: none; }
 }

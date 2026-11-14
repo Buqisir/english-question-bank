@@ -177,15 +177,23 @@ if (menuBlockMatch) {
 
 console.log('\nTest 5: save-space dialog "保存" button is the filled one, "取消" is not (D2)')
 
+// 2026-11-14 对话框换成共用 shared-ui/Dialog：「保存」「取消」由 Dialog 画——给了 onSubmit 时确认键是提交键、
+// 普通语气用 solid（石板墨填充），取消用 strong（墨字透明底）。这里查调用处把两个键交给了 Dialog，
+// 再查 Dialog.tsx 里这两种语气没变。
+const dialogSrc = readSrc('app/src/shared-ui/Dialog.tsx')
+
 assert(
   'submit button in the save-space dialog is a solid-tone Button',
-  /<Button\s+type="submit"\s+tone="solid"/.test(tsxSrc),
-  'solid-tone submit Button not found',
+  /<Dialog[\s\S]*?className="draft-save-space-dialog"[\s\S]*?onSubmit=[\s\S]*?confirm=\{\{/.test(tsxSrc) &&
+    /type=\{confirmType\}\s+tone=\{tone === 'alert' \? 'danger' : 'solid'\}/.test(dialogSrc) &&
+    /onSubmit \? 'submit' : 'button'/.test(dialogSrc),
+  'save-space Dialog with onSubmit + solid confirm not found',
 )
 
 assert(
   '"取消" in the save-space dialog is a transparent strong-tone Button, not a second filled key',
-  /<Button tone="strong" size="lg" onClick=\{\(\) => setSpaceDialogOpen\(false\)\}>取消<\/Button>/.test(tsxSrc),
+  /className="draft-save-space-dialog"[\s\S]*?cancel=\{\{ label: '取消' \}\}/.test(tsxSrc) &&
+    /<Button\s+tone="strong"\s+size="lg"[\s\S]*?onClick=\{cancel\.onClick \?\? dismiss\}/.test(dialogSrc),
   'strong-tone 取消 Button not found',
 )
 

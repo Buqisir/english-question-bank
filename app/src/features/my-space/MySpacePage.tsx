@@ -14,8 +14,8 @@ import type { MySpaceArtifact, MySpaceFolder } from '../../domain/questionBank'
 import { deleteMySpaceArtifact, downloadMySpaceArtifact, fetchMySpace } from '../../services/mySpace'
 import { prepareFileSaveTarget, type FileSaveMode } from '../../services/fileDownload.ts'
 import { describeError } from '../shared/errorCopy'
-import { useToastPresence } from '../shared/useToastPresence.ts'
 import { Button } from '../../shared-ui/Button.tsx'
+import { Dialog } from '../../shared-ui/Dialog.tsx'
 import { EmptyState } from '../../shared-ui/EmptyState.tsx'
 import { Menu } from '../../shared-ui/Menu.tsx'
 import './MySpacePage.css'
@@ -125,7 +125,6 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
   // 只给下载用：busyId 同时管删除，直接拿它驱动下载图标的话，删文件时下载图标也会动（D8）。
   const [downloadingId, setDownloadingId] = useState<string | null>(null)
   const [confirmTarget, setConfirmTarget] = useState<MySpaceArtifact | null>(null)
-  const confirmPresence = useToastPresence(confirmTarget, 120)
 
   const selectedFolder = useMemo(
     () => folders.find((folder) => folder.id === selectedFolderId) || null,
@@ -187,44 +186,14 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
     onOpenDraft(artifact.sourceDraftPaperId)
   }
 
-  const cancelButtonRef = useRef<HTMLButtonElement | null>(null)
+  // 关上确认框时焦点回到打开它的那个键：菜单项在打开时已经关掉了，所以记下菜单的触发键（Menu 交来的 trigger），
+  // 交给 Dialog 的 returnFocus。焦点圈、Esc、退场动画都由共用 Dialog 管（原来这里自己写的 keydown 循环删了）。
   const restoreFocusRef = useRef<HTMLElement | null>(null)
 
   function requestDeleteArtifact(artifact: MySpaceArtifact, trigger: HTMLElement) {
     restoreFocusRef.current = trigger
     setConfirmTarget(artifact)
   }
-
-  useEffect(() => {
-    // Presence mounts the dialog one render after the delete target changes.
-    if (!confirmPresence.rendered) return
-    cancelButtonRef.current?.focus()
-    const restoreTarget = restoreFocusRef.current
-    const onKeyDown = (event: globalThis.KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault()
-        setConfirmTarget(null)
-      } else if (event.key === 'Tab') {
-        const dialog = cancelButtonRef.current?.closest('[role="alertdialog"]')
-        const buttons = dialog ? [...dialog.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')] : []
-        const first = buttons[0]
-        const last = buttons.at(-1)
-        if (event.shiftKey && document.activeElement === first) {
-          event.preventDefault()
-          last?.focus()
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault()
-          first?.focus()
-        }
-      }
-    }
-    document.addEventListener('keydown', onKeyDown)
-    return () => {
-      document.removeEventListener('keydown', onKeyDown)
-      restoreTarget?.focus()
-      restoreFocusRef.current = null
-    }
-  }, [confirmPresence.rendered])
 
   async function confirmDeleteArtifact() {
     const artifact = confirmTarget
@@ -360,18 +329,17 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
         </div>
       </div>
 
-      {confirmPresence.rendered && (
-        <div className="my-space-modal-backdrop" role="presentation" data-visible={confirmPresence.visible}>
-          <div className="my-space-confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-space-confirm-dialog-title" data-visible={confirmPresence.visible}>
-            <h3 id="my-space-confirm-dialog-title">删除草稿卷 PDF</h3>
-            <p>删除「{confirmPresence.rendered.title || confirmPresence.rendered.fileName}」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。</p>
-            <div className="my-space-confirm-actions">
-              <Button tone="strong" size="lg" ref={cancelButtonRef} onClick={() => setConfirmTarget(null)}>取消</Button>
-              <Button className="my-space-delete-confirm" tone="danger" size="lg" onClick={() => void confirmDeleteArtifact()}>删除 PDF</Button>
-            </div>
-          </div>
-        </div>
-      )}
+      <Dialog
+        tone="alert"
+        open={Boolean(confirmTarget)}
+        onClose={() => setConfirmTarget(null)}
+        className="my-space-confirm-dialog"
+        title="删除草稿卷 PDF"
+        description={`删除「${confirmTarget?.title || confirmTarget?.fileName || ''}」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。`}
+        returnFocus={() => restoreFocusRef.current}
+        cancel={{ label: '取消' }}
+        confirm={{ label: '删除 PDF', className: 'my-space-delete-confirm', onClick: () => void confirmDeleteArtifact() }}
+      />
     </div>
   )
 }

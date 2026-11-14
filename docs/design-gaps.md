@@ -82,3 +82,8 @@ token 的扩展用法。
 
 - **想要的值**：空状态里图的尺寸档和说明的行宽，tokens.css 里没有这一类。一是坐石獭獭的图框 150 × 150（BRAND.md §4.7 空态 150px 高）；二是「没找到」摊手獭獭的宽 128（另外三张半身 110 宽 × 第 119 条的 1.17）；三是说明一行最多 26em（原来草稿卷空态的值）。另外平涂插图 88 × 88 还写在 `components/emptyIllustration.css` 里，没动。若收编，候选名 `--eqb-empty-art-otter-sit`、`--eqb-empty-art-otter-half`、`--eqb-measure-empty-text`。
 - **临时方案**：先写成 emptyState.css 里的局部变量 `--eqb-empty-otter-sit-size`、`--eqb-empty-otter-not-found-width`、`--eqb-empty-text-measure`，每个注明出处。说明文字用的是 `--eqb-font-size-control`（13px，DESIGN.md §3 的 UI Compact 档），名字说的是控件，空态借用；若要分开，候选名 `--eqb-font-size-compact`。记录在 `design/components-2026-11-13/migrate-empty/README.md`「缺的变量」。
+
+## 2026-11-14 对话框构件的宽度和模态遮罩（`app/src/shared-ui/dialog.css` 文件头 `:root` 五个局部变量）
+
+- **想要的值**：一是对话框宽度三档加抽屉一档，tokens.css 里没有这一类：sm 360（个人空间删除确认原来的宽）、md 440（「保存 PDF 到个人空间」和作废口令原来的宽）、lg 620（选择练字单词原来的宽）、side 780（录题面板原来的宽）。若收编，候选名 `--eqb-dialog-width-sm/-md/-lg/-side`。二是盖住整页的模态遮罩色：站上原来五处各写各的（墨 28% 两处、30%、32%、42%），取最多的墨 28%。上面「草稿卷重排遮罩」那条已有 `--eqb-color-scrim` 候选，但那是桌色 60% 的浅遮罩（旧内容还在、正在换新），和这里压暗整页、突出弹窗的用途和深浅都不同，不该共用一个名字。若收编，候选名 `--eqb-color-scrim-modal`（那条改叫 `--eqb-color-scrim-wait` 或保持原名，Owner 定）。
+- **临时方案**：先写成 dialog.css 里的局部变量 `--eqb-dialog-width-sm`、`--eqb-dialog-width-md`、`--eqb-dialog-width-lg`、`--eqb-dialog-width-side`、`--eqb-dialog-scrim`（`color-mix(in srgb, var(--eqb-color-text) 28%, transparent)`），每个注明出处。标题用 `--eqb-font-size-sm`（14）、说明和正文用 `--eqb-font-size-control`（13，名字说的是控件，对话框借用，同上一条空状态）。记录在 `design/components-2026-11-13/migrate-dialog/README.md`「缺的变量」。

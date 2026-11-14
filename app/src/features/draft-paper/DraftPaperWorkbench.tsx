@@ -2,8 +2,8 @@ import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, typ
 import { Archive, ArrowDown, ArrowLeftRight, ArrowUp, ChevronDown, Ellipsis, FolderPlus, PageBreak, PaperCheck, PaperStudent, RotateCcw, Save, Trash } from '../../icons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
-import { useModalDialog } from '../../components/useModalDialog'
 import { Button } from '../../shared-ui/Button.tsx'
+import { Dialog } from '../../shared-ui/Dialog.tsx'
 import { EmptyState } from '../../shared-ui/EmptyState.tsx'
 import { Menu } from '../../shared-ui/Menu.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
@@ -167,9 +167,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [exportError, setExportError] = useState<Failure | null>(null)
   const [exportSuccessMessage, setExportSuccessMessage] = useState('')
   const [spaceDialogOpen, setSpaceDialogOpen] = useState(false)
-  // motion-press-exit #2: 弹层退出 ~120ms（var(--motion-fast)）播完再卸载。
-  const spaceDialogPresence = usePresence(spaceDialogOpen, 120)
-  const spaceDialogRef = useModalDialog(spaceDialogPresence.mounted)
   const [spaceFolders, setSpaceFolders] = useState<MySpaceFolder[]>([])
   const [spaceFolderId, setSpaceFolderId] = useState('')
   const [spaceFileName, setSpaceFileName] = useState('')
@@ -2056,79 +2053,60 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           {savedToastPresence.rendered}
         </Notice>
       )}
-      {spaceDialogPresence.mounted && (
-        <dialog
-          ref={spaceDialogRef}
-          className="draft-modal-backdrop"
-          aria-label="保存 PDF 到个人空间"
-          data-visible={spaceDialogPresence.visible}
-          onCancel={(event) => {
-            event.preventDefault()
-            setSpaceDialogOpen(false)
-          }}
-        >
-          <form
-            aria-label="保存 PDF 到个人空间"
-            className="draft-save-space-dialog"
-            data-visible={spaceDialogPresence.visible}
-            onSubmit={(event) => {
-              event.preventDefault()
-              void saveToMySpace()
-            }}
+      {/* 构件厂 2026-11-14：换成共用 Dialog（shared-ui/Dialog.tsx）。开关、焦点、Esc、背后不能滚、入退场都在构件里；
+          原来头上的「关闭」字键换成右上角的关闭键（读屏名字仍是「关闭」）。「取消」墨字、「保存」石板墨填充照旧
+          （这一页的雾薄荷主键给了顶栏「导出」，DESIGN.md §2 每页一处）。「新建」是正文里的键，墨字带图标、大号 36。
+          「保存 PDF 到个人空间」选中后 Menu 先把焦点还给「导出」，对话框关上时回到那里。 */}
+      <Dialog
+        open={spaceDialogOpen}
+        onClose={() => setSpaceDialogOpen(false)}
+        title="保存 PDF 到个人空间"
+        closeLabel="关闭"
+        className="draft-save-space-dialog"
+        bodyClassName="draft-save-space-body"
+        onSubmit={(event) => {
+          event.preventDefault()
+          void saveToMySpace()
+        }}
+        cancel={{ label: '取消' }}
+        confirm={{
+          label: spaceStatus === 'saving' ? '保存中...' : '保存',
+          disabled: spaceStatus === 'saving' || draftPaper.items.length === 0,
+        }}
+      >
+        <label>
+          <span>文件名</span>
+          <input value={spaceFileName} onChange={(event) => setSpaceFileName(event.target.value)} />
+        </label>
+        <label>
+          <span>文件夹</span>
+          <select value={spaceFolderId} onChange={(event) => setSpaceFolderId(event.target.value)}>
+            <option value="">未归档</option>
+            {spaceFolders.map((folder) => (
+              <option key={folder.id} value={folder.id}>{folder.name}</option>
+            ))}
+          </select>
+        </label>
+        <div className="draft-new-folder-row">
+          <input
+            value={spaceNewFolderName}
+            onChange={(event) => setSpaceNewFolderName(event.target.value)}
+            aria-label="新建文件夹"
+            placeholder="新建文件夹"
+          />
+          <Button
+            tone="strong"
+            size="lg"
+            icon={<FolderPlus size={16} />}
+            onClick={createFolderInDialog}
+            disabled={!spaceNewFolderName.trim() || spaceStatus === 'saving'}
           >
-            <div className="draft-dialog-head">
-              <strong>保存 PDF 到个人空间</strong>
-              {/* 构件厂第 4 步第七页：对话框里的四个键换成 shared-ui/Button。「关闭」「取消」墨字、
-                  「新建」墨字带图标，「保存」石板墨填充（原来的 .primary-button 就是石板墨底白字；
-                  这一页的雾薄荷主键已经给了顶栏「导出」，DESIGN.md §2 每页一处）。都用大号 36。 */}
-              <Button tone="strong" size="lg" onClick={() => setSpaceDialogOpen(false)}>关闭</Button>
-            </div>
-            <label>
-              <span>文件名</span>
-              <input value={spaceFileName} onChange={(event) => setSpaceFileName(event.target.value)} />
-            </label>
-            <label>
-              <span>文件夹</span>
-              <select value={spaceFolderId} onChange={(event) => setSpaceFolderId(event.target.value)}>
-                <option value="">未归档</option>
-                {spaceFolders.map((folder) => (
-                  <option key={folder.id} value={folder.id}>{folder.name}</option>
-                ))}
-              </select>
-            </label>
-            <div className="draft-new-folder-row">
-              <input
-                value={spaceNewFolderName}
-                onChange={(event) => setSpaceNewFolderName(event.target.value)}
-                aria-label="新建文件夹"
-                placeholder="新建文件夹"
-              />
-              <Button
-                tone="strong"
-                size="lg"
-                icon={<FolderPlus size={16} />}
-                onClick={createFolderInDialog}
-                disabled={!spaceNewFolderName.trim() || spaceStatus === 'saving'}
-              >
-                新建
-              </Button>
-            </div>
-            {spaceStatus === 'loading' && <Notice kind="waiting" className="draft-dialog-note">正在读取文件夹…</Notice>}
-            {spaceStatus === 'error' && <Notice kind="error" className="draft-error">{spaceMessage}</Notice>}
-            <div className="draft-dialog-actions">
-              <Button tone="strong" size="lg" onClick={() => setSpaceDialogOpen(false)}>取消</Button>
-              <Button
-                type="submit"
-                tone="solid"
-                size="lg"
-                disabled={spaceStatus === 'saving' || draftPaper.items.length === 0}
-              >
-                {spaceStatus === 'saving' ? '保存中...' : '保存'}
-              </Button>
-            </div>
-          </form>
-        </dialog>
-      )}
+            新建
+          </Button>
+        </div>
+        {spaceStatus === 'loading' && <Notice kind="waiting" className="draft-dialog-note">正在读取文件夹…</Notice>}
+        {spaceStatus === 'error' && <Notice kind="error" className="draft-error">{spaceMessage}</Notice>}
+      </Dialog>
     </div>
     </>
   )

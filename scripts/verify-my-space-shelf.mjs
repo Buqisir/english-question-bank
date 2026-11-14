@@ -41,7 +41,8 @@ assert('MySpacePage.css has zero hardcoded palette hex', unexpectedHex.length ==
 assert('MySpacePage.tsx does not use window.confirm', !tsx.includes('window.confirm'))
 assert(
   'named permanent delete uses a custom alert dialog and preserves original-draft wording',
-  tsx.includes('role="alertdialog"') && tsx.includes('删除草稿卷 PDF') && tsx.includes('此操作不可恢复。原草稿不受影响。'),
+  // 2026-11-14 换成共用 Dialog 的 alert 语气（Dialog 渲染 role="alertdialog"）。
+  tsx.includes('tone="alert"') && tsx.includes('删除草稿卷 PDF') && tsx.includes('此操作不可恢复。原草稿不受影响。'),
 )
 assert('delete dialog retains cancel and explicit PDF deletion actions', tsx.includes('取消') && tsx.includes('删除 PDF'))
 assert('missing original draft still explains that its PDF remains downloadable', tsx.includes('原草稿卷已删除，PDF 仍可下载'))

@@ -952,59 +952,15 @@
    原来的黑底白字条去掉，改白底、e3（DESIGN.md §4），入退场的 transition 搬进 notice.css，
    做法不变（退出 motion-fast、入场 motion-base，同一属性平滑重定向）。 */
 
-/* emil-processing: modal 入退场（findings 表条目 draft-save-space-dialog）。
-   backdrop 淡入独立于 dialog 的 fade+scale；两者都走「保持挂载播完 exit
-   再卸载」的 usePresence，退出（本规则 motion-fast）快于入场
-   ([data-visible="true"] 覆盖成 motion-base）。center 弹层 origin 保持
-   居中，不需要 trigger 边 origin（模态豁免，findings 表已注明）。 */
-.draft-modal-backdrop {
-  align-items: center;
-  background: rgb(27 43 51 / 0.28);
-  display: flex;
-  inset: 0;
-  justify-content: center;
-  padding: 18px;
-  position: fixed;
-  z-index: 40;
-  opacity: 0;
-  transition: opacity var(--motion-fast) var(--ease-out);
-}
+/* 「保存 PDF 到个人空间」换成共用 Dialog（构件厂 2026-11-14）：遮罩、面板、入退场、标题行、底部动作都在
+   shared-ui/dialog.css，原来的 .draft-modal-backdrop、.draft-save-space-dialog 面板、.draft-dialog-head、
+   .draft-dialog-actions 几条删掉。下面只留正文里的表单排法；.draft-save-space-dialog 现在挂在 <dialog> 上。 */
 
-.draft-modal-backdrop[data-visible='true'] {
-  opacity: 1;
-  transition-duration: var(--motion-base);
-}
-
-.draft-save-space-dialog {
-  background: var(--panel);
-  border: 1px solid transparent;
-  border-radius: 8px;
-  /* Floating-tier shadow (DESIGN.md §4), ink-tinted per plan special case
-     rather than the literal rgba(0,0,0,0.12) in the shadow vocabulary. */
-  box-shadow: var(--elev-3);
+/* 覆盖：本条 (0,2,0) 盖过 dialog.css .eqb-dialog-body (0,1,0) 的块排法：这一处正文是三行表单，竖排、行距 12（原来面板的 gap）。 */
+.eqb-dialog-body.draft-save-space-body {
   display: grid;
-  gap: 12px;
-  max-width: 440px;
-  max-height: calc(100dvh - 36px);
-  overflow: auto;
-  padding: 16px;
-  width: min(100%, 440px);
-  opacity: 0;
-  transform: scale(0.97);
-  transition: opacity var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
-}
-
-.draft-save-space-dialog[data-visible='true'] {
-  opacity: 1;
-  transform: scale(1);
-  transition-duration: var(--motion-base);
-}
-
-.draft-dialog-head {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
+  gap: var(--eqb-space-3);
+  align-content: start;
 }
 
 .draft-save-space-dialog label {
@@ -1035,11 +991,6 @@
   grid-template-columns: minmax(0, 1fr) auto;
 }
 
-.draft-dialog-actions {
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-}
 
 
 /* workbench-header-unify Locked Decision 5 窄屏退化补充: ≤980px 时 A4/A3

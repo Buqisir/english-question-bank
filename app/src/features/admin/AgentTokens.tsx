@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useModalDialog } from '../../components/useModalDialog'
+import { Dialog } from '../../shared-ui/Dialog.tsx'
 import { errorFromResponse } from '../../services/httpClient'
 
 type AgentToken = { id: string; name: string; createdAt: string; revokedAt: string | null; lastUsedAt: string | null }
@@ -23,7 +23,6 @@ export function AgentTokens() {
   const [loadFailed, setLoadFailed] = useState(false)
   const [loadAttempt, setLoadAttempt] = useState(0)
   const [revoking, setRevoking] = useState<AgentToken | null>(null)
-  const dialog = useModalDialog(Boolean(revoking))
   useEffect(() => {
     let active = true
     request().then(data => { if (active) { setTokens(data.tokens); setLoadFailed(false) } })
@@ -73,18 +72,32 @@ export function AgentTokens() {
           <small>创建于 {new Date(item.createdAt).toLocaleDateString()} · {item.lastUsedAt ? `最近使用 ${new Date(item.lastUsedAt).toLocaleString()}` : '尚未使用'}</small></div>
         {!item.revokedAt && <button type="button" className="ghost-button" disabled={busy} onClick={() => setRevoking(item)}>作废口令</button>}
       </li>)}</ul>}
-    {revoking && <dialog ref={dialog} className="agent-token-dialog" aria-labelledby="agent-revoke-title" onCancel={event => { event.preventDefault(); if (!busy) setRevoking(null) }}>
-      <h2 id="agent-revoke-title">作废「{revoking.name}」？</h2>
-      <p>使用这条口令的 Agent 将立即失去访问权限，作废后无法恢复。</p>
-      <p role="alert" className="admin-backfill-error">{error}</p>
-      <div>
-        <button type="button" className="ghost-button" disabled={busy} onClick={() => setRevoking(null)}>保留口令</button>
-        <button type="button" className="ghost-button" disabled={busy} onClick={() => void mutate(async () => {
-          await request(`/${encodeURIComponent(revoking.id)}/revoke`, {})
-          setTokens(current => current.map(item => item.id === revoking.id ? { ...item, revokedAt: new Date().toISOString() } : item))
-          setRevoking(null); setSecret(''); setNotice(`已作废${revoking.name}`)
-        })}>{busy ? '作废中…' : `作废「${revoking.name}」`}</button>
-      </div>
-    </dialog>}
+    {/* 作废确认：共用 Dialog 的 alert 语气（读屏 alertdialog、确认键危险字），见 design/components-2026-11-13/migrate-dialog/README.md。
+      一直挂着、只切 open，退场动画播完再卸载；作废中（busy）Esc 和「保留口令」都不关。 */}
+    <Dialog
+      tone="alert"
+      size="md"
+      open={Boolean(revoking)}
+      onClose={() => setRevoking(null)}
+      busy={busy}
+      className="agent-token-dialog"
+      title={`作废「${revoking?.name ?? ''}」？`}
+      description="使用这条口令的 Agent 将立即失去访问权限，作废后无法恢复。"
+      cancel={{ label: '保留口令' }}
+      confirm={{
+        label: busy ? '作废中…' : `作废「${revoking?.name ?? ''}」`,
+        disabled: busy,
+        onClick: () => {
+          if (!revoking) return
+          void mutate(async () => {
+            await request(`/${encodeURIComponent(revoking.id)}/revoke`, {})
+            setTokens(current => current.map(item => item.id === revoking.id ? { ...item, revokedAt: new Date().toISOString() } : item))
+            setRevoking(null); setSecret(''); setNotice(`已作废${revoking.name}`)
+          })
+        },
+      }}
+    >
+      {error ? <p role="alert" className="admin-backfill-error">{error}</p> : null}
+    </Dialog>
   </section>
 }

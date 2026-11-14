@@ -152,7 +152,7 @@ assert('My Space page handles missing source draft', mySpacePage.includes('原�
 // replaced with a self-built confirm modal (verify-my-space-shelf.mjs owns
 // the full contract for it) — this assertion now checks its absence plus
 // the presence of the custom dialog, instead of asserting window.confirm.
-assert('My Space page deletes artifacts with a custom confirm dialog, not window.confirm', !mySpacePage.includes('window.confirm') && mySpacePage.includes('my-space-confirm-dialog'))
+assert('My Space page deletes artifacts with a custom confirm dialog, not window.confirm', !mySpacePage.includes('window.confirm') && mySpacePage.includes('<Dialog') && mySpacePage.includes('tone="alert"'))
 
 const app = read('app/src/App.tsx')
 assert('App parses my-space route', app.includes("get('view') === 'my-space'"))
