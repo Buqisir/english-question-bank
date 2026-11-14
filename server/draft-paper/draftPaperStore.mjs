@@ -592,7 +592,9 @@ export function createDraftPaperStore({
       publicationSource,
       reject,
       label: 'Canonical visible page-break source',
+      allowMaterialization: true,
     })
+    if (source.kind === 'source_materialization') return new Set()
     return new Set(source.asset.content.blocks.flatMap((block, index, blocks) => {
       if (
         block.type !== 'group'
@@ -1162,22 +1164,7 @@ export function createDraftPaperStore({
     return itemId
   }
 
-  // ROLLBACK-after-COMMIT fix (draft-numbering-style QA finding): the
-  // post-COMMIT getDraftPaper(...) call below (which re-renders print HTML)
-  // must sit OUTSIDE the BEGIN/COMMIT try-block. Before this fix it lived
-  // INSIDE that try-block, so a render failure there (e.g. a print-renderer
-  // consistency assertion) was caught by the surrounding `catch` and turned
-  // into a second `userDb.exec('ROLLBACK')` call — but the transaction was
-  // already committed, so sqlite throws "cannot rollback - no transaction is
-  // active", masking the real render error AND leaving the already-committed
-  // mutation in place with no accurate error surfaced to the caller. Moving
-  // the read/render call after the try-block means: the mutation still
-  // commits (correct — it succeeded), and if the subsequent render throws,
-  // that real error propagates as-is to the route layer (existing error
-  // convention: caught there and mapped to 4xx, or — for routes with no
-  // local catch — the router's top-level handler at the bottom of
-  // server/api.mjs turns it into a 500 with the real message). No rollback
-  // is attempted after a commit, and no error is swallowed.
+  // Render before COMMIT so a rejected response cannot persist a broken draft.
   function addGroupToCurrentDraftPaper(userId, groupId) {
     requireUserId(userId)
     const userDb = openUserDatabase({ readOnly: false })
@@ -1197,12 +1184,13 @@ export function createDraftPaperStore({
         }
         addGroupToDraftPaper({ userDb, bankDb }, userId, current.id, groupId)
         markCurrentDraftPaper(userDb, userId, current.id)
+        const draftPaper = getDraftPaper({ userDb, bankDb }, userId, current.id)
         userDb.exec('COMMIT')
+        return draftPaper
       } catch (error) {
         userDb.exec('ROLLBACK')
         throw error
       }
-      return getDraftPaper({ userDb, bankDb }, userId, current.id)
     } finally {
       userDb.close()
       bankDb.close()
