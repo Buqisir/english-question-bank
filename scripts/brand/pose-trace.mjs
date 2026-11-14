@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-// 仰躺姿势 · 第一轮：照两张图像生成的草图（L1 仰躺抱石、K2 仰躺敲开蛤）描成平涂矢量。提案 · 单一来源。
+// 仰躺姿势：照两张图像生成的草图（L1 仰躺抱石、K2 仰躺敲开蛤）描成平涂矢量。提案 · 单一来源。
+// 有两轮，用 ROUND 选（默认 2）。下面先写第一轮的做法，第二轮改了什么写在后面「第二轮」一段。
 //
 // 做法照全身像第三轮（scripts/brand/body-f6-trace.mjs）：playwright 在 canvas 上取草图像素 → 按最近色分类 →
 // 形态学开运算 / 连通块 / 填洞 → 沿像素缝走闭合轮廓 → 环形高斯平滑 → RDP 抽稀 → 过点三次贝塞尔。
@@ -14,12 +15,22 @@
 // 颜色只用 雾薄荷 #72BFA4、浅雾薄荷 #DDF1E8、雾白 #F2FAF6、墨 #191D18、石色 #6E828C，
 // 加上石头物件自带的石面 #8FA3AC（house-rules 第二节第 4 条：石头是石色加一块石面）。平涂，无描边、无渐变。
 //
-// 用法：node scripts/brand/pose-trace.mjs            （两张都出）
+// 第二轮（ROUND=2，审稿意见 2026-11-14）：
+//   - 头形换成头像母版：母版头裁到下巴、栅格化后并进身体剪影，草图的头（下巴线以上）不要；母版头形和五官原样盖在上面（同 F6）。
+//   - 后脚照草图描，不再剪掉换图元：只在两只后脚之间的分叉里挖一道圆头的缝（收干净），另在下面那只脚底下并一条短粗尾，尾尖从脚下露出来。
+//   - K2 举着的半片：改成从正面看半片壳的里面。外形是定稿 clam.svg 的剪影（转个角度），外圈一道雾薄荷壳边，里面雾白
+//     （同一剪影按中心缩小）。合页（壳顶）那头握在爪里，爪尖压在壳前面。是从定稿蛤派生的画法，不是新物件。
+//   - K2 举壳那条胳膊照草图描（弯的，有肘），只在被草图壳边切掉的地方补一个爪尖；不再用胶囊换前臂。
+//   - K2 下片和石头往右下挪，让开胳膊根，下片四周衬肚皮浅色。
+//
+// 用法：node scripts/brand/pose-trace.mjs            （两张都出，第二轮）
+//       ROUND=1 node scripts/brand/pose-trace.mjs    （复现第一轮，写回 pose-round1/）
+//       POSE_OUT=<目录> 把输出写到别处（比如核对第一轮能不能原样复现时用）
 //       POSE=float node scripts/brand/pose-trace.mjs  （只出一张，float 或 crack；拼图那三张图要两张都在才出）
 //       POSE_DEBUG=1 另出 debug-*.png（各蒙版上色看），默认不出。
-// 输出：design/brand-2026-10-13/image-review-2026-11-14/pose-round1/ 下的
+// 输出：design/brand-2026-10-13/image-review-2026-11-14/pose-round<ROUND>/ 下的
 //       otter-float.svg、otter-crack.svg、compare.png、check-large.png、small.png；终端打印量到的数（JSON）。
-// 只读 mascot/ 下的母版和物件，不改。
+// 草图两轮都从 pose-round1/ 读。只读 mascot/ 下的母版和物件，不改。
 import { readFileSync, writeFileSync, existsSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import path from 'node:path'
@@ -27,7 +38,12 @@ import { fileURLToPath } from 'node:url'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const BRAND = path.join(ROOT, 'design/brand-2026-10-13')
-const OUT = path.join(BRAND, 'image-review-2026-11-14/pose-round1')
+const ROUND = Number(process.env.ROUND || 2)
+if (![1, 2].includes(ROUND)) throw new Error('ROUND 只能是 1 或 2')
+const R2 = ROUND >= 2
+const SRC_DIR = path.join(BRAND, 'image-review-2026-11-14/pose-round1') // 草图放在第一轮目录里
+const OUT = process.env.POSE_OUT ? path.resolve(process.env.POSE_OUT) : path.join(BRAND, `image-review-2026-11-14/pose-round${ROUND}`)
+const ROUND_CN = ROUND === 1 ? '第一轮' : '第二轮'
 const MASCOT = path.join(BRAND, 'mascot')
 const requireFromApp = createRequire(path.join(ROOT, 'app/package.json'))
 const { chromium } = requireFromApp('playwright')
@@ -58,6 +74,14 @@ const objPaths = (f) => [...read(f).matchAll(/<path [^>]*\/>/g)].map((m) => m[0]
 const STONE_ROUND = objPaths('objects/stone-round.svg') // [石色主体, 石面]
 const STONE_FLAT = objPaths('objects/stone-flat.svg') // [石色主体, 石面]
 const CLAM_OPEN = objPaths('objects/clam-open.svg') // [下片, 上片, 合页圆, 下片纹 1, 下片纹 2, 上片里面]
+const CLAM_D = objPaths('objects/clam.svg')[0].match(/d="([^"]+)"/)[1] // 合着的蛤的外形（第一条 path）
+// 第二轮举着的半片：clam.svg 的剪影当壳边（雾薄荷），同一剪影按壳的中心缩小当里面（雾白）
+const CLAM_C = [119.5, 119] // clam.svg 外形外框的中心（56..182 × 71..166，目测取整）
+const HALF_SHELL = [
+  `<path d="${CLAM_D}" fill="#72BFA4"/>`,
+  `<path d="${CLAM_D}" fill="#F2FAF6" transform="translate(${CLAM_C[0]} ${CLAM_C[1] + 3}) scale(0.8 0.74) translate(${-CLAM_C[0]} ${-CLAM_C[1]})"/>`,
+]
+const HEAD_CLIP_Y = 680 // 第二轮：母版头形在下巴下面这条线裁掉（同 F6）
 const SIT_SVG = read('otter-sit.svg')
 
 const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
@@ -389,7 +413,7 @@ const POSES = {
   float: {
     src: 'source-L1-float.png',
     out: 'otter-float.svg',
-    title: '獭獭 · 仰躺抱石（float）· 第一轮对比稿',
+    title: `獭獭 · 仰躺抱石（float）· ${ROUND_CN}对比稿`,
     // 草图尾巴这一段（这条折线右边）剪掉，换后脚和尾巴
     tailCut: [[725, 420], [1024, 420], [1024, 800], [700, 800], [700, 700], [725, 660]],
     hips: [[738, 652, 50, 68, -10]], // 盖住剪口的髋
@@ -412,7 +436,7 @@ const POSES = {
   crack: {
     src: 'source-K2-crack.png',
     out: 'otter-crack.svg',
-    title: '獭獭 · 仰躺敲开蛤（crack）· 第一轮对比稿',
+    title: `獭獭 · 仰躺敲开蛤（crack）· ${ROUND_CN}对比稿`,
     tailCut: [[770, 420], [1024, 420], [1024, 820], [740, 820], [740, 720], [770, 680]],
     hips: [[778, 676, 50, 70, -8]],
     feet: [
@@ -450,10 +474,44 @@ const POSES = {
   },
 }
 
+// —— 第二轮在第一轮参数上改 ——
+if (R2) {
+  const F = POSES.float
+  const C = POSES.crack
+  for (const P of [F, C]) {
+    P.masterHead = true // 头形换母版
+    P.tailCut = null // 后脚照草图描，不剪
+    P.feet = []
+    P.hips = []
+    P.tail = []
+  }
+  // 两只后脚之间的分叉：草图里是一道尖缝，挖一道圆头的缝收干净（胶囊：缝底 → 缝口）
+  F.forkCarve = [[806, 627, 6, 905, 588, 9]]
+  C.forkCarve = [[868, 651, 6, 955, 637, 9]]
+  F.tailNotch = [[962, 691, 5, 1010, 684, 9]]
+  C.tailNotch = [[948, 722, 5, 1010, 716, 9]]
+  // 尾巴：下面那只脚底下并一条短粗尾，尾尖从脚的右下露出来
+  F.tailAdd = [...tailPrims([700, 708], [840, 709], [960, 707], 19, 21), ...tailPrims([960, 707], [985, 705], [998, 703], 21, 21)]
+  C.tailAdd = [...tailPrims([760, 738], [880, 738], [975, 736], 19, 21), ...tailPrims([975, 736], [990, 734], [999, 732], 21, 21)]
+  // K2 举着的那条胳膊照草图描；只在被壳边切掉的爪尖补一个椭圆，画在壳前面
+  C.forearm = null
+  C.localRound = [{ rect: [405, 450, 480, 505], open: 8 }, { rect: [405, 450, 480, 505], close: 12 }]
+  C.pawTips = [[440, 384, 46, 23, -15]] // 盖住草图前臂顶上被壳边切平的那一截（x 395～485）
+  C.frontPawTips = true
+  C.paws = [C.paws[0]] // 下面那只照旧按区域抠；举着的那只只把爪尖放到前面
+  // 举着的半片：正面看半片壳的里面（clam.svg 剪影派生），壳顶朝右下握在爪里
+  C.objects[0] = { paths: HALF_SHELL, pivot: CLAM_C, at: [432, 330], rotK: 165, id: 'shell-top' } // 壳顶露在爪尖上沿
+  // 下片和石头往右下挪，让开胳膊根（第一轮：石头 at [474, 600]，下片 at [500, 558]）
+  C.stone = { ...C.stone, at: [470, 628] }
+  C.objects[1] = { ...C.objects[1], at: [520, 590] }
+  // 胳膊根在下片左边就收住，下片左边、上边衬肚皮浅色
+  C.bellyTop = (x) => splinePts([[345, 525], [375, 533], [400, 528], [425, 510], [445, 497], [520, 534], [600, 552], [660, 563]], x)
+}
+
 // ————————————————————————————————— 一张 —————————————————————————————————
 async function build(key) {
   const P = POSES[key]
-  const SKETCH = path.join(OUT, P.src)
+  const SKETCH = path.join(SRC_DIR, P.src)
   const { W, H, px } = await loadPixels(SKETCH)
   const o = makeOps(W, H)
   const { N } = o
@@ -487,6 +545,11 @@ async function build(key) {
   const noseSk = inkParts[0]
   const eyes = inkParts.slice(1, 3).sort((a, b) => a.cx - b.cx)
   const SK = { cx: (eyes[0].cx + eyes[1].cx) / 2, cy: (eyes[0].cy + eyes[1].cy) / 2, gap: Math.hypot(eyes[1].cx - eyes[0].cx, eyes[1].cy - eyes[0].cy), deg: (Math.atan2(eyes[1].cy - eyes[0].cy, eyes[1].cx - eyes[0].cx) * 180) / Math.PI }
+
+  // 母版五官（第二轮还有头形）对齐草图两眼的变换
+  const S = SK.gap / MASTER.gap
+  const mcx = (MASTER.eyeL[0] + MASTER.eyeR[0]) / 2
+  const faceXf = `translate(${f1(SK.cx)} ${f1(SK.cy)}) rotate(${f1(SK.deg)}) scale(${(S).toFixed(4)}) translate(${-mcx} ${-MASTER.eyeL[1]})`
 
   // —— 物件里要抠掉的草图半片（K2）——
   let shellU = new Uint8Array(N)
@@ -524,8 +587,36 @@ async function build(key) {
     }
     body = o.fill(o.largest(body))
   }
-  // 尾巴：剪掉草图那一段，换几何图元拼的后脚和尾巴
-  const cut = o.fromFn((x, y) => inPoly(x, y, P.tailCut))
+  // 第二轮：头形换母版。草图的头在下巴线以上不要，只留一截比脖子窄的桩子伸进去；母版头（裁到下巴）栅格化后并进身体
+  if (P.masterHead) {
+    const toSk = (mx, my) => { const a = (SK.deg * Math.PI) / 180; const dx = (mx - mcx) * S; const dy = (my - MASTER.eyeL[1]) * S; return [SK.cx + dx * Math.cos(a) - dy * Math.sin(a), SK.cy + dx * Math.sin(a) + dy * Math.cos(a)] }
+    const CUT_Y = Math.round(toSk(mcx, 670)[1])
+    const STUB = 8
+    const hx0 = Math.round(SK.cx - SK.gap * 1.8)
+    const hx1 = Math.round(SK.cx + SK.gap * 1.6) // 再往右是 K2 举着的胳膊，不动
+    const row = CUT_Y * W
+    let x0 = hx0
+    let x1 = hx1
+    while (x0 < x1 && !body[row + x0]) x0++
+    while (x1 > x0 && !body[row + x1]) x1--
+    for (let y = 0; y < CUT_Y; y++) for (let x = hx0; x <= hx1; x++) if (y < CUT_Y - 40 || x < x0 + STUB || x > x1 - STUB) { body[y * W + x] = 0; belly[y * W + x] = 0 }
+    const headMask = await (async () => {
+      const hp = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 })
+      await hp.setContent(`<body style="margin:0;background:#fff"><svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><g transform="${faceXf}"><clipPath id="c"><rect x="-200" y="-200" width="1500" height="${HEAD_CLIP_Y + 200}"/></clipPath><path d="${HEAD_SHAPE_D}" fill="#000" clip-path="url(#c)"/></g></svg>`)
+      const png = await hp.screenshot({ type: 'png' })
+      await hp.setContent(`<img id="i" src="data:image/png;base64,${png.toString('base64')}">`)
+      const bits = await hp.evaluate(async () => { const img = document.getElementById('i'); await img.decode(); const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight; const g = c.getContext('2d'); g.drawImage(img, 0, 0); const d = g.getImageData(0, 0, c.width, c.height).data; let o = ''; for (let i = 0; i < d.length; i += 4) o += d[i] < 128 ? '1' : '0'; return o })
+      await hp.close()
+      return Uint8Array.from(bits, (ch) => (ch === '1' ? 1 : 0))
+    })()
+    body = o.largest(o.or(o.largest(body), headMask))
+  }
+  // 第二轮：后脚照草图描；分叉挖圆头缝，下面并一条短粗尾
+  if (P.forkCarve) body = o.sub(body, o.fromFn((x, y) => P.forkCarve.some((c) => inCapsule(x, y, c))))
+  if (P.tailAdd) body = o.or(body, o.fromFn((x, y) => P.tailAdd.some((c) => inCapsule(x, y, c))))
+  if (P.tailNotch) body = o.sub(body, o.fromFn((x, y) => P.tailNotch.some((c) => inCapsule(x, y, c)))) // 脚和尾巴之间的凹口挖圆
+  // 第一轮：剪掉草图那一段，换几何图元拼的后脚和尾巴
+  const cut = o.fromFn((x, y) => P.tailCut && inPoly(x, y, P.tailCut))
   body = o.sub(body, cut)
   belly = o.sub(belly, cut)
   const feetMask = P.feet.map((f) => o.fromFn((x, y) => inPoly(x, y, f.hull) && !f.notches.some((e) => inEllipse(x, y, e))))
@@ -533,7 +624,7 @@ async function build(key) {
   const hipMask = o.fromFn((x, y) => P.hips.some((e) => inEllipse(x, y, e)))
   const extra = o.or(...feetMask, tailMask, hipMask)
   body = o.or(o.and(body, o.sub(new Uint8Array(N).fill(1), cut)), extra)
-  { // 新接上的那一段（剪口往左 80 像素起）做一次闭运算，接缝处的凹角圆一下
+  if (P.tailCut) { // 新接上的那一段（剪口往左 80 像素起）做一次闭运算，接缝处的凹角圆一下
     const zone = o.fromFn((x, y) => x > P.tailCut[0][0] - 80 && y > P.tailCut[0][1] - 40)
     body = o.or(body, o.and(o.close(body, 10), zone))
   }
@@ -557,6 +648,7 @@ async function build(key) {
   // 压在物件上的爪子：身体（不含肚皮）在区域里的那部分
   const mintOnly = o.sub(body, belly)
   const pawMasks = P.paws.map((poly) => o.keep(o.and(mintOnly, o.fromFn((x, y) => inPoly(x, y, poly))), (c) => c.area > 400))
+  if (P.frontPawTips) pawMasks.push(o.and(body, o.fromFn((x, y) => P.pawTips.some((e) => inEllipse(x, y, e)))))
 
   // —— 描 ——
   const trace = (m, sigma = SIGMA, minArea = 400) => {
@@ -570,11 +662,9 @@ async function build(key) {
   const tPaws = pawMasks.map((m) => trace(m))
   const tWater = waterPath(P.water)
 
-  // —— 脸：母版五官，按草图两眼对齐 ——
-  const S = SK.gap / MASTER.gap
-  const mcx = (MASTER.eyeL[0] + MASTER.eyeR[0]) / 2
-  const faceXf = `translate(${f1(SK.cx)} ${f1(SK.cy)}) rotate(${f1(SK.deg)}) scale(${(S).toFixed(4)}) translate(${-mcx} ${-MASTER.eyeL[1]})`
-  const face = `<g id="face" transform="${faceXf}">${MUZZLE}${EYES}${NOSE}${DOTS}</g>`
+  // —— 脸：母版五官（第二轮连头形），按草图两眼对齐 ——
+  const headShape = P.masterHead ? `<clipPath id="${key}-chin"><rect x="-200" y="-200" width="1500" height="${HEAD_CLIP_Y + 200}"/></clipPath><path d="${HEAD_SHAPE_D}" fill="${COLOR.mint}" clip-path="url(#${key}-chin)"/>` : ''
+  const face = `<g id="face" transform="${faceXf}">${headShape}${MUZZLE}${EYES}${NOSE}${DOTS}</g>`
 
   // 头宽（含耳朵）：眼线上下各 0.35 个眼距这几行里，身体蒙版最宽的一行
   let headW = 0
@@ -587,7 +677,7 @@ async function build(key) {
     if (x1 - x0 + 1 > headW) { headW = x1 - x0 + 1; headSpan = [x0, x1, y] }
   }
   const sketchNoseW = noseSk.maxX - noseSk.minX + 1
-  const OBJ = headW / 240 // 物件画框换算：240 = 头宽
+  const OBJ = (P.masterHead ? MASTER_HEAD_W * S : headW) / 240 // 物件画框换算：240 = 头宽
 
   // —— 物件 ——
   const st = P.stone
@@ -611,7 +701,9 @@ async function build(key) {
   await probe.close()
   const PAD = Math.round(Math.max(bb.w, bb.h) * 0.04)
   const vb = [Math.floor(bb.x - PAD), Math.floor(bb.y - PAD), Math.ceil(bb.w + 2 * PAD), Math.ceil(bb.h + 2 * PAD)]
-  const NOTE = `<!-- 对比稿，不是母版：仰躺姿势第一轮（${P.src}），身体外形照草图描（scripts/brand/pose-trace.mjs）；五官是头像母版的脸斑、眼、鼻、胡须点整体缩放放上；物件是 mascot/objects/ 的定稿形；后脚和尾巴重画。提案 · 单一来源。water 那块可以整块拿掉。 -->`
+  const NOTE = R2
+    ? `<!-- 对比稿，不是母版：仰躺姿势第二轮（${P.src}），身体和后脚照草图描（scripts/brand/pose-trace.mjs，ROUND=2）；头是头像母版原样缩放（头形裁到下巴并进身体剪影）；物件是 mascot/objects/ 的定稿形${key === 'crack' ? '，举着的半片是 clam.svg 剪影派生的正面半壳' : ''}；尾巴是加的一小段。提案 · 单一来源。water 那块可以整块拿掉。 -->`
+    : `<!-- 对比稿，不是母版：仰躺姿势第一轮（${P.src}），身体外形照草图描（scripts/brand/pose-trace.mjs）；五官是头像母版的脸斑、眼、鼻、胡须点整体缩放放上；物件是 mascot/objects/ 的定稿形；后脚和尾巴重画。提案 · 单一来源。water 那块可以整块拿掉。 -->`
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.join(' ')}">\n${NOTE}\n<title>${P.title}</title>\n${layers}\n</svg>\n`
   writeFileSync(path.join(OUT, P.out), svg)
 
@@ -629,7 +721,8 @@ async function build(key) {
   }
 
   const nodes = { body: tBody.nodes, belly: tBelly.nodes, paws: tPaws.map((t) => t.nodes), water: tWater.nodes }
-  const headWfinal = headW // 头的外形照草图描，最后的头宽就是草图蒙版量到的宽（平滑只差零点几像素）
+  // 第一轮头形照草图描，头宽就是草图蒙版量到的宽；第二轮头形是母版，头宽 = 母版耳到耳 × 缩放
+  const headWfinal = P.masterHead ? f1(MASTER_HEAD_W * S) : headW
   const measure = {
     sketch: { eyeGap: f1(SK.gap), eyeLineDeg: f1(SK.deg), headW, headSpan, noseW: sketchNoseW, eyeGapPerHead: +(SK.gap / headW).toFixed(3), nosePerHead: +(sketchNoseW / headW).toFixed(3) },
     vector: { scaleFromMaster: +S.toFixed(4), eyeGap: f1(SK.gap), headW: headWfinal, noseW: f1(MASTER.noseW * S), eyeGapPerHead: +(SK.gap / headWfinal).toFixed(3), nosePerHead: +((MASTER.noseW * S) / headWfinal).toFixed(3) },
@@ -651,7 +744,7 @@ for (const k of keys) res[k] = await build(k)
 if (keys.length === 2) {
   const A = [res.float, res.crack]
   // compare.png：草图 | 矢量
-  const cmpHtml = `<style>body{margin:0;padding:24px;background:${COLOR.page};font:15px/1.5 system-ui,sans-serif;color:#1B2B33}h1{font-size:20px;margin:0 0 6px}p{margin:0 0 14px;color:#5A6C75}.r{display:flex;gap:14px;margin-bottom:14px}figure{margin:0;background:#fff;border-radius:8px;padding:12px}figcaption{padding-top:8px}img{display:block}</style><h1>仰躺姿势 · 第一轮：照草图描</h1><p>对比稿 · 提案 · 单一来源。左：草图（图像生成）。右：矢量（身体照草图描，五官用头像母版，物件用定稿，后脚和尾巴重画，品牌色平涂）。</p>${A.map((r) => `<div class="r"><figure><img src="${uriPng(r.sketch)}" width="520" height="520"><figcaption>草图 ${path.basename(r.sketch)}</figcaption></figure><figure style="display:flex;flex-direction:column;justify-content:center"><img src="${uriSvg(r.svg)}" width="${Math.round((520 * r.vbW) / Math.max(r.vbW, r.vbH))}"><figcaption>矢量 ${POSES[r.key].out}</figcaption></figure></div>`).join('')}`
+  const cmpHtml = `<style>body{margin:0;padding:24px;background:${COLOR.page};font:15px/1.5 system-ui,sans-serif;color:#1B2B33}h1{font-size:20px;margin:0 0 6px}p{margin:0 0 14px;color:#5A6C75}.r{display:flex;gap:14px;margin-bottom:14px}figure{margin:0;background:#fff;border-radius:8px;padding:12px}figcaption{padding-top:8px}img{display:block}</style><h1>仰躺姿势 · ${ROUND_CN}：照草图描</h1><p>对比稿 · 提案 · 单一来源。左：草图（图像生成）。右：矢量（${R2 ? '身体和后脚照草图描，头用头像母版，物件用定稿，举着的半片由 clam.svg 派生' : '身体照草图描，五官用头像母版，物件用定稿，后脚和尾巴重画'}，品牌色平涂）。</p>${A.map((r) => `<div class="r"><figure><img src="${uriPng(r.sketch)}" width="520" height="520"><figcaption>草图 ${path.basename(r.sketch)}</figcaption></figure><figure style="display:flex;flex-direction:column;justify-content:center"><img src="${uriSvg(r.svg)}" width="${Math.round((520 * r.vbW) / Math.max(r.vbW, r.vbH))}"><figcaption>矢量 ${POSES[r.key].out}</figcaption></figure></div>`).join('')}`
   const cmp = await browser.newPage({ viewport: { width: 1200, height: 800 }, deviceScaleFactor: 2 })
   await cmp.setContent(cmpHtml)
   await cmp.screenshot({ path: path.join(OUT, 'compare.png'), fullPage: true })
