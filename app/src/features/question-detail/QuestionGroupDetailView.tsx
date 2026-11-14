@@ -36,8 +36,7 @@ import {
   Pencil,
   Trash,
 } from '../../icons'
-import { DraftAddIcon } from '../../icons/MotionIcons'
-import { iconMotionInput } from '../../icons/motionInput'
+import { DraftAddButton } from '../../shared-ui/DraftAddButton.tsx'
 import type { QuestionGroupCard, QuestionGroupDetail, ReadingParseQuestionGroupResult, TopicLabel } from '../../domain/questionBank'
 import { sourceTypeLabel } from '../../domain/questionBank'
 import { compactGroupMeta } from './detailHelpers'
@@ -115,7 +114,6 @@ export type QuestionGroupDetailViewProps = {
   onBack: () => void
   onEdit: (detail: QuestionGroupDetail) => void
   onDelete: (detail: QuestionGroupDetail) => void
-  onAddToBasket: (detail: QuestionGroupDetail) => void
   /** opens the whole-paper preview page (paper-browse), scrolled to this
    * group — 挑题态, no lecture. Only rendered when the group has a
    * paperSurfaceHref (its paper has a paper-asset). */
@@ -131,10 +129,6 @@ export type QuestionGroupDetailViewProps = {
    * and the SW-3 thin-candidate disabled state) — same map App.tsx already
    * builds for PaperBrowsePage. */
   questionGroupById: Map<string, QuestionGroupCard>
-  /** similar-passages-entry (E6): adds one resolved 相似篇章 candidate to the
-   * current draft paper (same basket pipeline as onAddToBasket, just taking
-   * a QuestionGroupCard instead of the loaded QuestionGroupDetail). */
-  onAddSimilarToBasket: (card: QuestionGroupCard) => void
 }
 
 // ── 一张纸：题组模型（按 groupType 走五个现有 adapter 之一） ────────────
@@ -303,11 +297,9 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     onBack,
     onEdit,
     onDelete,
-    onAddToBasket,
     onOpenPaperBrowse,
     onOpenPaperBrowseLecture,
     questionGroupById,
-    onAddSimilarToBasket,
   } = props
 
   // ── 一张纸：async 挂载（confirmed Canonical Consumption only） ───────
@@ -566,26 +558,8 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
           )}
 
           <div className="peek-actions">
-            <Button
-              className="peek-add"
-              tone="primary"
-              {...iconMotionInput}
-              onClick={() => onAddToBasket(selectedDetail)}
-              disabled={selectedDetail.draftPaperButtonState === 'disabled'}
-              aria-pressed={selectedDetail.draftPaperButtonState === 'in_current_draft' ? true : undefined}
-              title={
-                selectedDetail.draftPaperButtonState === 'disabled'
-                  ? selectedDetail.printUnavailableReason || '暂不可组卷'
-                  : undefined
-              }
-              icon={<DraftAddIcon size={16} done={selectedDetail.draftPaperButtonState === 'in_current_draft'} />}
-            >
-              {selectedDetail.draftPaperButtonState === 'in_current_draft'
-                ? '已在草稿卷'
-                : selectedDetail.draftPaperButtonState === 'disabled'
-                  ? '暂不可组卷'
-                  : '加入草稿卷'}
-            </Button>
+            {/* 走查第四节第 6 条：换成共用加入键。加入前仍是这一页唯一的雾薄荷主键；加入后是「已加入 · 撤回」那块纸，不再是薄荷底。 */}
+            <DraftAddButton className="peek-add" target={selectedDetail} tone="primary" />
             {selectedDetail.draftPaperButtonState === 'disabled' && (
               <span className="peek-unavailable-note">这组题还在整理，整理好就能加入草稿卷</span>
             )}
@@ -654,7 +628,6 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
             recipeSummary={similarPassagesRecipeSummary(selectedDetail.groupType)}
             request={similarPassagesRequest}
             questionGroupById={questionGroupById}
-            onAdd={onAddSimilarToBasket}
             onCollapse={() => setSimilarPassagesOpen(false)}
             onRetry={() => selectedDetail && void loadSimilarPassages(selectedDetail.id)}
           />

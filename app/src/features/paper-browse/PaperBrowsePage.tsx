@@ -91,8 +91,9 @@ import {
 } from '../../../../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
-import { DisclosureIcon, DownloadFeedbackIcon, DraftAddIcon } from '../../icons/MotionIcons'
+import { DisclosureIcon, DownloadFeedbackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
+import { DraftAddButton } from '../../shared-ui/DraftAddButton.tsx'
 import { WritingPaperPage, type UnofficialReferenceEssay } from '../paper-intelligence/WritingPaperPage'
 import {
   buildPaperAssetSurfaceModel,
@@ -3165,37 +3166,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         >
           {!reviewRevision && card && (
             <div className="paper-browse-group-actions">
-              <button
-                type="button"
-                className={`paper-browse-gutter-add${
-                  card.draftPaperButtonState === 'in_current_draft'
-                    ? ' paper-browse-gutter-add--in-draft'
-                    : ''
-                }${
-                  card.draftPaperButtonState === 'disabled'
-                    ? ' paper-browse-gutter-add--disabled'
-                    : ''
-                }`}
-                {...iconMotionInput}
-                onClick={() => onAddGroupsToBasket([card])}
-                disabled={card.draftPaperButtonState === 'disabled'}
-                title={
-                  card.draftPaperButtonState === 'disabled'
-                    ? card.printUnavailableReason || '暂不可组卷'
-                    : undefined
-                }
-              >
-                {card.draftPaperButtonState !== 'disabled' && (
-                  <DraftAddIcon size={16} cut done={card.draftPaperButtonState === 'in_current_draft'} />
-                )}
-                {card.draftPaperButtonState === 'disabled' ? '暂不可组卷' : (
-                  // 两段文字叠在同一格里，按钮按长的那段留宽，切换时不跳；不显示的那段 visibility: hidden，不进可访问名称。
-                  <span className="paper-browse-gutter-add-label">
-                    <span className="paper-browse-gutter-add-label-idle">剪入</span>
-                    <span className="paper-browse-gutter-add-label-done">已剪入</span>
-                  </span>
-                )}
-              </button>
+              {/* 走查第四节第 6 条：卷面旁的「剪入 / 已剪入」换成共用加入键，和首页、详情页同一个写法（加入后「已加入 · 撤回」）。 */}
+              <DraftAddButton target={card} tone="strong" />
             </div>
           )}
           {options?.showScissorLine && (

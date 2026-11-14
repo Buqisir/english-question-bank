@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import type { GroupType, QuestionGroupDetail } from '../domain/questionBank.ts'
 import { QuestionGroupDetailView } from '../features/question-detail/QuestionGroupDetailView.tsx'
+import { DraftAddContext, type DraftAddActions } from '../shared-ui/draftAddContext.ts'
 import '../index.css'
 
 const search = new URLSearchParams(window.location.search)
@@ -73,7 +74,14 @@ const selectedDetail = {
   }],
 } satisfies QuestionGroupDetail
 
+// 卷面检查用的预览页不接草稿卷：点加入键时照实报错，不假装加进去了。
+const qaDraftAdd: DraftAddActions = {
+  add: () => Promise.reject(new Error('这一页是卷面检查用的预览，不接草稿卷')),
+  undo: () => Promise.reject(new Error('这一页是卷面检查用的预览，不接草稿卷')),
+}
+
 createRoot(document.getElementById('root')!).render(
+  <DraftAddContext.Provider value={qaDraftAdd}>
   <QuestionGroupDetailView
     isOwnerView={false}
     detail={{ selectedDetail, detailStatus: 'loaded', detailError: '' }}
@@ -81,10 +89,9 @@ createRoot(document.getElementById('root')!).render(
     onBack={() => {}}
     onEdit={() => {}}
     onDelete={() => {}}
-    onAddToBasket={() => {}}
     onOpenPaperBrowse={() => {}}
     onOpenPaperBrowseLecture={() => {}}
     questionGroupById={new Map()}
-    onAddSimilarToBasket={() => {}}
-  />,
+  />
+  </DraftAddContext.Provider>,
 )

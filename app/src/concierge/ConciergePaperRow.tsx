@@ -164,7 +164,6 @@ export type ConciergePaperRowProps = {
   expanded: boolean
   basketIds: Set<string>
   onTogglePaper: (key: string) => void
-  onAdd: (group: QuestionGroupCard) => void
   /** classic-retire-2-detail-view — opens the read-only detail view for a group. */
   onOpenDetail?: (group: QuestionGroupCard) => void
   /** paper-row-browse-entry — opens the whole-paper preview page for this row's paperId (no focusGroupId — from the paper's start). */
@@ -204,7 +203,6 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
     expanded,
     basketIds,
     onTogglePaper,
-    onAdd,
     onOpenDetail,
     onOpenPaperBrowse,
     variant = 'search',
@@ -421,7 +419,6 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
                           onOpenDetail={onOpenDetail}
                           alreadyInBasket={basketIds.has(group.id)}
                           dimmed={!isHit}
-                          onAdd={onAdd}
                           questionGroupById={questionGroupById}
                           isSimilarPassagesOpen={expandedSimilarGroupId === group.id}
                           similarPassagesRequest={expandedSimilarGroupId === group.id ? similarPassagesRequest : null}

@@ -28,9 +28,10 @@
  * asset analyzed, DB not yet synced) renders thin — disabled add button +
  * title tooltip, still shown (pool honesty, not hidden).
  */
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { ChevronUp } from '../../icons'
 import { Button } from '../../shared-ui/Button.tsx'
+import { DraftAddButton } from '../../shared-ui/DraftAddButton.tsx'
 import type { QuestionGroupCard, SimilarPassagesResponse } from '../../domain/questionBank'
 
 export type SimilarPassagesRequestState =
@@ -54,28 +55,12 @@ export type SimilarPassagesPanelProps = {
   recipeSummary: string
   request: SimilarPassagesRequestState
   questionGroupById: Map<string, QuestionGroupCard>
-  onAdd: (card: QuestionGroupCard) => void
   onCollapse: () => void
   onRetry: () => void
 }
 
 export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNode {
-  const { recipeSummary, request, questionGroupById, onAdd, onCollapse, onRetry } = props
-  const [toastMessage, setToastMessage] = useState<string | null>(null)
-  const toastTimeoutRef = useRef<number | null>(null)
-
-  useEffect(() => {
-    return (): void => {
-      if (toastTimeoutRef.current != null) window.clearTimeout(toastTimeoutRef.current)
-    }
-  }, [])
-
-  function handleAdd(card: QuestionGroupCard): void {
-    onAdd(card)
-    if (toastTimeoutRef.current != null) window.clearTimeout(toastTimeoutRef.current)
-    setToastMessage(`已把「${card.title || card.id}」加入草稿卷`)
-    toastTimeoutRef.current = window.setTimeout(() => setToastMessage(null), 2200)
-  }
+  const { recipeSummary, request, questionGroupById, onCollapse, onRetry } = props
 
   return (
     <div className="similar-passages-panel">
@@ -124,17 +109,22 @@ export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNod
                     </div>
                     <div className="similar-rcard-actions">
                       {/* Owner 2026-11-14 决定 #17：每张卡片一个键，一页会有好几个，不用雾薄荷主键（每页一处），
-                          改成墨字键 strong。详情页上方「加入草稿卷」仍是那一页唯一的主键。 */}
-                      <Button
-                        tone="strong"
-                        size="sm"
-                        className="similar-btn"
-                        disabled={isThin}
-                        title={isThin ? '该卷未入库存，暂不能加入' : undefined}
-                        onClick={() => card && handleAdd(card)}
-                      >
-                        ＋ 加入草稿卷
-                      </Button>
+                          改成墨字键 strong。详情页上方「加入草稿卷」仍是那一页唯一的主键。
+                          走查第四节第 6 条：能加的换成共用加入键（加入后「已加入 · 撤回」就在卡片上），
+                          原来点完不管成没成都弹的「已把「…」加入草稿卷」提示条去掉了。 */}
+                      {card ? (
+                        <DraftAddButton className="similar-btn" target={card} tone="strong" size="sm" />
+                      ) : (
+                        <Button
+                          tone="strong"
+                          size="sm"
+                          className="similar-btn"
+                          disabled={isThin}
+                          title="该卷未入库存，暂不能加入"
+                        >
+                          ＋ 加入草稿卷
+                        </Button>
+                      )}
                     </div>
                   </div>
                 )
@@ -147,7 +137,6 @@ export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNod
         </>
       )}
 
-      <div className={`similar-toast${toastMessage ? ' similar-toast--on' : ''}`}>{toastMessage}</div>
     </div>
   )
 }

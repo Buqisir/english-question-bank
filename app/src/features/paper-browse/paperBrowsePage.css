@@ -697,56 +697,8 @@
   pointer-events: none;
 }
 
-.paper-browse-gutter-add {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  min-height: 32px;
-  padding: 0 10px;
-  border: none;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--ink, #1F1F1D);
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.paper-browse-gutter-add-label {
-  display: inline-grid;
-}
-
-.paper-browse-gutter-add-label > span {
-  grid-area: 1 / 1;
-}
-
-.paper-browse-gutter-add:not(.paper-browse-gutter-add--in-draft) .paper-browse-gutter-add-label-done,
-.paper-browse-gutter-add--in-draft .paper-browse-gutter-add-label-idle {
-  visibility: hidden;
-}
-
-.paper-browse-gutter-add:hover:not(:disabled) {
-  background: var(--surface-strong, #E9ECE6);
-}
-
-.paper-browse-gutter-add--in-draft {
-  background: transparent;
-  color: var(--ink, #1F1F1D);
-}
-
-.paper-browse-gutter-add--in-draft:hover:not(:disabled) {
-  background: var(--surface-strong, #E9ECE6);
-  color: var(--ink, #1F1F1D);
-}
-
-.paper-browse-gutter-add--disabled,
-.paper-browse-gutter-add:disabled {
-  background: var(--surface-strong, #E9ECE6);
-  color: var(--muted, #6B6E68);
-  cursor: not-allowed;
-  opacity: 1;
-}
+/* 里面的键 2026-11-14 换成共用 DraftAddButton（走查第四节第 6 条），原来手写的 .paper-browse-gutter-add 几条
+ *（「剪入 / 已剪入」两段字叠放、--in-draft、--disabled）删掉了，样子由 button.css、draftAddButton.css 管。 */
 
 .paper-browse-group-card:focus-within .paper-browse-group-actions {
   opacity: 1;
@@ -1822,8 +1774,12 @@
  * 改前 primary 不归那条管，悬停变深一档。这里让卡片上的键照列表外的普通键垫桌色，
  * 和详情页、草稿卷换篇栏里同一个键一个样子（提案 · 单一来源）。
  * 覆盖：本条 (0,7,0) 盖过那条透明 (0,5,0)，也盖过「嵌在被选中行里的键垫 border 色」(0,6,0)（面板眼下不在行里，碰不上）。
- * 面板头上的「重试」不在 .similar-rcard-actions 里，不归本条管，另有一条（见下面第 20 条那条）。 */
-.fluid-hover-list .similar-passages-panel .similar-rcard-actions > .eqb-button[data-tone='strong']:hover:not(:disabled, [aria-disabled='true']) {
+ * 面板头上的「重试」不在 .similar-rcard-actions 里，不归本条管，另有一条（见下面第 20 条那条）。
+ * 2026-11-14 走查第四节第 6 条：能加的卡片上换成了共用加入键，键包在 .eqb-draft-add 里，第二个选择器管它；
+ * 加入后纸里的「撤回」（淡墨键）是第三个选择器。这两个都是 (0,8,0)，一样盖过上面两条。 */
+.fluid-hover-list .similar-passages-panel .similar-rcard-actions > .eqb-button[data-tone='strong']:hover:not(:disabled, [aria-disabled='true']),
+.fluid-hover-list .similar-passages-panel .similar-rcard-actions > .eqb-draft-add > .eqb-button[data-tone='strong']:hover:not(:disabled, [aria-disabled='true']),
+.fluid-hover-list .similar-passages-panel .similar-rcard-actions > .eqb-draft-add .eqb-button.eqb-draft-add-undo:hover:not(:disabled, [aria-disabled='true']) {
   background: var(--eqb-color-desk);
 }
 

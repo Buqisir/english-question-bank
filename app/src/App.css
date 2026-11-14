@@ -4010,43 +4010,7 @@ div.concierge-feed-empty-corpus p { margin: 0; }
   transform: scale(0.97);
 }
 
-/* Primary CTA: 加入草稿卷 — teal-filled, matches DraftPaperWorkbench's
-   export button so the same action reads the same everywhere. */
-/* 每一行都有的「加入」：一页十几个，不用强调色，墨色描边。 */
-.concierge-action-add {
-  background: transparent;
-  border: 1px solid var(--action);
-  color: var(--action);
-  font-weight: 600;
-}
-
-.concierge-action-add:hover:not(:disabled) {
-  background: var(--eqb-color-desk);
-  color: var(--action);
-}
-
-.concierge-action-add:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
-}
-
-/* Completed state: 已在草稿卷中 — quiet, no longer competes as a CTA. */
-.concierge-action-add[aria-pressed="true"] {
-  background: transparent;
-  color: var(--desk-muted);
-  font-weight: 500;
-}
-
-.concierge-action-add[aria-pressed="true"]:hover:not(:disabled) {
-  background: var(--desk-hover);
-  color: var(--desk-muted);
-}
-
-.concierge-action-add:disabled {
-  background: transparent;
-  border-color: #D8D8D2;
-  color: #9A9A93;
-}
+/* 首页结果行的加入键 2026-11-14 换成共用 DraftAddButton（app/src/shared-ui/），原来的 .concierge-action-add 几条删掉了。 */
 
 /* ========================================================================
    AI mode (homeMode='ai'): single-column quiet desk layout.
@@ -5410,79 +5374,13 @@ div.concierge-feed-empty-corpus p { margin: 0; }
   padding: 0 14px 0 4px;
 }
 
-.concierge-group-row-icon {
-  box-sizing: border-box;
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  border: 0;
-  border-radius: 8px;
-  display: grid;
-  place-items: center;
-  background: transparent;
-  color: var(--desk-muted);
-  cursor: pointer;
-  flex: 0 0 28px;
-  font-family: inherit;
-}
-
-.concierge-group-row-line[data-fluid-hover-active] .concierge-group-row-icon:not([aria-pressed='true']),
-.concierge-group-row-icon:focus-visible:not([aria-pressed='true']) {
+/* 行上的加入键：2026-11-14 换成共用 DraftAddButton（走查第四节第 6 条），原来手写的 .concierge-group-row-icon、
+ * .concierge-action-add、-icon-glyph、-icon-mark（墨色圆里一个勾）几条删掉了，样子由 button.css、draftAddButton.css 管。
+ * 整行悬停时把加号提到墨色，和下面「…」那条一样。
+ * 覆盖：本条 (0,4,0) 盖过 button.css 里 .eqb-button[data-tone='subtle'] 的次要灰字 (0,2,0)；
+ * 键自己悬停时 button.css 里「键嵌在列表的行里」那条 (0,6,0) 照旧垫 border 色底、墨字。 */
+.concierge-group-row-line[data-fluid-hover-active] .concierge-group-row-add .eqb-button {
   color: var(--eqb-color-text);
-}
-
-.concierge-group-row-icon:hover:not(:disabled):not([aria-pressed='true']) {
-  background: var(--eqb-color-desk);
-  color: var(--eqb-color-text);
-}
-
-.concierge-group-row-icon:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
-}
-
-.concierge-group-row-icon.concierge-action-add,
-.concierge-group-row-icon.concierge-action-add:hover:not(:disabled),
-.concierge-group-row-icon.concierge-action-add[aria-pressed='true'],
-.concierge-group-row-icon.concierge-action-add[aria-pressed='true']:hover:not(:disabled) {
-  background: transparent;
-  color: var(--desk-muted);
-  font-weight: 400;
-}
-
-.concierge-group-row-line[data-fluid-hover-active] .concierge-group-row-icon.concierge-action-add:not([aria-pressed='true']),
-.concierge-group-row-icon.concierge-action-add:hover:not(:disabled):not([aria-pressed='true']),
-.concierge-group-row-icon.concierge-action-add:focus-visible:not([aria-pressed='true']) {
-  background: transparent;
-  color: var(--eqb-color-text);
-}
-
-.concierge-group-row-icon.concierge-action-add:hover:not(:disabled):not([aria-pressed='true']) {
-  background: var(--eqb-color-desk);
-}
-
-.concierge-group-row-icon[aria-pressed='true'] {
-  color: #FFFFFF;
-  background: transparent;
-}
-
-.concierge-group-row-icon-glyph {
-  display: grid;
-  place-items: center;
-}
-
-.concierge-group-row-icon-mark {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--action);
-  color: #FFFFFF;
-  display: grid;
-  place-items: center;
-}
-
-.concierge-group-row-icon[aria-pressed='true']:hover:not(:disabled) .concierge-group-row-icon-mark {
-  background: var(--action-hover);
 }
 
 /* 题组行「…」菜单：2026-11-13 换成共用 Menu（app/src/shared-ui/Menu.tsx + menu.css），原来的

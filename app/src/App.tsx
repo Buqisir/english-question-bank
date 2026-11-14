@@ -38,7 +38,8 @@ import { VocabularyPracticePage } from './features/vocabulary-practice/Vocabular
 import { VocabularyDictationWorkbench } from './features/vocabulary-dictation-workbench/VocabularyDictationWorkbench'
 import { VocabularyNotebookPage } from './features/vocabulary-notebook/VocabularyNotebookPage.tsx'
 import { AppTopbar, type AppTopbarNav } from './components/AppTopbar'
-import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest } from './services/draftPapers'
+import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest, deleteDraftPaperItem } from './services/draftPapers'
+import { DraftAddContext, type DraftAddActions, type DraftAddReceipt } from './shared-ui/draftAddContext.ts'
 import { useCurrentUser, useIsOwnerView } from './auth/AuthGate.tsx'
 import { logout } from './auth/session.ts'
 import { EntryModal } from './workbench/EntryModal'
@@ -281,7 +282,7 @@ function App() {
   // to be one of the affected groups. This is the only surface the
   // add-to-draft optimistic-feedback cut is allowed to touch — no other
   // QuestionGroupCard field is ever patched this way.
-  function patchDraftButtonState(patchesByGroupId: Map<string, Pick<QuestionGroupCard, 'draftPaperButtonState' | 'currentDraftPaperId'>>) {
+  function patchDraftButtonState(patchesByGroupId: Map<string, Pick<QuestionGroupCard, 'draftPaperButtonState' | 'currentDraftPaperId'> & Partial<Pick<QuestionGroupCard, 'canAddToDraftPaper'>>>) {
     setQuestionGroups((groups) =>
       groups.map((group) => (patchesByGroupId.has(group.id) ? { ...group, ...patchesByGroupId.get(group.id) } : group)),
     )
@@ -355,13 +356,34 @@ function App() {
     void refreshQuestionGroups()
   }
 
-  function addToBasket(group: QuestionGroupCard) {
-    if (group.draftPaperButtonState === 'in_current_draft') {
-      openDraftPaperWorkbench(group.currentDraftPaperId, group.id)
-      return
-    }
-    void addGroupsToBasket([group])
+  // 加入键（shared-ui/DraftAddButton）用的加入和撤回，走查第四节第 6 条。
+  // 和上面 addGroupsToBasket 不同：不先乐观翻状态，键上先写「加入中…」，服务器确认后才算加入，
+  // 这样「已加入」和草稿丸的组数都是真的；失败不弹浏览器警告框，抛给加入键照登原话。
+  async function addGroupToDraft(groupId: string): Promise<DraftAddReceipt> {
+    const draftPaper = await addGroupToCurrentDraftPaperRequest(groupId)
+    const item = draftPaper.items.find((candidate) => candidate.groupId === groupId)
+    patchDraftButtonState(new Map([[groupId, { draftPaperButtonState: 'in_current_draft' as const, currentDraftPaperId: draftPaper.id }]]))
+    void refreshQuestionGroups()
+    return { groupId, draftPaperId: draftPaper.id, itemId: item ? item.id : null }
   }
+
+  async function undoAddGroupToDraft(receipt: DraftAddReceipt): Promise<void> {
+    if (receipt.itemId === null) throw new Error('找不到刚加入的那一条，没法撤回')
+    try {
+      await deleteDraftPaperItem(receipt.draftPaperId, receipt.itemId)
+    } catch (error) {
+      // 删没删掉拿不准（比如请求发出去了、回话丢了），按服务器现状对一遍再把错交给加入键。
+      void refreshQuestionGroups()
+      throw error
+    }
+    // 服务器给已在草稿卷里的组 canAddToDraftPaper=false（server/api.mjs 里 printReady.ok && 状态为 add）。
+    // 刚才能加进去说明这组可组卷，撤回后一并改回 true，不然等列表刷新前会闪一下「暂不可组卷」。
+    patchDraftButtonState(new Map([[receipt.groupId, { draftPaperButtonState: 'add' as const, currentDraftPaperId: receipt.draftPaperId, canAddToDraftPaper: true }]]))
+    void refreshQuestionGroups()
+  }
+
+  const draftAddActions: DraftAddActions = { add: addGroupToDraft, undo: undoAddGroupToDraft }
+
 
   // C3a (trust-cracks) — 详情进 URL: `?view=detail&groupId=<id>` via
   // pushState (a real navigation — Back should retreat to the list), mirrors
@@ -1057,6 +1079,7 @@ function App() {
 
   if (paperBrowseRoute.active && paperBrowseRoute.paperId) {
     return (
+      <DraftAddContext.Provider value={draftAddActions}>
       <PaperBrowsePage
         paperId={paperBrowseRoute.paperId}
         reviewRevision={paperBrowseRoute.reviewRevision}
@@ -1072,10 +1095,12 @@ function App() {
         onBackToWorkbench={paperBrowseOnBackToWorkbench}
         shellNav={shellNav}
       />
+      </DraftAddContext.Provider>
     )
   }
 
   return (
+    <DraftAddContext.Provider value={draftAddActions}>
     <div className="app-shell home-mode-ai">
       <AppTopbar
         variant="home"
@@ -1125,7 +1150,6 @@ function App() {
                 retrieval={conciergeDesk.retrieval}
                 actions={conciergeDesk.actions}
                 basketIds={new Set(basket.map((item) => item.id))}
-                onAdd={(group) => addToBasket(group)}
                 onOpenDetail={(group) => openDetail(group.id)}
                 onOpenPaperBrowse={(paperId) => openPaperBrowse(paperId)}
                 questionGroups={questionGroups}
@@ -1151,11 +1175,9 @@ function App() {
               onBack={backToList}
               onEdit={openEditEntry}
               onDelete={handleDeleteQuestionGroup}
-              onAddToBasket={addToBasket}
               onOpenPaperBrowse={openPaperBrowseFromDetail}
               onOpenPaperBrowseLecture={openPaperBrowseLectureFromDetail}
               questionGroupById={questionGroupById}
-              onAddSimilarToBasket={(card) => void addGroupsToBasket([card])}
             />
           ) : null}
         </section>
@@ -1191,6 +1213,7 @@ function App() {
         />
       )}
     </div>
+    </DraftAddContext.Provider>
   )
 }
 

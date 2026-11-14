@@ -1,0 +1,73 @@
+/* 加入键（DraftAddButton.tsx）。只用 tokens.css 里的变量，不写字面色值和影子。
+ * 加入前、加入中就是 Button（button.css 管样子）；加入后换成下面这块「纸」：
+ * 白底、e1、墨字，底、边、字三处一起变（BRAND.md §5.5，DESIGN.md §5「Proposal → Decision」）。
+ * 不用薄荷绿、不加侧边线、不打勾动画。高度和同一档的 Button 一样，放在原来那个键的位置上。 */
+
+.eqb-draft-add {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eqb-space-2);
+  min-width: 0;
+  vertical-align: middle;
+}
+
+.eqb-draft-add-paper {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eqb-space-1);
+  height: 32px;
+  padding: 0 var(--eqb-space-3);
+  border-radius: 8px;
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-1);
+  color: var(--eqb-color-text);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.eqb-draft-add-paper[data-size='sm'] {
+  height: 28px;
+  padding: 0 var(--eqb-space-2);
+}
+
+.eqb-draft-add-paper[data-size='lg'] {
+  height: 36px;
+}
+
+/* 纸里带「撤回」时，右边让给撤回键自己的内边距，字贴着纸边不至于太远。
+ * 覆盖：本条 (0,2,0) 盖过上面 .eqb-draft-add-paper 的 padding (0,1,0)；data-size='sm' 那条 (0,2,0) 写在前面，
+ * 所以小号带撤回时也是本条的右内边距生效。 */
+.eqb-draft-add-paper:has(.eqb-draft-add-undo) {
+  padding-right: 2px;
+}
+
+/* 撤回键在纸里比纸矮一档（sm 28px）。纸是 28px 时（小号）撤回键收成 24px，免得贴着纸边。
+ * 覆盖：本条 (0,4,0) 盖过 button.css 里 .eqb-button[data-size='sm'] 的高度 (0,2,0)。 */
+.eqb-draft-add-paper[data-size='sm'] .eqb-button.eqb-draft-add-undo {
+  height: 24px;
+  min-width: 24px;
+}
+
+.eqb-draft-add-error {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eqb-space-1);
+  min-width: 0;
+  /* 一行说完；太长时截断，整句在 title 和读屏里（目测宽度）。 */
+  max-width: 24em;
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
+  white-space: nowrap;
+}
+
+.eqb-draft-add-error > svg {
+  flex: 0 0 auto;
+}
+
+.eqb-draft-add-error-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

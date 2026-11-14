@@ -14,8 +14,7 @@
 
 import { type MouseEvent, type ReactNode } from 'react'
 import { ReadingAnalysis, Paper, Papers } from '../icons'
-import { DraftAddIcon } from '../icons/MotionIcons'
-import { iconMotionInput } from '../icons/motionInput'
+import { DraftAddButton } from '../shared-ui/DraftAddButton.tsx'
 import { type QuestionGroupCard } from '../domain/questionBank.ts'
 import { buildTopicText, compactPassageTitle, compactSummary } from './passageText.ts'
 import { Menu, type MenuAction } from '../shared-ui/Menu.tsx'
@@ -37,7 +36,6 @@ export type ConciergeGroupCardProps = {
   group: QuestionGroupCard
   reason: string
   alreadyInBasket: boolean
-  onAdd: (group: QuestionGroupCard) => void
   /** classic-retire-2-detail-view — opens the read-only detail view for this group. */
   onOpenDetail?: (group: QuestionGroupCard) => void
   /**
@@ -68,7 +66,6 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
     group,
     reason,
     alreadyInBasket,
-    onAdd,
     onOpenDetail,
     dimmed,
     questionGroupById,
@@ -98,27 +95,12 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
   // 条件同详情页：只有配方收录的四类题型才出现，写作组隐藏（池子诚实）。
   const similarEligible = SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType)
   const draftState = group.draftPaperButtonState || (alreadyInBasket ? 'in_current_draft' : 'add')
-  const draftButtonLabel =
-    draftState === 'in_current_draft'
-      ? '已在草稿卷中'
-      : draftState === 'disabled'
-        ? '暂不可组卷'
-        : '加入草稿卷'
-  const draftAriaLabel =
-    draftState === 'in_current_draft'
-      ? '从草稿卷移出'
-      : draftState === 'disabled'
-        ? '暂不可组卷'
-        : '加入当前草稿卷'
-  const draftButtonTitle =
-    draftState === 'disabled'
-      ? group.printUnavailableReason || '该题组暂不可加入草稿卷'
-      : draftAriaLabel
 
   const handleRowClick = (event: MouseEvent<HTMLElement>) => {
     if (!onOpenDetail) return
     const target = event.target as HTMLElement
-    if (target.closest('button, a, input, textarea, select, [role="button"], [role="menu"]')) return
+    // .eqb-draft-add：加入键加入后的「已加入」那块纸不是按钮，点在上面也不打开详情。
+    if (target.closest('button, a, input, textarea, select, [role="button"], [role="menu"], .eqb-draft-add')) return
     onOpenDetail(group)
   }
 
@@ -181,25 +163,15 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
 
         <div className="concierge-group-row-trail">
           {topicText && <span className="concierge-group-row-topic">{topicText}</span>}
-          <button
-            type="button"
-            className="concierge-group-row-icon concierge-action-add"
-            {...iconMotionInput}
-            onClick={(event) => {
-              event.stopPropagation()
-              onAdd(group)
-            }}
-            disabled={draftState === 'disabled'}
-            aria-pressed={draftState === 'in_current_draft'}
-            aria-label={draftAriaLabel}
-            title={draftButtonTitle}
-          >
-            <span className="visually-hidden">{draftButtonLabel}</span>
-            {/* 同一个元素在两态之间切换，过渡才会播；圆底是“已在草稿卷”的按下态，直接到位。 */}
-            <span className={draftState === 'in_current_draft' ? 'concierge-group-row-icon-mark' : 'concierge-group-row-icon-glyph'}>
-              <DraftAddIcon size={16} done={draftState === 'in_current_draft'} />
-            </span>
-          </button>
+          {/* 走查第四节第 6 条：加入键换成共用 DraftAddButton（紧凑档，加入前只有加号；加入后是「已加入 · 撤回」那块纸）。
+              行上点击（handleRowClick）碰到 button 或 .eqb-draft-add 就不打开详情，所以不用再 stopPropagation。 */}
+          <DraftAddButton
+            className="concierge-group-row-add"
+            target={{ ...group, draftPaperButtonState: draftState }}
+            tone="subtle"
+            size="sm"
+            compact
+          />
           <Menu items={menuItems} label="更多操作" triggerClassName="concierge-group-row-menu-trigger" />
         </div>
       </div>
@@ -209,7 +181,6 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
           recipeSummary={similarPassagesRecipeSummary(group.groupType)}
           request={similarPassagesRequest}
           questionGroupById={questionGroupById}
-          onAdd={onAdd}
           onCollapse={() => onToggleSimilar(group.id)}
           onRetry={onRetrySimilar}
         />

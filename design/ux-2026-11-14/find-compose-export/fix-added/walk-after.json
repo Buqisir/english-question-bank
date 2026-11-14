@@ -1,0 +1,129 @@
+{
+  "mode": "after",
+  "places": {
+    "首页结果行": {
+      "before": {
+        "text": "",
+        "ariaLabel": "加入草稿卷"
+      },
+      "timing": {
+        "what": "首页结果行",
+        "clickToVisibleChangeMs": 13,
+        "clickToDoneMs": 774
+      },
+      "after": "已加入 撤回 已加入草稿卷",
+      "draftAfterAdd": [
+        "group-2026-i-reading-a"
+      ],
+      "afterUndo": "已从草稿卷移出",
+      "draftAfterUndo": []
+    },
+    "详情页": {
+      "before": "加入草稿卷",
+      "timing": {
+        "what": "详情页",
+        "clickToVisibleChangeMs": 2,
+        "clickToDoneMs": 615
+      },
+      "after": "已加入 撤回 已加入草稿卷",
+      "afterUndo": "加入草稿卷 已从草稿卷移出",
+      "draft": []
+    },
+    "相似篇章": {
+      "panelText": "相似篇章 同话题硬门槛 · 同篇位优先 · 真题优先 收起 Reading C 2026年新课标Ⅰ卷 走查塞的数据 加入草稿卷 Reading D 2026年新课标Ⅰ卷 走查塞的数据 加入草稿卷 库内同话题还剩 0 组",
+      "cards": 2,
+      "timing": {
+        "what": "相似篇章",
+        "clickToVisibleChangeMs": 4,
+        "clickToDoneMs": 775
+      },
+      "after": "相似篇章 同话题硬门槛 · 同篇位优先 · 真题优先 收起 Reading C 2026年新课标Ⅰ卷 走查塞的数据 已加入 撤回 已加入草稿卷 Reading D 2026年新课标Ⅰ卷 走查塞的数据 加入草稿卷 库内同话题还剩 0 组",
+      "afterUndo": "相似篇章 同话题硬门槛 · 同篇位优先 · 真题优先 收起 Reading C 2026年新课标Ⅰ卷 走查塞的数据 加入草稿卷 已从草稿卷移出 Reading D 2026年新课标Ⅰ卷 走查塞的数据 加入草稿卷 库内同话题还剩 0 组",
+      "draft": []
+    },
+    "整卷预览": {
+      "before": "加入草稿卷",
+      "timing": {
+        "what": "整卷预览",
+        "clickToVisibleChangeMs": 6,
+        "clickToDoneMs": 903
+      },
+      "after": "已加入 撤回 已加入草稿卷",
+      "afterUndo": "加入草稿卷 已从草稿卷移出",
+      "draft": []
+    }
+  },
+  "keyboard": {
+    "start": "button 更多操作",
+    "afterTab": "button 加入草稿卷",
+    "timing": {
+      "what": "键盘回车加入",
+      "clickToVisibleChangeMs": 3,
+      "clickToDoneMs": 663
+    },
+    "afterEnter": "button 撤回",
+    "afterUndoEnter": "button 加入草稿卷",
+    "draft": []
+  },
+  "errors": {
+    "addFail": {
+      "text": "没加入：boom",
+      "draft": []
+    },
+    "undoFail": {
+      "text": "已加入 撤回 没撤回：boom",
+      "draft": [
+        "group-2026-i-reading-c"
+      ]
+    }
+  },
+  "timings": [
+    {
+      "what": "首页结果行",
+      "clickToVisibleChangeMs": 13,
+      "clickToDoneMs": 774
+    },
+    {
+      "what": "详情页",
+      "clickToVisibleChangeMs": 2,
+      "clickToDoneMs": 615
+    },
+    {
+      "what": "相似篇章",
+      "clickToVisibleChangeMs": 4,
+      "clickToDoneMs": 775
+    },
+    {
+      "what": "整卷预览",
+      "clickToVisibleChangeMs": 6,
+      "clickToDoneMs": 903
+    },
+    {
+      "what": "键盘回车加入",
+      "clickToVisibleChangeMs": 3,
+      "clickToDoneMs": 663
+    }
+  ],
+  "narrow": {
+    "text": "A篇 推荐理由：2026 E2E · A 篇 已加入 撤回 已加入草稿卷",
+    "overflowX": false
+  },
+  "dialogs": [],
+  "consoleErrors": [
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 409 (Conflict)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "console: Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ]
+}
