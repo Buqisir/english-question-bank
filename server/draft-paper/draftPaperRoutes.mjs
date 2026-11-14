@@ -263,6 +263,19 @@ export function createDraftPaperRoutes() {
       }
     }),
 
+    // 走查卡点 4 (Owner 2026-11-14): which of the four PDF products this draft can
+    // produce, decided by the same pre-render checks the pagination/print routes
+    // run (draftPaperStore.preparePaperProduct). Read-only, no render.
+    defineRoute('GET', /^\/api\/draft-papers\/([^/]+)\/pdf-editions$/, ({ response, match, context }) => {
+      const userId = context.resolveDataUserId(context)
+      try {
+        const result = context.draftPaperStore.getDraftPaperProductAvailability(userId, decodeURIComponent(match[1]))
+        context.sendJson(response, 200, result)
+      } catch (error) {
+        sendDraftMutationError(response, context, error)
+      }
+    }),
+
     // reorder-suggest (docs/cuts/reorder-suggest/plan.md 施工契约 2): same
     // auth / user-isolation / versionType shape as the pagination route right
     // above — a bare read-only GET, no request body, versionType optional

@@ -127,6 +127,25 @@ export async function fetchDraftPaperPagination(
   }
 }
 
+// 走查卡点 4（Owner 2026-11-14）：这份草稿四款 PDF 各能不能出。判定在服务器
+// （draftPaperStore.preparePaperProduct，和预览、下载同一套），不排版；
+// reason 是服务器那条判定的原话，code 标明是哪一条（可能为 null）。
+export type DraftPaperEditionAvailability = {
+  edition: PaperPdfEdition
+  available: boolean
+  code: string | null
+  reason: string | null
+}
+
+export async function fetchDraftPaperEditionAvailability(id: string): Promise<DraftPaperEditionAvailability[]> {
+  const response = await fetch(apiPath(`/api/draft-papers/${encodeURIComponent(id)}/pdf-editions`))
+  if (!response.ok) {
+    throw new Error(await readError(response, `Failed to load PDF editions: ${response.status}`))
+  }
+  const data = (await response.json()) as { editions: DraftPaperEditionAvailability[] }
+  return data.editions
+}
+
 // reorder-suggest (docs/cuts/reorder-suggest/plan.md 施工契约 2/3): the
 // verified-order verdict `getReorderSuggestion` (draftPaperStore.mjs)
 // produces — null means "no candidate order zeroed out every 跨页断篇",

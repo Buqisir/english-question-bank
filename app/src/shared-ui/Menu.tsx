@@ -25,6 +25,10 @@
  * Owner 2026-11-14 决定 #15 补了可勾选项 checked：给了 checked（true / false）的项读屏角色是
  * menuitemcheckbox，带 aria-checked；字不变，勾上时最右边画一个勾（图标库的 Check）。
  * 键盘和别的项一样，选中照旧关菜单。可勾选项总是按钮，不当链接。
+ *
+ * 走查卡点 4（Owner 2026-11-14 第四节第 4 条，草稿卷「PDF 版本」）补了 description：项下面一行小字，
+ * 用来写这一项为什么用不了。给了的项变两行高，小字用 aria-describedby 挂在项上。
+ * 禁用项照旧不进方向键（和别的菜单一致），所以读屏走菜单时不会停在它上面。
  */
 
 import {
@@ -60,6 +64,8 @@ export type MenuAction = {
   data?: Record<`data-${string}`, string | undefined>
   /** 可勾选项：给了就是 menuitemcheckbox，true 时画勾。字保持不变，状态只看勾。 */
   checked?: boolean
+  /** 项下面一行小字，比如这一项为什么用不了。禁用项上也照常显示，字不变淡。 */
+  description?: string
 }
 
 export type MenuSeparator = { key: string; separator: true }
@@ -254,12 +260,15 @@ export function Menu({
                 entry.onSelect?.(event, triggerRef.current)
                 close(entry.restoreFocus !== false)
               }
+              const noteId = entry.description ? `${menuId}-${entry.key}-note` : undefined
               const common = {
                 ...entry.data,
                 className: 'eqb-menu-item',
                 role: 'menuitem',
                 'data-tone': entry.tone,
                 'aria-disabled': entry.disabled || undefined,
+                'aria-describedby': noteId,
+                'data-has-note': noteId ? '' : undefined,
                 tabIndex: -1,
                 // 可勾选项换成 menuitemcheckbox，盖掉上面的 menuitem。
                 ...(entry.checked !== undefined
@@ -269,7 +278,14 @@ export function Menu({
               const body = (
                 <>
                   {entry.icon}
-                  <span className="eqb-menu-item-label">{entry.label}</span>
+                  {noteId ? (
+                    <span className="eqb-menu-item-text">
+                      <span className="eqb-menu-item-label">{entry.label}</span>
+                      <span id={noteId} className="eqb-menu-item-note">{entry.description}</span>
+                    </span>
+                  ) : (
+                    <span className="eqb-menu-item-label">{entry.label}</span>
+                  )}
                   {entry.checked && <Check className="eqb-menu-item-check" size={16} aria-hidden="true" />}
                 </>
               )

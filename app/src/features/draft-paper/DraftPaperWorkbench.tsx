@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { AlertTriangle, Archive, ArrowDown, ArrowLeftRight, ArrowUp, Ellipsis, FolderPlus, Loader, PageBreak, PaperCheck, PaperStudent, RotateCcw, Save, Trash } from '../../icons'
+import { AlertTriangle, Archive, ArrowDown, ArrowLeftRight, ArrowUp, ChevronDown, Ellipsis, FolderPlus, Loader, PageBreak, PaperCheck, PaperStudent, RotateCcw, Save, Trash } from '../../icons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { EmptyIllustration } from '../../components/EmptyIllustration'
@@ -13,6 +13,7 @@ import {
   downloadDraftPaperPdf,
   fetchCurrentDraftPaper,
   fetchDraftPaper,
+  fetchDraftPaperEditionAvailability,
   fetchDraftPaperPagination,
   fetchDraftPapers,
   fetchReorderSuggestion,
@@ -20,6 +21,7 @@ import {
   patchDraftPaperItem,
   restoreDraftPaperItem,
   updateDraftPaper,
+  type DraftPaperEditionAvailability,
   type ReorderSuggestion,
 } from '../../services/draftPapers'
 import {
@@ -67,6 +69,22 @@ type RemovedDraftItem = {
   groupId: string
   orderIndex: number
   pageBreakBefore: boolean
+}
+
+// 走查卡点 4（Owner 2026-11-14 第四节第 4 条）：「PDF 版本」菜单里用不了的版本写一行原因。
+// 判定和原话都来自服务器（preparePaperProduct，和预览、下载同一套）；这里只把认得的那几条
+// 判定（按 code）换成老师的话，各句只说那条判定真正查的东西。认不得的 code 照登服务器原话。
+const EDITION_UNAVAILABLE_TEXT: Record<string, string> = {
+  PRODUCT_EMPTY: '草稿卷里还没有题组',
+  PRODUCT_GROUP_MISSING: '有题组在题库里已经找不到了',
+  PRODUCT_ONLY_LISTENING: '这一版不印听力，草稿卷里只有听力题组',
+  LISTENING_PAIR_REQUIRED: '要有完整的两个听力题组',
+  LISTENING_PAIR_SAME_SOURCE: '两个听力题组要出自同一套卷',
+  ANSWER_SOURCE_MISSING: '选中的题组还没有审过的参考答案',
+}
+
+function editionUnavailableText(verdict: DraftPaperEditionAvailability): string {
+  return (verdict.code && EDITION_UNAVAILABLE_TEXT[verdict.code]) || verdict.reason || ''
 }
 
 function getLegacyBasketGroupIds() {
@@ -139,6 +157,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const savedToastTimerRef = useRef<number | null>(null)
   const [migrationNotice, setMigrationNotice] = useState('')
   const [edition, setEdition] = useState<PaperPdfEdition>('largeNoListening')
+  // 每个 PDF 版本这份草稿能不能出（服务器判定）。surface 记它是哪一份草稿的，换了草稿就不用。
+  const [editionAvailability, setEditionAvailability] = useState<{ surface: string; editions: DraftPaperEditionAvailability[] } | null>(null)
   const [removedItem, setRemovedItem] = useState<RemovedDraftItem | null>(null)
   // motion-press-exit #3: toast keyframe→transition — 退出前保持挂载
   // var(--motion-fast)(120ms)播完退出再真卸载。
@@ -357,13 +377,17 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // (D5 原先给导出菜单写的同一套；导出菜单换成 Menu 后只剩这一处用).
   useEffect(() => {
     if (!moreMenuOpen) return
+    // 窄屏时「PDF 版本」菜单开在「⋯」面板里，但菜单面板挂在 body 上：
+    // 在它上面点、按 Esc 只关菜单，不关「⋯」面板（和原来的原生下拉框一样）。
+    const inPortaledMenu = (target: EventTarget | null) => target instanceof Element && target.closest('.draft-product-menu') !== null
     function handlePointerDown(event: MouseEvent) {
+      if (inPortaledMenu(event.target)) return
       if (moreMenuRef.current && !moreMenuRef.current.contains(event.target as Node)) {
         setMoreMenuOpen(false)
       }
     }
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') setMoreMenuOpen(false)
+      if (event.key === 'Escape' && !inPortaledMenu(event.target)) setMoreMenuOpen(false)
     }
     document.addEventListener('mousedown', handlePointerDown)
     document.addEventListener('keydown', handleKeyDown)
@@ -470,6 +494,34 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     [draftPaper?.items],
   )
   const surfaceKey = JSON.stringify([draftGeneration, draftPaper?.id, edition])
+  const availabilitySurface = JSON.stringify([draftGeneration, draftPaper?.id])
+  const availabilityKey = JSON.stringify([availabilitySurface, itemsLayoutKey])
+
+  // 走查卡点 4：题组一变就重新问一次各版本能不能出（不排版，很快）。问的这一下菜单里
+  // 留着同一份草稿上一次的结果；问不到就不标（不猜），选了以后照旧由预览和下载报原因。
+  useEffect(() => {
+    if (!draftPaper) return
+    let cancelled = false
+    const surface = availabilitySurface
+    fetchDraftPaperEditionAvailability(draftPaper.id)
+      .then((editions) => {
+        if (!cancelled) setEditionAvailability({ surface, editions })
+      })
+      .catch((error) => {
+        if (cancelled) return
+        console.error('读取 PDF 版本能不能用', error)
+        setEditionAvailability(null)
+      })
+    return () => {
+      cancelled = true
+    }
+    // availabilityKey 已含草稿和题组表；draftPaper 对象本身每次保存都会换。
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [availabilityKey])
+  const editionVerdicts = useMemo(
+    () => new Map((editionAvailability?.surface === availabilitySurface ? editionAvailability.editions : []).map((verdict) => [verdict.edition, verdict])),
+    [editionAvailability, availabilitySurface],
+  )
   const paginationKey = JSON.stringify([draftGeneration, draftPaper?.id, draftPaper?.title, itemsLayoutKey, edition, draftPaper?.printForm, paginationRetry])
 
   // Debounce layout edits, invalidating in-flight results before the delay.
@@ -1436,17 +1488,44 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   }
 
   // The same product control appears in the wide header and narrow ⋯ panel.
+  // 走查卡点 4：原生下拉框换成共用 Menu（可勾选项 + 每项下面一行原因）。
+  // 用不了的版本照样列出、置灰不能选，下面一行写服务器判定的原因。
   const versionToggleControl = (
-    <label className="draft-product-control">
-      <span>PDF 版本</span>
-      <select aria-label="PDF 版本" value={edition} disabled={exportStatus === 'exporting' || spaceDialogOpen} onChange={(event) => {
-        setEdition(event.target.value as PaperPdfEdition)
-        setExportError('')
-        setExportSuccessMessage('')
-      }}>
-        {PAPER_PDF_EDITIONS.map((value) => <option key={value} value={value}>{PAPER_PDF_PRODUCTS[value]}</option>)}
-      </select>
-    </label>
+    <span className="draft-product-control">
+      <span aria-hidden="true">PDF 版本</span>
+      <Menu
+        label="PDF 版本"
+        triggerText={
+          <>
+            <span className="visually-hidden">PDF 版本：</span>
+            {PAPER_PDF_PRODUCTS[edition]}
+            <ChevronDown size={16} aria-hidden="true" />
+          </>
+        }
+        triggerTone="strong"
+        triggerSize="sm"
+        triggerClassName="draft-product-trigger"
+        triggerDisabled={exportStatus === 'exporting' || spaceDialogOpen}
+        align="start"
+        className="draft-product-menu"
+        items={PAPER_PDF_EDITIONS.map((value) => {
+          const verdict = editionVerdicts.get(value)
+          const unavailable = verdict !== undefined && !verdict.available
+          return {
+            key: value,
+            label: PAPER_PDF_PRODUCTS[value],
+            checked: value === edition,
+            disabled: unavailable,
+            description: unavailable ? editionUnavailableText(verdict) || undefined : undefined,
+            onSelect: () => {
+              setEdition(value)
+              setExportError('')
+              setExportSuccessMessage('')
+            },
+          }
+        })}
+      />
+    </span>
   )
 
   const formToggleControl = (

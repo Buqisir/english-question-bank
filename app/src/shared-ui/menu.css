@@ -96,6 +96,37 @@
   opacity: 0.55;
 }
 
+/* 带一行小字的项（description，走查卡点 4）：本条覆盖上面 .eqb-menu-item 的固定 32px 高和不换行，
+ * 因为要上下放两行；左右排法（图标、字、勾）不变，勾和图标贴第一行。 */
+.eqb-menu-item[data-has-note] {
+  height: auto;
+  min-height: 32px;
+  padding-top: var(--eqb-space-1);
+  padding-bottom: var(--eqb-space-1);
+  align-items: flex-start;
+  white-space: normal;
+}
+
+.eqb-menu-item-text {
+  display: grid;
+  min-width: 0;
+}
+
+.eqb-menu-item-note {
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
+}
+
+/* 本条覆盖上面 .eqb-menu-item[aria-disabled='true'] 的整项 opacity 0.55：带小字的禁用项，
+ * 小字是在说为什么用不了，不能跟着变淡；改成只让名字变淡（faint 色），小字保持 muted。 */
+.eqb-menu-item[aria-disabled='true'][data-has-note] {
+  opacity: 1;
+}
+
+.eqb-menu-item[aria-disabled='true'][data-has-note] .eqb-menu-item-label {
+  color: var(--eqb-color-text-faint);
+}
+
 .eqb-menu-separator {
   height: 1px;
   margin: var(--eqb-space-1) 0;

@@ -9,7 +9,7 @@ import { createHash, randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { buildPrintHtml } from '../print-renderer.mjs'
 import { buildAnswerOnlyHtml, buildAssembledAnswerOnlyHtml } from '../answer-renderer.mjs'
-import { PAPER_PDF_PRODUCTS, requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
+import { PAPER_PDF_EDITIONS, PAPER_PDF_PRODUCTS, requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
 import { canonicalSourceConsumptionForGroup } from '../paper-canonical/consumerRuntime.mjs'
 import { projectCanonicalConsumerGroup, selectedFamilyContractIdForGroup } from '../../shared/paper-canonical/consumerProjection.mjs'
 import { readSourceReferencePublication } from '../paper-import/sourceReferencePublication.mjs'
@@ -1754,16 +1754,23 @@ export function createDraftPaperStore({
     }
   }
 
-  async function renderPaperProduct(draftPaper, bankDb, edition, { exactConsumption = null, cache = true } = {}) {
+  // The checks each PDF product can decide before any render. renderPaperProduct
+  // and getDraftPaperProductAvailability both run exactly these, so the
+  // workbench's 「PDF 版本」 menu shows the same verdict and message a download
+  // would hit (走查卡点 4, Owner 2026-11-14). Messages are unchanged; `code`
+  // only names the branch so the UI can say it in teacher words.
+  function preparePaperProduct(draftPaper, bankDb, edition, { exactConsumption = null } = {}) {
       requirePaperPdfEdition(edition)
-      if (!draftPaper.items.length) throw new Error('请先添加题组')
-      if (draftPaper.items.some(item => item.groupMissing)) throw new Error('选中的题组已缺失，不能生成不完整产品')
+      if (!draftPaper.items.length) throw Object.assign(new Error('请先添加题组'), { code: 'PRODUCT_EMPTY' })
+      if (draftPaper.items.some(item => item.groupMissing)) {
+        throw Object.assign(new Error('选中的题组已缺失，不能生成不完整产品'), { code: 'PRODUCT_GROUP_MISSING' })
+      }
       const canonicalConsumption = exactConsumption || resolveDraftCanonicalConsumption(draftPaper)
-      if (!canonicalConsumption) throw new Error('选中的题组没有完整 Canonical 来源')
+      if (!canonicalConsumption) throw Object.assign(new Error('选中的题组没有完整 Canonical 来源'), { code: 'PRODUCT_NO_CANONICAL' })
       const sourceByPaper = new Map()
       const selected = draftPaper.items.filter(item => edition === 'answerOnly' || edition === 'largeComplete'
         || item.questionGroup?.groupType !== 'listening')
-      if (!selected.length) throw new Error('此产品没有可导出的题组')
+      if (!selected.length) throw Object.assign(new Error('此产品没有可导出的题组'), { code: 'PRODUCT_ONLY_LISTENING' })
       const exportItems = resolveDraftExportItems(buildDraftPaperExportInput(draftPaper))
         .filter(item => selected.some(selected => selected.groupId === item.detail.id))
       if (edition === 'answerOnly') {
@@ -1772,7 +1779,66 @@ export function createDraftPaperStore({
           if (!sourceByPaper.has(source.paperId)) sourceByPaper.set(source.paperId,
             readSourceReferencePublication({ db: bankDb, paperAssetsDir, consumption: source }))
         }
+      } else {
+        const listening = selected.filter(item => item.questionGroup?.groupType === 'listening')
+        studentProductPolicy(edition, listening.length)
+        if (edition === 'largeComplete' && new Set(listening.map(item =>
+          canonicalSourceConsumptionForGroup(canonicalConsumption, item.groupId).paperId)).size !== 1) {
+          throw Object.assign(new Error('大字完整版需要同一源卷完整的两个听力题组'), { code: 'LISTENING_PAIR_SAME_SOURCE' })
+        }
       }
+      return { canonicalConsumption, selected, exportItems, sourceByPaper }
+  }
+
+  // answerOnly's HTML is string assembly (no Chromium), and its per-group answer
+  // source check lives in the answer renderer, so availability builds it too.
+  function buildAnswerOnlyProductHtml(draftPaper, { canonicalConsumption, selected, exportItems, sourceByPaper }) {
+        const paperName = draftPaper.title || '未命名英语练习卷'
+        const fullSource = sourceByPaper.size === 1 ? [...sourceByPaper.values()][0] : null
+        const sourceGroupCount = fullSource ? fullSource.materialization.groups.length
+          + (fullSource.materialization.listening.state === 'captured' ? 2 : 0) : 0
+        const wholePaper = (draftPaper.questionNumberStart ?? 1) === 1
+          && selected.length === sourceGroupCount
+          && ownsCompletePaperOpening(canonicalConsumption, selected.map(item => item.groupId))
+        return wholePaper && fullSource
+          ? buildAnswerOnlyHtml({ ...fullSource, paperName })
+          : buildAssembledAnswerOnlyHtml({ paperName, questionNumberStart: draftPaper.questionNumberStart ?? 1,
+            items: exportItems.map(item => {
+              const consumption = canonicalSourceConsumptionForGroup(canonicalConsumption, item.detail.id)
+              return { detail: item.detail, source: sourceByPaper.get(item.detail.paperId),
+                canonicalGroup: item.detail.groupType === 'listening' ? projectCanonicalConsumerGroup({ consumption,
+                  groupId: item.detail.id, familyContractId: selectedFamilyContractIdForGroup({ consumption, groupId: item.detail.id }) }) : null }
+            }) })
+  }
+
+  // Read-only verdict for every product of one draft, without rendering. Layout
+  // failures that only a render can find (no fitting candidate) are not covered.
+  function getDraftPaperProductAvailability(userId, draftPaperId) {
+    requireUserId(userId)
+    const userDb = openUserDatabase({ readOnly: true })
+    const bankDb = openDatabase({ readOnly: true })
+    try {
+      const draftPaper = getDraftPaper({ userDb, bankDb }, userId, draftPaperId, { includePrintHtml: false })
+      if (!draftPaper) throw new Error('Draft paper not found')
+      return { editions: PAPER_PDF_EDITIONS.map(edition => {
+        try {
+          const prepared = preparePaperProduct(draftPaper, bankDb, edition)
+          if (edition === 'answerOnly') buildAnswerOnlyProductHtml(draftPaper, prepared)
+          return { edition, available: true, code: null, reason: null }
+        } catch (error) {
+          return { edition, available: false, code: typeof error?.code === 'string' ? error.code : null,
+            reason: error instanceof Error ? error.message : String(error) }
+        }
+      }) }
+    } finally {
+      userDb.close()
+      bankDb.close()
+    }
+  }
+
+  async function renderPaperProduct(draftPaper, bankDb, edition, { exactConsumption = null, cache = true } = {}) {
+      const prepared = preparePaperProduct(draftPaper, bankDb, edition, { exactConsumption })
+      const { canonicalConsumption, selected, sourceByPaper } = prepared
       const signature = draftPaperPaginationSignature(draftPaper, edition, JSON.stringify({
         canonical: consumptionSignature(canonicalConsumption),
         references: [...sourceByPaper].map(([paperId, source]) => [paperId, source?.commitment]),
@@ -1784,30 +1850,8 @@ export function createDraftPaperStore({
         pageBreakSuggestions: edition === 'answerOnly' ? [] : derivePageBreakSuggestions(cached.paginatedHtml, { itemsByGroupId, printForm: draftPaper.printForm }) }
       let rendered
       if (edition === 'answerOnly') {
-        const paperName = draftPaper.title || '未命名英语练习卷'
-        const fullSource = sourceByPaper.size === 1 ? [...sourceByPaper.values()][0] : null
-        const sourceGroupCount = fullSource ? fullSource.materialization.groups.length
-          + (fullSource.materialization.listening.state === 'captured' ? 2 : 0) : 0
-        const wholePaper = (draftPaper.questionNumberStart ?? 1) === 1
-          && selected.length === sourceGroupCount
-          && ownsCompletePaperOpening(canonicalConsumption, selected.map(item => item.groupId))
-        const html = wholePaper && fullSource
-          ? buildAnswerOnlyHtml({ ...fullSource, paperName })
-          : buildAssembledAnswerOnlyHtml({ paperName, questionNumberStart: draftPaper.questionNumberStart ?? 1,
-            items: exportItems.map(item => {
-              const consumption = canonicalSourceConsumptionForGroup(canonicalConsumption, item.detail.id)
-              return { detail: item.detail, source: sourceByPaper.get(item.detail.paperId),
-                canonicalGroup: item.detail.groupType === 'listening' ? projectCanonicalConsumerGroup({ consumption,
-                  groupId: item.detail.id, familyContractId: selectedFamilyContractIdForGroup({ consumption, groupId: item.detail.id }) }) : null }
-            }) })
-        rendered = await renderPaginatedPaper(html)
+        rendered = await renderPaginatedPaper(buildAnswerOnlyProductHtml(draftPaper, prepared))
       } else {
-        const listening = selected.filter(item => item.questionGroup?.groupType === 'listening')
-        studentProductPolicy(edition, listening.length)
-        if (edition === 'largeComplete' && new Set(listening.map(item =>
-          canonicalSourceConsumptionForGroup(canonicalConsumption, item.groupId).paperId)).size !== 1) {
-          throw new Error('大字完整版需要同一源卷完整的两个听力题组')
-        }
         const html = buildDraftPaginationPrintHtml(draftPaper, { versionType: 'student',
           includeListening: edition === 'largeComplete', canonicalConsumption })
         const groupIds = selected.map(item => item.groupId)
@@ -1958,6 +2002,7 @@ export function createDraftPaperStore({
     getDraftPaper,
     getDraftPaperPagination,
     getDraftPaperProductPagination,
+    getDraftPaperProductAvailability,
     getAssemblyPaperProduct,
     getPublishedPaperProduct,
     getPublishedPaperProductInventory,

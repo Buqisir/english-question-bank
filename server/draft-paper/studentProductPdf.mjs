@@ -14,7 +14,7 @@ export function studentProductPolicy(edition, listeningCount, { economyPageLimit
   if (!STUDENT_PRODUCT_EDITIONS.includes(edition)) throw new Error('Unknown student product')
   validateProductPageLimits({ economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit })
   if (edition === 'largeComplete' && listeningCount !== 2) {
-    throw new Error('大字完整版需要完整的两个听力题组')
+    throw Object.assign(new Error('大字完整版需要完整的两个听力题组'), { code: 'LISTENING_PAIR_REQUIRED' })
   }
   return { targetPages: edition === 'economy8' ? economyPageLimit : edition === 'largeComplete' ? largeCompletePageLimit : largeNoListeningPageLimit,
     includeListening: edition === 'largeComplete', omitCover: false,

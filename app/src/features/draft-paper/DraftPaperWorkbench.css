@@ -136,15 +136,20 @@
   font-size: 13px;
 }
 
-.draft-product-control select {
-  background: var(--eqb-color-paper);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  color: var(--ink);
-  font: inherit;
-  min-height: 32px;
-  padding: 0 8px;
-  max-width: 100%;
+/* 走查卡点 4：「PDF 版本」从原生下拉框换成共用 Menu 的触发键（strong 档，墨色字）。
+ * 本条覆盖 button.css 的 .eqb-button-label（默认只是一段可省略的字）：
+ * 这里字后面跟一个向下的箭头，要让字和箭头横排、竖向居中。 */
+.draft-product-trigger .eqb-button-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eqb-space-1);
+}
+
+/* 版本菜单里有原因小字时，菜单宽度跟着最长的一行走；限一个上限（目测），
+ * 长原因折成两行，不把菜单撑得比顶栏还宽。本条覆盖 menu.css 的 .eqb-menu max-width，
+ * 因为那条只防出屏，不管可读行长。 */
+.eqb-menu.draft-product-menu {
+  max-width: min(320px, calc(100vw - 16px));
 }
 
 .draft-version-toggle {

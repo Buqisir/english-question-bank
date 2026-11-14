@@ -1,0 +1,122 @@
+{
+  "mode": "after",
+  "steps": [
+    {
+      "what": "点置灰项",
+      "menuStillOpen": true,
+      "trigger": "PDF 版本：\n大字无听力版"
+    },
+    {
+      "what": "Esc",
+      "menuOpen": false,
+      "focus": "eqb-button draft-product-trigger PDF 版本：大字无听力版"
+    },
+    {
+      "what": "回车打开后 ↓ 四次，焦点依次落在",
+      "walk": [
+        "大字无听力版",
+        "省纸版",
+        "大字无听力版",
+        "省纸版",
+        "大字无听力版"
+      ]
+    },
+    {
+      "what": "回车选中省纸版",
+      "trigger": "PDF 版本：\n省纸版",
+      "focusOnTrigger": true
+    },
+    {
+      "what": "再开后 Esc",
+      "menuOpen": false,
+      "focusOnTrigger": true
+    },
+    {
+      "what": "390 宽 Esc",
+      "menuOpen": false,
+      "morePanelOpen": "true"
+    }
+  ],
+  "editionsApi": {
+    "status": 200,
+    "body": {
+      "editions": [
+        {
+          "edition": "largeComplete",
+          "available": false,
+          "code": "LISTENING_PAIR_REQUIRED",
+          "reason": "大字完整版需要完整的两个听力题组"
+        },
+        {
+          "edition": "largeNoListening",
+          "available": true,
+          "code": null,
+          "reason": null
+        },
+        {
+          "edition": "economy8",
+          "available": true,
+          "code": null,
+          "reason": null
+        },
+        {
+          "edition": "answerOnly",
+          "available": false,
+          "code": "ANSWER_SOURCE_MISSING",
+          "reason": "选中的题组没有同版本已审源参考答案；不能以教师卷替代"
+        }
+      ]
+    }
+  },
+  "menu": [
+    {
+      "text": "大字完整版 要有完整的两个听力题组",
+      "role": "menuitemcheckbox",
+      "checked": "false",
+      "disabled": "true",
+      "describedBy": "要有完整的两个听力题组"
+    },
+    {
+      "text": "大字无听力版",
+      "role": "menuitemcheckbox",
+      "checked": "true",
+      "disabled": null,
+      "describedBy": null
+    },
+    {
+      "text": "省纸版",
+      "role": "menuitemcheckbox",
+      "checked": "false",
+      "disabled": null,
+      "describedBy": null
+    },
+    {
+      "text": "纯答案版 选中的题组还没有审过的参考答案",
+      "role": "menuitemcheckbox",
+      "checked": "false",
+      "disabled": "true",
+      "describedBy": "选中的题组还没有审过的参考答案"
+    }
+  ],
+  "network": [
+    {
+      "url": "/api/draft-papers/draft-paper-efbe3a6a-153c-4ad4-bf17-dd8fea7a4447/pdf-editions",
+      "ms": 287,
+      "status": 200
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-efbe3a6a-153c-4ad4-bf17-dd8fea7a4447/pdf-editions",
+      "ms": 320,
+      "status": 200
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-efbe3a6a-153c-4ad4-bf17-dd8fea7a4447/pagination?edition=largeNoListeni",
+      "ms": 34017,
+      "status": 200
+    }
+  ],
+  "errors": [
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  ]
+}
