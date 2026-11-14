@@ -117,6 +117,19 @@ const buildSC = () => splice(splice(base, V_OLD_FROM, V_OLD_TO, V_NEW), LOW_OLD_
   .replace(slot, `<g id="paws"><path d="${SC_ARMS.left}" fill="${MINT}"/><path d="${SC_ARMS.right}" fill="${MINT}"/></g>\n${slot}`)
 writeFileSync(path.join(OUT, 'shrug-sc.svg'), buildSC())
 
+// sc2：Owner 看 sc——手可以，肚子不行（胸口和下腹之间露出一块身体色的 V）。手臂、头、脸、身体外轮廓、水面、viewBox 都和 sc 一样；
+// 肚皮回到原路径（不用 sc 修的 V 尖和下腹上沿），再盖上一块浅雾薄荷补块（形状照 i、第三轮的 belly-fill，两侧边线重画顺），补成从胸口到下腹的一整块浅雾薄荷。
+// belly-fill 原样用会在左边 y≈340 留一个往里收的小台阶（胸口浅色的左边线在那里往里收，补块从它下面起笔），看着像收腰。
+// 所以 sc2 的补块两侧边线重画：左边从胸口左边线 y 255 处（那里几乎竖直）起笔，一路往外放宽、顺到下腹左边线 y 545 处，切线接上；
+// 右边从胸口浅色里面（y 320）起笔，在胸口右边线最宽处（y≈380）斜着穿出来，顺到下腹右边线 y 545 处（补块和胸口同色，藏在里面的那段看不出来，穿出来的地方不留台阶）。补块只盖肚皮和旧合爪那段，不碰身体外沿和手臂。
+const bellyFill2 = `<path id="belly-fill" d="M500 255C500 340 491 475 471 545L690 545C684 495 677 420 666 320Z" fill="${PALE}"/>`
+const buildSC2 = () => base
+  .replace(VB, SC_VB).replace(CLIP, SC_CLIP)
+  .replace(/<title>[\s\S]*?<\/title>/, '<title>獭獭 · 半身像 · 没找到（摊手 sc2：sc 的两只手，肚皮补成一整块）</title>')
+  .replace(/<!--[\s\S]*?-->/, '<!-- 对比稿，不是母版：半身像「没找到」摊手 sc2 版。两只手臂连爪和 sc 一样，照第六批草图 SC-shrug 描（scripts/brand/half-shrug-sc-trace.py）；头、脸、躯干外轮廓、水面的路径照 mascot/states/half-not-found.svg 原样；旧合爪那段用一块浅雾薄荷（belly-fill，照 i 那块、两侧边线重画顺）补成从胸口到下腹的一整块肚皮。viewBox 和水面以上的裁切框往左加宽 24、往右加宽 58（270 12 576 715）（scripts/brand/half-shrug-r4.mjs）。提案 · 单一来源 · Owner 还没看。 -->')
+  .replace(slot, `${bellyFill2}\n<g id="paws"><path d="${SC_ARMS.left}" fill="${MINT}"/><path d="${SC_ARMS.right}" fill="${MINT}"/></g>\n${slot}`)
+writeFileSync(path.join(OUT, 'shrug-sc2.svg'), buildSC2())
+
 if (process.env.NO_SHOT) process.exit(0)
 
 const require = createRequire(path.join(ROOT, 'app/package.json'))
@@ -128,7 +141,7 @@ const scImg = `data:image/${SC_PNG.endsWith('.png') ? 'png' : 'jpeg'};base64,${r
 const svgOf = (k) => readFileSync(path.join(OUT, `shrug-${k}.svg`), 'utf8')
 const cur = readFileSync(path.join(BRAND, 'mascot/states/half-not-found.svg'), 'utf8')
 
-// compare.png：四格。现在的合爪、SC 草图、i、sc；每格 300 像素宽大图，除草图外下面再放 110、64 像素宽各一张。
+// compare.png：四格。现在的合爪、SC 草图、sc、sc2；每格 300 像素宽大图，除草图外下面再放 110、64 像素宽各一张。
 const CSS = 'body{margin:0;padding:28px;background:#F2F5F8;font:15px/1.5 system-ui,sans-serif;color:#1B2B33}h1{font-size:20px;margin:0 0 6px}p{margin:0 0 16px;color:#5A6C75}.g{display:flex;gap:16px;align-items:flex-start}figure{margin:0;background:#fff;border-radius:8px;padding:14px;width:300px}figcaption{padding-top:10px;font-size:14px}.big{display:flex;align-items:flex-end;justify-content:center;height:440px}.sm{display:flex;gap:20px;margin-top:14px;align-items:flex-end;height:170px}'
 const cell = (src, label, smalls = true) => `<figure><div class="big"><img src="${src}" width="300"></div><div class="sm">${smalls ? `<img src="${src}" width="110"><img src="${src}" width="64">` : '<span style="color:#5A6C75;font-size:13px;align-self:center">草图只看大图</span>'}</div><figcaption>${label}${smalls ? ' · 300 / 110 / 64 像素宽' : ''}</figcaption></figure>`
 // 草图按 sc 的框裁出来（同一块画面），和 sc 大图一样大，方便对着看。
@@ -137,7 +150,7 @@ const [vx, vy, vw, vh] = SC_VB.match(/"([^"]+)"/)[1].split(' ').map(Number)
 const z = 300 / (vw * K)
 const sketchCrop = `<div style="width:300px;height:${Math.round(vh * K * z)}px;background:url(${scImg}) no-repeat;background-size:${1024 * z}px;background-position:${-(228.7 + (vx - 294) * K) * z}px ${-(102 + (vy - 12) * K) * z}px"></div>`
 const sketchCell = `<figure><div class="big">${sketchCrop}</div><div class="sm"><span style="color:#5A6C75;font-size:13px;align-self:center">草图只看大图（按 sc 的框裁）</span></div><figcaption>草图 SC（照它描）</figcaption></figure>`
-const cells = [cell(uri(cur), '现在：合爪'), sketchCell, cell(uri(svgOf('i')), 'i：上一稿（已否）'), cell(uri(svgOf('sc')), 'sc：照 SC 描')]
+const cells = [cell(uri(cur), '现在：合爪'), sketchCell, cell(uri(svgOf('sc')), 'sc（肚子已否）'), cell(uri(svgOf('sc2')), 'sc2：肚皮补成一整块')]
 const page = await browser.newPage({ viewport: { width: 28 * 2 + cells.length * 328, height: 400 }, deviceScaleFactor: 2 })
 await page.setContent(`<style>${CSS}</style><h1>半身像 · 没找到 · 摊手：照草图 SC 描</h1><p>对比稿 · 提案。先看 110 像素那档：是不是自然地一左一右摊开、掌心朝上。</p><div class="g">${cells.join('')}</div>`)
 await page.screenshot({ path: path.join(OUT, 'compare.png'), fullPage: true })
