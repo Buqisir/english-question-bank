@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// 生态物件 · 出对比图（对比稿，提案 · 单一来源，2026-11-14）。第一、二、三轮共用这一个脚本。
+// 生态物件 · 出对比图（对比稿，提案 · 单一来源，2026-11-14）。第一到第四轮共用这一个脚本。
 //
 // 做什么：读 ecosystem-<轮次>/svg/ 下手写的物件 SVG（viewBox 0 0 240 240，240 = 獭獭头宽 1.0），
 // 出三张图：
@@ -7,12 +7,12 @@
 //   with-otter.png 全套按相对大小和獭獭头像（mascot/otter-head.svg）摆在同一条底线上
 //   mono.png       全套转成墨色剪影，只看轮廓认不认得出
 //   compare.png    （只有第二轮）石头三档颜色并排比、气泡两版并排比
-//   redo-compare.png          （只有第三轮）敲开的蛤、海胆：第二轮和本轮候选并排，160px、48px、48px 剪影
-//   stone-recolor/compare.png （只有第三轮）獭獭插画里墨色石子改石色的副本，改前改后并排
-// 第三轮的 svg/ 只放重画的物件，总图里其余物件从 ecosystem-round2/svg/ 原样带上。
+//   redo-compare.png          （第三、四轮）重画的物件：上一轮和本轮候选并排，160px、48px、48px 剪影
+//   stone-recolor/compare.png （第三、四轮）獭獭插画里墨色石子改石色的副本，改前改后并排
+// 第三、四轮的 svg/ 只放重画的物件，总图里其余物件往前一轮一轮找（第四轮：round4 → round3 → round2），原样带上。
 // 物件 SVG 和母版都只读，不改。
 //
-// 用法：node scripts/brand/ecosystem-sheet.mjs [round1|round2|round3]   不写参数就是 round1
+// 用法：node scripts/brand/ecosystem-sheet.mjs [round1|round2|round3|round4]   不写参数就是 round1
 // 输出：design/brand-2026-10-13/image-review-2026-11-14/ecosystem-<轮次>/ 下的 PNG
 import { existsSync, readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
@@ -21,14 +21,17 @@ import { fileURLToPath } from 'node:url'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const ROUND = process.argv[2] || 'round1'
-if (!['round1', 'round2', 'round3'].includes(ROUND)) throw new Error(`不认识的轮次：${ROUND}（只有 round1、round2、round3）`)
-const ROUND_NAME = { round1: '第一轮', round2: '第二轮', round3: '第三轮' }[ROUND]
+if (!['round1', 'round2', 'round3', 'round4'].includes(ROUND)) throw new Error(`不认识的轮次：${ROUND}（只有 round1 到 round4）`)
+const ROUND_NAME = { round1: '第一轮', round2: '第二轮', round3: '第三轮', round4: '第四轮' }[ROUND]
+const LATE = ['round3', 'round4'].includes(ROUND) // 只放重画物件、其余往前找的轮次
 const OUT = path.join(ROOT, `design/brand-2026-10-13/image-review-2026-11-14/ecosystem-${ROUND}`)
 const SVG_DIR = path.join(OUT, 'svg')
 const REVIEW = path.join(ROOT, 'design/brand-2026-10-13/image-review-2026-11-14')
 const R2_SVG = path.join(REVIEW, 'ecosystem-round2/svg')
-// 第三轮：本轮重画过的从本轮 svg/ 读，没重画的从第二轮 svg/ 读
-const svgPath = (file) => (ROUND === 'round3' && !existsSync(path.join(SVG_DIR, `${file}.svg`)) ? path.join(R2_SVG, `${file}.svg`) : path.join(SVG_DIR, `${file}.svg`))
+// 第三、四轮：本轮重画过的从本轮 svg/ 读，没重画的往前一轮一轮找
+const R3_SVG = path.join(REVIEW, 'ecosystem-round3/svg')
+const FALLBACK = { round3: [SVG_DIR, R2_SVG], round4: [SVG_DIR, R3_SVG, R2_SVG] }[ROUND] || [SVG_DIR]
+const svgPath = (file) => FALLBACK.map((d) => path.join(d, `${file}.svg`)).find((f) => existsSync(f)) || path.join(SVG_DIR, `${file}.svg`)
 const OTTER_PATH = path.join(ROOT, 'design/brand-2026-10-13/mascot/otter-head.svg')
 const requireFromApp = createRequire(path.join(ROOT, 'app/package.json'))
 const { chromium } = requireFromApp('playwright')
@@ -46,7 +49,7 @@ const ITEMS = [
   ['kelp-blade', ROUND === 'round1' ? '巨藻叶带气囊' : '巨藻一段'],
   ['starfish', '海星'],
   ['bubbles', '一串气泡'],
-].map(([file, label]) => ({ file, label, svg: readFileSync(svgPath(file), 'utf8'), redo: ROUND === 'round3' && svgPath(file).startsWith(SVG_DIR) }))
+].map(([file, label]) => ({ file, label, svg: readFileSync(svgPath(file), 'utf8'), redo: LATE && svgPath(file).startsWith(SVG_DIR + path.sep) }))
 
 const INK = '#191D18'
 const uri = (s) => `data:image/svg+xml;base64,${Buffer.from(s).toString('base64')}`
@@ -82,7 +85,7 @@ try {
   const cell = (it, svg) => `<figure><div class="r"><img src="${uri(svg)}" width="160" height="160"><div class="s"><img src="${uri(svg)}" width="48" height="48"><img src="${uri(withViewBox(svg, it.tight))}" width="48" height="48"></div></div><figcaption>${it.label}${it.redo ? '（本轮重画）' : ''}<br><small>相对宽 ${(it.box.w / 240).toFixed(2)}</small></figcaption></figure>`
   const band = (bg, name) => `<section style="background:${bg}"><h2>${name}</h2><div class="g">${ITEMS.map((it) => cell(it, it.svg)).join('')}</div></section>`
   const sheetHtml = `<style>${css}section{padding:16px 16px 8px;margin-bottom:16px;border-radius:8px;outline:1px solid #E3E9EC}h2{font-size:14px;margin:0 0 8px;color:#29424D}.g{display:grid;grid-template-columns:repeat(6,226px);gap:12px 16px}figure{margin:0}.r{display:flex;gap:6px;align-items:flex-end}.s{display:flex;flex-direction:column;gap:6px}figcaption{padding-top:4px;font-size:13px}small{color:#29424D}</style>
-<h1>生态物件 · ${ROUND_NAME}矢量（对比稿 · 提案）</h1><p class="sub">每样三格：160px 原框（240 = 獭獭头宽，物件按相对大小留白）、48px 原框、48px 贴边裁（当图标用时的大小）。${{ round1: '只用品牌色', round2: '石头、海胆和石砧用提案的新石色，其余只用品牌色', round3: '石色、石面已进色板；敲开的蛤、海胆是本轮重画，其余从第二轮原样带上' }[ROUND]}，无描边、无渐变、无阴影。</p>
+<h1>生态物件 · ${ROUND_NAME}矢量（对比稿 · 提案）</h1><p class="sub">每样三格：160px 原框（240 = 獭獭头宽，物件按相对大小留白）、48px 原框、48px 贴边裁（当图标用时的大小）。${{ round1: '只用品牌色', round2: '石头、海胆和石砧用提案的新石色，其余只用品牌色', round3: '石色、石面已进色板；敲开的蛤、海胆是本轮重画，其余从第二轮原样带上', round4: '敲开的蛤是本轮重画（侧面半开），海胆用第三轮的 L，其余从第二轮原样带上' }[ROUND]}，无描边、无渐变、无阴影。</p>
 ${band('#F1F5F7', '浅雾底 #F1F5F7（网站桌面）')}${band('#FFFFFF', '白底')}`
   await page.setViewportSize({ width: 1500, height: 900 })
   await page.setContent(sheetHtml)
@@ -161,7 +164,7 @@ ${TIERS.map(tierRow).join('')}
     await page.screenshot({ path: path.join(OUT, 'compare.png'), fullPage: true })
   }
   // ---- 第三轮：redo-compare.png 和 stone-recolor/compare.png ----
-  if (ROUND === 'round3') {
+  if (LATE) {
     // 量一组 SVG 画出来的边，给贴边裁用
     const measure = async (svgs) => {
       await page.setContent(`<div id="w">${svgs.join('')}</div>`)
@@ -169,7 +172,14 @@ ${TIERS.map(tierRow).join('')}
     }
     const tightOf = (b) => { const side = Math.max(b.w, b.h) + 8; return `${(b.x + b.w / 2 - side / 2).toFixed(1)} ${(b.y + b.h / 2 - side / 2).toFixed(1)} ${side.toFixed(1)} ${side.toFixed(1)}` }
     const C = path.join(SVG_DIR, 'candidates')
-    const GROUPS = [
+    const GROUPS = ROUND === 'round4' ? [
+      { name: '敲开的蛤', rows: [
+        ['第三轮 A（退回）', path.join(R3_SVG, 'clam-open-on-stone.svg')],
+        ['候选 a · 侧面半开，不带石砧（推荐）', path.join(C, 'clam-open-a.svg')],
+        ['候选 b · 侧面半开，垫石砧', path.join(C, 'clam-open-b-anvil.svg')],
+        ['对照：合着的蛤', path.join(R2_SVG, 'clam.svg')],
+      ] },
+    ] : [
       { name: '敲开的蛤', rows: [
         ['第二轮（退回）', path.join(R2_SVG, 'clam-open-on-stone.svg')],
         ['候选 A · 蝴蝶形 + 生长纹（推荐）', path.join(C, 'clam-open-A-butterfly.svg')],
@@ -189,7 +199,7 @@ ${TIERS.map(tierRow).join('')}
     let k = 0
     const redoCell = (r) => `<figure><div class="r"><img src="${uri(r.svg)}" width="160" height="160"><div class="s"><img src="${uri(withViewBox(r.svg, r.tight))}" width="48" height="48"><img src="${uri(withViewBox(toMono(r.svg), r.tight))}" width="48" height="48"></div></div><figcaption>${r.label}</figcaption></figure>`
     const redoHtml = `<style>${css}body{background:#F1F5F7}h2{font-size:15px;margin:14px 0 6px}.row{display:flex;gap:18px;flex-wrap:nowrap}figure{margin:0;background:#fff;padding:8px;border-radius:6px}.r{display:flex;gap:6px;align-items:flex-end}.s{display:flex;flex-direction:column;gap:6px}figcaption{font-size:12px;padding-top:4px}</style>
-<h1>重画对比 · 第三轮（底色 #F1F5F7，卡片白底）</h1><p class="sub">每格：160px 原框（240 = 獭獭头宽）、48px 贴边裁、48px 贴边裁墨色剪影。第一格是被退回的第二轮。对比稿 · 提案 · 单一来源。</p>
+<h1>重画对比 · ${ROUND_NAME}（底色 #F1F5F7，卡片白底）</h1><p class="sub">每格：160px 原框（240 = 獭獭头宽）、48px 贴边裁、48px 贴边裁墨色剪影。第一格是被退回的上一轮。对比稿 · 提案 · 单一来源。</p>
 ${GROUPS.map((g) => `<h2>${g.name}</h2><div class="row">${g.rows.map(() => redoCell(all[k++])).join('')}</div>`).join('')}`
     await page.setViewportSize({ width: 1300, height: 600 })
     await page.setContent(redoHtml)
@@ -198,10 +208,12 @@ ${GROUPS.map((g) => `<h2>${g.name}</h2><div class="row">${g.rows.map(() => redoC
     // 石子改色：母版（只读）和副本并排；再各放一张石子附近的放大
     const MASCOT = path.join(ROOT, 'design/brand-2026-10-13/mascot')
     const RC = path.join(OUT, 'stone-recolor')
-    const PAIRS = [
+    const PAIRS = (ROUND === 'round4' ? [
+      ['calendar/peek-login-gift.svg', '教学日历 · 登录页探头 · 递石头'],
+    ] : [
       ['states/state-01-idle.svg', '状态 01 空闲 · 胸口抱石'],
       ['upright/upright-08-gift-stone.svg', '直立 U8 · 递石头'],
-    ].map(([rel, label]) => ({ label, rel, before: readFileSync(path.join(MASCOT, rel), 'utf8'), after: readFileSync(path.join(RC, 'svg', path.basename(rel)), 'utf8') }))
+    ]).map(([rel, label]) => ({ label, rel, before: readFileSync(path.join(MASCOT, rel), 'utf8'), after: readFileSync(path.join(RC, 'svg', path.basename(rel)), 'utf8') }))
     // 石子的边：副本里石色那条路径
     await page.setContent(`<div id="w">${PAIRS.map((p) => p.after).join('')}</div>`)
     const stoneBoxes = await page.evaluate(() => [...document.querySelectorAll('#w > svg')].map((s) => { const b = s.querySelector('path[fill="#6E828C"]').getBBox(); return { x: b.x, y: b.y, w: b.width, h: b.height } }))
@@ -214,7 +226,7 @@ ${GROUPS.map((g) => `<h2>${g.name}</h2><div class="row">${g.rows.map(() => redoC
       return `<h2>${p.label}　<small>mascot/${p.rel}</small></h2><div class="row">${fig(p.before, '改前（母版，墨 #191D18）')}${fig(p.after, '改后（副本，石色 #6E828C + 石面 #8FA3AC 顶面）')}</div>`
     }).join('')
     const rcHtml = `<style>${css}body{background:#F1F5F7}h2{font-size:15px;margin:14px 0 6px}h2 small{font-weight:400;color:#29424D;font-size:12px}.row{display:flex;gap:24px;flex-wrap:nowrap}figure{margin:0;background:#fff;padding:10px;border-radius:6px;display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end;width:680px}figcaption{width:100%;font-size:12px}</style>
-<h1>石子改色 · 改前改后（第三轮）</h1><p class="sub">只换石子一条路径的颜色，石子宽过头宽 1/4 的加一块石面顶面。左边整张，右边石子附近放大。副本，母版没动。对比稿 · 提案 · 单一来源。</p>${pairHtml}`
+<h1>石子改色 · 改前改后（${ROUND_NAME}）</h1><p class="sub">只换石子一条路径的颜色，石子宽过头宽 1/4 的加一块石面顶面。左边整张，右边石子附近放大。副本，母版没动。对比稿 · 提案 · 单一来源。</p>${pairHtml}`
     await page.setViewportSize({ width: 1480, height: 600 })
     await page.setContent(rcHtml)
     await page.screenshot({ path: path.join(RC, 'compare.png'), fullPage: true })
@@ -222,4 +234,4 @@ ${GROUPS.map((g) => `<h2>${g.name}</h2><div class="row">${g.rows.map(() => redoC
 } finally {
   await browser.close()
 }
-console.log(`出了 sheet.png、with-otter.png、mono.png${{ round1: '', round2: '、compare.png', round3: '、redo-compare.png、stone-recolor/compare.png' }[ROUND]}：${path.relative(ROOT, OUT)}`)
+console.log(`出了 sheet.png、with-otter.png、mono.png${{ round1: '', round2: '、compare.png', round3: '、redo-compare.png、stone-recolor/compare.png', round4: '、redo-compare.png、stone-recolor/compare.png' }[ROUND]}：${path.relative(ROOT, OUT)}`)
