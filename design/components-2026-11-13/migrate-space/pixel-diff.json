@@ -1,0 +1,251 @@
+{
+ "confirm-390.png": {
+  "size": [
+   [
+    748,
+    388
+   ],
+   [
+    748,
+    392
+   ]
+  ]
+ },
+ "confirm-cancel-hover.png": {
+  "size": [
+   [
+    784,
+    388
+   ],
+   [
+    784,
+    392
+   ]
+  ]
+ },
+ "confirm-delete-focus.png": {
+  "size": [
+   [
+    784,
+    388
+   ],
+   [
+    784,
+    392
+   ]
+  ]
+ },
+ "confirm-delete-hover.png": {
+  "size": [
+   [
+    784,
+    388
+   ],
+   [
+    784,
+    392
+   ]
+  ]
+ },
+ "confirm.png": {
+  "size": [
+   [
+    784,
+    388
+   ],
+   [
+    784,
+    392
+   ]
+  ]
+ },
+ "empty-390.png": {
+  "pixels": 1275,
+  "bbox_2x": [
+   320,
+   378,
+   462,
+   450
+  ]
+ },
+ "empty-focus.png": {
+  "pixels": 2529,
+  "bbox_2x": [
+   1134,
+   370,
+   1292,
+   458
+  ]
+ },
+ "empty-hover.png": {
+  "pixels": 9823,
+  "bbox_2x": [
+   1142,
+   378,
+   1284,
+   450
+  ]
+ },
+ "empty.png": {
+  "pixels": 1275,
+  "bbox_2x": [
+   1142,
+   378,
+   1284,
+   450
+  ]
+ },
+ "error-390.png": {
+  "pixels": 1272,
+  "bbox_2x": [
+   306,
+   278,
+   474,
+   350
+  ]
+ },
+ "error-focus.png": {
+  "pixels": 2521,
+  "bbox_2x": [
+   1120,
+   269,
+   1304,
+   357
+  ]
+ },
+ "error-hover.png": {
+  "pixels": 11631,
+  "bbox_2x": [
+   1128,
+   277,
+   1296,
+   349
+  ]
+ },
+ "error.png": {
+  "pixels": 1272,
+  "bbox_2x": [
+   1128,
+   277,
+   1296,
+   349
+  ]
+ },
+ "page-390.png": {
+  "pixels": 6829,
+  "bbox_2x": [
+   343,
+   916,
+   631,
+   1172
+  ]
+ },
+ "page.png": {
+  "pixels": 5944,
+  "bbox_2x": [
+   2211,
+   576,
+   2491,
+   742
+  ]
+ },
+ "row-390.png": {
+  "pixels": 3408,
+  "bbox_2x": [
+   333,
+   176,
+   621,
+   202
+  ]
+ },
+ "row-busy-390.png": {
+  "pixels": 3454,
+  "bbox_2x": [
+   333,
+   176,
+   621,
+   202
+  ]
+ },
+ "row-busy-hover.png": {
+  "pixels": 3017,
+  "bbox_2x": [
+   1533,
+   80,
+   1813,
+   106
+  ]
+ },
+ "row-busy.png": {
+  "pixels": 3016,
+  "bbox_2x": [
+   1533,
+   80,
+   1813,
+   106
+  ]
+ },
+ "row-download-focus.png": {
+  "pixels": 4882,
+  "bbox_2x": [
+   1498,
+   50,
+   1813,
+   138
+  ]
+ },
+ "row-download-hover.png": {
+  "pixels": 2988,
+  "bbox_2x": [
+   1533,
+   80,
+   1813,
+   106
+  ]
+ },
+ "row-hover-390.png": {
+  "pixels": 3421,
+  "bbox_2x": [
+   333,
+   176,
+   621,
+   202
+  ]
+ },
+ "row-hover.png": {
+  "pixels": 2987,
+  "bbox_2x": [
+   1533,
+   80,
+   1813,
+   106
+  ]
+ },
+ "row-open-focus.png": {
+  "pixels": 3886,
+  "bbox_2x": [
+   1533,
+   50,
+   1813,
+   138
+  ]
+ },
+ "row-open-hover.png": {
+  "pixels": 2987,
+  "bbox_2x": [
+   1533,
+   80,
+   1813,
+   106
+  ]
+ },
+ "row.png": {
+  "pixels": 2972,
+  "bbox_2x": [
+   1533,
+   80,
+   1813,
+   106
+  ]
+ }
+}

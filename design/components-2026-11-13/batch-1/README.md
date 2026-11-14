@@ -28,7 +28,7 @@
 - **圆角**一律 8px（DESIGN.md §5：28–44px 的控件用 8，不做胶囊）。菜单面板 8px、内边距 4px、菜单项 4px（§5 同心）；面板白底 + `--elev-3`、无边线（§4）。
 - **状态**：悬停垫桌色（整块响应）；键盘焦点 2px 石板墨环、离 2px，淡墨、次要灰的字提到墨色（换顶栏时补的）；打开着的触发键（`aria-expanded=true`，淡墨 / 次要灰 / 墨三种透明底）保持桌色底、墨字（换草稿卷时补的，样张 `sheet-menu.png` 里「…」键因此变成桌色底）；按下缩到 0.97；禁用变淡（填充的两种改成桌色底、次要灰字，和现有 `.primary-button` 一样）；忙：点不动、读屏念「忙」。减少动态效果时不缩、菜单不做入场动画。
 - **菜单的行为**照搬现有 `ConciergeGroupRowMenu`：一次只开一个；Esc / Tab / 选中后关、焦点回触发键；点外面、外面滚动也关，但不抢焦点；方向键在项之间走（跳过禁用项，到头绕回），Home / End；打开时焦点落到第一项；面板挂到 body 下，固定定位，下面放不下就翻到上面，并且不出屏。
-- **菜单项的参数**（换首页和个人空间的行菜单时补的，都是那两处原来就有的）：`onSelect` 拿到点击事件和触发键（链接项 `preventDefault` 走站内跳转；打开确认框的项把触发键交给确认框）；`restoreFocus: false` 让选中后焦点不回触发键、交给对话框；`data` 挂 `data-*` 属性。触发键多了 `triggerClassName`（只当选择器钩子）和 `triggerDisabled`。`ConciergeGroupRowMenu.tsx` 已删，见 `../migrate-menus/README.md`。
+- **菜单项的参数**（换首页和个人空间的行菜单时补的，都是那两处原来就有的）：`onSelect` 拿到点击事件和触发键（链接项 `preventDefault` 走站内跳转；打开确认框的项把触发键交给确认框）；`restoreFocus: false` 让选中后焦点不回触发键、交给对话框；`data` 挂 `data-*` 属性。触发键多了 `triggerClassName`（只当选择器钩子）和 `triggerDisabled`。换个人空间页时又补了 `gapClick`（点面板空隙算不算点最近那一项，默认算；个人空间设成不算，和原来一样）。`ConciergeGroupRowMenu.tsx` 已删，见 `../migrate-menus/README.md`。
 - **`ButtonLink`**（换详情页时补的）：样子和 `Button` 一样、点了是去别的地址的 `<a>`，用在详情页「阅读解析」（原来就是链接，能中键开新标签、能复制地址）。参数是 `href`、`tone`、`size`、`icon`；链接没有禁用和忙，这两项不提供。见 `../migrate-detail/README.md`。
 - **放进会滑的悬停列表**（`FluidHoverList`，比如顶栏）时，底由列表画，按钮自己不再垫一层，只把字提到墨色。
 

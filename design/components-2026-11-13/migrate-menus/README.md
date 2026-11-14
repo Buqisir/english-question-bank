@@ -77,6 +77,7 @@
   - `scripts/component-inventory/scenarios.mjs`（`[aria-haspopup="menu"]`、`.my-space-row-menu-trigger`）。
 - `scripts/component-inventory/menu-shots.mjs`：新写的拍照脚本，见下一节。
 - `../batch-1/README.md`：补了一条，记下 `Menu` 新加的参数。
+- **更正（2026-11-14，换个人空间页时发现）**：上面说个人空间相关的脚本「没动」不全对。`scripts/verify-my-space-shelf.mjs` 里菜单那 5 条还在 `MySpacePage.tsx` 里找菜单代码，这次换完就会失败，我当时没查到这个文件。另外原来个人空间的菜单关掉了「点面板空隙也算点最近那一项」，换成 `Menu` 时没带过去。两处都在下一页补上了，见 `../migrate-space/README.md` 第三节。
 
 ## 五、检查和拍照时绕过的问题
 

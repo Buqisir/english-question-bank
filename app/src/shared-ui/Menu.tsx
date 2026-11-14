@@ -18,6 +18,9 @@
  * - restoreFocus：选中后焦点回不回触发键，默认回；打开对话框的项设 false，焦点交给对话框；
  * - data：项上的 data-* 属性（首页的 data-ra-entry / data-ra-group-id，阅读解析入口统计用）；
  * - triggerClassName、triggerDisabled：触发键的选择器钩子和禁用（个人空间文件下载中禁用）。
+ *
+ * 换个人空间页时（第六页）补了 gapClick：原来个人空间的菜单关掉了「点项和项之间、面板边上的空隙也算点最近那一项」
+ * （FluidHoverList 默认开着），第四页换菜单时漏了，这里补回来。默认照旧开着，别处的菜单不变。
  */
 
 import {
@@ -72,6 +75,8 @@ export type MenuProps = {
   /** 面板和触发键哪一边对齐：end 右边对齐（默认），start 左边对齐。 */
   align?: 'start' | 'end'
   className?: string
+  /** 点面板空隙算不算点最近那一项（FluidHoverList 的 gapClick）。默认算；有危险项、不想误触时设 false。 */
+  gapClick?: boolean
 }
 
 let activeCloser: (() => void) | null = null
@@ -101,6 +106,7 @@ export function Menu({
   triggerDisabled,
   align = 'end',
   className,
+  gapClick,
 }: MenuProps) {
   const [open, setOpen] = useState(false)
   const triggerRef = useRef<HTMLButtonElement>(null)
@@ -230,6 +236,7 @@ export function Menu({
             id={menuId}
             className={className ? `eqb-menu ${className}` : 'eqb-menu'}
             itemSelector=".eqb-menu-item:not([aria-disabled='true'])"
+            gapClick={gapClick}
             role="menu"
             aria-label={label}
             onClick={(event) => event.stopPropagation()}

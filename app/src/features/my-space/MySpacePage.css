@@ -208,36 +208,13 @@ button.my-space-folder-button { cursor: pointer; }
   gap: 3px;
 }
 
-/* :where(:not(.eqb-button))：「…」触发键是共用 Button，不吃这几条手写按钮规则（特异度不变）。 */
-.my-space-row-actions button:where(:not(.eqb-button)) {
-  align-items: center;
-  background: transparent;
-  border: 0;
-  border-radius: 8px;
-  color: var(--eqb-color-text-muted);
-  cursor: pointer;
-  display: inline-flex;
-  font: inherit;
-  font-size: 13px;
-  gap: 6px;
-  min-height: 36px;
-  padding: 0 10px;
-  white-space: nowrap;
-}
+/* 行上的「下载」「打开原草稿」「…」都是共用 Button 大号（36，次要灰），2026-11-13 构件厂第 4 步换的：
+ * 「…」第四页换成 Menu，「下载」「打开原草稿」第六页换成 Button，原来的手写按钮规则删掉。
+ * 整行在 FluidHoverList 里，悬停时按钮自己不垫底（button.css .fluid-hover-list 那条），和原来一样只把字提到墨色。 */
 
-.my-space-row-actions button:where(:not(.eqb-button)):hover:not(:disabled),
-.my-space-row-actions button:where(:not(.eqb-button)):focus-visible { color: var(--eqb-color-text); }
-
-.my-space-row-actions button:where(:not(.eqb-button)):disabled { cursor: not-allowed; opacity: 0.55; }
-
-/* 文件行「…」菜单：2026-11-13 换成共用 Menu（app/src/shared-ui/Menu.tsx + menu.css），原来的
- * .my-space-row-menu、-menu-item、-menu-item-danger、-menu-trigger 几条删掉。触发键是 Button 大号（36），
- * 和同一行「下载」「打开原草稿」一样高。 */
-
-.my-space-folder-button:focus-visible,
-.my-space-row-actions button:where(:not(.eqb-button)):focus-visible,
-.my-space-empty-cta:focus-visible,
-.my-space-confirm-actions button:focus-visible {
+/* 文件夹按钮仍是手写的（导航列表项，带选中态和计数，不在按钮那几种语气里）。
+ * 空态主键和确认框的两个键换成了 Button，焦点环由 button.css 管，从这里拿掉。 */
+.my-space-folder-button:focus-visible {
   outline: var(--focus-ring);
   outline-offset: 2px;
 }
@@ -270,18 +247,8 @@ button.my-space-folder-button { cursor: pointer; }
 
 .my-space-empty-state .my-space-empty { margin: 0; }
 
-.my-space-empty-cta {
-  background: var(--eqb-color-accent-fill);
-  border: 0;
-  border-radius: 8px;
-  color: var(--eqb-color-accent-fill-ink);
-  cursor: pointer;
-  font: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  min-height: 36px;
-  padding: 0 16px;
-}
+/* 空态「去找题」、出错态「重新加载」换成 Button 主键大号（36），原来的 .my-space-empty-cta 一块删掉；
+ * 类名还挂着，只当选择器钩子（verify-error-copy-mainline.mjs 认它）。 */
 
 .my-space-modal-backdrop {
   align-items: center;
@@ -317,20 +284,7 @@ button.my-space-folder-button { cursor: pointer; }
 .my-space-confirm-dialog p { color: var(--eqb-color-text-muted); font-size: 13px; line-height: 1.55; margin: 0; }
 .my-space-confirm-actions { display: flex; gap: 8px; justify-content: flex-end; }
 
-.my-space-confirm-actions button {
-  background: transparent;
-  border: 0;
-  border-radius: 8px;
-  color: var(--eqb-color-text);
-  cursor: pointer;
-  font: inherit;
-  font-size: 13px;
-  min-height: 34px;
-  padding: 0 12px;
-}
-
-.my-space-confirm-actions button:hover { background: var(--desk-hover); }
-.my-space-confirm-actions .my-space-delete-confirm { color: var(--eqb-color-danger); }
+/* 确认框「取消」（墨字）、「删除 PDF」（危险字）换成 Button 大号（36），原来三条手写规则删掉。 */
 
 @media (max-width: 760px) {
   .my-space-page > .topbar,
@@ -352,11 +306,10 @@ button.my-space-folder-button { cursor: pointer; }
   .my-space-file-row { align-items: start; gap: 10px; grid-template-columns: 24px minmax(0, 1fr); padding: 14px 12px; }
   .my-space-file-icon { margin-top: 2px; }
   .my-space-row-actions { grid-column: 2; justify-content: flex-end; margin-top: 2px; }
-  .my-space-row-actions button:where(:not(.eqb-button)) { min-height: 34px; }
-  .my-space-row-actions button:where(:not(.eqb-button)):nth-child(2) { padding-inline: 6px; }
-  /* 窄屏这一行的键都是 34 高（上一条）。本条覆盖 button.css 里 .eqb-button[data-size='lg'] 的 36，让「…」跟着一样高；
-   * 宽仍是 36，和原来一样。 */
-  .my-space-row-actions .eqb-button.my-space-row-menu-trigger { height: 34px; }
+  /* 窄屏这一行的键都是 34 高（原来手写按钮就是这样）。本条覆盖 button.css 里 .eqb-button[data-size='lg'] 的 36，
+   * 多带一个 .my-space-row-actions 才赢得过它。「…」宽仍是 36。原来「打开原草稿」窄屏左右内边距收到 6，
+   * 换成 Button 后不再单独收（12），这一行在 390 宽下放得下。 */
+  .my-space-row-actions .eqb-button[data-size='lg'] { height: 34px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

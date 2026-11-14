@@ -16,6 +16,7 @@ import { deleteMySpaceArtifact, downloadMySpaceArtifact, fetchMySpace } from '..
 import { prepareFileSaveTarget, type FileSaveMode } from '../../services/fileDownload.ts'
 import { describeError } from '../shared/errorCopy'
 import { useToastPresence } from '../shared/useToastPresence.ts'
+import { Button } from '../../shared-ui/Button.tsx'
 import { Menu } from '../../shared-ui/Menu.tsx'
 import './MySpacePage.css'
 
@@ -94,6 +95,8 @@ function ArtifactMenu({
       triggerDisabled={disabled}
       // 和同一行的「下载」「打开原草稿」一样高（36，窄屏 34 见 MySpacePage.css）。
       triggerSize="lg"
+      // 原来的菜单就关掉了空隙点击：面板边上点一下不算点「删除文件」（第六页补回，见 Menu.tsx 头注释）。
+      gapClick={false}
       items={[
         { key: 'save-as', label: '另存为…', icon: <Save size={16} aria-hidden="true" />, onSelect: () => onSaveAs() },
         {
@@ -290,14 +293,14 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
             {loadState === 'error' && (
               <div className="my-space-empty-state">
                 <p className="my-space-error">{message || '个人空间读取失败。'}</p>
-                <button type="button" className="my-space-empty-cta" onClick={() => void load()}>重新加载</button>
+                <Button className="my-space-empty-cta" tone="primary" size="lg" onClick={() => void load()}>重新加载</Button>
               </div>
             )}
             {loadState === 'loaded' && artifacts.length === 0 && (
               <div className="my-space-empty-state">
                 <EmptyIllustration kind="archive" />
                 <p className="my-space-empty">试卷导出为 PDF 后，可以保存在这里。</p>
-                <button type="button" className="my-space-empty-cta" onClick={onBackToWorkbench}>去找题</button>
+                <Button className="my-space-empty-cta" tone="primary" size="lg" onClick={onBackToWorkbench}>去找题</Button>
               </div>
             )}
             {loadState === 'loaded' && artifacts.length > 0 && monthGroups.map((group) => (
@@ -331,10 +334,16 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                           </p>
                         </div>
                         <div className="my-space-row-actions">
-                          <button type="button" disabled={busyId === artifact.id} onClick={() => void downloadArtifact(artifact)}>
-                            <DownloadFeedbackIcon size={16} working={downloadingId === artifact.id} /><span>下载</span>
-                          </button>
-                          <button type="button" onClick={() => openSourceDraft(artifact)}>打开原草稿</button>
+                          <Button
+                            tone="subtle"
+                            size="lg"
+                            disabled={busyId === artifact.id}
+                            icon={<DownloadFeedbackIcon size={16} working={downloadingId === artifact.id} />}
+                            onClick={() => void downloadArtifact(artifact)}
+                          >
+                            下载
+                          </Button>
+                          <Button tone="subtle" size="lg" onClick={() => openSourceDraft(artifact)}>打开原草稿</Button>
                           <ArtifactMenu
                             artifact={artifact}
                             disabled={busyId === artifact.id}
@@ -358,8 +367,8 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
             <h3 id="my-space-confirm-dialog-title">删除草稿卷 PDF</h3>
             <p>删除「{confirmPresence.rendered.title || confirmPresence.rendered.fileName}」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。</p>
             <div className="my-space-confirm-actions">
-              <button type="button" ref={cancelButtonRef} onClick={() => setConfirmTarget(null)}>取消</button>
-              <button type="button" className="my-space-delete-confirm" onClick={() => void confirmDeleteArtifact()}>删除 PDF</button>
+              <Button tone="strong" size="lg" ref={cancelButtonRef} onClick={() => setConfirmTarget(null)}>取消</Button>
+              <Button className="my-space-delete-confirm" tone="danger" size="lg" onClick={() => void confirmDeleteArtifact()}>删除 PDF</Button>
             </div>
           </div>
         </div>
