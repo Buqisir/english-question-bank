@@ -707,6 +707,15 @@
   gap: 10px;
 }
 
+/* 换篇栏头上的「返回目录」：Owner 2026-11-14 决定 #1 换成 Button 淡墨小号以后，共用的 .similar-backlink 给了右负边距
+ * （paperBrowsePage.css）。左栏窄（约 208px）、外层会裁掉超出的部分，右负边距会让字和悬停的底被切掉一截（改后第一次拍到），
+ * 这里不要右负边距；也不让键被标题挤窄（改前字被挤成两行，Button 的字不折行，挤窄会被截断），让标题去折行。
+ * 覆盖：本条 (0,4,0) 盖过 paperBrowsePage.css 的 .eqb-button.similar-backlink (0,2,0)。 */
+.draft-swap-drawer .similar-passages-head > .eqb-button.similar-backlink {
+  flex-shrink: 0;
+  margin-right: 0;
+}
+
 /* 左 rail = 整卷页目录语言（paperBrowsePage.css 的 .paper-browse-rail
    族：淡墨、无边框、无底色块、当前项加深并由小手指出），sticky offset
    与它同值。 */

@@ -3498,8 +3498,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             <div className="paper-browse-reading-header">
               {lectureTitle && <h4 className="paper-browse-lecture-title">{lectureTitle}</h4>}
               {readingOverview && (
-                <button
-                  type="button"
+                <Button
+                  tone="quiet"
+                  size="sm"
                   className="paper-browse-reading-overview-toggle"
                   {...iconMotionInput}
                   aria-expanded={readingOverviewOpen}
@@ -3515,7 +3516,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 >
                   文章简介
                   <DisclosureIcon expanded={readingOverviewOpen} size={16} />
-                </button>
+                </Button>
               )}
               {readingOverview && (
                 <p

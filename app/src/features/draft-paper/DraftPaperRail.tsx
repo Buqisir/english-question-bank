@@ -41,9 +41,9 @@ export function DraftPaperSwapDrawer(props: DraftPaperSwapDrawerProps): ReactNod
     <div className="draft-swap-drawer">
       <div className="similar-passages-head">
         <h4 className="paper-browse-lecture-title">相似篇章 · {seedTitle}</h4>
-        <button type="button" className="similar-backlink" onClick={onCollapse}>
+        <Button tone="quiet" size="sm" className="similar-backlink" onClick={onCollapse}>
           返回目录
-        </button>
+        </Button>
       </div>
       <p className="similar-passages-sub">{recipeSummary}</p>
 

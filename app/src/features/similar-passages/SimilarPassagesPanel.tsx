@@ -82,9 +82,9 @@ export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNod
       <div className="similar-passages-head">
         <h4 className="paper-browse-lecture-title">相似篇章</h4>
         <span className="similar-passages-sub">{recipeSummary}</span>
-        <button type="button" className="similar-backlink" onClick={onCollapse}>
+        <Button tone="quiet" size="sm" className="similar-backlink" onClick={onCollapse}>
           收起 <ChevronUp size={12} aria-hidden="true" />
-        </button>
+        </Button>
       </div>
 
       {request.status === 'loading' && <p className="paper-browse-lecture-empty">加载中…</p>}

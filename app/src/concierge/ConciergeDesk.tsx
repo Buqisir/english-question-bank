@@ -811,20 +811,23 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           ))}
           {(canToggleFilters || hasActiveFilters) && (
             <div className="concierge-filter-actions">
+              {/* Owner 2026-11-14 决定 #1：这一排的两个纯文字键换成淡墨小号（quiet sm），负边距见 App.css
+                  .concierge-filter-actions。句子里带下划线的「清除筛选」（concierge-filter-clear-inline）不动。 */}
               {canToggleFilters && (
-                <button
-                  type="button"
+                <Button
+                  tone="quiet"
+                  size="sm"
                   className="concierge-filter-more"
                   aria-expanded={showAllFilterDims}
                   onClick={() => setFiltersExpanded((value) => !value)}
                 >
                   {filtersExpanded ? '收起筛选' : '更多筛选'}
-                </button>
+                </Button>
               )}
               {hasActiveFilters && (
-                <button type="button" className="concierge-filter-clear" onClick={clearFilters}>
+                <Button tone="quiet" size="sm" className="concierge-filter-clear" onClick={clearFilters}>
                   清除筛选
-                </button>
+                </Button>
               )}
             </div>
           )}

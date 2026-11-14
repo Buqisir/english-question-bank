@@ -386,7 +386,13 @@ button.pi-ps-analysis-distractor--selected {
   gap: 8px;
   margin-bottom: 10px;
 }
-.pi-seven-panel-actions button,
+/* 「全部显示 / 全部隐藏」：Owner 2026-11-14 决定 #1 换成 Button 淡墨小号（quiet sm），不再归下面这条带框奶油底的手写样式管，
+ * 也删了它们的 :disabled 手写样式（改由 button.css 的 disabled 管：淡到 0.55、光标 not-allowed）。
+ * 第一个键用负边距抵掉 sm 的左内边距，字的左边贴齐面板的左边（改前字在框里，比面板左边往里 10px，实测）。
+ * 「展开细节」不在决定 #1 点名的范围里，仍用下面这条手写样式（见 batch-b README「没换的」）。 */
+.pi-seven-panel-actions > .eqb-button:first-child {
+  margin-left: calc(-1 * var(--eqb-space-2));
+}
 .pi-seven-details-toggle {
   padding: 5px 9px;
   border: 1px solid #d8d0c4;
@@ -396,11 +402,6 @@ button.pi-ps-analysis-distractor--selected {
   font: inherit;
   font-size: 12px;
   cursor: pointer;
-}
-.pi-seven-panel-actions button:disabled {
-  cursor: default;
-  color: #a49a8e;
-  background: rgba(255, 255, 255, 0.28);
 }
 .pi-seven-option-jump {
   position: sticky;

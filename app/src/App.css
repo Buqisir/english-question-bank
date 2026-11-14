@@ -4456,21 +4456,6 @@ div.concierge-feed-empty-corpus p { margin: 0; }
   color: var(--eqb-color-text);
 }
 
-.concierge-filter-clear {
-  background: transparent;
-  border: none;
-  color: var(--desk-muted);
-  font-family: inherit;
-  font-size: 12.5px;
-  cursor: pointer;
-  padding: 4px 2px;
-  text-decoration: underline;
-}
-
-.concierge-filter-clear:hover {
-  color: var(--desk-ink);
-}
-
 .concierge-filter-clear-inline {
   background: transparent;
   border: none;
@@ -4487,36 +4472,29 @@ div.concierge-feed-empty-corpus p { margin: 0; }
   margin-left: 4px;
 }
 
-/* Progressive-disclosure toggle + clear, on one quiet trailing row. */
+/* Progressive-disclosure toggle + clear, on one quiet trailing row.
+ * Owner 2026-11-14 决定 #1：「更多筛选 / 收起筛选」「清除筛选」换成 Button 淡墨小号（quiet sm），
+ * 原来的 12.5px 纯文字键样子（次要灰、400、内边距 4px 2px、「清除筛选」带下划线）删了，交给 button.css。
+ * 第一个键左边用负边距抵掉 sm 的左内边距（--eqb-space-2），字贴齐这一排的左边；
+ * 两个键之间的距离从 14 收到 --eqb-space-1，两边各多出的 8px 内边距已经把字隔开（实测「更多筛选」的字比改前左移 2px、「清除筛选」的字右移 2px，见 design/components-2026-11-13/decisions-2026-11-14/batch-b/README.md）。 */
 .concierge-filter-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: var(--eqb-space-1);
   margin-top: 2px;
 }
 
-.concierge-filter-more {
-  display: inline-flex;
-  align-items: center;
-  background: transparent;
-  border: none;
-  color: var(--desk-muted);
-  font-family: inherit;
-  font-size: 12.5px;
-  cursor: pointer;
-  padding: 4px 2px;
+.concierge-filter-actions > .eqb-button:first-child {
+  margin-left: calc(-1 * var(--eqb-space-2));
 }
 
-.concierge-filter-more:hover {
-  color: var(--desk-ink);
-}
-
-/* Chevron: down when collapsed, up when expanded (instant, no motion). */
+/* Chevron: down when collapsed, up when expanded (instant, no motion).
+ * 和字的间距由 Button 的 gap（6px）给，所以这里的 margin-left 归零（原来是 6px，按钮是 inline-flex 时没有 gap）。 */
 .concierge-filter-more::after {
   content: '';
   width: 6px;
   height: 6px;
-  margin-left: 6px;
+  margin-left: 0;
   border-right: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
   transform: translateY(-2px) rotate(45deg);

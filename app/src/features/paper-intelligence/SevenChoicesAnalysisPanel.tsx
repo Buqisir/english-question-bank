@@ -8,6 +8,7 @@ import { ObjectiveTeachingContent } from './ObjectiveTeachingContent.tsx'
 import type { ObjectiveTeachingView } from './objectiveTeachingContentAdapter.ts'
 import { DisclosureIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
+import { Button } from '../../shared-ui/Button.tsx'
 
 type Props = {
   overview: string
@@ -105,12 +106,12 @@ export function SevenChoicesAnalysisPanel({
         <span className="pi-seven-open-count">{openCount} / {chains.length}</span>
       </div>
       <div className="pi-seven-panel-actions" aria-label="七选五显示控制">
-        <button type="button" onClick={onShowAll} disabled={openCount === chains.length}>
+        <Button tone="quiet" size="sm" onClick={onShowAll} disabled={openCount === chains.length}>
           全部显示
-        </button>
-        <button type="button" onClick={onHideAll} disabled={openCount === 0}>
+        </Button>
+        <Button tone="quiet" size="sm" onClick={onHideAll} disabled={openCount === 0}>
           全部隐藏
-        </button>
+        </Button>
       </div>
       {overview && (
         <details className="pi-seven-group-overview" open>

@@ -2,6 +2,7 @@ import { useId, useState, useSyncExternalStore, type ReactNode } from 'react'
 import { SentenceAnalysis, X } from '../../../icons'
 import { CopyFeedbackIcon, DisclosureIcon, VolumeFeedbackIcon } from '../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../icons/motionInput'
+import { Button } from '../../../shared-ui/Button.tsx'
 import type {
   PaperDictionaryEntry,
   PaperDictionaryPosGroup,
@@ -273,16 +274,17 @@ function PosBlock({
         )) : null}
       </ol>
       {folded.length > 0 ? (
-        <button
-          type="button"
-          className="paper-dictionary-more paper-dictionary-rare-toggle"
+        <Button
+          tone="quiet"
+          size="sm"
+          className="paper-dictionary-text-toggle paper-dictionary-rare-toggle"
           {...iconMotionInput}
           aria-expanded={rareOpen}
           onClick={() => setRareOpen((value) => !value)}
         >
-          <span>{rareOpen ? '收起' : `更多义项 ${folded.length}`}</span>
+          {rareOpen ? '收起' : `更多义项 ${folded.length}`}
           <DisclosureIcon size={12} expanded={rareOpen} />
-        </button>
+        </Button>
       ) : null}
     </section>
   )
@@ -490,32 +492,34 @@ export function DictionaryCard({
       {playErrorId ? <p className="paper-dictionary-note">暂时无法播放</p> : null}
 
       {hasExplanations ? (
-        <button
-          type="button"
-          className="paper-dictionary-more paper-dictionary-detail-toggle"
+        <Button
+          tone="quiet"
+          size="sm"
+          className="paper-dictionary-text-toggle paper-dictionary-detail-toggle"
           {...iconMotionInput}
+          icon={<DisclosureIcon size={12} expanded={explainAll} />}
           aria-expanded={explainAll}
           onClick={() => setExplainAll((value) => !value)}
         >
-          <DisclosureIcon size={12} expanded={explainAll} />
-          <span>{explainAll ? '收起解释' : '详细解释'}</span>
-        </button>
+          {explainAll ? '收起解释' : '详细解释'}
+        </Button>
       ) : null}
 
       {notebook}
       <div className="paper-dictionary-footer">
         <span className="paper-dictionary-source">来源 Wiktionary</span>
-        <button
-          type="button"
-          className="paper-dictionary-more paper-dictionary-credits-toggle"
+        <Button
+          tone="quiet"
+          size="sm"
+          className="paper-dictionary-text-toggle paper-dictionary-credits-toggle"
           {...iconMotionInput}
           aria-expanded={creditsOpen}
           aria-controls={creditsId}
           onClick={() => setCreditsOpen((value) => !value)}
         >
-          <span>署名与隐私</span>
+          署名与隐私
           <DisclosureIcon size={12} expanded={creditsOpen} />
-        </button>
+        </Button>
         <div id={creditsId} className="paper-dictionary-credits-body" hidden={!creditsOpen}>
           <p className="paper-dictionary-attribution">
             {result?.attribution || 'Open Dictionary / Wiktionary 衍生数据，含模型生成释义'}

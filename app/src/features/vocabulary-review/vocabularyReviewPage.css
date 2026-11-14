@@ -164,14 +164,17 @@
   outline-offset: 2px;
 }
 
-.vocabulary-overall-progress span,
+/* 「.vocabulary-overall-progress > span」只管进度那行字。原来写成后代 span，会连「查看 / 调整进度」键（Owner 2026-11-14 决定 #1
+ * 换成 Button 以后）里的 .eqb-button-label 也染成淡色 12px/600，盖过 button.css 的淡墨小号；改成只管直接子元素。
+ * 特指度不变，仍是 (0,1,1)。 */
+.vocabulary-overall-progress > span,
 .vocabulary-collection-heading span {
   color: var(--muted);
   font-size: 12px;
   font-weight: 600;
 }
 
-.vocabulary-overall-progress span {
+.vocabulary-overall-progress > span {
   text-align: right;
 }
 
@@ -200,19 +203,15 @@
   background: var(--action);
 }
 
+/* 「查看 / 调整进度」：Owner 2026-11-14 决定 #1 换成 Button 淡墨小号（quiet sm），原来手写的 12px/600 墨色和焦点框删了，
+ * 改由 button.css 管。宽屏靠右：右边用负边距抵掉 sm 的右内边距，字的右边还贴齐进度条的右边；
+ * 上下各收 --eqb-space-1，抵掉一部分按钮（28）比原来（约 21）高出来的部分。 */
 .vocabulary-progress-toggle {
   justify-self: end;
-  padding: 2px 0;
-  border: 0;
-  background: transparent;
-  color: var(--eqb-color-text);
-  font: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.4;
+  margin-block: calc(-1 * var(--eqb-space-1));
+  margin-right: calc(-1 * var(--eqb-space-2));
 }
 
-.vocabulary-progress-toggle:focus-visible,
 .vocabulary-progress-explorer button:focus-visible {
   outline: 2px solid var(--action);
   outline-offset: 2px;
@@ -1569,12 +1568,15 @@
     width: 100%;
   }
 
-  .vocabulary-overall-progress span {
+  .vocabulary-overall-progress > span {
     text-align: left;
   }
 
+  /* 窄屏靠左：负边距换到左边，字的左边贴齐进度那行字的左边。 */
   .vocabulary-progress-toggle {
     justify-self: start;
+    margin-right: 0;
+    margin-left: calc(-1 * var(--eqb-space-2));
   }
 
   .vocabulary-progress-explorer {

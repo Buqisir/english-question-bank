@@ -1,0 +1,2282 @@
+{
+ "shots/detail-similar-collapse-390.png": {
+  "before": [
+   636,
+   124
+  ],
+  "after": [
+   636,
+   124
+  ],
+  "changedPixels": 2395,
+  "changedRatio": 0.03037,
+  "bbox": [
+   172,
+   35,
+   608,
+   94
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-detail-similar-collapse-390.png"
+ },
+ "shots/detail-similar-collapse-focus-390.png": {
+  "before": [
+   636,
+   124
+  ],
+  "after": [
+   636,
+   124
+  ],
+  "changedPixels": 5121,
+  "changedRatio": 0.06493,
+  "bbox": [
+   172,
+   12,
+   636,
+   94
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-detail-similar-collapse-focus-390.png"
+ },
+ "shots/detail-similar-collapse-focus.png": {
+  "before": [
+   1664,
+   92
+  ],
+  "after": [
+   1664,
+   92
+  ],
+  "changedPixels": 3558,
+  "changedRatio": 0.02324,
+  "bbox": [
+   1536,
+   12,
+   1664,
+   84
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-detail-similar-collapse-focus.png"
+ },
+ "shots/detail-similar-collapse-hover-390.png": {
+  "before": [
+   636,
+   124
+  ],
+  "after": [
+   636,
+   124
+  ],
+  "changedPixels": 7565,
+  "changedRatio": 0.09592,
+  "bbox": [
+   172,
+   20,
+   628,
+   94
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-detail-similar-collapse-hover-390.png"
+ },
+ "shots/detail-similar-collapse-hover.png": {
+  "before": [
+   1664,
+   92
+  ],
+  "after": [
+   1664,
+   92
+  ],
+  "changedPixels": 6001,
+  "changedRatio": 0.0392,
+  "bbox": [
+   1544,
+   20,
+   1656,
+   76
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-detail-similar-collapse-hover.png"
+ },
+ "shots/detail-similar-collapse.png": {
+  "before": [
+   1664,
+   92
+  ],
+  "after": [
+   1664,
+   92
+  ],
+  "changedPixels": 831,
+  "changedRatio": 0.00543,
+  "bbox": [
+   1561,
+   35,
+   1636,
+   60
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-detail-similar-collapse.png"
+ },
+ "shots/dict-card-390.png": {
+  "before": [
+   712,
+   622
+  ],
+  "after": [
+   712,
+   630
+  ],
+  "changedPixels": 25556,
+  "changedRatio": 0.05697,
+  "bbox": [
+   0,
+   384,
+   705,
+   630
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-card-390.png"
+ },
+ "shots/dict-card.png": {
+  "before": [
+   712,
+   622
+  ],
+  "after": [
+   712,
+   630
+  ],
+  "changedPixels": 26042,
+  "changedRatio": 0.05806,
+  "bbox": [
+   7,
+   383,
+   705,
+   630
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-card.png"
+ },
+ "shots/dict-credits-expanded-390.png": {
+  "before": [
+   712,
+   712
+  ],
+  "after": [
+   712,
+   720
+  ],
+  "changedPixels": 44752,
+  "changedRatio": 0.0873,
+  "bbox": [
+   0,
+   384,
+   704,
+   720
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-credits-expanded-390.png"
+ },
+ "shots/dict-credits-expanded.png": {
+  "before": [
+   712,
+   712
+  ],
+  "after": [
+   712,
+   720
+  ],
+  "changedPixels": 43952,
+  "changedRatio": 0.08574,
+  "bbox": [
+   8,
+   383,
+   711,
+   720
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-credits-expanded.png"
+ },
+ "shots/dict-credits-focus-390.png": {
+  "before": [
+   712,
+   622
+  ],
+  "after": [
+   712,
+   630
+  ],
+  "changedPixels": 29324,
+  "changedRatio": 0.06537,
+  "bbox": [
+   0,
+   384,
+   705,
+   630
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-credits-focus-390.png"
+ },
+ "shots/dict-credits-focus.png": {
+  "before": [
+   712,
+   622
+  ],
+  "after": [
+   712,
+   630
+  ],
+  "changedPixels": 29822,
+  "changedRatio": 0.06648,
+  "bbox": [
+   7,
+   383,
+   705,
+   630
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-credits-focus.png"
+ },
+ "shots/dict-credits-hover-390.png": {
+  "before": [
+   712,
+   622
+  ],
+  "after": [
+   712,
+   630
+  ],
+  "changedPixels": 33864,
+  "changedRatio": 0.07549,
+  "bbox": [
+   0,
+   384,
+   705,
+   630
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-credits-hover-390.png"
+ },
+ "shots/dict-credits-hover.png": {
+  "before": [
+   712,
+   622
+  ],
+  "after": [
+   712,
+   630
+  ],
+  "changedPixels": 34397,
+  "changedRatio": 0.07668,
+  "bbox": [
+   7,
+   383,
+   705,
+   630
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-credits-hover.png"
+ },
+ "shots/dict-detail-expanded-390.png": {
+  "before": [
+   712,
+   712
+  ],
+  "after": [
+   712,
+   720
+  ],
+  "changedPixels": 38678,
+  "changedRatio": 0.07545,
+  "bbox": [
+   0,
+   474,
+   705,
+   720
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-detail-expanded-390.png"
+ },
+ "shots/dict-detail-expanded.png": {
+  "before": [
+   712,
+   712
+  ],
+  "after": [
+   712,
+   720
+  ],
+  "changedPixels": 38276,
+  "changedRatio": 0.07466,
+  "bbox": [
+   7,
+   473,
+   711,
+   720
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-detail-expanded.png"
+ },
+ "shots/dict-detail-focus-390.png": {
+  "before": [
+   712,
+   622
+  ],
+  "after": [
+   712,
+   630
+  ],
+  "changedPixels": 32646,
+  "changedRatio": 0.07278,
+  "bbox": [
+   0,
+   384,
+   705,
+   630
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-detail-focus-390.png"
+ },
+ "shots/dict-detail-focus.png": {
+  "before": [
+   712,
+   622
+  ],
+  "after": [
+   712,
+   630
+  ],
+  "changedPixels": 33127,
+  "changedRatio": 0.07385,
+  "bbox": [
+   7,
+   383,
+   705,
+   630
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-detail-focus.png"
+ },
+ "shots/dict-detail-hover-390.png": {
+  "before": [
+   712,
+   622
+  ],
+  "after": [
+   712,
+   630
+  ],
+  "changedPixels": 33038,
+  "changedRatio": 0.07365,
+  "bbox": [
+   0,
+   384,
+   705,
+   630
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-detail-hover-390.png"
+ },
+ "shots/dict-detail-hover.png": {
+  "before": [
+   712,
+   622
+  ],
+  "after": [
+   712,
+   630
+  ],
+  "changedPixels": 33564,
+  "changedRatio": 0.07483,
+  "bbox": [
+   7,
+   383,
+   705,
+   630
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-detail-hover.png"
+ },
+ "shots/dict-rare-expanded-390.png": {
+  "before": [
+   712,
+   718
+  ],
+  "after": [
+   712,
+   726
+  ],
+  "changedPixels": 31408,
+  "changedRatio": 0.06076,
+  "bbox": [
+   0,
+   461,
+   705,
+   726
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-rare-expanded-390.png"
+ },
+ "shots/dict-rare-expanded.png": {
+  "before": [
+   712,
+   718
+  ],
+  "after": [
+   712,
+   726
+  ],
+  "changedPixels": 31023,
+  "changedRatio": 0.06002,
+  "bbox": [
+   7,
+   460,
+   711,
+   726
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-rare-expanded.png"
+ },
+ "shots/dict-rare-focus-390.png": {
+  "before": [
+   712,
+   622
+  ],
+  "after": [
+   712,
+   630
+  ],
+  "changedPixels": 29341,
+  "changedRatio": 0.06541,
+  "bbox": [
+   0,
+   365,
+   705,
+   630
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-rare-focus-390.png"
+ },
+ "shots/dict-rare-focus.png": {
+  "before": [
+   712,
+   622
+  ],
+  "after": [
+   712,
+   630
+  ],
+  "changedPixels": 29831,
+  "changedRatio": 0.0665,
+  "bbox": [
+   7,
+   364,
+   705,
+   630
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-rare-focus.png"
+ },
+ "shots/dict-rare-hover-390.png": {
+  "before": [
+   712,
+   622
+  ],
+  "after": [
+   712,
+   630
+  ],
+  "changedPixels": 33996,
+  "changedRatio": 0.07579,
+  "bbox": [
+   0,
+   373,
+   705,
+   630
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-rare-hover-390.png"
+ },
+ "shots/dict-rare-hover.png": {
+  "before": [
+   712,
+   622
+  ],
+  "after": [
+   712,
+   630
+  ],
+  "changedPixels": 34495,
+  "changedRatio": 0.0769,
+  "bbox": [
+   7,
+   372,
+   705,
+   630
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-dict-rare-hover.png"
+ },
+ "shots/draft-back-390.png": {
+  "before": [
+   664,
+   76
+  ],
+  "after": [
+   664,
+   76
+  ],
+  "changedPixels": 1694,
+  "changedRatio": 0.03357,
+  "bbox": [
+   349,
+   26,
+   468,
+   52
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-back-390.png"
+ },
+ "shots/draft-back-focus-390.png": {
+  "before": [
+   664,
+   76
+  ],
+  "after": [
+   664,
+   76
+  ],
+  "changedPixels": 4142,
+  "changedRatio": 0.08208,
+  "bbox": [
+   340,
+   4,
+   492,
+   76
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-back-focus-390.png"
+ },
+ "shots/draft-back-focus.png": {
+  "before": [
+   416,
+   116
+  ],
+  "after": [
+   416,
+   116
+  ],
+  "changedPixels": 4459,
+  "changedRatio": 0.0924,
+  "bbox": [
+   256,
+   4,
+   408,
+   100
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-back-focus.png"
+ },
+ "shots/draft-back-hover-390.png": {
+  "before": [
+   664,
+   76
+  ],
+  "after": [
+   664,
+   76
+  ],
+  "changedPixels": 7377,
+  "changedRatio": 0.14618,
+  "bbox": [
+   348,
+   12,
+   484,
+   68
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-back-hover-390.png"
+ },
+ "shots/draft-back-hover.png": {
+  "before": [
+   416,
+   116
+  ],
+  "after": [
+   416,
+   116
+  ],
+  "changedPixels": 7571,
+  "changedRatio": 0.15689,
+  "bbox": [
+   264,
+   12,
+   400,
+   85
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-back-hover.png"
+ },
+ "shots/draft-back.png": {
+  "before": [
+   416,
+   116
+  ],
+  "after": [
+   416,
+   116
+  ],
+  "changedPixels": 1835,
+  "changedRatio": 0.03803,
+  "bbox": [
+   280,
+   26,
+   389,
+   85
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-back.png"
+ },
+ "shots/draft-drawer-390.png": {
+  "before": [
+   664,
+   624
+  ],
+  "after": [
+   664,
+   624
+  ],
+  "changedPixels": 1694,
+  "changedRatio": 0.00409,
+  "bbox": [
+   349,
+   26,
+   468,
+   52
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-drawer-390.png"
+ },
+ "shots/draft-drawer.png": {
+  "before": [
+   416,
+   864
+  ],
+  "after": [
+   416,
+   864
+  ],
+  "changedPixels": 1835,
+  "changedRatio": 0.00511,
+  "bbox": [
+   280,
+   26,
+   389,
+   85
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-drawer.png"
+ },
+ "shots/filter-clear-390.png": {
+  "before": [
+   334,
+   114
+  ],
+  "after": [
+   354,
+   120
+  ],
+  "changedPixels": 8268,
+  "changedRatio": 0.19463,
+  "bbox": [
+   0,
+   0,
+   354,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-clear-390.png"
+ },
+ "shots/filter-clear-focus-390.png": {
+  "before": [
+   334,
+   114
+  ],
+  "after": [
+   354,
+   120
+  ],
+  "changedPixels": 11859,
+  "changedRatio": 0.27917,
+  "bbox": [
+   0,
+   0,
+   354,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-clear-focus-390.png"
+ },
+ "shots/filter-clear-focus.png": {
+  "before": [
+   334,
+   114
+  ],
+  "after": [
+   354,
+   120
+  ],
+  "changedPixels": 11895,
+  "changedRatio": 0.28001,
+  "bbox": [
+   0,
+   0,
+   354,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-clear-focus.png"
+ },
+ "shots/filter-clear-hover-390.png": {
+  "before": [
+   334,
+   114
+  ],
+  "after": [
+   354,
+   120
+  ],
+  "changedPixels": 13616,
+  "changedRatio": 0.32053,
+  "bbox": [
+   0,
+   0,
+   354,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-clear-hover-390.png"
+ },
+ "shots/filter-clear-hover.png": {
+  "before": [
+   334,
+   114
+  ],
+  "after": [
+   354,
+   120
+  ],
+  "changedPixels": 13652,
+  "changedRatio": 0.32137,
+  "bbox": [
+   0,
+   0,
+   354,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-clear-hover.png"
+ },
+ "shots/filter-clear.png": {
+  "before": [
+   334,
+   114
+  ],
+  "after": [
+   354,
+   120
+  ],
+  "changedPixels": 8304,
+  "changedRatio": 0.19548,
+  "bbox": [
+   0,
+   0,
+   354,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-clear.png"
+ },
+ "shots/filter-more-390.png": {
+  "before": [
+   198,
+   114
+  ],
+  "after": [
+   210,
+   120
+  ],
+  "changedPixels": 4498,
+  "changedRatio": 0.17849,
+  "bbox": [
+   0,
+   0,
+   210,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-more-390.png"
+ },
+ "shots/filter-more-expanded-390.png": {
+  "before": [
+   198,
+   114
+  ],
+  "after": [
+   210,
+   120
+  ],
+  "changedPixels": 11472,
+  "changedRatio": 0.45524,
+  "bbox": [
+   0,
+   0,
+   210,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-more-expanded-390.png"
+ },
+ "shots/filter-more-expanded-focus-390.png": {
+  "before": [
+   198,
+   114
+  ],
+  "after": [
+   210,
+   120
+  ],
+  "changedPixels": 13943,
+  "changedRatio": 0.55329,
+  "bbox": [
+   0,
+   0,
+   210,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-more-expanded-focus-390.png"
+ },
+ "shots/filter-more-expanded-focus.png": {
+  "before": [
+   198,
+   114
+  ],
+  "after": [
+   210,
+   120
+  ],
+  "changedPixels": 13943,
+  "changedRatio": 0.55329,
+  "bbox": [
+   0,
+   0,
+   210,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-more-expanded-focus.png"
+ },
+ "shots/filter-more-expanded-hover-390.png": {
+  "before": [
+   198,
+   114
+  ],
+  "after": [
+   210,
+   120
+  ],
+  "changedPixels": 11434,
+  "changedRatio": 0.45373,
+  "bbox": [
+   0,
+   0,
+   210,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-more-expanded-hover-390.png"
+ },
+ "shots/filter-more-expanded-hover.png": {
+  "before": [
+   198,
+   114
+  ],
+  "after": [
+   210,
+   120
+  ],
+  "changedPixels": 11434,
+  "changedRatio": 0.45373,
+  "bbox": [
+   0,
+   0,
+   210,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-more-expanded-hover.png"
+ },
+ "shots/filter-more-expanded.png": {
+  "before": [
+   198,
+   114
+  ],
+  "after": [
+   210,
+   120
+  ],
+  "changedPixels": 11472,
+  "changedRatio": 0.45524,
+  "bbox": [
+   0,
+   0,
+   210,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-more-expanded.png"
+ },
+ "shots/filter-more-focus-390.png": {
+  "before": [
+   198,
+   114
+  ],
+  "after": [
+   210,
+   120
+  ],
+  "changedPixels": 8652,
+  "changedRatio": 0.34333,
+  "bbox": [
+   0,
+   0,
+   210,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-more-focus-390.png"
+ },
+ "shots/filter-more-focus.png": {
+  "before": [
+   198,
+   114
+  ],
+  "after": [
+   210,
+   120
+  ],
+  "changedPixels": 8690,
+  "changedRatio": 0.34484,
+  "bbox": [
+   0,
+   0,
+   210,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-more-focus.png"
+ },
+ "shots/filter-more-hover-390.png": {
+  "before": [
+   198,
+   114
+  ],
+  "after": [
+   210,
+   120
+  ],
+  "changedPixels": 11433,
+  "changedRatio": 0.45369,
+  "bbox": [
+   0,
+   0,
+   210,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-more-hover-390.png"
+ },
+ "shots/filter-more-hover.png": {
+  "before": [
+   198,
+   114
+  ],
+  "after": [
+   210,
+   120
+  ],
+  "changedPixels": 11434,
+  "changedRatio": 0.45373,
+  "bbox": [
+   0,
+   0,
+   210,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-more-hover.png"
+ },
+ "shots/filter-more.png": {
+  "before": [
+   198,
+   114
+  ],
+  "after": [
+   210,
+   120
+  ],
+  "changedPixels": 4534,
+  "changedRatio": 0.17992,
+  "bbox": [
+   0,
+   0,
+   210,
+   120
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-more.png"
+ },
+ "shots/filter-panel-390.png": {
+  "before": [
+   732,
+   330
+  ],
+  "after": [
+   732,
+   336
+  ],
+  "changedPixels": 6262,
+  "changedRatio": 0.02546,
+  "bbox": [
+   0,
+   268,
+   732,
+   336
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-panel-390.png"
+ },
+ "shots/filter-panel-chosen-390.png": {
+  "before": [
+   732,
+   330
+  ],
+  "after": [
+   732,
+   336
+  ],
+  "changedPixels": 8257,
+  "changedRatio": 0.03357,
+  "bbox": [
+   0,
+   31,
+   732,
+   336
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-panel-chosen-390.png"
+ },
+ "shots/filter-panel-chosen.png": {
+  "before": [
+   1760,
+   330
+  ],
+  "after": [
+   1760,
+   336
+  ],
+  "changedPixels": 14460,
+  "changedRatio": 0.02445,
+  "bbox": [
+   0,
+   267,
+   1760,
+   336
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-panel-chosen.png"
+ },
+ "shots/filter-panel-expanded-390.png": {
+  "before": [
+   732,
+   466
+  ],
+  "after": [
+   732,
+   472
+  ],
+  "changedPixels": 13236,
+  "changedRatio": 0.03831,
+  "bbox": [
+   0,
+   393,
+   732,
+   472
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-panel-expanded-390.png"
+ },
+ "shots/filter-panel-expanded.png": {
+  "before": [
+   1760,
+   466
+  ],
+  "after": [
+   1760,
+   472
+  ],
+  "changedPixels": 19404,
+  "changedRatio": 0.02336,
+  "bbox": [
+   0,
+   392,
+   1760,
+   472
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-panel-expanded.png"
+ },
+ "shots/filter-panel.png": {
+  "before": [
+   1760,
+   330
+  ],
+  "after": [
+   1760,
+   336
+  ],
+  "changedPixels": 12466,
+  "changedRatio": 0.02108,
+  "bbox": [
+   0,
+   267,
+   1760,
+   336
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-filter-panel.png"
+ },
+ "shots/home-similar-390.png": {
+  "before": [
+   684,
+   600
+  ],
+  "after": [
+   684,
+   600
+  ],
+  "changedPixels": 1655,
+  "changedRatio": 0.00403,
+  "bbox": [
+   172,
+   64,
+   656,
+   123
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-home-similar-390.png"
+ },
+ "shots/home-similar-collapse-390.png": {
+  "before": [
+   684,
+   124
+  ],
+  "after": [
+   684,
+   124
+  ],
+  "changedPixels": 1655,
+  "changedRatio": 0.01951,
+  "bbox": [
+   172,
+   34,
+   656,
+   93
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-home-similar-collapse-390.png"
+ },
+ "shots/home-similar-collapse-focus-390.png": {
+  "before": [
+   684,
+   124
+  ],
+  "after": [
+   684,
+   124
+  ],
+  "changedPixels": 3979,
+  "changedRatio": 0.04691,
+  "bbox": [
+   172,
+   11,
+   684,
+   93
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-home-similar-collapse-focus-390.png"
+ },
+ "shots/home-similar-collapse-focus.png": {
+  "before": [
+   1712,
+   92
+  ],
+  "after": [
+   1712,
+   92
+  ],
+  "changedPixels": 3095,
+  "changedRatio": 0.01965,
+  "bbox": [
+   1584,
+   12,
+   1712,
+   84
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-home-similar-collapse-focus.png"
+ },
+ "shots/home-similar-collapse-hover-390.png": {
+  "before": [
+   684,
+   124
+  ],
+  "after": [
+   684,
+   124
+  ],
+  "changedPixels": 6834,
+  "changedRatio": 0.08057,
+  "bbox": [
+   172,
+   19,
+   676,
+   93
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-home-similar-collapse-hover-390.png"
+ },
+ "shots/home-similar-collapse-hover.png": {
+  "before": [
+   1712,
+   92
+  ],
+  "after": [
+   1712,
+   92
+  ],
+  "changedPixels": 6017,
+  "changedRatio": 0.0382,
+  "bbox": [
+   1592,
+   20,
+   1704,
+   76
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-home-similar-collapse-hover.png"
+ },
+ "shots/home-similar-collapse.png": {
+  "before": [
+   1712,
+   92
+  ],
+  "after": [
+   1712,
+   92
+  ],
+  "changedPixels": 830,
+  "changedRatio": 0.00527,
+  "bbox": [
+   1609,
+   35,
+   1684,
+   60
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-home-similar-collapse.png"
+ },
+ "shots/home-similar.png": {
+  "before": [
+   1712,
+   568
+  ],
+  "after": [
+   1712,
+   568
+  ],
+  "changedPixels": 830,
+  "changedRatio": 0.00085,
+  "bbox": [
+   1609,
+   65,
+   1684,
+   90
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-home-similar.png"
+ },
+ "shots/overview-390.png": {
+  "before": [
+   696,
+   100
+  ],
+  "after": [
+   696,
+   104
+  ],
+  "changedPixels": 3177,
+  "changedRatio": 0.04389,
+  "bbox": [
+   26,
+   31,
+   669,
+   104
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-overview-390.png"
+ },
+ "shots/overview-expanded-390.png": {
+  "before": [
+   696,
+   248
+  ],
+  "after": [
+   696,
+   252
+  ],
+  "changedPixels": 28160,
+  "changedRatio": 0.16055,
+  "bbox": [
+   24,
+   24,
+   690,
+   252
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-overview-expanded-390.png"
+ },
+ "shots/overview-expanded-focus-390.png": {
+  "before": [
+   696,
+   248
+  ],
+  "after": [
+   696,
+   252
+  ],
+  "changedPixels": 30498,
+  "changedRatio": 0.17388,
+  "bbox": [
+   24,
+   16,
+   696,
+   252
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-overview-expanded-focus-390.png"
+ },
+ "shots/overview-expanded-focus.png": {
+  "before": [
+   860,
+   204
+  ],
+  "after": [
+   860,
+   208
+  ],
+  "changedPixels": 30552,
+  "changedRatio": 0.1708,
+  "bbox": [
+   24,
+   16,
+   860,
+   208
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-overview-expanded-focus.png"
+ },
+ "shots/overview-expanded-hover-390.png": {
+  "before": [
+   696,
+   248
+  ],
+  "after": [
+   696,
+   252
+  ],
+  "changedPixels": 28076,
+  "changedRatio": 0.16008,
+  "bbox": [
+   24,
+   24,
+   690,
+   252
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-overview-expanded-hover-390.png"
+ },
+ "shots/overview-expanded-hover.png": {
+  "before": [
+   860,
+   204
+  ],
+  "after": [
+   860,
+   208
+  ],
+  "changedPixels": 28048,
+  "changedRatio": 0.1568,
+  "bbox": [
+   24,
+   24,
+   852,
+   208
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-overview-expanded-hover.png"
+ },
+ "shots/overview-expanded.png": {
+  "before": [
+   860,
+   204
+  ],
+  "after": [
+   860,
+   208
+  ],
+  "changedPixels": 28132,
+  "changedRatio": 0.15727,
+  "bbox": [
+   24,
+   24,
+   852,
+   208
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-overview-expanded.png"
+ },
+ "shots/overview-focus-390.png": {
+  "before": [
+   696,
+   100
+  ],
+  "after": [
+   696,
+   104
+  ],
+  "changedPixels": 6817,
+  "changedRatio": 0.09418,
+  "bbox": [
+   26,
+   16,
+   696,
+   104
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-overview-focus-390.png"
+ },
+ "shots/overview-focus.png": {
+  "before": [
+   860,
+   100
+  ],
+  "after": [
+   860,
+   104
+  ],
+  "changedPixels": 6894,
+  "changedRatio": 0.07708,
+  "bbox": [
+   26,
+   16,
+   860,
+   104
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-overview-focus.png"
+ },
+ "shots/overview-hover-390.png": {
+  "before": [
+   696,
+   100
+  ],
+  "after": [
+   696,
+   104
+  ],
+  "changedPixels": 11146,
+  "changedRatio": 0.15398,
+  "bbox": [
+   26,
+   24,
+   690,
+   104
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-overview-hover-390.png"
+ },
+ "shots/overview-hover.png": {
+  "before": [
+   860,
+   100
+  ],
+  "after": [
+   860,
+   104
+  ],
+  "changedPixels": 11140,
+  "changedRatio": 0.12455,
+  "bbox": [
+   26,
+   24,
+   852,
+   104
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-overview-hover.png"
+ },
+ "shots/overview.png": {
+  "before": [
+   860,
+   100
+  ],
+  "after": [
+   860,
+   104
+  ],
+  "changedPixels": 3172,
+  "changedRatio": 0.03547,
+  "bbox": [
+   26,
+   31,
+   831,
+   104
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-overview.png"
+ },
+ "shots/rail-back-390.png": {
+  "before": [
+   696,
+   92
+  ],
+  "after": [
+   696,
+   92
+  ],
+  "changedPixels": 1874,
+  "changedRatio": 0.02927,
+  "bbox": [
+   540,
+   32,
+   674,
+   58
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-rail-back-390.png"
+ },
+ "shots/rail-back-focus-390.png": {
+  "before": [
+   696,
+   92
+  ],
+  "after": [
+   696,
+   92
+  ],
+  "changedPixels": 4896,
+  "changedRatio": 0.07646,
+  "bbox": [
+   514,
+   10,
+   696,
+   82
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-rail-back-focus-390.png"
+ },
+ "shots/rail-back-focus.png": {
+  "before": [
+   860,
+   92
+  ],
+  "after": [
+   860,
+   92
+  ],
+  "changedPixels": 4969,
+  "changedRatio": 0.0628,
+  "bbox": [
+   676,
+   10,
+   860,
+   82
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-rail-back-focus.png"
+ },
+ "shots/rail-back-hover-390.png": {
+  "before": [
+   696,
+   92
+  ],
+  "after": [
+   696,
+   92
+  ],
+  "changedPixels": 9138,
+  "changedRatio": 0.14271,
+  "bbox": [
+   522,
+   18,
+   690,
+   74
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-rail-back-hover-390.png"
+ },
+ "shots/rail-back-hover.png": {
+  "before": [
+   860,
+   92
+  ],
+  "after": [
+   860,
+   92
+  ],
+  "changedPixels": 9137,
+  "changedRatio": 0.11548,
+  "bbox": [
+   684,
+   18,
+   852,
+   74
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-rail-back-hover.png"
+ },
+ "shots/rail-back.png": {
+  "before": [
+   860,
+   92
+  ],
+  "after": [
+   860,
+   92
+  ],
+  "changedPixels": 1874,
+  "changedRatio": 0.02369,
+  "bbox": [
+   702,
+   32,
+   836,
+   58
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-rail-back.png"
+ },
+ "shots/seven-all-open-390.png": {
+  "before": [
+   608,
+   106
+  ],
+  "after": [
+   608,
+   104
+  ],
+  "changedPixels": 10297,
+  "changedRatio": 0.15977,
+  "bbox": [
+   24,
+   24,
+   312,
+   82
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-all-open-390.png"
+ },
+ "shots/seven-all-open.png": {
+  "before": [
+   860,
+   106
+  ],
+  "after": [
+   860,
+   104
+  ],
+  "changedPixels": 10261,
+  "changedRatio": 0.11256,
+  "bbox": [
+   24,
+   24,
+   312,
+   82
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-all-open.png"
+ },
+ "shots/seven-head-390.png": {
+  "before": [
+   592,
+   188
+  ],
+  "after": [
+   592,
+   186
+  ],
+  "changedPixels": 15698,
+  "changedRatio": 0.14105,
+  "bbox": [
+   16,
+   115,
+   304,
+   173
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-head-390.png"
+ },
+ "shots/seven-head.png": {
+  "before": [
+   844,
+   188
+  ],
+  "after": [
+   844,
+   186
+  ],
+  "changedPixels": 19074,
+  "changedRatio": 0.12021,
+  "bbox": [
+   0,
+   45,
+   844,
+   173
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-head.png"
+ },
+ "shots/seven-hide-390.png": {
+  "before": [
+   608,
+   106
+  ],
+  "after": [
+   608,
+   104
+  ],
+  "changedPixels": 15698,
+  "changedRatio": 0.24358,
+  "bbox": [
+   24,
+   24,
+   312,
+   82
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-hide-390.png"
+ },
+ "shots/seven-hide-focus-390.png": {
+  "before": [
+   608,
+   106
+  ],
+  "after": [
+   608,
+   104
+  ],
+  "changedPixels": 16851,
+  "changedRatio": 0.26147,
+  "bbox": [
+   24,
+   16,
+   312,
+   88
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-hide-focus-390.png"
+ },
+ "shots/seven-hide-focus.png": {
+  "before": [
+   860,
+   106
+  ],
+  "after": [
+   860,
+   104
+  ],
+  "changedPixels": 16851,
+  "changedRatio": 0.18485,
+  "bbox": [
+   24,
+   16,
+   312,
+   88
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-hide-focus.png"
+ },
+ "shots/seven-hide-hover-390.png": {
+  "before": [
+   608,
+   106
+  ],
+  "after": [
+   608,
+   104
+  ],
+  "changedPixels": 16507,
+  "changedRatio": 0.25613,
+  "bbox": [
+   24,
+   24,
+   312,
+   82
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-hide-hover-390.png"
+ },
+ "shots/seven-hide-hover.png": {
+  "before": [
+   860,
+   106
+  ],
+  "after": [
+   860,
+   104
+  ],
+  "changedPixels": 16507,
+  "changedRatio": 0.18108,
+  "bbox": [
+   24,
+   24,
+   312,
+   82
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-hide-hover.png"
+ },
+ "shots/seven-hide.png": {
+  "before": [
+   860,
+   106
+  ],
+  "after": [
+   860,
+   104
+  ],
+  "changedPixels": 15698,
+  "changedRatio": 0.1722,
+  "bbox": [
+   24,
+   24,
+   312,
+   82
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-hide.png"
+ },
+ "shots/seven-show-390.png": {
+  "before": [
+   608,
+   106
+  ],
+  "after": [
+   608,
+   104
+  ],
+  "changedPixels": 15698,
+  "changedRatio": 0.24358,
+  "bbox": [
+   24,
+   24,
+   312,
+   82
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-show-390.png"
+ },
+ "shots/seven-show-focus-390.png": {
+  "before": [
+   608,
+   106
+  ],
+  "after": [
+   608,
+   104
+  ],
+  "changedPixels": 17096,
+  "changedRatio": 0.26527,
+  "bbox": [
+   0,
+   16,
+   312,
+   88
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-show-focus-390.png"
+ },
+ "shots/seven-show-focus.png": {
+  "before": [
+   860,
+   106
+  ],
+  "after": [
+   860,
+   104
+  ],
+  "changedPixels": 17097,
+  "changedRatio": 0.18755,
+  "bbox": [
+   0,
+   16,
+   312,
+   88
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-show-focus.png"
+ },
+ "shots/seven-show-hover-390.png": {
+  "before": [
+   608,
+   106
+  ],
+  "after": [
+   608,
+   104
+  ],
+  "changedPixels": 16507,
+  "changedRatio": 0.25613,
+  "bbox": [
+   8,
+   24,
+   312,
+   82
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-show-hover-390.png"
+ },
+ "shots/seven-show-hover.png": {
+  "before": [
+   860,
+   106
+  ],
+  "after": [
+   860,
+   104
+  ],
+  "changedPixels": 16507,
+  "changedRatio": 0.18108,
+  "bbox": [
+   8,
+   24,
+   312,
+   82
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-show-hover.png"
+ },
+ "shots/seven-show.png": {
+  "before": [
+   860,
+   106
+  ],
+  "after": [
+   860,
+   104
+  ],
+  "changedPixels": 15698,
+  "changedRatio": 0.1722,
+  "bbox": [
+   24,
+   24,
+   312,
+   82
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-seven-show.png"
+ },
+ "shots/vocab-head-390.png": {
+  "before": [
+   780,
+   720
+  ],
+  "after": [
+   780,
+   720
+  ],
+  "changedPixels": 13077,
+  "changedRatio": 0.02329,
+  "bbox": [
+   29,
+   61,
+   725,
+   392
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-vocab-head-390.png"
+ },
+ "shots/vocab-head.png": {
+  "before": [
+   2880,
+   720
+  ],
+  "after": [
+   2880,
+   720
+  ],
+  "changedPixels": 29413,
+  "changedRatio": 0.01418,
+  "bbox": [
+   48,
+   349,
+   2832,
+   538
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-vocab-head.png"
+ },
+ "shots/vocab-progress-390.png": {
+  "before": [
+   780,
+   182
+  ],
+  "after": [
+   780,
+   182
+  ],
+  "changedPixels": 2847,
+  "changedRatio": 0.02005,
+  "bbox": [
+   28,
+   116,
+   207,
+   142
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-vocab-progress-390.png"
+ },
+ "shots/vocab-progress-expanded-390.png": {
+  "before": [
+   780,
+   182
+  ],
+  "after": [
+   780,
+   182
+  ],
+  "changedPixels": 7352,
+  "changedRatio": 0.05179,
+  "bbox": [
+   12,
+   102,
+   148,
+   158
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-vocab-progress-expanded-390.png"
+ },
+ "shots/vocab-progress-expanded-focus-390.png": {
+  "before": [
+   780,
+   182
+  ],
+  "after": [
+   780,
+   182
+  ],
+  "changedPixels": 9301,
+  "changedRatio": 0.06552,
+  "bbox": [
+   4,
+   94,
+   156,
+   166
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-vocab-progress-expanded-focus-390.png"
+ },
+ "shots/vocab-progress-expanded-focus.png": {
+  "before": [
+   624,
+   182
+  ],
+  "after": [
+   624,
+   182
+  ],
+  "changedPixels": 9318,
+  "changedRatio": 0.08205,
+  "bbox": [
+   464,
+   94,
+   616,
+   166
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-vocab-progress-expanded-focus.png"
+ },
+ "shots/vocab-progress-expanded-hover-390.png": {
+  "before": [
+   780,
+   182
+  ],
+  "after": [
+   780,
+   182
+  ],
+  "changedPixels": 7352,
+  "changedRatio": 0.05179,
+  "bbox": [
+   12,
+   102,
+   148,
+   158
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-vocab-progress-expanded-hover-390.png"
+ },
+ "shots/vocab-progress-expanded-hover.png": {
+  "before": [
+   624,
+   182
+  ],
+  "after": [
+   624,
+   182
+  ],
+  "changedPixels": 7369,
+  "changedRatio": 0.06489,
+  "bbox": [
+   472,
+   102,
+   608,
+   158
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-vocab-progress-expanded-hover.png"
+ },
+ "shots/vocab-progress-expanded.png": {
+  "before": [
+   624,
+   182
+  ],
+  "after": [
+   624,
+   182
+  ],
+  "changedPixels": 7369,
+  "changedRatio": 0.06489,
+  "bbox": [
+   472,
+   102,
+   608,
+   158
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-vocab-progress-expanded.png"
+ },
+ "shots/vocab-progress-focus-390.png": {
+  "before": [
+   780,
+   182
+  ],
+  "after": [
+   780,
+   182
+  ],
+  "changedPixels": 6860,
+  "changedRatio": 0.04832,
+  "bbox": [
+   4,
+   94,
+   232,
+   166
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-vocab-progress-focus-390.png"
+ },
+ "shots/vocab-progress-focus.png": {
+  "before": [
+   624,
+   182
+  ],
+  "after": [
+   624,
+   182
+  ],
+  "changedPixels": 6925,
+  "changedRatio": 0.06098,
+  "bbox": [
+   388,
+   94,
+   616,
+   166
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-vocab-progress-focus.png"
+ },
+ "shots/vocab-progress-hover-390.png": {
+  "before": [
+   780,
+   182
+  ],
+  "after": [
+   780,
+   182
+  ],
+  "changedPixels": 11554,
+  "changedRatio": 0.08139,
+  "bbox": [
+   12,
+   102,
+   224,
+   158
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-vocab-progress-hover-390.png"
+ },
+ "shots/vocab-progress-hover.png": {
+  "before": [
+   624,
+   182
+  ],
+  "after": [
+   624,
+   182
+  ],
+  "changedPixels": 11582,
+  "changedRatio": 0.10198,
+  "bbox": [
+   396,
+   102,
+   608,
+   158
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-vocab-progress-hover.png"
+ },
+ "shots/vocab-progress.png": {
+  "before": [
+   624,
+   182
+  ],
+  "after": [
+   624,
+   182
+  ],
+  "changedPixels": 2884,
+  "changedRatio": 0.02539,
+  "bbox": [
+   413,
+   116,
+   591,
+   142
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-vocab-progress.png"
+ }
+}

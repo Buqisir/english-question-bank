@@ -1507,15 +1507,16 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                   value={processedCount}
                 />
                 {!printRequest && (
-                  <button
+                  <Button
+                    tone="quiet"
+                    size="sm"
                     className="vocabulary-progress-toggle"
-                    type="button"
                     aria-expanded={progressExplorerOpen}
                     aria-controls="vocabulary-progress-explorer"
                     onClick={toggleProgressExplorer}
                   >
                     {progressExplorerOpen ? '收起进度' : '查看 / 调整进度'}
-                  </button>
+                  </Button>
                 )}
               </div>
             </div>

@@ -125,9 +125,9 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
         <h4 className="paper-browse-lecture-title">
           {headLabel} · {seed.groupTypeLabel}
         </h4>
-        <button type="button" className="similar-backlink" onClick={onBack}>
+        <Button tone="quiet" size="sm" className="similar-backlink" onClick={onBack}>
           ← 返回解析
-        </button>
+        </Button>
       </div>
 
       {request.status !== 'loading' && (

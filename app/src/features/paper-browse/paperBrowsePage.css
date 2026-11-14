@@ -920,21 +920,16 @@
 }
 
 .paper-browse-reading-overview-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 0 4px 8px;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--paper-ink-muted);
-  cursor: pointer;
-  font: inherit;
-  font-size: 13px;
+  /* 讲评栏「文章简介」：Owner 2026-11-14 决定 #1 换成 Button 淡墨小号（quiet sm），原来手写的颜色、字号、内边距和悬停变色删了。
+   * 原来右内边距是 0、箭头贴齐这一行的右边；现在用负边距抵掉 sm 的右内边距（--eqb-space-2），箭头还在原来的位置。 */
+  margin-right: calc(-1 * var(--eqb-space-2));
 }
 
-.paper-browse-reading-overview-toggle:hover {
-  color: var(--ink);
+/* 字和后面的展开箭头都在 Button 的标签里：标签排成一行，间距和改前一样是 --eqb-space-1（4px）。 */
+.paper-browse-reading-overview-toggle > .eqb-button-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eqb-space-1);
 }
 
 .paper-browse-reading-overview {
@@ -1612,17 +1607,21 @@
   flex: 1;
 }
 
-.similar-backlink {
-  font-size: 12px;
-  color: var(--ink);
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-  /* quiet-chrome: 「收起 ↑」的 ↑ 字形换 Lucide SVG，inline-flex 对齐。 */
+/* 相似栏「← 返回解析」、相似篇章面板「收起」、草稿卷换篇栏「返回目录」（三处共用这个类）：
+ * Owner 2026-11-14 决定 #1 换成 Button 淡墨小号（quiet sm）。原来的纯文字样子（12px、墨色、没有内边距）删了。
+ * 靠右的两处（相似栏、相似篇章面板）右边用负边距抵掉 sm 的右内边距，字或箭头的右边和改前一样贴齐这一行的右边；
+ * 草稿卷换篇栏不要这个右负边距（见 DraftPaperWorkbench.css .draft-swap-drawer 那条）；
+ * 上下各收 --eqb-space-1，抵掉一部分按钮（28）比原来纯文字（17）高出来的部分，标题行少长高一点。
+ * 「收起」后面的箭头在字的标签里：标签排成一行、居中对齐，间距是原来的 2px（--eqb-space-1 的一半）。 */
+.eqb-button.similar-backlink {
+  margin-block: calc(-1 * var(--eqb-space-1));
+  margin-right: calc(-1 * var(--eqb-space-2));
+}
+
+.eqb-button.similar-backlink > .eqb-button-label {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
+  gap: calc(var(--eqb-space-1) / 2);
 }
 
 .similar-seed-line {
@@ -1785,7 +1784,7 @@
  * per-component CSS file — because it's the single existing home for the
  * `.similar-*` token language (no new color literal introduced here; every
  * rule below reuses `.similar-rcard` / `.similar-chip` / `.similar-btn`（现为 Button，见上）/
- * `.similar-pool-note` / `.similar-backlink` / `.similar-toast` already
+ * `.similar-pool-note` / `.similar-backlink`（现为 Button，见上）/ `.similar-toast` already
  * defined above, plus `.paper-browse-lecture-title` /
  * `.paper-browse-lecture-empty`).
  */
@@ -1825,6 +1824,15 @@
  * 覆盖：本条 (0,7,0) 盖过那条透明 (0,5,0)，也盖过「嵌在被选中行里的键垫 border 色」(0,6,0)（面板眼下不在行里，碰不上）。
  * 面板头上的「重试」不在 .similar-rcard-actions 里，不归本条管，悬停仍然没有底（A1 README 第 5 节第 3 问，待 Owner 定）。 */
 .fluid-hover-list .similar-passages-panel .similar-rcard-actions > .eqb-button[data-tone='strong']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-desk);
+}
+
+/* Owner 2026-11-14 决定 #1：面板头上的「收起」换成淡墨小号以后，在首页（面板整个在 FluidHoverList 里、不在任何一行里）
+ * 也归 button.css「.fluid-hover-list .eqb-button…:hover 透明」(0,5,0) 管，悬停会什么都不垫（改后第一次量就是这样）。
+ * 照上一条的办法让它垫桌色，和详情页、草稿卷、相似栏里同一个键一个样子（提案 · 单一来源）。
+ * 覆盖：本条 (0,7,0) 盖过那条透明 (0,5,0)，也盖过「嵌在被选中行里的键垫 border 色」(0,6,0)（面板不在行里，碰不上）。
+ * 同一个面板头上的「重试」不归本条管（A1 README 第 5 节第 3 问，待 Owner 定）。 */
+.fluid-hover-list .similar-passages-panel .similar-passages-head > .eqb-button.similar-backlink:hover:not(:disabled, [aria-disabled='true']) {
   background: var(--eqb-color-desk);
 }
 
