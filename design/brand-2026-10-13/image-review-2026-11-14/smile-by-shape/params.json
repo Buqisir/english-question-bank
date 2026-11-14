@@ -1,0 +1,75 @@
+{
+  "base": {
+    "topY": 407.5,
+    "shX": 273.5,
+    "shY": 450.5,
+    "sideX": 348,
+    "sideY": 558.5,
+    "k0": 42,
+    "k1": 68.5,
+    "botX": 190,
+    "botY": 669.5,
+    "h1": 93.5,
+    "h2": 78.5,
+    "nx": 38,
+    "ny": 48.5,
+    "notchY": 593
+  },
+  "variants": [
+    {
+      "id": "N",
+      "file": "smile-N-notch",
+      "label": "只把缺口抬高 30",
+      "changed": {
+        "notchY": 563
+      }
+    },
+    {
+      "id": "D",
+      "file": "smile-D-lift8",
+      "label": "缺口抬 30，两瓣整体上提 8",
+      "changed": {
+        "notchY": 563,
+        "botX": 180,
+        "botY": 661,
+        "sideY": 550
+      }
+    },
+    {
+      "id": "F",
+      "file": "smile-F-trim",
+      "label": "缺口抬 30，两瓣外下角削掉一点",
+      "changed": {
+        "notchY": 563,
+        "botX": 178,
+        "botY": 667,
+        "k1": 52,
+        "h1": 80
+      }
+    },
+    {
+      "id": "E",
+      "file": "smile-E-lift14",
+      "label": "缺口抬 36，两瓣整体上提 14",
+      "changed": {
+        "notchY": 557,
+        "botX": 172,
+        "botY": 655,
+        "sideY": 545
+      }
+    },
+    {
+      "id": "G",
+      "file": "smile-G-too-far",
+      "label": "缺口抬 30，外下角削得更多（过头的对照）",
+      "changed": {
+        "notchY": 563,
+        "botX": 168,
+        "botY": 663,
+        "k1": 44,
+        "h1": 74,
+        "sideY": 552
+      }
+    }
+  ]
+}
