@@ -1,0 +1,606 @@
+[
+ {
+  "file": "logo/mark-32.svg",
+  "big": "logo/mark.svg",
+  "size": "32×32",
+  "oldPngMatchesOldSvg": true,
+  "changed": [
+   {
+    "x": 8,
+    "y": 13,
+    "from": "#3D8F70",
+    "to": "#191D18"
+   },
+   {
+    "x": 9,
+    "y": 13,
+    "from": "#3D8F70",
+    "to": "#191D18"
+   },
+   {
+    "x": 10,
+    "y": 13,
+    "from": "#3D8F70",
+    "to": "#191D18"
+   },
+   {
+    "x": 8,
+    "y": 14,
+    "from": "#3D8F70",
+    "to": "#191D18"
+   },
+   {
+    "x": 8,
+    "y": 15,
+    "from": "#3D8F70",
+    "to": "#191D18"
+   },
+   {
+    "x": 21,
+    "y": 13,
+    "from": "#3D8F70",
+    "to": "#191D18"
+   },
+   {
+    "x": 22,
+    "y": 13,
+    "from": "#3D8F70",
+    "to": "#191D18"
+   },
+   {
+    "x": 23,
+    "y": 13,
+    "from": "#3D8F70",
+    "to": "#191D18"
+   },
+   {
+    "x": 23,
+    "y": 14,
+    "from": "#3D8F70",
+    "to": "#191D18"
+   },
+   {
+    "x": 23,
+    "y": 15,
+    "from": "#3D8F70",
+    "to": "#191D18"
+   },
+   {
+    "x": 15,
+    "y": 23,
+    "from": "#F6EFE0",
+    "to": "#3D8F70"
+   },
+   {
+    "x": 16,
+    "y": 23,
+    "from": "#F6EFE0",
+    "to": "#3D8F70"
+   },
+   {
+    "x": 7,
+    "y": 24,
+    "from": "#F6EFE0",
+    "to": "#3D8F70"
+   },
+   {
+    "x": 24,
+    "y": 24,
+    "from": "#F6EFE0",
+    "to": "#3D8F70"
+   }
+  ],
+  "before": {
+   "eyeCells": [
+    4,
+    4
+   ],
+   "muzzleCells": 122,
+   "eyeToNose": [
+    1,
+    1
+   ],
+   "eyeToMuzzle": [
+    1,
+    1
+   ],
+   "eyeToOutside": [
+    4,
+    4
+   ]
+  },
+  "after": {
+   "eyeCells": [
+    9,
+    9
+   ],
+   "muzzleCells": 118,
+   "eyeToNose": [
+    1,
+    1
+   ],
+   "eyeToMuzzle": [
+    1,
+    1
+   ],
+   "eyeToOutside": [
+    3,
+    3
+   ]
+  }
+ },
+ {
+  "file": "logo/mark-32-mono.svg",
+  "big": "logo/mark-mono.svg",
+  "size": "32×32",
+  "oldPngMatchesOldSvg": true,
+  "changed": [
+   {
+    "x": 8,
+    "y": 13,
+    "from": "#191D18",
+    "to": null
+   },
+   {
+    "x": 9,
+    "y": 13,
+    "from": "#191D18",
+    "to": null
+   },
+   {
+    "x": 10,
+    "y": 13,
+    "from": "#191D18",
+    "to": null
+   },
+   {
+    "x": 8,
+    "y": 14,
+    "from": "#191D18",
+    "to": null
+   },
+   {
+    "x": 8,
+    "y": 15,
+    "from": "#191D18",
+    "to": null
+   },
+   {
+    "x": 21,
+    "y": 13,
+    "from": "#191D18",
+    "to": null
+   },
+   {
+    "x": 22,
+    "y": 13,
+    "from": "#191D18",
+    "to": null
+   },
+   {
+    "x": 23,
+    "y": 13,
+    "from": "#191D18",
+    "to": null
+   },
+   {
+    "x": 23,
+    "y": 14,
+    "from": "#191D18",
+    "to": null
+   },
+   {
+    "x": 23,
+    "y": 15,
+    "from": "#191D18",
+    "to": null
+   },
+   {
+    "x": 15,
+    "y": 23,
+    "from": null,
+    "to": "#191D18"
+   },
+   {
+    "x": 16,
+    "y": 23,
+    "from": null,
+    "to": "#191D18"
+   },
+   {
+    "x": 7,
+    "y": 24,
+    "from": null,
+    "to": "#191D18"
+   },
+   {
+    "x": 24,
+    "y": 24,
+    "from": null,
+    "to": "#191D18"
+   }
+  ],
+  "before": {
+   "holes": [
+    4,
+    4,
+    130
+   ],
+   "inkBlobs": [
+    320,
+    18,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  "after": {
+   "holes": [
+    9,
+    9,
+    126
+   ],
+   "inkBlobs": [
+    314,
+    18,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ]
+  }
+ },
+ {
+  "file": "logo/mark-16.svg",
+  "big": "logo/mark.svg",
+  "size": "16×16",
+  "oldPngMatchesOldSvg": true,
+  "changed": [
+   {
+    "x": 4,
+    "y": 8,
+    "from": "#F6EFE0",
+    "to": "#3D8F70"
+   },
+   {
+    "x": 11,
+    "y": 8,
+    "from": "#F6EFE0",
+    "to": "#3D8F70"
+   }
+  ],
+  "before": {
+   "eyeCells": [
+    2,
+    2
+   ],
+   "muzzleCells": 36,
+   "eyeToNose": [
+    1,
+    1
+   ],
+   "eyeToMuzzle": [
+    0,
+    0
+   ],
+   "eyeToOutside": [
+    1,
+    1
+   ]
+  },
+  "after": {
+   "eyeCells": [
+    2,
+    2
+   ],
+   "muzzleCells": 34,
+   "eyeToNose": [
+    1,
+    1
+   ],
+   "eyeToMuzzle": [
+    0,
+    0
+   ],
+   "eyeToOutside": [
+    1,
+    1
+   ]
+  }
+ },
+ {
+  "file": "logo/mark-16-mono.svg",
+  "big": "logo/mark-mono.svg",
+  "size": "16×16",
+  "oldPngMatchesOldSvg": true,
+  "changed": [
+   {
+    "x": 4,
+    "y": 8,
+    "from": null,
+    "to": "#191D18"
+   },
+   {
+    "x": 11,
+    "y": 8,
+    "from": null,
+    "to": "#191D18"
+   }
+  ],
+  "before": {
+   "holes": [
+    42
+   ],
+   "inkBlobs": [
+    60,
+    14,
+    6
+   ]
+  },
+  "after": {
+   "holes": [
+    2,
+    2,
+    36
+   ],
+   "inkBlobs": [
+    60,
+    14,
+    6,
+    1,
+    1
+   ]
+  }
+ },
+ {
+  "file": "logo/mint/mark-16.svg",
+  "big": "logo/mint/mark.svg",
+  "size": "16×16",
+  "oldPngMatchesOldSvg": true,
+  "changed": [
+   {
+    "x": 4,
+    "y": 8,
+    "from": "#F2FAF6",
+    "to": "#72BFA4"
+   },
+   {
+    "x": 11,
+    "y": 8,
+    "from": "#F2FAF6",
+    "to": "#72BFA4"
+   }
+  ],
+  "before": {
+   "eyeCells": [
+    2,
+    2
+   ],
+   "muzzleCells": 36,
+   "eyeToNose": [
+    1,
+    1
+   ],
+   "eyeToMuzzle": [
+    0,
+    0
+   ],
+   "eyeToOutside": [
+    1,
+    1
+   ]
+  },
+  "after": {
+   "eyeCells": [
+    2,
+    2
+   ],
+   "muzzleCells": 34,
+   "eyeToNose": [
+    1,
+    1
+   ],
+   "eyeToMuzzle": [
+    0,
+    0
+   ],
+   "eyeToOutside": [
+    1,
+    1
+   ]
+  }
+ },
+ {
+  "file": "mascot/small/otter-head-16.svg",
+  "big": "mascot/otter-head.svg",
+  "size": "16×16",
+  "oldPngMatchesOldSvg": true,
+  "changed": [
+   {
+    "x": 4,
+    "y": 7,
+    "from": "#F2FAF6",
+    "to": "#72BFA4"
+   },
+   {
+    "x": 11,
+    "y": 7,
+    "from": "#F2FAF6",
+    "to": "#72BFA4"
+   }
+  ],
+  "before": {
+   "eyeCells": [
+    2,
+    2
+   ],
+   "muzzleCells": 36,
+   "eyeToNose": [
+    1,
+    1
+   ],
+   "eyeToMuzzle": [
+    0,
+    0
+   ],
+   "eyeToOutside": [
+    1,
+    1
+   ]
+  },
+  "after": {
+   "eyeCells": [
+    2,
+    2
+   ],
+   "muzzleCells": 34,
+   "eyeToNose": [
+    1,
+    1
+   ],
+   "eyeToMuzzle": [
+    0,
+    0
+   ],
+   "eyeToOutside": [
+    1,
+    1
+   ]
+  }
+ },
+ {
+  "file": "mascot/small/otter-head-32.svg",
+  "big": "mascot/otter-head.svg",
+  "size": "32×32",
+  "oldPngMatchesOldSvg": true,
+  "changed": [
+   {
+    "x": 8,
+    "y": 10,
+    "from": "#72BFA4",
+    "to": "#191D18"
+   },
+   {
+    "x": 9,
+    "y": 10,
+    "from": "#72BFA4",
+    "to": "#191D18"
+   },
+   {
+    "x": 10,
+    "y": 10,
+    "from": "#72BFA4",
+    "to": "#191D18"
+   },
+   {
+    "x": 8,
+    "y": 11,
+    "from": "#72BFA4",
+    "to": "#191D18"
+   },
+   {
+    "x": 8,
+    "y": 12,
+    "from": "#72BFA4",
+    "to": "#191D18"
+   },
+   {
+    "x": 21,
+    "y": 10,
+    "from": "#72BFA4",
+    "to": "#191D18"
+   },
+   {
+    "x": 22,
+    "y": 10,
+    "from": "#72BFA4",
+    "to": "#191D18"
+   },
+   {
+    "x": 23,
+    "y": 10,
+    "from": "#72BFA4",
+    "to": "#191D18"
+   },
+   {
+    "x": 23,
+    "y": 11,
+    "from": "#72BFA4",
+    "to": "#191D18"
+   },
+   {
+    "x": 23,
+    "y": 12,
+    "from": "#72BFA4",
+    "to": "#191D18"
+   },
+   {
+    "x": 15,
+    "y": 20,
+    "from": "#F2FAF6",
+    "to": "#72BFA4"
+   },
+   {
+    "x": 16,
+    "y": 20,
+    "from": "#F2FAF6",
+    "to": "#72BFA4"
+   },
+   {
+    "x": 7,
+    "y": 21,
+    "from": "#F2FAF6",
+    "to": "#72BFA4"
+   },
+   {
+    "x": 24,
+    "y": 21,
+    "from": "#F2FAF6",
+    "to": "#72BFA4"
+   }
+  ],
+  "before": {
+   "eyeCells": [
+    4,
+    4
+   ],
+   "muzzleCells": 122,
+   "eyeToNose": [
+    1,
+    1
+   ],
+   "eyeToMuzzle": [
+    1,
+    1
+   ],
+   "eyeToOutside": [
+    4,
+    4
+   ]
+  },
+  "after": {
+   "eyeCells": [
+    9,
+    9
+   ],
+   "muzzleCells": 118,
+   "eyeToNose": [
+    1,
+    1
+   ],
+   "eyeToMuzzle": [
+    1,
+    1
+   ],
+   "eyeToOutside": [
+    3,
+    3
+   ]
+  }
+ }
+]
