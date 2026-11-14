@@ -24,7 +24,7 @@
               </div>
               <div style={{ borderColor: '#D5DACF', borderRadius: '4px', borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', paddingInline: '7px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  部分已定 · 字标未开始
+                  部分已定 · 字标方向已定
                 </div>
               </div>
             </div>
@@ -239,13 +239,13 @@
                 </div>
                 <div style={{ borderColor: '#D5DACF', borderRadius: '4px', borderStyle: 'dashed', borderWidth: '1px', boxSizing: 'border-box', paddingInline: '7px' }}>
                   <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                    未开始 · 等名字
+                    方向已定 · 第 92 条
                   </div>
                 </div>
               </div>
               <div style={{ alignItems: 'center', borderColor: '#D5DACF', borderRadius: '8px', borderStyle: 'dashed', borderWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: 0, height: '56px', justifyContent: 'center' }}>
                 <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '16px' }}>
-                  名字定了再做
+                  草稿见 04 页
                 </div>
               </div>
             </div>
@@ -257,7 +257,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §3.3 · DESIGN.md §3 · 第 17、18、63 条 · 样张里 EQB Termes 用 Times New Roman 代显，思源宋体用同一套字形的 Noto Serif SC 代显
+          出处：BRAND.md §3.3 · DESIGN.md §3 · 第 17、18、63、92 条 · 样张里 EQB Termes 用 Times New Roman 代显，思源宋体用同一套字形的 Noto Serif SC 代显
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           08
