@@ -125,13 +125,13 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
           !props.hideBrand && (
             <div className="topbar-identity">
               <BrandMark />
-              <span className="topbar-brand-title">英语题库工作台</span>
+              <span className="topbar-brand-title">獭石</span>
             </div>
           )
         ) : (
           <div className="topbar-identity">
             <BrandMark />
-            <span className="topbar-brand-title">英语题库工作台</span>
+            <span className="topbar-brand-title">獭石</span>
             {props.pageTitleEditable ? (
               editingTitle ? (
                 <>

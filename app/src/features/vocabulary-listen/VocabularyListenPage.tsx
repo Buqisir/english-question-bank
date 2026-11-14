@@ -330,7 +330,7 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
     <div className="vocabulary-listen-page" {...iconMotionInput}>
       {audioElement}
       <header className="vocabulary-listen-header">
-        <a href="/" aria-label="返回英语题库首页">EQBank</a>
+        <a href="/" aria-label="返回獭石首页">獭石</a>
         <span>扫码听音频</span>
       </header>
 

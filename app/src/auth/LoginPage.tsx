@@ -70,7 +70,7 @@ export function LoginPage() {
       <div className="login-content">
         <div className="login-brand">
           <img src="/brand/mark.svg" alt="" />
-          <span>英语题库工作台</span>
+          <span>獭石</span>
         </div>
         <section className="login-card" aria-labelledby="login-title">
           <h1 id="login-title">题海三千，只取一瓢</h1>

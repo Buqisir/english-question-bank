@@ -1102,7 +1102,7 @@ function App() {
       )}
 
       {!adminRouteActive && (
-      <main className="workbench" aria-label="英语题库工作台">
+      <main className="workbench" aria-label="獭石">
         <section className="library-panel" aria-label="题库">
           <div className="library-header">
             <div>
