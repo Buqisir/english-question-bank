@@ -5,7 +5,7 @@
         <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
           <div style={{ backgroundImage: 'url(../../logo/mint/mark.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '20px', width: '31px' }} />
           <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
-            视觉规范手册 · 草案 0.6
+            视觉规范手册 · 草案 0.7
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
@@ -33,7 +33,7 @@
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: 0, fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '14px', lineHeight: '180%', width: '620px' }}>
-            领域图形一律由卷面原语拼成：正文行、药丸空、折角纸、点、书签。插画里的卷子和书也用同一套形，和 EQB 图标套件是一家。石子、水和巨藻只在插画里出现，不升格为全站的装饰图形。
+            领域图形一律由卷面原语拼成：正文行、药丸空、折角纸、点、书签。插画里的卷子和书也用同一套形，和 EQB 图标套件是一家。水和巨藻只在插画里出现，不升格为全站的装饰图形；石头 2026-11-14 起可以用到空态和装饰（第 106 条）。
           </div>
         </div>
         <div style={{ alignItems: 'start', boxSizing: 'border-box', display: 'flex', gap: '64px' }}>
@@ -138,12 +138,17 @@
                   提案
                 </div>
               </div>
+              <div style={{ backgroundColor: '#2C6E56', borderRadius: '4px', boxSizing: 'border-box', flexShrink: '0', paddingInline: '7px' }}>
+                <div style={{ boxSizing: 'border-box', color: '#FFFFFF', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
+                  松开 · 第 106 条
+                </div>
+              </div>
             </div>
             <div style={{ alignItems: 'center', backgroundColor: '#F1F5F7', borderRadius: '12px', boxShadow: '#E3E8DF 0px 0px 0px 1px inset', boxSizing: 'border-box', display: 'flex', flexShrink: 0, height: '150px', justifyContent: 'center' }}>
               <div style={{ backgroundImage: 'url(../../mascot/states/state-01-idle.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '124px', width: '180px' }} />
             </div>
             <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-              只在海獭的状态插画里当道具，墨色，比如 01 空闲胸口抱着的那块圆石。不升格为全站装饰图形，界面不加品牌点。
+              原来只在状态插画里当道具、用墨，比如 01 空闲胸口那块圆石。2026-11-14 定松开（第 106 条）：石头可以用到空态和装饰，改用石色、石面（06 页），画法见 09b 页。界面不加品牌点。
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0px', flexDirection: 'column', flexGrow: '1', gap: '14px' }}>
@@ -156,12 +161,17 @@
                   提案 · 例外见第 58 条
                 </div>
               </div>
+              <div style={{ backgroundColor: '#E9ECE6', borderRadius: '4px', boxSizing: 'border-box', flexShrink: '0', paddingInline: '7px' }}>
+                <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
+                  图已停用 · 第 114 条
+                </div>
+              </div>
             </div>
-            <div style={{ alignItems: 'center', backgroundColor: '#F1F5F7', borderRadius: '12px', boxShadow: '#E3E8DF 0px 0px 0px 1px inset', boxSizing: 'border-box', display: 'flex', flexShrink: 0, height: '150px', justifyContent: 'center' }}>
+            <div style={{ alignItems: 'center', opacity: '0.4', backgroundColor: '#F1F5F7', borderRadius: '12px', boxShadow: '#E3E8DF 0px 0px 0px 1px inset', boxSizing: 'border-box', display: 'flex', flexShrink: 0, height: '150px', justifyContent: 'center' }}>
               <div style={{ backgroundImage: 'url(../../illustration/kelp-canopy.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '130px', width: '136px' }} />
             </div>
             <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-              只用一两条细弧线暗示，不画写实水面。唯一的例外是林冠透光：一块深薄荷平涂的水，上沿平直就是水面，下两角 16px 圆角，不画波纹、气泡和渐变。
+              只用一两条细弧线暗示，不画写实水面。唯一的例外是林冠透光：一块深薄荷平涂的水，上沿平直就是水面，下两角 16px 圆角，不画波纹、气泡和渐变。这张林冠透光第 114 条起停用，以后重做。
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0px', flexDirection: 'column', flexGrow: '1', gap: '14px' }}>
@@ -172,6 +182,11 @@
               <div style={{ borderColor: '#D5DACF', borderRadius: '4px', borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', paddingInline: '7px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
                   提案 · 第 55 条
+                </div>
+              </div>
+              <div style={{ backgroundColor: '#2C6E56', borderRadius: '4px', boxSizing: 'border-box', flexShrink: '0', paddingInline: '7px' }}>
+                <div style={{ boxSizing: 'border-box', color: '#FFFFFF', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
+                  新画法已定 · 第 112 条
                 </div>
               </div>
             </div>
@@ -186,14 +201,14 @@
               </div>
             </div>
             <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-              插画里唯一的植物：固着器、茎和交替的圆头叶片，平涂一色，不画气囊和叶脉。近处深薄荷，远处可整株换浅雾薄荷只当景深，画在深薄荷水里换雾薄荷。不当界面底纹。
+              插画里唯一的植物。原画法：固着器、茎和交替的圆头叶片，平涂一色，不画气囊和叶脉。新画法已定（第 112 条）：一根略弯的茎、三片朝一侧飘的宽叶、叶根气囊，见 09b 页；kelp.svg 照第 114 条换成新画法。不当界面底纹。
             </div>
           </div>
         </div>
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §3.4、§1.6 · DESIGN.md §5 公认形法 · 第 54、55、58 条 · 文件 illustration/spot-paper.svg、kelp.svg、kelp-canopy.svg
+          出处：BRAND.md §3.4、§1.6 · DESIGN.md §5 公认形法 · 第 54、55、58、106、112、114 条 · 文件 illustration/spot-paper.svg、kelp.svg、kelp-canopy.svg
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           09

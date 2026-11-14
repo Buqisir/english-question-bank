@@ -5,7 +5,7 @@
         <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
           <div style={{ backgroundImage: 'url(../../logo/mint/mark.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '20px', width: '31px' }} />
           <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
-            视觉规范手册 · 草案 0.6
+            视觉规范手册 · 草案 0.7
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
@@ -72,13 +72,25 @@
                 只列要做什么，没定的内容不编。名字和字标的后续也标在这里。
               </div>
             </div>
+            <div style={{ alignItems: 'start', boxSizing: 'border-box', display: 'flex', gap: '16px' }}>
+              <div style={{ boxSizing: 'border-box', display: 'flex', flexShrink: '0', width: '76px' }}>
+                <div style={{ backgroundColor: '#E9ECE6', borderRadius: '4px', boxSizing: 'border-box', flexShrink: '0', paddingInline: '7px' }}>
+                  <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
+                    停用
+                  </div>
+                </div>
+              </div>
+              <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '14px', lineHeight: '170%' }}>
+                文件留着不删，新页面不再用（第 114 条）。图在页上调淡，只留作记录。
+              </div>
+            </div>
           </div>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '10px', paddingTop: '8px' }}>
             <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.08em', lineHeight: '16px' }}>
               几条约定
             </div>
             <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '14px', lineHeight: '180%', whiteSpace: 'pre-wrap' }}>
-              「第 N 条」指 BRAND.md §7 决策记录；「§」指 BRAND.md 的小节。<br />图里的尺寸都是 CSS 像素，按 1 倍屏显示的大小。<br />工作名「獭石」已定（第 88 条），商标没确认：界面上只写这两个字，商标确认前不出现拉丁写法（第 89 条）；宣传图上的名字和两句话仍是占位。<br />品牌主色 2026-10-16 从竹青换成雾薄荷（第 69 条）。全册的标志、海獭、插画、宣传图、3D 宣传版和字都按 06 页换过：竹青 → 雾薄荷，深竹青 → 深薄荷，米白 → 浅雾薄荷，暖米白 → 雾白。<br />素材在仓库 design/brand-2026-10-13/，画板在 Paper「全科题库品牌 · 海獭」。
+              「第 N 条」指 BRAND.md §7 决策记录；「§」指 BRAND.md 的小节。<br />图里的尺寸都是 CSS 像素，按 1 倍屏显示的大小。<br />工作名「獭石」已定（第 88 条），商标没确认：界面上只写这两个字，商标确认前不出现拉丁写法（第 89 条）；宣传图上的名字和两句话仍是占位。<br />品牌主色 2026-10-16 从竹青换成雾薄荷（第 69 条）。全册的标志、海獭、插画、宣传图、3D 宣传版和字都按 06 页换过：竹青 → 雾薄荷，深竹青 → 深薄荷，米白 → 浅雾薄荷，暖米白 → 雾白。<br />素材在仓库 design/brand-2026-10-13/；手册的源头在 manual/src/，Paper 上的画板停在 0.5（第 95 条）。<br />2026-11-14 起直立、巨藻姿势、节日探头和三张巨藻场景停用（第 114 条），全身像改用坐石（第 109、113 条），物件见 09b 页。
             </div>
           </div>
         </div>
@@ -152,10 +164,10 @@
               图形语言
             </div>
             <div style={{ boxSizing: 'border-box', color: '#60665C', flexBasis: '0%', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '14px', lineHeight: '18px' }}>
-              卷面原语 · 石子 · 水 · 巨藻
+              卷面原语 · 石子 · 水 · 巨藻 · 物件
             </div>
             <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '14px', lineHeight: '18px' }}>
-              09
+              09–09b
             </div>
           </div>
           <div style={{ alignItems: 'baseline', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', gap: '24px', paddingBlock: '16px' }}>
@@ -218,7 +230,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §0、§2、§3.5 · 第 88、89 条
+          出处：BRAND.md §0、§2、§3.5 · 第 88、89、95、109、113、114 条
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           01

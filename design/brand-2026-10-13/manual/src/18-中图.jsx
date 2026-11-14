@@ -5,7 +5,7 @@
         <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
           <div style={{ backgroundImage: 'url(../../logo/mint/mark.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '20px', width: '31px' }} />
           <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
-            视觉规范手册 · 草案 0.6
+            视觉规范手册 · 草案 0.7
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
@@ -27,6 +27,11 @@
                   提案 · 第 55、56、58 条
                 </div>
               </div>
+              <div style={{ backgroundColor: '#E9ECE6', borderRadius: '4px', boxSizing: 'border-box', flexShrink: '0', paddingInline: '7px' }}>
+                <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
+                  停用 · 第 114 条 · 以后重做
+                </div>
+              </div>
             </div>
             <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Noto Serif SC", system-ui, sans-serif', fontSize: '40px', fontWeight: 700, lineHeight: '135%' }}>
               潜下去摸，浮上来收。
@@ -38,7 +43,7 @@
         </div>
         <div style={{ boxSizing: 'border-box', display: 'flex', gap: '24px' }}>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0px', flexDirection: 'column', flexGrow: '1', gap: '10px' }}>
-            <div style={{ alignItems: 'center', backgroundColor: '#F1F5F7', borderRadius: '12px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', gap: '56px', height: '320px', justifyContent: 'center' }}>
+            <div style={{ alignItems: 'center', opacity: '0.4', backgroundColor: '#F1F5F7', borderRadius: '12px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', gap: '56px', height: '320px', justifyContent: 'center' }}>
               <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 <div style={{ backgroundImage: 'url(../../illustration/kelp-dive.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '240px', width: '313px' }} />
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Noto Serif SC", system-ui, sans-serif', fontSize: '16px', lineHeight: '24px' }}>
@@ -57,12 +62,12 @@
                 潜水 · 巨藻林
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                各 240px 高，放在桌面 #F1F5F7 上
+                各 240px 高，放在桌面 #F1F5F7 上 · 第 114 条起停用，以后重做
               </div>
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', flexShrink: '0', gap: '10px', width: '480px' }}>
-            <div style={{ alignItems: 'center', backgroundColor: '#F1F5F7', borderRadius: '12px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', height: '320px', justifyContent: 'center' }}>
+            <div style={{ alignItems: 'center', opacity: '0.4', backgroundColor: '#F1F5F7', borderRadius: '12px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', height: '320px', justifyContent: 'center' }}>
               <div style={{ backgroundImage: 'url(../../illustration/kelp-canopy.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '288px', width: '303px' }} />
             </div>
             <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '8px' }}>
@@ -70,7 +75,7 @@
                 林冠透光
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                288px 高 · 自带一块水
+                288px 高 · 自带一块水 · 第 114 条起停用
               </div>
             </div>
           </div>
@@ -183,7 +188,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §5.2、§3.4、§1.1 · 第 55、56、58 条 · 文件 illustration/kelp-forest、kelp-dive、kelp-canopy.svg
+          出处：BRAND.md §5.2、§3.4、§1.1 · 第 55、56、58、114 条 · 文件 illustration/kelp-forest、kelp-dive、kelp-canopy.svg
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           18

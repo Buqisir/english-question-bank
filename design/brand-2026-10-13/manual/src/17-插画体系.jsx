@@ -5,7 +5,7 @@
         <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
           <div style={{ backgroundImage: 'url(../../logo/mint/mark.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '20px', width: '31px' }} />
           <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
-            视觉规范手册 · 草案 0.6
+            视觉规范手册 · 草案 0.7
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
@@ -73,7 +73,7 @@
                 说的是纸、卷、书：原语 64px；整页像「水上的备课桌」：海獭 150px
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%', width: '250px' }}>
-                生词本用折角纸；个人空间用裹藻仰躺
+                生词本用折角纸；个人空间原用裹藻仰躺（第 114 条起停用）
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', gap: '16px', paddingBlock: '8px' }}>
@@ -154,7 +154,7 @@
                 以后
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                第一次登录用 U3 打招呼，一屏一只，不做多步插画
+                第一次登录用 U3 打招呼（第 114 条起停用），一屏一只，不做多步插画
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%', width: '250px' }}>
                 网站现在没有引导流程
@@ -204,7 +204,7 @@
                 </div>
               </div>
               <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0px', flexDirection: 'column', flexGrow: '1', gap: '10px' }}>
-                <div style={{ alignItems: 'center', backgroundColor: '#F1F5F7', borderRadius: '12px', boxShadow: '#E3E8DF 0px 0px 0px 1px inset', boxSizing: 'border-box', display: 'flex', flexShrink: '0', height: '180px', justifyContent: 'center' }}>
+                <div style={{ alignItems: 'center', opacity: '0.4', backgroundColor: '#F1F5F7', borderRadius: '12px', boxShadow: '#E3E8DF 0px 0px 0px 1px inset', boxSizing: 'border-box', display: 'flex', flexShrink: '0', height: '180px', justifyContent: 'center' }}>
                   <div style={{ backgroundImage: 'url(../../mascot/kelp/otter-kelp-wrap.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '148px', width: '208px' }} />
                 </div>
                 <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '8px' }}>
@@ -216,7 +216,7 @@
                   </div>
                 </div>
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                  先用 mascot/ 里现成的状态图和直立场景。手里只拿书、石头、贝壳和道具，不拿单张纸：墨色的单张纸两次都读成平板。
+                  先用 mascot/ 里现成的状态图。上图裹藻仰躺和直立场景第 114 条起停用，空闲改用坐石全身像。手里只拿书、石头、贝壳和道具，不拿单张纸：墨色的单张纸两次都读成平板。
                 </div>
               </div>
             </div>
@@ -335,7 +335,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §5.2、§3.4、§4.7 · 第 54、55、58、63 条
+          出处：BRAND.md §5.2、§3.4、§4.7 · 第 54、55、58、63、114 条
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           17

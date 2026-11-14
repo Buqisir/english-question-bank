@@ -5,7 +5,7 @@
         <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
           <div style={{ backgroundImage: 'url(../../logo/mint/mark.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '20px', width: '31px' }} />
           <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
-            视觉规范手册 · 草案 0.6
+            视觉规范手册 · 草案 0.7
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
@@ -33,39 +33,39 @@
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '14px', lineHeight: '180%', width: '620px' }}>
-            物种是海獭：拿石头当工具、仰躺着把肚皮当桌子，都是海獭的习性（第 24 条）。母版是 H1 大鼻子：宽鼻、侧耳、短扁尾巴，雾薄荷的头配浅雾薄荷围兜，中间隔一道下巴（第 33、44 条）；2026-10-16 从竹青换成雾薄荷（第 69 条）。下面三份母版文件是所有状态、道具和场景的出发点，形体和五官不在别处另画。
+            物种是海獭：拿石头当工具、仰躺着把肚皮当桌子，都是海獭的习性（第 24 条）。母版是 H1 大鼻子：宽鼻、侧耳、短扁尾巴，雾薄荷的头配浅雾薄荷围兜，中间隔一道下巴（第 33、44 条）；2026-10-16 从竹青换成雾薄荷（第 69 条）。下面三份文件是所有状态、道具和场景的出发点，形体和五官不在别处另画。
           </div>
         </div>
         <div style={{ alignItems: 'start', boxSizing: 'border-box', display: 'flex', gap: '64px' }}>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', flexShrink: '0', gap: '14px', width: '820px' }}>
             <div style={{ alignItems: 'center', borderBottomColor: '#191D18', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', gap: '10px', paddingBottom: '8px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.08em', lineHeight: '16px' }}>
-                母版三件
+                全身像与母版
               </div>
               <div style={{ backgroundColor: '#2C6E56', borderRadius: '4px', boxSizing: 'border-box', paddingInline: '7px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#FFFFFF', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  已定 · 第 33、39、44 条
+                  已定 · 第 33、39、44、109 条
                 </div>
               </div>
             </div>
-            <div style={{ alignItems: 'end', backgroundColor: '#F1F5F7', borderRadius: '12px', boxShadow: '#E3E8DF 0px 0px 0px 1px inset', boxSizing: 'border-box', display: 'flex', flexShrink: 0, height: '270px', overflow: 'clip' }}>
-              <div style={{ alignItems: 'end', boxSizing: 'border-box', display: 'flex', flexShrink: '0', height: '270px', justifyContent: 'center', paddingBottom: '22px', width: '380px' }}>
-                <div style={{ backgroundImage: 'url(../../mascot/otter-front.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '230px', width: '322px' }} />
+            <div style={{ alignItems: 'end', backgroundColor: '#F1F5F7', borderRadius: '12px', boxShadow: '#E3E8DF 0px 0px 0px 1px inset', boxSizing: 'border-box', display: 'flex', flexShrink: 0, height: '250px', overflow: 'clip' }}>
+              <div style={{ alignItems: 'end', boxSizing: 'border-box', display: 'flex', flexShrink: '0', height: '250px', justifyContent: 'center', paddingBottom: '8px', width: '380px' }}>
+                <div style={{ backgroundImage: 'url(../../mascot/otter-sit.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '236px', width: '236px' }} />
               </div>
-              <div style={{ alignItems: 'end', boxSizing: 'border-box', display: 'flex', flexShrink: '0', height: '270px', justifyContent: 'center', width: '240px' }}>
-                <div style={{ backgroundImage: 'url(../../mascot/otter-head.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '226px', width: '226px' }} />
+              <div style={{ alignItems: 'end', boxSizing: 'border-box', display: 'flex', flexShrink: '0', height: '250px', justifyContent: 'center', width: '240px' }}>
+                <div style={{ backgroundImage: 'url(../../mascot/otter-head.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '210px', width: '210px' }} />
               </div>
-              <div style={{ alignItems: 'end', boxSizing: 'border-box', display: 'flex', flexShrink: '0', height: '270px', justifyContent: 'center', paddingBottom: '40px', width: '200px' }}>
+              <div style={{ alignItems: 'end', boxSizing: 'border-box', display: 'flex', flexShrink: '0', height: '250px', justifyContent: 'center', paddingBottom: '36px', width: '200px' }}>
                 <div style={{ backgroundImage: 'url(../../mascot/app-icon.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '124px', width: '124px' }} />
               </div>
             </div>
             <div style={{ boxSizing: 'border-box', display: 'flex' }}>
               <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', flexShrink: '0', gap: '4px', paddingRight: '24px', width: '380px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#2C6E56', fontFamily: '"Paper Mono", ui-monospace, "SFMono-Regular", "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace', fontSize: '12px', lineHeight: '18px' }}>
-                  otter-front.svg
+                  otter-sit.svg
                 </div>
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                  正面浮姿 P：仰躺漂着，前爪收在胸口，空手。四条水线可以单独隐藏。
+                  坐石全身像：照 F6 草图描，两爪合在胸前，48px 以下不用（第 109、110、113 条）。原来这格的正面浮姿 otter-front.svg 已停用，将由新的仰躺取代（第 114、115 条，还没定稿）。
                 </div>
               </div>
               <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', flexShrink: '0', gap: '4px', paddingRight: '24px', width: '240px' }}>
@@ -291,7 +291,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §4.1、§4.2 · 第 24、33、44、47 条 · 文件 mascot/otter-front.svg、otter-head.svg、app-icon.svg
+          出处：BRAND.md §4.1、§4.2 · 第 24、33、44、47、109、110、113–115 条 · 文件 mascot/otter-sit.svg、otter-head.svg、app-icon.svg
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           10
