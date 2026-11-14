@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // 仰躺姿势：照两张图像生成的草图（L1 仰躺抱石、K2 仰躺敲开蛤）描成平涂矢量。提案 · 单一来源。
-// 有四轮，用 ROUND 选（默认 4）。下面先写第一轮的做法，第二到第四轮改了什么写在后面。
+// 有五轮，用 ROUND 选（默认 5）。下面先写第一轮的做法，第二到第五轮改了什么写在后面。
 //
 // 做法照全身像第三轮（scripts/brand/body-f6-trace.mjs）：playwright 在 canvas 上取草图像素 → 按最近色分类 →
 // 形态学开运算 / 连通块 / 填洞 → 沿像素缝走闭合轮廓 → 环形高斯平滑 → RDP 抽稀 → 过点三次贝塞尔。
@@ -37,8 +37,14 @@
 //   - otter-done.svg：同一套层，石头换成 objects/clam-open.svg（只平移、缩放、转小角度），蛤在两只爪子后面；
 //     蛤在爪子四周、身体在蛤四周各用 SVG 蒙版让出 DONE_GAP 的缝（露出后面的肚皮或背景，不是描边）。
 //   - compare.png：K2 第三轮 | 完成第四轮 | L1 第三轮；small.png：完成和 L1 的 96、48 宽真像素。
+// 第五轮（ROUND=5）：只出 L1 和完成。
+//   - 完成：clam-open.svg 原样（只平移、缩放、转角）平放在肚皮浅色上，不搭爪子，不用蒙版、不挖缝。
+//     系数从 1.0 往下每次降 0.05，取第一个能整只落进「肚皮浅色往里收 0.1 头宽」的；同一系数里取离 (440, 600) 最近的位置。
+//   - 尾巴缝：第四轮的补块在脚尖右边换成一条余弦缓坡（slitFillRamp），顺掉 x 985 那里约 1 像素的鼓包。
+//   - compare.png：完成第四轮 | 完成第五轮 | L1 第五轮；small.png 同第四轮。
 //
-// 用法：node scripts/brand/pose-trace.mjs            （第四轮：L1 和完成）
+// 用法：node scripts/brand/pose-trace.mjs            （第五轮：L1 和完成）
+//       ROUND=4 node scripts/brand/pose-trace.mjs    （复现第四轮，写回 pose-round4/）
 //       ROUND=3 node scripts/brand/pose-trace.mjs    （复现第三轮，写回 pose-round3/）
 //       ROUND=1 node scripts/brand/pose-trace.mjs    （复现第一轮，写回 pose-round1/）
 //       ROUND=2 node scripts/brand/pose-trace.mjs    （复现第二轮，写回 pose-round2/）
@@ -55,14 +61,15 @@ import { fileURLToPath } from 'node:url'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const BRAND = path.join(ROOT, 'design/brand-2026-10-13')
-const ROUND = Number(process.env.ROUND || 4)
-if (![1, 2, 3, 4].includes(ROUND)) throw new Error('ROUND 只能是 1、2、3 或 4')
+const ROUND = Number(process.env.ROUND || 5)
+if (![1, 2, 3, 4, 5].includes(ROUND)) throw new Error('ROUND 只能是 1 到 5')
 const R2 = ROUND >= 2
 const R3 = ROUND >= 3
 const R4 = ROUND >= 4
+const R5 = ROUND >= 5
 const SRC_DIR = path.join(BRAND, 'image-review-2026-11-14/pose-round1') // 草图放在第一轮目录里
 const OUT = process.env.POSE_OUT ? path.resolve(process.env.POSE_OUT) : path.join(BRAND, `image-review-2026-11-14/pose-round${ROUND}`)
-const ROUND_CN = ['', '第一轮', '第二轮', '第三轮', '第四轮'][ROUND]
+const ROUND_CN = ['', '第一轮', '第二轮', '第三轮', '第四轮', '第五轮'][ROUND]
 mkdirSync(OUT, { recursive: true })
 const MASCOT = path.join(BRAND, 'mascot')
 const requireFromApp = createRequire(path.join(ROOT, 'app/package.json'))
@@ -587,6 +594,16 @@ if (R4) {
   F.done = { paths: CLAM_OPEN, pivot: [124, 159], at: [290, 518], rotK: -14, scaleK: 0.7, id: 'clam' } // 系数 1.0 太大（胸口那块空当只有约 110 高），试过 1.0、0.9、0.85、0.8、0.75，0.7 才不碰下巴
 }
 
+// —— 第五轮：蛤从胸口挪到肚皮浅色块上（不搭爪子、不挖缝、不用蒙版）；尾巴缝补平后顺掉尾巴上沿那个小鼓包 ——
+if (R5) {
+  const F = POSES.float
+  // 脚尖右边（x ≥ 960）不再用第四轮补出来的那块（它在 x 985 收口处鼓出约 1 像素），改成一条缓坡：
+  // 从脚尖下角（960, 687.5）余弦缓到尾巴上沿（1000, 691），两头切线都是平的，再往右就是尾巴原来的上沿
+  F.slitFillRamp = [960, 687.5, 1000, 691]
+  // 蛤：系数从 1.0 往下试，取第一个能整只落进「肚皮浅色往里收 0.1 头宽」的；同一系数里取离 target 最近的位置
+  F.done = { paths: CLAM_OPEN, pivot: [124, 159], rotK: 0, scales: [1.0, 0.95, 0.9, 0.85, 0.8, 0.75, 0.7, 0.65, 0.6], margin: 0.1, target: [440, 600], id: 'clam', onBelly: true }
+}
+
 // ————————————————————————————————— 一张 —————————————————————————————————
 async function build(key) {
   const P = POSES[key]
@@ -753,7 +770,12 @@ async function build(key) {
     const waterIn = o.fromFn((x, y) => Math.abs((x + 0.5 - wcx) / wrx) ** wn + Math.abs((y + 0.5 - wcy) / wry) ** wn <= 1)
     // 缝里 x < slitFillX 那一段（看得见水的就是这段）补上；缝口那段（底下是背景）照旧
     const seen = o.and(o.fromFn((x, y) => x < P.slitFillX && P.tailSlit.some((q) => inPoly(x, y, q))), o.dilate(waterIn, 3), o.sub(new Uint8Array(N).fill(1), body))
-    const fillM = o.and(o.dilate(seen, 2), o.or(body, seen))
+    let fillM = o.and(o.dilate(seen, 2), o.or(body, seen))
+    if (P.slitFillRamp) {
+      const [x0, y0, x1, y1] = P.slitFillRamp
+      const ramp = (x) => y0 + (y1 - y0) * (1 - Math.cos(Math.PI * Math.min(1, Math.max(0, (x - x0) / (x1 - x0))))) / 2
+      fillM = o.or(o.and(fillM, o.fromFn((x) => x + 0.5 < x0)), o.fromFn((x, y) => x + 0.5 >= x0 && x + 0.5 <= x1 + 6 && y + 0.5 >= (x + 0.5 <= x1 ? ramp(x + 0.5) : y1 + 2) && y + 0.5 <= y1 + 8)) // 过了 x1 往右再伸 6、落到尾巴上沿以下 2，收口的圆角藏在尾巴里
+    }
     tSlitFill = trace(fillM, 1.5, 4)
   }
 
@@ -797,7 +819,9 @@ async function build(key) {
   await probe.close()
   const PAD = Math.round(Math.max(bb.w, bb.h) * 0.04)
   const vb = [Math.floor(bb.x - PAD), Math.floor(bb.y - PAD), Math.ceil(bb.w + 2 * PAD), Math.ceil(bb.h + 2 * PAD)]
-  const NOTE = R4
+  const NOTE = R5
+    ? `<!-- 对比稿，不是母版：仰躺姿势第五轮（${P.src}），和第三轮 otter-float.svg 同一套描法和参数（scripts/brand/pose-trace.mjs，ROUND=5）；只多一块 slit-fill：尾巴和下面那只脚之间那道缝里露出的水面补成雾薄荷，补块不高出尾巴上沿。提案 · 单一来源。water 那块可以整块拿掉。 -->`
+    : R4
     ? `<!-- 对比稿，不是母版：仰躺姿势第四轮（${P.src}），和第三轮 otter-float.svg 同一套描法和参数（scripts/brand/pose-trace.mjs，ROUND=4）；只多一块 slit-fill：尾巴和下面那只脚之间那道缝里露出的一丝水面补成雾薄荷。提案 · 单一来源。water 那块可以整块拿掉。 -->`
     : R3
     ? `<!-- 对比稿，不是母版：仰躺姿势第三轮（${P.src}），身体和后脚照草图描（scripts/brand/pose-trace.mjs，ROUND=3）；头是头像母版原样缩放（头形裁到下巴并进身体剪影）；物件是 mascot/objects/ 的定稿形${key === 'crack' ? '，举着的半片是 clam.svg 原样外形和两道纹、从外面看、壳口一侧露一道雾白月牙（派生画法，不是新物件）' : ''}；尾巴是加的一小段，末端收圆头，和下面那只脚之间一道两头渐尖的缝。提案 · 单一来源。water 那块可以整块拿掉。 -->`
@@ -809,7 +833,54 @@ async function build(key) {
 
   // 第四轮：完成（L1 身体 + 胸口开蛤）
   let done = null
-  if (P.done) {
+  if (P.done && P.done.onBelly) {
+    // 第五轮：蛤平放在肚皮浅色上。先在浏览器里把蛤（各系数）栅格化，再找能整只落进「肚皮往里收 margin 头宽」的位置
+    const dn = P.done
+    const HW = MASTER_HEAD_W * S
+    const M = Math.round(dn.margin * HW)
+    const inner = o.erode(belly, M)
+    let fit = null
+    for (const k of dn.scales) {
+      const sc = OBJ * k
+      const pg = await browser.newPage({ viewport: { width: 1024, height: 1024 }, deviceScaleFactor: 1 })
+      await pg.setContent(`<body style="margin:0;background:#fff"><svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">${placeObj(dn.paths.map((p) => p.replace(/fill="[^"]*"/, 'fill="#000"')), { at: [512, 512], pivot: dn.pivot, scale: sc, rot: dn.rotK })}</svg>`)
+      const png = await pg.screenshot({ type: 'png' })
+      await pg.setContent(`<img id="i" src="data:image/png;base64,${png.toString('base64')}">`)
+      const offs = await pg.evaluate(async () => { const img = document.getElementById('i'); await img.decode(); const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight; const g = c.getContext('2d'); g.drawImage(img, 0, 0); const d = g.getImageData(0, 0, c.width, c.height).data; const o = []; for (let i = 0; i < d.length; i += 4) if (d[i] < 250) { const q = i / 4; o.push((q % c.width) - 512, Math.floor(q / c.width) - 512) } return o })
+      await pg.close()
+      let best = null
+      for (let ay = 450; ay < 760; ay += 2) for (let ax = 250; ax < 800; ax += 2) {
+        let ok = true
+        for (let t = 0; t < offs.length && ok; t += 2) { const x = ax + offs[t]; const y = ay + offs[t + 1]; if (x < 0 || y < 0 || x >= W || y >= H || !inner[y * W + x]) ok = false }
+        if (!ok) continue
+        const dd = Math.hypot(ax - dn.target[0], ay - dn.target[1])
+        if (!best || dd < best.dd) best = { at: [ax, ay], dd }
+      }
+      if (best) { fit = { k, sc, at: best.at }; break }
+    }
+    if (!fit) throw new Error('肚皮上放不下蛤')
+    // 实际离雾薄荷多远：蛤像素到最近「非肚皮」像素的最小距离
+    const clam = placeObj(dn.paths, { at: fit.at, pivot: dn.pivot, scale: fit.sc, rot: dn.rotK, id: dn.id })
+    const dLayers = [
+      `<path id="water" d="${tWater.d}" fill="${COLOR.pale}"/>`,
+      ...(tSlitFill ? [`<path id="slit-fill" d="${tSlitFill.d}" fill="${COLOR.mint}"/>`] : []),
+      `<path id="body" d="${tBody.d}" fill="${COLOR.mint}"/>`,
+      `<path id="belly" d="${tBelly.d}" fill="${COLOR.pale}"/>`,
+      clam,
+      ...tPaws.map((t, k) => `<path id="paw-${k + 1}" d="${t.d}" fill="${COLOR.mint}"/>`),
+      face,
+    ].join('\n')
+    const pr = await browser.newPage({ viewport: { width: W, height: H } })
+    await pr.setContent(`<svg id="s" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">${dLayers}</svg>`)
+    const b2 = await pr.evaluate(() => { const b = document.getElementById('s').getBBox(); const c = document.getElementById('clam').getBoundingClientRect(); return { x: b.x, y: b.y, w: b.width, h: b.height, clam: [c.x, c.y, c.width, c.height] } })
+    await pr.close()
+    const PAD2 = Math.round(Math.max(b2.w, b2.h) * 0.04)
+    const vb2 = [Math.floor(b2.x - PAD2), Math.floor(b2.y - PAD2), Math.ceil(b2.w + 2 * PAD2), Math.ceil(b2.h + 2 * PAD2)]
+    const NOTE2 = `<!-- 对比稿，不是母版：「完成」第五轮（Owner 2026-11-14：完成改用 L1 身体加开蛤）。身体、头、尾、后脚、两只前爪和第五轮 otter-float.svg 逐字一样（scripts/brand/pose-trace.mjs，ROUND=5）；石头拿掉，mascot/objects/clam-open.svg 定稿形（只平移、缩放 ${fit.sc.toFixed(4)}、转 ${dn.rotK}°）平放在肚皮浅色上，四周离雾薄荷至少 ${M} 像素（0.1 头宽），不碰爪子，不用蒙版。提案 · 单一来源。water 那块可以整块拿掉。 -->`
+    const svg2 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb2.join(' ')}">\n${NOTE2}\n<title>獭獭 · 仰躺肚皮上放开蛤（done）· 第五轮对比稿</title>\n${dLayers}\n</svg>\n`
+    writeFileSync(path.join(OUT, 'otter-done.svg'), svg2)
+    done = { svg: svg2, vbW: vb2[2], scaleK: fit.k, clamScale: +fit.sc.toFixed(4), at: fit.at, marginPx: M, clamBox: b2.clam.map((v) => f1(v)), clamBoxPerHead: +(b2.clam[2] / HW).toFixed(3), viewBox: vb2, bytes: svg2.length }
+  } else if (P.done) {
     const dn = P.done
     const clam = placeObj(dn.paths, { at: dn.at, pivot: dn.pivot, scale: OBJ * dn.scaleK, rot: dn.rotK, id: dn.id })
     // 身体在蛤四周也让出同样宽的缝（露出背景色），蛤压在脖子、胳膊根这些雾薄荷上时才分得开；肚皮画在身体上面不受影响
@@ -896,25 +967,30 @@ async function build(key) {
     viewBox: vb,
     bytes: svg.length,
     ...(pawTipD ? { pawTipD, bowlGap800 } : {}),
-    ...(done ? { done: { clamScale: done.clamScale, clamBox: done.clamBox, clamBoxPerHead: done.clamBoxPerHead, viewBox: done.viewBox, bytes: done.bytes, gap: DONE_GAP } } : {}),
+    ...(done ? { done: { ...Object.fromEntries(Object.entries(done).filter(([k]) => k !== 'svg')), ...(R5 ? {} : { gap: DONE_GAP }) } } : {}),
   }
   return { key, svg, sketch: SKETCH, headWUnits: headWfinal, vbW: vb[2], vbH: vb[3], measure, done }
 }
 
 // ————————————————————————————————— 跑 —————————————————————————————————
-const keys = process.env.POSE ? [process.env.POSE] : R4 ? ['float'] : Object.keys(POSES) // 第四轮只出 L1 和完成
+const keys = process.env.POSE ? [process.env.POSE] : R4 ? ['float'] : Object.keys(POSES) // 第四轮起只出 L1 和完成
 const res = {}
 for (const k of keys) res[k] = await build(k)
 
 if (R4 && res.float) {
   // compare.png：K2 第三轮 | 完成第四轮 | L1 第三轮，大图 400 宽，下面 96、48 宽小样
   const R3DIR = path.join(BRAND, 'image-review-2026-11-14/pose-round3')
-  const cols = [
+  const R4DIR = path.join(BRAND, 'image-review-2026-11-14/pose-round4')
+  const cols = R5 ? [
+    { label: '完成 第四轮（胸口）· pose-round4/otter-done.svg', svg: readFileSync(path.join(R4DIR, 'otter-done.svg'), 'utf8') },
+    { label: '完成 第五轮（肚皮上）· otter-done.svg', svg: res.float.done.svg },
+    { label: 'L1 第五轮 · otter-float.svg', svg: res.float.svg },
+  ] : [
     { label: 'K2 第三轮（不再用）· pose-round3/otter-crack.svg', svg: readFileSync(path.join(R3DIR, 'otter-crack.svg'), 'utf8') },
     { label: '完成 第四轮 · otter-done.svg', svg: res.float.done.svg },
     { label: 'L1 第三轮 · pose-round3/otter-float.svg', svg: readFileSync(path.join(R3DIR, 'otter-float.svg'), 'utf8') },
   ]
-  const html = `<style>body{margin:0;padding:24px;background:${COLOR.page};font:15px/1.5 system-ui,sans-serif;color:#1B2B33}h1{font-size:20px;margin:0 0 6px}p{margin:0 0 14px;color:#5A6C75}.r{display:flex;gap:14px}figure{margin:0;background:#fff;border-radius:8px;padding:12px;width:400px}figcaption{padding-top:8px}img{display:block}.s{display:flex;gap:20px;align-items:flex-end;margin-top:14px;color:#5A6C75;font-size:12px}</style><h1>仰躺姿势 · 第四轮：完成 = L1 身体 + 胸口开蛤</h1><p>对比稿 · 提案 · 单一来源。中间那张：身体照第三轮 L1 原样，石头换成定稿 clam-open.svg，蛤在爪子四周让出 ${DONE_GAP} 像素（草图坐标）的缝。大图 400 宽，下面 96、48 宽（96、48 两张按 deviceScaleFactor 2 截图，看的时候以 400 那张为准）。</p><div class="r">${cols.map((c) => `<figure><img src="${uriSvg(c.svg)}" width="400"><div class="s"><div><img src="${uriSvg(c.svg)}" width="96">96</div><div><img src="${uriSvg(c.svg)}" width="48">48</div></div><figcaption>${c.label}</figcaption></figure>`).join('')}</div>`
+  const html = `<style>body{margin:0;padding:24px;background:${COLOR.page};font:15px/1.5 system-ui,sans-serif;color:#1B2B33}h1{font-size:20px;margin:0 0 6px}p{margin:0 0 14px;color:#5A6C75}.r{display:flex;gap:14px}figure{margin:0;background:#fff;border-radius:8px;padding:12px;width:400px}figcaption{padding-top:8px}img{display:block}.s{display:flex;gap:20px;align-items:flex-end;margin-top:14px;color:#5A6C75;font-size:12px}</style><h1>${R5 ? '仰躺姿势 · 第五轮：完成 = L1 身体 + 肚皮上放开蛤' : '仰躺姿势 · 第四轮：完成 = L1 身体 + 胸口开蛤'}</h1><p>对比稿 · 提案 · 单一来源。${R5 ? '中间那张：身体照 L1 原样，石头拿掉，定稿 clam-open.svg 平放在肚皮浅色上，不搭爪子，不挖缝。' : `中间那张：身体照第三轮 L1 原样，石头换成定稿 clam-open.svg，蛤在爪子四周让出 ${DONE_GAP} 像素（草图坐标）的缝。`}大图 400 宽，下面 96、48 宽（96、48 两张按 deviceScaleFactor 2 截图，看的时候以 400 那张为准）。</p><div class="r">${cols.map((c) => `<figure><img src="${uriSvg(c.svg)}" width="400"><div class="s"><div><img src="${uriSvg(c.svg)}" width="96">96</div><div><img src="${uriSvg(c.svg)}" width="48">48</div></div><figcaption>${c.label}</figcaption></figure>`).join('')}</div>`
   const pg = await browser.newPage({ viewport: { width: 1340, height: 600 }, deviceScaleFactor: 2 })
   await pg.setContent(html)
   await pg.screenshot({ path: path.join(OUT, 'compare.png'), fullPage: true })
