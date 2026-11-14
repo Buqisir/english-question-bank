@@ -1842,8 +1842,8 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
         assert.ok(layouts.length > 0, 'Listening layout check requires real options')
         assert.deepEqual([...new Set(layouts.map(layout => layout.desktopColumns))].sort(), [1, 3],
           'The listening fixture exercises both single-column and three-column placement')
-        assert.ok(layouts.every(layout => layout.columns === (width <= 700 ? 1 : layout.desktopColumns)),
-          'Screen preserves desktop single-column/thirds and mobile single-column options')
+        assert.ok(layouts.every(layout => layout.columns === (width <= 700 ? 1 : 3)),
+          'Screen keeps listening options in three desktop columns, including Print single-column fallbacks, and one mobile column')
         if (width <= 700) {
           assert.ok(layouts.every(layout => layout.width > width * 0.6),
             'Mobile options retain a readable measure instead of inheriting print-sized side margins')
