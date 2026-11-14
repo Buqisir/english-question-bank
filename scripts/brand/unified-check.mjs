@@ -30,7 +30,7 @@ const MODE = process.argv[2] || 'check'
 const REVIEW = path.join(ROOT, 'design/brand-2026-10-13/image-review-2026-11-14')
 const R5 = path.join(REVIEW, 'ecosystem-round5')
 const OUT = path.join(REVIEW, 'unified-check')
-const ROUNDS = ['ecosystem-round5', 'ecosystem-round4', 'ecosystem-round3', 'ecosystem-round2'].map((r) => path.join(REVIEW, r, 'svg'))
+const ROUNDS = ['ecosystem-round7', 'ecosystem-round6', 'ecosystem-round5', 'ecosystem-round4', 'ecosystem-round3', 'ecosystem-round2'].map((r) => path.join(REVIEW, r, 'svg'))
 const findSvg = (file) => ROUNDS.map((d) => path.join(d, `${file}.svg`)).find((f) => existsSync(f))
 const HEAD_PATH = path.join(ROOT, 'design/brand-2026-10-13/mascot/otter-head.svg')
 const BODY_PATH = path.join(REVIEW, 'body-f6-round3/body-f6.svg')
