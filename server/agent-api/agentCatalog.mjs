@@ -8,7 +8,7 @@ const reviewPaperCaches = new WeakMap()
 function paperEntry(paperId, asset, meta) {
   return {
     paperId, title: meta?.paperName || asset.paper.title, year: meta?.year ?? null,
-    type: ({ '真题': 'real', '高考真题': 'real', '模拟题': 'mock', '模拟': 'mock', real: 'real', mock: 'mock' })[meta?.sourceType] ?? null,
+    type: ({ '真题': 'real', '高考真题': 'real', '模拟题': 'mock', '模拟': 'mock', real: 'real', mock: 'mock', real_exam: 'real', mock_exam: 'mock' })[meta?.sourceType] ?? null,
     asset,
     groupIds: asset.content.blocks.filter(block => block.type === 'group').map(block => block.groupId),
   }
@@ -17,13 +17,22 @@ function paperEntry(paperId, asset, meta) {
 export function listAgentPapers(context, reviewStore) {
   const db = context.openDatabase({ readOnly: true })
   let published
-  try { published = listCanonicalPaperCatalog({ db, rootDir: context.paperAssetsDir }) }
+  try {
+    published = listCanonicalPaperCatalog({ db, rootDir: context.paperAssetsDir })
+    if (db.prepare("SELECT name FROM sqlite_master WHERE name = 'sources'").get()) {
+      const types = db.prepare('SELECT DISTINCT source_type FROM sources WHERE file_ref = ?')
+      for (const paper of published) {
+        const rows = types.all(`paper-assets/${paper.paperId}/latest/paper-asset.json`)
+        if (rows.length === 1) paper.sourceType = rows[0].source_type
+      }
+    }
+  }
   finally { db.close() }
-  const papers = published.map(({ paperId, asset }) => {
+  const papers = published.map(({ paperId, asset, sourceType }) => {
     const { baseDir } = resolvePaperAssetReadPaths(context.paperAssetsDir, paperId)
     let meta
     try { meta = JSON.parse(readFileSync(path.join(baseDir, 'import-meta.json'), 'utf8')).paper } catch { /* Unknown metadata stays null. */ }
-    return { ...paperEntry(paperId, asset, meta), status: 'published' }
+    return { ...paperEntry(paperId, asset, { ...meta, sourceType: meta?.sourceType ?? sourceType }), status: 'published' }
   })
   const publishedIds = new Set(papers.map(paper => paper.paperId))
   if (reviewStore) {
@@ -39,9 +48,11 @@ export function listAgentPapers(context, reviewStore) {
         status: 'awaiting_review', revisionId: revision.id }
       paper.load = () => {
         if (!paper.asset) {
-          const { paperAsset, meta } = reviewStore.agentPaperAssetForRevision(revision.id)
-          Object.assign(paper, paperEntry(revision.paperId, paperAsset, meta))
-          cache.set(key, paper)
+          try {
+            const { paperAsset, meta } = reviewStore.agentPaperAssetForRevision(revision.id)
+            Object.assign(paper, paperEntry(revision.paperId, paperAsset, meta))
+            cache.set(key, paper)
+          } catch { return null } // An unreadable Candidate must not break other papers.
         }
         return paper
       }
@@ -80,12 +91,17 @@ export function agentGroup(paper, groupId) {
 }
 
 export function matchesPaper(paper, params) {
-  if (params.has('type') || params.has('year')) paper.load?.()
+  if ((params.has('type') || params.has('year')) && paper.load && !paper.load()) return false
   return (!params.has('type') || paper.type === params.get('type'))
     && (!params.has('year') || String(paper.year) === params.get('year'))
 }
 
-export function groupPreview(group) {
+export function matchesQuery(text, q = '') {
+  const haystack = text.toLowerCase()
+  return q.toLowerCase().split(/\s+/).filter(Boolean).every(word => haystack.includes(word))
+}
+
+export function groupText(group) {
   const texts = []
   function visit(value) {
     if (typeof value === 'string') texts.push(value)
@@ -95,6 +111,10 @@ export function groupPreview(group) {
       else Object.entries(value).filter(([key]) => !/Id$/.test(key)).forEach(([, child]) => visit(child))
     }
   }
-  visit(group.passage ?? group.content ?? group.writingTask ?? group.material)
-  return Array.from(texts.join(' ')).slice(0, 80).join('')
+  visit(group)
+  return texts.join(' ')
+}
+
+export function groupPreview(group) {
+  return Array.from(groupText(group.passage ?? group.content ?? group.writingTask ?? group.material)).slice(0, 80).join('')
 }

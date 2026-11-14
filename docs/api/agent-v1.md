@@ -13,12 +13,16 @@ Owner 登录网站，打开「管理 → 数据维护 → Agent 口令」，填�
 
 | 接口 | 返回 |
 | --- | --- |
-| `GET /api/agent/v1/papers?type=real&year=2026` | `{papers:[{paperId,title,year,type,status,revisionId?,groupCount}]}` |
+| `GET /api/agent/v1/papers?type=real&year=2026&q=` | `{papers:[{paperId,title,year,type,status,revisionId?,groupCount}]}` |
 | `GET /api/agent/v1/papers/:paperId` | 卷信息与 `groups`，各组保留原文结构、题目、选项和 `answer` |
-| `GET /api/agent/v1/groups?section=&type=&year=&limit=50&offset=0` | `{groups:[摘要],total,limit,offset}`，预览最多 80 字 |
+| `GET /api/agent/v1/groups?section=&type=&year=&q=&limit=50&offset=0` | `{groups:[摘要],total,limit,offset}`，预览最多 80 字 |
+| `GET /api/agent/v1/sections?type=&year=` | `{sections:[{section,count}]}`，count 为该分节的题组数 |
 | `GET /api/agent/v1/groups/:groupId` | 完整题组与 `paperId/paperTitle` |
 
 `type` 为 `real`（真题）或 `mock`（模拟）；`section` 精确匹配返回的题型/部分名。
+`q` 忽略大小写、按空白分词且全部词须以子串命中；papers 搜卷名/paperId，groups 搜卷名及题组全文（含题干、选项，不受预览截断限制）。空查询不限。
+待审预览缺失或不可读时，需要内容的筛选、题组列表和分节统计跳过该卷；该卷详情返回 404。无内容筛选的卷列表仍可返回 DB 摘要。
+已发布卷缺少来源类型元数据时，仅用绑定同一卷资产且一致的 DB `sources.source_type` 补充；缺失或冲突仍为 `null`。
 `limit` 为 1–200，默认 50；`offset` 默认为 0。
 原文沿用资产的 `passage`、`content`、共享选项或 `writingTask`，不展平为字符串。
 来源答案缺失时 `answer` 为 `null`；未知年份/类型也为 `null`，不从卷名猜测。
