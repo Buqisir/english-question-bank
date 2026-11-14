@@ -44,3 +44,7 @@
 T1 在普通屏下的样子：`tile-T1-1x.png`（和现在的图标并排，另有放大 8 倍）。`png/` 是从 `svg/tile-T1.svg` 出的 16、32、48、64、180、192 像素图。网站上的图标文件还没换。
 
 agent 目测：16 像素下眼睛边上有一圈灰像素，眼睛、鼻子、两瓣脸斑仍分得清；32 像素清楚。
+
+## 换文件（2026-11-14，BRAND.md 第 102 条）
+
+Owner：「换，都照你的，普通屏那张也照新脸重画」。换了浏览器图标三个文件、`mascot/app-icon.svg`、`mascot/small/app-icon-16` 和 `-32`，以及普通屏的顶栏标志（`logo/mint/mark-32`、`app/public/brand/mark-32.png`，取 `../small-icons/drafts/mark-32-A`）。换完的样子：`after-swap-1x.png`（示意，不是真浏览器）。
