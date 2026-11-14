@@ -376,19 +376,23 @@ export function buildNck1AnalysisProjection({
   if (![LEGACY_NCK1_ANALYSIS_PROFILE, LISTENING_ANALYSIS_PROFILE].includes(analysisProfile)) {
     fail(`Unknown NCK1 analysis profile: ${analysisProfile}`)
   }
-  const presentCount = NCK1_STAGED_ANALYSIS_FILES.filter(({ path: relativePath }) =>
+  const readingSources = materialization.groups.filter(({ family }) => family === 'reading')
+    .sort((a, b) => a.slotId.localeCompare(b.slotId))
+  const stagedFiles = NCK1_STAGED_ANALYSIS_FILES.filter(({ key }) =>
+    !key.startsWith('reading-') || readingSources.some(({ slotId }) => slotId === key.replace('-', '.')))
+  const presentCount = stagedFiles.filter(({ path: relativePath }) =>
     existsSync(path.join(rootDir, relativePath))).length
   const listeningPresent = existsSync(path.join(rootDir, NCK1_LISTENING_STAGED_ANALYSIS.path))
   if (presentCount === 0 && !required && !listeningPresent
     && analysisProfile !== LISTENING_ANALYSIS_PROFILE) return null
-  if (presentCount !== NCK1_STAGED_ANALYSIS_FILES.length) {
-    const missing = NCK1_STAGED_ANALYSIS_FILES
+  if (presentCount !== stagedFiles.length) {
+    const missing = stagedFiles
       .filter(({ path: relativePath }) => !existsSync(path.join(rootDir, relativePath)))
       .map(({ path: relativePath }) => relativePath)
     fail(`Incomplete staged analyses; missing: ${missing.join(', ')}`, 'NCK1_ANALYSIS_INCOMPLETE')
   }
 
-  const raw = Object.fromEntries(NCK1_STAGED_ANALYSIS_FILES.map((descriptor) => [
+  const raw = Object.fromEntries(stagedFiles.map((descriptor) => [
     descriptor.key,
     readAnalysis(rootDir, descriptor),
   ]))
@@ -408,11 +412,10 @@ export function buildNck1AnalysisProjection({
       sourceAssetVersion,
     })
   }
-  const answers = Object.values(paperAsset.answerKey?.answers || {}).filter(
-    ({ questionNo }) => questionNo >= 21 && questionNo <= 65,
-  )
-  if (answers.length !== 45 || answers.some(({ answer }) => !String(answer || '').trim())) {
-    fail('Analysis projection requires all 45 authoritative objective answers')
+  const questionIds = materialization.groups.flatMap(({ groupId }) =>
+    paperAsset.content.groups[groupId]?.questionIds || [])
+  if (!questionIds.length || questionIds.some(id => !String(paperAsset.answerKey?.answers?.[id]?.answer || '').trim())) {
+    fail('Analysis projection requires all authoritative objective answers')
   }
 
   const groupsBySlot = new Map(materialization.groups.map((group) => [group.slotId, group]))
@@ -421,8 +424,7 @@ export function buildNck1AnalysisProjection({
     if (!group) fail(`Materialization is missing ${slotId}`)
     return legacyGroup(paperAsset, group, order, materialization.media)
   }
-  const readingGroups = ['a', 'b', 'c', 'd'].map((letter, index) =>
-    getGroup(`reading.${letter}`, index + 1))
+  const readingGroups = readingSources.map(({ slotId }, index) => getGroup(slotId, index + 1))
   const seven = getGroup('seven-choices', 5)
   const cloze = getGroup('cloze', 6)
   const grammar = getGroup('grammar-fill', 7)
@@ -436,7 +438,7 @@ export function buildNck1AnalysisProjection({
   }
 
   for (const [index, group] of readingGroups.entries()) {
-    const analysis = raw[`reading-${String.fromCharCode(97 + index)}`]
+    const analysis = raw[readingSources[index].slotId.replace('.', '-')]
     if (!validateReadingSchema(analysis)) {
       fail(`Reading analysis schema invalid: ${formatSchemaErrors(validateReadingSchema.errors)}`)
     }
@@ -512,7 +514,7 @@ export function buildNck1AnalysisProjection({
     parseResult: { paper, readingGroups },
     analysesByGroupId: Object.fromEntries(readingGroups.map((group, index) => [
       group.groupId,
-      raw[`reading-${String.fromCharCode(97 + index)}`],
+      raw[readingSources[index].slotId.replace('.', '-')],
     ])),
     sevenChoicesGroup: seven,
     sevenChoicesAnalysis: structuredClone(raw.seven),
@@ -550,7 +552,6 @@ export function buildNck1AnalysisProjection({
 
   const expectedReadingIds = readingGroups.flatMap((group) => group.questions.map(({ id }) => id))
   exactKeys(sidecars['reading-choice-analysis-v1.json'].questions, expectedReadingIds, 'reading questions')
-  if (expectedReadingIds.length !== 15) fail('Reading analysis requires exactly 15 Questions')
   exactKeys(
     sidecars['writing-analysis-v1.json'].groups,
     [application.groupId, continuation.groupId],
