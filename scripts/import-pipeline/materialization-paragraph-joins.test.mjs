@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import test from 'node:test'
 import { makeFixture } from '../verify-nck1-source-materialization.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
-import { validateNck1SourceMaterialization } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
+import { materializationSlotSpecs, profileHeadingSpecs, validateNck1SourceMaterialization } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { resolveCrossPageParagraphJoins } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
 import { verifyCrossPageParagraphJoinEvidence } from '../../server/paper-import/crossPageParagraphJoinEvidence.mjs'
 import { nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
@@ -12,8 +12,8 @@ import { confirmMaterializationWritingGivens } from './materialization-writing-g
 import { SOURCE_INSTRUCTION_SLOTS } from '../../shared/paper-canonical/sourcePresentation.mjs'
 const encode = value => new TextEncoder().encode(JSON.stringify(value))
 const hash = value => sha256(encode(value))
-function fixture(confirmationVersion = 'nck1-ocr-source-confirmation-v3') {
-  const m = makeFixture(), group = m.groups[0]
+function fixture(confirmationVersion = 'nck1-ocr-source-confirmation-v3', m = makeFixture()) {
+  const group = m.groups[0]
   group.blocks[0].content = [{ kind: 'text', text: 'This paragraph continues with' }]
   group.blocks[1].content = [{ kind: 'text', text: 'the same sentence on the next page.' }]
   group.blocks.forEach((block, index) => {
@@ -164,6 +164,45 @@ test('sealed v2 Reading uses a new relation/envelope without changing confirmati
   assert.equal(verifyCrossPageParagraphJoinEvidence(f.result, f.proof).length, 1)
   assert.deepEqual(f.plan.before, f.proof.confirmation.documents[0].pages.map(page => page.orderedItems[0].text))
   assert.deepEqual(f.input.ocrSourceBytes.confirmationBytes, f.proof.confirmationBytes)
+})
+
+test('legacy envelopes plan relation-v1 for v3 Reading without widening relation-v2', () => {
+  const f = fixture()
+  for (const version of [14, 15]) {
+    const raw = { ...f.m, schemaVersion: `nck1-source-materialization-v${version}` }
+    const input = { ...f.input, materializationBytes: encode(raw) }
+    const plan = planMaterializationParagraphJoin(input, f.receiptBytes, f.options)
+    assert.equal(plan.relation.schemaVersion, 'cross-page-paragraph-join-v1')
+    const joined = { ...raw, paragraphJoins: [plan.relation] }
+    assert.equal(resolveCrossPageParagraphJoins(joined).length, 1)
+    assert.equal(verifyCrossPageParagraphJoinEvidence(joined, f.proof).length, 1)
+    joined.paragraphJoins = [f.plan.relation]
+    assert.throws(() => resolveCrossPageParagraphJoins(joined), /closed relation/)
+  }
+})
+
+test('applying a v14 Reading plan preserves the complete legacy envelope and bound inputs', () => {
+  const raw = makeFixture({ listening: true, slotRanges: materializationSlotSpecs('zhejiang-legacy') })
+  raw.schemaVersion = 'nck1-source-materialization-v14'
+  raw.profileId = 'zhejiang-legacy'
+  const source = raw.groups[0].blocks[0].source
+  raw.sourcePresentation = {
+    instructions: Object.keys(SOURCE_INSTRUCTION_SLOTS).map(slotId => ({ slotId, text: 'Source instruction.', source })),
+    listeningExample: { state: 'not_supplied', source },
+    headings: profileHeadingSpecs().map(spec => ({ slotId: spec.slotId,
+      instructionId: spec.instructionId, text: 'Source heading.', source })),
+    opening: { title: 'Synthetic Zhejiang paper', notices: [], transferNotice: 'Use the answer sheet.', source },
+  }
+  const f = fixture('nck1-ocr-source-confirmation-v3', raw)
+  assert.deepEqual(validateNck1SourceMaterialization(f.m), [])
+  assert.deepEqual(validateNck1SourceMaterialization(f.result), [])
+  const { paragraphJoins, ...preserved } = f.result
+  assert.deepEqual(preserved, f.m)
+  assert.equal(paragraphJoins[0].schemaVersion, 'cross-page-paragraph-join-v1')
+  const before = structuredClone({ input: f.input, receipt: f.receiptBytes })
+  assert.deepEqual(applyMaterializationParagraphJoinPlan(f.input, f.receiptBytes, f.plan,
+    { confirmed: true }).materialization, f.result)
+  assert.deepEqual({ input: f.input, receipt: f.receiptBytes }, before)
 })
 
 test('v79 scopes producer issues to the separate answer document without mutating them', () => {
