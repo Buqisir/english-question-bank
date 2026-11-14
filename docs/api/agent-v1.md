@@ -25,7 +25,7 @@ Owner 登录网站，打开「管理 → 数据维护 → Agent 口令」，填�
 已发布卷缺少来源类型元数据时，仅用绑定同一卷资产且一致的 DB `sources.source_type` 补充；缺失或冲突仍为 `null`。
 `limit` 为 1–200，默认 50；`offset` 默认为 0。
 原文沿用资产的 `passage`、`content`、共享选项或 `writingTask`，不展平为字符串。
-来源答案缺失时 `answer` 为 `null`；未知年份/类型也为 `null`，不从卷名猜测。
+来源答案缺失时 `answer` 为 `null`；未知年份为 `null`；类型缺来源记录时按 paperId 约定补（`paper-mock-…` 为 mock，`paper-YYYY-…`/`paper-gaokao-YYYY-…` 为 real），仍无法判断为 `null`，不从卷名猜测。
 
 ```sh
 export EQB_AGENT_TOKEN='在此填入刚创建的口令'

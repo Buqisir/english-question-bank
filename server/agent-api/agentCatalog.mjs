@@ -5,10 +5,18 @@ import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 
 const reviewPaperCaches = new WeakMap()
 
+// Most imported configs carry no sourceType; the paperId convention in
+// docs/product/nck1-paper-standard.md (paper-mock-… vs paper-YYYY-…/paper-gaokao-…) is the fallback.
+function typeFromPaperId(paperId) {
+  if (paperId.startsWith('paper-mock-')) return 'mock'
+  if (/^paper-(gaokao-)?\d{4}-/.test(paperId)) return 'real'
+  return null
+}
+
 function paperEntry(paperId, asset, meta) {
   return {
     paperId, title: meta?.paperName || asset.paper.title, year: meta?.year ?? null,
-    type: ({ '真题': 'real', '高考真题': 'real', '模拟题': 'mock', '模拟': 'mock', real: 'real', mock: 'mock', real_exam: 'real', mock_exam: 'mock' })[meta?.sourceType] ?? null,
+    type: ({ '真题': 'real', '高考真题': 'real', '模拟题': 'mock', '模拟': 'mock', real: 'real', mock: 'mock', real_exam: 'real', mock_exam: 'mock' })[meta?.sourceType] ?? typeFromPaperId(paperId),
     asset,
     groupIds: asset.content.blocks.filter(block => block.type === 'group').map(block => block.groupId),
   }
@@ -44,7 +52,7 @@ export function listAgentPapers(context, reviewStore) {
       const key = `${revision.id}:${revision.bundleDigest}`
       activeKeys.add(key)
       const paper = cache.get(key) || { paperId: revision.paperId, title: revision.paperName,
-        year: null, type: null,
+        year: null, type: typeFromPaperId(revision.paperId),
         status: 'awaiting_review', revisionId: revision.id }
       paper.load = () => {
         if (!paper.asset) {
@@ -91,7 +99,8 @@ export function agentGroup(paper, groupId) {
 }
 
 export function matchesPaper(paper, params) {
-  if ((params.has('type') || params.has('year')) && paper.load && !paper.load()) return false
+  const needsLoad = params.has('year') || (params.has('type') && paper.type === null)
+  if (needsLoad && paper.load && !paper.load()) return false
   return (!params.has('type') || paper.type === params.get('type'))
     && (!params.has('year') || String(paper.year) === params.get('year'))
 }
