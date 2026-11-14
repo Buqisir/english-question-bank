@@ -32,11 +32,14 @@ Claude Code 和 Droid 均可在 MCP 配置的 `mcpServers` 下添加：
 
 | 工具 | GET 端点 | 参数 |
 | --- | --- | --- |
-| `list_papers` | `/api/agent/v1/papers` | 可选 `year`（整数）、`type`（`real`/`mock`） |
+| `list_papers` | `/api/agent/v1/papers` | 可选 `year`（整数）、`type`（`real`/`mock`）、`q`（卷名/paperId） |
 | `get_paper` | `/api/agent/v1/papers/:paperId` | `paperId` |
-| `list_groups` | `/api/agent/v1/groups` | 可选 `year`、`type`、`section`（精确名称）、`limit`（1–200，默认 50）、`offset`（非负，默认 0） |
+| `list_groups` | `/api/agent/v1/groups` | 可选 `year`、`type`、`q`（卷名及题组全文）、`section`（精确名称）、`limit`（1–200，默认 50）、`offset`（非负，默认 0） |
+| `list_sections` | `/api/agent/v1/sections` | 可选 `year`、`type`；返回 `{sections:[{section,count}]}` |
 | `get_group` | `/api/agent/v1/groups/:groupId` | `groupId` |
 
-工具以 JSON 文本原样返回 API 成功响应，包含已发布内容及答案。401 表示口令无效或已撤销，404 表示对象不存在，429 表示服务端限流；请求超时为 30 秒。错误作为 MCP `isError` 返回，不输出请求头或上游错误正文；不跟随重定向。
+`q` 忽略大小写，按空白分词，全部词都须以子串命中；空查询不限。题组搜索不受 80 字预览限制。
 
-本包不包含写操作、待审卷、审卷意见、个人数据、OCR/校对过程、听力切点或日志工具。`ops-mcp/` 仍独立负责运维。
+工具以 JSON 文本原样返回 API 成功响应，包含已发布和最新待审 Candidate 的内容及答案。待审预览缺失或不可读时，内容列表跳过该卷，详情返回 404。401 表示口令无效或已撤销，404 表示对象不存在或不可读，429 表示服务端限流；请求超时为 30 秒。错误作为 MCP `isError` 返回，不输出请求头或上游错误正文；不跟随重定向。
+
+本包不包含写操作、审卷意见、个人数据、OCR/校对过程、听力切点或日志工具。`ops-mcp/` 仍独立负责运维。

@@ -47,6 +47,8 @@ function assetFor(paperId) {
 }
 const bank = new DatabaseSync(bankPath)
 bank.exec('CREATE TABLE question_groups (id TEXT PRIMARY KEY)')
+bank.exec("CREATE TABLE sources (source_type TEXT, file_ref TEXT, year INTEGER)")
+bank.prepare('INSERT INTO sources (source_type, file_ref) VALUES (?, ?)').run('real_exam', 'paper-assets/paper-agent-published/latest/paper-asset.json')
 ensureCanonicalPublicationDatabaseShape(bank)
 const publishedId = 'paper-agent-published'
 const pendingId = 'paper-agent-pending'
@@ -57,7 +59,7 @@ bank.prepare(`INSERT INTO canonical_paper_publications
   .run(publishedId, ref.publicationDigest)
 bank.close()
 jsonFile(path.join(assets, publishedId, 'latest/paper-asset.json'), pubAsset)
-jsonFile(path.join(assets, publishedId, 'latest/import-meta.json'), { paper: { year: 2026, paperName: '正式测试卷', sourceType: '真题' } })
+jsonFile(path.join(assets, publishedId, 'latest/import-meta.json'), { paper: { year: 2026, paperName: '正式测试卷' } })
 jsonFile(path.join(assets, publishedId, 'latest/canonical-paper-publication-ref-v1.json'), ref)
 jsonFile(path.join(assets, publishedId, 'versions/v1/canonical/canonical-paper-plan-v1.json'), {
   paperId: publishedId, slotBindings: [{ state: 'bound', groupRef: { groupId: `group-${publishedId}` } }],
@@ -201,6 +203,41 @@ try {
   assert.equal(list.papers[1].type, 'real')
   assert.equal(list.papers[1].status, 'published')
   assert(!('revisionId' in list.papers[1]))
+  for (const failure of ['missing', 'identity']) {
+    const id = `paper-agent-broken-${failure}`
+    const revision = seedReview(id)
+    const db = new DatabaseSync(reviewPath)
+    db.prepare(failure === 'missing'
+      ? 'DELETE FROM import_review_product_previews WHERE revision_id = ?'
+      : "UPDATE import_review_product_previews SET payload_digest = 'invalid' WHERE revision_id = ?").run(revision)
+    db.close()
+    await expectStatus(`${api}/papers?type=mock`, { token: credential.token }, 200)
+    await expectStatus(`${api}/papers/${id}`, { token: credential.token }, 404)
+    await expectStatus(`${api}/groups/group-${id}`, { token: credential.token }, 404)
+    assert.equal((await expectStatus(`${api}/groups?limit=1`, { token: credential.token }, 200)).total, 2)
+  }
+  const query = async (route, q) => expectStatus(`${api}/${route}?q=${encodeURIComponent(q)}`, { token: credential.token }, 200)
+  assert.deepEqual((await query('papers', 'AGENT-PUBLISHED 正式')).papers.map(p => p.paperId), [publishedId])
+  assert.equal((await query('papers', '正式 missing')).papers.length, 0)
+  assert.equal((await query('groups', '正式   TEACHER')).total, 1)
+  assert.equal((await query('groups', '正式 trip')).total, 1)
+  const longRevision = seedReview('paper-agent-long', { textSize: 20 })
+  const longDb = new DatabaseSync(reviewPath)
+  const longPreview = JSON.parse(longDb.prepare('SELECT payload_json FROM import_review_product_previews WHERE revision_id = ?').get(longRevision).payload_json)
+  longPreview.paperAsset.content.groups['group-paper-agent-long'].passage.paragraphs[0].text += ' BeyondPreview'
+  longDb.prepare('UPDATE import_review_product_previews SET payload_json = ?, payload_digest = ? WHERE revision_id = ?')
+    .run(JSON.stringify(longPreview), digestJson(longPreview), longRevision)
+  longDb.close()
+  assert.equal((await query('groups', 'beyondpreview')).total, 1)
+  const hideLong = new DatabaseSync(reviewPath)
+  hideLong.prepare("UPDATE import_review_revisions SET state = 'changes_requested' WHERE id = ?").run(longRevision)
+  hideLong.close()
+  assert.equal((await query('groups', 'teacher missing')).total, 0)
+  assert.equal((await query('groups', '   ')).total, 2)
+  assert.deepEqual(await expectStatus(`${api}/sections?type=mock&year=2026`, { token: credential.token }, 200),
+    { sections: [{ section: '阅读理解', count: 1 }] })
+  assert.deepEqual(await expectStatus(`${api}/sections?year=1999`, { token: credential.token }, 200), { sections: [] })
+  console.log('PASS missing/invalid preview isolation, paper/group search and section counts')
   assert.equal((await expectStatus(`${api}/groups/group-${pendingId}`, { token: credential.token }, 200)).questions[0].answer, 'A')
   const pendingDetail = await expectStatus(`${api}/papers/${pendingId}`, { token: credential.token }, 200)
   assert.equal(pendingDetail.groups[0].questions[0].answer, 'A')
