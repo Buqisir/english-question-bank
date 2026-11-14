@@ -7,6 +7,8 @@
 //                  另有一排把修过的和没修的几样（海星、圆墩石、敲开的蛤 a）放在一起看
 //   round6         出 ecosystem-round6/compare.png：第六轮改的六样，修前和候选并排（160px、48px 贴边裁、48px 墨色剪影，下面写量数），
 //                  最下面把全套按同一比例放一排（160px、48px、48px 剪影），推荐的一组和另一组候选各一排
+//   round7         出 ecosystem-round7/compare.png：只重画巨藻一段。第六轮 k1、候选 A、候选 B 并排（160px、48px 贴边裁、48px 墨色剪影，下面写量数），
+//                  下面把推荐稿放进全套一排（其余物件用第六轮推荐稿，没有的往前找），另一排换成候选 A 看
 //   measure a.svg [b.svg …]  只量，打印量数（改图时用）
 //
 // 量法（和第四轮 README 说的一样，这里写成代码）：
@@ -17,7 +19,7 @@
 //   - 次色离外沿：除面积最大的主体色外，每个颜色的像素到最近透明底像素的最短距离，换成 48px 下的像素（0.1px = 贴边）。
 // 物件 SVG、全身像和头像母版都只读，不改。
 //
-// 用法：node scripts/brand/unified-check.mjs [check|round5|round6|measure <svg…>|preview out.png <svg…>]
+// 用法：node scripts/brand/unified-check.mjs [check|round5|round6|round7|measure <svg…>|preview out.png <svg…>]
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import path from 'node:path'
@@ -292,6 +294,44 @@ try {
     await page.setContent(html)
     await page.screenshot({ path: path.join(R6, 'compare.png'), fullPage: true })
     console.log(`出了 ${rel(path.join(R6, 'compare.png'))}`)
+  }
+
+  // ———— 第七轮对比图：只有巨藻一段 ————
+  if (MODE === 'round7') {
+    const R6 = path.join(REVIEW, 'ecosystem-round6'), R7 = path.join(REVIEW, 'ecosystem-round7')
+    const C7 = (f) => path.join(R7, 'svg/candidates', f)
+    const list = [
+      [path.join(R6, 'svg/candidates/kelp-k1-bulb.svg'), '第六轮 k1（退回）'],
+      [C7('kelp-k7a-pale-bulb.svg'), '候选 A（浅色气囊）'],
+      [C7('kelp-k7b-pale-rib.svg'), '候选 B（浅色中脉）· 推荐'],
+    ]
+    const note = (m) => {
+      const sec = m.colors.slice(1).map((c) => `${c.name}占 ${fmtPct(c.share)}、离外沿 ${fmtPx(c.edge)}`).join('；')
+      const nar = m.colors.map((c) => `${c.name} ${fmtPct(c.narrow)}`).join('，')
+      return `宽 ${(m.bbox.w / 240).toFixed(2)} 头宽<br>${sec ? sec + '<br>' : ''}窄于 2px：${nar}；剪影 ${fmtPct(m.silNarrow)}`
+    }
+    const row = []
+    for (const [f, tag] of list) { const svg = readFileSync(f, 'utf8'); const m = await analyze(svg); row.push({ svg, tag, m }); console.log(summary(`巨藻一段 ${tag}`, m)) }
+    const cell = (r) => `<figure><div class="r"><img src="${uri(r.svg)}" width="160" height="160"><div class="s"><img src="${uri(withViewBox(r.svg, r.m.vb))}" width="48" height="48"><img src="${uri(withViewBox(toMono(r.svg), r.m.vb))}" width="48" height="48"></div></div><figcaption><b>${r.tag}</b><br>${note(r.m)}</figcaption></figure>`
+    const famOf = (kelpFile) => ['stone-otter', 'stone-long', 'stone-round', 'stone-flat', 'urchin', 'clam', 'clam-open-on-stone', 'scallop', 'starfish', 'bubbles', 'kelp-blade'].map((k) => {
+      const f = k === 'kelp-blade' ? kelpFile : [path.join(R6, 'svg', `${k}.svg`), ...ROUNDS.map((d) => path.join(d, `${k}.svg`))].find((x) => existsSync(x))
+      return { k, f, svg: readFileSync(f, 'utf8') }
+    })
+    const famA = famOf(path.join(R7, 'svg/kelp-blade.svg')), famB = famOf(C7('kelp-k7a-pale-bulb.svg'))
+    for (const it of [...famA, ...famB]) it.tight = tight(await bbox(it.svg))
+    const famRows = (fam) => `<div class="fam">${fam.map((it) => `<img src="${uri(it.svg)}" width="160" height="160">`).join('')}</div>
+<div class="fam fam2">${fam.map((it) => `<img src="${uri(withViewBox(it.svg, it.tight))}" width="48" height="48">`).join('')}</div>
+<div class="fam fam2">${fam.map((it) => `<img src="${uri(withViewBox(toMono(it.svg), it.tight))}" width="48" height="48">`).join('')}</div>`
+    const srcList = (fam) => fam.map((it) => `${it.k}：${roundOf(it.f) || 'round7'}${it.f.includes('candidates') ? ' ' + path.basename(it.f, '.svg') : ''}`).join('，')
+    const html = `<style>body{margin:0;padding:28px;font:13px/1.5 system-ui,"Noto Sans CJK SC",sans-serif;color:#191D18;background:#F1F5F7}h1{font-size:20px;margin:0 0 4px}p.sub{margin:0 0 14px;color:#29424D}h2{font-size:15px;margin:16px 0 6px}.row{display:flex;gap:12px}figure{margin:0;background:#fff;padding:10px;border-radius:6px;width:290px}.r{display:flex;gap:6px;align-items:flex-end}.s{display:flex;flex-direction:column;gap:6px}figcaption{font-size:12px;padding-top:4px;color:#29424D}figcaption b{color:#191D18}.fam{background:#fff;padding:12px;border-radius:6px;display:flex;flex-wrap:wrap;gap:0;align-items:flex-end;margin-bottom:6px}.fam2{gap:14px}p.src{margin:2px 0 6px;font-size:12px;color:#29424D}</style>
+<h1>生态物件 · 第七轮：巨藻一段（对比稿 · 提案 · 单一来源）</h1><p class="sub">底色 #F1F5F7，卡片白底。每格：160px 原框（240 = 獭獭头宽）、48px 贴边裁、48px 贴边裁墨色剪影。量数按 48px 贴边裁的 10 倍不抗锯齿渲染量的（scripts/brand/unified-check.mjs）：次色占整样面积的比例、次色到外沿的最短距离（48px 下）、开运算抹掉的面积占比（窄于 2px）。</p>
+<h2>巨藻一段</h2><div class="row">${row.map(cell).join('')}</div>
+<h2>全套放一排 · 推荐稿（候选 B）放进去（160px、48px 贴边裁、48px 剪影）</h2><p class="src">${srcList(famA)}</p>${famRows(famA)}
+<h2>全套放一排 · 换成候选 A</h2><p class="src">${srcList(famB)}</p>${famRows(famB)}`
+    await page.setViewportSize({ width: 1900, height: 800 })
+    await page.setContent(html)
+    await page.screenshot({ path: path.join(R7, 'compare.png'), fullPage: true })
+    console.log(`出了 ${rel(path.join(R7, 'compare.png'))}`)
   }
 
   // ———— 统一检查 ————
