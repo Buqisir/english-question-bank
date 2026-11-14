@@ -24,6 +24,7 @@ import type {
 import { ObjectiveTeachingContent } from './ObjectiveTeachingContent.tsx'
 import { DisclosureIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
+import { Chip } from '../../shared-ui/Chip.tsx'
 
 export type ClozeAnalysisPanelProps = {
   /** The blank currently focused (null = none selected yet). */
@@ -72,11 +73,12 @@ export function ClozeAnalysisPanel({
       {hasActiveQuestion && analysis && (
         <div className="pi-cloze-blank-card" data-pi-question-id={analysis.questionId}>
           {/* Header */}
+          {/* 题头、证据定位里的小签都是状态标记，用 shared-ui/Chip（胶囊第二轮，2026-11-14）；类名只当钩子。 */}
           <div className="pi-cloze-blank-header">
             <span className="pi-cloze-blank-no">第 {analysis.blankNo} 题</span>
-            <span className="pi-cloze-tag pi-cloze-tag--pos">{analysis.pos}</span>
+            <Chip className="pi-cloze-tag pi-cloze-tag--pos">{analysis.pos}</Chip>
             {analysis.signatureLabel && (
-              <span className="pi-cloze-tag pi-cloze-tag--sig">{analysis.signatureLabel}</span>
+              <Chip className="pi-cloze-tag pi-cloze-tag--sig">{analysis.signatureLabel}</Chip>
             )}
           </div>
 
@@ -127,7 +129,7 @@ export function ClozeAnalysisPanel({
                         className="pi-cloze-evidence-option"
                         data-evidence-type={row.type}
                       >
-                        <span className="pi-cloze-evidence-type-label">{row.typeLabel}</span>
+                        <Chip className="pi-cloze-evidence-type-label">{row.typeLabel}</Chip>
                         <span className="pi-cloze-evidence-option-text">
                           {renderOptionTextWithMark(
                             row.signalText,
@@ -154,7 +156,7 @@ export function ClozeAnalysisPanel({
                         aria-pressed={row.evidenceId === activeEvidenceId}
                         onClick={() => onSelectEvidence(row.evidenceId)}
                       >
-                        <span className="pi-cloze-evidence-type-label">{row.typeLabel}</span>
+                        <Chip className="pi-cloze-evidence-type-label">{row.typeLabel}</Chip>
                         <blockquote className="pi-cloze-evidence-quote">{row.signalText}</blockquote>
                         {row.relation && (
                           <p className="pi-cloze-evidence-relation">{row.relation}</p>

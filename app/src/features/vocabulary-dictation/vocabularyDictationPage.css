@@ -160,7 +160,9 @@
   display: block;
   width: 100%;
   height: 100%;
-  border-radius: var(--radius-pill);
+  /* 原来写的 var(--radius-pill) 从没定义过，整条声明作废，圆角退回初始值 0（右端是直角，左端靠外框裁圆）。
+   * 胶囊第二轮（2026-11-14）换成圆角族的胶囊变量。 */
+  border-radius: var(--eqb-radius-pill);
   background: var(--action);
   transform-origin: left center;
   transition: transform var(--motion-base) var(--ease-out);
@@ -209,7 +211,9 @@
   margin: -4px auto 0;
   padding: 7px 12px;
   border: 0;
-  border-radius: var(--radius-pill);
+  /* 原来写的 var(--radius-pill) 从没定义过，圆角退回 0（底是透明的，看得出来的只有键盘焦点环是直角）。
+   * 胶囊第二轮（2026-11-14）换成圆角族的胶囊变量。 */
+  border-radius: var(--eqb-radius-pill);
   color: var(--ink-muted);
   background: transparent;
   display: inline-flex;

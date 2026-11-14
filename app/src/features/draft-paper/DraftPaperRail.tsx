@@ -81,13 +81,6 @@ export function DraftPaperSwapDrawer(props: DraftPaperSwapDrawerProps): ReactNod
                     <div className="similar-rcard-body">
                       <div className="similar-rcard-title">{result.title}</div>
                       <div className="similar-rcard-source">{result.sourceLabel}</div>
-                      <div className="similar-rcard-chips">
-                        {result.reasons.map((reason, index) => (
-                          <Chip key={`${reason.kind}-${index}`} className="similar-chip">
-                            {reason.label}
-                          </Chip>
-                        ))}
-                      </div>
                     </div>
                     <div className="similar-rcard-actions">
                       {/* Owner 2026-11-14 决定 #17：「替换这篇」每张卡片都有，不用雾薄荷主键（草稿卷页的主键是「导出」），
@@ -112,6 +105,16 @@ export function DraftPaperSwapDrawer(props: DraftPaperSwapDrawerProps): ReactNod
                       >
                         ＋ 加入
                       </Button>
+                    </div>
+                    {/* 胶囊第二轮（2026-11-14）：换篇栏只有 208 宽，理由小签挤在标题左栏里，胶囊不折行以后连「同话题：人与自然」
+                        都只剩「同话题：…」。这里把这一行挪到卡片底部、两个键下面，跨满整张卡（DraftPaperWorkbench.css .draft-swap-drawer）。
+                        首页相似篇章面板（SimilarPassagesPanel.tsx）不动。 */}
+                    <div className="similar-rcard-chips similar-rcard-chips--foot">
+                      {result.reasons.map((reason, index) => (
+                        <Chip key={`${reason.kind}-${index}`} className="similar-chip">
+                          {reason.label}
+                        </Chip>
+                      ))}
                     </div>
                   </div>
                 )

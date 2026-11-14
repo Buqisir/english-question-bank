@@ -753,16 +753,21 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
         !filterPanelExpanded &&
         hasActiveFilters && (
           <ul className="concierge-active-filter-chips" aria-label="已激活筛选">
+            {/* 胶囊第二轮（2026-11-14）：已选筛选点了是「移除这个筛选」，是动作，不是标记也不是开关，
+                照「胶囊只给标签类」归 Button（墨字小号 28），不再是胶囊；一直垫桌色底（Button「打开着」的样子，App.css）。
+                读屏名以看得见的字开头，后面补上点了会怎样（「×」是装饰，不念）。 */}
             {activeFilterEntries.map((entry) => (
               <li key={entry.key}>
-                <button
-                  type="button"
+                <Button
+                  tone="strong"
+                  size="sm"
                   className="concierge-active-filter-chip"
+                  aria-label={`${FILTER_DIM_LABEL[entry.key]}：${entry.text}，移除这个筛选`}
                   onClick={() => removeFilter(entry.key)}
                 >
                   {FILTER_DIM_LABEL[entry.key]}：{entry.text}
                   <span aria-hidden="true"> ×</span>
-                </button>
+                </Button>
               </li>
             ))}
           </ul>
@@ -815,15 +820,16 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 gapClick={false}
                 aria-label={dimension}
               >
+                {/* 胶囊第二轮（2026-11-14）：筛选胶囊换成 shared-ui/Chip.tsx 的 ChipToggle（aria-pressed），样子在 chip.css。
+                    类名 concierge-starter-chip 留给 FluidHoverList 的 itemSelector 和脚本当钩子；is-zero（这一项 0 条）的变淡还在 App.css。 */}
                 {filterOptions[dimension].map((option) => {
                   const selected = String(filters[dimension] ?? '') === option.value
                   const isZero = option.count === 0
                   return (
                     <li key={option.value}>
-                      <button
-                        type="button"
-                        className={`concierge-starter-chip${selected ? ' is-selected' : ''}${isZero ? ' is-zero' : ''}`}
-                        aria-pressed={selected}
+                      <ChipToggle
+                        pressed={selected}
+                        className={`concierge-starter-chip${isZero ? ' is-zero' : ''}`}
                         onClick={() =>
                           toggleFilter(
                             dimension,
@@ -832,7 +838,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                         }
                       >
                         {option.label} {option.count}
-                      </button>
+                      </ChipToggle>
                     </li>
                   )
                 })}

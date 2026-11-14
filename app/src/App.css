@@ -120,8 +120,10 @@
 .topbar-avatar {
   width: 28px;
   height: 28px;
-  /* 圆角方块，和浏览器图标一个形状（BRAND.md §7 第 105 条）：28px 的 22% 约 6px。 */
-  border-radius: 6px;
+  /* 圆角方块，和浏览器图标同形（BRAND.md §7 第 105 条）。圆角按圆角族取：28px 高按「按高度选档」用 control 8px，
+   * 约是边长的 29%，比浏览器图标的 22% 略圆一点（放大 4 倍对照见 design/components-2026-11-13/migrate-chip-r2/README.md，
+   * 原寸下差别很小）。6px 不在圆角族里（DESIGN.md §5、scripts/verify-radius-family.mjs）。 */
+  border-radius: var(--eqb-radius-control);
   display: block;
   flex-shrink: 0;
   object-fit: cover;
@@ -4211,36 +4213,10 @@ div.concierge-feed-empty-corpus p { margin: 0; }
   justify-content: center;
 }
 
-.concierge-starter-chip {
-  background: transparent;
-  border: 1px solid #D8D8D2;
-  color: var(--desk-muted);
-  font-family: inherit;
-  font-size: 12.5px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
-}
-
+/* 胶囊第二轮（2026-11-14）：筛选胶囊换成 shared-ui/Chip.tsx 的 ChipToggle，静止、悬停、滑块停留、键盘焦点、选中的样子
+ * 都在 shared-ui/chip.css；原来这里 12.5px、写死边色 #D8D8D2 的那几条删了。滑块的圆角跟胶囊走。 */
 .concierge-starter-chips.fluid-hover-list {
-  --fh-radius: 999px;
-}
-
-.concierge-starter-chip {
-  position: relative;
-}
-
-.concierge-starter-chip[data-fluid-hover-active] {
-  border-color: var(--eqb-color-border);
-  color: var(--eqb-color-text);
-}
-
-.concierge-starter-chip:focus-visible {
-  border-color: var(--action);
-  color: var(--eqb-color-text);
-  outline: var(--focus-ring);
-  outline-offset: 2px;
+  --fh-radius: var(--eqb-radius-pill);
 }
 
 /* In AI mode, keep the hint and chips centered with the intent bar. */
@@ -4251,9 +4227,7 @@ div.concierge-feed-empty-corpus p { margin: 0; }
   margin-right: auto;
 }
 
-/* Cut ai-mode-filter-chips (C6: zero new/changed color tokens) — the filter
-   row reuses .concierge-starter-chip's exact hex literals for the selected
-   state instead of introducing any variable. */
+/* Cut ai-mode-filter-chips: the structured filter row. 胶囊本身的样子在 shared-ui/chip.css（ChipToggle）。 */
 .concierge-filter-row {
   display: flex;
   flex-direction: column;
@@ -4303,27 +4277,10 @@ div.concierge-feed-empty-corpus p { margin: 0; }
   align-self: flex-start;
 }
 
+/* 这一项一条都没有：整颗变淡。叠在 ChipToggle 上：chip.css 只在 :disabled 时写 opacity（0.55），
+ * 0 条的项不禁用（仍能点，点了出空结果），两条不会同时生效，透明度只由本条决定。 */
 .concierge-starter-chip.is-zero {
   opacity: 0.45;
-}
-
-/* Selected chip = the system's signature. teal-repaint C6: retired the
-   oxblood red-pen (#B8323C) selected state — the current-selection role now
-   reads as the single teal accent, consistent with the Single-Hue Rule.
-   The fill stays a faint wash so multiple selected chips never bank past
-   the ≤10% accent budget (Green-Pen Rule). teal-800 on teal-50 wash clears
-   WCAG AA (9.26:1). */
-.concierge-starter-chip.is-selected {
-  background: var(--eqb-color-desk);
-  border-color: transparent;
-  color: var(--eqb-color-text);
-  font-weight: 600;
-}
-
-.concierge-starter-chip.is-selected:hover {
-  background: var(--eqb-color-desk);
-  border-color: transparent;
-  color: var(--eqb-color-text);
 }
 
 .concierge-filter-clear-inline {
@@ -4393,9 +4350,9 @@ div.concierge-feed-empty-corpus p { margin: 0; }
   white-space: nowrap;
 }
 
-/* Collapsed-state active-filter summary — removable chips reusing the same
-   selected-chip visual language as the open filter panel (single teal
-   accent, no new hue). */
+/* Collapsed-state active-filter summary（收起筛选面板后命令行下那一排已选筛选）。
+ * 胶囊第二轮（2026-11-14）：每一项点了是移除这个筛选，是动作，换成 shared-ui/Button（墨字小号 28、圆角 8），
+ * 原来 12.5px、胶囊圆角、悬停加深一档的那几条删了。 */
 .concierge-active-filter-chips {
   list-style: none;
   margin: 0;
@@ -4405,29 +4362,11 @@ div.concierge-feed-empty-corpus p { margin: 0; }
   gap: 8px;
 }
 
-.concierge-active-filter-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+/* 已选筛选一直是 Button「打开着」的样子：桌色底、墨字（墨字由 tone=strong 给）。透明底静止时只剩一行字加 ×，
+ * 看不出能点、能移除（协调方审 2026-11-14）。悬停、键盘焦点照 Button：悬停那条 (0,4,0) 也是桌色底，样子不变。
+ * 覆盖：本条 (0,2,0) 盖过 button.css .eqb-button 的 background: transparent (0,1,0)。 */
+.eqb-button.concierge-active-filter-chip {
   background: var(--eqb-color-desk);
-  border: 1px solid transparent;
-  color: var(--eqb-color-text);
-  font-family: inherit;
-  font-size: 12.5px;
-  font-weight: 500;
-  padding: 4px 10px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background var(--motion-fast) var(--ease-hover);
-}
-
-.concierge-active-filter-chip:hover {
-  background: var(--eqb-color-border);
-}
-
-.concierge-active-filter-chip:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
 }
 
 /* ── Intake batch panel: quiet variant aligned with the rest of the intake page ── */

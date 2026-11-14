@@ -76,22 +76,10 @@
   margin-top: 8px;
 }
 
-.peek-chip,
-.peek-topic {
-  display: inline-flex;
-  align-items: center;
-  font-size: 12px;
-  color: var(--ink);
-  background: var(--surface-strong);
-  border: 0;
-  border-radius: 999px;
-  padding: 3px 10px;
-  line-height: 1.5;
-}
-
+/* 胶囊第二轮（2026-11-14）：.peek-chip / .peek-topic 换成 shared-ui/Chip，样子在 shared-ui/chip.css；
+ * 原来墨字、12px、上下 3 左右 10 的那条删了。只留题数「×N」：比题型字重一档、数字等宽；颜色跟胶囊的次要灰走。 */
 .peek-chip b {
   font-weight: 500;
-  color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
 

@@ -777,30 +777,9 @@ button.pi-ps-analysis-distractor--selected {
   font-size: 14px;
   font-weight: 700;
 }
-.pi-cloze-tag,
-.pi-gf-tag,
-.pi-gf-blank-hint {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 7px;
-  border-radius: 999px;
-  background: rgb(27 43 51 / 0.07);
-  color: #5f554a;
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1.4;
-}
-.pi-cloze-tag--sig,
-.pi-gf-tag--facet {
-  background: rgb(27 43 51 / 0.12);
-  color: #221b15;
-}
-.pi-gf-blank-hint {
-  background: transparent;
-  border: 1px solid rgba(122, 106, 88, 0.24);
-  font-weight: 500;
-  color: #67594b;
-}
+/* 胶囊第二轮（2026-11-14）：题头的词性 / 考法、有无提示词、提示词、考点小签换成 shared-ui/Chip（状态标记），
+   样子在 shared-ui/chip.css。原来 11px、暖棕字、两档深浅底、提示词描边的几条删了，类名只当钩子
+   （verify-lecture-panel-css.mjs 的 HOOK_ONLY）。 */
 .pi-cloze-section-title,
 .pi-gf-section-title {
   margin: 0 0 6px;
@@ -879,16 +858,7 @@ button.pi-ps-analysis-distractor--selected {
   gap: 6px;
   margin-bottom: 10px;
 }
-.pi-gf-badge {
-  padding: 2px 7px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 600;
-}
-.pi-gf-badge--role {
-  background: rgb(27 43 51 / 0.1);
-  color: #5f554a;
-}
+/* 句法成分小签换成 shared-ui/Chip（胶囊第二轮），原来的胶囊样子删了，类名只当钩子。 */
 /* 证据定位 named fold — same quiet one-line summary idiom as
    文章简介 (no anonymous「展开细节」drawer, owner 2026-07-08).
    min-height keeps the tap target at the pi-seven touch standard. */
@@ -956,16 +926,11 @@ button.pi-ps-analysis-distractor--selected {
   border-color: rgba(122, 106, 88, 0.5);
   background: rgb(27 43 51 / 0.08);
 }
+/* 证据类型小签换成 shared-ui/Chip（胶囊第二轮），样子在 shared-ui/chip.css；原来 10px、暖棕字的胶囊删了。
+   这里只留它和下面引文之间的距离（排法，不和 chip.css 冲突）。 */
 .pi-cloze-evidence-type-label,
 .pi-gf-evidence-type-label {
-  display: inline-block;
   margin-bottom: 3px;
-  padding: 1px 6px;
-  border-radius: 999px;
-  background: rgb(27 43 51 / 0.08);
-  color: #67594b;
-  font-size: 10px;
-  font-weight: 600;
 }
 .pi-cloze-evidence-quote,
 .pi-gf-evidence-quote {

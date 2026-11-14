@@ -1229,12 +1229,13 @@ function App() {
       // 草稿丸（清单 chip-03 / chip-04）：点了是去草稿卷，是按钮，所以用共用 Button（墨字 strong）；
       // 浮在右下、白底、e2、胶囊这几样浮件的样子在 App.css .eqb-button.basket-chip。
       // 首页（找题台，下面是 ConciergeDesk）用大号 36，别的页小号 28，和原来一样高。
+      // 读屏名以看得见的字开头（Owner 2026-11-14 第 3 条），冒号后补上点了会怎样。
       <Button
         tone="strong"
         size={viewMode === 'list' ? 'lg' : 'sm'}
         className="basket-chip"
         onClick={() => openDraftPaperWorkbench(currentDraftPaperId)}
-        aria-label={draftCountKnown ? `打开草稿卷，已选 ${currentDraftGroupCount} 个题组` : '打开草稿卷'}
+        aria-label={draftCountKnown ? `草稿卷（${currentDraftGroupCount} 组）：打开草稿卷` : '草稿卷：打开草稿卷'}
         disabled={!currentDraftPaperId || (draftCountKnown && currentDraftGroupCount === 0)}
         icon={
           <>

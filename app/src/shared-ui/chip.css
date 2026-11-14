@@ -6,13 +6,27 @@
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
+  /* 一行写完，放不下就截断打省略号（Owner 2026-11-14：窄栏里折成两行显得臃肿）。
+   * 宽度最多到所在容器那么宽；胶囊是 inline-flex，省略号由里面的 .eqb-chip-label 画（flex 容器自己的字画不出省略号）。
+   * 被截断的胶囊，指针停上去或键盘停上去时由 Chip.tsx 补上 title 显示全文；读屏念的是 DOM 里的全文，不受截断影响。 */
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   border-radius: var(--eqb-radius-pill);
   font-family: inherit;
 }
 
+.eqb-chip-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* ── 状态标记（不可点） ─────────────────────────────────
  * 桌色底、次要灰字（对桌色 4.62 : 1，DESIGN.md §2）、12px、一行高 24（行高 16 + 上下各 4），无边无影。
- * 窄栏里放不下时照旧折行（草稿卷「换篇」栏里「同话题：…」就会折成两行），所以不写死高度、不禁折行。
+ * 胶囊形、灰字都是 Owner 2026-11-14 定的（高 24 也不改成 4px 圆角，字不改墨色）。
+ * 窄栏里放不下时不再折行，截断打省略号（见上面 .eqb-chip）。
  * 鼠标指针保持默认，不做悬停：它不是键。 */
 .eqb-chip[data-kind='mark'] {
   min-height: 24px;
@@ -35,10 +49,9 @@
   border: 1px solid var(--eqb-color-border-subtle);
   background: var(--eqb-color-paper);
   color: var(--eqb-color-text-muted);
-  /* 13px 是 DESIGN.md §3 的 UI Compact 档（芯片、导航），tokens.css 里还没有 13 的字号变量，照 button.css 写字面值。 */
-  font-size: 13px;
+  /* DESIGN.md §3 的 UI Compact 档（13px，控件类）。 */
+  font-size: var(--eqb-font-size-control);
   font-weight: 400;
-  white-space: nowrap;
   cursor: pointer;
   transition:
     background-color var(--motion-fast) var(--ease-hover),

@@ -74,6 +74,9 @@
   --eqb-radius-circle: 50%;
 
   --eqb-font-size-xs: 12px;
+  /* 控件字号（Owner 2026-11-14 定）：DESIGN.md §3 的 UI Compact 档 13px，用在控件类——胶囊（chip.css）、
+     紧凑按钮。别处已有的 13px 字面值这一轮没跟着换，清点见 design/components-2026-11-13/migrate-chip-r2/README.md。 */
+  --eqb-font-size-control: 13px;
   --eqb-font-size-sm: 14px;
   --eqb-font-size-md: 16px;
   --eqb-font-size-lg: 20px;

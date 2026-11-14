@@ -353,8 +353,9 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   // immediately" click handler is retired along with the constant — the
   // filter row toggles local filter state instead of touching intent/submit
   // at all (see Test 12 below for the full new contract).
+  // 胶囊第二轮（2026-11-14）：筛选胶囊换成 ChipToggle，类名还在。
   assert('Desk filter chip click toggles local filter state via toggleFilter',
-    /className=\{`concierge-starter-chip[\s\S]{0,300}onClick=\{\(\)\s*=>\s*[\s\S]{0,100}toggleFilter\(/.test(deskSource), '')
+    /<ChipToggle[\s\S]{0,120}className=\{`concierge-starter-chip[\s\S]{0,300}onClick=\{\(\)\s*=>\s*[\s\S]{0,100}toggleFilter\(/.test(deskSource), '')
 
   // 9.5 Hook exposes the new deeper surface only, no flat fields leaked.
   assert('hook exports ConciergeRetrievalView',
@@ -798,7 +799,9 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
   // of the classic sidebar. The floating basket-chip button (AI mode's
   // surviving draft-paper entry point) carries the same "草稿卷" wording in
   // a template-literal aria-label instead of a static one.
-  assert('App.tsx basket-chip aria-label still carries 草稿卷 wording', /aria-label=\{`打开草稿卷/.test(app), '')
+  // 胶囊第二轮（Owner 2026-11-14 第 3 条）：读屏名以看得见的字「草稿卷（N 组）」开头，冒号后补「打开草稿卷」。
+  assert('App.tsx basket-chip aria-label starts with the visible 草稿卷 wording',
+    /aria-label=\{draftCountKnown \? `草稿卷（\$\{currentDraftGroupCount\} 组）：打开草稿卷`/.test(app), '')
   assert('draft count updates without a duplicate chip pulse',
     !/chipTick|prevDraftCountRef|\.animate\(/.test(app) &&
       !/basket-count-in-(?:up|down)/.test(css), '')

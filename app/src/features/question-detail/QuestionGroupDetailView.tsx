@@ -43,6 +43,7 @@ import { compactGroupMeta } from './detailHelpers'
 import { buildPaperBrowseLectureHref } from '../../concierge/paperSurfaceHref'
 import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
 import { Menu } from '../../shared-ui/Menu.tsx'
+import { Chip } from '../../shared-ui/Chip.tsx'
 import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import {
   SimilarPassagesPanel,
@@ -531,12 +532,14 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
           <h3 className="peek-title">{selectedDetail.title}</h3>
           {selectedDetail.summary && <p className="peek-summary">{selectedDetail.summary}</p>}
           {chips.length > 0 && (
+            // 胶囊第二轮（2026-11-14）：题型分布、话题小签都是状态标记，换成 shared-ui/Chip（不可点、桌色底、次要灰字）。
+            // 类名 peek-chip / peek-topic 留作钩子。
             <div className="peek-chips" aria-label="题型/考点分布">
               {chips.map((chip) => (
-                <span key={chip.label} className="peek-chip">
+                <Chip key={chip.label} className="peek-chip">
                   {chip.label}
                   {chip.count !== undefined && <b> ×{chip.count}</b>}
-                </span>
+                </Chip>
               ))}
             </div>
           )}
@@ -545,13 +548,13 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
               {selectedDetail.topicLabels.map((topicLabel) => {
                 const path = topicLabelPath(topicLabel)
                 return (
-                  <span
+                  <Chip
                     key={topicLabel.label}
                     className="peek-topic"
                     title={path}
                   >
                     {topicLabelLeaf(topicLabel)}
-                  </span>
+                  </Chip>
                 )
               })}
             </div>

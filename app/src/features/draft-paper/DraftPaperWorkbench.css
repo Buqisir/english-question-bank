@@ -752,6 +752,26 @@
   margin-right: 0;
 }
 
+/* 换篇栏卡片（DraftPaperRail.tsx）：理由小签那一行放在卡片底部、跨满整张卡（胶囊第二轮，2026-11-14）。
+ * 胶囊不折行、放不下打省略号以后，挤在标题左栏（约 90px）里连短理由都被截成「同话题：…」；跨满后有约 166px，
+ * 短理由能写全，只有特别长的才打省略号。
+ * 覆盖：前两条 (0,2,0) 盖过 paperBrowsePage.css 的 .similar-rcard / .similar-rcard-body (0,1,0)，只在换篇栏里：
+ * 卡片允许换行（第一行标题 + 两个键，第二行小签）；标题栏的基准宽度归零，让它和两个键分第一行，
+ * 不然按标题的整行宽度算会把两个键挤到下一行。首页相似篇章面板的卡片不受影响。 */
+.draft-swap-drawer .similar-rcard {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+.draft-swap-drawer .similar-rcard-body {
+  flex: 1 1 0;
+}
+
+.draft-swap-drawer .similar-rcard-chips--foot {
+  flex: 1 0 100%;
+  min-width: 0;
+}
+
 /* 左 rail = 整卷页目录语言（paperBrowsePage.css 的 .paper-browse-rail
    族：淡墨、无边框、无底色块、当前项加深并由小手指出），sticky offset
    与它同值。 */

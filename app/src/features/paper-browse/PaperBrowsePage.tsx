@@ -4321,14 +4321,15 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         路径都不受蒙层影响。
       */}
       {lectureOpen && <div className="paper-browse-lecture-backdrop" aria-hidden="true" />}
-      {/* 草稿丸用共用 Button（小号 28，墨字）；浮件的样子在 App.css .eqb-button.basket-chip。 */}
+      {/* 草稿丸用共用 Button（小号 28，墨字）；浮件的样子在 App.css .eqb-button.basket-chip。
+          读屏名以看得见的字开头（Owner 2026-11-14 第 3 条），冒号后补上点了会怎样。 */}
       {!reviewRevision && (
         <Button
           tone="strong"
           size="sm"
           className="basket-chip"
           onClick={() => onOpenDraftPaperWorkbench(currentDraftPaperId)}
-          aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
+          aria-label={`草稿卷（${currentDraftGroupCount} 组）：打开草稿卷`}
           disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
           icon={<BoardList size={16} />}
         >
