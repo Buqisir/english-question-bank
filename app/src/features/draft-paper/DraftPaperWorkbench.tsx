@@ -1848,7 +1848,10 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           >
             <div className="draft-dialog-head">
               <strong>保存 PDF 到个人空间</strong>
-              <button type="button" onClick={() => setSpaceDialogOpen(false)}>关闭</button>
+              {/* 构件厂第 4 步第七页：对话框里的四个键换成 shared-ui/Button。「关闭」「取消」墨字、
+                  「新建」墨字带图标，「保存」石板墨填充（原来的 .primary-button 就是石板墨底白字；
+                  这一页的雾薄荷主键已经给了顶栏「导出」，DESIGN.md §2 每页一处）。都用大号 36。 */}
+              <Button tone="strong" size="lg" onClick={() => setSpaceDialogOpen(false)}>关闭</Button>
             </div>
             <label>
               <span>文件名</span>
@@ -1870,21 +1873,28 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 aria-label="新建文件夹"
                 placeholder="新建文件夹"
               />
-              <button type="button" onClick={createFolderInDialog} disabled={!spaceNewFolderName.trim() || spaceStatus === 'saving'}>
-                <FolderPlus size={16} /> 新建
-              </button>
+              <Button
+                tone="strong"
+                size="lg"
+                icon={<FolderPlus size={16} />}
+                onClick={createFolderInDialog}
+                disabled={!spaceNewFolderName.trim() || spaceStatus === 'saving'}
+              >
+                新建
+              </Button>
             </div>
             {spaceStatus === 'loading' && <p className="draft-dialog-note">正在读取文件夹...</p>}
             {spaceStatus === 'error' && <p className="draft-error">{spaceMessage}</p>}
             <div className="draft-dialog-actions">
-              <button type="button" onClick={() => setSpaceDialogOpen(false)}>取消</button>
-              <button
+              <Button tone="strong" size="lg" onClick={() => setSpaceDialogOpen(false)}>取消</Button>
+              <Button
                 type="submit"
-                className="primary-button"
+                tone="solid"
+                size="lg"
                 disabled={spaceStatus === 'saving' || draftPaper.items.length === 0}
               >
                 {spaceStatus === 'saving' ? '保存中...' : '保存'}
-              </button>
+              </Button>
             </div>
           </form>
         </dialog>

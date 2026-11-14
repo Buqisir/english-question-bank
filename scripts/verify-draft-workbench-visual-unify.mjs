@@ -19,9 +19,9 @@
  *      it is a custom floating panel wired for aria-expanded, outside-click
  *      dismiss, and Escape dismiss. Since 构件厂第 4 步 (2026-11-13) that
  *      panel is the shared `app/src/shared-ui/Menu.tsx`; the checks read it.
- *   5. The save-space dialog's primary "保存" action opts into the shared
- *      `.primary-button` accent treatment (D2), and the generic ghost-button
- *      selector explicitly excludes it so specificity doesn't clobber it.
+ *   5. The save-space dialog's primary "保存" action is the filled key (D2).
+ *      Since 构件厂第 4 步第七页 (2026-11-14) that is shared-ui/Button's
+ *      solid tone, with "取消" a transparent strong-tone Button.
  *
  * Cloud-safe: no browser, no build, no server — pure source-text checks.
  */
@@ -169,22 +169,34 @@ if (menuBlockMatch) {
   )
 }
 
-/* ─── 5. D2: save-space dialog primary button opts into .primary-button ─ */
+/* ─── 5. D2: save-space dialog primary button stays the filled one ─────
+   构件厂第 4 步第七页：对话框四个键换成 shared-ui/Button。D2 要的是「保存」是填充键、
+   「取消」不和它抢——原来靠 .primary-button 和一条 :not(.primary-button) 的白底描边规则，
+   现在靠 Button 的语气：「保存」solid（石板墨填充，就是原来 .primary-button 的颜色），
+   「取消」strong（墨字透明底）。 */
 
-console.log('\nTest 5: save-space dialog "保存" button uses the shared primary-button treatment (D2)')
+console.log('\nTest 5: save-space dialog "保存" button is the filled one, "取消" is not (D2)')
 
 assert(
-  'submit button in the save-space dialog has className="primary-button"',
-  /type="submit"\s+className="primary-button"/.test(tsxSrc),
-  'primary-button class not found on the submit/save button',
+  'submit button in the save-space dialog is a solid-tone Button',
+  /<Button\s+type="submit"\s+tone="solid"/.test(tsxSrc),
+  'solid-tone submit Button not found',
 )
 
-const dialogActionsSelectorMatch = cssSrc.match(/\.draft-dialog-actions button([^,{]*)[,{]/)
 assert(
-  'the shared ghost-button selector explicitly excludes .primary-button (so specificity does not clobber it)',
-  Boolean(dialogActionsSelectorMatch) && /:not\(\.primary-button\)/.test(dialogActionsSelectorMatch[0]),
-  `selector: ${dialogActionsSelectorMatch ? dialogActionsSelectorMatch[0] : 'not found'}`,
+  '"取消" in the save-space dialog is a transparent strong-tone Button, not a second filled key',
+  /<Button tone="strong" size="lg" onClick=\{\(\) => setSpaceDialogOpen\(false\)\}>取消<\/Button>/.test(tsxSrc),
+  'strong-tone 取消 Button not found',
 )
+
+{
+  const cssNoComments = cssSrc.replace(/\/\*[\s\S]*?\*\//g, '')
+  assert(
+    'no hand-written button rule targets the dialog any more (it would fight button.css)',
+    !/\.draft-dialog-actions button|\.draft-new-folder-row button|\.draft-dialog-head button/.test(cssNoComments),
+    'a .draft-dialog-* button rule re-appeared',
+  )
+}
 
 /* ─── 6. workbench-header-unify: Locked Decision 锚断言（CR SW-2 收账） ── */
 

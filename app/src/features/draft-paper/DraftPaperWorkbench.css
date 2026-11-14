@@ -48,12 +48,12 @@
    (.draft-title-field 起 .draft-more-menu-panel 止) is reused verbatim in
    the new location, only the container it sat in is gone. */
 
+/* 构件厂第 4 步第七页：「保存 PDF 到个人空间」对话框里的键（.draft-dialog-head、
+   .draft-new-folder-row、.draft-dialog-actions 里的）换成 shared-ui/Button，从这组白底描边的
+   手写规则里拿掉；剩下的撤销提示条里的键等提示条那批构件。 */
 .draft-outline-actions button,
 .draft-suggestions button,
-.draft-undo-toast button,
-.draft-dialog-actions button:not(.primary-button),
-.draft-new-folder-row button,
-.draft-dialog-head button {
+.draft-undo-toast button {
   align-items: center;
   background: var(--panel);
   border: 1px solid var(--line);
