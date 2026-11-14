@@ -1,9 +1,9 @@
 {
- "date": "2026-11-14T03:44:43.007Z",
+ "date": "2026-11-14T06:59:30.258Z",
  "site": "http://127.0.0.1:5340",
  "names": [
-  "青玉案 / Touchstone",
-  "他石 / Tashi"
+  "玉案 / Yu'an",
+  "青玉案 / Touchstone"
  ],
  "fontsOnThisMachine": {
   "inter": true,
@@ -97,7 +97,7 @@
   "inter": true
  },
  "truncatedIconLabels": {
-  "青玉案 / Touchstone": [],
-  "他石 / Tashi": []
+  "玉案 / Yu'an": [],
+  "青玉案 / Touchstone": []
  }
 }
