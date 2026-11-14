@@ -121,12 +121,9 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: var(--eqb-color-identity, #2C6E56);
-  color: #fff;
-  display: grid;
-  place-items: center;
-  font-size: 12px;
-  font-weight: 600;
+  display: block;
+  flex-shrink: 0;
+  object-fit: cover;
 }
 
 /* ui-shell-unify: unified AppTopbar vocabulary. `.topbar-sub` is the

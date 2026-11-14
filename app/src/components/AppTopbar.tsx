@@ -3,10 +3,6 @@ import { Archive, ArrowLeft, BookMarked, VocabularyNotebook, LogOut, Pencil, Set
 import { Button, type ButtonSize } from '../shared-ui/Button.tsx'
 import { FluidHoverList } from './FluidHoverList.tsx'
 
-function userInitials(username: string): string {
-  return username.slice(0, 2)
-}
-
 /* BRAND.md §3.1: the logo mark is drawn at 20px tall. On 1x screens the
    hand-placed 32-grid pixel version is crisper than the scaled-down vector;
    2x and above get the vector. Decorative: the site name beside it is the
@@ -218,9 +214,8 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
         )}
         {props.user && (
           <span className="topbar-user-group">
-            <span className="topbar-avatar" aria-hidden="true">
-              {userInitials(props.user.username)}
-            </span>
+            {/* BRAND.md §7 第 105 条：默认头像是獭獭，不再用深薄荷底的首字母。 */}
+            <img className="topbar-avatar" src="/brand/avatar.svg" alt="" aria-hidden="true" />
             <span className="topbar-username">{props.user.username}</span>
             <Button size={navSize} icon={<LogOut size={16} />} onClick={props.onLogout}>
               退出
