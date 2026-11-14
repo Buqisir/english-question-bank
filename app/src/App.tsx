@@ -76,6 +76,27 @@ const DEFAULT_AI_MODEL = DEEPSEEK_MODELS[0].value
 // verify-paper-browse.mjs's `[^{]*\{` body-extraction regex.
 type OpenPaperBrowseOptions = { questionId?: string | null; lecture?: boolean; similar?: boolean }
 
+// 草稿卷工作台的地址：`?view=draft-paper[&draftPaperId=<id>][&focusGroupId=<gid>]`，其余参数照当前地址留着。
+// openDraftPaperWorkbench 往历史里压的就是它；加入键「已加入」链接的 href 也用它（中键开新标签、复制地址都能到同一处）。
+function draftPaperWorkbenchHref(draftPaperId?: string | null, focusGroupId?: string | null): string {
+  const url = new URL(window.location.href)
+  url.searchParams.set('view', 'draft-paper')
+  // C3b — clear groupId when navigating away from the detail view so it
+  // doesn't linger as an orphan param on an unrelated route.
+  url.searchParams.delete('groupId')
+  if (draftPaperId) {
+    url.searchParams.set('draftPaperId', draftPaperId)
+  } else {
+    url.searchParams.delete('draftPaperId')
+  }
+  if (focusGroupId) {
+    url.searchParams.set('focusGroupId', focusGroupId)
+  } else {
+    url.searchParams.delete('focusGroupId')
+  }
+  return `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`
+}
+
 function App() {
   const currentUser = useCurrentUser()
   // M0-3 (docs/cuts/m0-3-role-gate/plan.md 2b): AuthGate is the only place that
@@ -382,7 +403,13 @@ function App() {
     void refreshQuestionGroups()
   }
 
-  const draftAddActions: DraftAddActions = { add: addGroupToDraft, undo: undoAddGroupToDraft }
+  // 「已加入」点了打开草稿卷工作台并定位到这一组（Owner 2026-11-14：恢复成改之前「再点一下」的去处）。
+  const draftAddActions: DraftAddActions = {
+    add: addGroupToDraft,
+    undo: undoAddGroupToDraft,
+    openDraft: (draftPaperId, groupId) => openDraftPaperWorkbench(draftPaperId, groupId),
+    draftHref: (draftPaperId, groupId) => draftPaperWorkbenchHref(draftPaperId, groupId),
+  }
 
 
   // C3a (trust-cracks) — 详情进 URL: `?view=detail&groupId=<id>` via
@@ -545,22 +572,7 @@ function App() {
 
   const openDraftPaperWorkbench = useCallback((draftPaperId?: string | null, focusGroupId?: string | null) => {
     if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
-      const url = new URL(window.location.href)
-      url.searchParams.set('view', 'draft-paper')
-      // C3b — clear groupId when navigating away from the detail view so it
-      // doesn't linger as an orphan param on an unrelated route.
-      url.searchParams.delete('groupId')
-      if (draftPaperId) {
-        url.searchParams.set('draftPaperId', draftPaperId)
-      } else {
-        url.searchParams.delete('draftPaperId')
-      }
-      if (focusGroupId) {
-        url.searchParams.set('focusGroupId', focusGroupId)
-      } else {
-        url.searchParams.delete('focusGroupId')
-      }
-      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+      window.history.pushState(window.history.state, '', draftPaperWorkbenchHref(draftPaperId, focusGroupId))
     }
     setAdminRouteActive(false)
     setBrowseRouteActive(false)

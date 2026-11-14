@@ -1,14 +1,16 @@
 // 走查第四节第 6 条：加入草稿卷之后的反馈全站一个写法，带撤回。
 // WALK_MODE=before 拍改之前；WALK_MODE=after 拍改之后（含键盘、出错、量时间）。
+// WALK_MODE=after2 第二轮（Owner 2026-11-14「已加入」恢复能点）：四处各走一遍 加入 → 撤回 → 再加入 → 点「已加入」
+// 打开草稿卷工作台、看里面有那一组 → 浏览器后退回来；键盘走一遍；出错和 390 宽再拍一遍。端口偏移 52。
 // 四处：首页结果行、题组详情页、相似篇章面板（首页结果行「⋯」里打开）、整卷预览卷面旁的加入键。
 import { mkdirSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { createRequire } from 'node:module'
 import { pathToFileURL } from 'node:url'
 
-process.env.INVENTORY_PORT_OFFSET = '51'
-const MODE = process.env.WALK_MODE === 'before' ? 'before' : 'after'
-const AFTER = MODE === 'after'
+const MODE = process.env.WALK_MODE === 'before' ? 'before' : process.env.WALK_MODE === 'after2' ? 'after2' : 'after'
+process.env.INVENTORY_PORT_OFFSET = MODE === 'after2' ? '52' : '51'
+const AFTER = MODE !== 'before'
 const ROOT = '/home/user/english-question-bank'
 const INV = path.join(ROOT, 'scripts/component-inventory')
 const { startRig } = await import(pathToFileURL(path.join(INV, 'rig.mjs')).href)
@@ -67,6 +69,181 @@ async function timedClick(target, container, doneRe, label) {
 }
 const focusedText = () => page.evaluate(() => { const e = document.activeElement; return e ? `${e.tagName.toLowerCase()} ${(e.getAttribute('aria-label') || e.innerText || '').trim().replace(/\s+/g, ' ')}` : null })
 
+// ── 第二轮：「已加入」能点（WALK_MODE=after2）──
+const R2 = { places: {}, keyboard: {}, errors: {} }
+const norm = (t) => (t || '').trim().replace(/\s+/g, ' ')
+const OPEN = 'a.eqb-draft-add-open'
+// 量「已加入」那块纸：纸、链接、撤回的框，链接里字离纸左边多远，链接的名字、地址，悬停时的底色。
+async function measurePaper(root) {
+  return root.evaluate((wrap) => {
+    const paper = wrap.querySelector('.eqb-draft-add-paper'); const link = wrap.querySelector('a.eqb-draft-add-open'); const undo = wrap.querySelector('.eqb-draft-add-undo')
+    const box = (e) => { if (!e) return null; const r = e.getBoundingClientRect(); return { x: Math.round(r.x * 10) / 10, w: Math.round(r.width * 10) / 10, h: Math.round(r.height * 10) / 10 } }
+    const textLeft = (e) => { if (!e) return null; const rg = document.createRange(); rg.selectNodeContents(e); return Math.round((rg.getBoundingClientRect().x - paper.getBoundingClientRect().x) * 10) / 10 }
+    const undoLabel = undo?.querySelector('.eqb-button-label')
+    return {
+      paper: box(paper), link: box(link), undo: box(undo),
+      linkTextLeftInPaper: textLeft(link),
+      linkTextToUndoText: link && undoLabel ? Math.round((textLeft(undoLabel) - textLeft(link) - (() => { const rg = document.createRange(); rg.selectNodeContents(link); return rg.getBoundingClientRect().width })()) * 10) / 10 : null,
+      tag: link?.tagName.toLowerCase(), ariaLabel: link?.getAttribute('aria-label'), text: link?.innerText, href: link?.getAttribute('href'),
+      linkColor: link ? getComputedStyle(link).color : null, linkBg: link ? getComputedStyle(link).backgroundColor : null,
+      paperBg: paper ? getComputedStyle(paper).backgroundColor : null,
+    }
+  })
+}
+async function waitWorkbench(gid) {
+  await page.waitForFunction(() => new URLSearchParams(location.search).get('view') === 'draft-paper', null, { timeout: 15000 })
+  await page.locator('.draft-workbench-layout').waitFor({ timeout: 60000 }).catch(() => {})
+  const tools = await page.locator(`[data-draft-tools-group-id="${gid}"]`).first().waitFor({ state: 'attached', timeout: 60000 }).then(() => true).catch(() => false)
+  await settle(page, 800)
+  const q = new URL(page.url()).searchParams
+  return { view: q.get('view'), draftPaperId: q.get('draftPaperId'), focusGroupId: q.get('focusGroupId'), groupToolsOnPage: tools, draftApi: await draftGroups() }
+}
+// 一处走一遍。goto() 进到那一处并返回加入键外面那层（[data-draft-add]）；clip() 返回截图框；hover() 让键露出来（整卷预览要）。
+async function walkPlace(n, name, goto, clip, hover = async () => {}) {
+  const r = {}
+  await resetDraft()
+  let key = await goto()
+  await hover()
+  await key.locator('button').first().click()
+  await key.locator(OPEN).waitFor({ timeout: 15000 })
+  const gid = (await draftGroups())[0]; r.groupId = gid
+  await sleep(300); await page.mouse.move(2, 898); await hover(); await sleep(200)
+  r.paper = await measurePaper(key)
+  await page.screenshot({ path: path.join(OUT, `after2-${n}a-${name}-加入后.png`), clip: await clip() })
+  await key.locator(OPEN).hover(); await sleep(250)
+  r.hoverBg = await key.locator(OPEN).evaluate((e) => getComputedStyle(e).backgroundColor)
+  await page.screenshot({ path: path.join(OUT, `after2-${n}b-${name}-悬停已加入.png`), clip: await clip() })
+  // 撤回照旧一步
+  await key.locator('button', { hasText: '撤回' }).click()
+  await key.locator(OPEN).waitFor({ state: 'detached', timeout: 15000 })
+  r.afterUndo = { text: norm(await key.innerText()), draft: await draftGroups() }
+  // 再加回来，点「已加入」
+  await hover(); await key.locator('button').first().click(); await key.locator(OPEN).waitFor({ timeout: 15000 })
+  const urlBefore = page.url().replace(rig.base, '')
+  const t0 = Date.now()
+  await key.locator(OPEN).click()
+  r.open = await waitWorkbench(gid); r.open.urlBefore = urlBefore; r.open.msToWorkbench = Date.now() - t0
+  await page.screenshot({ path: path.join(OUT, `after2-${n}c-${name}-点已加入打开草稿卷.png`) })
+  // 浏览器后退回来
+  await page.goBack()
+  await page.waitForFunction(() => new URLSearchParams(location.search).get('view') !== 'draft-paper', null, { timeout: 15000 })
+  await settle(page, 1500); await page.mouse.move(2, 898)
+  r.back = { url: page.url().replace(rig.base, ''), draft: await draftGroups() }
+  r.back.keyText = await key.count().then((c) => (c ? key.innerText().then(norm) : '(加入键不在页面上)'))
+  r.back.undoPresent = await key.locator('button', { hasText: '撤回' }).count().catch(() => 0)
+  log(name, r); R2.places[name] = r
+  return { r, key }
+}
+
+async function walkSecondRound() {
+  // 1. 首页结果行（紧凑档）
+  const rowA = () => page.locator('.concierge-group-row').filter({ hasText: 'A篇' }).first()
+  const p1 = await walkPlace(1, '首页结果行', async () => { await home(); return rowA().locator('[data-draft-add]') },
+    async () => { const b = await rowA().locator('.concierge-group-row-line').boundingBox(); return { x: b.x + b.width - 420, y: b.y - 8, width: 428, height: b.height + 16 } })
+  // 回来以后同一页上另加一组再撤回，看撤回仍好使（回来时首页结果还在才做得了）
+  if (await page.locator('.concierge-group-row').filter({ hasText: 'B篇' }).count()) {
+    const kB = page.locator('.concierge-group-row').filter({ hasText: 'B篇' }).first().locator('[data-draft-add]')
+    await kB.locator('button').first().click(); await kB.locator('button', { hasText: '撤回' }).click({ timeout: 15000 })
+    await kB.locator(OPEN).waitFor({ state: 'detached', timeout: 15000 })
+    p1.r.back.otherGroupAddUndo = { text: norm(await kB.innerText()), draft: await draftGroups() }
+  }
+  // 「已加入」的地址拿到新标签里直接打开（中键、复制地址就是这样）
+  {
+    await resetDraft(); await home()
+    const k = rowA().locator('[data-draft-add]'); await k.locator('button').first().click(); await k.locator(OPEN).waitFor({ timeout: 15000 })
+    const href = await k.locator(OPEN).getAttribute('href'); const gid = (await draftGroups())[0]
+    const p2 = await page.context().newPage(); const keep = page; page = p2
+    await page.goto(rig.base + href); R2.places['首页结果行'].hrefInNewTab = { href, ...(await waitWorkbench(gid)) }
+    await p2.close(); page = keep
+  }
+
+  // 2. 详情页
+  await walkPlace(2, '详情页', async () => {
+    await home(); await page.locator('.concierge-group-row').filter({ hasText: 'C篇' }).locator('.concierge-group-row-title').click()
+    await page.locator('.peek-actions [data-draft-add]').first().waitFor({ timeout: 30000 }); await settle(page, 800)
+    return page.locator('.peek-actions [data-draft-add]').first()
+  }, async () => { const b = await page.locator('.peek-actions').boundingBox(); return { x: b.x - 12, y: b.y - 12, width: Math.min(b.width + 24, 1440 - b.x + 12), height: b.height + 24 } })
+
+  // 3. 相似篇章（首页 B篇「⋯」→ 相似篇章；面板数据照第一轮拦接口塞两条）
+  await page.route('**/api/similar-passages', (r) => r.fulfill({ json: {
+    seedProfile: { groupType: 'reading', topicLabels: [] }, notice: null, poolStats: { totalInPool: 2, returned: 2 },
+    results: [
+      { groupId: 'group-2026-i-reading-c', paperId: 'paper-2026-i', title: 'Reading C', sourceLabel: '2026年新课标Ⅰ卷', score: 1, reasons: [{ kind: 'topic', label: '走查塞的数据' }] },
+      { groupId: 'group-2026-i-reading-d', paperId: 'paper-2026-i', title: 'Reading D', sourceLabel: '2026年新课标Ⅰ卷', score: 1, reasons: [{ kind: 'topic', label: '走查塞的数据' }] },
+    ] } }))
+  await walkPlace(3, '相似篇章', async () => {
+    await home()
+    await page.locator('.concierge-group-row').filter({ hasText: 'B篇' }).first().locator('.concierge-group-row-menu-trigger').click()
+    await page.locator('[role=menuitem]').filter({ hasText: '相似篇章' }).click()
+    await page.locator('.similar-passages-panel .similar-btn[data-draft-add]').first().waitFor({ timeout: 30000 }); await settle(page, 800)
+    return page.locator('.similar-passages-panel .similar-btn[data-draft-add]').first()
+  }, async () => { const b = await page.locator('.similar-rcard').first().boundingBox(); return { x: b.x - 12, y: b.y - 12, width: b.width + 24, height: b.height + 24 } })
+
+  // 4. 整卷预览卷面旁
+  const cardD = () => page.locator('.paper-browse-group-card').filter({ has: page.locator('[data-draft-add]') }).nth(1)
+  const hoverCard = async () => { await cardD().hover({ position: { x: 40, y: 20 } }).catch(() => {}); await sleep(300) }
+  await walkPlace(4, '整卷预览', async () => {
+    await page.goto(rig.base + '/?view=paper-browse&paperId=paper-2026-i')
+    await page.locator('.paper-browse-group-actions').first().waitFor({ state: 'attached', timeout: 60000 }); await settle(page, 2500)
+    await cardD().scrollIntoViewIfNeeded(); await sleep(400)
+    return cardD().locator('[data-draft-add]').first()
+  }, async () => { const c = await cardD().boundingBox(); return { x: c.x + c.width - 200, y: Math.max(0, c.y - 12), width: Math.min(420, 1440 - (c.x + c.width - 200)), height: 120 } }, hoverCard)
+
+  // 5. 键盘（首页 D篇）
+  await resetDraft(); await home()
+  const rowD = page.locator('.concierge-group-row').filter({ hasText: 'D篇' }).first()
+  const kD = rowD.locator('[data-draft-add]'); const lineD = rowD.locator('.concierge-group-row-line')
+  await kD.locator('button').first().evaluate((btn) => {
+    const all = [...document.querySelectorAll('button, a[href], input, textarea, select, [tabindex]:not([tabindex="-1"])')].filter((e) => !e.disabled && e.offsetParent !== null)
+    all[all.indexOf(btn) - 1].focus()
+  })
+  const kb = {}
+  await page.keyboard.press('Tab'); kb.tabToAdd = await focusedText()
+  await page.keyboard.press('Enter'); await kD.locator(OPEN).waitFor({ timeout: 15000 }); await sleep(300)
+  kb.afterEnterAdd = await focusedText()
+  await shotOf(lineD, 'after2-5a-键盘-回车加入-焦点在撤回.png')
+  await page.keyboard.press('Shift+Tab'); kb.shiftTab = await focusedText()
+  kb.focusRing = await page.evaluate(() => { const s = getComputedStyle(document.activeElement); return `${s.outlineWidth} ${s.outlineStyle} ${s.outlineColor} offset ${s.outlineOffset}` })
+  await shotOf(lineD, 'after2-5b-键盘-Shift+Tab到已加入.png')
+  await page.keyboard.press('Tab'); kb.tabBackToUndo = await focusedText()
+  await page.keyboard.press('Enter'); await kD.locator(OPEN).waitFor({ state: 'detached', timeout: 15000 }); await sleep(300)
+  kb.afterEnterUndo = await focusedText(); kb.draftAfterUndo = await draftGroups()
+  // 误触：回车加入，「已加入」一出来马上再按一下回车——落在撤回上，所以是撤回，人还在这一页
+  await page.keyboard.press('Enter'); await kD.locator(OPEN).waitFor({ timeout: 15000 })
+  await page.keyboard.press('Enter'); await kD.locator(OPEN).waitFor({ state: 'detached', timeout: 15000 }).catch(() => {}); await sleep(300)
+  kb.doubleEnter = { url: page.url().replace(rig.base, ''), keyText: norm(await kD.innerText()), focused: await focusedText(), draft: await draftGroups() }
+  // 回车加入 → Shift+Tab → 回车打开草稿卷
+  await page.keyboard.press('Enter'); await kD.locator(OPEN).waitFor({ timeout: 15000 }); await sleep(200)
+  const gidD = (await draftGroups())[0]
+  await page.keyboard.press('Shift+Tab'); await page.keyboard.press('Enter')
+  kb.enterOnLink = await waitWorkbench(gidD)
+  await page.goBack(); await settle(page, 1200)
+  R2.keyboard = kb; log('keyboard', kb)
+
+  // 6. 出错（首页 C篇，接口改成 500）
+  await resetDraft(); await home()
+  const rowC = page.locator('.concierge-group-row').filter({ hasText: 'C篇' }).first(); const kC = rowC.locator('[data-draft-add]')
+  await page.route('**/api/draft-papers/current/items', (r) => r.request().method() === 'POST' ? r.fulfill({ status: 500, contentType: 'application/json', body: '{"error":"boom"}' }) : r.fallback())
+  await kC.locator('button').first().click(); await sleep(800); await page.mouse.move(2, 898)
+  await shotOf(rowC.locator('.concierge-group-row-line'), 'after2-6a-加入失败.png')
+  R2.errors.addFail = { text: norm(await rowC.locator('.concierge-group-row-trail').innerText()), draft: await draftGroups() }
+  await page.unroute('**/api/draft-papers/current/items')
+  await kC.locator('button').first().click(); await kC.locator(OPEN).waitFor({ timeout: 15000 })
+  await page.route('**/api/draft-papers/*/items/*', (r) => r.request().method() === 'DELETE' ? r.fulfill({ status: 500, contentType: 'application/json', body: '{"error":"boom"}' }) : r.fallback())
+  await kC.locator('button', { hasText: '撤回' }).click(); await sleep(800); await page.mouse.move(2, 898)
+  await shotOf(rowC.locator('.concierge-group-row-line'), 'after2-6b-撤回失败.png')
+  R2.errors.undoFail = { text: norm(await rowC.locator('.concierge-group-row-trail').innerText()), draft: await draftGroups(), linkStill: await kC.locator(OPEN).count() }
+  await page.unroute('**/api/draft-papers/*/items/*')
+  log('errors', R2.errors)
+
+  // 7. 390 宽
+  await resetDraft(); await page.setViewportSize({ width: 390, height: 844 }); await home()
+  const k7 = rowA().locator('[data-draft-add]'); await k7.locator('button').first().click(); await k7.locator(OPEN).waitFor({ timeout: 15000 }); await sleep(300); await page.mouse.move(2, 840)
+  await rowA().screenshot({ path: path.join(OUT, 'after2-7-390宽-首页结果行加入后.png') })
+  R2.narrow = { text: norm(await rowA().innerText()), paper: await measurePaper(k7), overflowX: await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth) }
+  Object.assign(record, R2)
+}
+
 const rig = await startRig({ quiet: true })
 const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
 try {
@@ -83,6 +260,9 @@ try {
     return doc ? route.fulfill({ response: res, body: Buffer.from(doc.encodedBytes, 'base64') }) : route.fulfill({ response: res })
   })
   await login(page, rig.base)
+
+  walk: {
+  if (MODE === 'after2') { await walkSecondRound(); break walk }
 
   // ── 1. 首页结果行 ──
   await resetDraft(); await home()
@@ -250,6 +430,7 @@ try {
     await rowA2.locator('[data-draft-add] button', { hasText: '撤回' }).waitFor({ timeout: 15000 }); await sleep(300); await page.mouse.move(2, 840)
     await rowA2.screenshot({ path: path.join(OUT, 'after-7-390宽-首页结果行加入后.png') })
     record.narrow = { text: (await rowA2.innerText()).trim().replace(/\s+/g, ' '), overflowX: await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth) }
+  }
   }
   record.dialogs = dialogs
   record.consoleErrors = errors

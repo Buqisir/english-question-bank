@@ -141,3 +141,88 @@
 ## Owner 2026-11-14 定的
 
 「都照你的，『已加入』恢复能点」。子代理自己拿主意的四处：1「剪入 / 已剪入」换成「加入草稿卷 / 已加入」，可以；2「已加入」要恢复成能点、点了打开草稿卷（待改）；3 等服务器回话再显示「已加入」，可以；4 撤回只给本页刚加的那一条，可以。
+
+## 第二轮：已加入恢复能点
+
+Owner 2026-11-14：「已加入」恢复成能点，点了打开草稿卷工作台；「撤回」照旧在旁边，照旧一步撤掉。
+
+### 改了什么
+
+- `app/src/shared-ui/DraftAddButton.tsx`：纸里的「已加入」从一个 `<span>` 换成 `<a class="eqb-draft-add-open">`，读屏名「已加入，打开草稿卷」，title「打开草稿卷」。
+  - 用链接不用按钮：改之前各处「再点一下」走的是 App 的 `openDraftPaperWorkbench(草稿卷 id, 题组 id)`，它往历史里压一个新地址 `?view=draft-paper&draftPaperId=…&focusGroupId=…`，换整页内容，后退能回来、地址直接打开也能到——是去另一个地址，按语义是链接。
+  - href 就是那个地址：中键、Ctrl/⌘ 点、复制地址都交给浏览器；普通左键 preventDefault，在本页里切过去（和改之前一样，不整页刷新）。
+  - 去哪一份：这一次加的用回执上的草稿卷 id，本来就在的用题组的 `currentDraftPaperId`；并带上 `focusGroupId`，工作台定位到这一组（改之前也带）。
+- `app/src/shared-ui/draftAddContext.ts`：`DraftAddActions` 加 `openDraft`、`draftHref` 两项。
+- `app/src/App.tsx`：把 `openDraftPaperWorkbench` 里拼地址的几行抽成模块里的 `draftPaperWorkbenchHref()`（拼法一字不改），`openDraftPaperWorkbench` 和加入键的 href 共用；Provider 补上两项。
+- `app/src/shared-ui/draftAddButton.css`：纸两边改成 2px、中间不留缝；「已加入」成了和「撤回」一样矮一档的小块（中号、大号纸里 28px，小号纸里 24px，左右 8px，圆角 8px）。平时墨字、透明底、无下划线；悬停垫桌色（`--eqb-color-desk`）；焦点照 button.css：2px `--eqb-color-action` 焦点环，外扩 2px；按下缩 0.97，减少动态效果时不缩。删掉第一轮那条 `:has(.eqb-draft-add-undo)` 右内边距覆盖和小号纸的 padding 覆盖（纸两边统一 2px，用不着了）。链接不是 `.eqb-button`，button.css 里「.fluid-hover-list 里悬停透明」那几条够不着它，不用另盖；纸是白底，在被滑块选中的行里垫桌色照样看得出（after2-1b）。
+- `app/src/qa/mountCanonicalQuestionGroupDetail.tsx`：卷面检查预览页的 Provider 补两项，照实报错（那一页的组永远是加入前那一档，加入必失败，走不到「已加入」）。
+- `walk.mjs`：加 `WALK_MODE=after2`（端口偏移 52），出 `walk-after2.json` 和 after2-*.png。
+
+加入中、撤回中、出错：代码没动，走查里再看了一遍，和第一轮一样（见下）。四处共用这个构件，四处的调用处都没改。
+
+### 键盘：回车加入后焦点落在「撤回」，不落在「已加入」
+
+Owner 建议落在「已加入」，但以不误触跳走为准。agent 定落在「撤回」（第一轮原样），理由：
+
+1. 回车加入后最常见的误触是再按一下回车（以为没按上、或者按两下确认）。落在「撤回」上，多按的那一下是撤回：人还在这一页，键回到「加入草稿卷」、焦点也在它上面，再按一下就加回来，一步来回。落在「已加入」上，多按的那一下是跳去草稿卷：离开了这一页，这一页的「撤回」也跟着没了（DESIGN §5 撤回离开页面就失效），要找回原来的位置得后退。
+2. 走查实测：回车加入，「已加入」一出来马上再按回车 → 地址还是 `/`，键上是「加入草稿卷」，焦点在它上面，草稿卷为空（walk-after2.json keyboard.doubleEnter）。
+3. 「已加入」离得很近：Shift+Tab 一下就到（读屏念「已加入，打开草稿卷，链接」），Tab 一下回撤回。往后接着找题时，从「撤回」按 Tab 直接到下一个控件，不用多过一个。
+4. 拿不到刚加的那一条（回执 itemId 为空，没有撤回）时，焦点落到「已加入」，不掉到页面开头。这时纸里只剩它一个控件。
+
+读屏另播「已加入草稿卷」，照旧。
+
+### 量到的数（rig，1440×900，DPR 2，一次）
+
+| 位置 | 纸（宽×高） | 已加入（宽×高） | 撤回（宽×高） | 字离纸左边 | 已加入字尾到撤回字头 | 悬停底色 |
+|---|---|---|---|---|---|---|
+| 首页结果行（小号） | 101×28 | 55×24 | 42×24 | 10 | 16 | rgb(230,237,240) 桌色 |
+| 详情页（中号） | 101×32 | 55×28 | 42×28 | 10 | 16 | 同上 |
+| 相似篇章（小号） | 101×28 | 55×24 | 42×24 | 10 | 16 | 同上 |
+| 整卷预览（中号，卷面整体放大约 1.1） | 111×35.2 | 60.5×30.8 | 46.2×30.8 | 11 | 17.6 | 同上 |
+
+第一轮（按当时 CSS 算的，没量）：小号纸带撤回宽 95，字离纸左边 8，字尾到撤回字头 12；中号纸宽 99，字离左边 12，字尾到撤回 12。也就是这一轮纸宽 +2～+6px，「已加入」三个字左移或右移 2px，和「撤回」之间多出 4px（为了让「已加入」悬停的那块底左右对称）。平时样子：白底、e1、墨字 rgb(27,43,51)、淡墨「撤回」，没变。
+
+四处每处都走了：加入 → 撤回（草稿卷回到空）→ 再加入 → 点「已加入」：
+
+| 位置 | 点前地址 | 点后地址 | 工作台里有这一组（`[data-draft-tools-group-id]`） | 后退回来 |
+|---|---|---|---|---|
+| 首页结果行 | `/` | `?view=draft-paper&draftPaperId=…&focusGroupId=group-2026-i-reading-a` | 有 | `/`，结果列表还在，A 篇「已加入」，没有撤回 |
+| 详情页 | `?view=detail&groupId=…-c` | `…&focusGroupId=group-2026-i-reading-c` | 有 | 回到详情页，「已加入」，没有撤回 |
+| 相似篇章 | `/` | `…&focusGroupId=group-2026-i-reading-c` | 有 | `/`，相似面板收起了（面板开没开不进地址，原样） |
+| 整卷预览 | `?view=paper-browse&paperId=paper-2026-i` | `?view=draft-paper&paperId=paper-2026-i&draftPaperId=…&focusGroupId=group-2026-i-reading-b` | 有 | 回到整卷预览，「已加入」，没有撤回 |
+
+- 点下到工作台里那一组的工具出来约 14 秒（rig 里卷面排版慢，这是工作台自己的事，地址和页面是一点就换）。
+- 「回来撤回仍可用」：后退回来以后，刚才那一组只剩「已加入」、没有撤回——这是第一轮 Owner 认了的第 4 条（撤回只给本页刚加的那一条，离开页面就失效，DESIGN §5），这一轮没改。回来以后同一页上另加一组（首页 B 篇）再撤回，照常撤掉（草稿卷里只剩 A 篇）。
+- 「已加入」的 href 拿到新标签里直接打开，也到同一份草稿卷、同一组（walk-after2.json 首页结果行.hrefInNewTab）。
+- 整卷预览的地址里多带了一个 `paperId=paper-2026-i`：`openDraftPaperWorkbench` 本来就留着别的参数，改之前也这样，没动。
+
+键盘（首页 D 篇）：Tab 到「加入草稿卷」→ 回车 → 焦点在「撤回」→ Shift+Tab 到「已加入，打开草稿卷」（焦点环 2px solid rgb(41,66,77)，外扩 2px）→ Tab 回「撤回」→ 回车撤回，焦点回「加入草稿卷」→ 回车加入 → Shift+Tab → 回车，打开草稿卷，里面有 D 篇。
+
+出错（接口改成 500「boom」）：加入失败「没加入：boom」、草稿卷为空；撤回失败「已加入 撤回 没撤回：boom」、草稿卷里仍有那一组，「已加入」链接还在。没有浏览器弹框。控制台的 401 / 404 / 409 和第一轮一样，500 是故意造的。
+
+390 宽：首页行加入后「已加入 撤回」放得下，纸 101×28，没有横向滚动。
+
+### 截图
+
+| 位置 | 加入后 | 悬停「已加入」 | 点了以后（草稿卷工作台） |
+|---|---|---|---|
+| 首页结果行 | after2-1a | after2-1b | after2-1c |
+| 详情页 | after2-2a | after2-2b | after2-2c |
+| 相似篇章 | after2-3a | after2-3b | after2-3c |
+| 整卷预览 | after2-4a | after2-4b | after2-4c |
+
+键盘：after2-5a 回车加入后焦点在撤回，after2-5b Shift+Tab 到「已加入」（焦点环）。出错：after2-6a、after2-6b。390 宽：after2-7。
+
+### 检查
+
+- `cd app && npx tsc -b`：通过。
+- eslint（DraftAddButton.tsx、draftAddContext.ts、App.tsx、mountCanonicalQuestionGroupDetail.tsx）：只有 App.tsx 旧有的 set-state-in-effect ×1，没有新问题。
+- 按要求没跑任何 verify-*.mjs、smoke-*.mjs。
+
+### 没验证的和风险
+
+- 只在 Chromium 走；读屏只看了 DOM 上的名字和角色，没用真读屏软件听。
+- 没真点中键 / Ctrl 点，只把 href 拿到新标签里打开过。
+- 线上网络下没走。
+- 第一轮列的那些卡旧字样的 verify / smoke 脚本照旧多半会挂。另：verify-paper-browse.mjs 用正则抠 `openDraftPaperWorkbench` 的函数体，这一轮把拼地址抽了出去，函数体里还剩 pushState 和那几条 set 路由，它查的「清掉 paperBrowseRoute」还在，按读代码看应该能过，没跑。
+- 「撤回中…」时「已加入」仍能点：点了照样去草稿卷，撤回请求照常收尾（状态在 App 上改），去了以后看到的草稿卷可能还没撤掉那一组。没有另加处理，概率小。

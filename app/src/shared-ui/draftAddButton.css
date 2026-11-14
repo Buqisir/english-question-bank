@@ -1,7 +1,9 @@
 /* 加入键（DraftAddButton.tsx）。只用 tokens.css 里的变量，不写字面色值和影子。
  * 加入前、加入中就是 Button（button.css 管样子）；加入后换成下面这块「纸」：
  * 白底、e1、墨字，底、边、字三处一起变（BRAND.md §5.5，DESIGN.md §5「Proposal → Decision」）。
- * 不用薄荷绿、不加侧边线、不打勾动画。高度和同一档的 Button 一样，放在原来那个键的位置上。 */
+ * 不用薄荷绿、不加侧边线、不打勾动画。高度和同一档的 Button 一样，放在原来那个键的位置上。
+ * 第二轮（Owner 2026-11-14）：纸里的「已加入」是个链接，点了打开草稿卷。平时样子和第一轮一样（墨字、无下划线），
+ * 悬停垫桌色、键盘焦点走 2px 石板墨焦点环，照 button.css；它和「撤回」一样是纸里矮一档的小块，纸两边各留 2px。 */
 
 .eqb-draft-add {
   display: inline-flex;
@@ -15,9 +17,10 @@
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
-  gap: var(--eqb-space-1);
+  /* 「已加入」「撤回」两块各自带内边距，中间不再留缝；纸两边 2px，和小块的上下余量一样。 */
+  gap: 0;
   height: 32px;
-  padding: 0 var(--eqb-space-3);
+  padding: 0 2px;
   border-radius: 8px;
   background: var(--eqb-color-paper);
   box-shadow: var(--elev-1);
@@ -29,18 +32,57 @@
 
 .eqb-draft-add-paper[data-size='sm'] {
   height: 28px;
-  padding: 0 var(--eqb-space-2);
 }
 
 .eqb-draft-add-paper[data-size='lg'] {
   height: 36px;
 }
 
-/* 纸里带「撤回」时，右边让给撤回键自己的内边距，字贴着纸边不至于太远。
- * 覆盖：本条 (0,2,0) 盖过上面 .eqb-draft-add-paper 的 padding (0,1,0)；data-size='sm' 那条 (0,2,0) 写在前面，
- * 所以小号带撤回时也是本条的右内边距生效。 */
-.eqb-draft-add-paper:has(.eqb-draft-add-undo) {
-  padding-right: 2px;
+/* 「已加入」：去草稿卷的链接。高度和纸里的「撤回」一样（中号、大号纸里 28px，小号纸里 24px），左右 8px。 */
+.eqb-draft-add-open {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 var(--eqb-space-2);
+  border-radius: 8px;
+  color: var(--eqb-color-text);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast) var(--ease-hover),
+    transform var(--motion-fast) var(--ease-out);
+}
+
+.eqb-draft-add-paper[data-size='sm'] .eqb-draft-add-open {
+  height: 24px;
+}
+
+/* 悬停垫桌色，和 button.css 透明底几种语气的悬停一样；纸是白底，在被滑块选中的行里（滑块也是桌色）照样看得出。
+ * 链接不是 .eqb-button，button.css 里「.fluid-hover-list .eqb-button…:hover 透明」那几条够不着它，不用另盖。 */
+.eqb-draft-add-open:hover {
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
+}
+
+/* 键盘焦点：照 button.css .eqb-button:focus-visible，2px 石板墨焦点环、外扩 2px。 */
+.eqb-draft-add-open:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+.eqb-draft-add-open:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eqb-draft-add-open {
+    transition: background-color var(--motion-fast) var(--ease-hover);
+  }
+
+  .eqb-draft-add-open:active {
+    transform: none;
+  }
 }
 
 /* 撤回键在纸里比纸矮一档（sm 28px）。纸是 28px 时（小号）撤回键收成 24px，免得贴着纸边。

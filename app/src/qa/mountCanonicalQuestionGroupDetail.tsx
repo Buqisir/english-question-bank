@@ -78,6 +78,13 @@ const selectedDetail = {
 const qaDraftAdd: DraftAddActions = {
   add: () => Promise.reject(new Error('这一页是卷面检查用的预览，不接草稿卷')),
   undo: () => Promise.reject(new Error('这一页是卷面检查用的预览，不接草稿卷')),
+  // 这一页的题组永远是「加入草稿卷」那一档（加入必失败），不会出现「已加入」，下面两件也就用不上；照实报错，不假装能去。
+  openDraft: () => {
+    throw new Error('这一页是卷面检查用的预览，不接草稿卷')
+  },
+  draftHref: () => {
+    throw new Error('这一页是卷面检查用的预览，不接草稿卷')
+  },
 }
 
 createRoot(document.getElementById('root')!).render(
