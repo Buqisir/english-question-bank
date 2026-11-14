@@ -143,6 +143,22 @@ async function restoreAnswerSpace(fit, layout, { measure, accept, canMeasure }) 
   return { fit, layout }
 }
 
+const insufficientPages = result => result.pageCount + Math.max(0, result.inspection.length - 1) < 8
+
+export async function checkEconomyFeasibility(html, { render }) {
+  const layout = { profile: economyProfile, fontSizePt: 12, figureLayout: 'natural', answerBoxHeightsMm: normalHeights }
+  try {
+    const result = await render(applyPlannedGroupBreaks(applyStudentProductLayout(html, layout, 'economy8'), []),
+      { inspect: inspectGroups, generatePdf: false })
+    return { insufficient: insufficientPages(result) }
+  } catch (error) {
+    // Overflow cannot prove insufficient content. The selected product's
+    // ordinary search remains responsible for finding a valid layout.
+    if (error.code === 'PAPER_LAYOUT_OVERFLOW') return { insufficient: false }
+    throw error
+  }
+}
+
 export async function planStudentProductPdf(html, { edition, render, economyPageLimit = 8, largeCompletePageLimit = 12, largeNoListeningPageLimit = 10 }) {
   const policy = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0, { economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit })
   const accept = result => acceptableWriting(result, html)
@@ -154,6 +170,8 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
     answerBoxHeightsMm: { application, continuation } })
   let searchedCandidates = 0
   let regularAllOverLimit = true
+  const hasResponse = family => new RegExp(`class="[^"]*\\bcanonical-${family}-response\\b`).test(html)
+  const hasFloatingFigure = hasResponse('application') && /<figure\b[^>]*class="[^"]*\bcanonical-reading-figure\b/.test(html)
   const minimumApplication = html.includes('data-canonical-drawing-area-id=')
     ? applicationDrawingAreaPolicy.minimumApplicationHeightMm : 24
   const measureCandidate = async (source, options, layout) => {
@@ -188,6 +206,15 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
         if (retryError.code !== 'PAPER_LAYOUT_OVERFLOW') throw retryError
         return null
       }
+    }
+    // A group break can add at most one page. Keep papers which can still
+    // reach eight through semantic breaks; a short reading cannot.
+    if (!policy.atMost && searchedCandidates === 1
+      && insufficientPages(natural)) {
+      throw Object.assign(impossible(edition, searchedCandidates, economyPageLimit), {
+        message: '题量不足 8 页，加题后可用', actualPages: natural.pageCount,
+        timing: finishPaginationTiming(timed.timing),
+      })
     }
     // Semantic breaks can redistribute an overfull paper, but cannot justify
     // unbounded trial renders. Reserve room to restore both response boxes.
@@ -228,7 +255,11 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
     const profiles = [
       ['natural', 65, 57], ['float80', 65, 57], ['natural', 65, minimumContinuation],
       ['float80', 65, minimumContinuation], ['float80', 24, minimumContinuation],
-    ]
+    ].map(([figure, application, continuation]) => [
+      hasFloatingFigure ? figure : 'natural',
+      hasResponse('application') ? application : 65,
+      hasResponse('continuation') ? continuation : 57,
+    ]).filter((profile, index, all) => all.findIndex(entry => entry.join('/') === profile.join('/')) === index)
     triedHeights.set(fontSizePt, new Set(profiles.map(([, application, continuation]) => `${application}/${continuation}`)))
     for (const [figureLayout, application, continuation] of profiles) {
       if (html.includes('data-canonical-drawing-area-id=') && application < applicationDrawingAreaPolicy.minimumApplicationHeightMm) continue
@@ -245,6 +276,7 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
     const tierStart = searchedCandidates
     const heights = {}
     for (const family of ['application', 'continuation']) {
+      if (!hasResponse(family)) { heights[family] = normalHeights[family]; continue }
       let low = family === 'application' ? minimumApplication : fontSizePt === 12 ? 27 : 24
       let high = normalHeights[family]
       while (low < high) {
@@ -262,7 +294,7 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
     }
     measuredMinimumHeights.set(fontSizePt, heights)
     if (triedHeights.get(fontSizePt).has(`${heights.application}/${heights.continuation}`)) continue
-    for (const figureLayout of ['natural', 'float80']) {
+    for (const figureLayout of hasFloatingFigure ? ['natural', 'float80'] : ['natural']) {
       const planned = await fitProfile(layoutFor(fontSizePt, figureLayout, heights.application, heights.continuation), tierStart)
       if (planned) return planned
     }

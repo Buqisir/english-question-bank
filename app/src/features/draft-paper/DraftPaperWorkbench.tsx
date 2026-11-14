@@ -10,6 +10,7 @@ import {
   downloadDraftPaperPdf,
   fetchCurrentDraftPaper,
   fetchDraftPaper,
+  fetchDraftEconomyFeasibility,
   fetchDraftPaperPagination,
   fetchDraftPapers,
   fetchReorderSuggestion,
@@ -182,6 +183,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [renderedPaginationKey, setRenderedPaginationKey] = useState('')
   const [paginationStatus, setPaginationStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
   const [paginationError, setPaginationError] = useState('')
+  const [economyAvailability, setEconomyAvailability] = useState<{ key: string; insufficient: boolean } | null>(null)
+  const economyCheckKey = useRef('')
+  const paginationRequests = useRef(new Map<string, ReturnType<typeof fetchDraftPaperPagination>>())
   // print-form (plan.md Must Do 5, PO-1 收账): real, pagination-derived
   // page-break suggestions, refreshed on every pagination fetch (including a
   // print-form toggle alone — see the pagination-fetch effect's dependency
@@ -455,6 +459,34 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     [draftPaper?.items],
   )
   const paginationKey = JSON.stringify([draftGeneration, draftPaper?.id, draftPaper?.title, itemsLayoutKey, edition, draftPaper?.printForm])
+  const contentKey = JSON.stringify([draftGeneration, draftPaper?.id, draftPaper?.title, itemsLayoutKey, draftPaper?.printForm])
+  const economyInsufficient = economyAvailability?.key === contentKey && economyAvailability.insufficient
+  function requestPagination(product: PaperPdfEdition) {
+    const key = JSON.stringify([contentKey, product])
+    let request = paginationRequests.current.get(key)
+    if (!request) {
+      // Only retain the current content; pending callers keep their own promise.
+      for (const oldKey of paginationRequests.current.keys()) {
+        if (JSON.parse(oldKey)[0] !== contentKey) paginationRequests.current.delete(oldKey)
+      }
+      request = fetchDraftPaperPagination(draftPaper!.id, product).catch((error) => {
+        // Transient failures may retry; insufficient content stays cached until the draft changes.
+        if (!(error instanceof Error && error.message.includes('题量不足 8 页'))) paginationRequests.current.delete(key)
+        throw error
+      })
+      paginationRequests.current.set(key, request)
+    }
+    return request
+  }
+  function checkEconomyAvailability() {
+    if (!draftPaper?.items.length || paginationStatus === 'loading' || renderedPaginationKey !== paginationKey
+      || economyCheckKey.current === contentKey) return
+    const key = contentKey
+    economyCheckKey.current = key
+    fetchDraftEconomyFeasibility(draftPaper.id).then(({ insufficient }) => {
+      if (economyCheckKey.current === key) setEconomyAvailability({ key, insufficient })
+    }).catch(() => { /* A failed check cannot prove insufficient content. */ })
+  }
 
   // Debounce layout edits, invalidating in-flight results before the delay.
   useEffect(() => {
@@ -477,11 +509,10 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       resetPagination()
       return
     }
-    const draftPaperId = draftPaper.id
     paginationDebounceRef.current = window.setTimeout(() => {
       if (generation !== draftGenerationRef.current) return
       setPaginationStatus('loading')
-      fetchDraftPaperPagination(draftPaperId, edition)
+      requestPagination(edition)
         .then((result) => {
           if (paginationRequestIdRef.current !== requestId || generation !== draftGenerationRef.current) return
           setPaginatedHtml(result.paginatedHtml)
@@ -495,7 +526,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           setPaginatedHtml('')
           setRenderedPaginationKey(paginationKey)
           setPaginationStatus('error')
-          setPaginationError(edition === 'answerOnly'
+          setPaginationError(error instanceof Error && error.message.includes('题量不足 8 页')
+            ? '题量不足 8 页，加题后可用' : edition === 'answerOnly'
             ? `纯答案版不可用：${error instanceof Error ? error.message : '无法读取同版本源参考答案。'}`
             : describeError('生成分页预览', error))
         })
@@ -1248,6 +1280,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       })
       if (!target) return
       setExportStatus('exporting')
+      await requestPagination(edition)
       const { crossingGroupCount, splitOptionBankCount, fontSizePt } = await downloadDraftPaperPdf(draftPaper.id, edition, target)
       setExportStatus('exported')
       const savedMessage = target.kind === 'download'
@@ -1260,7 +1293,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       setExportStatus('error')
       const fixedLayoutMessage = error instanceof Error
-        && /^(未在有界搜索内找到|大字完整版需要|无法生成指定页数的友好 PDF：|长卷版未找到|长卷版：|定页版需要|10 页友好版需要完整|12 页长卷版需要完整|试卷内容超出排版区域：)/.test(error.message)
+        && /^(题量不足 8 页|未在有界搜索内找到|大字完整版需要|无法生成指定页数的友好 PDF：|长卷版未找到|长卷版：|定页版需要|10 页友好版需要完整|12 页长卷版需要完整|试卷内容超出排版区域：)/.test(error.message)
         ? error.message : null
       setExportError(edition === 'answerOnly'
         ? `纯答案版不可用：${error instanceof Error ? error.message : '无法读取同版本源参考答案。'}`
@@ -1307,6 +1340,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setSpaceStatus('saving')
     setSpaceMessage('')
     try {
+      await requestPagination(edition)
       await saveDraftPaperToMySpace({
         draftPaperId: draftPaper.id,
         edition,
@@ -1352,13 +1386,14 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const versionToggleControl = (
     <label className="draft-product-control">
       <span>PDF 版本</span>
-      <select aria-label="PDF 版本" value={edition} disabled={exportStatus === 'exporting' || spaceDialogOpen} onChange={(event) => {
+      <select aria-label="PDF 版本" value={edition} onFocus={checkEconomyAvailability} disabled={exportStatus === 'exporting' || spaceDialogOpen} onChange={(event) => {
         setEdition(event.target.value as PaperPdfEdition)
         setExportError('')
         setExportSuccessMessage('')
       }}>
-        {PAPER_PDF_EDITIONS.map((value) => <option key={value} value={value}>{PAPER_PDF_PRODUCTS[value]}</option>)}
+        {PAPER_PDF_EDITIONS.map((value) => <option key={value} value={value} disabled={value === 'economy8' && economyInsufficient}>{PAPER_PDF_PRODUCTS[value]}</option>)}
       </select>
+      {economyInsufficient && <span role="status">题量不足 8 页，加题后可用</span>}
     </label>
   )
 
@@ -1399,7 +1434,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           <button
             type="button"
             role="menuitem"
-            disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'}
+            disabled={draftPaper.items.length === 0 || exportStatus === 'exporting' || (edition === 'economy8' && economyInsufficient)}
             onClick={() => {
               setExportMenuOpen(false)
               void exportPdf()
@@ -1411,7 +1446,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           <button
             type="button"
             role="menuitem"
-            disabled={draftPaper.items.length === 0 || exportStatus === 'exporting'}
+            disabled={draftPaper.items.length === 0 || exportStatus === 'exporting' || (edition === 'economy8' && economyInsufficient)}
             onClick={() => {
               setExportMenuOpen(false)
               void exportPdf('save-as')
@@ -1422,7 +1457,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           <button
             type="button"
             role="menuitem"
-            disabled={draftPaper.items.length === 0 || spaceStatus === 'saving'}
+            disabled={draftPaper.items.length === 0 || spaceStatus === 'saving' || (edition === 'economy8' && economyInsufficient)}
             onClick={() => {
               setExportMenuOpen(false)
               // The menu item unmounts; restore focus to the persistent trigger.
@@ -1638,7 +1673,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 </>
               ) : (
                 <div className="draft-a4-empty">
-                  {renderedPaginationKey === paginationKey && paginationStatus === 'error' ? paginationError || '分页预览生成失败，请稍后重试。' : '正在生成分页预览…'}
+                  {edition === 'economy8' && economyInsufficient ? '题量不足 8 页，加题后可用' : renderedPaginationKey === paginationKey && paginationStatus === 'error' ? paginationError || '分页预览生成失败，请稍后重试。' : '正在生成分页预览…'}
                 </div>
               )}
             </div>
