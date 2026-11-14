@@ -165,7 +165,7 @@ if (process.env.NO_SHOT) process.exit(0)
 const { chromium } = createRequire(path.join(ROOT, 'app/package.json'))('playwright')
 const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
 const uri = (s) => `data:image/svg+xml;base64,${Buffer.from(s).toString('base64')}`
-const cur = readFileSync(path.join(BRAND, 'mascot/states/half-not-found.svg'), 'utf8')
+const cur = readFileSync(path.join(BRAND, 'image-review-2026-11-14/half-final/state-not-found.svg'), 'utf8')
 const sit = readFileSync(path.join(BRAND, 'mascot/otter-sit.svg'), 'utf8')
 const CSS = 'body{margin:0;padding:28px;background:#F2F5F8;font:15px/1.5 system-ui,sans-serif;color:#1B2B33}h1{font-size:20px;margin:0 0 6px}p{margin:0 0 16px;color:#5A6C75}.g{display:flex;gap:16px;align-items:flex-start}figure{margin:0;background:#fff;border-radius:8px;padding:14px}figcaption{padding-top:10px}.big{display:flex;align-items:flex-end;min-height:580px}'
 const cell = (sv, label) => `<figure style="width:400px"><div class="big"><img src="${uri(sv)}" width="400"></div><div class="g" style="gap:20px;margin-top:14px;align-items:flex-end"><img src="${uri(sv)}" width="110"><img src="${uri(sv)}" width="64"></div><figcaption>${label} · 400 / 110 / 64 像素宽</figcaption></figure>`

@@ -1,6 +1,6 @@
 // 半身像「没找到」摊手第四轮：照第六批草图 SA-shrug 的手臂结构描矢量（g、变体 h），审过以后以 h 为准改出 i；
 // i 被打回以后照第二组草图 SC-shrug 忠实描出 sc（手臂路径由 scripts/brand/half-shrug-sc-trace.py 从 SC 原图描出，贴在下面）。出对比图和叠图。
-// 底子是 mascot/states/half-not-found.svg：头、脸、躯干路径、水面原样不动，这个脚本只读不写它（i 的手形盖住并修顺了两侧一段身体外沿，身体路径本身没改）。
+// 底子是旧合爪版（2026-11-14 第 119 条以前的 mascot/states/half-not-found.svg，留档在 image-review-2026-11-14/half-final/state-not-found.svg，两者路径一样）：头、脸、躯干路径、水面原样不动，这个脚本只读不写它（i 的手形盖住并修顺了两侧一段身体外沿，身体路径本身没改）。
 // 旧合爪不是单独的形状，是胸口浅色和下腹浅色之间露出来的一段身体色；照第三轮的办法先补一块浅雾薄荷（belly-fill）把肚皮补成一整块，
 // 再把两只前臂连爪画在上面（<g id="paws">，每只一整块填充形状）。
 // SA 的手臂结构：上臂贴着身体两侧往下，不另画肩膀，就是身体外沿那条身体色；肘弯在下腹高度，在身体外沿上略微鼓出一点；
@@ -22,11 +22,11 @@ mkdirSync(OUT, { recursive: true })
 const MINT = '#72BFA4'
 const PALE = '#DDF1E8'
 
-const base = readFileSync(path.join(BRAND, 'mascot/states/half-not-found.svg'), 'utf8')
+const base = readFileSync(path.join(BRAND, 'image-review-2026-11-14/half-final/state-not-found.svg'), 'utf8')
 const VB = 'viewBox="294 12 494 715"'
 const CLIP = '<rect x="294" y="12" width="494" height="679.5"/>'
 const slot = '<g id="held"></g>'
-if (!base.includes(VB) || !base.includes(CLIP) || !base.includes(slot)) throw new Error('mascot/states/half-not-found.svg 变了，先核对再出图')
+if (!base.includes(VB) || !base.includes(CLIP) || !base.includes(slot)) throw new Error('旧合爪底子 half-final/state-not-found.svg 变了，先核对再出图')
 
 // 补缝：和第三轮同一块，盖住旧合爪那段身体色，两边接回原肚皮的边，不碰两侧身体。
 const bellyFill = `<path id="belly-fill" d="M514 340C515 400 501 462 489 490L479 525H686.2C685 517.9 683.5 511 681.7 504.3C679 468 674.5 420 673.5 366C650 352 560 346 514 340Z" fill="${PALE}"/>`
@@ -139,7 +139,7 @@ const uri = (sv) => `data:image/svg+xml;base64,${Buffer.from(sv).toString('base6
 const SC_PNG = process.env.SC_PNG && existsSync(process.env.SC_PNG) ? process.env.SC_PNG : path.join(REV, 'sketches-batch6/SC-shrug.jpg')
 const scImg = `data:image/${SC_PNG.endsWith('.png') ? 'png' : 'jpeg'};base64,${readFileSync(SC_PNG).toString('base64')}`
 const svgOf = (k) => readFileSync(path.join(OUT, `shrug-${k}.svg`), 'utf8')
-const cur = readFileSync(path.join(BRAND, 'mascot/states/half-not-found.svg'), 'utf8')
+const cur = readFileSync(path.join(BRAND, 'image-review-2026-11-14/half-final/state-not-found.svg'), 'utf8')
 
 // compare.png：四格。现在的合爪、SC 草图、sc、sc2；每格 300 像素宽大图，除草图外下面再放 110、64 像素宽各一张。
 const CSS = 'body{margin:0;padding:28px;background:#F2F5F8;font:15px/1.5 system-ui,sans-serif;color:#1B2B33}h1{font-size:20px;margin:0 0 6px}p{margin:0 0 16px;color:#5A6C75}.g{display:flex;gap:16px;align-items:flex-start}figure{margin:0;background:#fff;border-radius:8px;padding:14px;width:300px}figcaption{padding-top:10px;font-size:14px}.big{display:flex;align-items:flex-end;justify-content:center;height:440px}.sm{display:flex;gap:20px;margin-top:14px;align-items:flex-end;height:170px}'
