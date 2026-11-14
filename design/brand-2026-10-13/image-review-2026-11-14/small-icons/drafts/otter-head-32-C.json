@@ -1,0 +1,143 @@
+{
+ "status": "对比稿 · 提案 · 单一来源",
+ "draft": "C · 眼睛 2×3 + F 脸斑",
+ "why": "眼睛只往上加一行（同眼睛取证备选 c）；脸斑同 A",
+ "source": {
+  "svg": "design/brand-2026-10-13/mascot/small/otter-head-32.svg",
+  "png": "design/brand-2026-10-13/mascot/small/otter-head-32.png"
+ },
+ "pngSize": [
+  32,
+  32
+ ],
+ "svgSize": [
+  32,
+  32
+ ],
+ "changes": [
+  {
+   "x": 9,
+   "y": 10,
+   "old": "#72BFA4",
+   "new": "#191D18"
+  },
+  {
+   "x": 10,
+   "y": 10,
+   "old": "#72BFA4",
+   "new": "#191D18"
+  },
+  {
+   "x": 21,
+   "y": 10,
+   "old": "#72BFA4",
+   "new": "#191D18"
+  },
+  {
+   "x": 22,
+   "y": 10,
+   "old": "#72BFA4",
+   "new": "#191D18"
+  },
+  {
+   "x": 15,
+   "y": 20,
+   "old": "#F2FAF6",
+   "new": "#72BFA4"
+  },
+  {
+   "x": 16,
+   "y": 20,
+   "old": "#F2FAF6",
+   "new": "#72BFA4"
+  },
+  {
+   "x": 7,
+   "y": 21,
+   "old": "#F2FAF6",
+   "new": "#72BFA4"
+  },
+  {
+   "x": 24,
+   "y": 21,
+   "old": "#F2FAF6",
+   "new": "#72BFA4"
+  }
+ ],
+ "clearanceBefore": {
+  "eyes": [
+   {
+    "cells": 4,
+    "box": [
+     2,
+     2
+    ],
+    "at": [
+     9,
+     11
+    ],
+    "toNose": 1,
+    "toMuzzle": 1,
+    "muzzleSharesEdge": false,
+    "toOutline": 4,
+    "toWhisker": 3
+   },
+   {
+    "cells": 4,
+    "box": [
+     2,
+     2
+    ],
+    "at": [
+     21,
+     11
+    ],
+    "toNose": 1,
+    "toMuzzle": 1,
+    "muzzleSharesEdge": false,
+    "toOutline": 4,
+    "toWhisker": 3
+   }
+  ],
+  "muzzleCells": 122,
+  "whiskerDots": 6
+ },
+ "clearanceAfter": {
+  "eyes": [
+   {
+    "cells": 6,
+    "box": [
+     2,
+     3
+    ],
+    "at": [
+     9,
+     10
+    ],
+    "toNose": 1,
+    "toMuzzle": 1,
+    "muzzleSharesEdge": false,
+    "toOutline": 3,
+    "toWhisker": 3
+   },
+   {
+    "cells": 6,
+    "box": [
+     2,
+     3
+    ],
+    "at": [
+     21,
+     10
+    ],
+    "toNose": 1,
+    "toMuzzle": 1,
+    "muzzleSharesEdge": false,
+    "toOutline": 3,
+    "toWhisker": 3
+   }
+  ],
+  "muzzleCells": 118,
+  "whiskerDots": 6
+ }
+}

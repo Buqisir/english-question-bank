@@ -1,0 +1,165 @@
+{
+ "status": "对比稿 · 提案 · 单一来源",
+ "draft": "A0 · 只改眼睛 3×3（参照）",
+ "why": "只改眼睛，脸斑不动，用来对照 F 脸斑在小尺寸上值不值",
+ "source": {
+  "svg": "design/brand-2026-10-13/logo/mint/mark-32.svg",
+  "png": "design/brand-2026-10-13/logo/mint/mark-32.png"
+ },
+ "pngSize": [
+  32,
+  20
+ ],
+ "svgSize": [
+  32,
+  32
+ ],
+ "changes": [
+  {
+   "x": 8,
+   "y": 7,
+   "old": "#72BFA4",
+   "new": "#191D18",
+   "svgY": 13
+  },
+  {
+   "x": 9,
+   "y": 7,
+   "old": "#72BFA4",
+   "new": "#191D18",
+   "svgY": 13
+  },
+  {
+   "x": 10,
+   "y": 7,
+   "old": "#72BFA4",
+   "new": "#191D18",
+   "svgY": 13
+  },
+  {
+   "x": 8,
+   "y": 8,
+   "old": "#72BFA4",
+   "new": "#191D18",
+   "svgY": 14
+  },
+  {
+   "x": 8,
+   "y": 9,
+   "old": "#72BFA4",
+   "new": "#191D18",
+   "svgY": 15
+  },
+  {
+   "x": 21,
+   "y": 7,
+   "old": "#72BFA4",
+   "new": "#191D18",
+   "svgY": 13
+  },
+  {
+   "x": 22,
+   "y": 7,
+   "old": "#72BFA4",
+   "new": "#191D18",
+   "svgY": 13
+  },
+  {
+   "x": 23,
+   "y": 7,
+   "old": "#72BFA4",
+   "new": "#191D18",
+   "svgY": 13
+  },
+  {
+   "x": 23,
+   "y": 8,
+   "old": "#72BFA4",
+   "new": "#191D18",
+   "svgY": 14
+  },
+  {
+   "x": 23,
+   "y": 9,
+   "old": "#72BFA4",
+   "new": "#191D18",
+   "svgY": 15
+  }
+ ],
+ "clearanceBefore": {
+  "eyes": [
+   {
+    "cells": 4,
+    "box": [
+     2,
+     2
+    ],
+    "at": [
+     9,
+     8
+    ],
+    "toNose": 1,
+    "toMuzzle": 1,
+    "muzzleSharesEdge": false,
+    "toOutline": 4,
+    "toWhisker": 3
+   },
+   {
+    "cells": 4,
+    "box": [
+     2,
+     2
+    ],
+    "at": [
+     21,
+     8
+    ],
+    "toNose": 1,
+    "toMuzzle": 1,
+    "muzzleSharesEdge": false,
+    "toOutline": 4,
+    "toWhisker": 3
+   }
+  ],
+  "muzzleCells": 122,
+  "whiskerDots": 6
+ },
+ "clearanceAfter": {
+  "eyes": [
+   {
+    "cells": 9,
+    "box": [
+     3,
+     3
+    ],
+    "at": [
+     8,
+     7
+    ],
+    "toNose": 1,
+    "toMuzzle": 1,
+    "muzzleSharesEdge": false,
+    "toOutline": 3,
+    "toWhisker": 3
+   },
+   {
+    "cells": 9,
+    "box": [
+     3,
+     3
+    ],
+    "at": [
+     21,
+     7
+    ],
+    "toNose": 1,
+    "toMuzzle": 1,
+    "muzzleSharesEdge": false,
+    "toOutline": 3,
+    "toWhisker": 3
+   }
+  ],
+  "muzzleCells": 122,
+  "whiskerDots": 6
+ }
+}
