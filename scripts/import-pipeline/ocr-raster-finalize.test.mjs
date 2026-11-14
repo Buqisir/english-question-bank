@@ -33,6 +33,7 @@ test('OCR finalize rejects a digest-closed raster mismatch with 422 through the 
     const evidencePath = 'materialization/nck1-ocr-source-evidence-v1.json'
     const originalEvidenceBytes = readFileSync(path.join(staging, evidencePath))
     const validManifest = structuredClone(manifest)
+    const replayedRaster = structuredClone(evidence.documents[0].pages[0].raster)
     evidence.documents[0].pages[0].raster.sha256 = sha256(new TextEncoder().encode('different pixels'))
     evidence.evidenceDigest = nck1OcrEvidenceDigest(evidence)
     writeFileSync(path.join(staging, evidencePath), JSON.stringify(evidence))
@@ -56,6 +57,10 @@ test('OCR finalize rejects a digest-closed raster mismatch with 422 through the 
     assert(handled)
     assert.equal(result.status, 422, JSON.stringify(result.body))
     assert.equal(result.body.code, 'NCK1_OCR_PAGE_COVERAGE_INCOMPLETE')
+    assert.deepEqual(result.body.details.expected, evidence.documents[0].pages[0].raster)
+    assert.deepEqual(result.body.details.actual, replayedRaster)
+    assert.match(result.body.details.toolchain.pdftoppm, /^pdftoppm version /)
+    assert.match(result.body.details.toolchain.magick, /^Version: ImageMagick /)
     assert.match(result.body.error, /OCR page raster no longer replays from the immutable source/)
     assert.match(result.body.error, /documents\.question-source-1\.pages\.1\.raster/)
     assert.equal(store.getRevision(created.revision.id).state, 'uploading')

@@ -147,7 +147,7 @@ export function nck1OcrEvidenceDigest(evidence) {
 const pdfRasterMemo = new Map()
 const PDF_RASTER_MEMO_LIMIT = 256
 
-function pdfRasterKey(bytes, page) {
+function pdfRasterToolchain() {
   const toolchain = []
   for (const [command, args] of [['pdftoppm', ['-v']], ['magick', ['-version']]]) {
     const result = spawnSync(command, args, { encoding: 'utf8', timeout: 5000, maxBuffer: 64 * 1024 })
@@ -158,6 +158,12 @@ function pdfRasterKey(bytes, page) {
     if (!version) return null
     toolchain.push(version)
   }
+  return toolchain
+}
+
+function pdfRasterKey(bytes, page) {
+  const toolchain = pdfRasterToolchain()
+  if (!toolchain) return null
   return digestJson({
     recipe: 'ocr-pdf-page-raster-v1',
     pdf: sha256(bytes), page, density: RASTER_DENSITY, region: FULL_PAGE,
@@ -437,13 +443,20 @@ function inspectEvidencePage({
     !exactKeys(evidencePage.raster, ['recipe', 'sha256', 'pixelWidth', 'pixelHeight'])
     || stableStringify(evidencePage.raster) !== stableStringify(expectedRaster)
   ) {
-    issues.push(issue(
+    const toolchain = pdfRasterToolchain()
+    issues.push({ ...issue(
       'NCK1_OCR_PAGE_COVERAGE_INCOMPLETE',
       `documents.${document.documentId}.pages.${page}.raster`,
       'OCR page raster no longer replays from the immutable source',
       document.documentId,
       page,
-    ))
+    ), details: {
+      expected: Object.fromEntries(['recipe', 'sha256', 'pixelWidth', 'pixelHeight']
+        .map(key => [key, evidencePage.raster?.[key] ?? null])),
+      actual: expectedRaster,
+      toolchain: Object.fromEntries(['pdftoppm', 'magick']
+        .map((name, index) => [name, toolchain?.[index]?.split(/\r?\n/)[0] ?? null])),
+    } })
   }
   if (!Array.isArray(evidencePage.regions) || evidencePage.regions.length === 0
     || !Array.isArray(evidencePage.observations)

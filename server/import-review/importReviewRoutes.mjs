@@ -42,6 +42,7 @@ function sendError(response, context, error) {
   context.sendJson(response, Number(error?.status || 500), {
     error: error instanceof Error ? error.message : String(error),
     code: error?.code || 'IMPORT_REVIEW_FAILED',
+    ...(error?.details ? { details: error.details } : {}),
     ...(error?.reasonCode ? { reasonCode: error.reasonCode } : {}),
     ...(error?.compatibility ? { compatibility: error.compatibility } : {}),
     ...(error?.metrics ? { metrics: error.metrics } : {}),

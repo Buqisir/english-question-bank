@@ -69,6 +69,113 @@ import { makeClozeGrammarCanonicalReferenceFixture } from '../test-fixtures/pape
 import {
   seedConfirmedCanonicalDraftFixture,
 } from './lib/canonicalDraftE2eFixture.mjs'
+import { makeSyntheticNck1DocxFixture } from '../test-fixtures/paper-import/nck1-docx-materialization-v1/fixture.mjs'
+import { produceNck1DocxMaterialization } from '../server/paper-import/nck1DocxMaterializationProducer.mjs'
+import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
+import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
+import { buildNck1CompatibilityPaperAsset } from '../server/import-review/revisionProjection.mjs'
+
+async function assertMaterializedDraftRoutes() {
+  const temp = mkdtempSync(path.join(tmpdir(), 'eqb-materialized-draft-'))
+  const source = makeSyntheticNck1DocxFixture()
+  const produced = produceNck1DocxMaterialization({ paperId: source.paperId, documents: source.sourceDocuments })
+  const input = { kind: 'nck1-source-materialization',
+    materializationBytes: new TextEncoder().encode(JSON.stringify(produced.materialization)),
+    documents: source.sourceDocuments.map(({ documentId, bytes }) => ({ documentId, bytes })), media: [] }
+  const { candidate } = importCanonicalCandidate(input)
+  const { request } = materializeNck1CanonicalRequest(input, { schemaVersion: 'teacher-confirmation-v1',
+    candidateDigest: candidate.candidateDigest, sourceDigest: candidate.source.sha256, confirmed: true })
+  try {
+    await withActualDraftApi({ fixtureRoot: temp, paperAssetsRoot: path.join(temp, 'assets'), groupIds: [],
+      prepareBank(bankDbPath) {
+        cpSync('test-fixtures/paper-canonical/publications/ticket-32-remaining-v1/store/paper-2026-i',
+          path.join(temp, 'assets', 'paper-2026-i'), { recursive: true })
+        const db = new DatabaseSync(bankDbPath)
+        try {
+          const result = publishCanonicalPaperPublication({ rootDir: path.join(temp, 'assets'), db, request, sourceAssetVersion: 1 })
+          assert.equal(result.status, 'published', JSON.stringify(result))
+          const latest = path.join(temp, 'assets', source.paperId, 'latest')
+          mkdirSync(latest, { recursive: true })
+          const compat = buildNck1CompatibilityPaperAsset({
+            config: { paperId: source.paperId, provenance: { paperName: 'Materialized', source: 'E2E' } }, materialization: produced.materialization, sourceAssetVersion: 1 })
+          for (const q of Object.values(compat.content.questions)) if (!q.stem) q.stem = String(q.questionNo)
+          writeFileSync(path.join(latest, 'paper-asset.json'), JSON.stringify(compat))
+          db.prepare("INSERT INTO sources (id, source_type, year, region, paper_name, section, file_ref) VALUES (?, 'self_made', 2026, 'E2E', 'Materialized', '整卷', ?)").run(
+            source.paperId, `paper-assets/${source.paperId}/versions/v1/paper-asset.json`)
+          const runtime = createCanonicalConsumerRuntime({ rootDir: path.join(temp, 'assets'), db })
+          const consumption = runtime.load({ paperId: source.paperId, consumerId: 'print_pdf' })
+          for (const group of produced.materialization.groups) {
+            const detail = mixedDraftDetail(consumption, group.groupId)
+            db.prepare("INSERT INTO passages (id, source_id, title, material_text, difficulty) VALUES (?, ?, ?, 'Canonical source', 'medium')").run(group.groupId, source.paperId, group.groupId)
+            db.prepare("INSERT INTO question_groups (id, passage_id, group_type, title, default_score, difficulty) VALUES (?, ?, ?, ?, 1, 'medium')").run(group.groupId, group.groupId, detail.groupType === 'sevenChoices' ? 'seven_choices' : detail.groupType, group.groupId)
+            for (const [index, q] of detail.questions.entries()) {
+              db.prepare("INSERT INTO questions (id, group_id, question_no, question_type, stem, answer, display_order, difficulty) VALUES (?, ?, ?, 'Canonical', ?, 'word', ?, 'medium')").run(q.id, group.groupId, q.questionNo, q.stem || q.id, index + 1)
+              for (const o of q.options) db.prepare("INSERT INTO options (id, question_id, label, content, display_order) VALUES (?, ?, ?, ?, 1)").run(`${q.id}-${o.label}`, q.id, o.label, o.content)
+            }
+          }
+        } finally { db.close() }
+      },
+    }, async ({ baseUrl, draftPaperId, bankDbPath, userDbPath }) => {
+      for (const family of ['grammar-fill', 'application-writing', 'reading']) {
+        const group = produced.materialization.groups.find(g => g.family === family)
+        const response = await fetchPublic(`${baseUrl}/api/draft-papers/current/items`, {
+          method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ groupId: group.groupId }) })
+        const body = await response.text()
+        assert.equal(response.ok, true, `${family} add: ${response.status} ${body}`)
+        const get = await fetchPublic(`${baseUrl}/api/draft-papers/${draftPaperId}`)
+        assert.equal(get.status, 200, `${family} GET: ${await get.text()}`)
+      }
+      const preview = await fetch(`${baseUrl}/api/draft-papers/${draftPaperId}/print-html?edition=largeNoListening`, { signal: AbortSignal.timeout(90_000) })
+      const html = await preview.text()
+      assert.equal(preview.status, 200, html)
+      assert(html.includes('data-canonical-blank-id='), 'grammar blanks remain canonical')
+      assert(html.includes('Write a short notice for the reading club.'), 'application prompt survives')
+      writeFileSync('/tmp/eqb-materialized-draft-print.html', html)
+      if (process.argv.includes('--materialization-draft-only')) {
+        const { chromium } = await import('../app/node_modules/playwright/index.mjs')
+        const browser = await chromium.launch({ headless: true, channel: 'chromium' })
+        try {
+          const page = await browser.newPage({ viewport: { width: 1100, height: 1600 } })
+          await page.setContent(html, { waitUntil: 'networkidle' })
+          await page.screenshot({ path: '/tmp/eqb-materialized-draft-print.png', fullPage: true })
+          await page.pdf({ path: '/tmp/eqb-materialized-draft.pdf', format: 'A4' })
+        } finally { await browser.close() }
+      }
+      for (const groupId of ['group-2026-i-grammar-fill', 'group-2026-i-writing-application']) {
+        const response = await fetchPublic(`${baseUrl}/api/draft-papers/current/items`, {
+          method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ groupId }) })
+        assert.equal(response.ok, true, `legacy ${groupId}: ${await response.text()}`)
+      }
+      let resolutions = 0
+      const failingStore = createDraftPaperStore({
+        groupTypeLabels: { reading: '阅读理解' },
+        openDatabase: () => new DatabaseSync(bankDbPath),
+        openUserDatabase: () => new DatabaseSync(userDbPath),
+        getQuestionGroupDetail: id => ({ id, groupType: 'reading', defaultScore: 1, questions: [] }),
+        selectQuestionGroupCards: (db, _where, ids) => ids.map(id => db.prepare(
+          'SELECT id, group_type AS groupType, default_score AS defaultScore FROM question_groups WHERE id = ?').get(id)),
+        isGroupPrintReady: () => ({ ok: true }),
+        resolveCanonicalConsumption: () => {
+          if (++resolutions === 2) throw new Error('injected print render failure')
+          return {}
+        },
+      })
+      const before = new DatabaseSync(userDbPath)
+      const snapshot = () => before.prepare('SELECT * FROM draft_paper_items ORDER BY id').all()
+      const original = snapshot()
+      assert.throws(() => failingStore.addGroupToCurrentDraftPaper('local',
+        produced.materialization.groups.filter(g => g.family === 'reading')[1].groupId), /injected print render failure/)
+      assert.deepEqual(snapshot(), original, 'render failure rolls back the addition and ordering')
+      before.close()
+    })
+    console.log('PASS materialized grammar, application and reading draft HTTP routes')
+  } finally { rmSync(temp, { recursive: true, force: true }) }
+}
+
+if (process.argv.includes('--materialization-draft-only')) {
+  await assertMaterializedDraftRoutes()
+  process.exit(0)
+}
 
 const fixture = makeClozeGrammarCanonicalReferenceFixture()
 const compilation = compileCanonicalPaper(fixture.request)
@@ -562,6 +669,7 @@ async function withActualDraftApi({
   paperAssetsRoot,
   canonicalReference,
   groupIds,
+  prepareBank,
 }, callback) {
   mkdirSync(fixtureRoot, { recursive: true })
   const bankDbPath = path.join(fixtureRoot, 'question-bank.sqlite')
@@ -590,7 +698,8 @@ async function withActualDraftApi({
   child.stderr.on('data', (chunk) => { child.output += chunk.toString() })
   try {
     await waitForHttp(`${baseUrl}/api/health`, child)
-    setCanonicalReference(bankDbPath, canonicalReference)
+    if (!prepareBank) setCanonicalReference(bankDbPath, canonicalReference)
+    prepareBank?.(bankDbPath)
     const draft = seedDraftRows(userDbPath, groupIds)
     await callback({ baseUrl, bankDbPath, userDbPath, ...draft })
   } finally {
@@ -2531,6 +2640,7 @@ try {
   })
   await assertTicket35CompletePublication({ rootDir })
   assertMixedSourceDraftCanonicalComposition()
+  await assertMaterializedDraftRoutes()
   assertDocxSourcedGrammarFillPrintChromeSkipsJsonDigest()
   legacyDb.close()
   const mismatchedBlankJoin = structuredClone(complete)

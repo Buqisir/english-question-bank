@@ -35,7 +35,13 @@ export function loadCanonicalSourceAssetRepresentation({
   versionDir,
   reject,
   label,
+  allowMaterialization = false,
 }) {
+  // These consumers already have a validated Canonical projection. Materialized
+  // sources have no legacy Paper Asset chrome or page-break hints to supplement it.
+  if (allowMaterialization && sourceAsset?.schemaVersion?.startsWith('nck1-source-materialization-v')) {
+    return { asset: sourceAsset, digest: null, kind: 'source_materialization' }
+  }
   if (Array.isArray(sourceAsset?.content?.blocks)) {
     return { asset: sourceAsset, digest: null, kind: 'source_asset' }
   }
@@ -70,6 +76,7 @@ export function loadPublicationBoundSourceAssetRepresentation({
   publicationSource,
   reject,
   label,
+  allowMaterialization = false,
 }) {
   const isDocx = publicationSource?.mediaType === docxMediaType
   const sealedRelativePath = isDocx
@@ -97,5 +104,6 @@ export function loadPublicationBoundSourceAssetRepresentation({
     versionDir,
     reject,
     label,
+    allowMaterialization,
   })
 }
