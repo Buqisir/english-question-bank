@@ -324,15 +324,31 @@
     white-space: normal;
   }
 
-  /* Override PaperSurface's inline Print-sized tracks: zoom can shrink the
-   * Screen content box, so listening's equal thirds must fit that box.
+  /* Preserve Canonical's equal thirds when the row fits. Only its Print-only
+   * one_column fallback needs content-sized tracks on Screen.
    * Keep specificity low so the mobile single-column rule still wins. */
   .paper-browse-content :where(.canonical-listening-surface) .ps-option-list--three_columns {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    /* Override Canonical's inline gap: 0 so adjacent options stay distinct. */
+    column-gap: 1em !important;
   }
 
   .paper-browse-content :where(.canonical-listening-surface) .ps-option-list--one_column {
-    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-columns: repeat(3, auto) !important;
+    /* Override Canonical's inline gap: 0 so adjacent options stay distinct. */
+    column-gap: 1em !important;
+  }
+
+  /* Override one_column's block flow and inline Print hanging indent;
+   * flex keeps the label intact and continuation lines under the text. */
+  .paper-browse-content .canonical-listening-surface .ps-option {
+    display: flex;
+    padding-left: 0 !important;
+    text-indent: 0 !important;
+  }
+
+  .paper-browse-content .canonical-listening-surface .ps-option-label {
+    margin-right: 0;
   }
 
   .paper-browse-content :is(.ps-option, .ps-option-text, .ps-question-options-inline-item) {

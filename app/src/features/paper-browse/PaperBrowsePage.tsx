@@ -2139,10 +2139,13 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       const node = shellRef.current
       if (!node) return
       // Reserve the docked layout even while closed: toggling only moves the paper.
-      const canDockLecture = node.clientWidth >= DOCKED_LECTURE_MIN_WIDTH
+      // Match CSS's viewport breakpoint even when the scrollbar narrows the shell.
+      const canDockLecture = window.matchMedia(`(min-width: ${DOCKED_LECTURE_MIN_WIDTH}px)`).matches
       const railWidth = canDockLecture ? LECTURE_RAIL_WIDTH : RAIL_WIDTH
       const lectureColumn = canDockLecture ? GRID_GAP + LECTURE_PANEL_WIDTH : 0
-      const contentColumnWidth = node.clientWidth - railWidth - GRID_GAP - lectureColumn
+      const shellStyle = getComputedStyle(node)
+      const shellPadding = parseFloat(shellStyle.paddingLeft) + parseFloat(shellStyle.paddingRight)
+      const contentColumnWidth = node.clientWidth - shellPadding - railWidth - GRID_GAP - lectureColumn
       const gutterReserve = canDockLecture ? 0 : GUTTER_WIDTH
       const available = contentColumnWidth - gutterReserve
       const raw = Math.max(1, Math.min(1.35, available / PAPER_BASE_WIDTH))
