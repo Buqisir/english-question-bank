@@ -55,7 +55,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const BRAND = path.join(ROOT, 'design/brand-2026-10-13')
 const argRound = process.argv.indexOf('--round')
 const ROUND = Number(argRound > 0 ? process.argv[argRound + 1] : process.env.HALF_ROUND || 2)
-if (![1, 2, 3].includes(ROUND)) throw new Error('--round 只能是 1、2 或 3')
+if (![1, 2, 3, 4].includes(ROUND)) throw new Error('--round 只能是 1、2、3 或 4')
 const IS2 = ROUND === 2
 const OUT = process.env.HALF_OUT ? path.resolve(process.env.HALF_OUT) : path.join(BRAND, `image-review-2026-11-14/half-round${ROUND}`)
 const SKETCH = path.join(BRAND, 'image-review-2026-11-14/sketches-batch5/source-M2-half.png')
@@ -106,7 +106,7 @@ async function pixelsOf(html, w, h) {
   await p.close()
   return { ...out, px: Buffer.from(out.b64, 'base64') }
 }
-if (ROUND === 3) {
+if (ROUND === 3 || ROUND === 4) {
   await round3()
   await browser.close()
   process.exit(0)
@@ -115,6 +115,7 @@ if (ROUND === 3) {
 // —— 第三轮：不描草图，直接从定稿坐姿 otter-sit.svg 裁出半身 ——
 // 坐姿的路径原样引用（身体、浅色肚皮、头），只用 viewBox 和 clipPath 裁，不重描、不变形；坐姿的石头不画。
 async function round3() {
+  const R4 = ROUND === 4 // 第四轮：身体同第三轮；蛤少塞、物件和爪子之间留缝、下腹浅色调整、登录页只出不带爪尖
   const f1 = (n) => Math.round(n * 10) / 10
   const f2 = (n) => Math.round(n * 100) / 100
   const pathOf = (fill) => { const m = SIT.match(new RegExp(`<path d="([^"]+)" fill="${fill}"/>`)); if (!m) throw new Error(`坐姿里找不到 ${fill} 的路径，坐姿可能改过`); return m[1] }
@@ -134,6 +135,8 @@ async function round3() {
     const inner = OBJ(name).replace(/^[\s\S]*?<title>[^<]*<\/title>/, '').replace(/<\/svg>\s*$/, '').trim()
     await page.setContent(`<svg xmlns="http://www.w3.org/2000/svg">${inner}</svg>`)
     const box = await page.evaluate(() => { const bs = [...document.querySelectorAll('path')].map((e) => e.getBBox()); const x0 = Math.min(...bs.map((b) => b.x)); const y0 = Math.min(...bs.map((b) => b.y)); const x1 = Math.max(...bs.map((b) => b.x + b.width)); const y1 = Math.max(...bs.map((b) => b.y + b.height)); return { x0, y0, x1, y1, w: x1 - x0, h: y1 - y0 } })
+    // 外形（第一条路径）最高的那一点：蛤的壳喙
+    box.peak = await page.evaluate(() => { const e = document.querySelector('path'); const L = e.getTotalLength(); let b = null; for (let i = 0; i <= 800; i++) { const q = e.getPointAtLength((L * i) / 800); if (!b || q.y < b.y) b = { x: q.x, y: q.y } } return b })
     objects[name] = { inner, box }
   }
   await page.close()
@@ -171,30 +174,97 @@ async function round3() {
   const HOLD_X = Math.round((NOTCH_X + (lp0 + lp1) / 2) / 2)
   // 物件：上沿塞进爪子底下 TUCK × 物件高
   const UNIT = HW / 240
-  const K3 = { 'stone-round': Number(process.env.HALF3_K_STONE || 1.0), scallop: Number(process.env.HALF3_K_SCALLOP || 0.8), clam: Number(process.env.HALF3_K_CLAM || 0.8) }
+  const K3 = { 'stone-round': Number(process.env.HALF3_K_STONE || 1.0), scallop: Number(process.env.HALF3_K_SCALLOP || 0.8), clam: Number(process.env.HALF3_K_CLAM || (R4 ? 0.9 : 0.8)) }
+  // 第四轮：物件和爪子之间留的缝（坐姿坐标像素，目测取的；400 宽下约 3 像素）
+  const GAP4 = Number(process.env.HALF4_GAP || 4)
+  const NOTCH_PALE_TOP = colTop(lowM, NOTCH_X) // 两爪中间那道缝里，下腹浅色往上顶到的地方
+  let CLAM_DX = 0
+  const CLAM_LIFT = Number(process.env.HALF4_CLAM_LIFT || 6)
   const TUCK = Number(process.env.HALF3_TUCK || 0.18)
   const placed = {}
   const heldOf = (name) => {
     const { inner, box } = objects[name]
     const s = UNIT * K3[name]
     const w = box.w * s; const h = box.h * s
-    const top = PAW_BOTTOM - TUCK * h
-    const tx = HOLD_X - (box.x0 + box.w / 2) * s
+    let top = PAW_BOTTOM - TUCK * h
+    let tx = HOLD_X - (box.x0 + box.w / 2) * s
+    if (R4 && name === 'clam') {
+      // 第四轮的蛤：壳喙放在两爪中间那道缝附近（缝往左 CLAM_DX 像素），壳喙顶点放在那一列下腹浅色上沿往下（缝宽 + 2），
+      // 壳喙整个露在爪子下面，两肩塞进爪弧底下一点
+      const ux = NOTCH_X + CLAM_DX
+      tx = ux - box.peak.x * s
+      top = colTop(lowM, ux) + GAP4 + 2 - (box.peak.y - box.y0) * s
+    }
     const ty = top - box.y0 * s
-    placed[name] = { k: K3[name], w: f1(w), h: f1(h), top: f1(top), bottom: f1(top + h), hiddenPx: f1(PAW_BOTTOM - top) }
+    placed[name] = { k: K3[name], w: f1(w), h: f1(h), top: f1(top), bottom: f1(top + h), x: [f1(tx + box.x0 * s), f1(tx + box.x1 * s)], hiddenPx: f1(PAW_BOTTOM - top) }
     return `<g transform="translate(${f1(tx)} ${f1(ty)}) scale(${s.toFixed(4)})">\n${inner.replace(/^\s+/gm, '  ')}\n</g>`
   }
   for (const k of Object.keys(K3)) heldOf(k)
+  // 物件栅格：算露出来的比例（爪子带里被盖住的不算），第四轮还用来定蛤的系数
+  const PAW_REGION = (i) => { const x = i % W3; const y = Math.floor(i / W3); return bodyM[i] && !lowM[i] && y >= NOTCH_Y + 4 && y <= PAW_BOTTOM + 4 && x >= 0 }
+  const objMask = async (name) => maskOf3(heldOf(name))
+  const visibleShare = async (name) => { const m = await objMask(name); let a = 0; let v = 0; for (let i = 0; i < m.length; i++) if (m[i]) { a++; if (!PAW_REGION(i)) v++ } return v / a }
+  // 第四轮：蛤的系数从 0.9 往下试，直到爪子带以下的部分离下腹浅色左右边都有 GAP4 + 3 以上（不碰浅色块边缘）
+  // 壳喙的横向位置从缝（0）往左每 5 像素试到 30，每个位置找不碰浅色边的最大系数，取系数最大的那个位置
+  let clamTries = []
+  if (R4) {
+    const m = GAP4 + 3
+    const kMax = K3.clam
+    const fits = async () => {
+      const om = await objMask('clam')
+      for (let i = 0; i < om.length; i++) {
+        if (!om[i] || Math.floor(i / W3) <= PAW_BOTTOM + 4) continue
+        for (const d of [-m, m]) if (!lowM[i + d]) return false
+      }
+      return true
+    }
+    let best = { k: 0, dx: 0 }
+    for (let dx = 0; dx >= -30; dx -= 5) {
+      CLAM_DX = dx
+      let got = 0
+      for (let k = kMax; k >= 0.6; k = Math.round((k - 0.02) * 100) / 100) { K3.clam = k; if (await fits()) { got = k; break } }
+      const lift = PAW_BOTTOM - colTop(lowM, NOTCH_X + dx) // 壳喙比爪弧底高多少：要有 CLAM_LIFT 以上，两肩才塞得进爪子底下
+      clamTries.push([dx, got, lift])
+      if (lift >= CLAM_LIFT && got > best.k) best = { k: got, dx }
+    }
+    CLAM_DX = best.dx; K3.clam = best.k
+    heldOf('clam')
+  }
+  const visible = {}
+  for (const k of Object.keys(K3)) visible[k] = f2(await visibleShare(k))
   const lowestObj = Math.max(...Object.values(placed).map((p) => p.bottom))
 
   // 水面：默认放在最低的物件下沿往下 0.06 头宽（下腹浅色在物件下面还露一截）再加 0.1 头宽毛色带
   const BAND = Math.round(0.1 * HW)
-  const WY = Number(process.env.HALF3_WATER || Math.round(lowestObj + 0.06 * HW + BAND))
-  const BELLY_BOTTOM = WY - BAND
-  // 下腹浅色收圆底：横半轴 = 起点那一行浅色的半宽，竖半轴 = 0.75 倍横半轴（同第二轮）
-  let RR = 0; let A = 0; let BCX = 0
-  for (let it = 0; it < 3; it++) { const [x0, x1] = span(lowM, BELLY_BOTTOM - RR); A = (x1 - x0 + 1) / 2; BCX = (x0 + x1 + 1) / 2; RR = Math.round(0.75 * A) }
-  const Y0 = BELLY_BOTTOM - RR
+  // 第四轮：下腹浅色在物件下面露的那一截少一点、圆底平一点，不那么像托着物件的碗
+  let BELOW = Number(process.env.HALF4_BELOW || (R4 ? 0.03 : 0.06))
+  const RR_K = Number(process.env.HALF4_RR_K || (R4 ? 0.5 : 0.75))
+  let WY = 0; let BELLY_BOTTOM = 0
+  // 下腹浅色收圆底：横半轴 = 起点那一行浅色的半宽，竖半轴 = RR_K 倍横半轴（第二、三轮 0.75）
+  let RR = 0; let A = 0; let BCX = 0; let Y0 = 0
+  const shapeBelly = () => {
+    WY = Number(process.env.HALF3_WATER || Math.round(lowestObj + BELOW * HW + BAND))
+    BELLY_BOTTOM = WY - BAND
+    RR = 0
+    for (let it = 0; it < 3; it++) { const [x0, x1] = span(lowM, BELLY_BOTTOM - RR); A = (x1 - x0 + 1) / 2; BCX = (x0 + x1 + 1) / 2; RR = Math.round(RR_K * A) }
+    Y0 = BELLY_BOTTOM - RR
+  }
+  shapeBelly()
+  // 第四轮：三样物件在爪子带以下的部分都要落在收过圆底的下腹浅色里、离边 GAP4 + 3 以上，不够就把水面往下挪 0.01 头宽再试
+  const bellyAt = (x, y) => lowM[y * W3 + x] && (y < Y0 || (((x + 0.5 - BCX) / A) ** 2 + ((y + 0.5 - Y0) / RR) ** 2 <= 1 && y <= BELLY_BOTTOM))
+  const objMasks = {}
+  if (R4) for (const k of Object.keys(K3)) objMasks[k] = await objMask(k)
+  const inBelly = () => {
+    const m = GAP4 + 3
+    for (const om of Object.values(objMasks)) for (let i = 0; i < om.length; i++) {
+      if (!om[i]) continue
+      const x = i % W3; const y = Math.floor(i / W3)
+      if (y <= PAW_BOTTOM + 4) continue
+      for (const [dx, dy] of [[-m, 0], [m, 0], [0, m], [-m * 0.7, m * 0.7], [m * 0.7, m * 0.7]]) if (!bellyAt(Math.round(x + dx), Math.round(y + dy))) return false
+    }
+    return true
+  }
+  if (R4 && !process.env.HALF3_WATER) while (!inBelly() && BELOW < 0.3) { BELOW = Math.round((BELOW + 0.01) * 100) / 100; shapeBelly() }
   // 水带：高和两端超出身体的量都照第二轮按头宽折算（84、46 草图像素 ÷ 589.5 头宽）
   const WH = Math.round((84 / 589.5) * HW)
   const OVERHANG = Math.round((46 / 589.5) * HW)
@@ -216,7 +286,7 @@ async function round3() {
   if (Math.min(...Object.values(placed).map((p) => p.top)) < BAND_RECT.y) throw new Error('物件上沿高过爪子带矩形，会露在喉部浅色上')
   const rectD = (r) => `M${r.x} ${r.y}H${r.x + r.w}V${r.y + r.h}H${r.x}Z`
   const CANVAS = { x: 0, y: 0, w: W3, h: W3 }
-  const NOTE3 = '<!-- 对比稿，不是母版：半身像第三轮，身体、浅色肚皮、头原样引用定稿坐姿 mascot/otter-sit.svg 的路径（不重描、不变形），只用 viewBox 和 clipPath 裁；物件是 mascot/objects/ 的定稿形原样缩放（scripts/brand/half-trace.mjs 第三轮模式）。提案 · 单一来源。 -->'
+  const NOTE3 = R4 ? '<!-- 对比稿，不是母版：半身像第四轮，身体同第三轮（原样引用定稿坐姿 mascot/otter-sit.svg 的路径，只用 viewBox 和 clipPath 裁）；物件是 mascot/objects/ 的定稿形原样缩放，塞在两只合着的前爪底下，和爪子之间留一道浅色细缝（scripts/brand/half-trace.mjs 第四轮模式）。提案 · 单一来源。 -->' : '<!-- 对比稿，不是母版：半身像第三轮，身体、浅色肚皮、头原样引用定稿坐姿 mascot/otter-sit.svg 的路径（不重描、不变形），只用 viewBox 和 clipPath 裁；物件是 mascot/objects/ 的定稿形原样缩放（scripts/brand/half-trace.mjs 第三轮模式）。提案 · 单一来源。 -->'
   const STATES3 = {
     half: { title: '獭獭 · 半身像（底稿，手里空着）', held: null },
     searching: { title: '獭獭 · 半身像 · 找题中（抱着圆墩石头）', held: 'stone-round' },
@@ -228,7 +298,14 @@ async function round3() {
     const st = STATES3[key]
     const held = st.held ? heldOf(st.held) : ''
     // 爪子带 = 矩形 ∩（下腹浅色以外）。两个 clip 套着用：外层矩形，里层「整张画布减去下腹浅色」（evenodd）
-    const band = st.held ? `\n<clipPath id="half-paw-band"><path d="${rectD(BAND_RECT)}"/></clipPath>\n<clipPath id="half-not-low-pale"><path clip-rule="evenodd" d="${rectD(CANVAS)}${PALE_SUBS[1]}"/></clipPath>\n<g id="paw-band" clip-path="url(#half-paw-band)"><g clip-path="url(#half-not-low-pale)"><use href="#body"/><use href="#belly"/></g></g>` : ''
+    // 第四轮的缝：扇贝、蛤（雾薄荷）和雾薄荷爪子相接处，下腹浅色沿着爪弧往里让 GAP4，盖在物件上。
+    // 做法：下腹浅色里「离浅色边缘不到 GAP4 的那一圈」= 浅色 ∩（浅色外面往 12 个方向各挪 GAP4 的并集），
+    // 只在爪子带附近那一小块矩形里画，画成浅色，夹在物件和爪子带中间。物件路径不切，缝是盖上去的同一种浅色（不是描边色）。
+    const gapOn = R4 && st.held && st.held !== 'stone-round'
+    const gr = { x: BAND_RECT.x, y: BAND_RECT.y, w: BAND_RECT.w, h: PAW_BOTTOM + GAP4 + 3 - BAND_RECT.y }
+    const dirs = [...Array(12).keys()].map((k) => [f2(GAP4 * Math.cos((k * Math.PI) / 6)), f2(GAP4 * Math.sin((k * Math.PI) / 6))])
+    const gap = gapOn ? `\n<defs><path id="half-low-ring" clip-rule="evenodd" d="${rectD(CANVAS)}${PALE_SUBS[1]}"/></defs>\n<clipPath id="half-low-pale"><path d="${PALE_SUBS[1]}"/></clipPath>\n${dirs.map(([dx, dy], k) => `<clipPath id="half-gap-${k}"><use href="#half-low-ring" clip-rule="evenodd" transform="translate(${dx} ${dy})"/></clipPath>`).join('\n')}\n<g id="paw-gap" clip-path="url(#half-low-pale)">${dirs.map((_, k) => `<path d="${rectD(gr)}" fill="${COLOR.pale}" clip-path="url(#half-gap-${k})"/>`).join('')}</g>` : ''
+    const band = gap + (st.held ? `\n<clipPath id="half-paw-band"><path d="${rectD(BAND_RECT)}"/></clipPath>\n<clipPath id="half-not-low-pale"><path clip-rule="evenodd" d="${rectD(CANVAS)}${PALE_SUBS[1]}"/></clipPath>\n<g id="paw-band" clip-path="url(#half-paw-band)"><g clip-path="url(#half-not-low-pale)"><use href="#body"/><use href="#belly"/></g></g>` : '')
     return `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="${vbStr(VB)}">\n${NOTE3}\n<title>${st.title}</title>\n${figure(WY + WH / 2)}\n<g id="figure" clip-path="url(#half-above-water)">\n<path id="body" d="${BODY_D}" fill="${COLOR.mint}"/>\n<path id="belly" d="${PALE_D}" fill="${COLOR.pale}" clip-path="url(#half-belly-round)"/>\n${HEAD_G}\n<g id="held">${held ? `\n${held}\n` : ''}</g>${band}\n</g>\n${water(WY)}\n</svg>\n`
   }
   // 登录页：水面在下巴切线下 0.07 头宽；爪尖 = 坐姿前爪那一截（矩形减去两块浅色），上沿平齐水带上沿
@@ -248,8 +325,12 @@ async function round3() {
   const FILES3 = { half: 'otter-half.svg', searching: 'state-searching.svg', offer: 'state-offer.svg', 'not-found': 'state-not-found.svg' }
   const svgs = {}
   for (const k of Object.keys(FILES3)) { svgs[k] = build3(k); writeFileSync(path.join(OUT, FILES3[k]), svgs[k]) }
-  svgs.login = buildLogin(true); writeFileSync(path.join(OUT, 'state-login.svg'), svgs.login)
-  svgs.loginBare = buildLogin(false); writeFileSync(path.join(OUT, 'state-login-nopaws.svg'), svgs.loginBare)
+  if (R4) { // 第四轮：登录页只出不带爪尖那张，文件名用 state-login.svg
+    svgs.login = buildLogin(false); writeFileSync(path.join(OUT, 'state-login.svg'), svgs.login)
+  } else {
+    svgs.login = buildLogin(true); writeFileSync(path.join(OUT, 'state-login.svg'), svgs.login)
+    svgs.loginBare = buildLogin(false); writeFileSync(path.join(OUT, 'state-login-nopaws.svg'), svgs.loginBare)
+  }
 
   // 截图
   const shot = async (html, file, width) => {
@@ -270,18 +351,27 @@ async function round3() {
     const width = (HEAD_PX * v[2]) / (hb.w * s)
     return { width, eye: ((ty + MASTER_EYE.cy * s - v[1]) * width) / v[2] }
   }
-  const trio = [['第二轮 · half-round2/otter-half.svg', r2], ['第三轮 · otter-half.svg', svgs.half], ['坐姿原图 · mascot/otter-sit.svg', SIT]].map(([c, s]) => ({ c, s, ...placeOf(s) }))
-  const topEye = Math.max(...trio.map((t) => t.eye))
-  await shot(`<style>${CSS}</style><h1>半身像 · 第三轮：从定稿坐姿裁</h1><p>对比稿 · 提案。三张同头宽（${HEAD_PX} 像素，含耳朵），眼睛对在同一条线。左：第二轮（描 M2 再变形）。中：第三轮（坐姿路径原样，裁到下腹浅色上部，水带盖住裁口）。右：坐姿原图。</p><div class="g">${trio.map((t) => `<figure><img src="${uriSvg(t.s)}" width="${f1(t.width)}" style="margin-top:${f1(topEye - t.eye)}px"><figcaption>${t.c}</figcaption></figure>`).join('')}</div>`, 'compare.png', 1700)
-  const cell = (s, label) => `<figure style="width:400px"><img src="${uriSvg(s)}" width="400"><div class="g" style="gap:20px;margin-top:14px;align-items:flex-end"><img src="${uriSvg(s)}" width="96"><img src="${uriSvg(s)}" width="64"></div><figcaption>${label} · 400 / 96 / 64 像素宽</figcaption></figure>`
-  await shot(`<style>${CSS}.g{flex-wrap:wrap}</style><h1>半身像 · 四种状态 · 第三轮</h1><p>对比稿 · 提案。身体是定稿坐姿裁出来的同一份；只换手里的东西。物件是定稿形，按 240 = 头宽，系数：石头 ${K3['stone-round']}、扇贝 ${K3.scallop}、蛤 ${K3.clam}；物件上沿塞在两只合着的前爪底下（爪子带盖在物件上，物件不切）。登录页出了两种：带爪尖、不带爪尖。</p><div class="g">${cell(svgs.searching, '找题中 · 圆墩石头')}${cell(svgs.offer, '递出结果 · 扇贝')}${cell(svgs['not-found'], '没找到 · 合着的蛤')}${cell(svgs.login, '登录页探头 · 带爪尖')}${cell(svgs.loginBare, '登录页探头 · 不带爪尖')}</div>`, 'states.png', 1760)
+  if (R4) {
+    const R3D = path.join(BRAND, 'image-review-2026-11-14/half-round3')
+    const old3 = (f) => readFileSync(path.join(R3D, f), 'utf8')
+    const pair = (label, f) => `<figure><img src="${uriSvg(old3(f))}" width="400"><figcaption>第三轮 · ${label}</figcaption></figure><figure><img src="${uriSvg(svgs[f === 'state-offer.svg' ? 'offer' : 'not-found'])}" width="400"><figcaption>第四轮 · ${label}</figcaption></figure>`
+    await shot(`<style>${CSS}</style><h1>半身像 · 第三轮 | 第四轮</h1><p>对比稿 · 提案。身体同一份。第四轮：蛤少塞（整只露出来，壳喙在两爪中间那道缝${CLAM_DX ? `往左 ${-CLAM_DX} 像素` : ''}的地方露在爪子下面，系数 ${K3.clam}），扇贝、蛤和爪子之间留一道 ${GAP4} 像素（坐姿坐标）的浅色细缝，下腹浅色圆底放平一点。</p><div class="g">${pair('递出结果 · 扇贝', 'state-offer.svg')}</div><div class="g" style="margin-top:16px">${pair('没找到 · 合着的蛤', 'state-not-found.svg')}</div>`, 'compare.png', 920)
+    const cell4 = (sv, label) => `<figure style="width:400px"><img src="${uriSvg(sv)}" width="400"><div class="g" style="gap:20px;margin-top:14px;align-items:flex-end"><img src="${uriSvg(sv)}" width="96"><img src="${uriSvg(sv)}" width="64"></div><figcaption>${label} · 400 / 96 / 64 像素宽</figcaption></figure>`
+    await shot(`<style>${CSS}.g{flex-wrap:wrap}</style><h1>半身像 · 四种状态 · 第四轮</h1><p>对比稿 · 提案。身体是定稿坐姿裁出来的同一份（同第三轮）；只换手里的东西。物件是定稿形，按 240 = 头宽，系数：石头 ${K3['stone-round']}、扇贝 ${K3.scallop}、蛤 ${K3.clam}；扇贝、蛤和爪子之间留浅色细缝，石头不留。</p><div class="g">${cell4(svgs.searching, '找题中 · 圆墩石头')}${cell4(svgs.offer, '递出结果 · 扇贝')}${cell4(svgs['not-found'], '没找到 · 合着的蛤')}${cell4(svgs.login, '登录页探头')}</div>`, 'states.png', 1760)
+  } else {
+    const trio = [['第二轮 · half-round2/otter-half.svg', r2], ['第三轮 · otter-half.svg', svgs.half], ['坐姿原图 · mascot/otter-sit.svg', SIT]].map(([c, s]) => ({ c, s, ...placeOf(s) }))
+    const topEye = Math.max(...trio.map((t) => t.eye))
+    await shot(`<style>${CSS}</style><h1>半身像 · 第三轮：从定稿坐姿裁</h1><p>对比稿 · 提案。三张同头宽（${HEAD_PX} 像素，含耳朵），眼睛对在同一条线。左：第二轮（描 M2 再变形）。中：第三轮（坐姿路径原样，裁到下腹浅色上部，水带盖住裁口）。右：坐姿原图。</p><div class="g">${trio.map((t) => `<figure><img src="${uriSvg(t.s)}" width="${f1(t.width)}" style="margin-top:${f1(topEye - t.eye)}px"><figcaption>${t.c}</figcaption></figure>`).join('')}</div>`, 'compare.png', 1700)
+    const cell = (s, label) => `<figure style="width:400px"><img src="${uriSvg(s)}" width="400"><div class="g" style="gap:20px;margin-top:14px;align-items:flex-end"><img src="${uriSvg(s)}" width="96"><img src="${uriSvg(s)}" width="64"></div><figcaption>${label} · 400 / 96 / 64 像素宽</figcaption></figure>`
+    await shot(`<style>${CSS}.g{flex-wrap:wrap}</style><h1>半身像 · 四种状态 · 第三轮</h1><p>对比稿 · 提案。身体是定稿坐姿裁出来的同一份；只换手里的东西。物件是定稿形，按 240 = 头宽，系数：石头 ${K3['stone-round']}、扇贝 ${K3.scallop}、蛤 ${K3.clam}；物件上沿塞在两只合着的前爪底下（爪子带盖在物件上，物件不切）。登录页出了两种：带爪尖、不带爪尖。</p><div class="g">${cell(svgs.searching, '找题中 · 圆墩石头')}${cell(svgs.offer, '递出结果 · 扇贝')}${cell(svgs['not-found'], '没找到 · 合着的蛤')}${cell(svgs.login, '登录页探头 · 带爪尖')}${cell(svgs.loginBare, '登录页探头 · 不带爪尖')}</div>`, 'states.png', 1760)
+  }
 
   console.log(JSON.stringify({
     headWidth: f1(HW), headTop: f1(HEAD_TOP), chin: f1(CHIN), headVisH: f1(HEAD_VIS),
     waterY: WY, headOfVisible: f2(HEAD_VIS / (WY - HEAD_TOP)), visibleH: f1(WY - HEAD_TOP),
     viewBox: vbStr(VB), viewBoxLogin: vbStr(VBL), bellyBottom: BELLY_BOTTOM, band: BAND, bellyRound: { cx: f1(BCX), y0: Y0, a: f1(A), rr: RR },
     notch: [NOTCH_X, NOTCH_Y], holdX: HOLD_X, lowPaleAtHold: [lp0, lp1], lowPaleTop: LOW_TOP, pawBottom: PAW_BOTTOM, bandRect: BAND_RECT,
-    placed, water: { ...WATER, h: WH }, leftEdge,
+    placed, visible, clamTries, clamDx: CLAM_DX, gap: R4 ? GAP4 : null, notchPaleTop: NOTCH_PALE_TOP, rrK: RR_K, below: BELOW, water: { ...WATER, h: WH }, leftEdge,
     login: { waterY: LWY, neckPx: f1(LWY - CHIN), neck: [nx0, nx1], pawL: { dx: pl.dx, dy: pl.dy, rect: pl.r }, pawR: { dx: pr.dx, dy: pr.dy, rect: pr.r } },
     bytes: Object.fromEntries(Object.entries(svgs).map(([k, s]) => [k, s.length])),
   }, null, 1))
