@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T15:04:00.203Z",
+  "generatedAt": "2026-11-14T15:14:41.073Z",
   "src": "design/brand-2026-10-13/manual/src",
   "out": "design/brand-2026-10-13/manual/视觉规范手册-草案0.7-预览.pdf",
   "font": {
@@ -189,9 +189,9 @@
         }
       ],
       "compare": {
-        "diffPct": 9.17,
+        "diffPct": 9.25,
         "headerPct": 0.42,
-        "bodyPct": 11.06,
+        "bodyPct": 11.15,
         "footerPct": 2.43
       }
     },
@@ -222,7 +222,7 @@
     },
     {
       "page": "12-表情与状态",
-      "images": 11,
+      "images": 12,
       "failedImages": [],
       "outOfBoard": [],
       "clipped": [
@@ -239,10 +239,10 @@
         }
       ],
       "compare": {
-        "diffPct": 10.31,
+        "diffPct": 10.75,
         "headerPct": 0.42,
-        "bodyPct": 12.54,
-        "footerPct": 1.95
+        "bodyPct": 13.01,
+        "footerPct": 2.6
       }
     },
     {
@@ -252,10 +252,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 6.15,
+        "diffPct": 6.2,
         "headerPct": 0.42,
-        "bodyPct": 7.41,
-        "footerPct": 1.53
+        "bodyPct": 7.47,
+        "footerPct": 1.55
       }
     },
     {
@@ -415,7 +415,7 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 5.68,
+        "diffPct": 5.69,
         "headerPct": 0.48,
         "bodyPct": 6.75,
         "footerPct": 2.17

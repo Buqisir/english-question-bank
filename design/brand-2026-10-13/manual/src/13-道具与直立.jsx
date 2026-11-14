@@ -404,7 +404,7 @@
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', paddingBlock: '12px' }}>
               <div style={{ boxSizing: 'border-box', color: '#2C6E56', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                第 114 条起八个直立姿势全部停用，不重画：文件留着不删，新页面不再用。仰躺留一张，照 L1 重画（第 115 条）：仰躺矢量稿已出，还没定稿。下面三条只留作记录。
+                第 114 条起八个直立姿势全部停用，不重画：文件留着不删，新页面不再用。仰躺留一张，照 L1 重画（第 115 条）：仰躺抱石已定，「完成」就用它（第 116 条），还没放进 mascot/。下面三条只留作记录。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', paddingBlock: '12px' }}>
@@ -427,7 +427,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §4.4、§4.5、§4.9 · 第 38、48、49、114、115 条 · 文件 mascot/props/*、mascot/upright/*
+          出处：BRAND.md §4.4、§4.5、§4.9 · 第 38、48、49、114–116 条 · 文件 mascot/props/*、mascot/upright/*
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           13

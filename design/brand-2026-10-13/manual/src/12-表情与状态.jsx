@@ -29,7 +29,7 @@
               </div>
               <div style={{ backgroundColor: '#E9ECE6', borderRadius: '4px', boxSizing: 'border-box', flexShrink: '0', paddingInline: '7px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  要重画 · 第 114、115 条，还没定稿
+                  要重画 · 第 114–116 条，半身还没定稿
                 </div>
               </div>
             </div>
@@ -280,14 +280,14 @@
               重画的新方案
             </div>
             <div style={{ alignItems: 'start', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <div style={{ borderColor: '#D5DACF', borderRadius: '4px', borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', paddingInline: '7px' }}>
-                <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  还没定稿 · 第 114、115 条
+              <div style={{ backgroundColor: '#2C6E56', borderRadius: '4px', boxSizing: 'border-box', paddingInline: '7px' }}>
+                <div style={{ boxSizing: 'border-box', color: '#FFFFFF', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
+                  完成已定 · 第 116 条
                 </div>
               </div>
               <div style={{ borderColor: '#D5DACF', borderRadius: '4px', borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', paddingInline: '7px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  右边四张：候选 · Owner 还没看
+                  半身四张：候选 · 还没定稿
                 </div>
               </div>
             </div>
@@ -325,15 +325,24 @@
                   登录页
                 </div>
               </div>
+              <div style={{ alignSelf: 'stretch', backgroundColor: '#D5DACF', boxSizing: 'border-box', flexShrink: '0', marginInline: '6px', width: '1px' }} />
+              <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '6px', width: '135px' }}>
+                <div style={{ alignItems: 'end', boxSizing: 'border-box', display: 'flex', height: '76px', justifyContent: 'center' }}>
+                  <div style={{ backgroundImage: 'url(../../image-review-2026-11-14/pose-round5/otter-float.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '76px', width: '135px' }} />
+                </div>
+                <div style={{ boxSizing: 'border-box', color: '#2C6E56', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 600, lineHeight: '16px' }}>
+                  完成 · 已定
+                </div>
+              </div>
           </div>
           <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-            四种状态共用一个水面以上的半身，从坐石全身像 otter-sit.svg 裁出，只换手里的东西：找题中拿圆石，递出结果拿扇贝，没找到空着手（两爪合在胸前），登录页探头只露头。「完成」画仰躺、身上放一只张开的蛤，还在画。「空闲」直接用坐石全身像。上面一排是旧图。
+            四种状态共用一个水面以上的半身，从坐石全身像 otter-sit.svg 裁出，只换手里的东西：找题中拿圆石，递出结果拿扇贝，没找到空着手（两爪合在胸前），登录页探头只露头。「完成」直接用照 L1 描的仰躺抱石，不画蛤（第 116 条），意思是活干完了、躺着歇会儿；张开的蛤缩到 96 像素读不出，不用。「空闲」直接用坐石全身像。上面一排是旧图。
           </div>
         </div>
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §4.3、§4.4 · DESIGN.md §9 · 第 29–31、41、44、52、114、115 条 · 文件 mascot/states/*、image-review-2026-11-14/half-final/*
+          出处：BRAND.md §4.3、§4.4 · DESIGN.md §9 · 第 29–31、41、44、52、114、115、116 条 · 文件 mascot/states/*、image-review-2026-11-14/half-final/*、image-review-2026-11-14/pose-round5/otter-float.svg
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           12
