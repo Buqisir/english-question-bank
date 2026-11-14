@@ -5,6 +5,8 @@
 //   check（默认）  出 unified-check/ 下的 sheet.png、mono.png、small-48.png，并把逐样量数写到 unified-check/measure.json
 //   round5         出 ecosystem-round5/compare.png：第五轮修过的物件，修前修后并排（160px、48px 贴边裁、48px 墨色剪影），
 //                  另有一排把修过的和没修的几样（海星、圆墩石、敲开的蛤 a）放在一起看
+//   round6         出 ecosystem-round6/compare.png：第六轮改的六样，修前和候选并排（160px、48px 贴边裁、48px 墨色剪影，下面写量数），
+//                  最下面把全套按同一比例放一排（160px、48px、48px 剪影），推荐的一组和另一组候选各一排
 //   measure a.svg [b.svg …]  只量，打印量数（改图时用）
 //
 // 量法（和第四轮 README 说的一样，这里写成代码）：
@@ -15,7 +17,7 @@
 //   - 次色离外沿：除面积最大的主体色外，每个颜色的像素到最近透明底像素的最短距离，换成 48px 下的像素（0.1px = 贴边）。
 // 物件 SVG、全身像和头像母版都只读，不改。
 //
-// 用法：node scripts/brand/unified-check.mjs [check|round5|measure <svg…>]
+// 用法：node scripts/brand/unified-check.mjs [check|round5|round6|measure <svg…>|preview out.png <svg…>]
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import path from 'node:path'
@@ -241,6 +243,55 @@ try {
     await page.screenshot({ path: path.join(R5, 'compare.png'), fullPage: true })
     for (const p of pairs) for (const r of p.row) console.log(summary(`${p.label} ${r.tag}`, r.m))
     console.log(`出了 ${rel(path.join(R5, 'compare.png'))}`)
+  }
+
+  // ———— 第六轮对比图 ————
+  if (MODE === 'round6') {
+    const R6 = path.join(REVIEW, 'ecosystem-round6')
+    const C6 = (f) => path.join(R6, 'svg/candidates', f)
+    const S6 = (f) => path.join(R6, 'svg', f)
+    const P = (r, f) => path.join(REVIEW, r, 'svg', f)
+    const GROUPS = [
+      ['敲开的蛤 a', [[P('ecosystem-round4', 'candidates/clam-open-a.svg'), '修前（round4 候选 a）'], [C6('clam-open-a6-1.svg'), '候选 a6-1（掀约 40°）· 推荐'], [C6('clam-open-a6-2.svg'), '候选 a6-2（掀约 52°）']]],
+      ['合着的蛤', [[P('ecosystem-round5', 'clam.svg'), '修前（round5）'], [C6('clam-c1-three.svg'), '候选 c1（三道纹）· 推荐'], [C6('clam-c2-two.svg'), '候选 c2（两道纹）']]],
+      ['扇贝', [[P('ecosystem-round5', 'scallop.svg'), '修前（round5）'], [C6('scallop-s1-five.svg'), '候选 s1（五瓣四缝）· 推荐'], [C6('scallop-s2-four.svg'), '候选 s2（四瓣三缝）']]],
+      ['巨藻一段', [[P('ecosystem-round5', 'kelp-blade.svg'), '修前（round5）'], [C6('kelp-k1-bulb.svg'), '候选 k1（浅色气囊）· 推荐'], [C6('kelp-k2-leaf.svg'), '候选 k2（深色气囊）']]],
+      ['海胆 L', [[P('ecosystem-round5', 'urchin.svg'), '修前（round5）'], [S6('urchin.svg'), '修后（第六轮）']]],
+      ['石头 · 圆墩', [[P('ecosystem-round2', 'stone-round.svg'), '修前（round2）'], [S6('stone-round.svg'), '修后（第六轮）']]],
+    ]
+    const note = (m) => {
+      const sec = m.colors.slice(1).map((c) => `${c.name}占 ${fmtPct(c.share)}、离外沿 ${fmtPx(c.edge)}`).join('；')
+      const nar = m.colors.map((c) => `${c.name} ${fmtPct(c.narrow)}`).join('，')
+      return `${sec ? sec + '<br>' : ''}窄于 2px：${nar}；剪影 ${fmtPct(m.silNarrow)}`
+    }
+    const groups = []
+    for (const [label, list] of GROUPS) {
+      const row = []
+      for (const [f, tag] of list) { const svg = readFileSync(f, 'utf8'); const m = await analyze(svg); row.push({ svg, tag, m }); console.log(summary(`${label} ${tag}`, m)) }
+      groups.push({ label, row })
+    }
+    const cell = (r) => `<figure><div class="r"><img src="${uri(r.svg)}" width="160" height="160"><div class="s"><img src="${uri(withViewBox(r.svg, r.m.vb))}" width="48" height="48"><img src="${uri(withViewBox(toMono(r.svg), r.m.vb))}" width="48" height="48"></div></div><figcaption><b>${r.tag}</b><br>${note(r.m)}</figcaption></figure>`
+    // 全套一排：没改的往前几轮找
+    const famOf = (over) => ['stone-otter', 'stone-long', 'stone-round', 'stone-flat', 'urchin', 'clam', 'clam-open-on-stone', 'scallop', 'starfish', 'bubbles', 'kelp-blade'].map((k) => {
+      const f = over[k] || [S6(`${k}.svg`), ...ROUNDS.map((d) => path.join(d, `${k}.svg`))].find((x) => existsSync(x))
+      return { k, f, svg: readFileSync(f, 'utf8') }
+    })
+    const famA = famOf({})
+    const famB = famOf({ 'clam-open-on-stone': C6('clam-open-a6-2.svg'), clam: C6('clam-c2-two.svg'), scallop: C6('scallop-s2-four.svg'), 'kelp-blade': C6('kelp-k2-leaf.svg') })
+    for (const it of [...famA, ...famB]) it.tight = tight(await bbox(it.svg))
+    const famRows = (fam) => `<div class="fam">${fam.map((it) => `<img src="${uri(it.svg)}" width="160" height="160">`).join('')}</div>
+<div class="fam fam2">${fam.map((it) => `<img src="${uri(withViewBox(it.svg, it.tight))}" width="48" height="48">`).join('')}</div>
+<div class="fam fam2">${fam.map((it) => `<img src="${uri(withViewBox(toMono(it.svg), it.tight))}" width="48" height="48">`).join('')}</div>`
+    const srcList = (fam) => fam.map((it) => `${it.k}：${roundOf(it.f) || 'round6'}${it.f.includes('candidates') ? ' ' + path.basename(it.f, '.svg') : ''}`).join('，')
+    const html = `<style>body{margin:0;padding:28px;font:13px/1.5 system-ui,"Noto Sans CJK SC",sans-serif;color:#191D18;background:#F1F5F7}h1{font-size:20px;margin:0 0 4px}p.sub{margin:0 0 14px;color:#29424D}h2{font-size:15px;margin:16px 0 6px}.row{display:flex;gap:12px}figure{margin:0;background:#fff;padding:10px;border-radius:6px;width:290px}.r{display:flex;gap:6px;align-items:flex-end}.s{display:flex;flex-direction:column;gap:6px}figcaption{font-size:12px;padding-top:4px;color:#29424D}figcaption b{color:#191D18}.fam{background:#fff;padding:12px;border-radius:6px;display:flex;flex-wrap:wrap;gap:0;align-items:flex-end;margin-bottom:6px}.fam2{gap:14px}p.src{margin:2px 0 6px;font-size:12px;color:#29424D}</style>
+<h1>生态物件 · 第六轮（对比稿 · 提案 · 单一来源）</h1><p class="sub">底色 #F1F5F7，卡片白底。每格：160px 原框（240 = 獭獭头宽）、48px 贴边裁、48px 贴边裁墨色剪影。量数按 48px 贴边裁的 10 倍不抗锯齿渲染量的（scripts/brand/unified-check.mjs）：次色占整样面积的比例、次色到外沿的最短距离（48px 下）、开运算抹掉的面积占比（窄于 2px）。</p>
+<div style="display:grid;grid-template-columns:repeat(2,auto);gap:4px 28px;justify-content:start">${groups.map((g) => `<div><h2>${g.label}</h2><div class="row">${g.row.map(cell).join('')}</div></div>`).join('')}</div>
+<h2>全套放一排 · 推荐的一组（160px、48px 贴边裁、48px 剪影）</h2><p class="src">${srcList(famA)}</p>${famRows(famA)}
+<h2>全套放一排 · 另一组候选（a6-2、c2、s2、k2）</h2><p class="src">${srcList(famB)}</p>${famRows(famB)}`
+    await page.setViewportSize({ width: 1900, height: 800 })
+    await page.setContent(html)
+    await page.screenshot({ path: path.join(R6, 'compare.png'), fullPage: true })
+    console.log(`出了 ${rel(path.join(R6, 'compare.png'))}`)
   }
 
   // ———— 统一检查 ————
