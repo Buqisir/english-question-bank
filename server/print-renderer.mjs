@@ -697,10 +697,13 @@ function renderCanonicalSourceFigure(block, stemFigure = false) {
   return `<figure class="canonical-reading-figure" data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-block-kind="figure" data-canonical-media-id="${escapeHtml(block.mediaId)}"${stemFigure ? ` data-canonical-content-node-id="${escapeHtml(block.nodeId)}"` : ''}${canonicalMediaPresentationAttributes(block.media, stemFigure ? 'max-height:none' : '')}><img src="${escapeHtml(src)}" alt=""${canonicalMediaPresentationAttributes(block.media, stemFigure ? 'flex-shrink:0' : '')}>${caption}</figure>`
 }
 
-function renderCanonicalReadingBlocks(canonicalGroup, keepFigureHeadings) {
+function renderCanonicalReadingBlocks(canonicalGroup, keepFigureHeadings, displayPassageLetter) {
+  const passageLetter = displayPassageLetter ?? canonicalGroup.passageLetter
+  // The typography contract defines geometry for A–D only; a fifth or later
+  // passage in a long draft is preceded by a prior question tail, like B–D.
   const precedingGeometry =
     readingPassageLetterGeometryForLetter(
-      canonicalGroup.passageLetter,
+      /^[A-D]$/.test(passageLetter) ? passageLetter : 'D',
       'print_pdf',
     )
   const beforeAdjustment = precedingGeometry.pdfBeforeAdjustmentPt
@@ -725,7 +728,7 @@ function renderCanonicalReadingBlocks(canonicalGroup, keepFigureHeadings) {
       index += 1
     } else blocks.push(renderCanonicalReadingBlock(block))
   }
-  return `<div class="canonical-reading-start"><div class="canonical-reading-passage-letter" data-canonical-passage-letter="${escapeHtml(canonicalGroup.passageLetter)}" data-canonical-reading-rhythm-role="passage_letter" data-canonical-reading-preceding-kind="${precedingGeometry.precedingKind}" style="${beforeStyle}">${escapeHtml(canonicalGroup.passageLetter)}</div></div><div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${blocks.join('')}</div>`
+  return `<div class="canonical-reading-start"><div class="canonical-reading-passage-letter" data-canonical-passage-letter="${escapeHtml(passageLetter)}" data-canonical-reading-rhythm-role="passage_letter" data-canonical-reading-preceding-kind="${precedingGeometry.precedingKind}" style="${beforeStyle}">${escapeHtml(passageLetter)}</div></div><div class="canonical-reading" data-canonical-reading-semantic-signature="${escapeHtml(canonicalGroup.semanticSignature)}">${blocks.join('')}</div>`
 }
 
 function renderCanonicalWritingChrome(
@@ -1108,6 +1111,10 @@ export function buildPrintHtml({
   grammarFillChrome = null,
   grammarFillGeometryVariantId = null,
   grammarFillGeometrySurface = null,
+  // Owner 2026-11-14（走查 find-compose-export 第四节第 1 条）：草稿卷按老师
+  // 排的顺序重排篇目字母。groupId → 卷面字母，由 draftPaperStore 传入；不传
+  // 时仍印 Canonical 投影自带的源卷字母。
+  readingPassageLetterByGroupId = null,
 }) {
   if (
     Array.isArray(canonicalConsumption?.visibleStructure)
@@ -1212,9 +1219,13 @@ export function buildPrintHtml({
       selection.familyContractId === 'reading'
       && selection.mode === 'canonical',
   )
+  // Reading rhythm (first/last passage, successor anchors) follows the order
+  // the blocks actually render in. For a source-ordered paper this equals the
+  // selection order; a teacher-reordered draft (Owner 2026-11-14) renders its
+  // own order.
   const canonicalReadingGroupIds = canonicalReadingSelection
-    ? canonicalReadingSelection.groupIds.filter((groupId) =>
-        renderedGroupIds.includes(groupId))
+    ? renderedGroupIds.filter((groupId) =>
+        canonicalReadingSelection.groupIds.includes(groupId))
     : []
   const nextReadingGroupIdByPredecessorGroupId = new Map(
     canonicalReadingGroupIds.slice(0, -1).map((groupId, index) => [
@@ -1939,7 +1950,11 @@ export function buildPrintHtml({
             groupHtml += groupLeadHtml + `<div class="canonical-error-correction">${canonicalGroup.paragraphs.map(paragraph =>
               `<p data-canonical-paragraph-id="${escapeHtml(paragraph.paragraphId)}">${paragraph.nodes.map(node => escapeHtml(node.text)).join('')}</p>`).join('')}</div>`
           } else if (canonicalGroup.groupType === 'reading') {
-            groupHtml += renderCanonicalReadingBlocks(canonicalGroup, Boolean(roleLayoutAttribute(canonicalGroup.groupId)))
+            groupHtml += renderCanonicalReadingBlocks(
+              canonicalGroup,
+              Boolean(roleLayoutAttribute(canonicalGroup.groupId)),
+              readingPassageLetterByGroupId?.get(canonicalGroup.groupId),
+            )
           } else if (canonicalGroup.groupType === 'writing') {
             groupHtml += groupLeadHtml
             groupHtml += renderCanonicalApplicationWriting(

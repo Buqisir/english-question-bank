@@ -242,6 +242,13 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
     }
   }
 
+  // 卷面字母：按草稿顺序数阅读题组（缺失题组不上卷面，不占字母）。
+  const readingLetterByItemId = new Map(
+    items
+      .filter((item) => !item.groupMissing && item.questionGroup?.groupType === 'reading')
+      .map((item, index) => [item.id, String.fromCharCode(65 + index)]),
+  )
+
   return (
     <nav className="draft-paper-rail" aria-label="卷面目录">
       {metaText && <p className="draft-paper-rail-meta">{metaText}</p>}
@@ -266,14 +273,24 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
       )}
       {items.map((item) => {
         const isMissing = item.groupMissing
+        const sourceTitle = item.questionGroup?.passageTitle || item.questionGroup?.title || item.groupId
+        const sourceLetter = /^Reading\s+([A-D])$/i.exec(sourceTitle)?.[1]?.toUpperCase()
+        // Owner 2026-11-14（走查 find-compose-export 第四节第 1 条）：卷面篇目字母
+        // 跟老师排的顺序重排（server draftPaperStore.mjs draftReadingPassageLetters
+        // 用同一条规则），左栏主名跟卷面一致，原卷字母放进同一行的小字当来源。
+        const paperLetter = readingLetterByItemId.get(item.id)
         const label = isMissing
           ? '题组已从题库中移除'
-          : (item.questionGroup?.passageTitle || item.questionGroup?.title || item.groupId)
-            .replace(/^Reading\s+([A-D])$/i, (_, letter: string) => `${letter.toUpperCase()}篇`)
+          : sourceLetter
+            ? `${paperLetter ?? sourceLetter}篇`
+            : sourceTitle
+        const sourceNote = !isMissing && sourceLetter && paperLetter ? `原卷 ${sourceLetter} 篇` : ''
         // Keep custom titles and ordering; secondary type/count information lives in the tooltip.
         const groupTypeText = groupTypeLabel[item.questionGroup?.groupType || 'other']
         const questionCount = item.questionGroup?.questionCount || 0
-        const rowTitle = isMissing ? undefined : `${label} · ${groupTypeText} · ${questionCount} 题`
+        const rowTitle = isMissing
+          ? undefined
+          : `${label}${sourceNote ? `（${sourceNote}）` : ''} · ${groupTypeText} · ${questionCount} 题`
 
         return (
           <div
@@ -290,7 +307,10 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
             tabIndex={0}
             title={rowTitle}
           >
-            <span className="draft-paper-rail-label">{label}</span>
+            <span className="draft-paper-rail-label">
+              {label}
+              {sourceNote && <span className="draft-paper-rail-source">{sourceNote}</span>}
+            </span>
             {/* ui-northstar: 拖拽把手移到行尾——它 hover 前不可见但仍占位，
                 留在行首会把小手和标题顶开一格。 */}
             <Grip aria-hidden="true" className="draft-paper-rail-grip" size={12} />

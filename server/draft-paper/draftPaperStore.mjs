@@ -628,13 +628,14 @@ export function createDraftPaperStore({
     const itemByGroupId = new Map(
       exportItems.map((item) => [item.detail.id, item]),
     )
-    const blocks = []
+    // Pass 1 walks the canonical visible structure exactly as before (same
+    // validation, same chrome) but only records each selected Group's chrome
+    // context; pass 2 below emits in the teacher's draft order.
+    const entries = []
     let pendingPart = null
     let pendingSection = null
     let currentPartBlock = null
     let currentSectionBlock = null
-    let partEmitted = false
-    let sectionEmitted = false
     let groupInstructionBlocks = []
     const structuralGroupIds = new Set()
     const visibleGroupIds = new Set()
@@ -651,8 +652,6 @@ export function createDraftPaperStore({
         pendingSection = null
         currentPartBlock = null
         currentSectionBlock = null
-        partEmitted = false
-        sectionEmitted = false
         groupInstructionBlocks = []
         continue
       }
@@ -666,7 +665,6 @@ export function createDraftPaperStore({
         }
         pendingSection = node
         currentSectionBlock = null
-        sectionEmitted = false
         groupInstructionBlocks = []
         continue
       }
@@ -723,25 +721,19 @@ export function createDraftPaperStore({
           groupInstructionBlocks = []
           continue
         }
-        if (currentPartBlock && !partEmitted) {
-          blocks.push(currentPartBlock)
-          partEmitted = true
-        }
-        if (currentSectionBlock && !sectionEmitted) {
-          blocks.push(currentSectionBlock)
-          sectionEmitted = true
-        }
-        blocks.push(...groupInstructionBlocks)
+        entries.push({
+          groupId: node.groupId,
+          partBlock: currentPartBlock,
+          sectionBlock: currentSectionBlock,
+          instructionBlocks: groupInstructionBlocks,
+          groupBlock: {
+            type: 'question_group',
+            questionGroupId: node.groupId,
+            score: Number(item.score || item.detail.defaultScore || 0),
+          },
+        })
         groupInstructionBlocks = []
         visibleGroupIds.add(node.groupId)
-        blocks.push({
-          type: 'question_group',
-          questionGroupId: node.groupId,
-          score: Number(item.score || item.detail.defaultScore || 0),
-        })
-        if (pageBreakAfterGroupIds.has(node.groupId)) {
-          blocks.push({ type: 'page_break' })
-        }
       }
     }
     if (
@@ -755,6 +747,64 @@ export function createDraftPaperStore({
       )
       error.code = 'CANONICAL_CONSUMPTION_REJECTED'
       throw error
+    }
+    // Owner 2026-11-14（走查 find-compose-export 第四节第 1 条）：卷面顺序跟
+    // 老师在草稿卷左栏排的顺序走。此前这里按源卷 visibleStructure 的顺序出块，
+    // 同源草稿卷不管怎么上移下移，卷面都印回原卷 A、B、C、D 的顺序（而
+    // paginationDomContract 又按草稿顺序逐位贴 data-group-id，题组身份会贴错）。
+    // 现在按 exportItems（草稿 order_index 顺序）出块；部分/节标题和节首说明
+    // 在所属部分/节变化时重新出现，其余题组说明跟着自己的题组走。草稿顺序
+    // 与源卷相对顺序一致时，输出与旧实现逐块相同。
+    const entryIndexByGroupId = new Map(
+      entries.map((entry, index) => [entry.groupId, index]),
+    )
+    const orderedEntries = exportItems.map(
+      (item) => entries[entryIndexByGroupId.get(item.detail.id)],
+    )
+    // Instructions in front of a section's first selected Group are that
+    // section's lead (e.g. 「阅读下列短文…」 sits before 原卷 A). They stay at
+    // the section start wherever the teacher moves that Group; other Groups'
+    // instructions travel with their own Group.
+    const chromeKey = (entry) => entry.sectionBlock ?? entry.partBlock ?? null
+    const leadEntryByChromeKey = new Map()
+    for (const entry of entries) {
+      if (!leadEntryByChromeKey.has(chromeKey(entry))) {
+        leadEntryByChromeKey.set(chromeKey(entry), entry)
+      }
+    }
+    const blocks = []
+    let emittedPartBlock = null
+    let emittedSectionBlock = null
+    let emittedChromeKey
+    for (const [index, entry] of orderedEntries.entries()) {
+      if (entry.partBlock !== emittedPartBlock) {
+        if (entry.partBlock) blocks.push({ ...entry.partBlock })
+        emittedPartBlock = entry.partBlock
+        emittedSectionBlock = null
+      }
+      if (entry.sectionBlock && entry.sectionBlock !== emittedSectionBlock) {
+        blocks.push({ ...entry.sectionBlock })
+        emittedSectionBlock = entry.sectionBlock
+      }
+      const leadEntry = leadEntryByChromeKey.get(chromeKey(entry))
+      if (chromeKey(entry) !== emittedChromeKey) {
+        blocks.push(...leadEntry.instructionBlocks.map((block) => ({ ...block })))
+        emittedChromeKey = chromeKey(entry)
+      }
+      if (entry !== leadEntry) {
+        blocks.push(...entry.instructionBlocks.map((block) => ({ ...block })))
+      }
+      blocks.push(entry.groupBlock)
+      // The source page-break hint sits between this Group and its source
+      // successor; keep it only while the draft keeps that adjacency.
+      const sourceSuccessorGroupId =
+        entries[entryIndexByGroupId.get(entry.groupId) + 1]?.groupId
+      if (
+        pageBreakAfterGroupIds.has(entry.groupId)
+        && orderedEntries[index + 1]?.groupId === sourceSuccessorGroupId
+      ) {
+        blocks.push({ type: 'page_break' })
+      }
     }
     return blocks
   }
@@ -814,6 +864,32 @@ export function createDraftPaperStore({
     })
   }
 
+  // Owner 2026-11-14（走查 find-compose-export 第四节第 1 条）：卷面上的篇目
+  // 字母跟着老师排的顺序重排，卷面上第一篇阅读就是 A；原卷字母只留在草稿卷
+  // 左栏那一行的小字里当来源（app DraftPaperRail.tsx 用同一条规则：按草稿
+  // 顺序数阅读题组）。这里只按实际出块顺序给每个 Canonical 阅读题组排字母，
+  // 作为数据交给 buildPrintHtml，不改 Canonical 投影本身。
+  function draftReadingPassageLetters(blocks, exportItems, canonicalConsumption) {
+    const canonicalReadingGroupIds = new Set(
+      canonicalConsumption?.selections?.find(
+        (selection) =>
+          selection.familyContractId === 'reading'
+          && selection.mode === 'canonical',
+      )?.groupIds || [],
+    )
+    const exportedGroupIds = new Set(exportItems.map((item) => item.detail.id))
+    const readingGroupIds = blocks
+      .filter((block) =>
+        block.type === 'question_group'
+        && exportedGroupIds.has(block.questionGroupId)
+        && canonicalReadingGroupIds.has(block.questionGroupId))
+      .map((block) => block.questionGroupId)
+    return new Map(readingGroupIds.map((groupId, index) => [
+      groupId,
+      String.fromCharCode(65 + index),
+    ]))
+  }
+
   function buildDraftPrintHtml(draftPaper, exportOptions = {}) {
     if (!draftPaper.items.length) return ''
     const input = buildDraftPaperExportInput(draftPaper, { questionNumberStart: draftPaper.questionNumberStart ?? 1, ...exportOptions })
@@ -866,12 +942,18 @@ export function createDraftPaperStore({
       canonicalConsumption,
       canonicalPageBreakAfterGroupIds,
     )
+    const blocks = canonicalBlocks || input.blocks
     return buildPrintHtml({
       title: input.title,
       versionType: input.versionType,
       printStyle: input.printStyle,
       items: exportItems,
-      blocks: canonicalBlocks || input.blocks,
+      blocks,
+      readingPassageLetterByGroupId: draftReadingPassageLetters(
+        blocks,
+        exportItems,
+        canonicalConsumption,
+      ),
       questionNumberStart: input.questionNumberStart,
       paperAssetsDir,
       imageMode: exportOptions.imageMode === 'file' ? 'file' : 'web',
@@ -1140,7 +1222,12 @@ export function createDraftPaperStore({
     const count = userDb
       .prepare('SELECT COUNT(*) AS count FROM draft_paper_items WHERE draft_paper_id = ?')
       .get(draftPaperId)?.count || 0
-    const targetIndex = Number.isInteger(Number(insertIndex)) && Number(insertIndex) >= 0
+    // Owner 2026-11-14（走查 find-compose-export 第四节第 3 条）：新加入的题组
+    // 排在最后，和老师点的先后一致。此前不带位置的加入（默认 null）因
+    // Number(null) === 0 被当成「插到第 0 位」，新题组总排最上面。只有调用方
+    // 明确给出的位置（换篇/撤销）才插队，其余一律追加到末尾。
+    const hasInsertIndex = insertIndex !== null && insertIndex !== undefined && insertIndex !== ''
+    const targetIndex = hasInsertIndex && Number.isInteger(Number(insertIndex)) && Number(insertIndex) >= 0
       ? Math.min(Number(insertIndex), Number(count))
       : Number(count)
     userDb.prepare(

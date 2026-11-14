@@ -865,6 +865,16 @@
   white-space: nowrap;
 }
 
+/* Owner 2026-11-14（走查 find-compose-export 第四节第 1 条）：原卷字母当来源，
+   跟在左栏主名后面的一行小字。本条覆盖 .draft-paper-rail-item.active 继承下来的
+   500 字重和墨色，因来源只是次要说明，当前项也不该让它变实。 */
+.draft-paper-rail-source {
+  color: var(--muted);
+  font-size: var(--eqb-font-size-xs);
+  font-weight: 400;
+  margin-left: var(--eqb-space-2);
+}
+
 .draft-paper-rail-acts {
   display: flex;
   flex-shrink: 0;
