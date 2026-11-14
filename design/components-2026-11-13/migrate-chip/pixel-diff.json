@@ -1,0 +1,251 @@
+{
+ "basket-detail-390.png": {
+  "pixels": 112,
+  "bbox_2x": [
+   260,
+   64,
+   274,
+   85
+  ]
+ },
+ "basket-detail-focus.png": {
+  "pixels": 7515,
+  "bbox_2x": [
+   40,
+   40,
+   368,
+   112
+  ]
+ },
+ "basket-detail-hover.png": {
+  "pixels": 112,
+  "bbox_2x": [
+   260,
+   64,
+   274,
+   85
+  ]
+ },
+ "basket-detail.png": {
+  "pixels": 112,
+  "bbox_2x": [
+   260,
+   64,
+   274,
+   85
+  ]
+ },
+ "basket-home-390.png": {
+  "size": [
+   [
+    430,
+    168
+   ],
+   [
+    408,
+    168
+   ]
+  ]
+ },
+ "basket-home-active.png": {
+  "size": [
+   [
+    430,
+    168
+   ],
+   [
+    408,
+    168
+   ]
+  ]
+ },
+ "basket-home-empty-390.png": {
+  "size": [
+   [
+    430,
+    168
+   ],
+   [
+    408,
+    168
+   ]
+  ]
+ },
+ "basket-home-empty.png": {
+  "size": [
+   [
+    398,
+    168
+   ],
+   [
+    376,
+    168
+   ]
+  ]
+ },
+ "basket-home-focus.png": {
+  "size": [
+   [
+    430,
+    168
+   ],
+   [
+    408,
+    168
+   ]
+  ]
+ },
+ "basket-home-hover.png": {
+  "size": [
+   [
+    430,
+    168
+   ],
+   [
+    408,
+    168
+   ]
+  ]
+ },
+ "basket-home.png": {
+  "size": [
+   [
+    430,
+    168
+   ],
+   [
+    408,
+    168
+   ]
+  ]
+ },
+ "basket-paper-focus.png": {
+  "size": [
+   [
+    378,
+    152
+   ],
+   [
+    376,
+    152
+   ]
+  ]
+ },
+ "basket-paper-hover.png": {
+  "size": [
+   [
+    378,
+    152
+   ],
+   [
+    376,
+    152
+   ]
+  ]
+ },
+ "basket-paper.png": {
+  "size": [
+   [
+    378,
+    152
+   ],
+   [
+    376,
+    152
+   ]
+  ]
+ },
+ "browse-chips-390.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "browse-chips-focus.png": {
+  "pixels": 3239,
+  "bbox_2x": [
+   144,
+   24,
+   264,
+   96
+  ]
+ },
+ "browse-chips-hover.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "browse-chips-selected-focus.png": {
+  "pixels": 3519,
+  "bbox_2x": [
+   384,
+   24,
+   518,
+   96
+  ]
+ },
+ "browse-chips-selected-hover.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "browse-chips-selected.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "browse-chips.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "r-detail-added.png": {
+  "pixels": 98,
+  "bbox_2x": [
+   2731,
+   1713,
+   2811,
+   1754
+  ]
+ },
+ "r-draft-toast.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "r-home-row-menu.png": {
+  "pixels": 5175,
+  "bbox_2x": [
+   2530,
+   1680,
+   2790,
+   1752
+  ]
+ },
+ "r-home.png": {
+  "pixels": 5175,
+  "bbox_2x": [
+   2530,
+   1680,
+   2790,
+   1752
+  ]
+ },
+ "similar-draft.png": {
+  "size": [
+   [
+    432,
+    1100
+   ],
+   [
+    432,
+    1106
+   ]
+  ]
+ },
+ "similar-home.png": {
+  "size": [
+   [
+    1712,
+    600
+   ],
+   [
+    1712,
+    606
+   ]
+  ]
+ }
+}

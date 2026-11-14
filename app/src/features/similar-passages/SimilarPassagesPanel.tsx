@@ -32,6 +32,7 @@ import { type ReactNode } from 'react'
 import { ChevronUp } from '../../icons'
 import { Button } from '../../shared-ui/Button.tsx'
 import { DraftAddButton } from '../../shared-ui/DraftAddButton.tsx'
+import { Chip } from '../../shared-ui/Chip.tsx'
 import type { QuestionGroupCard, SimilarPassagesResponse } from '../../domain/questionBank'
 
 export type SimilarPassagesRequestState =
@@ -101,9 +102,9 @@ export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNod
                       <div className="similar-rcard-source">{result.sourceLabel}</div>
                       <div className="similar-rcard-chips">
                         {result.reasons.map((reason, index) => (
-                          <span key={`${reason.kind}-${index}`} className="similar-chip similar-chip--hit">
+                          <Chip key={`${reason.kind}-${index}`} className="similar-chip">
                             {reason.label}
-                          </span>
+                          </Chip>
                         ))}
                       </div>
                     </div>

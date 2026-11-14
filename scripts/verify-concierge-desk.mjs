@@ -712,12 +712,15 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone; STARTER_CHIPS 
   // Chip styling — the filter row reuses .concierge-starter-chip's rule.
   // teal-repaint: neutral resting chip border/text on the new #D8D8D2 /
   // #6A6A64 neutral palette (was #D3CBBD / #6B645C warm neutrals).
-  const chipRule = css.match(/\.concierge-browse-chip\s*\{[^}]*\}/)?.[0] || ''
-  assert('browse chip background #FFFFFF', /background:\s*#FFFFFF/.test(chipRule), '')
+  // 胶囊构件（2026-11-14）：浏览页筛选胶囊换成 shared-ui/Chip.tsx 的 ChipToggle，样子在 shared-ui/chip.css。
+  const chipCss = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'chip.css'), 'utf8')
+  const chipRule = chipCss.match(/\.eqb-chip\[data-kind='toggle'\]\s*\{[^}]*\}/)?.[0] || ''
+  assert('browse chips render through ChipToggle', /<ChipToggle[\s\S]{0,80}className="concierge-browse-chip"/.test(readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergeDesk.tsx'), 'utf8')), '')
+  assert('browse chip background is the paper (white) token', /background:\s*var\(--eqb-color-paper\)/.test(chipRule), '')
   assert('browse chip border uses the subtle border token', /border:\s*1px solid var\(--eqb-color-border-subtle\)/i.test(chipRule), '')
   assert('browse chip text uses muted ink token', /color:\s*var\(--eqb-color-text-muted\)/i.test(chipRule), '')
 
-  const chipSelectedRule = css.match(/\.concierge-browse-chip\[aria-pressed='true'\]\s*\{[^}]*\}/)?.[0] || ''
+  const chipSelectedRule = chipCss.match(/\.eqb-chip\[data-kind='toggle'\]\[aria-pressed='true'\]\s*\{[^}]*\}/)?.[0] || ''
   assert('selected chip is grey-filled, not accent (全站灰阶)', /background:\s*var\(--eqb-color-desk\)/i.test(chipSelectedRule), chipSelectedRule)
   assert('selected chip text is body ink', /color:\s*var\(--eqb-color-text\)/i.test(chipSelectedRule), chipSelectedRule)
   assert('selected chip is NOT oxblood #B8323C', !/#B8323C/i.test(chipSelectedRule), chipSelectedRule)

@@ -27,6 +27,7 @@ import { buildDefaultFeed, buildRecentFeed } from './defaultFeed.ts'
 import { HomeContinueSection, HomeDailyPassage } from './ConciergeHomeSections.tsx'
 import { FluidHoverList } from '../components/FluidHoverList.tsx'
 import { Button } from '../shared-ui/Button.tsx'
+import { ChipToggle } from '../shared-ui/Chip.tsx'
 import { Notice } from '../shared-ui/Notice.tsx'
 
 /** Fluid hover: an expanded paper row's open body still belongs to its head,
@@ -638,63 +639,60 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
             )}
             {isBrowseScreen && !dataLoading && state.kind === 'empty' && (
               <FluidHoverList as="div" axis="xy" className="concierge-browse-chips" itemSelector=".concierge-browse-chip" gapClick={false} role="group" aria-label="筛选">
-                <button
-                  type="button"
+                {/* 胶囊构件（shared-ui/Chip.tsx 的 ChipToggle，aria-pressed）。类名 concierge-browse-chip 只当
+                    FluidHoverList 的 itemSelector 和检查脚本的钩子，样子全在 chip.css。 */}
+                <ChipToggle
                   className="concierge-browse-chip"
-                  aria-pressed={!hasActiveFilters}
+                  pressed={!hasActiveFilters}
                   onClick={() => {
                     clearFilters()
                     if (!browseActive) onEnterBrowse?.()
                   }}
                 >
                   全部
-                </button>
-                <button
-                  type="button"
+                </ChipToggle>
+                <ChipToggle
                   className="concierge-browse-chip"
-                  aria-pressed={filters.sourceType === 'real_exam'}
+                  pressed={filters.sourceType === 'real_exam'}
                   onClick={() => selectBrowseSource(filters.sourceType === 'real_exam' ? undefined : 'real_exam')}
                 >
                   真题
-                </button>
-                <button
-                  type="button"
+                </ChipToggle>
+                <ChipToggle
                   className="concierge-browse-chip"
-                  aria-pressed={filters.sourceType === 'mock_exam'}
+                  pressed={filters.sourceType === 'mock_exam'}
                   onClick={() => selectBrowseSource(filters.sourceType === 'mock_exam' ? undefined : 'mock_exam')}
                 >
                   模拟
-                </button>
+                </ChipToggle>
                 {browseRecentYears.map((year) => (
-                  <button
+                  <ChipToggle
                     key={year}
-                    type="button"
                     className="concierge-browse-chip"
-                    aria-pressed={filters.year === year}
+                    pressed={filters.year === year}
                     onClick={() => selectBrowseYear(year)}
                   >
                     {year}
-                  </button>
+                  </ChipToggle>
                 ))}
                 {browseYears.length > 4 && browseOlderCutoff !== undefined && (
-                  <button
-                    type="button"
+                  <ChipToggle
                     className="concierge-browse-chip"
-                    aria-pressed={filters.yearBefore === browseOlderCutoff}
+                    pressed={filters.yearBefore === browseOlderCutoff}
                     onClick={() => selectBrowseOlder(browseOlderCutoff)}
                   >
                     更早
-                  </button>
+                  </ChipToggle>
                 )}
               </FluidHoverList>
             )}
             {isBrowseScreen && !dataLoading && state.kind === 'empty' && filters.year !== undefined && browseMonths.length > 0 && (
               <FluidHoverList as="div" axis="xy" className="concierge-browse-chips" itemSelector=".concierge-browse-chip" gapClick={false} role="group" aria-label="月份">
-                <button type="button" className="concierge-browse-chip" aria-pressed={filters.month === undefined} onClick={() => selectBrowseMonth(undefined)}>全部月份</button>
+                <ChipToggle className="concierge-browse-chip" pressed={filters.month === undefined} onClick={() => selectBrowseMonth(undefined)}>全部月份</ChipToggle>
                 {browseMonths.map(option => (
-                  <button key={option.value} type="button" className="concierge-browse-chip" aria-pressed={filters.month === Number(option.value)} onClick={() => selectBrowseMonth(Number(option.value))}>
+                  <ChipToggle key={option.value} className="concierge-browse-chip" pressed={filters.month === Number(option.value)} onClick={() => selectBrowseMonth(Number(option.value))}>
                     {option.label}
-                  </button>
+                  </ChipToggle>
                 ))}
               </FluidHoverList>
             )}

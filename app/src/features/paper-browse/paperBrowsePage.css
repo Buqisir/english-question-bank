@@ -1662,19 +1662,9 @@
   gap: 4px;
 }
 
-.similar-chip {
-  font-size: 12px;
-  border-radius: 999px;
-  padding: 2px 8px;
-  background: var(--desk-hover);
-  color: var(--desk-muted);
-}
-
-.similar-chip--hit {
-  background: var(--surface-strong);
-  color: #1e4a3a;
-  border: 1px solid #cfe4da;
-}
+/* 理由小签（「同话题：…」「同篇位 A」「真题」「含 N 题」）换成 shared-ui/Chip.tsx 的状态标记（胶囊构件，2026-11-14）：
+ * 桌色底、次要灰字、12px、无边。原来的墨绿字 #1e4a3a 和淡绿边 #cfe4da 去掉了（全站灰阶，标签不用点睛色，DESIGN.md §2）。
+ * 类名 similar-chip 还挂在 Chip 上，只当钩子。 */
 
 .similar-pool-note {
   font-size: 12px;

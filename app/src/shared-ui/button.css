@@ -16,7 +16,7 @@
   min-width: 32px;
   padding: 0 var(--eqb-space-3);
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--eqb-radius-control);
   background: transparent;
   color: var(--eqb-color-text-secondary);
   font: inherit;

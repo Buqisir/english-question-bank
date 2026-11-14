@@ -21,7 +21,7 @@
   gap: 0;
   height: 32px;
   padding: 0 2px;
-  border-radius: 8px;
+  border-radius: var(--eqb-radius-control);
   background: var(--eqb-color-paper);
   box-shadow: var(--elev-1);
   color: var(--eqb-color-text);
@@ -45,7 +45,7 @@
   align-items: center;
   height: 28px;
   padding: 0 var(--eqb-space-2);
-  border-radius: 8px;
+  border-radius: var(--eqb-radius-control);
   color: var(--eqb-color-text);
   text-decoration: none;
   cursor: pointer;

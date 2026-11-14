@@ -1099,7 +1099,7 @@ assert(
   'Review Screen hides draft and similarity consumer actions while retaining the real renderer',
   /\{!reviewRevision && card && \(\s*<div className="paper-browse-group-actions">/.test(pageSrc) &&
     /\{!reviewRevision && hasActiveQuestion[\s\S]{0,180}<div className="similar-cta">/.test(pageSrc) &&
-    /\{!reviewRevision && \(\s*<button[\s\S]{0,120}className="basket-chip"/.test(pageSrc),
+    /\{!reviewRevision && \(\s*<Button[\s\S]{0,120}className="basket-chip"/.test(pageSrc),
   'one or more consumer-only actions are still visible in Review Screen',
 )
 assert(
@@ -2101,7 +2101,7 @@ const expectedPaperBrowseTypeRoles = [
   ['.retained-writing-card-points li', '14px'],
   ['.continuation-analysis-model-answer p', '14px'],
   ['.similar-rcard-title', '14px'],
-  ['.similar-chip', '12px'],
+  // 胶囊构件（2026-11-14）：理由小签换成 shared-ui/Chip.tsx，12px 由 chip.css 的 --eqb-font-size-xs 给，这里不再有 .similar-chip 规则。
 ]
 assert(
   '81. paper-browse assigns the twelve approved UI declarations to Label, Compact Body, and Body roles',

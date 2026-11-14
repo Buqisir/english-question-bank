@@ -12,7 +12,7 @@
   overflow-y: auto;
   padding: var(--eqb-space-1);
   border: 0;
-  border-radius: 8px;
+  border-radius: var(--eqb-radius-control);
   background: var(--eqb-color-paper);
   box-shadow: var(--elev-3);
   color: var(--eqb-color-text);
@@ -20,7 +20,7 @@
 }
 
 .eqb-menu.fluid-hover-list {
-  --fh-radius: 4px;
+  --fh-radius: var(--eqb-radius-badge);
 }
 
 @keyframes eqb-menu-in {
@@ -51,7 +51,7 @@
   height: 32px;
   padding: 0 var(--eqb-space-2);
   border: 0;
-  border-radius: 4px;
+  border-radius: var(--eqb-radius-badge);
   background: transparent;
   color: var(--eqb-color-text);
   font: inherit;

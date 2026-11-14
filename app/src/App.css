@@ -3204,45 +3204,13 @@ button:disabled {
   gap: 8px;
 }
 
-.concierge-browse-chip {
-  display: inline-flex;
-  align-items: center;
-  height: 28px;
-  padding: 0 12px;
-  border-radius: 999px;
-  border: 1px solid var(--eqb-color-border-subtle);
-  background: #FFFFFF;
-  color: var(--eqb-color-text-muted);
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.concierge-browse-chip {
-  position: relative;
-}
-
+/* 浏览页筛选胶囊换成 shared-ui/Chip.tsx 的 ChipToggle（胶囊构件，2026-11-14）。原来的高 28、白底细边、次要灰字、
+ * 滑块停住时让出白底、选中桌色底墨字 600 都搬进 chip.css，这里只留滑块的圆角和颜色（列表的事，不是胶囊的事）。 */
 .concierge-browse-chips.fluid-hover-list {
-  --fh-radius: 999px;
+  --fh-radius: var(--eqb-radius-pill);
 }
 
 .concierge-browse-chips.fluid-hover-list::before {
-  background: var(--eqb-color-desk);
-}
-
-.concierge-browse-chip[data-fluid-hover-active] {
-  background: transparent;
-  color: var(--eqb-color-text);
-}
-
-/* 选中用灰不用色：全站灰阶，强调色只留给每页最该点的那一下（BRAND.md §1.5）。 */
-.concierge-browse-chip[aria-pressed='true'] {
-  background: var(--eqb-color-desk);
-  color: var(--eqb-color-text);
-  border-color: transparent;
-  font-weight: 600;
-}
-
-.concierge-browse-chip[aria-pressed='true']:hover {
   background: var(--eqb-color-desk);
 }
 
@@ -4109,63 +4077,33 @@ div.concierge-feed-empty-corpus p { margin: 0; }
   }
 }
 
-/* ── Basket: lightweight floating chip + slide-in drawer in AI mode ────── */
-.basket-chip {
+/* ── 草稿丸：右下的浮件（胶囊构件那一批，2026-11-14） ─────────────
+ * 键本身是 shared-ui/Button（墨字 strong；首页 lg 36，别的页 sm 28）：字 13/500、悬停垫桌色、键盘焦点环、按下缩放、
+ * 禁用变淡都由 button.css 管。这里只留浮件该有的几样：钉在右下、白底、e2、一圈透明边、胶囊。
+ * 胶囊：DESIGN.md §5 圆角细则「胶囊只给标签类……计数小牌（草稿丸）」点名了它，所以不照 Button 的 8px。
+ * 覆盖：本条 (0,3,0) 盖过 button.css 的 .eqb-button (0,1,0) 的透明底、0 边、8px 圆角，和 .eqb-button[data-size='sm'] (0,2,0)
+ * 的 8px 内边距（写成 [data-size] 多一档特指度，不靠两份 css 谁后加载），因为草稿丸是浮在内容上的白件，两头圆要多留点；
+ * 悬停的桌色底那条是 (0,4,0)，照旧赢过这里的白底。 */
+.eqb-button.basket-chip[data-size] {
   position: fixed;
-  right: 24px;
-  bottom: 24px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 28px;
-  padding: 0 12px;
-  background: #FFFFFF;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  color: var(--eqb-color-text);
-  font-family: inherit;
-  font-size: 13px;
-  cursor: pointer;
-  box-shadow: var(--elev-2);
+  right: var(--eqb-space-5);
+  bottom: var(--eqb-space-5);
   z-index: 22;
-  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
-}
-
-.basket-chip:hover {
-  background: var(--eqb-color-desk);
-}
-
-/* emil-processing: shared pressable convention (scale 0.97 on press). */
-.basket-chip:active:not(:disabled) {
-  transform: scale(0.97);
-}
-
-.basket-chip:disabled {
-  cursor: not-allowed;
-  opacity: 0.55;
-}
-
-.app-shell:has(.concierge-desk) .basket-chip {
-  height: 36px;
-  padding: 0 14px;
-  font-size: 14px;
-  font-weight: 500;
-  background: var(--desk-raised);
-  border-color: transparent;
-  color: var(--desk-ink);
+  gap: var(--eqb-space-2);
+  padding: 0 var(--eqb-space-3);
+  border: 1px solid transparent;
+  border-radius: var(--eqb-radius-pill);
+  background: var(--eqb-color-paper);
   box-shadow: var(--elev-2);
 }
 
-/* 没东西时不浮起来：回到板，边线回来（DESIGN.md §4 板不投影）。 */
-.app-shell:has(.concierge-desk) .basket-chip:disabled {
-  color: var(--desk-muted);
-  opacity: .8;
-  border-color: var(--desk-border);
+/* 首页没东西时不浮起来：回到板，边线回来（DESIGN.md §4 板不投影），字换次要灰，变淡到 0.8。
+ * 覆盖：本条 (0,6,0) 盖过 button.css .eqb-button:disabled 的 opacity 0.55 (0,2,0) 和上面那条 (0,3,0) 的影子、边色。 */
+.app-shell:has(.concierge-desk) .eqb-button.basket-chip[data-size]:disabled {
+  border-color: var(--eqb-color-border);
   box-shadow: none;
-}
-
-.app-shell:has(.concierge-desk) .basket-chip:hover:not(:disabled) {
-  background: var(--desk-hover);
+  color: var(--eqb-color-text-muted);
+  opacity: 0.8;
 }
 
 @media (max-width: 640px) {
@@ -5381,11 +5319,7 @@ div.concierge-feed-empty-corpus p { margin: 0; }
   }
 }
 
-@media (pointer: coarse) {
-  .concierge-browse-chip {
-    height: 36px;
-  }
-}
+/* 筛选胶囊在触屏上加高到 36 的那条搬进了 shared-ui/chip.css。 */
 
 /* 草稿卷里有题时的点睛小圆点：全站唯一常驻的强调色，每加一组跳一下。 */
 .basket-chip-dot {

@@ -33,6 +33,7 @@ import type { ReactNode } from 'react'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
+import { Chip } from '../../shared-ui/Chip.tsx'
 import { RotateCcw } from '../../icons'
 import { useToastPresence } from '../shared/useToastPresence.ts'
 import type {
@@ -108,12 +109,12 @@ function renderChips(matchedQuestionIds: string[], reasons: SimilarQuestionReaso
   return (
     <div className="similar-rcard-chips">
       {matchedQuestionIds.length > 0 && (
-        <span className="similar-chip similar-chip--hit">含 {matchedQuestionIds.length} 题</span>
+        <Chip className="similar-chip">含 {matchedQuestionIds.length} 题</Chip>
       )}
       {reasons.map((reason, index) => (
-        <span key={`${reason.kind}-${index}`} className="similar-chip similar-chip--hit">
+        <Chip key={`${reason.kind}-${index}`} className="similar-chip">
           {reason.label}
-        </span>
+        </Chip>
       ))}
     </div>
   )

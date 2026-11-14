@@ -2,6 +2,7 @@ import { ArrowDown, ArrowUp, Grip, Trash } from '../../icons'
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
+import { Chip } from '../../shared-ui/Chip.tsx'
 import { groupTypeLabel, type DraftPaperItem, type QuestionGroupCard } from '../../domain/questionBank'
 import type { SimilarPassagesRequestState } from '../similar-passages/SimilarPassagesPanel'
 
@@ -82,9 +83,9 @@ export function DraftPaperSwapDrawer(props: DraftPaperSwapDrawerProps): ReactNod
                       <div className="similar-rcard-source">{result.sourceLabel}</div>
                       <div className="similar-rcard-chips">
                         {result.reasons.map((reason, index) => (
-                          <span key={`${reason.kind}-${index}`} className="similar-chip similar-chip--hit">
+                          <Chip key={`${reason.kind}-${index}`} className="similar-chip">
                             {reason.label}
-                          </span>
+                          </Chip>
                         ))}
                       </div>
                     </div>

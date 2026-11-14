@@ -38,6 +38,7 @@ import { VocabularyDictationWorkbench } from './features/vocabulary-dictation-wo
 import { VocabularyNotebookPage } from './features/vocabulary-notebook/VocabularyNotebookPage.tsx'
 import { AppTopbar, type AppTopbarNav } from './components/AppTopbar'
 import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest, deleteDraftPaperItem, fetchCurrentDraftPaper } from './services/draftPapers'
+import { Button } from './shared-ui/Button.tsx'
 import { DraftAddContext, type DraftAddActions, type DraftAddReceipt } from './shared-ui/draftAddContext.ts'
 import { useCurrentUser, useIsOwnerView } from './auth/AuthGate.tsx'
 import { logout } from './auth/session.ts'
@@ -1225,22 +1226,28 @@ function App() {
       )}
 
       {!adminRouteActive && (
-      <button
-        type="button"
+      // 草稿丸（清单 chip-03 / chip-04）：点了是去草稿卷，是按钮，所以用共用 Button（墨字 strong）；
+      // 浮在右下、白底、e2、胶囊这几样浮件的样子在 App.css .eqb-button.basket-chip。
+      // 首页（找题台，下面是 ConciergeDesk）用大号 36，别的页小号 28，和原来一样高。
+      <Button
+        tone="strong"
+        size={viewMode === 'list' ? 'lg' : 'sm'}
         className="basket-chip"
         onClick={() => openDraftPaperWorkbench(currentDraftPaperId)}
         aria-label={draftCountKnown ? `打开草稿卷，已选 ${currentDraftGroupCount} 个题组` : '打开草稿卷'}
         disabled={!currentDraftPaperId || (draftCountKnown && currentDraftGroupCount === 0)}
+        icon={
+          <>
+            <BoardList size={16} />
+            {currentDraftGroupCount > 0 && (
+              // key 随组数变：每加一组就重挂一次，小圆点跳一下，告诉老师"落袋了"。
+              <span key={currentDraftGroupCount} className="basket-chip-dot" aria-hidden="true" />
+            )}
+          </>
+        }
       >
-        <BoardList size={16} />
-        {currentDraftGroupCount > 0 && (
-          // key 随组数变：每加一组就重挂一次，小圆点跳一下，告诉老师"落袋了"。
-          <span key={currentDraftGroupCount} className="basket-chip-dot" aria-hidden="true" />
-        )}
-        <span>
-          {draftCountKnown ? `草稿卷（${currentDraftGroupCount} 组）` : '草稿卷'}
-        </span>
-      </button>
+        {draftCountKnown ? `草稿卷（${currentDraftGroupCount} 组）` : '草稿卷'}
+      </Button>
       )}
 
       {isEntryOpen && (
