@@ -21,6 +21,10 @@
  *
  * 换个人空间页时（第六页）补了 gapClick：原来个人空间的菜单关掉了「点项和项之间、面板边上的空隙也算点最近那一项」
  * （FluidHoverList 默认开着），第四页换菜单时漏了，这里补回来。默认照旧开着，别处的菜单不变。
+ *
+ * Owner 2026-11-14 决定 #15 补了可勾选项 checked：给了 checked（true / false）的项读屏角色是
+ * menuitemcheckbox，带 aria-checked；字不变，勾上时最右边画一个勾（图标库的 Check）。
+ * 键盘和别的项一样，选中照旧关菜单。可勾选项总是按钮，不当链接。
  */
 
 import {
@@ -35,7 +39,7 @@ import {
 } from 'react'
 import { createPortal } from 'react-dom'
 import { FluidHoverList } from '../components/FluidHoverList.tsx'
-import { Ellipsis } from '../icons'
+import { Check, Ellipsis } from '../icons'
 import { Button, type ButtonSize, type ButtonTone } from './Button.tsx'
 import './menu.css'
 
@@ -54,6 +58,8 @@ export type MenuAction = {
   restoreFocus?: boolean
   /** 项上的 data-* 属性。 */
   data?: Record<`data-${string}`, string | undefined>
+  /** 可勾选项：给了就是 menuitemcheckbox，true 时画勾。字保持不变，状态只看勾。 */
+  checked?: boolean
 }
 
 export type MenuSeparator = { key: string; separator: true }
@@ -255,14 +261,19 @@ export function Menu({
                 'data-tone': entry.tone,
                 'aria-disabled': entry.disabled || undefined,
                 tabIndex: -1,
+                // 可勾选项换成 menuitemcheckbox，盖掉上面的 menuitem。
+                ...(entry.checked !== undefined
+                  ? { role: 'menuitemcheckbox', 'aria-checked': entry.checked }
+                  : null),
               }
               const body = (
                 <>
                   {entry.icon}
                   <span className="eqb-menu-item-label">{entry.label}</span>
+                  {entry.checked && <Check className="eqb-menu-item-check" size={16} aria-hidden="true" />}
                 </>
               )
-              if (entry.href && !entry.disabled) {
+              if (entry.href && !entry.disabled && entry.checked === undefined) {
                 return (
                   <a
                     key={entry.key}

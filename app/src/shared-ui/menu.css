@@ -74,8 +74,14 @@
   text-overflow: ellipsis;
 }
 
+/* 危险项写字用深一档的 danger-text（Owner 2026-11-14 决定 #9），图标跟字走 currentColor。 */
 .eqb-menu-item[data-tone='danger'] {
-  color: var(--eqb-color-danger);
+  color: var(--eqb-color-danger-text);
+}
+
+/* 可勾选项（role=menuitemcheckbox）：勾在最右边，没勾时不画（Owner 2026-11-14 决定 #15）。 */
+.eqb-menu-item-check {
+  margin-left: auto;
 }
 
 /* 键盘焦点：桌色底（和悬停一样）加 2px 石板墨焦点环，环收在项里面，免得盖到相邻项。 */

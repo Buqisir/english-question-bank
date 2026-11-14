@@ -642,7 +642,8 @@
    tools away from their group's anchor when the hint appears. */
 /* 提议和决定（Owner 2026-11-13 定）：分页小签只有提议的样子——桌色底、弱墨字、
    下划线，无边无影；原来的白底在新规则里是「已采用」的样子。不做「已采用」
-   状态：采用后的结果是纸上的分页线，撤回就是同组的「取消分页」。 */
+   状态：采用后的结果是纸上的分页线，撤回就是去掉同组「⋯」里「前置分页」的勾
+   （2026-11-14 起这一项字不变、靠勾表示状态，以前叫「取消分页」）。 */
 .draft-group-actions .draft-group-suggestion {
   background: var(--desk-page);
   border: 0;

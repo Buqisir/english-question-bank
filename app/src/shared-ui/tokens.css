@@ -33,6 +33,9 @@
   --eqb-color-primary-deep: #1e4a3a;
   --eqb-color-danger: #dc2626;
   --eqb-color-danger-soft: rgba(239, 68, 68, 0.08);
+  /* 危险小字：比 danger 深一档，对白 5.60、对页底 5.10、对桌色悬停底 4.73，都过 AA。
+     danger 本身不动，仍给图标、描边、色块用（Owner 2026-11-14 决定 #9）。 */
+  --eqb-color-danger-text: #ca2121;
   --eqb-color-warning: #E8901A;
   /* Small warning text: AA on paper and desk-hover; keep the bright mark color. */
   --eqb-color-warning-text: #965a08;

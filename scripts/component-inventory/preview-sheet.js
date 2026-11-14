@@ -1,6 +1,6 @@
 // 构件样张页（只给 preview.mjs 用，不进网站）：把第一批构件的每个选项、每种状态都摆出来。
 // 由 preview.mjs 当虚拟模块交给 Vite，所以下面的 /src/... 是 app/src 里的真代码，裸模块名从 app 解析。
-import { createElement as h, Fragment } from 'react'
+import { createElement as h, Fragment, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import '/src/index.css'
 import '/src/App.css'
@@ -37,6 +37,20 @@ const MENU_ITEMS = [
   { key: 'rename', label: '改名（这里禁用）', icon: icon(Pencil), disabled: true, onSelect: log('rename') },
   { key: 'delete', label: '删除这份卷', icon: icon(Trash), tone: 'danger', onSelect: log('delete') },
 ]
+
+// 可勾选项（Owner 2026-11-14 决定 #15）：字固定，勾表示状态；选中照旧关菜单。
+function CheckMenu() {
+  const [on, setOn] = useState(false)
+  return h(Menu, { label: '题组操作', items: [
+    { key: 'up', label: '上移', icon: icon(ArrowLeft), onSelect: log('up') },
+    { key: 'page-break', label: '前置分页', icon: icon(Printer), checked: on, onSelect: () => { log('page-break')(); setOn((v) => !v) } },
+    { key: 'sep', separator: true },
+    { key: 'remove', label: '移除', icon: icon(Trash), tone: 'danger', onSelect: log('remove') },
+  ] })
+}
+
+// 键嵌在会滑的列表的行里（Owner 2026-11-14 决定 #4）：行是列表项，键不是。
+const NEST_ROWS = [['2026 新课标Ⅰ卷', 'n1'], ['2025 全国甲卷', 'n2']]
 
 function Sheet() {
   return h('main', { className: 'pv' },
@@ -75,7 +89,19 @@ function Sheet() {
       h('div', { className: 'pv-row' },
         h('div', { 'data-menu': 'icon' }, h(Menu, { label: '更多操作', items: MENU_ITEMS })),
         h('div', { 'data-menu': 'text' }, h(Menu, { label: '导出', triggerText: '导出', triggerIcon: icon(Download), triggerTone: 'primary', triggerSize: 'md', items: MENU_ITEMS.slice(0, 2), align: 'start' })),
+        h('div', { 'data-menu': 'check' }, h(CheckMenu)),
         h('div', { 'data-menu': 'edge', className: 'pv-edge' }, h(Menu, { label: '贴着右下角的菜单', items: MENU_ITEMS, triggerIcon: icon(Ellipsis) })),
+      ),
+    ),
+    h('section', { 'data-section': 'nest' },
+      h('h2', null, '键嵌在会滑的列表的行里（像首页结果行）：滑块停在行上时，悬停的键自己再垫一块深一档的底'),
+      h(FluidHoverList, { as: 'ul', axis: 'y', itemSelector: '.pv-nest-row', className: 'pv-nest', 'data-nest-list': '' },
+        NEST_ROWS.map(([title, k]) => h('li', { key: k, className: 'pv-nest-row', 'data-nest-row': k },
+          h('span', { className: 'pv-nest-title' }, title),
+          h(Button, { tone: 'strong', size: 'sm', 'data-nest-key': `${k}-paper` }, '看整卷'),
+          h(Button, { tone: 'subtle', size: 'sm', icon: icon(Ellipsis), label: '更多操作', 'data-nest-key': `${k}-more` }),
+          h(Button, { tone: 'danger', size: 'sm', 'data-nest-key': `${k}-danger` }, '删除'),
+        )),
       ),
     ),
   )
@@ -91,6 +117,9 @@ style.textContent = `
   .pv td { vertical-align: middle; }
   .pv-fluid { display: inline-flex; gap: 4px; --fh-radius: 8px; }
   .pv-row { display: flex; gap: 32px; align-items: center; }
+  .pv-nest { list-style: none; margin: 0; padding: 0; width: 560px; --fh-radius: 8px; }
+  .pv-nest-row { position: relative; display: flex; align-items: center; gap: var(--eqb-space-2); padding: var(--eqb-space-2) var(--eqb-space-3); }
+  .pv-nest-title { margin-right: auto; font-size: 14px; }
   .pv-edge { position: fixed; right: 10px; bottom: 10px; }
 `
 document.head.appendChild(style)

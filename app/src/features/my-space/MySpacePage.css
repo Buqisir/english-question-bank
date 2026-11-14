@@ -210,7 +210,8 @@ button.my-space-folder-button { cursor: pointer; }
 
 /* 行上的「下载」「打开原草稿」「…」都是共用 Button 大号（36，次要灰），2026-11-13 构件厂第 4 步换的：
  * 「…」第四页换成 Menu，「下载」「打开原草稿」第六页换成 Button，原来的手写按钮规则删掉。
- * 整行在 FluidHoverList 里，悬停时按钮自己不垫底（button.css .fluid-hover-list 那条），和原来一样只把字提到墨色。 */
+ * 整行在 FluidHoverList 里，按钮嵌在行里、不是列表项：滑块停在这一行时，悬停哪个键那个键再垫一块 border 色的底
+ * （Owner 2026-11-14 决定 #4，button.css「键嵌在列表的行里」那条）；以前是自己不垫底、只把字提到墨色。 */
 
 /* 文件夹按钮仍是手写的（导航列表项，带选中态和计数，不在按钮那几种语气里）。
  * 空态主键和确认框的两个键换成了 Button，焦点环由 button.css 管，从这里拿掉。 */

@@ -456,8 +456,9 @@
     "class": "my-space-row-menu-item-danger",
     "look": "transparent / #DC2626 13/400 圆角 8px 高 36 icon+text",
     "same": [],
-    "nearest": "danger|lg|icon-text",
+    "nearest": "quiet|lg|icon-text",
     "changes": [
+     "字色 #DC2626 → #3F525B",
      "字 13/400 → 13/500"
     ]
    },
@@ -570,8 +571,9 @@
     "class": "danger",
     "look": "transparent / #DC2626 16/400 圆角 0px/8px 高 36 icon+text",
     "same": [],
-    "nearest": "danger|lg|icon-text",
+    "nearest": "quiet|lg|icon-text",
     "changes": [
+     "字色 #DC2626 → #3F525B",
      "圆角 0px/8px → 8px/8px/8px/8px",
      "边线 1px solid #E6EDF1 → 无",
      "字 16/400 → 13/500"
@@ -684,7 +686,7 @@
     "radius": "4px",
     "height": 32,
     "font": "13/400",
-    "color": "#DC2626"
+    "color": "#CA2121"
    }
   ],
   "list": [
@@ -1956,7 +1958,7 @@
    "option": "danger|sm|text",
    "look": {
     "bg": "transparent",
-    "color": "#DC2626",
+    "color": "#CA2121",
     "radius": [
      "8px",
      "8px",
@@ -1983,7 +1985,7 @@
    "option": "danger|sm|icon-text",
    "look": {
     "bg": "transparent",
-    "color": "#DC2626",
+    "color": "#CA2121",
     "radius": [
      "8px",
      "8px",
@@ -2010,7 +2012,7 @@
    "option": "danger|sm|icon",
    "look": {
     "bg": "transparent",
-    "color": "#DC2626",
+    "color": "#CA2121",
     "radius": [
      "8px",
      "8px",
@@ -2037,7 +2039,7 @@
    "option": "danger|md|text",
    "look": {
     "bg": "transparent",
-    "color": "#DC2626",
+    "color": "#CA2121",
     "radius": [
      "8px",
      "8px",
@@ -2064,7 +2066,7 @@
    "option": "danger|md|icon-text",
    "look": {
     "bg": "transparent",
-    "color": "#DC2626",
+    "color": "#CA2121",
     "radius": [
      "8px",
      "8px",
@@ -2091,7 +2093,7 @@
    "option": "danger|md|icon",
    "look": {
     "bg": "transparent",
-    "color": "#DC2626",
+    "color": "#CA2121",
     "radius": [
      "8px",
      "8px",
@@ -2118,7 +2120,7 @@
    "option": "danger|lg|text",
    "look": {
     "bg": "transparent",
-    "color": "#DC2626",
+    "color": "#CA2121",
     "radius": [
      "8px",
      "8px",
@@ -2145,7 +2147,7 @@
    "option": "danger|lg|icon-text",
    "look": {
     "bg": "transparent",
-    "color": "#DC2626",
+    "color": "#CA2121",
     "radius": [
      "8px",
      "8px",
@@ -2172,7 +2174,7 @@
    "option": "danger|lg|icon",
    "look": {
     "bg": "transparent",
-    "color": "#DC2626",
+    "color": "#CA2121",
     "radius": [
      "8px",
      "8px",

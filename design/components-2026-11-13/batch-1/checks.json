@@ -2,6 +2,30 @@
  "generated": "node scripts/component-inventory/preview.mjs",
  "contrast": [
   {
+   "cell": "nest-hover:paper",
+   "color": "#1B2B33",
+   "bg": "#DCE6EB",
+   "ratio": 11.5,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "nest-hover:more",
+   "color": "#1B2B33",
+   "bg": "#DCE6EB",
+   "ratio": 11.5,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "nest-hover:danger",
+   "color": "#CA2121",
+   "bg": "#E6EDF0",
+   "ratio": 4.73,
+   "need": 4.5,
+   "pass": true
+  },
+  {
    "cell": "quiet|sm|text",
    "color": "#3F525B",
    "bg": "#F1F5F7",
@@ -363,73 +387,73 @@
   },
   {
    "cell": "danger|sm|text",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "bg": "#F1F5F7",
-   "ratio": 4.4,
+   "ratio": 5.1,
    "need": 4.5,
-   "pass": false
+   "pass": true
   },
   {
    "cell": "danger|sm|icon-text",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "bg": "#F1F5F7",
-   "ratio": 4.4,
+   "ratio": 5.1,
    "need": 4.5,
-   "pass": false
+   "pass": true
   },
   {
    "cell": "danger|sm|icon",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "bg": "#F1F5F7",
-   "ratio": 4.4,
+   "ratio": 5.1,
    "need": 3,
    "pass": true
   },
   {
    "cell": "danger|md|text",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "bg": "#F1F5F7",
-   "ratio": 4.4,
+   "ratio": 5.1,
    "need": 4.5,
-   "pass": false
+   "pass": true
   },
   {
    "cell": "danger|md|icon-text",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "bg": "#F1F5F7",
-   "ratio": 4.4,
+   "ratio": 5.1,
    "need": 4.5,
-   "pass": false
+   "pass": true
   },
   {
    "cell": "danger|md|icon",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "bg": "#F1F5F7",
-   "ratio": 4.4,
+   "ratio": 5.1,
    "need": 3,
    "pass": true
   },
   {
    "cell": "danger|lg|text",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "bg": "#F1F5F7",
-   "ratio": 4.4,
+   "ratio": 5.1,
    "need": 4.5,
-   "pass": false
+   "pass": true
   },
   {
    "cell": "danger|lg|icon-text",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "bg": "#F1F5F7",
-   "ratio": 4.4,
+   "ratio": 5.1,
    "need": 4.5,
-   "pass": false
+   "pass": true
   },
   {
    "cell": "danger|lg|icon",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "bg": "#F1F5F7",
-   "ratio": 4.4,
+   "ratio": 5.1,
    "need": 3,
    "pass": true
   },
@@ -635,43 +659,43 @@
   },
   {
    "cell": "danger|rest",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "bg": "#F1F5F7",
-   "ratio": 4.4,
+   "ratio": 5.1,
    "need": 4.5,
-   "pass": false
+   "pass": true
   },
   {
    "cell": "danger|hover",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "bg": "#E6EDF0",
-   "ratio": 4.08,
+   "ratio": 4.73,
    "need": 4.5,
-   "pass": false
+   "pass": true
   },
   {
    "cell": "danger|focus",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "bg": "#F1F5F7",
-   "ratio": 4.4,
+   "ratio": 5.1,
    "need": 4.5,
-   "pass": false
+   "pass": true
   },
   {
    "cell": "danger|active",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "bg": "#E6EDF0",
-   "ratio": 4.08,
+   "ratio": 4.73,
    "need": 4.5,
-   "pass": false
+   "pass": true
   },
   {
    "cell": "danger|busy",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "bg": "#F1F5F7",
-   "ratio": 4.4,
+   "ratio": 5.1,
    "need": 4.5,
-   "pass": false
+   "pass": true
   },
   {
    "cell": "menu-item:下载 DOCX",
@@ -707,9 +731,9 @@
   },
   {
    "cell": "menu-item:删除这份卷",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "bg": "#FFFFFF",
-   "ratio": 4.83,
+   "ratio": 5.6,
    "need": 4.5,
    "pass": true
   }
@@ -1718,24 +1742,6 @@
  ],
  "axe": [
   {
-   "id": "color-contrast",
-   "impact": "serious",
-   "help": "Elements must meet minimum color contrast ratio thresholds",
-   "nodes": [
-    "td[data-cell=\"danger|sm|text\"] > .eqb-button[data-tone=\"danger\"][data-size=\"sm\"] > .eqb-button-label",
-    "td[data-cell=\"danger|sm|icon-text\"] > .eqb-button[data-tone=\"danger\"][data-size=\"sm\"] > .eqb-button-label",
-    "td[data-cell=\"danger|md|text\"] > .eqb-button[data-tone=\"danger\"][data-size=\"md\"] > .eqb-button-label",
-    "td[data-cell=\"danger|md|icon-text\"] > .eqb-button[data-tone=\"danger\"][data-size=\"md\"] > .eqb-button-label",
-    "td[data-cell=\"danger|lg|text\"] > .eqb-button[data-tone=\"danger\"][data-size=\"lg\"] > .eqb-button-label",
-    "td[data-cell=\"danger|lg|icon-text\"] > .eqb-button[data-tone=\"danger\"][data-size=\"lg\"] > .eqb-button-label",
-    "td[data-state-cell=\"danger|rest\"] > .eqb-button[data-tone=\"danger\"][data-size=\"md\"] > .eqb-button-label",
-    "td[data-state-cell=\"danger|hover\"] > .eqb-button[data-tone=\"danger\"][data-size=\"md\"] > .eqb-button-label",
-    "td[data-state-cell=\"danger|focus\"] > .eqb-button[data-tone=\"danger\"][data-size=\"md\"] > .eqb-button-label",
-    "td[data-state-cell=\"danger|active\"] > .eqb-button[data-tone=\"danger\"][data-size=\"md\"] > .eqb-button-label",
-    ".eqb-menu-item[role=\"menuitem\"][data-tone=\"danger\"] > .eqb-menu-item-label"
-   ]
-  },
-  {
    "id": "region",
    "impact": "moderate",
    "help": "All page content should be contained by landmarks",
@@ -1745,6 +1751,31 @@
   }
  ],
  "behavior": [
+  {
+   "name": "键嵌在行里：鼠标在行上（不在键上）时，行里的键不垫底",
+   "pass": true,
+   "detail": "{\"n1-paper\":{\"bg\":\"transparent\",\"color\":\"#1B2B33\"},\"n1-more\":{\"bg\":\"transparent\",\"color\":\"#5A6C75\"},\"n1-danger\":{\"bg\":\"transparent\",\"color\":\"#CA2121\"},\"n2-paper\":{\"bg\":\"transparent\",\"color\":\"#1B2B33\"},\"n2-more\":{\"bg\":\"transparent\",\"color\":\"#5A6C75\"},\"n2-danger\":{\"bg\":\"transparent\",\"color\":\"#CA2121\"}}"
+  },
+  {
+   "name": "键嵌在行里：悬停「看整卷」「⋯」自己垫 border 色底（#DCE6EB）、字墨色",
+   "pass": true,
+   "detail": "{\"paper\":{\"bg\":\"#DCE6EB\",\"color\":\"#1B2B33\"},\"paper-other-row\":{\"bg\":\"transparent\",\"color\":\"#1B2B33\"},\"more\":{\"bg\":\"#DCE6EB\",\"color\":\"#1B2B33\"},\"more-other-row\":{\"bg\":\"transparent\",\"color\":\"#5A6C75\"},\"danger\":{\"bg\":\"#E6EDF0\",\"color\":\"#CA2121\"},\"danger-other-row\":{\"bg\":\"transparent\",\"color\":\"#CA2121\"}}"
+  },
+  {
+   "name": "键嵌在行里：危险键悬停垫桌色（#E6EDF0），不垫 border 色",
+   "pass": true,
+   "detail": "{\"bg\":\"rgb(230, 237, 240)\",\"color\":\"rgb(202, 33, 33)\"}"
+  },
+  {
+   "name": "键嵌在行里：别的行的键不受影响",
+   "pass": true,
+   "detail": "{\"paper\":{\"bg\":\"#DCE6EB\",\"color\":\"#1B2B33\"},\"paper-other-row\":{\"bg\":\"transparent\",\"color\":\"#1B2B33\"},\"more\":{\"bg\":\"#DCE6EB\",\"color\":\"#1B2B33\"},\"more-other-row\":{\"bg\":\"transparent\",\"color\":\"#5A6C75\"},\"danger\":{\"bg\":\"#E6EDF0\",\"color\":\"#CA2121\"},\"danger-other-row\":{\"bg\":\"transparent\",\"color\":\"#CA2121\"}}"
+  },
+  {
+   "name": "危险字色 danger-text 在白、页底、桌色上都过 4.5",
+   "pass": true,
+   "detail": "[{\"bg\":\"--eqb-color-paper\",\"hex\":\"#ffffff\",\"text\":5.6,\"oldDanger\":4.83},{\"bg\":\"--eqb-color-bg\",\"hex\":\"#f1f5f7\",\"text\":5.1,\"oldDanger\":4.4},{\"bg\":\"--eqb-color-desk\",\"hex\":\"#e6edf0\",\"text\":4.73,\"oldDanger\":4.08},{\"bg\":\"--eqb-color-border\",\"hex\":\"#dce6eb\",\"text\":4.42,\"oldDanger\":3.81}]"
+  },
   {
    "name": "回车打开菜单，焦点落到第一项",
    "pass": true,
@@ -1798,7 +1829,7 @@
   {
    "name": "点外面关菜单，焦点不抢回触发键",
    "pass": true,
-   "detail": "第一批构件样张：按钮、菜单（提案 · 单一来源）\n按钮：语气 × 大小 × 图标\n语气\t小 sm · 28\n只有字\t小 sm · 28\n图标 + 字\t小 sm · 28\n只有图标\t中 md · 32\n只有字\t中 md · 32\n图标 + 字\t中 md · 32\n只有图标\t大 lg · 36\n只有字\t大 lg · 36\n图标 + 字\t大 lg · 36\n只有图标\n淡墨 quiet\t\n返回找题\n\t\n返回找题\n\t\n\t\n返回找题\n\t\n返回找题\n\t\n\t\n返回找题\n\t\n返回找题\n\t\n\n次要灰 subtle\t\n展开\n\t\n展开\n\t\n\t\n展开\n\t\n展开\n\t\n\t\n展开\n\t\n展开\n\t\n\n墨 strong\t\n换篇\n\t\n换篇\n\t\n\t\n换篇\n\t\n换篇\n\t\n\t\n换篇\n\t\n换篇\n\t\n\n雾薄荷 primary\t\n导出\n\t\n导出\n\t\n\t\n导出\n\t\n导出\n\t\n\t\n导出\n\t\n导出\n\t\n\n石板墨 solid\t\n保存\n\t\n保存\n\t\n\t\n保存\n\t\n保存\n\t\n\t\n保存\n\t\n保存\n\t\n\n危险 danger\t\n删除这份卷\n\t\n删除这份卷\n\t\n\t\n删除这份卷\n\t\n删除这份卷\n\t\n\t\n删除这份卷\n\t\n删除这份卷\n\t\n按钮：状态（中号，图标 + 字）\n语气\t静止\t悬停\t键盘焦点\t按下\t禁用\t忙\n淡墨 quiet\t\n返回找题\n\t\n返回找题\n\t\n返回找题\n\t\n返回找题\n\t\n返回找题\n\t\n返回找题\n\n次要灰 subtle\t\n展开\n\t\n展开\n\t\n展开\n\t\n展开\n\t\n展开\n\t\n展开\n\n墨 strong\t\n换篇\n\t\n换篇\n\t\n换篇\n\t\n换篇\n\t\n换篇\n\t\n换篇\n\n雾薄荷 primary\t\n导出\n\t\n导出\n\t\n导出\n\t\n导出\n\t\n导出\n\t\n导出\n\n石板墨 solid\t\n保存\n\t\n保存\n\t\n保存\n\t\n保存\n\t\n保存\n\t\n保存\n\n危险 danger\t\n删除这份卷\n\t\n删除这份卷\n\t\n删除这份卷\n\t\n删除这份卷\n\t\n删除这份卷\n\t\n删除这份卷\n放在会滑的悬停列表里（像顶栏）：底由列表画，按钮不再垫一层\n返回找题\n草稿卷\n退出\n菜单\n导出"
+   "detail": "第一批构件样张：按钮、菜单（提案 · 单一来源）\n按钮：语气 × 大小 × 图标\n语气\t小 sm · 28\n只有字\t小 sm · 28\n图标 + 字\t小 sm · 28\n只有图标\t中 md · 32\n只有字\t中 md · 32\n图标 + 字\t中 md · 32\n只有图标\t大 lg · 36\n只有字\t大 lg · 36\n图标 + 字\t大 lg · 36\n只有图标\n淡墨 quiet\t\n返回找题\n\t\n返回找题\n\t\n\t\n返回找题\n\t\n返回找题\n\t\n\t\n返回找题\n\t\n返回找题\n\t\n\n次要灰 subtle\t\n展开\n\t\n展开\n\t\n\t\n展开\n\t\n展开\n\t\n\t\n展开\n\t\n展开\n\t\n\n墨 strong\t\n换篇\n\t\n换篇\n\t\n\t\n换篇\n\t\n换篇\n\t\n\t\n换篇\n\t\n换篇\n\t\n\n雾薄荷 primary\t\n导出\n\t\n导出\n\t\n\t\n导出\n\t\n导出\n\t\n\t\n导出\n\t\n导出\n\t\n\n石板墨 solid\t\n保存\n\t\n保存\n\t\n\t\n保存\n\t\n保存\n\t\n\t\n保存\n\t\n保存\n\t\n\n危险 danger\t\n删除这份卷\n\t\n删除这份卷\n\t\n\t\n删除这份卷\n\t\n删除这份卷\n\t\n\t\n删除这份卷\n\t\n删除这份卷\n\t\n按钮：状态（中号，图标 + 字）\n语气\t静止\t悬停\t键盘焦点\t按下\t禁用\t忙\n淡墨 quiet\t\n返回找题\n\t\n返回找题\n\t\n返回找题\n\t\n返回找题\n\t\n返回找题\n\t\n返回找题\n\n次要灰 subtle\t\n展开\n\t\n展开\n\t\n展开\n\t\n展开\n\t\n展开\n\t\n展开\n\n墨 strong\t\n换篇\n\t\n换篇\n\t\n换篇\n\t\n换篇\n\t\n换篇\n\t\n换篇\n\n雾薄荷 primary\t\n导出\n\t\n导出\n\t\n导出\n\t\n导出\n\t\n导出\n\t\n导出\n\n石板墨 solid\t\n保存\n\t\n保存\n\t\n保存\n\t\n保存\n\t\n保存\n\t\n保存\n\n危险 danger\t\n删除这份卷\n\t\n删除这份卷\n\t\n删除这份卷\n\t\n删除这份卷\n\t\n删除这份卷\n\t\n删除这份卷\n放在会滑的悬停列表里（像顶栏）：底由列表画，按钮不再垫一层\n返回找题\n草稿卷\n退出\n菜单\n导出\n键嵌在会滑的列表的行里（像首页结果行）：滑块停在行上时，悬停的键自己再垫一块深一档的底\n2026 新课标Ⅰ卷\n看整卷\n删除\n2025 全国甲卷\n看整卷\n删除"
   },
   {
    "name": "外面滚动关菜单",
@@ -1836,6 +1867,26 @@
    "detail": "above {\"x\":1278,\"y\":781,\"width\":152,\"height\":177}"
   },
   {
+   "name": "可勾选项：role=menuitemcheckbox、aria-checked=false、没勾；别的项仍是 menuitem",
+   "pass": true,
+   "detail": "[{\"text\":\"上移\",\"role\":\"menuitem\",\"checked\":null,\"check\":false,\"color\":\"rgb(27, 43, 51)\",\"checkColor\":null},{\"text\":\"前置分页\",\"role\":\"menuitemcheckbox\",\"checked\":\"false\",\"check\":false,\"color\":\"rgb(27, 43, 51)\",\"checkColor\":null},{\"text\":\"移除\",\"role\":\"menuitem\",\"checked\":null,\"check\":false,\"color\":\"rgb(202, 33, 33)\",\"checkColor\":null}]"
+  },
+  {
+   "name": "可勾选项：↓ 和别的项一样走得到",
+   "pass": true,
+   "detail": "前置分页"
+  },
+  {
+   "name": "可勾选项：回车选中后触发、关菜单、焦点回触发键（和别的项一样）",
+   "pass": true,
+   "detail": "page-break 题组操作"
+  },
+  {
+   "name": "可勾选项：再打开是 aria-checked=true、画了勾，字还是「前置分页」",
+   "pass": true,
+   "detail": "{\"text\":\"前置分页\",\"role\":\"menuitemcheckbox\",\"checked\":\"true\",\"check\":true,\"color\":\"rgb(27, 43, 51)\",\"checkColor\":\"rgb(27, 43, 51)\"}"
+  },
+  {
    "name": "页面没有报错",
    "pass": true,
    "detail": ""
@@ -1858,7 +1909,7 @@
   {
    "name": "按钮和菜单项的字标签框高 ≥ 字号 × 1.2（不裁中文字形）",
    "pass": true,
-   "detail": "81 个，最矮 1.38；不够的 []"
+   "detail": "85 个，最矮 1.38；不够的 []"
   },
   {
    "name": "会滑的列表里：按钮的字画在列表高亮上面，没被盖住",
@@ -1871,6 +1922,151 @@
    "detail": "{\"opacity\":\"1\",\"bg\":\"rgb(230, 237, 240)\",\"w\":\"77px\"} rgba(0, 0, 0, 0) #1B2B33"
   }
  ],
+ "nest": {
+  "rowHover": {
+   "n1-paper": {
+    "bg": "transparent",
+    "color": "#1B2B33"
+   },
+   "n1-more": {
+    "bg": "transparent",
+    "color": "#5A6C75"
+   },
+   "n1-danger": {
+    "bg": "transparent",
+    "color": "#CA2121"
+   },
+   "n2-paper": {
+    "bg": "transparent",
+    "color": "#1B2B33"
+   },
+   "n2-more": {
+    "bg": "transparent",
+    "color": "#5A6C75"
+   },
+   "n2-danger": {
+    "bg": "transparent",
+    "color": "#CA2121"
+   }
+  },
+  "keyHover": {
+   "paper": {
+    "bg": "#DCE6EB",
+    "color": "#1B2B33"
+   },
+   "paper-other-row": {
+    "bg": "transparent",
+    "color": "#1B2B33"
+   },
+   "more": {
+    "bg": "#DCE6EB",
+    "color": "#1B2B33"
+   },
+   "more-other-row": {
+    "bg": "transparent",
+    "color": "#5A6C75"
+   },
+   "danger": {
+    "bg": "#E6EDF0",
+    "color": "#CA2121"
+   },
+   "danger-other-row": {
+    "bg": "transparent",
+    "color": "#CA2121"
+   }
+  }
+ },
+ "dangerText": {
+  "tokens": {
+   "--eqb-color-danger": "#dc2626",
+   "--eqb-color-danger-text": "#ca2121",
+   "--eqb-color-paper": "#ffffff",
+   "--eqb-color-bg": "#f1f5f7",
+   "--eqb-color-desk": "#e6edf0",
+   "--eqb-color-border": "#dce6eb",
+   "--eqb-color-text": "#1b2b33"
+  },
+  "on": [
+   {
+    "bg": "--eqb-color-paper",
+    "hex": "#ffffff",
+    "text": 5.6,
+    "oldDanger": 4.83
+   },
+   {
+    "bg": "--eqb-color-bg",
+    "hex": "#f1f5f7",
+    "text": 5.1,
+    "oldDanger": 4.4
+   },
+   {
+    "bg": "--eqb-color-desk",
+    "hex": "#e6edf0",
+    "text": 4.73,
+    "oldDanger": 4.08
+   },
+   {
+    "bg": "--eqb-color-border",
+    "hex": "#dce6eb",
+    "text": 4.42,
+    "oldDanger": 3.81
+   }
+  ]
+ },
+ "checkItem": {
+  "off": [
+   {
+    "text": "上移",
+    "role": "menuitem",
+    "checked": null,
+    "check": false,
+    "color": "rgb(27, 43, 51)",
+    "checkColor": null
+   },
+   {
+    "text": "前置分页",
+    "role": "menuitemcheckbox",
+    "checked": "false",
+    "check": false,
+    "color": "rgb(27, 43, 51)",
+    "checkColor": null
+   },
+   {
+    "text": "移除",
+    "role": "menuitem",
+    "checked": null,
+    "check": false,
+    "color": "rgb(202, 33, 33)",
+    "checkColor": null
+   }
+  ],
+  "on": [
+   {
+    "text": "上移",
+    "role": "menuitem",
+    "checked": null,
+    "check": false,
+    "color": "rgb(27, 43, 51)",
+    "checkColor": null
+   },
+   {
+    "text": "前置分页",
+    "role": "menuitemcheckbox",
+    "checked": "true",
+    "check": true,
+    "color": "rgb(27, 43, 51)",
+    "checkColor": "rgb(27, 43, 51)"
+   },
+   {
+    "text": "移除",
+    "role": "menuitem",
+    "checked": null,
+    "check": false,
+    "color": "rgb(202, 33, 33)",
+    "checkColor": null
+   }
+  ]
+ },
  "states": [
   {
    "cell": "quiet|rest",
@@ -2145,7 +2341,7 @@
   {
    "cell": "danger|rest",
    "bg": "transparent",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "outline": null,
    "opacity": "1",
    "transform": "none",
@@ -2154,7 +2350,7 @@
   {
    "cell": "danger|hover",
    "bg": "#E6EDF0",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "outline": null,
    "opacity": "1",
    "transform": "none",
@@ -2163,7 +2359,7 @@
   {
    "cell": "danger|focus",
    "bg": "transparent",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "outline": "2px #29424D @2",
    "opacity": "1",
    "transform": "none",
@@ -2172,7 +2368,7 @@
   {
    "cell": "danger|active",
    "bg": "#E6EDF0",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "outline": null,
    "opacity": "1",
    "transform": "matrix(0.97, 0, 0, 0.97, 0, 0)",
@@ -2181,7 +2377,7 @@
   {
    "cell": "danger|disabled",
    "bg": "transparent",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "outline": null,
    "opacity": "0.55",
    "transform": "none",
@@ -2190,7 +2386,7 @@
   {
    "cell": "danger|busy",
    "bg": "transparent",
-   "color": "#DC2626",
+   "color": "#CA2121",
    "outline": null,
    "opacity": "1",
    "transform": "none",
@@ -2222,15 +2418,14 @@
   }
  },
  "summary": {
-  "contrastFail": 11,
+  "contrastFail": 0,
   "targetFail": 0,
   "nameFail": 0,
   "focusFail": 0,
   "axe": [
-   "color-contrast×11",
    "region×1"
   ],
   "behaviorFail": [],
-  "behaviorTotal": 25
+  "behaviorTotal": 34
  }
 }

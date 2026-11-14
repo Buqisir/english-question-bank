@@ -164,6 +164,43 @@ try {
   const top = (await box('h1')).y - 12
   await page.screenshot({ path: path.join(BATCH, 'sheet-button.png'), clip: { x: 0, y: top, width: Math.max(a.width, b.width) + 48, height: f.y + f.height - top + 16 } })
 
+  // 2b. 键嵌在会滑的列表的行里（Owner 2026-11-14 决定 #4）：行悬停时键不垫底；键悬停时自己垫一块深一档的底。
+  // 这一块在页底，临时把视口拉高到整块看得见，量完复原（后面菜单的贴边检查按 1000 高算）。
+  await page.setViewportSize({ width: 1440, height: 1600 }); await page.evaluate(() => window.scrollTo(0, 0))
+  await page.mouse.move(5, 5); await page.waitForTimeout(200)
+  const nestKeys = () => page.evaluate(() => Object.fromEntries([...document.querySelectorAll('[data-nest-key]')].map((e) => [e.getAttribute('data-nest-key'), { bg: getComputedStyle(e).backgroundColor, color: getComputedStyle(e).color }])))
+  const nestBox = await box('[data-section="nest"]')
+  const nestClip = { x: 0, y: nestBox.y - 12, width: nestBox.width + 48, height: nestBox.height + 24 }
+  await page.screenshot({ path: path.join(BATCH, 'sheet-nest.png'), clip: nestClip })
+  await page.locator('[data-nest-row="n1"] .pv-nest-title').hover(); await page.waitForTimeout(300)
+  const nestRow = await nestKeys()
+  await page.screenshot({ path: path.join(BATCH, 'sheet-nest-row-hover.png'), clip: nestClip })
+  const nestHover = {}
+  for (const k of ['paper', 'more', 'danger']) {
+    await page.locator(`[data-nest-key="n1-${k}"]`).hover(); await page.waitForTimeout(300)
+    nestHover[k] = (await nestKeys())[`n1-${k}`]
+    nestHover[`${k}-other-row`] = (await nestKeys())[`n2-${k}`]
+    await page.screenshot({ path: path.join(BATCH, `sheet-nest-${k}-hover.png`), clip: nestClip })
+  }
+  const nestActive = await page.evaluate(() => document.querySelector('[data-nest-row="n1"]').hasAttribute('data-fluid-hover-active'))
+  await page.mouse.move(5, 5); await page.waitForTimeout(200)
+  await page.setViewportSize({ width: 1440, height: 1000 }); await page.evaluate(() => window.scrollTo(0, 0)); await page.waitForTimeout(100)
+  const tokenHex = await page.evaluate(() => { const cs = getComputedStyle(document.documentElement); return Object.fromEntries(['--eqb-color-danger', '--eqb-color-danger-text', '--eqb-color-paper', '--eqb-color-bg', '--eqb-color-desk', '--eqb-color-border', '--eqb-color-text'].map((n) => [n, cs.getPropertyValue(n).trim()])) })
+  const tokRgb = (n) => rgba(`rgb(${tokenHex[n].replace('#', '').match(/../g).map((x) => parseInt(x, 16)).join(',')})`)
+  checks.nest = { rowHover: Object.fromEntries(Object.entries(nestRow).map(([k, v]) => [k, { bg: hex(v.bg), color: hex(v.color) }])), keyHover: Object.fromEntries(Object.entries(nestHover).map(([k, v]) => [k, { bg: hex(v.bg), color: hex(v.color) }])) }
+  for (const k of ['paper', 'more', 'danger']) {
+    const v = nestHover[k], c = contrast(rgba(v.color), rgba(v.bg))
+    checks.contrast.push({ cell: `nest-hover:${k}`, color: hex(v.color), bg: hex(v.bg), ratio: c, need: k === 'more' ? 3 : 4.5, pass: c >= (k === 'more' ? 3 : 4.5) })
+  }
+  ok('键嵌在行里：鼠标在行上（不在键上）时，行里的键不垫底', nestActive && ['paper', 'more', 'danger'].every((k) => hex(nestRow[`n1-${k}`].bg) === 'transparent'), JSON.stringify(checks.nest.rowHover))
+  ok('键嵌在行里：悬停「看整卷」「⋯」自己垫 border 色底（#DCE6EB）、字墨色', ['paper', 'more'].every((k) => hex(nestHover[k].bg) === '#DCE6EB' && hex(nestHover[k].color) === '#1B2B33'), JSON.stringify(checks.nest.keyHover))
+  ok('键嵌在行里：危险键悬停垫桌色（#E6EDF0），不垫 border 色', hex(nestHover.danger.bg) === '#E6EDF0', JSON.stringify(nestHover.danger))
+  ok('键嵌在行里：别的行的键不受影响', ['paper', 'more', 'danger'].every((k) => hex(nestHover[`${k}-other-row`].bg) === 'transparent'), JSON.stringify(checks.nest.keyHover))
+
+  // 2c. 危险字色（Owner 2026-11-14 决定 #9）：danger-text 在白、页底、桌色（悬停）上都要过 4.5；border 色上不够，只记下来。
+  checks.dangerText = { tokens: tokenHex, on: ['--eqb-color-paper', '--eqb-color-bg', '--eqb-color-desk', '--eqb-color-border'].map((bg) => ({ bg, hex: tokenHex[bg], text: contrast(tokRgb('--eqb-color-danger-text'), tokRgb(bg)), oldDanger: contrast(tokRgb('--eqb-color-danger'), tokRgb(bg)) })) }
+  ok('危险字色 danger-text 在白、页底、桌色上都过 4.5', checks.dangerText.on.slice(0, 3).every((o) => o.text >= 4.5), JSON.stringify(checks.dangerText.on))
+
   // 3. 对比度、点击区域、名字、焦点环
   for (const m of [...options, ...states.filter((s) => !/\|(disabled)$/.test(s.cell))]) {
     const fg = rgba(m.color), bg = m.effBg
@@ -263,6 +300,29 @@ try {
   await edge.click(); await page.waitForSelector('.eqb-menu'); await page.waitForTimeout(250)
   const ep = await box('.eqb-menu'), side = await page.locator('.eqb-menu').getAttribute('data-side')
   ok('贴右下角：面板翻到上面、不出屏（1440 宽）', side === 'above' && ep.x >= 8 && ep.x + ep.width <= 1440 - 8 + 0.5 && ep.y >= 8, `${side} ${JSON.stringify(ep)}`)
+  await page.keyboard.press('Escape')
+
+  // 可勾选项（Owner 2026-11-14 决定 #15）
+  await page.evaluate(() => { window.__picked = [] })
+  const checkTrig = page.locator('[data-menu="check"] .eqb-button')
+  const checkItem = () => page.evaluate(() => [...document.querySelectorAll('.eqb-menu .eqb-menu-item')].map((e) => ({ text: e.innerText.trim(), role: e.getAttribute('role'), checked: e.getAttribute('aria-checked'), check: !!e.querySelector('.eqb-menu-item-check'), color: getComputedStyle(e).color, checkColor: e.querySelector('.eqb-menu-item-check') ? getComputedStyle(e.querySelector('.eqb-menu-item-check')).color : null })))
+  await page.keyboard.press('Shift'); await checkTrig.focus(); await page.keyboard.press('Enter'); await page.waitForSelector('.eqb-menu'); await page.waitForTimeout(250)
+  const off = await checkItem()
+  const pbOff = off.find((i) => i.text === '前置分页')
+  ok('可勾选项：role=menuitemcheckbox、aria-checked=false、没勾；别的项仍是 menuitem', pbOff?.role === 'menuitemcheckbox' && pbOff.checked === 'false' && !pbOff.check && off.filter((i) => i !== pbOff).every((i) => i.role === 'menuitem'), JSON.stringify(off))
+  await page.keyboard.press('ArrowDown'); await page.waitForTimeout(50)
+  ok('可勾选项：↓ 和别的项一样走得到', (await active()) === '前置分页', await active())
+  await page.keyboard.press('Enter'); await page.waitForTimeout(100)
+  ok('可勾选项：回车选中后触发、关菜单、焦点回触发键（和别的项一样）', (await page.evaluate(() => window.__picked.join(','))) === 'page-break' && (await page.locator('.eqb-menu').count()) === 0 && (await active()) === '题组操作', `${await page.evaluate(() => window.__picked.join(','))} ${await active()}`)
+  await page.keyboard.press('Enter'); await page.waitForSelector('.eqb-menu'); await page.waitForTimeout(250)
+  await page.keyboard.press('ArrowDown'); await page.waitForTimeout(100)
+  const on = await checkItem()
+  const pbOn = on.find((i) => i.role === 'menuitemcheckbox')
+  ok('可勾选项：再打开是 aria-checked=true、画了勾，字还是「前置分页」', pbOn?.checked === 'true' && pbOn.check && pbOn.text === '前置分页', JSON.stringify(pbOn))
+  const cm = await box('.eqb-menu'), ct = await box('[data-menu="check"]')
+  const cx = Math.min(cm.x, ct.x) - 24, cy = Math.min(cm.y, ct.y) - 24
+  await page.screenshot({ path: path.join(BATCH, 'sheet-menu-check.png'), clip: { x: cx, y: cy, width: Math.max(cm.x + cm.width, ct.x + ct.width) - cx + 24, height: Math.max(cm.y + cm.height, ct.y + ct.height) - cy + 24 } })
+  checks.checkItem = { off, on }
   await page.keyboard.press('Escape')
   ok('页面没有报错', errors.length === 0, errors.join(' | '))
 

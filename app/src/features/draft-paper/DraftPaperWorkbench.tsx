@@ -1727,8 +1727,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                     </button>
                   )}
                   {/* 构件厂第 4 步：题组「⋯」换成 shared-ui/Menu。面板挂到 body 上，不再被工具条
-                      的层级和纸面裁住；↑ ↓ 在项之间走。「前置分页 / 取消分页」原来是带
-                      aria-pressed 的开关键，菜单项没有按下态，靠字本身翻转说明当前状态。 */}
+                      的层级和纸面裁住；↑ ↓ 在项之间走。「前置分页」原来是带 aria-pressed 的开关键，
+                      Owner 2026-11-14 决定 #15 改成可勾选项：字固定「前置分页」，读屏是 menuitemcheckbox，
+                      分了页就打勾（以前是字翻成「取消分页」）。 */}
                   <Menu
                     label="更多题组操作"
                     triggerTone="strong"
@@ -1739,7 +1740,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       ...(canPageBreakBefore
                         ? [{
                             key: 'page-break',
-                            label: item.pageBreakBefore ? '取消分页' : '前置分页',
+                            label: '前置分页',
+                            checked: Boolean(item.pageBreakBefore),
                             icon: <PageBreak size={16} aria-hidden="true" />,
                             onSelect: () => void togglePageBreak(item, !item.pageBreakBefore),
                           }]

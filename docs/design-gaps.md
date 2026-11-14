@@ -67,7 +67,8 @@ token 的扩展用法。
 - **想要的值**：手机输入框的字号下限。iOS Safari 在输入框字号小于 16px 时聚焦会放大页面。
 - **临时方案**：≤760px 时 `.login-field input` 用 16px 字面量。若日后全站表单都需要，候选名 `--eqb-font-size-input-mobile`。
 
-## 2026-11-13 危险色写小字（`app/src/shared-ui/button.css` `[data-tone='danger']`、`menu.css` 危险菜单项）
+## 2026-11-13 危险色写小字（`app/src/shared-ui/button.css` `[data-tone='danger']`、`menu.css` 危险菜单项）〔已收编 → 落地 commit：「构件厂：拍板落地 A1」那次提交〕
 
 - **想要的值**：危险色的文字档，和 `--eqb-color-warning-text` 对称，在桌面底 `#F1F5F7` 和悬停底 `#E6EDF0` 上也达到 WCAG AA（≥ 4.5:1）。构件厂第一批实测（`design/components-2026-11-13/batch-1/checks.json`）：`--eqb-color-danger #DC2626` 对白 4.83，对桌面底 4.40，对悬停底 4.08，axe 报 color-contrast。若收编，候选名 `--eqb-color-danger-text`。
 - **临时方案**：构件里危险字仍用 `--eqb-color-danger`，不现场编深一档的红；放在白底（菜单、纸）上静止时达标，放在桌面底或悬停 / 键盘焦点时不达标。等 Owner 定色。
+- **已收编（Owner 2026-11-14 决定 #9）**：`tokens.css` 新增 `--eqb-color-danger-text: #ca2121`，对白 5.60、对桌面底 5.10、对悬停底 4.73，都过 AA；`button.css` 危险键和 `menu.css` 危险项写字改用它，图标跟字走。`--eqb-color-danger` 本身不动。样张重跑后 axe 的 color-contrast 从 11 处降到 0（`design/components-2026-11-13/decisions-2026-11-14/batch-a1/`）。站上手写的危险小字（`App.css .detail-button.danger:hover` 等）没跟着改，清单见那份 README。

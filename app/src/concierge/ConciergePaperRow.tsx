@@ -49,6 +49,7 @@ import { paperHeadline } from './paperHeadline.ts'
 import type { PaperHitContext, PaperResult, PaperResultGroup } from './aggregatePaperResults.ts'
 import { ConciergeGroupCard } from './ConciergeGroupCard.tsx'
 import { FluidHoverList } from '../components/FluidHoverList.tsx'
+import { Button } from '../shared-ui/Button.tsx'
 import type { SimilarPassagesRequestState } from '../features/similar-passages/SimilarPassagesPanel'
 
 const SOURCE_TYPE_LABEL: Record<string, string> = {
@@ -361,14 +362,16 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
           <span className="concierge-paper-hitcount">{paper.hitCount} 篇章</span>
         ) : null}
         {!rowPaperId && <span className="concierge-paper-hitcount">整卷未上线</span>}
+        {/* Owner 2026-11-14 决定 #4：「看整卷」换成 shared-ui/Button。它嵌在行头里（行头才是滑块列表的项），
+            滑块停在这一行时它悬停会自己垫一块底（button.css 嵌在行里的键）。 */}
         {rowPaperId && (
-          <button
-            type="button"
-            className="concierge-action"
+          <Button
+            tone="strong"
+            size="sm"
             onClick={() => onOpenPaperBrowse?.(rowPaperId)}
           >
             看整卷
-          </button>
+          </Button>
         )}
         {variant === 'feed' ? (
           <span className="concierge-row-chevron" aria-hidden="true">
