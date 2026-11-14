@@ -37,7 +37,12 @@
 //   输出 half-round3/：otter-half.svg、state-searching/offer/not-found.svg、state-login.svg、state-login-nopaws.svg、
 //   compare.png（第二轮 | 第三轮 | 坐姿原图，同头宽）、states.png。
 //
-// 用法：node scripts/brand/half-trace.mjs [--round 1|2|3]
+// 第五轮（--round 5）：只改「没找到」。身体、水面、另外三张同第四轮（第四轮的流程照跑一遍，只写 state-not-found.svg）。
+//   蛤照定稿方向放（最多转 ±10°），壳顶塞在左爪下面、靠两爪中缝，壳身往右下伸出来，外接框在下腹浅色块里左右居中。
+//   可选环境变量：HALF5_ROT（转角，度，负数 = 逆时针）、HALF5_TUCK（壳顶塞进爪子底下的像素）、HALF5_K_MAX（系数上限）。
+//   输出 half-round5/：state-not-found.svg、states.png（另外三张直接读 half-round4/）、compare.png（第四轮 | 第五轮）。
+//
+// 用法：node scripts/brand/half-trace.mjs [--round 1|2|3|4|5]
 //   可选环境变量：INVENTORY_CHROMIUM（chromium 路径）、HALF_OUT（输出目录，默认 half-round1 或 half-round2）、
 //   HALF_SIGMA（平滑，默认 4）、HALF_EPS（抽稀，默认 0.45）、
 //   HALF_HOLD_K（物件公共系数，默认 0.6）、HALF_HOLD_ANCHOR（第一轮：top | grip，默认 top）、
@@ -55,7 +60,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const BRAND = path.join(ROOT, 'design/brand-2026-10-13')
 const argRound = process.argv.indexOf('--round')
 const ROUND = Number(argRound > 0 ? process.argv[argRound + 1] : process.env.HALF_ROUND || 2)
-if (![1, 2, 3, 4].includes(ROUND)) throw new Error('--round 只能是 1、2、3 或 4')
+if (![1, 2, 3, 4, 5].includes(ROUND)) throw new Error('--round 只能是 1、2、3、4 或 5')
 const IS2 = ROUND === 2
 const OUT = process.env.HALF_OUT ? path.resolve(process.env.HALF_OUT) : path.join(BRAND, `image-review-2026-11-14/half-round${ROUND}`)
 const SKETCH = path.join(BRAND, 'image-review-2026-11-14/sketches-batch5/source-M2-half.png')
@@ -106,7 +111,7 @@ async function pixelsOf(html, w, h) {
   await p.close()
   return { ...out, px: Buffer.from(out.b64, 'base64') }
 }
-if (ROUND === 3 || ROUND === 4) {
+if (ROUND === 3 || ROUND === 4 || ROUND === 5) {
   await round3()
   await browser.close()
   process.exit(0)
@@ -115,7 +120,8 @@ if (ROUND === 3 || ROUND === 4) {
 // —— 第三轮：不描草图，直接从定稿坐姿 otter-sit.svg 裁出半身 ——
 // 坐姿的路径原样引用（身体、浅色肚皮、头），只用 viewBox 和 clipPath 裁，不重描、不变形；坐姿的石头不画。
 async function round3() {
-  const R4 = ROUND === 4 // 第四轮：身体同第三轮；蛤少塞、物件和爪子之间留缝、下腹浅色调整、登录页只出不带爪尖
+  const R5 = ROUND === 5 // 第五轮：第四轮照跑，只换「没找到」的蛤
+  const R4 = ROUND === 4 || R5 // 第四轮：身体同第三轮；蛤少塞、物件和爪子之间留缝、下腹浅色调整、登录页只出不带爪尖
   const f1 = (n) => Math.round(n * 10) / 10
   const f2 = (n) => Math.round(n * 100) / 100
   const pathOf = (fill) => { const m = SIT.match(new RegExp(`<path d="([^"]+)" fill="${fill}"/>`)); if (!m) throw new Error(`坐姿里找不到 ${fill} 的路径，坐姿可能改过`); return m[1] }
@@ -137,6 +143,7 @@ async function round3() {
     const box = await page.evaluate(() => { const bs = [...document.querySelectorAll('path')].map((e) => e.getBBox()); const x0 = Math.min(...bs.map((b) => b.x)); const y0 = Math.min(...bs.map((b) => b.y)); const x1 = Math.max(...bs.map((b) => b.x + b.width)); const y1 = Math.max(...bs.map((b) => b.y + b.height)); return { x0, y0, x1, y1, w: x1 - x0, h: y1 - y0 } })
     // 外形（第一条路径）最高的那一点：蛤的壳喙
     box.peak = await page.evaluate(() => { const e = document.querySelector('path'); const L = e.getTotalLength(); let b = null; for (let i = 0; i <= 800; i++) { const q = e.getPointAtLength((L * i) / 800); if (!b || q.y < b.y) b = { x: q.x, y: q.y } } return b })
+    if (R5) box.outline = await page.evaluate(() => { const e = document.querySelector('path'); const L = e.getTotalLength(); return [...Array(801).keys()].map((i) => { const q = e.getPointAtLength((L * i) / 800); return [q.x, q.y] }) })
     objects[name] = { inner, box }
   }
   await page.close()
@@ -179,11 +186,13 @@ async function round3() {
   const GAP4 = Number(process.env.HALF4_GAP || 4)
   const NOTCH_PALE_TOP = colTop(lowM, NOTCH_X) // 两爪中间那道缝里，下腹浅色往上顶到的地方
   let CLAM_DX = 0
+  let CLAM5 = null
   const CLAM_LIFT = Number(process.env.HALF4_CLAM_LIFT || 6)
   const TUCK = Number(process.env.HALF3_TUCK || 0.18)
   const placed = {}
   const heldOf = (name) => {
     const { inner, box } = objects[name]
+    if (R5 && name === 'clam' && CLAM5) return CLAM5.svg(inner)
     const s = UNIT * K3[name]
     const w = box.w * s; const h = box.h * s
     let top = PAW_BOTTOM - TUCK * h
@@ -265,6 +274,49 @@ async function round3() {
     return true
   }
   if (R4 && !process.env.HALF3_WATER) while (!inBelly() && BELOW < 0.3) { BELOW = Math.round((BELOW + 0.01) * 100) / 100; shapeBelly() }
+  // 第五轮的蛤：水面、下腹浅色都用上面第四轮算出来的（身体和另外三张一模一样），只重新放蛤。
+  // 照定稿方向，最多转 ±10°（绕外接框中心）；外接框在收过圆底的下腹浅色里左右居中；
+  // 壳顶（转过以后外形最高的那一点）那一列，往爪子底下塞 TUCK5 像素；系数从上限往下试，直到爪子带以下的部分离浅色边都有 GAP4 + 3。
+  let clam5 = null
+  if (R5) {
+    const { box } = objects.clam
+    const ROT = Number(process.env.HALF5_ROT ?? -10)
+    if (Math.abs(ROT) > 10) throw new Error('第五轮的蛤最多转 ±10°')
+    const TUCK5 = Number(process.env.HALF5_TUCK ?? -4)
+    const KMAX5 = Number(process.env.HALF5_K_MAX || 0.9)
+    const ccx = box.x0 + box.w / 2; const ccy = box.y0 + box.h / 2
+    const rad = (ROT * Math.PI) / 180; const cs = Math.cos(rad); const sn = Math.sin(rad)
+    const rot = ([x, y]) => [ccx + cs * (x - ccx) - sn * (y - ccy), ccy + sn * (x - ccx) + cs * (y - ccy)]
+    const pts = box.outline.map(rot)
+    const rx0 = Math.min(...pts.map((q) => q[0])); const rx1 = Math.max(...pts.map((q) => q[0]))
+    const ry0 = Math.min(...pts.map((q) => q[1])); const ry1 = Math.max(...pts.map((q) => q[1]))
+    const um = pts.find((q) => q[1] === ry0)
+    const make = (k) => {
+      const sc = UNIT * k
+      const tx = BCX - (sc * (rx0 + rx1)) / 2
+      const ux = Math.round(tx + sc * um[0])
+      const umTop = colTop(lowM, ux) - TUCK5
+      const ty = umTop - sc * um[1]
+      return {
+        k, rot: ROT, tuck: TUCK5, ux, umTop: f1(umTop), pawAtUmbo: colTop(lowM, ux), w: f1(sc * (rx1 - rx0)), h: f1(sc * (ry1 - ry0)),
+        top: f1(ty + sc * ry0), bottom: f1(ty + sc * ry1), x: [f1(tx + sc * rx0), f1(tx + sc * rx1)], boxCenter: f1(tx + (sc * (rx0 + rx1)) / 2),
+        svg: (inner) => `<g transform="translate(${f1(tx)} ${f1(ty)}) scale(${sc.toFixed(4)}) rotate(${ROT} ${f1(ccx)} ${f1(ccy)})">\n${inner.replace(/^\s+/gm, '  ')}\n</g>`,
+      }
+    }
+    const fits5 = async () => {
+      const om = await objMask('clam'); const m = GAP4 + 3
+      for (let i = 0; i < om.length; i++) {
+        if (!om[i]) continue
+        const x = i % W3; const y = Math.floor(i / W3)
+        if (y < NOTCH_Y + 4) return false
+        if (y <= PAW_BOTTOM + 4) continue
+        for (const [dx, dy] of [[-m, 0], [m, 0], [0, m], [-m * 0.7, m * 0.7], [m * 0.7, m * 0.7]]) if (!bellyAt(Math.round(x + dx), Math.round(y + dy))) return false
+      }
+      return true
+    }
+    for (let k = KMAX5; k >= 0.6; k = Math.round((k - 0.02) * 100) / 100) { CLAM5 = make(k); if (await fits5()) break }
+    clam5 = { ...CLAM5, svg: undefined, notchX: NOTCH_X, umboLeftOfNotch: NOTCH_X - CLAM5.ux, bellyCenter: f1(BCX), visible: f2(await visibleShare('clam')) }
+  }
   // 水带：高和两端超出身体的量都照第二轮按头宽折算（84、46 草图像素 ÷ 589.5 头宽）
   const WH = Math.round((84 / 589.5) * HW)
   const OVERHANG = Math.round((46 / 589.5) * HW)
@@ -324,8 +376,19 @@ async function round3() {
   const buildLogin = (paws) => `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="${vbStr(VBL)}">\n${NOTE3}\n<title>獭獭 · 半身像 · 登录页探头（${paws ? '从水里探头，两只爪尖搭在水带上沿' : '从水里探头，只露头和脖子'}）</title>\n${figure(LWY + WH / 2)}\n<g id="figure" clip-path="url(#half-above-water)">\n<path id="body" d="${BODY_D}" fill="${COLOR.mint}"/>\n<path id="belly" d="${PALE_D}" fill="${COLOR.pale}" clip-path="url(#half-belly-round)"/>\n${HEAD_G}\n</g>\n${water(LWY)}${paws ? `\n<clipPath id="half-not-pale"><path clip-rule="evenodd" d="${rectD(CANVAS)}${PALE_D}"/></clipPath>\n<g id="paws">\n${pl.svg}\n${pr.svg}\n</g>` : ''}\n</svg>\n`
   const FILES3 = { half: 'otter-half.svg', searching: 'state-searching.svg', offer: 'state-offer.svg', 'not-found': 'state-not-found.svg' }
   const svgs = {}
-  for (const k of Object.keys(FILES3)) { svgs[k] = build3(k); writeFileSync(path.join(OUT, FILES3[k]), svgs[k]) }
-  if (R4) { // 第四轮：登录页只出不带爪尖那张，文件名用 state-login.svg
+  const R4D = path.join(BRAND, 'image-review-2026-11-14/half-round4')
+  const NOTE5 = '<!-- 对比稿，不是母版：半身像第五轮，只改「没找到」。身体、水面同第四轮；蛤是 mascot/objects/clam.svg 的定稿形，照定稿方向（只转一点点）缩放，壳顶塞在左爪底下、靠两爪中缝，壳身往右下伸出来，和爪子之间留一道浅色细缝（scripts/brand/half-trace.mjs 第五轮模式）。提案 · 单一来源。 -->'
+  if (R5) {
+    for (const k of Object.keys(FILES3)) svgs[k] = build3(k)
+    for (const k of ['half', 'searching', 'offer']) if (svgs[k] !== readFileSync(path.join(R4D, FILES3[k]), 'utf8')) throw new Error(`第五轮的 ${FILES3[k]} 和第四轮的不一样，身体或水面变了`)
+    svgs['not-found'] = svgs['not-found'].replace(NOTE3, NOTE5)
+    writeFileSync(path.join(OUT, 'state-not-found.svg'), svgs['not-found'])
+    svgs.login = buildLogin(false)
+    if (svgs.login !== readFileSync(path.join(R4D, 'state-login.svg'), 'utf8')) throw new Error('第五轮的登录页和第四轮的不一样')
+  } else for (const k of Object.keys(FILES3)) { svgs[k] = build3(k); writeFileSync(path.join(OUT, FILES3[k]), svgs[k]) }
+  if (R5) {
+    // 登录页、另外三张不出，直接用第四轮的文件
+  } else if (R4) { // 第四轮：登录页只出不带爪尖那张，文件名用 state-login.svg
     svgs.login = buildLogin(false); writeFileSync(path.join(OUT, 'state-login.svg'), svgs.login)
   } else {
     svgs.login = buildLogin(true); writeFileSync(path.join(OUT, 'state-login.svg'), svgs.login)
@@ -351,7 +414,13 @@ async function round3() {
     const width = (HEAD_PX * v[2]) / (hb.w * s)
     return { width, eye: ((ty + MASTER_EYE.cy * s - v[1]) * width) / v[2] }
   }
-  if (R4) {
+  if (R5) {
+    const r4 = (f) => readFileSync(path.join(R4D, f), 'utf8')
+    const cell5 = (sv, label) => `<figure style="width:400px"><img src="${uriSvg(sv)}" width="400"><div class="g" style="gap:20px;margin-top:14px;align-items:flex-end"><img src="${uriSvg(sv)}" width="96"><img src="${uriSvg(sv)}" width="64"></div><figcaption>${label} · 400 / 96 / 64 像素宽</figcaption></figure>`
+    const both = (sv, label) => `<figure><img src="${uriSvg(sv)}" width="400"><div style="margin-top:14px"><img src="${uriSvg(sv)}" width="96"></div><figcaption>${label} · 400 / 96 像素宽</figcaption></figure>`
+    await shot(`<style>${CSS}</style><h1>半身像 · 没找到 · 第四轮 | 第五轮</h1><p>对比稿 · 提案。身体同一份。第五轮：蛤照定稿方向放（转 ${clam5.rot}°，负数 = 逆时针），${clam5.tuck >= 0 ? `壳顶塞在左爪底下 ${clam5.tuck} 像素` : `壳顶在左爪下沿往下 ${-clam5.tuck} 像素（不塞，壳顶鼓包整个露出）`}、在两爪中缝往左 ${clam5.umboLeftOfNotch} 像素，壳身往右下伸出来，外接框在下腹浅色块里左右居中；系数 ${clam5.k}。</p><div class="g">${both(r4('state-not-found.svg'), '第四轮')}${both(svgs['not-found'], '第五轮')}</div>`, 'compare.png', 920)
+    await shot(`<style>${CSS}.g{flex-wrap:wrap}</style><h1>半身像 · 四种状态 · 第五轮</h1><p>对比稿 · 提案。只改了「没找到」；找题中、递出结果、登录页直接用第四轮的文件。蛤：转 ${clam5.rot}°，系数 ${clam5.k}，壳顶在左爪下面，和爪子之间留浅色细缝。自检没过：生长纹读成一圈圈盘起来的形状。</p><div class="g">${cell5(r4('state-searching.svg'), '找题中 · 圆墩石头（第四轮）')}${cell5(r4('state-offer.svg'), '递出结果 · 扇贝（第四轮）')}${cell5(svgs['not-found'], '没找到 · 合着的蛤（第五轮）')}${cell5(r4('state-login.svg'), '登录页探头（第四轮）')}</div>`, 'states.png', 1760)
+  } else if (R4) {
     const R3D = path.join(BRAND, 'image-review-2026-11-14/half-round3')
     const old3 = (f) => readFileSync(path.join(R3D, f), 'utf8')
     const pair = (label, f) => `<figure><img src="${uriSvg(old3(f))}" width="400"><figcaption>第三轮 · ${label}</figcaption></figure><figure><img src="${uriSvg(svgs[f === 'state-offer.svg' ? 'offer' : 'not-found'])}" width="400"><figcaption>第四轮 · ${label}</figcaption></figure>`
@@ -371,7 +440,7 @@ async function round3() {
     waterY: WY, headOfVisible: f2(HEAD_VIS / (WY - HEAD_TOP)), visibleH: f1(WY - HEAD_TOP),
     viewBox: vbStr(VB), viewBoxLogin: vbStr(VBL), bellyBottom: BELLY_BOTTOM, band: BAND, bellyRound: { cx: f1(BCX), y0: Y0, a: f1(A), rr: RR },
     notch: [NOTCH_X, NOTCH_Y], holdX: HOLD_X, lowPaleAtHold: [lp0, lp1], lowPaleTop: LOW_TOP, pawBottom: PAW_BOTTOM, bandRect: BAND_RECT,
-    placed, visible, clamTries, clamDx: CLAM_DX, gap: R4 ? GAP4 : null, notchPaleTop: NOTCH_PALE_TOP, rrK: RR_K, below: BELOW, water: { ...WATER, h: WH }, leftEdge,
+    placed, visible, clam5, clamTries, clamDx: CLAM_DX, gap: R4 ? GAP4 : null, notchPaleTop: NOTCH_PALE_TOP, rrK: RR_K, below: BELOW, water: { ...WATER, h: WH }, leftEdge,
     login: { waterY: LWY, neckPx: f1(LWY - CHIN), neck: [nx0, nx1], pawL: { dx: pl.dx, dy: pl.dy, rect: pl.r }, pawR: { dx: pr.dx, dy: pr.dy, rect: pr.r } },
     bytes: Object.fromEntries(Object.entries(svgs).map(([k, s]) => [k, s.length])),
   }, null, 1))
