@@ -469,8 +469,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         if (JSON.parse(oldKey)[0] !== contentKey) paginationRequests.current.delete(oldKey)
       }
       request = fetchDraftPaperPagination(draftPaper!.id, product).catch((error) => {
-        // A transient failure must remain retryable; insufficient content is
-        // deterministic until the draft changes.
+        // Transient failures may retry; insufficient content stays cached until the draft changes.
         if (!(error instanceof Error && error.message.includes('题量不足 8 页'))) paginationRequests.current.delete(key)
         throw error
       })
@@ -479,7 +478,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     return request
   }
   function checkEconomyAvailability() {
-    if (!draftPaper?.items.length || paginationStatus !== 'ready' || renderedPaginationKey !== paginationKey
+    if (!draftPaper?.items.length || paginationStatus === 'loading' || renderedPaginationKey !== paginationKey
       || economyCheckKey.current === contentKey) return
     const key = contentKey
     economyCheckKey.current = key
@@ -1295,7 +1294,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       setExportStatus('error')
       const fixedLayoutMessage = error instanceof Error
-        && /^(未在有界搜索内找到|大字完整版需要|无法生成指定页数的友好 PDF：|长卷版未找到|长卷版：|定页版需要|10 页友好版需要完整|12 页长卷版需要完整|试卷内容超出排版区域：)/.test(error.message)
+        && /^(题量不足 8 页|未在有界搜索内找到|大字完整版需要|无法生成指定页数的友好 PDF：|长卷版未找到|长卷版：|定页版需要|10 页友好版需要完整|12 页长卷版需要完整|试卷内容超出排版区域：)/.test(error.message)
         ? error.message : null
       setExportError(edition === 'answerOnly'
         ? `纯答案版不可用：${error instanceof Error ? error.message : '无法读取同版本源参考答案。'}`
