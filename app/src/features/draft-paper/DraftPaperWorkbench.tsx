@@ -481,11 +481,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     if (!draftPaper?.items.length) return
     let current = true
     const timer = window.setTimeout(() => {
-      requestPagination('economy8').then(() => {
-        if (current) setEconomyAvailability({ key: contentKey, insufficient: false })
-      }).catch((error) => {
-        if (current) setEconomyAvailability({ key: contentKey, insufficient: error instanceof Error && error.message.includes('题量不足 8 页') })
-      })
+      fetch(`/api/draft-papers/${encodeURIComponent(draftPaper.id)}/pagination?check=economy8`).then(async response => {
+        if (!response.ok) return
+        const { insufficient } = await response.json()
+        if (current) setEconomyAvailability({ key: contentKey, insufficient })
+      }).catch(() => { /* A failed check cannot prove insufficient content. */ })
     }, 400)
     return () => { current = false; window.clearTimeout(timer) }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -529,7 +529,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           setPaginatedHtml('')
           setRenderedPaginationKey(paginationKey)
           setPaginationStatus('error')
-          setPaginationError(edition === 'answerOnly'
+          setPaginationError(error instanceof Error && error.message.includes('题量不足 8 页')
+            ? '题量不足 8 页，加题后可用' : edition === 'answerOnly'
             ? `纯答案版不可用：${error instanceof Error ? error.message : '无法读取同版本源参考答案。'}`
             : describeError('生成分页预览', error))
         })
@@ -1675,7 +1676,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 </>
               ) : (
                 <div className="draft-a4-empty">
-                  {renderedPaginationKey === paginationKey && paginationStatus === 'error' ? paginationError || '分页预览生成失败，请稍后重试。' : '正在生成分页预览…'}
+                  {edition === 'economy8' && economyInsufficient ? '题量不足 8 页，加题后可用' : renderedPaginationKey === paginationKey && paginationStatus === 'error' ? paginationError || '分页预览生成失败，请稍后重试。' : '正在生成分页预览…'}
                 </div>
               )}
             </div>

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { verifyDrawingAreaProductPolicy } from './verify-application-drawing-area.mjs'
 await verifyDrawingAreaProductPolicy()
 import { readFileSync } from 'node:fs'
-import { applyStudentProductLayout, planStudentProductPdf, renderExplicitStudentProductPdf, studentProductPolicy } from '../server/draft-paper/studentProductPdf.mjs'
+import { applyStudentProductLayout, checkEconomyFeasibility, planStudentProductPdf, renderExplicitStudentProductPdf, studentProductPolicy } from '../server/draft-paper/studentProductPdf.mjs'
 import { validatePaperPaginationPlan, paginationPlanEdition, productPageLimitsForPlan, productPlanAuthorization } from '../server/paper-import/paginationPlan.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
@@ -28,6 +28,15 @@ const geometry = source => ({
 })
 
 {
+  for (const pages of [2, 9]) {
+    let checks = 0
+    assert.deepEqual(await checkEconomyFeasibility(html, { render: async (_source, options) => {
+      checks += 1
+      assert.equal(options.generatePdf, false)
+      return { pageCount: pages, inspection: [{ id: 'reading', pages: [1] }] }
+    } }), { insufficient: pages === 2 })
+    assert.equal(checks, 1, 'feasibility never searches a second candidate')
+  }
   let renders = 0
   await assert.rejects(() => planStudentProductPdf(
     '<html><head><style>@page{margin: 21mm 24mm 24mm 24mm;}</style></head><body><section data-canonical-group-id="reading">Reading</section></body></html>',

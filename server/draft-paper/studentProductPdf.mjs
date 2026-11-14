@@ -143,6 +143,22 @@ async function restoreAnswerSpace(fit, layout, { measure, accept, canMeasure }) 
   return { fit, layout }
 }
 
+const insufficientPages = result => result.pageCount + Math.max(0, result.inspection.length - 1) < 8
+
+export async function checkEconomyFeasibility(html, { render }) {
+  const layout = { profile: economyProfile, fontSizePt: 12, figureLayout: 'natural', answerBoxHeightsMm: normalHeights }
+  try {
+    const result = await render(applyPlannedGroupBreaks(applyStudentProductLayout(html, layout, 'economy8'), []),
+      { inspect: inspectGroups, generatePdf: false })
+    return { insufficient: insufficientPages(result) }
+  } catch (error) {
+    // Overflow cannot prove insufficient content. The selected product's
+    // ordinary search remains responsible for finding a valid layout.
+    if (error.code === 'PAPER_LAYOUT_OVERFLOW') return { insufficient: false }
+    throw error
+  }
+}
+
 export async function planStudentProductPdf(html, { edition, render, economyPageLimit = 8, largeCompletePageLimit = 12, largeNoListeningPageLimit = 10 }) {
   const policy = studentProductPolicy(edition, edition === 'largeComplete' ? 2 : 0, { economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit })
   const accept = result => acceptableWriting(result, html)
@@ -194,7 +210,7 @@ export async function planStudentProductPdf(html, { edition, render, economyPage
     // A group break can add at most one page. Keep papers which can still
     // reach eight through semantic breaks; a short reading cannot.
     if (!policy.atMost && searchedCandidates === 1
-      && natural.pageCount + Math.max(0, natural.inspection.length - 1) < policy.targetPages) {
+      && insufficientPages(natural)) {
       throw Object.assign(impossible(edition, searchedCandidates, economyPageLimit), {
         message: '题量不足 8 页，加题后可用', actualPages: natural.pageCount,
         timing: finishPaginationTiming(timed.timing),
