@@ -324,10 +324,16 @@
     white-space: normal;
   }
 
-  /* Screen listening uses three content-sized tracks, including Canonical's
-   * Print-only one_column fallback. Only genuinely long rows need to wrap.
+  /* Preserve Canonical's equal thirds when the row fits. Only its Print-only
+   * one_column fallback needs content-sized tracks on Screen.
    * Keep specificity low so the mobile single-column rule still wins. */
-  .paper-browse-content :where(.canonical-listening-surface) .ps-option-list {
+  .paper-browse-content :where(.canonical-listening-surface) .ps-option-list--three_columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    /* Override Canonical's inline gap: 0 so adjacent options stay distinct. */
+    column-gap: 1em !important;
+  }
+
+  .paper-browse-content :where(.canonical-listening-surface) .ps-option-list--one_column {
     grid-template-columns: repeat(3, auto) !important;
     /* Override Canonical's inline gap: 0 so adjacent options stay distinct. */
     column-gap: 1em !important;
