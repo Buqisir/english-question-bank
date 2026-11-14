@@ -1,0 +1,342 @@
+{
+ "app-icon-16 (= favicon-16)": {
+  "file": "design/brand-2026-10-13/mascot/small/app-icon-16.png",
+  "size": [
+   16,
+   16
+  ],
+  "eyes": [
+   {
+    "px": 2,
+    "box": [
+     1,
+     2
+    ],
+    "at": [
+     4,
+     5
+    ],
+    "gapNose": 1,
+    "gapFace": 0,
+    "gapOutline": 1,
+    "gapWhisker": null
+   },
+   {
+    "px": 2,
+    "box": [
+     1,
+     2
+    ],
+    "at": [
+     11,
+     5
+    ],
+    "gapNose": 1,
+    "gapFace": 0,
+    "gapOutline": 1,
+    "gapWhisker": null
+   }
+  ],
+  "eyeCenterDist": 7,
+  "headWidthAtEyeRow": 12,
+  "figureBox": [
+   16,
+   14
+  ],
+  "nosePx": 6,
+  "facePx": 36,
+  "whiskerDots": 0
+ },
+ "app-icon-32 (= favicon-32)": {
+  "file": "design/brand-2026-10-13/mascot/small/app-icon-32.png",
+  "size": [
+   32,
+   32
+  ],
+  "eyes": [
+   {
+    "px": 4,
+    "box": [
+     2,
+     2
+    ],
+    "at": [
+     9,
+     12
+    ],
+    "gapNose": 1,
+    "gapFace": 1,
+    "gapOutline": 4,
+    "gapWhisker": 3
+   },
+   {
+    "px": 4,
+    "box": [
+     2,
+     2
+    ],
+    "at": [
+     21,
+     12
+    ],
+    "gapNose": 1,
+    "gapFace": 1,
+    "gapOutline": 4,
+    "gapWhisker": 3
+   }
+  ],
+  "eyeCenterDist": 12,
+  "headWidthAtEyeRow": 26,
+  "figureBox": [
+   32,
+   28
+  ],
+  "nosePx": 26,
+  "facePx": 122,
+  "whiskerDots": 6
+ },
+ "otter-head-16": {
+  "file": "design/brand-2026-10-13/mascot/small/otter-head-16.png",
+  "size": [
+   16,
+   16
+  ],
+  "eyes": [
+   {
+    "px": 2,
+    "box": [
+     1,
+     2
+    ],
+    "at": [
+     4,
+     5
+    ],
+    "gapNose": 1,
+    "gapFace": 0,
+    "gapOutline": 1,
+    "gapWhisker": null
+   },
+   {
+    "px": 2,
+    "box": [
+     1,
+     2
+    ],
+    "at": [
+     11,
+     5
+    ],
+    "gapNose": 1,
+    "gapFace": 0,
+    "gapOutline": 1,
+    "gapWhisker": null
+   }
+  ],
+  "eyeCenterDist": 7,
+  "headWidthAtEyeRow": 12,
+  "figureBox": [
+   16,
+   14
+  ],
+  "nosePx": 6,
+  "facePx": 36,
+  "whiskerDots": 0
+ },
+ "otter-head-32": {
+  "file": "design/brand-2026-10-13/mascot/small/otter-head-32.png",
+  "size": [
+   32,
+   32
+  ],
+  "eyes": [
+   {
+    "px": 4,
+    "box": [
+     2,
+     2
+    ],
+    "at": [
+     9,
+     11
+    ],
+    "gapNose": 1,
+    "gapFace": 1,
+    "gapOutline": 4,
+    "gapWhisker": 3
+   },
+   {
+    "px": 4,
+    "box": [
+     2,
+     2
+    ],
+    "at": [
+     21,
+     11
+    ],
+    "gapNose": 1,
+    "gapFace": 1,
+    "gapOutline": 4,
+    "gapWhisker": 3
+   }
+  ],
+  "eyeCenterDist": 12,
+  "headWidthAtEyeRow": 26,
+  "figureBox": [
+   32,
+   29
+  ],
+  "nosePx": 26,
+  "facePx": 122,
+  "whiskerDots": 6
+ },
+ "mark-16 (mint)": {
+  "file": "design/brand-2026-10-13/logo/mint/mark-16.png",
+  "size": [
+   16,
+   16
+  ],
+  "eyes": [
+   {
+    "px": 2,
+    "box": [
+     1,
+     2
+    ],
+    "at": [
+     4,
+     6
+    ],
+    "gapNose": 1,
+    "gapFace": 0,
+    "gapOutline": 1,
+    "gapWhisker": null
+   },
+   {
+    "px": 2,
+    "box": [
+     1,
+     2
+    ],
+    "at": [
+     11,
+     6
+    ],
+    "gapNose": 1,
+    "gapFace": 0,
+    "gapOutline": 1,
+    "gapWhisker": null
+   }
+  ],
+  "eyeCenterDist": 7,
+  "headWidthAtEyeRow": 12,
+  "figureBox": [
+   16,
+   10
+  ],
+  "nosePx": 6,
+  "facePx": 36,
+  "whiskerDots": 0
+ },
+ "mark-32 (mint, = 顶栏 1x)": {
+  "file": "design/brand-2026-10-13/logo/mint/mark-32.png",
+  "size": [
+   32,
+   20
+  ],
+  "eyes": [
+   {
+    "px": 4,
+    "box": [
+     2,
+     2
+    ],
+    "at": [
+     9,
+     8
+    ],
+    "gapNose": 1,
+    "gapFace": 1,
+    "gapOutline": 4,
+    "gapWhisker": 3
+   },
+   {
+    "px": 4,
+    "box": [
+     2,
+     2
+    ],
+    "at": [
+     21,
+     8
+    ],
+    "gapNose": 1,
+    "gapFace": 1,
+    "gapOutline": 4,
+    "gapWhisker": 3
+   }
+  ],
+  "eyeCenterDist": 12,
+  "headWidthAtEyeRow": 26,
+  "figureBox": [
+   32,
+   20
+  ],
+  "nosePx": 26,
+  "facePx": 122,
+  "whiskerDots": 6
+ },
+ "mark-16-mono": {
+  "file": "design/brand-2026-10-13/logo/mark-16-mono.png",
+  "error": "没量到：自动分块失败（单色版的眼洞和脸斑洞连在一起，分不出两只眼睛）。手量见 README。"
+ },
+ "mark-32-mono": {
+  "file": "design/brand-2026-10-13/logo/mark-32-mono.png",
+  "size": [
+   32,
+   32
+  ],
+  "eyes": [
+   {
+    "px": 4,
+    "box": [
+     2,
+     2
+    ],
+    "at": [
+     9,
+     14
+    ],
+    "gapNose": 2,
+    "gapFace": 1,
+    "gapOutline": 4,
+    "gapWhisker": 3
+   },
+   {
+    "px": 4,
+    "box": [
+     2,
+     2
+    ],
+    "at": [
+     21,
+     14
+    ],
+    "gapNose": 2,
+    "gapFace": 1,
+    "gapOutline": 4,
+    "gapWhisker": 3
+   }
+  ],
+  "eyeCenterDist": 12,
+  "headWidthAtEyeRow": 26,
+  "figureBox": [
+   32,
+   20
+  ],
+  "nosePx": 18,
+  "facePx": 130,
+  "whiskerDots": 6
+ }
+}

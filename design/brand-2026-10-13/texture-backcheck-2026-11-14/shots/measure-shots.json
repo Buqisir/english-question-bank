@@ -1,0 +1,368 @@
+{
+ "note": "本地网站（rig.mjs，端口偏移 44），owner 账号，减少动态效果。截图里的像素就是物理像素。",
+ "positions": {
+  "empty-my-space": {
+   "cssBox": {
+    "x": 676,
+    "y": 275.140625,
+    "width": 88,
+    "height": 88
+   },
+   "note": "现网空态是 EmptyIllustration（88×88 平涂图标），没有獭獭"
+  },
+  "login-brand": {
+   "1x": {
+    "cssBox": {
+     "x": 56,
+     "y": 40,
+     "width": 24,
+     "height": 24
+    },
+    "clip": {
+     "x": 48,
+     "y": 32,
+     "width": 40,
+     "height": 40
+    },
+    "eyeDiameterCss": 1.46,
+    "eyeDiameterDevicePx": 1.46,
+    "coverage": [
+     {
+      "equivalentInkPx": 2.13,
+      "pxAtLeastHalf": 2,
+      "pxTouched": 4
+     },
+     {
+      "equivalentInkPx": 2.09,
+      "pxAtLeastHalf": 2,
+      "pxTouched": 4
+     }
+    ]
+   },
+   "2x": {
+    "cssBox": {
+     "x": 56,
+     "y": 40,
+     "width": 24,
+     "height": 24
+    },
+    "clip": {
+     "x": 48,
+     "y": 32,
+     "width": 40,
+     "height": 40
+    },
+    "eyeDiameterCss": 1.46,
+    "eyeDiameterDevicePx": 2.92,
+    "coverage": [
+     {
+      "equivalentInkPx": 8.1,
+      "pxAtLeastHalf": 8,
+      "pxTouched": 11
+     },
+     {
+      "equivalentInkPx": 7.97,
+      "pxAtLeastHalf": 8,
+      "pxTouched": 11
+     }
+    ]
+   }
+  },
+  "login-otter-face": {
+   "1x": {
+    "cssBox": {
+     "x": 917.84375,
+     "y": 198.1328125,
+     "width": 419.734375,
+     "height": 416.03125
+    },
+    "clip": {
+     "x": 944.8334350585938,
+     "y": 471.06060791015625,
+     "width": 93.58349609375,
+     "height": 73.08865356445312
+    },
+    "eyeDiameterCss": 6.8,
+    "eyeDiameterDevicePx": 6.8,
+    "coverage": [
+     {
+      "equivalentInkPx": 41.06,
+      "pxAtLeastHalf": 43,
+      "pxTouched": 49
+     },
+     {
+      "equivalentInkPx": 39.17,
+      "pxAtLeastHalf": 39,
+      "pxTouched": 45
+     }
+    ]
+   },
+   "2x": {
+    "cssBox": {
+     "x": 917.84375,
+     "y": 198.1328125,
+     "width": 419.734375,
+     "height": 416.03125
+    },
+    "clip": {
+     "x": 944.8334350585938,
+     "y": 471.06060791015625,
+     "width": 93.58349609375,
+     "height": 73.08865356445312
+    },
+    "eyeDiameterCss": 6.8,
+    "eyeDiameterDevicePx": 13.61,
+    "coverage": [
+     {
+      "equivalentInkPx": 150.61,
+      "pxAtLeastHalf": 152,
+      "pxTouched": 164
+     },
+     {
+      "equivalentInkPx": 149.4,
+      "pxAtLeastHalf": 149,
+      "pxTouched": 162
+     }
+    ]
+   }
+  },
+  "topbar-mark": {
+   "1x": {
+    "cssBox": {
+     "x": 292,
+     "y": 22,
+     "width": 32,
+     "height": 20
+    },
+    "clip": {
+     "x": 284,
+     "y": 14,
+     "width": 48,
+     "height": 36
+    },
+    "currentSrc": "/brand/mark-32.png",
+    "eyeDiameterCss": 2,
+    "eyeDiameterDevicePx": 2,
+    "coverage": [
+     {
+      "equivalentInkPx": 4,
+      "pxAtLeastHalf": 4,
+      "pxTouched": 4
+     },
+     {
+      "equivalentInkPx": 4,
+      "pxAtLeastHalf": 4,
+      "pxTouched": 4
+     }
+    ]
+   },
+   "2x": {
+    "cssBox": {
+     "x": 292,
+     "y": 22,
+     "width": 32,
+     "height": 20
+    },
+    "clip": {
+     "x": 284,
+     "y": 14,
+     "width": 48,
+     "height": 36
+    },
+    "currentSrc": "/brand/mark.svg",
+    "eyeDiameterCss": 1.9,
+    "eyeDiameterDevicePx": 3.79,
+    "coverage": [
+     {
+      "equivalentInkPx": 13.2,
+      "pxAtLeastHalf": 14,
+      "pxTouched": 16
+     },
+     {
+      "equivalentInkPx": 13.35,
+      "pxAtLeastHalf": 14,
+      "pxTouched": 17
+     }
+    ]
+   }
+  },
+  "tab-light": {
+   "1x": {
+    "cssBox": {
+     "x": 18,
+     "y": 17,
+     "width": 16,
+     "height": 16
+    },
+    "clip": {
+     "x": 14,
+     "y": 13,
+     "width": 24,
+     "height": 24
+    },
+    "file": "favicon-16.png",
+    "eyeDiameterCss": null,
+    "eyeDiameterDevicePx": 2,
+    "coverage": [
+     {
+      "equivalentInkPx": 2,
+      "pxAtLeastHalf": 2,
+      "pxTouched": 2
+     },
+     {
+      "equivalentInkPx": 2,
+      "pxAtLeastHalf": 2,
+      "pxTouched": 2
+     }
+    ]
+   },
+   "2x": {
+    "cssBox": {
+     "x": 18,
+     "y": 17,
+     "width": 16,
+     "height": 16
+    },
+    "clip": {
+     "x": 14,
+     "y": 13,
+     "width": 24,
+     "height": 24
+    },
+    "file": "favicon-32.png",
+    "eyeDiameterCss": null,
+    "eyeDiameterDevicePx": 2,
+    "coverage": [
+     {
+      "equivalentInkPx": 4,
+      "pxAtLeastHalf": 4,
+      "pxTouched": 4
+     },
+     {
+      "equivalentInkPx": 4,
+      "pxAtLeastHalf": 4,
+      "pxTouched": 4
+     }
+    ]
+   }
+  },
+  "tab-dark": {
+   "1x": {
+    "cssBox": {
+     "x": 230,
+     "y": 17,
+     "width": 16,
+     "height": 16
+    },
+    "clip": {
+     "x": 226,
+     "y": 13,
+     "width": 24,
+     "height": 24
+    },
+    "file": "favicon-16.png",
+    "eyeDiameterCss": null,
+    "eyeDiameterDevicePx": 2,
+    "coverage": [
+     {
+      "equivalentInkPx": 2,
+      "pxAtLeastHalf": 2,
+      "pxTouched": 2
+     },
+     {
+      "equivalentInkPx": 2,
+      "pxAtLeastHalf": 2,
+      "pxTouched": 2
+     }
+    ]
+   },
+   "2x": {
+    "cssBox": {
+     "x": 230,
+     "y": 17,
+     "width": 16,
+     "height": 16
+    },
+    "clip": {
+     "x": 226,
+     "y": 13,
+     "width": 24,
+     "height": 24
+    },
+    "file": "favicon-32.png",
+    "eyeDiameterCss": null,
+    "eyeDiameterDevicePx": 2,
+    "coverage": [
+     {
+      "equivalentInkPx": 4,
+      "pxAtLeastHalf": 4,
+      "pxTouched": 4
+     },
+     {
+      "equivalentInkPx": 4,
+      "pxAtLeastHalf": 4,
+      "pxTouched": 4
+     }
+    ]
+   }
+  },
+  "home-icon": {
+   "1x": {
+    "cssBox": {
+     "x": 24,
+     "y": 70,
+     "width": 60,
+     "height": 60
+    },
+    "clip": {
+     "x": 20,
+     "y": 66,
+     "width": 68,
+     "height": 68
+    },
+    "eyeDiameterCss": 3.33,
+    "eyeDiameterDevicePx": 3.33,
+    "coverage": [
+     {
+      "equivalentInkPx": 9.57,
+      "pxAtLeastHalf": 10,
+      "pxTouched": 13
+     },
+     {
+      "equivalentInkPx": 9.7,
+      "pxAtLeastHalf": 10,
+      "pxTouched": 13
+     }
+    ]
+   },
+   "2x": {
+    "cssBox": {
+     "x": 24,
+     "y": 70,
+     "width": 60,
+     "height": 60
+    },
+    "clip": {
+     "x": 20,
+     "y": 66,
+     "width": 68,
+     "height": 68
+    },
+    "eyeDiameterCss": 3.33,
+    "eyeDiameterDevicePx": 6.66,
+    "coverage": [
+     {
+      "equivalentInkPx": 40.27,
+      "pxAtLeastHalf": 41,
+      "pxTouched": 44
+     },
+     {
+      "equivalentInkPx": 39.85,
+      "pxAtLeastHalf": 40,
+      "pxTouched": 46
+     }
+    ]
+   }
+  }
+ }
+}
