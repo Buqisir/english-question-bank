@@ -1,0 +1,8192 @@
+{
+ "generatedAt": "2026-11-14T09:36:33.508Z",
+ "base": "http://127.0.0.1:5342",
+ "query": "2026 阅读",
+ "widths": {
+  "390": {
+   "steps": [
+    {
+     "id": "m01",
+     "screen": "首页",
+     "intent": "回到首页",
+     "clicks": 0,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [],
+     "notes": [],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/m01-首页刚打开.png",
+       "afterMs": 200,
+       "notices": [],
+       "text": "獭石 生词本 过生词 个人空间 管理 ow 退出 自然语言搜索 浏览全部 1 套卷 草稿卷（0 组）"
+      }
+     ],
+     "ms": 4703,
+     "shot": "shots/m01-回到首页.png",
+     "url": "/",
+     "clickables": {
+      "inView": [
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         90,
+         47,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         179,
+         47,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         268,
+         47,
+         98,
+         36
+        ]
+       },
+       {
+        "name": "管理",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         182,
+         87,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         294,
+         87,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "输入框「比如：找一道讲生态恢复的阅读 C，主旨概括」",
+        "kind": "input",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:570:15",
+        "box": [
+         43,
+         172,
+         312,
+         20
+        ]
+       },
+       {
+        "name": "搜索",
+        "kind": "button",
+        "inView": true,
+        "disabled": true,
+        "inv": "concierge/ConciergeDesk.tsx:603:15",
+        "box": [
+         323,
+         166,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "浏览全部 1 套卷",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         12,
+         217,
+         136,
+         32
+        ]
+       },
+       {
+        "name": "草稿卷（0 组）（读屏：打开草稿卷，已选 0 个题组）",
+        "kind": "button",
+        "inView": true,
+        "disabled": true,
+        "inv": "App.tsx:1166:7",
+        "box": [
+         215,
+         784,
+         151,
+         36
+        ]
+       }
+      ],
+      "totalOnPage": 9
+     },
+     "notices": [],
+     "draft": [],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "m02",
+     "screen": "首页",
+     "intent": "输入找题需求并回车",
+     "clicks": 1,
+     "keys": 1,
+     "scrolls": 0,
+     "typed": [
+      "2026 阅读"
+     ],
+     "actions": [
+      "点「搜索框」",
+      "在「搜索框」里输入「2026 阅读」",
+      "按回车"
+     ],
+     "notes": [
+      "「思考模式」字号 16px，结果行标题字号 13.5px",
+      "卷行右侧写「整卷未上线」，没有「看整卷」可点"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/m02-回车后.png",
+       "afterMs": 250,
+       "notices": [
+        {
+         "cls": "concierge-notice",
+         "text": "已按本地题库精确信息匹配。",
+         "box": [
+          24,
+          299,
+          342,
+          32
+         ]
+        },
+        {
+         "cls": "concierge-results",
+         "text": "2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 加入草稿卷 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 加入草稿卷 D篇 推荐理由：2026 E2E · D 篇 加入草稿卷",
+         "box": [
+          24,
+          355,
+          342,
+          313
+         ]
+        },
+        {
+         "cls": "concierge-paper-detail",
+         "text": "A篇 推荐理由：2026 E2E · A 篇 加入草稿卷 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 加入草稿卷 D篇 推荐理由：2026 E2E · D 篇 加入草稿卷",
+         "box": [
+          24,
+          444,
+          342,
+          223
+         ]
+        }
+       ],
+       "text": "獭石 生词本 过生词 个人空间 管理 ow 退出 自然语言搜索 思考模式 筛选 已按本地题库精确信息匹配。 2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 加入草稿卷 B篇 推荐理由：2026 E2E · B 篇 加"
+      }
+     ],
+     "ms": 1663,
+     "shot": "shots/m02-输入找题需求并回车.png",
+     "url": "/",
+     "clickables": {
+      "inView": [
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         90,
+         47,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         179,
+         47,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         268,
+         47,
+         98,
+         36
+        ]
+       },
+       {
+        "name": "管理",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         182,
+         87,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         294,
+         87,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "输入框「比如：找一道讲生态恢复的阅读 C，主旨概括」=2026 阅读",
+        "kind": "input",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:570:15",
+        "box": [
+         43,
+         172,
+         312,
+         20
+        ]
+       },
+       {
+        "name": "清除搜索",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         289,
+         168,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "搜索",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:603:15",
+        "box": [
+         323,
+         166,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "思考模式［关］",
+        "kind": "input",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:690:15",
+        "box": [
+         24,
+         211,
+         32,
+         18
+        ]
+       },
+       {
+        "name": "筛选",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         24,
+         231,
+         50,
+         36
+        ]
+       },
+       {
+        "name": "收起来源卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergePaperRow.tsx:287:9",
+        "box": [
+         90,
+         366,
+         22,
+         22
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         294,
+         458,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         324,
+         458,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         294,
+         514,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         324,
+         514,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         294,
+         570,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         324,
+         570,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         294,
+         626,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         324,
+         626,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "草稿卷（0 组）（读屏：打开草稿卷，已选 0 个题组）",
+        "kind": "button",
+        "inView": true,
+        "disabled": true,
+        "inv": "App.tsx:1166:7",
+        "box": [
+         215,
+         784,
+         151,
+         36
+        ]
+       }
+      ],
+      "totalOnPage": 20
+     },
+     "notices": [
+      {
+       "cls": "concierge-notice",
+       "text": "已按本地题库精确信息匹配。",
+       "box": [
+        24,
+        299,
+        342,
+        32
+       ]
+      },
+      {
+       "cls": "concierge-results",
+       "text": "2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 加入草稿卷 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 加入草稿卷 D篇 推荐理由：2026 E2E · D 篇 加入草稿卷",
+       "box": [
+        24,
+        355,
+        342,
+        313
+       ]
+      },
+      {
+       "cls": "concierge-paper-detail",
+       "text": "A篇 推荐理由：2026 E2E · A 篇 加入草稿卷 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 加入草稿卷 D篇 推荐理由：2026 E2E · D 篇 加入草稿卷",
+       "box": [
+        24,
+        444,
+        342,
+        223
+       ]
+      }
+     ],
+     "draft": [],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "m03",
+     "screen": "首页 → 题组详情",
+     "intent": "点开 A篇 看一眼",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「A篇」"
+     ],
+     "notes": [
+      "详情页卷面位置写「这份卷还没上线，回到题库换一份看看。」，看不到题目原文"
+     ],
+     "ok": true,
+     "ms": 1612,
+     "shot": "shots/m03-点开-A篇-看一眼.png",
+     "url": "/?view=detail&groupId=group-2026-i-reading-a",
+     "clickables": {
+      "inView": [
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         38,
+         37,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         119,
+         37,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         200,
+         37,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "管理",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         294,
+         37,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         294,
+         69,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         40,
+         109,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         48,
+         253,
+         143,
+         32
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         314,
+         293,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "草稿卷（0 组）（读屏：打开草稿卷，已选 0 个题组）",
+        "kind": "button",
+        "inView": true,
+        "disabled": true,
+        "inv": "App.tsx:1166:7",
+        "box": [
+         226,
+         792,
+         140,
+         28
+        ]
+       }
+      ],
+      "totalOnPage": 9
+     },
+     "notices": [],
+     "draft": [],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "m04",
+     "screen": "题组详情",
+     "intent": "在详情页加入草稿卷",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「加入草稿卷」"
+     ],
+     "notes": [
+      "点完以后这颗键写「已在草稿卷」"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/m04-点完.png",
+       "afterMs": 300,
+       "notices": [],
+       "text": "獭石 生词本 过生词 个人空间 管理 ow 退出 返回找题 阅读理解 · 3 题 · 自建 Reading A Reading A 已在草稿卷 这份卷还没上线，回到题库换一份看看。 草稿卷（1 组）"
+      }
+     ],
+     "ms": 1649,
+     "shot": "shots/m04-在详情页加入草稿卷.png",
+     "url": "/?view=detail&groupId=group-2026-i-reading-a",
+     "clickables": {
+      "inView": [
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         38,
+         37,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         119,
+         37,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         200,
+         37,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "管理",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         294,
+         37,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         294,
+         69,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         40,
+         109,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "已在草稿卷",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         48,
+         253,
+         143,
+         32
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         314,
+         293,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "草稿卷（1 组）（读屏：打开草稿卷，已选 1 个题组）",
+        "kind": "button",
+        "inView": true,
+        "inv": "App.tsx:1166:7",
+        "box": [
+         213,
+         792,
+         153,
+         28
+        ]
+       }
+      ],
+      "totalOnPage": 9
+     },
+     "notices": [],
+     "draft": [
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "m05",
+     "screen": "题组详情 → 首页",
+     "intent": "回到找题结果",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「返回找题」"
+     ],
+     "notes": [
+      "搜索框里还留着「2026 阅读」，结果 4 行"
+     ],
+     "ok": true,
+     "ms": 1584,
+     "shot": "shots/m05-回到找题结果.png",
+     "url": "/",
+     "clickables": {
+      "inView": [
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         90,
+         47,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         179,
+         47,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         268,
+         47,
+         98,
+         36
+        ]
+       },
+       {
+        "name": "管理",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         182,
+         87,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         294,
+         87,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "输入框「比如：找一道讲生态恢复的阅读 C，主旨概括」=2026 阅读",
+        "kind": "input",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:570:15",
+        "box": [
+         43,
+         172,
+         312,
+         20
+        ]
+       },
+       {
+        "name": "清除搜索",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         289,
+         168,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "搜索",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:603:15",
+        "box": [
+         323,
+         166,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "思考模式［关］",
+        "kind": "input",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:690:15",
+        "box": [
+         24,
+         211,
+         32,
+         18
+        ]
+       },
+       {
+        "name": "筛选",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         24,
+         231,
+         50,
+         36
+        ]
+       },
+       {
+        "name": "收起来源卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergePaperRow.tsx:287:9",
+        "box": [
+         90,
+         366,
+         22,
+         22
+        ]
+       },
+       {
+        "name": "已在草稿卷中（读屏：从草稿卷移出）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         294,
+         458,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         324,
+         458,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         294,
+         514,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         324,
+         514,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         294,
+         570,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         324,
+         570,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         294,
+         626,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         324,
+         626,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "草稿卷（1 组）（读屏：打开草稿卷，已选 1 个题组）",
+        "kind": "button",
+        "inView": true,
+        "inv": "App.tsx:1166:7",
+        "box": [
+         202,
+         784,
+         164,
+         36
+        ]
+       }
+      ],
+      "totalOnPage": 20
+     },
+     "notices": [
+      {
+       "cls": "concierge-notice",
+       "text": "已按本地题库精确信息匹配。",
+       "box": [
+        24,
+        299,
+        342,
+        32
+       ]
+      },
+      {
+       "cls": "concierge-results",
+       "text": "2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 加入草稿卷 D篇 推荐理由：2026 E2E · D 篇 加入草稿卷",
+       "box": [
+        24,
+        355,
+        342,
+        313
+       ]
+      },
+      {
+       "cls": "concierge-paper-detail",
+       "text": "A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 加入草稿卷 D篇 推荐理由：2026 E2E · D 篇 加入草稿卷",
+       "box": [
+        24,
+        444,
+        342,
+        223
+       ]
+      }
+     ],
+     "draft": [
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "m06",
+     "screen": "首页",
+     "intent": "在结果行加入 C篇、D篇",
+     "clicks": 2,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「C篇 的 +」",
+      "点「D篇 的 +」"
+     ],
+     "notes": [
+      "右下草稿丸写「草稿卷（3 组）」"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/m06-加完.png",
+       "afterMs": 100,
+       "notices": [
+        {
+         "cls": "concierge-notice",
+         "text": "已按本地题库精确信息匹配。",
+         "box": [
+          24,
+          299,
+          342,
+          32
+         ]
+        },
+        {
+         "cls": "concierge-results",
+         "text": "2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中 D篇 推荐理由：2026 E2E · D 篇 已在草稿卷中",
+         "box": [
+          24,
+          355,
+          342,
+          313
+         ]
+        },
+        {
+         "cls": "concierge-paper-detail",
+         "text": "A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中 D篇 推荐理由：2026 E2E · D 篇 已在草稿卷中",
+         "box": [
+          24,
+          444,
+          342,
+          223
+         ]
+        }
+       ],
+       "text": "獭石 生词本 过生词 个人空间 管理 ow 退出 自然语言搜索 思考模式 筛选 已按本地题库精确信息匹配。 2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 "
+      }
+     ],
+     "ms": 2158,
+     "shot": "shots/m06-在结果行加入-C篇-D篇.png",
+     "url": "/",
+     "clickables": {
+      "inView": [
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         90,
+         47,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         179,
+         47,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         268,
+         47,
+         98,
+         36
+        ]
+       },
+       {
+        "name": "管理",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         182,
+         87,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         294,
+         87,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "输入框「比如：找一道讲生态恢复的阅读 C，主旨概括」=2026 阅读",
+        "kind": "input",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:570:15",
+        "box": [
+         43,
+         172,
+         312,
+         20
+        ]
+       },
+       {
+        "name": "清除搜索",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         289,
+         168,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "搜索",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:603:15",
+        "box": [
+         323,
+         166,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "思考模式［关］",
+        "kind": "input",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:690:15",
+        "box": [
+         24,
+         211,
+         32,
+         18
+        ]
+       },
+       {
+        "name": "筛选",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         24,
+         231,
+         50,
+         36
+        ]
+       },
+       {
+        "name": "收起来源卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergePaperRow.tsx:287:9",
+        "box": [
+         90,
+         366,
+         22,
+         22
+        ]
+       },
+       {
+        "name": "已在草稿卷中（读屏：从草稿卷移出）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         294,
+         458,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         324,
+         458,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         294,
+         514,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         324,
+         514,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "已在草稿卷中（读屏：从草稿卷移出）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         294,
+         570,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         324,
+         570,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "已在草稿卷中（读屏：从草稿卷移出）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         294,
+         626,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         324,
+         626,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "草稿卷（3 组）（读屏：打开草稿卷，已选 3 个题组）",
+        "kind": "button",
+        "inView": true,
+        "inv": "App.tsx:1166:7",
+        "box": [
+         199,
+         784,
+         167,
+         36
+        ]
+       }
+      ],
+      "totalOnPage": 20
+     },
+     "notices": [
+      {
+       "cls": "concierge-notice",
+       "text": "已按本地题库精确信息匹配。",
+       "box": [
+        24,
+        299,
+        342,
+        32
+       ]
+      },
+      {
+       "cls": "concierge-results",
+       "text": "2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中 D篇 推荐理由：2026 E2E · D 篇 已在草稿卷中",
+       "box": [
+        24,
+        355,
+        342,
+        313
+       ]
+      },
+      {
+       "cls": "concierge-paper-detail",
+       "text": "A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中 D篇 推荐理由：2026 E2E · D 篇 已在草稿卷中",
+       "box": [
+        24,
+        444,
+        342,
+        223
+       ]
+      }
+     ],
+     "draft": [
+      "D篇",
+      "C篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "m07",
+     "screen": "首页 → 草稿卷",
+     "intent": "打开草稿卷",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「草稿卷（N 组）」"
+     ],
+     "notes": [
+      "点草稿丸到题组工具条出现用了约 36 秒",
+      "左栏目录顺序：D篇、C篇、A篇"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/m07-打开中-0.5秒.png",
+       "afterMs": 500,
+       "notices": [
+        {
+         "cls": "draft-loading",
+         "text": "正在打开草稿卷…",
+         "box": [
+          0,
+          154,
+          390,
+          22
+         ]
+        }
+       ],
+       "text": "返回找题 草稿卷 生词本 过生词 个人空间 ow 退出 正在打开草稿卷…"
+      }
+     ],
+     "ms": 52866,
+     "shot": "shots/m07-打开草稿卷.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-46f891d8-f371-4f1a-9fb8-dae46a1a461e",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         10,
+         18,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         108,
+         23,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         23,
+         64,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         61,
+         62,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         120,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         201,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         282,
+         64,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         308,
+         98,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "换篇：换一篇相似篇章",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         346,
+         247,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         346,
+         279,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "建议前置分页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1705:21",
+        "box": [
+         290,
+         728,
+         90,
+         32
+        ]
+       },
+       {
+        "name": "换篇：换一篇相似篇章",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         346,
+         768,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         346,
+         800,
+         32,
+         32
+        ]
+       }
+      ],
+      "totalOnPage": 16
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status idle",
+       "text": "已保存",
+       "box": [
+        227,
+        24,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "D篇",
+      "C篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "m08",
+     "screen": "草稿卷",
+     "intent": "把第一个题组往后挪一位",
+     "clicks": 2,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「⋯（更多题组操作）」",
+      "点「下移」"
+     ],
+     "notes": [
+      "菜单项：上移、下移、移除",
+      "下移后卷面换成「正在生成分页预览…」，约 120 秒后卷面回来",
+      "左栏目录顺序：C篇、D篇、A篇"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/m08-菜单.png",
+       "afterMs": 0,
+       "notices": [
+        {
+         "cls": "draft-save-status idle",
+         "text": "已保存",
+         "box": [
+          227,
+          24,
+          36,
+          17
+         ]
+        }
+       ],
+       "text": "返回找题 1114 英语草稿卷 已保存 导出 生词本 过生词 个人空间 ow 退出 1114 英语草稿卷 建议前置分页 建议前置分页"
+      },
+      {
+       "shot": "shots/m08-下移后-1秒.png",
+       "afterMs": 1000,
+       "notices": [
+        {
+         "cls": "draft-save-status saved",
+         "text": "已保存",
+         "box": [
+          227,
+          24,
+          36,
+          17
+         ]
+        }
+       ],
+       "text": "返回找题 1114 英语草稿卷 已保存 导出 生词本 过生词 个人空间 ow 退出 1114 英语草稿卷 正在生成分页预览…"
+      }
+     ],
+     "ms": 124567,
+     "shot": "shots/m08-把第一个题组往后挪一位.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-46f891d8-f371-4f1a-9fb8-dae46a1a461e",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         10,
+         18,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         108,
+         23,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         23,
+         64,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         61,
+         62,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         120,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         201,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         282,
+         64,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         308,
+         98,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "换篇：换一篇相似篇章",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         346,
+         247,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         346,
+         279,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "建议前置分页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1705:21",
+        "box": [
+         290,
+         728,
+         90,
+         32
+        ]
+       },
+       {
+        "name": "换篇：换一篇相似篇章",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         346,
+         768,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         346,
+         800,
+         32,
+         32
+        ]
+       }
+      ],
+      "totalOnPage": 16
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        227,
+        24,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "m09",
+     "screen": "草稿卷",
+     "intent": "看分页建议并采用一条",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 1,
+     "typed": [],
+     "actions": [
+      "点「建议前置分页」"
+     ],
+     "notes": [
+      "「建议前置分页」在第二、三个题组的工具条上，要先滚下去才看得到",
+      "采用分页建议后卷面换成「正在生成分页预览…」，约 86 秒后卷面回来",
+      "点完以后屏上还剩 2 个「建议前置分页」"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/m09-采用前.png",
+       "afterMs": 0,
+       "notices": [
+        {
+         "cls": "draft-save-status saved",
+         "text": "已保存",
+         "box": [
+          227,
+          24,
+          36,
+          17
+         ]
+        }
+       ],
+       "text": "返回找题 1114 英语草稿卷 已保存 导出 生词本 过生词 个人空间 ow 退出 1114 英语草稿卷 建议前置分页 建议前置分页"
+      }
+     ],
+     "ms": 89729,
+     "shot": "shots/m09-看分页建议并采用一条.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-46f891d8-f371-4f1a-9fb8-dae46a1a461e",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         10,
+         18,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         108,
+         23,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         23,
+         64,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         61,
+         62,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         120,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         201,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         282,
+         64,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         308,
+         98,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "换篇：换一篇相似篇章",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         346,
+         247,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         346,
+         279,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "建议前置分页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1705:21",
+        "box": [
+         290,
+         728,
+         90,
+         32
+        ]
+       },
+       {
+        "name": "换篇：换一篇相似篇章",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         346,
+         768,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         346,
+         800,
+         32,
+         32
+        ]
+       }
+      ],
+      "totalOnPage": 16
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        227,
+        24,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "m10",
+     "screen": "草稿卷",
+     "intent": "移除一个题组",
+     "clicks": 2,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「⋯（更多题组操作）」",
+      "点「移除」"
+     ],
+     "notes": [
+      "撤销提示：题组已移出 撤销"
+     ],
+     "ok": true,
+     "ms": 2016,
+     "shot": "shots/m10-移除一个题组.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-46f891d8-f371-4f1a-9fb8-dae46a1a461e",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         10,
+         18,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         108,
+         23,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         23,
+         64,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         61,
+         62,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         120,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         201,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         282,
+         64,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         308,
+         98,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "撤销",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1796:11",
+        "box": [
+         204,
+         774,
+         74,
+         38
+        ]
+       }
+      ],
+      "totalOnPage": 9
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        227,
+        24,
+        36,
+        17
+       ]
+      },
+      {
+       "cls": "draft-undo-toast",
+       "text": "题组已移出 撤销",
+       "box": [
+        100,
+        764,
+        190,
+        58
+       ]
+      }
+     ],
+     "draft": [
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "m11",
+     "screen": "草稿卷",
+     "intent": "撤回刚才的移除",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「撤销」"
+     ],
+     "notes": [
+      "撤销后卷面换成「正在生成分页预览…」，约 147 秒后卷面回来",
+      "左栏目录顺序：C篇、D篇、A篇"
+     ],
+     "ok": true,
+     "ms": 149635,
+     "shot": "shots/m11-撤回刚才的移除.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-46f891d8-f371-4f1a-9fb8-dae46a1a461e",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         10,
+         18,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         108,
+         23,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         23,
+         64,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         61,
+         62,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         120,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         201,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         282,
+         64,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         308,
+         98,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "换篇：换一篇相似篇章",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         346,
+         247,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         346,
+         279,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "建议前置分页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1705:21",
+        "box": [
+         290,
+         728,
+         90,
+         32
+        ]
+       },
+       {
+        "name": "换篇：换一篇相似篇章",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         346,
+         768,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         346,
+         800,
+         32,
+         32
+        ]
+       }
+      ],
+      "totalOnPage": 16
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        227,
+        24,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "m12",
+     "screen": "草稿卷",
+     "intent": "打开顶栏「⋯」看看",
+     "clicks": 1,
+     "keys": 1,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「⋯（草稿卷更多信息）」",
+      "按Esc 关掉"
+     ],
+     "notes": [
+      "面板里：学生（可选） 最近草稿卷 1114 英语草稿卷 PDF 版本 大字完整版 大字无听力版 省纸版 纯答案版 A4 散页 A3 对折"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/m12-面板.png",
+       "afterMs": 0,
+       "notices": [
+        {
+         "cls": "draft-save-status saved",
+         "text": "已保存",
+         "box": [
+          227,
+          24,
+          36,
+          17
+         ]
+        }
+       ],
+       "text": "返回找题 1114 英语草稿卷 已保存 学生（可选） 最近草稿卷 1114 英语草稿卷 PDF 版本 大字完整版 大字无听力版 省纸版 纯答案版 A4 散页 A3 对折 导出 生词本 过生词 个人空间 ow 退出 1114 英语草稿卷 建议前置分页 建议前置分页"
+      }
+     ],
+     "ms": 1302,
+     "shot": "shots/m12-打开顶栏-⋯-看看.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-46f891d8-f371-4f1a-9fb8-dae46a1a461e",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         10,
+         18,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         108,
+         23,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         23,
+         64,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         61,
+         62,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         120,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         201,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         282,
+         64,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         308,
+         98,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "换篇：换一篇相似篇章",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         346,
+         247,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         346,
+         279,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "建议前置分页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1705:21",
+        "box": [
+         290,
+         728,
+         90,
+         32
+        ]
+       },
+       {
+        "name": "换篇：换一篇相似篇章",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         346,
+         768,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         346,
+         800,
+         32,
+         32
+        ]
+       }
+      ],
+      "totalOnPage": 16
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        227,
+        24,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "m13",
+     "screen": "草稿卷",
+     "intent": "点「导出」",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「导出」"
+     ],
+     "notes": [
+      "顶栏看不到「PDF 版本」下拉框",
+      "菜单项：下载 PDF（大字无听力版）、另存为 PDF…、保存 PDF 到个人空间"
+     ],
+     "ok": true,
+     "ms": 878,
+     "shot": "shots/m13-点-导出.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-46f891d8-f371-4f1a-9fb8-dae46a1a461e",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         10,
+         18,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         108,
+         23,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         23,
+         64,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         61,
+         62,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         120,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         201,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         282,
+         64,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         308,
+         98,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "换篇：换一篇相似篇章",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         346,
+         247,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         346,
+         279,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "建议前置分页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1705:21",
+        "box": [
+         290,
+         728,
+         90,
+         32
+        ]
+       },
+       {
+        "name": "换篇：换一篇相似篇章",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         346,
+         768,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         346,
+         800,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "下载 PDF（大字无听力版）",
+        "kind": "menuitem",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Menu.tsx:289:17",
+        "box": [
+         12,
+         102,
+         199,
+         32
+        ]
+       },
+       {
+        "name": "另存为 PDF…",
+        "kind": "menuitem",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Menu.tsx:289:17",
+        "box": [
+         12,
+         143,
+         199,
+         32
+        ]
+       },
+       {
+        "name": "保存 PDF 到个人空间",
+        "kind": "menuitem",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Menu.tsx:289:17",
+        "box": [
+         12,
+         175,
+         199,
+         32
+        ]
+       }
+      ],
+      "totalOnPage": 19
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        227,
+        24,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "m14",
+     "screen": "草稿卷",
+     "intent": "下载题卷 PDF",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「下载 PDF（大字无听力版）」"
+     ],
+     "notes": [],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/m14-点完-0.3秒.png",
+       "afterMs": 300,
+       "notices": [
+        {
+         "cls": "draft-save-status saved",
+         "text": "已保存",
+         "box": [
+          227,
+          24,
+          36,
+          17
+         ]
+        }
+       ],
+       "text": "返回找题 1114 英语草稿卷 已保存 导出 生词本 过生词 个人空间 ow 退出 PDF 已开始下载。 本卷采用小四（12pt）。 已满足长卷页数上限和正文版式，仍有 1 个题组跨 A3 正反面，请检查分页。 1114 英语草稿卷 建议前置分页 建议前置分页"
+      }
+     ],
+     "ms": 6510,
+     "shot": "shots/m14-下载题卷-PDF.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-46f891d8-f371-4f1a-9fb8-dae46a1a461e",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         10,
+         18,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         108,
+         23,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         23,
+         64,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         61,
+         62,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         120,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         201,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         282,
+         64,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         308,
+         98,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "换篇：换一篇相似篇章",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         346,
+         327,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         346,
+         359,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "建议前置分页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1705:21",
+        "box": [
+         290,
+         808,
+         90,
+         32
+        ]
+       }
+      ],
+      "totalOnPage": 16
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        227,
+        24,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [
+      {
+       "suggestedFilename": "download",
+       "url": "blob:http://127.0.0.1:5342/f82b7645-631e-40d6-a43a-208a43b81daf",
+       "bytes": 209582
+      }
+     ],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "m15",
+     "screen": "草稿卷",
+     "intent": "换成「纯答案版」",
+     "clicks": 3,
+     "keys": 1,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「⋯（草稿卷更多信息）」",
+      "在「PDF 版本」里选「纯答案版」",
+      "按Esc 关掉面板"
+     ],
+     "notes": [
+      "顶栏看不到「PDF 版本」下拉框，到「⋯」面板里找",
+      "选完以后「⋯」面板还开着",
+      "换版本后约 238 秒后卷面回来"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/m15-换完-1秒.png",
+       "afterMs": 1000,
+       "notices": [
+        {
+         "cls": "draft-save-status saved",
+         "text": "已保存",
+         "box": [
+          227,
+          24,
+          36,
+          17
+         ]
+        }
+       ],
+       "text": "返回找题 1114 英语草稿卷 已保存 导出 生词本 过生词 个人空间 ow 退出 1114 英语草稿卷 纯答案版不可用：选中的题组没有同版本已审源参考答案；不能以教师卷替代"
+      }
+     ],
+     "ms": 243004,
+     "shot": "shots/m15-换成-纯答案版.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-46f891d8-f371-4f1a-9fb8-dae46a1a461e",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         10,
+         18,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         108,
+         23,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         23,
+         64,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         61,
+         62,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         120,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         201,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         282,
+         64,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         308,
+         98,
+         64,
+         28
+        ]
+       }
+      ],
+      "totalOnPage": 8
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        227,
+        24,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "m16",
+     "screen": "草稿卷",
+     "intent": "下载答案 PDF",
+     "clicks": 2,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「导出」",
+      "点「下载 PDF（纯答案版）」"
+     ],
+     "notes": [
+      "菜单项：下载 PDF（纯答案版）、另存为 PDF…、保存 PDF 到个人空间"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/m16-点完-0.3秒.png",
+       "afterMs": 300,
+       "notices": [
+        {
+         "cls": "draft-save-status saved",
+         "text": "已保存",
+         "box": [
+          227,
+          24,
+          36,
+          17
+         ]
+        },
+        {
+         "cls": "draft-error",
+         "text": "纯答案版不可用：选中的题组没有同版本已审源参考答案；不能以教师卷替代",
+         "box": [
+          0,
+          160,
+          390,
+          44
+         ]
+        }
+       ],
+       "text": "返回找题 1114 英语草稿卷 已保存 导出 生词本 过生词 个人空间 ow 退出 纯答案版不可用：选中的题组没有同版本已审源参考答案；不能以教师卷替代 1114 英语草稿卷 纯答案版不可用：选中的题组没有同版本已审源参考答案；不能以教师卷替代"
+      }
+     ],
+     "ms": 7223,
+     "shot": "shots/m16-下载答案-PDF.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-46f891d8-f371-4f1a-9fb8-dae46a1a461e",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         10,
+         18,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         108,
+         23,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         23,
+         64,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         61,
+         62,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         120,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         201,
+         64,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         282,
+         64,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         308,
+         98,
+         64,
+         28
+        ]
+       }
+      ],
+      "totalOnPage": 8
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        227,
+        24,
+        36,
+        17
+       ]
+      },
+      {
+       "cls": "draft-error",
+       "text": "纯答案版不可用：选中的题组没有同版本已审源参考答案；不能以教师卷替代",
+       "box": [
+        0,
+        160,
+        390,
+        44
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    }
+   ],
+   "totals": {
+    "steps": 16,
+    "actionSteps": 15,
+    "clicks": 21,
+    "keys": 3,
+    "scrolls": 1,
+    "failed": []
+   },
+   "pageErrors": []
+  },
+  "1440": {
+   "steps": [
+    {
+     "id": "d01",
+     "screen": "首页",
+     "intent": "回到首页",
+     "clicks": 0,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [],
+     "notes": [],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/d01-首页刚打开.png",
+       "afterMs": 200,
+       "notices": [],
+       "text": "獭石 生词本 过生词 个人空间 管理 ow owner 退出 自然语言搜索 浏览全部 1 套卷 草稿卷（0 组）"
+      }
+     ],
+     "ms": 4684,
+     "shot": "shots/d01-回到首页.png",
+     "url": "/",
+     "clickables": {
+      "inView": [
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         637,
+         14,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         726,
+         14,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         815,
+         14,
+         98,
+         36
+        ]
+       },
+       {
+        "name": "管理",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         917,
+         14,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1076,
+         14,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "输入框「比如：找一道讲生态恢复的阅读 C，主旨概括」",
+        "kind": "input",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:570:15",
+        "box": [
+         311,
+         105,
+         826,
+         52
+        ]
+       },
+       {
+        "name": "搜索",
+        "kind": "button",
+        "inView": true,
+        "disabled": true,
+        "inv": "concierge/ConciergeDesk.tsx:603:15",
+        "box": [
+         1105,
+         115,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "浏览全部 1 套卷",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         280,
+         166,
+         136,
+         32
+        ]
+       },
+       {
+        "name": "草稿卷（0 组）（读屏：打开草稿卷，已选 0 个题组）",
+        "kind": "button",
+        "inView": true,
+        "disabled": true,
+        "inv": "App.tsx:1166:7",
+        "box": [
+         1265,
+         840,
+         151,
+         36
+        ]
+       }
+      ],
+      "totalOnPage": 9
+     },
+     "notices": [],
+     "draft": [],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "d02",
+     "screen": "首页",
+     "intent": "输入找题需求并回车",
+     "clicks": 1,
+     "keys": 1,
+     "scrolls": 0,
+     "typed": [
+      "2026 阅读"
+     ],
+     "actions": [
+      "点「搜索框」",
+      "在「搜索框」里输入「2026 阅读」",
+      "按回车"
+     ],
+     "notes": [
+      "「思考模式」字号 16px，结果行标题字号 13.5px",
+      "卷行右侧写「整卷未上线」，没有「看整卷」可点"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/d02-回车后.png",
+       "afterMs": 250,
+       "notices": [
+        {
+         "cls": "concierge-notice",
+         "text": "已按本地题库精确信息匹配。",
+         "box": [
+          310,
+          248,
+          820,
+          32
+         ]
+        },
+        {
+         "cls": "concierge-results",
+         "text": "2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 加入草稿卷 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 加入草稿卷 D篇 推荐理由：2026 E2E · D 篇 加入草稿卷",
+         "box": [
+          292,
+          304,
+          856,
+          282
+         ]
+        },
+        {
+         "cls": "concierge-paper-detail",
+         "text": "A篇 推荐理由：2026 E2E · A 篇 加入草稿卷 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 加入草稿卷 D篇 推荐理由：2026 E2E · D 篇 加入草稿卷",
+         "box": [
+          292,
+          363,
+          856,
+          223
+         ]
+        }
+       ],
+       "text": "獭石 生词本 过生词 个人空间 管理 ow owner 退出 自然语言搜索 思考模式 筛选 已按本地题库精确信息匹配。 2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 加入草稿卷 B篇 推荐理由：2026 E2E ·"
+      }
+     ],
+     "ms": 1691,
+     "shot": "shots/d02-输入找题需求并回车.png",
+     "url": "/",
+     "clickables": {
+      "inView": [
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         637,
+         14,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         726,
+         14,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         815,
+         14,
+         98,
+         36
+        ]
+       },
+       {
+        "name": "管理",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         917,
+         14,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1076,
+         14,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "输入框「比如：找一道讲生态恢复的阅读 C，主旨概括」=2026 阅读",
+        "kind": "input",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:570:15",
+        "box": [
+         311,
+         105,
+         826,
+         52
+        ]
+       },
+       {
+        "name": "清除搜索",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1071,
+         117,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "搜索",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:603:15",
+        "box": [
+         1105,
+         115,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "思考模式［关］",
+        "kind": "input",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:690:15",
+        "box": [
+         292,
+         160,
+         32,
+         18
+        ]
+       },
+       {
+        "name": "筛选",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         292,
+         180,
+         50,
+         36
+        ]
+       },
+       {
+        "name": "收起来源卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergePaperRow.tsx:287:9",
+        "box": [
+         386,
+         323,
+         22,
+         22
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         1076,
+         376,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1106,
+         376,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         1076,
+         432,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1106,
+         432,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         1076,
+         488,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1106,
+         488,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         1076,
+         545,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1106,
+         545,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "草稿卷（0 组）（读屏：打开草稿卷，已选 0 个题组）",
+        "kind": "button",
+        "inView": true,
+        "disabled": true,
+        "inv": "App.tsx:1166:7",
+        "box": [
+         1265,
+         840,
+         151,
+         36
+        ]
+       }
+      ],
+      "totalOnPage": 20
+     },
+     "notices": [
+      {
+       "cls": "concierge-notice",
+       "text": "已按本地题库精确信息匹配。",
+       "box": [
+        310,
+        248,
+        820,
+        32
+       ]
+      },
+      {
+       "cls": "concierge-results",
+       "text": "2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 加入草稿卷 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 加入草稿卷 D篇 推荐理由：2026 E2E · D 篇 加入草稿卷",
+       "box": [
+        292,
+        304,
+        856,
+        282
+       ]
+      },
+      {
+       "cls": "concierge-paper-detail",
+       "text": "A篇 推荐理由：2026 E2E · A 篇 加入草稿卷 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 加入草稿卷 D篇 推荐理由：2026 E2E · D 篇 加入草稿卷",
+       "box": [
+        292,
+        363,
+        856,
+        223
+       ]
+      }
+     ],
+     "draft": [],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "d03",
+     "screen": "首页 → 题组详情",
+     "intent": "点开 A篇 看一眼",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「A篇」"
+     ],
+     "notes": [
+      "详情页卷面位置写「这份卷还没上线，回到题库换一份看看。」，看不到题目原文"
+     ],
+     "ok": true,
+     "ms": 1592,
+     "shot": "shots/d03-点开-A篇-看一眼.png",
+     "url": "/?view=detail&groupId=group-2026-i-reading-a",
+     "clickables": {
+      "inView": [
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         677,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         758,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         839,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "管理",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         933,
+         10,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1084,
+         10,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         308,
+         68,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         316,
+         212,
+         111,
+         32
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1096,
+         214,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "草稿卷（0 组）（读屏：打开草稿卷，已选 0 个题组）",
+        "kind": "button",
+        "inView": true,
+        "disabled": true,
+        "inv": "App.tsx:1166:7",
+        "box": [
+         1276,
+         848,
+         140,
+         28
+        ]
+       }
+      ],
+      "totalOnPage": 9
+     },
+     "notices": [],
+     "draft": [],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "d04",
+     "screen": "题组详情",
+     "intent": "在详情页加入草稿卷",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「加入草稿卷」"
+     ],
+     "notes": [
+      "点完以后这颗键写「已在草稿卷」"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/d04-点完.png",
+       "afterMs": 300,
+       "notices": [],
+       "text": "獭石 生词本 过生词 个人空间 管理 ow owner 退出 返回找题 阅读理解 · 3 题 · 自建 Reading A Reading A 已在草稿卷 这份卷还没上线，回到题库换一份看看。 草稿卷（1 组）"
+      }
+     ],
+     "ms": 1655,
+     "shot": "shots/d04-在详情页加入草稿卷.png",
+     "url": "/?view=detail&groupId=group-2026-i-reading-a",
+     "clickables": {
+      "inView": [
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         677,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         758,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         839,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "管理",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         933,
+         10,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1084,
+         10,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         308,
+         68,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "已在草稿卷",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         316,
+         212,
+         111,
+         32
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1096,
+         214,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "草稿卷（1 组）（读屏：打开草稿卷，已选 1 个题组）",
+        "kind": "button",
+        "inView": true,
+        "inv": "App.tsx:1166:7",
+        "box": [
+         1263,
+         848,
+         153,
+         28
+        ]
+       }
+      ],
+      "totalOnPage": 9
+     },
+     "notices": [],
+     "draft": [
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "d05",
+     "screen": "题组详情 → 首页",
+     "intent": "回到找题结果",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「返回找题」"
+     ],
+     "notes": [
+      "搜索框里还留着「2026 阅读」，结果 4 行"
+     ],
+     "ok": true,
+     "ms": 1559,
+     "shot": "shots/d05-回到找题结果.png",
+     "url": "/",
+     "clickables": {
+      "inView": [
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         637,
+         14,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         726,
+         14,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         815,
+         14,
+         98,
+         36
+        ]
+       },
+       {
+        "name": "管理",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         917,
+         14,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1076,
+         14,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "输入框「比如：找一道讲生态恢复的阅读 C，主旨概括」=2026 阅读",
+        "kind": "input",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:570:15",
+        "box": [
+         311,
+         105,
+         826,
+         52
+        ]
+       },
+       {
+        "name": "清除搜索",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1071,
+         117,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "搜索",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:603:15",
+        "box": [
+         1105,
+         115,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "思考模式［关］",
+        "kind": "input",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:690:15",
+        "box": [
+         292,
+         160,
+         32,
+         18
+        ]
+       },
+       {
+        "name": "筛选",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         292,
+         180,
+         50,
+         36
+        ]
+       },
+       {
+        "name": "收起来源卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergePaperRow.tsx:287:9",
+        "box": [
+         386,
+         323,
+         22,
+         22
+        ]
+       },
+       {
+        "name": "已在草稿卷中（读屏：从草稿卷移出）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         1076,
+         376,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1106,
+         376,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         1076,
+         432,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1106,
+         432,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         1076,
+         488,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1106,
+         488,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         1076,
+         545,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1106,
+         545,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "草稿卷（1 组）（读屏：打开草稿卷，已选 1 个题组）",
+        "kind": "button",
+        "inView": true,
+        "inv": "App.tsx:1166:7",
+        "box": [
+         1252,
+         840,
+         164,
+         36
+        ]
+       }
+      ],
+      "totalOnPage": 20
+     },
+     "notices": [
+      {
+       "cls": "concierge-notice",
+       "text": "已按本地题库精确信息匹配。",
+       "box": [
+        310,
+        248,
+        820,
+        32
+       ]
+      },
+      {
+       "cls": "concierge-results",
+       "text": "2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 加入草稿卷 D篇 推荐理由：2026 E2E · D 篇 加入草稿卷",
+       "box": [
+        292,
+        304,
+        856,
+        282
+       ]
+      },
+      {
+       "cls": "concierge-paper-detail",
+       "text": "A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 加入草稿卷 D篇 推荐理由：2026 E2E · D 篇 加入草稿卷",
+       "box": [
+        292,
+        363,
+        856,
+        223
+       ]
+      }
+     ],
+     "draft": [
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "d06",
+     "screen": "首页",
+     "intent": "在结果行加入 C篇、D篇",
+     "clicks": 2,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「C篇 的 +」",
+      "点「D篇 的 +」"
+     ],
+     "notes": [
+      "右下草稿丸写「草稿卷（3 组）」"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/d06-加完.png",
+       "afterMs": 100,
+       "notices": [
+        {
+         "cls": "concierge-notice",
+         "text": "已按本地题库精确信息匹配。",
+         "box": [
+          310,
+          248,
+          820,
+          32
+         ]
+        },
+        {
+         "cls": "concierge-results",
+         "text": "2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中 D篇 推荐理由：2026 E2E · D 篇 已在草稿卷中",
+         "box": [
+          292,
+          304,
+          856,
+          282
+         ]
+        },
+        {
+         "cls": "concierge-paper-detail",
+         "text": "A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中 D篇 推荐理由：2026 E2E · D 篇 已在草稿卷中",
+         "box": [
+          292,
+          363,
+          856,
+          223
+         ]
+        }
+       ],
+       "text": "獭石 生词本 过生词 个人空间 管理 ow owner 退出 自然语言搜索 思考模式 筛选 已按本地题库精确信息匹配。 2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E "
+      }
+     ],
+     "ms": 2113,
+     "shot": "shots/d06-在结果行加入-C篇-D篇.png",
+     "url": "/",
+     "clickables": {
+      "inView": [
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         637,
+         14,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         726,
+         14,
+         85,
+         36
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         815,
+         14,
+         98,
+         36
+        ]
+       },
+       {
+        "name": "管理",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         917,
+         14,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1076,
+         14,
+         72,
+         36
+        ]
+       },
+       {
+        "name": "输入框「比如：找一道讲生态恢复的阅读 C，主旨概括」=2026 阅读",
+        "kind": "input",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:570:15",
+        "box": [
+         311,
+         105,
+         826,
+         52
+        ]
+       },
+       {
+        "name": "清除搜索",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1071,
+         117,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "搜索",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:603:15",
+        "box": [
+         1105,
+         115,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "思考模式［关］",
+        "kind": "input",
+        "inView": true,
+        "inv": "concierge/ConciergeDesk.tsx:690:15",
+        "box": [
+         292,
+         160,
+         32,
+         18
+        ]
+       },
+       {
+        "name": "筛选",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         292,
+         180,
+         50,
+         36
+        ]
+       },
+       {
+        "name": "收起来源卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergePaperRow.tsx:287:9",
+        "box": [
+         386,
+         323,
+         22,
+         22
+        ]
+       },
+       {
+        "name": "已在草稿卷中（读屏：从草稿卷移出）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         1076,
+         376,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1106,
+         376,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "加入草稿卷（读屏：加入当前草稿卷）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         1076,
+         432,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1106,
+         432,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "已在草稿卷中（读屏：从草稿卷移出）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         1076,
+         488,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1106,
+         488,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "已在草稿卷中（读屏：从草稿卷移出）",
+        "kind": "button",
+        "inView": true,
+        "inv": "concierge/ConciergeGroupCard.tsx:184:11",
+        "box": [
+         1076,
+         545,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "更多操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1106,
+         545,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "草稿卷（3 组）（读屏：打开草稿卷，已选 3 个题组）",
+        "kind": "button",
+        "inView": true,
+        "inv": "App.tsx:1166:7",
+        "box": [
+         1249,
+         840,
+         167,
+         36
+        ]
+       }
+      ],
+      "totalOnPage": 20
+     },
+     "notices": [
+      {
+       "cls": "concierge-notice",
+       "text": "已按本地题库精确信息匹配。",
+       "box": [
+        310,
+        248,
+        820,
+        32
+       ]
+      },
+      {
+       "cls": "concierge-results",
+       "text": "2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中 D篇 推荐理由：2026 E2E · D 篇 已在草稿卷中",
+       "box": [
+        292,
+        304,
+        856,
+        282
+       ]
+      },
+      {
+       "cls": "concierge-paper-detail",
+       "text": "A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中 D篇 推荐理由：2026 E2E · D 篇 已在草稿卷中",
+       "box": [
+        292,
+        363,
+        856,
+        223
+       ]
+      }
+     ],
+     "draft": [
+      "D篇",
+      "C篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "d07",
+     "screen": "首页 → 草稿卷",
+     "intent": "打开草稿卷",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「草稿卷（N 组）」"
+     ],
+     "notes": [
+      "点草稿丸到题组工具条出现用了约 36 秒",
+      "左栏目录顺序：D篇、C篇、A篇"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/d07-打开中-0.5秒.png",
+       "afterMs": 500,
+       "notices": [
+        {
+         "cls": "draft-loading",
+         "text": "正在打开草稿卷…",
+         "box": [
+          0,
+          62,
+          1440,
+          22
+         ]
+        }
+       ],
+       "text": "返回找题 獭石 · 草稿卷 生词本 过生词 个人空间 ow owner 退出 正在打开草稿卷…"
+      }
+     ],
+     "ms": 52420,
+     "shot": "shots/d07-打开草稿卷.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-a44d9357-b017-4ed2-bab3-9d63a1f71b62",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         16,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         200,
+         15,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         578,
+         10,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "下拉框「PDF 版本」=大字无听力版",
+        "kind": "select",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1386:7",
+        "box": [
+         679,
+         8,
+         116,
+         32
+        ]
+       },
+       {
+        "name": "A4 散页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1398:7",
+        "box": [
+         816,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "A3 对折",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1406:7",
+        "box": [
+         881,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         954,
+         8,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1013,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1094,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1175,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1352,
+         10,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "D篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         115,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "C篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         155,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "A篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         195,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "换篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         1137,
+         288,
+         66,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1205,
+         288,
+         32,
+         32
+        ]
+       }
+      ],
+      "totalOnPage": 22
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status idle",
+       "text": "已保存",
+       "box": [
+        319,
+        16,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "D篇",
+      "C篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "d08",
+     "screen": "草稿卷",
+     "intent": "把第一个题组往后挪一位",
+     "clicks": 2,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「⋯（更多题组操作）」",
+      "点「下移」"
+     ],
+     "notes": [
+      "菜单项：上移、下移、移除",
+      "下移后卷面换成「正在生成分页预览…」，约 121 秒后卷面回来",
+      "左栏目录顺序：C篇、D篇、A篇"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/d08-菜单.png",
+       "afterMs": 0,
+       "notices": [
+        {
+         "cls": "draft-save-status idle",
+         "text": "已保存",
+         "box": [
+          319,
+          16,
+          36,
+          17
+         ]
+        }
+       ],
+       "text": "返回找题 獭石 · 1114 英语草稿卷 已保存 PDF 版本 大字完整版 大字无听力版 省纸版 纯答案版 A4 散页 A3 对折 导出 生词本 过生词 个人空间 ow owner 退出 1114 英语草稿卷 共 4 页 · 双面 2 张 D篇 C篇 A篇 换篇 建议前置分页 换篇 建议前置分页 换篇"
+      },
+      {
+       "shot": "shots/d08-下移后-1秒.png",
+       "afterMs": 1000,
+       "notices": [
+        {
+         "cls": "draft-save-status saved",
+         "text": "已保存",
+         "box": [
+          319,
+          16,
+          36,
+          17
+         ]
+        }
+       ],
+       "text": "返回找题 獭石 · 1114 英语草稿卷 已保存 PDF 版本 大字完整版 大字无听力版 省纸版 纯答案版 A4 散页 A3 对折 导出 生词本 过生词 个人空间 ow owner 退出 1114 英语草稿卷 共 4 页 · 双面 2 张 C篇 D篇 A篇 正在生成分页预览…"
+      }
+     ],
+     "ms": 125740,
+     "shot": "shots/d08-把第一个题组往后挪一位.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-a44d9357-b017-4ed2-bab3-9d63a1f71b62",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         16,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         200,
+         15,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         578,
+         10,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "下拉框「PDF 版本」=大字无听力版",
+        "kind": "select",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1386:7",
+        "box": [
+         679,
+         8,
+         116,
+         32
+        ]
+       },
+       {
+        "name": "A4 散页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1398:7",
+        "box": [
+         816,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "A3 对折",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1406:7",
+        "box": [
+         881,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         954,
+         8,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1013,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1094,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1175,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1352,
+         10,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "C篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         115,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "D篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         155,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "A篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         195,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "换篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         1137,
+         288,
+         66,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1205,
+         288,
+         32,
+         32
+        ]
+       }
+      ],
+      "totalOnPage": 22
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        319,
+        16,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "d09",
+     "screen": "草稿卷",
+     "intent": "看分页建议并采用一条",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 1,
+     "typed": [],
+     "actions": [
+      "点「建议前置分页」"
+     ],
+     "notes": [
+      "「建议前置分页」在第二、三个题组的工具条上，要先滚下去才看得到",
+      "采用分页建议后卷面换成「正在生成分页预览…」，约 87 秒后卷面回来",
+      "点完以后屏上还剩 2 个「建议前置分页」"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/d09-采用前.png",
+       "afterMs": 0,
+       "notices": [
+        {
+         "cls": "draft-save-status saved",
+         "text": "已保存",
+         "box": [
+          319,
+          -1044,
+          36,
+          17
+         ]
+        }
+       ],
+       "text": "返回找题 獭石 · 1114 英语草稿卷 已保存 PDF 版本 大字完整版 大字无听力版 省纸版 纯答案版 A4 散页 A3 对折 导出 生词本 过生词 个人空间 ow owner 退出 1114 英语草稿卷 共 4 页 · 双面 2 张 C篇 D篇 A篇 换篇 建议前置分页 换篇 建议前置分页 换篇"
+      }
+     ],
+     "ms": 90316,
+     "shot": "shots/d09-看分页建议并采用一条.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-a44d9357-b017-4ed2-bab3-9d63a1f71b62",
+     "clickables": {
+      "inView": [
+       {
+        "name": "C篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         67,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "D篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         107,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "A篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         147,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "建议前置分页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1705:21",
+        "box": [
+         1151,
+         434,
+         90,
+         32
+        ]
+       },
+       {
+        "name": "换篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         1137,
+         476,
+         66,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1205,
+         476,
+         32,
+         32
+        ]
+       }
+      ],
+      "totalOnPage": 22
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        319,
+        -1044,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "d10",
+     "screen": "草稿卷",
+     "intent": "移除一个题组",
+     "clicks": 2,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「⋯（更多题组操作）」",
+      "点「移除」"
+     ],
+     "notes": [
+      "撤销提示：题组已移出 撤销"
+     ],
+     "ok": true,
+     "ms": 2007,
+     "shot": "shots/d10-移除一个题组.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-a44d9357-b017-4ed2-bab3-9d63a1f71b62",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         16,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         200,
+         15,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         578,
+         10,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "下拉框「PDF 版本」=大字无听力版",
+        "kind": "select",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1386:7",
+        "box": [
+         679,
+         8,
+         116,
+         32
+        ]
+       },
+       {
+        "name": "A4 散页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1398:7",
+        "box": [
+         816,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "A3 对折",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1406:7",
+        "box": [
+         881,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         954,
+         8,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1013,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1094,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1175,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1352,
+         10,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "D篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         115,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "A篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         155,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "撤销",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1796:11",
+        "box": [
+         729,
+         830,
+         74,
+         38
+        ]
+       }
+      ],
+      "totalOnPage": 14
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        319,
+        16,
+        36,
+        17
+       ]
+      },
+      {
+       "cls": "draft-undo-toast",
+       "text": "题组已移出 撤销",
+       "box": [
+        625,
+        820,
+        190,
+        58
+       ]
+      }
+     ],
+     "draft": [
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "d11",
+     "screen": "草稿卷",
+     "intent": "撤回刚才的移除",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「撤销」"
+     ],
+     "notes": [
+      "撤销后卷面换成「正在生成分页预览…」，约 137 秒后卷面回来",
+      "左栏目录顺序：C篇、D篇、A篇"
+     ],
+     "ok": true,
+     "ms": 140461,
+     "shot": "shots/d11-撤回刚才的移除.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-a44d9357-b017-4ed2-bab3-9d63a1f71b62",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         16,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         200,
+         15,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         578,
+         10,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "下拉框「PDF 版本」=大字无听力版",
+        "kind": "select",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1386:7",
+        "box": [
+         679,
+         8,
+         116,
+         32
+        ]
+       },
+       {
+        "name": "A4 散页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1398:7",
+        "box": [
+         816,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "A3 对折",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1406:7",
+        "box": [
+         881,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         954,
+         8,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1013,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1094,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1175,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1352,
+         10,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "C篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         115,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "D篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         155,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "A篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         195,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "换篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         1137,
+         288,
+         66,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1205,
+         288,
+         32,
+         32
+        ]
+       }
+      ],
+      "totalOnPage": 22
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        319,
+        16,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "d12",
+     "screen": "草稿卷",
+     "intent": "打开顶栏「⋯」看看",
+     "clicks": 1,
+     "keys": 1,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「⋯（草稿卷更多信息）」",
+      "按Esc 关掉"
+     ],
+     "notes": [
+      "面板里：学生（可选） 最近草稿卷 1114 英语草稿卷"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/d12-面板.png",
+       "afterMs": 0,
+       "notices": [
+        {
+         "cls": "draft-save-status saved",
+         "text": "已保存",
+         "box": [
+          319,
+          16,
+          36,
+          17
+         ]
+        }
+       ],
+       "text": "返回找题 獭石 · 1114 英语草稿卷 已保存 学生（可选） 最近草稿卷 1114 英语草稿卷 PDF 版本 大字完整版 大字无听力版 省纸版 纯答案版 A4 散页 A3 对折 导出 生词本 过生词 个人空间 ow owner 退出 1114 英语草稿卷 共 4 页 · 双面 2 张 C篇 D篇 A篇 换篇 建议前置"
+      }
+     ],
+     "ms": 1357,
+     "shot": "shots/d12-打开顶栏-⋯-看看.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-a44d9357-b017-4ed2-bab3-9d63a1f71b62",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         16,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         200,
+         15,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         578,
+         10,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "下拉框「PDF 版本」=大字无听力版",
+        "kind": "select",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1386:7",
+        "box": [
+         679,
+         8,
+         116,
+         32
+        ]
+       },
+       {
+        "name": "A4 散页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1398:7",
+        "box": [
+         816,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "A3 对折",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1406:7",
+        "box": [
+         881,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         954,
+         8,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1013,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1094,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1175,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1352,
+         10,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "C篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         115,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "D篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         155,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "A篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         195,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "换篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         1137,
+         288,
+         66,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1205,
+         288,
+         32,
+         32
+        ]
+       }
+      ],
+      "totalOnPage": 22
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        319,
+        16,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "d13",
+     "screen": "草稿卷",
+     "intent": "点「导出」",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「导出」"
+     ],
+     "notes": [
+      "顶栏「PDF 版本」现在是「大字无听力版」",
+      "菜单项：下载 PDF（大字无听力版）、另存为 PDF…、保存 PDF 到个人空间"
+     ],
+     "ok": true,
+     "ms": 860,
+     "shot": "shots/d13-点-导出.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-a44d9357-b017-4ed2-bab3-9d63a1f71b62",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         16,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         200,
+         15,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         578,
+         10,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "下拉框「PDF 版本」=大字无听力版",
+        "kind": "select",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1386:7",
+        "box": [
+         679,
+         8,
+         116,
+         32
+        ]
+       },
+       {
+        "name": "A4 散页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1398:7",
+        "box": [
+         816,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "A3 对折",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1406:7",
+        "box": [
+         881,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         954,
+         8,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1013,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1094,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1175,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1352,
+         10,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "C篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         115,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "D篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         155,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "A篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         195,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "换篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         1137,
+         288,
+         66,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1205,
+         288,
+         32,
+         32
+        ]
+       },
+       {
+        "name": "下载 PDF（大字无听力版）",
+        "kind": "menuitem",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Menu.tsx:289:17",
+        "box": [
+         801,
+         48,
+         199,
+         32
+        ]
+       },
+       {
+        "name": "另存为 PDF…",
+        "kind": "menuitem",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Menu.tsx:289:17",
+        "box": [
+         801,
+         89,
+         199,
+         32
+        ]
+       },
+       {
+        "name": "保存 PDF 到个人空间",
+        "kind": "menuitem",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Menu.tsx:289:17",
+        "box": [
+         801,
+         121,
+         199,
+         32
+        ]
+       }
+      ],
+      "totalOnPage": 25
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        319,
+        16,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "d14",
+     "screen": "草稿卷",
+     "intent": "下载题卷 PDF",
+     "clicks": 1,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「下载 PDF（大字无听力版）」"
+     ],
+     "notes": [],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/d14-点完-0.3秒.png",
+       "afterMs": 300,
+       "notices": [
+        {
+         "cls": "draft-save-status saved",
+         "text": "已保存",
+         "box": [
+          319,
+          16,
+          36,
+          17
+         ]
+        }
+       ],
+       "text": "返回找题 獭石 · 1114 英语草稿卷 已保存 PDF 版本 大字完整版 大字无听力版 省纸版 纯答案版 A4 散页 A3 对折 导出 生词本 过生词 个人空间 ow owner 退出 PDF 已开始下载。 本卷采用小四（12pt）。 已满足长卷页数上限和正文版式，仍有 1 个题组跨 A3 正反面，请检查分页。 11"
+      }
+     ],
+     "ms": 6526,
+     "shot": "shots/d14-下载题卷-PDF.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-a44d9357-b017-4ed2-bab3-9d63a1f71b62",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         16,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         200,
+         15,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         578,
+         10,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "下拉框「PDF 版本」=大字无听力版",
+        "kind": "select",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1386:7",
+        "box": [
+         679,
+         8,
+         116,
+         32
+        ]
+       },
+       {
+        "name": "A4 散页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1398:7",
+        "box": [
+         816,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "A3 对折",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1406:7",
+        "box": [
+         881,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         954,
+         8,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1013,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1094,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1175,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1352,
+         10,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "C篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         151,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "D篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         191,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "A篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         231,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "换篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1723:21",
+        "box": [
+         1137,
+         324,
+         66,
+         32
+        ]
+       },
+       {
+        "name": "更多题组操作",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1205,
+         324,
+         32,
+         32
+        ]
+       }
+      ],
+      "totalOnPage": 22
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        319,
+        16,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [
+      {
+       "suggestedFilename": "download",
+       "url": "blob:http://127.0.0.1:5342/02b288fd-2898-4244-910e-47e77f29bb41",
+       "bytes": 209582
+      }
+     ],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "d15",
+     "screen": "草稿卷",
+     "intent": "换成「纯答案版」",
+     "clicks": 2,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "在「PDF 版本」里选「纯答案版」"
+     ],
+     "notes": [
+      "换版本后约 238 秒后卷面回来"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/d15-换完-1秒.png",
+       "afterMs": 1000,
+       "notices": [
+        {
+         "cls": "draft-save-status saved",
+         "text": "已保存",
+         "box": [
+          319,
+          16,
+          36,
+          17
+         ]
+        }
+       ],
+       "text": "返回找题 獭石 · 1114 英语草稿卷 已保存 PDF 版本 大字完整版 大字无听力版 省纸版 纯答案版 A4 散页 A3 对折 导出 生词本 过生词 个人空间 ow owner 退出 1114 英语草稿卷 共 4 页 · 双面 2 张 C篇 D篇 A篇 纯答案版不可用：选中的题组没有同版本已审源参考答案；不能以教师"
+      }
+     ],
+     "ms": 242017,
+     "shot": "shots/d15-换成-纯答案版.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-a44d9357-b017-4ed2-bab3-9d63a1f71b62",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         16,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         200,
+         15,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         578,
+         10,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "下拉框「PDF 版本」=纯答案版",
+        "kind": "select",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1386:7",
+        "box": [
+         679,
+         8,
+         116,
+         32
+        ]
+       },
+       {
+        "name": "A4 散页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1398:7",
+        "box": [
+         816,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "A3 对折",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1406:7",
+        "box": [
+         881,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         954,
+         8,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1013,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1094,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1175,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1352,
+         10,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "C篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         129,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "D篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         169,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "A篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         209,
+         148,
+         36
+        ]
+       }
+      ],
+      "totalOnPage": 14
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        319,
+        16,
+        36,
+        17
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    },
+    {
+     "id": "d16",
+     "screen": "草稿卷",
+     "intent": "下载答案 PDF",
+     "clicks": 2,
+     "keys": 0,
+     "scrolls": 0,
+     "typed": [],
+     "actions": [
+      "点「导出」",
+      "点「下载 PDF（纯答案版）」"
+     ],
+     "notes": [
+      "菜单项：下载 PDF（纯答案版）、另存为 PDF…、保存 PDF 到个人空间"
+     ],
+     "ok": true,
+     "midShots": [
+      {
+       "shot": "shots/d16-点完-0.3秒.png",
+       "afterMs": 300,
+       "notices": [
+        {
+         "cls": "draft-save-status saved",
+         "text": "已保存",
+         "box": [
+          319,
+          16,
+          36,
+          17
+         ]
+        },
+        {
+         "cls": "draft-error",
+         "text": "纯答案版不可用：选中的题组没有同版本已审源参考答案；不能以教师卷替代",
+         "box": [
+          0,
+          64,
+          1440,
+          22
+         ]
+        }
+       ],
+       "text": "返回找题 獭石 · 1114 英语草稿卷 已保存 PDF 版本 大字完整版 大字无听力版 省纸版 纯答案版 A4 散页 A3 对折 导出 生词本 过生词 个人空间 ow owner 退出 纯答案版不可用：选中的题组没有同版本已审源参考答案；不能以教师卷替代 1114 英语草稿卷 共 4 页 · 双面 2 张 C篇 D篇"
+      }
+     ],
+     "ms": 7210,
+     "shot": "shots/d16-下载答案-PDF.png",
+     "url": "/?view=draft-paper&draftPaperId=draft-paper-a44d9357-b017-4ed2-bab3-9d63a1f71b62",
+     "clickables": {
+      "inView": [
+       {
+        "name": "返回找题",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         16,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "1114 英语草稿卷",
+        "kind": "button",
+        "inView": true,
+        "inv": "components/AppTopbar.tsx:161:21",
+        "box": [
+         200,
+         15,
+         111,
+         18
+        ]
+       },
+       {
+        "name": "草稿卷更多信息",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         578,
+         10,
+         28,
+         28
+        ]
+       },
+       {
+        "name": "下拉框「PDF 版本」=纯答案版",
+        "kind": "select",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1386:7",
+        "box": [
+         679,
+         8,
+         116,
+         32
+        ]
+       },
+       {
+        "name": "A4 散页",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1398:7",
+        "box": [
+         816,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "A3 对折",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperWorkbench.tsx:1406:7",
+        "box": [
+         881,
+         8,
+         63,
+         32
+        ]
+       },
+       {
+        "name": "导出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         954,
+         8,
+         50,
+         32
+        ]
+       },
+       {
+        "name": "生词本",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1013,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "过生词",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1094,
+         10,
+         77,
+         28
+        ]
+       },
+       {
+        "name": "个人空间",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1175,
+         10,
+         90,
+         28
+        ]
+       },
+       {
+        "name": "退出",
+        "kind": "button",
+        "inView": true,
+        "shared": true,
+        "inv": "shared-ui/Button.tsx:67:5",
+        "box": [
+         1352,
+         10,
+         64,
+         28
+        ]
+       },
+       {
+        "name": "C篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         169,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "D篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         209,
+         148,
+         36
+        ]
+       },
+       {
+        "name": "A篇",
+        "kind": "button",
+        "inView": true,
+        "inv": "features/draft-paper/DraftPaperRail.tsx:279:11",
+        "box": [
+         130,
+         249,
+         148,
+         36
+        ]
+       }
+      ],
+      "totalOnPage": 14
+     },
+     "notices": [
+      {
+       "cls": "draft-save-status saved",
+       "text": "已保存",
+       "box": [
+        319,
+        16,
+        36,
+        17
+       ]
+      },
+      {
+       "cls": "draft-error",
+       "text": "纯答案版不可用：选中的题组没有同版本已审源参考答案；不能以教师卷替代",
+       "box": [
+        0,
+        64,
+        1440,
+        22
+       ]
+      }
+     ],
+     "draft": [
+      "C篇",
+      "D篇",
+      "A篇"
+     ],
+     "downloads": [],
+     "popups": [],
+     "dialogs": []
+    }
+   ],
+   "totals": {
+    "steps": 16,
+    "actionSteps": 15,
+    "clicks": 20,
+    "keys": 2,
+    "scrolls": 1,
+    "failed": []
+   },
+   "pageErrors": []
+  }
+ },
+ "states": [
+  {
+   "id": "home-loading",
+   "width": 1440,
+   "how": "把 /api/question-groups 延迟 8 秒，打开首页 2.5 秒时截图",
+   "shot": "shots/state-home-loading-1440.png",
+   "url": "/",
+   "notices": [],
+   "text": "自然语言搜索 搜索中… 浏览全部 0 套卷",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "home-error",
+   "width": 1440,
+   "how": "让 /api/question-groups 返回 500，打开首页（这时草稿卷里实际有几组记在 draftActual）",
+   "draftActual": [
+    "C篇",
+    "D篇",
+    "A篇"
+   ],
+   "shot": "shots/state-home-error-1440.png",
+   "url": "/",
+   "notices": [],
+   "text": "自然语言搜索 浏览全部 10 套卷 今天翻到 阅读 B 2023 新课标 I 全国高考 从童年观察溪流自净，到用植物、动物和微生物组成生态机器清理污泥和污水。",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "home-noresult",
+   "width": 1440,
+   "how": "搜「zzqqxx 不存在的题」",
+   "shot": "shots/state-home-noresult-1440.png",
+   "url": "/",
+   "notices": [
+    {
+     "cls": "concierge-notice",
+     "text": "没填 AI 密钥，先用本地题库帮你找。",
+     "box": [
+      310,
+      248,
+      820,
+      32
+     ]
+    },
+    {
+     "cls": "concierge-results",
+     "text": "没找到匹配。可以换个说法，或返回浏览全部 1 套卷",
+     "box": [
+      292,
+      304,
+      856,
+      30
+     ]
+    }
+   ],
+   "text": "自然语言搜索 思考模式 筛选 没填 AI 密钥，先用本地题库帮你找。 没找到匹配。可以换个说法，或返回浏览全部 1 套卷 接着做 1114 英语草稿卷 3 题组 刚刚 继续组卷",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "home-natural-query",
+   "width": 1440,
+   "how": "搜输入框占位符里那句话「找一道讲生态恢复的阅读 C，主旨概括」（测试数据只有 4 篇）",
+   "shot": "shots/state-home-natural-query-1440.png",
+   "url": "/",
+   "notices": [
+    {
+     "cls": "concierge-notice",
+     "text": "已按本地题库精确信息匹配。",
+     "box": [
+      310,
+      248,
+      820,
+      32
+     ]
+    },
+    {
+     "cls": "concierge-results",
+     "text": "2026 E2E 新课标Ⅰ卷 命中 1 个篇章 推荐理由：2026 E2E · C 篇 整卷未上线 收起 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中",
+     "box": [
+      292,
+      304,
+      856,
+      114
+     ]
+    },
+    {
+     "cls": "concierge-paper-detail",
+     "text": "C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中",
+     "box": [
+      292,
+      363,
+      856,
+      55
+     ]
+    }
+   ],
+   "text": "自然语言搜索 思考模式 筛选 已按本地题库精确信息匹配。 2026 E2E 新课标Ⅰ卷 命中 1 个篇章 推荐理由：2026 E2E · C 篇 整卷未上线 收起 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "home-add-error",
+   "width": 1440,
+   "how": "让加入草稿卷的接口返回 500，在结果行点 B篇 的 +",
+   "shot": "shots/state-home-add-error-1440.png",
+   "url": "/",
+   "notices": [
+    {
+     "cls": "concierge-notice",
+     "text": "已按本地题库精确信息匹配。",
+     "box": [
+      310,
+      248,
+      820,
+      32
+     ]
+    },
+    {
+     "cls": "concierge-results",
+     "text": "2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中 D篇 推荐理由：2026 E2E · D 篇 已在草稿卷中",
+     "box": [
+      292,
+      304,
+      856,
+      282
+     ]
+    },
+    {
+     "cls": "concierge-paper-detail",
+     "text": "A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中 D篇 推荐理由：2026 E2E · D 篇 已在草稿卷中",
+     "box": [
+      292,
+      363,
+      856,
+      223
+     ]
+    }
+   ],
+   "text": "自然语言搜索 思考模式 筛选 已按本地题库精确信息匹配。 2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中 D篇 推荐理由：2026 E2E · D 篇 已在草稿卷中",
+   "downloads": [],
+   "dialogs": [
+    "alert: boom"
+   ],
+   "popups": []
+  },
+  {
+   "id": "paper-preview-error",
+   "width": 1440,
+   "how": "直接打开整卷预览地址 ?view=paper-browse&paperId=paper-2026-i（测试数据里这份卷没有可预览的卷面）",
+   "shot": "shots/state-paper-preview-error-1440.png",
+   "url": "/?view=paper-browse&paperId=paper-2026-i",
+   "notices": [
+    {
+     "cls": "paper-browse-error",
+     "text": "没找到这份卷面 这份卷可能还没上线或已被移除，回到找题页换一份看看。 错误信息：Cannot read properties of undefined (reading 'blocks') 返回找题",
+     "box": [
+      0,
+      48,
+      1440,
+      279
+     ]
+    },
+    {
+     "cls": "paper-browse-error-detail",
+     "text": "错误信息：Cannot read properties of undefined (reading 'blocks')",
+     "box": [
+      24,
+      206,
+      1392,
+      17
+     ]
+    },
+    {
+     "cls": "eqb-button paper-browse-error-back",
+     "text": "返回找题",
+     "box": [
+      671,
+      243,
+      98,
+      36
+     ]
+    }
+   ],
+   "text": "返回找题 獭石 · 整卷预览 生词本 过生词 个人空间 ow owner 退出 没找到这份卷面 这份卷可能还没上线或已被移除，回到找题页换一份看看。 错误信息：Cannot read properties of undefined (reading 'blocks') 返回找题",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "draft-empty",
+   "width": 1440,
+   "how": "清空草稿卷后直接打开 ?view=draft-paper（右下草稿丸在 0 组时不能点）",
+   "pillDisabled": true,
+   "shot": "shots/state-draft-empty-1440.png",
+   "url": "/?view=draft-paper",
+   "notices": [
+    {
+     "cls": "draft-save-status idle",
+     "text": "已保存",
+     "box": [
+      319,
+      16,
+      36,
+      17
+     ]
+    },
+    {
+     "cls": "draft-empty-export",
+     "text": "请先添加题组，再下载 PDF 用于打印。",
+     "box": [
+      0,
+      62,
+      1440,
+      22
+     ]
+    }
+   ],
+   "text": "1114 英语草稿卷 共 1 页 · 双面 1 张 从搜索结果添加题组。 还没有题组。在找题结果里点「加入草稿卷」，题就会排进这张纸。 去找题",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "draft-opening",
+   "width": 1440,
+   "how": "草稿卷里有 3 组时打开草稿卷，0.5 秒时截图",
+   "shot": "shots/state-draft-opening-1440.png",
+   "url": "/?view=draft-paper",
+   "notices": [],
+   "text": "",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "export-waiting",
+   "width": 1440,
+   "how": "把出 PDF 的接口延迟 5 秒，点「导出 → 下载 PDF」，1.5 秒时截图",
+   "shot": "shots/state-export-waiting-1440.png",
+   "url": "/?view=draft-paper",
+   "notices": [
+    {
+     "cls": "draft-save-status idle",
+     "text": "已保存",
+     "box": [
+      319,
+      16,
+      36,
+      17
+     ]
+    }
+   ],
+   "text": "1114 英语草稿卷 共 4 页 · 双面 2 张 D篇 C篇 A篇 换篇 建议前置分页 换篇 建议前置分页 换篇",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "export-error",
+   "width": 1440,
+   "how": "让出 PDF 的接口返回 500，点「导出 → 下载 PDF」",
+   "shot": "shots/state-export-error-1440.png",
+   "url": "/?view=draft-paper",
+   "notices": [
+    {
+     "cls": "draft-save-status idle",
+     "text": "已保存",
+     "box": [
+      319,
+      16,
+      36,
+      17
+     ]
+    },
+    {
+     "cls": "draft-error",
+     "text": "导出 PDF没成功，可以再试一次。",
+     "box": [
+      0,
+      64,
+      1440,
+      22
+     ]
+    }
+   ],
+   "text": "1114 英语草稿卷 共 4 页 · 双面 2 张 D篇 C篇 A篇 换篇 建议前置分页 换篇 建议前置分页 换篇",
+   "downloads": [
+    {
+     "suggestedFilename": "download",
+     "url": "blob:http://127.0.0.1:5342/781d781d-9794-431a-b789-f9a9d2cf55f2",
+     "bytes": 209582
+    }
+   ],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "export-saveas",
+   "width": 1440,
+   "how": "点「导出 → 另存为 PDF…」（无头浏览器，系统存文件窗口不会画出来）",
+   "shot": "shots/state-export-saveas-1440.png",
+   "url": "/?view=draft-paper",
+   "notices": [
+    {
+     "cls": "draft-save-status idle",
+     "text": "已保存",
+     "box": [
+      319,
+      16,
+      36,
+      17
+     ]
+    }
+   ],
+   "text": "1114 英语草稿卷 共 4 页 · 双面 2 张 D篇 C篇 A篇 换篇 建议前置分页 换篇 建议前置分页 换篇",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "export-space-dialog",
+   "width": 1440,
+   "how": "点「导出 → 保存 PDF 到个人空间」，只打开对话框不保存",
+   "shot": "shots/state-export-space-dialog-1440.png",
+   "url": "/?view=draft-paper",
+   "notices": [
+    {
+     "cls": "draft-save-status idle",
+     "text": "已保存",
+     "box": [
+      319,
+      16,
+      36,
+      17
+     ]
+    }
+   ],
+   "text": "1114 英语草稿卷 共 4 页 · 双面 2 张 D篇 C篇 A篇 换篇 建议前置分页 换篇 建议前置分页 换篇",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "export-largecomplete",
+   "width": 1440,
+   "how": "版本换成「大字完整版」，等卷面出完，再点「导出 → 下载 PDF（大字完整版）」（测试数据只有阅读题组）",
+   "previewMs": 1005,
+   "previewShot": "shots/state-largecomplete-preview-1440.png",
+   "previewText": "1114 英语草稿卷 共 4 页 · 双面 2 张 D篇 C篇 A篇 生成分页预览没成功，可以再试一次。",
+   "shot": "shots/state-export-largecomplete-1440.png",
+   "url": "/?view=draft-paper",
+   "notices": [
+    {
+     "cls": "draft-save-status idle",
+     "text": "已保存",
+     "box": [
+      319,
+      16,
+      36,
+      17
+     ]
+    },
+    {
+     "cls": "draft-error",
+     "text": "大字完整版需要完整的两个听力题组",
+     "box": [
+      0,
+      64,
+      1440,
+      22
+     ]
+    }
+   ],
+   "text": "1114 英语草稿卷 共 4 页 · 双面 2 张 D篇 C篇 A篇 生成分页预览没成功，可以再试一次。",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "home-loading",
+   "width": 390,
+   "how": "把 /api/question-groups 延迟 8 秒，打开首页 2.5 秒时截图",
+   "shot": "shots/state-home-loading-390.png",
+   "url": "/",
+   "notices": [],
+   "text": "自然语言搜索 搜索中… 浏览全部 0 套卷",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "home-error",
+   "width": 390,
+   "how": "让 /api/question-groups 返回 500，打开首页（这时草稿卷里实际有几组记在 draftActual）",
+   "draftActual": [
+    "D篇",
+    "C篇",
+    "A篇"
+   ],
+   "shot": "shots/state-home-error-390.png",
+   "url": "/",
+   "notices": [],
+   "text": "自然语言搜索 浏览全部 10 套卷 今天翻到 阅读 B 2023 新课标 I 全国高考 从童年观察溪流自净，到用植物、动物和微生物组成生态机器清理污泥和污水。",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "home-noresult",
+   "width": 390,
+   "how": "搜「zzqqxx 不存在的题」",
+   "shot": "shots/state-home-noresult-390.png",
+   "url": "/",
+   "notices": [
+    {
+     "cls": "concierge-notice",
+     "text": "没填 AI 密钥，先用本地题库帮你找。",
+     "box": [
+      24,
+      299,
+      342,
+      32
+     ]
+    },
+    {
+     "cls": "concierge-results",
+     "text": "没找到匹配。可以换个说法，或返回浏览全部 1 套卷",
+     "box": [
+      24,
+      355,
+      342,
+      30
+     ]
+    }
+   ],
+   "text": "自然语言搜索 思考模式 筛选 没填 AI 密钥，先用本地题库帮你找。 没找到匹配。可以换个说法，或返回浏览全部 1 套卷 接着做 1114 英语草稿卷 3 题组 继续组卷",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "home-natural-query",
+   "width": 390,
+   "how": "搜输入框占位符里那句话「找一道讲生态恢复的阅读 C，主旨概括」（测试数据只有 4 篇）",
+   "shot": "shots/state-home-natural-query-390.png",
+   "url": "/",
+   "notices": [
+    {
+     "cls": "concierge-notice",
+     "text": "已按本地题库精确信息匹配。",
+     "box": [
+      24,
+      299,
+      342,
+      32
+     ]
+    },
+    {
+     "cls": "concierge-results",
+     "text": "2026 E2E 新课标Ⅰ卷 命中 1 个篇章 推荐理由：2026 E2E · C 篇 整卷未上线 收起 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中",
+     "box": [
+      24,
+      355,
+      342,
+      145
+     ]
+    },
+    {
+     "cls": "concierge-paper-detail",
+     "text": "C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中",
+     "box": [
+      24,
+      444,
+      342,
+      55
+     ]
+    }
+   ],
+   "text": "自然语言搜索 思考模式 筛选 已按本地题库精确信息匹配。 2026 E2E 新课标Ⅰ卷 命中 1 个篇章 推荐理由：2026 E2E · C 篇 整卷未上线 收起 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "home-add-error",
+   "width": 390,
+   "how": "让加入草稿卷的接口返回 500，在结果行点 B篇 的 +",
+   "shot": "shots/state-home-add-error-390.png",
+   "url": "/",
+   "notices": [
+    {
+     "cls": "concierge-notice",
+     "text": "已按本地题库精确信息匹配。",
+     "box": [
+      24,
+      299,
+      342,
+      32
+     ]
+    },
+    {
+     "cls": "concierge-results",
+     "text": "2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中 D篇 推荐理由：2026 E2E · D 篇 已在草稿卷中",
+     "box": [
+      24,
+      355,
+      342,
+      313
+     ]
+    },
+    {
+     "cls": "concierge-paper-detail",
+     "text": "A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中 D篇 推荐理由：2026 E2E · D 篇 已在草稿卷中",
+     "box": [
+      24,
+      444,
+      342,
+      223
+     ]
+    }
+   ],
+   "text": "自然语言搜索 思考模式 筛选 已按本地题库精确信息匹配。 2026 E2E 新课标Ⅰ卷 命中 4 个篇章 推荐理由：2026 E2E · A 篇 整卷未上线 收起 A篇 推荐理由：2026 E2E · A 篇 已在草稿卷中 B篇 推荐理由：2026 E2E · B 篇 加入草稿卷 C篇 推荐理由：2026 E2E · C 篇 已在草稿卷中 D篇 推荐理由：2026 E2E · D 篇 已在草稿卷中",
+   "downloads": [],
+   "dialogs": [
+    "alert: boom"
+   ],
+   "popups": []
+  },
+  {
+   "id": "paper-preview-error",
+   "width": 390,
+   "how": "直接打开整卷预览地址 ?view=paper-browse&paperId=paper-2026-i（测试数据里这份卷没有可预览的卷面）",
+   "shot": "shots/state-paper-preview-error-390.png",
+   "url": "/?view=paper-browse&paperId=paper-2026-i",
+   "notices": [
+    {
+     "cls": "paper-browse-error",
+     "text": "没找到这份卷面 这份卷可能还没上线或已被移除，回到找题页换一份看看。 错误信息：Cannot read properties of undefined (reading 'blocks') 返回找题",
+     "box": [
+      0,
+      140,
+      390,
+      316
+     ]
+    },
+    {
+     "cls": "paper-browse-error-detail",
+     "text": "错误信息：Cannot read properties of undefined (reading 'blocks')",
+     "box": [
+      24,
+      320,
+      342,
+      32
+     ]
+    },
+    {
+     "cls": "eqb-button paper-browse-error-back",
+     "text": "返回找题",
+     "box": [
+      146,
+      372,
+      98,
+      36
+     ]
+    }
+   ],
+   "text": "返回找题 獭石 · 整卷预览 生词本 过生词 个人空间 ow 退出 没找到这份卷面 这份卷可能还没上线或已被移除，回到找题页换一份看看。 错误信息：Cannot read properties of undefined (reading 'blocks') 返回找题",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  },
+  {
+   "id": "draft-empty",
+   "width": 390,
+   "how": "清空草稿卷后直接打开 ?view=draft-paper（右下草稿丸在 0 组时不能点）",
+   "pillDisabled": true,
+   "shot": "shots/state-draft-empty-390.png",
+   "url": "/?view=draft-paper",
+   "notices": [
+    {
+     "cls": "draft-save-status idle",
+     "text": "已保存",
+     "box": [
+      227,
+      24,
+      36,
+      17
+     ]
+    },
+    {
+     "cls": "draft-empty-export",
+     "text": "请先添加题组，再下载 PDF 用于打印。",
+     "box": [
+      0,
+      158,
+      390,
+      22
+     ]
+    }
+   ],
+   "text": "1114 英语草稿卷 还没有题组。在找题结果里点「加入草稿卷」，题就会排进这张纸。 去找题",
+   "downloads": [],
+   "dialogs": [],
+   "popups": []
+  }
+ ]
+}
