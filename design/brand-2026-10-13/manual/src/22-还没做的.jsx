@@ -241,10 +241,10 @@
               </div>
               <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '14px', fontWeight: 600, lineHeight: '20px' }}>
-                  再改 Paper 里那一页
+                  再改 manual/src/ 里那一页
                 </div>
                 <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                  「主题 13 · 规范手册」页，复制内页模板，页脚写清出处。
+                  加页从 template.jsx 复制，页脚写清出处。
                 </div>
               </div>
             </div>
@@ -254,7 +254,7 @@
               </div>
               <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '14px', fontWeight: 600, lineHeight: '20px' }}>
-                  重新导出 PDF
+                  跑脚本重新出 PDF
                 </div>
                 <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
                   放进 design/brand-2026-10-13/manual/，封面上的草案号加一。
