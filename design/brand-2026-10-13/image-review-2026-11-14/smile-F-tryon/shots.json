@@ -1,0 +1,217 @@
+{
+ "note": "本地网站（rig.mjs，端口偏移 45），owner 账号，测试数据，减少动态效果。换图只在无头浏览器里改 img 的 src，源码和母版不动。",
+ "shots": {
+  "topbar-1x-current": {
+   "currentSrc": "/brand/mark-32.png",
+   "topbarCss": {
+    "x": 260,
+    "y": 0,
+    "width": 920,
+    "height": 64
+   },
+   "markCss": {
+    "x": 292,
+    "y": 22,
+    "width": 32,
+    "height": 20
+   }
+  },
+  "before": {
+   "login": {
+    "imgSrc": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My",
+    "brandCss": {
+     "x": 56,
+     "y": 40,
+     "width": 62,
+     "height": 24
+    },
+    "imgCss": {
+     "x": 56,
+     "y": 40,
+     "width": 24,
+     "height": 24
+    }
+   },
+   "topbar": {
+    "imgSrc": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My",
+    "topbarCss": {
+     "x": 260,
+     "y": 0,
+     "width": 920,
+     "height": 64
+    },
+    "markCss": {
+     "x": 292,
+     "y": 22,
+     "width": 32,
+     "height": 20
+    }
+   },
+   "empty": {
+    "cardCss": {
+     "x": 130,
+     "y": 339.390625,
+     "width": 1180,
+     "height": 250
+    }
+   },
+   "large": {
+    "rowCss": {
+     "x": 130,
+     "y": 82,
+     "width": 1180,
+     "height": 160
+    }
+   }
+  },
+  "F-eyes1.00": {
+   "login": {
+    "imgSrc": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My",
+    "brandCss": {
+     "x": 56,
+     "y": 40,
+     "width": 62,
+     "height": 24
+    },
+    "imgCss": {
+     "x": 56,
+     "y": 40,
+     "width": 24,
+     "height": 24
+    }
+   },
+   "topbar": {
+    "imgSrc": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My",
+    "topbarCss": {
+     "x": 260,
+     "y": 0,
+     "width": 920,
+     "height": 64
+    },
+    "markCss": {
+     "x": 292,
+     "y": 22,
+     "width": 32,
+     "height": 20
+    }
+   },
+   "empty": {
+    "cardCss": {
+     "x": 130,
+     "y": 339.390625,
+     "width": 1180,
+     "height": 250
+    }
+   },
+   "large": {
+    "rowCss": {
+     "x": 130,
+     "y": 82,
+     "width": 1180,
+     "height": 160
+    }
+   }
+  },
+  "F-eyes1.10": {
+   "login": {
+    "imgSrc": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My",
+    "brandCss": {
+     "x": 56,
+     "y": 40,
+     "width": 62,
+     "height": 24
+    },
+    "imgCss": {
+     "x": 56,
+     "y": 40,
+     "width": 24,
+     "height": 24
+    }
+   },
+   "topbar": {
+    "imgSrc": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My",
+    "topbarCss": {
+     "x": 260,
+     "y": 0,
+     "width": 920,
+     "height": 64
+    },
+    "markCss": {
+     "x": 292,
+     "y": 22,
+     "width": 32,
+     "height": 20
+    }
+   },
+   "empty": {
+    "cardCss": {
+     "x": 130,
+     "y": 339.390625,
+     "width": 1180,
+     "height": 250
+    }
+   },
+   "large": {
+    "rowCss": {
+     "x": 130,
+     "y": 82,
+     "width": 1180,
+     "height": 160
+    }
+   }
+  },
+  "F-eyes1.20": {
+   "login": {
+    "imgSrc": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My",
+    "brandCss": {
+     "x": 56,
+     "y": 40,
+     "width": 62,
+     "height": 24
+    },
+    "imgCss": {
+     "x": 56,
+     "y": 40,
+     "width": 24,
+     "height": 24
+    }
+   },
+   "topbar": {
+    "imgSrc": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My",
+    "topbarCss": {
+     "x": 260,
+     "y": 0,
+     "width": 920,
+     "height": 64
+    },
+    "markCss": {
+     "x": 292,
+     "y": 22,
+     "width": 32,
+     "height": 20
+    }
+   },
+   "empty": {
+    "cardCss": {
+     "x": 130,
+     "y": 339.390625,
+     "width": 1180,
+     "height": 250
+    }
+   },
+   "large": {
+    "rowCss": {
+     "x": 130,
+     "y": 82,
+     "width": 1180,
+     "height": 160
+    }
+   }
+  }
+ },
+ "topbar2xRealSrc": "/brand/mark.svg",
+ "deskBg": {
+  "el": "my-space-page",
+  "bg": "rgb(241, 245, 247)"
+ }
+}
