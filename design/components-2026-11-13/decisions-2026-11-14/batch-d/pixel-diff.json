@@ -1,0 +1,1621 @@
+{
+ "threshold": "任一通道差 > 3 算变；尺寸不同时两边都贴到同一大小的白底上再比",
+ "shots": {
+  "detail-retry-390.png": {
+   "before": [
+    636,
+    290
+   ],
+   "after": [
+    636,
+    290
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "detail-retry-focus-390.png": {
+   "before": [
+    636,
+    290
+   ],
+   "after": [
+    636,
+    290
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "detail-retry-focus.png": {
+   "before": [
+    1664,
+    258
+   ],
+   "after": [
+    1664,
+    258
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "detail-retry-hover-390.png": {
+   "before": [
+    636,
+    290
+   ],
+   "after": [
+    636,
+    290
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "detail-retry-hover.png": {
+   "before": [
+    1664,
+    258
+   ],
+   "after": [
+    1664,
+    258
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "detail-retry.png": {
+   "before": [
+    1664,
+    258
+   ],
+   "after": [
+    1664,
+    258
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "dict-credits-expanded-390.png": {
+   "before": [
+    712,
+    720
+   ],
+   "after": [
+    712,
+    720
+   ],
+   "changed": 10663,
+   "ratio": 0.0208,
+   "bbox": [
+    484,
+    543,
+    678,
+    599
+   ]
+  },
+  "dict-credits-expanded-focus-390.png": {
+   "before": [
+    712,
+    720
+   ],
+   "after": [
+    712,
+    720
+   ],
+   "changed": 10133,
+   "ratio": 0.01977,
+   "bbox": [
+    484,
+    543,
+    678,
+    599
+   ]
+  },
+  "dict-credits-expanded-focus.png": {
+   "before": [
+    712,
+    720
+   ],
+   "after": [
+    712,
+    720
+   ],
+   "changed": 10175,
+   "ratio": 0.01985,
+   "bbox": [
+    484,
+    542,
+    678,
+    598
+   ]
+  },
+  "dict-credits-expanded-hover-390.png": {
+   "before": [
+    712,
+    720
+   ],
+   "after": [
+    712,
+    720
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "dict-credits-expanded-hover.png": {
+   "before": [
+    712,
+    720
+   ],
+   "after": [
+    712,
+    720
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "dict-credits-expanded.png": {
+   "before": [
+    712,
+    720
+   ],
+   "after": [
+    712,
+    720
+   ],
+   "changed": 10663,
+   "ratio": 0.0208,
+   "bbox": [
+    484,
+    542,
+    678,
+    598
+   ]
+  },
+  "dict-detail-expanded-390.png": {
+   "before": [
+    712,
+    720
+   ],
+   "after": [
+    712,
+    720
+   ],
+   "changed": 9431,
+   "ratio": 0.0184,
+   "bbox": [
+    34,
+    519,
+    206,
+    575
+   ]
+  },
+  "dict-detail-expanded-focus-390.png": {
+   "before": [
+    712,
+    720
+   ],
+   "after": [
+    712,
+    720
+   ],
+   "changed": 8967,
+   "ratio": 0.01749,
+   "bbox": [
+    34,
+    519,
+    206,
+    575
+   ]
+  },
+  "dict-detail-expanded-focus.png": {
+   "before": [
+    712,
+    720
+   ],
+   "after": [
+    712,
+    720
+   ],
+   "changed": 8935,
+   "ratio": 0.01743,
+   "bbox": [
+    34,
+    518,
+    206,
+    574
+   ]
+  },
+  "dict-detail-expanded-hover-390.png": {
+   "before": [
+    712,
+    720
+   ],
+   "after": [
+    712,
+    720
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "dict-detail-expanded-hover.png": {
+   "before": [
+    712,
+    720
+   ],
+   "after": [
+    712,
+    720
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "dict-detail-expanded.png": {
+   "before": [
+    712,
+    720
+   ],
+   "after": [
+    712,
+    720
+   ],
+   "changed": 9431,
+   "ratio": 0.0184,
+   "bbox": [
+    34,
+    518,
+    206,
+    574
+   ]
+  },
+  "dict-rare-expanded-390.png": {
+   "before": [
+    712,
+    726
+   ],
+   "after": [
+    712,
+    726
+   ],
+   "changed": 6296,
+   "ratio": 0.01218,
+   "bbox": [
+    78,
+    469,
+    194,
+    525
+   ]
+  },
+  "dict-rare-expanded-focus-390.png": {
+   "before": [
+    712,
+    726
+   ],
+   "after": [
+    712,
+    726
+   ],
+   "changed": 6070,
+   "ratio": 0.01174,
+   "bbox": [
+    78,
+    469,
+    194,
+    525
+   ]
+  },
+  "dict-rare-expanded-focus.png": {
+   "before": [
+    712,
+    726
+   ],
+   "after": [
+    712,
+    726
+   ],
+   "changed": 6059,
+   "ratio": 0.01172,
+   "bbox": [
+    78,
+    468,
+    194,
+    524
+   ]
+  },
+  "dict-rare-expanded-hover-390.png": {
+   "before": [
+    712,
+    726
+   ],
+   "after": [
+    712,
+    726
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "dict-rare-expanded-hover.png": {
+   "before": [
+    712,
+    726
+   ],
+   "after": [
+    712,
+    726
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "dict-rare-expanded.png": {
+   "before": [
+    712,
+    726
+   ],
+   "after": [
+    712,
+    726
+   ],
+   "changed": 6296,
+   "ratio": 0.01218,
+   "bbox": [
+    78,
+    468,
+    194,
+    524
+   ]
+  },
+  "draft-export-open-390.png": {
+   "before": [
+    446,
+    330
+   ],
+   "after": [
+    446,
+    330
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "draft-export-open-key-390.png": {
+   "before": [
+    132,
+    96
+   ],
+   "after": [
+    132,
+    96
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "draft-export-open-key.png": {
+   "before": [
+    132,
+    96
+   ],
+   "after": [
+    132,
+    96
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "draft-export-open.png": {
+   "before": [
+    446,
+    330
+   ],
+   "after": [
+    446,
+    330
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "draft-item-menu-open-390.png": {
+   "before": [
+    328,
+    330
+   ],
+   "after": [
+    328,
+    330
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "draft-item-menu-open-key-390.png": {
+   "before": [
+    96,
+    96
+   ],
+   "after": [
+    96,
+    96
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "draft-item-menu-open-key.png": {
+   "before": [
+    96,
+    96
+   ],
+   "after": [
+    96,
+    96
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "draft-item-menu-open.png": {
+   "before": [
+    328,
+    330
+   ],
+   "after": [
+    328,
+    330
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "draft-more-open-390.png": {
+   "before": [
+    472,
+    632
+   ],
+   "after": [
+    472,
+    632
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "draft-more-open-key-390.png": {
+   "before": [
+    88,
+    88
+   ],
+   "after": [
+    88,
+    88
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "draft-more-open-key.png": {
+   "before": [
+    88,
+    88
+   ],
+   "after": [
+    88,
+    88
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "draft-more-open.png": {
+   "before": [
+    472,
+    400
+   ],
+   "after": [
+    472,
+    400
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "filter-more-expanded-390.png": {
+   "before": [
+    210,
+    120
+   ],
+   "after": [
+    210,
+    120
+   ],
+   "changed": 8865,
+   "ratio": 0.35179,
+   "bbox": [
+    16,
+    33,
+    178,
+    89
+   ]
+  },
+  "filter-more-expanded-focus-390.png": {
+   "before": [
+    210,
+    120
+   ],
+   "after": [
+    210,
+    120
+   ],
+   "changed": 8244,
+   "ratio": 0.32714,
+   "bbox": [
+    16,
+    33,
+    178,
+    89
+   ]
+  },
+  "filter-more-expanded-focus.png": {
+   "before": [
+    210,
+    120
+   ],
+   "after": [
+    210,
+    120
+   ],
+   "changed": 8244,
+   "ratio": 0.32714,
+   "bbox": [
+    16,
+    32,
+    178,
+    88
+   ]
+  },
+  "filter-more-expanded-hover-390.png": {
+   "before": [
+    210,
+    120
+   ],
+   "after": [
+    210,
+    120
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "filter-more-expanded-hover.png": {
+   "before": [
+    210,
+    120
+   ],
+   "after": [
+    210,
+    120
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "filter-more-expanded.png": {
+   "before": [
+    210,
+    120
+   ],
+   "after": [
+    210,
+    120
+   ],
+   "changed": 8865,
+   "ratio": 0.35179,
+   "bbox": [
+    16,
+    32,
+    178,
+    88
+   ]
+  },
+  "filter-toggle-open-390.png": {
+   "before": [
+    716,
+    488
+   ],
+   "after": [
+    716,
+    488
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "filter-toggle-open-key-390.png": {
+   "before": [
+    132,
+    104
+   ],
+   "after": [
+    132,
+    104
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "filter-toggle-open-key.png": {
+   "before": [
+    132,
+    104
+   ],
+   "after": [
+    132,
+    104
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "filter-toggle-open.png": {
+   "before": [
+    1744,
+    488
+   ],
+   "after": [
+    1744,
+    488
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "home-retry-390.png": {
+   "before": [
+    684,
+    290
+   ],
+   "after": [
+    684,
+    290
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "home-retry-focus-390.png": {
+   "before": [
+    684,
+    290
+   ],
+   "after": [
+    684,
+    290
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "home-retry-focus.png": {
+   "before": [
+    1712,
+    258
+   ],
+   "after": [
+    1712,
+    258
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "home-retry-hover-390.png": {
+   "before": [
+    684,
+    290
+   ],
+   "after": [
+    684,
+    290
+   ],
+   "changed": 4329,
+   "ratio": 0.02182,
+   "bbox": [
+    24,
+    209,
+    108,
+    265
+   ]
+  },
+  "home-retry-hover.png": {
+   "before": [
+    1712,
+    258
+   ],
+   "after": [
+    1712,
+    258
+   ],
+   "changed": 4329,
+   "ratio": 0.0098,
+   "bbox": [
+    24,
+    178,
+    108,
+    234
+   ]
+  },
+  "home-retry.png": {
+   "before": [
+    1712,
+    258
+   ],
+   "after": [
+    1712,
+    258
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "overview-expanded-390.png": {
+   "before": [
+    696,
+    252
+   ],
+   "after": [
+    696,
+    252
+   ],
+   "changed": 9656,
+   "ratio": 0.05505,
+   "bbox": [
+    514,
+    24,
+    690,
+    80
+   ]
+  },
+  "overview-expanded-focus-390.png": {
+   "before": [
+    696,
+    252
+   ],
+   "after": [
+    696,
+    252
+   ],
+   "changed": 9312,
+   "ratio": 0.05309,
+   "bbox": [
+    514,
+    24,
+    690,
+    80
+   ]
+  },
+  "overview-expanded-focus.png": {
+   "before": [
+    860,
+    208
+   ],
+   "after": [
+    860,
+    208
+   ],
+   "changed": 9311,
+   "ratio": 0.05205,
+   "bbox": [
+    676,
+    24,
+    852,
+    80
+   ]
+  },
+  "overview-expanded-hover-390.png": {
+   "before": [
+    696,
+    252
+   ],
+   "after": [
+    696,
+    252
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "overview-expanded-hover.png": {
+   "before": [
+    860,
+    208
+   ],
+   "after": [
+    860,
+    208
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "overview-expanded.png": {
+   "before": [
+    860,
+    208
+   ],
+   "after": [
+    860,
+    208
+   ],
+   "changed": 9655,
+   "ratio": 0.05397,
+   "bbox": [
+    676,
+    24,
+    852,
+    80
+   ]
+  },
+  "pron-390.png": {
+   "before": [
+    708,
+    660
+   ],
+   "after": [
+    708,
+    660
+   ],
+   "changed": 2516,
+   "ratio": 0.00538,
+   "bbox": [
+    69,
+    86,
+    310,
+    112
+   ]
+  },
+  "pron-focus-390.png": {
+   "before": [
+    708,
+    660
+   ],
+   "after": [
+    708,
+    660
+   ],
+   "changed": 4558,
+   "ratio": 0.00975,
+   "bbox": [
+    36,
+    59,
+    342,
+    139
+   ]
+  },
+  "pron-focus.png": {
+   "before": [
+    936,
+    768
+   ],
+   "after": [
+    936,
+    768
+   ],
+   "changed": 4552,
+   "ratio": 0.00633,
+   "bbox": [
+    57,
+    116,
+    361,
+    196
+   ]
+  },
+  "pron-hover-390.png": {
+   "before": [
+    708,
+    660
+   ],
+   "after": [
+    708,
+    660
+   ],
+   "changed": 5658,
+   "ratio": 0.01211,
+   "bbox": [
+    44,
+    67,
+    334,
+    131
+   ]
+  },
+  "pron-hover.png": {
+   "before": [
+    936,
+    768
+   ],
+   "after": [
+    936,
+    768
+   ],
+   "changed": 5661,
+   "ratio": 0.00788,
+   "bbox": [
+    65,
+    124,
+    353,
+    188
+   ]
+  },
+  "pron.png": {
+   "before": [
+    936,
+    768
+   ],
+   "after": [
+    936,
+    768
+   ],
+   "changed": 2544,
+   "ratio": 0.00354,
+   "bbox": [
+    90,
+    143,
+    329,
+    169
+   ]
+  },
+  "replay-390.png": {
+   "before": [
+    712,
+    310
+   ],
+   "after": [
+    712,
+    302
+   ],
+   "changed": 4745,
+   "ratio": 0.0215,
+   "bbox": [
+    246,
+    214,
+    466,
+    286
+   ]
+  },
+  "replay-focus-390.png": {
+   "before": [
+    712,
+    310
+   ],
+   "after": [
+    712,
+    302
+   ],
+   "changed": 7492,
+   "ratio": 0.03394,
+   "bbox": [
+    234,
+    206,
+    478,
+    294
+   ]
+  },
+  "replay-focus.png": {
+   "before": [
+    1668,
+    200
+   ],
+   "after": [
+    1668,
+    200
+   ],
+   "changed": 14526,
+   "ratio": 0.04354,
+   "bbox": [
+    489,
+    38,
+    1192,
+    182
+   ]
+  },
+  "replay-hover-390.png": {
+   "before": [
+    712,
+    310
+   ],
+   "after": [
+    712,
+    302
+   ],
+   "changed": 12797,
+   "ratio": 0.05798,
+   "bbox": [
+    242,
+    214,
+    470,
+    286
+   ]
+  },
+  "replay-hover.png": {
+   "before": [
+    1668,
+    200
+   ],
+   "after": [
+    1668,
+    200
+   ],
+   "changed": 19216,
+   "ratio": 0.0576,
+   "bbox": [
+    489,
+    38,
+    1184,
+    174
+   ]
+  },
+  "replay.png": {
+   "before": [
+    1668,
+    200
+   ],
+   "after": [
+    1668,
+    200
+   ],
+   "changed": 9935,
+   "ratio": 0.02978,
+   "bbox": [
+    489,
+    38,
+    1180,
+    174
+   ]
+  },
+  "row-menu-open-390.png": {
+   "before": [
+    344,
+    256
+   ],
+   "after": [
+    344,
+    256
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "row-menu-open-key-390.png": {
+   "before": [
+    88,
+    88
+   ],
+   "after": [
+    88,
+    88
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "row-menu-open-key.png": {
+   "before": [
+    88,
+    88
+   ],
+   "after": [
+    88,
+    88
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "row-menu-open.png": {
+   "before": [
+    344,
+    256
+   ],
+   "after": [
+    344,
+    256
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "seven-details-390.png": {
+   "before": [
+    588,
+    356
+   ],
+   "after": [
+    588,
+    354
+   ],
+   "changed": 10200,
+   "ratio": 0.04873,
+   "bbox": [
+    14,
+    248,
+    576,
+    344
+   ]
+  },
+  "seven-details-expanded-390.png": {
+   "before": [
+    588,
+    908
+   ],
+   "after": [
+    588,
+    908
+   ],
+   "changed": 39401,
+   "ratio": 0.0738,
+   "bbox": [
+    100,
+    248,
+    554,
+    903
+   ]
+  },
+  "seven-details-expanded-focus-390.png": {
+   "before": [
+    588,
+    1118
+   ],
+   "after": [
+    588,
+    1118
+   ],
+   "changed": 56878,
+   "ratio": 0.08652,
+   "bbox": [
+    14,
+    240,
+    576,
+    1118
+   ]
+  },
+  "seven-details-expanded-focus.png": {
+   "before": [
+    840,
+    932
+   ],
+   "after": [
+    840,
+    932
+   ],
+   "changed": 15115,
+   "ratio": 0.01931,
+   "bbox": [
+    76,
+    50,
+    782,
+    238
+   ]
+  },
+  "seven-details-expanded-hover-390.png": {
+   "before": [
+    588,
+    908
+   ],
+   "after": [
+    588,
+    908
+   ],
+   "changed": 40211,
+   "ratio": 0.07532,
+   "bbox": [
+    84,
+    248,
+    554,
+    903
+   ]
+  },
+  "seven-details-expanded-hover.png": {
+   "before": [
+    840,
+    944
+   ],
+   "after": [
+    840,
+    942
+   ],
+   "changed": 61982,
+   "ratio": 0.07817,
+   "bbox": [
+    0,
+    206,
+    840,
+    944
+   ]
+  },
+  "seven-details-expanded.png": {
+   "before": [
+    840,
+    944
+   ],
+   "after": [
+    840,
+    942
+   ],
+   "changed": 61173,
+   "ratio": 0.07715,
+   "bbox": [
+    0,
+    206,
+    840,
+    944
+   ]
+  },
+  "seven-details-focus-390.png": {
+   "before": [
+    588,
+    356
+   ],
+   "after": [
+    588,
+    354
+   ],
+   "changed": 12345,
+   "ratio": 0.05897,
+   "bbox": [
+    14,
+    240,
+    576,
+    344
+   ]
+  },
+  "seven-details-focus.png": {
+   "before": [
+    840,
+    316
+   ],
+   "after": [
+    840,
+    314
+   ],
+   "changed": 13339,
+   "ratio": 0.05025,
+   "bbox": [
+    14,
+    198,
+    826,
+    302
+   ]
+  },
+  "seven-details-hover-390.png": {
+   "before": [
+    588,
+    356
+   ],
+   "after": [
+    588,
+    354
+   ],
+   "changed": 11010,
+   "ratio": 0.0526,
+   "bbox": [
+    14,
+    248,
+    576,
+    344
+   ]
+  },
+  "seven-details-hover.png": {
+   "before": [
+    840,
+    316
+   ],
+   "after": [
+    840,
+    314
+   ],
+   "changed": 12009,
+   "ratio": 0.04524,
+   "bbox": [
+    14,
+    206,
+    826,
+    302
+   ]
+  },
+  "seven-details.png": {
+   "before": [
+    840,
+    316
+   ],
+   "after": [
+    840,
+    314
+   ],
+   "changed": 11200,
+   "ratio": 0.04219,
+   "bbox": [
+    14,
+    206,
+    826,
+    302
+   ]
+  },
+  "stage-390.png": {
+   "before": [
+    724,
+    1592
+   ],
+   "after": [
+    724,
+    1584
+   ],
+   "changed": 78064,
+   "ratio": 0.06773,
+   "bbox": [
+    0,
+    436,
+    724,
+    1592
+   ]
+  },
+  "stage-revealed-390.png": {
+   "before": [
+    724,
+    2028
+   ],
+   "after": [
+    724,
+    2020
+   ],
+   "changed": 103704,
+   "ratio": 0.07063,
+   "bbox": [
+    0,
+    436,
+    724,
+    2028
+   ]
+  },
+  "stage-revealed.png": {
+   "before": [
+    1720,
+    1240
+   ],
+   "after": [
+    1720,
+    1240
+   ],
+   "changed": 12479,
+   "ratio": 0.00585,
+   "bbox": [
+    515,
+    164,
+    1206,
+    489
+   ]
+  },
+  "stage.png": {
+   "before": [
+    1720,
+    1240
+   ],
+   "after": [
+    1720,
+    1240
+   ],
+   "changed": 9935,
+   "ratio": 0.00466,
+   "bbox": [
+    515,
+    164,
+    1206,
+    300
+   ]
+  },
+  "student-cancel-390.png": {
+   "before": [
+    772,
+    584
+   ],
+   "after": [
+    772,
+    584
+   ],
+   "changed": 6688,
+   "ratio": 0.01483,
+   "bbox": [
+    648,
+    164,
+    748,
+    236
+   ]
+  },
+  "student-cancel-focus-390.png": {
+   "before": [
+    772,
+    584
+   ],
+   "after": [
+    772,
+    584
+   ],
+   "changed": 6688,
+   "ratio": 0.01483,
+   "bbox": [
+    648,
+    164,
+    748,
+    236
+   ]
+  },
+  "student-cancel-focus.png": {
+   "before": [
+    688,
+    584
+   ],
+   "after": [
+    688,
+    584
+   ],
+   "changed": 6688,
+   "ratio": 0.01665,
+   "bbox": [
+    564,
+    164,
+    664,
+    236
+   ]
+  },
+  "student-cancel-hover-390.png": {
+   "before": [
+    772,
+    584
+   ],
+   "after": [
+    772,
+    584
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "student-cancel-hover.png": {
+   "before": [
+    688,
+    584
+   ],
+   "after": [
+    688,
+    584
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "student-cancel.png": {
+   "before": [
+    688,
+    584
+   ],
+   "after": [
+    688,
+    584
+   ],
+   "changed": 6688,
+   "ratio": 0.01665,
+   "bbox": [
+    564,
+    164,
+    664,
+    236
+   ]
+  },
+  "vocab-progress-expanded-390.png": {
+   "before": [
+    780,
+    182
+   ],
+   "after": [
+    780,
+    182
+   ],
+   "changed": 7409,
+   "ratio": 0.05219,
+   "bbox": [
+    12,
+    102,
+    148,
+    158
+   ]
+  },
+  "vocab-progress-expanded-focus-390.png": {
+   "before": [
+    780,
+    182
+   ],
+   "after": [
+    780,
+    182
+   ],
+   "changed": 6821,
+   "ratio": 0.04805,
+   "bbox": [
+    12,
+    102,
+    148,
+    158
+   ]
+  },
+  "vocab-progress-expanded-focus.png": {
+   "before": [
+    624,
+    182
+   ],
+   "after": [
+    624,
+    182
+   ],
+   "changed": 6821,
+   "ratio": 0.06006,
+   "bbox": [
+    472,
+    102,
+    608,
+    158
+   ]
+  },
+  "vocab-progress-expanded-hover-390.png": {
+   "before": [
+    780,
+    182
+   ],
+   "after": [
+    780,
+    182
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "vocab-progress-expanded-hover.png": {
+   "before": [
+    624,
+    182
+   ],
+   "after": [
+    624,
+    182
+   ],
+   "changed": 0,
+   "ratio": 0.0,
+   "bbox": null
+  },
+  "vocab-progress-expanded.png": {
+   "before": [
+    624,
+    182
+   ],
+   "after": [
+    624,
+    182
+   ],
+   "changed": 7409,
+   "ratio": 0.06524,
+   "bbox": [
+    472,
+    102,
+    608,
+    158
+   ]
+  }
+ }
+}

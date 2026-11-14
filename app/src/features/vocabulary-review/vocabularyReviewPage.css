@@ -591,22 +591,12 @@
   font-style: italic;
 }
 
-.vocabulary-word-replay {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 36px;
-  padding: 6px 8px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
-  color: var(--muted);
-  font: inherit;
-  font-size: 14px;
-  font-weight: 600;
-}
-
+/* 「重播」：Owner 2026-11-14 第 21 条换成 Button 次要灰中号（subtle md）。原来的描边、白底、内边距、14/600 删了，交给 button.css。
+ * 键帽在 Button 的字标签里：标签为了省略号是 overflow: hidden，键帽是行内框时上下边会被裁掉，
+ * 所以排成 inline-block 撑开行高；和「重播」两个字的间距是原来的 6px（--eqb-space-1 的 1.5 倍）。 */
 .vocabulary-word-replay kbd {
+  display: inline-block;
+  margin-left: calc(var(--eqb-space-1) * 1.5);
   padding: 1px 5px;
   border: 1px solid var(--line-strong);
   border-bottom-width: 2px;
@@ -686,9 +676,11 @@
   padding: 32px;
 }
 
-/* 音标发音键是 Button 次要灰中号（Owner 2026-11-14 决定 #2 去掉描边），这里只管它在竖排里不被拉宽。 */
+/* 音标发音键是 Button 次要灰中号（Owner 2026-11-14 决定 #2 去掉描边），这里管它在竖排里不被拉宽。
+ * 第 22 条：左边用负边距抵掉 md 的左内边距（--eqb-space-3），喇叭图标的左边和下面释义的左边对齐（实测见 batch-d README）。 */
 .vocabulary-pronunciation {
   align-self: flex-start;
+  margin-left: calc(-1 * var(--eqb-space-3));
 }
 
 .vocabulary-core-meanings {
@@ -1276,7 +1268,6 @@
 }
 
 .vocabulary-review-accent-control button:focus-visible,
-.vocabulary-word-replay:focus-visible,
 .vocabulary-set-title-control input:focus-visible {
   outline: 2px solid var(--action);
   outline-offset: 2px;

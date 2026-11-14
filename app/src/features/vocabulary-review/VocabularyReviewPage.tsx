@@ -1327,6 +1327,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       <Button
         tone="solid"
         aria-expanded={downloadMenuOpen}
+        // 弹出类（第 18 条）：solid 本来不归「打开着垫底」管，挂上只是标明类别，样子不变。
+        data-opens-popup=""
         aria-controls="vocabulary-download-options"
         onClick={() => setDownloadMenuOpen((open) => !open)}
         disabled={pdfDownloadBusy}
@@ -1753,11 +1755,19 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 <div className="vocabulary-word-block">
                   <h2>{currentEntry.headword}</h2>
                   <span>{currentEntry.partOfSpeech}</span>
-                  <button className="vocabulary-word-replay" type="button" onClick={playCurrentEntry} aria-label={`重播 ${currentEntry.headword} 的${reviewAccent === 'american' ? '美音' : '英音'}`}>
-                    <VolumeFeedbackIcon size={16} state={audioIcon.stateFor(currentEntry.id)} />
-                    <span>重播</span>
-                    <kbd>空格</kbd>
-                  </button>
+                  {/* Owner 2026-11-14 第 21 条：换成 Button 次要灰中号（subtle md），去掉描边。Button 的文字键不收 aria-label，
+                      原来 aria-label 给的读屏名字「重播 X 的美音 / 英音」改由只给读屏看的字拼出来（同 A2 批外链键的办法）；
+                      「空格」键帽只给眼睛看（aria-hidden），不进名字，和原来 aria-label 盖掉它时一样。 */}
+                  <Button
+                    tone="subtle"
+                    size="md"
+                    className="vocabulary-word-replay"
+                    icon={<VolumeFeedbackIcon size={16} state={audioIcon.stateFor(currentEntry.id)} />}
+                    onClick={playCurrentEntry}
+                  >
+                    重播<span className="visually-hidden"> {currentEntry.headword} 的{reviewAccent === 'american' ? '美音' : '英音'}</span>
+                    <kbd aria-hidden="true">空格</kbd>
+                  </Button>
                 </div>
 
                 {reviewState.revealed ? (

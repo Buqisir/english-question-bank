@@ -1474,6 +1474,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               // the trigger wears a danger dot while saveStatus is 'error'.
               className={`draft-more-menu-trigger${saveStatus === 'error' ? ' has-save-error' : ''}`}
               aria-expanded={moreMenuOpen}
+              // 开的是弹层（role=group），不是菜单，不加 aria-haspopup；data-opens-popup 只给 button.css 认「打开着垫底」（Owner 2026-11-14 第 18 条）。
+              data-opens-popup=""
               aria-controls="draft-more-information"
               label={saveStatus === 'error' ? `草稿卷更多信息（保存出错：${saveError}）` : '草稿卷更多信息'}
               title={saveStatus === 'error' ? `保存出错：${saveError}` : '学生 / 最近草稿卷'}

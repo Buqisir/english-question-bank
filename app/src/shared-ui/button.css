@@ -93,8 +93,12 @@
 }
 
 /* 打开着的触发键（菜单、弹出面板开着时 aria-expanded=true）：保持悬停的样子——桌色底、墨字，
- * 让人看得出面板是从哪里出来的（原草稿卷两个「⋯」键就是这样，构件厂第 4 步收进构件）。 */
-.eqb-button:is([data-tone='quiet'], [data-tone='subtle'], [data-tone='strong'])[aria-expanded='true'] {
+ * 让人看得出面板是从哪里出来的（原草稿卷两个「⋯」键就是这样，构件厂第 4 步收进构件）。
+ * 只认弹出类（Owner 2026-11-14 第 18 条）：带 aria-haspopup 的（Menu 的触发键都带 menu），
+ * 或者调用处挂了 data-opens-popup 的（开的是弹层、面板而不是菜单，加 aria-haspopup 会改读屏语义，所以另用一个只给样式看的属性）。
+ * 就地展开收起的键（「收起筛选」「文章简介」「收起进度」、词典卡三个展开键、新建学生的「取消」等）展开后静止时不垫底，
+ * 照旧只在悬停时垫。两个条件放在 :where() 里，不加特指度，本条仍是 (0,3,0)，和下面各条的先后关系不变。 */
+.eqb-button:is([data-tone='quiet'], [data-tone='subtle'], [data-tone='strong'])[aria-expanded='true']:where([aria-haspopup]:not([aria-haspopup='false']), [data-opens-popup]) {
   background: var(--eqb-color-desk);
   color: var(--eqb-color-text);
 }
@@ -133,11 +137,12 @@
 
 /* 键嵌在列表的行里（不是列表项本身，比如首页结果行「看整卷」、题组行「⋯」、个人空间文件行三个键）：
  * 滑块停在这一行时，键悬停或打开着自己再垫一块底，才看得出鼠标在行里的哪个键上（Owner 2026-11-14 决定 #4）。
+ * 「打开着」和上面那条一样只认弹出类（第 18 条），条件放在 :where() 里，:is() 的特指度仍取 :hover 那一项的 (0,1,0)。
  * 底用 border 色：滑块是桌色，再垫桌色看不出来，所以深一档（提案 · 单一来源）。
  * 只认「在被滑块选中的那一行里、自己不是列表项」的键，顶栏这种键本身是列表项的照旧不垫底。
  * 覆盖：本条 (0,6,0) 盖过上面「.fluid-hover-list .eqb-button…:hover 透明」(0,5,0)，
  * 也盖过前面打开着的触发键 [aria-expanded='true'] 的桌色底 (0,3,0)。 */
-.fluid-hover-list [data-fluid-hover-active] .eqb-button:is([data-tone='quiet'], [data-tone='subtle'], [data-tone='strong']):is(:hover, [aria-expanded='true']):not(:disabled, [aria-disabled='true'], [data-fluid-hover-active]) {
+.fluid-hover-list [data-fluid-hover-active] .eqb-button:is([data-tone='quiet'], [data-tone='subtle'], [data-tone='strong']):is(:hover, [aria-expanded='true']:where([aria-haspopup]:not([aria-haspopup='false']), [data-opens-popup])):not(:disabled, [aria-disabled='true'], [data-fluid-hover-active]) {
   background: var(--eqb-color-border);
   color: var(--eqb-color-text);
 }

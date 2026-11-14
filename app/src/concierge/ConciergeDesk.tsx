@@ -698,11 +698,14 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           {state.kind === 'results' && !dataLoading && (
             // 构件厂第 4 步第八页：换成 shared-ui/Button 墨字大号（高 36，原来也是 36）。展开时用构件的
             // 「打开着」样子（桌色底、墨字），原来是把细描边换成石板墨色。
+            // 开的是筛选面板，不是菜单，不加 aria-haspopup；挂 data-opens-popup 让 button.css 认它是弹出类，
+            // 展开时照旧垫桌色（Owner 2026-11-14 第 18 条：就地展开的键不垫，「筛选」保持 11-14 认下的样子）。
             <Button
               className="concierge-command-filter-toggle"
               tone="strong"
               size="lg"
               aria-expanded={filterPanelExpanded}
+              data-opens-popup=""
               aria-controls={filterPanelId}
               onClick={() => setFilterPanelExpanded((value) => !value)}
             >

@@ -184,14 +184,16 @@ export function SevenChoicesAnalysisPanel({
                     <span>{chain.roleLabel}</span>
                     {chain.primaryMechanismLabel && <span>{chain.primaryMechanismLabel}</span>}
                   </div>
-                  <button
-                    type="button"
+                  {/* Owner 2026-11-14 第 19 条：和「全部显示 / 全部隐藏」一样换成淡墨小号，类名留着当挂钩。 */}
+                  <Button
+                    tone="quiet"
+                    size="sm"
                     className="pi-seven-details-toggle"
                     onClick={() => toggleDetails(chain.questionId)}
                     aria-expanded={detailsOpen}
                   >
                     {detailsOpen ? '收起细节' : '展开细节'}
-                  </button>
+                  </Button>
                   {detailsOpen && (
                     <div className="pi-seven-details">
                       <DetailBlock title="匹配线索">
