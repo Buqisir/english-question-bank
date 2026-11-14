@@ -183,6 +183,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [paginationStatus, setPaginationStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
   const [paginationError, setPaginationError] = useState('')
   const [economyAvailability, setEconomyAvailability] = useState<{ key: string; insufficient: boolean } | null>(null)
+  const economyCheckKey = useRef('')
   const paginationRequests = useRef(new Map<string, ReturnType<typeof fetchDraftPaperPagination>>())
   // print-form (plan.md Must Do 5, PO-1 收账): real, pagination-derived
   // page-break suggestions, refreshed on every pagination fetch (including a
@@ -477,19 +478,17 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
     return request
   }
-  useEffect(() => {
-    if (!draftPaper?.items.length) return
-    let current = true
-    const timer = window.setTimeout(() => {
-      fetch(`/api/draft-papers/${encodeURIComponent(draftPaper.id)}/pagination?check=economy8`).then(async response => {
-        if (!response.ok) return
-        const { insufficient } = await response.json()
-        if (current) setEconomyAvailability({ key: contentKey, insufficient })
-      }).catch(() => { /* A failed check cannot prove insufficient content. */ })
-    }, 400)
-    return () => { current = false; window.clearTimeout(timer) }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [contentKey])
+  function checkEconomyAvailability() {
+    if (!draftPaper?.items.length || paginationStatus !== 'ready' || renderedPaginationKey !== paginationKey
+      || economyCheckKey.current === contentKey) return
+    const key = contentKey
+    economyCheckKey.current = key
+    fetch(`/api/draft-papers/${encodeURIComponent(draftPaper.id)}/pagination?check=economy8`).then(async response => {
+      if (!response.ok) return
+      const { insufficient } = await response.json()
+      if (economyCheckKey.current === key) setEconomyAvailability({ key, insufficient })
+    }).catch(() => { /* A failed check cannot prove insufficient content. */ })
+  }
 
   // Debounce layout edits, invalidating in-flight results before the delay.
   useEffect(() => {
@@ -1389,7 +1388,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const versionToggleControl = (
     <label className="draft-product-control">
       <span>PDF 版本</span>
-      <select aria-label="PDF 版本" value={edition} disabled={exportStatus === 'exporting' || spaceDialogOpen} onChange={(event) => {
+      <select aria-label="PDF 版本" value={edition} onFocus={checkEconomyAvailability} disabled={exportStatus === 'exporting' || spaceDialogOpen} onChange={(event) => {
         setEdition(event.target.value as PaperPdfEdition)
         setExportError('')
         setExportSuccessMessage('')
