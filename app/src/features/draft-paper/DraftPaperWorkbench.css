@@ -498,35 +498,60 @@
   max-width: 100%;
 }
 
-/* draft-desk-b step3 (PO-2 简单版) + step5 QA-1: the only visible sign a
-   server re-render is in flight — the previous preview stays fully visible/
-   interactive underneath. position: fixed (was absolute, top of the ~8000px
-   sheet) so the badge floats in the VIEWPORT: a teacher editing on page 3+
-   otherwise saw no feedback at all (QA measured badge at viewport -3156px).
-   pointer-events: none so it never eats a click meant for the paper. */
-.draft-a4-repaginating {
-  background: var(--ink);
-  border-radius: 999px;
-  box-shadow: var(--elev-3);
-  color: #ffffff;
-  font-size: 12.5px;
-  left: 50%;
-  padding: 6px 14px;
-  pointer-events: none;
-  position: fixed;
-  top: 108px;
-  transform: translateX(-50%);
-  z-index: 6;
+/* 走查卡点 2（Owner 2026-11-14 第四节第 2 条）：重排期间旧卷面留着，上面盖一层
+   桌色遮罩，顶上一行字（DESIGN.md §5 Notices：次要灰字 + 16px 图标）。原来那颗
+   固定在视口上方的墨色胶囊「重新排版中…」和红色出错胶囊一起退役：以前卷面一改
+   就空白，胶囊几乎看不到。遮罩是 .draft-a4-sheet 里、iframe 外面的一层，不碰
+   PaperSurface 和服务器出的打印稿、PDF。不加模糊（毛玻璃已在之前的迁移里去掉）。
+
+   默认 display: none，只在 @media screen 里显示：浏览器打印这一页时它不出现，
+   也不用另写 @media print。 */
+.draft-a4-wait {
+  display: none;
 }
 
-/* draft-desk-b step4 (SW-I, cr-step3-lite.md): the repagination-FAILURE variant
-   of the badge above — same shell (shape/position/pointer-events), just a
-   danger-tinted background instead of --ink so a stale preview during an error
-   reads as "something went wrong" rather than "still working". Uses the
-   existing --eqb-color-danger token (a var(), not a literal hex) — no new entry
-   needed in this file's palette-hardcode whitelist below. */
-.draft-a4-repaginating--error {
-  background: var(--eqb-color-danger);
+@media screen {
+  /* 本条覆盖上面的 .draft-a4-wait { display: none }，因为只有屏幕上要显示；
+     [hidden] 时仍由下一条收起。 */
+  .draft-a4-wait {
+    display: block;
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 4;
+  }
+
+  /* 本条覆盖上面 @media screen 里的 display: block，因为 hidden 属性要赢
+     （没在等也没出错时整层不在）。 */
+  .draft-a4-wait[hidden] {
+    display: none;
+  }
+
+  /* 遮罩色：桌色压在旧卷面上，透出底下的字。没有现成的遮罩 token，比例目测，
+     缺口登记在 docs/design-gaps.md「2026-11-14 草稿卷重排遮罩」。
+     本条覆盖 .draft-a4-wait 的 pointer-events: none，因为等的时候旧卷面不该被点。 */
+  .draft-a4-wait.is-waiting {
+    background: color-mix(in srgb, var(--eqb-color-desk) 60%, transparent);
+    pointer-events: auto;
+  }
+
+  .draft-a4-wait-line {
+    align-items: center;
+    background: var(--eqb-color-desk);
+    border-radius: 8px;
+    box-shadow: var(--elev-1);
+    color: var(--eqb-color-text-muted);
+    display: flex;
+    font-size: var(--eqb-font-size-sm);
+    gap: var(--eqb-space-2);
+    margin: var(--eqb-space-4) auto 0;
+    padding: var(--eqb-space-2) var(--eqb-space-3);
+    pointer-events: auto;
+    position: sticky;
+    top: var(--eqb-space-4);
+    width: fit-content;
+    max-width: calc(100% - 2 * var(--eqb-space-4));
+  }
 }
 
 .draft-a4-sheet iframe {

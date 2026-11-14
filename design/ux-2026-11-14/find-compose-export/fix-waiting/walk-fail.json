@@ -1,0 +1,92 @@
+{
+  "steps": [
+    {
+      "what": "下移，分页接口被拦成 500",
+      "railMs": 47.5,
+      "overlayMs": 47.5,
+      "iframeGoneMs": null,
+      "failAfterMs": 497,
+      "savedAfterMs": 482,
+      "failInfo": {
+        "line": "生成分页预览没成功，可以再试一次。下面还是改之前的卷面。 重试",
+        "hidden": false,
+        "waiting": false,
+        "iframe": true
+      }
+    },
+    {
+      "what": "点「重试」",
+      "railMs": null,
+      "overlayMs": 17.2,
+      "iframeGoneMs": null,
+      "overlayAt1s": true,
+      "waitTotalMs": 119775,
+      "railAfter": [
+        "A篇原卷 C 篇",
+        "B篇原卷 A 篇",
+        "C篇原卷 D 篇"
+      ],
+      "after": {
+        "ms": 118775,
+        "iframe": true,
+        "waiting": false,
+        "failed": false,
+        "empty": ""
+      }
+    }
+  ],
+  "openMs": 35939,
+  "railBefore": [
+    "A篇原卷 A 篇",
+    "B篇原卷 C 篇",
+    "C篇原卷 D 篇"
+  ],
+  "network": [
+    {
+      "url": "/api/draft-papers/current/items",
+      "method": "POST",
+      "ms": 1480,
+      "failed": "net::ERR_ABORTED"
+    },
+    {
+      "url": "/api/draft-papers/current/items",
+      "method": "POST",
+      "ms": 995,
+      "failed": "net::ERR_ABORTED"
+    },
+    {
+      "url": "/api/draft-papers/current/items",
+      "method": "POST",
+      "ms": 462,
+      "failed": "net::ERR_ABORTED"
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-b664cca3-6234-48ab-90eb-810827c67542/pagination?edition=larg",
+      "method": "GET",
+      "ms": 31160
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-b664cca3-6234-48ab-90eb-810827c67542/pagination?edition=larg",
+      "method": "GET",
+      "ms": 26
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-b664cca3-6234-48ab-90eb-810827c67542/pagination?edition=larg",
+      "method": "GET",
+      "ms": 10
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-b664cca3-6234-48ab-90eb-810827c67542/pagination?edition=larg",
+      "method": "GET",
+      "ms": 118950
+    }
+  ],
+  "errors": [
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "console: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "console: 生成分页预览 Error: walkthrough-forced\n    at fetchDraftPaperPagination (http://127.0.0.1:5348/src/services/draftPapers.ts:86:9)",
+    "console: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "console: 生成分页预览 Error: walkthrough-forced\n    at fetchDraftPaperPagination (http://127.0.0.1:5348/src/services/draftPapers.ts:86:9)"
+  ]
+}

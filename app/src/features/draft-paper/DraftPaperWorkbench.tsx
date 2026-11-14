@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowDown, ArrowLeftRight, ArrowUp, Ellipsis, FolderPlus, PageBreak, PaperCheck, PaperStudent, RotateCcw, Save, Trash } from '../../icons'
+import { AlertTriangle, Archive, ArrowDown, ArrowLeftRight, ArrowUp, Ellipsis, FolderPlus, Loader, PageBreak, PaperCheck, PaperStudent, RotateCcw, Save, Trash } from '../../icons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { EmptyIllustration } from '../../components/EmptyIllustration'
@@ -181,6 +181,16 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // An unavailable answer booklet must never display the previous question PDF.
   const [paginatedHtml, setPaginatedHtml] = useState('')
   const [renderedPaginationKey, setRenderedPaginationKey] = useState('')
+  // 走查卡点 2（Owner 2026-11-14 第四节第 2 条）：同一份草稿、同一个 PDF 版本里
+  // 只是排版变了（挪、删、加、分页、改标题），重排期间留着旧卷面、盖一层遮罩；
+  // 换了草稿或版本才不显示旧卷面（纯答案版不能拿题卷顶着）。这里记下当前
+  // paginatedHtml 是哪一份草稿、哪个版本的。
+  const [renderedSurfaceKey, setRenderedSurfaceKey] = useState('')
+  // 「重试」按钮：数字一变，paginationKey 跟着变，分页请求重新发一次。
+  const [paginationRetry, setPaginationRetry] = useState(0)
+  // 删、加、换篇、分页这几种改动要等服务器回话才知道新的题组表；等的这一下
+  // 也算「正在重排」，卷面先盖上遮罩，不让老师点完看不到任何变化。
+  const [layoutSavesPending, setLayoutSavesPending] = useState(0)
   const [paginationStatus, setPaginationStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
   const [paginationError, setPaginationError] = useState('')
   // print-form (plan.md Must Do 5, PO-1 收账): real, pagination-derived
@@ -459,7 +469,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     () => JSON.stringify((draftPaper?.items ?? []).map((item) => [item.id, item.groupId, item.orderIndex, item.pageBreakBefore])),
     [draftPaper?.items],
   )
-  const paginationKey = JSON.stringify([draftGeneration, draftPaper?.id, draftPaper?.title, itemsLayoutKey, edition, draftPaper?.printForm])
+  const surfaceKey = JSON.stringify([draftGeneration, draftPaper?.id, edition])
+  const paginationKey = JSON.stringify([draftGeneration, draftPaper?.id, draftPaper?.title, itemsLayoutKey, edition, draftPaper?.printForm, paginationRetry])
 
   // Debounce layout edits, invalidating in-flight results before the delay.
   useEffect(() => {
@@ -491,13 +502,15 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           if (paginationRequestIdRef.current !== requestId || generation !== draftGenerationRef.current) return
           setPaginatedHtml(result.paginatedHtml)
           setRenderedPaginationKey(paginationKey)
+          setRenderedSurfaceKey(surfaceKey)
           setPaginationStatus('ready')
           setPaginationError('')
           setPageBreakSuggestions(result.pageBreakSuggestions)
         })
         .catch((error) => {
           if (paginationRequestIdRef.current !== requestId || generation !== draftGenerationRef.current) return
-          setPaginatedHtml('')
+          // 不清 paginatedHtml：同一份草稿、同一版本的旧卷面留着，上面写一行没成功
+          // （见下面 previewHtml 和卷面状态行）；换了版本的旧卷面本来就不显示。
           setRenderedPaginationKey(paginationKey)
           setPaginationStatus('error')
           setPaginationError(edition === 'answerOnly'
@@ -552,11 +565,28 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // same call this useMemo made before this cut — applyA3Imposition only
   // ever runs when printForm==='a3', so a4 output is byte-identical to
   // pre-cut (zero-diff hard断言, verify-a3-imposition.mjs asserts this).
+  //
+  // 走查卡点 2：以前这里要求 renderedPaginationKey === paginationKey 才出卷面，
+  // 任何排版改动一发生两者就不等，卷面立刻变成空白，要等新分页回来（本地一两
+  // 分钟）。现在只要求是同一份草稿、同一版本（surfaceKey），排版没跟上时照样
+  // 显示旧卷面，由 previewStale 盖遮罩。
   const previewHtml = useMemo(() => {
-    if (renderedPaginationKey !== paginationKey || !paginatedHtml) return ''
+    if (renderedSurfaceKey !== surfaceKey || !paginatedHtml) return ''
     const base = buildA4PreviewHtml(paginatedHtml)
     return draftPaper?.printForm === 'a3' ? applyA3Imposition(base) : base
-  }, [paginatedHtml, draftPaper?.printForm, renderedPaginationKey, paginationKey])
+  }, [paginatedHtml, draftPaper?.printForm, renderedSurfaceKey, surfaceKey])
+  // 卷面落后于左栏：分页还没按当前的题组表排出来，或者删、加的保存还没回来。
+  const previewStale = renderedPaginationKey !== paginationKey || layoutSavesPending > 0
+  const previewFailed = !previewStale && paginationStatus === 'error'
+
+  async function withLayoutSave<T>(run: () => Promise<T>): Promise<T> {
+    setLayoutSavesPending((count) => count + 1)
+    try {
+      return await run()
+    } finally {
+      setLayoutSavesPending((count) => count - 1)
+    }
+  }
 
   // The iframe re-navigates (srcDoc changes → full document reload) whenever
   // previewHtml changes; scrollspy/persistent-button/page-badge reads must
@@ -970,7 +1000,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     void persistItems(nextItems)
   }
 
-  async function togglePageBreak(item: DraftPaperItem, nextValue: boolean) {
+  // 走查卡点 2：分页、删、撤销删、换篇、撤销换篇、加入这六处都套一层
+  // withLayoutSave，等服务器回话期间卷面先盖上「正在重排」。
+  function togglePageBreak(item: DraftPaperItem, nextValue: boolean) {
+    return withLayoutSave(() => togglePageBreakNow(item, nextValue))
+  }
+
+  async function togglePageBreakNow(item: DraftPaperItem, nextValue: boolean) {
     if (!draftPaper || !isCurrentDraft()) return
     clearReorderUndo()
     clearReplaceUndo()
@@ -989,7 +1025,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
   }
 
-  async function deleteItem(item: DraftPaperItem) {
+  function deleteItem(item: DraftPaperItem) {
+    return withLayoutSave(() => deleteItemNow(item))
+  }
+
+  async function deleteItemNow(item: DraftPaperItem) {
     if (!draftPaper || !isCurrentDraft()) return
     clearReorderUndo()
     clearReplaceUndo()
@@ -1016,7 +1056,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
   }
 
-  async function undoDelete() {
+  function undoDelete() {
+    return withLayoutSave(() => undoDeleteNow())
+  }
+
+  async function undoDeleteNow() {
     if (!draftPaper || !isCurrentDraft() || !removedItem || removedItem.generation !== draftGeneration) return
     clearReorderUndo()
     clearReplaceUndo()
@@ -1140,7 +1184,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // service calls that already exist (deleteDraftPaperItem +
   // addGroupToDraftPaper) — both go through services/draftPapers.ts, never
   // a bespoke bypass fetch (verify anchor: "非旁路 fetch").
-  async function applySwapReplace(candidateGroupId: string) {
+  function applySwapReplace(candidateGroupId: string) {
+    return withLayoutSave(() => applySwapReplaceNow(candidateGroupId))
+  }
+
+  async function applySwapReplaceNow(candidateGroupId: string) {
     if (!draftPaper || !isCurrentDraft() || !swapSeedItem) return
     const seedIndex = draftPaper.items.findIndex((entry) => entry.id === swapSeedItem.id)
     if (seedIndex < 0) return
@@ -1212,7 +1260,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     }
   }
 
-  async function undoSwapReplace() {
+  function undoSwapReplace() {
+    return withLayoutSave(() => undoSwapReplaceNow())
+  }
+
+  async function undoSwapReplaceNow() {
     if (!draftPaper || !isCurrentDraft() || !replaceUndoSnapshot || replaceUndoSnapshot.removed.generation !== draftGeneration) return
     const snapshot = replaceUndoSnapshot
     if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
@@ -1241,7 +1293,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // volume's end. No undo (C8/E2/E6 convention: 删除本就有撤销兜底), so the
   // drawer stays open afterward (unlike 替换 above, the seed item itself is
   // untouched — nothing invalidates the drawer's own anchor).
-  async function applySwapAdd(candidateGroupId: string) {
+  function applySwapAdd(candidateGroupId: string) {
+    return withLayoutSave(() => applySwapAddNow(candidateGroupId))
+  }
+
+  async function applySwapAddNow(candidateGroupId: string) {
     if (!draftPaper || !isCurrentDraft() || !swapSeedItem) return
     const seedIndex = draftPaper.items.findIndex((entry) => entry.id === swapSeedItem.id)
     if (seedIndex < 0) return
@@ -1645,26 +1701,28 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                           : null),
                     }}
                   />
-                  {/* draft-desk-b step3 (PO-2 简单版): the old preview stays fully
-                      visible/interactive while a re-render is in flight — this is
-                      the only visible sign a repagination is happening. */}
-                  {paginationStatus === 'loading' && (
-                    <div className="draft-a4-repaginating" role="status">重新排版中…</div>
-                  )}
-                  {/* draft-desk-b step4 (SW-I, cr-step3-lite.md): a repagination
-                      FAILURE while a stale preview is still on screen previously left
-                      no visible sign at all — the error copy only rendered in the
-                      empty-state branch below, which this branch (previewHtml
-                      truthy) never reaches, so the user silently kept looking at
-                      outdated content with no indication anything had gone wrong.
-                      Reuses the exact same badge shell as the loading state above
-                      (position/shape/pointer-events unchanged, "别过度设计") — only
-                      the copy and an added modifier class (background color) differ. */}
-                  {paginationStatus === 'error' && (
-                    <div className="draft-a4-repaginating draft-a4-repaginating--error" role="status">
-                      {paginationError || '重新排版失败，当前显示旧版预览'}
-                    </div>
-                  )}
+                  {/* 走查卡点 2（Owner 2026-11-14 第四节第 2 条）：重排期间旧卷面
+                      留着，上面盖一层遮罩和一行字；没成功时去掉遮罩，留旧卷面，写
+                      一行原因和「重试」。遮罩挂在 .draft-a4-sheet 上、iframe 外面，
+                      不进卷面，也不进服务器出的打印稿和 PDF。 */}
+                  <div className={`draft-a4-wait${previewStale ? ' is-waiting' : ''}`} hidden={!previewStale && !previewFailed}>
+                    <p className="draft-a4-wait-line" role="status">
+                      {previewStale ? (
+                        <>
+                          <Loader size={16} aria-hidden="true" />
+                          <span>正在重排卷面，旧卷面先留着…</span>
+                        </>
+                      ) : previewFailed ? (
+                        <>
+                          <AlertTriangle size={16} aria-hidden="true" />
+                          <span>{paginationError}下面还是改之前的卷面。</span>
+                          <Button tone="strong" size="sm" icon={<RotateCcw size={16} aria-hidden="true" />} onClick={() => setPaginationRetry((count) => count + 1)}>
+                            重试
+                          </Button>
+                        </>
+                      ) : null}
+                    </p>
+                  </div>
                 </>
               ) : (
                 <div className="draft-a4-empty">
@@ -1696,7 +1754,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               // seamAnchors) — suppressed here so it doesn't also show
               // pinned to the group's own action cluster. A4 keeps the
               // exact pre-cut behavior (裁点4).
-              const suggestion = canPageBreakBefore && draftPaper.printForm !== 'a3'
+              // 走查卡点 2：重排期间和重排没成功时卷面是旧的，按旧分页算出的建议先
+              // 不出（以前这时卷面空白，建议本来也看不到）。
+              const suggestion = canPageBreakBefore && draftPaper.printForm !== 'a3' && !previewStale && !previewFailed
                 ? pageBreakSuggestions.find((entry) => entry.groupId === item.groupId)
                 : undefined
               return (
@@ -1764,7 +1824,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 (seamAnchors, keyed by the same suggestion.groupId
                 applyA3Imposition tagged the seam with), same click behavior
                 (前置分页 PATCH) as the A4 per-group pill above. */}
-            {draftPaper.printForm === 'a3' &&
+            {draftPaper.printForm === 'a3' && !previewStale && !previewFailed &&
               pageBreakSuggestions.map((suggestion) => {
                 const anchorTop = seamAnchors[suggestion.groupId]
                 if (anchorTop == null) return null

@@ -72,3 +72,8 @@ token 的扩展用法。
 - **想要的值**：危险色的文字档，和 `--eqb-color-warning-text` 对称，在桌面底 `#F1F5F7` 和悬停底 `#E6EDF0` 上也达到 WCAG AA（≥ 4.5:1）。构件厂第一批实测（`design/components-2026-11-13/batch-1/checks.json`）：`--eqb-color-danger #DC2626` 对白 4.83，对桌面底 4.40，对悬停底 4.08，axe 报 color-contrast。若收编，候选名 `--eqb-color-danger-text`。
 - **临时方案**：构件里危险字仍用 `--eqb-color-danger`，不现场编深一档的红；放在白底（菜单、纸）上静止时达标，放在桌面底或悬停 / 键盘焦点时不达标。等 Owner 定色。
 - **已收编（Owner 2026-11-14 决定 #9）**：`tokens.css` 新增 `--eqb-color-danger-text: #ca2121`，对白 5.60、对桌面底 5.10、对悬停底 4.73，都过 AA；`button.css` 危险键和 `menu.css` 危险项写字改用它，图标跟字走。`--eqb-color-danger` 本身不动。样张重跑后 axe 的 color-contrast 从 11 处降到 0（`design/components-2026-11-13/decisions-2026-11-14/batch-a1/`）。站上手写的危险小字（`App.css .detail-button.danger:hover` 等）没跟着改，清单见那份 README。
+
+## 2026-11-14 草稿卷重排遮罩（`app/src/features/draft-paper/DraftPaperWorkbench.css` `.draft-a4-wait.is-waiting`）
+
+- **想要的值**：一层「旧内容还在、正在换新」的遮罩色，盖在纸上能看出底下的字，又一眼看出这一页不是最新的。tokens.css 里没有遮罩一类的 token。若收编，候选名 `--eqb-color-scrim`。
+- **临时方案**：`color-mix(in srgb, var(--eqb-color-desk) 60%, transparent)`，比例目测，只用在草稿卷卷面重排等待时（走查卡点 2，`design/ux-2026-11-14/find-compose-export/fix-waiting/`）。不加模糊。

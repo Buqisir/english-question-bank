@@ -1,0 +1,191 @@
+{
+  "steps": [
+    {
+      "what": "下移第一个题组",
+      "railMs": 37.2,
+      "overlayMs": 37.2,
+      "iframeGoneMs": null,
+      "railAfter": [
+        "A篇原卷 C 篇",
+        "B篇原卷 A 篇",
+        "C篇原卷 D 篇"
+      ],
+      "waitTotalMs": 99531,
+      "printDisplay": "none",
+      "after": {
+        "ms": 98531,
+        "iframe": true,
+        "waiting": false,
+        "failed": false,
+        "empty": ""
+      }
+    },
+    {
+      "what": "移除第一个题组",
+      "railMs": 711.5,
+      "overlayMs": 21.4,
+      "iframeGoneMs": null,
+      "railAfter": [
+        "A篇原卷 A 篇",
+        "B篇原卷 D 篇"
+      ],
+      "waitTotalMs": 35522,
+      "after": {
+        "ms": 34522,
+        "iframe": true,
+        "waiting": false,
+        "failed": false,
+        "empty": ""
+      }
+    },
+    {
+      "what": "撤销移除",
+      "note": "撤销提示已收起（等卷面超过 8 秒），没走这一步"
+    },
+    {
+      "what": "下移，分页接口被拦成 500",
+      "railMs": 35,
+      "overlayMs": 35,
+      "iframeGoneMs": null,
+      "failAfterMs": 463,
+      "savedAfterMs": 442,
+      "failInfo": {
+        "line": "生成分页预览没成功，可以再试一次。下面还是改之前的卷面。 重试",
+        "hidden": false,
+        "waiting": false,
+        "iframe": true
+      }
+    },
+    {
+      "what": "点「重试」",
+      "railMs": null,
+      "overlayMs": 14.2,
+      "iframeGoneMs": null,
+      "overlayAt1s": true,
+      "waitTotalMs": 40562,
+      "railAfter": [
+        "A篇原卷 D 篇",
+        "B篇原卷 A 篇"
+      ],
+      "after": {
+        "ms": 39562,
+        "iframe": true,
+        "waiting": false,
+        "failed": true,
+        "empty": ""
+      }
+    }
+  ],
+  "openMs": 36988,
+  "railBefore": [
+    "A篇原卷 A 篇",
+    "B篇原卷 C 篇",
+    "C篇原卷 D 篇"
+  ],
+  "network": [
+    {
+      "url": "/api/draft-papers/current/items",
+      "method": "POST",
+      "ms": 1502,
+      "failed": "net::ERR_ABORTED"
+    },
+    {
+      "url": "/api/draft-papers/current/items",
+      "method": "POST",
+      "ms": 969,
+      "failed": "net::ERR_ABORTED"
+    },
+    {
+      "url": "/api/draft-papers/current/items",
+      "method": "POST",
+      "ms": 535,
+      "failed": "net::ERR_ABORTED"
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-2bd7245c-b7c7-42d4-9afe-d4e8d3a2bdce/pagination?edition=larg",
+      "method": "GET",
+      "ms": 32045
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-2bd7245c-b7c7-42d4-9afe-d4e8d3a2bdce/pagination?edition=larg",
+      "method": "GET",
+      "ms": 76371
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-2bd7245c-b7c7-42d4-9afe-d4e8d3a2bdce/pagination?edition=larg",
+      "method": "GET",
+      "ms": 97890
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-2bd7245c-b7c7-42d4-9afe-d4e8d3a2bdce/items/draft-item-7669a5",
+      "method": "DELETE",
+      "ms": 656
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-2bd7245c-b7c7-42d4-9afe-d4e8d3a2bdce/pagination?edition=larg",
+      "method": "GET",
+      "ms": 34221
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-2bd7245c-b7c7-42d4-9afe-d4e8d3a2bdce/pagination?edition=larg",
+      "method": "GET",
+      "ms": 18
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-2bd7245c-b7c7-42d4-9afe-d4e8d3a2bdce/pagination?edition=larg",
+      "method": "GET",
+      "ms": 10
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-2bd7245c-b7c7-42d4-9afe-d4e8d3a2bdce/reorder-suggestion?edit",
+      "method": "GET",
+      "ms": 59639
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-2bd7245c-b7c7-42d4-9afe-d4e8d3a2bdce/pagination?edition=larg",
+      "method": "GET",
+      "ms": 40155
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-2bd7245c-b7c7-42d4-9afe-d4e8d3a2bdce/reorder-suggestion?edit",
+      "method": "GET",
+      "ms": 112525
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-2bd7245c-b7c7-42d4-9afe-d4e8d3a2bdce/reorder-suggestion?edit",
+      "method": "GET",
+      "ms": 214831
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-2bd7245c-b7c7-42d4-9afe-d4e8d3a2bdce/reorder-suggestion?edit",
+      "method": "GET",
+      "ms": 42387
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-2bd7245c-b7c7-42d4-9afe-d4e8d3a2bdce/reorder-suggestion?edit",
+      "method": "GET",
+      "ms": 41237
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-2bd7245c-b7c7-42d4-9afe-d4e8d3a2bdce/reorder-suggestion?edit",
+      "method": "GET",
+      "ms": 4
+    }
+  ],
+  "errors": [
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "console: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "console: 生成分页预览 Error: walkthrough-forced\n    at fetchDraftPaperPagination (http://127.0.0.1:5348/src/services/draftPapers.ts:86:9)",
+    "console: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "console: 生成分页预览 Error: walkthrough-forced\n    at fetchDraftPaperPagination (http://127.0.0.1:5348/src/services/draftPapers.ts:86:9)",
+    "console: Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+    "console: Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+    "console: 生成分页预览 Error: Failed to load draft paper pagination: 502\n    at fetchDraftPaperPagination (http://127.0.0.1:5348/src/services/draftPapers.ts:86:9)",
+    "console: Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+    "console: Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+    "console: Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+    "console: Failed to load resource: the server responded with a status of 502 (Bad Gateway)",
+    "console: Failed to load resource: the server responded with a status of 502 (Bad Gateway)"
+  ]
+}
