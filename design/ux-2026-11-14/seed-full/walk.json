@@ -1,0 +1,201 @@
+{
+  "base": "http://127.0.0.1:5354",
+  "query": "2024 阅读",
+  "paper": "2024年新课标Ⅰ卷",
+  "steps": [
+    {
+      "n": 1,
+      "name": "登录后首页",
+      "facts": {
+        "看整卷": 4,
+        "整卷未上线": 0
+      },
+      "shot": "shots/01-登录后首页.png",
+      "url": "/"
+    },
+    {
+      "n": 2,
+      "name": "搜索结果",
+      "facts": {
+        "query": "2024 阅读",
+        "行数": 3,
+        "看整卷": 3,
+        "整卷未上线": 0
+      },
+      "shot": "shots/02-搜索结果.png",
+      "url": "/"
+    },
+    {
+      "n": 3,
+      "name": "展开题组",
+      "facts": {
+        "题组": 4
+      },
+      "shot": "shots/03-展开题组.png",
+      "url": "/"
+    },
+    {
+      "n": 4,
+      "name": "题组详情",
+      "facts": {
+        "这份卷还没上线": 0,
+        "看整卷": 1,
+        "加入草稿卷": 1
+      },
+      "shot": "shots/04-题组详情.png",
+      "url": "/?view=detail&groupId=group-2024-i-reading-a"
+    },
+    {
+      "n": 5,
+      "name": "从题组详情看整卷",
+      "facts": {
+        "加入键": 9,
+        "占位": ""
+      },
+      "shot": "shots/05-从题组详情看整卷.png",
+      "url": "/?view=paper-browse&paperId=paper-2024-i&focusGroupId=group-2024-i-reading-a"
+    },
+    {
+      "n": 6,
+      "name": "回结果行点看整卷",
+      "facts": {
+        "加入键": 9
+      },
+      "shot": "shots/06-回结果行点看整卷.png",
+      "url": "/?view=paper-browse&paperId=paper-2024-i"
+    },
+    {
+      "n": 7,
+      "name": "整卷里加3个题组",
+      "facts": {
+        "added": [
+          "Reading A",
+          "Reading B",
+          "Reading C"
+        ],
+        "草稿丸": "草稿卷（3 组）"
+      },
+      "shot": "shots/07-整卷里加3个题组.png",
+      "url": "/?view=paper-browse&paperId=paper-2024-i"
+    },
+    {
+      "n": 8,
+      "name": "打开草稿卷",
+      "facts": {
+        "等待秒": 35,
+        "题组": 3
+      },
+      "shot": "shots/08-打开草稿卷.png",
+      "url": "/?view=draft-paper&paperId=paper-2024-i&draftPaperId=draft-paper-fca04503-7a5f-4d12-93ac-6a25c8e1f474"
+    },
+    {
+      "n": 9,
+      "name": "PDF版本菜单",
+      "facts": {
+        "菜单": [
+          {
+            "text": "大字完整版 要有完整的两个听力题组",
+            "disabled": true
+          },
+          {
+            "text": "大字无听力版",
+            "disabled": false
+          },
+          {
+            "text": "省纸版",
+            "disabled": false
+          },
+          {
+            "text": "纯答案版 选中的题组还没有审过的参考答案",
+            "disabled": true
+          }
+        ],
+        "服务器判定": {
+          "editions": [
+            {
+              "edition": "largeComplete",
+              "available": false,
+              "code": "LISTENING_PAIR_REQUIRED",
+              "reason": "大字完整版需要完整的两个听力题组"
+            },
+            {
+              "edition": "largeNoListening",
+              "available": true,
+              "code": null,
+              "reason": null
+            },
+            {
+              "edition": "economy8",
+              "available": true,
+              "code": null,
+              "reason": null
+            },
+            {
+              "edition": "answerOnly",
+              "available": false,
+              "code": "ANSWER_SOURCE_MISSING",
+              "reason": "选中的题组没有同版本已审源参考答案；不能以教师卷替代"
+            }
+          ]
+        }
+      },
+      "shot": "shots/09-PDF版本菜单.png",
+      "url": "/?view=draft-paper&paperId=paper-2024-i&draftPaperId=draft-paper-fca04503-7a5f-4d12-93ac-6a25c8e1f474"
+    },
+    {
+      "n": 10,
+      "name": "选大字无听力版",
+      "facts": {
+        "等待秒": 0
+      },
+      "shot": "shots/10-选大字无听力版.png",
+      "url": "/?view=draft-paper&paperId=paper-2024-i&draftPaperId=draft-paper-fca04503-7a5f-4d12-93ac-6a25c8e1f474"
+    },
+    {
+      "n": 11,
+      "name": "导出菜单",
+      "facts": {
+        "菜单": [
+          {
+            "text": "下载 PDF（大字无听力版）",
+            "disabled": false
+          },
+          {
+            "text": "另存为 PDF…",
+            "disabled": false
+          },
+          {
+            "text": "保存 PDF 到个人空间",
+            "disabled": false
+          }
+        ]
+      },
+      "shot": "shots/11-导出菜单.png",
+      "url": "/?view=draft-paper&paperId=paper-2024-i&draftPaperId=draft-paper-fca04503-7a5f-4d12-93ac-6a25c8e1f474"
+    },
+    {
+      "n": 12,
+      "name": "下载题卷PDF",
+      "facts": {
+        "文件": "paper-largeNoListening.pdf",
+        "字节": 166807,
+        "头": "%PDF-",
+        "页数": 4
+      },
+      "shot": "shots/12-下载题卷PDF.png",
+      "url": "/?view=draft-paper&paperId=paper-2024-i&draftPaperId=draft-paper-fca04503-7a5f-4d12-93ac-6a25c8e1f474"
+    },
+    {
+      "n": 13,
+      "name": "试答案PDF",
+      "facts": {
+        "status": 400,
+        "type": "application/json; charset=utf-8",
+        "body": "{\"error\":\"选中的题组没有同版本已审源参考答案；不能以教师卷替代\"}"
+      },
+      "shot": "shots/13-试答案PDF.png",
+      "url": "/?view=draft-paper&paperId=paper-2024-i&draftPaperId=draft-paper-fca04503-7a5f-4d12-93ac-6a25c8e1f474"
+    }
+  ],
+  "pageErrors": []
+}

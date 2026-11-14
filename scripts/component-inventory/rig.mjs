@@ -5,6 +5,7 @@
 //
 // 用法：node scripts/component-inventory/rig.mjs        （前台运行，Ctrl-C 结束）
 // 端口：网页 5299，接口 9912；账号 owner / inventory-owner-pw-1
+// 数据：默认只种 paper-2026-i 的四篇阅读；INVENTORY_SEED=full 种数据仓里所有当前版本的卷（INVENTORY_STORE 换数据仓）
 import { spawn, spawnSync } from 'node:child_process'
 import { mkdirSync, rmSync } from 'node:fs'
 import path from 'node:path'
@@ -50,9 +51,17 @@ export async function startRig({ quiet = false } = {}) {
   const tmp = path.join(RAW, OFF ? `rigdata-${OFF}` : 'rigdata')
   rmSync(tmp, { recursive: true, force: true }); mkdirSync(tmp, { recursive: true })
   const db = path.join(tmp, 'qb.sqlite'), udb = path.join(tmp, 'ud.sqlite'), assets = path.join(tmp, 'assets')
-  const { seedConfirmedCanonicalDraftFixture } = await import(pathToFileURL(path.join(ROOT, 'scripts/lib/canonicalDraftE2eFixture.mjs')).href)
-  seedConfirmedCanonicalDraftFixture({ repositoryRoot: ROOT, bankDbPath: db, paperAssetsDir: assets,
-    groupIds: ['group-2026-i-reading-a', 'group-2026-i-reading-b', 'group-2026-i-reading-c', 'group-2026-i-reading-d'] })
+  if (process.env.INVENTORY_SEED === 'full') {
+    // 全量种子：数据仓里所有当前版本的卷整卷种进去（见 scripts/lib/canonicalFullSeed.mjs）。
+    // INVENTORY_STORE 换数据仓目录（相对仓库根或绝对路径），默认 ticket-32-remaining-v1/store。
+    const { seedFullCanonicalStore } = await import(pathToFileURL(path.join(ROOT, 'scripts/lib/canonicalFullSeed.mjs')).href)
+    const seeded = seedFullCanonicalStore({ repositoryRoot: ROOT, storeDir: process.env.INVENTORY_STORE || undefined, bankDbPath: db, paperAssetsDir: assets })
+    if (!quiet) for (const p of seeded.papers) console.log(`[seed full] ${p.paperId} ${p.versionName} 题组 ${p.groups} 听力 ${p.listeningGroups} 整卷 ${p.catalog ? '上线' : '未上线'} 已审答案 ${p.answerCommitment ? '有' : '无'}${p.skipped ? ' 跳过：' + p.skipped : ''}`)
+  } else {
+    const { seedConfirmedCanonicalDraftFixture } = await import(pathToFileURL(path.join(ROOT, 'scripts/lib/canonicalDraftE2eFixture.mjs')).href)
+    seedConfirmedCanonicalDraftFixture({ repositoryRoot: ROOT, bankDbPath: db, paperAssetsDir: assets,
+      groupIds: ['group-2026-i-reading-a', 'group-2026-i-reading-b', 'group-2026-i-reading-c', 'group-2026-i-reading-d'] })
+  }
   const u = spawnSync('node', ['scripts/create-user.mjs', '--username', OWNER.username, '--password', OWNER.password, '--role', 'owner'],
     { cwd: ROOT, env: { ...process.env, USER_DATA_DB: udb }, encoding: 'utf8' })
   if (u.status !== 0) throw new Error('create-user failed: ' + u.stderr)
