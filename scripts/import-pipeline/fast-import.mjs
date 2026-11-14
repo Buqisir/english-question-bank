@@ -1299,8 +1299,15 @@ function assertReferencesMutable(ctx) {
   const submitted = ['push', 'local-preview', 'screen', 'local-screen']
     // An unfinished upload is Candidate-specific UNKNOWN evidence until reconciled.
     .some(name => ctx.state.steps[name] && (name !== 'push' || !reconciledPush(ctx)))
-  const retained = ['signals/review-restore.json', 'canonical-evidence/web-review-approval-v1.json', 'signals/qa-accepted.json',
+  const restorePath = path.join(ctx.paperDir, 'signals/review-restore.json')
+  const fix = ctx.state.data.feedbackFix
+  const restore = fix?.bundleDigest && existsSync(restorePath) ? readJson(restorePath) : null
+  // Keep hydrate's CAS receipt for push; only its exact validated repair may rebuild.
+  const repairingRestore = restore?.revisionId === fix?.baseRevisionId
+    && Boolean(restore?.bundleDigest) && restore.bundleDigest === fix?.bundleDigest
+  const retained = ['canonical-evidence/web-review-approval-v1.json', 'signals/qa-accepted.json',
     'signals/locally-published.json'].some(file => existsSync(path.join(ctx.paperDir, file)))
+    || (existsSync(restorePath) && !repairingRestore)
     || existsSync(path.join(ctx.work, 'handoff/evidence.json'))
   const initialization = path.join(ctx.paperDir, 'signals/source-intake-initialization.json')
   const hasBase = existsSync(initialization) && readJson(initialization).baseRevisionId
@@ -1649,7 +1656,16 @@ async function feedbackFix(ctx, args, readStatus) {
     return result.stdout
   }))()
   const status = JSON.parse(raw)
-  const baseRevisionId = ctx.state.data.candidateRevisionId || push?.result?.revisionId || ctx.state.data.revisionId
+  const restorePath = path.join(ctx.paperDir, 'signals/review-restore.json')
+  const restore = existsSync(restorePath) ? readJson(restorePath) : null
+  const baseRevisionId = ctx.state.data.candidateRevisionId || push?.result?.revisionId || ctx.state.data.revisionId || restore?.revisionId
+  if (restore && (restore.schemaVersion !== 'review-restore-v1' || restore.paperId !== ctx.paperId
+    || restore.origin !== reconciliationOrigin() || restore.revisionId !== baseRevisionId
+    || status.latest?.paperId !== ctx.paperId || status.latest?.reviewKind !== 'candidate'
+    || !/^sha256:[a-f0-9]{64}$/u.test(restore.bundleDigest || '')
+    || restore.bundleDigest !== status.latest.bundleDigest)) {
+    fail('feedback-fix：hydrate 恢复凭据须与线上最新 Candidate 的卷、站点、revision 和 bundleDigest 一致')
+  }
   if (!baseRevisionId || status.paperId !== ctx.paperId || status.latest?.state !== 'changes_requested'
     || status.latest.id !== baseRevisionId || status.latestRevisionId !== baseRevisionId
     || !Array.isArray(status.issues) || issues.some(id => !status.issues.some(issue =>
@@ -1663,7 +1679,8 @@ async function feedbackFix(ctx, args, readStatus) {
   if (existsSync(qa)) for (const file of readdirSync(qa).filter(file => file.startsWith('screen-tile-'))) archive(ctx, path.join(qa, file))
   for (const step of ['push', 'screen', 'local-preview', 'local-screen', 'report', 'preprocessing-report']) delete ctx.state.steps[step]
   for (const field of ['candidateRevisionId', 'revisionId', 'localReport', 'status']) delete ctx.state.data[field]
-  ctx.state.data.feedbackFix = { baseRevisionId, issues, at: new Date().toISOString() }
+  ctx.state.data.feedbackFix = { baseRevisionId, issues, at: new Date().toISOString(),
+    ...(restore ? { bundleDigest: restore.bundleDigest } : {}) }
   save(ctx)
   await requestedRedo(ctx, name)
 }
