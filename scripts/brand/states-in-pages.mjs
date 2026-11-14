@@ -2,10 +2,12 @@
 // 只拍图，不改网站代码：起本地测试站，截图时把图注入到页面上对应的位置再拍（§4.6 的老办法）。
 // 每处拍两张：-without 是页面原样，-with 是注入獭獭后；再拼一张 -pair 并排，带标题。
 // 另出 mascot/states/overview.png：五张新图 400 / 96 / 48 宽，白底和 #F1F5F7 底各一行。
+// 「没找到」（摊手，第 119 条）viewBox 比另外三张半身宽（576 对 494），宽度乘 WIDE，头脸才和另外三张一样大。
 //
 // 用法：
 //   先起站：INVENTORY_PORT_OFFSET=56 INVENTORY_SEED=full node scripts/component-inventory/rig.mjs
-//   再拍：  node scripts/brand/states-in-pages.mjs [overview|pages|all]   （默认 all）
+//   （端口偏移换了，STATES_BASE 跟着换：offset 60 就是 http://127.0.0.1:5359）
+//   再拍：  node scripts/brand/states-in-pages.mjs [overview|pages|all] [组号,...]   （默认 all；组号只对 pages 起作用，比如 3 只重拍「没找到」）
 // 环境变量：STATES_BASE（默认 http://127.0.0.1:5355）、INVENTORY_CHROMIUM（chromium 路径）。
 // 导出完成那一处会真的出一次 PDF，本地约一分钟多。
 import { mkdirSync, readFileSync } from 'node:fs'
@@ -20,12 +22,19 @@ const OUT = path.join(BRAND, 'evidence/states-2026-11-14')
 const BASE = process.env.STATES_BASE || 'http://127.0.0.1:5355'
 const OWNER = { username: 'owner', password: 'inventory-owner-pw-1' }
 const MODE = process.argv[2] || 'all'
+const ONLY = process.argv[3] ? process.argv[3].split(',').map((s) => s.trim()) : null
+const want = (n) => !ONLY || ONLY.includes(String(n))
 
 const { chromium } = createRequire(path.join(ROOT, 'app/package.json'))('playwright')
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 const svg = (rel) => readFileSync(path.join(MASCOT, rel), 'utf8')
 const uri = (s) => `data:image/svg+xml;base64,${Buffer.from(s).toString('base64')}`
 const pngUri = (buf) => `data:image/png;base64,${buf.toString('base64')}`
+
+// 半身图共用的头脸比例：另外三张半身 viewBox 宽 494，「没找到」宽 576（左右多出摊开的手），576 / 494 ≈ 1.17。
+const HALF_W = 494
+const WIDE = 576 / HALF_W
+const scaleOf = (f) => (f === 'states/half-not-found.svg' ? WIDE : 1)
 
 const FILES = [
   ['states/half-searching.svg', '找题中'],
@@ -43,24 +52,22 @@ const LOGIN_ABOVE = (231 - 12) / 276 // ≈ 0.793
 const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
 
 async function overview() {
-  const page = await browser.newPage({ viewport: { width: 2240, height: 600 }, deviceScaleFactor: 2 })
+  const page = await browser.newPage({ viewport: { width: 2320, height: 600 }, deviceScaleFactor: 2 })
   const row = (bg, label) => `
     <section style="background:${bg};padding:24px 28px 20px;border-radius:8px;margin-bottom:16px">
       <div class="lab">${label}</div>
-      <div class="r">${FILES.map(([f]) => `<figure><img src="${uri(svg(f))}" width="400"></figure>`).join('')}</div>
-      <div class="r">${FILES.map(([f]) => `<figure><img src="${uri(svg(f))}" width="96"></figure>`).join('')}</div>
-      <div class="r">${FILES.map(([f]) => `<figure><img src="${uri(svg(f))}" width="48"></figure>`).join('')}</div>
-      <div class="r cap">${FILES.map(([f, n]) => `<figure>${f.replace('states/', 'states/')}<br><span>${n}</span></figure>`).join('')}</div>
+      ${[400, 96, 48].map((w) => `<div class="r">${FILES.map(([f]) => `<figure><img src="${uri(svg(f))}" width="${Math.round(w * scaleOf(f))}"></figure>`).join('')}</div>`).join('')}
+      <div class="r cap">${FILES.map(([f, n]) => `<figure>${f}<br><span>${n}${scaleOf(f) !== 1 ? `<br>宽 ×${WIDE.toFixed(2)}（${Math.round(400 * WIDE)} / ${Math.round(96 * WIDE)} / ${Math.round(48 * WIDE)}）` : ''}</span></figure>`).join('')}</div>
     </section>`
   await page.setContent(`<style>
     body{margin:0;padding:28px;background:#fff;font:14px/1.5 system-ui,sans-serif;color:#191D18}
     h1{font-size:20px;margin:0 0 4px}p{margin:0 0 16px;color:#5A6C75}
     .lab{font-size:13px;color:#5A6C75;margin-bottom:12px}
-    .r{display:grid;grid-template-columns:repeat(5,400px);gap:28px;align-items:end;margin-bottom:16px}
+    .r{display:grid;grid-template-columns:${FILES.map(([f]) => `${Math.round(400 * scaleOf(f))}px`).join(' ')};gap:28px;align-items:end;margin-bottom:16px}
     figure{margin:0}.cap{align-items:start;font-size:13px}.cap span{color:#5A6C75}
     </style>
-    <h1>獭獭 · 五张定稿新图（Owner 2026-11-14，BRAND.md 第 115–117 条）</h1>
-    <p>每列一张：上 400 宽，中 96 宽，下 48 宽。文件都在 design/brand-2026-10-13/mascot/。</p>
+    <h1>獭獭 · 半身四张和「完成」（Owner 2026-11-14，BRAND.md 第 116、117、119 条）</h1>
+    <p>每列一张：上 400 宽，中 96 宽，下 48 宽；「没找到」是摊手，viewBox 更宽，宽度放大约 ${WIDE.toFixed(2)} 倍，头脸和另外三张一样大（第 119 条，提案，界面任务里再量）。文件都在 design/brand-2026-10-13/mascot/。</p>
     ${row('#FFFFFF;border:1px solid #E1E7EA', '白底 #FFFFFF')}${row('#F1F5F7', '页面底 #F1F5F7')}`)
   await page.screenshot({ path: path.join(MASCOT, 'states/overview.png'), fullPage: true })
   await page.close()
@@ -137,7 +144,7 @@ async function pages() {
   mkdirSync(OUT, { recursive: true })
 
   // 1 找题加载中 · half-searching · 不用（对照留档）
-  {
+  if (want(1)) {
     const { ctx, page } = await newPage({ ai: true })
     await login(page)
     await search(page, '适合高二的环保主题阅读')
@@ -157,7 +164,7 @@ async function pages() {
   }
 
   // 2 结果卡上沿探头 · half-offer · 不用（对照留档）
-  {
+  if (want(2)) {
     const { ctx, page } = await newPage()
     await login(page)
     await search(page, '2024 新课标Ⅰ卷')
@@ -174,13 +181,13 @@ async function pages() {
   }
 
   // 3 没找到匹配 · half-not-found · 已定留
-  {
+  if (want(3)) {
     const { ctx, page } = await newPage()
     await login(page)
     await search(page, 'zzqx qqwv 呃呃呃 xkcd')
     await page.locator('.concierge-empty').waitFor({ timeout: 15000 })
     await pair(page, '3-not-found', '「没找到匹配」 · half-not-found · 已定留',
-      '真页面状态：搜一串乱码，本地题库没有匹配（测试站没填 AI 密钥，所以上面一行是「没填 AI 密钥…」）。-without 是页面原样（一行灰字）；-with 照第 31 条把这行灰字做成卡片（卡片样式是注入的，页面里现在没有），獭獭 150 高居中探头，只露水面以上约 138px，卡片上沿就是水面。',
+      '真页面状态：搜一串乱码，本地题库没有匹配（测试站没填 AI 密钥，所以上面一行是「没填 AI 密钥…」）。-without 是页面原样（一行灰字）；-with 照第 31 条把这行灰字做成卡片（卡片样式是注入的，页面里现在没有），獭獭用摊手版（第 119 条），150 高、宽约 121（另外三张半身同样高是 104 宽，约 1.17 倍），居中探头，只露水面以上约 138px，卡片上沿就是水面。',
       async () => {
         await page.evaluate(() => {
           const p = document.querySelector('.concierge-empty')
@@ -196,15 +203,18 @@ async function pages() {
         })
         await sleep(200)
         const card = await rect(page, '.concierge-empty')
-        const h = 150, w = Math.round(h * 494 / 715)
+        // 摊手版 viewBox 宽 576（另外三张 494），同样 150 高、宽按 576 算，就是另外三张的约 1.17 倍宽，头脸一样大（第 119 条）。
+        const h = 150, w = Math.round(h * 576 / 715)
+        // 手摊出去左右不一样多（左 24、右 58），按身体中线（另外三张的框中线 x=541）对准卡片中线，不按图框居中。
+        const NOT_FOUND_MID = (541 - 270) / 576
         const above = Math.round(h * HALF_ABOVE)
-        await overlay(page, { src: uri(svg('states/half-not-found.svg')), x: Math.round(card.x + card.w / 2 - w / 2), y: card.y - above, w, h, clipH: above })
+        await overlay(page, { src: uri(svg('states/half-not-found.svg')), x: Math.round(card.x + card.w / 2 - w * NOT_FOUND_MID), y: card.y - above, w, h, clipH: above })
       })
     await ctx.close()
   }
 
   // 4 导出完成 · otter-float · 不用（对照留档）
-  {
+  if (want(4)) {
     const { ctx, page } = await newPage()
     await login(page)
     await page.evaluate(async () => {
@@ -234,7 +244,7 @@ async function pages() {
   }
 
   // 5 个人空间空态 · otter-sit · 已定留
-  {
+  if (want(5)) {
     const { ctx, page } = await newPage()
     // 测试站的个人空间本来就是空的；为了不受导出那一处影响，列表接口固定回空。
     await ctx.route(/\/api\/my-space(\?[^/]*)?$/, (r) => r.request().method() === 'GET' ? r.fulfill({ json: { folders: [], artifacts: [] } }) : r.fallback())
@@ -256,7 +266,7 @@ async function pages() {
   }
 
   // 6 登录页 · half-login · 比较用，不用（对照留档）
-  {
+  if (want(6)) {
     const { ctx, page } = await newPage()
     await page.goto(BASE + '/'); await page.locator('.login-card').waitFor({ timeout: 30000 })
     // 现在的登录页雾海里有一只 v11 海獭；一屏一只，两张都把它藏起来，只比「放不放半身探头」。

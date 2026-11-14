@@ -29,11 +29,11 @@
               </div>
             </div>
             <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Noto Serif SC", system-ui, sans-serif', fontSize: '40px', fontWeight: 700, lineHeight: '135%' }}>
-              只在等和有结果的时候出来。
+              只在页面本来空着的时候出来。
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '14px', lineHeight: '180%', width: '620px' }}>
-            出场：空态、找题加载、请老师确认、AI 没找到、组卷或导出完成、登录页、App 图标。读题、做题、编辑卷面时不出现，卷面上永远不出现。同一屏最多一只。
+            出场已定（第 118 条）：工作页面里只有个人空间空态和 AI 没找到；找题加载、请老师确认、组卷或导出完成、登录页探头都不放。顶栏标志、App 图标、默认头像照旧。卷面上永远不出现。同一屏最多一只。
           </div>
         </div>
         <div style={{ alignItems: 'start', boxSizing: 'border-box', display: 'flex', gap: '48px' }}>
@@ -109,13 +109,13 @@
                 个人空间空态
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                全身。裹藻仰躺和日历图第 114 条起停用；空闲改用坐石全身像
+                坐石全身像；裹藻仰躺和日历图停用
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%', width: '310px' }}>
-                尺寸基准要照坐石重定（原来按 150px 的 P）
+                150 × 150 试用（19 页），界面任务里再量
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '175%', textAlign: 'right', width: '90px' }}>
-                第 51、57 条
+                第 114、118 条
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', gap: '16px', paddingBlock: '10px' }}>
@@ -123,27 +123,27 @@
                 登录页
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                SL 探头；第 115 条起改成只露头（还没定稿）
+                不放探头，用 08 雾海（第 118 条）
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%', width: '310px' }}>
-                按母版全身 240px；SL 本身约 166px
+                —
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '175%', textAlign: 'right', width: '90px' }}>
-                第 29、41 条
+                第 67、118 条
               </div>
             </div>
             <div style={{ boxSizing: 'border-box', display: 'flex', gap: '16px', paddingTop: '10px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, lineHeight: '175%', width: '150px' }}>
-                03 待确认、05 没找到
+                AI 没找到
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                从卡片上沿探头，第 115 条起改用半身；03 靠右，05 居中
+                半身摊手，在卡片上沿后面，居中
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%', width: '310px' }}>
-                150px 高
+                150px 高，宽放大约 1.17 倍（提案）
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '175%', textAlign: 'right', width: '90px' }}>
-                第 29–31 条
+                第 118、119 条
               </div>
             </div>
           </div>
@@ -328,7 +328,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §4.4、§4.7–§4.10 · 第 29、33、34、45、55–57、62、66、106、109、114、115 条 · 文件 mascot/kelp/*
+          出处：BRAND.md §4.4、§4.7–§4.10 · 第 31、33、34、45、55–57、62、66、67、106、109、114、115、118、119 条 · 文件 mascot/kelp/*
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           15

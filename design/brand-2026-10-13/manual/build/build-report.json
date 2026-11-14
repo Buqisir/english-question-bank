@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T15:23:30.834Z",
+  "generatedAt": "2026-11-14T17:16:51.781Z",
   "src": "design/brand-2026-10-13/manual/src",
   "out": "design/brand-2026-10-13/manual/视觉规范手册-草案0.7-预览.pdf",
   "font": {
@@ -134,9 +134,9 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 5.09,
+        "diffPct": 5.64,
         "headerPct": 0.51,
-        "bodyPct": 5.98,
+        "bodyPct": 6.65,
         "footerPct": 2.42
       }
     },
@@ -189,9 +189,9 @@
         }
       ],
       "compare": {
-        "diffPct": 9.25,
+        "diffPct": 9.23,
         "headerPct": 0.42,
-        "bodyPct": 11.15,
+        "bodyPct": 11.14,
         "footerPct": 2.43
       }
     },
@@ -222,27 +222,15 @@
     },
     {
       "page": "12-表情与状态",
-      "images": 12,
+      "images": 13,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [
-        {
-          "text": "",
-          "box": [
-            1408,
-            210
-          ],
-          "content": [
-            1408,
-            235
-          ]
-        }
-      ],
+      "clipped": [],
       "compare": {
-        "diffPct": 10.8,
+        "diffPct": 10.26,
         "headerPct": 0.42,
-        "bodyPct": 13.06,
-        "footerPct": 2.63
+        "bodyPct": 12.42,
+        "footerPct": 2.36
       }
     },
     {
@@ -252,9 +240,9 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 6.2,
+        "diffPct": 6.22,
         "headerPct": 0.42,
-        "bodyPct": 7.47,
+        "bodyPct": 7.5,
         "footerPct": 1.55
       }
     },
@@ -312,10 +300,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 6.63,
+        "diffPct": 5.75,
         "headerPct": 0.42,
-        "bodyPct": 7.97,
-        "footerPct": 1.87
+        "bodyPct": 6.89,
+        "footerPct": 1.76
       }
     },
     {
@@ -362,24 +350,12 @@
       "images": 4,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [
-        {
-          "text": "",
-          "box": [
-            550,
-            240
-          ],
-          "content": [
-            678,
-            240
-          ]
-        }
-      ],
+      "clipped": [],
       "compare": {
-        "diffPct": 3.82,
+        "diffPct": 5.64,
         "headerPct": 0.51,
-        "bodyPct": 4.44,
-        "footerPct": 1.96
+        "bodyPct": 6.68,
+        "footerPct": 2.3
       }
     },
     {
@@ -415,9 +391,9 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 5.69,
+        "diffPct": 5.94,
         "headerPct": 0.48,
-        "bodyPct": 6.75,
+        "bodyPct": 7.07,
         "footerPct": 2.17
       }
     }

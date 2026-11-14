@@ -118,18 +118,18 @@
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, lineHeight: '175%' }}>
-                海獭出场的另两处
+                獭獭接进网站
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                个人空间空态（原裹藻仰躺已停用，空闲改用坐石全身像，第 114 条）、找题 02 和「正在想」；登录页已换成 08 雾海。
+                只接两处（第 118 条）：个人空间空态放坐石全身像，AI 没找到放半身摊手。空状态构件正在做，两张图都还没接进网站。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, lineHeight: '175%' }}>
-                03 待确认、05 没找到
+                「没找到」卡片
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                从结果卡、「没找到匹配」卡片上沿探头；05 要先改成卡片（第 31 条）。
+                现在只是一行灰字，要先做成卡片，獭獭在卡片上沿后面（第 31 条）；宽放大约 1.17 倍是提案，界面任务里再量（第 119 条）。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>
@@ -153,7 +153,7 @@
                 物件进界面
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                十一件物件和坐石全身像都没放进真实页面；物件先只当装饰，等「找题 → 组卷 → 导出」走查结果出来再挑一两处试（第 106、113 条）。
+                十一件物件都没放进真实页面；物件先只当装饰，等「找题 → 组卷 → 导出」走查结果出来再挑一两处试（第 106、113 条）。
               </div>
             </div>
           </div>
@@ -197,7 +197,7 @@
                 重画和重做
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                「完成」已定用 L1 仰躺抱石、眯眼（第 116 条），没放进 mascot/、没替换 otter-front.svg 和旧状态图 04；半身四张仍是候选、没定稿（第 115 条）；巨藻中图停用待重做（第 114 条）；更多原语插画等真有首次空态再做。
+                半身四张和「完成」已定稿、收进 mascot/（第 117 条），没找到已换摊手（第 119 条）。还没做：48 像素以下的小尺寸版；巨藻中图停用待重做（第 114 条）；更多原语插画等真有首次空态再做。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>
@@ -274,7 +274,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §2、§3.1、§3.5、§8 第 5–11 条、§4.10 · 第 69、71、88、89、92、95、106、113–116 条 · 以 BRAND.md 为准，和手册不一致时改手册
+          出处：BRAND.md §2、§3.1、§3.5、§8 第 5–11 条、§4.10 · 第 69、71、88、89、92、95、106、113–119 条 · 以 BRAND.md 为准，和手册不一致时改手册
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           22

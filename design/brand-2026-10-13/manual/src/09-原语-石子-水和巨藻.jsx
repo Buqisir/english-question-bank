@@ -145,10 +145,10 @@
               </div>
             </div>
             <div style={{ alignItems: 'center', backgroundColor: '#F1F5F7', borderRadius: '12px', boxShadow: '#E3E8DF 0px 0px 0px 1px inset', boxSizing: 'border-box', display: 'flex', flexShrink: 0, height: '150px', justifyContent: 'center' }}>
-              <div style={{ backgroundImage: 'url(../../mascot/states/state-01-idle.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '124px', width: '180px' }} />
+              <div style={{ backgroundImage: 'url(../../mascot/states/half-searching.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '124px', width: '86px' }} />
             </div>
             <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-              原来只在状态插画里当道具、用墨，比如 01 空闲胸口那块圆石。2026-11-14 定松开（第 106 条）：石头可以用到空态和装饰，改用石色、石面（06 页），画法见 09b 页。界面不加品牌点。
+              原来只在状态插画里当道具、用墨（旧 01 空闲那块，已停用）。2026-11-14 定松开（第 106 条）：石头可以用到空态和装饰，改用石色、石面（06 页），画法见 09b 页。图是半身「找题中」手里的圆石。界面不加品牌点。
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0px', flexDirection: 'column', flexGrow: '1', gap: '14px' }}>

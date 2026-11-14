@@ -20,7 +20,7 @@
             </div>
             <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.08em', lineHeight: '16px' }}>
-                登录页、空态、找题
+                登录页、空态、没找到
               </div>
               <div style={{ borderColor: '#D5DACF', borderRadius: '4px', borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', paddingInline: '7px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
@@ -33,7 +33,7 @@
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '14px', lineHeight: '180%', width: '620px' }}>
-            登录页是网站现在的样子（2026-10-16 重拍）。空态和找题两张是 2026-10-16 用雾薄荷素材照原截图重拼的，不是网站实拍。尺寸和位置以这些图为准；真要上线，每一处另开 UI 任务。
+            登录页是网站现在的样子（2026-10-16 重拍）。空态和没找到两张是 2026-11-14 在本地测试站截图时注入獭獭拍的，不是网站实拍。工作页面里獭獭只出这两处（第 118 条）；真要上线，每一处另开 UI 任务。
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', display: 'flex', gap: '48px' }}>
@@ -60,49 +60,44 @@
           </div>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', flexShrink: '0', gap: '12px', width: '378px' }}>
             <div style={{ borderRadius: '12px', boxShadow: '#E3E8DF 0px 0px 0px 1px', boxSizing: 'border-box', flexShrink: '0', height: '240px', overflow: 'clip', width: '378px' }}>
-              <div style={{ backgroundImage: 'url(../../evidence/my-space-empty-kelp.png)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', height: '240px', width: '378px' }} />
+              <div style={{ backgroundImage: 'url(../../evidence/states-2026-11-14/5-my-space-empty-with.png)', backgroundPosition: '-297px -128px', backgroundRepeat: 'no-repeat', backgroundSize: '972px 608px', boxSizing: 'border-box', height: '240px', width: '378px' }} />
             </div>
             <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '8px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '14px', fontWeight: 600, lineHeight: '20px' }}>
-                个人空间空态 · 裹藻仰躺
+                个人空间空态 · 坐石全身像
               </div>
               <div style={{ backgroundColor: '#2C6E56', borderRadius: '4px', boxSizing: 'border-box', paddingInline: '6px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#FFFFFF', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  已定
-                </div>
-              </div>
-              <div style={{ backgroundColor: '#E9ECE6', borderRadius: '4px', boxSizing: 'border-box', flexShrink: '0', paddingInline: '7px' }}>
-                <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  图已停用 · 第 114 条
+                  已定 · 第 118 条
                 </div>
               </div>
             </div>
             <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-              按两眼间距和 150px 的 P 一样大，居中放在文案上面。裹着巨藻不漂走，就是「保存在这里」。第 114 条起裹藻仰躺停用，空闲改用坐石全身像。
+              页面本来就空，獭獭坐在石头上等着，眼睛往下就是文案和「去找题」。换掉原来的平涂插图，居中放在文案上面。原来的裹藻仰躺第 114 条起停用。
             </div>
             <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '18px' }}>
-              第 57 条 · 约 148px 高、209px 宽 · 卡片 302px
+              第 114、118 条 · 图 150 × 150 · 试用截图
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', flexShrink: '0', gap: '12px', width: '550px' }}>
             <div style={{ borderRadius: '12px', boxShadow: '#E3E8DF 0px 0px 0px 1px', boxSizing: 'border-box', flexShrink: '0', height: '240px', overflow: 'clip', width: '550px' }}>
-              <div style={{ backgroundImage: 'url(../../evidence/thinking-loading.png)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', height: '240px', width: '678px' }} />
+              <div style={{ backgroundImage: 'url(../../evidence/states-2026-11-14/3-not-found-with.png)', backgroundPosition: '-184px -150px', backgroundRepeat: 'no-repeat', backgroundSize: '937px 586px', boxSizing: 'border-box', height: '240px', width: '550px' }} />
             </div>
             <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '8px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '14px', fontWeight: 600, lineHeight: '20px' }}>
-                找题等待 · 正在想
+                AI 没找到 · 半身摊手
               </div>
-              <div style={{ borderColor: '#2C6E56', borderRadius: '4px', borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', paddingInline: '6px' }}>
-                <div style={{ boxSizing: 'border-box', color: '#2C6E56', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  Droid 定
+              <div style={{ backgroundColor: '#2C6E56', borderRadius: '4px', boxSizing: 'border-box', paddingInline: '6px' }}>
+                <div style={{ boxSizing: 'border-box', color: '#FFFFFF', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
+                  已定 · 第 118、119 条
                 </div>
               </div>
             </div>
             <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-              状态 02 停在省略号上，下面是「正在为…找题…」和骨架屏。想的时候 ∴ 的上点潜下去再浮上来（14 页）；02 只在 150px 及以上用。
+              没找到就如实说没找到。獭獭摊手，视线往下落到「换个说法」和「返回浏览」两条出路上。卡片上沿就是水面（第 31 条）；网站现在只有一行灰字，卡片是截图时注入的。
             </div>
             <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '18px' }}>
-              第 41、52 条 · 150px
+              150 高 · 宽放大约 1.17 倍（提案，第 119 条）· 试用截图
             </div>
           </div>
         </div>
@@ -171,10 +166,10 @@
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '10px' }}>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 600, lineHeight: '18px' }}>
-                03 待确认、05 没找到
+                不放的四处 · 第 118 条
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                实景在 Paper「主题 3 · 五个状态」页：03 在结果卡上沿靠右，05 在「没找到匹配」卡片上居中。
+                找题加载、结果卡探头、导出完成、登录页探头都不放：加载看进度，完成用提示条。放和不放的对照图在 evidence/states-2026-11-14/。
               </div>
             </div>
             <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingTop: '10px' }}>
@@ -182,7 +177,7 @@
                 动效
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                只有可点的样例 mascot/motion/thinking-dive.html；02 还没进网站。
+                「正在想」的可点样例 mascot/motion/thinking-dive.html 留着；找题加载不放獭獭（第 118 条），这段动效眼下没有界面位置。
               </div>
             </div>
           </div>
@@ -190,7 +185,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §4.4–§4.8、§1.6 · 第 41、50、52、57、67、114 条 · 截图 evidence/login、my-space-empty-kelp、thinking-loading.png
+          出处：BRAND.md §4.4–§4.8、§1.6 · 第 31、50、52、67、114、118、119 条 · 截图 evidence/login.png、states-2026-11-14/5-my-space-empty-with、3-not-found-with.png
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           19

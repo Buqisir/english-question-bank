@@ -65,7 +65,7 @@
                   otter-sit.svg
                 </div>
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                  坐石全身像：照 F6 草图描，两爪合在胸前，48px 以下不用（第 109、110、113 条）。原来这格的正面浮姿 otter-front.svg 已停用，将由照 L1 描的仰躺抱石取代；这张仰躺已定，「完成」就用它，还没放进 mascot/（第 114–116 条）。
+                  坐石全身像：照 F6 草图描，两爪合在胸前，48px 以下不用（第 109、110、113 条）。原来这格的正面浮姿 otter-front.svg 已停用；仰躺换成照 L1 描的眯眼仰躺抱石 mascot/otter-float.svg，它也是「完成」（第 114–117 条）。
                 </div>
               </div>
               <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', flexShrink: '0', gap: '4px', paddingRight: '24px', width: '240px' }}>
@@ -291,7 +291,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §4.1、§4.2 · 第 24、33、44、47、109、110、113–116 条 · 文件 mascot/otter-sit.svg、otter-head.svg、app-icon.svg
+          出处：BRAND.md §4.1、§4.2 · 第 24、33、44、47、109、110、113–117 条 · 文件 mascot/otter-sit.svg、otter-head.svg、app-icon.svg
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           10
