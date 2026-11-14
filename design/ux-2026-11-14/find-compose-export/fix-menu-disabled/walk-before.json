@@ -1,0 +1,776 @@
+{
+  "mode": "before",
+  "menus": [
+    {
+      "id": "PDF版本",
+      "steps": [
+        {
+          "key": "(打开)",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "大字无听力版",
+            "checked": "true"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "省纸版",
+            "checked": "false"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "大字无听力版",
+            "checked": "true"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "省纸版",
+            "checked": "false"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "大字无听力版",
+            "checked": "true"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "省纸版",
+            "checked": "false"
+          }
+        },
+        {
+          "key": "Home",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "大字无听力版",
+            "checked": "true"
+          }
+        },
+        {
+          "key": "End",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "省纸版",
+            "checked": "false"
+          }
+        },
+        {
+          "key": "ArrowUp",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "大字无听力版",
+            "checked": "true"
+          }
+        },
+        {
+          "key": "首字「大」",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "大字无听力版",
+            "checked": "true"
+          }
+        },
+        {
+          "key": "首字「大」",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "大字无听力版",
+            "checked": "true"
+          }
+        },
+        {
+          "key": "首字「纯」",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "大字无听力版",
+            "checked": "true"
+          }
+        },
+        {
+          "key": "首字「省」",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "大字无听力版",
+            "checked": "true"
+          }
+        }
+      ],
+      "triggerText": "PDF 版本：\n大字无听力版",
+      "items": [
+        {
+          "label": "大字完整版",
+          "tag": "button",
+          "role": "menuitemcheckbox",
+          "ariaDisabled": "true",
+          "disabledAttr": false,
+          "note": "要有完整的两个听力题组"
+        },
+        {
+          "label": "大字无听力版",
+          "tag": "button",
+          "role": "menuitemcheckbox",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        },
+        {
+          "label": "省纸版",
+          "tag": "button",
+          "role": "menuitemcheckbox",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        },
+        {
+          "label": "纯答案版",
+          "tag": "button",
+          "role": "menuitemcheckbox",
+          "ariaDisabled": "true",
+          "disabledAttr": false,
+          "note": "选中的题组还没有审过的参考答案"
+        }
+      ],
+      "shotOpen": "before-01-PDF版本-打开.png",
+      "disabledReachable": false,
+      "menuOpenBeforeClickTest": true,
+      "clickOnDisabled": {
+        "menuOpen": true,
+        "mutations": 0,
+        "triggerText": "PDF 版本：\n大字无听力版"
+      },
+      "escape": {
+        "menuOpen": false,
+        "focusOnTrigger": true
+      },
+      "tab": {
+        "menuOpen": false,
+        "focusOnTrigger": true
+      }
+    },
+    {
+      "id": "导出",
+      "steps": [
+        {
+          "key": "(打开)",
+          "focus": {
+            "role": "menuitem",
+            "name": "下载 PDF（大字无听力版）"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "另存为 PDF…"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "保存 PDF 到个人空间"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "下载 PDF（大字无听力版）"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "另存为 PDF…"
+          }
+        },
+        {
+          "key": "Home",
+          "focus": {
+            "role": "menuitem",
+            "name": "下载 PDF（大字无听力版）"
+          }
+        },
+        {
+          "key": "End",
+          "focus": {
+            "role": "menuitem",
+            "name": "保存 PDF 到个人空间"
+          }
+        },
+        {
+          "key": "ArrowUp",
+          "focus": {
+            "role": "menuitem",
+            "name": "另存为 PDF…"
+          }
+        },
+        {
+          "key": "首字「保」",
+          "focus": {
+            "role": "menuitem",
+            "name": "下载 PDF（大字无听力版）"
+          }
+        }
+      ],
+      "triggerText": "导出",
+      "items": [
+        {
+          "label": "下载 PDF（大字无听力版）",
+          "tag": "button",
+          "role": "menuitem",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        },
+        {
+          "label": "另存为 PDF…",
+          "tag": "button",
+          "role": "menuitem",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        },
+        {
+          "label": "保存 PDF 到个人空间",
+          "tag": "button",
+          "role": "menuitem",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        }
+      ],
+      "shotOpen": "before-02-导出-打开.png",
+      "escape": {
+        "menuOpen": false,
+        "focusOnTrigger": true
+      },
+      "tab": {
+        "menuOpen": false,
+        "focusOnTrigger": true
+      }
+    },
+    {
+      "id": "题组⋯-第一组",
+      "steps": [
+        {
+          "key": "(打开)",
+          "focus": {
+            "role": "menuitem",
+            "name": "下移"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "移除"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "下移"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "移除"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "下移"
+          }
+        },
+        {
+          "key": "Home",
+          "focus": {
+            "role": "menuitem",
+            "name": "下移"
+          }
+        },
+        {
+          "key": "End",
+          "focus": {
+            "role": "menuitem",
+            "name": "移除"
+          }
+        },
+        {
+          "key": "ArrowUp",
+          "focus": {
+            "role": "menuitem",
+            "name": "下移"
+          }
+        },
+        {
+          "key": "首字「移」",
+          "focus": {
+            "role": "menuitem",
+            "name": "下移"
+          }
+        }
+      ],
+      "triggerText": "",
+      "items": [
+        {
+          "label": "上移",
+          "tag": "button",
+          "role": "menuitem",
+          "ariaDisabled": "true",
+          "disabledAttr": false
+        },
+        {
+          "label": "下移",
+          "tag": "button",
+          "role": "menuitem",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        },
+        {
+          "label": "移除",
+          "tag": "button",
+          "role": "menuitem",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        }
+      ],
+      "shotOpen": "before-03-题组⋯-第一组-打开.png",
+      "disabledReachable": false,
+      "menuOpenBeforeClickTest": true,
+      "clickOnDisabled": {
+        "menuOpen": true,
+        "mutations": 0,
+        "triggerText": ""
+      },
+      "escape": {
+        "menuOpen": false,
+        "focusOnTrigger": true
+      },
+      "tab": {
+        "menuOpen": false,
+        "focusOnTrigger": true
+      }
+    },
+    {
+      "id": "题组⋯-最后一组",
+      "steps": [
+        {
+          "key": "(打开)",
+          "focus": {
+            "role": "menuitem",
+            "name": "上移"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "前置分页",
+            "checked": "false"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "移除"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "上移"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "前置分页",
+            "checked": "false"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "移除"
+          }
+        },
+        {
+          "key": "Home",
+          "focus": {
+            "role": "menuitem",
+            "name": "上移"
+          }
+        },
+        {
+          "key": "End",
+          "focus": {
+            "role": "menuitem",
+            "name": "移除"
+          }
+        },
+        {
+          "key": "ArrowUp",
+          "focus": {
+            "role": "menuitemcheckbox",
+            "name": "前置分页",
+            "checked": "false"
+          }
+        },
+        {
+          "key": "首字「上」",
+          "focus": {
+            "role": "menuitem",
+            "name": "上移"
+          }
+        }
+      ],
+      "triggerText": "",
+      "items": [
+        {
+          "label": "上移",
+          "tag": "button",
+          "role": "menuitem",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        },
+        {
+          "label": "下移",
+          "tag": "button",
+          "role": "menuitem",
+          "ariaDisabled": "true",
+          "disabledAttr": false
+        },
+        {
+          "label": "前置分页",
+          "tag": "button",
+          "role": "menuitemcheckbox",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        },
+        {
+          "label": "移除",
+          "tag": "button",
+          "role": "menuitem",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        }
+      ],
+      "shotOpen": "before-04-题组⋯-最后一组-打开.png",
+      "disabledReachable": false,
+      "menuOpenBeforeClickTest": true,
+      "clickOnDisabled": {
+        "menuOpen": true,
+        "mutations": 0,
+        "triggerText": ""
+      },
+      "escape": {
+        "menuOpen": false,
+        "focusOnTrigger": true
+      },
+      "tab": {
+        "menuOpen": false,
+        "focusOnTrigger": true
+      }
+    },
+    {
+      "id": "空草稿-导出",
+      "error": "TimeoutError: locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.eqb-menu') to be visible\u001b[22m\n",
+      "shot": "before-06-空草稿-导出-出错.png",
+      "menuOpen": false,
+      "active": "<button data-inv=\"shared-ui/Button.tsx:67:5\" type=\"button\" class=\"eqb-button\" data-tone=\"primary\" data-size=\"md\" aria-haspopup=\"menu\" aria-expanded=\"false\" data-fluid-hover-active=\"\"><span data-inv=\"s"
+    },
+    {
+      "id": "空草稿-PDF版本",
+      "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.eqb-menu .eqb-menu-item[aria-disabled=\"true\"]').first()\u001b[22m\n",
+      "shot": "before-08-空草稿-PDF版本-出错.png",
+      "menuOpen": false,
+      "active": "<button data-inv=\"shared-ui/Button.tsx:67:5\" type=\"button\" class=\"eqb-button draft-product-trigger\" data-tone=\"strong\" data-size=\"sm\" aria-haspopup=\"menu\" aria-expanded=\"false\" data-fluid-hover-active"
+    },
+    {
+      "id": "首页结果行⋯",
+      "steps": [
+        {
+          "key": "(打开)",
+          "focus": {
+            "role": "menuitem",
+            "name": "相似篇章"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "详情"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "相似篇章"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "详情"
+          }
+        },
+        {
+          "key": "Home",
+          "focus": {
+            "role": "menuitem",
+            "name": "相似篇章"
+          }
+        },
+        {
+          "key": "End",
+          "focus": {
+            "role": "menuitem",
+            "name": "详情"
+          }
+        },
+        {
+          "key": "ArrowUp",
+          "focus": {
+            "role": "menuitem",
+            "name": "相似篇章"
+          }
+        },
+        {
+          "key": "首字「详」",
+          "focus": {
+            "role": "menuitem",
+            "name": "相似篇章"
+          }
+        }
+      ],
+      "triggerText": "",
+      "items": [
+        {
+          "label": "相似篇章",
+          "tag": "button",
+          "role": "menuitem",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        },
+        {
+          "label": "详情",
+          "tag": "a",
+          "role": "menuitem",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        }
+      ],
+      "shotOpen": "before-09-首页结果行⋯-打开.png",
+      "escape": {
+        "menuOpen": false,
+        "focusOnTrigger": true
+      },
+      "tab": {
+        "menuOpen": false,
+        "focusOnTrigger": true
+      }
+    },
+    {
+      "id": "详情更多操作",
+      "steps": [
+        {
+          "key": "(打开)",
+          "focus": {
+            "role": "menuitem",
+            "name": "编辑"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "删除"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "编辑"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "删除"
+          }
+        },
+        {
+          "key": "Home",
+          "focus": {
+            "role": "menuitem",
+            "name": "编辑"
+          }
+        },
+        {
+          "key": "End",
+          "focus": {
+            "role": "menuitem",
+            "name": "删除"
+          }
+        },
+        {
+          "key": "ArrowUp",
+          "focus": {
+            "role": "menuitem",
+            "name": "编辑"
+          }
+        },
+        {
+          "key": "首字「删」",
+          "focus": {
+            "role": "menuitem",
+            "name": "编辑"
+          }
+        }
+      ],
+      "triggerText": "",
+      "items": [
+        {
+          "label": "编辑",
+          "tag": "button",
+          "role": "menuitem",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        },
+        {
+          "label": "删除",
+          "tag": "button",
+          "role": "menuitem",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        }
+      ],
+      "shotOpen": "before-10-详情更多操作-打开.png",
+      "escape": {
+        "menuOpen": false,
+        "focusOnTrigger": true
+      },
+      "tab": {
+        "menuOpen": false,
+        "focusOnTrigger": true
+      }
+    },
+    {
+      "id": "个人空间行⋯",
+      "steps": [
+        {
+          "key": "(打开)",
+          "focus": {
+            "role": "menuitem",
+            "name": "另存为…"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "删除文件"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "另存为…"
+          }
+        },
+        {
+          "key": "ArrowDown",
+          "focus": {
+            "role": "menuitem",
+            "name": "删除文件"
+          }
+        },
+        {
+          "key": "Home",
+          "focus": {
+            "role": "menuitem",
+            "name": "另存为…"
+          }
+        },
+        {
+          "key": "End",
+          "focus": {
+            "role": "menuitem",
+            "name": "删除文件"
+          }
+        },
+        {
+          "key": "ArrowUp",
+          "focus": {
+            "role": "menuitem",
+            "name": "另存为…"
+          }
+        },
+        {
+          "key": "首字「删」",
+          "focus": {
+            "role": "menuitem",
+            "name": "另存为…"
+          }
+        }
+      ],
+      "triggerText": "",
+      "items": [
+        {
+          "label": "另存为…",
+          "tag": "button",
+          "role": "menuitem",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        },
+        {
+          "label": "删除文件",
+          "tag": "button",
+          "role": "menuitem",
+          "ariaDisabled": null,
+          "disabledAttr": false
+        }
+      ],
+      "shotOpen": "before-11-个人空间行⋯-打开.png",
+      "escape": {
+        "menuOpen": false,
+        "focusOnTrigger": true
+      },
+      "tab": {
+        "menuOpen": false,
+        "focusOnTrigger": true
+      }
+    }
+  ],
+  "errors": [
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+  ]
+}

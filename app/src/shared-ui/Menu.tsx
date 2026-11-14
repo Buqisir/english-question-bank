@@ -7,7 +7,7 @@
  *
  * 行为照搬站上做得最全的一份 ConciergeGroupRowMenu（2026-09-04 123e0f0bf）：
  * - 一次只开一个菜单，开新的会关掉旧的；
- * - 打开后焦点落到第一项；↑ ↓ Home End 在项之间走，跳过禁用项；
+ * - 打开后焦点落到第一个可用项；↑ ↓ Home End 在项之间走（禁用项也停，见文末 Owner 2026-11-14）；
  * - Esc、Tab、选中一项：关上，焦点回到触发键；
  * - 点外面、外面滚动：关上，焦点不抢；
  * - 面板挂在 body 上，贴着触发键放，下面放不下就翻到上面，左右不出屏。
@@ -27,8 +27,15 @@
  * 键盘和别的项一样，选中照旧关菜单。可勾选项总是按钮，不当链接。
  *
  * 走查卡点 4（Owner 2026-11-14 第四节第 4 条，草稿卷「PDF 版本」）补了 description：项下面一行小字，
- * 用来写这一项为什么用不了。给了的项变两行高，小字用 aria-describedby 挂在项上。
- * 禁用项照旧不进方向键（和别的菜单一致），所以读屏走菜单时不会停在它上面。
+ * 用来写这一项为什么用不了。给了的项变两行高，小字用 aria-describedby 挂在项上；
+ * 项的名字用 aria-labelledby 只指名字那一段，免得小字既算名字又算描述、读屏念两遍。
+ *
+ * Owner 2026-11-14 定：禁用项也能停焦点（照 WAI-ARIA APG 菜单模式，禁用项可聚焦），读屏走得到
+ * 置灰项、念得出「不可用」（aria-disabled="true"，不用会让焦点到不了的 disabled 属性）和挂着的原因小字。
+ * - ↑ ↓ Home End、首字母跳转都会停在禁用项上；
+ * - 首字母跳转：按一个字（字母不分大小写），焦点跳到当前项之后、名字以这个字开头的下一项，到底绕回；
+ * - 禁用项仍然不能选：回车、空格、点击都不触发 onSelect，菜单也不关；
+ * - 打开时焦点仍落在第一个可用项；整个菜单都禁用时落在第一项（焦点总在菜单里，Esc、Tab 照常关）。
  */
 
 import {
@@ -155,7 +162,8 @@ export function Menu({
     document.addEventListener('keydown', onKeyDown)
     window.addEventListener('scroll', onScroll, true)
     const focusFrame = requestAnimationFrame(() => {
-      enabledItems(menuRef.current)[0]?.focus({ preventScroll: true })
+      const root = menuRef.current
+      ;(enabledItems(root)[0] ?? allItems(root)[0])?.focus({ preventScroll: true })
     })
 
     return () => {
@@ -200,7 +208,8 @@ export function Menu({
   }
 
   const onMenuKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-    const list = enabledItems(menuRef.current)
+    // 禁用项也在里面：方向键、Home、End、首字母跳转都能停在它上面（Owner 2026-11-14）。
+    const list = allItems(menuRef.current)
     if (list.length === 0) return
     const index = list.indexOf(document.activeElement as HTMLElement)
     const move = (next: number) => {
@@ -214,6 +223,16 @@ export function Menu({
     else if (event.key === 'Tab') {
       event.preventDefault()
       close(true)
+    } else if (event.key.length === 1 && event.key !== ' ' && !event.ctrlKey && !event.metaKey && !event.altKey) {
+      // 首字母跳转：从当前项的下一项往后找，到底绕回；找不到就不动。
+      const char = event.key.toLocaleLowerCase()
+      for (let step = 1; step <= list.length; step += 1) {
+        const next = (index + step) % list.length
+        if (itemLabel(list[next]).startsWith(char)) {
+          move(next)
+          break
+        }
+      }
     }
   }
 
@@ -261,12 +280,16 @@ export function Menu({
                 close(entry.restoreFocus !== false)
               }
               const noteId = entry.description ? `${menuId}-${entry.key}-note` : undefined
+              // 带小字的项：名字只取名字那一段（aria-labelledby），不然按钮的名字会把小字也算进去，
+              // 读屏念名字时念一遍原因、念描述时再念一遍。
+              const labelId = noteId ? `${menuId}-${entry.key}-label` : undefined
               const common = {
                 ...entry.data,
                 className: 'eqb-menu-item',
                 role: 'menuitem',
                 'data-tone': entry.tone,
                 'aria-disabled': entry.disabled || undefined,
+                'aria-labelledby': labelId,
                 'aria-describedby': noteId,
                 'data-has-note': noteId ? '' : undefined,
                 tabIndex: -1,
@@ -280,7 +303,7 @@ export function Menu({
                   {entry.icon}
                   {noteId ? (
                     <span className="eqb-menu-item-text">
-                      <span className="eqb-menu-item-label">{entry.label}</span>
+                      <span id={labelId} className="eqb-menu-item-label">{entry.label}</span>
                       <span id={noteId} className="eqb-menu-item-note">{entry.description}</span>
                     </span>
                   ) : (
@@ -321,6 +344,14 @@ export function Menu({
   )
 }
 
+function allItems(root: HTMLElement | null): HTMLElement[] {
+  return root ? [...root.querySelectorAll<HTMLElement>('.eqb-menu-item')] : []
+}
+
 function enabledItems(root: HTMLElement | null): HTMLElement[] {
-  return root ? [...root.querySelectorAll<HTMLElement>(".eqb-menu-item:not([aria-disabled='true'])")] : []
+  return allItems(root).filter((item) => item.getAttribute('aria-disabled') !== 'true')
+}
+
+function itemLabel(item: HTMLElement): string {
+  return (item.querySelector('.eqb-menu-item-label')?.textContent ?? '').trim().toLocaleLowerCase()
 }

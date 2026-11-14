@@ -96,6 +96,17 @@
   opacity: 0.55;
 }
 
+/* 禁用项也能停焦点（Owner 2026-11-14，照 WAI-ARIA APG 菜单模式）。
+ * 本条覆盖上面 .eqb-menu-item[aria-disabled='true'] 的整项 opacity 0.55：整项变淡会把焦点环和桌色底
+ * 也一起变淡，键盘用户看不清焦点在哪；所以焦点在禁用项上时焦点环、底色照上面 :focus-visible 原样
+ * 全浓度画，只把字（和跟着 currentColor 走的图标、勾）换成置灰的 faint 色，看起来仍然点不了。
+ * 它和 :focus-visible 那条叠在同一元素上，比它多一个属性选择器，特异度更高，所以只换颜色和不透明度、
+ * 不碰底色和焦点环。 */
+.eqb-menu-item[aria-disabled='true']:focus-visible {
+  opacity: 1;
+  color: var(--eqb-color-text-faint);
+}
+
 /* 带一行小字的项（description，走查卡点 4）：本条覆盖上面 .eqb-menu-item 的固定 32px 高和不换行，
  * 因为要上下放两行；左右排法（图标、字、勾）不变，勾和图标贴第一行。 */
 .eqb-menu-item[data-has-note] {
