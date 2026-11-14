@@ -324,11 +324,11 @@
     white-space: normal;
   }
 
-  /* Screen listening always uses equal thirds, including Canonical's
-   * Print-only one_column fallback. Long options wrap within their column.
+  /* Screen listening uses three content-sized tracks, including Canonical's
+   * Print-only one_column fallback. Only genuinely long rows need to wrap.
    * Keep specificity low so the mobile single-column rule still wins. */
   .paper-browse-content :where(.canonical-listening-surface) .ps-option-list {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(3, auto) !important;
     /* Override Canonical's inline gap: 0 so adjacent options stay distinct. */
     column-gap: 1em !important;
   }
