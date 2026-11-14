@@ -329,6 +329,8 @@
    * Keep specificity low so the mobile single-column rule still wins. */
   .paper-browse-content :where(.canonical-listening-surface) .ps-option-list {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    /* Override Canonical's inline gap: 0 so adjacent options stay distinct. */
+    column-gap: 1em !important;
   }
 
   /* Override one_column's block flow and inline Print hanging indent;
