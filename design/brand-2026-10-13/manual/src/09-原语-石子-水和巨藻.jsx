@@ -171,7 +171,7 @@
               <div style={{ backgroundImage: 'url(../../illustration/kelp-canopy.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '130px', width: '136px' }} />
             </div>
             <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-              只用一两条细弧线暗示，不画写实水面。唯一的例外是林冠透光：一块深薄荷平涂的水，上沿平直就是水面，下两角 16px 圆角，不画波纹、气泡和渐变。这张林冠透光第 114 条起停用，以后重做。
+              只用一两条细弧线暗示，不画写实水面。原来唯一的例外是林冠透光：一块深薄荷平涂的水，上沿平直就是水面。这张第 114 条起停用、以后重做，在那之前没有画实水面的例外。
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0px', flexDirection: 'column', flexGrow: '1', gap: '14px' }}>
@@ -179,36 +179,31 @@
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.08em', lineHeight: '16px' }}>
                 巨藻
               </div>
-              <div style={{ borderColor: '#D5DACF', borderRadius: '4px', borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', paddingInline: '7px' }}>
-                <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  提案 · 第 55 条
-                </div>
-              </div>
               <div style={{ backgroundColor: '#2C6E56', borderRadius: '4px', boxSizing: 'border-box', flexShrink: '0', paddingInline: '7px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#FFFFFF', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  新画法已定 · 第 112 条
+                  新画法已定、已换 · 第 112、114 条
                 </div>
               </div>
             </div>
-            <div style={{ alignItems: 'end', backgroundColor: '#F1F5F7', borderRadius: '12px', boxShadow: '#E3E8DF 0px 0px 0px 1px inset', boxSizing: 'border-box', display: 'flex', flexShrink: 0, gap: '56px', height: '150px', justifyContent: 'center', paddingBottom: '14px' }}>
-              <div style={{ boxSizing: 'border-box', flexShrink: 0, height: '122px', position: 'relative', width: '84px' }}>
-                <div style={{ backgroundImage: 'url(assets/7KCGWJ5KWG0N78PQ2HK93WGFC6.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', height: '88px', left: '0px', position: 'absolute', top: '34px', width: '33px' }} />
-                <div style={{ backgroundImage: 'url(assets/7KCGWJ5KWG0N78PQ2HK93WGFC6.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', height: '76px', left: '50px', position: 'absolute', top: '46px', width: '28px' }} />
-                <div style={{ backgroundImage: 'url(../../illustration/kelp.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', height: '122px', left: '20px', position: 'absolute', top: '0px', width: '45px' }} />
+            <div style={{ alignItems: 'end', backgroundColor: '#F1F5F7', borderRadius: '12px', boxShadow: '#E3E8DF 0px 0px 0px 1px inset', boxSizing: 'border-box', display: 'flex', flexShrink: 0, gap: '48px', height: '150px', justifyContent: 'center', paddingBottom: '8px' }}>
+              <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <div style={{ backgroundImage: 'url(../../illustration/kelp.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '116px', width: '43px' }} />
+                <div style={{ fontFamily: '"Inter", system-ui, sans-serif', fontSize: '11px', lineHeight: '14px', color: '#60665C', boxSizing: 'border-box' }}>kelp.svg</div>
               </div>
-              <div style={{ alignItems: 'end', backgroundColor: '#2C6E56', borderBottomLeftRadius: '16px', borderBottomRightRadius: '16px', boxSizing: 'border-box', display: 'flex', flexShrink: 0, height: '122px', justifyContent: 'center', paddingBottom: '6px', width: '92px' }}>
-                <div style={{ backgroundImage: 'url(assets/5EA4E0Z6HXQ2DQDEF4TX1EA863.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '98px', width: '36px' }} />
+              <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <div style={{ backgroundImage: 'url(../../illustration/kelp-small.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '64px', width: '24px' }} />
+                <div style={{ fontFamily: '"Inter", system-ui, sans-serif', fontSize: '11px', lineHeight: '14px', color: '#60665C', boxSizing: 'border-box' }}>64px · kelp-small.svg</div>
               </div>
             </div>
             <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-              插画里唯一的植物。原画法：固着器、茎和交替的圆头叶片，平涂一色，不画气囊和叶脉。新画法已定（第 112 条）：一根略弯的茎、三片朝一侧飘的宽叶、叶根气囊，见 09b 页；kelp.svg 照第 114 条换成新画法。不当界面底纹。
+              插画里唯一的植物。新画法已定、插图已换（第 112、114 条）：S 形茎从三瓣圆脚的固着器长上来，叶子照 09b 的巨藻一段，叶根气囊、叶中浅雾薄荷中脉。64px 这类小位置用 kelp-small.svg：不画中脉、茎更粗。原画法（圆头叶片、一色）留在 kelp-old-2026-11-14.svg。不当界面底纹。
             </div>
           </div>
         </div>
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §3.4、§1.6 · DESIGN.md §5 公认形法 · 第 54、55、58、106、112、114 条 · 文件 illustration/spot-paper.svg、kelp.svg、kelp-canopy.svg
+          出处：BRAND.md §3.4、§1.6 · DESIGN.md §5 公认形法 · 第 54、55、58、106、112、114 条 · 文件 illustration/spot-paper.svg、kelp.svg、kelp-small.svg、kelp-canopy.svg
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           09

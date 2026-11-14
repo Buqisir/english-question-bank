@@ -68,7 +68,7 @@
                   </div>
                 </div>
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                  要写字的品牌色：头像圆的底，也就是网站的身份色。色值就是原来的深竹青，只改名。插画里只给巨藻和深水。海獭身上没有它。
+                  要写字的品牌色：网站的身份色（用户头像第 105 条起换成獭獭的脸）。色值就是原来的深竹青，只改名。插画里只给巨藻的深色部分和深水。海獭身上没有它。
                 </div>
               </div>
               <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0px', flexDirection: 'column', flexGrow: '1', gap: '14px' }}>
@@ -128,7 +128,7 @@
                   </div>
                 </div>
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                  接替米白。海獭的围兜：喉咙、胸口和肚子，和脸斑之间隔一道雾薄荷下巴；后脚的趾尖。插画里的正文行和光。
+                  接替米白。海獭的围兜：喉咙、胸口和肚子，和脸斑之间隔一道雾薄荷下巴；后脚的趾尖。插画里的正文行和光；巨藻叶的中脉（第 110、112 条）。
                 </div>
               </div>
               <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0px', flexDirection: 'column', flexGrow: '1', gap: '14px' }}>

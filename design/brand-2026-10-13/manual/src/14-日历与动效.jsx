@@ -267,7 +267,7 @@
               </div>
             </div>
             <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-              毕业帽、围巾、石头在头顶、脖子或两爪之间，探头时看得见。书包和书看不见或会挡住框沿，那些时段照旧 SL。每张自己的身体平切线落在卡片上沿下 1px。
+              第 114 条起节日探头和直立图都停用，要不要重画以后再定。以下留作记录：毕业帽、围巾、石头在头顶、脖子或两爪之间，探头时看得见。书包和书看不见或会挡住框沿，那些时段照旧 SL。每张自己的身体平切线落在卡片上沿下 1px。
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0px', flexDirection: 'column', flexGrow: '1' }}>

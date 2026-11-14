@@ -270,7 +270,7 @@
                 <div style={{ backgroundColor: '#191D18', borderRadius: '3px', boxSizing: 'border-box', flexShrink: 0, height: '14px', width: '14px' }} />
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '170%' }}>
-                四色。深薄荷只以巨藻的身份碰到海獭，缠在浅雾薄荷的围兜上；道具主体是墨。
+                四色。手里的石头和物件用石色、石面和物件各自的颜色（第 106、113 条）；深薄荷只以巨藻的身份出现在身边（裹藻仰躺第 114 条起停用）。
               </div>
               <div style={{ boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'end', paddingTop: '2px', width: '72px' }}>
                 <div style={{ backgroundColor: '#2C6E56', borderRadius: '4px', boxSizing: 'border-box', paddingInline: '7px' }}>
@@ -292,7 +292,7 @@
                 <div style={{ backgroundColor: '#191D18', borderRadius: '3px', boxSizing: 'border-box', flexShrink: 0, height: '14px', width: '14px' }} />
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '170%' }}>
-                品牌色平涂。原语插画是雾薄荷纸、浅雾薄荷正文行、墨书签；深薄荷只给巨藻和两处水。雾色只在登录页这类雾海场景。
+                品牌色平涂。原语插画是雾薄荷纸、浅雾薄荷正文行、墨书签；深薄荷只给巨藻（加浅雾薄荷中脉）和宣传大图的水；林冠透光中图第 114 条起停用。雾色只在登录页这类雾海场景。
               </div>
               <div style={{ boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'end', paddingTop: '2px', width: '72px' }}>
                 <div style={{ borderColor: '#2C6E56', borderRadius: '4px', borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', paddingInline: '7px' }}>
@@ -333,7 +333,7 @@
                 <div style={{ backgroundColor: '#29424D', borderRadius: '3px', boxSizing: 'border-box', flexShrink: 0, height: '14px', width: '14px' }} />
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '170%' }}>
-                表面照 08 雾海色阶（页面 #F1F5F7），正文是墨，动作色只有石板墨。深薄荷就是现在的身份色（头像圆），其余品牌色只在标志、海獭和插画里。
+                表面照 08 雾海色阶（页面 #F1F5F7），正文是墨，动作色只有石板墨。深薄荷就是现在的身份色，其余品牌色只在标志、海獭和插画里。
               </div>
               <div style={{ boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'end', paddingTop: '2px', width: '72px' }}>
                 <div style={{ backgroundColor: '#2C6E56', borderRadius: '4px', boxSizing: 'border-box', paddingInline: '7px' }}>
@@ -388,7 +388,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §1.5、§3.2 · 第 59、67、69、92 条 · 对比度按 WCAG 2.x 实测 · 竹青色板图 evidence/palette.png 留作历史
+          出处：BRAND.md §1.5、§3.2 · 第 59、67、69、92、106、112–114 条 · 对比度按 WCAG 2.x 实测 · 竹青色板图 evidence/palette.png 留作历史
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           07

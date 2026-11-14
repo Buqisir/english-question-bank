@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-14T08:28:30.740Z",
+  "generatedAt": "2026-11-14T15:04:00.203Z",
   "src": "design/brand-2026-10-13/manual/src",
-  "out": "design/brand-2026-10-13/manual/视觉规范手册-草案0.6-预览.pdf",
+  "out": "design/brand-2026-10-13/manual/视觉规范手册-草案0.7-预览.pdf",
   "font": {
     "fallback": true,
     "packages": [
@@ -17,9 +17,9 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 0.6,
+        "diffPct": 0.61,
         "headerPct": 0,
-        "bodyPct": 0.75,
+        "bodyPct": 0.76,
         "footerPct": 0
       }
     },
@@ -30,10 +30,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 5.21,
+        "diffPct": 5.79,
         "headerPct": 0.51,
-        "bodyPct": 6.35,
-        "footerPct": 0.59
+        "bodyPct": 7.05,
+        "footerPct": 0.76
       }
     },
     {
@@ -43,10 +43,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 2.62,
+        "diffPct": 3.49,
         "headerPct": 0.38,
-        "bodyPct": 3.16,
-        "footerPct": 0.43
+        "bodyPct": 4.23,
+        "footerPct": 0.55
       }
     },
     {
@@ -56,10 +56,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 3.52,
+        "diffPct": 4.51,
         "headerPct": 0.38,
-        "bodyPct": 4.27,
-        "footerPct": 0.53
+        "bodyPct": 5.45,
+        "footerPct": 0.87
       }
     },
     {
@@ -69,9 +69,9 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 4.32,
+        "diffPct": 4.51,
         "headerPct": 0.53,
-        "bodyPct": 5.1,
+        "bodyPct": 5.33,
         "footerPct": 1.76
       }
     },
@@ -82,9 +82,9 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 3.03,
+        "diffPct": 3.06,
         "headerPct": 0.53,
-        "bodyPct": 3.5,
+        "bodyPct": 3.54,
         "footerPct": 1.66
       }
     },
@@ -95,10 +95,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 3.1,
+        "diffPct": 13.63,
         "headerPct": 0.41,
-        "bodyPct": 3.72,
-        "footerPct": 0.78
+        "bodyPct": 16.79,
+        "footerPct": 0.92
       }
     },
     {
@@ -108,10 +108,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 5.71,
+        "diffPct": 6.36,
         "headerPct": 0.41,
-        "bodyPct": 6.81,
-        "footerPct": 2.04
+        "bodyPct": 7.49,
+        "footerPct": 3.04
       }
     },
     {
@@ -121,24 +121,32 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 3.85,
+        "diffPct": 3.9,
         "headerPct": 0.4,
-        "bodyPct": 4.45,
-        "footerPct": 2.4
+        "bodyPct": 4.49,
+        "footerPct": 2.53
       }
     },
     {
       "page": "09-原语-石子-水和巨藻",
-      "images": 7,
+      "images": 6,
       "failedImages": [],
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 2.28,
+        "diffPct": 5.09,
         "headerPct": 0.51,
-        "bodyPct": 2.51,
-        "footerPct": 2.1
+        "bodyPct": 5.98,
+        "footerPct": 2.42
       }
+    },
+    {
+      "page": "09b-物件",
+      "images": 12,
+      "failedImages": [],
+      "outOfBoard": [],
+      "clipped": [],
+      "compare": null
     },
     {
       "page": "10-设定与母版",
@@ -181,10 +189,10 @@
         }
       ],
       "compare": {
-        "diffPct": 2.93,
+        "diffPct": 9.17,
         "headerPct": 0.42,
-        "bodyPct": 3.4,
-        "footerPct": 1.56
+        "bodyPct": 11.06,
+        "footerPct": 2.43
       }
     },
     {
@@ -206,15 +214,15 @@
         }
       ],
       "compare": {
-        "diffPct": 2.35,
+        "diffPct": 3.35,
         "headerPct": 0.42,
-        "bodyPct": 2.63,
+        "bodyPct": 3.87,
         "footerPct": 1.96
       }
     },
     {
       "page": "12-表情与状态",
-      "images": 7,
+      "images": 11,
       "failedImages": [],
       "outOfBoard": [],
       "clipped": [
@@ -231,10 +239,10 @@
         }
       ],
       "compare": {
-        "diffPct": 2.94,
+        "diffPct": 10.31,
         "headerPct": 0.42,
-        "bodyPct": 3.43,
-        "footerPct": 1.43
+        "bodyPct": 12.54,
+        "footerPct": 1.95
       }
     },
     {
@@ -244,10 +252,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 3.89,
+        "diffPct": 6.15,
         "headerPct": 0.42,
-        "bodyPct": 4.62,
-        "footerPct": 1.39
+        "bodyPct": 7.41,
+        "footerPct": 1.53
       }
     },
     {
@@ -291,10 +299,10 @@
         }
       ],
       "compare": {
-        "diffPct": 3.55,
+        "diffPct": 5.83,
         "headerPct": 0.42,
-        "bodyPct": 4.16,
-        "footerPct": 1.65
+        "bodyPct": 6.99,
+        "footerPct": 1.7
       }
     },
     {
@@ -304,10 +312,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 4.34,
+        "diffPct": 6.63,
         "headerPct": 0.42,
-        "bodyPct": 5.19,
-        "footerPct": 1.33
+        "bodyPct": 7.97,
+        "footerPct": 1.87
       }
     },
     {
@@ -317,9 +325,9 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 3.95,
+        "diffPct": 4.24,
         "headerPct": 0.4,
-        "bodyPct": 4.64,
+        "bodyPct": 5,
         "footerPct": 1.83
       }
     },
@@ -330,10 +338,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 3.88,
+        "diffPct": 5.66,
         "headerPct": 0.4,
-        "bodyPct": 4.67,
-        "footerPct": 0.87
+        "bodyPct": 6.84,
+        "footerPct": 1.18
       }
     },
     {
@@ -343,10 +351,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 2.2,
+        "diffPct": 6.39,
         "headerPct": 0.4,
-        "bodyPct": 2.48,
-        "footerPct": 1.68
+        "bodyPct": 7.69,
+        "footerPct": 1.75
       }
     },
     {
@@ -368,10 +376,10 @@
         }
       ],
       "compare": {
-        "diffPct": 2.73,
+        "diffPct": 3.82,
         "headerPct": 0.51,
-        "bodyPct": 3.09,
-        "footerPct": 1.92
+        "bodyPct": 4.44,
+        "footerPct": 1.96
       }
     },
     {
@@ -407,10 +415,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 4.85,
+        "diffPct": 5.68,
         "headerPct": 0.48,
-        "bodyPct": 5.74,
-        "footerPct": 1.91
+        "bodyPct": 6.75,
+        "footerPct": 2.17
       }
     }
   ],
@@ -420,6 +428,6 @@
     "Noto Serif SC": false,
     "Inter": true
   },
-  "pdfPages": 23,
+  "pdfPages": 24,
   "preview": true
 }

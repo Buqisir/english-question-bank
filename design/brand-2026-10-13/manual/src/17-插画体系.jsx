@@ -244,10 +244,10 @@
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', gap: '16px', paddingBlock: '8px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, lineHeight: '175%', width: '110px' }}>
-                深薄荷三处
+                深薄荷两处
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                巨藻、林冠透光中图的水、宣传大图的水（第 55、58、63 条）。不透明底的只有后两张。
+                巨藻（深薄荷主体加浅雾薄荷中脉，第 110、112 条）、宣传大图的水（第 63 条）。林冠透光中图的水第 114 条起随图停用。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', gap: '16px', paddingBlock: '8px' }}>
@@ -335,7 +335,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §5.2、§3.4、§4.7 · 第 54、55、58、63、114 条
+          出处：BRAND.md §5.2、§3.4、§4.7 · 第 54、55、58、63、110、112、114 条
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           17

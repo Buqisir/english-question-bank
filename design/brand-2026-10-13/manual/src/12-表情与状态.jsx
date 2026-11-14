@@ -12,7 +12,7 @@
           06 獭獭
         </div>
       </div>
-      <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0%', flexDirection: 'column', flexGrow: '1', gap: '48px', paddingBottom: '40px', paddingTop: '48px' }}>
+      <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0%', flexDirection: 'column', flexGrow: '1', gap: '32px', paddingBottom: '32px', paddingTop: '40px' }}>
         <div style={{ alignItems: 'end', boxSizing: 'border-box', display: 'flex', gap: '80px', justifyContent: 'space-between' }}>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', flexShrink: '0', gap: '20px' }}>
             <div style={{ boxSizing: 'border-box', color: '#2C6E56', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.12em', lineHeight: '16px' }}>
@@ -24,12 +24,12 @@
               </div>
               <div style={{ backgroundColor: '#2C6E56', borderRadius: '4px', boxSizing: 'border-box', paddingInline: '7px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#FFFFFF', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  图已定 · 第 41 条
+                  旧图已定 · 第 41 条
                 </div>
               </div>
               <div style={{ backgroundColor: '#E9ECE6', borderRadius: '4px', boxSizing: 'border-box', flexShrink: '0', paddingInline: '7px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  要照新身材重画 · 第 114、115 条，还没画
+                  要重画 · 第 114、115 条，还没定稿
                 </div>
               </div>
             </div>
@@ -237,7 +237,7 @@
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', paddingBlock: '12px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                姿势 P2：身子在卡片后面，两只前爪画在边的前面。卡片边就是水面，不另画水线。
+                姿势 P2：身子在卡片后面，两只前爪画在边的前面。卡片边就是水面，不另画水线。第 115 条起改用半身，登录页只露头（还没定稿）。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', paddingBlock: '12px' }}>
@@ -274,10 +274,66 @@
             </div>
           </div>
         </div>
+        <div style={{ alignItems: 'start', borderTopColor: '#191D18', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', gap: '40px', paddingTop: '14px' }}>
+          <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', flexShrink: '0', gap: '10px', width: '260px' }}>
+            <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.08em', lineHeight: '16px' }}>
+              重画的新方案
+            </div>
+            <div style={{ alignItems: 'start', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div style={{ borderColor: '#D5DACF', borderRadius: '4px', borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', paddingInline: '7px' }}>
+                <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
+                  还没定稿 · 第 114、115 条
+                </div>
+              </div>
+              <div style={{ borderColor: '#D5DACF', borderRadius: '4px', borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', paddingInline: '7px' }}>
+                <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
+                  右边四张：候选 · Owner 还没看
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={{ backgroundColor: '#F1F5F7', borderRadius: '12px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', gap: '8px', paddingBlock: '8px', paddingInline: '12px' }}>
+              <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '6px', width: '72px' }}>
+                <div style={{ alignItems: 'end', boxSizing: 'border-box', display: 'flex', height: '76px', justifyContent: 'center' }}>
+                  <div style={{ backgroundImage: 'url(../../image-review-2026-11-14/half-final/state-searching.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '76px', width: '53px' }} />
+                </div>
+                <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
+                  找题中
+                </div>
+              </div>
+              <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '6px', width: '72px' }}>
+                <div style={{ alignItems: 'end', boxSizing: 'border-box', display: 'flex', height: '76px', justifyContent: 'center' }}>
+                  <div style={{ backgroundImage: 'url(../../image-review-2026-11-14/half-final/state-offer.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '76px', width: '53px' }} />
+                </div>
+                <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
+                  递出结果
+                </div>
+              </div>
+              <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '6px', width: '72px' }}>
+                <div style={{ alignItems: 'end', boxSizing: 'border-box', display: 'flex', height: '76px', justifyContent: 'center' }}>
+                  <div style={{ backgroundImage: 'url(../../image-review-2026-11-14/half-final/state-not-found.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '76px', width: '53px' }} />
+                </div>
+                <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
+                  没找到
+                </div>
+              </div>
+              <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '6px', width: '72px' }}>
+                <div style={{ alignItems: 'end', boxSizing: 'border-box', display: 'flex', height: '76px', justifyContent: 'center' }}>
+                  <div style={{ backgroundImage: 'url(../../image-review-2026-11-14/half-final/state-login.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '29px', width: '53px' }} />
+                </div>
+                <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
+                  登录页
+                </div>
+              </div>
+          </div>
+          <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
+            四种状态共用一个水面以上的半身，从坐石全身像 otter-sit.svg 裁出，只换手里的东西：找题中拿圆石，递出结果拿扇贝，没找到空着手（两爪合在胸前），登录页探头只露头。「完成」画仰躺、身上放一只张开的蛤，还在画。「空闲」直接用坐石全身像。上面一排是旧图。
+          </div>
+        </div>
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §4.3、§4.4 · DESIGN.md §9 · 第 29–31、41、44、52、114、115 条 · 文件 mascot/states/*
+          出处：BRAND.md §4.3、§4.4 · DESIGN.md §9 · 第 29–31、41、44、52、114、115 条 · 文件 mascot/states/*、image-review-2026-11-14/half-final/*
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           12

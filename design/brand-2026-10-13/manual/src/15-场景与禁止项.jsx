@@ -112,7 +112,7 @@
                 全身。裹藻仰躺和日历图第 114 条起停用；空闲改用坐石全身像
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%', width: '310px' }}>
-                按两眼间距和 150px 的 P 等大；裹藻约 148px
+                尺寸基准要照坐石重定（原来按 150px 的 P）
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '175%', textAlign: 'right', width: '90px' }}>
                 第 51、57 条
@@ -123,7 +123,7 @@
                 登录页
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                SL 探头，两只前爪压在框沿前面
+                SL 探头；第 115 条起改成只露头（还没定稿）
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%', width: '310px' }}>
                 按母版全身 240px；SL 本身约 166px
@@ -137,7 +137,7 @@
                 03 待确认、05 没找到
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                从卡片上沿探头；03 靠右，05 居中
+                从卡片上沿探头，第 115 条起改用半身；03 靠右，05 居中
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%', width: '310px' }}>
                 150px 高
@@ -237,7 +237,7 @@
             </div>
             <div style={{ boxSizing: 'border-box', paddingTop: '10px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                基础形象空手，爪子搭在胸前；石头只在状态图里出现。
+                基础形象空手，两爪合在胸前（第 109 条）；石头照 09 页，第 106 条起可以用到空态和装饰里。
               </div>
             </div>
           </div>
@@ -328,7 +328,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §4.4、§4.7–§4.10 · 第 29、33、34、45、55–57、62、66、114 条 · 文件 mascot/kelp/*
+          出处：BRAND.md §4.4、§4.7–§4.10 · 第 29、33、34、45、55–57、62、66、106、109、114、115 条 · 文件 mascot/kelp/*
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           15

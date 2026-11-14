@@ -404,7 +404,7 @@
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', paddingBlock: '12px' }}>
               <div style={{ boxSizing: 'border-box', color: '#2C6E56', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                第 114 条起八个直立姿势全部停用，不重画：文件留着不删，新页面不再用。仰躺留一张，照 L1 重画（第 115 条，还没有矢量稿）。下面三条只留作记录。
+                第 114 条起八个直立姿势全部停用，不重画：文件留着不删，新页面不再用。仰躺留一张，照 L1 重画（第 115 条）：仰躺矢量稿已出，还没定稿。下面三条只留作记录。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', paddingBlock: '12px' }}>

@@ -197,7 +197,7 @@
                 重画和重做
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                半身 M2 四张、敲蛤 K2、仰躺 L1 还没有矢量稿（第 115 条）；三张巨藻中图停用，以后重做（第 114 条）；更多原语插画等真有首次空态再做。
+                半身四张从坐石裁出，候选已画、Owner 还没看；仰躺矢量稿已出，还没定稿；「完成」仰躺加张开的蛤还在画（第 115 条）；三张巨藻中图停用，以后重做（第 114 条）；更多原语插画等真有首次空态再做。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>

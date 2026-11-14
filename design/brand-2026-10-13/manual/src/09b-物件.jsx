@@ -303,7 +303,7 @@
                 kelp.svg
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                原语巨藻 illustration/kelp.svg 照第 114 条换成这件的画法，换完以 09 页和文件为准。
+                原语巨藻 illustration/kelp.svg 已照第 114 条换成这件的画法（09 页）；64px 用 kelp-small.svg。
               </div>
             </div>
           </div>

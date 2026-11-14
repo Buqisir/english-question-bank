@@ -54,9 +54,9 @@
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0%', flexDirection: 'column', flexGrow: '1', gap: '12px', paddingTop: '40px' }}>
-            <div style={{ backgroundImage: 'url(../../evidence/dive-pair.png)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', borderRadius: '12px', boxSizing: 'border-box', flexShrink: 0, height: '304px', width: '664px' }} />
+            <div style={{ opacity: '0.4', backgroundImage: 'url(../../evidence/dive-pair.png)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', borderRadius: '12px', boxSizing: 'border-box', flexShrink: 0, height: '304px', width: '664px' }} />
             <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '170%' }}>
-              这句话的两半：潜下去摸到对的题（左），浮上来裹着巨藻把好题收好（右）。§5.2 潜水中图、巨藻林中图，提案。
+              这句话的两半：潜下去摸到对的题（左），浮上来裹着巨藻把好题收好（右）。§5.2 潜水中图、巨藻林中图，第 114 条起停用，以后重做；图调淡留作记录。
             </div>
           </div>
         </div>
@@ -137,7 +137,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §1.1–§1.3
+          出处：BRAND.md §1.1–§1.3 · 第 114 条
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           02
