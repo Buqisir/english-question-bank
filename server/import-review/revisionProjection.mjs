@@ -122,10 +122,11 @@ function loadPublicSearchMetadata(rootDir, loaded, sourceDigest, candidateDigest
   return { sidecar, bytes, digest: sha256(bytes) }
 }
 
-function fail(message, code = 'IMPORT_REVIEW_CANDIDATE_INVALID', status) {
+function fail(message, code = 'IMPORT_REVIEW_CANDIDATE_INVALID', status, details) {
   const error = new Error(message)
   error.code = code
   if (status !== undefined) error.status = status
+  if (details !== undefined) error.details = details
   throw error
 }
 
@@ -872,7 +873,7 @@ export function loadNck1OcrReviewSource(rootDir) {
     const status = finding.code === 'NCK1_OCR_PAGE_COVERAGE_INCOMPLETE'
       && finding.message === 'OCR page raster no longer replays from the immutable source'
       ? 422 : undefined
-    fail(`${finding.code}: ${finding.message} (${finding.path})`, finding.code, status)
+    fail(`${finding.code}: ${finding.message} (${finding.path})`, finding.code, status, finding.details)
   }
   return { config, manifest, documents, evidence, reviewFindings }
 }
