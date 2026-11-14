@@ -33,7 +33,7 @@ const NOSE = pick(/<path id="_L9S-0__ziti077"[^>]*\/>/, '鼻子')
 const DOTS = pick(/<g id="_L9S-0__ziti078">[\s\S]*?<\/g>/, '胡须点')
 // 母版两眼中心和眼距（otter-head.svg 里两只眼睛的 cx、cy）
 const MASTER_EYE = { cx: (336.45 + 688.25) / 2, cy: 371.25, gap: 688.25 - 336.45 }
-const HEAD_CLIP_Y = 692 // 母版头形在下巴下面这条线裁掉，不带母版的肩
+const HEAD_CLIP_Y = 680 // 母版头形在下巴下面这条线裁掉，不带母版的肩
 
 const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
 const uriPng = (file) => `data:image/png;base64,${readFileSync(file).toString('base64')}`
@@ -139,7 +139,7 @@ const TX = SK_EYE.cx - MASTER_EYE.cx * S
 const TY = SK_EYE.cy - MASTER_EYE.cy * S
 const toSketchY = (my) => TY + my * S
 // 草图的头在这条线以上全部不要（落在母版下巴拐点稍下，被母版的头盖住）
-const CUT_Y = Math.round(toSketchY(682))
+const CUT_Y = Math.round(toSketchY(670))
 const STUB = 8 // 线以上只留一截比脖子窄的桩子伸进头里，免得接头处露角
 
 const rockRaw = open(maskOf((c) => c === K.rock), 2)
@@ -155,10 +155,22 @@ body = fill(largest(open(body, 2)))
   for (let y = 0; y < CUT_Y; y++) for (let x = 0; x < W; x++) if (y < CUT_Y - 40 || x < x0 + STUB || x > x1 - STUB) body[y * W + x] = 0
 }
 body = largest(body)
-let belly = and(open(maskOf((c) => c === K.pale), 2), morph(body, 3, true))
+// 母版的头（裁到下巴）也画成像素并进身体，描成一整条外轮廓垫在下面，接头处就没有台阶；母版的头形仍原样盖在上面
+const headMask = await (async () => {
+  const hp = await browser.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: 1 })
+  await hp.setContent(`<body style="margin:0;background:#fff"><svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><g transform="translate(${TX} ${TY}) scale(${S})"><clipPath id="c"><rect x="-200" y="-200" width="1500" height="${HEAD_CLIP_Y + 200}"/></clipPath><g clip-path="url(#c)">${HEAD_SHAPE.replace(/fill="[^"]+"/, 'fill="#000"')}</g></g></svg>`)
+  const png = await hp.screenshot({ type: 'png' })
+  await hp.setContent(`<img id="i" src="data:image/png;base64,${png.toString('base64')}">`)
+  const bits = await hp.evaluate(async () => { const img = document.getElementById('i'); await img.decode(); const c = document.createElement('canvas'); c.width = img.naturalWidth; c.height = img.naturalHeight; const g = c.getContext('2d'); g.drawImage(img, 0, 0); const d = g.getImageData(0, 0, c.width, c.height).data; let o = ''; for (let i = 0; i < d.length; i += 4) o += d[i] < 128 ? '1' : '0'; return o })
+  await hp.close()
+  return Uint8Array.from(bits, (ch) => (ch === '1' ? 1 : 0))
+})()
+const bodyOnly = body
+body = largest(or(body, headMask))
+let belly = and(open(maskOf((c) => c === K.pale), 2), morph(bodyOnly, 3, true))
 belly = keep(belly, (c) => c.area > 2000 && c.minY > CUT_Y)
 // 石头垫到身体底下一点，免得两块之间露缝
-const rock = fill(or(rock0, and(morph(rock0, 8, false), body)))
+const rock = fill(or(rock0, and(morph(rock0, 8, false), bodyOnly)))
 
 // —— 3. 沿边描线 ——
 // 走像素之间的缝，里面在左手边，得到闭合折线；再沿线做一次环形平滑、抽稀、转成三次贝塞尔。
@@ -203,22 +215,45 @@ function smooth(p, sigma) {
   return p.map((_, i) => { let x = 0; let y = 0; for (let k = -r; k <= r; k++) { const q = p[(((i + k) % n) + n) % n]; x += q[0] * w[k + r]; y += q[1] * w[k + r] } return [x / sum, y / sum] })
 }
 const f1 = (n) => Math.round(n * 10) / 10
+// 抽稀（Ramer–Douglas–Peucker），再把太长的段对半补点
+function thin(p, eps, maxSeg) {
+  const n = p.length
+  const on = new Uint8Array(n)
+  const q4 = [0, Math.floor(n / 4), Math.floor(n / 2), Math.floor((3 * n) / 4)]
+  for (const i of q4) on[i] = 1
+  const st = q4.map((a, k) => [a, k === 3 ? n : q4[k + 1]])
+  while (st.length) {
+    const [a, b] = st.pop()
+    const [ax, ay] = p[a]
+    const [bx, by] = p[b % n]
+    const len = Math.hypot(bx - ax, by - ay) || 1
+    let far = -1
+    let fd = eps
+    for (let i = a + 1; i < b; i++) { const d = len < 2 ? Math.hypot(p[i][0] - ax, p[i][1] - ay) : Math.abs((bx - ax) * (ay - p[i][1]) - (ax - p[i][0]) * (by - ay)) / len; if (d > fd) { fd = d; far = i } }
+    if (far > 0) { on[far] = 1; st.push([a, far], [far, b]) } else if (b - a > maxSeg) { const m = (a + b) >> 1; on[m] = 1; st.push([a, m], [m, b]) }
+  }
+  return p.filter((_, i) => on[i])
+}
+// 过每个点的三次贝塞尔：切线取前后两点连线的方向，把手长是本段弦长的三分之一
 function toPath(p) {
   const n = p.length
   const P = (i) => p[((i % n) + n) % n]
+  const tan = (i) => { const a = P(i - 1); const b = P(i + 1); const l = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1; return [(b[0] - a[0]) / l, (b[1] - a[1]) / l] }
   let d = `M${f1(p[0][0])} ${f1(p[0][1])}`
   for (let i = 0; i < n; i++) {
-    const p0 = P(i - 1); const p1 = P(i); const p2 = P(i + 1); const p3 = P(i + 2)
-    d += `C${f1(p1[0] + (p2[0] - p0[0]) / 6)} ${f1(p1[1] + (p2[1] - p0[1]) / 6)} ${f1(p2[0] - (p3[0] - p1[0]) / 6)} ${f1(p2[1] - (p3[1] - p1[1]) / 6)} ${f1(p2[0])} ${f1(p2[1])}`
+    const p1 = P(i); const p2 = P(i + 1); const t1 = tan(i); const t2 = tan(i + 1)
+    const h = Math.hypot(p2[0] - p1[0], p2[1] - p1[1]) / 3
+    d += `C${f1(p1[0] + t1[0] * h)} ${f1(p1[1] + t1[1] * h)} ${f1(p2[0] - t2[0] * h)} ${f1(p2[1] - t2[1] * h)} ${f1(p2[0])} ${f1(p2[1])}`
   }
   return `${d}Z`
 }
 const SIGMA = Number(process.env.F6_SIGMA || 4)
-const STEP = Number(process.env.F6_STEP || 9)
+const EPS = Number(process.env.F6_EPS || 0.45)
+const MAX_SEG = 60 // 抽稀后一段最多跨多少个像素步
 function trace(m) {
   const all = loops(m).filter((p) => areaOf(p) > 400) // 只要外圈，洞和碎屑不要
   let nodes = 0
-  const d = all.map((p) => { const sm = smooth(p, SIGMA); const n = Math.max(8, Math.round(sm.length / STEP)); const q = Array.from({ length: n }, (_, i) => sm[Math.floor((i * sm.length) / n)]); nodes += q.length; return toPath(q) }).join('')
+  const d = all.map((p) => { const q = thin(smooth(p, SIGMA), EPS, MAX_SEG); nodes += q.length; return toPath(q) }).join('')
   return { d, nodes }
 }
 const tBody = trace(body)
