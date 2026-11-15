@@ -219,12 +219,17 @@ button.my-space-folder-button { cursor: pointer; }
   outline-offset: 2px;
 }
 
-/* 「正在读取个人空间…」「个人空间读取失败」换成共用 Notice（构件收尾，2026-11-15），字色、字号在 notice.css；
+/* 「个人空间读取失败」换成共用 Notice（构件收尾，2026-11-15），字色、字号在 notice.css；
  * 原来 .my-space-empty / .my-space-error 的字色、字号两条删了（读取失败原来是亮红字，照 DESIGN.md Notices
- * 「只有没保存、会丢东西才上危险色」改成次要灰加图标）。这里只留读取中那一行离上面的距离。
- * 覆盖：本条 (0,2,0) 盖过 notice.css .eqb-notice (0,1,0) 的 margin: 0。 */
-.eqb-notice.my-space-empty {
-  margin: 26px 0 0;
+ * 「只有没保存、会丢东西才上危险色」改成次要灰加图标）。
+ * 「正在读取个人空间」那一行等待第六轮（2026-11-15）换成文件列表的灰块（MySpacePage.tsx MySpaceListSkeleton，
+ * 用真列表的 .my-space-month-group 那一套 class，离上面的距离照真列表），给它离上面 26 的 .eqb-notice.my-space-empty 一条删了。 */
+
+/* 灰块里三个键的位置：真键是淡底（只看得见字），灰块放在字的位置，键和键之间、最后一个键右边留出键的内衬。
+ * 覆盖：本条 (0,2,0) 盖过上面 .my-space-row-actions (0,1,0) 的 gap: 3px，只在灰块里。 */
+.my-space-list-skeleton .my-space-row-actions {
+  gap: var(--eqb-space-5);
+  padding-right: var(--eqb-space-3);
 }
 
 /* 出错态（「个人空间读取失败」加「重新加载」）还用这一块排版。空态换成了共用的 EmptyState（见下面

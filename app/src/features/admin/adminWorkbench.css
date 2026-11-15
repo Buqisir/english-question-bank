@@ -74,6 +74,11 @@
 .agent-tokens li > div { min-width: 0; overflow-wrap: anywhere; }
 .agent-tokens li span { margin-left: 8px; color: var(--eqb-color-text-muted); }
 .agent-tokens li small { display: block; margin-top: 4px; font-size: 12px; color: var(--eqb-color-text-muted); }
+/* 口令列表在等时（等待第六轮 2026-11-15，AgentTokens.tsx AgentTokenListSkeleton）。灰块本身是 <span>：
+ * 覆盖：第一条 (0,2,2) 盖过上面 .agent-tokens li span (0,1,2) 的 margin-left: 8px——那条是给「有效 / 已作废」的，灰块套在它里面不再多空一次。
+ * 第二条 (0,2,0)：「作废口令」的灰块放在键上字的位置，右边留出键的内衬。 */
+.agent-tokens li > div .eqb-skeleton { margin-left: 0; }
+.eqb-skeleton.agent-token-skeleton-action { margin-right: var(--eqb-space-3); }
 /* 「只显示这一次」那一块是共用构件 Surface（board、padding md 16）：底、边、圆角、内边距归构件，这里只留离上面多远。 */
 .agent-token-secret { margin-top: 16px; }
 .agent-token-secret code { display: block; margin-bottom: 12px; overflow-wrap: anywhere; user-select: all; }

@@ -15,7 +15,7 @@ import type { PublicVocabularyDictationSet } from '../../domain/vocabulary'
 import { getPublicVocabularyDictationSet, VocabularyApiError } from '../../services/vocabulary'
 import { getVocabularyAudioPath, type VocabularyAudioAccent } from '../vocabulary-listen/vocabularyAudioVariants'
 import { Skeleton } from '../../shared-ui/Skeleton.tsx'
-import { useDelayedBusy, WAIT_SHOW_DELAY_MS } from '../../shared-ui/useDelayedBusy.ts'
+import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
 import './vocabularyDictationPage.css'
 
 type DictationStatus = 'idle' | 'countdown' | 'playing' | 'waiting' | 'paused' | 'ended' | 'error'
@@ -52,7 +52,8 @@ function readSavedSettings(): SavedSettings {
  * 高度跟着同一套规则走（题板最小高 410，窄屏 360），数据到了不跳。
  * 灰块走门槛：showSkeleton 由调用处的 useDelayedBusy 给；300ms 内只有读屏那一句。
  * 听写纸扫码进来时，在这一页的代码块到之前还有一层 main.tsx 的启动壳；第五轮（2026-11-15）起它画同样的灰块，
- * 那边的灰块已经出了（bootStartedAt 算出来过了 300ms），这里接着出，不重新数门槛（不会「灰块 → 空 → 灰块」）。
+ * 那边的灰块已经出了（bootStartedAt 算出来过了 300ms），这里接着出，不重新数门槛（不会「灰块 → 空 → 灰块」）；
+ * 第六轮起「至少留 500ms」也从启动壳的灰块出来那一刻算（useDelayedBusy 的 pendingSince）。
  */
 function DictationOpeningSkeleton({ showSkeleton }: { showSkeleton: boolean }) {
   return (
@@ -137,9 +138,9 @@ export function VocabularyDictationPage({
   const [set, setSet] = useState<PublicVocabularyDictationSet | null>(null)
   const [loadState, setLoadState] = useState<'loading' | 'ready' | 'missing' | 'revoked' | 'error'>('loading')
   // 灰块走门槛（等待第四轮）：出了至少留 500ms，这期间真题板（或出错那一页）先不换上。
-  const openingPhase = useDelayedBusy(loadState === 'loading')
-  // 启动壳的灰块在页面挂上时已经出了没有（等待第五轮）：只在挂上那一下算一次。
-  const [bootSkeletonShown] = useState(() => bootStartedAt !== undefined && performance.now() - bootStartedAt >= WAIT_SHOW_DELAY_MS)
+  // 扫码进来时这段等待从启动壳挂上就开始了（等待第六轮）：门槛和「至少留 500ms」都从 bootStartedAt 算，
+  // 启动壳的灰块已经出了就接着出，数据来得再快也从启动壳的灰块出来那一刻留满 500ms（第五轮只做了前一半）。
+  const openingPhase = useDelayedBusy(loadState === 'loading', { pendingSince: bootStartedAt })
   const [currentIndex, setCurrentIndex] = useState(0)
   const [repeatCount, setRepeatCount] = useState<1 | 2 | 3>(savedSettings.repeatCount)
   const [gapSeconds, setGapSeconds] = useState(savedSettings.gapSeconds)
@@ -462,7 +463,7 @@ export function VocabularyDictationPage({
   const audioElement = <audio ref={audioRef} preload="metadata" hidden />
 
   if (loadState === 'loading' || openingPhase === 'waiting') {
-    return <>{audioElement}<DictationOpeningSkeleton showSkeleton={openingPhase === 'waiting' || (bootSkeletonShown && loadState === 'loading')} /></>
+    return <>{audioElement}<DictationOpeningSkeleton showSkeleton={openingPhase === 'waiting'} /></>
   }
 
   if (loadState !== 'ready' || !set || !currentEntry) {

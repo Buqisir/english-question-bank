@@ -1569,7 +1569,10 @@
  * （雾薄荷、高 28）。字 12/600 → 13/500（primary 13/600），高 30 / 34 → 28，左右内边距 14 → 8。
  * `similar-btn` 这个类名还挂在 Button 上，只当选择器钩子，不再带样式。 */
 
-.similar-rail {
+/* .similar-rail-skeleton：读取中种子行和灰卡那一块（等待第六轮，SimilarQuestionsRailView），里面照栏的排法、一样的间距，
+ * 灰卡和真卡同位。 */
+.similar-rail,
+.similar-rail-skeleton {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -1649,6 +1652,29 @@
   accent-color: var(--ink);
   width: 15px;
   height: 15px;
+}
+
+/* 候选卡在等时的灰块（等待第六轮 2026-11-15，features/similar-passages/SimilarCardSkeletons.tsx）：卡、正文、小签用真卡的 class，
+ * 这里只管灰块怎么坐进去。
+ * 勾选框那一格：和真勾选框同位（上面那条的 margin-top 3、15 × 15，宽高由 Skeleton 给）。
+ * 覆盖：本条 (0,2,0) 盖过 waiting.css .eqb-skeleton (0,1,0) 的 margin（没写，默认 0），因为占的是勾选框的位置。 */
+.similar-rcard > .similar-rcard-skeleton-check {
+  margin-top: 3px;
+}
+
+/* 卡上一个小号键的位置：和小号键一样高（28，button.css .eqb-button[data-size='sm']）、一样的左右内衬，灰块放在键上字的位置。
+ * 键是淡底（墨字键），不画整块灰。 */
+.similar-rcard-skeleton-action {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 var(--eqb-space-2);
+}
+
+/* 卡片正在等的时候不是能点的东西：不出手指。
+ * 覆盖：本条 (0,2,0) 盖过上面 .similar-rcard (0,1,0) 的 cursor: pointer。 */
+.similar-rcard-skeletons > .similar-rcard {
+  cursor: default;
 }
 
 .similar-rcard input[type='checkbox'][disabled] {

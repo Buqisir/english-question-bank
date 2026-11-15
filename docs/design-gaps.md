@@ -144,7 +144,8 @@ token 的扩展用法。
 - **临时方案**：一、二照原值写字面量，注释写明照抄哪一条；整卷页灰块和真卷面同一条规则（选择器并列），不另写一份。三写在 TSX 的 Skeleton 宽高上。记录在 `design/components-2026-11-13/migrate-waiting-4/README.md`。
 - **2026-11-15 第五轮（未）**：第一条收了。`--elev-sheet` 加进 `app/src/shared-ui/tokens.css`（值和原字面量一字不差），换掉整卷页 `.paper-browse-zoom`、生词本 `.notebook-sheet`、题组详情 `.peek-paper`、草稿卷 `.draft-skeleton-sheet` 四处。没收的三处值不一样：PaperSurface `.ps-page`（`#00000010` / `#00000014`，不碰 PaperSurface）、草稿卷预览 iframe 里的 `.preview-page`（`draftPaperPreviewHtml.ts`，iframe 里读不到站里的变量，同 `#00000010` / `#00000014`）、写作卷 `.pi-writing-page`（0.063）。这三处和 `--elev-sheet` 差 0.003 / 0.002 的透明度，要不要统一等 Owner。第二、三条照旧。
 
-## 2026-11-15 扫码听写启动壳的门槛（`app/src/index.css` `.public-vocabulary-boot-skeleton`）
+## 2026-11-15 扫码听写启动壳的门槛（`app/src/index.css` `.public-vocabulary-boot-skeleton`）——已收编（第六轮，未 commit）
 
 - **想要的值**：等待的门槛 300ms（DESIGN.md §5「门槛」）。JS 里是 `shared-ui/useDelayedBusy.ts` 的 `WAIT_SHOW_DELAY_MS`，CSS 里没有对应的变量；启动壳不跑 JS 计时，只能用 CSS 的 animation-delay。若收编，候选名 `--wait-show-delay`（挂到 :root，JS 那边也读它）。
 - **临时方案**：在 `.public-vocabulary-boot-skeleton > *` 的 animation 里照写 300ms（另有一个 1ms 的空动画时长），注释写明出处是 `WAIT_SHOW_DELAY_MS`。记录在 `design/components-2026-11-13/migrate-waiting-5/README.md`。
+- **2026-11-15 第六轮（申）已收编**：`app/src/shared-ui/tokens.css` 加了三个变量 `--wait-show-delay: 300ms`、`--wait-min-visible: 500ms`、`--wait-breathe-cycle: 1800ms`（名字照 `--elev-*`、`--motion-*` 的写法，不带 `eqb-` 前缀；和 `--motion-*` 分开，因为是「等多久」不是「动多快」）。用到的地方：启动壳门槛 `index.css`（两处 animation-delay）；`waiting.css` 灰块呼吸（原来本文件的 `--eqb-skeleton-cycle: 1800ms` 删了）；`useDelayedBusy.ts` 的门槛和最短停留（原来的 `WAIT_SHOW_DELAY_MS` / `WAIT_MIN_VISIBLE_MS` 两个常量删了，改用 `readMotionMs` 读变量，读不到就是 0、不写字面兜底）；`main.tsx` 启动壳对呼吸相位（原来的 `BOOT_SKELETON_CYCLE_MS` 删了，读不到就不对相位）。值没变，换前换后启动壳灰块的动画时长、门槛延迟实量一样（`design/components-2026-11-13/migrate-waiting-6/diff.json`）。剩下的字面量：启动壳门槛那条空动画的 1ms 时长（只是让 animation 能挂上，不是等待的数）。记录在 `design/components-2026-11-13/migrate-waiting-6/README.md`。

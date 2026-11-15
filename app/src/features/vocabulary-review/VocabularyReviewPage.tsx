@@ -245,6 +245,40 @@ function RunSetupSkeleton({ showSkeleton }: { showSkeleton: boolean }) {
   )
 }
 
+/**
+ * 过词页右上那一栏（单词复习、课程 / 学生、总进度）的灰块（等待第六轮，2026-11-15）。
+ * 第五轮只画了下面开始页那一块，这一栏读完才出，数据一到下面整块往下挪约 119px。现在这一栏也照真栏画，和下面那块共用一个等待阶段
+ * （progressOpeningPhase）：门槛内这一栏照样占着位置、只是看不见（visibility，不是不画），300ms 时和下面一起出，读完换成真栏，高度不变。
+ * 容器、各段用真栏同一套 class（.vocabulary-heading-actions、.vocabulary-student-switcher、.eqb-field、.vocabulary-overall-progress），
+ * 灰块放在字的位置；「单词复习」「新建学生」「查看 / 调整进度」都是淡底键（只看得见字），灰块放在键上字的位置。
+ * 课程下拉只有一门以上课程才有（programs 这时可能已经读到了，照它画）；打印页没有「单词复习」和「查看 / 调整进度」。
+ */
+function HeadingActionsSkeleton({ showSkeleton, withProgramSwitcher, printMode }: { showSkeleton: boolean; withProgramSwitcher: boolean; printMode: boolean }) {
+  return (
+    <div className="vocabulary-heading-actions vocabulary-heading-skeleton" data-shown={showSkeleton ? '' : undefined} aria-hidden="true">
+      {!printMode && <span className="vocabulary-heading-skeleton-key"><Skeleton inline width={72} height={12} /></span>}
+      {withProgramSwitcher && (
+        <div className="eqb-field vocabulary-program-switcher">
+          <span className="eqb-field-label"><Skeleton inline width={48} height={10} /></span>
+          <Skeleton height={36} />
+        </div>
+      )}
+      <div className="vocabulary-student-switcher">
+        <div className="eqb-field vocabulary-student-picker">
+          <span className="eqb-field-label"><Skeleton inline width={48} height={10} /></span>
+          <Skeleton height={36} />
+        </div>
+        <span className="vocabulary-heading-skeleton-key"><Skeleton inline width={52} height={12} /></span>
+      </div>
+      <div className="vocabulary-overall-progress">
+        <span><Skeleton inline width={128} height={10} /></span>
+        <Skeleton height={6} shape="pill" />
+        {!printMode && <span className="vocabulary-progress-toggle vocabulary-heading-skeleton-toggle"><Skeleton inline width={84} height={10} /></span>}
+      </div>
+    </div>
+  )
+}
+
 function VocabularyVisual({ entry, compact = false }: { entry: VocabularyEntry; compact?: boolean }) {
   const manifestVisual = vocabularyVisualManifest[entry.visualKey]
   const visual = entry.visual
@@ -550,6 +584,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   // 等待第五轮（2026-11-15）：读词库、学生档案、过词进度这一段整页在等，画开始页的灰块，走门槛（300ms 内不出、出了至少留 500ms）。
   const progressLoading = programLoadState === 'loading' || studentsState === 'loading' || runState === 'loading'
   const progressOpeningPhase = useDelayedBusy(progressLoading)
+  // 等待第六轮（2026-11-15）：右上那一栏也画灰块，和下面开始页那块同一个阶段（读完、留够 500ms 一起换成真的）。读出错时不画。
+  const headingSkeletonPending = (progressLoading || progressOpeningPhase === 'waiting')
+    && programLoadState !== 'error' && studentsState !== 'error'
   const [downloadMenuOpen, setDownloadMenuOpen] = useState(false)
   const [pendingShareDownload, setPendingShareDownload] = useState<{
     kind: 'cards' | 'dictation' | 'bundle'
@@ -1508,7 +1545,13 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
               ? `${program.subtitle} · 按原书顺序逐词判断，收满本轮目标生词后生成固定生词纸。`
               : '万唯一轮完整1600词 · 读取完整词库后显示正式过词进度。'}</p>
           </div>
-          {programLoadState === 'ready' && studentsState === 'ready' && activeStudent && (
+          {headingSkeletonPending ? (
+            <HeadingActionsSkeleton
+              showSkeleton={progressOpeningPhase === 'waiting'}
+              withProgramSwitcher={programs.length > 1}
+              printMode={Boolean(printRequest)}
+            />
+          ) : programLoadState === 'ready' && studentsState === 'ready' && activeStudent && (
             <div className="vocabulary-heading-actions">
               {!printRequest && (
                 <Button tone="strong" size="lg" icon={<BoardCheck size={16} />} onClick={() => props.onOpenVocabularyDictationWorkbench()}>

@@ -35,7 +35,10 @@ import { Button } from '../../shared-ui/Button.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { Toast } from '../../shared-ui/Toast.tsx'
 import { Chip } from '../../shared-ui/Chip.tsx'
+import { Skeleton, SkeletonGate } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
 import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
+import { SimilarCardSkeletons } from '../similar-passages/SimilarCardSkeletons.tsx'
 import { RotateCcw } from '../../icons'
 import type {
   QuestionGroupCard,
@@ -127,10 +130,15 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
   const questionLabel = seed.questionNo != null ? `第${seed.questionNo}题` : ''
   const seedLine = [seed.groupTitle, questionLabel].filter(Boolean).join(' · ')
   const headLabel = seed.mode === 'passages' ? '相似篇章' : '配相似'
+  // 等待第六轮（2026-11-15）：读取中原来是一行「配相似加载中」，换成照真卡画的 3 张灰卡（连上面的种子行），走门槛
+  // （300ms 内不出、出了至少留 500ms，这期间结果到了也先不换上）。listWaiting = 灰块那一块还占着位置。
+  const pending = request.status === 'loading'
+  const listPhase = useDelayedBusy(pending)
+  const listWaiting = pending || listPhase === 'waiting'
   // 等待第四轮（2026-11-15）：结果回来时，候选卡从上到下依次淡入（只动透明度）。每次请求回来演一次；
-  // 勾选、加入、换篇这些不改 request.status 的变化不演。
+  // 勾选、加入、换篇这些不改 request.status 的变化不演。第六轮起等灰块走了、真卡挂上那一拍再演。
   const railRef = useRef<HTMLDivElement>(null)
-  useRowReveal(railRef, '.similar-rcard', request.status === 'ready')
+  useRowReveal(railRef, '.similar-rcard', request.status === 'ready' && !listWaiting)
 
   return (
     <div className="similar-rail" ref={railRef}>
@@ -143,21 +151,35 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
         </Button>
       </div>
 
-      {request.status !== 'loading' && (
+      {listWaiting && (
+        <SkeletonGate
+          pending={pending}
+          phase={listPhase}
+          label={`${headLabel}加载中`}
+          className="similar-rail-skeleton"
+          skeleton={<>
+            {/* 种子行（种子、配方、已排除本卷）在讲评栏里一般折成两行。 */}
+            <p className="similar-seed-line" aria-hidden="true">
+              <Skeleton inline width="96%" height={10} /><br /><Skeleton inline width="28%" height={10} />
+            </p>
+            <SimilarCardSkeletons variant="rail" />
+          </>}
+        />
+      )}
+
+      {!listWaiting && (
         <p className="similar-seed-line">
           种子：<b>{seedLine}</b>　配方：{seed.recipeSummary}　<span>已排除本卷</span>
         </p>
       )}
 
-      {request.status === 'loading' && <Notice kind="waiting">{`${headLabel}加载中`}</Notice>}
-
-      {request.status === 'error' && (
+      {!listWaiting && request.status === 'error' && (
         <Notice kind="error" className="similar-rail-error" action={{ label: '重试', onClick: onRetry }}>
           {request.message}
         </Notice>
       )}
 
-      {request.status === 'ready' && (() => {
+      {!listWaiting && request.status === 'ready' && (() => {
         const results = toUnifiedResults(request.data)
         const poolStats = request.data.response.poolStats
         const notice = request.data.kind === 'passages' ? request.data.response.notice : null
@@ -205,7 +227,7 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
         )
       })()}
 
-      {request.status === 'ready' && (
+      {!listWaiting && request.status === 'ready' && (
         <div className="similar-rail-foot">
           <span className="similar-count">
             {selectedGroupIds.size > 0 ? `已选 ${selectedGroupIds.size} 篇` : '未选择'}

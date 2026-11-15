@@ -19,10 +19,12 @@ export type SkeletonProps = {
   height: number | string
   /** block（默认）圆角 4；pill 占胶囊（筛选芯片）的位置。 */
   shape?: 'block' | 'pill'
+  /** 放在一行字的位置（标题、说明、小字里）：行内块、竖着居中，那一行的高度仍由原来的字号和行高给（waiting.css，等待第六轮）。 */
+  inline?: boolean
   className?: string
 }
 
-export function Skeleton({ width, height, shape = 'block', className }: SkeletonProps) {
+export function Skeleton({ width, height, shape = 'block', inline = false, className }: SkeletonProps) {
   const ref = useRef<HTMLSpanElement>(null)
   useLayoutEffect(() => {
     const element = ref.current
@@ -36,6 +38,7 @@ export function Skeleton({ width, height, shape = 'block', className }: Skeleton
       ref={ref}
       className={className ? `eqb-skeleton ${className}` : 'eqb-skeleton'}
       data-shape={shape === 'pill' ? 'pill' : undefined}
+      data-inline={inline ? '' : undefined}
       style={style}
       aria-hidden="true"
     />

@@ -4,7 +4,9 @@ import { Dialog } from '../../shared-ui/Dialog.tsx'
 import { TextField } from '../../shared-ui/Field.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { planFocusAfterRemoval, programmaticFocusTarget } from '../../shared-ui/focusAfterRemoval.ts'
+import { Skeleton, SkeletonGate } from '../../shared-ui/Skeleton.tsx'
 import { Surface } from '../../shared-ui/Surface.tsx'
+import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
 import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import { errorFromResponse } from '../../services/httpClient'
 
@@ -16,6 +18,18 @@ async function request(path = '', body?: object) {
   } : undefined)
   if (!response.ok) throw await errorFromResponse(response, '口令操作失败，请重试。')
   return response.json()
+}
+
+// 口令列表在等时的灰块（等待第六轮，2026-11-15；原来是一行「加载中」）。照真列表画 3 行：名字和状态一行、创建时间一行小字、
+// 右边「作废口令」的字；用真列表的 ul / li / strong / span / small（adminWorkbench.css .agent-tokens li，一行 64 高），灰块放在字的位置。
+const TOKEN_SKELETON_NAME_WIDTHS = [72, 64, 80]
+
+function AgentTokenListSkeleton() {
+  return <ul aria-hidden="true">{TOKEN_SKELETON_NAME_WIDTHS.map((width, index) => <li key={index}>
+    <div><strong><Skeleton inline width={width} height={12} /></strong><span><Skeleton inline width={28} height={10} /></span>
+      <small><Skeleton inline width={160} height={10} /></small></div>
+    <Skeleton className="agent-token-skeleton-action" width={52} height={12} />
+  </li>)}</ul>
 }
 
 export function AgentTokens() {
@@ -38,7 +52,11 @@ export function AgentTokens() {
   const revokedRef = useRef(false)
   // 等待第四轮（2026-11-15）：口令列表第一次读回来时一行行依次淡入；新建、作废、重试都不再演（once）。
   const sectionRef = useRef<HTMLElement>(null)
-  useRowReveal(sectionRef, ':scope > ul > li', !loading && !loadFailed && tokens.length > 0, { once: true })
+  // 等待第六轮（2026-11-15）：读取中画 3 行灰块，走门槛（300ms 内不出、出了至少留 500ms，这期间列表到了也先不换上）。
+  // listWaiting = 灰块那一块还占着位置；列表等它走了才挂，淡入也等那一拍。
+  const listPhase = useDelayedBusy(loading)
+  const listWaiting = loading || listPhase === 'waiting'
+  useRowReveal(sectionRef, ':scope > ul > li', !listWaiting && !loadFailed && tokens.length > 0, { once: true })
   useEffect(() => {
     let active = true
     request().then(data => { if (active) { setTokens(data.tokens); setLoadFailed(false) } })
@@ -83,8 +101,9 @@ export function AgentTokens() {
     </Surface>}
     <p role="alert" className="admin-backfill-error">{error}</p>
     <p role="status">{notice}</p>
-    {/* 读取中、读取失败两行换成共用 Notice（构件收尾 2026-11-15），字没改；「重试」由 Notice 行尾的键画。 */}
-    {loading ? <Notice kind="waiting">加载中</Notice> : loadFailed ? <Notice kind="error" className="agent-token-load-failed"
+    {/* 读取失败换成共用 Notice（构件收尾 2026-11-15），字没改；「重试」由 Notice 行尾的键画。
+        读取中原来也是一行 Notice「加载中」，等待第六轮换成 3 行灰块。 */}
+    {listWaiting ? <SkeletonGate pending={loading} phase={listPhase} label="口令列表加载中" skeleton={<AgentTokenListSkeleton />} /> : loadFailed ? <Notice kind="error" className="agent-token-load-failed"
       action={{ label: '重试', onClick: () => { setLoading(true); setLoadAttempt(n => n + 1) } }}>口令列表没有加载出来。</Notice> : tokens.length === 0 ? <p>还没有口令。</p> :
       <ul>{tokens.map(item => <li key={item.id} data-token-id={item.id}>
         <div><strong>{item.name}</strong><span>{item.revokedAt ? '已作废' : '有效'}</span>

@@ -11,6 +11,14 @@
  *
  * 只关心「出不出」的地方（灰块）用 phase !== 'idle'；所以点用 <WaitDots active={phase === 'waiting'} />。
  * 读屏的「忙」不走门槛：键上的 aria-busy、提示行的字由调用处立即给。
+ *
+ * 300ms、500ms 读 tokens.css 的 --wait-show-delay、--wait-min-visible（等待第六轮，2026-11-15，原来是本文件里的两个常量，
+ * 和启动壳 CSS 里的 300ms 同源）。读不到就不设门槛、不留最短时长（照 readMotionMs 那两段收尾的做法，不写字面兜底）。
+ *
+ * options.pendingSince：这段等待其实更早就开始了（performance.now() 的时刻），门槛和最短停留都从那时算。
+ * 扫码听写用它接上启动壳（等待第六轮）：启动壳的灰块（CSS 门槛）在 pendingSince + 300ms 出，页面挂上时如果已经过了，
+ * 第一拍就是 'waiting'（不会「灰块 → 空 → 灰块」）；数据来得再快也留满 500ms，从启动壳的灰块出来那一刻算。
+ * 只管挂上以后的第一段等待；之后再等，照常从那一刻算。
  */
 
 import { useEffect, useRef, useState } from 'react'
@@ -18,38 +26,59 @@ import { readMotionMs } from './waitDotsMotion.ts'
 
 export type WaitPhase = 'idle' | 'waiting' | 'settling' | 'leaving'
 
-/** 等这么久还没好才出等待的样子（DESIGN §5「门槛」）。 */
-export const WAIT_SHOW_DELAY_MS = 300
-/** 出了就至少留这么久（DESIGN §5「门槛」）。 */
-export const WAIT_MIN_VISIBLE_MS = 500
+/** 门槛：等这么久还没好才出等待的样子（DESIGN §5「门槛」）。读不到 token 返回 0（不设门槛）。 */
+function waitShowDelayMs(): number {
+  return readMotionMs('--wait-show-delay') ?? 0
+}
+/** 出了就至少留这么久（DESIGN §5「门槛」）。读不到 token 返回 0（不留）。 */
+function waitMinVisibleMs(): number {
+  return readMotionMs('--wait-min-visible') ?? 0
+}
 
-export function useDelayedBusy(pending: boolean): WaitPhase {
-  const [phase, setPhase] = useState<WaitPhase>('idle')
-  const shownAtRef = useRef(0)
+export function useDelayedBusy(pending: boolean, options?: { pendingSince?: number }): WaitPhase {
+  // 挂上那一下：第一段等待从哪一刻算起、是不是已经过了门槛（接上更早开始的那段时）。
+  const [initial] = useState(() => {
+    const since = pending ? options?.pendingSince : undefined
+    const showDelay = waitShowDelayMs()
+    const shown = since !== undefined && performance.now() - since >= showDelay
+    // 等待的样子是哪一刻出来的：接上更早开始的那段时，算它本该出来的那一刻（since + 门槛），不是挂上这一刻。
+    return { since, phase: (shown ? 'waiting' : 'idle') as WaitPhase, shownAt: shown ? since + showDelay : 0 }
+  })
+  // 第一段等待的起点；第一段等完就作废。
+  const sinceRef = useRef(initial.since)
+  const [phase, setPhase] = useState<WaitPhase>(initial.phase)
+  const shownAtRef = useRef(initial.shownAt)
 
   useEffect(() => {
     let delay: number
     let next: WaitPhase
     if (pending) {
       if (phase === 'waiting') return
-      // idle：等过门槛再出；settling / leaving：马上回到 waiting（下一拍，免得在 effect 里同步改状态）。
-      delay = phase === 'idle' ? WAIT_SHOW_DELAY_MS : 0
+      // idle：等过门槛再出（接上更早开始的那段时扣掉已经等了的）；settling / leaving：马上回到 waiting（下一拍，免得在 effect 里同步改状态）。
+      const since = sinceRef.current
+      delay = phase === 'idle' ? Math.max(0, waitShowDelayMs() - (since !== undefined ? performance.now() - since : 0)) : 0
       next = 'waiting'
-    } else if (phase === 'waiting') {
-      delay = Math.max(0, WAIT_MIN_VISIBLE_MS - (performance.now() - shownAtRef.current))
-      next = 'settling'
-    } else if (phase === 'settling') {
-      // 读不到 token 就不留收尾那一段
-      delay = readMotionMs('--motion-base') ?? 0
-      next = 'leaving'
-    } else if (phase === 'leaving') {
-      delay = readMotionMs('--motion-fast') ?? 0
-      next = 'idle'
     } else {
-      return
+      sinceRef.current = undefined
+      if (phase === 'waiting') {
+        delay = Math.max(0, waitMinVisibleMs() - (performance.now() - shownAtRef.current))
+        next = 'settling'
+      } else if (phase === 'settling') {
+        // 读不到 token 就不留收尾那一段
+        delay = readMotionMs('--motion-base') ?? 0
+        next = 'leaving'
+      } else if (phase === 'leaving') {
+        delay = readMotionMs('--motion-fast') ?? 0
+        next = 'idle'
+      } else {
+        return
+      }
     }
     const timer = window.setTimeout(() => {
-      if (next === 'waiting' && phase === 'idle') shownAtRef.current = performance.now()
+      if (next === 'waiting' && phase === 'idle') {
+        const since = sinceRef.current
+        shownAtRef.current = since !== undefined ? since + waitShowDelayMs() : performance.now()
+      }
       setPhase(next)
     }, delay)
     return () => window.clearTimeout(timer)

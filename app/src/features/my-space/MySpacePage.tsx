@@ -21,6 +21,8 @@ import { Menu } from '../../shared-ui/Menu.tsx'
 import { Notice, type NoticeKind } from '../../shared-ui/Notice.tsx'
 import { planFocusAfterRemoval, programmaticFocusTarget } from '../../shared-ui/focusAfterRemoval.ts'
 import { Row, RowList } from '../../shared-ui/Row.tsx'
+import { Skeleton, SkeletonGate } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
 import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import './MySpacePage.css'
 
@@ -123,6 +125,37 @@ function ArtifactMenu({
   )
 }
 
+// 文件列表在等时的灰块（等待第六轮，2026-11-15；原来是分区标题下面一行「正在读取个人空间」）。
+// 照真列表画：月份那一行、板里 3 行文件（图标、标题、页数日期一行、右边三个键的字），用真列表同一套 class，
+// 行高照真行（70，MySpacePage.css .my-space-file-row），灰块放在字的位置。整块对读屏隐藏，读屏那一句由 SkeletonGate 给。
+const SKELETON_FILE_TITLE_WIDTHS = [96, 132, 112]
+
+function MySpaceListSkeleton(): ReactNode {
+  return (
+    <section className="my-space-month-group my-space-list-skeleton" aria-hidden="true">
+      <div className="my-space-month-head">
+        <span className="my-space-month-label"><Skeleton inline width={88} height={10} /></span>
+      </div>
+      <RowList axis="y" className="my-space-file-list" itemSelector=".my-space-list-skeleton-none" gapClick={false}>
+        {SKELETON_FILE_TITLE_WIDTHS.map((width, index) => (
+          <Row className="my-space-file-row" padding="none" key={index}>
+            <Skeleton width={24} height={24} />
+            <div className="my-space-file-copy">
+              <h3><Skeleton inline width={width} height={12} /></h3>
+              <p><span><Skeleton inline width={88} height={10} /></span></p>
+            </div>
+            <div className="my-space-row-actions">
+              <Skeleton width={48} height={12} />
+              <Skeleton width={66} height={12} />
+              <Skeleton width={16} height={12} />
+            </div>
+          </Row>
+        ))}
+      </RowList>
+    </section>
+  )
+}
+
 export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpacePageProps): ReactNode {
   const [folders, setFolders] = useState<MySpaceFolder[]>([])
   const [artifacts, setArtifacts] = useState<MySpaceArtifact[]>([])
@@ -207,7 +240,12 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
   // 等待第四轮（2026-11-15）：文件第一次读回来时，月份行和文件行从上到下依次淡入。
   // 只演第一次（once）：换文件夹、删完重读都不演。
   const fileListRef = useRef<HTMLElement>(null)
-  useRowReveal(fileListRef, '.my-space-month-head, .my-space-file-row', loadState === 'loaded' && artifacts.length > 0, { once: true })
+  // 等待第六轮（2026-11-15）：读取中画文件列表的灰块，走门槛（300ms 内不出、出了至少留 500ms，这期间文件到了也先不换上）。
+  // listWaiting = 灰块那一块还占着位置；文件行等它走了才挂，淡入也等那一拍。
+  const listPending = loadState === 'loading'
+  const listPhase = useDelayedBusy(listPending)
+  const listWaiting = listPending || listPhase === 'waiting'
+  useRowReveal(fileListRef, '.my-space-month-head, .my-space-file-row', !listWaiting && loadState === 'loaded' && artifacts.length > 0, { once: true })
   // 删除失败时：那一行还在，焦点回到它的「更多操作」键（busy 解除、键能用以后）。
   const [focusAfterBusy, setFocusAfterBusy] = useState<HTMLElement | null>(null)
 
@@ -298,26 +336,31 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
               <div>
                 {/* 删完最后一份文件时焦点落在这里（programmaticFocusTarget 临时给 tabindex=-1，Tab 不停）。 */}
                 <h2 ref={sectionHeadingRef}>{selectedFolder?.name || '全部文件'}</h2>
-                {loadState === 'loaded' && <span>{artifacts.length} 份已保存文件</span>}
+                {/* 读取中这一行小字也画灰块，分区标题那块一样高（42 → 43.4），下面的灰块和真行同位。 */}
+                {listWaiting
+                  ? <span aria-hidden="true"><Skeleton inline width={84} height={10} /></span>
+                  : loadState === 'loaded' && <span>{artifacts.length} 份已保存文件</span>}
               </div>
               {/* Search and other future capabilities belong here only after they are real. */}
             </div>
 
-            {/* 读取中、读取失败两行换成共用 Notice（构件收尾，2026-11-15），字照原来。 */}
-            {loadState === 'loading' && <Notice kind="waiting" className="my-space-empty">正在读取个人空间</Notice>}
-            {loadState === 'error' && (
+            {/* 读取失败换成共用 Notice（构件收尾，2026-11-15），字照原来。读取中原来也是一行 Notice，等待第六轮换成灰块。 */}
+            {listWaiting && (
+              <SkeletonGate pending={listPending} phase={listPhase} label="正在读取个人空间" skeleton={<MySpaceListSkeleton />} />
+            )}
+            {!listWaiting && loadState === 'error' && (
               <div className="my-space-empty-state">
                 <Notice kind="error" className="my-space-error">{message?.text || '个人空间读取失败。'}</Notice>
                 <Button className="my-space-empty-cta" tone="primary" size="lg" onClick={() => void load()}>重新加载</Button>
               </div>
             )}
-            {loadState === 'loaded' && artifacts.length === 0 && (
+            {!listWaiting && loadState === 'loaded' && artifacts.length === 0 && (
               // 个人空间空态用坐石獭獭（BRAND.md §7 第 118 条），换掉原来的平涂文件夹插图。
               <EmptyState className="my-space-empty-placed" otter="otter-sit" action={{ label: '去找题', onClick: onBackToWorkbench }}>
                 试卷导出为 PDF 后，可以保存在这里。
               </EmptyState>
             )}
-            {loadState === 'loaded' && artifacts.length > 0 && monthGroups.map((group) => (
+            {!listWaiting && loadState === 'loaded' && artifacts.length > 0 && monthGroups.map((group) => (
               <section className="my-space-month-group" key={group.key} aria-label={group.label}>
                 <div className="my-space-month-head">
                   <span className="my-space-month-label">{group.label}</span>

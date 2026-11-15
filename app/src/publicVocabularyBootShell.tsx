@@ -10,7 +10,7 @@ import './shared-ui/waiting.css'
  * Skeleton 组件把呼吸对齐到页面时间轴的 0 点；这里用负的 animation-delay 对齐到同一个点，
  * 页面代码块到了、换成页面自己的灰块时，深浅接得上，不跳一下。
  */
-function BootSkeleton({ width, height, pill, phaseDelay }: { width?: number; height: number; pill?: boolean; phaseDelay: string }) {
+function BootSkeleton({ width, height, pill, phaseDelay }: { width?: number; height: number; pill?: boolean; phaseDelay?: string }) {
   return (
     <span
       className="eqb-skeleton"
@@ -25,10 +25,12 @@ function BootSkeleton({ width, height, pill, phaseDelay }: { width?: number; hei
  * 扫码听写的启动壳（等待第五轮，2026-11-15；原来是一张居中卡片：方块「EQ」字标、「正在准备听写」和一行说明）。
  * 页面代码块还没到时就画听写页的灰块：顶栏（獭石 / 自动听写）照常，题板、控制区的灰块和听写页 DictationOpeningSkeleton
  * 同一套 class、同样的块（容器几何由 vocabularyDictationPage.css 那一份规则给，值只写一处）。
- * 门槛：启动壳不跑 JS 计时，灰块用 CSS 的 animation-delay 等 300ms 再出（index.css .public-vocabulary-boot-skeleton）；
- * 「出了至少留 500ms」做不到，交给页面：页面挂上时启动壳的灰块已经出了，就接着出（bootStartedAt）。
+ * 门槛：启动壳不跑 JS 计时，灰块用 CSS 的 animation-delay 等 --wait-show-delay（300ms）再出（index.css .public-vocabulary-boot-skeleton）。
+ * 「出了至少留 500ms」交给页面（等待第六轮补齐）：页面拿 bootStartedAt 当这段等待的起点（useDelayedBusy 的 pendingSince），
+ * 启动壳的灰块已经出了就接着出，并从它出来那一刻起留满 --wait-min-visible（500ms）再换上真题板。
+ * phaseDelay 读不到 --wait-breathe-cycle 时不给，呼吸不对相位。
  */
-export function PublicVocabularyDictationBootShell({ phaseDelay }: { phaseDelay: string }) {
+export function PublicVocabularyDictationBootShell({ phaseDelay }: { phaseDelay?: string }) {
   return (
     <div className="vocabulary-dictation-page">
       <header className="vocabulary-dictation-header">

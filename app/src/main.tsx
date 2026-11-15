@@ -1,6 +1,8 @@
 import { StrictMode } from 'react'
+import { flushSync } from 'react-dom'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+import { readMotionMs } from './shared-ui/waitDotsMotion.ts'
 // 启动壳和启动失败页（等待第五轮，2026-11-15）：只有壳的标记和样式，不拿页面代码；页面代码块照旧按需加载（verify-launch-deploy Slice 1）。
 import {
   BootstrapError,
@@ -91,13 +93,17 @@ const publicVocabularyDictationRequest = getPublicVocabularyDictationRequest()
 
 const root = createRoot(document.getElementById('root')!)
 
-/** 灰块一呼一吸一圈的长度：和 waiting.css .eqb-skeleton 的 --eqb-skeleton-cycle 同一个数（DESIGN §5「灰块」）。 */
-const BOOT_SKELETON_CYCLE_MS = 1800
-
 async function bootstrap() {
   if (publicVocabularyDictationRequest) {
     const bootStartedAt = performance.now()
-    root.render(<PublicVocabularyDictationBootShell phaseDelay={`-${Math.round(bootStartedAt % BOOT_SKELETON_CYCLE_MS)}ms`} />)
+    // 灰块一呼一吸一圈的长度读 tokens.css 的 --wait-breathe-cycle（和 waiting.css .eqb-skeleton 同一个变量，等待第六轮收成 token）。
+    // 读不到就不对相位（不写字面兜底）。
+    const breatheCycle = readMotionMs('--wait-breathe-cycle')
+    // flushSync：启动壳当场挂上，CSS 门槛（--wait-show-delay）从差不多 bootStartedAt 这一刻（下一帧算样式）开始数，
+    // 页面用 bootStartedAt 算「启动壳的灰块出了没有、出了多久」，两边对得上（等待第六轮）。
+    flushSync(() => root.render(
+      <PublicVocabularyDictationBootShell phaseDelay={breatheCycle ? `-${Math.round(bootStartedAt % breatheCycle)}ms` : undefined} />,
+    ))
     const { VocabularyDictationPage } = await import('./features/vocabulary-dictation/VocabularyDictationPage.tsx')
     root.render(
       <StrictMode>

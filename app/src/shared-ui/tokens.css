@@ -93,4 +93,12 @@
   --eqb-space-3: 12px;
   --eqb-space-4: 16px;
   --eqb-space-5: 24px;
+
+  /* 等待（DESIGN.md §5「Waiting 等待」：门槛、灰块）。等待第六轮（2026-11-15）从各处字面量收进来（docs/design-gaps.md 2026-11-15 条）：
+     JS 的 useDelayedBusy（门槛、最短停留）、main.tsx 启动壳（灰块对相位）都读这里，CSS 的 waiting.css 灰块、index.css 启动壳门槛也用这里。
+     show-delay 等这么久还没好才出等待的样子；min-visible 出了就至少留这么久；breathe-cycle 灰块一呼一吸一圈。
+     和 --motion-*（动效时长，App.css）分开：这三个是「等多久」，不是「动多快」。 */
+  --wait-show-delay: 300ms;
+  --wait-min-visible: 500ms;
+  --wait-breathe-cycle: 1800ms;
 }

@@ -34,7 +34,10 @@ import { Button } from '../../shared-ui/Button.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { DraftAddButton } from '../../shared-ui/DraftAddButton.tsx'
 import { Chip } from '../../shared-ui/Chip.tsx'
+import { SkeletonGate } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
 import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
+import { SimilarCardSkeletons } from './SimilarCardSkeletons.tsx'
 import type { QuestionGroupCard, SimilarPassagesResponse } from '../../domain/questionBank'
 
 export type SimilarPassagesRequestState =
@@ -64,10 +67,15 @@ export type SimilarPassagesPanelProps = {
 
 export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNode {
   const { recipeSummary, request, questionGroupById, onCollapse, onRetry } = props
+  // 等待第六轮（2026-11-15）：读取中原来是一行「加载中」，换成照真卡画的 3 张灰卡，走门槛（300ms 内不出、出了至少留 500ms，
+  // 这期间结果到了也先不换上）。listWaiting = 灰卡那一块还占着位置。
+  const pending = request.status === 'loading'
+  const listPhase = useDelayedBusy(pending)
+  const listWaiting = pending || listPhase === 'waiting'
   // 等待第四轮（2026-11-15）：结果回来时，候选卡从上到下依次淡入（只动透明度）。每次请求回来演一次；
-  // 加入草稿卷这类不改 request.status 的变化不演。
+  // 加入草稿卷这类不改 request.status 的变化不演。第六轮起等灰卡走了、真卡挂上那一拍再演。
   const panelRef = useRef<HTMLDivElement>(null)
-  useRowReveal(panelRef, '.similar-rcard', request.status === 'ready')
+  useRowReveal(panelRef, '.similar-rcard', request.status === 'ready' && !listWaiting)
 
   return (
     <div className="similar-passages-panel" ref={panelRef}>
@@ -79,15 +87,17 @@ export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNod
         </Button>
       </div>
 
-      {request.status === 'loading' && <Notice kind="waiting">加载中</Notice>}
+      {listWaiting && (
+        <SkeletonGate pending={pending} phase={listPhase} label="相似篇章加载中" skeleton={<SimilarCardSkeletons variant="panel" />} />
+      )}
 
-      {request.status === 'error' && (
+      {!listWaiting && request.status === 'error' && (
         <Notice kind="error" className="similar-rail-error" action={{ label: '重试', onClick: onRetry }}>
           {request.message}
         </Notice>
       )}
 
-      {request.status === 'ready' && (
+      {!listWaiting && request.status === 'ready' && (
         <>
           {request.data.results.length === 0 ? (
             <p className="paper-browse-lecture-empty">

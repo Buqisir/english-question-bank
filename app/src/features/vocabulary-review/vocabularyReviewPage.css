@@ -1066,6 +1066,31 @@
   flex: 0 0 auto;
 }
 
+/* 右上那一栏的灰块（等待第六轮 2026-11-15，HeadingActionsSkeleton）：容器和各段用真栏同一套 class，这里只管灰块怎么坐进去。
+ * 门槛内（还不到 300ms）这一栏照样占着位置、只是看不见，下面开始页那块不会在 300ms 时被推下去。 */
+.vocabulary-heading-skeleton:not([data-shown]) {
+  visibility: hidden;
+}
+
+/* 大号淡底键（「单词复习」「新建学生」）的位置：和大号键一样高（36，button.css .eqb-button[data-size='lg']）、一样的左右内衬，
+ * 灰块放在键上字的位置、居中（「单词复习」在栏里撑满一行，字居中，和真键一样）。 */
+.vocabulary-heading-skeleton-key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 var(--eqb-space-3);
+}
+
+/* 「查看 / 调整进度」（小号淡墨键，28 高、左右内衬 8，button.css .eqb-button[data-size='sm']）的位置；靠右、上下收边由真键那条
+ * .vocabulary-progress-toggle 给（同一个 class）。 */
+.vocabulary-heading-skeleton-toggle {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 var(--eqb-space-2);
+}
+
 .vocabulary-run-setup > svg {
   color: var(--ink);
 }

@@ -4,11 +4,14 @@ import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { Chip } from '../../shared-ui/Chip.tsx'
+import { SkeletonGate } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
 import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import { Row } from '../../shared-ui/Row.tsx'
 import { Surface } from '../../shared-ui/Surface.tsx'
 import { groupTypeLabel, type DraftPaperItem, type QuestionGroupCard } from '../../domain/questionBank'
 import type { SimilarPassagesRequestState } from '../similar-passages/SimilarPassagesPanel'
+import { SimilarCardSkeletons } from '../similar-passages/SimilarCardSkeletons.tsx'
 
 /** similar-workbench-swap (E7, plan.md "抽屉"): the swap drawer's own props,
  * kept in this file (not similar-passages/SimilarPassagesPanel.tsx) — plan's
@@ -41,10 +44,15 @@ export type DraftPaperSwapDrawerProps = {
 
 export function DraftPaperSwapDrawer(props: DraftPaperSwapDrawerProps): ReactNode {
   const { seedTitle, recipeSummary, request, existingGroupIds, questionGroupById, onCollapse, onRetry, onReplace, onAdd } = props
+  // 等待第六轮（2026-11-15）：读取中原来是一行「加载中」，换成照真卡画的 3 张灰卡，走门槛（300ms 内不出、出了至少留 500ms，
+  // 这期间结果到了也先不换上）。listWaiting = 灰卡那一块还占着位置。
+  const pending = request.status === 'loading'
+  const listPhase = useDelayedBusy(pending)
+  const listWaiting = pending || listPhase === 'waiting'
   // 等待第四轮（2026-11-15）：结果回来时，候选卡从上到下依次淡入（只动透明度）。每次请求回来演一次；
-  // 勾选、加入、换篇这些不改 request.status 的变化不演。
+  // 勾选、加入、换篇这些不改 request.status 的变化不演。第六轮起等灰卡走了、真卡挂上那一拍再演。
   const drawerRef = useRef<HTMLDivElement>(null)
-  useRowReveal(drawerRef, '.similar-rcard', request.status === 'ready')
+  useRowReveal(drawerRef, '.similar-rcard', request.status === 'ready' && !listWaiting)
 
   return (
     <div className="draft-swap-drawer" ref={drawerRef}>
@@ -56,15 +64,17 @@ export function DraftPaperSwapDrawer(props: DraftPaperSwapDrawerProps): ReactNod
       </div>
       <p className="similar-passages-sub">{recipeSummary}</p>
 
-      {request.status === 'loading' && <Notice kind="waiting">加载中</Notice>}
+      {listWaiting && (
+        <SkeletonGate pending={pending} phase={listPhase} label="相似篇章加载中" skeleton={<SimilarCardSkeletons variant="drawer" />} />
+      )}
 
-      {request.status === 'error' && (
+      {!listWaiting && request.status === 'error' && (
         <Notice kind="error" className="similar-rail-error" action={{ label: '重试', onClick: onRetry }}>
           {request.message}
         </Notice>
       )}
 
-      {request.status === 'ready' && (
+      {!listWaiting && request.status === 'ready' && (
         <>
           {request.data.results.length === 0 ? (
             <p className="paper-browse-lecture-empty">
