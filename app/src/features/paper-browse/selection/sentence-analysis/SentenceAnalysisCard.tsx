@@ -8,6 +8,7 @@ import { ChevronLeft, ChevronRight, Target, SentenceAnalysis, X } from '../../..
 import { CopyFeedbackIcon } from '../../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../../icons/motionInput'
 import { useClipboardCopy } from '../../../../hooks/useClipboardCopy'
+import { InlineWaitDots } from '../../../../shared-ui/WaitDots.tsx'
 import { AnnotatedSentence } from './AnnotatedSentence'
 import { TranslationBlock } from './TranslationBlock'
 import { GrammarLegend } from './GrammarLegend'
@@ -151,9 +152,10 @@ export function SentenceAnalysisCard({
         </nav> : null}
         <div className="sa-head-actions">
           {status === 'loading' ? (
+            // 等待构件（2026-11-15，DESIGN.md §5 Waiting）：原来字前面一个转圈，换成字后面跟所以点。
             <span className="sa-loading">
-              <span className="paper-selection-spinner" aria-hidden="true" />
-              分析中…
+              分析中
+              <InlineWaitDots pending />
             </span>
           ) : null}
           {ready && flags.length === 1 ? (

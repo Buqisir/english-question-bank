@@ -8,6 +8,8 @@
  * - 出错写清哪里出错、东西还在不在（children，自己的话），后面照登服务器原话（detail），不另写兜底的话
  *   （No-Literal-Fallback）。能做什么放在行尾的一个键上（action，比如「重试」）。
  * - 等待那种不换掉旧内容：调用处把旧内容留着，只加这一行进度。
+ *   等待那种前面不放图标，字后面跟所以点（DESIGN.md §5「Waiting 等待」：一行字在等，所以点跟在字后面；2026-11-15 起，
+ *   原来是前面一个静止的 Loader 圈）。所以点也走 300ms 门槛；字本身照旧一挂上就在（读屏靠它）。字后面不再写「…」。
  * - 读屏：出错 role="alert"；其余 role="status"、aria-live="polite"。
  *
  * 放法（placement）：
@@ -19,8 +21,9 @@
  */
 
 import type { HTMLAttributes, ReactNode, Ref } from 'react'
-import { AlertTriangle, CheckCircle, InfoCircle, Loader } from '../icons'
+import { AlertTriangle, CheckCircle, InfoCircle } from '../icons'
 import { Button } from './Button.tsx'
+import { InlineWaitDots } from './WaitDots.tsx'
 import './notice.css'
 
 export type NoticeKind = 'info' | 'waiting' | 'success' | 'error'
@@ -48,9 +51,8 @@ export type NoticeProps = Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'rol
   ref?: Ref<HTMLDivElement>
 }
 
-function NoticeIcon({ kind }: { kind: NoticeKind }) {
+function NoticeIcon({ kind }: { kind: Exclude<NoticeKind, 'waiting'> }) {
   if (kind === 'error') return <AlertTriangle size={16} aria-hidden="true" />
-  if (kind === 'waiting') return <Loader size={16} aria-hidden="true" />
   if (kind === 'info') return <InfoCircle size={16} aria-hidden="true" />
   return <CheckCircle size={16} aria-hidden="true" />
 }
@@ -68,11 +70,12 @@ export function Notice({ kind, children, detail, action, placement = 'inline', d
       aria-live={kind === 'error' ? undefined : 'polite'}
       {...rest}
     >
-      <NoticeIcon kind={kind} />
+      {kind === 'waiting' ? null : <NoticeIcon kind={kind} />}
       <span className="eqb-notice-text" title={text}>
         {children}
         {detail ? <span className="eqb-notice-detail">：{detail}</span> : null}
       </span>
+      {kind === 'waiting' ? <InlineWaitDots pending /> : null}
       {action && (
         <Button tone="strong" size="sm" className="eqb-notice-action" icon={action.icon} busy={action.busy} onClick={action.onClick}>
           {action.label}

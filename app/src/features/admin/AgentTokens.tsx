@@ -74,7 +74,7 @@ export function AgentTokens() {
     <p role="alert" className="admin-backfill-error">{error}</p>
     <p role="status">{notice}</p>
     {/* 读取中、读取失败两行换成共用 Notice（构件收尾 2026-11-15），字没改；「重试」由 Notice 行尾的键画。 */}
-    {loading ? <Notice kind="waiting">加载中…</Notice> : loadFailed ? <Notice kind="error" className="agent-token-load-failed"
+    {loading ? <Notice kind="waiting">加载中</Notice> : loadFailed ? <Notice kind="error" className="agent-token-load-failed"
       action={{ label: '重试', onClick: () => { setLoading(true); setLoadAttempt(n => n + 1) } }}>口令列表没有加载出来。</Notice> : tokens.length === 0 ? <p>还没有口令。</p> :
       <ul>{tokens.map(item => <li key={item.id} data-token-id={item.id}>
         <div><strong>{item.name}</strong><span>{item.revokedAt ? '已作废' : '有效'}</span>
@@ -102,8 +102,9 @@ export function AgentTokens() {
       description="使用这条口令的 Agent 将立即失去访问权限，作废后无法恢复。"
       cancel={{ label: '保留口令' }}
       confirm={{
-        label: busy ? '作废中…' : `作废「${revoking?.name ?? ''}」`,
-        disabled: busy,
+        // 作废中：键上的字不换、不变淡，用 Button busy（门槛过了字隐去、所以点放在正中；DESIGN.md §5 Waiting）。
+        label: `作废「${revoking?.name ?? ''}」`,
+        busy,
         onClick: () => {
           if (!revoking) return
           void mutate(async () => {

@@ -498,7 +498,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
         <Button className="detail-back" tone="subtle" size="sm" icon={<ArrowLeft size={16} aria-hidden="true" />} onClick={onBack}>
           返回找题
         </Button>
-        {detailStatus === 'loading' && <Notice kind="waiting" className="detail-message">正在读取题组详情...</Notice>}
+        {detailStatus === 'loading' && <Notice kind="waiting" className="detail-message">正在读取题组详情</Notice>}
         {detailStatus === 'error' && <Notice kind="error" className="detail-message">{detailError}</Notice>}
       </div>
     )

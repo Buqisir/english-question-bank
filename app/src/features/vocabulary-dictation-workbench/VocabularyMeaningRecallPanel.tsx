@@ -21,6 +21,7 @@ import { useAudioIconState } from '../../hooks/useAudioIconState'
 import { DisclosureIcon, DownloadFeedbackIcon, VolumeFeedbackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
 import { Notice } from '../../shared-ui/Notice.tsx'
+import { InlineWaitDots } from '../../shared-ui/WaitDots.tsx'
 import { TextField } from '../../shared-ui/Field.tsx'
 import { SegmentedField, type ChoiceOption } from '../../shared-ui/OptionField.tsx'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
@@ -482,7 +483,7 @@ export function VocabularyMeaningRecallPanel({
         <header>
           <div>
             <strong>{stageRecord.title}</strong>
-            <span>{activeIndex + 1} / {stageRecord.entryCount} · {saveState === 'saving' ? '正在自动保存…' : saveState === 'error' ? '保存失败' : '已自动保存'}</span>
+            <span>{activeIndex + 1} / {stageRecord.entryCount} · {saveState === 'saving' ? '正在自动保存' : saveState === 'error' ? '保存失败' : '已自动保存'}<InlineWaitDots pending={saveState === 'saving'} /></span>
           </div>
           <button type="button" onClick={() => void finishRecord(stageRecord)} disabled={busy}>结束本轮</button>
         </header>

@@ -4025,32 +4025,8 @@ p.concierge-empty {
   min-height: 96px;
 }
 
-.concierge-skeleton-line {
-  position: relative;
-  overflow: hidden;
-  height: 12px;
-  border-radius: 4px;
-  background: var(--eqb-color-desk);
-}
-
-.concierge-skeleton-line.short {
-  width: 60%;
-}
-
-.concierge-skeleton-line::after,
-.concierge-skeleton-chip::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent 0%, var(--desk-hover) 50%, transparent 100%);
-  transform: translateX(100%);
-  animation: concierge-skeleton-shimmer 1.6s linear infinite; /* loading-loop, token-exempt */
-}
-
-@keyframes concierge-skeleton-shimmer {
-  from { transform: translateX(100%); }
-  to { transform: translateX(-100%); }
-}
+/* 首页灰块里的每一条（原 .concierge-skeleton-line、.short、扫光 ::after 和 @keyframes concierge-skeleton-shimmer）
+   2026-11-15 换成共用灰块 shared-ui/Skeleton（呼吸，不扫光；DESIGN.md §5 Waiting），删了。尺寸搬进 ConciergeDesk.tsx。 */
 
 @media (prefers-reduced-motion: reduce) {
   .group-card {
@@ -4068,12 +4044,6 @@ p.concierge-empty {
   .concierge-filter-row[data-visible='true'] {
     transform: none;
     transition: opacity var(--motion-micro) var(--ease-hover);
-  }
-
-  .concierge-skeleton-line::after,
-  .concierge-skeleton-chip::after {
-    animation: none;
-    opacity: 0;
   }
 
   .primary-button:active:not(:disabled),
@@ -4197,10 +4167,9 @@ p.concierge-empty {
 
 /* ── ui-search-feel 刀⑤ #1 — dataLoading skeleton ──────────────────────
  * Chip row + 3 feed-group placeholders shown while the local SQLite bank
- * is still connecting, so the first paint isn't a blank page. Reuses the
- * existing `.concierge-skeleton-line` shimmer gradient (neutral
- * surface/border grays, already reduced-motion-safe via the blanket
- * `@media (prefers-reduced-motion: reduce)` rule above).
+ * is still connecting, so the first paint isn't a blank page. 2026-11-15:
+ * the bars are shared-ui/Skeleton (breathing, reduced-motion-safe in
+ * shared-ui/waiting.css); only the board and group spacing stay here.
  */
 .concierge-skeleton-chip-row {
   list-style: none;
@@ -4212,20 +4181,7 @@ p.concierge-empty {
   justify-content: center;
 }
 
-.concierge-skeleton-chip {
-  position: relative;
-  overflow: hidden;
-  width: 76px;
-  height: 24px;
-  border-radius: 999px;
-  background: var(--eqb-color-desk);
-}
-
-.concierge-skeleton-chip:nth-child(2) { width: 96px; }
-.concierge-skeleton-chip:nth-child(3) { width: 64px; }
-.concierge-skeleton-chip:nth-child(4) { width: 108px; }
-.concierge-skeleton-chip:nth-child(5) { width: 84px; }
-.concierge-skeleton-chip:nth-child(6) { width: 70px; }
+/* 每个芯片占位（原 .concierge-skeleton-chip 和六个 :nth-child 宽度）换成 shared-ui/Skeleton shape="pill"，宽度在 ConciergeDesk.tsx。 */
 
 .concierge-skeleton-feed {
   margin-top: 20px;
@@ -4244,16 +4200,6 @@ p.concierge-empty {
 
 .concierge-skeleton-feed-group + .concierge-skeleton-feed-group {
   border-top: 1px solid rgb(27 43 51 / 0.06);
-}
-
-.concierge-skeleton-feed-title {
-  width: 220px;
-  height: 14px;
-}
-
-.concierge-skeleton-feed-row {
-  width: 85%;
-  height: 12px;
 }
 
 /* ========================================================================

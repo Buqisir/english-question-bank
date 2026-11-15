@@ -19,9 +19,19 @@
  * 对卷面的一条建议，点了就采纳（草稿卷 A4 题组上方、A3 两面接缝上的「建议前置分页」）。不是主键，不抢墨：
  * 垫页面底色、次要灰字带下划线、字小一档（12），字重常规；悬停和别的透明底键一样垫桌色、字提到墨色。
  * 「已采纳」没有这个键的样子：采纳以后键自己消失，结果是纸上的分页线（DESIGN.md §5「提议和决定」）。
+ *
+ * busy「正在做」（2026-11-15 接上等待构件，DESIGN.md §5「Waiting 等待」；设计记录 design/components-2026-11-13/migrate-waiting/README.md）：
+ * - 一按下 busy 就点了不再触发、读屏念「忙」（aria-busy），这两样不等门槛。
+ * - 看得见的样子走 useDelayedBusy 的门槛：等不到 300ms 什么都不变；出了至少留 500ms。
+ * - 宽度不变。有图标的键：图标换成所以点（叠在图标原来的位置上，图标只是隐去）；只有字的键：字隐去（opacity，不改宽），
+ *   所以点放在键正中。做完了所以点浮回 ∴、隐去，字和图标回来。
+ * - 图标自己会演「正在做」的（DownloadFeedbackIcon 这种），调用处加 iconShowsBusy：busy 时不换所以点，图标照旧自己演。
+ * - 所以宽度不变，调用处在 busy 时不要换键上的字（原来的「删除中…」「加入中…」这类都已改回原字）。
  */
 
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, MouseEvent, ReactNode, Ref } from 'react'
+import { WaitDots } from './WaitDots.tsx'
+import { useDelayedBusy } from './useDelayedBusy.ts'
 import './button.css'
 
 export type ButtonTone = 'quiet' | 'subtle' | 'strong' | 'primary' | 'solid' | 'danger' | 'suggest'
@@ -36,8 +46,10 @@ type ButtonBaseProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children' 
   size?: ButtonSize
   /** 放在字前面的图标，用 app/src/icons 里的图标。 */
   icon?: ReactNode
-  /** 正在做：按钮保持原样大小，点了不再触发，读屏念「忙」。 */
+  /** 正在做：按钮保持原样大小，点了不再触发，读屏念「忙」；过了 300ms 门槛，图标（没有图标时是字）换成所以点。 */
   busy?: boolean
+  /** 图标自己会演「正在做」（比如 DownloadFeedbackIcon 的 working）：busy 时不换成所以点，让图标自己演。 */
+  iconShowsBusy?: boolean
   ref?: Ref<HTMLButtonElement>
 }
 
@@ -52,6 +64,7 @@ export function Button({
   size = 'md',
   icon,
   busy = false,
+  iconShowsBusy = false,
   label,
   children,
   type = 'button',
@@ -61,6 +74,9 @@ export function Button({
   ...rest
 }: ButtonProps) {
   const iconOnly = children === undefined || children === null
+  const waitPhase = useDelayedBusy(busy && !iconShowsBusy)
+  const waiting = waitPhase !== 'idle'
+  const dots = waiting ? <WaitDots active={waitPhase === 'waiting'} /> : null
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (busy) {
       event.preventDefault()
@@ -79,11 +95,15 @@ export function Button({
       aria-label={iconOnly ? label : undefined}
       aria-busy={busy || undefined}
       aria-disabled={busy || undefined}
+      data-wait={waiting ? waitPhase : undefined}
       onClick={handleClick}
       {...rest}
     >
-      {icon}
+      {/* 等的时候图标换成所以点：图标留在原位只是隐去，所以点叠在它正中，宽度不变。 */}
+      {waiting && icon ? <span className="eqb-button-wait-icon">{icon}{dots}</span> : icon}
       {iconOnly ? null : <span className="eqb-button-label">{children}</span>}
+      {/* 只有字的键：字隐去，所以点放在键正中。 */}
+      {waiting && !icon ? <span className="eqb-button-wait-center">{dots}</span> : null}
     </button>
   )
 }

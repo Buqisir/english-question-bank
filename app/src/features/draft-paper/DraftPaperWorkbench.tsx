@@ -9,6 +9,7 @@ import { SelectField, TextField } from '../../shared-ui/Field.tsx'
 import { OptionSelectField, SegmentedField } from '../../shared-ui/OptionField.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { Toast } from '../../shared-ui/Toast.tsx'
+import { InlineWaitDots } from '../../shared-ui/WaitDots.tsx'
 import { planFocusAfterRemoval, programmaticFocusTarget } from '../../shared-ui/focusAfterRemoval.ts'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, GroupType, MySpaceFolder, QuestionGroupCard } from '../../domain/questionBank'
 import {
@@ -1615,7 +1616,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         <AppTopbar {...props.shellNav} pageTitle="草稿卷" onBack={onBackToWorkbench} />
         <main className="draft-workbench-shell">
           <div className="draft-notice-slot is-page">
-            <Notice kind="waiting" className="draft-loading">正在打开草稿卷…</Notice>
+            <Notice kind="waiting" className="draft-loading">正在打开草稿卷</Notice>
           </div>
         </main>
       </>
@@ -1743,6 +1744,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       pageStatus={
         <span className={`draft-save-status ${saveStatus}`} role="status" title={saveStatus === 'error' ? saveError : undefined}>
           {saveStatus === 'saving' ? '保存中' : saveStatus === 'error' ? '保存失败' : '已保存'}
+          <InlineWaitDots pending={saveStatus === 'saving'} />
         </span>
       }
       onBack={onBackToWorkbench}
@@ -1841,7 +1843,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               {exportError.lead}
             </Notice>
           ) : exportStatus === 'exporting' ? (
-            <Notice kind="waiting">正在生成 PDF…</Notice>
+            <Notice kind="waiting">正在生成 PDF</Notice>
           ) : exportStatus === 'exported' ? (
             <Notice kind="success" className="draft-success">{exportSuccessMessage}</Notice>
           ) : draftPaper.items.length === 0 ? (
@@ -1952,7 +1954,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                   <div className={`draft-a4-wait${previewStale ? ' is-waiting' : ''}`} hidden={!previewStale && !previewFailed}>
                     {/* 共用提示行的 over 放法（垫桌色、e1）；sticky 的位置仍由 .draft-a4-wait-line 给。 */}
                     {previewStale ? (
-                      <Notice kind="waiting" placement="over" className="draft-a4-wait-line">正在重排卷面，旧卷面先留着…</Notice>
+                      <Notice kind="waiting" placement="over" className="draft-a4-wait-line">正在重排卷面，旧卷面先留着</Notice>
                     ) : previewFailed && paginationError ? (
                       <Notice
                         kind="error"
@@ -1978,7 +1980,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       {paginationError.lead}
                     </Notice>
                   ) : (
-                    <Notice kind="waiting">正在生成分页预览…</Notice>
+                    <Notice kind="waiting">正在生成分页预览</Notice>
                   )}
                 </div>
               )}
@@ -2171,8 +2173,10 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         }}
         cancel={{ label: '取消' }}
         confirm={{
-          label: spaceStatus === 'saving' ? '保存中...' : '保存',
-          disabled: spaceStatus === 'saving' || draftPaper.items.length === 0,
+          // 保存中：键上的字不换、不变淡，用 Button busy（DESIGN.md §5 Waiting）。
+          label: '保存',
+          busy: spaceStatus === 'saving',
+          disabled: draftPaper.items.length === 0,
         }}
       >
         {/* 字段构件（shared-ui/Field.tsx）：三个都是大号 36，和旁边「新建」大号键同高。「新建文件夹」原来只有读屏标签，照旧 hideLabel。 */}
@@ -2203,7 +2207,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             新建
           </Button>
         </div>
-        {spaceStatus === 'loading' && <Notice kind="waiting" className="draft-dialog-note">正在读取文件夹…</Notice>}
+        {spaceStatus === 'loading' && <Notice kind="waiting" className="draft-dialog-note">正在读取文件夹</Notice>}
         {spaceStatus === 'error' && <Notice kind="error" className="draft-error">{spaceMessage}</Notice>}
       </Dialog>
     </div>

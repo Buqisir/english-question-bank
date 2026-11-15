@@ -58,7 +58,7 @@ export type DialogAction = {
   /** 取消键不给就是关上（onClose）。 */
   onClick?: () => void
   disabled?: boolean
-  /** 正在做：键保持原样大小，点了不再触发，读屏念「忙」。字由调用处换（「保存中…」）。 */
+  /** 正在做：键保持原样大小，点了不再触发，读屏念「忙」；过了 300ms 门槛字隐去、所以点放在正中。字不要换（宽度不变）。 */
   busy?: boolean
   /** 确认键：给了 onSubmit 时默认 submit，否则 button。 */
   type?: 'button' | 'submit'

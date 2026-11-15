@@ -22,6 +22,12 @@
   flex: 0 0 auto;
 }
 
+/* 等待那种：所以点跟在字后面（DESIGN.md §5「Waiting 等待」）。所以点的 24 格里左边自带约 3px 空，
+ * 再加整行 8px 间距会离字太远，收回 4px，看着像字后面打了个省略号（目测）。 */
+.eqb-notice > .eqb-wait-dots {
+  margin-left: calc(-1 * var(--eqb-space-1));
+}
+
 .eqb-notice[data-danger] {
   color: var(--eqb-color-danger-text);
 }

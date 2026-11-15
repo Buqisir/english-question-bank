@@ -7,6 +7,7 @@ import { CopyFeedbackIcon } from '../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../icons/motionInput'
 import { useClipboardCopy } from '../../../hooks/useClipboardCopy'
 import { Button } from '../../../shared-ui/Button.tsx'
+import { InlineWaitDots } from '../../../shared-ui/WaitDots.tsx'
 
 export type SelectionOverlayPhase = 'toolbar' | 'lookup' | 'loading' | 'result' | 'error' | 'dictionary' | 'sentence-analysis'
 
@@ -249,9 +250,10 @@ export function SelectionOverlay({
           {clipboard.error && <p className="paper-selection-card-error" role="alert">{clipboard.error}</p>}
 
           {phase === 'loading' ? (
+            // 等待构件（2026-11-15，DESIGN.md §5 Waiting）：原来字前面一个转圈，换成字后面跟所以点。
             <p className="paper-selection-card-status">
-              <span className="paper-selection-spinner" aria-hidden="true" />
-              <span>正在翻译…</span>
+              <span>正在翻译</span>
+              <InlineWaitDots pending />
             </p>
           ) : null}
 

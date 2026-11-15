@@ -4,7 +4,8 @@
  *
  * 照 BRAND.md §5.5「提议是轻的，决定是实的」和 DESIGN.md §5「Proposal → Decision」：
  * - 加入前：一个 Button，「加入草稿卷」（行上用紧凑档，只有加号，读屏名字「加入草稿卷」）。
- * - 加入中：同一个键上写「加入中…」，点了不再触发（Button 的 busy）。
+ * - 加入中：同一个键，字不换、宽度不变，点了不再触发、读屏念「忙」（Button 的 busy）；过了 300ms 门槛加号换成所以点
+ *   （DESIGN.md §5「Waiting 等待」，2026-11-15 起；原来是键上改写「加入中…」、紧凑档加入中展开成带字的键）。
  * - 加入后：键换成一块纸——白底、e1、墨字「已加入」（底、边、字三处一起变，不用薄荷绿、不加侧边线）。
  *   「已加入」是个链接（读屏名「已加入，打开草稿卷」），点了打开草稿卷工作台并定位到这一组
  *   （Owner 2026-11-14 第二轮：恢复改之前「再点一下」的去处）。去草稿卷是换地址（?view=draft-paper），所以用 <a>，
@@ -39,7 +40,7 @@ export type DraftAddButtonProps = {
   /** 加入前那个键的语气。详情页是那一页唯一的主键，用 primary；别处用 strong。 */
   tone?: ButtonTone
   size?: ButtonSize
-  /** 紧凑档：加入前只有加号（首页结果行）。加入中、加入后照样写字。 */
+  /** 紧凑档：加入前、加入中只有加号（首页结果行；加入中加号换成所以点）。加入后照样是「已加入」那块纸。 */
   compact?: boolean
   className?: string
 }
@@ -153,7 +154,7 @@ export function DraftAddButton({ target, tone = 'strong', size = 'md', compact =
             busy={busy === 'undoing'}
             onClick={() => void handleUndo()}
           >
-            {busy === 'undoing' ? '撤回中…' : '撤回'}
+            撤回
           </Button>
         )}
       </span>
@@ -164,7 +165,7 @@ export function DraftAddButton({ target, tone = 'strong', size = 'md', compact =
         暂不可组卷
       </Button>
     )
-  } else if (compact && busy !== 'adding') {
+  } else if (compact) {
     control = (
       <Button
         ref={mainRef}
@@ -173,6 +174,7 @@ export function DraftAddButton({ target, tone = 'strong', size = 'md', compact =
         icon={<Plus size={16} aria-hidden="true" />}
         label="加入草稿卷"
         title="加入草稿卷"
+        busy={busy === 'adding'}
         onClick={() => void handleAdd()}
       />
     )
@@ -186,7 +188,7 @@ export function DraftAddButton({ target, tone = 'strong', size = 'md', compact =
         busy={busy === 'adding'}
         onClick={() => void handleAdd()}
       >
-        {busy === 'adding' ? '加入中…' : '加入草稿卷'}
+        加入草稿卷
       </Button>
     )
   }

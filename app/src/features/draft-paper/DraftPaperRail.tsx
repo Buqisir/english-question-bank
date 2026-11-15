@@ -51,7 +51,7 @@ export function DraftPaperSwapDrawer(props: DraftPaperSwapDrawerProps): ReactNod
       </div>
       <p className="similar-passages-sub">{recipeSummary}</p>
 
-      {request.status === 'loading' && <Notice kind="waiting">加载中…</Notice>}
+      {request.status === 'loading' && <Notice kind="waiting">加载中</Notice>}
 
       {request.status === 'error' && (
         <Notice kind="error" className="similar-rail-error" action={{ label: '重试', onClick: onRetry }}>

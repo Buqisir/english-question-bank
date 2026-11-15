@@ -31,6 +31,7 @@ import { Notice } from '../shared-ui/Notice.tsx'
 import { EmptyState } from '../shared-ui/EmptyState.tsx'
 import { SearchField } from '../shared-ui/SearchField.tsx'
 import { RowList } from '../shared-ui/Row.tsx'
+import { Skeleton } from '../shared-ui/Skeleton.tsx'
 
 /** Fluid hover: an expanded paper row's open body still belongs to its head,
  *  so the highlight stays on that head instead of jumping to the next paper. */
@@ -148,6 +149,25 @@ const ALL_FILTER_DIMS = ['groupType', 'year', 'month', 'topicGroup', 'region', '
  * `isConfidentCandidate` / `WEAK_NOISE_FLOOR`). Feeds `pickResultsNoticeLine`
  * so the notice can say so plainly instead of implying a confident match.
  */
+// 灰块（shared-ui/Skeleton，2026-11-15 换掉原来的扫光，DESIGN.md §5 Waiting：所有灰块一起慢慢深浅）。
+// 尺寸照原来 App.css 里 .concierge-skeleton-chip / -feed-title / -feed-row 的数：芯片高 24、六个宽度错开；
+// 每组一行标题 220 × 14，两行正文 85% 和 60% × 12。外面的板和组的间距仍是 App.css 的 .concierge-skeleton-feed / -feed-group。
+const SKELETON_CHIP_WIDTHS = [76, 96, 64, 108, 84, 70]
+
+function SkeletonFeed() {
+  return (
+    <div className="concierge-skeleton-feed" aria-hidden="true">
+      {[0, 1, 2].map((index) => (
+        <div key={index} className="concierge-skeleton-feed-group">
+          <Skeleton width={220} height={14} />
+          <Skeleton width="85%" height={12} />
+          <Skeleton width="60%" height={12} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
 function isAllWeakResultsState(
   state: ConciergeRetrievalView['state'],
 ): state is Extract<ConciergeRetrievalView['state'], { kind: 'results' }> {
@@ -767,19 +787,11 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
               placeholders (aria-hidden) so the first paint isn't a blank
               page while the local SQLite connects. */}
           <ul className="concierge-skeleton-chip-row" aria-hidden="true">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <li key={index} className="concierge-skeleton-chip" />
+            {SKELETON_CHIP_WIDTHS.map((width, index) => (
+              <li key={index}><Skeleton shape="pill" width={width} height={24} /></li>
             ))}
           </ul>
-          <div className="concierge-skeleton-feed" aria-hidden="true">
-            {Array.from({ length: 3 }).map((_, index) => (
-              <div key={index} className="concierge-skeleton-feed-group">
-                <div className="concierge-skeleton-line concierge-skeleton-feed-title" />
-                <div className="concierge-skeleton-line concierge-skeleton-feed-row" />
-                <div className="concierge-skeleton-line concierge-skeleton-feed-row short" />
-              </div>
-            ))}
-          </div>
+          <SkeletonFeed />
         </>
       )}
 
@@ -901,7 +913,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       <div className="concierge-results" aria-live="polite">
         {state.kind === 'loading' && (
           <>
-            <Notice kind="waiting" className="concierge-loading">{`正在为「${state.query}」找题…`}</Notice>
+            <Notice kind="waiting" className="concierge-loading">{`正在为「${state.query}」找题`}</Notice>
             {/* ui-p1-panels #7 — 找题主面状态三缺: an AI search in flight
                 used to blank straight to this one line with nothing else
                 on screen (audit 62 "取题中整屏白屏"). Reuse the same
@@ -910,15 +922,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 idiom — verify-home-default-feed.mjs locks the feed block
                 itself to `showFeed` only, so this is a sibling skeleton,
                 not a faded copy of the feed. */}
-            <div className="concierge-skeleton-feed" aria-hidden="true">
-              {Array.from({ length: 3 }).map((_, index) => (
-                <div key={index} className="concierge-skeleton-feed-group">
-                  <div className="concierge-skeleton-line concierge-skeleton-feed-title" />
-                  <div className="concierge-skeleton-line concierge-skeleton-feed-row" />
-                  <div className="concierge-skeleton-line concierge-skeleton-feed-row short" />
-                </div>
-              ))}
-            </div>
+            <SkeletonFeed />
           </>
         )}
 

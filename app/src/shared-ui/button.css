@@ -210,6 +210,47 @@
   cursor: progress;
 }
 
+/* 等的样子（DESIGN.md §5「Waiting 等待」，2026-11-15）：Button 用 useDelayedBusy 过了门槛才挂 data-wait，
+ * 值是 waiting（在等）/ settling（所以点浮回 ∴）/ leaving（所以点隐去、字和图标回来）。宽度一律不变。 */
+
+/* 字和图标隐去、回来都走同一个淡入淡出。 */
+.eqb-button-label,
+.eqb-button-wait-icon > :not(.eqb-wait-dots) {
+  transition: opacity var(--motion-fast) var(--ease-hover);
+}
+
+/* 有图标的键：图标留在原位只隐去，所以点叠在图标正中（图标是 12 / 14px 时所以点照样 16px，往外多出一点，不撑宽）。 */
+.eqb-button-wait-icon {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.eqb-button-wait-icon > .eqb-wait-dots {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 只有字的键：所以点放在键正中，不接鼠标（点的还是键）。 */
+.eqb-button-wait-center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.eqb-button:is([data-wait='waiting'], [data-wait='settling']) .eqb-button-wait-icon > :not(.eqb-wait-dots),
+.eqb-button:is([data-wait='waiting'], [data-wait='settling']):not(:has(.eqb-button-wait-icon)) .eqb-button-label {
+  opacity: 0;
+}
+
+.eqb-button[data-wait='leaving'] .eqb-wait-dots {
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .eqb-button {
     transition: background-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);

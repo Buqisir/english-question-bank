@@ -193,7 +193,7 @@ export function VocabularyNotebookPage({
         <PaperFontGate>
           <main className="notebook-desk">
             {error ? <Notice kind="error" className="notebook-status">{error}</Notice> : null}
-            {detail ? <NotebookSheet detail={detail} titles={titles} /> : <Notice kind="waiting" className="notebook-status">正在打开这张纸…</Notice>}
+            {detail ? <NotebookSheet detail={detail} titles={titles} /> : <Notice kind="waiting" className="notebook-status">正在打开这张纸</Notice>}
           </main>
         </PaperFontGate>
       ) : (

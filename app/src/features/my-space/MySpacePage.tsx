@@ -299,7 +299,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
             </div>
 
             {/* 读取中、读取失败两行换成共用 Notice（构件收尾，2026-11-15），字照原来。 */}
-            {loadState === 'loading' && <Notice kind="waiting" className="my-space-empty">正在读取个人空间…</Notice>}
+            {loadState === 'loading' && <Notice kind="waiting" className="my-space-empty">正在读取个人空间</Notice>}
             {loadState === 'error' && (
               <div className="my-space-empty-state">
                 <Notice kind="error" className="my-space-error">{message?.text || '个人空间读取失败。'}</Notice>

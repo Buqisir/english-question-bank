@@ -913,7 +913,9 @@ console.log('\nTest 19: cut a11y-concierge-three-gaps — focus-ring visibility 
   assert('reduced-motion does not use a global wildcard kill switch', !/@media \(prefers-reduced-motion: reduce\)\s*\{\s*\*,\s*\*::before,\s*\*::after/.test(css), '')
   assert('reduced-motion has no 0.01ms duration override', !/0\.01ms/.test(css), '')
   assert('reduced-motion removes group-card movement', /@media \(prefers-reduced-motion: reduce\)[\s\S]{0,1200}\.group-card\s*\{[^}]*animation:\s*none/.test(css), '')
-  assert('reduced-motion stops skeleton shimmer while keeping a static placeholder', /@media \(prefers-reduced-motion: reduce\)[\s\S]{0,1800}\.concierge-skeleton-line::after,[\s\S]{0,200}animation:\s*none/.test(css), '')
+  // 2026-11-15：首页灰块换成共用灰块 shared-ui/Skeleton（呼吸，不扫光），减少动态效果的规则跟着搬到 shared-ui/waiting.css。
+  const waitingCss = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'waiting.css'), 'utf8')
+  assert('reduced-motion stops skeleton breathing while keeping a static placeholder', /@media \(prefers-reduced-motion: reduce\)\s*\{\s*\.eqb-skeleton\s*\{\s*animation:\s*none/.test(waitingCss), '')
 
   // Keyboard-equivalent path contract: the expand button must keep aria-expanded.
   const expandButtonMatch = paperRow.match(/className=\{`concierge-row-expand[\s\S]*?<\/button>/)

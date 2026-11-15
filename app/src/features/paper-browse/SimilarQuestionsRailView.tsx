@@ -144,7 +144,7 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
         </p>
       )}
 
-      {request.status === 'loading' && <Notice kind="waiting">{`${headLabel}加载中…`}</Notice>}
+      {request.status === 'loading' && <Notice kind="waiting">{`${headLabel}加载中`}</Notice>}
 
       {request.status === 'error' && (
         <Notice kind="error" className="similar-rail-error" action={{ label: '重试', onClick: onRetry }}>

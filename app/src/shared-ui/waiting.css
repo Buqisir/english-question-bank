@@ -1,0 +1,61 @@
+/* 等待构件（DESIGN.md §5「Waiting 等待」，2026-11-15）：所以点 WaitDots.tsx、灰块 Skeleton.tsx。
+ * 颜色、圆角、过渡只用 tokens.css / App.css :root 里的变量。DESIGN 给定、全站 token 里没有的几个数
+ * （所以点 16px、灰块一呼一吸 1.8 秒、透明度 0.6）写成本文件里的具名变量，出处都是 DESIGN §5 Waiting。 */
+
+/* ── 所以点 ─────────────────────────────────────────── */
+
+.eqb-wait-dots {
+  /* 16px：DESIGN §5「所以点」，和行内图标同一档。 */
+  --eqb-wait-dots-size: 16px;
+  display: inline-block;
+  flex: none;
+  width: var(--eqb-wait-dots-size);
+  height: var(--eqb-wait-dots-size);
+  vertical-align: middle;
+  overflow: visible;
+  /* 隐去时（Button / Notice 的 leaving 那一段）淡出。 */
+  transition: opacity var(--motion-fast) var(--ease-hover);
+}
+
+/* InlineWaitDots 收尾时淡出。 */
+.eqb-wait-dots[data-leaving] {
+  opacity: 0;
+}
+
+/* 点画在 (0,0)，位置全靠 transform：translate 的单位是 24 格里的格（SVG 里 CSS px = 用户单位）。 */
+.eqb-wait-dots circle {
+  transform-box: view-box;
+  transform-origin: 0 0;
+}
+
+/* ── 灰块 ───────────────────────────────────────────── */
+
+.eqb-skeleton {
+  /* 1.8 秒一呼一吸、透明度 1 ↔ 0.6（DESIGN §5「灰块」）；曲线是正弦，和 icons/motionIcons.css 的 --ease-sine 同一条。 */
+  --eqb-skeleton-cycle: 1800ms;
+  --eqb-skeleton-low: 0.6;
+  --eqb-skeleton-ease: cubic-bezier(0.37, 0, 0.63, 1);
+  display: block;
+  flex: none;
+  max-width: 100%;
+  border-radius: var(--eqb-radius-badge);
+  background: var(--eqb-color-desk);
+  animation: eqb-skeleton-breathe var(--eqb-skeleton-cycle) var(--eqb-skeleton-ease) infinite;
+}
+
+/* 胶囊形的占位（筛选芯片那种标签）：照真东西的形状，圆角取胶囊。
+ * 覆盖：本条 (0,2,0) 盖过上面 .eqb-skeleton (0,1,0) 的圆角 4，因为占的是胶囊的位置。 */
+.eqb-skeleton[data-shape='pill'] {
+  border-radius: var(--eqb-radius-pill);
+}
+
+@keyframes eqb-skeleton-breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: var(--eqb-skeleton-low); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eqb-skeleton {
+    animation: none;
+  }
+}

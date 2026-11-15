@@ -402,7 +402,7 @@ function App() {
   }
 
   // 加入键（shared-ui/DraftAddButton）用的加入和撤回，走查第四节第 6 条。
-  // 和上面 addGroupsToBasket 不同：不先乐观翻状态，键上先写「加入中…」，服务器确认后才算加入，
+  // 和上面 addGroupsToBasket 不同：不先乐观翻状态，键先进 busy（所以点），服务器确认后才算加入，
   // 这样「已加入」和草稿丸的组数都是真的；失败不弹浏览器警告框，抛给加入键照登原话。
   async function addGroupToDraft(groupId: string): Promise<DraftAddReceipt> {
     const draftPaper = await addGroupToCurrentDraftPaperRequest(groupId)
@@ -1297,7 +1297,8 @@ function App() {
         }}
         cancel={{ label: '取消' }}
         confirm={{
-          label: deleteGroupBusy ? '删除中…' : '删除题组',
+          // 删的时候键上的字不换（宽度不变），过了 300ms 门槛字隐去、所以点放在正中（Button busy，DESIGN.md §5 Waiting）。
+          label: '删除题组',
           busy: deleteGroupBusy,
           className: 'question-group-delete-confirm',
           onClick: () => void confirmDeleteQuestionGroup(),

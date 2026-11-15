@@ -1568,7 +1568,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             {requestError && <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>}
           </section>
         ) : programLoadState === 'loading' || studentsState === 'loading' || runState === 'loading' ? (
-          <section className="vocabulary-run-setup"><Notice kind="waiting">正在读取过词进度…</Notice></section>
+          <section className="vocabulary-run-setup"><Notice kind="waiting">正在读取过词进度</Notice></section>
         ) : progressExplorerOpen && activeStudent ? (
           <div id="vocabulary-progress-explorer">
             <VocabularyProgressExplorer

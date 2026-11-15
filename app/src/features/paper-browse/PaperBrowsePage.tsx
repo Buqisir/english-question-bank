@@ -4084,6 +4084,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       <Button
         size="sm"
         busy={analysisPdfBusy}
+        // 图标自己演「正在做」（下载图标的箭头往复），不换成所以点（DESIGN.md §5 Waiting「图标自己演」）。
+        iconShowsBusy
         disabled={!pdfEdition}
         icon={<DownloadFeedbackIcon size={16} icon="paper" working={analysisPdfBusy} />}
         onClick={() => void downloadPaperProduct()}
@@ -4136,7 +4138,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       <div className="paper-browse-page">
         <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />
         <div className="paper-browse-loading">
-          <Notice kind="waiting">正在打开整卷…</Notice>
+          <Notice kind="waiting">正在打开整卷</Notice>
         </div>
       </div>
     )

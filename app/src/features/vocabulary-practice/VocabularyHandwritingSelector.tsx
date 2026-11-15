@@ -71,8 +71,10 @@ export function VocabularyHandwritingSelector({
         : '请至少选择 1 个单词。'}
       cancel={{ label: '取消' }}
       confirm={{
-        label: busy ? '正在生成…' : `生成 ${selectedCount} 词练字纸`,
-        disabled: busy || selectedCount === 0,
+        // 生成中：键上的字不换、不变淡，用 Button busy（DESIGN.md §5 Waiting）。
+        label: `生成 ${selectedCount} 词练字纸`,
+        busy,
+        disabled: selectedCount === 0,
         onClick: () => onConfirm(entries.filter((entry) => selectedIds.has(entry.id)).map((entry) => entry.id), mode),
       }}
     >

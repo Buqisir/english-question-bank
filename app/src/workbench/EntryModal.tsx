@@ -254,8 +254,9 @@ export function EntryModal({ open, mode, initialDetail, onClose, onSaved }: Entr
       onSubmit={handleEntrySubmit}
       cancel={{ label: '取消' }}
       confirm={{
-        label: entryStatus === 'saving' ? '保存中' : entryMode === 'edit' ? '保存修改' : '保存题组',
-        disabled: entryStatus === 'saving',
+        // 保存中：键上的字不换、不变淡，用 Button busy（DESIGN.md §5 Waiting）。
+        label: entryMode === 'edit' ? '保存修改' : '保存题组',
+        busy: entryStatus === 'saving',
       }}
     >
       {/* 字段构件第二轮（2026-11-15）：22 个字段从全站旧的 .field 表单样式换成 shared-ui/Field 大号（36），字、必填、类型都没改。
