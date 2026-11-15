@@ -44,6 +44,7 @@ import { buildPaperBrowseLectureHref } from '../../concierge/paperSurfaceHref'
 import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
 import { Menu } from '../../shared-ui/Menu.tsx'
 import { Chip } from '../../shared-ui/Chip.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
 import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import {
   SimilarPassagesPanel,
@@ -497,8 +498,8 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
         <Button className="detail-back" tone="subtle" size="sm" icon={<ArrowLeft size={16} aria-hidden="true" />} onClick={onBack}>
           返回找题
         </Button>
-        {detailStatus === 'loading' && <p className="detail-message">正在读取题组详情...</p>}
-        {detailStatus === 'error' && <p className="detail-message error">{detailError}</p>}
+        {detailStatus === 'loading' && <Notice kind="waiting" className="detail-message">正在读取题组详情...</Notice>}
+        {detailStatus === 'error' && <Notice kind="error" className="detail-message">{detailError}</Notice>}
       </div>
     )
   }
@@ -640,20 +641,21 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
           <div className="peek-paper-clip">
             {paperBody}
           </div>
+          {/* 「展开卷面 / 收起卷面」原来是手写的胶囊键（构件收尾 2026-11-15）：点了是动作，照 DESIGN.md
+              「胶囊只给标签类、有字的按钮一律 8px」归 Button（墨字中号 32）；浮在卷面上的白底、e2 在
+              QuestionGroupDetailView.css .eqb-button.peek-expand（和草稿丸一样的写法）。键盘焦点环、按下、悬停照 Button。 */}
           {load.status === 'ready' && !expanded && (
             <div className="peek-expand-wrap">
-              <button className="peek-expand" type="button" onClick={() => toggleExpanded(true)}>
-                <ChevronDown size={16} />
+              <Button tone="strong" className="peek-expand" icon={<ChevronDown size={16} />} onClick={() => toggleExpanded(true)}>
                 展开卷面
-              </button>
+              </Button>
             </div>
           )}
           {load.status === 'ready' && expanded && (
             <div className="peek-expand-sticky">
-              <button className="peek-expand peek-expand--collapse" type="button" onClick={() => toggleExpanded(false)}>
-                <ChevronUp size={16} />
+              <Button tone="strong" className="peek-expand peek-expand--collapse" icon={<ChevronUp size={16} />} onClick={() => toggleExpanded(false)}>
                 收起卷面
-              </button>
+              </Button>
             </div>
           )}
         </div>

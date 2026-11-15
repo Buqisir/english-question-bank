@@ -78,16 +78,20 @@
   white-space: nowrap;
 }
 
+/* 「保存中」原来用亮琥珀 --eqb-color-warning（#E8901A），12px 小字对页底只有 2.27:1，不过 WCAG AA。
+ * 构件收尾（2026-11-15）换成同色相深一档、给小字用的 --eqb-color-warning-text（#965A08，对页底 5.09:1），没新加颜色。 */
 .draft-save-status.saving {
-  color: var(--eqb-color-warning);
+  color: var(--eqb-color-warning-text);
 }
 
 .draft-save-status.saved {
   color: var(--muted);
 }
 
+/* 「保存失败」原来用 --eqb-color-danger（#DC2626），对页底 4.40:1，也差一点；同理换成给小字用的
+ * --eqb-color-danger-text（#CA2121，对页底 5.10:1，Owner 2026-11-14 决定 #9 定的危险小字色）。 */
 .draft-save-status.error {
-  color: var(--eqb-color-danger);
+  color: var(--eqb-color-danger-text);
 }
 
 /* 字段构件（2026-11-14）：「PDF 版本」「A4 / A3」换成 shared-ui/OptionField.tsx 的 OptionSelectField / SegmentedField，
@@ -323,6 +327,18 @@
 
 .draft-reorder-suggestion .draft-reorder-suggestion-undo:hover {
   color: var(--desk-ink);
+}
+
+/* 点击区域补到 24 高（WCAG 2.2 2.5.8，清点 button-14 量到 32×23；构件收尾 2026-11-15）：一块透明的 ::after
+ * 往不够 24 的方向伸（min(0px, 50% − 12px)，这里上下各 0.5px），样子不变。24px 没有变量，缺口见 docs/design-gaps.md。 */
+.draft-reorder-suggestion .draft-reorder-suggestion-undo {
+  position: relative;
+}
+
+.draft-reorder-suggestion .draft-reorder-suggestion-undo::after {
+  content: '';
+  position: absolute;
+  inset: min(0px, calc(50% - 12px));
 }
 
 .draft-reorder-suggestion button:focus-visible {
@@ -590,10 +606,13 @@
    centered on the paper column (the seam it sits on spans the full face
    width) instead of right-aligned in a per-group action column. */
 .draft-seam-suggestion {
-  /* 提议的样子，同 .draft-group-suggestion（Owner 2026-11-13 定）。 */
+  /* 提议的样子，同 .draft-group-suggestion（Owner 2026-11-13 定）。
+   * 圆角：原来是胶囊（999px）。它点了是插一个分页，是动作不是标签，照 DESIGN.md §5「胶囊只给标签类，
+   * 有文字的按钮一律 8px」改成 control 8，和 A4 那一枚 .draft-group-suggestion 一样（构件收尾 2026-11-15）。
+   * 没换成 Button：提议的样子（桌色底、弱墨下划线字、12 号以下）不在 Button 的几种语气里，见 migrate-finish/README.md。 */
   background: var(--desk-page);
   border: 1px solid transparent;
-  border-radius: 999px;
+  border-radius: var(--eqb-radius-control);
   color: var(--desk-muted);
   text-decoration: underline;
   text-underline-offset: 2px;

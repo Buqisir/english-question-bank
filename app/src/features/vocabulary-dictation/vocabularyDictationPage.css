@@ -212,8 +212,9 @@
   padding: 7px 12px;
   border: 0;
   /* 原来写的 var(--radius-pill) 从没定义过，圆角退回 0（底是透明的，看得出来的只有键盘焦点环是直角）。
-   * 胶囊第二轮（2026-11-14）换成圆角族的胶囊变量。 */
-  border-radius: var(--eqb-radius-pill);
+   * 胶囊第二轮（2026-11-14）换成圆角族的胶囊变量；构件收尾（2026-11-15）照「有文字的按钮一律 8px」改成 control 8。
+   * 底是透明的，看得出来的仍只有键盘焦点环的圆角。 */
+  border-radius: var(--eqb-radius-control);
   color: var(--ink-muted);
   background: transparent;
   display: inline-flex;

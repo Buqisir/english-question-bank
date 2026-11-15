@@ -46,15 +46,11 @@
   min-width: 0;
 }
 
-.paper-browse-export-error {
+/* 导出 PDF / 读字体失败那一行：构件收尾（2026-11-15）从红框红底换成共用 Notice（DESIGN.md §5：出错和说明同一种写法，
+ * 只有「没保存」「会丢东西」才上危险色；这里卷子没动、能再导，所以不上）。只留左右边距；
+ * 覆盖：.eqb-notice.paper-browse-export-error (0,2,0) 盖过 notice.css 的 margin: 0 (0,1,0)。 */
+.eqb-notice.paper-browse-export-error {
   margin: 0 24px;
-  padding: 8px 12px;
-  border: 1px solid var(--eqb-color-danger);
-  border-radius: 8px;
-  background: var(--eqb-color-danger-soft);
-  color: var(--eqb-color-danger);
-  font-size: 14px;
-  line-height: 1.5;
 }
 
 .paper-browse-shell {
@@ -1593,12 +1589,8 @@
   color: var(--desk-ink);
 }
 
-.similar-rail-error {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-}
+/* 相似题 / 相似篇章出错那一行（.similar-rail-error）构件收尾（2026-11-15）换成共用 Notice：
+ * 图标、一行字、行尾「重试」，排布全归 notice.css；原来竖排（字一行、键一行）的这条删了。类名留着给脚本认。 */
 
 .similar-rcard-list {
   --fh-radius: 8px;
@@ -1768,11 +1760,12 @@
 }
 
 /* Owner 2026-11-14 第 20 条：相似篇章面板出错时的「重试」（A1 README 第 5 节第 3 问说的那个键）悬停也垫桌色，
+ * 构件收尾（2026-11-15）这个键改由 Notice 的 action 画（类名 .eqb-notice-action，原来 .similar-btn），选择器跟着换，层级不变。
  * 和上一条「收起」同一个办法。首页的面板整个在 FluidHoverList 里、不在任何一行里，
  * 不加这条时归 button.css「.fluid-hover-list .eqb-button…:hover 透明」(0,5,0) 管，悬停什么都不变（改前实测）。
  * 详情页、草稿卷换篇栏的面板不在滑动列表里，本来就垫桌色，这条碰不到它们。
  * 覆盖：本条 (0,7,0) 盖过那条透明 (0,5,0)，也盖过「嵌在被选中行里的键垫 border 色」(0,6,0)（面板不在行里，碰不上）。 */
-.fluid-hover-list .similar-passages-panel .similar-rail-error > .eqb-button.similar-btn:hover:not(:disabled, [aria-disabled='true']) {
+.fluid-hover-list .similar-passages-panel .similar-rail-error > .eqb-button.eqb-notice-action:hover:not(:disabled, [aria-disabled='true']) {
   background: var(--eqb-color-desk);
 }
 

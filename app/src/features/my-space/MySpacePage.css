@@ -36,9 +36,9 @@
   margin: 4px 0 0;
 }
 
-.my-space-message {
-  color: var(--eqb-color-text-muted);
-  font-size: 13px;
+/* 页面提示行换成共用 Notice（构件收尾，2026-11-15）：字色、字号、图标、行高在 shared-ui/notice.css，这里只留位置。
+ * 覆盖：本条 (0,2,0) 盖过 notice.css .eqb-notice (0,1,0) 的 margin: 0，因为位置由放它的那一处给（和原来一样对齐右栏）。 */
+.eqb-notice.my-space-message {
   margin: 14px 0 -10px 228px;
 }
 
@@ -219,15 +219,13 @@ button.my-space-folder-button { cursor: pointer; }
   outline-offset: 2px;
 }
 
-.my-space-empty,
-.my-space-error {
-  color: var(--eqb-color-text-muted);
-  font-size: 13px;
-  line-height: 1.5;
+/* 「正在读取个人空间…」「个人空间读取失败」换成共用 Notice（构件收尾，2026-11-15），字色、字号在 notice.css；
+ * 原来 .my-space-empty / .my-space-error 的字色、字号两条删了（读取失败原来是亮红字，照 DESIGN.md Notices
+ * 「只有没保存、会丢东西才上危险色」改成次要灰加图标）。这里只留读取中那一行离上面的距离。
+ * 覆盖：本条 (0,2,0) 盖过 notice.css .eqb-notice (0,1,0) 的 margin: 0。 */
+.eqb-notice.my-space-empty {
   margin: 26px 0 0;
 }
-
-.my-space-error { color: var(--eqb-color-danger); margin: 0; }
 
 /* 出错态（「个人空间读取失败」加「重新加载」）还用这一块排版。空态换成了共用的 EmptyState（见下面
  * .my-space-empty-placed），原来的 .my-space-empty-state .my-space-empty 一条随之删掉。 */
@@ -265,7 +263,7 @@ button.my-space-folder-button { cursor: pointer; }
   .my-space-page > .topbar,
   .my-space-shell { padding-inline: 20px; }
   .my-space-shell { padding-top: 24px; }
-  .my-space-message { margin-left: 0; }
+  .eqb-notice.my-space-message { margin-left: 0; }
   .my-space-workspace { gap: 20px; grid-template-columns: minmax(0, 1fr); margin-top: 22px; }
   .my-space-rail { min-height: 0; padding: 8px; }
   .my-space-folders { display: flex; overflow-x: auto; padding-bottom: 2px; }

@@ -7,14 +7,17 @@
   color: var(--eqb-color-text);
 }
 
-.dictation-workbench button,
-.dictation-workbench input,
-.dictation-workbench select,
-.dictation-workbench textarea {
+/* 页面自己的键和输入框继承页面字体。外层包一层 :where()，让这两条的权重降到只算元素 (0,0,1)，
+ * 不再盖过共用构件（.eqb-button 等，(0,1,0)）自己的字号和颜色。
+ * 不包的话，确认框（共用 Dialog，挂在本页里面）的键会被撑成 16px，和别处 13px 的对话框键不一样大（协调人复核 2026-11-15）。 */
+:where(.dictation-workbench) button,
+:where(.dictation-workbench) input,
+:where(.dictation-workbench) select,
+:where(.dictation-workbench) textarea {
   font: inherit;
 }
 
-.dictation-workbench button {
+:where(.dictation-workbench) button {
   color: inherit;
 }
 

@@ -251,7 +251,8 @@ const ROW_MENU = '.concierge-group-row-menu-trigger'
 const MENU = '.eqb-menu'
 const MENU_ITEMS = '.eqb-menu .eqb-menu-item'
 const PANEL = '.similar-passages-panel'
-const RETRY = `${PANEL} .similar-rail-error .similar-btn`
+// 构件收尾（2026-11-15）：出错行换成共用 Notice，「重试」由 Notice 的 action 画，类名从 .similar-btn 换成 .eqb-notice-action。
+const RETRY = `${PANEL} .similar-rail-error .eqb-notice-action`
 const OVERVIEW = '.paper-browse-reading-overview-toggle'
 const SEVEN = '.pi-seven-panel-actions'
 const DETAILS = '.pi-seven-details-toggle'

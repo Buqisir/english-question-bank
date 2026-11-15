@@ -112,7 +112,9 @@ const FILE_ROW = '.my-space-file-row'
 const FILE_KEYS = `${FILE_ROW}:first-of-type button`
 const MENU = '.eqb-menu'
 const MENU_ITEMS = '.eqb-menu .eqb-menu-item'
-const DIALOG_KEYS = '.my-space-confirm-actions > button'
+// 删除确认框 2026-11-14 换成共用 Dialog，原来的 .my-space-confirm-actions 没了；两个键现在在 Dialog 的动作区里
+// （<dialog class="eqb-dialog my-space-confirm-dialog"> 下的 .eqb-dialog-actions，「取消」在前、「删除 PDF」在后，顺序不变）。构件收尾 2026-11-15 改，没重跑。
+const DIALOG_KEYS = '.my-space-confirm-dialog .eqb-dialog-actions > button'
 const GROUP_MORE = '[aria-label="更多题组操作"][aria-haspopup]'
 
 const { chromium } = requireFromApp('playwright')

@@ -73,7 +73,7 @@
 }
 .agent-token-submit { border: 1px solid var(--eqb-color-border); }
 .agent-token-submit:disabled { color: var(--eqb-color-text-muted); }
-.agent-token-load-failed { display: flex; align-items: center; gap: 8px; }
+/* .agent-token-load-failed 的排布（字和「重试」一行）构件收尾（2026-11-15）归共用 Notice，这条删了。 */
 .agent-tokens input::placeholder { color: var(--eqb-color-text-muted); }
 .agent-tokens ul { list-style: none; padding: 0; margin: 16px 0 0; }
 .agent-tokens li { display: flex; gap: 16px; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--eqb-color-border-subtle); }

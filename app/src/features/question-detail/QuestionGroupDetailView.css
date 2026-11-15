@@ -217,41 +217,28 @@
   z-index: 2;
 }
 
-.peek-expand {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  padding: 6px 14px;
-  border-radius: 999px;
+/* 「展开卷面 / 收起卷面」换成 shared-ui/Button（墨字中号 32，构件收尾 2026-11-15）：字 13/500、圆角 8、悬停桌色、
+ * 键盘焦点环、按下缩放都由 button.css 管。原来的胶囊（999px）、白底悬停变 surface-strong、手写的内边距删了，
+ * 键盘焦点原来是浏览器默认的细黑框，现在是 Button 的墨环。这里只留浮件该有的：白底、e2、一圈透明边、能点（外层 pointer-events: none）。
+ * 覆盖：本条 (0,2,0) 盖过 button.css .eqb-button (0,1,0) 的透明底和 0 边，因为它浮在卷面上，要像草稿丸一样是白件；
+ * 悬停的桌色底那条是 (0,4,0)，照旧赢过这里的白底。 */
+.eqb-button.peek-expand {
   border: 1px solid transparent;
-  background: #fff;
-  color: var(--ink);
-  cursor: pointer;
+  background: var(--eqb-color-paper);
   box-shadow: var(--elev-2);
   pointer-events: auto;
 }
 
+/* 居中用 translate 属性，不用 transform：Button 按下时把 transform 换成 scale(0.97)（button.css），
+ * 写在 transform 里的居中位移会被它顶掉，键一按就往右跳半个身子。两个属性各管各的，叠在一起生效。 */
 .peek-expand-sticky .peek-expand {
   position: absolute;
   left: 50%;
   bottom: 0;
-  transform: translateX(-50%);
+  translate: -50% 0;
 }
 
-.peek-expand svg {
-  flex: 0 0 16px;
-}
-
-.peek-expand:hover {
-  background: var(--surface-strong);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .peek-expand {
-    transition: none;
-  }
-}
+/* .peek-expand svg 的 flex、:hover 的 surface-strong 底、减少动态效果时去掉过渡三条删了：图标、悬停、减少动态效果都归 button.css。 */
 
 @media screen and (max-width: 640px) {
   .peek-meta-line {

@@ -2,6 +2,7 @@ import { ArrowDown, ArrowUp, Grip, Trash } from '../../icons'
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
 import { Chip } from '../../shared-ui/Chip.tsx'
 import { Surface } from '../../shared-ui/Surface.tsx'
 import { groupTypeLabel, type DraftPaperItem, type QuestionGroupCard } from '../../domain/questionBank'
@@ -49,15 +50,12 @@ export function DraftPaperSwapDrawer(props: DraftPaperSwapDrawerProps): ReactNod
       </div>
       <p className="similar-passages-sub">{recipeSummary}</p>
 
-      {request.status === 'loading' && <p className="paper-browse-lecture-empty">加载中…</p>}
+      {request.status === 'loading' && <Notice kind="waiting">加载中…</Notice>}
 
       {request.status === 'error' && (
-        <div className="similar-rail-error">
-          <p className="paper-browse-lecture-empty">{request.message}</p>
-          <Button tone="strong" size="sm" className="similar-btn" onClick={onRetry}>
-            重试
-          </Button>
-        </div>
+        <Notice kind="error" className="similar-rail-error" action={{ label: '重试', onClick: onRetry }}>
+          {request.message}
+        </Notice>
       )}
 
       {request.status === 'ready' && (

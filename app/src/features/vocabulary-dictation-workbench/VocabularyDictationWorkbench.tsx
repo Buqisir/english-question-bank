@@ -23,6 +23,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { EmptyState } from '../../shared-ui/EmptyState.tsx'
+import { Dialog } from '../../shared-ui/Dialog.tsx'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
   createVocabularyDictationTask,
@@ -76,6 +77,13 @@ type DictationTaskDateGroup = {
   dateKey: string
   tasks: VocabularyDictationTaskDto[]
 }
+
+// 两处原来用浏览器自带 window.confirm 问「继续吗？」的地方（构件收尾 2026-11-15）换成共用 Dialog：
+// 拆成几份听写、一次打印很多词。都不是删除，Deletion-Cost Rule 管不到；是「做之前先说一声代价」，
+// 用 dialog 语气（不是 alert），确认键写做什么（DESIGN.md §9 动作 = 动词 + 宾语）。
+type PendingDictationConfirm =
+  | { kind: 'split'; share: boolean; total: number; chunks: VocabularySetEntry[][] }
+  | { kind: 'print'; printKind: PrintKind; mode: FileSaveMode; rawCount: number }
 
 type HandwritingDownloadRequest = {
   mode: FileSaveMode
@@ -266,6 +274,12 @@ export function VocabularyDictationWorkbench({
   const [error, setError] = useState('')
   const [createdTasks, setCreatedTasks] = useState<VocabularyDictationTaskDto[]>([])
   const [handwritingDownloadRequest, setHandwritingDownloadRequest] = useState<HandwritingDownloadRequest | null>(null)
+  const [pendingConfirm, setPendingConfirm] = useState<PendingDictationConfirm | null>(null)
+  // 开关和内容分开：关上时只把 confirmOpen 置 false，pendingConfirm 留着，退场那 120ms 里标题、说明不会变成「拆成 0 份」，
+  // 关上后 returnFocus 也还认得这是哪一种（打印那种回到「打印资料」）。下次打开时整个换掉。
+  const [confirmOpen, setConfirmOpen] = useState(false)
+  // 打印的确认框是从「打印资料」下拉里的项打开的，打开时下拉已经收起、那一项看不见了；关上时焦点回到「打印资料」。
+  const printMenuSummaryRef = useRef<HTMLElement>(null)
   const [suggestionTarget, setSuggestionTarget] = useState(() => {
     const stored = Number(window.localStorage.getItem(SUGGESTION_TARGET_STORAGE_KEY))
     return Math.max(1, Math.min(60, stored || 20))
@@ -476,15 +490,25 @@ export function VocabularyDictationWorkbench({
     setCollectionTitle(defaultCollectionTitle(students.find((student) => student.id === studentId)?.displayName ?? '学生'))
   }
 
-  async function createTasks({ share }: { share: boolean }) {
+  function createTasks({ share }: { share: boolean }) {
     if (!activeStudent || !selectedSets.length) return
+    // 打乱、拆份在问之前做完，确认以后照这一份生成（和原来先拆再问一样）。
+    const ordered = shuffleBeforeFreeze ? shuffled(uniqueSelectedEntries) : uniqueSelectedEntries
+    const chunks = splitEvery(ordered, 60)
+    if (chunks.length > 1) {
+      setPendingConfirm({ kind: 'split', share, total: ordered.length, chunks })
+      setConfirmOpen(true)
+      return
+    }
+    void createTaskChunks({ share, chunks })
+  }
+
+  async function createTaskChunks({ share, chunks }: { share: boolean; chunks: VocabularySetEntry[][] }) {
+    if (!activeStudent) return
     setBusy(true)
     setError('')
     setMessage('')
     try {
-      const ordered = shuffleBeforeFreeze ? shuffled(uniqueSelectedEntries) : uniqueSelectedEntries
-      const chunks = splitEvery(ordered, 60)
-      if (chunks.length > 1 && !window.confirm(`共 ${ordered.length} 个去重词，将按冻结顺序拆成 ${chunks.length} 份。继续吗？`)) return
       const nextTasks: VocabularyDictationTaskDto[] = []
       for (const [index, chunk] of chunks.entries()) {
         const title = chunks.length > 1 ? `${taskTitle}（${index + 1}/${chunks.length}）` : taskTitle
@@ -793,7 +817,17 @@ export function VocabularyDictationWorkbench({
       })
       return
     }
-    if (rawSelectedCount > 120 && !window.confirm(`这次会打印 ${rawSelectedCount} 个原始词，页数较多。继续吗？`)) return
+    if (rawSelectedCount > 120) {
+      setPendingConfirm({ kind: 'print', printKind: kind, mode, rawCount: rawSelectedCount })
+      setConfirmOpen(true)
+      return
+    }
+    await downloadSelectedSets(kind, mode)
+  }
+
+  // 确认框里点「继续」也算一次用户操作，另存为要弹的选文件夹框照样能弹出来。
+  async function downloadSelectedSets(kind: PrintKind, mode: FileSaveMode) {
+    if (!activeStudent || !selectedSets.length) return
     const kindLabel: Record<PrintKind, string> = {
       cards: '单词卡',
       dictation: '听写纸',
@@ -1091,7 +1125,7 @@ export function VocabularyDictationWorkbench({
                 <div className="dictation-selection-actions">
                   <button type="button" onClick={() => setTab('meaning')}><Eye size={16} />开始认词</button>
                   <details>
-                    <summary><Printer size={16} />打印资料</summary>
+                    <summary ref={printMenuSummaryRef}><Printer size={16} />打印资料</summary>
                     <DownloadMenuItems>
                       <label><input type="radio" name="print-mode" checked={printMode === 'dedupe'} onChange={() => setPrintMode('dedupe')} />合并去重</label>
                       <label><input type="radio" name="print-mode" checked={printMode === 'grouped'} onChange={() => setPrintMode('grouped')} />按组装订</label>
@@ -1102,7 +1136,7 @@ export function VocabularyDictationWorkbench({
                       <DownloadOption label="下载全套" onDownload={() => void downloadSelectedSetsBundle()} onSaveAs={() => void downloadSelectedSetsBundle('save-as')}>下载全套（4份）</DownloadOption>
                     </DownloadMenuItems>
                   </details>
-                  <button type="button" onClick={() => void createTasks({ share: true })} disabled={busy}><QrCode size={16} />生成扫码听写</button>
+                  <button type="button" onClick={() => createTasks({ share: true })} disabled={busy}><QrCode size={16} />生成扫码听写</button>
                 </div>
               </aside>
             )}
@@ -1289,6 +1323,33 @@ export function VocabularyDictationWorkbench({
           </section>
         )}
       </main>
+
+      <Dialog
+        open={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        size="sm"
+        className="dictation-confirm-dialog"
+        // 标题点出要做的事，说明照原来 window.confirm 的整句。
+        title={pendingConfirm?.kind === 'print' ? `打印 ${pendingConfirm.rawCount} 个原始词` : `拆成 ${pendingConfirm?.kind === 'split' ? pendingConfirm.chunks.length : 0} 份听写`}
+        description={pendingConfirm?.kind === 'print'
+          ? `这次会打印 ${pendingConfirm.rawCount} 个原始词，页数较多。继续吗？`
+          : pendingConfirm?.kind === 'split'
+            ? `共 ${pendingConfirm.total} 个去重词，将按冻结顺序拆成 ${pendingConfirm.chunks.length} 份。继续吗？`
+            : ''}
+        // 打印那种是从「打印资料」菜单里的项打开的，菜单一关那一项就看不见了，焦点回到菜单的 summary；拆份那种回到「生成扫码听写」（默认）。
+        returnFocus={() => (pendingConfirm?.kind === 'print' ? printMenuSummaryRef.current : null)}
+        cancel={{ label: '取消' }}
+        confirm={{
+          label: pendingConfirm?.kind === 'print' ? '继续打印' : `生成 ${pendingConfirm?.kind === 'split' ? pendingConfirm.chunks.length : 0} 份听写`,
+          className: 'dictation-confirm-continue',
+          onClick: () => {
+            const request = pendingConfirm
+            setConfirmOpen(false)
+            if (request?.kind === 'split') void createTaskChunks({ share: request.share, chunks: request.chunks })
+            if (request?.kind === 'print') void downloadSelectedSets(request.printKind, request.mode)
+          },
+        }}
+      />
 
       {handwritingDownloadRequest && (
         <VocabularyHandwritingSelector

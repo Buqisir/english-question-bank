@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Dialog } from '../../shared-ui/Dialog.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
+import { planFocusAfterRemoval, programmaticFocusTarget } from '../../shared-ui/focusAfterRemoval.ts'
 import { Surface } from '../../shared-ui/Surface.tsx'
 import { errorFromResponse } from '../../services/httpClient'
 
@@ -24,6 +26,11 @@ export function AgentTokens() {
   const [loadFailed, setLoadFailed] = useState(false)
   const [loadAttempt, setLoadAttempt] = useState(0)
   const [revoking, setRevoking] = useState<AgentToken | null>(null)
+  // 作废以后这一行的「作废口令」键没了，焦点照 shared-ui/focusAfterRemoval.ts 的规则落到下一行 / 上一行的同一个键，
+  // 都没有就落到「Agent 口令」标题（构件收尾 2026-11-15）。取消、Esc 不走这条，回到打开它的键。
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const focusAfterRevokeRef = useRef<(() => HTMLElement | null) | null>(null)
+  const revokedRef = useRef(false)
   useEffect(() => {
     let active = true
     request().then(data => { if (active) { setTokens(data.tokens); setLoadFailed(false) } })
@@ -39,7 +46,7 @@ export function AgentTokens() {
     finally { setBusy(false) }
   }
   return <section className="agent-tokens" aria-labelledby="agent-tokens-heading">
-    <h2 id="agent-tokens-heading">Agent 口令</h2>
+    <h2 id="agent-tokens-heading" ref={headingRef}>Agent 口令</h2>
     <p>口令可只读访问已发布卷，包含来源答案。</p>
     <form onSubmit={event => {
       event.preventDefault()
@@ -64,14 +71,20 @@ export function AgentTokens() {
     </Surface>}
     <p role="alert" className="admin-backfill-error">{error}</p>
     <p role="status">{notice}</p>
-    {loading ? <p>加载中…</p> : loadFailed ? <p className="agent-token-load-failed">
-      口令列表没有加载出来。
-      <button type="button" className="ghost-button" onClick={() => { setLoading(true); setLoadAttempt(n => n + 1) }}>重试</button>
-    </p> : tokens.length === 0 ? <p>还没有口令。</p> :
-      <ul>{tokens.map(item => <li key={item.id}>
+    {/* 读取中、读取失败两行换成共用 Notice（构件收尾 2026-11-15），字没改；「重试」由 Notice 行尾的键画。 */}
+    {loading ? <Notice kind="waiting">加载中…</Notice> : loadFailed ? <Notice kind="error" className="agent-token-load-failed"
+      action={{ label: '重试', onClick: () => { setLoading(true); setLoadAttempt(n => n + 1) } }}>口令列表没有加载出来。</Notice> : tokens.length === 0 ? <p>还没有口令。</p> :
+      <ul>{tokens.map(item => <li key={item.id} data-token-id={item.id}>
         <div><strong>{item.name}</strong><span>{item.revokedAt ? '已作废' : '有效'}</span>
           <small>创建于 {new Date(item.createdAt).toLocaleDateString()} · {item.lastUsedAt ? `最近使用 ${new Date(item.lastUsedAt).toLocaleString()}` : '尚未使用'}</small></div>
-        {!item.revokedAt && <button type="button" className="ghost-button" disabled={busy} onClick={() => setRevoking(item)}>作废口令</button>}
+        {!item.revokedAt && <button type="button" className="ghost-button agent-token-revoke" disabled={busy} onClick={(event) => {
+          focusAfterRevokeRef.current = planFocusAfterRemoval(event.currentTarget, {
+            item: '.agent-tokens li', key: 'data-token-id', control: '.agent-token-revoke',
+            fallback: () => programmaticFocusTarget(headingRef.current),
+          })
+          revokedRef.current = false
+          setRevoking(item)
+        }}>作废口令</button>}
       </li>)}</ul>}
     {/* 作废确认：共用 Dialog 的 alert 语气（读屏 alertdialog、确认键危险字），见 design/components-2026-11-13/migrate-dialog/README.md。
       一直挂着、只切 open，退场动画播完再卸载；作废中（busy）Esc 和「保留口令」都不关。 */}
@@ -80,6 +93,7 @@ export function AgentTokens() {
       size="md"
       open={Boolean(revoking)}
       onClose={() => setRevoking(null)}
+      returnFocus={() => (revokedRef.current ? focusAfterRevokeRef.current?.() ?? null : null)}
       busy={busy}
       className="agent-token-dialog"
       title={`作废「${revoking?.name ?? ''}」？`}
@@ -93,6 +107,7 @@ export function AgentTokens() {
           void mutate(async () => {
             await request(`/${encodeURIComponent(revoking.id)}/revoke`, {})
             setTokens(current => current.map(item => item.id === revoking.id ? { ...item, revokedAt: new Date().toISOString() } : item))
+            revokedRef.current = true
             setRevoking(null); setSecret(''); setNotice(`已作废${revoking.name}`)
           })
         },

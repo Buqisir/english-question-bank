@@ -205,6 +205,15 @@
   color: var(--ink);
 }
 
+/* 点击区域补到 24 高（WCAG 2.2 2.5.8，清点 button-08 量到 111×18；构件收尾 2026-11-15）：上下各透明外扩 3px（(24 − 18) / 2），
+ * 用等量的负外边距抵掉，字的位置和样子不变（底是透明的）。不用 ::after 外扩：这个键要 overflow: hidden 打省略号，
+ * 伸到框外的伪元素点不到。代价是键盘焦点框跟着高 6px。24px 没有变量，缺口见 docs/design-gaps.md。
+ * 覆盖：本条和上面 .topbar-page-title-editable 同特指度 (0,1,0)，写在后面赢它的 padding: 0。 */
+.topbar-page-title-editable {
+  padding-block: 3px;
+  margin-block: -3px;
+}
+
 .topbar-page-title-pencil {
   flex-shrink: 0;
   opacity: 0;
@@ -581,14 +590,6 @@ button:disabled {
   margin-left: 0;
 }
 
-.version-toggle {
-  gap: 2px;
-  padding: 3px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--surface-strong);
-}
-
 .version-toggle button {
   min-height: 28px;
   border-radius: 4px;
@@ -633,12 +634,6 @@ button:disabled {
   color: var(--muted);
   font-size: 12px;
   font-weight: 700;
-}
-
-.source-line span {
-  padding: 3px 7px;
-  border-radius: 999px;
-  background: var(--surface-strong);
 }
 
 .group-card h3 {
@@ -796,33 +791,14 @@ button:disabled {
 /* 详情页「返回找题」原来的 .back-button 换成了 Button（构件厂第 4 步，2026-11-13），
  * 排布写在 QuestionGroupDetailView.css 的 .detail-view > .detail-back。 */
 
-.detail-message {
-  margin: 0;
-  padding: 14px;
-  border: 1px dashed var(--line-strong);
-  border-radius: 8px;
-  color: var(--muted);
-  background: var(--panel);
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.detail-message.error {
-  border-color: transparent;
-  color: var(--coral-text);
-  background: var(--coral-soft);
-}
+/* 详情页「正在读取题组详情」「读取失败」原来是 .detail-message 虚线框（出错时珊瑚底红字），
+ * 构件收尾（2026-11-15）换成共用 Notice（DESIGN.md §5「Notices 提示条」：一行灰字加图标，没有底和边），这里的样子删了。 */
 
 .reading-ai-actions {
   display: grid;
   grid-template-columns: minmax(0, 1fr) max-content;
   gap: 10px;
   align-items: stretch;
-}
-
-.reading-ai-actions .detail-message {
-  display: flex;
-  align-items: center;
 }
 
 .detail-hero,
@@ -1041,15 +1017,6 @@ button:disabled {
   gap: 7px;
 }
 
-.detail-facts span {
-  padding: 4px 8px;
-  border-radius: 999px;
-  color: var(--ink);
-  background: var(--surface-strong);
-  font-size: 12px;
-  font-weight: 800;
-}
-
 .passage-text {
   overflow: auto;
   max-height: 340px;
@@ -1115,15 +1082,6 @@ button:disabled {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-}
-
-.question-topline span {
-  padding: 3px 7px;
-  border-radius: 999px;
-  color: var(--muted);
-  background: var(--surface-strong);
-  font-size: 12px;
-  font-weight: 800;
 }
 
 .question-stem {
@@ -1323,12 +1281,6 @@ button:disabled {
   font-size: 11px;
 }
 
-.difficulty-profile-score em {
-  padding: 4px 7px;
-  border-radius: 999px;
-  background: var(--surface-strong);
-}
-
 .synonym-difficulty-card {
   display: grid;
   gap: 9px;
@@ -1390,13 +1342,6 @@ button:disabled {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-}
-
-.synonym-difficulty-flags span,
-.synonym-difficulty-flags strong {
-  padding: 4px 7px;
-  border-radius: 999px;
-  background: var(--surface-strong);
 }
 
 .synonym-difficulty-flags strong {
@@ -1482,22 +1427,6 @@ button:disabled {
   gap: 8px;
 }
 
-.analysis-disclosure-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  align-self: flex-start;
-  padding: 4px 10px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: color var(--motion-base) var(--ease-hover), background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover);
-}
-
 .analysis-disclosure-toggle:hover {
   color: var(--ink);
   background: var(--surface-strong);
@@ -1533,15 +1462,6 @@ button:disabled {
   flex-wrap: wrap;
   justify-content: center;
   gap: 7px;
-}
-
-.paper-meta span {
-  padding: 4px 8px;
-  border-radius: 999px;
-  color: var(--ink);
-  background: var(--surface-strong);
-  font-size: 12px;
-  font-weight: 800;
 }
 
 .paper-section {
@@ -1662,17 +1582,6 @@ button:disabled {
   color: var(--muted);
   font-size: 12px;
   font-weight: 800;
-}
-
-.saved-paper-heading strong {
-  display: grid;
-  place-items: center;
-  min-width: 26px;
-  height: 26px;
-  border-radius: 999px;
-  color: #ffffff;
-  background: var(--ink-strong);
-  font-size: 12px;
 }
 
 .saved-paper-note {
@@ -1859,19 +1768,6 @@ button:disabled {
   font-size: 12px;
   font-style: normal;
   font-weight: 700;
-}
-
-.bundle-status {
-  flex: 0 0 auto;
-  min-height: 26px;
-  padding: 5px 9px;
-  border-radius: 999px;
-  color: var(--ink);
-  background: var(--surface-strong);
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1.25;
-  white-space: nowrap;
 }
 
 .bundle-status.single_file_ready,
@@ -2219,13 +2115,6 @@ button:disabled {
   white-space: nowrap;
 }
 
-.draft-answer-badge,
-.draft-option-count {
-  padding: 3px 6px;
-  border-radius: 999px;
-  white-space: nowrap;
-}
-
 .draft-answer-badge {
   color: var(--mint-text);
   background: var(--mint-soft);
@@ -2481,15 +2370,6 @@ button:disabled {
   gap: 5px;
 }
 
-.calibration-reasons span {
-  padding: 3px 7px;
-  border-radius: 999px;
-  color: var(--muted);
-  background: var(--surface-strong);
-  font-size: 11px;
-  font-weight: 800;
-}
-
 /* Difficulty Review Panel */
 .difficulty-review-panel {
   display: grid;
@@ -2505,18 +2385,6 @@ button:disabled {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface-strong);
-}
-
-.difficulty-review-stats span {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: var(--surface);
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
 }
 
 .difficulty-review-stats span strong {
@@ -2567,14 +2435,6 @@ button:disabled {
   color: var(--muted);
   font-size: 11px;
   font-weight: 700;
-}
-
-.review-q-flag {
-  display: inline-flex;
-  padding: 2px 6px;
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 800;
 }
 
 .review-q-flag.high-ceiling {
@@ -2668,18 +2528,6 @@ button:disabled {
   gap: 6px;
 }
 
-.calibration-report-chips span {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: var(--surface-strong);
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 700;
-}
-
 .calibration-report-chips span strong {
   color: var(--ink-strong);
   font-size: 13px;
@@ -2728,16 +2576,6 @@ button:disabled {
 .calibration-report-watch-item span {
   color: var(--muted);
   font-weight: 700;
-}
-
-.calibration-report-watch-item em {
-  padding: 2px 6px;
-  border-radius: 999px;
-  background: var(--amber-soft);
-  color: var(--amber-text);
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 800;
 }
 
 /* Paper Blocks Outline */
@@ -3207,6 +3045,15 @@ button:disabled {
   .concierge-thinking-toggle input[type='checkbox']::before {
     transition: transform var(--motion-base) var(--ease-out);
   }
+}
+
+/* 点击区域补到 24 高（WCAG 2.2 2.5.8，清点 field-04 量到 32×18；构件收尾 2026-11-15）：开关的 ::before 是圆钮，
+ * 用 ::after 画一块透明的外扩，上下各伸 3px（min(0px, 50% − 12px) 算出来），样子不变；点在外扩上照样切换开关。
+ * 24px 没有变量，缺口见 docs/design-gaps.md。 */
+.concierge-thinking-toggle input[type='checkbox']::after {
+  content: '';
+  position: absolute;
+  inset: min(0px, calc(50% - 12px));
 }
 
 .concierge-thinking-toggle input[type='checkbox']:checked {
@@ -3822,10 +3669,11 @@ p.concierge-empty {
 
 /* ── 草稿丸：右下的浮件（胶囊构件那一批，2026-11-14） ─────────────
  * 键本身是 shared-ui/Button（墨字 strong；首页 lg 36，别的页 sm 28）：字 13/500、悬停垫桌色、键盘焦点环、按下缩放、
- * 禁用变淡都由 button.css 管。这里只留浮件该有的几样：钉在右下、白底、e2、一圈透明边、胶囊。
- * 胶囊：DESIGN.md §5 圆角细则「胶囊只给标签类……计数小牌（草稿丸）」点名了它，所以不照 Button 的 8px。
- * 覆盖：本条 (0,3,0) 盖过 button.css 的 .eqb-button (0,1,0) 的透明底、0 边、8px 圆角，和 .eqb-button[data-size='sm'] (0,2,0)
- * 的 8px 内边距（写成 [data-size] 多一档特指度，不靠两份 css 谁后加载），因为草稿丸是浮在内容上的白件，两头圆要多留点；
+ * 禁用变淡、圆角 8 都由 button.css 管。这里只留浮件该有的几样：钉在右下、白底、e2、一圈透明边。
+ * 圆角：原来是胶囊（999px）。DESIGN.md §5 圆角细则 2026-11-14 改成「草稿丸能点，算按钮，归 Button，用 8px」，
+ * 构件收尾（2026-11-15）照改，删掉这里的胶囊圆角，用 Button 自己的 --eqb-radius-control。
+ * 覆盖：本条 (0,3,0) 盖过 button.css 的 .eqb-button (0,1,0) 的透明底、0 边，和 .eqb-button[data-size='sm'] (0,2,0)
+ * 的 8px 内边距（写成 [data-size] 多一档特指度，不靠两份 css 谁后加载），因为草稿丸是浮在内容上的白件，左右多留点（照原来，没改）；
  * 悬停的桌色底那条是 (0,4,0)，照旧赢过这里的白底。 */
 .eqb-button.basket-chip[data-size] {
   position: fixed;
@@ -3835,7 +3683,6 @@ p.concierge-empty {
   gap: var(--eqb-space-2);
   padding: 0 var(--eqb-space-3);
   border: 1px solid transparent;
-  border-radius: var(--eqb-radius-pill);
   background: var(--eqb-color-paper);
   box-shadow: var(--elev-2);
 }
@@ -4110,6 +3957,15 @@ p.concierge-empty {
   background: var(--eqb-color-desk);
 }
 
+/* 悬停（构件收尾 2026-11-15）：静止已经垫桌色，Button 的悬停也是桌色，原来指上去一点变化都没有。照 Button 自己
+ * 「底已经是桌色时再深一档」的悬停（button.css 里键嵌在滑块行里那一条，垫 --eqb-color-border），字仍是墨。
+ * 墨字在 border 色上 11.5:1。键盘焦点照 Button 的墨环，不变。
+ * 覆盖：本条 (0,5,0) 盖过 button.css 墨字悬停那条 .eqb-button[data-tone='strong']:hover:not(…) (0,4,0) 的桌色底
+ * （多写一个 [data-tone]，不靠两份 css 谁后加载）。 */
+.eqb-button.concierge-active-filter-chip[data-tone]:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-border);
+}
+
 /* ── Intake batch panel: quiet variant aligned with the rest of the intake page ── */
 
 /* Group overflow line: "+N 更多" */
@@ -4147,6 +4003,19 @@ p.concierge-empty {
 .concierge-row-expand:hover {
   background: var(--desk-hover);
   color: var(--desk-ink);
+}
+
+/* 点击区域补到 24×24（WCAG 2.2 2.5.8，清点 button-21 量到 22×22；构件收尾 2026-11-15）：一块透明的 ::after 往四边各伸到
+ * 凑够 24（min(0px, 50% − 12px)：本身已经够 24 的那一边不伸），样子不变。键在卷行里，Row 已经给它 position: relative（row.css）。
+ * 24px 没有变量，缺口见 docs/design-gaps.md。 */
+.concierge-row-expand {
+  position: relative;
+}
+
+.concierge-row-expand::after {
+  content: '';
+  position: absolute;
+  inset: min(0px, calc(50% - 12px));
 }
 
 .concierge-row-expand:focus-visible {

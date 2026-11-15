@@ -39,6 +39,9 @@ import { VocabularyNotebookPage } from './features/vocabulary-notebook/Vocabular
 import { AppTopbar, type AppTopbarNav } from './components/AppTopbar'
 import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest, deleteDraftPaperItem, fetchCurrentDraftPaper } from './services/draftPapers'
 import { Button } from './shared-ui/Button.tsx'
+import { Dialog } from './shared-ui/Dialog.tsx'
+import { Notice } from './shared-ui/Notice.tsx'
+import { programmaticFocusTarget } from './shared-ui/focusAfterRemoval.ts'
 import { DraftAddContext, type DraftAddActions, type DraftAddReceipt } from './shared-ui/draftAddContext.ts'
 import { useCurrentUser, useIsOwnerView } from './auth/AuthGate.tsx'
 import { logout } from './auth/session.ts'
@@ -515,17 +518,43 @@ function App() {
     openDetailRef.current(groupId, { writeUrl: false })
   }, [])
 
-  async function handleDeleteQuestionGroup(detail: QuestionGroupDetail) {
+  // 删除题组：从题库删掉，不可恢复，也没有回收站，照 DESIGN.md Deletion-Cost Rule 用具名确认框（Dialog alert），
+  // 不改成即删撤销（构件收尾 2026-11-15，原来是浏览器自带的 window.confirm / window.alert）。
+  // 确认框一直挂着、只切 open（退场动画播完再卸载）；删除中 Esc、「取消」都不关；删不掉时框不关，出错写在框里。
+  const [deleteGroupTarget, setDeleteGroupTarget] = useState<QuestionGroupDetail | null>(null)
+  // 开关单独放：关上时 deleteGroupTarget 留着，退场那 120ms 里标题不会变成「删除「」？」；下次打开整个换掉。
+  const [deleteGroupOpen, setDeleteGroupOpen] = useState(false)
+  const [deleteGroupBusy, setDeleteGroupBusy] = useState(false)
+  const [deleteGroupError, setDeleteGroupError] = useState('')
+  // 删掉以后详情页没了，打开确认框的「更多操作」键也跟着没了：焦点落到回到的那一页（找题台的搜索框，没有就落到「题库取题流」那一块），
+  // 不掉到页面最外层（shared-ui/focusAfterRemoval.ts 规则第 3 条的变体：整页换了，落到新一页的开头）。
+  const deletedGroupRef = useRef(false)
+
+  function handleDeleteQuestionGroup(detail: QuestionGroupDetail) {
     if (!isOwnerView || !detail.canEdit) return
-    if (!window.confirm(`删除「${detail.title}」？题组会从题库和草稿卷里移除，不可恢复。`)) return
+    deletedGroupRef.current = false
+    setDeleteGroupError('')
+    setDeleteGroupTarget(detail)
+    setDeleteGroupOpen(true)
+  }
+
+  async function confirmDeleteQuestionGroup() {
+    const detail = deleteGroupTarget
+    if (!detail || deleteGroupBusy) return
+    setDeleteGroupBusy(true)
+    setDeleteGroupError('')
     try {
       await deleteQuestionGroupRequest(detail.id)
+      deletedGroupRef.current = true
       setQuestionGroups((groups) => groups.filter((group) => group.id !== detail.id))
       paperDraft.externalRemoveByGroupId(detail.id)
       setSelectedDetail(null)
+      setDeleteGroupOpen(false)
       backToList()
     } catch (error) {
-      window.alert(`删除失败：${error instanceof Error ? error.message : String(error)}`)
+      setDeleteGroupError(error instanceof Error ? error.message : String(error))
+    } finally {
+      setDeleteGroupBusy(false)
     }
   }
 
@@ -1227,7 +1256,7 @@ function App() {
 
       {!adminRouteActive && (
       // 草稿丸（清单 chip-03 / chip-04）：点了是去草稿卷，是按钮，所以用共用 Button（墨字 strong）；
-      // 浮在右下、白底、e2、胶囊这几样浮件的样子在 App.css .eqb-button.basket-chip。
+      // 浮在右下、白底、e2 这几样浮件的样子在 App.css .eqb-button.basket-chip；圆角随 Button 用 8px（构件收尾 2026-11-15：动作键不用胶囊）。
       // 首页（找题台，下面是 ConciergeDesk）用大号 36，别的页小号 28，和原来一样高。
       // 读屏名以看得见的字开头（Owner 2026-11-14 第 3 条），冒号后补上点了会怎样。
       <Button
@@ -1250,6 +1279,33 @@ function App() {
         {draftCountKnown ? `草稿卷（${currentDraftGroupCount} 组）` : '草稿卷'}
       </Button>
       )}
+
+      <Dialog
+        tone="alert"
+        open={deleteGroupOpen}
+        onClose={() => setDeleteGroupOpen(false)}
+        busy={deleteGroupBusy}
+        className="question-group-delete-dialog"
+        title={`删除「${deleteGroupTarget?.title ?? ''}」？`}
+        description="题组会从题库和草稿卷里移除，不可恢复。"
+        // 删掉以后回到找题台：落到它的搜索框（换前 window.confirm 时实测也落在这里，是那一页第一个能操作的东西）；
+        // 搜索框不在（或禁用）时落到「题库取题流」那一块。取消、Esc 回到「更多操作」（默认）。
+        returnFocus={() => {
+          if (!deletedGroupRef.current) return null
+          const search = document.querySelector<HTMLInputElement>('.concierge-desk .concierge-intent-input')
+          return search && !search.disabled ? search : programmaticFocusTarget(document.querySelector<HTMLElement>('.concierge-desk'))
+        }}
+        cancel={{ label: '取消' }}
+        confirm={{
+          label: deleteGroupBusy ? '删除中…' : '删除题组',
+          busy: deleteGroupBusy,
+          className: 'question-group-delete-confirm',
+          onClick: () => void confirmDeleteQuestionGroup(),
+        }}
+      >
+        {/* 原来删不掉时弹 window.alert「删除失败：…」，现在写在框里（共用 Notice，出错读屏马上念），字照原来。 */}
+        {deleteGroupError ? <Notice kind="error" detail={deleteGroupError}>删除失败</Notice> : null}
+      </Dialog>
 
       {isEntryOpen && (
         <EntryModal

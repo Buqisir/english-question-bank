@@ -107,3 +107,8 @@ token 的扩展用法。
 
 - **想要的值**：一是行的最小高 48（DESIGN.md §5 Rows）和卷行展开后题组行的 44，tokens.css 里没有行高一类。若收编，候选名 `--eqb-row-min-height`、`--eqb-row-min-height-sm`（44 要不要改 48 是另一件事，见 `design/components-2026-11-13/migrate-row-toast/README.md`「要 Owner 定的」）。二是卷行内衬 10 / 14：DESIGN.md §5 Rows 写的就是 10 / 14，但不在间距阶梯（4 / 8 / 12 / 16 / 24）上，§8 说存量半档不追改。若收编，候选名 `--eqb-row-padding-y`、`--eqb-row-padding-x`；首页行 12 / 16 已经在阶梯上，用的是 `--eqb-space-3` / `--eqb-space-4`。三是行的「按下」底色：DESIGN.md 只写了悬停垫 `--desk-hover`，没写按下；悬停已经是桌色，按下取深一档的 `--eqb-color-border`（`#dce6eb`，目测看得出、不跳）。若收编，候选名 `--eqb-color-row-pressed`。四是底部提示的层级 32：tokens.css 没有层级一类（菜单 70、对话框各自写）。原来草稿卷的提示在 30，整卷页相似题栏的提示抬到 32（整卷预览里有 30、31 层），收成一个件取 32。若收编，候选名 `--eqb-z-toast`。五是提示的最小高 28（等于小号键的高，原 notice.css 就是字面量）。若收编，候选名 `--eqb-control-height-sm`。
 - **临时方案**：一、二、五照原值写字面量（`min-height: 48px` / `44px`、`padding: 10px 14px`、`min-height: 28px`），注释写明出处；三用 `var(--eqb-color-border)`；四 `z-index: 32` 字面量，注释写明为什么是 32。记录在 `design/components-2026-11-13/migrate-row-toast/README.md`「缺的变量」。
+
+## 2026-11-15 最小点击区域 24 × 24（`app/src/App.css` `.concierge-row-expand::after`、`.concierge-thinking-toggle input[type='checkbox']::after`、`.topbar-page-title-editable`；`app/src/features/draft-paper/DraftPaperWorkbench.css` `.draft-reorder-suggestion-undo::after`）
+
+- **想要的值**：能点的东西至少 24 × 24（WCAG 2.2 目标尺寸最低档；构件清单 `design/components-2026-11-13/inventory.md` 的客观检查里有 5 处不到）。tokens.css 没有点击区域一类。若收编，候选名 `--eqb-target-min`（24px），外扩写成 `inset: min(0px, calc(50% - var(--eqb-target-min) / 2))`。
+- **临时方案**：看得见的样子不动，只把能点的范围透明外扩到 24：有定位的元素加 `::after { inset: min(0px, calc(50% - 12px)) }`（本来够大的那一边算出 0，不外扩）；顶栏可改名的卷名外面裹着 `overflow: hidden`，伪元素会被裁掉，改用上下各 3px 内边距加等量负外边距（字的位置不动，键盘焦点框高 6px）。12 写在注释里说明是 24 的一半。记录在 `design/components-2026-11-13/migrate-finish/README.md`「缺的变量」。

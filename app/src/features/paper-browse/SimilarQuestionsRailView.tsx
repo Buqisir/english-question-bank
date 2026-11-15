@@ -32,6 +32,7 @@
 import type { ReactNode } from 'react'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
 import { Toast } from '../../shared-ui/Toast.tsx'
 import { Chip } from '../../shared-ui/Chip.tsx'
 import { RotateCcw } from '../../icons'
@@ -143,15 +144,12 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
         </p>
       )}
 
-      {request.status === 'loading' && <p className="paper-browse-lecture-empty">{headLabel}加载中…</p>}
+      {request.status === 'loading' && <Notice kind="waiting">{`${headLabel}加载中…`}</Notice>}
 
       {request.status === 'error' && (
-        <div className="similar-rail-error">
-          <p className="paper-browse-lecture-empty">{request.message}</p>
-          <Button tone="strong" size="sm" className="similar-btn" onClick={onRetry}>
-            重试
-          </Button>
-        </div>
+        <Notice kind="error" className="similar-rail-error" action={{ label: '重试', onClick: onRetry }}>
+          {request.message}
+        </Notice>
       )}
 
       {request.status === 'ready' && (() => {

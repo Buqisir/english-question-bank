@@ -1,0 +1,1483 @@
+{
+ "pages": {
+  "admin-390.png": {
+   "same": false,
+   "size": "390x844",
+   "diff": 6,
+   "box": [
+    32,
+    389,
+    33,
+    391
+   ]
+  },
+  "admin.png": {
+   "same": false,
+   "size": "1440x900",
+   "diff": 6,
+   "box": [
+    292,
+    340,
+    293,
+    342
+   ]
+  },
+  "browse-390.png": {
+   "same": false,
+   "size": "390x844",
+   "diff": 924,
+   "box": [
+    205,
+    781,
+    370,
+    826
+   ]
+  },
+  "browse.png": {
+   "same": false,
+   "size": "1440x900",
+   "diff": 924,
+   "box": [
+    1255,
+    837,
+    1420,
+    882
+   ]
+  },
+  "detail-390.png": {
+   "same": false,
+   "size": "390x844",
+   "diff": 645,
+   "box": [
+    205,
+    789,
+    370,
+    826
+   ]
+  },
+  "detail.png": {
+   "same": false,
+   "size": "1440x900",
+   "diff": 645,
+   "box": [
+    1255,
+    845,
+    1420,
+    882
+   ]
+  },
+  "home-390.png": {
+   "same": false,
+   "size": "390x844",
+   "diff": 924,
+   "box": [
+    205,
+    781,
+    370,
+    826
+   ]
+  },
+  "home.png": {
+   "same": false,
+   "size": "1440x900",
+   "diff": 924,
+   "box": [
+    1255,
+    837,
+    1420,
+    882
+   ]
+  },
+  "login-390.png": {
+   "same": true,
+   "size": "390x844",
+   "diff": 0,
+   "box": null
+  },
+  "login.png": {
+   "same": true,
+   "size": "1440x900",
+   "diff": 0,
+   "box": null
+  },
+  "my-space-390.png": {
+   "same": true,
+   "size": "390x844",
+   "diff": 0,
+   "box": null
+  },
+  "my-space.png": {
+   "same": true,
+   "size": "1440x900",
+   "diff": 0,
+   "box": null
+  },
+  "paper-browse-390.png": {
+   "same": true,
+   "size": "390x844",
+   "diff": 0,
+   "box": null
+  },
+  "paper-browse.png": {
+   "same": true,
+   "size": "1440x900",
+   "diff": 0,
+   "box": null
+  },
+  "public-dictation-390.png": {
+   "same": true,
+   "size": "390x844",
+   "diff": 0,
+   "box": null
+  },
+  "public-dictation.png": {
+   "same": true,
+   "size": "1440x900",
+   "diff": 0,
+   "box": null
+  },
+  "vocab-dictation-390.png": {
+   "same": true,
+   "size": "390x844",
+   "diff": 0,
+   "box": null
+  },
+  "vocab-dictation.png": {
+   "same": true,
+   "size": "1440x900",
+   "diff": 0,
+   "box": null
+  },
+  "vocab-notebook-390.png": {
+   "same": true,
+   "size": "390x844",
+   "diff": 0,
+   "box": null
+  },
+  "vocab-notebook.png": {
+   "same": true,
+   "size": "1440x900",
+   "diff": 0,
+   "box": null
+  },
+  "vocab-practice-390.png": {
+   "same": true,
+   "size": "390x844",
+   "diff": 0,
+   "box": null
+  },
+  "vocab-practice.png": {
+   "same": true,
+   "size": "1440x900",
+   "diff": 0,
+   "box": null
+  },
+  "vocab-review-390.png": {
+   "same": true,
+   "size": "390x844",
+   "diff": 0,
+   "box": null
+  },
+  "vocab-review.png": {
+   "same": true,
+   "size": "1440x900",
+   "diff": 0,
+   "box": null
+  }
+ },
+ "keysBefore": {
+  "missing": [],
+  "nativeDialogs": [
+   {
+    "at": "dictation-390",
+    "type": "confirm",
+    "message": "共 130 个去重词，将按冻结顺序拆成 3 份。继续吗？",
+    "answer": "dismiss"
+   },
+   {
+    "at": "dictation-390",
+    "type": "confirm",
+    "message": "这次会打印 150 个原始词，页数较多。继续吗？",
+    "answer": "dismiss"
+   },
+   {
+    "at": "detail-delete-390",
+    "type": "confirm",
+    "message": "删除「Reading D」？题组会从题库和草稿卷里移除，不可恢复。",
+    "answer": "dismiss"
+   },
+   {
+    "at": "dictation",
+    "type": "confirm",
+    "message": "共 130 个去重词，将按冻结顺序拆成 3 份。继续吗？",
+    "answer": "dismiss"
+   },
+   {
+    "at": "dictation",
+    "type": "confirm",
+    "message": "这次会打印 150 个原始词，页数较多。继续吗？",
+    "answer": "dismiss"
+   },
+   {
+    "at": "detail-delete",
+    "type": "confirm",
+    "message": "删除「Reading D」？题组会从题库和草稿卷里移除，不可恢复。",
+    "answer": "dismiss"
+   },
+   {
+    "at": "detail-delete",
+    "type": "confirm",
+    "message": "删除「Reading D」？题组会从题库和草稿卷里移除，不可恢复。",
+    "answer": "accept"
+   }
+  ],
+  "pageErrors": [],
+  "draftItems": [
+   {
+    "id": "draft-item-30cfecb3-b4d0-4c7c-8e01-11f297d0ea8a",
+    "groupId": "group-2026-i-reading-a"
+   },
+   {
+    "id": "draft-item-779ef370-c3fc-4f40-a634-6bcfd0c6166b",
+    "groupId": "group-2026-i-reading-b"
+   },
+   {
+    "id": "draft-item-a0884762-cb6f-4e63-a7e3-f7cc7bcf7e7a",
+    "groupId": "group-2026-i-reading-c"
+   }
+  ],
+  "vocabSets": {
+   "student": "默认学生",
+   "made": [
+    "第一组 201",
+    "第二组 201",
+    "第三组 201"
+   ],
+   "taskStatus": 201,
+   "taskError": null,
+   "shareId": "GE0EgELONbuWsGJbF3Fl2T0tCIYba7N3"
+  },
+  "w390": {
+   "basketHome": {
+    "text": "草稿卷（3 组）",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(255, 255, 255)",
+    "radius": "999px",
+    "font": "13px/500",
+    "w": 155.6,
+    "h": 36
+   },
+   "rowExpandHit": {
+    "visible": "22×22",
+    "hit": "22×22",
+    "centerHits": true,
+    "blockedBy": [
+     "button.eqb-row-hit",
+     "button.eqb-row-hit"
+    ]
+   },
+   "thinkingHit": {
+    "visible": "342×22",
+    "hit": "80×21",
+    "centerHits": true,
+    "blockedBy": [
+     "form.eqb-search",
+     "div.concierge-stage-inner"
+    ]
+   },
+   "thinkingInputHit": {
+    "visible": "32×18",
+    "hit": "32×18",
+    "centerHits": true,
+    "blockedBy": [
+     "label.concierge-thinking-toggle",
+     "label.concierge-thinking-toggle"
+    ]
+   },
+   "activeFilterRest": {
+    "text": "题型：阅读理解 ×",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)",
+    "radius": "8px",
+    "font": "13px/500",
+    "w": 119.2,
+    "h": 28
+   },
+   "activeFilterHover": {
+    "text": "题型：阅读理解 ×",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)",
+    "radius": "8px",
+    "font": "13px/500",
+    "w": 119.2,
+    "h": 28
+   },
+   "backButton": {
+    "visible": "90×28",
+    "hit": "80×28",
+    "centerHits": true,
+    "blockedBy": [
+     "div.detail-view",
+     "div.detail-view"
+    ]
+   },
+   "peekExpand": {
+    "text": "展开卷面",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(255, 255, 255)",
+    "radius": "999px",
+    "font": "13px/400",
+    "w": 104,
+    "h": 32
+   },
+   "peekCollapse": {
+    "text": "收起卷面",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(255, 255, 255)",
+    "radius": "999px",
+    "font": "13px/400",
+    "w": 104,
+    "h": 32
+   },
+   "detailError": {
+    "role": null,
+    "text": "Question group not found"
+   },
+   "similarError": {
+    "role": null,
+    "text": "rig: unavailable 重试"
+   },
+   "draftItems": [
+    {
+     "id": "draft-item-30cfecb3-b4d0-4c7c-8e01-11f297d0ea8a",
+     "groupId": "group-2026-i-reading-a"
+    },
+    {
+     "id": "draft-item-779ef370-c3fc-4f40-a634-6bcfd0c6166b",
+     "groupId": "group-2026-i-reading-b"
+    },
+    {
+     "id": "draft-item-a0884762-cb6f-4e63-a7e3-f7cc7bcf7e7a",
+     "groupId": "group-2026-i-reading-c"
+    }
+   ],
+   "titleHit": {
+    "visible": "110.7×18",
+    "hit": "80×18",
+    "centerHits": true,
+    "blockedBy": [
+     "div.topbar-brand",
+     "div.topbar-brand"
+    ]
+   },
+   "saveSaved": {
+    "text": "已保存",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "0px",
+    "font": "12px/400",
+    "w": 36,
+    "h": 17
+   },
+   "saveSaving": {
+    "text": "保存中",
+    "color": "rgb(232, 144, 26)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "0px",
+    "font": "12px/400",
+    "w": 36,
+    "h": 17
+   },
+   "saveError": {
+    "text": "保存失败",
+    "color": "rgb(220, 38, 38)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "0px",
+    "font": "12px/400",
+    "w": 48,
+    "h": 17
+   },
+   "reorderUndoHit": {
+    "visible": "32×22.6",
+    "hit": "32×23",
+    "centerHits": true,
+    "blockedBy": [
+     "div.draft-reorder-suggestion-head",
+     "div.draft-reorder-suggestion-head"
+    ]
+   },
+   "swapAxe": {
+    "violations": [],
+    "passes": 0,
+    "names": []
+   },
+   "seam": {
+    "text": "跨页断篇（第1/2页） · 建议前置分页",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgb(241, 245, 247)",
+    "radius": "999px",
+    "font": "11.5px/400",
+    "w": 212.6,
+    "h": 25
+   },
+   "toast": {
+    "text": "题组已移出 撤销",
+    "role": "status",
+    "live": "polite",
+    "undo": true
+   },
+   "toastFocusAfterRemove": "body（焦点落空）",
+   "toastUndoTabs": 5,
+   "toastFocusAfterUndo": "button「更多题组操作」",
+   "spaceDeleteMiddle": {
+    "dialog": {
+     "role": "alertdialog",
+     "modal": true,
+     "name": "删除草稿卷 PDF",
+     "description": "删除「期中复习卷」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。",
+     "buttons": [
+      "取消",
+      "删除 PDF"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "focusAfterEsc": "button.my-space-row-menu-trigger「更多操作：期中复习卷」",
+    "tabsToConfirm": 1,
+    "focusAfterDelete": "body（焦点落空）",
+    "message": {
+     "text": "文件已删除。",
+     "role": "status"
+    }
+   },
+   "spaceDeleteLast": {
+    "dialog": {
+     "role": "alertdialog",
+     "modal": true,
+     "name": "删除草稿卷 PDF",
+     "description": "删除「期末冲刺卷」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。",
+     "buttons": [
+      "取消",
+      "删除 PDF"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "tabsToConfirm": 1,
+    "focusAfterDelete": "body（焦点落空）",
+    "message": {
+     "text": "文件已删除。",
+     "role": "status"
+    }
+   },
+   "spaceDeleteOnly": {
+    "dialog": {
+     "role": "alertdialog",
+     "modal": true,
+     "name": "删除草稿卷 PDF",
+     "description": "删除「一卷阅读 A 篇练习」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。",
+     "buttons": [
+      "取消",
+      "删除 PDF"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "tabsToConfirm": 1,
+    "focusAfterDelete": "body（焦点落空）",
+    "message": {
+     "text": "文件已删除。",
+     "role": "status"
+    }
+   },
+   "dictSplit": {
+    "dialog": null,
+    "focusOnOpen": "button「生成扫码听写」",
+    "focusAfterCancel": "button「生成扫码听写」"
+   },
+   "dictPrint": {
+    "dialog": null,
+    "focusOnOpen": "body（焦点落空）",
+    "focusAfterCancel": "body（焦点落空）"
+   },
+   "handwriting": {
+    "open": {
+     "role": "dialog",
+     "modal": true,
+     "name": "选择练字单词",
+     "description": "默认学生 · 生词合集 · 2026-11-15 · 保持原词序",
+     "buttons": [
+      "关闭练字单词选择",
+      "全选",
+      "清空",
+      "取消",
+      "生成 10 词练字纸"
+     ],
+     "focusInside": true
+    },
+    "afterBackdropClick": null
+   },
+   "replay": {
+    "text": "重播本题",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "999px",
+    "font": "16px/400",
+    "w": 110,
+    "h": 36
+   },
+   "groupDelete": {
+    "dialog": null,
+    "focusOnOpen": "button「更多操作」",
+    "focusAfterCancel": "button「更多操作」"
+   }
+  },
+  "w1440": {
+   "basketHome": {
+    "text": "草稿卷（3 组）",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(255, 255, 255)",
+    "radius": "999px",
+    "font": "13px/500",
+    "w": 155.6,
+    "h": 36
+   },
+   "rowExpandHit": {
+    "visible": "22×22",
+    "hit": "22×22",
+    "centerHits": true,
+    "blockedBy": [
+     "button.eqb-row-hit",
+     "button.eqb-row-hit"
+    ]
+   },
+   "thinkingHit": {
+    "visible": "856×22",
+    "hit": "80×21",
+    "centerHits": true,
+    "blockedBy": [
+     "form.eqb-search",
+     "div.concierge-stage-inner"
+    ]
+   },
+   "thinkingInputHit": {
+    "visible": "32×18",
+    "hit": "32×18",
+    "centerHits": true,
+    "blockedBy": [
+     "label.concierge-thinking-toggle",
+     "label.concierge-thinking-toggle"
+    ]
+   },
+   "activeFilterRest": {
+    "text": "题型：阅读理解 ×",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)",
+    "radius": "8px",
+    "font": "13px/500",
+    "w": 119.2,
+    "h": 28
+   },
+   "activeFilterHover": {
+    "text": "题型：阅读理解 ×",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)",
+    "radius": "8px",
+    "font": "13px/500",
+    "w": 119.2,
+    "h": 28
+   },
+   "backButton": {
+    "visible": "90×28",
+    "hit": "80×28",
+    "centerHits": true,
+    "blockedBy": [
+     "div.detail-view",
+     "div.detail-view"
+    ]
+   },
+   "peekExpand": {
+    "text": "展开卷面",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(255, 255, 255)",
+    "radius": "999px",
+    "font": "13px/400",
+    "w": 104,
+    "h": 32
+   },
+   "peekCollapse": {
+    "text": "收起卷面",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(255, 255, 255)",
+    "radius": "999px",
+    "font": "13px/400",
+    "w": 104,
+    "h": 32
+   },
+   "detailError": {
+    "role": null,
+    "text": "Question group not found"
+   },
+   "similarError": {
+    "role": null,
+    "text": "rig: unavailable 重试"
+   },
+   "draftItems": [
+    {
+     "id": "draft-item-d669317b-e2ba-4ed3-9518-a5dada4688d7",
+     "groupId": "group-2026-i-reading-a"
+    },
+    {
+     "id": "draft-item-a0884762-cb6f-4e63-a7e3-f7cc7bcf7e7a",
+     "groupId": "group-2026-i-reading-c"
+    },
+    {
+     "id": "draft-item-779ef370-c3fc-4f40-a634-6bcfd0c6166b",
+     "groupId": "group-2026-i-reading-b"
+    }
+   ],
+   "titleHit": {
+    "visible": "139.6×18",
+    "hit": "80×18",
+    "centerHits": true,
+    "blockedBy": [
+     "div.topbar-identity",
+     "div.topbar-identity"
+    ]
+   },
+   "saveSaved": {
+    "text": "已保存",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "0px",
+    "font": "12px/400",
+    "w": 36,
+    "h": 17
+   },
+   "saveSaving": {
+    "text": "保存中",
+    "color": "rgb(232, 144, 26)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "0px",
+    "font": "12px/400",
+    "w": 36,
+    "h": 17
+   },
+   "saveError": {
+    "text": "保存失败",
+    "color": "rgb(220, 38, 38)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "0px",
+    "font": "12px/400",
+    "w": 48,
+    "h": 17
+   },
+   "reorderUndoHit": {
+    "visible": "32×22.6",
+    "hit": "32×23",
+    "centerHits": true,
+    "blockedBy": [
+     "div.draft-reorder-suggestion-head",
+     "div.draft-reorder-suggestion-head"
+    ]
+   },
+   "swapAxe": {
+    "violations": [],
+    "passes": 0,
+    "names": [
+     "换篇：换一篇相似篇章",
+     "换篇：换一篇相似篇章"
+    ]
+   },
+   "seam": {
+    "text": "跨页断篇（第1/2页） · 建议前置分页",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgb(241, 245, 247)",
+    "radius": "999px",
+    "font": "11.5px/400",
+    "w": 212.6,
+    "h": 25
+   },
+   "toast": {
+    "text": "题组已移出 撤销",
+    "role": "status",
+    "live": "polite",
+    "undo": true
+   },
+   "toastFocusAfterRemove": "body（焦点落空）",
+   "toastUndoTabs": 5,
+   "toastFocusAfterUndo": "button「更多题组操作」",
+   "spaceDeleteMiddle": {
+    "dialog": {
+     "role": "alertdialog",
+     "modal": true,
+     "name": "删除草稿卷 PDF",
+     "description": "删除「期中复习卷」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。",
+     "buttons": [
+      "取消",
+      "删除 PDF"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "focusAfterEsc": "button.my-space-row-menu-trigger「更多操作：期中复习卷」",
+    "tabsToConfirm": 1,
+    "focusAfterDelete": "body（焦点落空）",
+    "message": {
+     "text": "文件已删除。",
+     "role": "status"
+    }
+   },
+   "spaceDeleteLast": {
+    "dialog": {
+     "role": "alertdialog",
+     "modal": true,
+     "name": "删除草稿卷 PDF",
+     "description": "删除「期末冲刺卷」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。",
+     "buttons": [
+      "取消",
+      "删除 PDF"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "tabsToConfirm": 1,
+    "focusAfterDelete": "body（焦点落空）",
+    "message": {
+     "text": "文件已删除。",
+     "role": "status"
+    }
+   },
+   "spaceDeleteOnly": {
+    "dialog": {
+     "role": "alertdialog",
+     "modal": true,
+     "name": "删除草稿卷 PDF",
+     "description": "删除「一卷阅读 A 篇练习」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。",
+     "buttons": [
+      "取消",
+      "删除 PDF"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "tabsToConfirm": 1,
+    "focusAfterDelete": "body（焦点落空）",
+    "message": {
+     "text": "文件已删除。",
+     "role": "status"
+    }
+   },
+   "dictSplit": {
+    "dialog": null,
+    "focusOnOpen": "button「生成扫码听写」",
+    "focusAfterCancel": "button「生成扫码听写」"
+   },
+   "dictPrint": {
+    "dialog": null,
+    "focusOnOpen": "body（焦点落空）",
+    "focusAfterCancel": "body（焦点落空）"
+   },
+   "handwriting": {
+    "open": {
+     "role": "dialog",
+     "modal": true,
+     "name": "选择练字单词",
+     "description": "默认学生 · 生词合集 · 2026-11-15 · 保持原词序",
+     "buttons": [
+      "关闭练字单词选择",
+      "全选",
+      "清空",
+      "取消",
+      "生成 10 词练字纸"
+     ],
+     "focusInside": true
+    },
+    "afterBackdropClick": null
+   },
+   "replay": {
+    "text": "重播本题",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "999px",
+    "font": "16px/400",
+    "w": 110,
+    "h": 68
+   },
+   "groupDelete": {
+    "dialog": null,
+    "focusOnOpen": "button「更多操作」",
+    "focusAfterCancel": "button「更多操作」",
+    "focusAfterDelete": "input.eqb-search-input.concierge-intent-input「」",
+    "urlAfterDelete": "/"
+   }
+  },
+  "note": "A3 建议前置分页两边整跑都没稳定拍到，另跑 FINISH_ONLY=draft,draft-a3 补拍并入（图和 seam 实算样式）"
+ },
+ "keysAfter": {
+  "missing": [
+   "draft-remove-toast: TimeoutError: locator.waitFor: Timeout 15000ms exceeded."
+  ],
+  "nativeDialogs": [],
+  "pageErrors": [],
+  "draftItems": [
+   {
+    "id": "draft-item-d1b83907-a692-4726-89f1-542cd8a83bf7",
+    "groupId": "group-2026-i-reading-a"
+   },
+   {
+    "id": "draft-item-623e323e-7eb1-4e97-9b8f-fb2ebbc33b8a",
+    "groupId": "group-2026-i-reading-b"
+   },
+   {
+    "id": "draft-item-906442bf-6124-4e30-82b9-2118b449c35c",
+    "groupId": "group-2026-i-reading-c"
+   }
+  ],
+  "vocabSets": {
+   "student": "默认学生",
+   "made": [
+    "第一组 201",
+    "第二组 201",
+    "第三组 201"
+   ],
+   "taskStatus": 201,
+   "taskError": null,
+   "shareId": "AGdzvzg5mu8JDGmyRErgki5-mr2TvoNX"
+  },
+  "w390": {
+   "basketHome": {
+    "text": "草稿卷（3 组）",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(255, 255, 255)",
+    "radius": "8px",
+    "font": "13px/500",
+    "w": 155.6,
+    "h": 36
+   },
+   "rowExpandHit": {
+    "visible": "22×22",
+    "hit": "24×24",
+    "centerHits": true,
+    "blockedBy": [
+     "button.eqb-row-hit",
+     "button.eqb-row-hit"
+    ]
+   },
+   "thinkingHit": {
+    "visible": "342×22",
+    "hit": "80×21",
+    "centerHits": true,
+    "blockedBy": [
+     "form.eqb-search",
+     "div.concierge-stage-inner"
+    ]
+   },
+   "thinkingInputHit": {
+    "visible": "32×18",
+    "hit": "32×22.5",
+    "centerHits": true,
+    "blockedBy": [
+     "form.eqb-search",
+     "button.eqb-button"
+    ]
+   },
+   "activeFilterRest": {
+    "text": "题型：阅读理解 ×",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)",
+    "radius": "8px",
+    "font": "13px/500",
+    "w": 119.2,
+    "h": 28
+   },
+   "activeFilterHover": {
+    "text": "题型：阅读理解 ×",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(220, 230, 235)",
+    "radius": "8px",
+    "font": "13px/500",
+    "w": 119.2,
+    "h": 28
+   },
+   "backButton": {
+    "visible": "90×28",
+    "hit": "80×28",
+    "centerHits": true,
+    "blockedBy": [
+     "div.detail-view",
+     "div.detail-view"
+    ]
+   },
+   "peekExpand": {
+    "text": "展开卷面",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(255, 255, 255)",
+    "radius": "8px",
+    "font": "13px/500",
+    "w": 100,
+    "h": 32
+   },
+   "peekCollapse": {
+    "text": "收起卷面",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(255, 255, 255)",
+    "radius": "8px",
+    "font": "13px/500",
+    "w": 100,
+    "h": 32
+   },
+   "detailError": {
+    "role": "alert",
+    "text": "Question group not found"
+   },
+   "similarError": {
+    "role": "alert",
+    "text": "rig: unavailable 重试"
+   },
+   "draftItems": [
+    {
+     "id": "draft-item-d1b83907-a692-4726-89f1-542cd8a83bf7",
+     "groupId": "group-2026-i-reading-a"
+    },
+    {
+     "id": "draft-item-623e323e-7eb1-4e97-9b8f-fb2ebbc33b8a",
+     "groupId": "group-2026-i-reading-b"
+    },
+    {
+     "id": "draft-item-906442bf-6124-4e30-82b9-2118b449c35c",
+     "groupId": "group-2026-i-reading-c"
+    }
+   ],
+   "titleHit": {
+    "visible": "110.7×24",
+    "hit": "80×24",
+    "centerHits": true,
+    "blockedBy": [
+     "div.topbar-brand",
+     "div.topbar-brand"
+    ]
+   },
+   "saveSaved": {
+    "text": "已保存",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "0px",
+    "font": "12px/400",
+    "w": 36,
+    "h": 17
+   },
+   "saveSaving": {
+    "text": "保存中",
+    "color": "rgb(150, 90, 8)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "0px",
+    "font": "12px/400",
+    "w": 36,
+    "h": 17
+   },
+   "saveError": {
+    "text": "保存失败",
+    "color": "rgb(202, 33, 33)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "0px",
+    "font": "12px/400",
+    "w": 48,
+    "h": 17
+   },
+   "reorderUndoHit": {
+    "visible": "32×22.6",
+    "hit": "32×24",
+    "centerHits": true,
+    "blockedBy": [
+     "div.draft-reorder-suggestion-head",
+     "div.draft-reorder-suggestion-head"
+    ]
+   },
+   "swapAxe": {
+    "violations": [],
+    "passes": 0,
+    "names": []
+   },
+   "toast": {
+    "text": "题组已移出 撤销",
+    "role": "status",
+    "live": "polite",
+    "undo": true
+   },
+   "toastFocusAfterRemove": "body（焦点落空）",
+   "toastUndoTabs": 5,
+   "toastFocusAfterUndo": "button「更多题组操作」",
+   "spaceDeleteMiddle": {
+    "dialog": {
+     "role": "alertdialog",
+     "modal": true,
+     "name": "删除草稿卷 PDF",
+     "description": "删除「期中复习卷」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。",
+     "buttons": [
+      "取消",
+      "删除 PDF"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "focusAfterEsc": "button.my-space-row-menu-trigger「更多操作：期中复习卷」",
+    "tabsToConfirm": 1,
+    "focusAfterDelete": "button.my-space-row-menu-trigger「更多操作：期末冲刺卷」",
+    "message": {
+     "text": "文件已删除。",
+     "role": "status"
+    }
+   },
+   "spaceDeleteLast": {
+    "dialog": {
+     "role": "alertdialog",
+     "modal": true,
+     "name": "删除草稿卷 PDF",
+     "description": "删除「期末冲刺卷」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。",
+     "buttons": [
+      "取消",
+      "删除 PDF"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "tabsToConfirm": 1,
+    "focusAfterDelete": "button.my-space-row-menu-trigger「更多操作：一卷阅读 A 篇练习」",
+    "message": {
+     "text": "文件已删除。",
+     "role": "status"
+    }
+   },
+   "spaceDeleteOnly": {
+    "dialog": {
+     "role": "alertdialog",
+     "modal": true,
+     "name": "删除草稿卷 PDF",
+     "description": "删除「一卷阅读 A 篇练习」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。",
+     "buttons": [
+      "取消",
+      "删除 PDF"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "tabsToConfirm": 1,
+    "focusAfterDelete": "h2「全部文件」",
+    "message": {
+     "text": "文件已删除。",
+     "role": "status"
+    }
+   },
+   "dictSplit": {
+    "dialog": {
+     "role": "dialog",
+     "modal": true,
+     "name": "拆成 3 份听写",
+     "description": "共 130 个去重词，将按冻结顺序拆成 3 份。继续吗？",
+     "buttons": [
+      "取消",
+      "生成 3 份听写"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "focusAfterCancel": "button「生成扫码听写」"
+   },
+   "dictPrint": {
+    "dialog": {
+     "role": "dialog",
+     "modal": true,
+     "name": "打印 150 个原始词",
+     "description": "这次会打印 150 个原始词，页数较多。继续吗？",
+     "buttons": [
+      "取消",
+      "继续打印"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "focusAfterCancel": "summary「打印资料」"
+   },
+   "handwriting": {
+    "open": {
+     "role": "dialog",
+     "modal": true,
+     "name": "选择练字单词",
+     "description": "默认学生 · 生词合集 · 2026-11-15 · 保持原词序",
+     "buttons": [
+      "关闭练字单词选择",
+      "全选",
+      "清空",
+      "取消",
+      "生成 10 词练字纸"
+     ],
+     "focusInside": true
+    },
+    "afterBackdropClick": {
+     "role": "dialog",
+     "modal": true,
+     "name": "选择练字单词",
+     "description": "默认学生 · 生词合集 · 2026-11-15 · 保持原词序",
+     "buttons": [
+      "关闭练字单词选择",
+      "全选",
+      "清空",
+      "取消",
+      "生成 10 词练字纸"
+     ],
+     "focusInside": true
+    }
+   },
+   "replay": {
+    "text": "重播本题",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "8px",
+    "font": "16px/400",
+    "w": 110,
+    "h": 36
+   },
+   "groupDelete": {
+    "dialog": {
+     "role": "alertdialog",
+     "modal": true,
+     "name": "删除「Reading D」？",
+     "description": "题组会从题库和草稿卷里移除，不可恢复。",
+     "buttons": [
+      "取消",
+      "删除题组"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "focusAfterCancel": "button「更多操作」"
+   },
+   "seam": {
+    "text": "跨页断篇（第1/2页） · 建议前置分页",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgb(241, 245, 247)",
+    "radius": "8px",
+    "font": "11.5px/400",
+    "w": 212.6,
+    "h": 25
+   }
+  },
+  "w1440": {
+   "basketHome": {
+    "text": "草稿卷（3 组）",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(255, 255, 255)",
+    "radius": "8px",
+    "font": "13px/500",
+    "w": 155.6,
+    "h": 36
+   },
+   "rowExpandHit": {
+    "visible": "22×22",
+    "hit": "24×24",
+    "centerHits": true,
+    "blockedBy": [
+     "button.eqb-row-hit",
+     "button.eqb-row-hit"
+    ]
+   },
+   "thinkingHit": {
+    "visible": "856×22",
+    "hit": "80×21",
+    "centerHits": true,
+    "blockedBy": [
+     "form.eqb-search",
+     "div.concierge-stage-inner"
+    ]
+   },
+   "thinkingInputHit": {
+    "visible": "32×18",
+    "hit": "32×22.5",
+    "centerHits": true,
+    "blockedBy": [
+     "form.eqb-search",
+     "button.eqb-button"
+    ]
+   },
+   "activeFilterRest": {
+    "text": "题型：阅读理解 ×",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)",
+    "radius": "8px",
+    "font": "13px/500",
+    "w": 119.2,
+    "h": 28
+   },
+   "activeFilterHover": {
+    "text": "题型：阅读理解 ×",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(220, 230, 235)",
+    "radius": "8px",
+    "font": "13px/500",
+    "w": 119.2,
+    "h": 28
+   },
+   "backButton": {
+    "visible": "90×28",
+    "hit": "80×28",
+    "centerHits": true,
+    "blockedBy": [
+     "div.detail-view",
+     "div.detail-view"
+    ]
+   },
+   "peekExpand": {
+    "text": "展开卷面",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(255, 255, 255)",
+    "radius": "8px",
+    "font": "13px/500",
+    "w": 100,
+    "h": 32
+   },
+   "peekCollapse": {
+    "text": "收起卷面",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(255, 255, 255)",
+    "radius": "8px",
+    "font": "13px/500",
+    "w": 100,
+    "h": 32
+   },
+   "detailError": {
+    "role": "alert",
+    "text": "Question group not found"
+   },
+   "similarError": {
+    "role": "alert",
+    "text": "rig: unavailable 重试"
+   },
+   "draftItems": [
+    {
+     "id": "draft-item-e050fa52-db54-4dbc-aa9d-59d236fea53c",
+     "groupId": "group-2026-i-reading-a"
+    },
+    {
+     "id": "draft-item-906442bf-6124-4e30-82b9-2118b449c35c",
+     "groupId": "group-2026-i-reading-c"
+    },
+    {
+     "id": "draft-item-623e323e-7eb1-4e97-9b8f-fb2ebbc33b8a",
+     "groupId": "group-2026-i-reading-b"
+    }
+   ],
+   "titleHit": {
+    "visible": "139.6×24",
+    "hit": "80×24",
+    "centerHits": true,
+    "blockedBy": [
+     "div.topbar-brand",
+     "div.topbar-brand"
+    ]
+   },
+   "saveSaved": {
+    "text": "已保存",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "0px",
+    "font": "12px/400",
+    "w": 36,
+    "h": 17
+   },
+   "saveSaving": {
+    "text": "保存中",
+    "color": "rgb(150, 90, 8)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "0px",
+    "font": "12px/400",
+    "w": 36,
+    "h": 17
+   },
+   "saveError": {
+    "text": "保存失败",
+    "color": "rgb(202, 33, 33)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "0px",
+    "font": "12px/400",
+    "w": 48,
+    "h": 17
+   },
+   "reorderUndoHit": {
+    "visible": "32×22.6",
+    "hit": "32×24",
+    "centerHits": true,
+    "blockedBy": [
+     "div.draft-reorder-suggestion-head",
+     "div.draft-reorder-suggestion-head"
+    ]
+   },
+   "swapAxe": {
+    "violations": [],
+    "passes": 0,
+    "names": [
+     "换篇：换一篇相似篇章",
+     "换篇：换一篇相似篇章"
+    ]
+   },
+   "spaceDeleteMiddle": {
+    "dialog": {
+     "role": "alertdialog",
+     "modal": true,
+     "name": "删除草稿卷 PDF",
+     "description": "删除「期中复习卷」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。",
+     "buttons": [
+      "取消",
+      "删除 PDF"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "focusAfterEsc": "button.my-space-row-menu-trigger「更多操作：期中复习卷」",
+    "tabsToConfirm": 1,
+    "focusAfterDelete": "button.my-space-row-menu-trigger「更多操作：期末冲刺卷」",
+    "message": {
+     "text": "文件已删除。",
+     "role": "status"
+    }
+   },
+   "spaceDeleteLast": {
+    "dialog": {
+     "role": "alertdialog",
+     "modal": true,
+     "name": "删除草稿卷 PDF",
+     "description": "删除「期末冲刺卷」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。",
+     "buttons": [
+      "取消",
+      "删除 PDF"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "tabsToConfirm": 1,
+    "focusAfterDelete": "button.my-space-row-menu-trigger「更多操作：一卷阅读 A 篇练习」",
+    "message": {
+     "text": "文件已删除。",
+     "role": "status"
+    }
+   },
+   "spaceDeleteOnly": {
+    "dialog": {
+     "role": "alertdialog",
+     "modal": true,
+     "name": "删除草稿卷 PDF",
+     "description": "删除「一卷阅读 A 篇练习」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。",
+     "buttons": [
+      "取消",
+      "删除 PDF"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "tabsToConfirm": 1,
+    "focusAfterDelete": "h2「全部文件」",
+    "message": {
+     "text": "文件已删除。",
+     "role": "status"
+    }
+   },
+   "dictSplit": {
+    "dialog": {
+     "role": "dialog",
+     "modal": true,
+     "name": "拆成 3 份听写",
+     "description": "共 130 个去重词，将按冻结顺序拆成 3 份。继续吗？",
+     "buttons": [
+      "取消",
+      "生成 3 份听写"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "focusAfterCancel": "button「生成扫码听写」"
+   },
+   "dictPrint": {
+    "dialog": {
+     "role": "dialog",
+     "modal": true,
+     "name": "打印 150 个原始词",
+     "description": "这次会打印 150 个原始词，页数较多。继续吗？",
+     "buttons": [
+      "取消",
+      "继续打印"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "focusAfterCancel": "summary「打印资料」"
+   },
+   "handwriting": {
+    "open": {
+     "role": "dialog",
+     "modal": true,
+     "name": "选择练字单词",
+     "description": "默认学生 · 生词合集 · 2026-11-15 · 保持原词序",
+     "buttons": [
+      "关闭练字单词选择",
+      "全选",
+      "清空",
+      "取消",
+      "生成 10 词练字纸"
+     ],
+     "focusInside": true
+    },
+    "afterBackdropClick": {
+     "role": "dialog",
+     "modal": true,
+     "name": "选择练字单词",
+     "description": "默认学生 · 生词合集 · 2026-11-15 · 保持原词序",
+     "buttons": [
+      "关闭练字单词选择",
+      "全选",
+      "清空",
+      "取消",
+      "生成 10 词练字纸"
+     ],
+     "focusInside": true
+    }
+   },
+   "replay": {
+    "text": "重播本题",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgba(0, 0, 0, 0)",
+    "radius": "8px",
+    "font": "16px/400",
+    "w": 110,
+    "h": 68
+   },
+   "groupDelete": {
+    "dialog": {
+     "role": "alertdialog",
+     "modal": true,
+     "name": "删除「Reading D」？",
+     "description": "题组会从题库和草稿卷里移除，不可恢复。",
+     "buttons": [
+      "取消",
+      "删除题组"
+     ],
+     "focusInside": true
+    },
+    "focusOnOpen": "button「取消」",
+    "focusAfterCancel": "button「更多操作」",
+    "tabsToConfirm": 1,
+    "focusAfterDelete": "input.eqb-search-input.concierge-intent-input「」",
+    "urlAfterDelete": "/"
+   },
+   "seam": {
+    "text": "跨页断篇（第1/2页） · 建议前置分页",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgb(241, 245, 247)",
+    "radius": "8px",
+    "font": "11.5px/400",
+    "w": 212.6,
+    "h": 25
+   }
+  },
+  "note": "A3 建议前置分页两边整跑都没稳定拍到，另跑 FINISH_ONLY=draft,draft-a3 补拍并入（图和 seam 实算样式）"
+ }
+}

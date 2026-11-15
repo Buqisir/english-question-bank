@@ -4190,8 +4190,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           ? { publicationDigest: canonicalConsumption.publicationDigest, sourceAssetVersion: canonicalConsumption.sourceAssetVersion }
           : undefined}
       />}
-      {analysisPdfError && <p className="paper-browse-export-error" role="alert">{analysisPdfError}</p>}
-      {analysisFontError && !lectureOpen && <p className="paper-browse-export-error" role="alert">{analysisFontError}</p>}
+      {analysisPdfError && <Notice kind="error" className="paper-browse-export-error">{analysisPdfError}</Notice>}
+      {analysisFontError && !lectureOpen && <Notice kind="error" className="paper-browse-export-error">{analysisFontError}</Notice>}
       <div
         className={`paper-browse-shell${
           lectureOpen ? ' paper-browse-shell--lecture-open' : ''

@@ -47,7 +47,9 @@ export function VocabularyHandwritingSelector({
   }
 
   // 外壳换成共用 Dialog（design/components-2026-11-13/migrate-dialog/README.md）：焦点圈、Esc、关上后焦点回去、
-  // 背后不滚都由它管，原来这里自己写的 keydown 循环删了。点遮罩关（closeOnBackdrop）照原来的行为保留。
+  // 背后不滚都由它管，原来这里自己写的 keydown 循环删了。
+  // 点遮罩不关（构件收尾 2026-11-15）：原来保留了「点遮罩关」，和全站对话框不一样；勾了半天的单词点一下框外就没了，
+  // 现在照 Dialog 默认，只有 Esc、右上角关闭、「取消」能关。
   // 调用处挂上才渲染、关上就卸载，所以 open 一直是 true，没有退场动画（和原来一样）。
   // <dialog> 上还挂 vocabulary-handwriting-selector-backdrop：打印样式靠它把这一层藏掉（打印样式不动）。
   return (
@@ -56,7 +58,6 @@ export function VocabularyHandwritingSelector({
       onClose={onCancel}
       size="lg"
       busy={busy}
-      closeOnBackdrop
       className="vocabulary-handwriting-selector-backdrop"
       bodyClassName="vocabulary-handwriting-selector"
       title="选择练字单词"
