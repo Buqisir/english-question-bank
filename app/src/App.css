@@ -4386,14 +4386,8 @@ p.concierge-empty {
 /* Concierge: connecting-to-local-bank notice — 换成共用提示行，放在命令行下面的 .concierge-status-slot 里，
    原来这条居中小字的规则拿掉。 */
 
-/* 题库还在连时输入框禁用：禁用的底和光标搬进 shared-ui/search.css（字用 --eqb-color-text-faint）。
-   首页这里的字色仍是原来的 #9A9A93（暖灰，雾海色阶以前留下的）：为了换前换后实算样式一样，原值照留，
-   缺口见 docs/design-gaps.md「2026-11-15 搜索框构件的几处尺寸」。实际上看不到——题库没连上时输入框是空的，
-   只显示占位符（占位符是次要灰）。
-   本条 (0,3,0) 覆盖 search.css .eqb-search-input:disabled 的字色 (0,2,0)。 */
-.concierge-desk .concierge-intent-input:disabled {
-  color: #9A9A93;
-}
+/* 题库还在连时输入框禁用：禁用的底、光标、字色都在 shared-ui/search.css（字用 --eqb-color-text-faint）。
+   原来这里用 #9A9A93 盖回旧暖灰，2026-11-15 删掉：禁用时框是空的，只显示占位符，看不出差别。 */
 
 /* ── ui-search-feel 刀⑤ #1 — dataLoading skeleton ──────────────────────
  * Chip row + 3 feed-group placeholders shown while the local SQLite bank

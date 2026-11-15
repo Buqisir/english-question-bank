@@ -69,11 +69,16 @@
   padding-right: 84px;
 }
 
-/* compact 有字时清除键也出来，但右内边距仍是 40（原样：原来浏览页那条 (0,3,0) 写在「有清除键」那条后面，压过了它）。
- * 字一长会钻到 ✕ 底下，这是原来就有的毛病，这一轮为了逐像素一样没修，见 README「要 Owner 定的」。 */
+/* compact 没字时右内边距 40，只让回车键。 */
 .eqb-search[data-tier='compact'] .eqb-search-input {
   padding-right: 40px;
   font-size: var(--eqb-font-size-control);
+}
+
+/* 本条 (0,4,0) 覆盖上面 compact 的 40 (0,3,0)：有字时清除键出来，字不能钻到 ✕ 底下。
+ * 原来浏览页这里压字（旧规则顺序造成），2026-11-15 修掉，和 hero 一样让到 84。提案 · 单一来源。 */
+.eqb-search[data-tier='compact']:has(.eqb-search-clear) .eqb-search-input {
+  padding-right: 84px;
 }
 
 /* 占位符：次要灰（DESIGN.md §5 Inputs：不用极弱墨「显优雅」）。 */
