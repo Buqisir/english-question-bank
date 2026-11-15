@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { verifyDrawingAreaProductPolicy } from './verify-application-drawing-area.mjs'
 await verifyDrawingAreaProductPolicy()
 import { readFileSync } from 'node:fs'
-import { applyStudentProductLayout, planStudentProductPdf, renderExplicitStudentProductPdf, studentProductPolicy } from '../server/draft-paper/studentProductPdf.mjs'
+import { applyStudentProductLayout, checkEconomyFeasibility, planStudentProductPdf, renderExplicitStudentProductPdf, studentProductPolicy } from '../server/draft-paper/studentProductPdf.mjs'
 import { validatePaperPaginationPlan, paginationPlanEdition, productPageLimitsForPlan, productPlanAuthorization } from '../server/paper-import/paginationPlan.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
@@ -15,7 +15,7 @@ import { productPdfBytes } from '../test-fixtures/paper-import/frozen-products-v
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
 import { embeddedPaperFontCss } from '../server/paper-fonts.mjs'
 
-const html = '<html><head><style>@page{size:A4;margin: 21mm 24mm 24mm 24mm;}</style></head><body><section data-canonical-group-id="application"><div class="canonical-application-response"></div></section><section data-canonical-group-id="continuation"><div class="canonical-continuation-response">Both supplied starters</div></section></body></html>'
+const html = '<html><head><style>@page{size:A4;margin: 21mm 24mm 24mm 24mm;}</style></head><body><section data-canonical-group-id="application"><div class="canonical-application-prompt"><figure class="canonical-reading-figure"></figure></div><div class="canonical-application-response"></div></section><section data-canonical-group-id="continuation"><div class="canonical-continuation-response">Both supplied starters</div></section></body></html>'
 const inspection = [
   { id: 'application', type: 'writing', pages: [7], applicationPresent: true,
     applicationPromptPages: [7], applicationAnswerPages: [7], applicationPromptPage: 7, applicationAnswerPage: 7 },
@@ -26,6 +26,36 @@ const geometry = source => ({
   application: Number(source.match(/canonical-application-response\{height:(\d+)mm/)?.[1]),
   continuation: Number(source.match(/canonical-continuation-response\{height:(\d+)mm/)?.[1]),
 })
+
+{
+  for (const pages of [2, 9]) {
+    let checks = 0
+    assert.deepEqual(await checkEconomyFeasibility(html, { render: async (_source, options) => {
+      checks += 1
+      assert.equal(options.generatePdf, false)
+      return { pageCount: pages, inspection: [{ id: 'reading', pages: [1] }] }
+    } }), { insufficient: pages === 2 })
+    assert.equal(checks, 1, 'feasibility never searches a second candidate')
+  }
+  let renders = 0
+  await assert.rejects(() => planStudentProductPdf(
+    '<html><head><style>@page{margin: 21mm 24mm 24mm 24mm;}</style></head><body><section data-canonical-group-id="reading">Reading</section></body></html>',
+    { edition: 'economy8', render: async () => {
+      renders += 1
+      return { pageCount: 2, inspection: [{ id: 'reading', type: 'reading', pages: [2] }] }
+    } },
+  ), error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE' && error.message === '题量不足 8 页，加题后可用')
+  assert.equal(renders, 1, 'short reading stops after the roomiest candidate')
+  renders = 0
+  await assert.rejects(() => planStudentProductPdf(
+    '<html><head><style>@page{margin: 21mm 24mm 24mm 24mm;}.canonical-application-prompt{}.canonical-reading-figure{}</style></head><body><section data-canonical-group-id="reading">Reading</section></body></html>',
+    { edition: 'largeNoListening', render: async () => {
+      renders += 1
+      return { pageCount: 11, inspection: [{ id: 'reading', type: 'reading', pages: [1, 11] }] }
+    } },
+  ), error => error.code === 'PAPER_FIXED_PAGE_IMPOSSIBLE')
+  assert.equal(renders, 2, 'no absent writing height or media-wrap trials, even when CSS names them')
+}
 
 // Atomic split recovery is a single legal group-break retry per profile.
 // Keep it through semantic search, writing-space restoration and plan replay.

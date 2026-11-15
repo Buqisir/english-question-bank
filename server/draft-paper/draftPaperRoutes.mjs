@@ -1,5 +1,8 @@
 import { defineRoute } from '../router/index.mjs'
 import { PAPER_PDF_PRODUCTS, requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
+import { inlineFigureImages } from './draftPaperStore.mjs'
+import { checkEconomyFeasibility } from './studentProductPdf.mjs'
+import { renderPaginatedPaper } from './paginationRenderer.mjs'
 
 function routeError(error) {
   return error instanceof Error ? error.message : String(error)
@@ -245,6 +248,24 @@ export function createDraftPaperRoutes() {
         return
       }
       try {
+        if (url.searchParams.has('check')) {
+          if (url.searchParams.get('check') !== 'economy8' || url.searchParams.has('edition') || url.searchParams.has('versionType')) throw new Error('check 只支持 economy8，且不与 edition 或 versionType 混用')
+          const userDb = context.openUserDatabase({ readOnly: true })
+          const bankDb = context.openDatabase({ readOnly: true })
+          let html
+          try {
+            const draft = context.draftPaperStore.getDraftPaper({ userDb, bankDb }, userId, draftPaperId, { includePrintHtml: false })
+            if (!draft) throw new Error('Draft paper not found')
+            if (draft.items.some(item => item.groupMissing)) throw new Error('选中的题组已缺失')
+            if (!draft.items.length) { context.sendJson(response, 200, { insufficient: true }); return }
+            const images = []
+            html = inlineFigureImages(context.draftPaperStore.buildDraftPrintHtml(draft,
+              { versionType: 'student', includeListening: false, imageMode: 'file', images }), images)
+          } finally { userDb.close(); bankDb.close() }
+          context.sendJson(response, 200, html.trim()
+            ? await checkEconomyFeasibility(html, { render: renderPaginatedPaper }) : { insufficient: true })
+          return
+        }
         if (url.searchParams.has('edition') && url.searchParams.has('versionType')) throw new Error('edition 不与 versionType 混用')
         const result = url.searchParams.has('edition')
           ? await context.draftPaperStore.getDraftPaperProductPagination(userId, draftPaperId,

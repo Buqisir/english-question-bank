@@ -173,6 +173,8 @@ export type OptionSelectFieldProps<V extends string> = FieldFrameProps & {
   align?: 'start' | 'end'
   /** 说明 / 出错那一行只给读屏（看得见的人在别处已经看到同一句话时用，比如草稿卷顶栏：卷面上就写着为什么用不了）。 */
   hideMessages?: boolean
+  /** 触发键拿到焦点时（点开或 Tab 到）调用：要在打开菜单前现问一下某项用不用得了时用（比如草稿卷的省纸版）。 */
+  onTriggerFocus?: () => void
 }
 
 export function OptionSelectField<V extends string>({
@@ -192,6 +194,7 @@ export function OptionSelectField<V extends string>({
   menuClassName,
   align = 'start',
   hideMessages,
+  onTriggerFocus,
 }: OptionSelectFieldProps<V>) {
   const valueId = useId()
   const selected = options.find((option) => option.value === value)
@@ -225,6 +228,7 @@ export function OptionSelectField<V extends string>({
               aria-labelledby={joinIds(binding.labelId, valueId)}
               aria-describedby={binding.describedBy}
               aria-invalid={binding.invalid || undefined}
+              onFocus={onTriggerFocus}
             >
               <span id={valueId} className="eqb-option-select-value">{selected?.label ?? ''}</span>
               <ChevronDown className="eqb-field-chevron" size={16} aria-hidden="true" />

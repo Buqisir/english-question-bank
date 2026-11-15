@@ -91,6 +91,10 @@ import {
   isQuestionLikeRichBlock,
   readingCaptureHasUnregisteredBlock,
   someRichBlocks,
+  displayVariantArtifact,
+  validFigureTextRegions,
+  validTableColumnWidths,
+  validTableMarks,
 } from './richContent.mjs'
 import { validateSevenChoicesContract } from './sevenChoices.mjs'
 import { cloneJson, digestJson, exactKeys, isRecordValue, sha256, stableStringify, withoutKey } from './stable.mjs'
@@ -2592,6 +2596,7 @@ function validateInlines(inlines, blankIds, path, diagnostics, ids, {
   allowMediaRefs = false,
   mediaIds = new Set(),
   allowSourceMarks = false,
+  allowTableMarks = false,
 } = {}) {
   if (!Array.isArray(inlines)) {
     diagnostics.push(diagnostic('RICH_INLINE_INVALID', 'needs_review', path, 'Inlines must be ordered'))
@@ -2604,8 +2609,9 @@ function validateInlines(inlines, blankIds, path, diagnostics, ids, {
       && (
         (inline.kind === 'text'
           && (exactKeys(inline, ['kind', 'nodeId', 'text'])
-            || (allowSourceMarks && exactKeys(inline, ['kind', 'nodeId', 'text', 'marks'])
-              && ['["bold"]', '["underline"]', '["bold","underline"]'].includes(JSON.stringify(inline.marks))))
+            || ((allowSourceMarks || allowTableMarks) && exactKeys(inline, ['kind', 'nodeId', 'text', 'marks'])
+              && (allowTableMarks ? validTableMarks(inline.marks)
+                : ['["bold"]', '["underline"]', '["bold","underline"]'].includes(JSON.stringify(inline.marks)))))
           && typeof inline.text === 'string')
         || (inline.kind === 'blank_ref'
           && exactKeys(inline, ['kind', 'nodeId', 'blankId'])
@@ -2662,7 +2668,7 @@ function validateRichBlock(block, path, blankIds, mediaIds, diagnostics, ids, al
     return
   }
   if (block.kind === 'table') {
-    if (!exactKeys(block, ['kind', 'nodeId', 'columnCount', 'rows']) || !Number.isInteger(block.columnCount) || block.columnCount < 1 || !Array.isArray(block.rows)) {
+    if (!exactKeys(block, ['kind', 'nodeId', 'columnCount', 'rows', ...(Object.hasOwn(block, 'columnWidths') ? ['columnWidths'] : [])]) || !validTableColumnWidths(block) || !Number.isInteger(block.columnCount) || block.columnCount < 1 || !Array.isArray(block.rows)) {
       diagnostics.push(diagnostic('RICH_TABLE_INVALID', 'needs_review', path, 'Tables need a rectangular semantic grid'))
       return
     }
@@ -2690,7 +2696,7 @@ function validateRichBlock(block, path, blankIds, mediaIds, diagnostics, ids, al
           `${path}.rows[${rowIndex}].cells[${cellIndex}].inlines`,
           diagnostics,
           ids,
-          { allowMediaRefs: richTableV1, mediaIds },
+          { allowMediaRefs: richTableV1, mediaIds, allowTableMarks: true },
         )
       }
       if (occupied.size !== block.columnCount) diagnostics.push(diagnostic('RICH_TABLE_NOT_RECTANGULAR', 'needs_review', `${path}.rows[${rowIndex}]`, 'Cells do not cover the declared columns'))
@@ -2858,7 +2864,8 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
     const captured = capturedArtifacts.get(item?.sourceArtifactRef?.artifactId)
     if (
       !isRecordValue(item)
-      || !exactKeys(item, ['mediaId', 'mimeType', 'sha256', 'pixelWidth', 'pixelHeight', 'sourceArtifactRef'])
+      || !exactKeys(item, ['mediaId', 'mimeType', 'sha256', 'pixelWidth', 'pixelHeight', 'sourceArtifactRef', ...(Object.hasOwn(item, 'displayVariant') ? ['displayVariant'] : []), ...(Object.hasOwn(item, 'textRegions') ? ['textRegions'] : [])])
+      || (Object.hasOwn(item, 'textRegions') && !validFigureTextRegions(item.textRegions))
       || mediaIds.has(item.mediaId)
       || typeof item.mimeType !== 'string'
       || typeof item.sha256 !== 'string'
@@ -2869,6 +2876,11 @@ function buildGroupArtifact(sourceGroup, capture, closure, acceptedRecords) {
       || !captured
       || captured.sha256 !== item.sha256
     ) diagnostics.push(diagnostic('MEDIA_INVALID', 'incomplete_source', `$.groups.media[${index}]`, 'Media must close immutable bytes, digest, dimensions, and source artifact identity'))
+    try {
+      displayVariantArtifact(item, capturedArtifacts)
+    } catch {
+      diagnostics.push(diagnostic('MEDIA_DISPLAY_VARIANT_INVALID', 'incomplete_source', `$.groups.media[${index}]`, 'Display variant must close captured immutable bytes'))
+    }
     mediaIds.add(item.mediaId)
   }
   const content = cloneJson(sourceGroup.content || { blocks: [] })
@@ -4188,6 +4200,9 @@ function isConfirmedNck1MaterializationRequest(request) {
     media: (materialization.media || []).map((media) => ({
       mediaId: media.mediaId,
       bytes: byInputKey.get(nck1InputKey('source_media', media.mediaId))?.bytes,
+      ...(media.displayVariant ? {
+        displayVariantBytes: byInputKey.get(`display_variant_${media.mediaId.replace(/[^a-z0-9]+/gi, '_')}`)?.bytes,
+      } : {}),
       // Rebuild the same immutable input for every allowed raw authority.
       // The adapter validates these bytes; confirmation and evidence fingerprints
       // below still bind the complete candidate, source, and document order.

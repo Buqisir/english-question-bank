@@ -5,8 +5,11 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { makeFixture } from './verify-nck1-source-materialization.mjs'
 import { buildNck1AnalysisProjection, validateNck1StagedAnalysis } from '../server/import-review/nck1AnalysisProjection.mjs'
-import { buildNck1CompatibilityPaperAsset } from '../server/import-review/revisionProjection.mjs'
+import { buildNck1CompatibilityPaperAsset, buildNck1ReviewConsumption } from '../server/import-review/revisionProjection.mjs'
 import { buildListeningAnalysisAgentRequest } from '../server/paper-import-ai/analyzeListening.mjs'
+import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../shared/paper-canonical/compiler.mjs'
+import { sha256, digestJson } from '../shared/paper-canonical/stable.mjs'
+import { buildSevenChoicesSurfaceModel } from '../app/src/features/paper-intelligence/sevenChoicesSurfaceAdapter.ts'
 
 // Reuse existing synthetic publication fixtures without running its DB/HTTP suite.
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
@@ -18,6 +21,10 @@ else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
 const root = mkdtempSync(path.join(tmpdir(), 'single-group-analysis-'))
 try {
   const source = makeFixture({ listening: true })
+  // Published compatibility assets and teaching coordinates both retain raw text.
+  source.groups.find(g => g.slotId === 'seven-choices').blocks[1].content[0].text +=
+    ' To err（犯错）is human. feedback(反馈) portrayed(描绘) coding (编码)experiences. feedback(反馈)'
+  source.groups.find(g => g.slotId === 'seven-choices').optionBank[0].text += " Don't discard feedback(反馈)."
   writeStagedAnalyses(root, source)
   const paper = { paperId: source.paperId, sourceAssetVersion: 1 }
   const answers = new Map(source.answers.map(({ questionId, value }) => [questionId, value]))
@@ -43,6 +50,11 @@ try {
     }
     const filename = `analysis-${key === 'listening-unit' ? 'listening' : key}.json`
     const analysis = JSON.parse(readFileSync(path.join(root, filename), 'utf8'))
+    if (key === 'seven') {
+      Object.values(analysis.questions)[0].contextEvidence.afterQuote = 'feedback(反馈)'
+      Object.values(analysis.questions)[0].mechanismSignals[1].signalText = "Don't discard feedback(反馈)."
+      writeFileSync(path.join(root, filename), JSON.stringify(analysis))
+    }
     if (key === 'application') {
       // The publication fixture has placeholder English instructions, not a
       // recoverable writing task. Supply an explicit synthetic given skeleton.
@@ -67,6 +79,94 @@ try {
     assert.equal(readFileSync(candidatePath, 'utf8'), JSON.stringify(analysis))
     assert.equal(readFileSync(requestPath, 'utf8'), JSON.stringify(request))
     assert.deepEqual(readdirSync(root).sort(), files)
+
+    if (key === 'seven') {
+      const canonicalSource = structuredClone(source)
+      const documents = canonicalSource.documents.map(document => {
+        const bytes = new TextEncoder().encode(`%PDF-1.7 synthetic ${document.documentId}`.padEnd(100, 'x'))
+        document.sha256 = sha256(bytes)
+        return { documentId: document.documentId, bytes }
+      })
+      const imported = importCanonicalCandidate({ kind: 'nck1-source-materialization', documents, media: [],
+        materializationBytes: new TextEncoder().encode(JSON.stringify(canonicalSource)) })
+      assert.deepEqual(imported.issues, [])
+      const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+      assert.ok(preview.compilation, JSON.stringify(preview.unresolvedIssues))
+      const consumption = buildNck1ReviewConsumption(preview.candidate, preview.compilation)
+      const consumptionPath = path.join(root, 'consumption.json')
+      const runWithConsumption = () => spawnSync(process.execPath,
+        ['scripts/import-pipeline/validate-analysis.mjs', requestPath, candidatePath, '--consumption', consumptionPath],
+        { cwd: path.resolve(import.meta.dirname, '..'), encoding: 'utf8' })
+      writeFileSync(consumptionPath, JSON.stringify(consumption))
+      const aligned = runWithConsumption()
+      assert.equal(aligned.status, 0, aligned.stderr)
+      const paperAsset = buildNck1CompatibilityPaperAsset({
+        config: { provenance: { paperName: 'Gloss fixture', source: 'Verifier', year: 2026 } },
+        materialization: source, sourceAssetVersion: 1,
+      })
+      const authorityBefore = JSON.stringify({ source, paperAsset })
+      const full = () => buildNck1AnalysisProjection({ rootDir: root,
+        materialization: source, paperAsset, requireTeachingContent: true })
+      assert.ok(full().sidecars['seven-choices-analysis-v1.json'])
+      const screen = buildSevenChoicesSurfaceModel({
+        asset: paperAsset, analysis, groupId: group.groupId, canonicalConsumption: consumption,
+      })
+      assert.ok(screen.surfaceData.annotations.length, 'real Screen builder projects teaching annotations')
+      const forgedRange = structuredClone(analysis)
+      forgedRange.groups[group.groupId].teachingContent.annotations[0].sourceRanges[0].quote += 'FORGED'
+      const warnings = []
+      const originalWarn = console.warn
+      let degradedScreen
+      try {
+        console.warn = (...args) => warnings.push(args)
+        degradedScreen = buildSevenChoicesSurfaceModel({ asset: paperAsset, analysis: forgedRange,
+          groupId: group.groupId, canonicalConsumption: consumption })
+      } finally {
+        console.warn = originalWarn
+      }
+      assert.equal(degradedScreen.teachingContent.unavailable, true)
+      assert.equal(warnings.length, 1)
+      assert.match(warnings[0][1].message, /exact text range/)
+      assert.deepEqual(degradedScreen.surfaceData.textMap, screen.surfaceData.textMap)
+      assert.deepEqual(degradedScreen.surfaceData.questions, screen.surfaceData.questions)
+      assert.deepEqual(degradedScreen.surfaceData.annotations, [])
+      assert.deepEqual(degradedScreen.options, screen.options)
+      assert.deepEqual(degradedScreen.chains, screen.chains)
+      assert.throws(() => validateNck1StagedAnalysis(request, forgedRange), /exact text range/)
+      writeFileSync(candidatePath, JSON.stringify(forgedRange))
+      const rejectedRange = runWithConsumption()
+      assert.equal(rejectedRange.status, 1, rejectedRange.stdout)
+      assert.match(rejectedRange.stderr, /exact text range/)
+      writeFileSync(path.join(root, filename), JSON.stringify(forgedRange))
+      assert.throws(full, /exact text range/)
+      const forged = structuredClone(analysis)
+      Object.values(forged.questions)[0].contextEvidence.afterQuote = 'FORGED (伪造)'
+      writeFileSync(candidatePath, JSON.stringify(forged))
+      writeFileSync(path.join(root, filename), JSON.stringify(forged))
+      for (const runCheck of [run, runWithConsumption]) {
+        const rejected = runCheck()
+        assert.equal(rejected.status, 1, rejected.stdout)
+        assert.match(rejected.stderr, /afterQuote 必须精确匹配原文/)
+      }
+      assert.throws(full, /afterQuote 必须精确匹配原文/)
+      writeFileSync(candidatePath, JSON.stringify(analysis))
+      writeFileSync(path.join(root, filename), JSON.stringify(analysis))
+      assert.equal(JSON.stringify({ source, paperAsset }), authorityBefore)
+      const selection = consumption.selections.find(s => s.familyContractId === 'seven-choices')
+      const occurrence = selection.projectedOccurrences.find(o => o.groupId === group.groupId)
+      const paragraph = occurrence.content.blocks.find(b => b.nodeId === 'block:seven-choices')
+      paragraph.inlines[0].text = paragraph.inlines[0].text
+        .replace('To err (犯错) is human.', 'Invented sentence.')
+      selection.projectedOccurrenceDigests.find(d => d.groupId === group.groupId).digest = digestJson(occurrence)
+      writeFileSync(consumptionPath, JSON.stringify(consumption))
+      const mismatch = runWithConsumption()
+      assert.equal(mismatch.status, 1, mismatch.stdout)
+      assert.match(mismatch.stderr, /source paragraph .* does not match TextMap/)
+      rmSync(consumptionPath)
+      assert.equal(readFileSync(requestPath, 'utf8'), JSON.stringify(request))
+      assert.equal(readFileSync(candidatePath, 'utf8'), JSON.stringify(analysis))
+      console.log('PASS raw gloss coordinates: single/freeze/CLI/real Screen; legacy profile accepted; forged quotes and TextMap drift rejected; source unchanged')
+    }
 
     const wrong = structuredClone(analysis)
     if (key.startsWith('reading-')) {
@@ -99,10 +199,34 @@ try {
     assert.throws(() => validateNck1StagedAnalysis(drift, analysis), /authority disagree/)
 
     if (sourceGroup?.writingTask) {
+      const withoutModel = structuredClone(analysis)
+      delete withoutModel.modelAnswer
+      assert.equal(validateNck1StagedAnalysis(request, withoutModel).ok, true)
+      writeFileSync(candidatePath, JSON.stringify(withoutModel))
+      const noModelResult = run()
+      assert.equal(noModelResult.status, 0, `${key} without modelAnswer: ${noModelResult.stderr}`)
+      assert.equal(noModelResult.stderr, '', 'no absent-essay word-count warning')
+      for (const modelAnswer of ['', ' ', null, 42]) {
+        assert.throws(() => validateNck1StagedAnalysis(request, { ...withoutModel, modelAnswer }))
+      }
+      assert.throws(() => validateNck1StagedAnalysis(request,
+        { ...withoutModel, officialModelAnswer: 'Invented official answer' }), /source authority/)
+      if (key === 'application') {
+        assert.throws(() => validateNck1StagedAnalysis(request,
+          { ...analysis, modelAnswer: 'Dear Chris, Too short. Yours, Li Hua' }), /word count/)
+        const missingCard = structuredClone(withoutModel)
+        delete missingCard.reviewCard
+        assert.throws(() => validateNck1StagedAnalysis(request, missingCard), /keys|reviewCard/)
+      } else {
+        const badEvidence = structuredClone(withoutModel)
+        badEvidence.continuationAnalysis.storyUnderstanding.centralSituation.evidence[0].excerpt = 'FORGED'
+        assert.throws(() => validateNck1StagedAnalysis(request, badEvidence), /evidence excerpt/)
+      }
       const officialRequest = structuredClone(request)
       officialRequest.authoritativeAnswers.officialModelAnswer = 'A source-owned official sample.'
       officialRequest.sourceGroup.material.writingTask.officialModelAnswer = 'A source-owned official sample.'
       assert.equal(validateNck1StagedAnalysis(officialRequest, analysis).ok, true)
+      assert.equal(validateNck1StagedAnalysis(officialRequest, withoutModel).ok, true)
       assert.throws(() => validateNck1StagedAnalysis(officialRequest, { ...analysis, officialModelAnswer: 'FORGED' }), /does not match/)
       if (key === 'application') {
         assert.throws(() => validateNck1StagedAnalysis(request, { ...analysis, modelAnswer: analysis.modelAnswer.replace('Dear Chris,', 'Dear Robin,') }), /required given text/)
@@ -119,47 +243,86 @@ try {
     console.log(`PASS ${key}: CLI acceptance/rejection, source authority, immutable inputs`)
   }
 
-  // Official alternatives are a set of accepted answers, not one literal AI
-  // answer. Exercise both public seams with the same immutable authority.
-  const alternatives = structuredClone(source)
-  const grammarSource = alternatives.groups.find((group) => group.slotId === 'grammar-fill')
-  const questionId = grammarSource.questions.find((question) => question.canonicalNumber === 57).questionId
-  alternatives.answers.find((answer) => answer.questionId === questionId).value = 'which/that'
-  writeStagedAnalyses(root, alternatives)
-  const group = objectiveFixtureGroup(grammarSource,
-    new Map(alternatives.answers.map(({ questionId, value }) => [questionId, value])))
-  const request = { group: 'grammar', sourceGroup: { groupKey: 'grammar', material: { paper, group } },
-    authoritativeAnswers: Object.fromEntries(group.questions.map(({ id, answerKey }) => [id, { questionId: id, answer: answerKey }])) }
-  const paperAsset = buildNck1CompatibilityPaperAsset({
-    config: { provenance: { paperName: 'Alternatives fixture', source: 'Verifier', year: 2026 } },
-    materialization: alternatives, sourceAssetVersion: 1,
-  })
-  const grammarPath = path.join(root, 'analysis-grammar.json')
-  const grammar = JSON.parse(readFileSync(grammarPath, 'utf8'))
-  const authorityBefore = JSON.stringify({ alternatives, request, paperAsset })
-  for (const [answer, accepted] of [
-    ['which', true], ['that', true], ['  ThAt  ', true],
-    ['who', false], ['which/that', false], ['that.', false], ['whiches', false], ['', false],
-  ]) {
-    const candidate = structuredClone(grammar)
-    candidate.blanks[questionId].answer = answer
-    const bytes = JSON.stringify(candidate)
-    writeFileSync(grammarPath, bytes)
-    const single = () => validateNck1StagedAnalysis(request, candidate)
-    const full = () => buildNck1AnalysisProjection({ rootDir: root,
-      materialization: alternatives, paperAsset, requireTeachingContent: true })
-    if (accepted) {
-      assert.equal(single().ok, true, `single grammar accepts ${JSON.stringify(answer)}`)
-      assert.equal(full().sidecars['grammar-fill-analysis-v1.json'].blanks[questionId].answer, answer)
-    } else {
-      assert.throws(single, `single grammar rejects ${JSON.stringify(answer)}`)
-      assert.throws(full, `full grammar rejects ${JSON.stringify(answer)}`)
+  // Accept the complete official key or a legacy single branch, never a
+  // different joined answer. Exercise both public seams with immutable authority.
+  for (const answerKey of ['which/that', 'that']) {
+    const alternatives = structuredClone(source)
+    const grammarSource = alternatives.groups.find((group) => group.slotId === 'grammar-fill')
+    const questionId = grammarSource.questions.find((question) => question.canonicalNumber === 57).questionId
+    alternatives.answers.find((answer) => answer.questionId === questionId).value = answerKey
+    writeStagedAnalyses(root, alternatives)
+    const group = objectiveFixtureGroup(grammarSource,
+      new Map(alternatives.answers.map(({ questionId, value }) => [questionId, value])))
+    const request = { group: 'grammar', sourceGroup: { groupKey: 'grammar', material: { paper, group } },
+      authoritativeAnswers: Object.fromEntries(group.questions.map(({ id, answerKey }) => [id, { questionId: id, answer: answerKey }])) }
+    const paperAsset = buildNck1CompatibilityPaperAsset({
+      config: { provenance: { paperName: 'Alternatives fixture', source: 'Verifier', year: 2026 } },
+      materialization: alternatives, sourceAssetVersion: 1,
+    })
+    const grammarPath = path.join(root, 'analysis-grammar.json')
+    const grammar = JSON.parse(readFileSync(grammarPath, 'utf8'))
+    const authorityBefore = JSON.stringify({ alternatives, request, paperAsset })
+    for (const [answer, accepted] of [
+      ['which', answerKey === 'which/that'], ['that', true], ['  ThAt  ', true],
+      ['who', false], ['which/that', answerKey === 'which/that'], ['that/which', false],
+      ['that.', false], ['whiches', false], ['', false],
+    ]) {
+      const candidate = structuredClone(grammar)
+      candidate.blanks[questionId].answer = answer
+      const bytes = JSON.stringify(candidate)
+      writeFileSync(grammarPath, bytes)
+      const single = () => validateNck1StagedAnalysis(request, candidate)
+      const full = () => buildNck1AnalysisProjection({ rootDir: root,
+        materialization: alternatives, paperAsset, requireTeachingContent: true })
+      if (accepted) {
+        assert.equal(single().ok, true, `single grammar accepts ${JSON.stringify(answer)}`)
+        assert.equal(full().sidecars['grammar-fill-analysis-v1.json'].blanks[questionId].answer, answer)
+      } else {
+        assert.throws(single, `single grammar rejects ${JSON.stringify(answer)}`)
+        assert.throws(full, `full grammar rejects ${JSON.stringify(answer)}`)
+      }
+      assert.equal(JSON.stringify(candidate), bytes)
+      assert.equal(readFileSync(grammarPath, 'utf8'), bytes)
+      assert.equal(JSON.stringify({ alternatives, request, paperAsset }), authorityBefore)
     }
-    assert.equal(JSON.stringify(candidate), bytes)
-    assert.equal(readFileSync(grammarPath, 'utf8'), bytes)
-    assert.equal(JSON.stringify({ alternatives, request, paperAsset }), authorityBefore)
   }
-  console.log('PASS grammar alternatives: both branches/case/whitespace accepted; invalid, joined, punctuation, stemming and empty rejected at single/full seams; authority unchanged')
+  console.log('PASS grammar alternatives: exact complete key and legacy branches accepted; different joined answers, invalid, punctuation, stemming and empty rejected at single/full seams; authority unchanged')
+
+  const slotRanges = source.groups.filter(g => g.slotId !== 'reading.d').map(g => {
+    const range = { 'reading.c': [28, 30], 'seven-choices': [31, 35], cloze: [36, 55] }[g.slotId]
+      || (g.questions.length ? [g.questions[0].canonicalNumber, g.questions.at(-1).canonicalNumber] : [null, null])
+    return [g.slotId, g.family, ...range]
+  })
+  const zhejiang = makeFixture({ listening: true, slotRanges })
+  rmSync(path.join(root, 'analysis-reading-d.json'))
+  writeStagedAnalyses(root, zhejiang)
+  const paperAsset = buildNck1CompatibilityPaperAsset({
+    config: { provenance: { paperName: 'Zhejiang fixture', source: 'Verifier', year: 2021 } },
+    materialization: zhejiang, sourceAssetVersion: 1,
+  })
+  const projected = buildNck1AnalysisProjection({ rootDir: root,
+    materialization: zhejiang, paperAsset, requireTeachingContent: true })
+  assert.equal(Object.keys(projected.sidecars['reading-choice-analysis-v1.json'].questions).length, 10)
+  assert.deepEqual(Object.keys(projected.sidecars['seven-choices-analysis-v1.json'].questions),
+    Array.from({ length: 5 }, (_, i) => `question:${31 + i}`))
+  assert.deepEqual(Object.keys(projected.sidecars['cloze-analysis-v1.json'].blanks),
+    Array.from({ length: 20 }, (_, i) => `question:${36 + i}`))
+  const zjAnswers = new Map(zhejiang.answers.map(({ questionId, value }) => [questionId, value]))
+  for (const [key, slot] of Object.entries(slots).filter(([key]) =>
+    ['reading-a', 'reading-b', 'reading-c', 'seven', 'cloze'].includes(key))) {
+    const group = objectiveFixtureGroup(zhejiang.groups.find(g => g.slotId === slot), zjAnswers)
+    const request = { group: key, sourceGroup: { groupKey: key, material: { paper, group } },
+      authoritativeAnswers: Object.fromEntries(group.questions.map(q => [q.id, { questionId: q.id, answer: q.answerKey }])) }
+    assert.equal(validateNck1StagedAnalysis(request, projected.inputs[key]).ok, true)
+  }
+  const missing = structuredClone(paperAsset)
+  delete missing.answerKey.answers['question:36']
+  assert.throws(() => buildNck1AnalysisProjection({ rootDir: root,
+    materialization: zhejiang, paperAsset: missing }), /authoritative objective answers/)
+  rmSync(path.join(root, 'analysis-reading-c.json'))
+  assert.throws(() => buildNck1AnalysisProjection({ rootDir: root,
+    materialization: zhejiang, paperAsset }), /analysis-reading-c.json/)
+  console.log('PASS Zhejiang: reading A–C/10, seven 31–35, cloze 36–55/20; single/full validation; missing analysis/answer rejected')
 
   const usage = spawnSync(process.execPath, ['scripts/import-pipeline/validate-analysis.mjs'], { encoding: 'utf8' })
   assert.equal(usage.status, 2)

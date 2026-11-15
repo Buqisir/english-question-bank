@@ -1,6 +1,6 @@
 import { digestJson, exactKeys, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { validateNck1SourceMaterialization } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
-import { CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2, paragraphJoinSourceLocator } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
+import { CROSS_PAGE_PARAGRAPH_JOIN_VERSION, CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2, paragraphJoinSourceLocator } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
 
 export const PARAGRAPH_JOIN_PLAN_VERSION = 'cross-page-paragraph-join-plan-v2'
 const parse = bytes => JSON.parse(new TextDecoder().decode(bytes))
@@ -12,7 +12,7 @@ function context(input, receiptBytes) {
   const evidence = parse(input.ocrSourceBytes?.evidenceBytes)
   const confirmation = parse(input.ocrSourceBytes?.confirmationBytes)
   const receipt = parse(receiptBytes)
-  if (!/^nck1-source-materialization-v(?:[1-9]|1[012])$/u.test(materialization.schemaVersion)
+  if (!/^nck1-source-materialization-v(?:[1-9]|1[01245])$/u.test(materialization.schemaVersion)
     || !['nck1-ocr-source-confirmation-v2', 'nck1-ocr-source-confirmation-v3'].includes(confirmation.schemaVersion) || confirmation.confirmed !== true
     || materialization.paperId !== evidence.paperId || materialization.paperId !== confirmation.paperId
     || materialization.paperId !== receipt.paperId || receipt.reviewerKind !== 'import_agent'
@@ -54,7 +54,9 @@ export function planMaterializationParagraphJoin(input, receiptBytes, { groupId,
     return { blockId: blocks[0].blockId, itemId, observationIds: [...item.observationIds], source: structuredClone(blocks[0].source) }
   })
   const relation = {
-    schemaVersion: CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2,
+    schemaVersion: /^nck1-source-materialization-v1[45]$/u.test(materialization.schemaVersion)
+      && confirmation.schemaVersion === 'nck1-ocr-source-confirmation-v3' && groups[0].family === 'reading'
+      ? CROSS_PAGE_PARAGRAPH_JOIN_VERSION : CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2,
     joinId: `paragraph-join:${digestJson([groupId, fragments.map(fragment => fragment.itemId), reason]).slice(7, 31)}`,
     groupId, sourceSetDigest: evidence.sourceSetDigest, evidenceDigest: evidence.evidenceDigest,
     confirmationSha256: binding.confirmationSha256, separator: ' ',
@@ -83,7 +85,7 @@ export function applyMaterializationParagraphJoinPlan(input, receiptBytes, plan,
   })
   if (!same(plan, regenerated)) throw new Error('Paragraph join plan differs from its bound complete source fragments')
   const result = structuredClone(materialization)
-  result.schemaVersion = 'nck1-source-materialization-v12'
+  if (!/^nck1-source-materialization-v1[45]$/u.test(result.schemaVersion)) result.schemaVersion = 'nck1-source-materialization-v12'
   result.paragraphJoins = [...(result.paragraphJoins || []), structuredClone(plan.relation)]
   const issues = validateNck1SourceMaterialization(result)
   if (issues.length) throw new Error(`Paragraph join Materialization is invalid: ${JSON.stringify(issues)}`)

@@ -27,6 +27,7 @@ const paperFilters = {
   year: z.number().int().positive().optional().describe('试卷年份；省略时不限年份。'),
   type: z.enum(['real', 'mock']).optional().describe('real 为真题，mock 为模拟题。'),
 }
+const searchFilter = { q: z.string().optional().describe('忽略大小写的子串搜索，空白分隔词须全部命中。') }
 const identifier = z.string().min(1).refine(value => value !== '.' && value !== '..', '需要有效的 ID。')
 const textResult = (value, isError = false) => ({
   content: [{ type: 'text', text: JSON.stringify(value) }],
@@ -69,27 +70,33 @@ function createServer({ base, token }) {
     catch { return textResult({ error: '题库接口未返回有效 JSON，请检查服务状态。' }, true) }
   }
   server.registerTool('list_papers', {
-    description: '列出已发布试卷，可按年份与真题/模拟筛选；返回 paperId、标题与题组数。',
-    inputSchema: paperFilters,
+    description: '列出已发布及待审试卷，按年份、类型筛选或搜索卷名/paperId。',
+    inputSchema: { ...paperFilters, ...searchFilter },
     annotations,
   }, args => get('papers', args))
   server.registerTool('get_paper', {
-    description: '按 paperId 读取一份已发布试卷的全部题组、原文、题目和答案。',
+    description: '按 paperId 读取一份已发布或待审试卷的全部题组、原文、题目和答案。',
     inputSchema: { paperId: identifier.describe('list_papers 返回的 paperId。') },
     annotations,
   }, ({ paperId }) => get(`papers/${encodeURIComponent(paperId)}`))
   server.registerTool('list_groups', {
-    description: '分页列出已发布题组及预览；section 为列表返回的精确分节名，不是模糊搜索。',
+    description: '分页列出已发布及待审题组；q 搜索卷名及题组全文，section 用 list_sections 的精确名称。',
     inputSchema: {
       ...paperFilters,
+      ...searchFilter,
       section: z.string().optional(),
       limit: z.number().int().min(1).max(200).optional().describe('默认 50，最多 200。'),
       offset: z.number().int().nonnegative().optional().describe('默认 0。'),
     },
     annotations,
   }, args => get('groups', args))
+  server.registerTool('list_sections', {
+    description: '列出精确分节名称及题组数，可按年份和真题/模拟筛选。',
+    inputSchema: paperFilters,
+    annotations,
+  }, args => get('sections', args))
   server.registerTool('get_group', {
-    description: '按 groupId 读取一个已发布题组及其载体、题目、答案与来源试卷。',
+    description: '按 groupId 读取一个已发布或待审题组及其载体、题目、答案与来源试卷。',
     inputSchema: { groupId: identifier.describe('list_groups 或 get_paper 返回的 groupId。') },
     annotations,
   }, ({ groupId }) => get(`groups/${encodeURIComponent(groupId)}`))

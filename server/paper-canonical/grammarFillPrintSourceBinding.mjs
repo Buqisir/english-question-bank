@@ -154,7 +154,9 @@ export function loadCanonicalGrammarFillPrintChrome({
     versionDir,
     reject,
     label: 'Canonical Grammar Fill chrome immutable source',
+    allowMaterialization: true,
   })
+  if (chromeSource.kind === 'source_materialization') return null
   const chromeAsset = chromeSource.asset
   const chromeAssetDigest = chromeSource.digest || sourceAssetDigest
   const rhythm = grammarFillRhythmForPaperAuthority({

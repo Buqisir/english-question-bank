@@ -22,6 +22,7 @@ import {
   fetchCurrentDraftPaper,
   fetchDraftPaper,
   fetchDraftPaperEditionAvailability,
+  fetchDraftEconomyFeasibility,
   fetchDraftPaperPagination,
   fetchDraftPapers,
   fetchReorderSuggestion,
@@ -279,6 +280,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [layoutSavesPending, setLayoutSavesPending] = useState(0)
   const [paginationStatus, setPaginationStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
   const [paginationError, setPaginationError] = useState<Failure | null>(null)
+  const [economyAvailability, setEconomyAvailability] = useState<{ key: string; insufficient: boolean } | null>(null)
+  const economyCheckKey = useRef('')
+  const paginationRequests = useRef(new Map<string, ReturnType<typeof fetchDraftPaperPagination>>())
   // print-form (plan.md Must Do 5, PO-1 收账): real, pagination-derived
   // page-break suggestions, refreshed on every pagination fetch (including a
   // print-form toggle alone — see the pagination-fetch effect's dependency
@@ -577,6 +581,36 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // 一次挪动只发一次分页请求（fix-waiting/README.md「为什么要等一两分钟」第 3 条）：题组表的保存
   // （persistItems、withLayoutSave 包着的那几处）还没回来时不发分页请求，等服务器回了题组表再按它发一次。
   const layoutSaveInFlight = layoutSavesPending > 0
+  // 省纸版凑不够 8 页（主干 #717）：编排前的检查（上面的 editionVerdicts）看不出来，要真排一次；
+  // 只在老师点开「PDF 版本」时问一次，同一份内容问过就不再问。
+  const contentKey = JSON.stringify([draftGeneration, draftPaper?.id, draftPaper?.title, itemsLayoutKey, draftPaper?.printForm])
+  const economyInsufficient = economyAvailability?.key === contentKey && economyAvailability.insufficient
+  function requestPagination(product: PaperPdfEdition) {
+    const key = JSON.stringify([contentKey, product])
+    let request = paginationRequests.current.get(key)
+    if (!request) {
+      // Only retain the current content; pending callers keep their own promise.
+      for (const oldKey of paginationRequests.current.keys()) {
+        if (JSON.parse(oldKey)[0] !== contentKey) paginationRequests.current.delete(oldKey)
+      }
+      request = fetchDraftPaperPagination(draftPaper!.id, product).catch((error) => {
+        // Transient failures may retry; insufficient content stays cached until the draft changes.
+        if (!(error instanceof Error && error.message.includes('题量不足 8 页'))) paginationRequests.current.delete(key)
+        throw error
+      })
+      paginationRequests.current.set(key, request)
+    }
+    return request
+  }
+  function checkEconomyAvailability() {
+    if (!draftPaper?.items.length || paginationStatus === 'loading' || renderedPaginationKey !== paginationKey
+      || economyCheckKey.current === contentKey) return
+    const key = contentKey
+    economyCheckKey.current = key
+    fetchDraftEconomyFeasibility(draftPaper.id).then(({ insufficient }) => {
+      if (economyCheckKey.current === key) setEconomyAvailability({ key, insufficient })
+    }).catch(() => { /* A failed check cannot prove insufficient content. */ })
+  }
 
   // Debounce layout edits, invalidating in-flight results before the delay.
   useEffect(() => {
@@ -602,11 +636,10 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     if (layoutSaveInFlight) return
     // 保存回来、题组表和已经排好的那份一样（比如保存失败退回原样）：不用再排一次。
     if (renderedPaginationKey === paginationKey && paginationStatus === 'ready') return
-    const draftPaperId = draftPaper.id
     paginationDebounceRef.current = window.setTimeout(() => {
       if (generation !== draftGenerationRef.current) return
       setPaginationStatus('loading')
-      fetchDraftPaperPagination(draftPaperId, edition)
+      requestPagination(edition)
         .then((result) => {
           if (paginationRequestIdRef.current !== requestId || generation !== draftGenerationRef.current) return
           setPaginatedHtml(result.paginatedHtml)
@@ -622,9 +655,12 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           // （见下面 previewHtml 和卷面状态行）；换了版本的旧卷面本来就不显示。
           setRenderedPaginationKey(paginationKey)
           setPaginationStatus('error')
-          setPaginationError(edition === 'answerOnly'
-            ? { lead: '纯答案版不可用', detail: errorText(error) }
-            : failure('排卷面', error))
+          // 「题量不足 8 页」和纯答案版不可用：再排一次结果一样，不给「重试」。
+          setPaginationError(error instanceof Error && error.message.includes('题量不足 8 页')
+            ? { lead: '题量不足 8 页，加题后可用', detail: '' }
+            : edition === 'answerOnly'
+              ? { lead: '纯答案版不可用', detail: errorText(error) }
+              : { ...failure('排卷面', error), retry: () => setPaginationRetry((count) => count + 1) })
         })
     }, 400)
     return () => {
@@ -1570,13 +1606,14 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       // 走查第四节第 8 条（Owner 2026-11-14）：下载成功只说「已下载：文件名」。原来接在后面的排版检查
       // （字号、跨 A3 正反面的题组数、跨页的选项组数）不在这里说了；放到卷面上对应那一页要改卷面，
       // 等 Owner 定（fix-notice/README.md「第 8 条」）。服务器照旧在响应头里给这几个数。
+      await requestPagination(edition)
       const { fileName } = await downloadDraftPaperPdf(draftPaper.id, edition, target)
       setExportStatus('exported')
       setExportSuccessMessage(target.kind === 'download' ? `已下载：${fileName}` : `已保存：${fileName}`)
     } catch (error) {
       setExportStatus('error')
       const fixedLayoutMessage = error instanceof Error
-        && /^(未在有界搜索内找到|大字完整版需要|无法生成指定页数的友好 PDF：|长卷版未找到|长卷版：|定页版需要|10 页友好版需要完整|12 页长卷版需要完整|试卷内容超出排版区域：)/.test(error.message)
+        && /^(题量不足 8 页|未在有界搜索内找到|大字完整版需要|无法生成指定页数的友好 PDF：|长卷版未找到|长卷版：|定页版需要|10 页友好版需要完整|12 页长卷版需要完整|试卷内容超出排版区域：)/.test(error.message)
       // 版本用不了、版式凑不出来，再点一次结果一样，不给「重试」。
       setExportError(edition === 'answerOnly'
         ? { lead: '纯答案版不可用', detail: errorText(error) }
@@ -1625,6 +1662,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     setSpaceStatus('saving')
     setSpaceMessage('')
     try {
+      await requestPagination(edition)
       await saveDraftPaperToMySpace({
         draftPaperId: draftPaper.id,
         edition,
@@ -1700,12 +1738,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // （当前版本用不了时卷面上就写着原因），窄屏那一行有地方，照常显示。
   const editionOptions = PAPER_PDF_EDITIONS.map((value) => {
     const verdict = editionVerdicts.get(value)
-    const unavailable = verdict !== undefined && !verdict.available
+    const economyShort = value === 'economy8' && economyInsufficient
+    const unavailable = economyShort || (verdict !== undefined && !verdict.available)
     return {
       value,
       label: PAPER_PDF_PRODUCTS[value],
       disabled: unavailable,
-      reason: unavailable ? editionUnavailableText(verdict) || undefined : undefined,
+      reason: economyShort ? '题量不足 8 页，加题后可用' : unavailable && verdict ? editionUnavailableText(verdict) || undefined : undefined,
     }
   })
   const renderVersionField = (placement: 'topbar' | 'row') => (
@@ -1720,6 +1759,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       disabled={exportStatus === 'exporting' || spaceDialogOpen}
       value={edition}
       options={editionOptions}
+      onTriggerFocus={checkEconomyAvailability}
       onChange={(value) => {
         setEdition(value)
         setExportError(null)
@@ -1746,7 +1786,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
 
   // 构件厂第 4 步：导出菜单换成 shared-ui/Menu（雾薄荷主键做触发键，每页一处）。
   // 「保存 PDF 到个人空间」选中后 Menu 先把焦点还给「导出」，模态框关上时再还回这里。
-  const exportBlocked = draftPaper.items.length === 0 || exportStatus === 'exporting'
+  // 省纸版凑不够 8 页时三项都不能点（主干 #717），原因写在「PDF 版本」下面和卷面上。
+  const economyBlocked = edition === 'economy8' && economyInsufficient
+  const exportBlocked = draftPaper.items.length === 0 || exportStatus === 'exporting' || economyBlocked
   const exportMenuControl = (
     <Menu
       label="导出"
@@ -1768,7 +1810,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           key: 'space',
           label: '保存 PDF 到个人空间',
           icon: <Archive size={16} />,
-          disabled: draftPaper.items.length === 0 || spaceStatus === 'saving',
+          disabled: draftPaper.items.length === 0 || spaceStatus === 'saving' || economyBlocked,
           onSelect: () => void openSpaceDialog(),
         },
       ]}
@@ -2015,13 +2057,18 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                     ) : null}
                   </div>
                 </>
+              ) : economyBlocked ? (
+                // 省纸版已经问出来凑不够 8 页（主干 #717）：不再等排版，直接说为什么。
+                <div className="draft-a4-empty">
+                  <Notice kind="error">题量不足 8 页，加题后可用</Notice>
+                </div>
               ) : renderedPaginationKey === paginationKey && paginationStatus === 'error' && paginationError ? (
                 <div className="draft-a4-empty">
                   <Notice
                     kind="error"
                     detail={paginationError.detail}
-                    // 纯答案版不可用时再排一次结果一样，不给「重试」。
-                    action={edition === 'answerOnly' ? undefined : { label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: () => setPaginationRetry((count) => count + 1) }}
+                    // 纯答案版不可用、题量不足 8 页：再排一次结果一样，不给「重试」（见上面出错那里）。
+                    action={paginationError.retry ? { label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: paginationError.retry } : undefined}
                   >
                     {paginationError.lead}
                   </Notice>

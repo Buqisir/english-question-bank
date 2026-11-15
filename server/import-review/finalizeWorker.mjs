@@ -4,7 +4,7 @@ import { finalizeContentSubject, finalizeInventory, finalizeProjection, ocrConfi
 import { sealReviewPublication } from './sealedPublication.mjs'
 
 function failure(error) {
-  return { message: error.message, code: error.code, status: error.status, stack: error.stack }
+  return { message: error.message, code: error.code, status: error.status, stack: error.stack, details: error.details }
 }
 
 try {

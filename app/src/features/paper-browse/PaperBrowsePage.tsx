@@ -270,7 +270,7 @@ function isRenderableWritingAnalysis(value: unknown): value is WritingAnalysis {
   const analysis = value as Record<string, unknown>
   if (
     !['application', 'continuation'].includes(String(analysis.taskType ?? ''))
-    || typeof analysis.modelAnswer !== 'string'
+    || (analysis.modelAnswer !== undefined && typeof analysis.modelAnswer !== 'string')
   ) return false
   if (analysis.taskType === 'application') {
     return (
@@ -525,13 +525,20 @@ const GRID_GAP = 24
 // 794px paper + 440px notes + 72px rail + gaps and shell padding must fit.
 const DOCKED_LECTURE_MIN_WIDTH = 1440
 
-/** 整卷屏幕放大倍数（按 shell 宽度算）。真卷面和首屏灰块（PaperBrowseOpeningSkeleton）共用，灰块的纸和真纸一样宽。 */
-function paperScreenZoomForShellWidth(shellWidth: number): number {
+/**
+ * 整卷屏幕放大倍数。真卷面和首屏灰块（PaperBrowseOpeningSkeleton）共用，灰块的纸和真纸一样宽。
+ * 合并 main（2026-11-15）：能不能停靠讲评照 CSS 的视口断点判（滚动条把 shell 挤窄时也一样），
+ * 宽度用去掉 shell 左右内衬后的内宽。
+ */
+function paperScreenZoomForShell(shell: HTMLElement): number {
   // Reserve the docked layout even while closed: toggling only moves the paper.
-  const canDockLecture = shellWidth >= DOCKED_LECTURE_MIN_WIDTH
+  // Match CSS's viewport breakpoint even when the scrollbar narrows the shell.
+  const canDockLecture = window.matchMedia(`(min-width: ${DOCKED_LECTURE_MIN_WIDTH}px)`).matches
   const railWidth = canDockLecture ? LECTURE_RAIL_WIDTH : RAIL_WIDTH
   const lectureColumn = canDockLecture ? GRID_GAP + LECTURE_PANEL_WIDTH : 0
-  const contentColumnWidth = shellWidth - railWidth - GRID_GAP - lectureColumn
+  const shellStyle = getComputedStyle(shell)
+  const shellPadding = parseFloat(shellStyle.paddingLeft) + parseFloat(shellStyle.paddingRight)
+  const contentColumnWidth = shell.clientWidth - shellPadding - railWidth - GRID_GAP - lectureColumn
   const gutterReserve = canDockLecture ? 0 : GUTTER_WIDTH
   const available = contentColumnWidth - gutterReserve
   const raw = Math.max(1, Math.min(1.35, available / PAPER_BASE_WIDTH))
@@ -548,10 +555,23 @@ const OPENING_SKELETON_RAIL_PARTS = [5, 2, 2]
  * 灰块走门槛（调用处 useDelayedBusy）：300ms 内只有读屏那一句；出了至少留 500ms。
  */
 function PaperBrowseOpeningSkeleton({ showSkeleton }: { showSkeleton: boolean }) {
-  const zoom = typeof document === 'undefined' ? 1 : paperScreenZoomForShellWidth(document.documentElement.clientWidth)
-  const contentStyle = { '--paper-screen-zoom': zoom } as CSSProperties
+  // 放大倍数照灰块自己的 shell 量（和真卷面同一个算法，去掉内衬、照视口断点判停靠），
+  // 量完直接写到内容区的 --paper-screen-zoom 上（paperBrowsePage.css 在 .paper-browse-skeleton-content 上给了默认 1，
+  // 要写在它自己身上才盖得过），不经 state（不触发第二次渲染）。
+  const shellRef = useRef<HTMLElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  useLayoutEffect(() => {
+    const shell = shellRef.current
+    const content = contentRef.current
+    if (!shell || !content) return
+    const apply = () => content.style.setProperty('--paper-screen-zoom', String(paperScreenZoomForShell(shell)))
+    apply()
+    const observer = new ResizeObserver(apply)
+    observer.observe(shell)
+    return () => observer.disconnect()
+  }, [showSkeleton])
   return (
-    <main className="paper-browse-skeleton-shell" role="status" aria-busy="true">
+    <main ref={shellRef} className="paper-browse-skeleton-shell" role="status" aria-busy="true">
       <span className="visually-hidden">正在打开整卷</span>
       {showSkeleton ? <>
         <nav className="paper-browse-skeleton-rail" aria-hidden="true">
@@ -566,7 +586,7 @@ function PaperBrowseOpeningSkeleton({ showSkeleton }: { showSkeleton: boolean })
             ))}
           </div>
         </nav>
-        <div className="paper-browse-skeleton-content" style={contentStyle} aria-hidden="true">
+        <div ref={contentRef} className="paper-browse-skeleton-content" aria-hidden="true">
           <div className="paper-browse-skeleton-sheet">
             <div className="paper-browse-skeleton-cover">
               <Skeleton className="paper-browse-skeleton-title" width={72} height={28} />
@@ -670,8 +690,26 @@ function mountCanonicalReadingEvidenceAnchor(
     kind: 'support' | 'trap' | null
     quote: string
     paragraphId?: string | null
+    figureRegion?: { figureId?: string; mediaId?: string; regionId: string } | null
   },
 ): (() => void) | null {
+  if (input.figureRegion) {
+    const reference = input.figureRegion
+    const figure = [...card.querySelectorAll<HTMLElement>('[data-canonical-block-kind="figure"]')]
+      .find(element => reference.figureId ? element.dataset.canonicalBlockId === reference.figureId
+        : element.dataset.canonicalMediaId === reference.mediaId)
+    const anchor = figure && [...figure.querySelectorAll<HTMLElement>('[data-canonical-figure-region-id]')]
+      .find(element => element.dataset.canonicalFigureRegionId === reference.regionId)
+    if (!anchor) return null // A region reference never falls back to a quote.
+    anchor.setAttribute('data-paper-evidence-id', input.evidenceId)
+    anchor.setAttribute('data-paper-browse-evidence-line-anchor', input.evidenceId)
+    if (input.kind) anchor.setAttribute('data-paper-evidence-kind', input.kind)
+    return () => {
+      anchor.removeAttribute('data-paper-evidence-id')
+      anchor.removeAttribute('data-paper-browse-evidence-line-anchor')
+      anchor.removeAttribute('data-paper-evidence-kind')
+    }
+  }
   const compact = (value: string) => value.replace(/\s+/g, ' ').trim()
   const target = compact(input.quote)
   if (!target) return null
@@ -1116,10 +1154,10 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           try {
             const response = await fetch(`${resolvedBase}/source-references-v1.json`)
             const references = response.ok ? await response.json() : null
-            if (references?.schemaVersion === 'source-references-v7' && references.paperId === paperId) {
+            if (/^source-references-v[1-7]$/.test(references?.schemaVersion ?? '') && references.paperId === paperId) {
               unofficialByGroup = Object.fromEntries(references.groups.map(
                 (group: { groupId: string; essays: { entries: UnofficialReferenceEssay[] } }) => [
-                  group.groupId, group.essays.entries.filter(essay => essay.provenance === 'unofficial'),
+                  group.groupId, group.essays.entries.filter(essay => essay.provenance === 'unofficial' || essay.authority === 'source_reference'),
                 ],
               ))
             }
@@ -1264,6 +1302,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                     analysis: readingAnalysis,
                     groupId: block.groupId,
                     figures: loadedFigures,
+                    canonicalFigures: canonicalReading.richBlocks.filter(block => block.kind === 'figure'),
                     assetBase: resolvedBase,
                   })
                 : null
@@ -2212,7 +2251,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     function computeZoom(): void {
       const node = shellRef.current
       if (!node) return
-      setPaperScreenZoom(paperScreenZoomForShellWidth(node.clientWidth))
+      setPaperScreenZoom(paperScreenZoomForShell(node))
     }
 
     computeZoom()
@@ -2294,6 +2333,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     kind: 'support' | 'trap' | null
     quote: string | null
     paragraphId: string | null
+    figureRegion?: { figureId?: string; mediaId?: string; regionId: string } | null
   } => {
     const empty = {
       groupId: null,
@@ -2325,6 +2365,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       kind,
       quote,
       paragraphId: row?.paragraphId ?? null,
+      figureRegion: row?.figureRegion ?? null,
     }
   }, [lectureOpen, lectureSelection, panelGroupId, panelGroupModel])
 
@@ -2353,10 +2394,26 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       kind: readingEvidenceLineContext.kind,
       quote,
       paragraphId: readingEvidenceLineContext.paragraphId,
+      figureRegion: readingEvidenceLineContext.figureRegion,
     })
     if (!releaseAnchor) return
     setReadingEvidenceAnchorReadyId(evidenceId)
-    return releaseAnchor
+    if (!readingEvidenceLineContext.figureRegion) return releaseAnchor
+    const target = [...card.querySelectorAll<HTMLElement>('[data-paper-evidence-id]')]
+      .find(node => node.dataset.paperEvidenceId === evidenceId)
+    if (!target) return releaseAnchor
+    const syncRegionGeometry = () => {
+      const rect = target.getBoundingClientRect()
+      setReadingEvidenceAnchorReadyId(rect.width && rect.height ? evidenceId : null)
+      setPaperPositionVersion(version => version + 1)
+    }
+    syncRegionGeometry()
+    const resize = new ResizeObserver(syncRegionGeometry)
+    resize.observe(target)
+    if (target.parentElement) resize.observe(target.parentElement)
+    const mutation = new MutationObserver(syncRegionGeometry)
+    mutation.observe(target, { attributes: true, attributeFilter: ['style', 'hidden'] })
+    return () => { resize.disconnect(); mutation.disconnect(); releaseAnchor() }
   }, [readingEvidenceLineContext])
 
   function scrollToAnchor(anchor: string): void {
@@ -2821,9 +2878,16 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       />
     )
     if (entry.kind === 'writing') {
+      // Historical analysis keeps its original answer display; source essays
+      // supply lectures that omit a generated/retained official essay.
+      const referenceEssays = unofficialEssays[groupId]?.filter(essay =>
+        essay.provenance === 'unofficial'
+        || !(writingLectureEntry?.kind === 'writing'
+          && (writingLectureEntry.analysis.modelAnswer !== undefined
+            || writingLectureEntry.analysis.officialModelAnswer !== undefined)))
       const answerBoxOpensLecture = (
         !lectureOpen
-        && ((unofficialEssays[groupId]?.length ?? 0) > 0 || hasCompleteApplicationLecturePayload({
+        && ((referenceEssays?.length ?? 0) > 0 || hasCompleteApplicationLecturePayload({
           sourceTaskType,
           analysis: writingLectureEntry?.kind === 'writing'
             ? writingLectureEntry.analysis
@@ -2835,7 +2899,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           pageModel={entry.model.pageModel}
           retainedModelAnswer={retainedLecture?.modelAnswer}
           retainedOfficialModelAnswer={retainedLecture?.officialModelAnswer}
-          unofficialReferenceEssays={isPanelGroup ? unofficialEssays[groupId] : undefined}
+          unofficialReferenceEssays={isPanelGroup ? referenceEssays : undefined}
           onAnswerBoxActivate={
             lectureOpen || answerBoxOpensLecture
               ? () => {
@@ -3552,6 +3616,12 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       : []
     let lectureTitle: string | null = group.title
     if (group.groupType === 'reading') lectureTitle = readingLectureLabel(group.title)
+    if (group.groupType !== 'writing') {
+      const canonicalTitle = canonicalRailLabel(canonicalConsumption, groupId)
+      if (canonicalTitle) {
+        lectureTitle = group.groupType === 'listening' ? `听力 ${canonicalTitle}` : canonicalTitle
+      }
+    }
     if (group.groupType === 'writing' && canonicalConsumption) {
       lectureTitle = canonicalWritingNavigationChrome({
         consumption: canonicalConsumption,

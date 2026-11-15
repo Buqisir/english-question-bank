@@ -14,6 +14,7 @@ import { nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistori
 import { consumerContractRefsForAuthority } from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
+import { displayVariantArtifact } from '../../shared/paper-canonical/richContent.mjs'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { LEGACY_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview, readSealedListeningReview } from '../paper-import/listeningReview.mjs'
@@ -36,7 +37,7 @@ import {
   NCK1_LISTENING_STAGED_ANALYSIS,
   NCK1_STAGED_ANALYSIS_FILES,
 } from './nck1AnalysisProjection.mjs'
-import { LEGACY_NCK1_ANALYSIS_PROFILE, LISTENING_ANALYSIS_PROFILE } from '../paper-import-ai/analyzeListening.mjs'
+import { LEGACY_NCK1_ANALYSIS_PROFILE } from '../paper-import-ai/analyzeListening.mjs'
 import { validateParagraphSummaries } from '../paper-import-ai/paragraphSummaries.mjs'
 import { validatePublicSearchMetadata } from '../paper-import-ai/publicSearchMetadata.mjs'
 import { applySpellingReview, loadSpellingReview, summarizeSpellingReview, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
@@ -121,10 +122,11 @@ function loadPublicSearchMetadata(rootDir, loaded, sourceDigest, candidateDigest
   return { sidecar, bytes, digest: sha256(bytes) }
 }
 
-function fail(message, code = 'IMPORT_REVIEW_CANDIDATE_INVALID', status) {
+function fail(message, code = 'IMPORT_REVIEW_CANDIDATE_INVALID', status, details) {
   const error = new Error(message)
   error.code = code
   if (status !== undefined) error.status = status
+  if (details !== undefined) error.details = details
   throw error
 }
 
@@ -387,8 +389,14 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
       )
       const mediaPath = resolveReviewFile(rootDir, relativePath)
       if (!existsSync(mediaPath)) fail(`Materialized media is unavailable: ${media.mediaId}`)
+      const displayVariant = media.displayVariant
+      if (displayVariant && (!/^materialization\/media\/[^/]+$/.test(displayVariant.path)
+        || displayVariant.path.includes('..'))) fail('Display variant must be inside this paper materialization/media')
+      const displayBytes = displayVariant
+        ? { displayVariantBytes: readReviewBytes(resolveReviewFile(rootDir, normalizedRelativePath(displayVariant.path, 'displayVariant'))) }
+        : {}
       if (!media.publication?.candidate) {
-        return { mediaId: media.mediaId, bytes: readReviewBytes(mediaPath) }
+        return { mediaId: media.mediaId, bytes: readReviewBytes(mediaPath), ...displayBytes }
       }
       const renditionPath = resolveReviewFile(
         rootDir,
@@ -404,6 +412,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
         mediaId: media.mediaId,
         bytes: readReviewBytes(mediaPath),
         renditionBytes: readReviewBytes(renditionPath),
+        ...displayBytes,
       }
     }),
   }
@@ -657,8 +666,7 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
       materialization,
       paperAsset,
       required: !importProfile || loaded.config.withTeachingAnalyses === true,
-      analysisProfile: loaded.config.withTeachingAnalyses === true
-        ? LISTENING_ANALYSIS_PROFILE : LEGACY_NCK1_ANALYSIS_PROFILE,
+      analysisProfile: LEGACY_NCK1_ANALYSIS_PROFILE,
       requireTeachingContent: Boolean(loaded.analyzedPackage) || loaded.config.withTeachingAnalyses === true,
     })
   }
@@ -710,7 +718,12 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
           ),
           mediaType: media.mimeType,
           role: 'content_media',
-        }, ...(media.publication?.candidate
+        }, ...(media.displayVariant ? [{
+          path: normalizedRelativePath(media.displayVariant.path, 'displayVariant'),
+          mediaType: path.extname(media.displayVariant.path).toLowerCase() === '.webp' ? 'image/webp'
+            : /\.jpe?g$/i.test(media.displayVariant.path) ? 'image/jpeg' : 'image/png',
+          role: 'content_media_display_variant',
+        }] : []), ...(media.publication?.candidate
           ? [{
               path: path.posix.join(
                 normalizedRelativePath(manifest.mediaDirectory, 'mediaDirectory'),
@@ -860,7 +873,7 @@ export function loadNck1OcrReviewSource(rootDir) {
     const status = finding.code === 'NCK1_OCR_PAGE_COVERAGE_INCOMPLETE'
       && finding.message === 'OCR page raster no longer replays from the immutable source'
       ? 422 : undefined
-    fail(`${finding.code}: ${finding.message} (${finding.path})`, finding.code, status)
+    fail(`${finding.code}: ${finding.message} (${finding.path})`, finding.code, status, finding.details)
   }
   return { config, manifest, documents, evidence, reviewFindings }
 }
@@ -1143,6 +1156,7 @@ function mediaArtifacts(projected, sourceCapture) {
         pixelHeight: media.pixelHeight,
         sourceArtifactRef: media.sourceArtifactRef,
         encodedBytes: document.encodedBytes,
+        ...(media.displayVariant ? { displayVariant: displayVariantArtifact(media, documents) } : {}),
       }
       const existing = artifacts.get(media.mediaId)
       if (existing && stableStringify(existing) !== stableStringify(artifact)) {
@@ -1869,7 +1883,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
     paperAsset,
     sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
     required: (requireAnalyses && !importProfile) || loaded.config.withTeachingAnalyses === true,
-    analysisProfile: loaded.config.withTeachingAnalyses === true ? LISTENING_ANALYSIS_PROFILE : analysisProfile,
+    analysisProfile,
     requireTeachingContent: Boolean(loaded.analyzedPackage) || loaded.config.withTeachingAnalyses === true,
   })
   const sourceVisuals = sourceVisualProjection(loaded)

@@ -217,6 +217,11 @@ function inspectCommittedPromotion({ db, paperAssetsDir, promotion, packageData 
         packageData,
         version: promotion.assetVersion,
       })
+  if (promotion.importProfile && promotion.analysisDigest) {
+    for (const baseDir of [versionDir, latestDir]) {
+      assertPaperImportAnalysisSidecars({ baseDir, packageData, version: promotion.assetVersion })
+    }
+  }
   const versionPlanDigest = assertPaperImportPaginationPlan({ baseDir: versionDir, packageData })
   const latestPlanDigest = assertPaperImportPaginationPlan({ baseDir: latestDir, packageData })
   if (versionPlanDigest !== latestPlanDigest) {
@@ -396,7 +401,8 @@ export function createSinglePaperPromotionService({
                 if (promotion.importProfile) {
                   assertPaperImportParagraphSummaries({ baseDir, packageData: evidence })
                   assertPaperImportPublicSearchMetadata({ baseDir, packageData: evidence })
-                } else {
+                }
+                if (!promotion.importProfile || promotion.analysisDigest) {
                   assertPaperImportAnalysisSidecars({
                     baseDir,
                     packageData: evidence,
@@ -591,7 +597,9 @@ export function createSinglePaperPromotionService({
       }
       const approval = revision.approval || store.approveRevision(paperId, revisionId, {
         bundleDigest: input.bundleDigest,
-        ...(revision.manifest.importProfile ? { approvalScope: 'layout_only' } : {}),
+        ...(revision.manifest.importProfile ? {
+          approvalScope: revision.manifest.analysisDigest ? 'layout_and_analysis' : 'layout_only',
+        } : {}),
       }, actor)
       // Both calls are synchronous until the durable guard is acquired. The
       // store rechecks latest revision, content compatibility, approval and issues in its

@@ -45,6 +45,18 @@ Review 目标由 worktree 的 `.amp/import-review-origin` 决定：回环地址�
 OCR 文本修订（#647）；缺失软项可留空（#648）。不为单卷修改识别代码；
 只有卷面/PDF 显示错误或题文、题号、选项、官方答案对应、音频/图片、学生版答案隔离的硬门问题才改代码。
 
+### 可选精选讲评（Owner 2026-11-12）
+
+仅完整 NCK1 结构的 public-paper-v1 卷适用，旧制全国/浙江卷不在本次范围。
+在 paper 工作目录设置 `config.withTeachingAnalyses: true`，放齐九份 staged 输入
+（reading A–D、seven、cloze、grammar、application、continuation）；听力讲评可选，有则校验。
+首次送审在 finish 前安装；已有无讲评 Candidate 则先由 Owner 退回，随后安装文件并运行
+`fast-import.mjs finish <id> --feedback-fix <issueId> --redo-from freeze`。
+重新目检 PDF 后运行 `review.mjs verify-analyses <id>`，再 `fast-import.mjs submit <id> --resolves <issueId>`；
+新 revision 的 Screen 打开“讲评”检查。复用现有打包逻辑，不覆盖旧 revision。
+config/staged 文件属于冻结输入，不可直接补文件后复用旧 products 清单。
+新批准为 `layout_and_analysis`；无讲评仍 `layout_only`，旧凭据不升格。四款 PDF 内容边界不变。
+
 ### 原卷设计无听力与本地交付
 
 已经核对原卷设计无听力时，用 `prep <id> --listening absent-by-exam-design -- <init 参数>`，

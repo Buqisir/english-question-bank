@@ -1,6 +1,6 @@
 import { defineRoute } from '../router/index.mjs'
 import { createAgentToken, listAgentTokens, revokeAgentToken } from './agentTokens.mjs'
-import { agentGroup, groupPreview, listAgentPapers, matchesPaper, paperSummary } from './agentCatalog.mjs'
+import { agentGroup, groupPreview, groupText, listAgentPapers, matchesPaper, matchesQuery, paperSummary } from './agentCatalog.mjs'
 
 export function createAgentRoutes({ getReviewStore } = {}) {
   const admin = (method, pattern, action) => defineRoute(method, pattern, async input => {
@@ -32,11 +32,12 @@ export function createAgentRoutes({ getReviewStore } = {}) {
       input.context.sendJson(input.response, 200, { revoked: true })
     }),
     read(/^\/api\/agent\/v1\/papers$/, ({ context, response, url }, papers) =>
-      context.sendJson(response, 200, { papers: papers.filter(paper => matchesPaper(paper, url.searchParams)).map(paperSummary) })),
+      context.sendJson(response, 200, { papers: papers.filter(paper => matchesPaper(paper, url.searchParams)
+        && matchesQuery(`${paper.title} ${paper.paperId}`, url.searchParams.get('q') || '')).map(paperSummary) })),
     read(/^\/api\/agent\/v1\/papers\/([^/]+)$/, (input, papers) => {
       const paper = papers.find(paper => paper.paperId === decodeURIComponent(input.match[1]))
       if (!paper) return notFound(input)
-      paper.load?.()
+      if (paper.load && !paper.load()) return notFound(input)
       input.context.sendJson(input.response, 200, { ...paperSummary(paper), groups: paper.groupIds.map(id => agentGroup(paper, id)) })
     }),
     read(/^\/api\/agent\/v1\/groups$/, ({ context, response, url }, papers) => {
@@ -47,9 +48,10 @@ export function createAgentRoutes({ getReviewStore } = {}) {
         context.sendJson(response, 400, { error: 'limit must be 1–200; offset must be a nonnegative integer' }); return
       }
       const groups = papers.filter(paper => matchesPaper(paper, params)).flatMap(paper => {
-        paper.load?.()
-        return paper.groupIds.map(id => {
-          const group = agentGroup(paper, id)
+        if (paper.load && !paper.load()) return []
+        return paper.groupIds.map(id => agentGroup(paper, id))
+          .filter(group => matchesQuery(`${paper.title} ${groupText(group)}`, params.get('q') || '')).map(group => {
+          const id = group.groupId
           return { groupId: id, paperId: paper.paperId, paperTitle: paper.title, year: paper.year, type: paper.type,
             section: group.section, questionCount: group.questions.length, preview: groupPreview(group) }
         })
@@ -64,9 +66,20 @@ export function createAgentRoutes({ getReviewStore } = {}) {
         paper = papers.find(paper => revisionIds.has(paper.revisionId))
       }
       if (!paper) return notFound(input)
-      paper.load?.()
+      if (paper.load && !paper.load()) return notFound(input)
       input.context.sendJson(input.response, 200, { ...agentGroup(paper, id), paperId: paper.paperId,
         paperTitle: paper.title })
+    }),
+    read(/^\/api\/agent\/v1\/sections$/, ({ context, response, url }, papers) => {
+      const counts = new Map()
+      for (const paper of papers.filter(paper => matchesPaper(paper, url.searchParams))) {
+        if (paper.load && !paper.load()) continue
+        for (const id of paper.groupIds) {
+          const { section } = agentGroup(paper, id)
+          counts.set(section, (counts.get(section) || 0) + 1)
+        }
+      }
+      context.sendJson(response, 200, { sections: [...counts].map(([section, count]) => ({ section, count })) })
     }),
   ]
 }

@@ -24,8 +24,8 @@ export function hasCompleteApplicationLecturePayload(payload: {
   return (
     sourceTaskType === 'application'
     && analysis?.taskType === 'application'
-    && typeof analysis.modelAnswer === 'string'
-    && analysis.modelAnswer.trim().length > 0
+    && (analysis.modelAnswer === undefined
+      || (typeof analysis.modelAnswer === 'string' && analysis.modelAnswer.trim().length > 0))
     && isCompleteReviewCard(analysis.reviewCard)
   )
 }
@@ -77,14 +77,14 @@ export function RetainedModelAnswer({
   modelAnswer,
   officialModelAnswer,
 }: {
-  modelAnswer: string
+  modelAnswer?: string
   officialModelAnswer?: string
 }): ReactNode {
   const hasOfficialModelAnswer = typeof officialModelAnswer === 'string'
     && officialModelAnswer.trim().length > 0
   return (
     <div className="retained-writing-answer">
-      <RetainedModelAnswerSection label="AI 参考范文" answer={modelAnswer} source="ai" />
+      {modelAnswer && <RetainedModelAnswerSection label="AI 参考范文" answer={modelAnswer} source="ai" />}
       {hasOfficialModelAnswer && (
         <RetainedModelAnswerSection
           label="官方范文"

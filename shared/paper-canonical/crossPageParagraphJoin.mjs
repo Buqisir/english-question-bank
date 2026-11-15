@@ -31,7 +31,7 @@ export function resolveCrossPageParagraphJoins(materialization) {
   if (!Object.hasOwn(materialization, 'paragraphJoins')) return []
   const joins = materialization.paragraphJoins
   const reject = message => { throw new Error(`Cross-page paragraph join: ${message}`) }
-  if (!['nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12', 'nck1-source-materialization-v13'].includes(materialization.schemaVersion)
+  if (!['nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12', 'nck1-source-materialization-v13', 'nck1-source-materialization-v14', 'nck1-source-materialization-v15'].includes(materialization.schemaVersion)
     || !Array.isArray(joins) || !joins.length) reject('requires the opt-in v8 envelope and nonempty relations')
   const consumed = new Set()
   const ids = new Set()

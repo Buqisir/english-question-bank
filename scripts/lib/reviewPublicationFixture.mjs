@@ -78,7 +78,9 @@ export function finalizeReviewFixture({ directory, output, manifest, projection,
   }
   store.finalizeRevision(revision.id)
   const approval = approve ? store.approveRevision(manifest.paperId, revision.id, {
-    bundleDigest: revision.bundleDigest, ...(manifest.importProfile ? { approvalScope: 'layout_only' } : {}),
+    bundleDigest: revision.bundleDigest, ...(manifest.importProfile ? {
+      approvalScope: manifest.analysisDigest ? 'layout_and_analysis' : 'layout_only',
+    } : {}),
   }, 'synthetic-owner') : null
   return { store, revision: store.getRevision(revision.id), approval, manifest, projection, dbPath }
 }

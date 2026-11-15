@@ -224,15 +224,15 @@ export function isNarrativeContinuationAnalysis(value: unknown): value is Contin
 
 export function isNarrativeContinuationWritingAnalysis(value: unknown): value is {
   taskType: 'continuation'
-  modelAnswer: string
+  modelAnswer?: string
   continuationAnalysis: ContinuationAnalysis
 } {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return false
   const analysis = value as Record<string, unknown>
   return (
     analysis.taskType === 'continuation'
-    && typeof analysis.modelAnswer === 'string'
-    && analysis.modelAnswer.trim().length > 0
+    && (analysis.modelAnswer === undefined
+      || (typeof analysis.modelAnswer === 'string' && analysis.modelAnswer.trim().length > 0))
     && isNarrativeContinuationAnalysis(analysis.continuationAnalysis)
   )
 }

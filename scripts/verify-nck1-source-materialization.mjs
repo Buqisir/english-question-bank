@@ -31,8 +31,8 @@ const slots = [
   ['writing.continuation', 'continuation-writing', null, null],
 ]
 
-export function makeFixture({ listening = false, mixedTable = false } = {}) {
-  const groups = slots.map(([slotId, family, from, to]) => {
+export function makeFixture({ listening = false, mixedTable = false, slotRanges = slots } = {}) {
+  const groups = slotRanges.map(([slotId, family, from, to]) => {
     const tail = slotId.replaceAll('.', '-').replaceAll(' ', '-')
     const blankNumbers = from === null || family === 'reading'
       ? []

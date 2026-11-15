@@ -5,7 +5,7 @@ import Ajv from 'ajv/dist/2020.js'
 
 import { TOPIC_LABEL_TAXONOMY } from '../../shared/topics/topicTaxonomy.mjs'
 import { stableStringify } from '../../shared/paper-canonical/stable.mjs'
-import { isSupportedAppositiveGerundAnswer, isSupportedCleftThatAnswer, stampGrammarFillDerivedFields } from './analyzeGrammarFill.mjs'
+import { grammarFillAnswerAlternatives, isSupportedAppositiveGerundAnswer, isSupportedCleftThatAnswer, stampGrammarFillDerivedFields } from './analyzeGrammarFill.mjs'
 import { enumerateParagraphSummaryTargets } from './paragraphSummaries.mjs'
 
 export const PUBLIC_SEARCH_METADATA_VERSION = 'public-search-metadata-v1'
@@ -436,7 +436,14 @@ export function validatePublicSearchMetadata({ sidecar, materialization, sourceD
             if (!isSupportedAppositiveGerundAnswer(answers.get(q.questionId))) push(issues, 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID', `${path}.metadata.questions[${qIndex}].derived`, 'appositive-gerund requires authoritative ordinary active doing')
           }
           const expected = Object.fromEntries(['tense', 'voice', 'agreementSensitive', 'form', 'similarityForm'].filter((key) => Object.hasOwn(derived, key)).map((key) => [key, derived[key]]))
-          if (stableStringify(q.derived) !== stableStringify(expected)) push(issues, 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID', `${path}.metadata.questions[${qIndex}].derived`, 'derived answer form/axes must match authoritative answer')
+          // Sealed metadata may have been derived from another official alternative.
+          const matchesAlternative = () => grammarFillAnswerAlternatives(answers.get(q.questionId)).slice(1).some(answer => {
+            const holder = { blanks: { answer: { ...derivedHolder.blanks[q.questionId], answer } } }
+            stampGrammarFillDerivedFields(holder)
+            const alternative = Object.fromEntries(Object.keys(expected).map(key => [key, holder.blanks.answer[key]]))
+            return stableStringify(q.derived) === stableStringify(alternative)
+          })
+          if (stableStringify(q.derived) !== stableStringify(expected) && !matchesAlternative()) push(issues, 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID', `${path}.metadata.questions[${qIndex}].derived`, 'derived answer form/axes must match authoritative answer')
         } catch {
           push(issues, 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID', `${path}.metadata.questions[${qIndex}].derived`, 'derived values cannot be computed from malformed classification')
         }

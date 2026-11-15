@@ -1,4 +1,7 @@
-import { partitionAnalysisText } from '../../../../shared/analysis/analysisTextRanges.mjs'
+import { resolveFigureTextRegion } from '../../../../shared/paper-canonical/richContent.mjs'
+import type { CanonicalReadingSurfaceFigureBlock } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
+import { assertAnalysisTextRanges, partitionAnalysisText } from '../../../../shared/analysis/analysisTextRanges.mjs'
+import { canonicalizeVisibleEnglishTypography } from '../../../../shared/paper-canonical/visibleTypography.mjs'
 import { formatCanonicalBlankVisibleText } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import type { CanonicalSurfaceParagraph } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import type {
@@ -16,11 +19,24 @@ export type TeachingRange = {
   quote: string
 }
 
+export type FigureTeachingRange = ({ figureId: string; mediaId?: never } | { mediaId: string; figureId?: never }) & {
+  regionId: string
+  quote?: string
+}
+
+export type FigureTeachingEvidence = {
+  id: string
+  questionId: string
+  kind: 'support'
+  target: FigureTeachingRange
+  quote: string
+}
+
 export type TeachingAnnotation = {
   annotationId: string
   kind: 'answer-evidence' | 'answer-insertion' | 'sentence-structure'
   questionIds: string[]
-  sourceRanges: TeachingRange[]
+  sourceRanges: Array<TeachingRange | FigureTeachingRange>
   translationRanges: TeachingRange[]
   blankId?: string
   selectedSentenceId?: string
@@ -63,6 +79,7 @@ export type ObjectiveTeachingGroup = {
 }
 
 export type ObjectiveTeachingView = {
+  unavailable?: boolean
   discourseSummary: string
   discourseItems: Array<{ id: string; label: string; summary: string; functionText: string }>
   translationParagraphs: Array<{
@@ -85,12 +102,45 @@ export type ObjectiveTeachingView = {
 export type ObjectiveTeachingSourceProjection = {
   annotations: PaperAnnotation[]
   evidence: PaperEvidence[]
+  figureEvidence?: FigureTeachingEvidence[]
 }
 
 type SourceParagraph = { paragraphId?: string; id?: string; text: string }
 
 function codePointToUtf16(text: string, offset: number): number {
   return Array.from(text).slice(0, offset).join('').length
+}
+
+// Align only the changed span; transport offsets always remain bound to raw text.
+function typographyOffsets(before: string, after: string, start: number, end: number): number[] {
+  if (before === after) return [start, end]
+  let prefix = 0, rawEnd = before.length, visibleEnd = after.length
+  while (before[prefix] === after[prefix] && prefix < rawEnd) prefix++
+  while (rawEnd > prefix && visibleEnd > prefix && before[rawEnd - 1] === after[visibleEnd - 1]) { rawEnd--; visibleEnd-- }
+  const raw = before.slice(prefix, rawEnd), visible = after.slice(prefix, visibleEnd)
+  const costs = Array.from({ length: raw.length + 1 }, () => new Uint32Array(visible.length + 1))
+  for (let i = 0; i <= raw.length; i++) costs[i][0] = i
+  for (let j = 0; j <= visible.length; j++) costs[0][j] = j
+  for (let i = 1; i <= raw.length; i++) {
+    for (let j = 1; j <= visible.length; j++) {
+      costs[i][j] = Math.min(costs[i - 1][j] + 1, costs[i][j - 1] + 1,
+        costs[i - 1][j - 1] + Number(raw[i - 1] !== visible[j - 1]))
+    }
+  }
+  const project = (offset: number, right: boolean) => {
+    if (offset < prefix) return offset
+    if (offset > rawEnd) return offset + after.length - before.length
+    let i = raw.length, j = visible.length
+    while (i > offset - prefix) {
+      if (j > 0 && costs[i][j] === costs[i - 1][j - 1] + Number(raw[i - 1] !== visible[j - 1])) { i--; j-- }
+      else if (j > 0 && costs[i][j] === costs[i][j - 1] + 1) j--
+      else i--
+    }
+    // Inserted separators belong outside a quote ending at this boundary.
+    if (!right) while (j > 0 && costs[i][j] === costs[i][j - 1] + 1) j--
+    return prefix + j
+  }
+  return [project(start, true), project(end, false)]
 }
 
 function sourceRangeToTextMapRanges(
@@ -131,6 +181,25 @@ function sourceRangeToTextMapRanges(
     end = end >= replacement.end ? end + delta : end > replacement.start ? replacement.start + replacement.text.length : end
     displayText = displayText.slice(0, replacement.start) + replacement.text + displayText.slice(replacement.end)
   }
+  // Historical TextMaps that already match keep their original coordinates.
+  let matchCursor = 0
+  const matches = paragraph.sentences.every(({ text }) => {
+    while (/\s/u.test(displayText[matchCursor] ?? '')) matchCursor++
+    if (!displayText.startsWith(text, matchCursor)) return false
+    matchCursor += text.length
+    return true
+  })
+  if (!matches) {
+    // Match the compiler's text-inline boundaries around canonical blanks.
+    let sourceCursor = 0
+    const normalized = replacements.map((replacement) => {
+      const text = canonicalizeVisibleEnglishTypography(source.text.slice(sourceCursor, replacement.start), '4')
+      sourceCursor = replacement.end
+      return text + replacement.text
+    }).join('') + canonicalizeVisibleEnglishTypography(source.text.slice(sourceCursor), '4')
+    ;[start, end] = typographyOffsets(displayText, normalized, start, end)
+    displayText = normalized
+  }
   const result: PaperTextRange[] = []
   let cursor = 0
   for (const sentence of paragraph.sentences) {
@@ -162,10 +231,11 @@ export function projectObjectiveTeachingSource(
   sourceParagraphs: ReadonlyArray<SourceParagraph>,
   textMap: PaperTextMap,
   semanticParagraphs?: ReadonlyArray<CanonicalSurfaceParagraph>,
+  figures: ReadonlyArray<CanonicalReadingSurfaceFigureBlock> = [],
 ): ObjectiveTeachingSourceProjection {
   const teaching = group?.teachingContent
   if (teaching?.schemaVersion !== 'objective-teaching-content-v1') {
-    return { annotations: [], evidence: [] }
+    return { annotations: [], evidence: [], figureEvidence: [] }
   }
   const sourceById = new Map(sourceParagraphs.flatMap((paragraph) => {
     const paragraphId = paragraph.paragraphId ?? paragraph.id
@@ -173,15 +243,28 @@ export function projectObjectiveTeachingSource(
   }))
   const annotations: PaperAnnotation[] = []
   const evidence: PaperEvidence[] = []
+  const figureEvidence: FigureTeachingEvidence[] = []
   for (const relationship of teaching.annotations) {
     relationship.sourceRanges.forEach((sourceRange, sourceRangeIndex) => {
+      if ('regionId' in sourceRange) {
+        if (relationship.kind !== 'answer-evidence') throw new Error('Figure regions require answer evidence')
+        const region = resolveFigureTextRegion(sourceRange, figures)
+        relationship.questionIds.forEach(questionId => figureEvidence.push({
+          id: `${relationship.annotationId}:region:${sourceRangeIndex}:${questionId}`,
+          questionId, kind: 'support', target: sourceRange, quote: sourceRange.quote ?? region.text,
+        }))
+        return
+      }
       // Completed-source answer insertions are intentionally absent from the
       // original exam TextMap. Their relationship remains visible in the
       // teaching panel and companion output, without rewriting a blank.
       if (sourceRange.textId !== teaching.sourceTextId) return
       const source = sourceById.get(sourceRange.paragraphId)
       if (!source) return
-      sourceRangeToTextMapRanges(source, textMap, sourceRange.start, sourceRange.end, semanticParagraphs)
+      const { start, end, quote } = sourceRange
+      const ranges = sourceRangeToTextMapRanges(source, textMap, start, end, semanticParagraphs)
+      assertAnalysisTextRanges(source.text, [{ start, end, quote }], 'teachingContent sourceRanges')
+      ranges
         .forEach((range, sentenceRangeIndex) => {
           const owners = relationship.questionIds.length > 0 ? relationship.questionIds : [null]
           owners.forEach((questionId) => {
@@ -214,7 +297,7 @@ export function projectObjectiveTeachingSource(
         })
     })
   }
-  return { annotations, evidence }
+  return { annotations, evidence, figureEvidence }
 }
 
 export function buildObjectiveTeachingView(

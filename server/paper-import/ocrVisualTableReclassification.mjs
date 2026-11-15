@@ -1,13 +1,25 @@
 import { digestJson, exactKeys } from '../../shared/paper-canonical/stable.mjs'
+import { validTableColumnWidths, validTableMarks } from '../../shared/paper-canonical/richContent.mjs'
 import { semanticTableGrid } from './nck1OcrContentVisuals.mjs'
 
 const same = (a, b) => digestJson(a) === digestJson(b)
 const fail = message => { throw new Error(`OCR visual table reclassification: ${message}`) }
 
+function tableCellContent(nodes, fragments) {
+  if (!nodes.some(node => node.marks)) {
+    return [{ kind: 'text', text: nodes.map(node => node.text).join('\n') }]
+  }
+  return nodes.map((node, index) => {
+    const previous = fragments[index - 1], current = fragments[index]
+    const joined = previous?.itemId === current.itemId && previous.end === current.start
+    return index && !joined ? { ...node, text: `\n${node.text}` } : node
+  })
+}
+
 // A working interpretation of sealed text, never a replacement OCR receipt.
 // Character ranges allow one historical item to span several source cells.
 export function buildOcrVisualTable({ declaration, confirmation, source, blockId }) {
-  if (!exactKeys(declaration, ['regionId', 'confirmationDigest', 'basis', 'rows', 'merges'])
+  if (!exactKeys(declaration, ['regionId', 'confirmationDigest', 'basis', 'rows', 'merges', ...(Object.hasOwn(declaration, 'columnWidths') ? ['columnWidths'] : [])])
     || declaration.confirmationDigest !== digestJson(confirmation)
     || typeof declaration.basis !== 'string' || !declaration.basis.trim()
     || confirmation.schemaVersion !== 'nck1-ocr-source-confirmation-v3' || !confirmation.confirmed) {
@@ -30,6 +42,7 @@ export function buildOcrVisualTable({ declaration, confirmation, source, blockId
     return geometry
   }) : declaration.merges
   const grid = semanticTableGrid({ rows: declaration.rows, merges })
+  if (!validTableColumnWidths({ ...declaration, columnCount: grid.columnCount })) fail('columnWidths must contain one positive finite share per column')
   const readingCells = declaration.rows.flatMap((row, r) => row.cells.map((fragments, c) => ({
     keyRow: readAtRows.get(`${r}:${grid.geometry[r][c].columnStart}`) ?? r,
     column: grid.geometry[r][c].columnStart, fragments,
@@ -39,9 +52,11 @@ export function buildOcrVisualTable({ declaration, confirmation, source, blockId
     cells: row.cells.map((fragments, c) => ({
       cellId: `${blockId}:cell-${r + 1}-${c + 1}`, ...grid.geometry[r][c],
       role: row.header ? 'header' : 'data',
-      content: [{ kind: 'text', text: fragments.map(fragment => {
+      content: tableCellContent(fragments.map(fragment => {
         const item = items.get(fragment?.itemId)
-        if (!exactKeys(fragment, ['itemId', 'start', 'end']) || !item
+        if (!exactKeys(fragment, ['itemId', 'start', 'end', ...(Object.hasOwn(fragment, 'marks') ? ['marks'] : [])]) || !item
+          || (Object.hasOwn(fragment, 'marks') && (!validTableMarks(fragment.marks)
+            || fragment.marks.some(mark => !['bold', 'italic'].includes(mark))))
           || !Number.isInteger(fragment.start) || !Number.isInteger(fragment.end)
           || fragment.start < 0 || fragment.end <= fragment.start || fragment.end > item.text.length) {
           fail('cell fragments must address exact text ranges inside this confirmed region')
@@ -51,8 +66,9 @@ export function buildOcrVisualTable({ declaration, confirmation, source, blockId
           if (claimed.has(i)) fail('cell fragments overlap')
           claimed.add(i)
         }
-        return item.text.slice(fragment.start, fragment.end)
-      }).join('\n') }],
+        return { kind: 'text', text: item.text.slice(fragment.start, fragment.end),
+          ...(fragment.marks ? { marks: [...fragment.marks] } : {}) }
+      }), fragments),
     })),
   }))
   let previous = { index: -1, end: 0 }
@@ -67,7 +83,9 @@ export function buildOcrVisualTable({ declaration, confirmation, source, blockId
     if (Array.from({ length: item.text.length }, (_, i) => i)
         .some(i => !/\s/u.test(item.text[i]) && !used.get(id).has(i))) fail('every confirmed non-whitespace character must survive exactly once')
   }
-  return { kind: 'table', blockId, columnCount: grid.columnCount, rows, source: structuredClone(source) }
+  return { kind: 'table', blockId, columnCount: grid.columnCount,
+    ...(declaration.columnWidths ? { columnWidths: [...declaration.columnWidths] } : {}),
+    rows, source: structuredClone(source) }
 }
 
 // Project only explicitly named regions on the producer side. The ordinary

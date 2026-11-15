@@ -80,6 +80,7 @@ function cloneByteEntries(entries, idKey) {
   return entries.map((entry) => ({
     [idKey]: entry[idKey],
     bytes: new Uint8Array(entry.bytes),
+    ...(entry.displayVariantBytes instanceof Uint8Array ? { displayVariantBytes: new Uint8Array(entry.displayVariantBytes) } : {}),
     ...(entry.renditionBytes instanceof Uint8Array
       ? { renditionBytes: new Uint8Array(entry.renditionBytes) }
       : {}),
@@ -121,9 +122,11 @@ export function isNck1MaterializationInput(value) {
       && entry.bytes instanceof Uint8Array)
     && Array.isArray(value.media)
     && value.media.every((entry) =>
+      entry && typeof entry === 'object'
+      &&
       (
-        exactKeys(entry, ['mediaId', 'bytes'])
-        || exactKeys(entry, ['mediaId', 'bytes', 'renditionBytes'])
+        exactKeys(entry, ['mediaId', 'bytes', ...(Object.hasOwn(entry, 'renditionBytes') ? ['renditionBytes'] : []), ...(Object.hasOwn(entry, 'displayVariantBytes') ? ['displayVariantBytes'] : [])])
+        && (entry.displayVariantBytes === undefined || entry.displayVariantBytes instanceof Uint8Array)
       )
       && typeof entry.mediaId === 'string'
       && entry.bytes instanceof Uint8Array
@@ -217,6 +220,7 @@ function bundleDigest(materializationBytes, documents, media, listeningAudio, sp
       mediaId: entry.mediaId,
       sha256: sha256(entry.bytes),
       byteLength: entry.bytes.byteLength,
+      ...(entry.displayVariantBytes ? { displayVariantSha256: sha256(entry.displayVariantBytes), displayVariantByteLength: entry.displayVariantBytes.byteLength } : {}),
       ...(entry.renditionBytes
         ? {
             renditionSha256: sha256(entry.renditionBytes),
@@ -228,16 +232,21 @@ function bundleDigest(materializationBytes, documents, media, listeningAudio, sp
 }
 
 function identifyImage(bytes) {
-  const [pixelWidth, pixelHeight, mimeType] = execFileSync(
-    'magick', ['identify', '-format', '%w,%h,%m', '-'], {
-      encoding: 'utf8',
-      input: bytes,
-    },
-  ).split(',')
-  return {
-    pixelWidth: Number(pixelWidth),
-    pixelHeight: Number(pixelHeight),
-    mimeType: ({ PNG: 'image/png', JPEG: 'image/jpeg', WEBP: 'image/webp' })[mimeType],
+  // Parallel freezes can stall synchronous stdin delivery; identify the same bytes on disk.
+  const directory = mkdtempSync(path.join(tmpdir(), 'eqb-identify-'))
+  try {
+    const file = path.join(directory, 'image')
+    writeFileSync(file, bytes)
+    const [pixelWidth, pixelHeight, mimeType] = execFileSync(
+      'magick', ['identify', '-format', '%w,%h,%m', file], { encoding: 'utf8' },
+    ).split(',')
+    return {
+      pixelWidth: Number(pixelWidth),
+      pixelHeight: Number(pixelHeight),
+      mimeType: ({ PNG: 'image/png', JPEG: 'image/jpeg', WEBP: 'image/webp' })[mimeType],
+    }
+  } finally {
+    rmSync(directory, { recursive: true, force: true })
   }
 }
 
@@ -781,6 +790,17 @@ function validateBundle(materialization, input, options) {
     } catch {
       issues.push(adapterIssue('MATERIALIZATION_MEDIA_RECIPE_UNAVAILABLE', `Media ${media.mediaId} cannot be replayed from its immutable source recipe`, '$.media'))
     }
+    if (media.displayVariant || supplied.displayVariantBytes) {
+      try {
+        const variant = media.displayVariant
+        const bytes = supplied.displayVariantBytes
+        const image = identifyImage(bytes)
+        if (!variant || !bytes || sha256(bytes) !== variant.sha256
+          || bytes.byteLength !== variant.byteLength || !image.mimeType) throw new Error('Invalid display bytes')
+      } catch {
+        issues.push(adapterIssue('MATERIALIZATION_DISPLAY_VARIANT_MISMATCH', `Media ${media.mediaId} display variant must match its digest, length and supported image bytes`, '$.media'))
+      }
+    }
     const candidate = media.publication?.candidate
     if (!candidate && supplied.renditionBytes) {
       issues.push(adapterIssue('MATERIALIZATION_MEDIA_RENDITION_UNEXPECTED', `Media ${media.mediaId} supplied rendition bytes without a declared candidate`, '$.media'))
@@ -862,6 +882,7 @@ function canonicalTableInline(item, cellId, index) {
     kind: 'text',
     nodeId: `text:${cellId}:${index + 1}`,
     text: item.text,
+    ...(item.marks ? { marks: [...item.marks] } : {}),
   }
 }
 
@@ -879,6 +900,7 @@ function canonicalBlock(block) {
       kind: 'table',
       nodeId: block.blockId,
       columnCount: block.columnCount,
+      ...(block.columnWidths ? { columnWidths: [...block.columnWidths] } : {}),
       rows: block.rows.map((row) => ({
         rowId: row.rowId,
         cells: row.cells.map((cell) => ({
@@ -1663,7 +1685,10 @@ export function deriveNck1SemanticSource(
         .filter((value) => value.figure).map((value) => value.figure.mediaId)),
     ].map((mediaId) => {
       const media = mediaInventoryById.get(mediaId)
-      const selected = selectedMedia(media, mediaById.get(mediaId))
+      const selected = media.displayVariant
+        ? { bytes: mediaById.get(mediaId).bytes, mimeType: media.mimeType, sha256: media.sha256,
+          pixelWidth: media.pixelWidth, pixelHeight: media.pixelHeight }
+        : selectedMedia(media, mediaById.get(mediaId))
       return {
         mediaId,
         mimeType: selected.mimeType,
@@ -1671,6 +1696,12 @@ export function deriveNck1SemanticSource(
         pixelWidth: selected.pixelWidth,
         pixelHeight: selected.pixelHeight,
         sourceArtifactRef: { artifactId: stableArtifactId(selected.bytes) },
+        ...(media.textRegions ? { textRegions: structuredClone(media.textRegions) } : {}),
+        ...(media.displayVariant ? { displayVariant: {
+          ...structuredClone(media.displayVariant),
+          ...identifyImage(mediaById.get(mediaId).displayVariantBytes),
+          sourceArtifactRef: { artifactId: stableArtifactId(mediaById.get(mediaId).displayVariantBytes) },
+        } } : {}),
       }
     })
     for (const media of groupMedia) {
@@ -1930,9 +1961,15 @@ function compilerDocuments(input, materialization, source, instructionDocument, 
           originalName: `${media.mediaId.replace(/[^a-z0-9]+/gi, '-')}.${media.mimeType.split('/')[1].replace('jpeg', 'jpg')}`,
         },
       }
-      if (!media.publication?.candidate) return [sourceDocument]
+      const displayDocuments = media.displayVariant ? [{
+        inputKey: `display_variant_${entry.mediaId.replace(/[^a-z0-9]+/gi, '_')}`,
+        roles: ['source_media', 'source_provenance'],
+        bytes: entry.displayVariantBytes,
+        declared: { mediaType: identifyImage(entry.displayVariantBytes).mimeType, originalName: path.basename(media.displayVariant.path) },
+      }] : []
+      if (!media.publication?.candidate) return [sourceDocument, ...displayDocuments]
       const candidate = media.publication.candidate
-      return [sourceDocument, {
+      return [sourceDocument, ...displayDocuments, {
         inputKey: inputKeyForMediaRendition(entry.mediaId),
         roles: media.usage === 'content'
           && media.publication.selection !== 'source_crop'
@@ -3179,7 +3216,8 @@ export function nck1MaterializationSourceSummary(derivation) {
       + (derivation.input.ocrSourceBytes?.evidenceBytes.byteLength ?? 0)
       + (derivation.input.ocrSourceBytes?.confirmationBytes.byteLength ?? 0)
       + derivation.input.documents.reduce((total, entry) => total + entry.bytes.byteLength, 0)
-      + derivation.input.media.reduce((total, entry) => total + entry.bytes.byteLength, 0),
+      + derivation.input.media.reduce((total, entry) => total + entry.bytes.byteLength
+        + (entry.displayVariantBytes?.byteLength ?? 0), 0),
     ...(derivation.input.spellingReviewBytes ? {
       spellingReview: { sha256: sha256(derivation.input.spellingReviewBytes), byteLength: derivation.input.spellingReviewBytes.byteLength },
     } : {}),
@@ -3203,6 +3241,7 @@ export function nck1MaterializationSourceSummary(derivation) {
       mediaId: entry.mediaId,
       sha256: sha256(entry.bytes),
       byteLength: entry.bytes.byteLength,
+      ...(entry.displayVariantBytes ? { displayVariantSha256: sha256(entry.displayVariantBytes), displayVariantByteLength: entry.displayVariantBytes.byteLength } : {}),
       ...(entry.renditionBytes
         ? {
             renditionSha256: sha256(entry.renditionBytes),

@@ -21,7 +21,7 @@ Owner 2026-10-06 确认公共 PDF 目标为三款题卷加独立纯答案版，�
 已实现能力。Passage-first、Canonical Paper、共享 Screen/Print/PDF、学生版隐藏答案、
 权限隔离和版本追溯继续有效。
 
-## 新公共卷导入：机器核事实，Owner 只验最终版式
+## 新公共卷导入：机器核事实，Owner 验版式与可选讲评
 
 新导入 AI 仍负责 OCR/源提取、校对、源答案抄录比对，并产出必要的结构化检索元数据；
 自动 source/coverage/schema/answer 校验仍是硬门禁。缺源、缺答案、来源歧义或答案冲突通过
@@ -29,11 +29,17 @@ Owner 2026-10-06 确认公共 PDF 目标为三款题卷加独立纯答案版，�
 认可吞掉，也不新增事实异常 receipt/workflow。源答案 variants 保持既有权威文本及 provenance，
 不另造 alternative schema；AI 绝不是答案权威。
 
-Owner Review **只认可最终渲染版式**，不审核段落摘要、主题、语义标签、原题准确性或答案
-映射。认可 receipt 的精确字段是 `approvalScope: 'layout_only'`，不得声称人工语义/答案验证。认可绑定
+无讲评时 Owner Review **只认可最终渲染版式**，receipt 为 `approvalScope: 'layout_only'`。
+Owner 2026-11-12 决定：完整 NCK1 结构的新 public-paper-v1 卷可用
+`config.withTeachingAnalyses: true` 附带讲评；九份 staged 输入齐全并通过既有校验，
+投影 reading-choice / seven-choices / cloze / grammar-fill / writing 五类 sidecar；听力讲评可选，有则必须校验。
+Owner 随卷审阅，新批准使用 `approvalScope: 'layout_and_analysis'`，讲评作为精选官方参考随卷发布。
+旧制全国/浙江卷不在此次范围；已送审的无讲评 revision 继续有效，旧凭据不升格、不静默补件。
+以上均不表示人工核验摘要、主题、语义标签、原题准确性或答案映射。认可绑定
 不可变 revision 及 source/candidate/summary/metadata/render digests；之后仍须单独明确 promotion。
 历史无 profile 卷和 external analyzed package 保持原 analysisDigest、审核身份和门禁，不能
 因新规则被自动回填或重分类。
+讲评仅供教师讲评面消费；三款题卷隐藏答案与讲评，answerOnly 仍只用源答案及 source references。
 
 ## 摘要与检索元数据分离
 

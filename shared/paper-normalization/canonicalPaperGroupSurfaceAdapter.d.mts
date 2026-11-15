@@ -53,7 +53,7 @@ export type CanonicalReadingSurfaceTextInline = {
   readonly kind: 'text'
   readonly nodeId: string
   readonly text: string
-  readonly marks?: ReadonlyArray<'bold' | 'underline'>
+  readonly marks?: ReadonlyArray<'bold' | 'underline' | 'italic'>
 }
 
 export type CanonicalMediaPresentation = {
@@ -93,6 +93,7 @@ export type CanonicalReadingSurfaceTableBlock = {
   readonly kind: 'table'
   readonly nodeId: string
   readonly columnCount: number
+  readonly columnWidths?: ReadonlyArray<number>
   readonly rows: ReadonlyArray<{
     readonly rowId: string
     readonly cells: ReadonlyArray<{
@@ -107,6 +108,24 @@ export type CanonicalReadingSurfaceTableBlock = {
   }>
 }
 
+export type CanonicalFigureTextRegion = {
+  readonly id: string
+  readonly text: string
+  readonly box: { readonly x: number; readonly y: number; readonly w: number; readonly h: number }
+}
+
+export type CanonicalFigureDisplayVariant = {
+  readonly path: string
+  readonly sha256: string
+  readonly byteLength: number
+  readonly generator: 'codex-cli'
+  readonly textCheck: 'verified'
+  readonly mimeType: string
+  readonly pixelWidth: number
+  readonly pixelHeight: number
+  readonly sourceArtifactRef: { readonly artifactId: string }
+}
+
 export type CanonicalReadingSurfaceFigureBlock = {
   readonly kind: 'figure'
   readonly nodeId: string
@@ -118,11 +137,14 @@ export type CanonicalReadingSurfaceFigureBlock = {
     readonly sha256: string
     readonly sourceArtifactRef: { readonly artifactId: string }
     readonly presentation?: CanonicalMediaPresentation
+    readonly displayVariant?: CanonicalFigureDisplayVariant
+    readonly textRegions?: ReadonlyArray<CanonicalFigureTextRegion>
   }
   readonly mediaArtifact: {
     readonly mimeType: string
     readonly sha256: string
     readonly encodedBytes: string
+    readonly displayVariant?: CanonicalFigureDisplayVariant & { readonly encodedBytes: string }
   }
 }
 

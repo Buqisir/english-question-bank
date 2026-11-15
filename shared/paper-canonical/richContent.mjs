@@ -1,4 +1,19 @@
-import { exactKeys, isRecordValue } from './stable.mjs'
+import { exactKeys, isRecordValue, sha256 } from './stable.mjs'
+import { isBase64String } from './base64.mjs'
+
+// Optional source-backed table presentation; absence preserves historical output.
+export function validTableColumnWidths(block) {
+  if (!Object.hasOwn(block, 'columnWidths')) return true
+  return Array.isArray(block.columnWidths) && block.columnWidths.length === block.columnCount
+    && block.columnWidths.every(width => Number.isFinite(width) && width > 0)
+    && Number.isFinite(block.columnWidths.reduce((sum, width) => sum + width, 0))
+}
+
+export function validTableMarks(marks) {
+  return Array.isArray(marks) && marks.length > 0
+    && new Set(marks).size === marks.length
+    && marks.every(mark => ['bold', 'italic', 'underline'].includes(mark))
+}
 
 export const FRAMED_COLUMNS_KIND = 'framed_columns'
 export const FRAMED_COLUMNS_COLUMN_COUNT = 2
@@ -201,4 +216,65 @@ export function exactFramedColumnsBlock(block) {
     && Array.isArray(block.columns)
     && block.columns.length === FRAMED_COLUMNS_COLUMN_COUNT
     && block.columns.every((column) => exactFramedColumnsColumn(column))
+}
+
+/** A display rendition supplements, and never replaces, the captured source. */
+export function validDisplayVariant(value) {
+  return isRecordValue(value)
+    && exactKeys(value, ['path', 'sha256', 'byteLength', 'generator', 'textCheck'])
+    && typeof value.path === 'string'
+    && /^materialization\/media\/[a-zA-Z0-9][a-zA-Z0-9._-]*\.(?:png|jpe?g|webp)$/.test(value.path)
+    && !value.path.includes('..')
+    && /^sha256:[a-f0-9]{64}$/.test(value.sha256)
+    && Number.isSafeInteger(value.byteLength) && value.byteLength > 0
+    && value.generator === 'codex-cli' && value.textCheck === 'verified'
+}
+
+export function displayVariantArtifact(media, documents) {
+  if (!media.displayVariant) return undefined
+  const variant = media.displayVariant
+  const { mimeType, pixelWidth, pixelHeight, sourceArtifactRef, ...declaration } = variant
+  if (!validDisplayVariant(declaration) || !/^image\/(?:png|jpeg|webp)$/.test(mimeType)
+    || !Number.isInteger(pixelWidth) || pixelWidth < 1 || !Number.isInteger(pixelHeight) || pixelHeight < 1
+    || !exactKeys(sourceArtifactRef, ['artifactId'])) throw new Error('Invalid display variant declaration')
+  const document = documents.get(variant.sourceArtifactRef?.artifactId)
+  const bytes = isBase64String(document?.encodedBytes)
+    ? Uint8Array.from(atob(document.encodedBytes), character => character.charCodeAt(0)) : null
+  if (!document || !bytes || document.sha256 !== variant.sha256
+    || (document.mediaType ?? document.mimeType) !== variant.mimeType || bytes.byteLength !== variant.byteLength
+    || sha256(bytes) !== variant.sha256) throw new Error('Display variant does not close immutable bytes')
+  return { ...structuredClone(variant), encodedBytes: document.encodedBytes }
+}
+
+export function validFigureTextRegions(regions) {
+  if (!Array.isArray(regions)) return false
+  const ids = new Set()
+  return regions.every(region => {
+    if (!isRecordValue(region) || !exactKeys(region, ['id', 'text', 'box'])
+      || typeof region.id !== 'string' || !region.id.trim() || region.id.includes('\u0000')
+      || ids.has(region.id) || typeof region.text !== 'string' || !region.text.trim()
+      || !isRecordValue(region.box) || !exactKeys(region.box, ['x', 'y', 'w', 'h'])) return false
+    ids.add(region.id)
+    const { x, y, w, h } = region.box
+    return [x, y, w, h].every(Number.isFinite) && x >= 0 && y >= 0
+      && w > 0 && h > 0 && x + w <= 1 && y + h <= 1
+  })
+}
+
+/** Resolves only an exact figure/media + region identity, never a quote search. */
+export function resolveFigureTextRegion(reference, figures) {
+  const key = Object.hasOwn(reference, 'figureId') ? 'figureId' : 'mediaId'
+  if (!exactKeys(reference, [key, 'regionId', ...(Object.hasOwn(reference, 'quote') ? ['quote'] : [])])
+    || typeof reference[key] !== 'string' || !reference[key].trim()
+    || typeof reference.regionId !== 'string' || !reference.regionId.trim()) throw new Error('Invalid figure-region reference')
+  const matches = figures.filter(figure => reference[key] === (key === 'mediaId'
+    ? figure.mediaId : figure.nodeId ?? figure.blockId ?? figure.figureId))
+  const regions = matches.length === 1 ? matches[0].textRegions ?? matches[0].media?.textRegions : undefined
+  if (!validFigureTextRegions(regions)) throw new Error('Unknown figure text table')
+  const region = regions.find(item => item.id === reference.regionId)
+  if (!region || (Object.hasOwn(reference, 'quote')
+    && (typeof reference.quote !== 'string' || !reference.quote.trim() || !region.text.includes(reference.quote)))) {
+    throw new Error('Unknown figure region or quote outside its exact text')
+  }
+  return region
 }

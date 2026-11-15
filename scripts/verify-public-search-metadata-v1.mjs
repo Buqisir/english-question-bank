@@ -164,6 +164,22 @@ const persisted = JSON.parse(stableStringify(final))
 assert.deepEqual(validatePublicSearchMetadata({ sidecar: persisted, ...binding }), [],
   'CLI canonical JSON persistence must not invalidate derived object fields')
 
+const alternativeMaterialization = structuredClone(materialization)
+const alternativeQuestion = alternativeMaterialization.groups.find(group => group.family === 'grammar-fill').questions[0]
+alternativeQuestion.prompt = 'be'
+const alternativeAnswer = alternativeMaterialization.answers.find(answer => answer.questionId === alternativeQuestion.questionId)
+const alternativeBinding = { ...binding, materialization: alternativeMaterialization }
+for (const answer of ['were(are)', 'were/are']) {
+  alternativeAnswer.value = answer
+  const sealed = finalizePublicSearchMetadata({ authored, ...alternativeBinding })
+  const question = sealed.groups.find(group => group.family === 'grammar-fill').metadata.questions[0]
+  question.derived = { tense: 'present', voice: 'active', agreementSensitive: true }
+  assert.deepEqual(validatePublicSearchMetadata({ sidecar: sealed, ...alternativeBinding }), [], answer)
+  question.derived.tense = 'future'
+  assert.ok(validatePublicSearchMetadata({ sidecar: sealed, ...alternativeBinding })
+    .some(issue => issue.code === 'PUBLIC_METADATA_GRAMMAR_DERIVED_INVALID'), `${answer}: fabricated axes rejected`)
+}
+
 const progressiveMaterialization = structuredClone(materialization)
 const progressiveQuestion = progressiveMaterialization.groups.find((group) => group.family === 'grammar-fill').questions[0]
 progressiveQuestion.prompt = 'recover'
