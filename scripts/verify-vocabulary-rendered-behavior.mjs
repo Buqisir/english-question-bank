@@ -556,11 +556,12 @@ async function verifyScopePreviewAndReviewKeys(page, fixtures) {
 
   await page.getByRole('button', { name: '收起进度' }).click()
 
-  assert.equal(await page.getByRole('button', { name: '美音' }).getAttribute('aria-pressed'), 'true')
-  await page.getByRole('button', { name: '英音' }).click()
+  // 切换组那一轮（2026-11-15）：「过词读音」换成 SegmentedField，读屏角色是 radio、选中状态是 aria-checked。
+  assert.equal(await page.getByRole('radio', { name: '美音' }).getAttribute('aria-checked'), 'true')
+  await page.getByRole('radio', { name: '英音' }).click()
   assert.equal(await page.evaluate(() => window.localStorage.getItem('eqb-vocabulary-review-accent-wanwei-round-one-v1')), 'british')
   await page.reload({ waitUntil: 'networkidle' })
-  assert.equal(await page.getByRole('button', { name: '英音' }).getAttribute('aria-pressed'), 'true')
+  assert.equal(await page.getByRole('radio', { name: '英音' }).getAttribute('aria-checked'), 'true')
   pass('开始过词处可选美音或英音，并在刷新后记住上次选择')
 
   await page.setViewportSize({ width: 390, height: 844 })
@@ -1367,7 +1368,7 @@ async function verifyPlayer(page) {
   await page.goto(`${origin}/vocabulary/listen/share-15`, { waitUntil: 'networkidle' })
   await page.getByRole('heading', { name: 'about' }).waitFor()
   assert.equal(await page.locator('audio').count(), 1)
-  assert.equal(await page.getByRole('button', { name: '2遍' }).getAttribute('aria-pressed'), 'true')
+  assert.equal(await page.getByRole('radio', { name: '2遍' }).getAttribute('aria-checked'), 'true')
   assert.equal(await page.getByRole('slider', { name: '播放音量' }).count(), 1)
   pass('公开听写页只有一个 audio，真实语义控件与默认 2 遍正确')
 
@@ -1382,12 +1383,13 @@ async function verifyPlayer(page) {
   })
   const fail = () => audio.evaluate((node) => node.dispatchEvent(new Event('error')))
 
-  await page.getByRole('button', { name: '美音' }).waitFor()
-  assert.equal(await page.getByRole('button', { name: '美音' }).getAttribute('aria-pressed'), 'true')
+  // 「发音」换成 SegmentedField（radio / aria-checked，切换组那一轮 2026-11-15）。
+  await page.getByRole('radio', { name: '美音' }).waitFor()
+  assert.equal(await page.getByRole('radio', { name: '美音' }).getAttribute('aria-checked'), 'true')
   assert.equal(await page.getByText('/wɜːd 1/', { exact: true }).count(), 1)
   await controls.getByRole('button', { name: '开始播放' }).click()
   assert.equal((await log()).filter((item) => item.type === 'play').at(-1).src, '/fixture-audio/word-1.mp3')
-  await page.getByRole('button', { name: '英音' }).click()
+  await page.getByRole('radio', { name: '英音' }).click()
   assert.equal((await log()).at(-1).type, 'pause')
   assert.equal(await page.getByText('/wɜːd brɪtɪʃ 1/', { exact: true }).count(), 1)
   assert.equal(await page.getByText('准备开始').count(), 1)
@@ -1399,7 +1401,7 @@ async function verifyPlayer(page) {
     '/vocabulary-assets/wanwei-round-one-v1/audio/eqb-british-cori-high-v1/fixture-0001.mp3',
   )
   await controls.getByRole('button', { name: '暂停播放' }).click()
-  await page.getByRole('button', { name: '美音' }).click()
+  await page.getByRole('radio', { name: '美音' }).click()
   await clearLog()
   pass('同一二维码可切换美音/英音，音标同步且切换立即取消旧音频')
 
@@ -1514,8 +1516,8 @@ async function verifyPlayerSize(page, count) {
 async function verifyAmericanOnlyBeforeBritishRelease(page) {
   await page.goto(`${origin}/vocabulary/listen/share-1`, { waitUntil: 'networkidle' })
   await page.getByRole('heading', { name: 'about' }).waitFor()
-  assert.equal(await page.getByRole('button', { name: '美音' }).count(), 0)
-  assert.equal(await page.getByRole('button', { name: '英音' }).count(), 0)
+  assert.equal(await page.getByRole('radio', { name: '美音' }).count(), 0)
+  assert.equal(await page.getByRole('radio', { name: '英音' }).count(), 0)
   assert.equal(await page.getByText('/wɜːd 1/', { exact: true }).count(), 1)
   pass('英音 1600 词未发布 ready 标记前不暴露残缺切换入口')
 }

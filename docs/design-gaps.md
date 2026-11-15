@@ -122,3 +122,8 @@ token 的扩展用法。
 
 - **想要的值**：一是 TextField 新加的框内左图标 16px：左内边距写成 `calc(var(--eqb-space-3) + 16px + var(--eqb-space-2))`，16 是图标宽，和上面「字段构件的几处尺寸」那条的二是同一件事（候选名 `--eqb-icon-size`）。二是各页给字段定的宽：听写「从 / 到」日期 142、「推荐下一轮」「抽」数字框 64、错词听写「文件名」240、Agent 口令「名称」228、过生词完成页「单词纸名称」`min(440px, 100%)`。都是换前的原值（228 是换前实测），tokens.css 没有控件宽度一类。若收编，数字框可以用 `--eqb-field-width-number`（64），其余是各页的放法，建议留在页面里不收。
 - **临时方案**：一，16 写在 calc 里，注释写明是图标宽。二，照原值写字面量，每条有 Explicit-Cascade 注释（`.x .eqb-field-control` (0,2,0) 盖 field.css 的 `width: 100%` (0,1,0)）。记录在 `design/components-2026-11-13/migrate-fields2/README.md`「缺的变量」。
+
+## 2026-11-15 切换组换分段选择的两处（`app/src/shared-ui/field.css` `.eqb-segmented-icon`；`App.css` `.fluid-hover-list` 在公开页没加载）
+
+- **想要的值**：一是分段选择项里的图标 16px（`ChoiceOption.icon`），和上面两条的 `--eqb-icon-size` 是同一件事。二是分段选择的悬停滑块：SegmentedField 靠 FluidHoverList，滑块的样子（`.fluid-hover-list::before`）写在 `App.css` 里。扫码听音页 / 扫码听写页是另一个入口（`main.tsx` 不加载 `App.tsx`），这两页上的分段选择没有悬停滑块，只剩悬停那一项字变墨色。若收编，把 `.fluid-hover-list` 那几条从 `App.css` 挪进 `shared-ui/` 下一个随 FluidHoverList 一起加载的样式文件。
+- **临时方案**：一，构件不写图标尺寸，调用处给 `size={16}`，构件文件头写明。二，公开页先不补（学生在手机上用，触屏本来就不画滑块，`@media (hover: none) and (pointer: coarse)`）。记录在 `design/components-2026-11-13/migrate-segment/README.md`「缺的变量」。

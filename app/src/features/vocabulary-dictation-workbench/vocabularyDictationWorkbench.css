@@ -149,6 +149,9 @@
   width: 142px;
 }
 
+/* 已选听写面板里的「口音」是 SegmentedField（切换组那一轮 2026-11-15）：用 :where(:not(.eqb-segmented-option)) 排除，
+ * 不然本条 (0,1,1) 会盖过 field.css .eqb-segmented-option (0,1,0) 的透明底、无边、胶囊圆角。
+ * 包 :where 是为了权重不变（还是 (0,1,1)），后面靠权重赢它的几条（.dictation-batch-export-actions button 等）照旧。 */
 .dictation-library-tools > button,
 .dictation-pagination button,
 .dictation-selection-summary button,
@@ -159,7 +162,7 @@
 .dictation-task-date-heading button,
 .dictation-task-list button,
 .dictation-task-list a,
-.dictation-task-selection-panel button,
+.dictation-task-selection-panel button:where(:not(.eqb-segmented-option)),
 .dictation-record-list button,
 .dictation-suggestion-control button,
 .dictation-suggestion-panel button,
@@ -189,7 +192,7 @@
 .dictation-task-date-heading button:hover,
 .dictation-task-list button:hover,
 .dictation-task-list a:hover,
-.dictation-task-selection-panel button:hover,
+.dictation-task-selection-panel button:where(:not(.eqb-segmented-option)):hover,
 .dictation-record-list button:hover,
 .dictation-suggestion-control button:hover,
 .dictation-suggestion-panel button:hover,
@@ -392,45 +395,8 @@
 }
 
 
-.dictation-combine-settings fieldset {
-  display: flex;
-  gap: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-.dictation-combine-settings legend {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-}
-
-.dictation-combine-settings fieldset button {
-  min-height: 36px;
-  border: 1px solid var(--eqb-color-border);
-  background: var(--eqb-color-paper);
-  padding: 6px 12px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.dictation-combine-settings fieldset button:first-of-type {
-  border-radius: 8px 0 0 8px;
-}
-
-.dictation-combine-settings fieldset button:last-of-type {
-  border-left: 0;
-  border-radius: 0 8px 8px 0;
-}
-
-.dictation-combine-settings fieldset button.is-selected {
-  border-color: var(--action);
-  background: var(--eqb-color-desk);
-  color: var(--eqb-color-text);
-}
+/* 「口音」换成 SegmentedField（切换组那一轮 2026-11-15）：原来两块拼起来的方角键（36 高、8px 外角、选中墨边桌色底）删了，
+ * 样子归 field.css 分段选择（胶囊，选中白底 e1）。 */
 
 .dictation-check-setting {
   min-height: 36px;
@@ -881,7 +847,9 @@
   box-shadow: var(--elev-2);
 }
 
-.dictation-task-selection-panel > div {
+/* 「口音」字段的外层也是 div（.eqb-field），排除掉，免得被撑开、改成竖排。包 :where 让权重不变（(0,1,1)），
+ * 下面 .dictation-task-selection-panel > .dictation-batch-export-actions (0,2,0) 照旧赢它。 */
+.dictation-task-selection-panel > div:where(:not(.eqb-field)) {
   display: flex;
   min-width: 200px;
   flex: 1;
@@ -914,41 +882,7 @@
   font-size: 12px;
 }
 
-.dictation-task-selection-panel fieldset {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-.dictation-task-selection-panel legend {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-}
-
-/* Overrides the shared button radius so the two accent choices read as one segmented control. */
-.dictation-task-selection-panel fieldset button {
-  border-radius: 0;
-}
-
-.dictation-task-selection-panel fieldset button:first-of-type {
-  border-radius: 8px 0 0 8px;
-}
-
-.dictation-task-selection-panel fieldset button:last-of-type {
-  border-left: 0;
-  border-radius: 0 8px 8px 0;
-}
-
-/* Overrides the shared neutral button colors because this is the current accent selection. */
-.dictation-task-selection-panel fieldset button.is-selected {
-  border-color: var(--action);
-  background: var(--eqb-color-desk);
-  color: var(--eqb-color-text);
-}
+/* 「口音」换成 SegmentedField（切换组那一轮 2026-11-15）：原来覆盖共用键圆角、拼成方角两块的几条删了，样子归 field.css。 */
 
 /* Overrides the shared neutral button colors because date export is this toolbar's primary action. */
 .dictation-task-selection-panel button.is-primary {
@@ -1327,8 +1261,11 @@
   font-size: 14px;
 }
 
-.meaning-recall-home button,
-.meaning-recall-result button,
+/* 认词首页「顺序」、结果页「听写发音」是 SegmentedField（切换组那一轮 2026-11-15）：用 :where(:not(.eqb-segmented-option)) 排除，
+ * 不然这三条（底、悬停、焦点）会盖过 field.css 分段选择的透明底、无边、胶囊圆角和选中项的 e1。
+ * 包 :where 是为了权重不变：下载菜单里的键（.dictation-download-menu > div button 等）原来靠权重赢这几条，照旧赢。 */
+.meaning-recall-home button:where(:not(.eqb-segmented-option)),
+.meaning-recall-result button:where(:not(.eqb-segmented-option)),
 .meaning-recall-stage button {
   display: inline-flex;
   align-items: center;
@@ -1345,8 +1282,8 @@
   font-weight: 500;
 }
 
-.meaning-recall-home button:hover:not(:disabled),
-.meaning-recall-result button:hover:not(:disabled),
+.meaning-recall-home button:where(:not(.eqb-segmented-option)):hover:not(:disabled),
+.meaning-recall-result button:where(:not(.eqb-segmented-option)):hover:not(:disabled),
 .meaning-recall-stage button:hover:not(:disabled) {
   border-color: var(--eqb-color-border-strong);
   background: var(--eqb-color-desk);
@@ -1362,8 +1299,8 @@
   color: var(--eqb-color-paper);
 }
 
-.meaning-recall-home button:focus-visible,
-.meaning-recall-result button:focus-visible,
+.meaning-recall-home button:where(:not(.eqb-segmented-option)):focus-visible,
+.meaning-recall-result button:where(:not(.eqb-segmented-option)):focus-visible,
 .meaning-recall-stage button:focus-visible,
 .meaning-recall-home input:focus-visible,
 .meaning-recall-result input:focus-visible {
@@ -1380,9 +1317,10 @@
   padding: 20px 16px;
 }
 
-/* 「抽」的字段外层也是 div（.eqb-field），用 :not 排除，免得被改成竖排（字段的排法归 field.css）。权重 (0,2,1)，比原来 (0,1,1) 高一档，只为排除。 */
+/* 「抽」「顺序」「推荐词数」的字段外层也是 div（.eqb-field），排除掉，免得被改成竖排（字段的排法归 field.css）。
+ * 「抽」那一项（第二轮）用 :not，权重 (0,2,1)；「推荐词数」这一项（切换组那一轮）包 :where，权重不变 (0,1,1)。 */
 .meaning-recall-start-row > div:not(.eqb-field),
-.meaning-recall-suggestion > div,
+.meaning-recall-suggestion > div:where(:not(.eqb-field)),
 .meaning-recall-stage > header > div {
   display: flex;
   min-width: 0;
@@ -1390,31 +1328,18 @@
   gap: 4px;
 }
 
-.meaning-recall-start-row span,
+/* 「随机」前面的图标外层也是 span（.eqb-segmented-icon），排除掉，让它跟着字变色（field.css）。包 :where，权重不变。 */
+.meaning-recall-start-row span:where(:not(.eqb-segmented-icon)),
 .meaning-recall-suggestion span,
 .meaning-recall-stage > header span {
   color: var(--eqb-color-text-muted);
   font-size: 12px;
 }
 
-/* 「抽 … 词」换成 TextField（字段构件第二轮 2026-11-15），这两条只剩「直接推荐一轮」那个没有标签的词数框。 */
-.meaning-recall-suggestion label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--eqb-color-text-muted);
-  font-size: 12px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.meaning-recall-suggestion input {
+/* 「直接推荐一轮」的词数框换成 TextField（切换组那一轮 2026-11-15），原来的 label / input 两条删了。框宽 64（原值，同「抽」）。
+ * Explicit-Cascade：本条 (0,2,0) 覆盖 field.css .eqb-field-control 的 width: 100% (0,1,0)。 */
+.meaning-recall-suggestion-count .eqb-field-control {
   width: 64px;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 8px;
-  background: var(--eqb-color-paper);
-  padding: 8px;
-  color: var(--eqb-color-text);
 }
 
 /* 「抽」的词数框宽 64（原值）。Explicit-Cascade：本条 (0,2,0) 覆盖 field.css .eqb-field-control 的 width: 100% (0,1,0)。 */
@@ -1422,7 +1347,6 @@
   width: 64px;
 }
 
-.meaning-recall-start-row fieldset,
 .meaning-recall-result-list fieldset {
   display: flex;
   margin: 0;
@@ -1430,7 +1354,6 @@
   border: 0;
 }
 
-.meaning-recall-start-row legend,
 .meaning-recall-result-list legend {
   position: absolute;
   width: 1px;
@@ -1439,24 +1362,20 @@
   clip: rect(0, 0, 0, 0);
 }
 
-.meaning-recall-start-row fieldset button,
 .meaning-recall-result-list fieldset button {
   border-radius: 0;
   border-right: 0;
 }
 
-.meaning-recall-start-row fieldset button:first-of-type,
 .meaning-recall-result-list fieldset button:first-of-type {
   border-radius: 8px 0 0 8px;
 }
 
-.meaning-recall-start-row fieldset button:last-of-type,
 .meaning-recall-result-list fieldset button:last-of-type {
   border-right: 1px solid var(--eqb-color-border);
   border-radius: 0 8px 8px 0;
 }
 
-.meaning-recall-start-row fieldset button.is-selected,
 .meaning-recall-result-list fieldset button.is-selected {
   background: var(--eqb-color-desk);
   color: var(--eqb-color-text);
@@ -1620,42 +1539,8 @@
   width: 240px;
 }
 
-.meaning-recall-result-actions fieldset {
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-.meaning-recall-result-actions legend {
-  float: left;
-  align-self: center;
-  margin-right: 8px;
-  color: var(--eqb-color-text-muted);
-  font-size: 12px;
-}
-
-.meaning-recall-result-actions fieldset button {
-  min-width: 58px;
-  border-radius: 0;
-  border-right: 0;
-}
-
-.meaning-recall-result-actions fieldset button:first-of-type {
-  border-radius: 8px 0 0 8px;
-}
-
-.meaning-recall-result-actions fieldset button:last-of-type {
-  border-right: 1px solid var(--eqb-color-border);
-  border-radius: 0 8px 8px 0;
-}
-
-.meaning-recall-result-actions fieldset button.is-selected {
-  border-color: var(--eqb-color-border-strong);
-  background: var(--eqb-color-desk);
-  color: var(--eqb-color-text);
-}
+/* 「听写发音」换成 SegmentedField（切换组那一轮 2026-11-15），标签在左（layout inline）。原来 legend 浮在左边、两块方角键拼在一起的几条删了。
+ * 这一行是 align-items: flex-start，字段 36 高的框和 32 高的分段上边齐（目测和原来一样）。 */
 
 .meaning-recall-result-actions > span {
   align-self: center;
@@ -1706,7 +1591,7 @@
   }
 
   .meaning-recall-start-row > div:not(.eqb-field),
-  .meaning-recall-suggestion > div {
+  .meaning-recall-suggestion > div:where(:not(.eqb-field)) {
     grid-column: 1 / -1;
   }
 
@@ -1872,7 +1757,7 @@
     flex-direction: column;
   }
 
-  .dictation-task-selection-panel > div {
+  .dictation-task-selection-panel > div:where(:not(.eqb-field)) {
     min-width: 0;
   }
 
@@ -1882,12 +1767,18 @@
     width: 100%;
   }
 
-  .dictation-task-selection-panel fieldset,
   .dictation-task-selection-panel > button {
     width: 100%;
   }
 
-  .dictation-task-selection-panel fieldset button {
+  /* 窄屏「口音」占满一行、两项平分（照原来）。Explicit-Cascade：本条 (0,2,0) 覆盖 field.css .eqb-segmented 的 inline-flex (0,1,0)，flex: 1 在字段的 .eqb-field-body（flex 行）里撑满；
+   * 下一条 (0,2,0) 给 .eqb-segmented-option 加 flex，那边没写 flex，不冲突。 */
+  .dictation-task-accent .eqb-segmented {
+    display: flex;
+    flex: 1;
+  }
+
+  .dictation-task-accent .eqb-segmented-option {
     flex: 1;
   }
 
@@ -1954,7 +1845,6 @@
     width: 100%;
   }
 
-  .meaning-recall-start-row fieldset,
   .meaning-recall-suggestion-result > div,
   .meaning-recall-result-actions {
     flex-wrap: wrap;
@@ -1969,15 +1859,21 @@
     width: 100%;
   }
 
-  .meaning-recall-start-row fieldset button,
   .meaning-recall-suggestion-result button,
-  .meaning-recall-result-actions button,
+  .meaning-recall-result-actions button:where(:not(.eqb-segmented-option)),
   .meaning-recall-stage > footer button {
     flex: 1;
   }
 
-  .meaning-recall-result-actions fieldset button {
-    flex: 0 0 auto;
+  /* 窄屏「顺序」占满一行、两项平分（照原来）。Explicit-Cascade：本条 (0,2,0) 覆盖 field.css .eqb-segmented 的 inline-flex (0,1,0)，flex: 1 在字段的 .eqb-field-body（flex 行）里撑满；
+   * 下一条给 .eqb-segmented-option 加 flex，那边没写 flex，不冲突。「听写发音」照原来不拉宽（原来那一条 flex: 0 0 auto）。 */
+  .meaning-recall-order .eqb-segmented {
+    display: flex;
+    flex: 1;
+  }
+
+  .meaning-recall-order .eqb-segmented-option {
+    flex: 1;
   }
 
   .meaning-recall-word {

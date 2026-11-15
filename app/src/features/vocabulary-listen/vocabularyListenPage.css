@@ -250,37 +250,17 @@
   border-top: 1px solid var(--line);
 }
 
-.vocabulary-listen-settings fieldset {
+/* 「发音」「每词播放」换成 SegmentedField（切换组那一轮 2026-11-15），样子归 field.css 分段选择。
+ * 原来 fieldset / legend / 36 高带边的键几条删了。这里只留：整组占满一行、几项平分（照原来的 flex: 1）。
+ * Explicit-Cascade：前一条 (0,2,0) 覆盖 field.css .eqb-segmented 的 inline-flex (0,1,0)，flex: 1 在字段的 .eqb-field-body（flex 行）里撑满；
+ * 后一条 (0,2,0) 给 .eqb-segmented-option 加 flex，那边没写，不冲突。 */
+.vocabulary-listen-choice .eqb-segmented {
   display: flex;
-  gap: 6px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-.vocabulary-listen-settings legend {
-  width: 100%;
-  margin-bottom: 8px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.vocabulary-listen-settings fieldset button {
   flex: 1;
-  min-height: 36px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 650;
 }
 
-.vocabulary-listen-settings fieldset button.is-selected {
-  border-color: var(--line-strong);
-  background: var(--surface-strong);
-  color: #1e4a3a;
+.vocabulary-listen-choice .eqb-segmented-option {
+  flex: 1;
 }
 
 .vocabulary-listen-settings label {
@@ -467,7 +447,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .vocabulary-listen-control-row button:hover:not(:disabled),
-  .vocabulary-listen-settings button:hover,
+  .vocabulary-listen-settings button:where(:not(.eqb-segmented-option)):hover,
   .vocabulary-listen-message button:hover {
     border-color: var(--line-strong);
     background: var(--surface-strong);
@@ -483,7 +463,8 @@
   transform: scale(0.97);
 }
 
-.vocabulary-listen-page button:focus-visible,
+/* 分段选择的项排除掉（:where 不加权重）：本条的 3px 淡影会盖掉选中项的 e1，焦点环归 field.css。 */
+.vocabulary-listen-page button:where(:not(.eqb-segmented-option)):focus-visible,
 .vocabulary-listen-page a:focus-visible,
 .vocabulary-listen-page input:focus-visible {
   box-shadow: 0 0 0 3px rgb(27 43 51 / 0.12);

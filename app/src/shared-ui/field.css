@@ -67,6 +67,26 @@
   flex: 0 0 auto;
 }
 
+/* 出错要自己播报（Field 的 announce）：出错那一行包在一个一直在的 role=alert 里，出错字出现时读屏念一次。
+ * 还没出错（也没有说明）时，外面这一格是空的：拿出排版（不占一行、不多一个 4 的间隔），但留在无障碍树里，
+ * 播报区要先在页面上，后放进去的字才会被念（display: none 会把它从树里拿掉，所以不用）。写法同 index.css .visually-hidden。
+ * 有说明、没出错时，空着的播报区自己也拿出排版，免得说明上面多一个 4 的间隔。 */
+.eqb-field-messages[data-empty],
+.eqb-field-live:empty {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* 播报区本身不画东西，出错那一行照常排在说明上面。 */
+.eqb-field-live {
+  display: grid;
+  min-width: 0;
+}
+
 /* ── 控件：输入框、多行、下拉，以及长成字段样子的下拉触发键 ── */
 
 .eqb-field-control {
@@ -268,6 +288,11 @@
 .eqb-segmented-option {
   /* 放进 FluidHoverList 时，滑块是 z-index auto 的 ::before，项要有定位才画在它上面（同 button.css）。 */
   position: relative;
+  /* 带图标时图标和字一行竖着居中，隔 4（§8 组内最小一档）；没图标时和原来一样。拉宽时字居中。 */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--eqb-space-1);
   box-sizing: border-box;
   height: 32px;
   padding: 0 var(--eqb-space-3);
@@ -311,6 +336,13 @@
 .eqb-segmented-option[aria-disabled='true'] {
   color: var(--eqb-color-text-faint);
   cursor: not-allowed;
+}
+
+/* 项里字前面的 16px 图标（ChoiceOption.icon）：颜色跟字走（没选次要灰、选中墨色），不缩。 */
+.eqb-segmented-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: inherit;
 }
 
 /* 组下面的原因：每项一行。 */

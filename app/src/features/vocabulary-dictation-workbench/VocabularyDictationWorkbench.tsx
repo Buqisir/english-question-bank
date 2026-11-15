@@ -27,6 +27,7 @@ import { Dialog } from '../../shared-ui/Dialog.tsx'
 import { Button } from '../../shared-ui/Button.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { SelectField, TextField } from '../../shared-ui/Field.tsx'
+import { SegmentedField, type ChoiceOption } from '../../shared-ui/OptionField.tsx'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
   createVocabularyDictationTask,
@@ -73,6 +74,11 @@ const ACTIVE_STUDENT_STORAGE_KEY = 'eqb-vocabulary-active-student-wanwei-round-o
 const SUGGESTION_TARGET_STORAGE_KEY = 'eqb-vocabulary-review-suggestion-target-v1'
 type WorkspaceTab = 'sets' | 'meaning' | 'tasks' | 'review' | 'history'
 type Accent = 'american' | 'british'
+// 「口音」两个选项（合并设置、已选听写导出两处的 SegmentedField）。
+const ACCENT_OPTIONS: ChoiceOption<Accent>[] = [
+  { value: 'american', label: '美音' },
+  { value: 'british', label: '英音' },
+]
 type PrintKind = VocabularyMaterialKind
 type ReviewFilter = 'all' | 'frequent'
 type HistoryFilter = 'meaning' | 'dictation'
@@ -1144,7 +1150,8 @@ export function VocabularyDictationWorkbench({
                   <div className="dictation-combine-settings">
                     <TextField label="打印标题" size="lg" value={collectionTitle} maxLength={60} onChange={(event) => setCollectionTitle(event.target.value)} />
                     <TextField label="听写标题" size="lg" value={taskTitle} maxLength={60} onChange={(event) => setTaskTitle(event.target.value)} />
-                    <fieldset><legend>口音</legend><button type="button" className={accent === 'american' ? 'is-selected' : ''} onClick={() => setAccent('american')}>美音</button><button type="button" className={accent === 'british' ? 'is-selected' : ''} onClick={() => setAccent('british')}>英音</button></fieldset>
+                    {/* 切换组那一轮（2026-11-15）：换成 SegmentedField，标签「口音」照旧只给读屏。原来两个键没有 aria-pressed。 */}
+                    <SegmentedField className="dictation-combine-accent" label="口音" hideLabel value={accent} options={ACCENT_OPTIONS} onChange={setAccent} />
                     <label className="dictation-check-setting"><input type="checkbox" checked={shuffleBeforeFreeze} onChange={(event) => setShuffleBeforeFreeze(event.target.checked)} /><Shuffle size={16} />打乱词序</label>
                   </div>
                 </details>
@@ -1236,7 +1243,8 @@ export function VocabularyDictationWorkbench({
                   <strong>已选 {selectedTasks.length} 份听写</strong>
                   <span>{selectedTaskRawCount === selectedTaskUniqueCount ? `${selectedTaskUniqueCount} 词` : `原始 ${selectedTaskRawCount} 词 · 去重 ${selectedTaskUniqueCount} 词`} · 自动带二维码</span>
                 </div>
-                <fieldset><legend>口音</legend><button type="button" aria-pressed={accent === 'american'} className={accent === 'american' ? 'is-selected' : ''} onClick={() => setAccent('american')}>美音</button><button type="button" aria-pressed={accent === 'british'} className={accent === 'british' ? 'is-selected' : ''} onClick={() => setAccent('british')}>英音</button></fieldset>
+                {/* 切换组那一轮（2026-11-15）：一排 aria-pressed 的键换成 SegmentedField（单选组），标签「口音」照旧只给读屏。 */}
+                <SegmentedField className="dictation-task-accent" label="口音" hideLabel value={accent} options={ACCENT_OPTIONS} onChange={setAccent} />
                 <div className="dictation-batch-export-actions">
                   <button type="button" className="is-primary" disabled={busy} onClick={() => void exportSelectedTasksByDate()}><QrCode size={16} />合并导出听写纸</button>
                   <button type="button" disabled={busy} onClick={() => void exportSelectedTasksByDate('save-as')}><Save size={16} />另存到文件夹…</button>

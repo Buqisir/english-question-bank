@@ -13,6 +13,8 @@
  *   aria-describedby 上，读屏进组时就念。
  *   样子：DESIGN.md §5 Single-Radius-Family「胶囊只给标签类：分段切换」→ 圆角 --eqb-radius-pill；
  *   选中的是一张纸（白底、e1，§4），没选的透明底次要灰字，悬停由 FluidHoverList 的滑块垫桌色。
+ *   项可以带一个 16px 图标（ChoiceOption.icon，放在字前面，对读屏隐藏，读屏名字只是字）；
+ *   2026-11-15 切换组那一轮加的口子，第一处是认词「顺序」的「随机」（design/components-2026-11-13/migrate-segment/README.md）。
  *
  * - OptionSelectField 带原因的下拉：选项多一些、或者名字长、要写「为什么用不了」的（草稿卷 PDF 版本）。
  *   原生 <option> 只放得下一行名字，所以用共用 Menu（可勾选项 + 每项下面一行原因，fix-pdf-versions 那一轮定的），
@@ -23,7 +25,7 @@
  *   下面一行「用不了：原因」。
  */
 
-import { useId, type KeyboardEvent } from 'react'
+import { useId, type KeyboardEvent, type ReactNode } from 'react'
 import { FluidHoverList } from '../components/FluidHoverList.tsx'
 import { ChevronDown } from '../icons'
 import { Field, joinIds, type FieldFrameProps, type FieldSize } from './Field.tsx'
@@ -37,6 +39,11 @@ export type ChoiceOption<V extends string = string> = {
   disabled?: boolean
   /** 用不了的原因，一行。写在选项下面（下拉）或组下面（分段）。 */
   reason?: string
+  /**
+   * 字前面的 16px 图标，只有 SegmentedField 画（下拉里不画）。调用处给 size={16} 的图标，
+   * 构件自己包一层 aria-hidden，读屏名字只念 label。
+   */
+  icon?: ReactNode
 }
 
 // ── 分段选择 ──────────────────────────────────────────────
@@ -56,6 +63,7 @@ export function SegmentedField<V extends string>({
   hideLabel,
   hint,
   error,
+  announce,
   layout,
   className,
   value,
@@ -101,6 +109,7 @@ export function SegmentedField<V extends string>({
       hideLabel={hideLabel}
       hint={hint || reasons ? <>{hint}{reasons}</> : undefined}
       error={error}
+      announce={announce}
       layout={layout}
       className={className}
       labelledByControl
@@ -137,6 +146,7 @@ export function SegmentedField<V extends string>({
                 }}
                 onKeyDown={(event) => onKeyDown(event, index)}
               >
+                {option.icon && <span className="eqb-segmented-icon" aria-hidden="true">{option.icon}</span>}
                 {option.label}
               </button>
             )
@@ -170,6 +180,7 @@ export function OptionSelectField<V extends string>({
   hideLabel,
   hint,
   error,
+  announce,
   layout,
   className,
   value,
@@ -192,6 +203,7 @@ export function OptionSelectField<V extends string>({
       hideLabel={hideLabel}
       hint={hint}
       error={ownError}
+      announce={announce}
       layout={layout}
       className={className ? `${className}${hideMessages ? ' eqb-field-messages-hidden' : ''}` : hideMessages ? 'eqb-field-messages-hidden' : undefined}
       labelledByControl

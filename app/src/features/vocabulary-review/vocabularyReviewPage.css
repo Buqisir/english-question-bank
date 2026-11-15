@@ -1094,52 +1094,8 @@
   margin-top: 16px;
 }
 
-.vocabulary-review-accent-control {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-.vocabulary-review-accent-control legend {
-  float: left;
-  padding: 0;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.vocabulary-review-accent-control > div {
-  display: inline-flex;
-  padding: 2px;
-  border: 1px solid var(--line-strong);
-  border-radius: 8px;
-  background: var(--surface);
-}
-
-.vocabulary-review-accent-control button {
-  min-height: 36px;
-  padding: 6px 10px;
-  border: 0;
-  border-radius: 4px;
-  background: transparent;
-  color: var(--muted);
-  font: inherit;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.vocabulary-review-accent-control button.is-selected {
-  background: var(--surface-strong);
-  color: var(--eqb-color-text);
-}
-
-.vocabulary-review-accent-control button:focus-visible {
-  outline: 2px solid var(--action);
-  outline-offset: 2px;
-}
+/* 「过词读音」换成 SegmentedField（切换组那一轮 2026-11-15）：标签在左（layout inline），样子归 field.css 分段选择。
+ * 原来的外框（2px 内边距、深一档边、8px）、4px 圆角的键、600 字重几条删了。 */
 
 /* 开始页的输入框、多行框（原来 44 高、16 字、深一档的边、textarea 至少 112 高）归 field.css 大号（36 高、14 字；多行高跟 rows）。 */
 
@@ -1488,8 +1444,10 @@
     flex-direction: column;
   }
 
-  .vocabulary-review-accent-control {
-    justify-content: space-between;
+  /* 窄屏标签在左、分段靠右（照原来的 space-between）。字段是两列格子，控件那一格是 flex 行，往右推。
+   * 本条 (0,2,0) 给 field.css .eqb-field-body 加 justify-content，那边没写，不冲突。 */
+  .vocabulary-review-accent-control .eqb-field-body {
+    justify-content: flex-end;
   }
 
   .vocabulary-run-start-row > .eqb-button {

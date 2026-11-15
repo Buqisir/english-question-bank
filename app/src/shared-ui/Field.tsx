@@ -22,7 +22,10 @@
  * 无障碍：
  * - 标签用 <label for> 和控件连上（Field 生成 id）；只给读屏的标签用 hideLabel（标签照样在 DOM 里）。
  * - 说明、出错用 aria-describedby 挂到控件上（调用处自己给的 aria-describedby 接在后面）；有出错时控件带 aria-invalid。
- * - 出错那一行是普通文字，不用 role=alert：焦点在控件上时读屏会念描述；要「一出错就播报」的地方由调用处另放提示行。
+ * - 出错那一行默认是普通文字，不用 role=alert：焦点在控件上时读屏会念描述。
+ *   要「一出错就播报」的地方给 announce（2026-11-15 加）：出错那一行包进一个一直在页面上的 role=alert 播报区，
+ *   出错字出现或换成另一句时读屏念一次；字还是只有一份（就是看得见、挂在 aria-describedby 上的那一行），
+ *   读屏逐行读时不会听到两遍。调用处不用再另放一行只给读屏的 alert。
  *
  * 用法：
  * - TextField / TextAreaField / SelectField：一行写完，props 照原生元素给。
@@ -46,6 +49,11 @@ export type FieldFrameProps = {
   hint?: ReactNode
   /** 出错：控件下面一行，图标 + 次要灰字；控件边变危险色、带 aria-invalid。 */
   error?: ReactNode
+  /**
+   * 出错字出现时让读屏念一次（live region，role=alert）。按了「保存」才出错、焦点不在框上的地方用。
+   * 只是把出错那一行放进一直在的播报区，不另外复制一份字。
+   */
+  announce?: boolean
   /** stack 标签在上（默认）；inline 标签在左、控件在右（顶栏这种一行放得下的地方）。 */
   layout?: FieldLayout
   /** 挂在最外层的类名，只当选择器钩子和放法用。 */
@@ -77,7 +85,7 @@ export function joinIds(...ids: Array<string | undefined | false | null>): strin
 }
 
 /** 字段框架：标签、控件、说明、出错。 */
-export function Field({ label, hideLabel = false, hint, error, layout = 'stack', className, labelledByControl = false, id, children }: FieldProps) {
+export function Field({ label, hideLabel = false, hint, error, announce = false, layout = 'stack', className, labelledByControl = false, id, children }: FieldProps) {
   const generated = useId()
   const controlId = id ?? `${generated}-control`
   const labelId = `${generated}-label`
@@ -85,6 +93,12 @@ export function Field({ label, hideLabel = false, hint, error, layout = 'stack',
   const errorId = error ? `${generated}-error` : undefined
   const invalid = Boolean(error)
   const labelClass = hideLabel ? 'eqb-field-label visually-hidden' : 'eqb-field-label'
+  const errorLine = error ? (
+    <p id={errorId} className="eqb-field-message" data-kind="error">
+      <AlertTriangle size={16} aria-hidden="true" />
+      <span>{error}</span>
+    </p>
+  ) : null
   return (
     <div
       className={className ? `eqb-field ${className}` : 'eqb-field'}
@@ -100,14 +114,12 @@ export function Field({ label, hideLabel = false, hint, error, layout = 'stack',
       <div className="eqb-field-body">
         {children({ id: controlId, labelId, describedBy: joinIds(hintId, errorId), invalid })}
       </div>
-      {(hint || error) && (
-        <div className="eqb-field-messages">
-          {error && (
-            <p id={errorId} className="eqb-field-message" data-kind="error">
-              <AlertTriangle size={16} aria-hidden="true" />
-              <span>{error}</span>
-            </p>
-          )}
+      {(hint || error || announce) && (
+        // announce 时这一格一直在（播报区要先在页面上），没字时 data-empty 让它不占排版（field.css）。
+        <div className="eqb-field-messages" data-empty={!hint && !error ? '' : undefined}>
+          {announce ? (
+            <div className="eqb-field-live" role="alert">{errorLine}</div>
+          ) : errorLine}
           {hint && (
             <p id={hintId} className="eqb-field-message" data-kind="hint">
               {hint}
@@ -142,9 +154,9 @@ export type TextFieldProps = ControlCommon &
   }
 
 /** 一行文字输入。 */
-export function TextField({ label, hideLabel, hint, error, layout, className, size = 'md', controlClassName, id, ref, icon, trailing, 'aria-describedby': describedBy, ...rest }: TextFieldProps) {
+export function TextField({ label, hideLabel, hint, error, announce, layout, className, size = 'md', controlClassName, id, ref, icon, trailing, 'aria-describedby': describedBy, ...rest }: TextFieldProps) {
   return (
-    <Field label={label} hideLabel={hideLabel} hint={hint} error={error} layout={layout} className={className} id={id}>
+    <Field label={label} hideLabel={hideLabel} hint={hint} error={error} announce={announce} layout={layout} className={className} id={id}>
       {(binding) => (
         <>
           {icon && <span className="eqb-field-icon">{icon}</span>}
@@ -171,9 +183,9 @@ export type TextAreaFieldProps = ControlCommon &
   }
 
 /** 多行输入。高度跟 rows 走，字号跟 size 走（sm、md 13，lg 14）。 */
-export function TextAreaField({ label, hideLabel, hint, error, layout, className, size = 'md', controlClassName, id, ref, rows = 3, 'aria-describedby': describedBy, ...rest }: TextAreaFieldProps) {
+export function TextAreaField({ label, hideLabel, hint, error, announce, layout, className, size = 'md', controlClassName, id, ref, rows = 3, 'aria-describedby': describedBy, ...rest }: TextAreaFieldProps) {
   return (
-    <Field label={label} hideLabel={hideLabel} hint={hint} error={error} layout={layout} className={className} id={id}>
+    <Field label={label} hideLabel={hideLabel} hint={hint} error={error} announce={announce} layout={layout} className={className} id={id}>
       {(binding) => (
         <textarea
           ref={ref}
@@ -205,9 +217,9 @@ export type SelectFieldProps = ControlCommon &
  * 原生下拉（选一项）。系统自己的选项列表，键盘、读屏、手机上的滚轮都是浏览器给的。
  * 选项要写「为什么用不了」时用 OptionField.tsx 的 OptionSelectField（原生 <option> 只放得下一行名字）。
  */
-export function SelectField({ label, hideLabel, hint, error, layout, className, size = 'md', controlClassName, id, ref, options, children, 'aria-describedby': describedBy, ...rest }: SelectFieldProps) {
+export function SelectField({ label, hideLabel, hint, error, announce, layout, className, size = 'md', controlClassName, id, ref, options, children, 'aria-describedby': describedBy, ...rest }: SelectFieldProps) {
   return (
-    <Field label={label} hideLabel={hideLabel} hint={hint} error={error} layout={layout} className={className} id={id}>
+    <Field label={label} hideLabel={hideLabel} hint={hint} error={error} announce={announce} layout={layout} className={className} id={id}>
       {(binding) => (
         <span className="eqb-field-select" data-size={size}>
           <select

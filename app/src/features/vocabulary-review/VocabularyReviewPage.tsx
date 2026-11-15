@@ -20,6 +20,7 @@ import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { SelectField, TextAreaField, TextField } from '../../shared-ui/Field.tsx'
+import { SegmentedField, type ChoiceOption } from '../../shared-ui/OptionField.tsx'
 import {
   countVocabularyDecisions,
   createVocabularyReviewState,
@@ -102,6 +103,11 @@ type VocabularyReviewPageProps = {
 }
 
 type VocabularyAccent = VocabularyAudioAccent
+// 「过词读音」两个选项（SegmentedField）。
+const REVIEW_ACCENT_OPTIONS: ChoiceOption<VocabularyAccent>[] = [
+  { value: 'american', label: '美音' },
+  { value: 'british', label: '英音' },
+]
 type VocabularyPrintKind = 'cards' | 'dictation' | 'answer' | 'handwriting'
 type VocabularySetPrintKind = VocabularyPrintKind
 
@@ -1498,13 +1504,15 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
               {studentCreateOpen && (
                 <form className="vocabulary-student-create" onSubmit={(event) => { event.preventDefault(); void createStudentProfile() }}>
                   {/* 出错照字段构件的写法：框边变危险色、aria-invalid，出错那一行挂 aria-describedby，字不改。
-                      出错行本身不播报，所以另放一句只给读屏的 role=alert，按「保存」以后马上念（和原来一样）。 */}
+                      按「保存」以后出错要马上念：用字段的 announce（出错那一行自己在播报区里，2026-11-15 起），
+                      不再另放一句只给读屏的 role=alert，读屏逐行读时不会念两遍。 */}
                   <TextField
                     className="vocabulary-student-name-field"
                     id="vocabulary-student-name"
                     label="学生姓名"
                     size="lg"
                     error={studentFormError || undefined}
+                    announce
                     value={studentNameInput}
                     maxLength={30}
                     autoComplete="off"
@@ -1513,7 +1521,6 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                     onChange={(event) => setStudentNameInput(event.target.value)}
                     trailing={<Button tone="strong" size="lg" type="submit" className="vocabulary-student-save" disabled={requestBusy || !studentNameInput.trim()}>保存</Button>}
                   />
-                  <p role="alert" className="visually-hidden">{studentFormError}</p>
                 </form>
               )}
               <div className="vocabulary-overall-progress">
@@ -1650,13 +1657,15 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
               />
             </div>
             <div className="vocabulary-run-start-row">
-              <fieldset className="vocabulary-review-accent-control">
-                <legend>过词读音</legend>
-                <div>
-                  <button type="button" className={reviewAccent === 'american' ? 'is-selected' : undefined} aria-pressed={reviewAccent === 'american'} onClick={() => chooseReviewAccent('american')}>美音</button>
-                  <button type="button" className={reviewAccent === 'british' ? 'is-selected' : undefined} aria-pressed={reviewAccent === 'british'} onClick={() => chooseReviewAccent('british')}>英音</button>
-                </div>
-              </fieldset>
+              {/* 切换组那一轮（2026-11-15）：一排 aria-pressed 的键换成 SegmentedField（单选组，一个 Tab 位，方向键切换），标签在左照旧，字没改。 */}
+              <SegmentedField
+                className="vocabulary-review-accent-control"
+                label="过词读音"
+                layout="inline"
+                value={reviewAccent}
+                options={REVIEW_ACCENT_OPTIONS}
+                onChange={chooseReviewAccent}
+              />
               <Button tone="solid" onClick={() => void startReview()} disabled={requestBusy || (!runId && mainProgressCursor >= program.entries.length)}>
                 {runId ? '继续过词' : '开始过词'}
               </Button>
