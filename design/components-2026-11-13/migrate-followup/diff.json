@@ -1,0 +1,1194 @@
+{
+ "pages": {
+  "home-results-390.png": {
+   "same": true,
+   "size": "780x1688",
+   "diff": 0,
+   "box": null
+  },
+  "home-results.png": {
+   "same": true,
+   "size": "2880x1800",
+   "diff": 0,
+   "box": null
+  }
+ },
+ "keysBefore": {
+  "missing": [],
+  "pageErrors": [],
+  "vocab": {
+   "student": "默认学生",
+   "studentId": "vocabulary-student-default:user-9b66fced-6cc5-4891-9c3c-1465fa14b3de",
+   "made": [
+    {
+     "title": "第一组",
+     "status": 201,
+     "id": "vocabulary-set-00d2b981-1c69-4632-9884-d35662ef7ac8"
+    },
+    {
+     "title": "第二组",
+     "status": 201,
+     "id": "vocabulary-set-cf6a490c-4417-4305-b945-c06365914ac3"
+    }
+   ],
+   "firstSetId": "vocabulary-set-00d2b981-1c69-4632-9884-d35662ef7ac8"
+  },
+  "w390": {
+   "thinkingLabelHit": {
+    "visible": "342×22",
+    "hit": "80×21",
+    "up": 11,
+    "down": 10,
+    "blockedBy": [
+     "form.eqb-search",
+     "div.concierge-stage-inner"
+    ]
+   },
+   "thinkingInputHit": {
+    "visible": "32×18",
+    "hit": "32.5×23",
+    "up": 12.75,
+    "down": 10.25,
+    "blockedBy": [
+     "form.eqb-search",
+     "button.eqb-button"
+    ]
+   },
+   "thinkingRects": {
+    "search": {
+     "x": 24,
+     "top": 154.5,
+     "bottom": 208.5,
+     "w": 342,
+     "h": 54
+    },
+    "label": {
+     "x": 24,
+     "top": 208.5,
+     "bottom": 230.5,
+     "w": 342,
+     "h": 22
+    },
+    "input": {
+     "x": 24,
+     "top": 210.5,
+     "bottom": 228.5,
+     "w": 32,
+     "h": 18
+    },
+    "filter": {
+     "x": 24,
+     "top": 230.5,
+     "bottom": 266.5,
+     "w": 50,
+     "h": 36
+    }
+   },
+   "thinkingEdgeClicks": {
+    "above": {
+     "at": 208,
+     "element": "input.",
+     "toggles": true
+    },
+    "below": {
+     "at": 231,
+     "element": "button.eqb-button",
+     "toggles": false
+    }
+   },
+   "draftItems": [
+    {
+     "id": "draft-item-cd328745-ccdf-44da-82f3-d49580cae350",
+     "groupId": "group-2026-i-reading-a"
+    },
+    {
+     "id": "draft-item-2666532a-77d5-408a-977e-56352df5f6fb",
+     "groupId": "group-2026-i-reading-b"
+    },
+    {
+     "id": "draft-item-fc0c05b9-868a-4d06-b624-59bc1c622c0d",
+     "groupId": "group-2026-i-reading-c"
+    }
+   ],
+   "a4-suggest": {
+    "tag": "button",
+    "text": "建议前置分页",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgb(241, 245, 247)",
+    "radius": "8px",
+    "font": "12px/400",
+    "underline": "underline",
+    "padding": "4px 9px",
+    "w": 90,
+    "h": 32,
+    "name": "建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a4-suggestHover": {
+    "tag": "button",
+    "text": "建议前置分页",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)",
+    "radius": "8px",
+    "font": "12px/400",
+    "underline": "underline",
+    "padding": "4px 9px",
+    "w": 90,
+    "h": 32,
+    "name": "建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a4-suggestFocus": {
+    "focus": "button.draft-group-suggestion「建议前置分页」 @group-2026-i-reading-b",
+    "focusVisible": true
+   },
+   "a3-suggest": {
+    "tag": "button",
+    "text": "跨页断篇（第1/2页） · 建议前置分页",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgb(241, 245, 247)",
+    "radius": "8px",
+    "font": "11.5px/400",
+    "underline": "underline",
+    "padding": "4px 12px",
+    "w": 212.6,
+    "h": 25,
+    "name": "跨页断篇（第1/2页） · 建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a3-suggestHover": {
+    "tag": "button",
+    "text": "跨页断篇（第1/2页） · 建议前置分页",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)",
+    "radius": "8px",
+    "font": "11.5px/400",
+    "underline": "underline",
+    "padding": "4px 12px",
+    "w": 212.6,
+    "h": 25,
+    "name": "跨页断篇（第1/2页） · 建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a3-suggestFocus": {
+    "focus": "button.draft-seam-suggestion「跨页断篇（第1/2页） · 建议前置分页」",
+    "focusVisible": true
+   },
+   "removeGroups": [
+    "group-2026-i-reading-a",
+    "group-2026-i-reading-b",
+    "group-2026-i-reading-c"
+   ],
+   "removeMiddle": [
+    {
+     "ms": 2,
+     "focus": "body（焦点落空）"
+    }
+   ],
+   "removeMiddleToast": "题组已移出 撤销",
+   "undoTabs": 5,
+   "undoMiddle": [
+    {
+     "ms": 2,
+     "focus": "button.eqb-toast-action「撤销」"
+    },
+    {
+     "ms": 925,
+     "focus": "button「更多题组操作」 @group-2026-i-reading-c"
+    }
+   ],
+   "removeLastGroups": [
+    "group-2026-i-reading-a",
+    "group-2026-i-reading-b",
+    "group-2026-i-reading-c"
+   ],
+   "removeLast": [
+    {
+     "ms": 5,
+     "focus": "body（焦点落空）"
+    }
+   ],
+   "removeRest0": [
+    {
+     "ms": 2,
+     "focus": "button「更多题组操作」 @group-2026-i-reading-a"
+    },
+    {
+     "ms": 786,
+     "focus": "body（焦点落空）"
+    }
+   ],
+   "removeRest1": [
+    {
+     "ms": 2,
+     "focus": "body（焦点落空）"
+    }
+   ],
+   "removeAllFinal": "body（焦点落空）",
+   "dictationError": {
+    "tag": "div",
+    "cls": "dictation-notice is-error",
+    "role": "alert",
+    "live": null,
+    "text": "词汇服务暂时不可用。",
+    "buttons": [
+     "关闭提示"
+    ],
+    "color": "rgb(220, 38, 38)",
+    "bg": "rgba(239, 68, 68, 0.08)"
+   },
+   "dictationTaskMade": 201,
+   "practiceAudio": {
+    "tag": "p",
+    "cls": "vocabulary-practice-audio-error",
+    "role": "status",
+    "live": null,
+    "text": "美音暂时无法播放，可以继续配对。",
+    "buttons": [],
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "notebookListError": {
+    "tag": "p",
+    "cls": "notebook-empty",
+    "role": null,
+    "live": null,
+    "text": "rig: 生词本暂时打不开",
+    "buttons": [],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "notebookLoading": {
+    "tag": "p",
+    "cls": "notebook-status",
+    "role": null,
+    "live": null,
+    "text": "正在打开这张纸…",
+    "buttons": [],
+    "color": "rgb(109, 100, 91)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "notebookDetail": [
+    {
+     "role": null,
+     "text": "正在打开这张纸…"
+    }
+   ],
+   "reviewLoading": {
+    "tag": "section",
+    "cls": "vocabulary-run-setup",
+    "role": null,
+    "live": "polite",
+    "text": "正在读取过词进度…",
+    "buttons": [],
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(255, 255, 255)"
+   },
+   "reviewError": {
+    "tag": "p",
+    "cls": "vocabulary-request-error",
+    "role": "alert",
+    "live": null,
+    "text": "词汇服务暂时不可用。",
+    "buttons": [],
+    "color": "rgb(220, 38, 38)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "dictationSuccess": {
+    "tag": "div",
+    "cls": "dictation-notice",
+    "role": "status",
+    "live": null,
+    "text": "已生成“取证听写”的公开二维码。",
+    "buttons": [
+     "关闭提示"
+    ],
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)"
+   },
+   "meaningError": {
+    "tag": "p",
+    "cls": "meaning-recall-error",
+    "role": "alert",
+    "live": null,
+    "text": "词汇服务暂时不可用。",
+    "buttons": [],
+    "color": "rgb(220, 38, 38)",
+    "bg": "rgba(239, 68, 68, 0.08)"
+   }
+  },
+  "w1440": {
+   "thinkingLabelHit": {
+    "visible": "856×22",
+    "hit": "80×21",
+    "up": 11,
+    "down": 10,
+    "blockedBy": [
+     "form.eqb-search",
+     "div.concierge-stage-inner"
+    ]
+   },
+   "thinkingInputHit": {
+    "visible": "32×18",
+    "hit": "32.5×22.75",
+    "up": 12.75,
+    "down": 10,
+    "blockedBy": [
+     "form.eqb-search",
+     "button.eqb-button"
+    ]
+   },
+   "thinkingRects": {
+    "search": {
+     "x": 292,
+     "top": 104,
+     "bottom": 158,
+     "w": 856,
+     "h": 54
+    },
+    "label": {
+     "x": 292,
+     "top": 158,
+     "bottom": 180,
+     "w": 856,
+     "h": 22
+    },
+    "input": {
+     "x": 292,
+     "top": 160,
+     "bottom": 178,
+     "w": 32,
+     "h": 18
+    },
+    "filter": {
+     "x": 292,
+     "top": 180,
+     "bottom": 216,
+     "w": 50,
+     "h": 36
+    }
+   },
+   "thinkingEdgeClicks": {
+    "above": {
+     "at": 157.5,
+     "element": "input.",
+     "toggles": true
+    },
+    "below": {
+     "at": 180.5,
+     "element": "button.eqb-button",
+     "toggles": false
+    }
+   },
+   "draftItems": [
+    {
+     "id": "draft-item-a3afda2a-76e3-48eb-8bda-7eec714b67a2",
+     "groupId": "group-2026-i-reading-a"
+    },
+    {
+     "id": "draft-item-30a0f9ff-e1d6-41fd-9eda-418c1baf03d4",
+     "groupId": "group-2026-i-reading-b"
+    },
+    {
+     "id": "draft-item-c6cb148b-3f7e-414a-9f03-f47165064488",
+     "groupId": "group-2026-i-reading-c"
+    }
+   ],
+   "a4-suggest": {
+    "tag": "button",
+    "text": "建议前置分页",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgb(241, 245, 247)",
+    "radius": "8px",
+    "font": "12px/400",
+    "underline": "underline",
+    "padding": "4px 9px",
+    "w": 90,
+    "h": 32,
+    "name": "建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a4-suggestHover": {
+    "tag": "button",
+    "text": "建议前置分页",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)",
+    "radius": "8px",
+    "font": "12px/400",
+    "underline": "underline",
+    "padding": "4px 9px",
+    "w": 90,
+    "h": 32,
+    "name": "建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a4-suggestFocus": {
+    "focus": "button.draft-group-suggestion「建议前置分页」 @group-2026-i-reading-b",
+    "focusVisible": true
+   },
+   "a3-suggest": {
+    "tag": "button",
+    "text": "跨页断篇（第1/2页） · 建议前置分页",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgb(241, 245, 247)",
+    "radius": "8px",
+    "font": "11.5px/400",
+    "underline": "underline",
+    "padding": "4px 12px",
+    "w": 212.6,
+    "h": 25,
+    "name": "跨页断篇（第1/2页） · 建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a3-suggestHover": {
+    "tag": "button",
+    "text": "跨页断篇（第1/2页） · 建议前置分页",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)",
+    "radius": "8px",
+    "font": "11.5px/400",
+    "underline": "underline",
+    "padding": "4px 12px",
+    "w": 212.6,
+    "h": 25,
+    "name": "跨页断篇（第1/2页） · 建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a3-suggestFocus": {
+    "focus": "button.draft-seam-suggestion「跨页断篇（第1/2页） · 建议前置分页」",
+    "focusVisible": true
+   },
+   "removeGroups": [
+    "group-2026-i-reading-a",
+    "group-2026-i-reading-b",
+    "group-2026-i-reading-c"
+   ],
+   "removeMiddle": [
+    {
+     "ms": 2,
+     "focus": "body（焦点落空）"
+    }
+   ],
+   "removeMiddleToast": "题组已移出 撤销",
+   "undoTabs": 5,
+   "undoMiddle": [
+    {
+     "ms": 13,
+     "focus": "button.eqb-toast-action「撤销」"
+    },
+    {
+     "ms": 1009,
+     "focus": "button「更多题组操作」 @group-2026-i-reading-c"
+    }
+   ],
+   "removeLastGroups": [
+    "group-2026-i-reading-a",
+    "group-2026-i-reading-b",
+    "group-2026-i-reading-c"
+   ],
+   "removeLast": [
+    {
+     "ms": 2,
+     "focus": "body（焦点落空）"
+    }
+   ],
+   "removeRest0": [
+    {
+     "ms": 2,
+     "focus": "button「更多题组操作」 @group-2026-i-reading-a"
+    },
+    {
+     "ms": 841,
+     "focus": "body（焦点落空）"
+    }
+   ],
+   "removeRest1": [
+    {
+     "ms": 1,
+     "focus": "body（焦点落空）"
+    }
+   ],
+   "removeAllFinal": "body（焦点落空）",
+   "dictationError": {
+    "tag": "div",
+    "cls": "dictation-notice is-error",
+    "role": "alert",
+    "live": null,
+    "text": "词汇服务暂时不可用。",
+    "buttons": [
+     "关闭提示"
+    ],
+    "color": "rgb(220, 38, 38)",
+    "bg": "rgba(239, 68, 68, 0.08)"
+   },
+   "dictationTaskMade": 201,
+   "practiceAudio": {
+    "tag": "p",
+    "cls": "vocabulary-practice-audio-error",
+    "role": "status",
+    "live": null,
+    "text": "美音暂时无法播放，可以继续配对。",
+    "buttons": [],
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "notebookListError": {
+    "tag": "p",
+    "cls": "notebook-empty",
+    "role": null,
+    "live": null,
+    "text": "rig: 生词本暂时打不开",
+    "buttons": [],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "notebookLoading": {
+    "tag": "p",
+    "cls": "notebook-status",
+    "role": null,
+    "live": null,
+    "text": "正在打开这张纸…",
+    "buttons": [],
+    "color": "rgb(109, 100, 91)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "notebookDetail": [
+    {
+     "role": null,
+     "text": "正在打开这张纸…"
+    }
+   ],
+   "reviewLoading": {
+    "tag": "section",
+    "cls": "vocabulary-run-setup",
+    "role": null,
+    "live": "polite",
+    "text": "正在读取过词进度…",
+    "buttons": [],
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(255, 255, 255)"
+   },
+   "reviewError": {
+    "tag": "p",
+    "cls": "vocabulary-request-error",
+    "role": "alert",
+    "live": null,
+    "text": "词汇服务暂时不可用。",
+    "buttons": [],
+    "color": "rgb(220, 38, 38)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "dictationSuccess": {
+    "tag": "div",
+    "cls": "dictation-notice",
+    "role": "status",
+    "live": null,
+    "text": "已生成“取证听写”的公开二维码。",
+    "buttons": [
+     "关闭提示"
+    ],
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)"
+   },
+   "meaningError": {
+    "tag": "p",
+    "cls": "meaning-recall-error",
+    "role": "alert",
+    "live": null,
+    "text": "词汇服务暂时不可用。",
+    "buttons": [],
+    "color": "rgb(220, 38, 38)",
+    "bg": "rgba(239, 68, 68, 0.08)"
+   }
+  }
+ },
+ "keysAfter": {
+  "missing": [],
+  "pageErrors": [],
+  "vocab": {
+   "student": "默认学生",
+   "studentId": "vocabulary-student-default:user-f409e84d-6ee8-4ff8-ad2a-72b3889c176c",
+   "made": [
+    {
+     "title": "第一组",
+     "status": 201,
+     "id": "vocabulary-set-fed36dc9-39eb-4f74-b224-a259df457e72"
+    },
+    {
+     "title": "第二组",
+     "status": 201,
+     "id": "vocabulary-set-cf90cf58-da66-4205-8ed4-1b2041c79a81"
+    }
+   ],
+   "firstSetId": "vocabulary-set-fed36dc9-39eb-4f74-b224-a259df457e72"
+  },
+  "w390": {
+   "thinkingLabelHit": {
+    "visible": "342×22",
+    "hit": "80×21",
+    "up": 11,
+    "down": 10,
+    "blockedBy": [
+     "form.eqb-search",
+     "div.concierge-stage-inner"
+    ]
+   },
+   "thinkingInputHit": {
+    "visible": "32×18",
+    "hit": "32.5×24.5",
+    "up": 12.75,
+    "down": 11.75,
+    "blockedBy": [
+     "form.eqb-search",
+     "button.eqb-button"
+    ]
+   },
+   "thinkingRects": {
+    "search": {
+     "x": 24,
+     "top": 154.5,
+     "bottom": 208.5,
+     "w": 342,
+     "h": 54
+    },
+    "label": {
+     "x": 24,
+     "top": 208.5,
+     "bottom": 230.5,
+     "w": 342,
+     "h": 22
+    },
+    "input": {
+     "x": 24,
+     "top": 210.5,
+     "bottom": 228.5,
+     "w": 32,
+     "h": 18
+    },
+    "filter": {
+     "x": 24,
+     "top": 230.5,
+     "bottom": 266.5,
+     "w": 50,
+     "h": 36
+    }
+   },
+   "thinkingEdgeClicks": {
+    "above": {
+     "at": 208,
+     "element": "input.",
+     "toggles": true
+    },
+    "below": {
+     "at": 231,
+     "element": "input.",
+     "toggles": true
+    }
+   },
+   "draftItems": [
+    {
+     "id": "draft-item-77c66fc8-ed8f-4ca8-a754-8fcab2ab1d3f",
+     "groupId": "group-2026-i-reading-a"
+    },
+    {
+     "id": "draft-item-d6e8aebe-935b-427b-9eb9-521ca8562f0a",
+     "groupId": "group-2026-i-reading-b"
+    },
+    {
+     "id": "draft-item-a8df0f32-f273-44d9-8c3d-9a98f358d3d0",
+     "groupId": "group-2026-i-reading-c"
+    }
+   ],
+   "a4-suggest": {
+    "tag": "button",
+    "text": "建议前置分页",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgb(241, 245, 247)",
+    "radius": "8px",
+    "font": "12px/400",
+    "underline": "underline",
+    "padding": "0px 8px",
+    "w": 88,
+    "h": 28,
+    "name": "建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a4-suggestHover": {
+    "tag": "button",
+    "text": "建议前置分页",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)",
+    "radius": "8px",
+    "font": "12px/400",
+    "underline": "underline",
+    "padding": "0px 8px",
+    "w": 88,
+    "h": 28,
+    "name": "建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a4-suggestFocus": {
+    "focus": "button.draft-group-suggestion「建议前置分页」 @group-2026-i-reading-b",
+    "focusVisible": true
+   },
+   "a3-suggest": {
+    "tag": "button",
+    "text": "跨页断篇（第1/2页） · 建议前置分页",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgb(241, 245, 247)",
+    "radius": "8px",
+    "font": "12px/400",
+    "underline": "underline",
+    "padding": "0px 8px",
+    "w": 210.7,
+    "h": 28,
+    "name": "跨页断篇（第1/2页） · 建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a3-suggestHover": {
+    "tag": "button",
+    "text": "跨页断篇（第1/2页） · 建议前置分页",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)",
+    "radius": "8px",
+    "font": "12px/400",
+    "underline": "underline",
+    "padding": "0px 8px",
+    "w": 210.7,
+    "h": 28,
+    "name": "跨页断篇（第1/2页） · 建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a3-suggestFocus": {
+    "focus": "button.draft-seam-suggestion「跨页断篇（第1/2页） · 建议前置分页」",
+    "focusVisible": true
+   },
+   "removeGroups": [
+    "group-2026-i-reading-a",
+    "group-2026-i-reading-b",
+    "group-2026-i-reading-c"
+   ],
+   "removeMiddle": [
+    {
+     "ms": 1,
+     "focus": "button.draft-group-menu-trigger「更多题组操作」 @group-2026-i-reading-c"
+    }
+   ],
+   "removeMiddleToast": "题组已移出 撤销",
+   "undoTabs": 1,
+   "undoMiddle": [
+    {
+     "ms": 2,
+     "focus": "button.eqb-toast-action「撤销」"
+    },
+    {
+     "ms": 942,
+     "focus": "button.draft-group-menu-trigger「更多题组操作」 @group-2026-i-reading-c"
+    }
+   ],
+   "removeLastGroups": [
+    "group-2026-i-reading-a",
+    "group-2026-i-reading-b",
+    "group-2026-i-reading-c"
+   ],
+   "removeLast": [
+    {
+     "ms": 1,
+     "focus": "button.draft-group-menu-trigger「更多题组操作」 @group-2026-i-reading-b"
+    }
+   ],
+   "removeRest0": [
+    {
+     "ms": 1,
+     "focus": "button.draft-group-menu-trigger「更多题组操作」 @group-2026-i-reading-a"
+    },
+    {
+     "ms": 875,
+     "focus": "button.draft-group-menu-trigger「更多题组操作」 @group-2026-i-reading-b"
+    }
+   ],
+   "removeRest1": [
+    {
+     "ms": 1,
+     "focus": "h1.visually-hidden「1115 英语草稿卷」"
+    }
+   ],
+   "removeAllFinal": "h1.visually-hidden「1115 英语草稿卷」",
+   "dictationError": {
+    "tag": "div",
+    "cls": "dictation-notice-row",
+    "role": "alert",
+    "live": null,
+    "text": "词汇服务暂时不可用。",
+    "buttons": [
+     "关闭提示"
+    ],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "dictationTaskMade": 201,
+   "dictationSuccess": {
+    "tag": "div",
+    "cls": "dictation-notice-row",
+    "role": "status",
+    "live": "polite",
+    "text": "已生成“取证听写”的公开二维码。",
+    "buttons": [
+     "关闭提示"
+    ],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "meaningError": {
+    "tag": "div",
+    "cls": "eqb-notice meaning-recall-error",
+    "role": "alert",
+    "live": null,
+    "text": "词汇服务暂时不可用。",
+    "buttons": [],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "practiceAudio": {
+    "tag": "div",
+    "cls": "eqb-notice vocabulary-practice-audio-error",
+    "role": "alert",
+    "live": null,
+    "text": "美音暂时无法播放，可以继续配对。",
+    "buttons": [],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "notebookListError": {
+    "tag": "div",
+    "cls": "eqb-notice notebook-error",
+    "role": "alert",
+    "live": null,
+    "text": "rig: 生词本暂时打不开",
+    "buttons": [],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "notebookLoading": {
+    "tag": "div",
+    "cls": "eqb-notice notebook-status",
+    "role": "status",
+    "live": "polite",
+    "text": "正在打开这张纸…",
+    "buttons": [],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "notebookDetail": [
+    {
+     "role": "status",
+     "text": "正在打开这张纸…"
+    }
+   ],
+   "reviewLoading": {
+    "tag": "section",
+    "cls": "vocabulary-run-setup",
+    "role": "status",
+    "live": "polite",
+    "text": "正在读取过词进度…",
+    "buttons": [],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "reviewError": {
+    "tag": "div",
+    "cls": "eqb-notice vocabulary-request-error",
+    "role": "alert",
+    "live": null,
+    "text": "词汇服务暂时不可用。",
+    "buttons": [],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   }
+  },
+  "w1440": {
+   "thinkingLabelHit": {
+    "visible": "856×22",
+    "hit": "80×21",
+    "up": 11,
+    "down": 10,
+    "blockedBy": [
+     "form.eqb-search",
+     "div.concierge-stage-inner"
+    ]
+   },
+   "thinkingInputHit": {
+    "visible": "32×18",
+    "hit": "32.5×24.5",
+    "up": 12.75,
+    "down": 11.75,
+    "blockedBy": [
+     "form.eqb-search",
+     "button.eqb-button"
+    ]
+   },
+   "thinkingRects": {
+    "search": {
+     "x": 292,
+     "top": 104,
+     "bottom": 158,
+     "w": 856,
+     "h": 54
+    },
+    "label": {
+     "x": 292,
+     "top": 158,
+     "bottom": 180,
+     "w": 856,
+     "h": 22
+    },
+    "input": {
+     "x": 292,
+     "top": 160,
+     "bottom": 178,
+     "w": 32,
+     "h": 18
+    },
+    "filter": {
+     "x": 292,
+     "top": 180,
+     "bottom": 216,
+     "w": 50,
+     "h": 36
+    }
+   },
+   "thinkingEdgeClicks": {
+    "above": {
+     "at": 157.5,
+     "element": "input.",
+     "toggles": true
+    },
+    "below": {
+     "at": 180.5,
+     "element": "input.",
+     "toggles": true
+    }
+   },
+   "draftItems": [
+    {
+     "id": "draft-item-33a69d10-fcf0-4d78-b2af-7c0441e465a0",
+     "groupId": "group-2026-i-reading-a"
+    },
+    {
+     "id": "draft-item-496a9874-9ff8-490b-bbf6-d2d8eddeb6ac",
+     "groupId": "group-2026-i-reading-b"
+    },
+    {
+     "id": "draft-item-8ed485b6-aec5-45c0-b830-64e01fe34109",
+     "groupId": "group-2026-i-reading-c"
+    }
+   ],
+   "a4-suggest": {
+    "tag": "button",
+    "text": "建议前置分页",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgb(241, 245, 247)",
+    "radius": "8px",
+    "font": "12px/400",
+    "underline": "underline",
+    "padding": "0px 8px",
+    "w": 88,
+    "h": 28,
+    "name": "建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a4-suggestHover": {
+    "tag": "button",
+    "text": "建议前置分页",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)",
+    "radius": "8px",
+    "font": "12px/400",
+    "underline": "underline",
+    "padding": "0px 8px",
+    "w": 88,
+    "h": 28,
+    "name": "建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a4-suggestFocus": {
+    "focus": "button.draft-group-suggestion「建议前置分页」 @group-2026-i-reading-b",
+    "focusVisible": true
+   },
+   "a3-suggest": {
+    "tag": "button",
+    "text": "跨页断篇（第1/2页） · 建议前置分页",
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgb(241, 245, 247)",
+    "radius": "8px",
+    "font": "12px/400",
+    "underline": "underline",
+    "padding": "0px 8px",
+    "w": 210.7,
+    "h": 28,
+    "name": "跨页断篇（第1/2页） · 建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a3-suggestHover": {
+    "tag": "button",
+    "text": "跨页断篇（第1/2页） · 建议前置分页",
+    "color": "rgb(27, 43, 51)",
+    "bg": "rgb(230, 237, 240)",
+    "radius": "8px",
+    "font": "12px/400",
+    "underline": "underline",
+    "padding": "0px 8px",
+    "w": 210.7,
+    "h": 28,
+    "name": "跨页断篇（第1/2页） · 建议前置分页",
+    "title": "跨页断篇（第1/2页）"
+   },
+   "a3-suggestFocus": {
+    "focus": "button.draft-seam-suggestion「跨页断篇（第1/2页） · 建议前置分页」",
+    "focusVisible": true
+   },
+   "removeGroups": [
+    "group-2026-i-reading-a",
+    "group-2026-i-reading-b",
+    "group-2026-i-reading-c"
+   ],
+   "removeMiddle": [
+    {
+     "ms": 2,
+     "focus": "button.draft-group-menu-trigger「更多题组操作」 @group-2026-i-reading-c"
+    }
+   ],
+   "removeMiddleToast": "题组已移出 撤销",
+   "undoTabs": 1,
+   "undoMiddle": [
+    {
+     "ms": 3,
+     "focus": "button.eqb-toast-action「撤销」"
+    },
+    {
+     "ms": 936,
+     "focus": "button.draft-group-menu-trigger「更多题组操作」 @group-2026-i-reading-c"
+    }
+   ],
+   "removeLastGroups": [
+    "group-2026-i-reading-a",
+    "group-2026-i-reading-b",
+    "group-2026-i-reading-c"
+   ],
+   "removeLast": [
+    {
+     "ms": 2,
+     "focus": "button.draft-group-menu-trigger「更多题组操作」 @group-2026-i-reading-b"
+    }
+   ],
+   "removeRest0": [
+    {
+     "ms": 1,
+     "focus": "button.draft-group-menu-trigger「更多题组操作」 @group-2026-i-reading-a"
+    },
+    {
+     "ms": 783,
+     "focus": "button.draft-group-menu-trigger「更多题组操作」 @group-2026-i-reading-b"
+    }
+   ],
+   "removeRest1": [
+    {
+     "ms": 1,
+     "focus": "nav.eqb-surface.draft-paper-rail「卷面目录」"
+    }
+   ],
+   "removeAllFinal": "nav.eqb-surface.draft-paper-rail「卷面目录」",
+   "dictationError": {
+    "tag": "div",
+    "cls": "dictation-notice-row",
+    "role": "alert",
+    "live": null,
+    "text": "词汇服务暂时不可用。",
+    "buttons": [
+     "关闭提示"
+    ],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "dictationTaskMade": 201,
+   "dictationSuccess": {
+    "tag": "div",
+    "cls": "dictation-notice-row",
+    "role": "status",
+    "live": "polite",
+    "text": "已生成“取证听写”的公开二维码。",
+    "buttons": [
+     "关闭提示"
+    ],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "meaningError": {
+    "tag": "div",
+    "cls": "eqb-notice meaning-recall-error",
+    "role": "alert",
+    "live": null,
+    "text": "词汇服务暂时不可用。",
+    "buttons": [],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "practiceAudio": {
+    "tag": "div",
+    "cls": "eqb-notice vocabulary-practice-audio-error",
+    "role": "alert",
+    "live": null,
+    "text": "美音暂时无法播放，可以继续配对。",
+    "buttons": [],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "notebookListError": {
+    "tag": "div",
+    "cls": "eqb-notice notebook-error",
+    "role": "alert",
+    "live": null,
+    "text": "rig: 生词本暂时打不开",
+    "buttons": [],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "notebookLoading": {
+    "tag": "div",
+    "cls": "eqb-notice notebook-status",
+    "role": "status",
+    "live": "polite",
+    "text": "正在打开这张纸…",
+    "buttons": [],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "notebookDetail": [
+    {
+     "role": "status",
+     "text": "正在打开这张纸…"
+    }
+   ],
+   "reviewLoading": {
+    "tag": "section",
+    "cls": "vocabulary-run-setup",
+    "role": "status",
+    "live": "polite",
+    "text": "正在读取过词进度…",
+    "buttons": [],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   },
+   "reviewError": {
+    "tag": "div",
+    "cls": "eqb-notice vocabulary-request-error",
+    "role": "alert",
+    "live": null,
+    "text": "词汇服务暂时不可用。",
+    "buttons": [],
+    "color": "rgb(90, 108, 117)",
+    "bg": "rgba(0, 0, 0, 0)"
+   }
+  }
+ }
+}

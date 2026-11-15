@@ -410,8 +410,7 @@
 /* 只管左边说明文字里的 span。原来写成 .vocabulary-progress-selection span（0,1,1），会压过 button.css 的
  * .eqb-button-label（0,1,0），把「确认从这里开始」的字改成 12px 次要灰；构件厂第 4 步第十页收窄到左边那块。 */
 .vocabulary-progress-selection > div span,
-.vocabulary-progress-selection small,
-.vocabulary-progress-status {
+.vocabulary-progress-selection small {
   color: var(--muted);
   font-size: 12px;
   line-height: 1.5;
@@ -421,10 +420,10 @@
   color: var(--eqb-color-danger);
 }
 
-.vocabulary-progress-status {
-  margin: 14px 0 0;
-  color: var(--eqb-color-text);
-  font-weight: 600;
+/* 进度改好以后的那一行：样子归 shared-ui/Notice（2026-11-15，原来是墨色 600 字）。这里只留上面隔 12（原来 14，取最近的间距档）。
+ * 覆盖：本条 (0,2,0) 盖过 .eqb-notice (0,1,0) 的 margin: 0。 */
+.eqb-notice.vocabulary-progress-status {
+  margin-top: var(--eqb-space-3);
 }
 
 .vocabulary-review-layout {
@@ -1451,10 +1450,12 @@
   -webkit-line-clamp: 2;
 }
 
-.vocabulary-request-error {
-  margin: 12px 0 0 !important;
-  color: var(--eqb-color-danger) !important;
-  font-size: 14px !important;
+/* 过生词各处的出错行：样子归 shared-ui/Notice（2026-11-15，原来是危险色 14 号字，带三个 !important 压过 .vocabulary-run-setup p）。
+ * 换成 Notice 以后不是 <p> 了，不再被那条压，!important 一起去掉；这里只留上面隔 12。
+ * 类名留着：服务器出单词纸 PDF 时按它读出错的字（server/vocabulary/vocabularyPdfRenderer.mjs）。
+ * 覆盖：本条 (0,2,0) 盖过 .eqb-notice (0,1,0) 的 margin: 0。 */
+.eqb-notice.vocabulary-request-error {
+  margin-top: var(--eqb-space-3);
 }
 
 .vocabulary-share-ready {

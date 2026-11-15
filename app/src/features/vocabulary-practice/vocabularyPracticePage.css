@@ -298,8 +298,7 @@
   }
 }
 
-.vocabulary-practice-live,
-.vocabulary-practice-audio-error {
+.vocabulary-practice-live {
   min-height: 20px;
   margin: 16px 0 0;
   color: var(--muted);
@@ -308,9 +307,12 @@
   text-align: center;
 }
 
-.vocabulary-practice-audio-error {
-  margin-top: 4px;
-  color: var(--danger);
+/* 读音出错那一行：样子归 shared-ui/Notice（2026-11-15，原来是居中的危险色小字）。这里只留位置：
+ * 接在上面那行播报下面隔 4、居中。
+ * 覆盖：本条 (0,2,0) 盖过 .eqb-notice (0,1,0) 的 margin: 0。 */
+.eqb-notice.vocabulary-practice-audio-error {
+  justify-content: center;
+  margin-top: var(--eqb-space-1);
 }
 
 .vocabulary-practice-complete {

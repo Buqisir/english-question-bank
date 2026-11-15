@@ -18,6 +18,7 @@ import { QRCodeSVG } from 'qrcode.react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
 import {
   countVocabularyDecisions,
   createVocabularyReviewState,
@@ -471,6 +472,13 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const [studentFormError, setStudentFormError] = useState('')
   const [requestBusy, setRequestBusy] = useState(false)
   const [requestError, setRequestError] = useState('')
+  // 「没存住」这一类报错要上危险色（DESIGN.md §5 Notices：只有「没保存」「会丢东西」才上）。
+  // 记下这句报错的原文；页面上的报错还是这句时才标危险，被别的报错换掉或清空就自然不标了。
+  const [unsavedError, setUnsavedError] = useState('')
+  const reportUnsaved = useCallback((text: string) => {
+    setUnsavedError(text)
+    setRequestError(text)
+  }, [])
   const [vocabularySet, setVocabularySet] = useState<VocabularySetDto | null>(null)
   const [recentSets, setRecentSets] = useState<VocabularySetDto[]>([])
   const [shareId, setShareId] = useState<string | null>(null)
@@ -807,9 +815,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     setStudentFormError('')
     decideVocabularyReviewRun(runId, entry.id, verdict)
       .then(applyRun)
-      .catch((error: unknown) => setRequestError(error instanceof Error ? error.message : '判断未保存，请重试。'))
+      .catch((error: unknown) => reportUnsaved(error instanceof Error ? error.message : '判断未保存，请重试。'))
       .finally(() => setRequestBusy(false))
-  }, [applyRun, completion, program.entries, programLoadState, progressExplorerOpen, requestBusy, reviewState.cursor, runId, runState])
+  }, [applyRun, reportUnsaved, completion, program.entries, programLoadState, progressExplorerOpen, requestBusy, reviewState.cursor, runId, runState])
 
   const reveal = useCallback(() => {
     if (programLoadState !== 'ready' || runState !== 'active' || progressExplorerOpen) return
@@ -822,9 +830,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
     setRequestError('')
     undoVocabularyReviewRun(runId)
       .then(applyRun)
-      .catch((error: unknown) => setRequestError(error instanceof Error ? error.message : '撤销未保存，请重试。'))
+      .catch((error: unknown) => reportUnsaved(error instanceof Error ? error.message : '撤销未保存，请重试。'))
       .finally(() => setRequestBusy(false))
-  }, [applyRun, programLoadState, progressExplorerOpen, requestBusy, reviewState.decisionOrder.length, runId, runState])
+  }, [applyRun, reportUnsaved, programLoadState, progressExplorerOpen, requestBusy, reviewState.decisionOrder.length, runId, runState])
 
   useEffect(() => {
     const isTypingTarget = (target: EventTarget | null) => {
@@ -1255,7 +1263,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       setSetTitleInput(nextSet.title)
       setRecentSets((current) => current.map((item) => item.id === nextSet.id ? nextSet : item))
     } catch (error) {
-      setRequestError(error instanceof Error ? error.message : '生词组名称保存失败，请重试。')
+      reportUnsaved(error instanceof Error ? error.message : '生词组名称保存失败，请重试。')
     } finally {
       setRequestBusy(false)
     }
@@ -1535,7 +1543,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             <h2 id="vocabulary-program-error-title">词库没有加载出来</h2>
             <p>为了不把进度记错，要等词库加载完才能开始。</p>
             <Button tone="solid" onClick={() => window.location.reload()}>重新加载</Button>
-            {requestError && <p className="vocabulary-request-error" role="alert">{requestError}</p>}
+            {requestError && <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>}
           </section>
         ) : studentsState === 'error' ? (
           <section className="vocabulary-run-setup" aria-labelledby="vocabulary-student-error-title">
@@ -1543,10 +1551,10 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             <h2 id="vocabulary-student-error-title">学生档案没有加载出来</h2>
             <p>为了不把不同学生的进度混在一起，要等档案加载完才能继续。</p>
             <Button tone="solid" onClick={() => window.location.reload()}>重新加载</Button>
-            {requestError && <p className="vocabulary-request-error" role="alert">{requestError}</p>}
+            {requestError && <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>}
           </section>
         ) : programLoadState === 'loading' || studentsState === 'loading' || runState === 'loading' ? (
-          <section className="vocabulary-run-setup" aria-live="polite"><p>正在读取过词进度…</p></section>
+          <section className="vocabulary-run-setup"><Notice kind="waiting">正在读取过词进度…</Notice></section>
         ) : progressExplorerOpen && activeStudent ? (
           <div id="vocabulary-progress-explorer">
             <VocabularyProgressExplorer
@@ -1609,7 +1617,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             </div>
             {shareDownloadConfirmation}
             {shareId && <p className="vocabulary-share-ready">当前公开二维码有效：单词卡扫码听音频，听写纸扫码自动听写。</p>}
-            {requestError && <p className="vocabulary-request-error" role="alert">{requestError}</p>}
+            {requestError && <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>}
           </section>
         ) : runState === 'setup' || runState === 'error' ? (
           <section className="vocabulary-run-setup" aria-labelledby="vocabulary-run-title">
@@ -1685,7 +1693,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 生成固定词组
               </Button>
             </div>
-            {requestError && <p className="vocabulary-request-error" role="alert">{requestError}</p>}
+            {requestError && <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>}
             {recentSets.length > 0 && (
               <div className="vocabulary-recent-sets">
                 <div><h3>最近生词组</h3><span>内容固定，可随时下载</span></div>
@@ -1860,7 +1868,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                     <kbd>→</kbd>
                   </button>
                 </div>
-                {requestError && <p className="vocabulary-request-error" role="alert">{requestError}</p>}
+                {requestError && <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>}
               </>
             ) : (
               <div className="vocabulary-completion-state">
@@ -1893,7 +1901,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 </div>
                 {shareDownloadConfirmation}
                 {shareId && <p className="vocabulary-share-ready">公开二维码已固定：单词卡扫码听音频，听写纸扫码自动听写。</p>}
-                {requestError && <p className="vocabulary-request-error" role="alert">{requestError}</p>}
+                {requestError && <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>}
               </div>
             )}
           </section>

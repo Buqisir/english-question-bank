@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar.tsx'
 import { ChevronRight, Paper } from '../../icons'
 import { EmptyState } from '../../shared-ui/EmptyState.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate.tsx'
 import { fetchQuestionGroups } from '../../services/questionGroups.ts'
 import {
@@ -191,13 +192,13 @@ export function VocabularyNotebookPage({
       {paperId ? (
         <PaperFontGate>
           <main className="notebook-desk">
-            {error ? <p className="notebook-status">{error}</p> : null}
-            {detail ? <NotebookSheet detail={detail} titles={titles} /> : <p className="notebook-status">正在打开这张纸…</p>}
+            {error ? <Notice kind="error" className="notebook-status">{error}</Notice> : null}
+            {detail ? <NotebookSheet detail={detail} titles={titles} /> : <Notice kind="waiting" className="notebook-status">正在打开这张纸…</Notice>}
           </main>
         </PaperFontGate>
       ) : (
         <main className="notebook-main">
-          {error ? <p className="notebook-empty">{error}</p> : null}
+          {error ? <Notice kind="error" className="notebook-error">{error}</Notice> : null}
           {papers && papers.length === 0 ? (
             <EmptyState className="notebook-empty-state" illustration="vocabulary-notebook" action={{ label: '去找题', onClick: onBack }}>
               看卷时选中单词，点「加入生词本」，就会收到这里。

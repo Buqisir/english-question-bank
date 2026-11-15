@@ -9,6 +9,7 @@ import { SelectField, TextField } from '../../shared-ui/Field.tsx'
 import { OptionSelectField, SegmentedField } from '../../shared-ui/OptionField.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { Toast } from '../../shared-ui/Toast.tsx'
+import { planFocusAfterRemoval, programmaticFocusTarget } from '../../shared-ui/focusAfterRemoval.ts'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, GroupType, MySpaceFolder, QuestionGroupCard } from '../../domain/questionBank'
 import {
   addGroupToDraftPaper,
@@ -148,6 +149,20 @@ function moveItemTo(items: DraftPaperItem[], draggedId: string, targetId: string
   const [item] = next.splice(from, 1)
   next.splice(to, 0, item)
   return renumberItems(next)
+}
+
+// 移出题组、撤销移出以后要放的焦点（见下面「删后焦点」那一段）。
+type PendingDraftFocus = {
+  kind: 'remove' | 'undo'
+  generation: number
+  /** 每次调用重新查页面：要落的那个键还不在（卷面还在重排）就返回 null。 */
+  find: () => HTMLElement | null
+  /** 发起时焦点在哪（被移出那一组的「更多题组操作」、提示里的「撤销」）。 */
+  from: HTMLElement | null
+  /** 等的过程中已经先放过一次的键。 */
+  placed: HTMLElement | null
+  /** 撤销时被撤回的那一组：它还在卷上（没缺题）就一直等到它的工具条挂上，不提前兜底。 */
+  waitForGroupId?: string
 }
 
 export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode {
@@ -818,6 +833,79 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     return () => observer.disconnect()
   }, [groupAnchors])
 
+  // 删后焦点（2026-11-15，DESIGN.md §5 Interaction「删后焦点」；记录 design/components-2026-11-13/migrate-followup/README.md 第二节）。
+  // 从题组「⋯」菜单移出：菜单关上时焦点先回到这一组的「更多题组操作」，等服务器回话后这一组的工具条没了，
+  // 焦点照 shared-ui/focusAfterRemoval.ts 的顺序落到下一组的「更多题组操作」→ 上一组的 → 左栏「卷面目录」。
+  // 卷面要重排：新分页回来、iframe 重新载入时所有工具条会先卸掉再按新位置挂上，所以这里一直等到排好
+  // （没有在途的保存、卷面不旧、工具条位置算出来了）才算完；中间工具条还在时先放一次，被卸掉再放回同一个键。
+  // 撤销移出：排好以后焦点落到被撤回那一组自己的「更多题组操作」（回到移出之前的位置）；那一组没有工具条时落到「卷面目录」。
+  // 「卷面目录」在窄屏藏起来时，两种兜底都改落卷的标题（h1，平时视觉上藏着）。
+  // 只在焦点掉到 <body>、还在发起处或我们先放过的键上时动；用户已经把焦点挪到别处（比如 Tab 进了别的地方）就不抢。
+  const pendingFocusRef = useRef<PendingDraftFocus | null>(null)
+  useLayoutEffect(() => {
+    const pending = pendingFocusRef.current
+    if (!pending) return
+    if (pending.generation !== draftGeneration) {
+      pendingFocusRef.current = null
+      return
+    }
+    const active = document.activeElement
+    const lost = !active || active === document.body || !active.isConnected
+    const ours = active instanceof HTMLElement && (
+      active === pending.from
+      || active === pending.placed
+      || Boolean(active.closest('.draft-undo-toast'))
+      // 撤销时提示收起会把焦点还给进提示之前的那个键（多半是上一次移出后放过去的下一组的键），也算我们的。
+      || (pending.kind === 'undo' && Boolean(active.closest('.draft-group-actions')))
+    )
+    if (!lost && !ours) {
+      pendingFocusRef.current = null
+      return
+    }
+    const settled = layoutSavesPending === 0
+      && (nonMissingItems.length === 0 || (!previewStale && previewReady && Object.keys(groupAnchors).length > 0))
+    const target = pending.find()
+    // 撤销以后服务器先回话、卷面后重排：刚回话那一下旧的工具条位置还在，看着像「排好了」，
+    // 可被撤回那一组的工具条还没挂上。这时提前兜底，焦点会落到「卷面目录」，随后撤销提示收起又把焦点
+    // 还给进提示之前的那个键（下一组的「⋯」），就回不到被撤回的那一组了。所以这一组只要还在卷上，就等它的键出现。
+    const waiting = !target && Boolean(pending.waitForGroupId)
+      && nonMissingItems.some((entry) => entry.groupId === pending.waitForGroupId)
+    if (!settled || waiting) {
+      if (lost && target) {
+        target.focus({ preventScroll: true })
+        pending.placed = target
+      }
+      return
+    }
+    pendingFocusRef.current = null
+    // 兜底落「卷面目录」；窄屏（390 宽）左栏整个藏起来，没有可见的目录，就落到这张卷的标题（视觉上藏着的 h1）。
+    const rail = document.querySelector<HTMLElement>('.draft-paper-rail')
+    const heading = document.querySelector<HTMLElement>('.draft-workbench-layout > h1')
+    const last = target ?? programmaticFocusTarget(rail && rail.getClientRects().length > 0 ? rail : heading)
+    if (last && last !== active) last.focus()
+  }, [draftGeneration, layoutSavesPending, nonMissingItems, previewStale, previewReady, groupAnchors])
+
+  function removeFromGroupMenu(item: DraftPaperItem, trigger: HTMLButtonElement | null) {
+    if (trigger) {
+      const next = planFocusAfterRemoval(trigger, {
+        item: '.draft-group-actions',
+        key: 'data-draft-tools-group-id',
+        control: '.draft-group-menu-trigger',
+        // 前后都找不到时不在这里落到标题：卷面没排好时工具条暂时不在，要等排好再决定（见上面的 effect）。
+        fallback: () => null,
+        scope: paperColRef.current ?? document,
+      })
+      pendingFocusRef.current = { kind: 'remove', generation: draftGeneration, find: next, from: trigger, placed: null }
+    }
+    void deleteItem(item)
+  }
+
+  function groupMenuTrigger(groupId: string): HTMLElement | null {
+    const owner = paperColRef.current?.querySelector<HTMLElement>(`[data-draft-tools-group-id="${CSS.escape(groupId)}"]`)
+    const trigger = owner?.querySelector<HTMLElement>('.draft-group-menu-trigger')
+    return trigger && trigger.isConnected && trigger.getClientRects().length > 0 ? trigger : null
+  }
+
   // a3-imposition (plan.md Must Do 3, 裁点2): recomputed on the same
   // triggers as groupAnchors above, plus pageBreakSuggestions itself (a
   // suggestion set can change — e.g. after a PATCH resolves — without the
@@ -1117,6 +1205,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setSaveStatus('saved')
       onDraftChanged?.()
     } catch (error) {
+      if (pendingFocusRef.current?.kind === 'remove') pendingFocusRef.current = null
       if (!isCurrentDraft()) return
       setSaveStatus('error')
       setSaveError(failureLine('删除题组', error))
@@ -1136,6 +1225,16 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       const { groupId, orderIndex, pageBreakBefore } = removedItem
       const next = await restoreDraftPaperItem(draftPaper.id, { groupId, orderIndex, pageBreakBefore })
       if (!isCurrentDraft()) return
+      // 撤销以后焦点回到被撤回那一组的「更多题组操作」；那一组没有工具条（比如题库里已经没了）时落到左栏「卷面目录」。
+      const fromElement = document.activeElement instanceof HTMLElement ? document.activeElement : null
+      pendingFocusRef.current = {
+        kind: 'undo',
+        generation: draftGeneration,
+        find: () => groupMenuTrigger(groupId),
+        from: fromElement,
+        placed: null,
+        waitForGroupId: groupId,
+      }
       setDraftPaper(next)
       setTitleDraft(next.title)
       setRemovedItem(null)
@@ -1878,15 +1977,17 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 : undefined
               return (
                 <div key={item.id} className="draft-group-actions" data-draft-tools-group-id={item.groupId} role="group" aria-label="题组工具" style={{ top: `${anchorTop}px` }}>
+                  {/* 建议键换成 Button 的「建议」样子（2026-11-15，Owner 当天定）；类名留作摆放和脚本挂钩。 */}
                   {suggestion && (
-                    <button
-                      type="button"
+                    <Button
+                      tone="suggest"
+                      size="sm"
                       className="draft-group-suggestion"
                       title={suggestion.reason}
                       onClick={() => void togglePageBreak(item, true)}
                     >
                       建议前置分页
-                    </button>
+                    </Button>
                   )}
                   {/* similar-workbench-swap (E7, plan.md 施工要点 2 "⇄ 入口
                       gate"): only the four v2-supported groupTypes get a
@@ -1916,6 +2017,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                     label="更多题组操作"
                     triggerTone="strong"
                     triggerSize="md"
+                    triggerClassName="draft-group-menu-trigger"
                     items={[
                       { key: 'up', label: '上移', icon: <ArrowUp size={16} aria-hidden="true" />, disabled: fullIndex <= 0, onSelect: () => moveItem(item.id, -1) },
                       { key: 'down', label: '下移', icon: <ArrowDown size={16} aria-hidden="true" />, disabled: fullIndex >= draftPaper.items.length - 1, onSelect: () => moveItem(item.id, 1) },
@@ -1929,7 +2031,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                           }]
                         : []),
                       { key: 'sep', separator: true },
-                      { key: 'remove', label: '移除', tone: 'danger', icon: <Trash size={16} aria-hidden="true" />, onSelect: () => void deleteItem(item) },
+                      // 删后焦点：onSelect 拿到触发键，移出以后焦点落到下一组的同一个键（见 removeFromGroupMenu）。
+                      { key: 'remove', label: '移除', tone: 'danger', icon: <Trash size={16} aria-hidden="true" />, onSelect: (_event, trigger) => removeFromGroupMenu(item, trigger) },
                     ]}
                   />
                 </div>
@@ -1947,17 +2050,19 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 if (anchorTop == null) return null
                 const item = nonMissingItems.find((entry) => entry.groupId === suggestion.groupId)
                 if (!item) return null
+                // 和 A4 那只一样换成 Button 的「建议」样子（2026-11-15）；类名留作摆放和脚本挂钩。
                 return (
-                  <button
+                  <Button
                     key={`seam-${suggestion.groupId}`}
-                    type="button"
+                    tone="suggest"
+                    size="sm"
                     className="draft-seam-suggestion"
                     style={{ top: `${anchorTop}px` }}
                     title={suggestion.reason}
                     onClick={() => void togglePageBreak(item, true)}
                   >
-                    {suggestion.reason} · 建议前置分页
-                  </button>
+                    {`${suggestion.reason} · 建议前置分页`}
+                  </Button>
                 )
               })}
           </div>

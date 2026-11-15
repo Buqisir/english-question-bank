@@ -112,3 +112,8 @@ token 的扩展用法。
 
 - **想要的值**：能点的东西至少 24 × 24（WCAG 2.2 目标尺寸最低档；构件清单 `design/components-2026-11-13/inventory.md` 的客观检查里有 5 处不到）。tokens.css 没有点击区域一类。若收编，候选名 `--eqb-target-min`（24px），外扩写成 `inset: min(0px, calc(50% - var(--eqb-target-min) / 2))`。
 - **临时方案**：看得见的样子不动，只把能点的范围透明外扩到 24：有定位的元素加 `::after { inset: min(0px, calc(50% - 12px)) }`（本来够大的那一边算出 0，不外扩）；顶栏可改名的卷名外面裹着 `overflow: hidden`，伪元素会被裁掉，改用上下各 3px 内边距加等量负外边距（字的位置不动，键盘焦点框高 6px）。12 写在注释里说明是 24 的一半。记录在 `design/components-2026-11-13/migrate-finish/README.md`「缺的变量」。
+
+## 2026-11-15 Button「建议」样子的字重和两处层级（`app/src/shared-ui/button.css` `.eqb-button[data-tone='suggest']`；`app/src/features/draft-paper/DraftPaperWorkbench.css` `.eqb-button.draft-seam-suggestion`；`app/src/App.css` `.concierge-thinking-toggle input[type='checkbox']::after`）
+
+- **想要的值**：一是「建议」键的字重 400（常规）：tokens.css 没有字重一类，button.css 里别的语气也是字面量 500 / 600。若收编，候选名 `--eqb-font-weight-regular` / `-medium` / `-semibold`（400 / 500 / 600）。二是层级：A3 接缝上的建议键压在卷面上用 5（原值照搬，和题组工具条同层）；思考模式开关的透明外扩提到 1，才能盖过排在后面、带定位的「筛选」键。tokens.css 没有层级一类（上面行和底部提示那条的 `--eqb-z-toast` 也是）。若收编，候选名 `--eqb-z-paper-tools`（5）、`--eqb-z-hit-area`（1）。
+- **临时方案**：一，`font-weight: 400` 字面量，注释写明出处。二，`z-index: 5`、`z-index: 1` 字面量，注释写明谁盖谁。记录在 `design/components-2026-11-13/migrate-followup/README.md`「缺的变量」。

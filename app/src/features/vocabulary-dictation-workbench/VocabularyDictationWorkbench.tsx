@@ -24,6 +24,8 @@ import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { EmptyState } from '../../shared-ui/EmptyState.tsx'
 import { Dialog } from '../../shared-ui/Dialog.tsx'
+import { Button } from '../../shared-ui/Button.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
   createVocabularyDictationTask,
@@ -303,15 +305,23 @@ export function VocabularyDictationWorkbench({
     meaningSaveBarrierRef.current = barrier
   }, [])
 
+  // 「没存住」这一类报错要上危险色（DESIGN.md §5 Notices：只有「没保存」「会丢东西」才上）。
+  // 记下这句报错的原文；页面上的报错还是这句时才标危险，被别的报错或提示换掉就自然不标了。
+  const [unsavedError, setUnsavedError] = useState('')
+  function reportUnsaved(text: string) {
+    setUnsavedError(text)
+    setError(text)
+  }
+
   async function flushMeaningSaves() {
     const barrier = meaningSaveBarrierRef.current
     if (!barrier) return true
     try {
       const saved = await barrier()
-      if (!saved) setError('认词结果尚未保存，请重试后再离开。')
+      if (!saved) reportUnsaved('认词结果尚未保存，请重试后再离开。')
       return saved
     } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '认词结果尚未保存，请重试后再离开。')
+      reportUnsaved(nextError instanceof Error ? nextError.message : '认词结果尚未保存，请重试后再离开。')
       return false
     }
   }
@@ -1011,10 +1021,12 @@ export function VocabularyDictationWorkbench({
           </label>
         </div>
 
+        {/* 提示行换成共用 Notice（2026-11-15，migrate-followup 第三节）：出错 role=alert，做完了 role=status；字不改。
+            原来自带的「关闭提示」留着，换成 Button 次要灰小号的纯图标键，跟在字后面。 */}
         {(message || error) && (
-          <div className={error ? 'dictation-notice is-error' : 'dictation-notice'} role={error ? 'alert' : 'status'}>
-            <span>{error || message}</span>
-            <button type="button" aria-label="关闭提示" onClick={() => { setError(''); setMessage('') }}><X size={16} /></button>
+          <div className="dictation-notice-row">
+            <Notice kind={error ? 'error' : 'success'} danger={Boolean(error) && error === unsavedError}>{error || message}</Notice>
+            <Button tone="subtle" size="sm" icon={<X size={16} aria-hidden="true" />} label="关闭提示" onClick={() => { setError(''); setMessage('') }} />
           </div>
         )}
 

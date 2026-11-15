@@ -574,61 +574,35 @@
 
 /* The optional page-break hint sits above the strip, without shifting the
    tools away from their group's anchor when the hint appears. */
-/* 提议和决定（Owner 2026-11-13 定）：分页小签只有提议的样子——桌色底、弱墨字、
-   下划线，无边无影；原来的白底在新规则里是「已采用」的样子。不做「已采用」
-   状态：采用后的结果是纸上的分页线，撤回就是去掉同组「⋯」里「前置分页」的勾
-   （2026-11-14 起这一项字不变、靠勾表示状态，以前叫「取消分页」）。 */
+/* 提议和决定（Owner 2026-11-13 定）：分页小签只有提议的样子，不做「已采用」状态：采用后的结果是纸上的
+   分页线，撤回就是去掉同组「⋯」里「前置分页」的勾。2026-11-15 起样子归 Button 的「建议」（tone="suggest"，
+   shared-ui/button.css），这里只留摆法：贴在工具条右上角的上面，隔 8px。
+   覆盖：本条 (0,2,0) 盖过 .eqb-button (0,1,0) 的 position: relative；颜色、字、高度一条不写，都归 button.css。 */
 .draft-group-actions .draft-group-suggestion {
-  background: var(--desk-page);
-  border: 0;
-  border-radius: 8px;
-  bottom: calc(100% + 6px);
-  color: var(--desk-muted);
-  cursor: pointer;
-  font-size: 12px;
-  height: auto;
-  padding: 4px 9px;
   position: absolute;
+  bottom: calc(100% + var(--eqb-space-2));
   right: 0;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  white-space: nowrap;
-  width: auto;
 }
 
-.draft-group-actions .draft-group-suggestion:hover {
-  background: var(--desk-hover);
-  color: var(--desk-ink);
+/* 圆角：本文件后面的 .draft-group-actions .eqb-button（0,2,0）把工具条里的键按同心规则改成 4px，
+   可小签是贴在工具条外面的，不在那 4px 内边距里，该用 Button 自己的 8px。
+   本条 (0,3,0) 压过那条 (0,2,0)，把圆角还给 --eqb-radius-control。 */
+.draft-group-actions .eqb-button.draft-group-suggestion {
+  border-radius: var(--eqb-radius-control);
 }
 
 /* a3-imposition (plan.md Must Do 3, 裁点2): the A3-only seam-anchored
-   sibling of .draft-group-suggestion above — same pill treatment, but
-   centered on the paper column (the seam it sits on spans the full face
+   sibling of .draft-group-suggestion above — centered on the paper column (the seam it sits on spans the full face
    width) instead of right-aligned in a per-group action column. */
-.draft-seam-suggestion {
-  /* 提议的样子，同 .draft-group-suggestion（Owner 2026-11-13 定）。
-   * 圆角：原来是胶囊（999px）。它点了是插一个分页，是动作不是标签，照 DESIGN.md §5「胶囊只给标签类，
-   * 有文字的按钮一律 8px」改成 control 8，和 A4 那一枚 .draft-group-suggestion 一样（构件收尾 2026-11-15）。
-   * 没换成 Button：提议的样子（桌色底、弱墨下划线字、12 号以下）不在 Button 的几种语气里，见 migrate-finish/README.md。 */
-  background: var(--desk-page);
-  border: 1px solid transparent;
-  border-radius: var(--eqb-radius-control);
-  color: var(--desk-muted);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  cursor: pointer;
-  font-size: 11.5px;
-  left: 50%;
-  padding: 4px 12px;
+/* 2026-11-15 起样子归 Button 的「建议」，这里只留摆法：绝对定位到接缝（top 由 DraftPaperWorkbench.tsx 给）、
+   水平居中、压在卷面之上。居中用 translate 不用 transform：Button 按下时的缩放写的是 transform，
+   用 transform 居中会在按下那一下被盖掉、键跳到右边（详情页「展开卷面」同一个原因）。
+   覆盖：本条 (0,2,0) 盖过 .eqb-button (0,1,0) 的 position: relative；多写一个 .eqb-button 是为了不靠两份样式表谁后加载。 */
+.eqb-button.draft-seam-suggestion {
   position: absolute;
-  transform: translateX(-50%);
-  white-space: nowrap;
+  left: 50%;
+  translate: -50% 0;
   z-index: 5;
-}
-
-.draft-seam-suggestion:hover {
-  background: var(--desk-hover);
-  color: var(--desk-ink);
 }
 
 /* similar-workbench-swap (E7, plan.md "抽屉"): the swap drawer's own wrapper

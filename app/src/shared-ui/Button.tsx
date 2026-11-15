@@ -14,18 +14,23 @@
  * ButtonLink（构件厂第 4 步换详情页时加）：长得和 Button 一样、但点了是去别的地址的 <a>。
  * 详情页「阅读解析」原来就是链接（能中键开新标签、能复制地址），换成 <button> 会丢这些，所以单出一个。
  * 链接没有 disabled 和 busy，这两项不提供。
+ *
+ * suggest「建议」（2026-11-15 加，Owner 当天定；设计记录 design/components-2026-11-13/migrate-followup/README.md 第一节）：
+ * 对卷面的一条建议，点了就采纳（草稿卷 A4 题组上方、A3 两面接缝上的「建议前置分页」）。不是主键，不抢墨：
+ * 垫页面底色、次要灰字带下划线、字小一档（12），字重常规；悬停和别的透明底键一样垫桌色、字提到墨色。
+ * 「已采纳」没有这个键的样子：采纳以后键自己消失，结果是纸上的分页线（DESIGN.md §5「提议和决定」）。
  */
 
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, MouseEvent, ReactNode, Ref } from 'react'
 import './button.css'
 
-export type ButtonTone = 'quiet' | 'subtle' | 'strong' | 'primary' | 'solid' | 'danger'
+export type ButtonTone = 'quiet' | 'subtle' | 'strong' | 'primary' | 'solid' | 'danger' | 'suggest'
 export type ButtonSize = 'sm' | 'md' | 'lg'
 
 type ButtonBaseProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'aria-label'> & {
   /** quiet 淡墨（默认，导航和次级动作）；subtle 次要灰（一页有很多、行上的小动作）；
    *  strong 墨字（透明底里最重的一档）；primary 雾薄荷主键（每页一处）；
-   *  solid 石板墨填充（短标签）；danger 危险字。 */
+   *  solid 石板墨填充（短标签）；danger 危险字；suggest 对卷面的一条建议（点了就采纳）。 */
   tone?: ButtonTone
   /** sm 高 28；md 高 32（默认）；lg 高 36。 */
   size?: ButtonSize

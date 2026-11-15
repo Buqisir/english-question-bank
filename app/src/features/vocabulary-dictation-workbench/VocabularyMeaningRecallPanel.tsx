@@ -20,6 +20,7 @@ import { FluidHoverList } from '../../components/FluidHoverList'
 import { useAudioIconState } from '../../hooks/useAudioIconState'
 import { DisclosureIcon, DownloadFeedbackIcon, VolumeFeedbackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
+import { Notice } from '../../shared-ui/Notice.tsx'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
   createVocabularyDictationTask,
@@ -512,7 +513,7 @@ export function VocabularyMeaningRecallPanel({
         <div className="meaning-recall-result-summary">
           <strong>会 {counts.correct}</strong><strong>不会 {counts.wrong}</strong><span>未测 {counts.untested}</span>
         </div>
-        {error && <p className="meaning-recall-error" role="alert">{error}</p>}
+        {error && <Notice kind="error" className="meaning-recall-error" danger={saveState === 'error'}>{error}</Notice>}
         <div className="meaning-recall-result-actions">
           <label className="meaning-recall-export-name">
             <span>文件名</span>
@@ -585,7 +586,7 @@ export function VocabularyMeaningRecallPanel({
         <div><h2>看词说义</h2><p>给学生看英文，让他说中文；老师判对错。</p></div>
         {latestDraft && <button type="button" disabled={busy} onClick={() => void resumeRecord(latestDraft.id)}><Play size={16} />继续上次</button>}
       </header>
-      {error && <p className="meaning-recall-error" role="alert">{error}</p>}
+      {error && <Notice kind="error" className="meaning-recall-error" danger={saveState === 'error'}>{error}</Notice>}
 
       <div className="meaning-recall-start-row">
         <div>

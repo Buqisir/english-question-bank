@@ -125,6 +125,29 @@
   background: var(--eqb-color-action-hover);
 }
 
+/* 建议：对卷面的一条建议，点了就采纳（草稿卷「建议前置分页」，2026-11-15 加）。不是主键，不抢墨：
+ * 垫页面底色（放在桌上、纸上都看得出是一块可点的小签），次要灰字带下划线，字小一档、字重常规。
+ * 原来两处手写的样子收敛过来：A4 那只是 12 号、A3 那只是 11.5 号（不在字号阶梯上），统一成 --eqb-font-size-xs。
+ * 覆盖：本条 (0,2,0) 盖过 .eqb-button (0,1,0) 的透明底、淡墨字、13 号字、500 字重。 */
+.eqb-button[data-tone='suggest'] {
+  background: var(--eqb-color-bg);
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
+  font-weight: 400;
+}
+
+/* 下划线画在字的那一层上：字在 .eqb-button-label 里，它是弹性布局的子项，不靠父层把下划线传下来。 */
+.eqb-button[data-tone='suggest'] .eqb-button-label {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* 悬停：和透明底几种一样垫桌色、字提到墨色。 */
+.eqb-button[data-tone='suggest']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
+}
+
 /* 放在会滑动悬停底的列表里（FluidHoverList，比如顶栏）时，底由列表画，按钮自己不再垫，
  * 只把字提到墨色。本条覆盖上面透明底几种语气的 :hover 底色，因为两层底会叠出深一档的块。 */
 .fluid-hover-list .eqb-button:is([data-tone='quiet'], [data-tone='subtle'], [data-tone='strong'], [data-tone='danger']):hover:not(:disabled) {
@@ -160,9 +183,9 @@
   outline-offset: 2px;
 }
 
-/* 键盘焦点和悬停一样把淡墨、次要灰的字提到墨色（原顶栏 .topbar .ghost-button:focus-visible 就是这样）；
+/* 键盘焦点和悬停一样把淡墨、次要灰（和建议）的字提到墨色（原顶栏 .topbar .ghost-button:focus-visible 就是这样）；
  * 底不垫，靠焦点环。 */
-.eqb-button:is([data-tone='quiet'], [data-tone='subtle']):focus-visible:not(:disabled) {
+.eqb-button:is([data-tone='quiet'], [data-tone='subtle'], [data-tone='suggest']):focus-visible:not(:disabled) {
   color: var(--eqb-color-text);
 }
 

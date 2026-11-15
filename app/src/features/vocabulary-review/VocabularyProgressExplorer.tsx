@@ -1,5 +1,6 @@
 import { Check, ChevronUp } from '../../icons'
 import { Button } from '../../shared-ui/Button.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
 import type { RefObject } from 'react'
 import type { VocabularyEntry, VocabularyProgram, VocabularyStage } from '../../domain/vocabulary'
 
@@ -180,8 +181,8 @@ export function VocabularyProgressExplorer({
         })}
       </div>
 
-      {statusMessage && <p className="vocabulary-progress-status" aria-live="polite">{statusMessage}</p>}
-      {errorMessage && <p className="vocabulary-request-error" role="alert">{errorMessage}</p>}
+      {statusMessage && <Notice kind="success" className="vocabulary-progress-status">{statusMessage}</Notice>}
+      {errorMessage && <Notice kind="error" className="vocabulary-request-error">{errorMessage}</Notice>}
     </section>
   )
 }

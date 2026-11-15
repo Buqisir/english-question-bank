@@ -128,34 +128,14 @@
   border-bottom-color: var(--action);
 }
 
-.dictation-notice {
+/* 顶上的提示行：字归 shared-ui/Notice，「关闭提示」归 Button（2026-11-15）。这里只留这一行的摆法：
+ * 关闭键跟在字后面，和下面的东西隔 16。原来的灰底圆角框、出错时的红底红字框删了。 */
+.dictation-notice-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 16px;
-  padding: 12px 16px;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 12px;
-  background: var(--eqb-color-desk);
-  color: var(--eqb-color-text);
-  font-size: 14px;
-}
-
-.dictation-notice.is-error {
-  border-color: var(--eqb-color-danger);
-  background: var(--eqb-color-danger-soft);
-  color: var(--eqb-color-danger);
-}
-
-.dictation-notice button {
-  display: grid;
-  width: 28px;
-  height: 28px;
-  place-items: center;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
+  gap: var(--eqb-space-1);
+  min-width: 0;
+  margin-bottom: var(--eqb-space-4);
 }
 
 .dictation-library-tools {
@@ -1562,13 +1542,11 @@
   gap: 8px;
 }
 
-.meaning-recall-error {
-  margin: 0;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--eqb-color-danger);
-  background: var(--eqb-color-danger-soft);
-  color: var(--eqb-color-danger);
-  font-size: 14px;
+/* 看词说义的出错行：样子归 shared-ui/Notice（2026-11-15）。原来是一条贴边的红底红字带，左右内边距 16，
+ * 这里只留左右 16、上下 8 的位置，让字和面板里别的内容对齐（目测）。原来的红底、红字、底边线删了。
+ * 覆盖：本条 (0,2,0) 盖过 .eqb-notice (0,1,0) 的 margin: 0 以外没有冲突的属性；写两个类只是为了不靠样式表先后。 */
+.eqb-notice.meaning-recall-error {
+  padding: var(--eqb-space-2) var(--eqb-space-4);
 }
 
 .meaning-recall-stage {

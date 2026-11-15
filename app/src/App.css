@@ -3049,10 +3049,15 @@ button:disabled {
 
 /* 点击区域补到 24 高（WCAG 2.2 2.5.8，清点 field-04 量到 32×18；构件收尾 2026-11-15）：开关的 ::before 是圆钮，
  * 用 ::after 画一块透明的外扩，上下各伸 3px（min(0px, 50% − 12px) 算出来），样子不变；点在外扩上照样切换开关。
- * 24px 没有变量，缺口见 docs/design-gaps.md。 */
+ * 24px 没有变量，缺口见 docs/design-gaps.md。
+ * z-index: 1（2026-11-15 后续，migrate-followup 第四节）：这一行上贴搜索框、下贴「筛选」键，开关上下离它们各只有 2px，
+ * 外扩伸出去的 3px 里有 1px 压在它们上面。「筛选」键（.eqb-button 带 position: relative）在文档里排在后面，原来画在外扩上面，
+ * 点那 1px 落到「筛选」，开关只量到 32 × 22.75（目测是 22.5，见 migrate-finish）。外扩提到 1 层以后两头的 1px 都归开关，到 32 × 24；
+ * 代价是搜索框底边、「筛选」顶边各让出 1px 能点的地方（54 → 53、36 → 35，都还远过 24）。外扩是透明的，看不出来；布局不动。 */
 .concierge-thinking-toggle input[type='checkbox']::after {
   content: '';
   position: absolute;
+  z-index: 1;
   inset: min(0px, calc(50% - 12px));
 }
 

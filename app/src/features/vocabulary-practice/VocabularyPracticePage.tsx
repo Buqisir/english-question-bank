@@ -4,6 +4,7 @@ import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { useAudioIconState } from '../../hooks/useAudioIconState'
 import { VolumeFeedbackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
+import { Notice } from '../../shared-ui/Notice.tsx'
 import type { VocabularySetDto } from '../../services/vocabulary'
 import { getVocabularySet } from '../../services/vocabulary'
 import {
@@ -251,7 +252,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
               </div>
 
               <p className="vocabulary-practice-live" aria-live="polite">{liveMessage}</p>
-              {audioError && <p className="vocabulary-practice-audio-error" role="status">{audioError}</p>}
+              {audioError && <Notice kind="error" className="vocabulary-practice-audio-error">{audioError}</Notice>}
 
               {roundComplete && (
                 <div className="vocabulary-practice-complete">
