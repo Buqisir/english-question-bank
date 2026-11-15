@@ -452,7 +452,9 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
 
   // 9.7 ConciergePaperRow contract.
   assert('Paper row article uses concierge-paper-row class', /<article[\s\S]{0,200}className=\{`concierge-paper-row\$\{expanded \? ' is-expanded' : ''\}`\}/.test(paperRowSource), '')
-  assert('Paper row click guards interactive children', /target\.closest\('button, a, input, textarea, select, \[role="button"\], \.concierge-paper-detail'\)/.test(paperRowSource), '')
+  // 构件厂 2026-11-15：行头换成共用 Row，整行目标是真 <button>（action kind 'button'），「看整卷」是它的兄弟；
+  // 原来 article 上的整行 onClick 和「点的是不是键」判断（target.closest(...)）删了，这条跟着改成查 Row。
+  assert('Paper row head is shared Row with a button whole-row target', /<Row[\s\S]{0,120}className="concierge-paper-row-head"[\s\S]{0,200}action=\{\{ kind: 'button'[\s\S]{0,120}onTogglePaper\(paper\.key\)[\s\S]{0,40}expanded, controls: detailId/.test(paperRowSource) && !/target\.closest\(/.test(paperRowSource), '')
   assert('Paper row chevron toggles via onTogglePaper(paper.key)', /onClick=\{\(\)\s*=>\s*onTogglePaper\(paper\.key\)\}/.test(paperRowSource), '')
   assert('Paper row uses 命中 N 个篇章 wording (Cut 6)', /['"]命中\s*['"]/.test(paperRowSource) && /['"]\s*个篇章['"]/.test(paperRowSource) && /paper\.hitCount/.test(paperRowSource), '')
   assert('Paper row does NOT say 共 N 组', !/共\s*\{paper\.hitCount\}\s*组/.test(paperRowSource), '')
@@ -778,9 +780,11 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
   const css = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.css'), 'utf8')
   const app = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.tsx'), 'utf8')
 
-  // Paper row CSS exists with cursor: pointer + soft hover.
+  // Paper row CSS: soft transition. 构件厂 2026-11-15：手形光标从 article 挪到共用 Row 的整行目标（row.css .eqb-row-hit），
+  // article 不再整块可点（展开的题组目录不是点开卷行的地方），这条跟着改成查 row.css。
   const paperRowRule = css.match(/^\.concierge-paper-row\s*\{[\s\S]*?\}/m)?.[0] || ''
-  assert('paper-row uses cursor: pointer', /cursor:\s*pointer/.test(paperRowRule), `got: ${paperRowRule}`)
+  const rowCss = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'row.css'), 'utf8')
+  assert('paper-row whole-row target uses cursor: pointer', /\.eqb-row-hit \{[\s\S]{0,300}cursor:\s*pointer/.test(rowCss) && !/cursor:\s*pointer/.test(paperRowRule), `got: ${paperRowRule}`)
   // motion-pass: transition duration/curve literals were collected into
   // --motion-*/--ease-* tokens (docs/cuts/motion-pass/plan.md #2); assert the
   // token form on the same background+box-shadow pair, still no transform.

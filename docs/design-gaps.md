@@ -102,3 +102,8 @@ token 的扩展用法。
 
 - **想要的值**：一是板的那一圈边。DESIGN.md §4 的 e0 没有变量（表里写「—」），板的边是 `0 0 0 1px` 一圈 `--eqb-color-border`（首页、浏览卷行列表卡原来的画法，不占位置）。若收编，候选名 `--elev-0-edge`，和 `--elev-1/2/3` 放在一起。二是整张能点的卡片按下时缩多少：Button 用 0.97（也是字面量，没有 token），卡片比按钮大得多，0.97 会缩掉十来像素，取 0.99（目测）。若收编，候选名 `--eqb-press-scale`（键）、`--eqb-press-scale-large`（卡片）。三是草稿卷左栏目录的内衬 14 / 8 / 12，14 不在间距阶梯上（DESIGN.md §8 存量半档，不追改）。
 - **临时方案**：一，surface.css 里直接写 `box-shadow: 0 0 0 1px var(--eqb-color-border)`，颜色用 token，注释写明它是边不是影子。二，`transform: scale(0.99)` 字面量，注释写明理由。三，左栏照原值写字面量，换上板构件以后用一条 (0,3,0) 覆盖构件的 `padding: 0`，注释写明。记录在 `design/components-2026-11-13/migrate-surface/README.md`「缺的变量」。
+
+## 2026-11-15 行构件和底部提示构件的几处值（`app/src/shared-ui/row.css`、`app/src/shared-ui/toast.css`）
+
+- **想要的值**：一是行的最小高 48（DESIGN.md §5 Rows）和卷行展开后题组行的 44，tokens.css 里没有行高一类。若收编，候选名 `--eqb-row-min-height`、`--eqb-row-min-height-sm`（44 要不要改 48 是另一件事，见 `design/components-2026-11-13/migrate-row-toast/README.md`「要 Owner 定的」）。二是卷行内衬 10 / 14：DESIGN.md §5 Rows 写的就是 10 / 14，但不在间距阶梯（4 / 8 / 12 / 16 / 24）上，§8 说存量半档不追改。若收编，候选名 `--eqb-row-padding-y`、`--eqb-row-padding-x`；首页行 12 / 16 已经在阶梯上，用的是 `--eqb-space-3` / `--eqb-space-4`。三是行的「按下」底色：DESIGN.md 只写了悬停垫 `--desk-hover`，没写按下；悬停已经是桌色，按下取深一档的 `--eqb-color-border`（`#dce6eb`，目测看得出、不跳）。若收编，候选名 `--eqb-color-row-pressed`。四是底部提示的层级 32：tokens.css 没有层级一类（菜单 70、对话框各自写）。原来草稿卷的提示在 30，整卷页相似题栏的提示抬到 32（整卷预览里有 30、31 层），收成一个件取 32。若收编，候选名 `--eqb-z-toast`。五是提示的最小高 28（等于小号键的高，原 notice.css 就是字面量）。若收编，候选名 `--eqb-control-height-sm`。
+- **临时方案**：一、二、五照原值写字面量（`min-height: 48px` / `44px`、`padding: 10px 14px`、`min-height: 28px`），注释写明出处；三用 `var(--eqb-color-border)`；四 `z-index: 32` 字面量，注释写明为什么是 32。记录在 `design/components-2026-11-13/migrate-row-toast/README.md`「缺的变量」。

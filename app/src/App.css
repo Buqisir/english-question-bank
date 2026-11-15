@@ -3349,51 +3349,26 @@ p.concierge-empty {
   color: var(--desk-muted);
 }
 
-/* 「接着做」「今天翻到」的列表板：底、边（一圈 1px --desk-border）、圆角、裁切、去列表圆点由共用构件
-   shared-ui/Surface（board，surfaceProps 挂在 FluidHoverList 上）给，这里只留排法。 */
-.home-row-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.home-row-list > li + li {
-  border-top: 1px solid var(--desk-line);
-}
-
+/* 「接着做」「今天翻到」的列表和行是共用构件 shared-ui/Row（2026-11-15）：板（底、一圈边、圆角、裁切）、
+   竖排、去列表圆点、行间分隔线由 RowList 给；行的最小高 48、内衬 12 / 16（padding="home"）、定位、
+   整行目标、焦点环和焦点垫底、按下都在 row.css。原来 .home-row-list 的排法、li + li 分隔线，
+   .home-row 的 min-height、padding、border、width、font、cursor、position 和两条 :focus-visible 删了。
+   类名 home-row-list / home-row 留作排法和脚本的钩子。 */
 .home-row {
   display: grid;
   grid-template-columns: 16px minmax(0, 1fr) auto;
   align-items: center;
   gap: 12px;
-  width: 100%;
-  min-height: 48px;
-  padding: 12px 16px;
-  border: 0;
   background: transparent;
   color: var(--desk-ink);
-  font: inherit;
   text-align: left;
-  cursor: pointer;
   transition: background var(--motion-fast) var(--ease-hover);
-}
-
-.home-row {
-  position: relative;
 }
 
 /* Rows without a leading icon (e.g. 今天翻到) must not leave their text in
    the 16px icon track. */
 .home-row--no-icon {
   grid-template-columns: minmax(0, 1fr) auto;
-}
-
-.home-row:focus-visible {
-  background: var(--desk-hover);
-}
-
-.home-row:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: -2px;
 }
 
 .home-row-icon {
@@ -3406,7 +3381,7 @@ p.concierge-empty {
 }
 
 .home-row[data-fluid-hover-active] .home-row-icon,
-.home-row:focus-visible .home-row-icon {
+.home-row:has(> .eqb-row-hit:focus-visible) .home-row-icon {
   color: var(--desk-ink);
 }
 
@@ -3476,7 +3451,7 @@ p.concierge-empty {
 }
 
 .home-row[data-fluid-hover-active] .home-row-chevron,
-.home-row:focus-visible .home-row-chevron {
+.home-row:has(> .eqb-row-hit:focus-visible) .home-row-chevron {
   color: var(--desk-ink);
   transform: translateX(2px);
 }
@@ -4450,21 +4425,9 @@ p.concierge-empty {
    Reuses neutral paper / ink palette from the V1 stream.
    ======================================================================== */
 
-/* 卷行列表板（首页出结果、最近上新、浏览页每个年份）：底、边（一圈 1px --desk-border）、圆角、裁切、
-   去列表圆点由共用构件 shared-ui/Surface（board，surfaceProps 挂在 FluidHoverList 上）给，这里只留排法。 */
-.concierge-paper-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-}
-
-.concierge-paper-list > li {
-  border-bottom: 1px solid var(--desk-line);
-}
-
-.concierge-paper-list > li:last-child {
-  border-bottom: none;
-}
+/* 卷行列表板（首页出结果、最近上新、浏览页每个年份）：2026-11-15 起是共用构件 shared-ui/Row 的 RowList
+   （板、竖排、行间 1px --desk-line 分隔线都在 row.css / surface.css），原来这里的排法和分隔线两条删了。
+   类名 concierge-paper-list 留作脚本钩子。 */
 
 /* Paper-level row. The article is one flex column (header + optional
    passage list) so the expand tint can live on the header only — passages
@@ -4478,9 +4441,10 @@ p.concierge-empty {
   outline: none;
   border-radius: 0;
   transition: background var(--motion-fast) var(--ease-hover), box-shadow var(--motion-fast) var(--ease-hover);
-  cursor: pointer;
 }
 
+/* 行头是 shared-ui/Row（2026-11-15）：最小高 48、内衬 10 / 14（首页 12 / 16）、定位、整行目标的手形光标、
+   焦点环、按下都在 row.css，这里原来那几条（padding、min-height、position、article 上的 cursor）删了。 */
 .concierge-paper-row-head {
   display: grid;
   /* ui-search-feel 刀⑤ #3 — title column used to be capped narrow
@@ -4492,14 +4456,8 @@ p.concierge-empty {
   grid-template-columns: 64px minmax(220px, 1fr) minmax(160px, 320px) auto;
   align-items: center;
   gap: 16px;
-  padding: 10px 14px;
-  min-height: 48px;
   background: transparent;
   transition: background var(--motion-fast) var(--ease-hover);
-}
-
-.concierge-paper-row-head {
-  position: relative;
 }
 
 .concierge-paper-row:focus-within .concierge-paper-row-head,
@@ -4545,7 +4503,6 @@ p.concierge-empty {
 /* 首页是归来 (2026-09-15) — home additions sit on the same 48px row as
    browse rows (DESIGN Rows: 14/500 title, 13px weak year prefix on home). */
 .concierge-paper-row[data-recent] .concierge-paper-row-head {
-  padding: 12px 16px;
   align-items: center;
 }
 
@@ -4560,18 +4517,15 @@ p.concierge-empty {
   color: var(--desk-ink);
 }
 
+/* 原来是一个 <button>，2026-11-15 起是一行字（展开键是整行目标）。inline-block 照原来按钮的排法，像素不变。 */
 .concierge-recent-title {
-  border: 0;
-  padding: 0;
-  background: none;
+  display: inline-block;
   color: var(--desk-ink);
-  font: inherit;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.5;
   text-align: left;
   overflow-wrap: anywhere;
-  cursor: pointer;
 }
 
 .concierge-recent-year {
@@ -4580,12 +4534,6 @@ p.concierge-empty {
   font-weight: 400;
   font-variant-numeric: tabular-nums;
   color: var(--desk-muted);
-}
-
-.concierge-recent-title:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 4px;
-  border-radius: 4px;
 }
 
 .concierge-recent-date {
@@ -4597,6 +4545,7 @@ p.concierge-empty {
 }
 
 @media (max-width: 640px) {
+  /* 覆盖：本条 (0,3,0) 盖过 row.css .eqb-row[data-padding='home'] (0,2,0) 的 12 / 16，窄屏首页卷行照原来 16 / 14。 */
   .concierge-paper-row[data-recent] .concierge-paper-row-head {
     display: flex;
     flex-direction: column;
@@ -4868,15 +4817,14 @@ p.concierge-empty {
   max-width: 100%;
 }
 
+/* 题组行是 shared-ui/Row（2026-11-15，size="sm"）：最小高 44、定位、整行目标的手形光标、焦点环、按下都在 row.css，
+   这里原来的 position、min-height、cursor 删了（不能开详情时行不可点，不再显示手形）。 */
 .concierge-group-row-line {
-  position: relative;
   display: flex;
   align-items: stretch;
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  min-height: 44px;
-  cursor: pointer;
 }
 
 /* Hover surface comes from the enclosing `.concierge-group-index` fluid list

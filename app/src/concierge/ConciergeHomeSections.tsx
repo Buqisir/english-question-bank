@@ -14,8 +14,7 @@
  */
 
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
-import { FluidHoverList } from '../components/FluidHoverList.tsx'
-import { surfaceProps } from '../shared-ui/surfaceProps.ts'
+import { Row, RowList } from '../shared-ui/Row.tsx'
 import { groupTypeLabel, type DraftPaperSummary, type QuestionGroupCard } from '../domain/questionBank.ts'
 import { fetchDraftPapers } from '../services/draftPapers.ts'
 import { BoardList, ChevronRight } from '../icons'
@@ -56,31 +55,40 @@ type HomeRowProps = {
   detail?: string
   aside?: string
   action?: string
+  /** 这一行打开的页的地址（详情、草稿卷），整行目标是 <a href>。 */
+  href: string
   onOpen: () => void
   ariaLabel: string
 }
 
-function HomeRow({ icon: Icon, title, meta, detail, aside, action, onOpen, ariaLabel }: HomeRowProps) {
+// 首页行是共用构件 shared-ui/Row（2026-11-15）：原来整行是一个 <button>，现在 <li> 本身是行，
+// 整行目标是一个真 <a href>（打开详情 / 草稿卷，都有自己的地址：中键、新标签照浏览器的来，左键走站内跳转）。
+// 行里没有次要键。读屏名字照原来的 aria-label。
+function HomeRow({ icon: Icon, title, meta, detail, aside, action, href, onOpen, ariaLabel }: HomeRowProps) {
   return (
-    <li>
-      <button type="button" className={Icon ? 'home-row' : 'home-row home-row--no-icon'} onClick={onOpen} aria-label={ariaLabel}>
-        {Icon && <span className="home-row-icon" aria-hidden="true"><Icon size={16} /></span>}
-        <span className="home-row-text">
-          <span className="home-row-title-line">
-            <span className="home-row-title">{title}</span>
-            {meta && <span className="home-row-meta">{meta}</span>}
-          </span>
-          {detail && <span className="home-row-detail">{detail}</span>}
+    <Row
+      className={Icon ? 'home-row' : 'home-row home-row--no-icon'}
+      padding="home"
+      action={{ kind: 'link', label: ariaLabel, href, onNavigate: onOpen }}
+    >
+      {Icon && <span className="home-row-icon" aria-hidden="true"><Icon size={16} /></span>}
+      <span className="home-row-text">
+        <span className="home-row-title-line">
+          <span className="home-row-title">{title}</span>
+          {meta && <span className="home-row-meta">{meta}</span>}
         </span>
-        <span className="home-row-aside">
-          {aside && <span className="home-row-time">{aside}</span>}
-          {action && <span className="home-row-action">{action}</span>}
-          <span className="home-row-chevron" aria-hidden="true"><ChevronRight size={14} /></span>
-        </span>
-      </button>
-    </li>
+        {detail && <span className="home-row-detail">{detail}</span>}
+      </span>
+      <span className="home-row-aside">
+        {aside && <span className="home-row-time">{aside}</span>}
+        {action && <span className="home-row-action">{action}</span>}
+        <span className="home-row-chevron" aria-hidden="true"><ChevronRight size={14} /></span>
+      </span>
+    </Row>
   )
 }
+
+const detailHref = (group: QuestionGroupCard) => `?view=detail&groupId=${encodeURIComponent(group.id)}`
 
 export type HomeContinueSectionProps = {
   questionGroupById: Map<string, QuestionGroupCard>
@@ -132,7 +140,7 @@ export function HomeContinueSection({
 
   return (
     <HomeSection label="接着做">
-      <FluidHoverList {...surfaceProps({ variant: 'board' }, 'home-row-list')} itemSelector=".home-row">
+      <RowList className="home-row-list">
         {showDraft && draftPaperId && (
           <HomeRow
             icon={BoardList}
@@ -140,6 +148,7 @@ export function HomeContinueSection({
             meta={`${draftGroupCount} 题组`}
             aside={draftSummary ? relativeTimeLabel(`${draftSummary.updatedAt.replace(' ', 'T')}Z`) : undefined}
             action="继续组卷"
+            href={`?view=draft-paper&draftPaperId=${encodeURIComponent(draftPaperId)}`}
             onOpen={() => onOpenDraftPaper(draftPaperId)}
             ariaLabel={`继续组卷：${draftSummary?.title || '草稿卷'}，已选 ${draftGroupCount} 个题组`}
           />
@@ -151,11 +160,12 @@ export function HomeContinueSection({
             meta={paperOrigin(group)}
             detail={buildTopicText(group) ?? undefined}
             aside={relativeTimeLabel(entry.at)}
+            href={detailHref(group)}
             onOpen={() => onOpenDetail(group)}
             ariaLabel={`打开 ${paperOrigin(group)} ${passageLabel(group)}`}
           />
         ))}
-      </FluidHoverList>
+      </RowList>
     </HomeSection>
   )
 }
@@ -170,15 +180,16 @@ export function HomeDailyPassage({ questionGroups, onOpenDetail }: HomeDailyPass
   if (!group) return null
   return (
     <HomeSection label="今天翻到">
-      <FluidHoverList {...surfaceProps({ variant: 'board' }, 'home-row-list')} itemSelector=".home-row">
+      <RowList className="home-row-list">
         <HomeRow
           title={passageLabel(group)}
           meta={paperOrigin(group)}
           detail={compactSummary(group)}
+          href={detailHref(group)}
           onOpen={() => onOpenDetail(group)}
           ariaLabel={`打开 ${paperOrigin(group)} ${passageLabel(group)}`}
         />
-      </FluidHoverList>
+      </RowList>
     </HomeSection>
   )
 }

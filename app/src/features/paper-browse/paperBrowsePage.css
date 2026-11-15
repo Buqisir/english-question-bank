@@ -1688,13 +1688,8 @@
   flex: 1;
 }
 
-/* 「加入草稿卷」之后那一行（.similar-toast）换成了共用提示行 shared-ui/Notice 的 floating 放法：
-   原来的黑底白字条去掉，白底、e3、位置和入退场都由 notice.css 给。
-   覆盖：本条 (0,3,0) 盖过 notice.css floating 那条 (0,2,0) 的 z-index: 30，只改这一项，
-   因为原来这条提示就在 32 层（整卷预览里有 30、31 层的东西，不能被它们压住）。 */
-.similar-rail .eqb-notice.similar-toast {
-  z-index: 32;
-}
+/* 「加入草稿卷」之后那一行（.similar-toast）2026-11-15 换成共用构件 shared-ui/Toast：样子、位置、入退场、层（32）
+   都在 toast.css。原来这里把它抬到 32 层的那条删了（Toast 的播报区本来就在 32 层）。 */
 
 @media (prefers-reduced-motion: reduce) {
   .paper-browse-reading-overview-toggle svg {
@@ -1705,7 +1700,7 @@
     transition: none;
   }
 
-  /* .similar-toast 的减少动态效果由 notice.css 管（只淡入淡出，不挪位置）。 */
+  /* .similar-toast 的减少动态效果由 toast.css 管（不做动画）。 */
 }
 
 /* ─── similar-passages-entry (E6) — shared「相似篇章」候选面板 ───

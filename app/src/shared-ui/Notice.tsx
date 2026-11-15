@@ -1,5 +1,5 @@
 /**
- * 提示行：说明、等待、成功、出错、撤销五种，一个件（走查「路上的构件」第 1 名，Owner 2026-11-14；
+ * 提示行：说明、等待、成功、出错四种，一个件（走查「路上的构件」第 1 名，Owner 2026-11-14；
  * 设计记录 design/ux-2026-11-14/find-compose-export/fix-notice/README.md）。
  *
  * 照 DESIGN.md §5「Notices 提示条」和「质感六条」的「安静」「现代」：
@@ -7,15 +7,15 @@
  * - 出错和说明同一种写法；只有「没保存」「会丢东西」才上危险色（danger）。
  * - 出错写清哪里出错、东西还在不在（children，自己的话），后面照登服务器原话（detail），不另写兜底的话
  *   （No-Literal-Fallback）。能做什么放在行尾的一个键上（action，比如「重试」）。
- * - 撤销那种带一个文字键（action「撤销」）。
  * - 等待那种不换掉旧内容：调用处把旧内容留着，只加这一行进度。
  * - 读屏：出错 role="alert"；其余 role="status"、aria-live="polite"。
  *
  * 放法（placement）：
  * - inline（默认）：放在页面给的固定位置里，左右边距由那一处给（不贴 x=0）。
  * - over：压在内容上面（比如重排时盖着旧卷面的那一行），垫桌色、e1，免得和底下的字混在一起。
- * - floating：临时浮在视口底部正中（撤销、刚保存这类），白底、e3（DESIGN.md §4：e3 只给临时的东西）。
- *   入场退场照旧由调用处的 usePresence 给 data-visible。
+ *
+ * 原来还有第五种「撤销」和第三种放法 floating（临时浮在视口底部正中）：2026-11-15 收进共用构件 shared-ui/Toast
+ * （底部提示 / 撤销：一次只显示一条、鼠标停着不消失、常驻播报区），这里删了。浮着的临时提示用 Toast。
  */
 
 import type { HTMLAttributes, ReactNode, Ref } from 'react'
@@ -23,8 +23,8 @@ import { AlertTriangle, CheckCircle, InfoCircle, Loader } from '../icons'
 import { Button } from './Button.tsx'
 import './notice.css'
 
-export type NoticeKind = 'info' | 'waiting' | 'success' | 'error' | 'undo'
-export type NoticePlacement = 'inline' | 'over' | 'floating'
+export type NoticeKind = 'info' | 'waiting' | 'success' | 'error'
+export type NoticePlacement = 'inline' | 'over'
 
 export type NoticeAction = {
   label: string
@@ -40,7 +40,7 @@ export type NoticeProps = Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'rol
   children: string
   /** 服务器原话，照登，接在「：」后面。没有就不写。 */
   detail?: string | null
-  /** 行尾一个文字键：出错的「重试」、撤销的「撤销」。 */
+  /** 行尾一个文字键：出错的「重试」。 */
   action?: NoticeAction
   placement?: NoticePlacement
   /** 只给「没保存」「会丢东西」：字换危险色。 */

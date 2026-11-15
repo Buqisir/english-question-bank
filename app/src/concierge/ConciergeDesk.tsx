@@ -30,7 +30,7 @@ import { ChipToggle } from '../shared-ui/Chip.tsx'
 import { Notice } from '../shared-ui/Notice.tsx'
 import { EmptyState } from '../shared-ui/EmptyState.tsx'
 import { SearchField } from '../shared-ui/SearchField.tsx'
-import { surfaceProps } from '../shared-ui/surfaceProps.ts'
+import { RowList } from '../shared-ui/Row.tsx'
 
 /** Fluid hover: an expanded paper row's open body still belongs to its head,
  *  so the highlight stays on that head instead of jumping to the next paper. */
@@ -951,7 +951,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           )}
 
         {state.kind === 'results' && filteredPaperResults.length > 0 && (
-          <FluidHoverList {...surfaceProps({ variant: 'board' }, 'concierge-paper-list')} itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
+          <RowList className="concierge-paper-list" itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
             {filteredPaperResults.map((paper, index) => {
               // C7 (trust-cracks) — search-result year column: only the first
               // of a run of consecutive same-year rows shows the year digits;
@@ -978,7 +978,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 </li>
               )
             })}
-          </FluidHoverList>
+          </RowList>
         )}
       </div>
 
@@ -1001,7 +1001,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                     <span className="concierge-feed-year-label">{yearGroup.label}</span>
                     <span className="concierge-feed-year-count">{yearGroup.papers.length} 套</span>
                   </div>
-                  <FluidHoverList {...surfaceProps({ variant: 'board' }, 'concierge-paper-list')} itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
+                  <RowList className="concierge-paper-list" itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
                     {yearGroup.papers.map((paper) => (
                       <li key={paper.key}>
                         <ConciergePaperRow
@@ -1020,7 +1020,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                         />
                       </li>
                     ))}
-                  </FluidHoverList>
+                  </RowList>
                 </div>
               ))}
             </div>
@@ -1039,7 +1039,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
               {homeRecentFeed.length > 0 && (
                 <section className="home-section" aria-label="最近上新">
                   <h2 className="concierge-feed-label home-section-label">最近上新</h2>
-                  <FluidHoverList {...surfaceProps({ variant: 'board' }, 'concierge-paper-list')} itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
+                  <RowList className="concierge-paper-list" itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
                     {homeRecentFeed.map((paper) => (
                       <li key={paper.key}>
                         <ConciergePaperRow
@@ -1059,7 +1059,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                         />
                       </li>
                     ))}
-                  </FluidHoverList>
+                  </RowList>
                 </section>
               )}
               {onOpenDetail && (

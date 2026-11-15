@@ -1,0 +1,295 @@
+{
+ "tabOrder": [
+  {
+   "id": null,
+   "tag": "button",
+   "cls": "eqb-row-hit",
+   "name": "2026 新课标Ⅰ卷",
+   "expanded": "false",
+   "href": null,
+   "list": "keys-paper",
+   "row": "2026 新课标Ⅰ卷4 篇章",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @-2px",
+   "rowBg": "rgb(230, 237, 240)"
+  },
+  {
+   "id": null,
+   "tag": "button",
+   "cls": "eqb-button demo-open",
+   "name": "看整卷",
+   "expanded": null,
+   "href": null,
+   "list": "keys-paper",
+   "row": "2026 新课标Ⅰ卷4 篇章",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @2px",
+   "rowBg": "rgba(0, 0, 0, 0)"
+  },
+  {
+   "id": null,
+   "tag": "button",
+   "cls": "eqb-row-hit",
+   "name": "2025 新课标Ⅱ卷",
+   "expanded": "false",
+   "href": null,
+   "list": "keys-paper",
+   "row": "2025 新课标Ⅱ卷4 篇章",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @-2px",
+   "rowBg": "rgb(230, 237, 240)"
+  },
+  {
+   "id": null,
+   "tag": "button",
+   "cls": "eqb-button demo-open",
+   "name": "看整卷",
+   "expanded": null,
+   "href": null,
+   "list": "keys-paper",
+   "row": "2025 新课标Ⅱ卷4 篇章",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @2px",
+   "rowBg": "rgba(0, 0, 0, 0)"
+  },
+  {
+   "id": null,
+   "tag": "button",
+   "cls": "eqb-row-hit",
+   "name": "2024 全国甲卷",
+   "expanded": "false",
+   "href": null,
+   "list": "keys-paper",
+   "row": "2024 全国甲卷4 篇章看",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @-2px",
+   "rowBg": "rgb(230, 237, 240)"
+  },
+  {
+   "id": null,
+   "tag": "button",
+   "cls": "eqb-button demo-open",
+   "name": "看整卷",
+   "expanded": null,
+   "href": null,
+   "list": "keys-paper",
+   "row": "2024 全国甲卷4 篇章看",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @2px",
+   "rowBg": "rgba(0, 0, 0, 0)"
+  },
+  {
+   "id": null,
+   "tag": "a",
+   "cls": "eqb-row-hit",
+   "name": "继续组卷：期中复习，已选 3 个题组",
+   "expanded": null,
+   "href": "?view=draft-paper&draftPaperId=demo",
+   "list": "keys-home",
+   "row": "期中复习3 题组 · 继续组",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @-2px",
+   "rowBg": "rgb(230, 237, 240)"
+  },
+  {
+   "id": null,
+   "tag": "a",
+   "cls": "eqb-row-hit",
+   "name": "打开 2026 新课标Ⅰ卷 阅读 C",
+   "expanded": null,
+   "href": "?view=detail&groupId=demo-c",
+   "list": "keys-home",
+   "row": "阅读 C · 生态恢复202",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @-2px",
+   "rowBg": "rgb(230, 237, 240)"
+  },
+  {
+   "id": null,
+   "tag": "a",
+   "cls": "eqb-row-hit",
+   "name": "阅读 A · 旅行指南，打开详情",
+   "expanded": null,
+   "href": "?view=detail&groupId=g0",
+   "list": "keys-group",
+   "row": "阅读 A · 旅行指南+⋯",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @-2px",
+   "rowBg": "rgb(230, 237, 240)"
+  },
+  {
+   "id": null,
+   "tag": "button",
+   "cls": "eqb-button",
+   "name": "加入草稿卷",
+   "expanded": null,
+   "href": null,
+   "list": "keys-group",
+   "row": "阅读 A · 旅行指南+⋯",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @2px",
+   "rowBg": "rgba(0, 0, 0, 0)"
+  },
+  {
+   "id": null,
+   "tag": "button",
+   "cls": "eqb-button",
+   "name": "更多操作",
+   "expanded": null,
+   "href": null,
+   "list": "keys-group",
+   "row": "阅读 A · 旅行指南+⋯",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @2px",
+   "rowBg": "rgba(0, 0, 0, 0)"
+  },
+  {
+   "id": null,
+   "tag": "a",
+   "cls": "eqb-row-hit",
+   "name": "阅读 B · 人物传记，打开详情",
+   "expanded": null,
+   "href": "?view=detail&groupId=g1",
+   "list": "keys-group",
+   "row": "阅读 B · 人物传记+⋯",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @-2px",
+   "rowBg": "rgb(230, 237, 240)"
+  },
+  {
+   "id": null,
+   "tag": "button",
+   "cls": "eqb-button",
+   "name": "加入草稿卷",
+   "expanded": null,
+   "href": null,
+   "list": "keys-group",
+   "row": "阅读 B · 人物传记+⋯",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @2px",
+   "rowBg": "rgba(0, 0, 0, 0)"
+  },
+  {
+   "id": null,
+   "tag": "button",
+   "cls": "eqb-button",
+   "name": "更多操作",
+   "expanded": null,
+   "href": null,
+   "list": "keys-group",
+   "row": "阅读 B · 人物传记+⋯",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @2px",
+   "rowBg": "rgba(0, 0, 0, 0)"
+  },
+  {
+   "id": null,
+   "tag": "button",
+   "cls": "eqb-button",
+   "name": "下载",
+   "expanded": null,
+   "href": null,
+   "list": "keys-static",
+   "row": "1114 英语草稿卷-省纸版",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @2px",
+   "rowBg": "rgba(0, 0, 0, 0)"
+  },
+  {
+   "id": null,
+   "tag": "button",
+   "cls": "eqb-button",
+   "name": "更多操作",
+   "expanded": null,
+   "href": null,
+   "list": "keys-static",
+   "row": "1114 英语草稿卷-省纸版",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @2px",
+   "rowBg": "rgba(0, 0, 0, 0)"
+  },
+  {
+   "id": null,
+   "tag": "button",
+   "cls": "eqb-button",
+   "name": "下载",
+   "expanded": null,
+   "href": null,
+   "list": "keys-static",
+   "row": "期中复习-大字版.pdf下载",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @2px",
+   "rowBg": "rgba(0, 0, 0, 0)"
+  },
+  {
+   "id": null,
+   "tag": "button",
+   "cls": "eqb-button",
+   "name": "更多操作",
+   "expanded": null,
+   "href": null,
+   "list": "keys-static",
+   "row": "期中复习-大字版.pdf下载",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @2px",
+   "rowBg": "rgba(0, 0, 0, 0)"
+  },
+  {
+   "id": "end",
+   "tag": "button",
+   "cls": "",
+   "name": "终点",
+   "expanded": null,
+   "href": null,
+   "list": null,
+   "row": null,
+   "focusVisible": true,
+   "outline": "1px auto rgb(16, 16, 16) @0px",
+   "rowBg": null
+  }
+ ],
+ "ariaSnapshot": {
+  "paper": "- list \"示意卷行\":\n  - listitem:\n    - button \"2026 新课标Ⅰ卷\"\n    - text: 2026 新课标Ⅰ卷 4 篇章\n    - button \"看整卷\"\n  - listitem:\n    - button \"2025 新课标Ⅱ卷\"\n    - text: 2025 新课标Ⅱ卷 4 篇章\n    - button \"看整卷\"\n  - listitem:\n    - button \"2024 全国甲卷\"\n    - text: 2024 全国甲卷 4 篇章\n    - button \"看整卷\"",
+  "home": "- list \"示意首页行\":\n  - listitem:\n    - link \"继续组卷：期中复习，已选 3 个题组\":\n      - /url: \"?view=draft-paper&draftPaperId=demo\"\n    - text: 期中复习 3 题组 · 继续组卷 ›\n  - listitem:\n    - link \"打开 2026 新课标Ⅰ卷 阅读 C\":\n      - /url: \"?view=detail&groupId=demo-c\"\n    - text: 阅读 C · 生态恢复 2026 新课标Ⅰ卷 · 昨天 ›",
+  "group": "- list \"示意题组行\":\n  - listitem:\n    - link \"阅读 A · 旅行指南，打开详情\":\n      - /url: \"?view=detail&groupId=g0\"\n    - text: 阅读 A · 旅行指南\n    - button \"加入草稿卷\"\n    - button \"更多操作\"\n  - listitem:\n    - link \"阅读 B · 人物传记，打开详情\":\n      - /url: \"?view=detail&groupId=g1\"\n    - text: 阅读 B · 人物传记\n    - button \"加入草稿卷\"\n    - button \"更多操作\"",
+  "static": "- list \"示意文件行\":\n  - listitem:\n    - text: 1114 英语草稿卷-省纸版.pdf\n    - button \"下载\"\n    - button \"更多操作\"\n  - listitem:\n    - text: 期中复习-大字版.pdf\n    - button \"下载\"\n    - button \"更多操作\""
+ },
+ "afterEnter": {
+  "row": "paper0",
+  "secondary": "",
+  "nav": ""
+ },
+ "afterSpace": {
+  "row": "paper0,paper0",
+  "secondary": "",
+  "nav": ""
+ },
+ "afterSecondaryClick": {
+  "row": "paper0,paper0",
+  "secondary": "看整卷 1",
+  "nav": ""
+ },
+ "afterTitleClick": {
+  "row": "paper0,paper0,paper2",
+  "secondary": "看整卷 1",
+  "nav": ""
+ },
+ "afterGroupAddClick": {
+  "row": "paper0,paper0,paper2",
+  "secondary": "看整卷 1,加入 0",
+  "nav": ""
+ },
+ "afterHomeLeftClick": {
+  "row": "paper0,paper0,paper2",
+  "secondary": "看整卷 1,加入 0",
+  "nav": "草稿卷"
+ },
+ "urlAfterHomeLeftClick": "http://row-harness.local/#keys",
+ "afterHomeCtrlClick": {
+  "row": "paper0,paper0,paper2",
+  "secondary": "看整卷 1,加入 0",
+  "nav": "草稿卷"
+ },
+ "popupsAfterCtrlClick": 1,
+ "staticRowHasHit": 0
+}

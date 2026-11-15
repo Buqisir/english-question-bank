@@ -18,7 +18,7 @@ import { Button } from '../../shared-ui/Button.tsx'
 import { Dialog } from '../../shared-ui/Dialog.tsx'
 import { EmptyState } from '../../shared-ui/EmptyState.tsx'
 import { Menu } from '../../shared-ui/Menu.tsx'
-import { surfaceProps } from '../../shared-ui/surfaceProps.ts'
+import { Row, RowList } from '../../shared-ui/Row.tsx'
 import './MySpacePage.css'
 
 export type MySpacePageProps = {
@@ -278,10 +278,13 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                   <span className="my-space-month-label">{group.label}</span>
                   <span className="my-space-month-count">{group.artifacts.length} 份</span>
                 </div>
-                <FluidHoverList
-                  as="div"
+                {/* 文件列表是共用构件 shared-ui/Row（2026-11-15）：<ul> + 每份文件一个 <li>（原来 div + article），
+                    板、行间分隔线由 RowList 给。文件行不可点（不给 action），三个键各自是键。
+                    滑块悬停照原来留在文件行上（itemSelector 指名 .my-space-file-row）：Row 的规矩是不可点的行不加悬停，
+                    但 Owner 2026-11-14 决定 #4 说过滑块停在这一行时键自己垫底，去不去要 Owner 定，见设计记录。 */}
+                <RowList
                   axis="y"
-                  {...surfaceProps({ variant: 'board' }, 'my-space-file-list')}
+                  className="my-space-file-list"
                   itemSelector=".my-space-file-row"
                   gapClick={false}
                   aria-label={selectedFolder ? selectedFolder.name : '全部保存文件'}
@@ -291,7 +294,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                     const dateLabel = formatMonthDay(artifact.generatedAt)
                     const folderName = artifact.folderId ? folderNames.get(artifact.folderId) : null
                     return (
-                      <article className="my-space-file-row" key={artifact.id}>
+                      <Row className="my-space-file-row" padding="none" key={artifact.id}>
                         <Paper className="my-space-file-icon" size={24} aria-hidden="true" />
                         <div className="my-space-file-copy">
                           <h3 title={title}>{title}</h3>
@@ -320,10 +323,10 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                             onDelete={(trigger) => requestDeleteArtifact(artifact, trigger)}
                           />
                         </div>
-                      </article>
+                      </Row>
                     )
                   })}
-                </FluidHoverList>
+                </RowList>
               </section>
             ))}
           </main>

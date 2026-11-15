@@ -32,10 +32,9 @@
 import type { ReactNode } from 'react'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
-import { Notice } from '../../shared-ui/Notice.tsx'
+import { Toast } from '../../shared-ui/Toast.tsx'
 import { Chip } from '../../shared-ui/Chip.tsx'
 import { RotateCcw } from '../../icons'
-import { useToastPresence } from '../shared/useToastPresence.ts'
 import type {
   QuestionGroupCard,
   SimilarPassagesResponse,
@@ -93,14 +92,13 @@ export type SimilarQuestionsRailViewProps = {
   onBack: () => void
   onRetry: () => void
   onAddToDraft: () => void
-  /** `null` = no toast. Parent owns the show/clear timer (PaperBrowsePage's
-   * `similarToast` state) so there is one source of truth for the fade
-   * timing instead of splitting it between parent-set and component-local
-   * clocks. */
+  /** `null` = no toast. 要说什么由父组件（PaperBrowsePage 的 `similarToast`）定；
+   * 2026-11-15 起停留计时在共用 Toast 里（成功 2.2 秒，鼠标停在上面、焦点在里面时停住），到时叫 onToastClose。 */
   toastMessage: SimilarToast | null
+  onToastClose: () => void
 }
 
-/** 「加入草稿卷」之后那一行：成功（父组件 2.2 秒后收起）或没加入（原话照登，带「重试」时行尾一个键，不自动收起）。 */
+/** 「加入草稿卷」之后那一行：成功（2.2 秒后收起）或没加入（原话照登，带「重试」时行尾一个键，不自动收起）。 */
 export type SimilarToast =
   | { kind: 'success'; text: string }
   | { kind: 'error'; text: string; detail: string; retry?: () => void }
@@ -121,11 +119,8 @@ function renderChips(matchedQuestionIds: string[], reasons: SimilarQuestionReaso
 }
 
 export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): ReactNode {
-  const { seed, request, questionGroupById, selectedGroupIds, onToggleGroup, onBack, onRetry, onAddToDraft, toastMessage } =
+  const { seed, request, questionGroupById, selectedGroupIds, onToggleGroup, onBack, onRetry, onAddToDraft, toastMessage, onToastClose } =
     props
-
-  // 退场照旧淡出：值清掉以后再挂 120ms（--motion-fast，notice.css floating 的退场时长）播完退场，同草稿卷的提示。
-  const toast = useToastPresence(toastMessage, 120)
 
   const questionLabel = seed.questionNo != null ? `第${seed.questionNo}题` : ''
   const seedLine = [seed.groupTitle, questionLabel].filter(Boolean).join(' · ')
@@ -218,21 +213,20 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
         </div>
       )}
 
-      {/* 共用提示行的 floating 放法（白底、e3、视口底部正中）；类名 similar-toast 留作挂钩。 */}
-      {toast.rendered && (
-        <Notice
-          kind={toast.rendered.kind}
-          placement="floating"
-          className="similar-toast"
-          data-visible={toast.visible}
-          detail={toast.rendered.kind === 'error' ? toast.rendered.detail : null}
-          action={toast.rendered.kind === 'error' && toast.rendered.retry
-            ? { label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: toast.rendered.retry }
-            : undefined}
-        >
-          {toast.rendered.text}
-        </Notice>
-      )}
+      {/* 共用构件 shared-ui/Toast（2026-11-15，原来是共用提示行的 floating 放法）：白底、e3、视口底部正中，
+          一次只显示一条。成功 2.2 秒收起；没加入的不自己收起（留着「重试」）。类名 similar-toast 留作挂钩。 */}
+      <Toast
+        message={toastMessage?.text ?? null}
+        token={toastMessage}
+        kind={toastMessage?.kind ?? 'success'}
+        duration={toastMessage?.kind === 'error' ? null : 2200}
+        className="similar-toast"
+        detail={toastMessage?.kind === 'error' ? toastMessage.detail : null}
+        action={toastMessage?.kind === 'error' && toastMessage.retry
+          ? { label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: toastMessage.retry }
+          : undefined}
+        onClose={onToastClose}
+      />
     </div>
   )
 }

@@ -156,7 +156,8 @@ async function totalGroupCardsVisible(page) {
   for (const a of articles) {
     const expanded = await a.evaluate((el) => el.classList.contains('is-expanded'))
     if (!expanded) {
-      const body = a.locator('.concierge-paper-body').first()
+      // 构件厂 2026-11-15：卷行行头换成共用 Row，点整行目标（.eqb-row-hit）展开；原来点 .concierge-paper-body 会被它挡住。
+      const body = a.locator('.concierge-paper-row-head > .eqb-row-hit').first()
       if (await body.isVisible().catch(() => false)) {
         await body.click().catch(() => {})
         await page.waitForTimeout(120)

@@ -208,6 +208,8 @@ async function main() {
     await firstPaper.locator('button.concierge-action', { hasText: /展开题组|收起/ }).first().isVisible().catch(() => false))
 
   // ── Step 4: click row body to expand; one-at-a-time + user can collapse a single auto-expanded paper.
+  // 构件厂 2026-11-15：行头换成共用 Row，整行目标（.eqb-row-hit，真按钮）盖在行头的字上面，
+  // 点「行身」就是点它；原来点 .concierge-paper-body 会被它挡住（Playwright 判为被拦截），改成直接点整行目标。
   console.log('\nStep 4: click row body to expand; one-at-a-time')
   const firstArticle = firstPaper.locator('article.concierge-paper-row')
   const firstWasAlreadyExpanded = await firstArticle.evaluate((el) => el.classList.contains('is-expanded'))
@@ -230,7 +232,7 @@ async function main() {
     await page.waitForSelector('.concierge-paper-list > li:first-child .concierge-group-card', { timeout: 10000 }).catch(() => {})
   } else {
     if (!firstWasAlreadyExpanded) {
-      await firstArticle.locator('.concierge-paper-body').click()
+      await firstArticle.locator('.concierge-paper-row-head > .eqb-row-hit').click()
     }
     await page.waitForFunction(
       () => Boolean(document.querySelector('.concierge-paper-list > li:first-child article.concierge-paper-row.is-expanded')),
@@ -242,7 +244,7 @@ async function main() {
     await page.waitForSelector('.concierge-paper-list > li:first-child .concierge-group-card', { timeout: 10000 }).catch(() => {})
 
     const secondArticle = page.locator('.concierge-paper-list > li').nth(1).locator('article.concierge-paper-row')
-    await secondArticle.locator('.concierge-paper-body').click()
+    await secondArticle.locator('.concierge-paper-row-head > .eqb-row-hit').click()
     await page.waitForFunction(
       () => Boolean(document.querySelector('.concierge-paper-list > li:nth-child(2) article.concierge-paper-row.is-expanded')),
       null,
@@ -253,7 +255,7 @@ async function main() {
     step('first paper collapsed after switching',
       !(await page.locator('.concierge-paper-list > li:first-child article.concierge-paper-row.is-expanded').isVisible().catch(() => false)))
     // Re-open first for downstream steps.
-    await firstArticle.locator('.concierge-paper-body').click()
+    await firstArticle.locator('.concierge-paper-row-head > .eqb-row-hit').click()
     await page.waitForSelector('.concierge-paper-list > li:first-child .concierge-group-card', { timeout: 10000 }).catch(() => {})
   }
   await shot(page, '04-paper-expanded')

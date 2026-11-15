@@ -1,0 +1,349 @@
+{
+ "reducedMotion": {
+  "transitionDuration": "0s",
+  "transitionProperty": "none",
+  "transform": "none",
+  "opacity": "1"
+ },
+ "sheetMeasure": [
+  {
+   "name": "undo",
+   "rect": [
+    629,
+    832,
+    182,
+    44
+   ],
+   "bottomGap": 24,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "replace",
+   "rect": [
+    629,
+    832,
+    182,
+    44
+   ],
+   "bottomGap": 24,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "success",
+   "rect": [
+    656,
+    840,
+    128,
+    36
+   ],
+   "bottomGap": 24,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "saved",
+   "rect": [
+    593,
+    832,
+    254,
+    44
+   ],
+   "bottomGap": 24,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "error",
+   "rect": [
+    442,
+    832,
+    556,
+    44
+   ],
+   "bottomGap": 24,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "long",
+   "rect": [
+    371,
+    840,
+    699,
+    36
+   ],
+   "bottomGap": 24,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "undo-hover",
+   "rect": [
+    629,
+    832,
+    182,
+    44
+   ],
+   "bottomGap": 24,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "undo-focus",
+   "rect": [
+    629,
+    832,
+    182,
+    44
+   ],
+   "bottomGap": 24,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "exit"
+  },
+  {
+   "name": "undo-reduced",
+   "rect": [
+    629,
+    832,
+    182,
+    44
+   ],
+   "bottomGap": 24,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  }
+ ],
+ "reducedMotion-390": {
+  "transitionDuration": "0s",
+  "transitionProperty": "none",
+  "transform": "none",
+  "opacity": "1"
+ },
+ "sheetMeasure-390": [
+  {
+   "name": "undo",
+   "rect": [
+    16,
+    784,
+    358,
+    44
+   ],
+   "bottomGap": 16,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "replace",
+   "rect": [
+    16,
+    784,
+    358,
+    44
+   ],
+   "bottomGap": 16,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "success",
+   "rect": [
+    16,
+    792,
+    358,
+    36
+   ],
+   "bottomGap": 16,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "saved",
+   "rect": [
+    16,
+    784,
+    358,
+    44
+   ],
+   "bottomGap": 16,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "error",
+   "rect": [
+    16,
+    784,
+    358,
+    44
+   ],
+   "bottomGap": 16,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "long",
+   "rect": [
+    16,
+    792,
+    358,
+    36
+   ],
+   "bottomGap": 16,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "undo-hover",
+   "rect": [
+    16,
+    784,
+    358,
+    44
+   ],
+   "bottomGap": 16,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "undo-focus",
+   "rect": [
+    16,
+    784,
+    358,
+    44
+   ],
+   "bottomGap": 16,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  },
+  {
+   "name": "exit"
+  },
+  {
+   "name": "undo-reduced",
+   "rect": [
+    16,
+    784,
+    358,
+    44
+   ],
+   "bottomGap": 16,
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px, rgba(27, 43, 51, 0.1) 0px 6px 18px 0px",
+   "radius": "8px",
+   "opacity": "1",
+   "transform": "none"
+  }
+ ],
+ "regionsBeforeToast": [
+  {
+   "role": "alert",
+   "live": "assertive",
+   "parent": "body",
+   "children": 0
+  },
+  {
+   "role": "status",
+   "live": "polite",
+   "parent": "body",
+   "children": 0
+  }
+ ],
+ "ariaSnapshotUndo": "- status:\n  - text: 题组已移出\n  - button \"撤销\"",
+ "toastInsideLiveRegion": true,
+ "tabFromLast": {
+  "text": "撤销",
+  "inToast": true,
+  "focusVisible": true
+ },
+ "focusInsideAfter4s": 1,
+ "escInside": {
+  "visible": 0,
+  "focus": "last",
+  "log": "close-a-escape"
+ },
+ "escOutside": {
+  "visible": 1
+ },
+ "undoByKeyboard": {
+  "visible": 0,
+  "focus": "last",
+  "log": "close-a-escape,action-a"
+ },
+ "hoverAfter4s": 1,
+ "leftAfter1s": 1,
+ "leftAfter3_6s": {
+  "visible": 0,
+  "log": "close-a-escape,action-a,close-a-timeout"
+ },
+ "untouchedAfter3_5s": {
+  "visible": 0,
+  "log": "close-a-escape,action-a,close-a-timeout,close-a-timeout"
+ },
+ "oneAtATime": {
+  "toastsInDom": 1,
+  "visible": 1,
+  "log": "close-a-escape,action-a,close-a-timeout,close-a-timeout,close-a-replaced"
+ },
+ "errorRegion": {
+  "role": "alert",
+  "live": "assertive"
+ },
+ "ariaSnapshotError": "- alert:\n  - text: 2 篇没加入草稿卷，还勾着：草稿卷已经有 40 个题组，先删掉几个再加\n  - button \"重试\""
+}

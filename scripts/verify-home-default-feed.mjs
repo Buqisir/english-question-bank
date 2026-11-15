@@ -385,7 +385,9 @@ console.log('\nTest 24: home-editorial round 2 — year-grouped feed archive (�
   assert('sliced visibleFeed grouping is retired', !/groupFeedByYear\(visibleFeed\)/.test(desk), '')
   assert('home additions use a flat paper list, not date-group headings', /homeRecentFeed\.map\(\(paper\)/.test(desk) && !/groupFeedByDate/.test(desk), '')
   const row = readSrc('app/src/concierge/ConciergePaperRow.tsx')
-  assert('home additions use real collection dates and a keyboard-operable title', /<time className="concierge-recent-date" dateTime=\{collected\.iso\}/.test(row) && /className="concierge-recent-title"[\s\S]{0,150}aria-expanded=\{expanded\}/.test(row), '')
+  // 构件厂 2026-11-15：首页卷行的展开键从标题挪到共用 Row 的整行目标（action kind 'button'，带 aria-expanded），
+  // 标题回成一行字；这条跟着改成查 Row 的 action（键盘照样能展开，还是一个真按钮）。
+  assert('home additions use real collection dates and a keyboard-operable whole-row target', /<time className="concierge-recent-date" dateTime=\{collected\.iso\}/.test(row) && /action=\{\{ kind: 'button'[\s\S]{0,120}expanded, controls: detailId/.test(row) && /<span className="concierge-recent-title">/.test(row), '')
   assert('feed renders concierge-feed-year-head with the group label', /concierge-feed-year-label[\s\S]{0,40}\{yearGroup\.label\}/.test(desk), '')
   assert('feed renders the "N 套" true count next to the year head', /concierge-feed-year-count[\s\S]{0,60}\{yearGroup\.papers\.length\}\s*套/.test(desk), '')
 }

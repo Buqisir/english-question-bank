@@ -1,0 +1,764 @@
+{
+ "hoverStaticSliderActive": 0,
+ "forced": {
+  "focusPaper": 1,
+  "activePaper": 1,
+  "focusSecondary": 1,
+  "focusHome": 1,
+  "activeHome": 1,
+  "focusGroup": 1
+ },
+ "rows": [
+  {
+   "cell": "静止",
+   "row": "2026 新课标Ⅰ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "静止",
+   "row": "2025 新课标Ⅱ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "静止",
+   "row": "2024 全国甲卷4 篇章看整卷",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "键盘焦点在第二行的整行目标：整行垫桌色 + 2px 墨环向里 2px",
+   "row": "2026 新课标Ⅰ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "键盘焦点在第二行的整行目标：整行垫桌色 + 2px 墨环向里 2px",
+   "row": "2025 新课标Ⅱ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgb(230, 237, 240)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": "2px solid rgb(41, 66, 77) @-2px"
+   }
+  },
+  {
+   "cell": "键盘焦点在第二行的整行目标：整行垫桌色 + 2px 墨环向里 2px",
+   "row": "2024 全国甲卷4 篇章看整卷",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "按下第二行（整行目标 :active）：垫深一档 border 色",
+   "row": "2026 新课标Ⅰ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "按下第二行（整行目标 :active）：垫深一档 border 色",
+   "row": "2025 新课标Ⅱ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgb(220, 230, 235)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "按下第二行（整行目标 :active）：垫深一档 border 色",
+   "row": "2024 全国甲卷4 篇章看整卷",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "焦点在第二行的次要键「看整卷」上：整行不垫底，只有键的焦点环",
+   "row": "2026 新课标Ⅰ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "焦点在第二行的次要键「看整卷」上：整行不垫底，只有键的焦点环",
+   "row": "2025 新课标Ⅱ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "焦点在第二行的次要键「看整卷」上：整行不垫底，只有键的焦点环",
+   "row": "2024 全国甲卷4 篇章看整卷",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "第一行展开着（aria-expanded=true；展开后的垫底归调用处）",
+   "row": "2026 新课标Ⅰ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "第一行展开着（aria-expanded=true；展开后的垫底归调用处）",
+   "row": "2025 新课标Ⅱ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "第一行展开着（aria-expanded=true；展开后的垫底归调用处）",
+   "row": "2024 全国甲卷4 篇章看整卷",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "静止",
+   "row": "期中复习3 题组 · 继续组卷 ",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "12px 16px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "静止",
+   "row": "阅读 C · 生态恢复2026 ",
+   "height": 49,
+   "minHeight": "49px",
+   "padding": "12px 16px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "1px rgb(230, 237, 241)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "键盘焦点在第一行",
+   "row": "期中复习3 题组 · 继续组卷 ",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "12px 16px",
+   "bg": "rgb(230, 237, 240)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": "2px solid rgb(41, 66, 77) @-2px"
+   }
+  },
+  {
+   "cell": "键盘焦点在第一行",
+   "row": "阅读 C · 生态恢复2026 ",
+   "height": 49,
+   "minHeight": "49px",
+   "padding": "12px 16px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "1px rgb(230, 237, 241)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "按下第一行",
+   "row": "期中复习3 题组 · 继续组卷 ",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "12px 16px",
+   "bg": "rgb(220, 230, 235)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "按下第一行",
+   "row": "阅读 C · 生态恢复2026 ",
+   "height": 49,
+   "minHeight": "49px",
+   "padding": "12px 16px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "1px rgb(230, 237, 241)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "sm · 静止",
+   "row": "阅读 A · 旅行指南+⋯",
+   "height": 44,
+   "minHeight": "44px",
+   "padding": "0px 8px 0px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "sm · 静止",
+   "row": "阅读 B · 人物传记+⋯",
+   "height": 45,
+   "minHeight": "45px",
+   "padding": "0px 8px 0px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "1px rgb(230, 237, 241)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "sm · 键盘焦点在第一行",
+   "row": "阅读 A · 旅行指南+⋯",
+   "height": 44,
+   "minHeight": "44px",
+   "padding": "0px 8px 0px 14px",
+   "bg": "rgb(230, 237, 240)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": "2px solid rgb(41, 66, 77) @-2px"
+   }
+  },
+  {
+   "cell": "sm · 键盘焦点在第一行",
+   "row": "阅读 B · 人物传记+⋯",
+   "height": 45,
+   "minHeight": "45px",
+   "padding": "0px 8px 0px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "1px rgb(230, 237, 241)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "不可点 · 静止（键各自是键）",
+   "row": "1114 英语草稿卷-省纸版.p",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": null
+  },
+  {
+   "cell": "不可点 · 静止（键各自是键）",
+   "row": "期中复习-大字版.pdf下载⋯",
+   "height": 49,
+   "minHeight": "49px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "1px rgb(230, 237, 241)",
+   "hit": null
+  }
+ ],
+ "hoverStaticSliderActive-390": 0,
+ "forced-390": {
+  "focusPaper": 1,
+  "activePaper": 1,
+  "focusSecondary": 1,
+  "focusHome": 1,
+  "activeHome": 1,
+  "focusGroup": 1
+ },
+ "rows-390": [
+  {
+   "cell": "静止",
+   "row": "2026 新课标Ⅰ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "静止",
+   "row": "2025 新课标Ⅱ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "静止",
+   "row": "2024 全国甲卷4 篇章看整卷",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "键盘焦点在第二行的整行目标：整行垫桌色 + 2px 墨环向里 2px",
+   "row": "2026 新课标Ⅰ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "键盘焦点在第二行的整行目标：整行垫桌色 + 2px 墨环向里 2px",
+   "row": "2025 新课标Ⅱ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgb(230, 237, 240)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": "2px solid rgb(41, 66, 77) @-2px"
+   }
+  },
+  {
+   "cell": "键盘焦点在第二行的整行目标：整行垫桌色 + 2px 墨环向里 2px",
+   "row": "2024 全国甲卷4 篇章看整卷",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "按下第二行（整行目标 :active）：垫深一档 border 色",
+   "row": "2026 新课标Ⅰ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "按下第二行（整行目标 :active）：垫深一档 border 色",
+   "row": "2025 新课标Ⅱ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgb(220, 230, 235)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "按下第二行（整行目标 :active）：垫深一档 border 色",
+   "row": "2024 全国甲卷4 篇章看整卷",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "焦点在第二行的次要键「看整卷」上：整行不垫底，只有键的焦点环",
+   "row": "2026 新课标Ⅰ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "焦点在第二行的次要键「看整卷」上：整行不垫底，只有键的焦点环",
+   "row": "2025 新课标Ⅱ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "焦点在第二行的次要键「看整卷」上：整行不垫底，只有键的焦点环",
+   "row": "2024 全国甲卷4 篇章看整卷",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "第一行展开着（aria-expanded=true；展开后的垫底归调用处）",
+   "row": "2026 新课标Ⅰ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "第一行展开着（aria-expanded=true；展开后的垫底归调用处）",
+   "row": "2025 新课标Ⅱ卷4 篇章看整",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "第一行展开着（aria-expanded=true；展开后的垫底归调用处）",
+   "row": "2024 全国甲卷4 篇章看整卷",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "button",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "静止",
+   "row": "期中复习3 题组 · 继续组卷 ",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "12px 16px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "静止",
+   "row": "阅读 C · 生态恢复2026 ",
+   "height": 49,
+   "minHeight": "49px",
+   "padding": "12px 16px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "1px rgb(230, 237, 241)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "键盘焦点在第一行",
+   "row": "期中复习3 题组 · 继续组卷 ",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "12px 16px",
+   "bg": "rgb(230, 237, 240)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": "2px solid rgb(41, 66, 77) @-2px"
+   }
+  },
+  {
+   "cell": "键盘焦点在第一行",
+   "row": "阅读 C · 生态恢复2026 ",
+   "height": 49,
+   "minHeight": "49px",
+   "padding": "12px 16px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "1px rgb(230, 237, 241)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "按下第一行",
+   "row": "期中复习3 题组 · 继续组卷 ",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "12px 16px",
+   "bg": "rgb(220, 230, 235)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "按下第一行",
+   "row": "阅读 C · 生态恢复2026 ",
+   "height": 49,
+   "minHeight": "49px",
+   "padding": "12px 16px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "1px rgb(230, 237, 241)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "sm · 静止",
+   "row": "阅读 A · 旅行指南+⋯",
+   "height": 44,
+   "minHeight": "44px",
+   "padding": "0px 8px 0px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "sm · 静止",
+   "row": "阅读 B · 人物传记+⋯",
+   "height": 45,
+   "minHeight": "45px",
+   "padding": "0px 8px 0px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "1px rgb(230, 237, 241)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "sm · 键盘焦点在第一行",
+   "row": "阅读 A · 旅行指南+⋯",
+   "height": 44,
+   "minHeight": "44px",
+   "padding": "0px 8px 0px 14px",
+   "bg": "rgb(230, 237, 240)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": "2px solid rgb(41, 66, 77) @-2px"
+   }
+  },
+  {
+   "cell": "sm · 键盘焦点在第一行",
+   "row": "阅读 B · 人物传记+⋯",
+   "height": 45,
+   "minHeight": "45px",
+   "padding": "0px 8px 0px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "1px rgb(230, 237, 241)",
+   "hit": {
+    "tag": "a",
+    "cursor": "pointer",
+    "outline": null
+   }
+  },
+  {
+   "cell": "不可点 · 静止（键各自是键）",
+   "row": "1114 英语草稿卷-省纸版.p",
+   "height": 48,
+   "minHeight": "48px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "0px rgb(27, 43, 51)",
+   "hit": null
+  },
+  {
+   "cell": "不可点 · 静止（键各自是键）",
+   "row": "期中复习-大字版.pdf下载⋯",
+   "height": 49,
+   "minHeight": "49px",
+   "padding": "10px 14px",
+   "bg": "rgba(0, 0, 0, 0)",
+   "borderTop": "1px rgb(230, 237, 241)",
+   "hit": null
+  }
+ ]
+}

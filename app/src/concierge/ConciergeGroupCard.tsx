@@ -12,12 +12,13 @@
  * Smallest add unit is still QuestionGroup. There is no per-question add UI.
  */
 
-import { type MouseEvent, type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { ReadingAnalysis, Paper, Papers } from '../icons'
 import { DraftAddButton } from '../shared-ui/DraftAddButton.tsx'
 import { type QuestionGroupCard } from '../domain/questionBank.ts'
 import { buildTopicText, compactPassageTitle, compactSummary } from './passageText.ts'
 import { Menu, type MenuAction } from '../shared-ui/Menu.tsx'
+import { Row, type RowAction } from '../shared-ui/Row.tsx'
 import { buildPaperBrowseLectureHref } from './paperSurfaceHref.ts'
 import {
   SimilarPassagesPanel,
@@ -96,13 +97,14 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
   const similarEligible = SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType)
   const draftState = group.draftPaperButtonState || (alreadyInBasket ? 'in_current_draft' : 'add')
 
-  const handleRowClick = (event: MouseEvent<HTMLElement>) => {
-    if (!onOpenDetail) return
-    const target = event.target as HTMLElement
-    // .eqb-draft-add：加入键加入后的「已加入」那块纸不是按钮，点在上面也不打开详情。
-    if (target.closest('button, a, input, textarea, select, [role="button"], [role="menu"], .eqb-draft-add')) return
-    onOpenDetail(group)
-  }
+  // 题组行是共用构件 shared-ui/Row（2026-11-15）：能开详情时（onOpenDetail 在），整行目标是一个真 <a href>
+  // （去详情页，有自己的地址：中键、新标签照浏览器的来，左键走站内跳转），盖满整行；「+」和「⋯」是它的兄弟，
+  // 画在它上面，点它们不会打开详情。原来行上的 onClick 和「点的是不是键」判断删了。
+  // 读屏名字以看得见的篇章标题开头。高 44（size="sm"），照原值；和 DESIGN.md 的 48 不一样，提案见设计记录。
+  const detailHref = `?view=detail&groupId=${encodeURIComponent(group.id)}`
+  const rowAction: RowAction | undefined = onOpenDetail
+    ? { kind: 'link', label: `${passageTitle}，打开详情`, href: detailHref, onNavigate: () => onOpenDetail(group) }
+    : undefined
 
   const menuItems: MenuAction[] = []
   if (similarEligible) {
@@ -119,7 +121,7 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
       key: 'detail',
       label: '详情',
       icon: <Paper size={16} aria-hidden="true" />,
-      href: `?view=detail&groupId=${encodeURIComponent(group.id)}`,
+      href: detailHref,
       onSelect: (event) => {
         event.preventDefault()
         onOpenDetail(group)
@@ -141,7 +143,7 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
       className={`concierge-group-row${dimmed ? ' is-dim' : ''}`}
       data-group-id={group.id}
     >
-      <div className="concierge-group-row-line" onClick={handleRowClick}>
+      <Row as="div" className="concierge-group-row-line" padding="none" size="sm" action={rowAction}>
         <div className="concierge-group-row-body">
           <div className="concierge-group-row-main">
             <strong className="concierge-group-row-title" title={passageTitle}>
@@ -164,7 +166,7 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
         <div className="concierge-group-row-trail">
           {topicText && <span className="concierge-group-row-topic">{topicText}</span>}
           {/* 走查第四节第 6 条：加入键换成共用 DraftAddButton（紧凑档，加入前只有加号；加入后是「已加入 · 撤回」那块纸）。
-              行上点击（handleRowClick）碰到 button 或 .eqb-draft-add 就不打开详情，所以不用再 stopPropagation。 */}
+              它和整行目标是兄弟、画在整行目标上面（row.css），点它不会打开详情。 */}
           <DraftAddButton
             className="concierge-group-row-add"
             target={{ ...group, draftPaperButtonState: draftState }}
@@ -174,7 +176,7 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
           />
           <Menu items={menuItems} label="更多操作" triggerClassName="concierge-group-row-menu-trigger" />
         </div>
-      </div>
+      </Row>
 
       {isSimilarPassagesOpen && similarPassagesRequest && (
         <SimilarPassagesPanel

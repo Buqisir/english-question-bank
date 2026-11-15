@@ -8,6 +8,7 @@ import { Menu } from '../../shared-ui/Menu.tsx'
 import { SelectField, TextField } from '../../shared-ui/Field.tsx'
 import { OptionSelectField, SegmentedField } from '../../shared-ui/OptionField.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
+import { Toast } from '../../shared-ui/Toast.tsx'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, GroupType, MySpaceFolder, QuestionGroupCard } from '../../domain/questionBank'
 import {
   addGroupToDraftPaper,
@@ -38,7 +39,7 @@ import {
 } from '../../paperAssembly/basketPersistence'
 import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import { describeError } from '../shared/errorCopy'
-import { useToastPresence, usePresence } from '../shared/useToastPresence.ts'
+import { usePresence } from '../shared/useToastPresence.ts'
 import { similarPassagesRecipeSummary, type SimilarPassagesRequestState } from '../similar-passages/SimilarPassagesPanel'
 import { DraftPaperRail } from './DraftPaperRail'
 import { A3_FACE_NATIVE_WIDTH_PX, applyA3Imposition, buildA4PreviewHtml } from './draftPaperPreviewHtml'
@@ -179,17 +180,14 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // still clickable (repeat-save risk, "取消" reading oddly once already
   // saved). It now closes on success and hands off to this toast — same
   // pattern as `draft-undo-toast` below.
-  const [savedToastMessage, setSavedToastMessage] = useState<string | null>(null)
-  const savedToastTimerRef = useRef<number | null>(null)
+  // 底部提示换成共用 Toast（2026-11-15）：停留计时、一次只显示一条、入退场都在构件里，这里只存「要说的话」和
+  // 一个每次都不一样的 at（同一句话连着出两次时重新计时）。原来的四个计时 ref 和 presence 删了。
+  const [savedToast, setSavedToast] = useState<{ text: string; at: number } | null>(null)
   const [migrationNotice, setMigrationNotice] = useState('')
   const [edition, setEdition] = useState<PaperPdfEdition>('largeNoListening')
   // 每个 PDF 版本这份草稿能不能出（服务器判定）。surface 记它是哪一份草稿的，换了草稿就不用。
   const [editionAvailability, setEditionAvailability] = useState<{ surface: string; editions: DraftPaperEditionAvailability[] } | null>(null)
   const [removedItem, setRemovedItem] = useState<RemovedDraftItem | null>(null)
-  // motion-press-exit #3: toast keyframe→transition — 退出前保持挂载
-  // var(--motion-fast)(120ms)播完退出再真卸载。
-  const removedItemToast = useToastPresence(removedItem, 120)
-  const savedToastPresence = useToastPresence(savedToastMessage, 120)
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null)
   // 构件厂第 4 步（2026-11-13）：「导出」菜单和题组「⋯」菜单换成 shared-ui/Menu，
   // 开关、点外面关、Esc 关并还焦点都由构件自己管，这里不再存它们的开关状态。
@@ -203,7 +201,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // （motion-fast），播完 exit 再卸载。
   const moreMenuPresence = usePresence(moreMenuOpen, 80)
   const titleSaveTimerRef = useRef<number | null>(null)
-  const undoTimerRef = useRef<number | null>(null)
   const focusedOnceRef = useRef(false)
   const a4SheetRef = useRef<HTMLDivElement | null>(null)
   const moreMenuRef = useRef<HTMLDivElement | null>(null)
@@ -293,9 +290,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // seed (never null while swapSeedItemId is non-null).
   const [swapSeedItemId, setSwapSeedItemId] = useState<string | null>(null)
   const [swapRequest, setSwapRequest] = useState<SimilarPassagesRequestState | null>(null)
-  const [swapAddToastMessage, setSwapAddToastMessage] = useState<string | null>(null)
-  const swapAddToastTimerRef = useRef<number | null>(null)
-  const swapAddToastPresence = useToastPresence(swapAddToastMessage, 120)
+  const [swapAddToast, setSwapAddToast] = useState<{ text: string; at: number } | null>(null)
   // 替换 undo snapshot — same 8s-timer + toast-presence shape as
   // reorderUndoSnapshot above, and same 撤销快照互斥 lifecycle (plan.md 施工
   // 要点 4/5, DP-2 script ⑥): any OTHER item mutation (including the OTHER
@@ -303,8 +298,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // clearReplaceUndo/clearReorderUndo below, called in pairs everywhere
   // either kind of edit happens.
   const [replaceUndoSnapshot, setReplaceUndoSnapshot] = useState<{ removed: RemovedDraftItem; addedItemId: string } | null>(null)
-  const replaceUndoTimerRef = useRef<number | null>(null)
-  const replaceUndoToastPresence = usePresence(replaceUndoSnapshot !== null, 120)
 
   // Bug 4263fb71: both switch surfaces leave the workbench mounted, so a
   // snapshot captured on the previous draft stays live on the new one and
@@ -317,10 +310,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     if (titleSaveTimerRef.current) window.clearTimeout(titleSaveTimerRef.current)
     setSaveStatus('idle')
     setSaveError('')
-    if (undoTimerRef.current) window.clearTimeout(undoTimerRef.current)
-    undoTimerRef.current = null
-    if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
-    replaceUndoTimerRef.current = null
     setRemovedItem(null)
     setReorderUndoSnapshot(null)
     setReorderRestoredText(null)
@@ -388,10 +377,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     return () => {
       draftGenerationRef.current += 1
       if (titleSaveTimerRef.current) window.clearTimeout(titleSaveTimerRef.current)
-      if (undoTimerRef.current) window.clearTimeout(undoTimerRef.current)
-      if (savedToastTimerRef.current) window.clearTimeout(savedToastTimerRef.current)
-      if (swapAddToastTimerRef.current) window.clearTimeout(swapAddToastTimerRef.current)
-      if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
     }
   }, [loadDraft])
 
@@ -1060,8 +1045,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // set of "other mutation" handlers (撤销快照互斥: only one of the two
   // snapshot kinds is ever live, since creating either one clears both).
   function clearReplaceUndo() {
-    if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
-    replaceUndoTimerRef.current = null
     setReplaceUndoSnapshot(null)
   }
 
@@ -1131,8 +1114,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         orderIndex: result.removed.orderIndex,
         pageBreakBefore: result.removed.pageBreakBefore,
       })
-      if (undoTimerRef.current) window.clearTimeout(undoTimerRef.current)
-      undoTimerRef.current = window.setTimeout(() => setRemovedItem(null), 8000)
       setSaveStatus('saved')
       onDraftChanged?.()
     } catch (error) {
@@ -1330,8 +1311,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           },
           addedItemId: addedItem.id,
         })
-        if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
-        replaceUndoTimerRef.current = window.setTimeout(() => setReplaceUndoSnapshot(null), 8000)
       }
       // 替换后收起回目录 — the seed itemId this drawer was anchored to no
       // longer exists (it's the item just deleted above), so there is no
@@ -1353,8 +1332,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   async function undoSwapReplaceNow() {
     if (!draftPaper || !isCurrentDraft() || !replaceUndoSnapshot || replaceUndoSnapshot.removed.generation !== draftGeneration) return
     const snapshot = replaceUndoSnapshot
-    if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
-    replaceUndoTimerRef.current = null
     setReplaceUndoSnapshot(null)
     setSaveStatus('saving')
     setSaveError('')
@@ -1398,9 +1375,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setTitleDraft(next.title)
       setSaveStatus('saved')
       onDraftChanged?.()
-      if (swapAddToastTimerRef.current) window.clearTimeout(swapAddToastTimerRef.current)
-      setSwapAddToastMessage('已加入草稿卷')
-      swapAddToastTimerRef.current = window.setTimeout(() => setSwapAddToastMessage(null), 2200)
+      setSwapAddToast({ text: '已加入草稿卷', at: Date.now() })
     } catch (error) {
       if (!isCurrentDraft()) return
       setSaveStatus('error')
@@ -1489,9 +1464,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       // "saved, but still open with a live 保存 button" state.
       setSpaceDialogOpen(false)
       setSpaceStatus('idle')
-      if (savedToastTimerRef.current) window.clearTimeout(savedToastTimerRef.current)
-      setSavedToastMessage('已保存到个人空间')
-      savedToastTimerRef.current = window.setTimeout(() => setSavedToastMessage(null), 6000)
+      setSavedToast({ text: '已保存到个人空间', at: Date.now() })
     } catch (error) {
       setSpaceStatus('error')
       setSpaceMessage(edition === 'answerOnly'
@@ -1991,55 +1964,54 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         </section>
       </main>
 
-      {/* 撤销、刚保存这类临时提示：共用提示行的 floating 放法（白底、e3、视口底部正中），
-          入场退场照旧由 useToastPresence / usePresence 给 data-visible。类名 draft-undo-toast 留作挂钩。 */}
-      {removedItemToast.rendered && (
-        // C8 (trust-cracks) — 措辞：题组仍在题库里，撤销只是撤回本卷的移出动作，不说「删除」。
-        <Notice
-          kind="undo"
-          placement="floating"
-          className="draft-undo-toast"
-          data-visible={removedItemToast.visible}
-          action={{ label: '撤销', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: undoDelete }}
-        >
-          题组已移出
-        </Notice>
-      )}
+      {/* 撤销、刚保存这类临时提示：共用构件 shared-ui/Toast（2026-11-15，原来是共用提示行的 floating 放法）。
+          白底、e3、视口底部正中；一次只显示一条（新的一条顶掉旧的，旧的那条的撤销快照跟着清掉）；
+          鼠标停在上面、焦点在里面时不消失。停留时长照原来：撤销 8 秒、刚加入 2.2 秒、刚保存 6 秒。
+          类名 draft-undo-toast 留作脚本挂钩。 */}
+      {/* C8 (trust-cracks) — 措辞：题组仍在题库里，撤销只是撤回本卷的移出动作，不说「删除」。 */}
+      <Toast
+        message={removedItem ? '题组已移出' : null}
+        token={removedItem}
+        kind="undo"
+        duration={8000}
+        className="draft-undo-toast"
+        action={{ label: '撤销', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: undoDelete }}
+        onClose={() => setRemovedItem(null)}
+      />
       {/* similar-workbench-swap (E7, plan.md "替换这篇...可撤销"). */}
-      {replaceUndoToastPresence.mounted && (
-        <Notice
-          kind="undo"
-          placement="floating"
-          className="draft-undo-toast"
-          data-visible={replaceUndoToastPresence.visible}
-          action={{ label: '撤销', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: () => void undoSwapReplace() }}
-        >
-          已替换这篇
-        </Notice>
-      )}
+      <Toast
+        message={replaceUndoSnapshot ? '已替换这篇' : null}
+        token={replaceUndoSnapshot}
+        kind="undo"
+        duration={8000}
+        className="draft-undo-toast"
+        action={{ label: '撤销', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: () => void undoSwapReplace() }}
+        onClose={() => setReplaceUndoSnapshot(null)}
+      />
       {/* similar-workbench-swap (E7, plan.md "加入...沿用「已加入」语言，无撤销"). */}
-      {swapAddToastPresence.rendered && (
-        <Notice kind="success" placement="floating" className="draft-undo-toast" data-visible={swapAddToastPresence.visible}>
-          {swapAddToastPresence.rendered}
-        </Notice>
-      )}
-      {savedToastPresence.rendered && (
-        <Notice
-          kind="success"
-          placement="floating"
-          className="draft-undo-toast"
-          data-visible={savedToastPresence.visible}
-          action={shellNav.onOpenMySpace ? {
-            label: '查看个人空间',
-            onClick: () => {
-              setSavedToastMessage(null)
-              shellNav.onOpenMySpace?.()
-            },
-          } : undefined}
-        >
-          {savedToastPresence.rendered}
-        </Notice>
-      )}
+      <Toast
+        message={swapAddToast?.text ?? null}
+        token={swapAddToast?.at}
+        kind="success"
+        duration={2200}
+        className="draft-undo-toast"
+        onClose={() => setSwapAddToast(null)}
+      />
+      <Toast
+        message={savedToast?.text ?? null}
+        token={savedToast?.at}
+        kind="success"
+        duration={6000}
+        className="draft-undo-toast"
+        action={shellNav.onOpenMySpace ? {
+          label: '查看个人空间',
+          onClick: () => {
+            setSavedToast(null)
+            shellNav.onOpenMySpace?.()
+          },
+        } : undefined}
+        onClose={() => setSavedToast(null)}
+      />
       {/* 构件厂 2026-11-14：换成共用 Dialog（shared-ui/Dialog.tsx）。开关、焦点、Esc、背后不能滚、入退场都在构件里；
           原来头上的「关闭」字键换成右上角的关闭键（读屏名字仍是「关闭」）。「取消」墨字、「保存」石板墨填充照旧
           （这一页的雾薄荷主键给了顶栏「导出」，DESIGN.md §2 每页一处）。「新建」是正文里的键，墨字带图标、大号 36。

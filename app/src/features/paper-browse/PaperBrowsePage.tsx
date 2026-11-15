@@ -887,15 +887,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     motion: 'none' | 'adjacent' | 'relocate'
     revision: number
   } | null>(null)
-  // similar-rail (E2): toast fade timer — the parent is the single owner of
-  // the show/clear clock (see SimilarQuestionsRailView's toastMessage doc).
-  const similarToastTimeoutRef = useRef<number | null>(null)
-
-  useEffect(() => {
-    return (): void => {
-      if (similarToastTimeoutRef.current != null) window.clearTimeout(similarToastTimeoutRef.current)
-    }
-  }, [])
+  // similar-rail (E2): 提示的停留计时 2026-11-15 起在共用 Toast 里（SimilarQuestionsRailView），这里原来的计时 ref 删了。
 
   // 标记程序化滚动即将发生，给钢琴键 scrollspy 一段沉降窗口。
   function suppressScrollspyClear(durationMs = 700): void {
@@ -2496,7 +2488,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       .map((groupId) => questionGroupById.get(groupId))
       .filter((card): card is QuestionGroupCard => Boolean(card))
     if (cards.length === 0) return
-    if (similarToastTimeoutRef.current != null) window.clearTimeout(similarToastTimeoutRef.current)
     setSimilarToast(null)
     const outcome = await onAddGroupsToBasket(cards)
     if (outcome.kind === 'failed') {
@@ -2518,7 +2509,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     setSimilarSelectedGroupIds(new Set())
     if (outcome.kind !== 'added') return
     setSimilarToast({ kind: 'success', text: `已把 ${outcome.addedIds.length} 篇加入草稿卷，题目一并带上` })
-    similarToastTimeoutRef.current = window.setTimeout(() => setSimilarToast(null), 2200)
   }
 
   function renderGroupBody(
@@ -3450,6 +3440,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           onRetry={handleSimilarRetry}
           onAddToDraft={handleSimilarAddToDraft}
           toastMessage={similarToast}
+          onToastClose={() => setSimilarToast(null)}
         />
       )
     }

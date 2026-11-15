@@ -33,7 +33,7 @@
   white-space: nowrap;
 }
 
-/* 行尾的「重试」「撤销」：跟在字后面，不被挤扁。小号键自己左边有 8px 内边距，再加 8px 间距会离字 16px，
+/* 行尾的「重试」：跟在字后面，不被挤扁。小号键自己左边有 8px 内边距，再加 8px 间距会离字 16px，
  * 显得像另起一组；左边收 4px，键上的字（或图标）离前面的字 12px（目测）。 */
 .eqb-notice-action {
   flex: 0 0 auto;
@@ -50,42 +50,4 @@
   box-shadow: var(--elev-1);
 }
 
-/* ── 浮在视口底部（floating） ──────────────────────────
- * 撤销、刚保存这类临时提示：白底、e3（DESIGN.md §4「浮层是不透明白底加 e3」），离视口底 24px，
- * 左右至少留 16px。 */
-.eqb-notice[data-placement='floating'] {
-  position: fixed;
-  left: 50%;
-  bottom: var(--eqb-space-5);
-  z-index: 30;
-  width: max-content;
-  max-width: calc(100vw - 2 * var(--eqb-space-4));
-  padding: var(--eqb-space-2) var(--eqb-space-2) var(--eqb-space-2) var(--eqb-space-3);
-  border-radius: var(--eqb-radius-control);
-  background: var(--eqb-color-paper);
-  box-shadow: var(--elev-3);
-  transform: translateX(-50%);
-  transition:
-    opacity var(--motion-fast) var(--ease-out),
-    transform var(--motion-fast) var(--ease-out);
-}
-
-/* 调用处用 usePresence 时给 data-visible：退场（false）淡出下沉，入场（true）用 motion-base。
- * 覆盖：本条 (0,3,0) 盖过上面 floating 那条 (0,2,0) 的 transform，因为退场要往下挪 8px。 */
-.eqb-notice[data-placement='floating'][data-visible='false'] {
-  opacity: 0;
-  transform: translateX(-50%) translateY(8px);
-}
-
-/* 覆盖：本条 (0,3,0) 盖过 floating 那条的 transition 时长，入场比退场慢一档（同原来的撤销提示条）。 */
-.eqb-notice[data-placement='floating'][data-visible='true'] {
-  transition-duration: var(--motion-base);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  /* 覆盖：减少动态效果时只淡入淡出，不挪位置。 */
-  .eqb-notice[data-placement='floating'],
-  .eqb-notice[data-placement='floating'][data-visible='false'] {
-    transform: translateX(-50%);
-  }
-}
+/* 原来这里是浮在视口底部（floating）的四条（样子、退场、入场、减少动态效果）：2026-11-15 收进 shared-ui/toast.css，删了。 */
