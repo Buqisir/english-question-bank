@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar.tsx'
 import { ChevronRight, Paper } from '../../icons'
 import { EmptyState } from '../../shared-ui/EmptyState.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
+import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate.tsx'
 import { fetchQuestionGroups } from '../../services/questionGroups.ts'
 import {
@@ -136,6 +137,9 @@ export function VocabularyNotebookPage({
   onOpenList: () => void
 }) {
   const [papers, setPapers] = useState<NotebookPaper[] | null>(null)
+  // 等待第四轮（2026-11-15）：收藏的卷第一次读回来时，一行行依次淡入；从一张纸返回列表不再演（once）。
+  const paperListRef = useRef<HTMLElement>(null)
+  useRowReveal(paperListRef, '.home-row-list > li', (papers?.length ?? 0) > 0, { once: true })
   const [paperNames, setPaperNames] = useState<Record<string, string>>({})
   const [detail, setDetail] = useState<NotebookPaperDetail | null>(null)
   const [titles, setTitles] = useState<PaperTitles | null>(null)
@@ -197,7 +201,7 @@ export function VocabularyNotebookPage({
           </main>
         </PaperFontGate>
       ) : (
-        <main className="notebook-main">
+        <main className="notebook-main" ref={paperListRef}>
           {error ? <Notice kind="error" className="notebook-error">{error}</Notice> : null}
           {papers && papers.length === 0 ? (
             <EmptyState className="notebook-empty-state" illustration="vocabulary-notebook" action={{ label: '去找题', onClick: onBack }}>

@@ -14,6 +14,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import type { PublicVocabularyDictationSet } from '../../domain/vocabulary'
 import { getPublicVocabularyDictationSet, VocabularyApiError } from '../../services/vocabulary'
 import { getVocabularyAudioPath, type VocabularyAudioAccent } from '../vocabulary-listen/vocabularyAudioVariants'
+import { Skeleton } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
 import './vocabularyDictationPage.css'
 
 type DictationStatus = 'idle' | 'countdown' | 'playing' | 'waiting' | 'paused' | 'ended' | 'error'
@@ -44,10 +46,65 @@ function readSavedSettings(): SavedSettings {
   }
 }
 
-function LoadState({ kind, onRetry }: { kind: 'loading' | 'missing' | 'revoked' | 'error'; onRetry: () => void }) {
-  const content = kind === 'loading'
-    ? { title: '正在准备听写', detail: '题目顺序和录音正在载入。' }
-    : kind === 'revoked'
+/**
+ * 听写页的灰块（等待第四轮，2026-11-15；原来是整页居中的图标、「正在准备听写」和一行说明）。
+ * 顶栏（獭石 / 自动听写）照常；下面用真页面同一套容器 class 画题板和控制区，字、键的位置放灰块，
+ * 高度跟着同一套规则走（题板最小高 410，窄屏 360），数据到了不跳。
+ * 灰块走门槛：showSkeleton 由调用处的 useDelayedBusy 给；300ms 内只有读屏那一句。
+ * 听写纸扫码进来时，在这一页的代码块到之前还有一层 main.tsx 的 PublicVocabularyBootShell（没改，见 README）。
+ */
+function DictationOpeningSkeleton({ showSkeleton }: { showSkeleton: boolean }) {
+  return (
+    <div className="vocabulary-dictation-page">
+      <header className="vocabulary-dictation-header">
+        <a href="/" aria-label="返回獭石首页">獭石</a>
+        <span>自动听写</span>
+      </header>
+      <main className="vocabulary-dictation-shell vocabulary-dictation-skeleton" role="status" aria-busy="true">
+        <span className="visually-hidden">正在准备听写</span>
+        {showSkeleton && <>
+          <section className="vocabulary-dictation-stage" aria-hidden="true">
+            <div className="vocabulary-dictation-title-row">
+              <h1><Skeleton width={120} height={10} /></h1>
+              <strong><Skeleton width={36} height={10} /></strong>
+            </div>
+            <div className="vocabulary-dictation-question">
+              <Skeleton width={120} height={64} />
+            </div>
+            <p className="vocabulary-dictation-status"><Skeleton width={96} height={14} /></p>
+            <p className="vocabulary-dictation-instruction"><Skeleton width={260} height={12} /></p>
+            <div className="vocabulary-dictation-progress" />
+          </section>
+          <section className="vocabulary-dictation-controls" aria-hidden="true">
+            <div className="vocabulary-dictation-transport">
+              <Skeleton width={44} height={44} shape="pill" />
+              <Skeleton width={64} height={64} shape="pill" />
+              <Skeleton width={44} height={44} shape="pill" />
+            </div>
+            <span className="vocabulary-dictation-replay"><Skeleton width={72} height={20} /></span>
+            <div className="vocabulary-dictation-settings">
+              {[3, 4].map((count) => (
+                <div key={count} className="vocabulary-dictation-skeleton-fieldset">
+                  <p className="vocabulary-dictation-skeleton-legend"><Skeleton width={56} height={10} /></p>
+                  <div>
+                    {Array.from({ length: count }, (_, index) => <Skeleton key={index} height={36} />)}
+                  </div>
+                </div>
+              ))}
+              <div className="vocabulary-dictation-volume">
+                <Skeleton width={16} height={16} />
+                <Skeleton height={4} />
+              </div>
+            </div>
+          </section>
+        </>}
+      </main>
+    </div>
+  )
+}
+
+function LoadState({ kind, onRetry }: { kind: 'missing' | 'revoked' | 'error'; onRetry: () => void }) {
+  const content = kind === 'revoked'
       ? { title: '这份听写练习已停止分享', detail: '请向老师索取新的听写纸。' }
       : kind === 'missing'
         ? { title: '没有找到这份听写练习', detail: '链接可能不完整，请重新扫描纸上的二维码。' }
@@ -75,6 +132,8 @@ export function VocabularyDictationPage({
   const savedSettings = useMemo(readSavedSettings, [])
   const [set, setSet] = useState<PublicVocabularyDictationSet | null>(null)
   const [loadState, setLoadState] = useState<'loading' | 'ready' | 'missing' | 'revoked' | 'error'>('loading')
+  // 灰块走门槛（等待第四轮）：出了至少留 500ms，这期间真题板（或出错那一页）先不换上。
+  const openingPhase = useDelayedBusy(loadState === 'loading')
   const [currentIndex, setCurrentIndex] = useState(0)
   const [repeatCount, setRepeatCount] = useState<1 | 2 | 3>(savedSettings.repeatCount)
   const [gapSeconds, setGapSeconds] = useState(savedSettings.gapSeconds)
@@ -395,6 +454,10 @@ export function VocabularyDictationPage({
   }, [countdown, gapSeconds, playedRepeat, status])
 
   const audioElement = <audio ref={audioRef} preload="metadata" hidden />
+
+  if (loadState === 'loading' || openingPhase === 'waiting') {
+    return <>{audioElement}<DictationOpeningSkeleton showSkeleton={openingPhase === 'waiting'} /></>
+  }
 
   if (loadState !== 'ready' || !set || !currentEntry) {
     return <>{audioElement}<LoadState kind={loadState === 'ready' ? 'error' : loadState} onRetry={load} /></>

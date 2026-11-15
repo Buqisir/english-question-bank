@@ -8,6 +8,7 @@ import { iconMotionInput } from '../../../icons/motionInput'
 import { useClipboardCopy } from '../../../hooks/useClipboardCopy'
 import { Button } from '../../../shared-ui/Button.tsx'
 import { InlineWaitDots } from '../../../shared-ui/WaitDots.tsx'
+import { useSlowWait } from '../../../shared-ui/useDelayedBusy.ts'
 
 export type SelectionOverlayPhase = 'toolbar' | 'lookup' | 'loading' | 'result' | 'error' | 'dictionary' | 'sentence-analysis'
 
@@ -70,6 +71,8 @@ export function SelectionOverlay({
 }: SelectionOverlayProps) {
   const floatingRef = useRef<HTMLDivElement | null>(null)
   const clipboard = useClipboardCopy()
+  // 等待第四轮（2026-11-15）：翻译等过 10 秒，「正在翻译」那一行多说一句。
+  const translateSlow = useSlowWait(phase === 'loading')
   const copied = clipboard.copied
   const lockedPlacementRef = useRef<Placement | null>(null)
 
@@ -252,7 +255,7 @@ export function SelectionOverlay({
           {phase === 'loading' ? (
             // 等待构件（2026-11-15，DESIGN.md §5 Waiting）：原来字前面一个转圈，换成字后面跟所以点。
             <p className="paper-selection-card-status">
-              <span>正在翻译</span>
+              <span>{translateSlow ? '正在翻译，比平时慢，可以先去做别的' : '正在翻译'}</span>
               <InlineWaitDots pending size="sm" />
             </p>
           ) : null}

@@ -191,7 +191,7 @@
   display: inline-flex;
 }
 
-/* 草稿卷的提示行（.draft-loading / .draft-error / .draft-success / .draft-empty-export / .draft-warning）
+/* 草稿卷的提示行（.draft-error / .draft-success / .draft-empty-export / .draft-warning）
    都换成了 shared-ui/Notice，颜色、字号、图标由 notice.css 给；类名留着给脚本认。
    它们放在 .draft-notice-slot 里：卷头行之下、纸面之上，左右边距和下面的排序建议卡同一套
    （见 .draft-reorder-slot），不再贴着窗口左边。 */
@@ -369,7 +369,10 @@
    `120px 1fr`，同样的 gap 24px 和 padding）。两页都是「一份卷子 + 一份
    目录」，此前一页目录在左一页在右，老师换页得重新找目录。宽度比整卷页
    宽，因为这里每行还带序号和题数（整卷页只有 A/B/C 这种短标签）。 */
-.draft-preview-desk {
+/* 等待第四轮（2026-11-15）：打开草稿卷的灰块（.draft-skeleton-desk / -rail / -col）和真桌面共用这几条几何规则，
+   目录板、纸栏的位置和大小只写一处；灰块用自己的 class 是因为脚本和别的规则（:has(.draft-paper-col) 这类）按真 class 找。 */
+.draft-preview-desk,
+.draft-skeleton-desk {
   align-items: start;
   background: var(--paper-desk-bg);
   display: grid;
@@ -379,7 +382,8 @@
   padding: 24px 24px 96px;
 }
 
-.draft-paper-col {
+.draft-paper-col,
+.draft-skeleton-col {
   margin: 0 auto;
   max-width: 820px;
   min-width: 0;
@@ -650,7 +654,8 @@
 /* 左 rail = 整卷页目录语言（paperBrowsePage.css 的 .paper-browse-rail
    族：淡墨、无边框、无底色块、当前项加深并由小手指出），sticky offset
    与它同值。 */
-.draft-paper-rail {
+.draft-paper-rail,
+.draft-skeleton-rail {
   align-self: start;
   display: flex;
   flex-direction: column;
@@ -666,7 +671,8 @@
    本条 (0,3,0) 覆盖 surface.css 板的 (0,2,0) 两项，因为左栏照原样排：
    - 内衬 14 / 8 / 12 是存量半档（DESIGN.md §8 不追改），构件的 padding="none" 写的是 0；
    - 目录长了要能滚（overflow auto），构件的板是 overflow hidden。 */
-.draft-paper-rail.eqb-surface[data-surface='board'] {
+.draft-paper-rail.eqb-surface[data-surface='board'],
+.draft-skeleton-rail.eqb-surface[data-surface='board'] {
   overflow: auto;
   padding: 14px 8px 12px;
 }
@@ -933,7 +939,8 @@
    与本刀无关的工具栏堆叠行为）。 */
 @media (max-width: 900px) {
   .draft-preview-desk,
-  .draft-preview-desk:has(> .draft-paper-rail--swap) {
+  .draft-preview-desk:has(> .draft-paper-rail--swap),
+  .draft-skeleton-desk {
     grid-template-columns: 1fr;
     padding: 12px 48px 18px 10px;
   }
@@ -942,7 +949,8 @@
     right: -38px;
   }
 
-  .draft-paper-rail {
+  .draft-paper-rail,
+  .draft-skeleton-rail {
     display: none;
   }
 
@@ -999,16 +1007,85 @@
 
 @media (min-width: 1200px) {
   /* Center the A4 sheet in the viewport, not just the space after the outline. */
-  .draft-preview-desk:has(> .draft-paper-col:not(.is-a3)) {
+  .draft-preview-desk:has(> .draft-paper-col:not(.is-a3)),
+  .draft-skeleton-desk {
     grid-template-columns: minmax(0, 1fr) 820px minmax(0, 1fr);
   }
 
-  .draft-preview-desk:has(> .draft-paper-col:not(.is-a3)) > .draft-paper-rail {
+  .draft-preview-desk:has(> .draft-paper-col:not(.is-a3)) > .draft-paper-rail,
+  .draft-skeleton-desk > .draft-skeleton-rail {
     justify-self: end;
     width: 100%;
   }
 
   .draft-paper-col:not(.is-a3) .draft-group-actions {
     right: -111px;
+  }
+}
+
+/* ─── 打开草稿卷 / 第一次分页的灰块（等待第四轮，2026-11-15） ───
+   外框几何和真桌面共用上面的规则（.draft-skeleton-desk / -rail / -col）；这里只排板里、纸上的灰块。
+   原来那一行「正在打开草稿卷」（.draft-loading，桌面正中）和纸的位置正中「正在生成分页预览」换掉了。 */
+
+/* 页数那一行（.draft-paper-rail-meta：12px 一行，下空 12，左右内衬 8）。 */
+.draft-skeleton-rail-meta {
+  display: flex;
+  align-items: center;
+  height: 18px;
+  margin: 0 0 var(--eqb-space-3);
+  padding: 0 var(--eqb-space-2);
+}
+
+/* 目录一项（.draft-paper-rail-item：Row sm 最小高 44，左右内衬 8，行间 4）。 */
+.draft-skeleton-rail-item {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--eqb-space-2);
+}
+
+.draft-skeleton-rail-item + .draft-skeleton-rail-item {
+  margin-top: var(--eqb-space-1);
+}
+
+/* 一张 A4：照预览 iframe 里的 .preview-page（794 宽、离纸栏顶 24、A4 高 1123）。
+   底、阴影同 .preview-page 和整卷页 .paper-browse-zoom（DESIGN.md Shadow Vocabulary · Sheet 纸面）：
+   全站没有纸面阴影 token，这是同一组值的第三处，缺口登记在 docs/design-gaps.md「2026-11-15 纸面阴影」。
+   页边距照 PaperSurface 的页边（上 79、左右 91），灰块在纸上的位置和真卷面的字一样。 */
+.draft-skeleton-sheet {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 794px;
+  max-width: 100%;
+  min-height: 1123px;
+  margin: 0 auto;
+  padding: 79px 91px;
+  background: var(--eqb-color-paper);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* 纸离纸栏顶 24（预览 iframe 里 body 的上内边距）。写成外面一层的内边距，不写纸的外边距：
+   外边距会穿过 .draft-a4-sheet 叠出去，把 .draft-a4-sheet 整个往下推 24（量出来的，2026-11-15）。 */
+.draft-skeleton-col,
+.draft-a4-skeleton {
+  padding-top: 24px;
+}
+
+/* 卷头：卷名一行居中、下面一行说明，和下面的组之间空出卷头那段。 */
+.draft-skeleton-sheet-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 24px;
+}
+
+@media (max-width: 900px) {
+  /* 窄屏纸变窄（纸栏宽度跟着桌面走），页边同整卷页窄屏那一档收小。 */
+  .draft-skeleton-sheet {
+    min-height: 0;
+    padding: 32px 24px;
   }
 }

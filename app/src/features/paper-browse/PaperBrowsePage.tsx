@@ -62,6 +62,8 @@ import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
 import { SelectField } from '../../shared-ui/Field.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { PaperGroupSkeleton, Skeleton, SkeletonGate } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy, useSlowWait } from '../../shared-ui/useDelayedBusy.ts'
+import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { ensurePaperFonts, PaperFontError } from '../../shared-ui/papersurface/paperFontLoader'
@@ -523,6 +525,66 @@ const GRID_GAP = 24
 // 794px paper + 440px notes + 72px rail + gaps and shell padding must fit.
 const DOCKED_LECTURE_MIN_WIDTH = 1440
 
+/** 整卷屏幕放大倍数（按 shell 宽度算）。真卷面和首屏灰块（PaperBrowseOpeningSkeleton）共用，灰块的纸和真纸一样宽。 */
+function paperScreenZoomForShellWidth(shellWidth: number): number {
+  // Reserve the docked layout even while closed: toggling only moves the paper.
+  const canDockLecture = shellWidth >= DOCKED_LECTURE_MIN_WIDTH
+  const railWidth = canDockLecture ? LECTURE_RAIL_WIDTH : RAIL_WIDTH
+  const lectureColumn = canDockLecture ? GRID_GAP + LECTURE_PANEL_WIDTH : 0
+  const contentColumnWidth = shellWidth - railWidth - GRID_GAP - lectureColumn
+  const gutterReserve = canDockLecture ? 0 : GUTTER_WIDTH
+  const available = contentColumnWidth - gutterReserve
+  const raw = Math.max(1, Math.min(1.35, available / PAPER_BASE_WIDTH))
+  return Math.floor(raw / 0.05) * 0.05
+}
+
+// 首屏灰块的目录：照 paper-2026-i 的目录（阅读 5 项、语言运用 2 项、写作 2 项）画，每项一行 32 高（.paper-browse-rail-group）。
+const OPENING_SKELETON_RAIL_PARTS = [5, 2, 2]
+
+/**
+ * 整卷页首屏灰块（等待第四轮，2026-11-15；原来是居中一行「正在打开整卷」）。
+ * 顶栏照常（调用处画），内容区照真卷面的位置画：左边目录面板、中间一张纸（同宽、同放大倍数、同页边距），
+ * 纸上是卷头（标题、注意事项几行）加两组卷面灰块。几何由 paperBrowsePage.css 里和真卷面同一条规则给。
+ * 灰块走门槛（调用处 useDelayedBusy）：300ms 内只有读屏那一句；出了至少留 500ms。
+ */
+function PaperBrowseOpeningSkeleton({ showSkeleton }: { showSkeleton: boolean }) {
+  const zoom = typeof document === 'undefined' ? 1 : paperScreenZoomForShellWidth(document.documentElement.clientWidth)
+  const contentStyle = { '--paper-screen-zoom': zoom } as CSSProperties
+  return (
+    <main className="paper-browse-skeleton-shell" role="status" aria-busy="true">
+      <span className="visually-hidden">正在打开整卷</span>
+      {showSkeleton ? <>
+        <nav className="paper-browse-skeleton-rail" aria-hidden="true">
+          <div className="paper-browse-skeleton-rail-panel">
+            {OPENING_SKELETON_RAIL_PARTS.map((count, part) => (
+              <div key={part} className="paper-browse-skeleton-rail-part">
+                <span className="paper-browse-skeleton-rail-label"><Skeleton width={24} height={10} /></span>
+                {Array.from({ length: count }, (_, item) => (
+                  <span key={item} className="paper-browse-skeleton-rail-item"><Skeleton width={28} height={12} /></span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </nav>
+        <div className="paper-browse-skeleton-content" style={contentStyle} aria-hidden="true">
+          <div className="paper-browse-skeleton-sheet">
+            <div className="paper-browse-skeleton-cover">
+              <Skeleton className="paper-browse-skeleton-title" width={72} height={28} />
+              <Skeleton width={72} height={14} />
+              <Skeleton width="78%" height={12} />
+              <Skeleton width="100%" height={12} />
+              <Skeleton width="56%" height={12} />
+              <Skeleton width={180} height={14} />
+            </div>
+            <PaperGroupSkeleton />
+            <PaperGroupSkeleton />
+          </div>
+        </div>
+      </> : null}
+    </main>
+  )
+}
+
 function railGroupLabel(title: string): string {
   const trimmed = title.trim()
   const readingLetter = trimmed.match(/^Reading\s+([A-D])$/i)
@@ -797,9 +859,14 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     activeAudioRef.current = audio
   }, [])
   const [groupModels, setGroupModels] = useState<Record<string, GroupModel>>({})
-  const [loading, setLoading] = useState(true)
+  const [loadingAsset, setLoading] = useState(true)
+  // 等待第四轮（2026-11-15）：首屏灰块走门槛。灰块出了要留够 500ms，这期间真卷面先不挂，
+  // 所以 loading 在门槛的 'waiting' 段里也算「还在开」，下面跟着 loading 的副作用和真卷面一起晚这一点点。
+  const openingPhase = useDelayedBusy(loadingAsset)
+  const loading = loadingAsset || openingPhase === 'waiting'
   const [error, setError] = useState<string | null>(null)
   const [analysisPdfBusy, setAnalysisPdfBusy] = useState(false)
+  const analysisPdfSlow = useSlowWait(analysisPdfBusy)
   const [analysisPdfError, setAnalysisPdfError] = useState('')
   const [analysisFontError, setAnalysisFontError] = useState('')
   const { editions: pdfEditions, edition: pdfEdition, setEdition: setPdfEdition,
@@ -886,6 +953,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   // 镜像 harness 的 shellRef/leftScrollerRef/rightPanelRef 三件套）。
   // scrollerRef 复用现有的卷面容器（同 harness 的 leftScrollerRef）。
   const shellRef = useRef<HTMLDivElement | null>(null)
+  // 等待第四轮（2026-11-15）：卷面第一次挂上时，纸上的块（卷头、各组）从上到下依次淡入。
+  // 只演第一次（once）：换卷、开关讲评、展开都不演。
+  useRowReveal(shellRef, '.paper-browse-zoom > *', !loading && asset !== null, { once: true })
   const rightPanelRef = useRef<HTMLElement | null>(null)
   const [paperPositionVersion, setPaperPositionVersion] = useState(0)
   const railNavRef = useRef<HTMLElement | null>(null)
@@ -2142,16 +2212,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     function computeZoom(): void {
       const node = shellRef.current
       if (!node) return
-      // Reserve the docked layout even while closed: toggling only moves the paper.
-      const canDockLecture = node.clientWidth >= DOCKED_LECTURE_MIN_WIDTH
-      const railWidth = canDockLecture ? LECTURE_RAIL_WIDTH : RAIL_WIDTH
-      const lectureColumn = canDockLecture ? GRID_GAP + LECTURE_PANEL_WIDTH : 0
-      const contentColumnWidth = node.clientWidth - railWidth - GRID_GAP - lectureColumn
-      const gutterReserve = canDockLecture ? 0 : GUTTER_WIDTH
-      const available = contentColumnWidth - gutterReserve
-      const raw = Math.max(1, Math.min(1.35, available / PAPER_BASE_WIDTH))
-      const stepped = Math.floor(raw / 0.05) * 0.05
-      setPaperScreenZoom(stepped)
+      setPaperScreenZoom(paperScreenZoomForShellWidth(node.clientWidth))
     }
 
     computeZoom()
@@ -4169,9 +4230,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     return (
       <div className="paper-browse-page">
         <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />
-        <div className="paper-browse-loading">
-          <Notice kind="waiting">正在打开整卷</Notice>
-        </div>
+        <PaperBrowseOpeningSkeleton showSkeleton={openingPhase === 'waiting'} />
       </div>
     )
   }
@@ -4235,6 +4294,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           ? { publicationDigest: canonicalConsumption.publicationDigest, sourceAssetVersion: canonicalConsumption.sourceAssetVersion }
           : undefined}
       />}
+      {/* 等待第四轮（2026-11-15）：下载 PDF 等过 10 秒，在报错那一行的位置多说一句（键上的图标照旧自己演）。
+          10 秒内什么都不加；这一行出来会把卷面往下推一行，见 migrate-waiting-4/README.md。 */}
+      {analysisPdfSlow && <Notice kind="waiting" className="paper-browse-export-wait">正在生成 PDF，比平时慢，可以先去做别的</Notice>}
       {analysisPdfError && <Notice kind="error" className="paper-browse-export-error">{analysisPdfError}</Notice>}
       {analysisFontError && !lectureOpen && <Notice kind="error" className="paper-browse-export-error">{analysisFontError}</Notice>}
       <div

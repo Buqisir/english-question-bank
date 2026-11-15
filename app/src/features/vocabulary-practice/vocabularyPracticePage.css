@@ -381,6 +381,27 @@
   line-height: 1.6;
 }
 
+/* ─── 翻牌页的灰块（等待第四轮，2026-11-15，VocabularyPracticeSkeleton） ───
+ * 容器用真页面同一套 class，这里只管灰块怎么坐进去。 */
+
+/* 覆盖：放在字的位置（h1、p、strong、span、small、h2 里）的灰块，
+ * (0,2,1) 盖过 waiting.css .eqb-skeleton (0,1,0) 的 display: block——改成行内块，
+ * 这样外面那个元素的高度仍由它自己的字号、行高给，和有字时一样高。 */
+.vocabulary-practice-skeleton :is(h1, h2, p, strong, span, small) > .eqb-skeleton {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 练习方式里图标的位置：同 .vocabulary-practice-modes svg 占两行。 */
+.vocabulary-practice-modes > span > .eqb-skeleton {
+  grid-row: 1 / span 2;
+}
+
+/* 一张卡的位置：高同 .vocabulary-match-card（142，窄屏 126）。 */
+.vocabulary-practice-skeleton-card {
+  height: 142px;
+}
+
 @media (max-width: 640px) {
   .vocabulary-practice-shell {
     padding: 14px 12px 32px;
@@ -424,7 +445,8 @@
     gap: 8px;
   }
 
-  .vocabulary-match-card {
+  .vocabulary-match-card,
+  .vocabulary-practice-skeleton-card {
     height: 126px;
   }
 

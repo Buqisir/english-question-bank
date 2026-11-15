@@ -32,7 +32,7 @@ import { EmptyState } from '../shared-ui/EmptyState.tsx'
 import { SearchField } from '../shared-ui/SearchField.tsx'
 import { RowList } from '../shared-ui/Row.tsx'
 import { Skeleton } from '../shared-ui/Skeleton.tsx'
-import { useDelayedBusy } from '../shared-ui/useDelayedBusy.ts'
+import { useDelayedBusy, useSlowWait } from '../shared-ui/useDelayedBusy.ts'
 import { useRowReveal } from '../shared-ui/useRowReveal.ts'
 
 /** Fluid hover: an expanded paper row's open body still belongs to its head,
@@ -599,9 +599,16 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   const connectingSkeletonShown = dataConnecting && connectingWaitPhase !== 'idle'
   const searchSkeletonShown = searchWaitPhase === 'waiting' && (state.kind === 'loading' || state.kind === 'results')
   const searchResultsShown = state.kind === 'results' && !searchSkeletonShown
-  // 数据到了，真行从上到下依次淡入（DESIGN §5；只做首页找题结果这一处，shared-ui/useRowReveal.ts）。
+  // 数据到了，真行从上到下依次淡入（DESIGN §5；shared-ui/useRowReveal.ts）。
   const resultsRef = useRef<HTMLDivElement>(null)
   useRowReveal(resultsRef, '.concierge-paper-list > li', searchResultsShown && filteredPaperResults.length > 0)
+  // 等待第四轮（2026-11-15）：冷启动（挂上时题库还没连上，?view=browse 深链、刷新）时，库连上后列表第一次出来，
+  // 年份行和卷行依次淡入。挂上时库已经在手（从别处切回来）不演；之后筛选、展开、翻年份都不演（once）。
+  const [feedColdStart] = useState(() => dataLoading)
+  const feedRef = useRef<HTMLDivElement>(null)
+  useRowReveal(feedRef, '.concierge-feed-year-head, .concierge-paper-list > li', feedColdStart && showFeed, { once: true })
+  // AI 找题等过 10 秒，提示行多说一句（DESIGN §5「放在哪」：要等好几秒的事）。
+  const searchSlow = useSlowWait(state.kind === 'loading')
 
   return (
     <section
@@ -929,7 +936,9 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
 
       <div ref={resultsRef} className="concierge-results" aria-live="polite">
         {state.kind === 'loading' && (
-          <Notice kind="waiting" className="concierge-loading">{`正在为「${state.query}」找题`}</Notice>
+          <Notice kind="waiting" className="concierge-loading">
+            {searchSlow ? `正在为「${state.query}」找题，比平时慢，可以先去做别的` : `正在为「${state.query}」找题`}
+          </Notice>
         )}
         {/* ui-p1-panels #7 — 找题主面状态三缺: an AI search in flight
             used to blank straight to this one line with nothing else
@@ -1002,7 +1011,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       </div>
 
       {showFeed && (
-        <div className="concierge-default-feed" role="region" aria-label={isBrowseScreen ? '题库浏览' : '备课桌'}>
+        <div ref={feedRef} className="concierge-default-feed" role="region" aria-label={isBrowseScreen ? '题库浏览' : '备课桌'}>
           {questionGroups.length === 0 ? (
             <EmptyState className="concierge-feed-empty-corpus" illustration="question-bank">题库还没有题目。先导入一套卷，这里就能按卷浏览。</EmptyState>
           ) : hasActiveFilters && feedPaperCount === 0 ? (

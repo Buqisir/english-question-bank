@@ -5,6 +5,7 @@ import { TextField } from '../../shared-ui/Field.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { planFocusAfterRemoval, programmaticFocusTarget } from '../../shared-ui/focusAfterRemoval.ts'
 import { Surface } from '../../shared-ui/Surface.tsx'
+import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import { errorFromResponse } from '../../services/httpClient'
 
 type AgentToken = { id: string; name: string; createdAt: string; revokedAt: string | null; lastUsedAt: string | null }
@@ -35,6 +36,9 @@ export function AgentTokens() {
   const headingRef = useRef<HTMLHeadingElement>(null)
   const focusAfterRevokeRef = useRef<(() => HTMLElement | null) | null>(null)
   const revokedRef = useRef(false)
+  // 等待第四轮（2026-11-15）：口令列表第一次读回来时一行行依次淡入；新建、作废、重试都不再演（once）。
+  const sectionRef = useRef<HTMLElement>(null)
+  useRowReveal(sectionRef, ':scope > ul > li', !loading && !loadFailed && tokens.length > 0, { once: true })
   useEffect(() => {
     let active = true
     request().then(data => { if (active) { setTokens(data.tokens); setLoadFailed(false) } })
@@ -49,7 +53,7 @@ export function AgentTokens() {
     catch { setError('口令操作失败，检查连接后重试。') }
     finally { setBusy(false) }
   }
-  return <section className="agent-tokens" aria-labelledby="agent-tokens-heading">
+  return <section ref={sectionRef} className="agent-tokens" aria-labelledby="agent-tokens-heading">
     <h2 id="agent-tokens-heading" ref={headingRef}>Agent 口令</h2>
     <p>口令可只读访问已发布卷，包含来源答案。</p>
     <form onSubmit={event => {

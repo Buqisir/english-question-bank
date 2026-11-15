@@ -4,6 +4,7 @@ import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { Chip } from '../../shared-ui/Chip.tsx'
+import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import { Row } from '../../shared-ui/Row.tsx'
 import { Surface } from '../../shared-ui/Surface.tsx'
 import { groupTypeLabel, type DraftPaperItem, type QuestionGroupCard } from '../../domain/questionBank'
@@ -40,9 +41,13 @@ export type DraftPaperSwapDrawerProps = {
 
 export function DraftPaperSwapDrawer(props: DraftPaperSwapDrawerProps): ReactNode {
   const { seedTitle, recipeSummary, request, existingGroupIds, questionGroupById, onCollapse, onRetry, onReplace, onAdd } = props
+  // 等待第四轮（2026-11-15）：结果回来时，候选卡从上到下依次淡入（只动透明度）。每次请求回来演一次；
+  // 勾选、加入、换篇这些不改 request.status 的变化不演。
+  const drawerRef = useRef<HTMLDivElement>(null)
+  useRowReveal(drawerRef, '.similar-rcard', request.status === 'ready')
 
   return (
-    <div className="draft-swap-drawer">
+    <div className="draft-swap-drawer" ref={drawerRef}>
       <div className="similar-passages-head">
         <h4 className="paper-browse-lecture-title">相似篇章 · {seedTitle}</h4>
         <Button tone="quiet" size="sm" className="similar-backlink" onClick={onCollapse}>

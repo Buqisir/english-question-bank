@@ -48,12 +48,17 @@
 
 /* 导出 PDF / 读字体失败那一行：构件收尾（2026-11-15）从红框红底换成共用 Notice（DESIGN.md §5：出错和说明同一种写法，
  * 只有「没保存」「会丢东西」才上危险色；这里卷子没动、能再导，所以不上）。只留左右边距；
- * 覆盖：.eqb-notice.paper-browse-export-error (0,2,0) 盖过 notice.css 的 margin: 0 (0,1,0)。 */
-.eqb-notice.paper-browse-export-error {
+ * 覆盖：.eqb-notice.paper-browse-export-error (0,2,0) 盖过 notice.css 的 margin: 0 (0,1,0)。
+ * 等待第四轮（2026-11-15）：下载 PDF 过 10 秒的「比平时慢」那一行（.paper-browse-export-wait）放在同一位置，同一条。 */
+.eqb-notice.paper-browse-export-error,
+.eqb-notice.paper-browse-export-wait {
   margin: 0 24px;
 }
 
-.paper-browse-shell {
+/* 等待第四轮（2026-11-15）：首屏灰块（.paper-browse-skeleton-*，PaperBrowseOpeningSkeleton）和真卷面共用这几条几何规则，
+ * 纸、目录面板的位置和大小只写一处；灰块用自己的 class 是因为脚本和别的规则按真 class 找卷面。 */
+.paper-browse-shell,
+.paper-browse-skeleton-shell {
   display: grid;
   grid-template-columns: 120px 1fr;
   gap: 24px;
@@ -65,7 +70,8 @@
 }
 
 @media screen and (min-width: 1440px) {
-  .paper-browse-shell {
+  .paper-browse-shell,
+  .paper-browse-skeleton-shell {
     grid-template-columns: 72px minmax(0, 1fr) 440px;
   }
 
@@ -75,7 +81,8 @@
 
   /* Keep the lecture-sized sheet centered until its right-hand notes open.
      Half the unequal outer columns (440 - 72) is the centering offset. */
-  .paper-browse-shell:not(.paper-browse-shell--lecture-open) .paper-browse-content {
+  .paper-browse-shell:not(.paper-browse-shell--lecture-open) .paper-browse-content,
+  .paper-browse-skeleton-content {
     transform: translateX(184px);
   }
 
@@ -94,7 +101,8 @@
   visibility: hidden;
 }
 
-.paper-browse-rail {
+.paper-browse-rail,
+.paper-browse-skeleton-rail {
   position: sticky;
   top: 24px;
   align-self: start;
@@ -108,14 +116,16 @@
   overflow-y: auto;
 }
 
-.paper-browse-rail--centered {
+.paper-browse-rail--centered,
+.paper-browse-skeleton-rail {
   top: 50%;
   transform: translateY(-50%);
 }
 
 /* ─── Quiet TOC rail ─── */
 
-.paper-browse-rail-panel {
+.paper-browse-rail-panel,
+.paper-browse-skeleton-rail-panel {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -264,7 +274,8 @@
 /* 原 `.paper-browse-lecture-toggle--pressed`（石板墨底、白字）和它的 :hover 删了：按下态改由 Button 的
  * solid 语气画（button.css）。原来那条的白字其实被 App.css `.topbar .ghost-button` 的字色盖掉了。 */
 
-.paper-browse-content {
+.paper-browse-content,
+.paper-browse-skeleton-content {
   --pb-block-gap: 16px;
   --paper-screen-zoom: 1;
   min-width: 0;
@@ -275,7 +286,8 @@
   overflow: visible;
 }
 
-.paper-browse-zoom {
+.paper-browse-zoom,
+.paper-browse-skeleton-sheet {
   display: flex;
   flex-direction: column;
   gap: var(--pb-block-gap);
@@ -798,7 +810,6 @@
   }
 }
 
-.paper-browse-loading,
 .paper-browse-error {
   padding: 48px 24px;
   text-align: center;
@@ -806,7 +817,6 @@
 }
 
 /* 里面那一行共用提示行（shared-ui/Notice）居中，宽度跟着字走，窄屏时最多占满一行再截断。 */
-.paper-browse-loading .eqb-notice,
 .paper-browse-error .eqb-notice {
   margin: 0 auto;
   width: fit-content;
@@ -1405,11 +1415,13 @@
 }
 
 @media (max-width: 900px) {
-  .paper-browse-shell {
+  .paper-browse-shell,
+  .paper-browse-skeleton-shell {
     grid-template-columns: 1fr;
   }
 
-  .paper-browse-rail {
+  .paper-browse-rail,
+  .paper-browse-skeleton-rail {
     position: static;
     top: auto;
     transform: none;
@@ -1423,7 +1435,8 @@
 
   /* 窄屏 rail 横排：面板内各部分改并列成小分栏，分段线相应从「上边线」
    * 换成不画（并列时画竖线反而乱），面板边框继续圈住整体。 */
-  .paper-browse-rail-panel {
+  .paper-browse-rail-panel,
+  .paper-browse-skeleton-rail-panel {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -1446,13 +1459,15 @@
 /* 手机屏幕只改变交互预览的折行与页边距；Print/PDF 继续使用共享
  * PaperSurface 的金样卷几何，不被这组页面级覆盖影响。 */
 @media screen and (max-width: 700px) {
-  .paper-browse-shell {
+  .paper-browse-shell,
+  .paper-browse-skeleton-shell {
     gap: 16px;
     padding: 12px 12px 80px;
   }
 
   /* Override inherited print margins below the content's inline tokens. */
-  .paper-browse-zoom {
+  .paper-browse-zoom,
+  .paper-browse-skeleton-sheet {
     --ps-page-margin-top: 32px;
     --ps-page-margin-x: 24px;
   }
@@ -2214,3 +2229,51 @@
 
 /* .paper-browse-error-back / .paper-browse-error-detail：整卷预览打不开那一块换成了共用提示行
    （「返回找题」是行尾的键，原话接在「：」后面），这两条规则拿掉。 */
+
+/* ─── 首屏灰块（等待第四轮，2026-11-15，PaperBrowseOpeningSkeleton） ───
+ * 外框几何和真卷面共用上面的规则（.paper-browse-skeleton-shell / -rail / -rail-panel / -content / -sheet）；
+ * 这里只排面板和纸里面的灰块。原来那一行「正在打开整卷」（.paper-browse-loading）换掉了，规则一并删。 */
+
+/* 灰块的面板没有 .paper-browse-rail-panel 的分段，三段之间的间距由面板的 gap: 16px 给。 */
+.paper-browse-skeleton-rail-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 段名一行（真目录「阅读」那一行，字 10px，和第一项中心相距 30px）。 */
+.paper-browse-skeleton-rail-label {
+  display: flex;
+  align-items: center;
+  height: 28px;
+}
+
+/* 一项一行 32 高（.paper-browse-rail-group）。 */
+.paper-browse-skeleton-rail-item {
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+
+/* 卷头：标题居中，注意事项几行；和下面的组之间的距离照真卷面（标题下空得多）。 */
+.paper-browse-skeleton-cover {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 32px;
+}
+
+/* 覆盖：.eqb-skeleton.paper-browse-skeleton-title (0,2,0) 盖过 waiting.css .eqb-skeleton (0,1,0) 的 display: block，
+ * 标题灰块居中、下面空出真标题到注意事项之间那段。 */
+.eqb-skeleton.paper-browse-skeleton-title {
+  align-self: center;
+  margin-bottom: 72px;
+}
+
+@media (max-width: 900px) {
+  /* 窄屏目录横排（同上面真目录 900px 那条），段内各项也横排。 */
+  .paper-browse-skeleton-rail-part {
+    flex-direction: row;
+    gap: 8px;
+  }
+}

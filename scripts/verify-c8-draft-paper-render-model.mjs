@@ -288,7 +288,7 @@ assert('preview iframe does not add a second mat color', previewHtml.includes('h
 // warm cream) instead of the neutral `--surface-strong` — but it is STILL a
 // flat token fill, never a gradient (去渐变桌 constraint carried forward
 // from D8 unchanged).
-assert('preview outer desk keeps subtle paper mat', /\.draft-preview-desk\s*\{[^}]*background:\s*var\(--paper-desk-bg\)/.test(workbenchCss))
+assert('preview outer desk keeps subtle paper mat', /\.draft-preview-desk(?:,\s*\.draft-skeleton-desk)?\s*\{[^}]*background:\s*var\(--paper-desk-bg\)/.test(workbenchCss))
 // draft-desk-a: the iframe no longer pins a fixed 1188px CSS height — it
 // grows to its rendered content's real height (multi-page drafts now scroll
 // via the desk itself, not a fixed single-page window; see plan.md's

@@ -1336,7 +1336,7 @@ assert(
 )
 assert(
   '.paper-browse-content establishes position: relative for the shared overlay to anchor against (page-local, stays in paperBrowsePage.css)',
-  /\.paper-browse-content\s*\{[^}]*position:\s*relative/.test(pageCssSrc),
+  /\.paper-browse-content(?:,\s*\.paper-browse-skeleton-content)?\s*\{[^}]*position:\s*relative/.test(pageCssSrc),
   'missing the position: relative anchor on .paper-browse-content',
 )
 assert(
@@ -1387,8 +1387,8 @@ assert(
 
 assert(
   'paperBrowsePage.css: .paper-browse-shell is not centered via max-width + margin auto (rail glued to viewport edge)',
-  /\.paper-browse-shell\s*\{[^}]*\}/.exec(pageCssSrc) &&
-    !/\.paper-browse-shell\s*\{[^}]*max-width[^}]*\}/.test(pageCssSrc),
+  /\.paper-browse-shell(?:,\s*\.paper-browse-skeleton-shell)?\s*\{[^}]*\}/.exec(pageCssSrc) &&
+    !/\.paper-browse-shell(?:,\s*\.paper-browse-skeleton-shell)?\s*\{[^}]*max-width[^}]*\}/.test(pageCssSrc),
   'shell rule still constrains max-width — rail would stay centered, not edge-glued',
 )
 assert(
@@ -1751,10 +1751,10 @@ assert(
 
 assert(
   '47. paperBrowsePage.css: .paper-browse-zoom is the single sheet — one background + one box-shadow, page-margin padding driven by the shared --ps-page-margin tokens; .paper-browse-content is the desk',
-  /\.paper-browse-content \{[^}]*background:\s*var\(--eqb-color-bg/.test(pageCssSrc) &&
-    /\.paper-browse-zoom \{[^}]*background:\s*#fff/.test(pageCssSrc) &&
-    /\.paper-browse-zoom \{[^}]*box-shadow:/.test(pageCssSrc) &&
-    /\.paper-browse-zoom \{[^}]*padding:\s*var\(--ps-page-margin-top/.test(pageCssSrc),
+  /\.paper-browse-content(?:,\s*\.paper-browse-skeleton-content)? \{[^}]*background:\s*var\(--eqb-color-bg/.test(pageCssSrc) &&
+    /\.paper-browse-zoom(?:,\s*\.paper-browse-skeleton-sheet)? \{[^}]*background:\s*#fff/.test(pageCssSrc) &&
+    /\.paper-browse-zoom(?:,\s*\.paper-browse-skeleton-sheet)? \{[^}]*box-shadow:/.test(pageCssSrc) &&
+    /\.paper-browse-zoom(?:,\s*\.paper-browse-skeleton-sheet)? \{[^}]*padding:\s*var\(--ps-page-margin-top/.test(pageCssSrc),
   'missing the desk background on .paper-browse-content or single-sheet background/box-shadow/padding on .paper-browse-zoom',
 )
 assert(
@@ -1989,8 +1989,8 @@ assert(
     pageSrc.includes('renderQuietRail(dockedLecture)') &&
     !pageSrc.includes('renderPianoRail') &&
     !pageSrc.includes('paper-browse-piano-') &&
-    /\.paper-browse-rail\s*\{[^}]*width:\s*88px[^}]*margin-left:\s*-8px/.test(pageCssSrc) &&
-    /\.paper-browse-rail-panel\s*\{[^}]*gap:\s*16px[^}]*padding:\s*12px 6px[^}]*border-radius:\s*12px[^}]*var\(--desk-surface, #FAFCF8\)/.test(pageCssSrc) &&
+    /\.paper-browse-rail(?:,\s*\.paper-browse-skeleton-rail)?\s*\{[^}]*width:\s*88px[^}]*margin-left:\s*-8px/.test(pageCssSrc) &&
+    /\.paper-browse-rail-panel(?:,\s*\.paper-browse-skeleton-rail-panel)?\s*\{[^}]*gap:\s*16px[^}]*padding:\s*12px 6px[^}]*border-radius:\s*12px[^}]*var\(--desk-surface, #FAFCF8\)/.test(pageCssSrc) &&
     !/\.paper-browse-shell--lecture-open \.paper-browse-rail-part-head\s*\{[^}]*display:\s*none/.test(pageCssSrc),
   'the shared 88px directory surface, visible data-driven section heads, or existing rail reuse is missing',
 )
@@ -1999,14 +1999,14 @@ assert(
   /new ResizeObserver\(computeZoom\)/.test(pageSrc) &&
     /const raw = Math\.max\(1, Math\.min\(1\.35, available \/ PAPER_BASE_WIDTH\)\)/.test(pageSrc) &&
     /Math\.floor\(raw \/ 0\.05\) \* 0\.05/.test(pageSrc) &&
-    /\.paper-browse-zoom\s*\{[^}]*zoom:\s*var\(--paper-screen-zoom/.test(pageCssSrc) &&
+    /\.paper-browse-zoom(?:,\s*\.paper-browse-skeleton-sheet)?\s*\{[^}]*zoom:\s*var\(--paper-screen-zoom/.test(pageCssSrc) &&
     /@media print\s*\{[^}]*\.paper-browse-zoom\s*\{[^}]*zoom:\s*1/.test(pageCssSrc),
   'shared adaptive Screen zoom or Print guard is missing',
 )
 assert(
   'lecture toggle keeps the screen zoom and desktop content column independent of open state',
   !pageSrc.slice(pageSrc.indexOf('function computeZoom()'), pageSrc.indexOf('    computeZoom()')).includes('lectureOpen') &&
-    /@media screen and \(min-width: 1440px\)\s*\{\s*\.paper-browse-shell\s*\{\s*grid-template-columns: 72px minmax\(0, 1fr\) 440px/.test(pageCssSrc) &&
+    /@media screen and \(min-width: 1440px\)\s*\{\s*\.paper-browse-shell(?:,\s*\.paper-browse-skeleton-shell)?\s*\{\s*grid-template-columns: 72px minmax\(0, 1fr\) 440px/.test(pageCssSrc) &&
     /const DOCKED_LECTURE_MIN_WIDTH = 1440/.test(pageSrc) &&
     /transition: transform var\(--motion-slow\) var\(--ease-out\)/.test(pageCssSrc),
   'lecture still resizes the paper instead of translating the fixed-width column',

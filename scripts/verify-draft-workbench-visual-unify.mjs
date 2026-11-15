@@ -224,7 +224,7 @@ assert(
   'draft-toolbar className re-appeared',
 )
 {
-  const deskBlock = cssSrc.match(/\.draft-preview-desk\s*\{[^}]*\}/)?.[0] || ''
+  const deskBlock = cssSrc.match(/\.draft-preview-desk(?:,\s*\.draft-skeleton-desk)?\s*\{[^}]*\}/)?.[0] || ''
   assert(
     'the desk block carries no margin-top (LD3 — the 18px gray sliver stays dead)',
     deskBlock.length > 0 && !/margin-top/.test(deskBlock),

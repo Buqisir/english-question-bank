@@ -21,6 +21,7 @@ import { Menu } from '../../shared-ui/Menu.tsx'
 import { Notice, type NoticeKind } from '../../shared-ui/Notice.tsx'
 import { planFocusAfterRemoval, programmaticFocusTarget } from '../../shared-ui/focusAfterRemoval.ts'
 import { Row, RowList } from '../../shared-ui/Row.tsx'
+import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import './MySpacePage.css'
 
 export type MySpacePageProps = {
@@ -203,6 +204,10 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
   // 删完、重新取数以后再落一次（行重画了）。取消时仍回到打开它的键。
   const focusAfterDeleteRef = useRef<(() => HTMLElement | null) | null>(null)
   const sectionHeadingRef = useRef<HTMLHeadingElement>(null)
+  // 等待第四轮（2026-11-15）：文件第一次读回来时，月份行和文件行从上到下依次淡入。
+  // 只演第一次（once）：换文件夹、删完重读都不演。
+  const fileListRef = useRef<HTMLElement>(null)
+  useRowReveal(fileListRef, '.my-space-month-head, .my-space-file-row', loadState === 'loaded' && artifacts.length > 0, { once: true })
   // 删除失败时：那一行还在，焦点回到它的「更多操作」键（busy 解除、键能用以后）。
   const [focusAfterBusy, setFocusAfterBusy] = useState<HTMLElement | null>(null)
 
@@ -288,7 +293,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
             </aside>
           )}
 
-          <main className="my-space-main">
+          <main className="my-space-main" ref={fileListRef}>
             <div className="my-space-section-head">
               <div>
                 {/* 删完最后一份文件时焦点落在这里（programmaticFocusTarget 临时给 tabindex=-1，Tab 不停）。 */}

@@ -63,7 +63,8 @@ export const WAIT_SLOW_HINT_MS = 10_000
 
 /**
  * 等得太久：pending 连续超过 10 秒返回 true，不等了就回 false。
- * 2026-11-15 第二轮只接在草稿卷「正在生成 PDF」那行；别处是后续（design/components-2026-11-13/migrate-waiting-2/README.md）。
+ * 2026-11-15 第二轮接在草稿卷「正在生成 PDF」那行；第四轮接到整卷页下载 PDF、首页 AI 找题、划词翻译、句子分析
+ * （清点见 design/components-2026-11-13/migrate-waiting-4/README.md）。
  */
 export function useSlowWait(pending: boolean): boolean {
   const [slow, setSlow] = useState(false)

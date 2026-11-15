@@ -1341,7 +1341,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   ) : null
   const downloadControl = vocabularySet ? (
     <div className="vocabulary-download-menu" ref={downloadMenuRef}>
-      {/* 构件厂第 4 步第十页：原 .primary-button（石板墨填充、高 32）= solid md。仍是整键禁用，没改成 busy。 */}
+      {/* 构件厂第 4 步第十页：原 .primary-button（石板墨填充、高 32）= solid md。
+          等待第四轮（2026-11-15）：生成中原来换字「正在生成…」+ 整键禁用，改成 busy——字不换、宽度不变；
+          下载图标自己会演（DownloadFeedbackIcon working），所以 iconShowsBusy，键上不另出所以点。 */}
       <Button
         tone="solid"
         aria-expanded={downloadMenuOpen}
@@ -1349,10 +1351,11 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
         data-opens-popup=""
         aria-controls="vocabulary-download-options"
         onClick={() => setDownloadMenuOpen((open) => !open)}
-        disabled={pdfDownloadBusy}
+        busy={pdfDownloadBusy}
+        iconShowsBusy
         icon={<DownloadFeedbackIcon size={16} working={pdfDownloadBusy} />}
       >
-        {pdfDownloadBusy ? '正在生成…' : '下载'}
+        下载
       </Button>
       {downloadMenuOpen && (
         <FluidHoverList as="div" id="vocabulary-download-options" role="group" aria-label="选择下载内容" axis="y" itemSelector=".vocabulary-download-option">
@@ -1954,8 +1957,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
               <Button tone="strong" size="lg" onClick={() => void copyVocabularySet()} disabled={!unfamiliarEntries.length || listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'} icon={<CopyFeedbackIcon size={16} state={listClipboard.state} />}>
                 {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制'}
               </Button>
-              <Button tone="strong" size="lg" onClick={() => setDownloadMenuOpen(true)} disabled={!vocabularySet || pdfDownloadBusy} icon={<DownloadFeedbackIcon size={16} working={pdfDownloadBusy} />}>
-                {pdfDownloadBusy ? '生成中…' : '下载'}
+              {/* 等待第四轮（2026-11-15）：同上方下载键。没有生词组是 disabled，正在生成是 busy（字不换，图标自己演）。 */}
+              <Button tone="strong" size="lg" onClick={() => setDownloadMenuOpen(true)} disabled={!vocabularySet} busy={pdfDownloadBusy} iconShowsBusy icon={<DownloadFeedbackIcon size={16} working={pdfDownloadBusy} />}>
+                下载
               </Button>
             </div>
           </aside>

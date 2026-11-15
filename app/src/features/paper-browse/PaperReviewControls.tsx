@@ -121,11 +121,12 @@ export function PaperReviewControls({ paperId, paperName, revisionId, publicatio
         options={editions.map(edition => ({ value: edition, label: PAPER_PDF_PRODUCTS[edition] }))} />
       {/* 构件厂第 4 步第九页（2026-11-14，提案 · 单一来源）：这一排的链接和按钮换成 ButtonLink / Button。
           原来的全站 .ghost-button 是透明底墨字、高 36，对上 strong lg；这一行 44 的最小高度仍由 paperReviewControls.css 给。
-          「复制中…」沿用原来的整键禁用，没改成 busy：禁用条件里还有「线程信息没回来」，两件事分不开。 */}
+          等待第四轮（2026-11-15，Owner「把这个都换了」）：原来「复制中…」换字 + 整键禁用，改成 Button busy——字不换、宽度不变，
+          键上出所以点。两件事分开：线程信息没回来是 disabled（还不能按），正在复制是 busy（按过了，在做）。 */}
       {/* Owner 2026-11-14 决定 #13：会开新标签，加外链图标（对读屏隐藏），读屏名字补「在新标签页打开」；不恢复下划线。 */}
       {pdfUrl && <ButtonLink tone="strong" size="lg" icon={<ExternalLink size={16} aria-hidden="true" />} href={pdfUrl} target="_blank" rel="noopener noreferrer">查看 PDF<span className="visually-hidden">（在新标签页打开）</span></ButtonLink>}</>}
-      <Button tone="strong" size="lg" disabled={busy || (!detail && !error)} onClick={() => void discuss()}>
-        {busy ? '复制中…' : threadUrl ? '去 Amp 聊这份卷' : '复制试卷信息'}
+      <Button tone="strong" size="lg" disabled={!detail && !error} busy={busy} onClick={() => void discuss()}>
+        {threadUrl ? '去 Amp 聊这份卷' : '复制试卷信息'}
       </Button>
     </div>
     {revisionId && detail && !current && <p>你正在看旧版，复制的信息会保留这一版。</p>}

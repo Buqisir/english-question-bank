@@ -1,0 +1,2345 @@
+{
+ "missing": {
+  "before": [
+   "paper-copy: TimeoutError: locator.click: Timeout 30000ms exceeded.",
+   "dictation-open-390: TimeoutError: locator.waitFor: Timeout 20000ms exceeded.",
+   "dictation-open: TimeoutError: locator.waitFor: Timeout 20000ms exceeded."
+  ],
+  "after": [
+   "paper-copy: TimeoutError: locator.click: Timeout 30000ms exceeded."
+  ]
+ },
+ "pageErrors": {
+  "before": [],
+  "after": []
+ },
+ "steps": {
+  "paper-copy": {
+   "before": {
+    "notReady": [
+     {
+      "x": 24,
+      "y": 56,
+      "w": 102,
+      "h": 44,
+      "text": "复制试卷信息",
+      "ariaBusy": null,
+      "disabled": true
+     }
+    ],
+    "ready": [
+     {
+      "x": 24,
+      "y": 56,
+      "w": 102,
+      "h": 44,
+      "text": "复制试卷信息",
+      "ariaBusy": null,
+      "disabled": false
+     }
+    ],
+    "frozen": {
+     "count": 0,
+     "kinds": []
+    },
+    "busy": [
+     {
+      "x": 24,
+      "y": 56,
+      "w": 74.8,
+      "h": 44,
+      "text": "复制中…",
+      "ariaBusy": null,
+      "disabled": true
+     }
+    ],
+    "dots": []
+   },
+   "after": {
+    "notReady": [
+     {
+      "x": 24,
+      "y": 56,
+      "w": 102,
+      "h": 44,
+      "text": "复制试卷信息",
+      "ariaBusy": null,
+      "disabled": true
+     }
+    ],
+    "ready": [
+     {
+      "x": 24,
+      "y": 56,
+      "w": 102,
+      "h": 44,
+      "text": "复制试卷信息",
+      "ariaBusy": null,
+      "disabled": false
+     }
+    ],
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "wait-dots"
+     ]
+    },
+    "busy": [
+     {
+      "x": 24,
+      "y": 56,
+      "w": 102,
+      "h": 44,
+      "text": "复制试卷信息",
+      "ariaBusy": "true",
+      "disabled": false
+     }
+    ],
+    "dots": [
+     {
+      "kind": "wave",
+      "size": "md",
+      "px": 16
+     }
+    ]
+   }
+  },
+  "home-search-slow": {
+   "before": {
+    "early": "正在为「适合高二的环保主题阅读」找题",
+    "frozen": {
+     "count": 12,
+     "kinds": [
+      "eqb-skeleton-breathe",
+      "wait-dots"
+     ]
+    },
+    "slow": "正在为「适合高二的环保主题阅读」找题"
+   },
+   "after": {
+    "early": "正在为「适合高二的环保主题阅读」找题",
+    "frozen": {
+     "count": 12,
+     "kinds": [
+      "eqb-skeleton-breathe",
+      "wait-dots"
+     ]
+    },
+    "slow": "正在为「适合高二的环保主题阅读」找题，比平时慢，可以先去做别的"
+   }
+  },
+  "translate-slow": {
+   "before": {
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "wait-dots"
+     ]
+    },
+    "text": [
+     {
+      "x": 616,
+      "y": 495,
+      "w": 300,
+      "h": 20.4,
+      "text": "正在翻译",
+      "ariaBusy": null,
+      "disabled": null
+     }
+    ]
+   },
+   "after": {
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "wait-dots"
+     ]
+    },
+    "text": [
+     {
+      "x": 616,
+      "y": 495,
+      "w": 300,
+      "h": 20.4,
+      "text": "正在翻译，比平时慢，可以先去做别的",
+      "ariaBusy": null,
+      "disabled": null
+     }
+    ]
+   }
+  },
+  "analyze-slow": {
+   "before": {
+    "frozen": {
+     "count": 5,
+     "kinds": [
+      "eqb-skeleton-breathe",
+      "wait-dots"
+     ]
+    },
+    "text": [
+     {
+      "x": 955,
+      "y": 319,
+      "w": 50,
+      "h": 17,
+      "text": "分析中",
+      "ariaBusy": null,
+      "disabled": null
+     }
+    ],
+    "head": [
+     {
+      "x": 341,
+      "y": 301,
+      "w": 748,
+      "h": 42,
+      "text": "句子分析 分析中",
+      "ariaBusy": null,
+      "disabled": null
+     }
+    ]
+   },
+   "after": {
+    "frozen": {
+     "count": 5,
+     "kinds": [
+      "eqb-skeleton-breathe",
+      "wait-dots"
+     ]
+    },
+    "text": [
+     {
+      "x": 799,
+      "y": 319,
+      "w": 206,
+      "h": 17,
+      "text": "分析中，比平时慢，可以先去做别的",
+      "ariaBusy": null,
+      "disabled": null
+     }
+    ],
+    "head": [
+     {
+      "x": 341,
+      "y": 301,
+      "w": 748,
+      "h": 42,
+      "text": "句子分析 分析中，比平时慢，可以先去做别的",
+      "ariaBusy": null,
+      "disabled": null
+     }
+    ]
+   }
+  },
+  "similar-passages": {
+   "before": {
+    "reveal": {
+     "rows": 3,
+     "animations": 0,
+     "timing": [],
+     "opacity": [
+      "1.00",
+      "1.00",
+      "1.00"
+     ]
+    }
+   },
+   "after": {
+    "reveal": {
+     "rows": 3,
+     "animations": 3,
+     "timing": [
+      {
+       "duration": 160,
+       "delay": 0,
+       "easing": "ease"
+      },
+      {
+       "duration": 160,
+       "delay": 40,
+       "easing": "ease"
+      },
+      {
+       "duration": 160,
+       "delay": 80,
+       "easing": "ease"
+      }
+     ],
+     "opacity": [
+      "0.90",
+      "0.65",
+      "0.14"
+     ]
+    }
+   }
+  },
+  "paper-open": {
+   "before": {
+    "at150": {
+     "ms": 3789,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "正在打开整卷"
+     ]
+    },
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "wait-dots"
+     ]
+    },
+    "at1200": {
+     "ms": 4141,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "正在打开整卷"
+     ]
+    },
+    "waitBoxes": {
+     "sheet": [],
+     "rail": [],
+     "notice": [
+      {
+       "x": 670,
+       "y": 96,
+       "w": 100,
+       "h": 28,
+       "text": "正在打开整卷",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    },
+    "reveal": {
+     "rows": 19,
+     "animations": 0,
+     "timing": [],
+     "opacity": [
+      "1.00",
+      "1.00",
+      "1.00",
+      "1.00",
+      "1.00"
+     ]
+    },
+    "readyBoxes": {
+     "sheet": [
+      {
+       "x": 304,
+       "y": 184,
+       "w": 832,
+       "h": 8257.9,
+       "text": "英 语 注意事项： 答卷前，考生务必将自己的姓名、准考证号填",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "rail": [
+      {
+       "x": 16,
+       "y": 238,
+       "w": 88,
+       "h": 425,
+       "text": "阅读 A篇 B篇 C篇 D篇 七选五 语言运用 完形 语法 ",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "first": [
+      {
+       "x": 404,
+       "y": 271,
+       "w": 631.8,
+       "h": 294.4,
+       "text": "英 语 注意事项： 答卷前，考生务必将自己的姓名、准考证号填",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 404,
+       "y": 592,
+       "w": 631.8,
+       "h": 26.4,
+       "text": "第二部分 阅读（共两节，满分50分）",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 404,
+       "y": 627,
+       "w": 631.8,
+       "h": 26.4,
+       "text": "第一节 （共 15 小题；每小题 2.5 分，满分 37.5",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 404,
+       "y": 650,
+       "w": 631.8,
+       "h": 26.4,
+       "text": "阅读下列短文，从每题所给的A、B、C、D 四个选项中选出最佳",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 404,
+       "y": 694,
+       "w": 631.8,
+       "h": 1003.7,
+       "text": "加入草稿卷 A SoFi Stadium is the go",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 404,
+       "y": 1715,
+       "w": 631.8,
+       "h": 885.7,
+       "text": "加入草稿卷 B Not long ago, my fifth",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 404,
+       "y": 2619,
+       "w": 631.8,
+       "h": 1017.7,
+       "text": "加入草稿卷 C In line with longstand",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 404,
+       "y": 3654,
+       "w": 631.8,
+       "h": 964.9,
+       "text": "加入草稿卷 D A team of Cambridge ps",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 4240,
+     "skeletons": 56,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "paper-browse-skeleton-shell",
+       "role": "status",
+       "text": "正在打开整卷"
+      }
+     ],
+     "status": [
+      "正在打开整卷"
+     ]
+    },
+    "frozen": {
+     "count": 56,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 4562,
+     "skeletons": 56,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "paper-browse-skeleton-shell",
+       "role": "status",
+       "text": "正在打开整卷"
+      }
+     ],
+     "status": [
+      "正在打开整卷"
+     ]
+    },
+    "waitBoxes": {
+     "sheet": [
+      {
+       "x": 304,
+       "y": 72,
+       "w": 832,
+       "h": 1319.1,
+       "text": "",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "rail": [
+      {
+       "x": 16,
+       "y": 236,
+       "w": 88,
+       "h": 428,
+       "text": "",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "notice": []
+    },
+    "reveal": {
+     "rows": 19,
+     "animations": 19,
+     "timing": [
+      {
+       "duration": 160,
+       "delay": 0,
+       "easing": "ease"
+      },
+      {
+       "duration": 160,
+       "delay": 40,
+       "easing": "ease"
+      },
+      {
+       "duration": 160,
+       "delay": 80,
+       "easing": "ease"
+      },
+      {
+       "duration": 160,
+       "delay": 120,
+       "easing": "ease"
+      }
+     ],
+     "opacity": [
+      "0.90",
+      "0.65",
+      "0.14",
+      "0.00",
+      "0.00"
+     ]
+    },
+    "readyBoxes": {
+     "sheet": [
+      {
+       "x": 304,
+       "y": 184,
+       "w": 832,
+       "h": 8257.9,
+       "text": "英 语 注意事项： 答卷前，考生务必将自己的姓名、准考证号填",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "rail": [
+      {
+       "x": 16,
+       "y": 238,
+       "w": 88,
+       "h": 425,
+       "text": "阅读 A篇 B篇 C篇 D篇 七选五 语言运用 完形 语法 ",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "first": [
+      {
+       "x": 404,
+       "y": 271,
+       "w": 631.8,
+       "h": 294.4,
+       "text": "英 语 注意事项： 答卷前，考生务必将自己的姓名、准考证号填",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 404,
+       "y": 592,
+       "w": 631.8,
+       "h": 26.4,
+       "text": "第二部分 阅读（共两节，满分50分）",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 404,
+       "y": 627,
+       "w": 631.8,
+       "h": 26.4,
+       "text": "第一节 （共 15 小题；每小题 2.5 分，满分 37.5",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 404,
+       "y": 650,
+       "w": 631.8,
+       "h": 26.4,
+       "text": "阅读下列短文，从每题所给的A、B、C、D 四个选项中选出最佳",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 404,
+       "y": 694,
+       "w": 631.8,
+       "h": 1003.7,
+       "text": "加入草稿卷 A SoFi Stadium is the go",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 404,
+       "y": 1715,
+       "w": 631.8,
+       "h": 885.7,
+       "text": "加入草稿卷 B Not long ago, my fifth",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 404,
+       "y": 2619,
+       "w": 631.8,
+       "h": 1017.7,
+       "text": "加入草稿卷 C In line with longstand",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 404,
+       "y": 3654,
+       "w": 631.8,
+       "h": 964.9,
+       "text": "加入草稿卷 D A team of Cambridge ps",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   }
+  },
+  "practice-open": {
+   "before": {
+    "at150": {
+     "ms": 3736,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "正在准备卡片…"
+     ]
+    },
+    "frozen": {
+     "count": 0,
+     "kinds": []
+    },
+    "at1200": {
+     "ms": 4024,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "正在准备卡片…"
+     ]
+    },
+    "waitBoxes": {
+     "heading": [
+      {
+       "x": 184,
+       "y": 104,
+       "w": 1072,
+       "h": 560,
+       "text": "正在准备卡片…",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "board": [
+      {
+       "x": 184,
+       "y": 104,
+       "w": 1072,
+       "h": 560,
+       "text": "正在准备卡片…",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    },
+    "readyBoxes": {
+     "heading": [
+      {
+       "x": 184,
+       "y": 132,
+       "w": 1072,
+       "h": 93,
+       "text": "翻牌消消乐 拍图生词组 翻开英文和对应的中文核心义。点到英文",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "modes": [
+      {
+       "x": 184,
+       "y": 247,
+       "w": 388,
+       "h": 51.5,
+       "text": "翻牌消消乐 当前练习",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "board": [
+      {
+       "x": 184,
+       "y": 313,
+       "w": 1072,
+       "h": 762.8,
+       "text": "单词配对卡片 翻开 中文意思 真正的 翻开 英文 genui",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "card": [
+      {
+       "x": 209,
+       "y": 409,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 中文意思 真正的",
+       "ariaBusy": null,
+       "disabled": false
+      },
+      {
+       "x": 416,
+       "y": 409,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 英文 genuine",
+       "ariaBusy": null,
+       "disabled": false
+      },
+      {
+       "x": 623,
+       "y": 409,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 英文 decline",
+       "ariaBusy": null,
+       "disabled": false
+      },
+      {
+       "x": 829,
+       "y": 409,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 中文意思 证明合理",
+       "ariaBusy": null,
+       "disabled": false
+      },
+      {
+       "x": 1036,
+       "y": 409,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 中文意思 忽视",
+       "ariaBusy": null,
+       "disabled": false
+      },
+      {
+       "x": 209,
+       "y": 563,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 英文 emerge",
+       "ariaBusy": null,
+       "disabled": false
+      },
+      {
+       "x": 416,
+       "y": 563,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 中文意思 下降",
+       "ariaBusy": null,
+       "disabled": false
+      },
+      {
+       "x": 623,
+       "y": 563,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 英文 ignore",
+       "ariaBusy": null,
+       "disabled": false
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 3782,
+     "skeletons": 30,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "vocabulary-practice-loading",
+       "role": "status",
+       "text": "正在准备卡片"
+      }
+     ],
+     "status": [
+      "正在准备卡片"
+     ]
+    },
+    "frozen": {
+     "count": 30,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 4109,
+     "skeletons": 30,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "vocabulary-practice-loading",
+       "role": "status",
+       "text": "正在准备卡片"
+      }
+     ],
+     "status": [
+      "正在准备卡片"
+     ]
+    },
+    "waitBoxes": {
+     "heading": [
+      {
+       "x": 184,
+       "y": 132,
+       "w": 1072,
+       "h": 892.3,
+       "text": "正在准备卡片",
+       "ariaBusy": "true",
+       "disabled": null
+      }
+     ],
+     "board": [
+      {
+       "x": 209,
+       "y": 395,
+       "w": 1022,
+       "h": 604,
+       "text": "",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    },
+    "readyBoxes": {
+     "heading": [
+      {
+       "x": 184,
+       "y": 132,
+       "w": 1072,
+       "h": 93,
+       "text": "翻牌消消乐 拍图生词组 翻开英文和对应的中文核心义。点到英文",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "modes": [
+      {
+       "x": 184,
+       "y": 247,
+       "w": 388,
+       "h": 51.5,
+       "text": "翻牌消消乐 当前练习",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "board": [
+      {
+       "x": 184,
+       "y": 313,
+       "w": 1072,
+       "h": 762.8,
+       "text": "单词配对卡片 翻开 中文意思 下降 翻开 英文 captur",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "card": [
+      {
+       "x": 209,
+       "y": 409,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 中文意思 下降",
+       "ariaBusy": null,
+       "disabled": false
+      },
+      {
+       "x": 416,
+       "y": 409,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 英文 capture",
+       "ariaBusy": null,
+       "disabled": false
+      },
+      {
+       "x": 623,
+       "y": 409,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 英文 justify",
+       "ariaBusy": null,
+       "disabled": false
+      },
+      {
+       "x": 829,
+       "y": 409,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 中文意思 好处",
+       "ariaBusy": null,
+       "disabled": false
+      },
+      {
+       "x": 1036,
+       "y": 409,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 中文意思 忽视",
+       "ariaBusy": null,
+       "disabled": false
+      },
+      {
+       "x": 209,
+       "y": 563,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 中文意思 出现",
+       "ariaBusy": null,
+       "disabled": false
+      },
+      {
+       "x": 416,
+       "y": 563,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 英文 genuine",
+       "ariaBusy": null,
+       "disabled": false
+      },
+      {
+       "x": 623,
+       "y": 563,
+       "w": 194.8,
+       "h": 142,
+       "text": "翻开 中文意思 放弃",
+       "ariaBusy": null,
+       "disabled": false
+      }
+     ]
+    }
+   }
+  },
+  "myspace-rows": {
+   "before": {
+    "at150": {
+     "ms": 4372,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "正在读取个人空间"
+     ]
+    },
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "wait-dots"
+     ]
+    },
+    "at1200": {
+     "ms": 4674,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "正在读取个人空间"
+     ]
+    },
+    "waitBoxes": {
+     "main": [
+      {
+       "x": 130,
+       "y": 166,
+       "w": 1180,
+       "h": 96,
+       "text": "全部文件 正在读取个人空间",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    },
+    "reveal": {
+     "rows": 5,
+     "animations": 0,
+     "timing": [],
+     "opacity": [
+      "1.00",
+      "1.00",
+      "1.00",
+      "1.00",
+      "1.00"
+     ]
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 130,
+       "y": 260,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 1 2 页 11月14日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 330,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 2 3 页 11月13日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 400,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 3 4 页 11月12日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 470,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 4 5 页 11月11日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 540,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 5 6 页 11月10日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 3848,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "正在读取个人空间"
+     ]
+    },
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "wait-dots"
+     ]
+    },
+    "at1200": {
+     "ms": 4143,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "正在读取个人空间"
+     ]
+    },
+    "waitBoxes": {
+     "main": [
+      {
+       "x": 130,
+       "y": 166,
+       "w": 1180,
+       "h": 96,
+       "text": "全部文件 正在读取个人空间",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    },
+    "reveal": {
+     "rows": 5,
+     "animations": 5,
+     "timing": [
+      {
+       "duration": 160,
+       "delay": 40,
+       "easing": "ease"
+      },
+      {
+       "duration": 160,
+       "delay": 80,
+       "easing": "ease"
+      },
+      {
+       "duration": 160,
+       "delay": 120,
+       "easing": "ease"
+      },
+      {
+       "duration": 160,
+       "delay": 160,
+       "easing": "ease"
+      }
+     ],
+     "opacity": [
+      "0.65",
+      "0.14",
+      "0.00",
+      "0.00",
+      "0.00"
+     ]
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 130,
+       "y": 260,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 1 2 页 11月14日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 330,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 2 3 页 11月13日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 400,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 3 4 页 11月12日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 470,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 4 5 页 11月11日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 540,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 5 6 页 11月10日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   }
+  },
+  "notebook-rows": {
+   "before": {
+    "at150": {
+     "ms": 4322,
+     "skeletons": 0,
+     "busy": [],
+     "status": []
+    },
+    "frozen": {
+     "count": 0,
+     "kinds": []
+    },
+    "at1200": {
+     "ms": 4611,
+     "skeletons": 0,
+     "busy": [],
+     "status": []
+    },
+    "waitBoxes": {
+     "main": [
+      {
+       "x": 360,
+       "y": 48,
+       "w": 720,
+       "h": 96,
+       "text": "",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    },
+    "reveal": {
+     "rows": 4,
+     "animations": 0,
+     "timing": [],
+     "opacity": [
+      "1.00",
+      "1.00",
+      "1.00",
+      "1.00"
+     ]
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 400,
+       "y": 124,
+       "w": 680,
+       "h": 23,
+       "text": "2026年新课标Ⅰ卷 12 个生词",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 400,
+       "y": 147,
+       "w": 680,
+       "h": 23,
+       "text": "2025年新课标Ⅱ卷 7 个生词",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 400,
+       "y": 170,
+       "w": 680,
+       "h": 23,
+       "text": "2024年新课标Ⅰ卷 4 个生词",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 400,
+       "y": 193,
+       "w": 680,
+       "h": 23,
+       "text": "2023年新课标Ⅰ卷 9 个生词",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 3770,
+     "skeletons": 0,
+     "busy": [],
+     "status": []
+    },
+    "frozen": {
+     "count": 0,
+     "kinds": []
+    },
+    "at1200": {
+     "ms": 4060,
+     "skeletons": 0,
+     "busy": [],
+     "status": []
+    },
+    "waitBoxes": {
+     "main": [
+      {
+       "x": 360,
+       "y": 48,
+       "w": 720,
+       "h": 96,
+       "text": "",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    },
+    "reveal": {
+     "rows": 4,
+     "animations": 4,
+     "timing": [
+      {
+       "duration": 160,
+       "delay": 0,
+       "easing": "ease"
+      },
+      {
+       "duration": 160,
+       "delay": 40,
+       "easing": "ease"
+      },
+      {
+       "duration": 160,
+       "delay": 80,
+       "easing": "ease"
+      },
+      {
+       "duration": 160,
+       "delay": 120,
+       "easing": "ease"
+      }
+     ],
+     "opacity": [
+      "0.90",
+      "0.65",
+      "0.14",
+      "0.00"
+     ]
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 400,
+       "y": 124,
+       "w": 680,
+       "h": 23,
+       "text": "2026年新课标Ⅰ卷 12 个生词",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 400,
+       "y": 147,
+       "w": 680,
+       "h": 23,
+       "text": "2025年新课标Ⅱ卷 7 个生词",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 400,
+       "y": 170,
+       "w": 680,
+       "h": 23,
+       "text": "2024年新课标Ⅰ卷 4 个生词",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 400,
+       "y": 193,
+       "w": 680,
+       "h": 23,
+       "text": "2023年新课标Ⅰ卷 9 个生词",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   }
+  },
+  "tokens-rows": {
+   "before": {
+    "at150": {
+     "ms": 4035,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "加载中"
+     ]
+    },
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "wait-dots"
+     ]
+    },
+    "at1200": {
+     "ms": 4355,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "加载中"
+     ]
+    },
+    "waitBoxes": {
+     "section": [
+      {
+       "x": 292,
+       "y": 224,
+       "w": 856,
+       "h": 161.5,
+       "text": "Agent 口令 口令可只读访问已发布卷，包含来源答案。 名",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    },
+    "reveal": {
+     "rows": 4,
+     "animations": 0,
+     "timing": [],
+     "opacity": [
+      "1.00",
+      "1.00",
+      "1.00",
+      "1.00"
+     ]
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 292,
+       "y": 360,
+       "w": 856,
+       "h": 64,
+       "text": "组卷 Agent有效 创建于 2026/11/1 · 尚未使",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 292,
+       "y": 424,
+       "w": 856,
+       "h": 64,
+       "text": "导入 Agent有效 创建于 2026/11/2 · 最近使",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 292,
+       "y": 488,
+       "w": 856,
+       "h": 64,
+       "text": "审阅 Agent有效 创建于 2026/11/3 · 尚未使",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 292,
+       "y": 552,
+       "w": 856,
+       "h": 64,
+       "text": "旧口令已作废 创建于 2026/11/4 · 尚未使用",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 4051,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "加载中"
+     ]
+    },
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "wait-dots"
+     ]
+    },
+    "at1200": {
+     "ms": 4345,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "加载中"
+     ]
+    },
+    "waitBoxes": {
+     "section": [
+      {
+       "x": 292,
+       "y": 224,
+       "w": 856,
+       "h": 161.5,
+       "text": "Agent 口令 口令可只读访问已发布卷，包含来源答案。 名",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    },
+    "reveal": {
+     "rows": 4,
+     "animations": 4,
+     "timing": [
+      {
+       "duration": 160,
+       "delay": 0,
+       "easing": "ease"
+      },
+      {
+       "duration": 160,
+       "delay": 40,
+       "easing": "ease"
+      },
+      {
+       "duration": 160,
+       "delay": 80,
+       "easing": "ease"
+      },
+      {
+       "duration": 160,
+       "delay": 120,
+       "easing": "ease"
+      }
+     ],
+     "opacity": [
+      "0.90",
+      "0.65",
+      "0.14",
+      "0.00"
+     ]
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 292,
+       "y": 360,
+       "w": 856,
+       "h": 64,
+       "text": "组卷 Agent有效 创建于 2026/11/1 · 尚未使",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 292,
+       "y": 424,
+       "w": 856,
+       "h": 64,
+       "text": "导入 Agent有效 创建于 2026/11/2 · 最近使",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 292,
+       "y": 488,
+       "w": 856,
+       "h": 64,
+       "text": "审阅 Agent有效 创建于 2026/11/3 · 尚未使",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 292,
+       "y": 552,
+       "w": 856,
+       "h": 64,
+       "text": "旧口令已作废 创建于 2026/11/4 · 尚未使用",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   }
+  },
+  "browse-feed": {
+   "before": {
+    "at150": {
+     "ms": 4086,
+     "skeletons": 15,
+     "busy": [
+      {
+       "tag": "INPUT",
+       "cls": "eqb-search-input concierge-intent-input",
+       "role": null,
+       "text": ""
+      },
+      {
+       "tag": "BUTTON",
+       "cls": "eqb-search-submit concierge-intent-submit",
+       "role": null,
+       "text": ""
+      }
+     ],
+     "status": [
+      "正在连接本地题库，连上就能搜"
+     ]
+    },
+    "frozen": {
+     "count": 18,
+     "kinds": [
+      "eqb-skeleton-breathe",
+      "wait-dots"
+     ]
+    },
+    "at1200": {
+     "ms": 4394,
+     "skeletons": 15,
+     "busy": [
+      {
+       "tag": "INPUT",
+       "cls": "eqb-search-input concierge-intent-input",
+       "role": null,
+       "text": ""
+      },
+      {
+       "tag": "BUTTON",
+       "cls": "eqb-search-submit concierge-intent-submit",
+       "role": null,
+       "text": ""
+      }
+     ],
+     "status": [
+      "正在连接本地题库，连上就能搜"
+     ]
+    },
+    "waitBoxes": {
+     "surface": [
+      {
+       "x": 292,
+       "y": 164,
+       "w": 856,
+       "h": 366,
+       "text": "",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    },
+    "reveal": {
+     "rows": 1,
+     "animations": 0,
+     "timing": [],
+     "opacity": [
+      "1.00"
+     ]
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 292,
+       "y": 186,
+       "w": 856,
+       "h": 48,
+       "text": "E2E 新课标Ⅰ卷 4 篇章 整卷未上线",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 3789,
+     "skeletons": 15,
+     "busy": [
+      {
+       "tag": "INPUT",
+       "cls": "eqb-search-input concierge-intent-input",
+       "role": null,
+       "text": ""
+      },
+      {
+       "tag": "BUTTON",
+       "cls": "eqb-search-submit concierge-intent-submit",
+       "role": null,
+       "text": ""
+      }
+     ],
+     "status": [
+      "正在连接本地题库，连上就能搜"
+     ]
+    },
+    "frozen": {
+     "count": 18,
+     "kinds": [
+      "eqb-skeleton-breathe",
+      "wait-dots"
+     ]
+    },
+    "at1200": {
+     "ms": 4096,
+     "skeletons": 15,
+     "busy": [
+      {
+       "tag": "INPUT",
+       "cls": "eqb-search-input concierge-intent-input",
+       "role": null,
+       "text": ""
+      },
+      {
+       "tag": "BUTTON",
+       "cls": "eqb-search-submit concierge-intent-submit",
+       "role": null,
+       "text": ""
+      }
+     ],
+     "status": [
+      "正在连接本地题库，连上就能搜"
+     ]
+    },
+    "waitBoxes": {
+     "surface": [
+      {
+       "x": 292,
+       "y": 164,
+       "w": 856,
+       "h": 366,
+       "text": "",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    },
+    "reveal": {
+     "rows": 1,
+     "animations": 1,
+     "timing": [
+      {
+       "duration": 160,
+       "delay": 40,
+       "easing": "ease"
+      }
+     ],
+     "opacity": [
+      "0.65"
+     ]
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 292,
+       "y": 186,
+       "w": 856,
+       "h": 48,
+       "text": "E2E 新课标Ⅰ卷 4 篇章 整卷未上线",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   }
+  },
+  "draft-open": {
+   "before": {
+    "items": [
+     {
+      "id": "draft-item-772fd736-872d-40e8-83d4-ffc579d534ce",
+      "groupId": "group-2026-i-reading-a"
+     },
+     {
+      "id": "draft-item-073bc06d-219c-4b66-bdfd-20780b34cb5b",
+      "groupId": "group-2026-i-reading-b"
+     },
+     {
+      "id": "draft-item-2aa997fb-307b-480f-af6e-86ff2d31ba48",
+      "groupId": "group-2026-i-reading-c"
+     }
+    ],
+    "at150": {
+     "ms": 150,
+     "skeletons": 0,
+     "busy": [],
+     "status": []
+    },
+    "frozen": {
+     "count": 0,
+     "kinds": []
+    },
+    "at1200": {
+     "ms": 1412,
+     "skeletons": 0,
+     "busy": [],
+     "status": []
+    },
+    "waitBoxes": {
+     "rail": [],
+     "sheet": [],
+     "notice": []
+    },
+    "readyBoxes": {
+     "rail": [
+      {
+       "x": 122,
+       "y": 72,
+       "w": 164,
+       "h": 195,
+       "text": "共 1 页 · 双面 1 张 A篇原卷 A 篇 B篇原卷 B",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "col": [
+      {
+       "x": 310,
+       "y": 72,
+       "w": 820,
+       "h": 1200,
+       "text": "正在生成分页预览",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "sheet": [
+      {
+       "x": 310,
+       "y": 72,
+       "w": 820,
+       "h": 1200,
+       "text": "正在生成分页预览",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 310,
+       "y": 72,
+       "w": 820,
+       "h": 420,
+       "text": "正在生成分页预览",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   },
+   "after": {
+    "items": [
+     {
+      "id": "draft-item-f1dd54f7-9d75-4f43-8eb8-58201a49329f",
+      "groupId": "group-2026-i-reading-a"
+     },
+     {
+      "id": "draft-item-b8f01a22-4cbb-4576-92f7-f0af090cb37d",
+      "groupId": "group-2026-i-reading-b"
+     },
+     {
+      "id": "draft-item-ce09665c-046c-422e-a545-8a963f36fb13",
+      "groupId": "group-2026-i-reading-c"
+     }
+    ],
+    "at150": {
+     "ms": 151,
+     "skeletons": 0,
+     "busy": [],
+     "status": []
+    },
+    "frozen": {
+     "count": 0,
+     "kinds": []
+    },
+    "at1200": {
+     "ms": 1433,
+     "skeletons": 0,
+     "busy": [],
+     "status": []
+    },
+    "waitBoxes": {
+     "rail": [],
+     "sheet": [],
+     "notice": []
+    },
+    "readyBoxes": {
+     "rail": [
+      {
+       "x": 122,
+       "y": 72,
+       "w": 164,
+       "h": 195,
+       "text": "共 1 页 · 双面 1 张 A篇原卷 A 篇 B篇原卷 B",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "col": [
+      {
+       "x": 310,
+       "y": 72,
+       "w": 820,
+       "h": 1224,
+       "text": "正在生成分页预览",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "sheet": [
+      {
+       "x": 310,
+       "y": 96,
+       "w": 820,
+       "h": 1200,
+       "text": "正在生成分页预览",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   }
+  },
+  "paper-open-reduced": {
+   "before": {},
+   "after": {}
+  },
+  "practice-open-reduced": {
+   "before": {},
+   "after": {}
+  },
+  "myspace-rows-reduced": {
+   "before": {
+    "at150": {
+     "ms": 4537,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "正在读取个人空间"
+     ]
+    },
+    "frozen": {
+     "count": 0,
+     "kinds": []
+    },
+    "at1200": {
+     "ms": 4830,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "正在读取个人空间"
+     ]
+    },
+    "waitBoxes": {
+     "main": [
+      {
+       "x": 130,
+       "y": 166,
+       "w": 1180,
+       "h": 96,
+       "text": "全部文件 正在读取个人空间",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    },
+    "reveal": {
+     "rows": 5,
+     "animations": 0,
+     "timing": [],
+     "opacity": [
+      "1.00",
+      "1.00",
+      "1.00",
+      "1.00",
+      "1.00"
+     ]
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 130,
+       "y": 260,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 1 2 页 11月14日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 330,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 2 3 页 11月13日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 400,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 3 4 页 11月12日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 470,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 4 5 页 11月11日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 540,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 5 6 页 11月10日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 4530,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "正在读取个人空间"
+     ]
+    },
+    "frozen": {
+     "count": 0,
+     "kinds": []
+    },
+    "at1200": {
+     "ms": 4828,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "正在读取个人空间"
+     ]
+    },
+    "waitBoxes": {
+     "main": [
+      {
+       "x": 130,
+       "y": 166,
+       "w": 1180,
+       "h": 96,
+       "text": "全部文件 正在读取个人空间",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    },
+    "reveal": {
+     "rows": 5,
+     "animations": 0,
+     "timing": [],
+     "opacity": [
+      "1.00",
+      "1.00",
+      "1.00",
+      "1.00",
+      "1.00"
+     ]
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 130,
+       "y": 260,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 1 2 页 11月14日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 330,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 2 3 页 11月13日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 400,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 3 4 页 11月12日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 470,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 4 5 页 11月11日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      },
+      {
+       "x": 130,
+       "y": 540,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 5 6 页 11月10日 下载 打开原草稿",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   }
+  },
+  "notebook-rows-reduced": {
+   "before": {},
+   "after": {}
+  },
+  "tokens-rows-reduced": {
+   "before": {},
+   "after": {}
+  },
+  "browse-feed-reduced": {
+   "before": {},
+   "after": {}
+  },
+  "draft-open-reduced": {
+   "before": {},
+   "after": {}
+  },
+  "dictation-open-390": {
+   "before": {
+    "at150": {
+     "ms": 150,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "EQ正在准备听写正在载入本次练习，请稍候。"
+     ]
+    },
+    "frozen": {
+     "count": 0,
+     "kinds": []
+    },
+    "at1200": {
+     "ms": 1417,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "正在准备听写题目顺序和录音正在载入。"
+     ]
+    },
+    "waitBoxes": {
+     "stage": [],
+     "controls": [],
+     "message": [
+      {
+       "x": 0,
+       "y": 0,
+       "w": 390,
+       "h": 844,
+       "text": "正在准备听写 题目顺序和录音正在载入。",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 152,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "EQ正在准备听写正在载入本次练习，请稍候。"
+     ]
+    },
+    "frozen": {
+     "count": 20,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1424,
+     "skeletons": 20,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "vocabulary-dictation-shell vocabulary-dictation-sk",
+       "role": "status",
+       "text": "正在准备听写"
+      }
+     ],
+     "status": [
+      "正在准备听写"
+     ]
+    },
+    "waitBoxes": {
+     "stage": [
+      {
+       "x": 14,
+       "y": 70,
+       "w": 362,
+       "h": 360,
+       "text": "",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "controls": [
+      {
+       "x": 14,
+       "y": 446,
+       "w": 362,
+       "h": 358,
+       "text": "",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "message": []
+    },
+    "readyBoxes": {
+     "stage": [
+      {
+       "x": 14,
+       "y": 70,
+       "w": 362,
+       "h": 360,
+       "text": "拍图听写 1 / 10 第 1 题 准备开始 请在纸上写下英",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "controls": [
+      {
+       "x": 14,
+       "y": 446,
+       "w": 362,
+       "h": 368,
+       "text": "重播本题 每词播放 1遍 2遍 3遍 词间书写时间 3秒 5",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   }
+  },
+  "dictation-open": {
+   "before": {
+    "at150": {
+     "ms": 151,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "EQ正在准备听写正在载入本次练习，请稍候。"
+     ]
+    },
+    "frozen": {
+     "count": 0,
+     "kinds": []
+    },
+    "at1200": {
+     "ms": 1413,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "正在准备听写题目顺序和录音正在载入。"
+     ]
+    },
+    "waitBoxes": {
+     "stage": [],
+     "controls": [],
+     "message": [
+      {
+       "x": 0,
+       "y": 0,
+       "w": 1440,
+       "h": 900,
+       "text": "正在准备听写 题目顺序和录音正在载入。",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 150,
+     "skeletons": 0,
+     "busy": [],
+     "status": [
+      "EQ正在准备听写正在载入本次练习，请稍候。"
+     ]
+    },
+    "frozen": {
+     "count": 20,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1419,
+     "skeletons": 20,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "vocabulary-dictation-shell vocabulary-dictation-sk",
+       "role": "status",
+       "text": "正在准备听写"
+      }
+     ],
+     "status": [
+      "正在准备听写"
+     ]
+    },
+    "waitBoxes": {
+     "stage": [
+      {
+       "x": 340,
+       "y": 84,
+       "w": 760,
+       "h": 410,
+       "text": "",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "controls": [
+      {
+       "x": 340,
+       "y": 510,
+       "w": 760,
+       "h": 235,
+       "text": "",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "message": []
+    },
+    "readyBoxes": {
+     "stage": [
+      {
+       "x": 340,
+       "y": 84,
+       "w": 760,
+       "h": 410,
+       "text": "拍图听写 1 / 10 第 1 题 准备开始 请在纸上写下英",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ],
+     "controls": [
+      {
+       "x": 340,
+       "y": 510,
+       "w": 760,
+       "h": 258,
+       "text": "重播本题 每词播放 1遍 2遍 3遍 词间书写时间 3秒 5",
+       "ariaBusy": null,
+       "disabled": null
+      }
+     ]
+    }
+   }
+  }
+ }
+}

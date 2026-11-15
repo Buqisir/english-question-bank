@@ -28,12 +28,13 @@
  * asset analyzed, DB not yet synced) renders thin — disabled add button +
  * title tooltip, still shown (pool honesty, not hidden).
  */
-import { type ReactNode } from 'react'
+import { useRef, type ReactNode } from 'react'
 import { ChevronUp } from '../../icons'
 import { Button } from '../../shared-ui/Button.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { DraftAddButton } from '../../shared-ui/DraftAddButton.tsx'
 import { Chip } from '../../shared-ui/Chip.tsx'
+import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import type { QuestionGroupCard, SimilarPassagesResponse } from '../../domain/questionBank'
 
 export type SimilarPassagesRequestState =
@@ -63,9 +64,13 @@ export type SimilarPassagesPanelProps = {
 
 export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNode {
   const { recipeSummary, request, questionGroupById, onCollapse, onRetry } = props
+  // 等待第四轮（2026-11-15）：结果回来时，候选卡从上到下依次淡入（只动透明度）。每次请求回来演一次；
+  // 加入草稿卷这类不改 request.status 的变化不演。
+  const panelRef = useRef<HTMLDivElement>(null)
+  useRowReveal(panelRef, '.similar-rcard', request.status === 'ready')
 
   return (
-    <div className="similar-passages-panel">
+    <div className="similar-passages-panel" ref={panelRef}>
       <div className="similar-passages-head">
         <h4 className="paper-browse-lecture-title">相似篇章</h4>
         <span className="similar-passages-sub">{recipeSummary}</span>

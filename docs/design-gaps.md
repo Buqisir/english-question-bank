@@ -137,3 +137,8 @@ token 的扩展用法。
 
 - **想要的值**：Owner 2026-11-15 定 Button 加一档 52px 胶囊大号，照登录键原来手写的样子（原 `auth/LoginPage.css` `.login-submit`）。一是高 52（和登录页输入框同高），全站控件高度没有 token。二是字号 15，不在字号阶梯上（control 13 / sm 14 / md 16）。三是填充时那层影子 `0 8px 24px rgb(27 43 51 / 0.18)`，比 `--elev-3` 沉得多、浓得多，DESIGN §4 四档高度里没有。若收编，候选名 `--eqb-control-height-pill`（52）、`--eqb-font-size-cta`（15，或改用 sm 14 / md 16，会改登录键的样子）、`--elev-cta`（或改用 `--elev-3`，会改样子）。
 - **临时方案**：三个都写成 `[data-size='pill']` 规则里的具名变量（`--eqb-button-pill-height`、`--eqb-button-pill-font-size`、`--eqb-button-pill-shadow`），注释写出处是原 `.login-submit`。记录在 `design/components-2026-11-13/migrate-waiting-3/README.md`。
+
+## 2026-11-15 纸面阴影和整页灰块的几处尺寸（`app/src/features/draft-paper/DraftPaperWorkbench.css` `.draft-skeleton-sheet`；`app/src/features/paper-browse/paperBrowsePage.css` `.paper-browse-skeleton-*`；`vocabularyPracticePage.css`、`vocabularyDictationPage.css` 的灰块几条）
+
+- **想要的值**：一是纸面阴影（DESIGN.md Shadow Vocabulary · Sheet 纸面）`0 1px 0 rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08)`：整卷页 `.paper-browse-zoom`、草稿卷预览 `.preview-page` 各写了一份字面量，草稿卷打开时的 A4 灰块是第三份。二是 A4 纸的宽高和页边（794 × 1123，上 79、左右 91）：PaperSurface 有 JS token（`paperSurfaceTokens`），CSS 里没有，灰块只能照抄。三是整页灰块里放在「一行字」位置的灰块宽高（目录 24 × 10、28 × 12，卷头 72 × 28 等），照真页面字的大小目测。若收编，候选名 `--elev-sheet`、`--ps-page-width` / `--ps-page-height`（挂到 :root），三建议不收（是各页的放法）。
+- **临时方案**：一、二照原值写字面量，注释写明照抄哪一条；整卷页灰块和真卷面同一条规则（选择器并列），不另写一份。三写在 TSX 的 Skeleton 宽高上。记录在 `design/components-2026-11-13/migrate-waiting-4/README.md`。

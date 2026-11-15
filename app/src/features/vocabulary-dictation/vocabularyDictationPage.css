@@ -501,6 +501,42 @@
   outline-offset: 2px;
 }
 
+/* ─── 听写页的灰块（等待第四轮，2026-11-15，DictationOpeningSkeleton） ───
+ * 容器用真页面同一套 class，这里只管灰块怎么坐进去。 */
+
+/* 覆盖：放在字的位置（h1、p、strong）的灰块，(0,2,1) 盖过 waiting.css .eqb-skeleton (0,1,0) 的 display: block——
+ * 改成行内块，外面那个元素的高度仍由它的字号、行高给，和有字时一样高。 */
+.vocabulary-dictation-skeleton :is(h1, p, strong) > .eqb-skeleton {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 题号那一块：真题号是基线对齐的大字，灰块坐在同一个位置。
+ * 覆盖：(0,2,0) 盖过 .vocabulary-dictation-question (0,1,0) 的 align-items: baseline（灰块没有基线，按顶对齐）。 */
+.vocabulary-dictation-skeleton .vocabulary-dictation-question {
+  align-items: flex-start;
+}
+
+/* 设置里的一组（真页面是 fieldset + legend）：说明一行 12px、下空 8，下面一排 36 高的键平分一行，间距 6。 */
+.vocabulary-dictation-skeleton-legend {
+  margin: 0 0 8px;
+  font-size: 12px;
+}
+
+.vocabulary-dictation-skeleton-fieldset > div {
+  display: flex;
+  gap: 6px;
+}
+
+.vocabulary-dictation-skeleton-fieldset > div > .eqb-skeleton {
+  flex: 1;
+}
+
+/* 音量那一行：真的是一个滑块（高 20，量出来的）。灰块只画 4 高的一条，行高照滑块留够 20。 */
+.vocabulary-dictation-skeleton .vocabulary-dictation-volume {
+  min-height: 20px;
+}
+
 @media (max-width: 620px) {
   .vocabulary-dictation-header {
     padding: 0 16px;

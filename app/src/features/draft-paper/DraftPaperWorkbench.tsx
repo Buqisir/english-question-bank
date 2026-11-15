@@ -10,7 +10,9 @@ import { OptionSelectField, SegmentedField } from '../../shared-ui/OptionField.t
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { Toast } from '../../shared-ui/Toast.tsx'
 import { InlineWaitDots } from '../../shared-ui/WaitDots.tsx'
-import { useSlowWait } from '../../shared-ui/useDelayedBusy.ts'
+import { useDelayedBusy, useSlowWait } from '../../shared-ui/useDelayedBusy.ts'
+import { PaperGroupSkeleton, Skeleton } from '../../shared-ui/Skeleton.tsx'
+import { Surface } from '../../shared-ui/Surface.tsx'
 import { planFocusAfterRemoval, programmaticFocusTarget } from '../../shared-ui/focusAfterRemoval.ts'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, GroupType, MySpaceFolder, QuestionGroupCard } from '../../domain/questionBank'
 import {
@@ -167,6 +169,23 @@ type PendingDraftFocus = {
   waitForGroupId?: string
   /** 要落的键都在左栏里（左栏缺题项的「移除」）：不随卷面重排卸掉，不用等卷面排好，删完马上落。 */
   railOnly?: boolean
+}
+
+// 打开草稿卷的灰块：目录板里几行（宽度错开，像「1 阅读 A」这类短行），纸上一份卷头加两组卷面灰块。
+const DRAFT_SKELETON_RAIL_WIDTHS = [104, 88, 112]
+
+/** 一张 A4 的灰块（等待第四轮）：位置、大小照预览里的 .preview-page（794 宽、离纸栏顶 24）。对读屏隐藏。 */
+function DraftSheetSkeleton() {
+  return (
+    <div className="draft-skeleton-sheet" aria-hidden="true">
+      <div className="draft-skeleton-sheet-head">
+        <Skeleton width={180} height={20} />
+        <Skeleton width={240} height={12} />
+      </div>
+      <PaperGroupSkeleton />
+      <PaperGroupSkeleton />
+    </div>
+  )
 }
 
 export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode {
@@ -665,6 +684,12 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // 卷面落后于左栏：分页还没按当前的题组表排出来，或者删、加的保存还没回来。
   const previewStale = renderedPaginationKey !== paginationKey || layoutSavesPending > 0
   const previewFailed = !previewStale && paginationStatus === 'error'
+  // 等待第四轮（2026-11-15）：打开草稿卷、第一次排出卷面之前，纸的位置画灰块。两段（读草稿卷、分页）接成一段等，
+  // 走同一个门槛：读完草稿卷换上真目录时，纸上的灰块不断、不重新数 300ms。
+  const sheetPending = loadStatus === 'loading'
+    || (loadStatus === 'loaded' && draftPaper !== null && draftPaper.items.length > 0 && !previewHtml
+      && !(renderedPaginationKey === paginationKey && paginationStatus === 'error' && paginationError))
+  const sheetPhase = useDelayedBusy(sheetPending)
 
   async function withLayoutSave<T>(run: () => Promise<T>): Promise<T> {
     setLayoutSavesPending((count) => count + 1)
@@ -1617,10 +1642,21 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     return (
       <>
         <AppTopbar {...props.shellNav} pageTitle="草稿卷" onBack={onBackToWorkbench} />
-        <main className="draft-workbench-shell">
-          <div className="draft-notice-slot is-page">
-            <Notice kind="waiting" className="draft-loading">正在打开草稿卷</Notice>
-          </div>
+        {/* 等待第四轮（2026-11-15）：原来是桌面正中一行「正在打开草稿卷」，换成照真页面位置画的灰块
+            （左边目录板、中间一张 A4）。300ms 内只有读屏那一句；那一句仍在页面上（ux 走查脚本按字找）。 */}
+        <main className="draft-workbench-shell" role="status" aria-busy="true">
+          <span className="visually-hidden">正在打开草稿卷</span>
+          {sheetPhase === 'waiting' && (
+            <section className="draft-skeleton-desk" aria-hidden="true">
+              <Surface className="draft-skeleton-rail">
+                <span className="draft-skeleton-rail-meta"><Skeleton width={96} height={10} /></span>
+                {DRAFT_SKELETON_RAIL_WIDTHS.map((width, index) => (
+                  <span key={index} className="draft-skeleton-rail-item"><Skeleton width={width} height={12} /></span>
+                ))}
+              </Surface>
+              <div className="draft-skeleton-col"><DraftSheetSkeleton /></div>
+            </section>
+          )}
         </main>
       </>
     )
@@ -1971,20 +2007,24 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                     ) : null}
                   </div>
                 </>
-              ) : (
+              ) : renderedPaginationKey === paginationKey && paginationStatus === 'error' && paginationError ? (
                 <div className="draft-a4-empty">
-                  {renderedPaginationKey === paginationKey && paginationStatus === 'error' && paginationError ? (
-                    <Notice
-                      kind="error"
-                      detail={paginationError.detail}
-                      // 纯答案版不可用时再排一次结果一样，不给「重试」。
-                      action={edition === 'answerOnly' ? undefined : { label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: () => setPaginationRetry((count) => count + 1) }}
-                    >
-                      {paginationError.lead}
-                    </Notice>
-                  ) : (
-                    <Notice kind="waiting">正在生成分页预览</Notice>
-                  )}
+                  <Notice
+                    kind="error"
+                    detail={paginationError.detail}
+                    // 纯答案版不可用时再排一次结果一样，不给「重试」。
+                    action={edition === 'answerOnly' ? undefined : { label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: () => setPaginationRetry((count) => count + 1) }}
+                  >
+                    {paginationError.lead}
+                  </Notice>
+                </div>
+              ) : (
+                // 等待第四轮（2026-11-15）：原来是纸的位置正中一行「正在生成分页预览」（.draft-a4-empty 里的 Notice），
+                // 换成一张 A4 的灰块，和打开时的灰块同一段门槛（sheetPhase），读完草稿卷不重新等 300ms。
+                // 那一句仍给读屏（ux 走查脚本按字找）。
+                <div className="draft-a4-skeleton" role="status" aria-busy="true">
+                  <span className="visually-hidden">正在生成分页预览</span>
+                  {sheetPhase === 'waiting' && <DraftSheetSkeleton />}
                 </div>
               )}
             </div>

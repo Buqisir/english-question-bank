@@ -10,6 +10,7 @@ import { iconMotionInput } from '../../../../icons/motionInput'
 import { useClipboardCopy } from '../../../../hooks/useClipboardCopy'
 import { InlineWaitDots } from '../../../../shared-ui/WaitDots.tsx'
 import { Skeleton, SkeletonGate } from '../../../../shared-ui/Skeleton.tsx'
+import { useSlowWait } from '../../../../shared-ui/useDelayedBusy.ts'
 import { AnnotatedSentence } from './AnnotatedSentence'
 import { TranslationBlock } from './TranslationBlock'
 import { GrammarLegend } from './GrammarLegend'
@@ -53,6 +54,8 @@ export function SentenceAnalysisCard({
   const interaction = useSentenceInteraction(ready)
   const { scopePath, scopeId, focus, mainActive, logicalSubjectActive, selectedRole, open, restored, pending, keyboard, locate, send } = interaction
   const clipboard = useClipboardCopy()
+  // 等待第四轮（2026-11-15）：句子分析等过 10 秒，「分析中」那一行多说一句。
+  const analysisSlow = useSlowWait(status === 'loading')
   const [detailHost, setDetailHost] = useState<HTMLDivElement | null>(null)
   const cardRef = useRef<HTMLDivElement>(null)
   useLayoutEffect(() => {
@@ -155,7 +158,7 @@ export function SentenceAnalysisCard({
           {status === 'loading' ? (
             // 等待构件（2026-11-15，DESIGN.md §5 Waiting）：原来字前面一个转圈，换成字后面跟所以点。
             <span className="sa-loading">
-              分析中
+              {analysisSlow ? '分析中，比平时慢，可以先去做别的' : '分析中'}
               <InlineWaitDots pending size="sm" />
             </span>
           ) : null}
