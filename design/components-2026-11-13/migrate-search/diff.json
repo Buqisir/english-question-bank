@@ -1,0 +1,1114 @@
+{
+ "note": "像素比：same = 每个像素 RGBA 都一样。styles：搜索框里每个元素整份 getComputedStyle（含 ::placeholder）逐项比，differences 应为空。",
+ "summary": {
+  "after 对 migrate-field/before": {
+   "compared": 24,
+   "same": 22,
+   "different": [
+    "browse-page.png",
+    "home-page-390.png"
+   ]
+  },
+  "after 对 这一轮重拍的 before": {
+   "compared": 42,
+   "same": 42,
+   "different": []
+  },
+  "重拍的 before 对 migrate-field/before（拍照稳不稳）": {
+   "compared": 24,
+   "same": 22,
+   "different": [
+    "browse-page.png",
+    "home-page-390.png"
+   ]
+  },
+  "实算样式": {
+   "propsCompared": 189864,
+   "differences": 60
+  },
+  "读屏信息（ariaSnapshot）不同的状态": 0
+ },
+ "afterVsOld": {
+  "browse-page-390.png": {
+   "same": true,
+   "size": "780x1688",
+   "pixels": 1316640,
+   "diff": 0,
+   "box": null
+  },
+  "browse-page.png": {
+   "same": false,
+   "size": "2880x1800",
+   "pixels": 5184000,
+   "diff": 5733,
+   "box": [
+    2552,
+    1680,
+    2831,
+    1751
+   ]
+  },
+  "browse-search-390.png": {
+   "same": true,
+   "size": "748x136",
+   "pixels": 101728,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-focus-390.png": {
+   "same": true,
+   "size": "748x136",
+   "pixels": 101728,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-focus.png": {
+   "same": true,
+   "size": "704x136",
+   "pixels": 95744,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-typed-390.png": {
+   "same": true,
+   "size": "748x136",
+   "pixels": 101728,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-typed.png": {
+   "same": true,
+   "size": "704x136",
+   "pixels": 95744,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search.png": {
+   "same": true,
+   "size": "704x136",
+   "pixels": 95744,
+   "diff": 0,
+   "box": null
+  },
+  "home-page-390.png": {
+   "same": false,
+   "size": "780x1688",
+   "pixels": 1316640,
+   "diff": 2487,
+   "box": [
+    172,
+    634,
+    427,
+    661
+   ]
+  },
+  "home-page.png": {
+   "same": true,
+   "size": "2880x1800",
+   "pixels": 5184000,
+   "diff": 0,
+   "box": null
+  },
+  "home-results-page-390.png": {
+   "same": true,
+   "size": "780x1688",
+   "pixels": 1316640,
+   "diff": 0,
+   "box": null
+  },
+  "home-results-page.png": {
+   "same": true,
+   "size": "2880x1800",
+   "pixels": 5184000,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-focus-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-focus.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-results-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-results.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-typed-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-typed.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "home-search.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "vocab-dictation-page-390.png": {
+   "same": true,
+   "size": "780x1688",
+   "pixels": 1316640,
+   "diff": 0,
+   "box": null
+  },
+  "vocab-dictation-page.png": {
+   "same": true,
+   "size": "2880x1800",
+   "pixels": 5184000,
+   "diff": 0,
+   "box": null
+  },
+  "vocab-dictation-search-390.png": {
+   "same": true,
+   "size": "780x118",
+   "pixels": 92040,
+   "diff": 0,
+   "box": null
+  },
+  "vocab-dictation-search.png": {
+   "same": true,
+   "size": "1832x118",
+   "pixels": 216176,
+   "diff": 0,
+   "box": null
+  }
+ },
+ "afterVsBefore": {
+  "browse-page-390.png": {
+   "same": true,
+   "size": "780x1688",
+   "pixels": 1316640,
+   "diff": 0,
+   "box": null
+  },
+  "browse-page.png": {
+   "same": true,
+   "size": "2880x1800",
+   "pixels": 5184000,
+   "diff": 0,
+   "box": null
+  },
+  "browse-results-page-390.png": {
+   "same": true,
+   "size": "780x1688",
+   "pixels": 1316640,
+   "diff": 0,
+   "box": null
+  },
+  "browse-results-page.png": {
+   "same": true,
+   "size": "2880x1800",
+   "pixels": 5184000,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-390.png": {
+   "same": true,
+   "size": "748x136",
+   "pixels": 101728,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-focus-390.png": {
+   "same": true,
+   "size": "748x136",
+   "pixels": 101728,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-focus.png": {
+   "same": true,
+   "size": "704x136",
+   "pixels": 95744,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-results-390.png": {
+   "same": true,
+   "size": "748x136",
+   "pixels": 101728,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-results.png": {
+   "same": true,
+   "size": "704x136",
+   "pixels": 95744,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-submit-hover-390.png": {
+   "same": true,
+   "size": "748x136",
+   "pixels": 101728,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-submit-hover.png": {
+   "same": true,
+   "size": "704x136",
+   "pixels": 95744,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-tab1-390.png": {
+   "same": true,
+   "size": "748x136",
+   "pixels": 101728,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-tab1.png": {
+   "same": true,
+   "size": "704x136",
+   "pixels": 95744,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-tab2-390.png": {
+   "same": true,
+   "size": "748x136",
+   "pixels": 101728,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-tab2.png": {
+   "same": true,
+   "size": "704x136",
+   "pixels": 95744,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-typed-390.png": {
+   "same": true,
+   "size": "748x136",
+   "pixels": 101728,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-typed.png": {
+   "same": true,
+   "size": "704x136",
+   "pixels": 95744,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search.png": {
+   "same": true,
+   "size": "704x136",
+   "pixels": 95744,
+   "diff": 0,
+   "box": null
+  },
+  "home-page-390.png": {
+   "same": true,
+   "size": "780x1688",
+   "pixels": 1316640,
+   "diff": 0,
+   "box": null
+  },
+  "home-page.png": {
+   "same": true,
+   "size": "2880x1800",
+   "pixels": 5184000,
+   "diff": 0,
+   "box": null
+  },
+  "home-results-page-390.png": {
+   "same": true,
+   "size": "780x1688",
+   "pixels": 1316640,
+   "diff": 0,
+   "box": null
+  },
+  "home-results-page.png": {
+   "same": true,
+   "size": "2880x1800",
+   "pixels": 5184000,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-focus-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-focus.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-loading-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-loading.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-results-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-results.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-submit-hover-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-submit-hover.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-tab1-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-tab1.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-tab2-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-tab2.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-typed-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-typed.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "home-search.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "vocab-dictation-page-390.png": {
+   "same": true,
+   "size": "780x1688",
+   "pixels": 1316640,
+   "diff": 0,
+   "box": null
+  },
+  "vocab-dictation-page.png": {
+   "same": true,
+   "size": "2880x1800",
+   "pixels": 5184000,
+   "diff": 0,
+   "box": null
+  },
+  "vocab-dictation-search-390.png": {
+   "same": true,
+   "size": "780x118",
+   "pixels": 92040,
+   "diff": 0,
+   "box": null
+  },
+  "vocab-dictation-search.png": {
+   "same": true,
+   "size": "1832x118",
+   "pixels": 216176,
+   "diff": 0,
+   "box": null
+  }
+ },
+ "beforeVsOld": {
+  "browse-page-390.png": {
+   "same": true,
+   "size": "780x1688",
+   "pixels": 1316640,
+   "diff": 0,
+   "box": null
+  },
+  "browse-page.png": {
+   "same": false,
+   "size": "2880x1800",
+   "pixels": 5184000,
+   "diff": 5733,
+   "box": [
+    2552,
+    1680,
+    2831,
+    1751
+   ]
+  },
+  "browse-search-390.png": {
+   "same": true,
+   "size": "748x136",
+   "pixels": 101728,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-focus-390.png": {
+   "same": true,
+   "size": "748x136",
+   "pixels": 101728,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-focus.png": {
+   "same": true,
+   "size": "704x136",
+   "pixels": 95744,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-typed-390.png": {
+   "same": true,
+   "size": "748x136",
+   "pixels": 101728,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search-typed.png": {
+   "same": true,
+   "size": "704x136",
+   "pixels": 95744,
+   "diff": 0,
+   "box": null
+  },
+  "browse-search.png": {
+   "same": true,
+   "size": "704x136",
+   "pixels": 95744,
+   "diff": 0,
+   "box": null
+  },
+  "home-page-390.png": {
+   "same": false,
+   "size": "780x1688",
+   "pixels": 1316640,
+   "diff": 2487,
+   "box": [
+    172,
+    634,
+    427,
+    661
+   ]
+  },
+  "home-page.png": {
+   "same": true,
+   "size": "2880x1800",
+   "pixels": 5184000,
+   "diff": 0,
+   "box": null
+  },
+  "home-results-page-390.png": {
+   "same": true,
+   "size": "780x1688",
+   "pixels": 1316640,
+   "diff": 0,
+   "box": null
+  },
+  "home-results-page.png": {
+   "same": true,
+   "size": "2880x1800",
+   "pixels": 5184000,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-focus-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-focus.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-results-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-results.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-typed-390.png": {
+   "same": true,
+   "size": "748x172",
+   "pixels": 128656,
+   "diff": 0,
+   "box": null
+  },
+  "home-search-typed.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "home-search.png": {
+   "same": true,
+   "size": "1776x172",
+   "pixels": 305472,
+   "diff": 0,
+   "box": null
+  },
+  "vocab-dictation-page-390.png": {
+   "same": true,
+   "size": "780x1688",
+   "pixels": 1316640,
+   "diff": 0,
+   "box": null
+  },
+  "vocab-dictation-page.png": {
+   "same": true,
+   "size": "2880x1800",
+   "pixels": 5184000,
+   "diff": 0,
+   "box": null
+  },
+  "vocab-dictation-search-390.png": {
+   "same": true,
+   "size": "780x118",
+   "pixels": 92040,
+   "diff": 0,
+   "box": null
+  },
+  "vocab-dictation-search.png": {
+   "same": true,
+   "size": "1832x118",
+   "pixels": 216176,
+   "diff": 0,
+   "box": null
+  }
+ },
+ "styleDifferences": [
+  {
+   "state": "home-search",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "home-search-focus",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search-focus",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "home-search-typed",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search-typed",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "home-search-submit-hover",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search-submit-hover",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "home-search-tab1",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search-tab1",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "home-search-tab2",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search-tab2",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "home-search-results",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search-results",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "browse-search",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "compact"
+  },
+  {
+   "state": "browse-search",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "browse-search-focus",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "compact"
+  },
+  {
+   "state": "browse-search-focus",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "browse-search-typed",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "compact"
+  },
+  {
+   "state": "browse-search-typed",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "browse-search-submit-hover",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "compact"
+  },
+  {
+   "state": "browse-search-submit-hover",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "browse-search-tab1",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "compact"
+  },
+  {
+   "state": "browse-search-tab1",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "browse-search-tab2",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "compact"
+  },
+  {
+   "state": "browse-search-tab2",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "browse-search-results",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "compact"
+  },
+  {
+   "state": "browse-search-results",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "home-search-loading",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search-loading",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "home-search-390",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search-390",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "home-search-focus-390",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search-focus-390",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "home-search-typed-390",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search-typed-390",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "home-search-submit-hover-390",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search-submit-hover-390",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "home-search-tab1-390",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search-tab1-390",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "home-search-tab2-390",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search-tab2-390",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "home-search-results-390",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search-results-390",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "browse-search-390",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "compact"
+  },
+  {
+   "state": "browse-search-390",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "browse-search-focus-390",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "compact"
+  },
+  {
+   "state": "browse-search-focus-390",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "browse-search-typed-390",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "compact"
+  },
+  {
+   "state": "browse-search-typed-390",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "browse-search-submit-hover-390",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "compact"
+  },
+  {
+   "state": "browse-search-submit-hover-390",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "browse-search-tab1-390",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "compact"
+  },
+  {
+   "state": "browse-search-tab1-390",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "browse-search-tab2-390",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "compact"
+  },
+  {
+   "state": "browse-search-tab2-390",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "browse-search-results-390",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "compact"
+  },
+  {
+   "state": "browse-search-results-390",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  },
+  {
+   "state": "home-search-loading-390",
+   "i": 0,
+   "tag": "form",
+   "attr": "data-tier",
+   "after": "hero"
+  },
+  {
+   "state": "home-search-loading-390",
+   "i": 2,
+   "tag": "input",
+   "attr": "enterkeyhint",
+   "after": "search"
+  }
+ ],
+ "axDifferences": [],
+ "missing": {
+  "before": [],
+  "after": []
+ }
+}

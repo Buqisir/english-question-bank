@@ -17,7 +17,7 @@
  */
 
 import { useEffect, useId, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react'
-import { CornerDownLeft, QuestionBank, RotateCcw, X } from '../icons'
+import { QuestionBank, RotateCcw } from '../icons'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
@@ -29,6 +29,7 @@ import { Button } from '../shared-ui/Button.tsx'
 import { ChipToggle } from '../shared-ui/Chip.tsx'
 import { Notice } from '../shared-ui/Notice.tsx'
 import { EmptyState } from '../shared-ui/EmptyState.tsx'
+import { SearchField } from '../shared-ui/SearchField.tsx'
 
 /** Fluid hover: an expanded paper row's open body still belongs to its head,
  *  so the highlight stays on that head instead of jumping to the next paper. */
@@ -471,9 +472,9 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   }
 
   // home-blank 硬契约 — esc 只清 query（不清筛选/不退浏览态）. Named handlers
-  // (not inline arrows) keep the <input> tag itself short — a verify-
-  // concierge-desk.mjs regex windows the span between `className=` and
-  // `disabled={dataLoading}` on that element.
+  // (not inline arrows) keep the SearchField element short — a verify-
+  // concierge-desk.mjs regex windows the span between the SearchField tag
+  // and its `disabled={dataLoading}` prop.
   const handleInputKeyDown = (event: { key: string }) => {
     if (event.key === 'Escape') actions.reset()
   }
@@ -574,56 +575,41 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       <div className="concierge-stage">
         <div className="concierge-stage-inner concierge-stage-inner--risen">
           <div className="concierge-command-bar">
-            <form className="concierge-intent-bar" onSubmit={handleSubmit} role="search">
-              <label htmlFor={inputId} className="visually-hidden">
-                自然语言搜索
-              </label>
-              <input
-                ref={inputRef}
-                id={inputId}
-                className="concierge-intent-input"
-                value={intent}
-                onChange={(event) => setIntent(event.target.value)}
-                onFocus={handleInputFocus}
-                onBlur={handleInputBlur}
-                onKeyDown={handleInputKeyDown}
-                placeholder={placeholder}
-                autoComplete="off"
-                autoFocus={isHomeScreen}
-                disabled={dataLoading}
-                aria-busy={dataLoading || undefined}
-              />
-              {intent.length > 0 && !dataLoading && (
-                // 构件厂第 4 步第八页：✕ 换成 shared-ui/Button 次要灰小号、只有图标（高 28，原来也是 28）；
-                // 圆角 999 → 8（按钮不做胶囊）。位置仍由 App.css 的 .concierge-desk .concierge-intent-clear 定。
-                // Owner 2026-11-14 决定 #14：清完把焦点放回输入框。不放的话 ✕ 跟着空字一起卸掉，焦点掉到 body，
-                // 键盘用户要从页首重新 Tab，鼠标用户也得再点一次输入框才能接着打字。
-                <Button
-                  className="concierge-intent-clear"
-                  tone="subtle"
-                  size="sm"
-                  label="清除搜索"
-                  title="清除搜索"
-                  icon={<X size={16} aria-hidden="true" />}
-                  onClick={() => {
-                    actions.reset()
-                    inputRef.current?.focus()
-                  }}
-                />
-              )}
-              <button
-                type="submit"
-                className={`concierge-intent-submit${state.kind === 'loading' ? ' is-loading' : ''}`}
-                disabled={submitDisabled}
-                aria-label="搜索"
-                title="搜索"
-                aria-busy={state.kind === 'loading' || dataConnecting || undefined}
-              >
-                {/* 原来等的时候键上换成「搜索中…」，键窄、两行挤着；现在键上始终是图标，
-                    在等什么由下面的提示行说（共用提示行 shared-ui/Notice）。 */}
-                <CornerDownLeft size={18} aria-hidden="true" />
-              </button>
-            </form>
+            {/* 搜索框构件（shared-ui/SearchField，构件厂 2026-11-15）：首页 hero、浏览页 compact，换前换后逐像素一样。
+                concierge-intent-* 类名留作钩子：宽度和摆法在 App.css，测试脚本也按它们认。
+                ✕：Owner 2026-11-14 决定 #14，清完把焦点放回输入框。不放的话 ✕ 跟着空字一起卸掉，焦点掉到 body，
+                键盘用户要从页首重新 Tab，鼠标用户也得再点一次输入框才能接着打字。 */}
+            <SearchField
+              tier={isBrowseScreen ? 'compact' : 'hero'}
+              label="自然语言搜索"
+              hooks={{
+                form: 'concierge-intent-bar',
+                input: 'concierge-intent-input',
+                clear: 'concierge-intent-clear',
+                submit: 'concierge-intent-submit',
+              }}
+              inputRef={inputRef}
+              id={inputId}
+              value={intent}
+              onValueChange={setIntent}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              onKeyDown={handleInputKeyDown}
+              placeholder={placeholder}
+              autoFocus={isHomeScreen}
+              disabled={dataLoading}
+              aria-busy={dataLoading || undefined}
+              onSubmit={handleSubmit}
+              submitLabel="搜索"
+              submitDisabled={submitDisabled}
+              submitBusy={state.kind === 'loading' || dataConnecting}
+              loading={state.kind === 'loading'}
+              onClear={() => {
+                actions.reset()
+                inputRef.current?.focus()
+              }}
+              clearLabel="清除搜索"
+            />
             {/* 题库还没拿到（在连或没连上）时不出这个键：原来会写成「浏览全部 0 套卷」，像是题库空了。 */}
             {isHomeScreen && onEnterBrowse && !dataLoading && (
               // 构件厂第 4 步第八页：换成 shared-ui/Button 次要灰中号带图标（高 32，原来也是 32）。

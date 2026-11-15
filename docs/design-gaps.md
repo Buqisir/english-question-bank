@@ -92,3 +92,8 @@ token 的扩展用法。
 
 - **想要的值**：一是带原因的下拉菜单的行宽上限：菜单里每项下面有一行「为什么用不了」，菜单宽跟着最长一行走，要有个可读行长的上限，长原因折成两行。tokens.css 里没有行宽一类（上面空状态那条的 26em 也是）。若收编，候选名 `--eqb-measure-menu`。二是图标的尺寸：下拉右边的向下箭头、出错行的图标都是 16px（DESIGN.md §5 Icons 写了 16，但没有 token），下拉右内边距要算进去（12 + 16 + 4）。若收编，候选名 `--eqb-icon-size`。三是分段选择两项之间的缝 2px，比 `--eqb-space-1`（4）小一档，原来草稿卷 A4 / A3 那一排就是 2px（`.draft-version-toggle` gap 2px）。若收编，候选名 `--eqb-space-hairline`。四是触屏输入字号下限 16：和上面登录页那条「手机输入框的字号下限」是同一件事，这次字段构件也要（`@media (pointer: coarse)` 时控件字号提到 16），值正好等于 `--eqb-font-size-md`，所以先借用它，没写字面量；登录页那条的候选名 `--eqb-font-size-input-mobile` 收编后两处一起换。
 - **临时方案**：一，局部变量 `--eqb-option-menu-measure: 320px`（`.eqb-menu.eqb-option-menu` 上，320 是原来 `.eqb-menu.draft-product-menu` 的值），外面再套 `min(…, 100vw − 16)` 防出屏。二，`calc(var(--eqb-space-3) + 16px + var(--eqb-space-1))`，16 写在注释里说明是图标宽。三，`gap: 2px` 字面量，注释注明出处。四，借 `--eqb-font-size-md`。记录在 `design/components-2026-11-13/migrate-field/README.md`「缺的变量」。
+
+## 2026-11-15 搜索框构件的几处尺寸（`app/src/shared-ui/search.css`；首页一条字色在 `app/src/App.css` `.concierge-desk .concierge-intent-input:disabled`）
+
+- **想要的值**：一是搜索框的几处内边距不在间距阶梯（4 / 8 / 12 / 16 / 24）上：首页框左 18、右 10，提交键「正在搜」时左右 6。二是框里几个位置跟着提交键和清除键算出来：提交键右边 10（首页）/ 4（浏览页），清除键右边 48，输入框右内边距 48（首页）/ 40（浏览页）、首页有清除键时 84。三是首页题库没连上、输入框禁用时的字色 `#9A9A93`（暖灰，雾海色阶以前留下的），tokens.css 里没有同值的颜色，最近的是 `--eqb-color-text-faint`（`#94a4ac`）。
+- **临时方案**：一、二是原值，照搬成字面量写在 `search.css`，每条注释写明原值和出处（这一轮要换前换后逐像素一样，不能挪）；若收编，内边距可以对到阶梯上（18 → 16、10 → 8、6 → 8），位置跟着重算，届时首页会动一两个像素，要 Owner 点头。三，`search.css` 的禁用字色用 `--eqb-color-text-faint`，首页那条在 App.css 里以 (0,3,0) 盖回 `#9A9A93`，只为实算样式不变；实际上看不到（题库没连上时输入框是空的，只显示次要灰的占位符），建议直接删掉那条覆盖。记录在 `design/components-2026-11-13/migrate-search/README.md`。

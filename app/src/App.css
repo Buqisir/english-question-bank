@@ -3130,60 +3130,18 @@ button:disabled {
   background: var(--eqb-color-desk);
 }
 
-/* Intent bar */
+/* 搜索框换成 shared-ui/SearchField（构件厂，2026-11-15）：框、输入框、清除键、提交键的样子都搬进
+   shared-ui/search.css（首页 hero、浏览页 compact 两档），这里只留它在命令行这一行里的摆法——
+   首页占满、浏览页固定 320。.concierge-intent-bar 是 SearchField 的 hooks.form 挂上的钩子。
+   search.css 不设 flex / width / max-width，和这两条不冲突。 */
 .concierge-intent-bar {
-  position: relative;
-  display: flex;
   flex: 1 1 auto;
-  min-width: 0;
-  gap: 8px;
-  align-items: center;
-  background: var(--desk-raised);
-  border: 1px solid transparent;
-  border-radius: 16px;
-  padding: 0 10px 0 14px;
-  height: 44px;
-  min-height: 44px;
-  box-shadow: var(--elev-1);
-  transition: border-color var(--motion-base) var(--ease-hover), box-shadow var(--motion-base) var(--ease-hover);
-}
-
-.concierge-desk[data-screen='home'] .concierge-intent-bar {
-  height: 54px;
-  min-height: 54px;
-  padding-left: 18px;
-}
-
-.concierge-desk[data-screen='home'] .concierge-intent-input {
-  font-size: 16px;
-}
-
-.concierge-desk[data-screen='home'] .concierge-intent-submit {
-  width: 32px;
-  min-width: 32px;
-  height: 32px;
-}
-
-/* 构件厂第 4 步第八页：✕ 现在是 Button，button.css 的 .eqb-button 设了 position: relative（0,1,0）；
-   本条两个类名（0,2,0）压过它，✕ 仍浮在输入框右边。 */
-.concierge-desk .concierge-intent-clear {
-  position: absolute;
-  right: 48px;
-}
-
-.concierge-intent-bar:has(.concierge-intent-clear) .concierge-intent-input {
-  padding-right: 84px;
 }
 
 .concierge-desk[data-screen='browse'] .concierge-intent-bar {
   flex: 0 0 320px;
   width: 320px;
   max-width: 320px;
-  height: 36px;
-  min-height: 36px;
-  border-radius: 12px;
-  box-shadow: none;
-  padding: 0 4px 0 12px;
 }
 
 /* 窄屏：五个命令行元素挤在一行会互相重叠。搜索框独占一行，思考模式/筛选/
@@ -3200,95 +3158,7 @@ button:disabled {
   }
 }
 
-/* 聚焦时不再套一圈深色框：输入框本身就是页面主角，闪动的光标已经说明
-   "可以打字了"。边线只比平时深一档，像 Factory / ChatGPT 的输入框。 */
-.concierge-intent-bar:focus-within {
-  border-color: var(--eqb-color-border-strong);
-  outline: none;
-}
-
-.concierge-intent-input {
-  flex: 1;
-  min-width: 0;
-  border: none;
-  outline: none;
-  background: transparent;
-  font-size: 14px;
-  line-height: 24px;
-  color: var(--desk-ink);
-  font-family: inherit;
-  padding: 0 48px 0 0;
-  height: 100%;
-}
-
-.concierge-desk[data-screen='browse'] .concierge-intent-input {
-  font-size: 13px;
-  padding-right: 40px;
-}
-
-.concierge-intent-input::placeholder {
-  color: var(--desk-muted);
-}
-
-.concierge-intent-submit {
-  position: absolute;
-  right: 10px;
-  width: 28px;
-  min-width: 28px;
-  height: 28px;
-  align-self: center;
-  border: none;
-  border-radius: 8px;
-  padding: 0;
-  background: transparent;
-  color: var(--eqb-color-accent);
-  font-size: 13px;
-  line-height: 1;
-  font-family: inherit;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  transition: background-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
-  box-shadow: none;
-}
-
-.concierge-desk[data-screen='browse'] .concierge-intent-submit {
-  right: 4px;
-}
-
-.concierge-intent-submit.is-loading {
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.concierge-intent-submit:hover:not(:disabled) {
-  background: var(--eqb-color-desk);
-}
-
-/* emil-processing: press feedback — 一天按几十次的搜索提交应确认"听到了". */
-.concierge-intent-submit:active:not(:disabled) {
-  transform: scale(0.97);
-}
-
-.concierge-intent-submit:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
-}
-
-/* 发送键是一个回车符号，不再是实心圆：没输入时是灰色回车，打了字整个回车
-   变成强调色（参照 Factory / ChatGPT：没东西可发就不亮）。 */
-.concierge-intent-submit:disabled {
-  background: transparent;
-  color: var(--desk-muted);
-  opacity: 1;
-  cursor: not-allowed;
-}
-
-.concierge-intent-submit.is-loading:disabled {
-  width: auto;
-  padding: 0 6px;
-  color: var(--eqb-color-text-muted);
-}
+/* 搜索框的聚焦、输入框、占位符、提交键（悬停、按下、焦点、禁用、正在搜）搬进 shared-ui/search.css（2026-11-15）。 */
 
 /* home-editorial round 2 — rides inline in .concierge-command-bar now
    (was its own row below the intent bar with a hint sentence visible next
@@ -4404,7 +4274,6 @@ p.concierge-empty {
   .add-button:active:not(:disabled),
   .save-button:active:not(:disabled),
   .export-button:active:not(:disabled),
-  .concierge-intent-submit:active:not(:disabled),
   .concierge-action:active:not(:disabled),
   .basket-chip:active:not(:disabled) {
     transform: scale(0.995);
@@ -4517,10 +4386,13 @@ p.concierge-empty {
 /* Concierge: connecting-to-local-bank notice — 换成共用提示行，放在命令行下面的 .concierge-status-slot 里，
    原来这条居中小字的规则拿掉。 */
 
-.concierge-intent-input:disabled {
-  background: transparent;
+/* 题库还在连时输入框禁用：禁用的底和光标搬进 shared-ui/search.css（字用 --eqb-color-text-faint）。
+   首页这里的字色仍是原来的 #9A9A93（暖灰，雾海色阶以前留下的）：为了换前换后实算样式一样，原值照留，
+   缺口见 docs/design-gaps.md「2026-11-15 搜索框构件的几处尺寸」。实际上看不到——题库没连上时输入框是空的，
+   只显示占位符（占位符是次要灰）。
+   本条 (0,3,0) 覆盖 search.css .eqb-search-input:disabled 的字色 (0,2,0)。 */
+.concierge-desk .concierge-intent-input:disabled {
   color: #9A9A93;
-  cursor: progress;
 }
 
 /* ── ui-search-feel 刀⑤ #1 — dataLoading skeleton ──────────────────────

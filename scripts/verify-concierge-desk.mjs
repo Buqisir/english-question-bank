@@ -727,13 +727,20 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone; STARTER_CHIPS 
   assert('selected chip is NOT oxblood #B8323C', !/#B8323C/i.test(chipSelectedRule), chipSelectedRule)
 
   // Intent bar resting + focus.
-  const barRule = css.match(/\.concierge-intent-bar\s*\{[^}]*\}/)?.[0] || ''
+  // 搜索框构件（2026-11-15）：首页 / 浏览页搜索框换成 shared-ui/SearchField，样子在 shared-ui/search.css
+  // （.eqb-search 框、data-tier='hero' 首页一档）；App.css 的 .concierge-intent-bar 只剩摆法（flex / 宽度）。
+  const searchCss = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'search.css'), 'utf8')
+  const deskSrc = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergeDesk.tsx'), 'utf8')
+  assert('intent bar renders through SearchField (hero on home, compact on browse)', /<SearchField\s[\s\S]{0,200}tier=\{isBrowseScreen \? 'compact' : 'hero'\}/.test(deskSrc), '')
+  const barRule = searchCss.match(/\.eqb-search\s*\{[^}]*\}/)?.[0] || ''
+  const heroRule = searchCss.match(/\.eqb-search\[data-tier='hero'\]\s*\{[^}]*\}/)?.[0] || ''
   // texture 2026-11-13 (DESIGN.md §4): home search is paper at e1 — the elev ring
   // is its only edge, so the 1px border stays for layout but goes transparent.
-  assert('intent-bar rest edge is the e1 ring (border transparent, no double line)', /border:\s*1px solid transparent/.test(barRule) && /box-shadow:\s*var\(--elev-1\)/.test(barRule), barRule)
-  const focusRule = css.match(/\.concierge-intent-bar:focus-within\s*\{[^}]*\}/)?.[0] || ''
+  assert('intent-bar rest edge is the e1 ring (border transparent, no double line)', /border:\s*1px solid transparent/.test(barRule) && /box-shadow:\s*var\(--elev-1\)/.test(heroRule), barRule + heroRule)
+  const focusRule = searchCss.match(/\.eqb-search:focus-within\s*\{[^}]*\}/)?.[0] || ''
   assert('focus border only steps up one shade (no accent frame)', /border-color:\s*var\(--eqb-color-border-strong\)/.test(focusRule), focusRule)
-  assert('focus does not draw an outer ring around the intent bar', !/\.concierge-intent-bar:has\(:focus-visible\)/.test(css), '')
+  assert('focus does not draw an outer ring around the intent bar',
+    !/\.concierge-intent-bar:has\(:focus-visible\)/.test(css) && !/\.eqb-search:has\(:focus-visible\)/.test(searchCss), '')
 }
 
 // ------------------------------------------------------------------ Test 13
@@ -821,7 +828,12 @@ console.log('\nTest 15: Avoid sample-data race — ConciergeDesk waits for live 
   assert('Desk computes dataLoading from dataStatus', /const dataLoading = dataStatus === ['"]loading['"]/.test(desk), '')
   assert('handleSubmit early-returns while dataLoading', /if \(dataLoading\) return/.test(desk), '')
   assert('submit button disabled when dataLoading', /submitDisabled\s*=\s*dataLoading\s*\|\|/.test(desk), '')
-  assert('intent input disabled while dataLoading', /<input[\s\S]{0,400}className="concierge-intent-input"[\s\S]{0,400}disabled=\{dataLoading\}/.test(desk), '')
+  // 搜索框构件（2026-11-15）：输入框在 shared-ui/SearchField 里，ConciergeDesk 把 disabled={dataLoading} 交给它，
+  // 它原样给 <input>。两头都认。
+  const searchField = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'SearchField.tsx'), 'utf8')
+  assert('intent input disabled while dataLoading',
+    /<SearchField\s[\s\S]{0,900}input: 'concierge-intent-input'[\s\S]{0,900}disabled=\{dataLoading\}/.test(desk) &&
+      /<input[\s\S]{0,400}disabled=\{disabled\}/.test(searchField), '')
   assert('placeholder switches to 正在连接本地题库 while loading', /正在连接本地题库/.test(desk), '')
   assert('connecting notice rendered as concierge-data-loading', /<p className="concierge-data-loading"[\s\S]{0,200}role="status"/.test(desk), '')
   assert('App passes dataStatus to ConciergeDesk', /<ConciergeDesk[\s\S]*?dataStatus=\{dataStatus\}/.test(app), '')
