@@ -138,3 +138,8 @@ smoke-*、ux-walkthrough、构件清点脚本里按这几个类名找元素的�
    「搜索框焦点用 2px `--desk-muted` 外环」，实际是透明边 + e1 墨圈、透明底点睛色回车键、焦点只把边深一档不套外环
    （verify-concierge-desk 还专门守着「不套外圈」）。**建议：DESIGN.md 照现在的样子改**，并把「还没收进构件」里的首页 /
    浏览页搜索框删掉、写上 `shared-ui/SearchField.tsx` 两档。
+
+## 协调人复核（2026-11-15）
+- 第 1 条（浏览页清除键压字）：照建议修了，compact 有清除键时右内边距让到 84。长字截图见 `after/browse-search-longtext.png`，脚本 `scripts/component-inventory/search-longtext.mjs`。提案 · 单一来源。
+- 第 2 条（首页 `#9A9A93` 覆盖）：照建议删了。
+- 第 3 条（DESIGN.md 三处对不上）：协调人已照实际样子改写 §5 Inputs，并补上 SearchField 两档。
