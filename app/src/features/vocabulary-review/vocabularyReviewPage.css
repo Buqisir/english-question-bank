@@ -59,52 +59,10 @@
   gap: 8px;
 }
 
-.vocabulary-student-switcher label {
-  display: grid;
-  min-width: 0;
+/* 课程、学生两个下拉和「学生姓名」换成 shared-ui/Field（字段构件第二轮 2026-11-15）：标签、框、焦点归 field.css，
+ * 原来这里的 label / select / input 几条（38 高、14 字、深一档的边）删了。这里只留学生下拉在一行里占多宽。 */
+.vocabulary-student-switcher > .vocabulary-student-picker {
   flex: 1 1 auto;
-  gap: 5px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.vocabulary-program-switcher {
-  display: grid;
-  gap: 5px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.vocabulary-program-switcher select {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 38px;
-  padding: 7px 30px 7px 10px;
-  border: 1px solid var(--line-strong);
-  border-radius: 8px;
-  background: var(--panel);
-  color: var(--ink-strong);
-  font: inherit;
-  font-size: 14px;
-}
-
-.vocabulary-student-switcher select,
-.vocabulary-student-create input {
-  box-sizing: border-box;
-  min-height: 38px;
-  border: 1px solid var(--line-strong);
-  border-radius: 8px;
-  background: var(--panel);
-  color: var(--ink-strong);
-  font: inherit;
-  font-size: 14px;
-}
-
-.vocabulary-student-switcher select {
-  width: 100%;
-  padding: 7px 30px 7px 10px;
 }
 
 .vocabulary-student-create {
@@ -114,41 +72,8 @@
   background: var(--surface);
 }
 
-.vocabulary-student-create > label {
-  display: block;
-  margin-bottom: 6px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.vocabulary-student-create > div {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  /* 「保存」换成 Button 以后高 36，输入框高 38：底边对齐，和上面「当前学生」那一排（align-items: end）一样。 */
-  align-items: end;
-  gap: 8px;
-}
-
-.vocabulary-student-create input {
-  width: 100%;
-  padding: 7px 10px;
-}
-
-.vocabulary-student-create p {
-  margin: 8px 0 0;
-  color: var(--eqb-color-danger);
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.vocabulary-student-switcher select:focus-visible,
-.vocabulary-program-switcher select:focus-visible,
-.vocabulary-student-create input:focus-visible {
-  border-color: var(--line-strong);
-  outline: 2px solid var(--action);
-  outline-offset: 2px;
-}
+/* 「学生姓名」和「保存」一行：框和键都是 36 高，归 TextField 的 trailing。出错那一行归 field.css（字不上红，红只在框边上），
+ * 原来这里红字的 p 那条删了。 */
 
 /* 「.vocabulary-overall-progress > span」只管进度那行字。原来写成后代 span，会连「查看 / 调整进度」键（Owner 2026-11-14 决定 #1
  * 换成 Button 以后）里的 .eqb-button-label 也染成淡色 12px/600，盖过 button.css 的淡墨小号；改成只管直接子元素。
@@ -1094,35 +1019,12 @@
   gap: 8px;
 }
 
+/* 「单词纸名称」换成 shared-ui/TextField（字段构件第二轮 2026-11-15），标签、框和「保存名称」那一行的排法归 field.css。
+ * 这里只留多宽、放在哪。原来的 label / input 两条（38 高、14 / 500 字、深一档的边）删了。 */
 .vocabulary-set-title-control {
-  display: grid;
-  gap: 6px;
   width: min(440px, 100%);
   margin: 22px auto 0;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
   text-align: left;
-}
-
-.vocabulary-set-title-control > div {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 8px;
-}
-
-.vocabulary-set-title-control input {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 38px;
-  padding: 7px 10px;
-  border: 1px solid var(--line-strong);
-  border-radius: 8px;
-  background: var(--panel);
-  color: var(--ink-strong);
-  font: inherit;
-  font-size: 14px;
-  font-weight: 500;
 }
 
 .vocabulary-completion-actions > .vocabulary-set-title-control {
@@ -1130,30 +1032,11 @@
   margin-top: 0;
 }
 
+/* 「下载读音」换成 shared-ui/SelectField（标签在左、框在右，字段构件第二轮 2026-11-15）。原来是外面一圈边、里面无边的下拉，
+ * 现在边画在下拉上（和别处字段一样），外圈那几条删了。这里只留不占满、不加外边距。 */
 .vocabulary-completion-actions .vocabulary-print-accent-control {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
   width: auto;
   margin: 0;
-  padding: 0 8px 0 10px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.vocabulary-completion-actions .vocabulary-print-accent-control select {
-  width: auto;
-  min-height: 34px;
-  padding: 4px 26px 4px 8px;
-  border: 0;
-  background-color: transparent;
-  color: var(--ink-strong);
-  font-size: 14px;
-  font-weight: 500;
 }
 
 .vocabulary-run-setup {
@@ -1187,19 +1070,10 @@
   line-height: 1.5;
 }
 
-.vocabulary-run-setup label {
-  display: grid;
-  gap: 8px;
-  width: min(220px, 100%);
-  margin: 24px 0 16px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
+/* 开始页里的字段（目标生词数、直接生成词表、重新打开时的单词纸名称）换成 shared-ui/Field（字段构件第二轮 2026-11-15），
+ * 原来这里管 label 的两条删了。开始页整块居中排字，字段的标签和说明要靠左：本条 (0,2,0) 覆盖外层 text-align: center（继承来的）。 */
+.vocabulary-run-setup .eqb-field {
   text-align: left;
-}
-
-.vocabulary-run-setup label + label {
-  margin-top: 0;
 }
 
 .vocabulary-run-fields {
@@ -1210,10 +1084,6 @@
   margin-top: 24px;
 }
 
-.vocabulary-run-setup .vocabulary-run-fields label {
-  width: 100%;
-  margin: 0;
-}
 
 .vocabulary-run-start-row {
   display: flex;
@@ -1266,45 +1136,12 @@
   color: var(--eqb-color-text);
 }
 
-.vocabulary-review-accent-control button:focus-visible,
-.vocabulary-set-title-control input:focus-visible {
+.vocabulary-review-accent-control button:focus-visible {
   outline: 2px solid var(--action);
   outline-offset: 2px;
 }
 
-.vocabulary-run-setup input,
-.vocabulary-run-setup select,
-.vocabulary-run-setup textarea {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 44px;
-  padding: 8px 12px;
-  border: 1px solid var(--line-strong);
-  border-radius: 8px;
-  background: var(--panel);
-  color: var(--ink-strong);
-  font: inherit;
-  font-size: 16px;
-}
-
-.vocabulary-run-setup textarea {
-  min-height: 112px;
-  line-height: 1.5;
-  resize: vertical;
-}
-
-.vocabulary-run-setup input:focus-visible,
-.vocabulary-run-setup select:focus-visible,
-.vocabulary-run-setup textarea:focus-visible {
-  border-color: var(--line-strong);
-  outline: 2px solid var(--action);
-  outline-offset: 2px;
-}
-
-.vocabulary-run-setup textarea::placeholder {
-  color: var(--muted);
-  opacity: 1;
-}
+/* 开始页的输入框、多行框（原来 44 高、16 字、深一档的边、textarea 至少 112 高）归 field.css 大号（36 高、14 字；多行高跟 rows）。 */
 
 .vocabulary-direct-set {
   width: min(580px, 100%);

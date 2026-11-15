@@ -1,0 +1,1439 @@
+{
+ "found": {
+  "dict-student": {
+   "before": true,
+   "after": true
+  },
+  "dict-student-390": {
+   "before": true,
+   "after": false
+  },
+  "dict-student-focus-select": {
+   "before": true,
+   "after": true
+  },
+  "dict-student-focus-select-390": {
+   "before": true,
+   "after": false
+  },
+  "dict-filter": {
+   "before": true,
+   "after": true
+  },
+  "dict-filter-390": {
+   "before": true,
+   "after": false
+  },
+  "dict-filter-focus-search": {
+   "before": true,
+   "after": true
+  },
+  "dict-filter-focus-search-390": {
+   "before": true,
+   "after": false
+  },
+  "dict-filter-focus-date": {
+   "before": true,
+   "after": true
+  },
+  "dict-filter-focus-date-390": {
+   "before": true,
+   "after": false
+  },
+  "dict-settings": {
+   "before": true,
+   "after": true
+  },
+  "dict-settings-390": {
+   "before": true,
+   "after": false
+  },
+  "dict-settings-focus-print-title": {
+   "before": true,
+   "after": true
+  },
+  "dict-settings-focus-print-title-390": {
+   "before": true,
+   "after": false
+  },
+  "dict-suggest": {
+   "before": true,
+   "after": true
+  },
+  "dict-suggest-390": {
+   "before": true,
+   "after": false
+  },
+  "dict-suggest-focus-count": {
+   "before": true,
+   "after": true
+  },
+  "dict-suggest-focus-count-390": {
+   "before": true,
+   "after": false
+  },
+  "meaning-start": {
+   "before": true,
+   "after": true
+  },
+  "meaning-start-390": {
+   "before": true,
+   "after": false
+  },
+  "meaning-start-focus-count": {
+   "before": true,
+   "after": true
+  },
+  "meaning-start-focus-count-390": {
+   "before": true,
+   "after": false
+  },
+  "rev-student": {
+   "before": true,
+   "after": true
+  },
+  "rev-student-390": {
+   "before": false,
+   "after": false
+  },
+  "rev-student-focus-select": {
+   "before": true,
+   "after": true
+  },
+  "rev-student-focus-select-390": {
+   "before": false,
+   "after": false
+  },
+  "rev-create": {
+   "before": true,
+   "after": true
+  },
+  "rev-create-390": {
+   "before": false,
+   "after": true
+  },
+  "rev-create-focus-name": {
+   "before": true,
+   "after": true
+  },
+  "rev-create-focus-name-390": {
+   "before": false,
+   "after": true
+  },
+  "rev-create-error": {
+   "before": true,
+   "after": true
+  },
+  "rev-create-error-390": {
+   "before": false,
+   "after": true
+  },
+  "rev-create-error-focus": {
+   "before": true,
+   "after": true
+  },
+  "rev-create-error-focus-390": {
+   "before": false,
+   "after": true
+  },
+  "rev-target": {
+   "before": true,
+   "after": true
+  },
+  "rev-target-390": {
+   "before": false,
+   "after": false
+  },
+  "rev-target-focus-count": {
+   "before": true,
+   "after": true
+  },
+  "rev-target-focus-count-390": {
+   "before": false,
+   "after": false
+  },
+  "rev-direct": {
+   "before": true,
+   "after": true
+  },
+  "rev-direct-390": {
+   "before": false,
+   "after": false
+  },
+  "rev-direct-focus-textarea": {
+   "before": true,
+   "after": true
+  },
+  "rev-direct-focus-textarea-390": {
+   "before": false,
+   "after": false
+  },
+  "rev-title": {
+   "before": false,
+   "after": false
+  },
+  "rev-title-390": {
+   "before": false,
+   "after": false
+  },
+  "rev-title-focus-name": {
+   "before": false,
+   "after": false
+  },
+  "rev-title-focus-name-390": {
+   "before": false,
+   "after": false
+  },
+  "rev-accent": {
+   "before": false,
+   "after": false
+  },
+  "rev-accent-390": {
+   "before": false,
+   "after": false
+  },
+  "rev-accent-focus-select": {
+   "before": false,
+   "after": false
+  },
+  "rev-accent-focus-select-390": {
+   "before": false,
+   "after": false
+  },
+  "paper-pdf": {
+   "before": false,
+   "after": false
+  },
+  "paper-pdf-390": {
+   "before": false,
+   "after": false
+  },
+  "paper-pdf-focus-select": {
+   "before": false,
+   "after": false
+  },
+  "paper-pdf-focus-select-390": {
+   "before": false,
+   "after": false
+  },
+  "admin-token": {
+   "before": true,
+   "after": true
+  },
+  "admin-token-390": {
+   "before": true,
+   "after": true
+  },
+  "admin-token-focus-name": {
+   "before": true,
+   "after": true
+  },
+  "admin-token-focus-name-390": {
+   "before": true,
+   "after": true
+  },
+  "entry-source": {
+   "before": true,
+   "after": true
+  },
+  "entry-source-390": {
+   "before": true,
+   "after": true
+  },
+  "entry-source-focus-select": {
+   "before": true,
+   "after": true
+  },
+  "entry-source-focus-select-390": {
+   "before": true,
+   "after": true
+  },
+  "entry-source-focus-year": {
+   "before": true,
+   "after": true
+  },
+  "entry-source-focus-year-390": {
+   "before": true,
+   "after": true
+  },
+  "entry-required": {
+   "before": true,
+   "after": true
+  },
+  "entry-required-390": {
+   "before": true,
+   "after": true
+  },
+  "entry-passage": {
+   "before": true,
+   "after": true
+  },
+  "entry-passage-390": {
+   "before": true,
+   "after": true
+  },
+  "entry-passage-focus-textarea": {
+   "before": true,
+   "after": true
+  },
+  "entry-passage-focus-textarea-390": {
+   "before": true,
+   "after": true
+  },
+  "entry-question": {
+   "before": true,
+   "after": true
+  },
+  "entry-question-390": {
+   "before": true,
+   "after": true
+  },
+  "entry-question-focus-no": {
+   "before": true,
+   "after": true
+  },
+  "entry-question-focus-no-390": {
+   "before": true,
+   "after": true
+  }
+ },
+ "missingBefore": [
+  "review-done: TimeoutError: locator.waitFor: Timeout 20000ms exceeded.",
+  "paper: TimeoutError: locator.waitFor: Timeout 20000ms exceeded.",
+  "review-setup-390: TimeoutError: locator.waitFor: Timeout 30000ms exceeded.",
+  "review-create-390: TimeoutError: locator.waitFor: Timeout 30000ms exceeded.",
+  "review-done-390: TimeoutError: locator.waitFor: Timeout 30000ms exceeded.",
+  "paper-390: TimeoutError: locator.waitFor: Timeout 20000ms exceeded."
+ ],
+ "missingAfter": [
+  "review-done: Error: 只在最后一档拍（见上）",
+  "paper: TimeoutError: locator.waitFor: Timeout 60000ms exceeded.",
+  "dict-top-390: TimeoutError: locator.waitFor: Timeout 20000ms exceeded.",
+  "dict-settings-390: TimeoutError: locator.click: Timeout 30000ms exceeded.",
+  "dict-meaning-390: TimeoutError: locator.click: Timeout 30000ms exceeded.",
+  "dict-review-390: TimeoutError: locator.click: Timeout 30000ms exceeded.",
+  "review-setup-390: TimeoutError: locator.waitFor: Timeout 30000ms exceeded.",
+  "review-done-390: TimeoutError: locator.waitFor: Timeout 20000ms exceeded.",
+  "paper-390: TimeoutError: locator.waitFor: Timeout 60000ms exceeded."
+ ],
+ "extraAfter": {
+  "revCreateError": {
+   "before": {
+    "ax": {
+     "role": "textbox",
+     "name": "学生姓名",
+     "description": null,
+     "invalid": "false",
+     "required": false,
+     "disabled": null,
+     "nameFrom": "relatedElement"
+    },
+    "text": "学生姓名\n保存\n\n词汇服务暂时不可用。"
+   },
+   "after": {
+    "ax": {
+     "role": "textbox",
+     "name": "学生姓名",
+     "description": "词汇服务暂时不可用。",
+     "invalid": "true",
+     "required": false,
+     "disabled": null,
+     "nameFrom": "relatedElement"
+    },
+    "text": "学生姓名\n保存\n\n词汇服务暂时不可用。\n\n词汇服务暂时不可用。"
+   }
+  },
+  "entryRequired": {
+   "before": {
+    "focus": "input「」",
+    "ax": {
+     "role": "textbox",
+     "name": "地区",
+     "description": null,
+     "invalid": "false",
+     "required": true,
+     "disabled": null,
+     "nameFrom": "relatedElement"
+    },
+    "validity": "Please fill out this field."
+   },
+   "after": {
+    "focus": "input「」",
+    "ax": {
+     "role": "textbox",
+     "name": "地区",
+     "description": null,
+     "invalid": "false",
+     "required": true,
+     "disabled": null,
+     "nameFrom": "relatedElement"
+    },
+    "validity": "Please fill out this field."
+   }
+  },
+  "paperProbe": {
+   "found": false,
+   "topbar": true,
+   "body": "返回找题\n獭石\n·\n整卷预览\n生词本\n过生词\n个人空间\nowner\n退出\n整卷预览没打开，题库和草稿卷都没动：Cannot read properties of undefined (reading 'blocks')\n返回找题"
+  }
+ },
+ "ax": {
+  "w1440/dict-student/select": {
+   "before": {
+    "role": "combobox",
+    "name": "当前学生",
+    "description": null,
+    "invalid": "false",
+    "required": null,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "combobox",
+    "name": "当前学生",
+    "description": null,
+    "invalid": "false",
+    "required": null,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 35,
+    "w": 94,
+    "radius": "8px",
+    "border": "1px rgb(41, 66, 77)",
+    "font": "12px/500",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 102,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "select「默认学生」",
+    "（出了这一处）input「搜索词组」"
+   ],
+   "tabAfter": [
+    "select「默认学生」",
+    "（出了这一处）input「」"
+   ]
+  },
+  "w1440/dict-filter/search": {
+   "before": {
+    "role": "textbox",
+    "name": "搜索词组",
+    "description": null,
+    "invalid": "false",
+    "required": false,
+    "disabled": null,
+    "nameFrom": "attribute"
+   },
+   "after": {
+    "role": "textbox",
+    "name": "搜索词组",
+    "description": null,
+    "invalid": "false",
+    "required": false,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 35,
+    "w": 892,
+    "radius": "8px",
+    "border": "1px rgb(41, 66, 77)",
+    "font": "14px/500",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 892,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "input「搜索词组」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」"
+   ],
+   "tabAfter": [
+    "input「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」"
+   ]
+  },
+  "w1440/dict-filter/date": {
+   "before": {
+    "role": "Date",
+    "name": "从",
+    "description": null,
+    "invalid": "false",
+    "required": null,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "Date",
+    "name": "从",
+    "description": null,
+    "invalid": "false",
+    "required": null,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 37,
+    "w": 142,
+    "radius": "8px",
+    "border": "1px rgb(41, 66, 77)",
+    "font": "14px/500",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 142,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "input「搜索词组」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」"
+   ],
+   "tabAfter": [
+    "input「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」",
+    "input[date]「」"
+   ]
+  },
+  "w1440/dict-settings/print-title": {
+   "before": {
+    "role": "textbox",
+    "name": "打印标题",
+    "description": null,
+    "invalid": "false",
+    "required": false,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "textbox",
+    "name": "打印标题",
+    "description": null,
+    "invalid": "false",
+    "required": false,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 35,
+    "w": 480,
+    "radius": "8px",
+    "border": "1px rgb(41, 66, 77)",
+    "font": "14px/500",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 480,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "input「默认学生 · 生词合集 · 2026-11-15」",
+    "input「2026-11-15 综合听写」",
+    "button[button]「美音」",
+    "button[button]「英音」",
+    "input[checkbox]「on」",
+    "（出了这一处）button[button]「开始认词」"
+   ],
+   "tabAfter": [
+    "input「默认学生 · 生词合集 · 2026-11-15」",
+    "input「2026-11-15 综合听写」",
+    "button[button]「美音」",
+    "button[button]「英音」",
+    "input[checkbox]「on」",
+    "（出了这一处）button[button]「开始认词」"
+   ]
+  },
+  "w1440/meaning-start/count": {
+   "before": {
+    "role": "spinbutton",
+    "name": "抽 词",
+    "description": null,
+    "invalid": "false",
+    "required": false,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "spinbutton",
+    "name": "抽",
+    "description": "词",
+    "invalid": "false",
+    "required": false,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 33,
+    "w": 64,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "12px/500",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 64,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "input[number]「20」",
+    "button[button]「随机」",
+    "button[button]「原顺序」",
+    "button[button]「选择词组」",
+    "（出了这一处）input[number]「20」"
+   ],
+   "tabAfter": [
+    "input[number]「20」",
+    "button[button]「随机」",
+    "button[button]「原顺序」",
+    "button[button]「选择词组」",
+    "（出了这一处）input[number]「20」"
+   ]
+  },
+  "w1440/dict-suggest/count": {
+   "before": {
+    "role": "spinbutton",
+    "name": "推荐下一轮 词",
+    "description": null,
+    "invalid": "false",
+    "required": false,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "spinbutton",
+    "name": "推荐下一轮",
+    "description": "词",
+    "invalid": "false",
+    "required": false,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 35,
+    "w": 64,
+    "radius": "8px",
+    "border": "1px rgb(41, 66, 77)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 64,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "input[number]「20」",
+    "button[button]「选出单词」",
+    "（出了这一处）body（焦点落空）"
+   ],
+   "tabAfter": [
+    "input[number]「20」",
+    "button[button]「选出单词」",
+    "（出了这一处）body（焦点落空）"
+   ]
+  },
+  "w1440/rev-student/select": {
+   "before": {
+    "role": "combobox",
+    "name": "切换当前学生",
+    "description": null,
+    "invalid": "false",
+    "required": null,
+    "disabled": null,
+    "nameFrom": "attribute"
+   },
+   "after": {
+    "role": "combobox",
+    "name": "切换当前学生",
+    "description": null,
+    "invalid": "false",
+    "required": null,
+    "disabled": null,
+    "nameFrom": "attribute"
+   },
+   "styleBefore": {
+    "h": 38,
+    "w": 236,
+    "radius": "8px",
+    "border": "1px rgb(197, 211, 218)",
+    "font": "14px/600",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 236,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "select「切换当前学生」",
+    "button[button]「新建学生」",
+    "（出了这一处）button[button]「查看 / 调整进度」"
+   ],
+   "tabAfter": [
+    "select「切换当前学生」",
+    "button[button]「新建学生」",
+    "（出了这一处）button[button]「查看 / 调整进度」"
+   ]
+  },
+  "w1440/rev-target/count": {
+   "before": {
+    "role": "spinbutton",
+    "name": "目标生词数",
+    "description": null,
+    "invalid": "false",
+    "required": false,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "spinbutton",
+    "name": "目标生词数",
+    "description": null,
+    "invalid": "false",
+    "required": false,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 44,
+    "w": 260,
+    "radius": "8px",
+    "border": "1px rgb(197, 211, 218)",
+    "font": "16px/600",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 260,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "input[number]「15」",
+    "（出了这一处）button[button]「美音」"
+   ],
+   "tabAfter": [
+    "input[number]「15」",
+    "（出了这一处）button[button]「美音」"
+   ]
+  },
+  "w1440/rev-direct/textarea": {
+   "before": {
+    "role": "textbox",
+    "name": "用中文逗号隔开",
+    "description": null,
+    "invalid": "false",
+    "required": false,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "textbox",
+    "name": "用中文逗号隔开",
+    "description": null,
+    "invalid": "false",
+    "required": false,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 114,
+    "w": 580,
+    "radius": "8px",
+    "border": "1px rgb(197, 211, 218)",
+    "font": "16px/600",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "styleAfter": {
+    "h": 102,
+    "w": 580,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "textarea「」",
+    "（出了这一处）button[button]「第二组 20 词 · word021、word022、wor」"
+   ],
+   "tabAfter": [
+    "textarea「」",
+    "（出了这一处）button[button]「第二组 20 词 · word021、word022、wor」"
+   ]
+  },
+  "w1440/rev-create/name": {
+   "before": {
+    "role": "textbox",
+    "name": "学生姓名",
+    "description": null,
+    "invalid": "false",
+    "required": false,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "textbox",
+    "name": "学生姓名",
+    "description": null,
+    "invalid": "false",
+    "required": false,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 38,
+    "w": 240,
+    "radius": "8px",
+    "border": "1px rgb(197, 211, 218)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 245.1,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "input「」",
+    "（出了这一处）button[button]「查看 / 调整进度」"
+   ],
+   "tabAfter": [
+    "input「」",
+    "（出了这一处）button[button]「查看 / 调整进度」"
+   ]
+  },
+  "w1440/admin-token/name": {
+   "before": {
+    "role": "textbox",
+    "name": "名称",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "textbox",
+    "name": "名称",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 34,
+    "w": 228,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "13px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 228,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "input「」",
+    "（出了这一处）body（焦点落空）"
+   ],
+   "tabAfter": [
+    "input「」",
+    "（出了这一处）body（焦点落空）"
+   ]
+  },
+  "w1440/entry-source/select": {
+   "before": {
+    "role": "combobox",
+    "name": "来源类型",
+    "description": null,
+    "invalid": "false",
+    "required": null,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "combobox",
+    "name": "来源类型",
+    "description": null,
+    "invalid": "false",
+    "required": null,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 36,
+    "w": 342,
+    "radius": "8px",
+    "border": "1px rgb(197, 211, 218)",
+    "font": "13px/700",
+    "outline": "none 3px rgb(27, 43, 51) +0px",
+    "shadow": "rgba(27, 43, 51, 0.12) 0px 0px 0px 3px"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 342,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "select「真题 模拟题 自建 其他」",
+    "input[number]「2026」",
+    "input「校本」",
+    "input「课堂训练」",
+    "input「阅读」",
+    "（出了这一处）input「取证用篇章」"
+   ],
+   "tabAfter": [
+    "select「真题 模拟题 自建 其他」",
+    "input[number]「2026」",
+    "input「校本」",
+    "input「课堂训练」",
+    "input「阅读」",
+    "（出了这一处）input「取证用篇章」"
+   ]
+  },
+  "w1440/entry-source/year": {
+   "before": {
+    "role": "spinbutton",
+    "name": "年份",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "spinbutton",
+    "name": "年份",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 36,
+    "w": 342,
+    "radius": "8px",
+    "border": "1px rgb(197, 211, 218)",
+    "font": "13px/700",
+    "outline": "none 3px rgb(27, 43, 51) +0px",
+    "shadow": "rgba(27, 43, 51, 0.12) 0px 0px 0px 3px"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 342,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "select「真题 模拟题 自建 其他」",
+    "input[number]「2026」",
+    "input「校本」",
+    "input「课堂训练」",
+    "input「阅读」",
+    "（出了这一处）input「取证用篇章」"
+   ],
+   "tabAfter": [
+    "select「真题 模拟题 自建 其他」",
+    "input[number]「2026」",
+    "input「校本」",
+    "input「课堂训练」",
+    "input「阅读」",
+    "（出了这一处）input「取证用篇章」"
+   ]
+  },
+  "w1440/entry-passage/textarea": {
+   "before": {
+    "role": "textbox",
+    "name": "摘要",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "textbox",
+    "name": "摘要",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 88,
+    "w": 698,
+    "radius": "8px",
+    "border": "1px rgb(197, 211, 218)",
+    "font": "13.3333px/400",
+    "outline": "none 3px rgb(27, 43, 51) +0px",
+    "shadow": "rgba(27, 43, 51, 0.12) 0px 0px 0px 3px"
+   },
+   "styleAfter": {
+    "h": 81,
+    "w": 698,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "textarea「取证用摘要」",
+    "input「人与自我」",
+    "input「记叙文」",
+    "textarea「A short passage for the field 」",
+    "（出了这一处）input「取证用题组」"
+   ],
+   "tabAfter": [
+    "textarea「取证用摘要」",
+    "input「人与自我」",
+    "input「记叙文」",
+    "textarea「A short passage for the field 」",
+    "（出了这一处）input「取证用题组」"
+   ]
+  },
+  "w1440/entry-question/no": {
+   "before": {
+    "role": "textbox",
+    "name": "题号",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "textbox",
+    "name": "题号",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 36,
+    "w": 100,
+    "radius": "8px",
+    "border": "1px rgb(197, 211, 218)",
+    "font": "13px/700",
+    "outline": "none 3px rgb(27, 43, 51) +0px",
+    "shadow": "rgba(27, 43, 51, 0.12) 0px 0px 0px 3px"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 100,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "input「1」",
+    "input「细节理解」",
+    "input「A」",
+    "textarea「What is it about?」",
+    "textarea「」",
+    "textarea「」",
+    "（出了这一处）input「」"
+   ],
+   "tabAfter": [
+    "input「1」",
+    "input「细节理解」",
+    "input「A」",
+    "textarea「What is it about?」",
+    "textarea「」",
+    "textarea「」",
+    "（出了这一处）input「」"
+   ]
+  },
+  "w390/rev-create/name": {
+   "before": null,
+   "after": {
+    "role": "textbox",
+    "name": "学生姓名",
+    "description": null,
+    "invalid": "false",
+    "required": false,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": null,
+   "styleAfter": {
+    "h": 36,
+    "w": 286.4,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": null,
+   "tabAfter": [
+    "input「」",
+    "（出了这一处）button[button]「查看 / 调整进度」"
+   ]
+  },
+  "w390/admin-token/name": {
+   "before": {
+    "role": "textbox",
+    "name": "名称",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "textbox",
+    "name": "名称",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 34,
+    "w": 326,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "13px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 326,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "input「」",
+    "（出了这一处）body（焦点落空）"
+   ],
+   "tabAfter": [
+    "input「」",
+    "（出了这一处）body（焦点落空）"
+   ]
+  },
+  "w390/entry-source/select": {
+   "before": {
+    "role": "combobox",
+    "name": "来源类型",
+    "description": null,
+    "invalid": "false",
+    "required": null,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "combobox",
+    "name": "来源类型",
+    "description": null,
+    "invalid": "false",
+    "required": null,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 36,
+    "w": 292,
+    "radius": "8px",
+    "border": "1px rgb(197, 211, 218)",
+    "font": "13px/700",
+    "outline": "none 3px rgb(27, 43, 51) +0px",
+    "shadow": "rgba(27, 43, 51, 0.12) 0px 0px 0px 3px"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 292,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "select「真题 模拟题 自建 其他」",
+    "input[number]「2026」",
+    "input「校本」",
+    "input「课堂训练」",
+    "input「阅读」",
+    "（出了这一处）input「取证用篇章」"
+   ],
+   "tabAfter": [
+    "select「真题 模拟题 自建 其他」",
+    "input[number]「2026」",
+    "input「校本」",
+    "input「课堂训练」",
+    "input「阅读」",
+    "（出了这一处）input「取证用篇章」"
+   ]
+  },
+  "w390/entry-source/year": {
+   "before": {
+    "role": "spinbutton",
+    "name": "年份",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "spinbutton",
+    "name": "年份",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 36,
+    "w": 292,
+    "radius": "8px",
+    "border": "1px rgb(197, 211, 218)",
+    "font": "13px/700",
+    "outline": "none 3px rgb(27, 43, 51) +0px",
+    "shadow": "rgba(27, 43, 51, 0.12) 0px 0px 0px 3px"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 292,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "select「真题 模拟题 自建 其他」",
+    "input[number]「2026」",
+    "input「校本」",
+    "input「课堂训练」",
+    "input「阅读」",
+    "（出了这一处）input「取证用篇章」"
+   ],
+   "tabAfter": [
+    "select「真题 模拟题 自建 其他」",
+    "input[number]「2026」",
+    "input「校本」",
+    "input「课堂训练」",
+    "input「阅读」",
+    "（出了这一处）input「取证用篇章」"
+   ]
+  },
+  "w390/entry-passage/textarea": {
+   "before": {
+    "role": "textbox",
+    "name": "摘要",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "textbox",
+    "name": "摘要",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 88,
+    "w": 292,
+    "radius": "8px",
+    "border": "1px rgb(197, 211, 218)",
+    "font": "13.3333px/400",
+    "outline": "none 3px rgb(27, 43, 51) +0px",
+    "shadow": "rgba(27, 43, 51, 0.12) 0px 0px 0px 3px"
+   },
+   "styleAfter": {
+    "h": 81,
+    "w": 292,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "textarea「取证用摘要」",
+    "input「人与自我」",
+    "input「记叙文」",
+    "textarea「A short passage for the field 」",
+    "（出了这一处）input「取证用题组」"
+   ],
+   "tabAfter": [
+    "textarea「取证用摘要」",
+    "input「人与自我」",
+    "input「记叙文」",
+    "textarea「A short passage for the field 」",
+    "（出了这一处）input「取证用题组」"
+   ]
+  },
+  "w390/entry-question/no": {
+   "before": {
+    "role": "textbox",
+    "name": "题号",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "after": {
+    "role": "textbox",
+    "name": "题号",
+    "description": null,
+    "invalid": "false",
+    "required": true,
+    "disabled": null,
+    "nameFrom": "relatedElement"
+   },
+   "styleBefore": {
+    "h": 36,
+    "w": 262,
+    "radius": "8px",
+    "border": "1px rgb(197, 211, 218)",
+    "font": "13px/700",
+    "outline": "none 3px rgb(27, 43, 51) +0px",
+    "shadow": "rgba(27, 43, 51, 0.12) 0px 0px 0px 3px"
+   },
+   "styleAfter": {
+    "h": 36,
+    "w": 262,
+    "radius": "8px",
+    "border": "1px rgb(220, 230, 235)",
+    "font": "14px/400",
+    "outline": "solid 2px rgb(41, 66, 77) +2px",
+    "shadow": "none"
+   },
+   "tabBefore": [
+    "input「1」",
+    "input「细节理解」",
+    "input「A」",
+    "textarea「What is it about?」",
+    "textarea「」",
+    "textarea「」",
+    "（出了这一处）input「」"
+   ],
+   "tabAfter": [
+    "input「1」",
+    "input「细节理解」",
+    "input「A」",
+    "textarea「What is it about?」",
+    "textarea「」",
+    "textarea「」",
+    "（出了这一处）input「」"
+   ]
+  }
+ }
+}

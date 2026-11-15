@@ -59,6 +59,7 @@
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import { ArrowLeft, BoardList, ExternalLink, Presentation, RefreshCw, Scissors } from '../../icons'
 import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
+import { SelectField } from '../../shared-ui/Field.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
@@ -4058,12 +4059,22 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       >
         讲评
       </Button>
-      <select className="ghost-button" aria-label="PDF 版本" value={pdfEdition ?? ''} disabled={analysisPdfBusy || !pdfEdition} onChange={(event) => {
-        setPdfEdition(event.target.value as PaperPdfEdition)
-        setAnalysisPdfError('')
-      }}>
-        {pdfEditions.map((edition) => <option key={edition} value={edition}>{PAPER_PDF_PRODUCTS[edition]}</option>)}
-      </select>
+      {/* 字段构件第二轮（2026-11-15）：原来是套了 .ghost-button 的原生下拉，换成 shared-ui/SelectField 小号（28，和旁边的小号键同高），
+          标签「PDF 版本」只给读屏（原来是 aria-label，看得见的字没有）。用不了的版本服务器不列出来（usePaperPdfProducts 只拿到能用的），
+          没有「为什么用不了」可写，所以用原生下拉，不用 OptionSelectField。 */}
+      <SelectField
+        className="paper-browse-pdf-edition"
+        label="PDF 版本"
+        hideLabel
+        size="sm"
+        value={pdfEdition ?? ''}
+        disabled={analysisPdfBusy || !pdfEdition}
+        onChange={(event) => {
+          setPdfEdition(event.target.value as PaperPdfEdition)
+          setAnalysisPdfError('')
+        }}
+        options={pdfEditions.map((edition) => ({ value: edition, label: PAPER_PDF_PRODUCTS[edition] }))}
+      />
       {/* 构件厂第 4 步第九页（2026-11-14，提案 · 单一来源）：「PDF Screen」换成 ButtonLink（淡墨小号，和旁边「下载 PDF」一样）。
           仍是 <a>，中键开新标签、复制地址都还在。原来 .ghost-button 没去掉链接的下划线，换了以后没有下划线。
           Owner 2026-11-14 决定 #13：会开新标签，前面加图标库的外链图标（对读屏隐藏），不恢复下划线；

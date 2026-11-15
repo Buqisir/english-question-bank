@@ -19,6 +19,7 @@ import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
+import { SelectField, TextAreaField, TextField } from '../../shared-ui/Field.tsx'
 import {
   countVocabularyDecisions,
   createVocabularyReviewState,
@@ -1295,16 +1296,17 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
 
   const currentGlobalOrder = currentEntry?.source.globalOrder ?? program.entries.length
   const vocabularySetTitleControl = vocabularySet ? (
-    <div className="vocabulary-set-title-control">
-      <label htmlFor="vocabulary-set-title">单词纸名称</label>
-      <div>
-        <input
-          id="vocabulary-set-title"
-          value={setTitleInput}
-          maxLength={30}
-          onChange={(event) => setSetTitleInput(event.target.value)}
-        />
-        {/* 构件厂第 4 步第十页没换：这个键被旁边高 38 的输入框拉成 38，不在 Button 三档高度里。 */}
+    // 字段构件第二轮（2026-11-15）：换成 shared-ui/TextField（大号 36），「保存名称」跟在框后面（trailing），字没改。
+    // 构件厂第 4 步第十页没换这个键：原来它被旁边高 38 的输入框拉成 38；输入框换成 36 以后它跟着是 36（全站 .ghost-button 的高），键本身没动。
+    <TextField
+      className="vocabulary-set-title-control"
+      id="vocabulary-set-title"
+      label="单词纸名称"
+      size="lg"
+      value={setTitleInput}
+      maxLength={30}
+      onChange={(event) => setSetTitleInput(event.target.value)}
+      trailing={(
         <button
           className="ghost-button"
           type="button"
@@ -1313,21 +1315,23 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
         >
           保存名称
         </button>
-      </div>
-    </div>
+      )}
+    />
   ) : null
   const printAccentControl = vocabularySet ? (
-    <label className="vocabulary-print-accent-control">
-      <span>下载读音</span>
-      <select value={printAccent} onChange={(event) => {
+    <SelectField
+      className="vocabulary-print-accent-control"
+      label="下载读音"
+      layout="inline"
+      size="lg"
+      value={printAccent}
+      onChange={(event) => {
         const accent = event.target.value as VocabularyAccent
         setPrintAccent(accent)
         saveVocabularyAudioAccent(accent, activeProgramId)
-      }}>
-        <option value="american">美式</option>
-        <option value="british">英式</option>
-      </select>
-    </label>
+      }}
+      options={[{ value: 'american', label: '美式' }, { value: 'british', label: '英式' }]}
+    />
   ) : null
   const downloadControl = vocabularySet ? (
     <div className="vocabulary-download-menu" ref={downloadMenuRef}>
@@ -1452,30 +1456,30 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 </Button>
               )}
               {programs.length > 1 && (
-                <label className="vocabulary-program-switcher">
-                  <span>词汇课程</span>
-                  <select
-                    aria-label="切换词汇课程"
-                    value={activeProgramId}
-                    disabled={requestBusy || runState === 'active'}
-                    onChange={(event) => chooseVocabularyProgram(event.target.value)}
-                  >
-                    {programs.map((item) => <option value={item.id} key={item.id}>{item.title}</option>)}
-                  </select>
-                </label>
+                // 字段构件第二轮（2026-11-15）：课程、学生两个下拉和「学生姓名」换成 shared-ui/Field（大号 36），字没改；
+                // 读屏名字照旧是 aria-label（「切换词汇课程」「切换当前学生」，看得见的标签在名字里）。
+                <SelectField
+                  className="vocabulary-program-switcher"
+                  label="词汇课程"
+                  size="lg"
+                  aria-label="切换词汇课程"
+                  value={activeProgramId}
+                  disabled={requestBusy || runState === 'active'}
+                  onChange={(event) => chooseVocabularyProgram(event.target.value)}
+                  options={programs.map((item) => ({ value: item.id, label: item.title }))}
+                />
               )}
               <div className="vocabulary-student-switcher">
-                <label>
-                  <span>当前学生</span>
-                  <select
-                    aria-label="切换当前学生"
-                    value={activeStudentId ?? ''}
-                    disabled={requestBusy}
-                    onChange={(event) => setActiveStudentId(event.target.value)}
-                  >
-                    {students.map((student) => <option value={student.id} key={student.id}>{student.displayName}</option>)}
-                  </select>
-                </label>
+                <SelectField
+                  className="vocabulary-student-picker"
+                  label="当前学生"
+                  size="lg"
+                  aria-label="切换当前学生"
+                  value={activeStudentId ?? ''}
+                  disabled={requestBusy}
+                  onChange={(event) => setActiveStudentId(event.target.value)}
+                  options={students.map((student) => ({ value: student.id, label: student.displayName }))}
+                />
                 {/* 描边键不再单做一种（Owner 2026-11-14 决定 #2）：墨字大号，类名留着当挂钩。 */}
                 <Button
                   tone="strong"
@@ -1493,20 +1497,23 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
               </div>
               {studentCreateOpen && (
                 <form className="vocabulary-student-create" onSubmit={(event) => { event.preventDefault(); void createStudentProfile() }}>
-                  <label htmlFor="vocabulary-student-name">学生姓名</label>
-                  <div>
-                    <input
-                      id="vocabulary-student-name"
-                      value={studentNameInput}
-                      maxLength={30}
-                      autoComplete="off"
-                      autoFocus
-                      placeholder="例如：小林"
-                      onChange={(event) => setStudentNameInput(event.target.value)}
-                    />
-                    <Button tone="strong" size="lg" type="submit" className="vocabulary-student-save" disabled={requestBusy || !studentNameInput.trim()}>保存</Button>
-                  </div>
-                  {studentFormError && <p role="alert">{studentFormError}</p>}
+                  {/* 出错照字段构件的写法：框边变危险色、aria-invalid，出错那一行挂 aria-describedby，字不改。
+                      出错行本身不播报，所以另放一句只给读屏的 role=alert，按「保存」以后马上念（和原来一样）。 */}
+                  <TextField
+                    className="vocabulary-student-name-field"
+                    id="vocabulary-student-name"
+                    label="学生姓名"
+                    size="lg"
+                    error={studentFormError || undefined}
+                    value={studentNameInput}
+                    maxLength={30}
+                    autoComplete="off"
+                    autoFocus
+                    placeholder="例如：小林"
+                    onChange={(event) => setStudentNameInput(event.target.value)}
+                    trailing={<Button tone="strong" size="lg" type="submit" className="vocabulary-student-save" disabled={requestBusy || !studentNameInput.trim()}>保存</Button>}
+                  />
+                  <p role="alert" className="visually-hidden">{studentFormError}</p>
                 </form>
               )}
               <div className="vocabulary-overall-progress">
@@ -1629,18 +1636,18 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 : '可选 1–60 个。第一次默认 15，以后会记住上次目标。'}
             </p>
             <div className="vocabulary-run-fields">
-              <label>
-                <span>目标生词数</span>
-                <input
-                  type="number"
-                  min="1"
-                  max="60"
-                  step="1"
-                  value={targetInput}
-                  disabled={Boolean(runId)}
-                  onChange={(event) => setTargetInput(Math.max(1, Math.min(60, Number(event.target.value) || 1)))}
-                />
-              </label>
+              {/* 字段构件第二轮（2026-11-15）：目标生词数、直接生成词表的多行框换成 shared-ui/Field（大号 36），字没改。 */}
+              <TextField
+                label="目标生词数"
+                size="lg"
+                type="number"
+                min="1"
+                max="60"
+                step="1"
+                value={targetInput}
+                disabled={Boolean(runId)}
+                onChange={(event) => setTargetInput(Math.max(1, Math.min(60, Number(event.target.value) || 1)))}
+              />
             </div>
             <div className="vocabulary-run-start-row">
               <fieldset className="vocabulary-review-accent-control">
@@ -1659,16 +1666,16 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 <h3>已有单词，直接生成词表</h3>
                 <span>只匹配当前课程已入库的 {program.entries.length} 词</span>
               </div>
-              <label className="vocabulary-direct-set-input" htmlFor="vocabulary-direct-set-input">
-                <span>用中文逗号隔开</span>
-                <textarea
-                  id="vocabulary-direct-set-input"
-                  rows={4}
-                  value={directVocabularyInput}
-                  placeholder="about，advice，accept"
-                  onChange={(event) => setDirectVocabularyInput(event.target.value)}
-                />
-              </label>
+              <TextAreaField
+                className="vocabulary-direct-set-input"
+                id="vocabulary-direct-set-input"
+                label="用中文逗号隔开"
+                size="lg"
+                rows={4}
+                value={directVocabularyInput}
+                placeholder="about，advice，accept"
+                onChange={(event) => setDirectVocabularyInput(event.target.value)}
+              />
               {directVocabularyInput.trim() && (
                 <div className="vocabulary-direct-set-feedback" aria-live="polite">
                   <p>

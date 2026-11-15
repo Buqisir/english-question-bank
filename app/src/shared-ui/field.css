@@ -163,6 +163,46 @@
   pointer-events: none;
 }
 
+/* ── 框里左边的图标、框后面跟着的东西（TextField 的 icon、trailing，2026-11-15 第二轮）──
+ * 图标 16px 竖着居中、离左边 12；字往右让到 12 + 16 + 8，和原来听写「搜索词组」框一样（left 12、padding-left 36）。 */
+.eqb-field-icon {
+  position: absolute;
+  top: 50%;
+  left: var(--eqb-space-3);
+  display: inline-flex;
+  color: var(--eqb-color-text-muted);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* 本条 (0,2,0) 覆盖上面 .eqb-field-control 和 sm 档 (0,1,0) / (0,2,0，写在前面) 的左内边距。 */
+.eqb-field-control[data-has-icon] {
+  padding-left: calc(var(--eqb-space-3) + 16px + var(--eqb-space-2));
+}
+
+/* 框后面跟着单位或动作键时：框和它们一行，隔 8（§8 组内 8）。框不再占满，宽度归调用处。 */
+.eqb-field-body:has(> .eqb-field-control ~ :not(.eqb-field-icon)) {
+  align-items: center;
+  gap: var(--eqb-space-2);
+}
+
+/* 跟在框后面的单位、动作键不缩：一行挤的时候让框变窄，键上的字不被省略号吃掉
+ * （换后截图里「学生姓名」后面的「保存」缩成「保…」，2026-11-15 补）。
+ * 本条 (0,3,0)，button.css 的 .eqb-button (0,1,0) 没写 flex，不冲突。 */
+.eqb-field-body > .eqb-field-control ~ :not(.eqb-field-icon) {
+  flex: 0 0 auto;
+}
+
+/* 单位小字：和标签一档（§3 UI Label 12 / 500 次要灰）。调用处给它一个类名 eqb-field-unit 就是这个样子。 */
+.eqb-field-unit {
+  flex: 0 0 auto;
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
+  font-weight: 500;
+  line-height: 16px;
+  white-space: nowrap;
+}
+
 /* ── 带原因的下拉（OptionField.tsx OptionSelectField）────────
  * 触发键是一个 <button>，长成 SelectField 的样子：白底、细边、8px，字左对齐，右边一个向下箭头。
  * 不是 .eqb-button，所以 button.css 的悬停底、打开时的桌色底、顶栏滑块都不管它。 */

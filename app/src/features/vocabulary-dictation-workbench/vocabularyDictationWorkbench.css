@@ -59,8 +59,10 @@
   line-height: 1.5;
 }
 
-.dictation-student-picker,
-.dictation-library-tools label,
+/* 学生下拉、筛选条、合并设置的两个标题、推荐词数换成 shared-ui/Field（字段构件第二轮 2026-11-15），
+ * 标签、框、焦点的样子归 field.css，这里原来的 .dictation-student-picker、.dictation-library-tools label / input、
+ * .dictation-combine-settings input、.dictation-suggestion-control input 几条删了。
+ * 留下的 > label 只剩「打乱词序」那一格（.dictation-check-setting）。 */
 .dictation-combine-settings > label,
 .dictation-number-entry label {
   display: flex;
@@ -71,11 +73,7 @@
   font-weight: 500;
 }
 
-.dictation-student-picker select,
-.dictation-library-tools input,
-.dictation-combine-settings input,
-.dictation-number-entry input,
-.dictation-suggestion-control input {
+.dictation-number-entry input {
   border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
   background: var(--eqb-color-paper);
@@ -84,11 +82,7 @@
   outline: none;
 }
 
-.dictation-student-picker select:focus,
-.dictation-library-tools input:focus,
-.dictation-combine-settings input:focus,
-.dictation-number-entry input:focus,
-.dictation-suggestion-control input:focus {
+.dictation-number-entry input:focus {
   border-color: var(--action);
   outline: 2px solid var(--action);
   outline-offset: 2px;
@@ -145,26 +139,14 @@
   margin-bottom: 16px;
 }
 
+/* 「搜索词组」占满这一行剩下的宽；放大镜和让位归 field.css（TextField 的 icon）。 */
 .dictation-search-field {
-  position: relative;
   flex: 1;
 }
 
-.dictation-search-field svg {
-  position: absolute;
-  left: 12px;
-  color: var(--eqb-color-text-muted);
-}
-
-.dictation-search-field input {
-  width: 100%;
-  padding-left: 36px;
-  font-size: 14px;
-}
-
-.dictation-library-tools input[type="date"] {
+/* 日期框宽 142（原值）。Explicit-Cascade：本条 (0,2,0) 覆盖 field.css .eqb-field-control 的 width: 100% (0,1,0)。 */
+.dictation-date-field .eqb-field-control {
   width: 142px;
-  font-size: 14px;
 }
 
 .dictation-library-tools > button,
@@ -409,16 +391,6 @@
   padding: 12px 16px;
 }
 
-.dictation-combine-settings > label:not(.dictation-check-setting) {
-  align-items: stretch;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.dictation-combine-settings input {
-  min-width: 0;
-  font-size: 14px;
-}
 
 .dictation-combine-settings fieldset {
   display: flex;
@@ -1033,14 +1005,9 @@
   gap: 8px;
 }
 
-.dictation-suggestion-control label {
-  color: var(--eqb-color-text-muted);
-  font-size: 12px;
-}
-
-.dictation-suggestion-control input {
+/* 推荐词数框宽 64（原值）。Explicit-Cascade：本条 (0,2,0) 覆盖 field.css .eqb-field-control 的 width: 100% (0,1,0)。 */
+.dictation-suggestion-count .eqb-field-control {
   width: 64px;
-  font-size: 14px;
 }
 
 .dictation-suggestion-panel {
@@ -1413,7 +1380,8 @@
   padding: 20px 16px;
 }
 
-.meaning-recall-start-row > div,
+/* 「抽」的字段外层也是 div（.eqb-field），用 :not 排除，免得被改成竖排（字段的排法归 field.css）。权重 (0,2,1)，比原来 (0,1,1) 高一档，只为排除。 */
+.meaning-recall-start-row > div:not(.eqb-field),
 .meaning-recall-suggestion > div,
 .meaning-recall-stage > header > div {
   display: flex;
@@ -1429,7 +1397,7 @@
   font-size: 12px;
 }
 
-.meaning-recall-start-row label,
+/* 「抽 … 词」换成 TextField（字段构件第二轮 2026-11-15），这两条只剩「直接推荐一轮」那个没有标签的词数框。 */
 .meaning-recall-suggestion label {
   display: flex;
   align-items: center;
@@ -1440,7 +1408,6 @@
   white-space: nowrap;
 }
 
-.meaning-recall-start-row input,
 .meaning-recall-suggestion input {
   width: 64px;
   border: 1px solid var(--eqb-color-border);
@@ -1448,6 +1415,11 @@
   background: var(--eqb-color-paper);
   padding: 8px;
   color: var(--eqb-color-text);
+}
+
+/* 「抽」的词数框宽 64（原值）。Explicit-Cascade：本条 (0,2,0) 覆盖 field.css .eqb-field-control 的 width: 100% (0,1,0)。 */
+.meaning-recall-count .eqb-field-control {
+  width: 64px;
 }
 
 .meaning-recall-start-row fieldset,
@@ -1642,28 +1614,10 @@
   border-bottom: 1px solid var(--eqb-color-border-subtle);
 }
 
-.meaning-recall-export-name {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--eqb-color-text-muted);
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.meaning-recall-export-name input {
+/* 「文件名」换成 TextField（字段构件第二轮 2026-11-15）：标签、框、焦点归 field.css，这里只留框宽 240（原值）。
+ * Explicit-Cascade：本条 (0,2,0) 覆盖 field.css .eqb-field-control 的 width: 100% (0,1,0)。 */
+.meaning-recall-export-name .eqb-field-control {
   width: 240px;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 8px;
-  padding: 8px 12px;
-  outline: none;
-  background: var(--eqb-color-paper);
-  color: var(--eqb-color-text);
-  font-size: 14px;
-}
-
-.meaning-recall-export-name input:focus {
-  border-color: var(--action);
 }
 
 .meaning-recall-result-actions fieldset {
@@ -1751,7 +1705,7 @@
     grid-template-columns: minmax(0, 1fr) auto;
   }
 
-  .meaning-recall-start-row > div,
+  .meaning-recall-start-row > div:not(.eqb-field),
   .meaning-recall-suggestion > div {
     grid-column: 1 / -1;
   }
@@ -1815,8 +1769,7 @@
     padding-bottom: 0;
   }
 
-  .dictation-student-picker,
-  .dictation-student-picker select {
+  .dictation-student-picker {
     width: 100%;
   }
 
@@ -1839,11 +1792,12 @@
     flex-basis: 100%;
   }
 
-  .dictation-library-tools label:not(.dictation-search-field) {
+  .dictation-date-field {
     flex: 1;
   }
 
-  .dictation-library-tools input[type="date"] {
+  /* 窄屏日期框占满。本条和上面 142 那条同为 (0,2,0)，写在后面（媒体查询里），按先后赢。 */
+  .dictation-date-field .eqb-field-control {
     width: 100%;
   }
 
@@ -2010,9 +1964,9 @@
     width: 100%;
   }
 
-  .meaning-recall-export-name input {
-    min-width: 0;
-    flex: 1;
+  /* 窄屏文件名框占满这一行。本条和上面 240 那条同为 (0,2,0)，写在后面（媒体查询里），按先后赢。 */
+  .meaning-recall-export-name .eqb-field-control {
+    width: 100%;
   }
 
   .meaning-recall-start-row fieldset button,

@@ -129,22 +129,37 @@ type ControlCommon = FieldFrameProps & {
 export type TextFieldProps = ControlCommon &
   Omit<InputHTMLAttributes<HTMLInputElement>, 'size' | 'className'> & {
     ref?: Ref<HTMLInputElement>
+    /**
+     * 框里左边的 16px 图标（比如列表筛选框的放大镜），调用处自己写 aria-hidden。字往右让出图标的位置。
+     * 2026-11-15 第二轮加的口子，第一处是听写工作区「搜索词组」（design/components-2026-11-13/migrate-fields2/README.md）。
+     */
+    icon?: ReactNode
+    /**
+     * 跟在框后面、同一行的东西：单位小字（「词」）、紧挨着的动作键（「保存名称」）。不进框，不挂 aria-describedby；
+     * 单位要读出来时，调用处给单位一个 id，自己放进 aria-describedby。说明 / 出错那一行仍在这一行下面。
+     */
+    trailing?: ReactNode
   }
 
 /** 一行文字输入。 */
-export function TextField({ label, hideLabel, hint, error, layout, className, size = 'md', controlClassName, id, ref, 'aria-describedby': describedBy, ...rest }: TextFieldProps) {
+export function TextField({ label, hideLabel, hint, error, layout, className, size = 'md', controlClassName, id, ref, icon, trailing, 'aria-describedby': describedBy, ...rest }: TextFieldProps) {
   return (
     <Field label={label} hideLabel={hideLabel} hint={hint} error={error} layout={layout} className={className} id={id}>
       {(binding) => (
-        <input
-          ref={ref}
-          id={binding.id}
-          className={controlClassName ? `eqb-field-control ${controlClassName}` : 'eqb-field-control'}
-          data-size={size}
-          aria-describedby={joinIds(binding.describedBy, describedBy)}
-          aria-invalid={binding.invalid || undefined}
-          {...rest}
-        />
+        <>
+          {icon && <span className="eqb-field-icon">{icon}</span>}
+          <input
+            ref={ref}
+            id={binding.id}
+            className={controlClassName ? `eqb-field-control ${controlClassName}` : 'eqb-field-control'}
+            data-size={size}
+            data-has-icon={icon ? '' : undefined}
+            aria-describedby={joinIds(binding.describedBy, describedBy)}
+            aria-invalid={binding.invalid || undefined}
+            {...rest}
+          />
+          {trailing}
+        </>
       )}
     </Field>
   )

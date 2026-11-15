@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Dialog } from '../../shared-ui/Dialog.tsx'
+import { TextField } from '../../shared-ui/Field.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { planFocusAfterRemoval, programmaticFocusTarget } from '../../shared-ui/focusAfterRemoval.ts'
 import { Surface } from '../../shared-ui/Surface.tsx'
@@ -57,7 +58,8 @@ export function AgentTokens() {
         setTokens(current => [item, ...current])
       })
     }}>
-      <label>名称<input required maxLength={100} value={name} onChange={event => setName(event.target.value)} placeholder="例如：组卷 Agent" /></label>
+      {/* 字段构件第二轮（2026-11-15）：换成 shared-ui/TextField 大号（36，和旁边「新建口令」同高），字没改。 */}
+      <TextField className="agent-token-name" label="名称" size="lg" required maxLength={100} value={name} onChange={event => setName(event.target.value)} placeholder="例如：组卷 Agent" />
       <button className="ghost-button agent-token-submit" type="submit" disabled={busy || !name.trim()}>{busy ? '保存中…' : '新建口令'}</button>
     </form>
     {secret && <Surface padding="md" className="agent-token-secret">

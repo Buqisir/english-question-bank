@@ -350,7 +350,8 @@ assert.match(
 )
 assert.match(
   resultActionsSource,
-  /<span>文件名<\/span>[\s\S]{0,500}aria-label="错词听写文件名"[\s\S]{0,500}value=\{dictationTitle\}/u,
+  // 字段构件第二轮（2026-11-15）：文件名换成 shared-ui/TextField，看得见的标签从 <span>文件名</span> 变成 label="文件名"。
+  /<TextField[\s\S]{0,200}label="文件名"[\s\S]{0,500}aria-label="错词听写文件名"[\s\S]{0,500}value=\{dictationTitle\}/u,
   '认词结果生成错词听写前必须能编辑导出文件名',
 )
 assert.match(resultActionsSource, /disabled=\{!forgotten\.length \|\| !dictationTitle\.trim\(\) \|\| busy\}/u, '文件名为空时不得生成错词听写')

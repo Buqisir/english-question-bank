@@ -117,3 +117,8 @@ token 的扩展用法。
 
 - **想要的值**：一是「建议」键的字重 400（常规）：tokens.css 没有字重一类，button.css 里别的语气也是字面量 500 / 600。若收编，候选名 `--eqb-font-weight-regular` / `-medium` / `-semibold`（400 / 500 / 600）。二是层级：A3 接缝上的建议键压在卷面上用 5（原值照搬，和题组工具条同层）；思考模式开关的透明外扩提到 1，才能盖过排在后面、带定位的「筛选」键。tokens.css 没有层级一类（上面行和底部提示那条的 `--eqb-z-toast` 也是）。若收编，候选名 `--eqb-z-paper-tools`（5）、`--eqb-z-hit-area`（1）。
 - **临时方案**：一，`font-weight: 400` 字面量，注释写明出处。二，`z-index: 5`、`z-index: 1` 字面量，注释写明谁盖谁。记录在 `design/components-2026-11-13/migrate-followup/README.md`「缺的变量」。
+
+## 2026-11-15 字段构件第二轮的几处尺寸（`app/src/shared-ui/field.css` `.eqb-field-control[data-has-icon]`；各页字段宽度在 `vocabularyDictationWorkbench.css`、`vocabularyReviewPage.css`、`adminWorkbench.css`）
+
+- **想要的值**：一是 TextField 新加的框内左图标 16px：左内边距写成 `calc(var(--eqb-space-3) + 16px + var(--eqb-space-2))`，16 是图标宽，和上面「字段构件的几处尺寸」那条的二是同一件事（候选名 `--eqb-icon-size`）。二是各页给字段定的宽：听写「从 / 到」日期 142、「推荐下一轮」「抽」数字框 64、错词听写「文件名」240、Agent 口令「名称」228、过生词完成页「单词纸名称」`min(440px, 100%)`。都是换前的原值（228 是换前实测），tokens.css 没有控件宽度一类。若收编，数字框可以用 `--eqb-field-width-number`（64），其余是各页的放法，建议留在页面里不收。
+- **临时方案**：一，16 写在 calc 里，注释写明是图标宽。二，照原值写字面量，每条有 Explicit-Cascade 注释（`.x .eqb-field-control` (0,2,0) 盖 field.css 的 `width: 100%` (0,1,0)）。记录在 `design/components-2026-11-13/migrate-fields2/README.md`「缺的变量」。

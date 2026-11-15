@@ -26,6 +26,7 @@ import { EmptyState } from '../../shared-ui/EmptyState.tsx'
 import { Dialog } from '../../shared-ui/Dialog.tsx'
 import { Button } from '../../shared-ui/Button.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
+import { SelectField, TextField } from '../../shared-ui/Field.tsx'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
   createVocabularyDictationTask,
@@ -1013,12 +1014,18 @@ export function VocabularyDictationWorkbench({
               记录
             </button>
           </FluidHoverList>
-          <label className="dictation-student-picker">
-            <span>当前学生</span>
-            <select value={activeStudentId} disabled={busy || meaningSessionActive} onChange={(event) => void changeStudent(event.target.value)}>
-              {students.map((student) => <option key={student.id} value={student.id}>{student.displayName}</option>)}
-            </select>
-          </label>
+          {/* 字段构件第二轮（2026-11-15）：学生下拉、筛选条、合并设置、推荐词数换成 shared-ui/Field，字没改。
+              外层沿用原来的类名当摆法钩子；样子归 field.css，见 design/components-2026-11-13/migrate-fields2/README.md。 */}
+          <SelectField
+            className="dictation-student-picker"
+            label="当前学生"
+            layout="inline"
+            size="lg"
+            value={activeStudentId}
+            disabled={busy || meaningSessionActive}
+            onChange={(event) => void changeStudent(event.target.value)}
+            options={students.map((student) => ({ value: student.id, label: student.displayName }))}
+          />
         </div>
 
         {/* 提示行换成共用 Notice（2026-11-15，migrate-followup 第三节）：出错 role=alert，做完了 role=status；字不改。
@@ -1069,12 +1076,19 @@ export function VocabularyDictationWorkbench({
         {tab === 'sets' && (
           <section className="dictation-sets-workspace">
             <div className="dictation-library-tools">
-              <label className="dictation-search-field">
-                <Search size={16} aria-hidden="true" />
-                <input aria-label="搜索词组" value={searchInput} placeholder="搜索标题或单词" onChange={(event) => setSearchInput(event.target.value)} />
-              </label>
-              <label>从 <input type="date" value={fromDate} onChange={(event) => { setLibrary((current) => ({ ...current, page: 1 })); setFromDate(event.target.value) }} /></label>
-              <label>到 <input type="date" value={toDate} onChange={(event) => { setLibrary((current) => ({ ...current, page: 1 })); setToDate(event.target.value) }} /></label>
+              {/* 「搜索词组」是打字即筛的列表筛选（没有提交），用 TextField 加左边放大镜，不用 SearchField（它带回车提交键）。 */}
+              <TextField
+                className="dictation-search-field"
+                label="搜索词组"
+                hideLabel
+                size="lg"
+                icon={<Search size={16} aria-hidden="true" />}
+                value={searchInput}
+                placeholder="搜索标题或单词"
+                onChange={(event) => setSearchInput(event.target.value)}
+              />
+              <TextField className="dictation-date-field" label="从" layout="inline" size="lg" type="date" value={fromDate} onChange={(event) => { setLibrary((current) => ({ ...current, page: 1 })); setFromDate(event.target.value) }} />
+              <TextField className="dictation-date-field" label="到" layout="inline" size="lg" type="date" value={toDate} onChange={(event) => { setLibrary((current) => ({ ...current, page: 1 })); setToDate(event.target.value) }} />
               {(query || fromDate || toDate) && <button type="button" onClick={() => { setSearchInput(''); setQuery(''); setFromDate(''); setToDate('') }}>清除筛选</button>}
             </div>
 
@@ -1128,8 +1142,8 @@ export function VocabularyDictationWorkbench({
                 <details className="dictation-selection-settings">
                   <summary>设置</summary>
                   <div className="dictation-combine-settings">
-                    <label><span>打印标题</span><input value={collectionTitle} maxLength={60} onChange={(event) => setCollectionTitle(event.target.value)} /></label>
-                    <label><span>听写标题</span><input value={taskTitle} maxLength={60} onChange={(event) => setTaskTitle(event.target.value)} /></label>
+                    <TextField label="打印标题" size="lg" value={collectionTitle} maxLength={60} onChange={(event) => setCollectionTitle(event.target.value)} />
+                    <TextField label="听写标题" size="lg" value={taskTitle} maxLength={60} onChange={(event) => setTaskTitle(event.target.value)} />
                     <fieldset><legend>口音</legend><button type="button" className={accent === 'american' ? 'is-selected' : ''} onClick={() => setAccent('american')}>美音</button><button type="button" className={accent === 'british' ? 'is-selected' : ''} onClick={() => setAccent('british')}>英音</button></fieldset>
                     <label className="dictation-check-setting"><input type="checkbox" checked={shuffleBeforeFreeze} onChange={(event) => setShuffleBeforeFreeze(event.target.checked)} /><Shuffle size={16} />打乱词序</label>
                   </div>
@@ -1294,7 +1308,20 @@ export function VocabularyDictationWorkbench({
 
             <div className="dictation-suggestion-control dictation-suggestion-control-row">
               {pausedReviewCount > 0 && <button type="button" aria-pressed={showPausedReview} onClick={() => setShowPausedReview((current) => !current)}>{showPausedReview ? '隐藏' : '显示'}已暂停（{pausedReviewCount}）</button>}
-              <label>推荐下一轮 <input type="number" min="1" max="60" value={suggestionTarget} onChange={(event) => setSuggestionTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))} /> 词</label>
+              {/* 「词」跟在框后面，挂进 aria-describedby，读屏念「推荐下一轮 … 词」。 */}
+              <TextField
+                className="dictation-suggestion-count"
+                label="推荐下一轮"
+                layout="inline"
+                size="lg"
+                type="number"
+                min="1"
+                max="60"
+                value={suggestionTarget}
+                aria-describedby="dictation-suggestion-count-unit"
+                trailing={<span id="dictation-suggestion-count-unit" className="eqb-field-unit">词</span>}
+                onChange={(event) => setSuggestionTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))}
+              />
               <button type="button" onClick={() => void loadSuggestion()} disabled={busy}><Sparkles size={16} />选出单词</button>
             </div>
 

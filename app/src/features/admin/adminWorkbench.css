@@ -60,21 +60,12 @@
 .agent-tokens h2 { font-size: 14px; margin: 0 0 8px; }
 .agent-tokens p { color: var(--eqb-color-text-muted); line-height: 1.5; }
 .agent-tokens form { display: flex; flex-wrap: wrap; align-items: end; gap: 8px; }
-.agent-tokens label { display: grid; gap: 8px; }
-.agent-tokens input {
-  box-sizing: border-box;
-  max-width: 100%;
-  font: inherit;
-  padding: 8px 12px;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 8px;
-  color: var(--eqb-color-text);
-  background: var(--eqb-color-paper);
-}
+/* 「名称」换成 shared-ui/TextField（字段构件第二轮 2026-11-15）：标签、框、占位符、焦点归 field.css，
+ * 原来这里的 label / input / ::placeholder / input:focus-visible 几条删了。框宽 228 是换前实测的输入框宽（浏览器给的默认宽，fields2-shots 量的）。 */
+.agent-token-name { width: 228px; max-width: 100%; }
 .agent-token-submit { border: 1px solid var(--eqb-color-border); }
 .agent-token-submit:disabled { color: var(--eqb-color-text-muted); }
 /* .agent-token-load-failed 的排布（字和「重试」一行）构件收尾（2026-11-15）归共用 Notice，这条删了。 */
-.agent-tokens input::placeholder { color: var(--eqb-color-text-muted); }
 .agent-tokens ul { list-style: none; padding: 0; margin: 16px 0 0; }
 .agent-tokens li { display: flex; gap: 16px; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--eqb-color-border-subtle); }
 .agent-tokens li > div { min-width: 0; overflow-wrap: anywhere; }
@@ -84,9 +75,9 @@
 .agent-token-secret { margin-top: 16px; }
 .agent-token-secret code { display: block; margin-bottom: 12px; overflow-wrap: anywhere; user-select: all; }
 /* 作废确认框（.agent-token-dialog 和它的 ::backdrop）换成共用 Dialog，样式在 shared-ui/dialog.css。 */
-.agent-tokens button:focus-visible, .agent-tokens input:focus-visible { outline: 2px solid var(--eqb-color-action); outline-offset: 2px; }
+.agent-tokens button:focus-visible { outline: 2px solid var(--eqb-color-action); outline-offset: 2px; }
 @media (max-width: 560px) {
   .agent-tokens form { align-items: stretch; }
-  .agent-tokens label:first-child { flex-basis: 100%; }
+  .agent-token-name { flex-basis: 100%; width: auto; }
   .agent-tokens li { flex-wrap: wrap; }
 }

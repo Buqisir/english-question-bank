@@ -2,6 +2,7 @@ import { Plus, Trash } from '../icons'
 import type { FormEvent } from 'react'
 import { useState } from 'react'
 import { Dialog } from '../shared-ui/Dialog.tsx'
+import { SelectField, TextAreaField, TextField } from '../shared-ui/Field.tsx'
 import {
   type CreateQuestionGroupInput,
   type Difficulty,
@@ -257,138 +258,95 @@ export function EntryModal({ open, mode, initialDetail, onClose, onSaved }: Entr
         disabled: entryStatus === 'saving',
       }}
     >
+      {/* 字段构件第二轮（2026-11-15）：22 个字段从全站旧的 .field 表单样式换成 shared-ui/Field 大号（36），字、必填、类型都没改。
+          宽的那几格（.wide 占满两栏）把 wide 挂在字段外层。 */}
       <fieldset>
         <legend>来源</legend>
-        <label className="field">
-          <span>来源类型</span>
-          <select
-            value={entryForm.sourceType}
-            onChange={(event) => updateEntryField('sourceType', event.target.value as SourceType)}
-          >
-            <option value="real_exam">真题</option>
-            <option value="mock_exam">模拟题</option>
-            <option value="self_made">自建</option>
-            <option value="other">其他</option>
-          </select>
-        </label>
-        <label className="field">
-          <span>年份</span>
-          <input
-            required
-            type="number"
-            value={entryForm.year}
-            onChange={(event) => updateEntryField('year', event.target.value)}
-          />
-        </label>
-        <label className="field">
-          <span>地区</span>
-          <input required value={entryForm.region} onChange={(event) => updateEntryField('region', event.target.value)} />
-        </label>
-        <label className="field">
-          <span>卷别/资料名</span>
-          <input
-            required
-            value={entryForm.paperName}
-            onChange={(event) => updateEntryField('paperName', event.target.value)}
-          />
-        </label>
-        <label className="field">
-          <span>板块</span>
-          <input required value={entryForm.section} onChange={(event) => updateEntryField('section', event.target.value)} />
-        </label>
+        <SelectField label="来源类型" size="lg"
+          value={entryForm.sourceType}
+          onChange={(event) => updateEntryField('sourceType', event.target.value as SourceType)}
+        >
+          <option value="real_exam">真题</option>
+          <option value="mock_exam">模拟题</option>
+          <option value="self_made">自建</option>
+          <option value="other">其他</option>
+        </SelectField>
+        <TextField label="年份" size="lg"
+          required
+          type="number"
+          value={entryForm.year}
+          onChange={(event) => updateEntryField('year', event.target.value)}
+        />
+        <TextField label="地区" size="lg" required value={entryForm.region} onChange={(event) => updateEntryField('region', event.target.value)} />
+        <TextField label="卷别/资料名" size="lg"
+          required
+          value={entryForm.paperName}
+          onChange={(event) => updateEntryField('paperName', event.target.value)}
+        />
+        <TextField label="板块" size="lg" required value={entryForm.section} onChange={(event) => updateEntryField('section', event.target.value)} />
       </fieldset>
 
       <fieldset>
         <legend>篇章</legend>
-        <label className="field wide">
-          <span>篇章标题</span>
-          <input
-            required
-            value={entryForm.passageTitle}
-            onChange={(event) => updateEntryField('passageTitle', event.target.value)}
-          />
-        </label>
-        <label className="field wide">
-          <span>摘要</span>
-          <textarea
-            required
-            rows={3}
-            value={entryForm.summary}
-            onChange={(event) => updateEntryField('summary', event.target.value)}
-          />
-        </label>
-        <label className="field">
-          <span>主题</span>
-          <input value={entryForm.theme} onChange={(event) => updateEntryField('theme', event.target.value)} />
-        </label>
-        <label className="field">
-          <span>语篇类型</span>
-          <input
-            value={entryForm.discourseType}
-            onChange={(event) => updateEntryField('discourseType', event.target.value)}
-          />
-        </label>
-        <label className="field wide">
-          <span>原文/材料</span>
-          <textarea
-            rows={5}
-            value={entryForm.materialText}
-            onChange={(event) => updateEntryField('materialText', event.target.value)}
-          />
-        </label>
+        <TextField className="wide" label="篇章标题" size="lg"
+          required
+          value={entryForm.passageTitle}
+          onChange={(event) => updateEntryField('passageTitle', event.target.value)}
+        />
+        <TextAreaField className="wide" label="摘要" size="lg"
+          required
+          rows={3}
+          value={entryForm.summary}
+          onChange={(event) => updateEntryField('summary', event.target.value)}
+        />
+        <TextField label="主题" size="lg" value={entryForm.theme} onChange={(event) => updateEntryField('theme', event.target.value)} />
+        <TextField label="语篇类型" size="lg"
+          value={entryForm.discourseType}
+          onChange={(event) => updateEntryField('discourseType', event.target.value)}
+        />
+        <TextAreaField className="wide" label="原文/材料" size="lg"
+          rows={5}
+          value={entryForm.materialText}
+          onChange={(event) => updateEntryField('materialText', event.target.value)}
+        />
       </fieldset>
 
       <fieldset>
         <legend>题组</legend>
-        <label className="field wide">
-          <span>题组标题</span>
-          <input
-            required
-            value={entryForm.groupTitle}
-            onChange={(event) => updateEntryField('groupTitle', event.target.value)}
-          />
-        </label>
-        <label className="field">
-          <span>题组类型</span>
-          <select
-            value={entryForm.groupType}
-            onChange={(event) => updateEntryField('groupType', event.target.value as GroupType)}
-          >
-            <option value="reading">阅读理解</option>
-            <option value="cloze">完形填空</option>
-            <option value="seven_choices">七选五</option>
-            <option value="grammar_cloze">语法填空</option>
-            <option value="writing">写作</option>
-            <option value="continuation">读后续写</option>
-            <option value="listening">听力</option>
-            <option value="other">其他</option>
-          </select>
-        </label>
-        <label className="field">
-          <span>小题数量</span>
-          <input
-            readOnly
-            value={String(entryForm.questions.length)}
-          />
-        </label>
-        <label className="field">
-          <span>默认分值</span>
-          <input
-            min="0"
-            step="0.5"
-            required
-            type="number"
-            value={entryForm.defaultScore}
-            onChange={(event) => updateEntryField('defaultScore', event.target.value)}
-          />
-        </label>
-        <label className="field wide">
-          <span>题组说明</span>
-          <input
-            value={entryForm.instruction}
-            onChange={(event) => updateEntryField('instruction', event.target.value)}
-          />
-        </label>
+        <TextField className="wide" label="题组标题" size="lg"
+          required
+          value={entryForm.groupTitle}
+          onChange={(event) => updateEntryField('groupTitle', event.target.value)}
+        />
+        <SelectField label="题组类型" size="lg"
+          value={entryForm.groupType}
+          onChange={(event) => updateEntryField('groupType', event.target.value as GroupType)}
+        >
+          <option value="reading">阅读理解</option>
+          <option value="cloze">完形填空</option>
+          <option value="seven_choices">七选五</option>
+          <option value="grammar_cloze">语法填空</option>
+          <option value="writing">写作</option>
+          <option value="continuation">读后续写</option>
+          <option value="listening">听力</option>
+          <option value="other">其他</option>
+        </SelectField>
+        <TextField label="小题数量" size="lg"
+          readOnly
+          value={String(entryForm.questions.length)}
+        />
+        <TextField label="默认分值" size="lg"
+          min="0"
+          step="0.5"
+          required
+          type="number"
+          value={entryForm.defaultScore}
+          onChange={(event) => updateEntryField('defaultScore', event.target.value)}
+        />
+        <TextField className="wide" label="题组说明" size="lg"
+          value={entryForm.instruction}
+          onChange={(event) => updateEntryField('instruction', event.target.value)}
+        />
       </fieldset>
 
       <fieldset>
@@ -420,54 +378,36 @@ export function EntryModal({ open, mode, initialDetail, onClose, onSaved }: Entr
             </div>
 
             <div className="entry-question-grid">
-              <label className="field">
-                <span>题号</span>
-                <input
-                  required
-                  value={question.questionNo}
-                  onChange={(event) => updateEntryQuestion(index, 'questionNo', event.target.value)}
-                />
-              </label>
-              <label className="field">
-                <span>小题题型</span>
-                <input
-                  value={question.questionType}
-                  onChange={(event) => updateEntryQuestion(index, 'questionType', event.target.value)}
-                />
-              </label>
-              <label className="field">
-                <span>答案</span>
-                <input
-                  value={question.answer}
-                  onChange={(event) => updateEntryQuestion(index, 'answer', event.target.value)}
-                />
-              </label>
-              <label className="field wide">
-                <span>题干</span>
-                <textarea
-                  required
-                  rows={3}
-                  value={question.stem}
-                  onChange={(event) => updateEntryQuestion(index, 'stem', event.target.value)}
-                />
-              </label>
-              <label className="field wide">
-                <span>选项</span>
-                <textarea
-                  rows={4}
-                  placeholder={'A. ...\\nB. ...\\nC. ...\\nD. ...'}
-                  value={question.optionsText}
-                  onChange={(event) => updateEntryQuestion(index, 'optionsText', event.target.value)}
-                />
-              </label>
-              <label className="field wide">
-                <span>解析</span>
-                <textarea
-                  rows={3}
-                  value={question.explanation}
-                  onChange={(event) => updateEntryQuestion(index, 'explanation', event.target.value)}
-                />
-              </label>
+              <TextField label="题号" size="lg"
+                required
+                value={question.questionNo}
+                onChange={(event) => updateEntryQuestion(index, 'questionNo', event.target.value)}
+              />
+              <TextField label="小题题型" size="lg"
+                value={question.questionType}
+                onChange={(event) => updateEntryQuestion(index, 'questionType', event.target.value)}
+              />
+              <TextField label="答案" size="lg"
+                value={question.answer}
+                onChange={(event) => updateEntryQuestion(index, 'answer', event.target.value)}
+              />
+              <TextAreaField className="wide" label="题干" size="lg"
+                required
+                rows={3}
+                value={question.stem}
+                onChange={(event) => updateEntryQuestion(index, 'stem', event.target.value)}
+              />
+              <TextAreaField className="wide" label="选项" size="lg"
+                rows={4}
+                placeholder={'A. ...\\nB. ...\\nC. ...\\nD. ...'}
+                value={question.optionsText}
+                onChange={(event) => updateEntryQuestion(index, 'optionsText', event.target.value)}
+              />
+              <TextAreaField className="wide" label="解析" size="lg"
+                rows={3}
+                value={question.explanation}
+                onChange={(event) => updateEntryQuestion(index, 'explanation', event.target.value)}
+              />
             </div>
           </section>
         ))}
@@ -475,14 +415,11 @@ export function EntryModal({ open, mode, initialDetail, onClose, onSaved }: Entr
 
       <fieldset>
         <legend>标签</legend>
-        <label className="field wide">
-          <span>标签</span>
-          <input
-            placeholder="用逗号分隔，如 真实生活，兴趣驱动"
-            value={entryForm.tags}
-            onChange={(event) => updateEntryField('tags', event.target.value)}
-          />
-        </label>
+        <TextField className="wide" label="标签" size="lg"
+          placeholder="用逗号分隔，如 真实生活，兴趣驱动"
+          value={entryForm.tags}
+          onChange={(event) => updateEntryField('tags', event.target.value)}
+        />
       </fieldset>
 
       {entryStatus === 'error' && <p className="form-error">{entryError}</p>}

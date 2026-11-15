@@ -492,14 +492,8 @@ button:disabled {
   font-size: 16px;
 }
 
-.field {
-  display: grid;
-  gap: 7px;
-  margin-bottom: 16px;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 700;
-}
+/* 全站旧的 .field 表单样式（标签 13 / 700、框 36 高、柔光焦点圈）只剩录题面板在用，字段构件第二轮（2026-11-15）
+ * 录题面板换成 shared-ui/Field 以后没人用了，删掉；录题面板里字段之间的距离见下面 .entry-form .eqb-field。 */
 
 .search-field {
   display: flex;
@@ -520,45 +514,12 @@ button:disabled {
   outline: none;
 }
 
-.search-field input,
-.field input,
-.field select,
-.field textarea {
+.search-field input {
   width: 100%;
   border: 0;
   outline: 0;
   color: var(--ink);
   background: transparent;
-}
-
-.field input,
-.field select,
-.field textarea {
-  padding: 0 10px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface-strong);
-  transition: border-color var(--motion-base) var(--ease-hover);
-}
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-  border-color: var(--line-strong);
-  box-shadow: 0 0 0 3px rgb(27 43 51 / 0.12);
-  outline: none;
-}
-
-.field input,
-.field select {
-  height: 36px;
-}
-
-.field textarea {
-  min-height: 88px;
-  padding-top: 10px;
-  resize: vertical;
-  line-height: 1.5;
 }
 
 .search-field input {
@@ -1723,13 +1684,14 @@ button:disabled {
   gap: 0 12px;
 }
 
-.entry-question-grid .field {
-  margin-bottom: 12px;
+/* 录题面板的字段（shared-ui/Field）上下隔 16，小题卡片里隔 12，是原来 .field 的 margin-bottom 搬过来的（§8 组与组 16）。
+ * Explicit-Cascade：后一条 (0,2,0) 写在后面，同档按先后赢，盖前一条。 */
+.entry-form .eqb-field {
+  margin-bottom: var(--eqb-space-4);
 }
 
-.field input[type='file'] {
-  height: auto;
-  padding: 10px;
+.entry-question-grid .eqb-field {
+  margin-bottom: var(--eqb-space-3);
 }
 
 .field-note {

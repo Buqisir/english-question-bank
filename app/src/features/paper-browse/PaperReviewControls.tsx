@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
 import { usePaperPdfProducts } from './usePaperPdfProducts'
 import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
+import { SelectField, TextAreaField } from '../../shared-ui/Field.tsx'
 import { ExternalLink } from '../../icons'
 import './paperReviewControls.css'
 
@@ -113,10 +114,11 @@ export function PaperReviewControls({ paperId, paperName, revisionId, publicatio
 
   return <section className="paper-review-controls" aria-label="检查这份卷">
     <div className="paper-review-controls-row">
-      {revisionId && <><select className="ghost-button" aria-label="查看哪款 PDF" value={edition ?? ''}
-        disabled={!edition} onChange={event => setEdition(event.target.value as PaperPdfEdition)}>
-        {editions.map(edition => <option key={edition} value={edition}>{PAPER_PDF_PRODUCTS[edition]}</option>)}
-      </select>
+      {/* 字段构件第二轮（2026-11-15）：原来套 .ghost-button 的原生下拉换成 shared-ui/SelectField 大号（36，和这一排大号键同高），
+          标签「查看哪款 PDF」只给读屏（原来是 aria-label）。 */}
+      {revisionId && <><SelectField className="paper-review-edition" label="查看哪款 PDF" hideLabel size="lg" value={edition ?? ''}
+        disabled={!edition} onChange={event => setEdition(event.target.value as PaperPdfEdition)}
+        options={editions.map(edition => ({ value: edition, label: PAPER_PDF_PRODUCTS[edition] }))} />
       {/* 构件厂第 4 步第九页（2026-11-14，提案 · 单一来源）：这一排的链接和按钮换成 ButtonLink / Button。
           原来的全站 .ghost-button 是透明底墨字、高 36，对上 strong lg；这一行 44 的最小高度仍由 paperReviewControls.css 给。
           「复制中…」沿用原来的整键禁用，没改成 busy：禁用条件里还有「线程信息没回来」，两件事分不开。 */}
@@ -134,7 +136,7 @@ export function PaperReviewControls({ paperId, paperName, revisionId, publicatio
     {error && <p role="alert">{error}{' '}
       <Button tone="strong" size="lg" onClick={() => setRefresh(value => value + 1)}>刷新</Button>
     </p>}
-    {manualCopy && <textarea aria-label="手动复制试卷信息" value={manualCopy} readOnly rows={7}
+    {manualCopy && <TextAreaField className="paper-review-manual-copy" label="手动复制试卷信息" hideLabel size="lg" value={manualCopy} readOnly rows={7}
       onFocus={event => event.currentTarget.select()} />}
     {continueUrl && <p><a href={continueUrl} target="_blank" rel="noopener noreferrer">打开对应 Amp 线程</a></p>}
   </section>

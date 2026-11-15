@@ -21,6 +21,7 @@ import { useAudioIconState } from '../../hooks/useAudioIconState'
 import { DisclosureIcon, DownloadFeedbackIcon, VolumeFeedbackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
 import { Notice } from '../../shared-ui/Notice.tsx'
+import { TextField } from '../../shared-ui/Field.tsx'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
   createVocabularyDictationTask,
@@ -515,21 +516,23 @@ export function VocabularyMeaningRecallPanel({
         </div>
         {error && <Notice kind="error" className="meaning-recall-error" danger={saveState === 'error'}>{error}</Notice>}
         <div className="meaning-recall-result-actions">
-          <label className="meaning-recall-export-name">
-            <span>文件名</span>
-            <input
-              type="text"
-              aria-label="错词听写文件名"
-              autoComplete="off"
-              spellCheck={false}
-              maxLength={60}
-              value={dictationTitle}
-              onChange={(event) => {
-                setDictationTitle(event.target.value)
-                setError('')
-              }}
-            />
-          </label>
+          {/* 字段构件第二轮（2026-11-15）：换成 shared-ui/TextField，看得见的标签「文件名」照旧，读屏名字照旧是「错词听写文件名」。 */}
+          <TextField
+            className="meaning-recall-export-name"
+            label="文件名"
+            layout="inline"
+            size="lg"
+            type="text"
+            aria-label="错词听写文件名"
+            autoComplete="off"
+            spellCheck={false}
+            maxLength={60}
+            value={dictationTitle}
+            onChange={(event) => {
+              setDictationTitle(event.target.value)
+              setError('')
+            }}
+          />
           <fieldset>
             <legend>听写发音</legend>
             <button type="button" aria-pressed={accent === 'american'} className={accent === 'american' ? 'is-selected' : ''} onClick={() => onAccentChange('american')}>美音</button>
@@ -593,7 +596,20 @@ export function VocabularyMeaningRecallPanel({
           <strong>{selectedSets.length === 1 ? selectedSets[0].title : selectedSets.length > 1 ? `已选 ${selectedSets.length} 组` : '先选择词组'}</strong>
           {!selectedSets.length && <span>不会改动原词组。</span>}
         </div>
-        <label>抽 <input type="number" min="1" max="60" value={target} onChange={(event) => setTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))} /> 词</label>
+        {/* 字段构件第二轮（2026-11-15）：「抽 … 词」换成 TextField，「词」跟在框后面、挂进 aria-describedby。 */}
+        <TextField
+          className="meaning-recall-count"
+          label="抽"
+          layout="inline"
+          size="lg"
+          type="number"
+          min="1"
+          max="60"
+          value={target}
+          aria-describedby="meaning-recall-count-unit"
+          trailing={<span id="meaning-recall-count-unit" className="eqb-field-unit">词</span>}
+          onChange={(event) => setTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))}
+        />
         <fieldset><legend>顺序</legend><button type="button" className={orderMode === 'random' ? 'is-selected' : ''} onClick={() => setOrderMode('random')}><Shuffle size={16} />随机</button><button type="button" className={orderMode === 'source' ? 'is-selected' : ''} onClick={() => setOrderMode('source')}>原顺序</button></fieldset>
         {selectedSets.length
           ? <button type="button" className="is-primary" disabled={busy} onClick={() => void startRecall(selectedEntries.slice(0, target), selectedSets.map((set) => set.id))}><Eye size={16} />开始</button>
