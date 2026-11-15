@@ -82,7 +82,8 @@ export function Button({
   const iconOnly = children === undefined || children === null
   const waitPhase = useDelayedBusy(busy && !iconShowsBusy)
   const waiting = waitPhase !== 'idle'
-  const dots = waiting ? <WaitDots active={waitPhase === 'waiting'} /> : null
+  // 胶囊大号键（登录键）里用大一档的所以点（20px，Owner 2026-11-15 定），别的键都是 16px。
+  const dots = waiting ? <WaitDots active={waitPhase === 'waiting'} size={size === 'pill' ? 'lg' : 'md'} /> : null
   const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (busy) {
       event.preventDefault()

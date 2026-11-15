@@ -64,8 +64,9 @@ function prefersReducedMotion() {
     && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
-/** md 16px（默认，和 14px 及以上的字、行内图标同一档）；sm 14px（跟在 12–13px 小字后面，Owner 2026-11-15 定）。 */
-export type WaitDotsSize = 'md' | 'sm'
+/** md 16px（默认，和 14px 及以上的字、行内图标同一档）；sm 14px（跟在 12–13px 小字后面，Owner 2026-11-15 定）；
+ *  lg 20px（只给胶囊大号键，400 × 52 的登录键里 16px 偏小，Owner 2026-11-15 定）。 */
+export type WaitDotsSize = 'md' | 'sm' | 'lg'
 
 export type WaitDotsProps = {
   /** 正在等（默认）。变成 false 时浮回 ∴ 并停在那里。 */
@@ -155,7 +156,7 @@ export function WaitDots({ active = true, leaving = false, size = 'md', classNam
       className={className ? `eqb-wait-dots ${className}` : 'eqb-wait-dots'}
       viewBox={`0 0 ${WAIT_DOTS_VIEWBOX} ${WAIT_DOTS_VIEWBOX}`}
       data-active={active ? 'true' : 'false'}
-      data-size={size === 'sm' ? 'sm' : undefined}
+      data-size={size === 'md' ? undefined : size}
       data-leaving={leaving ? '' : undefined}
       aria-hidden="true"
       focusable="false"

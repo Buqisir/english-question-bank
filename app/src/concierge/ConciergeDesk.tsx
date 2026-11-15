@@ -593,6 +593,10 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   // 灰块还没留够 500ms 结果就到了：灰块接着留着，结果等灰块走了再出（免得灰块和真行同时在、页面跳）。
   // 出错不等：错误那一行在结果区外面，灰块直接收掉。
   const searchWaitPhase = useDelayedBusy(state.kind === 'loading')
+  // 连库时的灰块也走门槛（Owner 2026-11-15 定）：连库不到 300ms 就好，灰块不出。冷启动 ?view=browse 或带筛选的深链时会走到这里。
+  // 连上了就收：库一连上，下面换成真内容，不再留满 500ms（和卡片里只在加载时挂上的灰块同一条，DESIGN §5 Waiting）。
+  const connectingWaitPhase = useDelayedBusy(dataConnecting)
+  const connectingSkeletonShown = dataConnecting && connectingWaitPhase !== 'idle'
   const searchSkeletonShown = searchWaitPhase === 'waiting' && (state.kind === 'loading' || state.kind === 'results')
   const searchResultsShown = state.kind === 'results' && !searchSkeletonShown
   // 数据到了，真行从上到下依次淡入（DESIGN §5；只做首页找题结果这一处，shared-ui/useRowReveal.ts）。
@@ -793,7 +797,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           </ul>
         )}
 
-      {dataConnecting && (
+      {connectingSkeletonShown && (
         <>
           {/* ui-search-feel 刀⑤ #1 — dataLoading skeleton. The status line
               (.concierge-status-slot under the command bar) carries the a11y state; these blocks are pure visual
