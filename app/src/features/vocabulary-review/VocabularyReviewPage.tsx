@@ -19,6 +19,8 @@ import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
+import { Skeleton } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy, useSlowWait } from '../../shared-ui/useDelayedBusy.ts'
 import { SelectField, TextAreaField, TextField } from '../../shared-ui/Field.tsx'
 import { SegmentedField, type ChoiceOption } from '../../shared-ui/OptionField.tsx'
 import {
@@ -197,6 +199,50 @@ function replaceVocabularyProgramUrl(programId: string) {
   url.searchParams.set('programId', programId)
   const nextSearch = url.searchParams.toString()
   window.history.replaceState(window.history.state, '', `${url.pathname}?${nextSearch}${url.hash || ''}`)
+}
+
+/**
+ * 过词开始页的灰块（等待第五轮，2026-11-15；原来是这块白板正中一行「正在读取过词进度」）。
+ * 读完以后多半落在开始页（「这轮准备收多少个生词？」），所以照开始页排：图标、标题、说明一行、目标生词数、
+ * 读音和「开始过词」一排、下面「直接生成词表」一段。容器和各段用开始页同一套 class，白板整块居中，高度对上了才不跳。
+ * 最近生词组那一段要看数据，不画。读完落在过词中（有没过完的一轮）时整页换成过词的样子，那一下会变（见 README）。
+ */
+function RunSetupSkeleton({ showSkeleton }: { showSkeleton: boolean }) {
+  return (
+    <section className="vocabulary-run-setup vocabulary-run-skeleton" role="status" aria-busy="true">
+      <span className="visually-hidden">正在读取过词进度</span>
+      {showSkeleton && <>
+        <Skeleton width={32} height={32} />
+        <h2><Skeleton width={220} height={16} /></h2>
+        <p><Skeleton width={300} height={12} /></p>
+        <div className="vocabulary-run-fields">
+          <div className="eqb-field">
+            <span className="eqb-field-label"><Skeleton width={64} height={10} /></span>
+            <Skeleton height={36} />
+          </div>
+        </div>
+        <div className="vocabulary-run-start-row">
+          <div className="eqb-field" data-layout="inline">
+            <span className="eqb-field-label"><Skeleton width={48} height={10} /></span>
+            <Skeleton width={120} height={32} />
+          </div>
+          <Skeleton width={88} height={32} />
+        </div>
+        <div className="vocabulary-direct-set">
+          <div className="vocabulary-direct-set-heading">
+            <h3><Skeleton width={168} height={12} /></h3>
+            <span><Skeleton width={150} height={10} /></span>
+          </div>
+          <div className="eqb-field vocabulary-direct-set-input">
+            <span className="eqb-field-label"><Skeleton width={88} height={10} /></span>
+            {/* 多行框 4 行：14px × 1.5 × 4 + 上下内边距 8 × 2 + 边 1 × 2 = 102（field.css 大号多行）。 */}
+            <Skeleton height={102} />
+          </div>
+          <Skeleton width={104} height={36} />
+        </div>
+      </>}
+    </section>
+  )
 }
 
 function VocabularyVisual({ entry, compact = false }: { entry: VocabularyEntry; compact?: boolean }) {
@@ -499,6 +545,11 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const [printShareKind, setPrintShareKind] = useState<'listen' | 'dictation' | null>(null)
   const [printHandwritingMode, setPrintHandwritingMode] = useState<VocabularyHandwritingMode>('standard')
   const [pdfDownloadBusy, setPdfDownloadBusy] = useState(false)
+  // 等待第五轮（2026-11-15）：下载（PDF / ZIP）等过 10 秒，在键下方、出错那一行的位置多说一句（键上的图标照旧自己演）。
+  const pdfDownloadSlow = useSlowWait(pdfDownloadBusy)
+  // 等待第五轮（2026-11-15）：读词库、学生档案、过词进度这一段整页在等，画开始页的灰块，走门槛（300ms 内不出、出了至少留 500ms）。
+  const progressLoading = programLoadState === 'loading' || studentsState === 'loading' || runState === 'loading'
+  const progressOpeningPhase = useDelayedBusy(progressLoading)
   const [downloadMenuOpen, setDownloadMenuOpen] = useState(false)
   const [pendingShareDownload, setPendingShareDownload] = useState<{
     kind: 'cards' | 'dictation' | 'bundle'
@@ -1570,8 +1621,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             <Button tone="solid" onClick={() => window.location.reload()}>重新加载</Button>
             {requestError && <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>}
           </section>
-        ) : programLoadState === 'loading' || studentsState === 'loading' || runState === 'loading' ? (
-          <section className="vocabulary-run-setup"><Notice kind="waiting">正在读取过词进度</Notice></section>
+        ) : progressLoading || progressOpeningPhase === 'waiting' ? (
+          <RunSetupSkeleton showSkeleton={progressOpeningPhase === 'waiting'} />
         ) : progressExplorerOpen && activeStudent ? (
           <div id="vocabulary-progress-explorer">
             <VocabularyProgressExplorer
@@ -1634,7 +1685,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             </div>
             {shareDownloadConfirmation}
             {shareId && <p className="vocabulary-share-ready">当前公开二维码有效：单词卡扫码听音频，听写纸扫码自动听写。</p>}
-            {requestError && <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>}
+            {requestError ? <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>
+              : pdfDownloadSlow ? <Notice kind="waiting" className="vocabulary-download-wait">正在生成，比平时慢，可以先去做别的</Notice> : null}
           </section>
         ) : runState === 'setup' || runState === 'error' ? (
           <section className="vocabulary-run-setup" aria-labelledby="vocabulary-run-title">
@@ -1920,7 +1972,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 </div>
                 {shareDownloadConfirmation}
                 {shareId && <p className="vocabulary-share-ready">公开二维码已固定：单词卡扫码听音频，听写纸扫码自动听写。</p>}
-                {requestError && <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>}
+                {requestError ? <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>
+              : pdfDownloadSlow ? <Notice kind="waiting" className="vocabulary-download-wait">正在生成，比平时慢，可以先去做别的</Notice> : null}
               </div>
             )}
           </section>

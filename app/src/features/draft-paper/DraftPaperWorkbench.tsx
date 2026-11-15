@@ -684,6 +684,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // 卷面落后于左栏：分页还没按当前的题组表排出来，或者删、加的保存还没回来。
   const previewStale = renderedPaginationKey !== paginationKey || layoutSavesPending > 0
   const previewFailed = !previewStale && paginationStatus === 'error'
+  // 等待第五轮（2026-11-15）：重排等过 10 秒，那一行改说大概要多久。本地重排一次约 37 秒、每次都这么久，
+  // 所以不说「比平时慢」（DESIGN.md §5 Waiting，午第四轮建议、协调人排进第五轮）。
+  const reflowSlow = useSlowWait(previewStale)
   // 等待第四轮（2026-11-15）：打开草稿卷、第一次排出卷面之前，纸的位置画灰块。两段（读草稿卷、分页）接成一段等，
   // 走同一个门槛：读完草稿卷换上真目录时，纸上的灰块不断、不重新数 300ms。
   const sheetPending = loadStatus === 'loading'
@@ -1993,7 +1996,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                   <div className={`draft-a4-wait${previewStale ? ' is-waiting' : ''}`} hidden={!previewStale && !previewFailed}>
                     {/* 共用提示行的 over 放法（垫桌色、e1）；sticky 的位置仍由 .draft-a4-wait-line 给。 */}
                     {previewStale ? (
-                      <Notice kind="waiting" placement="over" className="draft-a4-wait-line">正在重排卷面，旧卷面先留着</Notice>
+                      <Notice kind="waiting" placement="over" className="draft-a4-wait-line">
+                        {reflowSlow ? '正在重排卷面，大约要半分钟，旧卷面先留着' : '正在重排卷面，旧卷面先留着'}
+                      </Notice>
                     ) : previewFailed && paginationError ? (
                       <Notice
                         kind="error"

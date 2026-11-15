@@ -1050,7 +1050,7 @@
 
 /* 一张 A4：照预览 iframe 里的 .preview-page（794 宽、离纸栏顶 24、A4 高 1123）。
    底、阴影同 .preview-page 和整卷页 .paper-browse-zoom（DESIGN.md Shadow Vocabulary · Sheet 纸面）：
-   全站没有纸面阴影 token，这是同一组值的第三处，缺口登记在 docs/design-gaps.md「2026-11-15 纸面阴影」。
+   阴影用纸面 token --elev-sheet（tokens.css，等待第五轮从字面量收进来，值不变；预览 iframe 里那份是 #00000010 / #00000014，没收）。
    页边距照 PaperSurface 的页边（上 79、左右 91），灰块在纸上的位置和真卷面的字一样。 */
 .draft-skeleton-sheet {
   box-sizing: border-box;
@@ -1063,7 +1063,7 @@
   margin: 0 auto;
   padding: 79px 91px;
   background: var(--eqb-color-paper);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--elev-sheet);
 }
 
 /* 纸离纸栏顶 24（预览 iframe 里 body 的上内边距）。写成外面一层的内边距，不写纸的外边距：

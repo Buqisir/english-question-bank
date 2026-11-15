@@ -3,8 +3,10 @@ import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar.tsx'
 import { ChevronRight, Paper } from '../../icons'
 import { EmptyState } from '../../shared-ui/EmptyState.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
+import { Skeleton, SkeletonGate } from '../../shared-ui/Skeleton.tsx'
 import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate.tsx'
+import { ensurePaperFonts } from '../../shared-ui/papersurface/paperFontLoader.ts'
 import { fetchQuestionGroups } from '../../services/questionGroups.ts'
 import {
   fetchNotebookPaper,
@@ -123,6 +125,39 @@ function NotebookSheet({
   )
 }
 
+// 一张纸的灰块（等待第五轮，2026-11-15；原来是纸上方居中一行「正在打开这张纸」）。
+// 纸用真纸同一个 class（.notebook-sheet：宽、页边、白底、纸面阴影都是那一条规则给的），里面照真纸排：
+// 卷名一行、篇名一行、三个生词（词头 + 音标一行、释义一行、例句和译文两行）。字的位置放灰块，行高由真规则给。
+const NOTEBOOK_SKELETON_WORDS = [
+  { head: 72, phonetic: 140, meaning: '46%', example: '100%', translation: '62%' },
+  { head: 96, phonetic: 120, meaning: '38%', example: '92%', translation: '54%' },
+  { head: 64, phonetic: 150, meaning: '52%', example: '100%', translation: '70%' },
+]
+
+function NotebookSheetSkeleton() {
+  return (
+    <div className="notebook-sheet notebook-skeleton" aria-hidden="true">
+      <h1 className="canonical-paper-cover-title"><Skeleton width={240} height={20} /></h1>
+      <div>
+        <h2 className="notebook-passage"><Skeleton width={120} height={12} /></h2>
+        {NOTEBOOK_SKELETON_WORDS.map((word, index) => (
+          <section key={index} className="notebook-word">
+            <p className="notebook-head">
+              <Skeleton width={word.head} height={14} />
+              <Skeleton width={word.phonetic} height={10} />
+            </p>
+            <p><Skeleton width={word.meaning} height={10} /></p>
+            <div className="notebook-example">
+              <p><Skeleton width={word.example} height={10} /></p>
+              <p><Skeleton width={word.translation} height={10} /></p>
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 export function VocabularyNotebookPage({
   paperId,
   shellNav,
@@ -162,6 +197,8 @@ export function VocabularyNotebookPage({
       })
     }
     reload()
+    // 纸面字体和这张纸一起读（灰块挪出 PaperFontGate 以后，免得等纸到了才开始读字体）。读不到由 PaperFontGate 照旧报。
+    if (paperId) void ensurePaperFonts('').catch(() => undefined)
     const channel = new BroadcastChannel('eqb-vocabulary-notebook')
     channel.addEventListener('message', reload)
     return () => {
@@ -194,12 +231,18 @@ export function VocabularyNotebookPage({
         onBack={paperId ? onOpenList : onBack}
       />
       {paperId ? (
-        <PaperFontGate>
-          <main className="notebook-desk">
-            {error ? <Notice kind="error" className="notebook-status">{error}</Notice> : null}
-            {detail ? <NotebookSheet detail={detail} titles={titles} /> : <Notice kind="waiting" className="notebook-status">正在打开这张纸</Notice>}
-          </main>
-        </PaperFontGate>
+        // 等待第五轮（2026-11-15）：灰块在 PaperFontGate 外面，一打开就走门槛，不等纸面字体；字体照旧由 PaperFontGate 管真纸。
+        // 原来 PaperFontGate 包着整块（连「正在打开这张纸」那一行），字体和这张纸一起读；挪出来以后在下面的 effect 里先读通用字体，仍是一起读。
+        <main className="notebook-desk">
+          {error ? <Notice kind="error" className="notebook-status">{error}</Notice> : null}
+          <SkeletonGate pending={!detail && !error} label="正在打开这张纸" skeleton={<NotebookSheetSkeleton />}>
+            {detail ? (
+              <PaperFontGate>
+                <NotebookSheet detail={detail} titles={titles} />
+              </PaperFontGate>
+            ) : null}
+          </SkeletonGate>
+        </main>
       ) : (
         <main className="notebook-main" ref={paperListRef}>
           {error ? <Notice kind="error" className="notebook-error">{error}</Notice> : null}

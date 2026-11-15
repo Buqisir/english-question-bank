@@ -48,7 +48,7 @@
   font-size: var(--ps-font-size);
   line-height: var(--ps-line-height);
   padding: var(--ps-page-margin-top) var(--ps-page-margin-x) 72px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--elev-sheet);
 }
 
 .notebook-sheet .canonical-paper-cover-title {
@@ -70,6 +70,21 @@
 .notebook-head { display: flex; flex-wrap: wrap; gap: 4pt 12px; align-items: baseline; }
 .notebook-head strong { font-size: 12pt; white-space: nowrap; }
 .notebook-example { margin-top: 6pt; }
+
+/* 一张纸的灰块（等待第五轮 2026-11-15，NotebookSheetSkeleton）：纸和里面的行都用真纸的 class，这里只管灰块怎么坐进去。
+ * 覆盖：放在字的位置（h1、h2、p）的灰块，(0,2,1) 盖过 waiting.css .eqb-skeleton (0,1,0) 的 display: block——改成行内块，
+ * 那一行的高度仍由真规则的字号、行高给，和有字时一样高；卷名、篇名照真规则居中。 */
+.notebook-skeleton :is(h1, h2, p) > .eqb-skeleton {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 词头那一行真的是基线对齐的 flex（.notebook-head），灰块没有基线，也撑不起一行字的行高。
+ * 覆盖：本条 (0,2,0) 盖过 .notebook-head (0,1,0) 的 align-items: baseline，按中线对齐；高度留够真纸的一行（--ps-line-height）。 */
+.notebook-skeleton .notebook-head {
+  align-items: center;
+  min-height: var(--ps-line-height);
+}
 
 @media print {
   .notebook-page { background: #fff; }

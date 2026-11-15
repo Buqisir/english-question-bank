@@ -304,7 +304,7 @@
   font-size: var(--ps-font-size);
   padding: var(--ps-page-margin-top, 79px) var(--ps-page-margin-x, 91px);
   /* DESIGN.md Shadow Vocabulary · Sheet 纸面 */
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--elev-sheet);
   position: relative;
 }
 

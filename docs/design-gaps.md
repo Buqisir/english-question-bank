@@ -142,3 +142,9 @@ token 的扩展用法。
 
 - **想要的值**：一是纸面阴影（DESIGN.md Shadow Vocabulary · Sheet 纸面）`0 1px 0 rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08)`：整卷页 `.paper-browse-zoom`、草稿卷预览 `.preview-page` 各写了一份字面量，草稿卷打开时的 A4 灰块是第三份。二是 A4 纸的宽高和页边（794 × 1123，上 79、左右 91）：PaperSurface 有 JS token（`paperSurfaceTokens`），CSS 里没有，灰块只能照抄。三是整页灰块里放在「一行字」位置的灰块宽高（目录 24 × 10、28 × 12，卷头 72 × 28 等），照真页面字的大小目测。若收编，候选名 `--elev-sheet`、`--ps-page-width` / `--ps-page-height`（挂到 :root），三建议不收（是各页的放法）。
 - **临时方案**：一、二照原值写字面量，注释写明照抄哪一条；整卷页灰块和真卷面同一条规则（选择器并列），不另写一份。三写在 TSX 的 Skeleton 宽高上。记录在 `design/components-2026-11-13/migrate-waiting-4/README.md`。
+- **2026-11-15 第五轮（未）**：第一条收了。`--elev-sheet` 加进 `app/src/shared-ui/tokens.css`（值和原字面量一字不差），换掉整卷页 `.paper-browse-zoom`、生词本 `.notebook-sheet`、题组详情 `.peek-paper`、草稿卷 `.draft-skeleton-sheet` 四处。没收的三处值不一样：PaperSurface `.ps-page`（`#00000010` / `#00000014`，不碰 PaperSurface）、草稿卷预览 iframe 里的 `.preview-page`（`draftPaperPreviewHtml.ts`，iframe 里读不到站里的变量，同 `#00000010` / `#00000014`）、写作卷 `.pi-writing-page`（0.063）。这三处和 `--elev-sheet` 差 0.003 / 0.002 的透明度，要不要统一等 Owner。第二、三条照旧。
+
+## 2026-11-15 扫码听写启动壳的门槛（`app/src/index.css` `.public-vocabulary-boot-skeleton`）
+
+- **想要的值**：等待的门槛 300ms（DESIGN.md §5「门槛」）。JS 里是 `shared-ui/useDelayedBusy.ts` 的 `WAIT_SHOW_DELAY_MS`，CSS 里没有对应的变量；启动壳不跑 JS 计时，只能用 CSS 的 animation-delay。若收编，候选名 `--wait-show-delay`（挂到 :root，JS 那边也读它）。
+- **临时方案**：在 `.public-vocabulary-boot-skeleton > *` 的 animation 里照写 300ms（另有一个 1ms 的空动画时长），注释写明出处是 `WAIT_SHOW_DELAY_MS`。记录在 `design/components-2026-11-13/migrate-waiting-5/README.md`。

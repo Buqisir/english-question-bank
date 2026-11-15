@@ -1052,6 +1052,20 @@
   text-align: center;
 }
 
+/* 过词开始页的灰块（等待第五轮 2026-11-15，RunSetupSkeleton）：容器和各段用开始页同一套 class，这里只管灰块怎么坐进去。
+ * 覆盖：放在字的位置（h2、h3、p、span）的灰块，(0,2,1) 盖过 waiting.css .eqb-skeleton (0,1,0) 的 display: block——
+ * 改成行内块，那一行的高度仍由真规则的字号、行高给，和有字时一样高。 */
+.vocabulary-run-skeleton :is(h2, h3, p, span) > .eqb-skeleton {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 「开始过词」那一排真的是底对齐（align-items: end），灰块照样底对齐；「读音」分段的灰块不缩。
+ * 覆盖：本条 (0,2,0) 和 .vocabulary-run-start-row (0,1,0) 不冲突属性，只是给灰块的「读音」那一格一个宽度。 */
+.vocabulary-run-skeleton .vocabulary-run-start-row > .eqb-field {
+  flex: 0 0 auto;
+}
+
 .vocabulary-run-setup > svg {
   color: var(--ink);
 }
@@ -1247,7 +1261,9 @@
  * 换成 Notice 以后不是 <p> 了，不再被那条压，!important 一起去掉；这里只留上面隔 12。
  * 类名留着：服务器出单词纸 PDF 时按它读出错的字（server/vocabulary/vocabularyPdfRenderer.mjs）。
  * 覆盖：本条 (0,2,0) 盖过 .eqb-notice (0,1,0) 的 margin: 0。 */
-.eqb-notice.vocabulary-request-error {
+/* 等待第五轮（2026-11-15）：下载等过 10 秒的那一行和出错行用同一个位置（两者不同时出），所以并在一条里。 */
+.eqb-notice.vocabulary-request-error,
+.eqb-notice.vocabulary-download-wait {
   margin-top: var(--eqb-space-3);
 }
 

@@ -384,10 +384,11 @@
 /* ─── 翻牌页的灰块（等待第四轮，2026-11-15，VocabularyPracticeSkeleton） ───
  * 容器用真页面同一套 class，这里只管灰块怎么坐进去。 */
 
-/* 覆盖：放在字的位置（h1、p、strong、span、small、h2 里）的灰块，
+/* 覆盖：放在字的位置（h1、p、strong、span、small 里）的灰块，
  * (0,2,1) 盖过 waiting.css .eqb-skeleton (0,1,0) 的 display: block——改成行内块，
- * 这样外面那个元素的高度仍由它自己的字号、行高给，和有字时一样高。 */
-.vocabulary-practice-skeleton :is(h1, h2, p, strong, span, small) > .eqb-skeleton {
+ * 这样外面那个元素的高度仍由它自己的字号、行高给，和有字时一样高。
+ * （牌桌上方原来占位的 h2 第五轮删了：真页面那个 h2 改成只给读屏，不占位置。） */
+.vocabulary-practice-skeleton :is(h1, p, strong, span, small) > .eqb-skeleton {
   display: inline-block;
   vertical-align: middle;
 }

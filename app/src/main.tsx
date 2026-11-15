@@ -1,6 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
+// 启动壳和启动失败页（等待第五轮，2026-11-15）：只有壳的标记和样式，不拿页面代码；页面代码块照旧按需加载（verify-launch-deploy Slice 1）。
+import {
+  BootstrapError,
+  PublicVocabularyDictationBootShell,
+  PublicVocabularyListenBootShell,
+} from './publicVocabularyBootShell.tsx'
 import type { VocabularyAudioAccent } from './features/vocabulary-listen/vocabularyAudioVariants.ts'
 
 /**
@@ -85,44 +91,24 @@ const publicVocabularyDictationRequest = getPublicVocabularyDictationRequest()
 
 const root = createRoot(document.getElementById('root')!)
 
-function PublicVocabularyBootShell({ mode }: { mode: 'dictation' | 'listen' }) {
-  return (
-    <main className="public-vocabulary-boot" aria-live="polite">
-      <div>
-        <span aria-hidden="true">EQ</span>
-        <h1>{mode === 'dictation' ? '正在准备听写' : '正在准备词汇练习'}</h1>
-        <p>正在载入本次练习，请稍候。</p>
-      </div>
-    </main>
-  )
-}
-
-function BootstrapError() {
-  return (
-    <main className="public-vocabulary-boot" role="alert">
-      <div>
-        <span aria-hidden="true">EQ</span>
-        <h1>页面暂时无法打开</h1>
-        <p>请检查网络后重新打开链接。</p>
-      </div>
-    </main>
-  )
-}
+/** 灰块一呼一吸一圈的长度：和 waiting.css .eqb-skeleton 的 --eqb-skeleton-cycle 同一个数（DESIGN §5「灰块」）。 */
+const BOOT_SKELETON_CYCLE_MS = 1800
 
 async function bootstrap() {
   if (publicVocabularyDictationRequest) {
-    root.render(<PublicVocabularyBootShell mode="dictation" />)
+    const bootStartedAt = performance.now()
+    root.render(<PublicVocabularyDictationBootShell phaseDelay={`-${Math.round(bootStartedAt % BOOT_SKELETON_CYCLE_MS)}ms`} />)
     const { VocabularyDictationPage } = await import('./features/vocabulary-dictation/VocabularyDictationPage.tsx')
     root.render(
       <StrictMode>
-        <VocabularyDictationPage {...publicVocabularyDictationRequest} />
+        <VocabularyDictationPage {...publicVocabularyDictationRequest} bootStartedAt={bootStartedAt} />
       </StrictMode>,
     )
     return
   }
 
   if (publicVocabularyShareId !== null) {
-    root.render(<PublicVocabularyBootShell mode="listen" />)
+    root.render(<PublicVocabularyListenBootShell />)
     const { VocabularyListenPage } = await import('./features/vocabulary-listen/VocabularyListenPage.tsx')
     root.render(
       <StrictMode>

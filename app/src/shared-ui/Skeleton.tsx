@@ -11,7 +11,7 @@
  */
 
 import { useLayoutEffect, useRef, type CSSProperties, type ReactNode } from 'react'
-import { useDelayedBusy } from './useDelayedBusy.ts'
+import { useDelayedBusy, type WaitPhase } from './useDelayedBusy.ts'
 import './waiting.css'
 
 export type SkeletonProps = {
@@ -53,6 +53,9 @@ export type SkeletonGateProps = {
   /** 真东西。等完、灰块走了才渲染。 */
   children?: ReactNode
   className?: string
+  /** 两段接着等（先等整页、再等这一块）时，由调用处给接成一段的门槛（等待第五轮，题组详情）：
+   *  灰块不在两段之间断开、不重新数 300ms。不给就用 pending 自己的门槛。 */
+  phase?: WaitPhase
 }
 
 /**
@@ -63,9 +66,9 @@ export type SkeletonGateProps = {
  * 真东西画在别处（词典卡、句子分析卡：词条、译文在灰块下面另画）时，调用处等完就卸掉 SkeletonGate，只要「300ms 内不出」，
  * 不留够 500ms（留着会和真东西同时在、卡片一跳）。
  */
-export function SkeletonGate({ pending, label, skeleton, children, className }: SkeletonGateProps) {
-  const phase = useDelayedBusy(pending)
-  const showSkeleton = phase === 'waiting'
+export function SkeletonGate({ pending, label, skeleton, children, className, phase: sharedPhase }: SkeletonGateProps) {
+  const ownPhase = useDelayedBusy(pending)
+  const showSkeleton = (sharedPhase ?? ownPhase) === 'waiting'
   if (!pending && !showSkeleton) return <>{children}</>
   return (
     <div className={className ? `eqb-skeleton-region ${className}` : 'eqb-skeleton-region'} role={label ? 'status' : undefined} aria-busy="true">

@@ -63,9 +63,6 @@ function VocabularyPracticeSkeleton() {
         </span>
       </div>
       <section className="vocabulary-practice-board-section">
-        {/* 真牌桌上方有一个 h2（className="sr-only"，但全站没有 .sr-only，所以看得见，见 migrate-waiting-4/README.md「看到的问题」）。
-            这里占同一个位置，数据到了牌桌不往下跳。 */}
-        <h2 className="sr-only"><Skeleton width={120} height={16} /></h2>
         <div className="vocabulary-match-board vocabulary-practice-skeleton-board">
           {Array.from({ length: SKELETON_CARD_COUNT }, (_, index) => (
             <div key={index} className="vocabulary-practice-skeleton-card"><Skeleton height="100%" /></div>
@@ -254,7 +251,8 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
             </div>
 
             <section className="vocabulary-practice-board-section" aria-labelledby="vocabulary-match-board-title">
-              <h2 id="vocabulary-match-board-title" className="sr-only">单词配对卡片</h2>
+              {/* 等待第五轮（2026-11-15）：原来写的 sr-only 全站没定义，这一行一直是看得见的大标题；改用 index.css 的 visually-hidden，只给读屏（牌桌的区域名）。 */}
+              <h2 id="vocabulary-match-board-title" className="visually-hidden">单词配对卡片</h2>
               <div ref={boardRef} className="vocabulary-match-board">
                 {game.cards.map((card, cardIndex) => {
                   const revealed = card.status === 'revealed'

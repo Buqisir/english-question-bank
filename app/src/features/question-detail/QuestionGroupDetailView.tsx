@@ -45,7 +45,8 @@ import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
 import { Menu } from '../../shared-ui/Menu.tsx'
 import { Chip } from '../../shared-ui/Chip.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
-import { PaperGroupSkeleton, SkeletonGate } from '../../shared-ui/Skeleton.tsx'
+import { PaperGroupSkeleton, Skeleton, SkeletonGate } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
 import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import {
   SimilarPassagesPanel,
@@ -292,6 +293,37 @@ const psTokenStyle: CSSProperties & Record<`--${string}`, string | number> = {
   '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
 }
 
+/**
+ * 整页在等题组详情时的灰块（等待第五轮，2026-11-15；原来是「返回找题」下面一行「正在读取题组详情」）。
+ * 用真页面同一套 class 排：速览头（题型一行、标题、摘要两行、三个小签、一排键），下面一张纸露一角（同卷面在等时的灰块）。
+ * 字的位置放灰块，行高由真规则的字号、行高给。showSkeleton 是外面接成一段的门槛（读详情 → 读卷面）。
+ */
+function DetailOpeningSkeleton({ showSkeleton }: { showSkeleton: boolean }) {
+  return (
+    <section className="peek-root detail-opening-skeleton" role="status" aria-busy="true">
+      <span className="visually-hidden">正在读取题组详情</span>
+      {showSkeleton && <>
+        <div className="peek-hero" aria-hidden="true">
+          <div className="peek-meta-line"><span><Skeleton width={120} height={10} /></span></div>
+          <h3 className="peek-title"><Skeleton width={280} height={16} /></h3>
+          <p className="peek-summary"><Skeleton width="100%" height={10} /><br /><Skeleton width="56%" height={10} /></p>
+          <div className="peek-chips">
+            {[72, 64, 80].map((width, index) => <Skeleton key={index} width={width} height={24} shape="pill" />)}
+          </div>
+          <div className="peek-actions">
+            {[104, 88, 88].map((width, index) => <Skeleton key={index} width={width} height={32} />)}
+          </div>
+        </div>
+        <div className="peek-paper" aria-hidden="true">
+          <div className="peek-paper-clip">
+            <div className="peek-paper-skeleton"><PaperGroupSkeleton /></div>
+          </div>
+        </div>
+      </>}
+    </section>
+  )
+}
+
 export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
   const {
     isOwnerView,
@@ -308,6 +340,8 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
   // ── 一张纸：async 挂载（confirmed Canonical Consumption only） ───────
   const paperId = selectedDetail?.canonicalPaperId
   const [load, setLoad] = useState<LoadState>({ status: 'loading' })
+  // 等待第五轮（2026-11-15）：读题组详情、读卷面两段接成一段等，走一个门槛：整页灰块换成真速览头时，纸上的灰块不断、不重新数 300ms。
+  const paperPhase = useDelayedBusy(selectedDetail ? load.status === 'loading' : detailStatus === 'loading')
   const [expanded, setExpanded] = useState(false)
 
   function toggleExpanded(next: boolean): void {
@@ -499,7 +533,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
         <Button className="detail-back" tone="subtle" size="sm" icon={<ArrowLeft size={16} aria-hidden="true" />} onClick={onBack}>
           返回找题
         </Button>
-        {detailStatus === 'loading' && <Notice kind="waiting" className="detail-message">正在读取题组详情</Notice>}
+        {(detailStatus === 'loading' || paperPhase === 'waiting') && detailStatus !== 'error' && <DetailOpeningSkeleton showSkeleton={paperPhase === 'waiting'} />}
         {detailStatus === 'error' && <Notice kind="error" className="detail-message">{detailError}</Notice>}
       </div>
     )
@@ -513,7 +547,7 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
   const paperBody: ReactNode = load.status === 'error'
     ? <div className="peek-paper-placeholder">{load.message}</div>
     : (
-      <SkeletonGate pending={load.status === 'loading'} label="卷面加载中" className="peek-paper-skeleton" skeleton={<PaperGroupSkeleton />}>
+      <SkeletonGate pending={load.status === 'loading'} phase={paperPhase} label="卷面加载中" className="peek-paper-skeleton" skeleton={<PaperGroupSkeleton />}>
         {load.status === 'ready' ? <QuestionGroupPaperSurface entry={load.model} /> : null}
       </SkeletonGate>
     )

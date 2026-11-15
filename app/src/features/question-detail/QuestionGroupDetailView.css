@@ -126,9 +126,8 @@
   box-sizing: border-box;
   border-radius: 4px;
   background: #fff;
-  box-shadow:
-    0 1px 0 rgba(0, 0, 0, 0.06),
-    0 12px 32px rgba(0, 0, 0, 0.08);
+  /* DESIGN.md §4 Sheet 纸面（--elev-sheet，tokens.css；等待第五轮从字面量收进来，值不变）。 */
+  box-shadow: var(--elev-sheet);
   overflow: hidden;
 }
 
@@ -180,6 +179,14 @@
  * 四周内边距照抄下面 .peek-paper .ps-page 的 32 / 48 / 40（真卷面的页边），不另取值。 */
 .peek-paper-skeleton {
   padding: 32px 48px 40px;
+}
+
+/* 整页在等题组详情的灰块（等待第五轮 2026-11-15，DetailOpeningSkeleton）：速览头、纸都用真页面的 class，这里只管灰块怎么坐进去。
+ * 覆盖：放在字的位置（span、h3、p）的灰块，(0,2,1) 盖过 waiting.css .eqb-skeleton (0,1,0) 的 display: block——
+ * 改成行内块，那一行的高度仍由真规则的字号、行高给，和有字时一样高。 */
+.detail-opening-skeleton :is(span, h3, p) > .eqb-skeleton {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .peek-paper-placeholder {
