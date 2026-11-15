@@ -1,0 +1,236 @@
+[
+  {
+    "where": "小舞台",
+    "what": "分段：Tab 进组停在选中项",
+    "ok": true,
+    "detail": "{\"role\":\"radio\",\"text\":\"A4 散页\",\"checked\":\"true\",\"disabled\":null,\"expanded\":null,\"outline\":\"2px solid rgb(41, 66, 77) @2px\"}"
+  },
+  {
+    "where": "小舞台",
+    "what": "分段：焦点环可见（2px 实线，外扩 2px）",
+    "ok": true,
+    "detail": "2px solid rgb(41, 66, 77) @2px"
+  },
+  {
+    "where": "小舞台",
+    "what": "分段：→ 跳过用不了的「A3 对折」，落到「A5 小册」并选上",
+    "ok": true,
+    "detail": "{\"role\":\"radio\",\"text\":\"A5 小册\",\"checked\":\"true\",\"disabled\":null,\"expanded\":null,\"outline\":\"2px solid rgb(41, 66, 77) @2px\"}"
+  },
+  {
+    "where": "小舞台",
+    "what": "分段：→ 到头绕回第一项",
+    "ok": true,
+    "detail": "{\"role\":\"radio\",\"text\":\"A4 散页\",\"checked\":\"true\",\"disabled\":null,\"expanded\":null,\"outline\":\"2px solid rgb(41, 66, 77) @2px\"}"
+  },
+  {
+    "where": "小舞台",
+    "what": "分段：← 反向同样跳过用不了的项",
+    "ok": true,
+    "detail": "{\"role\":\"radio\",\"text\":\"A5 小册\",\"checked\":\"true\",\"disabled\":null,\"expanded\":null,\"outline\":\"2px solid rgb(41, 66, 77) @2px\"}"
+  },
+  {
+    "where": "小舞台",
+    "what": "分段：↑ 同 ←",
+    "ok": true,
+    "detail": "{\"role\":\"radio\",\"text\":\"A4 散页\",\"checked\":\"true\",\"disabled\":null,\"expanded\":null,\"outline\":\"2px solid rgb(41, 66, 77) @2px\"}"
+  },
+  {
+    "where": "小舞台",
+    "what": "分段：整组只占一个 Tab 位",
+    "ok": true,
+    "detail": "tabindex=0 的项 1 个"
+  },
+  {
+    "where": "小舞台",
+    "what": "分段：点用不了的项不换",
+    "ok": true,
+    "detail": "A4 散页"
+  },
+  {
+    "where": "小舞台",
+    "what": "分段：读屏 radiogroup 名字 =「打印形态」，描述带原因",
+    "ok": true,
+    "detail": "{\"role\":\"radiogroup\",\"name\":\"打印形态\",\"description\":\"A3 对折用不了：卷面超过 8 页，对折装不下\",\"props\":{\"required\":false,\"describedby\":\"_r_1_-hint\"}}"
+  },
+  {
+    "where": "小舞台",
+    "what": "分段：用不了的 radio 读得到「不可用」和原因",
+    "ok": true,
+    "detail": "{\"role\":\"radio\",\"name\":\"A3 对折\",\"description\":\"A3 对折用不了：卷面超过 8 页，对折装不下\",\"props\":{\"disabled\":true,\"invalid\":\"false\",\"focusable\":true,\"focused\":true,\"checked\":\"false\",\"describedby\":\"_r_0_-reason-1\"}}"
+  },
+  {
+    "where": "小舞台",
+    "what": "下拉：Tab 从分段出来落到触发键",
+    "ok": true,
+    "detail": "{\"role\":\"button\",\"text\":\"大字无听力版\",\"checked\":null,\"disabled\":null,\"expanded\":\"false\",\"outline\":\"2px solid rgb(41, 66, 77) @2px\"}"
+  },
+  {
+    "where": "小舞台",
+    "what": "下拉：触发键焦点环可见",
+    "ok": true,
+    "detail": "2px solid rgb(41, 66, 77) @2px"
+  },
+  {
+    "where": "小舞台",
+    "what": "下拉：触发键读屏名字 =「PDF 版本 + 当前值」，说有弹出菜单",
+    "ok": true,
+    "detail": "{\"role\":\"button\",\"name\":\"PDF 版本 大字无听力版\",\"props\":{\"invalid\":\"false\",\"focusable\":true,\"focused\":true,\"hasPopup\":\"menu\",\"expanded\":false}}"
+  },
+  {
+    "where": "小舞台",
+    "what": "下拉：Enter 打开，焦点落在勾着的那一项",
+    "ok": true,
+    "detail": "{\"role\":\"menuitemcheckbox\",\"text\":\"大字无听力版\",\"checked\":\"true\",\"disabled\":null,\"expanded\":null,\"outline\":\"2px solid rgb(41, 66, 77) @-2px\"}"
+  },
+  {
+    "where": "小舞台",
+    "what": "下拉：↑ 停在用不了的「大字完整版」（禁用项也停）",
+    "ok": true,
+    "detail": "{\"role\":\"menuitemcheckbox\",\"text\":\"大字完整版 要有完整的两个听力题组\",\"checked\":\"false\",\"disabled\":\"true\",\"expanded\":null,\"outline\":\"2px solid rgb(41, 66, 77) @-2px\"}"
+  },
+  {
+    "where": "小舞台",
+    "what": "下拉：用不了的项读得到「不可用」和一行原因",
+    "ok": true,
+    "detail": "{\"role\":\"menuitemcheckbox\",\"name\":\"大字完整版\",\"description\":\"要有完整的两个听力题组\",\"props\":{\"disabled\":true,\"invalid\":\"false\",\"focusable\":true,\"focused\":true,\"checked\":\"false\",\"describedby\":\"_r_4_-largeComplete-note\"}}"
+  },
+  {
+    "where": "小舞台",
+    "what": "下拉：在用不了的项上按 Enter 不选、菜单不收",
+    "ok": true,
+    "detail": "菜单 1"
+  },
+  {
+    "where": "小舞台",
+    "what": "下拉：↑↑ 到「省纸版」",
+    "ok": true,
+    "detail": "{\"role\":\"menuitemcheckbox\",\"text\":\"省纸版\",\"checked\":\"false\",\"disabled\":null,\"expanded\":null,\"outline\":\"2px solid rgb(41, 66, 77) @-2px\"}"
+  },
+  {
+    "where": "小舞台",
+    "what": "下拉：Enter 选上、菜单收起、焦点回触发键、值变「省纸版」",
+    "ok": true,
+    "detail": "{\"role\":\"button\",\"text\":\"省纸版\",\"checked\":null,\"disabled\":null,\"expanded\":\"false\",\"outline\":\"2px solid rgb(41, 66, 77) @2px\"}"
+  },
+  {
+    "where": "小舞台",
+    "what": "下拉：空格打开、Esc 收起，焦点回触发键",
+    "ok": true,
+    "detail": "{\"role\":\"button\",\"text\":\"省纸版\",\"checked\":null,\"disabled\":null,\"expanded\":\"false\",\"outline\":\"2px solid rgb(41, 66, 77) @2px\"}"
+  },
+  {
+    "where": "小舞台",
+    "what": "文字输入：焦点环可见",
+    "ok": true,
+    "detail": "2px solid rgb(41, 66, 77) @2px"
+  },
+  {
+    "where": "小舞台",
+    "what": "文字输入：标签连上（名字 =「文件名」）、描述 = 出错 + 说明、invalid",
+    "ok": true,
+    "detail": "{\"role\":\"textbox\",\"name\":\"文件名\",\"description\":\"存进个人空间时用的名字 文件名不能空着\",\"props\":{\"invalid\":\"true\",\"focusable\":true,\"focused\":true,\"editable\":\"plaintext\",\"settable\":true,\"multiline\":false,\"readonly\":false,\"required\":false,\"describedby\":\"_r_5_-hint _r_5_-error\"}}"
+  },
+  {
+    "where": "小舞台",
+    "what": "文字输入：getByLabel 找得到",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "where": "草稿卷 1440",
+    "what": "「A4 / A3」在 header.topbar 里看得见",
+    "ok": true,
+    "detail": "2"
+  },
+  {
+    "where": "草稿卷 1440",
+    "what": "分段：→ 选上「A3 对折」",
+    "ok": true,
+    "detail": "{\"role\":\"radio\",\"text\":\"A3 对折\",\"checked\":\"true\",\"disabled\":null,\"expanded\":null,\"outline\":\"2px solid rgb(41, 66, 77) @2px\"}"
+  },
+  {
+    "where": "草稿卷 1440",
+    "what": "分段：← 回「A4 散页」",
+    "ok": true,
+    "detail": "{\"role\":\"radio\",\"text\":\"A4 散页\",\"checked\":\"true\",\"disabled\":null,\"expanded\":null,\"outline\":\"2px solid rgb(41, 66, 77) @2px\"}"
+  },
+  {
+    "where": "草稿卷 1440",
+    "what": "「PDF 版本」看得见",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "where": "草稿卷 1440",
+    "what": "下拉：Enter 打开，焦点落在勾着的那一项",
+    "ok": true,
+    "detail": "{\"role\":\"menuitemcheckbox\",\"text\":\"大字无听力版\",\"checked\":\"true\",\"disabled\":null,\"expanded\":null,\"outline\":\"2px solid rgb(41, 66, 77) @-2px\"}"
+  },
+  {
+    "where": "草稿卷 1440",
+    "what": "下拉：菜单不出屏",
+    "ok": true,
+    "detail": "{\"x\":654.6875,\"y\":44,\"width\":204,\"height\":158}"
+  },
+  {
+    "where": "草稿卷 1440",
+    "what": "下拉：用不了的版本读得到「不可用」和原因",
+    "ok": true,
+    "detail": "大字完整版｜要有完整的两个听力题组；纯答案版｜选中的题组还没有审过的参考答案"
+  },
+  {
+    "where": "草稿卷 1440",
+    "what": "下拉：键盘选另一个版本，焦点回触发键、值跟着变",
+    "ok": true,
+    "detail": "大字无听力版 → 省纸版 / 触发键 省纸版"
+  },
+  {
+    "where": "草稿卷 390",
+    "what": "「A4 / A3」在 .draft-option-row 里看得见",
+    "ok": true,
+    "detail": "2"
+  },
+  {
+    "where": "草稿卷 390",
+    "what": "分段：→ 选上「A3 对折」",
+    "ok": true,
+    "detail": "{\"role\":\"radio\",\"text\":\"A3 对折\",\"checked\":\"true\",\"disabled\":null,\"expanded\":null,\"outline\":\"2px solid rgb(41, 66, 77) @2px\"}"
+  },
+  {
+    "where": "草稿卷 390",
+    "what": "分段：← 回「A4 散页」",
+    "ok": true,
+    "detail": "{\"role\":\"radio\",\"text\":\"A4 散页\",\"checked\":\"true\",\"disabled\":null,\"expanded\":null,\"outline\":\"2px solid rgb(41, 66, 77) @2px\"}"
+  },
+  {
+    "where": "草稿卷 390",
+    "what": "「PDF 版本」看得见",
+    "ok": true,
+    "detail": ""
+  },
+  {
+    "where": "草稿卷 390",
+    "what": "下拉：Enter 打开，焦点落在勾着的那一项",
+    "ok": true,
+    "detail": "{\"role\":\"menuitemcheckbox\",\"text\":\"大字无听力版\",\"checked\":\"true\",\"disabled\":null,\"expanded\":null,\"outline\":\"2px solid rgb(41, 66, 77) @-2px\"}"
+  },
+  {
+    "where": "草稿卷 390",
+    "what": "下拉：菜单不出屏",
+    "ok": true,
+    "detail": "{\"x\":178,\"y\":180,\"width\":204,\"height\":158}"
+  },
+  {
+    "where": "草稿卷 390",
+    "what": "下拉：用不了的版本读得到「不可用」和原因",
+    "ok": true,
+    "detail": "大字完整版｜要有完整的两个听力题组；纯答案版｜选中的题组还没有审过的参考答案"
+  },
+  {
+    "where": "草稿卷 390",
+    "what": "下拉：键盘选另一个版本，焦点回触发键、值跟着变",
+    "ok": true,
+    "detail": "大字无听力版 → 省纸版 / 触发键 省纸版"
+  }
+]

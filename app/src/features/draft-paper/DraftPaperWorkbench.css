@@ -66,45 +66,9 @@
   padding: 7px 10px;
 }
 
-/* workbench-header-unify: .draft-title-field itself retired — the title
-   input now lives in AppTopbar (topbar-page-title-input, App.css) since the
-   title moved out of this file's DOM entirely (Locked Decision 2). Its
-   sibling field styles below stay: 学生（可选）/ 最近草稿卷 still render
-   here, just inside the "⋯" panel instead of the retired toolbar. */
-.draft-student-field span {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.draft-student-field {
-  display: grid;
-  gap: 4px;
-}
-
-.draft-student-field input,
-.draft-recent-select {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  color: var(--ink);
-  font: inherit;
-  min-height: 36px;
-  padding: 6px 9px;
-}
-
-.draft-student-field input {
-  width: 120px;
-}
-
-.draft-recent-select-field {
-  display: grid;
-  gap: 4px;
-}
-
-.draft-recent-select-field > span {
-  color: var(--muted);
-  font-size: 12px;
-}
+/* 字段构件（2026-11-14）：「⋯」面板里的「学生（可选）」「最近草稿卷」换成 shared-ui/Field.tsx 的 TextField / SelectField，
+   标签、边、高、焦点都在 shared-ui/field.css；原来 .draft-student-field / .draft-recent-select(-field) 那几条删掉，类名留给脚本认。
+   学生框原来定宽 120，现在跟面板一样宽（面板最窄 220）。 */
 
 .draft-save-status {
   color: var(--muted);
@@ -126,74 +90,20 @@
   color: var(--eqb-color-danger);
 }
 
-.draft-product-control {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--muted);
-  font-size: 13px;
-}
+/* 字段构件（2026-11-14）：「PDF 版本」「A4 / A3」换成 shared-ui/OptionField.tsx 的 OptionSelectField / SegmentedField，
+   样子全在 shared-ui/field.css。原来的 .draft-product-control（标签排法）、.draft-product-trigger .eqb-button-label、
+   .eqb-menu.draft-product-menu（宽度上限，搬进 field.css 的 .eqb-option-menu）、.draft-version-toggle*（分段的样子）删掉；
+   类名 draft-product-control / draft-product-trigger / draft-product-menu / draft-form-toggle 留给脚本认。 */
 
-/* 走查卡点 4：「PDF 版本」从原生下拉框换成共用 Menu 的触发键（strong 档，墨色字）。
- * 本条覆盖 button.css 的 .eqb-button-label（默认只是一段可省略的字）：
- * 这里字后面跟一个向下的箭头，要让字和箭头横排、竖向居中。 */
-.draft-product-trigger .eqb-button-label {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--eqb-space-1);
-}
-
-/* 版本菜单里有原因小字时，菜单宽度跟着最长的一行走；限一个上限（目测），
- * 长原因折成两行，不把菜单撑得比顶栏还宽。本条覆盖 menu.css 的 .eqb-menu max-width，
- * 因为那条只防出屏，不管可读行长。 */
-.eqb-menu.draft-product-menu {
-  max-width: min(320px, calc(100vw - 16px));
-}
-
-.draft-version-toggle {
-  --fh-radius: 8px;
-  background: transparent;
-  border: 0;
-  display: inline-flex;
-  gap: 2px;
-  padding: 0;
-}
-
+/* 顶栏里两个字段之间一条竖线，和原来一样。 */
 .draft-topbar-wide-toggle + .draft-topbar-wide-toggle {
   border-left: 1px solid var(--line);
   padding-left: 10px;
 }
 
-.draft-version-toggle button {
-  position: relative;
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  color: var(--muted);
-  cursor: pointer;
-  font: inherit;
-  font-size: 13px;
-  font-weight: 400;
-  min-height: 32px;
-  padding: 0 8px;
-  /* emil-processing: 无 transition 时选中段瞬跳，全站其他 hover 都是缓动的 */
-  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
-}
-
-.draft-version-toggle button[data-fluid-hover-active]:not(.active) {
-  color: var(--ink);
-}
-
-/* Selection stays legible without competing with the primary export action.
-   Paper-white + Card-tier hairline shadow (DESIGN.md Shadow Vocabulary): the
-   chosen segment sits *on* the desk, while fluid hover tints the desk *under*
-   a segment — opposite directions, so hovering a neighbour never reads as a
-   second selection. */
-.draft-version-toggle button.active {
-  background: var(--eqb-color-paper);
-  box-shadow: var(--elev-1);
-  color: var(--ink);
-  font-weight: 500;
+/* 窄屏那一行（见下面 980px 断点）：宽屏时不出。 */
+.draft-option-row {
+  display: none;
 }
 
 /* 构件厂第 4 步（2026-11-13，提案 · 单一来源）：「导出」触发键和菜单面板换成
@@ -269,22 +179,10 @@
   transition-duration: var(--motion-fast);
 }
 
-.draft-more-menu-panel select {
-  min-width: 0;
-  max-width: 100%;
-}
-
-/* Locked Decision 5 窄屏退化补充: only shown ≤980px, where the wide-row
-   copies of these same controls (.draft-topbar-wide-toggle) hide instead —
-   see the media query near the bottom of this file. */
-.draft-more-menu-narrow-controls {
-  display: none;
-}
-
 /* workbench-header-unify Locked Decision 2/5: wraps the head-row (wide)
-   copies of 学生版/教师版 and A4/A3 so they can hide as a unit ≤980px while
-   their .draft-more-menu-narrow-controls twins inside the "⋯" panel take
-   over — see the media query near the bottom of this file. */
+   copies of PDF 版本 and A4/A3 so they can hide as a unit ≤980px while
+   their .draft-option-row twins under the topbar take over (2026-11-14 起不再进「⋯」面板)
+   — see the media query near the bottom of this file. */
 .draft-topbar-wide-toggle {
   display: inline-flex;
 }
@@ -485,13 +383,9 @@
 
 /* workbench-header-unify Locked Decision 5: `.draft-paper-meta-row` /
    `.draft-paper-meta` retired whole — the A4/A3 toggle moved into
-   AppTopbar's actionsSlot (.draft-form-toggle below still styles it there),
-   and the页数真值 text moved to .draft-paper-rail-meta at the rail's top
-   (see the rail block further down this file). */
-.draft-form-toggle button {
-  min-height: 32px;
-  padding: 0 8px;
-}
+   AppTopbar's actionsSlot, and the页数真值 text moved to .draft-paper-rail-meta
+   at the rail's top (see the rail block further down this file).
+   A4/A3 的样子 2026-11-14 起在 shared-ui/field.css（分段选择）。 */
 
 .draft-a4-sheet {
   background: transparent;
@@ -963,27 +857,8 @@
   align-content: start;
 }
 
-.draft-save-space-dialog label {
-  display: grid;
-  gap: 5px;
-}
-
-/* .draft-dialog-note（「正在读取文件夹…」）换成了 shared-ui/Notice，字色字号由 notice.css 给。 */
-.draft-save-space-dialog label span {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.draft-save-space-dialog input,
-.draft-save-space-dialog select {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  color: var(--ink);
-  font: inherit;
-  min-height: 36px;
-  padding: 6px 9px;
-}
+/* 字段构件（2026-11-14）：文件名、文件夹、新建文件夹换成 shared-ui/Field.tsx（大号 36），标签、边、焦点在 field.css；
+   原来 .draft-save-space-dialog label / label span / input, select 三条删掉（它们 (0,1,1) 会压过 .eqb-field-control）。 */
 
 .draft-new-folder-row {
   display: grid;
@@ -993,19 +868,22 @@
 
 
 
-/* workbench-header-unify Locked Decision 5 窄屏退化补充: ≤980px 时 A4/A3
-   与版本切换一并被「⋯」吸收——hide the wide-row toggle mounts, reveal their
-   .draft-more-menu-narrow-controls twins inside the "⋯" panel instead.
+/* 窄屏（≤980px）：顶栏里那一份「PDF 版本」「A4 / A3」藏起来，换成卷面上方单独一行（.draft-option-row），
+   不再收进「⋯」面板（字段构件 2026-11-14，走查卡点 5）。这一行靠右，和顶栏「导出」同一侧；放不下时两个字段各占一行。
+   左右边距和下面提示行、排序建议卡一样（.draft-notice-slot / .draft-reorder-slot 的 0 24px）。
    导出 (shared-ui/Menu 的触发键) is never touched here — always visible. */
 @media (max-width: 980px) {
   .draft-topbar-wide-toggle {
     display: none;
   }
 
-  .draft-more-menu-narrow-controls {
+  .draft-option-row {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: var(--eqb-space-2) var(--eqb-space-4);
+    padding: 0 var(--eqb-space-5) var(--eqb-space-2);
   }
 
   /* When JS computes a scale < 1 (native A4 width no longer fits), the

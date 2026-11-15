@@ -87,3 +87,8 @@ token 的扩展用法。
 
 - **想要的值**：一是对话框宽度三档加抽屉一档，tokens.css 里没有这一类：sm 360（个人空间删除确认原来的宽）、md 440（「保存 PDF 到个人空间」和作废口令原来的宽）、lg 620（选择练字单词原来的宽）、side 780（录题面板原来的宽）。若收编，候选名 `--eqb-dialog-width-sm/-md/-lg/-side`。二是盖住整页的模态遮罩色：站上原来五处各写各的（墨 28% 两处、30%、32%、42%），取最多的墨 28%。上面「草稿卷重排遮罩」那条已有 `--eqb-color-scrim` 候选，但那是桌色 60% 的浅遮罩（旧内容还在、正在换新），和这里压暗整页、突出弹窗的用途和深浅都不同，不该共用一个名字。若收编，候选名 `--eqb-color-scrim-modal`（那条改叫 `--eqb-color-scrim-wait` 或保持原名，Owner 定）。
 - **临时方案**：先写成 dialog.css 里的局部变量 `--eqb-dialog-width-sm`、`--eqb-dialog-width-md`、`--eqb-dialog-width-lg`、`--eqb-dialog-width-side`、`--eqb-dialog-scrim`（`color-mix(in srgb, var(--eqb-color-text) 28%, transparent)`），每个注明出处。标题用 `--eqb-font-size-sm`（14）、说明和正文用 `--eqb-font-size-control`（13，名字说的是控件，对话框借用，同上一条空状态）。记录在 `design/components-2026-11-13/migrate-dialog/README.md`「缺的变量」。
+
+## 2026-11-14 字段构件的几处尺寸（`app/src/shared-ui/field.css`）
+
+- **想要的值**：一是带原因的下拉菜单的行宽上限：菜单里每项下面有一行「为什么用不了」，菜单宽跟着最长一行走，要有个可读行长的上限，长原因折成两行。tokens.css 里没有行宽一类（上面空状态那条的 26em 也是）。若收编，候选名 `--eqb-measure-menu`。二是图标的尺寸：下拉右边的向下箭头、出错行的图标都是 16px（DESIGN.md §5 Icons 写了 16，但没有 token），下拉右内边距要算进去（12 + 16 + 4）。若收编，候选名 `--eqb-icon-size`。三是分段选择两项之间的缝 2px，比 `--eqb-space-1`（4）小一档，原来草稿卷 A4 / A3 那一排就是 2px（`.draft-version-toggle` gap 2px）。若收编，候选名 `--eqb-space-hairline`。四是触屏输入字号下限 16：和上面登录页那条「手机输入框的字号下限」是同一件事，这次字段构件也要（`@media (pointer: coarse)` 时控件字号提到 16），值正好等于 `--eqb-font-size-md`，所以先借用它，没写字面量；登录页那条的候选名 `--eqb-font-size-input-mobile` 收编后两处一起换。
+- **临时方案**：一，局部变量 `--eqb-option-menu-measure: 320px`（`.eqb-menu.eqb-option-menu` 上，320 是原来 `.eqb-menu.draft-product-menu` 的值），外面再套 `min(…, 100vw − 16)` 防出屏。二，`calc(var(--eqb-space-3) + 16px + var(--eqb-space-1))`，16 写在注释里说明是图标宽。三，`gap: 2px` 字面量，注释注明出处。四，借 `--eqb-font-size-md`。记录在 `design/components-2026-11-13/migrate-field/README.md`「缺的变量」。

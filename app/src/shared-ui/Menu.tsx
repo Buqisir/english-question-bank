@@ -36,6 +36,12 @@
  * - 首字母跳转：按一个字（字母不分大小写），焦点跳到当前项之后、名字以这个字开头的下一项，到底绕回；
  * - 禁用项仍然不能选：回车、空格、点击都不触发 onSelect，菜单也不关；
  * - 打开时焦点仍落在第一个可用项；整个菜单都禁用时落在第一项（焦点总在菜单里，Esc、Tab 照常关）。
+ *
+ * 字段构件（OptionField.tsx 的带原因下拉，2026-11-14）补了两样，别的菜单不受影响：
+ * - renderTrigger：触发键由调用处画（拿到 ref、aria-haspopup、aria-expanded、aria-controls、disabled、onClick），
+ *   用来把触发键画成字段的样子（不是 .eqb-button，不进顶栏 FluidHoverList 的滑块，也不吃 button.css 的悬停底）。
+ * - focusChecked：打开时焦点先落在勾着的那一项（下拉选值的习惯：打开就停在当前值上）；勾着的那项用不了时照旧落第一个可用项。
+ *   题组「⋯」里的「前置分页」也是勾选项，但那里不该打开就停在它上面，所以默认关。
  */
 
 import {
@@ -47,6 +53,7 @@ import {
   type KeyboardEvent,
   type MouseEvent,
   type ReactNode,
+  type Ref,
 } from 'react'
 import { createPortal } from 'react-dom'
 import { FluidHoverList } from '../components/FluidHoverList.tsx'
@@ -96,6 +103,19 @@ export type MenuProps = {
   className?: string
   /** 点面板空隙算不算点最近那一项（FluidHoverList 的 gapClick）。默认算；有危险项、不想误触时设 false。 */
   gapClick?: boolean
+  /** 触发键由调用处画。给了它，triggerText、triggerIcon、triggerTone、triggerSize、triggerClassName 都不用。 */
+  renderTrigger?: (trigger: MenuTriggerProps) => ReactNode
+  /** 打开时焦点先落在勾着的那一项（可用时）。默认 false。 */
+  focusChecked?: boolean
+}
+
+export type MenuTriggerProps = {
+  ref: Ref<HTMLButtonElement>
+  disabled?: boolean
+  'aria-haspopup': 'menu'
+  'aria-expanded': boolean
+  'aria-controls': string | undefined
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
 let activeCloser: (() => void) | null = null
@@ -126,6 +146,8 @@ export function Menu({
   align = 'end',
   className,
   gapClick,
+  renderTrigger,
+  focusChecked = false,
 }: MenuProps) {
   const [open, setOpen] = useState(false)
   const triggerRef = useRef<HTMLButtonElement>(null)
@@ -163,7 +185,8 @@ export function Menu({
     window.addEventListener('scroll', onScroll, true)
     const focusFrame = requestAnimationFrame(() => {
       const root = menuRef.current
-      ;(enabledItems(root)[0] ?? allItems(root)[0])?.focus({ preventScroll: true })
+      const checked = focusChecked ? enabledItems(root).find((item) => item.getAttribute('aria-checked') === 'true') : undefined
+      ;(checked ?? enabledItems(root)[0] ?? allItems(root)[0])?.focus({ preventScroll: true })
     })
 
     return () => {
@@ -252,7 +275,16 @@ export function Menu({
 
   return (
     <>
-      {triggerText === undefined ? (
+      {renderTrigger ? (
+        renderTrigger({
+          ref: triggerRef,
+          disabled: triggerDisabled,
+          'aria-haspopup': 'menu',
+          'aria-expanded': open,
+          'aria-controls': open ? menuId : undefined,
+          onClick: toggle,
+        })
+      ) : triggerText === undefined ? (
         <Button {...triggerProps} icon={triggerIcon ?? <Ellipsis size={16} aria-hidden="true" />} label={label} />
       ) : (
         <Button {...triggerProps} icon={triggerIcon}>

@@ -491,7 +491,7 @@ async function runPhaseB(browser) {
     assert('fixture produces multiple A4 pages (imposition needs >=3 to be meaningful)', a4PageCount >= 3, `pageCount=${a4PageCount}`)
 
     // ── Toggle to A3, wait for the imposed iframe to reload ──
-    await page.getByRole('button', { name: 'A3 对折' }).click()
+    await page.getByRole('radio', { name: 'A3 对折' }).click()
     await page.waitForFunction(
       () => document.querySelector('.draft-a4-sheet iframe')?.contentDocument?.querySelector('.a3-imposition-wrap'),
       { timeout: 15_000 },
@@ -671,7 +671,7 @@ async function runPhaseB(browser) {
     assert('Escape closes the save dialog and restores the export trigger', await page.getByRole('button', { name: '导出', exact: true }).evaluate((el) => el === document.activeElement))
 
     // ── Toggle back to A4: imposition wrapper disappears ──
-    await page.getByRole('button', { name: 'A4 散页' }).click()
+    await page.getByRole('radio', { name: 'A4 散页' }).click()
     await page.waitForFunction(
       () => !document.querySelector('.draft-a4-sheet iframe')?.contentDocument?.querySelector('.a3-imposition-wrap'),
       { timeout: 15_000 },

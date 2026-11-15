@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowDown, ArrowLeftRight, ArrowUp, ChevronDown, Ellipsis, FolderPlus, PageBreak, PaperCheck, PaperStudent, RotateCcw, Save, Trash } from '../../icons'
+import { Archive, ArrowDown, ArrowLeftRight, ArrowUp, Ellipsis, FolderPlus, PageBreak, PaperCheck, PaperStudent, RotateCcw, Save, Trash } from '../../icons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
-import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
 import { Dialog } from '../../shared-ui/Dialog.tsx'
 import { EmptyState } from '../../shared-ui/EmptyState.tsx'
 import { Menu } from '../../shared-ui/Menu.tsx'
+import { SelectField, TextField } from '../../shared-ui/Field.tsx'
+import { OptionSelectField, SegmentedField } from '../../shared-ui/OptionField.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, GroupType, MySpaceFolder, QuestionGroupCard } from '../../domain/questionBank'
 import {
@@ -402,17 +403,14 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // (D5 原先给导出菜单写的同一套；导出菜单换成 Menu 后只剩这一处用).
   useEffect(() => {
     if (!moreMenuOpen) return
-    // 窄屏时「PDF 版本」菜单开在「⋯」面板里，但菜单面板挂在 body 上：
-    // 在它上面点、按 Esc 只关菜单，不关「⋯」面板（和原来的原生下拉框一样）。
-    const inPortaledMenu = (target: EventTarget | null) => target instanceof Element && target.closest('.draft-product-menu') !== null
+    // 字段构件那一轮（2026-11-14）起「PDF 版本」不再放进「⋯」面板，原来给它开的「点在版本菜单上不关面板」的例外删掉。
     function handlePointerDown(event: MouseEvent) {
-      if (inPortaledMenu(event.target)) return
       if (moreMenuRef.current && !moreMenuRef.current.contains(event.target as Node)) {
         setMoreMenuOpen(false)
       }
     }
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape' && !inPortaledMenu(event.target)) setMoreMenuOpen(false)
+      if (event.key === 'Escape') setMoreMenuOpen(false)
     }
     document.addEventListener('mousedown', handlePointerDown)
     document.addEventListener('keydown', handleKeyDown)
@@ -1537,66 +1535,58 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     )
   }
 
-  // The same product control appears in the wide header and narrow ⋯ panel.
-  // 走查卡点 4：原生下拉框换成共用 Menu（可勾选项 + 每项下面一行原因）。
-  // 用不了的版本照样列出、置灰不能选，下面一行写服务器判定的原因。
-  const versionToggleControl = (
-    <span className="draft-product-control">
-      <span aria-hidden="true">PDF 版本</span>
-      <Menu
-        label="PDF 版本"
-        triggerText={
-          <>
-            <span className="visually-hidden">PDF 版本：</span>
-            {PAPER_PDF_PRODUCTS[edition]}
-            <ChevronDown size={16} aria-hidden="true" />
-          </>
-        }
-        triggerTone="strong"
-        triggerSize="sm"
-        triggerClassName="draft-product-trigger"
-        triggerDisabled={exportStatus === 'exporting' || spaceDialogOpen}
-        align="start"
-        className="draft-product-menu"
-        items={PAPER_PDF_EDITIONS.map((value) => {
-          const verdict = editionVerdicts.get(value)
-          const unavailable = verdict !== undefined && !verdict.available
-          return {
-            key: value,
-            label: PAPER_PDF_PRODUCTS[value],
-            checked: value === edition,
-            disabled: unavailable,
-            description: unavailable ? editionUnavailableText(verdict) || undefined : undefined,
-            onSelect: () => {
-              setEdition(value)
-              setExportError(null)
-              setExportSuccessMessage('')
-            },
-          }
-        })}
-      />
-    </span>
+  // 字段构件（构件厂 2026-11-14，design/components-2026-11-13/migrate-field/README.md）：
+  // 「PDF 版本」和「A4 / A3」换成共用选项字段（shared-ui/OptionField.tsx）。
+  // - PDF 版本：带原因的下拉。用不了的版本照样列出、置灰不能选，下面一行写服务器判定的原因（走查卡点 4，
+  //   Owner 2026-11-14 第四节第 4 条）；触发键长成字段的样子，读屏念「PDF 版本 + 当前版本」。
+  // - A4 / A3：分段选择，读屏是单选组，← → 换。
+  // 宽屏放在顶栏「导出」左边；窄屏（≤980px）不再收进「⋯」面板，放在顶栏下面单独一行（走查卡点 5），
+  // 同一组控件、同一个顺序、紧挨着「导出」那一侧。宽屏顶栏里说明 / 出错那一行只给读屏
+  // （当前版本用不了时卷面上就写着原因），窄屏那一行有地方，照常显示。
+  const editionOptions = PAPER_PDF_EDITIONS.map((value) => {
+    const verdict = editionVerdicts.get(value)
+    const unavailable = verdict !== undefined && !verdict.available
+    return {
+      value,
+      label: PAPER_PDF_PRODUCTS[value],
+      disabled: unavailable,
+      reason: unavailable ? editionUnavailableText(verdict) || undefined : undefined,
+    }
+  })
+  const renderVersionField = (placement: 'topbar' | 'row') => (
+    <OptionSelectField
+      label="PDF 版本"
+      layout="inline"
+      size="md"
+      className="draft-product-control"
+      triggerClassName="draft-product-trigger"
+      menuClassName="draft-product-menu"
+      hideMessages={placement === 'topbar'}
+      disabled={exportStatus === 'exporting' || spaceDialogOpen}
+      value={edition}
+      options={editionOptions}
+      onChange={(value) => {
+        setEdition(value)
+        setExportError(null)
+        setExportSuccessMessage('')
+      }}
+    />
   )
 
   const formToggleControl = (
-    <FluidHoverList as="div" axis="x" className="draft-version-toggle draft-form-toggle" itemSelector="button" role="group" aria-label="打印形态">
-      <button
-        type="button"
-        className={draftPaper.printForm === 'a4' ? 'active' : ''}
-        aria-pressed={draftPaper.printForm === 'a4'}
-        onClick={() => void setPrintForm('a4')}
-      >
-        A4 散页
-      </button>
-      <button
-        type="button"
-        className={draftPaper.printForm === 'a3' ? 'active' : ''}
-        aria-pressed={draftPaper.printForm === 'a3'}
-        onClick={() => void setPrintForm('a3')}
-      >
-        A3 对折
-      </button>
-    </FluidHoverList>
+    <SegmentedField
+      label="打印形态"
+      hideLabel
+      layout="inline"
+      className="draft-form-field"
+      controlClassName="draft-form-toggle"
+      value={draftPaper.printForm === 'a3' ? 'a3' : 'a4'}
+      options={[
+        { value: 'a4', label: 'A4 散页' },
+        { value: 'a3', label: 'A3 对折' },
+      ]}
+      onChange={(value) => void setPrintForm(value)}
+    />
   )
 
   // 构件厂第 4 步：导出菜单换成 shared-ui/Menu（雾薄荷主键做触发键，每页一处）。
@@ -1668,69 +1658,66 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             />
             {moreMenuPresence.mounted && (
               <div id="draft-more-information" className="draft-more-menu-panel" role="group" aria-label="草稿卷更多信息" data-visible={moreMenuPresence.visible} inert={!moreMenuOpen}>
-                <label className="draft-student-field">
-                  <span>学生（可选）</span>
-                  <input
-                    value={studentLabelDraft}
-                    placeholder="未填写"
-                    onChange={(event) => setStudentLabelDraft(event.target.value)}
-                    onBlur={(event) => void saveStudentLabel(event.target.value)}
-                  />
-                </label>
-                <label className="draft-recent-select-field">
-                  <span>最近草稿卷</span>
-                  <select
-                    className="draft-recent-select"
-                    value={draftPaper.id}
-                    onChange={(event) => {
-                      const id = event.target.value
-                      // In-component switch path (pushState + setDraftPaper,
-                      // loadDraft never re-runs): clear the previous draft's
-                      // undo snapshots so undo can't fire against the new one.
-                      resetTransientStateForDraftSwitch()
-                      const generation = draftGenerationRef.current
-                      const url = new URL(window.location.href)
-                      url.searchParams.set('view', 'draft-paper')
-                      url.searchParams.set('draftPaperId', id)
-                      setEdition('largeNoListening')
-                      void fetchDraftPaper(id).then((next) => {
-                        if (generation !== draftGenerationRef.current) return
-                        setDraftGeneration(generation)
-                        window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}`)
-                        setDraftPaper(next)
-                        setTitleDraft(next.title)
-                        setStudentLabelDraft(next.studentLabel || '')
-                      }).catch((error) => {
-                        if (generation !== draftGenerationRef.current) return
-                        setSaveStatus('error')
-                        setSaveError(failureLine('切换草稿卷', error))
-                      })
-                    }}
-                  >
-                    {recentDrafts.map((draft) => (
-                      <option key={draft.id} value={draft.id}>{draft.title}</option>
-                    ))}
-                  </select>
-                </label>
+                {/* 字段构件（shared-ui/Field.tsx）：大号 36，和原来一样高。类名 draft-student-field / draft-recent-select 留给脚本认。 */}
+                <TextField
+                  label="学生（可选）"
+                  size="lg"
+                  className="draft-student-field"
+                  value={studentLabelDraft}
+                  placeholder="未填写"
+                  onChange={(event) => setStudentLabelDraft(event.target.value)}
+                  onBlur={(event) => void saveStudentLabel(event.target.value)}
+                />
+                <SelectField
+                  label="最近草稿卷"
+                  size="lg"
+                  className="draft-recent-select-field"
+                  controlClassName="draft-recent-select"
+                  value={draftPaper.id}
+                  onChange={(event) => {
+                    const id = event.target.value
+                    // In-component switch path (pushState + setDraftPaper,
+                    // loadDraft never re-runs): clear the previous draft's
+                    // undo snapshots so undo can't fire against the new one.
+                    resetTransientStateForDraftSwitch()
+                    const generation = draftGenerationRef.current
+                    const url = new URL(window.location.href)
+                    url.searchParams.set('view', 'draft-paper')
+                    url.searchParams.set('draftPaperId', id)
+                    setEdition('largeNoListening')
+                    void fetchDraftPaper(id).then((next) => {
+                      if (generation !== draftGenerationRef.current) return
+                      setDraftGeneration(generation)
+                      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}`)
+                      setDraftPaper(next)
+                      setTitleDraft(next.title)
+                      setStudentLabelDraft(next.studentLabel || '')
+                    }).catch((error) => {
+                      if (generation !== draftGenerationRef.current) return
+                      setSaveStatus('error')
+                      setSaveError(failureLine('切换草稿卷', error))
+                    })
+                  }}
+                  options={recentDrafts.map((draft) => ({ value: draft.id, label: draft.title }))}
+                />
                 {/* 保存出错是「没保存」，按 DESIGN.md §5 Notices 上危险色。 */}
                 {saveStatus === 'error' && <Notice kind="error" danger className="draft-error">{saveError}</Notice>}
-                {/* Locked Decision 5 窄屏退化补充: ≤980px 时 A4/A3 与版本切换
-                    一并被「⋯」吸收——duplicated mounts of the same controls,
-                    shown only at that breakpoint (see CSS). */}
-                <div className="draft-more-menu-narrow-controls">
-                  {versionToggleControl}
-                  {formToggleControl}
-                </div>
               </div>
             )}
           </div>
-          <span className="draft-topbar-wide-toggle">{versionToggleControl}</span>
+          <span className="draft-topbar-wide-toggle">{renderVersionField('topbar')}</span>
           <span className="draft-topbar-wide-toggle">{formToggleControl}</span>
           {exportMenuControl}
         </>
       }
     />
     <div className="draft-workbench-shell">
+      {/* 窄屏（≤980px）时「PDF 版本」和「A4 / A3」放在这一行，紧贴顶栏下面、靠右（「导出」那一侧）；宽屏时隐藏，
+          用顶栏里那一份（见 DraftPaperWorkbench.css .draft-option-row）。原来窄屏收进「⋯」面板，老师想不到去那里找（走查卡点 5）。 */}
+      <div className="draft-option-row">
+        {renderVersionField('row')}
+        {formToggleControl}
+      </div>
       {/* 共用提示行（shared-ui/Notice）：卷头行之下、纸面之上一个固定位置，左右边距和下面的排序建议卡一样
           （.draft-notice-slot）。一次只出一条：导出的结果（出错 / 生成中 / 已下载）排在前面。 */}
       {(draftPaper.items.length === 0 || migrationNotice || exportStatus !== 'idle') && (
@@ -2074,24 +2061,22 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           disabled: spaceStatus === 'saving' || draftPaper.items.length === 0,
         }}
       >
-        <label>
-          <span>文件名</span>
-          <input value={spaceFileName} onChange={(event) => setSpaceFileName(event.target.value)} />
-        </label>
-        <label>
-          <span>文件夹</span>
-          <select value={spaceFolderId} onChange={(event) => setSpaceFolderId(event.target.value)}>
-            <option value="">未归档</option>
-            {spaceFolders.map((folder) => (
-              <option key={folder.id} value={folder.id}>{folder.name}</option>
-            ))}
-          </select>
-        </label>
+        {/* 字段构件（shared-ui/Field.tsx）：三个都是大号 36，和旁边「新建」大号键同高。「新建文件夹」原来只有读屏标签，照旧 hideLabel。 */}
+        <TextField label="文件名" size="lg" value={spaceFileName} onChange={(event) => setSpaceFileName(event.target.value)} />
+        <SelectField
+          label="文件夹"
+          size="lg"
+          value={spaceFolderId}
+          onChange={(event) => setSpaceFolderId(event.target.value)}
+          options={[{ value: '', label: '未归档' }, ...spaceFolders.map((folder) => ({ value: folder.id, label: folder.name }))]}
+        />
         <div className="draft-new-folder-row">
-          <input
+          <TextField
+            label="新建文件夹"
+            hideLabel
+            size="lg"
             value={spaceNewFolderName}
             onChange={(event) => setSpaceNewFolderName(event.target.value)}
-            aria-label="新建文件夹"
             placeholder="新建文件夹"
           />
           <Button

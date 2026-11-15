@@ -1,0 +1,295 @@
+/* 字段构件（Field.tsx、OptionField.tsx）。只用 tokens.css 里的变量，不写字面色值、圆角和影子。
+ * DESIGN.md §5 Inputs / Fields、Single-Radius-Family（28–44 的控件 8px）、§4（输入框贴桌 e0）、§3（12 / 13 / 14）。
+ * 高度三档和 Button 一样：sm 28 / md 32 / lg 36。 */
+
+/* ── 框架：标签、控件、说明 / 出错 ───────────────────────── */
+
+.eqb-field {
+  display: grid;
+  gap: var(--eqb-space-1);
+  min-width: 0;
+}
+
+/* 标签在左、控件在右：顶栏这种一行放得下的地方。说明 / 出错放在控件下面那一格。 */
+.eqb-field[data-layout='inline'] {
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: var(--eqb-space-2);
+}
+
+.eqb-field[data-layout='inline'] > .eqb-field-messages {
+  grid-column: 2;
+}
+
+/* 标签只给读屏时（visually-hidden）不占格子，控件占满一行。 */
+.eqb-field[data-layout='inline'][data-label-hidden] {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.eqb-field[data-layout='inline'][data-label-hidden] > .eqb-field-messages {
+  grid-column: 1;
+}
+
+/* DESIGN.md §3 UI Label 档：12 / 500，次要灰（对白 5.47 : 1，对桌面 4.99 : 1）。 */
+.eqb-field-label {
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.eqb-field-body {
+  position: relative;
+  display: flex;
+  min-width: 0;
+}
+
+.eqb-field-messages {
+  display: grid;
+  gap: var(--eqb-space-1);
+  min-width: 0;
+}
+
+/* 说明 / 出错一行：12px 次要灰字（§5 Notices：报错和说明同一种写法，字不上红）。
+ * 出错时前面一个 16px 图标，和字一起给不看颜色的人；红只画在控件的边上。 */
+.eqb-field-message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--eqb-space-1);
+  margin: 0;
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.eqb-field-message > svg {
+  flex: 0 0 auto;
+}
+
+/* ── 控件：输入框、多行、下拉，以及长成字段样子的下拉触发键 ── */
+
+.eqb-field-control {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 32px;
+  margin: 0;
+  padding: 0 var(--eqb-space-3);
+  border: 1px solid var(--eqb-color-border);
+  border-radius: var(--eqb-radius-control);
+  background: var(--eqb-color-paper);
+  color: var(--eqb-color-text);
+  font: inherit;
+  /* DESIGN.md §3 UI Compact 档（13，控件类）。 */
+  font-size: var(--eqb-font-size-control);
+  font-weight: 400;
+  line-height: 20px;
+  transition: border-color var(--motion-fast) var(--ease-hover);
+}
+
+.eqb-field-control[data-size='sm'] {
+  height: 28px;
+  padding: 0 var(--eqb-space-2);
+}
+
+/* 大号 36：字提一档到 14（§3 UI Body），和对话框里旁边的大号 Button 同高。 */
+.eqb-field-control[data-size='lg'] {
+  height: 36px;
+  font-size: var(--eqb-font-size-sm);
+}
+
+/* 多行：高度跟 rows 走；上下内边距 8、左右 12（DESIGN.md 文件头 input padding 8px 12px），行高 1.5。
+ * 本条 (0,2,0) 覆盖上面各档的固定 height 和左右内边距 (0,1,0) / (0,2,0，写在前面)。 */
+.eqb-field-control[data-multiline] {
+  height: auto;
+  min-height: 0;
+  padding: var(--eqb-space-2) var(--eqb-space-3);
+  line-height: 1.5;
+  resize: vertical;
+}
+
+/* 占位符：次要灰（DESIGN.md §5 Inputs：不用极弱墨「显优雅」）。 */
+.eqb-field-control::placeholder {
+  color: var(--eqb-color-text-muted);
+  opacity: 1;
+}
+
+.eqb-field-control:hover:not(:disabled, [aria-disabled='true']) {
+  border-color: var(--eqb-color-border-strong);
+}
+
+/* 焦点：§4 墨焦点环，外扩 2px，不挪布局。文字输入在鼠标点进去时也算 :focus-visible，正好：光标在哪一格要看得出。 */
+.eqb-field-control:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+/* 出错：边换危险色（#dc2626 对白 4.83，画描边够）。本条 (0,2,0) 覆盖上面 :hover 的深一档边——出错时悬停也保持红边。 */
+.eqb-field-control[aria-invalid='true'],
+.eqb-field-control[aria-invalid='true']:hover:not(:disabled) {
+  border-color: var(--eqb-color-danger);
+}
+
+.eqb-field-control:disabled,
+.eqb-field-control[aria-disabled='true'] {
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text-muted);
+  cursor: not-allowed;
+}
+
+/* 原生下拉：去掉系统箭头，换图标库的 ChevronDown（DESIGN.md §5 Icons：图标统一走 EQB 套件）。
+ * 右边留出箭头的位置：12 + 16 + 4。 */
+.eqb-field-select {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.eqb-field-select > select.eqb-field-control {
+  appearance: none;
+  padding-right: calc(var(--eqb-space-3) + 16px + var(--eqb-space-1));
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.eqb-field-chevron {
+  position: absolute;
+  top: 50%;
+  right: var(--eqb-space-2);
+  color: var(--eqb-color-text-muted);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* ── 带原因的下拉（OptionField.tsx OptionSelectField）────────
+ * 触发键是一个 <button>，长成 SelectField 的样子：白底、细边、8px，字左对齐，右边一个向下箭头。
+ * 不是 .eqb-button，所以 button.css 的悬停底、打开时的桌色底、顶栏滑块都不管它。 */
+.eqb-option-select-trigger {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  max-width: 100%;
+  padding-right: calc(var(--eqb-space-3) + 16px + var(--eqb-space-1));
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.eqb-option-select-value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 打开着：边深一档，和悬停一样，让人看得出菜单从哪里出来（button.css 的「打开着的键」用桌色底，字段不换底）。
+ * 本条 (0,3,0) 会盖过前面出错的红边 (0,2,0)，所以用 :not 把出错的排除，出错时打开着也保持红边。 */
+.eqb-option-select-trigger[aria-expanded='true']:not([aria-invalid='true']) {
+  border-color: var(--eqb-color-border-strong);
+}
+
+/* 菜单里有原因小字时，菜单宽度跟着最长的一行走；上限 = 一行可读长度，长原因折成两行。
+ * 320 是原来草稿卷版本菜单的值（.eqb-menu.draft-product-menu，目测），搬进构件，缺口见 docs/design-gaps.md。
+ * 本条 (0,2,0) 覆盖 menu.css .eqb-menu 的 max-width (0,1,0)：那条只防出屏，不管行长。 */
+.eqb-menu.eqb-option-menu {
+  --eqb-option-menu-measure: 320px;
+  max-width: min(var(--eqb-option-menu-measure), calc(100vw - var(--eqb-space-4)));
+}
+
+/* 说明 / 出错只给读屏（hideMessages）：看得见的人在页面别处已经看到同一句话。 */
+.eqb-field-messages-hidden > .eqb-field-messages {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* ── 分段选择（OptionField.tsx SegmentedField）────────────
+ * DESIGN.md §5 Single-Radius-Family：分段切换是标签类，用胶囊。没有底槽，没选的透明底次要灰字；
+ * 选中的是一张纸：白底、e1（§4，墨圈就是边）、墨字 500。悬停由 FluidHoverList 的滑块垫桌色，
+ * 选中的纸和滑块方向相反（一个浮在桌上、一个压在桌下），悬停隔壁不会读成第二个选中。 */
+.eqb-segmented {
+  --fh-radius: var(--eqb-radius-pill);
+  display: inline-flex;
+  /* 2px：原来草稿卷 A4 / A3 那一排（.draft-version-toggle）的值，比 --eqb-space-1 小一档，缺口见 docs/design-gaps.md。 */
+  gap: 2px;
+  min-width: 0;
+  padding: 0;
+}
+
+.eqb-segmented.fluid-hover-list::before {
+  background: var(--eqb-color-desk);
+}
+
+.eqb-segmented-option {
+  /* 放进 FluidHoverList 时，滑块是 z-index auto 的 ::before，项要有定位才画在它上面（同 button.css）。 */
+  position: relative;
+  box-sizing: border-box;
+  height: 32px;
+  padding: 0 var(--eqb-space-3);
+  border: 0;
+  border-radius: var(--eqb-radius-pill);
+  background: transparent;
+  color: var(--eqb-color-text-muted);
+  font: inherit;
+  font-size: var(--eqb-font-size-control);
+  font-weight: 400;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+}
+
+.eqb-segmented[data-size='sm'] .eqb-segmented-option {
+  height: 28px;
+  padding: 0 var(--eqb-space-2);
+}
+
+/* 滑块停在哪一项，哪一项字提到墨色（和 ChipToggle 一样）。 */
+.eqb-segmented-option[data-fluid-hover-active] {
+  color: var(--eqb-color-text);
+}
+
+/* 选中：本条 (0,2,0) 写在 [data-fluid-hover-active] (0,2,0) 后面，同档按先后赢：滑块停在选中项上时仍是纸。 */
+.eqb-segmented-option[aria-checked='true'] {
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-1);
+  color: var(--eqb-color-text);
+  font-weight: 500;
+  cursor: default;
+}
+
+.eqb-segmented-option:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+/* 用不了：和 Button 禁用一样变淡、不可点；原因在组下面一行。本条 (0,2,0) 覆盖上面的 cursor 和墨字。 */
+.eqb-segmented-option[aria-disabled='true'] {
+  color: var(--eqb-color-text-faint);
+  cursor: not-allowed;
+}
+
+/* 组下面的原因：每项一行。 */
+.eqb-option-reason {
+  display: block;
+}
+
+/* 触屏：输入字至少 16，防 iOS 聚焦时放大页面（登录页同一条，缺口记在 docs/design-gaps.md）。
+ * 本条覆盖上面各档的 13 / 14。高度不变。 */
+@media (pointer: coarse) {
+  .eqb-field-control,
+  .eqb-field-control[data-size='lg'] {
+    font-size: var(--eqb-font-size-md);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eqb-field-control,
+  .eqb-segmented-option {
+    transition: none;
+  }
+}
