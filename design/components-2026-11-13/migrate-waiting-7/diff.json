@@ -1,0 +1,1961 @@
+{
+ "missing": {
+  "before": [
+   "space-dialog: TimeoutError: locator.waitFor: Timeout 30000ms exceeded."
+  ],
+  "after": []
+ },
+ "pageErrors": {
+  "before": [],
+  "after": []
+ },
+ "note": {
+  "before": null,
+  "after": "换后整套跑了一次。workbench 这一步拍完发现分区名灰块比真键矮 7px、学生下拉灰块宽 14px，改了以后只重拍这一步一次（第一次的数据留在 workbench-run1）。之后又发现搜索框、文件夹两块灰块偏窄（没占满那一格），加了 .eqb-skeleton-over { flex: 1 1 auto }，没再拍：图里这两块灰块的宽度是修之前的，高度和位置不受影响。"
+ },
+ "summary": {
+  "before": {
+   "spaceDialogRows": {
+    "wait": [
+     {
+      "y": 340,
+      "h": 56,
+      "text": "文件名"
+     },
+     {
+      "y": 408,
+      "h": 56,
+      "text": "文件夹 未归档"
+     },
+     {
+      "y": 476,
+      "h": 36,
+      "text": "新建文件夹 新建"
+     },
+     {
+      "y": 524,
+      "h": 28,
+      "text": "正在读取文件夹"
+     }
+    ],
+    "ready": "没拍到"
+   },
+   "spaceDialogSkeletonsAt150": 0,
+   "workbenchNav": {
+    "waitTop": null,
+    "readyTop": 68,
+    "shift": null,
+    "waitH": null,
+    "readyH": 45,
+    "rowsWait": 0,
+    "rowsReady": 1
+   },
+   "workbenchTab": {
+    "waitTop": null,
+    "readyTop": 68,
+    "shift": null,
+    "waitH": null,
+    "readyH": 45,
+    "rowsWait": 0,
+    "rowsReady": 5
+   },
+   "workbenchPicker": {
+    "waitTop": null,
+    "readyTop": 68,
+    "shift": null,
+    "waitH": null,
+    "readyH": 36,
+    "rowsWait": 0,
+    "rowsReady": 1
+   },
+   "workbenchTools": {
+    "waitTop": null,
+    "readyTop": 137,
+    "shift": null,
+    "waitH": null,
+    "readyH": 36,
+    "rowsWait": 0,
+    "rowsReady": 1
+   },
+   "workbenchList": {
+    "waitTop": null,
+    "readyTop": 189,
+    "shift": null,
+    "waitH": null,
+    "readyH": 392,
+    "rowsWait": 0,
+    "rowsReady": 1
+   },
+   "workbenchFirstRow": {
+    "waitTop": null,
+    "readyTop": 190,
+    "shift": null,
+    "waitH": null,
+    "readyH": 78,
+    "rowsWait": 0,
+    "rowsReady": 5
+   },
+   "detailPlainHero": {
+    "waitTop": 104,
+    "readyTop": 104,
+    "shift": 0,
+    "waitH": 206.6,
+    "readyH": 131,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "detailPlainPaper": {
+    "waitTop": 311,
+    "readyTop": 235,
+    "shift": -76,
+    "waitH": 300,
+    "readyH": 122,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "detailSummaryHero": {
+    "waitTop": 104,
+    "readyTop": 104,
+    "shift": 0,
+    "waitH": 206.6,
+    "readyH": 163.8,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "detailSummaryPaper": {
+    "waitTop": 311,
+    "readyTop": 268,
+    "shift": -43,
+    "waitH": 300,
+    "readyH": 122,
+    "rowsWait": 1,
+    "rowsReady": 1
+   }
+  },
+  "after": {
+   "spaceDialogRows": {
+    "wait": [
+     {
+      "y": 360,
+      "h": 56,
+      "text": "文件名"
+     },
+     {
+      "y": 428,
+      "h": 56,
+      "text": "文件夹 正在读取文件夹"
+     },
+     {
+      "y": 496,
+      "h": 36,
+      "text": "新建文件夹 新建"
+     }
+    ],
+    "ready": [
+     {
+      "y": 360,
+      "h": 56,
+      "text": "文件名"
+     },
+     {
+      "y": 428,
+      "h": 56,
+      "text": "文件夹 未归档 高一上 期中 高二 阅读专项 寒假作业"
+     },
+     {
+      "y": 496,
+      "h": 36,
+      "text": "新建文件夹 新建"
+     }
+    ]
+   },
+   "spaceDialogSkeletonsAt150": 0,
+   "workbenchNav": {
+    "waitTop": 68,
+    "readyTop": 68,
+    "shift": 0,
+    "waitH": 45,
+    "readyH": 45,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "workbenchTab": {
+    "waitTop": 70,
+    "readyTop": 68,
+    "shift": -2,
+    "waitH": 43,
+    "readyH": 45,
+    "rowsWait": 5,
+    "rowsReady": 5
+   },
+   "workbenchPicker": {
+    "waitTop": 68,
+    "readyTop": 68,
+    "shift": 0,
+    "waitH": 36,
+    "readyH": 36,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "workbenchTools": {
+    "waitTop": 137,
+    "readyTop": 137,
+    "shift": 0,
+    "waitH": 36,
+    "readyH": 36,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "workbenchList": {
+    "waitTop": 189,
+    "readyTop": 189,
+    "shift": 0,
+    "waitH": 236,
+    "readyH": 392,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "workbenchFirstRow": {
+    "waitTop": 190,
+    "readyTop": 190,
+    "shift": 0,
+    "waitH": 78,
+    "readyH": 78,
+    "rowsWait": 3,
+    "rowsReady": 5
+   },
+   "detailPlainHero": {
+    "waitTop": 104,
+    "readyTop": 104,
+    "shift": 0,
+    "waitH": 161.8,
+    "readyH": 131,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "detailPlainPaper": {
+    "waitTop": 266,
+    "readyTop": 235,
+    "shift": -31,
+    "waitH": 300,
+    "readyH": 122,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "detailSummaryHero": {
+    "waitTop": 104,
+    "readyTop": 104,
+    "shift": 0,
+    "waitH": 161.8,
+    "readyH": 163.8,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "detailSummaryPaper": {
+    "waitTop": 266,
+    "readyTop": 268,
+    "shift": 2,
+    "waitH": 300,
+    "readyH": 122,
+    "rowsWait": 1,
+    "rowsReady": 1
+   }
+  }
+ },
+ "steps": {
+  "space-dialog": {
+   "before": {
+    "items": [
+     {
+      "id": "draft-item-57ecb749-1845-4de2-976d-67fe0bceb13c",
+      "groupId": "group-2026-i-reading-a"
+     },
+     {
+      "id": "draft-item-7f302e18-5074-4040-81f5-c6f2930bd77d",
+      "groupId": "group-2026-i-reading-b"
+     },
+     {
+      "id": "draft-item-7eddbc37-a95b-46f0-8e4b-75d6fc8edf1d",
+      "groupId": "group-2026-i-reading-c"
+     }
+    ],
+    "at150": {
+     "ms": 150,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "已保存",
+      "正在读取文件夹"
+     ],
+     "notices": [
+      "正在读取文件夹"
+     ]
+    },
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "web-animation"
+     ]
+    },
+    "at1200": {
+     "ms": 1410,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "已保存",
+      "正在读取文件夹"
+     ],
+     "notices": [
+      "正在读取文件夹"
+     ]
+    },
+    "waitBoxes": {
+     "dialog": [
+      {
+       "x": 0,
+       "y": 0,
+       "w": 1440,
+       "h": 900,
+       "text": "保存 PDF 到个人空间 文件名 文件夹 未归档 新建文件夹 新建 正在读取文件"
+      }
+     ],
+     "rows": [
+      {
+       "x": 524,
+       "y": 340,
+       "w": 392,
+       "h": 56,
+       "text": "文件名"
+      },
+      {
+       "x": 524,
+       "y": 408,
+       "w": 392,
+       "h": 56,
+       "text": "文件夹 未归档"
+      },
+      {
+       "x": 524,
+       "y": 476,
+       "w": 392,
+       "h": 36,
+       "text": "新建文件夹 新建"
+      },
+      {
+       "x": 524,
+       "y": 524,
+       "w": 392,
+       "h": 28,
+       "text": "正在读取文件夹"
+      }
+     ],
+     "notice": [
+      {
+       "x": 524,
+       "y": 524,
+       "w": 392,
+       "h": 28,
+       "text": "正在读取文件夹"
+      }
+     ]
+    }
+   },
+   "after": {
+    "items": [
+     {
+      "id": "draft-item-1505b5a9-de5e-40e2-a779-01a6b9c958c6",
+      "groupId": "group-2026-i-reading-a"
+     },
+     {
+      "id": "draft-item-4b65f342-447c-457a-8c80-048e6f7dde1d",
+      "groupId": "group-2026-i-reading-b"
+     },
+     {
+      "id": "draft-item-d5c4baba-49cd-4a17-92e8-564cd592cf3d",
+      "groupId": "group-2026-i-reading-c"
+     }
+    ],
+    "at150": {
+     "ms": 151,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [
+      {
+       "tag": "SPAN",
+       "cls": "draft-space-folder-wait",
+       "role": "status",
+       "text": "正在读取文件夹"
+      }
+     ],
+     "status": [
+      "已保存",
+      "正在读取文件夹"
+     ],
+     "notices": []
+    },
+    "frozen": {
+     "count": 1,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1407,
+     "skeletons": 1,
+     "skeletonsVisible": 1,
+     "busy": [
+      {
+       "tag": "SPAN",
+       "cls": "draft-space-folder-wait",
+       "role": "status",
+       "text": "正在读取文件夹"
+      }
+     ],
+     "status": [
+      "已保存",
+      "正在读取文件夹"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "dialog": [
+      {
+       "x": 0,
+       "y": 0,
+       "w": 1440,
+       "h": 900,
+       "text": "保存 PDF 到个人空间 文件名 文件夹 正在读取文件夹 新建文件夹 新建 取消"
+      }
+     ],
+     "rows": [
+      {
+       "x": 524,
+       "y": 360,
+       "w": 392,
+       "h": 56,
+       "text": "文件名"
+      },
+      {
+       "x": 524,
+       "y": 428,
+       "w": 392,
+       "h": 56,
+       "text": "文件夹 正在读取文件夹"
+      },
+      {
+       "x": 524,
+       "y": 496,
+       "w": 392,
+       "h": 36,
+       "text": "新建文件夹 新建"
+      }
+     ],
+     "notice": []
+    },
+    "track": [
+     {
+      "t": 25,
+      "y": 0,
+      "h": 900,
+      "skeletons": 1
+     },
+     {
+      "t": 51,
+      "y": 0,
+      "h": 900,
+      "skeletons": 0
+     }
+    ],
+    "readyBoxes": {
+     "dialog": [
+      {
+       "x": 0,
+       "y": 0,
+       "w": 1440,
+       "h": 900,
+       "text": "保存 PDF 到个人空间 文件名 文件夹 未归档 高一上 期中 高二 阅读专项 "
+      }
+     ],
+     "rows": [
+      {
+       "x": 524,
+       "y": 360,
+       "w": 392,
+       "h": 56,
+       "text": "文件名"
+      },
+      {
+       "x": 524,
+       "y": 428,
+       "w": 392,
+       "h": 56,
+       "text": "文件夹 未归档 高一上 期中 高二 阅读专项 寒假作业"
+      },
+      {
+       "x": 524,
+       "y": 496,
+       "w": 392,
+       "h": 36,
+       "text": "新建文件夹 新建"
+      }
+     ]
+    },
+    "options": [
+     "未归档",
+     "高一上 期中",
+     "高二 阅读专项",
+     "寒假作业"
+    ]
+   }
+  },
+  "workbench": {
+   "before": {
+    "at150": {
+     "ms": 150,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [],
+     "notices": []
+    },
+    "frozen": {
+     "count": 0,
+     "kinds": []
+    },
+    "at1200": {
+     "ms": 1407,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [],
+     "notices": []
+    },
+    "waitBoxes": {
+     "message": [
+      {
+       "x": 0,
+       "y": 0,
+       "w": 1440,
+       "h": 900,
+       "text": "正在读取学生与听写记录…"
+      }
+     ],
+     "nav": [],
+     "tabs": [],
+     "picker": [],
+     "pickerBody": [],
+     "tools": [],
+     "search": [],
+     "dates": [],
+     "list": [],
+     "rows": []
+    },
+    "track": [
+     {
+      "t": 0,
+      "y": null,
+      "h": null,
+      "skeletons": 0
+     },
+     {
+      "t": 38,
+      "y": 189,
+      "h": 2,
+      "skeletons": 0
+     },
+     {
+      "t": 74,
+      "y": 189,
+      "h": 392,
+      "skeletons": 0
+     }
+    ],
+    "readyBoxes": {
+     "nav": [
+      {
+       "x": 100,
+       "y": 68,
+       "w": 1240,
+       "h": 45,
+       "text": "词组 认词 听写 待复习 记录 当前学生 林小满"
+      }
+     ],
+     "tabs": [
+      {
+       "x": 100,
+       "y": 68,
+       "w": 28,
+       "h": 45,
+       "text": "词组"
+      },
+      {
+       "x": 152,
+       "y": 68,
+       "w": 28,
+       "h": 45,
+       "text": "认词"
+      },
+      {
+       "x": 204,
+       "y": 68,
+       "w": 28,
+       "h": 45,
+       "text": "听写"
+      },
+      {
+       "x": 256,
+       "y": 68,
+       "w": 42,
+       "h": 45,
+       "text": "待复习"
+      },
+      {
+       "x": 322,
+       "y": 68,
+       "w": 28,
+       "h": 45,
+       "text": "记录"
+      }
+     ],
+     "picker": [
+      {
+       "x": 1196,
+       "y": 68,
+       "w": 144,
+       "h": 44,
+       "text": "当前学生 林小满"
+      }
+     ],
+     "pickerBody": [
+      {
+       "x": 1252,
+       "y": 68,
+       "w": 88,
+       "h": 36,
+       "text": "林小满"
+      }
+     ],
+     "tools": [
+      {
+       "x": 100,
+       "y": 137,
+       "w": 1240,
+       "h": 36,
+       "text": "搜索词组 从 到"
+      }
+     ],
+     "search": [
+      {
+       "x": 100,
+       "y": 137,
+       "w": 892,
+       "h": 36,
+       "text": "搜索词组"
+      }
+     ],
+     "dates": [
+      {
+       "x": 1004,
+       "y": 137,
+       "w": 162,
+       "h": 36,
+       "text": "从"
+      },
+      {
+       "x": 1178,
+       "y": 137,
+       "w": 162,
+       "h": 36,
+       "text": "到"
+      }
+     ],
+     "list": [
+      {
+       "x": 100,
+       "y": 189,
+       "w": 1240,
+       "h": 392,
+       "text": "第 1 组 · 拍图词组 8 词 · abandon、benefit、captu"
+      }
+     ],
+     "rows": [
+      {
+       "x": 101,
+       "y": 190,
+       "w": 1238,
+       "h": 78,
+       "text": "第 1 组 · 拍图词组 8 词 · abandon、benefit、captu"
+      },
+      {
+       "x": 101,
+       "y": 268,
+       "w": 1238,
+       "h": 78,
+       "text": "第 2 组 · 拍图词组 9 词 · abandon、benefit、captu"
+      },
+      {
+       "x": 101,
+       "y": 346,
+       "w": 1238,
+       "h": 78,
+       "text": "第 3 组 · 拍图词组 10 词 · abandon、benefit、capt"
+      },
+      {
+       "x": 101,
+       "y": 424,
+       "w": 1238,
+       "h": 78,
+       "text": "第 4 组 · 拍图词组 11 词 · abandon、benefit、capt"
+      },
+      {
+       "x": 101,
+       "y": 502,
+       "w": 1238,
+       "h": 78,
+       "text": "第 5 组 · 拍图词组 12 词 · abandon、benefit、capt"
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 151,
+     "skeletons": 21,
+     "skeletonsVisible": 21,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "dictation-workbench-shell",
+       "role": null,
+       "text": "单词复习正在读取学生与听写记录当前学生学生名搜索词组从到"
+      }
+     ],
+     "status": [
+      "正在读取学生与听写记录"
+     ],
+     "notices": []
+    },
+    "frozen": {
+     "count": 21,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1419,
+     "skeletons": 21,
+     "skeletonsVisible": 21,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "dictation-workbench-shell",
+       "role": null,
+       "text": "单词复习正在读取学生与听写记录当前学生学生名搜索词组从到"
+      }
+     ],
+     "status": [
+      "正在读取学生与听写记录"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "message": [],
+     "nav": [
+      {
+       "x": 100,
+       "y": 68,
+       "w": 1240,
+       "h": 45,
+       "text": "当前学生"
+      }
+     ],
+     "tabs": [
+      {
+       "x": 100,
+       "y": 70,
+       "w": 28,
+       "h": 43,
+       "text": ""
+      },
+      {
+       "x": 152,
+       "y": 70,
+       "w": 28,
+       "h": 43,
+       "text": ""
+      },
+      {
+       "x": 204,
+       "y": 70,
+       "w": 28,
+       "h": 43,
+       "text": ""
+      },
+      {
+       "x": 256,
+       "y": 70,
+       "w": 42,
+       "h": 43,
+       "text": ""
+      },
+      {
+       "x": 322,
+       "y": 70,
+       "w": 28,
+       "h": 43,
+       "text": ""
+      }
+     ],
+     "picker": [
+      {
+       "x": 1196,
+       "y": 68,
+       "w": 144,
+       "h": 44,
+       "text": "当前学生"
+      }
+     ],
+     "pickerBody": [
+      {
+       "x": 1252,
+       "y": 68,
+       "w": 88,
+       "h": 36,
+       "text": ""
+      }
+     ],
+     "tools": [
+      {
+       "x": 100,
+       "y": 137,
+       "w": 1240,
+       "h": 36,
+       "text": "搜索词组 从 到"
+      }
+     ],
+     "search": [
+      {
+       "x": 100,
+       "y": 137,
+       "w": 892,
+       "h": 36,
+       "text": "搜索词组"
+      }
+     ],
+     "dates": [
+      {
+       "x": 1004,
+       "y": 137,
+       "w": 162,
+       "h": 36,
+       "text": "从"
+      },
+      {
+       "x": 1178,
+       "y": 137,
+       "w": 162,
+       "h": 36,
+       "text": "到"
+      }
+     ],
+     "list": [
+      {
+       "x": 100,
+       "y": 189,
+       "w": 1240,
+       "h": 236,
+       "text": ""
+      }
+     ],
+     "rows": [
+      {
+       "x": 101,
+       "y": 190,
+       "w": 1238,
+       "h": 78,
+       "text": ""
+      },
+      {
+       "x": 101,
+       "y": 268,
+       "w": 1238,
+       "h": 78,
+       "text": ""
+      },
+      {
+       "x": 101,
+       "y": 346,
+       "w": 1238,
+       "h": 78,
+       "text": ""
+      }
+     ]
+    },
+    "track": [
+     {
+      "t": 0,
+      "y": 189,
+      "h": 236,
+      "skeletons": 12
+     },
+     {
+      "t": 65,
+      "y": 189,
+      "h": 392,
+      "skeletons": 0
+     }
+    ],
+    "readyBoxes": {
+     "nav": [
+      {
+       "x": 100,
+       "y": 68,
+       "w": 1240,
+       "h": 45,
+       "text": "词组 认词 听写 待复习 记录 当前学生 林小满"
+      }
+     ],
+     "tabs": [
+      {
+       "x": 100,
+       "y": 68,
+       "w": 28,
+       "h": 45,
+       "text": "词组"
+      },
+      {
+       "x": 152,
+       "y": 68,
+       "w": 28,
+       "h": 45,
+       "text": "认词"
+      },
+      {
+       "x": 204,
+       "y": 68,
+       "w": 28,
+       "h": 45,
+       "text": "听写"
+      },
+      {
+       "x": 256,
+       "y": 68,
+       "w": 42,
+       "h": 45,
+       "text": "待复习"
+      },
+      {
+       "x": 322,
+       "y": 68,
+       "w": 28,
+       "h": 45,
+       "text": "记录"
+      }
+     ],
+     "picker": [
+      {
+       "x": 1196,
+       "y": 68,
+       "w": 144,
+       "h": 44,
+       "text": "当前学生 林小满"
+      }
+     ],
+     "pickerBody": [
+      {
+       "x": 1252,
+       "y": 68,
+       "w": 88,
+       "h": 36,
+       "text": "林小满"
+      }
+     ],
+     "tools": [
+      {
+       "x": 100,
+       "y": 137,
+       "w": 1240,
+       "h": 36,
+       "text": "搜索词组 从 到"
+      }
+     ],
+     "search": [
+      {
+       "x": 100,
+       "y": 137,
+       "w": 892,
+       "h": 36,
+       "text": "搜索词组"
+      }
+     ],
+     "dates": [
+      {
+       "x": 1004,
+       "y": 137,
+       "w": 162,
+       "h": 36,
+       "text": "从"
+      },
+      {
+       "x": 1178,
+       "y": 137,
+       "w": 162,
+       "h": 36,
+       "text": "到"
+      }
+     ],
+     "list": [
+      {
+       "x": 100,
+       "y": 189,
+       "w": 1240,
+       "h": 392,
+       "text": "第 1 组 · 拍图词组 8 词 · abandon、benefit、captu"
+      }
+     ],
+     "rows": [
+      {
+       "x": 101,
+       "y": 190,
+       "w": 1238,
+       "h": 78,
+       "text": "第 1 组 · 拍图词组 8 词 · abandon、benefit、captu"
+      },
+      {
+       "x": 101,
+       "y": 268,
+       "w": 1238,
+       "h": 78,
+       "text": "第 2 组 · 拍图词组 9 词 · abandon、benefit、captu"
+      },
+      {
+       "x": 101,
+       "y": 346,
+       "w": 1238,
+       "h": 78,
+       "text": "第 3 组 · 拍图词组 10 词 · abandon、benefit、capt"
+      },
+      {
+       "x": 101,
+       "y": 424,
+       "w": 1238,
+       "h": 78,
+       "text": "第 4 组 · 拍图词组 11 词 · abandon、benefit、capt"
+      },
+      {
+       "x": 101,
+       "y": 502,
+       "w": 1238,
+       "h": 78,
+       "text": "第 5 组 · 拍图词组 12 词 · abandon、benefit、capt"
+      }
+     ]
+    }
+   }
+  },
+  "detail-plain": {
+   "before": {
+    "frozen": {
+     "count": 29,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1427,
+     "skeletons": 29,
+     "skeletonsVisible": 29,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "peek-root detail-opening-skeleton",
+       "role": "status",
+       "text": "正在读取题组详情"
+      }
+     ],
+     "status": [
+      "正在读取题组详情"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 206.6,
+       "text": ""
+      }
+     ],
+     "summary": [
+      {
+       "x": 316,
+       "y": 161,
+       "w": 557.7,
+       "h": 41.6,
+       "text": ""
+      }
+     ],
+     "chips": [
+      {
+       "x": 316,
+       "y": 215,
+       "w": 808,
+       "h": 24,
+       "text": ""
+      }
+     ],
+     "topics": [],
+     "actions": [
+      {
+       "x": 316,
+       "y": 255,
+       "w": 808,
+       "h": 32,
+       "text": ""
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 311,
+       "w": 808,
+       "h": 300,
+       "text": ""
+      }
+     ]
+    },
+    "track": [
+     {
+      "t": 23,
+      "y": 235,
+      "h": 300,
+      "skeletons": 19
+     },
+     {
+      "t": 35,
+      "y": 235,
+      "h": 122,
+      "skeletons": 0
+     }
+    ],
+    "readyBoxes": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 131,
+       "text": "阅读理解 · 3 题 · 自建 Reading A 已加入"
+      }
+     ],
+     "summary": [],
+     "chips": [],
+     "topics": [],
+     "actions": [
+      {
+       "x": 316,
+       "y": 179,
+       "w": 808,
+       "h": 32,
+       "text": "已加入"
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 235,
+       "w": 808,
+       "h": 122,
+       "text": "这份卷还没上线，回到题库换一份看看。"
+      }
+     ]
+    },
+    "paperState": "placeholder",
+    "readyBoxes2": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 131,
+       "text": "阅读理解 · 3 题 · 自建 Reading A 已加入"
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 235,
+       "w": 808,
+       "h": 122,
+       "text": "这份卷还没上线，回到题库换一份看看。"
+      }
+     ]
+    }
+   },
+   "after": {
+    "frozen": {
+     "count": 25,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1419,
+     "skeletons": 25,
+     "skeletonsVisible": 25,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "peek-root detail-opening-skeleton",
+       "role": "status",
+       "text": "正在读取题组详情"
+      }
+     ],
+     "status": [
+      "正在读取题组详情"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 161.8,
+       "text": ""
+      }
+     ],
+     "summary": [
+      {
+       "x": 316,
+       "y": 161,
+       "w": 557.7,
+       "h": 20.8,
+       "text": ""
+      }
+     ],
+     "chips": [],
+     "topics": [],
+     "actions": [
+      {
+       "x": 316,
+       "y": 210,
+       "w": 808,
+       "h": 32,
+       "text": ""
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 266,
+       "w": 808,
+       "h": 300,
+       "text": ""
+      }
+     ]
+    },
+    "track": [
+     {
+      "t": 23,
+      "y": 235,
+      "h": 300,
+      "skeletons": 19
+     },
+     {
+      "t": 37,
+      "y": 235,
+      "h": 122,
+      "skeletons": 0
+     }
+    ],
+    "readyBoxes": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 131,
+       "text": "阅读理解 · 3 题 · 自建 Reading A 已加入"
+      }
+     ],
+     "summary": [],
+     "chips": [],
+     "topics": [],
+     "actions": [
+      {
+       "x": 316,
+       "y": 179,
+       "w": 808,
+       "h": 32,
+       "text": "已加入"
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 235,
+       "w": 808,
+       "h": 122,
+       "text": "这份卷还没上线，回到题库换一份看看。"
+      }
+     ]
+    },
+    "paperState": "placeholder",
+    "readyBoxes2": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 131,
+       "text": "阅读理解 · 3 题 · 自建 Reading A 已加入"
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 235,
+       "w": 808,
+       "h": 122,
+       "text": "这份卷还没上线，回到题库换一份看看。"
+      }
+     ]
+    }
+   }
+  },
+  "detail-summary": {
+   "before": {
+    "frozen": {
+     "count": 29,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1412,
+     "skeletons": 29,
+     "skeletonsVisible": 29,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "peek-root detail-opening-skeleton",
+       "role": "status",
+       "text": "正在读取题组详情"
+      }
+     ],
+     "status": [
+      "正在读取题组详情"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 206.6,
+       "text": ""
+      }
+     ],
+     "summary": [
+      {
+       "x": 316,
+       "y": 161,
+       "w": 557.7,
+       "h": 41.6,
+       "text": ""
+      }
+     ],
+     "chips": [
+      {
+       "x": 316,
+       "y": 215,
+       "w": 808,
+       "h": 24,
+       "text": ""
+      }
+     ],
+     "topics": [],
+     "actions": [
+      {
+       "x": 316,
+       "y": 255,
+       "w": 808,
+       "h": 32,
+       "text": ""
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 311,
+       "w": 808,
+       "h": 300,
+       "text": ""
+      }
+     ]
+    },
+    "track": [
+     {
+      "t": 25,
+      "y": 268,
+      "h": 300,
+      "skeletons": 19
+     },
+     {
+      "t": 34,
+      "y": 268,
+      "h": 122,
+      "skeletons": 0
+     }
+    ],
+    "readyBoxes": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 163.8,
+       "text": "阅读理解 · 3 题 · 自建 Reading A 一位退休教师在社区开设免费英"
+      }
+     ],
+     "summary": [
+      {
+       "x": 316,
+       "y": 163,
+       "w": 557.7,
+       "h": 20.8,
+       "text": "一位退休教师在社区开设免费英语角，记录了邻里之间因为一起学语言而慢慢熟络起来的过"
+      }
+     ],
+     "chips": [],
+     "topics": [],
+     "actions": [
+      {
+       "x": 316,
+       "y": 212,
+       "w": 808,
+       "h": 32,
+       "text": "已加入"
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 268,
+       "w": 808,
+       "h": 122,
+       "text": "这份卷还没上线，回到题库换一份看看。"
+      }
+     ]
+    },
+    "paperState": "placeholder",
+    "readyBoxes2": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 163.8,
+       "text": "阅读理解 · 3 题 · 自建 Reading A 一位退休教师在社区开设免费英"
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 268,
+       "w": 808,
+       "h": 122,
+       "text": "这份卷还没上线，回到题库换一份看看。"
+      }
+     ]
+    }
+   },
+   "after": {
+    "frozen": {
+     "count": 25,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1413,
+     "skeletons": 25,
+     "skeletonsVisible": 25,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "peek-root detail-opening-skeleton",
+       "role": "status",
+       "text": "正在读取题组详情"
+      }
+     ],
+     "status": [
+      "正在读取题组详情"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 161.8,
+       "text": ""
+      }
+     ],
+     "summary": [
+      {
+       "x": 316,
+       "y": 161,
+       "w": 557.7,
+       "h": 20.8,
+       "text": ""
+      }
+     ],
+     "chips": [],
+     "topics": [],
+     "actions": [
+      {
+       "x": 316,
+       "y": 210,
+       "w": 808,
+       "h": 32,
+       "text": ""
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 266,
+       "w": 808,
+       "h": 300,
+       "text": ""
+      }
+     ]
+    },
+    "track": [
+     {
+      "t": 21,
+      "y": 268,
+      "h": 300,
+      "skeletons": 19
+     },
+     {
+      "t": 32,
+      "y": 268,
+      "h": 122,
+      "skeletons": 0
+     }
+    ],
+    "readyBoxes": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 163.8,
+       "text": "阅读理解 · 3 题 · 自建 Reading A 一位退休教师在社区开设免费英"
+      }
+     ],
+     "summary": [
+      {
+       "x": 316,
+       "y": 163,
+       "w": 557.7,
+       "h": 20.8,
+       "text": "一位退休教师在社区开设免费英语角，记录了邻里之间因为一起学语言而慢慢熟络起来的过"
+      }
+     ],
+     "chips": [],
+     "topics": [],
+     "actions": [
+      {
+       "x": 316,
+       "y": 212,
+       "w": 808,
+       "h": 32,
+       "text": "已加入"
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 268,
+       "w": 808,
+       "h": 122,
+       "text": "这份卷还没上线，回到题库换一份看看。"
+      }
+     ]
+    },
+    "paperState": "placeholder",
+    "readyBoxes2": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 163.8,
+       "text": "阅读理解 · 3 题 · 自建 Reading A 一位退休教师在社区开设免费英"
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 268,
+       "w": 808,
+       "h": 122,
+       "text": "这份卷还没上线，回到题库换一份看看。"
+      }
+     ]
+    }
+   }
+  },
+  "workbench-run1": {
+   "before": null,
+   "after": {
+    "at150": {
+     "ms": 150,
+     "skeletons": 21,
+     "skeletonsVisible": 21,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "dictation-workbench-shell",
+       "role": null,
+       "text": "单词复习正在读取学生与听写记录当前学生学生姓名搜索词组从到"
+      }
+     ],
+     "status": [
+      "正在读取学生与听写记录"
+     ],
+     "notices": []
+    },
+    "frozen": {
+     "count": 21,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1418,
+     "skeletons": 21,
+     "skeletonsVisible": 21,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "dictation-workbench-shell",
+       "role": null,
+       "text": "单词复习正在读取学生与听写记录当前学生学生姓名搜索词组从到"
+      }
+     ],
+     "status": [
+      "正在读取学生与听写记录"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "message": [],
+     "nav": [
+      {
+       "x": 100,
+       "y": 68,
+       "w": 1240,
+       "h": 45,
+       "text": "当前学生"
+      }
+     ],
+     "tabs": [
+      {
+       "x": 100,
+       "y": 75,
+       "w": 28,
+       "h": 38,
+       "text": ""
+      },
+      {
+       "x": 152,
+       "y": 75,
+       "w": 28,
+       "h": 38,
+       "text": ""
+      },
+      {
+       "x": 204,
+       "y": 75,
+       "w": 28,
+       "h": 38,
+       "text": ""
+      },
+      {
+       "x": 256,
+       "y": 75,
+       "w": 42,
+       "h": 38,
+       "text": ""
+      },
+      {
+       "x": 322,
+       "y": 75,
+       "w": 28,
+       "h": 38,
+       "text": ""
+      }
+     ],
+     "picker": [
+      {
+       "x": 1182,
+       "y": 68,
+       "w": 158,
+       "h": 44,
+       "text": "当前学生"
+      }
+     ],
+     "pickerBody": [
+      {
+       "x": 1238,
+       "y": 68,
+       "w": 102,
+       "h": 36,
+       "text": ""
+      }
+     ],
+     "tools": [
+      {
+       "x": 100,
+       "y": 137,
+       "w": 1240,
+       "h": 36,
+       "text": "搜索词组 从 到"
+      }
+     ],
+     "search": [
+      {
+       "x": 100,
+       "y": 137,
+       "w": 892,
+       "h": 36,
+       "text": "搜索词组"
+      }
+     ],
+     "dates": [
+      {
+       "x": 1004,
+       "y": 137,
+       "w": 162,
+       "h": 36,
+       "text": "从"
+      },
+      {
+       "x": 1178,
+       "y": 137,
+       "w": 162,
+       "h": 36,
+       "text": "到"
+      }
+     ],
+     "list": [
+      {
+       "x": 100,
+       "y": 189,
+       "w": 1240,
+       "h": 236,
+       "text": ""
+      }
+     ],
+     "rows": [
+      {
+       "x": 101,
+       "y": 190,
+       "w": 1238,
+       "h": 78,
+       "text": ""
+      },
+      {
+       "x": 101,
+       "y": 268,
+       "w": 1238,
+       "h": 78,
+       "text": ""
+      },
+      {
+       "x": 101,
+       "y": 346,
+       "w": 1238,
+       "h": 78,
+       "text": ""
+      }
+     ]
+    },
+    "track": [
+     {
+      "t": 16,
+      "y": 189,
+      "h": 236,
+      "skeletons": 12
+     },
+     {
+      "t": 64,
+      "y": 189,
+      "h": 392,
+      "skeletons": 0
+     }
+    ],
+    "readyBoxes": {
+     "nav": [
+      {
+       "x": 100,
+       "y": 68,
+       "w": 1240,
+       "h": 45,
+       "text": "词组 认词 听写 待复习 记录 当前学生 林小满"
+      }
+     ],
+     "tabs": [
+      {
+       "x": 100,
+       "y": 68,
+       "w": 28,
+       "h": 45,
+       "text": "词组"
+      },
+      {
+       "x": 152,
+       "y": 68,
+       "w": 28,
+       "h": 45,
+       "text": "认词"
+      },
+      {
+       "x": 204,
+       "y": 68,
+       "w": 28,
+       "h": 45,
+       "text": "听写"
+      },
+      {
+       "x": 256,
+       "y": 68,
+       "w": 42,
+       "h": 45,
+       "text": "待复习"
+      },
+      {
+       "x": 322,
+       "y": 68,
+       "w": 28,
+       "h": 45,
+       "text": "记录"
+      }
+     ],
+     "picker": [
+      {
+       "x": 1196,
+       "y": 68,
+       "w": 144,
+       "h": 44,
+       "text": "当前学生 林小满"
+      }
+     ],
+     "pickerBody": [
+      {
+       "x": 1252,
+       "y": 68,
+       "w": 88,
+       "h": 36,
+       "text": "林小满"
+      }
+     ],
+     "tools": [
+      {
+       "x": 100,
+       "y": 137,
+       "w": 1240,
+       "h": 36,
+       "text": "搜索词组 从 到"
+      }
+     ],
+     "search": [
+      {
+       "x": 100,
+       "y": 137,
+       "w": 892,
+       "h": 36,
+       "text": "搜索词组"
+      }
+     ],
+     "dates": [
+      {
+       "x": 1004,
+       "y": 137,
+       "w": 162,
+       "h": 36,
+       "text": "从"
+      },
+      {
+       "x": 1178,
+       "y": 137,
+       "w": 162,
+       "h": 36,
+       "text": "到"
+      }
+     ],
+     "list": [
+      {
+       "x": 100,
+       "y": 189,
+       "w": 1240,
+       "h": 392,
+       "text": "第 1 组 · 拍图词组 8 词 · abandon、benefit、captu"
+      }
+     ],
+     "rows": [
+      {
+       "x": 101,
+       "y": 190,
+       "w": 1238,
+       "h": 78,
+       "text": "第 1 组 · 拍图词组 8 词 · abandon、benefit、captu"
+      },
+      {
+       "x": 101,
+       "y": 268,
+       "w": 1238,
+       "h": 78,
+       "text": "第 2 组 · 拍图词组 9 词 · abandon、benefit、captu"
+      },
+      {
+       "x": 101,
+       "y": 346,
+       "w": 1238,
+       "h": 78,
+       "text": "第 3 组 · 拍图词组 10 词 · abandon、benefit、capt"
+      },
+      {
+       "x": 101,
+       "y": 424,
+       "w": 1238,
+       "h": 78,
+       "text": "第 4 组 · 拍图词组 11 词 · abandon、benefit、capt"
+      },
+      {
+       "x": 101,
+       "y": 502,
+       "w": 1238,
+       "h": 78,
+       "text": "第 5 组 · 拍图词组 12 词 · abandon、benefit、capt"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

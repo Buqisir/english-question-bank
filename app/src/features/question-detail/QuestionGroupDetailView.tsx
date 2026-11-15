@@ -295,8 +295,11 @@ const psTokenStyle: CSSProperties & Record<`--${string}`, string | number> = {
 
 /**
  * 整页在等题组详情时的灰块（等待第五轮，2026-11-15；原来是「返回找题」下面一行「正在读取题组详情」）。
- * 用真页面同一套 class 排：速览头（题型一行、标题、摘要两行、三个小签、一排键），下面一张纸露一角（同卷面在等时的灰块）。
+ * 用真页面同一套 class 排：速览头（题型一行、标题、摘要一行、一排键），下面一张纸露一角（同卷面在等时的灰块）。
  * 字的位置放灰块，行高由真规则的字号、行高给。showSkeleton 是外面接成一段的门槛（读详情 → 读卷面）。
+ * 等待第七轮（2026-11-15，Owner 同意协调人的建议）：摘要从两行改成一行、小签不画。原来按两行摘要加一排小签画，
+ * 没摘要、没小签的题组数据到了纸往上挪约 76px；现在有一行摘要的几乎不动，没摘要的往上挪约 31px（实量见
+ * design/components-2026-11-13/migrate-waiting-7/README.md）。
  */
 function DetailOpeningSkeleton({ showSkeleton }: { showSkeleton: boolean }) {
   return (
@@ -306,10 +309,7 @@ function DetailOpeningSkeleton({ showSkeleton }: { showSkeleton: boolean }) {
         <div className="peek-hero" aria-hidden="true">
           <div className="peek-meta-line"><span><Skeleton width={120} height={10} /></span></div>
           <h3 className="peek-title"><Skeleton width={280} height={16} /></h3>
-          <p className="peek-summary"><Skeleton width="100%" height={10} /><br /><Skeleton width="56%" height={10} /></p>
-          <div className="peek-chips">
-            {[72, 64, 80].map((width, index) => <Skeleton key={index} width={width} height={24} shape="pill" />)}
-          </div>
+          <p className="peek-summary"><Skeleton width={420} height={10} /></p>
           <div className="peek-actions">
             {[104, 88, 88].map((width, index) => <Skeleton key={index} width={width} height={32} />)}
           </div>

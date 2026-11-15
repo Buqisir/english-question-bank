@@ -5,13 +5,13 @@ import { Button } from '../../shared-ui/Button.tsx'
 import { Dialog } from '../../shared-ui/Dialog.tsx'
 import { EmptyState } from '../../shared-ui/EmptyState.tsx'
 import { Menu } from '../../shared-ui/Menu.tsx'
-import { SelectField, TextField } from '../../shared-ui/Field.tsx'
+import { Field, SelectField, TextField } from '../../shared-ui/Field.tsx'
 import { OptionSelectField, SegmentedField } from '../../shared-ui/OptionField.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { Toast } from '../../shared-ui/Toast.tsx'
 import { InlineWaitDots } from '../../shared-ui/WaitDots.tsx'
 import { useDelayedBusy, useSlowWait } from '../../shared-ui/useDelayedBusy.ts'
-import { PaperGroupSkeleton, Skeleton } from '../../shared-ui/Skeleton.tsx'
+import { PaperGroupSkeleton, Skeleton, SkeletonOver } from '../../shared-ui/Skeleton.tsx'
 import { Surface } from '../../shared-ui/Surface.tsx'
 import { planFocusAfterRemoval, programmaticFocusTarget } from '../../shared-ui/focusAfterRemoval.ts'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, GroupType, MySpaceFolder, QuestionGroupCard } from '../../domain/questionBank'
@@ -215,6 +215,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [spaceNewFolderName, setSpaceNewFolderName] = useState('')
   const [spaceStatus, setSpaceStatus] = useState<'idle' | 'loading' | 'saving' | 'saved' | 'error'>('idle')
   const [spaceMessage, setSpaceMessage] = useState('')
+  // 对话框里读文件夹（等待第七轮 2026-11-15）：「文件夹」下拉的位置画灰块，走门槛；灰块在的时候出错那行也先不挂，等灰块走了一起换上。
+  const spaceFoldersPhase = useDelayedBusy(spaceStatus === 'loading')
+  const spaceFoldersWaiting = spaceStatus === 'loading' || spaceFoldersPhase === 'waiting'
   // ui-p1-panels #14: the save dialog used to stay open after a successful
   // save, with the success text squeezed into the form body and "保存"
   // still clickable (repeat-save risk, "取消" reading oddly once already
@@ -2229,13 +2232,30 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       >
         {/* 字段构件（shared-ui/Field.tsx）：三个都是大号 36，和旁边「新建」大号键同高。「新建文件夹」原来只有读屏标签，照旧 hideLabel。 */}
         <TextField label="文件名" size="lg" value={spaceFileName} onChange={(event) => setSpaceFileName(event.target.value)} />
-        <SelectField
-          label="文件夹"
-          size="lg"
-          value={spaceFolderId}
-          onChange={(event) => setSpaceFolderId(event.target.value)}
-          options={[{ value: '', label: '未归档' }, ...spaceFolders.map((folder) => ({ value: folder.id, label: folder.name }))]}
-        />
+        {/* 在读文件夹（等待第七轮 2026-11-15，原来是表单下面一行「正在读取文件夹」，读完那行一收、对话框跟着变矮）：
+            「文件夹」标签照旧，下拉的位置画一块灰（SkeletonOver 垫一个同款大号下拉撑出 36 高），门槛内只占位置不出灰。
+            读屏念一句「正在读取文件夹」。读完灰块换成真下拉，同一个位置、同样高，对话框不动。 */}
+        {spaceFoldersWaiting ? (
+          <Field label="文件夹" labelledByControl>
+            {() => (
+              <>
+                {/* 只给读屏的一句（.visually-hidden 绝对定位，不占 flex 的位置）。 */}
+                <span className="visually-hidden" role="status">正在读取文件夹</span>
+                <SkeletonOver show={spaceFoldersPhase === 'waiting'}>
+                  <span className="eqb-field-select" data-size="lg"><select className="eqb-field-control" data-size="lg" tabIndex={-1} /></span>
+                </SkeletonOver>
+              </>
+            )}
+          </Field>
+        ) : (
+          <SelectField
+            label="文件夹"
+            size="lg"
+            value={spaceFolderId}
+            onChange={(event) => setSpaceFolderId(event.target.value)}
+            options={[{ value: '', label: '未归档' }, ...spaceFolders.map((folder) => ({ value: folder.id, label: folder.name }))]}
+          />
+        )}
         <div className="draft-new-folder-row">
           <TextField
             label="新建文件夹"
@@ -2255,8 +2275,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             新建
           </Button>
         </div>
-        {spaceStatus === 'loading' && <Notice kind="waiting" className="draft-dialog-note">正在读取文件夹</Notice>}
-        {spaceStatus === 'error' && <Notice kind="error" className="draft-error">{spaceMessage}</Notice>}
+        {spaceStatus === 'error' && !spaceFoldersWaiting && <Notice kind="error" className="draft-error">{spaceMessage}</Notice>}
       </Dialog>
     </div>
     </>

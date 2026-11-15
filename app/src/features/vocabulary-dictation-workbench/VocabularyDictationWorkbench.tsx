@@ -26,7 +26,9 @@ import { EmptyState } from '../../shared-ui/EmptyState.tsx'
 import { Dialog } from '../../shared-ui/Dialog.tsx'
 import { Button } from '../../shared-ui/Button.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
-import { SelectField, TextField } from '../../shared-ui/Field.tsx'
+import { Field, SelectField, TextField } from '../../shared-ui/Field.tsx'
+import { Skeleton, SkeletonOver } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
 import { SegmentedField, type ChoiceOption } from '../../shared-ui/OptionField.tsx'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
@@ -103,6 +105,68 @@ type HandwritingDownloadRequest = {
     | { kind: 'task'; taskId: string }
 }
 
+
+// 整页在等学生和词组时的灰块（等待第七轮，2026-11-15；原来是整屏桌色底上正中一行「正在读取学生与听写记录…」，没有顶栏）。
+// 顶栏照常；内容区照「词组」分区的真页面画：分区栏（五个分区名、右边「当前学生」下拉）、筛选条（搜索框、从、到）、
+// 词组列表三行（灰行数照第六轮，固定 3 行）。用真页面同一套 class 排，控件的位置用 SkeletonOver 垫同款控件撑出宽高，
+// 不另抄高度。字的位置放行内灰块，行高由真规则的字号、行高给。分区名的灰块宽照 14px 字算：两个字 28、三个字 42。
+const SKELETON_TAB_WIDTHS = [28, 28, 28, 42, 28]
+const SKELETON_SET_ROWS = 3
+
+function DictationWorkbenchSkeleton({ show }: { show: boolean }) {
+  return (
+    <main className="dictation-workbench-shell" aria-busy="true">
+      <h1 className="dictation-visually-hidden">单词复习</h1>
+      <p className="dictation-visually-hidden" role="status">正在读取学生与听写记录</p>
+      {/* 门槛内（300ms）整块占位置、看不见；inert：里面垫的键和框点不到、不进读屏。 */}
+      <div className="dictation-workbench-skeleton" inert data-hidden={show ? undefined : ''}>
+        <div className="dictation-workbench-navigation">
+          <div className="dictation-workbench-tabs">
+            {SKELETON_TAB_WIDTHS.map((width, index) => (
+              // 键是 inline-flex：灰块外面包一层 span 当那一行字，行高照 14px 字给，键和真键一样高（不包时矮 7px）。
+              <button key={index} type="button"><span><Skeleton inline width={width} height={12} /></span></button>
+            ))}
+          </div>
+          <Field className="dictation-student-picker" label="当前学生" layout="inline" labelledByControl>
+            {() => (
+              <SkeletonOver>
+                {/* 垫一个名字三个字的下拉（真名字长短不一，每多一个字宽差约 14px，高度一样）。 */}
+                <span className="eqb-field-select" data-size="lg"><select className="eqb-field-control" data-size="lg"><option>学生名</option></select></span>
+              </SkeletonOver>
+            )}
+          </Field>
+        </div>
+        <section className="dictation-sets-workspace">
+          <div className="dictation-library-tools">
+            <Field className="dictation-search-field" label="搜索词组" hideLabel labelledByControl>
+              {() => <SkeletonOver><input className="eqb-field-control" data-size="lg" /></SkeletonOver>}
+            </Field>
+            {['从', '到'].map((label) => (
+              <Field key={label} className="dictation-date-field" label={label} layout="inline" labelledByControl>
+                {() => <SkeletonOver><input className="eqb-field-control" data-size="lg" type="date" /></SkeletonOver>}
+              </Field>
+            ))}
+          </div>
+          <div className="dictation-set-list">
+            {Array.from({ length: SKELETON_SET_ROWS }, (_, index) => (
+              <div key={index} className="dictation-set-row">
+                <Skeleton width={16} height={16} />
+                <span className="dictation-selection-order" />
+                <span className="dictation-set-main">
+                  <strong><Skeleton inline width={index % 2 === 0 ? 140 : 112} height={12} /></strong>
+                  <small><Skeleton inline width={index % 2 === 0 ? 280 : 236} height={10} /></small>
+                </span>
+                <span className="dictation-set-stats">
+                  <strong><Skeleton inline width={84} height={12} /></strong>
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </main>
+  )
+}
 
 type DownloadOptionProps = {
   label: string
@@ -978,8 +1042,36 @@ export function VocabularyDictationWorkbench({
     )
   }
 
-  if (loadState === 'loading') {
-    return <main className="dictation-workbench-message">正在读取学生与听写记录…</main>
+  // 打开时的等待（等待第七轮 2026-11-15）：读学生、读第一页词组连成一段，走一个门槛（DESIGN §5「门槛」），灰块中间不断。
+  // libraryLoadedFor 只在第一页词组到了以后才不是 null；之后换学生、翻页、筛选不再画整页灰块。读出错就不等了。
+  const openingPending = loadState === 'loading'
+    || (loadState === 'ready' && activeStudentId !== '' && libraryLoadedFor === null && !error)
+  const openingPhase = useDelayedBusy(openingPending)
+
+  const topbar = (
+    <AppTopbar
+      variant="sub"
+      pageTitle="单词复习"
+      {...shellNav}
+      onBack={() => { void leaveWorkbench(onBackToVocabulary) }}
+      onLogout={() => { void leaveWorkbench(shellNav.onLogout) }}
+      onOpenVocabularyReview={shellNav.onOpenVocabularyReview
+        ? () => { void leaveWorkbench(shellNav.onOpenVocabularyReview!) }
+        : undefined}
+      onOpenMySpace={shellNav.onOpenMySpace
+        ? () => { void leaveWorkbench(shellNav.onOpenMySpace!) }
+        : undefined}
+    />
+  )
+
+  if (openingPending || openingPhase === 'waiting') {
+    // 和下面真页面同样是 .dictation-workbench 里先放顶栏：数据到了顶栏不重新挂。
+    return (
+      <div className="dictation-workbench">
+        {topbar}
+        <DictationWorkbenchSkeleton show={openingPhase === 'waiting'} />
+      </div>
+    )
   }
   if (loadState === 'error') {
     return <main className="dictation-workbench-message"><h1>听写工作区没有加载成功</h1><button type="button" onClick={() => window.location.reload()}>重新加载</button></main>
@@ -987,19 +1079,7 @@ export function VocabularyDictationWorkbench({
 
   return (
     <div className="dictation-workbench">
-      <AppTopbar
-        variant="sub"
-        pageTitle="单词复习"
-        {...shellNav}
-        onBack={() => { void leaveWorkbench(onBackToVocabulary) }}
-        onLogout={() => { void leaveWorkbench(shellNav.onLogout) }}
-        onOpenVocabularyReview={shellNav.onOpenVocabularyReview
-          ? () => { void leaveWorkbench(shellNav.onOpenVocabularyReview!) }
-          : undefined}
-        onOpenMySpace={shellNav.onOpenMySpace
-          ? () => { void leaveWorkbench(shellNav.onOpenMySpace!) }
-          : undefined}
-      />
+      {topbar}
       <main className="dictation-workbench-shell">
         <h1 className="dictation-visually-hidden">单词复习</h1>
         <div className="dictation-workbench-navigation">

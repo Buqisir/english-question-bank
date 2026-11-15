@@ -45,6 +45,28 @@ export function Skeleton({ width, height, shape = 'block', inline = false, class
   )
 }
 
+export type SkeletonOverProps = {
+  /** 垫在底下、看不见的同款控件（输入框、下拉、键）：只用来撑出宽高，和真东西用同一套 class，不用另抄高度。 */
+  children: ReactNode
+  /** 灰块出不出（门槛由调用处管）。不出时底下那个控件照样占位置，数据到了不跳。 */
+  show?: boolean
+  className?: string
+}
+
+/**
+ * 占一个控件的位置（等待第七轮，2026-11-15：草稿卷存到个人空间的「文件夹」下拉、听写工作台的学生下拉和筛选框）。
+ * 底下垫一个 visibility: hidden 的同款控件撑出宽高，灰块盖在上面一样大（waiting.css .eqb-skeleton-over）。
+ * 控件的高度（28 / 32 / 36）只在 field.css、button.css 里写一处，这里不抄数字。整块对读屏隐藏；在等什么由调用处的一句说。
+ */
+export function SkeletonOver({ children, show = true, className }: SkeletonOverProps) {
+  return (
+    <span className={className ? `eqb-skeleton-over ${className}` : 'eqb-skeleton-over'} aria-hidden="true">
+      <span className="eqb-skeleton-over-sizer">{children}</span>
+      {show ? <Skeleton width="100%" height="100%" /> : null}
+    </span>
+  )
+}
+
 export type SkeletonGateProps = {
   /** 正在等真东西。 */
   pending: boolean

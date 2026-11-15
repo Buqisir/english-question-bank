@@ -1099,6 +1099,12 @@
   font-weight: 600;
 }
 
+/* 打开时整页的灰块（等待第七轮 2026-11-15，DictationWorkbenchSkeleton）：排法全用真页面的 class，这里只管门槛内藏起来。
+ * 门槛内（300ms）整块占着位置、看不见，到点和灰块一起出来。 */
+.dictation-workbench-skeleton[data-hidden] {
+  visibility: hidden;
+}
+
 .dictation-workbench-message {
   display: grid;
   min-height: 100vh;

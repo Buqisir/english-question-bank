@@ -669,9 +669,11 @@ assert.match(tabNavigationSource, /axis="x" itemSelector="button"/u, '工作区�
 assert.match(tabNavigationSource, /词组[\s\S]{0,500}认词[\s\S]{0,500}听写[\s\S]{0,500}待复习[\s\S]{0,500}记录/u, '工作区导航必须明确待复习职责')
 assert.match(workbenchSource, /const reviewWords = meaningStates\.filter/u, '待复习池必须只由认词状态构成')
 assert.match(workbenchSource, /全部 \{reviewWords[\s\S]{0,900}常错 \{reviewWords/u, '待复习页只保留全部和常错筛选')
+// 等待第七轮（2026-11-15）：文件前面多了整页灰块（DictationWorkbenchSkeleton）自己的 </main>，从「待复习」那段往后找。
+const waitingReviewStart = workbenchSource.indexOf("{tab === 'review' && (")
 const waitingReviewSource = workbenchSource.slice(
-  workbenchSource.indexOf("{tab === 'review' && ("),
-  workbenchSource.indexOf('</main>'),
+  waitingReviewStart,
+  workbenchSource.indexOf('</main>', waitingReviewStart),
 )
 assert.doesNotMatch(waitingReviewSource, /pendingStates|mergeReviewWords|听写还需|听写错/u, '待复习页不得显示或消费听写掌握度')
 assert.match(workbenchSource, /认词记录[\s\S]{0,500}历史听写/u, '记录页必须默认区分认词记录和只读历史听写')

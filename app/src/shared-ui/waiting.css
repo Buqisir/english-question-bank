@@ -87,6 +87,27 @@
   }
 }
 
+/* ── 占一个控件的位置（SkeletonOver，等待第七轮 2026-11-15） ──
+ * 底下的同款控件和灰块叠在同一格：控件撑出宽高、看不见，灰块铺满那一格。控件的高度只在 field.css / button.css 写一处。 */
+/* flex: 1 1 auto 照 field.css .eqb-field-select：放在字段的 .eqb-field-body（flex）里时和真控件一样占满那一格，
+ * 不缩成空控件的默认宽（换后第一次拍，搜索框灰块只有 244 宽、文件夹灰块只有 46 宽）。 */
+.eqb-skeleton-over {
+  display: grid;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.eqb-skeleton-over > * {
+  grid-area: 1 / 1;
+}
+
+/* 垫底的控件：占位置、看不见、点不到（visibility: hidden 也让它不进读屏、不能聚焦）。 */
+.eqb-skeleton-over-sizer {
+  display: grid;
+  min-width: 0;
+  visibility: hidden;
+}
+
 /* ── 整块在等（SkeletonGate） ─────────────────────────── */
 
 /* .eqb-skeleton-region（SkeletonGate 的区域）本身不写样子：只给读屏的那一句由 index.css 的 .visually-hidden 藏起来，
