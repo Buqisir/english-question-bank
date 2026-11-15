@@ -80,7 +80,8 @@
 .agent-tokens li > div { min-width: 0; overflow-wrap: anywhere; }
 .agent-tokens li span { margin-left: 8px; color: var(--eqb-color-text-muted); }
 .agent-tokens li small { display: block; margin-top: 4px; font-size: 12px; color: var(--eqb-color-text-muted); }
-.agent-token-secret { margin-top: 16px; padding: 16px; background: var(--eqb-color-paper); border: 1px solid var(--eqb-color-border); border-radius: 12px; }
+/* 「只显示这一次」那一块是共用构件 Surface（board、padding md 16）：底、边、圆角、内边距归构件，这里只留离上面多远。 */
+.agent-token-secret { margin-top: 16px; }
 .agent-token-secret code { display: block; margin-bottom: 12px; overflow-wrap: anywhere; user-select: all; }
 /* 作废确认框（.agent-token-dialog 和它的 ::backdrop）换成共用 Dialog，样式在 shared-ui/dialog.css。 */
 .agent-tokens button:focus-visible, .agent-tokens input:focus-visible { outline: 2px solid var(--eqb-color-action); outline-offset: 2px; }

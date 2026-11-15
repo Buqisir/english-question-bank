@@ -3,6 +3,7 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState, type Keyboar
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
 import { Chip } from '../../shared-ui/Chip.tsx'
+import { Surface } from '../../shared-ui/Surface.tsx'
 import { groupTypeLabel, type DraftPaperItem, type QuestionGroupCard } from '../../domain/questionBank'
 import type { SimilarPassagesRequestState } from '../similar-passages/SimilarPassagesPanel'
 
@@ -232,9 +233,9 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
 
   if (swapDrawer) {
     return (
-      <nav ref={swapPanelRef} className="draft-paper-rail draft-paper-rail--swap" aria-label="相似篇章候选">
+      <Surface as="nav" ref={swapPanelRef} className="draft-paper-rail draft-paper-rail--swap" aria-label="相似篇章候选">
         <DraftPaperSwapDrawer {...swapDrawer} />
-      </nav>
+      </Surface>
     )
   }
 
@@ -254,7 +255,7 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
   )
 
   return (
-    <nav className="draft-paper-rail" aria-label="卷面目录">
+    <Surface as="nav" className="draft-paper-rail" aria-label="卷面目录">
       {metaText && <p className="draft-paper-rail-meta">{metaText}</p>}
       <FluidHoverList
         as="div"
@@ -368,6 +369,6 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
       })}
       {items.length === 0 && <p className="draft-paper-rail-empty">从搜索结果添加题组。</p>}
       </FluidHoverList>
-    </nav>
+    </Surface>
   )
 }

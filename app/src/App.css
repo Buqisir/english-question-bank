@@ -3349,16 +3349,11 @@ p.concierge-empty {
   color: var(--desk-muted);
 }
 
+/* 「接着做」「今天翻到」的列表板：底、边（一圈 1px --desk-border）、圆角、裁切、去列表圆点由共用构件
+   shared-ui/Surface（board，surfaceProps 挂在 FluidHoverList 上）给，这里只留排法。 */
 .home-row-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
-  border-radius: 12px;
-  background: var(--desk-surface);
-  overflow: hidden;
-  box-shadow: 0 0 0 1px var(--desk-border);
 }
 
 .home-row-list > li + li {
@@ -4455,18 +4450,12 @@ p.concierge-empty {
    Reuses neutral paper / ink palette from the V1 stream.
    ======================================================================== */
 
+/* 卷行列表板（首页出结果、最近上新、浏览页每个年份）：底、边（一圈 1px --desk-border）、圆角、裁切、
+   去列表圆点由共用构件 shared-ui/Surface（board，surfaceProps 挂在 FluidHoverList 上）给，这里只留排法。 */
 .concierge-paper-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   gap: 0;
-  border: 0;
-  border-radius: 12px;
-  background: var(--desk-surface);
-  overflow: hidden;
-  box-shadow: 0 0 0 1px var(--desk-border);
 }
 
 .concierge-paper-list > li {

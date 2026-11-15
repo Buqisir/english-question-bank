@@ -97,3 +97,8 @@ token 的扩展用法。
 
 - **想要的值**：一是搜索框的几处内边距不在间距阶梯（4 / 8 / 12 / 16 / 24）上：首页框左 18、右 10，提交键「正在搜」时左右 6。二是框里几个位置跟着提交键和清除键算出来：提交键右边 10（首页）/ 4（浏览页），清除键右边 48，输入框右内边距 48（首页）/ 40（浏览页）、有清除键时 84（浏览页 2026-11-15 起也让到 84，修掉压字）。三是首页题库没连上、输入框禁用时的字色 `#9A9A93`（暖灰，雾海色阶以前留下的），tokens.css 里没有同值的颜色，最近的是 `--eqb-color-text-faint`（`#94a4ac`）。
 - **临时方案**：一、二是原值，照搬成字面量写在 `search.css`，每条注释写明原值和出处（这一轮要换前换后逐像素一样，不能挪）；若收编，内边距可以对到阶梯上（18 → 16、10 → 8、6 → 8），位置跟着重算，届时首页会动一两个像素，要 Owner 点头。三，`search.css` 的禁用字色用 `--eqb-color-text-faint`，首页原来在 App.css 里以 (0,3,0) 盖回 `#9A9A93`，2026-11-15 已删（看不到差别：题库没连上时输入框是空的，只显示次要灰的占位符），三这一项已了结。记录在 `design/components-2026-11-13/migrate-search/README.md`。
+
+## 2026-11-15 卡片 / 板构件的几处值（`app/src/shared-ui/surface.css`；草稿卷左栏一条在 `app/src/features/draft-paper/DraftPaperWorkbench.css` `.draft-paper-rail.eqb-surface[data-surface='board']`）
+
+- **想要的值**：一是板的那一圈边。DESIGN.md §4 的 e0 没有变量（表里写「—」），板的边是 `0 0 0 1px` 一圈 `--eqb-color-border`（首页、浏览卷行列表卡原来的画法，不占位置）。若收编，候选名 `--elev-0-edge`，和 `--elev-1/2/3` 放在一起。二是整张能点的卡片按下时缩多少：Button 用 0.97（也是字面量，没有 token），卡片比按钮大得多，0.97 会缩掉十来像素，取 0.99（目测）。若收编，候选名 `--eqb-press-scale`（键）、`--eqb-press-scale-large`（卡片）。三是草稿卷左栏目录的内衬 14 / 8 / 12，14 不在间距阶梯上（DESIGN.md §8 存量半档，不追改）。
+- **临时方案**：一，surface.css 里直接写 `box-shadow: 0 0 0 1px var(--eqb-color-border)`，颜色用 token，注释写明它是边不是影子。二，`transform: scale(0.99)` 字面量，注释写明理由。三，左栏照原值写字面量，换上板构件以后用一条 (0,3,0) 覆盖构件的 `padding: 0`，注释写明。记录在 `design/components-2026-11-13/migrate-surface/README.md`「缺的变量」。

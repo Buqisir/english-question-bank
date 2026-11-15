@@ -15,6 +15,7 @@
 
 import { useEffect, useMemo, useState, type ReactNode } from 'react'
 import { FluidHoverList } from '../components/FluidHoverList.tsx'
+import { surfaceProps } from '../shared-ui/surfaceProps.ts'
 import { groupTypeLabel, type DraftPaperSummary, type QuestionGroupCard } from '../domain/questionBank.ts'
 import { fetchDraftPapers } from '../services/draftPapers.ts'
 import { BoardList, ChevronRight } from '../icons'
@@ -131,7 +132,7 @@ export function HomeContinueSection({
 
   return (
     <HomeSection label="接着做">
-      <FluidHoverList className="home-row-list" itemSelector=".home-row">
+      <FluidHoverList {...surfaceProps({ variant: 'board' }, 'home-row-list')} itemSelector=".home-row">
         {showDraft && draftPaperId && (
           <HomeRow
             icon={BoardList}
@@ -169,7 +170,7 @@ export function HomeDailyPassage({ questionGroups, onOpenDetail }: HomeDailyPass
   if (!group) return null
   return (
     <HomeSection label="今天翻到">
-      <FluidHoverList className="home-row-list" itemSelector=".home-row">
+      <FluidHoverList {...surfaceProps({ variant: 'board' }, 'home-row-list')} itemSelector=".home-row">
         <HomeRow
           title={passageLabel(group)}
           meta={paperOrigin(group)}

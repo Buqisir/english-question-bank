@@ -18,6 +18,7 @@ import { Button } from '../../shared-ui/Button.tsx'
 import { Dialog } from '../../shared-ui/Dialog.tsx'
 import { EmptyState } from '../../shared-ui/EmptyState.tsx'
 import { Menu } from '../../shared-ui/Menu.tsx'
+import { surfaceProps } from '../../shared-ui/surfaceProps.ts'
 import './MySpacePage.css'
 
 export type MySpacePageProps = {
@@ -280,7 +281,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                 <FluidHoverList
                   as="div"
                   axis="y"
-                  className="my-space-file-list"
+                  {...surfaceProps({ variant: 'board' }, 'my-space-file-list')}
                   itemSelector=".my-space-file-row"
                   gapClick={false}
                   aria-label={selectedFolder ? selectedFolder.name : '全部保存文件'}

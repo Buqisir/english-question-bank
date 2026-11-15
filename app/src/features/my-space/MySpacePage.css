@@ -152,12 +152,11 @@ button.my-space-folder-button { cursor: pointer; }
   font-variant-numeric: tabular-nums;
 }
 
+/* 文件列表板：底、边、圆角、裁切由共用构件 shared-ui/Surface（board）给。原来是一条占位的 1px 实边、颜色
+   --eqb-color-border-subtle；换成板的一圈 --eqb-color-border（DESIGN.md §4「板只用 1px --desk-border 一圈边」，
+   和首页、浏览的列表板同一个样子），边深了一档，里面的行宽了 2px（实边原来占位）。 */
 .my-space-file-list {
   --fh-radius: 0;
-  background: var(--desk-surface);
-  border: 1px solid var(--eqb-color-border-subtle);
-  border-radius: 12px;
-  overflow: hidden;
 }
 
 .my-space-file-row {

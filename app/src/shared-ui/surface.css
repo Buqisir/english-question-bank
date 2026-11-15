@@ -1,0 +1,87 @@
+/* 卡片 / 板（Surface.tsx）。颜色、圆角、影子、间距只用 tokens.css 里的变量；动效时长和曲线用 App.css :root 的
+ * 全站动效 token（--motion-* / --ease-*，DESIGN.md §6），和 button.css 一样。
+ * DESIGN.md §4：板 e0（不投影，一圈 1px --desk-border 边），纸 e1（墨圈就是边）；§5 Cards：白底、12 圆角。
+ * 构件不管自己在页面里的位置（外边距、宽、sticky 这些归调用处），只管底、边、圆角、影子、内边距。 */
+
+.eqb-surface {
+  box-sizing: border-box;
+  border: 0;
+  border-radius: var(--eqb-radius-card);
+  background: var(--eqb-color-paper);
+  color: var(--eqb-color-text);
+}
+
+/* 用 <ul> 当板（一列卷行）时去掉浏览器给列表的圆点和上下外边距。 */
+.eqb-surface:is(ul, ol) {
+  margin: 0;
+  list-style: none;
+}
+
+/* ── 板：一圈 1px 边，不投影 ─────────────────────────────
+ * 边用 0 0 0 1px 的一圈画，不占位置（首页、浏览卷行列表卡原来的画法，换构件后逐像素不变）。
+ * 这一圈是边，不是影子：颜色就是 --eqb-color-border（= --desk-border），没有模糊、没有偏移，§4「板不投影」照旧成立。
+ * 板把里面的行（悬停底、展开底）裁成圆角。 */
+.eqb-surface[data-surface='board'] {
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--eqb-color-border);
+}
+
+/* ── 纸：e1，墨圈就是边 ────────────────────────────────── */
+.eqb-surface[data-surface='sheet'] {
+  box-shadow: var(--elev-1);
+}
+
+/* ── 内边距 ─────────────────────────────────────────── */
+.eqb-surface[data-padding='none'] {
+  padding: 0;
+}
+
+.eqb-surface[data-padding='md'] {
+  padding: var(--eqb-space-4);
+}
+
+/* ── 整张能点的纸（SurfaceButton） ─────────────────────────
+ * 按钮的样子归零（字体、对齐跟页面走），整张是一个点击目标。
+ * 悬停垫桌色（§2 整块响应：整块铺悬停底，不只改字色）；键盘焦点墨环 2px 外扩 2px（§4 Focus Ring，和 Button 一样）；
+ * 按下缩到 0.99：卡片比按钮大得多，按钮的 0.97 放在一张卡上会缩掉十来像素，太晃（目测）。 */
+.eqb-surface[data-interactive] {
+  display: block;
+  width: 100%;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast) var(--ease-hover),
+    transform var(--motion-fast) var(--ease-out);
+}
+
+.eqb-surface[data-interactive]:hover:not(:disabled) {
+  background: var(--eqb-color-desk);
+}
+
+.eqb-surface[data-interactive]:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+.eqb-surface[data-interactive]:active:not(:disabled) {
+  background: var(--eqb-color-desk);
+  transform: scale(0.99);
+}
+
+.eqb-surface[data-interactive]:disabled {
+  cursor: not-allowed;
+  color: var(--eqb-color-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* 覆盖：本条 (0,2,0) 和上面 [data-interactive] 那条同级、写在后面，减少动态效果时只过渡底色，不过渡缩放。 */
+  .eqb-surface[data-interactive] {
+    transition: background-color var(--motion-fast) var(--ease-hover);
+  }
+
+  /* 覆盖：本条 (0,4,0) 和上面按下那条同级、写在后面，减少动态效果时按下只垫底、不缩。 */
+  .eqb-surface[data-interactive]:active:not(:disabled) {
+    transform: none;
+  }
+}

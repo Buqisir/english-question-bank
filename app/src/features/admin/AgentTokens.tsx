@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Dialog } from '../../shared-ui/Dialog.tsx'
+import { Surface } from '../../shared-ui/Surface.tsx'
 import { errorFromResponse } from '../../services/httpClient'
 
 type AgentToken = { id: string; name: string; createdAt: string; revokedAt: string | null; lastUsedAt: string | null }
@@ -52,7 +53,7 @@ export function AgentTokens() {
       <label>名称<input required maxLength={100} value={name} onChange={event => setName(event.target.value)} placeholder="例如：组卷 Agent" /></label>
       <button className="ghost-button agent-token-submit" type="submit" disabled={busy || !name.trim()}>{busy ? '保存中…' : '新建口令'}</button>
     </form>
-    {secret && <div className="agent-token-secret">
+    {secret && <Surface padding="md" className="agent-token-secret">
       <p>口令只显示这一次，请妥善保存。离开页面后无法再次查看。</p>
       <code>{secret}</code>
       <button className="ghost-button" type="button" onClick={async () => {
@@ -60,7 +61,7 @@ export function AgentTokens() {
         catch { setError('复制失败，请选中口令后手动复制。') }
       }}>复制口令</button>
       <button className="ghost-button" type="button" onClick={() => setSecret('')}>隐藏口令</button>
-    </div>}
+    </Surface>}
     <p role="alert" className="admin-backfill-error">{error}</p>
     <p role="status">{notice}</p>
     {loading ? <p>加载中…</p> : loadFailed ? <p className="agent-token-load-failed">

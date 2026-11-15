@@ -661,15 +661,21 @@
   align-self: start;
   display: flex;
   flex-direction: column;
-  background: var(--panel);
-  border-radius: 12px;
   gap: 0;
   max-width: 164px;
   max-height: calc(100vh - 48px);
-  overflow-y: auto;
-  padding: 14px 8px 12px;
   position: sticky;
   top: 24px;
+}
+
+/* 左栏是共用构件 Surface 的板（board）：白底、12 圆角、一圈 1px --eqb-color-border 边、不投影，归构件
+   （DESIGN.md §4「板（列表卡、面板）」e0；原来白底没有边，换上以后多了这一圈）。
+   本条 (0,3,0) 覆盖 surface.css 板的 (0,2,0) 两项，因为左栏照原样排：
+   - 内衬 14 / 8 / 12 是存量半档（DESIGN.md §8 不追改），构件的 padding="none" 写的是 0；
+   - 目录长了要能滚（overflow auto），构件的板是 overflow hidden。 */
+.draft-paper-rail.eqb-surface[data-surface='board'] {
+  overflow: auto;
+  padding: 14px 8px 12px;
 }
 
 .draft-paper-rail--swap {
