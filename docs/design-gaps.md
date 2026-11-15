@@ -132,3 +132,8 @@ token 的扩展用法。
 
 - **想要的值**：一是小字旁所以点 14px（Owner 2026-11-15 定），和第一轮的 16px（`--eqb-wait-dots-size`）一样只在 waiting.css 里。二是真行依次淡入：DESIGN §5 写每行 200ms、间隔 40ms；全站动效 token 没有 200（只有 160 `--motion-base`、220 `--motion-slow`），也没有「错开」一类。三是「超过 10 秒加一句」的 10 秒。四是详情页卷面灰块的内边距 32 / 48 / 40，照抄同文件 `.peek-paper .ps-page`（那条本身就是字面量）。若收编，候选名 `--eqb-wait-dots-size-sm`（14）、`--motion-stagger`（40ms）、`--eqb-wait-slow-hint`（10s）；200ms 建议 DESIGN 改成 160（用 `--motion-base`）或新加一档。
 - **临时方案**：一，`--eqb-wait-dots-size: 14px` 写在 `[data-size='sm']` 里，注释写出处。二，时长读 `--motion-base`（160ms，「显形、小入场」），间隔是 `useRowReveal.ts` 的具名常量 `ROW_REVEAL_STAGGER_MS = 40`。三，`useDelayedBusy.ts` 的具名常量 `WAIT_SLOW_HINT_MS = 10_000`。四，字面量，注释写明照抄哪一条。记录在 `design/components-2026-11-13/migrate-waiting-2/README.md`。
+
+## 2026-11-15 Button 胶囊大号的三个数（`app/src/shared-ui/button.css` `.eqb-button[data-size='pill']`）
+
+- **想要的值**：Owner 2026-11-15 定 Button 加一档 52px 胶囊大号，照登录键原来手写的样子（原 `auth/LoginPage.css` `.login-submit`）。一是高 52（和登录页输入框同高），全站控件高度没有 token。二是字号 15，不在字号阶梯上（control 13 / sm 14 / md 16）。三是填充时那层影子 `0 8px 24px rgb(27 43 51 / 0.18)`，比 `--elev-3` 沉得多、浓得多，DESIGN §4 四档高度里没有。若收编，候选名 `--eqb-control-height-pill`（52）、`--eqb-font-size-cta`（15，或改用 sm 14 / md 16，会改登录键的样子）、`--elev-cta`（或改用 `--elev-3`，会改样子）。
+- **临时方案**：三个都写成 `[data-size='pill']` 规则里的具名变量（`--eqb-button-pill-height`、`--eqb-button-pill-font-size`、`--eqb-button-pill-shadow`），注释写出处是原 `.login-submit`。记录在 `design/components-2026-11-13/migrate-waiting-3/README.md`。

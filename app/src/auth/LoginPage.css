@@ -251,8 +251,7 @@
   outline-offset: 2px;
 }
 
-.login-field input:disabled,
-.login-submit:disabled {
+.login-field input:disabled {
   cursor: not-allowed;
 }
 
@@ -267,41 +266,8 @@
   overflow-wrap: anywhere;
 }
 
-.login-submit {
-  height: 52px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--login-action);
-  box-shadow: 0 8px 24px rgb(27 43 51 / 0.18);
-  color: #FFFFFF;
-  cursor: pointer;
-  font: inherit;
-  font-size: 15px;
-  font-weight: 500;
-  transition:
-    background-color var(--motion-fast) var(--ease-hover),
-    transform var(--motion-fast) var(--ease-out);
-}
-
-.login-submit:hover:not(:disabled) {
-  background: var(--login-action-hover);
-}
-
-.login-submit:active:not(:disabled) {
-  transform: scale(0.97);
-}
-
-.login-submit:focus-visible {
-  outline: 2px solid var(--login-action);
-  outline-offset: 2px;
-}
-
-.login-submit:disabled {
-  /* 「登录中…」是唯一的进行态，弱墨对桌面色 4.62:1，仍达 AA。 */
-  background: var(--eqb-color-desk);
-  box-shadow: none;
-  color: var(--login-muted);
-}
+/* 登录键（原 .login-submit 的样子、悬停、按下、焦点、禁用五条）2026-11-15 换成共享 Button 的胶囊大号
+ * （tone="solid" size="pill"，shared-ui/button.css），样子照原来；类名 login-submit 只留给脚本认，这里不再写样子。 */
 
 .login-footer-hint {
   margin: 0;
@@ -390,8 +356,7 @@
     stroke-dasharray: none;
   }
 
-  .login-field input,
-  .login-submit {
+  .login-field input {
     transition: none;
   }
 }

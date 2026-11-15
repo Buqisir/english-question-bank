@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import './LoginPage.css'
 import { login } from './session.ts'
+import { Button } from '../shared-ui/Button.tsx'
 import otterSvg from './login-otter.svg?raw'
 
 /* 08 雾海（BRAND.md §4.7）：雾是背景图，海獭内联，好让描边能逐笔画出来。
@@ -103,9 +104,12 @@ export function LoginPage() {
                 required
               />
             </div>
-            <button className="login-submit" type="submit" disabled={submitting}>
-              {submitting ? '登录中…' : '登录'}
-            </button>
+            {/* 胶囊大号 Button（Owner 2026-11-15 定，DESIGN.md §5 Waiting）：样子照原来手写的登录键，
+                忙时字不换、宽度不变、字隐去换成所以点，点了不再提交、读屏念「忙」。
+                类名 login-submit 留着给 smoke / 截图脚本认（scenarios.mjs、smoke-golden-path.mjs 等）。 */}
+            <Button className="login-submit" type="submit" tone="solid" size="pill" busy={submitting}>
+              登录
+            </Button>
           </form>
         </section>
         <p className="login-footer-hint">账号需邀请开通 · eqbank.cc</p>

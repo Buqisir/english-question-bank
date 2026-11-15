@@ -604,6 +604,15 @@
   font-size: var(--eqb-font-size-xs, 12px);
 }
 
+/* 「加入生词本」在等（检查、加入，2026-11-15 等待第三轮）：点了不触发（NotebookAddButton 挂 aria-busy / aria-disabled），
+ * 指针换成「在忙」，悬停不把字提到墨色，免得看着像还能点。
+ * 覆盖：本条 (0,3,0) 盖过上面 .paper-dictionary-more:hover (0,2,0) 的墨字，因为在等时键不接点击。 */
+.paper-dictionary-more[aria-busy='true'],
+.paper-dictionary-more[aria-busy='true']:hover {
+  color: var(--eqb-color-text-muted);
+  cursor: progress;
+}
+
 /* 词典卡三个文字展开键（「更多义项 N / 收起」「详细解释 / 收起解释」「署名与隐私」）：
  * Owner 2026-11-14 决定 #1 换成 Button 淡墨小号（quiet sm），不再挂 .paper-dictionary-more（那个类现在只剩「加入生词本」在用）。
  * - 不让卡片把键拉满一行（改前「详细解释」被拉到整行宽），宽度跟字走；
