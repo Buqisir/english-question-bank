@@ -1,0 +1,276 @@
+<title>所以点动效</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<style>
+/* 獭獭两颊的 ∴ 做等待动效：三种候选并排。每张卡一块放大的（96px），下面是原大小放进按钮和一行字里。
+ * 点用 SVG 画在 24 格里：∴ = 上 (12,8)，左下 (7,16)，右下 (17,16)，半径 2.25（16px 下约 3px，和样张一致）。
+ * 颜色、圆角照抄产品 tokens.css。产品只有浅色，这页也只做浅色。 */
+:root {
+  --bg: #f1f5f7; --desk: #e6edf0; --paper: #fff; --border: #dce6eb;
+  --ink: #1b2b33; --ink-2: #3f525b; --muted: #5a6c75;
+  --action: #29424d; --accent-fill: #72bfa4;
+  --elev-1: 0 0 0 1px rgb(27 43 51 / 0.08), 0 1px 2px rgb(27 43 51 / 0.05);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/22px Inter, "PingFang SC", "Hiragino Sans GB", ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+.page { max-width: 880px; margin: 0 auto; padding: 40px max(24px, env(safe-area-inset-right, 0px)) 80px max(24px, env(safe-area-inset-left, 0px)); }
+@media (max-width: 480px) { .page { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); } }
+h1 { font-size: 28px; line-height: 36px; font-weight: 600; margin: 0 0 8px; }
+h2 { font-size: 16px; line-height: 24px; font-weight: 600; margin: 0; }
+p { margin: 0; }
+.lede { color: var(--ink-2); }
+.bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 16px; font-size: 13px; color: var(--muted); }
+.bar button { height: 28px; padding: 0 12px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: 13px; cursor: pointer; }
+.bar button[aria-pressed="true"] { background: var(--paper); color: var(--ink); font-weight: 500; box-shadow: var(--elev-1); }
+.bar button:focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 24px; }
+@media (max-width: 760px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+.card { background: var(--paper); border-radius: 12px; box-shadow: 0 0 0 1px var(--border); padding: 16px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.tile { display: grid; place-items: center; height: 168px; background: var(--desk); border-radius: 8px; color: var(--ink-2); }
+.tile svg { width: 96px; height: 96px; }
+.desc { font-size: 13px; line-height: 20px; color: var(--ink-2); }
+.small { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 12px; background: var(--desk); border-radius: 8px; }
+.btn { display: inline-grid; place-items: center; height: 32px; min-width: 88px; padding: 0 12px; border-radius: 8px; background: var(--accent-fill); color: #191d18; }
+.btn svg { width: 16px; height: 16px; }
+.status { display: inline-flex; align-items: center; gap: 2px; font-size: 12px; line-height: 20px; color: var(--muted); }
+.status svg { width: 16px; height: 16px; }
+.rand { margin-top: 24px; background: var(--paper); border-radius: 12px; box-shadow: 0 0 0 1px var(--border); padding: 16px; display: grid; gap: 12px; }
+.rand-stage { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 16px; background: var(--desk); border-radius: 8px; min-height: 64px; }
+.go { height: 32px; padding: 0 12px; border: 0; border-radius: 8px; background: var(--paper); box-shadow: inset 0 0 0 1px var(--border); color: var(--ink); font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; }
+.go:focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
+.mark-slot { display: inline-grid; place-items: center; width: 16px; height: 16px; }
+.mark-slot svg { width: 16px; height: 16px; transition: opacity 120ms ease; }
+.mark-slot[data-idle] svg { opacity: 0; }
+.btn .label { transition: opacity 120ms ease; }
+.btn[data-busy] .label { opacity: 0; }
+.btn { position: relative; }
+.btn .over { position: absolute; inset: 0; display: grid; place-items: center; }
+.log { font-size: 12px; line-height: 18px; color: var(--muted); min-height: 18px; }
+.note { margin-top: 32px; display: grid; gap: 6px; font-size: 13px; line-height: 20px; color: var(--ink-2); }
+.note b { color: var(--ink); font-weight: 500; }
+svg circle { transform-box: view-box; transform-origin: 0 0; }
+</style>
+
+<div class="page">
+  <h1>所以点动效</h1>
+  <p class="lede">獭獭两颊的 ∴ 做等待。三种平起平坐，每次等待随机出一种。上面先看随机的效果，下面三张卡分开看每一种。</p>
+  <div class="bar" role="group" aria-label="播放速度">
+    <span>速度</span>
+    <button type="button" aria-pressed="true" data-speed="1">正常</button>
+    <button type="button" aria-pressed="false" data-speed="0.25">慢 4 倍</button>
+  </div>
+
+  <div class="rand">
+    <h2>随机</h2>
+    <p class="desc">点「开始等」，等 4 秒。每次随机出一种，不连着出同一种；同一时刻屏幕上几处等待用同一种，免得乱。等完三颗点回到 ∴ 再隐去。</p>
+    <div class="rand-stage">
+      <button class="go" type="button" id="go">开始等</button>
+      <span class="btn" id="rand-btn"><span class="label">生成词表</span><span class="over"><span class="mark-slot" data-idle></span></span></span>
+      <span class="status"><span id="rand-text">已保存</span><span class="mark-slot" data-idle></span></span>
+    </div>
+    <p class="log" id="rand-log" aria-live="polite"></p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>甲 · 一沉两浮</h2>
+      <div class="tile" data-mark="flip"></div>
+      <p class="desc">潜下去、浮上来：上面一颗先潜，越潜越快；下面两颗晚一拍被顶上来，路过时往外让一点，到了上面轻轻漂着。再反过来，上面两颗一前一后潜下去，底下那颗被顶上来。∴ 和 ∵ 就这样来回换。</p>
+      <div class="small"><span class="btn" data-mark="flip"></span><span class="status">正在保存<span data-mark="flip"></span></span></div>
+    </div>
+    <div class="card">
+      <h2>乙 · 沉成一行，此起彼伏</h2>
+      <div class="tile" data-mark="wave"></div>
+      <p class="desc">∴ 上面一颗沉下来，三颗排成一行，间距放宽了。然后一会儿中间大、两边小，一会儿两边大、中间小。</p>
+      <div class="small"><span class="btn" data-mark="wave"></span><span class="status">正在保存<span data-mark="wave"></span></span></div>
+    </div>
+    <div class="card">
+      <h2>丙 · 两两换位</h2>
+      <div class="tile" data-mark="swap"></div>
+      <p class="desc">∴ 的形状一直在，三颗点轮流两两换位置，沿弧线互相让开。前面过的那颗稍大，后面过的稍小，像海獭在两爪间倒腾石头。</p>
+      <div class="small"><span class="btn" data-mark="swap"></span><span class="status">正在保存<span data-mark="swap"></span></span></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <p><b>三种怎么统一：</b>都从 ∴ 出发、回到 ∴；点一样大、一样颜色；快慢在同一档：甲一圈 3 秒，乙一呼一吸 1.8 秒，丙 0.95 秒换一次位；大小只变一成上下；都不整体转圈。</p>
+    <p><b>要你定的一条规矩：</b>BRAND 里写着獭獭脸上的点「不放大」（脸上一颗点变大像多了一只眼睛）。三种都要变大小。建议：獭獭脸上照旧不放大，这套动效只用在界面里的小号等待，那里没有脸。</p>
+    <p>系统开了「减少动态效果」时，三种都只显示静止的「…」。</p>
+  </div>
+</div>
+
+<script>
+(() => {
+  const NS = 'http://www.w3.org/2000/svg';
+  const R = 2.25;
+  const T = [12, 8], BL = [7, 16], BR = [17, 16];
+  const EASE = 'cubic-bezier(0.65, 0, 0.35, 1)';
+  const SINE = 'cubic-bezier(0.37, 0, 0.63, 1)';
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let speed = 1;
+  const live = new Set();
+  const tf = (p, s = 1) => 'translate(' + p[0] + 'px, ' + p[1] + 'px) scale(' + s + ')';
+
+  function makeSvg(host) {
+    const s = document.createElementNS(NS, 'svg');
+    s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('aria-hidden', 'true');
+    const dots = [0, 1, 2].map(() => { const c = document.createElementNS(NS, 'circle'); c.setAttribute('r', R); c.setAttribute('fill', 'currentColor'); s.append(c); return c; });
+    host.replaceChildren(s);
+    return dots;
+  }
+  function anim(el, kf, opt) { const a = el.animate(kf, opt); a.playbackRate = speed; live.add(a); a.finished.then(() => live.delete(a), () => live.delete(a)); return a; }
+  const rest = (dots) => { dots[0].style.transform = tf(T); dots[1].style.transform = tf(BL); dots[2].style.transform = tf(BR); };
+
+  // 甲：潜下去、浮上来，∴ ⇄ ∵，一圈 3 秒（第一版 2.4、第二版 3.6 的折中）。逐帧算，好控制先后和快慢。
+  // 前半圈：上面一颗先潜（越来越快，像有分量），左下、右下晚一拍被顶上来（起得快、到得轻），
+  //   路过时往外让一点（水被挤开），顶上去以后轻轻漂着，不死停。
+  // 后半圈：上面两颗一前一后潜下去，底下那颗被顶上来。沉在底下的点不动。
+  function flip(dots) {
+    const clamp = (x) => Math.max(0, Math.min(1, x));
+    const dive = (x) => x * x * (2.2 - 1.2 * x);           // 先慢后快，末尾收一点，不撞
+    const rise = (x) => 1 - Math.pow(1 - x, 3);            // 起得快，到得轻
+    const bell = (x) => Math.sin(Math.PI * x);             // 0 → 1 → 0
+    const D = 3000, DIVE = 540, RISE = 650;
+    // 每颗点：前半圈 / 后半圈各一段动作。kind: 'dive' 或 'rise'；start 是开始时刻；x0,y0 → x1,y1；bow 是路上往外让的格数
+    const plans = [
+      [{ kind: 'dive', start: 0, from: [12, 8], to: [12, 16], bow: 0 }, { kind: 'rise', start: 1650, from: [12, 16], to: [12, 8], bow: 0 }],
+      [{ kind: 'rise', start: 135, from: [7, 16], to: [7, 8], bow: -0.8 }, { kind: 'dive', start: 1500, from: [7, 8], to: [7, 16], bow: 0 }],
+      [{ kind: 'rise', start: 205, from: [17, 16], to: [17, 8], bow: 0.8 }, { kind: 'dive', start: 1580, from: [17, 8], to: [17, 16], bow: 0 }],
+    ];
+    function pose(plan, t) {
+      // 找当前所在的那一段；不在动作里时，停在上一段的终点（浮在上面的轻轻漂）
+      const [m1, m2] = plan;
+      const segs = [m1, m2];
+      for (const m of segs) {
+        const dur = m.kind === 'dive' ? DIVE : RISE;
+        const q = (t - m.start) / dur;
+        if (q >= 0 && q <= 1) {
+          const e = m.kind === 'dive' ? dive(q) : rise(q);
+          const x = m.from[0] + (m.to[0] - m.from[0]) * e + m.bow * bell(q);
+          const y = m.from[1] + (m.to[1] - m.from[1]) * e;
+          const sc = m.kind === 'dive' ? 1 - 0.1 * bell(q) : 1 + 0.07 * bell(q);
+          return [x, y, sc];
+        }
+      }
+      // 静止段：取最近结束的那一段的终点；如果终点在上面（y=8），从到达到下一段开始之间漂一下
+      const ends = segs.map((m) => ({ m, end: m.start + (m.kind === 'dive' ? DIVE : RISE) }));
+      const nexts = segs.map((m) => m.start);
+      let lastSeg = null, lastEnd = -Infinity;
+      ends.forEach(({ m, end }) => { const e = end <= t ? end : end - D; if (e > lastEnd) { lastEnd = e; lastSeg = m; } });
+      let next = Infinity;
+      nexts.forEach((n) => { const nn = n > t ? n : n + D; if (nn < next) next = nn; });
+      const [x, y] = lastSeg.to;
+      if (y < 12) {
+        const q = clamp((t - lastEnd) / (next - lastEnd));
+        return [x, y - 0.3 * bell(q), 1];
+      }
+      return [x, y, 1];
+    }
+    let t = 0, last = performance.now(), raf = 0;
+    function frame(now) {
+      t = (t + (now - last) * speed) % D; last = now;
+      dots.forEach((d, i) => { const [x, y, sc] = pose(plans[i], t); d.style.transform = tf([x, y], sc); });
+      raf = requestAnimationFrame(frame);
+    }
+    raf = requestAnimationFrame((now) => { last = now; frame(now); });
+    return () => cancelAnimationFrame(raf);
+  }
+
+  // 乙：∴ 沉成一行（x = 5 / 12 / 19，比上一版宽 2 格），大小此起彼伏，1.8 秒一呼一吸（1.2 和 2.4 的折中）。
+  function wave(dots) {
+    const row = [[12, 12], [5, 12], [19, 12]];
+    const start = [T, BL, BR];
+    const anims = [];
+    let stopped = false;
+    dots.forEach((d, i) => {
+      const s = anim(d, [{ transform: tf(start[i]) }, { transform: tf(row[i]) }], { duration: 220, easing: 'cubic-bezier(0.77, 0, 0.175, 1)', fill: 'forwards' });
+      anims.push(s);
+      s.finished.then(() => {
+        if (stopped) return;
+        d.style.transform = tf(row[i]); s.cancel();
+        const side = i !== 0;
+        const big = side ? 1.1 : 1.16, small = side ? 0.86 : 0.88;
+        const kf = side ? [small, big, small] : [big, small, big];
+        anims.push(anim(d, kf.map((k) => ({ transform: tf(row[i], k) })), { duration: 1800, iterations: Infinity, easing: SINE }));
+      }, () => {});
+    });
+    return () => { stopped = true; anims.forEach((a) => a.cancel()); };
+  }
+
+  // 丙：∴ 三个位置不变，两两换位。0.95 秒换一次：移 490ms + 停 460ms（两版折中）；两颗沿弧线错开 2 格，前面 1.1、后面 0.86。
+  function swap(dots) {
+    const slots = [T, BL, BR], at = [0, 1, 2];
+    const pairs = [[0, 1], [0, 2], [1, 2]];
+    let step = 0, timer = 0, stopped = false;
+    const cur = [];
+    function go() {
+      if (stopped) return;
+      const [p, q] = pairs[step % 3]; step += 1;
+      const a = at.indexOf(p), b = at.indexOf(q), A = slots[p], B = slots[q];
+      const mx = (A[0] + B[0]) / 2, my = (A[1] + B[1]) / 2, dx = B[0] - A[0], dy = B[1] - A[1], len = Math.hypot(dx, dy);
+      const nx = -dy / len * 2, ny = dx / len * 2;
+      cur.length = 0;
+      cur.push(anim(dots[a], [{ transform: tf(A) }, { transform: tf([mx + nx, my + ny], 1.1) }, { transform: tf(B) }], { duration: 490, easing: EASE }));
+      cur.push(anim(dots[b], [{ transform: tf(B) }, { transform: tf([mx - nx, my - ny], 0.86) }, { transform: tf(A) }], { duration: 490, easing: EASE }));
+      dots[a].style.transform = tf(B); dots[b].style.transform = tf(A);
+      at[a] = q; at[b] = p;
+      timer = setTimeout(go, 950 / speed);
+    }
+    timer = setTimeout(go, 200 / speed);
+    return () => { stopped = true; clearTimeout(timer); cur.forEach((x) => x.cancel()); };
+  }
+
+  const KINDS = { flip, wave, swap };
+  const NAMES = { flip: '甲', wave: '乙', swap: '丙' };
+
+  function start(dots, kind) {
+    rest(dots);
+    if (reduce) { dots.forEach((d, i) => { d.style.transform = tf([[12, 12], [5, 12], [19, 12]][i]); }); return () => {}; }
+    return KINDS[kind](dots);
+  }
+  // 收起：从当前位置浮回 ∴（160ms），再交给调用处隐去
+  function settle(dots, stop) {
+    const now = dots.map((d) => getComputedStyle(d).transform);
+    stop();
+    const home = [T, BL, BR];
+    return Promise.all(dots.map((d, i) => {
+      d.style.transform = tf(home[i]);
+      if (reduce || now[i] === 'none') return Promise.resolve();
+      return anim(d, [{ transform: now[i] }, { transform: tf(home[i]) }], { duration: 160, easing: 'cubic-bezier(0.77, 0, 0.175, 1)' }).finished.catch(() => {});
+    }));
+  }
+
+  // 卡片里的：一直循环
+  document.querySelectorAll('[data-mark]').forEach((host) => start(makeSvg(host), host.dataset.mark));
+
+  // 随机
+  const go = document.getElementById('go'), randBtn = document.getElementById('rand-btn');
+  const slots = [...document.querySelectorAll('.rand .mark-slot')];
+  const text = document.getElementById('rand-text'), log = document.getElementById('rand-log');
+  const sets = slots.map((s) => makeSvg(s));
+  let last = '', busy = false;
+  go.addEventListener('click', () => {
+    if (busy) return; busy = true;
+    const pool = Object.keys(KINDS).filter((k) => k !== last);
+    const kind = pool[Math.floor(Math.random() * pool.length)]; last = kind;
+    log.textContent = '这次是' + NAMES[kind];
+    randBtn.dataset.busy = ''; text.textContent = '正在保存';
+    slots.forEach((s) => delete s.dataset.idle);
+    const stops = sets.map((dots) => start(dots, kind));
+    setTimeout(() => {
+      Promise.all(sets.map((dots, i) => settle(dots, stops[i]))).then(() => {
+        slots.forEach((s) => { s.dataset.idle = ''; });
+        delete randBtn.dataset.busy; text.textContent = '已保存'; busy = false;
+      });
+    }, 4000);
+  });
+
+  document.querySelectorAll('[data-speed]').forEach((b, _, btns) => b.addEventListener('click', () => {
+    btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    speed = Number(b.dataset.speed);
+    live.forEach((a) => { a.playbackRate = speed; });
+  }));
+})();
+</script>
