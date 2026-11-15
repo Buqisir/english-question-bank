@@ -246,7 +246,7 @@ Deadpan 尚未实现；切换入口与记忆方式尚未定案。采用两套配
 
 ### 不在四档里的
 
-- **Sheet 纸面** (`box-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08)`): 整卷页里那张 A4 纸。一条贴地发丝 + 一层远而淡的漫射，让纸"搁在桌面上"而不是"浮在空中"。只给完整卷面用（看整卷、草稿卷预览），卡片和浮层不得借用。Owner 2026-09-15 列为标准，属于卷面（PaperSurface），这次不改。
+- **Sheet 纸面** (`box-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 12px 32px rgba(0,0,0,0.08)`): 整卷页里那张 A4 纸。一条贴地发丝 + 一层远而淡的漫射，让纸"搁在桌面上"而不是"浮在空中"。只给完整卷面用（看整卷、草稿卷预览），卡片和浮层不得借用。Owner 2026-09-15 列为标准，属于卷面（PaperSurface），这次不改。2026-11-15 起收成 `--elev-sheet`（`shared-ui/tokens.css`），整卷页、生词本、题组详情、草稿卷灰块四处用它；PaperSurface `.ps-page`、草稿卷预览 iframe、写作卷三处透明度差 0.002–0.003，没换，要不要统一等 Owner（`docs/design-gaps.md`）。
 - **Focus Ring 焦点环** (`outline: 2px solid var(--eqb-color-action); outline-offset: 2px`): 键盘焦点走石板墨，不走墨绿，不走蓝辉光。
 
 2026-11-13 以前的写法（迁移前现网还在用）：卡片 `0 0 0 1px rgba(30,30,28,0.05), 0 1px 2px rgba(30,30,28,0.06)` → e1；浮层 `0 8px 24px rgba(0,0,0,0.12)`（`--eqb-shadow-floating`）→ e3，草稿丸 → e2；首页搜索框 `0 2px 3px rgba(25,29,24,0.06)` → e1；首页和浏览的卷行列表卡 `0 0 0 1px var(--desk-border)` 本来就是板，不动。
