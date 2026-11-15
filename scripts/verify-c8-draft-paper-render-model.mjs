@@ -313,7 +313,8 @@ assert(
 )
 assert(
   'rail row carries a title tooltip with the full label · 题型 · N 题',
-  rail.includes('const rowTitle = isMissing ? undefined : `${label} · ${groupTypeText} · ${questionCount} 题`') &&
+  // 2026-11-14 起主名后面多了「（原卷 X 篇）」，rowTitle 拆成了几行；2026-11-15 左栏换 Row 时照现在的写法改这条（没运行）。
+  /const rowTitle = isMissing\s*\?\s*undefined\s*:\s*`\$\{label\}[\s\S]*?· \$\{groupTypeText\} · \$\{questionCount\} 题`/.test(rail) &&
     rail.includes('title={rowTitle}'),
 )
 assert('workbench gates the page-break sticker action on non-first items (mirrors the old canPageBreakBefore = index > 0 rule)', workbench.includes('canPageBreakBefore = fullIndex > 0'))

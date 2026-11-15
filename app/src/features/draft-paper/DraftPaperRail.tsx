@@ -1,9 +1,10 @@
 import { ArrowDown, ArrowUp, Grip, Trash } from '../../icons'
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { Chip } from '../../shared-ui/Chip.tsx'
+import { Row } from '../../shared-ui/Row.tsx'
 import { Surface } from '../../shared-ui/Surface.tsx'
 import { groupTypeLabel, type DraftPaperItem, type QuestionGroupCard } from '../../domain/questionBank'
 import type { SimilarPassagesRequestState } from '../similar-passages/SimilarPassagesPanel'
@@ -136,7 +137,8 @@ export type DraftPaperRailProps = {
   onDragStart: (itemId: string) => void
   onDrop: (targetId: string) => void
   onMoveItem: (itemId: string, direction: -1 | 1) => void
-  onDeleteItem: (item: DraftPaperItem) => void
+  /** 缺题项的「移除」：trigger 是被点的那个键，删之前用它定删完焦点落到哪（shared-ui/focusAfterRemoval.ts）。 */
+  onDeleteItem: (item: DraftPaperItem, trigger: HTMLButtonElement) => void
   /* workbench-header-unify Locked Decision 5: the "共 N 页 · 双面 M 张"
      真值 text retired from `.draft-paper-meta-row` (which retired along with
      it) and relocates here as a quiet annotation at the rail's top —
@@ -237,14 +239,6 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
     )
   }
 
-  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>, groupId: string, isMissing: boolean) {
-    if (isMissing) return
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault()
-      onItemClick(groupId)
-    }
-  }
-
   // 卷面字母：按草稿顺序数阅读题组（缺失题组不上卷面，不占字母）。
   const readingLetterByItemId = new Map(
     items
@@ -252,121 +246,120 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
       .map((item, index) => [item.id, String.fromCharCode(65 + index)]),
   )
 
+  // 目录项换成共用行 Row（2026-11-15；记录 design/components-2026-11-13/migrate-rail/README.md）。
+  // - 能跳的项（题组在卷上）：整行目标是 <button>（就地把卷面滚到这一组，不离开这一页），名字是行上看得见的字。
+  //   原来整项是 role="button" 的 div 自己接 Enter / 空格，现在是真按钮。
+  // - 缺题的项（题组已从题库里没了，不上卷面）：没有可跳的地方，是不可点的行；上移 / 下移 / 移除三个键是行里的键，
+  //   Tab 只停在这三个键上（原来整项本身也是一个 Tab 停点，按了什么也不做）。
+  // - 当前项：<li aria-current="location">，白底板（.draft-paper-rail-current）照旧由这里量位置画。
+  // - 拖动排序照旧挂在 <li> 上（draggable），类名 draft-paper-rail-item / active / is-missing 留作脚本挂钩。
+  // 列表是 <ul>，不用 RowList：左栏是板里的目录，行间是 4px 空隙、没有分隔线（和整卷页左栏一样），RowList 的分隔线不要。
   return (
     <Surface as="nav" className="draft-paper-rail" aria-label="卷面目录">
       {metaText && <p className="draft-paper-rail-meta">{metaText}</p>}
-      <FluidHoverList
-        as="div"
-        axis="y"
-        className="draft-paper-rail-panel"
-        itemSelector=".draft-paper-rail-item"
-        ref={panelRef}
-      >
-      {activePlate && (
-        <span
-          key={`active-plate-${activePlate.revision}`}
-          aria-hidden="true"
-          className={`draft-paper-rail-current draft-paper-rail-current--${activePlate.motion}`}
-          style={{
-            height: `${activePlate.height}px`,
-            transform: `translate(${activePlate.left}px, ${activePlate.top}px)`,
-            width: `${activePlate.width}px`,
-          }}
-        />
-      )}
-      {items.map((item) => {
-        const isMissing = item.groupMissing
-        const sourceTitle = item.questionGroup?.passageTitle || item.questionGroup?.title || item.groupId
-        const sourceLetter = /^Reading\s+([A-D])$/i.exec(sourceTitle)?.[1]?.toUpperCase()
-        // Owner 2026-11-14（走查 find-compose-export 第四节第 1 条）：卷面篇目字母
-        // 跟老师排的顺序重排（server draftPaperStore.mjs draftReadingPassageLetters
-        // 用同一条规则），左栏主名跟卷面一致，原卷字母放进同一行的小字当来源。
-        const paperLetter = readingLetterByItemId.get(item.id)
-        const label = isMissing
-          ? '题组已从题库中移除'
-          : sourceLetter
-            ? `${paperLetter ?? sourceLetter}篇`
-            : sourceTitle
-        const sourceNote = !isMissing && sourceLetter && paperLetter ? `原卷 ${sourceLetter} 篇` : ''
-        // Keep custom titles and ordering; secondary type/count information lives in the tooltip.
-        const groupTypeText = groupTypeLabel[item.questionGroup?.groupType || 'other']
-        const questionCount = item.questionGroup?.questionCount || 0
-        const rowTitle = isMissing
-          ? undefined
-          : `${label}${sourceNote ? `（${sourceNote}）` : ''} · ${groupTypeText} · ${questionCount} 题`
+      {/* 当前项的白底板和列表共用这一层量位置：板是这一层里的第一个，列表（<ul>，从左上角 0,0 起排）画在它上面。 */}
+      <div className="draft-paper-rail-panel" ref={panelRef}>
+        {activePlate && (
+          <span
+            key={`active-plate-${activePlate.revision}`}
+            aria-hidden="true"
+            className={`draft-paper-rail-current draft-paper-rail-current--${activePlate.motion}`}
+            style={{
+              height: `${activePlate.height}px`,
+              transform: `translate(${activePlate.left}px, ${activePlate.top}px)`,
+              width: `${activePlate.width}px`,
+            }}
+          />
+        )}
+        {/* 滑块停在能跳的项的整行目标上（它和行一样大）；行和行之间 4px 空隙里点一下，FluidHoverList 点的是
+            最近那一项的整行目标（原来点的是整项 div），照旧能跳。缺题项（不可点）也要算进来、停在 <li> 上，
+            否则滑块总挑最近的一项，鼠标停在缺题项上会把它上面那一项铺上悬停底（换后第一次实拍看到的）；
+            停在缺题项上时滑块藏起来（DraftPaperWorkbench.css），不可点的行没有悬停。 */}
+        <FluidHoverList
+          as="ul"
+          axis="y"
+          className="draft-paper-rail-list"
+          itemSelector=".draft-paper-rail-item > .eqb-row-hit, .draft-paper-rail-item.is-missing"
+        >
+          {items.map((item) => {
+            const isMissing = item.groupMissing
+            const sourceTitle = item.questionGroup?.passageTitle || item.questionGroup?.title || item.groupId
+            const sourceLetter = /^Reading\s+([A-D])$/i.exec(sourceTitle)?.[1]?.toUpperCase()
+            // Owner 2026-11-14（走查 find-compose-export 第四节第 1 条）：卷面篇目字母
+            // 跟老师排的顺序重排（server draftPaperStore.mjs draftReadingPassageLetters
+            // 用同一条规则），左栏主名跟卷面一致，原卷字母放进同一行的小字当来源。
+            const paperLetter = readingLetterByItemId.get(item.id)
+            const label = isMissing
+              ? '题组已从题库中移除'
+              : sourceLetter
+                ? `${paperLetter ?? sourceLetter}篇`
+                : sourceTitle
+            const sourceNote = !isMissing && sourceLetter && paperLetter ? `原卷 ${sourceLetter} 篇` : ''
+            // Keep custom titles and ordering; secondary type/count information lives in the tooltip.
+            const groupTypeText = groupTypeLabel[item.questionGroup?.groupType || 'other']
+            const questionCount = item.questionGroup?.questionCount || 0
+            const rowTitle = isMissing
+              ? undefined
+              : `${label}${sourceNote ? `（${sourceNote}）` : ''} · ${groupTypeText} · ${questionCount} 题`
+            const isActive = activeGroupId === item.groupId
 
-        return (
-          <div
-            className={`draft-paper-rail-item${activeGroupId === item.groupId ? ' active' : ''}${isMissing ? ' is-missing' : ''}`}
-            data-draft-group-id={item.groupId}
-            draggable
-            key={item.id}
-            onClick={() => !isMissing && onItemClick(item.groupId)}
-            onDragOver={(event) => event.preventDefault()}
-            onDragStart={() => onDragStart(item.id)}
-            onDrop={() => onDrop(item.id)}
-            onKeyDown={(event) => handleKeyDown(event, item.groupId, isMissing)}
-            role="button"
-            tabIndex={0}
-            title={rowTitle}
-          >
-            <span className="draft-paper-rail-label">
-              {label}
-              {sourceNote && <span className="draft-paper-rail-source">{sourceNote}</span>}
-            </span>
-            {/* ui-northstar: 拖拽把手移到行尾——它 hover 前不可见但仍占位，
-                留在行首会把小手和标题顶开一格。 */}
-            <Grip aria-hidden="true" className="draft-paper-rail-grip" size={12} />
-            {/* draft-desk-a scope note: the plan retires per-item action buttons from
-                the rail in favor of the paper-hover sticker (裁点1) — but a groupMissing
-                item never renders in the paper (server/draft-paper/draftPaperStore.mjs's
-                buildDraftPaperBlocks skips it), so it would otherwise lose its only path
-                to reorder/delete. Keeping a compact action row for this one edge case is
-                a deliberate exception, not a regression of the plan's "rail = pure list"
-                simplification for the common case. */}
-            {isMissing && (
-              <span className="draft-paper-rail-acts">
-                <button
-                  aria-label="上移"
-                  onClick={(event) => {
-                    event.stopPropagation()
-                    onMoveItem(item.id, -1)
-                  }}
-                  title="上移"
-                  type="button"
-                >
-                  <ArrowUp size={12} />
-                </button>
-                <button
-                  aria-label="下移"
-                  onClick={(event) => {
-                    event.stopPropagation()
-                    onMoveItem(item.id, 1)
-                  }}
-                  title="下移"
-                  type="button"
-                >
-                  <ArrowDown size={12} />
-                </button>
-                <button
-                  aria-label="移除"
-                  className="danger"
-                  onClick={(event) => {
-                    event.stopPropagation()
-                    onDeleteItem(item)
-                  }}
-                  title="移除"
-                  type="button"
-                >
-                  <Trash size={12} />
-                </button>
-              </span>
-            )}
-          </div>
-        )
-      })}
+            return (
+              <Row
+                key={item.id}
+                className={`draft-paper-rail-item${isActive ? ' active' : ''}${isMissing ? ' is-missing' : ''}`}
+                padding="none"
+                size="sm"
+                data-draft-group-id={item.groupId}
+                aria-current={isActive ? 'location' : undefined}
+                draggable
+                onDragOver={(event) => event.preventDefault()}
+                onDragStart={() => onDragStart(item.id)}
+                onDrop={() => onDrop(item.id)}
+                title={rowTitle}
+                action={isMissing
+                  ? undefined
+                  : { kind: 'button', label: sourceNote ? `${label} ${sourceNote}` : label, onClick: () => onItemClick(item.groupId) }}
+              >
+                <span className="draft-paper-rail-label">
+                  {label}
+                  {sourceNote && <span className="draft-paper-rail-source">{sourceNote}</span>}
+                </span>
+                {/* ui-northstar: 拖拽把手移到行尾——它 hover 前不可见但仍占位，
+                    留在行首会把小手和标题顶开一格。 */}
+                <Grip aria-hidden="true" className="draft-paper-rail-grip" size={12} />
+                {/* draft-desk-a scope note: the plan retires per-item action buttons from
+                    the rail in favor of the paper-hover sticker (裁点1) — but a groupMissing
+                    item never renders in the paper (server/draft-paper/draftPaperStore.mjs's
+                    buildDraftPaperBlocks skips it), so it would otherwise lose its only path
+                    to reorder/delete. Keeping a compact action row for this one edge case is
+                    a deliberate exception, not a regression of the plan's "rail = pure list"
+                    simplification for the common case. */}
+                {isMissing && (
+                  <span className="draft-paper-rail-acts">
+                    <button aria-label="上移" onClick={() => onMoveItem(item.id, -1)} title="上移" type="button">
+                      <ArrowUp size={12} />
+                    </button>
+                    <button aria-label="下移" onClick={() => onMoveItem(item.id, 1)} title="下移" type="button">
+                      <ArrowDown size={12} />
+                    </button>
+                    {/* 删后焦点：把这个键交给 onDeleteItem，删之前定好删完落到哪（DraftPaperWorkbench.tsx removeFromRail）。 */}
+                    <button
+                      aria-label="移除"
+                      className="danger draft-paper-rail-remove"
+                      onClick={(event) => onDeleteItem(item, event.currentTarget)}
+                      title="移除"
+                      type="button"
+                    >
+                      <Trash size={12} />
+                    </button>
+                  </span>
+                )}
+              </Row>
+            )
+          })}
+        </FluidHoverList>
+      </div>
       {items.length === 0 && <p className="draft-paper-rail-empty">从搜索结果添加题组。</p>}
-      </FluidHoverList>
     </Surface>
   )
 }

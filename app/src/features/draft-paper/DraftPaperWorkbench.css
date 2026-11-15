@@ -680,19 +680,25 @@
   grid-template-columns: 208px minmax(0, 1fr);
 }
 
-/* Current plate and Fluid Hover share this measured positioning container. */
+/* 当前项的白底板和目录列表共用这一层量位置（DraftPaperRail.tsx）：板在前、列表在后，列表从 0,0 起排。 */
 .draft-paper-rail-panel {
-  --fh-radius: 8px;
+  position: relative;
+}
+
+/* 目录列表：<ul>，FluidHoverList 的滑块画悬停底（8 圆角跟着行）。行间 4px 空隙、没有分隔线，所以不用 RowList。 */
+.draft-paper-rail-list {
+  --fh-radius: var(--eqb-radius-control);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--eqb-space-1);
+  list-style: none;
+  margin: 0;
   padding: 0;
-  position: relative;
 }
 
 .draft-paper-rail-current {
   background: var(--eqb-color-paper);
-  border-radius: 8px;
+  border-radius: var(--eqb-radius-control);
   box-shadow: var(--elev-1);
   left: 0;
   pointer-events: none;
@@ -719,85 +725,90 @@
 /* workbench-header-unify Locked Decision 5: relocated真值 annotation —
    same visual register as .draft-paper-meta before it (12px 暖墨,
    tabular-nums), now living at the rail's top instead of a retired
-   meta-row above the paper. */
+   meta-row above the paper.
+   左右内衬跟目录项一样（2026-11-15 换 Row 时 10 → --eqb-space-2，字往左 2px，和目录项对齐）。 */
 .draft-paper-rail-meta {
-  color: var(--muted);
-  font-size: 12px;
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
   font-variant-numeric: tabular-nums;
   letter-spacing: 0;
-  margin: 0 0 12px;
-  padding: 0 10px;
+  margin: 0 0 var(--eqb-space-3);
+  padding: 0 var(--eqb-space-2);
   white-space: nowrap;
 }
 
-/* 目录项：淡墨、无边框、无底色块。此前当前项是一块灰底 pill——那是给
-   目录「配色」，北极星只让动作用墨，当前位置由小手指出。 */
+/* 目录项是共用行 Row（shared-ui/row.css，size="sm" 最小高 44，padding="none"）：次要灰字（本页 --ink-soft 指到 --desk-muted，
+   就是 --eqb-color-text-muted #5A6C75，照原色）、无边框、无底色块，
+   当前位置由白底板指出（北极星只让动作用墨）。最小高、定位、整行目标、键盘焦点（桌色底 + 向里 2px 墨环）、
+   按下（深一档底）都归 row.css，这里只管排法、字、圆角。
+   显式层叠：.draft-paper-rail-item（0,1,0）和 row.css 的 .eqb-row（0,1,0）不写同一项，互不覆盖；
+   行的圆角 8 写在这里，整行目标的 border-radius: inherit 跟着它，焦点环、焦点 / 按下的底也就是 8 圆角。
+   原来 36 高、内衬 0 10、z-index 1（压在白底板上）；现在 44 高，内衬换成 --eqb-space-2，
+   不再要 z-index：白底板在列表外面、排在前面，列表里有定位的行按文档顺序画在它上面。 */
 .draft-paper-rail-item {
   align-items: center;
-  color: var(--ink-soft);
-  cursor: pointer;
+  border-radius: var(--eqb-radius-control);
+  color: var(--eqb-color-text-muted);
   display: flex;
-  font-size: 13px;
-  gap: 8px;
-  min-height: 36px;
-  padding: 0 10px;
-  position: relative;
-  z-index: 1;
+  font-size: var(--eqb-font-size-control);
+  gap: var(--eqb-space-2);
+  padding: 0 var(--eqb-space-2);
   user-select: none;
   transition: color var(--motion-fast) var(--ease-hover);
 }
 
-.draft-paper-rail-item[data-fluid-hover-active] {
-  color: var(--ink);
+/* 滑块停在整行目标上（DraftPaperRail.tsx itemSelector），悬停时字提到墨色。 */
+.draft-paper-rail-item:has(> .eqb-row-hit[data-fluid-hover-active]) {
+  color: var(--eqb-color-text);
 }
 
 /* The current row already owns the white plate; its hover surface stays
    transparent so location and hover never read as two selected states. */
-.draft-paper-rail-panel:has(.draft-paper-rail-item.active[data-fluid-hover-active])::before {
+.draft-paper-rail-list:has(> .draft-paper-rail-item.active > .eqb-row-hit[data-fluid-hover-active])::before {
   opacity: 0;
 }
 
-.draft-paper-rail-item:focus-visible {
-  outline: 2px solid var(--action);
-  outline-offset: -2px;
+/* 缺题项不可点，没有悬停：滑块停在它上面时藏起来（它在滑块的停靠表里，只是为了鼠标停在它上面时滑块不去挑别的项）。
+   显式层叠：本条 (0,3,1) 和上一条一样只改 ::before 的 opacity，盖过 App.css .fluid-hover-list::before 的 var(--fh-o)。 */
+.draft-paper-rail-list:has(> .draft-paper-rail-item.is-missing[data-fluid-hover-active])::before {
+  opacity: 0;
 }
 
 .draft-paper-rail-item.active {
-  color: var(--ink);
+  color: var(--eqb-color-text);
   font-weight: 500;
 }
 
-.draft-paper-rail-item.is-missing {
-  cursor: default;
-}
-
+/* 缺题：字用警示色、斜体（照原来）。行不可点，没有整行目标、没有手形、没有悬停。 */
 .draft-paper-rail-item.is-missing .draft-paper-rail-label {
   color: var(--eqb-color-warning);
   font-style: italic;
 }
 
+/* 拖拽把手：悬停或焦点在行里时出现。不接鼠标（pointer-events: none），点在把手上就是点下面的整行目标；
+   拖动照旧从整行起（<li draggable>）。原来把手出现时接鼠标、手形是 grab，点它不跳。
+   right 原来 9px，换成 --eqb-space-2（往右 1px，目测看不出）。 */
 .draft-paper-rail-grip {
   color: var(--eqb-color-text-faint);
-  cursor: grab;
   flex-shrink: 0;
   opacity: 0;
   pointer-events: none;
   position: absolute;
-  right: 9px;
+  right: var(--eqb-space-2);
   top: 50%;
   transform: translateY(-50%);
 }
 
-.draft-paper-rail-item[data-fluid-hover-active] .draft-paper-rail-grip,
+.draft-paper-rail-item:has(> .eqb-row-hit[data-fluid-hover-active]) .draft-paper-rail-grip,
 .draft-paper-rail-item:focus-within .draft-paper-rail-grip {
   opacity: 1;
-  pointer-events: auto;
 }
 
+/* 右边让出把手（右 8 + 宽 12）：原来让 18，换成 --eqb-space-4（16）。 */
 .draft-paper-rail-label {
   flex: 1;
   overflow: hidden;
-  padding-right: 18px;
+  padding-right: var(--eqb-space-4);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -806,12 +817,13 @@
    跟在左栏主名后面的一行小字。本条覆盖 .draft-paper-rail-item.active 继承下来的
    500 字重和墨色，因来源只是次要说明，当前项也不该让它变实。 */
 .draft-paper-rail-source {
-  color: var(--muted);
+  color: var(--eqb-color-text-muted);
   font-size: var(--eqb-font-size-xs);
   font-weight: 400;
   margin-left: var(--eqb-space-2);
 }
 
+/* 缺题项的上移 / 下移 / 移除。这一行不可点（没有整行目标），键不用叠在什么上面。 */
 .draft-paper-rail-acts {
   display: flex;
   flex-shrink: 0;
@@ -821,14 +833,14 @@
 .draft-paper-rail-acts button {
   background: transparent;
   border: none;
-  border-radius: 4px;
-  color: var(--ink-soft);
+  border-radius: var(--eqb-radius-badge);
+  color: var(--eqb-color-text-muted);
   padding: 1px 4px;
 }
 
 .draft-paper-rail-acts button:hover {
-  background: var(--surface-strong);
-  color: var(--ink);
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
 }
 
 .draft-paper-rail-acts button.danger:hover {

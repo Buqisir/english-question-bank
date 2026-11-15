@@ -163,6 +163,8 @@ type PendingDraftFocus = {
   placed: HTMLElement | null
   /** 撤销时被撤回的那一组：它还在卷上（没缺题）就一直等到它的工具条挂上，不提前兜底。 */
   waitForGroupId?: string
+  /** 要落的键都在左栏里（左栏缺题项的「移除」）：不随卷面重排卸掉，不用等卷面排好，删完马上落。 */
+  railOnly?: boolean
 }
 
 export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode {
@@ -839,6 +841,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // 卷面要重排：新分页回来、iframe 重新载入时所有工具条会先卸掉再按新位置挂上，所以这里一直等到排好
   // （没有在途的保存、卷面不旧、工具条位置算出来了）才算完；中间工具条还在时先放一次，被卸掉再放回同一个键。
   // 撤销移出：排好以后焦点落到被撤回那一组自己的「更多题组操作」（回到移出之前的位置）；那一组没有工具条时落到「卷面目录」。
+  // 左栏缺题项的「移除」走同一条路（removeFromRail）：落下一项的「移除」→ 上一项的 → 「卷面目录」；撤销后回到它自己的「移除」。
   // 「卷面目录」在窄屏藏起来时，两种兜底都改落卷的标题（h1，平时视觉上藏着）。
   // 只在焦点掉到 <body>、还在发起处或我们先放过的键上时动；用户已经把焦点挪到别处（比如 Tab 进了别的地方）就不抢。
   const pendingFocusRef = useRef<PendingDraftFocus | null>(null)
@@ -849,6 +852,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       pendingFocusRef.current = null
       return
     }
+    // 左栏删除：服务器回话、那一项从左栏里没了才算删完（删之前 withLayoutSave 先改一次计数，那时不能动焦点；
+    // 删失败时 deleteItemNow 的 catch 会清掉这次安排）。
+    if (pending.railOnly && pending.from?.isConnected) return
     const active = document.activeElement
     const lost = !active || active === document.body || !active.isConnected
     const ours = active instanceof HTMLElement && (
@@ -857,12 +863,14 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       || Boolean(active.closest('.draft-undo-toast'))
       // 撤销时提示收起会把焦点还给进提示之前的那个键（多半是上一次移出后放过去的下一组的键），也算我们的。
       || (pending.kind === 'undo' && Boolean(active.closest('.draft-group-actions')))
+      // 左栏缺题项：撤销提示收起时焦点还回去的是左栏里的「移除」（删完放过去的下一项的键），也算我们的。
+      || (pending.kind === 'undo' && Boolean(active.closest('.draft-paper-rail-item')))
     )
     if (!lost && !ours) {
       pendingFocusRef.current = null
       return
     }
-    const settled = layoutSavesPending === 0
+    const settled = Boolean(pending.railOnly) || layoutSavesPending === 0
       && (nonMissingItems.length === 0 || (!previewStale && previewReady && Object.keys(groupAnchors).length > 0))
     const target = pending.find()
     // 撤销以后服务器先回话、卷面后重排：刚回话那一下旧的工具条位置还在，看着像「排好了」，
@@ -870,8 +878,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     // 还给进提示之前的那个键（下一组的「⋯」），就回不到被撤回的那一组了。所以这一组只要还在卷上，就等它的键出现。
     const waiting = !target && Boolean(pending.waitForGroupId)
       && nonMissingItems.some((entry) => entry.groupId === pending.waitForGroupId)
+    // 被撤回的是左栏缺题项时，要落的键在左栏里，不随卷面重排卸掉；卷里还有缺题项时卷面一直排不出来（不会「排好」），
+    // 所以不等排好：键一出现就放过去，不等焦点先掉。只对撤销这样做——移出时焦点可能已经被用户 Tab 进了撤销提示，不能抢回来。
+    const railUndoTarget = pending.kind === 'undo' && target && target.closest('.draft-paper-rail') ? target : null
     if (!settled || waiting) {
-      if (lost && target) {
+      if (target && (lost || (railUndoTarget && active !== railUndoTarget))) {
         target.focus({ preventScroll: true })
         pending.placed = target
       }
@@ -900,9 +911,34 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     void deleteItem(item)
   }
 
+  // 左栏缺题项的「移除」（2026-11-15；记录 design/components-2026-11-13/migrate-rail/README.md）：同一套删后焦点。
+  // 删之前定好：下一项的「移除」→ 上一项的 → 兜底（上面那个 effect 落「卷面目录」，窄屏落 h1）。
+  // 这几个键都在左栏，不随卷面重排卸掉，所以不等卷面排好（railOnly）：服务器回话、左栏重画那一下就落。
+  // 删的是最后一个缺题项时卷面要重新排几十秒，等排好再落的话焦点在 <body> 上待这么久（换前实测）。
+  // 只有缺题项有「移除」，所以「下一项」是往后数最近的一个还有这个键的项（focusAfterRemoval.ts 本来就这样找）。
+  // 认项用 <li> 上的 data-draft-group-id，左栏重画以后也找得回来。
+  function removeFromRail(item: DraftPaperItem, trigger: HTMLButtonElement) {
+    const next = planFocusAfterRemoval(trigger, {
+      item: '.draft-paper-rail-item',
+      key: 'data-draft-group-id',
+      control: '.draft-paper-rail-remove',
+      fallback: () => null,
+      scope: trigger.closest('nav') ?? document,
+    })
+    pendingFocusRef.current = { kind: 'remove', generation: draftGeneration, find: next, from: trigger, placed: null, railOnly: true }
+    void deleteItem(item)
+  }
+
   function groupMenuTrigger(groupId: string): HTMLElement | null {
     const owner = paperColRef.current?.querySelector<HTMLElement>(`[data-draft-tools-group-id="${CSS.escape(groupId)}"]`)
     const trigger = owner?.querySelector<HTMLElement>('.draft-group-menu-trigger')
+    return trigger && trigger.isConnected && trigger.getClientRects().length > 0 ? trigger : null
+  }
+
+  // 被撤回的是左栏的缺题项（不上卷面、没有工具条）时，焦点回到它自己的「移除」。
+  function railRemoveTrigger(groupId: string): HTMLElement | null {
+    const row = document.querySelector<HTMLElement>(`.draft-paper-rail-item[data-draft-group-id="${CSS.escape(groupId)}"]`)
+    const trigger = row?.querySelector<HTMLElement>('.draft-paper-rail-remove')
     return trigger && trigger.isConnected && trigger.getClientRects().length > 0 ? trigger : null
   }
 
@@ -1225,12 +1261,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       const { groupId, orderIndex, pageBreakBefore } = removedItem
       const next = await restoreDraftPaperItem(draftPaper.id, { groupId, orderIndex, pageBreakBefore })
       if (!isCurrentDraft()) return
-      // 撤销以后焦点回到被撤回那一组的「更多题组操作」；那一组没有工具条（比如题库里已经没了）时落到左栏「卷面目录」。
+      // 撤销以后焦点回到被撤回那一组的「更多题组操作」；那一组没有工具条（比如题库里已经没了）时回到它在左栏的「移除」，
+      // 再没有就落到左栏「卷面目录」。
       const fromElement = document.activeElement instanceof HTMLElement ? document.activeElement : null
       pendingFocusRef.current = {
         kind: 'undo',
         generation: draftGeneration,
-        find: () => groupMenuTrigger(groupId),
+        find: () => groupMenuTrigger(groupId) ?? railRemoveTrigger(groupId),
         from: fromElement,
         placed: null,
         waitForGroupId: groupId,
@@ -1854,7 +1891,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             onDragStart={(itemId) => setDraggedItemId(itemId)}
             onDrop={handleDrop}
             onMoveItem={moveItem}
-            onDeleteItem={deleteItem}
+            onDeleteItem={removeFromRail}
             metaText={pagesMetaText}
             swapDrawer={
               swapSeedItem && swapRequest
