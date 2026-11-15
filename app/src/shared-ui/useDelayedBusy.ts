@@ -57,3 +57,23 @@ export function useDelayedBusy(pending: boolean): WaitPhase {
 
   return phase
 }
+
+/** 等这么久还没好，就在原地多说一句「比平时慢，可以先去做别的」（DESIGN §5「放在哪」：要等好几秒的事）。 */
+export const WAIT_SLOW_HINT_MS = 10_000
+
+/**
+ * 等得太久：pending 连续超过 10 秒返回 true，不等了就回 false。
+ * 2026-11-15 第二轮只接在草稿卷「正在生成 PDF」那行；别处是后续（design/components-2026-11-13/migrate-waiting-2/README.md）。
+ */
+export function useSlowWait(pending: boolean): boolean {
+  const [slow, setSlow] = useState(false)
+  useEffect(() => {
+    if (!pending) return
+    const timer = window.setTimeout(() => setSlow(true), WAIT_SLOW_HINT_MS)
+    return () => {
+      window.clearTimeout(timer)
+      setSlow(false)
+    }
+  }, [pending])
+  return pending && slow
+}

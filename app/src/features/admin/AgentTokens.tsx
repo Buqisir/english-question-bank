@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Button } from '../../shared-ui/Button.tsx'
 import { Dialog } from '../../shared-ui/Dialog.tsx'
 import { TextField } from '../../shared-ui/Field.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
@@ -23,6 +24,8 @@ export function AgentTokens() {
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
   const [busy, setBusy] = useState(false)
+  // 正在新建（和作废分开记）：只有新建时「新建口令」键才显示在等。
+  const [creating, setCreating] = useState(false)
   const [loading, setLoading] = useState(true)
   const [loadFailed, setLoadFailed] = useState(false)
   const [loadAttempt, setLoadAttempt] = useState(0)
@@ -51,16 +54,19 @@ export function AgentTokens() {
     <p>口令可只读访问已发布卷，包含来源答案。</p>
     <form onSubmit={event => {
       event.preventDefault()
+      setCreating(true)
       void mutate(async () => {
         const created = await request('', { name })
         setSecret(created.token); setName('')
         const { token: _token, ...item } = created
         setTokens(current => [item, ...current])
-      })
+      }).finally(() => setCreating(false))
     }}>
       {/* 字段构件第二轮（2026-11-15）：换成 shared-ui/TextField 大号（36，和旁边「新建口令」同高），字没改。 */}
       <TextField className="agent-token-name" label="名称" size="lg" required maxLength={100} value={name} onChange={event => setName(event.target.value)} placeholder="例如：组卷 Agent" />
-      <button className="ghost-button agent-token-submit" type="submit" disabled={busy || !name.trim()}>{busy ? '保存中…' : '新建口令'}</button>
+      {/* 等待第二轮（2026-11-15，DESIGN.md §5 Waiting）：原生 .ghost-button 换成 Button 墨字大号（同高 36、同 13 / 500、墨字），
+          一圈边照旧由 .agent-token-submit 画。新建中用 busy：字不换（原来换成「保存中…」）、宽度不变，字隐去、所以点在正中。 */}
+      <Button tone="strong" size="lg" className="agent-token-submit" type="submit" busy={creating} disabled={!creating && (busy || !name.trim())}>新建口令</Button>
     </form>
     {secret && <Surface padding="md" className="agent-token-secret">
       <p>口令只显示这一次，请妥善保存。离开页面后无法再次查看。</p>

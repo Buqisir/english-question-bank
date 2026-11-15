@@ -23,9 +23,11 @@
 }
 
 /* 等待那种：所以点跟在字后面（DESIGN.md §5「Waiting 等待」）。所以点的 24 格里左边自带约 3px 空，
- * 再加整行 8px 间距会离字太远，收回 4px，看着像字后面打了个省略号（目测）。 */
+ * 字和点之间不另加间距（全站统一，算法见 waiting.css「所以点和字的间距」）：把整行 8px 间距全收回来，
+ * 肉眼间隙约 3–4px（目测）。2026-11-15 第二轮由收回 4px 改成收回 8px，和选词翻译、句子分析、草稿卷顶栏一致。
+ * 覆盖：本条的负 margin 抵掉 .eqb-notice 的 gap，因为所以点要贴着字。 */
 .eqb-notice > .eqb-wait-dots {
-  margin-left: calc(-1 * var(--eqb-space-1));
+  margin-left: calc(-1 * var(--eqb-space-2));
 }
 
 .eqb-notice[data-danger] {

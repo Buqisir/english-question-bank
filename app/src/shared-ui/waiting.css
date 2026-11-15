@@ -17,6 +17,18 @@
   transition: opacity var(--motion-fast) var(--ease-hover);
 }
 
+/* 小字旁（12–13px）的一档：14px（Owner 2026-11-15 定：「所以点跟在 12px 小字后面缩到 14px」，DESIGN §5）。
+ * 覆盖：本条 (0,2,0) 盖过上面 .eqb-wait-dots (0,1,0) 的 16px，因为调用处说明了它跟在小字后面。 */
+.eqb-wait-dots[data-size='sm'] {
+  --eqb-wait-dots-size: 14px;
+}
+
+/* 所以点和字的间距（2026-11-15 第二轮统一）：字和点之间不另加间距（flex gap / margin 合起来是 0）。
+ * 怎么算的：∴ 最左那颗点圆心在 24 格的 x=7、半径 2.25，左边自带 4.75 格空，16px 下约 3.2px、14px 下约 2.8px；
+ * 再加上汉字字身右边自带约 0.5–1px 的空，肉眼看到的间隙约 3–4px（目测），像字后面打了个省略号。
+ * 所以调用处如果容器有 gap，要把 gap 去掉或在点上收回来（各处写了注释）。用到的地方：notice.css、selectionOverlay.css
+ * .paper-selection-card-status、sentenceAnalysis.css .sa-loading；草稿卷顶栏「保存中」、认词自动保存那行是行内，本来就没有间距。 */
+
 /* InlineWaitDots 收尾时淡出。 */
 .eqb-wait-dots[data-leaving] {
   opacity: 0;
@@ -58,4 +70,32 @@
   .eqb-skeleton {
     animation: none;
   }
+}
+
+/* ── 整块在等（SkeletonGate） ─────────────────────────── */
+
+/* .eqb-skeleton-region（SkeletonGate 的区域）本身不写样子：只给读屏的那一句由 index.css 的 .visually-hidden 藏起来，
+ * 灰块怎么排由调用处挂的类给（.paper-dictionary-skeletons、.sa-translation-skeleton、.peek-paper-skeleton），不和它们比权重。 */
+
+/* ── 一组卷面的灰块（PaperGroupSkeleton） ──────────────
+ * 照整卷页实量：正文 14px、行高 24 → 灰块高 12、行距 12（--eqb-space-3）；文章和题之间、题和题之间空一行（--eqb-space-5）；
+ * 选项两列两行，左边缩进和题号一样宽（约 24，--eqb-space-5）。题干和选项的行高实量 26，这里按 24 画，差 2px（目测看不出）。 */
+.eqb-skeleton-paper-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eqb-space-5);
+}
+
+.eqb-skeleton-paper-passage,
+.eqb-skeleton-paper-question {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eqb-space-3);
+}
+
+.eqb-skeleton-paper-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--eqb-space-3);
+  padding-left: var(--eqb-space-5);
 }

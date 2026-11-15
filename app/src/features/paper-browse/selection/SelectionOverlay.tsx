@@ -253,7 +253,7 @@ export function SelectionOverlay({
             // 等待构件（2026-11-15，DESIGN.md §5 Waiting）：原来字前面一个转圈，换成字后面跟所以点。
             <p className="paper-selection-card-status">
               <span>正在翻译</span>
-              <InlineWaitDots pending />
+              <InlineWaitDots pending size="sm" />
             </p>
           ) : null}
 

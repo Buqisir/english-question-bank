@@ -127,3 +127,8 @@ token 的扩展用法。
 
 - **想要的值**：一是分段选择项里的图标 16px（`ChoiceOption.icon`），和上面两条的 `--eqb-icon-size` 是同一件事。二是分段选择的悬停滑块：SegmentedField 靠 FluidHoverList，滑块的样子（`.fluid-hover-list::before`）写在 `App.css` 里。扫码听音页 / 扫码听写页是另一个入口（`main.tsx` 不加载 `App.tsx`），这两页上的分段选择没有悬停滑块，只剩悬停那一项字变墨色。若收编，把 `.fluid-hover-list` 那几条从 `App.css` 挪进 `shared-ui/` 下一个随 FluidHoverList 一起加载的样式文件。
 - **临时方案**：一，构件不写图标尺寸，调用处给 `size={16}`，构件文件头写明。二，公开页先不补（学生在手机上用，触屏本来就不画滑块，`@media (hover: none) and (pointer: coarse)`）。记录在 `design/components-2026-11-13/migrate-segment/README.md`「缺的变量」。
+
+## 2026-11-15 等待第二轮的几个数（`app/src/shared-ui/waiting.css` `.eqb-wait-dots[data-size='sm']`；`app/src/shared-ui/useRowReveal.ts`；`app/src/shared-ui/useDelayedBusy.ts` `WAIT_SLOW_HINT_MS`；`app/src/features/question-detail/QuestionGroupDetailView.css` `.peek-paper-skeleton`）
+
+- **想要的值**：一是小字旁所以点 14px（Owner 2026-11-15 定），和第一轮的 16px（`--eqb-wait-dots-size`）一样只在 waiting.css 里。二是真行依次淡入：DESIGN §5 写每行 200ms、间隔 40ms；全站动效 token 没有 200（只有 160 `--motion-base`、220 `--motion-slow`），也没有「错开」一类。三是「超过 10 秒加一句」的 10 秒。四是详情页卷面灰块的内边距 32 / 48 / 40，照抄同文件 `.peek-paper .ps-page`（那条本身就是字面量）。若收编，候选名 `--eqb-wait-dots-size-sm`（14）、`--motion-stagger`（40ms）、`--eqb-wait-slow-hint`（10s）；200ms 建议 DESIGN 改成 160（用 `--motion-base`）或新加一档。
+- **临时方案**：一，`--eqb-wait-dots-size: 14px` 写在 `[data-size='sm']` 里，注释写出处。二，时长读 `--motion-base`（160ms，「显形、小入场」），间隔是 `useRowReveal.ts` 的具名常量 `ROW_REVEAL_STAGGER_MS = 40`。三，`useDelayedBusy.ts` 的具名常量 `WAIT_SLOW_HINT_MS = 10_000`。四，字面量，注释写明照抄哪一条。记录在 `design/components-2026-11-13/migrate-waiting-2/README.md`。

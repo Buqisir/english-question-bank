@@ -10,6 +10,7 @@ import { OptionSelectField, SegmentedField } from '../../shared-ui/OptionField.t
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { Toast } from '../../shared-ui/Toast.tsx'
 import { InlineWaitDots } from '../../shared-ui/WaitDots.tsx'
+import { useSlowWait } from '../../shared-ui/useDelayedBusy.ts'
 import { planFocusAfterRemoval, programmaticFocusTarget } from '../../shared-ui/focusAfterRemoval.ts'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, GroupType, MySpaceFolder, QuestionGroupCard } from '../../domain/questionBank'
 import {
@@ -184,6 +185,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [saveError, setSaveError] = useState('')
   const [exportStatus, setExportStatus] = useState<'idle' | 'exporting' | 'exported' | 'error'>('idle')
+  // 生成 PDF 超过 10 秒还没好：那一行多说一句（DESIGN.md §5 Waiting「要等好几秒的事」，2026-11-15 第二轮只做这一处）。
+  const exportSlow = useSlowWait(exportStatus === 'exporting')
   const [exportError, setExportError] = useState<Failure | null>(null)
   const [exportSuccessMessage, setExportSuccessMessage] = useState('')
   const [spaceDialogOpen, setSpaceDialogOpen] = useState(false)
@@ -1744,7 +1747,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       pageStatus={
         <span className={`draft-save-status ${saveStatus}`} role="status" title={saveStatus === 'error' ? saveError : undefined}>
           {saveStatus === 'saving' ? '保存中' : saveStatus === 'error' ? '保存失败' : '已保存'}
-          <InlineWaitDots pending={saveStatus === 'saving'} />
+          <InlineWaitDots pending={saveStatus === 'saving'} size="sm" />
         </span>
       }
       onBack={onBackToWorkbench}
@@ -1843,7 +1846,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               {exportError.lead}
             </Notice>
           ) : exportStatus === 'exporting' ? (
-            <Notice kind="waiting">正在生成 PDF</Notice>
+            <Notice kind="waiting">{exportSlow ? '正在生成 PDF，比平时慢，可以先去做别的' : '正在生成 PDF'}</Notice>
           ) : exportStatus === 'exported' ? (
             <Notice kind="success" className="draft-success">{exportSuccessMessage}</Notice>
           ) : draftPaper.items.length === 0 ? (

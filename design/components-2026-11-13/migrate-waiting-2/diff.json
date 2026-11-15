@@ -1,0 +1,1067 @@
+{
+ "before": {
+  "steps": {
+   "home-search": {
+    "early": {
+     "feed": 1,
+     "notice": 1
+    },
+    "earlyAtMs": 163,
+    "frozen": [
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "flip",
+      "size": "md",
+      "reduced": false,
+      "active": "true",
+      "px": 16
+     }
+    ],
+    "late": {
+     "feed": 1
+    }
+   },
+   "home-rows": {
+    "reveal": {
+     "rows": 1,
+     "animations": 0,
+     "timing": []
+    },
+    "opacity": [
+     "1.00"
+    ]
+   },
+   "translate": {
+    "frozen": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "flip",
+      "size": "md",
+      "reduced": false,
+      "active": "true",
+      "px": 16
+     }
+    ],
+    "gap": {
+     "fontSize": "12px",
+     "lastChar": "译",
+     "dotsPx": 16,
+     "svgGap": 6,
+     "inkGap": 9.2,
+     "homeGap": 9.2
+    }
+   },
+   "analyze": {
+    "frozen": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "wave",
+      "size": "md",
+      "reduced": false,
+      "active": "true",
+      "px": 16
+     }
+    ],
+    "gap": {
+     "fontSize": "12px",
+     "lastChar": "中",
+     "dotsPx": 16,
+     "svgGap": 4,
+     "inkGap": 5.9,
+     "homeGap": 7.2
+    },
+    "skeleton": [
+     {
+      "w": 708,
+      "h": 47,
+      "text": "",
+      "ariaBusy": null
+     }
+    ]
+   },
+   "dictionary": {
+    "frozen": [],
+    "skeleton": [
+     {
+      "w": 306,
+      "h": 52,
+      "text": "",
+      "ariaBusy": null
+     }
+    ],
+    "region": [
+     {
+      "role": null,
+      "busy": null,
+      "hidden": "true",
+      "label": null
+     }
+    ]
+   },
+   "paper-pdf": {
+    "idle": [
+     {
+      "w": 92.9,
+      "text": "下载 PDF",
+      "disabled": true
+     }
+    ]
+   },
+   "detail-paper": {
+    "frozen": [],
+    "text": "卷面加载中…",
+    "region": [],
+    "box": [
+     {
+      "w": 808,
+      "h": 122,
+      "text": "卷面加载中…",
+      "ariaBusy": null
+     }
+    ]
+   },
+   "admin": {
+    "tagIdle": [
+     {
+      "w": 148,
+      "h": 32,
+      "text": "给题库打主题标签",
+      "ariaBusy": null
+     }
+    ],
+    "frozen": [],
+    "tagBusy": [
+     {
+      "w": 95.4,
+      "h": 32,
+      "text": "打标中…",
+      "ariaBusy": null
+     }
+    ],
+    "tokenIdle": [
+     {
+      "w": 78,
+      "h": 36,
+      "text": "新建口令",
+      "ariaBusy": null
+     }
+    ],
+    "frozen2": [],
+    "tokenBusy": [
+     {
+      "w": 76.8,
+      "h": 36,
+      "text": "保存中…",
+      "ariaBusy": null
+     }
+    ]
+   },
+   "draft": {
+    "items": [
+     {
+      "id": "draft-item-2ab448a9-cf64-43df-a2ad-67583271653f",
+      "groupId": "group-2026-i-reading-a"
+     },
+     {
+      "id": "draft-item-02ea9755-b780-4d8d-a6fb-9956045aa253",
+      "groupId": "group-2026-i-reading-b"
+     },
+     {
+      "id": "draft-item-30875b15-b22b-43db-aed4-699e25841312",
+      "groupId": "group-2026-i-reading-c"
+     }
+    ],
+    "frozen": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "wave",
+      "size": "md",
+      "reduced": false,
+      "active": "true",
+      "px": 16
+     },
+     {
+      "kind": "wave",
+      "size": "md",
+      "reduced": false,
+      "active": "true",
+      "px": 16
+     }
+    ],
+    "status": [
+     {
+      "w": 52,
+      "h": 17,
+      "text": "保存中",
+      "ariaBusy": null
+     }
+    ],
+    "gap": {
+     "fontSize": "12px",
+     "lastChar": "中",
+     "dotsPx": 16,
+     "svgGap": 0,
+     "inkGap": 1.9,
+     "homeGap": 3.2
+    },
+    "frozen2": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "pdfEarly": "正在生成 PDF",
+    "frozen3": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "pdfSlow": "正在生成 PDF",
+    "gapPdf": {
+     "fontSize": "14px",
+     "lastChar": "F",
+     "dotsPx": 16,
+     "svgGap": 4,
+     "inkGap": 5.9,
+     "homeGap": 7.2
+    }
+   },
+   "home-row-add": {
+    "frozen": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "swap",
+      "size": "md",
+      "reduced": false,
+      "active": "true",
+      "px": 16
+     }
+    ],
+    "busy": [
+     {
+      "w": 59,
+      "h": 28,
+      "text": "已加入",
+      "ariaBusy": null
+     },
+     {
+      "w": 59,
+      "h": 28,
+      "text": "已加入",
+      "ariaBusy": null
+     },
+     {
+      "w": 59,
+      "h": 28,
+      "text": "已加入",
+      "ariaBusy": null
+     },
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     }
+    ]
+   },
+   "home-rows-reduced": {
+    "reveal": {
+     "rows": 1,
+     "animations": 0,
+     "timing": []
+    },
+    "opacity": [
+     "1.00"
+    ]
+   }
+  },
+  "missing": [
+   "paper-pdf: TimeoutError: locator.click: Timeout 30000ms exceeded."
+  ],
+  "pageErrors": []
+ },
+ "after": {
+  "steps": {
+   "home-search": {
+    "early": {
+     "feed": 0,
+     "notice": 1
+    },
+    "earlyAtMs": 155,
+    "frozen": [
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "flip",
+      "size": "md",
+      "reduced": false,
+      "active": "true",
+      "px": 16
+     }
+    ],
+    "late": {
+     "feed": 1
+    }
+   },
+   "home-rows": {
+    "reveal": {
+     "rows": 1,
+     "animations": 1,
+     "timing": [
+      {
+       "duration": 160,
+       "delay": 0,
+       "easing": "cubic-bezier(0.23, 1, 0.32, 1)"
+      }
+     ]
+    },
+    "opacity": [
+     "0.99"
+    ]
+   },
+   "translate": {
+    "frozen": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "flip",
+      "size": "sm",
+      "reduced": false,
+      "active": "true",
+      "px": 14
+     }
+    ],
+    "gap": {
+     "fontSize": "12px",
+     "lastChar": "译",
+     "dotsPx": 14,
+     "svgGap": 0,
+     "inkGap": 2.8,
+     "homeGap": 2.8
+    }
+   },
+   "analyze": {
+    "frozen": [
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "flip",
+      "size": "sm",
+      "reduced": false,
+      "active": "true",
+      "px": 14
+     }
+    ],
+    "gap": {
+     "fontSize": "12px",
+     "lastChar": "中",
+     "dotsPx": 14,
+     "svgGap": 0,
+     "inkGap": 2.8,
+     "homeGap": 2.8
+    },
+    "skeleton": [
+     {
+      "w": 708,
+      "h": 47,
+      "text": "",
+      "ariaBusy": "true"
+     }
+    ]
+   },
+   "dictionary": {
+    "frozen": [
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     }
+    ],
+    "skeleton": [
+     {
+      "w": 306,
+      "h": 52,
+      "text": "正在查词典",
+      "ariaBusy": "true"
+     }
+    ],
+    "region": [
+     {
+      "role": "status",
+      "busy": "true",
+      "hidden": null,
+      "label": "正在查词典"
+     }
+    ]
+   },
+   "paper-pdf": {
+    "idle": [
+     {
+      "w": 92.9,
+      "text": "下载 PDF",
+      "disabled": true
+     }
+    ]
+   },
+   "detail-paper": {
+    "frozen": [
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     }
+    ],
+    "text": "卷面加载中",
+    "region": [
+     {
+      "role": "status",
+      "label": "卷面加载中"
+     }
+    ],
+    "box": [
+     {
+      "w": 808,
+      "h": 300,
+      "text": "卷面加载中",
+      "ariaBusy": null
+     }
+    ]
+   },
+   "admin": {
+    "tagIdle": [
+     {
+      "w": 148,
+      "h": 32,
+      "text": "给题库打主题标签",
+      "ariaBusy": null
+     }
+    ],
+    "frozen": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "tagBusy": [
+     {
+      "w": 148,
+      "h": 32,
+      "text": "给题库打主题标签",
+      "ariaBusy": "true"
+     }
+    ],
+    "tokenIdle": [
+     {
+      "w": 78,
+      "h": 36,
+      "text": "新建口令",
+      "ariaBusy": null
+     }
+    ],
+    "frozen2": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "tokenBusy": [
+     {
+      "w": 78,
+      "h": 36,
+      "text": "新建口令",
+      "ariaBusy": "true"
+     }
+    ]
+   },
+   "draft": {
+    "items": [
+     {
+      "id": "draft-item-5f58e05e-1b99-4053-a54d-818e6bb5ab3e",
+      "groupId": "group-2026-i-reading-a"
+     },
+     {
+      "id": "draft-item-a8549e19-fde9-4965-8b31-f587a1583ba9",
+      "groupId": "group-2026-i-reading-b"
+     },
+     {
+      "id": "draft-item-45433c0b-8a9b-46a8-9e1f-5cacabd1d553",
+      "groupId": "group-2026-i-reading-c"
+     }
+    ],
+    "frozen": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "flip",
+      "size": "sm",
+      "reduced": false,
+      "active": "true",
+      "px": 14
+     },
+     {
+      "kind": "flip",
+      "size": "md",
+      "reduced": false,
+      "active": "true",
+      "px": 16
+     }
+    ],
+    "status": [
+     {
+      "w": 50,
+      "h": 17,
+      "text": "保存中",
+      "ariaBusy": null
+     }
+    ],
+    "gap": {
+     "fontSize": "12px",
+     "lastChar": "中",
+     "dotsPx": 14,
+     "svgGap": 0,
+     "inkGap": 2.8,
+     "homeGap": 2.8
+    },
+    "frozen2": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "pdfEarly": "正在生成 PDF",
+    "frozen3": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "pdfSlow": "正在生成 PDF，比平时慢，可以先去做别的",
+    "gapPdf": {
+     "fontSize": "14px",
+     "lastChar": "的",
+     "dotsPx": 16,
+     "svgGap": 0,
+     "inkGap": 3.2,
+     "homeGap": 3.2
+    }
+   },
+   "home-row-add": {
+    "frozen": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "swap",
+      "size": "md",
+      "reduced": false,
+      "active": "true",
+      "px": 16
+     }
+    ],
+    "busy": [
+     {
+      "w": 59,
+      "h": 28,
+      "text": "已加入",
+      "ariaBusy": null
+     },
+     {
+      "w": 59,
+      "h": 28,
+      "text": "已加入",
+      "ariaBusy": null
+     },
+     {
+      "w": 59,
+      "h": 28,
+      "text": "已加入",
+      "ariaBusy": null
+     },
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     }
+    ]
+   },
+   "home-rows-reduced": {
+    "reveal": {
+     "rows": 1,
+     "animations": 0,
+     "timing": []
+    },
+    "opacity": [
+     "1.00"
+    ]
+   }
+  },
+  "missing": [
+   "paper-pdf: TimeoutError: locator.click: Timeout 30000ms exceeded."
+  ],
+  "pageErrors": []
+ }
+}

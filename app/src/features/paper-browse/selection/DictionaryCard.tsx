@@ -3,6 +3,7 @@ import { SentenceAnalysis, X } from '../../../icons'
 import { CopyFeedbackIcon, DisclosureIcon, VolumeFeedbackIcon } from '../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../icons/motionInput'
 import { Button } from '../../../shared-ui/Button.tsx'
+import { Skeleton, SkeletonGate } from '../../../shared-ui/Skeleton.tsx'
 import type {
   PaperDictionaryEntry,
   PaperDictionaryPosGroup,
@@ -17,6 +18,9 @@ export type DictionarySenseState =
   // matchKey 是服务端选中的义项（entryId\nposGroupIndex\nsenseId）；短语搭配没有对应义项，为 null。
   | { status: 'ok'; text: string; matchKey?: string | null }
   | { status: 'unavailable' | 'error'; message: string }
+
+// 查词典时的三条灰块宽度（照原来 .paper-dictionary-skeleton-line 的 100% / 82% / 58%）。
+const DICTIONARY_SKELETON_WIDTHS = ['100%', '82%', '58%']
 
 function sameWord(a: string, b: string) {
   return a.localeCompare(b, undefined, { sensitivity: 'accent' }) === 0
@@ -453,11 +457,14 @@ export function DictionaryCard({
       </div>
 
       {lookup === 'loading' ? (
-        <div className="paper-dictionary-skeletons" aria-hidden="true">
-          <span className="paper-dictionary-skeleton-line" />
-          <span className="paper-dictionary-skeleton-line" />
-          <span className="paper-dictionary-skeleton-line" />
-        </div>
+        // 共用灰块（2026-11-15 第二轮，DESIGN.md §5 Waiting）：原来三条自己画的灰条（字色 10%、不动），换成 Skeleton
+        // （桌色、一起呼吸），宽度照旧 100% / 82% / 58%、高 12。走 300ms 门槛；词条在下面另画，查完就卸掉，不留够 500ms。
+        <SkeletonGate
+          pending
+          label="正在查词典"
+          className="paper-dictionary-skeletons"
+          skeleton={DICTIONARY_SKELETON_WIDTHS.map((width) => <Skeleton key={width} width={width} height={12} />)}
+        />
       ) : null}
       {lookupError ? <p className="paper-dictionary-note">{lookupError}</p> : null}
       {result?.status === 'not-found' ? <p className="paper-dictionary-missing">暂未收录该词</p> : null}

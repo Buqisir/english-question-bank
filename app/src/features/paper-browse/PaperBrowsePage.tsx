@@ -61,6 +61,7 @@ import { ArrowLeft, BoardList, ExternalLink, Presentation, RefreshCw, Scissors }
 import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
 import { SelectField } from '../../shared-ui/Field.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
+import { PaperGroupSkeleton, Skeleton, SkeletonGate } from '../../shared-ui/Skeleton.tsx'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { ensurePaperFonts, PaperFontError } from '../../shared-ui/papersurface/paperFontLoader'
@@ -686,6 +687,22 @@ function renderSectionHeadingText(text: string): ReactNode {
           </span>
         )
       : run.text)
+}
+
+// 讲评栏里按需补拉解析的三种题组（完形、语法填空、写作）：只有它们在「解析加载中」时画灰块。
+const LECTURE_FETCHED_GROUP_TYPES: readonly PaperContentGroup['groupType'][] = ['cloze', 'grammarFill', 'writing']
+
+// 讲解区的灰块（2026-11-15 第二轮，DESIGN.md §5 Waiting）：照解析面板的样子——上面一行折叠标题（「文章简介」那种，
+// 12px 小字），下面一段 14px 正文（--pb-lecture-font-body）三行。行距和卷面灰块一样按 24 一行画。排法在 paperBrowsePage.css。
+function LectureAnalysisSkeleton() {
+  return (
+    <div className="paper-browse-lecture-skeleton" aria-hidden="true">
+      <Skeleton width={72} height={12} />
+      <Skeleton width="100%" height={12} />
+      <Skeleton width="100%" height={12} />
+      <Skeleton width="58%" height={12} />
+    </div>
+  )
 }
 
 // 讲评栏 — 答案行. `null` means "don't render an answer row at all"
@@ -2517,9 +2534,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     entry: GroupModel | undefined,
     readingSuccessorGroupId?: string,
   ): ReactNode {
-    if (!entry) {
-      return <div className="paper-browse-placeholder">加载中…</div>
-    }
+    // 还没来：灰块由调用处的 SkeletonGate 画（2026-11-15 第二轮，原来是一行「加载中…」）。
+    if (!entry) return null
     if (entry.kind === 'error') {
       return <div className="paper-browse-placeholder">该题组暂不可预览：{entry.message}</div>
     }
@@ -3267,7 +3283,10 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               {options.mergedInstructionText}
             </p>
           )}
-          {renderGroupBody(groupId, entry, readingSuccessorGroupId)}
+          {/* 整块在等：照一组卷面（文章 + 题）画灰块，走门槛；读屏念「题组加载中」（DESIGN.md §5 Waiting，2026-11-15 第二轮）。 */}
+          <SkeletonGate pending={!entry} label="题组加载中" skeleton={<PaperGroupSkeleton />}>
+            {renderGroupBody(groupId, entry, readingSuccessorGroupId)}
+          </SkeletonGate>
         </section>
       </Fragment>
     )
@@ -3364,7 +3383,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         )
       }
       return (
-        <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
+        // 加载中由调用处的 SkeletonGate 画灰块（2026-11-15 第二轮，原来这里写「解析加载中…」）。
+        <p className="paper-browse-lecture-empty">解析未发布</p>
       )
     }
 
@@ -3384,7 +3404,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         )
       }
       return (
-        <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
+        // 加载中由调用处的 SkeletonGate 画灰块（2026-11-15 第二轮，原来这里写「解析加载中…」）。
+        <p className="paper-browse-lecture-empty">解析未发布</p>
       )
     }
 
@@ -3411,7 +3432,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         return <ContinuationAnalysisPanel analysis={lectureEntry.analysis} />
       }
       return (
-        <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
+        // 加载中由调用处的 SkeletonGate 画灰块（2026-11-15 第二轮，原来这里写「解析加载中…」）。
+        <p className="paper-browse-lecture-empty">解析未发布</p>
       )
     }
 
@@ -3564,14 +3586,23 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           </>
         )}
         <div className="paper-browse-lecture-analysis">
-          {renderLectureAnalysisPanel({
-            groupId,
-            group,
-            hasActiveQuestion,
-            activeQuestionId,
-            activeEvidenceId,
-            activeOptionLabel,
-          })}
+          {/* 讲解区整块在等（完形 / 语法填空 / 写作的解析按需补拉）：照解析面板画灰块，走门槛；读屏念「解析加载中」
+              （DESIGN.md §5 Waiting，2026-11-15 第二轮，原来是一行「解析加载中…」）。 */}
+          <SkeletonGate
+            pending={lectureAnalysisLoading && !lectureAnalysisByGroupId[groupId]
+              && LECTURE_FETCHED_GROUP_TYPES.includes(group.groupType)}
+            label="解析加载中"
+            skeleton={<LectureAnalysisSkeleton />}
+          >
+            {renderLectureAnalysisPanel({
+              groupId,
+              group,
+              hasActiveQuestion,
+              activeQuestionId,
+              activeEvidenceId,
+              activeOptionLabel,
+            })}
+          </SkeletonGate>
         </div>
         {/* similar-rail (E2/E6), 已拍板设计 1: 当前选中题的解析下方「配相似」
             /「相似篇章」CTA——无选中题不渲染；只对 v2 引擎支持的四个题型
@@ -4090,7 +4121,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         icon={<DownloadFeedbackIcon size={16} icon="paper" working={analysisPdfBusy} />}
         onClick={() => void downloadPaperProduct()}
       >
-        {analysisPdfBusy ? '生成 PDF 中…' : '下载 PDF'}
+        {/* 2026-11-15 第二轮：生成中字不换（原来换成「生成 PDF 中…」，键会变宽），图标自己演，读屏靠 busy 念「忙」。 */}
+        下载 PDF
       </Button>
       {pdfProductsError && <span role="alert">{pdfProductsError}{' '}
         <Button size="sm" onClick={retryPdfProducts}>刷新 PDF 版本</Button>

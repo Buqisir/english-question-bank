@@ -847,6 +847,14 @@
   }
 }
 
+/* 讲解区在等的灰块（PaperBrowsePage.tsx LectureAnalysisSkeleton，2026-11-15 第二轮）：一行标题加三行正文，
+ * 行距 12（--eqb-space-3，按 14px 正文行高 24 画）。原来这里是一行「解析加载中…」。 */
+.paper-browse-lecture-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eqb-space-3);
+}
+
 .paper-browse-lecture-empty {
   margin: 0;
   font-size: var(--pb-lecture-font-body);

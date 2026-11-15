@@ -63,8 +63,11 @@
 /* 「名称」换成 shared-ui/TextField（字段构件第二轮 2026-11-15）：标签、框、占位符、焦点归 field.css，
  * 原来这里的 label / input / ::placeholder / input:focus-visible 几条删了。框宽 228 是换前实测的输入框宽（浏览器给的默认宽，fields2-shots 量的）。 */
 .agent-token-name { width: 228px; max-width: 100%; }
-.agent-token-submit { border: 1px solid var(--eqb-color-border); }
-.agent-token-submit:disabled { color: var(--eqb-color-text-muted); }
+/* 「新建口令」2026-11-15 换成 Button（strong lg）。原来是 .ghost-button 加一圈边，样子照旧：
+ * 覆盖：两条都是 (0,2,0) / (0,3,0)，盖过 button.css .eqb-button 的 border: 0 (0,1,0) 和 [data-tone='strong'] 的墨字 (0,2,0)，
+ * 因为这只键原来就带边、禁用时字是次要灰。 */
+.eqb-button.agent-token-submit { border: 1px solid var(--eqb-color-border); }
+.eqb-button.agent-token-submit:disabled { color: var(--eqb-color-text-muted); }
 /* .agent-token-load-failed 的排布（字和「重试」一行）构件收尾（2026-11-15）归共用 Notice，这条删了。 */
 .agent-tokens ul { list-style: none; padding: 0; margin: 16px 0 0; }
 .agent-tokens li { display: flex; gap: 16px; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--eqb-color-border-subtle); }

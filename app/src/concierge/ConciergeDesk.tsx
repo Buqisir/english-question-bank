@@ -32,6 +32,8 @@ import { EmptyState } from '../shared-ui/EmptyState.tsx'
 import { SearchField } from '../shared-ui/SearchField.tsx'
 import { RowList } from '../shared-ui/Row.tsx'
 import { Skeleton } from '../shared-ui/Skeleton.tsx'
+import { useDelayedBusy } from '../shared-ui/useDelayedBusy.ts'
+import { useRowReveal } from '../shared-ui/useRowReveal.ts'
 
 /** Fluid hover: an expanded paper row's open body still belongs to its head,
  *  so the highlight stays on that head instead of jumping to the next paper. */
@@ -586,6 +588,17 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
 
   const submitDisabled = dataLoading || state.kind === 'loading' || intent.trim().length === 0
 
+  // 找题结果区的灰块走等待门槛（DESIGN.md §5「Waiting 等待」，2026-11-15 第二轮）：找题不到 300ms 就回来，灰块不出；
+  // 出了至少留 500ms。提示行「正在为…找题」的字不等门槛，一挂上就在（读屏要及时），只有灰块等。
+  // 灰块还没留够 500ms 结果就到了：灰块接着留着，结果等灰块走了再出（免得灰块和真行同时在、页面跳）。
+  // 出错不等：错误那一行在结果区外面，灰块直接收掉。
+  const searchWaitPhase = useDelayedBusy(state.kind === 'loading')
+  const searchSkeletonShown = searchWaitPhase === 'waiting' && (state.kind === 'loading' || state.kind === 'results')
+  const searchResultsShown = state.kind === 'results' && !searchSkeletonShown
+  // 数据到了，真行从上到下依次淡入（DESIGN §5；只做首页找题结果这一处，shared-ui/useRowReveal.ts）。
+  const resultsRef = useRef<HTMLDivElement>(null)
+  useRowReveal(resultsRef, '.concierge-paper-list > li', searchResultsShown && filteredPaperResults.length > 0)
+
   return (
     <section
       className="concierge-desk"
@@ -910,23 +923,21 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
         </Notice>
       )}
 
-      <div className="concierge-results" aria-live="polite">
+      <div ref={resultsRef} className="concierge-results" aria-live="polite">
         {state.kind === 'loading' && (
-          <>
-            <Notice kind="waiting" className="concierge-loading">{`正在为「${state.query}」找题`}</Notice>
-            {/* ui-p1-panels #7 — 找题主面状态三缺: an AI search in flight
-                used to blank straight to this one line with nothing else
-                on screen (audit 62 "取题中整屏白屏"). Reuse the same
-                skeleton placeholder the dataLoading (SQLite connect) path
-                already shows, instead of introducing a second loading
-                idiom — verify-home-default-feed.mjs locks the feed block
-                itself to `showFeed` only, so this is a sibling skeleton,
-                not a faded copy of the feed. */}
-            <SkeletonFeed />
-          </>
+          <Notice kind="waiting" className="concierge-loading">{`正在为「${state.query}」找题`}</Notice>
         )}
+        {/* ui-p1-panels #7 — 找题主面状态三缺: an AI search in flight
+            used to blank straight to this one line with nothing else
+            on screen (audit 62 "取题中整屏白屏"). Reuse the same
+            skeleton placeholder the dataLoading (SQLite connect) path
+            already shows, instead of introducing a second loading
+            idiom — verify-home-default-feed.mjs locks the feed block
+            itself to `showFeed` only, so this is a sibling skeleton,
+            not a faded copy of the feed. 2026-11-15 第二轮：灰块走门槛（searchSkeletonShown），读屏靠上面那行字。 */}
+        {searchSkeletonShown && <SkeletonFeed />}
 
-        {state.kind === 'results' && paperResults.length === 0 && (
+        {searchResultsShown && paperResults.length === 0 && (
           // 「没找到」做成卡片，摊手獭獭从卡片上沿露出半身（BRAND.md 第 118、119、31 条）。话照原来那一行：
           // 两条出路，「换个说法」留在句子里，「返回浏览全部 N 套卷」原来是行内墨字链接，现在是卡片里的墨字键。
           // 类名 concierge-empty 留着给 smoke 脚本认。
@@ -943,7 +954,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
             the active chip filters narrowed them to zero, say so plainly
             (筛选筛空的, not "没搜到") and offer a one-click reset, instead of
             silently rendering a blank list. */}
-        {state.kind === 'results' &&
+        {searchResultsShown &&
           paperResults.length > 0 &&
           filteredPaperResults.length === 0 && (
             <p className="concierge-empty">
@@ -954,7 +965,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
             </p>
           )}
 
-        {state.kind === 'results' && filteredPaperResults.length > 0 && (
+        {searchResultsShown && filteredPaperResults.length > 0 && (
           <RowList className="concierge-paper-list" itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
             {filteredPaperResults.map((paper, index) => {
               // C7 (trust-cracks) — search-result year column: only the first

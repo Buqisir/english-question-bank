@@ -2,7 +2,8 @@
  * 所以点（DESIGN.md §5「Waiting 等待」，Owner 2026-11-15 定；BRAND.md §4.6 末段「界面等待 · 所以点」）。
  *
  * 獭獭两颊的 ∴ 三颗点，代替转圈，用在界面里的小号等待：按钮里（Button 的 busy）、一行字后面（「正在保存」）。
- * - 16px，点用 currentColor（所在处的字色），SVG 画在 24 格里。
+ * - 16px，点用 currentColor（所在处的字色），SVG 画在 24 格里。跟在 12–13px 小字后面用 size="sm"：14px
+ *   （Owner 2026-11-15 定，16px 在小字旁略大）。字和点之间不另加间距，见 waiting.css「所以点和字的间距」。
  * - 三种动作平起平坐：甲 一沉两浮、乙 此起彼伏、丙 两两换位（参数在 waitDotsMotion.ts）。
  *   每次开始等随机挑一种，不连着出同一种；同一时刻屏幕上几处等待用同一种，而且对齐到同一个起点（模块里共用一个「这次等待」）。
  * - active 变成 false：从当前位置浮回 ∴（--motion-base，160ms），停在 ∴；什么时候隐去由用的地方决定
@@ -63,15 +64,19 @@ function prefersReducedMotion() {
     && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
+/** md 16px（默认，和 14px 及以上的字、行内图标同一档）；sm 14px（跟在 12–13px 小字后面，Owner 2026-11-15 定）。 */
+export type WaitDotsSize = 'md' | 'sm'
+
 export type WaitDotsProps = {
   /** 正在等（默认）。变成 false 时浮回 ∴ 并停在那里。 */
   active?: boolean
+  size?: WaitDotsSize
   /** 隐去（淡出）。Button、Notice 用自己的样式隐去，不用这个。 */
   leaving?: boolean
   className?: string
 }
 
-export function WaitDots({ active = true, leaving = false, className }: WaitDotsProps) {
+export function WaitDots({ active = true, leaving = false, size = 'md', className }: WaitDotsProps) {
   const rootRef = useRef<SVGSVGElement>(null)
   const dotRefs = useRef<(SVGCircleElement | null)[]>([])
   const settleRef = useRef<Animation[]>([])
@@ -150,6 +155,7 @@ export function WaitDots({ active = true, leaving = false, className }: WaitDots
       className={className ? `eqb-wait-dots ${className}` : 'eqb-wait-dots'}
       viewBox={`0 0 ${WAIT_DOTS_VIEWBOX} ${WAIT_DOTS_VIEWBOX}`}
       data-active={active ? 'true' : 'false'}
+      data-size={size === 'sm' ? 'sm' : undefined}
       data-leaving={leaving ? '' : undefined}
       aria-hidden="true"
       focusable="false"
@@ -169,13 +175,15 @@ export function WaitDots({ active = true, leaving = false, className }: WaitDots
 export type InlineWaitDotsProps = {
   /** 正在等。过了 300ms 门槛才出所以点，出了至少 500ms；等完浮回 ∴、隐去。 */
   pending: boolean
+  /** 跟在 12–13px 小字后面给 sm（14px）；默认 md（16px）。 */
+  size?: WaitDotsSize
   className?: string
 }
 
 /** 一行字后面的所以点（「正在保存」「正在翻译」）：带门槛。没在等时什么都不渲染。 */
-export function InlineWaitDots({ pending, className }: InlineWaitDotsProps) {
+export function InlineWaitDots({ pending, size = 'md', className }: InlineWaitDotsProps) {
   const phase = useDelayedBusy(pending)
   if (phase === 'idle') return null
   const classes = ['eqb-wait-dots-inline', className].filter(Boolean).join(' ')
-  return <WaitDots active={phase === 'waiting'} className={classes} leaving={phase === 'leaving'} />
+  return <WaitDots active={phase === 'waiting'} className={classes} leaving={phase === 'leaving'} size={size} />
 }

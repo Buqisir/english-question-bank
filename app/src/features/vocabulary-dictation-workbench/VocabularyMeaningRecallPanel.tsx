@@ -483,7 +483,7 @@ export function VocabularyMeaningRecallPanel({
         <header>
           <div>
             <strong>{stageRecord.title}</strong>
-            <span>{activeIndex + 1} / {stageRecord.entryCount} · {saveState === 'saving' ? '正在自动保存' : saveState === 'error' ? '保存失败' : '已自动保存'}<InlineWaitDots pending={saveState === 'saving'} /></span>
+            <span>{activeIndex + 1} / {stageRecord.entryCount} · {saveState === 'saving' ? '正在自动保存' : saveState === 'error' ? '保存失败' : '已自动保存'}<InlineWaitDots pending={saveState === 'saving'} size="sm" /></span>
           </div>
           <button type="button" onClick={() => void finishRecord(stageRecord)} disabled={busy}>结束本轮</button>
         </header>

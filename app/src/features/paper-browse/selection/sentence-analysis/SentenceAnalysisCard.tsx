@@ -9,6 +9,7 @@ import { CopyFeedbackIcon } from '../../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../../icons/motionInput'
 import { useClipboardCopy } from '../../../../hooks/useClipboardCopy'
 import { InlineWaitDots } from '../../../../shared-ui/WaitDots.tsx'
+import { Skeleton, SkeletonGate } from '../../../../shared-ui/Skeleton.tsx'
 import { AnnotatedSentence } from './AnnotatedSentence'
 import { TranslationBlock } from './TranslationBlock'
 import { GrammarLegend } from './GrammarLegend'
@@ -155,7 +156,7 @@ export function SentenceAnalysisCard({
             // 等待构件（2026-11-15，DESIGN.md §5 Waiting）：原来字前面一个转圈，换成字后面跟所以点。
             <span className="sa-loading">
               分析中
-              <InlineWaitDots pending />
+              <InlineWaitDots pending size="sm" />
             </span>
           ) : null}
           {ready && flags.length === 1 ? (
@@ -203,10 +204,14 @@ export function SentenceAnalysisCard({
       {status === 'loading' ? (
         <>
           <div className="sa-sentence-wrap"><p className="sa-sentence sa-sentence-plain">{sentenceText}</p></div>
-          <div className="sa-translation">
-            <span className="sa-skeleton" style={{ width: '100%' }} />
-            <span className="sa-skeleton" style={{ width: '64%' }} />
-          </div>
+          {/* 共用灰块（2026-11-15 第二轮，DESIGN.md §5 Waiting）：原来两条自己画的灰条（字色 10%、不动），换成 Skeleton
+              （桌色、一起呼吸），宽度照旧 100% / 64%、高 12。走 300ms 门槛；读屏靠上面那行「分析中」，这里不再念。
+              译文到了是另画的，分析完就卸掉，不留够 500ms。 */}
+          <SkeletonGate
+            pending
+            className="sa-translation sa-translation-skeleton"
+            skeleton={<><Skeleton width="100%" height={12} /><Skeleton width="64%" height={12} /></>}
+          />
         </>
       ) : null}
 

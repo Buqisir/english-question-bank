@@ -45,6 +45,7 @@ import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
 import { Menu } from '../../shared-ui/Menu.tsx'
 import { Chip } from '../../shared-ui/Chip.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
+import { PaperGroupSkeleton, SkeletonGate } from '../../shared-ui/Skeleton.tsx'
 import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import {
   SimilarPassagesPanel,
@@ -507,15 +508,15 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
   const grammarChips = load.status === 'ready' && load.model.kind === 'grammarFill' ? load.model.chips : null
   const chips = buildTypeChips(selectedDetail, readingParseResult, grammarChips)
 
-  let paperBody: ReactNode = null
-  if (load.status === 'loading') {
-    paperBody = <div className="peek-paper-placeholder">卷面加载中…</div>
-  } else if (load.status === 'error') {
-    paperBody = <div className="peek-paper-placeholder">{load.message}</div>
-  } else {
-    const entry = load.model
-    paperBody = <QuestionGroupPaperSurface entry={entry} />
-  }
+  // 卷面整块在等：照一组卷面（文章 + 题）画灰块，走门槛；读屏念「卷面加载中」（DESIGN.md §5 Waiting，2026-11-15 第二轮，
+  // 原来是居中一行「卷面加载中…」）。真卷面作为 children 传进去，灰块没留够 500ms 时先不换上。
+  const paperBody: ReactNode = load.status === 'error'
+    ? <div className="peek-paper-placeholder">{load.message}</div>
+    : (
+      <SkeletonGate pending={load.status === 'loading'} label="卷面加载中" className="peek-paper-skeleton" skeleton={<PaperGroupSkeleton />}>
+        {load.status === 'ready' ? <QuestionGroupPaperSurface entry={load.model} /> : null}
+      </SkeletonGate>
+    )
 
   return (
     <div className="detail-view">

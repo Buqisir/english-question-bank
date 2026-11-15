@@ -176,6 +176,12 @@
   pointer-events: none;
 }
 
+/* 卷面在等的灰块（SkeletonGate + PaperGroupSkeleton，2026-11-15 第二轮）：灰块画在真卷面文字的位置上，
+ * 四周内边距照抄下面 .peek-paper .ps-page 的 32 / 48 / 40（真卷面的页边），不另取值。 */
+.peek-paper-skeleton {
+  padding: 32px 48px 40px;
+}
+
 .peek-paper-placeholder {
   padding: 40px 24px 64px;
   font-size: 13px;

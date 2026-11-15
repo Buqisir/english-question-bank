@@ -135,7 +135,8 @@
 .sa-loading {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  /* 「分析中」后面跟所以点，字和点之间不另加间距（原 4px；2026-11-15 第二轮统一，见 shared-ui/waiting.css）。 */
+  gap: 0;
   margin-right: 6px;
   color: var(--sa-muted);
   font-size: 12px;
@@ -726,14 +727,11 @@ from { opacity: 0; }
 
 /* Loading */
 
-.sa-skeleton {
-  display: block;
-  height: 12px;
-  border-radius: 4px;
-  background: color-mix(in srgb, var(--sa-ink) 10%, transparent);
-}
-
-.sa-translation:has(.sa-skeleton) {
+/* 原来这里是自己画的灰条 .sa-skeleton（字色 10%、圆角 4、高 12、不动）：2026-11-15 第二轮换成共用 Skeleton
+ * （shared-ui/waiting.css），删了（grep 过没人用）。下面这条是灰块那两行的排法（一列、间距 8，照原来的
+ * .sa-translation:has(.sa-skeleton)），改挂在 SkeletonGate 的区域上。
+ * 写成 (0,2,0) 是为了盖过 .sa-translation 自己可能有的 display（本条覆盖它，因为两条灰块要排成一列带间距）。 */
+.sa-translation.sa-translation-skeleton {
   display: flex;
   flex-direction: column;
   gap: 8px;
