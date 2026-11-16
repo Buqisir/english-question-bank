@@ -5,14 +5,107 @@ import { appendFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSy
 import { syncBuiltinESMExports } from 'node:module'
 import path from 'node:path'
 import test from 'node:test'
-import { assertReferenceProductsReady, finish, rebindRejectedIssue, reconcilePush, requestedRedo, submit } from './fast-import.mjs'
+import { assertReferenceProductsReady, finish, listeningRedo, rebindRejectedIssue, reconcilePush, requestedRedo, submit } from './fast-import.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as version } from './ocr-source-references-version.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as producerVersion } from './ocr-proofread.mjs'
 import { PAPER_PAGINATION_PLAN_FILE_NAME } from '../../server/paper-import/paginationPlan.mjs'
 import { uploadReviewBundle } from './lib-review-upload.mjs'
 import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
+import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 
 const downstream = ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']
+
+for (const mode of ['preserves all other bundle bytes', 'rejects a newer revision before writing',
+  'rejects files inconsistent with the original manifest']) test(`hydrated listening-only redo ${mode}`, async t => {
+  const stale = mode.includes('newer revision'), mismatch = mode.includes('original manifest')
+  fakeReviewOrigin(t)
+  const { dir, ctx } = fixture(t)
+  ctx.state = { paperId: ctx.paperId, steps: {}, background: {}, data: {} }
+  rmSync(ctx.statePath)
+  const restore = { schemaVersion: 'review-restore-v1', paperId: ctx.paperId,
+    origin: 'http://127.0.0.1:18890', revisionId: 'rev-hydrated', bundleDigest: `sha256:${'1'.repeat(64)}` }
+  const bindingPath = path.resolve(import.meta.dirname, '../../.amp/import-review-origin')
+  const binding = fs.existsSync(bindingPath) ? readFileSync(bindingPath, 'utf8').trim() : ''
+  if (binding && !/^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?\/?$/u.test(binding)) restore.origin = new URL(binding).origin
+  json(path.join(ctx.paperDir, 'products/manifest-v1.json'), { inputDigest: 'print-input' })
+  json(path.join(ctx.paperDir, 'paragraph-summaries-v1.json'), { retained: 'summaries' })
+  json(path.join(ctx.paperDir, 'public-search-metadata-v1.json'), { retained: 'metadata' })
+  json(path.join(ctx.paperDir, 'listening-review-v1.json'), { method: 'agent_asr_comparison', old: true })
+  const manifest = { schemaVersion: 'web-import-review-bundle-v3', paperId: ctx.paperId,
+    files: Object.entries(snapshot(ctx.paperDir)).filter(([name]) => !name.startsWith('signals/'))
+      .map(([name, hex]) => ({ path: name, sha256: sha256(Buffer.from(hex, 'hex')),
+        byteLength: hex.length / 2, mediaType: 'application/octet-stream', role: 'evidence' })) }
+  restore.bundleDigest = reviewBundleDigest(manifest)
+  json(path.join(ctx.paperDir, 'signals/review-restore.json'), restore)
+  const status = { ...JSON.parse(fakeStatus(ctx, [{ id: stale ? 'rev-new' : restore.revisionId,
+    state: 'changes_requested', bundleDigest: restore.bundleDigest, manifest }])),
+    issues: [{ id: 'issue-listening', paperId: ctx.paperId, state: 'open' }] }
+  const before = snapshot(dir), bundle = snapshot(ctx.paperDir)
+  const calls = []
+  const options = {
+    readStatus: async () => JSON.stringify(status),
+    inputs: () => Object.fromEntries(Object.entries(snapshot(ctx.paperDir)).filter(([name]) =>
+      name !== 'listening-review-v1.json')),
+    inputDigest: () => 'print-input',
+    ensureAsr: async () => 'apple-evidence',
+    execute: async (_ctx, label) => {
+      calls.push(label)
+      if (label === 'freeze') assert.fail('print-neutral change must retain frozen PDF')
+      return label === 'listening-segment-v2' ? { attempt: 'fresh', review: 'fresh-review' } : {}
+    },
+    install: async () => {
+      assert(!fs.existsSync(path.join(ctx.paperDir, 'listening-review-v1.json')), 'old AI review must be removed')
+      json(path.join(ctx.paperDir, 'listening-review-v1.json'), { fresh: true })
+      return { groups: 10 }
+    },
+    qa: async () => ({ dir: 'actual-qa' }),
+  }
+  const run = () => listeningRedo(ctx, ['--feedback-fix', 'issue-listening'], options)
+  if (stale) {
+    await assert.rejects(run, /最新修订/)
+    assert.deepEqual(snapshot(dir), before)
+    assert.deepEqual(calls, [])
+  } else if (mismatch) {
+    const file = path.join(ctx.paperDir, 'public-search-metadata-v1.json')
+    const original = readFileSync(file)
+    json(file, { changed: true })
+    await assert.rejects(run, /文件哈希不匹配：public-search-metadata-v1.json/)
+    assert.deepEqual(calls, [])
+    writeFileSync(file, original)
+    json(path.join(ctx.paperDir, 'products/answerOnly.pdf'), { changed: true })
+    await assert.rejects(run, /文件哈希不匹配：products\/answerOnly.pdf/)
+  } else {
+    await run()
+    delete bundle['listening-review-v1.json']
+    const after = snapshot(ctx.paperDir)
+    delete after['listening-review-v1.json']
+    assert.deepEqual(after, bundle)
+    assert.equal(ctx.state.steps['listening-redo-products'].result.refrozen, false)
+    assert(!ctx.state.steps['source-references'], 'must not invent authoring history')
+    assert(!ctx.state.steps.freeze, 'must not invent a freeze')
+    await run()
+    assert.deepEqual(calls, ['prepare-listening-review', 'listening-segment-v2'])
+  }
+})
+
+test('hydrated listening-only redo submit rejects invalid or unordered step times', async t => {
+  const { dir, ctx } = fixture(t)
+  const names = ['listening-redo-request', 'listening-redo-segment', 'listening-redo-install',
+    'listening-redo-products', 'pdf-qa']
+  ctx.state.data.listeningRedo = {}
+  const before = snapshot(dir)
+  for (const name of names) for (const invalid of [true, 'not-a-date', '2025-01-01T00:00:00Z']) {
+    for (const step of names) ctx.state.steps[step] = completed({})
+    ctx.state.steps[name].finishedAt = invalid
+    await assert.rejects(() => submit(ctx, []), error => {
+      assert.equal(error.code, 'SOURCE_REFERENCES_QA_REQUIRED')
+      assert(error.message.includes(name))
+      return true
+    })
+    assert.deepEqual(snapshot(dir), before)
+    assert(!ctx.state.steps.push)
+  }
+})
 const oldTime = '2026-01-01T00:00:00.000Z'
 
 function fakeReviewOrigin(t) {
