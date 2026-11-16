@@ -30,8 +30,9 @@
    "gap": 0.4
   },
   "vertical": {
-   "inkWidth": 0.9,
-   "gap": 0.22
+   "inkWidth": 0.8,
+   "gap": 0.25,
+   "note": "2026-11-16 从 0.9、0.22 改（BRAND.md 第 126 条）；只用 --svg-only 重出了两个竖排 SVG，lockups.png 还是 0.9 那版"
   }
  },
  "mark32Rows": [
