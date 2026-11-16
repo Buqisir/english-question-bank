@@ -97,6 +97,9 @@ uniquely supplies; otherwise keep it outside acceptance packs.
 
 - Tasks default to direct push and deployment; do not wait for another Ship.
   Keep one understandable, verifiable change per commit, completed within hours.
+  Every push ships with latest main, so keep unfinished features unreachable from
+  user entry points until done. While main is red keep developing locally; once
+  green, synchronize, rerun affected L1, then push.
   Develop on a local task branch based on latest `origin/main`; preserve unrelated
   work and never rewrite published history merely to consolidate commits.
 - At startup and before push, fetch origin, resolve current main SHA and inspect
