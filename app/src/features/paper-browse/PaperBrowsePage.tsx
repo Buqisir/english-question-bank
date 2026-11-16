@@ -149,6 +149,7 @@ import {
 import {
   projectAssetBlocksToCanonicalConsumption,
 } from './paperBrowseCanonicalAssetProjection.ts'
+import { resolveScreenPaperAsset } from './paperBrowseSourceCapture.ts'
 import {
   buildClozeAnalysisSurfaceModel,
   type ClozeAnalysisSurfaceModel,
@@ -1136,7 +1137,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         if (!assetRes.ok) {
           throw new Error(`没找到这份卷面（${paperId}），可能已被移除。回到找题页重新打开吧。`)
         }
-        const sourceAsset = (await assetRes.json()) as PaperAssetV1
+        const sourceAsset = await resolveScreenPaperAsset(await assetRes.json(), resolvedBase, fetch)
         const loadedAsset = projectAssetBlocksToCanonicalConsumption(
           sourceAsset,
           canonicalConsumption,
@@ -1479,7 +1480,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         setLoading(false)
       } catch (e) {
         if (cancelled) return
-        setError(e instanceof Error ? e.message : String(e))
+        // 出错行不登代码异常（UI 体检 2026-11-16 第 2 条）：有意拒绝的原因（卷面和消费计划对不上等）照登原话，
+        // 校验脚本靠它；代码自己摔的（TypeError 之类，如 Cannot read properties of undefined）不给老师看，原文留在控制台。
+        const crashed = e instanceof TypeError || e instanceof ReferenceError || e instanceof RangeError || e instanceof SyntaxError
+        if (crashed) console.error('PaperBrowse load failed:', e)
+        setError(crashed ? '卷面文件没读出来，可能是这份卷的数据格式变了。' : e instanceof Error ? e.message : String(e))
         setLoading(false)
       }
     }
