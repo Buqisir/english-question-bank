@@ -5,7 +5,7 @@
         <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
           <div style={{ backgroundImage: 'url(../../logo/mint/mark.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '20px', width: '31px' }} />
           <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
-            视觉规范手册 · 草案 0.8
+            视觉规范手册 · 草案 0.9
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
@@ -169,18 +169,15 @@
               </div>
             </div>
             <div style={{ backgroundColor: '#F2FAF6', borderRadius: '12px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', flexShrink: 0, height: '340px', justifyContent: 'space-between', padding: '28px' }}>
-              <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '10px' }}>
-                <div style={{ backgroundImage: 'url(../../logo/mint/mark.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '20px', width: '31px' }} />
-                <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Noto Serif SC", system-ui, sans-serif', fontSize: '15px', lineHeight: '20px' }}>
-                  英语题库工作台
-                </div>
+              <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex' }}>
+                <div style={{ backgroundImage: 'url(../../wordmark-2026-11-16/svg/lockup-h-ink.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '20px', width: '68px' }} />
               </div>
               <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Noto Serif SC", system-ui, sans-serif', fontSize: '28px', fontWeight: 700, lineHeight: '140%', whiteSpace: 'pre-wrap' }}>
-                  替老师在题海里摸到对的题，<br />再把好题收好。
+                <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Noto Serif SC", system-ui, sans-serif', fontSize: '36px', fontWeight: 700, lineHeight: '140%', whiteSpace: 'pre-wrap' }}>
+                  题海三千，只取一瓢
                 </div>
                 <div style={{ boxSizing: 'border-box', color: '#2C6E56', fontFamily: '"Noto Serif SC", system-ui, sans-serif', fontSize: '18px', lineHeight: '150%' }}>
-                  AI 帮老师找，老师来定。
+                  AI 先做好一版，老师来定。
                 </div>
               </div>
             </div>
@@ -190,7 +187,7 @@
                   横版 1200×630
                 </div>
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                  标题 48 · 副句 22 · 名字 20
+                  标题 64 · 副句 22 · 组合高 30
                 </div>
               </div>
               <div style={{ boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
@@ -198,11 +195,11 @@
                   竖版 1080×1440
                 </div>
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                  标题 76 · 副句 32 · 名字 26
+                  标题 96 · 副句 32 · 组合高 40
                 </div>
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                标题 Bold，副句和名字 Regular，英文和数字用它自带的拉丁字形。名字和两句话都是占位，名字定了一起换。
+                标题 Bold，副句 Regular，英文和数字用它自带的拉丁字形。名字是字标横排组合，标题是口号，副句是信念（第 122 条）。
               </div>
             </div>
           </div>
@@ -256,7 +253,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §3.3 · DESIGN.md §3 · 第 17、18、63、92、121 条 · 样张里 EQB Termes 用 Times New Roman 代显，思源宋体用同一套字形的 Noto Serif SC 代显
+          出处：BRAND.md §3.3 · DESIGN.md §3 · 第 17、18、63、92、121、122 条 · 样张里 EQB Termes 用 Times New Roman 代显，思源宋体用同一套字形的 Noto Serif SC 代显
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           08
