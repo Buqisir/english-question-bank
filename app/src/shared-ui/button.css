@@ -59,28 +59,26 @@
 
 /* 胶囊大号（2026-11-15 加，Owner 当天定，DESIGN.md §5 Waiting 末条）：照登录键原来手写的样子
  * （auth/LoginPage.css 原 .login-submit，换前实量见 design/components-2026-11-13/migrate-waiting-3/README.md）。
- * 52 和 15 全站 token 里没有，写成本条的具名变量，出处都是原 .login-submit；缺口记在 docs/design-gaps.md。
+ * 2026-11-16 Owner 选登录键方案 A：胶囊形留着（品牌例外），字号从 15 归到阶梯上的 md 16，影子归到 --elev-3（下一条）。
+ * 高 52 全站 token 里没有，写成本条的具名变量，出处是原 .login-submit；缺口记在 docs/design-gaps.md。
  * 覆盖：本条 (0,2,0) 盖过 .eqb-button (0,1,0) 的高 32、圆角 8（control）、字号 13、内衬 space-3，
  * 因为这一档就是要胶囊和大字（Owner 点名的例外，tokens.css「胶囊只给标签类」之外的唯一一处）。 */
 .eqb-button[data-size='pill'] {
   /* 52px：原 .login-submit 的 height，和登录页两个输入框（.login-field input）同高。 */
   --eqb-button-pill-height: 52px;
-  /* 15px：原 .login-submit 的 font-size，不在字号阶梯上（control 13 / sm 14 / md 16），照搬保持登录键样子不变。 */
-  --eqb-button-pill-font-size: 15px;
   height: var(--eqb-button-pill-height);
   min-width: var(--eqb-button-pill-height);
   padding: 0 var(--eqb-space-5);
   border-radius: var(--eqb-radius-pill);
-  font-size: var(--eqb-button-pill-font-size);
+  font-size: var(--eqb-font-size-md);
 }
 
-/* 胶囊大号配填充（solid / primary）：带登录键原来那层浮起的影子，字重回到 500。
- * 影子是原 .login-submit 的 box-shadow，比 --elev-3 往下沉得多、也更浓，四档高度（DESIGN §4）里没有，写成具名变量。
+/* 胶囊大号配填充（solid / primary）：浮起一档，用全站最高一档 --elev-3（2026-11-16 Owner 选方案 A，
+ * 原来是 .login-submit 手写的 0 8px 24px / 0.18，比四档都沉），字重回到 500。
  * 覆盖：本条 (0,3,0) 盖过 [data-tone='primary'] / [data-tone='solid'] (0,2,0) 的字重 600，
- * 因为原登录键 15px 字是 500，换上 Button 后样子不变。 */
+ * 因为原登录键的字是 500，大字号上 600 显得重。 */
 .eqb-button[data-size='pill']:is([data-tone='primary'], [data-tone='solid']) {
-  --eqb-button-pill-shadow: 0 8px 24px rgb(27 43 51 / 0.18);
-  box-shadow: var(--eqb-button-pill-shadow);
+  box-shadow: var(--elev-3);
   font-weight: 500;
 }
 

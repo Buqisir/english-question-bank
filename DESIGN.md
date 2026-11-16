@@ -258,7 +258,7 @@ Deadpan 尚未实现；切换入口与记忆方式尚未定案。采用两套配
 
 ### Buttons
 - **Shape:** 短动作圆钮 50%；次级/导航 8px。
-- **胶囊大号 `size="pill"`（2026-11-15 起）:** 只给登录键，是「胶囊只给标签类」的品牌例外（§5 Single-Radius-Family）。高 52、字 15/500，配 `tone="solid"` 时带一层影子；没有 token 的三个数在 `button.css` 里是具名变量，等第二处用到再收（`docs/design-gaps.md`）。
+- **胶囊大号 `size="pill"`（2026-11-15 起）:** 只给登录键，是「胶囊只给标签类」的品牌例外（§5 Single-Radius-Family）。高 52、字 `--eqb-font-size-md`（16）/500，配 `tone="solid"` 时影子用 `--elev-3`（2026-11-16 Owner 选方案 A：形状留着，字号和影子归队）。高 52 没有 token，在 `button.css` 里是具名变量，等第二处用到再收（`docs/design-gaps.md`）。
 - **Primary（每页一处）:** 雾薄荷底（#72BFA4）+ 墨字，悬停 #63B497。见 §2 Accent。
 - **Search submit（回车）:** 不是圆钮，是一个回车符号：没输入时极弱墨，有字整个回车变纯薄荷（#11957A），悬停垫悬停底。
 - **Row add（行上「加入」）:** 透明底、石板墨描边和字，悬停垫悬停底。
