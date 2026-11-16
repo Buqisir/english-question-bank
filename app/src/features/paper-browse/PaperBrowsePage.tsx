@@ -2697,9 +2697,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                   startSeconds: segment.startSeconds, endSeconds: segment.endSeconds, label: String(segment.questionNumbers[0]),
                 }))} />
             )}
-            listeningPartPlayer={audio && wholePaper && (
+            listeningPartPlayer={audio && (
               <ListeningSegmentPlayer key={`${audio.sha256}:full`} src={audio.url} label="整卷听力"
-                startSeconds={wholePaper.startSeconds} endSeconds={wholePaper.endSeconds} onActivate={activateAudio} size="full"
+                startSeconds={wholePaper?.startSeconds ?? 0} endSeconds={wholePaper?.endSeconds ?? audio.durationSeconds} onActivate={activateAudio} size="full"
                 marks={audio.segments?.map((segment) => ({
                   startSeconds: segment.startSeconds,
                   endSeconds: segment.endSeconds,
