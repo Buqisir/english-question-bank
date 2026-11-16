@@ -15,7 +15,8 @@
  * - 入场：遮罩淡入，面板淡入并从 0.97 放大（侧边抽屉从右边滑进来）；退场快一档。时长、曲线用全站
  *   --motion-* / --ease-*（App.css :root）。系统设了「减少动态效果」时不做过渡（dialog.css）。
  *   退场要等动画播完才卸载：调用处让 <Dialog> 一直挂着、只切 open。退场这段时间里标题、正文、动作照
- *   最后一次打开时的样子画（调用处的数据这时可能已经清空了）。
+ *   最后一次打开时的样子画（调用处的数据这时可能已经清空了）。这段时间面板是 inert：点不到、按回车不提交、
+ *   Tab 不进去，免得快速连点把确认键（比如删除）再触发一次。
  *
  * 两种语气（tone）：
  * - dialog（默认）：读屏角色 dialog，名字是标题。
@@ -281,12 +282,15 @@ export function Dialog(props: DialogProps) {
       onPointerDown={onPointerDown}
       onClick={onClick}
     >
+      {/* 退场中（open 已经是 false、还没卸载）面板 inert：画还照旧，但键不再响应。 */}
       {onSubmit ? (
-        <form className="eqb-dialog-panel" onSubmit={onSubmit}>
+        <form className="eqb-dialog-panel" inert={!open} onSubmit={onSubmit}>
           {panelContent}
         </form>
       ) : (
-        <div className="eqb-dialog-panel">{panelContent}</div>
+        <div className="eqb-dialog-panel" inert={!open}>
+          {panelContent}
+        </div>
       )}
     </dialog>
   )
