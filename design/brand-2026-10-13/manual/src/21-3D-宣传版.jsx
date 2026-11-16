@@ -137,7 +137,7 @@
                 限制
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                画是放大来的，开屏放大 1.4 倍，近看偏软；印周边要用 3D 母版重新出高清。
+                画是放大来的，开屏放大 1.4 倍，近看偏软。2026-11-16 用 3D 母版出了周边用的高清版 otter-3d-print.png（2932×2081，透明底）和竖版 1080×1440（第 128 条，提案）。
               </div>
             </div>
           </div>
@@ -145,7 +145,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §4.8、§4.9、§5.2 · 第 63、66、71、122 条 · 文件 illustration/promo-3d/、evidence/3d-materials.jpg、promo-3d-sizes.jpg、3d-mint-recolor.png
+          出处：BRAND.md §4.8、§4.9、§5.2 · 第 63、66、71、122、128 条 · 文件 illustration/promo-3d/、evidence/3d-materials.jpg、promo-3d-sizes.jpg、3d-mint-recolor.png
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           21

@@ -11,6 +11,8 @@
   3D 海獭本身就是标志，再摆一个平面头像会变成上下两只海獭头。
   2026-11-16 起（第 61、121 条）：横版的字和 2D 宣传图一样换成横排组合、口号和已定的信念；
   开屏的名字换成字标第二轮的大档字标 wordmark-large-ink.svg（不带标志，理由同上），副句换成信念。
+  2026-11-16 第 128 条（提案）：加 #tall 竖版 1080×1440，画是 tall-art.jpg（1536×2048，按 cover 缩），
+  字和平面竖版宣传图 promo/promo.html 的 #tall 同一套：横排组合 40 高、口号 96px 两行、信念 32px，左上。
 -->
 <html lang="zh-CN">
 <head>
@@ -34,6 +36,11 @@
   #wide .line { font-size: 64px; line-height: 1.38; }
   #wide .sub { font-size: 22px; line-height: 1.5; }
 
+  #tall { width: 1080px; height: 1440px; }
+  #tall .copy { left: 96px; top: 120px; gap: 44px; }
+  #tall .line { font-size: 96px; line-height: 1.36; }
+  #tall .sub { font-size: 32px; line-height: 1.5; }
+
   #splash { width: 1080px; height: 1920px; }
   #splash .copy { left: 0; right: 0; top: 400px; align-items: center; gap: 40px; }
   #splash .name { display: block; }
@@ -46,6 +53,14 @@
     <div class="copy">
       <img class="brand" src="../../wordmark-2026-11-16/svg/lockup-h-ink.svg" height="30" alt="獭石">
       <div class="line">题海三千，只取一瓢</div>
+      <div class="sub">AI 先做好一版，老师来定。</div>
+    </div>
+  </div>
+  <div class="frame" id="tall">
+    <img class="art" src="tall-art.jpg" alt="">
+    <div class="copy">
+      <img class="brand" src="../../wordmark-2026-11-16/svg/lockup-h-ink.svg" height="40" alt="獭石">
+      <div class="line">题海三千，<br>只取一瓢</div>
       <div class="sub">AI 先做好一版，老师来定。</div>
     </div>
   </div>
