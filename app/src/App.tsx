@@ -1181,8 +1181,7 @@ function App() {
         adminActive={adminRouteActive}
         onToggleAdmin={toggleAdminRoute}
         hideBrand={false}
-        // 找题台（题组列表，下面渲染 ConciergeDesk 的那个条件）顶栏导航用大号。
-        navSize={!adminRouteActive && viewMode === 'list' ? 'lg' : 'sm'}
+        // 顶栏全站一个高度（Owner 2026-11-16 定）：找题台原来导航用大号 36、顶栏 64，现在和别的页一样用默认小号、顶栏 48。
       />
 
       {adminRouteActive && (
