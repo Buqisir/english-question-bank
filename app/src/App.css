@@ -110,6 +110,13 @@
   object-fit: contain;
 }
 
+.topbar-brand-wordmark {
+  display: block;
+  width: 31px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
 .topbar-brand-title {
   font-size: 14px;
   font-weight: 600;
@@ -3445,11 +3452,6 @@ p.concierge-empty {
 
 .app-shell:has(.concierge-desk) > .topbar {
   min-height: 64px;
-}
-
-.app-shell:has(.concierge-desk) .topbar-brand-title {
-  font-size: 15px;
-  color: var(--desk-ink);
 }
 
 /* 找题台顶栏的导航按钮加高到 36，现在由 AppTopbar 的 navSize="lg" 给共用按钮构件，这里不再写。 */

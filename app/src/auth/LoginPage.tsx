@@ -71,7 +71,14 @@ export function LoginPage() {
       <div className="login-content">
         <div className="login-brand">
           <img src="/brand/mark.svg" alt="" />
-          <span>獭石</span>
+          <img
+            className="login-brand-wordmark"
+            src="/brand/wordmark-15.png"
+            srcSet="/brand/wordmark-15.png 1x, /brand/wordmark.svg 2x"
+            width={31}
+            height={20}
+            alt="獭石"
+          />
         </div>
         <section className="login-card" aria-labelledby="login-title">
           <h1 id="login-title">题海三千，只取一瓢</h1>
