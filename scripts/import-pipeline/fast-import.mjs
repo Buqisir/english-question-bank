@@ -45,6 +45,7 @@ import { normalizeMaterializationNumbering } from './materialization-numbering.m
 import { retainOwnerListening } from './lib-finish-owner-listening.mjs'
 import { importFormatBinding } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { reviewManifest } from './review.mjs'
+import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -1329,9 +1330,13 @@ export function assertReferenceProductsReady(ctx) {
   if (!referencesCurrent(ctx)) throw Object.assign(new Error(
     'SOURCE_REFERENCES_FINISH_REQUIRED: 源参考版本缺失、不受支持或绑定不一致；先运行 finish 并重新目检 PDF，再送审。'),
   { code: 'SOURCE_REFERENCES_FINISH_REQUIRED' })
+  assertStepTimes(ctx, ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa'])
+}
+
+function assertStepTimes(ctx, names) {
   // A completion marker alone cannot prove that QA followed this reference generation.
   let previous = -Infinity
-  for (const name of ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']) {
+  for (const name of names) {
     const entry = ctx.state.steps[name]
     const started = Date.parse(entry?.startedAt), finished = Date.parse(entry?.finishedAt)
     if (!Number.isFinite(started) || !Number.isFinite(finished) || started < previous || finished < started) {
@@ -1677,12 +1682,17 @@ async function feedbackFix(ctx, args, readStatus, listeningOnly = false) {
     fail('feedback-fix：最新修订须为本地送审的 changes_requested，issue 须属于该卷且未解决')
   }
   if (listeningOnly && !restore) fail('listening-redo 需要 hydrate 恢复凭据')
+  if (listeningOnly && (!status.latest.manifest
+    || status.latest.manifest.paperId !== ctx.paperId
+    || reviewBundleDigest(status.latest.manifest) !== restore.bundleDigest)) {
+    fail('listening-redo：原 revision manifest 与 hydrate 恢复凭据不匹配')
+  }
   if (listeningOnly && ctx.state.data.feedbackFix) {
     const fix = ctx.state.data.feedbackFix
     if (fix.baseRevisionId !== baseRevisionId || fix.bundleDigest !== restore.bundleDigest
       || digestJson([...fix.issues].sort()) !== digestJson([...issues].sort())
       || ctx.state.steps.push) fail('listening-redo：既有反馈事务不匹配或已经开始送审')
-    return
+    return status.latest.manifest
   }
   // Keep the complete old state, including submission markers, before clearing the local binding.
   archive(ctx, ctx.statePath, 'feedback-fix-')
@@ -1695,6 +1705,18 @@ async function feedbackFix(ctx, args, readStatus, listeningOnly = false) {
     ...(restore ? { bundleDigest: restore.bundleDigest } : {}) }
   save(ctx)
   if (!listeningOnly) await requestedRedo(ctx, name)
+  return status.latest.manifest
+}
+
+function assertRetainedListeningFiles(ctx, manifest, productsOnly = false) {
+  for (const file of manifest.files) {
+    if (file.path === 'listening-review-v1.json' || file.path.startsWith('listening-review-evidence/')
+      || file.path.startsWith('products/') !== productsOnly) continue
+    const local = path.join(ctx.paperDir, file.path)
+    if (!existsSync(local) || sha256(readFileSync(local)) !== file.sha256) {
+      fail(`listening-redo：原 revision 文件哈希不匹配：${file.path}`)
+    }
+  }
 }
 
 function retainedListeningInputs(ctx) {
@@ -1714,8 +1736,15 @@ function listeningProductDigest(ctx) {
 }
 
 function assertListeningRedoReady(ctx) {
+  assertStepTimes(ctx, ['listening-redo-request', 'listening-redo-segment', 'listening-redo-install',
+    'listening-redo-products', 'pdf-qa'])
   const redo = ctx.state.data.listeningRedo
   const restore = readJson(path.join(ctx.paperDir, 'signals/review-restore.json'))
+  if (!redo?.manifest || reviewBundleDigest(redo.manifest) !== restore.bundleDigest) {
+    fail('listening-redo：原 revision manifest 与 hydrate 恢复凭据不匹配')
+  }
+  assertRetainedListeningFiles(ctx, redo.manifest)
+  if (!ctx.state.steps['listening-redo-products'].result?.refrozen) assertRetainedListeningFiles(ctx, redo.manifest, true)
   if (!redo || redo.baseRevisionId !== restore.revisionId || redo.bundleDigest !== restore.bundleDigest
     || digestJson(redo.retainedInputs) !== digestJson(retainedListeningInputs(ctx))
     || !ctx.state.steps['listening-redo-products']?.finishedAt
@@ -1757,11 +1786,13 @@ export async function listeningRedo(ctx, args, {
   install = () => installListening(ctx), qa = () => pdfContactSheets(ctx),
 } = {}) {
   if (args.includes('--redo-from')) fail('listening-redo 不接受 --redo-from')
-  await feedbackFix(ctx, args, readStatus, true)
+  const originalManifest = await feedbackFix(ctx, args, readStatus, true)
+  assertRetainedListeningFiles(ctx, originalManifest)
   const fix = ctx.state.data.feedbackFix
   if (!ctx.state.data.listeningRedo) {
     const retainedInputs = inputs(ctx)
-    ctx.state.data.listeningRedo = { baseRevisionId: fix.baseRevisionId, bundleDigest: fix.bundleDigest, retainedInputs }
+    ctx.state.data.listeningRedo = { baseRevisionId: fix.baseRevisionId, bundleDigest: fix.bundleDigest,
+      manifest: originalManifest, retainedInputs }
     for (const name of ['listening-redo-request', 'listening-redo-segment', 'listening-redo-install',
       'listening-redo-products', 'pdf-qa']) delete ctx.state.steps[name]
     save(ctx)
@@ -1802,6 +1833,7 @@ export async function listeningRedo(ctx, args, {
     if (readJson(manifest).inputDigest !== digest) fail('listening-redo：PDF 冻结输入不匹配')
     return { inputDigest: digest, refrozen }
   })
+  if (!ctx.state.steps['listening-redo-products'].result.refrozen) assertRetainedListeningFiles(ctx, originalManifest, true)
   await step(ctx, 'pdf-qa', qa)
   if (digestJson(inputs(ctx)) !== digestJson(ctx.state.data.listeningRedo.retainedInputs)) {
     fail('listening-redo：非听力输入已变化')
