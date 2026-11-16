@@ -1,0 +1,32 @@
+{
+  "owner-qa": [
+    {
+      "cls": "decision-mark",
+      "color": "rgb(30, 74, 58)",
+      "border": "rgb(30, 74, 58)"
+    },
+    {
+      "cls": "control-button pass",
+      "color": "rgb(30, 74, 58)",
+      "border": "rgb(44, 110, 86)"
+    }
+  ],
+  "repair-qa": [
+    {
+      "cls": "decision-mark",
+      "color": "rgb(30, 74, 58)",
+      "border": "rgb(30, 74, 58)"
+    },
+    {
+      "cls": "control-button select",
+      "color": "rgb(30, 74, 58)",
+      "border": "rgb(44, 110, 86)"
+    },
+    {
+      "cls": "B",
+      "color": "rgb(27, 43, 51)",
+      "border": "rgb(27, 43, 51)",
+      "after": "rgb(30, 74, 58)"
+    }
+  ]
+}

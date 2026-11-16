@@ -91,7 +91,7 @@ h1 {
   color: var(--eqb-color-text-muted);
 }
 
-.decision-mark[data-status="pass"] { background: var(--eqb-color-success-soft); color: var(--eqb-color-primary-text); }
+.decision-mark[data-status="pass"] { background: var(--eqb-color-success-soft); color: var(--eqb-color-text); }
 .decision-mark[data-status="problem"] { background: var(--eqb-color-danger-soft); color: var(--eqb-color-danger); }
 
 .word-content {
@@ -150,7 +150,7 @@ button:focus-visible, input:focus-visible { outline: 3px solid var(--eqb-color-p
   font-weight: 700;
 }
 
-.control-button.pass { color: var(--eqb-color-primary-text); border-color: var(--eqb-color-primary); background: var(--eqb-color-success-soft); }
+.control-button.pass { color: var(--eqb-color-text); border-color: var(--eqb-color-text); background: var(--eqb-color-success-soft); }
 .control-button.problem { color: var(--eqb-color-danger); border-color: var(--eqb-color-danger); background: var(--eqb-color-danger-soft); }
 
 kbd {
