@@ -267,6 +267,56 @@
   }
 }
 
+/* 手机宽的顶栏（UI 体检 2026-11-16 第 3 条）：原来 ≤780 整条竖排，品牌、导航、页面自己的控件各占一块，
+ * 导航「图标 + 字」一行放不下再折，390 宽叠到 3–6 行。现在 ≤640：
+ *   - 导航键和「退出」「返回找题」只留图标，字仍在键里（视觉隐藏），读屏照读、无障碍名字不变；
+ *   - 品牌和导航回到同一行，导航靠右；
+ *   - 页面自己塞进来的控件（草稿卷的 PDF 版本、A4 / A3 等）单独占下一行，不和导航挤。
+ * 键仍是 28 高、图标键 32 宽，够 24px 点按下限。 */
+@media (max-width: 640px) {
+  header.topbar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 12px;
+  }
+
+  header.topbar .topbar-brand {
+    flex: 1 1 auto;
+  }
+
+  header.topbar .topbar-actions {
+    flex: 0 1 auto;
+    align-self: auto;
+    justify-content: flex-end;
+  }
+
+  .topbar-actions > .eqb-button .eqb-button-label,
+  .topbar-user-group > .eqb-button .eqb-button-label,
+  .topbar-back .eqb-button-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  header.topbar .topbar-actions:has(> .topbar-actions-page) {
+    flex-basis: 100%;
+  }
+
+  .topbar-actions > .topbar-actions-page {
+    order: 2;
+    flex-basis: 100%;
+    justify-content: flex-start;
+  }
+
+  .topbar-actions > .topbar-actions-divider {
+    display: none;
+  }
+}
+
 .topbar h1,
 .library-header h2,
 .panel-heading h2 {
