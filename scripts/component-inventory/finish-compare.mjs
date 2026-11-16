@@ -21,7 +21,7 @@ const keysBefore = JSON.parse(readFileSync(path.join(BEFORE, 'keys.json'), 'utf8
 const keysAfter = JSON.parse(readFileSync(path.join(AFTER, 'keys.json'), 'utf8'))
 const nativeText = (at) => keysBefore.nativeDialogs.filter((d) => d.at === at).map((d) => `浏览器原生 ${d.type}（截不到图）：${d.message}`)[0] || null
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const page = await browser.newPage()
 await page.setContent('<html><body></body></html>')
 

@@ -58,7 +58,7 @@ h1{font-size:22px;margin:0 0 4px}p.sub{margin:0 0 18px;color:#6B6862}
 .bad{color:#9A4325}.ok{color:#2F6E58}.dr{color:#9A4325}.nocrop{color:#B0ACA4;font-size:12px}
 .summary{display:flex;gap:18px;margin:0 0 18px;flex-wrap:wrap}.summary div{background:#fff;border:1px solid #E2E0DA;border-radius:8px;padding:8px 12px}.summary b{font-size:18px;display:block}`
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const page = await browser.newPage({ viewport: { width: 1576, height: 900 }, deviceScaleFactor: 1 })
 for (const [kind, label] of KINDS) {
   const vs = A.variants.filter((v) => v.kind === kind && !v.seed)

@@ -376,7 +376,7 @@ assert(
 )
 assert(
   'App.tsx imports PaperBrowsePage from features/paper-browse',
-  /import\s*\{\s*PaperBrowsePage\s*\}\s*from\s*['"]\.\/features\/paper-browse\/PaperBrowsePage['"]/.test(
+  /import\s*\{\s*PaperBrowsePage\s*(?:,\s*type\s+AddGroupsOutcome\s*)?\}\s*from\s*['"]\.\/features\/paper-browse\/PaperBrowsePage['"]/.test(
     appSrc,
   ),
   'missing PaperBrowsePage import',
@@ -558,11 +558,13 @@ assert(
   // site stays [card] (single group) and the new site is a user-picked
   // subset (`cards`, built from a Set of checkbox selections), never "every
   // group on the page".
-  'PaperBrowsePage calls onAddGroupsToBasket at exactly two call sites (per-card [card] + similar-rail user-picked subset), no whole-paper aggregate add',
-  (pageSrc.match(/onAddGroupsToBasket\(/g) || []).length === 2 &&
-    /onAddGroupsToBasket\(\[card\]\)/.test(pageSrc) &&
+  'PaperBrowsePage adds per card via DraftAddButton and calls onAddGroupsToBasket only for the similar-rail user-picked subset, no whole-paper aggregate add',
+  // 走查第四节第 6 条（Owner 2026-11-14）：每篇的加入换成共用加入键 <DraftAddButton target={card}>（单组、走
+  // DraftAddContext），所以 onAddGroupsToBasket 只剩相似栏勾选的那一处；仍然没有整卷一键全加。
+  (pageSrc.match(/onAddGroupsToBasket\(/g) || []).length === 1 &&
+    /<DraftAddButton target=\{card\}/.test(pageSrc) &&
     /onAddGroupsToBasket\(cards\)/.test(pageSrc),
-  'expected exactly two onAddGroupsToBasket call sites: [card] (per-card) and (cards) (similar-rail multi-select)',
+  'expected per-card <DraftAddButton target={card}> plus exactly one onAddGroupsToBasket(cards) call site (similar-rail multi-select)',
 )
 
 // ─── 9. Real paper-2026-i fixture structural check ───
@@ -1913,7 +1915,7 @@ assert(
   'similarQuestions.ts request shape or error-handling convention drifted from the E1 contract / draftPapers.ts pattern',
 )
 const handleSimilarAddToDraftBody =
-  pageSrc.match(/function handleSimilarAddToDraft\(\): void \{([\s\S]*?)\n  \}\n/)?.[1] || ''
+  pageSrc.match(/function handleSimilarAddToDraft\(\): (?:void|Promise<void>) \{([\s\S]*?)\n  \}\n/)?.[1] || ''
 assert(
   '59. handleSimilarAddToDraft reuses App.addGroupsToBasket (no new draft-add endpoint/path) and clears the selection Set after adding, without closing the result list (view stays \'similar\')',
   handleSimilarAddToDraftBody.length > 0 &&

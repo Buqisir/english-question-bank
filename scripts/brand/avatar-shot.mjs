@@ -18,7 +18,7 @@ const { chromium } = requireFromApp('playwright')
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
 const rig = await startRig({ quiet: true })
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const shots = {}
 try {
   for (const dpr of [1, 2]) {

@@ -38,7 +38,7 @@ async function axNodes(page) {
 
 const { chromium } = requireFromApp('playwright')
 await buildHarness()
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 let rig
 try {
   // ── 1. 小舞台 ──

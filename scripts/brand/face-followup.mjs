@@ -400,7 +400,7 @@ const rows = results.map((r) => `<div class="row"><div class="cap"><b>${r.cfg.la
 <div class="cell"><img src="${uri(r.svg)}" style="height:420px"><small>改之后</small></div><div class="cell"><img src="${uri(r.svg)}" style="height:120px"><small>改之后 · 小</small></div></div>`).join('\n')
 const compareHtml = `<style>${CSS}</style><h1>獭獭新脸跟到全身像和状态图 · 对比稿</h1><p>等 agent 负责人复核。每行左边是改之前，右边是改之后；大图约 420 像素高，小图约 120 像素高。只改了脸斑一条路径和两只眼睛（04 闭眼只改脸斑）。</p>${rows}`
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 try {
   const page = await browser.newPage({ viewport: { width: 1900, height: 900 }, deviceScaleFactor: 1 })
   await page.setContent(compareHtml)

@@ -41,7 +41,7 @@
 //   node scripts/brand/kelp-illustration.mjs round3       复现第三版
 //   node scripts/brand/kelp-illustration.mjs round4       复现第四版
 //   KELP5='{"leaves":[...]}' node scripts/brand/kelp-illustration.mjs preview /tmp/x.png
-// playwright 从 app/ 的依赖里取；浏览器路径用 INVENTORY_CHROMIUM，默认 /opt/pw-browsers/chromium。
+// playwright 从 app/ 的依赖里取；浏览器用 Playwright 的完整 Chromium（channel: 'chromium'）。
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import path from 'node:path'
@@ -105,7 +105,7 @@ for (const L of LEAF) {
   L.anchor = [stemCenterAt(cy), cy]
 }
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const page = await browser.newPage({ deviceScaleFactor: 2, viewport: { width: 1600, height: 1200 } })
 
 async function bboxOf(inner) {

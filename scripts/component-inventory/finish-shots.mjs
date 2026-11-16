@@ -154,7 +154,7 @@ async function patchDetailRoutes(context) {
 
 const rig = await startRig({ quiet: true })
 await seedVocabularyProgram()
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const WIDTHS = [[390, 844, '-390'], [1440, 900, '']]
 try {
   // ── 先种好：草稿卷三组、两个词组 ───────────────────────

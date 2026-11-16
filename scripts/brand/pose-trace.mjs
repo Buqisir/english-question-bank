@@ -128,7 +128,7 @@ const HALF_SHELL_OUT = (() => {
 const HEAD_CLIP_Y = 680 // 第二轮：母版头形在下巴下面这条线裁掉（同 F6）
 const SIT_SVG = read('otter-sit.svg')
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const uriPng = (file) => `data:image/png;base64,${readFileSync(file).toString('base64')}`
 const uriSvg = (s) => `data:image/svg+xml;base64,${Buffer.from(s).toString('base64')}`
 const f1 = (n) => Math.round(n * 10) / 10

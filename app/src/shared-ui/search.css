@@ -64,7 +64,7 @@
   font-size: var(--eqb-font-size-md);
 }
 
-/* 本条 (0,4,0) 覆盖上面 .eqb-search-input 的右内边距 48 (0,1,0)：有清除键时字不能钻到 ✕ 底下。 */
+/* 本条 (0,4,0) 覆盖上面 .eqb-search-input 的右内边距 48 (0,1,0)：有清除键时字不能钻到清除键底下。 */
 .eqb-search[data-tier='hero']:has(.eqb-search-clear) .eqb-search-input {
   padding-right: 84px;
 }
@@ -75,7 +75,7 @@
   font-size: var(--eqb-font-size-control);
 }
 
-/* 本条 (0,4,0) 覆盖上面 compact 的 40 (0,3,0)：有字时清除键出来，字不能钻到 ✕ 底下。
+/* 本条 (0,4,0) 覆盖上面 compact 的 40 (0,3,0)：有字时清除键出来，字不能钻到清除键底下。
  * 原来浏览页这里压字（旧规则顺序造成），2026-11-15 修掉，和 hero 一样让到 84。提案 · 单一来源。 */
 .eqb-search[data-tier='compact']:has(.eqb-search-clear) .eqb-search-input {
   padding-right: 84px;

@@ -15,7 +15,7 @@ const OUT_DIR = path.join(ROOT, 'design/components-2026-11-13/migrate-row-toast'
 const TMP = path.join(RAW, 'row-proposal'); mkdirSync(TMP, { recursive: true })
 const { chromium } = requireFromApp('playwright')
 const rig = await startRig({ quiet: true })
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const shots = []
 try {
   for (const [width, height, suffix] of [[1440, 900, ''], [390, 844, '-390']]) {
@@ -49,7 +49,7 @@ figure{margin:0;background:#fff;border-radius:12px;padding:12px}figcaption{font-
 <p>左边是现在（Row size="sm"，最小高 44，照原值）；右边是照 DESIGN.md §5 Rows 最小高 48。浏览页第一套卷展开。</p>
 ${shots.map((s) => `<div class="pair"><figure><figcaption>${s.width} 宽 · 现在 44（实测行高 ${s.h44}）</figcaption><img src="${pathToFileURL(s.a).href}"></figure><figure><figcaption>${s.width} 宽 · 提案 48（实测行高 ${s.h48}）</figcaption><img src="${pathToFileURL(s.b).href}"></figure></div>`).join('')}`
 const htmlFile = path.join(TMP, 'proposal.html'); writeFileSync(htmlFile, html)
-const b2 = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const b2 = await chromium.launch({ channel: 'chromium' })
 const sp = await b2.newPage({ viewport: { width: 1600, height: 900 }, deviceScaleFactor: 1 })
 await sp.goto(pathToFileURL(htmlFile).href); await sp.waitForLoadState('load')
 await sp.screenshot({ path: path.join(OUT_DIR, 'proposal-group-row-48.png'), fullPage: true })

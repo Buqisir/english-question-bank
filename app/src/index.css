@@ -151,14 +151,14 @@ a {
 }
 
 .public-vocabulary-boot-skeleton > * {
-  animation: public-vocabulary-boot-reveal 1ms linear var(--wait-show-delay) backwards;
+  animation: public-vocabulary-boot-reveal 1ms linear var(--wait-show-delay) backwards; /* 1ms 只是让延迟生效的技术步长，不演任何动效，token-exempt */
 }
 
 /* 覆盖：vocabularyDictationPage.css 在「减少动态效果」下用 .vocabulary-dictation-page * { animation: none !important }
  * 停掉所有动画，会连这条门槛也停掉（灰块一挂上就出）。门槛不是动效，本条 (0,2,0) + !important 盖过它 (0,1,0)。 */
 @media (prefers-reduced-motion: reduce) {
   .vocabulary-dictation-page .public-vocabulary-boot-skeleton > * {
-    animation: public-vocabulary-boot-reveal 1ms linear var(--wait-show-delay) backwards !important;
+    animation: public-vocabulary-boot-reveal 1ms linear var(--wait-show-delay) backwards !important; /* 同上，token-exempt */
   }
 }
 

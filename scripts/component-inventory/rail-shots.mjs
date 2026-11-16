@@ -110,7 +110,7 @@ async function insertGhosts(page) {
 }
 
 const rig = await startRig({ quiet: !process.env.RAIL_VERBOSE })
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 try {
   // ── 1440：拍左栏、量、走键盘、删后焦点 ─────────────────────
   {

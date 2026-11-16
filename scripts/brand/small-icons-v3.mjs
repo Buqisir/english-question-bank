@@ -11,7 +11,7 @@
 //
 // 用法：node scripts/brand/small-icons-v3.mjs            改写上面七张 SVG 和同名 PNG，出对照图和 measure.json
 //       node scripts/brand/small-icons-v3.mjs --dry-run  不写品牌文件，只出对照图（新图用内存里的结果）
-// 浏览器：INVENTORY_CHROMIUM 指定 chromium，默认 /opt/pw-browsers/chromium。playwright 从 app/ 的依赖里取。
+// 浏览器用 Playwright 的完整 Chromium（channel: 'chromium'）。playwright 从 app/ 的依赖里取。
 // 输出：design/brand-2026-10-13/image-review-2026-11-14/small-icons-v3/compare.png、measure.json
 import { execFileSync } from 'node:child_process'
 import { mkdirSync, writeFileSync } from 'node:fs'
@@ -140,7 +140,7 @@ function measure(g, face, muz) {
 }
 
 // ---- 跑 ----
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const lab = await (await browser.newContext({ deviceScaleFactor: 1 })).newPage()
 await lab.setContent('<!doctype html><body></body>')
 // SVG 在 chromium 里按原尺寸画到 canvas 上，读回格子并出 PNG

@@ -11,7 +11,7 @@ if (!OUT) { console.error('用法：search-longtext.mjs <输出目录>'); proces
 mkdirSync(OUT, { recursive: true })
 const { chromium } = requireFromApp('playwright')
 const rig = await startRig({ quiet: true })
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 try {
   const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 2, locale: 'zh-CN', reducedMotion: 'reduce' })
   const page = await context.newPage()

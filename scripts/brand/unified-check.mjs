@@ -176,7 +176,7 @@ const summary = (label, m) => {
   return `${label}：色 ${m.used.join('、')}；认不出的像素 ${m.unknown}；${sec || '无次色'}；窄于 2px：${narrow}，剪影 ${fmtPct(m.silNarrow)}`
 }
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 try {
   const page = await browser.newPage({ viewport: { width: 1600, height: 1000 }, deviceScaleFactor: 1 })
   await page.setContent('<body></body>')

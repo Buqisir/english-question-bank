@@ -181,7 +181,7 @@ async function paperRoutes(context) {
 }
 
 const rig = await startRig({ quiet: !process.env.WAITING_VERBOSE })
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 
 async function session({ width = 1440, height = 900, scale = 1, suffix = '', auth = true } = {}) {
   const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: scale, locale: 'zh-CN' })

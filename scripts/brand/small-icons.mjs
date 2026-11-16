@@ -171,7 +171,7 @@ function measure(g, W, H, mono) {
 }
 
 // ---------------------------------------------------------------- 浏览器：编 PNG、解 PNG、拍对比图
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const labCtx = await browser.newContext({ viewport: { width: 800, height: 600 }, deviceScaleFactor: 1 })
 const lab = await labCtx.newPage()
 await lab.setContent('<!doctype html><body></body>')

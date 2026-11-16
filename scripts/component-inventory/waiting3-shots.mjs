@@ -213,7 +213,7 @@ async function openDictionary(page, base) {
 }
 
 const rig = await startRig({ quiet: !process.env.WAITING_VERBOSE })
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 try {
   const width = 1440, height = 900
   const context = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 2, locale: 'zh-CN' })

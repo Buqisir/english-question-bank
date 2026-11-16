@@ -21,7 +21,7 @@ const SHEETS = [
 ]
 
 const { chromium } = requireFromApp('playwright')
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 try {
   const page = await browser.newPage({ viewport: { width: 1600, height: 900 }, deviceScaleFactor: 1 })
   for (const [file, title, note, names, perRow, stack = false] of SHEETS) {

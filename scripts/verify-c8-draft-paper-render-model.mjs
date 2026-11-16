@@ -335,10 +335,10 @@ assert('workbench exposes PDF download', workbench.includes('下载 PDF'))
 assert('workbench prints through PDF only', !workbench.includes('浏览器打印') && !workbench.includes('browserPrint') && !workbench.includes('printWindow'))
 assert('workbench selects the four products including source answerOnly', workbench.includes('PAPER_PDF_EDITIONS.map') && workbench.includes("edition === 'answerOnly'") && workbench.includes('纯答案版'))
 assert('workbench has no explanation export label', !workbench.includes('解析版'))
-// C8 (trust-cracks) — undo toast 措辞: "题组已删除" → "题组已移出" (the remove
+// C8 (trust-cracks) — undo toast 措辞（构件厂 2026-11-15 起由 shared-ui Toast 的 message 显示）: "题组已删除" → "题组已移出" (the remove
 // action button is itself called 移除; the group stays in the question bank,
 // undo only reverts this draft's removal, so "删除" over-claimed destruction).
-assert('undo toast reads 题组已移出 (not 题组已删除)', workbench.includes('<span>题组已移出</span>') && !workbench.includes('题组已删除'))
+assert('undo toast reads 题组已移出 (not 题组已删除)', (workbench.includes('<span>题组已移出</span>') || workbench.includes("message={removedItem ? '题组已移出' : null}")) && !workbench.includes('题组已删除'))
 
 // The public runtime must classify correction before validating its source.
 const correctionRuntime = createCanonicalConsumerRuntime({ rootDir, db: null })

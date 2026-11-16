@@ -80,23 +80,24 @@ type RemovedDraftItem = {
   pageBreakBefore: boolean
 }
 
-// 提示行（shared-ui/Notice）用的出错：自己的话（哪里没成功、东西还在不在）加服务器原话，
-// 不另写兜底的话（No-Literal-Fallback）。describeError 照旧把错打到 console。
+// 提示行（shared-ui/Notice）用的出错：自己的话（哪里没成功、东西还在不在），不另写兜底的话（No-Literal-Fallback）。
+// 原始报错只给 console（describeError），不给老师看（verify-error-copy-mainline）；只有服务器专门写给老师的
+// 那几句（纯答案版不可用、某个 PDF 版本排不出来、题量不足）照登，见 serverCopy。
 type Failure = { lead: string; detail: string; retry?: () => void }
 
-function errorText(error: unknown): string {
-  return error instanceof Error ? error.message : String(error)
+// 服务器写给老师的话：只在已知是这类报错的地方用。不是 Error 就没有可登的话，留空。
+function serverCopy(error: unknown): string {
+  return error instanceof Error ? error.message : ''
 }
 
 function failure(task: string, error: unknown, keep?: string): Failure {
   describeError(task, error)
-  return { lead: keep ? `${task}没成功，${keep}` : `${task}没成功`, detail: errorText(error) }
+  return { lead: keep ? `${task}没成功，${keep}` : `${task}没成功`, detail: '' }
 }
 
 // 只放得下一个字符串的地方（保存状态的 title、读屏名字、⋯ 面板那一行）用。
 function failureLine(task: string, error: unknown): string {
-  const { lead, detail } = failure(task, error)
-  return `${lead}：${detail}`
+  return failure(task, error).lead
 }
 
 // 走查卡点 4（Owner 2026-11-14 第四节第 4 条）：「PDF 版本」菜单里用不了的版本写一行原因。
@@ -659,7 +660,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           setPaginationError(error instanceof Error && error.message.includes('题量不足 8 页')
             ? { lead: '题量不足 8 页，加题后可用', detail: '' }
             : edition === 'answerOnly'
-              ? { lead: '纯答案版不可用', detail: errorText(error) }
+              ? { lead: '纯答案版不可用', detail: serverCopy(error) }
               : { ...failure('排卷面', error), retry: () => setPaginationRetry((count) => count + 1) })
         })
     }, 400)
@@ -1616,9 +1617,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         && /^(题量不足 8 页|未在有界搜索内找到|大字完整版需要|无法生成指定页数的友好 PDF：|长卷版未找到|长卷版：|定页版需要|10 页友好版需要完整|12 页长卷版需要完整|试卷内容超出排版区域：)/.test(error.message)
       // 版本用不了、版式凑不出来，再点一次结果一样，不给「重试」。
       setExportError(edition === 'answerOnly'
-        ? { lead: '纯答案版不可用', detail: errorText(error) }
+        ? { lead: '纯答案版不可用', detail: serverCopy(error) }
         : fixedLayoutMessage
-          ? { lead: `${PAPER_PDF_PRODUCTS[edition]}出不来，草稿卷没动`, detail: errorText(error) }
+          ? { lead: `${PAPER_PDF_PRODUCTS[edition]}出不来，草稿卷没动`, detail: serverCopy(error) }
           : { ...failure(mode === 'save-as' ? '另存为 PDF' : '导出 PDF', error, '草稿卷没动'), retry: () => void exportPdf(mode) })
     }
   }
@@ -1677,7 +1678,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       setSpaceStatus('error')
       setSpaceMessage(edition === 'answerOnly'
-        ? `纯答案版没保存：${errorText(error)}`
+        ? `纯答案版没保存：${serverCopy(error)}`
         : failureLine('保存到个人空间', error))
     }
   }

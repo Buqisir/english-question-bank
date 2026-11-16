@@ -419,7 +419,9 @@ console.log('\nTest 3: App.tsx no longer manages basket / paperBlocksHook direct
   )
   assert(
     'delete handler removes the group from the draft after the API delete',
-    /async function handleDeleteQuestionGroup[\s\S]*?paperDraft\.externalRemoveByGroupId\(detail\.id\)/.test(app),
+    // 构件收尾（2026-11-15）起删除先走确认框：handleDeleteQuestionGroup 只开 Dialog，
+    // 真正删的是 confirmDeleteQuestionGroup（API 删成功后再从草稿卷移出）。
+    /async function confirmDeleteQuestionGroup[\s\S]*?await deleteQuestionGroupRequest\(detail\.id\)[\s\S]*?paperDraft\.externalRemoveByGroupId\(detail\.id\)/.test(app),
     '',
   )
 

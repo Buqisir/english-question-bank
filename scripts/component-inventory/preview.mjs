@@ -115,7 +115,7 @@ function measure(sel) {
 const shadowName = (s, tokens) => (s === 'none' ? 'none' : Object.entries(tokens).find(([, v]) => v === s)?.[0] || 'custom')
 
 // ---------- 跑 ----------
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const checks = { generated: 'node scripts/component-inventory/preview.mjs', contrast: [], target: [], names: [], focus: [], axe: [], behavior: [] }
 const ok = (name, pass, detail = '') => { checks.behavior.push({ name, pass: !!pass, detail }); return pass }
 try {

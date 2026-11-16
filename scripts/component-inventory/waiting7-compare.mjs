@@ -57,7 +57,7 @@ const SHEETS = [
   },
 ]
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const page = await browser.newPage()
 await page.setContent('<html><body></body></html>')
 

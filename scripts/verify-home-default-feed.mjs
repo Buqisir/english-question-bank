@@ -223,7 +223,9 @@ console.log('\nTest 9: feed rows reuse ConciergePaperRow with the same wiring as
   const feedBlockMatch = desk.match(/\{showFeed &&[\s\S]*$/)?.[0] || ''
   assert('feed block renders <ConciergePaperRow', /<ConciergePaperRow/.test(feedBlockMatch), '')
   assert('feed rows wire onTogglePaper={togglePaper}', /onTogglePaper=\{togglePaper\}/.test(feedBlockMatch), '')
-  assert('feed rows wire onAdd={onAdd}', /onAdd=\{onAdd\}/.test(feedBlockMatch), '')
+  // 走查第四节第 6 条（Owner 2026-11-14）：加入键换成共用 DraftAddButton，加入这件事从 DraftAddContext 拿，
+  // 行上不再接 onAdd；信息流行仍拿 basketIds（谁已在草稿卷里）。
+  assert('feed rows no longer thread onAdd; they still get basketIds', !/onAdd=/.test(feedBlockMatch) && /basketIds=\{basketIds\}/.test(feedBlockMatch), '')
   // similar-entrypoints (E3): 找类似/onSimilar/triggerSimilar retired — feed
   // rows no longer wire a similar-trigger callback at all (配相似 is a plain
   // deep-link owned by ConciergeGroupCard, see verify-paper-browse.mjs

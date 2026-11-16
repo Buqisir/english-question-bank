@@ -6,7 +6,7 @@
 // SA 的手臂结构：上臂贴着身体两侧往下，不另画肩膀，就是身体外沿那条身体色；肘弯在下腹高度，在身体外沿上略微鼓出一点；
 // 前臂从肘往外、略往上斜出去，爪停在身体外轮廓外面一点点，掌心朝上、上沿放平。左右大致对称，头不歪，脸不改。
 // 爪照 half-offer 捧东西的爪形：圆头、连指一块、不画趾。只用 #72BFA4、#DDF1E8、#F2FAF6、#191D18 四色，无描边、渐变、透明。
-// 用法：node scripts/brand/half-shrug-r4.mjs。可选环境变量：INVENTORY_CHROMIUM（chromium 路径）、NO_SHOT=1（只写 SVG）、
+// 用法：node scripts/brand/half-shrug-r4.mjs。可选环境变量：NO_SHOT=1（只写 SVG）、
 //   SC_PNG（SC 草图原图 PNG；没给或不存在就用仓库里的 sketches-batch6/SC-shrug.jpg）。
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
@@ -134,7 +134,7 @@ if (process.env.NO_SHOT) process.exit(0)
 
 const require = createRequire(path.join(ROOT, 'app/package.json'))
 const { chromium } = require('playwright')
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const uri = (sv) => `data:image/svg+xml;base64,${Buffer.from(sv).toString('base64')}`
 const SC_PNG = process.env.SC_PNG && existsSync(process.env.SC_PNG) ? process.env.SC_PNG : path.join(REV, 'sketches-batch6/SC-shrug.jpg')
 const scImg = `data:image/${SC_PNG.endsWith('.png') ? 'png' : 'jpeg'};base64,${readFileSync(SC_PNG).toString('base64')}`

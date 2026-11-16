@@ -200,7 +200,7 @@ const SEL = { topbar: 'header.topbar .topbar-brand-title', login: '.login-brand 
 
 let rig = null
 if (!base) { rig = await startRig({ quiet: true }); base = rig.base }
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const ctxOpts = (width, height, dpr) => ({ viewport: { width, height }, deviceScaleFactor: dpr, locale: 'zh-CN', reducedMotion: 'reduce' })
 const shots = {} // shots[variant][place][dpr]
 run.errors = []

@@ -8,7 +8,7 @@
 //   先起站：INVENTORY_PORT_OFFSET=56 INVENTORY_SEED=full node scripts/component-inventory/rig.mjs
 //   （端口偏移换了，STATES_BASE 跟着换：offset 60 就是 http://127.0.0.1:5359）
 //   再拍：  node scripts/brand/states-in-pages.mjs [overview|pages|all] [组号,...]   （默认 all；组号只对 pages 起作用，比如 3 只重拍「没找到」）
-// 环境变量：STATES_BASE（默认 http://127.0.0.1:5355）、INVENTORY_CHROMIUM（chromium 路径）。
+// 环境变量：STATES_BASE（默认 http://127.0.0.1:5355）。
 // 导出完成那一处会真的出一次 PDF，本地约一分钟多。
 import { mkdirSync, readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
@@ -49,7 +49,7 @@ const FILES = [
 const HALF_ABOVE = (670 - 12) / 715 // ≈ 0.920
 const LOGIN_ABOVE = (231 - 12) / 276 // ≈ 0.793
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 
 async function overview() {
   const page = await browser.newPage({ viewport: { width: 2320, height: 600 }, deviceScaleFactor: 2 })

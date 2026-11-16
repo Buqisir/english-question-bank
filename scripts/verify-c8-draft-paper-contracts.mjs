@@ -107,9 +107,13 @@ assert(
 assert('App opens draft for already-added group', /draftPaperButtonState === 'in_current_draft'[\s\S]{0,180}openDraftPaperWorkbench/.test(app))
 
 const card = read('app/src/concierge/ConciergeGroupCard.tsx')
-assert('Concierge card shows joined draft label', card.includes('已在草稿卷中'))
-assert('Concierge card shows add draft label', card.includes('加入草稿卷'))
-assert('Concierge card disables only disabled state', /disabled=\{draftState === 'disabled'\}/.test(card))
+// 走查第四节第 6 条（Owner 2026-11-14）：卡片上的加入键换成共用 DraftAddButton，三种样子的字和停用条件都在它里面；
+// 卡片只把 draftState 交给它。加入后的字由「已在草稿卷中」改成「已加入」（点了打开草稿卷）。
+const draftAdd = read('app/src/shared-ui/DraftAddButton.tsx')
+assert('Concierge card hands draftState to the shared add button', /target=\{\{ \.\.\.group, draftPaperButtonState: draftState \}\}/.test(card))
+assert('Concierge card shows joined draft label', draftAdd.includes('已加入') && /const added = state === 'in_current_draft'/.test(draftAdd))
+assert('Concierge card shows add draft label', draftAdd.includes('加入草稿卷'))
+assert('Concierge card disables only disabled state', /const unavailable = state === 'disabled' \|\| \(!added && target\.canAddToDraftPaper === false\)/.test(draftAdd))
 assert('Concierge card exposes deterministic group id for smoke', /data-group-id=\{group\.id\}/.test(card))
 
 const workbench = read('app/src/features/draft-paper/DraftPaperWorkbench.tsx')

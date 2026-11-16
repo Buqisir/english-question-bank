@@ -100,8 +100,14 @@ console.log('== 3. Undo-snapshot mutual exclusion (撤销快照互斥) ==')
     const match = workbench.match(new RegExp(`function ${name}\\([^)]*\\)[^{]*\\{[\\s\\S]*?\\n  \\}`))
     return match ? match[0] : ''
   }
-  for (const name of ['moveItem', 'handleDrop', 'togglePageBreak', 'deleteItem', 'undoDelete']) {
+  // 走查卡点 2：分页、删、撤销删 改成 `function x() { return withLayoutSave(() => xNow()) }`，
+  // 真正干活（清快照、发请求）的是 xNow；外层只多一层「正在重排」遮罩。两层一起查。
+  function bodyWithLayoutSaveDelegate(name) {
     const body = fnBody(name)
+    return body.includes(`withLayoutSave(() => ${name}Now(`) ? `${body}\n${fnBody(`${name}Now`)}` : body
+  }
+  for (const name of ['moveItem', 'handleDrop', 'togglePageBreak', 'deleteItem', 'undoDelete']) {
+    const body = bodyWithLayoutSaveDelegate(name)
     assert(`${name} found`, body.length > 0)
     assert(`${name} clears the reorder-undo snapshot`, /clearReorderUndo\(\)/.test(body), name)
     assert(`${name} ALSO clears the replace-undo snapshot (mutual exclusion)`, /clearReplaceUndo\(\)/.test(body), name)

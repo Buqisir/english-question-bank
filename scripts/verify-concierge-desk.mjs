@@ -290,8 +290,11 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
     /retrieval\s*:\s*ConciergeRetrievalView/.test(deskSource), '')
   assert('Desk props include actions: ConciergeRetrievalActions',
     /actions\s*:\s*ConciergeRetrievalActions/.test(deskSource), '')
-  assert('Desk props include basketIds + onAdd (Assembly Basket layer)',
-    /basketIds\s*:\s*Set<string>/.test(deskSource) && /onAdd\s*:\s*\(group\s*:\s*QuestionGroupCard\)\s*=>\s*void/.test(deskSource), '')
+  // 走查第四节第 6 条（Owner 2026-11-14）：加入键换成共用 DraftAddButton，加入 / 撤回 / 打开草稿卷从
+  // DraftAddContext 拿（App 提供），不再从 Desk 一层层往下传 onAdd。basketIds 仍是 Desk 的 prop。
+  const appProvidesDraftAdd = /<DraftAddContext\.Provider value=\{draftAddActions\}>/.test(appSource)
+  assert('Desk props include basketIds; add-to-draft comes from DraftAddContext (App provides it), not an onAdd prop',
+    /basketIds\s*:\s*Set<string>/.test(deskSource) && !/onAdd\s*:/.test(deskSource) && appProvidesDraftAdd, '')
   assert('Desk destructures intent/state/paperResults/expandedPaperKey from retrieval',
     /const\s*\{\s*intent,\s*state,\s*paperResults,\s*expandedPaperKey\s*\}\s*=\s*retrieval/.test(deskSource), '')
   // similar-entrypoints (E3): triggerSimilar retired along with the whole
@@ -347,8 +350,10 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
     !/onSimilar=/.test(deskSource), '')
   assert('Desk submit handler uses actions.submit',
     /void submit\(\)/.test(deskSource), '')
+  // 2026-11-15 起搜索框是共用 SearchField，它把 input 的 onChange 换成 onValueChange(event.target.value)。
+  const searchFieldSource = readFileSync(path.join(srcRoot, 'shared-ui', 'SearchField.tsx'), 'utf8')
   assert('Desk input onChange wires to actions.setIntent',
-    /onChange=\{\(event\)\s*=>\s*setIntent\(event\.target\.value\)\}/.test(deskSource), '')
+    /onValueChange=\{setIntent\}/.test(deskSource) && /onValueChange\(event\.target\.value\)/.test(searchFieldSource), '')
   // Cut ai-mode-filter-chips (C7): STARTER_CHIPS' "fill input + submit
   // immediately" click handler is retired along with the constant — the
   // filter row toggles local filter state instead of touching intent/submit
@@ -475,10 +480,20 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Reading labels use stored passage identity rather than result position',
     passageTextSource.includes('[group.section, group.passageTitle, group.title]')
       && passageTextSource.includes('`${match[1].toUpperCase()}篇`'), '')
-  assert('Group card has C8 draft labels', /已在草稿卷中/.test(groupCardSource) && /加入草稿卷/.test(groupCardSource) && /暂不可组卷/.test(groupCardSource), '')
-  assert('Group card draft + titles switch add/remove', /加入当前草稿卷/.test(groupCardSource) && /从草稿卷移出/.test(groupCardSource), '')
-  assert('Group card aria-pressed follows joined draft state', /aria-pressed=\{draftState === ['"]in_current_draft['"]\}/.test(groupCardSource), '')
-  assert('Group card disables only unavailable draft state', /disabled=\{draftState === ['"]disabled['"]\}/.test(groupCardSource), '')
+  // 走查第四节第 6 条（Owner 2026-11-14）：行上的加入键换成共用 DraftAddButton（紧凑档）。原来的「再点一下移出」
+  // 开关（aria-pressed、「从草稿卷移出」）按那一条换成：加入后是「已加入」链接（打开草稿卷），这一次加的旁边带「撤回」。
+  // 下面几条查的是同一份契约在新构件里的样子：卡片把 draftState 交给加入键，加入键按它出三种样子。
+  const draftAddSource = readFileSync(path.join(srcRoot, 'shared-ui', 'DraftAddButton.tsx'), 'utf8')
+  assert('Group card hands its draft state to the shared add button',
+    /<DraftAddButton[\s\S]{0,120}target=\{\{ \.\.\.group, draftPaperButtonState: draftState \}\}/.test(groupCardSource), '')
+  assert('Group card has C8 draft labels (via DraftAddButton)',
+    /已加入/.test(draftAddSource) && /加入草稿卷/.test(draftAddSource) && /暂不可组卷/.test(draftAddSource), '')
+  assert('Joined state opens the draft; only a just-added item offers 撤回',
+    /aria-label="已加入，打开草稿卷"/.test(draftAddSource) && /const undoable = added && receipt !== null/.test(draftAddSource) && />\s*撤回\s*</.test(draftAddSource), '')
+  assert('Joined state is derived from in_current_draft',
+    /const added = state === 'in_current_draft'/.test(draftAddSource), '')
+  assert('Group card disables only unavailable draft state (never the joined state)',
+    /const unavailable = state === 'disabled' \|\| \(!added && target\.canAddToDraftPaper === false\)/.test(draftAddSource), '')
   // similar-entrypoints (E3): 「找类似」→「配相似」换引擎——was a plain
   // <a href> deep-link. similar-passages-entry (E6) retired that deep-link:
   // 「配相似」→「相似篇章」, now a menu <button onClick> that toggles the
@@ -495,7 +510,8 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
     /view=detail&groupId=/.test(groupCardSource) && /['"]data-ra-entry['"]:\s*['"]group-card['"]/.test(groupCardSource), '')
   assert('Group card uses always-visible + / … trail (hover-reveal cluster gone)',
     /concierge-group-row-trail/.test(groupCardSource) &&
-    /concierge-action-add/.test(groupCardSource) &&
+    // 走查第四节第 6 条：「+」是共用 DraftAddButton，类名钩子 concierge-group-row-add（原 concierge-action-add）。
+    /<DraftAddButton\s+className="concierge-group-row-add"/.test(groupCardSource) &&
     !/concierge-group-row-actions/.test(groupCardSource), '')
   assert('Group card has no 预览 button', !/['"]预览['"]/.test(groupCardSource), '')
   assert('Group card has no per-question add UI', !/加入小题|加入单题|onAddQuestion/.test(groupCardSource), '')
@@ -804,7 +820,10 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
   // 草稿卷 visible copy in App is intact.
   const mentions = app.match(/组题篮/g) || []
   assert('App.tsx still has no user-visible 组题篮', mentions.length === 0, `still found ${mentions.length} occurrence(s)`)
-  assert('App.tsx 加入草稿卷 present', /加入草稿卷/.test(app), '')
+  // 走查第四节第 6 条：「加入草稿卷」这几个字跟着加入键搬进 shared-ui/DraftAddButton.tsx；App 只提供加入这件事。
+  const draftAddButtonSource = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'DraftAddButton.tsx'), 'utf8')
+  assert('加入草稿卷 present (shared add button, provided by App)',
+    /加入草稿卷/.test(draftAddButtonSource) && /<DraftAddContext\.Provider value=\{draftAddActions\}>/.test(app), '')
   // classic-retire-3: the literal aria-label="草稿卷" lived on the classic
   // <aside className="basket-panel"> that was deleted along with the rest
   // of the classic sidebar. The floating basket-chip button (AI mode's
@@ -817,7 +836,8 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
     !/chipTick|prevDraftCountRef|\.animate\(/.test(app) &&
       !/basket-count-in-(?:up|down)/.test(css), '')
   assert('basket chip renders the current count directly',
-    /草稿卷（\{currentDraftGroupCount\} 组）/.test(app), '')
+    // 数还没读到时只写「草稿卷」，不写一个猜的 0（走查第四节）；读到了照旧直接写数。
+    /草稿卷（\{currentDraftGroupCount\} 组）/.test(app) || /draftCountKnown \? `草稿卷（\$\{currentDraftGroupCount\} 组）` : '草稿卷'/.test(app), '')
 }
 
 // ------------------------------------------------------------------ Test 15
@@ -828,7 +848,8 @@ console.log('\nTest 15: Avoid sample-data race — ConciergeDesk waits for live 
   const app = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.tsx'), 'utf8')
   const css = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.css'), 'utf8')
 
-  assert('ConciergeDeskProps adds dataStatus prop', /dataStatus\?\s*:\s*['"]loading['"]\s*\|\s*['"]sqlite['"]\s*\|\s*['"]sample['"]/.test(desk), '')
+  // 走查第四节第 7 条（Owner 2026-11-14）：题库没连上不再悄悄换成样例题，'sample' 换成 'error'，直说并给「重试」。
+  assert('ConciergeDeskProps adds dataStatus prop', /dataStatus\?\s*:\s*['"]loading['"]\s*\|\s*['"]sqlite['"]\s*\|\s*['"]error['"]/.test(desk), '')
   assert('Desk computes dataLoading from dataStatus', /const dataLoading = dataStatus === ['"]loading['"]/.test(desk), '')
   assert('handleSubmit early-returns while dataLoading', /if \(dataLoading\) return/.test(desk), '')
   assert('submit button disabled when dataLoading', /submitDisabled\s*=\s*dataLoading\s*\|\|/.test(desk), '')
@@ -839,13 +860,21 @@ console.log('\nTest 15: Avoid sample-data race — ConciergeDesk waits for live 
     /<SearchField\s[\s\S]{0,900}input: 'concierge-intent-input'[\s\S]{0,900}disabled=\{dataLoading\}/.test(desk) &&
       /<input[\s\S]{0,400}disabled=\{disabled\}/.test(searchField), '')
   assert('placeholder switches to 正在连接本地题库 while loading', /正在连接本地题库/.test(desk), '')
-  assert('connecting notice rendered as concierge-data-loading', /<p className="concierge-data-loading"[\s\S]{0,200}role="status"/.test(desk), '')
+  // 2026-11-15 起这一行是共用 Notice（kind="waiting"）：非出错的 Notice 自带 role="status"，字是 --eqb-color-text-muted。
+  const noticeSource = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'Notice.tsx'), 'utf8')
+  const noticeCss = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'notice.css'), 'utf8')
+  const tokensCss = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'tokens.css'), 'utf8')
+  assert('connecting notice rendered as concierge-data-loading',
+    /<Notice kind="waiting" className="concierge-data-loading">/.test(desk) && /role=\{kind === 'error' \? 'alert' : 'status'\}/.test(noticeSource), '')
   assert('App passes dataStatus to ConciergeDesk', /<ConciergeDesk[\s\S]*?dataStatus=\{dataStatus\}/.test(app), '')
 
-  const noticeRule = css.match(/\.concierge-data-loading\s*\{[^}]*\}/)?.[0] || ''
-  assert('.concierge-data-loading rule exists', noticeRule.length > 0, '')
-  // texture 2026-11-13: warm #6A6A64 retired for the desk scale; --desk-muted #5A6C75 is still AA on white and desk.
-  assert('notice uses muted ink var(--desk-muted) (AA-compliant status text)', /color:\s*var\(--desk-muted\)/i.test(noticeRule), noticeRule)
+  const noticeRule = noticeCss.match(/\.eqb-notice\s*\{[^}]*\}/)?.[0] || ''
+  assert('.concierge-data-loading rule exists (shared .eqb-notice rule)', noticeRule.length > 0, '')
+  // texture 2026-11-13: --desk-muted #5A6C75 is AA on white and desk; shared-ui carries the same value as --eqb-color-text-muted.
+  const deskMuted = css.match(/--desk-muted:\s*(#[0-9a-f]{6})/i)?.[1]?.toLowerCase()
+  const eqbMuted = tokensCss.match(/--eqb-color-text-muted:\s*(#[0-9a-f]{6})/i)?.[1]?.toLowerCase()
+  assert('notice uses muted ink var(--desk-muted) (AA-compliant status text)',
+    /color:\s*var\(--eqb-color-text-muted\)/.test(noticeRule) && Boolean(deskMuted) && deskMuted === eqbMuted, noticeRule)
 }
 
 // ------------------------------------------------------------------ Test 16
@@ -1131,7 +1160,8 @@ console.log('\nTest 22: C7 搜索结果年份列去复读 — Desk computes hide
   )
   assert(
     'ConciergePaperRow aria-label always carries the year regardless of hideYear',
-    /aria-label=\{paper\.year \? `\$\{paper\.year\} 年 \$\{headline\}` : headline\}/.test(paperRowRuleSource),
+    (/aria-label=\{paper\.year \? `\$\{paper\.year\} 年 \$\{headline\}` : headline\}/.test(paperRowRuleSource)
+      || (/const rowLabel = paper\.year \? `\$\{paper\.year\} 年 \$\{headline\}` : headline/.test(paperRowRuleSource) && /aria-label=\{rowLabel\}/.test(paperRowRuleSource))),
     '',
   )
 }

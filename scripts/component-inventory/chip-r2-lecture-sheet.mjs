@@ -67,7 +67,7 @@ h1{font-size:16px;margin:0 0 12px;font-weight:600}.cap{font-size:12px;color:var(
 <p class="cap" style="margin-top:16px">窄栏 220px，长字</p><div class="panel narrow">${narrowLong}</div>`
 
 const { chromium } = requireFromApp('playwright')
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const page = await browser.newPage({ viewport: { width: 928, height: 600 }, deviceScaleFactor: 2 })
 await page.setContent(html); await page.waitForTimeout(400)
 await page.screenshot({ path: path.join(OUT, 'lecture-sheet.png'), fullPage: true })

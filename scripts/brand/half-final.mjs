@@ -2,7 +2,7 @@
 // 四张来源：找题中、递出结果、登录页、底稿，原样拷第四轮（half-round4/）。
 // 没找到 = 第四轮的空手底稿：路径、水面、viewBox 都不动，只把 <title> 换成「没找到」，注释说明来源。
 // 出 states.png：四张各 400 宽，下面 96、64 像素小样，排法同第四轮。截图 deviceScaleFactor 2。
-// 用法：node scripts/brand/half-final.mjs。可选环境变量：INVENTORY_CHROMIUM（chromium 路径）、HALF_OUT（输出目录）。
+// 用法：node scripts/brand/half-final.mjs。可选环境变量：HALF_OUT（输出目录）。
 import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import path from 'node:path'
@@ -23,7 +23,7 @@ const notFound = base
 writeFileSync(path.join(OUT, 'state-not-found.svg'), notFound)
 
 const { chromium } = createRequire(path.join(ROOT, 'app/package.json'))('playwright')
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const uri = (s) => `data:image/svg+xml;base64,${Buffer.from(s).toString('base64')}`
 const read = (f) => readFileSync(path.join(OUT, f), 'utf8')
 const CSS = 'body{margin:0;padding:28px;background:#F2F5F8;font:15px/1.5 system-ui,sans-serif;color:#1B2B33}h1{font-size:20px;margin:0 0 6px}p{margin:0 0 16px;color:#5A6C75}.g{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}figure{margin:0;background:#fff;border-radius:8px;padding:14px}figcaption{padding-top:10px}'

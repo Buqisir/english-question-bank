@@ -144,7 +144,7 @@ async function focusTimeline(page, timeout = 150000) {
 
 const rig = await startRig({ quiet: !process.env.FOLLOWUP_VERBOSE })
 await seedVocabularyProgram()
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const WIDTHS = [[390, 844, '-390'], [1440, 900, '']]
 try {
   // ── 先种好：两个词组、一份带分享的听写 ───────────────────

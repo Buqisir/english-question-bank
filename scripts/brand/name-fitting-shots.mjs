@@ -110,7 +110,7 @@ async function clipShot(page, locator, { padX = 0, padY = 0, fullWidth = false, 
 const { chromium } = requireFromApp('playwright')
 let rig = null
 if (!base) { rig = await startRig({ quiet: true }); base = rig.base }
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const ctxOpts = (width, height) => ({ viewport: { width, height }, deviceScaleFactor: 2, locale: 'zh-CN', reducedMotion: 'reduce' })
 const shots = Object.fromEntries(NAMES.map((n) => [n.file, {}]))
 const run = { date: new Date().toISOString(), site: base, names: NAMES.map((n) => n.label), fontsOnThisMachine: FONT_HOST, topbar: {}, login: {}, errors: [] }

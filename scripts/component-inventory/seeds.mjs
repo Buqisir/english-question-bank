@@ -13,7 +13,7 @@ import { collectInPage } from './collect.mjs'
 
 const { chromium } = requireFromApp('playwright')
 const rig = await startRig({ quiet: true })
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1, locale: 'zh-CN' })
   await login(page, rig.base)

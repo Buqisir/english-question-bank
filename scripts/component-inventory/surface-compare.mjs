@@ -25,7 +25,7 @@ const pngs = (dir) => readdirSync(dir).filter((f) => f.endsWith('.png')).sort()
 const dataUrl = (f) => 'data:image/png;base64,' + readFileSync(f).toString('base64')
 
 const { chromium } = requireFromApp('playwright')
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const page = await browser.newPage()
 await page.setContent('<!doctype html><canvas></canvas>')
 

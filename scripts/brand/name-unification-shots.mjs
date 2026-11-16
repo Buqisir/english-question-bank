@@ -96,7 +96,7 @@ const record = { label, date: new Date().toISOString(), site: rig.base, pages: {
 const imported = spawnSync('node', ['scripts/vocabulary/import-calibration-program.mjs', '--publish'],
   { cwd: ROOT, env: { ...process.env, QUESTION_BANK_DB: path.join(RIGDATA, 'qb.sqlite') }, encoding: 'utf8' })
 if (imported.status !== 0) record.missing.push(`导入校准课程失败：${(imported.stderr || '').slice(-300)}`)
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 let shares = null
 try {
   for (const [width, height] of WIDTHS) {

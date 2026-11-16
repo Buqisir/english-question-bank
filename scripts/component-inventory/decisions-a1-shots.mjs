@@ -119,7 +119,7 @@ const GROUP_MORE = '[aria-label="更多题组操作"][aria-haspopup]'
 
 const { chromium } = requireFromApp('playwright')
 const rig = await startRig({ quiet: true })
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const result = { intercepted: ['GET /api/question-groups：补 canonicalPaperId（露出「看整卷」）', 'GET /api/my-space：两份假文件（space-shots.mjs 同一份）'] }
 try {
   for (const [width, height, suffix] of [[1440, 900, ''], [390, 844, '-390']]) {

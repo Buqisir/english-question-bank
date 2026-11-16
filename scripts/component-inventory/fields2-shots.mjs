@@ -104,7 +104,7 @@ async function shotAround(page, file, locator, pad = 16) {
 
 const rig = await startRig({ quiet: !process.env.FIELDS2_VERBOSE })
 await seedVocabularyProgram()
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const WIDTHS = [[1440, 900, ''], [390, 844, '-390']]
 try {
   // 先种好：两个词组（听写工作区要有词组可选），一条能编辑的题组。

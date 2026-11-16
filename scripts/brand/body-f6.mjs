@@ -314,7 +314,7 @@ function measureSvg(v) {
   return { svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${vb.join(' ')}" width="${vb[2]}" height="${vb[3]}">${only.replace(/fill="#[0-9A-Fa-f]{6}"/g, 'fill="#000"')}</svg>`, vb, seat: g.seat }
 }
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const measures = {}
 try {
   const page = await browser.newPage({ viewport: { width: 2300, height: 900 }, deviceScaleFactor: 1 })

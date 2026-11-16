@@ -7,7 +7,7 @@
 // c：两手一摊，上臂贴身、肘在胸口下沿、前臂往外往上，爪停在胸口中段，左右对称。d：c 的收敛版，爪更低、更靠近身体。
 // e、f（第三轮）：照旧图 05，两只前爪往下往两边伸，平搭在水面条上，中间空着；f 两爪近一点、不出身体外框。
 // 出 compare.png：四格「现在：合爪」「e」「f」「空态：坐石」，每格大图 400 宽，下面 110、64 宽各一张，deviceScaleFactor 2。
-// 用法：node scripts/brand/half-shrug.mjs。可选环境变量：INVENTORY_CHROMIUM（chromium 路径）、HALF_OUT（输出目录）、NO_SHOT=1（只写 SVG）。
+// 用法：node scripts/brand/half-shrug.mjs。可选环境变量：HALF_OUT（输出目录）、NO_SHOT=1（只写 SVG）。
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import path from 'node:path'
@@ -163,7 +163,7 @@ for (const k of ['e', 'f']) writeFileSync(path.join(OUT, `shrug-${k}.svg`), buil
 if (process.env.NO_SHOT) process.exit(0)
 
 const { chromium } = createRequire(path.join(ROOT, 'app/package.json'))('playwright')
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const uri = (s) => `data:image/svg+xml;base64,${Buffer.from(s).toString('base64')}`
 const cur = readFileSync(path.join(BRAND, 'image-review-2026-11-14/half-final/state-not-found.svg'), 'utf8')
 const sit = readFileSync(path.join(BRAND, 'mascot/otter-sit.svg'), 'utf8')

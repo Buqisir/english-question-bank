@@ -622,7 +622,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           <div className="concierge-command-bar">
             {/* 搜索框构件（shared-ui/SearchField，构件厂 2026-11-15）：首页 hero、浏览页 compact，换前换后逐像素一样。
                 concierge-intent-* 类名留作钩子：宽度和摆法在 App.css，测试脚本也按它们认。
-                ✕：Owner 2026-11-14 决定 #14，清完把焦点放回输入框。不放的话 ✕ 跟着空字一起卸掉，焦点掉到 body，
+                清除键：Owner 2026-11-14 决定 #14，清完把焦点放回输入框。不放的话清除键跟着空字一起卸掉，焦点掉到 body，
                 键盘用户要从页首重新 Tab，鼠标用户也得再点一次输入框才能接着打字。 */}
             <SearchField
               tier={isBrowseScreen ? 'compact' : 'hero'}

@@ -266,9 +266,8 @@ if (!ONLY) for (const f of readdirSync(PNG_DIR)) if (f.endsWith('.png')) rmSync(
 if (KEEP_HTML) mkdirSync(KEEP_HTML, { recursive: true })
 if (DIFF_DIR) mkdirSync(DIFF_DIR, { recursive: true })
 
-// 和仓库里其他截图脚本一样：本机的 Chromium 在 /opt/pw-browsers/chromium；别处用 MANUAL_CHROMIUM 指定，都没有就用 Playwright 默认的
-const exe = process.env.MANUAL_CHROMIUM || (existsSync('/opt/pw-browsers/chromium') ? '/opt/pw-browsers/chromium' : undefined)
-const browser = await chromium.launch(exe ? { executablePath: exe } : {})
+// 和仓库里其他截图脚本一样用 Playwright 的完整 Chromium（verify-architecture-housekeeping 管这条）
+const browser = await chromium.launch({ channel: 'chromium' })
 const ctx = await browser.newContext({ viewport: { width: W, height: H }, deviceScaleFactor: 1 })
 const page = await ctx.newPage()
 const errors = []

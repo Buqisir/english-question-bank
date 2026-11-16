@@ -78,7 +78,7 @@ const rig = await startRig({ quiet: true })
 const imported = spawnSync('node', ['scripts/vocabulary/import-calibration-program.mjs', '--publish'],
   { cwd: ROOT, env: { ...process.env, QUESTION_BANK_DB: path.join(RAW, 'rigdata/qb.sqlite') }, encoding: 'utf8' })
 if (imported.status !== 0) { await rig.stop(); throw new Error('导入校准课程失败：' + imported.stderr.slice(-400)) }
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const result = {}
 try {
   for (const [width, height, suffix] of [[1440, 900, ''], [390, 844, '-390']]) {

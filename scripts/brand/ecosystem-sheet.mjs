@@ -57,7 +57,7 @@ const withViewBox = (svg, vb) => svg.replace(/viewBox="[^"]+"/, `viewBox="${vb}"
 const toMono = (svg) => svg.replace(/fill="#[0-9A-Fa-f]{6}"/g, `fill="${INK}"`)
 const css = 'body{margin:0;padding:28px;font:14px/1.5 system-ui,"Noto Sans CJK SC",sans-serif;color:#191D18;background:#fff}h1{font-size:20px;margin:0 0 4px}p.sub{margin:0 0 18px;color:#29424D}'
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 try {
   const page = await browser.newPage({ viewport: { width: 1800, height: 900 }, deviceScaleFactor: 1 })
 

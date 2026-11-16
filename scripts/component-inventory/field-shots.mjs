@@ -46,7 +46,7 @@ const focused = () => {
 
 const { chromium } = createRequire(path.join(ROOT, 'app/package.json'))('playwright')
 const rig = await startRig({ quiet: true })
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const result = {}
 try {
   for (const [width, height, suffix] of [[1440, 900, ''], [390, 844, '-390']]) {

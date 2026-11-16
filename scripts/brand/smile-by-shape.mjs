@@ -74,7 +74,7 @@ const cells = all
   .join('')
 const html = `<style>body{margin:0;padding:28px;background:#F1F5F7;font:15px/1.5 system-ui,sans-serif;color:#1B2B33}h1{font-size:20px;margin:0 0 6px}p{margin:0 0 16px;color:#5A6C75}.g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}figure{margin:0;background:#fff;border-radius:8px;padding:14px}.row{display:flex;align-items:flex-end;gap:16px}figcaption{padding-top:10px}</style><h1>不画嘴，只动腮帮下沿</h1><p>对比稿 · 提案。只有脸斑这一条轮廓线不同，眼睛、鼻子、胡须点、头型都和母版一样。每格三个大小：400、96、40 像素。</p><div class="g">${cells}</div>`
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 try {
   const page = await browser.newPage({ viewport: { width: 1800, height: 900 }, deviceScaleFactor: 1 })
   await page.setContent(html)

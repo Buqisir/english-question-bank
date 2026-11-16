@@ -54,7 +54,7 @@ h1{font-size:20px;margin:0 0 4px;font-weight:600}h2{font-size:15px;margin:28px 0
 
 const file = path.join(RAW, 'sheet-chip-new.html'); writeFileSync(file, html)
 const { chromium } = requireFromApp('playwright')
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const page = await browser.newPage({ viewport: { width: 1464, height: 900 }, deviceScaleFactor: 2 })
 await page.goto(pathToFileURL(file).href); await page.waitForLoadState('load')
 const cdp = await page.context().newCDPSession(page)

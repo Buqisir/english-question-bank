@@ -9,8 +9,8 @@
 // 每张图的记录里写明是怎么触发的。
 //
 // 用法：node scripts/ux-walkthrough/find-compose-export.mjs
-//   先装好清点脚本的依赖（npm ci --prefix scripts/component-inventory），Chromium 默认取 /opt/pw-browsers/chromium，
-//   别处的用 INVENTORY_CHROMIUM 指定。端口偏移固定 43（网页 5342，接口 9955），可以和别的清点脚本同时跑。
+//   先装好清点脚本的依赖（npm ci --prefix scripts/component-inventory），Chromium 用 Playwright 的完整版（channel: 'chromium'）。
+//   端口偏移固定 43（网页 5342，接口 9955），可以和别的清点脚本同时跑。
 // 输出：design/ux-2026-11-14/find-compose-export/shots/*.png 和 walkthrough.json
 // 只重走一种宽度：WALK_ONLY=390（或 1440）node scripts/ux-walkthrough/find-compose-export.mjs
 //   只删并重拍该宽度的路线截图（d.. 或 m..），不拍状态图，结果并进现有 walkthrough.json。
@@ -121,7 +121,7 @@ async function seedDraft(page, groups) {
 
 const { chromium } = requireFromApp('playwright')
 const rig = await startRig({ quiet: true })
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const JSON_PATH = path.join(DOC, 'walkthrough.json')
 const result = ONLY && existsSync(JSON_PATH) ? JSON.parse(readFileSync(JSON_PATH, 'utf8')) : { widths: {}, states: [] }
 Object.assign(result, { generatedAt: new Date().toISOString(), base: rig.base, query: QUERY })

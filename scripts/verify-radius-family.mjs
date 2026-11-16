@@ -9,7 +9,9 @@
  * (it had been allowed here by mistake); the 77 existing 6px literals were
  * migrated the same day by element height, except one print-only rule.
  * Directional shorthand is legal when every component is in-family; var()
- * indirection is legal (token wins by definition).
+ * indirection is legal (token wins by definition). `inherit` is legal for the
+ * same reason: it can only resolve to an ancestor's radius, which this gate
+ * already checks (shared-ui/row.css: the full-row hit target follows the row).
  *
  * Remaining off-family literals are grandfathered per file × value below and
  * act as a ratchet: counts may only go down.
@@ -54,7 +56,7 @@ function cssFiles(dir) {
 
 function isInFamily(value) {
   const v = value.trim()
-  if (v.includes('var(')) return true
+  if (v.includes('var(') || v === 'inherit') return true
   return v.split(/\s+/).every((c) => FAMILY.has(c))
 }
 

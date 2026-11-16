@@ -38,7 +38,7 @@ const STYLE = `<style>
   figcaption{font-size:12px;color:#5A6C75;padding-top:4px}.none{padding:24px;color:#94A4AC;border:1px dashed #C5D3DA;border-radius:4px}
 </style>`
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 async function render(html, out, width = 1600) {
   const page = await browser.newPage({ viewport: { width, height: 600 }, deviceScaleFactor: 1 })
   await page.setContent(`${STYLE}${html}`)

@@ -127,7 +127,7 @@ await buildHarness()
 mkdirSync(OUT_DIR, { recursive: true })
 rmSync(SHOTS, { recursive: true, force: true }); mkdirSync(SHOTS, { recursive: true })
 const { chromium } = requireFromApp('playwright')
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const keys = {}
 try {
   // ── 样张 ──

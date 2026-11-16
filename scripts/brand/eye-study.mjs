@@ -387,7 +387,7 @@ const gridSvg = (g, W, H, title) => `<svg xmlns="http://www.w3.org/2000/svg" vie
   g.map((c, i) => (c ? `<rect x="${i % W}" y="${(i / W) | 0}" width="1" height="1" fill="${c}"/>` : '')).join('') + '</svg>\n'
 
 // ---------------------------------------------------------------- 主流程
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const ctx1 = await browser.newContext({ viewport: { width: 1400, height: 1000 }, deviceScaleFactor: 1 })
 const lab = await ctx1.newPage()
 await lab.setContent('<!doctype html><html><body style="margin:0"></body></html>')

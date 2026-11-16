@@ -21,7 +21,7 @@ import { addDraftItems, login, settle, sleep } from './scenarios.mjs'
 const OUT = path.join(ROOT, 'design/components-2026-11-13/migrate-row-toast/row-keys-site.json')
 const { chromium } = requireFromApp('playwright')
 const rig = await startRig({ quiet: true })
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const results = []
 const check = (name, pass, value) => { results.push({ name, pass: Boolean(pass), value }); console.log(pass ? 'PASS' : 'FAIL', name, JSON.stringify(value).slice(0, 300)) }
 // 读焦点之前等 200ms：行的底色有 120ms 的过渡（--motion-fast），马上读会读到过渡中间的值。

@@ -93,7 +93,7 @@ async function runPass({ browser, base, width, height, withCrops, withStates, wi
 }
 
 const rig = await startRig({ quiet: true })
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 try {
   const wide = await runPass({ browser, base: rig.base, width: 1440, height: 900, withCrops: true, withStates: true, withAxe: true })
   // 窄屏要重新起一份干净数据，顺序依赖（先空后满）才成立

@@ -116,7 +116,7 @@ async function shotAround(page, file, locator, pad = 16) {
 
 const rig = await startRig({ quiet: !process.env.SEGMENT_VERBOSE })
 await seedVocabularyProgram()
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const WIDTHS = [[1440, 900, ''], [390, 844, '-390']]
 try {
   // 先种好：两个词组；一份带二维码的听写（扫码听写页、已选听写面板）；一个分享的词组（听音页）；一条做完的认词记录（结果页）。

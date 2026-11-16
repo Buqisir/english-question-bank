@@ -40,7 +40,7 @@ const VERSIONS = [
 ]
 for (const v of VERSIONS) { const get = v.git ? fromGit : rd; v.markUrl = svgUrl(get(v.mark)); v.headUrl = svgUrl(get(v.head)) }
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const DESK_FALLBACK = '#F1F5F7'
 async function sheet(html, file, width) {
   const c = await browser.newContext({ viewport: { width, height: 800 }, deviceScaleFactor: 1 })

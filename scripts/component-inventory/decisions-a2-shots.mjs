@@ -200,7 +200,7 @@ const REVIEW_ITEMS = `${REVIEW} :is(button, a, select)`
 
 const { chromium } = requireFromApp('playwright')
 const rig = await startRig({ quiet: true })
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const result = {
   intercepted: [
     'POST /api/similar-passages：三张卡（两组不在草稿卷里、一组已在草稿卷里）',

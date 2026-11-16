@@ -42,7 +42,7 @@ if (eyes.length !== 2) throw new Error(`round5 里应有两只墨色椭圆眼，
 const D = Math.hypot(eyes[1].cx - eyes[0].cx, eyes[1].cy - eyes[0].cy) // L1 眼距（脸部坐标）
 const EYE_D = (eyes[0].rx + eyes[0].ry + eyes[1].rx + eyes[1].ry) / 2 // L1 眼径平均
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 
 // ———————————————— 量旧 04 ————————————————
 function fitCircle(P) {

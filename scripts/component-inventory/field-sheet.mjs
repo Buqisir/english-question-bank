@@ -11,7 +11,7 @@ import { buildHarness, serveHarness } from './field-harness.mjs'
 const OUT_DIR = path.join(ROOT, 'design/components-2026-11-13/migrate-field')
 await buildHarness()
 const { chromium } = requireFromApp('playwright')
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 try {
   for (const [width, suffix] of [[1440, ''], [390, '-390']]) {
     const context = await browser.newContext({ viewport: { width, height: 900 }, deviceScaleFactor: 2, locale: 'zh-CN', reducedMotion: 'reduce' })

@@ -43,7 +43,7 @@
 //   输出 half-round5/：state-not-found.svg、states.png（另外三张直接读 half-round4/）、compare.png（第四轮 | 第五轮）。
 //
 // 用法：node scripts/brand/half-trace.mjs [--round 1|2|3|4|5]
-//   可选环境变量：INVENTORY_CHROMIUM（chromium 路径）、HALF_OUT（输出目录，默认 half-round1 或 half-round2）、
+//   可选环境变量：HALF_OUT（输出目录，默认 half-round1 或 half-round2）、
 //   HALF_SIGMA（平滑，默认 4）、HALF_EPS（抽稀，默认 0.45）、
 //   HALF_HOLD_K（物件公共系数，默认 0.6）、HALF_HOLD_ANCHOR（第一轮：top | grip，默认 top）、
 //   HALF_SPREAD（爪子外挪像素，第一轮默认 28，第二轮默认 0）、HALF_WATER_END（round | square，水带两端，默认 round）、
@@ -87,7 +87,7 @@ const MASTER_EYE = { cx: (336.45 + 688.25) / 2, cy: 371.25, gap: 688.25 - 336.45
 const HEAD_CLIP_Y = 680 // 母版头形在下巴下面这条线裁掉，不带母版的肩和围兜
 const MUZZLE_BOTTOM = 667 // 母版脸斑下沿
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const uriPng = (file) => `data:image/png;base64,${readFileSync(file).toString('base64')}`
 const uriSvg = (s) => `data:image/svg+xml;base64,${Buffer.from(s).toString('base64')}`
 

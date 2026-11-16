@@ -35,7 +35,7 @@ const DOTS = pick(/<g id="_L9S-0__ziti078">[\s\S]*?<\/g>/, '胡须点')
 const MASTER_EYE = { cx: (336.45 + 688.25) / 2, cy: 371.25, gap: 688.25 - 336.45 }
 const HEAD_CLIP_Y = 680 // 母版头形在下巴下面这条线裁掉，不带母版的肩
 
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const uriPng = (file) => `data:image/png;base64,${readFileSync(file).toString('base64')}`
 
 // —— 1. 取像素 ——

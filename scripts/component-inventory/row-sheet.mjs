@@ -224,7 +224,7 @@ async function force(cdp, root, selector, pseudo) {
 await buildHarness()
 mkdirSync(OUT_DIR, { recursive: true })
 const { chromium } = requireFromApp('playwright')
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 const keys = {}
 const styles = {}
 try {

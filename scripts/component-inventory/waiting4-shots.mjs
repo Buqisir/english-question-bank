@@ -197,7 +197,7 @@ async function selectOnPaper(page, needle, words) {
 }
 
 const rig = await startRig({ quiet: !process.env.WAITING_VERBOSE })
-const browser = await chromium.launch({ executablePath: process.env.INVENTORY_CHROMIUM || '/opt/pw-browsers/chromium' })
+const browser = await chromium.launch({ channel: 'chromium' })
 
 // 一个上下文 + 一页 + 拍、量、步骤的小工具
 async function session({ width = 1440, height = 900, scale = 1, motion = 'no-preference', suffix = '', auth = true } = {}) {

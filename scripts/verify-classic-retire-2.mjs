@@ -170,11 +170,12 @@ assert(
 // (pointer vs keyboard motion source) between type and onClick.
 // 构件厂第 4 步（2026-11-13）：换成共用的 Button（tone="primary"，类名钩子 peek-add），
 // 不再写 type="button"（Button 默认就是）。
+// 走查第四节第 6 条（Owner 2026-11-14）：换成共用加入键 DraftAddButton（tone="primary"，类名钩子 peek-add），
+// 加入这件事从 DraftAddContext 拿；仍不包在 isOwnerView 里，成员也看得见。
 assert(
   '加入草稿卷 button stays visible to member (not gated by isOwnerView)',
-  /<Button\s*\n\s*className="peek-add"\s*\n\s*tone="primary"\s*\n(?:\s*\{\.\.\.iconMotionInput\}\s*\n)?\s*onClick=\{\(\) => onAddToBasket\(selectedDetail\)\}/.test(
-    detailView,
-  ),
+  /<DraftAddButton className="peek-add" target=\{selectedDetail\} tone="primary" \/>/.test(detailView)
+    && !/isOwnerView[^\n]{0,80}\n?[^\n]{0,80}<DraftAddButton/.test(detailView),
 )
 // detail-page-redesign (2026-07-15): the bespoke 语篇渲染 passage section
 // (`<pre className="passage-text">`) is fully retired per spec 退役清单 —
@@ -350,9 +351,10 @@ assert(
 // Northstar 2026-09-03: 详情 moved into the ConciergeGroupRowMenu `…` item list.
 assert(
   'ConciergeGroupCard renders a 详情 <a href> wired to onOpenDetail via preventDefault',
-  /key:\s*'detail'(?=[\s\S]{0,400}label:\s*'详情')(?=[\s\S]{0,400}href:\s*`\?view=detail&groupId=\$\{encodeURIComponent\(group\.id\)\}`)(?=[\s\S]{0,400}preventDefault\(\))(?=[\s\S]{0,400}onOpenDetail\(group\))/.test(
+  /key:\s*'detail'(?=[\s\S]{0,400}label:\s*'详情')(?=[\s\S]{0,400}href:\s*(?:`\?view=detail&groupId=\$\{encodeURIComponent\(group\.id\)\}`|detailHref\b))(?=[\s\S]{0,400}preventDefault\(\))(?=[\s\S]{0,400}onOpenDetail\(group\))/.test(
     conciergeGroupCard,
-  ),
+  ) && (!/href:\s*detailHref\b/.test(conciergeGroupCard)
+    || /const detailHref = `\?view=detail&groupId=\$\{encodeURIComponent\(group\.id\)\}`/.test(conciergeGroupCard)),
 )
 assert(
   'ConciergeGroupCard 详情 is no longer a <button> (C3c: real link)',
