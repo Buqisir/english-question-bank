@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T15:48:21.205Z",
+  "generatedAt": "2026-11-16T16:08:08.410Z",
   "src": "design/brand-2026-10-13/manual/src",
   "out": "design/brand-2026-10-13/manual/视觉规范手册-草案0.9-预览.pdf",
   "font": {
@@ -165,7 +165,26 @@
       "page": "14-日历与动效",
       "images": 14,
       "failedImages": [],
-      "outOfBoard": [],
+      "outOfBoard": [
+        {
+          "text": "出处：BRAND.md §4.5、§4.6 · DESIGN.md §6 · 第",
+          "rect": [
+            96,
+            1124,
+            921,
+            1140
+          ]
+        },
+        {
+          "text": "14",
+          "rect": [
+            1490,
+            1124,
+            1504,
+            1140
+          ]
+        }
+      ],
       "clipped": [
         {
           "text": "",

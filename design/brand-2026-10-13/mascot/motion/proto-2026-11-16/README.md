@@ -1,6 +1,6 @@
 # 獭獭动效原型 · 鼻子轻动、状态之间的短过渡（2026-11-16）
 
-提案 · 单一来源，还没定。可点的页面在 `../nose-and-transitions.html`，由 `scripts/brand/nose-transitions-proto.mjs` 从母版 SVG 生成（模板 `scripts/brand/nose-transitions-proto.template.html`），母版一笔没改，只在页面里加了 data-otter 标记。
+Owner 2026-11-16 定了鼻子 N2、过渡 T1（BRAND.md 第 129 条），正式代码在 `../otter-motion.js`（`sniff`、`dip`）；这里留作三选一的对照。可点的页面在 `../nose-and-transitions.html`，由 `scripts/brand/nose-transitions-proto.mjs` 从母版 SVG 生成（模板 `scripts/brand/nose-transitions-proto.template.html`），母版一笔没改，只在页面里加了 data-otter 标记。
 
 规矩照 BRAND.md §4.6：缓入缓出不回弹；一次出场一个动作；界面动效每段 ≤300ms；减少动态效果时什么都不演（已用 Playwright 的 reducedMotion: reduce 点过，0 个动画在跑）。
 

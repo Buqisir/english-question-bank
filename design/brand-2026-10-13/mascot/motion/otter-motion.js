@@ -1,5 +1,5 @@
 // 獭獭出场动效（BRAND.md §4.6）。一次出场只演一个动作，演完就停，不循环。
-// 部件靠 SVG 上的 data-otter 标记找：stone / stone-paw（01 的石头和右爪）、eye（两只眼睛）。
+// 部件靠 SVG 上的 data-otter 标记找：stone / stone-paw（01 的石头和右爪）、eye（两只眼睛）、nose（鼻子，第 129 条）。
 // 时长取 DESIGN.md §6 的动效 token（app/src/index.css），每一段都在 300ms 以内。
 // 减少动态效果时什么都不演，直接是最后那一帧。再演一次时先取消正在演的，不排队。
 (function () {
@@ -60,5 +60,36 @@
     ];
   }
 
-  window.OtterMotion = { turnStone, blink, surface, T };
+  // 嗅两下（第 129 条，Owner 2026-11-16 定 N2）：坐石全身像（个人空间空态）的出场，代替眨眼，不叠着眨。
+  // 鼻子横向宽 8%、纵向扁 14%，连着两下，共 240ms，出场 600ms 后（和眨眼同一个时间点）。只动鼻子，眼睛、嘴套、∴ 不跟。
+  // 鼻子要有 transform-box: fill-box; transform-origin: center。
+  function sniff(svg, { delay = BEAT * 2 } = {}) {
+    const nose = [...svg.querySelectorAll('[data-otter="nose"]')];
+    cancel(nose);
+    if (reduced() || !nose.length) return [];
+    const up = { transform: 'scale(1, 1)', easing: EASE_OTTER };
+    const in_ = { transform: 'scale(1.08, 0.86)', easing: EASE_OTTER };
+    const keys = [up, { ...in_, offset: 0.25 }, { ...up, offset: 0.5 }, { ...in_, offset: 0.75 }, { transform: 'scale(1, 1)' }];
+    return nose.map((el) => el.animate(keys, { duration: T.fast * 2, delay }));
+  }
+
+  // 状态之间的短过渡 · 沉一下再浮（第 129 条，Owner 2026-11-16 定 T1）：半身状态换成另一张时用，比如找题中 → 递出结果 / 没找到。
+  // 卡片上沿就是水面，from / to 是两张半身的外层（放在同一个裁到卡片边的框里，脸对齐）。
+  // from 往卡片边下沉 depth（120ms，缓入），在边下面换成 to，to 从同样深处浮回（160ms，缓入缓出，不回弹），合计 280ms。
+  // 换状态只演这一下，不再叠 to 自己的出场动作。减少动态效果时直接换。
+  function dip({ from, to, depth = 18, onSwap } = {}) {
+    cancel([from, to]);
+    const swap = () => { from.hidden = true; to.hidden = false; if (onSwap) onSwap(); };
+    if (reduced()) { swap(); return []; }
+    const down = from.animate([{ transform: 'none' }, { transform: `translateY(${depth}px)` }], {
+      duration: T.fast, easing: 'cubic-bezier(0.45, 0, 1, 1)', fill: 'forwards',
+    });
+    down.onfinish = () => {
+      swap(); down.cancel();
+      to.animate([{ transform: `translateY(${depth}px)` }, { transform: 'none' }], { duration: T.base, easing: EASE_OTTER });
+    };
+    return [down];
+  }
+
+  window.OtterMotion = { turnStone, blink, surface, sniff, dip, T };
 })();
