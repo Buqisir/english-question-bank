@@ -279,6 +279,8 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 8px 12px;
+    /* 顶栏全站 48 高（Owner 2026-11-16 定）：上面 ≤780 那条给的上下 18 在这里收成 10，28 高的键一行正好 48。 */
+    padding-block: 10px;
   }
 
   header.topbar .topbar-brand {
@@ -3345,11 +3347,7 @@ p.concierge-empty {
   background: var(--desk-page, #F3F5F1);
 }
 
-.app-shell:has(.concierge-desk) > .topbar {
-  min-height: 64px;
-}
-
-/* 找题台顶栏的导航按钮加高到 36，现在由 AppTopbar 的 navSize="lg" 给共用按钮构件，这里不再写。 */
+/* 找题台顶栏原来 64 高、导航键 36（navSize="lg"）；Owner 2026-11-16 定全站顶栏统一 48，这两条都拿掉了。 */
 
 .app-shell:has(.concierge-desk) .topbar-actions.fluid-hover-list::before {
   background: var(--desk-hover);
@@ -3485,9 +3483,10 @@ p.concierge-empty {
 }
 
 @media (max-width: 640px) {
+  /* 找题台窄屏顶栏原来上 16 下 8、键 36，共 64 高；Owner 2026-11-16 定全站 48，上下改成 10（同上面 ≤640 那条）。 */
   .app-shell:has(.concierge-desk) > .topbar {
     gap: 8px;
-    padding: 16px 24px 8px;
+    padding: 10px 24px;
   }
   .app-shell:has(.concierge-desk) .library-panel {
     padding: 0 24px;

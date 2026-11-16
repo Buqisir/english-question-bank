@@ -13,6 +13,22 @@
   padding: 32px 0 64px;
 }
 
+/* 顶栏跟本页内容栏对齐（Owner 2026-11-16 定，DESIGN.md §5）：列表页内容是 720 一栏，顶栏原来铺满整页，
+ * 「返回」和卷名比列表左边线往左出去一大截。这里和 .notebook-main 用同一个宽度、左右不再留内边距，
+ * 返回箭头落在列表左边线上（.topbar-back 自己往左让 8px，和别的页一样）。
+ * 打开一张纸（.notebook-desk）时不动：那是居中的一张纸，和整卷预览一样，顶栏铺满。
+ * 只在宽于 640 时这样：手机宽内容栏只剩 342，「生词本」加四个图标键一行放不下会折成两行（实测 84 高），
+ * 所以 ≤640 顶栏照旧铺满（左右 18），和内容左边线差 6px。
+ * 覆盖：本条 (0,3,1) 盖过 App.css .topbar-sub (0,1,0) 的 padding: 0 24px。 */
+@media (min-width: 641px) {
+  .notebook-page:has(> .notebook-main) > header.topbar {
+    box-sizing: border-box;
+    margin-inline: auto;
+    padding-inline: 0;
+    width: min(720px, calc(100% - 48px));
+  }
+}
+
 /* 列表页的出错行：样子归 shared-ui/Notice（2026-11-15）；原来的 .notebook-empty 灰字规则删了。 */
 /* 空态换成共用的 EmptyState（样子在 shared-ui/emptyState.css）；这里只给它在这一页的高度，和个人空间一样。
  * 覆盖：本条 (0,2,0) 和 .eqb-empty-state (0,1,0) 不冲突属性，写成两个类只是为了不依赖样式表的先后。 */

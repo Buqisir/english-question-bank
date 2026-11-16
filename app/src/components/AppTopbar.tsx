@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { Archive, ArrowLeft, BookMarked, VocabularyNotebook, LogOut, Pencil, Settings } from '../icons'
-import { Button, type ButtonSize } from '../shared-ui/Button.tsx'
+import { Button } from '../shared-ui/Button.tsx'
 import { FluidHoverList } from './FluidHoverList.tsx'
 
 /* BRAND.md §3.1: the logo mark is drawn at 20px tall. On 1x screens the
@@ -89,15 +89,12 @@ export type AppTopbarProps = AppTopbarNav & {
      AppTopbar does not interpret this content. undefined (every page but
      the draft workbench) = no divider, no extra markup, zero change. */
   actionsSlot?: ReactNode
-  /* 构件厂第 4 步（2026-11-13，提案 · 单一来源）：全站导航按钮的大小。首页找题台
-     （题组列表）用 lg（高 36），其余页面 sm（高 28），对应原先
-     `.app-shell:has(.concierge-desk) .topbar .ghost-button` 那条加高规则。 */
-  navSize?: ButtonSize
 }
 
 export function AppTopbar(props: AppTopbarProps): ReactNode {
   const variant = props.variant ?? 'sub'
-  const navSize = props.navSize ?? 'sm'
+  // 导航键全站一个大小（Owner 2026-11-16 定顶栏统一 48）：原来首页找题台单独用 lg（高 36），由 navSize 参数传进来，已拿掉。
+  const navSize = 'sm'
   const [editingTitle, setEditingTitle] = useState(false)
   // Uncommitted edit buffer — only meaningful while editingTitle is true.
   // Seeded from props.pageTitle at the moment editing starts (startTitleEdit

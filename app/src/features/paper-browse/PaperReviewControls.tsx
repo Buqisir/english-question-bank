@@ -38,8 +38,12 @@ export function PaperReviewControls({ paperId, paperName, revisionId, publicatio
     void fetch(`${endpoint}/product-review${publicationQuery}`, {
       signal: controller.signal, credentials: 'same-origin', cache: 'no-store',
     }).then(async response => {
-      if (!response.ok) throw new Error('暂时找不到对应线程，仍可复制试卷信息到 Amp。')
-      const result = await response.json() as ReviewDetail
+      // 没有审阅记录的卷（老卷）接口回 404：这不是错，当作「还没关联线程」，不出提示（UI 体检 2026-11-16）。
+      // 原来这里写「暂时找不到对应线程，仍可复制试卷信息到 Amp。」，是开发口吻，还带一个「刷新」，整行露在卷面上方。
+      const result = response.status === 404
+        ? { paperId, latest: null, discussionThreadId: null, published: null } satisfies ReviewDetail
+        : response.ok ? await response.json() as ReviewDetail : null
+      if (!result) throw new Error('这份卷的检查记录没读到。')
       if (result.paperId !== paperId) throw new Error('试卷与线程信息不一致，请刷新重试。')
       if (!controller.signal.aborted) { setDetail(result); setError('') }
     }).catch(error => {

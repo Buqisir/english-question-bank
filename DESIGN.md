@@ -395,7 +395,8 @@ Deadpan 尚未实现；切换入口与记忆方式尚未定案。采用两套配
 - 样张：`design/components-2026-11-13/waiting/waiting-family.html`（四种场合；里面的三个点还是旧的单一呼吸，以 `whisker-dots.html` 为准）。
 
 ### Navigation
-- **Topbar:** 透明无底、无 border-bottom，不 sticky。品牌位 = 图形标志 + 文字标题（14px/600；桌面色阶页面 15px）。标志 20px 高、32px 宽，离标题 8px，上下居中；普通屏用逐格画版 `app/public/brand/mark-32.png`，高清屏用 `mark.svg`（BRAND.md §3.1）。标志是装饰，读屏只读标题。草稿卷页窄于 560px 时，标志和标题一起让位给卷名。右侧导航为 16px EQB 图标 + 13px 文字（桌面色阶页面 14px、高 36px），激活项 `variant="fill"`，静止无填充，hover 浮出 8px 圆角底。头像为 28px 墨绿圆 + 12px/600 白色首字母。手搓 `?view=` 路由，非 react-router。
+- **Topbar:** 透明无底、无 border-bottom，不 sticky。品牌位 = 图形标志 + 文字标题（14px/600；桌面色阶页面 15px）。标志 20px 高、32px 宽，离标题 8px，上下居中；普通屏用逐格画版 `app/public/brand/mark-32.png`，高清屏用 `mark.svg`（BRAND.md §3.1）。标志是装饰，读屏只读标题。草稿卷页窄于 560px 时，标志和标题一起让位给卷名。右侧导航为 16px EQB 图标 + 13px 文字，按钮用 Button 小号（高 28），激活项 `variant="fill"`，静止无填充，hover 浮出 8px 圆角底。头像为 28px 墨绿圆 + 12px/600 白色首字母。手搓 `?view=` 路由，非 react-router。
+- **顶栏高度和宽度（Owner 定 2026-11-16）：** 全站顶栏一个高度 48px，导航键都是小号 28；手机宽（≤640）上下内边距 10，单行仍是 48，页面自己的控件折到第二行时照实变高。原来找题台（首页 / 题组列表）顶栏 64、导航键 36（Button 大号），这一档取消。顶栏宽度跟本页内容栏走：内容居中成一栏的页面（找题台 920、个人空间 1244、生词本列表 720），顶栏和内容栏同宽同左边线（生词本列表只在宽于 640 时这样，手机宽 720 栏缩到 342，导航一行放不下，顶栏照旧铺满）；内容是工作台或一张居中的纸的页面（草稿卷、整卷预览、生词本打开的那张纸），顶栏铺满整页、左右各 24。
 - **Draft pill:** 右下浮件，白底，13px，e2（一直在屏上，不用 e3，§4）。
 
 ### Signature Component: ConciergeDesk AI 找题主面
