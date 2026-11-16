@@ -10,7 +10,7 @@
 // 用法：
 //   WORDMARK_FONTSOURCE_DIR=<装了 @fontsource-variable/noto-sans-sc 的 node_modules 目录> \
 //   EQB_FONTTOOLS_PATH=<装了 fonttools 和 brotli 的目录> \
-//   node scripts/brand/wordmark-round2.mjs [--svg-only]
+//   node scripts/brand/wordmark-round2.mjs [--svg-only | --lockups-only]
 // 字体和 fontTools 的装法同 scripts/brand/wordmark-drafts.mjs 文件开头。不进仓库。
 // 输出：design/brand-2026-10-13/wordmark-2026-11-16/ 下的 svg/、png/、compare.png、lockups.png、run.json
 import { spawnSync } from 'node:child_process'
@@ -27,6 +27,9 @@ const GLYPH_TOOL = path.join(ROOT, 'scripts/brand/wordmark-glyphs.py')
 const PIXEL = JSON.parse(readFileSync(path.join(OUT, 'pixel-15.json'), 'utf8'))
 const C = { ink: '#191D18', mistWhite: '#F2FAF6', deepMint: '#2C6E56', page: '#F1F5F7', desk: '#E6EDF0', white: '#FFFFFF' }
 const svgOnly = process.argv.includes('--svg-only')
+// --lockups-only：只重出 SVG、逐格 PNG 和 lockups.png，不起本地网站、不重拍 compare.png。
+// 字标 2026-11-16 上线以后顶栏里没有可替换的标题文字了，真实页面对比那一步跑不通，也不用再拍；topbar、login、rects 沿用上一次 run.json。
+const lockupsOnly = process.argv.includes('--lockups-only')
 const FS_DIR = process.env.WORDMARK_FONTSOURCE_DIR
 if (!FS_DIR || !existsSync(path.join(FS_DIR, '@fontsource-variable/noto-sans-sc'))) {
   console.error('要先设 WORDMARK_FONTSOURCE_DIR（见文件开头）。'); process.exit(2)
@@ -182,6 +185,7 @@ async function clip(page, loc, { padX = 16, padY = 12, fullLeft = false, maxW = 
 const shots = {}
 let rig = null
 try {
+  if (lockupsOnly) { const old = JSON.parse(readFileSync(path.join(OUT, 'run.json'), 'utf8')); for (const k of ['topbar', 'login', 'rects']) if (old[k]) run[k] = old[k] } else {
   rig = await startRig({ quiet: true }); const base = rig.base
   for (const dpr of [2, 1]) {
     { // 顶栏
@@ -219,6 +223,7 @@ try {
     }
   }
 
+  } // lockupsOnly
   // ---------- 对比总图 ----------
   const img = (s, dpr, zoom = 1) => s ? `<img src="${png(s.buf)}" style="width:${s.w * zoom}px;height:${s.h * zoom}px;display:block;${dpr === 1 ? 'image-rendering:pixelated;' : ''}">` : '<span class="note">没拍到</span>'
   const pair = (o, zoom) => `<div class="pair"><div><div class="k">2x 屏</div>${img(o?.[2], 2)}</div><div><div class="k">1x 屏（放大 ${zoom} 倍，逐像素）</div>${img(o?.[1], 1, zoom)}</div><div><div class="k">1x 原大</div>${img(o?.[1], 1, 1)}</div></div>`
@@ -233,12 +238,12 @@ section { background: ${C.white}; border: 1px solid #d5dfe4; border-radius: 12px
   const lab = (v) => `<div class="lab">${v.name}<small>${v.note}</small></div>`
   const html = `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><style>${css}</style></head><body><div class="sheet">
 <div><h1>「獭石」字标第二轮 · 顶栏和登录页</h1><div class="meta">${STATUS} 本地临时网站的真实页面，只在截图前改 DOM。本机没有 PingFang SC，「现状」和旁边的导航字是文泉驿正黑，和苹果设备上不同，要在 Mac 上再看。</div></div>
-<section><h2>顶栏（实算 ${run.topbar.font}）</h2><div class="grid">${VARIANTS.map((v) => lab(v) + pair(shots[v.id].topbar, 3)).join('\n')}</div></section>
-<section><h2>登录页左上角（实算 ${run.login.font}）</h2><div class="grid">${VARIANTS.map((v) => lab(v) + pair(shots[v.id].login, 2)).join('\n')}</div></section>
+<section><h2>顶栏（实算 ${run.topbar.font}）</h2><div class="grid">${VARIANTS.map((v) => lab(v) + pair(shots[v.id]?.topbar, 3)).join('\n')}</div></section>
+<section><h2>登录页左上角（实算 ${run.login.font}）</h2><div class="grid">${VARIANTS.map((v) => lab(v) + pair(shots[v.id]?.login, 2)).join('\n')}</div></section>
 </div></body></html>`
   {
     const ctx = await browser.newContext(ctxOpts(1500, 400, 2)); const p = await ctx.newPage()
-    await p.setContent(html, { waitUntil: 'load' }); await p.screenshot({ path: path.join(OUT, 'compare.png'), fullPage: true }); await ctx.close()
+    if (!lockupsOnly) { await p.setContent(html, { waitUntil: 'load' }); await p.screenshot({ path: path.join(OUT, 'compare.png'), fullPage: true }) } await ctx.close()
   }
   // ---------- 组合图 ----------
   const lockImg = (k, h) => { const l = LOCK[k]; return `<img src="${uri(l.svg)}" style="height:${h}px;width:${f1(h * l.w / l.h)}px;display:block">` }

@@ -1,5 +1,5 @@
 {
- "date": "2026-11-16T12:48:23.517Z",
+ "date": "2026-11-16T15:25:23.585Z",
  "font": {
   "package": "@fontsource-variable/noto-sans-sc",
   "version": "5.3.1",
@@ -31,8 +31,7 @@
   },
   "vertical": {
    "inkWidth": 0.8,
-   "gap": 0.25,
-   "note": "2026-11-16 从 0.9、0.22 改（BRAND.md 第 126 条）；只用 --svg-only 重出了两个竖排 SVG，lockups.png 还是 0.9 那版"
+   "gap": 0.25
   }
  },
  "mark32Rows": [
@@ -62,6 +61,10 @@
   "html": "獭石",
   "font": "15px/600",
   "family": "Inter, \"PingFang SC\", \"Hiragino Sans GB\", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+ },
+ "login": {
+  "html": "獭石",
+  "font": "15px/600"
  },
  "rects": [
   {
@@ -184,9 +187,5 @@
     "h": 24
    }
   }
- ],
- "login": {
-  "html": "獭石",
-  "font": "15px/600"
- }
+ ]
 }

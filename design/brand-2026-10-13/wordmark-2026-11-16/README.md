@@ -46,7 +46,7 @@
 
 ## 竖排比例（2026-11-16，BRAND.md 第 126 条）
 
-`vertical-ratio-2026-11-16.png`：字墨迹宽 0.9、0.8、0.75 倍标志宽，间距 0.22H、0.25H，白底、深薄荷底、墨底，200、96、56px 宽。目测 0.9 倍字和标志一样重，0.75 倍偏轻，取 0.8 倍、0.25H。脚本改了 `V_RATIO`，用 `--svg-only` 重出了 `svg/lockup-v-*.svg`（`--svg-only` 会顺手删掉 `png/` 里的逐格 PNG，已从 git 恢复）；`run.json` 只手改了竖排两个数，其余是上一次整跑的记录。提案 · 单一来源。
+`vertical-ratio-2026-11-16.png`：字墨迹宽 0.9、0.8、0.75 倍标志宽，间距 0.22H、0.25H，白底、深薄荷底、墨底，200、96、56px 宽。目测 0.9 倍字和标志一样重，0.75 倍偏轻，取 0.8 倍、0.25H。脚本改了 `V_RATIO`，用 `--svg-only` 重出了 `svg/lockup-v-*.svg`（`--svg-only` 会顺手删掉 `png/` 里的逐格 PNG，已从 git 恢复）；`lockups.png` 同日用新加的 `--lockups-only` 重出（字标上线以后顶栏里没有标题文字可替换，整次重跑的真实页面对比那一步跑不通，也不用再拍；`compare.png` 留上线前那张，`run.json` 的页面坐标沿用上一次整跑）。提案 · 单一来源。
 
 ## 15px 逐格画版怎么画的
 
@@ -69,7 +69,6 @@
 ## 还没做
 
 - 在 Mac 上用苹方核对：顶栏导航字是苹方的时候，逐格版和矢量小档放在旁边是不是太细。
-- `lockups.png` 里的竖排还是 0.9 倍那张，要整次重跑脚本（会起本地网站截图）才会换。
 
 手册 04 页 2026-11-16 已换成这一轮的图（草案 0.8 预览，见 `../manual/README.md`）。
 
@@ -79,4 +78,4 @@
 WORDMARK_FONTSOURCE_DIR=<临时目录>/node_modules EQB_FONTTOOLS_PATH=<临时目录>/pylib node scripts/brand/wordmark-round2.mjs
 ```
 
-加 `--svg-only` 只出 SVG 和 `run.json`。会起一个本地临时网站（端口偏移 44），只在截图前改 DOM，不改源码。
+加 `--svg-only` 只出 SVG 和 `run.json`；加 `--lockups-only` 只出 SVG、逐格 PNG 和 `lockups.png`，不起本地网站。会起一个本地临时网站（端口偏移 44），只在截图前改 DOM，不改源码。
