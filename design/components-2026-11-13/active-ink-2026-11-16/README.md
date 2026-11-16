@@ -42,3 +42,7 @@ Owner：「那几处深薄荷也一起改成墨吧」。
 - 两张审听页的进度条、键盘焦点框：深薄荷 `#2C6E56` → 石板墨 `--eqb-color-action`（rgb 41, 66, 77），和网站里的进度条、焦点框同一个色。焦点框粗细 3px 没动。
 - 修音页正在听的那一版（`.audio-choice[data-active="true"]`）的边：深薄荷 → 墨 `--eqb-color-text`，和「选这一版」键的边一致。淡绿底没动。
 - 图在 `audio-qa-2/`：`compare.png` 左改前、右改后，上面是审听页，下面是修音页。焦点框是用 Tab 走到「下一条」键拍的。也是样张，不是真页面。
+
+## 补三：审听页焦点框 2px（同日）
+
+Owner：「焦点框也统一成 2px 吧」。两张审听页 `button:focus-visible, input:focus-visible` 的焦点框从 3px 改成 2px，颜色石板墨、外扩 2px 不变，和网站里搜索框、卡片的焦点框一致。图在 `audio-qa-3/compare.png`，左改前、右改后，样张。
