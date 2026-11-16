@@ -25,7 +25,7 @@ h1 { margin: 0; font-size: var(--eqb-font-size-xl); font-weight: 600; letter-spa
 .progress-copy, .progress-stats { justify-content: space-between; gap: 18px; color: var(--eqb-color-text-muted); font-size: var(--eqb-font-size-sm); }
 .progress-copy strong, .progress-stats strong { color: var(--eqb-color-text); }
 .progress-track { height: var(--eqb-space-2); margin: var(--eqb-space-3) 0; overflow: hidden; border-radius: 999px; background: var(--eqb-color-desk); }
-.progress-fill { width: 0; height: 100%; border-radius: inherit; background: var(--eqb-color-primary); }
+.progress-fill { width: 0; height: 100%; border-radius: inherit; background: var(--eqb-color-action); }
 
 .word-card { padding: clamp(24px, 4vw, 42px); border: 1px solid var(--eqb-color-border); border-radius: 8px; background: var(--eqb-color-paper); box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06); }
 .word-meta { gap: var(--eqb-space-2); color: var(--eqb-color-text-muted); font-size: var(--eqb-font-size-xs); }
@@ -44,13 +44,13 @@ h1 { margin: 0; font-size: var(--eqb-font-size-xl); font-weight: 600; letter-spa
 button { min-height: 44px; border: 1px solid var(--eqb-color-border); border-radius: 6px; background: var(--eqb-color-paper); cursor: pointer; transition: background-color 120ms ease, border-color 120ms ease, transform 120ms ease; }
 button:hover { border-color: var(--eqb-color-border-strong); background: var(--eqb-color-desk); }
 button:active { transform: translateY(1px); }
-button:focus-visible, input:focus-visible { outline: 3px solid var(--eqb-color-primary); outline-offset: 2px; }
+button:focus-visible, input:focus-visible { outline: 3px solid var(--eqb-color-action); outline-offset: 2px; }
 button:disabled { cursor: not-allowed; opacity: 0.5; }
 .audio-choice { display: flex; align-items: center; justify-content: space-between; min-height: 62px; padding: 0 12px; text-align: left; }
 .audio-choice span { display: grid; gap: 3px; }
 .audio-choice b { font-size: var(--eqb-font-size-sm); }
 .audio-choice small { color: var(--eqb-color-text-muted); font-size: var(--eqb-font-size-xs); }
-.audio-choice[data-active="true"] { border-color: var(--eqb-color-primary); background: var(--eqb-color-success-soft); }
+.audio-choice[data-active="true"] { border-color: var(--eqb-color-text); background: var(--eqb-color-success-soft); }
 .audio-choice[data-selected="true"] b::after { content: " · 已选"; color: var(--eqb-color-text); font-weight: 500; }
 .audio-choice.original[data-active="true"] { border-color: var(--eqb-color-border-strong); background: var(--eqb-color-desk); }
 kbd { padding: 2px 6px 3px; border: 1px solid currentColor; border-radius: 4px; background: rgba(255, 255, 255, 0.45); font-family: inherit; font-size: var(--eqb-font-size-xs); font-weight: 700; opacity: 0.72; }

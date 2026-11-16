@@ -1,0 +1,48 @@
+{
+  "owner-qa": [
+    {
+      "cls": "progress-fill",
+      "color": "rgb(27, 43, 51)",
+      "border": "rgb(27, 43, 51)",
+      "bg": "rgb(44, 110, 86)",
+      "outline": "rgb(27, 43, 51) none"
+    },
+    {
+      "cls": "control-button",
+      "color": "rgb(27, 43, 51)",
+      "border": "rgb(220, 230, 235)",
+      "bg": "rgb(255, 255, 255)",
+      "outline": "rgb(44, 110, 86) solid"
+    }
+  ],
+  "repair-qa": [
+    {
+      "cls": "progress-fill",
+      "color": "rgb(27, 43, 51)",
+      "border": "rgb(27, 43, 51)",
+      "bg": "rgb(44, 110, 86)",
+      "outline": "rgb(27, 43, 51) none"
+    },
+    {
+      "cls": "audio-choice",
+      "color": "rgb(27, 43, 51)",
+      "border": "rgb(44, 110, 86)",
+      "bg": "rgba(31, 160, 98, 0.1)",
+      "outline": "rgb(27, 43, 51) none"
+    },
+    {
+      "cls": "control-button",
+      "color": "rgb(27, 43, 51)",
+      "border": "rgb(220, 230, 235)",
+      "bg": "rgb(255, 255, 255)",
+      "outline": "rgb(44, 110, 86) solid"
+    },
+    {
+      "cls": "audio-choice",
+      "color": "rgb(27, 43, 51)",
+      "border": "rgb(27, 43, 51)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "outline": "rgb(27, 43, 51) none"
+    }
+  ]
+}
