@@ -1249,131 +1249,11 @@ button:disabled {
   font-size: 11px;
 }
 
-.synonym-difficulty-card {
-  display: grid;
-  gap: 9px;
-  padding: 12px;
-  border: 1px solid rgba(44, 110, 86, 0.25);
-  border-radius: 8px;
-  background: rgba(44, 110, 86, 0.08);
-}
-
-.synonym-difficulty-card.needs-review {
-  border-color: rgba(196, 155, 42, 0.55);
-  background: var(--amber-soft);
-}
-
-.synonym-difficulty-head {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-}
-
-.synonym-difficulty-head span,
-.synonym-difficulty-head em,
-.synonym-difficulty-flags span,
-.synonym-difficulty-flags strong {
-  color: var(--muted);
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 800;
-}
-
-.synonym-difficulty-head strong {
-  color: var(--ink-strong);
-  font-size: 14px;
-}
-
-.synonym-difficulty-card p {
-  margin: 0;
-  color: var(--ink);
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.55;
-}
-
-.synonym-difficulty-evidence {
-  display: grid;
-  gap: 6px;
-}
-
-.synonym-difficulty-evidence span {
-  overflow-wrap: anywhere;
-  color: var(--ink);
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.5;
-}
-
-.synonym-difficulty-flags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.synonym-difficulty-flags strong {
-  color: var(--amber-text);
-}
-
 .answer-compare-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-}
-
-.question-ai-block {
-  display: grid;
-  gap: 10px;
-  margin-top: 4px;
-}
-
-.question-ai-parse,
-.question-ai-verify {
-  display: grid;
-  gap: 8px;
-  padding: 12px;
-  border-radius: 8px;
-}
-
-.question-ai-parse {
-  border: 1px solid rgba(44, 110, 86, 0.2);
-  background: rgba(44, 110, 86, 0.08);
-}
-
-.question-ai-verify {
-  border: 1px solid var(--line);
-  background: var(--surface-strong);
-}
-
-.question-ai-section-title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  color: var(--ink-strong);
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.question-ai-section-title span {
-  display: inline-flex;
-  align-items: center;
-}
-
-.question-ai-parse p {
-  margin: 0;
-  color: var(--ink);
-  font-size: 14px;
-  line-height: 1.55;
-}
-
-.question-ai-verify p {
-  margin: 0;
-  color: var(--ink);
-  font-size: 13px;
-  line-height: 1.45;
 }
 
 .answer-box p {
@@ -2199,45 +2079,6 @@ button:disabled {
 .group-card:nth-child(4) { animation-delay: 0.15s; }
 .group-card:nth-child(5) { animation-delay: 0.2s; }
 
-/* Calibration Preview Card */
-.calibration-preview-card {
-  display: grid;
-  gap: 7px;
-  padding: 10px 12px;
-  border: 1px dashed rgba(44, 110, 86, 0.35);
-  border-radius: 8px;
-  background: rgba(44, 110, 86, 0.06);
-}
-
-.calibration-preview-card.low-confidence {
-  border-color: rgba(156, 163, 175, 0.5);
-  background: rgba(156, 163, 175, 0.08);
-  color: var(--muted);
-}
-
-.calibration-preview-head {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-}
-
-.calibration-preview-head span {
-  color: var(--muted);
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 800;
-}
-
-.calibration-preview-head strong {
-  color: var(--ink-strong);
-  font-size: 13px;
-}
-
-.calibration-preview-card.low-confidence .calibration-preview-head strong {
-  color: var(--muted);
-}
-
 .calibration-watch-flag {
   margin: 0;
   padding: 5px 8px;
@@ -2985,9 +2826,10 @@ button:disabled {
 }
 
 /* Clarification + notices */
+/* 追问提示是一块灰底，不再垫深薄荷淡底（BRAND.md §1.5：界面表面用 08 雾海桌面色阶；2026-11-16 色板外颜色收回）。 */
 .concierge-clarification {
-  border: 1px solid rgba(44, 110, 86, 0.28);
-  background: rgba(44, 110, 86, 0.08);
+  border: 1px solid var(--desk-border);
+  background: var(--desk-hover);
   padding: 12px 14px;
   border-radius: 4px;
   display: flex;
