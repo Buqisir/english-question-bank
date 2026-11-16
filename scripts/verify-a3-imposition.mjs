@@ -666,6 +666,22 @@ async function runPhaseB(browser) {
     await drawer.getByRole('button', { name: '返回目录' }).click()
     await page.unroute('**/api/similar-passages')
     await page.setViewportSize({ width: 1440, height: 920 })
+    // 「导出」在顶栏，前面的步骤把页面滚到了下面。直接点的话 Playwright 会先把键滚进视口，这次滚动的 scroll 事件
+    // 下一帧才派发，正好落在菜单刚打开之后；共用 Menu 见到页面滚动就收起，菜单一开就关（CI main e61a157d1，
+    // 2026-11-16：菜单项先 not stable 再 detached；本地打点：菜单出现 4ms 后来了一次 document scroll，随即被移除）。
+    // 老师不会去点一个不在屏幕上的键，所以由脚本先滚回顶部，等滚动位置连续几帧不动再点。
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'auto' }))
+    await page.evaluate(() => new Promise((resolve) => {
+      let last = window.scrollY
+      let still = 0
+      const tick = () => {
+        if (window.scrollY === last) still += 1
+        else { last = window.scrollY; still = 0 }
+        if (still >= 3) resolve()
+        else requestAnimationFrame(tick)
+      }
+      requestAnimationFrame(tick)
+    }))
 
     // Save modal uses real native modality; it must not strand keyboard users
     // on the now-unmounted export menu item or allow focus behind the dialog.
