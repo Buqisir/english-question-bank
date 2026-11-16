@@ -2814,7 +2814,10 @@ button:disabled {
   transition: none;
 }
 
-.concierge-thinking-toggle label {
+/* 字号写在开关这一层（UI 体检 2026-11-16 第 6 条）：.concierge-thinking-toggle 本身就是 <label>，
+ * 原来写成 .concierge-thinking-toggle label（找里面的 label）一处也没命中，「思考模式」四个字一直是 16 号，
+ * 比下面「筛选」（13 号）大一圈。 */
+.concierge-thinking-toggle {
   font-size: 13px;
   color: var(--desk-ink);
   cursor: pointer;
@@ -3663,6 +3666,14 @@ p.concierge-empty {
    样子（aria-expanded=true：桌色底、墨字）。只留不被挤窄这一条。 */
 .concierge-command-filter-toggle {
   flex: 0 0 auto;
+}
+
+/* 首页这一列里「筛选」的字和上面开关、搜索框的左边对齐（UI 体检 2026-11-16 第 6 条）：
+ * 和「浏览全部 N 套卷」同一个做法，负的按钮左内边距（--eqb-space-3，12px）。
+ * 浏览页那一行是横排，不用抵。 */
+.concierge-desk[data-screen='home'] .concierge-command-filter-toggle {
+  align-self: flex-start;
+  margin-left: calc(-1 * var(--eqb-space-3));
 }
 
 .concierge-command-count {
