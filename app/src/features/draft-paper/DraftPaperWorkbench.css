@@ -32,10 +32,8 @@
 .draft-workbench-shell button:focus-visible,
 .draft-workbench-shell input:focus-visible,
 .draft-workbench-shell select:focus-visible {
-  /* var(--eqb-color-primary) resolves to the exact #2C6E56 shell-刀 token
-     value (tokens.css) — token form instead of a literal so this file's
-     palette-hex guard (verify-draft-workbench-visual-unify.mjs) stays
-     zero-hardcode. */
+  /* 焦点框用动作色石板墨，和全站一致（BRAND.md 第 123 条）；写 token 不写色值，
+     这个文件的色值守卫（verify-draft-workbench-visual-unify.mjs）保持零硬编码。 */
   outline: 2px solid var(--action);
   outline-offset: 2px;
 }

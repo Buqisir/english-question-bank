@@ -25,6 +25,8 @@
   --eqb-color-accent-fill-hover: #63b497;
   --eqb-color-accent-fill-ink: #191d18;
   --eqb-color-identity: #2c6e56;
+  /* identity 是深薄荷，品牌身份色（BRAND.md §1.5），界面上已经不用：选中、悬停、焦点用灰和墨（第 72、123 条）。
+     primary 和 identity 同值，也没有地方再用；verify-architecture-housekeeping 还要求它在，等那条校验改了再删。 */
   --eqb-color-primary: #2c6e56;
   /* --eqb-color-primary-text / --eqb-color-primary-deep（色板外深绿 #1e4a3a）
      2026-11-16 删掉：最后几处用的地方都改成墨了（BRAND.md 第 122、123 条）。 */
