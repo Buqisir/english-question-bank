@@ -48,6 +48,7 @@ export const verificationShardOverrides = Object.freeze({
     'scripts/verify-generated-docx-output-deleted.mjs',
   ]),
   '2': Object.freeze([
+    'scripts/verify-review-subject-backfill.mjs',
     'scripts/verify-paper-canonical-framed-columns-rendered.mjs',
     'scripts/verify-import-review-ocr-confirmation.mjs',
     'scripts/verify-sentence-analysis-browser.mjs',
