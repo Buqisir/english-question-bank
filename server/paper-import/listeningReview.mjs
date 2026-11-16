@@ -145,7 +145,7 @@ function validateReview(rootDir, review, subject, transcript, version) {
         || !Array.isArray(occurrence.evidencePaths) || occurrence.evidencePaths.length === 0
         || new Set(occurrence.evidencePaths).size !== occurrence.evidencePaths.length
         || occurrence.evidencePaths.some(relative => !paths.has(relative))) fail('invalid occurrence/evidence binding')
-      if (review.method === 'asr_source_comparison') {
+      if (['asr_source_comparison', 'agent_asr_comparison'].includes(review.method)) {
         const windows = review.evidence.filter(file => file.kind === 'asr_window'
           && occurrence.evidencePaths.includes(file.path)).map(file => file.window)
           .sort((a, b) => a.startSeconds - b.startSeconds)
