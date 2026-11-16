@@ -79,89 +79,7 @@ function fixture() {
   return { temp, root, papers: [paperId], paperId, paperDir, attempt, audio, group, output: path.join(temp, 'pack') }
 }
 
-for (const kind of ['head', 'tail']) {
-  test(`overlapping ${kind} contexts with distinct edge words remain ambiguous`, () => {
-    const f = fixture()
-    try {
-      const source = kind === 'head'
-        ? 'Dinnertime brings everyone back home now. Fresh apples grow beyond those hills.'
-        : 'Bright birds gather beside our quiet river. Everyone comes back home for dinnertime.'
-      const entries = kind === 'head'
-        ? [['dinner', 2], ['time', 2.2], ['dinnertime', 7.4], ['brings', 7.6],
-          ['everyone', 7.8], ['back', 8], ['home', 8.2], ['now', 8.4]]
-        : [['everyone', 11.3], ['comes', 11.5], ['back', 11.7], ['home', 11.9],
-          ['for', 12.1], ['dinnertime', 12.2], ['dinner', 17.4], ['time', 17.6]]
-      const words = entries.map(([token, startSeconds]) => ({ token, startSeconds, endSeconds: startSeconds + 0.1 }))
-      const otherTokens = kind === 'head'
-        ? ['fresh', 'apples', 'grow', 'beyond', 'those', 'hills']
-        : ['bright', 'birds', 'gather', 'beside', 'our', 'quiet', 'river']
-      const other = otherTokens.map((token, i) => ({
-        token, startSeconds: (kind === 'head' ? 22 : 2) + i * 0.15,
-        endSeconds: (kind === 'head' ? 22 : 2) + i * 0.15 + 0.1,
-      }))
-      put(path.join(f.attempt, 'input.json'),
-        { audioSha256: hash(f.audio), subject: { durationSeconds: 30, paperId: f.paperId } })
-      put(path.join(f.attempt, 'rule-result.json'), { groups: [{ ...f.group,
-        sourceText: source, expectedReadings: 1,
-        observedWindows: [{ words, evidencePaths: [] }, { words: other, evidencePaths: [] }] }] })
-      assert.throws(() => buildReviewPack(f), kind === 'head'
-        ? /REVIEW_PACK_READING_COUNT_AMBIGUOUS.*found 2/u
-        : /REVIEW_PACK_TAIL_AMBIGUOUS.*: 2/u)
-      assert.equal(existsSync(f.output), false)
-    } finally { rmSync(f.temp, { recursive: true, force: true }) }
-  })
-
-  test(`compound ${kind} candidate cannot bridge two ordinary hits`, () => {
-    const f = fixture()
-    try {
-      const source = kind === 'head'
-        ? 'Dinnertime brings everyone back home now. Fresh apples grow beyond those hills.'
-        : 'Bright birds gather beside our quiet river. Everyone comes back home for dinnertime.'
-      const timed = (tokens, start) => tokens.map((token, i) => ({
-        token, startSeconds: start + i * 0.15, endSeconds: start + i * 0.15 + 0.1,
-      }))
-      const ordinary = kind === 'head'
-        ? ['dinnertime', 'brings', 'everyone', 'back', 'home', 'now']
-        : ['everyone', 'comes', 'back', 'home', 'for', 'dinnertime']
-      const compound = kind === 'head'
-        ? ['dinner', 'time', 'brings', 'everyone', 'back', 'home', 'now']
-        : ['everyone', 'comes', 'back', 'home', 'for', 'dinner', 'time']
-      const other = kind === 'head'
-        ? ['fresh', 'apples', 'grow', 'beyond', 'those', 'hills']
-        : ['bright', 'birds', 'gather', 'beside', 'our', 'quiet', 'river']
-      const starts = kind === 'head' ? [2, 5.85, 9.5] : [11.25, 15, 18.75]
-      const windows = [timed(ordinary, starts[0]), timed(compound, starts[1]),
-        timed(ordinary, starts[2]), timed(other, kind === 'head' ? 22 : 2)]
-        .map(words => ({ words, evidencePaths: [] }))
-      put(path.join(f.attempt, 'input.json'),
-        { audioSha256: hash(f.audio), subject: { durationSeconds: 30, paperId: f.paperId } })
-      put(path.join(f.attempt, 'rule-result.json'), { groups: [{ ...f.group,
-        sourceText: source, expectedReadings: 1, observedWindows: windows }] })
-      assert.throws(() => buildReviewPack(f), kind === 'head'
-        ? /REVIEW_PACK_READING_COUNT_AMBIGUOUS.*found 3/u
-        : /REVIEW_PACK_TAIL_AMBIGUOUS.*: 3/u)
-      assert.equal(existsSync(f.output), false)
-    } finally { rmSync(f.temp, { recursive: true, force: true }) }
-  })
-}
-
-test('two compound tail matches in one reading remain ambiguous', () => {
-  const f = fixture()
-  try {
-    const words = f.group.observedWindows[0].words.filter(w => w.startSeconds < 6).map(w => ({ ...w }))
-    const last = words.pop()
-    words.push({ ...last, token: 'hill', endSeconds: last.startSeconds + 0.1 },
-      { ...last, token: 'side', startSeconds: last.startSeconds + 0.1 })
-    const tail = words.slice(-6).map(w => ({ ...w, startSeconds: w.startSeconds + 7, endSeconds: w.endSeconds + 7 }))
-    put(path.join(f.attempt, 'rule-result.json'), { groups: [{ ...f.group,
-      sourceText: sourceText.replace('hills.', 'hillside.'), expectedReadings: 1,
-      observedWindows: [{ ...f.group.observedWindows[0], words: [...words, ...tail] }] }] })
-    assert.throws(() => buildReviewPack(f), /REVIEW_PACK_TAIL_AMBIGUOUS.*: 2/u)
-    assert.equal(existsSync(f.output), false)
-  } finally { rmSync(f.temp, { recursive: true, force: true }) }
-})
-
-test('compressed diagnostics produce identical Owner sentences, rounds, cuts and clip bytes; fingerprint includes gzip', () => {
+test('compressed diagnostics produce identical Owner sentences, whole segments, cuts and clip bytes; fingerprint includes gzip', () => {
   const f = fixture()
   try {
     const old = buildReviewPack({ ...f, attempts: { [f.paperId]: f.attempt } })
@@ -211,7 +129,7 @@ test('first and last sentences preserve literal source and abbreviations', () =>
   assert.deepEqual(edgeSentences(text), ['Ask Mr. Smith at 3 p.m.', 'Fine, thank you!'])
 })
 
-test('CLI emits distinct rounds, exact/context clips, literal Chinese page, SHA-bound unreviewed manifest, without source writes', () => {
+test('CLI emits one whole-segment clip, literal Chinese page, SHA-bound unreviewed manifest, without source writes', () => {
   const f = fixture()
   try {
     const files = ['input.json', 'rule-result.json', 'silence.json', 'raw.json'].map(n => path.join(f.attempt, n))
@@ -223,8 +141,6 @@ test('CLI emits distinct rounds, exact/context clips, literal Chinese page, SHA-
     assert.equal(manifest.asrAdded, false)
     assert.equal(manifest.sourceFingerprintCheck, 'PASS')
     assert.equal(manifest.timebase, 'normalized_playback_seconds')
-    assert.equal(manifest.rules.bufferSeconds, 0.8)
-    assert.equal(manifest.rules.contextSeconds, 3)
     assert.equal(manifest.rules.playbackRate, 1)
     assert.equal(manifest.inputSha256[path.join(import.meta.dirname, 'listening-owner-review-pack.mjs')],
       hash(path.join(import.meta.dirname, 'listening-owner-review-pack.mjs')))
@@ -235,12 +151,12 @@ test('CLI emits distinct rounds, exact/context clips, literal Chinese page, SHA-
     const [segment] = manifest.segments
     assert.equal(segment.sourceText, sourceText)
     assert.equal(segment.paperName, '合成听核卷')
-    assert.deepEqual(segment.readings.map(r => r.reading), [1, 2])
-    assert.ok(segment.readings[0].endSeconds < segment.readings[1].startSeconds)
+    assert.deepEqual(segment.readings.map(r => r.reading), [null])
+    assert.equal(segment.readings[0].startSeconds, 1.5)
+    assert.equal(segment.readings[0].endSeconds, 11.8)
+    assert.equal(segment.observedTranscript.split('Bright').length - 1, 2)
     for (const r of segment.readings) {
-      assert.deepEqual(r.clips.map(c => c.kind), ['exact', 'context'])
-      assert.ok(r.startSeconds >= r.signalEvidence.leadingMidpoint)
-      assert.ok(r.endSeconds <= r.signalEvidence.trailingMidpoint)
+      assert.deepEqual(r.clips.map(c => c.kind), ['window'])
       for (const c of r.clips) {
         assert.equal(hash(path.join(f.output, c.clipPath)), c.sha256)
         assert.ok(Math.abs(c.ffprobeDurationSeconds - c.requestedDurationSeconds) < 0.08)
@@ -248,7 +164,9 @@ test('CLI emits distinct rounds, exact/context clips, literal Chinese page, SHA-
       }
     }
     const html = readFileSync(path.join(f.output, 'index.html'), 'utf8')
-    for (const expected of ['lang="zh-CN"', '应听首句', '应听末句', '第 1 遍', '第 2 遍', '整录音', 'data-start="1.5"', 'audio controls']) assert.ok(html.includes(expected))
+    for (const expected of ['lang="zh-CN"', '应听首句', '应听末句', '整段音频（含所有遍）', '查看整段转录', '原卷说明：读 2 遍', '整录音', 'data-start="1.5"', 'audio controls']) assert.ok(html.includes(expected))
+    assert.equal((html.match(/<audio /gu) ?? []).length, 1)
+    assert.ok(!html.includes('第 1 遍'))
     assert.ok(!html.includes('BOUNDARY_UNCERTAIN'), 'machine issue codes stay in manifest')
     assert.throws(() => buildReviewPack(f), /OUTPUT_EXISTS/u)
   } finally { rmSync(f.temp, { recursive: true, force: true }) }
@@ -258,7 +176,7 @@ test('explicit paper/segment/reading selection and multiple papers do not repeat
   const f = fixture()
   try {
     const m = buildReviewPack({ ...f, selections: [`${f.paperId}:listening-text-1:2`] })
-    assert.deepEqual(m.segments[0].readings.map(r => r.reading), [2])
+    assert.deepEqual(m.segments[0].readings.map(r => r.reading), [null])
     const other = 'paper-mock-second'
     cpSync(f.paperDir, path.join(f.root, 'scripts/import-pipeline/papers', other), { recursive: true })
     const otherBase = path.join(f.root, 'imports/ocr-proofread', other)
@@ -290,14 +208,12 @@ test('review-pack anchors apply the shared pause projection to retained v1 attem
           text: literal.replace(/^M: /gmu, '   '), exclusions: [] } }] })
       const before = hash(file)
       const manifest = buildReviewPack(f)
-      assert.deepEqual(manifest.segments[0].readings.map(r => r.reading), [1, 2])
+      assert.deepEqual(manifest.segments[0].readings.map(r => r.reading), [null])
       assert.equal(manifest.segments[0].sourceText, literal)
       assert.ok(readFileSync(path.join(f.output, 'index.html'), 'utf8').includes(literal))
       assert.equal(hash(file), before)
       assert.equal(manifest.ownerReviewed, false)
-      assert.equal(manifest.segments[0].readings[0].asrFirstWord.token, prefix ? 'text' : 'bright',
-        'masking a speaker cannot turn its spoken (Text 1) into a heading on reprojection')
-      assert.equal(manifest.segments[0].readings[0].wordStartSeconds, 2)
+
     } finally { rmSync(f.temp, { recursive: true, force: true }) }
   }
 })
@@ -308,7 +224,7 @@ test('rejects source-directory/symlink output, bad selections, changed audio and
     assert.throws(() => buildReviewPack({ ...f, output: path.join(f.paperDir, 'pack') }), /OUTPUT_INSIDE_SOURCE/u)
     symlinkSync(f.paperDir, path.join(f.temp, 'alias'))
     assert.throws(() => buildReviewPack({ ...f, output: path.join(f.temp, 'alias/pack') }), /OUTPUT_INSIDE_SOURCE/u)
-    assert.throws(() => buildReviewPack({ ...f, selections: [`${f.paperId}:listening-text-1:3`] }), /SELECTION_INVALID/u)
+    assert.throws(() => buildReviewPack({ ...f, selections: [`${f.paperId}:listening-text-missing:all`] }), /SELECTION_INVALID/u)
     assert.equal(existsSync(f.output), false)
     put(path.join(f.attempt, 'input.json'), { audioSha256: 'sha256:wrong', subject: { durationSeconds: 16 } })
     assert.throws(() => buildReviewPack(f), /AUDIO_CHANGED/u)
@@ -319,50 +235,37 @@ test('rejects source-directory/symlink output, bad selections, changed audio and
     assert.throws(() => buildReviewPack(f), /PAUSE_MISSING/u)
     put(path.join(f.attempt, 'silence.json'), { status: 0, pauses })
     put(path.join(f.attempt, 'rule-result.json'), { groups: [{ ...f.group, observedWindows: [] }] })
-    assert.throws(() => buildReviewPack(f), /READING_COUNT_AMBIGUOUS/u)
+    assert.throws(() => buildReviewPack(f), /SEGMENT_BOUNDARY_MISSING/u)
     assert.equal(existsSync(f.output), false)
   } finally { rmSync(f.temp, { recursive: true, force: true }) }
 })
 
-test('printed count does not discard complete audio readings; incomplete bounded evidence stays unsegmented', () => {
-  const f = fixture()
-  try {
-    const file = path.join(f.attempt, 'rule-result.json')
-    put(file, { groups: [{ ...f.group, expectedReadings: 1 }] })
-    const m = buildReviewPack(f)
-    assert.equal(m.segments[0].expectedReadings, 1, 'retain the printed count')
-    assert.deepEqual(m.segments[0].readings.map(r => r.reading), [1, 2])
-    const words = f.group.observedWindows[0].words.filter(w => w.startSeconds >= 8)
-    put(file, { groups: [{ ...f.group, orderEvidence: { afterSeconds: 1, beforeSeconds: 14 },
-      observedWindows: [{ words, evidencePaths: [] }] }] })
-    const output = path.join(f.temp, 'window-pack')
-    const fallback = buildReviewPack({ ...f, output }).segments[0].readings
-    assert.equal(fallback.length, 1)
-    assert.equal(fallback[0].reading, null)
-    assert.equal(fallback[0].status, 'unsegmented')
-    assert.deepEqual(fallback[0].clips.map(c => [c.kind, c.sourceStartSeconds, c.sourceEndSeconds]),
-      [['window', 1, 14]])
-    const html = readFileSync(path.join(output, 'index.html'), 'utf8')
-    assert.ok(html.includes('未分遍'))
-    assert.ok(!html.includes('第 null 遍'))
-  } finally { rmSync(f.temp, { recursive: true, force: true }) }
+test('whole-segment boundaries and transcript do not depend on the printed reading count', () => {
+  for (const expectedReadings of [undefined, 'unknown', 1, 2]) {
+    const f = fixture()
+    try {
+      put(path.join(f.attempt, 'rule-result.json'), { groups: [{ ...f.group, expectedReadings,
+        playback: { startSeconds: 1, endSeconds: 14 } }] })
+      const m = buildReviewPack(f)
+      assert.equal(m.segments[0].expectedReadings, expectedReadings)
+      assert.deepEqual(m.segments[0].readings.map(r => [r.reading, r.startSeconds, r.endSeconds]), [[null, 1, 14]])
+      assert.equal(m.segments[0].readings[0].clips.length, 1)
+      const html = readFileSync(path.join(f.output, 'index.html'), 'utf8')
+      assert.equal(html.includes('原卷说明：'), Number.isInteger(expectedReadings))
+      assert.ok(html.includes('Bright birds gather'))
+    } finally { rmSync(f.temp, { recursive: true, force: true }) }
+  }
 })
 
-test('one-reading source stays one reading; ASR silence absorption retains raw edges and signal reconciliation', () => {
+test('bounded segment without usable anchors or a known count still produces one whole clip', () => {
   const f = fixture()
   try {
-    const words = f.group.observedWindows[0].words.filter(w => w.startSeconds < 6).map(w => ({ ...w }))
-    words[0].startSeconds = 1.5
-    words.at(-1).endSeconds = 5.6
-    put(path.join(f.attempt, 'rule-result.json'), { groups: [{ ...f.group, expectedReadings: 1,
-      observedWindows: [{ ...f.group.observedWindows[0], words }] }] })
-    const m = buildReviewPack({ ...f, attempts: { [f.paperId]: f.attempt } })
-    assert.equal(m.segments[0].readings.length, 1)
-    const [r] = m.segments[0].readings
-    assert.equal(r.asrFirstWord.startSeconds, 1.5)
-    assert.equal(r.asrLastWord.endSeconds, 5.6)
-    assert.equal(r.wordStartSeconds, 2)
-    assert.equal(r.wordEndSeconds, 5)
-    assert.equal(r.clips.length, 2)
+    put(path.join(f.attempt, 'rule-result.json'), { groups: [{ ...f.group,
+      expectedReadings: 'unknown', observedWindows: [],
+      orderEvidence: { afterSeconds: 1, beforeSeconds: 14 } }] })
+    const m = buildReviewPack(f)
+    assert.deepEqual(m.segments[0].readings[0].clips.map(c => [c.kind, c.sourceStartSeconds, c.sourceEndSeconds]),
+      [['window', 1, 14]])
+    assert.equal(m.ownerReviewed, false)
   } finally { rmSync(f.temp, { recursive: true, force: true }) }
 })
