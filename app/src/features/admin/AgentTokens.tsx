@@ -99,7 +99,10 @@ export function AgentTokens() {
       }}>复制口令</button>
       <button className="ghost-button" type="button" onClick={() => setSecret('')}>隐藏口令</button>
     </Surface>}
-    <p role="alert" className="admin-backfill-error">{error}</p>
+    {/* 口令操作出错（界面收尾 2026-11-16）：原来是常驻的空 <p role="alert">，换成共用 Notice，有错才挂，字没改。
+        新挂上的 role="alert" 读屏照样立刻念；每次操作前 mutate 先清空 error，同一句错连出两次也会重新挂、重新念。
+        不上危险色：口令没建成 / 没作废，名称还在框里，不算 §5 说的「没保存」「会丢东西」。 */}
+    {error ? <Notice kind="error">{error}</Notice> : null}
     <p role="status">{notice}</p>
     {/* 读取失败换成共用 Notice（构件收尾 2026-11-15），字没改；「重试」由 Notice 行尾的键画。
         读取中原来也是一行 Notice「加载中」，等待第六轮换成 3 行灰块。 */}
@@ -145,7 +148,8 @@ export function AgentTokens() {
         },
       }}
     >
-      {error ? <p role="alert" className="admin-backfill-error">{error}</p> : null}
+      {/* 作废没成功：写在框里（框不关），同样换成 Notice，字没改。 */}
+      {error ? <Notice kind="error">{error}</Notice> : null}
     </Dialog>
   </section>
 }

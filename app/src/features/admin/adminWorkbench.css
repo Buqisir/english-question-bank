@@ -40,16 +40,15 @@
   margin: 0;
 }
 
-.admin-backfill-fail,
-.admin-backfill-error {
+.admin-backfill-fail {
   color: var(--eqb-color-danger);
 }
 
-.admin-backfill-error {
+/* 打标失败那一行（界面收尾 2026-11-16 换成共用 Notice，原来的 .admin-backfill-error 红字 13px 删了）：样子归 notice.css，
+ * 这里只管排布：占满一行，排在键和结果行下面（原来 .admin-backfill-error 的 flex-basis: 100%）。
+ * 覆盖：(0,2,0)，notice.css 没写 flex-basis，不和它抢；写成 .admin-tool 下的直接子级，只认这一处。 */
+.admin-tool > .eqb-notice {
   flex-basis: 100%;
-  font-size: 13px;
-  line-height: 1.5;
-  margin: 0;
 }
 
 .agent-tokens {

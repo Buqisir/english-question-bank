@@ -1,5 +1,6 @@
 import { Tag } from '../../icons'
 import { Button } from '../../shared-ui/Button.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
 import { AgentTokens } from './AgentTokens'
 import type { BackfillTopicLabelsResult } from '../../services/questionGroups'
 import './adminWorkbench.css'
@@ -52,9 +53,11 @@ export function AdminWorkbench({
           </>}
         </p>
 
-        <p className="admin-backfill-error" role="alert" aria-atomic="true">
-          {backfillError ? `${backfillError} 可再试一次。` : null}
-        </p>
+        {/* 打标失败（界面收尾 2026-11-16）：原来是常驻的空 <p role="alert">，换成共用 Notice，有错才挂，字没改（服务器原话加「可再试一次。」）。
+            新挂上的 role="alert" 读屏照样立刻念；再点一次时 App.tsx 先清空 backfillError，同一句错也会重新挂、重新念。
+            「再试一次」就是上面那个「给题库打主题标签」键，不在 Notice 行尾再放一个同样的键。
+            不上危险色：打标没成，题库里的东西不丢，不算 §5 说的「没保存」「会丢东西」。 */}
+        {backfillError ? <Notice kind="error">{`${backfillError} 可再试一次。`}</Notice> : null}
       </section>
       <AgentTokens />
     </main>

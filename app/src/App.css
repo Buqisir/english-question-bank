@@ -1952,7 +1952,6 @@ button:disabled {
 }
 
 .draft-batch-panel .writeback-result,
-.draft-batch-panel .form-error,
 .draft-batch-panel .draft-panel-note {
   grid-column: 1 / -1;
 }
@@ -2117,22 +2116,7 @@ button:disabled {
   background: var(--mint-soft);
 }
 
-.form-error {
-  margin: 0 0 14px;
-  padding: 11px 12px;
-  border-radius: 8px;
-  color: var(--coral-text);
-  background: var(--coral-soft);
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.form-error.compact {
-  grid-column: 1 / -1;
-  margin: 0;
-  padding: 8px 10px;
-  font-size: 12px;
-}
+/* .form-error、.form-error.compact：录题面板的整表报错 2026-11-16 换成共用 Notice（界面收尾），没人再用，删了。 */
 
 @media (max-width: 1180px) {
   .workbench {
