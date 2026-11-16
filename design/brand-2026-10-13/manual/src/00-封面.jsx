@@ -12,7 +12,7 @@
         </div>
         <div style={{ boxSizing: 'border-box', paddingTop: '24px' }}>
           <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '15px', lineHeight: '160%', whiteSpace: 'pre-wrap' }}>
-            草案 0.7 · 2026-11-14 · Owner 与 Droid 共写<br />工作名「獭石」已定，商标没确认；字标方向已定，字形是第一轮草稿；条文以仓库里的 BRAND.md 为准
+            草案 0.8 · 2026-11-16 · Owner 与 Droid 共写<br />工作名「獭石」、日常叫法「獭石题库」和口号已定，商标没确认；字标是第二轮草稿；条文以仓库里的 BRAND.md 为准
           </div>
         </div>
       </div>

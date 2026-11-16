@@ -5,7 +5,7 @@
         <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
           <div style={{ backgroundImage: 'url(../../logo/mint/mark.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '20px', width: '31px' }} />
           <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
-            视觉规范手册 · 草案 0.7
+            视觉规范手册 · 草案 0.8
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
@@ -100,7 +100,7 @@
                   组合（图形 + 字标）
                 </div>
                 <div style={{ boxSizing: 'border-box', color: '#60665C', flexBasis: '0%', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '14px', lineHeight: '170%' }}>
-                  第一轮草稿：横排、竖排各一版，见 04 页（第 92 条）。比例是提案，四周另留至少 ¼ 标志高。
+                  第二轮草稿，标志是新脸：横排、竖排和普通屏 20px 小组合，见 04 页（第 92、121 条）。比例是提案，四周另留至少 ¼ 标志高。
                 </div>
               </div>
             </div>
