@@ -1,8 +1,7 @@
 # Ship one task to main
 
 Follow `AGENTS.md`. Tasks carry standing Owner authority for direct push to main,
-verification and automatic website deployment on Owner Mac (effective once
-`main` required status checks are removed, BUB-218; until then use the PR path). Do not wait for a
+verification and automatic website deployment on Owner Mac (BUB-218). Do not wait for a
 separate Ship instruction. “先别推” or “先别上” keeps the task out of main unless
 Owner explicitly permits it to ship with other commits; “停自动部署” pauses every
 Agent's automatic deployment. Migration, schema, DB/R2 data operations and host
@@ -31,9 +30,9 @@ branch protection remain outside this authority.
 ## Direct push, follow main, deploy
 
 Run `git push origin HEAD:refs/heads/main`. If rejected, synchronize and repeat
-affected self-checks before retrying; never force-push. CI/deployment toolchain
-and Ship/verification-rule changes instead require the PR route below, Astra
-review and complete green PR Full/E2E before squash merge.
+affected self-checks before retrying; never force-push. Only CI/deployment
+toolchain changes (see `AGENTS.md`) instead require the PR route below, Astra
+review and complete green PR Full/E2E before squash merge; do not open a PR by habit.
 
 The pusher actively follows their exact SHA's natural `push` run of
 `.github/workflows/verify.yml` to completion. Main has separate concurrency

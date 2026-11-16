@@ -48,8 +48,8 @@ reviewed entry maintenance, deployment, health checks and the agreed rollback
 or recovery when those outcomes are included in the Goal. Do not ask again at
 install/finalize/status/deploy boundaries. Tasks include direct push to main and
 deployment under standing Owner authority (Owner 2026-11-16, BUB-218); explicit
-non-goals still apply. Direct push applies only once `main` no longer has
-required status checks (activation, BUB-218); until then use the PR fallback.
+non-goals still apply. Trunk-based is the default: do not open a PR by habit;
+only the CI/deployment toolchain below uses a PR.
 “先别推” or “先别上” keeps that task out of main unless the Owner explicitly
 allows it to ship with other commits. “停自动部署” pauses all Agents' automatic
 deployments. Migration, schema, DB/R2 data operations and host configuration
@@ -115,11 +115,13 @@ uniquely supplies; otherwise keep it outside acceptance packs.
 - After L1, review the diff and require a clean committed worktree, then
   `git push origin HEAD:refs/heads/main`. If rejected, synchronize and repeat
   affected self-checks before retrying. Never force-push or bypass protection.
-- CI/deployment toolchain changes stay on PR + Astra + complete green PR CI:
+- Only CI/deployment toolchain changes use PR + Astra + complete green PR CI:
   `.github/workflows/`, `scripts/verify-ci.mjs`, `scripts/ci-pr-plan.mjs`,
-  deployment scripts/controllers, `.agents/setup`, `.agents/ship.md`, these
-  Ship/verification rules, `EQB_PERSISTENCE_AUTHORITY_PATHS` and
-  `EQB_HOST_CONFIGURATION_PATHS`. Changing shared GitHub settings is not authorized.
+  `.agents/setup`, deployment scripts/controllers and
+  `EQB_HOST_CONFIGURATION_PATHS`. Everything else, including high-risk behavior
+  (server admission, persistence, import upload tooling), is reviewed on the
+  local candidate and pushed directly to main (Owner 2026-11-16). Changing shared
+  GitHub settings is not authorized.
 - If direct push is unavailable, use the optional PR route in `.agents/ship.md`.
   Synchronize main before triggering PR verification so head contains the event
   base; after complete green PR CI, squash merge. Later main advancement alone
