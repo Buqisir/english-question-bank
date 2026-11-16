@@ -4,6 +4,7 @@ import { digestJson, exactKeys, sha256 } from '../../shared/paper-canonical/stab
 import { LISTENING_REVIEW_VERSION, LISTENING_RULE_EVIDENCE_VERSION,
   assertListeningRuleEvidence, assertListeningUploadBudget } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
 import { reviewSubjectBundleDigest } from '../import-review/reviewSubject.mjs'
+import { listeningAsrTokens } from '../../scripts/import-pipeline/lib-listening-segment-rule.mjs'
 
 export const LISTENING_REVIEW_FILE = 'listening-review-v1.json'
 const evidencePrefix = 'listening-review-evidence/'
@@ -64,14 +65,16 @@ function validateReview(rootDir, review, subject, transcript, version) {
     || review.schemaVersion !== version
     || digestJson(review.subject) !== digestJson(subject)
     || review.reviewedBy !== 'import_agent' || !Number.isFinite(Date.parse(review.reviewedAt))
-    || !['asr_source_comparison', 'audio_source_comparison'].includes(review.method)
+    || !['asr_source_comparison', 'audio_source_comparison', 'agent_asr_comparison'].includes(review.method)
     || review.untrustedContentHandledAsData !== true
     || digestJson(review.scope) !== digestJson({ purpose: 'teacher_navigation',
       verbatim: 'not_certified', wholeRecordingContent: 'not_certified' })) fail('invalid subject, attestation or scope')
+  if (review.method === 'agent_asr_comparison' && version !== LISTENING_REVIEW_VERSION) fail('agent ASR requires v2 rule evidence')
   if (!Array.isArray(review.evidence) || review.evidence.length === 0) fail('missing retained evidence')
   assertListeningUploadBudget(review.evidence)
   const paths = new Set()
   const ruleNotes = []
+  const asrWords = new Map()
   for (const file of review.evidence) {
     if (!exactKeys(file, ['path', 'sha256', 'byteLength', 'kind', 'window', 'settings'])
       || paths.has(file.path) || !digest(file.sha256) || !Number.isSafeInteger(file.byteLength)
@@ -86,6 +89,9 @@ function validateReview(rootDir, review, subject, transcript, version) {
     const bytes = readFileSync(evidencePath(rootDir, file.path))
     if (bytes.length !== file.byteLength || sha256(bytes) !== file.sha256) fail(`changed evidence: ${file.path}`)
     const record = JSON.parse(bytes.toString('utf8'))
+    if (review.method === 'agent_asr_comparison' && file.kind === 'asr_window') {
+      asrWords.set(file.path, listeningAsrTokens([{ ...record, ...file.window }]).words)
+    }
     if (version === LISTENING_REVIEW_VERSION && file.kind === 'asr_window'
       && (record.rule || record.groups || record.engineAttempts
         || /^listening-rule-evidence-/u.test(record.schemaVersion || ''))) fail('rule evidence cannot claim ASR settings')
@@ -105,12 +111,12 @@ function validateReview(rootDir, review, subject, transcript, version) {
     paths.add(file.path)
   }
   if (version === LISTENING_REVIEW_VERSION) {
-    if (ruleNotes.length > 1 || (review.method === 'asr_source_comparison' && ruleNotes.length !== 1)) fail('requires one v2 rule summary')
+    if (ruleNotes.length > 1 || (review.method !== 'audio_source_comparison' && ruleNotes.length !== 1)) fail('requires one v2 rule summary')
     for (const notes of ruleNotes) {
-      try { assertListeningRuleEvidence(notes, review, transcript) } catch (error) { fail(error.message) }
+      try { assertListeningRuleEvidence(notes, review, transcript, asrWords) } catch (error) { fail(error.message) }
     }
   }
-  if (review.method === 'asr_source_comparison' && !review.evidence.some(file => file.kind === 'asr_window')) {
+  if (review.method !== 'audio_source_comparison' && !review.evidence.some(file => file.kind === 'asr_window')) {
     fail('ASR comparison requires retained ASR windows')
   }
   const groups = [...transcript].sort((a, b) => Math.min(...a.questionNumbers) - Math.min(...b.questionNumbers))
@@ -118,7 +124,8 @@ function validateReview(rootDir, review, subject, transcript, version) {
   let lastEnd = 0
   for (const [index, group] of review.groups.entries()) {
     const source = groups[index]
-    if (!exactKeys(group, ['segmentId', 'questionNumbers', 'decision', 'reason', 'limits', 'playback', 'occurrences'])
+    if (!exactKeys(group, ['segmentId', 'questionNumbers', 'decision', 'reason', 'limits', 'playback', 'occurrences',
+      ...(review.method === 'agent_asr_comparison' && Object.hasOwn(group, 'boundaryJudgment') ? ['boundaryJudgment'] : [])])
       || group.segmentId !== source.segmentId
       || digestJson(group.questionNumbers) !== digestJson(source.questionNumbers)
       || !['usable', 'review_required', 'blocked'].includes(group.decision)
@@ -138,7 +145,7 @@ function validateReview(rootDir, review, subject, transcript, version) {
         || !Array.isArray(occurrence.evidencePaths) || occurrence.evidencePaths.length === 0
         || new Set(occurrence.evidencePaths).size !== occurrence.evidencePaths.length
         || occurrence.evidencePaths.some(relative => !paths.has(relative))) fail('invalid occurrence/evidence binding')
-      if (review.method === 'asr_source_comparison') {
+      if (['asr_source_comparison', 'agent_asr_comparison'].includes(review.method)) {
         const windows = review.evidence.filter(file => file.kind === 'asr_window'
           && occurrence.evidencePaths.includes(file.path)).map(file => file.window)
           .sort((a, b) => a.startSeconds - b.startSeconds)

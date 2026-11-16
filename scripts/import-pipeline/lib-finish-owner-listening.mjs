@@ -21,21 +21,24 @@ export async function retainOwnerListening({ paperDir, attempt, report, verify, 
   if (!existsSync(sidecar)) return null
   const bytes = readFileSync(sidecar)
   const owner = JSON.parse(bytes)
-  if (owner.method !== 'audio_source_comparison') return null
+  if (!['audio_source_comparison', 'agent_asr_comparison'].includes(owner.method)) return null
+  const agent = owner.method === 'agent_asr_comparison'
+  const label = agent ? 'AI 对照 ASR 判定' : 'Owner 听核'
   if (digestJson(owner.subject) !== digestJson(report.subject)) {
-    log('听力音频或来源已变化，旧 Owner 听核结论已失效；重新安装分段结果')
+    log(`听力音频或来源已变化，旧 ${label}结论已失效；重新安装分段结果`)
     return null
   }
   const oldRule = ruleDigest(paperDir, owner)
   const newRule = ruleDigest(attempt, report)
-  if (!oldRule || !newRule) throw new Error('无法确认 Owner 听核与当前分段的绑定；保留现有 sidecar，需人工核对')
+  if (!oldRule || !newRule) throw new Error(`无法确认 ${label}与当前分段的绑定；保留现有 sidecar，需人工核对`)
   if (oldRule !== newRule) {
-    log('听力切分证据已变化，旧 Owner 听核结论已失效；重新安装分段结果')
+    log(`听力切分证据已变化，旧 ${label}结论已失效；重新安装分段结果`)
     return null
   }
   await verify()
-  if (sha256(readFileSync(sidecar)) !== sha256(bytes)) throw new Error('校验期间 Owner 听核 sidecar 已变化')
-  log('保留已校验且绑定当前分段的 Owner 听核结果')
+  if (sha256(readFileSync(sidecar)) !== sha256(bytes)) throw new Error(`校验期间 ${label} sidecar 已变化`)
+  log(`保留已校验且绑定当前分段的 ${label}结果`)
   return { sidecar, sha256: sha256(bytes), groups: owner.groups.length,
-    usable: owner.groups.filter(group => group.decision === 'usable').length, retainedOwnerReview: true }
+    usable: owner.groups.filter(group => group.decision === 'usable').length,
+    retainedOwnerReview: !agent, ...(agent ? { retainedAgentReview: true, method: owner.method, label } : {}) }
 }

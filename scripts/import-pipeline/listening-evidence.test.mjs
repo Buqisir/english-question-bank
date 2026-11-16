@@ -83,7 +83,9 @@ test('missing, corrupt, escaping, oversized and unknown diagnostics fail closed'
 })
 function navigation(root) {
   mkdirSync(path.join(root, 'listening-review-evidence'))
-  const bytes = Buffer.from('{"synthetic":true}')
+  const bytes = Buffer.from(JSON.stringify({ result: { segments: [{ words: [
+    { word: 'Synthetic', start: 1, end: 1.2 }, { word: 'source', start: 3.5, end: 3.7 },
+  ] }] } }))
   writeFileSync(path.join(root, 'listening-review-evidence/raw.json'), bytes)
   const transcript = [{ segmentId: 's1', questionNumbers: [1], text: 'Synthetic source.' }]
   const subject = { paperId: 'paper-synthetic', sourceDigest: sha256('source'),
@@ -182,4 +184,58 @@ test('local upload preflight names oversize files and refuses total budget overf
   assert.throws(() => assertListeningUploadBudget([{ path: 'large.json', byteLength: 64 * 1024 ** 2 + 1 }]), /large.json/u)
   assert.throws(() => assertListeningUploadBudget(Array.from({ length: 5 }, (_, i) => ({
     path: `file-${i}.json`, byteLength: 64 * 1024 ** 2 }))), /bundle/u)
+})
+
+function agentNavigation(t) {
+  const root = workspace(t), { review, subject, transcript } = navigation(root)
+  transcript.push({ segmentId: 's2', questionNumbers: [2], text: 'Another source.' })
+  review.groups.push({ ...structuredClone(review.groups[0]), segmentId: 's2', questionNumbers: [2],
+    playback: { startSeconds: 5, endSeconds: 7 },
+    occurrences: [{ startSeconds: 5, endSeconds: 7, evidencePaths: [review.evidence[0].path] }] })
+  review.groups[0].decision = 'review_required'
+  review.groups[0].playback = null
+  review.groups[0].occurrences = []
+  const agent = withListeningRuleFixture(root, review, transcript)
+  agent.method = 'agent_asr_comparison'
+  Object.assign(agent.groups[0], { decision: 'usable', playback: { startSeconds: 1, endSeconds: 4 },
+    occurrences: [{ startSeconds: 1, endSeconds: 4, evidencePaths: [agent.evidence[0].path] }] })
+  const edge = (sourceText, text, startSeconds) => ({ sourceText,
+    words: [{ text, startSeconds, endSeconds: startSeconds + 0.2, evidencePath: agent.evidence[0].path }] })
+  agent.groups[0].boundaryJudgment = {
+    start: edge('Synthetic', 'Synthetic', 1), end: edge('source.', 'source', 3.5),
+  }
+  return { root, agent, subject, transcript }
+}
+test('agent ASR can adjust machine playback with retained word-time basis', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t)
+  assert.equal(validateListeningReview(root, agent, subject, transcript).review, agent)
+})
+test('agent ASR adjustment requires boundary basis', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t)
+  delete agent.groups[0].boundaryJudgment
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript), /boundary basis/u)
+})
+test('agent ASR adjustment cannot overlap its adjacent group', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t)
+  agent.groups[0].playback.endSeconds = 5.1
+  agent.groups[0].occurrences[0].endSeconds = 5.1
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript), /overlapping playback/u)
+})
+test('agent ASR cannot rewrite a machine usable group', t => {
+  const root = workspace(t), { review, subject, transcript } = navigation(root)
+  review.method = 'agent_asr_comparison'
+  review.groups[0].playback.endSeconds = 4
+  assert.throws(() => validateListeningReview(root, review, subject, transcript), /navigation differs from rule/u)
+})
+test('agent ASR rejects invented words, mismatched timestamps and distant boundary words', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t)
+  for (const mutate of [
+    v => { v.groups[0].boundaryJudgment.start.words[0].text = 'invented' },
+    v => { v.groups[0].boundaryJudgment.start.words[0].endSeconds += 0.06 },
+    v => { v.groups[0].playback.endSeconds = 5.21 },
+  ]) {
+    const next = structuredClone(agent)
+    mutate(next)
+    assert.throws(() => validateListeningReview(root, next, subject, transcript), /boundary word missing or far/u)
+  }
 })
