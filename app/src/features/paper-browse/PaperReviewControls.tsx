@@ -3,6 +3,7 @@ import { PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/pap
 import { usePaperPdfProducts } from './usePaperPdfProducts'
 import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
 import { SelectField, TextAreaField } from '../../shared-ui/Field.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
 import { ExternalLink } from '../../icons'
 import './paperReviewControls.css'
 
@@ -120,9 +121,10 @@ export function PaperReviewControls({ paperId, paperName, revisionId, publicatio
     <div className="paper-review-controls-row">
       {/* 字段构件第二轮（2026-11-15）：原来套 .ghost-button 的原生下拉换成 shared-ui/SelectField 大号（36，和这一排大号键同高），
           标签「查看哪款 PDF」只给读屏（原来是 aria-label）。 */}
-      {revisionId && <><SelectField className="paper-review-edition" label="查看哪款 PDF" hideLabel size="lg" value={edition ?? ''}
+      {/* PDF 版本还没读到（出错或在读）时不放下拉：原来是一个空的框带箭头，点开什么都没有（UI 体检 2026-11-16）。 */}
+      {revisionId && <>{editions.length > 0 && <SelectField className="paper-review-edition" label="查看哪款 PDF" hideLabel size="lg" value={edition ?? ''}
         disabled={!edition} onChange={event => setEdition(event.target.value as PaperPdfEdition)}
-        options={editions.map(edition => ({ value: edition, label: PAPER_PDF_PRODUCTS[edition] }))} />
+        options={editions.map(edition => ({ value: edition, label: PAPER_PDF_PRODUCTS[edition] }))} />}
       {/* 构件厂第 4 步第九页（2026-11-14，提案 · 单一来源）：这一排的链接和按钮换成 ButtonLink / Button。
           原来的全站 .ghost-button 是透明底墨字、高 36，对上 strong lg；这一行 44 的最小高度仍由 paperReviewControls.css 给。
           等待第四轮（2026-11-15，Owner「把这个都换了」）：原来「复制中…」换字 + 整键禁用，改成 Button busy——字不换、宽度不变，
@@ -135,12 +137,13 @@ export function PaperReviewControls({ paperId, paperName, revisionId, publicatio
     </div>
     {revisionId && detail && !current && <p>你正在看旧版，复制的信息会保留这一版。</p>}
     {notice && <p role="status">{notice}</p>}
-    {revisionId && productError && <p role="alert">{productError}{' '}
-      <Button tone="strong" size="lg" onClick={retryProducts}>刷新 PDF 版本</Button>
-    </p>}
-    {error && <p role="alert">{error}{' '}
-      <Button tone="strong" size="lg" onClick={() => setRefresh(value => value + 1)}>刷新</Button>
-    </p>}
+    {/* 两条出错行换成共用 Notice（UI 体检 2026-11-16，Owner「顺手修了」）：原来是手写 <p role="alert">，
+        14px 墨字、没有出错图标，句子里夹一个 36 高的大号键，看着比这一块的主键还重。
+        现在和全站出错行一样：出错图标 + 出错色小字，「刷新」是 Notice 自带的小号键（28）。 */}
+    {revisionId && productError && <Notice kind="error" className="paper-review-notice"
+      action={{ label: '刷新 PDF 版本', onClick: retryProducts }}>{productError}</Notice>}
+    {error && <Notice kind="error" className="paper-review-notice"
+      action={{ label: '刷新', onClick: () => setRefresh(value => value + 1) }}>{error}</Notice>}
     {manualCopy && <TextAreaField className="paper-review-manual-copy" label="手动复制试卷信息" hideLabel size="lg" value={manualCopy} readOnly rows={7}
       onFocus={event => event.currentTarget.select()} />}
     {continueUrl && <p><a href={continueUrl} target="_blank" rel="noopener noreferrer">打开对应 Amp 线程</a></p>}
