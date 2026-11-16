@@ -1,0 +1,191 @@
+{
+ "date": "2026-11-16T12:48:23.517Z",
+ "font": {
+  "package": "@fontsource-variable/noto-sans-sc",
+  "version": "5.3.1",
+  "license": "OFL-1.1",
+  "fontVersion": "Version 2.004-H2;hotconv 1.0.118;makeotfexe 2.5.65603"
+ },
+ "tiers": {
+  "large": {
+   "wght": 600,
+   "tracking": 0,
+   "how": "Noto Sans SC wght 600，不加字距（第 92 条：大字黑体中粗）"
+  },
+  "small": {
+   "wght": 400,
+   "tracking": 60,
+   "laiWght": 350,
+   "how": "Noto Sans SC wght 400，字距 +60，「赖」的 13 个轮廓取 350（第一轮 D 小档，第 92 条）"
+  }
+ },
+ "pixel": {
+  "size": 15,
+  "gap": 1,
+  "width": 31
+ },
+ "lockupRatios": {
+  "horizontal": {
+   "em": 0.75,
+   "gap": 0.4
+  },
+  "vertical": {
+   "inkWidth": 0.9,
+   "gap": 0.22
+  }
+ },
+ "mark32Rows": [
+  6,
+  26
+ ],
+ "files": [
+  "wordmark-large-ink.svg",
+  "wordmark-small-ink.svg",
+  "wordmark-15px-ink.svg",
+  "wordmark-15px-box20-ink.svg",
+  "wordmark-small-box20-ink.svg",
+  "lockup-h-15px-ink.svg",
+  "lockup-h-ink.svg",
+  "lockup-v-ink.svg",
+  "wordmark-large-reverse.svg",
+  "wordmark-small-reverse.svg",
+  "wordmark-15px-reverse.svg",
+  "wordmark-15px-box20-reverse.svg",
+  "wordmark-small-box20-reverse.svg",
+  "lockup-h-15px-reverse.svg",
+  "lockup-h-reverse.svg",
+  "lockup-v-reverse.svg"
+ ],
+ "errors": [],
+ "topbar": {
+  "html": "獭石",
+  "font": "15px/600",
+  "family": "Inter, \"PingFang SC\", \"Hiragino Sans GB\", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+ },
+ "rects": [
+  {
+   "place": "topbar",
+   "dpr": 2,
+   "id": "vector",
+   "x": 332,
+   "y": 24.5,
+   "w": 31,
+   "h": 15,
+   "src": "data:image",
+   "mark": {
+    "x": 292,
+    "y": 22,
+    "h": 20
+   }
+  },
+  {
+   "place": "topbar",
+   "dpr": 2,
+   "id": "srcset",
+   "x": 332,
+   "y": 22,
+   "w": 31,
+   "h": 20,
+   "src": "blob:http:",
+   "mark": {
+    "x": 292,
+    "y": 22,
+    "h": 20
+   }
+  },
+  {
+   "place": "login",
+   "dpr": 2,
+   "id": "vector",
+   "x": 88,
+   "y": 44.5,
+   "w": 31,
+   "h": 15,
+   "src": "data:image",
+   "mark": {
+    "x": 56,
+    "y": 40,
+    "h": 24
+   }
+  },
+  {
+   "place": "login",
+   "dpr": 2,
+   "id": "srcset",
+   "x": 88,
+   "y": 42,
+   "w": 31,
+   "h": 20,
+   "src": "blob:http:",
+   "mark": {
+    "x": 56,
+    "y": 40,
+    "h": 24
+   }
+  },
+  {
+   "place": "topbar",
+   "dpr": 1,
+   "id": "vector",
+   "x": 332,
+   "y": 24.5,
+   "w": 31,
+   "h": 15,
+   "src": "data:image",
+   "mark": {
+    "x": 292,
+    "y": 22,
+    "h": 20
+   }
+  },
+  {
+   "place": "topbar",
+   "dpr": 1,
+   "id": "srcset",
+   "x": 332,
+   "y": 22,
+   "w": 31,
+   "h": 20,
+   "src": "blob:http:",
+   "mark": {
+    "x": 292,
+    "y": 22,
+    "h": 20
+   }
+  },
+  {
+   "place": "login",
+   "dpr": 1,
+   "id": "vector",
+   "x": 88,
+   "y": 44.5,
+   "w": 31,
+   "h": 15,
+   "src": "data:image",
+   "mark": {
+    "x": 56,
+    "y": 40,
+    "h": 24
+   }
+  },
+  {
+   "place": "login",
+   "dpr": 1,
+   "id": "srcset",
+   "x": 88,
+   "y": 42,
+   "w": 31,
+   "h": 20,
+   "src": "blob:http:",
+   "mark": {
+    "x": 56,
+    "y": 40,
+    "h": 24
+   }
+  }
+ ],
+ "login": {
+  "html": "獭石",
+  "font": "15px/600"
+ }
+}
