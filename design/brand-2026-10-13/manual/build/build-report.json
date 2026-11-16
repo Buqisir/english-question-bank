@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-16T13:05:23.070Z",
+  "generatedAt": "2026-11-16T13:36:42.832Z",
   "src": "design/brand-2026-10-13/manual/src",
-  "out": "design/brand-2026-10-13/manual/视觉规范手册-草案0.8-预览.pdf",
+  "out": "design/brand-2026-10-13/manual/视觉规范手册-草案0.9-预览.pdf",
   "font": {
     "fallback": true,
     "packages": [
@@ -116,15 +116,15 @@
     },
     {
       "page": "08-三条字道",
-      "images": 3,
+      "images": 4,
       "failedImages": [],
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 4.04,
+        "diffPct": 4.56,
         "headerPct": 0.41,
-        "bodyPct": 4.65,
-        "footerPct": 2.63
+        "bodyPct": 5.29,
+        "footerPct": 2.66
       }
     },
     {
@@ -343,10 +343,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 2.33,
+        "diffPct": 3.04,
         "headerPct": 0.51,
-        "bodyPct": 2.6,
-        "footerPct": 1.86
+        "bodyPct": 3.49,
+        "footerPct": 1.88
       }
     },
     {
@@ -356,10 +356,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 2.71,
+        "diffPct": 3.08,
         "headerPct": 0.51,
-        "bodyPct": 3.03,
-        "footerPct": 2.28
+        "bodyPct": 3.48,
+        "footerPct": 2.34
       }
     },
     {
@@ -369,10 +369,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 5.62,
+        "diffPct": 5.32,
         "headerPct": 0.48,
-        "bodyPct": 6.59,
-        "footerPct": 2.77
+        "bodyPct": 6.28,
+        "footerPct": 2.25
       }
     }
   ],

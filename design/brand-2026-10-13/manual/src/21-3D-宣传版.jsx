@@ -5,7 +5,7 @@
         <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
           <div style={{ backgroundImage: 'url(../../logo/mint/mark.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '20px', width: '31px' }} />
           <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
-            视觉规范手册 · 草案 0.8
+            视觉规范手册 · 草案 0.9
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
@@ -43,7 +43,7 @@
                 <div style={{ backgroundImage: 'url(../../illustration/promo-3d/promo-3d-splash.png)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', height: '540px', width: '304px' }} />
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '18px' }}>
-                开屏 1080×1920 · 只放名字和副句
+                开屏 1080×1920 · 只放字标和副句
               </div>
             </div>
             <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -145,7 +145,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §4.8、§4.9、§5.2 · 第 63、66、71 条 · 文件 illustration/promo-3d/、evidence/3d-materials.jpg、promo-3d-sizes.jpg、3d-mint-recolor.png
+          出处：BRAND.md §4.8、§4.9、§5.2 · 第 63、66、71、122 条 · 文件 illustration/promo-3d/、evidence/3d-materials.jpg、promo-3d-sizes.jpg、3d-mint-recolor.png
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           21

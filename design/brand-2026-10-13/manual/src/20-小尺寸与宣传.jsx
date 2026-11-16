@@ -5,7 +5,7 @@
         <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
           <div style={{ backgroundImage: 'url(../../logo/mint/mark.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '20px', width: '31px' }} />
           <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
-            视觉规范手册 · 草案 0.8
+            视觉规范手册 · 草案 0.9
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
@@ -87,7 +87,7 @@
                 字
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                思源宋体，标题 Bold，副句 Regular。网站名和两句话都是占位，名字定了一起改。
+                思源宋体，标题 Bold，副句 Regular。名字是字标横排组合，标题是口号，副句是信念（第 122 条）。
               </div>
             </div>
             <div style={{ boxSizing: 'border-box', display: 'flex', gap: '16px', paddingTop: '8px' }}>
@@ -95,7 +95,7 @@
                 缩略
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                朋友圈约 150px 宽时标题约 10px，已经读不清；以后换标题不能比现在长。
+                换成口号后，链接卡片 300px 宽时标题约 16px，朋友圈 150px 宽约 13px；以后换标题不能比原来那句长。
               </div>
             </div>
           </div>
@@ -190,7 +190,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §3.1、§4.7、§5.2 · 第 34、45、62、63 条 · 文件 illustration/promo/、evidence/logo-real、small-sizes-1x.png
+          出处：BRAND.md §3.1、§4.7、§5.2 · 第 34、45、62、63、122 条 · 文件 illustration/promo/、evidence/logo-real、small-sizes-1x.png
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           20
