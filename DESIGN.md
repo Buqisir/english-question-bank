@@ -448,7 +448,7 @@ Deadpan 尚未实现；切换入口与记忆方式尚未定案。采用两套配
 
 **禁止**为单个组件现场发明 5px / 6px / 7px / 10px 这类族外档（要新档走 `docs/design-gaps.md`，见 `docs/agents/ui-collaboration.md` 的禁止现场兜底）。机器守门：`scripts/verify-radius-family.mjs`（挂 CI），允许家族为 {4, 8, 12, 16, 999, 0, 50%}，和本条一致。2026-11-13 以前守门脚本的允许表里多了一个 6px，CI 一直放行；那天删掉，当时的 77 处 6px 当天按「按高度选档」改成了 4px 或 8px（清单见 `design/texture-2026-11-13/radius-6px-migration.md`）；只剩 `vocabularyReviewPage.css` 里一条打印样式，质感工作不动打印，它留在脚本的 BASELINE 里，只许减少。
 
-**The No Side-Stripe Rule（禁侧条原则）.** 工具界面与卷面讲评不得用超过 1px 的彩色左右边线充当通用的选中、引用或提示语法。纸面题目定位采用页边上下范围角标 + 题号强调；跨栏证据采用轻底纹 + 与虚线同位的连接点。结构性 1px 发丝线仍可用于真实分隔。
+**The No Side-Stripe Rule（禁侧条原则）.** 工具界面与卷面讲评不得用超过 1px 的彩色左右边线充当通用的选中、引用或提示语法。纸面题目定位采用页边上下范围角标 + 题号强调（2026-11-16 起角标用墨、题号不另外着色，见 BRAND.md 第 123 条）；跨栏证据采用轻底纹 + 与虚线同位的连接点。结构性 1px 发丝线仍可用于真实分隔。
 
 **The No-Emoji-Icon Rule（禁 Emoji 图标原则）.**（2026-09-15 更新图标来源）产品界面的按钮、导航、状态与提示不得用 Emoji 或 Unicode 象形字符代替图标。需要图标时统一使用 `app/src/icons` 的 EQB 图标套件（源 `design/icon-system-2026-09-15/icons-v3.mjs`，`pnpm -C app icons:generate` 重生成；缺字形先按 `principles.md` 画进源文件，不临时引 Lucide 或手写 SVG）；图标不增加信息时直接使用文字。试题原文、用户输入与导入材料属于内容真值，不因本规则改写。
 

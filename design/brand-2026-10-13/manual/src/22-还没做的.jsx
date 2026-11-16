@@ -108,14 +108,6 @@
                 </div>
               </div>
             </div>
-            <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>
-              <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, lineHeight: '175%' }}>
-                浏览页当前题的颜色
-              </div>
-              <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                角标和题号还是深薄荷，和第 72 条「选中态不用薄荷」冲突；校验脚本也要求这样写，等 Owner 定（第 122 条）。
-              </div>
-            </div>
             <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingTop: '12px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, lineHeight: '175%' }}>
                 物件进界面
@@ -242,7 +234,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §2、§3.1、§3.5、§8 第 5–11 条、§4.10 · 第 69、71、88、89、92、95、106、113–119、121、122 条 · 以 BRAND.md 为准，和手册不一致时改手册
+          出处：BRAND.md §2、§3.1、§3.5、§8 第 5–11 条、§4.10 · 第 69、71、88、89、92、95、106、113–119、121–123 条 · 以 BRAND.md 为准，和手册不一致时改手册
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           22

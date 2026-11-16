@@ -1634,7 +1634,7 @@
   }
 
   .vocabulary-print-key strong {
-    color: #1e4a3a;
+    color: #1e1e1c;
     font-weight: 650;
   }
 
@@ -1682,7 +1682,7 @@
     overflow: hidden;
     border-radius: 6px;
     background: var(--surface-strong) !important;
-    color: #1e4a3a !important;
+    color: #1e1e1c !important;
   }
 
   .vocabulary-visual-compact img {
@@ -1850,7 +1850,7 @@
   }
 
   .vocabulary-print-footer strong {
-    color: #1e4a3a;
+    color: #1e1e1c;
     font-weight: 600;
   }
 
@@ -1865,7 +1865,7 @@
     justify-items: center;
     gap: 1mm;
     width: 22mm;
-    color: #1e4a3a;
+    color: #1e1e1c;
     font-size: 7.2pt;
     font-weight: 650;
   }
@@ -2078,7 +2078,7 @@
   }
 
   .vocabulary-dictation-print-footer strong {
-    color: #1e4a3a;
+    color: #1e1e1c;
     font-weight: 600;
   }
 

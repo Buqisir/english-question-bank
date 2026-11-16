@@ -1,0 +1,30 @@
+{
+  "label": "after",
+  "missing": [],
+  "print": {
+    ".vocabulary-print-key strong": "rgb(30, 30, 28)",
+    ".vocabulary-visual-compact": "rgb(30, 30, 28)",
+    ".vocabulary-print-footer strong": "rgb(30, 30, 28)",
+    ".vocabulary-print-qr": "rgb(30, 30, 28)",
+    ".vocabulary-dictation-print-footer strong": "rgb(30, 30, 28)",
+    ".vocabulary-handwriting-print-footer strong": "rgb(30, 30, 28)"
+  },
+  "active": {
+    "cornerTop": "rgb(27, 43, 51)",
+    "cornerBottom": "rgb(27, 43, 51)",
+    "no": "rgb(17, 17, 17)"
+  },
+  "focus": {
+    "focusVisible": true,
+    "outline": "2px solid rgb(17, 17, 17)"
+  },
+  "active-390": {
+    "cornerTop": "rgb(27, 43, 51)",
+    "cornerBottom": "rgb(27, 43, 51)",
+    "no": "rgb(17, 17, 17)"
+  },
+  "focus-390": {
+    "focusVisible": true,
+    "outline": "2px solid rgb(17, 17, 17)"
+  }
+}

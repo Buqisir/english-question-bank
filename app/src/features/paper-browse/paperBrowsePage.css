@@ -1038,20 +1038,19 @@
 .paper-browse-content .ps-question--active::before {
   top: -1px;
   bottom: auto;
-  border-top: 1px solid var(--eqb-color-primary);
-  border-left: 1px solid var(--eqb-color-primary);
+  border-top: 1px solid var(--eqb-color-text);
+  border-left: 1px solid var(--eqb-color-text);
   transition: none;
 }
 
 .paper-browse-content .ps-question--active::after {
   bottom: -1px;
-  border-bottom: 1px solid var(--eqb-color-primary);
-  border-left: 1px solid var(--eqb-color-primary);
+  border-bottom: 1px solid var(--eqb-color-text);
+  border-left: 1px solid var(--eqb-color-text);
 }
 
-.paper-browse-content .ps-question--active .ps-question-no {
-  color: var(--eqb-color-primary-text);
-}
+/* 当前题角标用墨，题号不另外着色（Owner 2026-11-16，BRAND.md 第 123 条）：当前题是选中态，
+ * 第 72 条说选中态不用薄荷。原来角标深薄荷 #2C6E56、题号色板外深绿 #1E4A3A。 */
 
 .paper-browse-lecture-panel .pi-ps-analysis-evidence,
 .paper-browse-lecture-panel .pi-ps-analysis-distractor {
