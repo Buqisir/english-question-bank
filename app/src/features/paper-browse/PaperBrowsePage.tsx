@@ -70,7 +70,7 @@ import { ensurePaperFonts, PaperFontError } from '../../shared-ui/papersurface/p
 import { ListeningSegmentPlayer } from './ListeningSegmentPlayer'
 import { PaperReviewControls } from './PaperReviewControls'
 import { useIsOwnerView } from '../../auth/AuthGate'
-import { firstListeningSectionRange } from '../../../../shared/paper-canonical/listeningPlayback.mjs'
+import { firstListeningSectionRange, wholeListeningPaperRange } from '../../../../shared/paper-canonical/listeningPlayback.mjs'
 // one-sheet-paper: 卷面字体/边距 token 只读消费——同 PaperSurface.tsx /
 // WritingPaperPage.tsx 的注入手法（CSS custom properties on a shared
 // ancestor），不是 shared-ui/papersurface/** 或 paper-intelligence/**
@@ -2676,6 +2676,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       const audio = canonicalConsumption?.listeningAudio
       const firstSection = firstListeningSectionRange(audio?.segments,
         entry.model.surfaceData.questions.map((question) => Number(question.questionNo)).sort((a, b) => a - b))
+      const wholePaper = wholeListeningPaperRange(audio?.segments)
       const listeningPlayers = audio?.segments ? Object.fromEntries(audio.segments.map((segment) => [
         segment.firstQuestionId,
         <ListeningSegmentPlayer key={`${audio.sha256}:${segment.segmentId}`} src={audio.url}
@@ -2696,9 +2697,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                   startSeconds: segment.startSeconds, endSeconds: segment.endSeconds, label: String(segment.questionNumbers[0]),
                 }))} />
             )}
-            listeningPartPlayer={audio && (
+            listeningPartPlayer={audio && wholePaper && (
               <ListeningSegmentPlayer key={`${audio.sha256}:full`} src={audio.url} label="整卷听力"
-                startSeconds={0} endSeconds={audio.durationSeconds} onActivate={activateAudio} size="full"
+                startSeconds={wholePaper.startSeconds} endSeconds={wholePaper.endSeconds} onActivate={activateAudio} size="full"
                 marks={audio.segments?.map((segment) => ({
                   startSeconds: segment.startSeconds,
                   endSeconds: segment.endSeconds,

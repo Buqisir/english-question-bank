@@ -5,17 +5,17 @@ import { reviewCuts } from './listening-owner-review-pack.mjs'
 
 const edges = {wordStartSeconds: 10, wordEndSeconds: 15, durationSeconds: 30}
 const near = (a, b) => assert.ok(Math.abs(a - b) < 1e-9, `${a} != ${b}`)
-test('word edges receive exactly 0.8 seconds when neighboring speech is distant', () => {
+test('word edges receive exactly 1 second when neighboring speech is distant', () => {
   const cut = padListeningWordEdges({...edges, previousSpeechEndSeconds: 5, nextSpeechStartSeconds: 20})
-  near(cut.startSeconds, 9.2)
-  near(cut.endSeconds, 15.8)
+  near(cut.startSeconds, 9)
+  near(cut.endSeconds, 16)
 })
-test('pauses shorter than 1.6 seconds share the adjacent speech midpoint, including zero gap', () => {
-  for (const gap of [0, 0.2, 1, 1.59, 1.6, 2]) {
+test('pauses shorter than 2 seconds share the adjacent speech midpoint, including zero gap', () => {
+  for (const gap of [0, 0.2, 1, 1.99, 2, 3]) {
     const cut = padListeningWordEdges({...edges,
       previousSpeechEndSeconds: 10 - gap, nextSpeechStartSeconds: 15 + gap})
-    near(cut.startSeconds, 10 - Math.min(0.8, gap / 2))
-    near(cut.endSeconds, 15 + Math.min(0.8, gap / 2))
+    near(cut.startSeconds, 10 - Math.min(1, gap / 2))
+    near(cut.endSeconds, 15 + Math.min(1, gap / 2))
   }
 })
 test('recording endpoints clip buffers without moving the first or last word', () => {
@@ -40,7 +40,7 @@ test('Owner review pack and producer share the same buffer/midpoint arithmetic',
   near(review.startSeconds, cut.startSeconds)
   near(review.endSeconds, cut.endSeconds)
 })
-test('production per-reading cuts cap long silence, honor short gaps and recording endpoints', () => {
+test('production material cuts cap long silence, honor short gaps and recording endpoints', () => {
   const text = 'Bright birds gather beside our quiet river near the peaceful village'
   const words = text.split(' ')
   const segment = start => ({start, end: start + 2.2, text,
@@ -53,11 +53,10 @@ test('production per-reading cuts cap long silence, honor short gaps and recordi
     pauses: [{startSeconds: 0, endSeconds: 1.95}, {startSeconds: 4.2, endSeconds: b.start},
       {startSeconds: b.end, endSeconds: 30}], durationSeconds: 30}).groups[0]
     assert.equal(result.decision, 'usable', result.issues.join(','))
-    const [first, second] = result.occurrences
-    near(first.playback.endSeconds, 4.2 + Math.min(0.8, gap / 2))
-    near(second.playback.startSeconds, b.start - Math.min(0.8, gap / 2))
-    assert.ok(first.playback.endSeconds <= second.playback.startSeconds)
-    near(second.playback.endSeconds, b.end + 0.8)
+    assert.equal(result.occurrences.length, 1)
+    near(result.playback.startSeconds, 1)
+    near(result.playback.endSeconds, b.end + 1)
+    assert.equal(result.readingCountEvidence.observedReadings, 2)
   }
   const only = segment(0)
   const result = evaluateListeningEngine({groups: [{segmentId: 'listening-text-1',

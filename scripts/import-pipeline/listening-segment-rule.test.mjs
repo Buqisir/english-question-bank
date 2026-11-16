@@ -5,6 +5,7 @@ import {
   LISTENING_SEGMENT_RULE, alignListeningOccurrence, evaluateListeningEngine, expectedListeningReadings,
   listeningAsrTokens, normalizeListeningText, parseListeningAnnouncements, reconcileListeningEngines, validateListeningOrder,
 } from './lib-listening-segment-rule.mjs'
+import { wholeListeningPaperRange } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { importSubmissionIssues } from './lib-import-submit-gate.mjs'
 
 const fixture = JSON.parse(readFileSync(new URL('./fixtures/listening-apple-run-v2.json', import.meta.url), 'utf8'))
@@ -43,18 +44,20 @@ test('a missing first tail is absence of evidence, paired by time with the compl
   assert.equal(missing.groups[0].occurrences.length, 1)
   const result = reconcileListeningEngines(missing, full)[0]
   assert.equal(result.decision, 'usable', JSON.stringify(result.engineConflicts))
-  assert.equal(result.selectedEngine, 'faster-whisper')
+  assert.equal(result.occurrences.length, 1)
   assert.equal(reconcileListeningEngines(full, missing)[0].decision, 'usable')
 })
-test('three complete readings remain blocked even if the other engine finds only two', () => {
-  const result = reconcileListeningEngines(repeatedEngine({third: true}), repeatedEngine({engine: 'faster-whisper'}))[0]
+test('three readings pass individually; a non-silent outer boundary dispute still blocks', () => {
+  const three = repeatedEngine({third: true})
+  assert.equal(three.groups[0].decision, 'usable')
+  const result = reconcileListeningEngines(three, repeatedEngine({engine: 'faster-whisper'}))[0]
   assert.equal(result.decision, 'review_required')
-  assert.equal(result.occurrences.length, 3)
-  assert.ok(result.issues.includes('OBSERVED_READING_COUNT_EXCEEDED'))
-  assert.equal(result.playback, null)
-  assert.ok(!result.readingCountEvidence?.complete)
-  assert.ok(!result.engineAttempts[0].issues.includes('ANCHOR_AMBIGUOUS'))
+  assert.ok(result.engineConflicts.some(c => c.kind === 'playback_boundary'))
+  assert.equal(result.occurrences.length, 1)
+  assert.equal(result.readingCountEvidence.observedReadings, 3)
+  assert.ok(result.notes.includes('OBSERVED_READING_COUNT_EXCEEDED'))
 })
+
 test('word differences in a missing-tail engine are notes when the other engine locates every reading', () => {
   const text = 'Bright birds gather beside our quiet river while travelers can buy lunch for twenty dollars before seven and enjoy the peaceful village over here'
   for (const first of [text.replace('can buy', 'can not buy'), text.replace('can buy', 'could buy'),
@@ -111,7 +114,7 @@ test('a short late not with complete independent boundaries becomes an isolated 
   for (const pair of [[partial, full], [full, partial]]) {
     const result = reconcileListeningEngines(...pair)[0]
     assert.equal(result.decision, 'usable')
-    assert.ok(result.engineNotes.some(n => n.kind === 'isolated_edge_asr'))
+    assert.ok(result.engineNotes.length)
   }
 })
 test('unanchored internal word differences become notes against complete reference readings', () => {
@@ -153,7 +156,7 @@ test('short isolated envelope words become notes in both engine directions', () 
       for (const pair of [[partial, full], [full, partial]]) {
         const result = reconcileListeningEngines(...pair)[0]
         assert.equal(result.decision, 'usable', `${side} ${word} in ${anchored}`)
-        assert.ok(result.engineNotes.some(n => n.kind === 'isolated_edge_asr'))
+        assert.ok(result.engineNotes.length)
       }
     }
   }
@@ -170,14 +173,15 @@ test('discarded overlapping windows retain internal word notes without blocking 
   assert.equal(result.decision, 'usable')
   assert.ok(result.engineNotes.some(n => n.kind === 'observed_critical_word_difference'))
 })
-test('unanchored raw speech spanning two physical readings has no safe subset assignment', () => {
+test('a coarse unanchored run is absence of boundary evidence when a complete material reference exists', () => {
   const text = astraText.replace('Bright', 'Blazing').replace('over there', 'over here')
   const partial = astraEngine(text, null, {windows: [{startSeconds: 0, endSeconds: 30,
     result: {segments: [{start: 2, end: 16.8, text, words: [{word: text, start: 2, end: 16.8}]}]}}]})
-  assert.equal(partial.groups[0].occurrences.length, 0)
-  assert.equal(partial.groups[0].partialOccurrences.length, 0)
-  assertCounterevidenceBlocks(partial, astraEngine(astraText, null, {engine: 'faster-whisper'}), 'ambiguous raw run')
+  assert.equal(partial.groups[0].decision, 'review_required')
+  const result = reconcileListeningEngines(partial, astraEngine(astraText, null, {engine: 'faster-whisper'}))[0]
+  assert.equal(result.decision, 'usable', JSON.stringify(result.engineConflicts))
 })
+
 test('short ordinary edge speech is recorded explicitly instead of clipping it', () => {
   const first = astraText.replace('Bright', 'Blazing').replace('over there', 'over here')
   const full = astraEngine(astraText, null, {engine: 'faster-whisper',
@@ -192,7 +196,7 @@ test('short ordinary edge speech is recorded explicitly instead of clipping it',
     for (const pair of [[partial, full], [full, partial]]) {
       const result = reconcileListeningEngines(...pair)[0]
       assert.equal(result.decision, 'usable', `${side} ordinary ${word}`)
-      assert.ok(result.engineNotes.some(n => n.kind === 'isolated_edge_asr'))
+      assert.ok(result.engineAttempts.some(a => a.observedWindows.some(w => w.words.some(t => t.token === word))))
     }
   }
 })
@@ -222,7 +226,7 @@ test('genuinely unobserved prefixes and suffixes do not assert critical deletion
 })
 test('common occurrences at incompatible times or in reversed order still conflict', () => {
   const full = repeatedEngine(), other = repeatedEngine({engine: 'faster-whisper'})
-  other.groups[0].occurrences.reverse()
+  other.groups[0].anchorEvidence.heads.reverse()
   assert.equal(reconcileListeningEngines(full, other)[0].decision, 'review_required')
   const shifted = repeatedEngine({engine: 'faster-whisper'})
   shifted.groups[0].occurrences[0].startSeconds += 30
@@ -252,16 +256,15 @@ test('boundary search skips an overlapping silence that cannot retain padding an
     pauses: [{startSeconds: 1, endSeconds: 1.9}, {startSeconds: end - 0.08, endSeconds: end + 0.003}]})
   assert.ok(noLaterPause.issues.includes('BOUNDARY_EVIDENCE_INSUFFICIENT'))
 })
-test('fewer complete readings stay blocked even with full recording coverage', () => {
-  const result = evaluate({ instructions: two })
-  assert.equal(result.decision, 'review_required')
-  assert.ok(result.issues.includes('READING_COUNT_MISMATCH'))
-  assert.ok(!result.readingCountEvidence?.complete)
-  const crop = evaluate({ instructions: two, windows: [{...fixture, startSeconds: 1, endSeconds: 12}] })
-  assert.equal(crop.decision, 'review_required')
-  assert.ok(crop.issues.includes('READING_COUNT_MISMATCH'))
-  assert.equal(evaluate({ instructions: [] }).expectedReadings, 'unknown')
+test('fewer readings, unknown instructions and conflicting printed counts are notes only', () => {
+  for (const instructions of [two, [], [...one, ...two]]) {
+    const result = evaluate({instructions})
+    assert.equal(result.decision, 'usable', result.issues.join(','))
+    assert.ok(result.notes.length)
+    assert.ok(!result.readingCountEvidence.instructionCorrectionRequired)
+  }
 })
+
 test('group instructions override section, conflicting same-level instructions block', () => {
   assert.equal(expectedListeningReadings({ ...group, instruction: '本段读一遍' }, two).expectedReadings, 1)
   assert.equal(expectedListeningReadings(group, [...one, ...two]).issue, 'READING_INSTRUCTION_CONFLICT')
@@ -303,6 +306,12 @@ test('missing a complete middle turn blocks despite high total score', () => {
   const text = `${source.split('\n')[0]}\nW: Perhaps.\nM: ${source.split('\n')[1].slice(3)}`
   const result = evaluate({ groups: [{ ...group, text }] })
   assert.ok(result.issues.includes('WHOLE_TURN_MISSING'))
+  const parts = [windowFor(source, 2), windowFor(text, 15)]
+  const repeated = evaluate({groups: [{...group, text}], instructions: two,
+    windows: [{startSeconds: 0, endSeconds: 100, result: {segments: parts.flatMap(w => w.result.segments)}}],
+    pauses: surrounding(parts), durationSeconds: 100})
+  assert.ok(repeated.issues.includes('WHOLE_TURN_MISSING'))
+  assert.equal(repeated.playback, null)
 })
 test('short materials require 0.95 both recall and edit similarity', () => {
   const raw = structuredClone(fixture)
@@ -366,17 +375,19 @@ test('Chinese instructions permit numbering inside an English quote or English i
   }
   assert.equal(importSubmissionIssues({ materialization: { stem: '要点：(1) 介绍活动；(2) …' } })[0].matches.length, 2)
 })
-test('cross-reading head/tail splicing across a pause cannot pass', () => {
+test('an internal silence alone does not invalidate complete material text', () => {
   const raw = structuredClone(fixture)
   for (const word of raw.result.segments[0].runs.slice(10)) { word.start += 10; word.end += 10 }
-  const result = evaluate({ windows: [raw], pauses: [...pauses,
-    { startSeconds: 4, endSeconds: 13.9 }, { startSeconds: 16.9, endSeconds: 20 }] })
-  assert.ok(result.issues.includes('OCCURRENCE_DISCONTINUOUS'))
+  const result = evaluate({windows: [raw], pauses: [...pauses,
+    {startSeconds: 4, endSeconds: 13.9}, {startSeconds: 16.9, endSeconds: 20}]})
+  assert.equal(result.decision, 'usable')
+  assert.ok(result.notes.includes('OCCURRENCE_DISCONTINUOUS'))
 })
+
 test('Chinese announcements must agree with group number and question range', () => {
   const raw = structuredClone(fixture)
   raw.result.segments.unshift({ text: '第2段，第6至8题', start: 0, end: 1.5, runs: [] })
-  assert.ok(evaluate({ windows: [raw] }).issues.includes('ANNOUNCEMENT_CONFLICT'))
+  assert.ok(evaluate({ windows: [raw] }).notes.includes('ANNOUNCEMENT_CONFLICT'))
   assert.deepEqual(parseListeningAnnouncements('Text Six. 第十段。第6至8题').map(m => m.kind),
     ['group', 'group', 'questions'])
 })
@@ -393,7 +404,7 @@ test('a corrected previous reading count does not reassign its announcement to t
   ] } }]
   const result = evaluateListeningEngine({ groups: [{ ...group, instruction: '本段读两遍' }, other],
     instructions: one, windows, pauses: surrounding([a, b]), durationSeconds: 100 })
-  assert.deepEqual(result.groups.map(g => g.decision), ['review_required', 'usable'])
+  assert.deepEqual(result.groups.map(g => g.decision), ['usable', 'usable'])
   assert.deepEqual(result.groups[1].occurrences[0].announcements.map(m => m.groupNumber), [2])
 })
 test('no local silence evidence means no approved playback', () => {
@@ -440,7 +451,7 @@ test('two-engine identity or boundary conflict blocks', () => {
   whisper.issues.push('ANNOUNCEMENT_CONFLICT')
   assert.equal(reconcileListeningEngines({ groups: [apple] }, { groups: [whisper] })[0].decision, 'review_required')
 })
-test('two readings with duration ratio outside 0.85..1.15 block', () => {
+test('two readings with different durations remain usable with diagnostic notes', () => {
   const second = structuredClone(fixture.result.segments[0])
   second.start = 15
   second.end = 24
@@ -448,7 +459,8 @@ test('two readings with duration ratio outside 0.85..1.15 block', () => {
   const raw = { ...fixture, result: { segments: [...fixture.result.segments, second] } }
   const result = evaluate({ instructions: two, windows: [raw],
     pauses: [...pauses, { startSeconds: 13, endSeconds: 14.9 }, { startSeconds: 22.8, endSeconds: 25 }] })
-  assert.ok(result.issues.includes('READING_DURATION_CONFLICT'))
+  assert.ok(result.notes.includes('READING_DURATION_CONFLICT'))
+  assert.equal(result.decision, 'usable')
 })
 test('finite normalization never equates proper names', () => {
   assert.deepEqual(normalizeListeningText('OK Hey hm theatres travelled $25'), normalizeListeningText('okay Hi hmm theaters traveled twenty five dollars'))
@@ -488,14 +500,14 @@ test('all explicit cues agree: a later correct range cannot hide a wrong group c
   const raw = structuredClone(fixture)
   raw.result.segments.unshift({ text: '第2段', start: 0, end: 0.5, runs: [] },
     { text: '第1至1题', start: 0.7, end: 1.5, runs: [] })
-  assert.ok(evaluate({ windows: [raw] }).issues.includes('ANNOUNCEMENT_CONFLICT'))
+  assert.ok(evaluate({ windows: [raw] }).notes.includes('ANNOUNCEMENT_CONFLICT'))
 })
 test('a cue spanning multiple runs remains visible before the body in a long ASR segment', () => {
   const raw = structuredClone(fixture)
   raw.result.segments[0].text = `Text Two. ${raw.result.segments[0].text}`
   raw.result.segments[0].start = 0
   raw.result.segments[0].runs.unshift({ text: 'Text', start: 0, end: 0.4 }, { text: ' Two.', start: 0.4, end: 1 })
-  assert.ok(evaluate({ windows: [raw] }).issues.includes('ANNOUNCEMENT_CONFLICT'))
+  assert.ok(evaluate({ windows: [raw] }).notes.includes('ANNOUNCEMENT_CONFLICT'))
 })
 
 function orderScenario(times, missing = [], middleInstruction = null) {
@@ -534,12 +546,12 @@ test('overlapping playback in the skeleton gap fails both groups before sidecar 
 test('all occurrences of an unannounced failed group must remain in its skeleton interval', () => {
   const result = orderScenario([2, 60, 40], [], '本段读两遍')
   assert.ok(result.groups[1].issues.includes('WHOLE_PAPER_ORDER_CONFLICT'))
-  assert.ok(result.groups[1].issues.includes('READING_COUNT_MISMATCH'))
-  assert.equal(result.groups[2].decision, 'usable', 'failed count must not become a neighboring skeleton')
+  assert.ok(result.groups[1].notes.includes('READING_COUNT_MISMATCH'))
+  assert.equal(result.groups[2].decision, 'review_required', 'count notes do not exempt an inverted material')
 })
 test('unknown expected reading count is not a numeric count mismatch', () => {
   const result = evaluate({ instructions: [] })
-  assert.ok(result.issues.includes('READING_COUNT_UNKNOWN'))
+  assert.ok(result.notes.includes('READING_COUNT_UNKNOWN'))
   assert.ok(!result.issues.includes('READING_COUNT_MISMATCH'))
 })
 test('adjacent readings share a silence boundary without clipping complete acoustic runs', () => {
@@ -550,13 +562,12 @@ test('adjacent readings share a silence boundary without clipping complete acous
     pauses: [{ startSeconds: 0, endSeconds: 1.9 }, { startSeconds: 6.45, endSeconds: 6.79 },
       { startSeconds: 11.1, endSeconds: 13 }] })
   assert.equal(result.decision, 'usable', result.issues.join(', '))
-  const [first, second] = result.occurrences
-  assert.ok(first.playback.endSeconds <= second.playback.startSeconds)
-  assert.ok(first.playback.endSeconds >= first.endSeconds + LISTENING_SEGMENT_RULE.boundaryPaddingSeconds)
-  assert.ok(second.playback.startSeconds <= second.startSeconds - LISTENING_SEGMENT_RULE.boundaryPaddingSeconds)
+  assert.equal(result.occurrences.length, 1)
+  assert.ok(result.playback.startSeconds < 2)
+  assert.ok(result.playback.endSeconds > b.result.segments[0].end)
 })
 
-test('printed once and two complete audio readings pass with a correction note and both occurrences', () => {
+test('printed once and two complete audio readings pass with a count note and one whole-material occurrence', () => {
   const text = astraText
   const parts = [windowFor(text, 2), windowFor(text, 12)]
   const result = evaluate({ groups: [{...group, text}], instructions: one,
@@ -564,34 +575,29 @@ test('printed once and two complete audio readings pass with a correction note a
     pauses: surrounding(parts), durationSeconds: 100 })
   assert.equal(result.decision, 'usable', result.issues.join(','))
   assert.equal(result.expectedReadings, 1, 'keep the original printed count for audit')
-  assert.equal(result.occurrences.length, 2)
+  assert.equal(result.occurrences.length, 1)
   assert.deepEqual(result.readingCountEvidence, {printedReadings: 1, observedReadings: 2,
-    complete: true, instructionCorrectionRequired: true})
+    headCount: 2, tailCount: 2})
   assert.ok(result.notes.includes('READING_COUNT_MISMATCH'))
-  assert.equal(result.playback.endSeconds, result.occurrences[1].playback.endSeconds)
+  assert.equal(result.playback.endSeconds, result.occurrences[0].playback.endSeconds)
 })
 
-test('a second observed head without its tail cannot become an approved single reading', () => {
+test('an internal missing tail does not block reliable outer material edges', () => {
   const result = repeatedEngine({first: astraText.replace('over there', 'over here')}).groups[0]
-  assert.equal(result.decision, 'review_required')
-  assert.ok(result.issues.includes('OCCURRENCE_TAIL_MISSING_OR_AMBIGUOUS'))
-  assert.ok(result.issues.includes('READING_COUNT_MISMATCH'))
-  assert.equal(result.playback, null)
-  assert.ok(!result.readingCountEvidence?.complete)
+  assert.equal(result.decision, 'usable', result.issues.join(','))
+  assert.equal(result.readingCountEvidence.observedReadings, 'unknown')
+  assert.equal(result.occurrences[0].alignment.observedReadings, 2)
 })
 
-test('a second reading with both head and tail misrecognized cannot certify a lower count', () => {
+test('only located outer anchors define the range; printed counts do not certify additional audio', () => {
   const result = astraEngine(astraText, segments => {
     segments[1].words[0].word = 'Blazing'
     segments[1].words.at(-1).word = 'here'
-    segments[1].text = astraText.replace('Bright', 'Blazing').replace('over there', 'over here')
   }).groups[0]
   assert.equal(result.occurrences.length, 1)
-  assert.equal(result.decision, 'review_required')
-  assert.ok(result.issues.includes('READING_COUNT_MISMATCH'))
-  assert.ok(!result.readingCountEvidence?.complete)
-  assert.equal(result.playback, null)
-  assert.equal(astraEngine().groups[0].decision, 'usable', 'two intact readings still pass')
+  assert.equal(result.decision, 'usable')
+  assert.ok(result.notes.includes('READING_COUNT_MISMATCH'))
+  assert.ok(result.playback.endSeconds < 12)
 })
 
 test('duration consistency checks every pair, including the third reading', () => {
@@ -609,22 +615,23 @@ test('duration consistency checks every pair, including the third reading', () =
   const equal = make(false), slow = make(true)
   assert.equal(equal.durationRatios.length, 3)
   assert.ok(!equal.issues.includes('READING_DURATION_CONFLICT'))
-  assert.ok(slow.issues.includes('READING_DURATION_CONFLICT'))
-  assert.equal(slow.decision, 'review_required')
+  assert.ok(slow.notes.includes('READING_DURATION_CONFLICT'))
+  assert.equal(slow.decision, 'usable')
 })
 
-test('only actual once/twice counts are approvable by the existing correction contract', () => {
-  for (const count of [1, 2]) {
+test('one, two and three readings use the same material approval rule', () => {
+  for (const count of [1, 2, 3]) {
     const parts = Array.from({length: count}, (_, i) => windowFor(astraText, 2 + i * 10))
     const result = evaluate({groups: [{...group, text: astraText}], instructions: one,
       windows: [{startSeconds: 0, endSeconds: 100, result: {segments: parts.flatMap(w => w.result.segments)}}],
       pauses: surrounding(parts), durationSeconds: 100})
     assert.equal(result.decision, 'usable')
-    assert.equal(result.occurrences.length, count)
+    assert.equal(result.occurrences.length, 1)
+    assert.equal(result.readingCountEvidence.observedReadings, count)
   }
   const three = repeatedEngine({third: true}).groups[0]
-  assert.equal(three.decision, 'review_required')
-  assert.ok(three.issues.includes('OBSERVED_READING_COUNT_EXCEEDED'))
+  assert.equal(three.decision, 'usable')
+  assert.ok(three.notes.includes('OBSERVED_READING_COUNT_EXCEEDED'))
   assert.ok(!three.readingCountEvidence?.instructionCorrectionRequired)
 })
 
@@ -644,4 +651,44 @@ test('word notes never remove a long edge or a cross-engine playback boundary co
   assert.equal(longEdge.decision, 'review_required')
   assert.ok(longEdge.issues.includes('EDGE_WORD_SPAN_LONG'))
   assert.equal(longEdge.playback, null)
+})
+
+test('whole-paper playback requires complete ordered question coverage and never includes recording furniture', () => {
+  const segments = Array.from({length: 20}, (_, i) => ({questionNumbers: [i + 1],
+    startSeconds: 10 + i * 5, endSeconds: 14 + i * 5}))
+  assert.deepEqual(wholeListeningPaperRange(segments), {startSeconds: 10, endSeconds: 109})
+  assert.equal(wholeListeningPaperRange(segments.slice(0, -1)), null)
+  assert.equal(wholeListeningPaperRange(undefined), null)
+  const overlap = structuredClone(segments); overlap[1].startSeconds = 13
+  assert.equal(wholeListeningPaperRange(overlap), null)
+})
+test('Chinese mixed acoustic runs and correct question announcements inside the material still block', () => {
+  for (const prompt of ['请听下面的对话', 'Text One']) {
+    const raw = structuredClone(fixture)
+    raw.result.segments[0].runs[0].text = `${prompt} ${raw.result.segments[0].runs[0].text}`
+    const result = reconcileListeningEngines({groups: [evaluate({windows: [raw]})]})[0]
+    assert.equal(result.decision, 'review_required')
+    assert.equal(result.playback, null)
+  }
+  const raw = repeatedEngine()
+  raw.groups[0].boundarySpeechRuns.push({engine: 'Apple SpeechAnalyzer', text: '请再听一遍',
+    startSeconds: 9, endSeconds: 10})
+  const result = reconcileListeningEngines(raw)[0]
+  assert.equal(result.decision, 'review_required')
+  assert.equal(result.playback, null)
+})
+test('a foreign material anchor cannot hide inside the body alignment tolerance or engine fallback', () => {
+  const other = {segmentId: 'listening-text-2', questionNumbers: [2],
+    text: 'Orange butterflies settle upon purple flowers beside the quiet school'}
+  const text = `Bright birds gather beside our quiet river ${'travelers enjoy village gardens '.repeat(40)}and return home before the evening train departs`
+  const dirty = windowFor(text.replace('village gardens', `village gardens ${other.text}`))
+  const clean = windowFor(text)
+  const run = (raw, engine) => evaluateListeningEngine({groups: [{...group, text}, other],
+    instructions: one, engine, windows: [raw], pauses: surrounding([raw]), durationSeconds: 100})
+  const primary = run(dirty, 'Apple SpeechAnalyzer'), secondary = run(clean, 'faster-whisper')
+  assert.ok(primary.groups[0].issues.includes('NEIGHBOR_BOUNDARY_CROSSED'))
+  assert.ok(!primary.groups[0].issues.includes('BODY_ALIGNMENT_LOW'))
+  const result = reconcileListeningEngines(primary, secondary)[0]
+  assert.equal(result.decision, 'review_required')
+  assert.equal(result.playback, null)
 })

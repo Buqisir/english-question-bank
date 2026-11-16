@@ -312,7 +312,7 @@ test('rule-only replay retains historical raw bytes and never opens an ASR runne
   const result = segmentListening(replay)
   assert.equal(result.usable, 1)
   const input = readJson(path.join(result.attempt, 'input.json'))
-  assert.equal(input.rule.version, 'listening-segment-rule-v7')
+  assert.equal(input.rule.version, 'listening-segment-rule-v8')
   assert.equal(input.historicalRuleVersion, 'listening-segment-rule-v3')
   assert.equal(input.inference, 'not_run')
   assert.match(input.ruleCacheKey, /^sha256:/u)
@@ -406,7 +406,7 @@ test('request text is bound to its reviewed transcript digest, including reviewe
   changed.transcript[0].text += ' altered'
   assert.throws(() => segmentListening({ ...options, request: changed }), /LISTENING_REQUEST_TRANSCRIPT_STALE/u)
 })
-test('two readings sharing one silence produce nonoverlapping occurrences accepted by the server', t => {
+test('two readings sharing one silence produce one whole-material occurrence accepted by the server', t => {
   const primary = structuredClone(fixture)
   const second = structuredClone(primary.result.segments[0])
   second.start += 5.2
@@ -420,10 +420,12 @@ test('two readings sharing one silence produce nonoverlapping occurrences accept
       { startSeconds: 12.1, endSeconds: 14 }] })
   assert.equal(result.usable, 1)
   const review = JSON.parse(readFileSync(result.review, 'utf8'))
-  assert.ok(review.groups[0].occurrences[0].endSeconds <= review.groups[0].occurrences[1].startSeconds)
+  assert.equal(review.groups[0].occurrences.length, 1)
+  assert.deepEqual(review.groups[0].occurrences[0].startSeconds, review.groups[0].playback.startSeconds)
+  assert.deepEqual(review.groups[0].occurrences[0].endSeconds, review.groups[0].playback.endSeconds)
   assert.equal(validateListeningReview(result.attempt, review, subject, [group]).review.groups[0].decision, 'usable')
 })
-test('missing first tail falls back once to complete readings; internal word differences are retained notes', t => {
+test('internal missing tails pass without fallback when whole-material text and outer edges pass', t => {
   for (const critical of [false, true]) {
     const full = structuredClone(fixture)
     const second = structuredClone(full.result.segments[0])
@@ -441,20 +443,20 @@ test('missing first tail falls back once to complete readings; internal word dif
       pauses: [{startSeconds: 0, endSeconds: 1.9}, {startSeconds: 6.9, endSeconds: 10},
         {startSeconds: 11, endSeconds: 11.9}, {startSeconds: 16.9, endSeconds: 19}],
       runWhisper: () => { calls++; return {...full, engine: {name: 'faster-whisper'}} }})
-    assert.equal(calls, 1)
+    assert.equal(calls, 0)
     const review = JSON.parse(readFileSync(result.review, 'utf8'))
     validateListeningReview(result.attempt, review, subject, [group])
     writeFileSync(path.join(dir, 'listening-review-v1.json'), JSON.stringify(review))
     assert.equal(result.usable, 1)
-    assert.equal(review.groups[0].occurrences.length, 2)
+    assert.equal(review.groups[0].occurrences.length, 1)
     const rules = JSON.parse(readFileSync(path.join(result.attempt, 'rule-result.json'), 'utf8'))
-    assert.equal(rules.groups[0].selectedEngine, 'faster-whisper')
+    assert.equal(rules.groups[0].selectedEngine, 'Apple SpeechAnalyzer')
     assert.equal(rules.groups[0].engineAttempts[0].occurrences.length, 1)
-    if (critical) assert.ok(rules.groups[0].engineNotes.length)
+    if (critical) assert.ok(rules.groups[0].notes.length)
     assert.equal(assertImportSubmissionReady(dir).status, 'PASS')
   }
 })
-test('a second reading with both anchors misrecognized must still invoke the frozen Whisper fallback', t => {
+test('printed counts do not force fallback for otherwise usable located material', t => {
   const text = 'Bright birds gather beside our quiet river while travelers can buy lunch for twenty dollars before seven and enjoy the peaceful village over there'
   const parts = [2, 12].map(start => ({start, end: start + text.split(' ').length * 0.2, text,
     words: text.split(' ').map((word, i) => ({word, start: start + i * 0.2, end: start + (i + 1) * 0.2}))}))
@@ -471,11 +473,11 @@ test('a second reading with both anchors misrecognized must still invoke the fro
     pauses: parts.flatMap(s => [{startSeconds: s.start - 1, endSeconds: s.start - 0.05},
       {startSeconds: s.end + 0.05, endSeconds: s.end + 1}]),
     runWhisper: () => { calls++; return full }})
-  assert.equal(calls, 1)
+  assert.equal(calls, 0)
   const apple = readJson(path.join(result.attempt, 'apple-rule.json')).groups[0]
-  assert.equal(apple.decision, 'review_required')
-  assert.ok(apple.issues.includes('READING_COUNT_MISMATCH'))
-  assert.equal(result.usable, 1, 'the independently complete fallback may prove both readings')
+  assert.equal(apple.decision, 'usable')
+  assert.ok(apple.notes.includes('READING_COUNT_MISMATCH'))
+  assert.equal(result.usable, 1, 'printed counts do not require an inference retry')
 })
 test('fallback crop ignores a failed neighbor with a partial occurrence', t => {
   const { options, dir, subject } = workspace(t, fixture)

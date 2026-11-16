@@ -15,3 +15,7 @@ export function firstListeningSectionRange(segments: readonly ListeningTiming[] 
   endSeconds: number
   segments: readonly ListeningTiming[]
 } | null
+export function wholeListeningPaperRange(segments: readonly ListeningTiming[] | undefined): {
+  startSeconds: number
+  endSeconds: number
+} | null
