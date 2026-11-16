@@ -149,7 +149,7 @@
                 重画和重做
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                半身四张和「完成」已定稿、收进 mascot/（第 117 条），没找到已换摊手（第 119 条）。还没做：48 像素以下的小尺寸版；巨藻中图停用待重做（第 114 条）；更多原语插画等真有首次空态再做。
+                半身四张和「完成」已定稿、收进 mascot/（第 117 条），没找到已换摊手（第 119 条）。48px 以下只用头像，不另画缩小版；巨藻林中图 2026-11-16 用新素材重做了一张（第 126 条，提案）。还没做：潜水、林冠透光两张中图；更多原语插画等真有首次空态再做。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>
@@ -226,7 +226,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §2、§3.1、§3.5、§8 第 5–11 条、§4.10 · 第 69、71、88、89、92、95、106、113–119、121–124 条 · 以 BRAND.md 为准，和手册不一致时改手册
+          出处：BRAND.md §2、§3.1、§3.5、§8 第 5–11 条、§4.10 · 第 69、71、88、89、92、95、106、113–119、121–126 条 · 以 BRAND.md 为准，和手册不一致时改手册
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           22

@@ -182,10 +182,10 @@
             </div>
             <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0%', flexDirection: 'column', flexGrow: '1', gap: '10px' }}>
               <div style={{ alignItems: 'center', backgroundColor: '#FFFFFF', borderColor: '#E3E8DF', borderRadius: '12px', borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: 0, gap: '24px', height: '150px', justifyContent: 'center' }}>
-                <div style={{ backgroundImage: 'url(../../wordmark-2026-11-16/svg/lockup-v-ink.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '100px', width: '81.78px' }} />
+                <div style={{ backgroundImage: 'url(../../wordmark-2026-11-16/svg/lockup-v-ink.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '100px', width: '83.81px' }} />
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '160%' }}>
-                竖排 · 比例只试了一组
+                竖排 · 字宽 0.8 倍标志宽
               </div>
             </div>
           </div>
@@ -193,7 +193,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §2、§3.1 · 第 62、68、88、89、92、121 条 · 文件 design/brand-2026-10-13/logo/mint/、wordmark-2026-11-16/
+          出处：BRAND.md §2、§3.1 · 第 62、68、88、89、92、121、126 条 · 文件 design/brand-2026-10-13/logo/mint/、wordmark-2026-11-16/
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           04

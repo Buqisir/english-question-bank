@@ -87,7 +87,7 @@ const markSrc = readFileSync(MARK, 'utf8')
 const MARK_VB = /viewBox="([^"]+)"/.exec(markSrc)[1].split(/\s+/).map(Number), MARK_W = MARK_VB[2], MARK_H = MARK_VB[3]
 const markBody = markSrc.replace(/^[\s\S]*?<\/title>/, '').replace(/<\/svg>\s*$/, '').replace(/id="cut"/g, 'id="mark-cut"').replace(/url\(#cut\)/g, 'url(#mark-cut)').trim()
 const markGroup = `<g transform="translate(${-MARK_VB[0]} ${-MARK_VB[1]})">\n  ${markBody}\n</g>`
-const H_RATIO = { em: 0.75, gap: 0.4 }, V_RATIO = { inkWidth: 0.9, gap: 0.22 } // 和第一轮一样（第一轮 README「组合怎么排的」）
+const H_RATIO = { em: 0.75, gap: 0.4 }, V_RATIO = { inkWidth: 0.8, gap: 0.25 } // 横排和第一轮一样；竖排 2026-11-16 从 0.9、0.22 改成 0.8、0.25（BRAND.md 第 126 条，目测比过 0.9、0.8、0.75）
 function lockup(kind, v) {
   const w = word('large'), inkW = w.ink.x1 - w.ink.x0, inkH = w.ink.y1 - w.ink.y0
   let s, x, y, vbW, vbH
