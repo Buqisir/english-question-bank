@@ -197,8 +197,9 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
         )}
       </div>
       {/* 页面塞进来的按钮（actionsSlot）还是 .ghost-button，等那些页面迁移时再换；
-          所以滑动高亮两种都认。 */}
-      <FluidHoverList as="div" axis="x" className="topbar-actions" itemSelector=".ghost-button, .eqb-button" gapClick={false}>
+          所以滑动高亮两种都认。「管理」和「退出」中间隔着头像和用户名：滑块不从它们后面滑过去，
+          在原地淡出、到「退出」再原地出现（glideGapMax，键之间平常只空 4–10px）。 */}
+      <FluidHoverList as="div" axis="x" className="topbar-actions" itemSelector=".ghost-button, .eqb-button" gapClick={false} glideGapMax={16}>
         {props.actionsSlot && (
           <>
             <span className="topbar-actions-page">{props.actionsSlot}</span>
