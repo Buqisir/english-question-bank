@@ -235,6 +235,12 @@ URL, and first state before Owner QA. Use
 `docs/agents/owner-qa-handoff-template.md`; the owner does not reconstruct the
 test state.
 
+Live verification and bug reproduction on eqbank.cc use the Agent accounts, never
+`buqisir`: Owner Mac uses `agent-local` in Ego Browser profile `tiger`
+(`Profile 6`; password only in macOS Keychain service `eqbank.cc`), cloud sessions
+use `agent-cloud` from their own secret store. Both are owner-role for admin and
+teacher views; Agents still never approve, publish, or delete others' data.
+
 ## Product boundaries
 
 - Preserve `Source -> Passage -> Question Group -> Question -> Paper Set ->
