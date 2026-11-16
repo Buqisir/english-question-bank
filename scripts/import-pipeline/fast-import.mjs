@@ -1731,6 +1731,15 @@ function assertListeningRedoReady(ctx) {
 export async function listeningRedo(ctx, args, {
   readStatus, execute = run, inputs = retainedListeningInputs, inputDigest = listeningProductDigest,
   ensureAsr = async () => {
+    const audioSha256 = sha256(readFileSync(path.join(ctx.paperDir, 'materialization/listening-audio/playback.mp3')))
+    const sidecar = path.join(ctx.paperDir, 'listening-review-v1.json')
+    for (const file of existsSync(sidecar) ? readJson(sidecar).evidence : []) {
+      if (file.kind !== 'asr_window' || !file.settings?.engine?.startsWith('Apple SpeechAnalyzer/')) continue
+      const evidence = path.join(ctx.paperDir, file.path)
+      const bytes = readFileSync(evidence)
+      if (sha256(bytes) !== file.sha256 || bytes.length !== file.byteLength) fail('保留的 Apple 证据 digest 不匹配')
+      if (JSON.parse(bytes).audioSha256 === audioSha256) return evidence
+    }
     const completed = path.join(ctx.fast, 'asr-apple-v2/completed.json')
     if (existsSync(completed) && readJson(completed).audioSha256
       !== sha256(readFileSync(path.join(ctx.paperDir, 'materialization/listening-audio/playback.mp3')))) {
