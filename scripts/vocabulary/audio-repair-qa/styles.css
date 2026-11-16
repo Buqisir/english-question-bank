@@ -30,7 +30,7 @@ h1 { margin: 0; font-size: var(--eqb-font-size-xl); font-weight: 600; letter-spa
 .word-card { padding: clamp(24px, 4vw, 42px); border: 1px solid var(--eqb-color-border); border-radius: 8px; background: var(--eqb-color-paper); box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06); }
 .word-meta { gap: var(--eqb-space-2); color: var(--eqb-color-text-muted); font-size: var(--eqb-font-size-xs); }
 .decision-mark { margin-left: auto; padding: 5px 9px; border-radius: 999px; background: var(--eqb-color-desk); }
-.decision-mark[data-status="selected"] { background: var(--eqb-color-success-soft); color: var(--eqb-color-primary-text); }
+.decision-mark[data-status="selected"] { background: var(--eqb-color-success-soft); color: var(--eqb-color-text); }
 .decision-mark[data-status="unresolved"] { background: var(--eqb-color-danger-soft); color: var(--eqb-color-danger); }
 .word-content { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(210px, 0.7fr); align-items: end; gap: 32px; margin: 42px 0 32px; }
 .word-heading { font-size: calc(var(--eqb-font-size-xl) * 2.6); font-weight: 500; line-height: 1.08; letter-spacing: -0.03em; overflow-wrap: anywhere; }
@@ -51,7 +51,7 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 .audio-choice b { font-size: var(--eqb-font-size-sm); }
 .audio-choice small { color: var(--eqb-color-text-muted); font-size: var(--eqb-font-size-xs); }
 .audio-choice[data-active="true"] { border-color: var(--eqb-color-primary); background: var(--eqb-color-success-soft); }
-.audio-choice[data-selected="true"] b::after { content: " · 已选"; color: var(--eqb-color-primary-text); font-weight: 500; }
+.audio-choice[data-selected="true"] b::after { content: " · 已选"; color: var(--eqb-color-text); font-weight: 500; }
 .audio-choice.original[data-active="true"] { border-color: var(--eqb-color-border-strong); background: var(--eqb-color-desk); }
 kbd { padding: 2px 6px 3px; border: 1px solid currentColor; border-radius: 4px; background: rgba(255, 255, 255, 0.45); font-family: inherit; font-size: var(--eqb-font-size-xs); font-weight: 700; opacity: 0.72; }
 
@@ -59,7 +59,7 @@ kbd { padding: 2px 6px 3px; border: 1px solid currentColor; border-radius: 4px; 
 .note-field input { width: 100%; height: 42px; padding: 0 12px; border: 1px solid var(--eqb-color-border); border-radius: 6px; color: var(--eqb-color-text); background: var(--eqb-color-paper); }
 .primary-controls { display: grid; grid-template-columns: 1.35fr 0.65fr; gap: 10px; }
 .control-button { display: flex; align-items: center; justify-content: space-between; min-height: 58px; padding: 0 18px; font-size: var(--eqb-font-size-md); font-weight: 700; }
-.control-button.select { color: var(--eqb-color-primary-text); border-color: var(--eqb-color-primary); background: var(--eqb-color-success-soft); }
+.control-button.select { color: var(--eqb-color-text); border-color: var(--eqb-color-text); background: var(--eqb-color-success-soft); }
 .control-button.unresolved { color: var(--eqb-color-danger); border-color: var(--eqb-color-danger); background: var(--eqb-color-danger-soft); }
 .secondary-controls { flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .secondary-controls button { display: flex; flex: 1 1 180px; align-items: center; justify-content: space-between; padding: 0 var(--eqb-space-3); color: var(--eqb-color-text-muted); font-size: var(--eqb-font-size-sm); }

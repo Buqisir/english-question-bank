@@ -24,3 +24,13 @@ Owner 2026-11-16：「行，三处都照你的建议改吧」（BRAND.md 第 123
 - 打印样张不是真页面打印：本地网站没有生词数据，样张是把真的三份样式文件（tokens、过生词、手写）放进一个按组件结构写的最小页面，用打印媒体出的 PDF。图框底色在样张里没显示出来，和这次改的颜色无关。
 - 截图用构件清点的本地网站（`scripts/component-inventory/rig.mjs`）。
 - 改后 `verify-paper-browse` 247 项全过。
+
+## 补：两张音频审听页（同日）
+
+Owner：「审听页那两处也一起换成墨吧」。
+
+- `scripts/vocabulary/audio-owner-qa/styles.css`：「通过」标记的字、「通过」键的字和边。
+- `scripts/vocabulary/audio-repair-qa/styles.css`：「已选」标记的字、「选这一版」键的字和边、版本名后面「· 已选」的字。
+- 深绿 `#1E4A3A` 和键上的深薄荷边都改成墨 `--eqb-color-text`（rgb 27, 43, 51）；淡绿底是成功色，没动。进度条、焦点框、正在听的那一版的边还是深薄荷，这次没动。
+- 改完 `--eqb-color-primary-text` / `--eqb-color-primary-deep` 没人用了，从 `app/src/shared-ui/tokens.css` 删掉。
+- 图在 `audio-qa/`：`compare.png` 左边改前、右边改后。也是样张，真样式文件加上按页面结构写的几个元素，不是真页面（审听页要本机的音频数据库才开得起来）。
