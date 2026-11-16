@@ -172,14 +172,16 @@ type DownloadOptionProps = {
   label: string
   disabled?: boolean
   children: React.ReactNode
-  onDownload: () => void
-  onSaveAs: () => void
+  /** menuTrigger：这一项所在下拉的 summary。点了以后下拉收起、这一项看不见了，要把焦点还回去的调用处用它。 */
+  onDownload: (menuTrigger: HTMLElement | null) => void
+  onSaveAs: (menuTrigger: HTMLElement | null) => void
 }
 
 function DownloadOption({ label, disabled = false, children, onDownload, onSaveAs }: DownloadOptionProps) {
-  function run(action: () => void, button: HTMLButtonElement) {
-    button.closest('details')?.removeAttribute('open')
-    action()
+  function run(action: (menuTrigger: HTMLElement | null) => void, button: HTMLButtonElement) {
+    const menu = button.closest('details')
+    menu?.removeAttribute('open')
+    action(menu?.querySelector<HTMLElement>(':scope > summary') ?? null)
   }
 
   return (
@@ -353,6 +355,9 @@ export function VocabularyDictationWorkbench({
   const [confirmOpen, setConfirmOpen] = useState(false)
   // 打印的确认框是从「打印资料」下拉里的项打开的，打开时下拉已经收起、那一项看不见了；关上时焦点回到「打印资料」。
   const printMenuSummaryRef = useRef<HTMLElement>(null)
+  // 「选择练字单词」是从下拉里的「衡水体练字纸」（或它的「另存为…」）打开的，打开时下拉已收起、那一项看不见了。
+  // 记下那个下拉的 summary（「打印资料」或那一行的「下载资料」），取消、Esc、右上角关闭、确认生成后焦点都回到它（界面收尾 2026-11-16）。
+  const handwritingReturnFocusRef = useRef<HTMLElement | null>(null)
   const [suggestionTarget, setSuggestionTarget] = useState(() => {
     const stored = Number(window.localStorage.getItem(SUGGESTION_TARGET_STORAGE_KEY))
     return Math.max(1, Math.min(60, stored || 20))
@@ -836,7 +841,8 @@ export function VocabularyDictationWorkbench({
     }
   }
 
-  function openHandwritingSelector(request: HandwritingDownloadRequest) {
+  function openHandwritingSelector(request: HandwritingDownloadRequest, menuTrigger: HTMLElement | null) {
+    handwritingReturnFocusRef.current = menuTrigger
     setError('')
     setMessage('')
     setHandwritingDownloadRequest(request)
@@ -887,7 +893,7 @@ export function VocabularyDictationWorkbench({
     }
   }
 
-  async function printSelectedSets(kind: PrintKind, mode: FileSaveMode = 'download') {
+  async function printSelectedSets(kind: PrintKind, mode: FileSaveMode = 'download', menuTrigger: HTMLElement | null = null) {
     if (!activeStudent || !selectedSets.length) return
     if (kind === 'handwriting') {
       openHandwritingSelector({
@@ -895,7 +901,7 @@ export function VocabularyDictationWorkbench({
         title: collectionTitle || '生词合集',
         entries: uniqueSelectedEntries,
         source: { kind: 'sets', sourceSetIds: selectedSets.map((set) => set.id), layout: printMode },
-      })
+      }, menuTrigger)
       return
     }
     if (rawSelectedCount > 120) {
@@ -971,6 +977,7 @@ export function VocabularyDictationWorkbench({
     task: VocabularyDictationTaskDto,
     kind: PrintKind,
     mode: FileSaveMode = 'download',
+    menuTrigger: HTMLElement | null = null,
   ) {
     if (kind === 'handwriting') {
       openHandwritingSelector({
@@ -978,7 +985,7 @@ export function VocabularyDictationWorkbench({
         title: task.title || '综合听写',
         entries: task.entries,
         source: { kind: 'task', taskId: task.id },
-      })
+      }, menuTrigger)
       return
     }
     setError('')
@@ -1036,7 +1043,7 @@ export function VocabularyDictationWorkbench({
         <DownloadOption label="单词卡" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'cards')} onSaveAs={() => void downloadTaskMaterial(task, 'cards', 'save-as')}><Card size={14} />{publicHref ? '单词卡（含二维码）' : '单词卡'}</DownloadOption>
         <DownloadOption label="听写纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'dictation')} onSaveAs={() => void downloadTaskMaterial(task, 'dictation', 'save-as')}><PaperStudent size={14} />{publicHref ? '听写纸（含二维码）' : '听写纸'}</DownloadOption>
         <DownloadOption label="教师答案" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'answer')} onSaveAs={() => void downloadTaskMaterial(task, 'answer', 'save-as')}><PaperCheck size={14} />教师答案</DownloadOption>
-        <DownloadOption label="衡水体练字纸" disabled={busy} onDownload={() => void downloadTaskMaterial(task, 'handwriting')} onSaveAs={() => void downloadTaskMaterial(task, 'handwriting', 'save-as')}><PaperLined size={14} />衡水体练字纸</DownloadOption>
+        <DownloadOption label="衡水体练字纸" disabled={busy} onDownload={(menuTrigger) => void downloadTaskMaterial(task, 'handwriting', 'download', menuTrigger)} onSaveAs={(menuTrigger) => void downloadTaskMaterial(task, 'handwriting', 'save-as', menuTrigger)}><PaperLined size={14} />衡水体练字纸</DownloadOption>
         <DownloadOption label="下载全套" disabled={busy} onDownload={() => void downloadTaskBundle(task)} onSaveAs={() => void downloadTaskBundle(task, 'save-as')}><Download size={14} />下载全套（4份）</DownloadOption>
       </>
     )
@@ -1245,7 +1252,7 @@ export function VocabularyDictationWorkbench({
                       <DownloadOption label="单词卡" onDownload={() => void printSelectedSets('cards')} onSaveAs={() => void printSelectedSets('cards', 'save-as')}>单词卡</DownloadOption>
                       <DownloadOption label="听写纸" onDownload={() => void printSelectedSets('dictation')} onSaveAs={() => void printSelectedSets('dictation', 'save-as')}>听写纸</DownloadOption>
                       <DownloadOption label="教师答案" onDownload={() => void printSelectedSets('answer')} onSaveAs={() => void printSelectedSets('answer', 'save-as')}>教师答案</DownloadOption>
-                      <DownloadOption label="衡水体练字纸" onDownload={() => void printSelectedSets('handwriting')} onSaveAs={() => void printSelectedSets('handwriting', 'save-as')}>衡水体练字纸</DownloadOption>
+                      <DownloadOption label="衡水体练字纸" onDownload={(menuTrigger) => void printSelectedSets('handwriting', 'download', menuTrigger)} onSaveAs={(menuTrigger) => void printSelectedSets('handwriting', 'save-as', menuTrigger)}>衡水体练字纸</DownloadOption>
                       <DownloadOption label="下载全套" onDownload={() => void downloadSelectedSetsBundle()} onSaveAs={() => void downloadSelectedSetsBundle('save-as')}>下载全套（4份）</DownloadOption>
                     </DownloadMenuItems>
                   </details>
@@ -1483,6 +1490,10 @@ export function VocabularyDictationWorkbench({
           title={handwritingDownloadRequest.title}
           entries={handwritingDownloadRequest.entries}
           busy={busy}
+          // 确认生成后也回到这个 summary：下载在后台进行，结果写在页顶的提示行（读屏 polite 念），
+          // 焦点留在刚才用的那个下拉上，接着下别的资料最近；没有更近的可见落点。
+          // 那个 summary 已不在页面上（比如列表刷新了）时，交回 Dialog 默认（打开那一刻的焦点）。
+          returnFocus={() => (handwritingReturnFocusRef.current?.isConnected ? handwritingReturnFocusRef.current : null)}
           onCancel={() => setHandwritingDownloadRequest(null)}
           onConfirm={(entryIds, handwritingMode) => void confirmHandwritingDownload(entryIds, handwritingMode)}
         />

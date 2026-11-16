@@ -3,6 +3,7 @@ import type { FormEvent } from 'react'
 import { useState } from 'react'
 import { Dialog } from '../shared-ui/Dialog.tsx'
 import { SelectField, TextAreaField, TextField } from '../shared-ui/Field.tsx'
+import { Notice } from '../shared-ui/Notice.tsx'
 import {
   type CreateQuestionGroupInput,
   type Difficulty,
@@ -140,7 +141,7 @@ export function EntryModal({ open, mode, initialDetail, onClose, onSaved }: Entr
   const [entryForm, setEntryForm] = useState<EntryForm>(() =>
     initialDetail ? createEntryFormFromDetail(initialDetail) : defaultEntryForm,
   )
-  const [entryStatus, setEntryStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
+  const [entryStatus, setEntryStatus] = useState<'idle' | 'saving' | 'saved' | 'invalid' | 'error'>('idle')
   const [entryError, setEntryError] = useState('')
 
   function updateEntryField<K extends keyof EntryForm>(field: K, value: EntryForm[K]) {
@@ -202,7 +203,7 @@ export function EntryModal({ open, mode, initialDetail, onClose, onSaved }: Entr
     const firstQuestion = questions[0]
 
     if (!firstQuestion) {
-      setEntryStatus('error')
+      setEntryStatus('invalid')
       setEntryError('至少需要录入一道小题。')
       return
     }
@@ -423,7 +424,13 @@ export function EntryModal({ open, mode, initialDetail, onClose, onSaved }: Entr
         />
       </fieldset>
 
-      {entryStatus === 'error' && <p className="form-error">{entryError}</p>}
+      {/* 整张表的报错（界面收尾 2026-11-16）：不挂在哪个字段上，换成共用 Notice（DESIGN.md §5 Notices），字没改。
+          只有服务器没收下（'error'）才上危险色，照 §5「没保存」；一道小题都没有（'invalid'）只是校验提示，
+          框里填的东西都还在，用灰字（协调人 2026-11-16 复核时改）。
+          原来的 <p class="form-error"> 没有 role，读屏不念；现在有错才挂，挂上就是 role="alert"，会被立刻念出来。 */}
+      {(entryStatus === 'error' || entryStatus === 'invalid') && (
+        <Notice kind="error" danger={entryStatus === 'error'}>{entryError}</Notice>
+      )}
     </Dialog>
   )
 }

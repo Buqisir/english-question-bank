@@ -166,6 +166,9 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
   // 只给下载用：busyId 同时管删除，直接拿它驱动下载图标的话，删文件时下载图标也会动（D8）。
   const [downloadingId, setDownloadingId] = useState<string | null>(null)
   const [confirmTarget, setConfirmTarget] = useState<MySpaceArtifact | null>(null)
+  // 开关和内容分开（界面收尾 2026-11-16，照 App.tsx 删除题组、听写页确认框的写法）：关上时只把 confirmOpen 置 false，
+  // confirmTarget 留着，退场那 120ms 里正文不会变成「删除「」？…」；下次打开时整个换掉。
+  const [confirmOpen, setConfirmOpen] = useState(false)
 
   const selectedFolder = useMemo(
     () => folders.find((folder) => folder.id === selectedFolderId) || null,
@@ -259,6 +262,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
     restoreFocusRef.current = trigger
     focusAfterDeleteRef.current = null
     setConfirmTarget(artifact)
+    setConfirmOpen(true)
   }
 
   async function confirmDeleteArtifact() {
@@ -274,7 +278,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
         })
       : () => programmaticFocusTarget(sectionHeadingRef.current)
     focusAfterDeleteRef.current = focusNext
-    setConfirmTarget(null)
+    setConfirmOpen(false)
     setBusyId(artifact.id)
     setMessage(null)
     try {
@@ -423,8 +427,8 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
 
       <Dialog
         tone="alert"
-        open={Boolean(confirmTarget)}
-        onClose={() => setConfirmTarget(null)}
+        open={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
         className="my-space-confirm-dialog"
         title="删除草稿卷 PDF"
         description={`删除「${confirmTarget?.title || confirmTarget?.fileName || ''}」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。`}

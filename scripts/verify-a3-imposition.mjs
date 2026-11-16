@@ -517,6 +517,17 @@ async function runPhaseB(browser) {
       JSON.stringify(a3Structure),
     )
 
+    // 上面的 .a3-imposition-wrap 旧卷面也会有（切换后先在旧稿上套 A3），真正按新版式排的那一版还在路上。
+    // 不等它就去数题组工具条、点「⋯」：iframe 换新时工具条整组卸掉再挂上，
+    // - 数工具条：挂上的是旧卷面那一组，随即被卸掉，数到 0（CI e2e-seams-2，PR #725 2026-11-16：
+    //   第二次分页 07:37:11.605 换进 iframe，16ms 后 count() 得 0，前面的 waitFor 并没超时）；
+    // - 点菜单：点到一半按钮连同菜单一起卸掉，「下移」点不到，PATCH 永远不来
+    //   （CI e2e-seams-2，2026-11-16：第二次分页 30.3s 回来、33.3s 换 iframe，菜单点击正卡在中间）。
+    // 所以等切换后那一版落地，再数、再点。下面 waitForRevisedA3Preview 是块内函数声明，这里调用时已可用。
+    await page.waitForFunction((patch) => window.__a3Pagination.successfulPatches >= patch, togglePatch,
+      { timeout: Math.max(1, toggleDeadline - Date.now()) })
+    await waitForRevisedA3Preview(0, toggleDeadline, requestsBeforeToggle)
+
     // ── Real click: persistent overlay buttons re-anchor correctly in A3 ──
     const firstGroupActions = page.locator('.draft-group-actions').first()
     await firstGroupActions.waitFor({ state: 'attached', timeout: 10_000 })
@@ -565,13 +576,6 @@ async function runPhaseB(browser) {
       console.log(`[A3 pagination] ${JSON.stringify(await ready.jsonValue())}`)
       await ready.dispose()
     }
-
-    // 上面的 .a3-imposition-wrap 旧卷面也会有（切换后先在旧稿上套 A3），真正按新版式排的那一版还在路上。
-    // 不等它就去点「⋯」：慢机器上点到一半 iframe 换新、按钮连同菜单一起卸掉，「下移」点不到，PATCH 永远不来
-    // （CI e2e-seams-2，2026-11-16：第二次分页 30.3s 回来、33.3s 换 iframe，菜单点击正卡在中间）。
-    await page.waitForFunction((patch) => window.__a3Pagination.successfulPatches >= patch, togglePatch,
-      { timeout: Math.max(1, toggleDeadline - Date.now()) })
-    await waitForRevisedA3Preview(0, toggleDeadline, requestsBeforeToggle)
 
     const reorderPatch = await page.evaluate(() => window.__a3Pagination.successfulPatches + 1)
     const reorderDeadline = Date.now() + 180_000
