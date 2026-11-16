@@ -33,7 +33,7 @@
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '14px', lineHeight: '180%', width: '620px' }}>
-            插画只给四种时刻：第一次的整页空态、AI 等结果和出结果、完成的那一屏、宣传。先问老师会不会天天看见（会就不配），再问画的是不是这件事本身（不是就不配），最后才问怎么画。
+            工作页面里只给两处：第一次的整页空态、AI 没找到；等结果和完成不配，加载看进度，完成用提示条（第 118 条）。宣传另算。先问老师会不会天天看见（会就不配），再问画的是不是这件事本身（不是就不配），最后才问怎么画。
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', display: 'flex', gap: '48px' }}>
@@ -73,7 +73,7 @@
                 说的是纸、卷、书：原语 64px；整页像「水上的备课桌」：海獭 150px
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%', width: '250px' }}>
-                生词本用折角纸；个人空间原用裹藻仰躺（第 114 条起停用）
+                生词本用折角纸；个人空间用坐石全身像（第 114、118 条）
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', gap: '16px', paddingBlock: '8px' }}>
@@ -120,30 +120,30 @@
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', gap: '16px', paddingBlock: '8px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, lineHeight: '175%', width: '170px' }}>
-                AI 等结果、确认、没找到
+                AI 没找到
               </div>
               <div style={{ boxSizing: 'border-box', color: '#2C6E56', flexShrink: '0', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, lineHeight: '175%', width: '44px' }}>
                 配
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                状态 02、03、05（§4.4）
+                半身「没找到」，摊手（第 118、119 条）
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%', width: '250px' }}>
-                找题加载、结果卡上沿探头
+                AI 找题没有结果
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', gap: '16px', paddingBlock: '8px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, lineHeight: '175%', width: '170px' }}>
-                完成
+                AI 等结果、完成
               </div>
-              <div style={{ boxSizing: 'border-box', color: '#2C6E56', flexShrink: '0', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, lineHeight: '175%', width: '44px' }}>
-                配
+              <div style={{ boxSizing: 'border-box', color: '#60665C', flexShrink: '0', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, lineHeight: '175%', width: '44px' }}>
+                不配
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                状态 04，只在出结果的那一屏；toast 不配图
+                等待用所以点（第 120 条），完成用提示条；「找题中」「递出结果」「完成」三张留给宣传（第 118 条）
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%', width: '250px' }}>
-                导出完成、组卷完成
+                找题加载、结果卡上沿、导出和组卷完成
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', gap: '16px', paddingBlock: '8px' }}>
@@ -204,8 +204,8 @@
                 </div>
               </div>
               <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0px', flexDirection: 'column', flexGrow: '1', gap: '10px' }}>
-                <div style={{ alignItems: 'center', opacity: '0.4', backgroundColor: '#F1F5F7', borderRadius: '12px', boxShadow: '#E3E8DF 0px 0px 0px 1px inset', boxSizing: 'border-box', display: 'flex', flexShrink: '0', height: '180px', justifyContent: 'center' }}>
-                  <div style={{ backgroundImage: 'url(../../mascot/kelp/otter-kelp-wrap.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '148px', width: '208px' }} />
+                <div style={{ alignItems: 'center', backgroundColor: '#F1F5F7', borderRadius: '12px', boxShadow: '#E3E8DF 0px 0px 0px 1px inset', boxSizing: 'border-box', display: 'flex', flexShrink: '0', height: '180px', justifyContent: 'center' }}>
+                  <div style={{ backgroundImage: 'url(../../mascot/otter-sit.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '150px', width: '150px' }} />
                 </div>
                 <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '8px' }}>
                   <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '14px', fontWeight: 600, lineHeight: '20px' }}>
@@ -216,7 +216,7 @@
                   </div>
                 </div>
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                  先用 mascot/ 里现成的状态图。上图裹藻仰躺和直立场景第 114 条起停用，空闲改用坐石全身像。手里只拿书、石头、贝壳和道具，不拿单张纸：墨色的单张纸两次都读成平板。
+                  先用 mascot/ 里现成的图。上图是坐石全身像，个人空间空态用它（第 114、118 条）；裹藻仰躺和直立场景已停用。手里只拿书、石头、贝壳和道具，不拿单张纸：墨色的单张纸两次都读成平板。
                 </div>
               </div>
             </div>
@@ -335,7 +335,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §5.2、§3.4、§4.7 · 第 54、55、58、63、110、112、114 条
+          出处：BRAND.md §5.2、§3.4、§4.7 · 第 54、55、58、63、110、112、114、118、119、120 条
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           17

@@ -33,7 +33,7 @@
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '14px', lineHeight: '180%', width: '620px' }}>
-            一年里海獭只在登录页和个人空间空态换装，跟着老师的学期走，过了时段自动换回，不弹窗、不加横幅、不写节日祝福。动起来也只演一个动作，演完就停：02 找题中两颊的 ∴ 潜成省略号，出场时转石头、眨一次眼或从卡片边浮上来。
+            一年里海獭只在登录页和个人空间空态换装，跟着老师的学期走，过了时段自动换回，不弹窗、不加横幅、不写节日祝福。动起来也只演一个动作，演完就停：找题中两颊的 ∴ 潜成省略号；界面里等待只用所以点，空态眨一次眼，没找到从卡片边浮上来。
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -310,18 +310,18 @@
           <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0px', flexDirection: 'column', flexGrow: '1', gap: '12px' }}>
             <div style={{ alignItems: 'center', borderBottomColor: '#191D18', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', gap: '10px', paddingBottom: '8px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.08em', lineHeight: '16px' }}>
-                动效 · 潜下去和三个出场动作
+                动效 · 潜下去、所以点和出场动作
               </div>
               <div style={{ borderColor: '#2C6E56', borderRadius: '4px', borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', paddingInline: '7px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#2C6E56', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  Droid 定 · 第 52、65 条
+                  第 52、65、120 条
                 </div>
               </div>
             </div>
             <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', justifyContent: 'space-between' }}>
               <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <div style={{ backgroundColor: '#F1F5F7', borderRadius: '8px', boxSizing: 'border-box', flexShrink: 0, height: '92px', overflow: 'clip', position: 'relative', width: '150px' }}>
-                  <div style={{ backgroundImage: 'url(../../mascot/states/state-02-searching.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', height: '247px', left: '0px', position: 'absolute', top: '-5px', width: '355px' }} />
+                  <div style={{ backgroundImage: 'url(assets/half-searching-face.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', height: '92px', left: '0px', position: 'absolute', top: '0px', width: '150px' }} />
                 </div>
                 <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '18px' }}>
                   静止 ∴
@@ -343,7 +343,7 @@
               </div>
               <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <div style={{ backgroundColor: '#F1F5F7', borderRadius: '8px', boxSizing: 'border-box', flexShrink: 0, height: '92px', overflow: 'clip', position: 'relative', width: '150px' }}>
-                  <div style={{ backgroundImage: 'url(assets/37FGTHMTRGF771ZN2D6AHJHCA6.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', height: '247px', left: '0px', position: 'absolute', top: '-5px', width: '355px' }} />
+                  <div style={{ backgroundImage: 'url(assets/half-searching-face-dive.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', height: '92px', left: '0px', position: 'absolute', top: '0px', width: '150px' }} />
                 </div>
                 <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '18px' }}>
                   潜下去 ……
@@ -353,17 +353,12 @@
             <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }}>
               <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', paddingBlock: '8px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                  02 正在想：结果在 300ms 内回来就不动；停在省略号上，不循环。只用在 150px 及以上。
+                  找题中 · 正在想：半身「找题中」的脸，150px 以上才用（第 117 条）；300ms 内有结果就不动，停在省略号上不循环。
                 </div>
               </div>
               <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', paddingBlock: '8px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                  出场：01 停一拍，石头转 -10° 再转回；空态眨一次眼；03、05、登录页从卡片边浮上来，爪子最后搭过边。
-                </div>
-              </div>
-              <div style={{ boxSizing: 'border-box', paddingTop: '8px' }}>
-                <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                  曲线 cubic-bezier(.45, 0, .55, 1)，不回弹；每段不超过 300ms；减少动态时不演。
+                  界面不放獭獭（第 118 条），等待用所以点：两颊的 ∴ 单独做小号、不带脸，随机三种：甲一沉两浮、乙此起彼伏、丙两两换位（第 120 条）。</div></div><div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', paddingBlock: '8px' }}><div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>出场：空态眨一次眼；没找到从卡片边浮上来，爪子最后搭过边。曲线 cubic-bezier(.45, 0, .55, 1)，不回弹；每段不超过 300ms；减少动态时不演。
                 </div>
               </div>
             </div>
@@ -372,7 +367,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §4.5、§4.6 · DESIGN.md §6 · 第 51、52、57、65、114 条 · 文件 mascot/calendar/*、mascot/motion/*
+          出处：BRAND.md §4.5、§4.6 · DESIGN.md §6 · 第 51、52、57、65、114、117、118、120 条 · 文件 mascot/calendar/*、mascot/motion/*
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           14

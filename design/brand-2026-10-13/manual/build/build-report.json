@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T17:16:51.781Z",
+  "generatedAt": "2026-11-16T11:05:30.952Z",
   "src": "design/brand-2026-10-13/manual/src",
   "out": "design/brand-2026-10-13/manual/视觉规范手册-草案0.7-预览.pdf",
   "font": {
@@ -262,35 +262,13 @@
             437,
             154
           ]
-        },
-        {
-          "text": "",
-          "box": [
-            150,
-            92
-          ],
-          "content": [
-            355,
-            242
-          ]
-        },
-        {
-          "text": "",
-          "box": [
-            150,
-            92
-          ],
-          "content": [
-            355,
-            242
-          ]
         }
       ],
       "compare": {
-        "diffPct": 5.83,
+        "diffPct": 6.69,
         "headerPct": 0.42,
-        "bodyPct": 6.99,
-        "footerPct": 1.7
+        "bodyPct": 7.95,
+        "footerPct": 2.56
       }
     },
     {
@@ -326,10 +304,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 5.66,
+        "diffPct": 6.14,
         "headerPct": 0.4,
-        "bodyPct": 6.84,
-        "footerPct": 1.18
+        "bodyPct": 7.23,
+        "footerPct": 2.98
       }
     },
     {
