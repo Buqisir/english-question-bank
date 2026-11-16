@@ -388,7 +388,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §1.5、§3.2 · 第 59、67、69、92、106、112–114 条 · 对比度按 WCAG 2.x 实测 · 竹青色板图 evidence/palette.png 留作历史
+          出处：BRAND.md §1.5、§3.2 · 第 59、67、69、92、106、112–114 条 · 对比度按 WCAG 2.x 实测 · 色板页 evidence/palette-mint-2026-11-16.png（2026-11-16，第 124 条）
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           07
