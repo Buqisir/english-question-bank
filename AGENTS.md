@@ -46,8 +46,14 @@ tool call. Within the stated repository, host/environment and privileges,
 continue through diagnosis, same-transaction status/evidence reconciliation,
 reviewed entry maintenance, deployment, health checks and the agreed rollback
 or recovery when those outcomes are included in the Goal. Do not ask again at
-install/finalize/status/deploy boundaries. Implementation or merge alone does
-not imply deployment; explicit non-goals still apply.
+install/finalize/status/deploy boundaries. Tasks include direct push to main and
+deployment under standing Owner authority (Owner 2026-11-16, BUB-218); explicit
+non-goals still apply. Direct push applies only once `main` no longer has
+required status checks (activation, BUB-218); until then use the PR fallback.
+“先别推” or “先别上” keeps that task out of main unless the Owner explicitly
+allows it to ship with other commits. “停自动部署” pauses all Agents' automatic
+deployments. Migration, schema, DB/R2 data operations and host configuration
+still require separate Owner authorization.
 
 Ask again only to expand privileges, access/change Secrets beyond the existing
 authorized route, change the target repository/host/environment, perform
@@ -60,25 +66,26 @@ the production traffic/data recovery boundary.
 
 ## Verify the changed risk
 
-Before the Owner explicitly says Ship, do not run formal local automated
-verification/regression suites by default. Iterate on the implementation and
-review the diff; run only build/render work needed for a usable preview or
-checks needed for an explicit diagnostic request. Mark candidates awaiting
-acceptance as unverified; inspect rendered visual changes before claiming UI
-completion. Preview preparation does not require a formal test pack.
+Before pushing, synchronize with `origin/main` and freeze the candidate.
+L1 uses the existing commands below; inspect changed behavior and direct consumers:
 
-Ship starts verification and delivery, not merge-before-test. Synchronize and
-freeze the candidate, then complete missing affected local-only acceptance once.
-Reuse its natural Actions results for covered checks, including required Full
-and E2E; do not stack focused, Paper and Full packs merely to repeat coverage.
-Inspect the changed behavior and direct consumers before choosing local checks.
-Expand them only when the impact remains unknown, and state the reason.
+- 前端 / UI：`node scripts/verify-ci.mjs --pack ui`（构建、类型检查，以及 motion、radius、emoji 等守卫）
+- 工作台组件：再加 `node scripts/verify-similar-workbench-swap.mjs`（裸 fetch 守卫）
+- 其他：`node scripts/verify-ci.mjs --changed --base-ref origin/main`（必须显式写基线）。先加 `--plan-json` 看选出哪一档；选出 `all` 时不在本地跑 Full，只跑直接受影响的脚本，Full 交给 main CI
+- 统一：`git diff --check origin/main...HEAD`，并实际操作一次受影响的行为
+- 高风险（鉴权、答案隔离、持久化、题号和答案对应、准入、共享 Paper 契约）：另加一次独立审查（Astra），审查结论绑定候选 SHA，但不开 PR
+- **CI 和部署工具链**（`.github/workflows/`、`scripts/verify-ci.mjs`、`scripts/ci-pr-plan.mjs`、部署脚本和控制器）：继续走 PR，PR 完整 CI 绿、Astra 审过再合。这类改动改的是裁判本身，推上 main 以后它自己那次绿灯证明不了它没被改松
 
-| Change | Local-only acceptance after Ship | Final gate (reuse natural CI) |
+Complete missing affected local-only acceptance once; reuse natural main Full/E2E
+for covered checks. Do not stack packs or duplicate hosted Full locally.
+Inspect rendered changes before claiming UI completion; visible changes get
+online Owner QA after deployment. Expand checks only for unbounded impact.
+
+| Change | Local-only acceptance before push | Final gate (reuse natural main CI) |
 | --- | --- | --- |
 | Atomic UI micro-change | exact-page real click | Owner QA when visible; no unrelated backend/Paper suite |
 | Known-shape Canonical Paper data | strict input/publication canary not covered by CI | no authority bump, deep per-paper tri-surface proof, full suite, or independent review unless a shared shape changes |
-| Ordinary local feature | affected build/public seam not covered by CI | selected natural CI pack |
+| Ordinary local feature | affected build/public seam not covered by CI | natural main Full/E2E |
 | Shared renderer/Paper contract | affected real Screen/Print/PDF | required Full/E2E and one independent Standards/Spec review |
 | Auth, isolation, persistence, migration, production config, or irreversible cross-cut | affected public seam not covered by CI | required Full/E2E and one independent Standards/Spec review |
 
@@ -88,66 +95,51 @@ uniquely supplies; otherwise keep it outside acceptance packs.
 
 ## Ship to main
 
-- Until the Owner separately activates Custom Ship and updates the `main`
-  protection settings, keep using the current task-branch PR path for every
-  change. This repository contract does not authorize those shared settings
-  changes.
-- Develop in a local task branch based on the latest `origin/main`; do not make
-  task commits on local `main`. A same-Goal PR may contain multiple commits;
-  do not rewrite published history merely to consolidate them. Squash merge
-  produces one independent main commit that can be safely reverted.
-- Classify the complete changed-path set, and each path when investigating the
-  route, with
-  `node scripts/verify-ci.mjs --plan-json --changed-file <path>` (repeat the
-  flag for multiple paths). Treat its `risk` as the primary machine result and
-  apply the explicit high-risk overrides below.
-- All classified changes use the task-branch PR route. A
-  `shared-renderer-contract` still requires the shared-renderer final gate
-  above, including affected real Screen/Print/PDF verification.
-- Classifier fallback labels (`unknown-fallback`,
-  `mixed-high-risk-fallback`, `git-diff-fallback`) only require the Full CI
-  pack. The stronger PR review and final gates apply only when the change
-  actually alters data-persistence writes or schema/migrations, the
-  question-number-to-answer mapping, review/publication admission rules,
-  student-version answer isolation, authentication or permissions,
-  breaking public schema/API changes, user-data deletion or bulk mutation,
-  deployment/host configuration or the CI toolchain itself
-  (`.github/workflows/`, `scripts/verify-ci.mjs`,
-  `scripts/ci-pr-plan.mjs`, `.agents/setup`, `.agents/ship.md`, these
-  `AGENTS.md` Ship/verification rules, `EQB_PERSISTENCE_AUTHORITY_PATHS`,
-  `EQB_HOST_CONFIGURATION_PATHS`), a change that cannot be safely reverted
-  as one commit, or any change the agent judges clearly high risk.
-  High-risk PRs require the relevant review, `verify:all`, and E2E; never
-  push them directly to `main`.
-- After the Owner says Ship, run `git fetch origin`, rebase the task branch onto
-  `origin/main`, require `git status --porcelain` to be empty, and complete
-  missing affected local-only and visual checks once on that candidate. Reuse
-  its natural Actions Full/E2E results; do not duplicate covered checks locally.
-  After a fix, rebase or base advance, re-run only local checks whose code,
-  dependencies, fixtures or runtime/environment changed; retain unaffected evidence
-  and failed attempts. If impact cannot be bounded, broaden checks with a reason.
-  A new head/base still requires its own natural CI; old-head/base results cannot
-  authorize merge. Resolve conflicts only within the Goal while preserving
-  unrelated behavior; apply the authorization boundary above if a conflict
-  requires broader scope.
-- Push the task branch and open its PR only when the Goal includes Ship. Merge
-  only after the reviewed candidate has successful GitHub Actions `verify` and `e2e`
-  checks from `.github/workflows/verify.yml` for its current natural PR run.
-  During cutover retain the existing required check until the replacement
-  checks are green and the Owner atomically saves the new required-check set;
-  follow `docs/agents/github-actions-cutover.md` rather than assuming a code
-  merge changed protection.
-  Do not bypass branch protection or force-push `main`; Custom Ship remains
-  inactive.
-- After Ship, report the exact 40-hex `main` SHA and parent, machine risk,
-  changed files, one-paragraph summary, and every command as `PASS` or `SKIP`
-  with the limitation. Link the exact Actions run and both job checks; no Focused/Low report,
-  private-receipt retrieval, human CI handoff or reply is a daily Ship gate.
+- Tasks default to direct push and deployment; do not wait for another Ship.
+  Keep one understandable, verifiable change per commit, completed within hours.
+  Develop on a local task branch based on latest `origin/main`; preserve unrelated
+  work and never rewrite published history merely to consolidate commits.
+- At startup and before push, fetch origin, resolve current main SHA and inspect
+  its latest natural Actions attempt's eight jobs, plus unresolved failures
+  still affecting main. Judge by SHA, never by run completion order.
+  On Owner Mac also compare production: deploy only if current main is all green
+  and not already live; pending/red main never permits an older green deployment.
+- Classify the complete changed-path set (and individual paths when investigating)
+  with `node scripts/verify-ci.mjs --plan-json --changed-file <path>` (repeat flags).
+  Treat `risk` as the primary machine result; high-risk behavior still needs
+  Astra review and affected real Screen/Print/PDF checks where applicable.
+  Unknown/fallback risk requires Full CI, not a routine local Full run.
+- After L1, review the diff and require a clean committed worktree, then
+  `git push origin HEAD:refs/heads/main`. If rejected, synchronize and repeat
+  affected self-checks before retrying. Never force-push or bypass protection.
+- CI/deployment toolchain changes stay on PR + Astra + complete green PR CI:
+  `.github/workflows/`, `scripts/verify-ci.mjs`, `scripts/ci-pr-plan.mjs`,
+  deployment scripts/controllers, `.agents/setup`, `.agents/ship.md`, these
+  Ship/verification rules, `EQB_PERSISTENCE_AUTHORITY_PATHS` and
+  `EQB_HOST_CONFIGURATION_PATHS`. Changing shared GitHub settings is not authorized.
+- If direct push is unavailable, use the optional PR route in `.agents/ship.md`.
+  Synchronize main before triggering PR verification so head contains the event
+  base; after complete green PR CI, squash merge. Later main advancement alone
+  does not require another PR run. Deployment still waits for latest main CI.
+- The pusher follows their exact SHA's natural main run to completion and deploys
+  latest green main on Owner Mac. If unable to wait, record “SHA 待确认” in Linear;
+  off Mac record “已绿待部署” once green. Startup checks pick up unattended work.
+- Red main pauses ordinary pushes; only fixes/reverts may proceed. The pusher of
+  the first failing SHA owns a fix/revert pushed within 30 minutes of discovery.
+  If absent, the first finder takes over. Before reverting, assess dependent
+  commits and data compatibility; do not blindly revert. Registered unrelated
+  flakes permit one whole-workflow rerun with a record; a second failure is real.
+  See `docs/agents/testing-cadence.md`.
+- After delivery report exact 40-hex main SHA and parent, machine risk, changed
+  files, summary, commands as PASS/SKIP/FAIL with limitations, review evidence,
+  exact Actions run and both aggregate job links, and deployment/health status.
+  Update Linear with commit, behavior, verification and whether it is live.
 
 ## GitHub Actions CI authority
 
 - `.github/workflows/verify.yml` runs on natural `pull_request` and `push` to
-  `main`. Stable required checks remain `verify` and `e2e`. Independent workers
+  `main`. Every main push runs Full in its own SHA concurrency group without
+  replacing another push; PR runs may replace older runs for that PR. Independent workers
   `verify-1`, `verify-2`, `e2e-seams-1`, `e2e-seams-2`, `e2e-render-1` and
   `e2e-render-2` use isolated runners within trusted-base boundaries; `verify`
   aggregates its two workers and `e2e` its four. Verify and render shards use
@@ -158,26 +150,24 @@ uniquely supplies; otherwise keep it outside acceptance packs.
   always run all six fixed browser seams exactly once (renderer + reorder;
   DOM contract + A3 + grammar-fill + golden path). Render workers partition the
   selected pack's e2e lane; a legitimate empty shard succeeds and records
-  `scripts=0`, never a skipped job. Both required checks and all
+  `scripts=0`, never a skipped job. Both aggregate jobs and all
   workers must succeed; their disjoint lanes must cover the complete selected
   pack. Local `verify:all` remains unpartitioned. No path filter, skipped job,
   local report, manual run or Amp Check substitutes for either job.
   See ADR-0026 and the cutover runbook.
-  Ship records `head/base/pack/reason` in the PR body per `.agents/ship.md`;
-  Actions uses its natural event snapshot, never a live mutable comment.
+  Optional PR pack advice follows `.agents/ship.md`; Actions uses its natural
+  event snapshot, never a live mutable comment.
 - Read GitHub Actions run and job evidence directly. Bind the repository,
   workflow path, event, current PR head/base (or exact live main SHA), latest
-  run attempt, GitHub Actions App identity and both successful job conclusions.
-  PRs test GitHub's merge ref; preserve strict/up-to-date branch protection,
-  require the head to contain current main, and reject stale results.
-- CI runs independently of Amp threads. The native Actions watcher provides
-  best-effort terminal notification to the originating Ship thread; register it
-  as described in `.agents/ship.md`. Its failure cannot affect CI or protection,
-  and no private queue, notification or agent acknowledgment supplies authority.
-  An existing Ship Goal covers fresh verification and ordinary protected merge
-  after a green notice; diagnose failures before rerunning and retain attempts.
-- Deployment accepts only the exact-main natural Actions run and its two
-  successful required checks through the deployment reader, which accepts only
+  run attempt, GitHub Actions App identity and all eight successful jobs.
+  PRs test GitHub's merge ref and must contain their event base; reject stale
+  head/attempt evidence. Main CI is the deployment gate, not a pre-push gate.
+- CI runs independently of Agent threads. The pusher actively checks main CI;
+  optional PR watcher notifications are best effort, never authority. Diagnose
+  failures before rerunning and retain attempts; no queue or acknowledgment
+  substitutes for direct Actions evidence.
+- Deployment accepts only latest main's exact-SHA natural `push` run and its
+  latest successful attempt through the deployment reader, which accepts only
   the exact v4 `{verify-1, verify-2, verify, e2e-seams-1, e2e-seams-2,
   e2e-render-1, e2e-render-2, e2e}` job
   set with every job successful. Reader and workflow ship together; historical
@@ -188,7 +178,7 @@ uniquely supplies; otherwise keep it outside acceptance packs.
 - The old Amp CI webhook/controller, serialized eligibility, Amp-only watcher,
   Sentinel/Discovery and Action-wake are not the new authority. Do not start,
   drain, replay or initialize them. Retire the live registration/services only
-  after Actions has taken over protection and exact-main validation passes;
+  after Actions takeover and exact-main validation passes;
   preserve old receipts and queue evidence. Source removal is not proof that a
   remote webhook or lost Orb has stopped.
 
@@ -197,12 +187,16 @@ uniquely supplies; otherwise keep it outside acceptance packs.
 - Website deployment runs on the Owner Mac through `scripts/local-deploy.sh`.
   The private key lives only in the Owner Mac Keychain; never copy it into a
   repository, worktree, log, Agent prompt, CI, or development Orb.
-- A current Owner instruction `部署最新版` authorizes that one website-code
-  deployment Goal, including diagnosis, health and agreed recovery. Use the
-  dedicated clean `main` clone at `~/Projects/eqb-deploy`, fetch `origin` and
-  fast-forward to `origin/main`, then run
-  `scripts/local-deploy.sh deploy --owner-said-deploy-latest`.
-  Never ask the Owner to copy a SHA.
+- Standing Owner `部署最新版` authority includes automatic deployment, diagnosis,
+  health and agreed recovery after latest main's eight jobs are green. Only on
+  Owner Mac, use clean `~/Projects/eqb-deploy`, fetch origin and fast-forward main,
+  then run `scripts/local-deploy.sh deploy --owner-said-deploy-latest`.
+  Re-resolve if main advances; never use an old green SHA or ask Owner to copy one.
+  For persistence-path code changes, review the complete production-SHA-to-target
+  diff and confirm no migration/schema/data operation, then add `--code-only`;
+  the script computes its digest. Migration, schema, DB/R2 data operations and
+  host configuration require separate authority. “停自动部署” pauses all Agents.
+  Off Mac, record “已绿待部署” in Linear for an Owner Mac Agent to pick up.
 - The deploy command requires the exact-main successful natural GitHub Actions
   `Verify` workflow with both `verify` and `e2e` jobs, then sends that SHA
   through pinned restricted SSH to the root-owned fixed host controller.
@@ -271,8 +265,8 @@ their established vocabulary, and flag conflicts before editing.
 
 ## Production and repository facts
 
-- Production changes, deploys, database/configuration mutation, and R2 actions
-  require explicit current owner authorization. Check
+- Code deployment uses the standing authority above; migration, schema,
+  DB/R2 data operations and host configuration require separate Owner authority. Check
   `docs/cuts/launch-deploy/go-live-record.md` before an authorized production
   action. Never run `scripts/pull-run-push.mjs` against production otherwise.
 - Remote: `origin`.
