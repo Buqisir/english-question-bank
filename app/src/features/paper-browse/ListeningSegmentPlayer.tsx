@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from 'react'
 import { Headphones } from '../../icons'
 import { PlaybackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
@@ -52,6 +52,14 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
   const shownPosition = dragPosition ?? position
   const progress = duration > 0 ? Math.min(1, shownPosition / duration) : 0
 
+  const stopAtEnd = useCallback((audio: HTMLAudioElement) => {
+    if (audio.currentTime < endSeconds) return false
+    audio.pause()
+    if (audio.currentTime !== endSeconds) audio.currentTime = endSeconds
+    setPosition(duration)
+    return true
+  }, [endSeconds, duration])
+
   useEffect(() => {
     const audio = audioRef.current
     return () => { audio?.pause() }
@@ -63,18 +71,13 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
     const tick = () => {
       const audio = audioRef.current
       if (!audio) return
-      if (audio.currentTime >= endSeconds) {
-        audio.pause()
-        audio.currentTime = endSeconds
-        setPosition(duration)
-        return
-      }
+      if (stopAtEnd(audio)) return
       setPosition(Math.max(0, audio.currentTime - startSeconds))
       frame = requestAnimationFrame(tick)
     }
     frame = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(frame)
-  }, [playing, startSeconds, endSeconds, duration])
+  }, [playing, startSeconds, stopAtEnd])
 
   useEffect(() => {
     if (!open) return
@@ -239,6 +242,8 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
       }}
       onTimeUpdate={() => {
         const audio = audioRef.current!
+        // Media events still enforce the boundary when background tabs suspend rAF.
+        if (stopAtEnd(audio)) return
         if (!playing) setPosition(Math.min(duration, Math.max(0, audio.currentTime - startSeconds)))
       }}
     />
