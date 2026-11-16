@@ -21,6 +21,24 @@ function BrandMark(): ReactNode {
   )
 }
 
+/* BRAND.md §3.1, 第 121 条: the home topbar's site name is the wordmark image.
+   Same 1x / 2x split as the mark: 1x screens get the hand-drawn 15px pixel
+   version, 2x and above the vector. Both sit in a 31×20 box as tall as the
+   mark, so the glyphs land on whole pixels next to it. Sub pages keep the
+   plain-text site name (muted 13px, the paper title leads there). */
+function BrandWordmark(): ReactNode {
+  return (
+    <img
+      className="topbar-brand-wordmark"
+      src="/brand/wordmark-15.png"
+      srcSet="/brand/wordmark-15.png 1x, /brand/wordmark.svg 2x"
+      width={31}
+      height={20}
+      alt="獭石"
+    />
+  )
+}
+
 /* ui-shell-unify CR MF-1 disposition: the topbar deliberately does NOT
    carry page workspace tools. Tool-heavy pages (draft workbench) keep
    their own sticky tool card below the shell bar so tools stay near the
@@ -121,7 +139,7 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
           !props.hideBrand && (
             <div className="topbar-identity">
               <BrandMark />
-              <span className="topbar-brand-title">獭石</span>
+              <BrandWordmark />
             </div>
           )
         ) : (

@@ -183,6 +183,12 @@
   object-fit: contain;
 }
 
+/* 字标图（BRAND.md §3.1，第 121 条）：31×20 的盒子，和顶栏一样，普通屏逐格、高清屏矢量。 */
+.login-brand .login-brand-wordmark {
+  width: 31px;
+  height: 20px;
+}
+
 .login-card {
   width: 100%;
   max-width: 400px;
