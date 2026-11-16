@@ -148,50 +148,33 @@ function locate(group, streams, pauses, durationSeconds) {
   for (const span of projection.exclusions.filter(e => e.reason === 'pause_duration_direction')) {
     text = text.slice(0, span.start) + projection.text.slice(span.start, span.end) + text.slice(span.end)
   }
-  const heads = anchors(streams, text, low, high, 'head'), tails = anchors(streams, text, low, high, 'tail')
-  // The retained count describes the printed instruction, which may differ
-  // from the recording. Complete extra readings are useful for review; fewer
-  // matches cannot prove that a reading is absent.
-  const complete = heads.length > group.expectedReadings && tails.length === heads.length && heads.every((head, i) =>
-    tails.filter(t => t.end > head.end && t.end <= (heads[i + 1]?.start ?? high)).length === 1)
-  if (!Number.isInteger(group.expectedReadings) || group.expectedReadings < 1
-      || (heads.length !== group.expectedReadings && !complete)) {
-    // A neighbor-bounded envelope is useful for listening, but proves no count
-    // or word edges. Never label this fallback as an individual reading.
-    if (Number.isFinite(group.orderEvidence?.afterSeconds) && Number.isFinite(group.orderEvidence?.beforeSeconds)
-        && low >= 0 && high > low && high <= durationSeconds) {
-      return [{ reading: null, status: 'unsegmented', startSeconds: low, endSeconds: high,
-        signalEvidence: { orderEvidence: group.orderEvidence },
-        clips: [{ kind: 'window', sourceStartSeconds: low, sourceEndSeconds: high }] }]
-    }
-    fail('REVIEW_PACK_READING_COUNT_AMBIGUOUS', `${group.segmentId}: expected ${group.expectedReadings}, found ${heads.length}`)
+  const heads = group.playback ? [] : anchors(streams, text, low, high, 'head')
+  const tails = group.playback ? [] : anchors(streams, text, low, high, 'tail')
+  let cut = group.playback
+  if (!cut && heads.length && tails.length && tails.at(-1).end > heads[0].start) {
+    const outer = reviewCuts({ wordStartSeconds: heads[0].start, wordEndSeconds: tails.at(-1).end,
+      pauses, durationSeconds })
+    cut = { startSeconds: outer.startSeconds, endSeconds: outer.endSeconds, signalEvidence: outer.signalEvidence }
   }
-  return heads.map((head, i) => {
-    const matching = tails.filter(t => t.end > head.end && t.end <= (heads[i + 1]?.start ?? high))
-    if (matching.length !== 1) fail('REVIEW_PACK_TAIL_AMBIGUOUS', `${group.segmentId} 第 ${i + 1} 遍: ${matching.length}`)
-    const tail = matching[0], first = head.words[0], last = tail.words.at(-1)
-    let start = first.startSeconds, end = last.endSeconds
-    // Retained ASR can absorb silence into an edge word. Retain both clocks.
-    const leading = pauses.filter(p => p.endSeconds - p.startSeconds >= 0.25
-      && ((first.startSeconds - 0.5 <= p.endSeconds && p.endSeconds <= first.endSeconds - 0.02)
-        || (p.startSeconds <= first.startSeconds && first.startSeconds <= p.endSeconds && p.endSeconds < head.end)))
-      .sort((a, b) => Math.abs(a.endSeconds - start) - Math.abs(b.endSeconds - start))[0]
-    const trailing = pauses.filter(p => p.endSeconds - p.startSeconds >= 0.25
-      && Math.max(last.startSeconds + 0.04, end - 1.5) <= p.startSeconds && p.startSeconds <= end + 0.8)
-      .sort((a, b) => Math.abs(a.startSeconds - end) - Math.abs(b.startSeconds - end))[0]
-    if (leading) start = leading.endSeconds
-    if (trailing) end = trailing.startSeconds
-    return { reading: i + 1, status: 'located', ...reviewCuts({ wordStartSeconds: start, wordEndSeconds: end, pauses, durationSeconds }),
-      headEvidence: head, tailEvidence: tail, asrFirstWord: first, asrLastWord: last }
-  })
+  if (!cut && Number.isFinite(group.orderEvidence?.afterSeconds)
+      && Number.isFinite(group.orderEvidence?.beforeSeconds)) {
+    cut = { startSeconds: low, endSeconds: high, signalEvidence: { orderEvidence: group.orderEvidence } }
+  }
+  if (!cut || ![cut.startSeconds, cut.endSeconds].every(Number.isFinite)
+      || cut.startSeconds < 0 || cut.endSeconds <= cut.startSeconds || cut.endSeconds > durationSeconds) {
+    fail('REVIEW_PACK_SEGMENT_BOUNDARY_MISSING', group.segmentId)
+  }
+  return [{ reading: null, status: 'whole-segment', ...cut,
+    clips: [{ kind: 'window', sourceStartSeconds: cut.startSeconds, sourceEndSeconds: cut.endSeconds }] }]
 }
 
 function page(segments) {
-  let body = '<h1>逐遍听核</h1><p>先听精确剪辑，有疑问再听上下文；所有片段保持原速。回复卷名、段号、第几遍及首尾／正文情况。</p>'
+  let body = '<h1>整段听核</h1><p>每段音频包含所有遍，保持原速。对照转录与官方原文，回复卷名、段号及首尾／正文情况。</p>'
   for (const e of segments) {
     body += `<section><h2>${esc(e.paperName)} · ${esc(e.segmentId)}</h2>`
+    if (Number.isInteger(e.expectedReadings) && e.expectedReadings > 0) body += `<p>原卷说明：读 ${e.expectedReadings} 遍</p>`
     for (const r of e.readings) {
-      const readingLabel = r.status === 'unsegmented' ? '整段 · 未分遍（遍数不确定，按相邻段时间窗听核）' : `第 ${r.reading} 遍`
+      const readingLabel = '整段音频（含所有遍）'
       body += `<article><h3>${readingLabel}</h3><div class="sentences"><small>应听首句</small><p>${esc(e.expectedFirstSentence)}</p><small>应听末句</small><p>${esc(e.expectedLastSentence)}</p></div><div class="players">`
       for (const c of r.clips) {
         const label = c.kind === 'window' ? '整段时间窗' : c.kind === 'exact' ? '精确剪辑' : '上下文 · 前后各多 3 秒'
@@ -199,11 +182,11 @@ function page(segments) {
       }
       body += `</div><p>回复示例：${esc(e.paperName)} ${esc(e.segmentId)} ${readingLabel}：首尾完整／开头缺 __／结尾缺 __／多了报题；正文差异 __</p></article>`
     }
-    body += `<details><summary>查看完整官方原文</summary><pre>${esc(e.sourceText)}</pre></details></section>`
+    body += `<details open><summary>查看整段转录</summary><pre>${esc(e.observedTranscript || '暂无保留转录')}</pre></details><details><summary>查看完整官方原文</summary><pre>${esc(e.sourceText)}</pre></details></section>`
   }
-  return `<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>逐遍听核</title>
-<style>:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f3f6f0;color:#191d18;font:14px/1.65 -apple-system,"PingFang SC",sans-serif}main{max-width:1080px;margin:auto;padding:32px 24px}h1{font-size:28px}h2{font-size:20px}h3{font-size:17px}section{background:#fafcf8;padding:24px;border-radius:12px;margin:24px 0;box-shadow:0 0 0 1px #191d180d,0 1px 2px #191d180f}article{padding:24px 0;border-top:1px solid #d5dacf}.sentences,pre{font:18px/1.7 Georgia,"Times New Roman",serif}small,.clock{font:12px/1.5 -apple-system,"PingFang SC",sans-serif;color:#60665c}.players{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:24px 0}.players>div{min-width:0}audio{display:block;width:100%;margin:8px 0}pre{white-space:pre-wrap}summary{cursor:pointer}:focus-visible{outline:2px solid #191d18;outline-offset:3px}@media(max-width:700px){.players{grid-template-columns:1fr}main{padding:24px 16px}}</style>
-<main>${body}<footer>词首尾前后各加最多 0.8 秒，不越过相邻停顿中点；上下文从精切前后各扩 3 秒，受录音端点限制。机器定位尚未经 Owner 听审，本包不能认定 usable。</footer></main>
+  return `<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>整段听核</title>
+<style>:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f3f6f0;color:#191d18;font:14px/1.65 -apple-system,"PingFang SC",sans-serif}main{max-width:1080px;margin:auto;padding:32px 24px}h1{font-size:28px}h2{font-size:20px}h3{font-size:17px}section{background:#fafcf8;padding:24px;border-radius:12px;margin:24px 0;box-shadow:0 0 0 1px #191d180d,0 1px 2px #191d180f}article{padding:24px 0;border-top:1px solid #d5dacf}.sentences,pre{font:18px/1.7 Georgia,"Times New Roman",serif}small,.clock{font:12px/1.5 -apple-system,"PingFang SC",sans-serif;color:#60665c}.players{display:grid;grid-template-columns:1fr;gap:24px;margin:24px 0}.players>div{min-width:0}audio{display:block;width:100%;margin:8px 0}pre{white-space:pre-wrap}summary{cursor:pointer}:focus-visible{outline:2px solid #191d18;outline-offset:3px}@media(max-width:700px){.players{grid-template-columns:1fr}main{padding:24px 16px}}</style>
+<main>${body}<footer>每段从整段起点播放至整段结束，包含录音中的所有遍，不按原卷说明拆分。机器定位尚未经 Owner 听审，本包不能认定 usable。</footer></main>
 <script>const aa=[...document.querySelectorAll('audio')];aa.forEach(a=>{a.addEventListener('play',()=>aa.forEach(b=>{if(a!==b)b.pause()}));a.addEventListener('timeupdate',()=>{a.nextElementSibling.textContent='片段内 '+a.currentTime.toFixed(2)+' 秒 · 整录音 '+(Number(a.dataset.start)+a.currentTime).toFixed(2)+' 秒'})})</script></html>`
 }
 
@@ -265,16 +248,22 @@ export function buildReviewPack({ root = DEFAULT_ROOT, papers, attempts = {}, se
       const streams = [group, ...(group.engineAttempts ?? [])].flatMap(g => (g.observedWindows ?? [])
         .filter(w => w.words?.length).map(w => ({ engine: g.engine ?? 'unknown', words: w.words,
           evidencePaths: (w.evidencePaths ?? []).map(p => track(path.resolve(attempt, p))) })))
-      const readings = locate(group, [...rawStreams, ...streams], silence.pauses, durationSeconds).filter(r => {
-        if (!selections.length) return true
-        const key = `${paperId}:${group.segmentId}:${r.reading}`, all = `${paperId}:${group.segmentId}:all`
-        if (selections.includes(key)) usedSelections.add(key)
-        if (selections.includes(all)) usedSelections.add(all)
-        return selections.includes(key) || selections.includes(all)
-      })
+      const readings = locate(group, [...rawStreams, ...streams], silence.pauses, durationSeconds)
+      // Historical reading selectors now select the containing whole segment.
+      for (const selection of selections) {
+        const prefix = `${paperId}:${group.segmentId}:`
+        if (selection.startsWith(prefix) && /^(?:all|[1-9]\d*)$/u.test(selection.slice(prefix.length))) usedSelections.add(selection)
+      }
+      const span = readings[0]
+      const transcripts = [...streams, ...rawStreams].map(stream => ({ ...stream,
+        words: stream.words.filter(w => w.startSeconds >= span.startSeconds && w.endSeconds <= span.endSeconds) }))
+      const transcript = transcripts.filter(s => s.engine === (group.selectedEngine ?? group.engine))
+        .sort((a, b) => b.words.length - a.words.length)[0]
+        ?? transcripts.sort((a, b) => b.words.length - a.words.length)[0]
+      const observedTranscript = (transcript?.words ?? []).map(w => (w.token ?? w.rawRunText ?? '').trim()).join(' ').trim()
       const [expectedFirstSentence, expectedLastSentence] = edgeSentences(group.sourceText)
       segments.push({ paperId, paperName: config.provenance?.paperName ?? input.subject?.paperName ?? paperId, segmentId: group.segmentId,
-        questionNumbers: group.questionNumbers, attemptPath: attempt,
+        questionNumbers: group.questionNumbers, attemptPath: attempt, observedTranscript,
         sourceText: group.sourceText, sourceTextEvidence: `${attempt}/rule-result.json#groups[${rule.groups.indexOf(group)}].sourceText`,
         expectedFirstSentence, expectedLastSentence, sourceAudioPath: audio, sourceAudioSha256: input.audioSha256,
         sourceAudioDurationSeconds: durationSeconds, expectedReadings: group.expectedReadings,
@@ -282,8 +271,8 @@ export function buildReviewPack({ root = DEFAULT_ROOT, papers, attempts = {}, se
           signalEvidence: { path: silencePath, ...r.signalEvidence } })) })
     }
   }
-  if (!segments.length) fail('REVIEW_PACK_NOTHING_SELECTED', '没有不确定段；可显式 --select')
   if (selections.some(s => !usedSelections.has(s))) fail('REVIEW_PACK_SELECTION_INVALID', selections.filter(s => !usedSelections.has(s)).join(', '))
+  if (!segments.length) fail('REVIEW_PACK_NOTHING_SELECTED', '没有不确定段；可显式 --select')
   // Validate every selection before creating anything, and never overwrite an old package.
   mkdirSync(path.dirname(output), { recursive: true })
   mkdirSync(output)
@@ -305,9 +294,8 @@ export function buildReviewPack({ root = DEFAULT_ROOT, papers, attempts = {}, se
   }
   for (const [file, digest] of Object.entries(inputSha256)) if (sha(file) !== digest) fail('REVIEW_PACK_SOURCE_CHANGED', file)
   const manifest = { schema: 'listening-owner-review-pack-v1', createdAt: new Date().toISOString(),
-    timebase: 'normalized_playback_seconds', rule: 'word edges -> +/-0.8s clipped at adjacent pause midpoints; context exact cut +/-3s',
-    rules: { bufferSeconds: 0.8, contextSeconds: 3, pauseMidpointGuard: true, playbackRate: 1,
-      edgeAnchorMinimumRatio: 0.72, exactEdgeTokenRequired: true, normalizedTokenSource: 'lib-listening-segment-rule.mjs' },
+    timebase: 'normalized_playback_seconds', rule: 'one whole-segment clip including all recorded readings',
+    rules: { playbackRate: 1 },
     ownerReviewed: false, asrAdded: false, sourceFingerprintCheck: 'PASS', inputSha256, segments }
   writeFileSync(path.join(output, 'index.html'), page(segments), { flag: 'wx' })
   writeFileSync(path.join(output, 'manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`, { flag: 'wx' })
@@ -319,7 +307,7 @@ function main(args) {
   for (let i = 0; i < args.length; i++) {
     const arg = args[i]
     if (arg === '--help') {
-      console.log('用法：node scripts/import-pipeline/listening-owner-review-pack.mjs <paperId> [paperId ...] --output <新建的仓库外目录> [--root <仓库>] [--attempt <paperId=attempt目录>] [--select <paperId:listening-text-N:遍数或all>]\n默认选择最新已完成 attempt 中 decision != usable 的所有段／所有遍；不运行 ASR，不安装审查结论。')
+      console.log('用法：node scripts/import-pipeline/listening-owner-review-pack.mjs <paperId> [paperId ...] --output <新建的仓库外目录> [--root <仓库>] [--attempt <paperId=attempt目录>] [--select <paperId:listening-text-N:all（兼容旧遍数选择，仍输出整段）>]\n默认选择最新已完成 attempt 中 decision != usable 的所有段，每段输出一个含所有遍的音频；不运行 ASR，不安装审查结论。')
       return
     }
     if (['--output', '--root', '--attempt', '--select'].includes(arg)) {
