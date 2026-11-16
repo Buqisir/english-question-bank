@@ -265,7 +265,9 @@ function startAsr(ctx, { tag = null, extent = ['--whole-file'] } = {}) {
     const name = 'asr-apple-v2'
     const out = path.join(ctx.fast, name)
     const completed = path.join(out, 'completed.json')
-    if (existsSync(completed) && readJson(completed).audioSha256 === sha256(readFileSync(playback))) return [name]
+    // A failed Apple run still writes completed.json (with error); never reuse it as evidence.
+    if (existsSync(completed) && !readJson(completed).error
+      && readJson(completed).audioSha256 === sha256(readFileSync(playback))) return [name]
     if (!alive(ctx.state.background[name]?.pid)) background(ctx, name, 'python3', [
       path.join(scripts, 'asr-slot.py'), 'python3', path.join(scripts, 'transcribe-listening-apple.py'), playback, out,
     ])
@@ -706,6 +708,7 @@ async function afterProofread(ctx, args) {
       }
       for (const name of replayAttempt ? [] : startAsr(ctx)) {
         const ready = () => existsSync(path.join(ctx.fast, name, 'completed.json'))
+          && !readJson(path.join(ctx.fast, name, 'completed.json')).error
           && readJson(path.join(ctx.fast, name, 'completed.json')).audioSha256
             === sha256(readFileSync(path.join(ctx.paperDir, 'materialization/listening-audio/playback.mp3')))
         if (!ready()) await waitBackground(ctx, name, ready)
@@ -1767,7 +1770,7 @@ export async function listeningRedo(ctx, args, {
       const evidence = path.join(ctx.paperDir, file.path)
       const bytes = readFileSync(evidence)
       if (sha256(bytes) !== file.sha256 || bytes.length !== file.byteLength) fail('保留的 Apple 证据 digest 不匹配')
-      if (JSON.parse(bytes).audioSha256 === audioSha256) return evidence
+      if (JSON.parse(bytes).audioSha256 === audioSha256 && !JSON.parse(bytes).error) return evidence
     }
     const completed = path.join(ctx.fast, 'asr-apple-v2/completed.json')
     if (existsSync(completed) && readJson(completed).audioSha256
@@ -1777,6 +1780,7 @@ export async function listeningRedo(ctx, args, {
     }
     for (const name of startAsr(ctx)) {
       const ready = () => existsSync(path.join(ctx.fast, name, 'completed.json'))
+        && !readJson(path.join(ctx.fast, name, 'completed.json')).error
         && readJson(path.join(ctx.fast, name, 'completed.json')).audioSha256
           === sha256(readFileSync(path.join(ctx.paperDir, 'materialization/listening-audio/playback.mp3')))
       if (!ready()) await waitBackground(ctx, name, ready)
