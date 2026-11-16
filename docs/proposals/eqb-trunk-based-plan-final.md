@@ -7,9 +7,9 @@
 
 ## 一、日常规则（激活后）
 
-1. **什么时候推：** 任务 Goal 默认包含直推 main 和上线，不用 Owner 再说一次 Ship。Owner 说「先别推」或「先别上」才停。
+1. **什么时候推：** 任务 Goal 默认包含直推 main 和上线，不用 Owner 再说一次 Ship。Owner 说「先别推」或「先别上」才停。对某个任务说「先别上」时，这个任务也先不进 main，因为进了 main 就会被别的 Agent 随最新版一起部署；除非 Owner 明确同意它跟着其他提交上线。Owner 说「停自动部署」，所有 Agent 的自动部署都暂停。
 2. **切小块：** 一个能说清、能验证的改动对应一个提交，几小时内做完。
-3. **推前自检（L1）：** 先同步 `origin/main`，再看一眼 main 最近一次跑完的运行：是红的，就只能推修复或撤销（第二节）。然后按改动选现有命令，不新建清单：
+3. **推前自检（L1）：** 先同步 `origin/main`，再解析当前 main 的 SHA，看它自己最新一次尝试的结果（不按运行结束的先后判断红绿，按 SHA 分组后旧运行可能晚完成）。当前 main 或它之前仍未解决的失败是红的，就只能推修复或撤销（第二节）。然后按改动选现有命令，不新建清单：
    - 前端 / UI：`node scripts/verify-ci.mjs --pack ui`（构建、类型检查，以及 motion、radius、emoji 等守卫）
    - 工作台组件：再加 `node scripts/verify-similar-workbench-swap.mjs`（裸 fetch 守卫）
    - 其他：`node scripts/verify-ci.mjs --changed --base-ref origin/main`（必须显式写基线）。先加 `--plan-json` 看选出哪一档；选出 `all` 时不在本地跑 Full，只跑直接受影响的脚本，Full 交给 main CI
@@ -24,7 +24,7 @@
    - 改了持久化路径（`data/sql`、`server/api.mjs` 等 11 处）的版本，部署脚本会要求先判断有没有迁移。没有迁移（只是改代码）：Agent 对照受保护路径的 diff 确认后，加 `--code-only` 照常部署，这是现行做法（11-15、11-16 的 #721、#722 就是这样上线的）。真有迁移、schema 变化，或改了主机配置：要 Owner 单独授权，Agent 不绕，在 Linear 点名 Owner，写清哪次提交、哪些路径。它没部署之前，后面的提交也都上不了线，所以带迁移的改动挑 Owner 在线时推。
    - 连续推送时最新 main 可能一直在跑，上不了线。要上线就停推一轮。
    - 可见改动上线后在线上做 Owner QA。现在没有外部用户，可以这样；有了真实老师再和功能开关一起重看。
-8. **开工先看两眼：** 每个 Agent 开工先查：main 最近一次跑完的运行是不是绿；在 Owner Mac 上的再查线上是不是最新的绿版本。红了没人管就接手，绿了没部署就补部署。这是推的人不在时的兜底，不新增服务。
+8. **开工先看两眼：** 每个 Agent 开工先解析当前 main 的 SHA，核对它最新一次尝试的 8 个 job；仍影响当前 main 的失败没人管就接手。在 Owner Mac 上的再查线上版本：只有当前 main 全绿、线上还不是它时才补部署；当前 main 还在跑或失败，就记录状态，不补部署历史上的绿版本（读取器也会拒绝）。这是推的人不在时的兜底，不新增服务。
 9. **更新 Linear：** 写 commit 链接、做了什么、验证情况、是否已上线。
 
 ### 线上线下对照
@@ -43,7 +43,7 @@
 - **线上推的改动怎么上线：** main 绿了以后在 Linear 留「已绿待部署」，线下 Agent 开工检查时补部署（第 7、8 条）。没有线下 Agent 在跑的时候，改动会停在「绿了没上线」。
 - **连接情况（2026-11-16 实测）：** 云端会话到 GitHub 的两条通道都通，git 能推能拉，接口能查 CI；Linear 可用。
 
-**PR 路径（退路）：** 某个会话直推不动时（环境不放行、凭据不够），开 PR，等 PR 的完整 CI 绿了再 squash 合并，不要求分支是最新的。这也是长期授权，不用 Owner 当次开口。合并后和直推一样，照第 6 条盯 main。
+**PR 路径（退路）：** 某个会话直推不动时（环境不放行、凭据不够），开 PR。触发 PR 验证前先同步 main，让分支包含那次事件的 base（workflow 里有祖先检查，不包含会直接失败）；PR 的完整 CI 绿了再 squash 合并，之后 main 又前进了不用为追平而重跑。合并后能不能上线，仍由最新 main 的完整 CI 决定。这也是长期授权，不用 Owner 当次开口。合并后和直推一样，照第 6 条盯 main。
 
 ## 二、红灯与不稳定测试
 
@@ -80,7 +80,7 @@ render 两片分匀不省总时长，不做。降到 20 分钟以内要加第三
 ## 五、切换（两步）
 
 **第 1 步：最后一个强制 PR。** 它属于工具链高风险改动，需要 Astra 审查，并跑完整 Full 和 E2E。改 4 个文件：
-- `AGENTS.md`：Ship、推前验证、CI authority 三段（required checks、PR body、strict、watcher 相关表述）；**另加 Goal authorization 和 Owner Mac deployment 两段**，现在写的是「一次指令授权一次部署」「合并不代表部署」，长期授权和它的边界（只限普通代码部署，不含持久化和主机配置）要写进去，并写明 Owner 说「停自动部署」即停
+- `AGENTS.md`：Ship、推前验证、CI authority 三段（required checks、PR body、strict、watcher 相关表述）；**另加 Goal authorization 和 Owner Mac deployment 两段**，现在写的是「一次指令授权一次部署」「合并不代表部署」，长期授权和它的边界要写进去：包含经审阅、确认没有迁移和额外数据操作的持久化路径代码改动，用 `scripts/local-deploy.sh deploy --owner-said-deploy-latest --code-only`（摘要由脚本自动算），审阅覆盖从当前生产 SHA 到目标 main SHA 的完整差异；迁移、schema、DB/R2 数据操作和主机配置仍要单独授权，并写明 Owner 说「停自动部署」即停
 - `.agents/ship.md`：默认路线改成直推加 main 收尾；开头「不授权部署」那句同步改；PR 风险块和 watcher 移到可选 PR 路径
 - `.github/workflows/verify.yml`：main 的并发组改按 SHA 分组
 - `docs/agents/testing-cadence.md`：写明推前 L1 和不稳定测试登记表，删掉强制 PR→main 两轮门禁
@@ -118,6 +118,8 @@ render 两片分匀不省总时长，不做。降到 20 分钟以内要加第三
 | 红灯责任写明「第一个变红的 SHA」、30 分钟指推出修复 | CI 要 26 分钟，这段时间里叠上去的提交会跟着红，原稿没说算谁的 |
 | `--changed` 选出 Full 时不在本地跑 | 本地 Full 不分片，会比 CI 还慢，和「推得快」相反 |
 | 激活前先读保护设置；加两周试行和复盘条件 | 云端会话没能读到保护设置；主会话 2026-11-16 在 Owner Mac 上读到了（见第五节第 2 步），激活前再对照一次。原稿只有整体撤回，没有中间档 |
+
+Astra 终审第 1 轮（同日）又改了四处：PR 退路要先同步 main（workflow 有祖先检查）；红绿按当前 main SHA 判断，不按运行结束顺序，只给当前 main 补部署；「先别上」的任务也先不进 main，「停自动部署」暂停所有 Agent；长期授权写明包含无迁移的持久化代码改动（`--code-only`）。另核实：控制器有全程互斥锁，两个 Agent 同时部署时后来者被拒（退出码 75），不用另加锁。
 
 没改、但要 Owner 明确点头的两件：一是「部署最新版」从一次一授权变成长期授权；二是第 2 步删除 required_status_checks。
 
