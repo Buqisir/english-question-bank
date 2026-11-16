@@ -247,7 +247,7 @@ export function VocabularyNotebookPage({
         <main className="notebook-main" ref={paperListRef}>
           {error ? <Notice kind="error" className="notebook-error">{error}</Notice> : null}
           {papers && papers.length === 0 ? (
-            <EmptyState className="notebook-empty-state" illustration="vocabulary-notebook" action={{ label: '去找题', onClick: onBack }}>
+            <EmptyState className="notebook-empty-state" primitive="paper" action={{ label: '去找题', onClick: onBack }}>
               看卷时选中单词，点「加入生词本」，就会收到这里。
             </EmptyState>
           ) : null}
