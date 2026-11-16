@@ -61,7 +61,10 @@ test('缺少切分绑定时停止而不覆盖', async t => {
 
 function agentFixture(t) {
   const fixture = setup(t)
-  const relative = 'listening-review-evidence/asr.json', bytes = Buffer.from('{"words":[]}')
+  const relative = 'listening-review-evidence/asr.json', bytes = Buffer.from(JSON.stringify({
+    result: { segments: [{ words: [{ word: 'Hello', start: 1, end: 1.2 },
+      { word: 'world.', start: 3.5, end: 3.7 }] }] },
+  }))
   for (const dir of [fixture.paperDir, fixture.attempt]) writeFileSync(path.join(dir, relative), bytes)
   const subject = { durationSeconds: 10, playbackAudioSha256: sha256('audio') }
   const transcript = [{ segmentId: 's1', questionNumbers: [1], text: 'Hello world.' },
@@ -73,16 +76,16 @@ function agentFixture(t) {
       window: { startSeconds: 0, endSeconds: 10 },
       settings: { engine: 'fixture', model: 'fixture', language: 'en', vad: false, computeType: 'fixture' } }],
     groups: transcript.map((g, i) => ({ segmentId: g.segmentId, questionNumbers: g.questionNumbers,
-      decision: 'usable', reason: 'fixture', limits: [],
-      playback: { startSeconds: i * 4 + 1, endSeconds: i * 4 + 3 },
-      occurrences: [{ startSeconds: i * 4 + 1, endSeconds: i * 4 + 3, evidencePaths: [relative] }] })),
+      decision: i === 0 ? 'review_required' : 'usable', reason: 'fixture', limits: [],
+      playback: i === 0 ? null : { startSeconds: i * 4 + 1, endSeconds: i * 4 + 3 },
+      occurrences: i === 0 ? [] : [{ startSeconds: i * 4 + 1, endSeconds: i * 4 + 3, evidencePaths: [relative] }] })),
   }, transcript)
   for (const file of report.evidence) writeFileSync(path.join(fixture.paperDir, file.path),
     readFileSync(path.join(fixture.attempt, file.path)))
   const agent = structuredClone(report)
   agent.method = 'agent_asr_comparison'
-  agent.groups[0].playback.endSeconds = 4
-  agent.groups[0].occurrences[0].endSeconds = 4
+  Object.assign(agent.groups[0], { decision: 'usable', playback: { startSeconds: 1, endSeconds: 4 },
+    occurrences: [{ startSeconds: 1, endSeconds: 4, evidencePaths: [relative] }] })
   const edge = (sourceText, startSeconds) => ({ sourceText,
     words: [{ text: sourceText, startSeconds, endSeconds: startSeconds + 0.2, evidencePath: relative }] })
   agent.groups[0].boundaryJudgment = { start: edge('Hello', 1), end: edge('world.', 3.5) }
@@ -92,7 +95,7 @@ for (const scenario of ['valid', 'missing basis', 'overlap']) {
   test(`finish preserves agent judgement only after validation: ${scenario}`, async t => {
     const fixture = agentFixture(t), logs = []
     if (scenario === 'missing basis') delete fixture.agent.groups[0].boundaryJudgment
-    if (scenario === 'overlap') fixture.agent.groups[0].playback.endSeconds = 6
+    if (scenario === 'overlap') fixture.agent.groups[0].playback.endSeconds = 5.1
     writeFileSync(fixture.file, JSON.stringify(fixture.agent))
     const before = readFileSync(fixture.file)
     const result = retainOwnerListening({ ...fixture, log: message => logs.push(message),

@@ -4,6 +4,7 @@ import { digestJson, exactKeys, sha256 } from '../../shared/paper-canonical/stab
 import { LISTENING_REVIEW_VERSION, LISTENING_RULE_EVIDENCE_VERSION,
   assertListeningRuleEvidence, assertListeningUploadBudget } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
 import { reviewSubjectBundleDigest } from '../import-review/reviewSubject.mjs'
+import { listeningAsrTokens } from '../../scripts/import-pipeline/lib-listening-segment-rule.mjs'
 
 export const LISTENING_REVIEW_FILE = 'listening-review-v1.json'
 const evidencePrefix = 'listening-review-evidence/'
@@ -73,6 +74,7 @@ function validateReview(rootDir, review, subject, transcript, version) {
   assertListeningUploadBudget(review.evidence)
   const paths = new Set()
   const ruleNotes = []
+  const asrWords = new Map()
   for (const file of review.evidence) {
     if (!exactKeys(file, ['path', 'sha256', 'byteLength', 'kind', 'window', 'settings'])
       || paths.has(file.path) || !digest(file.sha256) || !Number.isSafeInteger(file.byteLength)
@@ -87,6 +89,9 @@ function validateReview(rootDir, review, subject, transcript, version) {
     const bytes = readFileSync(evidencePath(rootDir, file.path))
     if (bytes.length !== file.byteLength || sha256(bytes) !== file.sha256) fail(`changed evidence: ${file.path}`)
     const record = JSON.parse(bytes.toString('utf8'))
+    if (review.method === 'agent_asr_comparison' && file.kind === 'asr_window') {
+      asrWords.set(file.path, listeningAsrTokens([{ ...record, ...file.window }]).words)
+    }
     if (version === LISTENING_REVIEW_VERSION && file.kind === 'asr_window'
       && (record.rule || record.groups || record.engineAttempts
         || /^listening-rule-evidence-/u.test(record.schemaVersion || ''))) fail('rule evidence cannot claim ASR settings')
@@ -108,7 +113,7 @@ function validateReview(rootDir, review, subject, transcript, version) {
   if (version === LISTENING_REVIEW_VERSION) {
     if (ruleNotes.length > 1 || (review.method !== 'audio_source_comparison' && ruleNotes.length !== 1)) fail('requires one v2 rule summary')
     for (const notes of ruleNotes) {
-      try { assertListeningRuleEvidence(notes, review, transcript) } catch (error) { fail(error.message) }
+      try { assertListeningRuleEvidence(notes, review, transcript, asrWords) } catch (error) { fail(error.message) }
     }
   }
   if (review.method !== 'audio_source_comparison' && !review.evidence.some(file => file.kind === 'asr_window')) {

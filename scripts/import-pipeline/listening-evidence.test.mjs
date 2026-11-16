@@ -83,7 +83,9 @@ test('missing, corrupt, escaping, oversized and unknown diagnostics fail closed'
 })
 function navigation(root) {
   mkdirSync(path.join(root, 'listening-review-evidence'))
-  const bytes = Buffer.from('{"synthetic":true}')
+  const bytes = Buffer.from(JSON.stringify({ result: { segments: [{ words: [
+    { word: 'Synthetic', start: 1, end: 1.2 }, { word: 'source', start: 3.5, end: 3.7 },
+  ] }] } }))
   writeFileSync(path.join(root, 'listening-review-evidence/raw.json'), bytes)
   const transcript = [{ segmentId: 's1', questionNumbers: [1], text: 'Synthetic source.' }]
   const subject = { paperId: 'paper-synthetic', sourceDigest: sha256('source'),
@@ -215,7 +217,25 @@ test('agent ASR adjustment requires boundary basis', t => {
 })
 test('agent ASR adjustment cannot overlap its adjacent group', t => {
   const { root, agent, subject, transcript } = agentNavigation(t)
-  agent.groups[0].playback.endSeconds = 6
-  agent.groups[0].occurrences[0].endSeconds = 6
+  agent.groups[0].playback.endSeconds = 5.1
+  agent.groups[0].occurrences[0].endSeconds = 5.1
   assert.throws(() => validateListeningReview(root, agent, subject, transcript), /overlapping playback/u)
+})
+test('agent ASR cannot rewrite a machine usable group', t => {
+  const root = workspace(t), { review, subject, transcript } = navigation(root)
+  review.method = 'agent_asr_comparison'
+  review.groups[0].playback.endSeconds = 4
+  assert.throws(() => validateListeningReview(root, review, subject, transcript), /navigation differs from rule/u)
+})
+test('agent ASR rejects invented words, mismatched timestamps and distant boundary words', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t)
+  for (const mutate of [
+    v => { v.groups[0].boundaryJudgment.start.words[0].text = 'invented' },
+    v => { v.groups[0].boundaryJudgment.start.words[0].endSeconds += 0.06 },
+    v => { v.groups[0].playback.endSeconds = 5.21 },
+  ]) {
+    const next = structuredClone(agent)
+    mutate(next)
+    assert.throws(() => validateListeningReview(root, next, subject, transcript), /boundary word missing or far/u)
+  }
 })

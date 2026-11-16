@@ -33,7 +33,7 @@ export function listeningNavigationGroup(group) {
       ? group.occurrences.map(occurrence => ({ ...occurrence.playback, evidencePaths: occurrence.evidencePaths })) : [] }
 }
 
-export function assertListeningRuleEvidence(value, review, transcript) {
+export function assertListeningRuleEvidence(value, review, transcript, asrWords = new Map()) {
   const fail = detail => { throw new Error(`Listening rule evidence: ${detail}`) }
   if (!exactKeys(value, ['schemaVersion', 'rule', 'normalization', 'input', 'rawEvidence', 'groups', 'diagnostic'])
     || value.schemaVersion !== LISTENING_RULE_EVIDENCE_VERSION
@@ -64,12 +64,14 @@ export function assertListeningRuleEvidence(value, review, transcript) {
     const differs = review.method !== 'audio_source_comparison'
       && digestJson(listeningNavigationGroup(group)) !== digestJson(pick(review.groups[i],
       ['segmentId', 'questionNumbers', 'decision', 'playback', 'occurrences']))
-    if (review.method === 'asr_source_comparison' && differs) fail('navigation differs from rule')
-    if (review.method === 'agent_asr_comparison' && differs) {
+    if (differs && (review.method === 'asr_source_comparison'
+      || (review.method === 'agent_asr_comparison' && group.decision !== 'review_required'))) fail('navigation differs from rule')
+    if (review.method === 'agent_asr_comparison'
+      && (differs || Object.hasOwn(review.groups[i], 'boundaryJudgment'))) {
       const basis = review.groups[i].boundaryJudgment
       const nonempty = text => typeof text === 'string' && text.trim().length > 0
       if (!exactKeys(basis, ['start', 'end'])) fail('missing agent ASR boundary basis')
-      for (const edge of [basis.start, basis.end]) {
+      for (const [side, edge] of Object.entries(basis)) {
         if (!exactKeys(edge, ['sourceText', 'words']) || !nonempty(edge.sourceText)
           || !Array.isArray(edge.words) || !edge.words.length) fail('missing agent ASR boundary basis')
         for (const word of edge.words) {
@@ -79,6 +81,14 @@ export function assertListeningRuleEvidence(value, review, transcript) {
             || word.endSeconds > review.subject.durationSeconds
             || !review.evidence.some(file => file.kind === 'asr_window' && file.path === word.evidencePath)) {
             fail('invalid agent ASR boundary basis')
+          }
+          const nearby = side === 'start' ? word.startSeconds - review.groups[i].playback?.startSeconds
+            : review.groups[i].playback?.endSeconds - word.endSeconds
+          if (!(nearby >= 0 && nearby <= 1.5)
+            || !asrWords.get(word.evidencePath)?.some(observed => observed.rawRunText === word.text
+              && Math.abs(observed.runStartSeconds - word.startSeconds) <= 0.05 + 1e-9
+              && Math.abs(observed.runEndSeconds - word.endSeconds) <= 0.05 + 1e-9)) {
+            fail('agent ASR boundary word missing or far from playback')
           }
         }
       }
