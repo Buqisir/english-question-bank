@@ -29,7 +29,7 @@
               </div>
               <div style={{ backgroundColor: '#E9ECE6', borderRadius: '4px', boxSizing: 'border-box', flexShrink: '0', paddingInline: '7px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  停用 · 第 114 条 · 以后重做
+                  2026-11-16 重做 · 第 126、127 条
                 </div>
               </div>
             </div>
@@ -38,22 +38,22 @@
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '14px', lineHeight: '180%', width: '620px' }}>
-            中图 240–480px，只给介绍页、宣传这类要讲产品在做什么的位置，不进工具界面。三张都用原语巨藻和现成的海獭原样拼成，没有另外生成；以后要别的林中场景，也先拼。
+            中图 240–480px，只给介绍页、宣传这类要讲产品在做什么的位置，不进工具界面。2026-11-16 三张重做：巨藻林、林冠透光用定稿素材原样拼成；潜水的姿势照图像生成的草图描，脸用头像母版。以后要别的林中场景，也先拼。
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', display: 'flex', gap: '24px' }}>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexBasis: '0px', flexDirection: 'column', flexGrow: '1', gap: '10px' }}>
-            <div style={{ alignItems: 'center', opacity: '0.4', backgroundColor: '#F1F5F7', borderRadius: '12px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', gap: '56px', height: '320px', justifyContent: 'center' }}>
+            <div style={{ alignItems: 'center', backgroundColor: '#F1F5F7', borderRadius: '12px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', gap: '56px', height: '320px', justifyContent: 'center' }}>
               <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <div style={{ backgroundImage: 'url(../../illustration/kelp-dive.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '240px', width: '313px' }} />
+                <div style={{ backgroundImage: 'url(../../illustration/kelp-dive-2026-11-16.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '200px', width: '320px' }} />
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Noto Serif SC", system-ui, sans-serif', fontSize: '16px', lineHeight: '24px' }}>
                   潜下去，摸到对的题
                 </div>
               </div>
               <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <div style={{ backgroundImage: 'url(../../illustration/kelp-forest.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '240px', width: '310px' }} />
+                <div style={{ backgroundImage: 'url(../../illustration/kelp-forest-2026-11-16.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '200px', width: '320px' }} />
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Noto Serif SC", system-ui, sans-serif', fontSize: '16px', lineHeight: '24px' }}>
-                  浮上来，裹着巨藻把好题收好
+                  浮上来，抱着石头把好题收好
                 </div>
               </div>
             </div>
@@ -62,20 +62,20 @@
                 潜水 · 巨藻林
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                各 240px 高，放在桌面 #F1F5F7 上 · 第 114 条起停用，以后重做
+                各 320px 宽，放在桌面 #F1F5F7 上 · 第 126、127 条
               </div>
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', flexShrink: '0', gap: '10px', width: '480px' }}>
-            <div style={{ alignItems: 'center', opacity: '0.4', backgroundColor: '#F1F5F7', borderRadius: '12px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', height: '320px', justifyContent: 'center' }}>
-              <div style={{ backgroundImage: 'url(../../illustration/kelp-canopy.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '288px', width: '303px' }} />
+            <div style={{ alignItems: 'center', backgroundColor: '#F1F5F7', borderRadius: '12px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', height: '320px', justifyContent: 'center' }}>
+              <div style={{ backgroundImage: 'url(../../illustration/kelp-canopy-2026-11-16.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: '0', height: '280px', width: '448px' }} />
             </div>
             <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '8px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '14px', fontWeight: 600, lineHeight: '20px' }}>
                 林冠透光
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                288px 高 · 自带一块水 · 第 114 条起停用
+                448px 宽 · 自带一块水 · 第 127 条
               </div>
             </div>
           </div>
@@ -188,7 +188,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §5.2、§3.4、§1.1 · 第 55、56、58、114 条 · 文件 illustration/kelp-forest、kelp-dive、kelp-canopy.svg
+          出处：BRAND.md §5.2、§3.4、§1.1 · 第 55、56、58、114、126、127 条 · 文件 illustration/kelp-forest、kelp-dive、kelp-canopy-2026-11-16.svg
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           18
