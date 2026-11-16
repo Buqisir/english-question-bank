@@ -138,7 +138,7 @@ button {
 
 button:hover { border-color: var(--eqb-color-border-strong); background: var(--eqb-color-desk); }
 button:active { transform: translateY(1px); }
-button:focus-visible, input:focus-visible { outline: 3px solid var(--eqb-color-action); outline-offset: 2px; }
+button:focus-visible, input:focus-visible { outline: 2px solid var(--eqb-color-action); outline-offset: 2px; }
 
 .control-button {
   display: flex;
