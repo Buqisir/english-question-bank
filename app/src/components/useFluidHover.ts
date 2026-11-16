@@ -42,6 +42,13 @@ export type FluidHoverOptions = {
    * sets the distance.
    */
   gapClick?: boolean | number
+  /**
+   * The highlight never glides across a gap between neighbouring items wider
+   * than this many px — something else sits there (an avatar and a name in
+   * the topbar). Over such a gap it fades out where it is; on the next item it
+   * appears in place. Only for `x` and `y` lists; off when left out.
+   */
+  glideGapMax?: number
 }
 
 export type FluidHoverHandlers = {
@@ -76,8 +83,16 @@ function axisDistance(rect: Rect, x: number, y: number, axis: FluidHoverAxis): n
   return Math.hypot(dx, dy)
 }
 
+/** Empty space between item `index` and the next one along the axis (negative when they overlap or wrap). */
+function gapAfter(rects: Rect[], index: number, axis: 'x' | 'y'): number {
+  const a = rects[index]
+  const b = rects[index + 1]
+  if (!a || !b) return 0
+  return axis === 'x' ? b.left - (a.left + a.width) : b.top - (a.top + a.height)
+}
+
 export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions): FluidHover<C> {
-  const { axis = 'y', itemSelector, isItemDisabled, hitArea, gapClick = true } = options
+  const { axis = 'y', itemSelector, isItemDisabled, hitArea, gapClick = true, glideGapMax } = options
   const containerRef = useRef<C>(null)
   const itemsRef = useRef<HTMLElement[]>([])
   const rectsRef = useRef<Rect[]>([])
@@ -86,6 +101,17 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
   const insideRef = useRef(false)
   const shownRef = useRef(false)
   const gapClickPx = gapClick === false ? 0 : gapClick === true ? DEFAULT_GAP_CLICK_PX : gapClick
+  const glideAxis = axis === 'xy' || glideGapMax === undefined ? null : axis
+
+  /** Some gap between items `from` and `to` (in list order) is too wide to glide across. */
+  const crossesWideGap = useCallback((from: number, to: number): boolean => {
+    if (glideAxis === null || glideGapMax === undefined) return false
+    const rects = rectsRef.current
+    for (let index = Math.min(from, to); index < Math.max(from, to); index += 1) {
+      if (gapAfter(rects, index, glideAxis) > glideGapMax) return true
+    }
+    return false
+  }, [glideAxis, glideGapMax])
 
   const measure = useCallback(() => {
     const container = containerRef.current
@@ -127,7 +153,7 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
       shownRef.current = false
       return
     }
-    const fresh = !shownRef.current
+    const fresh = !shownRef.current || (previous !== null && index !== null && crossesWideGap(previous, index))
     if (fresh) container.setAttribute(FRESH_ATTR, '')
     container.style.setProperty('--fh-x', `${rect.left}px`)
     container.style.setProperty('--fh-y', `${rect.top}px`)
@@ -141,7 +167,7 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
       void getComputedStyle(container, '::before').transform
       container.removeAttribute(FRESH_ATTR)
     }
-  }, [])
+  }, [crossesWideGap])
 
   const toLocal = useCallback((clientX: number, clientY: number): [number, number] | null => {
     const container = containerRef.current
@@ -171,8 +197,17 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
         best = index
       }
     })
+    // Inside a wide gap (between two items, not past either end) nothing is lit.
+    if (best !== null && bestDistance > 0 && glideAxis !== null && glideGapMax !== undefined) {
+      const along = glideAxis === 'x' ? x : y
+      const start = (rect: Rect) => (glideAxis === 'x' ? rect.left : rect.top)
+      for (let index = 0; index < rects.length - 1; index += 1) {
+        const end = start(rects[index]) + (glideAxis === 'x' ? rects[index].width : rects[index].height)
+        if (along > end && along < start(rects[index + 1]) && gapAfter(rects, index, glideAxis) > glideGapMax) return null
+      }
+    }
     return best
-  }, [axis])
+  }, [axis, glideAxis, glideGapMax])
 
   const remeasure = useCallback(() => {
     measure()
