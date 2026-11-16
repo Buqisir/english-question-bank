@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-16T14:41:04.032Z",
+  "generatedAt": "2026-11-16T15:01:23.083Z",
   "src": "design/brand-2026-10-13/manual/src",
   "out": "design/brand-2026-10-13/manual/视觉规范手册-草案0.9-预览.pdf",
   "font": {
@@ -15,138 +15,77 @@
       "images": 2,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 0.65,
-        "headerPct": 0,
-        "bodyPct": 0.81,
-        "footerPct": 0
-      }
+      "clipped": []
     },
     {
       "page": "01-目录",
       "images": 1,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 5.8,
-        "headerPct": 0.51,
-        "bodyPct": 7.05,
-        "footerPct": 0.76
-      }
+      "clipped": []
     },
     {
       "page": "02-北极星与性格",
       "images": 2,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 3.49,
-        "headerPct": 0.38,
-        "bodyPct": 4.23,
-        "footerPct": 0.55
-      }
+      "clipped": []
     },
     {
       "page": "03-形状-克制与反面",
       "images": 3,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 4.51,
-        "headerPct": 0.38,
-        "bodyPct": 5.45,
-        "footerPct": 0.87
-      }
+      "clipped": []
     },
     {
       "page": "04-图形标志",
       "images": 13,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 4.99,
-        "headerPct": 0.54,
-        "bodyPct": 5.93,
-        "footerPct": 1.77
-      }
+      "clipped": []
     },
     {
       "page": "05-用法与禁止",
       "images": 3,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 3.13,
-        "headerPct": 0.54,
-        "bodyPct": 3.62,
-        "footerPct": 1.66
-      }
+      "clipped": []
     },
     {
       "page": "06-五色与色阶",
       "images": 1,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 13.63,
-        "headerPct": 0.41,
-        "bodyPct": 16.79,
-        "footerPct": 0.92
-      }
+      "clipped": []
     },
     {
       "page": "07-写字与搭配",
       "images": 1,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 6.48,
-        "headerPct": 0.41,
-        "bodyPct": 7.64,
-        "footerPct": 3.07
-      }
+      "clipped": []
     },
     {
       "page": "08-三条字道",
       "images": 4,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 4.56,
-        "headerPct": 0.41,
-        "bodyPct": 5.29,
-        "footerPct": 2.66
-      }
+      "clipped": []
     },
     {
       "page": "09-原语-石子-水和巨藻",
       "images": 6,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 5.64,
-        "headerPct": 0.51,
-        "bodyPct": 6.65,
-        "footerPct": 2.42
-      }
+      "clipped": []
     },
     {
       "page": "09b-物件",
       "images": 12,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": null
+      "clipped": []
     },
     {
       "page": "10-设定与母版",
@@ -187,13 +126,7 @@
             235
           ]
         }
-      ],
-      "compare": {
-        "diffPct": 9.23,
-        "headerPct": 0.42,
-        "bodyPct": 11.14,
-        "footerPct": 2.43
-      }
+      ]
     },
     {
       "page": "11-三视图与小尺寸",
@@ -212,39 +145,21 @@
             349
           ]
         }
-      ],
-      "compare": {
-        "diffPct": 3.35,
-        "headerPct": 0.42,
-        "bodyPct": 3.87,
-        "footerPct": 1.96
-      }
+      ]
     },
     {
       "page": "12-表情与状态",
       "images": 13,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 10.26,
-        "headerPct": 0.42,
-        "bodyPct": 12.42,
-        "footerPct": 2.36
-      }
+      "clipped": []
     },
     {
       "page": "13-道具与直立",
       "images": 19,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 6.23,
-        "headerPct": 0.42,
-        "bodyPct": 7.5,
-        "footerPct": 1.55
-      }
+      "clipped": []
     },
     {
       "page": "14-日历与动效",
@@ -263,117 +178,63 @@
             154
           ]
         }
-      ],
-      "compare": {
-        "diffPct": 6.69,
-        "headerPct": 0.42,
-        "bodyPct": 7.95,
-        "footerPct": 2.56
-      }
+      ]
     },
     {
       "page": "15-场景与禁止项",
       "images": 3,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 5.75,
-        "headerPct": 0.42,
-        "bodyPct": 6.89,
-        "footerPct": 1.76
-      }
+      "clipped": []
     },
     {
       "page": "16-不靠海獭",
       "images": 15,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 4.24,
-        "headerPct": 0.41,
-        "bodyPct": 5,
-        "footerPct": 1.83
-      }
+      "clipped": []
     },
     {
       "page": "17-插画体系",
       "images": 3,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 6.14,
-        "headerPct": 0.41,
-        "bodyPct": 7.23,
-        "footerPct": 2.98
-      }
+      "clipped": []
     },
     {
       "page": "18-中图",
       "images": 4,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 6.39,
-        "headerPct": 0.41,
-        "bodyPct": 7.69,
-        "footerPct": 1.75
-      }
+      "clipped": []
     },
     {
       "page": "19-登录页与空态",
       "images": 4,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 5.64,
-        "headerPct": 0.51,
-        "bodyPct": 6.68,
-        "footerPct": 2.3
-      }
+      "clipped": []
     },
     {
       "page": "20-小尺寸与宣传",
       "images": 5,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 3.04,
-        "headerPct": 0.51,
-        "bodyPct": 3.49,
-        "footerPct": 1.88
-      }
+      "clipped": []
     },
     {
       "page": "21-3D-宣传版",
       "images": 4,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 3.08,
-        "headerPct": 0.51,
-        "bodyPct": 3.48,
-        "footerPct": 2.34
-      }
+      "clipped": []
     },
     {
       "page": "22-还没做的",
       "images": 1,
       "failedImages": [],
       "outOfBoard": [],
-      "clipped": [],
-      "compare": {
-        "diffPct": 5.18,
-        "headerPct": 0.48,
-        "bodyPct": 6.11,
-        "footerPct": 2.25
-      }
+      "clipped": []
     }
   ],
   "errors": [],
