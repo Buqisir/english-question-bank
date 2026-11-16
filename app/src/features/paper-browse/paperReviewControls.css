@@ -43,3 +43,9 @@
   min-height: 7lh;
   max-height: 50vh;
 }
+
+/* 两条出错行是共用 Notice（样子归 shared-ui/notice.css），这里只给它和上下的间距，同这一块里的 <p>。
+ * 覆盖：本条 (0,2,0) 和 .eqb-notice (0,1,0) 不冲突属性。 */
+.paper-review-controls .paper-review-notice {
+  margin: var(--eqb-space-2) 0;
+}
