@@ -63,7 +63,7 @@ token 的扩展用法。
 ## 2026-10-15 登录页 08 雾海（`app/src/auth/LoginPage.css`）
 
 - **想要的值**：比 14px 大一档、比 20px 小的品牌页正文字号。登录页是品牌时刻，品牌名、副题和登录按钮在 64px 标语旁边用 14px 显得太弱，用 20px 又和标语抢。
-- **临时方案**：`.login-brand`、`.login-subtitle`、`.login-submit` 用 15px 字面量。若收编，候选名 `--eqb-font-size-brand-body`。
+- **临时方案**：`.login-brand`、`.login-subtitle` 用 15px 字面量（`.login-submit` 2026-11-16 起改用 `--eqb-font-size-md` 16，见下面胶囊大号一节）。若收编，候选名 `--eqb-font-size-brand-body`。
 - **想要的值**：手机输入框的字号下限。iOS Safari 在输入框字号小于 16px 时聚焦会放大页面。
 - **临时方案**：≤760px 时 `.login-field input` 用 16px 字面量。若日后全站表单都需要，候选名 `--eqb-font-size-input-mobile`。
 
@@ -137,6 +137,7 @@ token 的扩展用法。
 
 - **想要的值**：Owner 2026-11-15 定 Button 加一档 52px 胶囊大号，照登录键原来手写的样子（原 `auth/LoginPage.css` `.login-submit`）。一是高 52（和登录页输入框同高），全站控件高度没有 token。二是字号 15，不在字号阶梯上（control 13 / sm 14 / md 16）。三是填充时那层影子 `0 8px 24px rgb(27 43 51 / 0.18)`，比 `--elev-3` 沉得多、浓得多，DESIGN §4 四档高度里没有。若收编，候选名 `--eqb-control-height-pill`（52）、`--eqb-font-size-cta`（15，或改用 sm 14 / md 16，会改登录键的样子）、`--elev-cta`（或改用 `--elev-3`，会改样子）。
 - **临时方案**：三个都写成 `[data-size='pill']` 规则里的具名变量（`--eqb-button-pill-height`、`--eqb-button-pill-font-size`、`--eqb-button-pill-shadow`），注释写出处是原 `.login-submit`。记录在 `design/components-2026-11-13/migrate-waiting-3/README.md`。
+- **2026-11-16 收了两个**：Owner 选登录键方案 A，字号改用 `--eqb-font-size-md`（16），影子改用 `--elev-3`，`--eqb-button-pill-font-size`、`--eqb-button-pill-shadow` 删掉。剩下高 52 一个缺口，照旧。
 
 ## 2026-11-15 纸面阴影和整页灰块的几处尺寸（`app/src/features/draft-paper/DraftPaperWorkbench.css` `.draft-skeleton-sheet`；`app/src/features/paper-browse/paperBrowsePage.css` `.paper-browse-skeleton-*`；`vocabularyPracticePage.css`、`vocabularyDictationPage.css` 的灰块几条）
 
