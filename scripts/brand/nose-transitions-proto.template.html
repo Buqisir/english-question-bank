@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>獭獭动效原型 · 鼻子和过渡</title>
 <!--
-  原型，提案 · 单一来源，还没定。由 scripts/brand/nose-transitions-proto.mjs 从母版 SVG 生成，别手改。
+  原型。Owner 2026-11-16 定了 N2 和 T1（BRAND.md 第 129 条），正式代码在 otter-motion.js 的 sniff、dip；本页留作三选一的对照。由 scripts/brand/nose-transitions-proto.mjs 从母版 SVG 生成，别手改。
   规矩照 BRAND.md §4.6：缓入缓出不回弹（cubic-bezier(.45,0,.55,1)）；一次出场一个动作，演完就停；
   界面动效每段 ≤300ms；减少动态效果时什么都不演。
   A 鼻子轻动：三种幅度和做法，坐石全身像（个人空间空态，150px 是线上尺寸）和半身「没找到」各演一遍。
@@ -53,7 +53,7 @@
 <main>
   <header>
     <h1>獭獭动效原型 · 鼻子轻动、状态之间的短过渡</h1>
-    <p class="lede">提案 · 单一来源，还没定。点「再演一次」重放；「慢放 ×4」只是为了看清，线上不慢放。系统打开「减少动态效果」时什么都不演。</p>
+    <p class="lede">已定（Owner 2026-11-16，BRAND.md 第 129 条）：鼻子用 N2 嗅两下，过渡用 T1 沉一下再浮；另外几种留作对照。点「再演一次」重放；「慢放 ×4」只是为了看清，线上不慢放。系统打开「减少动态效果」时什么都不演。</p>
     <div class="bar"><button class="pill" id="slow" aria-pressed="false">慢放 ×4</button><span class="tag" id="rm"></span></div>
   </header>
 
@@ -65,7 +65,7 @@
         <div class="faces"><figure class="sit150">{{SIT}}<figcaption>线上 150px</figcaption></figure><figure class="zoom" data-mirror></figure></div>
         <p class="note">鼻子往上抽一下再落回：上 100ms、回 140ms，约 1px（线上尺寸）。最轻，几乎是「动了一下吗？」的程度。</p>
         <button class="pill replay">再演一次</button></div>
-      <div class="panel" data-nose="n2"><h3>N2 · 嗅两下</h3>
+      <div class="panel" data-nose="n2"><h3>N2 · 嗅两下 · 已定</h3>
         <div class="faces"><figure class="sit150" data-clone></figure><figure class="zoom" data-mirror></figure></div>
         <p class="note">鼻子横向略宽、纵向略扁，连着两下（每下 120ms），像闻了闻。比 N1 更「像动物」，但是两拍。</p>
         <button class="pill replay">再演一次</button></div>
@@ -91,7 +91,7 @@
       <button class="pill" data-pair="notfound>searching">没找到 → 再找</button>
     </div>
     <div class="row">
-      <div class="panel" data-trans="dip"><h3>T1 · 沉一下再浮</h3>
+      <div class="panel" data-trans="dip"><h3>T1 · 沉一下再浮 · 已定</h3>
         <div class="stage"></div><div class="rcard"><b>A篇 · 失败以后重新振作</b><span>阅读理解 · 高二</span></div>
         <p class="note">整只往卡片边下沉 18px（120ms，缓入），在边下面换好手里的东西，再浮上来（160ms，缓入缓出）。合计 280ms。最像「潜下去拿了个东西上来」。</p>
         <button class="pill replay">再演一次</button></div>

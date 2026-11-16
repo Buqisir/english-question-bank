@@ -33,7 +33,7 @@
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '14px', lineHeight: '180%', width: '620px' }}>
-            一年里海獭只在登录页和个人空间空态换装，跟着老师的学期走，过了时段自动换回，不弹窗、不加横幅、不写节日祝福。动起来也只演一个动作，演完就停：找题中两颊的 ∴ 潜成省略号；界面里等待只用所以点，空态眨一次眼，没找到从卡片边浮上来。
+            一年里海獭只在登录页和个人空间空态换装，跟着老师的学期走，过了时段自动换回，不弹窗、不加横幅、不写节日祝福。动起来也只演一个动作，演完就停：找题中两颊的 ∴ 潜成省略号；界面里等待只用所以点，空态嗅两下，没找到从卡片边浮上来，换状态沉一下再浮。
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '16px' }}>
@@ -314,7 +314,7 @@
               </div>
               <div style={{ borderColor: '#2C6E56', borderRadius: '4px', borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', paddingInline: '7px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#2C6E56', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  第 52、65、120 条
+                  第 52、65、120、129 条
                 </div>
               </div>
             </div>
@@ -358,7 +358,7 @@
               </div>
               <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', paddingBlock: '8px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                  界面不放獭獭（第 118 条），等待用所以点：两颊的 ∴ 单独做小号、不带脸，随机三种：甲一沉两浮、乙此起彼伏、丙两两换位（第 120 条）。</div></div><div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', paddingBlock: '8px' }}><div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>出场：空态眨一次眼；没找到从卡片边浮上来，爪子最后搭过边。曲线 cubic-bezier(.45, 0, .55, 1)，不回弹；每段不超过 300ms；减少动态时不演。
+                  界面不放獭獭（第 118 条），等待用所以点：两颊的 ∴ 单独做小号、不带脸，随机三种：甲一沉两浮、乙此起彼伏、丙两两换位（第 120 条）。</div></div><div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', paddingBlock: '8px' }}><div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>出场：坐石空态嗅两下（鼻子宽扁两下，代替眨眼，第 129 条）；没找到从卡片边浮上来，爪子最后搭过边。换状态：沉到卡片边下换好再浮上来，共 280ms（第 129 条）。曲线 cubic-bezier(.45, 0, .55, 1)，不回弹；每段不超过 300ms；减少动态时不演。
                 </div>
               </div>
             </div>
@@ -367,7 +367,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §4.5、§4.6 · DESIGN.md §6 · 第 51、52、57、65、114、117、118、120 条 · 文件 mascot/calendar/*、mascot/motion/*
+          出处：BRAND.md §4.5、§4.6 · DESIGN.md §6 · 第 51、52、57、65、114、117、118、120、129 条 · 文件 mascot/calendar/*、mascot/motion/*
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           14

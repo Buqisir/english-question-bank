@@ -141,7 +141,7 @@
                 海獭的其他动效
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                转石头、眨眼、探头已做（第 65 条）；鼻子轻动、状态间过渡还没做。
+                转石头、眨眼、探头已做（第 65 条）；嗅两下、沉一下再浮已定（第 129 条）。都还没进网站，另开 UI 任务。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>
@@ -226,7 +226,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §2、§3.1、§3.5、§8 第 5–11 条、§4.10 · 第 69、71、88、89、92、95、106、113–119、121–128 条 · 以 BRAND.md 为准，和手册不一致时改手册
+          出处：BRAND.md §2、§3.1、§3.5、§8 第 5–11 条、§4.10 · 第 69、71、88、89、92、95、106、113–119、121–129 条 · 以 BRAND.md 为准，和手册不一致时改手册
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           22
