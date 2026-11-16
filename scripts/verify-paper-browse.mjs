@@ -2159,12 +2159,12 @@ assert(
   'the approved no-side-stripe annotation rule is missing from DESIGN.md',
 )
 assert(
-  '83. active questions replace the continuous shared rail with static top/bottom range corners plus question-number emphasis',
+  '83. active questions replace the continuous shared rail with static top/bottom ink range corners and no mint on the question number (BRAND 第 72、123 条)',
   /\.paper-browse-content \.ps-question--active::before,\s*\n\.paper-browse-content \.ps-question--active::after\s*\{[^}]*left:\s*-8px[^}]*width:\s*8px[^}]*height:\s*8px[^}]*background:\s*transparent/s.test(pageCssSrc) &&
-    /\.paper-browse-content \.ps-question--active::before\s*\{[^}]*bottom:\s*auto[^}]*border-top:\s*1px solid var\(--eqb-color-primary\)[^}]*border-left:\s*1px solid var\(--eqb-color-primary\)[^}]*transition:\s*none/s.test(pageCssSrc) &&
-    /\.paper-browse-content \.ps-question--active::after\s*\{[^}]*border-bottom:\s*1px solid var\(--eqb-color-primary\)[^}]*border-left:\s*1px solid var\(--eqb-color-primary\)/s.test(pageCssSrc) &&
-    /\.paper-browse-content \.ps-question--active \.ps-question-no\s*\{[^}]*color:\s*var\(--eqb-color-primary-text\)/s.test(pageCssSrc),
-  'the bounded active-question corners, rail reset, or question-number emphasis is missing',
+    /\.paper-browse-content \.ps-question--active::before\s*\{[^}]*bottom:\s*auto[^}]*border-top:\s*1px solid var\(--eqb-color-text\)[^}]*border-left:\s*1px solid var\(--eqb-color-text\)[^}]*transition:\s*none/s.test(pageCssSrc) &&
+    /\.paper-browse-content \.ps-question--active::after\s*\{[^}]*border-bottom:\s*1px solid var\(--eqb-color-text\)[^}]*border-left:\s*1px solid var\(--eqb-color-text\)/s.test(pageCssSrc) &&
+    !/\.ps-question--active \.ps-question-no\s*\{[^}]*color:\s*var\(--eqb-color-primary/s.test(pageCssSrc),
+  'the bounded ink active-question corners or rail reset is missing, or the question number is back on mint',
 )
 assert(
   '84. lecture evidence removes quote side bars, keeps semantic washes, and aligns a selected socket with the dashed connector endpoint',
