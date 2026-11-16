@@ -9,6 +9,7 @@
 //   prep <paperId> [--audio <file>] [--proofreaders 7] [-- <universal-nck1 init args>]
 //   after-proofread <paperId> [--issues-resolved] [--redo-from materialize --profile-version 17]
 //   finish <paperId> [--large-complete-page-limit 13] [--large-no-listening-page-limit 11] [--economy-page-limit 9] through frozen PDFs and their contact sheets
+//   listening-redo <paperId> --feedback-fix <issueId>   hydrated Candidate, listening only
 //   submit <paperId>                 after PDF QA: push the Candidate, then Screen tiles
 //   report <paperId> --screen "<what was checked>" --pdf "<what was checked>"
 //   status <paperId>
@@ -23,7 +24,9 @@ import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
-import { buildNck1ReviewProjection, loadNck1ReviewSource, importNck1ReviewCandidate } from '../../server/import-review/revisionProjection.mjs'
+import { buildNck1ReviewProjection, loadNck1ReviewSource, importNck1ReviewCandidate, reviewBundleFilePaths } from '../../server/import-review/revisionProjection.mjs'
+import { PRODUCT_MANIFEST, productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
+import { listeningReviewSubject, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { sourceReferenceCellContinuations, refreshSourceReferenceCellContinuations } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import {
@@ -1458,7 +1461,8 @@ export async function submit(ctx, args) {
       fail(`feedback-fix 要求 --resolves 恰好覆盖：${expected.join(',')}`)
     }
   }
-  assertReferenceProductsReady(ctx)
+  if (ctx.state.data.listeningRedo) assertListeningRedoReady(ctx)
+  else assertReferenceProductsReady(ctx)
   // Always re-read before a possibly cached push step; no preview/submit bypass.
   const gate = assertImportSubmissionReady(ctx.paperDir)
   if (gate.pendingOwnerListening?.length) {
@@ -1637,10 +1641,10 @@ function redoFrom(ctx, name) {
   save(ctx)
 }
 
-async function feedbackFix(ctx, args, readStatus) {
+async function feedbackFix(ctx, args, readStatus, listeningOnly = false) {
   const name = option(args, '--redo-from')
   const issues = [...new Set(String(option(args, '--feedback-fix') || '').split(',').map(id => id.trim()).filter(Boolean))]
-  if (!STEP_ORDER.includes(name) || !issues.length || issues.some(id => id.startsWith('--'))) {
+  if ((!listeningOnly && !STEP_ORDER.includes(name)) || !issues.length || issues.some(id => id.startsWith('--'))) {
     fail('feedback-fix 需要 <issueId[,issueId]> 和 --redo-from <步骤>')
   }
   const push = ctx.state.steps.push
@@ -1672,6 +1676,14 @@ async function feedbackFix(ctx, args, readStatus) {
       issue.id === id && issue.paperId === ctx.paperId && ['open', 'fixed_pending_review'].includes(issue.state)))) {
     fail('feedback-fix：最新修订须为本地送审的 changes_requested，issue 须属于该卷且未解决')
   }
+  if (listeningOnly && !restore) fail('listening-redo 需要 hydrate 恢复凭据')
+  if (listeningOnly && ctx.state.data.feedbackFix) {
+    const fix = ctx.state.data.feedbackFix
+    if (fix.baseRevisionId !== baseRevisionId || fix.bundleDigest !== restore.bundleDigest
+      || digestJson([...fix.issues].sort()) !== digestJson([...issues].sort())
+      || ctx.state.steps.push) fail('listening-redo：既有反馈事务不匹配或已经开始送审')
+    return
+  }
   // Keep the complete old state, including submission markers, before clearing the local binding.
   archive(ctx, ctx.statePath, 'feedback-fix-')
   for (const file of ['evidence.json', '校正报告与预处理完成表.md']) archive(ctx, path.join(ctx.work, 'handoff', file))
@@ -1682,7 +1694,110 @@ async function feedbackFix(ctx, args, readStatus) {
   ctx.state.data.feedbackFix = { baseRevisionId, issues, at: new Date().toISOString(),
     ...(restore ? { bundleDigest: restore.bundleDigest } : {}) }
   save(ctx)
-  await requestedRedo(ctx, name)
+  if (!listeningOnly) await requestedRedo(ctx, name)
+}
+
+function retainedListeningInputs(ctx) {
+  return Object.fromEntries(reviewBundleFilePaths(ctx.paperDir)
+    .filter(file => !file.path.startsWith('products/') && file.path !== 'listening-review-v1.json'
+      && !file.path.startsWith('listening-review-evidence/'))
+    .map(file => [file.path, sha256(readFileSync(path.join(ctx.paperDir, file.path)))]))
+}
+
+function listeningProductDigest(ctx) {
+  const loaded = loadNck1ReviewSource(ctx.paperDir)
+  const imported = importNck1ReviewCandidate(ctx.paperDir, loaded)
+  if (!imported.candidate || imported.issues.length) fail('listening-redo：Candidate 校验失败')
+  const reviewed = readListeningReview(ctx.paperDir, listeningReviewSubject(loaded, imported.candidate),
+    loaded.materialization.listening.transcript)
+  return productInputDigest(ctx.paperDir, reviewBundleFilePaths(ctx.paperDir), reviewed)
+}
+
+function assertListeningRedoReady(ctx) {
+  const redo = ctx.state.data.listeningRedo
+  const restore = readJson(path.join(ctx.paperDir, 'signals/review-restore.json'))
+  if (!redo || redo.baseRevisionId !== restore.revisionId || redo.bundleDigest !== restore.bundleDigest
+    || digestJson(redo.retainedInputs) !== digestJson(retainedListeningInputs(ctx))
+    || !ctx.state.steps['listening-redo-products']?.finishedAt
+    || ctx.state.steps['listening-redo-products'].result.inputDigest !== listeningProductDigest(ctx)) {
+    fail('listening-redo：保留输入或冻结输入已变化；重新运行 listening-redo')
+  }
+  // Validate real source references, pagination, listening evidence and frozen bytes.
+  buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true })
+}
+
+// Hydrated Candidates have sealed products, not local authoring stage history.
+// Run only listening stages; never fabricate completion markers for absent stages.
+export async function listeningRedo(ctx, args, {
+  readStatus, execute = run, inputs = retainedListeningInputs, inputDigest = listeningProductDigest,
+  ensureAsr = async () => {
+    const completed = path.join(ctx.fast, 'asr-apple-v2/completed.json')
+    if (existsSync(completed) && readJson(completed).audioSha256
+      !== sha256(readFileSync(path.join(ctx.paperDir, 'materialization/listening-audio/playback.mp3')))) {
+      if (alive(ctx.state.background['asr-apple-v2']?.pid)) fail('旧音频 ASR 仍在运行')
+      archive(ctx, path.dirname(completed))
+    }
+    for (const name of startAsr(ctx)) {
+      const ready = () => existsSync(path.join(ctx.fast, name, 'completed.json'))
+        && readJson(path.join(ctx.fast, name, 'completed.json')).audioSha256
+          === sha256(readFileSync(path.join(ctx.paperDir, 'materialization/listening-audio/playback.mp3')))
+      if (!ready()) await waitBackground(ctx, name, ready)
+    }
+    return readJson(path.join(ctx.fast, 'asr-apple-v2/completed.json')).evidence
+  },
+  install = () => installListening(ctx), qa = () => pdfContactSheets(ctx),
+} = {}) {
+  if (args.includes('--redo-from')) fail('listening-redo 不接受 --redo-from')
+  await feedbackFix(ctx, args, readStatus, true)
+  const fix = ctx.state.data.feedbackFix
+  if (!ctx.state.data.listeningRedo) {
+    const retainedInputs = inputs(ctx)
+    ctx.state.data.listeningRedo = { baseRevisionId: fix.baseRevisionId, bundleDigest: fix.bundleDigest, retainedInputs }
+    for (const name of ['listening-redo-request', 'listening-redo-segment', 'listening-redo-install',
+      'listening-redo-products', 'pdf-qa']) delete ctx.state.steps[name]
+    save(ctx)
+  }
+  if (digestJson(inputs(ctx)) !== digestJson(ctx.state.data.listeningRedo.retainedInputs)) {
+    fail('listening-redo：非听力输入已变化')
+  }
+  const request = path.join(ctx.fast, 'listening-review-request.json')
+  await step(ctx, 'listening-redo-request', async () => {
+    archive(ctx, request)
+    return execute(ctx, 'prepare-listening-review', cli('review.mjs', 'prepare-listening-review', ctx.paperId, '--output', request))
+  })
+  await step(ctx, 'listening-redo-segment', async () => {
+    const evidence = await ensureAsr()
+    const result = await execute(ctx, 'listening-segment-v2', cli('listening-segment.mjs',
+      '--paper-dir', ctx.paperDir, '--request', request, '--apple-evidence', evidence,
+      '--output', path.join(ctx.fast, 'listening-segment-attempts')))
+    ctx.state.data.listeningSegmentAttempt = result
+    // Never retain an AI decision from a superseded attempt.
+    archive(ctx, path.join(ctx.paperDir, 'listening-review-v1.json'))
+    save(ctx)
+    return result
+  })
+  await step(ctx, 'listening-redo-install', install)
+  // Re-evaluate on resume, including after a fresh agent_asr_comparison.
+  const digest = inputDigest(ctx)
+  const manifest = path.join(ctx.paperDir, PRODUCT_MANIFEST)
+  if (ctx.state.steps['listening-redo-products']?.result?.inputDigest !== digest) {
+    delete ctx.state.steps['listening-redo-products']
+    delete ctx.state.steps['pdf-qa']
+  }
+  await step(ctx, 'listening-redo-products', async () => {
+    const refrozen = !existsSync(manifest) || readJson(manifest).inputDigest !== digest
+    if (refrozen) {
+      archive(ctx, path.join(ctx.paperDir, 'products'))
+      await execute(ctx, 'freeze', cli('freeze-products.mjs', '--paper-dir', ctx.paperDir, '--parallel'))
+    }
+    if (readJson(manifest).inputDigest !== digest) fail('listening-redo：PDF 冻结输入不匹配')
+    return { inputDigest: digest, refrozen }
+  })
+  await step(ctx, 'pdf-qa', qa)
+  if (digestJson(inputs(ctx)) !== digestJson(ctx.state.data.listeningRedo.retainedInputs)) {
+    fail('listening-redo：非听力输入已变化')
+  }
+  say(`仅听力重做完成；目检后：fast-import.mjs submit ${ctx.paperId} --resolves ${fix.issues.join(',')}`)
 }
 
 export async function requestedRedo(ctx, name, profileVersion) {
@@ -1812,7 +1927,7 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
     || !option(args, '--profile-version') || option(args, '--profile-version').startsWith('--'))) {
     fail('--profile-version <16|17> requires after-proofread --redo-from materialize')
   }
-  if (args.includes('--feedback-fix') && command !== 'finish') fail('--feedback-fix 仅用于 finish')
+  if (args.includes('--feedback-fix') && !['finish', 'listening-redo'].includes(command)) fail('--feedback-fix 仅用于 finish/listening-redo')
   if (args.includes('--ocr-generation-plan') && (command !== 'after-proofread' || args.includes('--redo-from'))) {
     fail('--ocr-generation-plan 仅用于 after-proofread，不能与 --redo-from 合用')
   }
@@ -1837,6 +1952,7 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
       '--reason', reason, '--output', path.resolve(output)), { review: true }), null, 2))
   }
   else if (command === 'finish') await finish(ctx, args)
+  else if (command === 'listening-redo') await listeningRedo(ctx, args)
   else if (command === 'reconcile-push') say(JSON.stringify(await reconcilePush(ctx, option(args, '--failure-receipt')), null, 2))
   else if (command === 'reconcile-ocr-generation') say(JSON.stringify(await reconcileOcrGeneration(ctx, option(args, '--failure-receipt')), null, 2))
   else if (command === 'submit') await submit(ctx, args)
@@ -1844,7 +1960,7 @@ if (path.resolve(process.argv[1] || '') === fileURLToPath(import.meta.url)) try 
   else if (command === 'report') await report(ctx, args)
   else if (command === 'status') status(ctx)
   else if (command === 'asr-extra') await asrExtra(ctx, args)
-  else fail('Usage: fast-import.mjs <prep|after-proofread|finish|submit|reconcile-push|report|status|asr-extra> <paperId> …')
+  else fail('Usage: fast-import.mjs <prep|after-proofread|finish|listening-redo|submit|reconcile-push|report|status|asr-extra> <paperId> …')
 } catch (error) {
   if (error instanceof Stop) {
     console.error(`\n需要处理：${error.message}`)
