@@ -69,7 +69,7 @@ h1 {
 
 .progress-copy strong, .progress-stats strong { color: var(--eqb-color-text); }
 .progress-track { height: var(--eqb-space-2); margin: var(--eqb-space-3) 0; overflow: hidden; border-radius: 999px; background: var(--eqb-color-desk); }
-.progress-fill { width: 0; height: 100%; border-radius: inherit; background: var(--eqb-color-primary); }
+.progress-fill { width: 0; height: 100%; border-radius: inherit; background: var(--eqb-color-action); }
 
 .word-card {
   min-height: 460px;
@@ -138,7 +138,7 @@ button {
 
 button:hover { border-color: var(--eqb-color-border-strong); background: var(--eqb-color-desk); }
 button:active { transform: translateY(1px); }
-button:focus-visible, input:focus-visible { outline: 3px solid var(--eqb-color-primary); outline-offset: 2px; }
+button:focus-visible, input:focus-visible { outline: 3px solid var(--eqb-color-action); outline-offset: 2px; }
 
 .control-button {
   display: flex;
