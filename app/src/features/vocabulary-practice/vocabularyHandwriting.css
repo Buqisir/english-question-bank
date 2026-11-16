@@ -1,78 +1,38 @@
-.vocabulary-handwriting-selector-backdrop {
-  position: fixed;
-  z-index: 80;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-  background: color-mix(in srgb, var(--ink) 42%, transparent);
-}
+/* 选择练字单词：外壳（遮罩、面板、标题行、底部动作、窄屏底部抽屉）换成共用 Dialog，样式在 shared-ui/dialog.css；
+ * 原来的 .vocabulary-handwriting-selector-backdrop / .vocabulary-handwriting-selector 面板 / > header / > footer
+ * 和 ≤640 那段删掉。这里只剩正文里的三块：工具条、练习方式、单词列表。
+ * .vocabulary-handwriting-selector 现在挂在 Dialog 的正文上（bodyClassName）。 */
 
-.vocabulary-handwriting-selector {
+/* 覆盖：本条 (0,2,0) 盖过 dialog.css 里 .eqb-dialog-body (0,1,0) 的内边距和滚动：三块各自顶到面板两边、
+ * 自己留 24 的边，只让单词列表滚，工具条和练习方式不动。 */
+.eqb-dialog-body.vocabulary-handwriting-selector {
   display: grid;
-  grid-template-rows: auto auto auto minmax(0, 1fr) auto;
-  width: min(620px, 100%);
-  max-height: min(720px, calc(100vh - 48px));
+  grid-template-rows: auto auto minmax(0, 1fr);
   overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
-  box-shadow: 0 18px 48px color-mix(in srgb, var(--ink) 24%, transparent);
+  margin-top: var(--eqb-space-4);
+  padding: 0;
+  border-top: 1px solid var(--eqb-color-border-subtle);
 }
 
-.vocabulary-handwriting-selector > header,
-.vocabulary-handwriting-selector > footer,
+/* 覆盖：本条 (0,3,0) 盖过 dialog.css 里 .eqb-dialog-body + .eqb-dialog-foot (0,2,0) 的上边距：
+ * 列表一直顶到底部动作，中间画一条发丝线，上边距回到 16。 */
+.vocabulary-handwriting-selector-backdrop .eqb-dialog-body + .eqb-dialog-foot {
+  padding-top: var(--eqb-space-4);
+  border-top: 1px solid var(--eqb-color-border-subtle);
+}
+
 .vocabulary-handwriting-selector-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 18px;
-  padding: 18px 20px;
+  gap: var(--eqb-space-4);
+  padding: var(--eqb-space-3) var(--eqb-space-5);
+  border-bottom: 1px solid var(--eqb-color-border-subtle);
 }
 
-.vocabulary-handwriting-selector > header,
-.vocabulary-handwriting-selector-toolbar {
-  border-bottom: 1px solid var(--line);
-}
-
-.vocabulary-handwriting-selector > header h2,
-.vocabulary-handwriting-selector > header p,
-.vocabulary-handwriting-selector > footer p {
-  margin: 0;
-}
-
-.vocabulary-handwriting-selector > header h2 {
-  font-size: 20px;
-  line-height: 1.25;
-}
-
-.vocabulary-handwriting-selector > header p,
-.vocabulary-handwriting-selector > footer p {
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.vocabulary-handwriting-selector > header > button {
-  display: grid;
-  flex: 0 0 auto;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
-  color: var(--ink);
-}
-
-.vocabulary-handwriting-selector-toolbar {
-  padding-block: 12px;
-}
-
-.vocabulary-handwriting-selector-toolbar > div,
-.vocabulary-handwriting-selector > footer > div {
+.vocabulary-handwriting-selector-toolbar > div {
   display: flex;
-  gap: 8px;
+  gap: var(--eqb-space-2);
 }
 
 .vocabulary-handwriting-selector-toolbar button {
@@ -88,9 +48,9 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
   margin: 0;
-  padding: 14px 20px;
+  padding: var(--eqb-space-4) var(--eqb-space-5);
   border: 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--eqb-color-border-subtle);
 }
 
 .vocabulary-handwriting-selector-mode legend {
@@ -121,7 +81,7 @@
   min-height: 50px;
   padding: 8px 12px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
 }
 
@@ -163,7 +123,7 @@
   align-items: center;
   gap: 10px;
   min-height: 48px;
-  padding: 8px 20px;
+  padding: var(--eqb-space-2) var(--eqb-space-5);
   background: var(--panel);
   cursor: pointer;
 }
@@ -204,32 +164,6 @@
   color: var(--muted);
   font-variant-numeric: tabular-nums;
   text-align: right;
-}
-
-.vocabulary-handwriting-selector > footer {
-  border-top: 1px solid var(--line);
-}
-
-@media (max-width: 640px) {
-  .vocabulary-handwriting-selector-backdrop {
-    align-items: end;
-    padding: 0;
-  }
-
-  .vocabulary-handwriting-selector {
-    width: 100%;
-    max-height: 86vh;
-    border-radius: 8px 8px 0 0;
-  }
-
-  .vocabulary-handwriting-selector > footer {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .vocabulary-handwriting-selector > footer > div {
-    justify-content: flex-end;
-  }
 }
 
 @media print {

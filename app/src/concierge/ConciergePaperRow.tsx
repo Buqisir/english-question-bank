@@ -39,7 +39,7 @@
  *     header parsed from `group.section` (see `parseSectionGroupLabel`).
  */
 
-import { useEffect, useRef, type MouseEvent, type ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
 import { ChevronDown, Paper } from '../icons'
 import { DisclosureIcon } from '../icons/MotionIcons'
 import { iconMotionInput } from '../icons/motionInput'
@@ -49,6 +49,8 @@ import { paperHeadline } from './paperHeadline.ts'
 import type { PaperHitContext, PaperResult, PaperResultGroup } from './aggregatePaperResults.ts'
 import { ConciergeGroupCard } from './ConciergeGroupCard.tsx'
 import { FluidHoverList } from '../components/FluidHoverList.tsx'
+import { Button } from '../shared-ui/Button.tsx'
+import { Row } from '../shared-ui/Row.tsx'
 import type { SimilarPassagesRequestState } from '../features/similar-passages/SimilarPassagesPanel'
 
 const SOURCE_TYPE_LABEL: Record<string, string> = {
@@ -163,7 +165,6 @@ export type ConciergePaperRowProps = {
   expanded: boolean
   basketIds: Set<string>
   onTogglePaper: (key: string) => void
-  onAdd: (group: QuestionGroupCard) => void
   /** classic-retire-2-detail-view — opens the read-only detail view for a group. */
   onOpenDetail?: (group: QuestionGroupCard) => void
   /** paper-row-browse-entry — opens the whole-paper preview page for this row's paperId (no focusGroupId — from the paper's start). */
@@ -203,7 +204,6 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
     expanded,
     basketIds,
     onTogglePaper,
-    onAdd,
     onOpenDetail,
     onOpenPaperBrowse,
     variant = 'search',
@@ -223,11 +223,11 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
   const topicChips = buildTopicChips(paper)
   const groupBuckets = bucketGroupsBySection(paper.groups)
 
-  const handleRowClick = (event: MouseEvent<HTMLElement>) => {
-    const target = event.target as HTMLElement
-    if (target.closest('button, a, input, textarea, select, [role="button"], .concierge-paper-detail')) return
-    onTogglePaper(paper.key)
-  }
+  // 行头是共用构件 shared-ui/Row（2026-11-15）：整行目标是一个真 <button>（就地展开 / 收起题组，不是去别的页），
+  // 盖满行头；「看整卷」是它的兄弟，画在它上面，点它不会展开。原来 article 上的整行 onClick 和「点的是不是键」判断删了。
+  // 读屏名字和原来 article 的名字一样：年份 + 卷名（年份列对读屏藏着）。
+  const rowLabel = paper.year ? `${paper.year} 年 ${headline}` : headline
+  const detailId = `concierge-paper-detail-${paper.key}`
 
   // Cut 6 — auto-scroll the first hit passage into view on expand.
   //
@@ -266,11 +266,15 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
       data-canonical={paper.key.startsWith('canonical:') || undefined}
       // CR should-watch 收口：年份列 aria-hidden 后，行级 label 补回年份，
       // 屏幕阅读器才能区分同名不同年卷。
-      aria-label={paper.year ? `${paper.year} 年 ${headline}` : headline}
-      onClick={handleRowClick}
+      aria-label={rowLabel}
       {...iconMotionInput}
     >
-      <div className="concierge-paper-row-head">
+      <Row
+        as="div"
+        className="concierge-paper-row-head"
+        padding={recentAddition ? 'home' : 'paper'}
+        action={{ kind: 'button', label: rowLabel, onClick: () => onTogglePaper(paper.key), expanded, controls: detailId }}
+      >
       {variant !== 'feed' && (
         <div className="concierge-paper-year" aria-hidden="true">
           {hideYear ? '' : paper.year ?? '—'}
@@ -283,13 +287,16 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
             <Paper size={16} />
           </span>
         )}
+        {/* 搜索结果行首的小箭头：键盘和读屏走整行目标（上面 Row 的 action），这个只留给鼠标（样子、悬停都不变），
+            不进 Tab 顺序、对读屏藏起来，免得同一件事念两遍、按两次 Tab。 */}
         <button
           type="button"
           className={`concierge-row-expand${expanded ? ' open' : ''}`}
           onClick={() => onTogglePaper(paper.key)}
           aria-expanded={expanded}
-          aria-controls={`concierge-paper-detail-${paper.key}`}
-          aria-label={expanded ? '收起来源卷' : '展开来源卷'}
+          aria-controls={detailId}
+          aria-hidden="true"
+          tabIndex={-1}
           title={expanded ? '收起来源卷' : '展开来源卷'}
         >
           <DisclosureIcon kind="branch" size={14} expanded={expanded} />
@@ -297,16 +304,11 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
         <div className="concierge-paper-anchor-text">
           {recentAddition ? (
             <>
-              <button
-                type="button"
-                className="concierge-recent-title"
-                onClick={() => onTogglePaper(paper.key)}
-                aria-expanded={expanded}
-                aria-controls={`concierge-paper-detail-${paper.key}`}
-              >
+              {/* 原来标题本身是一个展开键；2026-11-15 起整行目标（Row 的 action）就是展开键，标题回成一行字。 */}
+              <span className="concierge-recent-title">
                 {paper.year && <span className="concierge-recent-year">{paper.year}</span>}
                 {headline}
-              </button>
+              </span>
             </>
           ) : (
             <div className="concierge-paper-title-line">
@@ -361,14 +363,16 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
           <span className="concierge-paper-hitcount">{paper.hitCount} 篇章</span>
         ) : null}
         {!rowPaperId && <span className="concierge-paper-hitcount">整卷未上线</span>}
+        {/* Owner 2026-11-14 决定 #4：「看整卷」换成 shared-ui/Button。它嵌在行头里（行头才是滑块列表的项），
+            滑块停在这一行时它悬停会自己垫一块底（button.css 嵌在行里的键）。 */}
         {rowPaperId && (
-          <button
-            type="button"
-            className="concierge-action"
+          <Button
+            tone="strong"
+            size="sm"
             onClick={() => onOpenPaperBrowse?.(rowPaperId)}
           >
             看整卷
-          </button>
+          </Button>
         )}
         {variant === 'feed' ? (
           <span className="concierge-row-chevron" aria-hidden="true">
@@ -380,12 +384,12 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
           </span>
         )}
       </div>
-      </div>
+      </Row>
 
       {expanded && (
         <section
           className="concierge-paper-detail"
-          id={`concierge-paper-detail-${paper.key}`}
+          id={detailId}
           aria-live="polite"
         >
           <FluidHoverList
@@ -418,7 +422,6 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
                           onOpenDetail={onOpenDetail}
                           alreadyInBasket={basketIds.has(group.id)}
                           dimmed={!isHit}
-                          onAdd={onAdd}
                           questionGroupById={questionGroupById}
                           isSimilarPassagesOpen={expandedSimilarGroupId === group.id}
                           similarPassagesRequest={expandedSimilarGroupId === group.id ? similarPassagesRequest : null}

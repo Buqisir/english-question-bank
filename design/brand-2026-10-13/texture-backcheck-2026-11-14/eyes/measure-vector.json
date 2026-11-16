@@ -1,0 +1,759 @@
+{
+ "otter-head": {
+  "file": "design/brand-2026-10-13/mascot/otter-head.svg",
+  "kind": "head",
+  "viewBox": [
+   35.29999923706055,
+   -8.100000381469727,
+   955.2999877929688,
+   955.2999877929688
+  ],
+  "eyes": [
+   {
+    "center": {
+     "x": 339.5,
+     "y": 375.5
+    },
+    "w": 56.6,
+    "h": 56.4,
+    "d": 56.5,
+    "shape": "ellipse",
+    "toNose": 51.37,
+    "toFace": 12.52,
+    "toHeadOutline": 178.24,
+    "toWhisker": 56.09
+   },
+   {
+    "center": {
+     "x": 685.2,
+     "y": 375.5
+    },
+    "w": 56.2,
+    "h": 56.4,
+    "d": 56.3,
+    "shape": "ellipse",
+    "toNose": 50.53,
+    "toFace": 12.63,
+    "toHeadOutline": 178.63,
+    "toWhisker": 56.32
+   }
+  ],
+  "eyeCenterDist": 345.7,
+  "nose": {
+   "w": 207.26,
+   "h": 100.67,
+   "cx": 512.89,
+   "cy": 457.96
+  },
+  "face": {
+   "w": 695,
+   "h": 262,
+   "y0": 407.5
+  },
+  "whiskerCount": 6,
+  "headWidthWithEars": 773.79,
+  "headWidthAtEyeAxis": 773.79,
+  "headTopToChin": 612.82,
+  "eyeAxisTiltDeg": 0,
+  "headArea": 434918,
+  "faceArea": 150416,
+  "eyeArea": 4997.6,
+  "ratios": {
+   "eyeD_over_headWidthWithEars": 0.073,
+   "eyeD_over_headWidthAtEyeAxis": 0.073,
+   "eyeDist_over_headWidthAtEyeAxis": 0.447,
+   "eyeD_over_eyeDist": 0.163,
+   "eyeD_over_headTopToChin": 0.092,
+   "eyeArea_over_headArea": 0.011,
+   "eyeArea_over_faceArea": 0.033,
+   "noseGap_over_eyeD": 0.911,
+   "faceGap_over_eyeD": 0.222
+  }
+ },
+ "mark-mint": {
+  "file": "design/brand-2026-10-13/logo/mint/mark.svg",
+  "kind": "mark",
+  "viewBox": [
+   49.5,
+   105.5,
+   926,
+   594.5
+  ],
+  "eyes": [
+   {
+    "center": {
+     "x": 339.5,
+     "y": 375.5
+    },
+    "w": 56.6,
+    "h": 56.4,
+    "d": 56.5,
+    "shape": "ellipse",
+    "toNose": 51.37,
+    "toFace": 12.52,
+    "toHeadOutline": 178.24,
+    "toWhisker": 56.09
+   },
+   {
+    "center": {
+     "x": 685.2,
+     "y": 375.5
+    },
+    "w": 56.2,
+    "h": 56.4,
+    "d": 56.3,
+    "shape": "ellipse",
+    "toNose": 50.54,
+    "toFace": 12.64,
+    "toHeadOutline": 178.63,
+    "toWhisker": 56.32
+   }
+  ],
+  "eyeCenterDist": 345.7,
+  "nose": {
+   "w": 207.26,
+   "h": 100.67,
+   "cx": 512.89,
+   "cy": 457.96
+  },
+  "face": {
+   "w": 695,
+   "h": 262,
+   "y0": 407.5
+  },
+  "whiskerCount": 6,
+  "headWidthWithEars": 773.67,
+  "headWidthAtEyeAxis": 773.67,
+  "headTopToChin": 594.95,
+  "eyeAxisTiltDeg": 0,
+  "headArea": 422958,
+  "faceArea": 150419,
+  "eyeArea": 4997.6,
+  "ratios": {
+   "eyeD_over_headWidthWithEars": 0.073,
+   "eyeD_over_headWidthAtEyeAxis": 0.073,
+   "eyeDist_over_headWidthAtEyeAxis": 0.447,
+   "eyeD_over_eyeDist": 0.163,
+   "eyeD_over_headTopToChin": 0.095,
+   "eyeArea_over_headArea": 0.012,
+   "eyeArea_over_faceArea": 0.033,
+   "noseGap_over_eyeD": 0.911,
+   "faceGap_over_eyeD": 0.222
+  }
+ },
+ "app-icon": {
+  "file": "design/brand-2026-10-13/mascot/app-icon.svg",
+  "kind": "icon",
+  "viewBox": [
+   0,
+   0,
+   100,
+   100
+  ],
+  "eyes": [
+   {
+    "center": {
+     "x": 32.93,
+     "y": 45.75
+    },
+    "w": 5.57,
+    "h": 5.55,
+    "d": 5.56,
+    "shape": "ellipse",
+    "toNose": 5.05,
+    "toFace": "inside",
+    "toHeadOutline": 17.54,
+    "toWhisker": 5.52
+   },
+   {
+    "center": {
+     "x": 66.95,
+     "y": 45.75
+    },
+    "w": 5.53,
+    "h": 5.55,
+    "d": 5.54,
+    "shape": "ellipse",
+    "toNose": 4.97,
+    "toFace": "inside",
+    "toHeadOutline": 17.58,
+    "toWhisker": 5.54
+   }
+  ],
+  "eyeCenterDist": 34.02,
+  "nose": {
+   "w": 20.39,
+   "h": 9.91,
+   "cx": 49.99,
+   "cy": 53.86
+  },
+  "face": {
+   "w": 100,
+   "h": 100,
+   "y0": 0
+  },
+  "whiskerCount": 6,
+  "headWidthWithEars": 100.05,
+  "headWidthAtEyeAxis": 100.05,
+  "headTopToChin": 79.45,
+  "eyeAxisTiltDeg": 0,
+  "headArea": 7737,
+  "faceArea": 9587,
+  "eyeArea": 48.4,
+  "ratios": {
+   "eyeD_over_headWidthWithEars": 0.055,
+   "eyeD_over_headWidthAtEyeAxis": 0.055,
+   "eyeDist_over_headWidthAtEyeAxis": 0.34,
+   "eyeD_over_eyeDist": 0.163,
+   "eyeD_over_headTopToChin": 0.07,
+   "eyeArea_over_headArea": 0.006,
+   "eyeArea_over_faceArea": 0.005,
+   "noseGap_over_eyeD": 0.91,
+   "faceGap_over_eyeD": null
+  }
+ },
+ "otter-front": {
+  "file": "design/brand-2026-10-13/mascot/otter-front.svg",
+  "kind": "body",
+  "viewBox": [
+   32,
+   28.5,
+   960,
+   687
+  ],
+  "eyes": [
+   {
+    "center": {
+     "x": 169.5,
+     "y": 181.6
+    },
+    "w": 27.6,
+    "h": 28.4,
+    "d": 28,
+    "shape": "ellipse",
+    "toNose": 21.87,
+    "toFace": 1.49,
+    "toHeadOutline": 87.4,
+    "toWhisker": 23.86
+   },
+   {
+    "center": {
+     "x": 329.7,
+     "y": 156.8
+    },
+    "w": 27.8,
+    "h": 28.2,
+    "d": 28,
+    "shape": "ellipse",
+    "toNose": 22.48,
+    "toFace": 5.53,
+    "toHeadOutline": 88.87,
+    "toWhisker": 23.38
+   }
+  ],
+  "eyeCenterDist": 162.11,
+  "nose": {
+   "w": 97.98,
+   "h": 52.51,
+   "cx": 251.99,
+   "cy": 205.34
+  },
+  "face": {
+   "w": 325.33,
+   "h": 136.39,
+   "y0": 176.41
+  },
+  "whiskerCount": 6,
+  "headWidthWithEars": 390.24,
+  "headWidthAtEyeAxis": 390.24,
+  "headTopToChin": 296.64,
+  "eyeAxisTiltDeg": -8.8,
+  "ratios": {
+   "eyeD_over_headWidthWithEars": 0.072,
+   "eyeD_over_headWidthAtEyeAxis": 0.072,
+   "eyeDist_over_headWidthAtEyeAxis": 0.415,
+   "eyeD_over_eyeDist": 0.173,
+   "eyeD_over_headTopToChin": 0.094,
+   "eyeArea_over_headArea": null,
+   "eyeArea_over_faceArea": null,
+   "noseGap_over_eyeD": 0.781,
+   "faceGap_over_eyeD": 0.053
+  }
+ },
+ "peek-login": {
+  "file": "design/brand-2026-10-13/mascot/states/peek-login.svg",
+  "kind": "body",
+  "viewBox": [
+   55.70000076293945,
+   66.0999984741211,
+   714.7000122070312,
+   874.4000244140625
+  ],
+  "eyes": [
+   {
+    "center": {
+     "x": 280,
+     "y": 270.7
+    },
+    "w": 43.4,
+    "h": 43.6,
+    "d": 43.5,
+    "shape": "ellipse",
+    "toNose": 40.88,
+    "toFace": 7.43,
+    "toHeadOutline": 132.32,
+    "toWhisker": 41.82
+   },
+   {
+    "center": {
+     "x": 545.8,
+     "y": 270.7
+    },
+    "w": 43.2,
+    "h": 43.6,
+    "d": 43.4,
+    "shape": "ellipse",
+    "toNose": 40.87,
+    "toFace": 7.41,
+    "toHeadOutline": 132.53,
+    "toWhisker": 42.12
+   }
+  ],
+  "eyeCenterDist": 265.8,
+  "nose": {
+   "w": 156.31,
+   "h": 77.05,
+   "cx": 412.81,
+   "cy": 333.52
+  },
+  "face": {
+   "w": 536.02,
+   "h": 207.44,
+   "y0": 294.97
+  },
+  "whiskerCount": 6,
+  "headWidthWithEars": 594.99,
+  "headWidthAtEyeAxis": 594.99,
+  "headTopToChin": 359.49,
+  "eyeAxisTiltDeg": 0,
+  "ratios": {
+   "eyeD_over_headWidthWithEars": 0.073,
+   "eyeD_over_headWidthAtEyeAxis": 0.073,
+   "eyeDist_over_headWidthAtEyeAxis": 0.447,
+   "eyeD_over_eyeDist": 0.163,
+   "eyeD_over_headTopToChin": 0.121,
+   "eyeArea_over_headArea": null,
+   "eyeArea_over_faceArea": null,
+   "noseGap_over_eyeD": 0.941,
+   "faceGap_over_eyeD": 0.171
+  }
+ },
+ "state-01-idle": {
+  "file": "design/brand-2026-10-13/mascot/states/state-01-idle.svg",
+  "kind": "body",
+  "viewBox": [
+   31,
+   28,
+   962.5,
+   663
+  ],
+  "eyes": [
+   {
+    "center": {
+     "x": 174.5,
+     "y": 178.33
+    },
+    "w": 27,
+    "h": 27.34,
+    "d": 27.17,
+    "shape": "path",
+    "toNose": 21.98,
+    "toFace": 3.79,
+    "toHeadOutline": 91.89,
+    "toWhisker": 21
+   },
+   {
+    "center": {
+     "x": 332.17,
+     "y": 156.3
+    },
+    "w": 27.23,
+    "h": 28.18,
+    "d": 27.71,
+    "shape": "path",
+    "toNose": 21.36,
+    "toFace": 0.57,
+    "toHeadOutline": 86.85,
+    "toWhisker": 19.43
+   }
+  ],
+  "eyeCenterDist": 159.21,
+  "nose": {
+   "w": 94.89,
+   "h": 50.78,
+   "cx": 255.45,
+   "cy": 200.42
+  },
+  "face": {
+   "w": 314.03,
+   "h": 128.67,
+   "y0": 170.88
+  },
+  "whiskerCount": 6,
+  "headWidthWithEars": 399.44,
+  "headWidthAtEyeAxis": 399.44,
+  "headTopToChin": 264.21,
+  "eyeAxisTiltDeg": -7.95,
+  "ratios": {
+   "eyeD_over_headWidthWithEars": 0.069,
+   "eyeD_over_headWidthAtEyeAxis": 0.069,
+   "eyeDist_over_headWidthAtEyeAxis": 0.399,
+   "eyeD_over_eyeDist": 0.172,
+   "eyeD_over_headTopToChin": 0.104,
+   "eyeArea_over_headArea": null,
+   "eyeArea_over_faceArea": null,
+   "noseGap_over_eyeD": 0.801,
+   "faceGap_over_eyeD": 0.138
+  }
+ },
+ "state-02-searching": {
+  "file": "design/brand-2026-10-13/mascot/states/state-02-searching.svg",
+  "kind": "body",
+  "viewBox": [
+   30.5,
+   25.5,
+   963.5,
+   671
+  ],
+  "eyes": [
+   {
+    "center": {
+     "x": 171.3,
+     "y": 177.1
+    },
+    "w": 28.6,
+    "h": 28.6,
+    "d": 28.6,
+    "shape": "circle",
+    "toNose": 19.4,
+    "toFace": 1.67,
+    "toHeadOutline": 89.47,
+    "toWhisker": 23.12
+   },
+   {
+    "center": {
+     "x": 330.5,
+     "y": 151.5
+    },
+    "w": 28.6,
+    "h": 28.6,
+    "d": 28.6,
+    "shape": "circle",
+    "toNose": 26.44,
+    "toFace": 2.25,
+    "toHeadOutline": 86.56,
+    "toWhisker": 18.36
+   }
+  ],
+  "eyeCenterDist": 161.25,
+  "nose": {
+   "w": 95,
+   "h": 54.38,
+   "cx": 249.5,
+   "cy": 201.24
+  },
+  "face": {
+   "w": 314.65,
+   "h": 133.89,
+   "y0": 167.98
+  },
+  "whiskerCount": 6,
+  "headWidthWithEars": 418.16,
+  "headWidthAtEyeAxis": 418.16,
+  "headTopToChin": 264,
+  "eyeAxisTiltDeg": -9.14,
+  "ratios": {
+   "eyeD_over_headWidthWithEars": 0.068,
+   "eyeD_over_headWidthAtEyeAxis": 0.068,
+   "eyeDist_over_headWidthAtEyeAxis": 0.386,
+   "eyeD_over_eyeDist": 0.177,
+   "eyeD_over_headTopToChin": 0.108,
+   "eyeArea_over_headArea": null,
+   "eyeArea_over_faceArea": null,
+   "noseGap_over_eyeD": 0.678,
+   "faceGap_over_eyeD": 0.058
+  }
+ },
+ "state-03-offer": {
+  "file": "design/brand-2026-10-13/mascot/states/state-03-offer.svg",
+  "kind": "body",
+  "viewBox": [
+   16.899999618530273,
+   19.799999237060547,
+   810.7999877929688,
+   963.7999877929688
+  ],
+  "eyes": [
+   {
+    "center": {
+     "x": 267.2,
+     "y": 236.8
+    },
+    "w": 55.6,
+    "h": 55.4,
+    "d": 55.5,
+    "shape": "ellipse",
+    "toNose": 47.35,
+    "toFace": 9.31,
+    "toHeadOutline": 130.64,
+    "toWhisker": 47.15
+   },
+   {
+    "center": {
+     "x": 578,
+     "y": 236.8
+    },
+    "w": 55.6,
+    "h": 55.4,
+    "d": 55.5,
+    "shape": "ellipse",
+    "toNose": 47.38,
+    "toFace": 9.25,
+    "toHeadOutline": 130.31,
+    "toWhisker": 47.22
+   }
+  ],
+  "eyeCenterDist": 310.8,
+  "nose": {
+   "w": 173.97,
+   "h": 95.2,
+   "cx": 422.6,
+   "cy": 294.8
+  },
+  "face": {
+   "w": 577.3,
+   "h": 223.1,
+   "y0": 256.8
+  },
+  "whiskerCount": 6,
+  "headWidthWithEars": 664.86,
+  "headWidthAtEyeAxis": 664.86,
+  "headTopToChin": 509.59,
+  "eyeAxisTiltDeg": 0,
+  "ratios": {
+   "eyeD_over_headWidthWithEars": 0.083,
+   "eyeD_over_headWidthAtEyeAxis": 0.083,
+   "eyeDist_over_headWidthAtEyeAxis": 0.467,
+   "eyeD_over_eyeDist": 0.179,
+   "eyeD_over_headTopToChin": 0.109,
+   "eyeArea_over_headArea": null,
+   "eyeArea_over_faceArea": null,
+   "noseGap_over_eyeD": 0.853,
+   "faceGap_over_eyeD": 0.168
+  }
+ },
+ "state-04-done": {
+  "file": "design/brand-2026-10-13/mascot/states/state-04-done.svg",
+  "kind": "body",
+  "viewBox": [
+   23.5,
+   21.5,
+   976.5,
+   692.5
+  ],
+  "eyes": [
+   {
+    "center": {
+     "x": 165.42,
+     "y": 157.82
+    },
+    "w": 48.85,
+    "h": 28.34,
+    "d": 38.6,
+    "shape": "path",
+    "toNose": 17.82,
+    "toFace": 10.02,
+    "toHeadOutline": 74.84,
+    "toWhisker": 29.67
+   },
+   {
+    "center": {
+     "x": 327.94,
+     "y": 133.51
+    },
+    "w": 47.87,
+    "h": 26.97,
+    "d": 37.42,
+    "shape": "path",
+    "toNose": 18.77,
+    "toFace": 9.62,
+    "toHeadOutline": 75.8,
+    "toWhisker": 34.32
+   }
+  ],
+  "eyeCenterDist": 164.32,
+  "nose": {
+   "w": 98.89,
+   "h": 51.7,
+   "cx": 247.45,
+   "cy": 187.86
+  },
+  "face": {
+   "w": 326.46,
+   "h": 131,
+   "y0": 155.97
+  },
+  "whiskerCount": 6,
+  "headWidthWithEars": 395.48,
+  "headWidthAtEyeAxis": 395.48,
+  "headTopToChin": 278.79,
+  "eyeAxisTiltDeg": -8.51,
+  "ratios": {
+   "eyeD_over_headWidthWithEars": 0.096,
+   "eyeD_over_headWidthAtEyeAxis": 0.096,
+   "eyeDist_over_headWidthAtEyeAxis": 0.415,
+   "eyeD_over_eyeDist": 0.231,
+   "eyeD_over_headTopToChin": 0.136,
+   "eyeArea_over_headArea": null,
+   "eyeArea_over_faceArea": null,
+   "noseGap_over_eyeD": 0.469,
+   "faceGap_over_eyeD": 0.264
+  }
+ },
+ "state-05-not-found": {
+  "file": "design/brand-2026-10-13/mascot/states/state-05-not-found.svg",
+  "kind": "body",
+  "viewBox": [
+   29.799999237060547,
+   123,
+   766.2999877929688,
+   768.2999877929688
+  ],
+  "eyes": [
+   {
+    "center": {
+     "x": 289.2,
+     "y": 310
+    },
+    "w": 37.6,
+    "h": 37.4,
+    "d": 37.5,
+    "shape": "ellipse",
+    "toNose": 36.81,
+    "toFace": 5.7,
+    "toHeadOutline": 114.57,
+    "toWhisker": 34.82
+   },
+   {
+    "center": {
+     "x": 536.5,
+     "y": 310
+    },
+    "w": 37.4,
+    "h": 37.6,
+    "d": 37.5,
+    "shape": "ellipse",
+    "toNose": 37.27,
+    "toFace": 5.56,
+    "toHeadOutline": 116.44,
+    "toWhisker": 34.74
+   }
+  ],
+  "eyeCenterDist": 247.3,
+  "nose": {
+   "w": 149.49,
+   "h": 76,
+   "cx": 412.54,
+   "cy": 365
+  },
+  "face": {
+   "w": 474.35,
+   "h": 188.34,
+   "y0": 328.66
+  },
+  "whiskerCount": 6,
+  "headWidthWithEars": 531.05,
+  "headWidthAtEyeAxis": 531.05,
+  "headTopToChin": 416.1,
+  "eyeAxisTiltDeg": 0,
+  "ratios": {
+   "eyeD_over_headWidthWithEars": 0.071,
+   "eyeD_over_headWidthAtEyeAxis": 0.071,
+   "eyeDist_over_headWidthAtEyeAxis": 0.466,
+   "eyeD_over_eyeDist": 0.152,
+   "eyeD_over_headTopToChin": 0.09,
+   "eyeArea_over_headArea": null,
+   "eyeArea_over_faceArea": null,
+   "noseGap_over_eyeD": 0.982,
+   "faceGap_over_eyeD": 0.152
+  }
+ },
+ "login-otter-v11": {
+  "file": "app/src/auth/login-otter.svg",
+  "kind": "body",
+  "viewBox": [
+   0,
+   0,
+   1024,
+   1015
+  ],
+  "eyes": [
+   {
+    "center": {
+     "x": 119,
+     "y": 769
+    },
+    "w": 16.6,
+    "h": 16.6,
+    "d": 16.6,
+    "shape": "circle",
+    "toNose": 23.24,
+    "toFace": 6.51,
+    "toHeadOutline": 57.49,
+    "toWhisker": 20.1
+   },
+   {
+    "center": {
+     "x": 235.6,
+     "y": 732
+    },
+    "w": 16.6,
+    "h": 16.6,
+    "d": 16.6,
+    "shape": "circle",
+    "toNose": 25.2,
+    "toFace": 5.3,
+    "toHeadOutline": 88.64,
+    "toWhisker": 20.49
+   }
+  ],
+  "eyeCenterDist": 122.33,
+  "nose": {
+   "w": 66.11,
+   "h": 45.35,
+   "cx": 182.07,
+   "cy": 778.12
+  },
+  "face": {
+   "w": 234.78,
+   "h": 130.26,
+   "y0": 743.86
+  },
+  "whiskerCount": 6,
+  "headWidthWithEars": 645.63,
+  "headWidthAtEyeAxis": 623.1,
+  "headTopToChin": 332.29,
+  "eyeAxisTiltDeg": -17.61,
+  "ratios": {
+   "eyeD_over_headWidthWithEars": 0.026,
+   "eyeD_over_headWidthAtEyeAxis": 0.027,
+   "eyeDist_over_headWidthAtEyeAxis": 0.196,
+   "eyeD_over_eyeDist": 0.136,
+   "eyeD_over_headTopToChin": 0.05,
+   "eyeArea_over_headArea": null,
+   "eyeArea_over_faceArea": null,
+   "noseGap_over_eyeD": 1.4,
+   "faceGap_over_eyeD": 0.392
+  }
+ }
+}

@@ -1,0 +1,295 @@
+/* 按钮构件（Button.tsx）。只用 tokens.css 里的变量，不写字面色值和影子。
+ * 状态：悬停垫一层桌色（DESIGN.md 整块响应）；键盘焦点走 2px 石板墨焦点环；
+ * 按下缩到 0.97（减少动态效果时不缩）；禁用、忙。 */
+
+.eqb-button {
+  /* 放进 FluidHoverList 时，列表的滑动高亮是 z-index auto 的绝对定位 ::before，
+   * 按钮要有定位才按文档顺序画在它上面，否则字被高亮盖住（App.css .fluid-hover-list 注释）。 */
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* 6px 是现有 .ghost-button / .primary-button 的图标间距，照搬，迁移时样子不变。 */
+  gap: 6px;
+  height: 32px;
+  min-width: 32px;
+  padding: 0 var(--eqb-space-3);
+  border: 0;
+  border-radius: var(--eqb-radius-control);
+  background: transparent;
+  color: var(--eqb-color-text-secondary);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  /* 行高不写，照 font: inherit 继承页面的（和原 .ghost-button 一样）。写成 1 时字的标签框只有
+   * 字号那么高，又因省略号要 overflow: hidden，中文字形顶上、底下各被裁掉约半像素（顶栏换构件前后逐像素对出来的）。
+   * 按钮高度是写死的，行高不影响它。 */
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast) var(--ease-hover),
+    color var(--motion-fast) var(--ease-hover),
+    transform var(--motion-fast) var(--ease-out);
+}
+
+.eqb-button > svg {
+  flex: 0 0 auto;
+}
+
+.eqb-button-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── 大小 ─────────────────────────────────────────────── */
+
+.eqb-button[data-size='sm'] {
+  height: 28px;
+  min-width: 28px;
+  padding: 0 var(--eqb-space-2);
+}
+
+.eqb-button[data-size='lg'] {
+  height: 36px;
+  min-width: 36px;
+}
+
+/* 胶囊大号（2026-11-15 加，Owner 当天定，DESIGN.md §5 Waiting 末条）：照登录键原来手写的样子
+ * （auth/LoginPage.css 原 .login-submit，换前实量见 design/components-2026-11-13/migrate-waiting-3/README.md）。
+ * 52 和 15 全站 token 里没有，写成本条的具名变量，出处都是原 .login-submit；缺口记在 docs/design-gaps.md。
+ * 覆盖：本条 (0,2,0) 盖过 .eqb-button (0,1,0) 的高 32、圆角 8（control）、字号 13、内衬 space-3，
+ * 因为这一档就是要胶囊和大字（Owner 点名的例外，tokens.css「胶囊只给标签类」之外的唯一一处）。 */
+.eqb-button[data-size='pill'] {
+  /* 52px：原 .login-submit 的 height，和登录页两个输入框（.login-field input）同高。 */
+  --eqb-button-pill-height: 52px;
+  /* 15px：原 .login-submit 的 font-size，不在字号阶梯上（control 13 / sm 14 / md 16），照搬保持登录键样子不变。 */
+  --eqb-button-pill-font-size: 15px;
+  height: var(--eqb-button-pill-height);
+  min-width: var(--eqb-button-pill-height);
+  padding: 0 var(--eqb-space-5);
+  border-radius: var(--eqb-radius-pill);
+  font-size: var(--eqb-button-pill-font-size);
+}
+
+/* 胶囊大号配填充（solid / primary）：带登录键原来那层浮起的影子，字重回到 500。
+ * 影子是原 .login-submit 的 box-shadow，比 --elev-3 往下沉得多、也更浓，四档高度（DESIGN §4）里没有，写成具名变量。
+ * 覆盖：本条 (0,3,0) 盖过 [data-tone='primary'] / [data-tone='solid'] (0,2,0) 的字重 600，
+ * 因为原登录键 15px 字是 500，换上 Button 后样子不变。 */
+.eqb-button[data-size='pill']:is([data-tone='primary'], [data-tone='solid']) {
+  --eqb-button-pill-shadow: 0 8px 24px rgb(27 43 51 / 0.18);
+  box-shadow: var(--eqb-button-pill-shadow);
+  font-weight: 500;
+}
+
+/* 只有图标：正方形，宽 = 高。 */
+.eqb-button[data-icon-only] {
+  padding: 0;
+}
+
+.eqb-button[data-size='sm'][data-icon-only] { width: 28px; }
+.eqb-button[data-size='md'][data-icon-only] { width: 32px; }
+.eqb-button[data-size='lg'][data-icon-only] { width: 36px; }
+
+/* ── 语气 ─────────────────────────────────────────────── */
+
+.eqb-button[data-tone='subtle'] {
+  color: var(--eqb-color-text-muted);
+}
+
+.eqb-button[data-tone='strong'] {
+  color: var(--eqb-color-text);
+}
+
+/* 危险键写字用深一档的 danger-text（Owner 2026-11-14 决定 #9），图标跟字走 currentColor。 */
+.eqb-button[data-tone='danger'] {
+  color: var(--eqb-color-danger-text);
+}
+
+.eqb-button[data-tone='quiet']:hover:not(:disabled, [aria-disabled='true']),
+.eqb-button[data-tone='subtle']:hover:not(:disabled, [aria-disabled='true']),
+.eqb-button[data-tone='strong']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
+}
+
+.eqb-button[data-tone='danger']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-desk);
+}
+
+/* 打开着的触发键（菜单、弹出面板开着时 aria-expanded=true）：保持悬停的样子——桌色底、墨字，
+ * 让人看得出面板是从哪里出来的（原草稿卷两个「⋯」键就是这样，构件厂第 4 步收进构件）。
+ * 只认弹出类（Owner 2026-11-14 第 18 条）：带 aria-haspopup 的（Menu 的触发键都带 menu），
+ * 或者调用处挂了 data-opens-popup 的（开的是弹层、面板而不是菜单，加 aria-haspopup 会改读屏语义，所以另用一个只给样式看的属性）。
+ * 就地展开收起的键（「收起筛选」「文章简介」「收起进度」、词典卡三个展开键、新建学生的「取消」等）展开后静止时不垫底，
+ * 照旧只在悬停时垫。两个条件放在 :where() 里，不加特指度，本条仍是 (0,3,0)，和下面各条的先后关系不变。 */
+.eqb-button:is([data-tone='quiet'], [data-tone='subtle'], [data-tone='strong'])[aria-expanded='true']:where([aria-haspopup]:not([aria-haspopup='false']), [data-opens-popup]) {
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
+}
+
+/* 雾薄荷主键：每页一处（DESIGN.md §2 Accent）。 */
+.eqb-button[data-tone='primary'] {
+  background: var(--eqb-color-accent-fill);
+  color: var(--eqb-color-accent-fill-ink);
+  font-weight: 600;
+}
+
+.eqb-button[data-tone='primary']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-accent-fill-hover);
+}
+
+/* 石板墨填充：只给短标签（DESIGN.md §2 Ink-Action Rule）。 */
+.eqb-button[data-tone='solid'] {
+  background: var(--eqb-color-action);
+  color: var(--eqb-color-paper);
+  font-weight: 600;
+}
+
+.eqb-button[data-tone='solid']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-action-hover);
+}
+
+/* 建议：对卷面的一条建议，点了就采纳（草稿卷「建议前置分页」，2026-11-15 加）。不是主键，不抢墨：
+ * 垫页面底色（放在桌上、纸上都看得出是一块可点的小签），次要灰字带下划线，字小一档、字重常规。
+ * 原来两处手写的样子收敛过来：A4 那只是 12 号、A3 那只是 11.5 号（不在字号阶梯上），统一成 --eqb-font-size-xs。
+ * 覆盖：本条 (0,2,0) 盖过 .eqb-button (0,1,0) 的透明底、淡墨字、13 号字、500 字重。 */
+.eqb-button[data-tone='suggest'] {
+  background: var(--eqb-color-bg);
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
+  font-weight: 400;
+}
+
+/* 下划线画在字的那一层上：字在 .eqb-button-label 里，它是弹性布局的子项，不靠父层把下划线传下来。 */
+.eqb-button[data-tone='suggest'] .eqb-button-label {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* 悬停：和透明底几种一样垫桌色、字提到墨色。 */
+.eqb-button[data-tone='suggest']:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
+}
+
+/* 放在会滑动悬停底的列表里（FluidHoverList，比如顶栏）时，底由列表画，按钮自己不再垫，
+ * 只把字提到墨色。本条覆盖上面透明底几种语气的 :hover 底色，因为两层底会叠出深一档的块。 */
+.fluid-hover-list .eqb-button:is([data-tone='quiet'], [data-tone='subtle'], [data-tone='strong'], [data-tone='danger']):hover:not(:disabled) {
+  background: transparent;
+}
+
+.fluid-hover-list .eqb-button:is([data-tone='quiet'], [data-tone='subtle'])[data-fluid-hover-active]:not(:disabled) {
+  color: var(--eqb-color-text);
+}
+
+/* 键嵌在列表的行里（不是列表项本身，比如首页结果行「看整卷」、题组行「⋯」、个人空间文件行三个键）：
+ * 滑块停在这一行时，键悬停或打开着自己再垫一块底，才看得出鼠标在行里的哪个键上（Owner 2026-11-14 决定 #4）。
+ * 「打开着」和上面那条一样只认弹出类（第 18 条），条件放在 :where() 里，:is() 的特指度仍取 :hover 那一项的 (0,1,0)。
+ * 底用 border 色：滑块是桌色，再垫桌色看不出来，所以深一档（提案 · 单一来源）。
+ * 只认「在被滑块选中的那一行里、自己不是列表项」的键，顶栏这种键本身是列表项的照旧不垫底。
+ * 覆盖：本条 (0,6,0) 盖过上面「.fluid-hover-list .eqb-button…:hover 透明」(0,5,0)，
+ * 也盖过前面打开着的触发键 [aria-expanded='true'] 的桌色底 (0,3,0)。 */
+.fluid-hover-list [data-fluid-hover-active] .eqb-button:is([data-tone='quiet'], [data-tone='subtle'], [data-tone='strong']):is(:hover, [aria-expanded='true']:where([aria-haspopup]:not([aria-haspopup='false']), [data-opens-popup])):not(:disabled, [aria-disabled='true'], [data-fluid-hover-active]) {
+  background: var(--eqb-color-border);
+  color: var(--eqb-color-text);
+}
+
+/* 危险键嵌在行里时垫桌色，不垫 border 色：danger-text 在 border 色上只有 4.42，不过 AA。
+ * 覆盖：本条 (0,6,0) 盖过上面「.fluid-hover-list .eqb-button…:hover 透明」(0,5,0)。眼下站上没有这样的键。 */
+.fluid-hover-list [data-fluid-hover-active] .eqb-button[data-tone='danger']:hover:not(:disabled, [aria-disabled='true'], [data-fluid-hover-active]) {
+  background: var(--eqb-color-desk);
+}
+
+/* ── 焦点、按下、禁用、忙 ──────────────────────────────── */
+
+.eqb-button:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+/* 键盘焦点和悬停一样把淡墨、次要灰（和建议）的字提到墨色（原顶栏 .topbar .ghost-button:focus-visible 就是这样）；
+ * 底不垫，靠焦点环。 */
+.eqb-button:is([data-tone='quiet'], [data-tone='subtle'], [data-tone='suggest']):focus-visible:not(:disabled) {
+  color: var(--eqb-color-text);
+}
+
+.eqb-button:active:not(:disabled, [aria-disabled='true']) {
+  transform: scale(0.97);
+}
+
+.eqb-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* 填充的两种禁用时换成桌色底、次要灰字，不靠变淡（和现有 .primary-button 一样）。
+ * 本条覆盖上面 :disabled 的 opacity，因为填充底变淡后会像另一种颜色的按钮。 */
+.eqb-button:is([data-tone='primary'], [data-tone='solid']):disabled {
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text-muted);
+  opacity: 1;
+}
+
+/* 胶囊大号禁用时影子也去掉（原 .login-submit:disabled 就是 box-shadow: none）。
+ * 覆盖：本条 (0,4,0) 盖过上面胶囊大号配填充那条 (0,3,0) 的影子，因为桌色底再浮着影子像一块还能按的键。 */
+.eqb-button[data-size='pill']:is([data-tone='primary'], [data-tone='solid']):disabled {
+  box-shadow: none;
+}
+
+.eqb-button[aria-busy='true'] {
+  cursor: progress;
+}
+
+/* 等的样子（DESIGN.md §5「Waiting 等待」，2026-11-15）：Button 用 useDelayedBusy 过了门槛才挂 data-wait，
+ * 值是 waiting（在等）/ settling（所以点浮回 ∴）/ leaving（所以点隐去、字和图标回来）。宽度一律不变。 */
+
+/* 字和图标隐去、回来都走同一个淡入淡出。 */
+.eqb-button-label,
+.eqb-button-wait-icon > :not(.eqb-wait-dots) {
+  transition: opacity var(--motion-fast) var(--ease-hover);
+}
+
+/* 有图标的键：图标留在原位只隐去，所以点叠在图标正中（图标是 12 / 14px 时所以点照样 16px，往外多出一点，不撑宽）。 */
+.eqb-button-wait-icon {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.eqb-button-wait-icon > .eqb-wait-dots {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 只有字的键：所以点放在键正中，不接鼠标（点的还是键）。 */
+.eqb-button-wait-center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.eqb-button:is([data-wait='waiting'], [data-wait='settling']) .eqb-button-wait-icon > :not(.eqb-wait-dots),
+.eqb-button:is([data-wait='waiting'], [data-wait='settling']):not(:has(.eqb-button-wait-icon)) .eqb-button-label {
+  opacity: 0;
+}
+
+.eqb-button[data-wait='leaving'] .eqb-wait-dots {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eqb-button {
+    transition: background-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+  }
+
+  .eqb-button:active:not(:disabled, [aria-disabled='true']) {
+    transform: none;
+  }
+}

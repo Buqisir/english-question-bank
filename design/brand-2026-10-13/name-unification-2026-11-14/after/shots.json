@@ -1,0 +1,265 @@
+{
+ "label": "after",
+ "date": "2026-11-14T07:53:20.410Z",
+ "site": "http://127.0.0.1:5341",
+ "pages": {
+  "login-w1440": {
+   "title": "獭石 · 英语题库",
+   "brand": {
+    "selector": ".login-brand > span",
+    "found": true,
+    "visible": true,
+    "text": "獭石",
+    "ariaLabel": null,
+    "font": "15px/600",
+    "letterSpacing": "normal",
+    "box": {
+     "x": 88,
+     "y": 43,
+     "w": 30,
+     "h": 18
+    }
+   }
+  },
+  "home-w1440": {
+   "title": "獭石 · 英语题库",
+   "brand": {
+    "selector": "header.topbar .topbar-brand-title",
+    "found": true,
+    "visible": true,
+    "text": "獭石",
+    "ariaLabel": null,
+    "font": "15px/600",
+    "letterSpacing": "normal",
+    "box": {
+     "x": 332,
+     "y": 21,
+     "w": 30,
+     "h": 23
+    }
+   },
+   "mainAriaLabel": "獭石"
+  },
+  "sub-w1440": {
+   "page": "/?view=paper-browse&paperId=paper-2026-i",
+   "title": "獭石 · 英语题库",
+   "brand": {
+    "selector": "header.topbar .topbar-brand-title",
+    "found": true,
+    "visible": true,
+    "text": "獭石",
+    "ariaLabel": null,
+    "font": "13px/500",
+    "letterSpacing": "normal",
+    "box": {
+     "x": 154,
+     "y": 14,
+     "w": 26,
+     "h": 20
+    }
+   },
+   "identity": {
+    "selector": "header.topbar .topbar-identity",
+    "found": true,
+    "visible": true,
+    "text": "獭石·整卷预览",
+    "ariaLabel": null,
+    "font": "16px/400",
+    "letterSpacing": "normal",
+    "box": {
+     "x": 114,
+     "y": 14,
+     "w": 138,
+     "h": 20
+    }
+   },
+   "mainAriaLabel": null
+  },
+  "listen-w1440": {
+   "page": "/vocabulary/listen/Qg-tdbJVRmQb8y-JqPKsM_lGx5wekgH_",
+   "title": "獭石 · 英语题库",
+   "link": {
+    "selector": ".vocabulary-listen-header > a",
+    "found": true,
+    "visible": true,
+    "text": "獭石",
+    "ariaLabel": "返回獭石首页",
+    "font": "16px/750",
+    "letterSpacing": "-0.32px",
+    "box": {
+     "x": 200,
+     "y": 17,
+     "w": 31,
+     "h": 22
+    }
+   }
+  },
+  "dictation-w1440": {
+   "page": "/vocabulary/dictation/gd5hwpcTmMmWbArnwofr_e1Y5llhTXt5",
+   "title": "獭石 · 英语题库",
+   "link": {
+    "selector": ".vocabulary-dictation-header > a",
+    "found": true,
+    "visible": true,
+    "text": "獭石",
+    "ariaLabel": "返回獭石首页",
+    "font": "16px/750",
+    "letterSpacing": "-0.32px",
+    "box": {
+     "x": 340,
+     "y": 17,
+     "w": 31,
+     "h": 22
+    }
+   }
+  },
+  "login-w390": {
+   "title": "獭石 · 英语题库",
+   "brand": {
+    "selector": ".login-brand > span",
+    "found": true,
+    "visible": true,
+    "text": "獭石",
+    "ariaLabel": null,
+    "font": "15px/600",
+    "letterSpacing": "normal",
+    "box": {
+     "x": 56,
+     "y": 23,
+     "w": 30,
+     "h": 18
+    }
+   }
+  },
+  "home-w390": {
+   "title": "獭石 · 英语题库",
+   "brand": {
+    "selector": "header.topbar .topbar-brand-title",
+    "found": true,
+    "visible": true,
+    "text": "獭石",
+    "ariaLabel": null,
+    "font": "15px/600",
+    "letterSpacing": "normal",
+    "box": {
+     "x": 64,
+     "y": 16,
+     "w": 30,
+     "h": 23
+    }
+   },
+   "mainAriaLabel": "獭石"
+  },
+  "sub-w390": {
+   "page": "/?view=paper-browse&paperId=paper-2026-i",
+   "title": "獭石 · 英语题库",
+   "brand": {
+    "selector": "header.topbar .topbar-brand-title",
+    "found": true,
+    "visible": true,
+    "text": "獭石",
+    "ariaLabel": null,
+    "font": "13px/500",
+    "letterSpacing": "normal",
+    "box": {
+     "x": 148,
+     "y": 22,
+     "w": 26,
+     "h": 20
+    }
+   },
+   "identity": {
+    "selector": "header.topbar .topbar-identity",
+    "found": true,
+    "visible": true,
+    "text": "獭石·整卷预览",
+    "ariaLabel": null,
+    "font": "16px/400",
+    "letterSpacing": "normal",
+    "box": {
+     "x": 108,
+     "y": 22,
+     "w": 138,
+     "h": 20
+    }
+   },
+   "mainAriaLabel": null
+  },
+  "listen-w390": {
+   "page": "/vocabulary/listen/Qg-tdbJVRmQb8y-JqPKsM_lGx5wekgH_",
+   "title": "獭石 · 英语题库",
+   "link": {
+    "selector": ".vocabulary-listen-header > a",
+    "found": true,
+    "visible": true,
+    "text": "獭石",
+    "ariaLabel": "返回獭石首页",
+    "font": "16px/750",
+    "letterSpacing": "-0.32px",
+    "box": {
+     "x": 16,
+     "y": 17,
+     "w": 31,
+     "h": 22
+    }
+   }
+  },
+  "dictation-w390": {
+   "page": "/vocabulary/dictation/gd5hwpcTmMmWbArnwofr_e1Y5llhTXt5",
+   "title": "獭石 · 英语题库",
+   "link": {
+    "selector": ".vocabulary-dictation-header > a",
+    "found": true,
+    "visible": true,
+    "text": "獭石",
+    "ariaLabel": "返回獭石首页",
+    "font": "16px/750",
+    "letterSpacing": "-0.32px",
+    "box": {
+     "x": 16,
+     "y": 17,
+     "w": 31,
+     "h": 22
+    }
+   }
+  }
+ },
+ "shots": [
+  "login-full-1440.png",
+  "login-brand-1440.png",
+  "home-topbar-1440.png",
+  "sub-topbar-1440.png",
+  "listen-top-1440.png",
+  "dictation-top-1440.png",
+  "login-full-390.png",
+  "login-brand-390.png",
+  "home-topbar-390.png",
+  "sub-topbar-390.png",
+  "listen-top-390.png",
+  "dictation-top-390.png"
+ ],
+ "missing": [],
+ "errors": [],
+ "shares": {
+  "listen": "Qg-tdbJVRmQb8y-JqPKsM_lGx5wekgH_",
+  "dictation": "gd5hwpcTmMmWbArnwofr_e1Y5llhTXt5",
+  "words": [
+   "a / an",
+   "about"
+  ]
+ },
+ "compare": [
+  "login-full-1440-compare.png",
+  "login-brand-1440-compare.png",
+  "home-topbar-1440-compare.png",
+  "sub-topbar-1440-compare.png",
+  "listen-top-1440-compare.png",
+  "dictation-top-1440-compare.png",
+  "login-full-390-compare.png",
+  "login-brand-390-compare.png",
+  "home-topbar-390-compare.png",
+  "sub-topbar-390-compare.png",
+  "listen-top-390-compare.png",
+  "dictation-top-390-compare.png"
+ ]
+}

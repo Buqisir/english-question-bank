@@ -1,0 +1,248 @@
+{
+ "styles": [
+  {
+   "cap": "padding none · 里面是行（卷行列表、文件列表）",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+   "radius": "12px",
+   "padding": "0px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "auto"
+  },
+  {
+   "cap": "padding md 16 · 一块说明加几个键（Agent 口令）",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "auto"
+  },
+  {
+   "cap": "悬停（板不能点，没有悬停）",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "auto"
+  },
+  {
+   "cap": "as=\"section\" + aria-labelledby（有标题）",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "auto"
+  },
+  {
+   "cap": "不能点 · 静止",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "auto"
+  },
+  {
+   "cap": "不能点 · 悬停（没有悬停）",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "auto"
+  },
+  {
+   "cap": "静止",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "pointer"
+  },
+  {
+   "cap": "悬停：垫桌色",
+   "bg": "rgb(230, 237, 240)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "pointer"
+  },
+  {
+   "cap": "键盘焦点：墨环 2px 外扩 2px",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": "2px solid rgb(41, 66, 77) @2px",
+   "cursor": "pointer"
+  },
+  {
+   "cap": "按下：垫桌色、缩到 0.99",
+   "bg": "rgb(230, 237, 240)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "matrix(0.99, 0, 0, 0.99, 0, 0)",
+   "outline": null,
+   "cursor": "pointer"
+  },
+  {
+   "cap": "禁用",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "not-allowed"
+  }
+ ],
+ "styles-390": [
+  {
+   "cap": "padding none · 里面是行（卷行列表、文件列表）",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+   "radius": "12px",
+   "padding": "0px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "auto"
+  },
+  {
+   "cap": "padding md 16 · 一块说明加几个键（Agent 口令）",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "auto"
+  },
+  {
+   "cap": "悬停（板不能点，没有悬停）",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "auto"
+  },
+  {
+   "cap": "as=\"section\" + aria-labelledby（有标题）",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "auto"
+  },
+  {
+   "cap": "不能点 · 静止",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "auto"
+  },
+  {
+   "cap": "不能点 · 悬停（没有悬停）",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "auto"
+  },
+  {
+   "cap": "静止",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "pointer"
+  },
+  {
+   "cap": "悬停：垫桌色",
+   "bg": "rgb(230, 237, 240)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "pointer"
+  },
+  {
+   "cap": "键盘焦点：墨环 2px 外扩 2px",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": "2px solid rgb(41, 66, 77) @2px",
+   "cursor": "pointer"
+  },
+  {
+   "cap": "按下：垫桌色、缩到 0.99",
+   "bg": "rgb(230, 237, 240)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "matrix(0.99, 0, 0, 0.99, 0, 0)",
+   "outline": null,
+   "cursor": "pointer"
+  },
+  {
+   "cap": "禁用",
+   "bg": "rgb(255, 255, 255)",
+   "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px",
+   "radius": "12px",
+   "padding": "16px",
+   "transform": "none",
+   "outline": null,
+   "cursor": "not-allowed"
+  }
+ ],
+ "afterEnter": "点击计数 1",
+ "afterSpace": "点击计数 2",
+ "tabOrder": [
+  {
+   "id": "card-a",
+   "tag": "button",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @2px"
+  },
+  {
+   "id": "card-b",
+   "tag": "button",
+   "focusVisible": true,
+   "outline": "2px solid rgb(41, 66, 77) @2px"
+  },
+  {
+   "id": "end",
+   "tag": "button",
+   "focusVisible": true,
+   "outline": "1px auto rgb(16, 16, 16) @0px"
+  }
+ ]
+}

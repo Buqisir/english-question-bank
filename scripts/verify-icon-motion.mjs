@@ -282,9 +282,11 @@ try {
   await notebookExisting.filter({ hasText:'已加入生词本' }).waitFor()
   assert.equal(await notebookExisting.locator('.eqb-motion-check').getAttribute('class'), 'eqb-motion eqb-motion-check', 'already added shows a static check')
   assert.equal(await notebookExisting.locator('.eqb-reveal').evaluate(n => getComputedStyle(n).animationName), 'none')
-  await notebookNew.filter({ hasText:'加入生词本' }).waitFor()
+  // 等待第三轮（2026-11-15）：检查、加入时字不再换成「正在检查… / 正在加入…」，字固定「＋ 加入生词本」、键上挂 aria-busy。
+  // 所以先等检查完（没有 aria-busy）再点，点了以后认 aria-busy。
+  await page.locator('#notebook-new button:not([aria-busy])').filter({ hasText:'加入生词本' }).waitFor()
   await notebookNew.click()
-  await notebookNew.filter({ hasText:'正在加入' }).waitFor()
+  await page.locator('#notebook-new button[aria-busy="true"]').filter({ hasText:'加入生词本' }).waitFor()
   assert.equal(await notebookNew.locator('.eqb-motion-check').count(), 0)
   while (!notebookAdd) await new Promise(resolve => setTimeout(resolve, 10))
   await notebookAdd.fulfill({ json:{ created:true, contextId:'c1', entryId:'e1', state:'occurrence-exists' } })

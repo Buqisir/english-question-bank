@@ -6,6 +6,9 @@ import { Translate, DictionaryLookup, X, RefreshCw, SentenceAnalysis } from '../
 import { CopyFeedbackIcon } from '../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../icons/motionInput'
 import { useClipboardCopy } from '../../../hooks/useClipboardCopy'
+import { Button } from '../../../shared-ui/Button.tsx'
+import { InlineWaitDots } from '../../../shared-ui/WaitDots.tsx'
+import { useSlowWait } from '../../../shared-ui/useDelayedBusy.ts'
 
 export type SelectionOverlayPhase = 'toolbar' | 'lookup' | 'loading' | 'result' | 'error' | 'dictionary' | 'sentence-analysis'
 
@@ -68,6 +71,8 @@ export function SelectionOverlay({
 }: SelectionOverlayProps) {
   const floatingRef = useRef<HTMLDivElement | null>(null)
   const clipboard = useClipboardCopy()
+  // 等待第四轮（2026-11-15）：翻译等过 10 秒，「正在翻译」那一行多说一句。
+  const translateSlow = useSlowWait(phase === 'loading')
   const copied = clipboard.copied
   const lockedPlacementRef = useRef<Placement | null>(null)
 
@@ -248,9 +253,10 @@ export function SelectionOverlay({
           {clipboard.error && <p className="paper-selection-card-error" role="alert">{clipboard.error}</p>}
 
           {phase === 'loading' ? (
+            // 等待构件（2026-11-15，DESIGN.md §5 Waiting）：原来字前面一个转圈，换成字后面跟所以点。
             <p className="paper-selection-card-status">
-              <span className="paper-selection-spinner" aria-hidden="true" />
-              <span>正在翻译…</span>
+              <span>{translateSlow ? '正在翻译，比平时慢，可以先去做别的' : '正在翻译'}</span>
+              <InlineWaitDots pending size="sm" />
             </p>
           ) : null}
 
@@ -286,10 +292,16 @@ export function SelectionOverlay({
           ) : null}
 
           {phase !== 'loading' && (hasErrors || phase === 'error') ? (
-            <button type="button" className="paper-selection-retry" onClick={onRetry}>
-              <RefreshCw size={16} className="paper-selection-retry-icon" />
-              <span>{partial ? '重试失败段落' : '重试'}</span>
-            </button>
+            // 描边键不再单做一种（Owner 2026-11-14 决定 #2）：墨字小号，类名留着给 CSS 和检查脚本当挂钩。
+            <Button
+              tone="strong"
+              size="sm"
+              className="paper-selection-retry"
+              icon={<RefreshCw size={16} className="paper-selection-retry-icon" />}
+              onClick={onRetry}
+            >
+              {partial ? '重试失败段落' : '重试'}
+            </Button>
           ) : null}
 
           {phase !== 'loading' ? (

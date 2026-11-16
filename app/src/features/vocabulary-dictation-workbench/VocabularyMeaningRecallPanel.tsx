@@ -20,6 +20,10 @@ import { FluidHoverList } from '../../components/FluidHoverList'
 import { useAudioIconState } from '../../hooks/useAudioIconState'
 import { DisclosureIcon, DownloadFeedbackIcon, VolumeFeedbackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
+import { Notice } from '../../shared-ui/Notice.tsx'
+import { InlineWaitDots } from '../../shared-ui/WaitDots.tsx'
+import { TextField } from '../../shared-ui/Field.tsx'
+import { SegmentedField, type ChoiceOption } from '../../shared-ui/OptionField.tsx'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
   createVocabularyDictationTask,
@@ -40,6 +44,11 @@ import { prepareFileSaveTarget, type FileSaveMode } from '../../services/fileDow
 import { getVocabularyAudioPath } from '../vocabulary-listen/vocabularyAudioVariants'
 
 const MEANING_SUGGESTION_TARGET_STORAGE_KEY = 'eqb-vocabulary-meaning-suggestion-target-v1'
+// 「听写发音」两个选项（SegmentedField）。
+const ACCENT_OPTIONS: ChoiceOption<'american' | 'british'>[] = [
+  { value: 'american', label: '美音' },
+  { value: 'british', label: '英音' },
+]
 
 type MeaningRecallPanelProps = {
   studentId: string
@@ -474,7 +483,7 @@ export function VocabularyMeaningRecallPanel({
         <header>
           <div>
             <strong>{stageRecord.title}</strong>
-            <span>{activeIndex + 1} / {stageRecord.entryCount} · {saveState === 'saving' ? '正在自动保存…' : saveState === 'error' ? '保存失败' : '已自动保存'}</span>
+            <span>{activeIndex + 1} / {stageRecord.entryCount} · {saveState === 'saving' ? '正在自动保存' : saveState === 'error' ? '保存失败' : '已自动保存'}<InlineWaitDots pending={saveState === 'saving'} size="sm" /></span>
           </div>
           <button type="button" onClick={() => void finishRecord(stageRecord)} disabled={busy}>结束本轮</button>
         </header>
@@ -512,28 +521,34 @@ export function VocabularyMeaningRecallPanel({
         <div className="meaning-recall-result-summary">
           <strong>会 {counts.correct}</strong><strong>不会 {counts.wrong}</strong><span>未测 {counts.untested}</span>
         </div>
-        {error && <p className="meaning-recall-error" role="alert">{error}</p>}
+        {error && <Notice kind="error" className="meaning-recall-error" danger={saveState === 'error'}>{error}</Notice>}
         <div className="meaning-recall-result-actions">
-          <label className="meaning-recall-export-name">
-            <span>文件名</span>
-            <input
-              type="text"
-              aria-label="错词听写文件名"
-              autoComplete="off"
-              spellCheck={false}
-              maxLength={60}
-              value={dictationTitle}
-              onChange={(event) => {
-                setDictationTitle(event.target.value)
-                setError('')
-              }}
-            />
-          </label>
-          <fieldset>
-            <legend>听写发音</legend>
-            <button type="button" aria-pressed={accent === 'american'} className={accent === 'american' ? 'is-selected' : ''} onClick={() => onAccentChange('american')}>美音</button>
-            <button type="button" aria-pressed={accent === 'british'} className={accent === 'british' ? 'is-selected' : ''} onClick={() => onAccentChange('british')}>英音</button>
-          </fieldset>
+          {/* 字段构件第二轮（2026-11-15）：换成 shared-ui/TextField，看得见的标签「文件名」照旧，读屏名字照旧是「错词听写文件名」。 */}
+          <TextField
+            className="meaning-recall-export-name"
+            label="文件名"
+            layout="inline"
+            size="lg"
+            type="text"
+            aria-label="错词听写文件名"
+            autoComplete="off"
+            spellCheck={false}
+            maxLength={60}
+            value={dictationTitle}
+            onChange={(event) => {
+              setDictationTitle(event.target.value)
+              setError('')
+            }}
+          />
+          {/* 切换组那一轮（2026-11-15）：一排 aria-pressed 的键换成 SegmentedField（单选组，一个 Tab 位，方向键切换），字没改。 */}
+          <SegmentedField
+            className="meaning-recall-export-accent"
+            label="听写发音"
+            layout="inline"
+            value={accent}
+            options={ACCENT_OPTIONS}
+            onChange={onAccentChange}
+          />
           <details className="dictation-download-menu meaning-recall-download-menu">
             <summary {...iconMotionInput}><DownloadFeedbackIcon size={16} working={downloading} />下载本轮错词<DisclosureIcon size={14} /></summary>
             <FluidHoverList as="div" className="dictation-download-items" axis="y" itemSelector=".dictation-download-option">
@@ -585,15 +600,40 @@ export function VocabularyMeaningRecallPanel({
         <div><h2>看词说义</h2><p>给学生看英文，让他说中文；老师判对错。</p></div>
         {latestDraft && <button type="button" disabled={busy} onClick={() => void resumeRecord(latestDraft.id)}><Play size={16} />继续上次</button>}
       </header>
-      {error && <p className="meaning-recall-error" role="alert">{error}</p>}
+      {error && <Notice kind="error" className="meaning-recall-error" danger={saveState === 'error'}>{error}</Notice>}
 
       <div className="meaning-recall-start-row">
         <div>
           <strong>{selectedSets.length === 1 ? selectedSets[0].title : selectedSets.length > 1 ? `已选 ${selectedSets.length} 组` : '先选择词组'}</strong>
           {!selectedSets.length && <span>不会改动原词组。</span>}
         </div>
-        <label>抽 <input type="number" min="1" max="60" value={target} onChange={(event) => setTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))} /> 词</label>
-        <fieldset><legend>顺序</legend><button type="button" className={orderMode === 'random' ? 'is-selected' : ''} onClick={() => setOrderMode('random')}><Shuffle size={16} />随机</button><button type="button" className={orderMode === 'source' ? 'is-selected' : ''} onClick={() => setOrderMode('source')}>原顺序</button></fieldset>
+        {/* 字段构件第二轮（2026-11-15）：「抽 … 词」换成 TextField，「词」跟在框后面、挂进 aria-describedby。 */}
+        <TextField
+          className="meaning-recall-count"
+          label="抽"
+          layout="inline"
+          size="lg"
+          type="number"
+          min="1"
+          max="60"
+          value={target}
+          aria-describedby="meaning-recall-count-unit"
+          trailing={<span id="meaning-recall-count-unit" className="eqb-field-unit">词</span>}
+          onChange={(event) => setTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))}
+        />
+        {/* 切换组那一轮（2026-11-15）：「随机 / 原顺序」换成 SegmentedField；标签「顺序」照旧只给读屏，「随机」的图标放进构件的图标位。
+            原来两个键都没有 aria-pressed，读屏听不出选了哪一个。 */}
+        <SegmentedField
+          className="meaning-recall-order"
+          label="顺序"
+          hideLabel
+          value={orderMode}
+          options={[
+            { value: 'random', label: '随机', icon: <Shuffle size={16} /> },
+            { value: 'source', label: '原顺序' },
+          ]}
+          onChange={setOrderMode}
+        />
         {selectedSets.length
           ? <button type="button" className="is-primary" disabled={busy} onClick={() => void startRecall(selectedEntries.slice(0, target), selectedSets.map((set) => set.id))}><Eye size={16} />开始</button>
           : <button type="button" onClick={onNeedSets}><EyeOff size={16} />选择词组</button>}
@@ -601,7 +641,22 @@ export function VocabularyMeaningRecallPanel({
 
       {!selectedSets.length && <div className="meaning-recall-suggestion">
         <div><strong>直接推荐一轮</strong><span>优先选择重点、常错和较久没检查的词。</span></div>
-        <label><input type="number" min="1" max="60" value={suggestionTarget} onChange={(event) => setSuggestionTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))} /> 词</label>
+        {/* 切换组那一轮（2026-11-15）：「[n] 词」换成 TextField。原来没有标签，读屏只念「数值 20」；
+            加一个只给读屏的标签「推荐词数」（hideLabel，看得见的样子不变），「词」跟在框后面、挂进 aria-describedby。 */}
+        <TextField
+          className="meaning-recall-suggestion-count"
+          label="推荐词数"
+          hideLabel
+          layout="inline"
+          size="lg"
+          type="number"
+          min="1"
+          max="60"
+          value={suggestionTarget}
+          aria-describedby="meaning-recall-suggestion-count-unit"
+          trailing={<span id="meaning-recall-suggestion-count-unit" className="eqb-field-unit">词</span>}
+          onChange={(event) => setSuggestionTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))}
+        />
         <button type="button" onClick={() => void loadSuggestion()} disabled={busy}><Sparkles size={16} />选出单词</button>
       </div>}
       {!selectedSets.length && suggestion.length > 0 && <div className="meaning-recall-suggestion-result">

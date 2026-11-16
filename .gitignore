@@ -35,6 +35,8 @@ dist-ssr/
 .amp/portals/*
 .amp/orb-profile
 .amp/import-review-origin
+# 检查脚本的本地证据（截图、PDF），规范里按路径引用，不进仓库
+.amp/in/
 server/logs/
 .playwright-cli/
 app/.playwright-cli/

@@ -12,13 +12,13 @@
  * Smallest add unit is still QuestionGroup. There is no per-question add UI.
  */
 
-import { type MouseEvent, type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { ReadingAnalysis, Paper, Papers } from '../icons'
-import { DraftAddIcon } from '../icons/MotionIcons'
-import { iconMotionInput } from '../icons/motionInput'
+import { DraftAddButton } from '../shared-ui/DraftAddButton.tsx'
 import { type QuestionGroupCard } from '../domain/questionBank.ts'
 import { buildTopicText, compactPassageTitle, compactSummary } from './passageText.ts'
-import { ConciergeGroupRowMenu, type ConciergeGroupRowMenuItem } from './ConciergeGroupRowMenu.tsx'
+import { Menu, type MenuAction } from '../shared-ui/Menu.tsx'
+import { Row, type RowAction } from '../shared-ui/Row.tsx'
 import { buildPaperBrowseLectureHref } from './paperSurfaceHref.ts'
 import {
   SimilarPassagesPanel,
@@ -37,7 +37,6 @@ export type ConciergeGroupCardProps = {
   group: QuestionGroupCard
   reason: string
   alreadyInBasket: boolean
-  onAdd: (group: QuestionGroupCard) => void
   /** classic-retire-2-detail-view — opens the read-only detail view for this group. */
   onOpenDetail?: (group: QuestionGroupCard) => void
   /**
@@ -68,7 +67,6 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
     group,
     reason,
     alreadyInBasket,
-    onAdd,
     onOpenDetail,
     dimmed,
     questionGroupById,
@@ -98,38 +96,23 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
   // 条件同详情页：只有配方收录的四类题型才出现，写作组隐藏（池子诚实）。
   const similarEligible = SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType)
   const draftState = group.draftPaperButtonState || (alreadyInBasket ? 'in_current_draft' : 'add')
-  const draftButtonLabel =
-    draftState === 'in_current_draft'
-      ? '已在草稿卷中'
-      : draftState === 'disabled'
-        ? '暂不可组卷'
-        : '加入草稿卷'
-  const draftAriaLabel =
-    draftState === 'in_current_draft'
-      ? '从草稿卷移出'
-      : draftState === 'disabled'
-        ? '暂不可组卷'
-        : '加入当前草稿卷'
-  const draftButtonTitle =
-    draftState === 'disabled'
-      ? group.printUnavailableReason || '该题组暂不可加入草稿卷'
-      : draftAriaLabel
 
-  const handleRowClick = (event: MouseEvent<HTMLElement>) => {
-    if (!onOpenDetail) return
-    const target = event.target as HTMLElement
-    if (target.closest('button, a, input, textarea, select, [role="button"], [role="menu"]')) return
-    onOpenDetail(group)
-  }
+  // 题组行是共用构件 shared-ui/Row（2026-11-15）：能开详情时（onOpenDetail 在），整行目标是一个真 <a href>
+  // （去详情页，有自己的地址：中键、新标签照浏览器的来，左键走站内跳转），盖满整行；「+」和「⋯」是它的兄弟，
+  // 画在它上面，点它们不会打开详情。原来行上的 onClick 和「点的是不是键」判断删了。
+  // 读屏名字以看得见的篇章标题开头。高 44（size="sm"），照原值；和 DESIGN.md 的 48 不一样，提案见设计记录。
+  const detailHref = `?view=detail&groupId=${encodeURIComponent(group.id)}`
+  const rowAction: RowAction | undefined = onOpenDetail
+    ? { kind: 'link', label: `${passageTitle}，打开详情`, href: detailHref, onNavigate: () => onOpenDetail(group) }
+    : undefined
 
-  const menuItems: ConciergeGroupRowMenuItem[] = []
+  const menuItems: MenuAction[] = []
   if (similarEligible) {
     menuItems.push({
       key: 'similar',
       label: '相似篇章',
       icon: <Papers size={16} aria-hidden="true" />,
-      dataRaEntry: 'group-card-similar',
-      dataRaGroupId: group.id,
+      data: { 'data-ra-entry': 'group-card-similar', 'data-ra-group-id': group.id },
       onSelect: () => onToggleSimilar(group.id),
     })
   }
@@ -138,8 +121,8 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
       key: 'detail',
       label: '详情',
       icon: <Paper size={16} aria-hidden="true" />,
-      href: `?view=detail&groupId=${encodeURIComponent(group.id)}`,
-      onClick: (event) => {
+      href: detailHref,
+      onSelect: (event) => {
         event.preventDefault()
         onOpenDetail(group)
       },
@@ -151,8 +134,7 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
       label: group.paperSurfaceLabel || '阅读解析',
       icon: <ReadingAnalysis size={16} aria-hidden="true" />,
       href: paperSurfaceAnalysisHref,
-      dataRaEntry: 'group-card',
-      dataRaGroupId: group.id,
+      data: { 'data-ra-entry': 'group-card', 'data-ra-group-id': group.id },
     })
   }
 
@@ -161,7 +143,7 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
       className={`concierge-group-row${dimmed ? ' is-dim' : ''}`}
       data-group-id={group.id}
     >
-      <div className="concierge-group-row-line" onClick={handleRowClick}>
+      <Row as="div" className="concierge-group-row-line" padding="none" size="sm" action={rowAction}>
         <div className="concierge-group-row-body">
           <div className="concierge-group-row-main">
             <strong className="concierge-group-row-title" title={passageTitle}>
@@ -183,35 +165,24 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
 
         <div className="concierge-group-row-trail">
           {topicText && <span className="concierge-group-row-topic">{topicText}</span>}
-          <button
-            type="button"
-            className="concierge-group-row-icon concierge-action-add"
-            {...iconMotionInput}
-            onClick={(event) => {
-              event.stopPropagation()
-              onAdd(group)
-            }}
-            disabled={draftState === 'disabled'}
-            aria-pressed={draftState === 'in_current_draft'}
-            aria-label={draftAriaLabel}
-            title={draftButtonTitle}
-          >
-            <span className="visually-hidden">{draftButtonLabel}</span>
-            {/* 同一个元素在两态之间切换，过渡才会播；圆底是“已在草稿卷”的按下态，直接到位。 */}
-            <span className={draftState === 'in_current_draft' ? 'concierge-group-row-icon-mark' : 'concierge-group-row-icon-glyph'}>
-              <DraftAddIcon size={16} done={draftState === 'in_current_draft'} />
-            </span>
-          </button>
-          <ConciergeGroupRowMenu items={menuItems} />
+          {/* 走查第四节第 6 条：加入键换成共用 DraftAddButton（紧凑档，加入前只有加号；加入后是「已加入 · 撤回」那块纸）。
+              它和整行目标是兄弟、画在整行目标上面（row.css），点它不会打开详情。 */}
+          <DraftAddButton
+            className="concierge-group-row-add"
+            target={{ ...group, draftPaperButtonState: draftState }}
+            tone="subtle"
+            size="sm"
+            compact
+          />
+          <Menu items={menuItems} label="更多操作" triggerClassName="concierge-group-row-menu-trigger" />
         </div>
-      </div>
+      </Row>
 
       {isSimilarPassagesOpen && similarPassagesRequest && (
         <SimilarPassagesPanel
           recipeSummary={similarPassagesRecipeSummary(group.groupType)}
           request={similarPassagesRequest}
           questionGroupById={questionGroupById}
-          onAdd={onAdd}
           onCollapse={() => onToggleSimilar(group.id)}
           onRetry={onRetrySimilar}
         />

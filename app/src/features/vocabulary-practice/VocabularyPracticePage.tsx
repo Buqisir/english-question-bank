@@ -4,6 +4,9 @@ import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { useAudioIconState } from '../../hooks/useAudioIconState'
 import { VolumeFeedbackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
+import { Notice } from '../../shared-ui/Notice.tsx'
+import { Skeleton } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
 import type { VocabularySetDto } from '../../services/vocabulary'
 import { getVocabularySet } from '../../services/vocabulary'
 import {
@@ -28,11 +31,55 @@ type VocabularyPracticePageProps = {
 }
 
 const MATCH_CONFIRMATION_MS = 720
+// 灰块画几张卡：一轮最多 10 对 = 20 张（rig 实量 10 个词 → 一轮 20 张，5 列 4 行）。
+const SKELETON_CARD_COUNT = 20
+
+/**
+ * 翻牌页的灰块（等待第四轮，2026-11-15；原来是居中的卡片图标加「正在准备卡片…」）。
+ * 照真页面画：用真页面同一套容器 class（标题区、轮次小卡、练习方式、牌桌），字的位置放灰块，
+ * 牌桌上 20 张卡的位置放灰块。高度跟着同一套规则走，数据到了不跳。对读屏隐藏，那一句由外面的 status 说。
+ */
+function VocabularyPracticeSkeleton() {
+  return (
+    <div className="vocabulary-practice-skeleton" aria-hidden="true">
+      <header className="vocabulary-practice-heading">
+        <div>
+          <h1><Skeleton width={100} height={16} /></h1>
+          <p className="vocabulary-practice-set"><Skeleton width={120} height={12} /></p>
+          <p><Skeleton width={320} height={12} /></p>
+        </div>
+        <div className="vocabulary-practice-round">
+          <strong><Skeleton width={96} height={12} /></strong>
+          <span><Skeleton width={80} height={10} /></span>
+          {/* 真的那一行是 inline-flex（图标 + 字），没有行框的支撑；放一个零宽字符，让它和有字时一样高。 */}
+          <small><Skeleton width={64} height={10} />{'\u200b'}</small>
+        </div>
+      </header>
+      <div className="vocabulary-practice-modes">
+        <span>
+          <Skeleton width={16} height={16} />
+          <strong><Skeleton width={72} height={12} /></strong>
+          <small><Skeleton width={48} height={10} /></small>
+        </span>
+      </div>
+      <section className="vocabulary-practice-board-section">
+        <div className="vocabulary-match-board vocabulary-practice-skeleton-board">
+          {Array.from({ length: SKELETON_CARD_COUNT }, (_, index) => (
+            <div key={index} className="vocabulary-practice-skeleton-card"><Skeleton height="100%" /></div>
+          ))}
+        </div>
+      </section>
+    </div>
+  )
+}
 
 export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: VocabularyPracticePageProps) {
   const [vocabularySet, setVocabularySet] = useState<VocabularySetDto | null>(null)
   const [loadState, setLoadState] = useState<'loading' | 'ready' | 'error'>(setId ? 'loading' : 'error')
   const [loadError, setLoadError] = useState(setId ? '' : '链接里没有生词组编号，请返回后重新打开趣味练习。')
+  // 灰块走门槛（等待第四轮）：300ms 内什么都不出，出了至少留 500ms，这期间真牌桌（或出错那一段）先不换上。
+  const openingPhase = useDelayedBusy(loadState === 'loading')
+  const opening = loadState === 'loading' || openingPhase === 'waiting'
   const [roundIndex, setRoundIndex] = useState(0)
   const [game, setGame] = useState<VocabularyMatchGameState | null>(null)
   const [liveMessage, setLiveMessage] = useState('全部卡片已盖好。请选择第一张卡。')
@@ -168,14 +215,14 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
           返回生词组
         </button>
 
-        {loadState === 'loading' && (
-          <section className="vocabulary-practice-status" aria-live="polite">
-            <Card size={32} aria-hidden="true" />
-            <h1>正在准备卡片…</h1>
+        {opening && (
+          <section className="vocabulary-practice-loading" role="status" aria-busy="true">
+            <span className="visually-hidden">正在准备卡片</span>
+            {openingPhase === 'waiting' && <VocabularyPracticeSkeleton />}
           </section>
         )}
 
-        {loadState === 'error' && (
+        {!opening && loadState === 'error' && (
           <section className="vocabulary-practice-status" role="alert">
             <Card size={32} aria-hidden="true" />
             <h1>这组卡片没有加载成功</h1>
@@ -184,7 +231,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
           </section>
         )}
 
-        {loadState === 'ready' && vocabularySet && game && (
+        {!opening && loadState === 'ready' && vocabularySet && game && (
           <>
             <header className="vocabulary-practice-heading">
               <div>
@@ -204,7 +251,8 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
             </div>
 
             <section className="vocabulary-practice-board-section" aria-labelledby="vocabulary-match-board-title">
-              <h2 id="vocabulary-match-board-title" className="sr-only">单词配对卡片</h2>
+              {/* 等待第五轮（2026-11-15）：原来写的 sr-only 全站没定义，这一行一直是看得见的大标题；改用 index.css 的 visually-hidden，只给读屏（牌桌的区域名）。 */}
+              <h2 id="vocabulary-match-board-title" className="visually-hidden">单词配对卡片</h2>
               <div ref={boardRef} className="vocabulary-match-board">
                 {game.cards.map((card, cardIndex) => {
                   const revealed = card.status === 'revealed'
@@ -251,7 +299,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
               </div>
 
               <p className="vocabulary-practice-live" aria-live="polite">{liveMessage}</p>
-              {audioError && <p className="vocabulary-practice-audio-error" role="status">{audioError}</p>}
+              {audioError && <Notice kind="error" className="vocabulary-practice-audio-error">{audioError}</Notice>}
 
               {roundComplete && (
                 <div className="vocabulary-practice-complete">

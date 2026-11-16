@@ -226,12 +226,13 @@ try {
       assert(`React App: DB ${card.id} opens edit dialog (draft=${card.draftPaperButtonState})`, true)
       await page.getByRole('button', { name: '关闭录题面板' }).click()
       await page.locator('.peek-actions-menu button').click()
-      const dialogPromise = page.waitForEvent('dialog').then(async (dialog) => {
-        assert(`React App: DB ${card.id} reaches delete confirmation`, dialog.type() === 'confirm')
-        await dialog.dismiss()
-      })
       await page.getByRole('menuitem', { name: '删除', exact: true }).click()
-      await dialogPromise
+      // 构件收尾（2026-11-15）：删除题组的确认从浏览器自带 window.confirm 换成共用 Dialog（alertdialog，标题点名题组）。
+      const deleteDialog = page.getByRole('alertdialog', { name: /^删除「.*」？$/ })
+      await deleteDialog.waitFor()
+      assert(`React App: DB ${card.id} reaches delete confirmation`, await deleteDialog.getByRole('button', { name: '删除题组', exact: true }).isVisible())
+      await deleteDialog.getByRole('button', { name: '取消', exact: true }).click()
+      await deleteDialog.waitFor({ state: 'hidden' })
     }
     await page.route('**/api/auth/me', (route) => route.fulfill({ json: {
       authRequired: true, user: { id: 'fixture-member', username: 'fixture-member', role: 'member' },

@@ -306,7 +306,7 @@ P1 写的是「要什么」。下面是 Owner 实际否决或采纳时用的尺�
 | 词（实心 A） | VocabularyNotebook、Card、BookMarked、DictionaryLookup | A 在册 / 卡 / 圈 / 镜里 | 4 枚共用 A，靠容器区分 | 家族部件已定（S10），新「词」图标必须用 A；非「词」不得用 A |
 | 回转箭头 | RotateCcw、RefreshCw、History、Loader | — | **RotateCcw 一形多义**：重新加载、撤销、再听一遍、返回（用量表 §3） | **拆（Owner 2026-11-02，Q10）**：返回 → ArrowLeft；重新加载 → RefreshCw；RotateCcw 只留「撤销」与「再听一遍」。这两者是否再分，另议 |
 | 勾 | Check、CheckCircle、PaperCheck、ListChecks、BoardCheck、UserCheck | 勾在：裸 / 圆 / 卷 / 清单 / 板 / 人 | Check 同时表示「答对」和「完成」 | **不拆（Owner 2026-11-02）**：两者都是正向确认，属行业公认形 |
-| 复制与叠页 | Copy、Papers、（相似篇章，已停） | 前后纸 / 双波纹卷 | 相似篇章已因「很像复制」否决（CR:1000） | 叠页只表示复制；多份卷用 Papers 的双波纹 |
+| 复制与叠页 | Copy、Papers、QuestionBank、（相似篇章，已停） | 前后纸平移 / 双波纹卷 / 两张卷旋开 | 相似篇章已因「很像复制」否决（CR:1000） | 平移叠页只表示复制；多份卷用 Papers 的双波纹；两张卷旋开只表示题库（Owner 2026-11-13） |
 | 标记 | Pin、Bookmark、Star、Tag | 钉 = 重点；带 = 收藏；星 = ？；签 = 标签 | Pin 与 Bookmark 的意义边界未写明 | 映射表补齐各自对应的产品动作 |
 | 看 | Eye、EyeOff | — | Eye 同时表示「查看答案」和「看提示」 | **「看提示」去掉图标、只留文字；「查看答案」保留 Eye（Owner 2026-11-02）**。依据 DESIGN.md「图标配角法」：图标不增加信息时用文字 |
 | 存 | Save、Download、PaperDownload、Archive | 盘 / 托盘箭头 / 卷 + 箭头 / 盒 | 「另存为」用 Save、「下载资料」用 Download，用户是否视为同一动作未知 | **暂不动（Owner 2026-11-02）**；放进识别测试问一次 |

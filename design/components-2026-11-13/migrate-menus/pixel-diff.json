@@ -1,0 +1,247 @@
+{
+ "detail-item-hover-last.png": {
+  "pixels": 3838,
+  "bbox_2x": [
+   1352,
+   28,
+   1640,
+   228
+  ]
+ },
+ "detail-item-hover.png": {
+  "pixels": 3838,
+  "bbox_2x": [
+   1352,
+   28,
+   1640,
+   228
+  ]
+ },
+ "detail-keyboard.png": {
+  "pixels": 6278,
+  "bbox_2x": [
+   1352,
+   28,
+   1640,
+   228
+  ]
+ },
+ "detail-open-390.png": {
+  "pixels": 4387,
+  "bbox_2x": [
+   341,
+   104,
+   612,
+   287
+  ]
+ },
+ "detail-open.png": {
+  "pixels": 4387,
+  "bbox_2x": [
+   1369,
+   28,
+   1640,
+   211
+  ]
+ },
+ "detail-rest-390.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "detail-rest.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "detail-trigger-focus.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "detail-trigger-hover.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "home-item-hover-last.png": {
+  "pixels": 3198,
+  "bbox_2x": [
+   1420,
+   51,
+   1708,
+   251
+  ]
+ },
+ "home-item-hover.png": {
+  "pixels": 3198,
+  "bbox_2x": [
+   1420,
+   51,
+   1708,
+   251
+  ]
+ },
+ "home-keyboard.png": {
+  "pixels": 5638,
+  "bbox_2x": [
+   1420,
+   51,
+   1708,
+   251
+  ]
+ },
+ "home-open-390.png": {
+  "pixels": 2960,
+  "bbox_2x": [
+   624,
+   52,
+   680,
+   108
+  ]
+ },
+ "home-open.png": {
+  "pixels": 2956,
+  "bbox_2x": [
+   1652,
+   51,
+   1708,
+   107
+  ]
+ },
+ "home-rest-390.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "home-rest.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "home-row-hover-390.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "home-row-hover.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "home-trigger-focus.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "home-trigger-hover.png": {
+  "pixels": 24,
+  "bbox_2x": [
+   1652,
+   51,
+   1708,
+   107
+  ]
+ },
+ "space-390.png": {
+  "pixels": 72,
+  "bbox_2x": [
+   675,
+   927,
+   697,
+   933
+  ]
+ },
+ "space-confirm-390.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "space-confirm.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "space-item-hover-last.png": {
+  "size": [
+   [
+    1964,
+    342
+   ],
+   [
+    1964,
+    306
+   ]
+  ]
+ },
+ "space-item-hover.png": {
+  "size": [
+   [
+    1964,
+    342
+   ],
+   [
+    1964,
+    306
+   ]
+  ]
+ },
+ "space-keyboard.png": {
+  "size": [
+   [
+    1964,
+    342
+   ],
+   [
+    1964,
+    306
+   ]
+  ]
+ },
+ "space-open-390.png": {
+  "size": [
+   [
+    760,
+    436
+   ],
+   [
+    760,
+    400
+   ]
+  ]
+ },
+ "space-open.png": {
+  "size": [
+   [
+    1964,
+    342
+   ],
+   [
+    1964,
+    306
+   ]
+  ]
+ },
+ "space-rest-390.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "space-rest.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "space-row-hover-390.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "space-row-hover.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "space-trigger-focus.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "space-trigger-hover.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "space.png": {
+  "pixels": 72,
+  "bbox_2x": [
+   2543,
+   587,
+   2565,
+   593
+  ]
+ }
+}

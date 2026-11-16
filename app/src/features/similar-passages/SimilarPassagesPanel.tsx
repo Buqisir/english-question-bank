@@ -28,8 +28,16 @@
  * asset analyzed, DB not yet synced) renders thin — disabled add button +
  * title tooltip, still shown (pool honesty, not hidden).
  */
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useRef, type ReactNode } from 'react'
 import { ChevronUp } from '../../icons'
+import { Button } from '../../shared-ui/Button.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
+import { DraftAddButton } from '../../shared-ui/DraftAddButton.tsx'
+import { Chip } from '../../shared-ui/Chip.tsx'
+import { SkeletonGate } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
+import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
+import { SimilarCardSkeletons } from './SimilarCardSkeletons.tsx'
 import type { QuestionGroupCard, SimilarPassagesResponse } from '../../domain/questionBank'
 
 export type SimilarPassagesRequestState =
@@ -53,51 +61,43 @@ export type SimilarPassagesPanelProps = {
   recipeSummary: string
   request: SimilarPassagesRequestState
   questionGroupById: Map<string, QuestionGroupCard>
-  onAdd: (card: QuestionGroupCard) => void
   onCollapse: () => void
   onRetry: () => void
 }
 
 export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNode {
-  const { recipeSummary, request, questionGroupById, onAdd, onCollapse, onRetry } = props
-  const [toastMessage, setToastMessage] = useState<string | null>(null)
-  const toastTimeoutRef = useRef<number | null>(null)
-
-  useEffect(() => {
-    return (): void => {
-      if (toastTimeoutRef.current != null) window.clearTimeout(toastTimeoutRef.current)
-    }
-  }, [])
-
-  function handleAdd(card: QuestionGroupCard): void {
-    onAdd(card)
-    if (toastTimeoutRef.current != null) window.clearTimeout(toastTimeoutRef.current)
-    setToastMessage(`已把「${card.title || card.id}」加入草稿卷`)
-    toastTimeoutRef.current = window.setTimeout(() => setToastMessage(null), 2200)
-  }
+  const { recipeSummary, request, questionGroupById, onCollapse, onRetry } = props
+  // 等待第六轮（2026-11-15）：读取中原来是一行「加载中」，换成照真卡画的 3 张灰卡，走门槛（300ms 内不出、出了至少留 500ms，
+  // 这期间结果到了也先不换上）。listWaiting = 灰卡那一块还占着位置。
+  const pending = request.status === 'loading'
+  const listPhase = useDelayedBusy(pending)
+  const listWaiting = pending || listPhase === 'waiting'
+  // 等待第四轮（2026-11-15）：结果回来时，候选卡从上到下依次淡入（只动透明度）。每次请求回来演一次；
+  // 加入草稿卷这类不改 request.status 的变化不演。第六轮起等灰卡走了、真卡挂上那一拍再演。
+  const panelRef = useRef<HTMLDivElement>(null)
+  useRowReveal(panelRef, '.similar-rcard', request.status === 'ready' && !listWaiting)
 
   return (
-    <div className="similar-passages-panel">
+    <div className="similar-passages-panel" ref={panelRef}>
       <div className="similar-passages-head">
         <h4 className="paper-browse-lecture-title">相似篇章</h4>
         <span className="similar-passages-sub">{recipeSummary}</span>
-        <button type="button" className="similar-backlink" onClick={onCollapse}>
+        <Button tone="quiet" size="sm" className="similar-backlink" onClick={onCollapse}>
           收起 <ChevronUp size={12} aria-hidden="true" />
-        </button>
+        </Button>
       </div>
 
-      {request.status === 'loading' && <p className="paper-browse-lecture-empty">加载中…</p>}
-
-      {request.status === 'error' && (
-        <div className="similar-rail-error">
-          <p className="paper-browse-lecture-empty">{request.message}</p>
-          <button type="button" className="similar-btn" onClick={onRetry}>
-            重试
-          </button>
-        </div>
+      {listWaiting && (
+        <SkeletonGate pending={pending} phase={listPhase} label="相似篇章加载中" skeleton={<SimilarCardSkeletons variant="panel" />} />
       )}
 
-      {request.status === 'ready' && (
+      {!listWaiting && request.status === 'error' && (
+        <Notice kind="error" className="similar-rail-error" action={{ label: '重试', onClick: onRetry }}>
+          {request.message}
+        </Notice>
+      )}
+
+      {!listWaiting && request.status === 'ready' && (
         <>
           {request.data.results.length === 0 ? (
             <p className="paper-browse-lecture-empty">
@@ -115,22 +115,30 @@ export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNod
                       <div className="similar-rcard-source">{result.sourceLabel}</div>
                       <div className="similar-rcard-chips">
                         {result.reasons.map((reason, index) => (
-                          <span key={`${reason.kind}-${index}`} className="similar-chip similar-chip--hit">
+                          <Chip key={`${reason.kind}-${index}`} className="similar-chip">
                             {reason.label}
-                          </span>
+                          </Chip>
                         ))}
                       </div>
                     </div>
                     <div className="similar-rcard-actions">
-                      <button
-                        type="button"
-                        className="similar-btn similar-btn--primary"
-                        disabled={isThin}
-                        title={isThin ? '该卷未入库存，暂不能加入' : undefined}
-                        onClick={() => card && handleAdd(card)}
-                      >
-                        ＋ 加入草稿卷
-                      </button>
+                      {/* Owner 2026-11-14 决定 #17：每张卡片一个键，一页会有好几个，不用雾薄荷主键（每页一处），
+                          改成墨字键 strong。详情页上方「加入草稿卷」仍是那一页唯一的主键。
+                          走查第四节第 6 条：能加的换成共用加入键（加入后「已加入 · 撤回」就在卡片上），
+                          原来点完不管成没成都弹的「已把「…」加入草稿卷」提示条去掉了。 */}
+                      {card ? (
+                        <DraftAddButton className="similar-btn" target={card} tone="strong" size="sm" />
+                      ) : (
+                        <Button
+                          tone="strong"
+                          size="sm"
+                          className="similar-btn"
+                          disabled={isThin}
+                          title="该卷未入库存，暂不能加入"
+                        >
+                          ＋ 加入草稿卷
+                        </Button>
+                      )}
                     </div>
                   </div>
                 )
@@ -143,7 +151,6 @@ export function SimilarPassagesPanel(props: SimilarPassagesPanelProps): ReactNod
         </>
       )}
 
-      <div className={`similar-toast${toastMessage ? ' similar-toast--on' : ''}`}>{toastMessage}</div>
     </div>
   )
 }

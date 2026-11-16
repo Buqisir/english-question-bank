@@ -17,10 +17,11 @@
  *      a literal hex (D3 — page-base token).
  *   4. The export menu is no longer a native `<details>`/`<summary>` (D5) —
  *      it is a custom floating panel wired for aria-expanded, outside-click
- *      dismiss, and Escape dismiss.
- *   5. The save-space dialog's primary "保存" action opts into the shared
- *      `.primary-button` accent treatment (D2), and the generic ghost-button
- *      selector explicitly excludes it so specificity doesn't clobber it.
+ *      dismiss, and Escape dismiss. Since 构件厂第 4 步 (2026-11-13) that
+ *      panel is the shared `app/src/shared-ui/Menu.tsx`; the checks read it.
+ *   5. The save-space dialog's primary "保存" action is the filled key (D2).
+ *      Since 构件厂第 4 步第七页 (2026-11-14) that is shared-ui/Button's
+ *      solid tone, with "取消" a transparent strong-tone Button.
  *
  * Cloud-safe: no browser, no build, no server — pure source-text checks.
  */
@@ -120,59 +121,90 @@ assert(
   !/<summary[\s>]/.test(tsxSrcNoLineComments),
   '<summary found — export menu still native',
 )
+// 构件厂第 4 步（2026-11-13）：导出菜单换成 shared-ui/Menu，aria-expanded、Esc 关、点外面关、
+// 贴右边、e3 影子、宽度不出屏都由构件给，这里改成核对「用的是 Menu」和构件里的这几条。
+const MENU_TSX_REL = 'app/src/shared-ui/Menu.tsx'
+const MENU_CSS_REL = 'app/src/shared-ui/menu.css'
+const menuTsxSrc = readSrc(MENU_TSX_REL)
+const menuCssSrc = readSrc(MENU_CSS_REL)
 assert(
-  'export menu trigger has aria-expanded wired to open state',
-  /aria-expanded=\{exportMenuOpen\}/.test(tsxSrc),
-  'aria-expanded={exportMenuOpen} not found on trigger',
+  'export menu is the shared Menu component',
+  /const exportMenuControl = \(\s*<Menu\b/.test(tsxSrc) && /label="导出"/.test(tsxSrc),
+  'exportMenuControl is not a <Menu label="导出">',
 )
 assert(
-  'export menu closes on Escape',
-  /event\.key === 'Escape'/.test(tsxSrc) && /setExportMenuOpen\(false\)/.test(tsxSrc),
+  'Menu trigger has aria-expanded wired to open state',
+  /'aria-expanded':\s*open/.test(menuTsxSrc),
+  `'aria-expanded': open not found in ${MENU_TSX_REL}`,
+)
+assert(
+  'Menu closes on Escape',
+  /event\.key === 'Escape'/.test(menuTsxSrc),
   'Escape-dismiss wiring not found',
 )
 assert(
-  'export menu closes on outside click (ref containment check)',
-  /exportMenuRef\.current\s*&&\s*!exportMenuRef\.current\.contains\(/.test(tsxSrc),
+  'Menu closes on outside click (ref containment check)',
+  /menuRef\.current\?\.contains\(target\)/.test(menuTsxSrc),
   'outside-click dismiss wiring not found',
 )
+assert(
+  'Menu is right-anchored to its trigger by default (align end)',
+  /align = 'end'/.test(menuTsxSrc) && /align === 'end' \? rect\.right - width/.test(menuTsxSrc),
+  'right anchoring not found',
+)
 
-const exportPanelBlockMatch = cssSrc.match(/\.draft-export-menu-panel\s*\{([^}]*)\}/)
-assert('.draft-export-menu-panel rule block found', Boolean(exportPanelBlockMatch), 'selector not found')
-if (exportPanelBlockMatch) {
-  const block = exportPanelBlockMatch[1]
+const menuBlockMatch = menuCssSrc.match(/\.eqb-menu\s*\{([^}]*)\}/)
+assert('.eqb-menu rule block found', Boolean(menuBlockMatch), 'selector not found')
+if (menuBlockMatch) {
+  const block = menuBlockMatch[1]
   assert(
-    '.draft-export-menu-panel has a Floating-tier box-shadow',
-    /box-shadow\s*:/.test(block),
+    '.eqb-menu has a Floating-tier box-shadow',
+    /box-shadow\s*:\s*var\(--elev-3\)/.test(block),
     `block: ${block.trim()}`,
   )
   assert(
-    '.draft-export-menu-panel is right-anchored to its trigger (right: 0)',
-    /right\s*:\s*0\b/.test(block),
-    `block: ${block.trim()}`,
-  )
-  assert(
-    '.draft-export-menu-panel clamps its width to the viewport (no unbounded overflow)',
+    '.eqb-menu clamps its width to the viewport (no unbounded overflow)',
     /max-width\s*:\s*calc\(100vw/.test(block),
     `block: ${block.trim()}`,
   )
 }
 
-/* ─── 5. D2: save-space dialog primary button opts into .primary-button ─ */
+/* ─── 5. D2: save-space dialog primary button stays the filled one ─────
+   构件厂第 4 步第七页：对话框四个键换成 shared-ui/Button。D2 要的是「保存」是填充键、
+   「取消」不和它抢——原来靠 .primary-button 和一条 :not(.primary-button) 的白底描边规则，
+   现在靠 Button 的语气：「保存」solid（石板墨填充，就是原来 .primary-button 的颜色），
+   「取消」strong（墨字透明底）。 */
 
-console.log('\nTest 5: save-space dialog "保存" button uses the shared primary-button treatment (D2)')
+console.log('\nTest 5: save-space dialog "保存" button is the filled one, "取消" is not (D2)')
+
+// 2026-11-14 对话框换成共用 shared-ui/Dialog：「保存」「取消」由 Dialog 画——给了 onSubmit 时确认键是提交键、
+// 普通语气用 solid（石板墨填充），取消用 strong（墨字透明底）。这里查调用处把两个键交给了 Dialog，
+// 再查 Dialog.tsx 里这两种语气没变。
+const dialogSrc = readSrc('app/src/shared-ui/Dialog.tsx')
 
 assert(
-  'submit button in the save-space dialog has className="primary-button"',
-  /type="submit"\s+className="primary-button"/.test(tsxSrc),
-  'primary-button class not found on the submit/save button',
+  'submit button in the save-space dialog is a solid-tone Button',
+  /<Dialog[\s\S]*?className="draft-save-space-dialog"[\s\S]*?onSubmit=[\s\S]*?confirm=\{\{/.test(tsxSrc) &&
+    /type=\{confirmType\}\s+tone=\{tone === 'alert' \? 'danger' : 'solid'\}/.test(dialogSrc) &&
+    /onSubmit \? 'submit' : 'button'/.test(dialogSrc),
+  'save-space Dialog with onSubmit + solid confirm not found',
 )
 
-const dialogActionsSelectorMatch = cssSrc.match(/\.draft-dialog-actions button([^,{]*)[,{]/)
 assert(
-  'the shared ghost-button selector explicitly excludes .primary-button (so specificity does not clobber it)',
-  Boolean(dialogActionsSelectorMatch) && /:not\(\.primary-button\)/.test(dialogActionsSelectorMatch[0]),
-  `selector: ${dialogActionsSelectorMatch ? dialogActionsSelectorMatch[0] : 'not found'}`,
+  '"取消" in the save-space dialog is a transparent strong-tone Button, not a second filled key',
+  /className="draft-save-space-dialog"[\s\S]*?cancel=\{\{ label: '取消' \}\}/.test(tsxSrc) &&
+    /<Button\s+tone="strong"\s+size="lg"[\s\S]*?onClick=\{cancel\.onClick \?\? dismiss\}/.test(dialogSrc),
+  'strong-tone 取消 Button not found',
 )
+
+{
+  const cssNoComments = cssSrc.replace(/\/\*[\s\S]*?\*\//g, '')
+  assert(
+    'no hand-written button rule targets the dialog any more (it would fight button.css)',
+    !/\.draft-dialog-actions button|\.draft-new-folder-row button|\.draft-dialog-head button/.test(cssNoComments),
+    'a .draft-dialog-* button rule re-appeared',
+  )
+}
 
 /* ─── 6. workbench-header-unify: Locked Decision 锚断言（CR SW-2 收账） ── */
 
@@ -192,7 +224,7 @@ assert(
   'draft-toolbar className re-appeared',
 )
 {
-  const deskBlock = cssSrc.match(/\.draft-preview-desk\s*\{[^}]*\}/)?.[0] || ''
+  const deskBlock = cssSrc.match(/\.draft-preview-desk(?:,\s*\.draft-skeleton-desk)?\s*\{[^}]*\}/)?.[0] || ''
   assert(
     'the desk block carries no margin-top (LD3 — the 18px gray sliver stays dead)',
     deskBlock.length > 0 && !/margin-top/.test(deskBlock),

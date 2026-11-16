@@ -25,6 +25,15 @@ const HOOK_ONLY = new Set([
   // 变体类：基类有样式，变体作语义钩子 (aria/QA 选择器面)，无独立规则。
   'pi-cloze-tag--pos',
   'pi-gf-tag--type',
+  // 胶囊第二轮（2026-11-14）：完形、语法填空的题头小签、句法成分小签换成 shared-ui/Chip，样子在 chip.css，
+  // 这几个类名留在元素上只当钩子，原来的样式删了。
+  'pi-cloze-tag',
+  'pi-cloze-tag--sig',
+  'pi-gf-tag',
+  'pi-gf-tag--facet',
+  'pi-gf-blank-hint',
+  'pi-gf-badge',
+  'pi-gf-badge--role',
   'pi-ps-analysis-empty--unpublished',
   // 'pi-ps-analysis-option-content' 于 2026-09-15 讲评「色留量减」获得样式
   // (正确项正文加粗)，已从白名单移除。

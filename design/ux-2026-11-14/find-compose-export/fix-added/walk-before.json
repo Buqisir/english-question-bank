@@ -1,0 +1,111 @@
+{
+  "mode": "before",
+  "places": {
+    "首页结果行": {
+      "before": "加入草稿卷",
+      "timing": {
+        "what": "首页结果行",
+        "clickToVisibleChangeMs": null,
+        "clickToDoneMs": 25
+      },
+      "after": "已在草稿卷中",
+      "draftAfterAdd": [
+        "group-2026-i-reading-a"
+      ],
+      "clickAgain": {
+        "urlBefore": "/",
+        "urlAfter": "/?view=draft-paper&draftPaperId=draft-paper-91c7e78c-f41f-4ea2-b3a6-371a19a3c959&focusGroupId=group-2026-i-reading-a"
+      },
+      "draftAfterUndo": [
+        "group-2026-i-reading-a"
+      ]
+    },
+    "详情页": {
+      "before": "加入草稿卷",
+      "timing": {
+        "what": "详情页",
+        "clickToVisibleChangeMs": null,
+        "clickToDoneMs": 9
+      },
+      "after": "已在草稿卷",
+      "clickAgain": {
+        "urlBefore": "/?view=detail&groupId=group-2026-i-reading-c",
+        "urlAfter": "/?view=draft-paper&draftPaperId=draft-paper-91c7e78c-f41f-4ea2-b3a6-371a19a3c959&focusGroupId=group-2026-i-reading-c"
+      },
+      "draft": [
+        "group-2026-i-reading-c"
+      ]
+    },
+    "相似篇章": {
+      "panelText": "相似篇章 同话题硬门槛 · 同篇位优先 · 真题优先 收起 Reading C 2026年新课标Ⅰ卷 走查塞的数据 ＋ 加入草稿卷 Reading D 2026年新课标Ⅰ卷 走查塞的数据 ＋ 加入草稿卷 库内同话题还剩 0 组",
+      "cards": 2,
+      "timing": {
+        "what": "相似篇章",
+        "clickToVisibleChangeMs": null,
+        "clickToDoneMs": 24
+      },
+      "after": "相似篇章 同话题硬门槛 · 同篇位优先 · 真题优先 收起 Reading C 2026年新课标Ⅰ卷 走查塞的数据 ＋ 加入草稿卷 Reading D 2026年新课标Ⅰ卷 走查塞的数据 ＋ 加入草稿卷 库内同话题还剩 0 组 已把「Reading C」加入草稿卷",
+      "draft": [
+        "group-2026-i-reading-c"
+      ]
+    },
+    "整卷预览": {
+      "before": "剪入",
+      "timing": {
+        "what": "整卷预览",
+        "clickToVisibleChangeMs": null,
+        "clickToDoneMs": 154
+      },
+      "after": "已剪入",
+      "clickAgain": {
+        "urlBefore": "/?view=paper-browse&paperId=paper-2026-i",
+        "urlAfter": "/?view=draft-paper&paperId=paper-2026-i&draftPaperId=draft-paper-91c7e78c-f41f-4ea2-b3a6-371a19a3c959&focusGroupId=group-2026-i-reading-b"
+      },
+      "draft": [
+        "group-2026-i-reading-b"
+      ]
+    }
+  },
+  "keyboard": {},
+  "errors": {},
+  "timings": [
+    {
+      "what": "首页结果行",
+      "clickToVisibleChangeMs": null,
+      "clickToDoneMs": 25
+    },
+    {
+      "what": "详情页",
+      "clickToVisibleChangeMs": null,
+      "clickToDoneMs": 9
+    },
+    {
+      "what": "相似篇章",
+      "clickToVisibleChangeMs": null,
+      "clickToDoneMs": 24
+    },
+    {
+      "what": "整卷预览",
+      "clickToVisibleChangeMs": null,
+      "clickToDoneMs": 154
+    }
+  ],
+  "dialogs": [],
+  "consoleErrors": [
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "console: 生成分页预览 TypeError: Failed to fetch\n    at fetchDraftPaperPagination (http://127.0.0.1:5350/src/services/draftPapers.ts:84:25)\n    at http://127.0.0.1:5350/src/features/draft-paper/DraftPaperWorkbench.t",
+    "console: 生成分页预览 TypeError: Failed to fetch\n    at fetchDraftPaperPagination (http://127.0.0.1:5350/src/services/draftPapers.ts:84:25)\n    at http://127.0.0.1:5350/src/features/draft-paper/DraftPaperWorkbench.t",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 409 (Conflict)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ]
+}

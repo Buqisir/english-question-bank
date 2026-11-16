@@ -1,0 +1,103 @@
+{
+ "date": "2026-11-14T07:44:45.189Z",
+ "site": "http://127.0.0.1:5340",
+ "names": [
+  "獭石 / Tashi",
+  "玉案 / Yu'an"
+ ],
+ "fontsOnThisMachine": {
+  "inter": true,
+  "pingfang": false,
+  "paperMono": false,
+  "cjkFallback": "wqy-zenhei.ttc: \"WenQuanYi Zen Hei\" \"Regular\"",
+  "mono": "DejaVuSansMono.ttf: \"DejaVu Sans Mono\" \"Book\""
+ },
+ "topbar": {
+  "w1440": {
+   "page": "首页（找题台）/",
+   "before": {
+    "found": true,
+    "visible": true,
+    "text": "英语题库工作台",
+    "font": "15px/600",
+    "family": "Inter, \"PingFang SC\", \"Hiragino Sans GB\", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "color": "rgb(27, 43, 51)",
+    "lineHeight": "22.5px",
+    "box": {
+     "x": 332,
+     "y": 21,
+     "w": 105,
+     "h": 23
+    }
+   },
+   "markVisible": true
+  },
+  "w390": {
+   "page": "首页（找题台）/",
+   "before": {
+    "found": true,
+    "visible": true,
+    "text": "英语题库工作台",
+    "font": "15px/600",
+    "family": "Inter, \"PingFang SC\", \"Hiragino Sans GB\", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "color": "rgb(27, 43, 51)",
+    "lineHeight": "22.5px",
+    "box": {
+     "x": 64,
+     "y": 16,
+     "w": 105,
+     "h": 23
+    }
+   },
+   "markVisible": true
+  }
+ },
+ "login": {
+  "w1440": {
+   "before": {
+    "found": true,
+    "visible": true,
+    "text": "英语题库工作台",
+    "font": "15px/600",
+    "family": "Inter, \"PingFang SC\", \"Hiragino Sans GB\", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "color": "rgb(27, 43, 51)",
+    "lineHeight": "18px",
+    "box": {
+     "x": 88,
+     "y": 43,
+     "w": 105,
+     "h": 18
+    }
+   },
+   "title": "题海三千，只取一瓢"
+  },
+  "w390": {
+   "before": {
+    "found": true,
+    "visible": true,
+    "text": "英语题库工作台",
+    "font": "15px/600",
+    "family": "Inter, \"PingFang SC\", \"Hiragino Sans GB\", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+    "color": "rgb(27, 43, 51)",
+    "lineHeight": "18px",
+    "box": {
+     "x": 56,
+     "y": 23,
+     "w": 105,
+     "h": 18
+    }
+   },
+   "title": "题海三千，只取一瓢"
+  }
+ },
+ "errors": [],
+ "bodyFamily": "Inter, \"PingFang SC\", \"Hiragino Sans GB\", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+ "fontsInSheet": {
+  "paperMono": false,
+  "inter": true
+ },
+ "truncatedIconLabels": {
+  "獭石 / Tashi": [],
+  "玉案 / Yu'an": []
+ }
+}

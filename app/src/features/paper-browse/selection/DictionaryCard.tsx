@@ -2,6 +2,8 @@ import { useId, useState, useSyncExternalStore, type ReactNode } from 'react'
 import { SentenceAnalysis, X } from '../../../icons'
 import { CopyFeedbackIcon, DisclosureIcon, VolumeFeedbackIcon } from '../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../icons/motionInput'
+import { Button } from '../../../shared-ui/Button.tsx'
+import { Skeleton, SkeletonGate } from '../../../shared-ui/Skeleton.tsx'
 import type {
   PaperDictionaryEntry,
   PaperDictionaryPosGroup,
@@ -16,6 +18,9 @@ export type DictionarySenseState =
   // matchKey 是服务端选中的义项（entryId\nposGroupIndex\nsenseId）；短语搭配没有对应义项，为 null。
   | { status: 'ok'; text: string; matchKey?: string | null }
   | { status: 'unavailable' | 'error'; message: string }
+
+// 查词典时的三条灰块宽度（照原来 .paper-dictionary-skeleton-line 的 100% / 82% / 58%）。
+const DICTIONARY_SKELETON_WIDTHS = ['100%', '82%', '58%']
 
 function sameWord(a: string, b: string) {
   return a.localeCompare(b, undefined, { sensitivity: 'accent' }) === 0
@@ -273,16 +278,17 @@ function PosBlock({
         )) : null}
       </ol>
       {folded.length > 0 ? (
-        <button
-          type="button"
-          className="paper-dictionary-more paper-dictionary-rare-toggle"
+        <Button
+          tone="quiet"
+          size="sm"
+          className="paper-dictionary-text-toggle paper-dictionary-rare-toggle"
           {...iconMotionInput}
           aria-expanded={rareOpen}
           onClick={() => setRareOpen((value) => !value)}
         >
-          <span>{rareOpen ? '收起' : `更多义项 ${folded.length}`}</span>
+          {rareOpen ? '收起' : `更多义项 ${folded.length}`}
           <DisclosureIcon size={12} expanded={rareOpen} />
-        </button>
+        </Button>
       ) : null}
     </section>
   )
@@ -451,11 +457,14 @@ export function DictionaryCard({
       </div>
 
       {lookup === 'loading' ? (
-        <div className="paper-dictionary-skeletons" aria-hidden="true">
-          <span className="paper-dictionary-skeleton-line" />
-          <span className="paper-dictionary-skeleton-line" />
-          <span className="paper-dictionary-skeleton-line" />
-        </div>
+        // 共用灰块（2026-11-15 第二轮，DESIGN.md §5 Waiting）：原来三条自己画的灰条（字色 10%、不动），换成 Skeleton
+        // （桌色、一起呼吸），宽度照旧 100% / 82% / 58%、高 12。走 300ms 门槛；词条在下面另画，查完就卸掉，不留够 500ms。
+        <SkeletonGate
+          pending
+          label="正在查词典"
+          className="paper-dictionary-skeletons"
+          skeleton={DICTIONARY_SKELETON_WIDTHS.map((width) => <Skeleton key={width} width={width} height={12} />)}
+        />
       ) : null}
       {lookupError ? <p className="paper-dictionary-note">{lookupError}</p> : null}
       {result?.status === 'not-found' ? <p className="paper-dictionary-missing">暂未收录该词</p> : null}
@@ -490,32 +499,34 @@ export function DictionaryCard({
       {playErrorId ? <p className="paper-dictionary-note">暂时无法播放</p> : null}
 
       {hasExplanations ? (
-        <button
-          type="button"
-          className="paper-dictionary-more paper-dictionary-detail-toggle"
+        <Button
+          tone="quiet"
+          size="sm"
+          className="paper-dictionary-text-toggle paper-dictionary-detail-toggle"
           {...iconMotionInput}
+          icon={<DisclosureIcon size={12} expanded={explainAll} />}
           aria-expanded={explainAll}
           onClick={() => setExplainAll((value) => !value)}
         >
-          <DisclosureIcon size={12} expanded={explainAll} />
-          <span>{explainAll ? '收起解释' : '详细解释'}</span>
-        </button>
+          {explainAll ? '收起解释' : '详细解释'}
+        </Button>
       ) : null}
 
       {notebook}
       <div className="paper-dictionary-footer">
         <span className="paper-dictionary-source">来源 Wiktionary</span>
-        <button
-          type="button"
-          className="paper-dictionary-more paper-dictionary-credits-toggle"
+        <Button
+          tone="quiet"
+          size="sm"
+          className="paper-dictionary-text-toggle paper-dictionary-credits-toggle"
           {...iconMotionInput}
           aria-expanded={creditsOpen}
           aria-controls={creditsId}
           onClick={() => setCreditsOpen((value) => !value)}
         >
-          <span>署名与隐私</span>
+          署名与隐私
           <DisclosureIcon size={12} expanded={creditsOpen} />
-        </button>
+        </Button>
         <div id={creditsId} className="paper-dictionary-credits-body" hidden={!creditsOpen}>
           <p className="paper-dictionary-attribution">
             {result?.attribution || 'Open Dictionary / Wiktionary 衍生数据，含模型生成释义'}

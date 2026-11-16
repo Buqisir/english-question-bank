@@ -1,0 +1,187 @@
+[
+ {
+  "name": "草稿卷提示：在 role=status / aria-live=polite 的播报区里",
+  "pass": true,
+  "value": "- status:\n  - text: 题组已移出\n  - button \"撤销\""
+ },
+ {
+  "name": "草稿卷提示：一路 Tab 能到「撤销」",
+  "pass": true,
+  "value": {
+   "tabs": 1,
+   "from": "更多题组操作",
+   "reached": {
+    "tag": "button",
+    "cls": "eqb-button eqb-toast-action",
+    "name": "撤销",
+    "expanded": null,
+    "href": null,
+    "focusVisible": true,
+    "rowBg": null,
+    "inToast": true
+   }
+  }
+ },
+ {
+  "name": "草稿卷提示：焦点在「撤销」上，过了 8 秒还在",
+  "pass": true,
+  "value": null
+ },
+ {
+  "name": "草稿卷提示：Esc 收起，焦点回到进提示之前那一处（不丢到 body）",
+  "pass": true,
+  "value": {
+   "tag": "button",
+   "cls": "eqb-button",
+   "name": "更多题组操作",
+   "expanded": "false",
+   "href": null,
+   "focusVisible": true,
+   "rowBg": null,
+   "inToast": false
+  }
+ },
+ {
+  "name": "接着做：整行目标是 <a href>，读屏名字照原来的 aria-label",
+  "pass": true,
+  "value": {
+   "tag": "a",
+   "name": "继续组卷：1115 英语草稿卷，已选 2 个题组",
+   "href": "?view=draft-paper&draftPaperId=draft-paper-adb72e02-e141-4885-91d7-a08429faaacd"
+  }
+ },
+ {
+  "name": "接着做：读屏树",
+  "pass": true,
+  "value": "- list:\n  - listitem:\n    - link \"继续组卷：1115 英语草稿卷，已选 2 个题组\":\n      - /url: \"?view=draft-paper&draftPaperId=draft-paper-adb72e02-e141-4885-91d7-a08429faaacd\"\n    - text: 1115 英语草稿卷 2 题组 刚刚 继续组卷"
+ },
+ {
+  "name": "接着做：键盘焦点在整行目标上，整行垫桌色",
+  "pass": true,
+  "value": {
+   "tag": "a",
+   "cls": "eqb-row-hit",
+   "name": "继续组卷：1115 英语草稿卷，已选 2 个题组",
+   "expanded": null,
+   "href": "?view=draft-paper&draftPaperId=draft-paper-adb72e02-e141-4885-91d7-a08429faaacd",
+   "focusVisible": true,
+   "rowBg": "rgb(230, 237, 240)",
+   "inToast": false
+  }
+ },
+ {
+  "name": "接着做：Enter 走站内跳转到草稿卷",
+  "pass": true,
+  "value": "http://127.0.0.1:5365/?view=draft-paper&draftPaperId=draft-paper-adb72e02-e141-4885-91d7-a08429faaacd"
+ },
+ {
+  "name": "最近上新：整行目标是按钮，名字是年份 + 卷名，aria-expanded=false",
+  "pass": true,
+  "value": {
+   "tag": "button",
+   "cls": "eqb-row-hit",
+   "name": "2026 年 2026年新课标Ⅰ卷",
+   "expanded": "false",
+   "href": null,
+   "focusVisible": true,
+   "rowBg": "rgb(230, 237, 240)",
+   "inToast": false
+  }
+ },
+ {
+  "name": "最近上新：下一站是「看整卷」（次要键分开到达）",
+  "pass": true,
+  "value": {
+   "tag": "button",
+   "cls": "eqb-button",
+   "name": "看整卷",
+   "expanded": null,
+   "href": null,
+   "focusVisible": true,
+   "rowBg": "rgb(230, 237, 240)",
+   "inToast": false
+  }
+ },
+ {
+  "name": "最近上新：Enter 展开（is-expanded、aria-expanded=true）",
+  "pass": true,
+  "value": null
+ },
+ {
+  "name": "展开后 Tab：看整卷 → 题组行整行目标（链接）→「+」→「⋯」",
+  "pass": true,
+  "value": [
+   "button:看整卷",
+   "a:A篇，打开详情",
+   "button:加入草稿卷",
+   "button:更多操作",
+   "a:B篇，打开详情",
+   "a:已加入，打开草稿卷"
+  ]
+ },
+ {
+  "name": "点题组行的「⋯」不打开详情（只开菜单）",
+  "pass": true,
+  "value": "http://127.0.0.1:5365/"
+ },
+ {
+  "name": "题组行整行目标按 Enter 去详情",
+  "pass": true,
+  "value": "http://127.0.0.1:5365/?view=detail&groupId=group-2026-i-reading-a"
+ },
+ {
+  "name": "浏览页卷行：整行目标能拿到键盘焦点（原来键盘到不了）",
+  "pass": true,
+  "value": {
+   "tag": "button",
+   "cls": "eqb-row-hit",
+   "name": "2026 年 2026年1月浙江卷",
+   "expanded": "false",
+   "href": null,
+   "focusVisible": true,
+   "rowBg": "rgb(230, 237, 240)",
+   "inToast": false
+  }
+ },
+ {
+  "name": "浏览页卷行：Enter 展开",
+  "pass": true,
+  "value": null
+ },
+ {
+  "name": "浏览页卷行：空格收起",
+  "pass": true,
+  "value": null
+ },
+ {
+  "name": "搜索结果卷行：整行目标 → 下一站「看整卷」，行首小箭头不进 Tab 顺序",
+  "pass": true,
+  "value": [
+   {
+    "tag": "button",
+    "cls": "eqb-row-hit",
+    "name": "2026 年 2026年新课标Ⅰ卷",
+    "expanded": "false",
+    "href": null,
+    "focusVisible": true,
+    "rowBg": "rgb(230, 237, 240)",
+    "inToast": false
+   },
+   {
+    "tag": "button",
+    "cls": "eqb-button",
+    "name": "看整卷",
+    "expanded": null,
+    "href": null,
+    "focusVisible": true,
+    "rowBg": "rgb(230, 237, 240)",
+    "inToast": false
+   }
+  ]
+ },
+ {
+  "name": "搜索结果卷行：读屏树（小箭头对读屏藏着）",
+  "pass": true,
+  "value": "- button \"2026 年 2026年新课标Ⅰ卷\"\n- strong: 2026年新课标Ⅰ卷\n- text: 真题\n- paragraph: 命中 4 个篇章\n- paragraph: 推荐理由：2026 全国新课标Ⅰ · A 篇\n- button \"看整卷\""
+ }
+]

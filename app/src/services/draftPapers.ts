@@ -1,5 +1,5 @@
 import type { DraftPaper, DraftPaperSummary, DraftPrintForm } from '../domain/questionBank'
-import { directDownloadTarget, saveBlobToTarget, type FileSaveTarget } from './fileDownload.ts'
+import { directDownloadTarget, normalizeDownloadFileName, saveBlobToTarget, type FileSaveTarget } from './fileDownload.ts'
 import { apiPath, decodeHeaderValue, errorMessageFromResponse as readError } from './httpClient.ts'
 import { PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../shared/paperPdfProducts.mjs'
 
@@ -127,6 +127,25 @@ export async function fetchDraftPaperPagination(
   }
 }
 
+// 走查卡点 4（Owner 2026-11-14）：这份草稿四款 PDF 各能不能出。判定在服务器
+// （draftPaperStore.preparePaperProduct，和预览、下载同一套），不排版；
+// reason 是服务器那条判定的原话，code 标明是哪一条（可能为 null）。
+export type DraftPaperEditionAvailability = {
+  edition: PaperPdfEdition
+  available: boolean
+  code: string | null
+  reason: string | null
+}
+
+export async function fetchDraftPaperEditionAvailability(id: string): Promise<DraftPaperEditionAvailability[]> {
+  const response = await fetch(apiPath(`/api/draft-papers/${encodeURIComponent(id)}/pdf-editions`))
+  if (!response.ok) {
+    throw new Error(await readError(response, `Failed to load PDF editions: ${response.status}`))
+  }
+  const data = (await response.json()) as { editions: DraftPaperEditionAvailability[] }
+  return data.editions
+}
+
 export async function fetchDraftEconomyFeasibility(id: string): Promise<{ insufficient: boolean }> {
   const response = await fetch(apiPath(`/api/draft-papers/${encodeURIComponent(id)}/pagination?check=economy8`))
   if (!response.ok) {
@@ -243,7 +262,7 @@ export async function downloadDraftPaperPdf(
   draftPaperId: string,
   edition: PaperPdfEdition,
   target: FileSaveTarget = directDownloadTarget(),
-): Promise<{ crossingGroupCount: number; splitOptionBankCount: number; fontSizePt: number }> {
+): Promise<{ fileName: string; crossingGroupCount: number; splitOptionBankCount: number; fontSizePt: number }> {
   const response = await fetch(apiPath(`/api/draft-papers/${encodeURIComponent(draftPaperId)}/print-pdf`), {
     body: JSON.stringify({ edition }),
     headers: { 'content-type': 'application/json' },
@@ -257,6 +276,8 @@ export async function downloadDraftPaperPdf(
   const fileName = decodeHeaderValue(response.headers.get('x-file-name')) || defaultFileName
   await saveBlobToTarget(blob, fileName, target)
   return {
+    // 提示行「已下载：文件名」用（走查第四节第 8 条）；和浏览器真正存下的名字同一套清洗。
+    fileName: normalizeDownloadFileName(fileName),
     fontSizePt: Number(response.headers.get('x-paper-font-size-pt') || 0),
     crossingGroupCount: Number(response.headers.get('x-paper-crossing-group-count') || 0),
     splitOptionBankCount: Number(response.headers.get('x-paper-split-option-bank-count') || 0),

@@ -1,0 +1,330 @@
+{
+  "mode": "after2",
+  "places": {
+    "首页结果行": {
+      "groupId": "group-2026-i-reading-a",
+      "paper": {
+        "paper": {
+          "x": 1003,
+          "w": 101,
+          "h": 28
+        },
+        "link": {
+          "x": 1005,
+          "w": 55,
+          "h": 24
+        },
+        "undo": {
+          "x": 1060,
+          "w": 42,
+          "h": 24
+        },
+        "linkTextLeftInPaper": 10,
+        "linkTextToUndoText": 16,
+        "tag": "a",
+        "ariaLabel": "已加入，打开草稿卷",
+        "text": "已加入",
+        "href": "/?view=draft-paper&draftPaperId=draft-paper-c7d6e6fc-6905-4548-b494-cb8d190441f4&focusGroupId=group-2026-i-reading-a",
+        "linkColor": "rgb(27, 43, 51)",
+        "linkBg": "rgba(0, 0, 0, 0)",
+        "paperBg": "rgb(255, 255, 255)"
+      },
+      "hoverBg": "rgb(230, 237, 240)",
+      "afterUndo": {
+        "text": "已从草稿卷移出",
+        "draft": []
+      },
+      "open": {
+        "view": "draft-paper",
+        "draftPaperId": "draft-paper-c7d6e6fc-6905-4548-b494-cb8d190441f4",
+        "focusGroupId": "group-2026-i-reading-a",
+        "groupToolsOnPage": true,
+        "draftApi": [
+          "group-2026-i-reading-a"
+        ],
+        "urlBefore": "/",
+        "msToWorkbench": 15118
+      },
+      "back": {
+        "url": "/",
+        "draft": [
+          "group-2026-i-reading-a"
+        ],
+        "keyText": "已加入",
+        "undoPresent": 0,
+        "otherGroupAddUndo": {
+          "text": "已从草稿卷移出",
+          "draft": [
+            "group-2026-i-reading-a"
+          ]
+        }
+      },
+      "hrefInNewTab": {
+        "href": "/?view=draft-paper&draftPaperId=draft-paper-c7d6e6fc-6905-4548-b494-cb8d190441f4&focusGroupId=group-2026-i-reading-a",
+        "view": "draft-paper",
+        "draftPaperId": "draft-paper-c7d6e6fc-6905-4548-b494-cb8d190441f4",
+        "focusGroupId": "group-2026-i-reading-a",
+        "groupToolsOnPage": true,
+        "draftApi": [
+          "group-2026-i-reading-a"
+        ]
+      }
+    },
+    "详情页": {
+      "groupId": "group-2026-i-reading-c",
+      "paper": {
+        "paper": {
+          "x": 316,
+          "w": 101,
+          "h": 32
+        },
+        "link": {
+          "x": 318,
+          "w": 55,
+          "h": 28
+        },
+        "undo": {
+          "x": 373,
+          "w": 42,
+          "h": 28
+        },
+        "linkTextLeftInPaper": 10,
+        "linkTextToUndoText": 16,
+        "tag": "a",
+        "ariaLabel": "已加入，打开草稿卷",
+        "text": "已加入",
+        "href": "/?view=draft-paper&draftPaperId=draft-paper-c7d6e6fc-6905-4548-b494-cb8d190441f4&focusGroupId=group-2026-i-reading-c",
+        "linkColor": "rgb(27, 43, 51)",
+        "linkBg": "rgba(0, 0, 0, 0)",
+        "paperBg": "rgb(255, 255, 255)"
+      },
+      "hoverBg": "rgb(230, 237, 240)",
+      "afterUndo": {
+        "text": "加入草稿卷 已从草稿卷移出",
+        "draft": []
+      },
+      "open": {
+        "view": "draft-paper",
+        "draftPaperId": "draft-paper-c7d6e6fc-6905-4548-b494-cb8d190441f4",
+        "focusGroupId": "group-2026-i-reading-c",
+        "groupToolsOnPage": true,
+        "draftApi": [
+          "group-2026-i-reading-c"
+        ],
+        "urlBefore": "/?view=detail&groupId=group-2026-i-reading-c",
+        "msToWorkbench": 14174
+      },
+      "back": {
+        "url": "/?view=detail&groupId=group-2026-i-reading-c",
+        "draft": [
+          "group-2026-i-reading-c"
+        ],
+        "keyText": "已加入",
+        "undoPresent": 0
+      }
+    },
+    "相似篇章": {
+      "groupId": "group-2026-i-reading-c",
+      "paper": {
+        "paper": {
+          "x": 417,
+          "w": 101,
+          "h": 28
+        },
+        "link": {
+          "x": 419,
+          "w": 55,
+          "h": 24
+        },
+        "undo": {
+          "x": 474,
+          "w": 42,
+          "h": 24
+        },
+        "linkTextLeftInPaper": 10,
+        "linkTextToUndoText": 16,
+        "tag": "a",
+        "ariaLabel": "已加入，打开草稿卷",
+        "text": "已加入",
+        "href": "/?view=draft-paper&draftPaperId=draft-paper-c7d6e6fc-6905-4548-b494-cb8d190441f4&focusGroupId=group-2026-i-reading-c",
+        "linkColor": "rgb(27, 43, 51)",
+        "linkBg": "rgba(0, 0, 0, 0)",
+        "paperBg": "rgb(255, 255, 255)"
+      },
+      "hoverBg": "rgb(230, 237, 240)",
+      "afterUndo": {
+        "text": "加入草稿卷 已从草稿卷移出",
+        "draft": []
+      },
+      "open": {
+        "view": "draft-paper",
+        "draftPaperId": "draft-paper-c7d6e6fc-6905-4548-b494-cb8d190441f4",
+        "focusGroupId": "group-2026-i-reading-c",
+        "groupToolsOnPage": true,
+        "draftApi": [
+          "group-2026-i-reading-c"
+        ],
+        "urlBefore": "/",
+        "msToWorkbench": 14002
+      },
+      "back": {
+        "url": "/",
+        "draft": [
+          "group-2026-i-reading-c"
+        ],
+        "keyText": "(加入键不在页面上)",
+        "undoPresent": 0
+      }
+    },
+    "整卷预览": {
+      "groupId": "group-2026-i-reading-b",
+      "paper": {
+        "paper": {
+          "x": 1053.5,
+          "w": 111,
+          "h": 35.2
+        },
+        "link": {
+          "x": 1055.7,
+          "w": 60.5,
+          "h": 30.8
+        },
+        "undo": {
+          "x": 1116.2,
+          "w": 46.2,
+          "h": 30.8
+        },
+        "linkTextLeftInPaper": 11,
+        "linkTextToUndoText": 17.6,
+        "tag": "a",
+        "ariaLabel": "已加入，打开草稿卷",
+        "text": "已加入",
+        "href": "/?view=draft-paper&paperId=paper-2026-i&draftPaperId=draft-paper-c7d6e6fc-6905-4548-b494-cb8d190441f4&focusGroupId=group-2026-i-reading-b",
+        "linkColor": "rgb(27, 43, 51)",
+        "linkBg": "rgba(0, 0, 0, 0)",
+        "paperBg": "rgb(255, 255, 255)"
+      },
+      "hoverBg": "rgb(230, 237, 240)",
+      "afterUndo": {
+        "text": "加入草稿卷 已从草稿卷移出",
+        "draft": []
+      },
+      "open": {
+        "view": "draft-paper",
+        "draftPaperId": "draft-paper-c7d6e6fc-6905-4548-b494-cb8d190441f4",
+        "focusGroupId": "group-2026-i-reading-b",
+        "groupToolsOnPage": true,
+        "draftApi": [
+          "group-2026-i-reading-b"
+        ],
+        "urlBefore": "/?view=paper-browse&paperId=paper-2026-i",
+        "msToWorkbench": 13937
+      },
+      "back": {
+        "url": "/?view=paper-browse&paperId=paper-2026-i",
+        "draft": [
+          "group-2026-i-reading-b"
+        ],
+        "keyText": "已加入",
+        "undoPresent": 0
+      }
+    }
+  },
+  "keyboard": {
+    "tabToAdd": "button 加入草稿卷",
+    "afterEnterAdd": "button 撤回",
+    "shiftTab": "a 已加入，打开草稿卷",
+    "focusRing": "2px solid rgb(41, 66, 77) offset 2px",
+    "tabBackToUndo": "button 撤回",
+    "afterEnterUndo": "button 加入草稿卷",
+    "draftAfterUndo": [],
+    "doubleEnter": {
+      "url": "/",
+      "keyText": "已从草稿卷移出",
+      "focused": "button 加入草稿卷",
+      "draft": []
+    },
+    "enterOnLink": {
+      "view": "draft-paper",
+      "draftPaperId": "draft-paper-c7d6e6fc-6905-4548-b494-cb8d190441f4",
+      "focusGroupId": "group-2026-i-reading-d",
+      "groupToolsOnPage": true,
+      "draftApi": [
+        "group-2026-i-reading-d"
+      ]
+    }
+  },
+  "errors": {
+    "addFail": {
+      "text": "没加入：boom",
+      "draft": []
+    },
+    "undoFail": {
+      "text": "已加入 撤回 没撤回：boom",
+      "draft": [
+        "group-2026-i-reading-c"
+      ],
+      "linkStill": 1
+    }
+  },
+  "timings": [],
+  "narrow": {
+    "text": "A篇 推荐理由：2026 E2E · A 篇 已加入 撤回 已加入草稿卷",
+    "paper": {
+      "paper": {
+        "x": 221,
+        "w": 101,
+        "h": 28
+      },
+      "link": {
+        "x": 223,
+        "w": 55,
+        "h": 24
+      },
+      "undo": {
+        "x": 278,
+        "w": 42,
+        "h": 24
+      },
+      "linkTextLeftInPaper": 10,
+      "linkTextToUndoText": 16,
+      "tag": "a",
+      "ariaLabel": "已加入，打开草稿卷",
+      "text": "已加入",
+      "href": "/?view=draft-paper&draftPaperId=draft-paper-c7d6e6fc-6905-4548-b494-cb8d190441f4&focusGroupId=group-2026-i-reading-a",
+      "linkColor": "rgb(27, 43, 51)",
+      "linkBg": "rgba(0, 0, 0, 0)",
+      "paperBg": "rgb(255, 255, 255)"
+    },
+    "overflowX": false
+  },
+  "dialogs": [],
+  "consoleErrors": [
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 409 (Conflict)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 409 (Conflict)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+    "console: Failed to load resource: the server responded with a status of 500 (Internal Server Error)"
+  ]
+}

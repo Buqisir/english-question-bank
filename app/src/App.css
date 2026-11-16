@@ -120,13 +120,13 @@
 .topbar-avatar {
   width: 28px;
   height: 28px;
-  border-radius: 50%;
-  background: var(--eqb-color-identity, #2C6E56);
-  color: #fff;
-  display: grid;
-  place-items: center;
-  font-size: 12px;
-  font-weight: 600;
+  /* 圆角方块，和浏览器图标同形（BRAND.md §7 第 105 条）。圆角按圆角族取：28px 高按「按高度选档」用 control 8px，
+   * 约是边长的 29%，比浏览器图标的 22% 略圆一点（放大 4 倍对照见 design/components-2026-11-13/migrate-chip-r2/README.md，
+   * 原寸下差别很小）。6px 不在圆角族里（DESIGN.md §5、scripts/verify-radius-family.mjs）。 */
+  border-radius: var(--eqb-radius-control);
+  display: block;
+  flex-shrink: 0;
+  object-fit: cover;
 }
 
 /* ui-shell-unify: unified AppTopbar vocabulary. `.topbar-sub` is the
@@ -144,26 +144,11 @@
   min-width: 0;
 }
 
+/* 「返回找题」是共用按钮构件（shared-ui/Button，次要灰小号），样子归构件管；这里只管它在顶栏里的位置。
+ * 构件左边有 8px 内边距，往左让出同样多，箭头仍和页面内容左边对齐，悬停底伸到对齐线外面。 */
 .topbar-back {
   flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: none;
-  border: none;
-  padding: 0 8px 0 0;
-  margin: 0;
-  min-height: 28px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--muted);
-  cursor: pointer;
-  transition: color var(--motion-fast) var(--ease-hover);
-}
-
-.topbar-back:hover:not(:disabled) {
-  color: var(--ink);
+  margin-inline-start: calc(-1 * var(--eqb-space-2));
 }
 
 .topbar-sub .topbar-brand-title {
@@ -220,6 +205,15 @@
   color: var(--ink);
 }
 
+/* 点击区域补到 24 高（WCAG 2.2 2.5.8，清点 button-08 量到 111×18；构件收尾 2026-11-15）：上下各透明外扩 3px（(24 − 18) / 2），
+ * 用等量的负外边距抵掉，字的位置和样子不变（底是透明的）。不用 ::after 外扩：这个键要 overflow: hidden 打省略号，
+ * 伸到框外的伪元素点不到。代价是键盘焦点框跟着高 6px。24px 没有变量，缺口见 docs/design-gaps.md。
+ * 覆盖：本条和上面 .topbar-page-title-editable 同特指度 (0,1,0)，写在后面赢它的 padding: 0。 */
+.topbar-page-title-editable {
+  padding-block: 3px;
+  margin-block: -3px;
+}
+
 .topbar-page-title-pencil {
   flex-shrink: 0;
   opacity: 0;
@@ -234,7 +228,7 @@
 .topbar-page-title-input {
   background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   color: var(--ink-strong);
   font: inherit;
   font-size: 13px;
@@ -365,7 +359,6 @@ button:disabled {
 .ghost-button,
 .add-button,
 .detail-button,
-.back-button,
 .save-button,
 .export-button {
   display: inline-flex;
@@ -373,7 +366,7 @@ button:disabled {
   justify-content: center;
   gap: 6px;
   min-height: 36px;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 0 12px;
   font-size: 13px;
   font-weight: 500;
@@ -432,8 +425,7 @@ button:disabled {
   background: var(--surface-strong);
 }
 
-.detail-button,
-.back-button {
+.detail-button {
   color: var(--muted);
   background: transparent;
   border: 0;
@@ -444,15 +436,13 @@ button:disabled {
 .ghost-button:focus-visible,
 .add-button:focus-visible,
 .detail-button:focus-visible,
-.back-button:focus-visible,
 .save-button:focus-visible,
 .export-button:focus-visible {
   outline: var(--focus-ring);
   outline-offset: 2px;
 }
 
-.detail-button:hover,
-.back-button:hover {
+.detail-button:hover {
   color: var(--ink);
   background: var(--surface-strong);
 }
@@ -502,14 +492,8 @@ button:disabled {
   font-size: 16px;
 }
 
-.field {
-  display: grid;
-  gap: 7px;
-  margin-bottom: 16px;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 700;
-}
+/* 全站旧的 .field 表单样式（标签 13 / 700、框 36 高、柔光焦点圈）只剩录题面板在用，字段构件第二轮（2026-11-15）
+ * 录题面板换成 shared-ui/Field 以后没人用了，删掉；录题面板里字段之间的距离见下面 .entry-form .eqb-field。 */
 
 .search-field {
   display: flex;
@@ -518,7 +502,7 @@ button:disabled {
   height: 36px;
   padding: 0 10px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--surface-strong);
   color: var(--muted);
   transition: border-color var(--motion-base) var(--ease-hover);
@@ -526,49 +510,16 @@ button:disabled {
 
 .search-field:focus-within {
   border-color: var(--line-strong);
-  box-shadow: 0 0 0 3px rgba(31, 31, 29, 0.12);
+  box-shadow: 0 0 0 3px rgb(27 43 51 / 0.12);
   outline: none;
 }
 
-.search-field input,
-.field input,
-.field select,
-.field textarea {
+.search-field input {
   width: 100%;
   border: 0;
   outline: 0;
   color: var(--ink);
   background: transparent;
-}
-
-.field input,
-.field select,
-.field textarea {
-  padding: 0 10px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--surface-strong);
-  transition: border-color var(--motion-base) var(--ease-hover);
-}
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-  border-color: var(--line-strong);
-  box-shadow: 0 0 0 3px rgba(31, 31, 29, 0.12);
-  outline: none;
-}
-
-.field input,
-.field select {
-  height: 36px;
-}
-
-.field textarea {
-  min-height: 88px;
-  padding-top: 10px;
-  resize: vertical;
-  line-height: 1.5;
 }
 
 .search-field input {
@@ -600,14 +551,6 @@ button:disabled {
   margin-left: 0;
 }
 
-.version-toggle {
-  gap: 2px;
-  padding: 3px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--surface-strong);
-}
-
 .version-toggle button {
   min-height: 28px;
   border-radius: 4px;
@@ -637,9 +580,7 @@ button:disabled {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--panel);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  box-shadow: none;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -654,12 +595,6 @@ button:disabled {
   color: var(--muted);
   font-size: 12px;
   font-weight: 700;
-}
-
-.source-line span {
-  padding: 3px 7px;
-  border-radius: 999px;
-  background: var(--surface-strong);
 }
 
 .group-card h3 {
@@ -814,47 +749,17 @@ button:disabled {
   gap: 0;
 }
 
-.detail-view > .back-button {
-  justify-self: start;
-  min-height: 0;
-  margin: 0 0 12px;
-  padding: 0;
-  font-size: 13px;
-  color: var(--muted);
-}
+/* 详情页「返回找题」原来的 .back-button 换成了 Button（构件厂第 4 步，2026-11-13），
+ * 排布写在 QuestionGroupDetailView.css 的 .detail-view > .detail-back。 */
 
-.detail-view > .back-button:hover {
-  color: var(--ink);
-  background: transparent;
-}
-
-.detail-message {
-  margin: 0;
-  padding: 14px;
-  border: 1px dashed var(--line-strong);
-  border-radius: 8px;
-  color: var(--muted);
-  background: var(--panel);
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.detail-message.error {
-  border-color: transparent;
-  color: var(--coral-text);
-  background: var(--coral-soft);
-}
+/* 详情页「正在读取题组详情」「读取失败」原来是 .detail-message 虚线框（出错时珊瑚底红字），
+ * 构件收尾（2026-11-15）换成共用 Notice（DESIGN.md §5「Notices 提示条」：一行灰字加图标，没有底和边），这里的样子删了。 */
 
 .reading-ai-actions {
   display: grid;
   grid-template-columns: minmax(0, 1fr) max-content;
   gap: 10px;
   align-items: stretch;
-}
-
-.reading-ai-actions .detail-message {
-  display: flex;
-  align-items: center;
 }
 
 .detail-hero,
@@ -1073,15 +978,6 @@ button:disabled {
   gap: 7px;
 }
 
-.detail-facts span {
-  padding: 4px 8px;
-  border-radius: 999px;
-  color: var(--ink);
-  background: var(--surface-strong);
-  font-size: 12px;
-  font-weight: 800;
-}
-
 .passage-text {
   overflow: auto;
   max-height: 340px;
@@ -1149,15 +1045,6 @@ button:disabled {
   gap: 6px;
 }
 
-.question-topline span {
-  padding: 3px 7px;
-  border-radius: 999px;
-  color: var(--muted);
-  background: var(--surface-strong);
-  font-size: 12px;
-  font-weight: 800;
-}
-
 .question-stem {
   margin: 0;
   color: var(--ink-strong);
@@ -1206,7 +1093,7 @@ button:disabled {
   display: grid;
   gap: 9px;
   padding: 12px;
-  border: 1px solid rgba(106, 106, 100, 0.22);
+  border: 1px solid rgb(90 108 117 / 0.22);
   border-radius: 8px;
   background: var(--surface);
 }
@@ -1293,9 +1180,9 @@ button:disabled {
   display: grid;
   gap: 9px;
   padding: 12px;
-  border: 1px solid rgba(106, 106, 100, 0.22);
+  border: 1px solid rgb(90 108 117 / 0.22);
   border-radius: 8px;
-  background: rgba(106, 106, 100, 0.08);
+  background: rgb(90 108 117 / 0.08);
 }
 
 .reading-profile-head,
@@ -1343,7 +1230,7 @@ button:disabled {
   gap: 2px;
   padding: 7px 8px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--surface);
   color: var(--ink);
   font-size: 12px;
@@ -1353,12 +1240,6 @@ button:disabled {
 .difficulty-profile-grid strong {
   color: var(--muted);
   font-size: 11px;
-}
-
-.difficulty-profile-score em {
-  padding: 4px 7px;
-  border-radius: 999px;
-  background: var(--surface-strong);
 }
 
 .synonym-difficulty-card {
@@ -1422,13 +1303,6 @@ button:disabled {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-}
-
-.synonym-difficulty-flags span,
-.synonym-difficulty-flags strong {
-  padding: 4px 7px;
-  border-radius: 999px;
-  background: var(--surface-strong);
 }
 
 .synonym-difficulty-flags strong {
@@ -1514,22 +1388,6 @@ button:disabled {
   gap: 8px;
 }
 
-.analysis-disclosure-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  align-self: flex-start;
-  padding: 4px 10px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: transparent;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: color var(--motion-base) var(--ease-hover), background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover);
-}
-
 .analysis-disclosure-toggle:hover {
   color: var(--ink);
   background: var(--surface-strong);
@@ -1565,15 +1423,6 @@ button:disabled {
   flex-wrap: wrap;
   justify-content: center;
   gap: 7px;
-}
-
-.paper-meta span {
-  padding: 4px 8px;
-  border-radius: 999px;
-  color: var(--ink);
-  background: var(--surface-strong);
-  font-size: 12px;
-  font-weight: 800;
 }
 
 .paper-section {
@@ -1696,17 +1545,6 @@ button:disabled {
   font-weight: 800;
 }
 
-.saved-paper-heading strong {
-  display: grid;
-  place-items: center;
-  min-width: 26px;
-  height: 26px;
-  border-radius: 999px;
-  color: #ffffff;
-  background: var(--ink-strong);
-  font-size: 12px;
-}
-
 .saved-paper-note {
   margin: 0;
   line-height: 1.45;
@@ -1743,79 +1581,9 @@ button:disabled {
   border: 1px solid var(--line);
 }
 
-/* Native modal focus/inert behavior, retaining the existing full-screen
-   backdrops and their individual surface/entrance styles. */
-.entry-backdrop,
-.draft-modal-backdrop {
-  box-sizing: border-box;
-  border: 0;
-  color: inherit;
-  height: 100%;
-  margin: 0;
-  max-height: none;
-  max-width: none;
-  width: 100%;
-}
-
-.entry-backdrop::backdrop,
-.draft-modal-backdrop::backdrop {
-  background: transparent;
-}
-
-.entry-backdrop:not([open]),
-.draft-modal-backdrop:not([open]) {
-  display: none;
-}
-
-.entry-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 30;
-  padding: 0;
-  display: flex;
-  justify-content: flex-end;
-  background: rgba(30, 30, 28, 0.3);
-}
-
-.entry-panel {
-  display: flex;
-  flex-direction: column;
-  width: min(780px, 100vw);
-  height: 100vh;
-  background: var(--panel);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-}
-
-.entry-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 22px 24px;
-  border-bottom: 1px solid var(--line);
-}
-
-.entry-header-hint {
-  display: block;
-  margin-top: 4px;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 400;
-}
-
-.entry-header-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-
-.entry-header h2 {
-  margin: 0;
-  color: var(--ink-strong);
-  font-size: 22px;
-  letter-spacing: 0;
-}
+/* 录题面板（.entry-backdrop / .entry-panel / .entry-header*）和草稿卷「保存 PDF 到个人空间」（.draft-modal-backdrop）
+   换成共用 Dialog（shared-ui/Dialog.tsx，构件厂 2026-11-14）：原生 <dialog> 的铺满、遮罩、面板、标题行这几条删掉，
+   录题面板正文的 .entry-form 留下 fieldset 那几条，滚动和内边距归 dialog.css 的 .eqb-dialog-body。 */
 
 .icon-button {
   display: grid;
@@ -1823,7 +1591,7 @@ button:disabled {
   width: 32px;
   height: 32px;
   border: 0;
-  border-radius: 6px;
+  border-radius: 8px;
   color: var(--muted);
   background: transparent;
   transition: color var(--motion-base) var(--ease-hover), background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover);
@@ -1832,11 +1600,6 @@ button:disabled {
 .icon-button:hover {
   color: var(--ink);
   background: var(--surface-strong);
-}
-
-.entry-form {
-  overflow: auto;
-  padding: 20px 24px 24px;
 }
 
 .entry-form fieldset {
@@ -1921,13 +1684,14 @@ button:disabled {
   gap: 0 12px;
 }
 
-.entry-question-grid .field {
-  margin-bottom: 12px;
+/* 录题面板的字段（shared-ui/Field）上下隔 16，小题卡片里隔 12，是原来 .field 的 margin-bottom 搬过来的（§8 组与组 16）。
+ * Explicit-Cascade：后一条 (0,2,0) 写在后面，同档按先后赢，盖前一条。 */
+.entry-form .eqb-field {
+  margin-bottom: var(--eqb-space-4);
 }
 
-.field input[type='file'] {
-  height: auto;
-  padding: 10px;
+.entry-question-grid .eqb-field {
+  margin-bottom: var(--eqb-space-3);
 }
 
 .field-note {
@@ -1966,19 +1730,6 @@ button:disabled {
   font-size: 12px;
   font-style: normal;
   font-weight: 700;
-}
-
-.bundle-status {
-  flex: 0 0 auto;
-  min-height: 26px;
-  padding: 5px 9px;
-  border-radius: 999px;
-  color: var(--ink);
-  background: var(--surface-strong);
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1.25;
-  white-space: nowrap;
 }
 
 .bundle-status.single_file_ready,
@@ -2326,13 +2077,6 @@ button:disabled {
   white-space: nowrap;
 }
 
-.draft-answer-badge,
-.draft-option-count {
-  padding: 3px 6px;
-  border-radius: 999px;
-  white-space: nowrap;
-}
-
 .draft-answer-badge {
   color: var(--mint-text);
   background: var(--mint-soft);
@@ -2388,17 +2132,6 @@ button:disabled {
   margin: 0;
   padding: 8px 10px;
   font-size: 12px;
-}
-
-.entry-footer {
-  position: sticky;
-  bottom: 0;
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  padding: 14px 0 0;
-  border-top: 1px solid var(--line);
-  background: var(--panel);
 }
 
 @media (max-width: 1180px) {
@@ -2577,7 +2310,7 @@ button:disabled {
 .calibration-watch-flag {
   margin: 0;
   padding: 5px 8px;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 12px;
   font-weight: 700;
   line-height: 1.4;
@@ -2599,15 +2332,6 @@ button:disabled {
   gap: 5px;
 }
 
-.calibration-reasons span {
-  padding: 3px 7px;
-  border-radius: 999px;
-  color: var(--muted);
-  background: var(--surface-strong);
-  font-size: 11px;
-  font-weight: 800;
-}
-
 /* Difficulty Review Panel */
 .difficulty-review-panel {
   display: grid;
@@ -2623,18 +2347,6 @@ button:disabled {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface-strong);
-}
-
-.difficulty-review-stats span {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: var(--surface);
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
 }
 
 .difficulty-review-stats span strong {
@@ -2685,14 +2397,6 @@ button:disabled {
   color: var(--muted);
   font-size: 11px;
   font-weight: 700;
-}
-
-.review-q-flag {
-  display: inline-flex;
-  padding: 2px 6px;
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 800;
 }
 
 .review-q-flag.high-ceiling {
@@ -2786,18 +2490,6 @@ button:disabled {
   gap: 6px;
 }
 
-.calibration-report-chips span {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  background: var(--surface-strong);
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 700;
-}
-
 .calibration-report-chips span strong {
   color: var(--ink-strong);
   font-size: 13px;
@@ -2826,7 +2518,7 @@ button:disabled {
   align-items: center;
   padding: 5px 8px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--surface-strong);
   text-decoration: none;
   color: inherit;
@@ -2846,16 +2538,6 @@ button:disabled {
 .calibration-report-watch-item span {
   color: var(--muted);
   font-weight: 700;
-}
-
-.calibration-report-watch-item em {
-  padding: 2px 6px;
-  border-radius: 999px;
-  background: var(--amber-soft);
-  color: var(--amber-text);
-  font-size: 10px;
-  font-style: normal;
-  font-weight: 800;
 }
 
 /* Paper Blocks Outline */
@@ -2903,7 +2585,7 @@ button:disabled {
   height: 28px;
   padding: 0 6px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--surface-strong);
   color: var(--ink);
   font-size: 13px;
@@ -3048,7 +2730,7 @@ button:disabled {
   height: 32px;
   padding: 0 8px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--surface-strong);
   color: var(--ink);
   font-size: 13px;
@@ -3086,7 +2768,7 @@ button:disabled {
   height: 28px;
   padding: 0 6px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--surface-strong);
   color: var(--ink);
   font-size: 13px;
@@ -3144,14 +2826,14 @@ button:disabled {
   font-size: clamp(22px, 2.4vw, 28px);
   font-weight: 600;
   margin: 0;
-  color: #1E1E1C;
+  color: var(--desk-ink);
   letter-spacing: 0.02em;
 }
 
 .concierge-subhead {
   margin: 0;
   font-size: 13px;
-  color: #6A6A64;
+  color: var(--desk-muted);
 }
 
 /* home-blank — the stage wrapper (原型 D + 节拍 A). `.concierge-stage-inner`
@@ -3204,38 +2886,15 @@ button:disabled {
   gap: 8px;
 }
 
+/* 构件厂第 4 步第八页：「浏览全部 N 套卷」换成 shared-ui/Button（次要灰中号带图标）。高、字号、
+   颜色、悬停、键盘焦点、禁用都交给 button.css；这里只留它在首页这一列里的摆法。
+   margin-left 用负的按钮左内边距（--eqb-space-3，12px），让图标和上面搜索框的左边对齐（原来
+   是 -8px 抵 8px 内边距）。本条和 .eqb-button 都是一个类名（0,1,0），button.css 不设 margin，
+   不冲突。 */
 .concierge-browse-entry {
-  display: inline-flex;
-  align-items: center;
   align-self: flex-start;
-  gap: 8px;
-  min-height: 32px;
-  padding: 4px 8px;
-  margin-left: -8px;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--desk-muted);
-  font: inherit;
-  font-size: 13px;
+  margin-left: calc(-1 * var(--eqb-space-3));
   font-variant-numeric: tabular-nums;
-  cursor: pointer;
-  transition: background-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
-}
-
-.concierge-browse-entry:hover:not(:disabled) {
-  background: var(--desk-hover);
-  color: var(--desk-ink);
-}
-
-.concierge-browse-entry:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
-}
-
-.concierge-browse-entry:disabled {
-  opacity: .6;
-  cursor: not-allowed;
 }
 
 .concierge-desk[data-surface='home'] .concierge-list-surface {
@@ -3261,100 +2920,28 @@ button:disabled {
   gap: 8px;
 }
 
-.concierge-browse-chip {
-  display: inline-flex;
-  align-items: center;
-  height: 28px;
-  padding: 0 12px;
-  border-radius: 999px;
-  border: 1px solid var(--eqb-color-border-subtle);
-  background: #FFFFFF;
-  color: var(--eqb-color-text-muted);
-  font-size: 13px;
-  cursor: pointer;
-}
-
-.concierge-browse-chip {
-  position: relative;
-}
-
+/* 浏览页筛选胶囊换成 shared-ui/Chip.tsx 的 ChipToggle（胶囊构件，2026-11-14）。原来的高 28、白底细边、次要灰字、
+ * 滑块停住时让出白底、选中桌色底墨字 600 都搬进 chip.css，这里只留滑块的圆角和颜色（列表的事，不是胶囊的事）。 */
 .concierge-browse-chips.fluid-hover-list {
-  --fh-radius: 999px;
+  --fh-radius: var(--eqb-radius-pill);
 }
 
 .concierge-browse-chips.fluid-hover-list::before {
   background: var(--eqb-color-desk);
 }
 
-.concierge-browse-chip[data-fluid-hover-active] {
-  background: transparent;
-  color: var(--eqb-color-text);
-}
-
-/* 选中用灰不用色：全站灰阶，强调色只留给每页最该点的那一下（BRAND.md §1.5）。 */
-.concierge-browse-chip[aria-pressed='true'] {
-  background: var(--eqb-color-desk);
-  color: var(--eqb-color-text);
-  border-color: transparent;
-  font-weight: 600;
-}
-
-.concierge-browse-chip[aria-pressed='true']:hover {
-  background: var(--eqb-color-desk);
-}
-
-/* Intent bar */
+/* 搜索框换成 shared-ui/SearchField（构件厂，2026-11-15）：框、输入框、清除键、提交键的样子都搬进
+   shared-ui/search.css（首页 hero、浏览页 compact 两档），这里只留它在命令行这一行里的摆法——
+   首页占满、浏览页固定 320。.concierge-intent-bar 是 SearchField 的 hooks.form 挂上的钩子。
+   search.css 不设 flex / width / max-width，和这两条不冲突。 */
 .concierge-intent-bar {
-  position: relative;
-  display: flex;
   flex: 1 1 auto;
-  min-width: 0;
-  gap: 8px;
-  align-items: center;
-  background: var(--desk-raised);
-  border: 1px solid var(--desk-border);
-  border-radius: 16px;
-  padding: 0 10px 0 14px;
-  height: 44px;
-  min-height: 44px;
-  box-shadow: 0 2px 3px rgba(25, 29, 24, 0.06);
-  transition: border-color var(--motion-base) var(--ease-hover), box-shadow var(--motion-base) var(--ease-hover);
-}
-
-.concierge-desk[data-screen='home'] .concierge-intent-bar {
-  height: 54px;
-  min-height: 54px;
-  padding-left: 18px;
-}
-
-.concierge-desk[data-screen='home'] .concierge-intent-input {
-  font-size: 16px;
-}
-
-.concierge-desk[data-screen='home'] .concierge-intent-submit {
-  width: 32px;
-  min-width: 32px;
-  height: 32px;
-}
-
-.concierge-desk .concierge-intent-clear {
-  position: absolute;
-  right: 48px;
-}
-
-.concierge-intent-bar:has(.concierge-intent-clear) .concierge-intent-input {
-  padding-right: 84px;
 }
 
 .concierge-desk[data-screen='browse'] .concierge-intent-bar {
   flex: 0 0 320px;
   width: 320px;
   max-width: 320px;
-  height: 36px;
-  min-height: 36px;
-  border-radius: 12px;
-  box-shadow: none;
-  padding: 0 4px 0 12px;
 }
 
 /* 窄屏：五个命令行元素挤在一行会互相重叠。搜索框独占一行，思考模式/筛选/
@@ -3371,95 +2958,7 @@ button:disabled {
   }
 }
 
-/* 聚焦时不再套一圈深色框：输入框本身就是页面主角，闪动的光标已经说明
-   "可以打字了"。边线只比平时深一档，像 Factory / ChatGPT 的输入框。 */
-.concierge-intent-bar:focus-within {
-  border-color: var(--eqb-color-border-strong);
-  outline: none;
-}
-
-.concierge-intent-input {
-  flex: 1;
-  min-width: 0;
-  border: none;
-  outline: none;
-  background: transparent;
-  font-size: 14px;
-  line-height: 24px;
-  color: var(--desk-ink);
-  font-family: inherit;
-  padding: 0 48px 0 0;
-  height: 100%;
-}
-
-.concierge-desk[data-screen='browse'] .concierge-intent-input {
-  font-size: 13px;
-  padding-right: 40px;
-}
-
-.concierge-intent-input::placeholder {
-  color: var(--desk-muted);
-}
-
-.concierge-intent-submit {
-  position: absolute;
-  right: 10px;
-  width: 28px;
-  min-width: 28px;
-  height: 28px;
-  align-self: center;
-  border: none;
-  border-radius: 8px;
-  padding: 0;
-  background: transparent;
-  color: var(--eqb-color-accent);
-  font-size: 13px;
-  line-height: 1;
-  font-family: inherit;
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  transition: background-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
-  box-shadow: none;
-}
-
-.concierge-desk[data-screen='browse'] .concierge-intent-submit {
-  right: 4px;
-}
-
-.concierge-intent-submit.is-loading {
-  font-size: 13px;
-  font-weight: 500;
-}
-
-.concierge-intent-submit:hover:not(:disabled) {
-  background: var(--eqb-color-desk);
-}
-
-/* emil-processing: press feedback — 一天按几十次的搜索提交应确认"听到了". */
-.concierge-intent-submit:active:not(:disabled) {
-  transform: scale(0.97);
-}
-
-.concierge-intent-submit:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
-}
-
-/* 发送键是一个回车符号，不再是实心圆：没输入时是灰色回车，打了字整个回车
-   变成强调色（参照 Factory / ChatGPT：没东西可发就不亮）。 */
-.concierge-intent-submit:disabled {
-  background: transparent;
-  color: var(--eqb-color-text-faint);
-  opacity: 1;
-  cursor: not-allowed;
-}
-
-.concierge-intent-submit.is-loading:disabled {
-  width: auto;
-  padding: 0 6px;
-  color: var(--eqb-color-text-muted);
-}
+/* 搜索框的聚焦、输入框、占位符、提交键（悬停、按下、焦点、禁用、正在搜）搬进 shared-ui/search.css（2026-11-15）。 */
 
 /* home-editorial round 2 — rides inline in .concierge-command-bar now
    (was its own row below the intent bar with a hint sentence visible next
@@ -3478,9 +2977,11 @@ button:disabled {
   width: 32px;
   height: 18px;
   margin: 0;
-  border: 1px solid var(--line, #D8D8D2);
+  /* 迁移第 10 条（2026-11-13）：关着时轨道原来是桌色 + 最淡的线，和页面几乎一样，
+     只看得见白色圆钮，像被切掉一半。轨道改用控件强边线色平涂，整只开关看得出来（目测）。 */
+  border: 1px solid transparent;
   border-radius: 999px;
-  background: var(--surface-strong, #EDEDEA);
+  background: var(--eqb-color-border-strong);
   cursor: pointer;
 }
 
@@ -3493,7 +2994,7 @@ button:disabled {
   height: 14px;
   border-radius: 50%;
   background: #fff;
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.2);
+  box-shadow: var(--elev-2);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -3506,6 +3007,20 @@ button:disabled {
   .concierge-thinking-toggle input[type='checkbox']::before {
     transition: transform var(--motion-base) var(--ease-out);
   }
+}
+
+/* 点击区域补到 24 高（WCAG 2.2 2.5.8，清点 field-04 量到 32×18；构件收尾 2026-11-15）：开关的 ::before 是圆钮，
+ * 用 ::after 画一块透明的外扩，上下各伸 3px（min(0px, 50% − 12px) 算出来），样子不变；点在外扩上照样切换开关。
+ * 24px 没有变量，缺口见 docs/design-gaps.md。
+ * z-index: 1（2026-11-15 后续，migrate-followup 第四节）：这一行上贴搜索框、下贴「筛选」键，开关上下离它们各只有 2px，
+ * 外扩伸出去的 3px 里有 1px 压在它们上面。「筛选」键（.eqb-button 带 position: relative）在文档里排在后面，原来画在外扩上面，
+ * 点那 1px 落到「筛选」，开关只量到 32 × 22.75（目测是 22.5，见 migrate-finish）。外扩提到 1 层以后两头的 1px 都归开关，到 32 × 24；
+ * 代价是搜索框底边、「筛选」顶边各让出 1px 能点的地方（54 → 53、36 → 35，都还远过 24）。外扩是透明的，看不出来；布局不动。 */
+.concierge-thinking-toggle input[type='checkbox']::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: min(0px, calc(50% - 12px));
 }
 
 .concierge-thinking-toggle input[type='checkbox']:checked {
@@ -3529,13 +3044,13 @@ button:disabled {
 
 .concierge-thinking-toggle label {
   font-size: 13px;
-  color: #1E1E1C;
+  color: var(--desk-ink);
   cursor: pointer;
 }
 
 .concierge-thinking-hint {
   font-size: 12px;
-  color: #6A6A64;
+  color: var(--desk-muted);
 }
 
 /* Clarification + notices */
@@ -3552,57 +3067,39 @@ button:disabled {
 .concierge-clarification-line {
   margin: 0;
   font-size: 13.5px;
-  color: #1E1E1C;
+  color: var(--desk-ink);
   line-height: 1.5;
 }
 
 .concierge-clarification-examples {
   margin: 0;
   font-size: 12px;
-  color: #6A6A64;
+  color: var(--desk-muted);
 }
 
-.concierge-notice,
+/* 提示条不是一种材料：一行次要灰字，没有底和边，不用薄荷（DESIGN.md §5 Notices，Owner 2026-11-13）。
+   .concierge-notice / .concierge-error / .concierge-loading / .concierge-data-loading 换成了共用提示行
+   shared-ui/Notice（字色、字号、图标、行尾的「重试」键都由 notice.css 和 Button 给），这里只剩
+   还是段落的两种。 */
+/* 「没找到」那一行 2026-11-14 换成了 EmptyState 卡片（类名 concierge-empty 留着给 smoke 脚本认，是 div）；
+   这里只管还是段落的「筛选条件太严格」，所以写 p.concierge-empty，不碰卡片。 */
 .concierge-assistant,
-.concierge-error,
-.concierge-empty,
-.concierge-loading {
+p.concierge-empty {
   margin: 0;
   font-size: 13px;
-  color: #6A6A64;
+  color: var(--desk-muted);
   padding: 6px 4px;
 }
 
-.concierge-notice {
-  border: 1px solid rgba(90, 156, 131, 0.35);
-  background: rgba(90, 156, 131, 0.08);
-  border-radius: 4px;
-  padding: 6px 10px;
-  color: #1E1E1C;
+/* 共用提示行在找题页里左边让出 4px，和上面两种段落的字对齐（原来的 padding: 6px 4px）。
+   只给 inline 放法（notice.css 的 inline 没写 padding，不算覆盖）；找题页里没有 over / floating 的提示行。 */
+.concierge-desk .eqb-notice[data-placement='inline'] {
+  padding-inline: 4px;
 }
 
-.concierge-error {
-  align-items: center;
-  color: #dc2626;
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-}
-
-.concierge-error button {
-  background: transparent;
-  border: 1px solid currentColor;
-  border-radius: 6px;
-  color: inherit;
-  cursor: pointer;
-  flex: 0 0 auto;
-  font: inherit;
-  min-height: 34px;
-  padding: 5px 10px;
-}
-
-.concierge-error button:hover {
-  background: color-mix(in srgb, currentColor 8%, transparent);
+/* 题库连接状态那一行：命令行下面，离命令行 12px（目测，和「浏览全部」那一行的间距差不多）。 */
+.concierge-status-slot {
+  margin-top: var(--eqb-space-3);
 }
 
 /* Result list */
@@ -3666,56 +3163,26 @@ button:disabled {
   color: var(--desk-muted);
 }
 
-.home-row-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  border-radius: 12px;
-  background: var(--desk-surface);
-  overflow: hidden;
-  box-shadow: 0 0 0 1px var(--desk-border);
-}
-
-.home-row-list > li + li {
-  border-top: 1px solid var(--desk-line);
-}
-
+/* 「接着做」「今天翻到」的列表和行是共用构件 shared-ui/Row（2026-11-15）：板（底、一圈边、圆角、裁切）、
+   竖排、去列表圆点、行间分隔线由 RowList 给；行的最小高 48、内衬 12 / 16（padding="home"）、定位、
+   整行目标、焦点环和焦点垫底、按下都在 row.css。原来 .home-row-list 的排法、li + li 分隔线，
+   .home-row 的 min-height、padding、border、width、font、cursor、position 和两条 :focus-visible 删了。
+   类名 home-row-list / home-row 留作排法和脚本的钩子。 */
 .home-row {
   display: grid;
   grid-template-columns: 16px minmax(0, 1fr) auto;
   align-items: center;
   gap: 12px;
-  width: 100%;
-  min-height: 48px;
-  padding: 12px 16px;
-  border: 0;
   background: transparent;
   color: var(--desk-ink);
-  font: inherit;
   text-align: left;
-  cursor: pointer;
   transition: background var(--motion-fast) var(--ease-hover);
-}
-
-.home-row {
-  position: relative;
 }
 
 /* Rows without a leading icon (e.g. 今天翻到) must not leave their text in
    the 16px icon track. */
 .home-row--no-icon {
   grid-template-columns: minmax(0, 1fr) auto;
-}
-
-.home-row:focus-visible {
-  background: var(--desk-hover);
-}
-
-.home-row:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: -2px;
 }
 
 .home-row-icon {
@@ -3728,7 +3195,7 @@ button:disabled {
 }
 
 .home-row[data-fluid-hover-active] .home-row-icon,
-.home-row:focus-visible .home-row-icon {
+.home-row:has(> .eqb-row-hit:focus-visible) .home-row-icon {
   color: var(--desk-ink);
 }
 
@@ -3793,12 +3260,12 @@ button:disabled {
 .home-row-chevron {
   display: grid;
   place-items: center;
-  color: var(--eqb-color-text-faint);
+  color: var(--desk-muted);
   transition: color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
 }
 
 .home-row[data-fluid-hover-active] .home-row-chevron,
-.home-row:focus-visible .home-row-chevron {
+.home-row:has(> .eqb-row-hit:focus-visible) .home-row-chevron {
   color: var(--desk-ink);
   transform: translateX(2px);
 }
@@ -3826,12 +3293,9 @@ button:disabled {
   padding: 0 4px;
 }
 
-.concierge-feed-empty-corpus {
-  margin: 0;
-  font-size: 13px;
-  color: #6A6A64;
-  padding: 6px 4px;
-}
+/* 迁移第 12 条：题库一套卷都没有 = 「还没东西」，放题库插图（照图标 QuestionBank）。
+   2026-11-14 起换成共用的 EmptyState（shared-ui/emptyState.css），原来这里的三条删掉；
+   类名 concierge-feed-empty-corpus 留在元素上，只当钩子。 */
 
 /* home-editorial round 2 (方向 C) — 年份分组档案. 组头是真序列 + 真计数
    (结构编码真相: 除年份和「N 套」外不加编号/eyebrow/分割装饰). */
@@ -3902,7 +3366,7 @@ button:disabled {
 }
 
 .concierge-result-list > li {
-  border-bottom: 1px solid rgba(30, 30, 28, 0.06);
+  border-bottom: 1px solid rgb(27 43 51 / 0.06);
 }
 
 .concierge-result-list > li:last-child {
@@ -3922,7 +3386,7 @@ button:disabled {
   padding: 16px 14px;
   background: #FFFFFF;
   outline: none;
-  border-radius: 6px;
+  border-radius: 12px;
   transition: background var(--motion-fast) var(--ease-hover), box-shadow var(--motion-fast) var(--ease-hover);
   cursor: pointer;
 }
@@ -3930,8 +3394,8 @@ button:disabled {
 .concierge-row:hover,
 .concierge-row:focus-visible,
 .concierge-row:focus-within {
-  background: #EDEDEA;
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.03);
+  background: var(--desk-hover);
+  box-shadow: none;
 }
 
 .concierge-row:focus-visible {
@@ -3951,7 +3415,7 @@ button:disabled {
 .concierge-source {
   font-size: 13px;
   font-weight: 600;
-  color: #1E1E1C;
+  color: var(--desk-ink);
   letter-spacing: 0.02em;
   white-space: nowrap;
   overflow: hidden;
@@ -3960,7 +3424,7 @@ button:disabled {
 
 .concierge-section {
   font-size: 11px;
-  color: #6A6A64;
+  color: var(--desk-muted);
 }
 
 .concierge-row-body {
@@ -3973,7 +3437,7 @@ button:disabled {
 .concierge-primary {
   margin: 0;
   font-size: 14px;
-  color: #1E1E1C;
+  color: var(--desk-ink);
   line-height: 1.45;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -4010,20 +3474,20 @@ button:disabled {
   align-items: center;
   background: transparent;
   border: 0;
-  color: #1E1E1C;
+  color: var(--desk-ink);
   font-family: inherit;
   text-decoration: none;
   /* quiet-chrome: 12.5px 是族外半档，收进 The Four-Step UI Type Ramp 的
      12px Label 档；同时摘掉描边盒（透明底 + hover 浮中性底）。 */
   font-size: 12px;
   padding: 4px 10px;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   transition: background-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
 }
 
 .concierge-action:hover:not(:disabled) {
-  background: #EDEDEA;
+  background: var(--desk-hover);
 }
 
 .concierge-action:focus-visible {
@@ -4041,43 +3505,7 @@ button:disabled {
   transform: scale(0.97);
 }
 
-/* Primary CTA: 加入草稿卷 — teal-filled, matches DraftPaperWorkbench's
-   export button so the same action reads the same everywhere. */
-/* 每一行都有的「加入」：一页十几个，不用强调色，墨色描边。 */
-.concierge-action-add {
-  background: transparent;
-  border: 1px solid var(--action);
-  color: var(--action);
-  font-weight: 600;
-}
-
-.concierge-action-add:hover:not(:disabled) {
-  background: var(--eqb-color-desk);
-  color: var(--action);
-}
-
-.concierge-action-add:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
-}
-
-/* Completed state: 已在草稿卷中 — quiet, no longer competes as a CTA. */
-.concierge-action-add[aria-pressed="true"] {
-  background: transparent;
-  color: #6A6A64;
-  font-weight: 500;
-}
-
-.concierge-action-add[aria-pressed="true"]:hover:not(:disabled) {
-  background: #EDEDEA;
-  color: #6A6A64;
-}
-
-.concierge-action-add:disabled {
-  background: transparent;
-  border-color: #D8D8D2;
-  color: #9A9A93;
-}
+/* 首页结果行的加入键 2026-11-14 换成共用 DraftAddButton（app/src/shared-ui/），原来的 .concierge-action-add 几条删掉了。 */
 
 /* ========================================================================
    AI mode (homeMode='ai'): single-column quiet desk layout.
@@ -4100,25 +3528,10 @@ button:disabled {
   color: var(--desk-ink);
 }
 
-.app-shell:has(.concierge-desk) .topbar .ghost-button {
-  min-height: 36px;
-  height: 36px;
-  font-size: 14px;
-  color: var(--eqb-color-text-secondary);
-}
-
-.app-shell:has(.concierge-desk) .topbar .ghost-button[data-fluid-hover-active]:not(:disabled),
-.app-shell:has(.concierge-desk) .topbar .ghost-button:focus-visible:not(:disabled) {
-  color: var(--desk-ink);
-}
+/* 找题台顶栏的导航按钮加高到 36，现在由 AppTopbar 的 navSize="lg" 给共用按钮构件，这里不再写。 */
 
 .app-shell:has(.concierge-desk) .topbar-actions.fluid-hover-list::before {
   background: var(--desk-hover);
-}
-
-.app-shell:has(.concierge-desk) .topbar .ghost-button svg {
-  width: 16px;
-  height: 16px;
 }
 
 .app-shell.home-mode-ai > .topbar {
@@ -4221,62 +3634,33 @@ button:disabled {
   }
 }
 
-/* ── Basket: lightweight floating chip + slide-in drawer in AI mode ────── */
-.basket-chip {
+/* ── 草稿丸：右下的浮件（胶囊构件那一批，2026-11-14） ─────────────
+ * 键本身是 shared-ui/Button（墨字 strong；首页 lg 36，别的页 sm 28）：字 13/500、悬停垫桌色、键盘焦点环、按下缩放、
+ * 禁用变淡、圆角 8 都由 button.css 管。这里只留浮件该有的几样：钉在右下、白底、e2、一圈透明边。
+ * 圆角：原来是胶囊（999px）。DESIGN.md §5 圆角细则 2026-11-14 改成「草稿丸能点，算按钮，归 Button，用 8px」，
+ * 构件收尾（2026-11-15）照改，删掉这里的胶囊圆角，用 Button 自己的 --eqb-radius-control。
+ * 覆盖：本条 (0,3,0) 盖过 button.css 的 .eqb-button (0,1,0) 的透明底、0 边，和 .eqb-button[data-size='sm'] (0,2,0)
+ * 的 8px 内边距（写成 [data-size] 多一档特指度，不靠两份 css 谁后加载），因为草稿丸是浮在内容上的白件，左右多留点（照原来，没改）；
+ * 悬停的桌色底那条是 (0,4,0)，照旧赢过这里的白底。 */
+.eqb-button.basket-chip[data-size] {
   position: fixed;
-  right: 24px;
-  bottom: 24px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 28px;
-  padding: 0 12px;
-  background: #FFFFFF;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 999px;
-  color: var(--eqb-color-text);
-  font-family: inherit;
-  font-size: 13px;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  right: var(--eqb-space-5);
+  bottom: var(--eqb-space-5);
   z-index: 22;
-  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
+  gap: var(--eqb-space-2);
+  padding: 0 var(--eqb-space-3);
+  border: 1px solid transparent;
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-2);
 }
 
-.basket-chip:hover {
-  background: var(--eqb-color-desk);
+/* 首页没东西时不浮起来：回到板，边线回来（DESIGN.md §4 板不投影），字换次要灰，变淡到 0.8。
+ * 覆盖：本条 (0,6,0) 盖过 button.css .eqb-button:disabled 的 opacity 0.55 (0,2,0) 和上面那条 (0,3,0) 的影子、边色。 */
+.app-shell:has(.concierge-desk) .eqb-button.basket-chip[data-size]:disabled {
   border-color: var(--eqb-color-border);
-}
-
-/* emil-processing: shared pressable convention (scale 0.97 on press). */
-.basket-chip:active:not(:disabled) {
-  transform: scale(0.97);
-}
-
-.basket-chip:disabled {
-  cursor: not-allowed;
-  opacity: 0.55;
-}
-
-.app-shell:has(.concierge-desk) .basket-chip {
-  height: 36px;
-  padding: 0 14px;
-  font-size: 14px;
-  font-weight: 500;
-  background: var(--desk-raised);
-  border-color: var(--desk-border);
-  color: var(--desk-ink);
-  box-shadow: 0 3px 10px rgba(25, 29, 24, .10);
-}
-
-.app-shell:has(.concierge-desk) .basket-chip:disabled {
-  color: var(--desk-muted);
-  opacity: .8;
   box-shadow: none;
-}
-
-.app-shell:has(.concierge-desk) .basket-chip:hover:not(:disabled) {
-  background: var(--desk-hover);
+  color: var(--eqb-color-text-muted);
+  opacity: 0.8;
 }
 
 @media (max-width: 640px) {
@@ -4300,7 +3684,7 @@ button:disabled {
 .basket-drawer-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(30, 30, 28, 0.18);
+  background: rgb(27 43 51 / 0.18);
   border: none;
   padding: 0;
   cursor: pointer;
@@ -4314,8 +3698,8 @@ button:disabled {
   bottom: 0;
   width: min(420px, 100vw);
   background: #FFFFFF;
-  border-left: 1px solid #D8D8D2;
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  border-left: 1px solid transparent;
+  box-shadow: var(--elev-3);
   z-index: 26;
   transform: translateX(100%);
   transition: transform var(--motion-base) var(--ease-out);
@@ -4336,7 +3720,7 @@ button:disabled {
   border: 1px solid transparent;
   border-radius: 4px;
   background: transparent;
-  color: #1E1E1C;
+  color: var(--desk-ink);
   font-size: 18px;
   cursor: pointer;
   z-index: 1;
@@ -4346,7 +3730,7 @@ button:disabled {
 }
 
 .basket-drawer-close:hover {
-  background: #EDEDEA;
+  background: var(--desk-hover);
   border-color: #D8D8D2;
 }
 
@@ -4369,7 +3753,7 @@ button:disabled {
 .concierge-subhead-hint {
   margin: 8px 0 0;
   font-size: 12px;
-  color: #6A6A64;
+  color: var(--desk-muted);
   text-align: center;
 }
 
@@ -4384,36 +3768,10 @@ button:disabled {
   justify-content: center;
 }
 
-.concierge-starter-chip {
-  background: transparent;
-  border: 1px solid #D8D8D2;
-  color: #6A6A64;
-  font-family: inherit;
-  font-size: 12.5px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
-}
-
+/* 胶囊第二轮（2026-11-14）：筛选胶囊换成 shared-ui/Chip.tsx 的 ChipToggle，静止、悬停、滑块停留、键盘焦点、选中的样子
+ * 都在 shared-ui/chip.css；原来这里 12.5px、写死边色 #D8D8D2 的那几条删了。滑块的圆角跟胶囊走。 */
 .concierge-starter-chips.fluid-hover-list {
-  --fh-radius: 999px;
-}
-
-.concierge-starter-chip {
-  position: relative;
-}
-
-.concierge-starter-chip[data-fluid-hover-active] {
-  border-color: var(--eqb-color-border);
-  color: var(--eqb-color-text);
-}
-
-.concierge-starter-chip:focus-visible {
-  border-color: var(--action);
-  color: var(--eqb-color-text);
-  outline: var(--focus-ring);
-  outline-offset: 2px;
+  --fh-radius: var(--eqb-radius-pill);
 }
 
 /* In AI mode, keep the hint and chips centered with the intent bar. */
@@ -4424,9 +3782,7 @@ button:disabled {
   margin-right: auto;
 }
 
-/* Cut ai-mode-filter-chips (C6: zero new/changed color tokens) — the filter
-   row reuses .concierge-starter-chip's exact hex literals for the selected
-   state instead of introducing any variable. */
+/* Cut ai-mode-filter-chips: the structured filter row. 胶囊本身的样子在 shared-ui/chip.css（ChipToggle）。 */
 .concierge-filter-row {
   display: flex;
   flex-direction: column;
@@ -4459,7 +3815,7 @@ button:disabled {
   min-width: 34px;
   font-size: 11px;
   font-weight: 500;
-  color: #6A6A64;
+  color: var(--desk-muted);
 }
 
 /* Must out-rank `.app-shell.home-mode-ai .concierge-starter-chips` above
@@ -4476,48 +3832,16 @@ button:disabled {
   align-self: flex-start;
 }
 
+/* 这一项一条都没有：整颗变淡。叠在 ChipToggle 上：chip.css 只在 :disabled 时写 opacity（0.55），
+ * 0 条的项不禁用（仍能点，点了出空结果），两条不会同时生效，透明度只由本条决定。 */
 .concierge-starter-chip.is-zero {
   opacity: 0.45;
-}
-
-/* Selected chip = the system's signature. teal-repaint C6: retired the
-   oxblood red-pen (#B8323C) selected state — the current-selection role now
-   reads as the single teal accent, consistent with the Single-Hue Rule.
-   The fill stays a faint wash so multiple selected chips never bank past
-   the ≤10% accent budget (Green-Pen Rule). teal-800 on teal-50 wash clears
-   WCAG AA (9.26:1). */
-.concierge-starter-chip.is-selected {
-  background: var(--eqb-color-desk);
-  border-color: transparent;
-  color: var(--eqb-color-text);
-  font-weight: 600;
-}
-
-.concierge-starter-chip.is-selected:hover {
-  background: var(--eqb-color-desk);
-  border-color: transparent;
-  color: var(--eqb-color-text);
-}
-
-.concierge-filter-clear {
-  background: transparent;
-  border: none;
-  color: #6A6A64;
-  font-family: inherit;
-  font-size: 12.5px;
-  cursor: pointer;
-  padding: 4px 2px;
-  text-decoration: underline;
-}
-
-.concierge-filter-clear:hover {
-  color: #1E1E1C;
 }
 
 .concierge-filter-clear-inline {
   background: transparent;
   border: none;
-  color: #1E1E1C;
+  color: var(--desk-ink);
   font-family: inherit;
   font-size: inherit;
   cursor: pointer;
@@ -4526,40 +3850,33 @@ button:disabled {
 }
 
 .concierge-feed-filtered-tag {
-  color: #6A6A64;
+  color: var(--desk-muted);
   margin-left: 4px;
 }
 
-/* Progressive-disclosure toggle + clear, on one quiet trailing row. */
+/* Progressive-disclosure toggle + clear, on one quiet trailing row.
+ * Owner 2026-11-14 决定 #1：「更多筛选 / 收起筛选」「清除筛选」换成 Button 淡墨小号（quiet sm），
+ * 原来的 12.5px 纯文字键样子（次要灰、400、内边距 4px 2px、「清除筛选」带下划线）删了，交给 button.css。
+ * 第一个键左边用负边距抵掉 sm 的左内边距（--eqb-space-2），字贴齐这一排的左边；
+ * 两个键之间的距离从 14 收到 --eqb-space-1，两边各多出的 8px 内边距已经把字隔开（实测「更多筛选」的字比改前左移 2px、「清除筛选」的字右移 2px，见 design/components-2026-11-13/decisions-2026-11-14/batch-b/README.md）。 */
 .concierge-filter-actions {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: var(--eqb-space-1);
   margin-top: 2px;
 }
 
-.concierge-filter-more {
-  display: inline-flex;
-  align-items: center;
-  background: transparent;
-  border: none;
-  color: #6A6A64;
-  font-family: inherit;
-  font-size: 12.5px;
-  cursor: pointer;
-  padding: 4px 2px;
+.concierge-filter-actions > .eqb-button:first-child {
+  margin-left: calc(-1 * var(--eqb-space-2));
 }
 
-.concierge-filter-more:hover {
-  color: #1E1E1C;
-}
-
-/* Chevron: down when collapsed, up when expanded (instant, no motion). */
+/* Chevron: down when collapsed, up when expanded (instant, no motion).
+ * 和字的间距由 Button 的 gap（6px）给，所以这里的 margin-left 归零（原来是 6px，按钮是 inline-flex 时没有 gap）。 */
 .concierge-filter-more::after {
   content: '';
   width: 6px;
   height: 6px;
-  margin-left: 6px;
+  margin-left: 0;
   border-right: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
   transform: translateY(-2px) rotate(45deg);
@@ -4573,53 +3890,24 @@ button:disabled {
    count. Quiet, no border chrome except a hairline (the search input is the
    one framed control on this row — 结构编码真相: don't invent a second
    frame that competes with it). */
+/* 构件厂第 4 步第八页：「筛选」开关换成 shared-ui/Button（墨字大号）。原来的细描边（#D8D8D2）、
+   悬停、按下缩放、展开时的石板墨描边、键盘焦点都删了，交给 button.css；展开时用构件的「打开着」
+   样子（aria-expanded=true：桌色底、墨字）。只留不被挤窄这一条。 */
 .concierge-command-filter-toggle {
   flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  height: 36px;
-  padding: 0 12px;
-  background: transparent;
-  border: 1px solid #D8D8D2;
-  border-radius: 8px;
-  color: #1E1E1C;
-  font-family: inherit;
-  font-size: 13px;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
-}
-
-.concierge-command-filter-toggle:hover {
-  background: var(--eqb-color-desk);
-  border-color: var(--eqb-color-border);
-}
-
-.concierge-command-filter-toggle:active {
-  transform: scale(0.97);
-}
-
-.concierge-command-filter-toggle[aria-expanded='true'] {
-  border-color: var(--action);
-  color: var(--eqb-color-text);
-}
-
-.concierge-command-filter-toggle:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
 }
 
 .concierge-command-count {
   flex: 0 0 auto;
   margin-left: auto;
   font-size: 12.5px;
-  color: #6A6A64;
+  color: var(--desk-muted);
   white-space: nowrap;
 }
 
-/* Collapsed-state active-filter summary — removable chips reusing the same
-   selected-chip visual language as the open filter panel (single teal
-   accent, no new hue). */
+/* Collapsed-state active-filter summary（收起筛选面板后命令行下那一排已选筛选）。
+ * 胶囊第二轮（2026-11-14）：每一项点了是移除这个筛选，是动作，换成 shared-ui/Button（墨字小号 28、圆角 8），
+ * 原来 12.5px、胶囊圆角、悬停加深一档的那几条删了。 */
 .concierge-active-filter-chips {
   list-style: none;
   margin: 0;
@@ -4629,29 +3917,20 @@ button:disabled {
   gap: 8px;
 }
 
-.concierge-active-filter-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
+/* 已选筛选一直是 Button「打开着」的样子：桌色底、墨字（墨字由 tone=strong 给）。透明底静止时只剩一行字加 ×，
+ * 看不出能点、能移除（协调方审 2026-11-14）。悬停、键盘焦点照 Button：悬停那条 (0,4,0) 也是桌色底，样子不变。
+ * 覆盖：本条 (0,2,0) 盖过 button.css .eqb-button 的 background: transparent (0,1,0)。 */
+.eqb-button.concierge-active-filter-chip {
   background: var(--eqb-color-desk);
-  border: 1px solid transparent;
-  color: var(--eqb-color-text);
-  font-family: inherit;
-  font-size: 12.5px;
-  font-weight: 500;
-  padding: 4px 10px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition: background var(--motion-fast) var(--ease-hover);
 }
 
-.concierge-active-filter-chip:hover {
+/* 悬停（构件收尾 2026-11-15）：静止已经垫桌色，Button 的悬停也是桌色，原来指上去一点变化都没有。照 Button 自己
+ * 「底已经是桌色时再深一档」的悬停（button.css 里键嵌在滑块行里那一条，垫 --eqb-color-border），字仍是墨。
+ * 墨字在 border 色上 11.5:1。键盘焦点照 Button 的墨环，不变。
+ * 覆盖：本条 (0,5,0) 盖过 button.css 墨字悬停那条 .eqb-button[data-tone='strong']:hover:not(…) (0,4,0) 的桌色底
+ * （多写一个 [data-tone]，不靠两份 css 谁后加载）。 */
+.eqb-button.concierge-active-filter-chip[data-tone]:hover:not(:disabled, [aria-disabled='true']) {
   background: var(--eqb-color-border);
-}
-
-.concierge-active-filter-chip:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
 }
 
 /* ── Intake batch panel: quiet variant aligned with the rest of the intake page ── */
@@ -4676,7 +3955,7 @@ button:disabled {
   height: 22px;
   border: none;
   background: transparent;
-  color: #6A6A64;
+  color: var(--desk-muted);
   font-size: 13px;
   line-height: 1;
   border-radius: 4px;
@@ -4689,18 +3968,31 @@ button:disabled {
 }
 
 .concierge-row-expand:hover {
-  background: #EDEDEA;
-  color: #1E1E1C;
+  background: var(--desk-hover);
+  color: var(--desk-ink);
+}
+
+/* 点击区域补到 24×24（WCAG 2.2 2.5.8，清点 button-21 量到 22×22；构件收尾 2026-11-15）：一块透明的 ::after 往四边各伸到
+ * 凑够 24（min(0px, 50% − 12px)：本身已经够 24 的那一边不伸），样子不变。键在卷行里，Row 已经给它 position: relative（row.css）。
+ * 24px 没有变量，缺口见 docs/design-gaps.md。 */
+.concierge-row-expand {
+  position: relative;
+}
+
+.concierge-row-expand::after {
+  content: '';
+  position: absolute;
+  inset: min(0px, calc(50% - 12px));
 }
 
 .concierge-row-expand:focus-visible {
-  background: #EDEDEA;
+  background: var(--desk-hover);
   outline: var(--focus-ring);
   outline-offset: 2px;
 }
 
 .concierge-row-expand.open {
-  color: #1E1E1C;
+  color: var(--desk-ink);
 }
 
 .concierge-row-anchor-text {
@@ -4721,7 +4013,7 @@ button:disabled {
   grid-column: 1 / -1;
   margin-top: 12px;
   padding: 14px 14px 4px;
-  border-top: 1px solid rgba(30, 30, 28, 0.06);
+  border-top: 1px solid rgb(27 43 51 / 0.06);
   cursor: default;
 }
 
@@ -4733,32 +4025,8 @@ button:disabled {
   min-height: 96px;
 }
 
-.concierge-skeleton-line {
-  position: relative;
-  overflow: hidden;
-  height: 12px;
-  border-radius: 6px;
-  background: var(--eqb-color-desk);
-}
-
-.concierge-skeleton-line.short {
-  width: 60%;
-}
-
-.concierge-skeleton-line::after,
-.concierge-skeleton-chip::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent 0%, #EDEDEA 50%, transparent 100%);
-  transform: translateX(100%);
-  animation: concierge-skeleton-shimmer 1.6s linear infinite; /* loading-loop, token-exempt */
-}
-
-@keyframes concierge-skeleton-shimmer {
-  from { transform: translateX(100%); }
-  to { transform: translateX(-100%); }
-}
+/* 首页灰块里的每一条（原 .concierge-skeleton-line、.short、扫光 ::after 和 @keyframes concierge-skeleton-shimmer）
+   2026-11-15 换成共用灰块 shared-ui/Skeleton（呼吸，不扫光；DESIGN.md §5 Waiting），删了。尺寸搬进 ConciergeDesk.tsx。 */
 
 @media (prefers-reduced-motion: reduce) {
   .group-card {
@@ -4778,20 +4046,12 @@ button:disabled {
     transition: opacity var(--motion-micro) var(--ease-hover);
   }
 
-  .concierge-skeleton-line::after,
-  .concierge-skeleton-chip::after {
-    animation: none;
-    opacity: 0;
-  }
-
   .primary-button:active:not(:disabled),
   .add-button:active:not(:disabled),
   .save-button:active:not(:disabled),
   .export-button:active:not(:disabled),
-  .concierge-intent-submit:active:not(:disabled),
   .concierge-action:active:not(:disabled),
-  .basket-chip:active:not(:disabled),
-  .concierge-command-filter-toggle:active {
+  .basket-chip:active:not(:disabled) {
     transform: scale(0.995);
   }
 }
@@ -4803,13 +4063,13 @@ button:disabled {
   gap: 12px;
   padding: 8px 0;
   font-size: 13px;
-  color: #6A6A64;
+  color: var(--desk-muted);
 }
 
 .concierge-row-detail-empty {
   margin: 0;
   font-size: 13px;
-  color: #6A6A64;
+  color: var(--desk-muted);
 }
 
 /* Question card list — read-only, horizontally scrollable */
@@ -4847,20 +4107,20 @@ button:disabled {
 .concierge-detail-q-no {
   font-size: 12.5px;
   font-weight: 600;
-  color: #1E1E1C;
+  color: var(--desk-ink);
   letter-spacing: 0.02em;
 }
 
 .concierge-detail-q-type {
   font-size: 11px;
-  color: #6A6A64;
+  color: var(--desk-muted);
 }
 
 .concierge-detail-q-stem {
   margin: 0;
   font-size: 12.5px;
   line-height: 1.5;
-  color: #1E1E1C;
+  color: var(--desk-ink);
   display: -webkit-box;
   -webkit-line-clamp: 2;
   line-clamp: 2;
@@ -4877,7 +4137,7 @@ button:disabled {
   gap: 3px;
   font-size: 11.5px;
   line-height: 1.35;
-  color: #6A6A64;
+  color: var(--desk-muted);
 }
 
 .concierge-detail-q-options li {
@@ -4896,29 +4156,20 @@ button:disabled {
 .concierge-detail-q-answer {
   margin-top: auto;
   font-size: 11.5px;
-  color: #6A6A64;
+  color: var(--desk-muted);
 }
 
-/* Concierge: connecting-to-local-bank notice while data is in flight. */
-.concierge-data-loading {
-  margin: 8px 0 0;
-  font-size: 12.5px;
-  color: #6A6A64;
-  text-align: center;
-}
+/* Concierge: connecting-to-local-bank notice — 换成共用提示行，放在命令行下面的 .concierge-status-slot 里，
+   原来这条居中小字的规则拿掉。 */
 
-.concierge-intent-input:disabled {
-  background: transparent;
-  color: #9A9A93;
-  cursor: progress;
-}
+/* 题库还在连时输入框禁用：禁用的底、光标、字色都在 shared-ui/search.css（字用 --eqb-color-text-faint）。
+   原来这里用 #9A9A93 盖回旧暖灰，2026-11-15 删掉：禁用时框是空的，只显示占位符，看不出差别。 */
 
 /* ── ui-search-feel 刀⑤ #1 — dataLoading skeleton ──────────────────────
  * Chip row + 3 feed-group placeholders shown while the local SQLite bank
- * is still connecting, so the first paint isn't a blank page. Reuses the
- * existing `.concierge-skeleton-line` shimmer gradient (neutral
- * surface/border grays, already reduced-motion-safe via the blanket
- * `@media (prefers-reduced-motion: reduce)` rule above).
+ * is still connecting, so the first paint isn't a blank page. 2026-11-15:
+ * the bars are shared-ui/Skeleton (breathing, reduced-motion-safe in
+ * shared-ui/waiting.css); only the board and group spacing stay here.
  */
 .concierge-skeleton-chip-row {
   list-style: none;
@@ -4930,20 +4181,7 @@ button:disabled {
   justify-content: center;
 }
 
-.concierge-skeleton-chip {
-  position: relative;
-  overflow: hidden;
-  width: 76px;
-  height: 24px;
-  border-radius: 999px;
-  background: var(--eqb-color-desk);
-}
-
-.concierge-skeleton-chip:nth-child(2) { width: 96px; }
-.concierge-skeleton-chip:nth-child(3) { width: 64px; }
-.concierge-skeleton-chip:nth-child(4) { width: 108px; }
-.concierge-skeleton-chip:nth-child(5) { width: 84px; }
-.concierge-skeleton-chip:nth-child(6) { width: 70px; }
+/* 每个芯片占位（原 .concierge-skeleton-chip 和六个 :nth-child 宽度）换成 shared-ui/Skeleton shape="pill"，宽度在 ConciergeDesk.tsx。 */
 
 .concierge-skeleton-feed {
   margin-top: 20px;
@@ -4961,17 +4199,7 @@ button:disabled {
 }
 
 .concierge-skeleton-feed-group + .concierge-skeleton-feed-group {
-  border-top: 1px solid rgba(30, 30, 28, 0.06);
-}
-
-.concierge-skeleton-feed-title {
-  width: 220px;
-  height: 14px;
-}
-
-.concierge-skeleton-feed-row {
-  width: 85%;
-  height: 12px;
+  border-top: 1px solid rgb(27 43 51 / 0.06);
 }
 
 /* ========================================================================
@@ -4979,27 +4207,9 @@ button:disabled {
    Reuses neutral paper / ink palette from the V1 stream.
    ======================================================================== */
 
-.concierge-paper-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  border: 0;
-  border-radius: 12px;
-  background: var(--desk-surface);
-  overflow: hidden;
-  box-shadow: 0 0 0 1px var(--desk-border);
-}
-
-.concierge-paper-list > li {
-  border-bottom: 1px solid var(--desk-line);
-}
-
-.concierge-paper-list > li:last-child {
-  border-bottom: none;
-}
+/* 卷行列表板（首页出结果、最近上新、浏览页每个年份）：2026-11-15 起是共用构件 shared-ui/Row 的 RowList
+   （板、竖排、行间 1px --desk-line 分隔线都在 row.css / surface.css），原来这里的排法和分隔线两条删了。
+   类名 concierge-paper-list 留作脚本钩子。 */
 
 /* Paper-level row. The article is one flex column (header + optional
    passage list) so the expand tint can live on the header only — passages
@@ -5013,9 +4223,10 @@ button:disabled {
   outline: none;
   border-radius: 0;
   transition: background var(--motion-fast) var(--ease-hover), box-shadow var(--motion-fast) var(--ease-hover);
-  cursor: pointer;
 }
 
+/* 行头是 shared-ui/Row（2026-11-15）：最小高 48、内衬 10 / 14（首页 12 / 16）、定位、整行目标的手形光标、
+   焦点环、按下都在 row.css，这里原来那几条（padding、min-height、position、article 上的 cursor）删了。 */
 .concierge-paper-row-head {
   display: grid;
   /* ui-search-feel 刀⑤ #3 — title column used to be capped narrow
@@ -5027,14 +4238,8 @@ button:disabled {
   grid-template-columns: 64px minmax(220px, 1fr) minmax(160px, 320px) auto;
   align-items: center;
   gap: 16px;
-  padding: 10px 14px;
-  min-height: 48px;
   background: transparent;
   transition: background var(--motion-fast) var(--ease-hover);
-}
-
-.concierge-paper-row-head {
-  position: relative;
 }
 
 .concierge-paper-row:focus-within .concierge-paper-row-head,
@@ -5080,7 +4285,6 @@ button:disabled {
 /* 首页是归来 (2026-09-15) — home additions sit on the same 48px row as
    browse rows (DESIGN Rows: 14/500 title, 13px weak year prefix on home). */
 .concierge-paper-row[data-recent] .concierge-paper-row-head {
-  padding: 12px 16px;
   align-items: center;
 }
 
@@ -5095,18 +4299,15 @@ button:disabled {
   color: var(--desk-ink);
 }
 
+/* 原来是一个 <button>，2026-11-15 起是一行字（展开键是整行目标）。inline-block 照原来按钮的排法，像素不变。 */
 .concierge-recent-title {
-  border: 0;
-  padding: 0;
-  background: none;
+  display: inline-block;
   color: var(--desk-ink);
-  font: inherit;
   font-size: 14px;
   font-weight: 500;
   line-height: 1.5;
   text-align: left;
   overflow-wrap: anywhere;
-  cursor: pointer;
 }
 
 .concierge-recent-year {
@@ -5115,12 +4316,6 @@ button:disabled {
   font-weight: 400;
   font-variant-numeric: tabular-nums;
   color: var(--desk-muted);
-}
-
-.concierge-recent-title:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 4px;
-  border-radius: 4px;
 }
 
 .concierge-recent-date {
@@ -5132,6 +4327,7 @@ button:disabled {
 }
 
 @media (max-width: 640px) {
+  /* 覆盖：本条 (0,3,0) 盖过 row.css .eqb-row[data-padding='home'] (0,2,0) 的 12 / 16，窄屏首页卷行照原来 16 / 14。 */
   .concierge-paper-row[data-recent] .concierge-paper-row-head {
     display: flex;
     flex-direction: column;
@@ -5145,7 +4341,7 @@ button:disabled {
 }
 
 .concierge-row-chevron {
-  color: var(--eqb-color-text-faint);
+  color: var(--desk-muted);
   display: grid;
   place-items: center;
   transform: rotate(-90deg);
@@ -5189,7 +4385,7 @@ button:disabled {
 .concierge-paper-year {
   font-size: 24px;
   font-weight: 300;
-  color: #1E1E1C;
+  color: var(--desk-ink);
   font-variant-numeric: tabular-nums;
   text-align: right;
   line-height: 1;
@@ -5277,7 +4473,7 @@ button:disabled {
 .concierge-paper-meta {
   margin: 0;
   font-size: 12px;
-  color: #6A6A64;
+  color: var(--desk-muted);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -5308,7 +4504,7 @@ button:disabled {
   margin: 0;
   font-size: 11.5px;
   line-height: 1.45;
-  color: #6A6A64; /* 推荐理由是老师判断依据，正文级对比度（≥4.5:1），不用极弱墨 */
+  color: var(--desk-muted); /* 推荐理由是老师判断依据，正文级对比度（≥4.5:1），不用极弱墨 */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -5403,15 +4599,14 @@ button:disabled {
   max-width: 100%;
 }
 
+/* 题组行是 shared-ui/Row（2026-11-15，size="sm"）：最小高 44、定位、整行目标的手形光标、焦点环、按下都在 row.css，
+   这里原来的 position、min-height、cursor 删了（不能开详情时行不可点，不再显示手形）。 */
 .concierge-group-row-line {
-  position: relative;
   display: flex;
   align-items: stretch;
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  min-height: 44px;
-  cursor: pointer;
 }
 
 /* Hover surface comes from the enclosing `.concierge-group-index` fluid list
@@ -5442,7 +4637,7 @@ button:disabled {
 .concierge-group-row-title {
   font-size: 13.5px;
   font-weight: 600;
-  color: #1E1E1C;
+  color: var(--desk-ink);
   /* home-editorial QA fix — flex-shrink:1 with overflow:hidden lets the
      automatic min-width drop to 0, so at narrow widths this was losing the
      flex-basis fight against `.concierge-group-row-summary`'s flex:1 and
@@ -5461,7 +4656,7 @@ button:disabled {
   flex: 1 1 auto;
   min-width: 0;
   font-size: 12.5px;
-  color: #1E1E1C;
+  color: var(--desk-ink);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -5480,7 +4675,7 @@ button:disabled {
 .concierge-group-row-reason {
   margin: 0;
   font-size: 11.5px;
-  color: #6A6A64;
+  color: var(--desk-muted);
   line-height: 1.4;
   white-space: nowrap;
   overflow: hidden;
@@ -5488,7 +4683,7 @@ button:disabled {
 }
 
 .concierge-group-reason-label {
-  color: #6A6A64;
+  color: var(--desk-muted);
   margin-right: 4px;
 }
 
@@ -5496,7 +4691,7 @@ button:disabled {
 .concierge-group-row.is-dim .concierge-group-row-title,
 .concierge-group-row.is-dim .concierge-group-row-summary,
 .concierge-group-row.is-dim .concierge-group-row-topic {
-  color: #6A6A64;
+  color: var(--desk-muted);
 }
 
 .concierge-group-row-trail {
@@ -5507,140 +4702,23 @@ button:disabled {
   padding: 0 14px 0 4px;
 }
 
-.concierge-group-row-icon {
-  box-sizing: border-box;
-  width: 28px;
-  height: 28px;
-  padding: 0;
-  border: 0;
-  border-radius: 8px;
-  display: grid;
-  place-items: center;
-  background: transparent;
-  color: var(--eqb-color-text-faint);
-  cursor: pointer;
-  flex: 0 0 28px;
-  font-family: inherit;
-}
-
-.concierge-group-row-line[data-fluid-hover-active] .concierge-group-row-icon:not([aria-pressed='true']),
-.concierge-group-row-icon:focus-visible:not([aria-pressed='true']) {
+/* 行上的加入键：2026-11-14 换成共用 DraftAddButton（走查第四节第 6 条），原来手写的 .concierge-group-row-icon、
+ * .concierge-action-add、-icon-glyph、-icon-mark（墨色圆里一个勾）几条删掉了，样子由 button.css、draftAddButton.css 管。
+ * 整行悬停时把加号提到墨色，和下面「…」那条一样。
+ * 覆盖：本条 (0,4,0) 盖过 button.css 里 .eqb-button[data-tone='subtle'] 的次要灰字 (0,2,0)；
+ * 键自己悬停时 button.css 里「键嵌在列表的行里」那条 (0,6,0) 照旧垫 border 色底、墨字。 */
+.concierge-group-row-line[data-fluid-hover-active] .concierge-group-row-add .eqb-button {
   color: var(--eqb-color-text);
 }
 
-.concierge-group-row-icon:hover:not(:disabled):not([aria-pressed='true']) {
-  background: var(--eqb-color-desk);
+/* 题组行「…」菜单：2026-11-13 换成共用 Menu（app/src/shared-ui/Menu.tsx + menu.css），原来的
+ * .concierge-group-row-menu / -menuitem 两组规则删掉。触发键是 Button，挂 .concierge-group-row-menu-trigger。
+ *
+ * 整行悬停时把「…」的字提到墨色（原 .concierge-group-row-line[data-fluid-hover-active] .concierge-group-row-icon 那条）。
+ * 本条覆盖 button.css 里 .eqb-button[data-tone='subtle'] 的淡墨字：行是滑动高亮的那一项，按钮自己不是，
+ * 所以 button.css 里 .fluid-hover-list .eqb-button[data-fluid-hover-active] 那条够不着它。 */
+.concierge-group-row-line[data-fluid-hover-active] .concierge-group-row-menu-trigger {
   color: var(--eqb-color-text);
-}
-
-.concierge-group-row-icon:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
-}
-
-.concierge-group-row-icon.concierge-action-add,
-.concierge-group-row-icon.concierge-action-add:hover:not(:disabled),
-.concierge-group-row-icon.concierge-action-add[aria-pressed='true'],
-.concierge-group-row-icon.concierge-action-add[aria-pressed='true']:hover:not(:disabled) {
-  background: transparent;
-  color: var(--eqb-color-text-faint);
-  font-weight: 400;
-}
-
-.concierge-group-row-line[data-fluid-hover-active] .concierge-group-row-icon.concierge-action-add:not([aria-pressed='true']),
-.concierge-group-row-icon.concierge-action-add:hover:not(:disabled):not([aria-pressed='true']),
-.concierge-group-row-icon.concierge-action-add:focus-visible:not([aria-pressed='true']) {
-  background: transparent;
-  color: var(--eqb-color-text);
-}
-
-.concierge-group-row-icon.concierge-action-add:hover:not(:disabled):not([aria-pressed='true']) {
-  background: var(--eqb-color-desk);
-}
-
-.concierge-group-row-icon[aria-pressed='true'] {
-  color: #FFFFFF;
-  background: transparent;
-}
-
-.concierge-group-row-icon-glyph {
-  display: grid;
-  place-items: center;
-}
-
-.concierge-group-row-icon-mark {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--action);
-  color: #FFFFFF;
-  display: grid;
-  place-items: center;
-}
-
-.concierge-group-row-icon[aria-pressed='true']:hover:not(:disabled) .concierge-group-row-icon-mark {
-  background: var(--action-hover);
-}
-
-.concierge-group-row-menu {
-  position: fixed;
-  z-index: 40;
-  min-width: 148px;
-  max-width: calc(100vw - 16px);
-  max-height: calc(100dvh - 16px);
-  overflow-y: auto;
-  box-sizing: border-box;
-  padding: 4px;
-  background: #FFFFFF;
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(30, 30, 28, 0.05);
-}
-
-.concierge-group-row-menuitem {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  height: 32px;
-  padding: 0 8px;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--eqb-color-text);
-  font-size: 13px;
-  font-family: inherit;
-  font-weight: 400;
-  text-decoration: none;
-  cursor: pointer;
-  box-sizing: border-box;
-}
-
-.concierge-group-row-menu.fluid-hover-list {
-  --fh-radius: 8px;
-}
-
-.concierge-group-row-menuitem {
-  position: relative;
-}
-
-.concierge-group-row-menuitem:focus-visible {
-  background: var(--eqb-color-desk);
-  outline: none;
-}
-
-.concierge-group-row-menuitem svg {
-  flex: 0 0 16px;
-  color: var(--eqb-color-text);
-}
-
-.concierge-group-row-menuitem--danger[data-fluid-hover-active],
-.concierge-group-row-menuitem--danger:focus-visible {
-  color: #dc2626;
-}
-
-.concierge-group-row-menuitem--danger[data-fluid-hover-active] svg,
-.concierge-group-row-menuitem--danger:focus-visible svg {
-  color: #dc2626;
 }
 
 /* ─────────────────────────── Recent imports — quiet workbench overrides ───
@@ -5666,11 +4744,7 @@ button:disabled {
   }
 }
 
-@media (pointer: coarse) {
-  .concierge-browse-chip {
-    height: 36px;
-  }
-}
+/* 筛选胶囊在触屏上加高到 36 的那条搬进了 shared-ui/chip.css。 */
 
 /* 草稿卷里有题时的点睛小圆点：全站唯一常驻的强调色，每加一组跳一下。 */
 .basket-chip-dot {

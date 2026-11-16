@@ -1,0 +1,2186 @@
+{
+ "missing": {
+  "before": [],
+  "after": []
+ },
+ "pageErrors": {
+  "before": [],
+  "after": []
+ },
+ "summary": {
+  "before": {
+   "reviewSetup": {
+    "waitTop": 138,
+    "readyTop": 257,
+    "shift": 119,
+    "waitH": 620,
+    "readyH": 620,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "reviewActions": {
+    "waitTop": null,
+    "readyTop": 68,
+    "shift": null,
+    "waitH": null,
+    "readyH": 171,
+    "rowsWait": 0,
+    "rowsReady": 1
+   },
+   "reviewStart": {
+    "waitTop": 401,
+    "readyTop": 521,
+    "shift": 120,
+    "waitH": 32,
+    "readyH": 32,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "reviewTrack": [
+    {
+     "t": 10,
+     "y": 138,
+     "h": 620,
+     "skeletons": 13
+    },
+    {
+     "t": 62,
+     "y": 257,
+     "h": 620,
+     "skeletons": 13
+    },
+    {
+     "t": 113,
+     "y": 257,
+     "h": 620,
+     "skeletons": 0
+    }
+   ],
+   "myspaceRows": {
+    "waitTop": null,
+    "readyTop": 260,
+    "shift": null,
+    "waitH": null,
+    "readyH": 70,
+    "rowsWait": 0,
+    "rowsReady": 5
+   },
+   "myspaceMonth": {
+    "waitTop": null,
+    "readyTop": 235,
+    "shift": null,
+    "waitH": null,
+    "readyH": 17,
+    "rowsWait": 0,
+    "rowsReady": 1
+   },
+   "tokensRows": {
+    "waitTop": null,
+    "readyTop": 360,
+    "shift": null,
+    "waitH": null,
+    "readyH": 64,
+    "rowsWait": 0,
+    "rowsReady": 4
+   },
+   "lectureSimilarRows": {
+    "waitTop": null,
+    "readyTop": 117,
+    "shift": null,
+    "waitH": null,
+    "readyH": 87,
+    "rowsWait": 0,
+    "rowsReady": 3
+   },
+   "homeSimilarRows": {
+    "waitTop": null,
+    "readyTop": 461,
+    "shift": null,
+    "waitH": null,
+    "readyH": 87,
+    "rowsWait": 0,
+    "rowsReady": 3
+   },
+   "drawerRows": {
+    "waitTop": null,
+    "readyTop": 206,
+    "shift": null,
+    "waitH": null,
+    "readyH": 116,
+    "rowsWait": 0,
+    "rowsReady": 3
+   },
+   "detailPaper": {
+    "waitTop": 311,
+    "readyTop": 268,
+    "shift": -43,
+    "waitH": 300,
+    "readyH": 122,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "detailTrack": [
+    {
+     "t": 12,
+     "y": 311,
+     "h": 300,
+     "skeletons": 19
+    },
+    {
+     "t": 37,
+     "y": 268,
+     "h": 300,
+     "skeletons": 19
+    },
+    {
+     "t": 50,
+     "y": 268,
+     "h": 122,
+     "skeletons": 0
+    }
+   ],
+   "draftOpen150": {
+    "ms": 151,
+    "skeletonsVisible": 44
+   },
+   "bootVisibleMs": 282,
+   "bootGaps": 0,
+   "bootCss": {
+    "vars": {
+     "--wait-show-delay": null,
+     "--wait-min-visible": null,
+     "--wait-breathe-cycle": null
+    },
+    "skeletonAnimation": {
+     "name": "eqb-skeleton-breathe",
+     "duration": "1.8s",
+     "delay": "-0.074s"
+    },
+    "gateAnimation": {
+     "name": "public-vocabulary-boot-reveal",
+     "duration": "0.001s",
+     "delay": "0.3s"
+    }
+   }
+  },
+  "after": {
+   "reviewSetup": {
+    "waitTop": 248,
+    "readyTop": 250,
+    "shift": 2,
+    "waitH": 620,
+    "readyH": 620,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "reviewActions": {
+    "waitTop": 61,
+    "readyTop": 61,
+    "shift": 0,
+    "waitH": 169,
+    "readyH": 171,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "reviewStart": {
+    "waitTop": 511,
+    "readyTop": 514,
+    "shift": 3,
+    "waitH": 32,
+    "readyH": 32,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "reviewTrack": [
+    {
+     "t": 11,
+     "y": 248,
+     "h": 620,
+     "skeletons": 13
+    },
+    {
+     "t": 120,
+     "y": 250,
+     "h": 620,
+     "skeletons": 0
+    }
+   ],
+   "myspaceRows": {
+    "waitTop": 257,
+    "readyTop": 260,
+    "shift": 3,
+    "waitH": 70,
+    "readyH": 70,
+    "rowsWait": 3,
+    "rowsReady": 5
+   },
+   "myspaceMonth": {
+    "waitTop": 234,
+    "readyTop": 235,
+    "shift": 1,
+    "waitH": 15,
+    "readyH": 17,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "tokensRows": {
+    "waitTop": 360,
+    "readyTop": 360,
+    "shift": 0,
+    "waitH": 60,
+    "readyH": 64,
+    "rowsWait": 3,
+    "rowsReady": 4
+   },
+   "lectureSimilarRows": {
+    "waitTop": 113,
+    "readyTop": 117,
+    "shift": 4,
+    "waitH": 84,
+    "readyH": 87,
+    "rowsWait": 3,
+    "rowsReady": 3
+   },
+   "homeSimilarRows": {
+    "waitTop": 461,
+    "readyTop": 461,
+    "shift": 0,
+    "waitH": 84,
+    "readyH": 87,
+    "rowsWait": 3,
+    "rowsReady": 3
+   },
+   "drawerRows": {
+    "waitTop": 206,
+    "readyTop": 206,
+    "shift": 0,
+    "waitH": 116,
+    "readyH": 116,
+    "rowsWait": 3,
+    "rowsReady": 3
+   },
+   "detailPaper": {
+    "waitTop": 311,
+    "readyTop": 268,
+    "shift": -43,
+    "waitH": 300,
+    "readyH": 122,
+    "rowsWait": 1,
+    "rowsReady": 1
+   },
+   "detailTrack": [
+    {
+     "t": 4,
+     "y": 311,
+     "h": 300,
+     "skeletons": 19
+    },
+    {
+     "t": 48,
+     "y": 268,
+     "h": 300,
+     "skeletons": 19
+    },
+    {
+     "t": 60,
+     "y": 268,
+     "h": 122,
+     "skeletons": 0
+    }
+   ],
+   "draftOpen150": {
+    "ms": 150,
+    "skeletonsVisible": 44
+   },
+   "bootVisibleMs": 486,
+   "bootGaps": 0,
+   "bootCss": {
+    "vars": {
+     "--wait-show-delay": "300ms",
+     "--wait-min-visible": "500ms",
+     "--wait-breathe-cycle": "1800ms"
+    },
+    "skeletonAnimation": {
+     "name": "eqb-skeleton-breathe",
+     "duration": "1.8s",
+     "delay": "-0.092s"
+    },
+    "gateAnimation": {
+     "name": "public-vocabulary-boot-reveal",
+     "duration": "0.001s",
+     "delay": "0.3s"
+    }
+   }
+  }
+ },
+ "steps": {
+  "review-open": {
+   "before": {
+    "at150": {
+     "ms": 150,
+     "skeletons": 13,
+     "skeletonsVisible": 13,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "vocabulary-run-setup vocabulary-run-skeleton",
+       "role": "status",
+       "text": "正在读取过词进度"
+      }
+     ],
+     "status": [
+      "正在读取过词进度"
+     ],
+     "notices": []
+    },
+    "frozen": {
+     "count": 13,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1416,
+     "skeletons": 13,
+     "skeletonsVisible": 13,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "vocabulary-run-setup vocabulary-run-skeleton",
+       "role": "status",
+       "text": "正在读取过词进度"
+      }
+     ],
+     "status": [
+      "正在读取过词进度"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "heading": [
+      {
+       "x": 24,
+       "y": 68,
+       "w": 1392,
+       "h": 51.5,
+       "text": "中考词汇一轮 万唯一轮完整1600词 · 读取完整词库后显示正式过词进度。"
+      }
+     ],
+     "actions": [],
+     "switcher": [],
+     "progress": [],
+     "setup": [
+      {
+       "x": 24,
+       "y": 138,
+       "w": 1392,
+       "h": 620,
+       "text": "正在读取过词进度"
+      }
+     ],
+     "h2": [
+      {
+       "x": 610,
+       "y": 252,
+       "w": 220,
+       "h": 24,
+       "text": ""
+      }
+     ],
+     "start": [
+      {
+       "x": 380,
+       "y": 401,
+       "w": 680,
+       "h": 32,
+       "text": ""
+      }
+     ],
+     "direct": [
+      {
+       "x": 430,
+       "y": 465,
+       "w": 580,
+       "h": 231,
+       "text": ""
+      }
+     ]
+    },
+    "track": [
+     {
+      "t": 10,
+      "y": 138,
+      "h": 620,
+      "skeletons": 13
+     },
+     {
+      "t": 62,
+      "y": 257,
+      "h": 620,
+      "skeletons": 13
+     },
+     {
+      "t": 113,
+      "y": 257,
+      "h": 620,
+      "skeletons": 0
+     }
+    ],
+    "readyBoxes": {
+     "heading": [
+      {
+       "x": 24,
+       "y": 68,
+       "w": 1392,
+       "h": 171,
+       "text": "中考词汇一轮 完整1600词课程 · 当前30词校准批次 · 按原书顺序逐词判断"
+      }
+     ],
+     "actions": [
+      {
+       "x": 1096,
+       "y": 68,
+       "w": 320,
+       "h": 171,
+       "text": "单词复习 当前学生 默认学生 新建学生 默认学生 · 下一词 1 / 30 查看"
+      }
+     ],
+     "switcher": [
+      {
+       "x": 1096,
+       "y": 114,
+       "w": 320,
+       "h": 56,
+       "text": "当前学生 默认学生 新建学生"
+      }
+     ],
+     "progress": [
+      {
+       "x": 1096,
+       "y": 180,
+       "w": 280,
+       "h": 59,
+       "text": "默认学生 · 下一词 1 / 30 查看 / 调整进度"
+      }
+     ],
+     "setup": [
+      {
+       "x": 24,
+       "y": 257,
+       "w": 1392,
+       "h": 620,
+       "text": "这轮准备收多少个生词？ 可选 1–60 个。第一次默认 15，以后会记住上次目标"
+      }
+     ],
+     "h2": [
+      {
+       "x": 610,
+       "y": 369,
+       "w": 220,
+       "h": 27,
+       "text": "这轮准备收多少个生词？"
+      }
+     ],
+     "start": [
+      {
+       "x": 380,
+       "y": 521,
+       "w": 680,
+       "h": 32,
+       "text": "过词读音 美音 英音 开始过词"
+      }
+     ],
+     "direct": [
+      {
+       "x": 430,
+       "y": 585,
+       "w": 580,
+       "h": 233,
+       "text": "已有单词，直接生成词表 只匹配当前课程已入库的 30 词 用中文逗号隔开 生成固"
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 150,
+     "skeletons": 7,
+     "skeletonsVisible": 0,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "vocabulary-run-setup vocabulary-run-skeleton",
+       "role": "status",
+       "text": "正在读取过词进度"
+      }
+     ],
+     "status": [
+      "正在读取过词进度"
+     ],
+     "notices": []
+    },
+    "frozen": {
+     "count": 20,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1417,
+     "skeletons": 20,
+     "skeletonsVisible": 20,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "vocabulary-run-setup vocabulary-run-skeleton",
+       "role": "status",
+       "text": "正在读取过词进度"
+      }
+     ],
+     "status": [
+      "正在读取过词进度"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "heading": [
+      {
+       "x": 24,
+       "y": 61,
+       "w": 1392,
+       "h": 169,
+       "text": "中考词汇一轮 万唯一轮完整1600词 · 读取完整词库后显示正式过词进度。"
+      }
+     ],
+     "actions": [
+      {
+       "x": 1096,
+       "y": 61,
+       "w": 320,
+       "h": 169,
+       "text": ""
+      }
+     ],
+     "switcher": [
+      {
+       "x": 1096,
+       "y": 107,
+       "w": 320,
+       "h": 56,
+       "text": ""
+      }
+     ],
+     "progress": [
+      {
+       "x": 1096,
+       "y": 173,
+       "w": 280,
+       "h": 57,
+       "text": ""
+      }
+     ],
+     "setup": [
+      {
+       "x": 24,
+       "y": 248,
+       "w": 1392,
+       "h": 620,
+       "text": "正在读取过词进度"
+      }
+     ],
+     "h2": [
+      {
+       "x": 610,
+       "y": 362,
+       "w": 220,
+       "h": 24,
+       "text": ""
+      }
+     ],
+     "start": [
+      {
+       "x": 380,
+       "y": 511,
+       "w": 680,
+       "h": 32,
+       "text": ""
+      }
+     ],
+     "direct": [
+      {
+       "x": 430,
+       "y": 575,
+       "w": 580,
+       "h": 231,
+       "text": ""
+      }
+     ]
+    },
+    "track": [
+     {
+      "t": 11,
+      "y": 248,
+      "h": 620,
+      "skeletons": 13
+     },
+     {
+      "t": 120,
+      "y": 250,
+      "h": 620,
+      "skeletons": 0
+     }
+    ],
+    "readyBoxes": {
+     "heading": [
+      {
+       "x": 24,
+       "y": 61,
+       "w": 1392,
+       "h": 171,
+       "text": "中考词汇一轮 完整1600词课程 · 当前30词校准批次 · 按原书顺序逐词判断"
+      }
+     ],
+     "actions": [
+      {
+       "x": 1096,
+       "y": 61,
+       "w": 320,
+       "h": 171,
+       "text": "单词复习 当前学生 默认学生 新建学生 默认学生 · 下一词 1 / 30 查看"
+      }
+     ],
+     "switcher": [
+      {
+       "x": 1096,
+       "y": 107,
+       "w": 320,
+       "h": 56,
+       "text": "当前学生 默认学生 新建学生"
+      }
+     ],
+     "progress": [
+      {
+       "x": 1096,
+       "y": 173,
+       "w": 280,
+       "h": 59,
+       "text": "默认学生 · 下一词 1 / 30 查看 / 调整进度"
+      }
+     ],
+     "setup": [
+      {
+       "x": 24,
+       "y": 250,
+       "w": 1392,
+       "h": 620,
+       "text": "这轮准备收多少个生词？ 可选 1–60 个。第一次默认 15，以后会记住上次目标"
+      }
+     ],
+     "h2": [
+      {
+       "x": 610,
+       "y": 362,
+       "w": 220,
+       "h": 27,
+       "text": "这轮准备收多少个生词？"
+      }
+     ],
+     "start": [
+      {
+       "x": 380,
+       "y": 514,
+       "w": 680,
+       "h": 32,
+       "text": "过词读音 美音 英音 开始过词"
+      }
+     ],
+     "direct": [
+      {
+       "x": 430,
+       "y": 578,
+       "w": 580,
+       "h": 233,
+       "text": "已有单词，直接生成词表 只匹配当前课程已入库的 30 词 用中文逗号隔开 生成固"
+      }
+     ]
+    }
+   }
+  },
+  "detail-open": {
+   "before": {
+    "frozen": {
+     "count": 29,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1418,
+     "skeletons": 29,
+     "skeletonsVisible": 29,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "peek-root detail-opening-skeleton",
+       "role": "status",
+       "text": "正在读取题组详情"
+      }
+     ],
+     "status": [
+      "正在读取题组详情"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 206.6,
+       "text": ""
+      }
+     ],
+     "title": [
+      {
+       "x": 316,
+       "y": 127,
+       "w": 808,
+       "h": 26,
+       "text": ""
+      }
+     ],
+     "actions": [
+      {
+       "x": 316,
+       "y": 255,
+       "w": 808,
+       "h": 32,
+       "text": ""
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 311,
+       "w": 808,
+       "h": 300,
+       "text": ""
+      }
+     ]
+    },
+    "track": [
+     {
+      "t": 12,
+      "y": 311,
+      "h": 300,
+      "skeletons": 19
+     },
+     {
+      "t": 37,
+      "y": 268,
+      "h": 300,
+      "skeletons": 19
+     },
+     {
+      "t": 50,
+      "y": 268,
+      "h": 122,
+      "skeletons": 0
+     }
+    ],
+    "readyBoxes": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 163.8,
+       "text": "阅读理解 · 3 题 · 自建 Reading A Reading A 加入草稿"
+      }
+     ],
+     "title": [
+      {
+       "x": 316,
+       "y": 129,
+       "w": 808,
+       "h": 26,
+       "text": "Reading A"
+      }
+     ],
+     "actions": [
+      {
+       "x": 316,
+       "y": 212,
+       "w": 808,
+       "h": 32,
+       "text": "加入草稿卷"
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 268,
+       "w": 808,
+       "h": 122,
+       "text": "这份卷还没上线，回到题库换一份看看。"
+      }
+     ]
+    },
+    "paperState": "placeholder: 这份卷还没上线，回到题库换一份看看。",
+    "readyBoxes2": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 163.8,
+       "text": "阅读理解 · 3 题 · 自建 Reading A Reading A 加入草稿"
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 268,
+       "w": 808,
+       "h": 122,
+       "text": "这份卷还没上线，回到题库换一份看看。"
+      }
+     ]
+    }
+   },
+   "after": {
+    "frozen": {
+     "count": 29,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1418,
+     "skeletons": 29,
+     "skeletonsVisible": 29,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "peek-root detail-opening-skeleton",
+       "role": "status",
+       "text": "正在读取题组详情"
+      }
+     ],
+     "status": [
+      "正在读取题组详情"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 206.6,
+       "text": ""
+      }
+     ],
+     "title": [
+      {
+       "x": 316,
+       "y": 127,
+       "w": 808,
+       "h": 26,
+       "text": ""
+      }
+     ],
+     "actions": [
+      {
+       "x": 316,
+       "y": 255,
+       "w": 808,
+       "h": 32,
+       "text": ""
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 311,
+       "w": 808,
+       "h": 300,
+       "text": ""
+      }
+     ]
+    },
+    "track": [
+     {
+      "t": 4,
+      "y": 311,
+      "h": 300,
+      "skeletons": 19
+     },
+     {
+      "t": 48,
+      "y": 268,
+      "h": 300,
+      "skeletons": 19
+     },
+     {
+      "t": 60,
+      "y": 268,
+      "h": 122,
+      "skeletons": 0
+     }
+    ],
+    "readyBoxes": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 163.8,
+       "text": "阅读理解 · 3 题 · 自建 Reading A Reading A 加入草稿"
+      }
+     ],
+     "title": [
+      {
+       "x": 316,
+       "y": 129,
+       "w": 808,
+       "h": 26,
+       "text": "Reading A"
+      }
+     ],
+     "actions": [
+      {
+       "x": 316,
+       "y": 212,
+       "w": 808,
+       "h": 32,
+       "text": "加入草稿卷"
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 268,
+       "w": 808,
+       "h": 122,
+       "text": "这份卷还没上线，回到题库换一份看看。"
+      }
+     ]
+    },
+    "paperState": "placeholder: 这份卷还没上线，回到题库换一份看看。",
+    "readyBoxes2": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 163.8,
+       "text": "阅读理解 · 3 题 · 自建 Reading A Reading A 加入草稿"
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 268,
+       "w": 808,
+       "h": 122,
+       "text": "这份卷还没上线，回到题库换一份看看。"
+      }
+     ]
+    }
+   }
+  },
+  "myspace": {
+   "before": {
+    "at150": {
+     "ms": 151,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "正在读取个人空间"
+     ],
+     "notices": [
+      "正在读取个人空间"
+     ]
+    },
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "web-animation"
+     ]
+    },
+    "at1200": {
+     "ms": 1409,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "正在读取个人空间"
+     ],
+     "notices": [
+      "正在读取个人空间"
+     ]
+    },
+    "waitBoxes": {
+     "head": [
+      {
+       "x": 130,
+       "y": 166,
+       "w": 1180,
+       "h": 42,
+       "text": "全部文件"
+      }
+     ],
+     "notice": [
+      {
+       "x": 130,
+       "y": 234,
+       "w": 1180,
+       "h": 28,
+       "text": "正在读取个人空间"
+      }
+     ],
+     "rows": [],
+     "month": []
+    },
+    "readyBoxes": {
+     "head": [
+      {
+       "x": 130,
+       "y": 166,
+       "w": 1180,
+       "h": 43.4,
+       "text": "全部文件 5 份已保存文件"
+      }
+     ],
+     "rows": [
+      {
+       "x": 130,
+       "y": 260,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 1 2 页 11月14日 下载 打开原草稿"
+      },
+      {
+       "x": 130,
+       "y": 330,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 2 3 页 11月13日 下载 打开原草稿"
+      },
+      {
+       "x": 130,
+       "y": 400,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 3 4 页 11月12日 下载 打开原草稿"
+      },
+      {
+       "x": 130,
+       "y": 470,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 4 5 页 11月11日 下载 打开原草稿"
+      },
+      {
+       "x": 130,
+       "y": 540,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 5 6 页 11月10日 下载 打开原草稿"
+      }
+     ],
+     "month": [
+      {
+       "x": 130,
+       "y": 235,
+       "w": 1180,
+       "h": 17,
+       "text": "2026 年 11 月 5 份"
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 153,
+     "skeletons": 20,
+     "skeletonsVisible": 20,
+     "busy": [
+      {
+       "tag": "DIV",
+       "cls": "eqb-skeleton-region",
+       "role": "status",
+       "text": "正在读取个人空间"
+      }
+     ],
+     "status": [
+      "正在读取个人空间"
+     ],
+     "notices": []
+    },
+    "frozen": {
+     "count": 20,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1411,
+     "skeletons": 20,
+     "skeletonsVisible": 20,
+     "busy": [
+      {
+       "tag": "DIV",
+       "cls": "eqb-skeleton-region",
+       "role": "status",
+       "text": "正在读取个人空间"
+      }
+     ],
+     "status": [
+      "正在读取个人空间"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "head": [
+      {
+       "x": 130,
+       "y": 166,
+       "w": 1180,
+       "h": 42,
+       "text": "全部文件"
+      }
+     ],
+     "notice": [],
+     "rows": [
+      {
+       "x": 130,
+       "y": 257,
+       "w": 1180,
+       "h": 70,
+       "text": ""
+      },
+      {
+       "x": 130,
+       "y": 327,
+       "w": 1180,
+       "h": 70,
+       "text": ""
+      },
+      {
+       "x": 130,
+       "y": 397,
+       "w": 1180,
+       "h": 70,
+       "text": ""
+      }
+     ],
+     "month": [
+      {
+       "x": 130,
+       "y": 234,
+       "w": 1180,
+       "h": 15,
+       "text": ""
+      }
+     ]
+    },
+    "readyBoxes": {
+     "head": [
+      {
+       "x": 130,
+       "y": 166,
+       "w": 1180,
+       "h": 43.4,
+       "text": "全部文件 5 份已保存文件"
+      }
+     ],
+     "rows": [
+      {
+       "x": 130,
+       "y": 260,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 1 2 页 11月14日 下载 打开原草稿"
+      },
+      {
+       "x": 130,
+       "y": 330,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 2 3 页 11月13日 下载 打开原草稿"
+      },
+      {
+       "x": 130,
+       "y": 400,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 3 4 页 11月12日 下载 打开原草稿"
+      },
+      {
+       "x": 130,
+       "y": 470,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 4 5 页 11月11日 下载 打开原草稿"
+      },
+      {
+       "x": 130,
+       "y": 540,
+       "w": 1180,
+       "h": 70,
+       "text": "拍图卷 5 6 页 11月10日 下载 打开原草稿"
+      }
+     ],
+     "month": [
+      {
+       "x": 130,
+       "y": 235,
+       "w": 1180,
+       "h": 17,
+       "text": "2026 年 11 月 5 份"
+      }
+     ]
+    }
+   }
+  },
+  "tokens": {
+   "before": {
+    "at150": {
+     "ms": 150,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "加载中"
+     ],
+     "notices": [
+      "加载中"
+     ]
+    },
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "web-animation"
+     ]
+    },
+    "at1200": {
+     "ms": 1412,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "加载中"
+     ],
+     "notices": [
+      "加载中"
+     ]
+    },
+    "waitBoxes": {
+     "notice": [
+      {
+       "x": 292,
+       "y": 357,
+       "w": 856,
+       "h": 28,
+       "text": "加载中"
+      }
+     ],
+     "rows": []
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 292,
+       "y": 360,
+       "w": 856,
+       "h": 64,
+       "text": "组卷 Agent有效 创建于 2026/11/1 · 尚未使用 作废口令"
+      },
+      {
+       "x": 292,
+       "y": 424,
+       "w": 856,
+       "h": 64,
+       "text": "导入 Agent有效 创建于 2026/11/2 · 最近使用 2026/11/"
+      },
+      {
+       "x": 292,
+       "y": 488,
+       "w": 856,
+       "h": 64,
+       "text": "审阅 Agent有效 创建于 2026/11/3 · 尚未使用 作废口令"
+      },
+      {
+       "x": 292,
+       "y": 552,
+       "w": 856,
+       "h": 64,
+       "text": "旧口令已作废 创建于 2026/11/4 · 尚未使用"
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 150,
+     "skeletons": 12,
+     "skeletonsVisible": 12,
+     "busy": [
+      {
+       "tag": "DIV",
+       "cls": "eqb-skeleton-region",
+       "role": "status",
+       "text": "口令列表加载中"
+      }
+     ],
+     "status": [
+      "口令列表加载中"
+     ],
+     "notices": []
+    },
+    "frozen": {
+     "count": 12,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1409,
+     "skeletons": 12,
+     "skeletonsVisible": 12,
+     "busy": [
+      {
+       "tag": "DIV",
+       "cls": "eqb-skeleton-region",
+       "role": "status",
+       "text": "口令列表加载中"
+      }
+     ],
+     "status": [
+      "口令列表加载中"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "notice": [],
+     "rows": [
+      {
+       "x": 292,
+       "y": 360,
+       "w": 856,
+       "h": 60,
+       "text": ""
+      },
+      {
+       "x": 292,
+       "y": 420,
+       "w": 856,
+       "h": 60,
+       "text": ""
+      },
+      {
+       "x": 292,
+       "y": 480,
+       "w": 856,
+       "h": 60,
+       "text": ""
+      }
+     ]
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 292,
+       "y": 360,
+       "w": 856,
+       "h": 64,
+       "text": "组卷 Agent有效 创建于 2026/11/1 · 尚未使用 作废口令"
+      },
+      {
+       "x": 292,
+       "y": 424,
+       "w": 856,
+       "h": 64,
+       "text": "导入 Agent有效 创建于 2026/11/2 · 最近使用 2026/11/"
+      },
+      {
+       "x": 292,
+       "y": 488,
+       "w": 856,
+       "h": 64,
+       "text": "审阅 Agent有效 创建于 2026/11/3 · 尚未使用 作废口令"
+      },
+      {
+       "x": 292,
+       "y": 552,
+       "w": 856,
+       "h": 64,
+       "text": "旧口令已作废 创建于 2026/11/4 · 尚未使用"
+      }
+     ]
+    }
+   }
+  },
+  "lecture-similar": {
+   "before": {
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "web-animation"
+     ]
+    },
+    "at1200": {
+     "ms": 1418,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "配相似加载中"
+     ],
+     "notices": [
+      "配相似加载中"
+     ]
+    },
+    "waitBoxes": {
+     "notice": [
+      {
+       "x": 993,
+       "y": 73,
+       "w": 406,
+       "h": 28,
+       "text": "配相似加载中"
+      }
+     ],
+     "rows": [],
+     "seed": []
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 993,
+       "y": 117,
+       "w": 406,
+       "h": 87,
+       "text": "B 篇 2026年新课标Ⅰ卷 阅读 同话题：人与自然"
+      },
+      {
+       "x": 993,
+       "y": 214,
+       "w": 406,
+       "h": 87,
+       "text": "C 篇 2026年新课标Ⅰ卷 阅读 同体裁：记叙文"
+      },
+      {
+       "x": 993,
+       "y": 311,
+       "w": 406,
+       "h": 87,
+       "text": "D 篇 2026年新课标Ⅰ卷 阅读 同体裁：记叙文"
+      }
+     ],
+     "seed": [
+      {
+       "x": 993,
+       "y": 73,
+       "w": 406,
+       "h": 34,
+       "text": "种子：Reading A · 第21题 配方：同小题题型命中 → 同话题优先 已"
+      }
+     ],
+     "list": [
+      {
+       "x": 993,
+       "y": 117,
+       "w": 406,
+       "h": 281,
+       "text": "B 篇 2026年新课标Ⅰ卷 阅读 同话题：人与自然 C 篇 2026年新课标Ⅰ"
+      }
+     ]
+    }
+   },
+   "after": {
+    "frozen": {
+     "count": 14,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1411,
+     "skeletons": 14,
+     "skeletonsVisible": 14,
+     "busy": [
+      {
+       "tag": "DIV",
+       "cls": "eqb-skeleton-region similar-rail-skeleton",
+       "role": "status",
+       "text": "配相似加载中"
+      }
+     ],
+     "status": [
+      "配相似加载中"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "notice": [],
+     "rows": [
+      {
+       "x": 993,
+       "y": 113,
+       "w": 406,
+       "h": 84,
+       "text": ""
+      },
+      {
+       "x": 993,
+       "y": 207,
+       "w": 406,
+       "h": 84,
+       "text": ""
+      },
+      {
+       "x": 993,
+       "y": 301,
+       "w": 406,
+       "h": 84,
+       "text": ""
+      }
+     ],
+     "seed": [
+      {
+       "x": 993,
+       "y": 73,
+       "w": 406,
+       "h": 30,
+       "text": ""
+      }
+     ]
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 993,
+       "y": 117,
+       "w": 406,
+       "h": 87,
+       "text": "B 篇 2026年新课标Ⅰ卷 阅读 同话题：人与自然"
+      },
+      {
+       "x": 993,
+       "y": 214,
+       "w": 406,
+       "h": 87,
+       "text": "C 篇 2026年新课标Ⅰ卷 阅读 同体裁：记叙文"
+      },
+      {
+       "x": 993,
+       "y": 311,
+       "w": 406,
+       "h": 87,
+       "text": "D 篇 2026年新课标Ⅰ卷 阅读 同体裁：记叙文"
+      }
+     ],
+     "seed": [
+      {
+       "x": 993,
+       "y": 73,
+       "w": 406,
+       "h": 34,
+       "text": "种子：Reading A · 第21题 配方：同小题题型命中 → 同话题优先 已"
+      }
+     ],
+     "list": [
+      {
+       "x": 993,
+       "y": 117,
+       "w": 406,
+       "h": 281,
+       "text": "B 篇 2026年新课标Ⅰ卷 阅读 同话题：人与自然 C 篇 2026年新课标Ⅰ"
+      }
+     ]
+    }
+   }
+  },
+  "home-similar": {
+   "before": {
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "web-animation"
+     ]
+    },
+    "at1200": {
+     "ms": 1423,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "已按本地题库精确信息匹配。",
+      "2026E2E 新课标Ⅰ卷命中 4 个篇章推荐理由：2026 E2E · A 篇",
+      "A篇推荐理由：2026 E2E · A 篇相似篇章同话题硬门槛 · 同篇位优先 ",
+      "加载中"
+     ],
+     "notices": [
+      "已按本地题库精确信息匹配。",
+      "加载中"
+     ]
+    },
+    "waitBoxes": {
+     "notice": [
+      {
+       "x": 304,
+       "y": 461,
+       "w": 832,
+       "h": 28,
+       "text": "加载中"
+      }
+     ],
+     "rows": []
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 304,
+       "y": 461,
+       "w": 832,
+       "h": 87,
+       "text": "B 篇 2026年新课标Ⅰ卷 阅读 同话题：人与自然 加入草稿卷"
+      },
+      {
+       "x": 304,
+       "y": 558,
+       "w": 832,
+       "h": 87,
+       "text": "C 篇 2026年新课标Ⅰ卷 阅读 同体裁：记叙文 加入草稿卷"
+      },
+      {
+       "x": 304,
+       "y": 655,
+       "w": 832,
+       "h": 87,
+       "text": "D 篇 2026年新课标Ⅰ卷 阅读 同体裁：记叙文 加入草稿卷"
+      }
+     ]
+    }
+   },
+   "after": {
+    "frozen": {
+     "count": 12,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1427,
+     "skeletons": 12,
+     "skeletonsVisible": 12,
+     "busy": [
+      {
+       "tag": "DIV",
+       "cls": "eqb-skeleton-region",
+       "role": "status",
+       "text": "相似篇章加载中"
+      }
+     ],
+     "status": [
+      "已按本地题库精确信息匹配。",
+      "2026E2E 新课标Ⅰ卷命中 4 个篇章推荐理由：2026 E2E · A 篇",
+      "A篇推荐理由：2026 E2E · A 篇相似篇章同话题硬门槛 · 同篇位优先 ",
+      "相似篇章加载中"
+     ],
+     "notices": [
+      "已按本地题库精确信息匹配。"
+     ]
+    },
+    "waitBoxes": {
+     "notice": [],
+     "rows": [
+      {
+       "x": 304,
+       "y": 461,
+       "w": 832,
+       "h": 84,
+       "text": ""
+      },
+      {
+       "x": 304,
+       "y": 555,
+       "w": 832,
+       "h": 84,
+       "text": ""
+      },
+      {
+       "x": 304,
+       "y": 649,
+       "w": 832,
+       "h": 84,
+       "text": ""
+      }
+     ]
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 304,
+       "y": 461,
+       "w": 832,
+       "h": 87,
+       "text": "B 篇 2026年新课标Ⅰ卷 阅读 同话题：人与自然 加入草稿卷"
+      },
+      {
+       "x": 304,
+       "y": 558,
+       "w": 832,
+       "h": 87,
+       "text": "C 篇 2026年新课标Ⅰ卷 阅读 同体裁：记叙文 加入草稿卷"
+      },
+      {
+       "x": 304,
+       "y": 655,
+       "w": 832,
+       "h": 87,
+       "text": "D 篇 2026年新课标Ⅰ卷 阅读 同体裁：记叙文 加入草稿卷"
+      }
+     ]
+    }
+   }
+  },
+  "draft": {
+   "before": {
+    "items": [
+     {
+      "id": "draft-item-59c1570e-f6f9-47bb-9ab6-000393595df8",
+      "groupId": "group-2026-i-reading-a"
+     },
+     {
+      "id": "draft-item-1cc08685-e6c0-4e85-81ab-04b31f79596c",
+      "groupId": "group-2026-i-reading-b"
+     },
+     {
+      "id": "draft-item-8ba310d3-7f3f-4742-9c2b-6effb9af4563",
+      "groupId": "group-2026-i-reading-c"
+     }
+    ],
+    "at150": {
+     "ms": 151,
+     "skeletons": 44,
+     "skeletonsVisible": 44,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "draft-workbench-shell",
+       "role": "status",
+       "text": "正在打开草稿卷"
+      }
+     ],
+     "status": [
+      "正在打开草稿卷"
+     ],
+     "notices": []
+    },
+    "frozen": {
+     "count": 44,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1416,
+     "skeletons": 44,
+     "skeletonsVisible": 44,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "draft-workbench-shell",
+       "role": "status",
+       "text": "正在打开草稿卷"
+      }
+     ],
+     "status": [
+      "正在打开草稿卷"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "rail": [
+      {
+       "x": 122,
+       "y": 72,
+       "w": 164,
+       "h": 196,
+       "text": ""
+      }
+     ],
+     "sheet": [
+      {
+       "x": 323,
+       "y": 96,
+       "w": 794,
+       "h": 1123,
+       "text": ""
+      }
+     ]
+    },
+    "readyBoxes": {
+     "rail": [
+      {
+       "x": 122,
+       "y": 72,
+       "w": 164,
+       "h": 195,
+       "text": "共 1 页 · 双面 1 张 A篇原卷 A 篇 B篇原卷 B 篇 C篇原卷 C "
+      }
+     ],
+     "col": [
+      {
+       "x": 310,
+       "y": 72,
+       "w": 820,
+       "h": 1200,
+       "text": "正在生成分页预览"
+      }
+     ],
+     "sheet": [
+      {
+       "x": 310,
+       "y": 72,
+       "w": 820,
+       "h": 1200,
+       "text": "正在生成分页预览"
+      }
+     ]
+    }
+   },
+   "after": {
+    "items": [
+     {
+      "id": "draft-item-2cd7d219-3a66-49d7-9179-77153b76255d",
+      "groupId": "group-2026-i-reading-a"
+     },
+     {
+      "id": "draft-item-ea7928c6-3029-422e-8032-e741f4147c6d",
+      "groupId": "group-2026-i-reading-b"
+     },
+     {
+      "id": "draft-item-87c2b80a-4819-46cb-bf59-6091e7f724b4",
+      "groupId": "group-2026-i-reading-c"
+     }
+    ],
+    "at150": {
+     "ms": 150,
+     "skeletons": 44,
+     "skeletonsVisible": 44,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "draft-workbench-shell",
+       "role": "status",
+       "text": "正在打开草稿卷"
+      }
+     ],
+     "status": [
+      "正在打开草稿卷"
+     ],
+     "notices": []
+    },
+    "frozen": {
+     "count": 44,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1419,
+     "skeletons": 44,
+     "skeletonsVisible": 44,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "draft-workbench-shell",
+       "role": "status",
+       "text": "正在打开草稿卷"
+      }
+     ],
+     "status": [
+      "正在打开草稿卷"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "rail": [
+      {
+       "x": 122,
+       "y": 72,
+       "w": 164,
+       "h": 196,
+       "text": ""
+      }
+     ],
+     "sheet": [
+      {
+       "x": 323,
+       "y": 96,
+       "w": 794,
+       "h": 1123,
+       "text": ""
+      }
+     ]
+    },
+    "readyBoxes": {
+     "rail": [
+      {
+       "x": 122,
+       "y": 72,
+       "w": 164,
+       "h": 195,
+       "text": "共 1 页 · 双面 1 张 A篇原卷 A 篇 B篇原卷 B 篇 C篇原卷 C "
+      }
+     ],
+     "col": [
+      {
+       "x": 310,
+       "y": 72,
+       "w": 820,
+       "h": 1200,
+       "text": "正在生成分页预览"
+      }
+     ],
+     "sheet": [
+      {
+       "x": 310,
+       "y": 72,
+       "w": 820,
+       "h": 1200,
+       "text": "正在生成分页预览"
+      }
+     ]
+    }
+   }
+  },
+  "draft-swap": {
+   "before": {
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "web-animation"
+     ]
+    },
+    "at1200": {
+     "ms": 1409,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "已保存",
+      "加载中"
+     ],
+     "notices": [
+      "加载中"
+     ]
+    },
+    "waitBoxes": {
+     "notice": [
+      {
+       "x": 86,
+       "y": 206,
+       "w": 192,
+       "h": 28,
+       "text": "加载中"
+      }
+     ],
+     "rows": []
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 86,
+       "y": 206,
+       "w": 192,
+       "h": 116,
+       "text": "B 篇 2026年新课标Ⅰ卷 阅读 ⇄ 替换这篇 ＋ 加入 同话题：人与自然"
+      },
+      {
+       "x": 86,
+       "y": 332,
+       "w": 192,
+       "h": 116,
+       "text": "C 篇 2026年新课标Ⅰ卷 阅读 ⇄ 替换这篇 ＋ 加入 同体裁：记叙文"
+      },
+      {
+       "x": 86,
+       "y": 458,
+       "w": 192,
+       "h": 116,
+       "text": "D 篇 2026年新课标Ⅰ卷 阅读 ⇄ 替换这篇 ＋ 加入 同体裁：记叙文"
+      }
+     ]
+    }
+   },
+   "after": {
+    "frozen": {
+     "count": 18,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1413,
+     "skeletons": 18,
+     "skeletonsVisible": 18,
+     "busy": [
+      {
+       "tag": "DIV",
+       "cls": "eqb-skeleton-region",
+       "role": "status",
+       "text": "相似篇章加载中"
+      }
+     ],
+     "status": [
+      "已保存",
+      "相似篇章加载中"
+     ],
+     "notices": []
+    },
+    "waitBoxes": {
+     "notice": [],
+     "rows": [
+      {
+       "x": 86,
+       "y": 206,
+       "w": 192,
+       "h": 116,
+       "text": ""
+      },
+      {
+       "x": 86,
+       "y": 332,
+       "w": 192,
+       "h": 116,
+       "text": ""
+      },
+      {
+       "x": 86,
+       "y": 458,
+       "w": 192,
+       "h": 116,
+       "text": ""
+      }
+     ]
+    },
+    "readyBoxes": {
+     "rows": [
+      {
+       "x": 86,
+       "y": 206,
+       "w": 192,
+       "h": 116,
+       "text": "B 篇 2026年新课标Ⅰ卷 阅读 ⇄ 替换这篇 ＋ 加入 同话题：人与自然"
+      },
+      {
+       "x": 86,
+       "y": 332,
+       "w": 192,
+       "h": 116,
+       "text": "C 篇 2026年新课标Ⅰ卷 阅读 ⇄ 替换这篇 ＋ 加入 同体裁：记叙文"
+      },
+      {
+       "x": 86,
+       "y": 458,
+       "w": 192,
+       "h": 116,
+       "text": "D 篇 2026年新课标Ⅰ卷 阅读 ⇄ 替换这篇 ＋ 加入 同体裁：记叙文"
+      }
+     ]
+    }
+   }
+  },
+  "dictation-boot-min-390": {
+   "before": {
+    "revealedAt": 411,
+    "css": {
+     "vars": {
+      "--wait-show-delay": null,
+      "--wait-min-visible": null,
+      "--wait-breathe-cycle": null
+     },
+     "skeletonAnimation": {
+      "name": "eqb-skeleton-breathe",
+      "duration": "1.8s",
+      "delay": "-0.074s"
+     },
+     "gateAnimation": {
+      "name": "public-vocabulary-boot-reveal",
+      "duration": "0.001s",
+      "delay": "0.3s"
+     }
+    },
+    "readyAt": 759,
+    "timeline": [
+     {
+      "t": 23,
+      "visible": 0,
+      "boot": false
+     },
+     {
+      "t": 408,
+      "visible": 20,
+      "boot": true
+     },
+     {
+      "t": 690,
+      "visible": 0,
+      "boot": false
+     }
+    ],
+    "visibleMs": 282,
+    "gaps": 0
+   },
+   "after": {
+    "revealedAt": 424,
+    "css": {
+     "vars": {
+      "--wait-show-delay": "300ms",
+      "--wait-min-visible": "500ms",
+      "--wait-breathe-cycle": "1800ms"
+     },
+     "skeletonAnimation": {
+      "name": "eqb-skeleton-breathe",
+      "duration": "1.8s",
+      "delay": "-0.092s"
+     },
+     "gateAnimation": {
+      "name": "public-vocabulary-boot-reveal",
+      "duration": "0.001s",
+      "delay": "0.3s"
+     }
+    },
+    "readyAt": 1282,
+    "timeline": [
+     {
+      "t": 19,
+      "visible": 0,
+      "boot": false
+     },
+     {
+      "t": 414,
+      "visible": 20,
+      "boot": true
+     },
+     {
+      "t": 900,
+      "visible": 0,
+      "boot": false
+     }
+    ],
+    "visibleMs": 486,
+    "gaps": 0
+   }
+  }
+ }
+}

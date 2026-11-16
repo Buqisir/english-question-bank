@@ -1,0 +1,25 @@
+{
+  "mode": "before",
+  "shots": [
+    {
+      "file": "before-1440-15-相似题批量加入失败.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "similar-toast similar-toast--on",
+          "role": null,
+          "text": "已把 1 篇加入草稿卷，题目一并带上",
+          "x": 604,
+          "y": 839,
+          "w": 232,
+          "h": 35
+        }
+      ]
+    }
+  ],
+  "counts": [],
+  "dialogs": [
+    "1440 alert: walk-forced 500"
+  ],
+  "errors": []
+}

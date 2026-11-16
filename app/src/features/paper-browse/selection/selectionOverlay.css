@@ -14,10 +14,10 @@
   box-sizing: border-box;
   gap: 4px;
   background: var(--desk-raised, #FAFDF7);
-  border: 1px solid var(--desk-line, #E3E8DF);
+  border: 1px solid transparent;
   border-radius: 8px;
   padding: 3px;
-  box-shadow: var(--eqb-shadow-floating, 0 8px 24px rgba(0, 0, 0, 0.12));
+  box-shadow: var(--elev-3);
   animation: paper-selection-pop var(--motion-fast) var(--ease-out);
   transform-origin: var(--paper-selection-origin, top left);
 }
@@ -93,9 +93,9 @@
   flex-direction: column;
   padding: 12px 14px 10px;
   background: var(--desk-raised, #FAFDF7);
-  border: 1px solid var(--desk-line, #E3E8DF);
+  border: 1px solid transparent;
   border-radius: 12px;
-  box-shadow: var(--eqb-shadow-floating, 0 8px 24px rgba(0, 0, 0, 0.12));
+  box-shadow: var(--elev-3);
   animation: paper-selection-card-enter var(--motion-base) var(--ease-out);
   transform-origin: var(--paper-selection-origin, top left);
   scrollbar-width: thin;
@@ -200,21 +200,15 @@
   padding: 2px 0 4px;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  /* 「正在翻译」后面跟所以点，字和点之间不另加间距（原 6px；2026-11-15 第二轮统一，见 shared-ui/waiting.css）。 */
+  gap: 0;
   font-size: var(--eqb-font-size-xs, 12px);
   color: var(--eqb-color-text-muted, #6b6e68);
   line-height: 1.2;
 }
 
-.paper-selection-spinner {
-  width: 12px;
-  height: 12px;
-  border: 1.5px solid var(--desk-line, #E3E8DF);
-  border-top-color: currentColor;
-  border-radius: 50%;
-  animation: paper-selection-spin 0.8s linear infinite; /* token-exempt */
-  flex-shrink: 0;
-}
+/* 原来这里是「正在翻译」「分析中」前面的转圈（.paper-selection-spinner 和 @keyframes paper-selection-spin），
+ * 2026-11-15 换成字后面的所以点（shared-ui/WaitDots.tsx 的 InlineWaitDots，DESIGN.md §5 Waiting），删了。 */
 
 .paper-selection-segment-row {
   padding: 2px 0;
@@ -257,9 +251,16 @@
 }
 
 .paper-selection-retry {
-  appearance: none;
   margin: 10px 0 0;
   align-self: flex-start;
+}
+
+/* 下面这几条手写的描边样子只剩句子分析卡出错时的「重试」（SentenceAnalysisCard.tsx）在用：句子分析卡这次不换（等它自己那批）。
+ * 选词浮条翻译卡的「重试」已换成 Button 墨字小号（Owner 2026-11-14 决定 #2），所以这里加 :not(.eqb-button) 让开它。
+ * 覆盖：加了 :not(.eqb-button) 以后这几条特指度从 (0,1,0)/(0,2,0) 变成 (0,2,0)/(0,3,0)，管的元素只有句子分析卡那一个，
+ * 它不挂 .eqb-button，button.css 碰不到它，所以只是让开，不盖谁。 */
+.paper-selection-retry:not(.eqb-button) {
+  appearance: none;
   border: 1px solid var(--desk-border, #D5DACF);
   background: transparent;
   color: var(--eqb-color-text-strong, #1f1f1d);
@@ -275,15 +276,15 @@
   transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), transform var(--motion-micro) var(--ease-out);
 }
 
-.paper-selection-retry:hover {
+.paper-selection-retry:not(.eqb-button):hover {
   background: var(--desk-hover, #E5EAE1);
 }
 
-.paper-selection-retry:active {
+.paper-selection-retry:not(.eqb-button):active {
   transform: scale(0.96);
 }
 
-.paper-selection-retry:focus-visible {
+.paper-selection-retry:not(.eqb-button):focus-visible {
   outline: 2px solid var(--eqb-color-text-strong, #1f1f1d);
   outline-offset: 2px;
 }
@@ -328,12 +329,6 @@
   to {
     opacity: 1;
     transform: scale(1) translateY(0);
-  }
-}
-
-@keyframes paper-selection-spin {
-  to {
-    transform: rotate(360deg);
   }
 }
 
@@ -609,13 +604,46 @@
   font-size: var(--eqb-font-size-xs, 12px);
 }
 
-/* 「其他义项」与释义左缘对齐（16px 号列 + 6px 列距）；卡级「详细解释」不受此缩进。 */
-.paper-dictionary-rare-toggle {
-  margin-left: 22px;
+/* 「加入生词本」在等（检查、加入，2026-11-15 等待第三轮）：点了不触发（NotebookAddButton 挂 aria-busy / aria-disabled），
+ * 指针换成「在忙」，悬停不把字提到墨色，免得看着像还能点。
+ * 覆盖：本条 (0,3,0) 盖过上面 .paper-dictionary-more:hover (0,2,0) 的墨字，因为在等时键不接点击。 */
+.paper-dictionary-more[aria-busy='true'],
+.paper-dictionary-more[aria-busy='true']:hover {
+  color: var(--eqb-color-text-muted);
+  cursor: progress;
 }
 
+/* 词典卡三个文字展开键（「更多义项 N / 收起」「详细解释 / 收起解释」「署名与隐私」）：
+ * Owner 2026-11-14 决定 #1 换成 Button 淡墨小号（quiet sm），不再挂 .paper-dictionary-more（那个类现在只剩「加入生词本」在用）。
+ * - 不让卡片把键拉满一行（改前「详细解释」被拉到整行宽），宽度跟字走；
+ * - 上下各收 --eqb-space-1，抵掉一部分按钮（28）比原来纯文字（17）高出来的部分；
+ * - 字后面的箭头在 Button 的标签里：标签排成一行，间距 --eqb-space-1（改前 3px）。 */
+.paper-dictionary-text-toggle {
+  align-self: flex-start;
+  justify-self: start;
+  margin-block: calc(-1 * var(--eqb-space-1));
+}
+
+.paper-dictionary-text-toggle > .eqb-button-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eqb-space-1);
+}
+
+/* 「其他义项」与释义左缘对齐（16px 号列 + 6px 列距）；卡级「详细解释」不受此缩进。
+ * 换成 Button 以后减掉 sm 的左内边距（--eqb-space-2），字还从释义左缘起；22px 是原有的号列 + 列距，不是新数。
+ * 覆盖：本条和上面的 .paper-dictionary-text-toggle 都是 (0,1,0)，写在后面，所以本条的 margin-top 0 盖过上面的上收。 */
+.paper-dictionary-rare-toggle {
+  margin-top: 0;
+  margin-left: calc(22px - var(--eqb-space-2));
+}
+
+/* 「详细解释」箭头在字前面：左边用负边距抵掉 sm 的左内边距，箭头还贴齐卡片内容的左边。
+ * 上边距改前 12px；按钮比原来高 11px（字在按钮里居中，上下各多约 5.5px），上边距收到 --eqb-space-1，字的上沿和改前差约 1px（实测见 batch-b README）。
+ * 覆盖：(0,1,0)，写在 .paper-dictionary-text-toggle 后面，盖过它的 margin-top。 */
 .paper-dictionary-detail-toggle {
-  margin-top: 12px;
+  margin-top: var(--eqb-space-1);
+  margin-left: calc(-1 * var(--eqb-space-2));
 }
 
 .paper-dictionary-explanation {
@@ -703,19 +731,9 @@
   margin: 0;
 }
 
-.paper-dictionary-skeleton-line {
-  height: 12px;
-  border-radius: 4px;
-  background: color-mix(in srgb, var(--eqb-color-text-strong, #1f1f1d) 10%, transparent);
-}
-
-.paper-dictionary-skeleton-line:nth-child(2) {
-  width: 82%;
-}
-
-.paper-dictionary-skeleton-line:nth-child(3) {
-  width: 58%;
-}
+/* 原来这里是三条自己画的灰条 .paper-dictionary-skeleton-line（字色 10%、圆角 4、不动，第 2、3 条宽 82% / 58%）：
+ * 2026-11-15 第二轮换成共用 Skeleton（shared-ui/waiting.css），宽度改由 DictionaryCard.tsx 给，三条删了（grep 过没人用）。
+ * 上面 .paper-dictionary-skeletons 的排法（一列、间距 8）留着，现在挂在 SkeletonGate 的区域上。 */
 
 .paper-dictionary-machine {
   margin-left: auto;
@@ -739,10 +757,12 @@
   white-space: nowrap;
 }
 
+/* 「署名与隐私」在页脚右栏、贴齐卡片右边：右边用负边距抵掉 sm 的右内边距，箭头的右边还在原来的位置。
+ * 原来的颜色和字号改由 Button 淡墨小号管，删了。justify-self 改回 end（上面的 .paper-dictionary-text-toggle 设了 start）。
+ * 覆盖：(0,1,0)，写在 .paper-dictionary-text-toggle 后面，盖过它的 justify-self。 */
 .paper-dictionary-credits-toggle {
-  margin: 0;
-  color: var(--eqb-color-text-muted, #6b6e68);
-  font-size: var(--eqb-font-size-xs, 12px);
+  justify-self: end;
+  margin-right: calc(-1 * var(--eqb-space-2));
 }
 
 .paper-dictionary-credits-body {
@@ -769,7 +789,6 @@
   .paper-selection-overlay,
   .paper-selection-toolbar,
   .paper-selection-card,
-  .paper-selection-spinner,
   .paper-selection-kicker-icon circle,
   .paper-sentence-analysis,
   .paper-sentence-analysis .sa-token,

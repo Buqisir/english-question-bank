@@ -45,20 +45,18 @@
    they held (title, student, recent-drafts, save-status, version toggle,
    export menu) now live in AppTopbar's actionsSlot / "⋯" menu (see
    DraftPaperWorkbench.tsx). Their own field/control CSS below
-   (.draft-title-field 起 .draft-export-menu-panel 止) is reused verbatim in
+   (.draft-title-field 起 .draft-more-menu-panel 止) is reused verbatim in
    the new location, only the container it sat in is gone. */
 
-.draft-export-menu-panel button,
+/* 构件厂第 4 步第七页：「保存 PDF 到个人空间」对话框里的键（.draft-dialog-head、
+   .draft-new-folder-row、.draft-dialog-actions 里的）换成 shared-ui/Button，从这组白底描边的
+   手写规则里拿掉。撤销提示条换成 shared-ui/Notice（键是 shared-ui/Button），也从这组里拿掉。 */
 .draft-outline-actions button,
-.draft-suggestions button,
-.draft-undo-toast button,
-.draft-dialog-actions button:not(.primary-button),
-.draft-new-folder-row button,
-.draft-dialog-head button {
+.draft-suggestions button {
   align-items: center;
   background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   color: var(--ink);
   cursor: pointer;
   display: inline-flex;
@@ -68,50 +66,9 @@
   padding: 7px 10px;
 }
 
-.draft-export-menu-panel button:disabled {
-  color: var(--muted);
-  cursor: not-allowed;
-}
-
-/* workbench-header-unify: .draft-title-field itself retired — the title
-   input now lives in AppTopbar (topbar-page-title-input, App.css) since the
-   title moved out of this file's DOM entirely (Locked Decision 2). Its
-   sibling field styles below stay: 学生（可选）/ 最近草稿卷 still render
-   here, just inside the "⋯" panel instead of the retired toolbar. */
-.draft-student-field span {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.draft-student-field {
-  display: grid;
-  gap: 4px;
-}
-
-.draft-student-field input,
-.draft-recent-select {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  color: var(--ink);
-  font: inherit;
-  min-height: 36px;
-  padding: 6px 9px;
-}
-
-.draft-student-field input {
-  width: 120px;
-}
-
-.draft-recent-select-field {
-  display: grid;
-  gap: 4px;
-}
-
-.draft-recent-select-field > span {
-  color: var(--muted);
-  font-size: 12px;
-}
+/* 字段构件（2026-11-14）：「⋯」面板里的「学生（可选）」「最近草稿卷」换成 shared-ui/Field.tsx 的 TextField / SelectField，
+   标签、边、高、焦点都在 shared-ui/field.css；原来 .draft-student-field / .draft-recent-select(-field) 那几条删掉，类名留给脚本认。
+   学生框原来定宽 120，现在跟面板一样宽（面板最窄 220）。 */
 
 .draft-save-status {
   color: var(--muted);
@@ -121,207 +78,69 @@
   white-space: nowrap;
 }
 
+/* 「保存中」原来用亮琥珀 --eqb-color-warning（#E8901A），12px 小字对页底只有 2.27:1，不过 WCAG AA。
+ * 构件收尾（2026-11-15）换成同色相深一档、给小字用的 --eqb-color-warning-text（#965A08，对页底 5.09:1），没新加颜色。 */
 .draft-save-status.saving {
-  color: var(--eqb-color-warning);
+  color: var(--eqb-color-warning-text);
 }
 
 .draft-save-status.saved {
   color: var(--muted);
 }
 
-.draft-save-status.error,
-.draft-error {
-  color: var(--eqb-color-danger);
+/* 「保存失败」原来用 --eqb-color-danger（#DC2626），对页底 4.40:1，也差一点；同理换成给小字用的
+ * --eqb-color-danger-text（#CA2121，对页底 5.10:1，Owner 2026-11-14 决定 #9 定的危险小字色）。 */
+.draft-save-status.error {
+  color: var(--eqb-color-danger-text);
 }
 
-.draft-product-control {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--muted);
-  font-size: 13px;
-}
+/* 字段构件（2026-11-14）：「PDF 版本」「A4 / A3」换成 shared-ui/OptionField.tsx 的 OptionSelectField / SegmentedField，
+   样子全在 shared-ui/field.css。原来的 .draft-product-control（标签排法）、.draft-product-trigger .eqb-button-label、
+   .eqb-menu.draft-product-menu（宽度上限，搬进 field.css 的 .eqb-option-menu）、.draft-version-toggle*（分段的样子）删掉；
+   类名 draft-product-control / draft-product-trigger / draft-product-menu / draft-form-toggle 留给脚本认。 */
 
-.draft-product-control select {
-  background: var(--eqb-color-paper);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  color: var(--ink);
-  font: inherit;
-  min-height: 32px;
-  padding: 0 8px;
-  max-width: 100%;
-}
-
-.draft-version-toggle {
-  --fh-radius: 8px;
-  background: transparent;
-  border: 0;
-  display: inline-flex;
-  gap: 2px;
-  padding: 0;
-}
-
+/* 顶栏里两个字段之间一条竖线，和原来一样。 */
 .draft-topbar-wide-toggle + .draft-topbar-wide-toggle {
   border-left: 1px solid var(--line);
   padding-left: 10px;
 }
 
-.draft-version-toggle button {
-  position: relative;
-  background: transparent;
-  border: none;
-  border-radius: 8px;
-  color: var(--muted);
-  cursor: pointer;
-  font: inherit;
-  font-size: 13px;
-  font-weight: 400;
-  min-height: 32px;
-  padding: 0 8px;
-  /* emil-processing: 无 transition 时选中段瞬跳，全站其他 hover 都是缓动的 */
-  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+/* 窄屏那一行（见下面 980px 断点）：宽屏时不出。 */
+.draft-option-row {
+  display: none;
 }
 
-.draft-version-toggle button[data-fluid-hover-active]:not(.active) {
-  color: var(--ink);
-}
+/* 构件厂第 4 步（2026-11-13，提案 · 单一来源）：「导出」触发键和菜单面板换成
+   shared-ui/Button（primary）和 shared-ui/Menu，样子全由 button.css / menu.css 定；
+   原来这里的 .draft-export-menu(-trigger/-panel/-divider) 规则删掉。
+   面板上留着 .draft-export-menu-panel 这个类名，只给脚本认，不挂样式。 */
 
-/* Selection stays legible without competing with the primary export action.
-   Paper-white + Card-tier hairline shadow (DESIGN.md Shadow Vocabulary): the
-   chosen segment sits *on* the desk, while fluid hover tints the desk *under*
-   a segment — opposite directions, so hovering a neighbour never reads as a
-   second selection. */
-.draft-version-toggle button.active {
-  background: var(--eqb-color-paper);
-  box-shadow: 0 0 0 1px rgba(30, 30, 28, 0.05), 0 1px 2px rgba(30, 30, 28, 0.06);
-  color: var(--ink);
-  font-weight: 500;
-}
-
-/* D5: custom floating export menu replacing native <details>/<summary> —
-   anchored to the trigger's right edge so the panel never grows past the
-   viewport's right side, with a Floating-tier shadow per DESIGN.md. */
-.draft-export-menu {
-  position: relative;
-}
-
-.draft-export-menu-trigger {
-  align-items: center;
-  background: var(--eqb-color-accent-fill);
-  border-radius: 8px;
-  color: var(--eqb-color-accent-fill-ink);
-  display: inline-flex;
-  gap: 6px;
-  min-height: 32px;
-  padding: 0 14px;
-  font-size: 13px;
-  font-weight: 600;
-  transition: background var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
-}
-
-.draft-export-menu-trigger:hover:not(:disabled) {
-  background: var(--eqb-color-accent-fill-hover);
-}
-
-/* emil-processing: press feedback for the export trigger. */
-.draft-export-menu-trigger:active:not(:disabled) {
-  transform: scale(0.97);
-}
-
-/* 复评工艺账 keyframe→transition：入退同轴（data-visible + usePresence
-   延迟卸载），退出（本规则 motion-micro）快于入场（[data-visible='true']
-   覆盖成 motion-fast）。Origin sits at the trigger's right edge (panel is
-   right-anchored via `right: 0`). */
-.draft-export-menu-panel {
-  --fh-radius: 8px;
-  opacity: 0;
-  transform: translateY(-2px) scale(0.98);
-  transition: opacity var(--motion-micro) var(--ease-out), transform var(--motion-micro) var(--ease-out);
-  background: var(--panel);
-  border: 0;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(30, 30, 28, 0.12);
-  display: grid;
-  gap: 2px;
-  margin-top: 6px;
-  max-width: calc(100vw - 32px);
-  min-width: 256px;
-  padding: 8px;
-  position: absolute;
-  right: 0;
-  top: 100%;
-  transform-origin: top right;
-  z-index: 20;
-}
-
-.draft-export-menu-panel[data-visible='true'] {
-  opacity: 1;
-  transform: scale(1);
-  transition-duration: var(--motion-fast);
-}
-
-.draft-export-menu-panel button {
-  background: transparent;
-  border: 0;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 400;
-  gap: 9px;
-  justify-content: flex-start;
-  min-height: 38px;
-  position: relative;
-  padding: 0 10px;
-  white-space: nowrap;
-  width: 100%;
-}
-
-.draft-export-menu-panel button:first-of-type {
-  font-weight: 500;
-}
-
-.draft-export-menu-divider {
-  background: var(--line);
-  height: 1px;
-  margin: 6px 10px;
-}
-
-/* workbench-header-unify Locked Decision 2: the "⋯" menu — same floating-
-   panel chrome/entrance as .draft-export-menu(-panel) above (D5 convention),
-   holding form fields instead of menuitem buttons. */
+/* workbench-header-unify Locked Decision 2: the "⋯" menu — floating-panel
+   chrome/entrance from the D5 export menu convention, holding form fields
+   instead of menuitem buttons (so it stays its own panel, not shared-ui/Menu). */
 .draft-more-menu {
   position: relative;
 }
 
-.draft-more-menu-trigger {
-  align-items: center;
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  color: var(--muted);
-  cursor: pointer;
-  display: inline-flex;
-  justify-content: center;
-  min-height: 28px;
-  min-width: 28px;
-  padding: 0;
-  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
-}
-
-.draft-more-menu-trigger:hover,
-.draft-more-menu-trigger[aria-expanded='true'] {
-  background: var(--surface-strong);
-  color: var(--ink-strong);
-}
+/* 构件厂第 4 步：触发键换成 shared-ui/Button（subtle、sm、只有图标），大小、颜色、悬停、
+   打开时的底都由 button.css 定。 */
 
 /* workbench-header-unify CR SW-1: autosave/save errors must not go silent
    now that save-status lives inside the "⋯" panel — while saveStatus is
    'error' the trigger wears a danger dot + border so the failure is
    visible without opening the menu. */
 .draft-more-menu-trigger.has-save-error {
-  border-color: var(--eqb-color-danger);
-  color: var(--eqb-color-danger);
   position: relative;
+}
+
+/* 显式层叠：Button 自己是 border: 0，次要灰字悬停 / 焦点 / 打开时提到墨色
+   （button.css `.eqb-button[data-tone='subtle']:hover:not(…)` 等，特异度 0,4,0）。
+   出错时这枚键要一直是危险色加一圈危险色边，所以这里加上 .eqb-button[data-tone]
+   把特异度抬到 0,5,0 压过它们。边框 1px 在 border-box 里，键仍是 28×28。 */
+.eqb-button[data-tone].draft-more-menu-trigger.has-save-error,
+.eqb-button[data-tone].draft-more-menu-trigger.has-save-error:is(:hover, :focus-visible, [aria-expanded='true']) {
+  border: 1px solid var(--eqb-color-danger);
+  color: var(--eqb-color-danger);
 }
 
 .draft-more-menu-trigger.has-save-error::after {
@@ -337,9 +156,9 @@
 
 .draft-more-menu-panel {
   background: var(--panel);
-  border: 1px solid var(--line);
+  border: 1px solid transparent;
   border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(30, 30, 28, 0.12);
+  box-shadow: var(--elev-3);
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 10px;
@@ -352,7 +171,7 @@
   top: 100%;
   transform-origin: top right;
   z-index: 20;
-  /* 复评工艺账：同 .draft-export-menu-panel 的入退对称制 */
+  /* 复评工艺账：入退对称制（原先和 D5 导出菜单面板同一套；导出菜单已换成 Menu） */
   opacity: 0;
   transform: translateY(-2px) scale(0.98);
   transition: opacity var(--motion-micro) var(--ease-out), transform var(--motion-micro) var(--ease-out);
@@ -364,80 +183,174 @@
   transition-duration: var(--motion-fast);
 }
 
-.draft-more-menu-panel select {
-  min-width: 0;
-  max-width: 100%;
-}
-
-/* Locked Decision 5 窄屏退化补充: only shown ≤980px, where the wide-row
-   copies of these same controls (.draft-topbar-wide-toggle) hide instead —
-   see the media query near the bottom of this file. */
-.draft-more-menu-narrow-controls {
-  display: none;
-}
-
 /* workbench-header-unify Locked Decision 2/5: wraps the head-row (wide)
-   copies of 学生版/教师版 and A4/A3 so they can hide as a unit ≤980px while
-   their .draft-more-menu-narrow-controls twins inside the "⋯" panel take
-   over — see the media query near the bottom of this file. */
+   copies of PDF 版本 and A4/A3 so they can hide as a unit ≤980px while
+   their .draft-option-row twins under the topbar take over (2026-11-14 起不再进「⋯」面板)
+   — see the media query near the bottom of this file. */
 .draft-topbar-wide-toggle {
   display: inline-flex;
 }
 
-.draft-loading,
-.draft-empty-export,
-.draft-success,
-.draft-warning {
-  color: var(--muted);
-  margin: 14px 0 0;
+/* 草稿卷的提示行（.draft-error / .draft-success / .draft-empty-export / .draft-warning）
+   都换成了 shared-ui/Notice，颜色、字号、图标由 notice.css 给；类名留着给脚本认。
+   它们放在 .draft-notice-slot 里：卷头行之下、纸面之上，左右边距和下面的排序建议卡同一套
+   （见 .draft-reorder-slot），不再贴着窗口左边。 */
+.draft-notice-slot .eqb-notice {
+  margin: 0 auto;
+  max-width: 820px;
 }
 
-.draft-warning {
-  color: var(--eqb-color-warning);
+/* 打开草稿卷时（还没有卷面、没有目录栏）：提示行在桌面正中那一栏，离顶 24px。
+   覆盖：本条 (0,2,0) 盖过下面 .draft-notice-slot (0,1,0) 的左右内边距（含 ≤900px 那条），
+   因为这时没有目录栏，不用给它让出 212px。 */
+.draft-notice-slot.is-page {
+  padding: var(--eqb-space-5) var(--eqb-space-4) 0;
 }
 
 /* reorder-suggest (docs/cuts/reorder-suggest/plan.md 施工契约 3 "卡"): 卷级
-   单卡, quiet + real-verified only (安静常驻, 真值验证过才亮) — same visual
-   family as prototype-print-form-v2.html's `.sugg.warn` (left danger bar +
-   danger-soft fill, since the card only ever shows a REAL, still-uncorrected
-   跨页断篇), all via existing danger/primary tokens (no new palette entry).
-   Sits in the same notices slot as .draft-warning/.draft-error above (卷头行
-   之下、纸面之上), not anchored to any one group's action cluster like
-   .draft-group-suggestion/.draft-seam-suggestion (those are per-seam quiet
-   annotations; this is the one whole-draft verdict). */
-.draft-reorder-suggestion {
-  align-items: center;
-  background: color-mix(in srgb, var(--eqb-color-danger) 8%, var(--eqb-color-paper));
-  /* 复评工艺账：side-stripe（border-left 3px）→ 全边框+对称圆角，警示由
-     底色 tint 承担（安静卡本意不变；改动 shipped 视觉，DP-3 owner 有否决权） */
-  border: 1px solid color-mix(in srgb, var(--eqb-color-danger) 35%, transparent);
-  border-radius: 8px;
-  color: var(--ink);
-  display: flex;
-  font-size: 13.5px;
-  gap: 14px;
-  justify-content: space-between;
-  line-height: 1.5;
-  margin: 14px 0 0;
-  padding: 10px 14px;
+   单卡, quiet + real-verified only (安静常驻, 真值验证过才亮)。Sits in the same
+   notices slot as .draft-warning/.draft-error above (卷头行之下、纸面之上).
+   提议和决定（DESIGN.md §5 Proposal → Decision，Owner 2026-11-13 定）：同一块卡
+   两种状态。提议＝桌色底、无边无影、弱墨字，第一行「建议」＋「采用」（次键）；
+   决定＝白底、e1、墨字，第一行「已采用」＋「撤回」（文字链）。正文另起一行占
+   整行宽，换状态时位置和行宽都不动。底、影、字一起变，120ms ease-out，不弹不缩。
+   去掉了原来的淡红底和红边：断篇不会丢东西，危险色只给「没保存」「会丢东西」
+   （§5 Notices）。草稿卷这一栏本来是桌色，所以提议看上去只是一段灰字。 */
+/* 卡片和纸对齐，不再横跨整个窗口（shell 没有内边距）。左内边距照桌面网格算：
+   24 + 目录 164 + 间距 24；宽屏 A4 时纸在视口居中，卡片也居中。 */
+.draft-reorder-slot,
+.draft-notice-slot {
+  padding: 14px 24px 0 212px;
 }
 
-.draft-reorder-suggestion-act {
-  background: none;
-  border: 0;
-  color: var(--ink);
+.draft-workbench-shell:has(.draft-paper-rail--swap) .draft-reorder-slot,
+.draft-workbench-shell:has(.draft-paper-rail--swap) .draft-notice-slot {
+  padding-left: 256px;
+}
+
+@media (min-width: 1200px) {
+  .draft-workbench-shell:has(.draft-paper-col:not(.is-a3)) .draft-reorder-slot,
+  .draft-workbench-shell:has(.draft-paper-col:not(.is-a3)) .draft-notice-slot {
+    padding-left: 24px;
+  }
+}
+
+@media (max-width: 900px) {
+  .draft-reorder-slot,
+  .draft-notice-slot,
+  .draft-workbench-shell:has(.draft-paper-rail--swap) .draft-reorder-slot,
+  .draft-workbench-shell:has(.draft-paper-rail--swap) .draft-notice-slot {
+    padding: 12px 48px 0 10px;
+  }
+}
+
+/* 提示行下面紧跟排序建议卡时，卡自己的上边距收掉一半，两样不隔太远（目测）。
+   覆盖：本条 (0,3,0) 盖过上面 .draft-reorder-slot 的 padding-top，因为前面已经有提示行的上边距。 */
+.draft-notice-slot + .draft-reorder-slot {
+  padding-top: var(--eqb-space-2);
+}
+
+.draft-reorder-suggestion {
+  margin: 0 auto;
+  max-width: 820px;
+  background: var(--desk-page);
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px transparent;
+  color: var(--desk-muted);
+  display: grid;
+  font-size: 13px;
+  gap: 4px;
+  line-height: 1.55;
+  padding: 10px 12px;
+  transition:
+    background var(--motion-fast) var(--ease-out),
+    color var(--motion-fast) var(--ease-out),
+    box-shadow var(--motion-fast) var(--ease-out);
+}
+
+.draft-reorder-suggestion[data-state='decided'] {
+  background: var(--desk-surface);
+  box-shadow: var(--elev-1);
+  color: var(--desk-ink);
+}
+
+.draft-reorder-suggestion p {
+  margin: 0;
+}
+
+.draft-reorder-suggestion-head {
+  align-items: center;
+  display: flex;
+  font-size: 12px;
+  gap: 12px;
+  justify-content: space-between;
+  min-height: 26px;
+}
+
+.draft-reorder-suggestion .draft-reorder-suggestion-act {
+  background: transparent;
+  border: 1px solid var(--desk-ink);
+  border-radius: 8px;
+  color: var(--desk-ink);
   cursor: pointer;
   flex: none;
   font: inherit;
-  font-size: 12.5px;
-  font-weight: 600;
-  padding: 0;
-  transition: color var(--motion-fast) var(--ease-hover);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 2px 10px;
+  transition: background var(--motion-fast) var(--ease-hover);
   white-space: nowrap;
 }
 
-.draft-reorder-suggestion-act:hover {
-  color: var(--ink);
+.draft-reorder-suggestion .draft-reorder-suggestion-act:hover:not([aria-disabled='true']) {
+  background: var(--desk-hover);
+}
+
+.draft-reorder-suggestion .draft-reorder-suggestion-act[aria-disabled='true'] {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.draft-reorder-suggestion .draft-reorder-suggestion-undo {
+  background: none;
+  border: 0;
+  border-radius: 4px;
+  color: var(--desk-muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  padding: 2px 4px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--motion-fast) var(--ease-hover);
+}
+
+.draft-reorder-suggestion .draft-reorder-suggestion-undo:hover {
+  color: var(--desk-ink);
+}
+
+/* 点击区域补到 24 高（WCAG 2.2 2.5.8，清点 button-14 量到 32×23；构件收尾 2026-11-15）：一块透明的 ::after
+ * 往不够 24 的方向伸（min(0px, 50% − 12px)，这里上下各 0.5px），样子不变。24px 没有变量，缺口见 docs/design-gaps.md。 */
+.draft-reorder-suggestion .draft-reorder-suggestion-undo {
+  position: relative;
+}
+
+.draft-reorder-suggestion .draft-reorder-suggestion-undo::after {
+  content: '';
+  position: absolute;
+  inset: min(0px, calc(50% - 12px));
+}
+
+.draft-reorder-suggestion button:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .draft-reorder-suggestion,
+  .draft-reorder-suggestion button {
+    transition: none;
+  }
 }
 
 /* draft-desk-a: 备课桌骨架重构（docs/cuts/draft-desk-a/plan.md，原型
@@ -456,7 +369,10 @@
    `120px 1fr`，同样的 gap 24px 和 padding）。两页都是「一份卷子 + 一份
    目录」，此前一页目录在左一页在右，老师换页得重新找目录。宽度比整卷页
    宽，因为这里每行还带序号和题数（整卷页只有 A/B/C 这种短标签）。 */
-.draft-preview-desk {
+/* 等待第四轮（2026-11-15）：打开草稿卷的灰块（.draft-skeleton-desk / -rail / -col）和真桌面共用这几条几何规则，
+   目录板、纸栏的位置和大小只写一处；灰块用自己的 class 是因为脚本和别的规则（:has(.draft-paper-col) 这类）按真 class 找。 */
+.draft-preview-desk,
+.draft-skeleton-desk {
   align-items: start;
   background: var(--paper-desk-bg);
   display: grid;
@@ -466,7 +382,8 @@
   padding: 24px 24px 96px;
 }
 
-.draft-paper-col {
+.draft-paper-col,
+.draft-skeleton-col {
   margin: 0 auto;
   max-width: 820px;
   min-width: 0;
@@ -486,13 +403,9 @@
 
 /* workbench-header-unify Locked Decision 5: `.draft-paper-meta-row` /
    `.draft-paper-meta` retired whole — the A4/A3 toggle moved into
-   AppTopbar's actionsSlot (.draft-form-toggle below still styles it there),
-   and the页数真值 text moved to .draft-paper-rail-meta at the rail's top
-   (see the rail block further down this file). */
-.draft-form-toggle button {
-  min-height: 32px;
-  padding: 0 8px;
-}
+   AppTopbar's actionsSlot, and the页数真值 text moved to .draft-paper-rail-meta
+   at the rail's top (see the rail block further down this file).
+   A4/A3 的样子 2026-11-14 起在 shared-ui/field.css（分段选择）。 */
 
 .draft-a4-sheet {
   background: transparent;
@@ -517,35 +430,53 @@
   max-width: 100%;
 }
 
-/* draft-desk-b step3 (PO-2 简单版) + step5 QA-1: the only visible sign a
-   server re-render is in flight — the previous preview stays fully visible/
-   interactive underneath. position: fixed (was absolute, top of the ~8000px
-   sheet) so the badge floats in the VIEWPORT: a teacher editing on page 3+
-   otherwise saw no feedback at all (QA measured badge at viewport -3156px).
-   pointer-events: none so it never eats a click meant for the paper. */
-.draft-a4-repaginating {
-  background: var(--ink);
-  border-radius: 999px;
-  box-shadow: 0 8px 24px rgba(30, 30, 28, 0.12);
-  color: #ffffff;
-  font-size: 12.5px;
-  left: 50%;
-  padding: 6px 14px;
-  pointer-events: none;
-  position: fixed;
-  top: 108px;
-  transform: translateX(-50%);
-  z-index: 6;
+/* 走查卡点 2（Owner 2026-11-14 第四节第 2 条）：重排期间旧卷面留着，上面盖一层
+   桌色遮罩，顶上一行字（DESIGN.md §5 Notices：次要灰字 + 16px 图标）。原来那颗
+   固定在视口上方的墨色胶囊「重新排版中…」和红色出错胶囊一起退役：以前卷面一改
+   就空白，胶囊几乎看不到。遮罩是 .draft-a4-sheet 里、iframe 外面的一层，不碰
+   PaperSurface 和服务器出的打印稿、PDF。不加模糊（毛玻璃已在之前的迁移里去掉）。
+
+   默认 display: none，只在 @media screen 里显示：浏览器打印这一页时它不出现，
+   也不用另写 @media print。 */
+.draft-a4-wait {
+  display: none;
 }
 
-/* draft-desk-b step4 (SW-I, cr-step3-lite.md): the repagination-FAILURE variant
-   of the badge above — same shell (shape/position/pointer-events), just a
-   danger-tinted background instead of --ink so a stale preview during an error
-   reads as "something went wrong" rather than "still working". Uses the
-   existing --eqb-color-danger token (a var(), not a literal hex) — no new entry
-   needed in this file's palette-hardcode whitelist below. */
-.draft-a4-repaginating--error {
-  background: var(--eqb-color-danger);
+@media screen {
+  /* 本条覆盖上面的 .draft-a4-wait { display: none }，因为只有屏幕上要显示；
+     [hidden] 时仍由下一条收起。 */
+  .draft-a4-wait {
+    display: block;
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 4;
+  }
+
+  /* 本条覆盖上面 @media screen 里的 display: block，因为 hidden 属性要赢
+     （没在等也没出错时整层不在）。 */
+  .draft-a4-wait[hidden] {
+    display: none;
+  }
+
+  /* 遮罩色：桌色压在旧卷面上，透出底下的字。没有现成的遮罩 token，比例目测，
+     缺口登记在 docs/design-gaps.md「2026-11-14 草稿卷重排遮罩」。
+     本条覆盖 .draft-a4-wait 的 pointer-events: none，因为等的时候旧卷面不该被点。 */
+  .draft-a4-wait.is-waiting {
+    background: color-mix(in srgb, var(--eqb-color-desk) 60%, transparent);
+    pointer-events: auto;
+  }
+
+  /* 这一行换成了 shared-ui/Notice 的 over 放法（垫桌色、e1、字色字号都由 notice.css 给）。
+     这里只管它在遮罩里的位置：居中、离纸顶 16px，往下滚时贴在视口上沿。
+     覆盖：本条 (0,2,0) 盖过 notice.css 里 .eqb-notice (0,1,0) 的 margin: 0 和 max-width: 100%，因为这一行在遮罩里要居中、离纸顶 16px、两边留 16px；其余照 notice.css。 */
+  .draft-a4-wait-line.eqb-notice {
+    margin: var(--eqb-space-4) auto 0;
+    max-width: calc(100% - 2 * var(--eqb-space-4));
+    pointer-events: auto;
+    position: sticky;
+    top: var(--eqb-space-4);
+  }
 }
 
 .draft-a4-sheet iframe {
@@ -563,6 +494,10 @@
   justify-content: center;
 }
 
+/* 迁移第 12 条：草稿卷还没有题组 = 「还没东西」，插图照图标 BoardList（草稿卷）。
+   插图放在纸上，纸本身就是白卡片，不另加底。2026-11-14 起整块换成共用的 EmptyState
+   （shared-ui/emptyState.css），放在上面 .draft-a4-empty 的居中框里；原来的 .is-blank 两条删掉。 */
+
 /* One persistent tool strip per group. Its paper-relative anchor stays stable
    while scrolling; wide A4 places the strip on the desk outside the paper. */
 .draft-group-actions {
@@ -577,11 +512,15 @@
   position: absolute;
   right: 10px;
   translate: 0 var(--draft-tool-shift, 0px);
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  box-shadow: var(--elev-2);
   z-index: 5;
 }
 
-.draft-group-actions button {
+/* 构件厂第 4 步：题组「⋯」换成 shared-ui/Menu 后，它的触发键（.eqb-button）也在这条
+   工具条里。下面这些宽泛的 `.draft-group-actions button` 规则只管还没换的「换篇」开关键和
+   分页小签，所以都加了 :where(:not(.eqb-button))——:where 不加特异度，原来压人和被压的
+   关系（比如 .draft-group-actions .draft-group-suggestion 压过这里）一条不变。 */
+.draft-group-actions button:where(:not(.eqb-button)) {
   align-items: center;
   background: transparent;
   border: 0;
@@ -594,21 +533,21 @@
   width: 32px;
 }
 
-.draft-group-actions button:hover:not(:disabled) {
+.draft-group-actions button:where(:not(.eqb-button)):hover:not(:disabled) {
   background: var(--surface-strong);
   color: var(--ink);
 }
 
-.draft-group-actions button:active {
+.draft-group-actions button:where(:not(.eqb-button)):active {
   transform: scale(0.94);
 }
 
-.draft-group-actions button[aria-pressed='true'] {
+.draft-group-actions button:where(:not(.eqb-button))[aria-pressed='true'] {
   background: var(--surface-strong);
   color: var(--ink);
 }
 
-.draft-group-actions > button:not(.draft-group-suggestion) {
+.draft-group-actions > button:not(.draft-group-suggestion, .eqb-button) {
   gap: 6px;
   min-width: 66px;
   padding: 0 7px;
@@ -627,7 +566,7 @@
   padding: 2px;
 }
 
-.draft-paper-col.is-a3 .draft-group-actions > button:not(.draft-group-suggestion) {
+.draft-paper-col.is-a3 .draft-group-actions > button:not(.draft-group-suggestion, .eqb-button) {
   min-width: 32px;
   padding: 0;
   width: 32px;
@@ -637,53 +576,37 @@
   display: none;
 }
 
-.draft-group-actions button.danger:hover {
-  color: var(--eqb-color-danger);
-}
-
 /* The optional page-break hint sits above the strip, without shifting the
    tools away from their group's anchor when the hint appears. */
+/* 提议和决定（Owner 2026-11-13 定）：分页小签只有提议的样子，不做「已采用」状态：采用后的结果是纸上的
+   分页线，撤回就是去掉同组「⋯」里「前置分页」的勾。2026-11-15 起样子归 Button 的「建议」（tone="suggest"，
+   shared-ui/button.css），这里只留摆法：贴在工具条右上角的上面，隔 8px。
+   覆盖：本条 (0,2,0) 盖过 .eqb-button (0,1,0) 的 position: relative；颜色、字、高度一条不写，都归 button.css。 */
 .draft-group-actions .draft-group-suggestion {
-  background: var(--panel);
-  border: 0;
-  border-radius: 8px;
-  bottom: calc(100% + 6px);
-  color: var(--ink);
-  cursor: pointer;
-  font-size: 12px;
-  height: auto;
-  padding: 4px 9px;
   position: absolute;
+  bottom: calc(100% + var(--eqb-space-2));
   right: 0;
-  white-space: nowrap;
-  width: auto;
 }
 
-.draft-group-actions .draft-group-suggestion:hover {
-  background: var(--surface-strong);
+/* 圆角：本文件后面的 .draft-group-actions .eqb-button（0,2,0）把工具条里的键按同心规则改成 4px，
+   可小签是贴在工具条外面的，不在那 4px 内边距里，该用 Button 自己的 8px。
+   本条 (0,3,0) 压过那条 (0,2,0)，把圆角还给 --eqb-radius-control。 */
+.draft-group-actions .eqb-button.draft-group-suggestion {
+  border-radius: var(--eqb-radius-control);
 }
 
 /* a3-imposition (plan.md Must Do 3, 裁点2): the A3-only seam-anchored
-   sibling of .draft-group-suggestion above — same pill treatment, but
-   centered on the paper column (the seam it sits on spans the full face
+   sibling of .draft-group-suggestion above — centered on the paper column (the seam it sits on spans the full face
    width) instead of right-aligned in a per-group action column. */
-.draft-seam-suggestion {
-  background: var(--surface-strong);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--ink);
-  cursor: pointer;
-  font-size: 11.5px;
-  left: 50%;
-  padding: 4px 12px;
+/* 2026-11-15 起样子归 Button 的「建议」，这里只留摆法：绝对定位到接缝（top 由 DraftPaperWorkbench.tsx 给）、
+   水平居中、压在卷面之上。居中用 translate 不用 transform：Button 按下时的缩放写的是 transform，
+   用 transform 居中会在按下那一下被盖掉、键跳到右边（详情页「展开卷面」同一个原因）。
+   覆盖：本条 (0,2,0) 盖过 .eqb-button (0,1,0) 的 position: relative；多写一个 .eqb-button 是为了不靠两份样式表谁后加载。 */
+.eqb-button.draft-seam-suggestion {
   position: absolute;
-  transform: translateX(-50%);
-  white-space: nowrap;
+  left: 50%;
+  translate: -50% 0;
   z-index: 5;
-}
-
-.draft-seam-suggestion:hover {
-  border-color: var(--action);
 }
 
 /* similar-workbench-swap (E7, plan.md "抽屉"): the swap drawer's own wrapper
@@ -699,22 +622,59 @@
   gap: 10px;
 }
 
+/* 换篇栏头上的「返回目录」：Owner 2026-11-14 决定 #1 换成 Button 淡墨小号以后，共用的 .similar-backlink 给了右负边距
+ * （paperBrowsePage.css）。左栏窄（约 208px）、外层会裁掉超出的部分，右负边距会让字和悬停的底被切掉一截（改后第一次拍到），
+ * 这里不要右负边距；也不让键被标题挤窄（改前字被挤成两行，Button 的字不折行，挤窄会被截断），让标题去折行。
+ * 覆盖：本条 (0,4,0) 盖过 paperBrowsePage.css 的 .eqb-button.similar-backlink (0,2,0)。 */
+.draft-swap-drawer .similar-passages-head > .eqb-button.similar-backlink {
+  flex-shrink: 0;
+  margin-right: 0;
+}
+
+/* 换篇栏卡片（DraftPaperRail.tsx）：理由小签那一行放在卡片底部、跨满整张卡（胶囊第二轮，2026-11-14）。
+ * 胶囊不折行、放不下打省略号以后，挤在标题左栏（约 90px）里连短理由都被截成「同话题：…」；跨满后有约 166px，
+ * 短理由能写全，只有特别长的才打省略号。
+ * 覆盖：前两条 (0,2,0) 盖过 paperBrowsePage.css 的 .similar-rcard / .similar-rcard-body (0,1,0)，只在换篇栏里：
+ * 卡片允许换行（第一行标题 + 两个键，第二行小签）；标题栏的基准宽度归零，让它和两个键分第一行，
+ * 不然按标题的整行宽度算会把两个键挤到下一行。首页相似篇章面板的卡片不受影响。 */
+.draft-swap-drawer .similar-rcard {
+  flex-wrap: wrap;
+  row-gap: 8px;
+}
+
+.draft-swap-drawer .similar-rcard-body {
+  flex: 1 1 0;
+}
+
+.draft-swap-drawer .similar-rcard-chips--foot {
+  flex: 1 0 100%;
+  min-width: 0;
+}
+
 /* 左 rail = 整卷页目录语言（paperBrowsePage.css 的 .paper-browse-rail
    族：淡墨、无边框、无底色块、当前项加深并由小手指出），sticky offset
    与它同值。 */
-.draft-paper-rail {
+.draft-paper-rail,
+.draft-skeleton-rail {
   align-self: start;
   display: flex;
   flex-direction: column;
-  background: var(--panel);
-  border-radius: 12px;
   gap: 0;
   max-width: 164px;
   max-height: calc(100vh - 48px);
-  overflow-y: auto;
-  padding: 14px 8px 12px;
   position: sticky;
   top: 24px;
+}
+
+/* 左栏是共用构件 Surface 的板（board）：白底、12 圆角、一圈 1px --eqb-color-border 边、不投影，归构件
+   （DESIGN.md §4「板（列表卡、面板）」e0；原来白底没有边，换上以后多了这一圈）。
+   本条 (0,3,0) 覆盖 surface.css 板的 (0,2,0) 两项，因为左栏照原样排：
+   - 内衬 14 / 8 / 12 是存量半档（DESIGN.md §8 不追改），构件的 padding="none" 写的是 0；
+   - 目录长了要能滚（overflow auto），构件的板是 overflow hidden。 */
+.draft-paper-rail.eqb-surface[data-surface='board'],
+.draft-skeleton-rail.eqb-surface[data-surface='board'] {
+  overflow: auto;
+  padding: 14px 8px 12px;
 }
 
 .draft-paper-rail--swap {
@@ -726,20 +686,26 @@
   grid-template-columns: 208px minmax(0, 1fr);
 }
 
-/* Current plate and Fluid Hover share this measured positioning container. */
+/* 当前项的白底板和目录列表共用这一层量位置（DraftPaperRail.tsx）：板在前、列表在后，列表从 0,0 起排。 */
 .draft-paper-rail-panel {
-  --fh-radius: 8px;
+  position: relative;
+}
+
+/* 目录列表：<ul>，FluidHoverList 的滑块画悬停底（8 圆角跟着行）。行间 4px 空隙、没有分隔线，所以不用 RowList。 */
+.draft-paper-rail-list {
+  --fh-radius: var(--eqb-radius-control);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--eqb-space-1);
+  list-style: none;
+  margin: 0;
   padding: 0;
-  position: relative;
 }
 
 .draft-paper-rail-current {
   background: var(--eqb-color-paper);
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(30, 30, 28, 0.08), 0 0 0 1px rgba(30, 30, 28, 0.03);
+  border-radius: var(--eqb-radius-control);
+  box-shadow: var(--elev-1);
   left: 0;
   pointer-events: none;
   position: absolute;
@@ -765,89 +731,105 @@
 /* workbench-header-unify Locked Decision 5: relocated真值 annotation —
    same visual register as .draft-paper-meta before it (12px 暖墨,
    tabular-nums), now living at the rail's top instead of a retired
-   meta-row above the paper. */
+   meta-row above the paper.
+   左右内衬跟目录项一样（2026-11-15 换 Row 时 10 → --eqb-space-2，字往左 2px，和目录项对齐）。 */
 .draft-paper-rail-meta {
-  color: var(--muted);
-  font-size: 12px;
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
   font-variant-numeric: tabular-nums;
   letter-spacing: 0;
-  margin: 0 0 12px;
-  padding: 0 10px;
+  margin: 0 0 var(--eqb-space-3);
+  padding: 0 var(--eqb-space-2);
   white-space: nowrap;
 }
 
-/* 目录项：淡墨、无边框、无底色块。此前当前项是一块灰底 pill——那是给
-   目录「配色」，北极星只让动作用墨，当前位置由小手指出。 */
+/* 目录项是共用行 Row（shared-ui/row.css，size="sm" 最小高 44，padding="none"）：次要灰字（本页 --ink-soft 指到 --desk-muted，
+   就是 --eqb-color-text-muted #5A6C75，照原色）、无边框、无底色块，
+   当前位置由白底板指出（北极星只让动作用墨）。最小高、定位、整行目标、键盘焦点（桌色底 + 向里 2px 墨环）、
+   按下（深一档底）都归 row.css，这里只管排法、字、圆角。
+   显式层叠：.draft-paper-rail-item（0,1,0）和 row.css 的 .eqb-row（0,1,0）不写同一项，互不覆盖；
+   行的圆角 8 写在这里，整行目标的圆角写 inherit 跟着它，焦点环、焦点 / 按下的底也就是 8 圆角。
+   原来 36 高、内衬 0 10、z-index 1（压在白底板上）；现在 44 高，内衬换成 --eqb-space-2，
+   不再要 z-index：白底板在列表外面、排在前面，列表里有定位的行按文档顺序画在它上面。 */
 .draft-paper-rail-item {
   align-items: center;
-  color: var(--ink-soft);
-  cursor: pointer;
+  border-radius: var(--eqb-radius-control);
+  color: var(--eqb-color-text-muted);
   display: flex;
-  font-size: 13px;
-  gap: 8px;
-  min-height: 36px;
-  padding: 0 10px;
-  position: relative;
-  z-index: 1;
+  font-size: var(--eqb-font-size-control);
+  gap: var(--eqb-space-2);
+  padding: 0 var(--eqb-space-2);
   user-select: none;
   transition: color var(--motion-fast) var(--ease-hover);
 }
 
-.draft-paper-rail-item[data-fluid-hover-active] {
-  color: var(--ink);
+/* 滑块停在整行目标上（DraftPaperRail.tsx itemSelector），悬停时字提到墨色。 */
+.draft-paper-rail-item:has(> .eqb-row-hit[data-fluid-hover-active]) {
+  color: var(--eqb-color-text);
 }
 
 /* The current row already owns the white plate; its hover surface stays
    transparent so location and hover never read as two selected states. */
-.draft-paper-rail-panel:has(.draft-paper-rail-item.active[data-fluid-hover-active])::before {
+.draft-paper-rail-list:has(> .draft-paper-rail-item.active > .eqb-row-hit[data-fluid-hover-active])::before {
   opacity: 0;
 }
 
-.draft-paper-rail-item:focus-visible {
-  outline: 2px solid var(--action);
-  outline-offset: -2px;
+/* 缺题项不可点，没有悬停：滑块停在它上面时藏起来（它在滑块的停靠表里，只是为了鼠标停在它上面时滑块不去挑别的项）。
+   显式层叠：本条 (0,3,1) 和上一条一样只改 ::before 的 opacity，盖过 App.css .fluid-hover-list::before 的 var(--fh-o)。 */
+.draft-paper-rail-list:has(> .draft-paper-rail-item.is-missing[data-fluid-hover-active])::before {
+  opacity: 0;
 }
 
 .draft-paper-rail-item.active {
-  color: var(--ink);
+  color: var(--eqb-color-text);
   font-weight: 500;
 }
 
-.draft-paper-rail-item.is-missing {
-  cursor: default;
-}
-
+/* 缺题：字用警示色、斜体（照原来）。行不可点，没有整行目标、没有手形、没有悬停。 */
 .draft-paper-rail-item.is-missing .draft-paper-rail-label {
   color: var(--eqb-color-warning);
   font-style: italic;
 }
 
+/* 拖拽把手：悬停或焦点在行里时出现。不接鼠标（pointer-events: none），点在把手上就是点下面的整行目标；
+   拖动照旧从整行起（<li draggable>）。原来把手出现时接鼠标、手形是 grab，点它不跳。
+   right 原来 9px，换成 --eqb-space-2（往右 1px，目测看不出）。 */
 .draft-paper-rail-grip {
   color: var(--eqb-color-text-faint);
-  cursor: grab;
   flex-shrink: 0;
   opacity: 0;
   pointer-events: none;
   position: absolute;
-  right: 9px;
+  right: var(--eqb-space-2);
   top: 50%;
   transform: translateY(-50%);
 }
 
-.draft-paper-rail-item[data-fluid-hover-active] .draft-paper-rail-grip,
+.draft-paper-rail-item:has(> .eqb-row-hit[data-fluid-hover-active]) .draft-paper-rail-grip,
 .draft-paper-rail-item:focus-within .draft-paper-rail-grip {
   opacity: 1;
-  pointer-events: auto;
 }
 
+/* 右边让出把手（右 8 + 宽 12）：原来让 18，换成 --eqb-space-4（16）。 */
 .draft-paper-rail-label {
   flex: 1;
   overflow: hidden;
-  padding-right: 18px;
+  padding-right: var(--eqb-space-4);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+/* Owner 2026-11-14（走查 find-compose-export 第四节第 1 条）：原卷字母当来源，
+   跟在左栏主名后面的一行小字。本条覆盖 .draft-paper-rail-item.active 继承下来的
+   500 字重和墨色，因来源只是次要说明，当前项也不该让它变实。 */
+.draft-paper-rail-source {
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
+  font-weight: 400;
+  margin-left: var(--eqb-space-2);
+}
+
+/* 缺题项的上移 / 下移 / 移除。这一行不可点（没有整行目标），键不用叠在什么上面。 */
 .draft-paper-rail-acts {
   display: flex;
   flex-shrink: 0;
@@ -857,14 +839,14 @@
 .draft-paper-rail-acts button {
   background: transparent;
   border: none;
-  border-radius: 4px;
-  color: var(--ink-soft);
+  border-radius: var(--eqb-radius-badge);
+  color: var(--eqb-color-text-muted);
   padding: 1px 4px;
 }
 
 .draft-paper-rail-acts button:hover {
-  background: var(--surface-strong);
-  color: var(--ink);
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text);
 }
 
 .draft-paper-rail-acts button.danger:hover {
@@ -877,109 +859,23 @@
   padding: 4px 0;
 }
 
-/* emil-processing: keyframe→transition (findings 表条目3). 入退同轴
-   （translateY 位移不变方向），退出（回到本规则的 motion-fast）快于入场
-   （[data-visible="true"] 覆盖成 motion-base）；连续触发（如连删两题）时
-   同一属性的 transition 天然平滑重定向，不像 keyframe 那样从零重播。 */
-.draft-undo-toast {
-  align-items: center;
-  background: var(--ink);
-  border-radius: 8px;
-  bottom: 22px;
-  color: #ffffff;
-  display: flex;
-  gap: 12px;
-  left: 50%;
-  padding: 10px 12px;
-  position: fixed;
-  z-index: 30;
-  opacity: 0;
-  transform: translateX(-50%) translateY(8px);
-  transition: opacity var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
-}
+/* 撤销、刚保存这几条临时提示（.draft-undo-toast）换成了 shared-ui/Notice 的 floating 放法：
+   原来的黑底白字条去掉，改白底、e3（DESIGN.md §4），入退场的 transition 搬进 notice.css，
+   做法不变（退出 motion-fast、入场 motion-base，同一属性平滑重定向）。 */
 
-.draft-undo-toast[data-visible='true'] {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-  transition-duration: var(--motion-base);
-}
+/* 「保存 PDF 到个人空间」换成共用 Dialog（构件厂 2026-11-14）：遮罩、面板、入退场、标题行、底部动作都在
+   shared-ui/dialog.css，原来的 .draft-modal-backdrop、.draft-save-space-dialog 面板、.draft-dialog-head、
+   .draft-dialog-actions 几条删掉。下面只留正文里的表单排法；.draft-save-space-dialog 现在挂在 <dialog> 上。 */
 
-/* emil-processing: modal 入退场（findings 表条目 draft-save-space-dialog）。
-   backdrop 淡入独立于 dialog 的 fade+scale；两者都走「保持挂载播完 exit
-   再卸载」的 usePresence，退出（本规则 motion-fast）快于入场
-   ([data-visible="true"] 覆盖成 motion-base）。center 弹层 origin 保持
-   居中，不需要 trigger 边 origin（模态豁免，findings 表已注明）。 */
-.draft-modal-backdrop {
-  align-items: center;
-  background: rgba(30, 30, 28, 0.28);
-  display: flex;
-  inset: 0;
-  justify-content: center;
-  padding: 18px;
-  position: fixed;
-  z-index: 40;
-  opacity: 0;
-  transition: opacity var(--motion-fast) var(--ease-out);
-}
-
-.draft-modal-backdrop[data-visible='true'] {
-  opacity: 1;
-  transition-duration: var(--motion-base);
-}
-
-.draft-save-space-dialog {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  /* Floating-tier shadow (DESIGN.md §4), ink-tinted per plan special case
-     rather than the literal rgba(0,0,0,0.12) in the shadow vocabulary. */
-  box-shadow: 0 8px 24px rgba(30, 30, 28, 0.12);
+/* 覆盖：本条 (0,2,0) 盖过 dialog.css .eqb-dialog-body (0,1,0) 的块排法：这一处正文是三行表单，竖排、行距 12（原来面板的 gap）。 */
+.eqb-dialog-body.draft-save-space-body {
   display: grid;
-  gap: 12px;
-  max-width: 440px;
-  max-height: calc(100dvh - 36px);
-  overflow: auto;
-  padding: 16px;
-  width: min(100%, 440px);
-  opacity: 0;
-  transform: scale(0.97);
-  transition: opacity var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
+  gap: var(--eqb-space-3);
+  align-content: start;
 }
 
-.draft-save-space-dialog[data-visible='true'] {
-  opacity: 1;
-  transform: scale(1);
-  transition-duration: var(--motion-base);
-}
-
-.draft-dialog-head {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.draft-save-space-dialog label {
-  display: grid;
-  gap: 5px;
-}
-
-.draft-save-space-dialog label span,
-.draft-dialog-note {
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.draft-save-space-dialog input,
-.draft-save-space-dialog select {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  color: var(--ink);
-  font: inherit;
-  min-height: 36px;
-  padding: 6px 9px;
-}
+/* 字段构件（2026-11-14）：文件名、文件夹、新建文件夹换成 shared-ui/Field.tsx（大号 36），标签、边、焦点在 field.css；
+   原来 .draft-save-space-dialog label / label span / input, select 三条删掉（它们 (0,1,1) 会压过 .eqb-field-control）。 */
 
 .draft-new-folder-row {
   display: grid;
@@ -987,29 +883,24 @@
   grid-template-columns: minmax(0, 1fr) auto;
 }
 
-.draft-dialog-actions {
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-}
 
-.draft-success button {
-  margin-left: 10px;
-}
 
-/* workbench-header-unify Locked Decision 5 窄屏退化补充: ≤980px 时 A4/A3
-   与版本切换一并被「⋯」吸收——hide the wide-row toggle mounts, reveal their
-   .draft-more-menu-narrow-controls twins inside the "⋯" panel instead.
-   导出 (.draft-export-menu) is never touched here — always visible. */
+/* 窄屏（≤980px）：顶栏里那一份「PDF 版本」「A4 / A3」藏起来，换成卷面上方单独一行（.draft-option-row），
+   不再收进「⋯」面板（字段构件 2026-11-14，走查卡点 5）。这一行靠右，和顶栏「导出」同一侧；放不下时两个字段各占一行。
+   左右边距和下面提示行、排序建议卡一样（.draft-notice-slot / .draft-reorder-slot 的 0 24px）。
+   导出 (shared-ui/Menu 的触发键) is never touched here — always visible. */
 @media (max-width: 980px) {
   .draft-topbar-wide-toggle {
     display: none;
   }
 
-  .draft-more-menu-narrow-controls {
+  .draft-option-row {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: var(--eqb-space-2) var(--eqb-space-4);
+    padding: 0 var(--eqb-space-5) var(--eqb-space-2);
   }
 
   /* When JS computes a scale < 1 (native A4 width no longer fits), the
@@ -1032,7 +923,7 @@
     padding: 2px;
   }
 
-  .draft-paper-col:not(.is-a3) .draft-group-actions > button:not(.draft-group-suggestion) {
+  .draft-paper-col:not(.is-a3) .draft-group-actions > button:not(.draft-group-suggestion, .eqb-button) {
     min-width: 32px;
     padding: 0;
     width: 32px;
@@ -1048,7 +939,8 @@
    与本刀无关的工具栏堆叠行为）。 */
 @media (max-width: 900px) {
   .draft-preview-desk,
-  .draft-preview-desk:has(> .draft-paper-rail--swap) {
+  .draft-preview-desk:has(> .draft-paper-rail--swap),
+  .draft-skeleton-desk {
     grid-template-columns: 1fr;
     padding: 12px 48px 18px 10px;
   }
@@ -1057,7 +949,8 @@
     right: -38px;
   }
 
-  .draft-paper-rail {
+  .draft-paper-rail,
+  .draft-skeleton-rail {
     display: none;
   }
 
@@ -1070,56 +963,17 @@
   }
 }
 
-.draft-group-actions-menu {
-  position: relative;
-}
-
-.draft-group-actions button:focus-visible,
-.draft-group-actions-menu-trigger:focus-visible {
+.draft-group-actions button:where(:not(.eqb-button)):focus-visible {
   outline: 2px solid var(--action);
   outline-offset: 2px;
 }
 
-.draft-group-actions-menu-trigger[aria-expanded='true'] {
-  background: var(--surface-strong);
-  color: var(--ink);
-}
-
-.draft-group-actions-menu-panel {
-  background: var(--panel);
-  border: 0;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(30, 30, 28, 0.12);
-  display: grid;
-  gap: 3px;
-  min-width: 150px;
-  padding: 6px;
-  position: absolute;
-  left: auto;
-  right: 0;
-  top: calc(100% + 10px);
-}
-
-.draft-group-actions .draft-group-actions-menu-panel button {
-  box-shadow: none;
-  gap: 8px;
-  height: 36px;
-  justify-content: flex-start;
-  padding: 0 10px;
-  width: 100%;
-}
-
-.draft-group-actions .draft-group-actions-menu-panel button:disabled {
-  color: var(--muted);
-  cursor: default;
-  opacity: 0.45;
-}
-
-.draft-group-actions .draft-group-actions-menu-panel button.danger {
-  border-radius: 0 0 8px 8px;
-  border-top: 1px solid var(--line);
-  color: var(--eqb-color-danger);
-  margin-top: 4px;
+/* 显式层叠：题组「⋯」是 shared-ui/Button（strong、md、32×32），本身 8px 圆角；在这条
+   8px 圆角、4px 内边距的工具条里按 DESIGN.md §5 同心规则改成 4px（和旁边「换篇」键一样）。
+   .draft-group-actions .eqb-button（0,2,0）压过 button.css 的 .eqb-button（0,1,0）。
+   原来的 .draft-group-actions-menu(-trigger/-panel) 规则随菜单换成 Menu 一起删掉。 */
+.draft-group-actions .eqb-button {
+  border-radius: 4px;
 }
 
 @media (max-width: 560px) {
@@ -1139,13 +993,11 @@
     flex: 1;
   }
 
-  .draft-more-menu,
-  .draft-export-menu {
+  .draft-more-menu {
     position: static;
   }
 
-  .draft-more-menu-panel,
-  .draft-export-menu-panel {
+  .draft-more-menu-panel {
     left: 0;
     right: auto;
     max-width: 100%;
@@ -1155,11 +1007,13 @@
 
 @media (min-width: 1200px) {
   /* Center the A4 sheet in the viewport, not just the space after the outline. */
-  .draft-preview-desk:has(> .draft-paper-col:not(.is-a3)) {
+  .draft-preview-desk:has(> .draft-paper-col:not(.is-a3)),
+  .draft-skeleton-desk {
     grid-template-columns: minmax(0, 1fr) 820px minmax(0, 1fr);
   }
 
-  .draft-preview-desk:has(> .draft-paper-col:not(.is-a3)) > .draft-paper-rail {
+  .draft-preview-desk:has(> .draft-paper-col:not(.is-a3)) > .draft-paper-rail,
+  .draft-skeleton-desk > .draft-skeleton-rail {
     justify-self: end;
     width: 100%;
   }
@@ -1167,9 +1021,71 @@
   .draft-paper-col:not(.is-a3) .draft-group-actions {
     right: -111px;
   }
+}
 
-  .draft-paper-col:not(.is-a3) .draft-group-actions-menu-panel {
-    left: -78px;
-    right: auto;
+/* ─── 打开草稿卷 / 第一次分页的灰块（等待第四轮，2026-11-15） ───
+   外框几何和真桌面共用上面的规则（.draft-skeleton-desk / -rail / -col）；这里只排板里、纸上的灰块。
+   原来那一行「正在打开草稿卷」（.draft-loading，桌面正中）和纸的位置正中「正在生成分页预览」换掉了。 */
+
+/* 页数那一行（.draft-paper-rail-meta：12px 一行，下空 12，左右内衬 8）。 */
+.draft-skeleton-rail-meta {
+  display: flex;
+  align-items: center;
+  height: 18px;
+  margin: 0 0 var(--eqb-space-3);
+  padding: 0 var(--eqb-space-2);
+}
+
+/* 目录一项（.draft-paper-rail-item：Row sm 最小高 44，左右内衬 8，行间 4）。 */
+.draft-skeleton-rail-item {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--eqb-space-2);
+}
+
+.draft-skeleton-rail-item + .draft-skeleton-rail-item {
+  margin-top: var(--eqb-space-1);
+}
+
+/* 一张 A4：照预览 iframe 里的 .preview-page（794 宽、离纸栏顶 24、A4 高 1123）。
+   底、阴影同 .preview-page 和整卷页 .paper-browse-zoom（DESIGN.md Shadow Vocabulary · Sheet 纸面）：
+   阴影用纸面 token --elev-sheet（tokens.css，等待第五轮从字面量收进来，值不变；预览 iframe 里那份是 #00000010 / #00000014，没收）。
+   页边距照 PaperSurface 的页边（上 79、左右 91），灰块在纸上的位置和真卷面的字一样。 */
+.draft-skeleton-sheet {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 794px;
+  max-width: 100%;
+  min-height: 1123px;
+  margin: 0 auto;
+  padding: 79px 91px;
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-sheet);
+}
+
+/* 纸离纸栏顶 24（预览 iframe 里 body 的上内边距）。写成外面一层的内边距，不写纸的外边距：
+   外边距会穿过 .draft-a4-sheet 叠出去，把 .draft-a4-sheet 整个往下推 24（量出来的，2026-11-15）。 */
+.draft-skeleton-col,
+.draft-a4-skeleton {
+  padding-top: 24px;
+}
+
+/* 卷头：卷名一行居中、下面一行说明，和下面的组之间空出卷头那段。 */
+.draft-skeleton-sheet-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 24px;
+}
+
+@media (max-width: 900px) {
+  /* 窄屏纸变窄（纸栏宽度跟着桌面走），页边同整卷页窄屏那一档收小。 */
+  .draft-skeleton-sheet {
+    min-height: 0;
+    padding: 32px 24px;
   }
 }

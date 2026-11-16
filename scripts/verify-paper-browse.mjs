@@ -376,7 +376,7 @@ assert(
 )
 assert(
   'App.tsx imports PaperBrowsePage from features/paper-browse',
-  /import\s*\{\s*PaperBrowsePage\s*\}\s*from\s*['"]\.\/features\/paper-browse\/PaperBrowsePage['"]/.test(
+  /import\s*\{\s*PaperBrowsePage\s*(?:,\s*type\s+AddGroupsOutcome\s*)?\}\s*from\s*['"]\.\/features\/paper-browse\/PaperBrowsePage['"]/.test(
     appSrc,
   ),
   'missing PaperBrowsePage import',
@@ -462,14 +462,16 @@ assert(
 // 预览指引") legitimately says "看整卷" a few more times as user-facing
 // guidance text in error messages, not as additional buttons. Narrowed to
 // counting the actual button JSX.
+// 构件厂第 4 步（2026-11-13）：换成共用的 Button，图标走 icon 属性，写法是
+// <Button tone="strong" icon={<Eye size={16} />} …>看整卷；两种写法都认。
 assert(
   'QuestionGroupDetailView renders exactly one 看整卷 button',
-  (detailViewSrc.match(/<button[\s\S]{0,120}?>\s*<Eye[^/]*\/>\s*看整卷/g) || []).length === 1,
+  (detailViewSrc.match(/<button[\s\S]{0,120}?>\s*<Eye[^/]*\/>\s*看整卷|<Button\b[^>]*icon=\{<Eye[^/]*\/>\}[\s\S]{0,120}?\}>\s*看整卷/g) || []).length === 1,
   'expected exactly one 看整卷 button element',
 )
 assert(
   '看整卷 button is gated on selectedDetail.canonicalPaperId',
-  /\{selectedDetail\.canonicalPaperId\s*&&\s*\(\s*<button[\s\S]*?看整卷/.test(detailViewSrc),
+  /\{selectedDetail\.canonicalPaperId\s*&&\s*\(\s*<[bB]utton[\s\S]*?看整卷/.test(detailViewSrc),
   '看整卷 button is not gated on Screen admission',
 )
 assert(
@@ -556,11 +558,13 @@ assert(
   // site stays [card] (single group) and the new site is a user-picked
   // subset (`cards`, built from a Set of checkbox selections), never "every
   // group on the page".
-  'PaperBrowsePage calls onAddGroupsToBasket at exactly two call sites (per-card [card] + similar-rail user-picked subset), no whole-paper aggregate add',
-  (pageSrc.match(/onAddGroupsToBasket\(/g) || []).length === 2 &&
-    /onAddGroupsToBasket\(\[card\]\)/.test(pageSrc) &&
+  'PaperBrowsePage adds per card via DraftAddButton and calls onAddGroupsToBasket only for the similar-rail user-picked subset, no whole-paper aggregate add',
+  // 走查第四节第 6 条（Owner 2026-11-14）：每篇的加入换成共用加入键 <DraftAddButton target={card}>（单组、走
+  // DraftAddContext），所以 onAddGroupsToBasket 只剩相似栏勾选的那一处；仍然没有整卷一键全加。
+  (pageSrc.match(/onAddGroupsToBasket\(/g) || []).length === 1 &&
+    /<DraftAddButton target=\{card\}/.test(pageSrc) &&
     /onAddGroupsToBasket\(cards\)/.test(pageSrc),
-  'expected exactly two onAddGroupsToBasket call sites: [card] (per-card) and (cards) (similar-rail multi-select)',
+  'expected per-card <DraftAddButton target={card}> plus exactly one onAddGroupsToBasket(cards) call site (similar-rail multi-select)',
 )
 
 // ─── 9. Real paper-2026-i fixture structural check ───
@@ -1122,7 +1126,7 @@ assert(
   'PaperBrowsePage renders a 讲评 toggle in the topbar actionsSlot unconditionally, including Review Screen',
   /paper-browse-lecture-toggle/.test(pageSrc) &&
     /actionsSlot=\{topbarActionsSlot\}/.test(pageSrc) &&
-    /Presentation size=\{14\}/.test(pageSrc) &&
+    /Presentation size=\{16\}/.test(pageSrc) &&
     !/paper-browse-lecture-handle/.test(pageSrc),
   'topbar lecture toggle missing, or the retired right-edge handle remains',
 )
@@ -1130,7 +1134,7 @@ assert(
   'Review Screen hides draft and similarity consumer actions while retaining the real renderer',
   /\{!reviewRevision && card && \(\s*<div className="paper-browse-group-actions">/.test(pageSrc) &&
     /\{!reviewRevision && hasActiveQuestion[\s\S]{0,180}<div className="similar-cta">/.test(pageSrc) &&
-    /\{!reviewRevision && \(\s*<button[\s\S]{0,120}className="basket-chip"/.test(pageSrc),
+    /\{!reviewRevision && \(\s*<Button[\s\S]{0,120}className="basket-chip"/.test(pageSrc),
   'one or more consumer-only actions are still visible in Review Screen',
 )
 assert(
@@ -1367,7 +1371,7 @@ assert(
 )
 assert(
   '.paper-browse-content establishes position: relative for the shared overlay to anchor against (page-local, stays in paperBrowsePage.css)',
-  /\.paper-browse-content\s*\{[^}]*position:\s*relative/.test(pageCssSrc),
+  /\.paper-browse-content(?:,\s*\.paper-browse-skeleton-content)?\s*\{[^}]*position:\s*relative/.test(pageCssSrc),
   'missing the position: relative anchor on .paper-browse-content',
 )
 assert(
@@ -1418,8 +1422,8 @@ assert(
 
 assert(
   'paperBrowsePage.css: .paper-browse-shell is not centered via max-width + margin auto (rail glued to viewport edge)',
-  /\.paper-browse-shell\s*\{[^}]*\}/.exec(pageCssSrc) &&
-    !/\.paper-browse-shell\s*\{[^}]*max-width[^}]*\}/.test(pageCssSrc),
+  /\.paper-browse-shell(?:,\s*\.paper-browse-skeleton-shell)?\s*\{[^}]*\}/.exec(pageCssSrc) &&
+    !/\.paper-browse-shell(?:,\s*\.paper-browse-skeleton-shell)?\s*\{[^}]*max-width[^}]*\}/.test(pageCssSrc),
   'shell rule still constrains max-width — rail would stay centered, not edge-glued',
 )
 assert(
@@ -1782,10 +1786,10 @@ assert(
 
 assert(
   '47. paperBrowsePage.css: .paper-browse-zoom is the single sheet — one background + one box-shadow, page-margin padding driven by the shared --ps-page-margin tokens; .paper-browse-content is the desk',
-  /\.paper-browse-content \{[^}]*background:\s*var\(--eqb-color-bg/.test(pageCssSrc) &&
-    /\.paper-browse-zoom \{[^}]*background:\s*#fff/.test(pageCssSrc) &&
-    /\.paper-browse-zoom \{[^}]*box-shadow:/.test(pageCssSrc) &&
-    /\.paper-browse-zoom \{[^}]*padding:\s*var\(--ps-page-margin-top/.test(pageCssSrc),
+  /\.paper-browse-content(?:,\s*\.paper-browse-skeleton-content)? \{[^}]*background:\s*var\(--eqb-color-bg/.test(pageCssSrc) &&
+    /\.paper-browse-zoom(?:,\s*\.paper-browse-skeleton-sheet)? \{[^}]*background:\s*#fff/.test(pageCssSrc) &&
+    /\.paper-browse-zoom(?:,\s*\.paper-browse-skeleton-sheet)? \{[^}]*box-shadow:/.test(pageCssSrc) &&
+    /\.paper-browse-zoom(?:,\s*\.paper-browse-skeleton-sheet)? \{[^}]*padding:\s*var\(--ps-page-margin-top/.test(pageCssSrc),
   'missing the desk background on .paper-browse-content or single-sheet background/box-shadow/padding on .paper-browse-zoom',
 )
 assert(
@@ -1911,7 +1915,7 @@ assert(
   'similarQuestions.ts request shape or error-handling convention drifted from the E1 contract / draftPapers.ts pattern',
 )
 const handleSimilarAddToDraftBody =
-  pageSrc.match(/function handleSimilarAddToDraft\(\): void \{([\s\S]*?)\n  \}\n/)?.[1] || ''
+  pageSrc.match(/function handleSimilarAddToDraft\(\): (?:void|Promise<void>) \{([\s\S]*?)\n  \}\n/)?.[1] || ''
 assert(
   '59. handleSimilarAddToDraft reuses App.addGroupsToBasket (no new draft-add endpoint/path) and clears the selection Set after adding, without closing the result list (view stays \'similar\')',
   handleSimilarAddToDraftBody.length > 0 &&
@@ -2020,8 +2024,8 @@ assert(
     pageSrc.includes('renderQuietRail(dockedLecture)') &&
     !pageSrc.includes('renderPianoRail') &&
     !pageSrc.includes('paper-browse-piano-') &&
-    /\.paper-browse-rail\s*\{[^}]*width:\s*88px[^}]*margin-left:\s*-8px/.test(pageCssSrc) &&
-    /\.paper-browse-rail-panel\s*\{[^}]*gap:\s*16px[^}]*padding:\s*12px 6px[^}]*border-radius:\s*12px[^}]*var\(--desk-surface, #FAFCF8\)/.test(pageCssSrc) &&
+    /\.paper-browse-rail(?:,\s*\.paper-browse-skeleton-rail)?\s*\{[^}]*width:\s*88px[^}]*margin-left:\s*-8px/.test(pageCssSrc) &&
+    /\.paper-browse-rail-panel(?:,\s*\.paper-browse-skeleton-rail-panel)?\s*\{[^}]*gap:\s*16px[^}]*padding:\s*12px 6px[^}]*border-radius:\s*12px[^}]*var\(--desk-surface, #FAFCF8\)/.test(pageCssSrc) &&
     !/\.paper-browse-shell--lecture-open \.paper-browse-rail-part-head\s*\{[^}]*display:\s*none/.test(pageCssSrc),
   'the shared 88px directory surface, visible data-driven section heads, or existing rail reuse is missing',
 )
@@ -2030,14 +2034,14 @@ assert(
   /new ResizeObserver\(computeZoom\)/.test(pageSrc) &&
     /const raw = Math\.max\(1, Math\.min\(1\.35, available \/ PAPER_BASE_WIDTH\)\)/.test(pageSrc) &&
     /Math\.floor\(raw \/ 0\.05\) \* 0\.05/.test(pageSrc) &&
-    /\.paper-browse-zoom\s*\{[^}]*zoom:\s*var\(--paper-screen-zoom/.test(pageCssSrc) &&
+    /\.paper-browse-zoom(?:,\s*\.paper-browse-skeleton-sheet)?\s*\{[^}]*zoom:\s*var\(--paper-screen-zoom/.test(pageCssSrc) &&
     /@media print\s*\{[^}]*\.paper-browse-zoom\s*\{[^}]*zoom:\s*1/.test(pageCssSrc),
   'shared adaptive Screen zoom or Print guard is missing',
 )
 assert(
   'lecture toggle keeps the screen zoom and desktop content column independent of open state',
   !pageSrc.slice(pageSrc.indexOf('function computeZoom()'), pageSrc.indexOf('    computeZoom()')).includes('lectureOpen') &&
-    /@media screen and \(min-width: 1440px\)\s*\{\s*\.paper-browse-shell\s*\{\s*grid-template-columns: 72px minmax\(0, 1fr\) 440px/.test(pageCssSrc) &&
+    /@media screen and \(min-width: 1440px\)\s*\{\s*\.paper-browse-shell(?:,\s*\.paper-browse-skeleton-shell)?\s*\{\s*grid-template-columns: 72px minmax\(0, 1fr\) 440px/.test(pageCssSrc) &&
     /const DOCKED_LECTURE_MIN_WIDTH = 1440/.test(pageSrc) &&
     /transition: transform var\(--motion-slow\) var\(--ease-out\)/.test(pageCssSrc),
   'lecture still resizes the paper instead of translating the fixed-width column',
@@ -2067,7 +2071,7 @@ assert(
     /trimmed\.replace\(\/\\s\*\[（\(\][\s\S]*满分[\s\S]*\$\/, ''\)/.test(pageSrc) &&
     !pageSrc.includes('PointingHand') &&
     pageSrc.includes('paper-browse-rail-current') &&
-    /\.paper-browse-rail-current\s*\{[^}]*background:\s*#fff[^}]*box-shadow:\s*0 1px 3px rgb\(25 29 24 \/ 9%\)/.test(pageCssSrc) &&
+    /\.paper-browse-rail-current\s*\{[^}]*background:\s*#fff[^}]*box-shadow:\s*var\(--elev-1\)/.test(pageCssSrc) &&
     /\.paper-browse-rail-group-list\.fluid-hover-list\s*\{[^}]*--fh-radius:\s*8px/.test(pageCssSrc) &&
     /\.paper-browse-rail-group-list:has\(\.paper-browse-rail-group--active\[data-fluid-hover-active\]\)::before\s*\{[^}]*opacity:\s*0/.test(pageCssSrc) &&
     pageSrc.includes('itemSelector=".paper-browse-rail-group"') &&
@@ -2132,7 +2136,7 @@ const expectedPaperBrowseTypeRoles = [
   ['.retained-writing-card-points li', '14px'],
   ['.continuation-analysis-model-answer p', '14px'],
   ['.similar-rcard-title', '14px'],
-  ['.similar-chip', '12px'],
+  // 胶囊构件（2026-11-14）：理由小签换成 shared-ui/Chip.tsx，12px 由 chip.css 的 --eqb-font-size-xs 给，这里不再有 .similar-chip 规则。
 ]
 assert(
   '81. paper-browse assigns the twelve approved UI declarations to Label, Compact Body, and Body roles',

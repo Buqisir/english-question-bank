@@ -36,13 +36,17 @@ import {
   Pencil,
   Trash,
 } from '../../icons'
-import { DraftAddIcon } from '../../icons/MotionIcons'
-import { iconMotionInput } from '../../icons/motionInput'
+import { DraftAddButton } from '../../shared-ui/DraftAddButton.tsx'
 import type { QuestionGroupCard, QuestionGroupDetail, ReadingParseQuestionGroupResult, TopicLabel } from '../../domain/questionBank'
 import { sourceTypeLabel } from '../../domain/questionBank'
 import { compactGroupMeta } from './detailHelpers'
 import { buildPaperBrowseLectureHref } from '../../concierge/paperSurfaceHref'
-import { ConciergeGroupRowMenu } from '../../concierge/ConciergeGroupRowMenu'
+import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
+import { Menu } from '../../shared-ui/Menu.tsx'
+import { Chip } from '../../shared-ui/Chip.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
+import { PaperGroupSkeleton, Skeleton, SkeletonGate } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
 import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import {
   SimilarPassagesPanel,
@@ -114,7 +118,6 @@ export type QuestionGroupDetailViewProps = {
   onBack: () => void
   onEdit: (detail: QuestionGroupDetail) => void
   onDelete: (detail: QuestionGroupDetail) => void
-  onAddToBasket: (detail: QuestionGroupDetail) => void
   /** opens the whole-paper preview page (paper-browse), scrolled to this
    * group — 挑题态, no lecture. Only rendered when the group has a
    * paperSurfaceHref (its paper has a paper-asset). */
@@ -130,10 +133,6 @@ export type QuestionGroupDetailViewProps = {
    * and the SW-3 thin-candidate disabled state) — same map App.tsx already
    * builds for PaperBrowsePage. */
   questionGroupById: Map<string, QuestionGroupCard>
-  /** similar-passages-entry (E6): adds one resolved 相似篇章 candidate to the
-   * current draft paper (same basket pipeline as onAddToBasket, just taking
-   * a QuestionGroupCard instead of the loaded QuestionGroupDetail). */
-  onAddSimilarToBasket: (card: QuestionGroupCard) => void
 }
 
 // ── 一张纸：题组模型（按 groupType 走五个现有 adapter 之一） ────────────
@@ -294,6 +293,37 @@ const psTokenStyle: CSSProperties & Record<`--${string}`, string | number> = {
   '--ps-page-margin-top': paperSurfaceTokens.pageMarginTop,
 }
 
+/**
+ * 整页在等题组详情时的灰块（等待第五轮，2026-11-15；原来是「返回找题」下面一行「正在读取题组详情」）。
+ * 用真页面同一套 class 排：速览头（题型一行、标题、摘要一行、一排键），下面一张纸露一角（同卷面在等时的灰块）。
+ * 字的位置放灰块，行高由真规则的字号、行高给。showSkeleton 是外面接成一段的门槛（读详情 → 读卷面）。
+ * 等待第七轮（2026-11-15，Owner 同意协调人的建议）：摘要从两行改成一行、小签不画。原来按两行摘要加一排小签画，
+ * 没摘要、没小签的题组数据到了纸往上挪约 76px；现在有一行摘要的几乎不动，没摘要的往上挪约 31px（实量见
+ * design/components-2026-11-13/migrate-waiting-7/README.md）。
+ */
+function DetailOpeningSkeleton({ showSkeleton }: { showSkeleton: boolean }) {
+  return (
+    <section className="peek-root detail-opening-skeleton" role="status" aria-busy="true">
+      <span className="visually-hidden">正在读取题组详情</span>
+      {showSkeleton && <>
+        <div className="peek-hero" aria-hidden="true">
+          <div className="peek-meta-line"><span><Skeleton width={120} height={10} /></span></div>
+          <h3 className="peek-title"><Skeleton width={280} height={16} /></h3>
+          <p className="peek-summary"><Skeleton width={420} height={10} /></p>
+          <div className="peek-actions">
+            {[104, 88, 88].map((width, index) => <Skeleton key={index} width={width} height={32} />)}
+          </div>
+        </div>
+        <div className="peek-paper" aria-hidden="true">
+          <div className="peek-paper-clip">
+            <div className="peek-paper-skeleton"><PaperGroupSkeleton /></div>
+          </div>
+        </div>
+      </>}
+    </section>
+  )
+}
+
 export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
   const {
     isOwnerView,
@@ -302,16 +332,16 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     onBack,
     onEdit,
     onDelete,
-    onAddToBasket,
     onOpenPaperBrowse,
     onOpenPaperBrowseLecture,
     questionGroupById,
-    onAddSimilarToBasket,
   } = props
 
   // ── 一张纸：async 挂载（confirmed Canonical Consumption only） ───────
   const paperId = selectedDetail?.canonicalPaperId
   const [load, setLoad] = useState<LoadState>({ status: 'loading' })
+  // 等待第五轮（2026-11-15）：读题组详情、读卷面两段接成一段等，走一个门槛：整页灰块换成真速览头时，纸上的灰块不断、不重新数 300ms。
+  const paperPhase = useDelayedBusy(selectedDetail ? load.status === 'loading' : detailStatus === 'loading')
   const [expanded, setExpanded] = useState(false)
 
   function toggleExpanded(next: boolean): void {
@@ -500,11 +530,11 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
   if (!selectedDetail) {
     return (
       <div className="detail-view">
-        <button className="back-button" type="button" onClick={onBack}>
-          <ArrowLeft size={14} aria-hidden="true" /> 返回找题
-        </button>
-        {detailStatus === 'loading' && <p className="detail-message">正在读取题组详情...</p>}
-        {detailStatus === 'error' && <p className="detail-message error">{detailError}</p>}
+        <Button className="detail-back" tone="subtle" size="sm" icon={<ArrowLeft size={16} aria-hidden="true" />} onClick={onBack}>
+          返回找题
+        </Button>
+        {(detailStatus === 'loading' || paperPhase === 'waiting') && detailStatus !== 'error' && <DetailOpeningSkeleton showSkeleton={paperPhase === 'waiting'} />}
+        {detailStatus === 'error' && <Notice kind="error" className="detail-message">{detailError}</Notice>}
       </div>
     )
   }
@@ -512,21 +542,21 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
   const grammarChips = load.status === 'ready' && load.model.kind === 'grammarFill' ? load.model.chips : null
   const chips = buildTypeChips(selectedDetail, readingParseResult, grammarChips)
 
-  let paperBody: ReactNode = null
-  if (load.status === 'loading') {
-    paperBody = <div className="peek-paper-placeholder">卷面加载中…</div>
-  } else if (load.status === 'error') {
-    paperBody = <div className="peek-paper-placeholder">{load.message}</div>
-  } else {
-    const entry = load.model
-    paperBody = <QuestionGroupPaperSurface entry={entry} />
-  }
+  // 卷面整块在等：照一组卷面（文章 + 题）画灰块，走门槛；读屏念「卷面加载中」（DESIGN.md §5 Waiting，2026-11-15 第二轮，
+  // 原来是居中一行「卷面加载中…」）。真卷面作为 children 传进去，灰块没留够 500ms 时先不换上。
+  const paperBody: ReactNode = load.status === 'error'
+    ? <div className="peek-paper-placeholder">{load.message}</div>
+    : (
+      <SkeletonGate pending={load.status === 'loading'} phase={paperPhase} label="卷面加载中" className="peek-paper-skeleton" skeleton={<PaperGroupSkeleton />}>
+        {load.status === 'ready' ? <QuestionGroupPaperSurface entry={load.model} /> : null}
+      </SkeletonGate>
+    )
 
   return (
     <div className="detail-view">
-      <button className="back-button" type="button" onClick={onBack}>
-        <ArrowLeft size={14} aria-hidden="true" /> 返回找题
-      </button>
+      <Button className="detail-back" tone="subtle" size="sm" icon={<ArrowLeft size={16} aria-hidden="true" />} onClick={onBack}>
+        返回找题
+      </Button>
 
       <section className="peek-root" aria-label="题组速览">
         <header className="peek-hero">
@@ -538,12 +568,14 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
           <h3 className="peek-title">{selectedDetail.title}</h3>
           {selectedDetail.summary && <p className="peek-summary">{selectedDetail.summary}</p>}
           {chips.length > 0 && (
+            // 胶囊第二轮（2026-11-14）：题型分布、话题小签都是状态标记，换成 shared-ui/Chip（不可点、桌色底、次要灰字）。
+            // 类名 peek-chip / peek-topic 留作钩子。
             <div className="peek-chips" aria-label="题型/考点分布">
               {chips.map((chip) => (
-                <span key={chip.label} className="peek-chip">
+                <Chip key={chip.label} className="peek-chip">
                   {chip.label}
                   {chip.count !== undefined && <b> ×{chip.count}</b>}
-                </span>
+                </Chip>
               ))}
             </div>
           )}
@@ -552,53 +584,35 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
               {selectedDetail.topicLabels.map((topicLabel) => {
                 const path = topicLabelPath(topicLabel)
                 return (
-                  <span
+                  <Chip
                     key={topicLabel.label}
                     className="peek-topic"
                     title={path}
                   >
                     {topicLabelLeaf(topicLabel)}
-                  </span>
+                  </Chip>
                 )
               })}
             </div>
           )}
 
           <div className="peek-actions">
-            <button
-              className="peek-btn peek-btn--primary"
-              type="button"
-              {...iconMotionInput}
-              onClick={() => onAddToBasket(selectedDetail)}
-              disabled={selectedDetail.draftPaperButtonState === 'disabled'}
-              aria-pressed={selectedDetail.draftPaperButtonState === 'in_current_draft' ? true : undefined}
-              title={
-                selectedDetail.draftPaperButtonState === 'disabled'
-                  ? selectedDetail.printUnavailableReason || '暂不可组卷'
-                  : undefined
-              }
-            >
-              <DraftAddIcon size={16} done={selectedDetail.draftPaperButtonState === 'in_current_draft'} />
-              {selectedDetail.draftPaperButtonState === 'in_current_draft'
-                ? '已在草稿卷'
-                : selectedDetail.draftPaperButtonState === 'disabled'
-                  ? '暂不可组卷'
-                  : '加入草稿卷'}
-            </button>
+            {/* 走查第四节第 6 条：换成共用加入键。加入前仍是这一页唯一的雾薄荷主键；加入后是「已加入 · 撤回」那块纸，不再是薄荷底。 */}
+            <DraftAddButton className="peek-add" target={selectedDetail} tone="primary" />
             {selectedDetail.draftPaperButtonState === 'disabled' && (
               <span className="peek-unavailable-note">这组题还在整理，整理好就能加入草稿卷</span>
             )}
             {selectedDetail.canonicalPaperId && (
-              <button className="peek-btn" type="button" onClick={() => onOpenPaperBrowse(selectedDetail)}>
-                <Eye size={16} />
+              <Button tone="strong" icon={<Eye size={16} />} onClick={() => onOpenPaperBrowse(selectedDetail)}>
                 看整卷
-              </button>
+              </Button>
             )}
             {selectedDetail.hasPaperSurfaceAnalysis &&
               selectedDetail.paperSurfaceHref &&
               selectedDetail.paperSurfaceLabel && (
-              <a
-                className="peek-btn"
+              <ButtonLink
+                tone="strong"
+                icon={<ReadingAnalysis size={16} />}
                 href={buildPaperBrowseLectureHref(selectedDetail.paperSurfaceHref) || selectedDetail.paperSurfaceHref}
                 data-ra-entry="detail-view"
                 data-ra-group-id={selectedDetail.id}
@@ -609,36 +623,35 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
                   onOpenPaperBrowseLecture(selectedDetail)
                 }}
               >
-                <ReadingAnalysis size={16} />
                 {selectedDetail.paperSurfaceLabel}
-              </a>
+              </ButtonLink>
             )}
             {SIMILAR_SUPPORTED_GROUP_TYPES.has(selectedDetail.groupType) && selectedDetail.paperSurfaceHref && (
-              <button
-                className="peek-btn"
-                type="button"
+              <Button
+                tone="strong"
+                icon={<Papers size={16} />}
                 data-ra-entry="detail-view-similar"
                 data-ra-group-id={selectedDetail.id}
                 onClick={handleToggleSimilarPassages}
               >
-                <Papers size={16} />
                 相似篇章
-              </button>
+              </Button>
             )}
             {isOwnerView && selectedDetail.canEdit && (
               <div className="peek-actions-menu">
-                <ConciergeGroupRowMenu
+                <Menu
+                  label="更多操作"
                   items={[
                     {
                       key: 'edit',
                       label: '编辑',
-                      icon: <Pencil size={14} aria-hidden="true" />,
+                      icon: <Pencil size={16} aria-hidden="true" />,
                       onSelect: () => onEdit(selectedDetail),
                     },
                     {
                       key: 'delete',
                       label: '删除',
-                      icon: <Trash size={14} aria-hidden="true" />,
+                      icon: <Trash size={16} aria-hidden="true" />,
                       tone: 'danger',
                       onSelect: () => onDelete(selectedDetail),
                     },
@@ -654,7 +667,6 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
             recipeSummary={similarPassagesRecipeSummary(selectedDetail.groupType)}
             request={similarPassagesRequest}
             questionGroupById={questionGroupById}
-            onAdd={onAddSimilarToBasket}
             onCollapse={() => setSimilarPassagesOpen(false)}
             onRetry={() => selectedDetail && void loadSimilarPassages(selectedDetail.id)}
           />
@@ -664,20 +676,21 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
           <div className="peek-paper-clip">
             {paperBody}
           </div>
+          {/* 「展开卷面 / 收起卷面」原来是手写的胶囊键（构件收尾 2026-11-15）：点了是动作，照 DESIGN.md
+              「胶囊只给标签类、有字的按钮一律 8px」归 Button（墨字中号 32）；浮在卷面上的白底、e2 在
+              QuestionGroupDetailView.css .eqb-button.peek-expand（和草稿丸一样的写法）。键盘焦点环、按下、悬停照 Button。 */}
           {load.status === 'ready' && !expanded && (
             <div className="peek-expand-wrap">
-              <button className="peek-expand" type="button" onClick={() => toggleExpanded(true)}>
-                <ChevronDown size={16} />
+              <Button tone="strong" className="peek-expand" icon={<ChevronDown size={16} />} onClick={() => toggleExpanded(true)}>
                 展开卷面
-              </button>
+              </Button>
             </div>
           )}
           {load.status === 'ready' && expanded && (
             <div className="peek-expand-sticky">
-              <button className="peek-expand peek-expand--collapse" type="button" onClick={() => toggleExpanded(false)}>
-                <ChevronUp size={16} />
+              <Button tone="strong" className="peek-expand peek-expand--collapse" icon={<ChevronUp size={16} />} onClick={() => toggleExpanded(false)}>
                 收起卷面
-              </button>
+              </Button>
             </div>
           )}
         </div>

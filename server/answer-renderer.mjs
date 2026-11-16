@@ -260,7 +260,7 @@ export function buildAssembledAnswerOnlyHtml({ paperName, items, questionNumberS
   const labels = { reading: '阅读理解', 'seven-choices': '七选五', cloze: '完形填空',
     'grammar-fill': '语法填空', application: '应用文', continuation: '读后续写', listening: '听力' }
   const content = items.map(({ detail, source, canonicalGroup }, index) => {
-    if (!source) throw new Error('选中的题组没有同版本已审源参考答案；不能以教师卷替代')
+    if (!source) throw Object.assign(new Error('选中的题组没有同版本已审源参考答案；不能以教师卷替代'), { code: 'ANSWER_SOURCE_MISSING' })
     const { materialization, sourceReferences } = source
     if (detail.paperId !== materialization.paperId) throw new Error('选中的题组与答案源不属于同一卷')
     if (!validated.has(source)) {

@@ -11,12 +11,13 @@
  * The primary list maps over retrieval.paperResults (one row per source paper),
  * and clicking expands the paper to show its matching question groups.
  *
- * `basketIds` and `onAdd` remain plain props because 加入草稿卷 belongs to
- * the Assembly Basket layer, not Retrieval.
+ * `basketIds` remains a plain prop because 加入草稿卷 belongs to the Assembly
+ * Basket layer, not Retrieval. The add/undo actions themselves come from
+ * DraftAddContext (App provides it; shared-ui/DraftAddButton consumes it).
  */
 
-import { useEffect, useId, useMemo, useState, type FormEvent, type ReactNode } from 'react'
-import { CornerDownLeft, Sliders, X } from '../icons'
+import { useEffect, useId, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react'
+import { QuestionBank, RotateCcw } from '../icons'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
@@ -24,6 +25,15 @@ import { pickClarificationLine, pickResultsNoticeLine } from './clarificationCop
 import { buildDefaultFeed, buildRecentFeed } from './defaultFeed.ts'
 import { HomeContinueSection, HomeDailyPassage } from './ConciergeHomeSections.tsx'
 import { FluidHoverList } from '../components/FluidHoverList.tsx'
+import { Button } from '../shared-ui/Button.tsx'
+import { ChipToggle } from '../shared-ui/Chip.tsx'
+import { Notice } from '../shared-ui/Notice.tsx'
+import { EmptyState } from '../shared-ui/EmptyState.tsx'
+import { SearchField } from '../shared-ui/SearchField.tsx'
+import { RowList } from '../shared-ui/Row.tsx'
+import { Skeleton } from '../shared-ui/Skeleton.tsx'
+import { useDelayedBusy, useSlowWait } from '../shared-ui/useDelayedBusy.ts'
+import { useRowReveal } from '../shared-ui/useRowReveal.ts'
 
 /** Fluid hover: an expanded paper row's open body still belongs to its head,
  *  so the highlight stays on that head instead of jumping to the next paper. */
@@ -47,7 +57,6 @@ export type ConciergeDeskProps = {
   retrieval: ConciergeRetrievalView
   actions: ConciergeRetrievalActions
   basketIds: Set<string>
-  onAdd: (group: QuestionGroupCard) => void
   /** classic-retire-2-detail-view — opens the read-only detail view for a group. */
   onOpenDetail?: (group: QuestionGroupCard) => void
   /** paper-row-browse-entry — opens the whole-paper preview page (paper-browse) for a paperId, from the row's own "看整卷" button. */
@@ -63,11 +72,15 @@ export type ConciergeDeskProps = {
 
   /**
    * App-level data connection status. While 'loading', the local question bank
-   * is still being fetched and the in-memory list is the bundled sample fixture.
-   * Searching against sample groups can return ids that don't exist in the live
-   * SQLite. We disable submit + show a calm notice until real data is in.
+   * is still being fetched; 'error' means it never loaded (走查第四节第 7 条，Owner 2026-11-14：
+   * 不再悄悄换成仓库里的样例题，直说「题库没连上」并给「重试」）。两种情况下手里都没有真题，
+   * 搜索、浏览都先关着。
    */
-  dataStatus?: 'loading' | 'sqlite' | 'sample'
+  dataStatus?: 'loading' | 'sqlite' | 'error'
+  /** dataStatus 为 'error' 时服务器（或浏览器）的原话，照登在「题库没连上」后面。 */
+  dataError?: string | null
+  /** 「题库没连上」那一行的「重试」。 */
+  onRetryData?: () => void
 
   /** Whether thinking mode is currently enabled for AI search. */
   thinkingMode?: boolean
@@ -138,6 +151,25 @@ const ALL_FILTER_DIMS = ['groupType', 'year', 'month', 'topicGroup', 'region', '
  * `isConfidentCandidate` / `WEAK_NOISE_FLOOR`). Feeds `pickResultsNoticeLine`
  * so the notice can say so plainly instead of implying a confident match.
  */
+// 灰块（shared-ui/Skeleton，2026-11-15 换掉原来的扫光，DESIGN.md §5 Waiting：所有灰块一起慢慢深浅）。
+// 尺寸照原来 App.css 里 .concierge-skeleton-chip / -feed-title / -feed-row 的数：芯片高 24、六个宽度错开；
+// 每组一行标题 220 × 14，两行正文 85% 和 60% × 12。外面的板和组的间距仍是 App.css 的 .concierge-skeleton-feed / -feed-group。
+const SKELETON_CHIP_WIDTHS = [76, 96, 64, 108, 84, 70]
+
+function SkeletonFeed() {
+  return (
+    <div className="concierge-skeleton-feed" aria-hidden="true">
+      {[0, 1, 2].map((index) => (
+        <div key={index} className="concierge-skeleton-feed-group">
+          <Skeleton width={220} height={14} />
+          <Skeleton width="85%" height={12} />
+          <Skeleton width="60%" height={12} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
 function isAllWeakResultsState(
   state: ConciergeRetrievalView['state'],
 ): state is Extract<ConciergeRetrievalView['state'], { kind: 'results' }> {
@@ -191,11 +223,12 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
     retrieval,
     actions,
     basketIds,
-    onAdd,
     onOpenDetail,
     onOpenPaperBrowse,
     questionGroups,
     dataStatus,
+    dataError = null,
+    onRetryData,
     thinkingMode,
     onThinkingModeChange,
     browseActive,
@@ -208,7 +241,11 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   const { intent, state, paperResults, expandedPaperKey } = retrieval
   const { setIntent, submit, togglePaper } = actions
   const inputId = useId()
-  const dataLoading = dataStatus === 'loading'
+  const inputRef = useRef<HTMLInputElement>(null)
+  // dataLoading：手里还没有真题（在连，或没连上），搜索、浏览、默认列表都先关着。
+  const dataLoading = dataStatus === 'loading' || dataStatus === 'error'
+  const dataConnecting = dataStatus === 'loading'
+  const dataDown = dataStatus === 'error'
 
   // similar-passages-entry (E6): full corpus lookup for resolving a「相似
   // 篇章」candidate's groupId to a full QuestionGroupCard — same map App.tsx
@@ -458,9 +495,9 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   }
 
   // home-blank 硬契约 — esc 只清 query（不清筛选/不退浏览态）. Named handlers
-  // (not inline arrows) keep the <input> tag itself short — a verify-
-  // concierge-desk.mjs regex windows the span between `className=` and
-  // `disabled={dataLoading}` on that element.
+  // (not inline arrows) keep the SearchField element short — a verify-
+  // concierge-desk.mjs regex windows the span between the SearchField tag
+  // and its `disabled={dataLoading}` prop.
   const handleInputKeyDown = (event: { key: string }) => {
     if (event.key === 'Escape') actions.reset()
   }
@@ -542,13 +579,36 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   }, [showListSurface, dataLoading, inputFocused])
 
   const placeholder = useMemo(() => {
+    if (dataDown) return '题库没连上，暂时搜不了'
     if (dataLoading) return '正在连接本地题库…'
     if (state.kind === 'clarification') return '换个说法，比如：偏说明文 / 主旨概括'
     if (!showListSurface) return ROTATING_PLACEHOLDERS[placeholderIndex]
     return ROTATING_PLACEHOLDERS[0]
-  }, [dataLoading, state, showListSurface, placeholderIndex])
+  }, [dataLoading, dataDown, state, showListSurface, placeholderIndex])
 
   const submitDisabled = dataLoading || state.kind === 'loading' || intent.trim().length === 0
+
+  // 找题结果区的灰块走等待门槛（DESIGN.md §5「Waiting 等待」，2026-11-15 第二轮）：找题不到 300ms 就回来，灰块不出；
+  // 出了至少留 500ms。提示行「正在为…找题」的字不等门槛，一挂上就在（读屏要及时），只有灰块等。
+  // 灰块还没留够 500ms 结果就到了：灰块接着留着，结果等灰块走了再出（免得灰块和真行同时在、页面跳）。
+  // 出错不等：错误那一行在结果区外面，灰块直接收掉。
+  const searchWaitPhase = useDelayedBusy(state.kind === 'loading')
+  // 连库时的灰块也走门槛（Owner 2026-11-15 定）：连库不到 300ms 就好，灰块不出。冷启动 ?view=browse 或带筛选的深链时会走到这里。
+  // 连上了就收：库一连上，下面换成真内容，不再留满 500ms（和卡片里只在加载时挂上的灰块同一条，DESIGN §5 Waiting）。
+  const connectingWaitPhase = useDelayedBusy(dataConnecting)
+  const connectingSkeletonShown = dataConnecting && connectingWaitPhase !== 'idle'
+  const searchSkeletonShown = searchWaitPhase === 'waiting' && (state.kind === 'loading' || state.kind === 'results')
+  const searchResultsShown = state.kind === 'results' && !searchSkeletonShown
+  // 数据到了，真行从上到下依次淡入（DESIGN §5；shared-ui/useRowReveal.ts）。
+  const resultsRef = useRef<HTMLDivElement>(null)
+  useRowReveal(resultsRef, '.concierge-paper-list > li', searchResultsShown && filteredPaperResults.length > 0)
+  // 等待第四轮（2026-11-15）：冷启动（挂上时题库还没连上，?view=browse 深链、刷新）时，库连上后列表第一次出来，
+  // 年份行和卷行依次淡入。挂上时库已经在手（从别处切回来）不演；之后筛选、展开、翻年份都不演（once）。
+  const [feedColdStart] = useState(() => dataLoading)
+  const feedRef = useRef<HTMLDivElement>(null)
+  useRowReveal(feedRef, '.concierge-feed-year-head, .concierge-paper-list > li', feedColdStart && showFeed, { once: true })
+  // AI 找题等过 10 秒，提示行多说一句（DESIGN §5「放在哪」：要等好几秒的事）。
+  const searchSlow = useSlowWait(state.kind === 'loading')
 
   return (
     <section
@@ -560,119 +620,132 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       <div className="concierge-stage">
         <div className="concierge-stage-inner concierge-stage-inner--risen">
           <div className="concierge-command-bar">
-            <form className="concierge-intent-bar" onSubmit={handleSubmit} role="search">
-              <label htmlFor={inputId} className="visually-hidden">
-                自然语言搜索
-              </label>
-              <input
-                id={inputId}
-                className="concierge-intent-input"
-                value={intent}
-                onChange={(event) => setIntent(event.target.value)}
-                onFocus={handleInputFocus}
-                onBlur={handleInputBlur}
-                onKeyDown={handleInputKeyDown}
-                placeholder={placeholder}
-                autoComplete="off"
-                autoFocus={isHomeScreen}
-                disabled={dataLoading}
-                aria-busy={dataLoading || undefined}
-              />
-              {intent.length > 0 && !dataLoading && (
-                <button
-                  type="button"
-                  className="concierge-intent-clear"
-                  onClick={() => actions.reset()}
-                  aria-label="清除搜索"
-                  title="清除搜索"
-                >
-                  <X size={16} aria-hidden="true" />
-                </button>
-              )}
-              <button
-                type="submit"
-                className={`concierge-intent-submit${state.kind === 'loading' ? ' is-loading' : ''}`}
-                disabled={submitDisabled}
-                aria-label="搜索"
-                title="搜索"
-              >
-                {state.kind === 'loading' || dataLoading ? '搜索中…' : <CornerDownLeft size={18} aria-hidden="true" />}
-              </button>
-            </form>
-            {isHomeScreen && onEnterBrowse && (
-              <button
-                type="button"
+            {/* 搜索框构件（shared-ui/SearchField，构件厂 2026-11-15）：首页 hero、浏览页 compact，换前换后逐像素一样。
+                concierge-intent-* 类名留作钩子：宽度和摆法在 App.css，测试脚本也按它们认。
+                清除键：Owner 2026-11-14 决定 #14，清完把焦点放回输入框。不放的话清除键跟着空字一起卸掉，焦点掉到 body，
+                键盘用户要从页首重新 Tab，鼠标用户也得再点一次输入框才能接着打字。 */}
+            <SearchField
+              tier={isBrowseScreen ? 'compact' : 'hero'}
+              label="自然语言搜索"
+              hooks={{
+                form: 'concierge-intent-bar',
+                input: 'concierge-intent-input',
+                clear: 'concierge-intent-clear',
+                submit: 'concierge-intent-submit',
+              }}
+              inputRef={inputRef}
+              id={inputId}
+              value={intent}
+              onValueChange={setIntent}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              onKeyDown={handleInputKeyDown}
+              placeholder={placeholder}
+              autoFocus={isHomeScreen}
+              disabled={dataLoading}
+              aria-busy={dataLoading || undefined}
+              onSubmit={handleSubmit}
+              submitLabel="搜索"
+              submitDisabled={submitDisabled}
+              submitBusy={state.kind === 'loading' || dataConnecting}
+              loading={state.kind === 'loading'}
+              onClear={() => {
+                actions.reset()
+                inputRef.current?.focus()
+              }}
+              clearLabel="清除搜索"
+            />
+            {/* 题库还没拿到（在连或没连上）时不出这个键：原来会写成「浏览全部 0 套卷」，像是题库空了。 */}
+            {isHomeScreen && onEnterBrowse && !dataLoading && (
+              // 构件厂第 4 步第八页：换成 shared-ui/Button 次要灰中号带图标（高 32，原来也是 32）。
+              <Button
                 className="concierge-browse-entry"
+                tone="subtle"
+                icon={<QuestionBank size={16} aria-hidden="true" />}
                 onClick={handleEnterBrowse}
                 disabled={dataLoading}
               >
-                <Sliders size={16} aria-hidden="true" />
                 浏览全部 {catalogPaperCount} 套卷
-              </button>
+              </Button>
             )}
             {isBrowseScreen && !dataLoading && state.kind === 'empty' && (
               <FluidHoverList as="div" axis="xy" className="concierge-browse-chips" itemSelector=".concierge-browse-chip" gapClick={false} role="group" aria-label="筛选">
-                <button
-                  type="button"
+                {/* 胶囊构件（shared-ui/Chip.tsx 的 ChipToggle，aria-pressed）。类名 concierge-browse-chip 只当
+                    FluidHoverList 的 itemSelector 和检查脚本的钩子，样子全在 chip.css。 */}
+                <ChipToggle
                   className="concierge-browse-chip"
-                  aria-pressed={!hasActiveFilters}
+                  pressed={!hasActiveFilters}
                   onClick={() => {
                     clearFilters()
                     if (!browseActive) onEnterBrowse?.()
                   }}
                 >
                   全部
-                </button>
-                <button
-                  type="button"
+                </ChipToggle>
+                <ChipToggle
                   className="concierge-browse-chip"
-                  aria-pressed={filters.sourceType === 'real_exam'}
+                  pressed={filters.sourceType === 'real_exam'}
                   onClick={() => selectBrowseSource(filters.sourceType === 'real_exam' ? undefined : 'real_exam')}
                 >
                   真题
-                </button>
-                <button
-                  type="button"
+                </ChipToggle>
+                <ChipToggle
                   className="concierge-browse-chip"
-                  aria-pressed={filters.sourceType === 'mock_exam'}
+                  pressed={filters.sourceType === 'mock_exam'}
                   onClick={() => selectBrowseSource(filters.sourceType === 'mock_exam' ? undefined : 'mock_exam')}
                 >
                   模拟
-                </button>
+                </ChipToggle>
                 {browseRecentYears.map((year) => (
-                  <button
+                  <ChipToggle
                     key={year}
-                    type="button"
                     className="concierge-browse-chip"
-                    aria-pressed={filters.year === year}
+                    pressed={filters.year === year}
                     onClick={() => selectBrowseYear(year)}
                   >
                     {year}
-                  </button>
+                  </ChipToggle>
                 ))}
                 {browseYears.length > 4 && browseOlderCutoff !== undefined && (
-                  <button
-                    type="button"
+                  <ChipToggle
                     className="concierge-browse-chip"
-                    aria-pressed={filters.yearBefore === browseOlderCutoff}
+                    pressed={filters.yearBefore === browseOlderCutoff}
                     onClick={() => selectBrowseOlder(browseOlderCutoff)}
                   >
                     更早
-                  </button>
+                  </ChipToggle>
                 )}
               </FluidHoverList>
             )}
             {isBrowseScreen && !dataLoading && state.kind === 'empty' && filters.year !== undefined && browseMonths.length > 0 && (
               <FluidHoverList as="div" axis="xy" className="concierge-browse-chips" itemSelector=".concierge-browse-chip" gapClick={false} role="group" aria-label="月份">
-                <button type="button" className="concierge-browse-chip" aria-pressed={filters.month === undefined} onClick={() => selectBrowseMonth(undefined)}>全部月份</button>
+                <ChipToggle className="concierge-browse-chip" pressed={filters.month === undefined} onClick={() => selectBrowseMonth(undefined)}>全部月份</ChipToggle>
                 {browseMonths.map(option => (
-                  <button key={option.value} type="button" className="concierge-browse-chip" aria-pressed={filters.month === Number(option.value)} onClick={() => selectBrowseMonth(Number(option.value))}>
+                  <ChipToggle key={option.value} className="concierge-browse-chip" pressed={filters.month === Number(option.value)} onClick={() => selectBrowseMonth(Number(option.value))}>
                     {option.label}
-                  </button>
+                  </ChipToggle>
                 ))}
               </FluidHoverList>
             )}
           </div>
+          {/* 题库的连接状态：命令行下面固定一处，一行（共用提示行）。
+              没连上时不悄悄换成样例题（走查第四节第 7 条），直说并给「重试」；草稿卷在服务器上，不受影响。 */}
+          {(dataConnecting || dataDown) && (
+            <div className="concierge-status-slot">
+              {dataDown ? (
+                <Notice
+                  kind="error"
+                  className="concierge-data-error"
+                  detail={dataError}
+                  action={onRetryData ? { label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: onRetryData } : undefined}
+                >
+                  题库没连上，草稿卷里的题还在
+                </Notice>
+              ) : (
+                <Notice kind="waiting" className="concierge-data-loading">正在连接本地题库，连上就能搜</Notice>
+              )}
+            </div>
+          )}
           {state.kind !== 'empty' && onThinkingModeChange && (
             <label className="concierge-thinking-toggle">
               <input
@@ -684,15 +757,21 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
             </label>
           )}
           {state.kind === 'results' && !dataLoading && (
-            <button
-              type="button"
+            // 构件厂第 4 步第八页：换成 shared-ui/Button 墨字大号（高 36，原来也是 36）。展开时用构件的
+            // 「打开着」样子（桌色底、墨字），原来是把细描边换成石板墨色。
+            // 开的是筛选面板，不是菜单，不加 aria-haspopup；挂 data-opens-popup 让 button.css 认它是弹出类，
+            // 展开时照旧垫桌色（Owner 2026-11-14 第 18 条：就地展开的键不垫，「筛选」保持 11-14 认下的样子）。
+            <Button
               className="concierge-command-filter-toggle"
+              tone="strong"
+              size="lg"
               aria-expanded={filterPanelExpanded}
+              data-opens-popup=""
               aria-controls={filterPanelId}
               onClick={() => setFilterPanelExpanded((value) => !value)}
             >
               筛选{activeFilterCount > 0 ? ` · ${activeFilterCount}` : ''}
-            </button>
+            </Button>
           )}
         </div>
 
@@ -705,44 +784,38 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
         !filterPanelExpanded &&
         hasActiveFilters && (
           <ul className="concierge-active-filter-chips" aria-label="已激活筛选">
+            {/* 胶囊第二轮（2026-11-14）：已选筛选点了是「移除这个筛选」，是动作，不是标记也不是开关，
+                照「胶囊只给标签类」归 Button（墨字小号 28），不再是胶囊；一直垫桌色底（Button「打开着」的样子，App.css）。
+                读屏名以看得见的字开头，后面补上点了会怎样（「×」是装饰，不念）。 */}
             {activeFilterEntries.map((entry) => (
               <li key={entry.key}>
-                <button
-                  type="button"
+                <Button
+                  tone="strong"
+                  size="sm"
                   className="concierge-active-filter-chip"
+                  aria-label={`${FILTER_DIM_LABEL[entry.key]}：${entry.text}，移除这个筛选`}
                   onClick={() => removeFilter(entry.key)}
                 >
                   {FILTER_DIM_LABEL[entry.key]}：{entry.text}
                   <span aria-hidden="true"> ×</span>
-                </button>
+                </Button>
               </li>
             ))}
           </ul>
         )}
 
-      {dataLoading && (
+      {connectingSkeletonShown && (
         <>
-          <p className="concierge-data-loading" role="status">
-            正在连接本地题库，稍候即可搜索。
-          </p>
           {/* ui-search-feel 刀⑤ #1 — dataLoading skeleton. The status line
-              above carries the a11y state; these blocks are pure visual
+              (.concierge-status-slot under the command bar) carries the a11y state; these blocks are pure visual
               placeholders (aria-hidden) so the first paint isn't a blank
               page while the local SQLite connects. */}
           <ul className="concierge-skeleton-chip-row" aria-hidden="true">
-            {Array.from({ length: 6 }).map((_, index) => (
-              <li key={index} className="concierge-skeleton-chip" />
+            {SKELETON_CHIP_WIDTHS.map((width, index) => (
+              <li key={index}><Skeleton shape="pill" width={width} height={24} /></li>
             ))}
           </ul>
-          <div className="concierge-skeleton-feed" aria-hidden="true">
-            {Array.from({ length: 3 }).map((_, index) => (
-              <div key={index} className="concierge-skeleton-feed-group">
-                <div className="concierge-skeleton-line concierge-skeleton-feed-title" />
-                <div className="concierge-skeleton-line concierge-skeleton-feed-row" />
-                <div className="concierge-skeleton-line concierge-skeleton-feed-row short" />
-              </div>
-            ))}
-          </div>
+          <SkeletonFeed />
         </>
       )}
 
@@ -770,15 +843,16 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 gapClick={false}
                 aria-label={dimension}
               >
+                {/* 胶囊第二轮（2026-11-14）：筛选胶囊换成 shared-ui/Chip.tsx 的 ChipToggle（aria-pressed），样子在 chip.css。
+                    类名 concierge-starter-chip 留给 FluidHoverList 的 itemSelector 和脚本当钩子；is-zero（这一项 0 条）的变淡还在 App.css。 */}
                 {filterOptions[dimension].map((option) => {
                   const selected = String(filters[dimension] ?? '') === option.value
                   const isZero = option.count === 0
                   return (
                     <li key={option.value}>
-                      <button
-                        type="button"
-                        className={`concierge-starter-chip${selected ? ' is-selected' : ''}${isZero ? ' is-zero' : ''}`}
-                        aria-pressed={selected}
+                      <ChipToggle
+                        pressed={selected}
+                        className={`concierge-starter-chip${isZero ? ' is-zero' : ''}`}
                         onClick={() =>
                           toggleFilter(
                             dimension,
@@ -787,7 +861,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                         }
                       >
                         {option.label} {option.count}
-                      </button>
+                      </ChipToggle>
                     </li>
                   )
                 })}
@@ -796,20 +870,23 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
           ))}
           {(canToggleFilters || hasActiveFilters) && (
             <div className="concierge-filter-actions">
+              {/* Owner 2026-11-14 决定 #1：这一排的两个纯文字键换成淡墨小号（quiet sm），负边距见 App.css
+                  .concierge-filter-actions。句子里带下划线的「清除筛选」（concierge-filter-clear-inline）不动。 */}
               {canToggleFilters && (
-                <button
-                  type="button"
+                <Button
+                  tone="quiet"
+                  size="sm"
                   className="concierge-filter-more"
                   aria-expanded={showAllFilterDims}
                   onClick={() => setFiltersExpanded((value) => !value)}
                 >
                   {filtersExpanded ? '收起筛选' : '更多筛选'}
-                </button>
+                </Button>
               )}
               {hasActiveFilters && (
-                <button type="button" className="concierge-filter-clear" onClick={clearFilters}>
+                <Button tone="quiet" size="sm" className="concierge-filter-clear" onClick={clearFilters}>
                   清除筛选
-                </button>
+                </Button>
               )}
             </div>
           )}
@@ -828,9 +905,9 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       )}
 
       {state.kind === 'results' && state.usedFallback && (
-        <p className="concierge-notice">
+        <Notice kind="info" className="concierge-notice">
           {pickResultsNoticeLine(isAllWeakResultsState(state), state.assistantMessage, state.fallbackReason)}
-        </p>
+        </Notice>
       )}
 
       {/* C2 (trust-cracks) — 前端空态一个声音: a steward-source (non-fallback)
@@ -846,52 +923,51 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       )}
 
       {state.kind === 'error' && (
-        <div className="concierge-error" role="alert">
-          <span>搜索暂时连不上，你输入的内容还在。</span>
-          <button type="button" onClick={() => void actions.submit(state.query)}>
-            重试
-          </button>
-        </div>
+        // 连不上搜索不会丢东西（输入还在），不上危险色；后面照登原话（No-Literal-Fallback）。
+        <Notice
+          kind="error"
+          className="concierge-error"
+          detail={state.message}
+          action={{ label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: () => void actions.submit(state.query) }}
+        >
+          搜索没连上，你输入的内容还在
+        </Notice>
       )}
 
-      <div className="concierge-results" aria-live="polite">
+      <div ref={resultsRef} className="concierge-results" aria-live="polite">
         {state.kind === 'loading' && (
-          <>
-            <p className="concierge-loading">正在为「{state.query}」找题…</p>
-            {/* ui-p1-panels #7 — 找题主面状态三缺: an AI search in flight
-                used to blank straight to this one line with nothing else
-                on screen (audit 62 "取题中整屏白屏"). Reuse the same
-                skeleton placeholder the dataLoading (SQLite connect) path
-                already shows, instead of introducing a second loading
-                idiom — verify-home-default-feed.mjs locks the feed block
-                itself to `showFeed` only, so this is a sibling skeleton,
-                not a faded copy of the feed. */}
-            <div className="concierge-skeleton-feed" aria-hidden="true">
-              {Array.from({ length: 3 }).map((_, index) => (
-                <div key={index} className="concierge-skeleton-feed-group">
-                  <div className="concierge-skeleton-line concierge-skeleton-feed-title" />
-                  <div className="concierge-skeleton-line concierge-skeleton-feed-row" />
-                  <div className="concierge-skeleton-line concierge-skeleton-feed-row short" />
-                </div>
-              ))}
-            </div>
-          </>
+          <Notice kind="waiting" className="concierge-loading">
+            {searchSlow ? `正在为「${state.query}」找题，比平时慢，可以先去做别的` : `正在为「${state.query}」找题`}
+          </Notice>
         )}
+        {/* ui-p1-panels #7 — 找题主面状态三缺: an AI search in flight
+            used to blank straight to this one line with nothing else
+            on screen (audit 62 "取题中整屏白屏"). Reuse the same
+            skeleton placeholder the dataLoading (SQLite connect) path
+            already shows, instead of introducing a second loading
+            idiom — verify-home-default-feed.mjs locks the feed block
+            itself to `showFeed` only, so this is a sibling skeleton,
+            not a faded copy of the feed. 2026-11-15 第二轮：灰块走门槛（searchSkeletonShown），读屏靠上面那行字。 */}
+        {searchSkeletonShown && <SkeletonFeed />}
 
-        {state.kind === 'results' && paperResults.length === 0 && (
-          <p className="concierge-empty">
-            没找到匹配。可以换个说法，或
-            <button type="button" className="concierge-filter-clear-inline" onClick={() => actions.reset()}>
-              返回浏览全部 {catalogPaperCount} 套卷
-            </button>
-          </p>
+        {searchResultsShown && paperResults.length === 0 && (
+          // 「没找到」做成卡片，摊手獭獭从卡片上沿露出半身（BRAND.md 第 118、119、31 条）。话照原来那一行：
+          // 两条出路，「换个说法」留在句子里，「返回浏览全部 N 套卷」原来是行内墨字链接，现在是卡片里的墨字键。
+          // 类名 concierge-empty 留着给 smoke 脚本认。
+          <EmptyState
+            className="concierge-empty"
+            otter="not-found"
+            action={{ label: `返回浏览全部 ${catalogPaperCount} 套卷`, tone: 'strong', onClick: () => actions.reset() }}
+          >
+            没找到匹配。可以换个说法。
+          </EmptyState>
         )}
 
         {/* C4: honest empty handling — when the search itself found hits but
             the active chip filters narrowed them to zero, say so plainly
             (筛选筛空的, not "没搜到") and offer a one-click reset, instead of
             silently rendering a blank list. */}
-        {state.kind === 'results' &&
+        {searchResultsShown &&
           paperResults.length > 0 &&
           filteredPaperResults.length === 0 && (
             <p className="concierge-empty">
@@ -902,8 +978,8 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
             </p>
           )}
 
-        {state.kind === 'results' && filteredPaperResults.length > 0 && (
-          <FluidHoverList className="concierge-paper-list" itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
+        {searchResultsShown && filteredPaperResults.length > 0 && (
+          <RowList className="concierge-paper-list" itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
             {filteredPaperResults.map((paper, index) => {
               // C7 (trust-cracks) — search-result year column: only the first
               // of a run of consecutive same-year rows shows the year digits;
@@ -918,7 +994,6 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                     expanded={expandedPaperKey === paper.key}
                     basketIds={basketIds}
                     onTogglePaper={togglePaper}
-                    onAdd={onAdd}
                     onOpenDetail={onOpenDetail}
                     onOpenPaperBrowse={onOpenPaperBrowse}
                     hideYear={hideYear}
@@ -931,16 +1006,14 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                 </li>
               )
             })}
-          </FluidHoverList>
+          </RowList>
         )}
       </div>
 
       {showFeed && (
-        <div className="concierge-default-feed" role="region" aria-label={isBrowseScreen ? '题库浏览' : '备课桌'}>
+        <div ref={feedRef} className="concierge-default-feed" role="region" aria-label={isBrowseScreen ? '题库浏览' : '备课桌'}>
           {questionGroups.length === 0 ? (
-            <p className="concierge-feed-empty-corpus">
-              题库还没有题目。先导入一套卷，题库会在这里展开浏览。
-            </p>
+            <EmptyState className="concierge-feed-empty-corpus" illustration="question-bank">题库还没有题目。先导入一套卷，这里就能按卷浏览。</EmptyState>
           ) : hasActiveFilters && feedPaperCount === 0 ? (
             <p className="concierge-empty">
               筛选条件太严格，题库里没有匹配的卷。
@@ -956,7 +1029,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                     <span className="concierge-feed-year-label">{yearGroup.label}</span>
                     <span className="concierge-feed-year-count">{yearGroup.papers.length} 套</span>
                   </div>
-                  <FluidHoverList className="concierge-paper-list" itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
+                  <RowList className="concierge-paper-list" itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
                     {yearGroup.papers.map((paper) => (
                       <li key={paper.key}>
                         <ConciergePaperRow
@@ -965,7 +1038,6 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                           expanded={expandedPaperKey === paper.key}
                           basketIds={basketIds}
                           onTogglePaper={togglePaper}
-                          onAdd={onAdd}
                           onOpenDetail={onOpenDetail}
                           onOpenPaperBrowse={onOpenPaperBrowse}
                           questionGroupById={questionGroupById}
@@ -976,7 +1048,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                         />
                       </li>
                     ))}
-                  </FluidHoverList>
+                  </RowList>
                 </div>
               ))}
             </div>
@@ -995,7 +1067,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
               {homeRecentFeed.length > 0 && (
                 <section className="home-section" aria-label="最近上新">
                   <h2 className="concierge-feed-label home-section-label">最近上新</h2>
-                  <FluidHoverList className="concierge-paper-list" itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
+                  <RowList className="concierge-paper-list" itemSelector=".concierge-paper-row-head" hitArea={paperRowHitArea}>
                     {homeRecentFeed.map((paper) => (
                       <li key={paper.key}>
                         <ConciergePaperRow
@@ -1005,7 +1077,6 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                           expanded={expandedPaperKey === paper.key}
                           basketIds={basketIds}
                           onTogglePaper={togglePaper}
-                          onAdd={onAdd}
                           onOpenDetail={onOpenDetail}
                           onOpenPaperBrowse={onOpenPaperBrowse}
                           questionGroupById={questionGroupById}
@@ -1016,7 +1087,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                         />
                       </li>
                     ))}
-                  </FluidHoverList>
+                  </RowList>
                 </section>
               )}
               {onOpenDetail && (

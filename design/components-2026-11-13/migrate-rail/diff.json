@@ -1,0 +1,793 @@
+{
+ "before": {
+  "railBox": {
+   "display": "flex",
+   "visible": true,
+   "w": 164,
+   "h": 171
+  },
+  "rows": [
+   {
+    "tag": "div",
+    "group": "group-2026-i-reading-a",
+    "cls": "draft-paper-rail-item active",
+    "h": 36,
+    "w": 148,
+    "top": 115,
+    "role": "button",
+    "tabindex": "0",
+    "ariaCurrent": null,
+    "target": {
+     "tag": "div",
+     "name": "A篇原卷 A 篇",
+     "title": "A篇（原卷 A 篇） · 阅读理解 · 3 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(27, 43, 51)"
+   },
+   {
+    "tag": "div",
+    "group": "group-2026-i-reading-b",
+    "cls": "draft-paper-rail-item",
+    "h": 36,
+    "w": 148,
+    "top": 155,
+    "role": "button",
+    "tabindex": "0",
+    "ariaCurrent": null,
+    "target": {
+     "tag": "div",
+     "name": "B篇原卷 B 篇",
+     "title": "B篇（原卷 B 篇） · 阅读理解 · 4 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(90, 108, 117)"
+   },
+   {
+    "tag": "div",
+    "group": "group-2026-i-reading-c",
+    "cls": "draft-paper-rail-item",
+    "h": 36,
+    "w": 148,
+    "top": 195,
+    "role": "button",
+    "tabindex": "0",
+    "ariaCurrent": null,
+    "target": {
+     "tag": "div",
+     "name": "C篇原卷 C 篇",
+     "title": "C篇（原卷 C 篇） · 阅读理解 · 4 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(90, 108, 117)"
+   }
+  ],
+  "aria": "- navigation \"卷面目录\":\n  - paragraph: 共 4 页 · 双面 2 张\n  - button \"A篇原卷 A 篇\"\n  - button \"B篇原卷 B 篇\"\n  - button \"C篇原卷 C 篇\"",
+  "railBoxWithGhosts": {
+   "display": "flex",
+   "visible": true,
+   "w": 164,
+   "h": 251
+  },
+  "rowsWithGhosts": [
+   {
+    "tag": "div",
+    "group": "group-2026-i-reading-a",
+    "cls": "draft-paper-rail-item",
+    "h": 36,
+    "w": 148,
+    "top": 115,
+    "role": "button",
+    "tabindex": "0",
+    "ariaCurrent": null,
+    "target": {
+     "tag": "div",
+     "name": "A篇原卷 A 篇",
+     "title": "A篇（原卷 A 篇） · 阅读理解 · 3 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(90, 108, 117)"
+   },
+   {
+    "tag": "div",
+    "group": "group-2026-i-reading-b",
+    "cls": "draft-paper-rail-item",
+    "h": 36,
+    "w": 148,
+    "top": 155,
+    "role": "button",
+    "tabindex": "0",
+    "ariaCurrent": null,
+    "target": {
+     "tag": "div",
+     "name": "B篇原卷 B 篇",
+     "title": "B篇（原卷 B 篇） · 阅读理解 · 4 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(90, 108, 117)"
+   },
+   {
+    "tag": "div",
+    "group": "group-2026-i-reading-c",
+    "cls": "draft-paper-rail-item",
+    "h": 36,
+    "w": 148,
+    "top": 195,
+    "role": "button",
+    "tabindex": "0",
+    "ariaCurrent": null,
+    "target": {
+     "tag": "div",
+     "name": "C篇原卷 C 篇",
+     "title": "C篇（原卷 C 篇） · 阅读理解 · 4 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(90, 108, 117)"
+   },
+   {
+    "tag": "div",
+    "group": "group-ghost-1",
+    "cls": "draft-paper-rail-item is-missing",
+    "h": 36,
+    "w": 148,
+    "top": 235,
+    "role": "button",
+    "tabindex": "0",
+    "ariaCurrent": null,
+    "target": {
+     "tag": "div",
+     "name": "题组已从题库中移除",
+     "title": null,
+     "ariaCurrent": null
+    },
+    "keys": [
+     "上移",
+     "下移",
+     "移除"
+    ],
+    "color": "rgb(232, 144, 26)"
+   },
+   {
+    "tag": "div",
+    "group": "group-ghost-2",
+    "cls": "draft-paper-rail-item is-missing",
+    "h": 36,
+    "w": 148,
+    "top": 275,
+    "role": "button",
+    "tabindex": "0",
+    "ariaCurrent": null,
+    "target": {
+     "tag": "div",
+     "name": "题组已从题库中移除",
+     "title": null,
+     "ariaCurrent": null
+    },
+    "keys": [
+     "上移",
+     "下移",
+     "移除"
+    ],
+    "color": "rgb(232, 144, 26)"
+   }
+  ],
+  "ariaWithGhosts": "- navigation \"卷面目录\":\n  - paragraph: 共 1 页 · 双面 1 张\n  - button \"A篇原卷 A 篇\"\n  - button \"B篇原卷 B 篇\"\n  - button \"C篇原卷 C 篇\"\n  - button \"题组已从题库中移除 上移 下移 移除\":\n    - text: 题组已从题库中移除\n    - button \"上移\":\n      - img\n    - button \"下移\":\n      - img\n    - button \"移除\":\n      - img\n  - button \"题组已从题库中移除 上移 下移 移除\":\n    - text: 题组已从题库中移除\n    - button \"上移\":\n      - img\n    - button \"下移\":\n      - img\n    - button \"移除\":\n      - img",
+  "paperError": [
+   "排卷面没成功：选中的题组已缺失，不能生成不完整产品\n重试"
+  ],
+  "tabOrder": [
+   "div「A篇原卷 A 篇」 @左栏 group-2026-i-reading-a",
+   "div「B篇原卷 B 篇」 @左栏 group-2026-i-reading-b",
+   "div「C篇原卷 C 篇」 @左栏 group-2026-i-reading-c",
+   "iframe「」"
+  ],
+  "focus": {
+   "at": "div「B篇原卷 B 篇」 @左栏 group-2026-i-reading-b",
+   "focusVisible": true
+  },
+  "enterJump": {
+   "before": 0,
+   "after": 2634,
+   "focus": "div「C篇原卷 C 篇」 @左栏 group-2026-i-reading-c"
+  },
+  "hoverColor": "rgb(27, 43, 51)",
+  "missingFocus": "button「移除」 @左栏 group-ghost-1",
+  "removeGhost1": [
+   {
+    "ms": 2,
+    "focus": "body（焦点落空）"
+   }
+  ],
+  "removeGhost1Settled": "body（焦点落空）",
+  "rowsAfterRemove1": [
+   "group-2026-i-reading-a",
+   "group-2026-i-reading-b",
+   "group-2026-i-reading-c",
+   "group-ghost-2"
+  ],
+  "undoTabs": 6,
+  "undoGhost1": [
+   {
+    "ms": 627,
+    "focus": "button「撤销」 @撤销提示"
+   },
+   {
+    "ms": 797,
+    "focus": "body（焦点落空）"
+   }
+  ],
+  "undoGhost1Settled": "body（焦点落空）",
+  "undoGhost1Error": null,
+  "rowsAfterUndo": [
+   "group-2026-i-reading-a",
+   "group-2026-i-reading-b",
+   "group-2026-i-reading-c",
+   "group-ghost-1",
+   "group-ghost-2"
+  ],
+  "removeLast": {
+   "group": "group-ghost-1",
+   "timeline": [
+    {
+     "ms": 3,
+     "focus": "body（焦点落空）"
+    }
+   ],
+   "error": null,
+   "toast": "题组已移出 撤销",
+   "settled": "body（焦点落空）",
+   "rows": [
+    "group-2026-i-reading-a",
+    "group-2026-i-reading-b",
+    "group-2026-i-reading-c"
+   ]
+  },
+  "undoLastTabs": 10,
+  "undoLast": [
+   {
+    "ms": 3,
+    "focus": "button「撤销」 @撤销提示"
+   }
+  ],
+  "undoLastSettled": "button「撤销」 @撤销提示",
+  "undoLastError": null,
+  "undoLastRows": [
+   "group-2026-i-reading-a",
+   "group-2026-i-reading-b",
+   "group-2026-i-reading-c"
+  ],
+  "removeGhost1Toast": "题组已移出 撤销",
+  "currentRows": [
+   {
+    "tag": "div",
+    "group": "group-2026-i-reading-a",
+    "cls": "draft-paper-rail-item",
+    "h": 36,
+    "w": 148,
+    "top": 67,
+    "role": "button",
+    "tabindex": "0",
+    "ariaCurrent": null,
+    "target": {
+     "tag": "div",
+     "name": "A篇原卷 A 篇",
+     "title": "A篇（原卷 A 篇） · 阅读理解 · 3 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(90, 108, 117)"
+   },
+   {
+    "tag": "div",
+    "group": "group-2026-i-reading-b",
+    "cls": "draft-paper-rail-item",
+    "h": 36,
+    "w": 148,
+    "top": 107,
+    "role": "button",
+    "tabindex": "0",
+    "ariaCurrent": null,
+    "target": {
+     "tag": "div",
+     "name": "B篇原卷 B 篇",
+     "title": "B篇（原卷 B 篇） · 阅读理解 · 4 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(90, 108, 117)"
+   },
+   {
+    "tag": "div",
+    "group": "group-2026-i-reading-c",
+    "cls": "draft-paper-rail-item active",
+    "h": 36,
+    "w": 148,
+    "top": 147,
+    "role": "button",
+    "tabindex": "0",
+    "ariaCurrent": null,
+    "target": {
+     "tag": "div",
+     "name": "C篇原卷 C 篇",
+     "title": "C篇（原卷 C 篇） · 阅读理解 · 4 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(27, 43, 51)"
+   }
+  ],
+  "drag": {
+   "before": [
+    "group-2026-i-reading-a",
+    "group-2026-i-reading-b",
+    "group-2026-i-reading-c"
+   ],
+   "after": [
+    "group-2026-i-reading-b",
+    "group-2026-i-reading-c",
+    "group-2026-i-reading-a"
+   ],
+   "error": null
+  },
+  "w390": {
+   "railBox": {
+    "display": "none",
+    "visible": false,
+    "w": 0,
+    "h": 0
+   },
+   "rows": 3
+  },
+  "missing": [],
+  "pageErrors": []
+ },
+ "after": {
+  "railBox": {
+   "display": "flex",
+   "visible": true,
+   "w": 164,
+   "h": 195
+  },
+  "rows": [
+   {
+    "tag": "li",
+    "group": "group-2026-i-reading-a",
+    "cls": "eqb-row draft-paper-rail-item active",
+    "h": 44,
+    "w": 148,
+    "top": 115,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": "location",
+    "target": {
+     "tag": "button",
+     "name": "A篇 原卷 A 篇",
+     "title": "A篇（原卷 A 篇） · 阅读理解 · 3 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(27, 43, 51)"
+   },
+   {
+    "tag": "li",
+    "group": "group-2026-i-reading-b",
+    "cls": "eqb-row draft-paper-rail-item",
+    "h": 44,
+    "w": 148,
+    "top": 163,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": null,
+    "target": {
+     "tag": "button",
+     "name": "B篇 原卷 B 篇",
+     "title": "B篇（原卷 B 篇） · 阅读理解 · 4 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(90, 108, 117)"
+   },
+   {
+    "tag": "li",
+    "group": "group-2026-i-reading-c",
+    "cls": "eqb-row draft-paper-rail-item",
+    "h": 44,
+    "w": 148,
+    "top": 211,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": null,
+    "target": {
+     "tag": "button",
+     "name": "C篇 原卷 C 篇",
+     "title": "C篇（原卷 C 篇） · 阅读理解 · 4 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(90, 108, 117)"
+   }
+  ],
+  "aria": "- navigation \"卷面目录\":\n  - paragraph: 共 4 页 · 双面 2 张\n  - list:\n    - listitem \"A篇（原卷 A 篇） · 阅读理解 · 3 题\":\n      - button \"A篇 原卷 A 篇\"\n      - text: A篇原卷 A 篇\n    - listitem \"B篇（原卷 B 篇） · 阅读理解 · 4 题\":\n      - button \"B篇 原卷 B 篇\"\n      - text: B篇原卷 B 篇\n    - listitem \"C篇（原卷 C 篇） · 阅读理解 · 4 题\":\n      - button \"C篇 原卷 C 篇\"\n      - text: C篇原卷 C 篇",
+  "railBoxWithGhosts": {
+   "display": "flex",
+   "visible": true,
+   "w": 164,
+   "h": 291
+  },
+  "rowsWithGhosts": [
+   {
+    "tag": "li",
+    "group": "group-2026-i-reading-a",
+    "cls": "eqb-row draft-paper-rail-item",
+    "h": 44,
+    "w": 148,
+    "top": 115,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": null,
+    "target": {
+     "tag": "button",
+     "name": "A篇 原卷 A 篇",
+     "title": "A篇（原卷 A 篇） · 阅读理解 · 3 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(90, 108, 117)"
+   },
+   {
+    "tag": "li",
+    "group": "group-2026-i-reading-b",
+    "cls": "eqb-row draft-paper-rail-item",
+    "h": 44,
+    "w": 148,
+    "top": 163,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": null,
+    "target": {
+     "tag": "button",
+     "name": "B篇 原卷 B 篇",
+     "title": "B篇（原卷 B 篇） · 阅读理解 · 4 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(90, 108, 117)"
+   },
+   {
+    "tag": "li",
+    "group": "group-2026-i-reading-c",
+    "cls": "eqb-row draft-paper-rail-item",
+    "h": 44,
+    "w": 148,
+    "top": 211,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": null,
+    "target": {
+     "tag": "button",
+     "name": "C篇 原卷 C 篇",
+     "title": "C篇（原卷 C 篇） · 阅读理解 · 4 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(90, 108, 117)"
+   },
+   {
+    "tag": "li",
+    "group": "group-ghost-1",
+    "cls": "eqb-row draft-paper-rail-item is-missing",
+    "h": 44,
+    "w": 148,
+    "top": 259,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": null,
+    "target": null,
+    "keys": [
+     "上移",
+     "下移",
+     "移除"
+    ],
+    "color": "rgb(232, 144, 26)"
+   },
+   {
+    "tag": "li",
+    "group": "group-ghost-2",
+    "cls": "eqb-row draft-paper-rail-item is-missing",
+    "h": 44,
+    "w": 148,
+    "top": 307,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": null,
+    "target": null,
+    "keys": [
+     "上移",
+     "下移",
+     "移除"
+    ],
+    "color": "rgb(232, 144, 26)"
+   }
+  ],
+  "ariaWithGhosts": "- navigation \"卷面目录\":\n  - paragraph: 共 1 页 · 双面 1 张\n  - list:\n    - listitem \"A篇（原卷 A 篇） · 阅读理解 · 3 题\":\n      - button \"A篇 原卷 A 篇\"\n      - text: A篇原卷 A 篇\n    - listitem \"B篇（原卷 B 篇） · 阅读理解 · 4 题\":\n      - button \"B篇 原卷 B 篇\"\n      - text: B篇原卷 B 篇\n    - listitem \"C篇（原卷 C 篇） · 阅读理解 · 4 题\":\n      - button \"C篇 原卷 C 篇\"\n      - text: C篇原卷 C 篇\n    - listitem:\n      - text: 题组已从题库中移除\n      - button \"上移\":\n        - img\n      - button \"下移\":\n        - img\n      - button \"移除\":\n        - img\n    - listitem:\n      - text: 题组已从题库中移除\n      - button \"上移\":\n        - img\n      - button \"下移\":\n        - img\n      - button \"移除\":\n        - img",
+  "paperError": [
+   "排卷面没成功：选中的题组已缺失，不能生成不完整产品\n重试"
+  ],
+  "tabOrder": [
+   "button「A篇 原卷 A 篇」 @左栏 group-2026-i-reading-a",
+   "button「B篇 原卷 B 篇」 @左栏 group-2026-i-reading-b",
+   "button「C篇 原卷 C 篇」 @左栏 group-2026-i-reading-c",
+   "iframe「」"
+  ],
+  "focus": {
+   "at": "button「B篇 原卷 B 篇」 @左栏 group-2026-i-reading-b",
+   "focusVisible": true
+  },
+  "enterJump": {
+   "before": 0,
+   "after": 2634,
+   "focus": "button「C篇 原卷 C 篇」 @左栏 group-2026-i-reading-c"
+  },
+  "hoverColor": "rgb(27, 43, 51)",
+  "missingFocus": "button「移除」 @左栏 group-ghost-1",
+  "currentRows": [
+   {
+    "tag": "li",
+    "group": "group-2026-i-reading-a",
+    "cls": "eqb-row draft-paper-rail-item",
+    "h": 44,
+    "w": 148,
+    "top": 67,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": null,
+    "target": {
+     "tag": "button",
+     "name": "A篇 原卷 A 篇",
+     "title": "A篇（原卷 A 篇） · 阅读理解 · 3 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(90, 108, 117)"
+   },
+   {
+    "tag": "li",
+    "group": "group-2026-i-reading-b",
+    "cls": "eqb-row draft-paper-rail-item",
+    "h": 44,
+    "w": 148,
+    "top": 115,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": null,
+    "target": {
+     "tag": "button",
+     "name": "B篇 原卷 B 篇",
+     "title": "B篇（原卷 B 篇） · 阅读理解 · 4 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(90, 108, 117)"
+   },
+   {
+    "tag": "li",
+    "group": "group-2026-i-reading-c",
+    "cls": "eqb-row draft-paper-rail-item active",
+    "h": 44,
+    "w": 148,
+    "top": 163,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": "location",
+    "target": {
+     "tag": "button",
+     "name": "C篇 原卷 C 篇",
+     "title": "C篇（原卷 C 篇） · 阅读理解 · 4 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(27, 43, 51)"
+   }
+  ],
+  "w390": {
+   "railBox": {
+    "display": "none",
+    "visible": false,
+    "w": 0,
+    "h": 0
+   },
+   "rows": 5
+  },
+  "missing": [],
+  "pageErrors": []
+ },
+ "afterFocus": {
+  "railBoxWithGhosts": {
+   "display": "flex",
+   "visible": true,
+   "w": 164,
+   "h": 291
+  },
+  "rowsWithGhosts": [
+   {
+    "tag": "li",
+    "group": "group-2026-i-reading-a",
+    "cls": "eqb-row draft-paper-rail-item",
+    "h": 44,
+    "w": 148,
+    "top": 115,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": null,
+    "target": {
+     "tag": "button",
+     "name": "A篇 原卷 A 篇",
+     "title": "A篇（原卷 A 篇） · 阅读理解 · 3 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(63, 82, 91)"
+   },
+   {
+    "tag": "li",
+    "group": "group-2026-i-reading-b",
+    "cls": "eqb-row draft-paper-rail-item",
+    "h": 44,
+    "w": 148,
+    "top": 163,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": null,
+    "target": {
+     "tag": "button",
+     "name": "B篇 原卷 B 篇",
+     "title": "B篇（原卷 B 篇） · 阅读理解 · 4 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(63, 82, 91)"
+   },
+   {
+    "tag": "li",
+    "group": "group-2026-i-reading-c",
+    "cls": "eqb-row draft-paper-rail-item",
+    "h": 44,
+    "w": 148,
+    "top": 211,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": null,
+    "target": {
+     "tag": "button",
+     "name": "C篇 原卷 C 篇",
+     "title": "C篇（原卷 C 篇） · 阅读理解 · 4 题",
+     "ariaCurrent": null
+    },
+    "keys": [],
+    "color": "rgb(63, 82, 91)"
+   },
+   {
+    "tag": "li",
+    "group": "group-ghost-1",
+    "cls": "eqb-row draft-paper-rail-item is-missing",
+    "h": 44,
+    "w": 148,
+    "top": 259,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": null,
+    "target": null,
+    "keys": [
+     "上移",
+     "下移",
+     "移除"
+    ],
+    "color": "rgb(232, 144, 26)"
+   },
+   {
+    "tag": "li",
+    "group": "group-ghost-2",
+    "cls": "eqb-row draft-paper-rail-item is-missing",
+    "h": 44,
+    "w": 148,
+    "top": 307,
+    "role": null,
+    "tabindex": null,
+    "ariaCurrent": null,
+    "target": null,
+    "keys": [
+     "上移",
+     "下移",
+     "移除"
+    ],
+    "color": "rgb(232, 144, 26)"
+   }
+  ],
+  "ariaWithGhosts": "- navigation \"卷面目录\":\n  - paragraph: 共 1 页 · 双面 1 张\n  - list:\n    - listitem \"A篇（原卷 A 篇） · 阅读理解 · 3 题\":\n      - button \"A篇 原卷 A 篇\"\n      - text: A篇原卷 A 篇\n    - listitem \"B篇（原卷 B 篇） · 阅读理解 · 4 题\":\n      - button \"B篇 原卷 B 篇\"\n      - text: B篇原卷 B 篇\n    - listitem \"C篇（原卷 C 篇） · 阅读理解 · 4 题\":\n      - button \"C篇 原卷 C 篇\"\n      - text: C篇原卷 C 篇\n    - listitem:\n      - text: 题组已从题库中移除\n      - button \"上移\":\n        - img\n      - button \"下移\":\n        - img\n      - button \"移除\":\n        - img\n    - listitem:\n      - text: 题组已从题库中移除\n      - button \"上移\":\n        - img\n      - button \"下移\":\n        - img\n      - button \"移除\":\n        - img",
+  "paperError": [
+   "排卷面没成功：选中的题组已缺失，不能生成不完整产品\n重试"
+  ],
+  "removeGhost1": [
+   {
+    "ms": 2,
+    "focus": "button「移除」 @左栏 group-ghost-2"
+   }
+  ],
+  "removeGhost1Settled": "button「移除」 @左栏 group-ghost-2",
+  "rowsAfterRemove1": [
+   "group-2026-i-reading-a",
+   "group-2026-i-reading-b",
+   "group-2026-i-reading-c",
+   "group-ghost-2"
+  ],
+  "undoTabs": 2,
+  "undoGhost1": [
+   {
+    "ms": 656,
+    "focus": "button「撤销」 @撤销提示"
+   },
+   {
+    "ms": 833,
+    "focus": "button「移除」 @左栏 group-ghost-1"
+   }
+  ],
+  "undoGhost1Settled": "button「移除」 @左栏 group-ghost-1",
+  "undoGhost1Error": null,
+  "rowsAfterUndo": [
+   "group-2026-i-reading-a",
+   "group-2026-i-reading-b",
+   "group-2026-i-reading-c",
+   "group-ghost-1",
+   "group-ghost-2"
+  ],
+  "removeLast": {
+   "group": "group-ghost-1",
+   "timeline": [
+    {
+     "ms": 2,
+     "focus": "nav「卷面目录」"
+    }
+   ],
+   "error": null,
+   "toast": "题组已移出 撤销",
+   "settled": "nav「卷面目录」",
+   "rows": [
+    "group-2026-i-reading-a",
+    "group-2026-i-reading-b",
+    "group-2026-i-reading-c"
+   ]
+  },
+  "undoLastTabs": 13,
+  "undoLast": [
+   {
+    "ms": 4,
+    "focus": "button「撤销」 @撤销提示"
+   }
+  ],
+  "undoLastSettled": "button「撤销」 @撤销提示",
+  "undoLastError": null,
+  "undoLastRows": [
+   "group-2026-i-reading-a",
+   "group-2026-i-reading-b",
+   "group-2026-i-reading-c"
+  ],
+  "removeGhost1Toast": "题组已移出 撤销",
+  "w390": {
+   "railBox": {
+    "display": "none",
+    "visible": false,
+    "w": 0,
+    "h": 0
+   },
+   "rows": 3
+  },
+  "missing": [],
+  "pageErrors": []
+ }
+}

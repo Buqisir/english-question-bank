@@ -7,14 +7,17 @@
   color: var(--eqb-color-text);
 }
 
-.dictation-workbench button,
-.dictation-workbench input,
-.dictation-workbench select,
-.dictation-workbench textarea {
+/* 页面自己的键和输入框继承页面字体。外层包一层 :where()，让这两条的权重降到只算元素 (0,0,1)，
+ * 不再盖过共用构件（.eqb-button 等，(0,1,0)）自己的字号和颜色。
+ * 不包的话，确认框（共用 Dialog，挂在本页里面）的键会被撑成 16px，和别处 13px 的对话框键不一样大（协调人复核 2026-11-15）。 */
+:where(.dictation-workbench) button,
+:where(.dictation-workbench) input,
+:where(.dictation-workbench) select,
+:where(.dictation-workbench) textarea {
   font: inherit;
 }
 
-.dictation-workbench button {
+:where(.dictation-workbench) button {
   color: inherit;
 }
 
@@ -56,8 +59,10 @@
   line-height: 1.5;
 }
 
-.dictation-student-picker,
-.dictation-library-tools label,
+/* 学生下拉、筛选条、合并设置的两个标题、推荐词数换成 shared-ui/Field（字段构件第二轮 2026-11-15），
+ * 标签、框、焦点的样子归 field.css，这里原来的 .dictation-student-picker、.dictation-library-tools label / input、
+ * .dictation-combine-settings input、.dictation-suggestion-control input 几条删了。
+ * 留下的 > label 只剩「打乱词序」那一格（.dictation-check-setting）。 */
 .dictation-combine-settings > label,
 .dictation-number-entry label {
   display: flex;
@@ -68,24 +73,16 @@
   font-weight: 500;
 }
 
-.dictation-student-picker select,
-.dictation-library-tools input,
-.dictation-combine-settings input,
-.dictation-number-entry input,
-.dictation-suggestion-control input {
+.dictation-number-entry input {
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-paper);
   color: var(--eqb-color-text);
   padding: 8px 12px;
   outline: none;
 }
 
-.dictation-student-picker select:focus,
-.dictation-library-tools input:focus,
-.dictation-combine-settings input:focus,
-.dictation-number-entry input:focus,
-.dictation-suggestion-control input:focus {
+.dictation-number-entry input:focus {
   border-color: var(--action);
   outline: 2px solid var(--action);
   outline-offset: 2px;
@@ -125,34 +122,14 @@
   border-bottom-color: var(--action);
 }
 
-.dictation-notice {
+/* 顶上的提示行：字归 shared-ui/Notice，「关闭提示」归 Button（2026-11-15）。这里只留这一行的摆法：
+ * 关闭键跟在字后面，和下面的东西隔 16。原来的灰底圆角框、出错时的红底红字框删了。 */
+.dictation-notice-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 16px;
-  padding: 12px 16px;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
-  background: var(--eqb-color-desk);
-  color: var(--eqb-color-text);
-  font-size: 14px;
-}
-
-.dictation-notice.is-error {
-  border-color: var(--eqb-color-danger);
-  background: var(--eqb-color-danger-soft);
-  color: var(--eqb-color-danger);
-}
-
-.dictation-notice button {
-  display: grid;
-  width: 28px;
-  height: 28px;
-  place-items: center;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
+  gap: var(--eqb-space-1);
+  min-width: 0;
+  margin-bottom: var(--eqb-space-4);
 }
 
 .dictation-library-tools {
@@ -162,28 +139,19 @@
   margin-bottom: 16px;
 }
 
+/* 「搜索词组」占满这一行剩下的宽；放大镜和让位归 field.css（TextField 的 icon）。 */
 .dictation-search-field {
-  position: relative;
   flex: 1;
 }
 
-.dictation-search-field svg {
-  position: absolute;
-  left: 12px;
-  color: var(--eqb-color-text-muted);
-}
-
-.dictation-search-field input {
-  width: 100%;
-  padding-left: 36px;
-  font-size: 14px;
-}
-
-.dictation-library-tools input[type="date"] {
+/* 日期框宽 142（原值）。Explicit-Cascade：本条 (0,2,0) 覆盖 field.css .eqb-field-control 的 width: 100% (0,1,0)。 */
+.dictation-date-field .eqb-field-control {
   width: 142px;
-  font-size: 14px;
 }
 
+/* 已选听写面板里的「口音」是 SegmentedField（切换组那一轮 2026-11-15）：用 :where(:not(.eqb-segmented-option)) 排除，
+ * 不然本条 (0,1,1) 会盖过 field.css .eqb-segmented-option (0,1,0) 的透明底、无边、胶囊圆角。
+ * 包 :where 是为了权重不变（还是 (0,1,1)），后面靠权重赢它的几条（.dictation-batch-export-actions button 等）照旧。 */
 .dictation-library-tools > button,
 .dictation-pagination button,
 .dictation-selection-summary button,
@@ -194,7 +162,7 @@
 .dictation-task-date-heading button,
 .dictation-task-list button,
 .dictation-task-list a,
-.dictation-task-selection-panel button,
+.dictation-task-selection-panel button:where(:not(.eqb-segmented-option)),
 .dictation-record-list button,
 .dictation-suggestion-control button,
 .dictation-suggestion-panel button,
@@ -207,7 +175,7 @@
   gap: 6px;
   min-height: 36px;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-paper);
   padding: 6px 12px;
   cursor: pointer;
@@ -224,7 +192,7 @@
 .dictation-task-date-heading button:hover,
 .dictation-task-list button:hover,
 .dictation-task-list a:hover,
-.dictation-task-selection-panel button:hover,
+.dictation-task-selection-panel button:where(:not(.eqb-segmented-option)):hover,
 .dictation-record-list button:hover,
 .dictation-suggestion-control button:hover,
 .dictation-suggestion-panel button:hover,
@@ -241,7 +209,7 @@
   border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  box-shadow: none;
 }
 
 .dictation-set-row {
@@ -349,10 +317,10 @@
   z-index: 10;
   bottom: 16px;
   margin-top: 24px;
-  border: 1px solid var(--eqb-color-border-strong);
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: var(--eqb-shadow-floating);
+  box-shadow: var(--elev-2);
   outline: none;
 }
 
@@ -426,56 +394,9 @@
   padding: 12px 16px;
 }
 
-.dictation-combine-settings > label:not(.dictation-check-setting) {
-  align-items: stretch;
-  flex-direction: column;
-  gap: 4px;
-}
 
-.dictation-combine-settings input {
-  min-width: 0;
-  font-size: 14px;
-}
-
-.dictation-combine-settings fieldset {
-  display: flex;
-  gap: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-.dictation-combine-settings legend {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-}
-
-.dictation-combine-settings fieldset button {
-  min-height: 36px;
-  border: 1px solid var(--eqb-color-border);
-  background: var(--eqb-color-paper);
-  padding: 6px 12px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.dictation-combine-settings fieldset button:first-of-type {
-  border-radius: 6px 0 0 6px;
-}
-
-.dictation-combine-settings fieldset button:last-of-type {
-  border-left: 0;
-  border-radius: 0 6px 6px 0;
-}
-
-.dictation-combine-settings fieldset button.is-selected {
-  border-color: var(--action);
-  background: var(--eqb-color-desk);
-  color: var(--eqb-color-text);
-}
+/* 「口音」换成 SegmentedField（切换组那一轮 2026-11-15）：原来两块拼起来的方角键（36 高、8px 外角、选中墨边桌色底）删了，
+ * 样子归 field.css 分段选择（胶囊，选中白底 e1）。 */
 
 .dictation-check-setting {
   min-height: 36px;
@@ -519,10 +440,10 @@
   gap: 8px;
   width: 380px;
   padding: 12px;
-  border: 1px solid var(--eqb-color-border);
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: var(--eqb-shadow-floating);
+  box-shadow: var(--elev-3);
 }
 
 .dictation-selection-actions .dictation-error-materials-menu > div {
@@ -540,7 +461,7 @@
 .dictation-selection-actions details button {
   min-height: 34px;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-desk);
   cursor: pointer;
   font-size: 12px;
@@ -581,7 +502,7 @@
   border: 1px solid var(--eqb-color-border-strong);
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: var(--eqb-shadow-card);
+  box-shadow: none;
 }
 
 .dictation-created-results:focus-visible {
@@ -619,7 +540,7 @@
 .dictation-created-header-actions button {
   min-height: 32px;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-paper);
   padding: 5px 10px;
   cursor: pointer;
@@ -689,7 +610,7 @@
   gap: 6px;
   min-height: 36px;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 6px 10px;
   background: var(--eqb-color-paper);
   cursor: pointer;
@@ -711,7 +632,7 @@
 }
 
 .dictation-download-items {
-  --fh-radius: 6px;
+  --fh-radius: 8px;
 }
 
 .dictation-download-menu > div {
@@ -725,10 +646,10 @@
   overflow-y: auto;
   gap: 2px;
   padding: 6px;
-  border: 1px solid var(--eqb-color-border);
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: var(--eqb-shadow-floating);
+  box-shadow: var(--elev-3);
 }
 
 .dictation-download-option,
@@ -776,7 +697,7 @@
   border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  box-shadow: none;
 }
 
 .dictation-task-queue > header,
@@ -920,13 +841,15 @@
   gap: 12px;
   margin-top: 16px;
   padding: 12px 16px;
-  border: 1px solid var(--eqb-color-border-strong);
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: var(--eqb-shadow-floating);
+  box-shadow: var(--elev-2);
 }
 
-.dictation-task-selection-panel > div {
+/* 「口音」字段的外层也是 div（.eqb-field），排除掉，免得被撑开、改成竖排。包 :where 让权重不变（(0,1,1)），
+ * 下面 .dictation-task-selection-panel > .dictation-batch-export-actions (0,2,0) 照旧赢它。 */
+.dictation-task-selection-panel > div:where(:not(.eqb-field)) {
   display: flex;
   min-width: 200px;
   flex: 1;
@@ -959,41 +882,7 @@
   font-size: 12px;
 }
 
-.dictation-task-selection-panel fieldset {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-.dictation-task-selection-panel legend {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-}
-
-/* Overrides the shared button radius so the two accent choices read as one segmented control. */
-.dictation-task-selection-panel fieldset button {
-  border-radius: 0;
-}
-
-.dictation-task-selection-panel fieldset button:first-of-type {
-  border-radius: 6px 0 0 6px;
-}
-
-.dictation-task-selection-panel fieldset button:last-of-type {
-  border-left: 0;
-  border-radius: 0 6px 6px 0;
-}
-
-/* Overrides the shared neutral button colors because this is the current accent selection. */
-.dictation-task-selection-panel fieldset button.is-selected {
-  border-color: var(--action);
-  background: var(--eqb-color-desk);
-  color: var(--eqb-color-text);
-}
+/* 「口音」换成 SegmentedField（切换组那一轮 2026-11-15）：原来覆盖共用键圆角、拼成方角两块的几条删了，样子归 field.css。 */
 
 /* Overrides the shared neutral button colors because date export is this toolbar's primary action. */
 .dictation-task-selection-panel button.is-primary {
@@ -1011,28 +900,34 @@
   outline-offset: 2px;
 }
 
-.dictation-empty-state {
-  display: grid;
-  min-height: 220px;
-  place-items: center;
-  align-content: center;
-  gap: 8px;
-  padding: 32px;
-  color: var(--eqb-color-text-muted);
-  text-align: center;
+/* 迁移第 12 条：还没有听写 / 还没有词组 = 「还没东西」，插图照图标 PaperLined（Owner 选横线纸）。
+   2026-11-14 起换成共用的 EmptyState（样子在 shared-ui/emptyState.css），这里只剩两条：
+   列表里只剩这个空状态时，外面的白框去掉，插图直接放在桌色上（Owner 2026-11-13 选 B）；空态至少 220 高（照原来）。 */
+.dictation-set-list:has(.dictation-empty-state),
+.dictation-task-queue:has(.dictation-empty-state) {
+  background: transparent;
+  border-color: transparent;
 }
+/* 覆盖：本条 (0,2,0) 和 .eqb-empty-state (0,1,0) 不冲突属性，写成两个类只是为了不依赖样式表的先后。 */
+.eqb-empty-state.dictation-empty-state { min-height: 220px; }
 
-.dictation-empty-state h2 {
-  margin: 0;
-  color: var(--eqb-color-text);
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.dictation-empty-state p {
-  margin: 0;
+/* 搜了没结果、暂时没有、还没有记录：一行灰字，能一步解决的放行内按钮（同首页「清除筛选」）。 */
+.dictation-empty-line {
+  color: var(--desk-muted);
   font-size: 13px;
+  margin: 0;
+  padding: 14px 16px; /* 和卡片里列表内容同一条左边（目测） */
 }
+.dictation-empty-line .dictation-empty-inline {
+  background: transparent;
+  border: 0;
+  color: var(--desk-ink);
+  cursor: pointer;
+  font: inherit;
+  padding: 0 0 0 6px;
+  text-decoration: underline;
+}
+.dictation-empty-line .dictation-empty-inline:focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
 
 .dictation-review-heading {
   align-items: flex-end;
@@ -1044,14 +939,9 @@
   gap: 8px;
 }
 
-.dictation-suggestion-control label {
-  color: var(--eqb-color-text-muted);
-  font-size: 12px;
-}
-
-.dictation-suggestion-control input {
+/* 推荐词数框宽 64（原值）。Explicit-Cascade：本条 (0,2,0) 覆盖 field.css .eqb-field-control 的 width: 100% (0,1,0)。 */
+.dictation-suggestion-count .eqb-field-control {
   width: 64px;
-  font-size: 14px;
 }
 
 .dictation-suggestion-panel {
@@ -1116,9 +1006,9 @@
   align-items: center;
   gap: 6px;
   padding: 10px 16px;
-  border-bottom: 1px solid var(--eqb-color-border);
+  border-bottom: 1px solid transparent;
   background: var(--eqb-color-paper);
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  box-shadow: var(--elev-2);
 }
 
 .dictation-review-actions > span {
@@ -1209,6 +1099,12 @@
   font-weight: 600;
 }
 
+/* 打开时整页的灰块（等待第七轮 2026-11-15，DictationWorkbenchSkeleton）：排法全用真页面的 class，这里只管门槛内藏起来。
+ * 门槛内（300ms）整块占着位置、看不见，到点和灰块一起出来。 */
+.dictation-workbench-skeleton[data-hidden] {
+  visibility: hidden;
+}
+
 .dictation-workbench-message {
   display: grid;
   min-height: 100vh;
@@ -1229,7 +1125,7 @@
 
 .dictation-workbench-message button {
   border: 1px solid var(--action);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--action);
   color: var(--eqb-color-paper);
   padding: 8px 16px;
@@ -1244,7 +1140,7 @@
 .dictation-history-filter {
   display: inline-flex;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 12px;
   overflow: hidden;
 }
 
@@ -1284,7 +1180,7 @@
   box-sizing: border-box;
   padding: 6px 10px;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-paper);
   cursor: pointer;
   font-size: 12px;
@@ -1310,11 +1206,11 @@
   width: min(360px, calc(100vw - 48px));
   max-height: 320px;
   overflow: auto;
-  border: 1px solid var(--eqb-color-border-strong);
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--eqb-color-paper);
   padding: 8px 12px;
-  box-shadow: var(--eqb-shadow-floating);
+  box-shadow: var(--elev-3);
 }
 
 .dictation-history-details p {
@@ -1343,7 +1239,7 @@
   border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: 0 1px 2px rgba(30, 30, 28, 0.06);
+  box-shadow: none;
 }
 
 .meaning-recall-heading,
@@ -1371,8 +1267,11 @@
   font-size: 14px;
 }
 
-.meaning-recall-home button,
-.meaning-recall-result button,
+/* 认词首页「顺序」、结果页「听写发音」是 SegmentedField（切换组那一轮 2026-11-15）：用 :where(:not(.eqb-segmented-option)) 排除，
+ * 不然这三条（底、悬停、焦点）会盖过 field.css 分段选择的透明底、无边、胶囊圆角和选中项的 e1。
+ * 包 :where 是为了权重不变：下载菜单里的键（.dictation-download-menu > div button 等）原来靠权重赢这几条，照旧赢。 */
+.meaning-recall-home button:where(:not(.eqb-segmented-option)),
+.meaning-recall-result button:where(:not(.eqb-segmented-option)),
 .meaning-recall-stage button {
   display: inline-flex;
   align-items: center;
@@ -1380,7 +1279,7 @@
   gap: 6px;
   min-height: 36px;
   border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-paper);
   padding: 6px 12px;
   color: var(--eqb-color-text);
@@ -1389,8 +1288,8 @@
   font-weight: 500;
 }
 
-.meaning-recall-home button:hover:not(:disabled),
-.meaning-recall-result button:hover:not(:disabled),
+.meaning-recall-home button:where(:not(.eqb-segmented-option)):hover:not(:disabled),
+.meaning-recall-result button:where(:not(.eqb-segmented-option)):hover:not(:disabled),
 .meaning-recall-stage button:hover:not(:disabled) {
   border-color: var(--eqb-color-border-strong);
   background: var(--eqb-color-desk);
@@ -1406,8 +1305,8 @@
   color: var(--eqb-color-paper);
 }
 
-.meaning-recall-home button:focus-visible,
-.meaning-recall-result button:focus-visible,
+.meaning-recall-home button:where(:not(.eqb-segmented-option)):focus-visible,
+.meaning-recall-result button:where(:not(.eqb-segmented-option)):focus-visible,
 .meaning-recall-stage button:focus-visible,
 .meaning-recall-home input:focus-visible,
 .meaning-recall-result input:focus-visible {
@@ -1424,8 +1323,10 @@
   padding: 20px 16px;
 }
 
-.meaning-recall-start-row > div,
-.meaning-recall-suggestion > div,
+/* 「抽」「顺序」「推荐词数」的字段外层也是 div（.eqb-field），排除掉，免得被改成竖排（字段的排法归 field.css）。
+ * 「抽」那一项（第二轮）用 :not，权重 (0,2,1)；「推荐词数」这一项（切换组那一轮）包 :where，权重不变 (0,1,1)。 */
+.meaning-recall-start-row > div:not(.eqb-field),
+.meaning-recall-suggestion > div:where(:not(.eqb-field)),
 .meaning-recall-stage > header > div {
   display: flex;
   min-width: 0;
@@ -1433,35 +1334,25 @@
   gap: 4px;
 }
 
-.meaning-recall-start-row span,
+/* 「随机」前面的图标外层也是 span（.eqb-segmented-icon），排除掉，让它跟着字变色（field.css）。包 :where，权重不变。 */
+.meaning-recall-start-row span:where(:not(.eqb-segmented-icon)),
 .meaning-recall-suggestion span,
 .meaning-recall-stage > header span {
   color: var(--eqb-color-text-muted);
   font-size: 12px;
 }
 
-.meaning-recall-start-row label,
-.meaning-recall-suggestion label {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--eqb-color-text-muted);
-  font-size: 12px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.meaning-recall-start-row input,
-.meaning-recall-suggestion input {
+/* 「直接推荐一轮」的词数框换成 TextField（切换组那一轮 2026-11-15），原来的 label / input 两条删了。框宽 64（原值，同「抽」）。
+ * Explicit-Cascade：本条 (0,2,0) 覆盖 field.css .eqb-field-control 的 width: 100% (0,1,0)。 */
+.meaning-recall-suggestion-count .eqb-field-control {
   width: 64px;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
-  background: var(--eqb-color-paper);
-  padding: 8px;
-  color: var(--eqb-color-text);
 }
 
-.meaning-recall-start-row fieldset,
+/* 「抽」的词数框宽 64（原值）。Explicit-Cascade：本条 (0,2,0) 覆盖 field.css .eqb-field-control 的 width: 100% (0,1,0)。 */
+.meaning-recall-count .eqb-field-control {
+  width: 64px;
+}
+
 .meaning-recall-result-list fieldset {
   display: flex;
   margin: 0;
@@ -1469,7 +1360,6 @@
   border: 0;
 }
 
-.meaning-recall-start-row legend,
 .meaning-recall-result-list legend {
   position: absolute;
   width: 1px;
@@ -1478,24 +1368,20 @@
   clip: rect(0, 0, 0, 0);
 }
 
-.meaning-recall-start-row fieldset button,
 .meaning-recall-result-list fieldset button {
   border-radius: 0;
   border-right: 0;
 }
 
-.meaning-recall-start-row fieldset button:first-of-type,
 .meaning-recall-result-list fieldset button:first-of-type {
-  border-radius: 6px 0 0 6px;
+  border-radius: 8px 0 0 8px;
 }
 
-.meaning-recall-start-row fieldset button:last-of-type,
 .meaning-recall-result-list fieldset button:last-of-type {
   border-right: 1px solid var(--eqb-color-border);
-  border-radius: 0 6px 6px 0;
+  border-radius: 0 8px 8px 0;
 }
 
-.meaning-recall-start-row fieldset button.is-selected,
 .meaning-recall-result-list fieldset button.is-selected {
   background: var(--eqb-color-desk);
   color: var(--eqb-color-text);
@@ -1553,13 +1439,11 @@
   gap: 8px;
 }
 
-.meaning-recall-error {
-  margin: 0;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--eqb-color-danger);
-  background: var(--eqb-color-danger-soft);
-  color: var(--eqb-color-danger);
-  font-size: 14px;
+/* 看词说义的出错行：样子归 shared-ui/Notice（2026-11-15）。原来是一条贴边的红底红字带，左右内边距 16，
+ * 这里只留左右 16、上下 8 的位置，让字和面板里别的内容对齐（目测）。原来的红底、红字、底边线删了。
+ * 覆盖：本条 (0,2,0) 盖过 .eqb-notice (0,1,0) 的 margin: 0 以外没有冲突的属性；写两个类只是为了不靠样式表先后。 */
+.eqb-notice.meaning-recall-error {
+  padding: var(--eqb-space-2) var(--eqb-space-4);
 }
 
 .meaning-recall-stage {
@@ -1655,66 +1539,14 @@
   border-bottom: 1px solid var(--eqb-color-border-subtle);
 }
 
-.meaning-recall-export-name {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--eqb-color-text-muted);
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.meaning-recall-export-name input {
+/* 「文件名」换成 TextField（字段构件第二轮 2026-11-15）：标签、框、焦点归 field.css，这里只留框宽 240（原值）。
+ * Explicit-Cascade：本条 (0,2,0) 覆盖 field.css .eqb-field-control 的 width: 100% (0,1,0)。 */
+.meaning-recall-export-name .eqb-field-control {
   width: 240px;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 6px;
-  padding: 8px 12px;
-  outline: none;
-  background: var(--eqb-color-paper);
-  color: var(--eqb-color-text);
-  font-size: 14px;
 }
 
-.meaning-recall-export-name input:focus {
-  border-color: var(--action);
-}
-
-.meaning-recall-result-actions fieldset {
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-.meaning-recall-result-actions legend {
-  float: left;
-  align-self: center;
-  margin-right: 8px;
-  color: var(--eqb-color-text-muted);
-  font-size: 12px;
-}
-
-.meaning-recall-result-actions fieldset button {
-  min-width: 58px;
-  border-radius: 0;
-  border-right: 0;
-}
-
-.meaning-recall-result-actions fieldset button:first-of-type {
-  border-radius: 6px 0 0 6px;
-}
-
-.meaning-recall-result-actions fieldset button:last-of-type {
-  border-right: 1px solid var(--eqb-color-border);
-  border-radius: 0 6px 6px 0;
-}
-
-.meaning-recall-result-actions fieldset button.is-selected {
-  border-color: var(--eqb-color-border-strong);
-  background: var(--eqb-color-desk);
-  color: var(--eqb-color-text);
-}
+/* 「听写发音」换成 SegmentedField（切换组那一轮 2026-11-15），标签在左（layout inline）。原来 legend 浮在左边、两块方角键拼在一起的几条删了。
+ * 这一行是 align-items: flex-start，字段 36 高的框和 32 高的分段上边齐（目测和原来一样）。 */
 
 .meaning-recall-result-actions > span {
   align-self: center;
@@ -1764,8 +1596,8 @@
     grid-template-columns: minmax(0, 1fr) auto;
   }
 
-  .meaning-recall-start-row > div,
-  .meaning-recall-suggestion > div {
+  .meaning-recall-start-row > div:not(.eqb-field),
+  .meaning-recall-suggestion > div:where(:not(.eqb-field)) {
     grid-column: 1 / -1;
   }
 
@@ -1828,8 +1660,7 @@
     padding-bottom: 0;
   }
 
-  .dictation-student-picker,
-  .dictation-student-picker select {
+  .dictation-student-picker {
     width: 100%;
   }
 
@@ -1852,11 +1683,12 @@
     flex-basis: 100%;
   }
 
-  .dictation-library-tools label:not(.dictation-search-field) {
+  .dictation-date-field {
     flex: 1;
   }
 
-  .dictation-library-tools input[type="date"] {
+  /* 窄屏日期框占满。本条和上面 142 那条同为 (0,2,0)，写在后面（媒体查询里），按先后赢。 */
+  .dictation-date-field .eqb-field-control {
     width: 100%;
   }
 
@@ -1931,7 +1763,7 @@
     flex-direction: column;
   }
 
-  .dictation-task-selection-panel > div {
+  .dictation-task-selection-panel > div:where(:not(.eqb-field)) {
     min-width: 0;
   }
 
@@ -1941,12 +1773,18 @@
     width: 100%;
   }
 
-  .dictation-task-selection-panel fieldset,
   .dictation-task-selection-panel > button {
     width: 100%;
   }
 
-  .dictation-task-selection-panel fieldset button {
+  /* 窄屏「口音」占满一行、两项平分（照原来）。Explicit-Cascade：本条 (0,2,0) 覆盖 field.css .eqb-segmented 的 inline-flex (0,1,0)，flex: 1 在字段的 .eqb-field-body（flex 行）里撑满；
+   * 下一条 (0,2,0) 给 .eqb-segmented-option 加 flex，那边没写 flex，不冲突。 */
+  .dictation-task-accent .eqb-segmented {
+    display: flex;
+    flex: 1;
+  }
+
+  .dictation-task-accent .eqb-segmented-option {
     flex: 1;
   }
 
@@ -2013,7 +1851,6 @@
     width: 100%;
   }
 
-  .meaning-recall-start-row fieldset,
   .meaning-recall-suggestion-result > div,
   .meaning-recall-result-actions {
     flex-wrap: wrap;
@@ -2023,20 +1860,26 @@
     width: 100%;
   }
 
-  .meaning-recall-export-name input {
-    min-width: 0;
-    flex: 1;
+  /* 窄屏文件名框占满这一行。本条和上面 240 那条同为 (0,2,0)，写在后面（媒体查询里），按先后赢。 */
+  .meaning-recall-export-name .eqb-field-control {
+    width: 100%;
   }
 
-  .meaning-recall-start-row fieldset button,
   .meaning-recall-suggestion-result button,
-  .meaning-recall-result-actions button,
+  .meaning-recall-result-actions button:where(:not(.eqb-segmented-option)),
   .meaning-recall-stage > footer button {
     flex: 1;
   }
 
-  .meaning-recall-result-actions fieldset button {
-    flex: 0 0 auto;
+  /* 窄屏「顺序」占满一行、两项平分（照原来）。Explicit-Cascade：本条 (0,2,0) 覆盖 field.css .eqb-segmented 的 inline-flex (0,1,0)，flex: 1 在字段的 .eqb-field-body（flex 行）里撑满；
+   * 下一条给 .eqb-segmented-option 加 flex，那边没写 flex，不冲突。「听写发音」照原来不拉宽（原来那一条 flex: 0 0 auto）。 */
+  .meaning-recall-order .eqb-segmented {
+    display: flex;
+    flex: 1;
+  }
+
+  .meaning-recall-order .eqb-segmented-option {
+    flex: 1;
   }
 
   .meaning-recall-word {

@@ -1,6 +1,5 @@
 import {
   Card,
-  Check,
   ChevronLeft,
   ChevronRight,
   Download,
@@ -9,7 +8,6 @@ import {
   PaperLined,
   PaperStudent,
   Link,
-  ListChecks,
   PauseCircle,
   Printer,
   QrCode,
@@ -24,6 +22,14 @@ import { iconMotionInput } from '../../icons/motionInput'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
+import { EmptyState } from '../../shared-ui/EmptyState.tsx'
+import { Dialog } from '../../shared-ui/Dialog.tsx'
+import { Button } from '../../shared-ui/Button.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
+import { Field, SelectField, TextField } from '../../shared-ui/Field.tsx'
+import { Skeleton, SkeletonOver } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
+import { SegmentedField, type ChoiceOption } from '../../shared-ui/OptionField.tsx'
 import type { VocabularySetEntry } from '../../domain/vocabulary'
 import {
   createVocabularyDictationTask,
@@ -70,6 +76,11 @@ const ACTIVE_STUDENT_STORAGE_KEY = 'eqb-vocabulary-active-student-wanwei-round-o
 const SUGGESTION_TARGET_STORAGE_KEY = 'eqb-vocabulary-review-suggestion-target-v1'
 type WorkspaceTab = 'sets' | 'meaning' | 'tasks' | 'review' | 'history'
 type Accent = 'american' | 'british'
+// 「口音」两个选项（合并设置、已选听写导出两处的 SegmentedField）。
+const ACCENT_OPTIONS: ChoiceOption<Accent>[] = [
+  { value: 'american', label: '美音' },
+  { value: 'british', label: '英音' },
+]
 type PrintKind = VocabularyMaterialKind
 type ReviewFilter = 'all' | 'frequent'
 type HistoryFilter = 'meaning' | 'dictation'
@@ -77,6 +88,13 @@ type DictationTaskDateGroup = {
   dateKey: string
   tasks: VocabularyDictationTaskDto[]
 }
+
+// 两处原来用浏览器自带 window.confirm 问「继续吗？」的地方（构件收尾 2026-11-15）换成共用 Dialog：
+// 拆成几份听写、一次打印很多词。都不是删除，Deletion-Cost Rule 管不到；是「做之前先说一声代价」，
+// 用 dialog 语气（不是 alert），确认键写做什么（DESIGN.md §9 动作 = 动词 + 宾语）。
+type PendingDictationConfirm =
+  | { kind: 'split'; share: boolean; total: number; chunks: VocabularySetEntry[][] }
+  | { kind: 'print'; printKind: PrintKind; mode: FileSaveMode; rawCount: number }
 
 type HandwritingDownloadRequest = {
   mode: FileSaveMode
@@ -87,6 +105,68 @@ type HandwritingDownloadRequest = {
     | { kind: 'task'; taskId: string }
 }
 
+
+// 整页在等学生和词组时的灰块（等待第七轮，2026-11-15；原来是整屏桌色底上正中一行「正在读取学生与听写记录…」，没有顶栏）。
+// 顶栏照常；内容区照「词组」分区的真页面画：分区栏（五个分区名、右边「当前学生」下拉）、筛选条（搜索框、从、到）、
+// 词组列表三行（灰行数照第六轮，固定 3 行）。用真页面同一套 class 排，控件的位置用 SkeletonOver 垫同款控件撑出宽高，
+// 不另抄高度。字的位置放行内灰块，行高由真规则的字号、行高给。分区名的灰块宽照 14px 字算：两个字 28、三个字 42。
+const SKELETON_TAB_WIDTHS = [28, 28, 28, 42, 28]
+const SKELETON_SET_ROWS = 3
+
+function DictationWorkbenchSkeleton({ show }: { show: boolean }) {
+  return (
+    <main className="dictation-workbench-shell" aria-busy="true">
+      <h1 className="dictation-visually-hidden">单词复习</h1>
+      <p className="dictation-visually-hidden" role="status">正在读取学生与听写记录</p>
+      {/* 门槛内（300ms）整块占位置、看不见；inert：里面垫的键和框点不到、不进读屏。 */}
+      <div className="dictation-workbench-skeleton" inert data-hidden={show ? undefined : ''}>
+        <div className="dictation-workbench-navigation">
+          <div className="dictation-workbench-tabs">
+            {SKELETON_TAB_WIDTHS.map((width, index) => (
+              // 键是 inline-flex：灰块外面包一层 span 当那一行字，行高照 14px 字给，键和真键一样高（不包时矮 7px）。
+              <button key={index} type="button"><span><Skeleton inline width={width} height={12} /></span></button>
+            ))}
+          </div>
+          <Field className="dictation-student-picker" label="当前学生" layout="inline" labelledByControl>
+            {() => (
+              <SkeletonOver>
+                {/* 垫一个名字三个字的下拉（真名字长短不一，每多一个字宽差约 14px，高度一样）。 */}
+                <span className="eqb-field-select" data-size="lg"><select className="eqb-field-control" data-size="lg"><option>学生名</option></select></span>
+              </SkeletonOver>
+            )}
+          </Field>
+        </div>
+        <section className="dictation-sets-workspace">
+          <div className="dictation-library-tools">
+            <Field className="dictation-search-field" label="搜索词组" hideLabel labelledByControl>
+              {() => <SkeletonOver><input className="eqb-field-control" data-size="lg" /></SkeletonOver>}
+            </Field>
+            {['从', '到'].map((label) => (
+              <Field key={label} className="dictation-date-field" label={label} layout="inline" labelledByControl>
+                {() => <SkeletonOver><input className="eqb-field-control" data-size="lg" type="date" /></SkeletonOver>}
+              </Field>
+            ))}
+          </div>
+          <div className="dictation-set-list">
+            {Array.from({ length: SKELETON_SET_ROWS }, (_, index) => (
+              <div key={index} className="dictation-set-row">
+                <Skeleton width={16} height={16} />
+                <span className="dictation-selection-order" />
+                <span className="dictation-set-main">
+                  <strong><Skeleton inline width={index % 2 === 0 ? 140 : 112} height={12} /></strong>
+                  <small><Skeleton inline width={index % 2 === 0 ? 280 : 236} height={10} /></small>
+                </span>
+                <span className="dictation-set-stats">
+                  <strong><Skeleton inline width={84} height={12} /></strong>
+                </span>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+    </main>
+  )
+}
 
 type DownloadOptionProps = {
   label: string
@@ -241,6 +321,9 @@ export function VocabularyDictationWorkbench({
   const [tab, setTab] = useState<WorkspaceTab>('sets')
   const [library, setLibrary] = useState<VocabularySetLibraryDto>({ items: [], page: 1, pageSize: 20, total: 0, hasMore: false })
   const [tasks, setTasks] = useState<VocabularyDictationTaskDto[]>([])
+  // 空状态只在读完之后出现，免得插图或灰字在加载时闪一下。
+  const [studentDataLoadedFor, setStudentDataLoadedFor] = useState<string | null>(null)
+  const [libraryLoadedFor, setLibraryLoadedFor] = useState<string | null>(null)
   const [records, setRecords] = useState<VocabularyDictationRecordDto[]>([])
   const [meaningRecords, setMeaningRecords] = useState<VocabularyMeaningRecallRecordDto[]>([])
   const [meaningStates, setMeaningStates] = useState<StudentVocabularyMeaningStateDto[]>([])
@@ -264,6 +347,12 @@ export function VocabularyDictationWorkbench({
   const [error, setError] = useState('')
   const [createdTasks, setCreatedTasks] = useState<VocabularyDictationTaskDto[]>([])
   const [handwritingDownloadRequest, setHandwritingDownloadRequest] = useState<HandwritingDownloadRequest | null>(null)
+  const [pendingConfirm, setPendingConfirm] = useState<PendingDictationConfirm | null>(null)
+  // 开关和内容分开：关上时只把 confirmOpen 置 false，pendingConfirm 留着，退场那 120ms 里标题、说明不会变成「拆成 0 份」，
+  // 关上后 returnFocus 也还认得这是哪一种（打印那种回到「打印资料」）。下次打开时整个换掉。
+  const [confirmOpen, setConfirmOpen] = useState(false)
+  // 打印的确认框是从「打印资料」下拉里的项打开的，打开时下拉已经收起、那一项看不见了；关上时焦点回到「打印资料」。
+  const printMenuSummaryRef = useRef<HTMLElement>(null)
   const [suggestionTarget, setSuggestionTarget] = useState(() => {
     const stored = Number(window.localStorage.getItem(SUGGESTION_TARGET_STORAGE_KEY))
     return Math.max(1, Math.min(60, stored || 20))
@@ -287,15 +376,23 @@ export function VocabularyDictationWorkbench({
     meaningSaveBarrierRef.current = barrier
   }, [])
 
+  // 「没存住」这一类报错要上危险色（DESIGN.md §5 Notices：只有「没保存」「会丢东西」才上）。
+  // 记下这句报错的原文；页面上的报错还是这句时才标危险，被别的报错或提示换掉就自然不标了。
+  const [unsavedError, setUnsavedError] = useState('')
+  function reportUnsaved(text: string) {
+    setUnsavedError(text)
+    setError(text)
+  }
+
   async function flushMeaningSaves() {
     const barrier = meaningSaveBarrierRef.current
     if (!barrier) return true
     try {
       const saved = await barrier()
-      if (!saved) setError('认词结果尚未保存，请重试后再离开。')
+      if (!saved) reportUnsaved('认词结果尚未保存，请重试后再离开。')
       return saved
     } catch (nextError) {
-      setError(nextError instanceof Error ? nextError.message : '认词结果尚未保存，请重试后再离开。')
+      reportUnsaved(nextError instanceof Error ? nextError.message : '认词结果尚未保存，请重试后再离开。')
       return false
     }
   }
@@ -354,6 +451,7 @@ export function VocabularyDictationWorkbench({
     ])
     if (requestedVersion !== studentDataVersionRef.current || studentId !== activeStudentIdRef.current) return
     setTasks(nextTasks)
+    setStudentDataLoadedFor(studentId)
     setRecords(nextRecords)
     setMeaningRecords(nextMeaningRecords)
     setMeaningStates(nextMeaningStates)
@@ -399,7 +497,9 @@ export function VocabularyDictationWorkbench({
       from: fromDate,
       to: toDate,
     }).then((nextLibrary) => {
-      if (!cancelled) setLibrary(nextLibrary)
+      if (cancelled) return
+      setLibrary(nextLibrary)
+      setLibraryLoadedFor(activeStudentId)
     }).catch((nextError: unknown) => {
       if (!cancelled) setError(nextError instanceof Error ? nextError.message : '词组加载失败。')
     })
@@ -471,15 +571,25 @@ export function VocabularyDictationWorkbench({
     setCollectionTitle(defaultCollectionTitle(students.find((student) => student.id === studentId)?.displayName ?? '学生'))
   }
 
-  async function createTasks({ share }: { share: boolean }) {
+  function createTasks({ share }: { share: boolean }) {
     if (!activeStudent || !selectedSets.length) return
+    // 打乱、拆份在问之前做完，确认以后照这一份生成（和原来先拆再问一样）。
+    const ordered = shuffleBeforeFreeze ? shuffled(uniqueSelectedEntries) : uniqueSelectedEntries
+    const chunks = splitEvery(ordered, 60)
+    if (chunks.length > 1) {
+      setPendingConfirm({ kind: 'split', share, total: ordered.length, chunks })
+      setConfirmOpen(true)
+      return
+    }
+    void createTaskChunks({ share, chunks })
+  }
+
+  async function createTaskChunks({ share, chunks }: { share: boolean; chunks: VocabularySetEntry[][] }) {
+    if (!activeStudent) return
     setBusy(true)
     setError('')
     setMessage('')
     try {
-      const ordered = shuffleBeforeFreeze ? shuffled(uniqueSelectedEntries) : uniqueSelectedEntries
-      const chunks = splitEvery(ordered, 60)
-      if (chunks.length > 1 && !window.confirm(`共 ${ordered.length} 个去重词，将按冻结顺序拆成 ${chunks.length} 份。继续吗？`)) return
       const nextTasks: VocabularyDictationTaskDto[] = []
       for (const [index, chunk] of chunks.entries()) {
         const title = chunks.length > 1 ? `${taskTitle}（${index + 1}/${chunks.length}）` : taskTitle
@@ -788,7 +898,17 @@ export function VocabularyDictationWorkbench({
       })
       return
     }
-    if (rawSelectedCount > 120 && !window.confirm(`这次会打印 ${rawSelectedCount} 个原始词，页数较多。继续吗？`)) return
+    if (rawSelectedCount > 120) {
+      setPendingConfirm({ kind: 'print', printKind: kind, mode, rawCount: rawSelectedCount })
+      setConfirmOpen(true)
+      return
+    }
+    await downloadSelectedSets(kind, mode)
+  }
+
+  // 确认框里点「继续」也算一次用户操作，另存为要弹的选文件夹框照样能弹出来。
+  async function downloadSelectedSets(kind: PrintKind, mode: FileSaveMode) {
+    if (!activeStudent || !selectedSets.length) return
     const kindLabel: Record<PrintKind, string> = {
       cards: '单词卡',
       dictation: '听写纸',
@@ -922,8 +1042,36 @@ export function VocabularyDictationWorkbench({
     )
   }
 
-  if (loadState === 'loading') {
-    return <main className="dictation-workbench-message">正在读取学生与听写记录…</main>
+  // 打开时的等待（等待第七轮 2026-11-15）：读学生、读第一页词组连成一段，走一个门槛（DESIGN §5「门槛」），灰块中间不断。
+  // libraryLoadedFor 只在第一页词组到了以后才不是 null；之后换学生、翻页、筛选不再画整页灰块。读出错就不等了。
+  const openingPending = loadState === 'loading'
+    || (loadState === 'ready' && activeStudentId !== '' && libraryLoadedFor === null && !error)
+  const openingPhase = useDelayedBusy(openingPending)
+
+  const topbar = (
+    <AppTopbar
+      variant="sub"
+      pageTitle="单词复习"
+      {...shellNav}
+      onBack={() => { void leaveWorkbench(onBackToVocabulary) }}
+      onLogout={() => { void leaveWorkbench(shellNav.onLogout) }}
+      onOpenVocabularyReview={shellNav.onOpenVocabularyReview
+        ? () => { void leaveWorkbench(shellNav.onOpenVocabularyReview!) }
+        : undefined}
+      onOpenMySpace={shellNav.onOpenMySpace
+        ? () => { void leaveWorkbench(shellNav.onOpenMySpace!) }
+        : undefined}
+    />
+  )
+
+  if (openingPending || openingPhase === 'waiting') {
+    // 和下面真页面同样是 .dictation-workbench 里先放顶栏：数据到了顶栏不重新挂。
+    return (
+      <div className="dictation-workbench">
+        {topbar}
+        <DictationWorkbenchSkeleton show={openingPhase === 'waiting'} />
+      </div>
+    )
   }
   if (loadState === 'error') {
     return <main className="dictation-workbench-message"><h1>听写工作区没有加载成功</h1><button type="button" onClick={() => window.location.reload()}>重新加载</button></main>
@@ -931,19 +1079,7 @@ export function VocabularyDictationWorkbench({
 
   return (
     <div className="dictation-workbench">
-      <AppTopbar
-        variant="sub"
-        pageTitle="单词复习"
-        {...shellNav}
-        onBack={() => { void leaveWorkbench(onBackToVocabulary) }}
-        onLogout={() => { void leaveWorkbench(shellNav.onLogout) }}
-        onOpenVocabularyReview={shellNav.onOpenVocabularyReview
-          ? () => { void leaveWorkbench(shellNav.onOpenVocabularyReview!) }
-          : undefined}
-        onOpenMySpace={shellNav.onOpenMySpace
-          ? () => { void leaveWorkbench(shellNav.onOpenMySpace!) }
-          : undefined}
-      />
+      {topbar}
       <main className="dictation-workbench-shell">
         <h1 className="dictation-visually-hidden">单词复习</h1>
         <div className="dictation-workbench-navigation">
@@ -964,18 +1100,26 @@ export function VocabularyDictationWorkbench({
               记录
             </button>
           </FluidHoverList>
-          <label className="dictation-student-picker">
-            <span>当前学生</span>
-            <select value={activeStudentId} disabled={busy || meaningSessionActive} onChange={(event) => void changeStudent(event.target.value)}>
-              {students.map((student) => <option key={student.id} value={student.id}>{student.displayName}</option>)}
-            </select>
-          </label>
+          {/* 字段构件第二轮（2026-11-15）：学生下拉、筛选条、合并设置、推荐词数换成 shared-ui/Field，字没改。
+              外层沿用原来的类名当摆法钩子；样子归 field.css，见 design/components-2026-11-13/migrate-fields2/README.md。 */}
+          <SelectField
+            className="dictation-student-picker"
+            label="当前学生"
+            layout="inline"
+            size="lg"
+            value={activeStudentId}
+            disabled={busy || meaningSessionActive}
+            onChange={(event) => void changeStudent(event.target.value)}
+            options={students.map((student) => ({ value: student.id, label: student.displayName }))}
+          />
         </div>
 
+        {/* 提示行换成共用 Notice（2026-11-15，migrate-followup 第三节）：出错 role=alert，做完了 role=status；字不改。
+            原来自带的「关闭提示」留着，换成 Button 次要灰小号的纯图标键，跟在字后面。 */}
         {(message || error) && (
-          <div className={error ? 'dictation-notice is-error' : 'dictation-notice'} role={error ? 'alert' : 'status'}>
-            <span>{error || message}</span>
-            <button type="button" aria-label="关闭提示" onClick={() => { setError(''); setMessage('') }}><X size={16} /></button>
+          <div className="dictation-notice-row">
+            <Notice kind={error ? 'error' : 'success'} danger={Boolean(error) && error === unsavedError}>{error || message}</Notice>
+            <Button tone="subtle" size="sm" icon={<X size={16} aria-hidden="true" />} label="关闭提示" onClick={() => { setError(''); setMessage('') }} />
           </div>
         )}
 
@@ -1018,12 +1162,19 @@ export function VocabularyDictationWorkbench({
         {tab === 'sets' && (
           <section className="dictation-sets-workspace">
             <div className="dictation-library-tools">
-              <label className="dictation-search-field">
-                <Search size={16} aria-hidden="true" />
-                <input aria-label="搜索词组" value={searchInput} placeholder="搜索标题或单词" onChange={(event) => setSearchInput(event.target.value)} />
-              </label>
-              <label>从 <input type="date" value={fromDate} onChange={(event) => { setLibrary((current) => ({ ...current, page: 1 })); setFromDate(event.target.value) }} /></label>
-              <label>到 <input type="date" value={toDate} onChange={(event) => { setLibrary((current) => ({ ...current, page: 1 })); setToDate(event.target.value) }} /></label>
+              {/* 「搜索词组」是打字即筛的列表筛选（没有提交），用 TextField 加左边放大镜，不用 SearchField（它带回车提交键）。 */}
+              <TextField
+                className="dictation-search-field"
+                label="搜索词组"
+                hideLabel
+                size="lg"
+                icon={<Search size={16} aria-hidden="true" />}
+                value={searchInput}
+                placeholder="搜索标题或单词"
+                onChange={(event) => setSearchInput(event.target.value)}
+              />
+              <TextField className="dictation-date-field" label="从" layout="inline" size="lg" type="date" value={fromDate} onChange={(event) => { setLibrary((current) => ({ ...current, page: 1 })); setFromDate(event.target.value) }} />
+              <TextField className="dictation-date-field" label="到" layout="inline" size="lg" type="date" value={toDate} onChange={(event) => { setLibrary((current) => ({ ...current, page: 1 })); setToDate(event.target.value) }} />
               {(query || fromDate || toDate) && <button type="button" onClick={() => { setSearchInput(''); setQuery(''); setFromDate(''); setToDate('') }}>清除筛选</button>}
             </div>
 
@@ -1052,7 +1203,11 @@ export function VocabularyDictationWorkbench({
                     </span>
                   </label>
                 )
-              }) : <div className="dictation-empty-state"><Card size={32} /><h2>没有符合条件的词组</h2><p>换一个搜索词或日期范围。</p></div>}
+              }) : libraryLoadedFor !== activeStudentId ? null : (query || fromDate || toDate) ? (
+                <p className="dictation-empty-line">没有符合条件的词组。<button type="button" className="dictation-empty-inline" onClick={() => { setSearchInput(''); setQuery(''); setFromDate(''); setToDate('') }}>清除搜索和日期</button></p>
+              ) : (
+                <EmptyState className="dictation-empty-state" illustration="paper-lined">还没有词组。在看卷时把生词收进生词本，就能在这里组成词组。</EmptyState>
+              )}
             </FluidHoverList>
 
             {library.total > library.pageSize && (
@@ -1073,16 +1228,17 @@ export function VocabularyDictationWorkbench({
                 <details className="dictation-selection-settings">
                   <summary>设置</summary>
                   <div className="dictation-combine-settings">
-                    <label><span>打印标题</span><input value={collectionTitle} maxLength={60} onChange={(event) => setCollectionTitle(event.target.value)} /></label>
-                    <label><span>听写标题</span><input value={taskTitle} maxLength={60} onChange={(event) => setTaskTitle(event.target.value)} /></label>
-                    <fieldset><legend>口音</legend><button type="button" className={accent === 'american' ? 'is-selected' : ''} onClick={() => setAccent('american')}>美音</button><button type="button" className={accent === 'british' ? 'is-selected' : ''} onClick={() => setAccent('british')}>英音</button></fieldset>
+                    <TextField label="打印标题" size="lg" value={collectionTitle} maxLength={60} onChange={(event) => setCollectionTitle(event.target.value)} />
+                    <TextField label="听写标题" size="lg" value={taskTitle} maxLength={60} onChange={(event) => setTaskTitle(event.target.value)} />
+                    {/* 切换组那一轮（2026-11-15）：换成 SegmentedField，标签「口音」照旧只给读屏。原来两个键没有 aria-pressed。 */}
+                    <SegmentedField className="dictation-combine-accent" label="口音" hideLabel value={accent} options={ACCENT_OPTIONS} onChange={setAccent} />
                     <label className="dictation-check-setting"><input type="checkbox" checked={shuffleBeforeFreeze} onChange={(event) => setShuffleBeforeFreeze(event.target.checked)} /><Shuffle size={16} />打乱词序</label>
                   </div>
                 </details>
                 <div className="dictation-selection-actions">
                   <button type="button" onClick={() => setTab('meaning')}><Eye size={16} />开始认词</button>
                   <details>
-                    <summary><Printer size={16} />打印资料</summary>
+                    <summary ref={printMenuSummaryRef}><Printer size={16} />打印资料</summary>
                     <DownloadMenuItems>
                       <label><input type="radio" name="print-mode" checked={printMode === 'dedupe'} onChange={() => setPrintMode('dedupe')} />合并去重</label>
                       <label><input type="radio" name="print-mode" checked={printMode === 'grouped'} onChange={() => setPrintMode('grouped')} />按组装订</label>
@@ -1093,7 +1249,7 @@ export function VocabularyDictationWorkbench({
                       <DownloadOption label="下载全套" onDownload={() => void downloadSelectedSetsBundle()} onSaveAs={() => void downloadSelectedSetsBundle('save-as')}>下载全套（4份）</DownloadOption>
                     </DownloadMenuItems>
                   </details>
-                  <button type="button" onClick={() => void createTasks({ share: true })} disabled={busy}><QrCode size={16} />生成扫码听写</button>
+                  <button type="button" onClick={() => createTasks({ share: true })} disabled={busy}><QrCode size={16} />生成扫码听写</button>
                 </div>
               </aside>
             )}
@@ -1158,7 +1314,7 @@ export function VocabularyDictationWorkbench({
                     })}</div>
                   </section>
                 )
-              })}</div> : <div className="dictation-empty-state"><ListChecks size={32} /><h2>还没有听写</h2><p>先到“词组”选择单词。</p></div>}
+              })}</div> : studentDataLoadedFor !== activeStudentId ? null : <EmptyState className="dictation-empty-state" illustration="paper-lined" action={{ label: '去选词组', onClick: () => { void switchWorkbenchTab('sets') } }}>还没有听写。先到「词组」里选好单词。</EmptyState>}
             </div>
 
             {selectedTasks.length > 0 && (
@@ -1167,7 +1323,8 @@ export function VocabularyDictationWorkbench({
                   <strong>已选 {selectedTasks.length} 份听写</strong>
                   <span>{selectedTaskRawCount === selectedTaskUniqueCount ? `${selectedTaskUniqueCount} 词` : `原始 ${selectedTaskRawCount} 词 · 去重 ${selectedTaskUniqueCount} 词`} · 自动带二维码</span>
                 </div>
-                <fieldset><legend>口音</legend><button type="button" aria-pressed={accent === 'american'} className={accent === 'american' ? 'is-selected' : ''} onClick={() => setAccent('american')}>美音</button><button type="button" aria-pressed={accent === 'british'} className={accent === 'british' ? 'is-selected' : ''} onClick={() => setAccent('british')}>英音</button></fieldset>
+                {/* 切换组那一轮（2026-11-15）：一排 aria-pressed 的键换成 SegmentedField（单选组），标签「口音」照旧只给读屏。 */}
+                <SegmentedField className="dictation-task-accent" label="口音" hideLabel value={accent} options={ACCENT_OPTIONS} onChange={setAccent} />
                 <div className="dictation-batch-export-actions">
                   <button type="button" className="is-primary" disabled={busy} onClick={() => void exportSelectedTasksByDate()}><QrCode size={16} />合并导出听写纸</button>
                   <button type="button" disabled={busy} onClick={() => void exportSelectedTasksByDate('save-as')}><Save size={16} />另存到文件夹…</button>
@@ -1224,7 +1381,7 @@ export function VocabularyDictationWorkbench({
                   </details>
                 </article>
               )
-            }) : <div className="dictation-empty-state"><PaperCheck size={32} /><h2>{historyFilter === 'meaning' ? '还没有认词记录' : '还没有历史听写'}</h2><p>{historyFilter === 'meaning' ? '完成认词后会自动保留。' : '旧听写结果会只读保留在这里。'}</p></div>}
+            }) : studentDataLoadedFor !== activeStudentId ? null : <p className="dictation-empty-line">{historyFilter === 'meaning' ? '还没有认词记录。完成认词后会自动保留。' : '还没有历史听写。旧听写结果会只读保留在这里。'}</p>}
           </section>
         )}
 
@@ -1239,7 +1396,20 @@ export function VocabularyDictationWorkbench({
 
             <div className="dictation-suggestion-control dictation-suggestion-control-row">
               {pausedReviewCount > 0 && <button type="button" aria-pressed={showPausedReview} onClick={() => setShowPausedReview((current) => !current)}>{showPausedReview ? '隐藏' : '显示'}已暂停（{pausedReviewCount}）</button>}
-              <label>推荐下一轮 <input type="number" min="1" max="60" value={suggestionTarget} onChange={(event) => setSuggestionTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))} /> 词</label>
+              {/* 「词」跟在框后面，挂进 aria-describedby，读屏念「推荐下一轮 … 词」。 */}
+              <TextField
+                className="dictation-suggestion-count"
+                label="推荐下一轮"
+                layout="inline"
+                size="lg"
+                type="number"
+                min="1"
+                max="60"
+                value={suggestionTarget}
+                aria-describedby="dictation-suggestion-count-unit"
+                trailing={<span id="dictation-suggestion-count-unit" className="eqb-field-unit">词</span>}
+                onChange={(event) => setSuggestionTarget(Math.max(1, Math.min(60, Number(event.target.value) || 1)))}
+              />
               <button type="button" onClick={() => void loadSuggestion()} disabled={busy}><Sparkles size={16} />选出单词</button>
             </div>
 
@@ -1276,10 +1446,37 @@ export function VocabularyDictationWorkbench({
                     </div>
                 ))}
               </div>
-            ) : <div className="dictation-empty-state"><Check size={32} /><h2>{reviewMode === 'all' ? '现在没有待复习单词' : '现在没有常错词'}</h2><p>认词时忘记的词会自动出现在这里。</p></div>}
+            ) : studentDataLoadedFor !== activeStudentId ? null : <p className="dictation-empty-line">{reviewMode === 'all' ? '现在没有待复习单词。' : '现在没有常错词。'}认词时忘记的词会自动出现在这里。</p>}
           </section>
         )}
       </main>
+
+      <Dialog
+        open={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        size="sm"
+        className="dictation-confirm-dialog"
+        // 标题点出要做的事，说明照原来 window.confirm 的整句。
+        title={pendingConfirm?.kind === 'print' ? `打印 ${pendingConfirm.rawCount} 个原始词` : `拆成 ${pendingConfirm?.kind === 'split' ? pendingConfirm.chunks.length : 0} 份听写`}
+        description={pendingConfirm?.kind === 'print'
+          ? `这次会打印 ${pendingConfirm.rawCount} 个原始词，页数较多。继续吗？`
+          : pendingConfirm?.kind === 'split'
+            ? `共 ${pendingConfirm.total} 个去重词，将按冻结顺序拆成 ${pendingConfirm.chunks.length} 份。继续吗？`
+            : ''}
+        // 打印那种是从「打印资料」菜单里的项打开的，菜单一关那一项就看不见了，焦点回到菜单的 summary；拆份那种回到「生成扫码听写」（默认）。
+        returnFocus={() => (pendingConfirm?.kind === 'print' ? printMenuSummaryRef.current : null)}
+        cancel={{ label: '取消' }}
+        confirm={{
+          label: pendingConfirm?.kind === 'print' ? '继续打印' : `生成 ${pendingConfirm?.kind === 'split' ? pendingConfirm.chunks.length : 0} 份听写`,
+          className: 'dictation-confirm-continue',
+          onClick: () => {
+            const request = pendingConfirm
+            setConfirmOpen(false)
+            if (request?.kind === 'split') void createTaskChunks({ share: request.share, chunks: request.chunks })
+            if (request?.kind === 'print') void downloadSelectedSets(request.printKind, request.mode)
+          },
+        }}
+      />
 
       {handwritingDownloadRequest && (
         <VocabularyHandwritingSelector

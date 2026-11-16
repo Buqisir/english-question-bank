@@ -76,22 +76,10 @@
   margin-top: 8px;
 }
 
-.peek-chip,
-.peek-topic {
-  display: inline-flex;
-  align-items: center;
-  font-size: 12px;
-  color: var(--ink);
-  background: var(--surface-strong);
-  border: 0;
-  border-radius: 999px;
-  padding: 3px 10px;
-  line-height: 1.5;
-}
-
+/* 胶囊第二轮（2026-11-14）：.peek-chip / .peek-topic 换成 shared-ui/Chip，样子在 shared-ui/chip.css；
+ * 原来墨字、12px、上下 3 左右 10 的那条删了。只留题数「×N」：比题型字重一档、数字等宽；颜色跟胶囊的次要灰走。 */
 .peek-chip b {
   font-weight: 500;
-  color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
 
@@ -113,53 +101,20 @@
   margin-left: auto;
 }
 
-.peek-btn,
-a.peek-btn,
-a.peek-btn:visited {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  height: 32px;
-  padding: 0 10px;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--ink);
-  font-size: 13px;
-  text-decoration: none;
-  cursor: pointer;
+/* 构件厂第 4 步（2026-11-13）：这一行的「加入草稿卷」「看整卷」「阅读解析」「相似篇章」换成了 Button / ButtonLink
+ * （app/src/shared-ui/Button.tsx），原来的 .peek-btn、.peek-btn--primary 两块删掉了，样子由 button.css 管。
+ * 下面只留页面自己的排布。 */
+
+/* 主键和后面几个次级键之间多空一格，原来 .peek-btn--primary 的 margin-right: 8px 照搬（8 = --eqb-space-2）。 */
+.peek-actions > .peek-add {
+  margin-right: var(--eqb-space-2);
 }
 
-.peek-btn:hover:not(:disabled),
-a.peek-btn:hover {
-  background: var(--surface-strong);
-  text-decoration: none;
-}
-
-.peek-btn:focus-visible,
-a.peek-btn:focus-visible {
-  text-decoration: none;
-}
-
-.peek-btn svg {
-  flex: 0 0 16px;
-}
-
-.peek-btn--primary {
-  margin-right: 8px;
-  padding: 0 12px;
-  background: var(--eqb-color-accent-fill);
-  color: var(--eqb-color-accent-fill-ink);
-}
-
-.peek-btn--primary:hover:not(:disabled) {
-  background: var(--eqb-color-accent-fill-hover);
-}
-
-.peek-btn--primary:disabled {
-  background: var(--surface-strong);
-  color: var(--muted);
-  cursor: default;
+/* 「返回找题」换成 Button（次要灰、小号）。按钮有了左右内边距，往左挪同样的距离，
+ * 让箭头还和下面的标题左边对齐；往上挪一格，抵掉一部分按钮比原来纯文字高出来的 10px。 */
+.detail-view > .detail-back {
+  justify-self: start;
+  margin: calc(-1 * var(--eqb-space-1)) 0 var(--eqb-space-2) calc(-1 * var(--eqb-space-2));
 }
 
 /* ── 一张纸（露一角） ─────────────────────────────────────── */
@@ -171,9 +126,8 @@ a.peek-btn:focus-visible {
   box-sizing: border-box;
   border-radius: 4px;
   background: #fff;
-  box-shadow:
-    0 1px 0 rgba(0, 0, 0, 0.06),
-    0 12px 32px rgba(0, 0, 0, 0.08);
+  /* DESIGN.md §4 Sheet 纸面（--elev-sheet，tokens.css；等待第五轮从字面量收进来，值不变）。 */
+  box-shadow: var(--elev-sheet);
   overflow: hidden;
 }
 
@@ -221,6 +175,20 @@ a.peek-btn:focus-visible {
   pointer-events: none;
 }
 
+/* 卷面在等的灰块（SkeletonGate + PaperGroupSkeleton，2026-11-15 第二轮）：灰块画在真卷面文字的位置上，
+ * 四周内边距照抄下面 .peek-paper .ps-page 的 32 / 48 / 40（真卷面的页边），不另取值。 */
+.peek-paper-skeleton {
+  padding: 32px 48px 40px;
+}
+
+/* 整页在等题组详情的灰块（等待第五轮 2026-11-15，DetailOpeningSkeleton）：速览头、纸都用真页面的 class，这里只管灰块怎么坐进去。
+ * 覆盖：放在字的位置（span、h3、p）的灰块，(0,2,1) 盖过 waiting.css .eqb-skeleton (0,1,0) 的 display: block——
+ * 改成行内块，那一行的高度仍由真规则的字号、行高给，和有字时一样高。 */
+.detail-opening-skeleton :is(span, h3, p) > .eqb-skeleton {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .peek-paper-placeholder {
   padding: 40px 24px 64px;
   font-size: 13px;
@@ -262,42 +230,28 @@ a.peek-btn:focus-visible {
   z-index: 2;
 }
 
-.peek-expand {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: #fff;
-  color: var(--ink);
-  cursor: pointer;
-  box-shadow: var(--eqb-shadow-floating);
+/* 「展开卷面 / 收起卷面」换成 shared-ui/Button（墨字中号 32，构件收尾 2026-11-15）：字 13/500、圆角 8、悬停桌色、
+ * 键盘焦点环、按下缩放都由 button.css 管。原来的胶囊（999px）、白底悬停变 surface-strong、手写的内边距删了，
+ * 键盘焦点原来是浏览器默认的细黑框，现在是 Button 的墨环。这里只留浮件该有的：白底、e2、一圈透明边、能点（外层 pointer-events: none）。
+ * 覆盖：本条 (0,2,0) 盖过 button.css .eqb-button (0,1,0) 的透明底和 0 边，因为它浮在卷面上，要像草稿丸一样是白件；
+ * 悬停的桌色底那条是 (0,4,0)，照旧赢过这里的白底。 */
+.eqb-button.peek-expand {
+  border: 1px solid transparent;
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-2);
   pointer-events: auto;
 }
 
+/* 居中用 translate 属性，不用 transform：Button 按下时把 transform 换成 scale(0.97)（button.css），
+ * 写在 transform 里的居中位移会被它顶掉，键一按就往右跳半个身子。两个属性各管各的，叠在一起生效。 */
 .peek-expand-sticky .peek-expand {
   position: absolute;
   left: 50%;
   bottom: 0;
-  transform: translateX(-50%);
+  translate: -50% 0;
 }
 
-.peek-expand svg {
-  flex: 0 0 16px;
-}
-
-.peek-expand:hover {
-  background: var(--surface-strong);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .peek-btn,
-  .peek-expand {
-    transition: none;
-  }
-}
+/* .peek-expand svg 的 flex、:hover 的 surface-strong 底、减少动态效果时去掉过渡三条删了：图标、悬停、减少动态效果都归 button.css。 */
 
 @media screen and (max-width: 640px) {
   .peek-meta-line {
@@ -319,12 +273,9 @@ a.peek-btn:focus-visible {
     justify-self: end;
   }
 
-  .peek-btn {
-    justify-content: center;
-    min-width: 0;
-  }
-
-  .peek-btn--primary {
+  /* 窄屏两列网格里不需要主键后面那一格（本条覆盖上面 .peek-actions > .peek-add 的 margin-right，因为网格自己有间距）。
+   * Button 本来就居中，原来 .peek-btn 的 justify-content: center 不用再写。 */
+  .peek-actions > .peek-add {
     margin-right: 0;
   }
 

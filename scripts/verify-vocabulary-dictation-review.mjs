@@ -669,9 +669,11 @@ assert.match(tabNavigationSource, /axis="x" itemSelector="button"/u, '工作区�
 assert.match(tabNavigationSource, /词组[\s\S]{0,500}认词[\s\S]{0,500}听写[\s\S]{0,500}待复习[\s\S]{0,500}记录/u, '工作区导航必须明确待复习职责')
 assert.match(workbenchSource, /const reviewWords = meaningStates\.filter/u, '待复习池必须只由认词状态构成')
 assert.match(workbenchSource, /全部 \{reviewWords[\s\S]{0,900}常错 \{reviewWords/u, '待复习页只保留全部和常错筛选')
+// 等待第七轮（2026-11-15）：文件前面多了整页灰块（DictationWorkbenchSkeleton）自己的 </main>，从「待复习」那段往后找。
+const waitingReviewStart = workbenchSource.indexOf("{tab === 'review' && (")
 const waitingReviewSource = workbenchSource.slice(
-  workbenchSource.indexOf("{tab === 'review' && ("),
-  workbenchSource.indexOf('</main>'),
+  waitingReviewStart,
+  workbenchSource.indexOf('</main>', waitingReviewStart),
 )
 assert.doesNotMatch(waitingReviewSource, /pendingStates|mergeReviewWords|听写还需|听写错/u, '待复习页不得显示或消费听写掌握度')
 assert.match(workbenchSource, /认词记录[\s\S]{0,500}历史听写/u, '记录页必须默认区分认词记录和只读历史听写')
@@ -691,10 +693,16 @@ assert.match(dateExportSource, /sourceTaskIds: group\.tasks\.map/u, '按日期�
 assert.doesNotMatch(dateExportSource, /缺少来源生词组/u, '没有来源生词组的合法冻结任务也必须可合并导出')
 assert.match(dateExportSource, /downloadVocabularyDictationTaskPdf\(task\.id, 'dictation'(?:, target)?\)/u, '按日期导出必须下载复听写纸')
 assert.match(workbenchSource, /全选当天[\s\S]{0,6000}自动带二维码[\s\S]{0,1200}合并导出听写纸/u, '听写列表必须提供日期全选和明确的二维码导出说明')
-assert.match(workbenchSource, /aria-pressed=\{accent === 'american'\}[\s\S]{0,300}aria-pressed=\{accent === 'british'\}/u, '导出口音必须向辅助技术暴露选中状态')
+// 切换组那一轮（2026-11-15）：导出口音从一排 aria-pressed 的键换成 SegmentedField（radiogroup + radio，选中状态是 aria-checked）。
+assert.match(workbenchSource, /<SegmentedField className="dictation-task-accent" label="口音"[\s\S]{0,120}value=\{accent\} options=\{ACCENT_OPTIONS\} onChange=\{setAccent\}/u, '导出口音必须是单选组')
+assert.match(workbenchSource, /const ACCENT_OPTIONS[\s\S]{0,200}value: 'american', label: '美音'[\s\S]{0,120}value: 'british', label: '英音'/u, '导出口音必须只有美音、英音两项')
+const optionFieldSource = readFileSync(path.join(import.meta.dirname, '../app/src/shared-ui/OptionField.tsx'), 'utf8')
+assert.match(optionFieldSource, /role="radio"[\s\S]{0,120}aria-checked=\{checked\}/u, '导出口音必须向辅助技术暴露选中状态')
 const workbenchCss = readFileSync(path.join(import.meta.dirname, '../app/src/features/vocabulary-dictation-workbench/vocabularyDictationWorkbench.css'), 'utf8')
 assert.match(workbenchCss, /dictation-task-selection-panel button:focus-visible[\s\S]{0,160}outline: 2px solid var\(--action\)/u, '新增任务操作必须有可见的墨色键盘焦点')
-assert.match(workbenchCss, /Overrides the shared button radius/u, '分段按钮覆盖共享圆角时必须显式说明 cascade 原因')
+// 切换组那一轮（2026-11-15）：拼成分段的方角键几条删了（样子归 field.css），面板的通用键样式排除分段选择的项。
+assert.match(workbenchCss, /\.dictation-task-selection-panel button:where\(:not\(\.eqb-segmented-option\)\),/u, '面板的通用键样式不得盖过分段选择')
+assert.match(workbenchCss, /用 :where\(:not\(\.eqb-segmented-option\)\) 排除/u, '排除分段选择时必须显式说明 cascade 原因')
 const createReviewTaskSource = workbenchSource.slice(
   workbenchSource.indexOf('async function createTaskFromReviewEntries'),
   workbenchSource.indexOf('function openHandwritingSelector'),

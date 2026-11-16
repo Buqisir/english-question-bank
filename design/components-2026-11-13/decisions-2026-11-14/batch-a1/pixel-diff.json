@@ -1,0 +1,1368 @@
+{
+ "shots/draft-menu-390.png": {
+  "before": [
+   344,
+   338
+  ],
+  "after": [
+   344,
+   338
+  ],
+  "changedPixels": 843,
+  "changedRatio": 0.00725,
+  "bbox": [
+   51,
+   258,
+   147,
+   288
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-menu-390.png"
+ },
+ "shots/draft-menu-danger-focus-390.png": {
+  "before": [
+   344,
+   338
+  ],
+  "after": [
+   344,
+   338
+  ],
+  "changedPixels": 843,
+  "changedRatio": 0.00725,
+  "bbox": [
+   51,
+   258,
+   147,
+   288
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-menu-danger-focus-390.png"
+ },
+ "shots/draft-menu-danger-focus.png": {
+  "before": [
+   344,
+   338
+  ],
+  "after": [
+   344,
+   338
+  ],
+  "changedPixels": 843,
+  "changedRatio": 0.00725,
+  "bbox": [
+   51,
+   259,
+   147,
+   289
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-menu-danger-focus.png"
+ },
+ "shots/draft-menu-danger-hover-390.png": {
+  "before": [
+   344,
+   338
+  ],
+  "after": [
+   344,
+   338
+  ],
+  "changedPixels": 843,
+  "changedRatio": 0.00725,
+  "bbox": [
+   51,
+   258,
+   147,
+   288
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-menu-danger-hover-390.png"
+ },
+ "shots/draft-menu-danger-hover.png": {
+  "before": [
+   344,
+   338
+  ],
+  "after": [
+   344,
+   338
+  ],
+  "changedPixels": 843,
+  "changedRatio": 0.00725,
+  "bbox": [
+   51,
+   259,
+   147,
+   289
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-menu-danger-hover.png"
+ },
+ "shots/draft-menu-page-focus-390.png": {
+  "before": [
+   344,
+   338
+  ],
+  "after": [
+   344,
+   338
+  ],
+  "changedPixels": 843,
+  "changedRatio": 0.00725,
+  "bbox": [
+   51,
+   258,
+   147,
+   288
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-menu-page-focus-390.png"
+ },
+ "shots/draft-menu-page-focus.png": {
+  "before": [
+   344,
+   338
+  ],
+  "after": [
+   344,
+   338
+  ],
+  "changedPixels": 843,
+  "changedRatio": 0.00725,
+  "bbox": [
+   51,
+   259,
+   147,
+   289
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-menu-page-focus.png"
+ },
+ "shots/draft-menu-page-on-390.png": {
+  "before": [
+   344,
+   338
+  ],
+  "after": [
+   344,
+   338
+  ],
+  "changedPixels": 1793,
+  "changedRatio": 0.01542,
+  "bbox": [
+   51,
+   177,
+   293,
+   288
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-menu-page-on-390.png"
+ },
+ "shots/draft-menu-page-on.png": {
+  "before": [
+   344,
+   338
+  ],
+  "after": [
+   344,
+   338
+  ],
+  "changedPixels": 1793,
+  "changedRatio": 0.01542,
+  "bbox": [
+   51,
+   178,
+   293,
+   289
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-menu-page-on.png"
+ },
+ "shots/draft-menu.png": {
+  "before": [
+   344,
+   338
+  ],
+  "after": [
+   344,
+   338
+  ],
+  "changedPixels": 843,
+  "changedRatio": 0.00725,
+  "bbox": [
+   51,
+   259,
+   147,
+   289
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-draft-menu.png"
+ },
+ "shots/group-add-hover-390.png": {
+  "before": [
+   716,
+   142
+  ],
+  "after": [
+   716,
+   142
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/group-add-hover.png": {
+  "before": [
+   1744,
+   142
+  ],
+  "after": [
+   1744,
+   142
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/group-more-focus-390.png": {
+  "before": [
+   716,
+   142
+  ],
+  "after": [
+   716,
+   142
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/group-more-focus.png": {
+  "before": [
+   1744,
+   142
+  ],
+  "after": [
+   1744,
+   142
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/group-more-hover-390.png": {
+  "before": [
+   716,
+   142
+  ],
+  "after": [
+   716,
+   142
+  ],
+  "changedPixels": 2882,
+  "changedRatio": 0.02835,
+  "bbox": [
+   616,
+   44,
+   672,
+   100
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-group-more-hover-390.png"
+ },
+ "shots/group-more-hover.png": {
+  "before": [
+   1744,
+   142
+  ],
+  "after": [
+   1744,
+   142
+  ],
+  "changedPixels": 2882,
+  "changedRatio": 0.01164,
+  "bbox": [
+   1644,
+   43,
+   1700,
+   99
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-group-more-hover.png"
+ },
+ "shots/group-more-open-390.png": {
+  "before": [
+   716,
+   266
+  ],
+  "after": [
+   716,
+   266
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/group-more-open-rowhover-390.png": {
+  "before": [
+   716,
+   142
+  ],
+  "after": [
+   716,
+   142
+  ],
+  "changedPixels": 2880,
+  "changedRatio": 0.02833,
+  "bbox": [
+   616,
+   44,
+   672,
+   100
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-group-more-open-rowhover-390.png"
+ },
+ "shots/group-more-open-rowhover.png": {
+  "before": [
+   1744,
+   142
+  ],
+  "after": [
+   1744,
+   142
+  ],
+  "changedPixels": 2880,
+  "changedRatio": 0.01163,
+  "bbox": [
+   1644,
+   43,
+   1700,
+   99
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-group-more-open-rowhover.png"
+ },
+ "shots/group-more-open.png": {
+  "before": [
+   1744,
+   266
+  ],
+  "after": [
+   1744,
+   266
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/group-row-390.png": {
+  "before": [
+   716,
+   142
+  ],
+  "after": [
+   716,
+   142
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/group-row-hover-390.png": {
+  "before": [
+   716,
+   142
+  ],
+  "after": [
+   716,
+   142
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/group-row-hover.png": {
+  "before": [
+   1744,
+   142
+  ],
+  "after": [
+   1744,
+   142
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/group-row.png": {
+  "before": [
+   1744,
+   142
+  ],
+  "after": [
+   1744,
+   142
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/paper-key-focus-390.png": {
+  "before": [
+   716,
+   214
+  ],
+  "after": [
+   716,
+   220
+  ],
+  "changedPixels": 16577,
+  "changedRatio": 0.10524,
+  "bbox": [
+   0,
+   29,
+   716,
+   220
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-paper-key-focus-390.png"
+ },
+ "shots/paper-key-focus.png": {
+  "before": [
+   1744,
+   148
+  ],
+  "after": [
+   1744,
+   148
+  ],
+  "changedPixels": 6914,
+  "changedRatio": 0.02679,
+  "bbox": [
+   820,
+   38,
+   1612,
+   110
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-paper-key-focus.png"
+ },
+ "shots/paper-key-hover-390.png": {
+  "before": [
+   716,
+   214
+  ],
+  "after": [
+   716,
+   220
+  ],
+  "changedPixels": 19852,
+  "changedRatio": 0.12603,
+  "bbox": [
+   0,
+   37,
+   716,
+   220
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-paper-key-hover-390.png"
+ },
+ "shots/paper-key-hover.png": {
+  "before": [
+   1744,
+   148
+  ],
+  "after": [
+   1744,
+   148
+  ],
+  "changedPixels": 9901,
+  "changedRatio": 0.03836,
+  "bbox": [
+   820,
+   40,
+   1604,
+   108
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-paper-key-hover.png"
+ },
+ "shots/paper-row-390.png": {
+  "before": [
+   716,
+   214
+  ],
+  "after": [
+   716,
+   220
+  ],
+  "changedPixels": 14509,
+  "changedRatio": 0.09211,
+  "bbox": [
+   0,
+   41,
+   716,
+   220
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-paper-row-390.png"
+ },
+ "shots/paper-row-hover-390.png": {
+  "before": [
+   716,
+   214
+  ],
+  "after": [
+   716,
+   220
+  ],
+  "changedPixels": 15198,
+  "changedRatio": 0.09648,
+  "bbox": [
+   0,
+   41,
+   716,
+   220
+  ],
+  "sameSize": false,
+  "compare": "compare/compare-shots-paper-row-hover-390.png"
+ },
+ "shots/paper-row-hover.png": {
+  "before": [
+   1744,
+   148
+  ],
+  "after": [
+   1744,
+   148
+  ],
+  "changedPixels": 5153,
+  "changedRatio": 0.01996,
+  "bbox": [
+   820,
+   40,
+   1587,
+   108
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-paper-row-hover.png"
+ },
+ "shots/paper-row.png": {
+  "before": [
+   1744,
+   148
+  ],
+  "after": [
+   1744,
+   148
+  ],
+  "changedPixels": 5153,
+  "changedRatio": 0.01996,
+  "bbox": [
+   820,
+   40,
+   1587,
+   108
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-paper-row.png"
+ },
+ "shots/results-390.png": {
+  "before": [
+   780,
+   1688
+  ],
+  "after": [
+   780,
+   1688
+  ],
+  "changedPixels": 47488,
+  "changedRatio": 0.03607,
+  "bbox": [
+   46,
+   734,
+   734,
+   1348
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-results-390.png"
+ },
+ "shots/results.png": {
+  "before": [
+   2880,
+   1800
+  ],
+  "after": [
+   2880,
+   1800
+  ],
+  "changedPixels": 5153,
+  "changedRatio": 0.00099,
+  "bbox": [
+   1388,
+   632,
+   2155,
+   700
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-results.png"
+ },
+ "shots/similar-key-hover-390.png": {
+  "before": [
+   172,
+   130
+  ],
+  "after": [
+   172,
+   130
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/similar-key-hover.png": {
+  "before": [
+   172,
+   130
+  ],
+  "after": [
+   172,
+   130
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/space-dialog-390.png": {
+  "before": [
+   732,
+   376
+  ],
+  "after": [
+   732,
+   376
+  ],
+  "changedPixels": 1054,
+  "changedRatio": 0.00383,
+  "bbox": [
+   539,
+   267,
+   647,
+   292
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-dialog-390.png"
+ },
+ "shots/space-dialog-danger-focus-390.png": {
+  "before": [
+   732,
+   376
+  ],
+  "after": [
+   732,
+   376
+  ],
+  "changedPixels": 1054,
+  "changedRatio": 0.00383,
+  "bbox": [
+   539,
+   267,
+   647,
+   292
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-dialog-danger-focus-390.png"
+ },
+ "shots/space-dialog-danger-focus.png": {
+  "before": [
+   768,
+   376
+  ],
+  "after": [
+   768,
+   376
+  ],
+  "changedPixels": 1054,
+  "changedRatio": 0.00365,
+  "bbox": [
+   575,
+   267,
+   683,
+   292
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-dialog-danger-focus.png"
+ },
+ "shots/space-dialog-danger-hover-390.png": {
+  "before": [
+   732,
+   376
+  ],
+  "after": [
+   732,
+   376
+  ],
+  "changedPixels": 1054,
+  "changedRatio": 0.00383,
+  "bbox": [
+   539,
+   267,
+   647,
+   292
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-dialog-danger-hover-390.png"
+ },
+ "shots/space-dialog-danger-hover.png": {
+  "before": [
+   768,
+   376
+  ],
+  "after": [
+   768,
+   376
+  ],
+  "changedPixels": 1054,
+  "changedRatio": 0.00365,
+  "bbox": [
+   575,
+   267,
+   683,
+   292
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-dialog-danger-hover.png"
+ },
+ "shots/space-dialog.png": {
+  "before": [
+   768,
+   376
+  ],
+  "after": [
+   768,
+   376
+  ],
+  "changedPixels": 1054,
+  "changedRatio": 0.00365,
+  "bbox": [
+   575,
+   267,
+   683,
+   292
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-dialog.png"
+ },
+ "shots/space-key-focus-0-390.png": {
+  "before": [
+   744,
+   260
+  ],
+  "after": [
+   744,
+   260
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/space-key-focus-0.png": {
+  "before": [
+   1948,
+   172
+  ],
+  "after": [
+   1948,
+   172
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/space-key-focus-1-390.png": {
+  "before": [
+   744,
+   260
+  ],
+  "after": [
+   744,
+   260
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/space-key-focus-1.png": {
+  "before": [
+   1948,
+   172
+  ],
+  "after": [
+   1948,
+   172
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/space-key-focus-2-390.png": {
+  "before": [
+   744,
+   260
+  ],
+  "after": [
+   744,
+   260
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/space-key-focus-2.png": {
+  "before": [
+   1948,
+   172
+  ],
+  "after": [
+   1948,
+   172
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/space-key-hover-0-390.png": {
+  "before": [
+   744,
+   260
+  ],
+  "after": [
+   744,
+   260
+  ],
+  "changedPixels": 9154,
+  "changedRatio": 0.04732,
+  "bbox": [
+   298,
+   148,
+   442,
+   216
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-key-hover-0-390.png"
+ },
+ "shots/space-key-hover-0.png": {
+  "before": [
+   1948,
+   172
+  ],
+  "after": [
+   1948,
+   172
+  ],
+  "changedPixels": 9729,
+  "changedRatio": 0.02904,
+  "bbox": [
+   1498,
+   50,
+   1642,
+   122
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-key-hover-0.png"
+ },
+ "shots/space-key-hover-1-390.png": {
+  "before": [
+   744,
+   260
+  ],
+  "after": [
+   744,
+   260
+  ],
+  "changedPixels": 11198,
+  "changedRatio": 0.05789,
+  "bbox": [
+   448,
+   148,
+   626,
+   216
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-key-hover-1-390.png"
+ },
+ "shots/space-key-hover-1.png": {
+  "before": [
+   1948,
+   172
+  ],
+  "after": [
+   1948,
+   172
+  ],
+  "changedPixels": 11910,
+  "changedRatio": 0.03555,
+  "bbox": [
+   1648,
+   50,
+   1826,
+   122
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-key-hover-1.png"
+ },
+ "shots/space-key-hover-2-390.png": {
+  "before": [
+   744,
+   260
+  ],
+  "after": [
+   744,
+   260
+  ],
+  "changedPixels": 4642,
+  "changedRatio": 0.024,
+  "bbox": [
+   632,
+   148,
+   704,
+   216
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-key-hover-2-390.png"
+ },
+ "shots/space-key-hover-2.png": {
+  "before": [
+   1948,
+   172
+  ],
+  "after": [
+   1948,
+   172
+  ],
+  "changedPixels": 4930,
+  "changedRatio": 0.01471,
+  "bbox": [
+   1832,
+   50,
+   1904,
+   122
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-key-hover-2.png"
+ },
+ "shots/space-menu-390.png": {
+  "before": [
+   344,
+   192
+  ],
+  "after": [
+   344,
+   192
+  ],
+  "changedPixels": 1265,
+  "changedRatio": 0.01915,
+  "bbox": [
+   51,
+   113,
+   199,
+   143
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-menu-390.png"
+ },
+ "shots/space-menu-danger-focus-390.png": {
+  "before": [
+   344,
+   192
+  ],
+  "after": [
+   344,
+   192
+  ],
+  "changedPixels": 1265,
+  "changedRatio": 0.01915,
+  "bbox": [
+   51,
+   113,
+   199,
+   143
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-menu-danger-focus-390.png"
+ },
+ "shots/space-menu-danger-focus.png": {
+  "before": [
+   344,
+   192
+  ],
+  "after": [
+   344,
+   192
+  ],
+  "changedPixels": 1265,
+  "changedRatio": 0.01915,
+  "bbox": [
+   51,
+   113,
+   199,
+   143
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-menu-danger-focus.png"
+ },
+ "shots/space-menu-danger-hover-390.png": {
+  "before": [
+   344,
+   192
+  ],
+  "after": [
+   344,
+   192
+  ],
+  "changedPixels": 1265,
+  "changedRatio": 0.01915,
+  "bbox": [
+   51,
+   113,
+   199,
+   143
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-menu-danger-hover-390.png"
+ },
+ "shots/space-menu-danger-hover.png": {
+  "before": [
+   344,
+   192
+  ],
+  "after": [
+   344,
+   192
+  ],
+  "changedPixels": 1265,
+  "changedRatio": 0.01915,
+  "bbox": [
+   51,
+   113,
+   199,
+   143
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-menu-danger-hover.png"
+ },
+ "shots/space-menu.png": {
+  "before": [
+   344,
+   192
+  ],
+  "after": [
+   344,
+   192
+  ],
+  "changedPixels": 1265,
+  "changedRatio": 0.01915,
+  "bbox": [
+   51,
+   113,
+   199,
+   143
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-shots-space-menu.png"
+ },
+ "shots/space-row-390.png": {
+  "before": [
+   744,
+   260
+  ],
+  "after": [
+   744,
+   260
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/space-row-hover-390.png": {
+  "before": [
+   744,
+   260
+  ],
+  "after": [
+   744,
+   260
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/space-row-hover.png": {
+  "before": [
+   1948,
+   172
+  ],
+  "after": [
+   1948,
+   172
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/space-row.png": {
+  "before": [
+   1948,
+   172
+  ],
+  "after": [
+   1948,
+   172
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/topbar-390.png": {
+  "before": [
+   716,
+   184
+  ],
+  "after": [
+   716,
+   184
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/topbar-focus-390.png": {
+  "before": [
+   716,
+   184
+  ],
+  "after": [
+   716,
+   184
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/topbar-focus.png": {
+  "before": [
+   1054,
+   104
+  ],
+  "after": [
+   1054,
+   104
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/topbar-hover-0-390.png": {
+  "before": [
+   716,
+   184
+  ],
+  "after": [
+   716,
+   184
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/topbar-hover-0.png": {
+  "before": [
+   1054,
+   104
+  ],
+  "after": [
+   1054,
+   104
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/topbar-hover-1-390.png": {
+  "before": [
+   716,
+   184
+  ],
+  "after": [
+   716,
+   184
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/topbar-hover-1.png": {
+  "before": [
+   1054,
+   104
+  ],
+  "after": [
+   1054,
+   104
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/topbar-hover-2-390.png": {
+  "before": [
+   716,
+   184
+  ],
+  "after": [
+   716,
+   184
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/topbar-hover-2.png": {
+  "before": [
+   1054,
+   104
+  ],
+  "after": [
+   1054,
+   104
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "shots/topbar.png": {
+  "before": [
+   1054,
+   104
+  ],
+  "after": [
+   1054,
+   104
+  ],
+  "changedPixels": 0,
+  "changedRatio": 0.0,
+  "bbox": null,
+  "sameSize": true
+ },
+ "sheet/sheet-button.png": {
+  "before": [
+   2880,
+   1784
+  ],
+  "after": [
+   2880,
+   1784
+  ],
+  "changedPixels": 19134,
+  "changedRatio": 0.00372,
+  "bbox": [
+   261,
+   801,
+   1915,
+   1549
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-sheet-sheet-button.png"
+ },
+ "sheet/sheet-menu-check.png": {
+  "only": "after"
+ },
+ "sheet/sheet-menu-narrow.png": {
+  "before": [
+   780,
+   486
+  ],
+  "after": [
+   780,
+   486
+  ],
+  "changedPixels": 19340,
+  "changedRatio": 0.05102,
+  "bbox": [
+   464,
+   56,
+   752,
+   377
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-sheet-sheet-menu-narrow.png"
+ },
+ "sheet/sheet-menu.png": {
+  "before": [
+   368,
+   518
+  ],
+  "after": [
+   368,
+   518
+  ],
+  "changedPixels": 2148,
+  "changedRatio": 0.01127,
+  "bbox": [
+   43,
+   67,
+   368,
+   377
+  ],
+  "sameSize": true,
+  "compare": "compare/compare-sheet-sheet-menu.png"
+ },
+ "sheet/sheet-nest-danger-hover.png": {
+  "only": "after"
+ },
+ "sheet/sheet-nest-more-hover.png": {
+  "only": "after"
+ },
+ "sheet/sheet-nest-paper-hover.png": {
+  "only": "after"
+ },
+ "sheet/sheet-nest-row-hover.png": {
+  "only": "after"
+ },
+ "sheet/sheet-nest.png": {
+  "only": "after"
+ }
+}

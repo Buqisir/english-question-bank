@@ -13,34 +13,10 @@
   padding: 32px 0 64px;
 }
 
-.notebook-empty { color: var(--desk-muted, #6b6e68); }
-/* Same empty-state shape as 个人空间, so every empty page reads alike. */
-.notebook-empty-state {
-  display: grid;
-  justify-items: center;
-  gap: 12px;
-  min-height: 250px;
-  align-content: center;
-  padding: 36px 20px;
-  text-align: center;
-  background: var(--desk-surface);
-  border: 1px solid var(--eqb-color-border-subtle);
-  border-radius: 12px;
-}
-.notebook-empty-state .notebook-empty { margin: 0; }
-.notebook-empty-cta {
-  min-height: 36px;
-  padding: 0 16px;
-  border: 0;
-  border-radius: 8px;
-  background: var(--eqb-color-accent-fill);
-  color: var(--eqb-color-accent-fill-ink);
-  font: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.notebook-empty-cta:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+/* 列表页的出错行：样子归 shared-ui/Notice（2026-11-15）；原来的 .notebook-empty 灰字规则删了。 */
+/* 空态换成共用的 EmptyState（样子在 shared-ui/emptyState.css）；这里只给它在这一页的高度，和个人空间一样。
+ * 覆盖：本条 (0,2,0) 和 .eqb-empty-state (0,1,0) 不冲突属性，写成两个类只是为了不依赖样式表的先后。 */
+.eqb-empty-state.notebook-empty-state { min-height: 250px; }
 .notebook-main .home-row:hover { background: var(--desk-hover, #e9ece6); }
 .notebook-main .home-row:hover .home-row-icon { color: var(--desk-ink, #1f1f1d); }
 
@@ -48,9 +24,11 @@
   padding: 24px 16px 64px;
 }
 
-.notebook-status {
-  text-align: center;
-  color: #6d645b;
+/* 打开一张纸时的等待和出错行：样子归 shared-ui/Notice（2026-11-15），这里只让它在纸的上方居中。
+ * 原来的居中灰字（#6d645b）删了。打印时照旧不出（下面 @media print 那条，类名没变）。
+ * 覆盖：本条 (0,2,0) 和 .eqb-notice (0,1,0) 没有冲突的属性。 */
+.eqb-notice.notebook-status {
+  justify-content: center;
 }
 
 .notebook-sheet {
@@ -70,7 +48,7 @@
   font-size: var(--ps-font-size);
   line-height: var(--ps-line-height);
   padding: var(--ps-page-margin-top) var(--ps-page-margin-x) 72px;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--elev-sheet);
 }
 
 .notebook-sheet .canonical-paper-cover-title {
@@ -92,6 +70,21 @@
 .notebook-head { display: flex; flex-wrap: wrap; gap: 4pt 12px; align-items: baseline; }
 .notebook-head strong { font-size: 12pt; white-space: nowrap; }
 .notebook-example { margin-top: 6pt; }
+
+/* 一张纸的灰块（等待第五轮 2026-11-15，NotebookSheetSkeleton）：纸和里面的行都用真纸的 class，这里只管灰块怎么坐进去。
+ * 覆盖：放在字的位置（h1、h2、p）的灰块，(0,2,1) 盖过 waiting.css .eqb-skeleton (0,1,0) 的 display: block——改成行内块，
+ * 那一行的高度仍由真规则的字号、行高给，和有字时一样高；卷名、篇名照真规则居中。 */
+.notebook-skeleton :is(h1, h2, p) > .eqb-skeleton {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 词头那一行真的是基线对齐的 flex（.notebook-head），灰块没有基线，也撑不起一行字的行高。
+ * 覆盖：本条 (0,2,0) 盖过 .notebook-head (0,1,0) 的 align-items: baseline，按中线对齐；高度留够真纸的一行（--ps-line-height）。 */
+.notebook-skeleton .notebook-head {
+  align-items: center;
+  min-height: var(--ps-line-height);
+}
 
 @media print {
   .notebook-page { background: #fff; }

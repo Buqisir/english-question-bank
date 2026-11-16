@@ -1,0 +1,223 @@
+{
+ "date": "2026-11-14T08:07:25.584Z",
+ "fonts": {
+  "sans": {
+   "package": "@fontsource-variable/noto-sans-sc",
+   "version": "5.3.1",
+   "license": "OFL-1.1",
+   "fontVersion": "Version 2.004-H2;hotconv 1.0.118;makeotfexe 2.5.65603",
+   "axes": [
+    [
+     "wght",
+     100,
+     900
+    ]
+   ],
+   "sliceTa": "noto-sans-sc-55-wght-normal.woff2",
+   "sliceShi": "noto-sans-sc-115-wght-normal.woff2"
+  },
+  "serif": {
+   "package": "@fontsource-variable/noto-serif-sc",
+   "version": "5.3.1",
+   "license": "OFL-1.1",
+   "fontVersion": "Version 2.003-H1;hotconv 1.1.1;makeotfexe 2.6.0",
+   "axes": [
+    [
+     "wght",
+     200,
+     900
+    ]
+   ],
+   "sliceTa": "noto-serif-sc-55-wght-normal.woff2",
+   "sliceShi": "noto-serif-sc-115-wght-normal.woff2"
+  }
+ },
+ "directions": [
+  {
+   "id": "A",
+   "name": "A 黑体直排",
+   "tiers": {
+    "all": {
+     "wght": 600,
+     "tracking": 0
+    }
+   },
+   "how": "Noto Sans SC 可变字体 wght 600（和网站顶栏、登录页现在的 600 一致），不加字距，所有字号同一档。"
+  },
+  {
+   "id": "B",
+   "name": "B 黑体分两档",
+   "tiers": {
+    "large": {
+     "wght": 600,
+     "tracking": 0
+    },
+    "small": {
+     "wght": 400,
+     "tracking": 60
+    }
+   },
+   "how": ">16px 用 wght 600、不加字距（和 A 一样）；≤16px 用 wght 400，两字之间加 60（6% 字号）。"
+  },
+  {
+   "id": "C",
+   "name": "C 宋体",
+   "tiers": {
+    "all": {
+     "wght": 600,
+     "tracking": 0
+    }
+   },
+   "how": "Noto Serif SC 可变字体 wght 600（思源宋体同一套字形，§3.3 宣传标题字），不加字距，所有字号同一档。"
+  },
+  {
+   "id": "D",
+   "name": "D 黑体分两档 + 「赖」收细",
+   "tiers": {
+    "large": {
+     "wght": 600,
+     "tracking": 0,
+     "contourWeights": {
+      "3": 550,
+      "4": 550,
+      "5": 550,
+      "6": 550,
+      "7": 550,
+      "8": 550,
+      "9": 550,
+      "10": 550,
+      "11": 550,
+      "12": 550,
+      "13": 550,
+      "14": 550,
+      "15": 550
+     }
+    },
+    "small": {
+     "wght": 400,
+     "tracking": 60,
+     "contourWeights": {
+      "3": 350,
+      "4": 350,
+      "5": 350,
+      "6": 350,
+      "7": 350,
+      "8": 350,
+      "9": 350,
+      "10": 350,
+      "11": 350,
+      "12": 350,
+      "13": 350,
+      "14": 350,
+      "15": 350
+     }
+    }
+   },
+   "how": "在 B 上只改「獭」右边的「赖」：它的 13 个轮廓取同一字体里轻 50 的字重（大档 550、小档 350），「犭」和「石」不动。"
+  }
+ ],
+ "lockupRatios": {
+  "horizontal": {
+   "em": 0.75,
+   "gap": 0.4
+  },
+  "vertical": {
+   "inkWidth": 0.9,
+   "gap": 0.22
+  }
+ },
+ "files": [
+  "wordmark-A-ink.svg",
+  "lockup-h-A-ink.svg",
+  "lockup-v-A-ink.svg",
+  "wordmark-A-reverse.svg",
+  "lockup-h-A-reverse.svg",
+  "lockup-v-A-reverse.svg",
+  "wordmark-B-large-ink.svg",
+  "lockup-h-B-large-ink.svg",
+  "lockup-v-B-large-ink.svg",
+  "wordmark-B-large-reverse.svg",
+  "lockup-h-B-large-reverse.svg",
+  "lockup-v-B-large-reverse.svg",
+  "wordmark-B-small-ink.svg",
+  "lockup-h-B-small-ink.svg",
+  "lockup-v-B-small-ink.svg",
+  "wordmark-B-small-reverse.svg",
+  "lockup-h-B-small-reverse.svg",
+  "lockup-v-B-small-reverse.svg",
+  "wordmark-C-ink.svg",
+  "lockup-h-C-ink.svg",
+  "lockup-v-C-ink.svg",
+  "wordmark-C-reverse.svg",
+  "lockup-h-C-reverse.svg",
+  "lockup-v-C-reverse.svg",
+  "wordmark-D-large-ink.svg",
+  "lockup-h-D-large-ink.svg",
+  "lockup-v-D-large-ink.svg",
+  "wordmark-D-large-reverse.svg",
+  "lockup-h-D-large-reverse.svg",
+  "lockup-v-D-large-reverse.svg",
+  "wordmark-D-small-ink.svg",
+  "lockup-h-D-small-ink.svg",
+  "lockup-v-D-small-ink.svg",
+  "wordmark-D-small-reverse.svg",
+  "lockup-h-D-small-reverse.svg",
+  "lockup-v-D-small-reverse.svg"
+ ],
+ "errors": [],
+ "topbar": {
+  "html": "獭石",
+  "text": "獭石",
+  "font": "15px/600",
+  "family": "Inter, \"PingFang SC\", \"Hiragino Sans GB\", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif"
+ },
+ "login": {
+  "html": "獭石",
+  "text": "獭石",
+  "font": "15px/600"
+ },
+ "inkArea": [
+  {
+   "id": "A",
+   "tier": "all",
+   "ta": 50.4,
+   "shi": 35.5,
+   "ratio": 1.42
+  },
+  {
+   "id": "B",
+   "tier": "large",
+   "ta": 50.4,
+   "shi": 35.5,
+   "ratio": 1.42
+  },
+  {
+   "id": "B",
+   "tier": "small",
+   "ta": 38.2,
+   "shi": 25.6,
+   "ratio": 1.5
+  },
+  {
+   "id": "C",
+   "tier": "all",
+   "ta": 40.2,
+   "shi": 20.1,
+   "ratio": 2
+  },
+  {
+   "id": "D",
+   "tier": "large",
+   "ta": 48.6,
+   "shi": 35.5,
+   "ratio": 1.37
+  },
+  {
+   "id": "D",
+   "tier": "small",
+   "ta": 35.9,
+   "shi": 25.6,
+   "ratio": 1.4
+  }
+ ]
+}

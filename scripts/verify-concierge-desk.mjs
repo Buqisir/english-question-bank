@@ -279,7 +279,8 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   const groupCardSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeGroupCard.tsx'), 'utf8')
   // 2026-09-15: compactPassageTitle & friends moved to passageText.ts (shared with home rows).
   const passageTextSource = readFileSync(path.join(srcRoot, 'concierge', 'passageText.ts'), 'utf8')
-  const rowMenuSource = readFileSync(path.join(srcRoot, 'concierge', 'ConciergeGroupRowMenu.tsx'), 'utf8')
+  // 构件厂第 4 步（2026-11-13）：行「…」菜单换成共用 Menu，ConciergeGroupRowMenu.tsx 删掉；下面菜单行为几条改读 Menu.tsx。
+  const rowMenuSource = readFileSync(path.join(srcRoot, 'shared-ui', 'Menu.tsx'), 'utf8')
   const appSource = readFileSync(path.join(srcRoot, 'App.tsx'), 'utf8')
   const aggSource = readFileSync(path.join(srcRoot, 'concierge', 'aggregatePaperResults.ts'), 'utf8')
 
@@ -289,8 +290,11 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
     /retrieval\s*:\s*ConciergeRetrievalView/.test(deskSource), '')
   assert('Desk props include actions: ConciergeRetrievalActions',
     /actions\s*:\s*ConciergeRetrievalActions/.test(deskSource), '')
-  assert('Desk props include basketIds + onAdd (Assembly Basket layer)',
-    /basketIds\s*:\s*Set<string>/.test(deskSource) && /onAdd\s*:\s*\(group\s*:\s*QuestionGroupCard\)\s*=>\s*void/.test(deskSource), '')
+  // 走查第四节第 6 条（Owner 2026-11-14）：加入键换成共用 DraftAddButton，加入 / 撤回 / 打开草稿卷从
+  // DraftAddContext 拿（App 提供），不再从 Desk 一层层往下传 onAdd。basketIds 仍是 Desk 的 prop。
+  const appProvidesDraftAdd = /<DraftAddContext\.Provider value=\{draftAddActions\}>/.test(appSource)
+  assert('Desk props include basketIds; add-to-draft comes from DraftAddContext (App provides it), not an onAdd prop',
+    /basketIds\s*:\s*Set<string>/.test(deskSource) && !/onAdd\s*:/.test(deskSource) && appProvidesDraftAdd, '')
   assert('Desk destructures intent/state/paperResults/expandedPaperKey from retrieval',
     /const\s*\{\s*intent,\s*state,\s*paperResults,\s*expandedPaperKey\s*\}\s*=\s*retrieval/.test(deskSource), '')
   // similar-entrypoints (E3): triggerSimilar retired along with the whole
@@ -346,14 +350,17 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
     !/onSimilar=/.test(deskSource), '')
   assert('Desk submit handler uses actions.submit',
     /void submit\(\)/.test(deskSource), '')
+  // 2026-11-15 起搜索框是共用 SearchField，它把 input 的 onChange 换成 onValueChange(event.target.value)。
+  const searchFieldSource = readFileSync(path.join(srcRoot, 'shared-ui', 'SearchField.tsx'), 'utf8')
   assert('Desk input onChange wires to actions.setIntent',
-    /onChange=\{\(event\)\s*=>\s*setIntent\(event\.target\.value\)\}/.test(deskSource), '')
+    /onValueChange=\{setIntent\}/.test(deskSource) && /onValueChange\(event\.target\.value\)/.test(searchFieldSource), '')
   // Cut ai-mode-filter-chips (C7): STARTER_CHIPS' "fill input + submit
   // immediately" click handler is retired along with the constant — the
   // filter row toggles local filter state instead of touching intent/submit
   // at all (see Test 12 below for the full new contract).
+  // 胶囊第二轮（2026-11-14）：筛选胶囊换成 ChipToggle，类名还在。
   assert('Desk filter chip click toggles local filter state via toggleFilter',
-    /className=\{`concierge-starter-chip[\s\S]{0,300}onClick=\{\(\)\s*=>\s*[\s\S]{0,100}toggleFilter\(/.test(deskSource), '')
+    /<ChipToggle[\s\S]{0,120}className=\{`concierge-starter-chip[\s\S]{0,300}onClick=\{\(\)\s*=>\s*[\s\S]{0,100}toggleFilter\(/.test(deskSource), '')
 
   // 9.5 Hook exposes the new deeper surface only, no flat fields leaked.
   assert('hook exports ConciergeRetrievalView',
@@ -450,7 +457,9 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
 
   // 9.7 ConciergePaperRow contract.
   assert('Paper row article uses concierge-paper-row class', /<article[\s\S]{0,200}className=\{`concierge-paper-row\$\{expanded \? ' is-expanded' : ''\}`\}/.test(paperRowSource), '')
-  assert('Paper row click guards interactive children', /target\.closest\('button, a, input, textarea, select, \[role="button"\], \.concierge-paper-detail'\)/.test(paperRowSource), '')
+  // 构件厂 2026-11-15：行头换成共用 Row，整行目标是真 <button>（action kind 'button'），「看整卷」是它的兄弟；
+  // 原来 article 上的整行 onClick 和「点的是不是键」判断（target.closest(...)）删了，这条跟着改成查 Row。
+  assert('Paper row head is shared Row with a button whole-row target', /<Row[\s\S]{0,120}className="concierge-paper-row-head"[\s\S]{0,200}action=\{\{ kind: 'button'[\s\S]{0,120}onTogglePaper\(paper\.key\)[\s\S]{0,40}expanded, controls: detailId/.test(paperRowSource) && !/target\.closest\(/.test(paperRowSource), '')
   assert('Paper row chevron toggles via onTogglePaper(paper.key)', /onClick=\{\(\)\s*=>\s*onTogglePaper\(paper\.key\)\}/.test(paperRowSource), '')
   assert('Paper row uses 命中 N 个篇章 wording (Cut 6)', /['"]命中\s*['"]/.test(paperRowSource) && /['"]\s*个篇章['"]/.test(paperRowSource) && /paper\.hitCount/.test(paperRowSource), '')
   assert('Paper row does NOT say 共 N 组', !/共\s*\{paper\.hitCount\}\s*组/.test(paperRowSource), '')
@@ -471,10 +480,20 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Reading labels use stored passage identity rather than result position',
     passageTextSource.includes('[group.section, group.passageTitle, group.title]')
       && passageTextSource.includes('`${match[1].toUpperCase()}篇`'), '')
-  assert('Group card has C8 draft labels', /已在草稿卷中/.test(groupCardSource) && /加入草稿卷/.test(groupCardSource) && /暂不可组卷/.test(groupCardSource), '')
-  assert('Group card draft + titles switch add/remove', /加入当前草稿卷/.test(groupCardSource) && /从草稿卷移出/.test(groupCardSource), '')
-  assert('Group card aria-pressed follows joined draft state', /aria-pressed=\{draftState === ['"]in_current_draft['"]\}/.test(groupCardSource), '')
-  assert('Group card disables only unavailable draft state', /disabled=\{draftState === ['"]disabled['"]\}/.test(groupCardSource), '')
+  // 走查第四节第 6 条（Owner 2026-11-14）：行上的加入键换成共用 DraftAddButton（紧凑档）。原来的「再点一下移出」
+  // 开关（aria-pressed、「从草稿卷移出」）按那一条换成：加入后是「已加入」链接（打开草稿卷），这一次加的旁边带「撤回」。
+  // 下面几条查的是同一份契约在新构件里的样子：卡片把 draftState 交给加入键，加入键按它出三种样子。
+  const draftAddSource = readFileSync(path.join(srcRoot, 'shared-ui', 'DraftAddButton.tsx'), 'utf8')
+  assert('Group card hands its draft state to the shared add button',
+    /<DraftAddButton[\s\S]{0,120}target=\{\{ \.\.\.group, draftPaperButtonState: draftState \}\}/.test(groupCardSource), '')
+  assert('Group card has C8 draft labels (via DraftAddButton)',
+    /已加入/.test(draftAddSource) && /加入草稿卷/.test(draftAddSource) && /暂不可组卷/.test(draftAddSource), '')
+  assert('Joined state opens the draft; only a just-added item offers 撤回',
+    /aria-label="已加入，打开草稿卷"/.test(draftAddSource) && /const undoable = added && receipt !== null/.test(draftAddSource) && />\s*撤回\s*</.test(draftAddSource), '')
+  assert('Joined state is derived from in_current_draft',
+    /const added = state === 'in_current_draft'/.test(draftAddSource), '')
+  assert('Group card disables only unavailable draft state (never the joined state)',
+    /const unavailable = state === 'disabled' \|\| \(!added && target\.canAddToDraftPaper === false\)/.test(draftAddSource), '')
   // similar-entrypoints (E3): 「找类似」→「配相似」换引擎——was a plain
   // <a href> deep-link. similar-passages-entry (E6) retired that deep-link:
   // 「配相似」→「相似篇章」, now a menu <button onClick> that toggles the
@@ -482,21 +501,22 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Group card has no 找类似 <button> (retired text-search-fill flow)',
     !/>\s*找类似\s*<\/button>/.test(groupCardSource), '')
   assert('Group card renders 相似篇章 as a menu button (no deep-link <a>)',
-    /dataRaEntry:\s*['"]group-card-similar['"]/.test(groupCardSource) &&
+    /['"]data-ra-entry['"]:\s*['"]group-card-similar['"]/.test(groupCardSource) &&
     /label:\s*['"]相似篇章['"]/.test(groupCardSource) &&
     !/<a[^>]*>\s*相似篇章\s*<\/a>/.test(groupCardSource), '')
   assert('Group card gates 相似篇章 on the four v2-supported groupTypes',
     /SIMILAR_SUPPORTED_GROUP_TYPES/.test(groupCardSource) && /similarEligible/.test(groupCardSource), '')
   assert('Group card keeps 详情 href and 阅读解析 data-ra-entry',
-    /view=detail&groupId=/.test(groupCardSource) && /dataRaEntry:\s*['"]group-card['"]/.test(groupCardSource), '')
+    /view=detail&groupId=/.test(groupCardSource) && /['"]data-ra-entry['"]:\s*['"]group-card['"]/.test(groupCardSource), '')
   assert('Group card uses always-visible + / … trail (hover-reveal cluster gone)',
     /concierge-group-row-trail/.test(groupCardSource) &&
-    /concierge-action-add/.test(groupCardSource) &&
+    // 走查第四节第 6 条：「+」是共用 DraftAddButton，类名钩子 concierge-group-row-add（原 concierge-action-add）。
+    /<DraftAddButton\s+className="concierge-group-row-add"/.test(groupCardSource) &&
     !/concierge-group-row-actions/.test(groupCardSource), '')
   assert('Group card has no 预览 button', !/['"]预览['"]/.test(groupCardSource), '')
   assert('Group card has no per-question add UI', !/加入小题|加入单题|onAddQuestion/.test(groupCardSource), '')
-  assert('Row menu is a role=menu with menuitem children', /role=['"]menu['"]/.test(rowMenuSource) && /role=['"]menuitem['"]/.test(rowMenuSource), '')
-  assert('Row menu trigger has aria-haspopup=menu and aria-expanded', /aria-haspopup=['"]menu['"]/.test(rowMenuSource) && /aria-expanded=\{open\}/.test(rowMenuSource), '')
+  assert('Row menu is a role=menu with menuitem children', /role=['"]menu['"]/.test(rowMenuSource) && /role[=:]\s*['"]menuitem['"]/.test(rowMenuSource), '')
+  assert('Row menu trigger has aria-haspopup=menu and aria-expanded', /['"]?aria-haspopup['"]?[=:]\s*['"]menu['"]/.test(rowMenuSource) && /['"]?aria-expanded['"]?(=\{|:\s*)open\b/.test(rowMenuSource), '')
   assert('Row menu moves focus with ArrowDown/ArrowUp', /ArrowDown/.test(rowMenuSource) && /ArrowUp/.test(rowMenuSource), '')
   assert('Row menu closes on Esc, outside click, and scroll', /Escape/.test(rowMenuSource) && /pointerdown/.test(rowMenuSource) && /scroll/.test(rowMenuSource), '')
   assert('hover-reveal .concierge-group-row-actions CSS is gone', !/\.concierge-group-row-actions/.test(readFileSync(path.join(srcRoot, 'App.css'), 'utf8')), '')
@@ -711,22 +731,34 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone; STARTER_CHIPS 
   // Chip styling — the filter row reuses .concierge-starter-chip's rule.
   // teal-repaint: neutral resting chip border/text on the new #D8D8D2 /
   // #6A6A64 neutral palette (was #D3CBBD / #6B645C warm neutrals).
-  const chipRule = css.match(/\.concierge-browse-chip\s*\{[^}]*\}/)?.[0] || ''
-  assert('browse chip background #FFFFFF', /background:\s*#FFFFFF/.test(chipRule), '')
+  // 胶囊构件（2026-11-14）：浏览页筛选胶囊换成 shared-ui/Chip.tsx 的 ChipToggle，样子在 shared-ui/chip.css。
+  const chipCss = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'chip.css'), 'utf8')
+  const chipRule = chipCss.match(/\.eqb-chip\[data-kind='toggle'\]\s*\{[^}]*\}/)?.[0] || ''
+  assert('browse chips render through ChipToggle', /<ChipToggle[\s\S]{0,80}className="concierge-browse-chip"/.test(readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergeDesk.tsx'), 'utf8')), '')
+  assert('browse chip background is the paper (white) token', /background:\s*var\(--eqb-color-paper\)/.test(chipRule), '')
   assert('browse chip border uses the subtle border token', /border:\s*1px solid var\(--eqb-color-border-subtle\)/i.test(chipRule), '')
   assert('browse chip text uses muted ink token', /color:\s*var\(--eqb-color-text-muted\)/i.test(chipRule), '')
 
-  const chipSelectedRule = css.match(/\.concierge-browse-chip\[aria-pressed='true'\]\s*\{[^}]*\}/)?.[0] || ''
+  const chipSelectedRule = chipCss.match(/\.eqb-chip\[data-kind='toggle'\]\[aria-pressed='true'\]\s*\{[^}]*\}/)?.[0] || ''
   assert('selected chip is grey-filled, not accent (全站灰阶)', /background:\s*var\(--eqb-color-desk\)/i.test(chipSelectedRule), chipSelectedRule)
   assert('selected chip text is body ink', /color:\s*var\(--eqb-color-text\)/i.test(chipSelectedRule), chipSelectedRule)
   assert('selected chip is NOT oxblood #B8323C', !/#B8323C/i.test(chipSelectedRule), chipSelectedRule)
 
   // Intent bar resting + focus.
-  const barRule = css.match(/\.concierge-intent-bar\s*\{[^}]*\}/)?.[0] || ''
-  assert('intent-bar rest border uses desk palette', /border:\s*1px solid var\(--desk-border\)/.test(barRule), '')
-  const focusRule = css.match(/\.concierge-intent-bar:focus-within\s*\{[^}]*\}/)?.[0] || ''
+  // 搜索框构件（2026-11-15）：首页 / 浏览页搜索框换成 shared-ui/SearchField，样子在 shared-ui/search.css
+  // （.eqb-search 框、data-tier='hero' 首页一档）；App.css 的 .concierge-intent-bar 只剩摆法（flex / 宽度）。
+  const searchCss = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'search.css'), 'utf8')
+  const deskSrc = readFileSync(path.resolve(here, '..', 'app', 'src', 'concierge', 'ConciergeDesk.tsx'), 'utf8')
+  assert('intent bar renders through SearchField (hero on home, compact on browse)', /<SearchField\s[\s\S]{0,200}tier=\{isBrowseScreen \? 'compact' : 'hero'\}/.test(deskSrc), '')
+  const barRule = searchCss.match(/\.eqb-search\s*\{[^}]*\}/)?.[0] || ''
+  const heroRule = searchCss.match(/\.eqb-search\[data-tier='hero'\]\s*\{[^}]*\}/)?.[0] || ''
+  // texture 2026-11-13 (DESIGN.md §4): home search is paper at e1 — the elev ring
+  // is its only edge, so the 1px border stays for layout but goes transparent.
+  assert('intent-bar rest edge is the e1 ring (border transparent, no double line)', /border:\s*1px solid transparent/.test(barRule) && /box-shadow:\s*var\(--elev-1\)/.test(heroRule), barRule + heroRule)
+  const focusRule = searchCss.match(/\.eqb-search:focus-within\s*\{[^}]*\}/)?.[0] || ''
   assert('focus border only steps up one shade (no accent frame)', /border-color:\s*var\(--eqb-color-border-strong\)/.test(focusRule), focusRule)
-  assert('focus does not draw an outer ring around the intent bar', !/\.concierge-intent-bar:has\(:focus-visible\)/.test(css), '')
+  assert('focus does not draw an outer ring around the intent bar',
+    !/\.concierge-intent-bar:has\(:focus-visible\)/.test(css) && !/\.eqb-search:has\(:focus-visible\)/.test(searchCss), '')
 }
 
 // ------------------------------------------------------------------ Test 13
@@ -764,9 +796,11 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
   const css = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.css'), 'utf8')
   const app = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.tsx'), 'utf8')
 
-  // Paper row CSS exists with cursor: pointer + soft hover.
+  // Paper row CSS: soft transition. 构件厂 2026-11-15：手形光标从 article 挪到共用 Row 的整行目标（row.css .eqb-row-hit），
+  // article 不再整块可点（展开的题组目录不是点开卷行的地方），这条跟着改成查 row.css。
   const paperRowRule = css.match(/^\.concierge-paper-row\s*\{[\s\S]*?\}/m)?.[0] || ''
-  assert('paper-row uses cursor: pointer', /cursor:\s*pointer/.test(paperRowRule), `got: ${paperRowRule}`)
+  const rowCss = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'row.css'), 'utf8')
+  assert('paper-row whole-row target uses cursor: pointer', /\.eqb-row-hit \{[\s\S]{0,300}cursor:\s*pointer/.test(rowCss) && !/cursor:\s*pointer/.test(paperRowRule), `got: ${paperRowRule}`)
   // motion-pass: transition duration/curve literals were collected into
   // --motion-*/--ease-* tokens (docs/cuts/motion-pass/plan.md #2); assert the
   // token form on the same background+box-shadow pair, still no transform.
@@ -786,18 +820,24 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
   // 草稿卷 visible copy in App is intact.
   const mentions = app.match(/组题篮/g) || []
   assert('App.tsx still has no user-visible 组题篮', mentions.length === 0, `still found ${mentions.length} occurrence(s)`)
-  assert('App.tsx 加入草稿卷 present', /加入草稿卷/.test(app), '')
+  // 走查第四节第 6 条：「加入草稿卷」这几个字跟着加入键搬进 shared-ui/DraftAddButton.tsx；App 只提供加入这件事。
+  const draftAddButtonSource = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'DraftAddButton.tsx'), 'utf8')
+  assert('加入草稿卷 present (shared add button, provided by App)',
+    /加入草稿卷/.test(draftAddButtonSource) && /<DraftAddContext\.Provider value=\{draftAddActions\}>/.test(app), '')
   // classic-retire-3: the literal aria-label="草稿卷" lived on the classic
   // <aside className="basket-panel"> that was deleted along with the rest
   // of the classic sidebar. The floating basket-chip button (AI mode's
   // surviving draft-paper entry point) carries the same "草稿卷" wording in
   // a template-literal aria-label instead of a static one.
-  assert('App.tsx basket-chip aria-label still carries 草稿卷 wording', /aria-label=\{`打开草稿卷/.test(app), '')
+  // 胶囊第二轮（Owner 2026-11-14 第 3 条）：读屏名以看得见的字「草稿卷（N 组）」开头，冒号后补「打开草稿卷」。
+  assert('App.tsx basket-chip aria-label starts with the visible 草稿卷 wording',
+    /aria-label=\{draftCountKnown \? `草稿卷（\$\{currentDraftGroupCount\} 组）：打开草稿卷`/.test(app), '')
   assert('draft count updates without a duplicate chip pulse',
     !/chipTick|prevDraftCountRef|\.animate\(/.test(app) &&
       !/basket-count-in-(?:up|down)/.test(css), '')
   assert('basket chip renders the current count directly',
-    /草稿卷（\{currentDraftGroupCount\} 组）/.test(app), '')
+    // 数还没读到时只写「草稿卷」，不写一个猜的 0（走查第四节）；读到了照旧直接写数。
+    /草稿卷（\{currentDraftGroupCount\} 组）/.test(app) || /draftCountKnown \? `草稿卷（\$\{currentDraftGroupCount\} 组）` : '草稿卷'/.test(app), '')
 }
 
 // ------------------------------------------------------------------ Test 15
@@ -808,18 +848,33 @@ console.log('\nTest 15: Avoid sample-data race — ConciergeDesk waits for live 
   const app = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.tsx'), 'utf8')
   const css = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.css'), 'utf8')
 
-  assert('ConciergeDeskProps adds dataStatus prop', /dataStatus\?\s*:\s*['"]loading['"]\s*\|\s*['"]sqlite['"]\s*\|\s*['"]sample['"]/.test(desk), '')
+  // 走查第四节第 7 条（Owner 2026-11-14）：题库没连上不再悄悄换成样例题，'sample' 换成 'error'，直说并给「重试」。
+  assert('ConciergeDeskProps adds dataStatus prop', /dataStatus\?\s*:\s*['"]loading['"]\s*\|\s*['"]sqlite['"]\s*\|\s*['"]error['"]/.test(desk), '')
   assert('Desk computes dataLoading from dataStatus', /const dataLoading = dataStatus === ['"]loading['"]/.test(desk), '')
   assert('handleSubmit early-returns while dataLoading', /if \(dataLoading\) return/.test(desk), '')
   assert('submit button disabled when dataLoading', /submitDisabled\s*=\s*dataLoading\s*\|\|/.test(desk), '')
-  assert('intent input disabled while dataLoading', /<input[\s\S]{0,400}className="concierge-intent-input"[\s\S]{0,400}disabled=\{dataLoading\}/.test(desk), '')
+  // 搜索框构件（2026-11-15）：输入框在 shared-ui/SearchField 里，ConciergeDesk 把 disabled={dataLoading} 交给它，
+  // 它原样给 <input>。两头都认。
+  const searchField = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'SearchField.tsx'), 'utf8')
+  assert('intent input disabled while dataLoading',
+    /<SearchField\s[\s\S]{0,900}input: 'concierge-intent-input'[\s\S]{0,900}disabled=\{dataLoading\}/.test(desk) &&
+      /<input[\s\S]{0,400}disabled=\{disabled\}/.test(searchField), '')
   assert('placeholder switches to 正在连接本地题库 while loading', /正在连接本地题库/.test(desk), '')
-  assert('connecting notice rendered as concierge-data-loading', /<p className="concierge-data-loading"[\s\S]{0,200}role="status"/.test(desk), '')
+  // 2026-11-15 起这一行是共用 Notice（kind="waiting"）：非出错的 Notice 自带 role="status"，字是 --eqb-color-text-muted。
+  const noticeSource = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'Notice.tsx'), 'utf8')
+  const noticeCss = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'notice.css'), 'utf8')
+  const tokensCss = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'tokens.css'), 'utf8')
+  assert('connecting notice rendered as concierge-data-loading',
+    /<Notice kind="waiting" className="concierge-data-loading">/.test(desk) && /role=\{kind === 'error' \? 'alert' : 'status'\}/.test(noticeSource), '')
   assert('App passes dataStatus to ConciergeDesk', /<ConciergeDesk[\s\S]*?dataStatus=\{dataStatus\}/.test(app), '')
 
-  const noticeRule = css.match(/\.concierge-data-loading\s*\{[^}]*\}/)?.[0] || ''
-  assert('.concierge-data-loading rule exists', noticeRule.length > 0, '')
-  assert('notice uses muted ink #6A6A64 (AA-compliant status text)', /color:\s*#6A6A64/i.test(noticeRule), '')
+  const noticeRule = noticeCss.match(/\.eqb-notice\s*\{[^}]*\}/)?.[0] || ''
+  assert('.concierge-data-loading rule exists (shared .eqb-notice rule)', noticeRule.length > 0, '')
+  // texture 2026-11-13: --desk-muted #5A6C75 is AA on white and desk; shared-ui carries the same value as --eqb-color-text-muted.
+  const deskMuted = css.match(/--desk-muted:\s*(#[0-9a-f]{6})/i)?.[1]?.toLowerCase()
+  const eqbMuted = tokensCss.match(/--eqb-color-text-muted:\s*(#[0-9a-f]{6})/i)?.[1]?.toLowerCase()
+  assert('notice uses muted ink var(--desk-muted) (AA-compliant status text)',
+    /color:\s*var\(--eqb-color-text-muted\)/.test(noticeRule) && Boolean(deskMuted) && deskMuted === eqbMuted, noticeRule)
 }
 
 // ------------------------------------------------------------------ Test 16
@@ -887,7 +942,9 @@ console.log('\nTest 19: cut a11y-concierge-three-gaps — focus-ring visibility 
   assert('reduced-motion does not use a global wildcard kill switch', !/@media \(prefers-reduced-motion: reduce\)\s*\{\s*\*,\s*\*::before,\s*\*::after/.test(css), '')
   assert('reduced-motion has no 0.01ms duration override', !/0\.01ms/.test(css), '')
   assert('reduced-motion removes group-card movement', /@media \(prefers-reduced-motion: reduce\)[\s\S]{0,1200}\.group-card\s*\{[^}]*animation:\s*none/.test(css), '')
-  assert('reduced-motion stops skeleton shimmer while keeping a static placeholder', /@media \(prefers-reduced-motion: reduce\)[\s\S]{0,1800}\.concierge-skeleton-line::after,[\s\S]{0,200}animation:\s*none/.test(css), '')
+  // 2026-11-15：首页灰块换成共用灰块 shared-ui/Skeleton（呼吸，不扫光），减少动态效果的规则跟着搬到 shared-ui/waiting.css。
+  const waitingCss = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'waiting.css'), 'utf8')
+  assert('reduced-motion stops skeleton breathing while keeping a static placeholder', /@media \(prefers-reduced-motion: reduce\)\s*\{\s*\.eqb-skeleton\s*\{\s*animation:\s*none/.test(waitingCss), '')
 
   // Keyboard-equivalent path contract: the expand button must keep aria-expanded.
   const expandButtonMatch = paperRow.match(/className=\{`concierge-row-expand[\s\S]*?<\/button>/)
@@ -1103,7 +1160,8 @@ console.log('\nTest 22: C7 搜索结果年份列去复读 — Desk computes hide
   )
   assert(
     'ConciergePaperRow aria-label always carries the year regardless of hideYear',
-    /aria-label=\{paper\.year \? `\$\{paper\.year\} 年 \$\{headline\}` : headline\}/.test(paperRowRuleSource),
+    (/aria-label=\{paper\.year \? `\$\{paper\.year\} 年 \$\{headline\}` : headline\}/.test(paperRowRuleSource)
+      || (/const rowLabel = paper\.year \? `\$\{paper\.year\} 年 \$\{headline\}` : headline/.test(paperRowRuleSource) && /aria-label=\{rowLabel\}/.test(paperRowRuleSource))),
     '',
   )
 }

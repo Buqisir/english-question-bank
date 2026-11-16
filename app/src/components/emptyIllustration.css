@@ -1,0 +1,19 @@
+/* 空状态插图：88 × 88 方画布（同图标 24 格放大），颜色只用三个角色（tokens.css）。 */
+.eqb-empty-ill {
+  display: block;
+  flex: none;
+  height: 88px;
+  width: 88px;
+}
+.eqb-empty-ill .ill-deep { fill: var(--eqb-color-ill-deep); }
+.eqb-empty-ill .ill-mid { fill: var(--eqb-color-ill-mid); }
+.eqb-empty-ill .ill-paper { fill: var(--eqb-color-ill-paper); }
+/* 线状部件和 32px 起的图标同一支笔：1.5 格。 */
+.eqb-empty-ill .ill-deep-line,
+.eqb-empty-ill .ill-mid-line {
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: 1.5;
+}
+.eqb-empty-ill .ill-deep-line { stroke: var(--eqb-color-ill-deep); }
+.eqb-empty-ill .ill-mid-line { stroke: var(--eqb-color-ill-mid); }

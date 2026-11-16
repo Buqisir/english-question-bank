@@ -1,0 +1,4226 @@
+{
+ "base": "http://127.0.0.1:5339",
+ "intercepted": [
+  "POST /api/similar-passages：回 500（相似篇章面板出「重试」）",
+  "GET /api/question-groups/group-2026-i-reading-a：补 paperSurfaceHref（露出详情页「相似篇章」入口）",
+  "整卷预览：资产投影、consumption 补 sourceAssetVersion、审阅线程 404（同 decisions-b-shots.mjs）",
+  "讲评栏解析：paper-assets/paper-2026-i/versions/*/analyses/{reading-choice,seven-choices}-analysis-v1.json 换成 test-fixtures/retired-paper-assets/paper-2026-i/latest/analyses/ 的同名文件",
+  "词典：status 回可用、lookup 回假词条 destination（同 decisions-b-shots.mjs）、生词本 selection-state 回没加过"
+ ],
+ "w1440": {
+  "missing": [
+   "vocab-download: 页面上没有「下载」键"
+  ],
+  "filterOpen": {
+   "open": {
+    "tag": "button",
+    "text": "筛选",
+    "cls": "eqb-button concierge-command-filter-toggle",
+    "tone": "strong",
+    "size": "lg",
+    "expanded": "true",
+    "box": {
+     "x": 292,
+     "y": 180,
+     "w": 50,
+     "h": 36
+    },
+    "textBox": {
+     "x": 304,
+     "y": 190,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "筛选",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   }
+  },
+  "moreExpanded": {
+   "still": {
+    "tag": "button",
+    "text": "收起筛选",
+    "cls": "eqb-button concierge-filter-more",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 284,
+     "y": 448,
+     "w": 81,
+     "h": 28
+    },
+    "textBox": {
+     "x": 292,
+     "y": 454,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "收起筛选",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "收起筛选",
+    "cls": "eqb-button concierge-filter-more",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 284,
+     "y": 448,
+     "w": 81,
+     "h": 28
+    },
+    "textBox": {
+     "x": 292,
+     "y": 454,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "收起筛选",
+    "cls": "eqb-button concierge-filter-more",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 284,
+     "y": 448,
+     "w": 81,
+     "h": 28
+    },
+    "textBox": {
+     "x": 292,
+     "y": 454,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "rowMenuOpen": {
+   "open": {
+    "tag": "button",
+    "text": "更多操作",
+    "cls": "eqb-button concierge-group-row-menu-trigger",
+    "tone": "subtle",
+    "size": "sm",
+    "expanded": "true",
+    "haspopup": "menu",
+    "box": {
+     "x": 1106,
+     "y": 376.2,
+     "w": 28,
+     "h": 28
+    },
+    "textBox": null,
+    "iconBox": {
+     "x": 1112,
+     "y": 382.2,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 1114.7,
+     "y": 389.1,
+     "w": 10.7,
+     "h": 2.3
+    },
+    "kbdBox": null,
+    "bg": "rgb(220, 230, 235)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 0px 0px 0px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": "fluid-hover-list concierge-group-index"
+   },
+   "ax": {
+    "role": "button",
+    "name": "更多操作",
+    "nameFrom": "attribute",
+    "description": null,
+    "expanded": true,
+    "focusable": true,
+    "hasPopup": "menu"
+   }
+  },
+  "homeRetry": {
+   "still": {
+    "tag": "button",
+    "text": "重试",
+    "cls": "eqb-button similar-btn",
+    "tone": "strong",
+    "size": "sm",
+    "box": {
+     "x": 304,
+     "y": 494.8,
+     "w": 42,
+     "h": 28
+    },
+    "textBox": {
+     "x": 312,
+     "y": 500.8,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": "fluid-hover-list concierge-group-index"
+   },
+   "ax": {
+    "role": "button",
+    "name": "重试",
+    "nameFrom": "contents",
+    "description": null,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "重试",
+    "cls": "eqb-button similar-btn",
+    "tone": "strong",
+    "size": "sm",
+    "box": {
+     "x": 304,
+     "y": 494.8,
+     "w": 42,
+     "h": 28
+    },
+    "textBox": {
+     "x": 312,
+     "y": 500.8,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": "fluid-hover-list concierge-group-index"
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "重试",
+    "cls": "eqb-button similar-btn",
+    "tone": "strong",
+    "size": "sm",
+    "box": {
+     "x": 304,
+     "y": 494.8,
+     "w": 42,
+     "h": 28
+    },
+    "textBox": {
+     "x": 312,
+     "y": 500.8,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": "fluid-hover-list concierge-group-index"
+   }
+  },
+  "detailRetry": {
+   "still": {
+    "tag": "button",
+    "text": "重试",
+    "cls": "eqb-button similar-btn",
+    "tone": "strong",
+    "size": "sm",
+    "box": {
+     "x": 316,
+     "y": 360.8,
+     "w": 42,
+     "h": 28
+    },
+    "textBox": {
+     "x": 324,
+     "y": 366.8,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "重试",
+    "nameFrom": "contents",
+    "description": null,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "重试",
+    "cls": "eqb-button similar-btn",
+    "tone": "strong",
+    "size": "sm",
+    "box": {
+     "x": 316,
+     "y": 360.8,
+     "w": 42,
+     "h": 28
+    },
+    "textBox": {
+     "x": 324,
+     "y": 366.8,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "重试",
+    "cls": "eqb-button similar-btn",
+    "tone": "strong",
+    "size": "sm",
+    "box": {
+     "x": 316,
+     "y": 360.8,
+     "w": 42,
+     "h": 28
+    },
+    "textBox": {
+     "x": 324,
+     "y": 366.8,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "draftMoreOpen": {
+   "open": {
+    "tag": "button",
+    "text": "草稿卷更多信息",
+    "cls": "eqb-button draft-more-menu-trigger",
+    "tone": "subtle",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 577.7,
+     "y": 10,
+     "w": 28,
+     "h": 28
+    },
+    "textBox": null,
+    "iconBox": {
+     "x": 583.7,
+     "y": 16,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 586.3,
+     "y": 22.8,
+     "w": 10.7,
+     "h": 2.3
+    },
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 0px 0px 0px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": "fluid-hover-list topbar-actions"
+   },
+   "ax": {
+    "role": "button",
+    "name": "草稿卷更多信息",
+    "nameFrom": "attribute",
+    "description": "学生 / 最近草稿卷",
+    "expanded": true,
+    "focusable": true
+   }
+  },
+  "draftItemMenuOpen": {
+   "open": {
+    "tag": "button",
+    "text": "更多题组操作",
+    "cls": "eqb-button",
+    "tone": "strong",
+    "size": "md",
+    "expanded": "true",
+    "haspopup": "menu",
+    "box": {
+     "x": 1205,
+     "y": 288.4,
+     "w": 32,
+     "h": 32
+    },
+    "textBox": null,
+    "iconBox": {
+     "x": 1213,
+     "y": 296.4,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 1215.7,
+     "y": 303.2,
+     "w": 10.7,
+     "h": 2.3
+    },
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 0px 0px 0px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "4px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "更多题组操作",
+    "nameFrom": "attribute",
+    "description": null,
+    "expanded": true,
+    "focusable": true,
+    "hasPopup": "menu"
+   }
+  },
+  "draftExportOpen": {
+   "open": {
+    "tag": "button",
+    "text": "导出",
+    "cls": "eqb-button",
+    "tone": "primary",
+    "size": "md",
+    "expanded": "true",
+    "haspopup": "menu",
+    "box": {
+     "x": 953.6,
+     "y": 8,
+     "w": 50,
+     "h": 32
+    },
+    "textBox": {
+     "x": 965.6,
+     "y": 16,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(114, 191, 164)",
+    "color": "rgb(25, 29, 24)",
+    "font": "13px/600",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": "fluid-hover-list topbar-actions"
+   },
+   "ax": {
+    "role": "button",
+    "name": "导出",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true,
+    "hasPopup": "menu"
+   }
+  },
+  "overviewExpanded": {
+   "still": {
+    "tag": "button",
+    "text": "文章简介",
+    "cls": "eqb-button paper-browse-reading-overview-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 1319,
+     "y": 41,
+     "w": 88,
+     "h": 28
+    },
+    "textBox": {
+     "x": 1327,
+     "y": 47,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 1383,
+     "y": 47,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 1386.7,
+     "y": 52.8,
+     "w": 8.7,
+     "h": 4
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px -8px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "文章简介",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "文章简介",
+    "cls": "eqb-button paper-browse-reading-overview-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 1319,
+     "y": 41,
+     "w": 88,
+     "h": 28
+    },
+    "textBox": {
+     "x": 1327,
+     "y": 47,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 1383,
+     "y": 47,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 1386.7,
+     "y": 52.8,
+     "w": 8.7,
+     "h": 4
+    },
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px -8px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "文章简介",
+    "cls": "eqb-button paper-browse-reading-overview-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 1319,
+     "y": 41,
+     "w": 88,
+     "h": 28
+    },
+    "textBox": {
+     "x": 1327,
+     "y": 47,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 1383,
+     "y": 47,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 1386.7,
+     "y": 52.8,
+     "w": 8.7,
+     "h": 4
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px -8px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "sevenFitLine": {
+   "tag": "p",
+   "text": "首段列举 AI 在个性化参观、文物保护、揭示故事等多方面的作用，C 用 In s",
+   "cls": "pi-seven-fit-line",
+   "box": {
+    "x": 1036,
+    "y": 436,
+    "w": 352,
+    "h": 60.4
+   },
+   "textBox": {
+    "x": 1036,
+    "y": 438,
+    "w": 344.8,
+    "h": 56.3
+   },
+   "iconBox": null,
+   "shapeBox": null,
+   "kbdBox": null,
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(75, 64, 53)",
+   "font": "13px/400",
+   "lineHeight": "20.15px",
+   "deco": "none",
+   "pad": "0px 0px 0px 0px",
+   "margin": "0px 0px 8px 0px",
+   "radius": "0px",
+   "gap": "normal",
+   "border": null,
+   "opacity": "1",
+   "outline": null,
+   "cursor": "auto",
+   "inFluidHoverList": false
+  },
+  "sevenDetails": {
+   "still": {
+    "tag": "button",
+    "text": "展开细节",
+    "cls": "eqb-button pi-seven-details-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "false",
+    "box": {
+     "x": 1028,
+     "y": 531.5,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 1036,
+     "y": 537.5,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 8px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "展开细节",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": false,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "展开细节",
+    "cls": "eqb-button pi-seven-details-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "false",
+    "box": {
+     "x": 1028,
+     "y": 531.5,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 1036,
+     "y": 537.5,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 8px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "展开细节",
+    "cls": "eqb-button pi-seven-details-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "false",
+    "box": {
+     "x": 1028,
+     "y": 531.5,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 1036,
+     "y": 537.5,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 8px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "sevenDetailsExpanded": {
+   "still": {
+    "tag": "button",
+    "text": "收起细节",
+    "cls": "eqb-button pi-seven-details-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 1028,
+     "y": 531.5,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 1036,
+     "y": 537.5,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 8px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "收起细节",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "收起细节",
+    "cls": "eqb-button pi-seven-details-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 1028,
+     "y": 531.5,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 1036,
+     "y": 537.5,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 8px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "收起细节",
+    "cls": "eqb-button pi-seven-details-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 1028,
+     "y": 87.5,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 1036,
+     "y": 93.5,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 8px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "dictRare": {
+   "still": {
+    "tag": "button",
+    "text": "收起",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-rare-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 631.8,
+     "y": 675.7,
+     "w": 58,
+     "h": 28
+    },
+    "textBox": {
+     "x": 639.8,
+     "y": 681.7,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 669.8,
+     "y": 683.7,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 672.6,
+     "y": 688,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px -4px 14px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "收起",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "收起",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-rare-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 631.8,
+     "y": 675.7,
+     "w": 58,
+     "h": 28
+    },
+    "textBox": {
+     "x": 639.8,
+     "y": 681.7,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 669.8,
+     "y": 683.7,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 672.6,
+     "y": 688,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px -4px 14px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "收起",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-rare-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 631.8,
+     "y": 675.7,
+     "w": 58,
+     "h": 28
+    },
+    "textBox": {
+     "x": 639.8,
+     "y": 681.7,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 669.8,
+     "y": 683.7,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 672.6,
+     "y": 688,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px -4px 14px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "dictDetail": {
+   "still": {
+    "tag": "button",
+    "text": "收起解释",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-detail-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 609.8,
+     "y": 700.7,
+     "w": 86,
+     "h": 28
+    },
+    "textBox": {
+     "x": 635.8,
+     "y": 706.7,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 617.8,
+     "y": 708.7,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 620.6,
+     "y": 713,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "4px 0px -4px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "收起解释",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "收起解释",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-detail-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 609.8,
+     "y": 700.7,
+     "w": 86,
+     "h": 28
+    },
+    "textBox": {
+     "x": 635.8,
+     "y": 706.7,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 617.8,
+     "y": 708.7,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 620.6,
+     "y": 713,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "4px 0px -4px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "收起解释",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-detail-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 609.8,
+     "y": 700.7,
+     "w": 86,
+     "h": 28
+    },
+    "textBox": {
+     "x": 635.8,
+     "y": 706.7,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 617.8,
+     "y": 708.7,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 620.6,
+     "y": 713,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "4px 0px -4px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "dictCredits": {
+   "still": {
+    "tag": "button",
+    "text": "署名与隐私",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-credits-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 834.8,
+     "y": 712.7,
+     "w": 97,
+     "h": 28
+    },
+    "textBox": {
+     "x": 842.8,
+     "y": 718.2,
+     "w": 65,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 911.8,
+     "y": 720.7,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 914.6,
+     "y": 725,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "18.85px",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "-4px -8px -4px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "署名与隐私",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "署名与隐私",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-credits-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 834.8,
+     "y": 712.7,
+     "w": 97,
+     "h": 28
+    },
+    "textBox": {
+     "x": 842.8,
+     "y": 718.2,
+     "w": 65,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 911.8,
+     "y": 720.7,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 914.6,
+     "y": 725,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "18.85px",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "-4px -8px -4px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "署名与隐私",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-credits-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 834.8,
+     "y": 712.7,
+     "w": 97,
+     "h": 28
+    },
+    "textBox": {
+     "x": 842.8,
+     "y": 718.2,
+     "w": 65,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 911.8,
+     "y": 720.7,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 914.6,
+     "y": 725,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "18.85px",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "-4px -8px -4px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "vocabExpanded": {
+   "still": {
+    "tag": "button",
+    "text": "收起进度",
+    "cls": "eqb-button vocabulary-progress-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 1316,
+     "y": 219,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 1324,
+     "y": 225,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "-4px -8px -4px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "收起进度",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "收起进度",
+    "cls": "eqb-button vocabulary-progress-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 1316,
+     "y": 219,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 1324,
+     "y": 225,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "-4px -8px -4px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "收起进度",
+    "cls": "eqb-button vocabulary-progress-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 1316,
+     "y": 219,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 1324,
+     "y": 225,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "-4px -8px -4px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "studentCancel": {
+   "still": {
+    "tag": "button",
+    "text": "取消",
+    "cls": "eqb-button vocabulary-student-add-button",
+    "tone": "strong",
+    "size": "lg",
+    "expanded": "true",
+    "box": {
+     "x": 1366,
+     "y": 138,
+     "w": 50,
+     "h": 36
+    },
+    "textBox": {
+     "x": 1378,
+     "y": 148,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "取消",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "取消",
+    "cls": "eqb-button vocabulary-student-add-button",
+    "tone": "strong",
+    "size": "lg",
+    "expanded": "true",
+    "box": {
+     "x": 1366,
+     "y": 138,
+     "w": 50,
+     "h": 36
+    },
+    "textBox": {
+     "x": 1378,
+     "y": 148,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "取消",
+    "cls": "eqb-button vocabulary-student-add-button",
+    "tone": "strong",
+    "size": "lg",
+    "expanded": "true",
+    "box": {
+     "x": 1366,
+     "y": 138,
+     "w": 50,
+     "h": 36
+    },
+    "textBox": {
+     "x": 1378,
+     "y": 148,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "replay": {
+   "still": {
+    "tag": "button",
+    "text": "重播 a / an 的美音 空格",
+    "cls": "eqb-button vocabulary-word-replay",
+    "tone": "subtle",
+    "size": "md",
+    "box": {
+     "x": 750.9,
+     "y": 377,
+     "w": 114,
+     "h": 32
+    },
+    "textBox": {
+     "x": 784.9,
+     "y": 384,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 762.9,
+     "y": 385,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 764.5,
+     "y": 387.5,
+     "w": 12.7,
+     "h": 11
+    },
+    "kbdBox": {
+     "x": 816.9,
+     "y": 382,
+     "w": 36,
+     "h": 22,
+     "border": "1px/2px rgb(197, 211, 218)",
+     "font": "12px/500",
+     "bg": "rgb(241, 245, 247)"
+    },
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(90, 108, 117)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "重播 a / an 的美音",
+    "nameFrom": "contents",
+    "description": null,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "重播 a / an 的美音 空格",
+    "cls": "eqb-button vocabulary-word-replay",
+    "tone": "subtle",
+    "size": "md",
+    "box": {
+     "x": 750.9,
+     "y": 377,
+     "w": 114,
+     "h": 32
+    },
+    "textBox": {
+     "x": 784.9,
+     "y": 384,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 762.9,
+     "y": 385,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 764.5,
+     "y": 387.5,
+     "w": 12.7,
+     "h": 11
+    },
+    "kbdBox": {
+     "x": 816.9,
+     "y": 382,
+     "w": 36,
+     "h": 22,
+     "border": "1px/2px rgb(197, 211, 218)",
+     "font": "12px/500",
+     "bg": "rgb(241, 245, 247)"
+    },
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "重播 a / an 的美音 空格",
+    "cls": "eqb-button vocabulary-word-replay",
+    "tone": "subtle",
+    "size": "md",
+    "box": {
+     "x": 750.9,
+     "y": 377,
+     "w": 114,
+     "h": 32
+    },
+    "textBox": {
+     "x": 784.9,
+     "y": 384,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 762.9,
+     "y": 385,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 764.5,
+     "y": 387.5,
+     "w": 12.7,
+     "h": 11
+    },
+    "kbdBox": {
+     "x": 816.9,
+     "y": 382,
+     "w": 36,
+     "h": 22,
+     "border": "1px/2px rgb(197, 211, 218)",
+     "font": "12px/500",
+     "bg": "rgb(241, 245, 247)"
+    },
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "pron": {
+   "still": {
+    "tag": "button",
+    "text": "/eɪ, ə; æn, ən/",
+    "cls": "eqb-button vocabulary-pronunciation",
+    "tone": "subtle",
+    "size": "md",
+    "box": {
+     "x": 669.6,
+     "y": 482.7,
+     "w": 132.8,
+     "h": 32
+    },
+    "textBox": {
+     "x": 703.6,
+     "y": 490.7,
+     "w": 86.8,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 681.6,
+     "y": 490.7,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 683.2,
+     "y": 493.2,
+     "w": 12.7,
+     "h": 11
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(90, 108, 117)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px -12px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "/eɪ, ə; æn, ən/",
+    "nameFrom": "contents",
+    "description": "播放美音",
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "/eɪ, ə; æn, ən/",
+    "cls": "eqb-button vocabulary-pronunciation",
+    "tone": "subtle",
+    "size": "md",
+    "box": {
+     "x": 669.6,
+     "y": 482.7,
+     "w": 132.8,
+     "h": 32
+    },
+    "textBox": {
+     "x": 703.6,
+     "y": 490.7,
+     "w": 86.8,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 681.6,
+     "y": 490.7,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 683.2,
+     "y": 493.2,
+     "w": 12.7,
+     "h": 11
+    },
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px -12px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "/eɪ, ə; æn, ən/",
+    "cls": "eqb-button vocabulary-pronunciation",
+    "tone": "subtle",
+    "size": "md",
+    "box": {
+     "x": 669.6,
+     "y": 482.7,
+     "w": 132.8,
+     "h": 32
+    },
+    "textBox": {
+     "x": 703.6,
+     "y": 490.7,
+     "w": 86.8,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 681.6,
+     "y": 490.7,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 683.2,
+     "y": 493.2,
+     "w": 12.7,
+     "h": 11
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px -12px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "pronAlign": {
+   "keyLeft": 669.59,
+   "iconSvgLeft": 681.59,
+   "iconShapeLeft": 683.18,
+   "meaningsLeft": 681.59,
+   "meaningsTextLeft": 681.59,
+   "blockContentLeft": 681.59
+  },
+  "errors": [
+   "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+   "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+   "console: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+   "console: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 409 (Conflict)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 409 (Conflict)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 409 (Conflict)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ]
+ },
+ "w390": {
+  "missing": [
+   "vocab-download: 页面上没有「下载」键"
+  ],
+  "filterOpen": {
+   "open": {
+    "tag": "button",
+    "text": "筛选",
+    "cls": "eqb-button concierge-command-filter-toggle",
+    "tone": "strong",
+    "size": "lg",
+    "expanded": "true",
+    "box": {
+     "x": 24,
+     "y": 230.5,
+     "w": 50,
+     "h": 36
+    },
+    "textBox": {
+     "x": 36,
+     "y": 240.5,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "筛选",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   }
+  },
+  "moreExpanded": {
+   "still": {
+    "tag": "button",
+    "text": "收起筛选",
+    "cls": "eqb-button concierge-filter-more",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 16,
+     "y": 498.5,
+     "w": 81,
+     "h": 28
+    },
+    "textBox": {
+     "x": 24,
+     "y": 504.5,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "收起筛选",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "收起筛选",
+    "cls": "eqb-button concierge-filter-more",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 16,
+     "y": 498.5,
+     "w": 81,
+     "h": 28
+    },
+    "textBox": {
+     "x": 24,
+     "y": 504.5,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "收起筛选",
+    "cls": "eqb-button concierge-filter-more",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 16,
+     "y": 498.5,
+     "w": 81,
+     "h": 28
+    },
+    "textBox": {
+     "x": 24,
+     "y": 504.5,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "rowMenuOpen": {
+   "open": {
+    "tag": "button",
+    "text": "更多操作",
+    "cls": "eqb-button concierge-group-row-menu-trigger",
+    "tone": "subtle",
+    "size": "sm",
+    "expanded": "true",
+    "haspopup": "menu",
+    "box": {
+     "x": 324,
+     "y": 457.7,
+     "w": 28,
+     "h": 28
+    },
+    "textBox": null,
+    "iconBox": {
+     "x": 330,
+     "y": 463.7,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 332.7,
+     "y": 470.6,
+     "w": 10.7,
+     "h": 2.3
+    },
+    "kbdBox": null,
+    "bg": "rgb(220, 230, 235)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 0px 0px 0px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": "fluid-hover-list concierge-group-index"
+   },
+   "ax": {
+    "role": "button",
+    "name": "更多操作",
+    "nameFrom": "attribute",
+    "description": null,
+    "expanded": true,
+    "focusable": true,
+    "hasPopup": "menu"
+   }
+  },
+  "homeRetry": {
+   "still": {
+    "tag": "button",
+    "text": "重试",
+    "cls": "eqb-button similar-btn",
+    "tone": "strong",
+    "size": "sm",
+    "box": {
+     "x": 36,
+     "y": 592.3,
+     "w": 42,
+     "h": 28
+    },
+    "textBox": {
+     "x": 44,
+     "y": 598.3,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": "fluid-hover-list concierge-group-index"
+   },
+   "ax": {
+    "role": "button",
+    "name": "重试",
+    "nameFrom": "contents",
+    "description": null,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "重试",
+    "cls": "eqb-button similar-btn",
+    "tone": "strong",
+    "size": "sm",
+    "box": {
+     "x": 36,
+     "y": 592.3,
+     "w": 42,
+     "h": 28
+    },
+    "textBox": {
+     "x": 44,
+     "y": 598.3,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": "fluid-hover-list concierge-group-index"
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "重试",
+    "cls": "eqb-button similar-btn",
+    "tone": "strong",
+    "size": "sm",
+    "box": {
+     "x": 36,
+     "y": 592.3,
+     "w": 42,
+     "h": 28
+    },
+    "textBox": {
+     "x": 44,
+     "y": 598.3,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": "fluid-hover-list concierge-group-index"
+   }
+  },
+  "detailRetry": {
+   "still": {
+    "tag": "button",
+    "text": "重试",
+    "cls": "eqb-button similar-btn",
+    "tone": "strong",
+    "size": "sm",
+    "box": {
+     "x": 48,
+     "y": 453.8,
+     "w": 42,
+     "h": 28
+    },
+    "textBox": {
+     "x": 56,
+     "y": 459.8,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "重试",
+    "nameFrom": "contents",
+    "description": null,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "重试",
+    "cls": "eqb-button similar-btn",
+    "tone": "strong",
+    "size": "sm",
+    "box": {
+     "x": 48,
+     "y": 453.8,
+     "w": 42,
+     "h": 28
+    },
+    "textBox": {
+     "x": 56,
+     "y": 459.8,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "重试",
+    "cls": "eqb-button similar-btn",
+    "tone": "strong",
+    "size": "sm",
+    "box": {
+     "x": 48,
+     "y": 453.8,
+     "w": 42,
+     "h": 28
+    },
+    "textBox": {
+     "x": 56,
+     "y": 459.8,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "draftMoreOpen": {
+   "open": {
+    "tag": "button",
+    "text": "草稿卷更多信息",
+    "cls": "eqb-button draft-more-menu-trigger",
+    "tone": "subtle",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 23,
+     "y": 64,
+     "w": 28,
+     "h": 28
+    },
+    "textBox": null,
+    "iconBox": {
+     "x": 29,
+     "y": 70,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 31.7,
+     "y": 76.8,
+     "w": 10.7,
+     "h": 2.3
+    },
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 0px 0px 0px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": "fluid-hover-list topbar-actions"
+   },
+   "ax": {
+    "role": "button",
+    "name": "草稿卷更多信息",
+    "nameFrom": "attribute",
+    "description": "学生 / 最近草稿卷",
+    "expanded": true,
+    "focusable": true
+   }
+  },
+  "draftItemMenuOpen": {
+   "open": {
+    "tag": "button",
+    "text": "更多题组操作",
+    "cls": "eqb-button",
+    "tone": "strong",
+    "size": "md",
+    "expanded": "true",
+    "haspopup": "menu",
+    "box": {
+     "x": 346,
+     "y": 278.8,
+     "w": 32,
+     "h": 32
+    },
+    "textBox": null,
+    "iconBox": {
+     "x": 354,
+     "y": 286.8,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 356.7,
+     "y": 293.6,
+     "w": 10.7,
+     "h": 2.3
+    },
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 0px 0px 0px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "4px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "更多题组操作",
+    "nameFrom": "attribute",
+    "description": null,
+    "expanded": true,
+    "focusable": true,
+    "hasPopup": "menu"
+   }
+  },
+  "draftExportOpen": {
+   "open": {
+    "tag": "button",
+    "text": "导出",
+    "cls": "eqb-button",
+    "tone": "primary",
+    "size": "md",
+    "expanded": "true",
+    "haspopup": "menu",
+    "box": {
+     "x": 61,
+     "y": 62,
+     "w": 50,
+     "h": 32
+    },
+    "textBox": {
+     "x": 73,
+     "y": 70,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(114, 191, 164)",
+    "color": "rgb(25, 29, 24)",
+    "font": "13px/600",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": "fluid-hover-list topbar-actions"
+   },
+   "ax": {
+    "role": "button",
+    "name": "导出",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true,
+    "hasPopup": "menu"
+   }
+  },
+  "overviewExpanded": {
+   "still": {
+    "tag": "button",
+    "text": "文章简介",
+    "cls": "eqb-button paper-browse-reading-overview-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 293,
+     "y": 17,
+     "w": 88,
+     "h": 28
+    },
+    "textBox": {
+     "x": 301,
+     "y": 23,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 357,
+     "y": 23,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 360.7,
+     "y": 28.8,
+     "w": 8.7,
+     "h": 4
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px -8px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "文章简介",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "文章简介",
+    "cls": "eqb-button paper-browse-reading-overview-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 293,
+     "y": 17,
+     "w": 88,
+     "h": 28
+    },
+    "textBox": {
+     "x": 301,
+     "y": 23,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 357,
+     "y": 23,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 360.7,
+     "y": 28.8,
+     "w": 8.7,
+     "h": 4
+    },
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px -8px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "文章简介",
+    "cls": "eqb-button paper-browse-reading-overview-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 293,
+     "y": 17,
+     "w": 88,
+     "h": 28
+    },
+    "textBox": {
+     "x": 301,
+     "y": 23,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 357,
+     "y": 23,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 360.7,
+     "y": 28.8,
+     "w": 8.7,
+     "h": 4
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px -8px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "sevenFitLine": {
+   "tag": "p",
+   "text": "首段列举 AI 在个性化参观、文物保护、揭示故事等多方面的作用，C 用 In s",
+   "cls": "pi-seven-fit-line",
+   "box": {
+    "x": 135.2,
+    "y": 397,
+    "w": 226.8,
+    "h": 80.6
+   },
+   "textBox": {
+    "x": 135.2,
+    "y": 399,
+    "w": 223,
+    "h": 76.4
+   },
+   "iconBox": null,
+   "shapeBox": null,
+   "kbdBox": null,
+   "bg": "rgba(0, 0, 0, 0)",
+   "color": "rgb(75, 64, 53)",
+   "font": "13px/400",
+   "lineHeight": "20.15px",
+   "deco": "none",
+   "pad": "0px 0px 0px 0px",
+   "margin": "0px 0px 8px 0px",
+   "radius": "0px",
+   "gap": "normal",
+   "border": null,
+   "opacity": "1",
+   "outline": null,
+   "cursor": "auto",
+   "inFluidHoverList": false
+  },
+  "sevenDetails": {
+   "still": {
+    "tag": "button",
+    "text": "展开细节",
+    "cls": "eqb-button pi-seven-details-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "false",
+    "box": {
+     "x": 127.2,
+     "y": 512.6,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 135.2,
+     "y": 518.6,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 8px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "展开细节",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": false,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "展开细节",
+    "cls": "eqb-button pi-seven-details-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "false",
+    "box": {
+     "x": 127.2,
+     "y": 512.6,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 135.2,
+     "y": 518.6,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 8px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "展开细节",
+    "cls": "eqb-button pi-seven-details-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "false",
+    "box": {
+     "x": 127.2,
+     "y": 512.6,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 135.2,
+     "y": 518.6,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 8px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "sevenDetailsExpanded": {
+   "still": {
+    "tag": "button",
+    "text": "收起细节",
+    "cls": "eqb-button pi-seven-details-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 127.2,
+     "y": 512.6,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 135.2,
+     "y": 518.6,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 8px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "收起细节",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "收起细节",
+    "cls": "eqb-button pi-seven-details-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 127.2,
+     "y": 512.6,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 135.2,
+     "y": 518.6,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 8px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "收起细节",
+    "cls": "eqb-button pi-seven-details-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 127.2,
+     "y": 407.6,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 135.2,
+     "y": 413.6,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px 8px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "dictRare": {
+   "still": {
+    "tag": "button",
+    "text": "收起",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-rare-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 43,
+     "y": 636.5,
+     "w": 58,
+     "h": 28
+    },
+    "textBox": {
+     "x": 51,
+     "y": 642.5,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 81,
+     "y": 644.5,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 83.8,
+     "y": 648.9,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px -4px 14px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "收起",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "收起",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-rare-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 43,
+     "y": 636.5,
+     "w": 58,
+     "h": 28
+    },
+    "textBox": {
+     "x": 51,
+     "y": 642.5,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 81,
+     "y": 644.5,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 83.8,
+     "y": 648.9,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px -4px 14px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "收起",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-rare-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 43,
+     "y": 636.5,
+     "w": 58,
+     "h": 28
+    },
+    "textBox": {
+     "x": 51,
+     "y": 642.5,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 81,
+     "y": 644.5,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 83.8,
+     "y": 648.9,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "0px 0px -4px 14px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "dictDetail": {
+   "still": {
+    "tag": "button",
+    "text": "收起解释",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-detail-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 21,
+     "y": 661.5,
+     "w": 86,
+     "h": 28
+    },
+    "textBox": {
+     "x": 47,
+     "y": 667.5,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 29,
+     "y": 669.5,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 31.8,
+     "y": 673.9,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "4px 0px -4px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "收起解释",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "收起解释",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-detail-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 21,
+     "y": 661.5,
+     "w": 86,
+     "h": 28
+    },
+    "textBox": {
+     "x": 47,
+     "y": 667.5,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 29,
+     "y": 669.5,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 31.8,
+     "y": 673.9,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "4px 0px -4px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "收起解释",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-detail-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 21,
+     "y": 661.5,
+     "w": 86,
+     "h": 28
+    },
+    "textBox": {
+     "x": 47,
+     "y": 667.5,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 29,
+     "y": 669.5,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 31.8,
+     "y": 673.9,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "4px 0px -4px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "dictCredits": {
+   "still": {
+    "tag": "button",
+    "text": "署名与隐私",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-credits-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 246,
+     "y": 673.5,
+     "w": 97,
+     "h": 28
+    },
+    "textBox": {
+     "x": 254,
+     "y": 679.1,
+     "w": 65,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 323,
+     "y": 681.5,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 325.8,
+     "y": 685.9,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "18.85px",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "-4px -8px -4px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "署名与隐私",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "署名与隐私",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-credits-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 246,
+     "y": 673.5,
+     "w": 97,
+     "h": 28
+    },
+    "textBox": {
+     "x": 254,
+     "y": 679.1,
+     "w": 65,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 323,
+     "y": 681.5,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 325.8,
+     "y": 685.9,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "18.85px",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "-4px -8px -4px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "署名与隐私",
+    "cls": "eqb-button paper-dictionary-text-toggle paper-dictionary-credits-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 246,
+     "y": 673.5,
+     "w": 97,
+     "h": 28
+    },
+    "textBox": {
+     "x": 254,
+     "y": 679.1,
+     "w": 65,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 323,
+     "y": 681.5,
+     "w": 12,
+     "h": 12
+    },
+    "shapeBox": {
+     "x": 325.8,
+     "y": 685.9,
+     "w": 6.5,
+     "h": 3
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "18.85px",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "-4px -8px -4px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "vocabExpanded": {
+   "still": {
+    "tag": "button",
+    "text": "收起进度",
+    "cls": "eqb-button vocabulary-progress-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 6,
+     "y": 366,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 14,
+     "y": 372,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(63, 82, 91)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "-4px 0px -4px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "收起进度",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "收起进度",
+    "cls": "eqb-button vocabulary-progress-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 6,
+     "y": 366,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 14,
+     "y": 372,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "-4px 0px -4px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "收起进度",
+    "cls": "eqb-button vocabulary-progress-toggle",
+    "tone": "quiet",
+    "size": "sm",
+    "expanded": "true",
+    "box": {
+     "x": 6,
+     "y": 366,
+     "w": 68,
+     "h": 28
+    },
+    "textBox": {
+     "x": 14,
+     "y": 372,
+     "w": 52,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 8px 0px 8px",
+    "margin": "-4px 0px -4px -8px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "studentCancel": {
+   "still": {
+    "tag": "button",
+    "text": "取消",
+    "cls": "eqb-button vocabulary-student-add-button",
+    "tone": "strong",
+    "size": "lg",
+    "expanded": "true",
+    "box": {
+     "x": 326,
+     "y": 285,
+     "w": 50,
+     "h": 36
+    },
+    "textBox": {
+     "x": 338,
+     "y": 295,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "取消",
+    "nameFrom": "contents",
+    "description": null,
+    "expanded": true,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "取消",
+    "cls": "eqb-button vocabulary-student-add-button",
+    "tone": "strong",
+    "size": "lg",
+    "expanded": "true",
+    "box": {
+     "x": 326,
+     "y": 285,
+     "w": 50,
+     "h": 36
+    },
+    "textBox": {
+     "x": 338,
+     "y": 295,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "取消",
+    "cls": "eqb-button vocabulary-student-add-button",
+    "tone": "strong",
+    "size": "lg",
+    "expanded": "true",
+    "box": {
+     "x": 326,
+     "y": 285,
+     "w": 50,
+     "h": 36
+    },
+    "textBox": {
+     "x": 338,
+     "y": 295,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": null,
+    "shapeBox": null,
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "replay": {
+   "still": {
+    "tag": "button",
+    "text": "重播 a / an 的美音 空格",
+    "cls": "eqb-button vocabulary-word-replay",
+    "tone": "subtle",
+    "size": "md",
+    "box": {
+     "x": 138,
+     "y": 626.4,
+     "w": 114,
+     "h": 32
+    },
+    "textBox": {
+     "x": 172,
+     "y": 633.4,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 150,
+     "y": 634.4,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 151.6,
+     "y": 636.9,
+     "w": 12.7,
+     "h": 11
+    },
+    "kbdBox": {
+     "x": 204,
+     "y": 631.4,
+     "w": 36,
+     "h": 22,
+     "border": "1px/2px rgb(197, 211, 218)",
+     "font": "12px/500",
+     "bg": "rgb(241, 245, 247)"
+    },
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(90, 108, 117)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "重播 a / an 的美音",
+    "nameFrom": "contents",
+    "description": null,
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "重播 a / an 的美音 空格",
+    "cls": "eqb-button vocabulary-word-replay",
+    "tone": "subtle",
+    "size": "md",
+    "box": {
+     "x": 138,
+     "y": 626.4,
+     "w": 114,
+     "h": 32
+    },
+    "textBox": {
+     "x": 172,
+     "y": 633.4,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 150,
+     "y": 634.4,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 151.6,
+     "y": 636.9,
+     "w": 12.7,
+     "h": 11
+    },
+    "kbdBox": {
+     "x": 204,
+     "y": 631.4,
+     "w": 36,
+     "h": 22,
+     "border": "1px/2px rgb(197, 211, 218)",
+     "font": "12px/500",
+     "bg": "rgb(241, 245, 247)"
+    },
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "重播 a / an 的美音 空格",
+    "cls": "eqb-button vocabulary-word-replay",
+    "tone": "subtle",
+    "size": "md",
+    "box": {
+     "x": 138,
+     "y": 626.4,
+     "w": 114,
+     "h": 32
+    },
+    "textBox": {
+     "x": 172,
+     "y": 633.4,
+     "w": 26,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 150,
+     "y": 634.4,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 151.6,
+     "y": 636.9,
+     "w": 12.7,
+     "h": 11
+    },
+    "kbdBox": {
+     "x": 204,
+     "y": 631.4,
+     "w": 36,
+     "h": 22,
+     "border": "1px/2px rgb(197, 211, 218)",
+     "font": "12px/500",
+     "bg": "rgb(241, 245, 247)"
+    },
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px 0px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "pron": {
+   "still": {
+    "tag": "button",
+    "text": "/eɪ, ə; æn, ən/",
+    "cls": "eqb-button vocabulary-pronunciation",
+    "tone": "subtle",
+    "size": "md",
+    "box": {
+     "x": 40,
+     "y": 528.4,
+     "w": 132.8,
+     "h": 32
+    },
+    "textBox": {
+     "x": 74,
+     "y": 536.4,
+     "w": 86.8,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 52,
+     "y": 536.4,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 53.6,
+     "y": 538.9,
+     "w": 12.7,
+     "h": 11
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(90, 108, 117)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px -12px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "ax": {
+    "role": "button",
+    "name": "/eɪ, ə; æn, ən/",
+    "nameFrom": "contents",
+    "description": "播放美音",
+    "focusable": true
+   },
+   "hover": {
+    "tag": "button",
+    "text": "/eɪ, ə; æn, ən/",
+    "cls": "eqb-button vocabulary-pronunciation",
+    "tone": "subtle",
+    "size": "md",
+    "box": {
+     "x": 40,
+     "y": 528.4,
+     "w": 132.8,
+     "h": 32
+    },
+    "textBox": {
+     "x": 74,
+     "y": 536.4,
+     "w": 86.8,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 52,
+     "y": 536.4,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 53.6,
+     "y": 538.9,
+     "w": 12.7,
+     "h": 11
+    },
+    "kbdBox": null,
+    "bg": "rgb(230, 237, 240)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px -12px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": null,
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   },
+   "focusIsKey": true,
+   "focus": {
+    "tag": "button",
+    "text": "/eɪ, ə; æn, ən/",
+    "cls": "eqb-button vocabulary-pronunciation",
+    "tone": "subtle",
+    "size": "md",
+    "box": {
+     "x": 40,
+     "y": 528.4,
+     "w": 132.8,
+     "h": 32
+    },
+    "textBox": {
+     "x": 74,
+     "y": 536.4,
+     "w": 86.8,
+     "h": 16
+    },
+    "iconBox": {
+     "x": 52,
+     "y": 536.4,
+     "w": 16,
+     "h": 16
+    },
+    "shapeBox": {
+     "x": 53.6,
+     "y": 538.9,
+     "w": 12.7,
+     "h": 11
+    },
+    "kbdBox": null,
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(27, 43, 51)",
+    "font": "13px/500",
+    "lineHeight": "normal",
+    "deco": "none",
+    "pad": "0px 12px 0px 12px",
+    "margin": "0px 0px 0px -12px",
+    "radius": "8px",
+    "gap": "6px",
+    "border": null,
+    "opacity": "1",
+    "outline": "2px rgb(41, 66, 77) @2px",
+    "cursor": "pointer",
+    "inFluidHoverList": false
+   }
+  },
+  "pronAlign": {
+   "keyLeft": 40,
+   "iconSvgLeft": 52,
+   "iconShapeLeft": 53.59,
+   "meaningsLeft": 52,
+   "meaningsTextLeft": 52,
+   "blockContentLeft": 52
+  },
+  "errors": [
+   "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+   "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+   "console: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+   "console: Failed to load resource: the server responded with a status of 500 (Internal Server Error)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 409 (Conflict)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 409 (Conflict)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+   "console: Failed to load resource: the server responded with a status of 409 (Conflict)",
+   "console: Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ]
+ }
+}

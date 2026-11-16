@@ -59,119 +59,33 @@
   gap: 8px;
 }
 
-.vocabulary-student-switcher label {
-  display: grid;
-  min-width: 0;
+/* 课程、学生两个下拉和「学生姓名」换成 shared-ui/Field（字段构件第二轮 2026-11-15）：标签、框、焦点归 field.css，
+ * 原来这里的 label / select / input 几条（38 高、14 字、深一档的边）删了。这里只留学生下拉在一行里占多宽。 */
+.vocabulary-student-switcher > .vocabulary-student-picker {
   flex: 1 1 auto;
-  gap: 5px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.vocabulary-program-switcher {
-  display: grid;
-  gap: 5px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.vocabulary-program-switcher select {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 38px;
-  padding: 7px 30px 7px 10px;
-  border: 1px solid var(--line-strong);
-  border-radius: 6px;
-  background: var(--panel);
-  color: var(--ink-strong);
-  font: inherit;
-  font-size: 14px;
-}
-
-.vocabulary-student-switcher select,
-.vocabulary-student-create input {
-  box-sizing: border-box;
-  min-height: 38px;
-  border: 1px solid var(--line-strong);
-  border-radius: 6px;
-  background: var(--panel);
-  color: var(--ink-strong);
-  font: inherit;
-  font-size: 14px;
-}
-
-.vocabulary-student-switcher select {
-  width: 100%;
-  padding: 7px 30px 7px 10px;
-}
-
-.vocabulary-student-add-button,
-.vocabulary-student-create button {
-  min-height: 38px;
-  padding: 7px 11px;
-  border: 1px solid var(--line-strong);
-  border-radius: 6px;
-  background: var(--panel);
-  color: var(--ink);
-  font: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  white-space: nowrap;
 }
 
 .vocabulary-student-create {
   padding: 10px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--surface);
 }
 
-.vocabulary-student-create > label {
-  display: block;
-  margin-bottom: 6px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-}
+/* 「学生姓名」和「保存」一行：框和键都是 36 高，归 TextField 的 trailing。出错那一行归 field.css（字不上红，红只在框边上），
+ * 原来这里红字的 p 那条删了。 */
 
-.vocabulary-student-create > div {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 8px;
-}
-
-.vocabulary-student-create input {
-  width: 100%;
-  padding: 7px 10px;
-}
-
-.vocabulary-student-create p {
-  margin: 8px 0 0;
-  color: var(--eqb-color-danger);
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-.vocabulary-student-switcher select:focus-visible,
-.vocabulary-program-switcher select:focus-visible,
-.vocabulary-student-add-button:focus-visible,
-.vocabulary-student-create input:focus-visible,
-.vocabulary-student-create button:focus-visible {
-  border-color: var(--line-strong);
-  outline: 2px solid var(--action);
-  outline-offset: 2px;
-}
-
-.vocabulary-overall-progress span,
+/* 「.vocabulary-overall-progress > span」只管进度那行字。原来写成后代 span，会连「查看 / 调整进度」键（Owner 2026-11-14 决定 #1
+ * 换成 Button 以后）里的 .eqb-button-label 也染成淡色 12px/600，盖过 button.css 的淡墨小号；改成只管直接子元素。
+ * 特指度不变，仍是 (0,1,1)。 */
+.vocabulary-overall-progress > span,
 .vocabulary-collection-heading span {
   color: var(--muted);
   font-size: 12px;
   font-weight: 600;
 }
 
-.vocabulary-overall-progress span {
+.vocabulary-overall-progress > span {
   text-align: right;
 }
 
@@ -200,19 +114,15 @@
   background: var(--action);
 }
 
+/* 「查看 / 调整进度」：Owner 2026-11-14 决定 #1 换成 Button 淡墨小号（quiet sm），原来手写的 12px/600 墨色和焦点框删了，
+ * 改由 button.css 管。宽屏靠右：右边用负边距抵掉 sm 的右内边距，字的右边还贴齐进度条的右边；
+ * 上下各收 --eqb-space-1，抵掉一部分按钮（28）比原来（约 21）高出来的部分。 */
 .vocabulary-progress-toggle {
   justify-self: end;
-  padding: 2px 0;
-  border: 0;
-  background: transparent;
-  color: var(--eqb-color-text);
-  font: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1.4;
+  margin-block: calc(-1 * var(--eqb-space-1));
+  margin-right: calc(-1 * var(--eqb-space-2));
 }
 
-.vocabulary-progress-toggle:focus-visible,
 .vocabulary-progress-explorer button:focus-visible {
   outline: 2px solid var(--action);
   outline-offset: 2px;
@@ -255,7 +165,7 @@
   justify-content: flex-start;
   margin-top: 20px;
   padding: 14px 16px;
-  border-radius: 6px;
+  border-radius: 12px;
   background: var(--surface);
 }
 
@@ -285,7 +195,7 @@
   flex: 0 0 auto;
   padding: 7px 12px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--muted);
   font: inherit;
@@ -345,7 +255,7 @@
   min-height: 44px;
   padding: 7px 9px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
   font: inherit;
@@ -406,10 +316,10 @@
   z-index: 3;
   margin-bottom: 8px;
   padding: 16px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--panel);
-  box-shadow: var(--eqb-shadow-floating);
+  box-shadow: var(--elev-2);
 }
 
 .vocabulary-progress-selection > div {
@@ -422,9 +332,10 @@
   font-size: 14px;
 }
 
-.vocabulary-progress-selection span,
-.vocabulary-progress-selection small,
-.vocabulary-progress-status {
+/* 只管左边说明文字里的 span。原来写成 .vocabulary-progress-selection span（0,1,1），会压过 button.css 的
+ * .eqb-button-label（0,1,0），把「确认从这里开始」的字改成 12px 次要灰；构件厂第 4 步第十页收窄到左边那块。 */
+.vocabulary-progress-selection > div span,
+.vocabulary-progress-selection small {
   color: var(--muted);
   font-size: 12px;
   line-height: 1.5;
@@ -434,10 +345,10 @@
   color: var(--eqb-color-danger);
 }
 
-.vocabulary-progress-status {
-  margin: 14px 0 0;
-  color: var(--eqb-color-text);
-  font-weight: 600;
+/* 进度改好以后的那一行：样子归 shared-ui/Notice（2026-11-15，原来是墨色 600 字）。这里只留上面隔 12（原来 14，取最近的间距档）。
+ * 覆盖：本条 (0,2,0) 盖过 .eqb-notice (0,1,0) 的 margin: 0。 */
+.eqb-notice.vocabulary-progress-status {
+  margin-top: var(--eqb-space-3);
 }
 
 .vocabulary-review-layout {
@@ -496,7 +407,7 @@
   gap: 10px;
   min-height: 48px;
   padding: 8px;
-  border-radius: 6px;
+  border-radius: 12px;
   color: var(--muted);
 }
 
@@ -580,20 +491,6 @@
   gap: 12px;
 }
 
-.vocabulary-stage-meta button {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  min-height: 32px;
-  padding: 5px 8px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: transparent;
-  color: var(--muted);
-  font: inherit;
-  font-weight: 600;
-}
-
 .vocabulary-word-block {
   display: flex;
   align-items: baseline;
@@ -618,22 +515,12 @@
   font-style: italic;
 }
 
-.vocabulary-word-replay {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  min-height: 36px;
-  padding: 6px 8px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--panel);
-  color: var(--muted);
-  font: inherit;
-  font-size: 14px;
-  font-weight: 600;
-}
-
+/* 「重播」：Owner 2026-11-14 第 21 条换成 Button 次要灰中号（subtle md）。原来的描边、白底、内边距、14/600 删了，交给 button.css。
+ * 键帽在 Button 的字标签里：标签为了省略号是 overflow: hidden，键帽是行内框时上下边会被裁掉，
+ * 所以排成 inline-block 撑开行高；和「重播」两个字的间距是原来的 6px（--eqb-space-1 的 1.5 倍）。 */
 .vocabulary-word-replay kbd {
+  display: inline-block;
+  margin-left: calc(var(--eqb-space-1) * 1.5);
   padding: 1px 5px;
   border: 1px solid var(--line-strong);
   border-bottom-width: 2px;
@@ -713,17 +600,11 @@
   padding: 32px;
 }
 
+/* 音标发音键是 Button 次要灰中号（Owner 2026-11-14 决定 #2 去掉描边），这里管它在竖排里不被拉宽。
+ * 第 22 条：左边用负边距抵掉 md 的左内边距（--eqb-space-3），喇叭图标的左边和下面释义的左边对齐（实测见 batch-d README）。 */
 .vocabulary-pronunciation {
-  display: inline-flex;
-  align-items: center;
   align-self: flex-start;
-  gap: 8px;
-  padding: 7px 10px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--panel);
-  color: var(--muted);
-  font-size: 14px;
+  margin-left: calc(-1 * var(--eqb-space-3));
 }
 
 .vocabulary-core-meanings {
@@ -871,7 +752,7 @@
   min-height: 48px;
   padding: 0 12px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--panel);
   color: var(--ink);
   font-size: 14px;
@@ -975,10 +856,6 @@
   border-top: 1px solid var(--line);
 }
 
-.vocabulary-collection-actions .ghost-button {
-  min-width: 0;
-}
-
 .vocabulary-completion-state {
   display: flex;
   align-items: center;
@@ -1025,10 +902,10 @@
   display: grid;
   width: 360px;
   padding: 6px;
-  border: 1px solid var(--line-strong);
+  border: 1px solid transparent;
   border-radius: 8px;
   background: var(--panel);
-  box-shadow: var(--eqb-shadow-floating);
+  box-shadow: var(--elev-3);
   transform: translateX(-50%);
 }
 
@@ -1129,7 +1006,9 @@
   font-size: 14px;
 }
 
-.vocabulary-share-download-confirmation span {
+/* 只管说明文字。原来写成 .vocabulary-share-download-confirmation span（0,1,1），会压过 .eqb-button-label（0,1,0），
+ * 把右边两个键的字改成 12px 次要灰；构件厂第 4 步第十页收窄到左边那块。 */
+.vocabulary-share-download-confirmation > div:first-child span {
   color: var(--muted);
   font-size: 12px;
   line-height: 1.5;
@@ -1140,35 +1019,12 @@
   gap: 8px;
 }
 
+/* 「单词纸名称」换成 shared-ui/TextField（字段构件第二轮 2026-11-15），标签、框和「保存名称」那一行的排法归 field.css。
+ * 这里只留多宽、放在哪。原来的 label / input 两条（38 高、14 / 500 字、深一档的边）删了。 */
 .vocabulary-set-title-control {
-  display: grid;
-  gap: 6px;
   width: min(440px, 100%);
   margin: 22px auto 0;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
   text-align: left;
-}
-
-.vocabulary-set-title-control > div {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 8px;
-}
-
-.vocabulary-set-title-control input {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 38px;
-  padding: 7px 10px;
-  border: 1px solid var(--line-strong);
-  border-radius: 6px;
-  background: var(--panel);
-  color: var(--ink-strong);
-  font: inherit;
-  font-size: 14px;
-  font-weight: 500;
 }
 
 .vocabulary-completion-actions > .vocabulary-set-title-control {
@@ -1176,30 +1032,11 @@
   margin-top: 0;
 }
 
+/* 「下载读音」换成 shared-ui/SelectField（标签在左、框在右，字段构件第二轮 2026-11-15）。原来是外面一圈边、里面无边的下拉，
+ * 现在边画在下拉上（和别处字段一样），外圈那几条删了。这里只留不占满、不加外边距。 */
 .vocabulary-completion-actions .vocabulary-print-accent-control {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
   width: auto;
   margin: 0;
-  padding: 0 8px 0 10px;
-  border: 1px solid var(--line);
-  border-radius: 6px;
-  background: var(--panel);
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.vocabulary-completion-actions .vocabulary-print-accent-control select {
-  width: auto;
-  min-height: 34px;
-  padding: 4px 26px 4px 8px;
-  border: 0;
-  background-color: transparent;
-  color: var(--ink-strong);
-  font-size: 14px;
-  font-weight: 500;
 }
 
 .vocabulary-run-setup {
@@ -1213,6 +1050,45 @@
   border-radius: 8px;
   background: var(--panel);
   text-align: center;
+}
+
+/* 过词开始页的灰块（等待第五轮 2026-11-15，RunSetupSkeleton）：容器和各段用开始页同一套 class，这里只管灰块怎么坐进去。
+ * 覆盖：放在字的位置（h2、h3、p、span）的灰块，(0,2,1) 盖过 waiting.css .eqb-skeleton (0,1,0) 的 display: block——
+ * 改成行内块，那一行的高度仍由真规则的字号、行高给，和有字时一样高。 */
+.vocabulary-run-skeleton :is(h2, h3, p, span) > .eqb-skeleton {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 「开始过词」那一排真的是底对齐（align-items: end），灰块照样底对齐；「读音」分段的灰块不缩。
+ * 覆盖：本条 (0,2,0) 和 .vocabulary-run-start-row (0,1,0) 不冲突属性，只是给灰块的「读音」那一格一个宽度。 */
+.vocabulary-run-skeleton .vocabulary-run-start-row > .eqb-field {
+  flex: 0 0 auto;
+}
+
+/* 右上那一栏的灰块（等待第六轮 2026-11-15，HeadingActionsSkeleton）：容器和各段用真栏同一套 class，这里只管灰块怎么坐进去。
+ * 门槛内（还不到 300ms）这一栏照样占着位置、只是看不见，下面开始页那块不会在 300ms 时被推下去。 */
+.vocabulary-heading-skeleton:not([data-shown]) {
+  visibility: hidden;
+}
+
+/* 大号淡底键（「单词复习」「新建学生」）的位置：和大号键一样高（36，button.css .eqb-button[data-size='lg']）、一样的左右内衬，
+ * 灰块放在键上字的位置、居中（「单词复习」在栏里撑满一行，字居中，和真键一样）。 */
+.vocabulary-heading-skeleton-key {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 var(--eqb-space-3);
+}
+
+/* 「查看 / 调整进度」（小号淡墨键，28 高、左右内衬 8，button.css .eqb-button[data-size='sm']）的位置；靠右、上下收边由真键那条
+ * .vocabulary-progress-toggle 给（同一个 class）。 */
+.vocabulary-heading-skeleton-toggle {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 var(--eqb-space-2);
 }
 
 .vocabulary-run-setup > svg {
@@ -1233,19 +1109,10 @@
   line-height: 1.5;
 }
 
-.vocabulary-run-setup label {
-  display: grid;
-  gap: 8px;
-  width: min(220px, 100%);
-  margin: 24px 0 16px;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
+/* 开始页里的字段（目标生词数、直接生成词表、重新打开时的单词纸名称）换成 shared-ui/Field（字段构件第二轮 2026-11-15），
+ * 原来这里管 label 的两条删了。开始页整块居中排字，字段的标签和说明要靠左：本条 (0,2,0) 覆盖外层 text-align: center（继承来的）。 */
+.vocabulary-run-setup .eqb-field {
   text-align: left;
-}
-
-.vocabulary-run-setup label + label {
-  margin-top: 0;
 }
 
 .vocabulary-run-fields {
@@ -1256,10 +1123,6 @@
   margin-top: 24px;
 }
 
-.vocabulary-run-setup .vocabulary-run-fields label {
-  width: 100%;
-  margin: 0;
-}
 
 .vocabulary-run-start-row {
   display: flex;
@@ -1270,89 +1133,10 @@
   margin-top: 16px;
 }
 
-.vocabulary-review-accent-control {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
+/* 「过词读音」换成 SegmentedField（切换组那一轮 2026-11-15）：标签在左（layout inline），样子归 field.css 分段选择。
+ * 原来的外框（2px 内边距、深一档边、8px）、4px 圆角的键、600 字重几条删了。 */
 
-.vocabulary-review-accent-control legend {
-  float: left;
-  padding: 0;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.vocabulary-review-accent-control > div {
-  display: inline-flex;
-  padding: 2px;
-  border: 1px solid var(--line-strong);
-  border-radius: 6px;
-  background: var(--surface);
-}
-
-.vocabulary-review-accent-control button {
-  min-height: 36px;
-  padding: 6px 10px;
-  border: 0;
-  border-radius: 4px;
-  background: transparent;
-  color: var(--muted);
-  font: inherit;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.vocabulary-review-accent-control button.is-selected {
-  background: var(--surface-strong);
-  color: var(--eqb-color-text);
-}
-
-.vocabulary-review-accent-control button:focus-visible,
-.vocabulary-word-replay:focus-visible,
-.vocabulary-stage-meta button:focus-visible,
-.vocabulary-set-title-control input:focus-visible {
-  outline: 2px solid var(--action);
-  outline-offset: 2px;
-}
-
-.vocabulary-run-setup input,
-.vocabulary-run-setup select,
-.vocabulary-run-setup textarea {
-  box-sizing: border-box;
-  width: 100%;
-  min-height: 44px;
-  padding: 8px 12px;
-  border: 1px solid var(--line-strong);
-  border-radius: 6px;
-  background: var(--panel);
-  color: var(--ink-strong);
-  font: inherit;
-  font-size: 16px;
-}
-
-.vocabulary-run-setup textarea {
-  min-height: 112px;
-  line-height: 1.5;
-  resize: vertical;
-}
-
-.vocabulary-run-setup input:focus-visible,
-.vocabulary-run-setup select:focus-visible,
-.vocabulary-run-setup textarea:focus-visible {
-  border-color: var(--line-strong);
-  outline: 2px solid var(--action);
-  outline-offset: 2px;
-}
-
-.vocabulary-run-setup textarea::placeholder {
-  color: var(--muted);
-  opacity: 1;
-}
+/* 开始页的输入框、多行框（原来 44 高、16 字、深一档的边、textarea 至少 112 高）归 field.css 大号（36 高、14 字；多行高跟 rows）。 */
 
 .vocabulary-direct-set {
   width: min(580px, 100%);
@@ -1444,7 +1228,7 @@
 }
 
 .vocabulary-recent-set-list {
-  --fh-radius: 6px;
+  --fh-radius: 8px;
   display: grid;
   gap: 6px;
   margin: 12px 0 0;
@@ -1461,7 +1245,7 @@
   width: 100%;
   padding: 12px 14px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--surface);
   color: var(--muted);
   text-align: left;
@@ -1498,10 +1282,14 @@
   -webkit-line-clamp: 2;
 }
 
-.vocabulary-request-error {
-  margin: 12px 0 0 !important;
-  color: var(--eqb-color-danger) !important;
-  font-size: 14px !important;
+/* 过生词各处的出错行：样子归 shared-ui/Notice（2026-11-15，原来是危险色 14 号字，带三个 !important 压过 .vocabulary-run-setup p）。
+ * 换成 Notice 以后不是 <p> 了，不再被那条压，!important 一起去掉；这里只留上面隔 12。
+ * 类名留着：服务器出单词纸 PDF 时按它读出错的字（server/vocabulary/vocabularyPdfRenderer.mjs）。
+ * 覆盖：本条 (0,2,0) 盖过 .eqb-notice (0,1,0) 的 margin: 0。 */
+/* 等待第五轮（2026-11-15）：下载等过 10 秒的那一行和出错行用同一个位置（两者不同时出），所以并在一条里。 */
+.eqb-notice.vocabulary-request-error,
+.eqb-notice.vocabulary-download-wait {
+  margin-top: var(--eqb-space-3);
 }
 
 .vocabulary-share-ready {
@@ -1569,12 +1357,15 @@
     width: 100%;
   }
 
-  .vocabulary-overall-progress span {
+  .vocabulary-overall-progress > span {
     text-align: left;
   }
 
+  /* 窄屏靠左：负边距换到左边，字的左边贴齐进度那行字的左边。 */
   .vocabulary-progress-toggle {
     justify-self: start;
+    margin-right: 0;
+    margin-left: calc(-1 * var(--eqb-space-2));
   }
 
   .vocabulary-progress-explorer {
@@ -1588,8 +1379,9 @@
     flex-direction: column;
   }
 
-  .vocabulary-progress-explorer-heading .ghost-button,
-  .vocabulary-progress-selection .primary-button {
+  /* 两个键是共用按钮（.eqb-button）；button.css 不给有字的按钮定宽，这里撑满不和它抢。 */
+  .vocabulary-progress-explorer-heading .eqb-button,
+  .vocabulary-progress-selection .eqb-button {
     width: 100%;
   }
 
@@ -1693,11 +1485,13 @@
     flex-direction: column;
   }
 
-  .vocabulary-review-accent-control {
-    justify-content: space-between;
+  /* 窄屏标签在左、分段靠右（照原来的 space-between）。字段是两列格子，控件那一格是 flex 行，往右推。
+   * 本条 (0,2,0) 给 field.css .eqb-field-body 加 justify-content，那边没写，不冲突。 */
+  .vocabulary-review-accent-control .eqb-field-body {
+    justify-content: flex-end;
   }
 
-  .vocabulary-run-start-row > .primary-button {
+  .vocabulary-run-start-row > .eqb-button {
     width: 100%;
   }
 
@@ -1741,11 +1535,6 @@
   .vocabulary-control:hover:not(:disabled) {
     border-color: var(--line-strong);
     background: var(--surface-strong);
-  }
-
-  .vocabulary-pronunciation:hover {
-    border-color: var(--line-strong);
-    color: var(--ink);
   }
 }
 

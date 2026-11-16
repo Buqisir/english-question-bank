@@ -27,6 +27,7 @@ import { ROLE_LABELS } from './grammarFillAnalysisSurfaceAdapter.ts'
 import { ObjectiveTeachingContent } from './ObjectiveTeachingContent.tsx'
 import { DisclosureIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
+import { Chip } from '../../shared-ui/Chip.tsx'
 
 export type GrammarFillAnalysisPanelProps = {
   /** The blank currently focused (null = none selected yet). */
@@ -71,15 +72,16 @@ export function GrammarFillAnalysisPanel({
       {hasActiveQuestion && analysis && (
         <div className="pi-gf-blank-card" data-pi-question-id={analysis.questionId}>
           {/* Header */}
+          {/* 题头、证据定位里的小签都是状态标记，用 shared-ui/Chip（胶囊第二轮，2026-11-14）；类名只当钩子。 */}
           <div className="pi-gf-blank-header">
             <span className="pi-gf-blank-no">第 {analysis.blankNo} 题</span>
-            <span className="pi-gf-tag pi-gf-tag--type">
+            <Chip className="pi-gf-tag pi-gf-tag--type">
               {analysis.blankType === 'given' ? '有提示词' : '无提示词'}
-            </span>
+            </Chip>
             {analysis.blankType === 'given' && analysis.hint && (
-              <span className="pi-gf-blank-hint">提示词：{analysis.hint}</span>
+              <Chip className="pi-gf-blank-hint">提示词：{analysis.hint}</Chip>
             )}
-            <span className="pi-gf-tag pi-gf-tag--facet">{analysis.labelZh}</span>
+            <Chip className="pi-gf-tag pi-gf-tag--facet">{analysis.labelZh}</Chip>
           </div>
 
           {/* Answer */}
@@ -97,9 +99,9 @@ export function GrammarFillAnalysisPanel({
           {/* Ordinary syntactic role, without a personal solving-path badge. */}
           {analysis.role && (
             <div className="pi-gf-nonfinite-badges">
-              <span className="pi-gf-badge pi-gf-badge--role">
+              <Chip className="pi-gf-badge pi-gf-badge--role">
                 {ROLE_LABELS[analysis.role] ?? analysis.role}
-              </span>
+              </Chip>
             </div>
           )}
 
@@ -126,7 +128,7 @@ export function GrammarFillAnalysisPanel({
                       aria-pressed={row.evidenceId === activeEvidenceId}
                       onClick={() => onSelectEvidence(row.evidenceId)}
                     >
-                      <span className="pi-gf-evidence-type-label">{row.typeLabel}</span>
+                      <Chip className="pi-gf-evidence-type-label">{row.typeLabel}</Chip>
                       <blockquote className="pi-gf-evidence-quote">{row.signalText}</blockquote>
                       {row.relation && (
                         <p className="pi-gf-evidence-relation">{row.relation}</p>

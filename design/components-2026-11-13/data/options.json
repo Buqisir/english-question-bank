@@ -1,0 +1,1478 @@
+{
+ "button": {
+  "底色 / 字色": {
+   "options": [
+    {
+     "value": "transparent / --eqb-color-text-secondary",
+     "count": 116,
+     "variants": [
+      "button-01",
+      "button-03",
+      "button-19"
+     ]
+    },
+    {
+     "value": "transparent / --blue-text",
+     "count": 95,
+     "variants": [
+      "button-04",
+      "button-05",
+      "button-06",
+      "button-07",
+      "button-09",
+      "button-10",
+      "button-14",
+      "button-15",
+      "button-20",
+      "button-32"
+     ]
+    },
+    {
+     "value": "transparent / --desk-ink",
+     "count": 72,
+     "variants": [
+      "button-02",
+      "button-08",
+      "button-13",
+      "button-17",
+      "button-18",
+      "button-21",
+      "button-24",
+      "button-26",
+      "button-27",
+      "button-30",
+      "button-31",
+      "button-33",
+      "button-34",
+      "button-38"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "--eqb-color-accent-fill / --eqb-color-accent-fill-ink",
+     "count": 9,
+     "variants": [
+      "button-11",
+      "button-25"
+     ]
+    },
+    {
+     "value": "--desk-page / --blue-text",
+     "count": 6,
+     "variants": [
+      "button-12"
+     ]
+    },
+    {
+     "value": "--action / --desk-raised",
+     "count": 5,
+     "variants": [
+      "button-23",
+      "button-29",
+      "button-36"
+     ]
+    },
+    {
+     "value": "transparent / --eqb-color-accent",
+     "count": 4,
+     "variants": [
+      "button-16"
+     ]
+    },
+    {
+     "value": "--desk-raised / --desk-ink",
+     "count": 4,
+     "variants": [
+      "button-22",
+      "button-37"
+     ]
+    },
+    {
+     "value": "transparent / --coral-text",
+     "count": 3,
+     "variants": [
+      "button-28",
+      "button-35"
+     ]
+    }
+   ]
+  },
+  "圆角": {
+   "options": [
+    {
+     "value": "8px",
+     "count": 234,
+     "variants": [
+      "button-01",
+      "button-03",
+      "button-04",
+      "button-05",
+      "button-07",
+      "button-09",
+      "button-10",
+      "button-11",
+      "button-12",
+      "button-13",
+      "button-16",
+      "button-17",
+      "button-18",
+      "button-19",
+      "button-22",
+      "button-23",
+      "button-24",
+      "button-25",
+      "button-26",
+      "button-27",
+      "button-28",
+      "button-30",
+      "button-32",
+      "button-33",
+      "button-36",
+      "button-37",
+      "button-38"
+     ]
+    },
+    {
+     "value": "4px",
+     "count": 44,
+     "variants": [
+      "button-02",
+      "button-14",
+      "button-21",
+      "button-34"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "0px",
+     "count": 30,
+     "variants": [
+      "button-06",
+      "button-08",
+      "button-20",
+      "button-31"
+     ]
+    },
+    {
+     "value": "999px",
+     "count": 5,
+     "variants": [
+      "button-15",
+      "button-29"
+     ]
+    },
+    {
+     "value": "0px/8px",
+     "count": 1,
+     "variants": [
+      "button-35"
+     ]
+    }
+   ]
+  },
+  "高度档": {
+   "options": [
+    {
+     "value": "25–30",
+     "count": 143,
+     "variants": [
+      "button-01",
+      "button-04",
+      "button-05",
+      "button-09",
+      "button-15",
+      "button-19",
+      "button-24",
+      "button-27",
+      "button-33",
+      "button-38"
+     ]
+    },
+    {
+     "value": "31–36",
+     "count": 141,
+     "variants": [
+      "button-02",
+      "button-03",
+      "button-06",
+      "button-07",
+      "button-10",
+      "button-11",
+      "button-12",
+      "button-13",
+      "button-16",
+      "button-17",
+      "button-18",
+      "button-23",
+      "button-25",
+      "button-28",
+      "button-30",
+      "button-34",
+      "button-35",
+      "button-37"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "≤24",
+     "count": 19,
+     "variants": [
+      "button-08",
+      "button-14",
+      "button-21",
+      "button-31",
+      "button-32"
+     ]
+    },
+    {
+     "value": "37–44",
+     "count": 10,
+     "variants": [
+      "button-20",
+      "button-22",
+      "button-26",
+      "button-36"
+     ]
+    },
+    {
+     "value": ">44",
+     "count": 1,
+     "variants": [
+      "button-29"
+     ]
+    }
+   ]
+  },
+  "影子": {
+   "options": [
+    {
+     "value": "无",
+     "count": 313,
+     "variants": [
+      "button-01",
+      "button-02",
+      "button-03",
+      "button-04",
+      "button-05",
+      "button-06",
+      "button-07",
+      "button-08",
+      "button-09",
+      "button-10",
+      "button-11",
+      "button-12",
+      "button-13",
+      "button-14",
+      "button-15",
+      "button-16",
+      "button-17",
+      "button-18",
+      "button-19",
+      "button-20",
+      "button-21",
+      "button-22",
+      "button-23",
+      "button-24",
+      "button-25",
+      "button-26",
+      "button-27",
+      "button-28",
+      "button-30",
+      "button-31",
+      "button-32",
+      "button-33",
+      "button-34",
+      "button-35",
+      "button-36",
+      "button-37",
+      "button-38"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "custom",
+     "count": 1,
+     "variants": [
+      "button-29"
+     ]
+    }
+   ]
+  },
+  "边框": {
+   "options": [
+    {
+     "value": "无",
+     "count": 288,
+     "variants": [
+      "button-01",
+      "button-02",
+      "button-03",
+      "button-04",
+      "button-05",
+      "button-06",
+      "button-07",
+      "button-08",
+      "button-10",
+      "button-11",
+      "button-12",
+      "button-13",
+      "button-14",
+      "button-15",
+      "button-16",
+      "button-19",
+      "button-21",
+      "button-23",
+      "button-24",
+      "button-25",
+      "button-26",
+      "button-27",
+      "button-28",
+      "button-29",
+      "button-30",
+      "button-31",
+      "button-32",
+      "button-34",
+      "button-36",
+      "button-38"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "有",
+     "count": 26,
+     "variants": [
+      "button-09",
+      "button-17",
+      "button-18",
+      "button-20",
+      "button-22",
+      "button-33",
+      "button-35",
+      "button-37"
+     ]
+    }
+   ]
+  },
+  "字号 / 字重": {
+   "options": [
+    {
+     "value": "13/500",
+     "count": 123,
+     "variants": [
+      "button-01",
+      "button-05",
+      "button-08",
+      "button-13",
+      "button-18",
+      "button-27",
+      "button-32",
+      "button-33"
+     ]
+    },
+    {
+     "value": "16/400",
+     "count": 72,
+     "variants": [
+      "button-02",
+      "button-04",
+      "button-09",
+      "button-22",
+      "button-24",
+      "button-34",
+      "button-35",
+      "button-38"
+     ]
+    },
+    {
+     "value": "13/400",
+     "count": 55,
+     "variants": [
+      "button-06",
+      "button-07",
+      "button-10",
+      "button-16",
+      "button-17",
+      "button-19",
+      "button-21",
+      "button-26",
+      "button-28",
+      "button-30",
+      "button-31"
+     ]
+    },
+    {
+     "value": "14/500",
+     "count": 34,
+     "variants": [
+      "button-03",
+      "button-20"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "13/600",
+     "count": 13,
+     "variants": [
+      "button-11",
+      "button-23",
+      "button-25",
+      "button-36"
+     ]
+    },
+    {
+     "value": "12/400",
+     "count": 11,
+     "variants": [
+      "button-12",
+      "button-14"
+     ]
+    },
+    {
+     "value": "18/400",
+     "count": 4,
+     "variants": [
+      "button-15"
+     ]
+    },
+    {
+     "value": "15/500",
+     "count": 1,
+     "variants": [
+      "button-29"
+     ]
+    },
+    {
+     "value": "14/600",
+     "count": 1,
+     "variants": [
+      "button-37"
+     ]
+    }
+   ]
+  },
+  "图标": {
+   "options": [
+    {
+     "value": "icon+text",
+     "count": 224,
+     "variants": [
+      "button-01",
+      "button-02",
+      "button-03",
+      "button-05",
+      "button-06",
+      "button-07",
+      "button-08",
+      "button-10",
+      "button-19",
+      "button-26",
+      "button-27",
+      "button-28",
+      "button-30",
+      "button-32",
+      "button-34",
+      "button-35",
+      "button-37",
+      "button-38"
+     ]
+    },
+    {
+     "value": "none",
+     "count": 71,
+     "variants": [
+      "button-04",
+      "button-11",
+      "button-12",
+      "button-13",
+      "button-14",
+      "button-17",
+      "button-18",
+      "button-20",
+      "button-22",
+      "button-23",
+      "button-24",
+      "button-25",
+      "button-29",
+      "button-31",
+      "button-33",
+      "button-36"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "icon-only",
+     "count": 19,
+     "variants": [
+      "button-09",
+      "button-15",
+      "button-16",
+      "button-21"
+     ]
+    }
+   ]
+  }
+ },
+ "chip": {
+  "底色 / 字色": {
+   "options": [
+    {
+     "value": "--accent / --desk-raised",
+     "count": 29,
+     "variants": [
+      "chip-01"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "--desk-raised / --blue-text",
+     "count": 3,
+     "variants": [
+      "chip-02"
+     ]
+    },
+    {
+     "value": "--desk-raised / --desk-ink",
+     "count": 3,
+     "variants": [
+      "chip-03",
+      "chip-04"
+     ]
+    }
+   ]
+  },
+  "圆角": {
+   "options": [
+    {
+     "value": "50%",
+     "count": 29,
+     "variants": [
+      "chip-01"
+     ]
+    },
+    {
+     "value": "999px",
+     "count": 6,
+     "variants": [
+      "chip-02",
+      "chip-03",
+      "chip-04"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "高度档": {
+   "options": [
+    {
+     "value": "25–30",
+     "count": 33,
+     "variants": [
+      "chip-01",
+      "chip-02",
+      "chip-04"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "31–36",
+     "count": 2,
+     "variants": [
+      "chip-03"
+     ]
+    }
+   ]
+  },
+  "影子": {
+   "options": [
+    {
+     "value": "无",
+     "count": 32,
+     "variants": [
+      "chip-01",
+      "chip-02"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "--elev-2",
+     "count": 3,
+     "variants": [
+      "chip-03",
+      "chip-04"
+     ]
+    }
+   ]
+  },
+  "边框": {
+   "options": [
+    {
+     "value": "无",
+     "count": 29,
+     "variants": [
+      "chip-01"
+     ]
+    },
+    {
+     "value": "有",
+     "count": 6,
+     "variants": [
+      "chip-02",
+      "chip-03",
+      "chip-04"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "字号 / 字重": {
+   "options": [
+    {
+     "value": "12/600",
+     "count": 29,
+     "variants": [
+      "chip-01"
+     ]
+    },
+    {
+     "value": "13/400",
+     "count": 4,
+     "variants": [
+      "chip-02",
+      "chip-04"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "14/500",
+     "count": 2,
+     "variants": [
+      "chip-03"
+     ]
+    }
+   ]
+  },
+  "图标": {
+   "options": [
+    {
+     "value": "none",
+     "count": 32,
+     "variants": [
+      "chip-01",
+      "chip-02"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "icon+text",
+     "count": 3,
+     "variants": [
+      "chip-03",
+      "chip-04"
+     ]
+    }
+   ]
+  }
+ },
+ "row": {
+  "底色 / 字色": {
+   "single": "transparent / --desk-ink"
+  },
+  "圆角": {
+   "single": "0px"
+  },
+  "高度档": {
+   "single": "不定高"
+  },
+  "影子": {
+   "single": "无"
+  },
+  "边框": {
+   "single": "无"
+  },
+  "字号 / 字重": {
+   "single": "16/400"
+  },
+  "图标": {
+   "single": "none"
+  }
+ },
+ "surface": {
+  "底色 / 字色": {
+   "options": [
+    {
+     "value": "--desk-raised / --desk-ink",
+     "count": 19,
+     "variants": [
+      "surface-01",
+      "surface-02",
+      "surface-04",
+      "surface-05",
+      "surface-06",
+      "surface-08"
+     ]
+    },
+    {
+     "value": "--blue-soft / --desk-ink",
+     "count": 3,
+     "variants": [
+      "surface-03"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "#F4F8FA / --desk-ink",
+     "count": 1,
+     "variants": [
+      "surface-07"
+     ]
+    }
+   ]
+  },
+  "圆角": {
+   "options": [
+    {
+     "value": "12px",
+     "count": 14,
+     "variants": [
+      "surface-01",
+      "surface-05",
+      "surface-06",
+      "surface-08"
+     ]
+    },
+    {
+     "value": "16px",
+     "count": 5,
+     "variants": [
+      "surface-02",
+      "surface-04"
+     ]
+    },
+    {
+     "value": "0px",
+     "count": 4,
+     "variants": [
+      "surface-03",
+      "surface-07"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "高度档": {
+   "single": "不定高"
+  },
+  "影子": {
+   "options": [
+    {
+     "value": "无",
+     "count": 16,
+     "variants": [
+      "surface-01",
+      "surface-03",
+      "surface-06",
+      "surface-07",
+      "surface-08"
+     ]
+    },
+    {
+     "value": "--elev-1",
+     "count": 5,
+     "variants": [
+      "surface-02",
+      "surface-04"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "custom",
+     "count": 2,
+     "variants": [
+      "surface-05"
+     ]
+    }
+   ]
+  },
+  "边框": {
+   "options": [
+    {
+     "value": "无",
+     "count": 15,
+     "variants": [
+      "surface-01",
+      "surface-03",
+      "surface-05",
+      "surface-07"
+     ]
+    },
+    {
+     "value": "有",
+     "count": 8,
+     "variants": [
+      "surface-02",
+      "surface-04",
+      "surface-06",
+      "surface-08"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "字号 / 字重": {
+   "options": [
+    {
+     "value": "16/400",
+     "count": 22,
+     "variants": [
+      "surface-01",
+      "surface-02",
+      "surface-03",
+      "surface-04",
+      "surface-05",
+      "surface-06",
+      "surface-07"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "13/400",
+     "count": 1,
+     "variants": [
+      "surface-08"
+     ]
+    }
+   ]
+  },
+  "图标": {
+   "single": "none"
+  }
+ },
+ "notice": {
+  "底色 / 字色": {
+   "options": [
+    {
+     "value": "transparent / --blue-text",
+     "count": 19,
+     "variants": [
+      "notice-01",
+      "notice-03",
+      "notice-04"
+     ]
+    },
+    {
+     "value": "--desk-raised / --desk-ink",
+     "count": 5,
+     "variants": [
+      "notice-02"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "--coral-soft / transparent",
+     "count": 1,
+     "variants": [
+      "notice-05"
+     ]
+    },
+    {
+     "value": "--desk-page / --blue-text",
+     "count": 1,
+     "variants": [
+      "notice-06"
+     ]
+    },
+    {
+     "value": "transparent / --amber-text",
+     "count": 1,
+     "variants": [
+      "notice-07"
+     ]
+    }
+   ]
+  },
+  "圆角": {
+   "options": [
+    {
+     "value": "0px",
+     "count": 20,
+     "variants": [
+      "notice-01",
+      "notice-03",
+      "notice-04",
+      "notice-07"
+     ]
+    },
+    {
+     "value": "8px",
+     "count": 7,
+     "variants": [
+      "notice-02",
+      "notice-05",
+      "notice-06"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "高度档": {
+   "single": "不定高"
+  },
+  "影子": {
+   "options": [
+    {
+     "value": "无",
+     "count": 21,
+     "variants": [
+      "notice-01",
+      "notice-03",
+      "notice-04",
+      "notice-05",
+      "notice-07"
+     ]
+    },
+    {
+     "value": "--elev-1",
+     "count": 5,
+     "variants": [
+      "notice-02"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "custom",
+     "count": 1,
+     "variants": [
+      "notice-06"
+     ]
+    }
+   ]
+  },
+  "边框": {
+   "single": "无"
+  },
+  "字号 / 字重": {
+   "options": [
+    {
+     "value": "12/400",
+     "count": 13,
+     "variants": [
+      "notice-01",
+      "notice-07"
+     ]
+    },
+    {
+     "value": "13/400",
+     "count": 11,
+     "variants": [
+      "notice-02",
+      "notice-03",
+      "notice-05",
+      "notice-06"
+     ]
+    },
+    {
+     "value": "16/400",
+     "count": 3,
+     "variants": [
+      "notice-04"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "图标": {
+   "options": [
+    {
+     "value": "none",
+     "count": 23,
+     "variants": [
+      "notice-01",
+      "notice-02",
+      "notice-04",
+      "notice-05",
+      "notice-06",
+      "notice-07"
+     ]
+    },
+    {
+     "value": "icon+text",
+     "count": 4,
+     "variants": [
+      "notice-03"
+     ]
+    }
+   ],
+   "toMerge": []
+  }
+ },
+ "toast": {
+  "底色 / 字色": {
+   "single": "--desk-ink / --desk-raised"
+  },
+  "圆角": {
+   "single": "8px"
+  },
+  "高度档": {
+   "single": "不定高"
+  },
+  "影子": {
+   "single": "无"
+  },
+  "边框": {
+   "single": "无"
+  },
+  "字号 / 字重": {
+   "single": "16/400"
+  },
+  "图标": {
+   "single": "none"
+  }
+ },
+ "empty": {
+  "底色 / 字色": {
+   "options": [
+    {
+     "value": "transparent / --blue-text",
+     "count": 7,
+     "variants": [
+      "empty-01",
+      "empty-02"
+     ]
+    },
+    {
+     "value": "transparent / --desk-ink",
+     "count": 1,
+     "variants": [
+      "empty-03"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "圆角": {
+   "options": [
+    {
+     "value": "0px",
+     "count": 7,
+     "variants": [
+      "empty-01",
+      "empty-02"
+     ]
+    },
+    {
+     "value": "12px",
+     "count": 1,
+     "variants": [
+      "empty-03"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "高度档": {
+   "single": "不定高"
+  },
+  "影子": {
+   "single": "无"
+  },
+  "边框": {
+   "options": [
+    {
+     "value": "无",
+     "count": 7,
+     "variants": [
+      "empty-01",
+      "empty-02"
+     ]
+    },
+    {
+     "value": "有",
+     "count": 1,
+     "variants": [
+      "empty-03"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "字号 / 字重": {
+   "options": [
+    {
+     "value": "13/400",
+     "count": 4,
+     "variants": [
+      "empty-01"
+     ]
+    },
+    {
+     "value": "16/400",
+     "count": 4,
+     "variants": [
+      "empty-02",
+      "empty-03"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "图标": {
+   "options": [
+    {
+     "value": "none",
+     "count": 7,
+     "variants": [
+      "empty-01",
+      "empty-02"
+     ]
+    },
+    {
+     "value": "icon+text",
+     "count": 1,
+     "variants": [
+      "empty-03"
+     ]
+    }
+   ],
+   "toMerge": []
+  }
+ },
+ "dialog": {
+  "底色 / 字色": {
+   "single": "--desk-raised / --desk-ink"
+  },
+  "圆角": {
+   "options": [
+    {
+     "value": "12px",
+     "count": 5,
+     "variants": [
+      "dialog-01",
+      "dialog-04",
+      "dialog-05"
+     ]
+    },
+    {
+     "value": "8px",
+     "count": 3,
+     "variants": [
+      "dialog-02",
+      "dialog-03"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "高度档": {
+   "single": "不定高"
+  },
+  "影子": {
+   "options": [
+    {
+     "value": "--elev-3",
+     "count": 7,
+     "variants": [
+      "dialog-01",
+      "dialog-02",
+      "dialog-03",
+      "dialog-04"
+     ]
+    },
+    {
+     "value": "无",
+     "count": 1,
+     "variants": [
+      "dialog-05"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "边框": {
+   "options": [
+    {
+     "value": "无",
+     "count": 4,
+     "variants": [
+      "dialog-01",
+      "dialog-03"
+     ]
+    },
+    {
+     "value": "有",
+     "count": 4,
+     "variants": [
+      "dialog-02",
+      "dialog-04",
+      "dialog-05"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "字号 / 字重": {
+   "options": [
+    {
+     "value": "16/400",
+     "count": 7,
+     "variants": [
+      "dialog-01",
+      "dialog-02",
+      "dialog-03",
+      "dialog-04"
+     ]
+    },
+    {
+     "value": "13/400",
+     "count": 1,
+     "variants": [
+      "dialog-05"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "图标": {
+   "single": "none"
+  }
+ },
+ "field": {
+  "底色 / 字色": {
+   "options": [
+    {
+     "value": "--desk-raised / --desk-ink",
+     "count": 23,
+     "variants": [
+      "field-01",
+      "field-02",
+      "field-03",
+      "field-06",
+      "field-07",
+      "field-10",
+      "field-11"
+     ]
+    },
+    {
+     "value": "--eqb-color-border-strong / #000000",
+     "count": 4,
+     "variants": [
+      "field-04"
+     ]
+    },
+    {
+     "value": "transparent / --desk-ink",
+     "count": 4,
+     "variants": [
+      "field-05",
+      "field-08",
+      "field-09"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "圆角": {
+   "options": [
+    {
+     "value": "8px",
+     "count": 19,
+     "variants": [
+      "field-01",
+      "field-02",
+      "field-06",
+      "field-07",
+      "field-10",
+      "field-11"
+     ]
+    },
+    {
+     "value": "12px",
+     "count": 4,
+     "variants": [
+      "field-03"
+     ]
+    },
+    {
+     "value": "999px",
+     "count": 4,
+     "variants": [
+      "field-04"
+     ]
+    },
+    {
+     "value": "0px",
+     "count": 4,
+     "variants": [
+      "field-05",
+      "field-08",
+      "field-09"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "高度档": {
+   "options": [
+    {
+     "value": "31–36",
+     "count": 18,
+     "variants": [
+      "field-01",
+      "field-02",
+      "field-07",
+      "field-09",
+      "field-10",
+      "field-11"
+     ]
+    },
+    {
+     "value": ">44",
+     "count": 7,
+     "variants": [
+      "field-03",
+      "field-05",
+      "field-08"
+     ]
+    },
+    {
+     "value": "≤24",
+     "count": 4,
+     "variants": [
+      "field-04"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "37–44",
+     "count": 2,
+     "variants": [
+      "field-06"
+     ]
+    }
+   ]
+  },
+  "影子": {
+   "options": [
+    {
+     "value": "无",
+     "count": 27,
+     "variants": [
+      "field-01",
+      "field-02",
+      "field-04",
+      "field-05",
+      "field-06",
+      "field-07",
+      "field-08",
+      "field-09",
+      "field-10",
+      "field-11"
+     ]
+    },
+    {
+     "value": "custom",
+     "count": 4,
+     "variants": [
+      "field-03"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "边框": {
+   "options": [
+    {
+     "value": "有",
+     "count": 27,
+     "variants": [
+      "field-01",
+      "field-02",
+      "field-03",
+      "field-04",
+      "field-06",
+      "field-07",
+      "field-10",
+      "field-11"
+     ]
+    },
+    {
+     "value": "无",
+     "count": 4,
+     "variants": [
+      "field-05",
+      "field-08",
+      "field-09"
+     ]
+    }
+   ],
+   "toMerge": []
+  },
+  "字号 / 字重": {
+   "options": [
+    {
+     "value": "16/400",
+     "count": 12,
+     "variants": [
+      "field-02",
+      "field-04",
+      "field-05",
+      "field-08"
+     ]
+    },
+    {
+     "value": "13/400",
+     "count": 11,
+     "variants": [
+      "field-01",
+      "field-07",
+      "field-09"
+     ]
+    },
+    {
+     "value": "14/400",
+     "count": 4,
+     "variants": [
+      "field-03"
+     ]
+    }
+   ],
+   "toMerge": [
+    {
+     "value": "14/500",
+     "count": 3,
+     "variants": [
+      "field-06",
+      "field-11"
+     ]
+    },
+    {
+     "value": "12/500",
+     "count": 1,
+     "variants": [
+      "field-10"
+     ]
+    }
+   ]
+  },
+  "图标": {
+   "single": "none"
+  }
+ }
+}

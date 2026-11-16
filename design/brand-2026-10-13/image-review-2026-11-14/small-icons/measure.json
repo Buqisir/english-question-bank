@@ -1,0 +1,1628 @@
+{
+ "status": "对比稿 · 提案 · 单一来源",
+ "method": "净空 = 切比雪夫距离减 1（中间隔几格，0 = 贴着，含斜角贴着）；muzzleSharesEdge = 眼睛和脸斑有没有共用一条边（上下左右挨着）。彩色版眼睛 = 最上面两块墨（八连通），脸斑 = 不碰画布边的最大一块雾白；墨色版眼睛 = 最上面两个封闭的透明洞。坐标是 PNG 的 (列, 行)，从 0 数；mint mark-32 的 SVG 行号要再加 6。",
+ "equivalence": [
+  {
+   "app": "app/public/favicon-16.png",
+   "design": "design/brand-2026-10-13/mascot/small/app-icon-16.png",
+   "sameGrid": true,
+   "sameBytes": false
+  },
+  {
+   "app": "app/public/favicon-32.png",
+   "design": "design/brand-2026-10-13/mascot/small/app-icon-32.png",
+   "sameGrid": true,
+   "sameBytes": false
+  },
+  {
+   "app": "app/public/brand/mark-32.png",
+   "design": "design/brand-2026-10-13/logo/mint/mark-32.png",
+   "sameGrid": true,
+   "sameBytes": true
+  },
+  {
+   "app": "app/public/favicon.ico",
+   "totalBytes": 489,
+   "entries": [
+    {
+     "size": "16×16",
+     "bytes": 179,
+     "embedded": "PNG",
+     "byteIdenticalTo": "app/public/favicon-16.png"
+    },
+    {
+     "size": "32×32",
+     "bytes": 272,
+     "embedded": "PNG",
+     "byteIdenticalTo": "app/public/favicon-32.png"
+    }
+   ]
+  }
+ ],
+ "files": {
+  "app-icon-32": {
+   "file": "design/brand-2026-10-13/mascot/small/app-icon-32",
+   "use": "浏览器标签 2x：app/public/favicon-32.png 和 favicon.ico 里的 32×32 是同一套格子",
+   "current": {
+    "eyes": [
+     {
+      "cells": 4,
+      "box": [
+       2,
+       2
+      ],
+      "at": [
+       9,
+       12
+      ],
+      "toNose": 1,
+      "toMuzzle": 1,
+      "muzzleSharesEdge": false,
+      "toOutline": 4,
+      "toWhisker": 3
+     },
+     {
+      "cells": 4,
+      "box": [
+       2,
+       2
+      ],
+      "at": [
+       21,
+       12
+      ],
+      "toNose": 1,
+      "toMuzzle": 1,
+      "muzzleSharesEdge": false,
+      "toOutline": 4,
+      "toWhisker": 3
+     }
+    ],
+    "muzzleCells": 122,
+    "whiskerDots": 6
+   },
+   "drafts": {
+    "A": {
+     "name": "A · 眼睛 3×3 + F 脸斑",
+     "changed": 14,
+     "after": {
+      "eyes": [
+       {
+        "cells": 9,
+        "box": [
+         3,
+         3
+        ],
+        "at": [
+         8,
+         11
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       },
+       {
+        "cells": 9,
+        "box": [
+         3,
+         3
+        ],
+        "at": [
+         21,
+         11
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       }
+      ],
+      "muzzleCells": 118,
+      "whiskerDots": 6
+     }
+    },
+    "C": {
+     "name": "C · 眼睛 2×3 + F 脸斑",
+     "changed": 8,
+     "after": {
+      "eyes": [
+       {
+        "cells": 6,
+        "box": [
+         2,
+         3
+        ],
+        "at": [
+         9,
+         11
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       },
+       {
+        "cells": 6,
+        "box": [
+         2,
+         3
+        ],
+        "at": [
+         21,
+         11
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       }
+      ],
+      "muzzleCells": 118,
+      "whiskerDots": 6
+     }
+    },
+    "A0": {
+     "name": "A0 · 只改眼睛 3×3（参照）",
+     "changed": 10,
+     "after": {
+      "eyes": [
+       {
+        "cells": 9,
+        "box": [
+         3,
+         3
+        ],
+        "at": [
+         8,
+         11
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       },
+       {
+        "cells": 9,
+        "box": [
+         3,
+         3
+        ],
+        "at": [
+         21,
+         11
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       }
+      ],
+      "muzzleCells": 122,
+      "whiskerDots": 6
+     }
+    },
+    "C0": {
+     "name": "C0 · 只改眼睛 2×3（参照）",
+     "changed": 4,
+     "after": {
+      "eyes": [
+       {
+        "cells": 6,
+        "box": [
+         2,
+         3
+        ],
+        "at": [
+         9,
+         11
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       },
+       {
+        "cells": 6,
+        "box": [
+         2,
+         3
+        ],
+        "at": [
+         21,
+         11
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       }
+      ],
+      "muzzleCells": 122,
+      "whiskerDots": 6
+     }
+    }
+   }
+  },
+  "otter-head-32": {
+   "file": "design/brand-2026-10-13/mascot/small/otter-head-32",
+   "use": "行内小头像（现网没用）",
+   "current": {
+    "eyes": [
+     {
+      "cells": 4,
+      "box": [
+       2,
+       2
+      ],
+      "at": [
+       9,
+       11
+      ],
+      "toNose": 1,
+      "toMuzzle": 1,
+      "muzzleSharesEdge": false,
+      "toOutline": 4,
+      "toWhisker": 3
+     },
+     {
+      "cells": 4,
+      "box": [
+       2,
+       2
+      ],
+      "at": [
+       21,
+       11
+      ],
+      "toNose": 1,
+      "toMuzzle": 1,
+      "muzzleSharesEdge": false,
+      "toOutline": 4,
+      "toWhisker": 3
+     }
+    ],
+    "muzzleCells": 122,
+    "whiskerDots": 6
+   },
+   "drafts": {
+    "A": {
+     "name": "A · 眼睛 3×3 + F 脸斑",
+     "changed": 14,
+     "after": {
+      "eyes": [
+       {
+        "cells": 9,
+        "box": [
+         3,
+         3
+        ],
+        "at": [
+         8,
+         10
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       },
+       {
+        "cells": 9,
+        "box": [
+         3,
+         3
+        ],
+        "at": [
+         21,
+         10
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       }
+      ],
+      "muzzleCells": 118,
+      "whiskerDots": 6
+     }
+    },
+    "C": {
+     "name": "C · 眼睛 2×3 + F 脸斑",
+     "changed": 8,
+     "after": {
+      "eyes": [
+       {
+        "cells": 6,
+        "box": [
+         2,
+         3
+        ],
+        "at": [
+         9,
+         10
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       },
+       {
+        "cells": 6,
+        "box": [
+         2,
+         3
+        ],
+        "at": [
+         21,
+         10
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       }
+      ],
+      "muzzleCells": 118,
+      "whiskerDots": 6
+     }
+    },
+    "A0": {
+     "name": "A0 · 只改眼睛 3×3（参照）",
+     "changed": 10,
+     "after": {
+      "eyes": [
+       {
+        "cells": 9,
+        "box": [
+         3,
+         3
+        ],
+        "at": [
+         8,
+         10
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       },
+       {
+        "cells": 9,
+        "box": [
+         3,
+         3
+        ],
+        "at": [
+         21,
+         10
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       }
+      ],
+      "muzzleCells": 122,
+      "whiskerDots": 6
+     }
+    },
+    "C0": {
+     "name": "C0 · 只改眼睛 2×3（参照）",
+     "changed": 4,
+     "after": {
+      "eyes": [
+       {
+        "cells": 6,
+        "box": [
+         2,
+         3
+        ],
+        "at": [
+         9,
+         10
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       },
+       {
+        "cells": 6,
+        "box": [
+         2,
+         3
+        ],
+        "at": [
+         21,
+         10
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       }
+      ],
+      "muzzleCells": 122,
+      "whiskerDots": 6
+     }
+    }
+   }
+  },
+  "mark-32": {
+   "file": "design/brand-2026-10-13/logo/mint/mark-32",
+   "use": "顶栏 1x：app/public/brand/mark-32.png 和它逐字节相同",
+   "current": {
+    "eyes": [
+     {
+      "cells": 4,
+      "box": [
+       2,
+       2
+      ],
+      "at": [
+       9,
+       8
+      ],
+      "toNose": 1,
+      "toMuzzle": 1,
+      "muzzleSharesEdge": false,
+      "toOutline": 4,
+      "toWhisker": 3
+     },
+     {
+      "cells": 4,
+      "box": [
+       2,
+       2
+      ],
+      "at": [
+       21,
+       8
+      ],
+      "toNose": 1,
+      "toMuzzle": 1,
+      "muzzleSharesEdge": false,
+      "toOutline": 4,
+      "toWhisker": 3
+     }
+    ],
+    "muzzleCells": 122,
+    "whiskerDots": 6
+   },
+   "drafts": {
+    "A": {
+     "name": "A · 眼睛 3×3 + F 脸斑",
+     "changed": 14,
+     "after": {
+      "eyes": [
+       {
+        "cells": 9,
+        "box": [
+         3,
+         3
+        ],
+        "at": [
+         8,
+         7
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       },
+       {
+        "cells": 9,
+        "box": [
+         3,
+         3
+        ],
+        "at": [
+         21,
+         7
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       }
+      ],
+      "muzzleCells": 118,
+      "whiskerDots": 6
+     }
+    },
+    "C": {
+     "name": "C · 眼睛 2×3 + F 脸斑",
+     "changed": 8,
+     "after": {
+      "eyes": [
+       {
+        "cells": 6,
+        "box": [
+         2,
+         3
+        ],
+        "at": [
+         9,
+         7
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       },
+       {
+        "cells": 6,
+        "box": [
+         2,
+         3
+        ],
+        "at": [
+         21,
+         7
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       }
+      ],
+      "muzzleCells": 118,
+      "whiskerDots": 6
+     }
+    },
+    "A0": {
+     "name": "A0 · 只改眼睛 3×3（参照）",
+     "changed": 10,
+     "after": {
+      "eyes": [
+       {
+        "cells": 9,
+        "box": [
+         3,
+         3
+        ],
+        "at": [
+         8,
+         7
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       },
+       {
+        "cells": 9,
+        "box": [
+         3,
+         3
+        ],
+        "at": [
+         21,
+         7
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       }
+      ],
+      "muzzleCells": 122,
+      "whiskerDots": 6
+     }
+    },
+    "C0": {
+     "name": "C0 · 只改眼睛 2×3（参照）",
+     "changed": 4,
+     "after": {
+      "eyes": [
+       {
+        "cells": 6,
+        "box": [
+         2,
+         3
+        ],
+        "at": [
+         9,
+         7
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       },
+       {
+        "cells": 6,
+        "box": [
+         2,
+         3
+        ],
+        "at": [
+         21,
+         7
+        ],
+        "toNose": 1,
+        "toMuzzle": 1,
+        "muzzleSharesEdge": false,
+        "toOutline": 3,
+        "toWhisker": 3
+       }
+      ],
+      "muzzleCells": 122,
+      "whiskerDots": 6
+     }
+    }
+   }
+  },
+  "app-icon-16": {
+   "file": "design/brand-2026-10-13/mascot/small/app-icon-16",
+   "use": "浏览器标签 1x：app/public/favicon-16.png 和 favicon.ico 里的 16×16 是同一套格子",
+   "current": {
+    "eyes": [
+     {
+      "cells": 2,
+      "box": [
+       1,
+       2
+      ],
+      "at": [
+       4,
+       5
+      ],
+      "toNose": 1,
+      "toMuzzle": 0,
+      "muzzleSharesEdge": true,
+      "toOutline": 1,
+      "toWhisker": null
+     },
+     {
+      "cells": 2,
+      "box": [
+       1,
+       2
+      ],
+      "at": [
+       11,
+       5
+      ],
+      "toNose": 1,
+      "toMuzzle": 0,
+      "muzzleSharesEdge": true,
+      "toOutline": 1,
+      "toWhisker": null
+     }
+    ],
+    "muzzleCells": 36,
+    "whiskerDots": 0
+   },
+   "drafts": {
+    "fix": {
+     "name": "修 · 眼下一格白改绿",
+     "changed": 2,
+     "after": {
+      "eyes": [
+       {
+        "cells": 2,
+        "box": [
+         1,
+         2
+        ],
+        "at": [
+         4,
+         5
+        ],
+        "toNose": 1,
+        "toMuzzle": 0,
+        "muzzleSharesEdge": false,
+        "toOutline": 1,
+        "toWhisker": null
+       },
+       {
+        "cells": 2,
+        "box": [
+         1,
+         2
+        ],
+        "at": [
+         11,
+         5
+        ],
+        "toNose": 1,
+        "toMuzzle": 0,
+        "muzzleSharesEdge": false,
+        "toOutline": 1,
+        "toWhisker": null
+       }
+      ],
+      "muzzleCells": 34,
+      "whiskerDots": 0
+     }
+    }
+   }
+  },
+  "otter-head-16": {
+   "file": "design/brand-2026-10-13/mascot/small/otter-head-16",
+   "use": "行内小头像（现网没用）",
+   "current": {
+    "eyes": [
+     {
+      "cells": 2,
+      "box": [
+       1,
+       2
+      ],
+      "at": [
+       4,
+       5
+      ],
+      "toNose": 1,
+      "toMuzzle": 0,
+      "muzzleSharesEdge": true,
+      "toOutline": 1,
+      "toWhisker": null
+     },
+     {
+      "cells": 2,
+      "box": [
+       1,
+       2
+      ],
+      "at": [
+       11,
+       5
+      ],
+      "toNose": 1,
+      "toMuzzle": 0,
+      "muzzleSharesEdge": true,
+      "toOutline": 1,
+      "toWhisker": null
+     }
+    ],
+    "muzzleCells": 36,
+    "whiskerDots": 0
+   },
+   "drafts": {
+    "fix": {
+     "name": "修 · 眼下一格白改绿",
+     "changed": 2,
+     "after": {
+      "eyes": [
+       {
+        "cells": 2,
+        "box": [
+         1,
+         2
+        ],
+        "at": [
+         4,
+         5
+        ],
+        "toNose": 1,
+        "toMuzzle": 0,
+        "muzzleSharesEdge": false,
+        "toOutline": 1,
+        "toWhisker": null
+       },
+       {
+        "cells": 2,
+        "box": [
+         1,
+         2
+        ],
+        "at": [
+         11,
+         5
+        ],
+        "toNose": 1,
+        "toMuzzle": 0,
+        "muzzleSharesEdge": false,
+        "toOutline": 1,
+        "toWhisker": null
+       }
+      ],
+      "muzzleCells": 34,
+      "whiskerDots": 0
+     }
+    }
+   }
+  },
+  "mark-16": {
+   "file": "design/brand-2026-10-13/logo/mint/mark-16",
+   "use": "16px 以下的标志（现网没用）",
+   "current": {
+    "eyes": [
+     {
+      "cells": 2,
+      "box": [
+       1,
+       2
+      ],
+      "at": [
+       4,
+       6
+      ],
+      "toNose": 1,
+      "toMuzzle": 0,
+      "muzzleSharesEdge": true,
+      "toOutline": 1,
+      "toWhisker": null
+     },
+     {
+      "cells": 2,
+      "box": [
+       1,
+       2
+      ],
+      "at": [
+       11,
+       6
+      ],
+      "toNose": 1,
+      "toMuzzle": 0,
+      "muzzleSharesEdge": true,
+      "toOutline": 1,
+      "toWhisker": null
+     }
+    ],
+    "muzzleCells": 36,
+    "whiskerDots": 0
+   },
+   "drafts": {
+    "fix": {
+     "name": "修 · 眼下一格白改绿",
+     "changed": 2,
+     "after": {
+      "eyes": [
+       {
+        "cells": 2,
+        "box": [
+         1,
+         2
+        ],
+        "at": [
+         4,
+         6
+        ],
+        "toNose": 1,
+        "toMuzzle": 0,
+        "muzzleSharesEdge": false,
+        "toOutline": 1,
+        "toWhisker": null
+       },
+       {
+        "cells": 2,
+        "box": [
+         1,
+         2
+        ],
+        "at": [
+         11,
+         6
+        ],
+        "toNose": 1,
+        "toMuzzle": 0,
+        "muzzleSharesEdge": false,
+        "toOutline": 1,
+        "toWhisker": null
+       }
+      ],
+      "muzzleCells": 34,
+      "whiskerDots": 0
+     }
+    }
+   }
+  },
+  "mark-16-mono": {
+   "file": "design/brand-2026-10-13/logo/mark-16-mono",
+   "use": "墨色版（现网没用）",
+   "current": {
+    "error": "封闭的洞只有 1 个：眼洞和脸斑洞连在一起，分不出两只眼睛"
+   },
+   "drafts": {
+    "fix": {
+     "name": "修 · 眼洞下补一格墨",
+     "changed": 2,
+     "after": {
+      "eyes": [
+       {
+        "cells": 2,
+        "box": [
+         1,
+         2
+        ],
+        "at": [
+         4,
+         6
+        ],
+        "toNose": 1,
+        "toMuzzle": 0,
+        "muzzleSharesEdge": false,
+        "toOutline": 1,
+        "toWhisker": null
+       },
+       {
+        "cells": 2,
+        "box": [
+         1,
+         2
+        ],
+        "at": [
+         11,
+         6
+        ],
+        "toNose": 1,
+        "toMuzzle": 0,
+        "muzzleSharesEdge": false,
+        "toOutline": 1,
+        "toWhisker": null
+       }
+      ],
+      "muzzleCells": 36,
+      "whiskerDots": 0
+     }
+    }
+   }
+  }
+ },
+ "probes": {
+  "note": "试探，不是草稿：16 格在「修」之上再试 F；32 格脸斑几种下沿（眼睛都按 C）",
+  "p16": {
+   "p1": {
+    "name": "试探 1 · 两瓣外下角各削一格",
+    "changes": [
+     {
+      "x": 4,
+      "y": 7,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 11,
+      "y": 7,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 3,
+      "y": 10,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 12,
+      "y": 10,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     }
+    ],
+    "after": {
+     "eyes": [
+      {
+       "cells": 2,
+       "box": [
+        1,
+        2
+       ],
+       "at": [
+        4,
+        5
+       ],
+       "toNose": 1,
+       "toMuzzle": 0,
+       "muzzleSharesEdge": false,
+       "toOutline": 1,
+       "toWhisker": null
+      },
+      {
+       "cells": 2,
+       "box": [
+        1,
+        2
+       ],
+       "at": [
+        11,
+        5
+       ],
+       "toNose": 1,
+       "toMuzzle": 0,
+       "muzzleSharesEdge": false,
+       "toOutline": 1,
+       "toWhisker": null
+      }
+     ],
+     "muzzleCells": 32,
+     "whiskerDots": 0
+    }
+   },
+   "p2": {
+    "name": "试探 2 · 缺口加高一行（2 格宽）",
+    "changes": [
+     {
+      "x": 4,
+      "y": 7,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 11,
+      "y": 7,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 7,
+      "y": 9,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 8,
+      "y": 9,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     }
+    ],
+    "after": {
+     "eyes": [
+      {
+       "cells": 2,
+       "box": [
+        1,
+        2
+       ],
+       "at": [
+        4,
+        5
+       ],
+       "toNose": 1,
+       "toMuzzle": 0,
+       "muzzleSharesEdge": false,
+       "toOutline": 1,
+       "toWhisker": null
+      },
+      {
+       "cells": 2,
+       "box": [
+        1,
+        2
+       ],
+       "at": [
+        11,
+        5
+       ],
+       "toNose": 1,
+       "toMuzzle": 4,
+       "muzzleSharesEdge": false,
+       "toOutline": 1,
+       "toWhisker": null
+      }
+     ],
+     "muzzleCells": 16,
+     "whiskerDots": 0
+    }
+   },
+   "p3": {
+    "name": "试探 3 · 缺口加高一行 + 削外下角",
+    "changes": [
+     {
+      "x": 4,
+      "y": 7,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 11,
+      "y": 7,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 7,
+      "y": 9,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 8,
+      "y": 9,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 3,
+      "y": 10,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 12,
+      "y": 10,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     }
+    ],
+    "after": {
+     "eyes": [
+      {
+       "cells": 2,
+       "box": [
+        1,
+        2
+       ],
+       "at": [
+        4,
+        5
+       ],
+       "toNose": 1,
+       "toMuzzle": 0,
+       "muzzleSharesEdge": false,
+       "toOutline": 1,
+       "toWhisker": null
+      },
+      {
+       "cells": 2,
+       "box": [
+        1,
+        2
+       ],
+       "at": [
+        11,
+        5
+       ],
+       "toNose": 1,
+       "toMuzzle": 4,
+       "muzzleSharesEdge": false,
+       "toOutline": 1,
+       "toWhisker": null
+      }
+     ],
+     "muzzleCells": 15,
+     "whiskerDots": 0
+    }
+   }
+  },
+  "m32": {
+   "m0": {
+    "name": "现状缺口（1 行 4 格）",
+    "changes": [
+     {
+      "x": 9,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 10,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 21,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 22,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     }
+    ],
+    "after": {
+     "eyes": [
+      {
+       "cells": 6,
+       "box": [
+        2,
+        3
+       ],
+       "at": [
+        9,
+        11
+       ],
+       "toNose": 1,
+       "toMuzzle": 1,
+       "muzzleSharesEdge": false,
+       "toOutline": 3,
+       "toWhisker": 3
+      },
+      {
+       "cells": 6,
+       "box": [
+        2,
+        3
+       ],
+       "at": [
+        21,
+        11
+       ],
+       "toNose": 1,
+       "toMuzzle": 1,
+       "muzzleSharesEdge": false,
+       "toOutline": 3,
+       "toWhisker": 3
+      }
+     ],
+     "muzzleCells": 122,
+     "whiskerDots": 6
+    }
+   },
+   "m1": {
+    "name": "台阶缺口（下 4 上 2）",
+    "changes": [
+     {
+      "x": 9,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 10,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 21,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 22,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 15,
+      "y": 21,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 16,
+      "y": 21,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     }
+    ],
+    "after": {
+     "eyes": [
+      {
+       "cells": 6,
+       "box": [
+        2,
+        3
+       ],
+       "at": [
+        9,
+        11
+       ],
+       "toNose": 1,
+       "toMuzzle": 1,
+       "muzzleSharesEdge": false,
+       "toOutline": 3,
+       "toWhisker": 3
+      },
+      {
+       "cells": 6,
+       "box": [
+        2,
+        3
+       ],
+       "at": [
+        21,
+        11
+       ],
+       "toNose": 1,
+       "toMuzzle": 1,
+       "muzzleSharesEdge": false,
+       "toOutline": 3,
+       "toWhisker": 3
+      }
+     ],
+     "muzzleCells": 120,
+     "whiskerDots": 6
+    }
+   },
+   "m2": {
+    "name": "台阶缺口 + 削外下角（= 草稿用的）",
+    "changes": [
+     {
+      "x": 9,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 10,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 21,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 22,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 15,
+      "y": 21,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 16,
+      "y": 21,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 7,
+      "y": 22,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 24,
+      "y": 22,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     }
+    ],
+    "after": {
+     "eyes": [
+      {
+       "cells": 6,
+       "box": [
+        2,
+        3
+       ],
+       "at": [
+        9,
+        11
+       ],
+       "toNose": 1,
+       "toMuzzle": 1,
+       "muzzleSharesEdge": false,
+       "toOutline": 3,
+       "toWhisker": 3
+      },
+      {
+       "cells": 6,
+       "box": [
+        2,
+        3
+       ],
+       "at": [
+        21,
+        11
+       ],
+       "toNose": 1,
+       "toMuzzle": 1,
+       "muzzleSharesEdge": false,
+       "toOutline": 3,
+       "toWhisker": 3
+      }
+     ],
+     "muzzleCells": 118,
+     "whiskerDots": 6
+    }
+   },
+   "m3": {
+    "name": "只削外下角",
+    "changes": [
+     {
+      "x": 9,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 10,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 21,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 22,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 7,
+      "y": 22,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 24,
+      "y": 22,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     }
+    ],
+    "after": {
+     "eyes": [
+      {
+       "cells": 6,
+       "box": [
+        2,
+        3
+       ],
+       "at": [
+        9,
+        11
+       ],
+       "toNose": 1,
+       "toMuzzle": 1,
+       "muzzleSharesEdge": false,
+       "toOutline": 3,
+       "toWhisker": 3
+      },
+      {
+       "cells": 6,
+       "box": [
+        2,
+        3
+       ],
+       "at": [
+        21,
+        11
+       ],
+       "toNose": 1,
+       "toMuzzle": 1,
+       "muzzleSharesEdge": false,
+       "toOutline": 3,
+       "toWhisker": 3
+      }
+     ],
+     "muzzleCells": 120,
+     "whiskerDots": 6
+    }
+   },
+   "m4": {
+    "name": "台阶 + 外下角削两层",
+    "changes": [
+     {
+      "x": 9,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 10,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 21,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 22,
+      "y": 11,
+      "old": "#72BFA4",
+      "new": "#191D18"
+     },
+     {
+      "x": 15,
+      "y": 21,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 16,
+      "y": 21,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 7,
+      "y": 22,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 24,
+      "y": 22,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 6,
+      "y": 21,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     },
+     {
+      "x": 25,
+      "y": 21,
+      "old": "#F2FAF6",
+      "new": "#72BFA4"
+     }
+    ],
+    "after": {
+     "eyes": [
+      {
+       "cells": 6,
+       "box": [
+        2,
+        3
+       ],
+       "at": [
+        9,
+        11
+       ],
+       "toNose": 1,
+       "toMuzzle": 1,
+       "muzzleSharesEdge": false,
+       "toOutline": 3,
+       "toWhisker": 3
+      },
+      {
+       "cells": 6,
+       "box": [
+        2,
+        3
+       ],
+       "at": [
+        21,
+        11
+       ],
+       "toNose": 1,
+       "toMuzzle": 1,
+       "muzzleSharesEdge": false,
+       "toOutline": 3,
+       "toWhisker": 3
+      }
+     ],
+     "muzzleCells": 116,
+     "whiskerDots": 6
+    }
+   }
+  }
+ }
+}

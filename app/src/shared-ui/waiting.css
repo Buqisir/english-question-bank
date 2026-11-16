@@ -1,0 +1,137 @@
+/* 等待构件（DESIGN.md §5「Waiting 等待」，2026-11-15）：所以点 WaitDots.tsx、灰块 Skeleton.tsx。
+ * 颜色、圆角、过渡只用 tokens.css / App.css :root 里的变量。DESIGN 给定、全站 token 里没有的几个数
+ * （所以点 16px、透明度 0.6）写成本文件里的具名变量，出处都是 DESIGN §5 Waiting。灰块一呼一吸 1.8 秒等待第六轮收进了
+ * tokens.css 的 --wait-breathe-cycle。 */
+
+/* ── 所以点 ─────────────────────────────────────────── */
+
+.eqb-wait-dots {
+  /* 16px：DESIGN §5「所以点」，和行内图标同一档。 */
+  --eqb-wait-dots-size: 16px;
+  display: inline-block;
+  flex: none;
+  width: var(--eqb-wait-dots-size);
+  height: var(--eqb-wait-dots-size);
+  vertical-align: middle;
+  overflow: visible;
+  /* 隐去时（Button / Notice 的 leaving 那一段）淡出。 */
+  transition: opacity var(--motion-fast) var(--ease-hover);
+}
+
+/* 小字旁（12–13px）的一档：14px（Owner 2026-11-15 定：「所以点跟在 12px 小字后面缩到 14px」，DESIGN §5）。
+ * 覆盖：本条 (0,2,0) 盖过上面 .eqb-wait-dots (0,1,0) 的 16px，因为调用处说明了它跟在小字后面。 */
+.eqb-wait-dots[data-size='sm'] {
+  --eqb-wait-dots-size: 14px;
+}
+
+/* 胶囊大号键（Button size="pill"，只给登录键）里的一档：20px（Owner 2026-11-15 定：400 × 52 的键里 16px 偏小，目测）。
+ * 覆盖：本条 (0,2,0) 盖过上面 .eqb-wait-dots (0,1,0) 的 16px，因为调用处说明了它在胶囊大号键里。 */
+.eqb-wait-dots[data-size='lg'] {
+  --eqb-wait-dots-size: 20px;
+}
+
+/* 所以点和字的间距（2026-11-15 第二轮统一）：字和点之间不另加间距（flex gap / margin 合起来是 0）。
+ * 怎么算的：∴ 最左那颗点圆心在 24 格的 x=7、半径 2.25，左边自带 4.75 格空，16px 下约 3.2px、14px 下约 2.8px；
+ * 再加上汉字字身右边自带约 0.5–1px 的空，肉眼看到的间隙约 3–4px（目测），像字后面打了个省略号。
+ * 所以调用处如果容器有 gap，要把 gap 去掉或在点上收回来（各处写了注释）。用到的地方：notice.css、selectionOverlay.css
+ * .paper-selection-card-status、sentenceAnalysis.css .sa-loading；草稿卷顶栏「保存中」、认词自动保存那行是行内，本来就没有间距。 */
+
+/* InlineWaitDots 收尾时淡出。 */
+.eqb-wait-dots[data-leaving] {
+  opacity: 0;
+}
+
+/* 点画在 (0,0)，位置全靠 transform：translate 的单位是 24 格里的格（SVG 里 CSS px = 用户单位）。 */
+.eqb-wait-dots circle {
+  transform-box: view-box;
+  transform-origin: 0 0;
+}
+
+/* ── 灰块 ───────────────────────────────────────────── */
+
+.eqb-skeleton {
+  /* 1.8 秒一呼一吸（--wait-breathe-cycle，tokens.css；等待第六轮从本文件的 --eqb-skeleton-cycle 收过去，main.tsx 启动壳对相位也读它）、
+   * 透明度 1 ↔ 0.6（DESIGN §5「灰块」）；曲线是正弦，和 icons/motionIcons.css 的 --ease-sine 同一条。 */
+  --eqb-skeleton-low: 0.6;
+  --eqb-skeleton-ease: cubic-bezier(0.37, 0, 0.63, 1);
+  display: block;
+  flex: none;
+  max-width: 100%;
+  border-radius: var(--eqb-radius-badge);
+  background: var(--eqb-color-desk);
+  animation: eqb-skeleton-breathe var(--wait-breathe-cycle) var(--eqb-skeleton-ease) infinite;
+}
+
+/* 放在一行字的位置（标题、说明、小字里）的灰块：行内块、竖着居中，那一行的高度仍由原来的字号、行高给，和有字时一样高
+ * （Skeleton 的 inline，等待第六轮 2026-11-15 收成一处；之前各页各写一条 `:is(h2, p, …) > .eqb-skeleton`，那几条没动）。
+ * 覆盖：本条 (0,2,0) 盖过上面 .eqb-skeleton (0,1,0) 的 display: block，因为调用处说明了它占的是字的位置。 */
+.eqb-skeleton[data-inline] {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* 胶囊形的占位（筛选芯片那种标签）：照真东西的形状，圆角取胶囊。
+ * 覆盖：本条 (0,2,0) 盖过上面 .eqb-skeleton (0,1,0) 的圆角 4，因为占的是胶囊的位置。 */
+.eqb-skeleton[data-shape='pill'] {
+  border-radius: var(--eqb-radius-pill);
+}
+
+@keyframes eqb-skeleton-breathe {
+  0%, 100% { opacity: 1; }
+  50% { opacity: var(--eqb-skeleton-low); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eqb-skeleton {
+    animation: none;
+  }
+}
+
+/* ── 占一个控件的位置（SkeletonOver，等待第七轮 2026-11-15） ──
+ * 底下的同款控件和灰块叠在同一格：控件撑出宽高、看不见，灰块铺满那一格。控件的高度只在 field.css / button.css 写一处。 */
+/* flex: 1 1 auto 照 field.css .eqb-field-select：放在字段的 .eqb-field-body（flex）里时和真控件一样占满那一格，
+ * 不缩成空控件的默认宽（换后第一次拍，搜索框灰块只有 244 宽、文件夹灰块只有 46 宽）。 */
+.eqb-skeleton-over {
+  display: grid;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.eqb-skeleton-over > * {
+  grid-area: 1 / 1;
+}
+
+/* 垫底的控件：占位置、看不见、点不到（visibility: hidden 也让它不进读屏、不能聚焦）。 */
+.eqb-skeleton-over-sizer {
+  display: grid;
+  min-width: 0;
+  visibility: hidden;
+}
+
+/* ── 整块在等（SkeletonGate） ─────────────────────────── */
+
+/* .eqb-skeleton-region（SkeletonGate 的区域）本身不写样子：只给读屏的那一句由 index.css 的 .visually-hidden 藏起来，
+ * 灰块怎么排由调用处挂的类给（.paper-dictionary-skeletons、.sa-translation-skeleton、.peek-paper-skeleton），不和它们比权重。 */
+
+/* ── 一组卷面的灰块（PaperGroupSkeleton） ──────────────
+ * 照整卷页实量：正文 14px、行高 24 → 灰块高 12、行距 12（--eqb-space-3）；文章和题之间、题和题之间空一行（--eqb-space-5）；
+ * 选项两列两行，左边缩进和题号一样宽（约 24，--eqb-space-5）。题干和选项的行高实量 26，这里按 24 画，差 2px（目测看不出）。 */
+.eqb-skeleton-paper-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eqb-space-5);
+}
+
+.eqb-skeleton-paper-passage,
+.eqb-skeleton-paper-question {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eqb-space-3);
+}
+
+.eqb-skeleton-paper-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--eqb-space-3);
+  padding-left: var(--eqb-space-5);
+}

@@ -1,0 +1,1875 @@
+{
+ "missing": {
+  "before": [
+   "detail-open: TimeoutError: locator.waitFor: Timeout 60000ms exceeded."
+  ],
+  "after": [
+   "detail-open: TimeoutError: locator.waitFor: Timeout 60000ms exceeded."
+  ]
+ },
+ "pageErrors": {
+  "before": [],
+  "after": []
+ },
+ "shadowPixelDiff": {
+  "shadow-paper-browse": {
+   "sameSize": true,
+   "size": [
+    912,
+    440
+   ],
+   "pixels": 401280,
+   "differentPixels": 0,
+   "maxChannelDiff": 0
+  },
+  "shadow-notebook": {
+   "sameSize": true,
+   "size": [
+    874,
+    440
+   ],
+   "pixels": 384560,
+   "differentPixels": 0,
+   "maxChannelDiff": 0
+  },
+  "shadow-detail": "没拍到"
+ },
+ "steps": {
+  "shadow": {
+   "before": {
+    "paper": [
+     {
+      "x": 304,
+      "y": 184,
+      "w": 832,
+      "h": 8257.9,
+      "text": "英 语 注意事项： 答卷前，考生务必将自己的姓名、准考证号填写在答题卡上。 回答",
+      "visibility": "visible",
+      "shadow": "rgba(0, 0, 0, 0.06) 0px 1px 0px 0px, rgba(0, 0, 0, 0.08) 0px 12px 32px 0px"
+     }
+    ]
+   },
+   "after": {
+    "paper": [
+     {
+      "x": 304,
+      "y": 184,
+      "w": 832,
+      "h": 8257.9,
+      "text": "英 语 注意事项： 答卷前，考生务必将自己的姓名、准考证号填写在答题卡上。 回答",
+      "visibility": "visible",
+      "shadow": "rgba(0, 0, 0, 0.06) 0px 1px 0px 0px, rgba(0, 0, 0, 0.08) 0px 12px 32px 0px"
+     }
+    ]
+   }
+  },
+  "detail-open": {
+   "before": {
+    "at150": {
+     "ms": 3930,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "正在读取题组详情"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "web-animation"
+     ]
+    },
+    "at1200": {
+     "ms": 4231,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "正在读取题组详情"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "waitBoxes": {
+     "hero": [],
+     "title": [],
+     "actions": [],
+     "paper": [],
+     "notice": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 28,
+       "text": "正在读取题组详情",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 4174,
+     "skeletons": 29,
+     "skeletonsVisible": 29,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "peek-root detail-opening-skeleton",
+       "role": "status",
+       "text": "正在读取题组详情"
+      }
+     ],
+     "status": [
+      "正在读取题组详情"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "frozen": {
+     "count": 29,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 4500,
+     "skeletons": 29,
+     "skeletonsVisible": 29,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "peek-root detail-opening-skeleton",
+       "role": "status",
+       "text": "正在读取题组详情"
+      }
+     ],
+     "status": [
+      "正在读取题组详情"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "waitBoxes": {
+     "hero": [
+      {
+       "x": 316,
+       "y": 104,
+       "w": 808,
+       "h": 206.6,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "title": [
+      {
+       "x": 316,
+       "y": 127,
+       "w": 808,
+       "h": 26,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "actions": [
+      {
+       "x": 316,
+       "y": 255,
+       "w": 808,
+       "h": 32,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "paper": [
+      {
+       "x": 316,
+       "y": 311,
+       "w": 808,
+       "h": 300,
+       "text": "",
+       "visibility": "visible",
+       "shadow": "rgba(0, 0, 0, 0.06) 0px 1px 0px 0px, rgba(0, 0, 0, 0.08) 0px 12px 32px 0px"
+      }
+     ],
+     "notice": []
+    }
+   }
+  },
+  "notebook-open": {
+   "before": {
+    "at150": {
+     "ms": 4226,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "正在打开这张纸"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "web-animation"
+     ]
+    },
+    "at1200": {
+     "ms": 4525,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "正在打开这张纸"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "waitBoxes": {
+     "sheet": [],
+     "title": [],
+     "passage": [],
+     "words": [],
+     "notice": [
+      {
+       "x": 16,
+       "y": 72,
+       "w": 1408,
+       "h": 28,
+       "text": "正在打开这张纸",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    },
+    "readyBoxes": {
+     "sheet": [
+      {
+       "x": 323,
+       "y": 72,
+       "w": 794,
+       "h": 658,
+       "text": "2026年新课标Ⅰ卷 阅读 A destination /dest/ 美 n. ",
+       "visibility": "visible",
+       "shadow": "rgba(0, 0, 0, 0.06) 0px 1px 0px 0px, rgba(0, 0, 0, 0.08) 0px 12px 32px 0px"
+      }
+     ],
+     "title": [
+      {
+       "x": 414,
+       "y": 151,
+       "w": 612,
+       "h": 26.7,
+       "text": "2026年新课标Ⅰ卷",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "passage": [
+      {
+       "x": 414,
+       "y": 226,
+       "w": 612,
+       "h": 24,
+       "text": "阅读 A",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "words": [
+      {
+       "x": 414,
+       "y": 271,
+       "w": 612,
+       "h": 105,
+       "text": "destination /dest/ 美 n. 目的地 The island i",
+       "visibility": "visible",
+       "shadow": null
+      },
+      {
+       "x": 414,
+       "y": 400,
+       "w": 612,
+       "h": 105,
+       "text": "remarkable /rema/ 美 adj. 非凡的 She made a ",
+       "visibility": "visible",
+       "shadow": null
+      },
+      {
+       "x": 414,
+       "y": 529,
+       "w": 612,
+       "h": 105,
+       "text": "tolerate /tole/ 美 n. 容忍 Few plants can t",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 4917,
+     "skeletons": 17,
+     "skeletonsVisible": 17,
+     "busy": [
+      {
+       "tag": "DIV",
+       "cls": "eqb-skeleton-region",
+       "role": "status",
+       "text": "正在打开这张纸"
+      }
+     ],
+     "status": [
+      "正在打开这张纸"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "frozen": {
+     "count": 17,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 5266,
+     "skeletons": 17,
+     "skeletonsVisible": 17,
+     "busy": [
+      {
+       "tag": "DIV",
+       "cls": "eqb-skeleton-region",
+       "role": "status",
+       "text": "正在打开这张纸"
+      }
+     ],
+     "status": [
+      "正在打开这张纸"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "waitBoxes": {
+     "sheet": [
+      {
+       "x": 323,
+       "y": 72,
+       "w": 794,
+       "h": 655,
+       "text": "",
+       "visibility": "visible",
+       "shadow": "rgba(0, 0, 0, 0.06) 0px 1px 0px 0px, rgba(0, 0, 0, 0.08) 0px 12px 32px 0px"
+      }
+     ],
+     "title": [
+      {
+       "x": 414,
+       "y": 151,
+       "w": 612,
+       "h": 26.7,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "passage": [
+      {
+       "x": 414,
+       "y": 226,
+       "w": 612,
+       "h": 24,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "words": [
+      {
+       "x": 414,
+       "y": 271,
+       "w": 612,
+       "h": 104,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      },
+      {
+       "x": 414,
+       "y": 399,
+       "w": 612,
+       "h": 104,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      },
+      {
+       "x": 414,
+       "y": 527,
+       "w": 612,
+       "h": 104,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "notice": []
+    },
+    "readyBoxes": {
+     "sheet": [
+      {
+       "x": 323,
+       "y": 72,
+       "w": 794,
+       "h": 658,
+       "text": "2026年新课标Ⅰ卷 阅读 A destination /dest/ 美 n. ",
+       "visibility": "visible",
+       "shadow": "rgba(0, 0, 0, 0.06) 0px 1px 0px 0px, rgba(0, 0, 0, 0.08) 0px 12px 32px 0px"
+      }
+     ],
+     "title": [
+      {
+       "x": 414,
+       "y": 151,
+       "w": 612,
+       "h": 26.7,
+       "text": "2026年新课标Ⅰ卷",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "passage": [
+      {
+       "x": 414,
+       "y": 226,
+       "w": 612,
+       "h": 24,
+       "text": "阅读 A",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "words": [
+      {
+       "x": 414,
+       "y": 271,
+       "w": 612,
+       "h": 105,
+       "text": "destination /dest/ 美 n. 目的地 The island i",
+       "visibility": "visible",
+       "shadow": null
+      },
+      {
+       "x": 414,
+       "y": 400,
+       "w": 612,
+       "h": 105,
+       "text": "remarkable /rema/ 美 adj. 非凡的 She made a ",
+       "visibility": "visible",
+       "shadow": null
+      },
+      {
+       "x": 414,
+       "y": 529,
+       "w": 612,
+       "h": 105,
+       "text": "tolerate /tole/ 美 n. 容忍 Few plants can t",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    }
+   }
+  },
+  "review-open": {
+   "before": {
+    "at150": {
+     "ms": 4082,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "正在读取过词进度"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "frozen": {
+     "count": 3,
+     "kinds": [
+      "web-animation"
+     ]
+    },
+    "at1200": {
+     "ms": 4411,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "正在读取过词进度"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "waitBoxes": {
+     "setup": [
+      {
+       "x": 24,
+       "y": 138,
+       "w": 1392,
+       "h": 620,
+       "text": "正在读取过词进度",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "h2": [],
+     "fields": [],
+     "start": [],
+     "direct": []
+    },
+    "readyBoxes": {
+     "setup": [
+      {
+       "x": 24,
+       "y": 257,
+       "w": 1392,
+       "h": 620,
+       "text": "这轮准备收多少个生词？ 可选 1–60 个。第一次默认 15，以后会记住上次目标",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "h2": [
+      {
+       "x": 610,
+       "y": 369,
+       "w": 220,
+       "h": 27,
+       "text": "这轮准备收多少个生词？",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "fields": [
+      {
+       "x": 590,
+       "y": 449,
+       "w": 260,
+       "h": 56,
+       "text": "目标生词数",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "start": [
+      {
+       "x": 380,
+       "y": 521,
+       "w": 680,
+       "h": 32,
+       "text": "过词读音 美音 英音 开始过词",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "direct": [
+      {
+       "x": 430,
+       "y": 585,
+       "w": 580,
+       "h": 233,
+       "text": "已有单词，直接生成词表 只匹配当前课程已入库的 30 词 用中文逗号隔开 生成固",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 4823,
+     "skeletons": 13,
+     "skeletonsVisible": 13,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "vocabulary-run-setup vocabulary-run-skeleton",
+       "role": "status",
+       "text": "正在读取过词进度"
+      }
+     ],
+     "status": [
+      "正在读取过词进度"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "frozen": {
+     "count": 13,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 5213,
+     "skeletons": 13,
+     "skeletonsVisible": 13,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "vocabulary-run-setup vocabulary-run-skeleton",
+       "role": "status",
+       "text": "正在读取过词进度"
+      }
+     ],
+     "status": [
+      "正在读取过词进度"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "waitBoxes": {
+     "setup": [
+      {
+       "x": 24,
+       "y": 138,
+       "w": 1392,
+       "h": 620,
+       "text": "正在读取过词进度",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "h2": [
+      {
+       "x": 610,
+       "y": 252,
+       "w": 220,
+       "h": 24,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "fields": [
+      {
+       "x": 590,
+       "y": 329,
+       "w": 260,
+       "h": 56,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "start": [
+      {
+       "x": 380,
+       "y": 401,
+       "w": 680,
+       "h": 32,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "direct": [
+      {
+       "x": 430,
+       "y": 465,
+       "w": 580,
+       "h": 231,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    },
+    "readyBoxes": {
+     "setup": [
+      {
+       "x": 24,
+       "y": 257,
+       "w": 1392,
+       "h": 620,
+       "text": "这轮准备收多少个生词？ 可选 1–60 个。第一次默认 15，以后会记住上次目标",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "h2": [
+      {
+       "x": 610,
+       "y": 369,
+       "w": 220,
+       "h": 27,
+       "text": "这轮准备收多少个生词？",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "fields": [
+      {
+       "x": 590,
+       "y": 449,
+       "w": 260,
+       "h": 56,
+       "text": "目标生词数",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "start": [
+      {
+       "x": 380,
+       "y": 521,
+       "w": 680,
+       "h": 32,
+       "text": "过词读音 美音 英音 开始过词",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "direct": [
+      {
+       "x": 430,
+       "y": 585,
+       "w": 580,
+       "h": 233,
+       "text": "已有单词，直接生成词表 只匹配当前课程已入库的 30 词 用中文逗号隔开 生成固",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    }
+   }
+  },
+  "review-download-slow": {
+   "before": {
+    "blocked": 1,
+    "at1200": {
+     "actions": [
+      {
+       "x": 285,
+       "y": 582,
+       "w": 810,
+       "h": 100,
+       "text": "单词纸名称 保存名称 下载读音 美式 英式 下载 生成公开二维码 趣味练习 复制",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "state": [
+      {
+       "x": 624,
+       "y": 500,
+       "w": 132.5,
+       "h": 27,
+       "text": "已收满2个生词",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    },
+    "at11s": {
+     "actions": [
+      {
+       "x": 285,
+       "y": 582,
+       "w": 810,
+       "h": 100,
+       "text": "单词纸名称 保存名称 下载读音 美式 英式 下载 生成公开二维码 趣味练习 复制",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "state": [
+      {
+       "x": 624,
+       "y": 500,
+       "w": 132.5,
+       "h": 27,
+       "text": "已收满2个生词",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "line": []
+    }
+   },
+   "after": {
+    "blocked": 1,
+    "at1200": {
+     "actions": [
+      {
+       "x": 285,
+       "y": 582,
+       "w": 810,
+       "h": 100,
+       "text": "单词纸名称 保存名称 下载读音 美式 英式 下载 生成公开二维码 趣味练习 复制",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "state": [
+      {
+       "x": 624,
+       "y": 500,
+       "w": 132.5,
+       "h": 27,
+       "text": "已收满2个生词",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    },
+    "at11s": {
+     "actions": [
+      {
+       "x": 285,
+       "y": 562,
+       "w": 810,
+       "h": 100,
+       "text": "单词纸名称 保存名称 下载读音 美式 英式 下载 生成公开二维码 趣味练习 复制",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "state": [
+      {
+       "x": 624,
+       "y": 480,
+       "w": 132.5,
+       "h": 27,
+       "text": "已收满2个生词",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "line": [
+      {
+       "x": 563,
+       "y": 674,
+       "w": 254,
+       "h": 28,
+       "text": "正在生成，比平时慢，可以先去做别的",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    }
+   }
+  },
+  "practice-open": {
+   "before": {
+    "at150": {
+     "ms": 3962,
+     "skeletons": 30,
+     "skeletonsVisible": 30,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "vocabulary-practice-loading",
+       "role": "status",
+       "text": "正在准备卡片​"
+      }
+     ],
+     "status": [
+      "正在准备卡片​"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "frozen": {
+     "count": 30,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 4297,
+     "skeletons": 30,
+     "skeletonsVisible": 30,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "vocabulary-practice-loading",
+       "role": "status",
+       "text": "正在准备卡片​"
+      }
+     ],
+     "status": [
+      "正在准备卡片​"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "waitBoxes": {
+     "heading": [
+      {
+       "x": 184,
+       "y": 132,
+       "w": 1072,
+       "h": 87,
+       "text": "​",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "round": [
+      {
+       "x": 1066,
+       "y": 132,
+       "w": 190,
+       "h": 87,
+       "text": "​",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "modes": [
+      {
+       "x": 184,
+       "y": 241,
+       "w": 388,
+       "h": 51.5,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "board": [
+      {
+       "x": 209,
+       "y": 400,
+       "w": 1022,
+       "h": 604,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "h2": [
+      {
+       "x": 209,
+       "y": 351,
+       "w": 1022,
+       "h": 29,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    },
+    "readyBoxes": {
+     "heading": [
+      {
+       "x": 184,
+       "y": 132,
+       "w": 1072,
+       "h": 93,
+       "text": "翻牌消消乐 拍图生词组 翻开英文和对应的中文核心义。点到英文卡时会朗读一次。 第",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "round": [
+      {
+       "x": 1066,
+       "y": 132,
+       "w": 190,
+       "h": 93,
+       "text": "第 1 / 1 轮 已配对 0 / 10 沿用美音",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "modes": [
+      {
+       "x": 184,
+       "y": 247,
+       "w": 388,
+       "h": 51.5,
+       "text": "翻牌消消乐 当前练习",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "board": [
+      {
+       "x": 209,
+       "y": 409,
+       "w": 1022,
+       "h": 604,
+       "text": "翻开 中文意思 放弃 翻开 中文意思 下降 翻开 英文 capture 翻开 中",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "h2": [
+      {
+       "x": 209,
+       "y": 357,
+       "w": 1022,
+       "h": 32,
+       "text": "单词配对卡片",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 4202,
+     "skeletons": 29,
+     "skeletonsVisible": 29,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "vocabulary-practice-loading",
+       "role": "status",
+       "text": "正在准备卡片​"
+      }
+     ],
+     "status": [
+      "正在准备卡片​"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "frozen": {
+     "count": 29,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 4505,
+     "skeletons": 29,
+     "skeletonsVisible": 29,
+     "busy": [
+      {
+       "tag": "SECTION",
+       "cls": "vocabulary-practice-loading",
+       "role": "status",
+       "text": "正在准备卡片​"
+      }
+     ],
+     "status": [
+      "正在准备卡片​"
+     ],
+     "img": [
+      "/brand/mark-32.png",
+      "/brand/avatar.svg"
+     ]
+    },
+    "waitBoxes": {
+     "heading": [
+      {
+       "x": 184,
+       "y": 132,
+       "w": 1072,
+       "h": 87,
+       "text": "​",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "round": [
+      {
+       "x": 1066,
+       "y": 132,
+       "w": 190,
+       "h": 87,
+       "text": "​",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "modes": [
+      {
+       "x": 184,
+       "y": 241,
+       "w": 388,
+       "h": 51.5,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "board": [
+      {
+       "x": 209,
+       "y": 332,
+       "w": 1022,
+       "h": 604,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "h2": []
+    },
+    "readyBoxes": {
+     "heading": [
+      {
+       "x": 184,
+       "y": 132,
+       "w": 1072,
+       "h": 93,
+       "text": "翻牌消消乐 拍图生词组 翻开英文和对应的中文核心义。点到英文卡时会朗读一次。 第",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "round": [
+      {
+       "x": 1066,
+       "y": 132,
+       "w": 190,
+       "h": 93,
+       "text": "第 1 / 1 轮 已配对 0 / 10 沿用美音",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "modes": [
+      {
+       "x": 184,
+       "y": 247,
+       "w": 388,
+       "h": 51.5,
+       "text": "翻牌消消乐 当前练习",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "board": [
+      {
+       "x": 209,
+       "y": 338,
+       "w": 1022,
+       "h": 604,
+       "text": "翻开 中文意思 好处 翻开 中文意思 忽视 翻开 中文意思 易碎的 翻开 英文 ",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "h2": [
+      {
+       "x": 208,
+       "y": 337,
+       "w": 1,
+       "h": 1,
+       "text": "单词配对卡片",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    }
+   }
+  },
+  "draft": {
+   "before": {
+    "items": [
+     {
+      "id": "draft-item-01380208-8d61-422d-8731-bd81f5d55a20",
+      "groupId": "group-2026-i-reading-a"
+     },
+     {
+      "id": "draft-item-7a78dea6-d7f7-4060-a6cd-df837938afeb",
+      "groupId": "group-2026-i-reading-b"
+     },
+     {
+      "id": "draft-item-49472db7-88e8-4b3e-bbda-b27204536fb3",
+      "groupId": "group-2026-i-reading-c"
+     }
+    ],
+    "at150": {
+     "ms": 150,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [],
+     "img": []
+    },
+    "frozen": {
+     "count": 0,
+     "kinds": []
+    },
+    "at1200": {
+     "ms": 1487,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [],
+     "img": []
+    },
+    "waitBoxes": {
+     "rail": [],
+     "sheet": [],
+     "notice": []
+    },
+    "readyBoxes": {
+     "rail": [
+      {
+       "x": 122,
+       "y": 72,
+       "w": 164,
+       "h": 195,
+       "text": "共 1 页 · 双面 1 张 A篇原卷 A 篇 B篇原卷 B 篇 C篇原卷 C ",
+       "visibility": "visible",
+       "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px"
+      }
+     ],
+     "col": [
+      {
+       "x": 310,
+       "y": 72,
+       "w": 820,
+       "h": 1200,
+       "text": "正在生成分页预览",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "sheet": [
+      {
+       "x": 310,
+       "y": 72,
+       "w": 820,
+       "h": 1200,
+       "text": "正在生成分页预览",
+       "visibility": "visible",
+       "shadow": "rgba(30, 30, 28, 0) 0px 0px 0px 0px"
+      }
+     ]
+    },
+    "blocked": {
+     "save": 1,
+     "pagination": 0
+    },
+    "reflow1200": [
+     {
+      "x": 609,
+      "y": 88,
+      "w": 222,
+      "h": 36,
+      "text": "正在重排卷面，旧卷面先留着",
+      "visibility": "visible",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     }
+    ],
+    "reflow11s": [
+     {
+      "x": 609,
+      "y": 88,
+      "w": 222,
+      "h": 36,
+      "text": "正在重排卷面，旧卷面先留着",
+      "visibility": "visible",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     }
+    ]
+   },
+   "after": {
+    "items": [
+     {
+      "id": "draft-item-ea49731c-8881-44cc-ac9a-3f353a36f0ec",
+      "groupId": "group-2026-i-reading-a"
+     },
+     {
+      "id": "draft-item-92d6a0b5-7917-4c9c-a5f7-a88647f92717",
+      "groupId": "group-2026-i-reading-b"
+     },
+     {
+      "id": "draft-item-d006270a-5a4c-4952-8b4b-be618e4db8e2",
+      "groupId": "group-2026-i-reading-c"
+     }
+    ],
+    "at150": {
+     "ms": 157,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [],
+     "img": []
+    },
+    "frozen": {
+     "count": 0,
+     "kinds": []
+    },
+    "at1200": {
+     "ms": 1424,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [],
+     "img": []
+    },
+    "waitBoxes": {
+     "rail": [],
+     "sheet": [],
+     "notice": []
+    },
+    "readyBoxes": {
+     "rail": [
+      {
+       "x": 122,
+       "y": 72,
+       "w": 164,
+       "h": 195,
+       "text": "共 1 页 · 双面 1 张 A篇原卷 A 篇 B篇原卷 B 篇 C篇原卷 C ",
+       "visibility": "visible",
+       "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px"
+      }
+     ],
+     "col": [
+      {
+       "x": 310,
+       "y": 72,
+       "w": 820,
+       "h": 1200,
+       "text": "正在生成分页预览",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "sheet": [
+      {
+       "x": 310,
+       "y": 72,
+       "w": 820,
+       "h": 1200,
+       "text": "正在生成分页预览",
+       "visibility": "visible",
+       "shadow": "rgba(30, 30, 28, 0) 0px 0px 0px 0px"
+      }
+     ]
+    },
+    "blocked": {
+     "save": 1,
+     "pagination": 0
+    },
+    "reflow1200": [
+     {
+      "x": 609,
+      "y": 88,
+      "w": 222,
+      "h": 36,
+      "text": "正在重排卷面，旧卷面先留着",
+      "visibility": "visible",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     }
+    ],
+    "reflow11s": [
+     {
+      "x": 560,
+      "y": 88,
+      "w": 320,
+      "h": 36,
+      "text": "正在重排卷面，大约要半分钟，旧卷面先留着",
+      "visibility": "visible",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     }
+    ]
+   }
+  },
+  "dictation-boot-390": {
+   "before": {
+    "at150": {
+     "ms": 150,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "EQ正在准备听写正在载入本次练习，请稍候。"
+     ],
+     "img": []
+    },
+    "frozen": {
+     "count": 0,
+     "kinds": []
+    },
+    "at1200": {
+     "ms": 1410,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "EQ正在准备听写正在载入本次练习，请稍候。"
+     ],
+     "img": []
+    },
+    "bootBoxes": {
+     "stage": [],
+     "controls": [],
+     "card": [
+      {
+       "x": 24,
+       "y": 328,
+       "w": 342,
+       "h": 187.5,
+       "text": "EQ 正在准备听写 正在载入本次练习，请稍候。",
+       "visibility": "visible",
+       "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+      }
+     ]
+    },
+    "handover100": {
+     "ms": 101,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "vocabulary-dictation-shell vocabulary-dictation-sk",
+       "role": "status",
+       "text": "正在准备听写"
+      }
+     ],
+     "status": [
+      "正在准备听写"
+     ],
+     "img": [],
+     "stage": []
+    },
+    "readyBoxes": {
+     "stage": [
+      {
+       "x": 14,
+       "y": 70,
+       "w": 362,
+       "h": 360,
+       "text": "拍图听写 1 / 10 第 1 题 准备开始 请在纸上写下英文单词、词性和一个中",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "controls": [
+      {
+       "x": 14,
+       "y": 446,
+       "w": 362,
+       "h": 368,
+       "text": "重播本题 每词播放 1遍 2遍 3遍 词间书写时间 3秒 5秒 8秒 自定义 音",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 151,
+     "skeletons": 20,
+     "skeletonsVisible": 0,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "vocabulary-dictation-shell vocabulary-dictation-sk",
+       "role": "status",
+       "text": "正在准备听写"
+      }
+     ],
+     "status": [
+      "正在准备听写"
+     ],
+     "img": []
+    },
+    "frozen": {
+     "count": 20,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1426,
+     "skeletons": 20,
+     "skeletonsVisible": 20,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "vocabulary-dictation-shell vocabulary-dictation-sk",
+       "role": "status",
+       "text": "正在准备听写"
+      }
+     ],
+     "status": [
+      "正在准备听写"
+     ],
+     "img": []
+    },
+    "bootBoxes": {
+     "stage": [
+      {
+       "x": 14,
+       "y": 70,
+       "w": 362,
+       "h": 360,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "controls": [
+      {
+       "x": 14,
+       "y": 446,
+       "w": 362,
+       "h": 362,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "card": []
+    },
+    "handover100": {
+     "ms": 101,
+     "skeletons": 20,
+     "skeletonsVisible": 20,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "vocabulary-dictation-shell vocabulary-dictation-sk",
+       "role": "status",
+       "text": "正在准备听写"
+      }
+     ],
+     "status": [
+      "正在准备听写"
+     ],
+     "img": [],
+     "stage": [
+      {
+       "x": 14,
+       "y": 70,
+       "w": 362,
+       "h": 360,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    },
+    "readyBoxes": {
+     "stage": [
+      {
+       "x": 14,
+       "y": 70,
+       "w": 362,
+       "h": 360,
+       "text": "拍图听写 1 / 10 第 1 题 准备开始 请在纸上写下英文单词、词性和一个中",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "controls": [
+      {
+       "x": 14,
+       "y": 446,
+       "w": 362,
+       "h": 368,
+       "text": "重播本题 每词播放 1遍 2遍 3遍 词间书写时间 3秒 5秒 8秒 自定义 音",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    }
+   }
+  },
+  "dictation-boot": {
+   "before": {
+    "at150": {
+     "ms": 150,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "EQ正在准备听写正在载入本次练习，请稍候。"
+     ],
+     "img": []
+    },
+    "frozen": {
+     "count": 0,
+     "kinds": []
+    },
+    "at1200": {
+     "ms": 1413,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "EQ正在准备听写正在载入本次练习，请稍候。"
+     ],
+     "img": []
+    },
+    "bootBoxes": {
+     "stage": [],
+     "controls": [],
+     "card": [
+      {
+       "x": 540,
+       "y": 356,
+       "w": 360,
+       "h": 187.5,
+       "text": "EQ 正在准备听写 正在载入本次练习，请稍候。",
+       "visibility": "visible",
+       "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+      }
+     ]
+    },
+    "handover100": {
+     "ms": 101,
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "vocabulary-dictation-shell vocabulary-dictation-sk",
+       "role": "status",
+       "text": "正在准备听写"
+      }
+     ],
+     "status": [
+      "正在准备听写"
+     ],
+     "img": [],
+     "stage": []
+    },
+    "readyBoxes": {
+     "stage": [
+      {
+       "x": 340,
+       "y": 84,
+       "w": 760,
+       "h": 410,
+       "text": "拍图听写 1 / 10 第 1 题 准备开始 请在纸上写下英文单词、词性和一个中",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "controls": [
+      {
+       "x": 340,
+       "y": 510,
+       "w": 760,
+       "h": 258,
+       "text": "重播本题 每词播放 1遍 2遍 3遍 词间书写时间 3秒 5秒 8秒 自定义 音",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    }
+   },
+   "after": {
+    "at150": {
+     "ms": 150,
+     "skeletons": 20,
+     "skeletonsVisible": 0,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "vocabulary-dictation-shell vocabulary-dictation-sk",
+       "role": "status",
+       "text": "正在准备听写"
+      }
+     ],
+     "status": [
+      "正在准备听写"
+     ],
+     "img": []
+    },
+    "frozen": {
+     "count": 20,
+     "kinds": [
+      "eqb-skeleton-breathe"
+     ]
+    },
+    "at1200": {
+     "ms": 1418,
+     "skeletons": 20,
+     "skeletonsVisible": 20,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "vocabulary-dictation-shell vocabulary-dictation-sk",
+       "role": "status",
+       "text": "正在准备听写"
+      }
+     ],
+     "status": [
+      "正在准备听写"
+     ],
+     "img": []
+    },
+    "bootBoxes": {
+     "stage": [
+      {
+       "x": 340,
+       "y": 84,
+       "w": 760,
+       "h": 410,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "controls": [
+      {
+       "x": 340,
+       "y": 510,
+       "w": 760,
+       "h": 239,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "card": []
+    },
+    "handover100": {
+     "ms": 101,
+     "skeletons": 20,
+     "skeletonsVisible": 20,
+     "busy": [
+      {
+       "tag": "MAIN",
+       "cls": "vocabulary-dictation-shell vocabulary-dictation-sk",
+       "role": "status",
+       "text": "正在准备听写"
+      }
+     ],
+     "status": [
+      "正在准备听写"
+     ],
+     "img": [],
+     "stage": [
+      {
+       "x": 340,
+       "y": 84,
+       "w": 760,
+       "h": 410,
+       "text": "",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    },
+    "readyBoxes": {
+     "stage": [
+      {
+       "x": 340,
+       "y": 84,
+       "w": 760,
+       "h": 410,
+       "text": "拍图听写 1 / 10 第 1 题 准备开始 请在纸上写下英文单词、词性和一个中",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ],
+     "controls": [
+      {
+       "x": 340,
+       "y": 510,
+       "w": 760,
+       "h": 258,
+       "text": "重播本题 每词播放 1遍 2遍 3遍 词间书写时间 3秒 5秒 8秒 自定义 音",
+       "visibility": "visible",
+       "shadow": null
+      }
+     ]
+    }
+   }
+  },
+  "listen-boot": {
+   "before": {
+    "card": {
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "EQ正在准备词汇练习正在载入本次练习，请稍候。"
+     ],
+     "img": [],
+     "card": [
+      {
+       "x": 540,
+       "y": 356,
+       "w": 360,
+       "h": 187.5,
+       "text": "EQ 正在准备词汇练习 正在载入本次练习，请稍候。",
+       "visibility": "visible",
+       "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+      }
+     ]
+    }
+   },
+   "after": {
+    "card": {
+     "skeletons": 0,
+     "skeletonsVisible": 0,
+     "busy": [],
+     "status": [
+      "正在准备词汇练习正在载入本次练习，请稍候。"
+     ],
+     "img": [
+      "/brand/mark.svg"
+     ],
+     "card": [
+      {
+       "x": 540,
+       "y": 356,
+       "w": 360,
+       "h": 187.5,
+       "text": "正在准备词汇练习 正在载入本次练习，请稍候。",
+       "visibility": "visible",
+       "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+      }
+     ]
+    }
+   }
+  }
+ }
+}

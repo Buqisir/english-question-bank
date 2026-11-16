@@ -1,0 +1,100 @@
+/* 底部提示 / 撤销（Toast.tsx）。颜色、间距、圆角、影子只用 tokens.css 里的变量；动效用全站动效 token
+ * （--motion-* / --ease-*，App.css :root，DESIGN.md §6）。
+ * 样子照原来共用提示行的 floating 放法（notice.css，这一轮收进这里）：白底、e3、8 圆角，16px 图标加一行 14px 次要灰字，
+ * 行尾一个墨字小号键。DESIGN.md §4：浮层是不透明白底加 e3，不用玻璃。 */
+
+/* 播报区：常驻在 <body> 最后，空的时候什么也不画、不挡点击。提示放在里面，视口底部正中。
+ * 两块播报区（polite / assertive）叠在同一个位置；一次只显示一条，退场的那条和新来的那条叠在同一格里，不互相挤开。
+ * z-index 32：原来草稿卷的提示在 30 层（notice.css floating），整卷页相似题栏的提示抬到 32 层（整卷预览里有 30、31 层的东西）；
+ * 收成一个件以后取高的那个，两处都不被压住。菜单 70、对话框在它上面。没有层级变量，记在 docs/design-gaps.md。 */
+.eqb-toast-region {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: var(--eqb-space-5);
+  z-index: 32;
+  display: grid;
+  justify-items: center;
+  align-items: end;
+  padding: 0 var(--eqb-space-4);
+  pointer-events: none;
+}
+
+.eqb-toast-region > * {
+  grid-area: 1 / 1;
+}
+
+.eqb-toast {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--eqb-space-2);
+  width: max-content;
+  max-width: 100%;
+  min-width: 0;
+  /* 和 28px 的小号键一样高，有键没键一样高。 */
+  min-height: 28px;
+  padding: var(--eqb-space-2) var(--eqb-space-2) var(--eqb-space-2) var(--eqb-space-3);
+  border-radius: var(--eqb-radius-control);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-3);
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-sm);
+  line-height: 20px;
+  pointer-events: auto;
+  transition:
+    opacity var(--motion-fast) var(--ease-out),
+    transform var(--motion-fast) var(--ease-out);
+}
+
+.eqb-toast > svg {
+  flex: 0 0 auto;
+}
+
+.eqb-toast[data-kind='error'] > svg {
+  color: var(--eqb-color-danger-text);
+}
+
+.eqb-toast-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 行尾的键：小号键左边自带 8px 内边距，再加 8px 间距离字 16px，像另起一组；左边收 4px（照原 notice.css）。 */
+.eqb-toast-action {
+  flex: 0 0 auto;
+  margin-left: calc(-1 * var(--eqb-space-1));
+}
+
+/* 退场：淡出、下沉 8px（--motion-fast）。 */
+.eqb-toast[data-visible='false'] {
+  opacity: 0;
+  transform: translateY(var(--eqb-space-2));
+}
+
+/* 入场比退场慢一档（--motion-base，同原来的撤销提示条）。
+ * 覆盖：本条 (0,2,0) 盖过 .eqb-toast (0,1,0) 的 transition 时长。 */
+.eqb-toast[data-visible='true'] {
+  transition-duration: var(--motion-base);
+}
+
+/* 窄屏：离底 16 再加手机底部的安全区。宽度和宽屏一样跟着内容走、居中，最宽到左右各留 16（播报区的内边距）。
+ * 不占满一整行：一句「题组已移出 · 撤销」铺满 358 宽，右边空一大片，还会盖住卷面右下角的浮键（协调人复核 2026-11-15）。 */
+@media (max-width: 640px) {
+  .eqb-toast-region {
+    bottom: calc(var(--eqb-space-4) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* 减少动态效果：不做动画，直接出现、直接消失。
+ * 覆盖：本条盖过上面两条 transition（含 [data-visible='true'] 的 (0,2,0)），也不下沉。 */
+@media (prefers-reduced-motion: reduce) {
+  .eqb-toast,
+  .eqb-toast[data-visible='true'],
+  .eqb-toast[data-visible='false'] {
+    transition: none;
+    transform: none;
+  }
+}

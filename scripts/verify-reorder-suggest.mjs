@@ -51,8 +51,9 @@
 //   ⑦ real click (if this fixture produced a card — same "if present, else
 //     log and move on" escape hatch verify-a3-imposition.mjs's own seam-
 //     suggestion assertion uses, plan.md never guarantees THIS fixture
-//     produces one): click "调整顺序 →", assert the resulting PATCH
-//     succeeds and item order actually changed; click 撤销 in the undo
+//     produces one): click 「采用」, assert the resulting PATCH
+//     succeeds and item order actually changed; the same card turns into
+//     「已采用」 in place (DESIGN.md §5 Proposal → Decision); click 撤回 on it
 //     toast, assert a second PATCH restores the original order.
 import { spawn } from 'node:child_process'
 import { createRequire } from 'node:module'
@@ -437,7 +438,7 @@ async function runPhaseB(browser) {
       )
       await page.locator('.draft-reorder-suggestion-act').first().click()
       const applyResponse = await applyMutation
-      assert(`real click on 调整顺序 → triggers a successful PATCH [${label}]`, applyResponse.ok(), String(applyResponse.status()))
+      assert(`real click on 采用 triggers a successful PATCH [${label}]`, applyResponse.ok(), String(applyResponse.status()))
 
       const orderAfterClick = await page.evaluate(async (id) => {
         const response = await fetch(`/api/draft-papers/${id}`)
@@ -446,14 +447,19 @@ async function runPhaseB(browser) {
       }, draftId)
       assert(`applying the suggestion actually changed the item order [${label}]`, JSON.stringify(orderAfterClick) !== JSON.stringify(orderBeforeClick))
 
-      await page.locator('.draft-undo-toast').filter({ hasText: '顺序已调整' }).waitFor({ timeout: 5000 })
+      // 提议和决定：采用后卡片留在原处变「已采用」，撤回就在卡上，不再弹底部提示条。
+      const decidedCard = page.locator('.draft-reorder-suggestion[data-state="decided"]')
+      await decidedCard.waitFor({ timeout: 5000 })
+      assert(`the adopted card stays in place and reads 已采用 [${label}]`, (await decidedCard.innerText()).includes('已采用'))
+      assert(`no bottom 顺序已调整 toast any more [${label}]`, (await page.locator('.draft-undo-toast').filter({ hasText: '顺序已调整' }).count()) === 0)
       const undoMutation = page.waitForResponse(
         (response) => response.url().includes(`/api/draft-papers/${draftId}`) && response.request().method() === 'PATCH',
         { timeout: 10_000 },
       )
-      await page.locator('.draft-undo-toast').filter({ hasText: '顺序已调整' }).getByRole('button', { name: /撤销/ }).click()
+      await decidedCard.getByRole('button', { name: '撤回' }).click()
       const undoResponse = await undoMutation
-      assert(`real click on 撤销 triggers a successful PATCH [${label}]`, undoResponse.ok(), String(undoResponse.status()))
+      assert(`real click on 撤回 triggers a successful PATCH [${label}]`, undoResponse.ok(), String(undoResponse.status()))
+      await page.locator('.draft-reorder-suggestion[data-state="proposal"]').waitFor({ timeout: 5000 })
 
       const orderAfterUndo = await page.evaluate(async (id) => {
         const response = await fetch(`/api/draft-papers/${id}`)

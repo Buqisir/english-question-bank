@@ -1,0 +1,288 @@
+{
+ "status": "对比稿 · 提案 · 单一来源",
+ "note": "本地网站（rig.mjs，端口偏移 46），owner 账号，视口 1440×900，减少动态效果。只在截图前换 img 地址，源码没动。标签条是示意。",
+ "shots": {
+  "1x-topbar-currentSrc": "/brand/mark-32.png",
+  "1x-cur": {
+   "label": "现状",
+   "topbarCss": {
+    "x": 260,
+    "y": 40,
+    "width": 920,
+    "height": 64
+   },
+   "markCss": {
+    "x": 292,
+    "y": 62,
+    "width": 32,
+    "height": 20
+   },
+   "favLightCss": {
+    "x": 20,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "favDarkCss": {
+    "x": 238,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "topbarImgSrc": "data:（换成草稿 PNG）"
+  },
+  "1x-A": {
+   "label": "A（标签 16 修 + 顶栏 A）",
+   "topbarCss": {
+    "x": 260,
+    "y": 40,
+    "width": 920,
+    "height": 64
+   },
+   "markCss": {
+    "x": 292,
+    "y": 62,
+    "width": 32,
+    "height": 20
+   },
+   "favLightCss": {
+    "x": 20,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "favDarkCss": {
+    "x": 238,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "topbarImgSrc": "data:（换成草稿 PNG）"
+  },
+  "1x-C": {
+   "label": "C（标签 16 修 + 顶栏 C）",
+   "topbarCss": {
+    "x": 260,
+    "y": 40,
+    "width": 920,
+    "height": 64
+   },
+   "markCss": {
+    "x": 292,
+    "y": 62,
+    "width": 32,
+    "height": 20
+   },
+   "favLightCss": {
+    "x": 20,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "favDarkCss": {
+    "x": 238,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "topbarImgSrc": "data:（换成草稿 PNG）"
+  },
+  "1x-A0": {
+   "label": "A0 只改眼（参照）",
+   "topbarCss": {
+    "x": 260,
+    "y": 40,
+    "width": 920,
+    "height": 64
+   },
+   "markCss": {
+    "x": 292,
+    "y": 62,
+    "width": 32,
+    "height": 20
+   },
+   "favLightCss": {
+    "x": 20,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "favDarkCss": {
+    "x": 238,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "topbarImgSrc": "data:（换成草稿 PNG）"
+  },
+  "1x-C0": {
+   "label": "C0 只改眼（参照）",
+   "topbarCss": {
+    "x": 260,
+    "y": 40,
+    "width": 920,
+    "height": 64
+   },
+   "markCss": {
+    "x": 292,
+    "y": 62,
+    "width": 32,
+    "height": 20
+   },
+   "favLightCss": {
+    "x": 20,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "favDarkCss": {
+    "x": 238,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "topbarImgSrc": "data:（换成草稿 PNG）"
+  },
+  "2x-topbar-currentSrc": "/brand/mark.svg",
+  "2x-cur": {
+   "label": "现状",
+   "topbarCss": {
+    "x": 260,
+    "y": 40,
+    "width": 920,
+    "height": 64
+   },
+   "markCss": {
+    "x": 292,
+    "y": 62,
+    "width": 32,
+    "height": 20
+   },
+   "favLightCss": {
+    "x": 20,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "favDarkCss": {
+    "x": 238,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "topbarImgSrc": "/brand/mark.svg"
+  },
+  "2x-A": {
+   "label": "A",
+   "topbarCss": {
+    "x": 260,
+    "y": 40,
+    "width": 920,
+    "height": 64
+   },
+   "markCss": {
+    "x": 292,
+    "y": 62,
+    "width": 32,
+    "height": 20
+   },
+   "favLightCss": {
+    "x": 20,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "favDarkCss": {
+    "x": 238,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "topbarImgSrc": "/brand/mark.svg"
+  },
+  "2x-C": {
+   "label": "C",
+   "topbarCss": {
+    "x": 260,
+    "y": 40,
+    "width": 920,
+    "height": 64
+   },
+   "markCss": {
+    "x": 292,
+    "y": 62,
+    "width": 32,
+    "height": 20
+   },
+   "favLightCss": {
+    "x": 20,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "favDarkCss": {
+    "x": 238,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "topbarImgSrc": "/brand/mark.svg"
+  },
+  "2x-A0": {
+   "label": "A0 只改眼（参照）",
+   "topbarCss": {
+    "x": 260,
+    "y": 40,
+    "width": 920,
+    "height": 64
+   },
+   "markCss": {
+    "x": 292,
+    "y": 62,
+    "width": 32,
+    "height": 20
+   },
+   "favLightCss": {
+    "x": 20,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "favDarkCss": {
+    "x": 238,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "topbarImgSrc": "/brand/mark.svg"
+  },
+  "2x-C0": {
+   "label": "C0 只改眼（参照）",
+   "topbarCss": {
+    "x": 260,
+    "y": 40,
+    "width": 920,
+    "height": 64
+   },
+   "markCss": {
+    "x": 292,
+    "y": 62,
+    "width": 32,
+    "height": 20
+   },
+   "favLightCss": {
+    "x": 20,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "favDarkCss": {
+    "x": 238,
+    "y": 15,
+    "width": 16,
+    "height": 16
+   },
+   "topbarImgSrc": "/brand/mark.svg"
+  }
+ }
+}

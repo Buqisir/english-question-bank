@@ -17,7 +17,20 @@ import {
   getVocabularyAudioPath,
   type VocabularyAudioAccent,
 } from './vocabularyAudioVariants'
+import { SegmentedField, type ChoiceOption } from '../../shared-ui/OptionField.tsx'
 import './vocabularyListenPage.css'
+
+// 「发音」「每词播放」的选项（SegmentedField 的值是字符串，播放遍数进出时换成数字）。
+type RepeatValue = '1' | '2' | '3'
+const ACCENT_OPTIONS: ChoiceOption<VocabularyAudioAccent>[] = [
+  { value: 'american', label: '美音' },
+  { value: 'british', label: '英音' },
+]
+const REPEAT_OPTIONS: ChoiceOption<RepeatValue>[] = [
+  { value: '1', label: '1遍' },
+  { value: '2', label: '2遍' },
+  { value: '3', label: '3遍' },
+]
 
 type PlaybackStatus = 'idle' | 'playing' | 'paused' | 'ended' | 'error'
 
@@ -330,7 +343,7 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
     <div className="vocabulary-listen-page" {...iconMotionInput}>
       {audioElement}
       <header className="vocabulary-listen-header">
-        <a href="/" aria-label="返回英语题库首页">EQBank</a>
+        <a href="/" aria-label="返回獭石首页">獭石</a>
         <span>扫码听音频</span>
       </header>
 
@@ -386,18 +399,16 @@ export function VocabularyListenPage({ shareId }: { shareId: string }) {
             {set.accent ? (
               <p>发音：{set.accent === 'british' ? '英音' : '美音'}</p>
             ) : britishAudioReady && (
-              <fieldset>
-                <legend>发音</legend>
-                <button type="button" className={accent === 'american' ? 'is-selected' : undefined} onClick={() => selectAccent('american')} aria-pressed={accent === 'american'}>美音</button>
-                <button type="button" className={accent === 'british' ? 'is-selected' : undefined} onClick={() => selectAccent('british')} aria-pressed={accent === 'british'}>英音</button>
-              </fieldset>
+              // 切换组那一轮（2026-11-15）：「发音」「每词播放」两排 aria-pressed 的键换成 SegmentedField（单选组，一个 Tab 位，方向键切换），字没改。
+              <SegmentedField className="vocabulary-listen-choice" label="发音" value={accent} options={ACCENT_OPTIONS} onChange={selectAccent} />
             )}
-            <fieldset>
-              <legend>每词播放</legend>
-              {([1, 2, 3] as const).map((count) => (
-                <button key={count} type="button" className={repeatCount === count ? 'is-selected' : undefined} onClick={() => setRepeatCount(count)} aria-pressed={repeatCount === count}>{count}遍</button>
-              ))}
-            </fieldset>
+            <SegmentedField
+              className="vocabulary-listen-choice"
+              label="每词播放"
+              value={String(repeatCount) as RepeatValue}
+              options={REPEAT_OPTIONS}
+              onChange={(value) => setRepeatCount(Number(value) as 1 | 2 | 3)}
+            />
             <label>
               <Volume size={16} aria-hidden="true" />
               <span className="visually-hidden">音量</span>

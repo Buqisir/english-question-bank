@@ -36,9 +36,9 @@
   margin: 4px 0 0;
 }
 
-.my-space-message {
-  color: var(--eqb-color-text-muted);
-  font-size: 13px;
+/* 页面提示行换成共用 Notice（构件收尾，2026-11-15）：字色、字号、图标、行高在 shared-ui/notice.css，这里只留位置。
+ * 覆盖：本条 (0,2,0) 盖过 notice.css .eqb-notice (0,1,0) 的 margin: 0，因为位置由放它的那一处给（和原来一样对齐右栏）。 */
+.eqb-notice.my-space-message {
   margin: 14px 0 -10px 228px;
 }
 
@@ -97,7 +97,7 @@ button.my-space-folder-button { cursor: pointer; }
 
 .my-space-folder-button.is-selected {
   background: var(--desk-raised);
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--eqb-color-text) 7%, transparent);
+  box-shadow: var(--elev-1);
 }
 
 .my-space-folder-count {
@@ -152,26 +152,25 @@ button.my-space-folder-button { cursor: pointer; }
   font-variant-numeric: tabular-nums;
 }
 
+/* 文件列表板：底、边、圆角、裁切由共用构件 shared-ui/Surface（board）给。原来是一条占位的 1px 实边、颜色
+   --eqb-color-border-subtle；换成板的一圈 --eqb-color-border（DESIGN.md §4「板只用 1px --desk-border 一圈边」，
+   和首页、浏览的列表板同一个样子），边深了一档，里面的行宽了 2px（实边原来占位）。 */
 .my-space-file-list {
   --fh-radius: 0;
-  background: var(--desk-surface);
-  border: 1px solid var(--eqb-color-border-subtle);
-  border-radius: 12px;
-  overflow: hidden;
 }
 
+/* 文件行是 shared-ui/Row（2026-11-15）：定位、box-sizing、行间分隔线（RowList 的 li + li）在 row.css，
+ * 这里原来的 position、box-sizing 和 .my-space-file-row + .my-space-file-row 分隔线删了。
+ * 覆盖：min-height 这条 (0,2,0) 盖过 row.css .eqb-row (0,1,0) 的 48（和第二行起的 +1px）：文件行照原来 70，分隔线算在 70 里。 */
 .my-space-file-row {
   align-items: center;
-  box-sizing: border-box;
   display: grid;
   gap: 14px;
   grid-template-columns: 28px minmax(0, 1fr) auto;
-  min-height: 70px;
   padding: 10px 14px 10px 16px;
-  position: relative;
 }
 
-.my-space-file-row + .my-space-file-row { border-top: 1px solid var(--eqb-color-border-subtle); }
+.my-space-file-list > .my-space-file-row { min-height: 70px; }
 .my-space-file-icon { color: var(--eqb-color-text); }
 .my-space-file-copy { min-width: 0; }
 
@@ -208,71 +207,38 @@ button.my-space-folder-button { cursor: pointer; }
   gap: 3px;
 }
 
-.my-space-row-actions button,
-.my-space-row-menu-item {
-  align-items: center;
-  background: transparent;
-  border: 0;
-  border-radius: 8px;
-  color: var(--eqb-color-text-muted);
-  cursor: pointer;
-  display: inline-flex;
-  font: inherit;
-  font-size: 13px;
-  gap: 6px;
-  min-height: 36px;
-  padding: 0 10px;
-  white-space: nowrap;
-}
+/* 行上的「下载」「打开原草稿」「…」都是共用 Button 大号（36，次要灰），2026-11-13 构件厂第 4 步换的：
+ * 「…」第四页换成 Menu，「下载」「打开原草稿」第六页换成 Button，原来的手写按钮规则删掉。
+ * 整行在 FluidHoverList 里，按钮嵌在行里、不是列表项：滑块停在这一行时，悬停哪个键那个键再垫一块 border 色的底
+ * （Owner 2026-11-14 决定 #4，button.css「键嵌在列表的行里」那条）；以前是自己不垫底、只把字提到墨色。 */
 
-.my-space-row-actions button:hover:not(:disabled),
-.my-space-row-actions button:focus-visible { color: var(--eqb-color-text); }
-
-.my-space-row-actions button:disabled { cursor: not-allowed; opacity: 0.55; }
-.my-space-row-menu-trigger { justify-content: center; padding-inline: 8px !important; width: 36px; }
-
-.my-space-row-menu {
-  --fh-radius: 8px;
-  background: var(--desk-raised);
-  border: 1px solid var(--desk-line);
-  border-radius: 12px;
-  box-shadow: 0 10px 28px color-mix(in srgb, var(--desk-ink) 13%, transparent);
-  box-sizing: border-box;
-  display: grid;
-  gap: 2px;
-  padding: 6px;
-  position: fixed;
-  width: 168px;
-  z-index: 70;
-}
-
-.my-space-row-menu-item { color: var(--desk-ink); position: relative; width: 100%; }
-.my-space-row-menu-item-danger { color: var(--eqb-color-danger); }
-
-.my-space-folder-button:focus-visible,
-.my-space-row-actions button:focus-visible,
-.my-space-row-menu-item:focus-visible,
-.my-space-empty-cta:focus-visible,
-.my-space-confirm-actions button:focus-visible {
+/* 文件夹按钮仍是手写的（导航列表项，带选中态和计数，不在按钮那几种语气里）。
+ * 空态主键和确认框的两个键换成了 Button，焦点环由 button.css 管，从这里拿掉。 */
+.my-space-folder-button:focus-visible {
   outline: var(--focus-ring);
   outline-offset: 2px;
 }
 
-.my-space-empty,
-.my-space-error {
-  color: var(--eqb-color-text-muted);
-  font-size: 13px;
-  line-height: 1.5;
-  margin: 26px 0 0;
+/* 「个人空间读取失败」换成共用 Notice（构件收尾，2026-11-15），字色、字号在 notice.css；
+ * 原来 .my-space-empty / .my-space-error 的字色、字号两条删了（读取失败原来是亮红字，照 DESIGN.md Notices
+ * 「只有没保存、会丢东西才上危险色」改成次要灰加图标）。
+ * 「正在读取个人空间」那一行等待第六轮（2026-11-15）换成文件列表的灰块（MySpacePage.tsx MySpaceListSkeleton，
+ * 用真列表的 .my-space-month-group 那一套 class，离上面的距离照真列表），给它离上面 26 的 .eqb-notice.my-space-empty 一条删了。 */
+
+/* 灰块里三个键的位置：真键是淡底（只看得见字），灰块放在字的位置，键和键之间、最后一个键右边留出键的内衬。
+ * 覆盖：本条 (0,2,0) 盖过上面 .my-space-row-actions (0,1,0) 的 gap: 3px，只在灰块里。 */
+.my-space-list-skeleton .my-space-row-actions {
+  gap: var(--eqb-space-5);
+  padding-right: var(--eqb-space-3);
 }
 
-.my-space-error { color: var(--eqb-color-danger); margin: 0; }
-
+/* 出错态（「个人空间读取失败」加「重新加载」）还用这一块排版。空态换成了共用的 EmptyState（见下面
+ * .my-space-empty-placed），原来的 .my-space-empty-state .my-space-empty 一条随之删掉。 */
 .my-space-empty-state {
   align-content: center;
   align-items: center;
-  background: var(--desk-surface);
-  border: 1px solid var(--eqb-color-border-subtle);
+  background: transparent;
+  border: 1px solid transparent;
   border-radius: 12px;
   display: grid;
   gap: 12px;
@@ -283,75 +249,26 @@ button.my-space-folder-button { cursor: pointer; }
   text-align: center;
 }
 
-.my-space-empty-state .my-space-empty { margin: 0; }
-
-.my-space-empty-cta {
-  background: var(--eqb-color-accent-fill);
-  border: 0;
-  border-radius: 8px;
-  color: var(--eqb-color-accent-fill-ink);
-  cursor: pointer;
-  font: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  min-height: 36px;
-  padding: 0 16px;
+/* 空态（shared-ui/EmptyState，坐石獭獭）在这一页的位置：离上面分区标题和原来一样远，至少和原来一样高。
+ * 覆盖：本条 (0,2,0) 盖过 emptyState.css 里 .eqb-empty-state (0,1,0) 的 margin: 0，因为位置由放它的那一处给。 */
+.eqb-empty-state.my-space-empty-placed {
+  margin-top: 26px;
+  min-height: 250px;
 }
 
-.my-space-modal-backdrop {
-  align-items: center;
-  background: color-mix(in srgb, var(--eqb-color-text) 28%, transparent);
-  display: flex;
-  inset: 0;
-  justify-content: center;
-  opacity: 0;
-  padding: 24px;
-  position: fixed;
-  transition: opacity var(--motion-fast) var(--ease-out);
-  z-index: 80;
-}
+/* 空态「去找题」、出错态「重新加载」换成 Button 主键大号（36），原来的 .my-space-empty-cta 一块删掉；
+ * 类名还挂着，只当选择器钩子（verify-error-copy-mainline.mjs 认它）。 */
 
-.my-space-modal-backdrop[data-visible='true'] { opacity: 1; }
+/* 删除确认框（.my-space-modal-backdrop / .my-space-confirm-dialog / .my-space-confirm-actions）换成共用 Dialog，
+ * 样式在 shared-ui/dialog.css；.my-space-confirm-dialog 还挂在 <dialog> 上，只当选择器钩子。 */
 
-.my-space-confirm-dialog {
-  background: var(--desk-raised);
-  border-radius: 12px;
-  box-shadow: 0 8px 24px color-mix(in srgb, var(--eqb-color-text) 12%, transparent);
-  display: grid;
-  gap: 16px;
-  max-width: 360px;
-  opacity: 0;
-  padding: 18px;
-  transform: scale(0.97);
-  transition: opacity var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
-  width: 100%;
-}
-
-.my-space-confirm-dialog[data-visible='true'] { opacity: 1; transform: scale(1); }
-.my-space-confirm-dialog h3 { font-size: 15px; margin: 0; }
-.my-space-confirm-dialog p { color: var(--eqb-color-text-muted); font-size: 13px; line-height: 1.55; margin: 0; }
-.my-space-confirm-actions { display: flex; gap: 8px; justify-content: flex-end; }
-
-.my-space-confirm-actions button {
-  background: transparent;
-  border: 0;
-  border-radius: 8px;
-  color: var(--eqb-color-text);
-  cursor: pointer;
-  font: inherit;
-  font-size: 13px;
-  min-height: 34px;
-  padding: 0 12px;
-}
-
-.my-space-confirm-actions button:hover { background: var(--desk-hover); }
-.my-space-confirm-actions .my-space-delete-confirm { color: var(--eqb-color-danger); }
+/* 确认框「取消」（墨字）、「删除 PDF」（危险字）换成 Button 大号（36），原来三条手写规则删掉。 */
 
 @media (max-width: 760px) {
   .my-space-page > .topbar,
   .my-space-shell { padding-inline: 20px; }
   .my-space-shell { padding-top: 24px; }
-  .my-space-message { margin-left: 0; }
+  .eqb-notice.my-space-message { margin-left: 0; }
   .my-space-workspace { gap: 20px; grid-template-columns: minmax(0, 1fr); margin-top: 22px; }
   .my-space-rail { min-height: 0; padding: 8px; }
   .my-space-folders { display: flex; overflow-x: auto; padding-bottom: 2px; }
@@ -367,11 +284,8 @@ button.my-space-folder-button { cursor: pointer; }
   .my-space-file-row { align-items: start; gap: 10px; grid-template-columns: 24px minmax(0, 1fr); padding: 14px 12px; }
   .my-space-file-icon { margin-top: 2px; }
   .my-space-row-actions { grid-column: 2; justify-content: flex-end; margin-top: 2px; }
-  .my-space-row-actions button { min-height: 34px; }
-  .my-space-row-actions button:nth-child(2) { padding-inline: 6px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .my-space-modal-backdrop,
-  .my-space-confirm-dialog { transition: none; }
+  /* 窄屏这一行的键都是 34 高（原来手写按钮就是这样）。本条覆盖 button.css 里 .eqb-button[data-size='lg'] 的 36，
+   * 多带一个 .my-space-row-actions 才赢得过它。「…」宽仍是 36。原来「打开原草稿」窄屏左右内边距收到 6，
+   * 换成 Button 后不再单独收（12），这一行在 390 宽下放得下。 */
+  .my-space-row-actions .eqb-button[data-size='lg'] { height: 34px; }
 }

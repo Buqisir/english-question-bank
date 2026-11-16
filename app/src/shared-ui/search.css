@@ -1,0 +1,181 @@
+/* 搜索框构件（SearchField.tsx）。两档：hero 首页、compact 浏览页（DESIGN.md §5 Inputs / Fields）。
+ * 数值从 App.css 原来的 .concierge-intent-* 规则原样搬来（构件厂，2026-11-15），换前换后逐像素一样。
+ * 颜色、圆角、影子只用 tokens.css 的变量：原来写的 --desk-raised / --desk-ink / --desk-muted 换成同值的
+ * --eqb-color-paper / --eqb-color-text / --eqb-color-text-muted（都是 #FFFFFF / #1B2B33 / #5A6C75）。
+ * 几个不在间距阶梯上的内边距（10 / 18 / 6）和位置（48 / 84 / 40）是原值，照搬，缺口记在 docs/design-gaps.md
+ * 「2026-11-15 搜索框构件的几处尺寸」。宽度和在一行里怎么摆不在这里，见 App.css 的 .concierge-intent-bar。 */
+
+/* ── 框 ─────────────────────────────────────────────────── */
+
+.eqb-search {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  gap: var(--eqb-space-2);
+  align-items: center;
+  background: var(--eqb-color-paper);
+  /* 边线占位、颜色透明：hero 的边是 e1 的墨圈（DESIGN.md §4「一条边，不画两条」）；焦点时边线深一档。 */
+  border: 1px solid transparent;
+  transition: border-color var(--motion-base) var(--ease-hover), box-shadow var(--motion-base) var(--ease-hover);
+}
+
+/* hero：高 54、圆角 16、e1。左内边距 18、右 10（原值）。 */
+.eqb-search[data-tier='hero'] {
+  height: 54px;
+  min-height: 54px;
+  padding: 0 10px 0 18px;
+  border-radius: var(--eqb-radius-search);
+  box-shadow: var(--elev-1);
+}
+
+/* compact：高 36、圆角 12、不投影（§4 输入框贴桌 e0）。 */
+.eqb-search[data-tier='compact'] {
+  height: 36px;
+  min-height: 36px;
+  padding: 0 var(--eqb-space-1) 0 var(--eqb-space-3);
+  border-radius: var(--eqb-radius-card);
+  box-shadow: none;
+}
+
+/* 焦点：不套外圈（输入框本身就是页面主角，闪动的光标已经说明「可以打字了」），边线只深一档。
+ * 本条 (0,2,0) 只管 border-color，上面两档没设 border-color，不冲突。 */
+.eqb-search:focus-within {
+  border-color: var(--eqb-color-border-strong);
+  outline: none;
+}
+
+/* ── 输入框 ─────────────────────────────────────────────── */
+
+/* 右内边距给浮在右边的提交键让位（hero 48、compact 40），有清除键时 hero 再让到 84。 */
+.eqb-search-input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  padding: 0 48px 0 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--eqb-color-text);
+  font-family: inherit;
+  line-height: 24px;
+}
+
+.eqb-search[data-tier='hero'] .eqb-search-input {
+  font-size: var(--eqb-font-size-md);
+}
+
+/* 本条 (0,4,0) 覆盖上面 .eqb-search-input 的右内边距 48 (0,1,0)：有清除键时字不能钻到清除键底下。 */
+.eqb-search[data-tier='hero']:has(.eqb-search-clear) .eqb-search-input {
+  padding-right: 84px;
+}
+
+/* compact 没字时右内边距 40，只让回车键。 */
+.eqb-search[data-tier='compact'] .eqb-search-input {
+  padding-right: 40px;
+  font-size: var(--eqb-font-size-control);
+}
+
+/* 本条 (0,4,0) 覆盖上面 compact 的 40 (0,3,0)：有字时清除键出来，字不能钻到清除键底下。
+ * 原来浏览页这里压字（旧规则顺序造成），2026-11-15 修掉，和 hero 一样让到 84。提案 · 单一来源。 */
+.eqb-search[data-tier='compact']:has(.eqb-search-clear) .eqb-search-input {
+  padding-right: 84px;
+}
+
+/* 占位符：次要灰（DESIGN.md §5 Inputs：不用极弱墨「显优雅」）。 */
+.eqb-search-input::placeholder {
+  color: var(--eqb-color-text-muted);
+}
+
+/* 禁用（比如题库还在连）：底保持透明，字淡一档，光标是「在忙」。本条 (0,2,0) 覆盖上面的字色。 */
+.eqb-search-input:disabled {
+  background: transparent;
+  color: var(--eqb-color-text-faint);
+  cursor: progress;
+}
+
+/* ── 清除键（shared-ui/Button 次要灰小号，只有图标）──────── */
+
+/* 浮在提交键左边。本条 (0,2,0) 覆盖 button.css .eqb-button 的 position: relative (0,1,0)。 */
+.eqb-search .eqb-search-clear {
+  position: absolute;
+  right: 48px;
+  align-self: center;
+  flex-shrink: 0;
+}
+
+/* ── 提交键：一个回车符号 ───────────────────────────────── */
+
+.eqb-search-submit {
+  position: absolute;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  align-self: center;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: var(--eqb-radius-control);
+  background: transparent;
+  box-shadow: none;
+  /* 有字能搜时回车是点睛色（BRAND.md §1.5：回车键这类细线用 --eqb-color-accent）。 */
+  color: var(--eqb-color-accent);
+  font-family: inherit;
+  font-size: var(--eqb-font-size-control);
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
+}
+
+.eqb-search[data-tier='hero'] .eqb-search-submit {
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+}
+
+.eqb-search[data-tier='compact'] .eqb-search-submit {
+  right: var(--eqb-space-1);
+}
+
+.eqb-search-submit:hover:not(:disabled) {
+  background: var(--eqb-color-desk);
+}
+
+/* 按下去缩一点：一天按几十次的提交键要确认「听到了」。 */
+.eqb-search-submit:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* §4 墨焦点环。 */
+.eqb-search-submit:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+/* 没字可搜时是灰色回车（没东西可发就不亮）。本条 (0,2,0) 覆盖 App.css 全站 button:disabled (0,1,1) 的 opacity 0.55。 */
+.eqb-search-submit:disabled {
+  background: transparent;
+  color: var(--eqb-color-text-muted);
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.eqb-search-submit.is-loading {
+  font-size: var(--eqb-font-size-control);
+  font-weight: 500;
+}
+
+/* 正在搜：宽度放开、左右 6（原值）。本条 (0,4,0) 覆盖上面 hero / compact 两档的固定宽 (0,3,0)。 */
+.eqb-search .eqb-search-submit.is-loading:disabled {
+  width: auto;
+  padding: 0 6px;
+  color: var(--eqb-color-text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* 减少动效时按下只缩一点点。本条和上面 :active 同为 (0,3,0)，写在后面，按先后赢。 */
+  .eqb-search-submit:active:not(:disabled) {
+    transform: scale(0.995);
+  }
+}

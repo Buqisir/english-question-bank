@@ -5,8 +5,13 @@
  * Every border-radius value in app/src CSS must come from the radius ladder
  * {0, 4px, 8px, 12px, 16px, 999px} plus 50% (circular controls only).
  * Northstar 2026-09-03 authorised 12 / 16 into the family (cards / hero search).
+ * Owner 2026-11-13: 6px removed from FAMILY so this gate matches DESIGN.md §5
+ * (it had been allowed here by mistake); the 77 existing 6px literals were
+ * migrated the same day by element height, except one print-only rule.
  * Directional shorthand is legal when every component is in-family; var()
- * indirection is legal (token wins by definition).
+ * indirection is legal (token wins by definition). `inherit` is legal for the
+ * same reason: it can only resolve to an ancestor's radius, which this gate
+ * already checks (shared-ui/row.css: the full-row hit target follows the row).
  *
  * Remaining off-family literals are grandfathered per file × value below and
  * act as a ratchet: counts may only go down.
@@ -20,13 +25,17 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
 const srcDir = path.join(rootDir, 'app', 'src')
 
-const FAMILY = new Set(['0', '4px', '6px', '8px', '12px', '16px', '999px', '50%'])
+const FAMILY = new Set(['0', '4px', '8px', '12px', '16px', '999px', '50%'])
 
 // file (relative to app/src) → { offFamilyValue → grandfathered count }
 const BASELINE = {
   // ui-northstar 草稿卷: 5px rail-acts / 7px group-action stickers → 4 / 8.
   'features/paper-intelligence/paperIntelligence.css': { '10px': 2, '2px': 1, '3px': 5 },
   'features/paper-intelligence/paperSurfaceLectureHighlights.css': { '3px': 1 },
+  // texture 2026-11-13: 6px left the family; the 77 literals were migrated
+  // by element height (design/texture-2026-11-13/radius-6px-migration.md).
+  // The one left is an @media print rule, which the texture work does not touch.
+  'features/vocabulary-review/vocabularyReviewPage.css': { '6px': 1 },
 }
 // reading-analysis-retire (2026-07-16): the two baseline entries above for
 // `paperIntelligencePaperSurfaceHarness.css` and
@@ -47,7 +56,7 @@ function cssFiles(dir) {
 
 function isInFamily(value) {
   const v = value.trim()
-  if (v.includes('var(')) return true
+  if (v.includes('var(') || v === 'inherit') return true
   return v.split(/\s+/).every((c) => FAMILY.has(c))
 }
 

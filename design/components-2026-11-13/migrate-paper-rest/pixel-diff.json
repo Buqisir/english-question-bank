@@ -1,0 +1,132 @@
+{
+ "copy-focus.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "copy-hover.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "page-390.png": {
+  "pixels": 292,
+  "bbox_2x": [
+   448,
+   162,
+   594,
+   164
+  ]
+ },
+ "page.png": {
+  "pixels": 292,
+  "bbox_2x": [
+   1640,
+   58,
+   1786,
+   60
+  ]
+ },
+ "pdf-screen-focus.png": {
+  "pixels": 292,
+  "bbox_2x": [
+   1640,
+   58,
+   1786,
+   60
+  ]
+ },
+ "pdf-screen-hover.png": {
+  "pixels": 394,
+  "bbox_2x": [
+   1624,
+   20,
+   1802,
+   76
+  ]
+ },
+ "refresh-focus.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "refresh-hover.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "retry-products-focus.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "retry-products-hover.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "review-390.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "review-preview-390.png": {
+  "pixels": 220,
+  "bbox_2x": [
+   332,
+   90,
+   442,
+   92
+  ]
+ },
+ "review-preview-fail-390.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "review-preview-fail.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "review-preview.png": {
+  "pixels": 220,
+  "bbox_2x": [
+   332,
+   90,
+   442,
+   92
+  ]
+ },
+ "review.png": {
+  "pixels": 0,
+  "bbox_2x": null
+ },
+ "topbar-390.png": {
+  "pixels": 292,
+  "bbox_2x": [
+   448,
+   162,
+   594,
+   164
+  ]
+ },
+ "topbar.png": {
+  "pixels": 292,
+  "bbox_2x": [
+   1640,
+   58,
+   1786,
+   60
+  ]
+ },
+ "view-pdf-focus.png": {
+  "pixels": 220,
+  "bbox_2x": [
+   332,
+   90,
+   442,
+   92
+  ]
+ },
+ "view-pdf-hover.png": {
+  "pixels": 220,
+  "bbox_2x": [
+   332,
+   90,
+   442,
+   92
+  ]
+ }
+}

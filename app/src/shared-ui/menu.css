@@ -1,0 +1,152 @@
+/* 菜单构件（Menu.tsx）。DESIGN.md §5：下拉菜单 8px、内边距 4px、菜单项 4px（同心）；
+ * §4：浮着的东西白底加 e3，不加边线，不用玻璃。只用 tokens.css 里的变量。 */
+
+.eqb-menu {
+  position: fixed;
+  z-index: 70;
+  box-sizing: border-box;
+  display: grid;
+  min-width: 148px;
+  max-width: calc(100vw - 16px);
+  max-height: calc(100dvh - 16px);
+  overflow-y: auto;
+  padding: var(--eqb-space-1);
+  border: 0;
+  border-radius: var(--eqb-radius-control);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-3);
+  color: var(--eqb-color-text);
+  animation: eqb-menu-in var(--motion-fast) var(--ease-out);
+}
+
+.eqb-menu.fluid-hover-list {
+  --fh-radius: var(--eqb-radius-badge);
+}
+
+@keyframes eqb-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+
+.eqb-menu[data-side='above'] {
+  animation-name: eqb-menu-in-above;
+}
+
+@keyframes eqb-menu-in-above {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+.eqb-menu-item {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--eqb-space-2);
+  width: 100%;
+  height: 32px;
+  padding: 0 var(--eqb-space-2);
+  border: 0;
+  border-radius: var(--eqb-radius-badge);
+  background: transparent;
+  color: var(--eqb-color-text);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  /* 行高继承，不写 1：理由同 button.css（标签 overflow: hidden 时行高 1 会裁掉中文字形的顶和底）。 */
+  text-align: left;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.eqb-menu-item > svg {
+  flex: 0 0 auto;
+}
+
+.eqb-menu-item-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 危险项写字用深一档的 danger-text（Owner 2026-11-14 决定 #9），图标跟字走 currentColor。 */
+.eqb-menu-item[data-tone='danger'] {
+  color: var(--eqb-color-danger-text);
+}
+
+/* 可勾选项（role=menuitemcheckbox）：勾在最右边，没勾时不画（Owner 2026-11-14 决定 #15）。 */
+.eqb-menu-item-check {
+  margin-left: auto;
+}
+
+/* 键盘焦点：桌色底（和悬停一样）加 2px 石板墨焦点环，环收在项里面，免得盖到相邻项。 */
+.eqb-menu-item:focus-visible {
+  background: var(--eqb-color-desk);
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: -2px;
+}
+
+.eqb-menu-item[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* 禁用项也能停焦点（Owner 2026-11-14，照 WAI-ARIA APG 菜单模式）。
+ * 本条覆盖上面 .eqb-menu-item[aria-disabled='true'] 的整项 opacity 0.55：整项变淡会把焦点环和桌色底
+ * 也一起变淡，键盘用户看不清焦点在哪；所以焦点在禁用项上时焦点环、底色照上面 :focus-visible 原样
+ * 全浓度画，只把字（和跟着 currentColor 走的图标、勾）换成置灰的 faint 色，看起来仍然点不了。
+ * 它和 :focus-visible 那条叠在同一元素上，比它多一个属性选择器，特异度更高，所以只换颜色和不透明度、
+ * 不碰底色和焦点环。 */
+.eqb-menu-item[aria-disabled='true']:focus-visible {
+  opacity: 1;
+  color: var(--eqb-color-text-faint);
+}
+
+/* 带一行小字的项（description，走查卡点 4）：本条覆盖上面 .eqb-menu-item 的固定 32px 高和不换行，
+ * 因为要上下放两行；左右排法（图标、字、勾）不变，勾和图标贴第一行。 */
+.eqb-menu-item[data-has-note] {
+  height: auto;
+  min-height: 32px;
+  padding-top: var(--eqb-space-1);
+  padding-bottom: var(--eqb-space-1);
+  align-items: flex-start;
+  white-space: normal;
+}
+
+.eqb-menu-item-text {
+  display: grid;
+  min-width: 0;
+}
+
+.eqb-menu-item-note {
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
+}
+
+/* 本条覆盖上面 .eqb-menu-item[aria-disabled='true'] 的整项 opacity 0.55：带小字的禁用项，
+ * 小字是在说为什么用不了，不能跟着变淡；改成只让名字变淡（faint 色），小字保持 muted。 */
+.eqb-menu-item[aria-disabled='true'][data-has-note] {
+  opacity: 1;
+}
+
+.eqb-menu-item[aria-disabled='true'][data-has-note] .eqb-menu-item-label {
+  color: var(--eqb-color-text-faint);
+}
+
+.eqb-menu-separator {
+  height: 1px;
+  margin: var(--eqb-space-1) 0;
+  background: var(--eqb-color-border-subtle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eqb-menu,
+  .eqb-menu[data-side='above'] {
+    animation: none;
+  }
+}

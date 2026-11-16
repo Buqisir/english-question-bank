@@ -343,14 +343,22 @@ const resultActionsSource = panelSource.slice(
   panelSource.indexOf('<div className="meaning-recall-result-list">'),
 )
 assert.match(resultActionsSource, /生成错词听写/u, '认词结果只保留本轮错词听写入口')
+// 切换组那一轮（2026-11-15）：「听写发音」从一排 aria-pressed 的键换成 shared-ui/OptionField 的 SegmentedField（单选组），
+// 选项写在文件头的 ACCENT_OPTIONS 里。
 assert.match(
   resultActionsSource,
-  /<legend>听写发音<\/legend>[\s\S]{0,500}>美音<\/button>[\s\S]{0,500}>英音<\/button>/u,
+  /<SegmentedField[\s\S]{0,200}label="听写发音"[\s\S]{0,300}options=\{ACCENT_OPTIONS\}[\s\S]{0,120}onChange=\{onAccentChange\}/u,
   '认词结果生成错词听写前必须能选择美音或英音',
 )
 assert.match(
+  panelSource,
+  /const ACCENT_OPTIONS[\s\S]{0,200}value: 'american', label: '美音'[\s\S]{0,120}value: 'british', label: '英音'/u,
+  '认词结果的听写发音必须只有美音、英音两项',
+)
+assert.match(
   resultActionsSource,
-  /<span>文件名<\/span>[\s\S]{0,500}aria-label="错词听写文件名"[\s\S]{0,500}value=\{dictationTitle\}/u,
+  // 字段构件第二轮（2026-11-15）：文件名换成 shared-ui/TextField，看得见的标签从 <span>文件名</span> 变成 label="文件名"。
+  /<TextField[\s\S]{0,200}label="文件名"[\s\S]{0,500}aria-label="错词听写文件名"[\s\S]{0,500}value=\{dictationTitle\}/u,
   '认词结果生成错词听写前必须能编辑导出文件名',
 )
 assert.match(resultActionsSource, /disabled=\{!forgotten\.length \|\| !dictationTitle\.trim\(\) \|\| busy\}/u, '文件名为空时不得生成错词听写')

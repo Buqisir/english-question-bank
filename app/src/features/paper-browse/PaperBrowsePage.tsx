@@ -57,7 +57,13 @@
  * out of scope per aggregatePaperResults.ts:8-11).
  */
 import { Fragment, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react'
-import { BoardList, Presentation, RefreshCw, Scissors } from '../../icons'
+import { ArrowLeft, BoardList, ExternalLink, Presentation, RefreshCw, Scissors } from '../../icons'
+import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
+import { SelectField } from '../../shared-ui/Field.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
+import { PaperGroupSkeleton, Skeleton, SkeletonGate } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy, useSlowWait } from '../../shared-ui/useDelayedBusy.ts'
+import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { ensurePaperFonts, PaperFontError } from '../../shared-ui/papersurface/paperFontLoader'
@@ -90,8 +96,9 @@ import {
 } from '../../../../shared/paper-canonical/grammarFillPublicGeometryFixtures.mjs'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
-import { DisclosureIcon, DownloadFeedbackIcon, DraftAddIcon } from '../../icons/MotionIcons'
+import { DisclosureIcon, DownloadFeedbackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
+import { DraftAddButton } from '../../shared-ui/DraftAddButton.tsx'
 import { WritingPaperPage, type UnofficialReferenceEssay } from '../paper-intelligence/WritingPaperPage'
 import {
   buildPaperAssetSurfaceModel,
@@ -196,6 +203,7 @@ import { fetchSimilarPassages, fetchSimilarQuestions } from '../../services/simi
 import {
   SimilarQuestionsRailView,
   type SimilarRailRequestState,
+  type SimilarToast,
 } from './SimilarQuestionsRailView'
 import { applyPaperSurfaceFocusIntent } from './paperBrowseFocusIntent'
 import { usePaperSelectionTranslation } from './selection/usePaperSelectionTranslation'
@@ -369,6 +377,14 @@ type SimilarSeedSnapshot = {
   recipeSummary: string
 }
 
+/** App.addGroupsToBasket 的结果。 */
+export type AddGroupsOutcome =
+  | { kind: 'added'; addedIds: string[] }
+  | { kind: 'failed'; addedIds: string[]; failedIds: string[]; message: string }
+  | { kind: 'blocked'; reason: string }
+  | { kind: 'opened' }
+  | { kind: 'none' }
+
 export type PaperBrowsePageProps = {
   paperId: string
   /** Import review only: read the immutable Candidate revision through the
@@ -395,7 +411,8 @@ export type PaperBrowsePageProps = {
   grammarFillGeometryVariantId?: string
   /** App's loaded questionGroups, keyed by id (== paper-asset groupId). */
   questionGroupById: Map<string, QuestionGroupCard>
-  onAddGroupsToBasket: (groups: QuestionGroupCard[]) => void
+  /** 加入草稿卷；结果交回来，由「配相似」栏用共用提示行说（成功、没加入的原话），不弹浏览器警告框。 */
+  onAddGroupsToBasket: (groups: QuestionGroupCard[]) => Promise<AddGroupsOutcome>
   currentDraftPaperId: string | null
   currentDraftGroupCount: number
   onOpenDraftPaperWorkbench: (draftPaperId?: string | null) => void
@@ -507,6 +524,86 @@ const PAPER_BASE_WIDTH = 794
 const GRID_GAP = 24
 // 794px paper + 440px notes + 72px rail + gaps and shell padding must fit.
 const DOCKED_LECTURE_MIN_WIDTH = 1440
+
+/**
+ * 整卷屏幕放大倍数。真卷面和首屏灰块（PaperBrowseOpeningSkeleton）共用，灰块的纸和真纸一样宽。
+ * 合并 main（2026-11-15）：能不能停靠讲评照 CSS 的视口断点判（滚动条把 shell 挤窄时也一样），
+ * 宽度用去掉 shell 左右内衬后的内宽。
+ */
+function paperScreenZoomForShell(shell: HTMLElement): number {
+  // Reserve the docked layout even while closed: toggling only moves the paper.
+  // Match CSS's viewport breakpoint even when the scrollbar narrows the shell.
+  const canDockLecture = window.matchMedia(`(min-width: ${DOCKED_LECTURE_MIN_WIDTH}px)`).matches
+  const railWidth = canDockLecture ? LECTURE_RAIL_WIDTH : RAIL_WIDTH
+  const lectureColumn = canDockLecture ? GRID_GAP + LECTURE_PANEL_WIDTH : 0
+  const shellStyle = getComputedStyle(shell)
+  const shellPadding = parseFloat(shellStyle.paddingLeft) + parseFloat(shellStyle.paddingRight)
+  const contentColumnWidth = shell.clientWidth - shellPadding - railWidth - GRID_GAP - lectureColumn
+  const gutterReserve = canDockLecture ? 0 : GUTTER_WIDTH
+  const available = contentColumnWidth - gutterReserve
+  const raw = Math.max(1, Math.min(1.35, available / PAPER_BASE_WIDTH))
+  return Math.floor(raw / 0.05) * 0.05
+}
+
+// 首屏灰块的目录：照 paper-2026-i 的目录（阅读 5 项、语言运用 2 项、写作 2 项）画，每项一行 32 高（.paper-browse-rail-group）。
+const OPENING_SKELETON_RAIL_PARTS = [5, 2, 2]
+
+/**
+ * 整卷页首屏灰块（等待第四轮，2026-11-15；原来是居中一行「正在打开整卷」）。
+ * 顶栏照常（调用处画），内容区照真卷面的位置画：左边目录面板、中间一张纸（同宽、同放大倍数、同页边距），
+ * 纸上是卷头（标题、注意事项几行）加两组卷面灰块。几何由 paperBrowsePage.css 里和真卷面同一条规则给。
+ * 灰块走门槛（调用处 useDelayedBusy）：300ms 内只有读屏那一句；出了至少留 500ms。
+ */
+function PaperBrowseOpeningSkeleton({ showSkeleton }: { showSkeleton: boolean }) {
+  // 放大倍数照灰块自己的 shell 量（和真卷面同一个算法，去掉内衬、照视口断点判停靠），
+  // 量完直接写到内容区的 --paper-screen-zoom 上（paperBrowsePage.css 在 .paper-browse-skeleton-content 上给了默认 1，
+  // 要写在它自己身上才盖得过），不经 state（不触发第二次渲染）。
+  const shellRef = useRef<HTMLElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  useLayoutEffect(() => {
+    const shell = shellRef.current
+    const content = contentRef.current
+    if (!shell || !content) return
+    const apply = () => content.style.setProperty('--paper-screen-zoom', String(paperScreenZoomForShell(shell)))
+    apply()
+    const observer = new ResizeObserver(apply)
+    observer.observe(shell)
+    return () => observer.disconnect()
+  }, [showSkeleton])
+  return (
+    <main ref={shellRef} className="paper-browse-skeleton-shell" role="status" aria-busy="true">
+      <span className="visually-hidden">正在打开整卷</span>
+      {showSkeleton ? <>
+        <nav className="paper-browse-skeleton-rail" aria-hidden="true">
+          <div className="paper-browse-skeleton-rail-panel">
+            {OPENING_SKELETON_RAIL_PARTS.map((count, part) => (
+              <div key={part} className="paper-browse-skeleton-rail-part">
+                <span className="paper-browse-skeleton-rail-label"><Skeleton width={24} height={10} /></span>
+                {Array.from({ length: count }, (_, item) => (
+                  <span key={item} className="paper-browse-skeleton-rail-item"><Skeleton width={28} height={12} /></span>
+                ))}
+              </div>
+            ))}
+          </div>
+        </nav>
+        <div ref={contentRef} className="paper-browse-skeleton-content" aria-hidden="true">
+          <div className="paper-browse-skeleton-sheet">
+            <div className="paper-browse-skeleton-cover">
+              <Skeleton className="paper-browse-skeleton-title" width={72} height={28} />
+              <Skeleton width={72} height={14} />
+              <Skeleton width="78%" height={12} />
+              <Skeleton width="100%" height={12} />
+              <Skeleton width="56%" height={12} />
+              <Skeleton width={180} height={14} />
+            </div>
+            <PaperGroupSkeleton />
+            <PaperGroupSkeleton />
+          </div>
+        </div>
+      </> : null}
+    </main>
+  )
+}
 
 function railGroupLabel(title: string): string {
   const trimmed = title.trim()
@@ -692,6 +789,22 @@ function renderSectionHeadingText(text: string): ReactNode {
       : run.text)
 }
 
+// 讲评栏里按需补拉解析的三种题组（完形、语法填空、写作）：只有它们在「解析加载中」时画灰块。
+const LECTURE_FETCHED_GROUP_TYPES: readonly PaperContentGroup['groupType'][] = ['cloze', 'grammarFill', 'writing']
+
+// 讲解区的灰块（2026-11-15 第二轮，DESIGN.md §5 Waiting）：照解析面板的样子——上面一行折叠标题（「文章简介」那种，
+// 12px 小字），下面一段 14px 正文（--pb-lecture-font-body）三行。行距和卷面灰块一样按 24 一行画。排法在 paperBrowsePage.css。
+function LectureAnalysisSkeleton() {
+  return (
+    <div className="paper-browse-lecture-skeleton" aria-hidden="true">
+      <Skeleton width={72} height={12} />
+      <Skeleton width="100%" height={12} />
+      <Skeleton width="100%" height={12} />
+      <Skeleton width="58%" height={12} />
+    </div>
+  )
+}
+
 // 讲评栏 — 答案行. `null` means "don't render an answer row at all"
 // (groupType === 'writing'); an empty-but-non-null case renders the
 // 答案未入库 fallback below. Logic moved from the撤刀 flow-hover Chunk B
@@ -784,9 +897,14 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     activeAudioRef.current = audio
   }, [])
   const [groupModels, setGroupModels] = useState<Record<string, GroupModel>>({})
-  const [loading, setLoading] = useState(true)
+  const [loadingAsset, setLoading] = useState(true)
+  // 等待第四轮（2026-11-15）：首屏灰块走门槛。灰块出了要留够 500ms，这期间真卷面先不挂，
+  // 所以 loading 在门槛的 'waiting' 段里也算「还在开」，下面跟着 loading 的副作用和真卷面一起晚这一点点。
+  const openingPhase = useDelayedBusy(loadingAsset)
+  const loading = loadingAsset || openingPhase === 'waiting'
   const [error, setError] = useState<string | null>(null)
   const [analysisPdfBusy, setAnalysisPdfBusy] = useState(false)
+  const analysisPdfSlow = useSlowWait(analysisPdfBusy)
   const [analysisPdfError, setAnalysisPdfError] = useState('')
   const [analysisFontError, setAnalysisFontError] = useState('')
   const { editions: pdfEditions, edition: pdfEdition, setEdition: setPdfEdition,
@@ -837,7 +955,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const [similarSeed, setSimilarSeed] = useState<SimilarSeedSnapshot | null>(null)
   const [similarRequest, setSimilarRequest] = useState<SimilarRailRequestState>({ status: 'loading' })
   const [similarSelectedGroupIds, setSimilarSelectedGroupIds] = useState<Set<string>>(new Set())
-  const [similarToast, setSimilarToast] = useState<string | null>(null)
+  const [similarToast, setSimilarToast] = useState<SimilarToast | null>(null)
   const scrollerRef = useRef<HTMLDivElement | null>(null)
   const paperSelection = usePaperSelectionTranslation({
     paperId,
@@ -873,6 +991,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   // 镜像 harness 的 shellRef/leftScrollerRef/rightPanelRef 三件套）。
   // scrollerRef 复用现有的卷面容器（同 harness 的 leftScrollerRef）。
   const shellRef = useRef<HTMLDivElement | null>(null)
+  // 等待第四轮（2026-11-15）：卷面第一次挂上时，纸上的块（卷头、各组）从上到下依次淡入。
+  // 只演第一次（once）：换卷、开关讲评、展开都不演。
+  useRowReveal(shellRef, '.paper-browse-zoom > *', !loading && asset !== null, { once: true })
   const rightPanelRef = useRef<HTMLElement | null>(null)
   const [paperPositionVersion, setPaperPositionVersion] = useState(0)
   const railNavRef = useRef<HTMLElement | null>(null)
@@ -892,15 +1013,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     motion: 'none' | 'adjacent' | 'relocate'
     revision: number
   } | null>(null)
-  // similar-rail (E2): toast fade timer — the parent is the single owner of
-  // the show/clear clock (see SimilarQuestionsRailView's toastMessage doc).
-  const similarToastTimeoutRef = useRef<number | null>(null)
-
-  useEffect(() => {
-    return (): void => {
-      if (similarToastTimeoutRef.current != null) window.clearTimeout(similarToastTimeoutRef.current)
-    }
-  }, [])
+  // similar-rail (E2): 提示的停留计时 2026-11-15 起在共用 Toast 里（SimilarQuestionsRailView），这里原来的计时 ref 删了。
 
   // 标记程序化滚动即将发生，给钢琴键 scrollspy 一段沉降窗口。
   function suppressScrollspyClear(durationMs = 700): void {
@@ -2138,19 +2251,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     function computeZoom(): void {
       const node = shellRef.current
       if (!node) return
-      // Reserve the docked layout even while closed: toggling only moves the paper.
-      // Match CSS's viewport breakpoint even when the scrollbar narrows the shell.
-      const canDockLecture = window.matchMedia(`(min-width: ${DOCKED_LECTURE_MIN_WIDTH}px)`).matches
-      const railWidth = canDockLecture ? LECTURE_RAIL_WIDTH : RAIL_WIDTH
-      const lectureColumn = canDockLecture ? GRID_GAP + LECTURE_PANEL_WIDTH : 0
-      const shellStyle = getComputedStyle(node)
-      const shellPadding = parseFloat(shellStyle.paddingLeft) + parseFloat(shellStyle.paddingRight)
-      const contentColumnWidth = node.clientWidth - shellPadding - railWidth - GRID_GAP - lectureColumn
-      const gutterReserve = canDockLecture ? 0 : GUTTER_WIDTH
-      const available = contentColumnWidth - gutterReserve
-      const raw = Math.max(1, Math.min(1.35, available / PAPER_BASE_WIDTH))
-      const stepped = Math.floor(raw / 0.05) * 0.05
-      setPaperScreenZoom(stepped)
+      setPaperScreenZoom(paperScreenZoomForShell(node))
     }
 
     computeZoom()
@@ -2516,16 +2617,34 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     })
   }
 
-  function handleSimilarAddToDraft(): void {
+  // 原来不等加入结果就说「已把 N 篇加入草稿卷」，加入失败时另弹一个浏览器警告框（两句互相打架）。
+  // 现在等结果：成功说加入了几篇（2.2 秒后收起）；没加入的照登原话、留着勾选、给「重试」，不自动收起。
+  async function handleSimilarAddToDraft(): Promise<void> {
     const cards = [...similarSelectedGroupIds]
       .map((groupId) => questionGroupById.get(groupId))
       .filter((card): card is QuestionGroupCard => Boolean(card))
     if (cards.length === 0) return
-    onAddGroupsToBasket(cards)
+    setSimilarToast(null)
+    const outcome = await onAddGroupsToBasket(cards)
+    if (outcome.kind === 'failed') {
+      setSimilarSelectedGroupIds(new Set(outcome.failedIds))
+      setSimilarToast({
+        kind: 'error',
+        text: outcome.addedIds.length > 0
+          ? `加入了 ${outcome.addedIds.length} 篇，${outcome.failedIds.length} 篇没加入，还勾着`
+          : `${outcome.failedIds.length} 篇没加入草稿卷，还勾着`,
+        detail: outcome.message,
+        retry: () => void handleSimilarAddToDraft(),
+      })
+      return
+    }
+    if (outcome.kind === 'blocked') {
+      setSimilarToast({ kind: 'error', text: '没加入草稿卷', detail: outcome.reason })
+      return
+    }
     setSimilarSelectedGroupIds(new Set())
-    if (similarToastTimeoutRef.current != null) window.clearTimeout(similarToastTimeoutRef.current)
-    setSimilarToast(`已把 ${cards.length} 篇加入草稿卷，题目一并带上`)
-    similarToastTimeoutRef.current = window.setTimeout(() => setSimilarToast(null), 2200)
+    if (outcome.kind !== 'added') return
+    setSimilarToast({ kind: 'success', text: `已把 ${outcome.addedIds.length} 篇加入草稿卷，题目一并带上` })
   }
 
   function renderGroupBody(
@@ -2533,9 +2652,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     entry: GroupModel | undefined,
     readingSuccessorGroupId?: string,
   ): ReactNode {
-    if (!entry) {
-      return <div className="paper-browse-placeholder">加载中…</div>
-    }
+    // 还没来：灰块由调用处的 SkeletonGate 画（2026-11-15 第二轮，原来是一行「加载中…」）。
+    if (!entry) return null
     if (entry.kind === 'error') {
       return <div className="paper-browse-placeholder">该题组暂不可预览：{entry.message}</div>
     }
@@ -3211,37 +3329,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         >
           {!reviewRevision && card && (
             <div className="paper-browse-group-actions">
-              <button
-                type="button"
-                className={`paper-browse-gutter-add${
-                  card.draftPaperButtonState === 'in_current_draft'
-                    ? ' paper-browse-gutter-add--in-draft'
-                    : ''
-                }${
-                  card.draftPaperButtonState === 'disabled'
-                    ? ' paper-browse-gutter-add--disabled'
-                    : ''
-                }`}
-                {...iconMotionInput}
-                onClick={() => onAddGroupsToBasket([card])}
-                disabled={card.draftPaperButtonState === 'disabled'}
-                title={
-                  card.draftPaperButtonState === 'disabled'
-                    ? card.printUnavailableReason || '暂不可组卷'
-                    : undefined
-                }
-              >
-                {card.draftPaperButtonState !== 'disabled' && (
-                  <DraftAddIcon size={16} cut done={card.draftPaperButtonState === 'in_current_draft'} />
-                )}
-                {card.draftPaperButtonState === 'disabled' ? '暂不可组卷' : (
-                  // 两段文字叠在同一格里，按钮按长的那段留宽，切换时不跳；不显示的那段 visibility: hidden，不进可访问名称。
-                  <span className="paper-browse-gutter-add-label">
-                    <span className="paper-browse-gutter-add-label-idle">剪入</span>
-                    <span className="paper-browse-gutter-add-label-done">已剪入</span>
-                  </span>
-                )}
-              </button>
+              {/* 走查第四节第 6 条：卷面旁的「剪入 / 已剪入」换成共用加入键，和首页、详情页同一个写法（加入后「已加入 · 撤回」）。 */}
+              <DraftAddButton target={card} tone="strong" />
             </div>
           )}
           {options?.showScissorLine && (
@@ -3319,7 +3408,10 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               {options.mergedInstructionText}
             </p>
           )}
-          {renderGroupBody(groupId, entry, readingSuccessorGroupId)}
+          {/* 整块在等：照一组卷面（文章 + 题）画灰块，走门槛；读屏念「题组加载中」（DESIGN.md §5 Waiting，2026-11-15 第二轮）。 */}
+          <SkeletonGate pending={!entry} label="题组加载中" skeleton={<PaperGroupSkeleton />}>
+            {renderGroupBody(groupId, entry, readingSuccessorGroupId)}
+          </SkeletonGate>
         </section>
       </Fragment>
     )
@@ -3416,7 +3508,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         )
       }
       return (
-        <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
+        // 加载中由调用处的 SkeletonGate 画灰块（2026-11-15 第二轮，原来这里写「解析加载中…」）。
+        <p className="paper-browse-lecture-empty">解析未发布</p>
       )
     }
 
@@ -3436,7 +3529,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         )
       }
       return (
-        <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
+        // 加载中由调用处的 SkeletonGate 画灰块（2026-11-15 第二轮，原来这里写「解析加载中…」）。
+        <p className="paper-browse-lecture-empty">解析未发布</p>
       )
     }
 
@@ -3463,7 +3557,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         return <ContinuationAnalysisPanel analysis={lectureEntry.analysis} />
       }
       return (
-        <p className="paper-browse-lecture-empty">{lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}</p>
+        // 加载中由调用处的 SkeletonGate 画灰块（2026-11-15 第二轮，原来这里写「解析加载中…」）。
+        <p className="paper-browse-lecture-empty">解析未发布</p>
       )
     }
 
@@ -3493,6 +3588,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           onRetry={handleSimilarRetry}
           onAddToDraft={handleSimilarAddToDraft}
           toastMessage={similarToast}
+          onToastClose={() => setSimilarToast(null)}
         />
       )
     }
@@ -3550,8 +3646,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             <div className="paper-browse-reading-header">
               {lectureTitle && <h4 className="paper-browse-lecture-title">{lectureTitle}</h4>}
               {readingOverview && (
-                <button
-                  type="button"
+                <Button
+                  tone="quiet"
+                  size="sm"
                   className="paper-browse-reading-overview-toggle"
                   {...iconMotionInput}
                   aria-expanded={readingOverviewOpen}
@@ -3567,7 +3664,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 >
                   文章简介
                   <DisclosureIcon expanded={readingOverviewOpen} size={16} />
-                </button>
+                </Button>
               )}
               {readingOverview && (
                 <p
@@ -3620,14 +3717,23 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           </>
         )}
         <div className="paper-browse-lecture-analysis">
-          {renderLectureAnalysisPanel({
-            groupId,
-            group,
-            hasActiveQuestion,
-            activeQuestionId,
-            activeEvidenceId,
-            activeOptionLabel,
-          })}
+          {/* 讲解区整块在等（完形 / 语法填空 / 写作的解析按需补拉）：照解析面板画灰块，走门槛；读屏念「解析加载中」
+              （DESIGN.md §5 Waiting，2026-11-15 第二轮，原来是一行「解析加载中…」）。 */}
+          <SkeletonGate
+            pending={lectureAnalysisLoading && !lectureAnalysisByGroupId[groupId]
+              && LECTURE_FETCHED_GROUP_TYPES.includes(group.groupType)}
+            label="解析加载中"
+            skeleton={<LectureAnalysisSkeleton />}
+          >
+            {renderLectureAnalysisPanel({
+              groupId,
+              group,
+              hasActiveQuestion,
+              activeQuestionId,
+              activeEvidenceId,
+              activeOptionLabel,
+            })}
+          </SkeletonGate>
         </div>
         {/* similar-rail (E2/E6), 已拍板设计 1: 当前选中题的解析下方「配相似」
             /「相似篇章」CTA——无选中题不渲染；只对 v2 引擎支持的四个题型
@@ -3637,9 +3743,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         {!reviewRevision && hasActiveQuestion && activeQuestionId && SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType) && (
           <div className="similar-cta">
             {/* owner 拍板 2026-07-10：按钮在最左，说明文字跟在右边 */}
-            <button
-              type="button"
-              className="similar-btn similar-btn--primary"
+            <Button
+              tone="primary"
+              size="sm"
+              className="similar-btn"
+              icon={<RefreshCw aria-hidden="true" size={16} />}
               onClick={() => {
                 const mode = SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? 'passages' : 'questions'
                 // 篇章模式种子=整个题组，不带题号（CR SW-2）
@@ -3655,9 +3763,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 })
               }}
             >
-              <RefreshCw aria-hidden="true" size={16} />
               {SIMILAR_PASSAGES_MODE_GROUP_TYPES.has(group.groupType) ? '相似篇章' : '配相似'}
-            </button>
+            </Button>
             <span className="similar-cta-why">——从库里配同配方的相似题</span>
           </div>
         )}
@@ -4099,53 +4206,72 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
 
   const topbarActionsSlot = !reviewRevision ? (
     <>
-      <button
-        type="button"
+      {/* 构件厂第 4 步（2026-11-13，提案 · 单一来源）：讲评开关换成 Button。关着淡墨（和顶栏导航一样），
+          开着石板墨填充（solid，纸白字）。原来按下态的白字被 App.css `.topbar .ghost-button` 的字色盖掉，
+          深底深字几乎看不清；换构件后这个问题没了。图标 14 → 16，和顶栏其余图标一样。 */}
+      <Button
         ref={lectureToggleRef}
-        className={`ghost-button paper-browse-lecture-toggle${
-          lectureOpen ? ' paper-browse-lecture-toggle--pressed' : ''
-        }`}
+        className="paper-browse-lecture-toggle"
+        tone={lectureOpen ? 'solid' : 'quiet'}
+        size="sm"
+        icon={<Presentation size={16} aria-hidden="true" />}
         onClick={toggleLecturePanel}
         aria-pressed={lectureOpen}
         aria-expanded={lectureOpen}
       >
-        <Presentation size={14} aria-hidden="true" />
         讲评
-      </button>
-      <select className="ghost-button" aria-label="PDF 版本" value={pdfEdition ?? ''} disabled={analysisPdfBusy || !pdfEdition} onChange={(event) => {
-        setPdfEdition(event.target.value as PaperPdfEdition)
-        setAnalysisPdfError('')
-      }}>
-        {pdfEditions.map((edition) => <option key={edition} value={edition}>{PAPER_PDF_PRODUCTS[edition]}</option>)}
-      </select>
-      {pdfEdition && canonicalConsumption?.publicationDigest && <a className="ghost-button" href={paperProductPdfUrl(paperId, pdfEdition, canonicalConsumption.publicationDigest)} target="_blank" rel="noopener noreferrer">PDF Screen</a>}
-      <button
-        className="ghost-button"
-        type="button"
+      </Button>
+      {/* 字段构件第二轮（2026-11-15）：原来是套了 .ghost-button 的原生下拉，换成 shared-ui/SelectField 小号（28，和旁边的小号键同高），
+          标签「PDF 版本」只给读屏（原来是 aria-label，看得见的字没有）。用不了的版本服务器不列出来（usePaperPdfProducts 只拿到能用的），
+          没有「为什么用不了」可写，所以用原生下拉，不用 OptionSelectField。 */}
+      <SelectField
+        className="paper-browse-pdf-edition"
+        label="PDF 版本"
+        hideLabel
+        size="sm"
+        value={pdfEdition ?? ''}
         disabled={analysisPdfBusy || !pdfEdition}
+        onChange={(event) => {
+          setPdfEdition(event.target.value as PaperPdfEdition)
+          setAnalysisPdfError('')
+        }}
+        options={pdfEditions.map((edition) => ({ value: edition, label: PAPER_PDF_PRODUCTS[edition] }))}
+      />
+      {/* 构件厂第 4 步第九页（2026-11-14，提案 · 单一来源）：「PDF Screen」换成 ButtonLink（淡墨小号，和旁边「下载 PDF」一样）。
+          仍是 <a>，中键开新标签、复制地址都还在。原来 .ghost-button 没去掉链接的下划线，换了以后没有下划线。
+          Owner 2026-11-14 决定 #13：会开新标签，前面加图标库的外链图标（对读屏隐藏），不恢复下划线；
+          读屏名字靠只给读屏看的一句补上「在新标签页打开」，看得见的字不变。 */}
+      {pdfEdition && canonicalConsumption?.publicationDigest && <ButtonLink size="sm" icon={<ExternalLink size={16} aria-hidden="true" />} href={paperProductPdfUrl(paperId, pdfEdition, canonicalConsumption.publicationDigest)} target="_blank" rel="noopener noreferrer">PDF Screen<span className="visually-hidden">（在新标签页打开）</span></ButtonLink>}
+      {/* 生成中用 Button 的 busy（保持原样、点了不触发、读屏念「忙」），不再整键变淡；没有版本时才禁用。 */}
+      <Button
+        size="sm"
+        busy={analysisPdfBusy}
+        // 图标自己演「正在做」（下载图标的箭头往复），不换成所以点（DESIGN.md §5 Waiting「图标自己演」）。
+        iconShowsBusy
+        disabled={!pdfEdition}
+        icon={<DownloadFeedbackIcon size={16} icon="paper" working={analysisPdfBusy} />}
         onClick={() => void downloadPaperProduct()}
       >
-        <DownloadFeedbackIcon size={16} icon="paper" working={analysisPdfBusy} />
-        {analysisPdfBusy ? '生成 PDF 中…' : '下载 PDF'}
-      </button>
+        {/* 2026-11-15 第二轮：生成中字不换（原来换成「生成 PDF 中…」，键会变宽），图标自己演，读屏靠 busy 念「忙」。 */}
+        下载 PDF
+      </Button>
       {pdfProductsError && <span role="alert">{pdfProductsError}{' '}
-        <button className="ghost-button" type="button" onClick={retryPdfProducts}>刷新 PDF 版本</button>
+        <Button size="sm" onClick={retryPdfProducts}>刷新 PDF 版本</Button>
       </span>}
     </>
   ) : (
-    <button
-      type="button"
+    <Button
       ref={lectureToggleRef}
-      className={`ghost-button paper-browse-lecture-toggle${
-        lectureOpen ? ' paper-browse-lecture-toggle--pressed' : ''
-      }`}
+      className="paper-browse-lecture-toggle"
+      tone={lectureOpen ? 'solid' : 'quiet'}
+      size="sm"
+      icon={<Presentation size={16} aria-hidden="true" />}
       onClick={toggleLecturePanel}
       aria-pressed={lectureOpen}
       aria-expanded={lectureOpen}
     >
-      <Presentation size={14} aria-hidden="true" />
       讲评
-    </button>
+    </Button>
   )
 
   async function downloadPaperProduct(): Promise<void> {
@@ -4174,7 +4300,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     return (
       <div className="paper-browse-page">
         <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />
-        <div className="paper-browse-loading" role="status" aria-live="polite">正在打开整卷…</div>
+        <PaperBrowseOpeningSkeleton showSkeleton={openingPhase === 'waiting'} />
       </div>
     )
   }
@@ -4183,14 +4309,17 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     return (
       <div className="paper-browse-page">
         <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />
-        <div className="paper-browse-error" role="main">
-          <h2>没找到这份卷面</h2>
-          {/* Lead with plain copy; keep a non-Chinese server diagnostic as a small
-              secondary line so it can still be reported (and fail-closed checks can read it). */}
-          <p>{error && /[\u4e00-\u9fff]/.test(error) ? error : '这份卷可能还没上线或已被移除，回到找题页换一份看看。'}</p>
-          {error && !/[\u4e00-\u9fff]/.test(error) && <p className="paper-browse-error-detail">错误信息：{error}</p>}
-          <button type="button" className="ghost-button paper-browse-error-back" onClick={onBackToWorkbench}>返回找题</button>
-        </div>
+        <main className="paper-browse-error">
+          {/* 共用提示行：哪里没成功、东西还在不在（自己的话），后面照登原话（No-Literal-Fallback，
+              原来没原话时补的「这份卷可能还没上线或已被移除…」去掉），行尾「返回找题」。 */}
+          <Notice
+            kind="error"
+            detail={error || null}
+            action={{ label: '返回找题', icon: <ArrowLeft size={16} aria-hidden="true" />, onClick: onBackToWorkbench }}
+          >
+            整卷预览没打开，题库和草稿卷都没动
+          </Notice>
+        </main>
       </div>
     )
   }
@@ -4235,8 +4364,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           ? { publicationDigest: canonicalConsumption.publicationDigest, sourceAssetVersion: canonicalConsumption.sourceAssetVersion }
           : undefined}
       />}
-      {analysisPdfError && <p className="paper-browse-export-error" role="alert">{analysisPdfError}</p>}
-      {analysisFontError && !lectureOpen && <p className="paper-browse-export-error" role="alert">{analysisFontError}</p>}
+      {/* 等待第四轮（2026-11-15）：下载 PDF 等过 10 秒，在报错那一行的位置多说一句（键上的图标照旧自己演）。
+          10 秒内什么都不加；这一行出来会把卷面往下推一行，见 migrate-waiting-4/README.md。 */}
+      {analysisPdfSlow && <Notice kind="waiting" className="paper-browse-export-wait">正在生成 PDF，比平时慢，可以先去做别的</Notice>}
+      {analysisPdfError && <Notice kind="error" className="paper-browse-export-error">{analysisPdfError}</Notice>}
+      {analysisFontError && !lectureOpen && <Notice kind="error" className="paper-browse-export-error">{analysisFontError}</Notice>}
       <div
         className={`paper-browse-shell${
           lectureOpen ? ' paper-browse-shell--lecture-open' : ''
@@ -4357,17 +4489,20 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         路径都不受蒙层影响。
       */}
       {lectureOpen && <div className="paper-browse-lecture-backdrop" aria-hidden="true" />}
+      {/* 草稿丸用共用 Button（小号 28，墨字）；浮件的样子在 App.css .eqb-button.basket-chip。
+          读屏名以看得见的字开头（Owner 2026-11-14 第 3 条），冒号后补上点了会怎样。 */}
       {!reviewRevision && (
-        <button
-          type="button"
+        <Button
+          tone="strong"
+          size="sm"
           className="basket-chip"
           onClick={() => onOpenDraftPaperWorkbench(currentDraftPaperId)}
-          aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
+          aria-label={`草稿卷（${currentDraftGroupCount} 组）：打开草稿卷`}
           disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
+          icon={<BoardList size={16} />}
         >
-          <BoardList size={16} />
-          <span>草稿卷（{currentDraftGroupCount} 组）</span>
-        </button>
+          草稿卷（{currentDraftGroupCount} 组）
+        </Button>
       )}
     </div>
   )

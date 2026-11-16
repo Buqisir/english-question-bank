@@ -8,6 +8,7 @@ import { ObjectiveTeachingContent } from './ObjectiveTeachingContent.tsx'
 import type { ObjectiveTeachingView } from './objectiveTeachingContentAdapter.ts'
 import { DisclosureIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
+import { Button } from '../../shared-ui/Button.tsx'
 
 type Props = {
   overview: string
@@ -105,12 +106,12 @@ export function SevenChoicesAnalysisPanel({
         <span className="pi-seven-open-count">{openCount} / {chains.length}</span>
       </div>
       <div className="pi-seven-panel-actions" aria-label="七选五显示控制">
-        <button type="button" onClick={onShowAll} disabled={openCount === chains.length}>
+        <Button tone="quiet" size="sm" onClick={onShowAll} disabled={openCount === chains.length}>
           全部显示
-        </button>
-        <button type="button" onClick={onHideAll} disabled={openCount === 0}>
+        </Button>
+        <Button tone="quiet" size="sm" onClick={onHideAll} disabled={openCount === 0}>
           全部隐藏
-        </button>
+        </Button>
       </div>
       {overview && (
         <details className="pi-seven-group-overview" open>
@@ -183,14 +184,16 @@ export function SevenChoicesAnalysisPanel({
                     <span>{chain.roleLabel}</span>
                     {chain.primaryMechanismLabel && <span>{chain.primaryMechanismLabel}</span>}
                   </div>
-                  <button
-                    type="button"
+                  {/* Owner 2026-11-14 第 19 条：和「全部显示 / 全部隐藏」一样换成淡墨小号，类名留着当挂钩。 */}
+                  <Button
+                    tone="quiet"
+                    size="sm"
                     className="pi-seven-details-toggle"
                     onClick={() => toggleDetails(chain.questionId)}
                     aria-expanded={detailsOpen}
                   >
                     {detailsOpen ? '收起细节' : '展开细节'}
-                  </button>
+                  </Button>
                   {detailsOpen && (
                     <div className="pi-seven-details">
                       <DetailBlock title="匹配线索">

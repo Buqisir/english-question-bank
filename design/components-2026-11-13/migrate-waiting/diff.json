@@ -1,0 +1,571 @@
+{
+ "before": {
+  "runs": [
+   "waiting-before（全部步骤）",
+   "waiting-before-home（home-row-add 补拍；home-connecting 仍没拍到）",
+   "waiting-before-home2（home-connecting 改等提示行）",
+   "waiting-before-home3（home-search，改用走 AI 的说法）"
+  ],
+  "steps": {
+   "home-connecting": {
+    "frozen": [],
+    "dots": [],
+    "skeletonInDom": {
+     "chips": 0,
+     "feed": 0
+    }
+   },
+   "home-row-add": {
+    "idle": [
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     },
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     },
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     },
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     }
+    ],
+    "frozen": [],
+    "dots": [],
+    "busy": [
+     {
+      "w": 88.8,
+      "h": 28,
+      "text": "加入中…",
+      "ariaBusy": null
+     },
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     },
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     },
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     }
+    ],
+    "rowFound": 1
+   },
+   "detail-add": {
+    "idle": [
+     {
+      "w": 111,
+      "h": 32,
+      "text": "加入草稿卷",
+      "ariaBusy": null
+     }
+    ],
+    "frozen": [],
+    "dots": [],
+    "busy": [
+     {
+      "w": 97.4,
+      "h": 32,
+      "text": "加入中…",
+      "ariaBusy": "true"
+     }
+    ]
+   },
+   "delete-dialog": {
+    "idle": [
+     {
+      "w": 76,
+      "h": 36,
+      "text": "删除题组",
+      "ariaBusy": null
+     }
+    ],
+    "frozen": [],
+    "dots": [],
+    "busy": [
+     {
+      "w": 74.8,
+      "h": 36,
+      "text": "删除中…",
+      "ariaBusy": "true"
+     }
+    ]
+   },
+   "translate": {
+    "frozen": [
+     {
+      "name": "paper-selection-spin",
+      "target": "paper-selection-spinner"
+     }
+    ],
+    "dots": []
+   },
+   "analyze": {
+    "frozen": [
+     {
+      "name": "paper-selection-spin",
+      "target": "paper-selection-spinner"
+     }
+    ],
+    "dots": []
+   },
+   "draft": {
+    "items": [
+     {
+      "id": "draft-item-a7c90d5f-dc5d-4f32-8f16-ecf753050721",
+      "groupId": "group-2026-i-reading-a"
+     },
+     {
+      "id": "draft-item-cab4af38-2a4c-4a02-8a4e-7871a0da5959",
+      "groupId": "group-2026-i-reading-b"
+     },
+     {
+      "id": "draft-item-dffadba7-4be0-4e38-b58e-0dbd10b88cd5",
+      "groupId": "group-2026-i-reading-c"
+     }
+    ],
+    "frozen": [],
+    "dots": [],
+    "frozen2": [],
+    "dots2": [],
+    "status": [
+     {
+      "w": 36,
+      "h": 17,
+      "text": "已保存",
+      "ariaBusy": null
+     }
+    ]
+   },
+   "detail-add-reduced": {
+    "idle": [
+     {
+      "w": 111,
+      "h": 32,
+      "text": "加入草稿卷",
+      "ariaBusy": null
+     }
+    ],
+    "frozen": [],
+    "dots": [],
+    "busy": [
+     {
+      "w": 97.4,
+      "h": 32,
+      "text": "加入中…",
+      "ariaBusy": "true"
+     }
+    ]
+   },
+   "delete-dialog-reduced": {
+    "idle": [
+     {
+      "w": 76,
+      "h": 36,
+      "text": "删除题组",
+      "ariaBusy": null
+     }
+    ],
+    "frozen": [],
+    "dots": [],
+    "busy": [
+     {
+      "w": 74.8,
+      "h": 36,
+      "text": "删除中…",
+      "ariaBusy": "true"
+     }
+    ]
+   },
+   "home-search": {
+    "frozen": [
+     {
+      "name": "concierge-skeleton-shimmer",
+      "target": "concierge-skeleton-line concierge-skeleton-feed-title"
+     },
+     {
+      "name": "concierge-skeleton-shimmer",
+      "target": "concierge-skeleton-line concierge-skeleton-feed-row"
+     },
+     {
+      "name": "concierge-skeleton-shimmer",
+      "target": "concierge-skeleton-line concierge-skeleton-feed-row short"
+     },
+     {
+      "name": "concierge-skeleton-shimmer",
+      "target": "concierge-skeleton-line concierge-skeleton-feed-title"
+     },
+     {
+      "name": "concierge-skeleton-shimmer",
+      "target": "concierge-skeleton-line concierge-skeleton-feed-row"
+     },
+     {
+      "name": "concierge-skeleton-shimmer",
+      "target": "concierge-skeleton-line concierge-skeleton-feed-row short"
+     },
+     {
+      "name": "concierge-skeleton-shimmer",
+      "target": "concierge-skeleton-line concierge-skeleton-feed-title"
+     },
+     {
+      "name": "concierge-skeleton-shimmer",
+      "target": "concierge-skeleton-line concierge-skeleton-feed-row"
+     },
+     {
+      "name": "concierge-skeleton-shimmer",
+      "target": "concierge-skeleton-line concierge-skeleton-feed-row short"
+     }
+    ],
+    "dots": []
+   }
+  },
+  "missing": [],
+  "pageErrors": []
+ },
+ "after": {
+  "steps": {
+   "home-connecting": {
+    "frozen": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "flip",
+      "reduced": false,
+      "active": "true"
+     }
+    ],
+    "skeletonInDom": {
+     "chips": 0,
+     "feed": 0
+    }
+   },
+   "home-search": {
+    "frozen": [
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "eqb-skeleton-breathe",
+      "target": "eqb-skeleton"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "wave",
+      "reduced": false,
+      "active": "true"
+     }
+    ]
+   },
+   "home-row-add": {
+    "idle": [
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     },
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     },
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     },
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     }
+    ],
+    "frozen": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "swap",
+      "reduced": false,
+      "active": "true"
+     }
+    ],
+    "busy": [
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     },
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     },
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     },
+     {
+      "w": 28,
+      "h": 28,
+      "text": "",
+      "ariaBusy": null
+     }
+    ],
+    "rowFound": 1
+   },
+   "detail-add": {
+    "idle": [
+     {
+      "w": 111,
+      "h": 32,
+      "text": "加入草稿卷",
+      "ariaBusy": null
+     }
+    ],
+    "frozen": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "wave",
+      "reduced": false,
+      "active": "true"
+     }
+    ],
+    "busy": [
+     {
+      "w": 111,
+      "h": 32,
+      "text": "加入草稿卷",
+      "ariaBusy": "true"
+     }
+    ]
+   },
+   "delete-dialog": {
+    "idle": [
+     {
+      "w": 76,
+      "h": 36,
+      "text": "删除题组",
+      "ariaBusy": null
+     }
+    ],
+    "frozen": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "wave",
+      "reduced": false,
+      "active": "true"
+     }
+    ],
+    "busy": [
+     {
+      "w": 76,
+      "h": 36,
+      "text": "删除题组",
+      "ariaBusy": "true"
+     }
+    ]
+   },
+   "translate": {
+    "frozen": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "wave",
+      "reduced": false,
+      "active": "true"
+     }
+    ]
+   },
+   "analyze": {
+    "frozen": [
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     },
+     {
+      "name": "wait-dots",
+      "target": "circle"
+     }
+    ],
+    "dots": [
+     {
+      "kind": "swap",
+      "reduced": false,
+      "active": "true"
+     }
+    ]
+   },
+   "draft": {
+    "diag": {
+     "url": "http://127.0.0.1:5375/?view=paper-browse&paperId=paper-2026-i",
+     "found": [],
+     "notices": []
+    }
+   },
+   "detail-add-reduced": {
+    "idle": [
+     {
+      "w": 89,
+      "h": 32,
+      "text": "暂不可组卷",
+      "ariaBusy": null
+     }
+    ],
+    "diag": {
+     "url": "http://127.0.0.1:5375/?view=detail&groupId=group-2026-i-reading-d",
+     "found": [],
+     "notices": []
+    }
+   },
+   "delete-dialog-reduced": {
+    "diag": {
+     "url": "http://127.0.0.1:5375/?view=detail&groupId=group-2026-i-reading-d",
+     "found": [],
+     "notices": []
+    }
+   }
+  },
+  "missing": [
+   "draft: Error: page.evaluate: Error: add group-2026-i-reading-a 400 {\"error\":\"questionGroupId not found: group-2026-i-reading-a\"}",
+   "detail-add-reduced: TimeoutError: locator.click: Timeout 30000ms exceeded.",
+   "delete-dialog-reduced: TimeoutError: locator.click: Timeout 30000ms exceeded."
+  ],
+  "pageErrors": []
+ }
+}

@@ -1,24 +1,29 @@
-import { Ellipsis, Folder, Paper, Save, Trash } from '../../icons'
+import { Folder, Paper, Save, Trash } from '../../icons'
 import { DownloadFeedbackIcon } from '../../icons/MotionIcons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import {
   useCallback,
   useEffect,
-  useId,
   useMemo,
   useRef,
   useState,
-  type KeyboardEvent,
-  type MouseEvent,
   type ReactNode,
 } from 'react'
-import { createPortal } from 'react-dom'
 import type { MySpaceArtifact, MySpaceFolder } from '../../domain/questionBank'
 import { deleteMySpaceArtifact, downloadMySpaceArtifact, fetchMySpace } from '../../services/mySpace'
 import { prepareFileSaveTarget, type FileSaveMode } from '../../services/fileDownload.ts'
 import { describeError } from '../shared/errorCopy'
-import { useToastPresence } from '../shared/useToastPresence.ts'
+import { Button } from '../../shared-ui/Button.tsx'
+import { Dialog } from '../../shared-ui/Dialog.tsx'
+import { EmptyState } from '../../shared-ui/EmptyState.tsx'
+import { Menu } from '../../shared-ui/Menu.tsx'
+import { Notice, type NoticeKind } from '../../shared-ui/Notice.tsx'
+import { planFocusAfterRemoval, programmaticFocusTarget } from '../../shared-ui/focusAfterRemoval.ts'
+import { Row, RowList } from '../../shared-ui/Row.tsx'
+import { Skeleton, SkeletonGate } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
+import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import './MySpacePage.css'
 
 export type MySpacePageProps = {
@@ -28,6 +33,10 @@ export type MySpacePageProps = {
 }
 
 type LoadState = 'loading' | 'loaded' | 'error'
+
+// 页面上那一行提示（原来是手写的 <p className="my-space-message">）换成共用 Notice 以后要分种类：
+// 出错（读取、下载、删除失败）、说明（原草稿卷已删除）、做完了（文件已删除）。字照原来。
+type PageMessage = { kind: NoticeKind; text: string }
 
 function formatMonthDay(value: string) {
   if (!value) return ''
@@ -78,8 +87,6 @@ function groupArtifactsByMonth(items: MySpaceArtifact[]): MonthGroup[] {
   }))
 }
 
-let activeFileMenuCloser: ((restoreFocus?: boolean) => void) | null = null
-
 function ArtifactMenu({
   artifact,
   disabled,
@@ -91,138 +98,61 @@ function ArtifactMenu({
   onSaveAs: () => void
   onDelete: (trigger: HTMLButtonElement) => void
 }) {
-  const [open, setOpen] = useState(false)
-  const [position, setPosition] = useState({ top: 0, left: 0 })
-  const triggerRef = useRef<HTMLButtonElement>(null)
-  const menuRef = useRef<HTMLDivElement>(null)
-  const menuId = useId()
-
-  const close = useCallback((restoreFocus = true) => {
-    setOpen(false)
-    if (restoreFocus) requestAnimationFrame(() => triggerRef.current?.focus())
-  }, [])
-
-  useEffect(() => {
-    if (!open) return
-    if (activeFileMenuCloser && activeFileMenuCloser !== close) activeFileMenuCloser(false)
-    activeFileMenuCloser = close
-
-    const onPointerDown = (event: PointerEvent) => {
-      const target = event.target as Node
-      if (triggerRef.current?.contains(target) || menuRef.current?.contains(target)) return
-      close(false)
-    }
-    const onKeyDown = (event: globalThis.KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault()
-        close(true)
-      }
-    }
-    const onViewportChange = () => close(false)
-    document.addEventListener('pointerdown', onPointerDown)
-    document.addEventListener('keydown', onKeyDown)
-    window.addEventListener('resize', onViewportChange)
-    window.addEventListener('scroll', onViewportChange, true)
-    const focusFrame = requestAnimationFrame(() => menuRef.current?.querySelector<HTMLElement>('[role="menuitem"]')?.focus({ preventScroll: true }))
-
-    return () => {
-      cancelAnimationFrame(focusFrame)
-      if (activeFileMenuCloser === close) activeFileMenuCloser = null
-      document.removeEventListener('pointerdown', onPointerDown)
-      document.removeEventListener('keydown', onKeyDown)
-      window.removeEventListener('resize', onViewportChange)
-      window.removeEventListener('scroll', onViewportChange, true)
-    }
-  }, [close, open])
-
-  function placeMenu() {
-    const rect = triggerRef.current?.getBoundingClientRect()
-    if (!rect) return
-    const width = 168
-    const height = 92
-    const gutter = 8
-    const top = rect.bottom + 6 + height > window.innerHeight
-      ? Math.max(gutter, rect.top - height - 6)
-      : rect.bottom + 6
-    const left = Math.min(window.innerWidth - width - gutter, Math.max(gutter, rect.right - width))
-    setPosition({ top, left })
-  }
-
-  function toggle(event: MouseEvent<HTMLButtonElement>) {
-    event.stopPropagation()
-    if (open) {
-      close(false)
-      return
-    }
-    placeMenu()
-    setOpen(true)
-  }
-
-  function onMenuKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    const items = menuRef.current ? [...menuRef.current.querySelectorAll<HTMLElement>('[role="menuitem"]')] : []
-    if (!items.length) return
-    const index = items.indexOf(document.activeElement as HTMLElement)
-    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-      event.preventDefault()
-      const step = event.key === 'ArrowDown' ? 1 : -1
-      items[(index + step + items.length) % items.length].focus()
-    } else if (event.key === 'Home' || event.key === 'End') {
-      event.preventDefault()
-      items[event.key === 'Home' ? 0 : items.length - 1].focus()
-    } else if (event.key === 'Tab') {
-      event.preventDefault()
-      close(true)
-    }
-  }
-
   return (
-    <>
-      <button
-        ref={triggerRef}
-        type="button"
-        className="my-space-row-menu-trigger"
-        aria-label={`更多操作：${artifact.title || artifact.fileName}`}
-        aria-haspopup="menu"
-        aria-expanded={open}
-        aria-controls={open ? menuId : undefined}
-        disabled={disabled}
-        onClick={toggle}
-      >
-        <Ellipsis size={16} aria-hidden="true" />
-      </button>
-      {open && createPortal(
-        <FluidHoverList
-          as="div"
-          ref={menuRef}
-          id={menuId}
-          className="my-space-row-menu"
-          itemSelector=".my-space-row-menu-item"
-          role="menu"
-          gapClick={false}
-          style={position}
-          onKeyDown={onMenuKeyDown}
-          onClick={(event) => event.stopPropagation()}
-        >
-          <button type="button" className="my-space-row-menu-item" role="menuitem" onClick={() => { close(true); onSaveAs() }}>
-            <Save size={16} aria-hidden="true" />另存为…
-          </button>
-          <button
-            type="button"
-            className="my-space-row-menu-item my-space-row-menu-item-danger"
-            role="menuitem"
-            onClick={() => {
-              const trigger = triggerRef.current
-              close(false)
-              if (trigger) onDelete(trigger)
-            }}
-          >
-            <Trash size={16} aria-hidden="true" />删除文件
-          </button>
-        </FluidHoverList>,
-        // Keep the page's theme tokens while escaping the clipped file list.
-        triggerRef.current?.closest('.my-space-page') ?? document.body,
-      )}
-    </>
+    <Menu
+      label={`更多操作：${artifact.title || artifact.fileName}`}
+      triggerClassName="my-space-row-menu-trigger"
+      triggerDisabled={disabled}
+      // 和同一行的「下载」「打开原草稿」一样高（36，窄屏 34 见 MySpacePage.css）。
+      triggerSize="lg"
+      // 原来的菜单就关掉了空隙点击：面板边上点一下不算点「删除文件」（第六页补回，见 Menu.tsx 头注释）。
+      gapClick={false}
+      items={[
+        { key: 'save-as', label: '另存为…', icon: <Save size={16} aria-hidden="true" />, onSelect: () => onSaveAs() },
+        {
+          key: 'delete',
+          label: '删除文件',
+          icon: <Trash size={16} aria-hidden="true" />,
+          tone: 'danger',
+          // 确认框接焦点；关掉确认框时焦点回这个触发键（requestDeleteArtifact 记下它）。
+          restoreFocus: false,
+          onSelect: (_event, trigger) => {
+            if (trigger) onDelete(trigger)
+          },
+        },
+      ]}
+    />
+  )
+}
+
+// 文件列表在等时的灰块（等待第六轮，2026-11-15；原来是分区标题下面一行「正在读取个人空间」）。
+// 照真列表画：月份那一行、板里 3 行文件（图标、标题、页数日期一行、右边三个键的字），用真列表同一套 class，
+// 行高照真行（70，MySpacePage.css .my-space-file-row），灰块放在字的位置。整块对读屏隐藏，读屏那一句由 SkeletonGate 给。
+const SKELETON_FILE_TITLE_WIDTHS = [96, 132, 112]
+
+function MySpaceListSkeleton(): ReactNode {
+  return (
+    <section className="my-space-month-group my-space-list-skeleton" aria-hidden="true">
+      <div className="my-space-month-head">
+        <span className="my-space-month-label"><Skeleton inline width={88} height={10} /></span>
+      </div>
+      <RowList axis="y" className="my-space-file-list" itemSelector=".my-space-list-skeleton-none" gapClick={false}>
+        {SKELETON_FILE_TITLE_WIDTHS.map((width, index) => (
+          <Row className="my-space-file-row" padding="none" key={index}>
+            <Skeleton width={24} height={24} />
+            <div className="my-space-file-copy">
+              <h3><Skeleton inline width={width} height={12} /></h3>
+              <p><span><Skeleton inline width={88} height={10} /></span></p>
+            </div>
+            <div className="my-space-row-actions">
+              <Skeleton width={48} height={12} />
+              <Skeleton width={66} height={12} />
+              <Skeleton width={16} height={12} />
+            </div>
+          </Row>
+        ))}
+      </RowList>
+    </section>
   )
 }
 
@@ -231,12 +161,11 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
   const [artifacts, setArtifacts] = useState<MySpaceArtifact[]>([])
   const [selectedFolderId, setSelectedFolderId] = useState<string | null>(null)
   const [loadState, setLoadState] = useState<LoadState>('loading')
-  const [message, setMessage] = useState('')
+  const [message, setMessage] = useState<PageMessage | null>(null)
   const [busyId, setBusyId] = useState<string | null>(null)
   // 只给下载用：busyId 同时管删除，直接拿它驱动下载图标的话，删文件时下载图标也会动（D8）。
   const [downloadingId, setDownloadingId] = useState<string | null>(null)
   const [confirmTarget, setConfirmTarget] = useState<MySpaceArtifact | null>(null)
-  const confirmPresence = useToastPresence(confirmTarget, 120)
 
   const selectedFolder = useMemo(
     () => folders.find((folder) => folder.id === selectedFolderId) || null,
@@ -247,10 +176,12 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
 
   // A monotonically increasing token prevents a stale folder response replacing a newer one.
   const loadTokenRef = useRef(0)
-  const load = useCallback(async (folderId = selectedFolderId) => {
+  // keepList：删完文件以后重新取数时不把列表换成「正在读取」，列表一直挂着，
+  // 焦点才能留在（或落到）下一份文件的键上，不掉到页面最外层（见 confirmDeleteArtifact）。
+  const load = useCallback(async (folderId = selectedFolderId, { keepList = false }: { keepList?: boolean } = {}) => {
     const token = ++loadTokenRef.current
-    setLoadState('loading')
-    setMessage('')
+    if (!keepList) setLoadState('loading')
+    setMessage(null)
     try {
       const snapshot = await fetchMySpace(folderId)
       if (loadTokenRef.current !== token) return
@@ -260,19 +191,18 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
     } catch (error) {
       if (loadTokenRef.current !== token) return
       setLoadState('error')
-      setMessage(describeError('加载个人空间', error))
+      setMessage({ kind: 'error', text: describeError('加载个人空间', error) })
     }
   }, [selectedFolderId])
 
   useEffect(() => { void load() }, [load])
 
   function selectFolder(folderId: string | null) {
-    activeFileMenuCloser?.(false)
     setSelectedFolderId(folderId)
   }
 
   async function downloadArtifact(artifact: MySpaceArtifact, mode: FileSaveMode = 'download') {
-    setMessage('')
+    setMessage(null)
     try {
       const target = await prepareFileSaveTarget({
         mode,
@@ -284,7 +214,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
       setDownloadingId(artifact.id)
       await downloadMySpaceArtifact(artifact, target)
     } catch (error) {
-      setMessage(describeError(mode === 'save-as' ? '另存为 PDF' : '下载 PDF', error))
+      setMessage({ kind: 'error', text: describeError(mode === 'save-as' ? '另存为 PDF' : '下载 PDF', error) })
     } finally {
       setBusyId(null)
       setDownloadingId(null)
@@ -293,63 +223,70 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
 
   function openSourceDraft(artifact: MySpaceArtifact) {
     if (!artifact.sourceDraftExists) {
-      setMessage('原草稿卷已删除，PDF 仍可下载')
+      setMessage({ kind: 'info', text: '原草稿卷已删除，PDF 仍可下载' })
       return
     }
     onOpenDraft(artifact.sourceDraftPaperId)
   }
 
-  const cancelButtonRef = useRef<HTMLButtonElement | null>(null)
+  // 关上确认框时焦点回到打开它的那个键：菜单项在打开时已经关掉了，所以记下菜单的触发键（Menu 交来的 trigger），
+  // 交给 Dialog 的 returnFocus。焦点圈、Esc、退场动画都由共用 Dialog 管（原来这里自己写的 keydown 循环删了）。
   const restoreFocusRef = useRef<HTMLElement | null>(null)
+  // 确认删除以后焦点落在哪（shared-ui/focusAfterRemoval.ts 的规则）：下一份文件的「更多操作」键 → 没有下一份就上一份 →
+  // 一份都不剩就落到分区标题（h2）。确认框关上时就交给 Dialog 的 returnFocus（被删那一行这时还在、但键已禁用），
+  // 删完、重新取数以后再落一次（行重画了）。取消时仍回到打开它的键。
+  const focusAfterDeleteRef = useRef<(() => HTMLElement | null) | null>(null)
+  const sectionHeadingRef = useRef<HTMLHeadingElement>(null)
+  // 等待第四轮（2026-11-15）：文件第一次读回来时，月份行和文件行从上到下依次淡入。
+  // 只演第一次（once）：换文件夹、删完重读都不演。
+  const fileListRef = useRef<HTMLElement>(null)
+  // 等待第六轮（2026-11-15）：读取中画文件列表的灰块，走门槛（300ms 内不出、出了至少留 500ms，这期间文件到了也先不换上）。
+  // listWaiting = 灰块那一块还占着位置；文件行等它走了才挂，淡入也等那一拍。
+  const listPending = loadState === 'loading'
+  const listPhase = useDelayedBusy(listPending)
+  const listWaiting = listPending || listPhase === 'waiting'
+  useRowReveal(fileListRef, '.my-space-month-head, .my-space-file-row', !listWaiting && loadState === 'loaded' && artifacts.length > 0, { once: true })
+  // 删除失败时：那一行还在，焦点回到它的「更多操作」键（busy 解除、键能用以后）。
+  const [focusAfterBusy, setFocusAfterBusy] = useState<HTMLElement | null>(null)
+
+  useEffect(() => {
+    if (busyId !== null || !focusAfterBusy) return
+    if (focusAfterBusy.isConnected) focusAfterBusy.focus()
+    setFocusAfterBusy(null)
+  }, [busyId, focusAfterBusy])
 
   function requestDeleteArtifact(artifact: MySpaceArtifact, trigger: HTMLElement) {
     restoreFocusRef.current = trigger
+    focusAfterDeleteRef.current = null
     setConfirmTarget(artifact)
   }
-
-  useEffect(() => {
-    // Presence mounts the dialog one render after the delete target changes.
-    if (!confirmPresence.rendered) return
-    cancelButtonRef.current?.focus()
-    const restoreTarget = restoreFocusRef.current
-    const onKeyDown = (event: globalThis.KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        event.preventDefault()
-        setConfirmTarget(null)
-      } else if (event.key === 'Tab') {
-        const dialog = cancelButtonRef.current?.closest('[role="alertdialog"]')
-        const buttons = dialog ? [...dialog.querySelectorAll<HTMLButtonElement>('button:not(:disabled)')] : []
-        const first = buttons[0]
-        const last = buttons.at(-1)
-        if (event.shiftKey && document.activeElement === first) {
-          event.preventDefault()
-          last?.focus()
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault()
-          first?.focus()
-        }
-      }
-    }
-    document.addEventListener('keydown', onKeyDown)
-    return () => {
-      document.removeEventListener('keydown', onKeyDown)
-      restoreTarget?.focus()
-      restoreFocusRef.current = null
-    }
-  }, [confirmPresence.rendered])
 
   async function confirmDeleteArtifact() {
     const artifact = confirmTarget
     if (!artifact) return
+    const trigger = restoreFocusRef.current
+    const focusNext = trigger
+      ? planFocusAfterRemoval(trigger, {
+          item: '.my-space-file-row',
+          key: 'data-artifact-id',
+          control: '.my-space-row-menu-trigger',
+          fallback: () => programmaticFocusTarget(sectionHeadingRef.current),
+        })
+      : () => programmaticFocusTarget(sectionHeadingRef.current)
+    focusAfterDeleteRef.current = focusNext
     setConfirmTarget(null)
     setBusyId(artifact.id)
-    setMessage('')
+    setMessage(null)
     try {
       await deleteMySpaceArtifact(artifact.id)
-      await load(selectedFolderId)
-      setMessage('文件已删除。')
+      await load(selectedFolderId, { keepList: true })
+      setMessage({ kind: 'success', text: '文件已删除。' })
+      focusNext()?.focus()
     } catch (error) {
-      setMessage(describeError('删除文件', error))
+      setMessage({ kind: 'error', text: describeError('删除文件', error) })
+      // 没删掉：那一行还在，确认框若还在退场，关上时也回到它，不去下一行。
+      focusAfterDeleteRef.current = () => trigger
+      if (trigger) setFocusAfterBusy(trigger)
     } finally {
       setBusyId(null)
     }
@@ -364,7 +301,9 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
           <p>已保存的 PDF</p>
         </header>
 
-        {message && loadState !== 'error' && <p className="my-space-message" role="status">{message}</p>}
+        {/* 页面提示行换成共用 Notice（构件收尾，2026-11-15）：一行次要灰字加 16px 图标；出错读屏马上念（role=alert）。
+            位置照原来（.my-space-message 的外边距）。 */}
+        {message && loadState !== 'error' && <Notice kind={message.kind} className="my-space-message">{message.text}</Notice>}
 
         <div className={`my-space-workspace${folders.length ? '' : ' my-space-workspace--no-folders'}`}>
           {folders.length > 0 && (
@@ -392,37 +331,46 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
             </aside>
           )}
 
-          <main className="my-space-main">
+          <main className="my-space-main" ref={fileListRef}>
             <div className="my-space-section-head">
               <div>
-                <h2>{selectedFolder?.name || '全部文件'}</h2>
-                {loadState === 'loaded' && <span>{artifacts.length} 份已保存文件</span>}
+                {/* 删完最后一份文件时焦点落在这里（programmaticFocusTarget 临时给 tabindex=-1，Tab 不停）。 */}
+                <h2 ref={sectionHeadingRef}>{selectedFolder?.name || '全部文件'}</h2>
+                {/* 读取中这一行小字也画灰块，分区标题那块一样高（42 → 43.4），下面的灰块和真行同位。 */}
+                {listWaiting
+                  ? <span aria-hidden="true"><Skeleton inline width={84} height={10} /></span>
+                  : loadState === 'loaded' && <span>{artifacts.length} 份已保存文件</span>}
               </div>
               {/* Search and other future capabilities belong here only after they are real. */}
             </div>
 
-            {loadState === 'loading' && <p className="my-space-empty">正在读取个人空间…</p>}
-            {loadState === 'error' && (
+            {/* 读取失败换成共用 Notice（构件收尾，2026-11-15），字照原来。读取中原来也是一行 Notice，等待第六轮换成灰块。 */}
+            {listWaiting && (
+              <SkeletonGate pending={listPending} phase={listPhase} label="正在读取个人空间" skeleton={<MySpaceListSkeleton />} />
+            )}
+            {!listWaiting && loadState === 'error' && (
               <div className="my-space-empty-state">
-                <p className="my-space-error">{message || '个人空间读取失败。'}</p>
-                <button type="button" className="my-space-empty-cta" onClick={() => void load()}>重新加载</button>
+                <Notice kind="error" className="my-space-error">{message?.text || '个人空间读取失败。'}</Notice>
+                <Button className="my-space-empty-cta" tone="primary" size="lg" onClick={() => void load()}>重新加载</Button>
               </div>
             )}
-            {loadState === 'loaded' && artifacts.length === 0 && (
-              <div className="my-space-empty-state">
-                <Paper size={24} aria-hidden="true" />
-                <p className="my-space-empty">试卷导出为 PDF 后，可以保存在这里。</p>
-                <button type="button" className="my-space-empty-cta" onClick={onBackToWorkbench}>去找题</button>
-              </div>
+            {!listWaiting && loadState === 'loaded' && artifacts.length === 0 && (
+              // 个人空间空态用坐石獭獭（BRAND.md §7 第 118 条），换掉原来的平涂文件夹插图。
+              <EmptyState className="my-space-empty-placed" otter="otter-sit" action={{ label: '去找题', onClick: onBackToWorkbench }}>
+                试卷导出为 PDF 后，可以保存在这里。
+              </EmptyState>
             )}
-            {loadState === 'loaded' && artifacts.length > 0 && monthGroups.map((group) => (
+            {!listWaiting && loadState === 'loaded' && artifacts.length > 0 && monthGroups.map((group) => (
               <section className="my-space-month-group" key={group.key} aria-label={group.label}>
                 <div className="my-space-month-head">
                   <span className="my-space-month-label">{group.label}</span>
                   <span className="my-space-month-count">{group.artifacts.length} 份</span>
                 </div>
-                <FluidHoverList
-                  as="div"
+                {/* 文件列表是共用构件 shared-ui/Row（2026-11-15）：<ul> + 每份文件一个 <li>（原来 div + article），
+                    板、行间分隔线由 RowList 给。文件行不可点（不给 action），三个键各自是键。
+                    滑块悬停照原来留在文件行上（itemSelector 指名 .my-space-file-row）：Row 的规矩是不可点的行不加悬停，
+                    但 Owner 2026-11-14 决定 #4 说过滑块停在这一行时键自己垫底，去不去要 Owner 定，见设计记录。 */}
+                <RowList
                   axis="y"
                   className="my-space-file-list"
                   itemSelector=".my-space-file-row"
@@ -434,7 +382,7 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                     const dateLabel = formatMonthDay(artifact.generatedAt)
                     const folderName = artifact.folderId ? folderNames.get(artifact.folderId) : null
                     return (
-                      <article className="my-space-file-row" key={artifact.id}>
+                      <Row className="my-space-file-row" padding="none" key={artifact.id} data-artifact-id={artifact.id}>
                         <Paper className="my-space-file-icon" size={24} aria-hidden="true" />
                         <div className="my-space-file-copy">
                           <h3 title={title}>{title}</h3>
@@ -446,10 +394,16 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                           </p>
                         </div>
                         <div className="my-space-row-actions">
-                          <button type="button" disabled={busyId === artifact.id} onClick={() => void downloadArtifact(artifact)}>
-                            <DownloadFeedbackIcon size={16} working={downloadingId === artifact.id} /><span>下载</span>
-                          </button>
-                          <button type="button" onClick={() => openSourceDraft(artifact)}>打开原草稿</button>
+                          <Button
+                            tone="subtle"
+                            size="lg"
+                            disabled={busyId === artifact.id}
+                            icon={<DownloadFeedbackIcon size={16} working={downloadingId === artifact.id} />}
+                            onClick={() => void downloadArtifact(artifact)}
+                          >
+                            下载
+                          </Button>
+                          <Button tone="subtle" size="lg" onClick={() => openSourceDraft(artifact)}>打开原草稿</Button>
                           <ArtifactMenu
                             artifact={artifact}
                             disabled={busyId === artifact.id}
@@ -457,28 +411,28 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
                             onDelete={(trigger) => requestDeleteArtifact(artifact, trigger)}
                           />
                         </div>
-                      </article>
+                      </Row>
                     )
                   })}
-                </FluidHoverList>
+                </RowList>
               </section>
             ))}
           </main>
         </div>
       </div>
 
-      {confirmPresence.rendered && (
-        <div className="my-space-modal-backdrop" role="presentation" data-visible={confirmPresence.visible}>
-          <div className="my-space-confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="my-space-confirm-dialog-title" data-visible={confirmPresence.visible}>
-            <h3 id="my-space-confirm-dialog-title">删除草稿卷 PDF</h3>
-            <p>删除「{confirmPresence.rendered.title || confirmPresence.rendered.fileName}」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。</p>
-            <div className="my-space-confirm-actions">
-              <button type="button" ref={cancelButtonRef} onClick={() => setConfirmTarget(null)}>取消</button>
-              <button type="button" className="my-space-delete-confirm" onClick={() => void confirmDeleteArtifact()}>删除 PDF</button>
-            </div>
-          </div>
-        </div>
-      )}
+      <Dialog
+        tone="alert"
+        open={Boolean(confirmTarget)}
+        onClose={() => setConfirmTarget(null)}
+        className="my-space-confirm-dialog"
+        title="删除草稿卷 PDF"
+        description={`删除「${confirmTarget?.title || confirmTarget?.fileName || ''}」？PDF 文件会一并删除，此操作不可恢复。原草稿不受影响。`}
+        // 取消、Esc：回到打开它的键。确认删除：落到下一份文件（见 confirmDeleteArtifact）。
+        returnFocus={() => focusAfterDeleteRef.current?.() || restoreFocusRef.current}
+        cancel={{ label: '取消' }}
+        confirm={{ label: '删除 PDF', className: 'my-space-delete-confirm', onClick: () => void confirmDeleteArtifact() }}
+      />
     </div>
   )
 }

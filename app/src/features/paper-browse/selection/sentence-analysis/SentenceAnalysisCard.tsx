@@ -8,6 +8,9 @@ import { ChevronLeft, ChevronRight, Target, SentenceAnalysis, X } from '../../..
 import { CopyFeedbackIcon } from '../../../../icons/MotionIcons'
 import { iconMotionInput } from '../../../../icons/motionInput'
 import { useClipboardCopy } from '../../../../hooks/useClipboardCopy'
+import { InlineWaitDots } from '../../../../shared-ui/WaitDots.tsx'
+import { Skeleton, SkeletonGate } from '../../../../shared-ui/Skeleton.tsx'
+import { useSlowWait } from '../../../../shared-ui/useDelayedBusy.ts'
 import { AnnotatedSentence } from './AnnotatedSentence'
 import { TranslationBlock } from './TranslationBlock'
 import { GrammarLegend } from './GrammarLegend'
@@ -51,6 +54,8 @@ export function SentenceAnalysisCard({
   const interaction = useSentenceInteraction(ready)
   const { scopePath, scopeId, focus, mainActive, logicalSubjectActive, selectedRole, open, restored, pending, keyboard, locate, send } = interaction
   const clipboard = useClipboardCopy()
+  // 等待第四轮（2026-11-15）：句子分析等过 10 秒，「分析中」那一行多说一句。
+  const analysisSlow = useSlowWait(status === 'loading')
   const [detailHost, setDetailHost] = useState<HTMLDivElement | null>(null)
   const cardRef = useRef<HTMLDivElement>(null)
   useLayoutEffect(() => {
@@ -151,9 +156,10 @@ export function SentenceAnalysisCard({
         </nav> : null}
         <div className="sa-head-actions">
           {status === 'loading' ? (
+            // 等待构件（2026-11-15，DESIGN.md §5 Waiting）：原来字前面一个转圈，换成字后面跟所以点。
             <span className="sa-loading">
-              <span className="paper-selection-spinner" aria-hidden="true" />
-              分析中…
+              {analysisSlow ? '分析中，比平时慢，可以先去做别的' : '分析中'}
+              <InlineWaitDots pending size="sm" />
             </span>
           ) : null}
           {ready && flags.length === 1 ? (
@@ -201,10 +207,14 @@ export function SentenceAnalysisCard({
       {status === 'loading' ? (
         <>
           <div className="sa-sentence-wrap"><p className="sa-sentence sa-sentence-plain">{sentenceText}</p></div>
-          <div className="sa-translation">
-            <span className="sa-skeleton" style={{ width: '100%' }} />
-            <span className="sa-skeleton" style={{ width: '64%' }} />
-          </div>
+          {/* 共用灰块（2026-11-15 第二轮，DESIGN.md §5 Waiting）：原来两条自己画的灰条（字色 10%、不动），换成 Skeleton
+              （桌色、一起呼吸），宽度照旧 100% / 64%、高 12。走 300ms 门槛；读屏靠上面那行「分析中」，这里不再念。
+              译文到了是另画的，分析完就卸掉，不留够 500ms。 */}
+          <SkeletonGate
+            pending
+            className="sa-translation sa-translation-skeleton"
+            skeleton={<><Skeleton width="100%" height={12} /><Skeleton width="64%" height={12} /></>}
+          />
         </>
       ) : null}
 

@@ -93,7 +93,8 @@ console.log('== MySpacePage failure-state recovery + de-duplication ==')
   // state (content-area error block is now the single render site).
   assert(
     'header message is gated off during error state (single render site)',
-    /\{message && loadState !== 'error' && <p className="my-space-message"/.test(src),
+    // 构件收尾（2026-11-15）：这一行换成共用 Notice，仍只有这一处、仍在出错态时不画。
+    /\{message && loadState !== 'error' && <Notice kind=\{message\.kind\} className="my-space-message"/.test(src),
   )
 }
 

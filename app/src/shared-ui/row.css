@@ -1,0 +1,88 @@
+/* 行（Row.tsx）。颜色、间距只用 tokens.css 里的变量；卷行内衬 10 / 14 是存量半档（DESIGN.md §5 Rows、§8），
+ * 照原值写，缺口记在 docs/design-gaps.md「2026-11-15 行构件的几处值」。
+ * 行不画自己的底：整行悬停的底由放行的那张列表的滑块画（App.css .fluid-hover-list::before），行要有定位才画在它上面。
+ * 行的字色、字号、排法（grid / flex、几列）归调用处，构件只管：最小高、内衬、整行目标、焦点、按下、分隔线。 */
+
+/* 最小高说的是行本身（内衬 + 内容），不含行间那 1px 分隔线。行就是 RowList 里的 <li> 时，分隔线画在它自己的上沿
+ * （见下 RowList），border-box 把边算在高里，所以第二行起最小高加上 --eqb-row-rule（1px）。
+ * 每一行自己把 --eqb-row-rule 归 0，套在别的行里的行（卷行里的行头）不会跟着加。
+ * 调用处要别的最小高（个人空间文件行 70）时，用比 (0,2,0) 高的选择器直接写 min-height。 */
+.eqb-row {
+  --eqb-row-rule: 0px;
+  position: relative;
+  box-sizing: border-box;
+  min-height: calc(48px + var(--eqb-row-rule));
+}
+
+.eqb-row[data-size='sm'] {
+  min-height: calc(44px + var(--eqb-row-rule));
+}
+
+.eqb-row[data-padding='paper'] {
+  padding: 10px 14px;
+}
+
+.eqb-row[data-padding='home'] {
+  padding: var(--eqb-space-3) var(--eqb-space-4);
+}
+
+/* ── 整行目标 ───────────────────────────────────────────
+ * 一块透明的真 <button> / <a>，盖满整行。排在行里第一个、z-index auto，后面有定位的元素（次要键）画在它上面、点得到；
+ * 没定位的字在它下面，点字就是点整行。圆角跟着行（行在板里时由板裁）。 */
+.eqb-row-hit {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 次要键画在整行目标上面：给行里的键都加定位（只 position，不加 z-index，不开新的一层，免得把下一行弹出来的菜单压住）。
+ * .eqb-draft-add：加入草稿卷的键加入以后是「已加入 · 撤回」那一块纸，纸的空白处也不算点整行（照原来的行为）。 */
+.eqb-row[data-row='action'] :is(button, a[href], [role='button'], input, select, textarea, summary, label, .eqb-draft-add):not(.eqb-row-hit) {
+  position: relative;
+}
+
+/* 键盘焦点：焦点环画在整行目标上（它就是整行那么大），向里 2px，行在板的第一行、最后一行时不被圆角裁掉一半；
+ * 整行垫桌色，和悬停一样（DESIGN.md §4 Focus Ring：2px 石板墨）。 */
+.eqb-row-hit:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: -2px;
+}
+
+.eqb-row:has(> .eqb-row-hit:focus-visible) {
+  background: var(--eqb-color-desk);
+}
+
+/* 按下：鼠标按在整行目标上时整行垫深一档的 border 色（悬停已经是桌色，再垫桌色看不出按下）。
+ * 按在次要键上不算：那时 :active 的是键，不是整行目标。
+ * 覆盖：本条 (0,3,0) 写在焦点那条 (0,3,0) 后面，按下时盖过焦点的桌色底。 */
+.eqb-row:has(> .eqb-row-hit:active) {
+  background: var(--eqb-color-border);
+}
+
+/* ── 一列行（RowList） ─────────────────────────────────
+ * 行间 1px 分隔线（DESIGN.md §5 Rows：--desk-line，tokens.css 里就是 --eqb-color-border-subtle），画在后一行的上沿。
+ * 外面的圆角、边、裁切由板（Surface board）给。 */
+.eqb-row-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.eqb-row-list > li + li {
+  border-top: 1px solid var(--eqb-color-border-subtle);
+}
+
+/* 覆盖：本条 (0,3,0) 盖过 .eqb-row (0,1,0) 里归 0 的 --eqb-row-rule，第二行起最小高多 1px 给分隔线。 */
+.eqb-row-list > .eqb-row + .eqb-row {
+  --eqb-row-rule: 1px;
+}

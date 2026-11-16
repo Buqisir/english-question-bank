@@ -1,0 +1,332 @@
+<title>等待构件样张</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+<style>
+/* 等待构件样张：一页四张卡（按钮里、一行字、列表、长任务），每张都能点。
+ * 等待只用三样：图标自己演、三个点（∴ 沉成 …）、灰块。全都用同一个呼吸：1.2 秒、正弦、透明度 1 ↔ 0.45
+ * （= icons/motionIcons.css 的 --eqb-pulse-cycle 和 eqb-download-pulse）。不转圈。
+ * 颜色、圆角、时长照抄产品 tokens.css / App.css / motionIcons.css。产品只有浅色，这页也只做浅色。 */
+:root {
+  --bg: #f1f5f7; --desk: #e6edf0; --paper: #fff;
+  --line: #e6edf1; --border: #dce6eb;
+  --ink: #1b2b33; --ink-2: #3f525b; --muted: #5a6c75; --faint: #94a4ac;
+  --action: #29424d; --accent-fill: #72bfa4; --accent-fill-hover: #63b497;
+  --elev-1: 0 0 0 1px rgb(27 43 51 / 0.08), 0 1px 2px rgb(27 43 51 / 0.05);
+  --r4: 4px; --r8: 8px; --r12: 12px;
+  --fast: 120ms; --base: 160ms; --slow: 220ms;
+  --ease-hover: ease; --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-sine: cubic-bezier(0.37, 0, 0.63, 1);
+  --breath: 1200ms;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 14px/22px Inter, "PingFang SC", "Hiragino Sans GB", ui-sans-serif, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+.page { max-width: 760px; margin: 0 auto; padding: 40px max(24px, env(safe-area-inset-right, 0px)) 80px max(24px, env(safe-area-inset-left, 0px)); }
+@media (max-width: 480px) { .page { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); } }
+h1 { font-size: 28px; line-height: 36px; font-weight: 600; margin: 0 0 8px; }
+h2 { font-size: 16px; line-height: 24px; font-weight: 600; margin: 0; }
+p { margin: 0; }
+.lede { color: var(--ink-2); }
+.rules { margin: 16px 0 0; padding: 16px 20px; background: var(--paper); border-radius: var(--r12); box-shadow: 0 0 0 1px var(--border); display: grid; gap: 6px; color: var(--ink-2); font-size: 13px; line-height: 20px; }
+.rules b { color: var(--ink); font-weight: 500; }
+.card { margin-top: 24px; background: var(--paper); border-radius: var(--r12); box-shadow: 0 0 0 1px var(--border); padding: 20px; display: grid; gap: 12px; }
+.how { color: var(--muted); font-size: 13px; line-height: 20px; }
+.how b { color: var(--ink); font-weight: 500; }
+.stage { background: var(--desk); border-radius: var(--r8); padding: 16px; display: grid; gap: 12px; min-width: 0; }
+.row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.pick { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: 13px; color: var(--muted); }
+.pick button { height: 28px; padding: 0 10px; border: 0; border-radius: 999px; background: transparent; color: var(--muted); font: inherit; font-size: 13px; cursor: pointer; }
+.pick button[aria-pressed="true"] { background: var(--paper); color: var(--ink); font-weight: 500; box-shadow: var(--elev-1); }
+
+/* 按钮（照 shared-ui/button.css 的 md 档） */
+.btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 32px; padding: 0 12px; border: 0; border-radius: var(--r8); background: transparent; color: var(--ink-2); font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: background-color var(--fast) var(--ease-hover); }
+.btn:hover { background: rgb(27 43 51 / 0.06); color: var(--ink); }
+.btn.primary { background: var(--accent-fill); color: #191d18; }
+.btn.primary:hover { background: var(--accent-fill-hover); }
+.btn.line { background: var(--paper); box-shadow: inset 0 0 0 1px var(--border); color: var(--ink); }
+.btn[aria-busy="true"] { cursor: progress; }
+.btn:focus-visible, .pick button:focus-visible, .field input:focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
+.slot { position: relative; display: inline-grid; place-items: center; width: 16px; height: 16px; flex: 0 0 auto; }
+.slot > * { grid-area: 1 / 1; }
+svg.i { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+/* 只有字的键：等的时候字隐去（宽度不变），三个点放在正中 */
+.btn .label { transition: opacity var(--fast) var(--ease-hover); }
+.btn.text-only[data-waiting] .label { opacity: 0; }
+.btn.text-only .center { position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none; }
+/* 点停在底线上（像打出来的省略号）；放在键正中时整组上提 2px，看着居中。 */
+.btn.text-only .center .dots { transform: translateY(-2px); }
+.slot .icon { transition: opacity var(--fast) var(--ease-hover); }
+.slot[data-waiting] .icon.swap { opacity: 0; }
+
+/* 下载图标自己演：箭头往托盘里压 3 个单位（16px 下是 2px），1 秒一次，最多 5 次，之后透明度呼吸（照 motionIcons.css） */
+.dl .arrow { transform-box: view-box; }
+.dl[data-waiting] .arrow { animation: press 1000ms linear 100ms 5, breathe var(--breath) var(--ease-sine) 5100ms infinite; }
+@keyframes press {
+  0% { transform: translateY(0); animation-timing-function: var(--ease-sine); }
+  40% { transform: translateY(3px); animation-timing-function: var(--ease-sine); }
+  80%, 100% { transform: translateY(0); }
+}
+@keyframes breathe { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+
+/* 三个点：静止是 ∴（上一颗、下两颗），开始等时上面那颗沉到两颗中间成 …，然后三颗依次呼吸；
+ * 等完先浮回 ∴ 再收起。潜 220ms、浮 160ms，缓入缓出，不回弹，点不放大、不变色（BRAND §4.6「正在想」(b)）。 */
+.dots { position: relative; width: 16px; height: 16px; display: block; opacity: 0; transition: opacity var(--fast) var(--ease-hover); }
+.dots i { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: currentColor; top: 10px; }
+.dots i:nth-child(1) { left: 1.5px; }
+.dots i:nth-child(2) { left: 6.5px; top: 5px; transition: top var(--base) var(--ease-in-out); }
+.dots i:nth-child(3) { left: 11.5px; }
+[data-waiting] > .dots, [data-waiting] .dots { opacity: 1; }
+.dots[data-phase="sink"] i:nth-child(2), .dots[data-phase="wait"] i:nth-child(2) { top: 10px; transition-duration: var(--slow); }
+.dots[data-phase="wait"] i { animation: breathe var(--breath) var(--ease-sine) infinite; }
+.dots[data-phase="wait"] i:nth-child(2) { animation-delay: 150ms; }
+.dots[data-phase="wait"] i:nth-child(3) { animation-delay: 300ms; }
+
+/* 一行字 */
+.field { display: grid; gap: 6px; max-width: 360px; }
+.field label { font-size: 13px; font-weight: 500; color: var(--ink-2); }
+.field input { height: 36px; padding: 0 12px; border: 0; border-radius: var(--r8); background: var(--paper); box-shadow: inset 0 0 0 1px var(--border); font: inherit; color: var(--ink); }
+.status { display: inline-flex; align-items: center; gap: 4px; min-height: 20px; font-size: 12px; line-height: 20px; color: var(--muted); }
+.status .dots { width: 16px; height: 16px; }
+
+/* 列表：灰块按真行的位置和高度画，所有灰块一起呼吸；数据到了真行依次淡入 */
+.results { background: var(--paper); border-radius: var(--r12); box-shadow: 0 0 0 1px var(--border); overflow: hidden; }
+.r-head { display: flex; justify-content: space-between; align-items: center; height: 40px; padding: 0 16px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+.r-row { display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 16px; border-top: 1px solid var(--line); }
+.r-row:first-child { border-top: 0; }
+.r-text { display: grid; margin-right: auto; min-width: 0; }
+.r-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.r-meta { font-size: 12px; line-height: 18px; color: var(--muted); }
+.r-row.in { animation: fade-in 200ms var(--ease-hover) both; animation-delay: calc(var(--i) * 40ms); }
+@keyframes fade-in { from { opacity: 0; } }
+.sk { display: block; border-radius: var(--r4); background: var(--desk); }
+.sk-on .sk { animation: breathe-soft var(--breath) var(--ease-sine) infinite; }
+/* 灰块本来就浅，同一个节奏，只浅到 0.6，免得在白纸上看不见。 */
+@keyframes breathe-soft { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+/* 长任务 */
+.job { display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 0 8px 0 16px; background: var(--paper); border-radius: var(--r8); box-shadow: var(--elev-1); }
+.job .r-text span:first-child { font-size: 13px; font-weight: 500; }
+
+.api { margin-top: 32px; font-size: 13px; line-height: 20px; color: var(--ink-2); display: grid; gap: 6px; }
+.api code { font: 12px/18px ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--desk); border-radius: var(--r4); padding: 1px 5px; color: var(--ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition-duration: 1ms !important; }
+  .dots i:nth-child(2) { top: 10px; }
+}
+</style>
+
+<div class="page">
+  <h1>等待构件样张</h1>
+  <p class="lede">我们自己的等待：不转圈，只用三样东西，全站一个节奏。</p>
+  <div class="rules">
+    <p><b>图标自己演。</b>键上的图标有现成动作的，等的时候就演这个动作，比如「导出」的箭头往托盘里压。</p>
+    <p><b>三个点。</b>没有现成动作的，用獭獭两颊那三个点：∴ 的上面一颗沉下去成「…」，等完再浮回 ∴。</p>
+    <p><b>灰块。</b>整块内容还没来时，按真东西的位置和大小画灰块。</p>
+    <p><b>一个节奏。</b>三样东西都按 1.2 秒一呼一吸，深浅变化，不放大、不转。快于 0.3 秒的什么都不出；出了就至少留 0.5 秒，不闪。</p>
+  </div>
+
+  <!-- 1 按钮 -->
+  <div class="card">
+    <h2>一、按钮里</h2>
+    <p class="how">点下面三个键。先用「要等 2.5 秒」看清楚，再选「很快」，三个键都不会闪。</p>
+    <div class="pick" data-pick="latency"><span>这次要等</span><button type="button" aria-pressed="true" data-ms="2500">2.5 秒</button><button type="button" aria-pressed="false" data-ms="150">很快</button></div>
+    <div class="stage">
+      <div class="row">
+        <button class="btn primary" type="button" data-kind="icon-own">
+          <span class="slot dl"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 14.25 L4.6 17.55 Q5.2 19.4 7.25 19.6 Q12 20.3 16.75 19.6 Q18.8 19.4 19.4 17.55 L20.5 14.25"/><g class="arrow"><path d="M12 3.8 V12.9"/><path d="M8.5 9.4 L12 12.9 L15.5 9.4"/></g></svg></span>
+          <span class="label">导出 PDF</span>
+        </button>
+        <button class="btn line" type="button" data-kind="icon-dots">
+          <span class="slot"><svg class="i icon swap" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5 Q4 5.5 6 5.5 H9.5 L11.5 7.5 H18 Q20 7.5 20 9.5 V17 Q20 19 18 19 H6 Q4 19 4 17 Z"/></svg><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></span>
+          <span class="label">存到个人空间</span>
+        </button>
+        <button class="btn primary text-only" type="button" data-kind="text">
+          <span class="label">生成词表</span>
+          <span class="center"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></span>
+        </button>
+      </div>
+      <p class="how" id="btn-log" aria-live="polite"></p>
+    </div>
+    <p class="how">键的宽度一直不变，等的时候再点没反应，读屏会念「忙」。</p>
+  </div>
+
+  <!-- 2 一行字 -->
+  <div class="card">
+    <h2>二、一行字</h2>
+    <p class="how">在框里随便打几个字。停手以后过一会儿「正在保存」出现，存好变成「已保存」。</p>
+    <div class="stage">
+      <div class="field">
+        <label for="title-input">草稿卷名称</label>
+        <input id="title-input" value="1115 英语草稿卷" autocomplete="off">
+        <span class="status" id="save-status" aria-live="polite"><span class="status-text">已保存</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 列表 -->
+  <div class="card">
+    <h2>三、列表和区块</h2>
+    <p class="how">点「重新找」。灰块和真行一样高、在同一个位置，数据来了一行行淡出来，页面不跳。</p>
+    <div class="stage">
+      <div class="row"><button class="btn line" type="button" id="reload">重新找</button></div>
+      <div class="results" id="results"><div class="r-head"><span>找到的卷</span><span>按年份</span></div><div id="rbody"></div></div>
+    </div>
+  </div>
+
+  <!-- 4 长任务 -->
+  <div class="card">
+    <h2>四、要等好几秒的事</h2>
+    <p class="how">点「生成」。不写百分比、不画进度条，原地写正在做哪一步，做完在同一行变成结果。超过 10 秒加一句「比平时慢，可以先去做别的」。</p>
+    <div class="stage">
+      <div class="job">
+        <span class="r-text"><span>1115 英语草稿卷 · A3 · 学生版</span><span class="status" id="job-status"><span class="status-text">还没生成</span></span></span>
+        <button class="btn line" type="button" id="job-btn"><span class="label">生成</span></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="api">
+    <p>做成构件后，用的地方只要写：</p>
+    <p><code>&lt;Button busy={saving}&gt;</code> 按钮自己处理门槛、点、宽度和读屏；有现成动作的图标自己演。</p>
+    <p><code>&lt;BusyDots /&gt;</code> 三个点，放在一行字后面。</p>
+    <p><code>&lt;Skeleton /&gt;</code> 灰块，给出高和宽。</p>
+    <p><code>useDelayedBusy(pending)</code> 0.3 秒门槛、0.5 秒最短，上面三样都用它。</p>
+    <p>AI 找题的大等待照旧用獭獭「找题中」，它脸上就是这三个点。</p>
+  </div>
+</div>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+  // 门槛：300ms 后才出，出了至少 500ms
+  function gate(show, hide) {
+    let shownAt = 0, done = false;
+    const t = setTimeout(() => { if (!done) { shownAt = performance.now(); show(); } }, 300);
+    return (cb) => {
+      done = true; clearTimeout(t);
+      if (!shownAt) return cb(false);
+      setTimeout(() => { hide(cb); }, Math.max(0, 500 - (performance.now() - shownAt)));
+    };
+  }
+  // 三个点：沉下去 → 呼吸；收起时先浮回 ∴（160ms）再隐去
+  function dotsOn(dots) {
+    dots.dataset.phase = 'sink';
+    setTimeout(() => { if (dots.dataset.phase === 'sink') dots.dataset.phase = 'wait'; }, reduce.matches ? 0 : 220);
+  }
+  function dotsOff(dots, after) {
+    dots.dataset.phase = '';
+    setTimeout(after, reduce.matches ? 0 : 200);
+  }
+
+  // ── 一、按钮 ──
+  let latency = 2500;
+  document.querySelectorAll('[data-pick="latency"] button').forEach((b, _, all) => b.addEventListener('click', () => {
+    all.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); latency = Number(b.dataset.ms);
+  }));
+  const log = document.getElementById('btn-log');
+  document.querySelectorAll('[data-kind]').forEach((btn) => {
+    const kind = btn.dataset.kind;
+    const label = btn.querySelector('.label').textContent;
+    btn.addEventListener('click', () => {
+      if (btn.getAttribute('aria-busy') === 'true') return;
+      btn.setAttribute('aria-busy', 'true'); log.textContent = '';
+      const holder = kind === 'icon-own' ? btn.querySelector('.slot') : kind === 'icon-dots' ? btn.querySelector('.slot') : btn;
+      const dots = btn.querySelector('.dots');
+      const finish = gate(
+        () => { holder.dataset.waiting = ''; if (dots) dotsOn(dots); },
+        (cb) => {
+          if (dots) dotsOff(dots, () => { delete holder.dataset.waiting; cb(true); });
+          else { delete holder.dataset.waiting; cb(true); }
+        },
+      );
+      setTimeout(() => finish(() => {
+        btn.removeAttribute('aria-busy');
+        log.textContent = '「' + label + '」好了';
+      }), latency);
+    });
+  });
+
+  // ── 二、一行字 ──
+  const input = document.getElementById('title-input');
+  const status = document.getElementById('save-status');
+  let idle = 0, saving = null;
+  function setStatus(text, withDots) {
+    status.replaceChildren();
+    const t = document.createElement('span'); t.className = 'status-text'; t.textContent = text; status.append(t);
+    if (withDots) {
+      const d = document.createElement('span'); d.className = 'dots'; d.setAttribute('aria-hidden', 'true'); d.innerHTML = '<i></i><i></i><i></i>';
+      status.dataset.waiting = ''; status.append(d); requestAnimationFrame(() => dotsOn(d));
+    } else delete status.dataset.waiting;
+  }
+  input.addEventListener('input', () => {
+    clearTimeout(idle);
+    if (!saving) setStatus('有改动', false);
+    idle = setTimeout(() => {
+      // 停手 600ms 后存；存要 1.2 秒
+      const finish = gate(() => setStatus('正在保存', true), (cb) => cb(true));
+      saving = true;
+      setTimeout(() => finish(() => { saving = null; setStatus('已保存', false); }), 1200);
+    }, 600);
+  });
+
+  // ── 三、列表 ──
+  const rows = [
+    ['2026 年普通高等学校招生全国统一考试（新课标 I 卷）', '阅读 4 篇 · 七选五 · 完形'],
+    ['2026 年普通高等学校招生全国统一考试（新课标 II 卷）', '阅读 4 篇 · 七选五 · 完形'],
+    ['2025 年 6 月浙江卷', '阅读 3 篇 · 读后续写'],
+    ['2025 年新课标 I 卷', '阅读 4 篇 · 七选五 · 完形'],
+  ];
+  const rbody = document.getElementById('rbody'), results = document.getElementById('results');
+  function real(anim) {
+    rbody.replaceChildren(...rows.map(([t, m], i) => {
+      const r = document.createElement('div'); r.className = 'r-row' + (anim ? ' in' : ''); r.style.setProperty('--i', i);
+      r.innerHTML = '<span class="r-text"><span class="r-title"></span><span class="r-meta"></span></span><button class="btn" type="button">看整卷</button>';
+      r.querySelector('.r-title').textContent = t; r.querySelector('.r-meta').textContent = m; return r;
+    }));
+  }
+  function skeleton() {
+    const w = [[80, 36], [72, 34], [44, 28], [56, 34]];
+    rbody.replaceChildren(...w.map(([a, b]) => {
+      const r = document.createElement('div'); r.className = 'r-row'; r.setAttribute('aria-hidden', 'true');
+      r.innerHTML = '<span class="r-text" style="gap:6px;width:100%"><span class="sk" style="height:12px;width:' + a + '%"></span><span class="sk" style="height:10px;width:' + b + '%"></span></span><span class="sk" style="height:12px;width:44px"></span>';
+      return r;
+    }));
+    results.classList.add('sk-on');
+  }
+  let loading = false;
+  document.getElementById('reload').addEventListener('click', () => {
+    if (loading) return; loading = true; results.setAttribute('aria-busy', 'true');
+    // 门槛期间旧结果先留着，不清空，免得白一下
+    const finish = gate(skeleton, (cb) => cb(true));
+    setTimeout(() => finish(() => { results.classList.remove('sk-on'); real(true); results.removeAttribute('aria-busy'); loading = false; }), 1800);
+  });
+  real(false);
+
+  // ── 四、长任务 ──
+  const jobBtn = document.getElementById('job-btn'), jobStatus = document.getElementById('job-status');
+  let running = false;
+  function jobLine(text, dots) {
+    jobStatus.replaceChildren();
+    const t = document.createElement('span'); t.className = 'status-text'; t.textContent = text; jobStatus.append(t);
+    if (dots) { const d = document.createElement('span'); d.className = 'dots'; d.setAttribute('aria-hidden', 'true'); d.innerHTML = '<i></i><i></i><i></i>'; jobStatus.dataset.waiting = ''; jobStatus.append(d); requestAnimationFrame(() => dotsOn(d)); }
+    else delete jobStatus.dataset.waiting;
+  }
+  jobBtn.addEventListener('click', () => {
+    if (running) return;
+    if (jobBtn.dataset.done) { jobLine('（样张里不真的打开文件）', false); return; }
+    running = true; jobBtn.setAttribute('aria-busy', 'true');
+    const steps = ['正在排版', '正在排版 · 第 2 / 6 页', '正在排版 · 第 5 / 6 页', '正在生成 PDF'];
+    let i = 0; jobLine(steps[0], true);
+    const t = setInterval(() => {
+      i += 1;
+      if (i < steps.length) { jobStatus.querySelector('.status-text').textContent = steps[i]; return; }
+      clearInterval(t);
+      jobLine('已生成 · 6 页 · 2.1 MB', false);
+      jobBtn.querySelector('.label').textContent = '打开'; jobBtn.dataset.done = '1'; jobBtn.removeAttribute('aria-busy'); running = false;
+    }, 900);
+  });
+})();
+</script>

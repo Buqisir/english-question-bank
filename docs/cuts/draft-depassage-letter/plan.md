@@ -14,6 +14,15 @@
 
 ## Owner 拍板（2026-07-09，STATUS 在案）
 
+> **2026-11-14 Owner 改了决定**（走查 `design/ux-2026-11-14/find-compose-export/`
+> 第四节第 1 条，原话「卷面顺序跟老师排的走」）：后来的 Canonical 阅读渲染
+> 又把源卷字母印回了草稿卷卷面，而且同源草稿卷按原卷顺序出块。现在卷面顺序
+> 跟老师在左栏排的顺序走，卷面篇目字母按草稿顺序重排（第一篇阅读就是 A），
+> 原卷字母只放在左栏那一行的小字里当来源（「原卷 D 篇」）。实现见
+> `server/draft-paper/draftPaperStore.mjs` 的 `draftReadingPassageLetters` /
+> `buildCanonicalVisibleBlocks` 和 `app/src/features/draft-paper/DraftPaperRail.tsx`。
+> 下面 2026-07-09 的拍板记录保留原样，作为历史。
+
 草稿卷=练习单非仿真卷，A/B/C/D 是**源卷结构属性**不该带走；改
 **大题号徽标+题型标签**。编号语义：**大题序号连续 1、2、3…**（小题号
 全卷另行连续——已是现状）。**不在范围**：七选五 A-G 选项字母、整卷页

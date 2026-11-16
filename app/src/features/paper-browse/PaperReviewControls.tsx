@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
 import { usePaperPdfProducts } from './usePaperPdfProducts'
+import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
+import { SelectField, TextAreaField } from '../../shared-ui/Field.tsx'
+import { ExternalLink } from '../../icons'
 import './paperReviewControls.css'
 
 type ReviewDetail = {
@@ -111,24 +114,30 @@ export function PaperReviewControls({ paperId, paperName, revisionId, publicatio
 
   return <section className="paper-review-controls" aria-label="检查这份卷">
     <div className="paper-review-controls-row">
-      {revisionId && <><select className="ghost-button" aria-label="查看哪款 PDF" value={edition ?? ''}
-        disabled={!edition} onChange={event => setEdition(event.target.value as PaperPdfEdition)}>
-        {editions.map(edition => <option key={edition} value={edition}>{PAPER_PDF_PRODUCTS[edition]}</option>)}
-      </select>
-      {pdfUrl && <a className="ghost-button" href={pdfUrl} target="_blank" rel="noopener noreferrer">查看 PDF</a>}</>}
-      <button className="ghost-button" type="button" disabled={busy || (!detail && !error)} onClick={() => void discuss()}>
-        {busy ? '复制中…' : threadUrl ? '去 Amp 聊这份卷' : '复制试卷信息'}
-      </button>
+      {/* 字段构件第二轮（2026-11-15）：原来套 .ghost-button 的原生下拉换成 shared-ui/SelectField 大号（36，和这一排大号键同高），
+          标签「查看哪款 PDF」只给读屏（原来是 aria-label）。 */}
+      {revisionId && <><SelectField className="paper-review-edition" label="查看哪款 PDF" hideLabel size="lg" value={edition ?? ''}
+        disabled={!edition} onChange={event => setEdition(event.target.value as PaperPdfEdition)}
+        options={editions.map(edition => ({ value: edition, label: PAPER_PDF_PRODUCTS[edition] }))} />
+      {/* 构件厂第 4 步第九页（2026-11-14，提案 · 单一来源）：这一排的链接和按钮换成 ButtonLink / Button。
+          原来的全站 .ghost-button 是透明底墨字、高 36，对上 strong lg；这一行 44 的最小高度仍由 paperReviewControls.css 给。
+          等待第四轮（2026-11-15，Owner「把这个都换了」）：原来「复制中…」换字 + 整键禁用，改成 Button busy——字不换、宽度不变，
+          键上出所以点。两件事分开：线程信息没回来是 disabled（还不能按），正在复制是 busy（按过了，在做）。 */}
+      {/* Owner 2026-11-14 决定 #13：会开新标签，加外链图标（对读屏隐藏），读屏名字补「在新标签页打开」；不恢复下划线。 */}
+      {pdfUrl && <ButtonLink tone="strong" size="lg" icon={<ExternalLink size={16} aria-hidden="true" />} href={pdfUrl} target="_blank" rel="noopener noreferrer">查看 PDF<span className="visually-hidden">（在新标签页打开）</span></ButtonLink>}</>}
+      <Button tone="strong" size="lg" disabled={!detail && !error} busy={busy} onClick={() => void discuss()}>
+        {threadUrl ? '去 Amp 聊这份卷' : '复制试卷信息'}
+      </Button>
     </div>
     {revisionId && detail && !current && <p>你正在看旧版，复制的信息会保留这一版。</p>}
     {notice && <p role="status">{notice}</p>}
     {revisionId && productError && <p role="alert">{productError}{' '}
-      <button className="ghost-button" type="button" onClick={retryProducts}>刷新 PDF 版本</button>
+      <Button tone="strong" size="lg" onClick={retryProducts}>刷新 PDF 版本</Button>
     </p>}
     {error && <p role="alert">{error}{' '}
-      <button className="ghost-button" type="button" onClick={() => setRefresh(value => value + 1)}>刷新</button>
+      <Button tone="strong" size="lg" onClick={() => setRefresh(value => value + 1)}>刷新</Button>
     </p>}
-    {manualCopy && <textarea aria-label="手动复制试卷信息" value={manualCopy} readOnly rows={7}
+    {manualCopy && <TextAreaField className="paper-review-manual-copy" label="手动复制试卷信息" hideLabel size="lg" value={manualCopy} readOnly rows={7}
       onFocus={event => event.currentTarget.select()} />}
     {continueUrl && <p><a href={continueUrl} target="_blank" rel="noopener noreferrer">打开对应 Amp 线程</a></p>}
   </section>

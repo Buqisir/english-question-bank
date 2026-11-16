@@ -1,0 +1,17 @@
+{
+  "scope": "app/src 的 .css 和 .tsx；不含 shared-ui/papersurface 和 @media print；色值、影子的定义处（tokens.css、App.css :root）不算手写",
+  "rawButtonElements": 324,
+  "rawFieldElements": 67,
+  "handWrittenShadows": 25,
+  "distinctShadows": 17,
+  "handWrittenRadii": 393,
+  "distinctRadii": 15,
+  "handWrittenColors": 288,
+  "distinctColors": 57,
+  "handWrittenFontSizes": 672,
+  "distinctFontSizes": 26,
+  "cssFiles": 26,
+  "cssRules": 3065,
+  "tsxFiles": 194,
+  "jsxHostElements": 3087
+}

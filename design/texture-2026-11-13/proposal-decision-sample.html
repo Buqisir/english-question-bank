@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>提议和决定样张</title>
+<!--
+  提议和决定样张 · 2026-11-13 · 提案 · 单一来源（只看了代码，没问过老师）
+  规则：DESIGN.md §5 Proposal → Decision（Owner 2026-11-13 定）。这张样张只回答「放进现有页面要动哪些结构」。
+  现状一栏照代码复刻：DraftPaperWorkbench.tsx / .css 的排序建议卡、分页小签、撤销提示；ConciergePaperRow.tsx 的推荐理由。
+  间距和字号目测，待测量。
+-->
+<style>
+  :root {
+    --desk-page: #F1F5F7;
+    --desk-surface: #FFFFFF;
+    --desk-border: #DCE6EB;
+    --desk-line: #E6EDF1;
+    --desk-hover: #E6EDF1;
+    --desk-ink: #1B2B33;
+    --desk-muted: #5A6C75;
+    --accent-fill: #72BFA4;
+    --danger: #dc2626;
+    --elev-1: 0 0 0 1px rgb(27 43 51 / .08), 0 1px 2px rgb(27 43 51 / .05);
+    --elev-3: 0 0 0 1px rgb(27 43 51 / .08), 0 1px 2px rgb(27 43 51 / .05), 0 6px 18px rgb(27 43 51 / .10);
+    --t: 120ms;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--desk-page);
+    color: var(--desk-ink);
+    font: 14px/1.5 Inter, "PingFang SC", "Microsoft YaHei", "WenQuanYi Zen Hei", system-ui, sans-serif;
+    padding: 32px 16px 56px;
+  }
+  main { max-width: 1120px; margin: 0 auto; }
+  h1 { font-size: 22px; font-weight: 600; margin: 0 0 4px; }
+  h2 { font-size: 17px; font-weight: 600; margin: 44px 0 4px; }
+  h3 { font-size: 14px; font-weight: 600; margin: 0; }
+  p { margin: 0; }
+  .lead, .sec-lead { color: var(--desk-muted); margin: 0 0 16px; max-width: 46em; }
+  .tag { display: inline-block; font-size: 12px; color: var(--desk-muted); border: 1px solid var(--desk-border); border-radius: 4px; padding: 0 6px; margin-left: 6px; vertical-align: 2px; font-weight: 400; }
+
+  .tools { display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--desk-muted); margin: 0 0 8px; }
+  .tools label { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+  #stage.gray { filter: grayscale(1); }
+  #stage.proj { filter: contrast(.72) brightness(1.1) saturate(.75); }
+  #stage.gray.proj { filter: grayscale(1) contrast(.72) brightness(1.1); }
+  #stage.still *, #stage.still *::before, #stage.still *::after { transition: none !important; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+
+  .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  @media (max-width: 820px) { .pair { grid-template-columns: 1fr; } }
+  .col-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin: 0 0 8px; }
+  .col-head span { font-size: 12px; color: var(--desk-muted); }
+
+  /* 草稿卷桌面（缩小示意） */
+  .desk { position: relative; background: var(--desk-page); border: 1px solid var(--desk-border); border-radius: 12px; padding: 14px 16px 64px; min-height: 420px; overflow: hidden; }
+  .bar { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+  .bar b { font-weight: 600; font-size: 14px; margin-right: auto; }
+  .bar .ghost { color: var(--desk-muted); }
+  .sheet { margin: 14px auto 0; width: min(100%, 300px); background: #fff; box-shadow: var(--elev-1); border-radius: 2px; padding: 18px 20px; font-size: 11px; color: #222; }
+  .sheet .g { border-top: 1px solid #eee; padding: 8px 0; transition: transform var(--t) ease-out; }
+  .sheet .g:first-child { border-top: 0; }
+  .sheet .g b { display: block; font-size: 11.5px; }
+  .sheet .g i { font-style: normal; color: #777; }
+  .sheet .brk { border-top: 1px dashed #c33; position: relative; margin: 2px 0; }
+  .sheet .brk::after { content: "第 1 / 2 页"; position: absolute; right: 0; top: -9px; font-size: 9px; background: #fff; color: #c33; padding: 0 4px; }
+  .sheet.fixed .brk { border-top-color: #ccc; }
+  .sheet.fixed .brk::after { color: #999; }
+
+  /* 现状：排序建议卡（DraftPaperWorkbench.css .draft-reorder-suggestion） */
+  .cur-card { display: flex; justify-content: space-between; align-items: center; gap: 14px; margin: 14px 0 0; padding: 10px 14px; border-radius: 8px; font-size: 13.5px; line-height: 1.5;
+    background: color-mix(in srgb, var(--danger) 8%, #fff); border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent); }
+  .cur-card button { flex: none; background: none; border: 0; padding: 0; font: inherit; font-size: 12.5px; font-weight: 600; color: var(--desk-ink); cursor: pointer; white-space: nowrap; }
+  .toast { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; gap: 12px; align-items: center; background: var(--desk-ink); color: #fff; border-radius: 8px; padding: 8px 12px; font-size: 13px; white-space: nowrap; }
+  .toast button { background: none; border: 0; color: #fff; font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; padding: 0; }
+
+  /* 新：提议 / 决定（DESIGN.md §5 Proposal → Decision） */
+  .prop { margin: 14px 0 0; border-radius: 8px; padding: 10px 12px; display: grid; gap: 4px; font-size: 13px; line-height: 1.55;
+    background: var(--desk-page); color: var(--desk-muted); box-shadow: 0 0 0 1px transparent;
+    transition: background var(--t) ease-out, color var(--t) ease-out, box-shadow var(--t) ease-out; }
+  .prop .head { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 26px; font-size: 12px; }
+  .prop.decided { background: var(--desk-surface); color: var(--desk-ink); box-shadow: var(--elev-1); }
+  .key2 { font: inherit; font-size: 13px; font-weight: 500; border-radius: 8px; padding: 2px 10px; border: 1px solid var(--desk-ink); background: transparent; color: var(--desk-ink); cursor: pointer; transition: background var(--t) ease-out; }
+  .key2:hover { background: var(--desk-hover); }
+  .link { font: inherit; font-size: 12px; background: none; border: 0; padding: 2px 4px; color: var(--desk-muted); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; border-radius: 4px; }
+  .link:hover { color: var(--desk-ink); }
+  button:focus-visible { outline: 2px solid var(--desk-ink); outline-offset: 2px; }
+  /* 草稿卷这一栏本来就是桌色（--paper-desk-bg = --desk-page），提议块和桌一色、没有边，看上去只是一段灰字；采用后才成一张白纸 */
+
+  .notes { margin: 12px 0 0; padding: 0 0 0 18px; color: var(--desk-ink); font-size: 13px; display: grid; gap: 4px; max-width: 52em; }
+  .notes li::marker { color: var(--desk-muted); }
+  .muted { color: var(--desk-muted); }
+
+  /* 分页小签 */
+  .gutter-demo { position: relative; display: flex; gap: 12px; align-items: flex-start; }
+  .gutter-demo .sheet { margin: 0; flex: 1; }
+  .tools-col { width: 132px; flex: none; display: grid; gap: 6px; padding-top: 38px; position: relative; }
+  .tools-col .tb { font-size: 12px; height: 28px; border-radius: 8px; border: 0; background: transparent; color: var(--desk-muted); text-align: left; padding: 0 8px; font-family: inherit; }
+  .tools-col .tb[aria-pressed="true"] { color: var(--desk-ink); background: var(--desk-hover); }
+  .pill-cur { position: absolute; top: 0; left: 0; font: inherit; font-size: 12px; background: #fff; border: 0; border-radius: 8px; padding: 4px 9px; color: var(--desk-ink); cursor: pointer; white-space: nowrap; }
+  .pill-new { position: absolute; top: 0; left: 0; font: inherit; font-size: 12px; background: transparent; border: 0; border-radius: 8px; padding: 4px 8px; color: var(--desk-muted); cursor: pointer; white-space: nowrap; text-decoration: underline; text-underline-offset: 2px; transition: background var(--t) ease-out, color var(--t) ease-out; }
+  .pill-new:hover { background: var(--desk-hover); color: var(--desk-ink); }
+
+  /* 推荐理由 */
+  .board { background: var(--desk-surface); border: 1px solid var(--desk-border); border-radius: 12px; }
+  .rows { list-style: none; margin: 0; padding: 0; }
+  .rows li { padding: 12px 14px; border-top: 1px solid var(--desk-line); display: flex; gap: 12px; align-items: flex-start; }
+  .rows li:first-child { border-top: 0; }
+  .rows .t { font-size: 14px; font-weight: 500; }
+  .rows .m { font-size: 12px; color: var(--desk-muted); }
+  .rows .r { font-size: 11.5px; color: var(--desk-muted); margin-top: 2px; }
+  .rows .r.as-prop { background: var(--desk-page); border-radius: 8px; padding: 6px 8px; margin-top: 6px; font-size: 12px; }
+  .rows .add { margin-left: auto; flex: none; font: inherit; font-size: 13px; border: 1px solid var(--desk-ink); background: transparent; border-radius: 8px; padding: 3px 10px; color: var(--desk-ink); }
+
+  table { border-collapse: collapse; width: 100%; font-size: 13px; background: var(--desk-surface); border: 1px solid var(--desk-border); border-radius: 12px; overflow: hidden; }
+  th, td { text-align: left; padding: 9px 12px; border-top: 1px solid var(--desk-line); vertical-align: top; }
+  th { font-weight: 600; font-size: 12px; color: var(--desk-muted); border-top: 0; }
+  .ask { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; counter-reset: q; }
+  .ask li { background: var(--desk-surface); border: 1px solid var(--desk-border); border-radius: 12px; padding: 12px 14px; font-size: 13px; counter-increment: q; }
+  .ask li::before { content: counter(q) "　"; font-weight: 600; }
+  .ask .rec { color: var(--desk-muted); display: block; margin-top: 2px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>提议和决定，放进现有页面 <span class="tag">样张 · Owner 2026-11-13 已定，已写进代码</span></h1>
+  <p class="lead">规则已经定在 DESIGN.md §5：提议在桌里，老师点「采用」它浮上来变成纸，点「撤回」沉回去，位置和大小不动。这张样张只看一件事：放进现有页面，哪些结构要改。代码还没动，你点头后再写。</p>
+
+  <div class="tools" role="group" aria-label="查看方式">
+    <label><input type="checkbox" data-f="gray">黑白</label>
+    <label><input type="checkbox" data-f="proj">投影仪（模拟）</label>
+    <label><input type="checkbox" data-f="still">关掉动效</label>
+  </div>
+
+  <div id="stage">
+  <!-- 1 排序建议卡 -->
+  <h2>1　草稿卷 · 排序建议卡 <span class="tag">要改结构</span></h2>
+  <p class="sec-lead">现在代码里唯一一处「点一下就照做、还能撤回」的建议。两边都能点，题组顺序会跟着换。</p>
+
+  <div class="pair">
+    <div>
+      <div class="col-head"><h3>现状</h3><span>DraftPaperWorkbench.tsx 第 1548 行起</span></div>
+      <div class="desk" id="cur-desk">
+        <div class="bar"><b>高二期中 · 草稿卷</b><span class="ghost">A4</span><span class="ghost">下载 PDF</span></div>
+        <div id="cur-slot"></div>
+        <div class="sheet" id="cur-sheet"></div>
+        <div id="cur-toast"></div>
+      </div>
+    </div>
+    <div>
+      <div class="col-head"><h3>新</h3><span>DESIGN.md §5 Proposal → Decision</span></div>
+      <div class="desk" id="new-desk">
+        <div class="bar"><b>高二期中 · 草稿卷</b><span class="ghost">A4</span><span class="ghost">下载 PDF</span></div>
+        <div id="new-slot"></div>
+        <div class="sheet" id="new-sheet"></div>
+      </div>
+    </div>
+  </div>
+
+  <ol class="notes">
+    <li><b>提议在桌上看不出块</b>：草稿卷这一栏本来就是桌色，提议块和桌一色、没有边，看上去只是一段灰字加一个「采用」。采用后才浮成一张白纸，差别比现状大。</li>
+    <li><b>采用之后卡片留在原处</b>，变成「已采用」，不再消失。屏幕底部那条「顺序已调整 · 撤销」去掉，撤回就在卡片上。</li>
+    <li><b>去掉淡红底和红边。</b>跨页断篇不会丢东西，按 §5 Notices，危险色只给「没保存」「会丢东西」。</li>
+    <li><b>第一行放「建议」和「采用」</b>，正文另起一行占整行宽。原来按钮挤在正文右边，正文长了会折行。</li>
+    <li><b>按钮字从「调整顺序 →」改成「采用」。</b>正文已经说了怎么调，按钮只管点头。</li>
+    <li><b>「已采用」什么时候收起</b>：现在代码里，改了别的题组，撤销就失效（撤销快照清掉）。我建议卡片跟着一起收起，见最后第 2 问。</li>
+    <li class="muted">这条建议是规则算出来、真排过一遍验证的，不是模型写的。对老师来说一样是「机器提的、还没点头的」，所以照这条做。</li>
+  </ol>
+
+  <!-- 2 分页小签 -->
+  <h2>2　草稿卷 · 分页小签 <span class="tag">只改样子</span></h2>
+  <p class="sec-lead">题组跨页时，题组工具上方会出一个小签「建议前置分页 · 跨页断篇」，点了就在这组前面分页。</p>
+
+  <div class="pair">
+    <div>
+      <div class="col-head"><h3>现状</h3><span>白底小签，没有影子</span></div>
+      <div class="desk" style="min-height:0;padding-bottom:16px">
+        <div class="gutter-demo" id="pb-cur"></div>
+      </div>
+    </div>
+    <div>
+      <div class="col-head"><h3>新（我推荐的做法）</h3><span>只有提议的样子，没有「已采用」</span></div>
+      <div class="desk" style="min-height:0;padding-bottom:16px">
+        <div class="gutter-demo" id="pb-new"></div>
+      </div>
+    </div>
+  </div>
+  <ol class="notes">
+    <li><b>现在的小签是白底</b>，在新规则里白底就是「已采用」的样子，正好反了。改成桌上的一行灰字加下划线，悬停垫底。</li>
+    <li><b>不做「已采用」状态。</b>点了以后题组挪到下一页，小签的位置本来就会跟着变，做不到「位置不动」。同组已经有「取消分页」，再加一个「撤回」就是两个按钮做同一件事。</li>
+    <li>采用后：纸上的分页线就是结果，「前置分页」按钮变成按下的「取消分页」。这部分代码现在就是这样，不改。</li>
+  </ol>
+
+  <!-- 3 推荐理由 -->
+  <h2>3　搜索结果 · 推荐理由 <span class="tag">建议不套</span></h2>
+  <p class="sec-lead">DESIGN.md §5 的「用在」里列了题目推荐理由。看了代码后，我觉得它不该套这条：它没有「采用」可点，老师的决定是整行的「加入」。</p>
+
+  <div class="pair">
+    <div>
+      <div class="col-head"><h3>现状（建议保持）</h3><span>一行 11.5px 灰字</span></div>
+      <div class="board"><ul class="rows" id="rs-cur"></ul></div>
+    </div>
+    <div>
+      <div class="col-head"><h3>如果硬套</h3><span>每行一块桌色</span></div>
+      <div class="board"><ul class="rows" id="rs-new"></ul></div>
+    </div>
+  </div>
+  <ol class="notes">
+    <li>硬套以后每一行都多一块灰底，列表变重；而且它永远停在「提议」，没有另一种状态可变，三处同时变的意义就没有了。</li>
+    <li>它现在的写法已经合规：灰字 <code>--desk-muted</code>，正文级对比度。</li>
+    <li>Owner 2026-11-13 同意：DESIGN.md §5「用在」里已拿掉「题目推荐理由」，列进「不用在」。</li>
+  </ol>
+
+  <!-- 4 清单 -->
+  <h2>4　§5 列的几处，代码里现在什么样</h2>
+  <p class="sec-lead">在 app/src 里搜过「建议」「采用」「suggest」。阅读分析、卷面智能、词汇几页本地数据跑不出来，下面只看了源码。</p>
+  <table>
+    <thead><tr><th>§5 写的</th><th>代码里有没有</th><th>建议</th></tr></thead>
+    <tbody>
+      <tr><td>草稿卷里 AI 补的题</td><td>没有「补题」。有排序建议卡和分页小签（都是规则算的）</td><td>排序建议卡照第 1 节改；分页小签照第 2 节只改样子</td></tr>
+      <tr><td>题目推荐理由</td><td>有，搜索结果每行一句</td><td>不套，见第 3 节</td></tr>
+      <tr><td>阅读分析的 AI 标注</td><td>没找到可采用的标注</td><td>功能做出来时照规则做</td></tr>
+      <tr><td>卷面智能的结构建议</td><td>没找到</td><td>同上</td></tr>
+      <tr><td>词汇的释义建议</td><td>没找到。只有认词里的「复习建议」：一串词加「开始这一轮」</td><td>不套：点了是开始一轮复习，不是把建议变成决定。不改</td></tr>
+    </tbody>
+  </table>
+
+  <h2>已定（Owner 2026-11-13，四件都按推荐）</h2>
+  <ul class="ask">
+    <li>排序建议卡照第 1 节改：采用后卡片留下变「已采用」，去掉底部提示条，去掉淡红。
+      <span class="rec">定：改。</span></li>
+    <li>「已采用」卡什么时候收起：A 改了别的题组、撤回失效时一起收起；B 一直留到离开这一页。
+      <span class="rec">定 A：卡上写着「撤回」，撤回已经做不到时还留着，会骗人。不设计时。</span></li>
+    <li>分页小签只改成桌上的灰字，不做「已采用」状态。
+      <span class="rec">定：是。</span></li>
+    <li>推荐理由不套这条，并从 DESIGN.md §5「用在」里拿掉。
+      <span class="rec">定：是。</span></li>
+  </ul>
+  </div>
+</main>
+
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const GROUPS = [
+    { t: 'Community Gardens', m: '阅读 C 篇 · 412 词 · 4 题' },
+    { t: 'Night Runners', m: '阅读 D 篇 · 438 词 · 4 题', broken: true },
+    { t: 'Sleep and Memory', m: '七选五 · 296 词 · 5 空' },
+  ];
+  const BODY = '跨页断篇（第 1/2 页）。把「Night Runners」移到卷尾即可消除。';
+
+  function sheet(fixed) {
+    const order = fixed ? [0, 2, 1] : [0, 1, 2];
+    return order.map((i, k) => {
+      const g = GROUPS[i];
+      const brk = !fixed && g.broken ? '<div class="brk"></div>' : (fixed && k === 2 ? '<div class="brk"></div>' : '');
+      return `<div class="g"><b>${k + 1}. ${g.t}</b><i>${g.m}</i>${brk}</div>`;
+    }).join('');
+  }
+
+  // 现状
+  let curApplied = false;
+  function renderCur() {
+    $('#cur-slot').innerHTML = curApplied ? '' :
+      `<div class="cur-card" role="status"><span>${BODY}</span><button type="button" id="cur-act">调整顺序 →</button></div>`;
+    $('#cur-sheet').className = 'sheet' + (curApplied ? ' fixed' : '');
+    $('#cur-sheet').innerHTML = sheet(curApplied);
+    $('#cur-toast').innerHTML = curApplied ? '<div class="toast" role="status"><span>顺序已调整</span><button type="button" id="cur-undo">撤销</button></div>' : '';
+  }
+  // 新
+  let newApplied = false;
+  function renderNewOnce() {
+    $('#new-slot').innerHTML = `<div class="prop" id="np" role="status"><div class="head"><span id="np-label">建议</span><span id="np-act"></span></div><div>${BODY}</div></div>`;
+    renderNew();
+  }
+  function renderNew() {
+    $('#np').classList.toggle('decided', newApplied);
+    $('#np-label').textContent = newApplied ? '已采用' : '建议';
+    $('#np-act').innerHTML = newApplied
+      ? '<button type="button" class="link" id="new-undo">撤回</button>'
+      : '<button type="button" class="key2" id="new-act">采用</button>';
+    $('#new-sheet').className = 'sheet' + (newApplied ? ' fixed' : '');
+    $('#new-sheet').innerHTML = sheet(newApplied);
+  }
+  document.addEventListener('click', (e) => {
+    const id = e.target.closest('button')?.id;
+    if (id === 'cur-act') { curApplied = true; renderCur(); $('#cur-undo').focus(); }
+    if (id === 'cur-undo') { curApplied = false; renderCur(); }
+    if (id === 'new-act') { newApplied = true; renderNew(); $('#new-undo').focus(); }
+    if (id === 'new-undo') { newApplied = false; renderNew(); $('#new-act').focus(); }
+    if (id === 'pb-cur-btn' || id === 'pb-new-btn' || id === 'pb-cur-tg' || id === 'pb-new-tg') {
+      const side = id.includes('cur') ? 'cur' : 'new';
+      pb[side] = id.endsWith('btn') ? true : !pb[side];
+      renderPB(side);
+    }
+  });
+
+  // 分页小签
+  const pb = { cur: false, new: false };
+  function renderPB(side) {
+    const on = pb[side];
+    const pill = on ? '' : (side === 'cur'
+      ? `<button type="button" class="pill-cur" id="pb-cur-btn" title="跨页断篇（第 1/2 页）">建议前置分页 · 跨页断篇</button>`
+      : `<button type="button" class="pill-new" id="pb-new-btn" title="跨页断篇（第 1/2 页）">建议前置分页</button>`);
+    const sheetHTML = `<div class="sheet${on ? ' fixed' : ''}">
+        <div class="g"><b>1. Community Gardens</b><i>阅读 C 篇</i></div>
+        ${on ? '<div class="brk"></div>' : ''}
+        <div class="g"><b>2. Night Runners</b><i>阅读 D 篇</i>${on ? '' : '<div class="brk"></div>'}</div>
+      </div>`;
+    $('#pb-' + side).innerHTML = sheetHTML + `<div class="tools-col">${pill}
+        <button type="button" class="tb" id="pb-${side}-tg" aria-pressed="${on}">${on ? '取消分页' : '前置分页'}</button>
+        <span class="tb">换一篇</span><span class="tb">移出</span></div>`;
+  }
+
+  // 推荐理由
+  const ROWS = [
+    { t: '2026 新课标 I 卷', m: '阅读 C 篇 · 社区菜园', r: '话题和第 3 单元一致，生词量适中' },
+    { t: '2025 北京卷', m: '阅读 B 篇 · 城市夜跑', r: '长难句 6 处，适合放在卷子后半' },
+    { t: '2025 浙江卷', m: '七选五 · 睡眠与记忆', r: '段首句线索明显，适合讲七选五方法' },
+  ];
+  $('#rs-cur').innerHTML = ROWS.map(r => `<li><div><div class="t">${r.t}</div><div class="m">${r.m}</div><div class="r">推荐理由：${r.r}</div></div><button type="button" class="add">加入</button></li>`).join('');
+  $('#rs-new').innerHTML = ROWS.map(r => `<li><div><div class="t">${r.t}</div><div class="m">${r.m}</div><div class="r as-prop">建议 · ${r.r}</div></div><button type="button" class="add">加入</button></li>`).join('');
+
+  document.querySelectorAll('.tools input').forEach((box) => box.addEventListener('change', () => $('#stage').classList.toggle(box.dataset.f, box.checked)));
+
+  renderCur(); renderNewOnce(); renderPB('cur'); renderPB('new');
+})();
+</script>
+</body>
+</html>

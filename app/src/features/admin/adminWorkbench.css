@@ -57,36 +57,35 @@
   color: var(--eqb-color-text);
   font-size: 13px;
 }
-.agent-tokens h2, .agent-token-dialog h2 { font-size: 14px; margin: 0 0 8px; }
-.agent-tokens p, .agent-token-dialog p { color: var(--eqb-color-text-muted); line-height: 1.5; }
-.agent-tokens form, .agent-token-dialog > div { display: flex; flex-wrap: wrap; align-items: end; gap: 8px; }
-.agent-tokens label { display: grid; gap: 8px; }
-.agent-tokens input {
-  box-sizing: border-box;
-  max-width: 100%;
-  font: inherit;
-  padding: 8px 12px;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 8px;
-  color: var(--eqb-color-text);
-  background: var(--eqb-color-paper);
-}
-.agent-token-submit { border: 1px solid var(--eqb-color-border); }
-.agent-token-submit:disabled { color: var(--eqb-color-text-muted); }
-.agent-token-load-failed { display: flex; align-items: center; gap: 8px; }
-.agent-tokens input::placeholder { color: var(--eqb-color-text-muted); }
+.agent-tokens h2 { font-size: 14px; margin: 0 0 8px; }
+.agent-tokens p { color: var(--eqb-color-text-muted); line-height: 1.5; }
+.agent-tokens form { display: flex; flex-wrap: wrap; align-items: end; gap: 8px; }
+/* 「名称」换成 shared-ui/TextField（字段构件第二轮 2026-11-15）：标签、框、占位符、焦点归 field.css，
+ * 原来这里的 label / input / ::placeholder / input:focus-visible 几条删了。框宽 228 是换前实测的输入框宽（浏览器给的默认宽，fields2-shots 量的）。 */
+.agent-token-name { width: 228px; max-width: 100%; }
+/* 「新建口令」2026-11-15 换成 Button（strong lg）。原来是 .ghost-button 加一圈边，样子照旧：
+ * 覆盖：两条都是 (0,2,0) / (0,3,0)，盖过 button.css .eqb-button 的 border: 0 (0,1,0) 和 [data-tone='strong'] 的墨字 (0,2,0)，
+ * 因为这只键原来就带边、禁用时字是次要灰。 */
+.eqb-button.agent-token-submit { border: 1px solid var(--eqb-color-border); }
+.eqb-button.agent-token-submit:disabled { color: var(--eqb-color-text-muted); }
+/* .agent-token-load-failed 的排布（字和「重试」一行）构件收尾（2026-11-15）归共用 Notice，这条删了。 */
 .agent-tokens ul { list-style: none; padding: 0; margin: 16px 0 0; }
 .agent-tokens li { display: flex; gap: 16px; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--eqb-color-border-subtle); }
 .agent-tokens li > div { min-width: 0; overflow-wrap: anywhere; }
 .agent-tokens li span { margin-left: 8px; color: var(--eqb-color-text-muted); }
 .agent-tokens li small { display: block; margin-top: 4px; font-size: 12px; color: var(--eqb-color-text-muted); }
-.agent-token-secret { margin-top: 16px; padding: 16px; background: var(--eqb-color-paper); border: 1px solid var(--eqb-color-border); border-radius: 12px; }
+/* 口令列表在等时（等待第六轮 2026-11-15，AgentTokens.tsx AgentTokenListSkeleton）。灰块本身是 <span>：
+ * 覆盖：第一条 (0,2,2) 盖过上面 .agent-tokens li span (0,1,2) 的 margin-left: 8px——那条是给「有效 / 已作废」的，灰块套在它里面不再多空一次。
+ * 第二条 (0,2,0)：「作废口令」的灰块放在键上字的位置，右边留出键的内衬。 */
+.agent-tokens li > div .eqb-skeleton { margin-left: 0; }
+.eqb-skeleton.agent-token-skeleton-action { margin-right: var(--eqb-space-3); }
+/* 「只显示这一次」那一块是共用构件 Surface（board、padding md 16）：底、边、圆角、内边距归构件，这里只留离上面多远。 */
+.agent-token-secret { margin-top: 16px; }
 .agent-token-secret code { display: block; margin-bottom: 12px; overflow-wrap: anywhere; user-select: all; }
-.agent-token-dialog { box-sizing: border-box; width: min(440px, calc(100% - 32px)); padding: 24px; border: 1px solid var(--eqb-color-border); border-radius: 12px; color: var(--eqb-color-text); background: var(--eqb-color-paper); font-size: 13px; overflow-wrap: anywhere; }
-.agent-token-dialog::backdrop { background: color-mix(in srgb, var(--eqb-color-text) 32%, transparent); }
-.agent-tokens button:focus-visible, .agent-tokens input:focus-visible { outline: 2px solid var(--eqb-color-action); outline-offset: 2px; }
+/* 作废确认框（.agent-token-dialog 和它的 ::backdrop）换成共用 Dialog，样式在 shared-ui/dialog.css。 */
+.agent-tokens button:focus-visible { outline: 2px solid var(--eqb-color-action); outline-offset: 2px; }
 @media (max-width: 560px) {
   .agent-tokens form { align-items: stretch; }
-  .agent-tokens label:first-child { flex-basis: 100%; }
+  .agent-token-name { flex-basis: 100%; width: auto; }
   .agent-tokens li { flex-wrap: wrap; }
 }

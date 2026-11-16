@@ -99,7 +99,7 @@
   font-size: 0.75rem;
 }
 .pi-ps-analysis-options--accordion {
-  --fh-radius: 6px;
+  --fh-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: 0.375rem;
@@ -107,7 +107,7 @@
 .pi-ps-analysis-option-section {
   overflow: hidden;
   border: 1px solid rgba(44, 40, 32, 0.14);
-  border-radius: 6px;
+  border-radius: 12px;
   background: transparent;
   transition: background-color var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover);
 }
@@ -346,7 +346,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 /* ─── I0-D Seven Choices option-pool panel ─── */
 .pi-seven-panel {
-  color: var(--pi-ps-insight-ink, #1e1e1c);
+  color: var(--pi-ps-insight-ink, var(--desk-ink));
 }
 @media (max-width: 1199px) {
   .pi-seven-panel {
@@ -365,7 +365,7 @@ button.pi-ps-analysis-distractor--selected {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0;
-  color: var(--pi-ps-insight-muted-ink, #6a6a64);
+  color: var(--pi-ps-insight-muted-ink, #5A6C75);
 }
 .pi-seven-panel h2 {
   margin: 0;
@@ -376,7 +376,7 @@ button.pi-ps-analysis-distractor--selected {
   flex-shrink: 0;
   padding: 3px 7px;
   font-size: 12px;
-  color: var(--pi-ps-insight-muted-ink, #6a6a64);
+  color: var(--pi-ps-insight-muted-ink, #5A6C75);
   border: 1px solid var(--pi-ps-insight-hairline, #e8e8e4);
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.45);
@@ -386,21 +386,12 @@ button.pi-ps-analysis-distractor--selected {
   gap: 8px;
   margin-bottom: 10px;
 }
-.pi-seven-panel-actions button,
-.pi-seven-details-toggle {
-  padding: 5px 9px;
-  border: 1px solid #d8d0c4;
-  border-radius: 4px; /* lecture-css-restore: 复活文件归 radius 梯（原 5px, DESIGN.md §5） */
-  background: #fffaf0;
-  color: #3f352b;
-  font: inherit;
-  font-size: 12px;
-  cursor: pointer;
-}
-.pi-seven-panel-actions button:disabled {
-  cursor: default;
-  color: #a49a8e;
-  background: rgba(255, 255, 255, 0.28);
+/* 「全部显示 / 全部隐藏」：Owner 2026-11-14 决定 #1 换成 Button 淡墨小号（quiet sm），不再归下面这条带框奶油底的手写样式管，
+ * 也删了它们的 :disabled 手写样式（改由 button.css 的 disabled 管：淡到 0.55、光标 not-allowed）。
+ * 第一个键用负边距抵掉 sm 的左内边距，字的左边贴齐面板的左边（改前字在框里，比面板左边往里 10px，实测）。
+ * 「展开细节」后来也换了（第 19 条），见下面 .pi-seven-chain-body 里那条。 */
+.pi-seven-panel-actions > .eqb-button:first-child {
+  margin-left: calc(-1 * var(--eqb-space-2));
 }
 .pi-seven-option-jump {
   position: sticky;
@@ -410,7 +401,8 @@ button.pi-ps-analysis-distractor--selected {
   gap: 6px;
   padding: 7px 0 10px;
   margin-bottom: 8px;
-  background: linear-gradient(180deg, #f7f1e6 0%, rgba(247, 241, 230, 0.92) 70%, rgba(247, 241, 230, 0) 100%);
+  /* 吸顶渐隐取讲解面板自己的白（DESIGN.md §2 Paper，Owner 2026-11-13） */
+  background: linear-gradient(180deg, var(--desk-surface) 0%, rgb(255 255 255 / 0.92) 70%, rgb(255 255 255 / 0) 100%);
 }
 .pi-seven-option-jump-chip {
   display: inline-flex;
@@ -432,7 +424,7 @@ button.pi-ps-analysis-distractor--selected {
   background: var(--seven-soft, rgba(255, 255, 255, 0.5));
 }
 .pi-seven-option-jump-chip[data-active='true'] {
-  background: var(--seven-strong, rgba(30, 30, 28, 0.12));
+  background: var(--seven-strong, rgb(27 43 51 / 0.12));
   color: #221b15;
   box-shadow: inset 0 0 0 1px var(--seven-border, rgba(122, 106, 88, 0.34));
 }
@@ -448,7 +440,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-seven-option-card {
   scroll-margin-top: 54px;
   border: 1px solid transparent;
-  border-radius: 6px;
+  border-radius: 12px;
   background: transparent;
 }
 .pi-seven-option-card--correct:not(.pi-seven-option-card--open) {
@@ -493,11 +485,11 @@ button.pi-ps-analysis-distractor--selected {
   font-size: 12px;
   font-weight: 700;
   color: #5f554a;
-  background: rgba(30, 30, 28, 0.07);
+  background: rgb(27 43 51 / 0.07);
 }
 .pi-seven-option-card--open .pi-seven-option-label {
   color: #221b15;
-  background: var(--seven-strong, rgba(30, 30, 28, 0.12));
+  background: var(--seven-strong, rgb(27 43 51 / 0.12));
 }
 .pi-seven-option-text {
   min-width: 0;
@@ -508,7 +500,7 @@ button.pi-ps-analysis-distractor--selected {
   align-self: start;
   padding: 2px 7px;
   border-radius: 999px;
-  background: var(--seven-strong, rgba(30, 30, 28, 0.12));
+  background: var(--seven-strong, rgb(27 43 51 / 0.12));
   color: #221b15;
   font-size: 12px;
   font-weight: 700;
@@ -535,8 +527,14 @@ button.pi-ps-analysis-distractor--selected {
   color: #67594b;
   font-size: 11px;
 }
+/* 「展开细节 / 收起细节」：Owner 2026-11-14 第 19 条换成 Button 淡墨小号（quiet sm），原来带框奶油底的手写样子
+ * （内边距 5px 9px、1px 边、圆角 4、奶油底、12px）删了，交给 button.css。
+ * 左边照「全部显示」的办法用负边距抵掉 sm 的左内边距，字贴齐上面那行解析的左边；下边距是原来的 8px，没动。 */
 .pi-seven-details-toggle {
   margin-bottom: 8px;
+}
+.eqb-button.pi-seven-details-toggle {
+  margin-left: calc(-1 * var(--eqb-space-2));
 }
 .pi-seven-details {
   display: grid;
@@ -649,7 +647,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-gf-group-overview-summary {
   cursor: pointer;
   font-size: 0.8125rem;
-  color: var(--pi-ps-insight-muted-ink, #6a6a64);
+  color: var(--pi-ps-insight-muted-ink, #5A6C75);
   user-select: none;
 }
 .pi-reading-group-overview {
@@ -696,7 +694,7 @@ button.pi-ps-analysis-distractor--selected {
 }
 .pi-objective-teaching-section > summary {
   cursor: pointer;
-  color: var(--pi-ps-insight-muted-ink, #6a6a64);
+  color: var(--pi-ps-insight-muted-ink, #5A6C75);
   font-size: 0.8125rem;
   user-select: none;
 }
@@ -704,7 +702,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-objective-discourse,
 .pi-objective-long-sentences {
   margin-top: 8px;
-  color: var(--pi-ps-insight-ink, #1e1e1c);
+  color: var(--pi-ps-insight-ink, var(--desk-ink));
   font-family: var(--paper-font-serif);
   font-size: 0.875rem;
   line-height: 1.7;
@@ -739,7 +737,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-objective-long-sentences small {
   display: block;
   margin-bottom: 4px;
-  color: var(--pi-ps-insight-muted-ink, #6a6a64);
+  color: var(--pi-ps-insight-muted-ink, #5A6C75);
   font-family: var(--paper-font-sans);
 }
 .pi-objective-long-sentences p > b {
@@ -755,13 +753,13 @@ button.pi-ps-analysis-distractor--selected {
  */
 .pi-cloze-panel,
 .pi-gf-panel {
-  color: var(--pi-ps-insight-ink, #1e1e1c);
+  color: var(--pi-ps-insight-ink, var(--desk-ink));
 }
 .pi-cloze-blank-card,
 .pi-gf-blank-card {
   padding: 10px 12px;
   border: 1px solid rgba(122, 106, 88, 0.24);
-  border-radius: 6px;
+  border-radius: 8px;
   background: rgba(255, 255, 255, 0.5);
 }
 /* Header row: blank-no + pos/type tag + optional signature/hint tag.
@@ -779,36 +777,15 @@ button.pi-ps-analysis-distractor--selected {
   font-size: 14px;
   font-weight: 700;
 }
-.pi-cloze-tag,
-.pi-gf-tag,
-.pi-gf-blank-hint {
-  display: inline-flex;
-  align-items: center;
-  padding: 2px 7px;
-  border-radius: 999px;
-  background: rgba(30, 30, 28, 0.07);
-  color: #5f554a;
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 1.4;
-}
-.pi-cloze-tag--sig,
-.pi-gf-tag--facet {
-  background: rgba(30, 30, 28, 0.12);
-  color: #221b15;
-}
-.pi-gf-blank-hint {
-  background: transparent;
-  border: 1px solid rgba(122, 106, 88, 0.24);
-  font-weight: 500;
-  color: #67594b;
-}
+/* 胶囊第二轮（2026-11-14）：题头的词性 / 考法、有无提示词、提示词、考点小签换成 shared-ui/Chip（状态标记），
+   样子在 shared-ui/chip.css。原来 11px、暖棕字、两档深浅底、提示词描边的几条删了，类名只当钩子
+   （verify-lecture-panel-css.mjs 的 HOOK_ONLY）。 */
 .pi-cloze-section-title,
 .pi-gf-section-title {
   margin: 0 0 6px;
   font-size: 12px;
   font-weight: 600;
-  color: var(--pi-ps-insight-muted-ink, #6a6a64);
+  color: var(--pi-ps-insight-muted-ink, #5A6C75);
 }
 .pi-cloze-correct-fit,
 .pi-gf-answer,
@@ -833,7 +810,7 @@ button.pi-ps-analysis-distractor--selected {
   height: 22px;
   padding: 0 6px;
   border-radius: 999px;
-  background: rgba(30, 30, 28, 0.12);
+  background: rgb(27 43 51 / 0.12);
   color: #221b15;
   font-size: 12px;
   font-weight: 700;
@@ -881,16 +858,7 @@ button.pi-ps-analysis-distractor--selected {
   gap: 6px;
   margin-bottom: 10px;
 }
-.pi-gf-badge {
-  padding: 2px 7px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 600;
-}
-.pi-gf-badge--role {
-  background: rgba(30, 30, 28, 0.1);
-  color: #5f554a;
-}
+/* 句法成分小签换成 shared-ui/Chip（胶囊第二轮），原来的胶囊样子删了，类名只当钩子。 */
 /* 证据定位 named fold — same quiet one-line summary idiom as
    文章简介 (no anonymous「展开细节」drawer, owner 2026-07-08).
    min-height keeps the tap target at the pi-seven touch standard. */
@@ -898,7 +866,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-gf-evidence-summary {
   cursor: pointer;
   font-size: 0.8125rem;
-  color: var(--pi-ps-insight-muted-ink, #6a6a64);
+  color: var(--pi-ps-insight-muted-ink, #5A6C75);
   user-select: none;
   min-height: 30px;
   display: flex;
@@ -956,18 +924,13 @@ button.pi-ps-analysis-distractor--selected {
 .pi-cloze-evidence--selected,
 .pi-gf-evidence--selected {
   border-color: rgba(122, 106, 88, 0.5);
-  background: rgba(30, 30, 28, 0.08);
+  background: rgb(27 43 51 / 0.08);
 }
+/* 证据类型小签换成 shared-ui/Chip（胶囊第二轮），样子在 shared-ui/chip.css；原来 10px、暖棕字的胶囊删了。
+   这里只留它和下面引文之间的距离（排法，不和 chip.css 冲突）。 */
 .pi-cloze-evidence-type-label,
 .pi-gf-evidence-type-label {
-  display: inline-block;
   margin-bottom: 3px;
-  padding: 1px 6px;
-  border-radius: 999px;
-  background: rgba(30, 30, 28, 0.08);
-  color: #67594b;
-  font-size: 10px;
-  font-weight: 600;
 }
 .pi-cloze-evidence-quote,
 .pi-gf-evidence-quote {
@@ -1000,7 +963,7 @@ button.pi-ps-analysis-distractor--selected {
 .pi-gf-teaching-note {
   padding: 8px 9px;
   border-radius: 4px; /* lecture-css-restore: 复活文件归 radius 梯（原 5px, DESIGN.md §5） */
-  background: rgba(30, 30, 28, 0.05);
+  background: rgb(27 43 51 / 0.05);
   color: #67594b;
 }
 .pi-cloze-teaching-note p,

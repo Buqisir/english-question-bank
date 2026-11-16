@@ -1,0 +1,227 @@
+/* 对话框（Dialog.tsx）。颜色、间距、圆角、影子只用 tokens.css 里的变量；动效用全站 --motion-* / --ease-*
+ * （App.css :root，DESIGN.md §6）。tokens.css 里没有的取值（对话框宽度、遮罩色）先写成本文件里的局部变量，
+ * 每个注明出处，缺口记在 docs/design-gaps.md 和 design/components-2026-11-13/migrate-dialog/README.md「缺的变量」。
+ *
+ * DESIGN.md 依据：
+ * - §4 四档高度：弹窗是 e3（--elev-3），白底不透明，不用玻璃（不加 backdrop-filter）；墨圈就是边，不另画边线。
+ * - §5 Single-Radius-Family：卡片、板、弹窗用 12px（--eqb-radius-card）。
+ * - §8 间距：块内 8 / 组间 16 / 块边 24。面板四周 24，标题到正文 16，正文到底部动作 16，动作之间 8。
+ * - §3 字号：标题 14 / 600（工具界面字号只用 12 / 13 / 14 / 20）；说明 13 次要灰。
+ *
+ * 结构：<dialog class="eqb-dialog"> 本身铺满视口、画遮罩（原生 ::backdrop 透明），里面一块 .eqb-dialog-panel。
+ * 这样遮罩和面板能各自做入退场过渡，点遮罩也好认（点到的是 <dialog> 本身）。 */
+
+:root {
+  /* 对话框宽度三档，取站上原有的宽：sm 360 = 个人空间删除确认；md 440 = 「保存 PDF 到个人空间」和作废口令；
+   * lg 620 = 选择练字单词。side 780 = 录题面板（抽屉）。 */
+  --eqb-dialog-width-sm: 360px;
+  --eqb-dialog-width-md: 440px;
+  --eqb-dialog-width-lg: 620px;
+  --eqb-dialog-width-side: 780px;
+  /* 模态遮罩：墨 28%。站上原来五处是 28%（两处）、30%、32%、42%，取最多的 28%，等于原来的 rgb(27 43 51 / 0.28)。
+   * docs/design-gaps.md 里已有一条 --eqb-color-scrim 候选（草稿卷重排等待，桌色 60%，是另一种「旧内容还在」的浅遮罩），
+   * 这里是盖住整页的模态遮罩，深浅和用途都不同，另记一条。 */
+  --eqb-dialog-scrim: color-mix(in srgb, var(--eqb-color-text) 28%, transparent);
+}
+
+/* ── 遮罩层（<dialog> 本身） ─────────────────────────── */
+
+.eqb-dialog {
+  --eqb-dialog-width: var(--eqb-dialog-width-md);
+  --eqb-dialog-gutter: var(--eqb-space-5);
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: var(--eqb-dialog-gutter);
+  border: 0;
+  background: var(--eqb-dialog-scrim);
+  color: var(--eqb-color-text);
+  overscroll-behavior: contain;
+  opacity: 0;
+  /* 退场快一档（motion-fast），入场 motion-base（下面 data-visible='true' 那条）。 */
+  transition: opacity var(--motion-fast) var(--ease-out);
+}
+
+.eqb-dialog:not([open]) {
+  display: none;
+}
+
+/* 遮罩画在 <dialog> 本身上，原生 ::backdrop 不画，免得叠成两层。 */
+.eqb-dialog::backdrop {
+  background: transparent;
+}
+
+/* 覆盖：本条 (0,2,0) 盖过 .eqb-dialog (0,1,0) 的不透明度和过渡时长：打开着时显出来，入场比退场慢一档。 */
+.eqb-dialog[data-visible='true'] {
+  opacity: 1;
+  transition-duration: var(--motion-base);
+}
+
+.eqb-dialog[data-size='sm'] { --eqb-dialog-width: var(--eqb-dialog-width-sm); }
+.eqb-dialog[data-size='lg'] { --eqb-dialog-width: var(--eqb-dialog-width-lg); }
+
+/* ── 面板 ─────────────────────────────────────────────── */
+
+.eqb-dialog-panel {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: min(var(--eqb-dialog-width), 100%);
+  max-height: 100%;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--eqb-radius-card);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-3);
+  opacity: 0;
+  transform: scale(0.97);
+  transition:
+    opacity var(--motion-fast) var(--ease-out),
+    transform var(--motion-fast) var(--ease-out);
+}
+
+/* 覆盖：本条 (0,3,0) 盖过 .eqb-dialog-panel (0,1,0) 的不透明度、缩放和过渡时长，理由同遮罩那条。 */
+.eqb-dialog[data-visible='true'] .eqb-dialog-panel {
+  opacity: 1;
+  transform: none;
+  transition-duration: var(--motion-base);
+}
+
+.eqb-dialog-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--eqb-space-3);
+  padding: var(--eqb-space-5) var(--eqb-space-5) 0;
+}
+
+.eqb-dialog-heading {
+  min-width: 0;
+}
+
+.eqb-dialog-title {
+  margin: 0;
+  color: var(--eqb-color-text);
+  font-size: var(--eqb-font-size-sm);
+  font-weight: 600;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.eqb-dialog-description {
+  margin: var(--eqb-space-1) 0 0;
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-control);
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+/* 右上角关闭键：36 的方键，图标 16。往右上收一点，让图标和面板 24px 内边距对齐，而不是键的外框对齐。 */
+.eqb-dialog-close {
+  flex: 0 0 auto;
+  margin: calc(-1 * var(--eqb-space-2)) calc(-1 * var(--eqb-space-2)) 0 0;
+}
+
+/* 正文：长了在这里滚，标题和底部动作不动。上下留 4px 以上的内边距，里面控件的焦点环（外扩 2px）不会被裁。 */
+.eqb-dialog-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: var(--eqb-space-4) var(--eqb-space-5) var(--eqb-space-1);
+  font-size: var(--eqb-font-size-control);
+}
+
+.eqb-dialog-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--eqb-space-2) var(--eqb-space-4);
+  padding: var(--eqb-space-4) var(--eqb-space-5) var(--eqb-space-5);
+}
+
+/* 覆盖：有正文时，正文自己已经在底下留了 4px，这里上边距收成 12px，正文到动作合起来还是 16。 */
+.eqb-dialog-body + .eqb-dialog-foot {
+  padding-top: var(--eqb-space-3);
+}
+
+.eqb-dialog-footnote {
+  flex: 1 1 12em;
+  min-width: 0;
+  margin: 0;
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-control);
+  line-height: 1.55;
+}
+
+/* 主次：「取消」在左、确认在右，整组靠右（README「主次顺序」）。 */
+.eqb-dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--eqb-space-2);
+  margin-left: auto;
+}
+
+/* ── 侧边抽屉（placement='side'） ─────────────────────
+ * 贴右边、满高：长表单（录题面板）。从右边滑进来，用抽屉级的 --motion-slow。 */
+
+/* 覆盖：本条 (0,2,0) 盖过 .eqb-dialog 的居中和四周留白：抽屉贴右边、满高。 */
+.eqb-dialog[data-placement='side'] {
+  --eqb-dialog-width: var(--eqb-dialog-width-side);
+  align-items: stretch;
+  justify-content: flex-end;
+  padding: 0;
+}
+
+/* 覆盖：本条 (0,3,0) 盖过 .eqb-dialog-panel 的宽、高、圆角和入场位移：左边留出 16px 看得见底下的页面，
+ * 只圆左边两个角（右边贴着视口边）；入场从右边 24px 外滑进来，不缩放。 */
+.eqb-dialog[data-placement='side'] .eqb-dialog-panel {
+  width: min(var(--eqb-dialog-width), calc(100% - var(--eqb-space-4)));
+  height: 100%;
+  border-radius: var(--eqb-radius-card) 0 0 var(--eqb-radius-card);
+  transform: translateX(var(--eqb-space-5));
+}
+
+/* 覆盖：本条 (0,4,0) 盖过上面打开着的 (0,3,0)：抽屉入场用 --motion-slow（DESIGN.md 动效档「面板 / 抽屉级」）。 */
+.eqb-dialog[data-placement='side'][data-visible='true'] .eqb-dialog-panel {
+  transform: none;
+  transition-duration: var(--motion-slow);
+}
+
+/* 抽屉里的表单很长：标题下、动作上各一条发丝线，滚动时看得出哪里是固定的。 */
+.eqb-dialog[data-placement='side'] .eqb-dialog-head {
+  padding-bottom: var(--eqb-space-4);
+  border-bottom: 1px solid var(--eqb-color-border-subtle);
+}
+
+.eqb-dialog[data-placement='side'] .eqb-dialog-foot {
+  padding-top: var(--eqb-space-4);
+  border-top: 1px solid var(--eqb-color-border-subtle);
+}
+
+/* ── 窄屏 ─────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  /* 覆盖：.eqb-dialog 的四周留白在窄屏收成 16（手机两边的通用留白）。 */
+  .eqb-dialog {
+    --eqb-dialog-gutter: var(--eqb-space-4);
+  }
+}
+
+/* 减少动态效果：不做过渡，直接出现、直接消失（DESIGN.md §6）。 */
+@media (prefers-reduced-motion: reduce) {
+  .eqb-dialog,
+  .eqb-dialog .eqb-dialog-panel {
+    transition: none;
+  }
+}

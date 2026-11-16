@@ -1,0 +1,4430 @@
+{
+ "method": "Built independently from render.json wide.records (styles, state, accessible names), the full-page screenshots and a few crops; source locations (inv) were used only to group repeated instances of the same element across scenarios, and every inv was then judged on its rendered style and on what the teacher does with it. KIND: a record gets a kind only if it is itself the visible component; wrappers, labels, text spans inside rows, icons inside buttons, backdrops, dividers, the avatar, the green 'has items' dot, the sliding rail highlight and the A4 paper sheet are null (job then says what the thing is). Inputs that sit inside a painted search box are null and the painted box is the field. Menu items are counted as buttons; menu/popover panels and modal cards are dialog; full-area 'could not load' or 'nothing here' blocks are empty (even when the job is an error), inline banners and status lines are notice. JOB: short Chinese verb phrase for what the teacher accomplishes, taken from visible text plus accessible name (e.g. the pressed '+' whose name is 从草稿卷移出 gets 移出草稿卷; 去找题 and 返回找题 both get 回找题页). LOOK: one id per visual treatment = fill (none / white / tinted / solid colour), border (none / light / dark), corner shape (r4, r8, r12, pill), text colour role (muted grey, ink, red, white-on-dark) and decoration (underline), plus icon-only vs text. Tolerance: same treatment is one look even if font size differs by <=2px, height by <=10px, padding by a few px, or border/text grey differs by <~30 per channel; a different colour role, fill, corner family or underline makes a new look. Resting, hover, disabled, pressed/selected and expanded instances share the look of their resting form (e.g. the proposal vs decided state of the reorder suggestion, the disabled vs enabled 草稿卷 pill). Within-look drift is reported in reviewer-notes.md. The two __seed__ records are injected test controls and get their own looks.",
+ "records": {
+  "login|0": {
+   "kind": null,
+   "job": "页面底",
+   "look": null
+  },
+  "login|1": {
+   "kind": null,
+   "job": "登录区布局",
+   "look": null
+  },
+  "login|2": {
+   "kind": null,
+   "job": "字段布局",
+   "look": null
+  },
+  "login|3": {
+   "kind": "field",
+   "job": "填用户名",
+   "look": "field-login"
+  },
+  "login|4": {
+   "kind": null,
+   "job": "字段布局",
+   "look": null
+  },
+  "login|5": {
+   "kind": "field",
+   "job": "填密码",
+   "look": "field-login"
+  },
+  "login|6": {
+   "kind": "button",
+   "job": "登录",
+   "look": "button-primary-pill"
+  },
+  "login|7": {
+   "kind": null,
+   "job": "页面文字",
+   "look": null
+  },
+  "login-error|0": {
+   "kind": null,
+   "job": "页面底",
+   "look": null
+  },
+  "login-error|1": {
+   "kind": null,
+   "job": "登录区布局",
+   "look": null
+  },
+  "login-error|2": {
+   "kind": "notice",
+   "job": "报错",
+   "look": "notice-error-tint"
+  },
+  "login-error|3": {
+   "kind": null,
+   "job": "字段布局",
+   "look": null
+  },
+  "login-error|4": {
+   "kind": "field",
+   "job": "填用户名",
+   "look": "field-login"
+  },
+  "login-error|5": {
+   "kind": null,
+   "job": "字段布局",
+   "look": null
+  },
+  "login-error|6": {
+   "kind": "field",
+   "job": "填密码",
+   "look": "field-login"
+  },
+  "login-error|7": {
+   "kind": "button",
+   "job": "登录",
+   "look": "button-primary-pill"
+  },
+  "login-error|8": {
+   "kind": null,
+   "job": "页面文字",
+   "look": null
+  },
+  "home|0": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "home|1": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "home|2": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "home|3": {
+   "kind": "button",
+   "job": "进入/退出管理",
+   "look": "button-quiet"
+  },
+  "home|4": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "home|5": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "home|6": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "home|7": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "home|8": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "home|9": {
+   "kind": "field",
+   "job": "自然语言找题",
+   "look": "field-search-bar"
+  },
+  "home|10": {
+   "kind": null,
+   "job": "搜索框内的输入(随外框)",
+   "look": null
+  },
+  "home|11": {
+   "kind": "button",
+   "job": "提交搜索",
+   "look": "button-icon"
+  },
+  "home|12": {
+   "kind": "button",
+   "job": "浏览全部试卷",
+   "look": "button-quiet"
+  },
+  "home|13": {
+   "kind": "button",
+   "job": "打开草稿卷",
+   "look": "button-pill-float"
+  },
+  "home-results|0": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "home-results|1": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "home-results|2": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "home-results|3": {
+   "kind": "button",
+   "job": "进入/退出管理",
+   "look": "button-quiet"
+  },
+  "home-results|4": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "home-results|5": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "home-results|6": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "home-results|7": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "home-results|8": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "home-results|9": {
+   "kind": "field",
+   "job": "自然语言找题",
+   "look": "field-search-bar"
+  },
+  "home-results|10": {
+   "kind": null,
+   "job": "搜索框内的输入(随外框)",
+   "look": null
+  },
+  "home-results|11": {
+   "kind": "button",
+   "job": "清空搜索",
+   "look": "button-icon"
+  },
+  "home-results|12": {
+   "kind": "button",
+   "job": "提交搜索",
+   "look": "button-icon"
+  },
+  "home-results|13": {
+   "kind": null,
+   "job": "开关标签",
+   "look": null
+  },
+  "home-results|14": {
+   "kind": "field",
+   "job": "开关思考模式",
+   "look": "field-switch"
+  },
+  "home-results|15": {
+   "kind": "button",
+   "job": "展开筛选",
+   "look": "button-outline-clear"
+  },
+  "home-results|16": {
+   "kind": "notice",
+   "job": "说明搜索方式",
+   "look": "notice-plain-icon"
+  },
+  "home-results|17": {
+   "kind": null,
+   "job": "结果区布局",
+   "look": null
+  },
+  "home-results|18": {
+   "kind": "row",
+   "job": "展开试卷看篇章",
+   "look": "row-list"
+  },
+  "home-results|19": {
+   "kind": null,
+   "job": "试卷行头(行的一部分)",
+   "look": null
+  },
+  "home-results|20": {
+   "kind": "button",
+   "job": "展开/收起试卷",
+   "look": "button-icon-sm"
+  },
+  "home-results|21": {
+   "kind": null,
+   "job": "篇章区布局",
+   "look": null
+  },
+  "home-results|22": {
+   "kind": null,
+   "job": "列表布局",
+   "look": null
+  },
+  "home-results|23": {
+   "kind": "row",
+   "job": "看篇章并加入",
+   "look": "row-passage"
+  },
+  "home-results|24": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|25": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|26": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|27": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-results|28": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-results|29": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|30": {
+   "kind": "button",
+   "job": "加入草稿卷",
+   "look": "button-icon"
+  },
+  "home-results|31": {
+   "kind": null,
+   "job": "按钮内图标",
+   "look": null
+  },
+  "home-results|32": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "home-results|33": {
+   "kind": null,
+   "job": "列表项分隔",
+   "look": null
+  },
+  "home-results|34": {
+   "kind": "row",
+   "job": "看篇章并加入",
+   "look": "row-passage"
+  },
+  "home-results|35": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|36": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|37": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|38": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-results|39": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-results|40": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|41": {
+   "kind": "button",
+   "job": "加入草稿卷",
+   "look": "button-icon"
+  },
+  "home-results|42": {
+   "kind": null,
+   "job": "按钮内图标",
+   "look": null
+  },
+  "home-results|43": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "home-results|44": {
+   "kind": null,
+   "job": "列表项分隔",
+   "look": null
+  },
+  "home-results|45": {
+   "kind": "row",
+   "job": "看篇章并加入",
+   "look": "row-passage"
+  },
+  "home-results|46": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|47": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|48": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|49": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-results|50": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-results|51": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|52": {
+   "kind": "button",
+   "job": "加入草稿卷",
+   "look": "button-icon"
+  },
+  "home-results|53": {
+   "kind": null,
+   "job": "按钮内图标",
+   "look": null
+  },
+  "home-results|54": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "home-results|55": {
+   "kind": null,
+   "job": "列表项分隔",
+   "look": null
+  },
+  "home-results|56": {
+   "kind": "row",
+   "job": "看篇章并加入",
+   "look": "row-passage"
+  },
+  "home-results|57": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|58": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|59": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|60": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-results|61": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-results|62": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-results|63": {
+   "kind": "button",
+   "job": "加入草稿卷",
+   "look": "button-icon"
+  },
+  "home-results|64": {
+   "kind": null,
+   "job": "按钮内图标",
+   "look": null
+  },
+  "home-results|65": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "home-results|66": {
+   "kind": "button",
+   "job": "打开草稿卷",
+   "look": "button-pill-float"
+  },
+  "home-row-menu|0": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "home-row-menu|1": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "home-row-menu|2": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "home-row-menu|3": {
+   "kind": "button",
+   "job": "进入/退出管理",
+   "look": "button-quiet"
+  },
+  "home-row-menu|4": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "home-row-menu|5": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "home-row-menu|6": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "home-row-menu|7": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "home-row-menu|8": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "home-row-menu|9": {
+   "kind": "field",
+   "job": "自然语言找题",
+   "look": "field-search-bar"
+  },
+  "home-row-menu|10": {
+   "kind": null,
+   "job": "搜索框内的输入(随外框)",
+   "look": null
+  },
+  "home-row-menu|11": {
+   "kind": "button",
+   "job": "清空搜索",
+   "look": "button-icon"
+  },
+  "home-row-menu|12": {
+   "kind": "button",
+   "job": "提交搜索",
+   "look": "button-icon"
+  },
+  "home-row-menu|13": {
+   "kind": null,
+   "job": "开关标签",
+   "look": null
+  },
+  "home-row-menu|14": {
+   "kind": "field",
+   "job": "开关思考模式",
+   "look": "field-switch"
+  },
+  "home-row-menu|15": {
+   "kind": "button",
+   "job": "展开筛选",
+   "look": "button-outline-clear"
+  },
+  "home-row-menu|16": {
+   "kind": "notice",
+   "job": "说明搜索方式",
+   "look": "notice-plain-icon"
+  },
+  "home-row-menu|17": {
+   "kind": null,
+   "job": "结果区布局",
+   "look": null
+  },
+  "home-row-menu|18": {
+   "kind": "row",
+   "job": "展开试卷看篇章",
+   "look": "row-list"
+  },
+  "home-row-menu|19": {
+   "kind": null,
+   "job": "试卷行头(行的一部分)",
+   "look": null
+  },
+  "home-row-menu|20": {
+   "kind": "button",
+   "job": "展开/收起试卷",
+   "look": "button-icon-sm"
+  },
+  "home-row-menu|21": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-row-menu|22": {
+   "kind": null,
+   "job": "篇章区布局",
+   "look": null
+  },
+  "home-row-menu|23": {
+   "kind": null,
+   "job": "列表布局",
+   "look": null
+  },
+  "home-row-menu|24": {
+   "kind": "row",
+   "job": "看篇章并加入",
+   "look": "row-passage"
+  },
+  "home-row-menu|25": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|26": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|27": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|28": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-row-menu|29": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-row-menu|30": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|31": {
+   "kind": "button",
+   "job": "加入草稿卷",
+   "look": "button-icon"
+  },
+  "home-row-menu|32": {
+   "kind": null,
+   "job": "按钮内图标",
+   "look": null
+  },
+  "home-row-menu|33": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "home-row-menu|34": {
+   "kind": null,
+   "job": "列表项分隔",
+   "look": null
+  },
+  "home-row-menu|35": {
+   "kind": "row",
+   "job": "看篇章并加入",
+   "look": "row-passage"
+  },
+  "home-row-menu|36": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|37": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|38": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|39": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-row-menu|40": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-row-menu|41": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|42": {
+   "kind": "button",
+   "job": "加入草稿卷",
+   "look": "button-icon"
+  },
+  "home-row-menu|43": {
+   "kind": null,
+   "job": "按钮内图标",
+   "look": null
+  },
+  "home-row-menu|44": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "home-row-menu|45": {
+   "kind": null,
+   "job": "列表项分隔",
+   "look": null
+  },
+  "home-row-menu|46": {
+   "kind": "row",
+   "job": "看篇章并加入",
+   "look": "row-passage"
+  },
+  "home-row-menu|47": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|48": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|49": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|50": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-row-menu|51": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-row-menu|52": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|53": {
+   "kind": "button",
+   "job": "加入草稿卷",
+   "look": "button-icon"
+  },
+  "home-row-menu|54": {
+   "kind": null,
+   "job": "按钮内图标",
+   "look": null
+  },
+  "home-row-menu|55": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "home-row-menu|56": {
+   "kind": null,
+   "job": "列表项分隔",
+   "look": null
+  },
+  "home-row-menu|57": {
+   "kind": "row",
+   "job": "看篇章并加入",
+   "look": "row-passage"
+  },
+  "home-row-menu|58": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|59": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|60": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|61": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-row-menu|62": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-row-menu|63": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-row-menu|64": {
+   "kind": "button",
+   "job": "加入草稿卷",
+   "look": "button-icon"
+  },
+  "home-row-menu|65": {
+   "kind": null,
+   "job": "按钮内图标",
+   "look": null
+  },
+  "home-row-menu|66": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "home-row-menu|67": {
+   "kind": "button",
+   "job": "打开草稿卷",
+   "look": "button-pill-float"
+  },
+  "home-row-menu|68": {
+   "kind": "button",
+   "job": "找相似篇章",
+   "look": "button-menuitem"
+  },
+  "home-row-menu|69": {
+   "kind": "button",
+   "job": "看篇章详情",
+   "look": "button-menuitem"
+  },
+  "home-added|0": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "home-added|1": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "home-added|2": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "home-added|3": {
+   "kind": "button",
+   "job": "进入/退出管理",
+   "look": "button-quiet"
+  },
+  "home-added|4": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "home-added|5": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "home-added|6": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "home-added|7": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "home-added|8": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "home-added|9": {
+   "kind": "field",
+   "job": "自然语言找题",
+   "look": "field-search-bar"
+  },
+  "home-added|10": {
+   "kind": null,
+   "job": "搜索框内的输入(随外框)",
+   "look": null
+  },
+  "home-added|11": {
+   "kind": "button",
+   "job": "清空搜索",
+   "look": "button-icon"
+  },
+  "home-added|12": {
+   "kind": "button",
+   "job": "提交搜索",
+   "look": "button-icon"
+  },
+  "home-added|13": {
+   "kind": null,
+   "job": "开关标签",
+   "look": null
+  },
+  "home-added|14": {
+   "kind": "field",
+   "job": "开关思考模式",
+   "look": "field-switch"
+  },
+  "home-added|15": {
+   "kind": "button",
+   "job": "展开筛选",
+   "look": "button-outline-clear"
+  },
+  "home-added|16": {
+   "kind": "notice",
+   "job": "说明搜索方式",
+   "look": "notice-plain-icon"
+  },
+  "home-added|17": {
+   "kind": null,
+   "job": "结果区布局",
+   "look": null
+  },
+  "home-added|18": {
+   "kind": "row",
+   "job": "展开试卷看篇章",
+   "look": "row-list"
+  },
+  "home-added|19": {
+   "kind": null,
+   "job": "试卷行头(行的一部分)",
+   "look": null
+  },
+  "home-added|20": {
+   "kind": "button",
+   "job": "展开/收起试卷",
+   "look": "button-icon-sm"
+  },
+  "home-added|21": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-added|22": {
+   "kind": null,
+   "job": "篇章区布局",
+   "look": null
+  },
+  "home-added|23": {
+   "kind": null,
+   "job": "列表布局",
+   "look": null
+  },
+  "home-added|24": {
+   "kind": "row",
+   "job": "看篇章并加入",
+   "look": "row-passage"
+  },
+  "home-added|25": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|26": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|27": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|28": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-added|29": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-added|30": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|31": {
+   "kind": "button",
+   "job": "移出草稿卷",
+   "look": "button-icon"
+  },
+  "home-added|32": {
+   "kind": null,
+   "job": "已加入标记(按钮内)",
+   "look": null
+  },
+  "home-added|33": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "home-added|34": {
+   "kind": null,
+   "job": "列表项分隔",
+   "look": null
+  },
+  "home-added|35": {
+   "kind": "row",
+   "job": "看篇章并加入",
+   "look": "row-passage"
+  },
+  "home-added|36": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|37": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|38": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|39": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-added|40": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-added|41": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|42": {
+   "kind": "button",
+   "job": "加入草稿卷",
+   "look": "button-icon"
+  },
+  "home-added|43": {
+   "kind": null,
+   "job": "按钮内图标",
+   "look": null
+  },
+  "home-added|44": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "home-added|45": {
+   "kind": null,
+   "job": "列表项分隔",
+   "look": null
+  },
+  "home-added|46": {
+   "kind": "row",
+   "job": "看篇章并加入",
+   "look": "row-passage"
+  },
+  "home-added|47": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|48": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|49": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|50": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-added|51": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-added|52": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|53": {
+   "kind": "button",
+   "job": "加入草稿卷",
+   "look": "button-icon"
+  },
+  "home-added|54": {
+   "kind": null,
+   "job": "按钮内图标",
+   "look": null
+  },
+  "home-added|55": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "home-added|56": {
+   "kind": null,
+   "job": "列表项分隔",
+   "look": null
+  },
+  "home-added|57": {
+   "kind": "row",
+   "job": "看篇章并加入",
+   "look": "row-passage"
+  },
+  "home-added|58": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|59": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|60": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|61": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-added|62": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-added|63": {
+   "kind": null,
+   "job": "行内布局",
+   "look": null
+  },
+  "home-added|64": {
+   "kind": "button",
+   "job": "加入草稿卷",
+   "look": "button-icon"
+  },
+  "home-added|65": {
+   "kind": null,
+   "job": "按钮内图标",
+   "look": null
+  },
+  "home-added|66": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "home-added|67": {
+   "kind": "button",
+   "job": "打开草稿卷",
+   "look": "button-pill-float"
+  },
+  "home-added|68": {
+   "kind": null,
+   "job": "草稿卷有题的圆点",
+   "look": null
+  },
+  "home-noresult|0": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "home-noresult|1": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "home-noresult|2": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "home-noresult|3": {
+   "kind": "button",
+   "job": "进入/退出管理",
+   "look": "button-quiet"
+  },
+  "home-noresult|4": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "home-noresult|5": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "home-noresult|6": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "home-noresult|7": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "home-noresult|8": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "home-noresult|9": {
+   "kind": "field",
+   "job": "自然语言找题",
+   "look": "field-search-bar"
+  },
+  "home-noresult|10": {
+   "kind": null,
+   "job": "搜索框内的输入(随外框)",
+   "look": null
+  },
+  "home-noresult|11": {
+   "kind": "button",
+   "job": "清空搜索",
+   "look": "button-icon"
+  },
+  "home-noresult|12": {
+   "kind": "button",
+   "job": "提交搜索",
+   "look": "button-icon"
+  },
+  "home-noresult|13": {
+   "kind": null,
+   "job": "开关标签",
+   "look": null
+  },
+  "home-noresult|14": {
+   "kind": "field",
+   "job": "开关思考模式",
+   "look": "field-switch"
+  },
+  "home-noresult|15": {
+   "kind": "button",
+   "job": "展开筛选",
+   "look": "button-outline-clear"
+  },
+  "home-noresult|16": {
+   "kind": "notice",
+   "job": "说明搜索方式",
+   "look": "notice-plain-icon"
+  },
+  "home-noresult|17": {
+   "kind": null,
+   "job": "结果区布局",
+   "look": null
+  },
+  "home-noresult|18": {
+   "kind": "empty",
+   "job": "无搜索结果",
+   "look": "empty-inline-text"
+  },
+  "home-noresult|19": {
+   "kind": "button",
+   "job": "清除搜索回浏览",
+   "look": "button-inline-link"
+  },
+  "home-noresult|20": {
+   "kind": null,
+   "job": "列表布局",
+   "look": null
+  },
+  "home-noresult|21": {
+   "kind": "row",
+   "job": "打开草稿卷",
+   "look": "row-list"
+  },
+  "home-noresult|22": {
+   "kind": null,
+   "job": "行内图标",
+   "look": null
+  },
+  "home-noresult|23": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-noresult|24": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-noresult|25": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-noresult|26": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-noresult|27": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-noresult|28": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-noresult|29": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "home-noresult|30": {
+   "kind": null,
+   "job": "行内箭头",
+   "look": null
+  },
+  "home-noresult|31": {
+   "kind": "button",
+   "job": "打开草稿卷",
+   "look": "button-pill-float"
+  },
+  "home-noresult|32": {
+   "kind": null,
+   "job": "草稿卷有题的圆点",
+   "look": null
+  },
+  "browse|0": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "browse|1": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "browse|2": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "browse|3": {
+   "kind": "button",
+   "job": "进入/退出管理",
+   "look": "button-quiet"
+  },
+  "browse|4": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "browse|5": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "browse|6": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "browse|7": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "browse|8": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "browse|9": {
+   "kind": "field",
+   "job": "自然语言找题",
+   "look": "field-search-bar"
+  },
+  "browse|10": {
+   "kind": null,
+   "job": "搜索框内的输入(随外框)",
+   "look": null
+  },
+  "browse|11": {
+   "kind": "button",
+   "job": "提交搜索",
+   "look": "button-icon"
+  },
+  "browse|12": {
+   "kind": "chip",
+   "job": "筛选试卷",
+   "look": "chip-filter"
+  },
+  "browse|13": {
+   "kind": "chip",
+   "job": "筛选试卷",
+   "look": "chip-filter"
+  },
+  "browse|14": {
+   "kind": "chip",
+   "job": "筛选试卷",
+   "look": "chip-filter"
+  },
+  "browse|15": {
+   "kind": "chip",
+   "job": "筛选试卷",
+   "look": "chip-filter"
+  },
+  "browse|16": {
+   "kind": null,
+   "job": "列表布局",
+   "look": null
+  },
+  "browse|17": {
+   "kind": "row",
+   "job": "打开试卷",
+   "look": "row-list"
+  },
+  "browse|18": {
+   "kind": null,
+   "job": "试卷行头(行的一部分)",
+   "look": null
+  },
+  "browse|19": {
+   "kind": null,
+   "job": "行内箭头",
+   "look": null
+  },
+  "browse|20": {
+   "kind": "button",
+   "job": "打开草稿卷",
+   "look": "button-pill-float"
+  },
+  "browse|21": {
+   "kind": null,
+   "job": "草稿卷有题的圆点",
+   "look": null
+  },
+  "detail|0": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "detail|1": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "detail|2": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "detail|3": {
+   "kind": "button",
+   "job": "进入/退出管理",
+   "look": "button-quiet"
+  },
+  "detail|4": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "detail|5": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "detail|6": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "detail|7": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "detail|8": {
+   "kind": "button",
+   "job": "加入草稿卷",
+   "look": "button-green"
+  },
+  "detail|9": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "detail|10": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "detail|11": {
+   "kind": "empty",
+   "job": "卷未上线",
+   "look": "empty-in-sheet"
+  },
+  "detail|12": {
+   "kind": "button",
+   "job": "打开草稿卷",
+   "look": "button-pill-float"
+  },
+  "detail|13": {
+   "kind": null,
+   "job": "草稿卷有题的圆点",
+   "look": null
+  },
+  "paper-browse|0": {
+   "kind": null,
+   "job": "页面底",
+   "look": null
+  },
+  "paper-browse|1": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "paper-browse|2": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "paper-browse|3": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "paper-browse|4": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "paper-browse|5": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "paper-browse|6": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "paper-browse|7": {
+   "kind": "empty",
+   "job": "加载失败",
+   "look": "empty-error-title"
+  },
+  "paper-browse|8": {
+   "kind": null,
+   "job": "错误详情文字",
+   "look": null
+  },
+  "paper-browse|9": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-outline-clear"
+  },
+  "paper-browse-selection|0": {
+   "kind": null,
+   "job": "页面底",
+   "look": null
+  },
+  "paper-browse-selection|1": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "paper-browse-selection|2": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "paper-browse-selection|3": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "paper-browse-selection|4": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "paper-browse-selection|5": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "paper-browse-selection|6": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "paper-browse-selection|7": {
+   "kind": "empty",
+   "job": "加载失败",
+   "look": "empty-error-title"
+  },
+  "paper-browse-selection|8": {
+   "kind": null,
+   "job": "错误详情文字",
+   "look": null
+  },
+  "paper-browse-selection|9": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-outline-clear"
+  },
+  "paper-browse-lecture|0": {
+   "kind": null,
+   "job": "页面底",
+   "look": null
+  },
+  "paper-browse-lecture|1": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "paper-browse-lecture|2": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "paper-browse-lecture|3": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "paper-browse-lecture|4": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "paper-browse-lecture|5": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "paper-browse-lecture|6": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "paper-browse-lecture|7": {
+   "kind": "empty",
+   "job": "加载失败",
+   "look": "empty-error-title"
+  },
+  "paper-browse-lecture|8": {
+   "kind": null,
+   "job": "错误详情文字",
+   "look": null
+  },
+  "paper-browse-lecture|9": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-outline-clear"
+  },
+  "paper-browse-similar|0": {
+   "kind": null,
+   "job": "页面底",
+   "look": null
+  },
+  "paper-browse-similar|1": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "paper-browse-similar|2": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "paper-browse-similar|3": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "paper-browse-similar|4": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "paper-browse-similar|5": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "paper-browse-similar|6": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "paper-browse-similar|7": {
+   "kind": "empty",
+   "job": "加载失败",
+   "look": "empty-error-title"
+  },
+  "paper-browse-similar|8": {
+   "kind": null,
+   "job": "错误详情文字",
+   "look": null
+  },
+  "paper-browse-similar|9": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-outline-clear"
+  },
+  "draft-empty|0": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "draft-empty|1": {
+   "kind": "button",
+   "job": "改卷名",
+   "look": "button-title-text"
+  },
+  "draft-empty|2": {
+   "kind": null,
+   "job": "保存状态文字",
+   "look": null
+  },
+  "draft-empty|3": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-empty|4": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "draft-empty|5": {
+   "kind": null,
+   "job": "工具栏分组",
+   "look": null
+  },
+  "draft-empty|6": {
+   "kind": "field",
+   "job": "选 PDF 版本",
+   "look": "field-box-compact"
+  },
+  "draft-empty|7": {
+   "kind": null,
+   "job": "分段控件外框",
+   "look": null
+  },
+  "draft-empty|8": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-empty|9": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-empty|10": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-empty|11": {
+   "kind": "button",
+   "job": "打开导出菜单",
+   "look": "button-green"
+  },
+  "draft-empty|12": {
+   "kind": null,
+   "job": "分隔线",
+   "look": null
+  },
+  "draft-empty|13": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "draft-empty|14": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "draft-empty|15": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "draft-empty|16": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "draft-empty|17": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "draft-empty|18": {
+   "kind": "notice",
+   "job": "提示先加题再导出",
+   "look": "notice-bare-text"
+  },
+  "draft-empty|19": {
+   "kind": "surface",
+   "job": "篇章导航板",
+   "look": "surface-panel"
+  },
+  "draft-empty|20": {
+   "kind": "empty",
+   "job": "草稿卷为空",
+   "look": "empty-inline-text"
+  },
+  "draft-empty|21": {
+   "kind": null,
+   "job": "卷面纸(空)",
+   "look": null
+  },
+  "draft-empty|22": {
+   "kind": "empty",
+   "job": "草稿卷为空",
+   "look": "empty-illustrated"
+  },
+  "draft-empty|23": {
+   "kind": null,
+   "job": "空状态插画",
+   "look": null
+  },
+  "draft-empty|24": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-green"
+  },
+  "draft|0": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "draft|1": {
+   "kind": "button",
+   "job": "改卷名",
+   "look": "button-title-text"
+  },
+  "draft|2": {
+   "kind": null,
+   "job": "保存状态文字",
+   "look": null
+  },
+  "draft|3": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft|4": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "draft|5": {
+   "kind": null,
+   "job": "工具栏分组",
+   "look": null
+  },
+  "draft|6": {
+   "kind": "field",
+   "job": "选 PDF 版本",
+   "look": "field-box-compact"
+  },
+  "draft|7": {
+   "kind": null,
+   "job": "分段控件外框",
+   "look": null
+  },
+  "draft|8": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft|9": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft|10": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft|11": {
+   "kind": "button",
+   "job": "打开导出菜单",
+   "look": "button-green"
+  },
+  "draft|12": {
+   "kind": null,
+   "job": "分隔线",
+   "look": null
+  },
+  "draft|13": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "draft|14": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "draft|15": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "draft|16": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "draft|17": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "draft|18": {
+   "kind": "notice",
+   "job": "排版建议",
+   "look": "notice-card"
+  },
+  "draft|19": {
+   "kind": null,
+   "job": "提示条头部",
+   "look": null
+  },
+  "draft|20": {
+   "kind": "button",
+   "job": "采纳排版建议",
+   "look": "button-outline-dark"
+  },
+  "draft|21": {
+   "kind": "surface",
+   "job": "篇章导航板",
+   "look": "surface-panel"
+  },
+  "draft|22": {
+   "kind": null,
+   "job": "当前项高亮块",
+   "look": null
+  },
+  "draft|23": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft|24": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft|25": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft|26": {
+   "kind": null,
+   "job": "卷面纸",
+   "look": null
+  },
+  "draft|27": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft|28": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft|29": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft|30": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft|31": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft|32": {
+   "kind": "button",
+   "job": "采纳排版建议",
+   "look": "button-link-small"
+  },
+  "draft|33": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft|34": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft|35": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft|36": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft|37": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft|38": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft|39": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-decided|0": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "draft-decided|1": {
+   "kind": "button",
+   "job": "改卷名",
+   "look": "button-title-text"
+  },
+  "draft-decided|2": {
+   "kind": null,
+   "job": "保存状态文字",
+   "look": null
+  },
+  "draft-decided|3": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-decided|4": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "draft-decided|5": {
+   "kind": null,
+   "job": "工具栏分组",
+   "look": null
+  },
+  "draft-decided|6": {
+   "kind": "field",
+   "job": "选 PDF 版本",
+   "look": "field-box-compact"
+  },
+  "draft-decided|7": {
+   "kind": null,
+   "job": "分段控件外框",
+   "look": null
+  },
+  "draft-decided|8": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-decided|9": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-decided|10": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-decided|11": {
+   "kind": "button",
+   "job": "打开导出菜单",
+   "look": "button-green"
+  },
+  "draft-decided|12": {
+   "kind": null,
+   "job": "分隔线",
+   "look": null
+  },
+  "draft-decided|13": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "draft-decided|14": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "draft-decided|15": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "draft-decided|16": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "draft-decided|17": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "draft-decided|18": {
+   "kind": "notice",
+   "job": "排版建议",
+   "look": "notice-card"
+  },
+  "draft-decided|19": {
+   "kind": null,
+   "job": "提示条头部",
+   "look": null
+  },
+  "draft-decided|20": {
+   "kind": "button",
+   "job": "撤销",
+   "look": "button-link-small"
+  },
+  "draft-decided|21": {
+   "kind": "surface",
+   "job": "篇章导航板",
+   "look": "surface-panel"
+  },
+  "draft-decided|22": {
+   "kind": null,
+   "job": "当前项高亮块",
+   "look": null
+  },
+  "draft-decided|23": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-decided|24": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-decided|25": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-decided|26": {
+   "kind": null,
+   "job": "卷面纸",
+   "look": null
+  },
+  "draft-decided|27": {
+   "kind": "empty",
+   "job": "等待分页预览",
+   "look": "empty-center-text"
+  },
+  "draft-group-actions|0": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "draft-group-actions|1": {
+   "kind": "button",
+   "job": "改卷名",
+   "look": "button-title-text"
+  },
+  "draft-group-actions|2": {
+   "kind": null,
+   "job": "保存状态文字",
+   "look": null
+  },
+  "draft-group-actions|3": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-group-actions|4": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "draft-group-actions|5": {
+   "kind": null,
+   "job": "工具栏分组",
+   "look": null
+  },
+  "draft-group-actions|6": {
+   "kind": "field",
+   "job": "选 PDF 版本",
+   "look": "field-box-compact"
+  },
+  "draft-group-actions|7": {
+   "kind": null,
+   "job": "分段控件外框",
+   "look": null
+  },
+  "draft-group-actions|8": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-group-actions|9": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-group-actions|10": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-group-actions|11": {
+   "kind": "button",
+   "job": "打开导出菜单",
+   "look": "button-green"
+  },
+  "draft-group-actions|12": {
+   "kind": null,
+   "job": "分隔线",
+   "look": null
+  },
+  "draft-group-actions|13": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "draft-group-actions|14": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "draft-group-actions|15": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "draft-group-actions|16": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "draft-group-actions|17": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "draft-group-actions|18": {
+   "kind": "notice",
+   "job": "排版建议",
+   "look": "notice-card"
+  },
+  "draft-group-actions|19": {
+   "kind": null,
+   "job": "提示条头部",
+   "look": null
+  },
+  "draft-group-actions|20": {
+   "kind": "button",
+   "job": "撤销",
+   "look": "button-link-small"
+  },
+  "draft-group-actions|21": {
+   "kind": "surface",
+   "job": "篇章导航板",
+   "look": "surface-panel"
+  },
+  "draft-group-actions|22": {
+   "kind": null,
+   "job": "当前项高亮块",
+   "look": null
+  },
+  "draft-group-actions|23": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-group-actions|24": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-group-actions|25": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-group-actions|26": {
+   "kind": null,
+   "job": "卷面纸",
+   "look": null
+  },
+  "draft-group-actions|27": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-group-actions|28": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-group-actions|29": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-group-actions|30": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-group-actions|31": {
+   "kind": "dialog",
+   "job": "调整题组",
+   "look": "dialog-menu-r12"
+  },
+  "draft-group-actions|32": {
+   "kind": "button",
+   "job": "调整顺序",
+   "look": "button-plain-16"
+  },
+  "draft-group-actions|33": {
+   "kind": "button",
+   "job": "调整顺序",
+   "look": "button-plain-16"
+  },
+  "draft-group-actions|34": {
+   "kind": "button",
+   "job": "移出草稿卷",
+   "look": "button-plain-16-danger"
+  },
+  "draft-group-actions|35": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-group-actions|36": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-group-actions|37": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-group-actions|38": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-group-actions|39": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-group-actions|40": {
+   "kind": "button",
+   "job": "采纳排版建议",
+   "look": "button-link-small"
+  },
+  "draft-group-actions|41": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-group-actions|42": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-group-actions|43": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-export-menu|0": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "draft-export-menu|1": {
+   "kind": "button",
+   "job": "改卷名",
+   "look": "button-title-text"
+  },
+  "draft-export-menu|2": {
+   "kind": null,
+   "job": "保存状态文字",
+   "look": null
+  },
+  "draft-export-menu|3": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-export-menu|4": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "draft-export-menu|5": {
+   "kind": null,
+   "job": "工具栏分组",
+   "look": null
+  },
+  "draft-export-menu|6": {
+   "kind": "field",
+   "job": "选 PDF 版本",
+   "look": "field-box-compact"
+  },
+  "draft-export-menu|7": {
+   "kind": null,
+   "job": "分段控件外框",
+   "look": null
+  },
+  "draft-export-menu|8": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-export-menu|9": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-export-menu|10": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-export-menu|11": {
+   "kind": "button",
+   "job": "打开导出菜单",
+   "look": "button-green"
+  },
+  "draft-export-menu|12": {
+   "kind": "button",
+   "job": "下载 PDF",
+   "look": "button-menuitem"
+  },
+  "draft-export-menu|13": {
+   "kind": null,
+   "job": "分隔线",
+   "look": null
+  },
+  "draft-export-menu|14": {
+   "kind": "button",
+   "job": "另存 PDF",
+   "look": "button-menuitem"
+  },
+  "draft-export-menu|15": {
+   "kind": "button",
+   "job": "存 PDF 到个人空间",
+   "look": "button-menuitem"
+  },
+  "draft-export-menu|16": {
+   "kind": null,
+   "job": "分隔线",
+   "look": null
+  },
+  "draft-export-menu|17": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "draft-export-menu|18": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "draft-export-menu|19": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "draft-export-menu|20": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "draft-export-menu|21": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "draft-export-menu|22": {
+   "kind": "notice",
+   "job": "排版建议",
+   "look": "notice-card"
+  },
+  "draft-export-menu|23": {
+   "kind": null,
+   "job": "提示条头部",
+   "look": null
+  },
+  "draft-export-menu|24": {
+   "kind": "button",
+   "job": "撤销",
+   "look": "button-link-small"
+  },
+  "draft-export-menu|25": {
+   "kind": "surface",
+   "job": "篇章导航板",
+   "look": "surface-panel"
+  },
+  "draft-export-menu|26": {
+   "kind": null,
+   "job": "当前项高亮块",
+   "look": null
+  },
+  "draft-export-menu|27": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-export-menu|28": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-export-menu|29": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-export-menu|30": {
+   "kind": null,
+   "job": "卷面纸",
+   "look": null
+  },
+  "draft-export-menu|31": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-export-menu|32": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-export-menu|33": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-export-menu|34": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-export-menu|35": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-export-menu|36": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-export-menu|37": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-export-menu|38": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-export-menu|39": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-export-menu|40": {
+   "kind": "button",
+   "job": "采纳排版建议",
+   "look": "button-link-small"
+  },
+  "draft-export-menu|41": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-export-menu|42": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-export-menu|43": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-more-menu|0": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "draft-more-menu|1": {
+   "kind": "button",
+   "job": "改卷名",
+   "look": "button-title-text"
+  },
+  "draft-more-menu|2": {
+   "kind": null,
+   "job": "保存状态文字",
+   "look": null
+  },
+  "draft-more-menu|3": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-more-menu|4": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "draft-more-menu|5": {
+   "kind": "dialog",
+   "job": "更多设置",
+   "look": "dialog-menu-r8"
+  },
+  "draft-more-menu|6": {
+   "kind": null,
+   "job": "字段标签",
+   "look": null
+  },
+  "draft-more-menu|7": {
+   "kind": "field",
+   "job": "指定学生",
+   "look": "field-box-16"
+  },
+  "draft-more-menu|8": {
+   "kind": null,
+   "job": "字段标签",
+   "look": null
+  },
+  "draft-more-menu|9": {
+   "kind": "field",
+   "job": "切换草稿卷",
+   "look": "field-box-16"
+  },
+  "draft-more-menu|10": {
+   "kind": null,
+   "job": "工具栏分组",
+   "look": null
+  },
+  "draft-more-menu|11": {
+   "kind": "field",
+   "job": "选 PDF 版本",
+   "look": "field-box-compact"
+  },
+  "draft-more-menu|12": {
+   "kind": null,
+   "job": "分段控件外框",
+   "look": null
+  },
+  "draft-more-menu|13": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-more-menu|14": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-more-menu|15": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-more-menu|16": {
+   "kind": "button",
+   "job": "打开导出菜单",
+   "look": "button-green"
+  },
+  "draft-more-menu|17": {
+   "kind": null,
+   "job": "分隔线",
+   "look": null
+  },
+  "draft-more-menu|18": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "draft-more-menu|19": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "draft-more-menu|20": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "draft-more-menu|21": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "draft-more-menu|22": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "draft-more-menu|23": {
+   "kind": "notice",
+   "job": "排版建议",
+   "look": "notice-card"
+  },
+  "draft-more-menu|24": {
+   "kind": null,
+   "job": "提示条头部",
+   "look": null
+  },
+  "draft-more-menu|25": {
+   "kind": "button",
+   "job": "撤销",
+   "look": "button-link-small"
+  },
+  "draft-more-menu|26": {
+   "kind": "surface",
+   "job": "篇章导航板",
+   "look": "surface-panel"
+  },
+  "draft-more-menu|27": {
+   "kind": null,
+   "job": "当前项高亮块",
+   "look": null
+  },
+  "draft-more-menu|28": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-more-menu|29": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-more-menu|30": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-more-menu|31": {
+   "kind": null,
+   "job": "卷面纸",
+   "look": null
+  },
+  "draft-more-menu|32": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-more-menu|33": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-more-menu|34": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-more-menu|35": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-more-menu|36": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-more-menu|37": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-more-menu|38": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-more-menu|39": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-more-menu|40": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-more-menu|41": {
+   "kind": "button",
+   "job": "采纳排版建议",
+   "look": "button-link-small"
+  },
+  "draft-more-menu|42": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-more-menu|43": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-more-menu|44": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-space-dialog|0": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "draft-space-dialog|1": {
+   "kind": "button",
+   "job": "改卷名",
+   "look": "button-title-text"
+  },
+  "draft-space-dialog|2": {
+   "kind": null,
+   "job": "保存状态文字",
+   "look": null
+  },
+  "draft-space-dialog|3": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-space-dialog|4": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "draft-space-dialog|5": {
+   "kind": null,
+   "job": "工具栏分组",
+   "look": null
+  },
+  "draft-space-dialog|6": {
+   "kind": "field",
+   "job": "选 PDF 版本",
+   "look": "field-box-compact"
+  },
+  "draft-space-dialog|7": {
+   "kind": null,
+   "job": "分段控件外框",
+   "look": null
+  },
+  "draft-space-dialog|8": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-space-dialog|9": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-space-dialog|10": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-space-dialog|11": {
+   "kind": "button",
+   "job": "打开导出菜单",
+   "look": "button-green"
+  },
+  "draft-space-dialog|12": {
+   "kind": null,
+   "job": "分隔线",
+   "look": null
+  },
+  "draft-space-dialog|13": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "draft-space-dialog|14": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "draft-space-dialog|15": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "draft-space-dialog|16": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "draft-space-dialog|17": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "draft-space-dialog|18": {
+   "kind": "notice",
+   "job": "排版建议",
+   "look": "notice-card"
+  },
+  "draft-space-dialog|19": {
+   "kind": null,
+   "job": "提示条头部",
+   "look": null
+  },
+  "draft-space-dialog|20": {
+   "kind": "button",
+   "job": "撤销",
+   "look": "button-link-small"
+  },
+  "draft-space-dialog|21": {
+   "kind": "surface",
+   "job": "篇章导航板",
+   "look": "surface-panel"
+  },
+  "draft-space-dialog|22": {
+   "kind": null,
+   "job": "当前项高亮块",
+   "look": null
+  },
+  "draft-space-dialog|23": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-space-dialog|24": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-space-dialog|25": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-space-dialog|26": {
+   "kind": null,
+   "job": "卷面纸",
+   "look": null
+  },
+  "draft-space-dialog|27": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-space-dialog|28": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-space-dialog|29": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-space-dialog|30": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-space-dialog|31": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-space-dialog|32": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-space-dialog|33": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-space-dialog|34": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-space-dialog|35": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-space-dialog|36": {
+   "kind": "button",
+   "job": "采纳排版建议",
+   "look": "button-link-small"
+  },
+  "draft-space-dialog|37": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-space-dialog|38": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-space-dialog|39": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-space-dialog|40": {
+   "kind": null,
+   "job": "对话框遮罩",
+   "look": null
+  },
+  "draft-space-dialog|41": {
+   "kind": "dialog",
+   "job": "存 PDF 到个人空间",
+   "look": "dialog-shadow-r8"
+  },
+  "draft-space-dialog|42": {
+   "kind": null,
+   "job": "对话框头部",
+   "look": null
+  },
+  "draft-space-dialog|43": {
+   "kind": "button",
+   "job": "关闭对话框",
+   "look": "button-outline-white"
+  },
+  "draft-space-dialog|44": {
+   "kind": "field",
+   "job": "填文件名",
+   "look": "field-box-16"
+  },
+  "draft-space-dialog|45": {
+   "kind": "field",
+   "job": "选文件夹",
+   "look": "field-box-16"
+  },
+  "draft-space-dialog|46": {
+   "kind": null,
+   "job": "行布局",
+   "look": null
+  },
+  "draft-space-dialog|47": {
+   "kind": "field",
+   "job": "填新文件夹名",
+   "look": "field-box-16"
+  },
+  "draft-space-dialog|48": {
+   "kind": "button",
+   "job": "新建文件夹",
+   "look": "button-outline-white"
+  },
+  "draft-space-dialog|49": {
+   "kind": null,
+   "job": "按钮区布局",
+   "look": null
+  },
+  "draft-space-dialog|50": {
+   "kind": "button",
+   "job": "取消",
+   "look": "button-outline-white"
+  },
+  "draft-space-dialog|51": {
+   "kind": "button",
+   "job": "确认保存",
+   "look": "button-primary"
+  },
+  "draft-saved|0": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "draft-saved|1": {
+   "kind": "button",
+   "job": "改卷名",
+   "look": "button-title-text"
+  },
+  "draft-saved|2": {
+   "kind": null,
+   "job": "保存状态文字",
+   "look": null
+  },
+  "draft-saved|3": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-saved|4": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "draft-saved|5": {
+   "kind": null,
+   "job": "工具栏分组",
+   "look": null
+  },
+  "draft-saved|6": {
+   "kind": "field",
+   "job": "选 PDF 版本",
+   "look": "field-box-compact"
+  },
+  "draft-saved|7": {
+   "kind": null,
+   "job": "分段控件外框",
+   "look": null
+  },
+  "draft-saved|8": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-saved|9": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-saved|10": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-saved|11": {
+   "kind": "button",
+   "job": "打开导出菜单",
+   "look": "button-green"
+  },
+  "draft-saved|12": {
+   "kind": null,
+   "job": "分隔线",
+   "look": null
+  },
+  "draft-saved|13": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "draft-saved|14": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "draft-saved|15": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "draft-saved|16": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "draft-saved|17": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "draft-saved|18": {
+   "kind": "notice",
+   "job": "排版建议",
+   "look": "notice-card"
+  },
+  "draft-saved|19": {
+   "kind": null,
+   "job": "提示条头部",
+   "look": null
+  },
+  "draft-saved|20": {
+   "kind": "button",
+   "job": "撤销",
+   "look": "button-link-small"
+  },
+  "draft-saved|21": {
+   "kind": "surface",
+   "job": "篇章导航板",
+   "look": "surface-panel"
+  },
+  "draft-saved|22": {
+   "kind": null,
+   "job": "当前项高亮块",
+   "look": null
+  },
+  "draft-saved|23": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-saved|24": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-saved|25": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-saved|26": {
+   "kind": null,
+   "job": "卷面纸",
+   "look": null
+  },
+  "draft-saved|27": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-saved|28": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-saved|29": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-saved|30": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-saved|31": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-saved|32": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-saved|33": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-saved|34": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-saved|35": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-saved|36": {
+   "kind": "button",
+   "job": "采纳排版建议",
+   "look": "button-link-small"
+  },
+  "draft-saved|37": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-saved|38": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-saved|39": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-saved|40": {
+   "kind": "toast",
+   "job": "保存成功提示",
+   "look": "toast-dark"
+  },
+  "draft-saved|41": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-outline-white"
+  },
+  "draft-removed-toast|0": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "draft-removed-toast|1": {
+   "kind": "button",
+   "job": "改卷名",
+   "look": "button-title-text"
+  },
+  "draft-removed-toast|2": {
+   "kind": null,
+   "job": "保存状态文字",
+   "look": null
+  },
+  "draft-removed-toast|3": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-removed-toast|4": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "draft-removed-toast|5": {
+   "kind": null,
+   "job": "工具栏分组",
+   "look": null
+  },
+  "draft-removed-toast|6": {
+   "kind": "field",
+   "job": "选 PDF 版本",
+   "look": "field-box-compact"
+  },
+  "draft-removed-toast|7": {
+   "kind": null,
+   "job": "分段控件外框",
+   "look": null
+  },
+  "draft-removed-toast|8": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-removed-toast|9": {
+   "kind": "button",
+   "job": "选纸张版式",
+   "look": "button-segment"
+  },
+  "draft-removed-toast|10": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-removed-toast|11": {
+   "kind": "button",
+   "job": "打开导出菜单",
+   "look": "button-green"
+  },
+  "draft-removed-toast|12": {
+   "kind": null,
+   "job": "分隔线",
+   "look": null
+  },
+  "draft-removed-toast|13": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "draft-removed-toast|14": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "draft-removed-toast|15": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "draft-removed-toast|16": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "draft-removed-toast|17": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "draft-removed-toast|18": {
+   "kind": "notice",
+   "job": "排版建议",
+   "look": "notice-card"
+  },
+  "draft-removed-toast|19": {
+   "kind": null,
+   "job": "提示条头部",
+   "look": null
+  },
+  "draft-removed-toast|20": {
+   "kind": "button",
+   "job": "采纳排版建议",
+   "look": "button-outline-dark"
+  },
+  "draft-removed-toast|21": {
+   "kind": "surface",
+   "job": "篇章导航板",
+   "look": "surface-panel"
+  },
+  "draft-removed-toast|22": {
+   "kind": null,
+   "job": "当前项高亮块",
+   "look": null
+  },
+  "draft-removed-toast|23": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-removed-toast|24": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-removed-toast|25": {
+   "kind": "row",
+   "job": "跳到篇章",
+   "look": "row-rail"
+  },
+  "draft-removed-toast|26": {
+   "kind": null,
+   "job": "卷面纸",
+   "look": null
+  },
+  "draft-removed-toast|27": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-removed-toast|28": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-removed-toast|29": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-removed-toast|30": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-removed-toast|31": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-removed-toast|32": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-removed-toast|33": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-removed-toast|34": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "draft-removed-toast|35": {
+   "kind": "surface",
+   "job": "题组操作条",
+   "look": "surface-toolbar"
+  },
+  "draft-removed-toast|36": {
+   "kind": "button",
+   "job": "采纳排版建议",
+   "look": "button-link-small"
+  },
+  "draft-removed-toast|37": {
+   "kind": "button",
+   "job": "换篇",
+   "look": "button-plain-16"
+  },
+  "draft-removed-toast|38": {
+   "kind": null,
+   "job": "菜单包裹",
+   "look": null
+  },
+  "draft-removed-toast|39": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon-sm"
+  },
+  "my-space|0": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "my-space|1": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "my-space|2": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "my-space|3": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "my-space|4": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "my-space|5": {
+   "kind": "row",
+   "job": "管理已存 PDF",
+   "look": "row-file"
+  },
+  "my-space|6": {
+   "kind": null,
+   "job": "行内按钮区",
+   "look": null
+  },
+  "my-space|7": {
+   "kind": "button",
+   "job": "下载 PDF",
+   "look": "button-quiet"
+  },
+  "my-space|8": {
+   "kind": "button",
+   "job": "打开草稿卷",
+   "look": "button-quiet"
+  },
+  "my-space|9": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "my-space-menu|0": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "my-space-menu|1": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "my-space-menu|2": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "my-space-menu|3": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "my-space-menu|4": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "my-space-menu|5": {
+   "kind": "row",
+   "job": "管理已存 PDF",
+   "look": "row-file"
+  },
+  "my-space-menu|6": {
+   "kind": null,
+   "job": "行内按钮区",
+   "look": null
+  },
+  "my-space-menu|7": {
+   "kind": "button",
+   "job": "下载 PDF",
+   "look": "button-quiet"
+  },
+  "my-space-menu|8": {
+   "kind": "button",
+   "job": "打开草稿卷",
+   "look": "button-quiet"
+  },
+  "my-space-menu|9": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "my-space-menu|10": {
+   "kind": "button",
+   "job": "另存 PDF",
+   "look": "button-menuitem"
+  },
+  "my-space-menu|11": {
+   "kind": "button",
+   "job": "删除文件",
+   "look": "button-menuitem-danger"
+  },
+  "my-space-confirm|0": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "my-space-confirm|1": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "my-space-confirm|2": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "my-space-confirm|3": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "my-space-confirm|4": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "my-space-confirm|5": {
+   "kind": "row",
+   "job": "管理已存 PDF",
+   "look": "row-file"
+  },
+  "my-space-confirm|6": {
+   "kind": null,
+   "job": "行内按钮区",
+   "look": null
+  },
+  "my-space-confirm|7": {
+   "kind": "button",
+   "job": "下载 PDF",
+   "look": "button-quiet"
+  },
+  "my-space-confirm|8": {
+   "kind": "button",
+   "job": "打开草稿卷",
+   "look": "button-quiet"
+  },
+  "my-space-confirm|9": {
+   "kind": "button",
+   "job": "打开更多操作",
+   "look": "button-icon"
+  },
+  "my-space-confirm|10": {
+   "kind": null,
+   "job": "对话框遮罩",
+   "look": null
+  },
+  "my-space-confirm|11": {
+   "kind": "dialog",
+   "job": "确认删除",
+   "look": "dialog-shadow-r12"
+  },
+  "my-space-confirm|12": {
+   "kind": null,
+   "job": "对话框标题",
+   "look": null
+  },
+  "my-space-confirm|13": {
+   "kind": "button",
+   "job": "取消",
+   "look": "button-ghost-ink"
+  },
+  "my-space-confirm|14": {
+   "kind": "button",
+   "job": "确认危险操作",
+   "look": "button-ghost-danger"
+  },
+  "vocab-notebook|0": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "vocab-notebook|1": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "vocab-notebook|2": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "vocab-notebook|3": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "vocab-notebook|4": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "vocab-notebook|5": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "vocab-notebook|6": {
+   "kind": "empty",
+   "job": "生词本为空",
+   "look": "empty-illustrated"
+  },
+  "vocab-notebook|7": {
+   "kind": null,
+   "job": "空状态插画",
+   "look": null
+  },
+  "vocab-notebook|8": {
+   "kind": null,
+   "job": "空状态文字",
+   "look": null
+  },
+  "vocab-notebook|9": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-green"
+  },
+  "vocab-review|0": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "vocab-review|1": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "vocab-review|2": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "vocab-review|3": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "vocab-review|4": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "vocab-review|5": {
+   "kind": "empty",
+   "job": "加载失败",
+   "look": "empty-in-card"
+  },
+  "vocab-review|6": {
+   "kind": null,
+   "job": "标题文字",
+   "look": null
+  },
+  "vocab-review|7": {
+   "kind": "button",
+   "job": "重试加载",
+   "look": "button-primary"
+  },
+  "vocab-practice|0": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "vocab-practice|1": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "vocab-practice|2": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "vocab-practice|3": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "vocab-practice|4": {
+   "kind": "button",
+   "job": "返回生词组",
+   "look": "button-outline-white"
+  },
+  "vocab-practice|5": {
+   "kind": "empty",
+   "job": "加载失败",
+   "look": "empty-icon-title"
+  },
+  "vocab-practice|6": {
+   "kind": "button",
+   "job": "返回生词组",
+   "look": "button-ghost-ink"
+  },
+  "vocab-dictation|0": {
+   "kind": "button",
+   "job": "回找题页",
+   "look": "button-quiet"
+  },
+  "vocab-dictation|1": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "vocab-dictation|2": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "vocab-dictation|3": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "vocab-dictation|4": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "vocab-dictation|5": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "vocab-dictation|6": {
+   "kind": null,
+   "job": "标签栏外框",
+   "look": null
+  },
+  "vocab-dictation|7": {
+   "kind": "button",
+   "job": "切换词组视图",
+   "look": "button-tab"
+  },
+  "vocab-dictation|8": {
+   "kind": "button",
+   "job": "切换词组视图",
+   "look": "button-tab"
+  },
+  "vocab-dictation|9": {
+   "kind": "button",
+   "job": "切换词组视图",
+   "look": "button-tab"
+  },
+  "vocab-dictation|10": {
+   "kind": "button",
+   "job": "切换词组视图",
+   "look": "button-tab"
+  },
+  "vocab-dictation|11": {
+   "kind": "button",
+   "job": "切换词组视图",
+   "look": "button-tab"
+  },
+  "vocab-dictation|12": {
+   "kind": "field",
+   "job": "指定学生",
+   "look": "field-box-compact"
+  },
+  "vocab-dictation|13": {
+   "kind": null,
+   "job": "搜索框包裹(含图标)",
+   "look": null
+  },
+  "vocab-dictation|14": {
+   "kind": "field",
+   "job": "搜索生词",
+   "look": "field-box-compact"
+  },
+  "vocab-dictation|15": {
+   "kind": "field",
+   "job": "按日期筛选",
+   "look": "field-box-compact"
+  },
+  "vocab-dictation|16": {
+   "kind": "field",
+   "job": "按日期筛选",
+   "look": "field-box-compact"
+  },
+  "vocab-dictation|17": {
+   "kind": "empty",
+   "job": "词组为空",
+   "look": "empty-illustrated"
+  },
+  "vocab-dictation|18": {
+   "kind": null,
+   "job": "空状态插画",
+   "look": null
+  },
+  "admin|0": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "admin|1": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "admin|2": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "admin|3": {
+   "kind": "button",
+   "job": "进入/退出管理",
+   "look": "button-quiet"
+  },
+  "admin|4": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "admin|5": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "admin|6": {
+   "kind": "button",
+   "job": "打主题标签",
+   "look": "button-primary"
+  },
+  "admin|7": {
+   "kind": "field",
+   "job": "填口令名称",
+   "look": "field-box-compact"
+  },
+  "admin|8": {
+   "kind": "button",
+   "job": "新建口令",
+   "look": "button-outline-clear"
+  },
+  "admin-token-revoke|0": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "admin-token-revoke|1": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "admin-token-revoke|2": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "admin-token-revoke|3": {
+   "kind": "button",
+   "job": "进入/退出管理",
+   "look": "button-quiet"
+  },
+  "admin-token-revoke|4": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "admin-token-revoke|5": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "admin-token-revoke|6": {
+   "kind": "button",
+   "job": "打主题标签",
+   "look": "button-primary"
+  },
+  "admin-token-revoke|7": {
+   "kind": "field",
+   "job": "填口令名称",
+   "look": "field-box-compact"
+  },
+  "admin-token-revoke|8": {
+   "kind": "button",
+   "job": "新建口令",
+   "look": "button-outline-clear"
+  },
+  "admin-token-revoke|9": {
+   "kind": "surface",
+   "job": "展示新口令",
+   "look": "surface-bordered"
+  },
+  "admin-token-revoke|10": {
+   "kind": "button",
+   "job": "复制口令",
+   "look": "button-ghost-ink"
+  },
+  "admin-token-revoke|11": {
+   "kind": "button",
+   "job": "隐藏口令",
+   "look": "button-ghost-ink"
+  },
+  "admin-token-revoke|12": {
+   "kind": "row",
+   "job": "管理口令",
+   "look": "row-token"
+  },
+  "admin-token-revoke|13": {
+   "kind": "button",
+   "job": "作废口令",
+   "look": "button-ghost-ink"
+  },
+  "admin-token-revoke|14": {
+   "kind": "dialog",
+   "job": "确认作废",
+   "look": "dialog-bordered-r12"
+  },
+  "admin-token-revoke|15": {
+   "kind": "button",
+   "job": "取消",
+   "look": "button-ghost-ink"
+  },
+  "admin-token-revoke|16": {
+   "kind": "button",
+   "job": "确认危险操作",
+   "look": "button-ghost-ink"
+  },
+  "reading-analysis|0": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "reading-analysis|1": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "reading-analysis|2": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "reading-analysis|3": {
+   "kind": "button",
+   "job": "进入/退出管理",
+   "look": "button-quiet"
+  },
+  "reading-analysis|4": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "reading-analysis|5": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "reading-analysis|6": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "reading-analysis|7": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "reading-analysis|8": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "reading-analysis|9": {
+   "kind": "field",
+   "job": "自然语言找题",
+   "look": "field-search-bar"
+  },
+  "reading-analysis|10": {
+   "kind": null,
+   "job": "搜索框内的输入(随外框)",
+   "look": null
+  },
+  "reading-analysis|11": {
+   "kind": "button",
+   "job": "提交搜索",
+   "look": "button-icon"
+  },
+  "reading-analysis|12": {
+   "kind": "button",
+   "job": "浏览全部试卷",
+   "look": "button-quiet"
+  },
+  "reading-analysis|13": {
+   "kind": null,
+   "job": "列表布局",
+   "look": null
+  },
+  "reading-analysis|14": {
+   "kind": "row",
+   "job": "打开草稿卷",
+   "look": "row-list"
+  },
+  "reading-analysis|15": {
+   "kind": null,
+   "job": "行内图标",
+   "look": null
+  },
+  "reading-analysis|16": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "reading-analysis|17": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "reading-analysis|18": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "reading-analysis|19": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "reading-analysis|20": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "reading-analysis|21": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "reading-analysis|22": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "reading-analysis|23": {
+   "kind": null,
+   "job": "行内箭头",
+   "look": null
+  },
+  "reading-analysis|24": {
+   "kind": null,
+   "job": "列表项分隔",
+   "look": null
+  },
+  "reading-analysis|25": {
+   "kind": "row",
+   "job": "打开最近看的篇章",
+   "look": "row-list"
+  },
+  "reading-analysis|26": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "reading-analysis|27": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "reading-analysis|28": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "reading-analysis|29": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "reading-analysis|30": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "reading-analysis|31": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "reading-analysis|32": {
+   "kind": null,
+   "job": "行内箭头",
+   "look": null
+  },
+  "reading-analysis|33": {
+   "kind": "button",
+   "job": "打开草稿卷",
+   "look": "button-pill-float"
+  },
+  "reading-analysis|34": {
+   "kind": null,
+   "job": "草稿卷有题的圆点",
+   "look": null
+  },
+  "paper-intelligence|0": {
+   "kind": "button",
+   "job": "打开生词本",
+   "look": "button-quiet"
+  },
+  "paper-intelligence|1": {
+   "kind": "button",
+   "job": "去过生词",
+   "look": "button-quiet"
+  },
+  "paper-intelligence|2": {
+   "kind": "button",
+   "job": "打开个人空间",
+   "look": "button-quiet"
+  },
+  "paper-intelligence|3": {
+   "kind": "button",
+   "job": "进入/退出管理",
+   "look": "button-quiet"
+  },
+  "paper-intelligence|4": {
+   "kind": null,
+   "job": "头像",
+   "look": null
+  },
+  "paper-intelligence|5": {
+   "kind": "button",
+   "job": "退出登录",
+   "look": "button-quiet"
+  },
+  "paper-intelligence|6": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "paper-intelligence|7": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "paper-intelligence|8": {
+   "kind": null,
+   "job": "页面布局",
+   "look": null
+  },
+  "paper-intelligence|9": {
+   "kind": "field",
+   "job": "自然语言找题",
+   "look": "field-search-bar"
+  },
+  "paper-intelligence|10": {
+   "kind": null,
+   "job": "搜索框内的输入(随外框)",
+   "look": null
+  },
+  "paper-intelligence|11": {
+   "kind": "button",
+   "job": "提交搜索",
+   "look": "button-icon"
+  },
+  "paper-intelligence|12": {
+   "kind": "button",
+   "job": "浏览全部试卷",
+   "look": "button-quiet"
+  },
+  "paper-intelligence|13": {
+   "kind": null,
+   "job": "列表布局",
+   "look": null
+  },
+  "paper-intelligence|14": {
+   "kind": "row",
+   "job": "打开草稿卷",
+   "look": "row-list"
+  },
+  "paper-intelligence|15": {
+   "kind": null,
+   "job": "行内图标",
+   "look": null
+  },
+  "paper-intelligence|16": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "paper-intelligence|17": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "paper-intelligence|18": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "paper-intelligence|19": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "paper-intelligence|20": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "paper-intelligence|21": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "paper-intelligence|22": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "paper-intelligence|23": {
+   "kind": null,
+   "job": "行内箭头",
+   "look": null
+  },
+  "paper-intelligence|24": {
+   "kind": null,
+   "job": "列表项分隔",
+   "look": null
+  },
+  "paper-intelligence|25": {
+   "kind": "row",
+   "job": "打开最近看的篇章",
+   "look": "row-list"
+  },
+  "paper-intelligence|26": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "paper-intelligence|27": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "paper-intelligence|28": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "paper-intelligence|29": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "paper-intelligence|30": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "paper-intelligence|31": {
+   "kind": null,
+   "job": "行内文字",
+   "look": null
+  },
+  "paper-intelligence|32": {
+   "kind": null,
+   "job": "行内箭头",
+   "look": null
+  },
+  "paper-intelligence|33": {
+   "kind": "button",
+   "job": "打开草稿卷",
+   "look": "button-pill-float"
+  },
+  "paper-intelligence|34": {
+   "kind": null,
+   "job": "草稿卷有题的圆点",
+   "look": null
+  },
+  "__seed__|0": {
+   "kind": "button",
+   "job": "未知(注入种子)",
+   "look": "button-seed-magenta"
+  },
+  "__seed__|1": {
+   "kind": "button",
+   "job": "未知(注入种子)",
+   "look": "button-seed-uadefault"
+  }
+ }
+}

@@ -1,0 +1,270 @@
+{
+  "mode": "before",
+  "shots": [
+    {
+      "file": "before-390-01-首页说明行.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "concierge-notice",
+          "role": null,
+          "text": "没填 AI 密钥，先用本地题库帮你找。",
+          "x": 24,
+          "y": 299,
+          "w": 342,
+          "h": 32
+        }
+      ]
+    },
+    {
+      "file": "before-390-02-首页题库没连上.png",
+      "width": 390,
+      "pill": "草稿卷（0 组）",
+      "notices": []
+    },
+    {
+      "file": "before-390-03-首页等题库.png",
+      "width": 390,
+      "pill": "草稿卷（0 组）",
+      "notices": []
+    },
+    {
+      "file": "before-390-04-打开草稿卷等待.png",
+      "width": 390,
+      "notices": []
+    },
+    {
+      "file": "before-390-05-草稿卷打不开.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "draft-error",
+          "role": null,
+          "text": "打开草稿卷没成功，可以再试一次。",
+          "x": 0,
+          "y": 156,
+          "w": 390,
+          "h": 22
+        }
+      ]
+    },
+    {
+      "file": "before-390-06-第一次生成分页预览等待.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "draft-a4-empty",
+          "role": null,
+          "text": "正在生成分页预览…",
+          "x": 10,
+          "y": 156,
+          "w": 332,
+          "h": 420
+        }
+      ]
+    },
+    {
+      "file": "before-390-07-挪动后等重排.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "draft-a4-wait-line",
+          "role": "status",
+          "text": "正在重排卷面，旧卷面先留着…",
+          "x": 55,
+          "y": 172,
+          "w": 242,
+          "h": 34
+        }
+      ]
+    },
+    {
+      "file": "before-390-08-重排失败.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "draft-a4-wait-line",
+          "role": "status",
+          "text": "生成分页预览没成功，可以再试一次。下面还是改之前的卷面。 重试",
+          "x": 26,
+          "y": 172,
+          "w": 300,
+          "h": 52
+        }
+      ]
+    },
+    {
+      "file": "before-390-09-保存失败-更多面板.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "draft-error",
+          "role": null,
+          "text": "保存草稿卷没成功，可以再试一次。",
+          "x": 31,
+          "y": 295,
+          "w": 256,
+          "h": 22
+        },
+        {
+          "cls": "draft-a4-wait-line",
+          "role": "status",
+          "text": "正在重排卷面，旧卷面先留着…",
+          "x": 55,
+          "y": 172,
+          "w": 242,
+          "h": 34
+        }
+      ]
+    },
+    {
+      "file": "before-390-10-导出出错.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "draft-error",
+          "role": null,
+          "text": "导出 PDF没成功，可以再试一次。",
+          "x": 0,
+          "y": 160,
+          "w": 390,
+          "h": 22
+        }
+      ]
+    },
+    {
+      "file": "before-390-11-下载成功.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "draft-success",
+          "role": null,
+          "text": "PDF 已开始下载。 本卷采用小四（12pt）。 已满足长卷页数上限和正文版式，仍有 1 个题组跨 A3 正反面，请检查分页。",
+          "x": 0,
+          "y": 158,
+          "w": 390,
+          "h": 66
+        }
+      ]
+    },
+    {
+      "file": "before-390-12-移除后撤销提示.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "draft-a4-wait-line",
+          "role": "status",
+          "text": "正在重排卷面，旧卷面先留着…",
+          "x": 55,
+          "y": 172,
+          "w": 242,
+          "h": 34
+        },
+        {
+          "cls": "draft-undo-toast",
+          "role": "status",
+          "text": "题组已移出 撤销",
+          "x": 100,
+          "y": 764,
+          "w": 190,
+          "h": 58
+        }
+      ]
+    },
+    {
+      "file": "before-390-13-空卷导出提示.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "draft-empty-export",
+          "role": "status",
+          "text": "请先添加题组，再下载 PDF 用于打印。",
+          "x": 0,
+          "y": 158,
+          "w": 390,
+          "h": 22
+        }
+      ]
+    },
+    {
+      "file": "before-390-14-整卷预览打不开.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "paper-browse-error",
+          "role": "main",
+          "text": "没找到这份卷面 这份卷可能还没上线或已被移除，回到找题页换一份看看。 错误信息：Cannot read properties of undefined (reading 'blocks') 返回找题",
+          "x": 0,
+          "y": 140,
+          "w": 390,
+          "h": 316
+        }
+      ]
+    },
+    {
+      "file": "before-390-15-相似题批量加入失败.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "similar-toast similar-toast--on",
+          "role": null,
+          "text": "已把 1 篇加入草稿卷，题目一并带上",
+          "x": 98,
+          "y": 766,
+          "w": 195,
+          "h": 52
+        }
+      ]
+    }
+  ],
+  "counts": [
+    {
+      "what": "下移一次（保存不拖）",
+      "paginationRequests": 2,
+      "requestAtMs": [
+        531,
+        1674
+      ],
+      "patchDoneMs": 667
+    },
+    {
+      "what": "下移一次（保存拖 1 秒）",
+      "paginationRequests": 2,
+      "requestAtMs": [
+        6575,
+        8407
+      ],
+      "patchDoneMs": 7703
+    },
+    {
+      "what": "下移一次（保存不拖（第二次））",
+      "paginationRequests": 2,
+      "requestAtMs": [
+        514,
+        1651
+      ],
+      "patchDoneMs": 646
+    },
+    {
+      "what": "下移一次（保存拖 1 秒（第二次））",
+      "paginationRequests": 2,
+      "requestAtMs": [
+        6546,
+        8326
+      ],
+      "patchDoneMs": 7592
+    },
+    {
+      "what": "左栏拖动换位一次（保存不拖）",
+      "paginationRequests": 2,
+      "requestAtMs": [
+        562,
+        1624
+      ]
+    }
+  ],
+  "dialogs": [
+    "390 alert: walk-forced 500"
+  ],
+  "errors": []
+}

@@ -28,19 +28,18 @@
   text-underline-offset: 0.2em;
 }
 
-.paper-review-controls textarea {
-  width: 100%;
+/* 「查看哪款 PDF」是字段（shared-ui/SelectField，字段构件第二轮 2026-11-15）。上面那条给这一排每一格至少 44 高，
+ * 字段外层被撑高时下拉和箭头要一起竖着居中：本条 (0,2,0) 只加 align-content，不和 field.css 冲突。 */
+.paper-review-controls-row > .paper-review-edition {
+  align-content: center;
+}
+
+/* 手动复制的多行框换成 shared-ui/TextAreaField（字段构件第二轮 2026-11-15）：边、底、圆角、内边距、字归 field.css。
+ * 这里只留原来的尺寸：跟着内容长高、最多半屏、一行最多 75 字宽。
+ * Explicit-Cascade：本条 (0,2,0) 覆盖 field.css 多行档 .eqb-field-control[data-multiline] (0,2,0，先载入) 的 min-height: 0。 */
+.paper-review-manual-copy .eqb-field-control {
   max-width: 75ch;
   field-sizing: content;
   min-height: 7lh;
   max-height: 50vh;
-  box-sizing: border-box;
-  padding: var(--eqb-space-2) var(--eqb-space-3);
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 8px;
-  background: var(--eqb-color-paper);
-  color: var(--eqb-color-text);
-  font: inherit;
-  line-height: 1.5;
-  resize: vertical;
 }

@@ -46,18 +46,19 @@
   min-width: 0;
 }
 
-.paper-browse-export-error {
+/* 导出 PDF / 读字体失败那一行：构件收尾（2026-11-15）从红框红底换成共用 Notice（DESIGN.md §5：出错和说明同一种写法，
+ * 只有「没保存」「会丢东西」才上危险色；这里卷子没动、能再导，所以不上）。只留左右边距；
+ * 覆盖：.eqb-notice.paper-browse-export-error (0,2,0) 盖过 notice.css 的 margin: 0 (0,1,0)。
+ * 等待第四轮（2026-11-15）：下载 PDF 过 10 秒的「比平时慢」那一行（.paper-browse-export-wait）放在同一位置，同一条。 */
+.eqb-notice.paper-browse-export-error,
+.eqb-notice.paper-browse-export-wait {
   margin: 0 24px;
-  padding: 8px 12px;
-  border: 1px solid var(--eqb-color-danger);
-  border-radius: 6px;
-  background: var(--eqb-color-danger-soft);
-  color: var(--eqb-color-danger);
-  font-size: 14px;
-  line-height: 1.5;
 }
 
-.paper-browse-shell {
+/* 等待第四轮（2026-11-15）：首屏灰块（.paper-browse-skeleton-*，PaperBrowseOpeningSkeleton）和真卷面共用这几条几何规则，
+ * 纸、目录面板的位置和大小只写一处；灰块用自己的 class 是因为脚本和别的规则按真 class 找卷面。 */
+.paper-browse-shell,
+.paper-browse-skeleton-shell {
   display: grid;
   grid-template-columns: 120px 1fr;
   gap: 24px;
@@ -69,7 +70,8 @@
 }
 
 @media screen and (min-width: 1440px) {
-  .paper-browse-shell {
+  .paper-browse-shell,
+  .paper-browse-skeleton-shell {
     grid-template-columns: 72px minmax(0, 1fr) 440px;
   }
 
@@ -79,7 +81,8 @@
 
   /* Keep the lecture-sized sheet centered until its right-hand notes open.
      Half the unequal outer columns (440 - 72) is the centering offset. */
-  .paper-browse-shell:not(.paper-browse-shell--lecture-open) .paper-browse-content {
+  .paper-browse-shell:not(.paper-browse-shell--lecture-open) .paper-browse-content,
+  .paper-browse-skeleton-content {
     transform: translateX(184px);
   }
 
@@ -98,7 +101,8 @@
   visibility: hidden;
 }
 
-.paper-browse-rail {
+.paper-browse-rail,
+.paper-browse-skeleton-rail {
   position: sticky;
   top: 24px;
   align-self: start;
@@ -112,14 +116,16 @@
   overflow-y: auto;
 }
 
-.paper-browse-rail--centered {
+.paper-browse-rail--centered,
+.paper-browse-skeleton-rail {
   top: 50%;
   transform: translateY(-50%);
 }
 
 /* ─── Quiet TOC rail ─── */
 
-.paper-browse-rail-panel {
+.paper-browse-rail-panel,
+.paper-browse-skeleton-rail-panel {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -147,7 +153,7 @@
   z-index: 0;
   border-radius: 8px;
   background: #fff;
-  box-shadow: 0 1px 3px rgb(25 29 24 / 9%);
+  box-shadow: var(--elev-1);
   pointer-events: none;
 }
 
@@ -259,21 +265,17 @@
   white-space: nowrap;
 }
 
-.paper-browse-lecture-toggle--pressed {
-  background: var(--action, #1F1F1D);
-  color: #fff;
-}
-
 .paper-browse-page .paper-browse-lecture-toggle {
+  /* 讲评开关已换成 Button（构件厂第 4 步），Button 本来就是 13px，这条现在和它一样、不改变什么。
+   * 留着是因为 scripts/verify-paper-browse.mjs 第 81 条把它列在拍板过的字号表里。 */
   font-size: 13px;
 }
 
-.paper-browse-lecture-toggle--pressed:hover:not(:disabled) {
-  background: var(--action-hover, #3A3A37);
-  color: #fff;
-}
+/* 原 `.paper-browse-lecture-toggle--pressed`（石板墨底、白字）和它的 :hover 删了：按下态改由 Button 的
+ * solid 语气画（button.css）。原来那条的白字其实被 App.css `.topbar .ghost-button` 的字色盖掉了。 */
 
-.paper-browse-content {
+.paper-browse-content,
+.paper-browse-skeleton-content {
   --pb-block-gap: 16px;
   --paper-screen-zoom: 1;
   min-width: 0;
@@ -284,7 +286,8 @@
   overflow: visible;
 }
 
-.paper-browse-zoom {
+.paper-browse-zoom,
+.paper-browse-skeleton-sheet {
   display: flex;
   flex-direction: column;
   gap: var(--pb-block-gap);
@@ -301,7 +304,7 @@
   font-size: var(--ps-font-size);
   padding: var(--ps-page-margin-top, 79px) var(--ps-page-margin-x, 91px);
   /* DESIGN.md Shadow Vocabulary · Sheet 纸面 */
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--elev-sheet);
   position: relative;
 }
 
@@ -718,56 +721,8 @@
   pointer-events: none;
 }
 
-.paper-browse-gutter-add {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  min-height: 32px;
-  padding: 0 10px;
-  border: none;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--ink, #1F1F1D);
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.paper-browse-gutter-add-label {
-  display: inline-grid;
-}
-
-.paper-browse-gutter-add-label > span {
-  grid-area: 1 / 1;
-}
-
-.paper-browse-gutter-add:not(.paper-browse-gutter-add--in-draft) .paper-browse-gutter-add-label-done,
-.paper-browse-gutter-add--in-draft .paper-browse-gutter-add-label-idle {
-  visibility: hidden;
-}
-
-.paper-browse-gutter-add:hover:not(:disabled) {
-  background: var(--surface-strong, #E9ECE6);
-}
-
-.paper-browse-gutter-add--in-draft {
-  background: transparent;
-  color: var(--ink, #1F1F1D);
-}
-
-.paper-browse-gutter-add--in-draft:hover:not(:disabled) {
-  background: var(--surface-strong, #E9ECE6);
-  color: var(--ink, #1F1F1D);
-}
-
-.paper-browse-gutter-add--disabled,
-.paper-browse-gutter-add:disabled {
-  background: var(--surface-strong, #E9ECE6);
-  color: var(--muted, #6B6E68);
-  cursor: not-allowed;
-  opacity: 1;
-}
+/* 里面的键 2026-11-14 换成共用 DraftAddButton（走查第四节第 6 条），原来手写的 .paper-browse-gutter-add 几条
+ *（「剪入 / 已剪入」两段字叠放、--in-draft、--disabled）删掉了，样子由 button.css、draftAddButton.css 管。 */
 
 .paper-browse-group-card:focus-within .paper-browse-group-actions {
   opacity: 1;
@@ -871,17 +826,22 @@
   }
 }
 
-.paper-browse-loading,
 .paper-browse-error {
   padding: 48px 24px;
   text-align: center;
-  color: var(--eqb-color-text-muted, #6a6a64);
+  color: var(--eqb-color-text-muted, #5A6C75);
+}
+
+/* 里面那一行共用提示行（shared-ui/Notice）居中，宽度跟着字走，窄屏时最多占满一行再截断。 */
+.paper-browse-error .eqb-notice {
+  margin: 0 auto;
+  width: fit-content;
 }
 
 .paper-browse-placeholder {
   padding: 24px;
   font-size: 12px;
-  color: var(--eqb-color-text-muted, #6a6a64);
+  color: var(--eqb-color-text-muted, #5A6C75);
 }
 
 /* ─── 讲评栏（组级速览） ─── */
@@ -913,10 +873,18 @@
   }
 }
 
+/* 讲解区在等的灰块（PaperBrowsePage.tsx LectureAnalysisSkeleton，2026-11-15 第二轮）：一行标题加三行正文，
+ * 行距 12（--eqb-space-3，按 14px 正文行高 24 画）。原来这里是一行「解析加载中…」。 */
+.paper-browse-lecture-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--eqb-space-3);
+}
+
 .paper-browse-lecture-empty {
   margin: 0;
   font-size: var(--pb-lecture-font-body);
-  color: var(--eqb-color-text-muted, #6a6a64);
+  color: var(--eqb-color-text-muted, #5A6C75);
 }
 
 .paper-browse-lecture-body {
@@ -941,21 +909,16 @@
 }
 
 .paper-browse-reading-overview-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 0 4px 8px;
-  border: 0;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--paper-ink-muted);
-  cursor: pointer;
-  font: inherit;
-  font-size: 13px;
+  /* 讲评栏「文章简介」：Owner 2026-11-14 决定 #1 换成 Button 淡墨小号（quiet sm），原来手写的颜色、字号、内边距和悬停变色删了。
+   * 原来右内边距是 0、箭头贴齐这一行的右边；现在用负边距抵掉 sm 的右内边距（--eqb-space-2），箭头还在原来的位置。 */
+  margin-right: calc(-1 * var(--eqb-space-2));
 }
 
-.paper-browse-reading-overview-toggle:hover {
-  color: var(--ink);
+/* 字和后面的展开箭头都在 Button 的标签里：标签排成一行，间距和改前一样是 --eqb-space-1（4px）。 */
+.paper-browse-reading-overview-toggle > .eqb-button-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--eqb-space-1);
 }
 
 .paper-browse-reading-overview {
@@ -1010,7 +973,7 @@
  * transient hover surface: selection stays visible while hover still glides. */
 .paper-browse-reading-question-nav button[aria-pressed='true'] {
   background: var(--eqb-color-paper);
-  box-shadow: 0 0 0 1px rgba(30, 30, 28, 0.05), 0 1px 2px rgba(30, 30, 28, 0.06);
+  box-shadow: var(--elev-1);
   color: var(--paper-ink-strong);
   font-weight: 600;
 }
@@ -1146,7 +1109,7 @@
   border: 1px solid var(--eqb-color-border);
   border-radius: 8px;
   background: var(--eqb-color-paper);
-  box-shadow: 0 1px 2px color-mix(in srgb, var(--eqb-color-text-strong) 6%, transparent);
+  box-shadow: none;
   color: var(--eqb-color-text);
   font-size: 14px;
   line-height: 1.55;
@@ -1349,7 +1312,7 @@
 .continuation-analysis-subcard {
   padding: 10px 12px;
   border: 1px solid var(--eqb-color-border-subtle);
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--eqb-color-paper);
 }
 
@@ -1421,17 +1384,17 @@
 @media (hover: hover) and (pointer: fine) {
   .paper-browse-page .pi-writing-answer-box--lecture-trigger:hover {
     border-color: var(--line-strong);
-    box-shadow: inset 0 0 0 1px rgba(31, 31, 29, 0.12);
+    box-shadow: inset 0 0 0 1px rgb(27 43 51 / 0.12);
   }
 }
 
 .paper-browse-page .pi-writing-answer-box--lecture-trigger:active {
   border-color: var(--line-strong);
-  box-shadow: inset 0 0 0 1px rgba(31, 31, 29, 0.12);
+  box-shadow: inset 0 0 0 1px rgb(27 43 51 / 0.12);
 }
 
 .paper-browse-page .pi-writing-answer-box--lecture-trigger:focus-visible {
-  box-shadow: 0 0 0 3px rgba(31, 31, 29, 0.12); outline: none;
+  box-shadow: 0 0 0 3px rgb(27 43 51 / 0.12);
   outline-offset: 3px;
 }
 
@@ -1449,7 +1412,7 @@
     height: 100vh;
     z-index: 30;
     border-radius: 0;
-    box-shadow: -4px 0 16px rgba(30, 30, 28, 0.18);
+    box-shadow: var(--elev-3);
     overflow-y: auto;
   }
 
@@ -1461,18 +1424,20 @@
     inset: 0;
     border: none;
     padding: 0;
-    background: rgba(30, 30, 28, 0.18);
+    background: rgb(27 43 51 / 0.18);
     z-index: 29;
     pointer-events: none;
   }
 }
 
 @media (max-width: 900px) {
-  .paper-browse-shell {
+  .paper-browse-shell,
+  .paper-browse-skeleton-shell {
     grid-template-columns: 1fr;
   }
 
-  .paper-browse-rail {
+  .paper-browse-rail,
+  .paper-browse-skeleton-rail {
     position: static;
     top: auto;
     transform: none;
@@ -1486,7 +1451,8 @@
 
   /* 窄屏 rail 横排：面板内各部分改并列成小分栏，分段线相应从「上边线」
    * 换成不画（并列时画竖线反而乱），面板边框继续圈住整体。 */
-  .paper-browse-rail-panel {
+  .paper-browse-rail-panel,
+  .paper-browse-skeleton-rail-panel {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -1509,13 +1475,15 @@
 /* 手机屏幕只改变交互预览的折行与页边距；Print/PDF 继续使用共享
  * PaperSurface 的金样卷几何，不被这组页面级覆盖影响。 */
 @media screen and (max-width: 700px) {
-  .paper-browse-shell {
+  .paper-browse-shell,
+  .paper-browse-skeleton-shell {
     gap: 16px;
     padding: 12px 12px 80px;
   }
 
   /* Override inherited print margins below the content's inline tokens. */
-  .paper-browse-zoom {
+  .paper-browse-zoom,
+  .paper-browse-skeleton-sheet {
     --ps-page-margin-top: 32px;
     --ps-page-margin-x: 24px;
   }
@@ -1611,43 +1579,16 @@
    * 正好把动作接住。 */
 }
 
-.similar-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  /* quiet-chrome（2026-08-28）：摘白底描边盒，透明底 + hover 浮中性底；
-     字体不再硬编码 -apple-system，跟随全站 UI 字道（Inter 栈）。 */
-  font-family: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  line-height: 1;
-  border-radius: 8px;
-  padding: 9px 14px;
-  cursor: pointer;
-  border: 0;
-  background: transparent;
-  color: #1e1e1c;
-}
+/* `.similar-btn` / `.similar-btn--primary` 的样子删了（构件厂第 4 步，2026-11-13，提案 · 单一来源）：
+ * 「配相似 / 相似篇章」、相似栏的「重试 / 加入草稿卷」、相似篇章面板和草稿卷换篇栏的键都换成了
+ * Button（app/src/shared-ui/Button.tsx）：普通的用 strong sm（墨字、高 28），带底的用 primary sm
+ * （雾薄荷、高 28）。字 12/600 → 13/500（primary 13/600），高 30 / 34 → 28，左右内边距 14 → 8。
+ * `similar-btn` 这个类名还挂在 Button 上，只当选择器钩子，不再带样式。 */
 
-.similar-btn:hover {
-  background: #ededea;
-}
-
-.similar-btn--primary {
-  background: var(--eqb-color-accent-fill);
-  color: var(--eqb-color-accent-fill-ink);
-}
-
-.similar-btn--primary:hover {
-  background: var(--eqb-color-accent-fill-hover);
-}
-
-.similar-btn[disabled] {
-  opacity: 0.45;
-  cursor: default;
-}
-
-.similar-rail {
+/* .similar-rail-skeleton：读取中种子行和灰卡那一块（等待第六轮，SimilarQuestionsRailView），里面照栏的排法、一样的间距，
+ * 灰卡和真卡同位。 */
+.similar-rail,
+.similar-rail-skeleton {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -1663,35 +1604,35 @@
   flex: 1;
 }
 
-.similar-backlink {
-  font-size: 12px;
-  color: var(--ink);
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-  /* quiet-chrome: 「收起 ↑」的 ↑ 字形换 Lucide SVG，inline-flex 对齐。 */
+/* 相似栏「← 返回解析」、相似篇章面板「收起」、草稿卷换篇栏「返回目录」（三处共用这个类）：
+ * Owner 2026-11-14 决定 #1 换成 Button 淡墨小号（quiet sm）。原来的纯文字样子（12px、墨色、没有内边距）删了。
+ * 靠右的两处（相似栏、相似篇章面板）右边用负边距抵掉 sm 的右内边距，字或箭头的右边和改前一样贴齐这一行的右边；
+ * 草稿卷换篇栏不要这个右负边距（见 DraftPaperWorkbench.css .draft-swap-drawer 那条）；
+ * 上下各收 --eqb-space-1，抵掉一部分按钮（28）比原来纯文字（17）高出来的部分，标题行少长高一点。
+ * 「收起」后面的箭头在字的标签里：标签排成一行、居中对齐，间距是原来的 2px（--eqb-space-1 的一半）。 */
+.eqb-button.similar-backlink {
+  margin-block: calc(-1 * var(--eqb-space-1));
+  margin-right: calc(-1 * var(--eqb-space-2));
+}
+
+.eqb-button.similar-backlink > .eqb-button-label {
   display: inline-flex;
   align-items: center;
-  gap: 2px;
+  gap: calc(var(--eqb-space-1) / 2);
 }
 
 .similar-seed-line {
   font-size: 12px;
-  color: #6a6a64;
+  color: var(--desk-muted);
   margin: 0;
 }
 
 .similar-seed-line b {
-  color: #1e1e1c;
+  color: var(--desk-ink);
 }
 
-.similar-rail-error {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-}
+/* 相似题 / 相似篇章出错那一行（.similar-rail-error）构件收尾（2026-11-15）换成共用 Notice：
+ * 图标、一行字、行尾「重试」，排布全归 notice.css；原来竖排（字一行、键一行）的这条删了。类名留着给脚本认。 */
 
 .similar-rcard-list {
   --fh-radius: 8px;
@@ -1729,6 +1670,29 @@
   height: 15px;
 }
 
+/* 候选卡在等时的灰块（等待第六轮 2026-11-15，features/similar-passages/SimilarCardSkeletons.tsx）：卡、正文、小签用真卡的 class，
+ * 这里只管灰块怎么坐进去。
+ * 勾选框那一格：和真勾选框同位（上面那条的 margin-top 3、15 × 15，宽高由 Skeleton 给）。
+ * 覆盖：本条 (0,2,0) 盖过 waiting.css .eqb-skeleton (0,1,0) 的 margin（没写，默认 0），因为占的是勾选框的位置。 */
+.similar-rcard > .similar-rcard-skeleton-check {
+  margin-top: 3px;
+}
+
+/* 卡上一个小号键的位置：和小号键一样高（28，button.css .eqb-button[data-size='sm']）、一样的左右内衬，灰块放在键上字的位置。
+ * 键是淡底（墨字键），不画整块灰。 */
+.similar-rcard-skeleton-action {
+  display: flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 var(--eqb-space-2);
+}
+
+/* 卡片正在等的时候不是能点的东西：不出手指。
+ * 覆盖：本条 (0,2,0) 盖过上面 .similar-rcard (0,1,0) 的 cursor: pointer。 */
+.similar-rcard-skeletons > .similar-rcard {
+  cursor: default;
+}
+
 .similar-rcard input[type='checkbox'][disabled] {
   cursor: not-allowed;
 }
@@ -1740,12 +1704,12 @@
 .similar-rcard-title {
   font-weight: 600;
   font-size: 14px;
-  color: #1e1e1c;
+  color: var(--desk-ink);
 }
 
 .similar-rcard-source {
   font-size: 11.5px;
-  color: #6a6a64;
+  color: var(--desk-muted);
   margin: 1px 0 6px;
 }
 
@@ -1755,23 +1719,13 @@
   gap: 4px;
 }
 
-.similar-chip {
-  font-size: 12px;
-  border-radius: 999px;
-  padding: 2px 8px;
-  background: #ededea;
-  color: #6a6a64;
-}
-
-.similar-chip--hit {
-  background: var(--surface-strong);
-  color: #1e4a3a;
-  border: 1px solid #cfe4da;
-}
+/* 理由小签（「同话题：…」「同篇位 A」「真题」「含 N 题」）换成 shared-ui/Chip.tsx 的状态标记（胶囊构件，2026-11-14）：
+ * 桌色底、次要灰字、12px、无边。原来的墨绿字 #1e4a3a 和淡绿边 #cfe4da 去掉了（全站灰阶，标签不用点睛色，DESIGN.md §2）。
+ * 类名 similar-chip 还挂在 Chip 上，只当钩子。 */
 
 .similar-pool-note {
   font-size: 12px;
-  color: #6a6a64;
+  color: var(--desk-muted);
   text-align: center;
   padding: 6px 0 2px;
   margin: 0;
@@ -1787,30 +1741,12 @@
 
 .similar-count {
   font-size: 12.5px;
-  color: #6a6a64;
+  color: var(--desk-muted);
   flex: 1;
 }
 
-.similar-toast {
-  position: fixed;
-  left: 50%;
-  bottom: 26px;
-  transform: translateX(-50%) translateY(8px);
-  background: #1e1e1c;
-  color: #ffffff;
-  font-size: 12.5px;
-  border-radius: 8px;
-  padding: 9px 16px;
-  opacity: 0;
-  transition: opacity var(--motion-base) var(--ease-out), transform var(--motion-base) var(--ease-out);
-  pointer-events: none;
-  z-index: 32;
-}
-
-.similar-toast--on {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
+/* 「加入草稿卷」之后那一行（.similar-toast）2026-11-15 换成共用构件 shared-ui/Toast：样子、位置、入退场、层（32）
+   都在 toast.css。原来这里把它抬到 32 层的那条删了（Toast 的播报区本来就在 32 层）。 */
 
 @media (prefers-reduced-motion: reduce) {
   .paper-browse-reading-overview-toggle svg {
@@ -1821,11 +1757,7 @@
     transition: none;
   }
 
-  .similar-toast,
-  .similar-toast--on {
-    transform: translateX(-50%);
-    transition: opacity var(--motion-micro) var(--ease-hover);
-  }
+  /* .similar-toast 的减少动态效果由 toast.css 管（不做动画）。 */
 }
 
 /* ─── similar-passages-entry (E6) — shared「相似篇章」候选面板 ───
@@ -1835,8 +1767,8 @@
  * this file's own PaperBrowsePage). Kept in this stylesheet — not a new
  * per-component CSS file — because it's the single existing home for the
  * `.similar-*` token language (no new color literal introduced here; every
- * rule below reuses `.similar-rcard` / `.similar-chip` / `.similar-btn` /
- * `.similar-pool-note` / `.similar-backlink` / `.similar-toast` already
+ * rule below reuses `.similar-rcard` / `.similar-chip` / `.similar-btn`（现为 Button，见上）/
+ * `.similar-pool-note` / `.similar-backlink`（现为 Button，见上）/ `.similar-toast` already
  * defined above, plus `.paper-browse-lecture-title` /
  * `.paper-browse-lecture-empty`).
  */
@@ -1859,13 +1791,47 @@
 .similar-passages-sub {
   flex: 1;
   font-size: 12px;
-  color: #6a6a64;
+  color: var(--desk-muted);
 }
 
 .similar-rcard-actions {
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+/* Owner 2026-11-14 决定 #17：相似篇章面板卡片上的键从雾薄荷 primary 换成墨字 strong。
+ * 首页的面板挂在题组卡里，整个在 FluidHoverList 里面，但不在任何一行里（滑块不会停到它下面），
+ * button.css 那条「.fluid-hover-list .eqb-button…:hover 透明」(0,5,0) 会让 strong 键悬停时什么都不变；
+ * 改前 primary 不归那条管，悬停变深一档。这里让卡片上的键照列表外的普通键垫桌色，
+ * 和详情页、草稿卷换篇栏里同一个键一个样子（提案 · 单一来源）。
+ * 覆盖：本条 (0,7,0) 盖过那条透明 (0,5,0)，也盖过「嵌在被选中行里的键垫 border 色」(0,6,0)（面板眼下不在行里，碰不上）。
+ * 面板头上的「重试」不在 .similar-rcard-actions 里，不归本条管，另有一条（见下面第 20 条那条）。
+ * 2026-11-14 走查第四节第 6 条：能加的卡片上换成了共用加入键，键包在 .eqb-draft-add 里，第二个选择器管它；
+ * 加入后纸里的「撤回」（淡墨键）是第三个选择器。这两个都是 (0,8,0)，一样盖过上面两条。 */
+.fluid-hover-list .similar-passages-panel .similar-rcard-actions > .eqb-button[data-tone='strong']:hover:not(:disabled, [aria-disabled='true']),
+.fluid-hover-list .similar-passages-panel .similar-rcard-actions > .eqb-draft-add > .eqb-button[data-tone='strong']:hover:not(:disabled, [aria-disabled='true']),
+.fluid-hover-list .similar-passages-panel .similar-rcard-actions > .eqb-draft-add .eqb-button.eqb-draft-add-undo:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-desk);
+}
+
+/* Owner 2026-11-14 决定 #1：面板头上的「收起」换成淡墨小号以后，在首页（面板整个在 FluidHoverList 里、不在任何一行里）
+ * 也归 button.css「.fluid-hover-list .eqb-button…:hover 透明」(0,5,0) 管，悬停会什么都不垫（改后第一次量就是这样）。
+ * 照上一条的办法让它垫桌色，和详情页、草稿卷、相似栏里同一个键一个样子（提案 · 单一来源）。
+ * 覆盖：本条 (0,7,0) 盖过那条透明 (0,5,0)，也盖过「嵌在被选中行里的键垫 border 色」(0,6,0)（面板不在行里，碰不上）。
+ * 同一个面板里的「重试」见下一条。 */
+.fluid-hover-list .similar-passages-panel .similar-passages-head > .eqb-button.similar-backlink:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-desk);
+}
+
+/* Owner 2026-11-14 第 20 条：相似篇章面板出错时的「重试」（A1 README 第 5 节第 3 问说的那个键）悬停也垫桌色，
+ * 构件收尾（2026-11-15）这个键改由 Notice 的 action 画（类名 .eqb-notice-action，原来 .similar-btn），选择器跟着换，层级不变。
+ * 和上一条「收起」同一个办法。首页的面板整个在 FluidHoverList 里、不在任何一行里，
+ * 不加这条时归 button.css「.fluid-hover-list .eqb-button…:hover 透明」(0,5,0) 管，悬停什么都不变（改前实测）。
+ * 详情页、草稿卷换篇栏的面板不在滑动列表里，本来就垫桌色，这条碰不到它们。
+ * 覆盖：本条 (0,7,0) 盖过那条透明 (0,5,0)，也盖过「嵌在被选中行里的键垫 border 色」(0,6,0)（面板不在行里，碰不上）。 */
+.fluid-hover-list .similar-passages-panel .similar-rail-error > .eqb-button.eqb-notice-action:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-desk);
 }
 
 .paper-browse-listening {
@@ -1906,7 +1872,7 @@
 }
 
 .listening-analysis-topic {
-  color: var(--eqb-color-text-muted, #6a6a64);
+  color: var(--eqb-color-text-muted, #5A6C75);
   font-size: 12px;
 }
 
@@ -1923,7 +1889,7 @@
 }
 
 .listening-analysis-text h6 {
-  color: var(--eqb-color-text-muted, #6a6a64);
+  color: var(--eqb-color-text-muted, #5A6C75);
   font-size: 12px;
   font-weight: 600;
   line-height: 1.5;
@@ -2034,10 +2000,10 @@
   align-items: center;
   gap: 10px;
   padding: 8px 14px 8px 8px;
-  border: 1px solid var(--paper-border);
+  border: 1px solid transparent;
   border-radius: 12px;
   background: var(--paper-bg);
-  box-shadow: 0 1px 2px rgba(var(--paper-ink-strong-rgb), 0.06), 0 10px 28px rgba(var(--paper-ink-strong-rgb), 0.12);
+  box-shadow: var(--elev-3);
   color: var(--paper-ink-strong);
   white-space: nowrap;
   transition:
@@ -2303,12 +2269,53 @@
   .ps-text-trail { display: none; }
 }
 
-.paper-browse-error-back {
-  margin-top: 8px;
-  border: 1px solid var(--eqb-color-border);
+/* .paper-browse-error-back / .paper-browse-error-detail：整卷预览打不开那一块换成了共用提示行
+   （「返回找题」是行尾的键，原话接在「：」后面），这两条规则拿掉。 */
+
+/* ─── 首屏灰块（等待第四轮，2026-11-15，PaperBrowseOpeningSkeleton） ───
+ * 外框几何和真卷面共用上面的规则（.paper-browse-skeleton-shell / -rail / -rail-panel / -content / -sheet）；
+ * 这里只排面板和纸里面的灰块。原来那一行「正在打开整卷」（.paper-browse-loading）换掉了，规则一并删。 */
+
+/* 灰块的面板没有 .paper-browse-rail-panel 的分段，三段之间的间距由面板的 gap: 16px 给。 */
+.paper-browse-skeleton-rail-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.paper-browse-error-detail {
-  font-size: 12px;
-  overflow-wrap: anywhere;
+/* 段名一行（真目录「阅读」那一行，字 10px，和第一项中心相距 30px）。 */
+.paper-browse-skeleton-rail-label {
+  display: flex;
+  align-items: center;
+  height: 28px;
+}
+
+/* 一项一行 32 高（.paper-browse-rail-group）。 */
+.paper-browse-skeleton-rail-item {
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+
+/* 卷头：标题居中，注意事项几行；和下面的组之间的距离照真卷面（标题下空得多）。 */
+.paper-browse-skeleton-cover {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 32px;
+}
+
+/* 覆盖：.eqb-skeleton.paper-browse-skeleton-title (0,2,0) 盖过 waiting.css .eqb-skeleton (0,1,0) 的 display: block，
+ * 标题灰块居中、下面空出真标题到注意事项之间那段。 */
+.eqb-skeleton.paper-browse-skeleton-title {
+  align-self: center;
+  margin-bottom: 72px;
+}
+
+@media (max-width: 900px) {
+  /* 窄屏目录横排（同上面真目录 900px 那条），段内各项也横排。 */
+  .paper-browse-skeleton-rail-part {
+    flex-direction: row;
+    gap: 8px;
+  }
 }

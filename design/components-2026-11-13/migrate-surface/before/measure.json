@@ -1,0 +1,562 @@
+{
+ "draft-empty": {
+  ".concierge-paper-list": [],
+  ".home-row-list": [],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [
+   {
+    "tag": "nav",
+    "cls": "draft-paper-rail",
+    "rect": [
+     122,
+     114,
+     164,
+     107
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "0px none rgb(27, 43, 51)",
+    "radius": "12px",
+    "shadow": "none",
+    "padding": "14px 8px 12px 8px",
+    "overflow": "auto",
+    "labelledby": null,
+    "label": "卷面目录"
+   }
+  ],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "home": {
+  ".concierge-paper-list": [],
+  ".home-row-list": [],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "home-continue": {
+  ".concierge-paper-list": [],
+  ".home-row-list": [
+   {
+    "tag": "ul",
+    "cls": "fluid-hover-list home-row-list",
+    "rect": [
+     292,
+     249.5,
+     856,
+     48
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "0px none rgb(27, 43, 51)",
+    "radius": "12px",
+    "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+    "padding": "0px 0px 0px 0px",
+    "overflow": "hidden",
+    "labelledby": null,
+    "label": null
+   }
+  ],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "home-results": {
+  ".concierge-paper-list": [
+   {
+    "tag": "ul",
+    "cls": "fluid-hover-list concierge-paper-list",
+    "rect": [
+     292,
+     300,
+     856,
+     282.05
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "0px none rgb(27, 43, 51)",
+    "radius": "12px",
+    "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+    "padding": "0px 0px 0px 0px",
+    "overflow": "hidden",
+    "labelledby": null,
+    "label": null
+   }
+  ],
+  ".home-row-list": [],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [
+   {
+    "tag": "div",
+    "cls": "concierge-paper-row-head",
+    "rect": [
+     292,
+     300,
+     856,
+     58.67
+    ],
+    "bg": "rgb(230, 237, 240)",
+    "border": "0px none rgb(27, 43, 51)",
+    "radius": "0px",
+    "shadow": "none",
+    "padding": "10px 14px 10px 14px",
+    "overflow": "visible",
+    "labelledby": null,
+    "label": null
+   }
+  ],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "home-results-expanded": {
+  ".concierge-paper-list": [
+   {
+    "tag": "ul",
+    "cls": "fluid-hover-list concierge-paper-list",
+    "rect": [
+     292,
+     300,
+     856,
+     58.67
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "0px none rgb(27, 43, 51)",
+    "radius": "12px",
+    "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+    "padding": "0px 0px 0px 0px",
+    "overflow": "hidden",
+    "labelledby": null,
+    "label": null
+   }
+  ],
+  ".home-row-list": [],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "home-noresult": {
+  ".concierge-paper-list": [],
+  ".home-row-list": [
+   {
+    "tag": "ul",
+    "cls": "fluid-hover-list home-row-list",
+    "rect": [
+     292,
+     635.22,
+     856,
+     48
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "0px none rgb(27, 43, 51)",
+    "radius": "12px",
+    "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+    "padding": "0px 0px 0px 0px",
+    "overflow": "hidden",
+    "labelledby": null,
+    "label": null
+   }
+  ],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": [
+   {
+    "tag": "div",
+    "cls": "eqb-empty-state concierge-empty",
+    "rect": [
+     292,
+     470.22,
+     856,
+     117.5
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "1px solid rgb(220, 230, 235)",
+    "radius": "12px",
+    "shadow": "none",
+    "padding": "24px 24px 24px 24px",
+    "overflow": "visible",
+    "labelledby": null,
+    "label": null
+   }
+  ]
+ },
+ "browse": {
+  ".concierge-paper-list": [
+   {
+    "tag": "ul",
+    "cls": "fluid-hover-list concierge-paper-list",
+    "rect": [
+     292,
+     186,
+     856,
+     48
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "0px none rgb(27, 43, 51)",
+    "radius": "12px",
+    "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+    "padding": "0px 0px 0px 0px",
+    "overflow": "hidden",
+    "labelledby": null,
+    "label": null
+   }
+  ],
+  ".home-row-list": [],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "draft": {
+  ".concierge-paper-list": [],
+  ".home-row-list": [],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [
+   {
+    "tag": "nav",
+    "cls": "draft-paper-rail",
+    "rect": [
+     122,
+     72,
+     164,
+     171
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "0px none rgb(27, 43, 51)",
+    "radius": "12px",
+    "shadow": "none",
+    "padding": "14px 8px 12px 8px",
+    "overflow": "auto",
+    "labelledby": null,
+    "label": "卷面目录"
+   }
+  ],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "my-space": {
+  ".concierge-paper-list": [],
+  ".home-row-list": [],
+  ".my-space-file-list": [
+   {
+    "tag": "div",
+    "cls": "fluid-hover-list my-space-file-list",
+    "rect": [
+     350,
+     258.89,
+     960,
+     142
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "1px solid rgb(230, 237, 241)",
+    "radius": "12px",
+    "shadow": "none",
+    "padding": "0px 0px 0px 0px",
+    "overflow": "hidden",
+    "labelledby": null,
+    "label": "全部保存文件"
+   }
+  ],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "admin-token": {
+  ".concierge-paper-list": [],
+  ".home-row-list": [],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [
+   {
+    "tag": "div",
+    "cls": "agent-token-secret",
+    "rect": [
+     292,
+     363,
+     856,
+     142.5
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "1px solid rgb(220, 230, 235)",
+    "radius": "12px",
+    "shadow": "none",
+    "padding": "16px 16px 16px 16px",
+    "overflow": "visible",
+    "labelledby": null,
+    "label": null
+   }
+  ],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "draft-empty-390": {
+  ".concierge-paper-list": [],
+  ".home-row-list": [],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "home-390": {
+  ".concierge-paper-list": [],
+  ".home-row-list": [],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "home-continue-390": {
+  ".concierge-paper-list": [],
+  ".home-row-list": [
+   {
+    "tag": "ul",
+    "cls": "fluid-hover-list home-row-list",
+    "rect": [
+     24,
+     300,
+     342,
+     48
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "0px none rgb(27, 43, 51)",
+    "radius": "12px",
+    "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+    "padding": "0px 0px 0px 0px",
+    "overflow": "hidden",
+    "labelledby": null,
+    "label": null
+   }
+  ],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "home-results-390": {
+  ".concierge-paper-list": [
+   {
+    "tag": "ul",
+    "cls": "fluid-hover-list concierge-paper-list",
+    "rect": [
+     24,
+     350.5,
+     342,
+     313.05
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "0px none rgb(27, 43, 51)",
+    "radius": "12px",
+    "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+    "padding": "0px 0px 0px 0px",
+    "overflow": "hidden",
+    "labelledby": null,
+    "label": null
+   }
+  ],
+  ".home-row-list": [],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [
+   {
+    "tag": "div",
+    "cls": "concierge-paper-row-head",
+    "rect": [
+     24,
+     350.5,
+     342,
+     89.67
+    ],
+    "bg": "rgb(230, 237, 240)",
+    "border": "0px none rgb(27, 43, 51)",
+    "radius": "0px",
+    "shadow": "none",
+    "padding": "10px 14px 10px 14px",
+    "overflow": "visible",
+    "labelledby": null,
+    "label": null
+   }
+  ],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "home-results-expanded-390": {
+  ".concierge-paper-list": [
+   {
+    "tag": "ul",
+    "cls": "fluid-hover-list concierge-paper-list",
+    "rect": [
+     24,
+     350.5,
+     342,
+     102.67
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "0px none rgb(27, 43, 51)",
+    "radius": "12px",
+    "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+    "padding": "0px 0px 0px 0px",
+    "overflow": "hidden",
+    "labelledby": null,
+    "label": null
+   }
+  ],
+  ".home-row-list": [],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "home-noresult-390": {
+  ".concierge-paper-list": [],
+  ".home-row-list": [
+   {
+    "tag": "ul",
+    "cls": "fluid-hover-list home-row-list",
+    "rect": [
+     24,
+     685.72,
+     342,
+     48
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "0px none rgb(27, 43, 51)",
+    "radius": "12px",
+    "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+    "padding": "0px 0px 0px 0px",
+    "overflow": "hidden",
+    "labelledby": null,
+    "label": null
+   }
+  ],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": [
+   {
+    "tag": "div",
+    "cls": "eqb-empty-state concierge-empty",
+    "rect": [
+     24,
+     520.72,
+     342,
+     117.5
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "1px solid rgb(220, 230, 235)",
+    "radius": "12px",
+    "shadow": "none",
+    "padding": "24px 24px 24px 24px",
+    "overflow": "visible",
+    "labelledby": null,
+    "label": null
+   }
+  ]
+ },
+ "browse-390": {
+  ".concierge-paper-list": [
+   {
+    "tag": "ul",
+    "cls": "fluid-hover-list concierge-paper-list",
+    "rect": [
+     24,
+     288.5,
+     342,
+     48
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "0px none rgb(27, 43, 51)",
+    "radius": "12px",
+    "shadow": "rgb(220, 230, 235) 0px 0px 0px 1px",
+    "padding": "0px 0px 0px 0px",
+    "overflow": "hidden",
+    "labelledby": null,
+    "label": null
+   }
+  ],
+  ".home-row-list": [],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "draft-390": {
+  ".concierge-paper-list": [],
+  ".home-row-list": [],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "my-space-390": {
+  ".concierge-paper-list": [],
+  ".home-row-list": [],
+  ".my-space-file-list": [
+   {
+    "tag": "div",
+    "cls": "fluid-hover-list my-space-file-list",
+    "rect": [
+     16,
+     381.14,
+     358,
+     231.09
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "1px solid rgb(230, 237, 241)",
+    "radius": "12px",
+    "shadow": "none",
+    "padding": "0px 0px 0px 0px",
+    "overflow": "hidden",
+    "labelledby": null,
+    "label": "全部保存文件"
+   }
+  ],
+  ".agent-token-secret": [],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ },
+ "admin-token-390": {
+  ".concierge-paper-list": [],
+  ".home-row-list": [],
+  ".my-space-file-list": [],
+  ".agent-token-secret": [
+   {
+    "tag": "div",
+    "cls": "agent-token-secret",
+    "rect": [
+     32,
+     456,
+     326,
+     177
+    ],
+    "bg": "rgb(255, 255, 255)",
+    "border": "1px solid rgb(220, 230, 235)",
+    "radius": "12px",
+    "shadow": "none",
+    "padding": "16px 16px 16px 16px",
+    "overflow": "visible",
+    "labelledby": null,
+    "label": null
+   }
+  ],
+  ".draft-paper-rail": [],
+  ".concierge-paper-row.is-expanded .concierge-paper-row-head": [],
+  ".eqb-empty-state[data-art=\"not-found\"]": []
+ }
+}

@@ -1,0 +1,107 @@
+{
+ "status": "对比稿 · 提案 · 单一来源",
+ "draft": "修 · 眼下一格白改绿",
+ "why": "眼睛不动；每只眼睛正下方那一格脸斑白改成头的绿（BRAND.md 第 98 条③）",
+ "source": {
+  "svg": "design/brand-2026-10-13/logo/mint/mark-16.svg",
+  "png": "design/brand-2026-10-13/logo/mint/mark-16.png"
+ },
+ "pngSize": [
+  16,
+  16
+ ],
+ "svgSize": [
+  16,
+  16
+ ],
+ "changes": [
+  {
+   "x": 4,
+   "y": 8,
+   "old": "#F2FAF6",
+   "new": "#72BFA4"
+  },
+  {
+   "x": 11,
+   "y": 8,
+   "old": "#F2FAF6",
+   "new": "#72BFA4"
+  }
+ ],
+ "clearanceBefore": {
+  "eyes": [
+   {
+    "cells": 2,
+    "box": [
+     1,
+     2
+    ],
+    "at": [
+     4,
+     6
+    ],
+    "toNose": 1,
+    "toMuzzle": 0,
+    "muzzleSharesEdge": true,
+    "toOutline": 1,
+    "toWhisker": null
+   },
+   {
+    "cells": 2,
+    "box": [
+     1,
+     2
+    ],
+    "at": [
+     11,
+     6
+    ],
+    "toNose": 1,
+    "toMuzzle": 0,
+    "muzzleSharesEdge": true,
+    "toOutline": 1,
+    "toWhisker": null
+   }
+  ],
+  "muzzleCells": 36,
+  "whiskerDots": 0
+ },
+ "clearanceAfter": {
+  "eyes": [
+   {
+    "cells": 2,
+    "box": [
+     1,
+     2
+    ],
+    "at": [
+     4,
+     6
+    ],
+    "toNose": 1,
+    "toMuzzle": 0,
+    "muzzleSharesEdge": false,
+    "toOutline": 1,
+    "toWhisker": null
+   },
+   {
+    "cells": 2,
+    "box": [
+     1,
+     2
+    ],
+    "at": [
+     11,
+     6
+    ],
+    "toNose": 1,
+    "toMuzzle": 0,
+    "muzzleSharesEdge": false,
+    "toOutline": 1,
+    "toWhisker": null
+   }
+  ],
+  "muzzleCells": 34,
+  "whiskerDots": 0
+ }
+}

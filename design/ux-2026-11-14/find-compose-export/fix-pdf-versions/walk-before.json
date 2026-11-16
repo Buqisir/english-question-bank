@@ -1,0 +1,77 @@
+{
+  "mode": "before",
+  "steps": [
+    {
+      "what": "选纯答案版",
+      "text": [
+        "纯答案版不可用：选中的题组没有同版本已审源参考答案；不能以教师卷替代"
+      ]
+    },
+    {
+      "what": "选大字完整版",
+      "text": [
+        "生成分页预览没成功，可以再试一次。"
+      ]
+    }
+  ],
+  "editionsApi": {
+    "status": 404,
+    "body": {
+      "error": "Not found"
+    }
+  },
+  "options": [
+    {
+      "value": "largeComplete",
+      "text": "大字完整版",
+      "disabled": false
+    },
+    {
+      "value": "largeNoListening",
+      "text": "大字无听力版",
+      "disabled": false
+    },
+    {
+      "value": "economy8",
+      "text": "省纸版",
+      "disabled": false
+    },
+    {
+      "value": "answerOnly",
+      "text": "纯答案版",
+      "disabled": false
+    }
+  ],
+  "network": [
+    {
+      "url": "/api/draft-papers/draft-paper-14f62847-e1a7-4405-92b3-31adf9fea51b/pdf-editions",
+      "ms": 7,
+      "status": 404
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-14f62847-e1a7-4405-92b3-31adf9fea51b/pagination?edition=largeNoListeni",
+      "ms": 33041,
+      "status": 200
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-14f62847-e1a7-4405-92b3-31adf9fea51b/pagination?edition=answerOnly",
+      "ms": 104,
+      "status": 400
+    },
+    {
+      "url": "/api/draft-papers/draft-paper-14f62847-e1a7-4405-92b3-31adf9fea51b/pagination?edition=largeComplete",
+      "ms": 116,
+      "status": 400
+    }
+  ],
+  "errors": [
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "console: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "console: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "console: Failed to load resource: the server responded with a status of 400 (Bad Request)",
+    "console: Failed to load resource: the server responded with a status of 400 (Bad Request)",
+    "console: Failed to load resource: the server responded with a status of 400 (Bad Request)",
+    "console: 生成分页预览 Error: 大字完整版需要完整的两个听力题组\n    at fetchDraftPaperPagination (http://127.0.0.1:5349/src/services/draftPapers.ts:86:9)",
+    "console: Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  ]
+}

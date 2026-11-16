@@ -1,0 +1,2236 @@
+{
+ "generated": "node scripts/component-inventory/preview.mjs",
+ "contrast": [
+  {
+   "cell": "quiet|sm|text",
+   "color": "#3F525B",
+   "bg": "#F1F5F7",
+   "ratio": 7.45,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "quiet|sm|icon-text",
+   "color": "#3F525B",
+   "bg": "#F1F5F7",
+   "ratio": 7.45,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "quiet|sm|icon",
+   "color": "#3F525B",
+   "bg": "#F1F5F7",
+   "ratio": 7.45,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "quiet|md|text",
+   "color": "#3F525B",
+   "bg": "#F1F5F7",
+   "ratio": 7.45,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "quiet|md|icon-text",
+   "color": "#3F525B",
+   "bg": "#F1F5F7",
+   "ratio": 7.45,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "quiet|md|icon",
+   "color": "#3F525B",
+   "bg": "#F1F5F7",
+   "ratio": 7.45,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "quiet|lg|text",
+   "color": "#3F525B",
+   "bg": "#F1F5F7",
+   "ratio": 7.45,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "quiet|lg|icon-text",
+   "color": "#3F525B",
+   "bg": "#F1F5F7",
+   "ratio": 7.45,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "quiet|lg|icon",
+   "color": "#3F525B",
+   "bg": "#F1F5F7",
+   "ratio": 7.45,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "subtle|sm|text",
+   "color": "#5A6C75",
+   "bg": "#F1F5F7",
+   "ratio": 4.99,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "subtle|sm|icon-text",
+   "color": "#5A6C75",
+   "bg": "#F1F5F7",
+   "ratio": 4.99,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "subtle|sm|icon",
+   "color": "#5A6C75",
+   "bg": "#F1F5F7",
+   "ratio": 4.99,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "subtle|md|text",
+   "color": "#5A6C75",
+   "bg": "#F1F5F7",
+   "ratio": 4.99,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "subtle|md|icon-text",
+   "color": "#5A6C75",
+   "bg": "#F1F5F7",
+   "ratio": 4.99,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "subtle|md|icon",
+   "color": "#5A6C75",
+   "bg": "#F1F5F7",
+   "ratio": 4.99,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "subtle|lg|text",
+   "color": "#5A6C75",
+   "bg": "#F1F5F7",
+   "ratio": 4.99,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "subtle|lg|icon-text",
+   "color": "#5A6C75",
+   "bg": "#F1F5F7",
+   "ratio": 4.99,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "subtle|lg|icon",
+   "color": "#5A6C75",
+   "bg": "#F1F5F7",
+   "ratio": 4.99,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "strong|sm|text",
+   "color": "#1B2B33",
+   "bg": "#F1F5F7",
+   "ratio": 13.29,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "strong|sm|icon-text",
+   "color": "#1B2B33",
+   "bg": "#F1F5F7",
+   "ratio": 13.29,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "strong|sm|icon",
+   "color": "#1B2B33",
+   "bg": "#F1F5F7",
+   "ratio": 13.29,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "strong|md|text",
+   "color": "#1B2B33",
+   "bg": "#F1F5F7",
+   "ratio": 13.29,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "strong|md|icon-text",
+   "color": "#1B2B33",
+   "bg": "#F1F5F7",
+   "ratio": 13.29,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "strong|md|icon",
+   "color": "#1B2B33",
+   "bg": "#F1F5F7",
+   "ratio": 13.29,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "strong|lg|text",
+   "color": "#1B2B33",
+   "bg": "#F1F5F7",
+   "ratio": 13.29,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "strong|lg|icon-text",
+   "color": "#1B2B33",
+   "bg": "#F1F5F7",
+   "ratio": 13.29,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "strong|lg|icon",
+   "color": "#1B2B33",
+   "bg": "#F1F5F7",
+   "ratio": 13.29,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "primary|sm|text",
+   "color": "#191D18",
+   "bg": "#72BFA4",
+   "ratio": 7.89,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "primary|sm|icon-text",
+   "color": "#191D18",
+   "bg": "#72BFA4",
+   "ratio": 7.89,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "primary|sm|icon",
+   "color": "#191D18",
+   "bg": "#72BFA4",
+   "ratio": 7.89,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "primary|md|text",
+   "color": "#191D18",
+   "bg": "#72BFA4",
+   "ratio": 7.89,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "primary|md|icon-text",
+   "color": "#191D18",
+   "bg": "#72BFA4",
+   "ratio": 7.89,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "primary|md|icon",
+   "color": "#191D18",
+   "bg": "#72BFA4",
+   "ratio": 7.89,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "primary|lg|text",
+   "color": "#191D18",
+   "bg": "#72BFA4",
+   "ratio": 7.89,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "primary|lg|icon-text",
+   "color": "#191D18",
+   "bg": "#72BFA4",
+   "ratio": 7.89,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "primary|lg|icon",
+   "color": "#191D18",
+   "bg": "#72BFA4",
+   "ratio": 7.89,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "solid|sm|text",
+   "color": "#FFFFFF",
+   "bg": "#29424D",
+   "ratio": 10.6,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "solid|sm|icon-text",
+   "color": "#FFFFFF",
+   "bg": "#29424D",
+   "ratio": 10.6,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "solid|sm|icon",
+   "color": "#FFFFFF",
+   "bg": "#29424D",
+   "ratio": 10.6,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "solid|md|text",
+   "color": "#FFFFFF",
+   "bg": "#29424D",
+   "ratio": 10.6,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "solid|md|icon-text",
+   "color": "#FFFFFF",
+   "bg": "#29424D",
+   "ratio": 10.6,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "solid|md|icon",
+   "color": "#FFFFFF",
+   "bg": "#29424D",
+   "ratio": 10.6,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "solid|lg|text",
+   "color": "#FFFFFF",
+   "bg": "#29424D",
+   "ratio": 10.6,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "solid|lg|icon-text",
+   "color": "#FFFFFF",
+   "bg": "#29424D",
+   "ratio": 10.6,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "solid|lg|icon",
+   "color": "#FFFFFF",
+   "bg": "#29424D",
+   "ratio": 10.6,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "danger|sm|text",
+   "color": "#DC2626",
+   "bg": "#F1F5F7",
+   "ratio": 4.4,
+   "need": 4.5,
+   "pass": false
+  },
+  {
+   "cell": "danger|sm|icon-text",
+   "color": "#DC2626",
+   "bg": "#F1F5F7",
+   "ratio": 4.4,
+   "need": 4.5,
+   "pass": false
+  },
+  {
+   "cell": "danger|sm|icon",
+   "color": "#DC2626",
+   "bg": "#F1F5F7",
+   "ratio": 4.4,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "danger|md|text",
+   "color": "#DC2626",
+   "bg": "#F1F5F7",
+   "ratio": 4.4,
+   "need": 4.5,
+   "pass": false
+  },
+  {
+   "cell": "danger|md|icon-text",
+   "color": "#DC2626",
+   "bg": "#F1F5F7",
+   "ratio": 4.4,
+   "need": 4.5,
+   "pass": false
+  },
+  {
+   "cell": "danger|md|icon",
+   "color": "#DC2626",
+   "bg": "#F1F5F7",
+   "ratio": 4.4,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "danger|lg|text",
+   "color": "#DC2626",
+   "bg": "#F1F5F7",
+   "ratio": 4.4,
+   "need": 4.5,
+   "pass": false
+  },
+  {
+   "cell": "danger|lg|icon-text",
+   "color": "#DC2626",
+   "bg": "#F1F5F7",
+   "ratio": 4.4,
+   "need": 4.5,
+   "pass": false
+  },
+  {
+   "cell": "danger|lg|icon",
+   "color": "#DC2626",
+   "bg": "#F1F5F7",
+   "ratio": 4.4,
+   "need": 3,
+   "pass": true
+  },
+  {
+   "cell": "quiet|rest",
+   "color": "#3F525B",
+   "bg": "#F1F5F7",
+   "ratio": 7.45,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "quiet|hover",
+   "color": "#1B2B33",
+   "bg": "#E6EDF0",
+   "ratio": 12.32,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "quiet|focus",
+   "color": "#1B2B33",
+   "bg": "#F1F5F7",
+   "ratio": 13.29,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "quiet|active",
+   "color": "#1B2B33",
+   "bg": "#E6EDF0",
+   "ratio": 12.32,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "quiet|busy",
+   "color": "#3F525B",
+   "bg": "#F1F5F7",
+   "ratio": 7.45,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "subtle|rest",
+   "color": "#5A6C75",
+   "bg": "#F1F5F7",
+   "ratio": 4.99,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "subtle|hover",
+   "color": "#1B2B33",
+   "bg": "#E6EDF0",
+   "ratio": 12.32,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "subtle|focus",
+   "color": "#1B2B33",
+   "bg": "#F1F5F7",
+   "ratio": 13.29,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "subtle|active",
+   "color": "#1B2B33",
+   "bg": "#E6EDF0",
+   "ratio": 12.32,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "subtle|busy",
+   "color": "#5A6C75",
+   "bg": "#F1F5F7",
+   "ratio": 4.99,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "strong|rest",
+   "color": "#1B2B33",
+   "bg": "#F1F5F7",
+   "ratio": 13.29,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "strong|hover",
+   "color": "#1B2B33",
+   "bg": "#E6EDF0",
+   "ratio": 12.32,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "strong|focus",
+   "color": "#1B2B33",
+   "bg": "#F1F5F7",
+   "ratio": 13.29,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "strong|active",
+   "color": "#1B2B33",
+   "bg": "#E6EDF0",
+   "ratio": 12.32,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "strong|busy",
+   "color": "#1B2B33",
+   "bg": "#F1F5F7",
+   "ratio": 13.29,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "primary|rest",
+   "color": "#191D18",
+   "bg": "#72BFA4",
+   "ratio": 7.89,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "primary|hover",
+   "color": "#191D18",
+   "bg": "#63B497",
+   "ratio": 6.91,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "primary|focus",
+   "color": "#191D18",
+   "bg": "#72BFA4",
+   "ratio": 7.89,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "primary|active",
+   "color": "#191D18",
+   "bg": "#63B497",
+   "ratio": 6.91,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "primary|busy",
+   "color": "#191D18",
+   "bg": "#72BFA4",
+   "ratio": 7.89,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "solid|rest",
+   "color": "#FFFFFF",
+   "bg": "#29424D",
+   "ratio": 10.6,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "solid|hover",
+   "color": "#FFFFFF",
+   "bg": "#3A5561",
+   "ratio": 7.92,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "solid|focus",
+   "color": "#FFFFFF",
+   "bg": "#29424D",
+   "ratio": 10.6,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "solid|active",
+   "color": "#FFFFFF",
+   "bg": "#3A5561",
+   "ratio": 7.92,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "solid|busy",
+   "color": "#FFFFFF",
+   "bg": "#29424D",
+   "ratio": 10.6,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "danger|rest",
+   "color": "#DC2626",
+   "bg": "#F1F5F7",
+   "ratio": 4.4,
+   "need": 4.5,
+   "pass": false
+  },
+  {
+   "cell": "danger|hover",
+   "color": "#DC2626",
+   "bg": "#E6EDF0",
+   "ratio": 4.08,
+   "need": 4.5,
+   "pass": false
+  },
+  {
+   "cell": "danger|focus",
+   "color": "#DC2626",
+   "bg": "#F1F5F7",
+   "ratio": 4.4,
+   "need": 4.5,
+   "pass": false
+  },
+  {
+   "cell": "danger|active",
+   "color": "#DC2626",
+   "bg": "#E6EDF0",
+   "ratio": 4.08,
+   "need": 4.5,
+   "pass": false
+  },
+  {
+   "cell": "danger|busy",
+   "color": "#DC2626",
+   "bg": "#F1F5F7",
+   "ratio": 4.4,
+   "need": 4.5,
+   "pass": false
+  },
+  {
+   "cell": "menu-item:下载 DOCX",
+   "color": "#1B2B33",
+   "bg": "#E6EDF0",
+   "ratio": 12.32,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "menu-item:打印",
+   "color": "#1B2B33",
+   "bg": "#FFFFFF",
+   "ratio": 14.58,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "menu-item:复制一份",
+   "color": "#1B2B33",
+   "bg": "#FFFFFF",
+   "ratio": 14.58,
+   "need": 4.5,
+   "pass": true
+  },
+  {
+   "cell": "menu-item:改名（这里禁用）",
+   "color": "#1B2B33",
+   "bg": "#FFFFFF",
+   "ratio": 14.58,
+   "need": "（禁用项不要求）",
+   "pass": true
+  },
+  {
+   "cell": "menu-item:删除这份卷",
+   "color": "#DC2626",
+   "bg": "#FFFFFF",
+   "ratio": 4.83,
+   "need": 4.5,
+   "pass": true
+  }
+ ],
+ "target": [
+  {
+   "cell": "quiet|sm|text",
+   "w": 68,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "quiet|sm|icon-text",
+   "w": 90,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "quiet|sm|icon",
+   "w": 28,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "quiet|md|text",
+   "w": 76,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "quiet|md|icon-text",
+   "w": 98,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "quiet|md|icon",
+   "w": 32,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "quiet|lg|text",
+   "w": 76,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "quiet|lg|icon-text",
+   "w": 98,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "quiet|lg|icon",
+   "w": 36,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "subtle|sm|text",
+   "w": 42,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "subtle|sm|icon-text",
+   "w": 64,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "subtle|sm|icon",
+   "w": 28,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "subtle|md|text",
+   "w": 50,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "subtle|md|icon-text",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "subtle|md|icon",
+   "w": 32,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "subtle|lg|text",
+   "w": 50,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "subtle|lg|icon-text",
+   "w": 72,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "subtle|lg|icon",
+   "w": 36,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "strong|sm|text",
+   "w": 42,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "strong|sm|icon-text",
+   "w": 64,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "strong|sm|icon",
+   "w": 28,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "strong|md|text",
+   "w": 50,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "strong|md|icon-text",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "strong|md|icon",
+   "w": 32,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "strong|lg|text",
+   "w": 50,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "strong|lg|icon-text",
+   "w": 72,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "strong|lg|icon",
+   "w": 36,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "primary|sm|text",
+   "w": 42,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "primary|sm|icon-text",
+   "w": 64,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "primary|sm|icon",
+   "w": 28,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "primary|md|text",
+   "w": 50,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "primary|md|icon-text",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "primary|md|icon",
+   "w": 32,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "primary|lg|text",
+   "w": 50,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "primary|lg|icon-text",
+   "w": 72,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "primary|lg|icon",
+   "w": 36,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "solid|sm|text",
+   "w": 42,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "solid|sm|icon-text",
+   "w": 64,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "solid|sm|icon",
+   "w": 28,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "solid|md|text",
+   "w": 50,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "solid|md|icon-text",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "solid|md|icon",
+   "w": 32,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "solid|lg|text",
+   "w": 50,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "solid|lg|icon-text",
+   "w": 72,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "solid|lg|icon",
+   "w": 36,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "danger|sm|text",
+   "w": 81,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "danger|sm|icon-text",
+   "w": 103,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "danger|sm|icon",
+   "w": 28,
+   "h": 28,
+   "pass": true
+  },
+  {
+   "cell": "danger|md|text",
+   "w": 89,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "danger|md|icon-text",
+   "w": 111,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "danger|md|icon",
+   "w": 32,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "danger|lg|text",
+   "w": 89,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "danger|lg|icon-text",
+   "w": 111,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "danger|lg|icon",
+   "w": 36,
+   "h": 36,
+   "pass": true
+  },
+  {
+   "cell": "quiet|rest",
+   "w": 98,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "quiet|hover",
+   "w": 98,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "quiet|focus",
+   "w": 98,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "quiet|active",
+   "w": 95,
+   "h": 31,
+   "pass": true
+  },
+  {
+   "cell": "quiet|busy",
+   "w": 98,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "subtle|rest",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "subtle|hover",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "subtle|focus",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "subtle|active",
+   "w": 70,
+   "h": 31,
+   "pass": true
+  },
+  {
+   "cell": "subtle|busy",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "strong|rest",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "strong|hover",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "strong|focus",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "strong|active",
+   "w": 70,
+   "h": 31,
+   "pass": true
+  },
+  {
+   "cell": "strong|busy",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "primary|rest",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "primary|hover",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "primary|focus",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "primary|active",
+   "w": 70,
+   "h": 31,
+   "pass": true
+  },
+  {
+   "cell": "primary|busy",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "solid|rest",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "solid|hover",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "solid|focus",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "solid|active",
+   "w": 70,
+   "h": 31,
+   "pass": true
+  },
+  {
+   "cell": "solid|busy",
+   "w": 72,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "danger|rest",
+   "w": 111,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "danger|hover",
+   "w": 111,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "danger|focus",
+   "w": 111,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "danger|active",
+   "w": 108,
+   "h": 31,
+   "pass": true
+  },
+  {
+   "cell": "danger|busy",
+   "w": 111,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "menu-item:下载 DOCX",
+   "w": 144,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "menu-item:打印",
+   "w": 144,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "menu-item:复制一份",
+   "w": 144,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "menu-item:改名（这里禁用）",
+   "w": 144,
+   "h": 32,
+   "pass": true
+  },
+  {
+   "cell": "menu-item:删除这份卷",
+   "w": 144,
+   "h": 32,
+   "pass": true
+  }
+ ],
+ "names": [
+  {
+   "cell": "quiet|sm|text",
+   "name": "返回找题",
+   "pass": true
+  },
+  {
+   "cell": "quiet|sm|icon-text",
+   "name": "返回找题",
+   "pass": true
+  },
+  {
+   "cell": "quiet|sm|icon",
+   "name": "返回找题",
+   "pass": true
+  },
+  {
+   "cell": "quiet|md|text",
+   "name": "返回找题",
+   "pass": true
+  },
+  {
+   "cell": "quiet|md|icon-text",
+   "name": "返回找题",
+   "pass": true
+  },
+  {
+   "cell": "quiet|md|icon",
+   "name": "返回找题",
+   "pass": true
+  },
+  {
+   "cell": "quiet|lg|text",
+   "name": "返回找题",
+   "pass": true
+  },
+  {
+   "cell": "quiet|lg|icon-text",
+   "name": "返回找题",
+   "pass": true
+  },
+  {
+   "cell": "quiet|lg|icon",
+   "name": "返回找题",
+   "pass": true
+  },
+  {
+   "cell": "subtle|sm|text",
+   "name": "展开",
+   "pass": true
+  },
+  {
+   "cell": "subtle|sm|icon-text",
+   "name": "展开",
+   "pass": true
+  },
+  {
+   "cell": "subtle|sm|icon",
+   "name": "展开",
+   "pass": true
+  },
+  {
+   "cell": "subtle|md|text",
+   "name": "展开",
+   "pass": true
+  },
+  {
+   "cell": "subtle|md|icon-text",
+   "name": "展开",
+   "pass": true
+  },
+  {
+   "cell": "subtle|md|icon",
+   "name": "展开",
+   "pass": true
+  },
+  {
+   "cell": "subtle|lg|text",
+   "name": "展开",
+   "pass": true
+  },
+  {
+   "cell": "subtle|lg|icon-text",
+   "name": "展开",
+   "pass": true
+  },
+  {
+   "cell": "subtle|lg|icon",
+   "name": "展开",
+   "pass": true
+  },
+  {
+   "cell": "strong|sm|text",
+   "name": "换篇",
+   "pass": true
+  },
+  {
+   "cell": "strong|sm|icon-text",
+   "name": "换篇",
+   "pass": true
+  },
+  {
+   "cell": "strong|sm|icon",
+   "name": "换篇",
+   "pass": true
+  },
+  {
+   "cell": "strong|md|text",
+   "name": "换篇",
+   "pass": true
+  },
+  {
+   "cell": "strong|md|icon-text",
+   "name": "换篇",
+   "pass": true
+  },
+  {
+   "cell": "strong|md|icon",
+   "name": "换篇",
+   "pass": true
+  },
+  {
+   "cell": "strong|lg|text",
+   "name": "换篇",
+   "pass": true
+  },
+  {
+   "cell": "strong|lg|icon-text",
+   "name": "换篇",
+   "pass": true
+  },
+  {
+   "cell": "strong|lg|icon",
+   "name": "换篇",
+   "pass": true
+  },
+  {
+   "cell": "primary|sm|text",
+   "name": "导出",
+   "pass": true
+  },
+  {
+   "cell": "primary|sm|icon-text",
+   "name": "导出",
+   "pass": true
+  },
+  {
+   "cell": "primary|sm|icon",
+   "name": "导出",
+   "pass": true
+  },
+  {
+   "cell": "primary|md|text",
+   "name": "导出",
+   "pass": true
+  },
+  {
+   "cell": "primary|md|icon-text",
+   "name": "导出",
+   "pass": true
+  },
+  {
+   "cell": "primary|md|icon",
+   "name": "导出",
+   "pass": true
+  },
+  {
+   "cell": "primary|lg|text",
+   "name": "导出",
+   "pass": true
+  },
+  {
+   "cell": "primary|lg|icon-text",
+   "name": "导出",
+   "pass": true
+  },
+  {
+   "cell": "primary|lg|icon",
+   "name": "导出",
+   "pass": true
+  },
+  {
+   "cell": "solid|sm|text",
+   "name": "保存",
+   "pass": true
+  },
+  {
+   "cell": "solid|sm|icon-text",
+   "name": "保存",
+   "pass": true
+  },
+  {
+   "cell": "solid|sm|icon",
+   "name": "保存",
+   "pass": true
+  },
+  {
+   "cell": "solid|md|text",
+   "name": "保存",
+   "pass": true
+  },
+  {
+   "cell": "solid|md|icon-text",
+   "name": "保存",
+   "pass": true
+  },
+  {
+   "cell": "solid|md|icon",
+   "name": "保存",
+   "pass": true
+  },
+  {
+   "cell": "solid|lg|text",
+   "name": "保存",
+   "pass": true
+  },
+  {
+   "cell": "solid|lg|icon-text",
+   "name": "保存",
+   "pass": true
+  },
+  {
+   "cell": "solid|lg|icon",
+   "name": "保存",
+   "pass": true
+  },
+  {
+   "cell": "danger|sm|text",
+   "name": "删除这份卷",
+   "pass": true
+  },
+  {
+   "cell": "danger|sm|icon-text",
+   "name": "删除这份卷",
+   "pass": true
+  },
+  {
+   "cell": "danger|sm|icon",
+   "name": "删除这份卷",
+   "pass": true
+  },
+  {
+   "cell": "danger|md|text",
+   "name": "删除这份卷",
+   "pass": true
+  },
+  {
+   "cell": "danger|md|icon-text",
+   "name": "删除这份卷",
+   "pass": true
+  },
+  {
+   "cell": "danger|md|icon",
+   "name": "删除这份卷",
+   "pass": true
+  },
+  {
+   "cell": "danger|lg|text",
+   "name": "删除这份卷",
+   "pass": true
+  },
+  {
+   "cell": "danger|lg|icon-text",
+   "name": "删除这份卷",
+   "pass": true
+  },
+  {
+   "cell": "danger|lg|icon",
+   "name": "删除这份卷",
+   "pass": true
+  },
+  {
+   "cell": "quiet|rest",
+   "name": "返回找题",
+   "pass": true
+  },
+  {
+   "cell": "quiet|hover",
+   "name": "返回找题",
+   "pass": true
+  },
+  {
+   "cell": "quiet|focus",
+   "name": "返回找题",
+   "pass": true
+  },
+  {
+   "cell": "quiet|active",
+   "name": "返回找题",
+   "pass": true
+  },
+  {
+   "cell": "quiet|busy",
+   "name": "返回找题",
+   "pass": true
+  },
+  {
+   "cell": "subtle|rest",
+   "name": "展开",
+   "pass": true
+  },
+  {
+   "cell": "subtle|hover",
+   "name": "展开",
+   "pass": true
+  },
+  {
+   "cell": "subtle|focus",
+   "name": "展开",
+   "pass": true
+  },
+  {
+   "cell": "subtle|active",
+   "name": "展开",
+   "pass": true
+  },
+  {
+   "cell": "subtle|busy",
+   "name": "展开",
+   "pass": true
+  },
+  {
+   "cell": "strong|rest",
+   "name": "换篇",
+   "pass": true
+  },
+  {
+   "cell": "strong|hover",
+   "name": "换篇",
+   "pass": true
+  },
+  {
+   "cell": "strong|focus",
+   "name": "换篇",
+   "pass": true
+  },
+  {
+   "cell": "strong|active",
+   "name": "换篇",
+   "pass": true
+  },
+  {
+   "cell": "strong|busy",
+   "name": "换篇",
+   "pass": true
+  },
+  {
+   "cell": "primary|rest",
+   "name": "导出",
+   "pass": true
+  },
+  {
+   "cell": "primary|hover",
+   "name": "导出",
+   "pass": true
+  },
+  {
+   "cell": "primary|focus",
+   "name": "导出",
+   "pass": true
+  },
+  {
+   "cell": "primary|active",
+   "name": "导出",
+   "pass": true
+  },
+  {
+   "cell": "primary|busy",
+   "name": "导出",
+   "pass": true
+  },
+  {
+   "cell": "solid|rest",
+   "name": "保存",
+   "pass": true
+  },
+  {
+   "cell": "solid|hover",
+   "name": "保存",
+   "pass": true
+  },
+  {
+   "cell": "solid|focus",
+   "name": "保存",
+   "pass": true
+  },
+  {
+   "cell": "solid|active",
+   "name": "保存",
+   "pass": true
+  },
+  {
+   "cell": "solid|busy",
+   "name": "保存",
+   "pass": true
+  },
+  {
+   "cell": "danger|rest",
+   "name": "删除这份卷",
+   "pass": true
+  },
+  {
+   "cell": "danger|hover",
+   "name": "删除这份卷",
+   "pass": true
+  },
+  {
+   "cell": "danger|focus",
+   "name": "删除这份卷",
+   "pass": true
+  },
+  {
+   "cell": "danger|active",
+   "name": "删除这份卷",
+   "pass": true
+  },
+  {
+   "cell": "danger|busy",
+   "name": "删除这份卷",
+   "pass": true
+  }
+ ],
+ "focus": [
+  {
+   "cell": "quiet|focus",
+   "outline": "2px #29424D @2",
+   "ringContrast": 9.67,
+   "pass": true
+  },
+  {
+   "cell": "subtle|focus",
+   "outline": "2px #29424D @2",
+   "ringContrast": 9.67,
+   "pass": true
+  },
+  {
+   "cell": "strong|focus",
+   "outline": "2px #29424D @2",
+   "ringContrast": 9.67,
+   "pass": true
+  },
+  {
+   "cell": "primary|focus",
+   "outline": "2px #29424D @2",
+   "ringContrast": 9.67,
+   "pass": true
+  },
+  {
+   "cell": "solid|focus",
+   "outline": "2px #29424D @2",
+   "ringContrast": 9.67,
+   "pass": true
+  },
+  {
+   "cell": "danger|focus",
+   "outline": "2px #29424D @2",
+   "ringContrast": 9.67,
+   "pass": true
+  },
+  {
+   "cell": "menu-item",
+   "outline": "2px #29424D @-2",
+   "ringContrast": 8.95,
+   "pass": true
+  }
+ ],
+ "axe": [
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "help": "Elements must meet minimum color contrast ratio thresholds",
+   "nodes": [
+    "td[data-cell=\"danger|sm|text\"] > .eqb-button[data-tone=\"danger\"][data-size=\"sm\"] > .eqb-button-label",
+    "td[data-cell=\"danger|sm|icon-text\"] > .eqb-button[data-tone=\"danger\"][data-size=\"sm\"] > .eqb-button-label",
+    "td[data-cell=\"danger|md|text\"] > .eqb-button[data-tone=\"danger\"][data-size=\"md\"] > .eqb-button-label",
+    "td[data-cell=\"danger|md|icon-text\"] > .eqb-button[data-tone=\"danger\"][data-size=\"md\"] > .eqb-button-label",
+    "td[data-cell=\"danger|lg|text\"] > .eqb-button[data-tone=\"danger\"][data-size=\"lg\"] > .eqb-button-label",
+    "td[data-cell=\"danger|lg|icon-text\"] > .eqb-button[data-tone=\"danger\"][data-size=\"lg\"] > .eqb-button-label",
+    "td[data-state-cell=\"danger|rest\"] > .eqb-button[data-tone=\"danger\"][data-size=\"md\"] > .eqb-button-label",
+    "td[data-state-cell=\"danger|hover\"] > .eqb-button[data-tone=\"danger\"][data-size=\"md\"] > .eqb-button-label",
+    "td[data-state-cell=\"danger|focus\"] > .eqb-button[data-tone=\"danger\"][data-size=\"md\"] > .eqb-button-label",
+    "td[data-state-cell=\"danger|active\"] > .eqb-button[data-tone=\"danger\"][data-size=\"md\"] > .eqb-button-label",
+    ".eqb-menu-item[role=\"menuitem\"][data-tone=\"danger\"] > .eqb-menu-item-label"
+   ]
+  },
+  {
+   "id": "region",
+   "impact": "moderate",
+   "help": "All page content should be contained by landmarks",
+   "nodes": [
+    "#_r_0_"
+   ]
+  }
+ ],
+ "behavior": [
+  {
+   "name": "回车打开菜单，焦点落到第一项",
+   "pass": true,
+   "detail": "下载 DOCX"
+  },
+  {
+   "name": "打开时触发键 aria-expanded=true、aria-controls 指向菜单",
+   "pass": true,
+   "detail": "true _r_0_ _r_0_"
+  },
+  {
+   "name": "↓ 跳过禁用的「改名」，到「删除这份卷」",
+   "pass": true,
+   "detail": "删除这份卷"
+  },
+  {
+   "name": "最后一项再 ↓ 回到第一项",
+   "pass": true,
+   "detail": "下载 DOCX"
+  },
+  {
+   "name": "End 到最后一项",
+   "pass": true,
+   "detail": "删除这份卷"
+  },
+  {
+   "name": "Home 到第一项",
+   "pass": true,
+   "detail": "下载 DOCX"
+  },
+  {
+   "name": "第一项再 ↑ 到最后一项",
+   "pass": true,
+   "detail": "删除这份卷"
+  },
+  {
+   "name": "Esc 关菜单，焦点回触发键",
+   "pass": true,
+   "detail": "更多操作"
+  },
+  {
+   "name": "关上后 aria-expanded=false",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "Tab 关菜单，焦点回触发键",
+   "pass": true,
+   "detail": "更多操作"
+  },
+  {
+   "name": "点外面关菜单，焦点不抢回触发键",
+   "pass": true,
+   "detail": "第一批构件样张：按钮、菜单（提案 · 单一来源）\n按钮：语气 × 大小 × 图标\n语气\t小 sm · 28\n只有字\t小 sm · 28\n图标 + 字\t小 sm · 28\n只有图标\t中 md · 32\n只有字\t中 md · 32\n图标 + 字\t中 md · 32\n只有图标\t大 lg · 36\n只有字\t大 lg · 36\n图标 + 字\t大 lg · 36\n只有图标\n淡墨 quiet\t\n返回找题\n\t\n返回找题\n\t\n\t\n返回找题\n\t\n返回找题\n\t\n\t\n返回找题\n\t\n返回找题\n\t\n\n次要灰 subtle\t\n展开\n\t\n展开\n\t\n\t\n展开\n\t\n展开\n\t\n\t\n展开\n\t\n展开\n\t\n\n墨 strong\t\n换篇\n\t\n换篇\n\t\n\t\n换篇\n\t\n换篇\n\t\n\t\n换篇\n\t\n换篇\n\t\n\n雾薄荷 primary\t\n导出\n\t\n导出\n\t\n\t\n导出\n\t\n导出\n\t\n\t\n导出\n\t\n导出\n\t\n\n石板墨 solid\t\n保存\n\t\n保存\n\t\n\t\n保存\n\t\n保存\n\t\n\t\n保存\n\t\n保存\n\t\n\n危险 danger\t\n删除这份卷\n\t\n删除这份卷\n\t\n\t\n删除这份卷\n\t\n删除这份卷\n\t\n\t\n删除这份卷\n\t\n删除这份卷\n\t\n按钮：状态（中号，图标 + 字）\n语气\t静止\t悬停\t键盘焦点\t按下\t禁用\t忙\n淡墨 quiet\t\n返回找题\n\t\n返回找题\n\t\n返回找题\n\t\n返回找题\n\t\n返回找题\n\t\n返回找题\n\n次要灰 subtle\t\n展开\n\t\n展开\n\t\n展开\n\t\n展开\n\t\n展开\n\t\n展开\n\n墨 strong\t\n换篇\n\t\n换篇\n\t\n换篇\n\t\n换篇\n\t\n换篇\n\t\n换篇\n\n雾薄荷 primary\t\n导出\n\t\n导出\n\t\n导出\n\t\n导出\n\t\n导出\n\t\n导出\n\n石板墨 solid\t\n保存\n\t\n保存\n\t\n保存\n\t\n保存\n\t\n保存\n\t\n保存\n\n危险 danger\t\n删除这份卷\n\t\n删除这份卷\n\t\n删除这份卷\n\t\n删除这份卷\n\t\n删除这份卷\n\t\n删除这份卷\n放在会滑的悬停列表里（像顶栏）：底由列表画，按钮不再垫一层\n返回找题\n草稿卷\n退出\n菜单\n导出"
+  },
+  {
+   "name": "外面滚动关菜单",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "开第二个菜单时第一个自动关上（一次只开一个）",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "align=start：面板左边和触发键左边对齐",
+   "pass": true,
+   "detail": "84 vs 84"
+  },
+  {
+   "name": "点禁用项：不触发，菜单不关",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "回车选中一项：触发、关菜单、焦点回触发键",
+   "pass": true,
+   "detail": "docx"
+  },
+  {
+   "name": "忙的时候点不动（aria-busy、aria-disabled）",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "贴右下角：面板翻到上面、不出屏（1440 宽）",
+   "pass": true,
+   "detail": "above {\"x\":1278,\"y\":781,\"width\":152,\"height\":177}"
+  },
+  {
+   "name": "页面没有报错",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "窄屏 390：面板不出屏",
+   "pass": true,
+   "detail": "{\"x\":228,\"y\":541,\"width\":152,\"height\":177}"
+  },
+  {
+   "name": "窄屏菜单项高 ≥ 24、字不截断",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "减少动态效果：菜单不做入场动画，按下不缩",
+   "pass": true,
+   "detail": "none none"
+  },
+  {
+   "name": "按钮和菜单项的字标签框高 ≥ 字号 × 1.2（不裁中文字形）",
+   "pass": true,
+   "detail": "81 个，最矮 1.38；不够的 []"
+  },
+  {
+   "name": "会滑的列表里：按钮的字画在列表高亮上面，没被盖住",
+   "pass": true,
+   "detail": "字框里深色像素 467 个"
+  },
+  {
+   "name": "会滑的列表里：悬停底由列表画（列表高亮可见），按钮自己不垫底、字提到墨色",
+   "pass": true,
+   "detail": "{\"opacity\":\"1\",\"bg\":\"rgb(230, 237, 240)\",\"w\":\"77px\"} rgba(0, 0, 0, 0) #1B2B33"
+  }
+ ],
+ "states": [
+  {
+   "cell": "quiet|rest",
+   "bg": "transparent",
+   "color": "#3F525B",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "quiet|hover",
+   "bg": "#E6EDF0",
+   "color": "#1B2B33",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "quiet|focus",
+   "bg": "transparent",
+   "color": "#1B2B33",
+   "outline": "2px #29424D @2",
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "quiet|active",
+   "bg": "#E6EDF0",
+   "color": "#1B2B33",
+   "outline": null,
+   "opacity": "1",
+   "transform": "matrix(0.97, 0, 0, 0.97, 0, 0)",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "quiet|disabled",
+   "bg": "transparent",
+   "color": "#3F525B",
+   "outline": null,
+   "opacity": "0.55",
+   "transform": "none",
+   "cursor": "not-allowed"
+  },
+  {
+   "cell": "quiet|busy",
+   "bg": "transparent",
+   "color": "#3F525B",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "progress"
+  },
+  {
+   "cell": "subtle|rest",
+   "bg": "transparent",
+   "color": "#5A6C75",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "subtle|hover",
+   "bg": "#E6EDF0",
+   "color": "#1B2B33",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "subtle|focus",
+   "bg": "transparent",
+   "color": "#1B2B33",
+   "outline": "2px #29424D @2",
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "subtle|active",
+   "bg": "#E6EDF0",
+   "color": "#1B2B33",
+   "outline": null,
+   "opacity": "1",
+   "transform": "matrix(0.97, 0, 0, 0.97, 0, 0)",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "subtle|disabled",
+   "bg": "transparent",
+   "color": "#5A6C75",
+   "outline": null,
+   "opacity": "0.55",
+   "transform": "none",
+   "cursor": "not-allowed"
+  },
+  {
+   "cell": "subtle|busy",
+   "bg": "transparent",
+   "color": "#5A6C75",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "progress"
+  },
+  {
+   "cell": "strong|rest",
+   "bg": "transparent",
+   "color": "#1B2B33",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "strong|hover",
+   "bg": "#E6EDF0",
+   "color": "#1B2B33",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "strong|focus",
+   "bg": "transparent",
+   "color": "#1B2B33",
+   "outline": "2px #29424D @2",
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "strong|active",
+   "bg": "#E6EDF0",
+   "color": "#1B2B33",
+   "outline": null,
+   "opacity": "1",
+   "transform": "matrix(0.97, 0, 0, 0.97, 0, 0)",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "strong|disabled",
+   "bg": "transparent",
+   "color": "#1B2B33",
+   "outline": null,
+   "opacity": "0.55",
+   "transform": "none",
+   "cursor": "not-allowed"
+  },
+  {
+   "cell": "strong|busy",
+   "bg": "transparent",
+   "color": "#1B2B33",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "progress"
+  },
+  {
+   "cell": "primary|rest",
+   "bg": "#72BFA4",
+   "color": "#191D18",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "primary|hover",
+   "bg": "#63B497",
+   "color": "#191D18",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "primary|focus",
+   "bg": "#72BFA4",
+   "color": "#191D18",
+   "outline": "2px #29424D @2",
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "primary|active",
+   "bg": "#63B497",
+   "color": "#191D18",
+   "outline": null,
+   "opacity": "1",
+   "transform": "matrix(0.97, 0, 0, 0.97, 0, 0)",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "primary|disabled",
+   "bg": "#E6EDF0",
+   "color": "#5A6C75",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "not-allowed"
+  },
+  {
+   "cell": "primary|busy",
+   "bg": "#72BFA4",
+   "color": "#191D18",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "progress"
+  },
+  {
+   "cell": "solid|rest",
+   "bg": "#29424D",
+   "color": "#FFFFFF",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "solid|hover",
+   "bg": "#3A5561",
+   "color": "#FFFFFF",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "solid|focus",
+   "bg": "#29424D",
+   "color": "#FFFFFF",
+   "outline": "2px #29424D @2",
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "solid|active",
+   "bg": "#3A5561",
+   "color": "#FFFFFF",
+   "outline": null,
+   "opacity": "1",
+   "transform": "matrix(0.97, 0, 0, 0.97, 0, 0)",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "solid|disabled",
+   "bg": "#E6EDF0",
+   "color": "#5A6C75",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "not-allowed"
+  },
+  {
+   "cell": "solid|busy",
+   "bg": "#29424D",
+   "color": "#FFFFFF",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "progress"
+  },
+  {
+   "cell": "danger|rest",
+   "bg": "transparent",
+   "color": "#DC2626",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "danger|hover",
+   "bg": "#E6EDF0",
+   "color": "#DC2626",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "danger|focus",
+   "bg": "transparent",
+   "color": "#DC2626",
+   "outline": "2px #29424D @2",
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "danger|active",
+   "bg": "#E6EDF0",
+   "color": "#DC2626",
+   "outline": null,
+   "opacity": "1",
+   "transform": "matrix(0.97, 0, 0, 0.97, 0, 0)",
+   "cursor": "pointer"
+  },
+  {
+   "cell": "danger|disabled",
+   "bg": "transparent",
+   "color": "#DC2626",
+   "outline": null,
+   "opacity": "0.55",
+   "transform": "none",
+   "cursor": "not-allowed"
+  },
+  {
+   "cell": "danger|busy",
+   "bg": "transparent",
+   "color": "#DC2626",
+   "outline": null,
+   "opacity": "1",
+   "transform": "none",
+   "cursor": "progress"
+  }
+ ],
+ "fluid": {
+  "buttons": [
+   {
+    "text": "返回找题",
+    "bg": "transparent",
+    "color": "#3F525B"
+   },
+   {
+    "text": "草稿卷",
+    "bg": "transparent",
+    "color": "#1B2B33"
+   },
+   {
+    "text": "退出",
+    "bg": "transparent",
+    "color": "#3F525B"
+   }
+  ],
+  "highlight": {
+   "opacity": "1",
+   "bg": "#E6EDF0",
+   "w": "77px"
+  }
+ },
+ "summary": {
+  "contrastFail": 11,
+  "targetFail": 0,
+  "nameFail": 0,
+  "focusFail": 0,
+  "axe": [
+   "color-contrast×11",
+   "region×1"
+  ],
+  "behaviorFail": [],
+  "behaviorTotal": 25
+ }
+}

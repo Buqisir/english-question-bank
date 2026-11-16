@@ -4,7 +4,6 @@ import {
 } from './icons'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import './App.css'
-import { questionGroups as sampleQuestionGroups } from './data/sampleQuestionGroups'
 import {
   type QuestionGroupCard,
   type QuestionGroupDetail,
@@ -29,7 +28,7 @@ import {
   backfillTopicLabels,
   type BackfillTopicLabelsResult,
 } from './services/questionGroups'
-import { PaperBrowsePage } from './features/paper-browse/PaperBrowsePage'
+import { PaperBrowsePage, type AddGroupsOutcome } from './features/paper-browse/PaperBrowsePage'
 import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
 import { MySpacePage } from './features/my-space/MySpacePage'
 import { AdminWorkbench } from './features/admin/AdminWorkbench'
@@ -38,7 +37,12 @@ import { VocabularyPracticePage } from './features/vocabulary-practice/Vocabular
 import { VocabularyDictationWorkbench } from './features/vocabulary-dictation-workbench/VocabularyDictationWorkbench'
 import { VocabularyNotebookPage } from './features/vocabulary-notebook/VocabularyNotebookPage.tsx'
 import { AppTopbar, type AppTopbarNav } from './components/AppTopbar'
-import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest } from './services/draftPapers'
+import { addGroupToCurrentDraftPaper as addGroupToCurrentDraftPaperRequest, deleteDraftPaperItem, fetchCurrentDraftPaper } from './services/draftPapers'
+import { Button } from './shared-ui/Button.tsx'
+import { Dialog } from './shared-ui/Dialog.tsx'
+import { Notice } from './shared-ui/Notice.tsx'
+import { programmaticFocusTarget } from './shared-ui/focusAfterRemoval.ts'
+import { DraftAddContext, type DraftAddActions, type DraftAddReceipt } from './shared-ui/draftAddContext.ts'
 import { useCurrentUser, useIsOwnerView } from './auth/AuthGate.tsx'
 import { logout } from './auth/session.ts'
 import { EntryModal } from './workbench/EntryModal'
@@ -74,6 +78,27 @@ const DEFAULT_AI_MODEL = DEEPSEEK_MODELS[0].value
 // literal would put a `{` before the callback body and break
 // verify-paper-browse.mjs's `[^{]*\{` body-extraction regex.
 type OpenPaperBrowseOptions = { questionId?: string | null; lecture?: boolean; similar?: boolean }
+
+// 草稿卷工作台的地址：`?view=draft-paper[&draftPaperId=<id>][&focusGroupId=<gid>]`，其余参数照当前地址留着。
+// openDraftPaperWorkbench 往历史里压的就是它；加入键「已加入」链接的 href 也用它（中键开新标签、复制地址都能到同一处）。
+function draftPaperWorkbenchHref(draftPaperId?: string | null, focusGroupId?: string | null): string {
+  const url = new URL(window.location.href)
+  url.searchParams.set('view', 'draft-paper')
+  // C3b — clear groupId when navigating away from the detail view so it
+  // doesn't linger as an orphan param on an unrelated route.
+  url.searchParams.delete('groupId')
+  if (draftPaperId) {
+    url.searchParams.set('draftPaperId', draftPaperId)
+  } else {
+    url.searchParams.delete('draftPaperId')
+  }
+  if (focusGroupId) {
+    url.searchParams.set('focusGroupId', focusGroupId)
+  } else {
+    url.searchParams.delete('focusGroupId')
+  }
+  return `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`
+}
 
 function App() {
   const currentUser = useCurrentUser()
@@ -170,7 +195,12 @@ function App() {
     }
   })
   const [questionGroups, setQuestionGroups] = useState<QuestionGroupCard[]>([])
-  const [dataStatus, setDataStatus] = useState<'loading' | 'sqlite' | 'sample'>('loading')
+  // 走查第四节第 7 条（Owner 2026-11-14）：题库没拿到时不再悄悄换成仓库里的样例题（原来退到
+  // data/sampleQuestionGroups，首页看着像有题，草稿丸却变成 0 组），改成 'error' + 原话，首页说「题库没连上」给「重试」。
+  const [dataStatus, setDataStatus] = useState<'loading' | 'sqlite' | 'error'>('loading')
+  const [dataError, setDataError] = useState<string | null>(null)
+  // 题库没拿到时草稿丸的数：单独问一次当前草稿卷（不新建）拿真数；问不到就是不知道（不写 0）。
+  const [draftFallback, setDraftFallback] = useState<{ id: string; count: number } | null>(null)
   // Edit-status orchestration is forwarded into usePaperDraft via a ref so the
   // hook can be created BEFORE paperExports / saveStatus / previewStatus
   // setters exist in this scope. The ref is wired up below as soon as the
@@ -231,14 +261,26 @@ function App() {
       if (ignore?.()) return
       setQuestionGroups(groups)
       setDataStatus('sqlite')
-    } catch {
+      setDataError(null)
+    } catch (error) {
       if (ignore?.()) return
-      // Offline fallback only: keep any real data already loaded; show repo
-      // samples only when we have nothing at all to render.
-      setQuestionGroups((current) => (current.length ? current : sampleQuestionGroups))
-      setDataStatus((status) => (status === 'sqlite' ? status : 'sample'))
+      // 已经拿到过真题就留着（状态仍是 sqlite，草稿丸照旧按真题算）；一次都没拿到才算没连上。
+      setDataStatus((status) => (status === 'sqlite' ? status : 'error'))
+      setDataError(error instanceof Error ? error.message : String(error))
+      try {
+        const draft = await fetchCurrentDraftPaper(false)
+        if (ignore?.()) return
+        setDraftFallback({ id: draft.id, count: draft.items.length })
+      } catch (draftError) {
+        // 草稿卷也问不到：草稿丸留着上一次知道的数（没有就不写数）。
+        console.error('读取当前草稿卷', draftError)
+      }
     }
   }, [])
+  const retryQuestionGroups = useCallback(() => {
+    setDataStatus((status) => (status === 'error' ? 'loading' : status))
+    void refreshQuestionGroups()
+  }, [refreshQuestionGroups])
   // Paper export flow hook — manages the supported Print HTML/PDF state and actions.
   const paperExports = usePaperExports({
     basket,
@@ -281,26 +323,24 @@ function App() {
   // to be one of the affected groups. This is the only surface the
   // add-to-draft optimistic-feedback cut is allowed to touch — no other
   // QuestionGroupCard field is ever patched this way.
-  function patchDraftButtonState(patchesByGroupId: Map<string, Pick<QuestionGroupCard, 'draftPaperButtonState' | 'currentDraftPaperId'>>) {
+  function patchDraftButtonState(patchesByGroupId: Map<string, Pick<QuestionGroupCard, 'draftPaperButtonState' | 'currentDraftPaperId'> & Partial<Pick<QuestionGroupCard, 'canAddToDraftPaper'>>>) {
     setQuestionGroups((groups) =>
       groups.map((group) => (patchesByGroupId.has(group.id) ? { ...group, ...patchesByGroupId.get(group.id) } : group)),
     )
     setSelectedDetail((detail) => (detail && patchesByGroupId.has(detail.id) ? { ...detail, ...patchesByGroupId.get(detail.id) } : detail))
   }
 
-  async function addGroupsToBasket(groups: QuestionGroupCard[]) {
+  // 加入结果交回调用处，由它用共用提示行说（不再弹浏览器警告框，走查「路上的构件」第 1 名）。
+  async function addGroupsToBasket(groups: QuestionGroupCard[]): Promise<AddGroupsOutcome> {
     const addableGroups = groups.filter((group) => group.draftPaperButtonState === 'add' && group.canAddToDraftPaper)
     if (addableGroups.length === 0) {
       const existing = groups.find((group) => group.draftPaperButtonState === 'in_current_draft')
       if (existing) {
         openDraftPaperWorkbench(existing.currentDraftPaperId, existing.id)
-        return
+        return { kind: 'opened' }
       }
       const blocked = groups.find((group) => group.printUnavailableReason)
-      if (blocked) {
-        window.alert(blocked.printUnavailableReason || '该题组暂不可加入草稿卷。')
-      }
-      return
+      return blocked?.printUnavailableReason ? { kind: 'blocked', reason: blocked.printUnavailableReason } : { kind: 'none' }
     }
 
     // Optimistic feedback (docs/cuts/add-to-draft-feel/plan.md): flip each
@@ -345,23 +385,56 @@ function App() {
       }
     }
     if (confirmedPatches.size) patchDraftButtonState(confirmedPatches)
-    if (rollbackPatches.size) {
-      patchDraftButtonState(rollbackPatches)
-      window.alert(firstError instanceof Error ? firstError.message : String(firstError))
-    }
+    if (rollbackPatches.size) patchDraftButtonState(rollbackPatches)
 
     // Background reconciliation only (fire-and-forget) — must not block the
     // button feedback applied above.
     void refreshQuestionGroups()
+    if (rollbackPatches.size) {
+      return {
+        kind: 'failed',
+        addedIds: [...confirmedPatches.keys()],
+        failedIds: [...rollbackPatches.keys()],
+        message: firstError instanceof Error ? firstError.message : String(firstError),
+      }
+    }
+    return { kind: 'added', addedIds: [...confirmedPatches.keys()] }
   }
 
-  function addToBasket(group: QuestionGroupCard) {
-    if (group.draftPaperButtonState === 'in_current_draft') {
-      openDraftPaperWorkbench(group.currentDraftPaperId, group.id)
-      return
-    }
-    void addGroupsToBasket([group])
+  // 加入键（shared-ui/DraftAddButton）用的加入和撤回，走查第四节第 6 条。
+  // 和上面 addGroupsToBasket 不同：不先乐观翻状态，键先进 busy（所以点），服务器确认后才算加入，
+  // 这样「已加入」和草稿丸的组数都是真的；失败不弹浏览器警告框，抛给加入键，由它说一句没成功（原始报错进 console）。
+  async function addGroupToDraft(groupId: string): Promise<DraftAddReceipt> {
+    const draftPaper = await addGroupToCurrentDraftPaperRequest(groupId)
+    const item = draftPaper.items.find((candidate) => candidate.groupId === groupId)
+    patchDraftButtonState(new Map([[groupId, { draftPaperButtonState: 'in_current_draft' as const, currentDraftPaperId: draftPaper.id }]]))
+    void refreshQuestionGroups()
+    return { groupId, draftPaperId: draftPaper.id, itemId: item ? item.id : null }
   }
+
+  async function undoAddGroupToDraft(receipt: DraftAddReceipt): Promise<void> {
+    if (receipt.itemId === null) throw new Error('找不到刚加入的那一条，没法撤回')
+    try {
+      await deleteDraftPaperItem(receipt.draftPaperId, receipt.itemId)
+    } catch (error) {
+      // 删没删掉拿不准（比如请求发出去了、回话丢了），按服务器现状对一遍再把错交给加入键。
+      void refreshQuestionGroups()
+      throw error
+    }
+    // 服务器给已在草稿卷里的组 canAddToDraftPaper=false（server/api.mjs 里 printReady.ok && 状态为 add）。
+    // 刚才能加进去说明这组可组卷，撤回后一并改回 true，不然等列表刷新前会闪一下「暂不可组卷」。
+    patchDraftButtonState(new Map([[receipt.groupId, { draftPaperButtonState: 'add' as const, currentDraftPaperId: receipt.draftPaperId, canAddToDraftPaper: true }]]))
+    void refreshQuestionGroups()
+  }
+
+  // 「已加入」点了打开草稿卷工作台并定位到这一组（Owner 2026-11-14：恢复成改之前「再点一下」的去处）。
+  const draftAddActions: DraftAddActions = {
+    add: addGroupToDraft,
+    undo: undoAddGroupToDraft,
+    openDraft: (draftPaperId, groupId) => openDraftPaperWorkbench(draftPaperId, groupId),
+    draftHref: (draftPaperId, groupId) => draftPaperWorkbenchHref(draftPaperId, groupId),
+  }
+
 
   // C3a (trust-cracks) — 详情进 URL: `?view=detail&groupId=<id>` via
   // pushState (a real navigation — Back should retreat to the list), mirrors
@@ -445,17 +518,43 @@ function App() {
     openDetailRef.current(groupId, { writeUrl: false })
   }, [])
 
-  async function handleDeleteQuestionGroup(detail: QuestionGroupDetail) {
+  // 删除题组：从题库删掉，不可恢复，也没有回收站，照 DESIGN.md Deletion-Cost Rule 用具名确认框（Dialog alert），
+  // 不改成即删撤销（构件收尾 2026-11-15，原来是浏览器自带的 window.confirm / window.alert）。
+  // 确认框一直挂着、只切 open（退场动画播完再卸载）；删除中 Esc、「取消」都不关；删不掉时框不关，出错写在框里。
+  const [deleteGroupTarget, setDeleteGroupTarget] = useState<QuestionGroupDetail | null>(null)
+  // 开关单独放：关上时 deleteGroupTarget 留着，退场那 120ms 里标题不会变成「删除「」？」；下次打开整个换掉。
+  const [deleteGroupOpen, setDeleteGroupOpen] = useState(false)
+  const [deleteGroupBusy, setDeleteGroupBusy] = useState(false)
+  const [deleteGroupError, setDeleteGroupError] = useState('')
+  // 删掉以后详情页没了，打开确认框的「更多操作」键也跟着没了：焦点落到回到的那一页（找题台的搜索框，没有就落到「题库取题流」那一块），
+  // 不掉到页面最外层（shared-ui/focusAfterRemoval.ts 规则第 3 条的变体：整页换了，落到新一页的开头）。
+  const deletedGroupRef = useRef(false)
+
+  function handleDeleteQuestionGroup(detail: QuestionGroupDetail) {
     if (!isOwnerView || !detail.canEdit) return
-    if (!window.confirm(`删除「${detail.title}」？题组会从题库和草稿卷里移除，不可恢复。`)) return
+    deletedGroupRef.current = false
+    setDeleteGroupError('')
+    setDeleteGroupTarget(detail)
+    setDeleteGroupOpen(true)
+  }
+
+  async function confirmDeleteQuestionGroup() {
+    const detail = deleteGroupTarget
+    if (!detail || deleteGroupBusy) return
+    setDeleteGroupBusy(true)
+    setDeleteGroupError('')
     try {
       await deleteQuestionGroupRequest(detail.id)
+      deletedGroupRef.current = true
       setQuestionGroups((groups) => groups.filter((group) => group.id !== detail.id))
       paperDraft.externalRemoveByGroupId(detail.id)
       setSelectedDetail(null)
+      setDeleteGroupOpen(false)
       backToList()
     } catch (error) {
-      window.alert(`删除失败：${error instanceof Error ? error.message : String(error)}`)
+      setDeleteGroupError(error instanceof Error ? error.message : String(error))
+    } finally {
+      setDeleteGroupBusy(false)
     }
   }
 
@@ -501,8 +600,14 @@ function App() {
 
   // Derived on render; React Compiler memoizes this (manual useMemo here
   // trips react-hooks/preserve-manual-memoization).
-  const currentDraftPaperId = questionGroups.find((group) => group.currentDraftPaperId)?.currentDraftPaperId || null
-  const currentDraftGroupCount = questionGroups.filter((group) => group.draftPaperButtonState === 'in_current_draft').length
+  // 第 7 条：题库拿到了就按题组算（真数）；没拿到用单独问来的草稿卷；都没有就不知道（草稿丸不写数，不写 0）。
+  const draftCountKnown = dataStatus === 'sqlite' || draftFallback !== null
+  const currentDraftPaperId = dataStatus === 'sqlite'
+    ? questionGroups.find((group) => group.currentDraftPaperId)?.currentDraftPaperId || null
+    : draftFallback?.id ?? null
+  const currentDraftGroupCount = dataStatus === 'sqlite'
+    ? questionGroups.filter((group) => group.draftPaperButtonState === 'in_current_draft').length
+    : draftFallback?.count ?? 0
   // Detail fetch (GET /api/question-groups/:id) omits draftContext, so
   // selectedDetail.draftPaperButtonState lags the list cards that
   // addGroupsToBasket patches via questionGroups. Mirror ConciergeGroupCard:
@@ -523,22 +628,7 @@ function App() {
 
   const openDraftPaperWorkbench = useCallback((draftPaperId?: string | null, focusGroupId?: string | null) => {
     if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
-      const url = new URL(window.location.href)
-      url.searchParams.set('view', 'draft-paper')
-      // C3b — clear groupId when navigating away from the detail view so it
-      // doesn't linger as an orphan param on an unrelated route.
-      url.searchParams.delete('groupId')
-      if (draftPaperId) {
-        url.searchParams.set('draftPaperId', draftPaperId)
-      } else {
-        url.searchParams.delete('draftPaperId')
-      }
-      if (focusGroupId) {
-        url.searchParams.set('focusGroupId', focusGroupId)
-      } else {
-        url.searchParams.delete('focusGroupId')
-      }
-      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+      window.history.pushState(window.history.state, '', draftPaperWorkbenchHref(draftPaperId, focusGroupId))
     }
     setAdminRouteActive(false)
     setBrowseRouteActive(false)
@@ -1057,6 +1147,7 @@ function App() {
 
   if (paperBrowseRoute.active && paperBrowseRoute.paperId) {
     return (
+      <DraftAddContext.Provider value={draftAddActions}>
       <PaperBrowsePage
         paperId={paperBrowseRoute.paperId}
         reviewRevision={paperBrowseRoute.reviewRevision}
@@ -1065,17 +1156,19 @@ function App() {
         lecture={paperBrowseRoute.lecture}
         similar={paperBrowseRoute.similar}
         questionGroupById={questionGroupById}
-        onAddGroupsToBasket={(groups) => void addGroupsToBasket(groups)}
+        onAddGroupsToBasket={addGroupsToBasket}
         currentDraftPaperId={currentDraftPaperId}
         currentDraftGroupCount={currentDraftGroupCount}
         onOpenDraftPaperWorkbench={(draftPaperId) => openDraftPaperWorkbench(draftPaperId)}
         onBackToWorkbench={paperBrowseOnBackToWorkbench}
         shellNav={shellNav}
       />
+      </DraftAddContext.Provider>
     )
   }
 
   return (
+    <DraftAddContext.Provider value={draftAddActions}>
     <div className="app-shell home-mode-ai">
       <AppTopbar
         variant="home"
@@ -1088,6 +1181,8 @@ function App() {
         adminActive={adminRouteActive}
         onToggleAdmin={toggleAdminRoute}
         hideBrand={false}
+        // 找题台（题组列表，下面渲染 ConciergeDesk 的那个条件）顶栏导航用大号。
+        navSize={!adminRouteActive && viewMode === 'list' ? 'lg' : 'sm'}
       />
 
       {adminRouteActive && (
@@ -1100,7 +1195,7 @@ function App() {
       )}
 
       {!adminRouteActive && (
-      <main className="workbench" aria-label="英语题库工作台">
+      <main className="workbench" aria-label="獭石">
         <section className="library-panel" aria-label="题库">
           <div className="library-header">
             <div>
@@ -1123,11 +1218,12 @@ function App() {
                 retrieval={conciergeDesk.retrieval}
                 actions={conciergeDesk.actions}
                 basketIds={new Set(basket.map((item) => item.id))}
-                onAdd={(group) => addToBasket(group)}
                 onOpenDetail={(group) => openDetail(group.id)}
                 onOpenPaperBrowse={(paperId) => openPaperBrowse(paperId)}
                 questionGroups={questionGroups}
                 dataStatus={dataStatus}
+                dataError={dataError}
+                onRetryData={retryQuestionGroups}
                 thinkingMode={aiThinkingMode}
                 onThinkingModeChange={(value) => {
                   setAiThinkingMode(value)
@@ -1149,11 +1245,9 @@ function App() {
               onBack={backToList}
               onEdit={openEditEntry}
               onDelete={handleDeleteQuestionGroup}
-              onAddToBasket={addToBasket}
               onOpenPaperBrowse={openPaperBrowseFromDetail}
               onOpenPaperBrowseLecture={openPaperBrowseLectureFromDetail}
               questionGroupById={questionGroupById}
-              onAddSimilarToBasket={(card) => void addGroupsToBasket([card])}
             />
           ) : null}
         </section>
@@ -1161,23 +1255,58 @@ function App() {
       )}
 
       {!adminRouteActive && (
-      <button
-        type="button"
+      // 草稿丸（清单 chip-03 / chip-04）：点了是去草稿卷，是按钮，所以用共用 Button（墨字 strong）；
+      // 浮在右下、白底、e2 这几样浮件的样子在 App.css .eqb-button.basket-chip；圆角随 Button 用 8px（构件收尾 2026-11-15：动作键不用胶囊）。
+      // 首页（找题台，下面是 ConciergeDesk）用大号 36，别的页小号 28，和原来一样高。
+      // 读屏名以看得见的字开头（Owner 2026-11-14 第 3 条），冒号后补上点了会怎样。
+      <Button
+        tone="strong"
+        size={viewMode === 'list' ? 'lg' : 'sm'}
         className="basket-chip"
         onClick={() => openDraftPaperWorkbench(currentDraftPaperId)}
-        aria-label={`打开草稿卷，已选 ${currentDraftGroupCount} 个题组`}
-        disabled={!currentDraftPaperId || currentDraftGroupCount === 0}
+        aria-label={draftCountKnown ? `草稿卷（${currentDraftGroupCount} 组）：打开草稿卷` : '草稿卷：打开草稿卷'}
+        disabled={!currentDraftPaperId || (draftCountKnown && currentDraftGroupCount === 0)}
+        icon={
+          <>
+            <BoardList size={16} />
+            {currentDraftGroupCount > 0 && (
+              // key 随组数变：每加一组就重挂一次，小圆点跳一下，告诉老师"落袋了"。
+              <span key={currentDraftGroupCount} className="basket-chip-dot" aria-hidden="true" />
+            )}
+          </>
+        }
       >
-        <BoardList size={16} />
-        {currentDraftGroupCount > 0 && (
-          // key 随组数变：每加一组就重挂一次，小圆点跳一下，告诉老师"落袋了"。
-          <span key={currentDraftGroupCount} className="basket-chip-dot" aria-hidden="true" />
-        )}
-        <span>
-          草稿卷（{currentDraftGroupCount} 组）
-        </span>
-      </button>
+        {draftCountKnown ? `草稿卷（${currentDraftGroupCount} 组）` : '草稿卷'}
+      </Button>
       )}
+
+      <Dialog
+        tone="alert"
+        open={deleteGroupOpen}
+        onClose={() => setDeleteGroupOpen(false)}
+        busy={deleteGroupBusy}
+        className="question-group-delete-dialog"
+        title={`删除「${deleteGroupTarget?.title ?? ''}」？`}
+        description="题组会从题库和草稿卷里移除，不可恢复。"
+        // 删掉以后回到找题台：落到它的搜索框（换前 window.confirm 时实测也落在这里，是那一页第一个能操作的东西）；
+        // 搜索框不在（或禁用）时落到「题库取题流」那一块。取消、Esc 回到「更多操作」（默认）。
+        returnFocus={() => {
+          if (!deletedGroupRef.current) return null
+          const search = document.querySelector<HTMLInputElement>('.concierge-desk .concierge-intent-input')
+          return search && !search.disabled ? search : programmaticFocusTarget(document.querySelector<HTMLElement>('.concierge-desk'))
+        }}
+        cancel={{ label: '取消' }}
+        confirm={{
+          // 删的时候键上的字不换（宽度不变），过了 300ms 门槛字隐去、所以点放在正中（Button busy，DESIGN.md §5 Waiting）。
+          label: '删除题组',
+          busy: deleteGroupBusy,
+          className: 'question-group-delete-confirm',
+          onClick: () => void confirmDeleteQuestionGroup(),
+        }}
+      >
+        {/* 原来删不掉时弹 window.alert「删除失败：…」，现在写在框里（共用 Notice，出错读屏马上念），字照原来。 */}
+        {deleteGroupError ? <Notice kind="error" detail={deleteGroupError}>删除失败</Notice> : null}
+      </Dialog>
 
       {isEntryOpen && (
         <EntryModal
@@ -1189,6 +1318,7 @@ function App() {
         />
       )}
     </div>
+    </DraftAddContext.Provider>
   )
 }
 

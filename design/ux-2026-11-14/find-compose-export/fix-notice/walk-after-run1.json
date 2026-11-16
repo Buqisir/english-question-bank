@@ -1,0 +1,566 @@
+{
+  "mode": "after",
+  "shots": [
+    {
+      "file": "after-1440-01-首页说明行.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "eqb-notice concierge-notice",
+          "role": "status",
+          "text": "没填 AI 密钥，先用本地题库帮你找。",
+          "x": 310,
+          "y": 248,
+          "w": 820,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-1440-02-首页题库没连上.png",
+      "width": 1440,
+      "pill": "草稿卷（3 组）",
+      "notices": [
+        {
+          "cls": "eqb-notice concierge-data-error",
+          "role": "alert",
+          "text": "题库没连上，草稿卷里的题还在：Failed to load question groups: 500 重试",
+          "x": 292,
+          "y": 210,
+          "w": 856,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-1440-02b-首页重试后.png",
+      "width": 1440,
+      "pill": "草稿卷（3 组）",
+      "notices": []
+    },
+    {
+      "file": "after-1440-03-首页等题库.png",
+      "width": 1440,
+      "pill": "草稿卷",
+      "notices": [
+        {
+          "cls": "eqb-notice concierge-data-loading",
+          "role": "status",
+          "text": "正在连接本地题库，连上就能搜",
+          "x": 292,
+          "y": 210,
+          "w": 856,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-1440-04-打开草稿卷等待.png",
+      "width": 1440,
+      "notices": []
+    },
+    {
+      "file": "after-1440-05-草稿卷打不开.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-error",
+          "role": "alert",
+          "text": "打开草稿卷没成功，卷里的题组没动：walk-forced 500 重试",
+          "x": 310,
+          "y": 72,
+          "w": 820,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-1440-06-第一次生成分页预览等待.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "draft-a4-empty",
+          "role": null,
+          "text": "正在生成分页预览…",
+          "x": 310,
+          "y": 72,
+          "w": 820,
+          "h": 420
+        },
+        {
+          "cls": "eqb-notice",
+          "role": "status",
+          "text": "正在生成分页预览…",
+          "x": 646,
+          "y": 268,
+          "w": 148,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-1440-07-挪动后等重排.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-a4-wait-line",
+          "role": "status",
+          "text": "正在重排卷面，旧卷面先留着…",
+          "x": 599,
+          "y": 88,
+          "w": 242,
+          "h": 36
+        }
+      ]
+    },
+    {
+      "file": "after-1440-08-重排失败.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-a4-wait-line",
+          "role": "alert",
+          "text": "排卷面没成功，下面还是改之前的卷面：walk-forced 500 重试",
+          "x": 481,
+          "y": 16,
+          "w": 477,
+          "h": 44
+        }
+      ]
+    },
+    {
+      "file": "after-1440-09-保存失败-更多面板.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-error",
+          "role": "alert",
+          "text": "保存草稿卷没成功：walk-forced 500",
+          "x": 401,
+          "y": 191,
+          "w": 194,
+          "h": 28
+        },
+        {
+          "cls": "eqb-notice draft-a4-wait-line",
+          "role": "status",
+          "text": "正在重排卷面，旧卷面先留着…",
+          "x": 599,
+          "y": 88,
+          "w": 242,
+          "h": 36
+        }
+      ]
+    },
+    {
+      "file": "after-1440-10-导出出错.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-error",
+          "role": "alert",
+          "text": "导出 PDF没成功，草稿卷没动：walk-forced 500 重试",
+          "x": 310,
+          "y": 62,
+          "w": 820,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-1440-11-下载成功.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-success",
+          "role": "status",
+          "text": "已下载：1114 英语草稿卷-大字无听力版.pdf",
+          "x": 310,
+          "y": 62,
+          "w": 820,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-1440-12-移除后撤销提示.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-a4-wait-line",
+          "role": "status",
+          "text": "正在重排卷面，旧卷面先留着…",
+          "x": 599,
+          "y": 88,
+          "w": 242,
+          "h": 36
+        },
+        {
+          "cls": "eqb-notice draft-undo-toast",
+          "role": "status",
+          "text": "题组已移出 撤销",
+          "x": 629,
+          "y": 832,
+          "w": 182,
+          "h": 44
+        }
+      ]
+    },
+    {
+      "file": "after-1440-13-空卷导出提示.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-empty-export",
+          "role": "status",
+          "text": "先加题组，才能下载 PDF",
+          "x": 310,
+          "y": 62,
+          "w": 820,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-1440-14-整卷预览打不开.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "paper-browse-error",
+          "role": null,
+          "text": "整卷预览没打开，题库和草稿卷都没动：Cannot read properties of undefined (reading 'blocks') 返回找题",
+          "x": 0,
+          "y": 48,
+          "w": 1440,
+          "h": 124
+        },
+        {
+          "cls": "eqb-notice",
+          "role": "alert",
+          "text": "整卷预览没打开，题库和草稿卷都没动：Cannot read properties of undefined (reading 'blocks') 返回找题",
+          "x": 354,
+          "y": 96,
+          "w": 731,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-1440-15-相似题批量加入失败.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "eqb-notice similar-toast",
+          "role": "alert",
+          "text": "1 篇没加入草稿卷，还勾着：walk-forced 500 重试",
+          "x": 521,
+          "y": 832,
+          "w": 399,
+          "h": 44
+        }
+      ]
+    },
+    {
+      "file": "after-390-01-首页说明行.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "eqb-notice concierge-notice",
+          "role": "status",
+          "text": "没填 AI 密钥，先用本地题库帮你找。",
+          "x": 24,
+          "y": 299,
+          "w": 342,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-390-02-首页题库没连上.png",
+      "width": 390,
+      "pill": "草稿卷（3 组）",
+      "notices": [
+        {
+          "cls": "eqb-notice concierge-data-error",
+          "role": "alert",
+          "text": "题库没连上，草稿卷里的题还在：Failed to load question groups: 500 重试",
+          "x": 24,
+          "y": 261,
+          "w": 342,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-390-02b-首页重试后.png",
+      "width": 390,
+      "pill": "草稿卷（3 组）",
+      "notices": []
+    },
+    {
+      "file": "after-390-03-首页等题库.png",
+      "width": 390,
+      "pill": "草稿卷",
+      "notices": [
+        {
+          "cls": "eqb-notice concierge-data-loading",
+          "role": "status",
+          "text": "正在连接本地题库，连上就能搜",
+          "x": 24,
+          "y": 261,
+          "w": 342,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-390-04-打开草稿卷等待.png",
+      "width": 390,
+      "notices": []
+    },
+    {
+      "file": "after-390-05-草稿卷打不开.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-error",
+          "role": "alert",
+          "text": "打开草稿卷没成功，卷里的题组没动：walk-forced 500 重试",
+          "x": 16,
+          "y": 164,
+          "w": 358,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-390-06-第一次生成分页预览等待.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "draft-a4-empty",
+          "role": null,
+          "text": "正在生成分页预览…",
+          "x": 10,
+          "y": 156,
+          "w": 332,
+          "h": 420
+        },
+        {
+          "cls": "eqb-notice",
+          "role": "status",
+          "text": "正在生成分页预览…",
+          "x": 102,
+          "y": 352,
+          "w": 148,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-390-07-挪动后等重排.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-a4-wait-line",
+          "role": "status",
+          "text": "正在重排卷面，旧卷面先留着…",
+          "x": 55,
+          "y": 172,
+          "w": 242,
+          "h": 36
+        }
+      ]
+    },
+    {
+      "file": "after-390-08-重排失败.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-a4-wait-line",
+          "role": "alert",
+          "text": "排卷面没成功，下面还是改之前的卷面：walk-forced 500 重试",
+          "x": 26,
+          "y": 172,
+          "w": 300,
+          "h": 44
+        }
+      ]
+    },
+    {
+      "file": "after-390-09-保存失败-更多面板.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-error",
+          "role": "alert",
+          "text": "保存草稿卷没成功：walk-forced 500",
+          "x": 31,
+          "y": 279,
+          "w": 259,
+          "h": 28
+        },
+        {
+          "cls": "eqb-notice draft-a4-wait-line",
+          "role": "status",
+          "text": "正在重排卷面，旧卷面先留着…",
+          "x": 55,
+          "y": 172,
+          "w": 242,
+          "h": 36
+        }
+      ]
+    },
+    {
+      "file": "after-390-10-导出出错.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-error",
+          "role": "alert",
+          "text": "导出 PDF没成功，草稿卷没动：walk-forced 500 重试",
+          "x": 10,
+          "y": 156,
+          "w": 332,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-390-11-下载成功.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-success",
+          "role": "status",
+          "text": "已下载：1114 英语草稿卷-大字无听力版.pdf",
+          "x": 10,
+          "y": 156,
+          "w": 332,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-390-12-移除后撤销提示.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-a4-wait-line",
+          "role": "status",
+          "text": "正在重排卷面，旧卷面先留着…",
+          "x": 55,
+          "y": 172,
+          "w": 242,
+          "h": 36
+        },
+        {
+          "cls": "eqb-notice draft-undo-toast",
+          "role": "status",
+          "text": "题组已移出 撤销",
+          "x": 104,
+          "y": 776,
+          "w": 182,
+          "h": 44
+        }
+      ]
+    },
+    {
+      "file": "after-390-13-空卷导出提示.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "eqb-notice draft-empty-export",
+          "role": "status",
+          "text": "先加题组，才能下载 PDF",
+          "x": 10,
+          "y": 156,
+          "w": 332,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-390-14-整卷预览打不开.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "paper-browse-error",
+          "role": null,
+          "text": "整卷预览没打开，题库和草稿卷都没动：Cannot read properties of undefined (reading 'blocks') 返回找题",
+          "x": 0,
+          "y": 140,
+          "w": 390,
+          "h": 124
+        },
+        {
+          "cls": "eqb-notice",
+          "role": "alert",
+          "text": "整卷预览没打开，题库和草稿卷都没动：Cannot read properties of undefined (reading 'blocks') 返回找题",
+          "x": 24,
+          "y": 188,
+          "w": 342,
+          "h": 28
+        }
+      ]
+    },
+    {
+      "file": "after-390-15-相似题批量加入失败.png",
+      "width": 390,
+      "notices": [
+        {
+          "cls": "eqb-notice similar-toast",
+          "role": "alert",
+          "text": "1 篇没加入草稿卷，还勾着：walk-forced 500 重试",
+          "x": 16,
+          "y": 776,
+          "w": 358,
+          "h": 44
+        }
+      ]
+    }
+  ],
+  "counts": [
+    {
+      "what": "下移一次（保存不拖）",
+      "paginationRequests": 1,
+      "requestAtMs": [
+        2317
+      ],
+      "patchDoneMs": 1207
+    },
+    {
+      "what": "下移一次（保存拖 1 秒）",
+      "paginationRequests": 1,
+      "requestAtMs": [
+        8764
+      ],
+      "patchDoneMs": 8029
+    },
+    {
+      "what": "下移一次（保存不拖（第二次））",
+      "paginationRequests": 1,
+      "requestAtMs": [
+        2323
+      ],
+      "patchDoneMs": 1128
+    },
+    {
+      "what": "下移一次（保存拖 1 秒（第二次））",
+      "paginationRequests": 1,
+      "requestAtMs": [
+        8550
+      ],
+      "patchDoneMs": 7714
+    },
+    {
+      "what": "左栏拖动换位一次（保存不拖）",
+      "paginationRequests": 1,
+      "requestAtMs": [
+        1644
+      ]
+    }
+  ],
+  "dialogs": [],
+  "errors": []
+}

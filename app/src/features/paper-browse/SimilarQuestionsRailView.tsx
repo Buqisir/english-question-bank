@@ -29,8 +29,17 @@
  *   - SW-3: `questionGroupById` 查不到的候选 = thin（paper-asset 已解析、
  *     DB 未同步），复选框禁用 + title 提示，仍然渲染（池子诚实，不隐藏）。
  */
-import type { ReactNode } from 'react'
+import { useRef, type ReactNode } from 'react'
 import { FluidHoverList } from '../../components/FluidHoverList'
+import { Button } from '../../shared-ui/Button.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
+import { Toast } from '../../shared-ui/Toast.tsx'
+import { Chip } from '../../shared-ui/Chip.tsx'
+import { Skeleton, SkeletonGate } from '../../shared-ui/Skeleton.tsx'
+import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
+import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
+import { SimilarCardSkeletons } from '../similar-passages/SimilarCardSkeletons.tsx'
+import { RotateCcw } from '../../icons'
 import type {
   QuestionGroupCard,
   SimilarPassagesResponse,
@@ -88,65 +97,89 @@ export type SimilarQuestionsRailViewProps = {
   onBack: () => void
   onRetry: () => void
   onAddToDraft: () => void
-  /** `null` = no toast. Parent owns the show/clear timer (PaperBrowsePage's
-   * `similarToast` state) so there is one source of truth for the fade
-   * timing instead of splitting it between parent-set and component-local
-   * clocks. */
-  toastMessage: string | null
+  /** `null` = no toast. 要说什么由父组件（PaperBrowsePage 的 `similarToast`）定；
+   * 2026-11-15 起停留计时在共用 Toast 里（成功 2.2 秒，鼠标停在上面、焦点在里面时停住），到时叫 onToastClose。 */
+  toastMessage: SimilarToast | null
+  onToastClose: () => void
 }
+
+/** 「加入草稿卷」之后那一行：成功（2.2 秒后收起）或没加入（原话照登，带「重试」时行尾一个键，不自动收起）。 */
+export type SimilarToast =
+  | { kind: 'success'; text: string }
+  | { kind: 'error'; text: string; detail: string; retry?: () => void }
 
 function renderChips(matchedQuestionIds: string[], reasons: SimilarQuestionReason[]): ReactNode {
   return (
     <div className="similar-rcard-chips">
       {matchedQuestionIds.length > 0 && (
-        <span className="similar-chip similar-chip--hit">含 {matchedQuestionIds.length} 题</span>
+        <Chip className="similar-chip">含 {matchedQuestionIds.length} 题</Chip>
       )}
       {reasons.map((reason, index) => (
-        <span key={`${reason.kind}-${index}`} className="similar-chip similar-chip--hit">
+        <Chip key={`${reason.kind}-${index}`} className="similar-chip">
           {reason.label}
-        </span>
+        </Chip>
       ))}
     </div>
   )
 }
 
 export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): ReactNode {
-  const { seed, request, questionGroupById, selectedGroupIds, onToggleGroup, onBack, onRetry, onAddToDraft, toastMessage } =
+  const { seed, request, questionGroupById, selectedGroupIds, onToggleGroup, onBack, onRetry, onAddToDraft, toastMessage, onToastClose } =
     props
 
   const questionLabel = seed.questionNo != null ? `第${seed.questionNo}题` : ''
   const seedLine = [seed.groupTitle, questionLabel].filter(Boolean).join(' · ')
   const headLabel = seed.mode === 'passages' ? '相似篇章' : '配相似'
+  // 等待第六轮（2026-11-15）：读取中原来是一行「配相似加载中」，换成照真卡画的 3 张灰卡（连上面的种子行），走门槛
+  // （300ms 内不出、出了至少留 500ms，这期间结果到了也先不换上）。listWaiting = 灰块那一块还占着位置。
+  const pending = request.status === 'loading'
+  const listPhase = useDelayedBusy(pending)
+  const listWaiting = pending || listPhase === 'waiting'
+  // 等待第四轮（2026-11-15）：结果回来时，候选卡从上到下依次淡入（只动透明度）。每次请求回来演一次；
+  // 勾选、加入、换篇这些不改 request.status 的变化不演。第六轮起等灰块走了、真卡挂上那一拍再演。
+  const railRef = useRef<HTMLDivElement>(null)
+  useRowReveal(railRef, '.similar-rcard', request.status === 'ready' && !listWaiting)
 
   return (
-    <div className="similar-rail">
+    <div className="similar-rail" ref={railRef}>
       <div className="similar-rail-head">
         <h4 className="paper-browse-lecture-title">
           {headLabel} · {seed.groupTypeLabel}
         </h4>
-        <button type="button" className="similar-backlink" onClick={onBack}>
+        <Button tone="quiet" size="sm" className="similar-backlink" onClick={onBack}>
           ← 返回解析
-        </button>
+        </Button>
       </div>
 
-      {request.status !== 'loading' && (
+      {listWaiting && (
+        <SkeletonGate
+          pending={pending}
+          phase={listPhase}
+          label={`${headLabel}加载中`}
+          className="similar-rail-skeleton"
+          skeleton={<>
+            {/* 种子行（种子、配方、已排除本卷）在讲评栏里一般折成两行。 */}
+            <p className="similar-seed-line" aria-hidden="true">
+              <Skeleton inline width="96%" height={10} /><br /><Skeleton inline width="28%" height={10} />
+            </p>
+            <SimilarCardSkeletons variant="rail" />
+          </>}
+        />
+      )}
+
+      {!listWaiting && (
         <p className="similar-seed-line">
           种子：<b>{seedLine}</b>　配方：{seed.recipeSummary}　<span>已排除本卷</span>
         </p>
       )}
 
-      {request.status === 'loading' && <p className="paper-browse-lecture-empty">{headLabel}加载中…</p>}
-
-      {request.status === 'error' && (
-        <div className="similar-rail-error">
-          <p className="paper-browse-lecture-empty">{request.message}</p>
-          <button type="button" className="similar-btn" onClick={onRetry}>
-            重试
-          </button>
-        </div>
+      {!listWaiting && request.status === 'error' && (
+        <Notice kind="error" className="similar-rail-error" action={{ label: '重试', onClick: onRetry }}>
+          {request.message}
+        </Notice>
       )}
 
-      {request.status === 'ready' && (() => {
+      {!listWaiting && request.status === 'ready' && (() => {
         const results = toUnifiedResults(request.data)
         const poolStats = request.data.response.poolStats
         const notice = request.data.kind === 'passages' ? request.data.response.notice : null
@@ -194,18 +227,31 @@ export function SimilarQuestionsRailView(props: SimilarQuestionsRailViewProps): 
         )
       })()}
 
-      {request.status === 'ready' && (
+      {!listWaiting && request.status === 'ready' && (
         <div className="similar-rail-foot">
           <span className="similar-count">
             {selectedGroupIds.size > 0 ? `已选 ${selectedGroupIds.size} 篇` : '未选择'}
           </span>
-          <button type="button" className="similar-btn similar-btn--primary" disabled={selectedGroupIds.size === 0} onClick={onAddToDraft}>
+          <Button tone="primary" size="sm" className="similar-btn" disabled={selectedGroupIds.size === 0} onClick={onAddToDraft}>
             加入草稿卷
-          </button>
+          </Button>
         </div>
       )}
 
-      <div className={`similar-toast${toastMessage ? ' similar-toast--on' : ''}`}>{toastMessage}</div>
+      {/* 共用构件 shared-ui/Toast（2026-11-15，原来是共用提示行的 floating 放法）：白底、e3、视口底部正中，
+          一次只显示一条。成功 2.2 秒收起；没加入的不自己收起（留着「重试」）。类名 similar-toast 留作挂钩。 */}
+      <Toast
+        message={toastMessage?.text ?? null}
+        token={toastMessage}
+        kind={toastMessage?.kind ?? 'success'}
+        duration={toastMessage?.kind === 'error' ? null : 2200}
+        className="similar-toast"
+        detail={toastMessage?.kind === 'error' ? toastMessage.detail : null}
+        action={toastMessage?.kind === 'error' && toastMessage.retry
+          ? { label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: toastMessage.retry }
+          : undefined}
+        onClose={onToastClose}
+      />
     </div>
   )
 }

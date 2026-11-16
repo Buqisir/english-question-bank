@@ -1,0 +1,678 @@
+{
+ "records": 813,
+ "notReviewed": 0,
+ "kind": {
+  "agreement": 0.851,
+  "kappa": 0.776,
+  "confusion": {
+   "button": {
+    "button": 338,
+    "chip": 0,
+    "row": 24,
+    "surface": 0,
+    "notice": 0,
+    "toast": 0,
+    "empty": 0,
+    "dialog": 0,
+    "field": 0,
+    "none": 0
+   },
+   "chip": {
+    "button": 7,
+    "chip": 4,
+    "row": 0,
+    "surface": 0,
+    "notice": 0,
+    "toast": 0,
+    "empty": 0,
+    "dialog": 0,
+    "field": 0,
+    "none": 29
+   },
+   "row": {
+    "button": 0,
+    "chip": 0,
+    "row": 20,
+    "surface": 0,
+    "notice": 0,
+    "toast": 0,
+    "empty": 0,
+    "dialog": 0,
+    "field": 0,
+    "none": 1
+   },
+   "surface": {
+    "button": 0,
+    "chip": 0,
+    "row": 0,
+    "surface": 10,
+    "notice": 0,
+    "toast": 0,
+    "empty": 1,
+    "dialog": 0,
+    "field": 5,
+    "none": 5
+   },
+   "notice": {
+    "button": 0,
+    "chip": 0,
+    "row": 0,
+    "surface": 0,
+    "notice": 14,
+    "toast": 0,
+    "empty": 5,
+    "dialog": 0,
+    "field": 0,
+    "none": 13
+   },
+   "toast": {
+    "button": 0,
+    "chip": 0,
+    "row": 0,
+    "surface": 0,
+    "notice": 0,
+    "toast": 1,
+    "empty": 0,
+    "dialog": 0,
+    "field": 0,
+    "none": 0
+   },
+   "empty": {
+    "button": 0,
+    "chip": 0,
+    "row": 0,
+    "surface": 0,
+    "notice": 0,
+    "toast": 0,
+    "empty": 6,
+    "dialog": 0,
+    "field": 0,
+    "none": 1
+   },
+   "dialog": {
+    "button": 0,
+    "chip": 0,
+    "row": 0,
+    "surface": 0,
+    "notice": 0,
+    "toast": 0,
+    "empty": 0,
+    "dialog": 5,
+    "field": 0,
+    "none": 0
+   },
+   "field": {
+    "button": 0,
+    "chip": 0,
+    "row": 0,
+    "surface": 0,
+    "notice": 0,
+    "toast": 0,
+    "empty": 0,
+    "dialog": 0,
+    "field": 28,
+    "none": 6
+   },
+   "none": {
+    "button": 0,
+    "chip": 0,
+    "row": 1,
+    "surface": 21,
+    "notice": 0,
+    "toast": 0,
+    "empty": 1,
+    "dialog": 0,
+    "field": 1,
+    "none": 266
+   }
+  }
+ },
+ "look": {
+  "button": {
+   "records": 318,
+   "groupsMine": 43,
+   "groupsTheirs": 20,
+   "precision": 0.391,
+   "recall": 0.913,
+   "f1": 0.547,
+   "ari": 0.471
+  },
+  "chip": {
+   "records": 3,
+   "groupsMine": 1,
+   "groupsTheirs": 1,
+   "precision": 1,
+   "recall": 1,
+   "f1": 1,
+   "ari": 1
+  },
+  "row": {
+   "records": 20,
+   "groupsMine": 1,
+   "groupsTheirs": 3,
+   "precision": 1,
+   "recall": 0.416,
+   "f1": 0.587,
+   "ari": 0
+  },
+  "surface": {
+   "records": 10,
+   "groupsMine": 2,
+   "groupsTheirs": 2,
+   "precision": 1,
+   "recall": 1,
+   "f1": 1,
+   "ari": 1
+  },
+  "notice": {
+   "records": 14,
+   "groupsMine": 5,
+   "groupsTheirs": 4,
+   "precision": 0.647,
+   "recall": 1,
+   "f1": 0.786,
+   "ari": 0.697
+  },
+  "toast": {
+   "records": 1,
+   "groupsMine": 1,
+   "groupsTheirs": 1,
+   "precision": 0,
+   "recall": 0,
+   "f1": 0,
+   "ari": 1
+  },
+  "empty": {
+   "records": 6,
+   "groupsMine": 3,
+   "groupsTheirs": 3,
+   "precision": 0.25,
+   "recall": 0.25,
+   "f1": 0.25,
+   "ari": -0.023
+  },
+  "dialog": {
+   "records": 5,
+   "groupsMine": 3,
+   "groupsTheirs": 5,
+   "precision": 0,
+   "recall": 0,
+   "f1": 0,
+   "ari": 0
+  },
+  "field": {
+   "records": 27,
+   "groupsMine": 8,
+   "groupsTheirs": 4,
+   "precision": 0.46,
+   "recall": 1,
+   "f1": 0.63,
+   "ari": 0.536
+  }
+ },
+ "job": {
+  "button": {
+   "records": 338,
+   "groupsMine": 22,
+   "groupsTheirs": 43,
+   "precision": 1,
+   "recall": 0.352,
+   "f1": 0.521,
+   "ari": 0.473
+  },
+  "chip": {
+   "records": 4,
+   "groupsMine": 1,
+   "groupsTheirs": 1,
+   "precision": 1,
+   "recall": 1,
+   "f1": 1,
+   "ari": 1
+  },
+  "row": {
+   "records": 20,
+   "groupsMine": 2,
+   "groupsTheirs": 5,
+   "precision": 1,
+   "recall": 0.518,
+   "f1": 0.682,
+   "ari": 0.366
+  },
+  "surface": {
+   "records": 10,
+   "groupsMine": 2,
+   "groupsTheirs": 2,
+   "precision": 1,
+   "recall": 1,
+   "f1": 1,
+   "ari": 1
+  },
+  "notice": {
+   "records": 14,
+   "groupsMine": 2,
+   "groupsTheirs": 4,
+   "precision": 1,
+   "recall": 0.436,
+   "f1": 0.607,
+   "ari": 0.181
+  },
+  "toast": {
+   "records": 1,
+   "groupsMine": 1,
+   "groupsTheirs": 1,
+   "precision": 0,
+   "recall": 0,
+   "f1": 0,
+   "ari": 1
+  },
+  "empty": {
+   "records": 6,
+   "groupsMine": 3,
+   "groupsTheirs": 5,
+   "precision": 1,
+   "recall": 0.167,
+   "f1": 0.286,
+   "ari": 0.194
+  },
+  "dialog": {
+   "records": 5,
+   "groupsMine": 3,
+   "groupsTheirs": 5,
+   "precision": 0,
+   "recall": 0,
+   "f1": 0,
+   "ari": 0
+  },
+  "field": {
+   "records": 28,
+   "groupsMine": 4,
+   "groupsTheirs": 12,
+   "precision": 0.979,
+   "recall": 0.362,
+   "f1": 0.529,
+   "ari": 0.424
+  }
+ },
+ "lookSplits": [
+  {
+   "kind": "button",
+   "mine": "button-07",
+   "theirsSplit": {
+    "button-quiet": 1,
+    "button-segment": 9
+   }
+  },
+  {
+   "kind": "button",
+   "mine": "button-02",
+   "theirsSplit": {
+    "button-plain-16": 21,
+    "button-icon-sm": 20
+   }
+  },
+  {
+   "kind": "button",
+   "mine": "button-13",
+   "theirsSplit": {
+    "button-menuitem": 1,
+    "button-ghost-ink": 6
+   }
+  },
+  {
+   "kind": "button",
+   "mine": "button-15",
+   "theirsSplit": {
+    "button-menuitem": 3,
+    "button-icon": 1,
+    "button-ghost-ink": 1
+   }
+  },
+  {
+   "kind": "button",
+   "mine": "button-11",
+   "theirsSplit": {
+    "button-quiet": 6,
+    "button-icon": 2
+   }
+  },
+  {
+   "kind": "button",
+   "mine": "button-30",
+   "theirsSplit": {
+    "button-menuitem-danger": 1,
+    "button-ghost-danger": 1
+   }
+  },
+  {
+   "kind": "button",
+   "theirs": "button-primary-pill",
+   "mineSplit": {
+    "button-31": 1,
+    "button-32": 1
+   }
+  },
+  {
+   "kind": "button",
+   "theirs": "button-quiet",
+   "mineSplit": {
+    "button-03": 30,
+    "button-07": 1,
+    "button-01": 82,
+    "button-35": 1,
+    "button-05": 18,
+    "button-29": 2,
+    "button-11": 6,
+    "button-44": 1,
+    "button-20": 4
+   }
+  },
+  {
+   "kind": "button",
+   "theirs": "button-icon",
+   "mineSplit": {
+    "button-16": 4,
+    "button-17": 4,
+    "button-04": 21,
+    "button-25": 2,
+    "button-33": 1,
+    "button-09": 8,
+    "button-41": 1,
+    "button-11": 2,
+    "button-15": 1
+   }
+  },
+  {
+   "kind": "button",
+   "theirs": "button-outline-clear",
+   "mineSplit": {
+    "button-18": 4,
+    "button-19": 4
+   }
+  },
+  {
+   "kind": "button",
+   "theirs": "button-icon-sm",
+   "mineSplit": {
+    "button-22": 3,
+    "button-02": 20,
+    "button-37": 1
+   }
+  },
+  {
+   "kind": "button",
+   "theirs": "button-menuitem",
+   "mineSplit": {
+    "button-26": 2,
+    "button-13": 1,
+    "button-15": 3
+   }
+  },
+  {
+   "kind": "button",
+   "theirs": "button-green",
+   "mineSplit": {
+    "button-10": 8,
+    "button-27": 2,
+    "button-40": 1
+   }
+  },
+  {
+   "kind": "button",
+   "theirs": "button-plain-16",
+   "mineSplit": {
+    "button-02": 21,
+    "button-38": 1
+   }
+  },
+  {
+   "kind": "button",
+   "theirs": "button-link-small",
+   "mineSplit": {
+    "button-12": 7,
+    "button-36": 1,
+    "button-14": 5
+   }
+  },
+  {
+   "kind": "button",
+   "theirs": "button-outline-white",
+   "mineSplit": {
+    "button-23": 3,
+    "button-43": 1
+   }
+  },
+  {
+   "kind": "button",
+   "theirs": "button-primary",
+   "mineSplit": {
+    "button-42": 1,
+    "button-24": 3
+   }
+  },
+  {
+   "kind": "button",
+   "theirs": "button-ghost-ink",
+   "mineSplit": {
+    "button-15": 1,
+    "button-13": 6
+   }
+  },
+  {
+   "kind": "row",
+   "mine": "row-01",
+   "theirsSplit": {
+    "row-list": 5,
+    "row-passage": 12,
+    "row-file": 3
+   }
+  },
+  {
+   "kind": "notice",
+   "theirs": "notice-card",
+   "mineSplit": {
+    "notice-05": 2,
+    "notice-02": 6
+   }
+  },
+  {
+   "kind": "empty",
+   "mine": "empty-01",
+   "theirsSplit": {
+    "empty-inline-text": 2,
+    "empty-illustrated": 1
+   }
+  },
+  {
+   "kind": "empty",
+   "mine": "empty-02",
+   "theirsSplit": {
+    "empty-center-text": 1,
+    "empty-illustrated": 1
+   }
+  },
+  {
+   "kind": "empty",
+   "theirs": "empty-illustrated",
+   "mineSplit": {
+    "empty-01": 1,
+    "empty-03": 1,
+    "empty-02": 1
+   }
+  },
+  {
+   "kind": "dialog",
+   "mine": "dialog-01",
+   "theirsSplit": {
+    "dialog-menu-r12": 1,
+    "dialog-shadow-r12": 1
+   }
+  },
+  {
+   "kind": "dialog",
+   "mine": "dialog-02",
+   "theirsSplit": {
+    "dialog-menu-r8": 1,
+    "dialog-shadow-r8": 1
+   }
+  },
+  {
+   "kind": "field",
+   "theirs": "field-box-compact",
+   "mineSplit": {
+    "field-01": 8,
+    "field-10": 1,
+    "field-11": 1,
+    "field-06": 2,
+    "field-07": 2
+   }
+  }
+ ],
+ "nesting": {
+  "button": {
+   "mine": 43,
+   "mineInsideOneOfTheirs": 37,
+   "theirs": 20,
+   "theirsInsideOneOfMine": 8,
+   "mineSpanningSeveral": [
+    {
+     "id": "button-07",
+     "theirs": [
+      "button-quiet",
+      "button-segment"
+     ]
+    },
+    {
+     "id": "button-02",
+     "theirs": [
+      "button-plain-16",
+      "button-icon-sm"
+     ]
+    },
+    {
+     "id": "button-13",
+     "theirs": [
+      "button-menuitem",
+      "button-ghost-ink"
+     ]
+    },
+    {
+     "id": "button-15",
+     "theirs": [
+      "button-menuitem",
+      "button-icon",
+      "button-ghost-ink"
+     ]
+    },
+    {
+     "id": "button-11",
+     "theirs": [
+      "button-quiet",
+      "button-icon"
+     ]
+    },
+    {
+     "id": "button-30",
+     "theirs": [
+      "button-menuitem-danger",
+      "button-ghost-danger"
+     ]
+    }
+   ]
+  },
+  "chip": {
+   "mine": 1,
+   "mineInsideOneOfTheirs": 1,
+   "theirs": 1,
+   "theirsInsideOneOfMine": 1,
+   "mineSpanningSeveral": []
+  },
+  "row": {
+   "mine": 1,
+   "mineInsideOneOfTheirs": 0,
+   "theirs": 3,
+   "theirsInsideOneOfMine": 3,
+   "mineSpanningSeveral": [
+    {
+     "id": "row-01",
+     "theirs": [
+      "row-list",
+      "row-passage",
+      "row-file"
+     ]
+    }
+   ]
+  },
+  "surface": {
+   "mine": 2,
+   "mineInsideOneOfTheirs": 2,
+   "theirs": 2,
+   "theirsInsideOneOfMine": 2,
+   "mineSpanningSeveral": []
+  },
+  "notice": {
+   "mine": 5,
+   "mineInsideOneOfTheirs": 5,
+   "theirs": 4,
+   "theirsInsideOneOfMine": 3,
+   "mineSpanningSeveral": []
+  },
+  "toast": {
+   "mine": 1,
+   "mineInsideOneOfTheirs": 1,
+   "theirs": 1,
+   "theirsInsideOneOfMine": 1,
+   "mineSpanningSeveral": []
+  },
+  "empty": {
+   "mine": 3,
+   "mineInsideOneOfTheirs": 1,
+   "theirs": 3,
+   "theirsInsideOneOfMine": 2,
+   "mineSpanningSeveral": [
+    {
+     "id": "empty-01",
+     "theirs": [
+      "empty-inline-text",
+      "empty-illustrated"
+     ]
+    },
+    {
+     "id": "empty-02",
+     "theirs": [
+      "empty-center-text",
+      "empty-illustrated"
+     ]
+    }
+   ]
+  },
+  "dialog": {
+   "mine": 3,
+   "mineInsideOneOfTheirs": 1,
+   "theirs": 5,
+   "theirsInsideOneOfMine": 5,
+   "mineSpanningSeveral": [
+    {
+     "id": "dialog-01",
+     "theirs": [
+      "dialog-menu-r12",
+      "dialog-shadow-r12"
+     ]
+    },
+    {
+     "id": "dialog-02",
+     "theirs": [
+      "dialog-menu-r8",
+      "dialog-shadow-r8"
+     ]
+    }
+   ]
+  },
+  "field": {
+   "mine": 8,
+   "mineInsideOneOfTheirs": 8,
+   "theirs": 4,
+   "theirsInsideOneOfMine": 3,
+   "mineSpanningSeveral": []
+  }
+ }
+}

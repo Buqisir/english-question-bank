@@ -1,0 +1,4000 @@
+{
+ "found": {
+  "combine-accent": {
+   "before": true,
+   "after": true
+  },
+  "combine-accent-390": {
+   "before": true,
+   "after": true
+  },
+  "combine-accent-focus": {
+   "before": true,
+   "after": true
+  },
+  "combine-accent-focus-390": {
+   "before": true,
+   "after": true
+  },
+  "task-accent": {
+   "before": true,
+   "after": true
+  },
+  "task-accent-390": {
+   "before": true,
+   "after": true
+  },
+  "task-accent-focus": {
+   "before": true,
+   "after": true
+  },
+  "task-accent-focus-390": {
+   "before": true,
+   "after": true
+  },
+  "meaning-order": {
+   "before": true,
+   "after": true
+  },
+  "meaning-order-390": {
+   "before": true,
+   "after": true
+  },
+  "meaning-order-focus": {
+   "before": true,
+   "after": true
+  },
+  "meaning-order-focus-390": {
+   "before": true,
+   "after": true
+  },
+  "meaning-suggest": {
+   "before": true,
+   "after": true
+  },
+  "meaning-suggest-390": {
+   "before": true,
+   "after": true
+  },
+  "meaning-suggest-focus": {
+   "before": true,
+   "after": true
+  },
+  "meaning-suggest-focus-390": {
+   "before": true,
+   "after": true
+  },
+  "result-accent": {
+   "before": true,
+   "after": true
+  },
+  "result-accent-390": {
+   "before": true,
+   "after": true
+  },
+  "result-accent-focus": {
+   "before": true,
+   "after": true
+  },
+  "result-accent-focus-390": {
+   "before": true,
+   "after": true
+  },
+  "review-accent": {
+   "before": true,
+   "after": true
+  },
+  "review-accent-390": {
+   "before": true,
+   "after": true
+  },
+  "review-accent-focus": {
+   "before": true,
+   "after": true
+  },
+  "review-accent-focus-390": {
+   "before": true,
+   "after": true
+  },
+  "create-error": {
+   "before": true,
+   "after": true
+  },
+  "create-error-390": {
+   "before": true,
+   "after": true
+  },
+  "create-error-focus": {
+   "before": true,
+   "after": true
+  },
+  "create-error-focus-390": {
+   "before": true,
+   "after": true
+  },
+  "listen-accent": {
+   "before": true,
+   "after": true
+  },
+  "listen-accent-390": {
+   "before": true,
+   "after": true
+  },
+  "listen-accent-focus": {
+   "before": true,
+   "after": true
+  },
+  "listen-accent-focus-390": {
+   "before": true,
+   "after": true
+  },
+  "listen-repeat": {
+   "before": true,
+   "after": true
+  },
+  "listen-repeat-390": {
+   "before": true,
+   "after": true
+  },
+  "listen-repeat-focus": {
+   "before": true,
+   "after": true
+  },
+  "listen-repeat-focus-390": {
+   "before": true,
+   "after": true
+  },
+  "dictation-repeat": {
+   "before": true,
+   "after": true
+  },
+  "dictation-repeat-390": {
+   "before": true,
+   "after": true
+  },
+  "dictation-repeat-focus": {
+   "before": true,
+   "after": true
+  },
+  "dictation-repeat-focus-390": {
+   "before": true,
+   "after": true
+  }
+ },
+ "errorCopies": {
+  "before/w1440": 2,
+  "before/w390": 2,
+  "after/w1440": 1,
+  "after/w390": 1
+ },
+ "seedBefore": {
+  "student": "默认学生",
+  "sets": [
+   "vocabulary-set-916b13e5-0306-48d4-9e90-23f4f6e4b2a0",
+   "vocabulary-set-f3434f16-bc6f-4500-9527-59545c4c2687"
+  ],
+  "listenShareId": "M-GaMeNEBCurDECsVo_3wmgVTwbWOF_Y",
+  "task": {
+   "status": 201,
+   "id": "vocabulary-dictation-task-e5682180-3793-4213-95e8-fa8b9893a313",
+   "shareId": "Wx9JJ1RCusY_-RNpqGPMJ1kMsgWTMSXY"
+  },
+  "record": {
+   "status": 201,
+   "id": "vocabulary-meaning-recall-record-5e31a8a5-8f81-4086-8710-06f5d6c8bc77",
+   "error": null
+  }
+ },
+ "seedAfter": {
+  "student": "默认学生",
+  "sets": [
+   "vocabulary-set-39be7e17-f4db-4040-85f1-b728f6c1f7c2",
+   "vocabulary-set-b6a9693e-e0c7-4693-a06b-fb576dae08b8"
+  ],
+  "listenShareId": "25KZydHJnQCubiEp9wQtC_4sS8w_PBwd",
+  "task": {
+   "status": 201,
+   "id": "vocabulary-dictation-task-7f35459d-0658-46ac-bdd7-9fc261449458",
+   "shareId": "9BIeG0jn4VJDZ-LALk2Z-h1WyfaDflc2"
+  },
+  "record": {
+   "status": 201,
+   "id": "vocabulary-meaning-recall-record-bf52d8b1-05a0-4e64-8bc4-3bf587e0eeb1",
+   "error": null
+  }
+ },
+ "missingBefore": [],
+ "missingAfter": [],
+ "pageErrorsBefore": [],
+ "pageErrorsAfter": [],
+ "ax": {
+  "w1440/combine-accent": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "口音",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "美音",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "英音",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 36,
+      "w": 54,
+      "radius": "8px 0px 0px 8px",
+      "border": "1px rgb(41, 66, 77)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/400",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "英音",
+      "h": 36,
+      "w": 53,
+      "radius": "0px 8px 8px 0px",
+      "border": "1px rgb(220, 230, 235)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/400",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 36,
+     "w": 54,
+     "radius": "8px 0px 0px 8px",
+     "border": "1px rgb(41, 66, 77)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(27, 43, 51)",
+     "font": "14px/400",
+     "outline": "auto 1px rgb(16, 16, 16) +0px",
+     "shadow": "none"
+    },
+    "tabStops": [
+     "button「美音」",
+     "button「英音」"
+    ],
+    "arrow": {
+     "start": "button「美音」",
+     "afterRight": "button「美音」",
+     "statesAfterRight": [
+      "美音:is-selected",
+      "英音:-"
+     ],
+     "afterLeft": "button「美音」",
+     "statesAfterLeft": [
+      "美音:is-selected",
+      "英音:-"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "口音",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "美音",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "英音",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 32,
+      "w": 50,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "英音",
+      "h": 32,
+      "w": 50,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 50,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「美音」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「美音」 checked=true",
+     "afterRight": "button[role=radio]「英音」 checked=true",
+     "statesAfterRight": [
+      "美音:false",
+      "英音:true"
+     ],
+     "afterLeft": "button[role=radio]「美音」 checked=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   }
+  },
+  "w1440/task-accent": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "口音",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "美音",
+       "description": null,
+       "checked": null,
+       "pressed": "true",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "英音",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 36,
+      "w": 54,
+      "radius": "8px 0px 0px 8px",
+      "border": "1px rgb(41, 66, 77)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "英音",
+      "h": 36,
+      "w": 53,
+      "radius": "0px 8px 8px 0px",
+      "border": "1px rgb(220, 230, 235)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 36,
+     "w": 54,
+     "radius": "8px 0px 0px 8px",
+     "border": "1px rgb(41, 66, 77)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(27, 43, 51)",
+     "font": "14px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "none"
+    },
+    "tabStops": [
+     "button「美音」 pressed=true",
+     "button「英音」 pressed=false"
+    ],
+    "arrow": {
+     "start": "button「美音」 pressed=true",
+     "afterRight": "button「美音」 pressed=true",
+     "statesAfterRight": [
+      "美音:true",
+      "英音:false"
+     ],
+     "afterLeft": "button「美音」 pressed=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "口音",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "美音",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "英音",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 32,
+      "w": 50,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "英音",
+      "h": 32,
+      "w": 50,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 50,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「美音」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「美音」 checked=true",
+     "afterRight": "button[role=radio]「英音」 checked=true",
+     "statesAfterRight": [
+      "美音:false",
+      "英音:true"
+     ],
+     "afterLeft": "button[role=radio]「美音」 checked=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   }
+  },
+  "w1440/meaning-order": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "顺序",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "随机",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "原顺序",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "随机",
+      "h": 36,
+      "w": 75,
+      "radius": "8px 0px 0px 8px",
+      "border": "1px rgb(220, 230, 235)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "原顺序",
+      "h": 36,
+      "w": 68,
+      "radius": "0px 8px 8px 0px",
+      "border": "1px rgb(220, 230, 235)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 36,
+     "w": 75,
+     "radius": "8px 0px 0px 8px",
+     "border": "1px rgb(220, 230, 235)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(27, 43, 51)",
+     "font": "14px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "none"
+    },
+    "tabStops": [
+     "button「随机」",
+     "button「原顺序」"
+    ],
+    "arrow": {
+     "start": "button「随机」",
+     "afterRight": "button「随机」",
+     "statesAfterRight": [
+      "随机:is-selected",
+      "原顺序:-"
+     ],
+     "afterLeft": "button「随机」",
+     "statesAfterLeft": [
+      "随机:is-selected",
+      "原顺序:-"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "顺序",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "随机",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "原顺序",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "随机",
+      "h": 32,
+      "w": 70,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "原顺序",
+      "h": 32,
+      "w": 63,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 70,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「随机」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「随机」 checked=true",
+     "afterRight": "button[role=radio]「原顺序」 checked=true",
+     "statesAfterRight": [
+      "随机:false",
+      "原顺序:true"
+     ],
+     "afterLeft": "button[role=radio]「随机」 checked=true",
+     "statesAfterLeft": [
+      "随机:true",
+      "原顺序:false"
+     ]
+    }
+   }
+  },
+  "w1440/meaning-suggest": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "spinbutton",
+      "name": "词",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": true
+     },
+     "children": []
+    },
+    "style": {
+     "h": 33,
+     "w": 64,
+     "radius": "8px",
+     "border": "1px rgb(220, 230, 235)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "12px/500",
+     "outline": "none 3px rgb(27, 43, 51) +0px",
+     "shadow": "none"
+    },
+    "focusVisible": true
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "spinbutton",
+      "name": "推荐词数",
+      "description": "词",
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": true
+     },
+     "children": []
+    },
+    "style": {
+     "h": 36,
+     "w": 64,
+     "radius": "8px",
+     "border": "1px rgb(220, 230, 235)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "14px/400",
+     "outline": "none 3px rgb(27, 43, 51) +0px",
+     "shadow": "none"
+    },
+    "focusVisible": true
+   }
+  },
+  "w1440/result-accent": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "听写发音",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "美音",
+       "description": null,
+       "checked": null,
+       "pressed": "true",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "英音",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 36,
+      "w": 58,
+      "radius": "8px 0px 0px 8px",
+      "border": "1px rgb(197, 211, 218)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "英音",
+      "h": 36,
+      "w": 58,
+      "radius": "0px 8px 8px 0px",
+      "border": "1px rgb(220, 230, 235)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 36,
+     "w": 58,
+     "radius": "8px 0px 0px 8px",
+     "border": "1px rgb(197, 211, 218)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(27, 43, 51)",
+     "font": "14px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "none"
+    },
+    "tabStops": [
+     "button「美音」 pressed=true",
+     "button「英音」 pressed=false"
+    ],
+    "arrow": {
+     "start": "button「美音」 pressed=true",
+     "afterRight": "button「美音」 pressed=true",
+     "statesAfterRight": [
+      "美音:true",
+      "英音:false"
+     ],
+     "afterLeft": "button「美音」 pressed=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "听写发音",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "美音",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "英音",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 32,
+      "w": 50,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "英音",
+      "h": 32,
+      "w": 50,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 50,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「美音」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「美音」 checked=true",
+     "afterRight": "button[role=radio]「英音」 checked=true",
+     "statesAfterRight": [
+      "美音:false",
+      "英音:true"
+     ],
+     "afterLeft": "button[role=radio]「美音」 checked=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   }
+  },
+  "w1440/review-accent": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "过词读音",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "美音",
+       "description": null,
+       "checked": null,
+       "pressed": "true",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "英音",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 36,
+      "w": 48,
+      "radius": "4px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/600",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "英音",
+      "h": 36,
+      "w": 48,
+      "radius": "4px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "14px/600",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 36,
+     "w": 48,
+     "radius": "4px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(27, 43, 51)",
+     "font": "14px/600",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "none"
+    },
+    "tabStops": [
+     "button「美音」 pressed=true",
+     "button「英音」 pressed=false"
+    ],
+    "arrow": {
+     "start": "button「美音」 pressed=true",
+     "afterRight": "button「美音」 pressed=true",
+     "statesAfterRight": [
+      "美音:true",
+      "英音:false"
+     ],
+     "afterLeft": "button「美音」 pressed=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "过词读音",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "美音",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "英音",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 32,
+      "w": 50,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "英音",
+      "h": 32,
+      "w": 50,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 50,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「美音」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「美音」 checked=true",
+     "afterRight": "button[role=radio]「英音」 checked=true",
+     "statesAfterRight": [
+      "美音:false",
+      "英音:true"
+     ],
+     "afterLeft": "button[role=radio]「美音」 checked=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   }
+  },
+  "w1440/createBefore": {
+   "before": {
+    "alerts": [
+     {
+      "text": "",
+      "cls": "visually-hidden",
+      "rects": 1
+     }
+    ]
+   },
+   "after": {
+    "alerts": [
+     {
+      "text": "",
+      "cls": "eqb-field-live",
+      "rects": 1
+     }
+    ]
+   }
+  },
+  "w1440/createError": {
+   "before": {
+    "input": {
+     "self": {
+      "role": "textbox",
+      "name": "学生姓名",
+      "description": "词汇服务暂时不可用。",
+      "checked": null,
+      "pressed": null,
+      "invalid": "true",
+      "live": null,
+      "focusable": true
+     },
+     "children": []
+    },
+    "form": {
+     "self": {
+      "role": "form",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "LabelText",
+       "name": "",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "textbox",
+       "name": "学生姓名",
+       "description": "词汇服务暂时不可用。",
+       "checked": null,
+       "pressed": null,
+       "invalid": "true",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "保存",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "paragraph",
+       "name": "",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "alert",
+       "name": "",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": "assertive",
+       "focusable": null
+      }
+     ]
+    },
+    "copies": 0,
+    "alerts": [
+     {
+      "text": "词汇服务暂时不可用。",
+      "cls": "visually-hidden"
+     }
+    ],
+    "text": "学生姓名\n保存\n\n词汇服务暂时不可用。\n\n词汇服务暂时不可用。"
+   },
+   "after": {
+    "input": {
+     "self": {
+      "role": "textbox",
+      "name": "学生姓名",
+      "description": "词汇服务暂时不可用。",
+      "checked": null,
+      "pressed": null,
+      "invalid": "true",
+      "live": null,
+      "focusable": true
+     },
+     "children": []
+    },
+    "form": {
+     "self": {
+      "role": "form",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "LabelText",
+       "name": "",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "textbox",
+       "name": "学生姓名",
+       "description": "词汇服务暂时不可用。",
+       "checked": null,
+       "pressed": null,
+       "invalid": "true",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "保存",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "alert",
+       "name": "",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": "assertive",
+       "focusable": null
+      },
+      {
+       "role": "paragraph",
+       "name": "",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      }
+     ]
+    },
+    "copies": 0,
+    "alerts": [
+     {
+      "text": "词汇服务暂时不可用。",
+      "cls": "eqb-field-live"
+     }
+    ],
+    "text": "学生姓名\n保存\n\n词汇服务暂时不可用。"
+   }
+  },
+  "w1440/listen-accent": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "发音",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "美音",
+       "description": null,
+       "checked": null,
+       "pressed": "true",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "英音",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 36,
+      "w": 138.4,
+      "radius": "8px",
+      "border": "1px rgb(197, 211, 218)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(30, 74, 58)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(30, 74, 58) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "英音",
+      "h": 36,
+      "w": 138.4,
+      "radius": "8px",
+      "border": "1px rgb(230, 237, 241)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(90, 108, 117)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 36,
+     "w": 138.4,
+     "radius": "8px",
+     "border": "1px rgb(197, 211, 218)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(30, 74, 58)",
+     "font": "12px/650",
+     "outline": "auto 1px rgb(16, 16, 16) +2px",
+     "shadow": "rgba(27, 43, 51, 0.12) 0px 0px 0px 3px"
+    },
+    "tabStops": [
+     "button「美音」 pressed=true",
+     "button「英音」 pressed=false"
+    ],
+    "arrow": {
+     "start": "button「美音」 pressed=true",
+     "afterRight": "button「美音」 pressed=true",
+     "statesAfterRight": [
+      "美音:true",
+      "英音:false"
+     ],
+     "afterLeft": "button「美音」 pressed=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "发音",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "美音",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "英音",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 32,
+      "w": 140.4,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "英音",
+      "h": 32,
+      "w": 140.4,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 140.4,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「美音」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「美音」 checked=true",
+     "afterRight": "button[role=radio]「英音」 checked=true",
+     "statesAfterRight": [
+      "美音:false",
+      "英音:true"
+     ],
+     "afterLeft": "button[role=radio]「美音」 checked=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   }
+  },
+  "w1440/listen-repeat": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "每词播放",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "1遍",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "2遍",
+       "description": null,
+       "checked": null,
+       "pressed": "true",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "3遍",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "1遍",
+      "h": 36,
+      "w": 90.3,
+      "radius": "8px",
+      "border": "1px rgb(230, 237, 241)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(90, 108, 117)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "2遍",
+      "h": 36,
+      "w": 90.3,
+      "radius": "8px",
+      "border": "1px rgb(197, 211, 218)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(30, 74, 58)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(30, 74, 58) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "3遍",
+      "h": 36,
+      "w": 90.3,
+      "radius": "8px",
+      "border": "1px rgb(230, 237, 241)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(90, 108, 117)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 36,
+     "w": 90.3,
+     "radius": "8px",
+     "border": "1px rgb(197, 211, 218)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(30, 74, 58)",
+     "font": "12px/650",
+     "outline": "auto 1px rgb(16, 16, 16) +2px",
+     "shadow": "rgba(27, 43, 51, 0.12) 0px 0px 0px 3px"
+    },
+    "tabStops": [
+     "button「1遍」 pressed=false",
+     "button「2遍」 pressed=true",
+     "button「3遍」 pressed=false"
+    ],
+    "arrow": {
+     "start": "button「2遍」 pressed=true",
+     "afterRight": "button「2遍」 pressed=true",
+     "statesAfterRight": [
+      "1遍:false",
+      "2遍:true",
+      "3遍:false"
+     ],
+     "afterLeft": "button「2遍」 pressed=true",
+     "statesAfterLeft": [
+      "1遍:false",
+      "2遍:true",
+      "3遍:false"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "每词播放",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "1遍",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "2遍",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "3遍",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "1遍",
+      "h": 32,
+      "w": 92.9,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "2遍",
+      "h": 32,
+      "w": 92.9,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "3遍",
+      "h": 32,
+      "w": 92.9,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 92.9,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「2遍」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「2遍」 checked=true",
+     "afterRight": "button[role=radio]「3遍」 checked=true",
+     "statesAfterRight": [
+      "1遍:false",
+      "2遍:false",
+      "3遍:true"
+     ],
+     "afterLeft": "button[role=radio]「2遍」 checked=true",
+     "statesAfterLeft": [
+      "1遍:false",
+      "2遍:true",
+      "3遍:false"
+     ]
+    }
+   }
+  },
+  "w1440/dictation-repeat": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "每词播放",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "1遍",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "2遍",
+       "description": null,
+       "checked": null,
+       "pressed": "true",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "3遍",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "1遍",
+      "h": 53,
+      "w": 26,
+      "radius": "8px",
+      "border": "1px rgb(230, 237, 241)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(90, 108, 117)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "2遍",
+      "h": 53,
+      "w": 26,
+      "radius": "8px",
+      "border": "1px rgb(197, 211, 218)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(30, 74, 58)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(30, 74, 58) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "3遍",
+      "h": 53,
+      "w": 26,
+      "radius": "8px",
+      "border": "1px rgb(230, 237, 241)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(90, 108, 117)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 53,
+     "w": 26,
+     "radius": "8px",
+     "border": "1px rgb(197, 211, 218)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(30, 74, 58)",
+     "font": "12px/650",
+     "outline": "auto 1px rgb(16, 16, 16) +2px",
+     "shadow": "rgba(27, 43, 51, 0.12) 0px 0px 0px 3px"
+    },
+    "tabStops": [
+     "button「1遍」 pressed=false",
+     "button「2遍」 pressed=true",
+     "button「3遍」 pressed=false"
+    ],
+    "arrow": {
+     "start": "button「2遍」 pressed=true",
+     "afterRight": "button「2遍」 pressed=true",
+     "statesAfterRight": [
+      "1遍:false",
+      "2遍:true",
+      "3遍:false"
+     ],
+     "afterLeft": "button「2遍」 pressed=true",
+     "statesAfterLeft": [
+      "1遍:false",
+      "2遍:true",
+      "3遍:false"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "每词播放",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "1遍",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "2遍",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "3遍",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "1遍",
+      "h": 32,
+      "w": 42.3,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "2遍",
+      "h": 32,
+      "w": 45,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "3遍",
+      "h": 32,
+      "w": 45,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 45,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「2遍」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「2遍」 checked=true",
+     "afterRight": "button[role=radio]「3遍」 checked=true",
+     "statesAfterRight": [
+      "1遍:false",
+      "2遍:false",
+      "3遍:true"
+     ],
+     "afterLeft": "button[role=radio]「2遍」 checked=true",
+     "statesAfterLeft": [
+      "1遍:false",
+      "2遍:true",
+      "3遍:false"
+     ]
+    }
+   }
+  },
+  "w390/combine-accent": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "口音",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "美音",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "英音",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 36,
+      "w": 54,
+      "radius": "8px 0px 0px 8px",
+      "border": "1px rgb(41, 66, 77)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/400",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "英音",
+      "h": 36,
+      "w": 53,
+      "radius": "0px 8px 8px 0px",
+      "border": "1px rgb(220, 230, 235)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/400",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 36,
+     "w": 54,
+     "radius": "8px 0px 0px 8px",
+     "border": "1px rgb(41, 66, 77)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(27, 43, 51)",
+     "font": "14px/400",
+     "outline": "auto 1px rgb(16, 16, 16) +0px",
+     "shadow": "none"
+    },
+    "tabStops": [
+     "button「美音」",
+     "button「英音」"
+    ],
+    "arrow": {
+     "start": "button「美音」",
+     "afterRight": "button「美音」",
+     "statesAfterRight": [
+      "美音:is-selected",
+      "英音:-"
+     ],
+     "afterLeft": "button「美音」",
+     "statesAfterLeft": [
+      "美音:is-selected",
+      "英音:-"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "口音",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "美音",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "英音",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 32,
+      "w": 50,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "英音",
+      "h": 32,
+      "w": 50,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 50,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「美音」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「美音」 checked=true",
+     "afterRight": "button[role=radio]「英音」 checked=true",
+     "statesAfterRight": [
+      "美音:false",
+      "英音:true"
+     ],
+     "afterLeft": "button[role=radio]「美音」 checked=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   }
+  },
+  "w390/task-accent": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "口音",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "美音",
+       "description": null,
+       "checked": null,
+       "pressed": "true",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "英音",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 36,
+      "w": 166.5,
+      "radius": "8px 0px 0px 8px",
+      "border": "1px rgb(41, 66, 77)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "英音",
+      "h": 36,
+      "w": 165.5,
+      "radius": "0px 8px 8px 0px",
+      "border": "1px rgb(220, 230, 235)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 36,
+     "w": 166.5,
+     "radius": "8px 0px 0px 8px",
+     "border": "1px rgb(41, 66, 77)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(27, 43, 51)",
+     "font": "14px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "none"
+    },
+    "tabStops": [
+     "button「美音」 pressed=true",
+     "button「英音」 pressed=false"
+    ],
+    "arrow": {
+     "start": "button「美音」 pressed=true",
+     "afterRight": "button「美音」 pressed=true",
+     "statesAfterRight": [
+      "美音:true",
+      "英音:false"
+     ],
+     "afterLeft": "button「美音」 pressed=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "口音",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "美音",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "英音",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 32,
+      "w": 165,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "英音",
+      "h": 32,
+      "w": 165,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 165,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「美音」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「美音」 checked=true",
+     "afterRight": "button[role=radio]「英音」 checked=true",
+     "statesAfterRight": [
+      "美音:false",
+      "英音:true"
+     ],
+     "afterLeft": "button[role=radio]「美音」 checked=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   }
+  },
+  "w390/meaning-order": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "顺序",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "随机",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "原顺序",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "随机",
+      "h": 36,
+      "w": 165.5,
+      "radius": "8px 0px 0px 8px",
+      "border": "1px rgb(220, 230, 235)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "原顺序",
+      "h": 36,
+      "w": 166.5,
+      "radius": "0px 8px 8px 0px",
+      "border": "1px rgb(220, 230, 235)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 36,
+     "w": 165.5,
+     "radius": "8px 0px 0px 8px",
+     "border": "1px rgb(220, 230, 235)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(27, 43, 51)",
+     "font": "14px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "none"
+    },
+    "tabStops": [
+     "button「随机」",
+     "button「原顺序」"
+    ],
+    "arrow": {
+     "start": "button「随机」",
+     "afterRight": "button「随机」",
+     "statesAfterRight": [
+      "随机:is-selected",
+      "原顺序:-"
+     ],
+     "afterLeft": "button「随机」",
+     "statesAfterLeft": [
+      "随机:is-selected",
+      "原顺序:-"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "顺序",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "随机",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "原顺序",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "随机",
+      "h": 32,
+      "w": 165,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "原顺序",
+      "h": 32,
+      "w": 165,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 165,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「随机」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「随机」 checked=true",
+     "afterRight": "button[role=radio]「原顺序」 checked=true",
+     "statesAfterRight": [
+      "随机:false",
+      "原顺序:true"
+     ],
+     "afterLeft": "button[role=radio]「随机」 checked=true",
+     "statesAfterLeft": [
+      "随机:true",
+      "原顺序:false"
+     ]
+    }
+   }
+  },
+  "w390/meaning-suggest": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "spinbutton",
+      "name": "词",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": true
+     },
+     "children": []
+    },
+    "style": {
+     "h": 33,
+     "w": 64,
+     "radius": "8px",
+     "border": "1px rgb(220, 230, 235)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "12px/500",
+     "outline": "none 3px rgb(27, 43, 51) +0px",
+     "shadow": "none"
+    },
+    "focusVisible": true
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "spinbutton",
+      "name": "推荐词数",
+      "description": "词",
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": true
+     },
+     "children": []
+    },
+    "style": {
+     "h": 36,
+     "w": 64,
+     "radius": "8px",
+     "border": "1px rgb(220, 230, 235)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "14px/400",
+     "outline": "none 3px rgb(27, 43, 51) +0px",
+     "shadow": "none"
+    },
+    "focusVisible": true
+   }
+  },
+  "w390/result-accent": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "听写发音",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "美音",
+       "description": null,
+       "checked": null,
+       "pressed": "true",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "英音",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 36,
+      "w": 58,
+      "radius": "8px 0px 0px 8px",
+      "border": "1px rgb(197, 211, 218)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "英音",
+      "h": 36,
+      "w": 58,
+      "radius": "0px 8px 8px 0px",
+      "border": "1px rgb(220, 230, 235)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 36,
+     "w": 58,
+     "radius": "8px 0px 0px 8px",
+     "border": "1px rgb(197, 211, 218)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(27, 43, 51)",
+     "font": "14px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "none"
+    },
+    "tabStops": [
+     "button「美音」 pressed=true",
+     "button「英音」 pressed=false"
+    ],
+    "arrow": {
+     "start": "button「美音」 pressed=true",
+     "afterRight": "button「美音」 pressed=true",
+     "statesAfterRight": [
+      "美音:true",
+      "英音:false"
+     ],
+     "afterLeft": "button「美音」 pressed=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "听写发音",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "美音",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "英音",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 32,
+      "w": 50,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "英音",
+      "h": 32,
+      "w": 50,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 50,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「美音」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「美音」 checked=true",
+     "afterRight": "button[role=radio]「英音」 checked=true",
+     "statesAfterRight": [
+      "美音:false",
+      "英音:true"
+     ],
+     "afterLeft": "button[role=radio]「美音」 checked=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   }
+  },
+  "w390/review-accent": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "过词读音",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "美音",
+       "description": null,
+       "checked": null,
+       "pressed": "true",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "英音",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 36,
+      "w": 48,
+      "radius": "4px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(27, 43, 51)",
+      "font": "14px/600",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "英音",
+      "h": 36,
+      "w": 48,
+      "radius": "4px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "14px/600",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 36,
+     "w": 48,
+     "radius": "4px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(27, 43, 51)",
+     "font": "14px/600",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "none"
+    },
+    "tabStops": [
+     "button「美音」 pressed=true",
+     "button「英音」 pressed=false"
+    ],
+    "arrow": {
+     "start": "button「美音」 pressed=true",
+     "afterRight": "button「美音」 pressed=true",
+     "statesAfterRight": [
+      "美音:true",
+      "英音:false"
+     ],
+     "afterLeft": "button「美音」 pressed=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "过词读音",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "美音",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "英音",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 32,
+      "w": 50,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "英音",
+      "h": 32,
+      "w": 50,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 50,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「美音」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「美音」 checked=true",
+     "afterRight": "button[role=radio]「英音」 checked=true",
+     "statesAfterRight": [
+      "美音:false",
+      "英音:true"
+     ],
+     "afterLeft": "button[role=radio]「美音」 checked=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   }
+  },
+  "w390/createBefore": {
+   "before": {
+    "alerts": [
+     {
+      "text": "",
+      "cls": "visually-hidden",
+      "rects": 1
+     }
+    ]
+   },
+   "after": {
+    "alerts": [
+     {
+      "text": "",
+      "cls": "eqb-field-live",
+      "rects": 1
+     }
+    ]
+   }
+  },
+  "w390/createError": {
+   "before": {
+    "input": {
+     "self": {
+      "role": "textbox",
+      "name": "学生姓名",
+      "description": "词汇服务暂时不可用。",
+      "checked": null,
+      "pressed": null,
+      "invalid": "true",
+      "live": null,
+      "focusable": true
+     },
+     "children": []
+    },
+    "form": {
+     "self": {
+      "role": "form",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "LabelText",
+       "name": "",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "textbox",
+       "name": "学生姓名",
+       "description": "词汇服务暂时不可用。",
+       "checked": null,
+       "pressed": null,
+       "invalid": "true",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "保存",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "paragraph",
+       "name": "",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "alert",
+       "name": "",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": "assertive",
+       "focusable": null
+      }
+     ]
+    },
+    "copies": 0,
+    "alerts": [
+     {
+      "text": "词汇服务暂时不可用。",
+      "cls": "visually-hidden"
+     }
+    ],
+    "text": "学生姓名\n保存\n\n词汇服务暂时不可用。\n\n词汇服务暂时不可用。"
+   },
+   "after": {
+    "input": {
+     "self": {
+      "role": "textbox",
+      "name": "学生姓名",
+      "description": "词汇服务暂时不可用。",
+      "checked": null,
+      "pressed": null,
+      "invalid": "true",
+      "live": null,
+      "focusable": true
+     },
+     "children": []
+    },
+    "form": {
+     "self": {
+      "role": "form",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "LabelText",
+       "name": "",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "textbox",
+       "name": "学生姓名",
+       "description": "词汇服务暂时不可用。",
+       "checked": null,
+       "pressed": null,
+       "invalid": "true",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "保存",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "alert",
+       "name": "",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": "assertive",
+       "focusable": null
+      },
+      {
+       "role": "paragraph",
+       "name": "",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      }
+     ]
+    },
+    "copies": 0,
+    "alerts": [
+     {
+      "text": "词汇服务暂时不可用。",
+      "cls": "eqb-field-live"
+     }
+    ],
+    "text": "学生姓名\n保存\n\n词汇服务暂时不可用。"
+   }
+  },
+  "w390/listen-accent": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "发音",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "美音",
+       "description": null,
+       "checked": null,
+       "pressed": "true",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "英音",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 36,
+      "w": 153,
+      "radius": "8px",
+      "border": "1px rgb(197, 211, 218)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(30, 74, 58)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(30, 74, 58) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "英音",
+      "h": 36,
+      "w": 153,
+      "radius": "8px",
+      "border": "1px rgb(230, 237, 241)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(90, 108, 117)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 36,
+     "w": 153,
+     "radius": "8px",
+     "border": "1px rgb(197, 211, 218)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(30, 74, 58)",
+     "font": "12px/650",
+     "outline": "auto 1px rgb(16, 16, 16) +2px",
+     "shadow": "rgba(27, 43, 51, 0.12) 0px 0px 0px 3px"
+    },
+    "tabStops": [
+     "button「美音」 pressed=true",
+     "button「英音」 pressed=false"
+    ],
+    "arrow": {
+     "start": "button「美音」 pressed=true",
+     "afterRight": "button「美音」 pressed=true",
+     "statesAfterRight": [
+      "美音:true",
+      "英音:false"
+     ],
+     "afterLeft": "button「美音」 pressed=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "发音",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "美音",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "英音",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "美音",
+      "h": 32,
+      "w": 155,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "英音",
+      "h": 32,
+      "w": 155,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 155,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「美音」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「美音」 checked=true",
+     "afterRight": "button[role=radio]「英音」 checked=true",
+     "statesAfterRight": [
+      "美音:false",
+      "英音:true"
+     ],
+     "afterLeft": "button[role=radio]「美音」 checked=true",
+     "statesAfterLeft": [
+      "美音:true",
+      "英音:false"
+     ]
+    }
+   }
+  },
+  "w390/listen-repeat": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "每词播放",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "1遍",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "2遍",
+       "description": null,
+       "checked": null,
+       "pressed": "true",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "3遍",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "1遍",
+      "h": 36,
+      "w": 100,
+      "radius": "8px",
+      "border": "1px rgb(230, 237, 241)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(90, 108, 117)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "2遍",
+      "h": 36,
+      "w": 100,
+      "radius": "8px",
+      "border": "1px rgb(197, 211, 218)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(30, 74, 58)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(30, 74, 58) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "3遍",
+      "h": 36,
+      "w": 100,
+      "radius": "8px",
+      "border": "1px rgb(230, 237, 241)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(90, 108, 117)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 36,
+     "w": 100,
+     "radius": "8px",
+     "border": "1px rgb(197, 211, 218)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(30, 74, 58)",
+     "font": "12px/650",
+     "outline": "auto 1px rgb(16, 16, 16) +2px",
+     "shadow": "rgba(27, 43, 51, 0.12) 0px 0px 0px 3px"
+    },
+    "tabStops": [
+     "button「1遍」 pressed=false",
+     "button「2遍」 pressed=true",
+     "button「3遍」 pressed=false"
+    ],
+    "arrow": {
+     "start": "button「2遍」 pressed=true",
+     "afterRight": "button「2遍」 pressed=true",
+     "statesAfterRight": [
+      "1遍:false",
+      "2遍:true",
+      "3遍:false"
+     ],
+     "afterLeft": "button「2遍」 pressed=true",
+     "statesAfterLeft": [
+      "1遍:false",
+      "2遍:true",
+      "3遍:false"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "每词播放",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "1遍",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "2遍",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "3遍",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "1遍",
+      "h": 32,
+      "w": 102.7,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "2遍",
+      "h": 32,
+      "w": 102.7,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "3遍",
+      "h": 32,
+      "w": 102.7,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 102.7,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「2遍」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「2遍」 checked=true",
+     "afterRight": "button[role=radio]「3遍」 checked=true",
+     "statesAfterRight": [
+      "1遍:false",
+      "2遍:false",
+      "3遍:true"
+     ],
+     "afterLeft": "button[role=radio]「2遍」 checked=true",
+     "statesAfterLeft": [
+      "1遍:false",
+      "2遍:true",
+      "3遍:false"
+     ]
+    }
+   }
+  },
+  "w390/dictation-repeat": {
+   "before": {
+    "ax": {
+     "self": {
+      "role": "group",
+      "name": "每词播放",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": "false",
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "button",
+       "name": "1遍",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "2遍",
+       "description": null,
+       "checked": null,
+       "pressed": "true",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "button",
+       "name": "3遍",
+       "description": null,
+       "checked": null,
+       "pressed": "false",
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "1遍",
+      "h": 36,
+      "w": 104,
+      "radius": "8px",
+      "border": "1px rgb(230, 237, 241)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(90, 108, 117)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "2遍",
+      "h": 36,
+      "w": 104,
+      "radius": "8px",
+      "border": "1px rgb(197, 211, 218)",
+      "bg": "rgb(230, 237, 240)",
+      "color": "rgb(30, 74, 58)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(30, 74, 58) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "3遍",
+      "h": 36,
+      "w": 104,
+      "radius": "8px",
+      "border": "1px rgb(230, 237, 241)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(90, 108, 117)",
+      "font": "12px/650",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 36,
+     "w": 104,
+     "radius": "8px",
+     "border": "1px rgb(197, 211, 218)",
+     "bg": "rgb(230, 237, 240)",
+     "color": "rgb(30, 74, 58)",
+     "font": "12px/650",
+     "outline": "auto 1px rgb(16, 16, 16) +2px",
+     "shadow": "rgba(27, 43, 51, 0.12) 0px 0px 0px 3px"
+    },
+    "tabStops": [
+     "button「1遍」 pressed=false",
+     "button「2遍」 pressed=true",
+     "button「3遍」 pressed=false"
+    ],
+    "arrow": {
+     "start": "button「2遍」 pressed=true",
+     "afterRight": "button「2遍」 pressed=true",
+     "statesAfterRight": [
+      "1遍:false",
+      "2遍:true",
+      "3遍:false"
+     ],
+     "afterLeft": "button「2遍」 pressed=true",
+     "statesAfterLeft": [
+      "1遍:false",
+      "2遍:true",
+      "3遍:false"
+     ]
+    }
+   },
+   "after": {
+    "ax": {
+     "self": {
+      "role": "none",
+      "name": "",
+      "description": null,
+      "checked": null,
+      "pressed": null,
+      "invalid": null,
+      "live": null,
+      "focusable": null
+     },
+     "children": [
+      {
+       "role": "radiogroup",
+       "name": "每词播放",
+       "description": null,
+       "checked": null,
+       "pressed": null,
+       "invalid": null,
+       "live": null,
+       "focusable": null
+      },
+      {
+       "role": "radio",
+       "name": "1遍",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "2遍",
+       "description": null,
+       "checked": "true",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      },
+      {
+       "role": "radio",
+       "name": "3遍",
+       "description": null,
+       "checked": "false",
+       "pressed": null,
+       "invalid": "false",
+       "live": null,
+       "focusable": true
+      }
+     ]
+    },
+    "optionStyles": [
+     {
+      "text": "1遍",
+      "h": 32,
+      "w": 106.7,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     },
+     {
+      "text": "2遍",
+      "h": 32,
+      "w": 106.7,
+      "radius": "999px",
+      "border": "0px rgb(27, 43, 51)",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(27, 43, 51)",
+      "font": "13px/500",
+      "outline": "none 3px rgb(27, 43, 51) +0px",
+      "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+     },
+     {
+      "text": "3遍",
+      "h": 32,
+      "w": 106.7,
+      "radius": "999px",
+      "border": "0px rgb(90, 108, 117)",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(90, 108, 117)",
+      "font": "13px/400",
+      "outline": "none 3px rgb(90, 108, 117) +0px",
+      "shadow": "none"
+     }
+    ],
+    "focusVisible": true,
+    "focusStyle": {
+     "h": 32,
+     "w": 106.7,
+     "radius": "999px",
+     "border": "0px rgb(27, 43, 51)",
+     "bg": "rgb(255, 255, 255)",
+     "color": "rgb(27, 43, 51)",
+     "font": "13px/500",
+     "outline": "solid 2px rgb(41, 66, 77) +2px",
+     "shadow": "rgba(27, 43, 51, 0.08) 0px 0px 0px 1px, rgba(27, 43, 51, 0.05) 0px 1px 2px 0px"
+    },
+    "tabStops": [
+     "button[role=radio]「2遍」 checked=true"
+    ],
+    "arrow": {
+     "start": "button[role=radio]「2遍」 checked=true",
+     "afterRight": "button[role=radio]「3遍」 checked=true",
+     "statesAfterRight": [
+      "1遍:false",
+      "2遍:false",
+      "3遍:true"
+     ],
+     "afterLeft": "button[role=radio]「2遍」 checked=true",
+     "statesAfterLeft": [
+      "1遍:false",
+      "2遍:true",
+      "3遍:false"
+     ]
+    }
+   }
+  }
+ }
+}

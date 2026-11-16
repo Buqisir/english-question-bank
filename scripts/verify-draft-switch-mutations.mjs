@@ -104,11 +104,12 @@ async function scenario(kind, switchPath, timing) {
     await page.getByRole('button', { name: '更多题组操作', exact: true }).first().waitFor()
     if (kind === 'delete') {
       await page.getByRole('button', { name: '更多题组操作', exact: true }).first().click()
-      await page.getByRole('button', { name: '移除', exact: true }).click()
+      // 构件厂第 4 步：题组「⋯」换成 shared-ui/Menu，「移除」是 menuitem。
+      await page.getByRole('menuitem', { name: '移除', exact: true }).click()
     }
     if (kind === 'reorder') await page.locator('.draft-reorder-suggestion-act').click()
     if (kind === 'replace') {
-      await page.getByRole('button', { name: '换一篇相似篇章', exact: true }).first().click()
+      await page.getByRole('button', { name: '换篇：换一篇相似篇章', exact: true }).first().click()
       await page.getByRole('button', { name: '⇄ 替换这篇', exact: true }).click()
     }
     await mutationStarted.promise
@@ -135,7 +136,10 @@ async function scenario(kind, switchPath, timing) {
     if (timing === 'before') { bRelease.resolve(); await page.locator('.topbar-page-title').filter({ hasText: 'Draft B' }).waitFor() }
     await settle(page)
     // Exercise any stale undo that reappears, then inspect its actual API target.
-    const undo = page.locator('.draft-undo-toast[data-visible="true"] button').filter({ hasText: '撤销' })
+    // 排序建议采用后，撤回在卡片上（DESIGN.md §5 Proposal → Decision），不在底部提示条。
+    const undo = kind === 'reorder'
+      ? page.locator('.draft-reorder-suggestion[data-state="decided"] button').filter({ hasText: '撤回' })
+      : page.locator('.draft-undo-toast[data-visible="true"] button').filter({ hasText: '撤销' })
     const staleUndo = await undo.count()
     if (staleUndo) { await undo.first().click(); await settle(page) }
     assert.equal(writes.filter(w => w.pathname.startsWith('/api/draft-papers/B')).length, 0, 'A undo must never write B')

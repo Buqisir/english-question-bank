@@ -33,6 +33,9 @@
   --eqb-color-primary-deep: #1e4a3a;
   --eqb-color-danger: #dc2626;
   --eqb-color-danger-soft: rgba(239, 68, 68, 0.08);
+  /* 危险小字：比 danger 深一档，对白 5.60、对页底 5.10、对桌色悬停底 4.73，都过 AA。
+     danger 本身不动，仍给图标、描边、色块用（Owner 2026-11-14 决定 #9）。 */
+  --eqb-color-danger-text: #ca2121;
   --eqb-color-warning: #E8901A;
   /* Small warning text: AA on paper and desk-hover; keep the bright mark color. */
   --eqb-color-warning-text: #965a08;
@@ -41,9 +44,45 @@
   --eqb-color-success: #1FA062;
   --eqb-color-success-soft: rgba(31, 160, 98, 0.10);
   --eqb-color-success-rgb: 31, 160, 98; /* 供 rgba() alpha 叠层复用；不单独当色值使用 */
-  --eqb-shadow-floating: 0 8px 24px rgba(0, 0, 0, 0.12);
+  /* 四档高度（DESIGN.md §4，Owner 2026-11-13 定；数值目测，待测量）。一盏顶光，
+     影子只用墨 rgb(27 43 51)：墨圈给边、接触影贴桌、主影偏移 h 模糊 3h。
+     e0 贴桌 = none；e1 放着（纸、首页搜索）；e2 拿起来（草稿丸等一直在屏上的浮件）；
+     e3 浮着（菜单、弹层、toast、弹窗——只给临时的东西）。 */
+  --elev-1: 0 0 0 1px rgb(27 43 51 / 0.08), 0 1px 2px rgb(27 43 51 / 0.05);
+  --elev-2: 0 0 0 1px rgb(27 43 51 / 0.08), 0 1px 2px rgb(27 43 51 / 0.05), 0 2px 6px rgb(27 43 51 / 0.06);
+  --elev-3: 0 0 0 1px rgb(27 43 51 / 0.08), 0 1px 2px rgb(27 43 51 / 0.05), 0 6px 18px rgb(27 43 51 / 0.1);
+  /* 纸面（DESIGN.md §4「不在四档里的」· Sheet 纸面，Owner 2026-09-15 列为标准）：一条贴地发丝 + 一层远而淡的漫射，
+     只给网页里画成一整张纸的地方（整卷页的纸、生词本的纸、题组详情露一角的纸、草稿卷打开时的 A4 灰块），卡片和浮层不得借用。
+     值和原来各处的字面量一字不差（纯黑，不是四档的墨）。等待第五轮（2026-11-15）从各处字面量收进来（docs/design-gaps.md 2026-11-15 条）。
+     PaperSurface 自己的 .ps-page 阴影（#00000010 / #00000014，透明度 0.063 / 0.078）、草稿卷预览 iframe 里的 .preview-page、
+     写作卷 .pi-writing-page（0.063）值不一样，没收进来。 */
+  --elev-sheet: 0 1px 0 rgba(0, 0, 0, 0.06), 0 12px 32px rgba(0, 0, 0, 0.08);
+
+  /* 空状态插图（迁移第 12 条，2026-11-13，提案 · 单一来源；颜色目测，待测量）：
+     插图 = 这一页图标的平涂版，只用三个角色，不用薄荷。深 = 后片、封面、笔、卷角；
+     浅 = 前片、纸上的字；纸 = 白。 */
+  --eqb-color-ill-deep: #c9d6dd;
+  --eqb-color-ill-mid: #dce6eb;
+  --eqb-color-ill-paper: #ffffff;
+
+  /* 圆角（DESIGN.md §5 The Single-Radius-Family Rule；Owner 2026-11-13 补「按高度选档」「嵌套同心」「胶囊只给标签类」三条）。
+     名字照 DESIGN.md 文件头 rounded: 那一组。只收家族里的值：
+     badge 4 = 高 24px 以下的小件（徽章、小色块）、菜单项；control 8 = 28–44px 的控件（按钮、输入框）、下拉菜单面板；
+     card 12 = 卡片、板、弹窗，浏览页紧凑搜索框；search 16 = 首页搜索框；
+     pill 999px = 胶囊，只给标签类：筛选芯片、只读小标、分段切换、开关，有字的按钮不用（草稿丸 2026-11-14 起算按钮，用 control 8）；
+     circle 50% = 圆形：头像、圆点、短动作的纯图标圆钮。
+     0（卷面直角）不设变量。家族外的值不收，要新档先记 docs/design-gaps.md。 */
+  --eqb-radius-badge: 4px;
+  --eqb-radius-control: 8px;
+  --eqb-radius-card: 12px;
+  --eqb-radius-search: 16px;
+  --eqb-radius-pill: 999px;
+  --eqb-radius-circle: 50%;
 
   --eqb-font-size-xs: 12px;
+  /* 控件字号（Owner 2026-11-14 定）：DESIGN.md §3 的 UI Compact 档 13px，用在控件类——胶囊（chip.css）、
+     紧凑按钮。别处已有的 13px 字面值这一轮没跟着换，清点见 design/components-2026-11-13/migrate-chip-r2/README.md。 */
+  --eqb-font-size-control: 13px;
   --eqb-font-size-sm: 14px;
   --eqb-font-size-md: 16px;
   --eqb-font-size-lg: 20px;
@@ -54,4 +93,12 @@
   --eqb-space-3: 12px;
   --eqb-space-4: 16px;
   --eqb-space-5: 24px;
+
+  /* 等待（DESIGN.md §5「Waiting 等待」：门槛、灰块）。等待第六轮（2026-11-15）从各处字面量收进来（docs/design-gaps.md 2026-11-15 条）：
+     JS 的 useDelayedBusy（门槛、最短停留）、main.tsx 启动壳（灰块对相位）都读这里，CSS 的 waiting.css 灰块、index.css 启动壳门槛也用这里。
+     show-delay 等这么久还没好才出等待的样子；min-visible 出了就至少留这么久；breathe-cycle 灰块一呼一吸一圈。
+     和 --motion-*（动效时长，App.css）分开：这三个是「等多久」，不是「动多快」。 */
+  --wait-show-delay: 300ms;
+  --wait-min-visible: 500ms;
+  --wait-breathe-cycle: 1800ms;
 }

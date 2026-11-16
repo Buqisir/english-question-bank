@@ -1,8 +1,19 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { Archive, ArrowDown, ArrowLeftRight, ArrowUp, Ellipsis, FolderPlus, PageBreak, PaperCheck, PaperStudent, RotateCcw, Save, Trash } from '../../icons'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
-import { FluidHoverList } from '../../components/FluidHoverList'
-import { useModalDialog } from '../../components/useModalDialog'
+import { Button } from '../../shared-ui/Button.tsx'
+import { Dialog } from '../../shared-ui/Dialog.tsx'
+import { EmptyState } from '../../shared-ui/EmptyState.tsx'
+import { Menu } from '../../shared-ui/Menu.tsx'
+import { Field, SelectField, TextField } from '../../shared-ui/Field.tsx'
+import { OptionSelectField, SegmentedField } from '../../shared-ui/OptionField.tsx'
+import { Notice } from '../../shared-ui/Notice.tsx'
+import { Toast } from '../../shared-ui/Toast.tsx'
+import { InlineWaitDots } from '../../shared-ui/WaitDots.tsx'
+import { useDelayedBusy, useSlowWait } from '../../shared-ui/useDelayedBusy.ts'
+import { PaperGroupSkeleton, Skeleton, SkeletonOver } from '../../shared-ui/Skeleton.tsx'
+import { Surface } from '../../shared-ui/Surface.tsx'
+import { planFocusAfterRemoval, programmaticFocusTarget } from '../../shared-ui/focusAfterRemoval.ts'
 import type { DraftPaper, DraftPaperItem, DraftPaperSummary, DraftPrintForm, GroupType, MySpaceFolder, QuestionGroupCard } from '../../domain/questionBank'
 import {
   addGroupToDraftPaper,
@@ -10,6 +21,7 @@ import {
   downloadDraftPaperPdf,
   fetchCurrentDraftPaper,
   fetchDraftPaper,
+  fetchDraftPaperEditionAvailability,
   fetchDraftEconomyFeasibility,
   fetchDraftPaperPagination,
   fetchDraftPapers,
@@ -18,6 +30,7 @@ import {
   patchDraftPaperItem,
   restoreDraftPaperItem,
   updateDraftPaper,
+  type DraftPaperEditionAvailability,
   type ReorderSuggestion,
 } from '../../services/draftPapers'
 import {
@@ -32,7 +45,7 @@ import {
 } from '../../paperAssembly/basketPersistence'
 import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import { describeError } from '../shared/errorCopy'
-import { useToastPresence, usePresence } from '../shared/useToastPresence.ts'
+import { usePresence } from '../shared/useToastPresence.ts'
 import { similarPassagesRecipeSummary, type SimilarPassagesRequestState } from '../similar-passages/SimilarPassagesPanel'
 import { DraftPaperRail } from './DraftPaperRail'
 import { A3_FACE_NATIVE_WIDTH_PX, applyA3Imposition, buildA4PreviewHtml } from './draftPaperPreviewHtml'
@@ -67,6 +80,42 @@ type RemovedDraftItem = {
   pageBreakBefore: boolean
 }
 
+// 提示行（shared-ui/Notice）用的出错：自己的话（哪里没成功、东西还在不在），不另写兜底的话（No-Literal-Fallback）。
+// 原始报错只给 console（describeError），不给老师看（verify-error-copy-mainline）；只有服务器专门写给老师的
+// 那几句（纯答案版不可用、某个 PDF 版本排不出来、题量不足）照登，见 serverCopy。
+type Failure = { lead: string; detail: string; retry?: () => void }
+
+// 服务器写给老师的话：只在已知是这类报错的地方用。不是 Error 就没有可登的话，留空。
+function serverCopy(error: unknown): string {
+  return error instanceof Error ? error.message : ''
+}
+
+function failure(task: string, error: unknown, keep?: string): Failure {
+  describeError(task, error)
+  return { lead: keep ? `${task}没成功，${keep}` : `${task}没成功`, detail: '' }
+}
+
+// 只放得下一个字符串的地方（保存状态的 title、读屏名字、⋯ 面板那一行）用。
+function failureLine(task: string, error: unknown): string {
+  return failure(task, error).lead
+}
+
+// 走查卡点 4（Owner 2026-11-14 第四节第 4 条）：「PDF 版本」菜单里用不了的版本写一行原因。
+// 判定和原话都来自服务器（preparePaperProduct，和预览、下载同一套）；这里只把认得的那几条
+// 判定（按 code）换成老师的话，各句只说那条判定真正查的东西。认不得的 code 照登服务器原话。
+const EDITION_UNAVAILABLE_TEXT: Record<string, string> = {
+  PRODUCT_EMPTY: '草稿卷里还没有题组',
+  PRODUCT_GROUP_MISSING: '有题组在题库里已经找不到了',
+  PRODUCT_ONLY_LISTENING: '这一版不印听力，草稿卷里只有听力题组',
+  LISTENING_PAIR_REQUIRED: '要有完整的两个听力题组',
+  LISTENING_PAIR_SAME_SOURCE: '两个听力题组要出自同一套卷',
+  ANSWER_SOURCE_MISSING: '选中的题组还没有审过的参考答案',
+}
+
+function editionUnavailableText(verdict: DraftPaperEditionAvailability): string {
+  return (verdict.code && EDITION_UNAVAILABLE_TEXT[verdict.code]) || verdict.reason || ''
+}
+
 function getLegacyBasketGroupIds() {
   if (typeof window === 'undefined') return []
   const raw = window.localStorage.getItem(ASSEMBLY_BASKET_STORAGE_KEY)
@@ -79,6 +128,14 @@ function clearLegacyBasket() {
   window.localStorage.removeItem(ASSEMBLY_BASKET_STORAGE_KEY)
 }
 
+// 一次挪动只发一次分页请求（Owner 2026-11-14，fix-waiting/README.md「为什么要等一两分钟」第 3 条）：
+// 服务器保存题组表时把 order_index 按新顺序重编成 1..n（server/draft-paper/draftPaperStore.mjs
+// updateDraftPaper + normalizeDraftItemOrder）。乐观更新这边也照样重编，PATCH 回来的题组表和
+// 乐观的那份 itemsLayoutKey 一样，就不会因为编号不同再触发一次分页请求。
+function renumberItems(items: DraftPaperItem[]): DraftPaperItem[] {
+  return items.map((item, index) => (item.orderIndex === index + 1 ? item : { ...item, orderIndex: index + 1 }))
+}
+
 function reorderItems(items: DraftPaperItem[], itemId: string, direction: -1 | 1) {
   const index = items.findIndex((item) => item.id === itemId)
   const nextIndex = index + direction
@@ -86,7 +143,7 @@ function reorderItems(items: DraftPaperItem[], itemId: string, direction: -1 | 1
   const next = [...items]
   const [item] = next.splice(index, 1)
   next.splice(nextIndex, 0, item)
-  return next
+  return renumberItems(next)
 }
 
 function moveItemTo(items: DraftPaperItem[], draggedId: string, targetId: string) {
@@ -97,7 +154,40 @@ function moveItemTo(items: DraftPaperItem[], draggedId: string, targetId: string
   const next = [...items]
   const [item] = next.splice(from, 1)
   next.splice(to, 0, item)
-  return next
+  return renumberItems(next)
+}
+
+// 移出题组、撤销移出以后要放的焦点（见下面「删后焦点」那一段）。
+type PendingDraftFocus = {
+  kind: 'remove' | 'undo'
+  generation: number
+  /** 每次调用重新查页面：要落的那个键还不在（卷面还在重排）就返回 null。 */
+  find: () => HTMLElement | null
+  /** 发起时焦点在哪（被移出那一组的「更多题组操作」、提示里的「撤销」）。 */
+  from: HTMLElement | null
+  /** 等的过程中已经先放过一次的键。 */
+  placed: HTMLElement | null
+  /** 撤销时被撤回的那一组：它还在卷上（没缺题）就一直等到它的工具条挂上，不提前兜底。 */
+  waitForGroupId?: string
+  /** 要落的键都在左栏里（左栏缺题项的「移除」）：不随卷面重排卸掉，不用等卷面排好，删完马上落。 */
+  railOnly?: boolean
+}
+
+// 打开草稿卷的灰块：目录板里几行（宽度错开，像「1 阅读 A」这类短行），纸上一份卷头加两组卷面灰块。
+const DRAFT_SKELETON_RAIL_WIDTHS = [104, 88, 112]
+
+/** 一张 A4 的灰块（等待第四轮）：位置、大小照预览里的 .preview-page（794 宽、离纸栏顶 24）。对读屏隐藏。 */
+function DraftSheetSkeleton() {
+  return (
+    <div className="draft-skeleton-sheet" aria-hidden="true">
+      <div className="draft-skeleton-sheet-head">
+        <Skeleton width={180} height={20} />
+        <Skeleton width={240} height={12} />
+      </div>
+      <PaperGroupSkeleton />
+      <PaperGroupSkeleton />
+    </div>
+  )
 }
 
 export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode {
@@ -112,54 +202,52 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const [titleDraft, setTitleDraft] = useState('')
   const [studentLabelDraft, setStudentLabelDraft] = useState('')
   const [loadStatus, setLoadStatus] = useState<'loading' | 'loaded' | 'error'>('loading')
-  const [loadError, setLoadError] = useState('')
+  const [loadError, setLoadError] = useState<Failure | null>(null)
   const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [saveError, setSaveError] = useState('')
   const [exportStatus, setExportStatus] = useState<'idle' | 'exporting' | 'exported' | 'error'>('idle')
-  const [exportError, setExportError] = useState('')
+  // 生成 PDF 超过 10 秒还没好：那一行多说一句（DESIGN.md §5 Waiting「要等好几秒的事」，2026-11-15 第二轮只做这一处）。
+  const exportSlow = useSlowWait(exportStatus === 'exporting')
+  const [exportError, setExportError] = useState<Failure | null>(null)
   const [exportSuccessMessage, setExportSuccessMessage] = useState('')
   const [spaceDialogOpen, setSpaceDialogOpen] = useState(false)
-  // motion-press-exit #2: 弹层退出 ~120ms（var(--motion-fast)）播完再卸载。
-  const spaceDialogPresence = usePresence(spaceDialogOpen, 120)
-  const spaceDialogRef = useModalDialog(spaceDialogPresence.mounted)
   const [spaceFolders, setSpaceFolders] = useState<MySpaceFolder[]>([])
   const [spaceFolderId, setSpaceFolderId] = useState('')
   const [spaceFileName, setSpaceFileName] = useState('')
   const [spaceNewFolderName, setSpaceNewFolderName] = useState('')
   const [spaceStatus, setSpaceStatus] = useState<'idle' | 'loading' | 'saving' | 'saved' | 'error'>('idle')
   const [spaceMessage, setSpaceMessage] = useState('')
+  // 对话框里读文件夹（等待第七轮 2026-11-15）：「文件夹」下拉的位置画灰块，走门槛；灰块在的时候出错那行也先不挂，等灰块走了一起换上。
+  const spaceFoldersPhase = useDelayedBusy(spaceStatus === 'loading')
+  const spaceFoldersWaiting = spaceStatus === 'loading' || spaceFoldersPhase === 'waiting'
   // ui-p1-panels #14: the save dialog used to stay open after a successful
   // save, with the success text squeezed into the form body and "保存"
   // still clickable (repeat-save risk, "取消" reading oddly once already
   // saved). It now closes on success and hands off to this toast — same
   // pattern as `draft-undo-toast` below.
-  const [savedToastMessage, setSavedToastMessage] = useState<string | null>(null)
-  const savedToastTimerRef = useRef<number | null>(null)
+  // 底部提示换成共用 Toast（2026-11-15）：停留计时、一次只显示一条、入退场都在构件里，这里只存「要说的话」和
+  // 一个每次都不一样的 at（同一句话连着出两次时重新计时）。原来的四个计时 ref 和 presence 删了。
+  const [savedToast, setSavedToast] = useState<{ text: string; at: number } | null>(null)
   const [migrationNotice, setMigrationNotice] = useState('')
   const [edition, setEdition] = useState<PaperPdfEdition>('largeNoListening')
+  // 每个 PDF 版本这份草稿能不能出（服务器判定）。surface 记它是哪一份草稿的，换了草稿就不用。
+  const [editionAvailability, setEditionAvailability] = useState<{ surface: string; editions: DraftPaperEditionAvailability[] } | null>(null)
   const [removedItem, setRemovedItem] = useState<RemovedDraftItem | null>(null)
-  // motion-press-exit #3: toast keyframe→transition — 退出前保持挂载
-  // var(--motion-fast)(120ms)播完退出再真卸载。
-  const removedItemToast = useToastPresence(removedItem, 120)
-  const savedToastPresence = useToastPresence(savedToastMessage, 120)
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null)
-  const [openGroupActionsItemId, setOpenGroupActionsItemId] = useState<string | null>(null)
-  const [exportMenuOpen, setExportMenuOpen] = useState(false)
+  // 构件厂第 4 步（2026-11-13）：「导出」菜单和题组「⋯」菜单换成 shared-ui/Menu，
+  // 开关、点外面关、Esc 关并还焦点都由构件自己管，这里不再存它们的开关状态。
   // workbench-header-unify Locked Decision 2: the retired `.draft-toolbar`'s
   // 学生（可选）/ 最近草稿卷 / 自动保存状态 三项 now live behind this quiet
-  // "⋯" menu in the head row — same disclosure pattern as exportMenuOpen
-  // above (outside-click + Escape dismiss effect below).
+  // "⋯" panel in the head row (outside-click + Escape dismiss effect below).
+  // 它里面是表单字段，不是菜单项，所以不换 Menu，仍是自己的弹出面板。
   const [moreMenuOpen, setMoreMenuOpen] = useState(false)
   // 复评工艺账（2026-07-17 C 路）：菜单入场有 keyframe、关闭裸卸载=可感的
   // 不对称。与 toast/模态同走 usePresence——退（motion-micro）快于入
   // （motion-fast），播完 exit 再卸载。
-  const exportMenuPresence = usePresence(exportMenuOpen, 80)
   const moreMenuPresence = usePresence(moreMenuOpen, 80)
   const titleSaveTimerRef = useRef<number | null>(null)
-  const undoTimerRef = useRef<number | null>(null)
   const focusedOnceRef = useRef(false)
   const a4SheetRef = useRef<HTMLDivElement | null>(null)
-  const exportMenuRef = useRef<HTMLDivElement | null>(null)
   const moreMenuRef = useRef<HTMLDivElement | null>(null)
   const [previewScale, setPreviewScale] = useState(1)
   // draft-desk-a: iframe now grows to its full rendered height (read from
@@ -181,8 +269,18 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // An unavailable answer booklet must never display the previous question PDF.
   const [paginatedHtml, setPaginatedHtml] = useState('')
   const [renderedPaginationKey, setRenderedPaginationKey] = useState('')
+  // 走查卡点 2（Owner 2026-11-14 第四节第 2 条）：同一份草稿、同一个 PDF 版本里
+  // 只是排版变了（挪、删、加、分页、改标题），重排期间留着旧卷面、盖一层遮罩；
+  // 换了草稿或版本才不显示旧卷面（纯答案版不能拿题卷顶着）。这里记下当前
+  // paginatedHtml 是哪一份草稿、哪个版本的。
+  const [renderedSurfaceKey, setRenderedSurfaceKey] = useState('')
+  // 「重试」按钮：数字一变，paginationKey 跟着变，分页请求重新发一次。
+  const [paginationRetry, setPaginationRetry] = useState(0)
+  // 删、加、换篇、分页这几种改动要等服务器回话才知道新的题组表；等的这一下
+  // 也算「正在重排」，卷面先盖上遮罩，不让老师点完看不到任何变化。
+  const [layoutSavesPending, setLayoutSavesPending] = useState(0)
   const [paginationStatus, setPaginationStatus] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle')
-  const [paginationError, setPaginationError] = useState('')
+  const [paginationError, setPaginationError] = useState<Failure | null>(null)
   const [economyAvailability, setEconomyAvailability] = useState<{ key: string; insufficient: boolean } | null>(null)
   const economyCheckKey = useRef('')
   const paginationRequests = useRef(new Map<string, ReturnType<typeof fetchDraftPaperPagination>>())
@@ -197,19 +295,25 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // quiet, real-dry-run-verified 排序建议 card — fetched only after a
   // pagination response comes back with pageBreakSuggestions.length > 0 (see
   // the effect below), never polled/timered on its own (Forbidden: 无后台
-  // 轮询). `reorderUndoSnapshot` holds the pre-apply item order so 撤销 can
-  // PATCH straight back to it; it is cleared both by its own 8s timer and by
-  // any OTHER item mutation in the meantime (moveItem/handleDrop/deleteItem/
-  // undoDelete/togglePageBreak below all call clearReorderUndo() first — the
-  // snapshot is stale the instant a different edit lands, 施工契约 3 边界).
+  // 轮询). `reorderUndoSnapshot` holds the pre-apply item order so 撤回 can
+  // PATCH straight back to it; it is cleared by any OTHER item mutation
+  // (moveItem/handleDrop/deleteItem/undoDelete/togglePageBreak below all call
+  // clearReorderUndo() first — the snapshot is stale the instant a different
+  // edit lands, 施工契约 3 边界).
+  // 提议和决定（DESIGN.md §5 Proposal → Decision，Owner 2026-11-13 定）：采用后
+  // 卡片留在原处变成「已采用 · 撤回」，不再弹底部提示条；撤回失效（别的编辑、
+  // 换草稿卷、离开页面）时卡片一起收起，所以去掉了原来 8 秒的计时。
+  // `text` 是采用那一刻卡上的话（采用后断篇消失，建议本身会被清掉）；`ready`
+  // 在保存成功前为 false，这期间点撤回先记下，保存成功后再撤。
   const [reorderSuggestion, setReorderSuggestion] = useState<ReorderSuggestion>(null)
-  const [reorderUndoSnapshot, setReorderUndoSnapshot] = useState<{ generation: number; items: DraftPaperItem[] } | null>(null)
-  const reorderUndoTimerRef = useRef<number | null>(null)
+  const [reorderUndoSnapshot, setReorderUndoSnapshot] = useState<{ generation: number; items: DraftPaperItem[]; text: string; ready: boolean } | null>(null)
+  // 撤回后到新建议回来之前，卡片按原话留在「建议」状态，不闪一下消失。
+  const [reorderRestoredText, setReorderRestoredText] = useState<string | null>(null)
+  const reorderCardRef = useRef<HTMLDivElement | null>(null)
+  const reorderFocusPendingRef = useRef(false)
+  // 保存还没回来时点了「撤回」：先记下，保存成功后马上撤回，不悄悄吞掉这一下。
+  const reorderUndoQueuedRef = useRef(false)
   const reorderRequestIdRef = useRef(0)
-  // Same delayed-unmount toast pattern as removedItemToast above — driven by
-  // presence of reorderUndoSnapshot rather than a payload value, since the
-  // toast's own text is static.
-  const reorderUndoToastPresence = usePresence(reorderUndoSnapshot !== null, 120)
   // draft-desk-b step3 (MF-5, plan.md "步3"): per-group persistent overlay
   // button anchors — replaces the retired hover-only sticker (裁点1 in
   // draft-desk-a) with one always-visible button per question group. Keyed by
@@ -234,9 +338,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // seed (never null while swapSeedItemId is non-null).
   const [swapSeedItemId, setSwapSeedItemId] = useState<string | null>(null)
   const [swapRequest, setSwapRequest] = useState<SimilarPassagesRequestState | null>(null)
-  const [swapAddToastMessage, setSwapAddToastMessage] = useState<string | null>(null)
-  const swapAddToastTimerRef = useRef<number | null>(null)
-  const swapAddToastPresence = useToastPresence(swapAddToastMessage, 120)
+  const [swapAddToast, setSwapAddToast] = useState<{ text: string; at: number } | null>(null)
   // 替换 undo snapshot — same 8s-timer + toast-presence shape as
   // reorderUndoSnapshot above, and same 撤销快照互斥 lifecycle (plan.md 施工
   // 要点 4/5, DP-2 script ⑥): any OTHER item mutation (including the OTHER
@@ -244,8 +346,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // clearReplaceUndo/clearReorderUndo below, called in pairs everywhere
   // either kind of edit happens.
   const [replaceUndoSnapshot, setReplaceUndoSnapshot] = useState<{ removed: RemovedDraftItem; addedItemId: string } | null>(null)
-  const replaceUndoTimerRef = useRef<number | null>(null)
-  const replaceUndoToastPresence = usePresence(replaceUndoSnapshot !== null, 120)
 
   // Bug 4263fb71: both switch surfaces leave the workbench mounted, so a
   // snapshot captured on the previous draft stays live on the new one and
@@ -258,14 +358,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     if (titleSaveTimerRef.current) window.clearTimeout(titleSaveTimerRef.current)
     setSaveStatus('idle')
     setSaveError('')
-    if (undoTimerRef.current) window.clearTimeout(undoTimerRef.current)
-    undoTimerRef.current = null
-    if (reorderUndoTimerRef.current) window.clearTimeout(reorderUndoTimerRef.current)
-    reorderUndoTimerRef.current = null
-    if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
-    replaceUndoTimerRef.current = null
     setRemovedItem(null)
     setReorderUndoSnapshot(null)
+    setReorderRestoredText(null)
     setReplaceUndoSnapshot(null)
     setSwapSeedItemId(null)
     setSwapRequest(null)
@@ -281,7 +376,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
 
   const loadDraft = useCallback(async () => {
     setLoadStatus('loading')
-    setLoadError('')
+    setLoadError(null)
     setMigrationNotice('')
     // popstate switch path (parent-prop change re-runs loadDraft): the
     // [loadDraft] effect cleanup clears the undo TIMERS but not the undo
@@ -321,7 +416,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (generation !== draftGenerationRef.current) return
       setLoadStatus('error')
-      setLoadError(describeError('打开草稿卷', error))
+      setLoadError(failure('打开草稿卷', error, '卷里的题组没动'))
     }
   }, [draftPaperId, loadRecentDrafts, resetTransientStateForDraftSwitch])
 
@@ -330,11 +425,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     return () => {
       draftGenerationRef.current += 1
       if (titleSaveTimerRef.current) window.clearTimeout(titleSaveTimerRef.current)
-      if (undoTimerRef.current) window.clearTimeout(undoTimerRef.current)
-      if (savedToastTimerRef.current) window.clearTimeout(savedToastTimerRef.current)
-      if (reorderUndoTimerRef.current) window.clearTimeout(reorderUndoTimerRef.current)
-      if (swapAddToastTimerRef.current) window.clearTimeout(swapAddToastTimerRef.current)
-      if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
     }
   }, [loadDraft])
 
@@ -342,30 +432,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     focusedOnceRef.current = false
   }, [draftPaperId, focusGroupId])
 
-  // D5: close the export menu on outside click or Escape, mirroring the
-  // dismiss behavior native disclosure widgets give you for free.
-  useEffect(() => {
-    if (!exportMenuOpen) return
-    function handlePointerDown(event: MouseEvent) {
-      if (exportMenuRef.current && !exportMenuRef.current.contains(event.target as Node)) {
-        setExportMenuOpen(false)
-      }
-    }
-    function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') setExportMenuOpen(false)
-    }
-    document.addEventListener('mousedown', handlePointerDown)
-    document.addEventListener('keydown', handleKeyDown)
-    return () => {
-      document.removeEventListener('mousedown', handlePointerDown)
-      document.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [exportMenuOpen])
-
-  // workbench-header-unify: same dismiss pattern as the export menu effect
-  // above, for the "⋯" menu.
+  // workbench-header-unify: outside-click / Escape dismiss for the "⋯" panel
+  // (D5 原先给导出菜单写的同一套；导出菜单换成 Menu 后只剩这一处用).
   useEffect(() => {
     if (!moreMenuOpen) return
+    // 字段构件那一轮（2026-11-14）起「PDF 版本」不再放进「⋯」面板，原来给它开的「点在版本菜单上不关面板」的例外删掉。
     function handlePointerDown(event: MouseEvent) {
       if (moreMenuRef.current && !moreMenuRef.current.contains(event.target as Node)) {
         setMoreMenuOpen(false)
@@ -443,8 +514,28 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         ? `把「${titleFor(reorderSuggestion.move.itemId)}」和「${titleFor(reorderSuggestion.move.otherItemId)}」调换顺序即可消除。`
         : `把「${titleFor(reorderSuggestion.move.itemId)}」移到卷${reorderSuggestion.move.kind === 'front' ? '首' : '尾'}即可消除。`
     const reasonText = pageBreakSuggestions.find((entry) => entry.groupId === reorderSuggestion.brokenGroupId)?.reason || ''
-    return { text: `${reasonText}${moveText}` }
+    return { text: reasonText ? `${reasonText}，${moveText}` : moveText }
   }, [draftPaper, reorderSuggestion, pageBreakSuggestions])
+
+  // 提议和决定：卡片只有两种状态。已采用优先（采用后建议本身会被清掉）；
+  // 撤回后新建议回来前，用原话撑住「建议」状态。
+  const reorderDecided = reorderUndoSnapshot && reorderUndoSnapshot.generation === draftGeneration ? reorderUndoSnapshot : null
+  const reorderCard: { state: 'proposal' | 'decided'; text: string } | null = reorderDecided
+    ? { state: 'decided', text: reorderDecided.text }
+    : reorderSuggestionCard
+      ? { state: 'proposal', text: reorderSuggestionCard.text }
+      : reorderRestoredText
+        ? { state: 'proposal', text: reorderRestoredText }
+        : null
+  const reorderCardState = reorderCard?.state ?? null
+
+  // 点「采用」「撤回」后按钮换了一个，焦点跟到新按钮上，键盘用户不丢位置。
+  useEffect(() => {
+    if (!reorderFocusPendingRef.current) return
+    reorderFocusPendingRef.current = false
+    if (!reorderCardState) return
+    reorderCardRef.current?.querySelector<HTMLButtonElement>('button')?.focus()
+  }, [reorderCardState])
 
   // draft-desk-b step3 (MF-3): the exact fields draftPaperPaginationSignature
   // (server/draft-paper/draftPaperStore.mjs) treats as layout — item identity/
@@ -458,7 +549,41 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     () => JSON.stringify((draftPaper?.items ?? []).map((item) => [item.id, item.groupId, item.orderIndex, item.pageBreakBefore])),
     [draftPaper?.items],
   )
-  const paginationKey = JSON.stringify([draftGeneration, draftPaper?.id, draftPaper?.title, itemsLayoutKey, edition, draftPaper?.printForm])
+  const surfaceKey = JSON.stringify([draftGeneration, draftPaper?.id, edition])
+  const availabilitySurface = JSON.stringify([draftGeneration, draftPaper?.id])
+  const availabilityKey = JSON.stringify([availabilitySurface, itemsLayoutKey])
+
+  // 走查卡点 4：题组一变就重新问一次各版本能不能出（不排版，很快）。问的这一下菜单里
+  // 留着同一份草稿上一次的结果；问不到就不标（不猜），选了以后照旧由预览和下载报原因。
+  useEffect(() => {
+    if (!draftPaper) return
+    let cancelled = false
+    const surface = availabilitySurface
+    fetchDraftPaperEditionAvailability(draftPaper.id)
+      .then((editions) => {
+        if (!cancelled) setEditionAvailability({ surface, editions })
+      })
+      .catch((error) => {
+        if (cancelled) return
+        console.error('读取 PDF 版本能不能用', error)
+        setEditionAvailability(null)
+      })
+    return () => {
+      cancelled = true
+    }
+    // availabilityKey 已含草稿和题组表；draftPaper 对象本身每次保存都会换。
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [availabilityKey])
+  const editionVerdicts = useMemo(
+    () => new Map((editionAvailability?.surface === availabilitySurface ? editionAvailability.editions : []).map((verdict) => [verdict.edition, verdict])),
+    [editionAvailability, availabilitySurface],
+  )
+  const paginationKey = JSON.stringify([draftGeneration, draftPaper?.id, draftPaper?.title, itemsLayoutKey, edition, draftPaper?.printForm, paginationRetry])
+  // 一次挪动只发一次分页请求（fix-waiting/README.md「为什么要等一两分钟」第 3 条）：题组表的保存
+  // （persistItems、withLayoutSave 包着的那几处）还没回来时不发分页请求，等服务器回了题组表再按它发一次。
+  const layoutSaveInFlight = layoutSavesPending > 0
+  // 省纸版凑不够 8 页（主干 #717）：编排前的检查（上面的 editionVerdicts）看不出来，要真排一次；
+  // 只在老师点开「PDF 版本」时问一次，同一份内容问过就不再问。
   const contentKey = JSON.stringify([draftGeneration, draftPaper?.id, draftPaper?.title, itemsLayoutKey, draftPaper?.printForm])
   const economyInsufficient = economyAvailability?.key === contentKey && economyAvailability.insufficient
   function requestPagination(product: PaperPdfEdition) {
@@ -502,13 +627,16 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       paginationRequestIdRef.current += 1
       setPaginatedHtml('')
       setPaginationStatus('idle')
-      setPaginationError('')
+      setPaginationError(null)
       setPageBreakSuggestions([])
     }
     if (!draftPaper || draftPaper.items.length === 0) {
       resetPagination()
       return
     }
+    if (layoutSaveInFlight) return
+    // 保存回来、题组表和已经排好的那份一样（比如保存失败退回原样）：不用再排一次。
+    if (renderedPaginationKey === paginationKey && paginationStatus === 'ready') return
     paginationDebounceRef.current = window.setTimeout(() => {
       if (generation !== draftGenerationRef.current) return
       setPaginationStatus('loading')
@@ -517,19 +645,23 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           if (paginationRequestIdRef.current !== requestId || generation !== draftGenerationRef.current) return
           setPaginatedHtml(result.paginatedHtml)
           setRenderedPaginationKey(paginationKey)
+          setRenderedSurfaceKey(surfaceKey)
           setPaginationStatus('ready')
-          setPaginationError('')
+          setPaginationError(null)
           setPageBreakSuggestions(result.pageBreakSuggestions)
         })
         .catch((error) => {
           if (paginationRequestIdRef.current !== requestId || generation !== draftGenerationRef.current) return
-          setPaginatedHtml('')
+          // 不清 paginatedHtml：同一份草稿、同一版本的旧卷面留着，上面写一行没成功
+          // （见下面 previewHtml 和卷面状态行）；换了版本的旧卷面本来就不显示。
           setRenderedPaginationKey(paginationKey)
           setPaginationStatus('error')
+          // 「题量不足 8 页」和纯答案版不可用：再排一次结果一样，不给「重试」。
           setPaginationError(error instanceof Error && error.message.includes('题量不足 8 页')
-            ? '题量不足 8 页，加题后可用' : edition === 'answerOnly'
-            ? `纯答案版不可用：${error instanceof Error ? error.message : '无法读取同版本源参考答案。'}`
-            : describeError('生成分页预览', error))
+            ? { lead: '题量不足 8 页，加题后可用', detail: '' }
+            : edition === 'answerOnly'
+              ? { lead: '纯答案版不可用', detail: serverCopy(error) }
+              : { ...failure('排卷面', error), retry: () => setPaginationRetry((count) => count + 1) })
         })
     }, 400)
     return () => {
@@ -542,7 +674,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     // is deliberately excluded from the render signature, see
     // draftPaperStore.mjs's getDraftPaperPagination doc comment).
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [paginationKey])
+  }, [paginationKey, layoutSaveInFlight])
 
   // reorder-suggest (plan.md 施工契约 3 "拉取策略"): fires only once the
   // pagination fetch above has resolved with real breakage — never on its
@@ -554,6 +686,8 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     const requestId = (reorderRequestIdRef.current += 1)
     if (!draftPaper || renderedPaginationKey !== paginationKey || pageBreakSuggestions.length === 0) {
       setReorderSuggestion(null)
+      // 分页已经出结果且没有断篇：撤回后留着的原话也该收起了。
+      if (!draftPaper || renderedPaginationKey === paginationKey) setReorderRestoredText(null)
       return
     }
     const draftPaperId = draftPaper.id
@@ -561,6 +695,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       .then((suggestion) => {
         if (reorderRequestIdRef.current !== requestId) return
         setReorderSuggestion(suggestion)
+        setReorderRestoredText(null)
       })
       .catch(() => {
         // Quiet by design (plan.md "安静常驻卡"): a failed fetch here just
@@ -568,6 +703,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         // The next pagination fetch (any subsequent edit) tries again.
         if (reorderRequestIdRef.current !== requestId) return
         setReorderSuggestion(null)
+        setReorderRestoredText(null)
       })
   }, [draftPaper?.id, pageBreakSuggestions, edition, renderedPaginationKey, paginationKey])
 
@@ -575,11 +711,37 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // same call this useMemo made before this cut — applyA3Imposition only
   // ever runs when printForm==='a3', so a4 output is byte-identical to
   // pre-cut (zero-diff hard断言, verify-a3-imposition.mjs asserts this).
+  //
+  // 走查卡点 2：以前这里要求 renderedPaginationKey === paginationKey 才出卷面，
+  // 任何排版改动一发生两者就不等，卷面立刻变成空白，要等新分页回来（本地一两
+  // 分钟）。现在只要求是同一份草稿、同一版本（surfaceKey），排版没跟上时照样
+  // 显示旧卷面，由 previewStale 盖遮罩。
   const previewHtml = useMemo(() => {
-    if (renderedPaginationKey !== paginationKey || !paginatedHtml) return ''
+    if (renderedSurfaceKey !== surfaceKey || !paginatedHtml) return ''
     const base = buildA4PreviewHtml(paginatedHtml)
     return draftPaper?.printForm === 'a3' ? applyA3Imposition(base) : base
-  }, [paginatedHtml, draftPaper?.printForm, renderedPaginationKey, paginationKey])
+  }, [paginatedHtml, draftPaper?.printForm, renderedSurfaceKey, surfaceKey])
+  // 卷面落后于左栏：分页还没按当前的题组表排出来，或者删、加的保存还没回来。
+  const previewStale = renderedPaginationKey !== paginationKey || layoutSavesPending > 0
+  const previewFailed = !previewStale && paginationStatus === 'error'
+  // 等待第五轮（2026-11-15）：重排等过 10 秒，那一行改说大概要多久。本地重排一次约 37 秒、每次都这么久，
+  // 所以不说「比平时慢」（DESIGN.md §5 Waiting，午第四轮建议、协调人排进第五轮）。
+  const reflowSlow = useSlowWait(previewStale)
+  // 等待第四轮（2026-11-15）：打开草稿卷、第一次排出卷面之前，纸的位置画灰块。两段（读草稿卷、分页）接成一段等，
+  // 走同一个门槛：读完草稿卷换上真目录时，纸上的灰块不断、不重新数 300ms。
+  const sheetPending = loadStatus === 'loading'
+    || (loadStatus === 'loaded' && draftPaper !== null && draftPaper.items.length > 0 && !previewHtml
+      && !(renderedPaginationKey === paginationKey && paginationStatus === 'error' && paginationError))
+  const sheetPhase = useDelayedBusy(sheetPending)
+
+  async function withLayoutSave<T>(run: () => Promise<T>): Promise<T> {
+    setLayoutSavesPending((count) => count + 1)
+    try {
+      return await run()
+    } finally {
+      setLayoutSavesPending((count) => count - 1)
+    }
+  }
 
   // The iframe re-navigates (srcDoc changes → full document reload) whenever
   // previewHtml changes; scrollspy/persistent-button/page-badge reads must
@@ -745,6 +907,113 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     return () => observer.disconnect()
   }, [groupAnchors])
 
+  // 删后焦点（2026-11-15，DESIGN.md §5 Interaction「删后焦点」；记录 design/components-2026-11-13/migrate-followup/README.md 第二节）。
+  // 从题组「⋯」菜单移出：菜单关上时焦点先回到这一组的「更多题组操作」，等服务器回话后这一组的工具条没了，
+  // 焦点照 shared-ui/focusAfterRemoval.ts 的顺序落到下一组的「更多题组操作」→ 上一组的 → 左栏「卷面目录」。
+  // 卷面要重排：新分页回来、iframe 重新载入时所有工具条会先卸掉再按新位置挂上，所以这里一直等到排好
+  // （没有在途的保存、卷面不旧、工具条位置算出来了）才算完；中间工具条还在时先放一次，被卸掉再放回同一个键。
+  // 撤销移出：排好以后焦点落到被撤回那一组自己的「更多题组操作」（回到移出之前的位置）；那一组没有工具条时落到「卷面目录」。
+  // 左栏缺题项的「移除」走同一条路（removeFromRail）：落下一项的「移除」→ 上一项的 → 「卷面目录」；撤销后回到它自己的「移除」。
+  // 「卷面目录」在窄屏藏起来时，两种兜底都改落卷的标题（h1，平时视觉上藏着）。
+  // 只在焦点掉到 <body>、还在发起处或我们先放过的键上时动；用户已经把焦点挪到别处（比如 Tab 进了别的地方）就不抢。
+  const pendingFocusRef = useRef<PendingDraftFocus | null>(null)
+  useLayoutEffect(() => {
+    const pending = pendingFocusRef.current
+    if (!pending) return
+    if (pending.generation !== draftGeneration) {
+      pendingFocusRef.current = null
+      return
+    }
+    // 左栏删除：服务器回话、那一项从左栏里没了才算删完（删之前 withLayoutSave 先改一次计数，那时不能动焦点；
+    // 删失败时 deleteItemNow 的 catch 会清掉这次安排）。
+    if (pending.railOnly && pending.from?.isConnected) return
+    const active = document.activeElement
+    const lost = !active || active === document.body || !active.isConnected
+    const ours = active instanceof HTMLElement && (
+      active === pending.from
+      || active === pending.placed
+      || Boolean(active.closest('.draft-undo-toast'))
+      // 撤销时提示收起会把焦点还给进提示之前的那个键（多半是上一次移出后放过去的下一组的键），也算我们的。
+      || (pending.kind === 'undo' && Boolean(active.closest('.draft-group-actions')))
+      // 左栏缺题项：撤销提示收起时焦点还回去的是左栏里的「移除」（删完放过去的下一项的键），也算我们的。
+      || (pending.kind === 'undo' && Boolean(active.closest('.draft-paper-rail-item')))
+    )
+    if (!lost && !ours) {
+      pendingFocusRef.current = null
+      return
+    }
+    const settled = Boolean(pending.railOnly) || layoutSavesPending === 0
+      && (nonMissingItems.length === 0 || (!previewStale && previewReady && Object.keys(groupAnchors).length > 0))
+    const target = pending.find()
+    // 撤销以后服务器先回话、卷面后重排：刚回话那一下旧的工具条位置还在，看着像「排好了」，
+    // 可被撤回那一组的工具条还没挂上。这时提前兜底，焦点会落到「卷面目录」，随后撤销提示收起又把焦点
+    // 还给进提示之前的那个键（下一组的「⋯」），就回不到被撤回的那一组了。所以这一组只要还在卷上，就等它的键出现。
+    const waiting = !target && Boolean(pending.waitForGroupId)
+      && nonMissingItems.some((entry) => entry.groupId === pending.waitForGroupId)
+    // 被撤回的是左栏缺题项时，要落的键在左栏里，不随卷面重排卸掉；卷里还有缺题项时卷面一直排不出来（不会「排好」），
+    // 所以不等排好：键一出现就放过去，不等焦点先掉。只对撤销这样做——移出时焦点可能已经被用户 Tab 进了撤销提示，不能抢回来。
+    const railUndoTarget = pending.kind === 'undo' && target && target.closest('.draft-paper-rail') ? target : null
+    if (!settled || waiting) {
+      if (target && (lost || (railUndoTarget && active !== railUndoTarget))) {
+        target.focus({ preventScroll: true })
+        pending.placed = target
+      }
+      return
+    }
+    pendingFocusRef.current = null
+    // 兜底落「卷面目录」；窄屏（390 宽）左栏整个藏起来，没有可见的目录，就落到这张卷的标题（视觉上藏着的 h1）。
+    const rail = document.querySelector<HTMLElement>('.draft-paper-rail')
+    const heading = document.querySelector<HTMLElement>('.draft-workbench-layout > h1')
+    const last = target ?? programmaticFocusTarget(rail && rail.getClientRects().length > 0 ? rail : heading)
+    if (last && last !== active) last.focus()
+  }, [draftGeneration, layoutSavesPending, nonMissingItems, previewStale, previewReady, groupAnchors])
+
+  function removeFromGroupMenu(item: DraftPaperItem, trigger: HTMLButtonElement | null) {
+    if (trigger) {
+      const next = planFocusAfterRemoval(trigger, {
+        item: '.draft-group-actions',
+        key: 'data-draft-tools-group-id',
+        control: '.draft-group-menu-trigger',
+        // 前后都找不到时不在这里落到标题：卷面没排好时工具条暂时不在，要等排好再决定（见上面的 effect）。
+        fallback: () => null,
+        scope: paperColRef.current ?? document,
+      })
+      pendingFocusRef.current = { kind: 'remove', generation: draftGeneration, find: next, from: trigger, placed: null }
+    }
+    void deleteItem(item)
+  }
+
+  // 左栏缺题项的「移除」（2026-11-15；记录 design/components-2026-11-13/migrate-rail/README.md）：同一套删后焦点。
+  // 删之前定好：下一项的「移除」→ 上一项的 → 兜底（上面那个 effect 落「卷面目录」，窄屏落 h1）。
+  // 这几个键都在左栏，不随卷面重排卸掉，所以不等卷面排好（railOnly）：服务器回话、左栏重画那一下就落。
+  // 删的是最后一个缺题项时卷面要重新排几十秒，等排好再落的话焦点在 <body> 上待这么久（换前实测）。
+  // 只有缺题项有「移除」，所以「下一项」是往后数最近的一个还有这个键的项（focusAfterRemoval.ts 本来就这样找）。
+  // 认项用 <li> 上的 data-draft-group-id，左栏重画以后也找得回来。
+  function removeFromRail(item: DraftPaperItem, trigger: HTMLButtonElement) {
+    const next = planFocusAfterRemoval(trigger, {
+      item: '.draft-paper-rail-item',
+      key: 'data-draft-group-id',
+      control: '.draft-paper-rail-remove',
+      fallback: () => null,
+      scope: trigger.closest('nav') ?? document,
+    })
+    pendingFocusRef.current = { kind: 'remove', generation: draftGeneration, find: next, from: trigger, placed: null, railOnly: true }
+    void deleteItem(item)
+  }
+
+  function groupMenuTrigger(groupId: string): HTMLElement | null {
+    const owner = paperColRef.current?.querySelector<HTMLElement>(`[data-draft-tools-group-id="${CSS.escape(groupId)}"]`)
+    const trigger = owner?.querySelector<HTMLElement>('.draft-group-menu-trigger')
+    return trigger && trigger.isConnected && trigger.getClientRects().length > 0 ? trigger : null
+  }
+
+  // 被撤回的是左栏的缺题项（不上卷面、没有工具条）时，焦点回到它自己的「移除」。
+  function railRemoveTrigger(groupId: string): HTMLElement | null {
+    const row = document.querySelector<HTMLElement>(`.draft-paper-rail-item[data-draft-group-id="${CSS.escape(groupId)}"]`)
+    const trigger = row?.querySelector<HTMLElement>('.draft-paper-rail-remove')
+    return trigger && trigger.isConnected && trigger.getClientRects().length > 0 ? trigger : null
+  }
+
   // a3-imposition (plan.md Must Do 3, 裁点2): recomputed on the same
   // triggers as groupAnchors above, plus pageBreakSuggestions itself (a
   // suggestion set can change — e.g. after a PATCH resolves — without the
@@ -857,7 +1126,12 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     return () => observer.disconnect()
   }, [previewHtml, draftPaper?.printForm])
 
-  async function persistItems(nextItems: DraftPaperItem[]) {
+  // 题组表的保存也算「正在重排」（withLayoutSave）：卷面先盖遮罩，分页请求等它回来再发。
+  function persistItems(nextItems: DraftPaperItem[]) {
+    return withLayoutSave(() => persistItemsNow(nextItems))
+  }
+
+  async function persistItemsNow(nextItems: DraftPaperItem[]) {
     if (!draftPaper || !isCurrentDraft()) return false
     setSaveStatus('saving')
     setSaveError('')
@@ -874,7 +1148,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (!isCurrentDraft()) return false
       setSaveStatus('error')
-      setSaveError(describeError('保存草稿卷', error))
+      setSaveError(failureLine('保存草稿卷', error))
       return false
     }
   }
@@ -895,7 +1169,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       } catch (error) {
         if (!isCurrentDraft()) return
         setSaveStatus('error')
-        setSaveError(describeError('保存标题', error))
+        setSaveError(failureLine('保存标题', error))
       }
     }, 450)
   }
@@ -919,7 +1193,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (!isCurrentDraft()) return
       setSaveStatus('error')
-      setSaveError(describeError('保存学生', error))
+      setSaveError(failureLine('保存学生', error))
     }
   }
 
@@ -945,7 +1219,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       if (!isCurrentDraft()) return
       setDraftPaper(previous)
       setSaveStatus('error')
-      setSaveError(describeError('切换打印形态', error))
+      setSaveError(failureLine('切换打印形态', error))
     }
   }
 
@@ -957,9 +1231,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // "other" mutation handler below (never inside applyReorderSuggestion /
   // undoReorderSuggestion themselves, which own the snapshot's lifecycle).
   function clearReorderUndo() {
-    if (reorderUndoTimerRef.current) window.clearTimeout(reorderUndoTimerRef.current)
-    reorderUndoTimerRef.current = null
+    reorderUndoQueuedRef.current = false
     setReorderUndoSnapshot(null)
+    setReorderRestoredText(null)
   }
 
   // similar-workbench-swap (E7): 替换's own undo-snapshot clearer, same
@@ -967,8 +1241,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // set of "other mutation" handlers (撤销快照互斥: only one of the two
   // snapshot kinds is ever live, since creating either one clears both).
   function clearReplaceUndo() {
-    if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
-    replaceUndoTimerRef.current = null
     setReplaceUndoSnapshot(null)
   }
 
@@ -993,7 +1265,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     void persistItems(nextItems)
   }
 
-  async function togglePageBreak(item: DraftPaperItem, nextValue: boolean) {
+  // 走查卡点 2：分页、删、撤销删、换篇、撤销换篇、加入这六处都套一层
+  // withLayoutSave，等服务器回话期间卷面先盖上「正在重排」。
+  function togglePageBreak(item: DraftPaperItem, nextValue: boolean) {
+    return withLayoutSave(() => togglePageBreakNow(item, nextValue))
+  }
+
+  async function togglePageBreakNow(item: DraftPaperItem, nextValue: boolean) {
     if (!draftPaper || !isCurrentDraft()) return
     clearReorderUndo()
     clearReplaceUndo()
@@ -1008,11 +1286,15 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (!isCurrentDraft()) return
       setSaveStatus('error')
-      setSaveError(describeError('更新分页设置', error))
+      setSaveError(failureLine('更新分页设置', error))
     }
   }
 
-  async function deleteItem(item: DraftPaperItem) {
+  function deleteItem(item: DraftPaperItem) {
+    return withLayoutSave(() => deleteItemNow(item))
+  }
+
+  async function deleteItemNow(item: DraftPaperItem) {
     if (!draftPaper || !isCurrentDraft()) return
     clearReorderUndo()
     clearReplaceUndo()
@@ -1028,18 +1310,21 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         orderIndex: result.removed.orderIndex,
         pageBreakBefore: result.removed.pageBreakBefore,
       })
-      if (undoTimerRef.current) window.clearTimeout(undoTimerRef.current)
-      undoTimerRef.current = window.setTimeout(() => setRemovedItem(null), 8000)
       setSaveStatus('saved')
       onDraftChanged?.()
     } catch (error) {
+      if (pendingFocusRef.current?.kind === 'remove') pendingFocusRef.current = null
       if (!isCurrentDraft()) return
       setSaveStatus('error')
-      setSaveError(describeError('删除题组', error))
+      setSaveError(failureLine('删除题组', error))
     }
   }
 
-  async function undoDelete() {
+  function undoDelete() {
+    return withLayoutSave(() => undoDeleteNow())
+  }
+
+  async function undoDeleteNow() {
     if (!draftPaper || !isCurrentDraft() || !removedItem || removedItem.generation !== draftGeneration) return
     clearReorderUndo()
     clearReplaceUndo()
@@ -1048,6 +1333,17 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       const { groupId, orderIndex, pageBreakBefore } = removedItem
       const next = await restoreDraftPaperItem(draftPaper.id, { groupId, orderIndex, pageBreakBefore })
       if (!isCurrentDraft()) return
+      // 撤销以后焦点回到被撤回那一组的「更多题组操作」；那一组没有工具条（比如题库里已经没了）时回到它在左栏的「移除」，
+      // 再没有就落到左栏「卷面目录」。
+      const fromElement = document.activeElement instanceof HTMLElement ? document.activeElement : null
+      pendingFocusRef.current = {
+        kind: 'undo',
+        generation: draftGeneration,
+        find: () => groupMenuTrigger(groupId) ?? railRemoveTrigger(groupId),
+        from: fromElement,
+        placed: null,
+        waitForGroupId: groupId,
+      }
       setDraftPaper(next)
       setTitleDraft(next.title)
       setRemovedItem(null)
@@ -1056,7 +1352,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (!isCurrentDraft()) return
       setSaveStatus('error')
-      setSaveError(describeError('撤销删除', error))
+      setSaveError(failureLine('撤销删除', error))
     }
   }
 
@@ -1068,9 +1364,10 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // coming back from that real render is the natural second check (no
   // separate re-verification step needed here).
   async function applyReorderSuggestion() {
-    if (!draftPaper || !isCurrentDraft() || !reorderSuggestion) return
+    if (!draftPaper || !isCurrentDraft() || !reorderSuggestion || !reorderSuggestionCard) return
     clearReplaceUndo()
     const snapshot = draftPaper.items
+    const cardText = reorderSuggestionCard.text
     const byId = new Map(draftPaper.items.map((item) => [item.id, item]))
     const orderedItems = reorderSuggestion.order
       .map((id) => byId.get(id))
@@ -1080,20 +1377,41 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     // draft changed underneath it, tack on anything the order missed rather
     // than silently dropping an item.
     const coveredIds = new Set(orderedItems.map((item) => item.id))
-    const nextItems = [...orderedItems, ...draftPaper.items.filter((item) => !coveredIds.has(item.id))]
+    const nextItems = renumberItems([...orderedItems, ...draftPaper.items.filter((item) => !coveredIds.has(item.id))])
     setDraftPaper({ ...draftPaper, items: nextItems })
-    if (!await persistItems(nextItems) || !isCurrentDraft()) return
-    setReorderUndoSnapshot({ generation: draftGeneration, items: snapshot })
-    if (reorderUndoTimerRef.current) window.clearTimeout(reorderUndoTimerRef.current)
-    reorderUndoTimerRef.current = window.setTimeout(() => setReorderUndoSnapshot(null), 8000)
+    // 先在原处变成「已采用」，保存在后台走；保存失败就收起（报错走 saveError）。
+    setReorderRestoredText(null)
+    setReorderUndoSnapshot({ generation: draftGeneration, items: snapshot, text: cardText, ready: false })
+    reorderFocusPendingRef.current = true
+    reorderUndoQueuedRef.current = false
+    const saved = await persistItems(nextItems)
+    if (!isCurrentDraft()) return
+    if (saved && reorderUndoQueuedRef.current) {
+      reorderUndoQueuedRef.current = false
+      setReorderUndoSnapshot(null)
+      setReorderRestoredText(cardText)
+      reorderFocusPendingRef.current = true
+      setDraftPaper((current) => (current ? { ...current, items: snapshot } : current))
+      await persistItems(snapshot)
+      return
+    }
+    reorderUndoQueuedRef.current = false
+    setReorderUndoSnapshot((current) => (current && current.items === snapshot ? (saved ? { ...current, ready: true } : null) : current))
   }
 
   async function undoReorderSuggestion() {
     if (!draftPaper || !isCurrentDraft() || !reorderUndoSnapshot || reorderUndoSnapshot.generation !== draftGeneration) return
-    const snapshot = reorderUndoSnapshot.items
-    if (reorderUndoTimerRef.current) window.clearTimeout(reorderUndoTimerRef.current)
-    reorderUndoTimerRef.current = null
+    if (!reorderUndoSnapshot.ready) {
+      reorderUndoQueuedRef.current = true
+      return
+    }
+    const { items: snapshot, text } = reorderUndoSnapshot
     setReorderUndoSnapshot(null)
+    // 保险：草稿卷里的题组和采用时不是同一批了，就不按旧顺序写回去。
+    const sameItems = snapshot.length === draftPaper.items.length && snapshot.every((item) => draftPaper.items.some((entry) => entry.id === item.id))
+    if (!sameItems) return
+    setReorderRestoredText(text)
+    reorderFocusPendingRef.current = true
     setDraftPaper({ ...draftPaper, items: snapshot })
     await persistItems(snapshot)
   }
@@ -1141,7 +1459,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // service calls that already exist (deleteDraftPaperItem +
   // addGroupToDraftPaper) — both go through services/draftPapers.ts, never
   // a bespoke bypass fetch (verify anchor: "非旁路 fetch").
-  async function applySwapReplace(candidateGroupId: string) {
+  function applySwapReplace(candidateGroupId: string) {
+    return withLayoutSave(() => applySwapReplaceNow(candidateGroupId))
+  }
+
+  async function applySwapReplaceNow(candidateGroupId: string) {
     if (!draftPaper || !isCurrentDraft() || !swapSeedItem) return
     const seedIndex = draftPaper.items.findIndex((entry) => entry.id === swapSeedItem.id)
     if (seedIndex < 0) return
@@ -1171,7 +1493,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         setDraftPaper(inserted)
         setTitleDraft(inserted.title)
         setSaveStatus('error')
-        setSaveError(describeError('替换第二步（移除原篇）', error) + '——新篇已加入，原篇仍在卷中，可手动移除原篇完成替换')
+        setSaveError(failureLine('替换第二步（移除原篇）', error) + '——新篇已加入，原篇仍在卷中，可手动移除原篇完成替换')
         onDraftChanged?.()
         setSwapSeedItemId(null)
         setSwapRequest(null)
@@ -1197,8 +1519,6 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
           },
           addedItemId: addedItem.id,
         })
-        if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
-        replaceUndoTimerRef.current = window.setTimeout(() => setReplaceUndoSnapshot(null), 8000)
       }
       // 替换后收起回目录 — the seed itemId this drawer was anchored to no
       // longer exists (it's the item just deleted above), so there is no
@@ -1209,15 +1529,17 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (!isCurrentDraft()) return
       setSaveStatus('error')
-      setSaveError(describeError('替换题组', error))
+      setSaveError(failureLine('替换题组', error))
     }
   }
 
-  async function undoSwapReplace() {
+  function undoSwapReplace() {
+    return withLayoutSave(() => undoSwapReplaceNow())
+  }
+
+  async function undoSwapReplaceNow() {
     if (!draftPaper || !isCurrentDraft() || !replaceUndoSnapshot || replaceUndoSnapshot.removed.generation !== draftGeneration) return
     const snapshot = replaceUndoSnapshot
-    if (replaceUndoTimerRef.current) window.clearTimeout(replaceUndoTimerRef.current)
-    replaceUndoTimerRef.current = null
     setReplaceUndoSnapshot(null)
     setSaveStatus('saving')
     setSaveError('')
@@ -1233,7 +1555,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     } catch (error) {
       if (!isCurrentDraft()) return
       setSaveStatus('error')
-      setSaveError(describeError('撤销替换', error))
+      setSaveError(failureLine('撤销替换', error))
     }
   }
 
@@ -1242,7 +1564,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // volume's end. No undo (C8/E2/E6 convention: 删除本就有撤销兜底), so the
   // drawer stays open afterward (unlike 替换 above, the seed item itself is
   // untouched — nothing invalidates the drawer's own anchor).
-  async function applySwapAdd(candidateGroupId: string) {
+  function applySwapAdd(candidateGroupId: string) {
+    return withLayoutSave(() => applySwapAddNow(candidateGroupId))
+  }
+
+  async function applySwapAddNow(candidateGroupId: string) {
     if (!draftPaper || !isCurrentDraft() || !swapSeedItem) return
     const seedIndex = draftPaper.items.findIndex((entry) => entry.id === swapSeedItem.id)
     if (seedIndex < 0) return
@@ -1257,20 +1583,18 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setTitleDraft(next.title)
       setSaveStatus('saved')
       onDraftChanged?.()
-      if (swapAddToastTimerRef.current) window.clearTimeout(swapAddToastTimerRef.current)
-      setSwapAddToastMessage('已加入草稿卷')
-      swapAddToastTimerRef.current = window.setTimeout(() => setSwapAddToastMessage(null), 2200)
+      setSwapAddToast({ text: '已加入草稿卷', at: Date.now() })
     } catch (error) {
       if (!isCurrentDraft()) return
       setSaveStatus('error')
-      setSaveError(describeError('加入草稿卷', error))
+      setSaveError(failureLine('加入草稿卷', error))
     }
   }
 
   async function exportPdf(mode: FileSaveMode = 'download') {
     if (!draftPaper || draftPaper.items.length === 0) return
     setExportStatus('idle')
-    setExportError('')
+    setExportError(null)
     setExportSuccessMessage('')
     try {
       const target = await prepareFileSaveTarget({
@@ -1280,24 +1604,23 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       })
       if (!target) return
       setExportStatus('exporting')
+      // 走查第四节第 8 条（Owner 2026-11-14）：下载成功只说「已下载：文件名」。原来接在后面的排版检查
+      // （字号、跨 A3 正反面的题组数、跨页的选项组数）不在这里说了；放到卷面上对应那一页要改卷面，
+      // 等 Owner 定（fix-notice/README.md「第 8 条」）。服务器照旧在响应头里给这几个数。
       await requestPagination(edition)
-      const { crossingGroupCount, splitOptionBankCount, fontSizePt } = await downloadDraftPaperPdf(draftPaper.id, edition, target)
+      const { fileName } = await downloadDraftPaperPdf(draftPaper.id, edition, target)
       setExportStatus('exported')
-      const savedMessage = target.kind === 'download'
-        ? target.fallbackFromSaveAs ? '当前浏览器不支持系统另存为，已改为普通下载。' : 'PDF 已开始下载。'
-        : 'PDF 已保存到所选位置。'
-      const longPaper = edition === 'largeComplete' || edition === 'largeNoListening'
-      setExportSuccessMessage(savedMessage + (fontSizePt ? ` 本卷采用${fontSizePt === 12 ? '小四（12pt）' : '五号（10.5pt）'}。` : '') + (crossingGroupCount > 0
-        ? ` ${longPaper ? '已满足长卷页数上限' : '已保持指定页数'}和正文版式，仍有 ${crossingGroupCount} 个题组跨 A3 正反面，请检查分页。` : '')
-        + (splitOptionBankCount > 0 ? ` ${longPaper ? '' : '为保持指定页数，'}有 ${splitOptionBankCount} 个选项组跨页，单条选项保持完整，请检查。` : ''))
+      setExportSuccessMessage(target.kind === 'download' ? `已下载：${fileName}` : `已保存：${fileName}`)
     } catch (error) {
       setExportStatus('error')
       const fixedLayoutMessage = error instanceof Error
         && /^(题量不足 8 页|未在有界搜索内找到|大字完整版需要|无法生成指定页数的友好 PDF：|长卷版未找到|长卷版：|定页版需要|10 页友好版需要完整|12 页长卷版需要完整|试卷内容超出排版区域：)/.test(error.message)
-        ? error.message : null
+      // 版本用不了、版式凑不出来，再点一次结果一样，不给「重试」。
       setExportError(edition === 'answerOnly'
-        ? `纯答案版不可用：${error instanceof Error ? error.message : '无法读取同版本源参考答案。'}`
-        : fixedLayoutMessage || describeError(mode === 'save-as' ? '另存为 PDF' : '导出 PDF', error))
+        ? { lead: '纯答案版不可用', detail: serverCopy(error) }
+        : fixedLayoutMessage
+          ? { lead: `${PAPER_PDF_PRODUCTS[edition]}出不来，草稿卷没动`, detail: serverCopy(error) }
+          : { ...failure(mode === 'save-as' ? '另存为 PDF' : '导出 PDF', error, '草稿卷没动'), retry: () => void exportPdf(mode) })
     }
   }
 
@@ -1314,7 +1637,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setSpaceStatus('idle')
     } catch (error) {
       setSpaceStatus('error')
-      setSpaceMessage(describeError('读取个人空间文件夹', error))
+      setSpaceMessage(failureLine('读取个人空间文件夹', error))
     }
   }
 
@@ -1331,7 +1654,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setSpaceStatus('idle')
     } catch (error) {
       setSpaceStatus('error')
-      setSpaceMessage(describeError('新建文件夹', error))
+      setSpaceMessage(failureLine('新建文件夹', error))
     }
   }
 
@@ -1351,14 +1674,12 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       // "saved, but still open with a live 保存 button" state.
       setSpaceDialogOpen(false)
       setSpaceStatus('idle')
-      if (savedToastTimerRef.current) window.clearTimeout(savedToastTimerRef.current)
-      setSavedToastMessage('已保存到个人空间。')
-      savedToastTimerRef.current = window.setTimeout(() => setSavedToastMessage(null), 6000)
+      setSavedToast({ text: '已保存到个人空间', at: Date.now() })
     } catch (error) {
       setSpaceStatus('error')
       setSpaceMessage(edition === 'answerOnly'
-        ? `纯答案版保存失败：${error instanceof Error ? error.message : '无法读取同版本源参考答案。'}`
-        : describeError('保存到个人空间', error))
+        ? `纯答案版没保存：${serverCopy(error)}`
+        : failureLine('保存到个人空间', error))
     }
   }
 
@@ -1366,7 +1687,22 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     return (
       <>
         <AppTopbar {...props.shellNav} pageTitle="草稿卷" onBack={onBackToWorkbench} />
-        <main className="draft-workbench-shell"><p className="draft-loading" role="status" aria-live="polite">正在打开草稿卷…</p></main>
+        {/* 等待第四轮（2026-11-15）：原来是桌面正中一行「正在打开草稿卷」，换成照真页面位置画的灰块
+            （左边目录板、中间一张 A4）。300ms 内只有读屏那一句；那一句仍在页面上（ux 走查脚本按字找）。 */}
+        <main className="draft-workbench-shell" role="status" aria-busy="true">
+          <span className="visually-hidden">正在打开草稿卷</span>
+          {sheetPhase === 'waiting' && (
+            <section className="draft-skeleton-desk" aria-hidden="true">
+              <Surface className="draft-skeleton-rail">
+                <span className="draft-skeleton-rail-meta"><Skeleton width={96} height={10} /></span>
+                {DRAFT_SKELETON_RAIL_WIDTHS.map((width, index) => (
+                  <span key={index} className="draft-skeleton-rail-item"><Skeleton width={width} height={12} /></span>
+                ))}
+              </Surface>
+              <div className="draft-skeleton-col"><DraftSheetSkeleton /></div>
+            </section>
+          )}
+        </main>
       </>
     )
   }
@@ -1376,100 +1712,110 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       <>
         <AppTopbar {...props.shellNav} pageTitle="草稿卷" onBack={onBackToWorkbench} />
         <main className="draft-workbench-shell">
-          <p className="draft-error">{loadError || '没找到这份草稿卷，可能已被删除。回到找题页重新组一份吧。'}</p>
+          <div className="draft-notice-slot is-page">
+            {loadError ? (
+              <Notice kind="error" className="draft-error" detail={loadError.detail} action={{ label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: () => void loadDraft() }}>
+                {loadError.lead}
+              </Notice>
+            ) : (
+              // 打开成功但没拿到草稿卷：不是出错，是真没有。
+              <Notice kind="info" className="draft-error" action={{ label: '回找题页', onClick: onBackToWorkbench }}>
+                没找到这份草稿卷，可能已被删除
+              </Notice>
+            )}
+          </div>
         </main>
       </>
     )
   }
 
-  // The same product control appears in the wide header and narrow ⋯ panel.
-  const versionToggleControl = (
-    <label className="draft-product-control">
-      <span>PDF 版本</span>
-      <select aria-label="PDF 版本" value={edition} onFocus={checkEconomyAvailability} disabled={exportStatus === 'exporting' || spaceDialogOpen} onChange={(event) => {
-        setEdition(event.target.value as PaperPdfEdition)
-        setExportError('')
+  // 字段构件（构件厂 2026-11-14，design/components-2026-11-13/migrate-field/README.md）：
+  // 「PDF 版本」和「A4 / A3」换成共用选项字段（shared-ui/OptionField.tsx）。
+  // - PDF 版本：带原因的下拉。用不了的版本照样列出、置灰不能选，下面一行写服务器判定的原因（走查卡点 4，
+  //   Owner 2026-11-14 第四节第 4 条）；触发键长成字段的样子，读屏念「PDF 版本 + 当前版本」。
+  // - A4 / A3：分段选择，读屏是单选组，← → 换。
+  // 宽屏放在顶栏「导出」左边；窄屏（≤980px）不再收进「⋯」面板，放在顶栏下面单独一行（走查卡点 5），
+  // 同一组控件、同一个顺序、紧挨着「导出」那一侧。宽屏顶栏里说明 / 出错那一行只给读屏
+  // （当前版本用不了时卷面上就写着原因），窄屏那一行有地方，照常显示。
+  const editionOptions = PAPER_PDF_EDITIONS.map((value) => {
+    const verdict = editionVerdicts.get(value)
+    const economyShort = value === 'economy8' && economyInsufficient
+    const unavailable = economyShort || (verdict !== undefined && !verdict.available)
+    return {
+      value,
+      label: PAPER_PDF_PRODUCTS[value],
+      disabled: unavailable,
+      reason: economyShort ? '题量不足 8 页，加题后可用' : unavailable && verdict ? editionUnavailableText(verdict) || undefined : undefined,
+    }
+  })
+  const renderVersionField = (placement: 'topbar' | 'row') => (
+    <OptionSelectField
+      label="PDF 版本"
+      layout="inline"
+      size="md"
+      className="draft-product-control"
+      triggerClassName="draft-product-trigger"
+      menuClassName="draft-product-menu"
+      hideMessages={placement === 'topbar'}
+      disabled={exportStatus === 'exporting' || spaceDialogOpen}
+      value={edition}
+      options={editionOptions}
+      onTriggerFocus={checkEconomyAvailability}
+      onChange={(value) => {
+        setEdition(value)
+        setExportError(null)
         setExportSuccessMessage('')
-      }}>
-        {PAPER_PDF_EDITIONS.map((value) => <option key={value} value={value} disabled={value === 'economy8' && economyInsufficient}>{PAPER_PDF_PRODUCTS[value]}</option>)}
-      </select>
-      {economyInsufficient && <span role="status">题量不足 8 页，加题后可用</span>}
-    </label>
+      }}
+    />
   )
 
   const formToggleControl = (
-    <FluidHoverList as="div" axis="x" className="draft-version-toggle draft-form-toggle" itemSelector="button" role="group" aria-label="打印形态">
-      <button
-        type="button"
-        className={draftPaper.printForm === 'a4' ? 'active' : ''}
-        aria-pressed={draftPaper.printForm === 'a4'}
-        onClick={() => void setPrintForm('a4')}
-      >
-        A4 散页
-      </button>
-      <button
-        type="button"
-        className={draftPaper.printForm === 'a3' ? 'active' : ''}
-        aria-pressed={draftPaper.printForm === 'a3'}
-        onClick={() => void setPrintForm('a3')}
-      >
-        A3 对折
-      </button>
-    </FluidHoverList>
+    <SegmentedField
+      label="打印形态"
+      hideLabel
+      layout="inline"
+      className="draft-form-field"
+      controlClassName="draft-form-toggle"
+      value={draftPaper.printForm === 'a3' ? 'a3' : 'a4'}
+      options={[
+        { value: 'a4', label: 'A4 散页' },
+        { value: 'a3', label: 'A3 对折' },
+      ]}
+      onChange={(value) => void setPrintForm(value)}
+    />
   )
 
+  // 构件厂第 4 步：导出菜单换成 shared-ui/Menu（雾薄荷主键做触发键，每页一处）。
+  // 「保存 PDF 到个人空间」选中后 Menu 先把焦点还给「导出」，模态框关上时再还回这里。
+  // 省纸版凑不够 8 页时三项都不能点（主干 #717），原因写在「PDF 版本」下面和卷面上。
+  const economyBlocked = edition === 'economy8' && economyInsufficient
+  const exportBlocked = draftPaper.items.length === 0 || exportStatus === 'exporting' || economyBlocked
   const exportMenuControl = (
-    <div className="draft-export-menu" ref={exportMenuRef}>
-      <button
-        type="button"
-        className="draft-export-menu-trigger"
-        aria-haspopup="true"
-        aria-expanded={exportMenuOpen}
-        onClick={() => setExportMenuOpen((open) => !open)}
-      >
-        导出
-      </button>
-      {exportMenuPresence.mounted && (
-        <FluidHoverList as="div" axis="y" className="draft-export-menu-panel" itemSelector="button" role="menu" data-visible={exportMenuPresence.visible}>
-          <button
-            type="button"
-            role="menuitem"
-            disabled={draftPaper.items.length === 0 || exportStatus === 'exporting' || (edition === 'economy8' && economyInsufficient)}
-            onClick={() => {
-              setExportMenuOpen(false)
-              void exportPdf()
-            }}
-          >
-            {edition === 'answerOnly' ? <PaperCheck size={16} /> : <PaperStudent size={16} />} 下载 PDF（{PAPER_PDF_PRODUCTS[edition]}）
-          </button>
-          <span className="draft-export-menu-divider" role="separator" />
-          <button
-            type="button"
-            role="menuitem"
-            disabled={draftPaper.items.length === 0 || exportStatus === 'exporting' || (edition === 'economy8' && economyInsufficient)}
-            onClick={() => {
-              setExportMenuOpen(false)
-              void exportPdf('save-as')
-            }}
-          >
-            <Save size={16} /> 另存为 PDF…
-          </button>
-          <button
-            type="button"
-            role="menuitem"
-            disabled={draftPaper.items.length === 0 || spaceStatus === 'saving' || (edition === 'economy8' && economyInsufficient)}
-            onClick={() => {
-              setExportMenuOpen(false)
-              // The menu item unmounts; restore focus to the persistent trigger.
-              exportMenuRef.current?.querySelector<HTMLButtonElement>('.draft-export-menu-trigger')?.focus()
-              void openSpaceDialog()
-            }}
-          >
-            <Archive size={16} /> 保存 PDF 到个人空间
-          </button>
-        </FluidHoverList>
-      )}
-    </div>
+    <Menu
+      label="导出"
+      triggerText="导出"
+      triggerTone="primary"
+      triggerSize="md"
+      className="draft-export-menu-panel"
+      items={[
+        {
+          key: 'download',
+          label: `下载 PDF（${PAPER_PDF_PRODUCTS[edition]}）`,
+          icon: edition === 'answerOnly' ? <PaperCheck size={16} /> : <PaperStudent size={16} />,
+          disabled: exportBlocked,
+          onSelect: () => void exportPdf(),
+        },
+        { key: 'sep', separator: true },
+        { key: 'save-as', label: '另存为 PDF…', icon: <Save size={16} />, disabled: exportBlocked, onSelect: () => void exportPdf('save-as') },
+        {
+          key: 'space',
+          label: '保存 PDF 到个人空间',
+          icon: <Archive size={16} />,
+          disabled: draftPaper.items.length === 0 || spaceStatus === 'saving' || economyBlocked,
+          onSelect: () => void openSpaceDialog(),
+        },
+      ]}
+    />
   )
 
   const pagesMetaText = draftPaper.printForm === 'a3'
@@ -1486,6 +1832,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       pageStatus={
         <span className={`draft-save-status ${saveStatus}`} role="status" title={saveStatus === 'error' ? saveError : undefined}>
           {saveStatus === 'saving' ? '保存中' : saveStatus === 'error' ? '保存失败' : '已保存'}
+          <InlineWaitDots pending={saveStatus === 'saving'} size="sm" />
         </span>
       }
       onBack={onBackToWorkbench}
@@ -1493,98 +1840,132 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         <>
           {/* Low-frequency document fields remain in More; save status stays by the title. */}
           <div className="draft-more-menu" ref={moreMenuRef}>
-            <button
-              type="button"
+            <Button
+              tone="subtle"
+              size="sm"
+              icon={<Ellipsis size={16} />}
               // CR SW-1: save errors must stay visible with the menu closed —
               // the trigger wears a danger dot while saveStatus is 'error'.
               className={`draft-more-menu-trigger${saveStatus === 'error' ? ' has-save-error' : ''}`}
               aria-expanded={moreMenuOpen}
+              // 开的是弹层（role=group），不是菜单，不加 aria-haspopup；data-opens-popup 只给 button.css 认「打开着垫底」（Owner 2026-11-14 第 18 条）。
+              data-opens-popup=""
               aria-controls="draft-more-information"
-              aria-label={saveStatus === 'error' ? `草稿卷更多信息（保存出错：${saveError}）` : '草稿卷更多信息'}
+              label={saveStatus === 'error' ? `草稿卷更多信息（保存出错：${saveError}）` : '草稿卷更多信息'}
               title={saveStatus === 'error' ? `保存出错：${saveError}` : '学生 / 最近草稿卷'}
               onClick={() => setMoreMenuOpen((open) => !open)}
-            >
-              <Ellipsis size={16} />
-            </button>
+            />
             {moreMenuPresence.mounted && (
               <div id="draft-more-information" className="draft-more-menu-panel" role="group" aria-label="草稿卷更多信息" data-visible={moreMenuPresence.visible} inert={!moreMenuOpen}>
-                <label className="draft-student-field">
-                  <span>学生（可选）</span>
-                  <input
-                    value={studentLabelDraft}
-                    placeholder="未填写"
-                    onChange={(event) => setStudentLabelDraft(event.target.value)}
-                    onBlur={(event) => void saveStudentLabel(event.target.value)}
-                  />
-                </label>
-                <label className="draft-recent-select-field">
-                  <span>最近草稿卷</span>
-                  <select
-                    className="draft-recent-select"
-                    value={draftPaper.id}
-                    onChange={(event) => {
-                      const id = event.target.value
-                      // In-component switch path (pushState + setDraftPaper,
-                      // loadDraft never re-runs): clear the previous draft's
-                      // undo snapshots so undo can't fire against the new one.
-                      resetTransientStateForDraftSwitch()
-                      const generation = draftGenerationRef.current
-                      const url = new URL(window.location.href)
-                      url.searchParams.set('view', 'draft-paper')
-                      url.searchParams.set('draftPaperId', id)
-                      setEdition('largeNoListening')
-                      void fetchDraftPaper(id).then((next) => {
-                        if (generation !== draftGenerationRef.current) return
-                        setDraftGeneration(generation)
-                        window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}`)
-                        setDraftPaper(next)
-                        setTitleDraft(next.title)
-                        setStudentLabelDraft(next.studentLabel || '')
-                      }).catch((error) => {
-                        if (generation !== draftGenerationRef.current) return
-                        setSaveStatus('error')
-                        setSaveError(describeError('切换草稿卷', error))
-                      })
-                    }}
-                  >
-                    {recentDrafts.map((draft) => (
-                      <option key={draft.id} value={draft.id}>{draft.title}</option>
-                    ))}
-                  </select>
-                </label>
-                {saveStatus === 'error' && <p className="draft-error">{saveError}</p>}
-                {/* Locked Decision 5 窄屏退化补充: ≤980px 时 A4/A3 与版本切换
-                    一并被「⋯」吸收——duplicated mounts of the same controls,
-                    shown only at that breakpoint (see CSS). */}
-                <div className="draft-more-menu-narrow-controls">
-                  {versionToggleControl}
-                  {formToggleControl}
-                </div>
+                {/* 字段构件（shared-ui/Field.tsx）：大号 36，和原来一样高。类名 draft-student-field / draft-recent-select 留给脚本认。 */}
+                <TextField
+                  label="学生（可选）"
+                  size="lg"
+                  className="draft-student-field"
+                  value={studentLabelDraft}
+                  placeholder="未填写"
+                  onChange={(event) => setStudentLabelDraft(event.target.value)}
+                  onBlur={(event) => void saveStudentLabel(event.target.value)}
+                />
+                <SelectField
+                  label="最近草稿卷"
+                  size="lg"
+                  className="draft-recent-select-field"
+                  controlClassName="draft-recent-select"
+                  value={draftPaper.id}
+                  onChange={(event) => {
+                    const id = event.target.value
+                    // In-component switch path (pushState + setDraftPaper,
+                    // loadDraft never re-runs): clear the previous draft's
+                    // undo snapshots so undo can't fire against the new one.
+                    resetTransientStateForDraftSwitch()
+                    const generation = draftGenerationRef.current
+                    const url = new URL(window.location.href)
+                    url.searchParams.set('view', 'draft-paper')
+                    url.searchParams.set('draftPaperId', id)
+                    setEdition('largeNoListening')
+                    void fetchDraftPaper(id).then((next) => {
+                      if (generation !== draftGenerationRef.current) return
+                      setDraftGeneration(generation)
+                      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}`)
+                      setDraftPaper(next)
+                      setTitleDraft(next.title)
+                      setStudentLabelDraft(next.studentLabel || '')
+                    }).catch((error) => {
+                      if (generation !== draftGenerationRef.current) return
+                      setSaveStatus('error')
+                      setSaveError(failureLine('切换草稿卷', error))
+                    })
+                  }}
+                  options={recentDrafts.map((draft) => ({ value: draft.id, label: draft.title }))}
+                />
+                {/* 保存出错是「没保存」，按 DESIGN.md §5 Notices 上危险色。 */}
+                {saveStatus === 'error' && <Notice kind="error" danger className="draft-error">{saveError}</Notice>}
               </div>
             )}
           </div>
-          <span className="draft-topbar-wide-toggle">{versionToggleControl}</span>
+          <span className="draft-topbar-wide-toggle">{renderVersionField('topbar')}</span>
           <span className="draft-topbar-wide-toggle">{formToggleControl}</span>
           {exportMenuControl}
         </>
       }
     />
     <div className="draft-workbench-shell">
-      {draftPaper.items.length === 0 && (
-        <p className="draft-empty-export" role="status">请先添加题组，再下载 PDF 用于打印。</p>
+      {/* 窄屏（≤980px）时「PDF 版本」和「A4 / A3」放在这一行，紧贴顶栏下面、靠右（「导出」那一侧）；宽屏时隐藏，
+          用顶栏里那一份（见 DraftPaperWorkbench.css .draft-option-row）。原来窄屏收进「⋯」面板，老师想不到去那里找（走查卡点 5）。 */}
+      <div className="draft-option-row">
+        {renderVersionField('row')}
+        {formToggleControl}
+      </div>
+      {/* 共用提示行（shared-ui/Notice）：卷头行之下、纸面之上一个固定位置，左右边距和下面的排序建议卡一样
+          （.draft-notice-slot）。一次只出一条：导出的结果（出错 / 生成中 / 已下载）排在前面。 */}
+      {(draftPaper.items.length === 0 || migrationNotice || exportStatus !== 'idle') && (
+        <div className="draft-notice-slot">
+          {exportStatus === 'error' && exportError ? (
+            <Notice
+              kind="error"
+              className="draft-error"
+              detail={exportError.detail}
+              action={exportError.retry ? { label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: exportError.retry } : undefined}
+            >
+              {exportError.lead}
+            </Notice>
+          ) : exportStatus === 'exporting' ? (
+            <Notice kind="waiting">{exportSlow ? '正在生成 PDF，比平时慢，可以先去做别的' : '正在生成 PDF'}</Notice>
+          ) : exportStatus === 'exported' ? (
+            <Notice kind="success" className="draft-success">{exportSuccessMessage}</Notice>
+          ) : draftPaper.items.length === 0 ? (
+            <Notice kind="info" className="draft-empty-export">先加题组，才能下载 PDF</Notice>
+          ) : migrationNotice ? (
+            <Notice kind="info" className="draft-warning">{migrationNotice}</Notice>
+          ) : null}
+        </div>
       )}
-      {migrationNotice && <p className="draft-warning" role="status">{migrationNotice}</p>}
-      {exportStatus === 'error' && <p className="draft-error">{exportError}</p>}
-      {exportStatus === 'exported' && <p className="draft-success">{exportSuccessMessage}</p>}
 
       {/* reorder-suggest (plan.md 施工契约 3 "卡"): 卷头行之下、纸面之上 —
           same slot as the notices above, ahead of <main>'s preview desk. */}
-      {reorderSuggestionCard && (
-        <div className="draft-reorder-suggestion" role="status">
-          <span>{reorderSuggestionCard.text}</span>
-          <button type="button" className="draft-reorder-suggestion-act" onClick={() => void applyReorderSuggestion()}>
-            调整顺序 →
-          </button>
+      {reorderCard && (
+        <div className="draft-reorder-slot">
+        <div ref={reorderCardRef} className="draft-reorder-suggestion" data-state={reorderCard.state} role="status">
+          <div className="draft-reorder-suggestion-head">
+            <span>{reorderCard.state === 'decided' ? '已采用' : '建议'}</span>
+            {reorderCard.state === 'decided' ? (
+              <button type="button" className="draft-reorder-suggestion-undo" onClick={() => void undoReorderSuggestion()}>
+                撤回
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="draft-reorder-suggestion-act"
+                aria-disabled={reorderSuggestionCard ? undefined : true}
+                onClick={() => void applyReorderSuggestion()}
+              >
+                采用
+              </button>
+            )}
+          </div>
+          <p>{reorderCard.text}</p>
+        </div>
         </div>
       )}
 
@@ -1600,7 +1981,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             onDragStart={(itemId) => setDraggedItemId(itemId)}
             onDrop={handleDrop}
             onMoveItem={moveItem}
-            onDeleteItem={deleteItem}
+            onDeleteItem={removeFromRail}
             metaText={pagesMetaText}
             swapDrawer={
               swapSeedItem && swapRequest
@@ -1626,7 +2007,11 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               style={{ height: `${nativeContentHeight * previewScale}px` }}
             >
               {draftPaper.items.length === 0 ? (
-                <div className="draft-a4-empty">请先添加题组</div>
+                <div className="draft-a4-empty">
+                  <EmptyState illustration="board-list" action={{ label: '去找题', onClick: onBackToWorkbench }}>
+                    还没有题组。在找题结果里点「加入草稿卷」，题就会排进这张纸。
+                  </EmptyState>
+                </div>
               ) : previewHtml ? (
                 <>
                   <iframe
@@ -1650,30 +2035,52 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                           : null),
                     }}
                   />
-                  {/* draft-desk-b step3 (PO-2 简单版): the old preview stays fully
-                      visible/interactive while a re-render is in flight — this is
-                      the only visible sign a repagination is happening. */}
-                  {paginationStatus === 'loading' && (
-                    <div className="draft-a4-repaginating" role="status">重新排版中…</div>
-                  )}
-                  {/* draft-desk-b step4 (SW-I, cr-step3-lite.md): a repagination
-                      FAILURE while a stale preview is still on screen previously left
-                      no visible sign at all — the error copy only rendered in the
-                      empty-state branch below, which this branch (previewHtml
-                      truthy) never reaches, so the user silently kept looking at
-                      outdated content with no indication anything had gone wrong.
-                      Reuses the exact same badge shell as the loading state above
-                      (position/shape/pointer-events unchanged, "别过度设计") — only
-                      the copy and an added modifier class (background color) differ. */}
-                  {paginationStatus === 'error' && (
-                    <div className="draft-a4-repaginating draft-a4-repaginating--error" role="status">
-                      {paginationError || '重新排版失败，当前显示旧版预览'}
-                    </div>
-                  )}
+                  {/* 走查卡点 2（Owner 2026-11-14 第四节第 2 条）：重排期间旧卷面
+                      留着，上面盖一层遮罩和一行字；没成功时去掉遮罩，留旧卷面，写
+                      一行原因和「重试」。遮罩挂在 .draft-a4-sheet 上、iframe 外面，
+                      不进卷面，也不进服务器出的打印稿和 PDF。 */}
+                  <div className={`draft-a4-wait${previewStale ? ' is-waiting' : ''}`} hidden={!previewStale && !previewFailed}>
+                    {/* 共用提示行的 over 放法（垫桌色、e1）；sticky 的位置仍由 .draft-a4-wait-line 给。 */}
+                    {previewStale ? (
+                      <Notice kind="waiting" placement="over" className="draft-a4-wait-line">
+                        {reflowSlow ? '正在重排卷面，大约要半分钟，旧卷面先留着' : '正在重排卷面，旧卷面先留着'}
+                      </Notice>
+                    ) : previewFailed && paginationError ? (
+                      <Notice
+                        kind="error"
+                        placement="over"
+                        className="draft-a4-wait-line"
+                        detail={paginationError.detail}
+                        action={{ label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: () => setPaginationRetry((count) => count + 1) }}
+                      >
+                        {`${paginationError.lead}，下面还是改之前的卷面`}
+                      </Notice>
+                    ) : null}
+                  </div>
                 </>
-              ) : (
+              ) : economyBlocked ? (
+                // 省纸版已经问出来凑不够 8 页（主干 #717）：不再等排版，直接说为什么。
                 <div className="draft-a4-empty">
-                  {edition === 'economy8' && economyInsufficient ? '题量不足 8 页，加题后可用' : renderedPaginationKey === paginationKey && paginationStatus === 'error' ? paginationError || '分页预览生成失败，请稍后重试。' : '正在生成分页预览…'}
+                  <Notice kind="error">题量不足 8 页，加题后可用</Notice>
+                </div>
+              ) : renderedPaginationKey === paginationKey && paginationStatus === 'error' && paginationError ? (
+                <div className="draft-a4-empty">
+                  <Notice
+                    kind="error"
+                    detail={paginationError.detail}
+                    // 纯答案版不可用、题量不足 8 页：再排一次结果一样，不给「重试」（见上面出错那里）。
+                    action={paginationError.retry ? { label: '重试', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: paginationError.retry } : undefined}
+                  >
+                    {paginationError.lead}
+                  </Notice>
+                </div>
+              ) : (
+                // 等待第四轮（2026-11-15）：原来是纸的位置正中一行「正在生成分页预览」（.draft-a4-empty 里的 Notice），
+                // 换成一张 A4 的灰块，和打开时的灰块同一段门槛（sheetPhase），读完草稿卷不重新等 300ms。
+                // 那一句仍给读屏（ux 走查脚本按字找）。
+                <div className="draft-a4-skeleton" role="status" aria-busy="true">
+                  <span className="visually-hidden">正在生成分页预览</span>
+                  {sheetPhase === 'waiting' && <DraftSheetSkeleton />}
                 </div>
               )}
             </div>
@@ -1701,20 +2108,24 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
               // seamAnchors) — suppressed here so it doesn't also show
               // pinned to the group's own action cluster. A4 keeps the
               // exact pre-cut behavior (裁点4).
-              const suggestion = canPageBreakBefore && draftPaper.printForm !== 'a3'
+              // 走查卡点 2：重排期间和重排没成功时卷面是旧的，按旧分页算出的建议先
+              // 不出（以前这时卷面空白，建议本来也看不到）。
+              const suggestion = canPageBreakBefore && draftPaper.printForm !== 'a3' && !previewStale && !previewFailed
                 ? pageBreakSuggestions.find((entry) => entry.groupId === item.groupId)
                 : undefined
               return (
                 <div key={item.id} className="draft-group-actions" data-draft-tools-group-id={item.groupId} role="group" aria-label="题组工具" style={{ top: `${anchorTop}px` }}>
+                  {/* 建议键换成 Button 的「建议」样子（2026-11-15，Owner 当天定）；类名留作摆放和脚本挂钩。 */}
                   {suggestion && (
-                    <button
-                      type="button"
+                    <Button
+                      tone="suggest"
+                      size="sm"
                       className="draft-group-suggestion"
                       title={suggestion.reason}
                       onClick={() => void togglePageBreak(item, true)}
                     >
-                      建议前置分页 · 跨页断篇
-                    </button>
+                      建议前置分页
+                    </Button>
                   )}
                   {/* similar-workbench-swap (E7, plan.md 施工要点 2 "⇄ 入口
                       gate"): only the four v2-supported groupTypes get a
@@ -1722,10 +2133,13 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       hides it entirely, same 隐藏式降级 convention as E6's
                       own CTA. */}
                   {item.questionGroup && SWAP_SUPPORTED_GROUP_TYPES.has(item.questionGroup.groupType) && (
+                    // Owner 2026-11-14 决定 #5：读屏名字以看得见的「换篇」开头（WCAG 2.5.3 名字含可见文字），
+                    // 收着念「换篇：换一篇相似篇章」，展开念「换篇：收起」。看得见的字仍是「换篇」；
+                    // 悬停提示和改前一样跟读屏名字用同一句。
                     <button
                       type="button"
-                      aria-label={swapSeedItemId === item.id ? '收起换篇' : '换一篇相似篇章'}
-                      title={swapSeedItemId === item.id ? '收起换篇' : '换一篇相似篇章'}
+                      aria-label={swapSeedItemId === item.id ? '换篇：收起' : '换篇：换一篇相似篇章'}
+                      title={swapSeedItemId === item.id ? '换篇：收起' : '换篇：换一篇相似篇章'}
                       aria-pressed={swapSeedItemId === item.id}
                       onClick={() => handleSwapToggle(item)}
                     >
@@ -1733,87 +2147,32 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       <span className="draft-group-actions-label">换篇</span>
                     </button>
                   )}
-                  <div
-                    className="draft-group-actions-menu"
-                    onBlur={(event) => {
-                      if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
-                        setOpenGroupActionsItemId(null)
-                      }
-                    }}
-                    onKeyDown={(event) => {
-                      if (event.key === 'Escape') {
-                        setOpenGroupActionsItemId(null)
-                        event.currentTarget.querySelector<HTMLButtonElement>('.draft-group-actions-menu-trigger')?.focus()
-                      }
-                    }}
-                  >
-                    <button
-                      type="button"
-                      className="draft-group-actions-menu-trigger"
-                      aria-label="更多题组操作"
-                      title="更多题组操作"
-                      aria-expanded={openGroupActionsItemId === item.id}
-                      aria-controls={`draft-group-actions-${item.id}`}
-                      onClick={() => setOpenGroupActionsItemId((openId) => openId === item.id ? null : item.id)}
-                    >
-                      <Ellipsis size={16} aria-hidden="true" />
-                    </button>
-                    {openGroupActionsItemId === item.id && (
-                      <div
-                        id={`draft-group-actions-${item.id}`}
-                        className="draft-group-actions-menu-panel"
-                        role="group"
-                        aria-label="题组操作"
-                      >
-                        <button
-                          type="button"
-                          disabled={fullIndex <= 0}
-                          onClick={() => {
-                            setOpenGroupActionsItemId(null)
-                            moveItem(item.id, -1)
-                          }}
-                        >
-                          <ArrowUp size={16} aria-hidden="true" />
-                          上移
-                        </button>
-                        <button
-                          type="button"
-                          disabled={fullIndex >= draftPaper.items.length - 1}
-                          onClick={() => {
-                            setOpenGroupActionsItemId(null)
-                            moveItem(item.id, 1)
-                          }}
-                        >
-                          <ArrowDown size={16} aria-hidden="true" />
-                          下移
-                        </button>
-                        {canPageBreakBefore && (
-                          <button
-                            type="button"
-                            aria-pressed={item.pageBreakBefore}
-                            onClick={() => {
-                              setOpenGroupActionsItemId(null)
-                              void togglePageBreak(item, !item.pageBreakBefore)
-                            }}
-                          >
-                            <PageBreak size={16} aria-hidden="true" />
-                            {item.pageBreakBefore ? '取消分页' : '前置分页'}
-                          </button>
-                        )}
-                        <button
-                          type="button"
-                          className="danger"
-                          onClick={() => {
-                            setOpenGroupActionsItemId(null)
-                            void deleteItem(item)
-                          }}
-                        >
-                          <Trash size={16} aria-hidden="true" />
-                          移除
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                  {/* 构件厂第 4 步：题组「⋯」换成 shared-ui/Menu。面板挂到 body 上，不再被工具条
+                      的层级和纸面裁住；↑ ↓ 在项之间走。「前置分页」原来是带 aria-pressed 的开关键，
+                      Owner 2026-11-14 决定 #15 改成可勾选项：字固定「前置分页」，读屏是 menuitemcheckbox，
+                      分了页就打勾（以前是字翻成「取消分页」）。 */}
+                  <Menu
+                    label="更多题组操作"
+                    triggerTone="strong"
+                    triggerSize="md"
+                    triggerClassName="draft-group-menu-trigger"
+                    items={[
+                      { key: 'up', label: '上移', icon: <ArrowUp size={16} aria-hidden="true" />, disabled: fullIndex <= 0, onSelect: () => moveItem(item.id, -1) },
+                      { key: 'down', label: '下移', icon: <ArrowDown size={16} aria-hidden="true" />, disabled: fullIndex >= draftPaper.items.length - 1, onSelect: () => moveItem(item.id, 1) },
+                      ...(canPageBreakBefore
+                        ? [{
+                            key: 'page-break',
+                            label: '前置分页',
+                            checked: Boolean(item.pageBreakBefore),
+                            icon: <PageBreak size={16} aria-hidden="true" />,
+                            onSelect: () => void togglePageBreak(item, !item.pageBreakBefore),
+                          }]
+                        : []),
+                      { key: 'sep', separator: true },
+                      // 删后焦点：onSelect 拿到触发键，移出以后焦点落到下一组的同一个键（见 removeFromGroupMenu）。
+                      { key: 'remove', label: '移除', tone: 'danger', icon: <Trash size={16} aria-hidden="true" />, onSelect: (_event, trigger) => removeFromGroupMenu(item, trigger) },
+                    ]}
+                  />
                 </div>
               )
             })}
@@ -1823,150 +2182,149 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 (seamAnchors, keyed by the same suggestion.groupId
                 applyA3Imposition tagged the seam with), same click behavior
                 (前置分页 PATCH) as the A4 per-group pill above. */}
-            {draftPaper.printForm === 'a3' &&
+            {draftPaper.printForm === 'a3' && !previewStale && !previewFailed &&
               pageBreakSuggestions.map((suggestion) => {
                 const anchorTop = seamAnchors[suggestion.groupId]
                 if (anchorTop == null) return null
                 const item = nonMissingItems.find((entry) => entry.groupId === suggestion.groupId)
                 if (!item) return null
+                // 和 A4 那只一样换成 Button 的「建议」样子（2026-11-15）；类名留作摆放和脚本挂钩。
                 return (
-                  <button
+                  <Button
                     key={`seam-${suggestion.groupId}`}
-                    type="button"
+                    tone="suggest"
+                    size="sm"
                     className="draft-seam-suggestion"
                     style={{ top: `${anchorTop}px` }}
                     title={suggestion.reason}
                     onClick={() => void togglePageBreak(item, true)}
                   >
-                    {suggestion.reason} · 建议前置分页
-                  </button>
+                    {`${suggestion.reason} · 建议前置分页`}
+                  </Button>
                 )
               })}
           </div>
         </section>
       </main>
 
-      {removedItemToast.rendered && (
-        <div className="draft-undo-toast" role="status" data-visible={removedItemToast.visible}>
-          {/* C8 (trust-cracks) — 措辞更新: 动作按钮本就叫"移除"；题组仍在
-              题库里，undo 只是撤回本卷的移出动作，旧文案"删除"二字读起来
-              像题目本身被销毁了，故改为下面这句。 */}
-          <span>题组已移出</span>
-          <button type="button" onClick={undoDelete}>
-            <RotateCcw size={14} /> 撤销
-          </button>
-        </div>
-      )}
-      {/* reorder-suggest (plan.md 施工契约 3 "应用"): 复用 undo-toast 组件
-          模式 — same fixed-position toast + RotateCcw 撤销 button shape as
-          removedItemToast above, keyed off reorderUndoSnapshot's own presence
-          instead of a payload value. */}
-      {reorderUndoToastPresence.mounted && (
-        <div className="draft-undo-toast" role="status" data-visible={reorderUndoToastPresence.visible}>
-          <span>顺序已调整</span>
-          <button type="button" onClick={() => void undoReorderSuggestion()}>
-            <RotateCcw size={14} /> 撤销
-          </button>
-        </div>
-      )}
-      {/* similar-workbench-swap (E7, plan.md "替换这篇...可撤销"): same
-          undo-toast shape as reorderUndoToastPresence above, keyed off
-          replaceUndoSnapshot's own presence. */}
-      {replaceUndoToastPresence.mounted && (
-        <div className="draft-undo-toast" role="status" data-visible={replaceUndoToastPresence.visible}>
-          <span>已替换这篇</span>
-          <button type="button" onClick={() => void undoSwapReplace()}>
-            <RotateCcw size={14} /> 撤销
-          </button>
-        </div>
-      )}
-      {/* similar-workbench-swap (E7, plan.md "加入...沿用「已加入」语言，
-          无撤销"): plain toast, no action button — mirrors
-          SimilarPassagesPanel's own handleAdd toast shape/timer (2200ms). */}
-      {swapAddToastPresence.rendered && (
-        <div className="draft-undo-toast" role="status" data-visible={swapAddToastPresence.visible}>
-          <span>{swapAddToastPresence.rendered}</span>
-        </div>
-      )}
-      {savedToastPresence.rendered && (
-        <div className="draft-undo-toast" role="status" data-visible={savedToastPresence.visible}>
-          <span>{savedToastPresence.rendered}</span>
-          {shellNav.onOpenMySpace && (
-            <button
-              type="button"
-              onClick={() => {
-                setSavedToastMessage(null)
-                shellNav.onOpenMySpace?.()
-              }}
-            >
-              查看个人空间
-            </button>
-          )}
-        </div>
-      )}
-      {spaceDialogPresence.mounted && (
-        <dialog
-          ref={spaceDialogRef}
-          className="draft-modal-backdrop"
-          aria-label="保存 PDF 到个人空间"
-          data-visible={spaceDialogPresence.visible}
-          onCancel={(event) => {
-            event.preventDefault()
-            setSpaceDialogOpen(false)
-          }}
-        >
-          <form
-            aria-label="保存 PDF 到个人空间"
-            className="draft-save-space-dialog"
-            data-visible={spaceDialogPresence.visible}
-            onSubmit={(event) => {
-              event.preventDefault()
-              void saveToMySpace()
-            }}
+      {/* 撤销、刚保存这类临时提示：共用构件 shared-ui/Toast（2026-11-15，原来是共用提示行的 floating 放法）。
+          白底、e3、视口底部正中；一次只显示一条（新的一条顶掉旧的，旧的那条的撤销快照跟着清掉）；
+          鼠标停在上面、焦点在里面时不消失。停留时长照原来：撤销 8 秒、刚加入 2.2 秒、刚保存 6 秒。
+          类名 draft-undo-toast 留作脚本挂钩。 */}
+      {/* C8 (trust-cracks) — 措辞：题组仍在题库里，撤销只是撤回本卷的移出动作，不说「删除」。 */}
+      <Toast
+        message={removedItem ? '题组已移出' : null}
+        token={removedItem}
+        kind="undo"
+        duration={8000}
+        className="draft-undo-toast"
+        action={{ label: '撤销', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: undoDelete }}
+        onClose={() => setRemovedItem(null)}
+      />
+      {/* similar-workbench-swap (E7, plan.md "替换这篇...可撤销"). */}
+      <Toast
+        message={replaceUndoSnapshot ? '已替换这篇' : null}
+        token={replaceUndoSnapshot}
+        kind="undo"
+        duration={8000}
+        className="draft-undo-toast"
+        action={{ label: '撤销', icon: <RotateCcw size={16} aria-hidden="true" />, onClick: () => void undoSwapReplace() }}
+        onClose={() => setReplaceUndoSnapshot(null)}
+      />
+      {/* similar-workbench-swap (E7, plan.md "加入...沿用「已加入」语言，无撤销"). */}
+      <Toast
+        message={swapAddToast?.text ?? null}
+        token={swapAddToast?.at}
+        kind="success"
+        duration={2200}
+        className="draft-undo-toast"
+        onClose={() => setSwapAddToast(null)}
+      />
+      <Toast
+        message={savedToast?.text ?? null}
+        token={savedToast?.at}
+        kind="success"
+        duration={6000}
+        className="draft-undo-toast"
+        action={shellNav.onOpenMySpace ? {
+          label: '查看个人空间',
+          onClick: () => {
+            setSavedToast(null)
+            shellNav.onOpenMySpace?.()
+          },
+        } : undefined}
+        onClose={() => setSavedToast(null)}
+      />
+      {/* 构件厂 2026-11-14：换成共用 Dialog（shared-ui/Dialog.tsx）。开关、焦点、Esc、背后不能滚、入退场都在构件里；
+          原来头上的「关闭」字键换成右上角的关闭键（读屏名字仍是「关闭」）。「取消」墨字、「保存」石板墨填充照旧
+          （这一页的雾薄荷主键给了顶栏「导出」，DESIGN.md §2 每页一处）。「新建」是正文里的键，墨字带图标、大号 36。
+          「保存 PDF 到个人空间」选中后 Menu 先把焦点还给「导出」，对话框关上时回到那里。 */}
+      <Dialog
+        open={spaceDialogOpen}
+        onClose={() => setSpaceDialogOpen(false)}
+        title="保存 PDF 到个人空间"
+        closeLabel="关闭"
+        className="draft-save-space-dialog"
+        bodyClassName="draft-save-space-body"
+        onSubmit={(event) => {
+          event.preventDefault()
+          void saveToMySpace()
+        }}
+        cancel={{ label: '取消' }}
+        confirm={{
+          // 保存中：键上的字不换、不变淡，用 Button busy（DESIGN.md §5 Waiting）。
+          label: '保存',
+          busy: spaceStatus === 'saving',
+          disabled: draftPaper.items.length === 0,
+        }}
+      >
+        {/* 字段构件（shared-ui/Field.tsx）：三个都是大号 36，和旁边「新建」大号键同高。「新建文件夹」原来只有读屏标签，照旧 hideLabel。 */}
+        <TextField label="文件名" size="lg" value={spaceFileName} onChange={(event) => setSpaceFileName(event.target.value)} />
+        {/* 在读文件夹（等待第七轮 2026-11-15，原来是表单下面一行「正在读取文件夹」，读完那行一收、对话框跟着变矮）：
+            「文件夹」标签照旧，下拉的位置画一块灰（SkeletonOver 垫一个同款大号下拉撑出 36 高），门槛内只占位置不出灰。
+            读屏念一句「正在读取文件夹」。读完灰块换成真下拉，同一个位置、同样高，对话框不动。 */}
+        {spaceFoldersWaiting ? (
+          <Field label="文件夹" labelledByControl>
+            {() => (
+              <>
+                {/* 只给读屏的一句（.visually-hidden 绝对定位，不占 flex 的位置）。 */}
+                <span className="visually-hidden" role="status">正在读取文件夹</span>
+                <SkeletonOver show={spaceFoldersPhase === 'waiting'}>
+                  <span className="eqb-field-select" data-size="lg"><select className="eqb-field-control" data-size="lg" tabIndex={-1} /></span>
+                </SkeletonOver>
+              </>
+            )}
+          </Field>
+        ) : (
+          <SelectField
+            label="文件夹"
+            size="lg"
+            value={spaceFolderId}
+            onChange={(event) => setSpaceFolderId(event.target.value)}
+            options={[{ value: '', label: '未归档' }, ...spaceFolders.map((folder) => ({ value: folder.id, label: folder.name }))]}
+          />
+        )}
+        <div className="draft-new-folder-row">
+          <TextField
+            label="新建文件夹"
+            hideLabel
+            size="lg"
+            value={spaceNewFolderName}
+            onChange={(event) => setSpaceNewFolderName(event.target.value)}
+            placeholder="新建文件夹"
+          />
+          <Button
+            tone="strong"
+            size="lg"
+            icon={<FolderPlus size={16} />}
+            onClick={createFolderInDialog}
+            disabled={!spaceNewFolderName.trim() || spaceStatus === 'saving'}
           >
-            <div className="draft-dialog-head">
-              <strong>保存 PDF 到个人空间</strong>
-              <button type="button" onClick={() => setSpaceDialogOpen(false)}>关闭</button>
-            </div>
-            <label>
-              <span>文件名</span>
-              <input value={spaceFileName} onChange={(event) => setSpaceFileName(event.target.value)} />
-            </label>
-            <label>
-              <span>文件夹</span>
-              <select value={spaceFolderId} onChange={(event) => setSpaceFolderId(event.target.value)}>
-                <option value="">未归档</option>
-                {spaceFolders.map((folder) => (
-                  <option key={folder.id} value={folder.id}>{folder.name}</option>
-                ))}
-              </select>
-            </label>
-            <div className="draft-new-folder-row">
-              <input
-                value={spaceNewFolderName}
-                onChange={(event) => setSpaceNewFolderName(event.target.value)}
-                aria-label="新建文件夹"
-                placeholder="新建文件夹"
-              />
-              <button type="button" onClick={createFolderInDialog} disabled={!spaceNewFolderName.trim() || spaceStatus === 'saving'}>
-                <FolderPlus size={16} /> 新建
-              </button>
-            </div>
-            {spaceStatus === 'loading' && <p className="draft-dialog-note">正在读取文件夹...</p>}
-            {spaceStatus === 'error' && <p className="draft-error">{spaceMessage}</p>}
-            <div className="draft-dialog-actions">
-              <button type="button" onClick={() => setSpaceDialogOpen(false)}>取消</button>
-              <button
-                type="submit"
-                className="primary-button"
-                disabled={spaceStatus === 'saving' || draftPaper.items.length === 0}
-              >
-                {spaceStatus === 'saving' ? '保存中...' : '保存'}
-              </button>
-            </div>
-          </form>
-        </dialog>
-      )}
+            新建
+          </Button>
+        </div>
+        {spaceStatus === 'error' && !spaceFoldersWaiting && <Notice kind="error" className="draft-error">{spaceMessage}</Notice>}
+      </Dialog>
     </div>
     </>
   )

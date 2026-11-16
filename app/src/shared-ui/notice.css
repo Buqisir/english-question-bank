@@ -1,0 +1,61 @@
+/* 提示行（Notice.tsx）。颜色、间距、影子只用 tokens.css 里的变量，不写字面色值和影子；
+ * 浮着那种的入场退场用全站动效 token（--motion-* / --ease-*，App.css :root，DESIGN.md §6）。
+ * DESIGN.md §5「Notices 提示条」：一行次要灰字，前面一个 16px 图标，没有底和边；只有「没保存」「会丢东西」上危险色。
+ * 「质感六条·现代」：每条提示不超过一行——这里不折行，太长截断，整句在 title 和读屏里。 */
+
+.eqb-notice {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--eqb-space-2);
+  min-width: 0;
+  max-width: 100%;
+  /* 有键时和 28px 的小号键一样高，没键时也一样高，换状态时下面的东西不跳。 */
+  min-height: 28px;
+  margin: 0;
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-sm);
+  line-height: 20px;
+}
+
+.eqb-notice > svg {
+  flex: 0 0 auto;
+}
+
+/* 等待那种：所以点跟在字后面（DESIGN.md §5「Waiting 等待」）。所以点的 24 格里左边自带约 3px 空，
+ * 字和点之间不另加间距（全站统一，算法见 waiting.css「所以点和字的间距」）：把整行 8px 间距全收回来，
+ * 肉眼间隙约 3–4px（目测）。2026-11-15 第二轮由收回 4px 改成收回 8px，和选词翻译、句子分析、草稿卷顶栏一致。
+ * 覆盖：本条的负 margin 抵掉 .eqb-notice 的 gap，因为所以点要贴着字。 */
+.eqb-notice > .eqb-wait-dots {
+  margin-left: calc(-1 * var(--eqb-space-2));
+}
+
+.eqb-notice[data-danger] {
+  color: var(--eqb-color-danger-text);
+}
+
+.eqb-notice-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 行尾的「重试」：跟在字后面，不被挤扁。小号键自己左边有 8px 内边距，再加 8px 间距会离字 16px，
+ * 显得像另起一组；左边收 4px，键上的字（或图标）离前面的字 12px（目测）。 */
+.eqb-notice-action {
+  flex: 0 0 auto;
+  margin-left: calc(-1 * var(--eqb-space-1));
+}
+
+/* ── 压在内容上（over） ──────────────────────────────────
+ * 比如重排时盖在旧卷面上的那一行：垫桌色、e1，宽度跟着字走。 */
+.eqb-notice[data-placement='over'] {
+  width: fit-content;
+  padding: var(--eqb-space-2) var(--eqb-space-3);
+  border-radius: var(--eqb-radius-control);
+  background: var(--eqb-color-desk);
+  box-shadow: var(--elev-1);
+}
+
+/* 原来这里是浮在视口底部（floating）的四条（样子、退场、入场、减少动态效果）：2026-11-15 收进 shared-ui/toast.css，删了。 */

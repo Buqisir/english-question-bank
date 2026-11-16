@@ -49,7 +49,9 @@ console.log('add-to-draft-feel verify: client optimistic feedback + server batch
 // --- A. source assertion: addGroupsToBasket no longer blocks on refreshQuestionGroups ---
 const appSrc = readFileSync(path.join(rootDir, 'app/src/App.tsx'), 'utf8')
 const fnStart = appSrc.indexOf('async function addGroupsToBasket(')
-const fnEnd = appSrc.indexOf('\n  function addToBasket(', fnStart)
+// 走查第四节第 6 条（Owner 2026-11-14）起 addToBasket 退役，单组加入走共用加入键的 addGroupToDraft；
+// addGroupsToBasket 的函数体到它后面第一个同级函数为止。
+const fnEnd = appSrc.slice(fnStart + 1).search(/\n  (?:async )?function /) + fnStart + 1
 assert('addGroupsToBasket found in App.tsx', fnStart !== -1 && fnEnd !== -1 && fnEnd > fnStart)
 const fnBody = appSrc.slice(fnStart, fnEnd)
 assert(
@@ -65,6 +67,14 @@ assert(
   'addGroupsToBasket patches draftPaperButtonState optimistically before the add request resolves',
   /patchDraftButtonState\(/.test(fnBody) && fnBody.indexOf('patchDraftButtonState(') < fnBody.indexOf('await Promise.all('),
 )
+
+// 单组加入（共用加入键）按 Owner 定的「键先忙、服务器确认后才算加入」走，不乐观翻状态；
+// 但同样不能卡在刷新题组列表上。
+const singleStart = appSrc.indexOf('async function addGroupToDraft(')
+const singleBody = singleStart === -1 ? '' : appSrc.slice(singleStart, appSrc.slice(singleStart + 1).search(/\n  (?:async )?function /) + singleStart + 1)
+assert('addGroupToDraft found in App.tsx', singleBody.length > 0)
+assert('addGroupToDraft does not await refreshQuestionGroups (background reconciliation)',
+  !/await refreshQuestionGroups\(/.test(singleBody) && /void refreshQuestionGroups\(/.test(singleBody), singleBody)
 
 // --- B. behavioral: getDraftPaper -> getDraftPaperItems batches print-ready lookups ---
 const { createDraftPaperStore } = await import(path.join(rootDir, 'server/draft-paper/draftPaperStore.mjs'))

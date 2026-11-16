@@ -1,0 +1,210 @@
+{
+  "mode": "before",
+  "shots": [
+    {
+      "file": "before-1440-01-首页说明行.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "concierge-notice",
+          "role": null,
+          "text": "没填 AI 密钥，先用本地题库帮你找。",
+          "x": 310,
+          "y": 248,
+          "w": 820,
+          "h": 32
+        }
+      ]
+    },
+    {
+      "file": "before-1440-02-首页题库没连上.png",
+      "width": 1440,
+      "pill": "草稿卷（0 组）",
+      "notices": []
+    },
+    {
+      "file": "before-1440-03-首页等题库.png",
+      "width": 1440,
+      "pill": "草稿卷（0 组）",
+      "notices": []
+    },
+    {
+      "file": "before-1440-04-打开草稿卷等待.png",
+      "width": 1440,
+      "notices": []
+    },
+    {
+      "file": "before-1440-05-草稿卷打不开.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "draft-error",
+          "role": null,
+          "text": "打开草稿卷没成功，可以再试一次。",
+          "x": 0,
+          "y": 64,
+          "w": 1440,
+          "h": 22
+        }
+      ]
+    },
+    {
+      "file": "before-1440-06-第一次生成分页预览等待.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "draft-a4-empty",
+          "role": null,
+          "text": "正在生成分页预览…",
+          "x": 310,
+          "y": 72,
+          "w": 820,
+          "h": 420
+        }
+      ]
+    },
+    {
+      "file": "before-1440-07-挪动后等重排.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "draft-a4-wait-line",
+          "role": "status",
+          "text": "正在重排卷面，旧卷面先留着…",
+          "x": 599,
+          "y": 88,
+          "w": 242,
+          "h": 34
+        }
+      ]
+    },
+    {
+      "file": "before-1440-08-重排失败.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "draft-a4-wait-line",
+          "role": "status",
+          "text": "正在重排卷面，旧卷面先留着…",
+          "x": 599,
+          "y": 16,
+          "w": 242,
+          "h": 34
+        }
+      ]
+    },
+    {
+      "file": "before-1440-09-保存失败-更多面板.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "draft-error",
+          "role": null,
+          "text": "保存草稿卷没成功，可以再试一次。",
+          "x": 401,
+          "y": 207,
+          "w": 194,
+          "h": 44
+        },
+        {
+          "cls": "draft-a4-wait-line",
+          "role": "status",
+          "text": "正在重排卷面，旧卷面先留着…",
+          "x": 599,
+          "y": 88,
+          "w": 242,
+          "h": 34
+        }
+      ]
+    },
+    {
+      "file": "before-1440-10-导出出错.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "draft-error",
+          "role": null,
+          "text": "导出 PDF没成功，可以再试一次。",
+          "x": 0,
+          "y": 64,
+          "w": 1440,
+          "h": 22
+        }
+      ]
+    },
+    {
+      "file": "before-1440-11-下载成功.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "draft-success",
+          "role": null,
+          "text": "PDF 已开始下载。 本卷采用小四（12pt）。 已满足长卷页数上限和正文版式，仍有 1 个题组跨 A3 正反面，请检查分页。",
+          "x": 0,
+          "y": 62,
+          "w": 1440,
+          "h": 22
+        }
+      ]
+    },
+    {
+      "file": "before-1440-12-移除后撤销提示.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "draft-a4-wait-line",
+          "role": "status",
+          "text": "正在重排卷面，旧卷面先留着…",
+          "x": 599,
+          "y": 88,
+          "w": 242,
+          "h": 34
+        },
+        {
+          "cls": "draft-undo-toast",
+          "role": "status",
+          "text": "题组已移出 撤销",
+          "x": 625,
+          "y": 820,
+          "w": 190,
+          "h": 58
+        }
+      ]
+    },
+    {
+      "file": "before-1440-13-空卷导出提示.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "draft-empty-export",
+          "role": "status",
+          "text": "请先添加题组，再下载 PDF 用于打印。",
+          "x": 0,
+          "y": 62,
+          "w": 1440,
+          "h": 22
+        }
+      ]
+    },
+    {
+      "file": "before-1440-14-整卷预览打不开.png",
+      "width": 1440,
+      "notices": [
+        {
+          "cls": "paper-browse-error",
+          "role": "main",
+          "text": "没找到这份卷面 这份卷可能还没上线或已被移除，回到找题页换一份看看。 错误信息：Cannot read properties of undefined (reading 'blocks') 返回找题",
+          "x": 0,
+          "y": 48,
+          "w": 1440,
+          "h": 279
+        }
+      ]
+    }
+  ],
+  "counts": [],
+  "dialogs": [],
+  "errors": [
+    "1440 similar: TimeoutError: locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('.similar-rcard input[type=checkbox]').first() to be visible\u001b[22m\n"
+  ]
+}
