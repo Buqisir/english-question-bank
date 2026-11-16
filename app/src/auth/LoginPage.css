@@ -34,7 +34,8 @@
   width: 520px;
   height: 440px;
   border-radius: 50%;
-  background: #BFEFDB;
+  /* 薄荷雾，取雾色里的值（BRAND.md §1.5 雾色；原来的 #BFEFDB 不在色板里，2026-11-16 收回）。 */
+  background: #C4ECDD;
   filter: blur(90px);
   opacity: 0.55;
   pointer-events: none;

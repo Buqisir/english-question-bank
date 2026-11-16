@@ -1655,7 +1655,8 @@
 }
 
 .similar-rcard[data-fluid-hover-active] {
-  border-color: #a5cdbd;
+  /* 悬停边用灰，不用淡薄荷 #a5cdbd（BRAND.md §1.5 第 72 条：悬停不用薄荷；2026-11-16 色板外颜色收回）。 */
+  border-color: var(--eqb-color-border-strong);
 }
 
 .similar-rcard--checked {
