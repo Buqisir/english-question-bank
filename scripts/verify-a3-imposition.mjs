@@ -491,6 +491,11 @@ async function runPhaseB(browser) {
     assert('fixture produces multiple A4 pages (imposition needs >=3 to be meaningful)', a4PageCount >= 3, `pageCount=${a4PageCount}`)
 
     // ── Toggle to A3, wait for the imposed iframe to reload ──
+    // 切 A3 之后还会再排一次卷面（那次分页请求可能赶在切换的 PATCH 回来之前发，也可能在之后，看机器快慢，
+    // 所以不按 PATCH 序号认，按「点切换之后发出的第一个分页请求」认）。下面点题组菜单之前要等这一版落地。
+    const togglePatch = await page.evaluate(() => window.__a3Pagination.successfulPatches + 1)
+    const requestsBeforeToggle = await page.evaluate(() => window.__a3Pagination.requests.length)
+    const toggleDeadline = Date.now() + 180_000
     await page.getByRole('radio', { name: 'A3 对折' }).click()
     await page.waitForFunction(
       () => document.querySelector('.draft-a4-sheet iframe')?.contentDocument?.querySelector('.a3-imposition-wrap'),
@@ -529,20 +534,20 @@ async function runPhaseB(browser) {
 
     // Products hide stale content after a mutation. Scroll/anchor assertions
     // must target the new rendered document, not its loading placeholder.
-    async function waitForRevisedA3Preview(patch, deadline) {
+    async function waitForRevisedA3Preview(patch, deadline, afterRequestId = 0) {
       // An optimistic GET (or the A3-toggle GET) can finish after PATCH while
       // belonging to an obsolete render. Require issuance AFTER PATCH success,
       // and the newest such response to be adopted by the real frontend.
       // Body delivery + React adoption share the original pagination budget;
       // only then does the unchanged iframe load/layout budget begin.
-      const adopted = await page.waitForFunction(({ patch, pathname }) => {
+      const adopted = await page.waitForFunction(({ patch, pathname, afterRequestId }) => {
         const latest = window.__a3Pagination.requests
-          .filter((request) => request.path === pathname && request.patch >= patch).at(-1)
+          .filter((request) => request.path === pathname && request.patch >= patch && request.id > afterRequestId).at(-1)
         const frame = document.querySelector('.draft-a4-sheet iframe')
         return latest?.finishedAt && latest.status === 200
           && frame?.srcdoc.includes(`name="a3-qa-pagination-request" content="${latest.id}"`)
           && latest.id
-      }, { patch, pathname: `/api/draft-papers/${draftId}/pagination` },
+      }, { patch, pathname: `/api/draft-papers/${draftId}/pagination`, afterRequestId },
       { timeout: Math.max(1, deadline - Date.now()) })
       const requestId = await adopted.jsonValue()
       await adopted.dispose()
@@ -560,6 +565,13 @@ async function runPhaseB(browser) {
       console.log(`[A3 pagination] ${JSON.stringify(await ready.jsonValue())}`)
       await ready.dispose()
     }
+
+    // 上面的 .a3-imposition-wrap 旧卷面也会有（切换后先在旧稿上套 A3），真正按新版式排的那一版还在路上。
+    // 不等它就去点「⋯」：慢机器上点到一半 iframe 换新、按钮连同菜单一起卸掉，「下移」点不到，PATCH 永远不来
+    // （CI e2e-seams-2，2026-11-16：第二次分页 30.3s 回来、33.3s 换 iframe，菜单点击正卡在中间）。
+    await page.waitForFunction((patch) => window.__a3Pagination.successfulPatches >= patch, togglePatch,
+      { timeout: Math.max(1, toggleDeadline - Date.now()) })
+    await waitForRevisedA3Preview(0, toggleDeadline, requestsBeforeToggle)
 
     const reorderPatch = await page.evaluate(() => window.__a3Pagination.successfulPatches + 1)
     const reorderDeadline = Date.now() + 180_000
