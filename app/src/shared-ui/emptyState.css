@@ -14,6 +14,8 @@
   /* 「没找到」摊手图的宽。另外三张半身图按 110 宽放；摊手的 viewBox 宽 576、另外三张 494，
    * 同宽放头脸会小约 14%，要放大到约 1.17 倍（BRAND.md 第 119 条）：110 × 576 / 494 ≈ 128。 */
   --eqb-empty-otter-not-found-width: 128px;
+  /* 原语插图（折角纸）的高：BRAND.md §5.2「首次空态……用原语插画 64px」（第 54 条）。宽跟着 viewBox 走，约 45。 */
+  --eqb-empty-primitive-size: 64px;
   /* 说明一行最多多宽：照原来草稿卷空态的 26em（单词复习原来是 24em，并成一种）。 */
   --eqb-empty-text-measure: 26em;
 }
@@ -55,6 +57,18 @@
 .eqb-empty-state[data-art='otter-sit'] .eqb-empty-state-otter {
   width: var(--eqb-empty-otter-sit-size);
   height: var(--eqb-empty-otter-sit-size);
+}
+
+/* ── 原语插图（生词本首次空态，BRAND.md 第 54 条） ────────
+ * viewBox 贴着画出来的边，图下没有空白；和坐石全身像一样在图下补 8px，图到字的空白和平涂插图那几处差不多（目测）。 */
+.eqb-empty-state[data-art^='primitive-'] .eqb-empty-state-art {
+  padding-bottom: var(--eqb-space-2);
+}
+
+.eqb-empty-state[data-art^='primitive-'] .eqb-empty-state-primitive {
+  display: block;
+  width: auto;
+  height: var(--eqb-empty-primitive-size);
 }
 
 /* ── 「没找到」卡片 ──────────────────────────────────────

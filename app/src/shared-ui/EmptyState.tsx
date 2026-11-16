@@ -6,8 +6,10 @@
  * 「插图 + 一句灰字 + 主键」，间距、字号、外框各不一样。这里收成一种写法，照 DESIGN.md §5「Empty states」：
  * 桌色底、不放白卡片（Owner 2026-11-13 选 B），图在上，一句话在中间，动作在最下面。
  *
- * 图只有两类：
+ * 图有三类：
  * - illustration：平涂插图，沿用 components/EmptyIllustration 的 kind（这一页图标的平涂版）。
+ * - primitive：原语插图（BRAND.md §5.2「插画」，第 54 条）。只有 'paper' 一种，收藏的卷：雾薄荷折角纸、
+ *   浅雾薄荷正文行、墨书签，64px 高，放在一行字上面。只给对象本身就是卷子的首次空态（生词本）。
  * - otter：獭獭。类型上只开放 'otter-sit' 和 'not-found' 两种，依据是 BRAND.md §7 第 118 条：
  *   工作页面里獭獭只出两处，个人空间空态用坐石全身像（otter-sit），AI 找题没找到用半身摊手（not-found，
  *   第 119 条）。别处要加獭獭先改那一条，不在这里加选项。
@@ -35,10 +37,18 @@ const OTTER_SRC: Record<EmptyStateOtter, string> = {
   'not-found': '/brand/otter-not-found.svg',
 }
 
-/** 二选一：平涂插图，或者獭獭。 */
+/** 原语插图（BRAND.md §5.2）。spot-paper.svg ← design/brand-2026-10-13/illustration/spot-paper.svg，逐字节一样。 */
+export type EmptyStatePrimitive = 'paper'
+
+const PRIMITIVE_SRC: Record<EmptyStatePrimitive, string> = {
+  paper: '/brand/spot-paper.svg',
+}
+
+/** 三选一：平涂插图、原语插图，或者獭獭。 */
 export type EmptyStateArt =
-  | { illustration: EmptyIllustrationKind; otter?: undefined }
-  | { otter: EmptyStateOtter; illustration?: undefined }
+  | { illustration: EmptyIllustrationKind; primitive?: undefined; otter?: undefined }
+  | { primitive: EmptyStatePrimitive; illustration?: undefined; otter?: undefined }
+  | { otter: EmptyStateOtter; illustration?: undefined; primitive?: undefined }
 
 export type EmptyStateAction = {
   label: string
@@ -57,8 +67,8 @@ export type EmptyStateProps = Omit<HTMLAttributes<HTMLDivElement>, 'children'> &
     ref?: Ref<HTMLDivElement>
   }
 
-export function EmptyState({ illustration, otter, children, action, className, ref, ...rest }: EmptyStateProps) {
-  const art = otter ?? 'illustration'
+export function EmptyState({ illustration, primitive, otter, children, action, className, ref, ...rest }: EmptyStateProps) {
+  const art = otter ?? (primitive ? `primitive-${primitive}` : 'illustration')
   return (
     <div
       ref={ref}
@@ -69,6 +79,8 @@ export function EmptyState({ illustration, otter, children, action, className, r
       <span className="eqb-empty-state-art" aria-hidden="true">
         {otter ? (
           <img className="eqb-empty-state-otter" src={OTTER_SRC[otter]} alt="" draggable={false} />
+        ) : primitive ? (
+          <img className="eqb-empty-state-primitive" src={PRIMITIVE_SRC[primitive]} alt="" draggable={false} />
         ) : illustration ? (
           <EmptyIllustration kind={illustration} />
         ) : null}
