@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-16T11:05:30.952Z",
+  "generatedAt": "2026-11-16T13:05:23.070Z",
   "src": "design/brand-2026-10-13/manual/src",
-  "out": "design/brand-2026-10-13/manual/视觉规范手册-草案0.7-预览.pdf",
+  "out": "design/brand-2026-10-13/manual/视觉规范手册-草案0.8-预览.pdf",
   "font": {
     "fallback": true,
     "packages": [
@@ -17,9 +17,9 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 0.61,
+        "diffPct": 0.65,
         "headerPct": 0,
-        "bodyPct": 0.76,
+        "bodyPct": 0.81,
         "footerPct": 0
       }
     },
@@ -30,7 +30,7 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 5.79,
+        "diffPct": 5.8,
         "headerPct": 0.51,
         "bodyPct": 7.05,
         "footerPct": 0.76
@@ -64,15 +64,15 @@
     },
     {
       "page": "04-图形标志",
-      "images": 11,
+      "images": 13,
       "failedImages": [],
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 4.51,
-        "headerPct": 0.53,
-        "bodyPct": 5.33,
-        "footerPct": 1.76
+        "diffPct": 4.99,
+        "headerPct": 0.54,
+        "bodyPct": 5.93,
+        "footerPct": 1.77
       }
     },
     {
@@ -82,9 +82,9 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 3.06,
-        "headerPct": 0.53,
-        "bodyPct": 3.54,
+        "diffPct": 3.13,
+        "headerPct": 0.54,
+        "bodyPct": 3.62,
         "footerPct": 1.66
       }
     },
@@ -108,23 +108,23 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 6.36,
+        "diffPct": 6.48,
         "headerPct": 0.41,
-        "bodyPct": 7.49,
-        "footerPct": 3.04
+        "bodyPct": 7.64,
+        "footerPct": 3.07
       }
     },
     {
       "page": "08-三条字道",
-      "images": 1,
+      "images": 3,
       "failedImages": [],
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 3.9,
-        "headerPct": 0.4,
-        "bodyPct": 4.49,
-        "footerPct": 2.53
+        "diffPct": 4.04,
+        "headerPct": 0.41,
+        "bodyPct": 4.65,
+        "footerPct": 2.63
       }
     },
     {
@@ -240,7 +240,7 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 6.22,
+        "diffPct": 6.23,
         "headerPct": 0.42,
         "bodyPct": 7.5,
         "footerPct": 1.55
@@ -292,7 +292,7 @@
       "clipped": [],
       "compare": {
         "diffPct": 4.24,
-        "headerPct": 0.4,
+        "headerPct": 0.41,
         "bodyPct": 5,
         "footerPct": 1.83
       }
@@ -305,7 +305,7 @@
       "clipped": [],
       "compare": {
         "diffPct": 6.14,
-        "headerPct": 0.4,
+        "headerPct": 0.41,
         "bodyPct": 7.23,
         "footerPct": 2.98
       }
@@ -318,7 +318,7 @@
       "clipped": [],
       "compare": {
         "diffPct": 6.39,
-        "headerPct": 0.4,
+        "headerPct": 0.41,
         "bodyPct": 7.69,
         "footerPct": 1.75
       }
@@ -343,7 +343,7 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 2.32,
+        "diffPct": 2.33,
         "headerPct": 0.51,
         "bodyPct": 2.6,
         "footerPct": 1.86
@@ -369,10 +369,10 @@
       "outOfBoard": [],
       "clipped": [],
       "compare": {
-        "diffPct": 5.94,
+        "diffPct": 5.62,
         "headerPct": 0.48,
-        "bodyPct": 7.07,
-        "footerPct": 2.17
+        "bodyPct": 6.59,
+        "footerPct": 2.77
       }
     }
   ],

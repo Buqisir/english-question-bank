@@ -5,7 +5,7 @@
         <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
           <div style={{ backgroundImage: 'url(../../logo/mint/mark.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '20px', width: '31px' }} />
           <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
-            视觉规范手册 · 草案 0.7
+            视觉规范手册 · 草案 0.8
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
@@ -239,25 +239,24 @@
                 </div>
                 <div style={{ borderColor: '#D5DACF', borderRadius: '4px', borderStyle: 'dashed', borderWidth: '1px', boxSizing: 'border-box', paddingInline: '7px' }}>
                   <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                    方向已定 · 第 92 条
+                    方向已定 · 第 92、121 条
                   </div>
                 </div>
               </div>
-              <div style={{ alignItems: 'center', borderColor: '#D5DACF', borderRadius: '8px', borderStyle: 'dashed', borderWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: 0, height: '56px', justifyContent: 'center' }}>
-                <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '16px' }}>
-                  草稿见 04 页
-                </div>
+              <div style={{ alignItems: 'center', borderColor: '#E3E8DF', borderRadius: '8px', borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: 0, gap: '20px', height: '56px', justifyContent: 'center' }}>
+                <div style={{ backgroundImage: 'url(../../wordmark-2026-11-16/svg/wordmark-large-ink.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '28px', width: '56px' }} />
+                <div style={{ backgroundImage: 'url(../../wordmark-2026-11-16/svg/wordmark-small-ink.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '15px', width: '30.9px' }} />
               </div>
             </div>
             <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-              在现成字体上改，不从零造字，也不直接用系统字；授权要允许商用和修改，比如 SIL OFL。拉丁写法比三版：Inter、Paper Mono、在 Paper Mono 上改字；中文名另找能改的中文字体，比如思源黑体。字形要胖而清爽，圆来自形体。
+              在现成字体上改，不从零造字，也不直接用系统字；授权要允许商用和修改。中文字标取自 Noto Sans SC（思源黑体，SIL OFL 1.1）：左边大档 600，右边小档 400、略放字距、「獭」右半边收细；15px 另有逐格画版，见 04 页。拉丁写法没定，拉丁字标不做（第 121 条）。
             </div>
           </div>
         </div>
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §3.3 · DESIGN.md §3 · 第 17、18、63、92 条 · 样张里 EQB Termes 用 Times New Roman 代显，思源宋体用同一套字形的 Noto Serif SC 代显
+          出处：BRAND.md §3.3 · DESIGN.md §3 · 第 17、18、63、92、121 条 · 样张里 EQB Termes 用 Times New Roman 代显，思源宋体用同一套字形的 Noto Serif SC 代显
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           08

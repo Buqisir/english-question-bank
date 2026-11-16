@@ -5,7 +5,7 @@
         <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
           <div style={{ backgroundImage: 'url(../../logo/mint/mark.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '20px', width: '31px' }} />
           <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
-            视觉规范手册 · 草案 0.7
+            视觉规范手册 · 草案 0.8
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
@@ -249,7 +249,7 @@
                 <div style={{ backgroundColor: '#191D18', borderRadius: '3px', boxSizing: 'border-box', flexShrink: 0, height: '14px', width: '14px' }} />
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0px', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '170%' }}>
-                雾薄荷、雾白、墨三色，没有围兜所以不用浅雾薄荷；单色版只用墨；不做反白版。字标的第一轮草稿见 04 页。
+                雾薄荷、雾白、墨三色，没有围兜所以不用浅雾薄荷；单色版只用墨；不做反白版。字标见 04 页，墨底上的字标用雾白，旁边的标志仍是彩色。
               </div>
               <div style={{ boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'end', paddingTop: '2px', width: '72px' }}>
                 <div style={{ borderColor: '#2C6E56', borderRadius: '4px', borderStyle: 'solid', borderWidth: '1px', boxSizing: 'border-box', paddingInline: '7px' }}>

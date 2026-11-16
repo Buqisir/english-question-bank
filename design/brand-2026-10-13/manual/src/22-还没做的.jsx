@@ -5,7 +5,7 @@
         <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
           <div style={{ backgroundImage: 'url(../../logo/mint/mark.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '20px', width: '31px' }} />
           <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
-            视觉规范手册 · 草案 0.7
+            视觉规范手册 · 草案 0.8
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
@@ -44,7 +44,7 @@
               </div>
               <div style={{ backgroundColor: '#2C6E56', borderRadius: '4px', boxSizing: 'border-box', paddingInline: '7px' }}>
                 <div style={{ boxSizing: 'border-box', color: '#FFFFFF', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
-                  工作名已定 · 其余提案
+                  名字、口号已定 · 其余提案
                 </div>
               </div>
             </div>
@@ -53,15 +53,15 @@
                 商标确认
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                第 9 类已有「他石」，只差一个声调，要代理人判断（第 88 条）。
+                以獭石为主，以后再问代理人；第 9 类有「他石」（第 121 条）。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, lineHeight: '175%' }}>
-                字标小尺寸逐格画版
+                字标在 Mac 上核对
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                11px 不够清楚；逐格画还是用普通文字，没定（第 92 条）。
+                已上首页顶栏和登录页；放在苹方旁边粗细对不对，要在 Mac 上看（第 121 条）。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>
@@ -69,15 +69,15 @@
                 拉丁写法
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                商标确认前界面上不出现（第 89 条）；拉丁字标不做。
+                没定，文档里暂用 Tashi；界面上不出现，拉丁字标不做（第 89、121 条）。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, lineHeight: '175%' }}>
-                一句话和口号
+                一句话
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                两句候选配哪句还是提案；要能长到教育 agent 阶段（§2）。
+                口号已定（第 121 条）；一句话还是提案，要能长到 agent 阶段（§1.1）。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>
@@ -93,7 +93,7 @@
                 宣传大图上的字
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                图上的名字和两句话是占位，字形定稿后换成字标（第 63 条）。
+                图上的名字和两句话是占位，换成第二轮字标还没做（第 63、121 条）。
               </div>
             </div>
             <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingTop: '12px' }}>
@@ -101,7 +101,7 @@
                 手册在 Mac 上出正式版
               </div>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                0.6、0.7 都是没有苹方的机器出的预览版，要在 Mac 上重跑出正式版。
+                0.6–0.8 都是没有苹方的机器出的预览版，要在 Mac 上重跑出正式版。
               </div>
             </div>
           </div>
@@ -114,22 +114,6 @@
                 <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Medium", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 500, lineHeight: '18px' }}>
                   每一处另开 UI 任务
                 </div>
-              </div>
-            </div>
-            <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>
-              <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, lineHeight: '175%' }}>
-                獭獭接进网站
-              </div>
-              <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                只接两处（第 118 条）：个人空间空态放坐石全身像，AI 没找到放半身摊手。空状态构件正在做，两张图都还没接进网站。
-              </div>
-            </div>
-            <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>
-              <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '13px', fontWeight: 600, lineHeight: '175%' }}>
-                「没找到」卡片
-              </div>
-              <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                现在只是一行灰字，要先做成卡片，獭獭在卡片上沿后面（第 31 条）；宽放大约 1.17 倍是提案，界面任务里再量（第 119 条）。
               </div>
             </div>
             <div style={{ borderBottomColor: '#E3E8DF', borderBottomStyle: 'solid', borderBottomWidth: '1px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingBlock: '12px' }}>
@@ -274,7 +258,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §2、§3.1、§3.5、§8 第 5–11 条、§4.10 · 第 69、71、88、89、92、95、106、113–119 条 · 以 BRAND.md 为准，和手册不一致时改手册
+          出处：BRAND.md §2、§3.1、§3.5、§8 第 5–11 条、§4.10 · 第 69、71、88、89、92、95、106、113–119、121 条 · 以 BRAND.md 为准，和手册不一致时改手册
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           22
