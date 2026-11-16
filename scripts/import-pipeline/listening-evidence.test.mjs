@@ -183,3 +183,39 @@ test('local upload preflight names oversize files and refuses total budget overf
   assert.throws(() => assertListeningUploadBudget(Array.from({ length: 5 }, (_, i) => ({
     path: `file-${i}.json`, byteLength: 64 * 1024 ** 2 }))), /bundle/u)
 })
+
+function agentNavigation(t) {
+  const root = workspace(t), { review, subject, transcript } = navigation(root)
+  transcript.push({ segmentId: 's2', questionNumbers: [2], text: 'Another source.' })
+  review.groups.push({ ...structuredClone(review.groups[0]), segmentId: 's2', questionNumbers: [2],
+    playback: { startSeconds: 5, endSeconds: 7 },
+    occurrences: [{ startSeconds: 5, endSeconds: 7, evidencePaths: [review.evidence[0].path] }] })
+  review.groups[0].decision = 'review_required'
+  review.groups[0].playback = null
+  review.groups[0].occurrences = []
+  const agent = withListeningRuleFixture(root, review, transcript)
+  agent.method = 'agent_asr_comparison'
+  Object.assign(agent.groups[0], { decision: 'usable', playback: { startSeconds: 1, endSeconds: 4 },
+    occurrences: [{ startSeconds: 1, endSeconds: 4, evidencePaths: [agent.evidence[0].path] }] })
+  const edge = (sourceText, text, startSeconds) => ({ sourceText,
+    words: [{ text, startSeconds, endSeconds: startSeconds + 0.2, evidencePath: agent.evidence[0].path }] })
+  agent.groups[0].boundaryJudgment = {
+    start: edge('Synthetic', 'Synthetic', 1), end: edge('source.', 'source', 3.5),
+  }
+  return { root, agent, subject, transcript }
+}
+test('agent ASR can adjust machine playback with retained word-time basis', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t)
+  assert.equal(validateListeningReview(root, agent, subject, transcript).review, agent)
+})
+test('agent ASR adjustment requires boundary basis', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t)
+  delete agent.groups[0].boundaryJudgment
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript), /boundary basis/u)
+})
+test('agent ASR adjustment cannot overlap its adjacent group', t => {
+  const { root, agent, subject, transcript } = agentNavigation(t)
+  agent.groups[0].playback.endSeconds = 6
+  agent.groups[0].occurrences[0].endSeconds = 6
+  assert.throws(() => validateListeningReview(root, agent, subject, transcript), /overlapping playback/u)
+})

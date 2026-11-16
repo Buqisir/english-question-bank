@@ -64,10 +64,11 @@ function validateReview(rootDir, review, subject, transcript, version) {
     || review.schemaVersion !== version
     || digestJson(review.subject) !== digestJson(subject)
     || review.reviewedBy !== 'import_agent' || !Number.isFinite(Date.parse(review.reviewedAt))
-    || !['asr_source_comparison', 'audio_source_comparison'].includes(review.method)
+    || !['asr_source_comparison', 'audio_source_comparison', 'agent_asr_comparison'].includes(review.method)
     || review.untrustedContentHandledAsData !== true
     || digestJson(review.scope) !== digestJson({ purpose: 'teacher_navigation',
       verbatim: 'not_certified', wholeRecordingContent: 'not_certified' })) fail('invalid subject, attestation or scope')
+  if (review.method === 'agent_asr_comparison' && version !== LISTENING_REVIEW_VERSION) fail('agent ASR requires v2 rule evidence')
   if (!Array.isArray(review.evidence) || review.evidence.length === 0) fail('missing retained evidence')
   assertListeningUploadBudget(review.evidence)
   const paths = new Set()
@@ -105,12 +106,12 @@ function validateReview(rootDir, review, subject, transcript, version) {
     paths.add(file.path)
   }
   if (version === LISTENING_REVIEW_VERSION) {
-    if (ruleNotes.length > 1 || (review.method === 'asr_source_comparison' && ruleNotes.length !== 1)) fail('requires one v2 rule summary')
+    if (ruleNotes.length > 1 || (review.method !== 'audio_source_comparison' && ruleNotes.length !== 1)) fail('requires one v2 rule summary')
     for (const notes of ruleNotes) {
       try { assertListeningRuleEvidence(notes, review, transcript) } catch (error) { fail(error.message) }
     }
   }
-  if (review.method === 'asr_source_comparison' && !review.evidence.some(file => file.kind === 'asr_window')) {
+  if (review.method !== 'audio_source_comparison' && !review.evidence.some(file => file.kind === 'asr_window')) {
     fail('ASR comparison requires retained ASR windows')
   }
   const groups = [...transcript].sort((a, b) => Math.min(...a.questionNumbers) - Math.min(...b.questionNumbers))
@@ -118,7 +119,8 @@ function validateReview(rootDir, review, subject, transcript, version) {
   let lastEnd = 0
   for (const [index, group] of review.groups.entries()) {
     const source = groups[index]
-    if (!exactKeys(group, ['segmentId', 'questionNumbers', 'decision', 'reason', 'limits', 'playback', 'occurrences'])
+    if (!exactKeys(group, ['segmentId', 'questionNumbers', 'decision', 'reason', 'limits', 'playback', 'occurrences',
+      ...(review.method === 'agent_asr_comparison' && Object.hasOwn(group, 'boundaryJudgment') ? ['boundaryJudgment'] : [])])
       || group.segmentId !== source.segmentId
       || digestJson(group.questionNumbers) !== digestJson(source.questionNumbers)
       || !['usable', 'review_required', 'blocked'].includes(group.decision)

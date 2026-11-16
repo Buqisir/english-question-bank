@@ -1096,10 +1096,13 @@ function listeningInstructionCorrection(paperId, command) {
 
 function listeningReview(paperId, command) {
   const paperDir = paperDirectory(paperId)
+  const method = option('--method') || 'asr_source_comparison'
+  if (!['asr_source_comparison', 'audio_source_comparison', 'agent_asr_comparison'].includes(method)) fail('Unknown listening review method')
   const loaded = loadNck1ReviewSource(paperDir)
   const input = command === 'finalize-listening-review' ? option('--input') : null
   if (command === 'finalize-listening-review' && !input) fail('finalize-listening-review requires --input <review.json>')
   const authoredBytes = input ? readFileSync(path.resolve(input)) : null
+  if (authoredBytes && option('--method') && JSON.parse(authoredBytes).method !== method) fail('Listening review method differs from --method')
   const expectedDigest = option('--candidate-digest') || (authoredBytes
     ? JSON.parse(authoredBytes.toString('utf8'))?.subject?.candidateDigest : null)
   const imported = importNck1ReviewCandidate(paperDir, loaded, expectedDigest)
@@ -1115,7 +1118,7 @@ function listeningReview(paperId, command) {
       sourceInstructions: loaded.materialization.sourcePresentation?.instructions || [],
       report: {
         schemaVersion: LISTENING_REVIEW_VERSION, subject, reviewedBy: 'import_agent', reviewedAt: null,
-        method: 'asr_source_comparison', untrustedContentHandledAsData: true,
+        method, untrustedContentHandledAsData: true,
         scope: { purpose: 'teacher_navigation', verbatim: 'not_certified', wholeRecordingContent: 'not_certified' },
         evidence: [],
         groups: [...transcript].sort((a, b) => Math.min(...a.questionNumbers) - Math.min(...b.questionNumbers))
@@ -1150,6 +1153,8 @@ function listeningReview(paperId, command) {
   } else validated = readListeningReview(paperDir, subject, transcript)
   if (!validated) fail('No listening review exists')
   console.log(JSON.stringify({ paperId, validation: 'PASS', scope: validated.review.scope,
+    method: validated.review.method,
+    ...(validated.review.method === 'agent_asr_comparison' ? { label: 'AI 对照 ASR 判定', ownerReviewed: false } : {}),
     usableGroups: validated.review.groups.filter(group => group.decision === 'usable').length,
     unresolvedGroups: validated.review.groups.filter(group => group.decision !== 'usable').map(group => group.segmentId),
     semanticJudgment: 'import_agent_attestation', revision: 'not_submitted', publication: null }, null, 2))

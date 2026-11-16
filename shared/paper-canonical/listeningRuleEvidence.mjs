@@ -61,9 +61,28 @@ export function assertListeningRuleEvidence(value, review, transcript) {
       || Object.keys(group).some(key => ![...groupKeys, 'partialOccurrences', 'observedWindowBindings', 'engineAttempts'].includes(key))
       || group.engineAttempts.some(attempt => Object.keys(attempt).some(key =>
         ![...engineKeys, 'partialOccurrences', 'observedWindowBindings'].includes(key)))) fail('invalid group summary')
-    if (review.method === 'asr_source_comparison'
+    const differs = review.method !== 'audio_source_comparison'
       && digestJson(listeningNavigationGroup(group)) !== digestJson(pick(review.groups[i],
-        ['segmentId', 'questionNumbers', 'decision', 'playback', 'occurrences']))) fail('navigation differs from rule')
+      ['segmentId', 'questionNumbers', 'decision', 'playback', 'occurrences']))
+    if (review.method === 'asr_source_comparison' && differs) fail('navigation differs from rule')
+    if (review.method === 'agent_asr_comparison' && differs) {
+      const basis = review.groups[i].boundaryJudgment
+      const nonempty = text => typeof text === 'string' && text.trim().length > 0
+      if (!exactKeys(basis, ['start', 'end'])) fail('missing agent ASR boundary basis')
+      for (const edge of [basis.start, basis.end]) {
+        if (!exactKeys(edge, ['sourceText', 'words']) || !nonempty(edge.sourceText)
+          || !Array.isArray(edge.words) || !edge.words.length) fail('missing agent ASR boundary basis')
+        for (const word of edge.words) {
+          if (!exactKeys(word, ['text', 'startSeconds', 'endSeconds', 'evidencePath'])
+            || !nonempty(word.text) || !Number.isFinite(word.startSeconds) || !Number.isFinite(word.endSeconds)
+            || word.startSeconds < 0 || word.endSeconds <= word.startSeconds
+            || word.endSeconds > review.subject.durationSeconds
+            || !review.evidence.some(file => file.kind === 'asr_window' && file.path === word.evidencePath)) {
+            fail('invalid agent ASR boundary basis')
+          }
+        }
+      }
+    }
   }
   const d = value.diagnostic
   if (!exactKeys(d, ['schemaVersion', 'path', 'encoding', 'sha256', 'byteLength', 'decodedSha256', 'decodedByteLength'])

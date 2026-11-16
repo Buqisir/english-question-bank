@@ -4,6 +4,8 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'nod
 import path from 'node:path'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { retainOwnerListening } from './lib-finish-owner-listening.mjs'
+import { withListeningRuleFixture } from '../lib/listeningRuleEvidenceFixture.mjs'
+import { validateListeningReview } from '../../server/paper-import/listeningReview.mjs'
 
 function setup(t, { changed = false, sidecar = true } = {}) {
   const scratch = path.resolve('.scratch')
@@ -56,3 +58,53 @@ test('缺少切分绑定时停止而不覆盖', async t => {
   await assert.rejects(retainOwnerListening({ ...fixture, log: () => {}, verify: async () => assert.fail() }), /无法确认/u)
   assert.deepEqual(readFileSync(fixture.file), original)
 })
+
+function agentFixture(t) {
+  const fixture = setup(t)
+  const relative = 'listening-review-evidence/asr.json', bytes = Buffer.from('{"words":[]}')
+  for (const dir of [fixture.paperDir, fixture.attempt]) writeFileSync(path.join(dir, relative), bytes)
+  const subject = { durationSeconds: 10, playbackAudioSha256: sha256('audio') }
+  const transcript = [{ segmentId: 's1', questionNumbers: [1], text: 'Hello world.' },
+    { segmentId: 's2', questionNumbers: [2], text: 'Second source.' }]
+  const report = withListeningRuleFixture(fixture.attempt, { subject, method: 'asr_source_comparison',
+    reviewedBy: 'import_agent', reviewedAt: '2026-11-16T00:00:00Z', untrustedContentHandledAsData: true,
+    scope: { purpose: 'teacher_navigation', verbatim: 'not_certified', wholeRecordingContent: 'not_certified' },
+    evidence: [{ path: relative, sha256: sha256(bytes), byteLength: bytes.length, kind: 'asr_window',
+      window: { startSeconds: 0, endSeconds: 10 },
+      settings: { engine: 'fixture', model: 'fixture', language: 'en', vad: false, computeType: 'fixture' } }],
+    groups: transcript.map((g, i) => ({ segmentId: g.segmentId, questionNumbers: g.questionNumbers,
+      decision: 'usable', reason: 'fixture', limits: [],
+      playback: { startSeconds: i * 4 + 1, endSeconds: i * 4 + 3 },
+      occurrences: [{ startSeconds: i * 4 + 1, endSeconds: i * 4 + 3, evidencePaths: [relative] }] })),
+  }, transcript)
+  for (const file of report.evidence) writeFileSync(path.join(fixture.paperDir, file.path),
+    readFileSync(path.join(fixture.attempt, file.path)))
+  const agent = structuredClone(report)
+  agent.method = 'agent_asr_comparison'
+  agent.groups[0].playback.endSeconds = 4
+  agent.groups[0].occurrences[0].endSeconds = 4
+  const edge = (sourceText, startSeconds) => ({ sourceText,
+    words: [{ text: sourceText, startSeconds, endSeconds: startSeconds + 0.2, evidencePath: relative }] })
+  agent.groups[0].boundaryJudgment = { start: edge('Hello', 1), end: edge('world.', 3.5) }
+  return { ...fixture, report, agent, subject, transcript }
+}
+for (const scenario of ['valid', 'missing basis', 'overlap']) {
+  test(`finish preserves agent judgement only after validation: ${scenario}`, async t => {
+    const fixture = agentFixture(t), logs = []
+    if (scenario === 'missing basis') delete fixture.agent.groups[0].boundaryJudgment
+    if (scenario === 'overlap') fixture.agent.groups[0].playback.endSeconds = 6
+    writeFileSync(fixture.file, JSON.stringify(fixture.agent))
+    const before = readFileSync(fixture.file)
+    const result = retainOwnerListening({ ...fixture, log: message => logs.push(message),
+      verify: async () => validateListeningReview(fixture.paperDir, JSON.parse(readFileSync(fixture.file)),
+        fixture.subject, fixture.transcript) })
+    if (scenario === 'valid') {
+      const retained = await result
+      assert.equal(retained.retainedOwnerReview, false)
+      assert.equal(retained.retainedAgentReview, true)
+      assert.match(logs.join('\n'), /AI 对照 ASR 判定/u)
+      assert.doesNotMatch(logs.join('\n'), /Owner/u)
+    } else await assert.rejects(result, scenario === 'overlap' ? /overlapping playback/u : /boundary basis/u)
+    assert.deepEqual(readFileSync(fixture.file), before)
+  })
+}
