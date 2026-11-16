@@ -984,7 +984,7 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
       ...expected, notes: [], decision: 'usable', issues: [], occurrences: [], playback: null,
       sourceText: group.text, sourceProjection: projectListeningSpokenText(group, corpus),
       compoundSpellings: spellings,
-      boundarySpeech, boundarySpeechRuns: speechRuns, partialOccurrences: [],
+      boundarySpeech, boundarySpeechRuns: speechRuns, boundaryAnnouncements: markers, partialOccurrences: [],
       observedWindows }
     if (expected.issue) result.notes.push(expected.issue)
     if (!words.length) problem(result, 'ASR_NO_TIMED_WORDS')
@@ -1021,14 +1021,16 @@ export function evaluateListeningEngine({ groups, instructions = [], windows = [
     const tails = scopedTails.length ? scopedTails : anchor.tails
     const startIndex = heads[0]
     const tailIndex = tails.at(-1)
-    if (startIndex === undefined || tailIndex === undefined || tailIndex + anchor.width <= startIndex) {
+    const outerEdgesFound = startIndex !== undefined && tailIndex !== undefined
+      && tailIndex + anchor.width > startIndex && tailIndex >= heads.at(-1)
+    if (!outerEdgesFound) {
       problem(result, 'OCCURRENCE_TAIL_MISSING_OR_AMBIGUOUS')
     }
     // Per-reading anchors remain diagnostics; only the material's outside edges cut audio.
     result.readingCountEvidence = {printedReadings: expected.expectedReadings,
       observedReadings: heads.length && heads.length === tails.length ? heads.length : 'unknown',
       headCount: heads.length, tailCount: tails.length}
-    if (startIndex !== undefined && tailIndex !== undefined && tailIndex + anchor.width > startIndex) {
+    if (outerEdgesFound) {
       const nextHead = upper > tailIndex + anchor.width ? upper : words.length
       const endIndex = tailIndex + anchor.width
       const actual = words.slice(startIndex, endIndex)
@@ -1412,6 +1414,7 @@ function silentBoundaryUnions(conflicts, observed, reference, attempts, corpus, 
 export function reconcileListeningEngines(apple, whisper) {
   const allAttempts = [...apple.groups, ...(whisper?.groups || [])]
   const allObservedRuns = [...new Set(allAttempts.flatMap(group => group.boundarySpeechRuns || []))]
+  const allAnnouncements = allAttempts.flatMap(group => group.boundaryAnnouncements || [])
   // Legacy/incomplete evidence with no run identity remains an obstruction.
   const unknownSpeech = allAttempts.filter(g => !g.boundarySpeechRuns).flatMap(g => g.boundarySpeech || [])
   const hardConflict = new Set(['ANNOUNCEMENT_CONFLICT', 'ANCHOR_AMBIGUOUS'])
@@ -1529,10 +1532,13 @@ export function reconcileListeningEngines(apple, whisper) {
       trailingMidpoint: occurrence.boundaryEvidence?.padding?.trailingMidpoint ?? duration,
       ...(Number.isFinite(previousEnd) ? {previousSpeechEndSeconds: previousEnd} : {}),
       ...(Number.isFinite(nextStart) ? {nextSpeechStartSeconds: nextStart} : {})})
-    const includedPrompt = padding && allObservedRuns.find(run => spansOverlap(run, {
+    const finalPlayback = padding && {
       startSeconds: Math.max(occurrence.playback.startSeconds, padding.startSeconds),
       endSeconds: Math.min(occurrence.playback.endSeconds, padding.endSeconds),
-    }) && (/[\p{Script=Han}]/u.test(run.text) || parseListeningAnnouncements(run.text).length))
+    }
+    const includedPrompt = finalPlayback && (allAnnouncements.find(marker => spansOverlap(marker, finalPlayback))
+      || allObservedRuns.find(run => spansOverlap(run, finalPlayback)
+        && (/[\p{Script=Han}]/u.test(run.text) || parseListeningAnnouncements(run.text).length)))
     if (obstructions.length || includedPrompt || !padding || occurrence.playback.endSeconds > endLimit) {
       occurrence.boundaryEvidence ??= {}
       occurrence.boundaryEvidence.reconciledObstructions = obstructions

@@ -589,6 +589,44 @@ test('an internal missing tail does not block reliable outer material edges', ()
   assert.equal(result.occurrences[0].alignment.observedReadings, 2)
 })
 
+test('a final reading with a missing tail or only half its body cannot be silently cropped away', () => {
+  for (const half of [false, true]) {
+    const result = astraEngine(astraText, segments => {
+      if (half) segments[1].words = segments[1].words.slice(0, 14)
+      else segments[1].words.at(-1).word = 'here'
+      segments[1].end = segments[1].words.at(-1).end
+    }).groups[0]
+    assert.equal(result.readingCountEvidence.headCount, 2)
+    assert.equal(result.readingCountEvidence.tailCount, 1)
+    assert.equal(result.decision, 'review_required')
+    assert.ok(result.issues.includes('OCCURRENCE_TAIL_MISSING_OR_AMBIGUOUS'))
+    assert.equal(result.playback, null)
+  }
+})
+
+test('cross-run announcements from an unanchored engine block the other engine material in either direction', () => {
+  const parts = [windowFor(astraText.replace('Bright', 'Blazing').replace('over there', 'over here'), 2),
+    windowFor(astraText.replace('Bright', 'Blazing').replace('over there', 'over here'), 12)]
+  const prompt = {start: 9, end: 9.4, text: 'Text One', words: [
+    {word: 'Text', start: 9, end: 9.2}, {word: 'One', start: 9.2, end: 9.4},
+  ]}
+  const unanchored = astraEngine(astraText, null, {
+    windows: [{startSeconds: 0, endSeconds: 30,
+      result: {segments: [parts[0].result.segments[0], prompt, parts[1].result.segments[0]]}}],
+  })
+  assert.equal(unanchored.groups[0].occurrences.length, 0)
+  const full = astraEngine(astraText, null, {engine: 'faster-whisper'})
+  assert.equal(full.groups[0].decision, 'usable')
+  for (const pair of [[unanchored, full], [full, unanchored]]) {
+    const result = reconcileListeningEngines(...pair)[0]
+    assert.equal(result.decision, 'review_required')
+    assert.equal(result.playback, null)
+    assert.equal(result.occurrences[0].boundaryEvidence.includedPrompt.raw, 'Text One')
+    assert.equal(result.occurrences[0].boundaryEvidence.includedPrompt.startSeconds, 9)
+    assert.equal(result.occurrences[0].boundaryEvidence.includedPrompt.endSeconds, 9.4)
+  }
+})
+
 test('only located outer anchors define the range; printed counts do not certify additional audio', () => {
   const result = astraEngine(astraText, segments => {
     segments[1].words[0].word = 'Blazing'
