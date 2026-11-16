@@ -1740,7 +1740,10 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   const editionOptions = PAPER_PDF_EDITIONS.map((value) => {
     const verdict = editionVerdicts.get(value)
     const economyShort = value === 'economy8' && economyInsufficient
-    const unavailable = economyShort || (verdict !== undefined && !verdict.available)
+    // 空卷不算哪一版用不了（UI 体检 2026-11-16 第 1 条）：服务器对空卷每一版都判 PRODUCT_EMPTY，
+    // 字段就会自己标红、写「用不了」，新建的卷一打开像出了错。空卷的原因只写一处：卷头那行「先加题组，才能下载 PDF」。
+    const emptyPaper = verdict?.code === 'PRODUCT_EMPTY'
+    const unavailable = economyShort || (verdict !== undefined && !verdict.available && !emptyPaper)
     return {
       value,
       label: PAPER_PDF_PRODUCTS[value],
@@ -1794,7 +1797,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     <Menu
       label="导出"
       triggerText="导出"
-      triggerTone="primary"
+      // 空卷时「导出」不当主键（UI 体检 2026-11-16 第 1 条）：菜单里三项都不能点，主键让给空态里的「去找题」，
+      // 一页只有一处雾薄荷（DESIGN.md §2 Accent）。有题组了再变回主键。
+      triggerTone={draftPaper.items.length === 0 ? 'subtle' : 'primary'}
       triggerSize="md"
       className="draft-export-menu-panel"
       items={[
@@ -1954,14 +1959,17 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                 撤回
               </button>
             ) : (
-              <button
-                type="button"
+              // 「采用」换成 Button 的「建议」样子（UI 体检 2026-11-16 第 5 条）：原来手写墨色描边键，
+              // 和「描边键换无边 Button」（拍板 C）、「建议前置分页」同一类动作不同样子。类名留给脚本挂钩。
+              <Button
+                tone="suggest"
+                size="sm"
                 className="draft-reorder-suggestion-act"
                 aria-disabled={reorderSuggestionCard ? undefined : true}
                 onClick={() => void applyReorderSuggestion()}
               >
                 采用
-              </button>
+              </Button>
             )}
           </div>
           <p>{reorderCard.text}</p>

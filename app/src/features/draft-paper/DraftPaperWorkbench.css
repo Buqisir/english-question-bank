@@ -286,27 +286,14 @@
 }
 
 .draft-reorder-suggestion .draft-reorder-suggestion-act {
-  background: transparent;
-  border: 1px solid var(--desk-ink);
-  border-radius: 8px;
-  color: var(--desk-ink);
-  cursor: pointer;
+  /* 样子归 Button「建议」（UI 体检 2026-11-16 第 5 条），这里只管摆放。 */
   flex: none;
-  font: inherit;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 2px 10px;
-  transition: background var(--motion-fast) var(--ease-hover);
-  white-space: nowrap;
 }
 
-.draft-reorder-suggestion .draft-reorder-suggestion-act:hover:not([aria-disabled='true']) {
-  background: var(--desk-hover);
-}
-
+/* 还没算出建议时键在、不能点（沿用原来的 aria-disabled）：和 .eqb-button:disabled 同一个淡法。 */
 .draft-reorder-suggestion .draft-reorder-suggestion-act[aria-disabled='true'] {
-  cursor: default;
-  opacity: 0.4;
+  cursor: not-allowed;
+  opacity: 0.55;
 }
 
 .draft-reorder-suggestion .draft-reorder-suggestion-undo {
