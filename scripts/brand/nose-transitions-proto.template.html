@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>獭獭动效原型 · 鼻子和过渡</title>
+<!--
+  原型，提案 · 单一来源，还没定。由 scripts/brand/nose-transitions-proto.mjs 从母版 SVG 生成，别手改。
+  规矩照 BRAND.md §4.6：缓入缓出不回弹（cubic-bezier(.45,0,.55,1)）；一次出场一个动作，演完就停；
+  界面动效每段 ≤300ms；减少动态效果时什么都不演。
+  A 鼻子轻动：三种幅度和做法，坐石全身像（个人空间空态，150px 是线上尺寸）和半身「没找到」各演一遍。
+  B 状态之间的短过渡：半身三张放进同一个 viewBox，脸对齐；卡片上沿就是水面。三种做法，三组状态。
+-->
+<style>
+  :root { --ink:#191D18; --muted:#60665C; --bg:#F3F6F0; --card:#FAFCF8; --line:#D5DACF; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:14px/1.5 Inter,"PingFang SC","Noto Sans SC",system-ui,sans-serif; }
+  main { max-width:1120px; margin:0 auto; padding:32px 16px 56px; display:flex; flex-direction:column; gap:36px; }
+  h1 { margin:0; font-size:20px; font-weight:600; }
+  h2 { margin:0 0 4px; font-size:16px; font-weight:600; }
+  h3 { margin:0; font-size:14px; font-weight:600; }
+  p { margin:0; }
+  .lede, .note { color:var(--muted); font-size:13px; }
+  .note { font-size:12px; max-width:320px; }
+  .bar { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:12px; }
+  .row { display:flex; gap:20px; flex-wrap:wrap; align-items:flex-start; margin-top:16px; }
+  .panel { background:var(--card); border-radius:12px; box-shadow:0 0 0 1px rgba(30,30,28,.05),0 1px 2px rgba(30,30,28,.06); padding:16px; display:flex; flex-direction:column; gap:10px; width:340px; max-width:100%; }
+  .pill { height:28px; padding:0 12px; border:1px solid var(--line); border-radius:999px; background:var(--card); color:var(--ink); font:inherit; font-size:13px; cursor:pointer; }
+  .pill[aria-pressed="true"] { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .tag { font-size:12px; color:var(--muted); }
+  .faces { display:flex; gap:8px; align-items:flex-end; }
+  .faces figure { margin:0; display:flex; flex-direction:column; align-items:center; gap:4px; }
+  .faces figcaption { font-size:11px; color:var(--muted); }
+  .sit150 svg { width:150px; height:150px; display:block; }
+  .faces figure.zoom { display:block; }
+  .zoom { width:150px; height:150px; overflow:hidden; border-radius:8px; background:#fff; }
+  .zoom svg { flex:none; width:900px; height:900px; display:block; margin:-40px 0 0 -417px; }
+  .nf120 svg { width:min(120px, 24vw); height:auto; display:block; }
+  /* B：卡片上沿就是水面，獭獭在卡片后面，下沉就是沉到卡片边下面 */
+  .stage { position:relative; width:220px; height:252px; overflow:hidden; margin:0 auto; }
+  .stage .layer { position:absolute; inset:0; }
+  .stage .layer svg { width:220px; height:252px; display:block; }
+  .stage .layer[hidden] { display:none; }
+  .rcard { position:relative; height:64px; margin-top:-1px; border-radius:12px; background:#fff; box-shadow:0 0 0 1px rgba(30,30,28,.06),0 1px 2px rgba(30,30,28,.06); padding:12px 14px; display:flex; flex-direction:column; gap:6px; }
+  .rcard b { font-size:13px; font-weight:500; }
+  .rcard span { font-size:12px; color:var(--muted); }
+  [data-otter="nose"],[data-otter="muzzle"],[data-otter="eye"] { transform-box:fill-box; transform-origin:center; }
+  [data-otter="muzzle"] { transform-origin:50% 0; }
+  [data-otter="hands"] { transform-box:view-box; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>獭獭动效原型 · 鼻子轻动、状态之间的短过渡</h1>
+    <p class="lede">提案 · 单一来源，还没定。点「再演一次」重放；「慢放 ×4」只是为了看清，线上不慢放。系统打开「减少动态效果」时什么都不演。</p>
+    <div class="bar"><button class="pill" id="slow" aria-pressed="false">慢放 ×4</button><span class="tag" id="rm"></span></div>
+  </header>
+
+  <section>
+    <h2>A · 鼻子轻动</h2>
+    <p class="lede">出场 600ms 后演一次（和现在的眨眼同一个时间点），只动鼻子这一小块，眼睛、嘴套、点点不跟（N3 除外）。和眨眼二选一，不叠在一起演。</p>
+    <div class="row">
+      <div class="panel" data-nose="n1"><h3>N1 · 抽一下</h3>
+        <div class="faces"><figure class="sit150">{{SIT}}<figcaption>线上 150px</figcaption></figure><figure class="zoom" data-mirror></figure></div>
+        <p class="note">鼻子往上抽一下再落回：上 100ms、回 140ms，约 1px（线上尺寸）。最轻，几乎是「动了一下吗？」的程度。</p>
+        <button class="pill replay">再演一次</button></div>
+      <div class="panel" data-nose="n2"><h3>N2 · 嗅两下</h3>
+        <div class="faces"><figure class="sit150" data-clone></figure><figure class="zoom" data-mirror></figure></div>
+        <p class="note">鼻子横向略宽、纵向略扁，连着两下（每下 120ms），像闻了闻。比 N1 更「像动物」，但是两拍。</p>
+        <button class="pill replay">再演一次</button></div>
+      <div class="panel" data-nose="n3"><h3>N3 · 鼻子带嘴套</h3>
+        <div class="faces"><figure class="sit150" data-clone></figure><figure class="zoom" data-mirror></figure></div>
+        <p class="note">鼻子上抽，嘴套跟着往上鼓一点点（纵向 +3%），一次 260ms。动得最「整体」，也最显眼。</p>
+        <button class="pill replay">再演一次</button></div>
+    </div>
+    <div class="row">
+      <div class="panel" style="width:auto"><h3>同样三种放在半身「没找到」上</h3>
+        <div class="faces" id="nf-row"><figure class="nf120" data-nose="n1">{{NF_NOSE}}<figcaption>N1</figcaption></figure></div>
+        <p class="note">「没找到」现在是浮上来，按「一次出场一个动作」它就不该再动鼻子；放这里只是看在别的脸型位置上幅度是否合适。</p>
+        <button class="pill replay" id="nf-replay">三个一起再演</button></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>B · 状态之间的短过渡</h2>
+    <p class="lede">换状态时只演过渡，不再叠出场动作。每种都在 300ms 以内。卡片上沿就是水面。</p>
+    <div class="bar" id="pairs">
+      <button class="pill" data-pair="searching>offer" aria-pressed="true">找题中 → 递出结果</button>
+      <button class="pill" data-pair="searching>notfound">找题中 → 没找到</button>
+      <button class="pill" data-pair="notfound>searching">没找到 → 再找</button>
+    </div>
+    <div class="row">
+      <div class="panel" data-trans="dip"><h3>T1 · 沉一下再浮</h3>
+        <div class="stage"></div><div class="rcard"><b>A篇 · 失败以后重新振作</b><span>阅读理解 · 高二</span></div>
+        <p class="note">整只往卡片边下沉 18px（120ms，缓入），在边下面换好手里的东西，再浮上来（160ms，缓入缓出）。合计 280ms。最像「潜下去拿了个东西上来」。</p>
+        <button class="pill replay">再演一次</button></div>
+      <div class="panel" data-trans="hands"><h3>T2 · 只换手里的</h3>
+        <div class="stage"></div><div class="rcard"><b>A篇 · 失败以后重新振作</b><span>阅读理解 · 高二</span></div>
+        <p class="note">头、身子、爪子都不动，只有手里的东西沉到爪子后面、落进水里（120ms），新的从水里托上来（160ms）。合计 280ms。最安静。只适合「找题中 ↔ 递出结果」这种身子、爪子一样的；「没找到」手臂和肚皮都不同，碰到它就退回 T1。</p>
+        <button class="pill replay">再演一次</button></div>
+      <div class="panel" data-trans="fade"><h3>T3 · 叠化</h3>
+        <div class="stage"></div><div class="rcard"><b>A篇 · 失败以后重新振作</b><span>阅读理解 · 高二</span></div>
+        <p class="note">两张直接叠化 200ms。脸是同一张，不会重影；但中间那几帧手是半透明的，和「不用透明」的画法不太一致。作对照用。</p>
+        <button class="pill replay">再演一次</button></div>
+    </div>
+  </section>
+</main>
+
+<template id="t-searching">{{SEARCHING}}</template>
+<template id="t-offer">{{OFFER}}</template>
+<template id="t-notfound">{{NOTFOUND}}</template>
+
+<script>
+(() => {
+  const EASE = 'cubic-bezier(0.45, 0, 0.55, 1)';
+  const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let K = 1; // 慢放倍数
+  const cancelIn = (root) => root.querySelectorAll('*').forEach((el) => el.getAnimations().forEach((a) => a.cancel()));
+  // 同一张 svg 克隆时 id 要换，不然 clipPath 串到第一张上
+  let cid = 0;
+  const cloneSvg = (svg) => {
+    const p = `c${++cid}-`;
+    let s = svg.outerHTML.replace(/\bid="([^"]+)"/g, `id="${p}$1"`).replace(/url\(#([^)]+)\)/g, `url(#${p}$1)`).replace(/href="#([^"]+)"/g, `href="#${p}$1"`);
+    const t = document.createElement('template'); t.innerHTML = s; return t.content.firstElementChild;
+  };
+
+  // ---------- A 鼻子 ----------
+  const NOSE = {
+    // 鼻子在头像母版坐标里大约 130 宽；24 个单位在线上 150px 的坐石像上约 1px
+    n1: (svg) => [svg.querySelector('[data-otter="nose"]').animate([
+      { transform: 'translateY(0)', easing: EASE }, { transform: 'translateY(-24px)', offset: 100 / 240, easing: EASE }, { transform: 'translateY(0)' },
+    ], { duration: 240 * K, delay: 600 * K })],
+    n2: (svg) => [svg.querySelector('[data-otter="nose"]').animate([
+      { transform: 'scale(1,1)', easing: EASE }, { transform: 'scale(1.08,0.86)', offset: 0.25, easing: EASE }, { transform: 'scale(1,1)', offset: 0.5, easing: EASE },
+      { transform: 'scale(1.08,0.86)', offset: 0.75, easing: EASE }, { transform: 'scale(1,1)' },
+    ], { duration: 240 * K, delay: 600 * K })],
+    n3: (svg) => {
+      const o = { duration: 260 * K, delay: 600 * K };
+      return [
+        svg.querySelector('[data-otter="nose"]').animate([{ transform: 'translateY(0)', easing: EASE }, { transform: 'translateY(-20px)', offset: 0.42, easing: EASE }, { transform: 'translateY(0)' }], o),
+        svg.querySelector('[data-otter="muzzle"]').animate([{ transform: 'scaleY(1)', easing: EASE }, { transform: 'scaleY(1.03)', offset: 0.42, easing: EASE }, { transform: 'scaleY(1)' }], o),
+      ];
+    },
+  };
+  const sit = document.querySelector('[data-nose="n1"] .sit150 svg');
+  document.querySelectorAll('[data-clone]').forEach((f) => f.prepend(cloneSvg(sit)));
+  document.querySelectorAll('[data-clone]').forEach((f) => { const c = document.createElement('figcaption'); c.textContent = '线上 150px'; f.append(c); });
+  document.querySelectorAll('[data-mirror]').forEach((f) => { f.append(cloneSvg(sit)); f.title = '放大看鼻子'; });
+  const nfRow = document.getElementById('nf-row');
+  const nf1 = nfRow.querySelector('figure');
+  ['n2', 'n3'].forEach((k) => { const f = document.createElement('figure'); f.className = 'nf120'; f.dataset.nose = k; f.append(cloneSvg(nf1.querySelector('svg'))); const c = document.createElement('figcaption'); c.textContent = k.toUpperCase(); f.append(c); nfRow.append(f); });
+
+  const playNose = (panel) => {
+    const k = panel.dataset.nose;
+    panel.querySelectorAll('svg').forEach((svg) => { cancelIn(svg); if (!reduced()) NOSE[k](svg); });
+  };
+  document.querySelectorAll('.panel[data-nose]').forEach((p) => { p.querySelector('.replay').onclick = () => playNose(p); });
+  document.getElementById('nf-replay').onclick = () => nfRow.querySelectorAll('figure').forEach(playNose);
+
+  // ---------- B 过渡 ----------
+  const T = { searching: 't-searching', offer: 't-offer', notfound: 't-notfound' };
+  // 只动手里的东西：held，加上跟着它走的浅色细缝（扇贝的 paw-gap、half-low-ring）。爪子 paw-band 画在它上面不动，
+  // 东西往下落时先沉到爪子后面、再被 figure 的水面裁掉。
+  const handsOf = (svg) => [...svg.querySelectorAll('[id$="-held"], [id$="-paw-gap"], [id$="-half-low-ring"]')];
+  let pair = ['searching', 'offer'];
+  const build = (stage) => {
+    stage.innerHTML = '';
+    for (const k of Object.keys(T)) {
+      const d = document.createElement('div'); d.className = 'layer'; d.dataset.state = k;
+      d.append(cloneSvg(document.getElementById(T[k]).content.firstElementChild));
+      d.hidden = k !== pair[0]; stage.append(d);
+    }
+  };
+  const TRANS = {
+    dip(stage, a, b) {
+      const out = a.animate([{ transform: 'none' }, { transform: 'translateY(18px)' }], { duration: 120 * K, easing: 'cubic-bezier(0.45,0,1,1)', fill: 'forwards' });
+      out.onfinish = () => {
+        a.hidden = true; out.cancel(); b.hidden = false;
+        b.animate([{ transform: 'translateY(18px)' }, { transform: 'none' }], { duration: 160 * K, easing: EASE });
+      };
+    },
+    hands(stage, a, b) {
+      // 「没找到」的两条手臂、整块肚皮和另外两张不是同一套，只换手里的会对不上；这一组退回 T1。
+      if (a.dataset.state === 'notfound' || b.dataset.state === 'notfound') return TRANS.dip(stage, a, b);
+      const drop = 'translateY(150px)';
+      const outs = handsOf(a.firstElementChild).map((h) => h.animate([{ transform: 'none' }, { transform: drop }], { duration: 120 * K, easing: 'cubic-bezier(0.45,0,1,1)', fill: 'forwards' }));
+      outs[0].onfinish = () => {
+        a.hidden = true; outs.forEach((o) => o.cancel()); b.hidden = false;
+        handsOf(b.firstElementChild).forEach((h) => h.animate([{ transform: drop }, { transform: 'none' }], { duration: 160 * K, easing: EASE }));
+      };
+    },
+    fade(stage, a, b) {
+      b.hidden = false; b.style.zIndex = 1;
+      b.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200 * K, easing: EASE }).onfinish = () => { a.hidden = true; b.style.zIndex = ''; };
+    },
+  };
+  const panels = [...document.querySelectorAll('.panel[data-trans]')];
+  const playTrans = (panel) => {
+    const stage = panel.querySelector('.stage'); build(stage);
+    const a = stage.querySelector(`[data-state="${pair[0]}"]`), b = stage.querySelector(`[data-state="${pair[1]}"]`);
+    if (reduced()) { a.hidden = true; b.hidden = false; return; }
+    setTimeout(() => TRANS[panel.dataset.trans](stage, a, b), 500 * K);
+  };
+  panels.forEach((p) => { build(p.querySelector('.stage')); p.querySelector('.replay').onclick = () => playTrans(p); });
+  document.querySelectorAll('#pairs .pill').forEach((btn) => btn.onclick = () => {
+    document.querySelectorAll('#pairs .pill').forEach((x) => x.setAttribute('aria-pressed', x === btn));
+    pair = btn.dataset.pair.split('>'); panels.forEach(playTrans);
+  });
+
+  document.getElementById('slow').onclick = (e) => { K = K === 1 ? 4 : 1; e.currentTarget.setAttribute('aria-pressed', K === 4); };
+  document.getElementById('rm').textContent = reduced() ? '系统开着「减少动态效果」：现在什么都不演。' : '';
+  // 打开页面先各演一次
+  document.querySelectorAll('.panel[data-nose]').forEach(playNose);
+  nfRow.querySelectorAll('figure').forEach(playNose);
+  panels.forEach(playTrans);
+  window.__proto = { playNose, playTrans, NOSE, TRANS, handsOf, setPair: (p) => { pair = p; } };
+})();
+</script>
+</body>
+</html>
