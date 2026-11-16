@@ -22,8 +22,8 @@ main 自然运行覆盖的 Full/E2E 不在本地重复；不叠加 focused/Paper
 
 ## Local and reversible
 
-At acceptance, run affected build/typecheck or behavioral checks only where
-current CI does not cover them. A UI micro-change also gets real-click
+Before pushing, run the L1 checks above even when main CI also covers them;
+reuse still-valid L1 evidence, and add other acceptance only for real gaps. A UI micro-change also gets real-click
 verification on the exact page and state, plus Owner QA when visible. It does
 not trigger unrelated backend, paper, print/PDF, or full-repository suites
 without a demonstrated dependency.

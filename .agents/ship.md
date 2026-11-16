@@ -1,7 +1,8 @@
 # Ship one task to main
 
 Follow `AGENTS.md`. Tasks carry standing Owner authority for direct push to main,
-verification and automatic website deployment on Owner Mac. Do not wait for a
+verification and automatic website deployment on Owner Mac (effective once
+`main` required status checks are removed, BUB-218; until then use the PR path). Do not wait for a
 separate Ship instruction. “先别推” or “先别上” keeps the task out of main unless
 Owner explicitly permits it to ship with other commits; “停自动部署” pauses every
 Agent's automatic deployment. Migration, schema, DB/R2 data operations and host

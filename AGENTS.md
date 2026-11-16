@@ -47,7 +47,9 @@ continue through diagnosis, same-transaction status/evidence reconciliation,
 reviewed entry maintenance, deployment, health checks and the agreed rollback
 or recovery when those outcomes are included in the Goal. Do not ask again at
 install/finalize/status/deploy boundaries. Tasks include direct push to main and
-deployment under standing Owner authority; explicit non-goals still apply.
+deployment under standing Owner authority (Owner 2026-11-16, BUB-218); explicit
+non-goals still apply. Direct push applies only once `main` no longer has
+required status checks (activation, BUB-218); until then use the PR fallback.
 “先别推” or “先别上” keeps that task out of main unless the Owner explicitly
 allows it to ship with other commits. “停自动部署” pauses all Agents' automatic
 deployments. Migration, schema, DB/R2 data operations and host configuration
