@@ -437,13 +437,12 @@ export function segmentListening({ paperDir, request, appleEvidence, output, whi
     method: 'asr_source_comparison', evidence,
     groups: resolved.map(group => ({
       segmentId: group.segmentId, questionNumbers: group.questionNumbers, decision: group.decision,
-      reason: group.decision === 'usable' ? `${LISTENING_SEGMENT_RULE.version}：原文为准，实际 ${group.occurrences.length} 遍，正文、顺序及完整播放边界有证据`
+      reason: group.decision === 'usable' ? `${LISTENING_SEGMENT_RULE.version}：原文为准，观察遍数 ${group.readingCountEvidence?.observedReadings ?? 'unknown'}，正文、顺序及完整播放边界有证据`
         : `${LISTENING_SEGMENT_RULE.version}：${group.issues.join(', ')}`,
       limits: ['仅 ASR 与权威原文对照；非直接听审、逐字认证或全录音安全认证。',
         ...(group.notes?.length ? [`记录性差异：${group.notes.join(', ')}`] : []),
         ...(group.engineNotes?.length ? ['两引擎字词差异已记录；不据此改写原文。'] : []),
-        ...(group.readingCountEvidence?.instructionCorrectionRequired
-          ? ['新交付卷面须通过 listening-instruction-correction 校正遍数说明；保留原 PDF、音频和旧 revision。'] : [])],
+      ],
       playback: group.playback,
       occurrences: group.decision === 'usable' ? group.occurrences.map(o => ({
         ...o.playback, evidencePaths: o.evidencePaths,

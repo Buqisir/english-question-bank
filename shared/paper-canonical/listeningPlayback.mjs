@@ -45,3 +45,16 @@ export function firstListeningSectionRange(segments, questionNumbers) {
     || (index > 0 && segment.startSeconds < selected[index - 1].endSeconds))) return null
   return { startSeconds: selected[0].startSeconds, endSeconds: selected.at(-1).endSeconds, segments: selected }
 }
+
+// A complete question-number cover is required; missing cuts never fall back to raw audio.
+export function wholeListeningPaperRange(segments) {
+  if (!Array.isArray(segments) || !segments.length) return null
+  const ordered = [...segments].sort((a, b) => Math.min(...a.questionNumbers) - Math.min(...b.questionNumbers))
+  const numbers = ordered.flatMap(segment => segment.questionNumbers)
+  if (numbers.join(',') !== Array.from({length: 20}, (_, i) => i + 1).join(',')
+    || ordered.some((segment, index) => !Number.isFinite(segment.startSeconds)
+      || !Number.isFinite(segment.endSeconds) || segment.startSeconds < 0
+      || segment.endSeconds <= segment.startSeconds
+      || (index && segment.startSeconds < ordered[index - 1].endSeconds))) return null
+  return {startSeconds: ordered[0].startSeconds, endSeconds: ordered.at(-1).endSeconds}
+}

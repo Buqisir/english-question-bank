@@ -103,22 +103,22 @@ test('compressed diagnostics produce identical Owner sentences, whole segments, 
   } finally { rmSync(f.temp, { recursive: true, force: true }) }
 })
 
-test('0.8-second buffer stops at adjacent pause midpoints; context expands exact cut by 3 seconds', () => {
+test('1-second buffer stops at adjacent pause midpoints; context expands exact cut by 3 seconds', () => {
   const r = reviewCuts({ wordStartSeconds: 2, wordEndSeconds: 5, pauses, durationSeconds: 16 })
   assert.equal(r.startSeconds, 1.5)
-  assert.equal(r.endSeconds, 5.8)
+  assert.equal(r.endSeconds, 6)
   assert.equal(r.actualLeadingBufferSeconds, 0.5)
-  assert.equal(r.actualTrailingBufferSeconds, 0.8)
+  assert.equal(r.actualTrailingBufferSeconds, 1)
   assert.equal(r.clips[1].sourceStartSeconds, 0)
-  assert.equal(r.clips[1].sourceEndSeconds, 8.8)
+  assert.equal(r.clips[1].sourceEndSeconds, 9)
   const narrow = reviewCuts({ wordStartSeconds: 8, wordEndSeconds: 11, durationSeconds: 16,
     pauses: [{ startSeconds: 7.8, endSeconds: 8 }, { startSeconds: 11, endSeconds: 11.2 }] })
   assert.equal(narrow.startSeconds, 7.9)
   assert.equal(narrow.endSeconds, 11.1)
   const long = reviewCuts({ wordStartSeconds: 8, wordEndSeconds: 11, durationSeconds: 13,
     pauses: [{ startSeconds: 5, endSeconds: 8 }, { startSeconds: 11, endSeconds: 13 }] })
-  assert.equal(long.startSeconds, 7.2)
-  assert.equal(long.endSeconds, 11.8)
+  assert.equal(long.startSeconds, 7)
+  assert.equal(long.endSeconds, 12)
   assert.equal(long.clips[1].sourceEndSeconds, 13)
   assert.throws(() => reviewCuts({ wordStartSeconds: 2, wordEndSeconds: 5, pauses: [], durationSeconds: 16 }), /REVIEW_PACK_PAUSE_MISSING/u)
   assert.throws(() => reviewCuts({ wordStartSeconds: NaN, wordEndSeconds: 5, pauses, durationSeconds: 16 }), /INVALID_WORD_EDGES/u)
@@ -153,7 +153,7 @@ test('CLI emits one whole-segment clip, literal Chinese page, SHA-bound unreview
     assert.equal(segment.paperName, '合成听核卷')
     assert.deepEqual(segment.readings.map(r => r.reading), [null])
     assert.equal(segment.readings[0].startSeconds, 1.5)
-    assert.equal(segment.readings[0].endSeconds, 11.8)
+    assert.equal(segment.readings[0].endSeconds, 12)
     assert.equal(segment.observedTranscript.split('Bright').length - 1, 2)
     for (const r of segment.readings) {
       assert.deepEqual(r.clips.map(c => c.kind), ['window'])
