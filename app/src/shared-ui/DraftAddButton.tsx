@@ -12,7 +12,8 @@
  *   能中键开新标签、能复制地址；普通左键点在本页里切过去，不整页刷新。
  *   这一次在这里加的，纸里右边带「撤回」（淡墨文字键），点了把刚加的那一条从草稿卷移除，回到加入前。
  *   本来就在草稿卷里的（进页面时就是），只有「已加入」，不出撤回。
- * - 出错：键后面一行次要灰字加 16px 图标，「没加入：」「没撤回：」后面照登服务器原话，不另写兜底的话。
+ * - 出错：键后面一行次要灰字加 16px 图标，写「加入草稿卷没成功，可以再试一次。」「撤回没成功，可以再试一次。」（describeError）。
+ *   原始报错只进 console，不给老师看（和草稿卷同一条，verify-error-copy-mainline；Owner 2026-11-16 定收紧）。
  * - 键盘：在键上按回车加入后，焦点落到「撤回」，不落到「已加入」：多按一下回车顶多撤回（原地、一步能再加回来），
  *   不会跳去草稿卷（跳走了这一页的撤回也就没了）。Shift+Tab 回到「已加入」。没有撤回时（拿不到刚加的那一条）落到「已加入」。
  *   撤回后焦点回到加入键。
@@ -23,6 +24,7 @@
 import { useContext, useEffect, useRef, useState, type MouseEvent } from 'react'
 import { AlertTriangle, Plus } from '../icons'
 import { Button, type ButtonSize, type ButtonTone } from './Button.tsx'
+import { describeError } from '../features/shared/errorCopy'
 import { DraftAddContext, type DraftAddActions, type DraftAddReceipt } from './draftAddContext.ts'
 import './draftAddButton.css'
 
@@ -43,10 +45,6 @@ export type DraftAddButtonProps = {
   /** 紧凑档：加入前、加入中只有加号（首页结果行；加入中加号换成所以点）。加入后照样是「已加入」那块纸。 */
   compact?: boolean
   className?: string
-}
-
-function errorText(error: unknown): string {
-  return error instanceof Error ? error.message : String(error)
 }
 
 export function DraftAddButton({ target, tone = 'strong', size = 'md', compact = false, className }: DraftAddButtonProps) {
@@ -96,7 +94,7 @@ export function DraftAddButton({ target, tone = 'strong', size = 'md', compact =
       setAnnouncement('已加入草稿卷')
       if (hadFocus) focusNextRef.current = next.itemId !== null ? 'undo' : 'open'
     } catch (addError) {
-      setError(`没加入：${errorText(addError)}`)
+      setError(describeError('加入草稿卷', addError))
       if (hadFocus) focusNextRef.current = 'main'
     } finally {
       setBusy(null)
@@ -115,7 +113,7 @@ export function DraftAddButton({ target, tone = 'strong', size = 'md', compact =
       setAnnouncement('已从草稿卷移出')
       if (hadFocus) focusNextRef.current = 'main'
     } catch (undoError) {
-      setError(`没撤回：${errorText(undoError)}`)
+      setError(describeError('撤回', undoError))
     } finally {
       setBusy(null)
     }

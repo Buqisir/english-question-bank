@@ -12,9 +12,9 @@ export type DraftAddReceipt = {
 }
 
 export type DraftAddActions = {
-  /** 把题组加入当前草稿卷。失败时抛出，错误原话由加入键照登。 */
+  /** 把题组加入当前草稿卷。失败时抛出，加入键说一句「没成功，可以再试一次」，原始报错进 console。 */
   add: (groupId: string) => Promise<DraftAddReceipt>
-  /** 把刚加的那一条从草稿卷移除。失败时抛出，错误原话由加入键照登。 */
+  /** 把刚加的那一条从草稿卷移除。失败时抛出，加入键说一句「没成功，可以再试一次」，原始报错进 console。 */
   undo: (receipt: DraftAddReceipt) => Promise<void>
   /** 打开草稿卷工作台并定位到这一组（「已加入」点了去这里；和改之前「再点一下」走的是同一条路）。 */
   openDraft: (draftPaperId: string | null, groupId: string) => void

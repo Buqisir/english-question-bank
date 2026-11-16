@@ -403,7 +403,7 @@ function App() {
 
   // 加入键（shared-ui/DraftAddButton）用的加入和撤回，走查第四节第 6 条。
   // 和上面 addGroupsToBasket 不同：不先乐观翻状态，键先进 busy（所以点），服务器确认后才算加入，
-  // 这样「已加入」和草稿丸的组数都是真的；失败不弹浏览器警告框，抛给加入键照登原话。
+  // 这样「已加入」和草稿丸的组数都是真的；失败不弹浏览器警告框，抛给加入键，由它说一句没成功（原始报错进 console）。
   async function addGroupToDraft(groupId: string): Promise<DraftAddReceipt> {
     const draftPaper = await addGroupToCurrentDraftPaperRequest(groupId)
     const item = draftPaper.items.find((candidate) => candidate.groupId === groupId)
