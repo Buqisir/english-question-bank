@@ -23,6 +23,7 @@ const NEEDLE_DEGREES = { 0.75: -50, 1: 0, 1.25: 50 } as const
 const CLICK_NEXT = { 1: 1.25, 1.25: 0.75, 0.75: 1 } as const
 const WAVE_WIDTH = { segment: 216, full: 384 } as const
 const MARK_CHAR_PX = 8
+const MARK_LABEL_MAX_SHIFT_PX = 12
 const HEADER_CLEARANCE = 72
 
 function clock(seconds: number): string {
@@ -201,23 +202,27 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
   }
 
   // Each question segment owns its span of the track; its label is centred
-  // over that span and dropped only if it would touch the previous label.
+  // over that span, nudged right past the previous label when short adjacent
+  // segments crowd together, and dropped only if that nudge would drift too far.
   const toX = (seconds: number) => duration > 0
     ? Math.min(waveWidth, Math.max(0, ((seconds - startSeconds) / duration) * waveWidth)) : 0
   const nowSeconds = startSeconds + shownPosition
   const markItems = (marks ?? []).reduce<{
-    items: Array<{ label: string; startSeconds: number; x: number; width: number; showLabel: boolean; current: boolean }>
+    items: Array<{ label: string; startSeconds: number; x: number; width: number; showLabel: boolean; labelShift: number; current: boolean }>
     labelEnd: number
   }>((layout, mark) => {
     const x = toX(mark.startSeconds)
     const width = Math.max(4, toX(mark.endSeconds) - x)
     const halfLabel = (mark.label.length * MARK_CHAR_PX) / 2
-    const showLabel = x + width / 2 - halfLabel >= layout.labelEnd + 2
+    const centredLeft = x + width / 2 - halfLabel
+    const labelLeft = Math.max(centredLeft, layout.labelEnd + 2)
+    const labelShift = labelLeft - centredLeft
+    const showLabel = labelShift <= MARK_LABEL_MAX_SHIFT_PX
     const current = (started || dragPosition !== null)
       && nowSeconds >= mark.startSeconds && nowSeconds < mark.endSeconds
     return {
-      items: [...layout.items, { ...mark, x, width, showLabel, current }],
-      labelEnd: showLabel ? x + width / 2 + halfLabel : layout.labelEnd,
+      items: [...layout.items, { ...mark, x, width, showLabel, labelShift, current }],
+      labelEnd: showLabel ? labelLeft + halfLabel * 2 : layout.labelEnd,
     }
   }, { items: [], labelEnd: -Infinity }).items
   // Real time spans only: silence/instructions remain empty, never equal divisions.
@@ -265,7 +270,8 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
           aria-label={`跳到第 ${mark.label} 题`} aria-current={mark.current ? 'true' : undefined}
           data-label={`第 ${mark.label} 题`} data-current={mark.current || undefined}
           onClick={() => jumpTo(mark.startSeconds - startSeconds)}>
-          {mark.showLabel && <span className="listening-player-mark-label" aria-hidden="true">{mark.label}</span>}
+          {mark.showLabel && <span className="listening-player-mark-label" aria-hidden="true"
+            style={mark.labelShift > 0 ? { left: mark.labelShift } : undefined}>{mark.label}</span>}
         </button>)}
       </span>}
       <div ref={waveRef} className="listening-player-wave" role="slider" tabIndex={0}
