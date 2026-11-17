@@ -125,16 +125,18 @@
 }
 
 .vocabulary-progress-explorer button:focus-visible {
-  outline: 2px solid var(--action);
+  outline: 2px solid var(--eqb-color-action);
   outline-offset: 2px;
 }
 
+/* 2026-11-17 过生词改版③（提案 · 单一来源）：选起点面板和开始卡、生词组卡同一套纸面——
+ * 白纸、--elev-2、卡片圆角、无描边；词格去掉描边和圆圈，改成底色块；确认条吸在面板底部。 */
 .vocabulary-progress-explorer {
-  min-height: min(680px, calc(100vh - 180px));
-  padding: 24px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
+  position: relative;
+  padding: 28px 32px 0;
+  border-radius: var(--eqb-radius-card);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-2);
 }
 
 .vocabulary-progress-explorer-heading,
@@ -147,6 +149,10 @@
   gap: 16px;
 }
 
+.vocabulary-progress-explorer-heading {
+  align-items: flex-start;
+}
+
 .vocabulary-progress-explorer-heading h2 {
   margin: 0;
   color: var(--eqb-color-text);
@@ -157,74 +163,89 @@
 
 .vocabulary-progress-explorer-heading p {
   margin: 6px 0 0;
-  color: var(--muted);
+  color: var(--eqb-color-text-muted);
   font-size: 14px;
   line-height: 1.5;
 }
 
 .vocabulary-progress-current {
   justify-content: flex-start;
+  gap: 10px;
   margin-top: 20px;
-  padding: 14px 16px;
-  border-radius: 12px;
-  background: var(--surface);
+  color: var(--eqb-color-text-secondary);
+  font-size: 14px;
 }
 
 .vocabulary-progress-current > span {
-  color: var(--muted);
+  padding: 2px 8px;
+  border-radius: var(--eqb-radius-badge);
+  background: var(--eqb-color-bg);
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
   font-weight: 600;
 }
 
 .vocabulary-progress-current strong {
-  color: var(--ink-strong);
-  font-size: 14px;
-  font-weight: 650;
+  color: var(--eqb-color-text);
+  font-weight: 600;
 }
 
 .vocabulary-progress-weeks {
   display: flex;
-  gap: 8px;
-  margin-top: 20px;
-  padding: 2px 2px 8px;
+  gap: 6px;
+  margin: 20px -2px 0;
+  padding: 2px 2px 6px;
   overflow-x: auto;
   scrollbar-width: thin;
 }
 
 .vocabulary-progress-weeks button {
-  min-height: 38px;
   flex: 0 0 auto;
-  padding: 7px 12px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
-  color: var(--muted);
+  min-height: 32px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: var(--eqb-radius-pill);
+  background: var(--eqb-color-bg);
+  color: var(--eqb-color-text-secondary);
   font: inherit;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
+  cursor: pointer;
+}
+
+.vocabulary-progress-weeks button:hover {
+  background: var(--eqb-color-desk);
 }
 
 .vocabulary-progress-weeks button.is-selected {
-  border-color: var(--line-strong);
-  background: var(--surface-strong);
-  color: var(--eqb-color-text);
+  background: var(--eqb-color-action);
+  color: var(--eqb-color-paper);
 }
 
 .vocabulary-progress-days {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 28px;
-  margin-top: 12px;
+  gap: 4px;
+  margin-top: 8px;
+  padding-bottom: 28px;
 }
 
 .vocabulary-progress-day {
   min-width: 0;
-  padding: 20px 0 24px;
-  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+
+.vocabulary-progress-day-heading {
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.vocabulary-progress-day-heading > div {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
 }
 
 .vocabulary-progress-day-heading h3 {
-  display: inline;
   margin: 0;
   color: var(--eqb-color-text);
   font-size: 14px;
@@ -233,34 +254,40 @@
 
 .vocabulary-progress-day-heading span,
 .vocabulary-progress-day-heading small {
-  color: var(--muted);
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
 }
 
-.vocabulary-progress-day-heading span {
-  margin-left: 8px;
+.vocabulary-progress-day-heading small {
+  color: var(--eqb-color-text-faint);
 }
 
 .vocabulary-progress-words {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  margin-top: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 6px;
+  margin-top: 10px;
 }
 
 .vocabulary-progress-word {
   display: grid;
-  grid-template-columns: 26px minmax(0, 1fr) auto;
+  grid-template-columns: 24px minmax(0, 1fr) auto;
   align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 7px 9px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
-  color: var(--ink);
+  gap: 6px;
+  min-height: 40px;
+  padding: 6px 10px 6px 8px;
+  border: 0;
+  border-radius: var(--eqb-radius-control);
+  background: var(--eqb-color-bg);
+  color: var(--eqb-color-text);
   font: inherit;
   text-align: left;
+  cursor: pointer;
+  transition: background-color var(--motion-fast) var(--ease-hover), box-shadow var(--motion-fast) var(--ease-hover);
+}
+
+.vocabulary-progress-word:hover {
+  background: var(--eqb-color-desk);
 }
 
 .vocabulary-progress-word strong {
@@ -275,75 +302,84 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
-  border: 1px solid var(--line-strong);
-  border-radius: 50%;
-  color: var(--muted);
+  color: var(--eqb-color-text-faint);
   font-size: 12px;
+  font-variant-numeric: tabular-nums;
 }
 
 .vocabulary-progress-word-state {
-  color: var(--muted);
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
   font-weight: 600;
 }
 
 .vocabulary-progress-word.is-processed {
-  background: var(--surface);
-  color: var(--muted);
+  background: transparent;
+  color: var(--eqb-color-text-faint);
+}
+
+.vocabulary-progress-word.is-processed:hover {
+  background: var(--eqb-color-bg);
+}
+
+.vocabulary-progress-word.is-processed .vocabulary-progress-word-order {
+  color: var(--eqb-color-text-muted);
+}
+
+.vocabulary-progress-word.is-current .vocabulary-progress-word-order {
+  color: var(--eqb-color-text);
+  font-weight: 600;
 }
 
 .vocabulary-progress-word.is-current {
-  border-color: var(--line-strong);
-  background: var(--eqb-color-desk);
+  box-shadow: inset 0 0 0 1px var(--eqb-color-border-strong);
 }
 
-.vocabulary-progress-word.is-selected {
-  border-color: var(--line-strong);
-  background: var(--surface-strong);
-  color: var(--eqb-color-text);
+.vocabulary-progress-word.is-selected,
+.vocabulary-progress-word.is-selected:hover {
+  background: var(--eqb-color-paper);
+  box-shadow: inset 0 0 0 2px var(--eqb-color-action);
 }
 
 .vocabulary-progress-word.is-selected .vocabulary-progress-word-order,
-.vocabulary-progress-word.is-current .vocabulary-progress-word-order {
-  border-color: var(--line-strong);
+.vocabulary-progress-word.is-selected .vocabulary-progress-word-state {
   color: var(--eqb-color-text);
 }
 
+/* 确认条：吸在面板底部（滚动时一直在视口里），上沿一条发丝和面板分开。 */
 .vocabulary-progress-selection {
   position: sticky;
-  top: 12px;
+  bottom: 0;
   z-index: 3;
-  margin-bottom: 8px;
-  padding: 16px;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  background: var(--panel);
-  box-shadow: var(--elev-2);
+  margin: 0 -32px;
+  padding: 14px 32px;
+  border-top: 1px solid var(--eqb-color-border);
+  border-radius: 0 0 var(--eqb-radius-card) var(--eqb-radius-card);
+  background: var(--eqb-color-paper);
 }
 
 .vocabulary-progress-selection > div {
   display: grid;
-  gap: 4px;
+  gap: 2px;
+  min-width: 0;
 }
 
 .vocabulary-progress-selection strong {
-  color: var(--ink-strong);
-  font-size: 14px;
+  color: var(--eqb-color-text);
+  font-size: 15px;
+  font-weight: 600;
 }
 
-/* 只管左边说明文字里的 span。原来写成 .vocabulary-progress-selection span（0,1,1），会压过 button.css 的
- * .eqb-button-label（0,1,0），把「确认从这里开始」的字改成 12px 次要灰；构件厂第 4 步第十页收窄到左边那块。 */
+/* 只管左边说明文字里的 span，不碰按钮里的 .eqb-button-label。 */
 .vocabulary-progress-selection > div span,
 .vocabulary-progress-selection small {
-  color: var(--muted);
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
   line-height: 1.5;
 }
 
 .vocabulary-progress-selection small {
-  color: var(--eqb-color-danger);
+  color: var(--eqb-color-danger-text);
 }
 
 /* 进度改好以后的那一行：样子归 shared-ui/Notice（2026-11-15，原来是墨色 600 字）。这里只留上面隔 12（原来 14，取最近的间距档）。
@@ -1466,8 +1502,12 @@
   }
 
   .vocabulary-progress-explorer {
-    min-height: auto;
-    padding: 16px;
+    padding: 22px 18px 0;
+  }
+
+  .vocabulary-progress-selection {
+    margin: 0 -18px;
+    padding: 12px 18px;
   }
 
   .vocabulary-progress-explorer-heading,
@@ -1477,7 +1517,11 @@
   }
 
   /* 两个键是共用按钮（.eqb-button）；button.css 不给有字的按钮定宽，这里撑满不和它抢。 */
-  .vocabulary-progress-explorer-heading .eqb-button,
+  .vocabulary-progress-explorer-heading .eqb-button {
+    align-self: flex-start;
+    margin-left: calc(-1 * var(--eqb-space-3));
+  }
+
   .vocabulary-progress-selection .eqb-button {
     width: 100%;
   }
@@ -1486,14 +1530,6 @@
     align-items: flex-start;
     flex-direction: column;
     gap: 4px;
-  }
-
-  .vocabulary-progress-days {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .vocabulary-progress-selection {
-    top: 8px;
   }
 
   .vocabulary-word-card {
@@ -1611,9 +1647,8 @@
 
 @media (max-width: 420px) {
   .vocabulary-progress-words {
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-
 }
 
 @media (prefers-reduced-motion: reduce) {
