@@ -68,8 +68,8 @@ export function VocabularyProgressExplorer({
           <h2 id="vocabulary-progress-explorer-title">选择下一词</h2>
           <p>按 Week 和 Day 找到实体书上的位置。确认后，下一轮从所选单词开始。</p>
         </div>
-        {/* 构件厂第 4 步第十页：原 .ghost-button = strong lg；下面「确认从这里开始」原 .primary-button（高 32）= solid md。 */}
-        <Button tone="strong" size="lg" icon={<ChevronUp size={16} aria-hidden="true" />} onClick={onClose}>
+        {/* 2026-11-17 过生词改版③：收起键降成淡墨（quiet），整张卡只留底部确认条一个实心键。 */}
+        <Button tone="quiet" icon={<ChevronUp size={16} aria-hidden="true" />} onClick={onClose}>
           {closeLabel}
         </Button>
       </div>
@@ -94,37 +94,6 @@ export function VocabularyProgressExplorer({
           </button>
         ))}
       </nav>
-
-      {selectedEntry && (
-        <div className="vocabulary-progress-selection">
-          <div>
-            <strong>下一次将从 {selectedEntry.headword}（第 {selectedEntry.source.globalOrder} 词）开始</strong>
-            <span>第 {selectedEntry.source.week} 周 · Day {selectedEntry.source.group}</span>
-            {selectedEntry.source.metadata && (
-              <span>
-                频序 {selectedEntry.source.metadata.frequencyRank}
-                {' · '}{stageLabel(program, selectedEntry.source.metadata.frequencyStage)}
-                {' · '}{curriculumTagLabel(selectedEntry.source.metadata.curriculumTag)}
-                {' · '}{(selectedEntry.teachingSenses?.length ? selectedEntry.teachingSenses : [selectedEntry.teachingSense]).join('；')}
-              </span>
-            )}
-            {hasUnfinishedRun && (
-              <small>确认后会放弃当前未结束轮次及本轮判断；已生成的生词组不受影响。</small>
-            )}
-          </div>
-          <Button
-            tone="solid"
-            disabled={busy || selectionIsCurrent}
-            onClick={() => onConfirm(selectedEntry)}
-          >
-            {selectionIsCurrent
-              ? '这里已是下一词'
-              : hasUnfinishedRun
-                ? '放弃当前轮并从这里开始'
-                : '确认从这里开始'}
-          </Button>
-        </div>
-      )}
 
       <div className="vocabulary-progress-days">
         {groups.map((group) => {
@@ -180,6 +149,41 @@ export function VocabularyProgressExplorer({
           )
         })}
       </div>
+
+      {selectedEntry && (
+        <div className="vocabulary-progress-selection">
+          <div>
+            <strong>下一次将从 {selectedEntry.headword}（第 {selectedEntry.source.globalOrder} 词）开始</strong>
+            <span>第 {selectedEntry.source.week} 周 · Day {selectedEntry.source.group}</span>
+            {selectedEntry.source.metadata && (
+              <span>
+                {/* 空的项（没有频序、没有课标标签）不留「频序 · · 」这样的空位。 */}
+                {[
+                  selectedEntry.source.metadata.frequencyRank ? `频序 ${selectedEntry.source.metadata.frequencyRank}` : '',
+                  stageLabel(program, selectedEntry.source.metadata.frequencyStage),
+                  curriculumTagLabel(selectedEntry.source.metadata.curriculumTag),
+                  (selectedEntry.teachingSenses?.length ? selectedEntry.teachingSenses : [selectedEntry.teachingSense]).filter(Boolean).join('；'),
+                ].filter(Boolean).join(' · ')}
+              </span>
+            )}
+            {hasUnfinishedRun && (
+              <small>确认后会放弃当前未结束轮次及本轮判断；已生成的生词组不受影响。</small>
+            )}
+          </div>
+          <Button
+            tone="solid"
+            size="lg"
+            disabled={busy || selectionIsCurrent}
+            onClick={() => onConfirm(selectedEntry)}
+          >
+            {selectionIsCurrent
+              ? '这里已是下一词'
+              : hasUnfinishedRun
+                ? '放弃当前轮并从这里开始'
+                : '确认从这里开始'}
+          </Button>
+        </div>
+      )}
 
       {statusMessage && <Notice kind="success" className="vocabulary-progress-status">{statusMessage}</Notice>}
       {errorMessage && <Notice kind="error" className="vocabulary-request-error">{errorMessage}</Notice>}
