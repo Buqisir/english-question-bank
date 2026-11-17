@@ -214,7 +214,7 @@
 }
 
 .vocabulary-progress-weeks button:hover {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
 }
 
 .vocabulary-progress-weeks button.is-selected {
@@ -287,7 +287,7 @@
 }
 
 .vocabulary-progress-word:hover {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
 }
 
 .vocabulary-progress-word strong {
@@ -822,7 +822,7 @@
 
 .vocabulary-control-back:hover:not(:disabled),
 .vocabulary-control-reveal:hover:not(:disabled) {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
   color: var(--eqb-color-text);
 }
 

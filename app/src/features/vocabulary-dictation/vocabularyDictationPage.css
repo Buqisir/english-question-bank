@@ -494,7 +494,7 @@
   .vocabulary-dictation-page button:hover:not(:disabled),
   .vocabulary-dictation-message button:hover {
     border-color: transparent;
-    background: var(--eqb-color-desk);
+    background: var(--eqb-color-state-hover);
   }
 
   .vocabulary-dictation-settings fieldset button.is-selected:hover {

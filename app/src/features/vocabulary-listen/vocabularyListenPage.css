@@ -353,7 +353,7 @@
 
 /* 当前一条用墨，不用墨绿 #1e4a3a（BRAND.md §1.5 第 72 条：选中态不用薄荷；2026-11-16 色板外颜色收回）。 */
 .vocabulary-listen-list li button.is-current {
-  background: var(--surface-strong);
+  background: var(--eqb-color-state-selected);
   color: var(--eqb-color-text);
 }
 
@@ -453,7 +453,7 @@
   .vocabulary-listen-settings button:where(:not(.eqb-segmented-option)):hover,
   .vocabulary-listen-message button:hover {
     border-color: transparent;
-    background: var(--eqb-color-desk);
+    background: var(--eqb-color-state-hover);
   }
 
   .vocabulary-listen-control-row .vocabulary-listen-primary-control:hover {

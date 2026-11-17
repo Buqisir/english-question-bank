@@ -519,7 +519,7 @@
 }
 
 .draft-group-actions button:where(:not(.eqb-button)):hover:not(:disabled) {
-  background: var(--surface-strong);
+  background: var(--eqb-color-state-hover);
   color: var(--ink);
 }
 
@@ -528,7 +528,7 @@
 }
 
 .draft-group-actions button:where(:not(.eqb-button))[aria-pressed='true'] {
-  background: var(--surface-strong);
+  background: var(--eqb-color-state-selected);
   color: var(--ink);
 }
 
@@ -835,7 +835,7 @@
 }
 
 .draft-paper-rail-acts button:hover {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
   color: var(--eqb-color-text);
 }
 

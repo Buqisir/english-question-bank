@@ -129,9 +129,9 @@
 }
 
 .eqb-search[data-tier='hero'] .eqb-search-submit {
-  width: 32px;
-  min-width: 32px;
-  height: 32px;
+  /* 首页大框里也是 28（Owner 2026-11-17：灰块高度只留 28 / 32 两档，图标键一律 28）。
+   * 原来 32 宽、right 10，回车符号中心离右边 26；现在 right 12，中心仍离右边 26，不挪。 */
+  right: 12px;
 }
 
 .eqb-search[data-tier='compact'] .eqb-search-submit {
@@ -139,7 +139,7 @@
 }
 
 .eqb-search-submit:hover:not(:disabled) {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
 }
 
 /* 按下去缩一点：一天按几十次的提交键要确认「听到了」。 */
