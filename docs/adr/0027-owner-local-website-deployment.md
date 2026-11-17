@@ -106,3 +106,74 @@ TAT 免密终端与 VNC 不经过 sshd，作为带外恢复入口；需要回退
   不得重放，不清除 admission/evidence，不在恢复流量后恢复旧数据。
 - ADR-0023 仅「独立 Orb 为唯一执行方」这一点被替代；当前 CI 权威沿用
   ADR-0026，历史退役命令不恢复。
+
+## GitHub 自动上线与手机回退（Owner 2026-11-16，BUB-223）
+
+本段替代上文的执行位置限制：GitHub Actions `Deploy` 是主路径，Mac 原命令
+保持备用；Mac 私钥仍只在 Keychain，CI 使用独立部署钥匙。CI 复用既有候选、
+八 job 证据、保护路径与 digest 校验。只部署当前 main；旧 Verify 完成事件不能
+授权部署尚未全绿的新 main。计划与实际执行绑定同一目标、生产 SHA 和路径摘要；
+等待批准期间任一变化均停止，重新 dispatch，不能把审批挪给新候选。
+
+普通差异走 `production`；保护路径非空则自动流程只开/更新「需要部署判断：
+<sha>」issue。Owner 查看完整差异后，在 Deploy → Run workflow 选择 `code-only`
+或 `migration`，并批准 `production-reviewed`。迁移仍需明确授权；摘要不代表审批。
+仓库管理员须事先设置 `production-reviewed` 的 required reviewer 为 Owner，
+限制两个 environment 的 deployment branch 为 main。`production` 不设人工审批。
+这是 workflow 审批边界，服务器仍不独立验证 CI 或审批，泄露钥匙的能力见上文。
+
+GitHub 仓库 variables：`EQB_DEPLOY_SSH_HOST` 使用 Mac 配置中的同一
+`QUESTION_BANK_DEPLOY_SSH_HOST`（含 transport 用户），`EQB_DEPLOY_KNOWN_HOSTS`
+使用已核对的同一 known_hosts 内容。分别在两个 environment 保存 secret
+`EQB_DEPLOY_SSH_KEY`：同一把新建的专用 Ed25519 私钥，不能复制 Mac 钥匙。
+workflow 的 GITHUB_TOKEN 需要 contents/actions/checks read 与 issues write。
+钥匙受 forced command 限制，只能走部署/preflight（含下述上一版例外），没有 shell。
+
+手机打开 Actions →「回退到上一版」→ Run workflow，输入 `ROLLBACK`。
+preflight 给出可信 previousSha，仍通过 `deploy <previousSha>` 回退；只允许当前
+成功、非 no-op activation receipt 的紧邻上一版，迁移 activation、缺失/歧义历史
+或缺失 release/marker 均不允许。回退跳过 main 拉取和构建，原子切换、重启、
+健康检查；失败切回原版本，回执保留 `rolledBackFrom`。其他旧 SHA 照旧拒绝。
+带 code-only digest 的调用仍走普通 exact-main 准入，保证回退后经审批恢复 main
+不会被误当成再次回退。
+两 workflow 共用部署 concurrency，SSH 请求不重试。该兼容命令不携带 expected
+current 参数；同时运行 Mac 操作时仍需避免竞争，回执不符先对账，不重放。
+
+成功后自动创建带 `deploy-paused` 标签的暂停 issue。恢复按钮就是手机上的
+Close issue：关闭所有 open 暂停 issue，然后运行 Deploy 的 `auto` 或等待下一次
+main Verify 全绿。关闭 issue 本身不会立即部署。暂停只约束 Actions，不挡 Mac
+备用命令或 root。回退后若创建 issue 失败，先手动新建带该标签的暂停 issue再处理，
+不要重跑回退。job summary 记录版本、结果与 controller 健康版本。
+
+首次启用前，由主会话把合并后 main SHA 与两个升级 payload 的 SHA-256 填入
+下面占位符（在可信 clone 用 `git show "$T:deploy/<文件>" | shasum -a 256`
+取得摘要），按既有 [升级通道](../cuts/controlled-ssh-maintenance/plan.md) 核对
+无未决维护。腾讯云 root 控制台第一项：按摘要 staging，再提交一次升级；
+已有 payload 不覆盖，UNKNOWN 按原 runbook 对账，不能重复提交。
+
+```bash
+set -euo pipefail
+umask 077
+T='<merged-main-40hex>'; H_SH='<shell-sha256>'; H_JS='<module-sha256>'
+S=/opt/eqb/english-question-bank; B=/opt/eqb/deployments/host-upgrade-payload-$T
+[[ $(id -u):$(id -g) == 0:0 && $T =~ ^[0-9a-f]{40}$ && $H_SH =~ ^[0-9a-f]{64}$ && $H_JS =~ ^[0-9a-f]{64}$ ]]
+/usr/sbin/runuser -u eqb -- /usr/bin/env -i HOME=/home/eqb PATH=/usr/local/bin:/usr/bin:/bin GIT_TERMINAL_PROMPT=0 /usr/bin/git -C "$S" fetch --quiet --no-tags origin main
+[[ $(/usr/bin/git -c safe.directory="$S" -C "$S" rev-parse FETCH_HEAD) == "$T" ]]
+mkdir "$B"; mkdir "$B/deploy"
+for F in upgrade-eqb-host-configuration-once upgrade-eqb-host-configuration-once.mjs; do
+  /usr/bin/git --no-replace-objects -c safe.directory="$S" -C "$S" show "$T:deploy/$F" > "$B/deploy/$F"
+done
+printf '%s  %s\n' "$H_SH" "$B/deploy/upgrade-eqb-host-configuration-once" "$H_JS" "$B/deploy/upgrade-eqb-host-configuration-once.mjs" | /usr/bin/sha256sum --check --strict
+/usr/bin/systemd-run --quiet --wait --collect --unit="eqb-host-upgrade-$T" --property=Type=exec --property=UMask=0077 --property=RuntimeMaxSec=1200s --property=KillMode=control-group --property=StandardInput=null --property=StandardOutput=journal --property=StandardError=journal -- /bin/bash "$B/deploy/upgrade-eqb-host-configuration-once" "$T"
+```
+
+第二项：把 `U` 填为现有 transport 用户，`PUB` 填为新 CI 公钥的类型与正文
+（不含原注释），以下一行仅追加缺失的精确授权行：
+
+```bash
+U='<transport-user>'; PUB='ssh-ed25519 <new-ci-public-key-body>'; A="$(getent passwd "$U" | cut -d: -f6)/.ssh/authorized_keys"; L="restrict,command=\"/usr/local/libexec/eqb-deploy-transport-v1\" $PUB eqb-deploy-github-actions-v1"; [ "$(id -u)" = 0 ] && [ -f "$A" ] && [ ! -L "$A" ] && { grep -qxF "$L" "$A" || printf '\n%s\n' "$L" >> "$A"; }
+```
+
+通过新 CI key 的 preflight 后再启用 Actions。保留 Mac/Orb 两条旧授权。
+历史 bootstrap/retire 脚本断言只有 1–2 把钥匙；以后调用前先处理第三把 CI
+钥匙并重新审查，不能直接运行它们；日常 deploy 不依赖这些历史脚本。

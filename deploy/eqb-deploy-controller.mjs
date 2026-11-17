@@ -748,55 +748,57 @@ function sealRelease(config, dependencies, release, sha) {
   chmodSync(markerPath, 0o444)
 }
 
-// Called only by deploy after its boundary checks, under the launcher's exclusive
-// deploy.lock. Never infer rollback history from directory names or mtimes.
-// Ordinary activation retains 2–3 releases; noOp retains current + previous.
-// deployReviewedPersistence does not prune. Build/runtime-owned interrupted
-// staging/health directories remain untouched under the same ownership rule.
+// Share trusted activation history between preflight, rollback and pruning.
+// Never infer the previous release from directory names or mtimes.
+function latestActivation(config, currentSha, progress = () => {}) {
+  const invalidReceipt = code => Object.assign(new Error('Invalid release history'), { code })
+  const receipts = path.join(config.root, 'deployments', 'receipts')
+  if (!pathEntryExists(receipts)) return null
+  const successful = readdirSync(receipts).filter(name => name.endsWith('.json')).sort().flatMap(name => {
+    progress('receipt-metadata', name)
+    const file = path.join(receipts, name)
+    const metadata = lstatSync(file)
+    if (!metadata.isFile() || metadata.isSymbolicLink() || metadata.uid !== config.controllerUid
+      || metadata.gid !== config.controllerGid || (metadata.mode & 0o7777) !== 0o600
+      || metadata.nlink !== 1) throw invalidReceipt('UNSAFE_RECEIPT')
+    progress('receipt-json', name)
+    const receipt = JSON.parse(readFileSync(file, 'utf8'))
+    progress('receipt-validation', name)
+    if (!receipt || typeof receipt !== 'object' || Array.isArray(receipt)
+      || ![EQB_DEPLOY_RECEIPT_SCHEMA_VERSION, EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION,
+        EQB_HOST_CONFIGURATION_RECEIPT_SCHEMA_VERSION,
+        EQB_DEPLOY_BOOTSTRAP_RECEIPT_SCHEMA_VERSION].includes(receipt.schemaVersion)
+      || !['success', 'failure'].includes(receipt.conclusion)
+      || !SHA.test(receipt.targetSha || '')
+      || typeof receipt.finishedAt !== 'string'
+      || !Number.isFinite(Date.parse(receipt.finishedAt))) throw invalidReceipt('INVALID_RECEIPT')
+    if (receipt.schemaVersion !== EQB_HOST_CONFIGURATION_RECEIPT_SCHEMA_VERSION
+      && receipt.conclusion === 'success' && !SHA.test(receipt.previousSha || '')) {
+      throw invalidReceipt('INVALID_PREVIOUS_SHA')
+    }
+    // No-op receipts do not represent an activation and point back to self.
+    if (![EQB_DEPLOY_RECEIPT_SCHEMA_VERSION, EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION]
+      .includes(receipt.schemaVersion) || receipt.conclusion !== 'success'
+      || receipt.targetSha !== currentSha || receipt.noOp === true) return []
+    return [receipt]
+  }).sort((a, b) => Date.parse(b.finishedAt) - Date.parse(a.finishedAt))
+  const latest = successful[0]
+  if (!latest || !SHA.test(latest.previousSha || '') || latest.previousSha === currentSha
+    || successful.some(receipt => Date.parse(receipt.finishedAt) === Date.parse(latest.finishedAt)
+      && (receipt.previousSha !== latest.previousSha || receipt.schemaVersion !== latest.schemaVersion))) return null
+  return latest
+}
+
 function pruneReleases(config, dependencies, currentSha, targetSha) {
   const result = { pruned: [] }
   let stage = 'history-directory'
   let filename = 'receipts'
-  const invalidReceipt = code => Object.assign(new Error('Invalid release history'), { code })
   try {
-    const receipts = path.join(config.root, 'deployments', 'receipts')
-    if (!pathEntryExists(receipts)) {
-      result.pruneSkipped = 'PREVIOUS_RELEASE_UNKNOWN'
-      return result
-    }
-    const successful = readdirSync(receipts).filter(name => name.endsWith('.json')).sort().flatMap(name => {
+    const latest = latestActivation(config, currentSha, (nextStage, name) => {
+      stage = nextStage
       filename = name
-      stage = 'receipt-metadata'
-      const file = path.join(receipts, name)
-      const metadata = lstatSync(file)
-      if (!metadata.isFile() || metadata.isSymbolicLink() || metadata.uid !== config.controllerUid
-        || metadata.gid !== config.controllerGid || (metadata.mode & 0o7777) !== 0o600
-        || metadata.nlink !== 1) throw invalidReceipt('UNSAFE_RECEIPT')
-      stage = 'receipt-json'
-      const receipt = JSON.parse(readFileSync(file, 'utf8'))
-      stage = 'receipt-validation'
-      if (!receipt || typeof receipt !== 'object' || Array.isArray(receipt)
-        || ![EQB_DEPLOY_RECEIPT_SCHEMA_VERSION, EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION,
-          EQB_HOST_CONFIGURATION_RECEIPT_SCHEMA_VERSION,
-          EQB_DEPLOY_BOOTSTRAP_RECEIPT_SCHEMA_VERSION].includes(receipt.schemaVersion)
-        || !['success', 'failure'].includes(receipt.conclusion)
-        || !SHA.test(receipt.targetSha || '')
-        || typeof receipt.finishedAt !== 'string'
-        || !Number.isFinite(Date.parse(receipt.finishedAt))) throw invalidReceipt('INVALID_RECEIPT')
-      if (receipt.schemaVersion !== EQB_HOST_CONFIGURATION_RECEIPT_SCHEMA_VERSION
-        && receipt.conclusion === 'success' && !SHA.test(receipt.previousSha || '')) {
-        throw invalidReceipt('INVALID_PREVIOUS_SHA')
-      }
-      // No-op receipts do not represent an activation and point back to self.
-      if (![EQB_DEPLOY_RECEIPT_SCHEMA_VERSION, EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION]
-        .includes(receipt.schemaVersion) || receipt.conclusion !== 'success'
-        || receipt.targetSha !== currentSha || receipt.noOp === true) return []
-      return [receipt]
-    }).sort((a, b) => Date.parse(b.finishedAt) - Date.parse(a.finishedAt))
-    const latest = successful[0]
-    if (!latest || !SHA.test(latest.previousSha || '') || latest.previousSha === currentSha
-      || successful.some(receipt => Date.parse(receipt.finishedAt) === Date.parse(latest.finishedAt)
-        && receipt.previousSha !== latest.previousSha)) {
+    })
+    if (!latest) {
       result.pruneSkipped = 'PREVIOUS_RELEASE_UNKNOWN'
       return result
     }
@@ -1255,25 +1257,36 @@ async function deploy(config, dependencies, targetSha, reviewedCodeOnlyDigest = 
   let rollbackHealthy = null
   let failureCode = null
   let phase = 'PREPARATION'
+  let rolledBackFrom
 
   assertLayout(config, dependencies)
   try {
     previousSha = currentReleaseSha(config)
-    const fetchedSha = fetchMain(config, dependencies)
-    if (fetchedSha !== targetSha) throw new Error('Production source main does not match target SHA')
-    assertOrdinaryReleaseBoundary(config, dependencies, previousSha, targetSha, reviewedCodeOnlyDigest)
-    const pruning = pruneReleases(config, dependencies, previousSha, targetSha)
-    // Receipt v2 readers reject unknown fields, so retain diagnostics in the
-    // controller journal without changing the wire receipt or rollback path.
-    try {
-      const message = `EQB_RELEASE_PRUNE ${JSON.stringify({ targetSha, ...pruning })}\n`
-      if (dependencies.log) dependencies.log(message)
-      else process.stderr.write(message)
-    } catch { /* Logging failure must not affect activation or rollback. */ }
-    staged = prepareRelease(config, dependencies, targetSha).staged
-    if (previousSha !== targetSha) checkCandidate(config, dependencies, targetSha)
-    const recheckedSha = fetchMain(config, dependencies)
-    if (recheckedSha !== targetSha) throw new Error('GitHub main changed while preparing release')
+    let activation
+    try { activation = latestActivation(config, previousSha) } catch { /* No rollback authority. */ }
+    if (reviewedCodeOnlyDigest === null && targetSha !== previousSha && activation?.previousSha === targetSha) {
+      if (activation.schemaVersion === EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION) {
+        throw controllerFailure('ROLLBACK_AFTER_MIGRATION_REFUSED', 'Current activation migrated persistence')
+      }
+      readReleaseMarker(config, targetSha)
+      rolledBackFrom = previousSha
+    } else {
+      const fetchedSha = fetchMain(config, dependencies)
+      if (fetchedSha !== targetSha) throw new Error('Production source main does not match target SHA')
+      assertOrdinaryReleaseBoundary(config, dependencies, previousSha, targetSha, reviewedCodeOnlyDigest)
+      const pruning = pruneReleases(config, dependencies, previousSha, targetSha)
+      // Receipt v2 readers reject unknown fields, so retain diagnostics in the
+      // controller journal without changing the wire receipt or rollback path.
+      try {
+        const message = `EQB_RELEASE_PRUNE ${JSON.stringify({ targetSha, ...pruning })}\n`
+        if (dependencies.log) dependencies.log(message)
+        else process.stderr.write(message)
+      } catch { /* Logging failure must not affect activation or rollback. */ }
+      staged = prepareRelease(config, dependencies, targetSha).staged
+      if (previousSha !== targetSha) checkCandidate(config, dependencies, targetSha)
+      const recheckedSha = fetchMain(config, dependencies)
+      if (recheckedSha !== targetSha) throw new Error('GitHub main changed while preparing release')
+    }
 
     if (previousSha === targetSha) {
       noOp = true
@@ -1309,6 +1322,7 @@ async function deploy(config, dependencies, targetSha, reviewedCodeOnlyDigest = 
     failureCode,
     startedAt,
   })
+  if (rolledBackFrom) receipt.rolledBackFrom = rolledBackFrom
   const receiptPath = writeReceipt(config, receipt)
   return { receipt, receiptPath }
 }
@@ -2109,6 +2123,14 @@ function preflight(config, dependencies) {
     schemaVersion: 'eqb-deployment-preflight-v2',
     controllerVersion: EQB_DEPLOY_CONTROLLER_VERSION,
     productionSha,
+    previousSha: (() => {
+      try {
+        const activation = releaseLayout && latestActivation(config, productionSha)
+        if (!activation || activation.schemaVersion === EQB_REVIEWED_PERSISTENCE_RECEIPT_SCHEMA_VERSION) return null
+        readReleaseMarker(config, activation.previousSha)
+        return activation.previousSha
+      } catch { return null }
+    })(),
     eqb: String(dependencies.runSystem(
       '/usr/bin/systemctl',
       ['is-active', config.service],
