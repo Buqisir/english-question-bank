@@ -5,7 +5,7 @@
         <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
           <div style={{ backgroundImage: 'url(../../logo/mint/mark.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '20px', width: '31px' }} />
           <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
-            视觉规范手册 · 草案 0.9
+            视觉规范手册 · 草案 0.10
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
@@ -84,7 +84,7 @@
                   登录页
                 </div>
                 <div style={{ boxSizing: 'border-box', color: '#191D18', flexBasis: '0%', flexGrow: '1', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '14px', lineHeight: '170%' }}>
-                  08 雾海：标志在左上角；右半屏是白身线稿的獭獭，标语和表单区不放标志，免得两张脸。
+                  08 雾海：标志在左上角；右半屏是平涂的潜水獭獭（第 130 条），标语和表单区不放标志，免得两张脸。
                 </div>
               </div>
               <div style={{ borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', gap: '24px', paddingBlock: '12px' }}>

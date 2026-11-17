@@ -4,8 +4,8 @@ import { login } from './session.ts'
 import { Button } from '../shared-ui/Button.tsx'
 import otterSvg from './login-otter.svg?raw'
 
-/* 08 雾海（BRAND.md §4.7）：雾是背景图，海獭内联，好让描边能逐笔画出来。
-   线稿自画只在这台设备第一次打开登录页时出现，之后直接静态出场。 */
+/* 08 雾海（BRAND.md §4.7）：雾是背景图，海獭内联。
+   淡入只在这台设备第一次打开登录页时出现，之后直接静态出场（BRAND.md 第 128 条）。 */
 const MIST_SRC = '/brand/login-mist.svg'
 const DRAWN_KEY = 'eqb.login.otterDrawn'
 
@@ -24,7 +24,7 @@ function MistScene() {
     try {
       window.localStorage.setItem(DRAWN_KEY, '1')
     } catch {
-      // 无痕模式写不进去也无妨，最多每次都画一遍。
+      // 无痕模式写不进去也无妨，最多每次都淡入一遍。
     }
   }, [])
   return (

@@ -93,12 +93,13 @@
   height: 100%;
 }
 
-/* 海獭在画布里的位置来自 08-mist-v11.svg：translate(238.6 179.3) scale(0.408)。 */
+/* 海獭在画布里的位置来自 08-mist-v11.svg：translate(238.6 179.3) scale(0.408)；
+   2026-11-17 Owner 要「拉大一点」，以 (50%, 55%) 为中心放大 1.25 倍（原 left 29.825%、top 20.849%、width 52.225%）。 */
 .login-otter-sway {
   position: absolute;
-  left: 29.825%;
-  top: 20.849%;
-  width: 52.225%;
+  left: 23.297%;
+  top: 14.227%;
+  width: 65.281%;
   aspect-ratio: 1024 / 1015;
   transform-origin: 50% 55%;
   /* 签名时刻豁免 300ms 上限：这是常驻的慢呼吸，不是界面反馈。 */
@@ -121,31 +122,9 @@
   }
 }
 
-/* 首次出场：描边按笔画画出来，白底与五官随后浮现。签名时刻豁免 300ms 上限。 */
-.login-otter.is-drawing [pathLength] {
-  stroke-dasharray: 1;
-  animation: /* signature, token-exempt */
-    login-otter-draw 1600ms var(--ease-in-out) both,
-    login-otter-fill-in 500ms var(--ease-hover) 1300ms both;
-}
-
-.login-otter.is-drawing svg > g > :not([pathLength]) {
-  animation: login-otter-fade-in 400ms var(--ease-hover) 1500ms both; /* signature, token-exempt */
-}
-
-@keyframes login-otter-draw {
-  from {
-    stroke-dashoffset: 1;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes login-otter-fill-in {
-  from {
-    fill-opacity: 0;
-  }
+/* 首次出场：整只淡入（2026-11-17 Owner 定，替换原来的描线自画）。签名时刻豁免 300ms 上限。 */
+.login-otter.is-drawing {
+  animation: login-otter-fade-in 900ms var(--ease-hover) both; /* signature, token-exempt */
 }
 
 @keyframes login-otter-fade-in {
@@ -354,13 +333,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .login-otter-sway,
-  .login-otter.is-drawing [pathLength],
-  .login-otter.is-drawing svg > g > :not([pathLength]) {
+  .login-otter.is-drawing {
     animation: none;
-  }
-
-  .login-otter.is-drawing [pathLength] {
-    stroke-dasharray: none;
   }
 
   .login-field input {
