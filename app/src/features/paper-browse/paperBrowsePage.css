@@ -327,8 +327,14 @@
     white-space: normal;
   }
 
-  /* Preserve Canonical's equal thirds when the row fits. Only its Print-only
-   * one_column fallback needs content-sized tracks on Screen.
+  /* Canonical measures "A. text" with one space after the label; a wider
+   * label gap lets a measured-to-fit 2x2 option wrap on Screen. */
+  .paper-browse-content .ps-option-list--canonical .ps-option {
+    gap: 0.25em;
+  }
+
+  /* Preserve Canonical's equal thirds when the row fits; its one_column
+   * fallback stays one option per line, as on the source paper.
    * Keep specificity low so the mobile single-column rule still wins. */
   .paper-browse-content :where(.canonical-listening-surface) .ps-option-list--three_columns {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
@@ -337,9 +343,7 @@
   }
 
   .paper-browse-content :where(.canonical-listening-surface) .ps-option-list--one_column {
-    grid-template-columns: repeat(3, auto) !important;
-    /* Override Canonical's inline gap: 0 so adjacent options stay distinct. */
-    column-gap: 1em !important;
+    grid-template-columns: minmax(0, 1fr) !important;
   }
 
   /* Override one_column's block flow and inline Print hanging indent;
