@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { Archive, ArrowLeft, BookMarked, VocabularyNotebook, LogOut, Pencil, Settings } from '../icons'
+import { Archive, ArrowLeft, VocabularyNotebook, VocabularyReview, LogOut, Pencil, Settings } from '../icons'
 import { Button } from '../shared-ui/Button.tsx'
 import { FluidHoverList } from './FluidHoverList.tsx'
 
@@ -209,7 +209,7 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
           </Button>
         )}
         {props.onOpenVocabularyReview && (
-          <Button size={navSize} icon={<BookMarked size={16} />} onClick={props.onOpenVocabularyReview}>
+          <Button size={navSize} icon={<VocabularyReview size={16} />} onClick={props.onOpenVocabularyReview}>
             过生词
           </Button>
         )}
