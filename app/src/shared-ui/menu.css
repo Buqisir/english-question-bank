@@ -1,4 +1,5 @@
-/* 菜单构件（Menu.tsx）。DESIGN.md §5：下拉菜单 8px、内边距 4px、菜单项 4px（同心）；
+/* 菜单构件（Menu.tsx）。DESIGN.md §5 原是下拉菜单 8px、内边距 4px、菜单项 4px（同心）；
+ * 2026-11-17 Owner 要灰态照 Claude 截图统一成 8 圆角，菜单项改 8，面板跟着改 12（card），仍同心（12 − 4 = 8）；
  * §4：浮着的东西白底加 e3，不加边线，不用玻璃。只用 tokens.css 里的变量。 */
 
 .eqb-menu {
@@ -12,7 +13,7 @@
   overflow-y: auto;
   padding: var(--eqb-space-1);
   border: 0;
-  border-radius: var(--eqb-radius-control);
+  border-radius: var(--eqb-radius-card);
   background: var(--eqb-color-paper);
   box-shadow: var(--elev-3);
   color: var(--eqb-color-text);
@@ -20,7 +21,7 @@
 }
 
 .eqb-menu.fluid-hover-list {
-  --fh-radius: var(--eqb-radius-badge);
+  --fh-radius: var(--eqb-radius-control);
 }
 
 @keyframes eqb-menu-in {
@@ -51,7 +52,7 @@
   height: 32px;
   padding: 0 var(--eqb-space-2);
   border: 0;
-  border-radius: var(--eqb-radius-badge);
+  border-radius: var(--eqb-radius-control);
   background: transparent;
   color: var(--eqb-color-text);
   font: inherit;

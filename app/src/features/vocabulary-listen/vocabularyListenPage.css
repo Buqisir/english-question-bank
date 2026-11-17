@@ -304,7 +304,7 @@
 }
 
 .vocabulary-listen-list ul {
-  --fh-radius: 4px;
+  --fh-radius: var(--eqb-radius-control);
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0 24px;

@@ -86,3 +86,9 @@
 .eqb-row-list > .eqb-row + .eqb-row {
   --eqb-row-rule: 1px;
 }
+
+/* 灰态底（2026-11-17 Owner 照截图统一）：板里的行，悬停灰块往里收 4px、8 圆角，不贴板边（和板 12 圆角同心）。 */
+.eqb-row-list.fluid-hover-list {
+  --fh-inset-x: var(--eqb-space-1);
+  --fh-inset-y: var(--eqb-space-1);
+}
