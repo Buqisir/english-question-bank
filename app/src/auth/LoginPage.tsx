@@ -5,7 +5,7 @@ import { Button } from '../shared-ui/Button.tsx'
 import otterSvg from './login-otter.svg?raw'
 
 /* 08 雾海（BRAND.md §4.7）：雾是背景图，海獭内联。
-   淡入只在这台设备第一次打开登录页时出现，之后直接静态出场（BRAND.md 第 128 条）。 */
+   淡入只在这台设备第一次打开登录页时出现，之后直接静态出场（BRAND.md 第 130 条）。 */
 const MIST_SRC = '/brand/login-mist.svg'
 const DRAWN_KEY = 'eqb.login.otterDrawn'
 
