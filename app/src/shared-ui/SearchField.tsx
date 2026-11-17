@@ -122,7 +122,7 @@ export function SearchField({
         aria-busy={submitBusy || undefined}
       >
         {/* 键上始终是回车图标；在等什么由调用处的提示行说（共用提示行 shared-ui/Notice）。 */}
-        <CornerDownLeft size={18} aria-hidden="true" />
+        <CornerDownLeft size={20} aria-hidden="true" />
       </button>
     </form>
   )
