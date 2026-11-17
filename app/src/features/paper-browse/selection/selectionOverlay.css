@@ -63,7 +63,7 @@
 
 .paper-selection-translate:hover,
 .paper-selection-lookup:hover {
-  background: var(--desk-hover, #E5EAE1);
+  background: var(--eqb-color-state-hover);
 }
 
 .paper-selection-analyze:hover {
@@ -184,7 +184,7 @@
 }
 
 .paper-selection-action-btn:hover {
-  background: var(--desk-hover, #E5EAE1);
+  background: var(--eqb-color-state-hover);
   color: var(--eqb-color-text-strong, #1f1f1d);
 }
 
@@ -283,7 +283,7 @@
 }
 
 .paper-selection-retry:not(.eqb-button):hover {
-  background: var(--desk-hover, #E5EAE1);
+  background: var(--eqb-color-state-hover);
 }
 
 .paper-selection-retry:not(.eqb-button):active {
@@ -537,7 +537,7 @@
 }
 
 .paper-dictionary-play:hover {
-  background: var(--desk-hover, #E5EAE1);
+  background: var(--eqb-color-state-hover);
 }
 
 .paper-dictionary-play:hover,

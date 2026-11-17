@@ -155,7 +155,7 @@
 }
 
 .vocabulary-match-card:hover .vocabulary-match-card-back {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
   color: var(--eqb-color-text-muted);
 }
 

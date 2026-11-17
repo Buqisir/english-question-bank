@@ -42,7 +42,7 @@
 
 /* ── 整张能点的纸（SurfaceButton） ─────────────────────────
  * 按钮的样子归零（字体、对齐跟页面走），整张是一个点击目标。
- * 悬停垫桌色（§2 整块响应：整块铺悬停底，不只改字色）；键盘焦点墨环 2px 外扩 2px（§4 Focus Ring，和 Button 一样）；
+ * 悬停垫悬停灰（§2 整块响应：整块铺悬停底，不只改字色）；键盘焦点墨环 2px 外扩 2px（§4 Focus Ring，和 Button 一样）；
  * 按下缩到 0.99：卡片比按钮大得多，按钮的 0.97 放在一张卡上会缩掉十来像素，太晃（目测）。 */
 .eqb-surface[data-interactive] {
   display: block;
@@ -56,7 +56,7 @@
 }
 
 .eqb-surface[data-interactive]:hover:not(:disabled) {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
 }
 
 .eqb-surface[data-interactive]:focus-visible {
@@ -65,7 +65,7 @@
 }
 
 .eqb-surface[data-interactive]:active:not(:disabled) {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-selected-hover);
   transform: scale(0.99);
 }
 

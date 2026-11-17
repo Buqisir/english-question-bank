@@ -57,14 +57,14 @@
 }
 
 .eqb-row:has(> .eqb-row-hit:focus-visible) {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
 }
 
 /* 按下：鼠标按在整行目标上时整行垫深一档的 border 色（悬停已经是桌色，再垫桌色看不出按下）。
  * 按在次要键上不算：那时 :active 的是键，不是整行目标。
  * 覆盖：本条 (0,3,0) 写在焦点那条 (0,3,0) 后面，按下时盖过焦点的桌色底。 */
 .eqb-row:has(> .eqb-row-hit:active) {
-  background: var(--eqb-color-border);
+  background: var(--eqb-color-state-selected-hover);
 }
 
 /* ── 一列行（RowList） ─────────────────────────────────

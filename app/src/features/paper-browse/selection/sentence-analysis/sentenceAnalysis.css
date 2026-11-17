@@ -640,7 +640,7 @@ from { opacity: 0; }
 }
 
 .sa-main-btn:hover {
-  background: var(--desk-hover, #E5EAE1);
+  background: var(--eqb-color-state-hover, rgba(31, 90, 122, 0.087));
   color: var(--sa-ink);
 }
 
@@ -649,9 +649,10 @@ from { opacity: 0; }
   color: var(--sa-ink);
 }
 
-/* 灰态底：按下的键再悬停深一档，不然和悬停一模一样。 */
+/* 灰态底：按下的键再悬停深一档，不然和悬停一模一样。按下的底色是 --sa-label-bg（下面另有一条），
+   这里只在它上面再叠一层悬停色，不换掉底色。 */
 .sa-main-btn[aria-pressed="true"]:hover {
-  background: var(--eqb-color-state-selected-hover);
+  background-image: linear-gradient(var(--eqb-color-state-hover, rgba(31, 90, 122, 0.087)), var(--eqb-color-state-hover, rgba(31, 90, 122, 0.087)));
 }
 
 /* Translation */
@@ -763,7 +764,7 @@ from { opacity: 0; }
 }
 
 .paper-dictionary-analyze:hover {
-  background: var(--desk-hover, #E5EAE1);
+  background: var(--eqb-color-state-hover, rgba(31, 90, 122, 0.087));
   color: var(--desk-ink, #191D18);
 }
 

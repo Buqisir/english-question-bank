@@ -282,7 +282,7 @@
 }
 
 .eqb-segmented.fluid-hover-list::before {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
 }
 
 .eqb-segmented-option {

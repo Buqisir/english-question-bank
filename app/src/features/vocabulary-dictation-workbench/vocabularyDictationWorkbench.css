@@ -206,7 +206,7 @@
 .dictation-review-row button:hover,
 .dictation-number-entry > button:hover {
   border-color: transparent;
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
   color: var(--eqb-color-text);
 }
 
@@ -237,7 +237,7 @@
 }
 
 .dictation-set-row.is-selected {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-selected);
 }
 
 .dictation-set-row input,
@@ -635,7 +635,7 @@
 .dictation-download-menu > summary:hover,
 .dictation-download-menu[open] > summary {
   border-color: transparent;
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
   color: var(--eqb-color-text);
 }
 
@@ -783,7 +783,7 @@
 }
 
 .dictation-task-list article.is-selected {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-selected);
 }
 
 .dictation-task-select {
@@ -1088,7 +1088,7 @@
 
 .dictation-review-row button.is-active {
   border-color: var(--eqb-color-border-strong);
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-selected);
   color: var(--eqb-color-text);
 }
 
@@ -1209,7 +1209,7 @@
 .dictation-history-details > summary:hover,
 .dictation-history-details[open] > summary {
   border-color: transparent;
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
   color: var(--eqb-color-text);
 }
 
@@ -1307,7 +1307,7 @@
 .meaning-recall-result button:where(:not(.eqb-segmented-option)):hover:not(:disabled),
 .meaning-recall-stage button:hover:not(:disabled) {
   border-color: transparent;
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
   color: var(--eqb-color-text);
 }
 

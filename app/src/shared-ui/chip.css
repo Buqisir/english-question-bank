@@ -40,7 +40,7 @@
 }
 
 /* ── 筛选 / 切换（可点） ────────────────────────────────
- * DESIGN.md §5 Chips：高 28、字 13、白底 + 细边、次要灰字（对白 5.47 : 1）；悬停垫桌色、字提到墨色。 */
+ * DESIGN.md §5 Chips：高 28、字 13、白底 + 细边、次要灰字（对白 5.47 : 1）；悬停垫悬停灰（--eqb-color-state-hover）、字提到墨色。 */
 .eqb-chip[data-kind='toggle'] {
   /* 放进 FluidHoverList 时，列表的滑动悬停底是 z-index auto 的 ::before，键要有定位才画在它上面（同 button.css）。 */
   position: relative;
@@ -60,12 +60,12 @@
 }
 
 .eqb-chip[data-kind='toggle']:hover:not(:disabled) {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
   color: var(--eqb-color-text);
 }
 
 /* 放在会滑动悬停底的列表里（FluidHoverList，比如浏览页那两排）时，底由列表画，胶囊自己不垫，只把字提到墨色。
- * 本条 (0,4,0) 覆盖上面 :hover 的桌色底 (0,3,0)，因为胶囊自己的底会盖住滑动的那块底，看不出它在滑。
+ * 本条 (0,4,0) 覆盖上面 :hover 的悬停底 (0,3,0)，因为胶囊自己的底会盖住滑动的那块底，看不出它在滑。
  * 选中的不在这条里，它的底由下面 [aria-pressed='true'] 那条画。 */
 .fluid-hover-list .eqb-chip[data-kind='toggle']:hover:not(:disabled, [aria-pressed='true']) {
   background: transparent;
@@ -77,11 +77,11 @@
   color: var(--eqb-color-text);
 }
 
-/* 选中：实的。桌色底、墨字、字重 600、边透明（2026-11-07 起不用填充色，全站灰阶）。
- * 本条 (0,3,0) 写在 [data-fluid-hover-active] 那条 (0,3,0) 后面，同特指度按先后赢：滑块停在选中的胶囊上时仍是桌色底。 */
+/* 选中：实的。选中底（--eqb-color-state-selected）、墨字、字重 600、边透明（2026-11-07 起不用填充色，全站灰阶）。
+ * 本条 (0,3,0) 写在 [data-fluid-hover-active] 那条 (0,3,0) 后面，同特指度按先后赢：滑块停在选中的胶囊上时由「选中再悬停」那条接手，App.css 会把滑块藏掉免得叠两层。 */
 .eqb-chip[data-kind='toggle'][aria-pressed='true'] {
   border-color: transparent;
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-selected);
   color: var(--eqb-color-text);
   font-weight: 600;
 }
