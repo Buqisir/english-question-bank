@@ -174,10 +174,13 @@
   justify-content: center;
   gap: 6px;
   min-height: 36px;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 8px;
-  background: var(--eqb-color-paper);
+  /* 统一质感：和共享 Button 墨字档（strong）一个样——不描边、透明底，悬停垫桌色。
+   * 边框留 1px 透明，尺寸不变；主键（第一个、.is-primary）仍是石板墨填充。 */
+  border: 1px solid transparent;
+  border-radius: var(--eqb-radius-control);
+  background: transparent;
   padding: 6px 12px;
+  color: var(--eqb-color-text);
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
@@ -199,17 +202,19 @@
 .dictation-review-actions button:hover,
 .dictation-review-row button:hover,
 .dictation-number-entry > button:hover {
-  border-color: var(--eqb-color-border-strong);
+  border-color: transparent;
   background: var(--eqb-color-desk);
   color: var(--eqb-color-text);
 }
 
+/* 2026-11-17 统一质感（提案 · 单一来源）：工作台里的面板和过生词、翻牌练习同一套纸面——
+ * 白纸、卡片圆角、--elev-1，不再画 1px 灰边。 */
 .dictation-set-list {
   overflow: hidden;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 8px;
+  border: 0;
+  border-radius: var(--eqb-radius-card);
   background: var(--eqb-color-paper);
-  box-shadow: none;
+  box-shadow: var(--elev-1);
 }
 
 .dictation-set-row {
@@ -318,7 +323,7 @@
   bottom: 16px;
   margin-top: 24px;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: var(--eqb-radius-card);
   background: var(--eqb-color-paper);
   box-shadow: var(--elev-2);
   outline: none;
@@ -407,7 +412,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  padding: 0 16px 16px;
+  padding: 12px 16px 16px;
 }
 
 .dictation-selection-actions > button:nth-of-type(1),
@@ -460,9 +465,9 @@
 
 .dictation-selection-actions details button {
   min-height: 34px;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 8px;
-  background: var(--eqb-color-desk);
+  border: 1px solid transparent;
+  border-radius: var(--eqb-radius-control);
+  background: var(--eqb-color-bg);
   cursor: pointer;
   font-size: 12px;
 }
@@ -499,10 +504,10 @@
 .dictation-created-results {
   margin-bottom: 24px;
   position: relative;
-  border: 1px solid var(--eqb-color-border-strong);
-  border-radius: 8px;
+  border: 0;
+  border-radius: var(--eqb-radius-card);
   background: var(--eqb-color-paper);
-  box-shadow: none;
+  box-shadow: var(--elev-2);
 }
 
 .dictation-created-results:focus-visible {
@@ -516,8 +521,8 @@
   justify-content: space-between;
   gap: 16px;
   padding: 12px 16px;
-  border-radius: 8px 8px 0 0;
-  background: var(--eqb-color-desk);
+  border-radius: var(--eqb-radius-card) var(--eqb-radius-card) 0 0;
+  background: var(--eqb-color-bg);
 }
 
 .dictation-created-summary {
@@ -539,9 +544,9 @@
 
 .dictation-created-header-actions button {
   min-height: 32px;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 8px;
-  background: var(--eqb-color-paper);
+  border: 1px solid transparent;
+  border-radius: var(--eqb-radius-control);
+  background: transparent;
   padding: 5px 10px;
   cursor: pointer;
   font-size: 12px;
@@ -572,7 +577,7 @@
 }
 
 .dictation-created-links > div:last-child {
-  border-radius: 0 0 8px 8px;
+  border-radius: 0 0 var(--eqb-radius-card) var(--eqb-radius-card);
 }
 
 .dictation-created-links > div > span {
@@ -609,10 +614,10 @@
   justify-content: center;
   gap: 6px;
   min-height: 36px;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 8px;
+  border: 1px solid transparent;
+  border-radius: var(--eqb-radius-control);
   padding: 6px 10px;
-  background: var(--eqb-color-paper);
+  background: transparent;
   cursor: pointer;
   color: var(--eqb-color-text);
   font-size: 14px;
@@ -626,7 +631,7 @@
 
 .dictation-download-menu > summary:hover,
 .dictation-download-menu[open] > summary {
-  border-color: var(--eqb-color-border-strong);
+  border-color: transparent;
   background: var(--eqb-color-desk);
   color: var(--eqb-color-text);
 }
@@ -694,10 +699,10 @@
 .dictation-task-queue,
 .dictation-record-list,
 .dictation-review-workspace {
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 8px;
+  border: 0;
+  border-radius: var(--eqb-radius-card);
   background: var(--eqb-color-paper);
-  box-shadow: none;
+  box-shadow: var(--elev-1);
 }
 
 .dictation-task-queue > header,
@@ -842,7 +847,7 @@
   margin-top: 16px;
   padding: 12px 16px;
   border: 1px solid transparent;
-  border-radius: 8px;
+  border-radius: var(--eqb-radius-card);
   background: var(--eqb-color-paper);
   box-shadow: var(--elev-2);
 }
@@ -1136,35 +1141,41 @@
   width: 100%;
 }
 
+/* 「全部 / 常错」「全部 / 认词 / 听写」这类二选一、三选一：照 SegmentedField 的样子——
+ * 页底色的胶囊槽，选中的那一格是白纸加 --elev-1（2026-11-17，原来是带边的方框分段）。 */
 .dictation-review-channel,
 .dictation-history-filter {
   display: inline-flex;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 12px;
-  overflow: hidden;
+  gap: 2px;
+  padding: 2px;
+  border-radius: var(--eqb-radius-pill);
+  background: var(--eqb-color-bg);
 }
 
 .dictation-review-channel button,
 .dictation-history-filter button {
-  min-height: 36px;
+  min-height: 32px;
   border: 0;
-  border-right: 1px solid var(--eqb-color-border);
-  background: var(--eqb-color-paper);
-  padding: 6px 12px;
+  border-radius: var(--eqb-radius-pill);
+  background: transparent;
+  padding: 4px 14px;
+  color: var(--eqb-color-text-secondary);
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
 }
 
-.dictation-review-channel button:last-child,
-.dictation-history-filter button:last-child {
-  border-right: 0;
+.dictation-review-channel button:hover:not(.is-selected),
+.dictation-history-filter button:hover:not(.is-selected) {
+  color: var(--eqb-color-text);
 }
 
 .dictation-review-channel button.is-selected,
 .dictation-history-filter button.is-selected {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-1);
   color: var(--eqb-color-text);
+  font-weight: 600;
 }
 
 .dictation-history-filter {
@@ -1179,9 +1190,9 @@
   min-height: 32px;
   box-sizing: border-box;
   padding: 6px 10px;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 8px;
-  background: var(--eqb-color-paper);
+  border: 1px solid transparent;
+  border-radius: var(--eqb-radius-control);
+  background: transparent;
   cursor: pointer;
   font-size: 12px;
   font-weight: 500;
@@ -1192,8 +1203,9 @@
   display: none;
 }
 
+.dictation-history-details > summary:hover,
 .dictation-history-details[open] > summary {
-  border-color: var(--eqb-color-border-strong);
+  border-color: transparent;
   background: var(--eqb-color-desk);
   color: var(--eqb-color-text);
 }
@@ -1236,10 +1248,10 @@
 .meaning-recall-home,
 .meaning-recall-result,
 .meaning-recall-stage {
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 8px;
+  border: 0;
+  border-radius: var(--eqb-radius-card);
   background: var(--eqb-color-paper);
-  box-shadow: none;
+  box-shadow: var(--elev-1);
 }
 
 .meaning-recall-heading,
@@ -1278,9 +1290,9 @@
   justify-content: center;
   gap: 6px;
   min-height: 36px;
-  border: 1px solid var(--eqb-color-border);
-  border-radius: 8px;
-  background: var(--eqb-color-paper);
+  border: 1px solid transparent;
+  border-radius: var(--eqb-radius-control);
+  background: transparent;
   padding: 6px 12px;
   color: var(--eqb-color-text);
   cursor: pointer;
@@ -1291,7 +1303,7 @@
 .meaning-recall-home button:where(:not(.eqb-segmented-option)):hover:not(:disabled),
 .meaning-recall-result button:where(:not(.eqb-segmented-option)):hover:not(:disabled),
 .meaning-recall-stage button:hover:not(:disabled) {
-  border-color: var(--eqb-color-border-strong);
+  border-color: transparent;
   background: var(--eqb-color-desk);
   color: var(--eqb-color-text);
 }
@@ -1355,9 +1367,13 @@
 
 .meaning-recall-result-list fieldset {
   display: flex;
+  gap: 2px;
   margin: 0;
-  padding: 0;
+  padding: 2px;
   border: 0;
+  border-radius: var(--eqb-radius-pill);
+  background: var(--eqb-color-bg);
+  width: fit-content;
 }
 
 .meaning-recall-result-list legend {
@@ -1369,29 +1385,29 @@
 }
 
 .meaning-recall-result-list fieldset button {
-  border-radius: 0;
-  border-right: 0;
-}
-
-.meaning-recall-result-list fieldset button:first-of-type {
-  border-radius: 8px 0 0 8px;
-}
-
-.meaning-recall-result-list fieldset button:last-of-type {
-  border-right: 1px solid var(--eqb-color-border);
-  border-radius: 0 8px 8px 0;
+  min-height: 28px;
+  padding: 2px 12px;
+  border-radius: var(--eqb-radius-pill);
+  font-size: 13px;
 }
 
 .meaning-recall-result-list fieldset button.is-selected {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-1);
   color: var(--eqb-color-text);
+  font-weight: 600;
 }
 
+/* 「答错」「错」：不再画红框，只用淡红底、深一档的危险字（和共享 Button danger 同一个字色）。 */
 .meaning-recall-result-list fieldset button.is-wrong,
 .meaning-recall-stage button.is-wrong {
-  border-color: var(--eqb-color-danger);
+  border-color: transparent;
   background: var(--eqb-color-danger-soft);
-  color: var(--eqb-color-danger);
+  color: var(--eqb-color-danger-text);
+}
+
+.meaning-recall-result-list fieldset button.is-selected.is-wrong {
+  box-shadow: none;
 }
 
 .meaning-recall-suggestion {
