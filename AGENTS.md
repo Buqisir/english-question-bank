@@ -74,7 +74,8 @@ L1 uses the existing commands below; inspect changed behavior and direct consume
 - 其他：`node scripts/verify-ci.mjs --changed --base-ref origin/main`（必须显式写基线）。先加 `--plan-json` 看选出哪一档；选出 `all` 时不在本地跑 Full，只跑直接受影响的脚本，Full 交给 main CI
 - 统一：`git diff --check origin/main...HEAD`，并实际操作一次受影响的行为
 - 高风险（鉴权、答案隔离、持久化、题号和答案对应、准入、共享 Paper 契约）：另加一次独立审查（Astra），审查结论绑定候选 SHA，但不开 PR
-- **CI 和部署工具链**（`.github/workflows/`、`scripts/verify-ci.mjs`、`scripts/ci-pr-plan.mjs`、部署脚本和控制器）：继续走 PR，PR 完整 CI 绿、Astra 审过再合。这类改动改的是裁判本身，推上 main 以后它自己那次绿灯证明不了它没被改松
+- 检查清单（`scripts/verify-ci.mjs`、`scripts/lib/verificationShards.mjs` 里登记的检查增删）：不开 PR，由另一个 Agent 独立审查有没有删掉或放松不该动的检查，审完直推
+- **CI 和部署工具链**（`.github/workflows/`、`scripts/ci-pr-plan.mjs`、`.agents/setup`、`verify-ci.mjs` 的分档/规划逻辑、部署脚本、控制器和主机配置）：继续走 PR，PR 完整 CI 绿、Astra 审过再合。这类改动改的是裁判本身，推上 main 以后它自己那次绿灯证明不了它没被改松
 
 Complete missing affected local-only acceptance once; reuse natural main Full/E2E
 for covered checks. Do not stack packs or duplicate hosted Full locally.
@@ -116,9 +117,13 @@ uniquely supplies; otherwise keep it outside acceptance packs.
   `git push origin HEAD:refs/heads/main`. If rejected, synchronize and repeat
   affected self-checks before retrying. Never force-push or bypass protection.
 - Only CI/deployment toolchain changes use PR + Astra + complete green PR CI:
-  `.github/workflows/`, `scripts/verify-ci.mjs`, `scripts/ci-pr-plan.mjs`,
-  `.agents/setup`, deployment scripts/controllers and
-  `EQB_HOST_CONFIGURATION_PATHS`. Everything else, including high-risk behavior
+  `.github/workflows/`, `scripts/ci-pr-plan.mjs`, `.agents/setup`, pack or
+  planner logic in `scripts/verify-ci.mjs`, deployment scripts/controllers and
+  `EQB_HOST_CONFIGURATION_PATHS`. Adding or removing check entries in the
+  `scripts/verify-ci.mjs` / `scripts/lib/verificationShards.mjs` registries does
+  not use a PR: another Agent independently reviews that no unrelated check was
+  dropped or loosened, then it is pushed directly (Owner 2026-11-16; PR CI runs the
+  head's registry, so only review catches a dropped check). Everything else, including high-risk behavior
   (server admission, persistence, import upload tooling), is reviewed on the
   local candidate and pushed directly to main (Owner 2026-11-16). Changing shared
   GitHub settings is not authorized.

@@ -31,7 +31,7 @@ branch protection remain outside this authority.
 
 Run `git push origin HEAD:refs/heads/main`. If rejected, synchronize and repeat
 affected self-checks before retrying; never force-push. Only CI/deployment
-toolchain changes (see `AGENTS.md`) instead require the PR route below, Astra
+toolchain changes (see `AGENTS.md`; check-registry entries excluded) instead require the PR route below, Astra
 review and complete green PR Full/E2E before squash merge; do not open a PR by habit.
 
 The pusher actively follows their exact SHA's natural `push` run of
