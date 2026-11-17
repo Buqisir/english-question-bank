@@ -709,10 +709,12 @@ const createReviewTaskSource = workbenchSource.slice(
 )
 assert.match(createReviewTaskSource, /setSelectedReviewIds\(\[\]\)/u, '生成复听写任务后必须清空旧选择')
 assert.match(createReviewTaskSource, /setSuggestion\(\[\]\)/u, '生成复听写任务后必须收起旧建议')
-const createSetTaskSource = workbenchSource.slice(
-  workbenchSource.indexOf('async function createTasks'),
-  workbenchSource.indexOf('function updateTaskShare'),
-)
+// 生成合并听写：createTasks 先拆份、问过再交给 createTaskChunks，成功后在那里清空选择。
+const createSetTaskStart = workbenchSource.indexOf('async function createTaskChunks')
+const createSetTaskEnd = workbenchSource.indexOf('function updateTaskShare')
+assert.ok(createSetTaskStart !== -1 && createSetTaskEnd > createSetTaskStart, '找不到生成合并听写的 createTaskChunks，校验锚点要跟着改')
+const createSetTaskSource = workbenchSource.slice(createSetTaskStart, createSetTaskEnd)
+assert.match(createSetTaskSource, /nextTasks\.push\(task\)[\s\S]*setSelectedSets\(\[\]\)[\s\S]*\} catch/u, '合并听写生成成功后才清空生词组选择')
 assert.match(createSetTaskSource, /setSelectedSets\(\[\]\)/u, '生成合并听写后也必须收起旧生词组选择面板')
 
 const vocabularyServiceSource = readFileSync(path.join(import.meta.dirname, '../app/src/services/vocabulary.ts'), 'utf8')
