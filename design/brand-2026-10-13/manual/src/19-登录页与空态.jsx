@@ -33,13 +33,13 @@
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', color: '#191D18', flexShrink: '0', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '14px', lineHeight: '180%', width: '620px' }}>
-            登录页是网站现在的样子（2026-10-16 重拍）。空态和没找到两张是 2026-11-14 在本地测试站截图时注入獭獭拍的，不是网站实拍。工作页面里獭獭只出这两处（第 118 条）；真要上线，每一处另开 UI 任务。
+            登录页是网站现在的样子（2026-11-17 线上重拍）。空态和没找到两张是 2026-11-14 在本地测试站截图时注入獭獭拍的，不是网站实拍。工作页面里獭獭只出这两处（第 118 条）；真要上线，每一处另开 UI 任务。
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', display: 'flex', gap: '48px' }}>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', flexShrink: '0', gap: '12px', width: '384px' }}>
             <div style={{ borderRadius: '12px', boxShadow: '#E3E8DF 0px 0px 0px 1px', boxSizing: 'border-box', flexShrink: '0', height: '240px', overflow: 'clip', width: '384px' }}>
-              <div style={{ backgroundImage: 'url(../../evidence/login.png)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', height: '240px', width: '384px' }} />
+              <div style={{ backgroundImage: 'url(../../evidence/login-2026-11-17.png)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', height: '240px', width: '384px' }} />
             </div>
             <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '8px' }}>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '14px', fontWeight: 600, lineHeight: '20px' }}>
@@ -52,10 +52,10 @@
               </div>
             </div>
             <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-              标志在左上角；右半屏的雾海里潜着白身石板墨线稿的獭獭 v11。标语和表单区不放标志。
+              左上角是标志加「獭石」字标（第 121 条）；右半屏的雾海里潜着白身石板墨线稿的獭獭 v11。标语和表单区不放标志。
             </div>
             <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '18px' }}>
-              第 67、68 条 · 1440 × 900
+              第 67、68、121 条 · 1440 × 900
             </div>
           </div>
           <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', flexShrink: '0', gap: '12px', width: '378px' }}>
@@ -185,7 +185,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §4.4–§4.8、§1.6 · 第 31、50、52、67、114、118、119 条 · 截图 evidence/login.png、states-2026-11-14/5-my-space-empty-with、3-not-found-with.png
+          出处：BRAND.md §4.4–§4.8、§1.6 · 第 31、50、52、67、114、118、119、121 条 · 截图 evidence/login-2026-11-17.png、states-2026-11-14/5-my-space-empty-with、3-not-found-with.png
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           19
