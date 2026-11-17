@@ -11,6 +11,7 @@ import {
   Grid2X2,
   RotateCcw,
   Save,
+  VocabularyReview,
   WordBubble,
 } from '../../icons'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -1650,7 +1651,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
 
         {programLoadState === 'error' ? (
           <section className="vocabulary-run-setup" aria-labelledby="vocabulary-program-error-title">
-            <BookMarked size={32} aria-hidden="true" />
+            <VocabularyReview size={32} aria-hidden="true" />
             <h2 id="vocabulary-program-error-title">词库没有加载出来</h2>
             <p>为了不把进度记错，要等词库加载完才能开始。</p>
             <Button tone="solid" onClick={() => window.location.reload()}>重新加载</Button>
@@ -1658,7 +1659,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           </section>
         ) : studentsState === 'error' ? (
           <section className="vocabulary-run-setup" aria-labelledby="vocabulary-student-error-title">
-            <BookMarked size={32} aria-hidden="true" />
+            <VocabularyReview size={32} aria-hidden="true" />
             <h2 id="vocabulary-student-error-title">学生档案没有加载出来</h2>
             <p>为了不把不同学生的进度混在一起，要等档案加载完才能继续。</p>
             <Button tone="solid" onClick={() => window.location.reload()}>重新加载</Button>
@@ -1733,7 +1734,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           </section>
         ) : runState === 'setup' || runState === 'error' ? (
           <section className="vocabulary-run-setup" aria-labelledby="vocabulary-run-title">
-            <BookMarked size={32} aria-hidden="true" />
+            <VocabularyReview size={32} aria-hidden="true" />
             <h2 id="vocabulary-run-title">这轮准备收多少个生词？</h2>
             <p>
               {runId
