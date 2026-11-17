@@ -358,23 +358,12 @@ try {
       await page.evaluate(resumeAnimations)
     })
 
-    // ── 管理页：「给题库打主题标签」在打标、「新建口令」在建
+    // ── 管理页：「新建口令」在建
     await step('admin', async (rec) => {
-      const backfill = blocker()
       const tokens = blocker((req) => req.method() === 'POST')
-      await page.route('**/api/topic-labels/backfill', backfill.handle)
       await page.route(/\/api\/admin\/agent-tokens$/, tokens.handle)
-      rec.cleanup(async () => { await backfill.abort(); await tokens.abort(); await page.unroute('**/api/topic-labels/backfill', backfill.handle); await page.unroute(/\/api\/admin\/agent-tokens$/, tokens.handle) })
+      rec.cleanup(async () => { await tokens.abort(); await page.unroute(/\/api\/admin\/agent-tokens$/, tokens.handle) })
       await page.goto(rig.base + '/?view=admin'); await settle(page, 2000); await park()
-      const tag = page.getByRole('button', { name: /给题库打主题标签|打标中/ }).first()
-      await tag.waitFor({ timeout: 15000 })
-      rec.tagIdle = await page.evaluate(boxOf, '.admin-tool button')
-      await shot('admin-tag-idle', tag, 8)
-      await tag.click(); await sleep(HOLD_BEFORE_SHOT); await park()
-      rec.frozen = await freeze()
-      rec.tagBusy = await page.evaluate(boxOf, '.admin-tool button')
-      await shot('admin-tag-busy', tag, 8)
-      await page.evaluate(resumeAnimations)
       await page.locator('.agent-tokens form input').first().fill('拍图用口令'); await sleep(200); await park()
       const submit = page.locator('.agent-token-submit').first()
       rec.tokenIdle = await page.evaluate(boxOf, '.agent-token-submit')

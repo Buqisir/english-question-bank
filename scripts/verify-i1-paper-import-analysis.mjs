@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { createHash } from 'node:crypto'
-import { mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
 import { spawnSync } from 'node:child_process'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -466,6 +466,58 @@ function assertAllowedScope() {
   )
   assert('I1 Step 3 forbidden scopes are untouched', forbidden.length === 0, forbidden.join('\n'))
 }
+
+// ─── Req 7: MF-2 diff-fence assertions ────────────────────────────────────────
+console.log('=== Req 7: MF-2 diff-fence — forbidden files untouched ===')
+{
+  const rootDir = repoRoot
+  // prompts/reading-choice-analysis-v1.md must NOT contain topicLabels
+  const analysisPromptPath = path.join(rootDir, 'prompts/reading-choice-analysis-v1.md')
+  if (existsSync(analysisPromptPath)) {
+    const promptContent = readFileSync(analysisPromptPath, 'utf8')
+    assert(
+      'Req7 MF-2: prompts/reading-choice-analysis-v1.md does NOT contain topicLabels',
+      !promptContent.includes('topicLabels'),
+      'topicLabels found in reading-choice-analysis-v1.md — forbidden re-coupling!'
+    )
+  } else {
+    assert('Req7 MF-2: prompts/reading-choice-analysis-v1.md exists', false, 'File not found')
+  }
+
+  // server/shared/topicTaxonomy.mjs must NOT be recreated
+  assert(
+    'Req7 MF-2: server/shared/topicTaxonomy.mjs does NOT exist (must not be recreated)',
+    !existsSync(path.join(rootDir, 'server/shared/topicTaxonomy.mjs')),
+    'topicTaxonomy.mjs was recreated — forbidden!'
+  )
+
+  // server/paper-import-ai/analyzeReading.mjs must NOT contain topicLabels
+  const analyzeReadingPath = path.join(rootDir, 'server/paper-import-ai/analyzeReading.mjs')
+  if (existsSync(analyzeReadingPath)) {
+    const analyzeSource = readFileSync(analyzeReadingPath, 'utf8')
+    assert(
+      'Req7 MF-2: analyzeReading.mjs does NOT contain topicLabels',
+      !analyzeSource.includes('topicLabels'),
+      'topicLabels found in analyzeReading.mjs — forbidden re-coupling!'
+    )
+  } else {
+    assert('Req7 MF-2: server/paper-import-ai/analyzeReading.mjs exists', false, 'File not found')
+  }
+
+  // server/paper-import-ai/packageBuilder.mjs must NOT contain topicLabels
+  const packageBuilderPath = path.join(rootDir, 'server/paper-import-ai/packageBuilder.mjs')
+  if (existsSync(packageBuilderPath)) {
+    const pkgSource = readFileSync(packageBuilderPath, 'utf8')
+    assert(
+      'Req7 MF-2: packageBuilder.mjs does NOT contain topicLabels',
+      !pkgSource.includes('topicLabels'),
+      'topicLabels found in packageBuilder.mjs — forbidden re-coupling!'
+    )
+  } else {
+    assert('Req7 MF-2: server/paper-import-ai/packageBuilder.mjs exists', false, 'File not found')
+  }
+}
+
 
 function assertStaticContracts() {
   const analyzeSource = readRepoFile('server/paper-import-ai/analyzeReading.mjs')

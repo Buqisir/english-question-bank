@@ -43,7 +43,6 @@ import { createSearchSidecarStore, ensureSearchSidecarDatabaseShape } from './se
 import { createTeachingFacetIndex, createTeachingFacetRoutes } from './search/teachingFacets.mjs'
 import { createSimilarQuestionsStore, createSimilarQuestionsRoutes } from './search/similarQuestions.mjs'
 import { createListeningMaterialProjectionRoutes } from './search/listeningMaterialProjection.mjs'
-import { createTopicLabelBackfillRoutes } from './topic-labels/topicLabelBackfillRoutes.mjs'
 import { createVocabularyRoutes } from './vocabulary/vocabularyRoutes.mjs'
 import { renderVocabularySetPdf } from './vocabulary/vocabularyPdfRenderer.mjs'
 import { ensureSharedVocabularyShape, ensureUserVocabularyShape } from './vocabulary/vocabularyStore.mjs'
@@ -163,7 +162,6 @@ const serverContext = {
   similarQuestionsStore,
   listPaperSets,
   listQuestionGroups,
-  listUnlabeledGroupIds,
   parseClozeByQuestionGroup,
   parseGrammarByQuestionGroup,
   parseReadingByQuestionGroup,
@@ -523,7 +521,6 @@ const serverRoutes = [
   ...createTeachingFacetRoutes(),
   ...createSimilarQuestionsRoutes(),
   ...createListeningMaterialProjectionRoutes(),
-  ...createTopicLabelBackfillRoutes(),
   ...createVocabularyRoutes(),
   ...createPaperTranslationRoutes(),
   ...createPaperDictionaryRoutes(),
@@ -3869,22 +3866,6 @@ export function bindTopicLabelsToQuestionGroup(questionGroupId, input) {
       questionGroupId,
       topicLabels: getTopicLabelsForQuestionGroup(db, questionGroupId),
     }
-  } finally {
-    db.close()
-  }
-}
-
-function listUnlabeledGroupIds() {
-  const db = openDatabase({ readOnly: true })
-  try {
-    const allRows = db.prepare('SELECT id FROM question_groups ORDER BY id').all()
-    const labeledRows = db
-      .prepare('SELECT DISTINCT question_group_id FROM question_group_topic_labels')
-      .all()
-    const labeledSet = new Set(labeledRows.map((r) => r.question_group_id))
-    const unlabeled = allRows.map((r) => r.id).filter((id) => !labeledSet.has(id))
-    const skipped = allRows.length - unlabeled.length
-    return { unlabeled, skipped }
   } finally {
     db.close()
   }

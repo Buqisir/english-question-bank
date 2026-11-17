@@ -37,8 +37,6 @@ const SHEETS = [
     ['detail-paper', '详情页：卷面在等'],
     ['paper-pdf-idle', '整卷页「下载 PDF」（静止）'],
     ['paper-pdf-busy', '整卷页「下载 PDF」在生成'],
-    ['admin-tag-idle', '管理页「给题库打主题标签」（静止）'],
-    ['admin-tag-busy', '管理页：在打标'],
     ['admin-token-busy', '管理页「新建口令」在建'],
     ['draft-pdf-1s', '草稿卷：正在生成 PDF（1 秒）'],
     ['draft-pdf-11s', '草稿卷：正在生成 PDF（11 秒）'],

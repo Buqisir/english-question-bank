@@ -332,11 +332,6 @@ for (const retiredState of ['clozeParseResult', 'sevenChoicesParseResult', 'gram
     !new RegExp(`\\[${retiredState}, set${retiredState[0].toUpperCase()}${retiredState.slice(1)}\\]`).test(appTsx),
   )
 }
-assert(
-  'App.tsx still defines handleBackfillTopicLabels (AI Enhancement batch backfill, distinct from retired handleGenerateTopicLabels)',
-  /async function handleBackfillTopicLabels\(/.test(appTsx),
-)
-
 // ------------------------------------------------------------------ 3. onOpenDetail threading (SW-4 — all three render points)
 
 const conciergeGroupCard = read('app/src/concierge/ConciergeGroupCard.tsx')

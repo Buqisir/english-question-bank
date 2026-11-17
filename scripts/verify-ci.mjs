@@ -211,7 +211,6 @@ const registry = {
   'scripts/verify-i15-grammar-fill-blank-focus.mjs',
   // I16-A's gitignored corpus and list-groups-perf's real local DB are manual
   // audits, not reproducible daily checks. Prerequisites: scripts/README.md.
-  'scripts/verify-i16b-theme-labels-backfill.mjs',
   'scripts/verify-grammar-facets-v2.mjs',
   'scripts/verify-similar-v2.mjs',
   'scripts/verify-similar-workbench-swap.mjs',

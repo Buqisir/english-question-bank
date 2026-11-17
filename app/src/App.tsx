@@ -25,8 +25,6 @@ import {
   deleteQuestionGroup as deleteQuestionGroupRequest,
   fetchQuestionGroupDetail,
   fetchQuestionGroups,
-  backfillTopicLabels,
-  type BackfillTopicLabelsResult,
 } from './services/questionGroups'
 import { PaperBrowsePage, type AddGroupsOutcome } from './features/paper-browse/PaperBrowsePage'
 import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
@@ -47,25 +45,6 @@ import { useCurrentUser, useIsOwnerView } from './auth/AuthGate.tsx'
 import { logout } from './auth/session.ts'
 import { EntryModal } from './workbench/EntryModal'
 import { QuestionGroupDetailView } from './features/question-detail/QuestionGroupDetailView'
-
-const DEEPSEEK_MODELS = [
-  { value: 'deepseek-v4-flash', label: 'deepseek-v4-flash（推荐）' },
-  { value: 'deepseek-v4-pro', label: 'deepseek-v4-pro（高性能）' },
-] as const
-
-const DEEPSEEK_MODEL_ALIASES: Record<string, string> = {
-  'deepseek-v4-pro': 'deepseek-v4-pro',
-  'deepseek-v4-flash': 'deepseek-v4-flash',
-}
-
-function normalizeAiModel(value: string) {
-  const rawModel = String(value || '').trim()
-  if (!rawModel) return DEEPSEEK_MODELS[0].value
-  const normalized = rawModel.toLowerCase().replace(/\s+/g, '').replace(/_/g, '-')
-  return DEEPSEEK_MODEL_ALIASES[normalized] || DEEPSEEK_MODELS[0].value
-}
-
-const DEFAULT_AI_MODEL = DEEPSEEK_MODELS[0].value
 
 // detail-page-redesign (2026-07-15): buildGrammarVerifyResult /
 // buildClozeVerifyResult / buildSevenChoicesVerifyResult retired — their
@@ -239,10 +218,6 @@ function App() {
   // for the matching anchor update.
   const [readingParseResult, setReadingParseResult] = useState<ReadingParseQuestionGroupResult | null>(null)
   const [aiApiKey] = useState(() => localStorage.getItem('ai-api-key') || '')
-  const [aiModel] = useState(() => normalizeAiModel(localStorage.getItem('ai-model') || DEFAULT_AI_MODEL))
-  const [backfillStatus, setBackfillStatus] = useState<'idle' | 'loading'>('idle')
-  const [backfillResult, setBackfillResult] = useState<BackfillTopicLabelsResult | null>(null)
-  const [backfillError, setBackfillError] = useState('')
   const [aiThinkingMode, setAiThinkingMode] = useState(() => localStorage.getItem('ai-thinking-mode') === 'on')
   // 首页是归来 — the teacher's own trail of opened passages (localStorage only).
   // Scoped by user id so a shared browser never shows another teacher's trail;
@@ -579,23 +554,6 @@ function App() {
     setDataStatus('sqlite')
     setEntryOpen(false)
     setEntryInitialDetail(null)
-  }
-
-  async function handleBackfillTopicLabels() {
-    const key = aiApiKey.trim()
-    localStorage.setItem('ai-api-key', key)
-    setBackfillStatus('loading')
-    setBackfillResult(null)
-    setBackfillError('')
-    try {
-      const result = await backfillTopicLabels({ apiKey: key, model: aiModel })
-      setBackfillResult(result)
-      setBackfillStatus('idle')
-      await refreshQuestionGroups()
-    } catch (error) {
-      setBackfillError(error instanceof Error ? error.message : String(error))
-      setBackfillStatus('idle')
-    }
   }
 
   // Derived on render; React Compiler memoizes this (manual useMemo here
@@ -1185,12 +1143,7 @@ function App() {
       />
 
       {adminRouteActive && (
-        <AdminWorkbench
-          backfillStatus={backfillStatus}
-          backfillResult={backfillResult}
-          backfillError={backfillError}
-          onBackfillTopicLabels={() => void handleBackfillTopicLabels()}
-        />
+        <AdminWorkbench />
       )}
 
       {!adminRouteActive && (

@@ -130,9 +130,6 @@ function cookieHeaderFrom(setCookieValue) {
 // any handler/lookup, so a nonexistent id must still 403 for a blocked caller.
 const FAKE_ID = 'verify-fake-id'
 const GATED_ROUTES = [
-  // server/topic-labels/topicLabelBackfillRoutes.mjs (1; whole module)
-  { method: 'POST', path: '/api/topic-labels/backfill', body: {} },
-
   // server/grammar-verb-profile/verbProfileBackfillRoutes.mjs (D4) — route
   // retired in D1 (grammar-facets-v2): tense/voice/agreementSensitive now
   // live on the analysis-v2 blank entry directly, no sidecar backfill route
