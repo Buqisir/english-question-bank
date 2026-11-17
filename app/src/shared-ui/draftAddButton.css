@@ -38,7 +38,8 @@
   height: 36px;
 }
 
-/* 「已加入」：去草稿卷的链接。高度和纸里的「撤回」一样（中号、大号纸里 28px，小号纸里 24px），左右 8px。 */
+/* 「已加入」：去草稿卷的链接。高度和纸里的「撤回」一样，一律 28px，左右 8px。
+ * 小号纸本身也是 28 高，这时悬停灰上下贴满纸、左右离纸边 2px（Owner 2026-11-17：小灰块一律撑到 28），纸和布局不变。 */
 .eqb-draft-add-open {
   box-sizing: border-box;
   display: inline-flex;
@@ -52,10 +53,6 @@
   transition:
     background-color var(--motion-fast) var(--ease-hover),
     transform var(--motion-fast) var(--ease-out);
-}
-
-.eqb-draft-add-paper[data-size='sm'] .eqb-draft-add-open {
-  height: 24px;
 }
 
 /* 悬停垫悬停灰，和 button.css 透明底几种语气的悬停一样；悬停灰半透明，叠在滑块上自然深一档，照样看得出。
@@ -85,12 +82,7 @@
   }
 }
 
-/* 撤回键在纸里比纸矮一档（sm 28px）。纸是 28px 时（小号）撤回键收成 24px，免得贴着纸边。
- * 覆盖：本条 (0,4,0) 盖过 button.css 里 .eqb-button[data-size='sm'] 的高度 (0,2,0)。 */
-.eqb-draft-add-paper[data-size='sm'] .eqb-button.eqb-draft-add-undo {
-  height: 24px;
-  min-width: 24px;
-}
+/* 撤回键在纸里用 sm 28px。小号纸也是 28 时同样不收，和「已加入」一样上下贴满纸（Owner 2026-11-17，原来收成 24）。 */
 
 .eqb-draft-add-error {
   display: inline-flex;
