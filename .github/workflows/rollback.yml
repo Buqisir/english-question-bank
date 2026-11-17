@@ -1,0 +1,35 @@
+name: 回退到上一版
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: 输入 ROLLBACK 确认回退；成功后自动暂停上线
+        type: string
+        required: true
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: eqb-production-deployment
+  cancel-in-progress: false
+jobs:
+  rollback:
+    if: github.ref == 'refs/heads/main' && inputs.confirmation == 'ROLLBACK'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.21.0
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          EQB_DEPLOY_SSH_KEY: ${{ secrets.EQB_DEPLOY_SSH_KEY }}
+          EQB_DEPLOY_SSH_HOST: ${{ vars.EQB_DEPLOY_SSH_HOST }}
+          EQB_DEPLOY_KNOWN_HOSTS: ${{ vars.EQB_DEPLOY_KNOWN_HOSTS }}
+          EQB_ROLLBACK_CONFIRM: ${{ inputs.confirmation }}
+        run: node scripts/amp-orb-deploy.mjs ci-rollback

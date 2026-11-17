@@ -194,7 +194,17 @@ uniquely supplies; otherwise keep it outside acceptance packs.
 
 ## Owner Mac deployment
 
-- Website deployment runs on the Owner Mac through `scripts/local-deploy.sh`.
+- GitHub Actions `Deploy` is the primary website deployment path after latest
+  main's natural `Verify` and all eight jobs succeed. An open issue labeled
+  `deploy-paused` pauses Actions deployments. Protected persistence-path changes
+  create a decision issue; dispatch `code-only` or `migration` through
+  `production-reviewed`, with Owner approval. Never bypass that environment.
+- On mobile, dispatch `回退到上一版` with confirmation `ROLLBACK`. It selects only
+  the trusted immediately previous release, refuses a migrated current release,
+  and opens a `deploy-paused` issue after success. Close all pause issues to
+  resume; dispatch `Deploy` with `auto` or wait for the next successful Verify.
+  See ADR-0027 for initial setup and the restricted CI deployment key.
+- Owner Mac remains the backup through `scripts/local-deploy.sh`.
   The private key lives only in the Owner Mac Keychain; never copy it into a
   repository, worktree, log, Agent prompt, CI, or development Orb.
 - Standing Owner `部署最新版` authority includes automatic deployment, diagnosis,
