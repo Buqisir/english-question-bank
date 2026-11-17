@@ -327,11 +327,12 @@ try {
         if (sample.name === 'reading-analysis' && parse(sample.line).querySelectorAll('path').length !== 2) failures.push(`reading-analysis/${sample.size}: R3 is lens + handle + two text lines, no paper`)
       }
       if (sample.name === 'paper-lined') {
-        // 语义第三轮 ① L2（Owner 2026-11-03）：卷家族纸身 + 卷角 + 三条贴纸边的格线（纸下沿当第四线），G2 同纸家族 ×0.972。
+        // 语义第三轮 ① L2（Owner 2026-11-03）：卷家族纸身 + 卷角 + 贴纸边的格线，G2 同纸家族 ×0.972。
+        // 2026-11-17 Owner 嫌三条线密，定去掉最短那条，剩两条拉开。
         const svgEl = parse(sample.line)
         const paths = [...svgEl.querySelectorAll('path')]
         const lines = paths[2]?.getAttribute('d') ?? ''
-        if (paths.length !== 3 || svgEl.querySelectorAll('[stroke-width], [data-stroke-small], [fill="currentColor"]').length || (lines.match(/M/g) ?? []).length !== 3) failures.push(`paper-lined/${sample.size}: paper, curl and three ruled lines in one pen`)
+        if (paths.length !== 3 || svgEl.querySelectorAll('[stroke-width], [data-stroke-small], [fill="currentColor"]').length || (lines.match(/M/g) ?? []).length !== 2) failures.push(`paper-lined/${sample.size}: paper, curl and two ruled lines in one pen`)
         else if (!paths[0].getAttribute('d').startsWith('M7.383 3.009 H16.617 Q19.776 3.009 19.776 6.168 V14.819 C')) failures.push(`paper-lined/${sample.size}: share the paper body`)
       }
       if (sample.name === 'word-bubble') {
