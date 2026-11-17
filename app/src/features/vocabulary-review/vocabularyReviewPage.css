@@ -319,7 +319,7 @@
 }
 
 .vocabulary-progress-word.is-processed:hover {
-  background: var(--eqb-color-bg);
+  background: var(--eqb-color-state-hover);
 }
 
 .vocabulary-progress-word.is-processed .vocabulary-progress-word-order {
@@ -798,7 +798,8 @@
 }
 
 .vocabulary-control-known:hover:not(:disabled) {
-  background: var(--eqb-color-bg);
+  /* 白底键：白底留着，上面叠一层灰态底。 */
+  background-image: linear-gradient(var(--eqb-color-state-hover), var(--eqb-color-state-hover));
 }
 
 .vocabulary-control-unfamiliar {
@@ -1263,7 +1264,7 @@
 }
 
 .vocabulary-set-title-control .eqb-field-control[data-size]:hover:not(:focus-visible) {
-  background: var(--eqb-color-bg);
+  background: var(--eqb-color-state-hover);
 }
 
 .vocabulary-set-meta {

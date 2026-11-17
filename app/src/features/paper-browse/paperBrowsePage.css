@@ -1980,13 +1980,18 @@
 .listening-player[data-open] .listening-player-trigger,
 .listening-player[data-playing] .listening-player-trigger {
   color: var(--paper-ink-strong);
-  background: rgba(var(--paper-ink-strong-rgb), 0.07);
+  /* 正在播：选中底（灰态底统一，Owner 2026-11-17 定 D）；播放图标本身就是不靠灰的标记。 */
+  background: var(--eqb-color-state-selected);
 }
 
 @media (hover: hover) and (pointer: fine) {
   .listening-player-trigger:hover {
     color: var(--paper-ink-strong);
-    background: rgba(var(--paper-ink-strong-rgb), 0.07);
+    background: var(--eqb-color-state-hover);
+  }
+
+  .listening-player[data-playing] .listening-player-trigger:hover {
+    background: var(--eqb-color-state-selected-hover);
   }
 }
 
@@ -2047,7 +2052,7 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .listening-player-play:hover { background: rgba(var(--paper-ink-strong-rgb), 0.07); }
+  .listening-player-play:hover { background: var(--eqb-color-state-hover); }
 }
 
 .listening-player-time {
@@ -2233,7 +2238,7 @@
 @media (hover: hover) and (pointer: fine) {
   .listening-player .listening-player-speed:hover {
     color: var(--paper-ink-strong);
-    background: rgba(var(--paper-ink-strong-rgb), 0.08);
+    background: var(--eqb-color-state-hover);
   }
 
   .listening-player-speed:hover::after {

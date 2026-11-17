@@ -804,7 +804,8 @@ button:disabled {
 
 .detail-button.danger:hover {
   border-color: rgba(220, 38, 38, 0.35);
-  background: rgba(220, 38, 38, 0.06);
+  /* 危险键悬停也垫灰态底，危险只靠字色和边（和 button.css 的危险键一样，2026-11-17）。 */
+  background: var(--eqb-color-state-hover);
   color: var(--eqb-color-danger, #dc2626);
 }
 
@@ -1163,7 +1164,6 @@ button:disabled {
 }
 
 .teacher-difficulty-head,
-.teacher-difficulty-controls,
 .teacher-difficulty-meta {
   display: flex;
   flex-wrap: wrap;
@@ -1182,28 +1182,6 @@ button:disabled {
 .teacher-difficulty-head strong {
   color: var(--ink-strong);
   font-size: 14px;
-}
-
-.teacher-difficulty-controls button {
-  min-width: 34px;
-  height: 34px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface-strong);
-  color: var(--ink);
-  font-weight: 900;
-}
-
-.teacher-difficulty-controls button.active {
-  border-color: var(--line-strong);
-  background: var(--surface-strong);
-  color: var(--ink);
-}
-
-.teacher-difficulty-controls button.ghost {
-  width: auto;
-  padding: 0 10px;
-  color: var(--muted);
 }
 
 .teacher-difficulty-meta select,
@@ -1325,31 +1303,6 @@ button:disabled {
   color: var(--ink);
   font-size: 14px;
   line-height: 1.55;
-}
-
-.analysis-disclosure {
-  display: grid;
-  gap: 8px;
-}
-
-.analysis-disclosure-toggle:hover {
-  color: var(--ink);
-  background: var(--surface-strong);
-  border-color: var(--line-strong);
-}
-
-.analysis-disclosure-toggle:focus-visible {
-  outline: var(--focus-ring);
-  outline-offset: 2px;
-}
-
-.analysis-disclosure-toggle-label {
-  color: var(--ink-strong);
-}
-
-.analysis-disclosure-body {
-  display: grid;
-  gap: 8px;
 }
 
 .paper-page {
@@ -2238,137 +2191,6 @@ button:disabled {
   background: var(--surface-strong);
 }
 
-/* Difficulty Calibration Report */
-.calibration-report {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
-}
-
-.calibration-report summary {
-  padding: 10px 14px;
-  color: var(--ink-strong);
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  user-select: none;
-}
-
-.calibration-report summary:hover {
-  background: var(--surface-strong);
-  border-radius: 8px;
-}
-
-.calibration-report-body {
-  display: grid;
-  gap: 12px;
-  padding: 0 14px 14px;
-}
-
-.calibration-report-section {
-  display: grid;
-  gap: 6px;
-}
-
-.calibration-report-label {
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-}
-
-.calibration-report-muted {
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 700;
-  font-style: italic;
-}
-
-.calibration-report-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.calibration-report-table th,
-.calibration-report-table td {
-  padding: 4px 6px;
-  text-align: center;
-  border: 1px solid var(--line);
-}
-
-.calibration-report-table th {
-  background: var(--surface-strong);
-  color: var(--muted);
-  font-weight: 800;
-}
-
-.calibration-report-table td:first-child {
-  text-align: left;
-  color: var(--muted);
-  font-weight: 800;
-  background: var(--surface-strong);
-  min-width: 40px;
-}
-
-.calibration-report-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.calibration-report-chips span strong {
-  color: var(--ink-strong);
-  font-size: 13px;
-}
-
-.calibration-report-chips span.warn {
-  color: var(--coral-text);
-  background: var(--coral-soft);
-}
-
-.calibration-report-chips span.blocker {
-  border: 1px solid var(--line);
-}
-
-.calibration-report-watchlist {
-  display: grid;
-  gap: 4px;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.calibration-report-watch-item {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  align-items: center;
-  padding: 5px 8px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface-strong);
-  text-decoration: none;
-  color: inherit;
-  font-size: 12px;
-  transition: border-color var(--motion-base) var(--ease-hover);
-}
-
-.calibration-report-watch-item:hover {
-  border-color: var(--line-strong);
-}
-
-.calibration-report-watch-item strong {
-  color: var(--ink-strong);
-  font-weight: 800;
-}
-
-.calibration-report-watch-item span {
-  color: var(--muted);
-  font-weight: 700;
-}
-
 /* Paper Blocks Outline */
 .paper-blocks-outline {
   border: 1px solid var(--line);
@@ -2467,27 +2289,6 @@ button:disabled {
   color: var(--muted);
   font-size: 11px;
   font-weight: 700;
-}
-
-.paper-block-actions {
-  display: flex;
-  gap: 2px;
-}
-
-.paper-block-actions button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
-  color: var(--muted);
-  background: transparent;
-}
-
-.paper-block-actions button:hover {
-  color: var(--ink);
-  background: var(--line);
 }
 
 /* Preview block types */
@@ -3536,29 +3337,6 @@ p.concierge-empty {
   transform: translateX(0);
 }
 
-.basket-drawer-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 28px;
-  height: 28px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  background: transparent;
-  color: var(--desk-ink);
-  font-size: 18px;
-  cursor: pointer;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.basket-drawer-close:hover {
-  background: var(--desk-hover);
-  border-color: #D8D8D2;
-}
-
 /* ========================================================================
    Import Intake — quiet workbench, slim status rows.
    Reuses the concierge palette: neutral paper, ink, teal.
@@ -4352,7 +4130,6 @@ p.concierge-empty {
   display: inline;
 }
 
-
 .concierge-paper-reason {
   margin: 0;
   font-size: 11.5px;
@@ -4644,7 +4421,7 @@ p.concierge-empty {
 }
 
 /* 灰态底：灰块上的淡墨小字换成次墨。淡墨 #5A6C75 在页面底上本来只有 4.99:1，压在悬停灰上
-   掉到 4.4 左右；次墨在最深的「选中再悬停」上也有 6.05:1。用改变量的办法，块里所有用淡墨的字一起换。 */
+   掉到 4.4 左右；次墨在页底最深的「选中再悬停」上也有 6.03:1。用改变量的办法，块里所有用淡墨的字一起换。 */
 :where(
   [data-fluid-hover-active],
   .eqb-row:hover,
@@ -4654,10 +4431,21 @@ p.concierge-empty {
   .concierge-paper-row.is-expanded .concierge-paper-row-head,
   .dictation-set-row.is-selected,
   .dictation-task-list article.is-selected,
-  .vocabulary-listen-list li button.is-current
+  .vocabulary-listen-list li button.is-current,
+  .listening-player-trigger:hover,
+  .listening-player[data-playing] .listening-player-trigger,
+  .vocabulary-handwriting-selector-mode label:is(:hover, .is-selected) span,
+  .vocabulary-handwriting-selector-list label:is(:hover, .is-selected),
+  .vocabulary-progress-word.is-processed:hover,
+  .sa-legend-item:hover,
+  .sa-legend-item[aria-pressed='true'],
+  .sa-main-btn[aria-pressed='true']
 ) {
   --eqb-color-text-muted: var(--eqb-color-text-secondary);
   --desk-muted: var(--eqb-color-text-secondary);
   --muted: var(--eqb-color-text-secondary);
   --blue-text: var(--eqb-color-text-secondary);
+  /* 句子分析卡自己的淡墨在卡上就解析了，这里也要重设。 */
+  --sa-muted: var(--eqb-color-text-secondary, #3F525B);
+  --sa-chrome-muted: var(--eqb-color-text-secondary, #3F525B);
 }
