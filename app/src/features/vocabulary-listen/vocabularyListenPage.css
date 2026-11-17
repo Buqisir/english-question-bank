@@ -562,3 +562,8 @@
     transition: none;
   }
 }
+
+/* 灰态底：正在听的词（桌色底 + 喇叭图标），鼠标停上去深一档。 */
+.vocabulary-listen-list li button.is-current[data-fluid-hover-active] {
+  background: var(--eqb-color-state-selected-hover);
+}

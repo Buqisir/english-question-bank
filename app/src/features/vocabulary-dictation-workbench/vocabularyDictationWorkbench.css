@@ -1684,6 +1684,8 @@
   }
 
   .dictation-workbench-tabs {
+    /* 窄屏标签自带左右 12 内边距，灰块收回 4 才是「字两边各多 8」，也不会被横向滚动裁掉。 */
+    --fh-inset-x: 4px;
     gap: 0;
     overflow-x: auto;
   }
@@ -1950,4 +1952,10 @@
   .dictation-workbench *::after {
     scroll-behavior: auto !important;
   }
+}
+
+/* 灰态底：选中的词组行、选中的复习键，鼠标停上去深一档（选中自己的桌色底会盖住滑块，看不出变化）。 */
+.dictation-set-row.is-selected[data-fluid-hover-active],
+.dictation-review-row button.is-active:hover {
+  background: var(--eqb-color-state-selected-hover);
 }

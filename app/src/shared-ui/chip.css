@@ -103,3 +103,9 @@
     height: 36px;
   }
 }
+
+/* 鼠标停在已选中的胶囊上：深一档（灰态底第三档）。不然选中的底和滑块同色，看不出鼠标在它上面。
+ * 本条 (0,4,0) 盖过上面选中那条 (0,3,0) 和 [data-fluid-hover-active] 透明那条 (0,3,0)。 */
+.eqb-chip[data-kind='toggle'][aria-pressed='true']:is(:hover, [data-fluid-hover-active]):not(:disabled) {
+  background: var(--eqb-color-state-selected-hover);
+}
