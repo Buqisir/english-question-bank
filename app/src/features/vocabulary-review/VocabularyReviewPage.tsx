@@ -7,7 +7,9 @@ import {
   BookMarked,
   Check,
   BoardCheck,
+  ChevronRight,
   Eye,
+  InfoCircle,
   Grid2X2,
   RotateCcw,
   Save,
@@ -556,6 +558,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const [activeStudentId, setActiveStudentId] = useState<string | null>(null)
   const [studentsState, setStudentsState] = useState<'loading' | 'ready' | 'error'>('loading')
   const [studentCreateOpen, setStudentCreateOpen] = useState(false)
+  // ⓘ 开着的是哪一个词：换词时自然关上，不用另写 effect 去关。
+  const [entryInfoFor, setEntryInfoFor] = useState<string | null>(null)
+  const entryInfoRef = useRef<HTMLDivElement>(null)
   const [studentNameInput, setStudentNameInput] = useState('')
   const [studentFormError, setStudentFormError] = useState('')
   const [requestBusy, setRequestBusy] = useState(false)
@@ -654,13 +659,26 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
   const hasUnfinishedRun = Boolean(runId && runStatus !== 'frozen')
   const progressRequiresRunReplacement = hasUnfinishedRun || progressReplaceRequired
   const currentStage = currentEntry?.source.stage ?? 'core'
+  const entryInfoOpen = Boolean(currentEntry && entryInfoFor === currentEntry.id)
+  const setEntryInfoOpen = (open: boolean) => setEntryInfoFor(open && currentEntry ? currentEntry.id : null)
   const currentStageLabel = vocabularyStageLabel(program, currentStage)
   const currentWeek = currentEntry?.source.week ?? 1
-  const visibleGroups = useMemo(
-    () => program.groups.filter((group) =>
-      (!group.stage || group.stage === currentStage) && group.week === currentWeek),
-    [currentStage, currentWeek, program.groups],
-  )
+
+  useEffect(() => {
+    if (!entryInfoOpen) return
+    const closeOnPointerDown = (event: PointerEvent) => {
+      if (!entryInfoRef.current?.contains(event.target as Node)) setEntryInfoFor(null)
+    }
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setEntryInfoFor(null)
+    }
+    document.addEventListener('pointerdown', closeOnPointerDown)
+    document.addEventListener('keydown', closeOnEscape)
+    return () => {
+      document.removeEventListener('pointerdown', closeOnPointerDown)
+      document.removeEventListener('keydown', closeOnEscape)
+    }
+  }, [entryInfoOpen])
 
   useEffect(() => {
     if (!downloadMenuOpen) return
@@ -1540,12 +1558,9 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
 
       <main className="vocabulary-review-shell" aria-label="过生词">
         <header className="vocabulary-review-heading">
-          <div>
-            <h1>{programLoadState === 'ready' ? program.title : '中考词汇一轮'}</h1>
-            <p>{programLoadState === 'ready'
-              ? `${program.subtitle} · 按原书顺序逐词判断，收满本轮目标生词后生成固定生词纸。`
-              : '万唯一轮完整1600词 · 读取完整词库后显示正式过词进度。'}</p>
-          </div>
+          {/* 过生词改版第一步（Owner 2026-11-17 看过可点样张后定「一屏只突出词卡」）：页头压成一行。
+              原来标题下那句「· 按原书顺序逐词判断…」是开发口吻，删掉；课程名留作标题。 */}
+          <h1>{programLoadState === 'ready' ? program.title : '中考词汇一轮'}</h1>
           {headingSkeletonPending ? (
             <HeadingActionsSkeleton
               showSkeleton={progressOpeningPhase === 'waiting'}
@@ -1555,7 +1570,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           ) : programLoadState === 'ready' && studentsState === 'ready' && activeStudent && (
             <div className="vocabulary-heading-actions">
               {!printRequest && (
-                <Button tone="strong" size="lg" icon={<BoardCheck size={16} />} onClick={() => props.onOpenVocabularyDictationWorkbench()}>
+                <Button tone="quiet" size="md" className="vocabulary-heading-review-link" icon={<BoardCheck size={16} />} onClick={() => props.onOpenVocabularyDictationWorkbench()}>
                   单词复习
                 </Button>
               )}
@@ -1565,7 +1580,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 <SelectField
                   className="vocabulary-program-switcher"
                   label="词汇课程"
-                  size="lg"
+                  hideLabel
+                  size="md"
                   aria-label="切换词汇课程"
                   value={activeProgramId}
                   disabled={requestBusy || runState === 'active'}
@@ -1577,7 +1593,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 <SelectField
                   className="vocabulary-student-picker"
                   label="当前学生"
-                  size="lg"
+                  hideLabel
+                  size="md"
                   aria-label="切换当前学生"
                   value={activeStudentId ?? ''}
                   disabled={requestBusy}
@@ -1586,8 +1603,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 />
                 {/* 描边键不再单做一种（Owner 2026-11-14 决定 #2）：墨字大号，类名留着当挂钩。 */}
                 <Button
-                  tone="strong"
-                  size="lg"
+                  tone="quiet"
+                  size="md"
                   className="vocabulary-student-add-button"
                   aria-expanded={studentCreateOpen}
                   onClick={() => {
@@ -1829,54 +1846,28 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             )}
           </section>
         ) : <div className="vocabulary-review-layout">
-          <aside className="vocabulary-course-rail" aria-label="课程位置">
-            <div className="vocabulary-rail-heading">
-              <h2>第{currentWeek}周</h2>
-              <span>{currentStageLabel}</span>
-            </div>
-            <ol className="vocabulary-group-list">
-              {visibleGroups.map((group) => {
-                const groupEntries = program.entries.filter((entry) =>
-                  entry.source.group === group.group && (!group.stage || entry.source.stage === group.stage))
-                const groupProcessed = groupEntries.filter((entry) => reviewState.decisions[entry.id]).length
-                const isCurrent = currentEntry?.source.group === group.group && (!group.stage || currentEntry.source.stage === group.stage)
-                const isComplete = groupProcessed === groupEntries.length
-                return (
-                  <li
-                    key={group.id}
-                    className={isCurrent ? 'is-current' : isComplete ? 'is-complete' : undefined}
-                    aria-current={isCurrent ? 'step' : undefined}
-                  >
-                    <span className="vocabulary-group-marker" aria-hidden="true">
-                      {isComplete ? <Check size={14} /> : group.group}
-                    </span>
-                    <span>
-                      <strong>Day {group.group}</strong>
-                      <small>{groupProcessed > 0 || isCurrent ? `${groupProcessed} / ${groupEntries.length} 词` : `共 ${groupEntries.length} 词`}</small>
-                    </span>
-                  </li>
-                )
-              })}
-            </ol>
-            <p className="vocabulary-source-note">
-              {program.entries.length === 30
-                ? '来源索引、页码与标题证据已复核；当前样本覆盖 Day 1–4 的前30词。'
-                : `来源索引、页码与标题证据已复核；完整 ${program.entries.length} 词按原书 Day 顺序入库。`}
-            </p>
-          </aside>
-
           <section className="vocabulary-review-stage" aria-live="polite">
             {completion === 'active' && currentEntry ? (
               <>
+                {/* 过生词改版第一步：左栏 Day 列表收成面包屑（第几周 › Day › 阶段 · 词序），右栏「本轮生词」收成词卡上方一条进度
+                    和词卡下方一排小标签。原来左栏底下「来源索引、页码与标题证据已复核」是开发口吻，删掉。 */}
                 <div className="vocabulary-stage-meta">
-                  <span>第{currentEntry.source.week}周 · {currentEntry.source.sourceLabel}</span>
-                  <div>
+                  <p className="vocabulary-run-crumb">
+                    <span>第{currentWeek}周</span>
+                    <ChevronRight size={12} aria-hidden="true" />
+                    <span>Day {currentEntry.source.group}</span>
+                    <span className="vocabulary-run-crumb-stage">{currentStageLabel}</span>
                     <span>词序 {currentGlobalOrder} / {program.entries.length}</span>
-                    <Button tone="subtle" size="md" className="vocabulary-stage-pause" icon={<ArrowLeft size={14} aria-hidden="true" />} onClick={pauseReview} disabled={requestBusy}>
-                      暂停并返回
-                    </Button>
-                  </div>
+                  </p>
+                  <Button tone="quiet" size="sm" className="vocabulary-stage-pause" icon={<ArrowLeft size={14} aria-hidden="true" />} onClick={pauseReview} disabled={requestBusy}>
+                    暂停并返回
+                  </Button>
                 </div>
+                <div className="vocabulary-run-collect">
+                  <span id="vocabulary-run-collect-label">收下 <strong>{unfamiliarEntries.length}</strong> / {reviewState.targetUnfamiliarCount}</span>
+                  <progress aria-labelledby="vocabulary-run-collect-label" max={reviewState.targetUnfamiliarCount} value={unfamiliarEntries.length} />
+                </div>
+                <article className="vocabulary-word-card">
                 <div className="vocabulary-word-block">
                   <h2>{currentEntry.headword}</h2>
                   <span>{currentEntry.partOfSpeech}</span>
@@ -1915,73 +1906,98 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                       </div>
                       <VocabularyPronunciationGuide entry={currentEntry} accent={reviewAccent} />
                       <VocabularyExample entry={currentEntry} />
-                      <dl>
-                        {currentEntry.source.metadata?.frequencyRank && (
-                          <div>
-                            <dt>频序</dt>
-                            <dd>第 {currentEntry.source.metadata.frequencyRank} 词</dd>
-                          </div>
-                        )}
-                        {currentEntry.source.metadata?.frequencyStage && (
-                          <div>
-                            <dt>频率</dt>
-                            <dd>{frequencyStageLabel(currentEntry.source.metadata.frequencyStage)}</dd>
-                          </div>
-                        )}
-                        {currentEntry.source.metadata?.curriculumTag && (
-                          <div>
-                            <dt>课标</dt>
-                            <dd>{curriculumTagLabel(currentEntry.source.metadata.curriculumTag)}</dd>
-                          </div>
-                        )}
-                        {currentEntry.source.metadata?.sourceGroup && (
-                          <div>
-                            <dt>源书组</dt>
-                            <dd>No. {currentEntry.source.metadata.sourceGroup}</dd>
-                          </div>
-                        )}
-                        {currentEntry.examFrequency != null && currentEntry.examFrequency > 0 && (
-                          <div>
-                            <dt>来源考频</dt>
-                            <dd>{currentEntry.examFrequency}考</dd>
-                          </div>
-                        )}
-                        <div>
-                          <dt>释义状态</dt>
-                          <dd>独立复核通过</dd>
-                        </div>
-                      </dl>
                     </div>
                   </div>
                 ) : (
                   <button className="vocabulary-reveal-prompt" type="button" onClick={reveal}>
-                    <Eye size={24} />
-                    <strong>先让孩子认词</strong>
-                    <span>按 → 再查看图片、音标和常见义</span>
+                    <Eye size={20} />
+                    <span>先让孩子自己认，认不出再看提示</span>
                   </button>
                 )}
+                  {/* 老师才看的词条信息（频序、考频、释义状态…）不再印在孩子的卡上，收进右上角 ⓘ（Owner 2026-11-17 定）。 */}
+                  <div className="vocabulary-entry-info" ref={entryInfoRef}>
+                    <Button
+                      tone="quiet"
+                      size="sm"
+                      className="vocabulary-entry-info-toggle"
+                      icon={<InfoCircle size={16} aria-hidden="true" />}
+                      label="词条信息（给老师看）"
+                      aria-expanded={entryInfoOpen}
+                      aria-controls="vocabulary-entry-info-panel"
+                      onClick={() => setEntryInfoOpen(!entryInfoOpen)}
+                    />
+                    {entryInfoOpen && (
+                      <div className="vocabulary-entry-info-panel" id="vocabulary-entry-info-panel">
+                        <dl>
+                          {currentEntry.source.metadata?.frequencyRank && (
+                            <div>
+                              <dt>频序</dt>
+                              <dd>第 {currentEntry.source.metadata.frequencyRank} 词</dd>
+                            </div>
+                          )}
+                          {currentEntry.source.metadata?.frequencyStage && (
+                            <div>
+                              <dt>频率</dt>
+                              <dd>{frequencyStageLabel(currentEntry.source.metadata.frequencyStage)}</dd>
+                            </div>
+                          )}
+                          {currentEntry.source.metadata?.curriculumTag && (
+                            <div>
+                              <dt>课标</dt>
+                              <dd>{curriculumTagLabel(currentEntry.source.metadata.curriculumTag)}</dd>
+                            </div>
+                          )}
+                          {currentEntry.source.metadata?.sourceGroup && (
+                            <div>
+                              <dt>源书组</dt>
+                              <dd>No. {currentEntry.source.metadata.sourceGroup}</dd>
+                            </div>
+                          )}
+                          {currentEntry.examFrequency != null && currentEntry.examFrequency > 0 && (
+                            <div>
+                              <dt>来源考频</dt>
+                              <dd>{currentEntry.examFrequency}考</dd>
+                            </div>
+                          )}
+                          <div>
+                            <dt>释义状态</dt>
+                            <dd>独立复核通过</dd>
+                          </div>
+                        </dl>
+                      </div>
+                    )}
+                  </div>
+                </article>
 
+                {/* 四个一样大的键改成两大两小：认识 / 不认识收下 是孩子每个词都要按的，放大；
+                    「上一个」「看提示」降成小字键。快捷键不变。第一个词「上一个」按不了时只留位置不显示。 */}
                 <div className="vocabulary-decision-controls" aria-label="过词判断">
-                  <button className="vocabulary-control vocabulary-control-back" type="button" onClick={undo} disabled={!reviewState.decisionOrder.length}>
-                    <RotateCcw size={20} />
-                    <span>上一个</span>
-                    <kbd>Delete</kbd>
-                  </button>
-                  <button className="vocabulary-control vocabulary-control-known" type="button" onClick={() => decide('known')} disabled={requestBusy}>
-                    <Check size={20} />
-                    <span>认识</span>
-                    <kbd>Enter</kbd>
-                  </button>
-                  <button className="vocabulary-control vocabulary-control-unfamiliar" type="button" onClick={() => decide('unfamiliar')} disabled={requestBusy}>
-                    <BookMarked size={20} />
-                    <span>不认识，收下</span>
-                    <kbd>Shift</kbd>
-                  </button>
-                  <button className="vocabulary-control vocabulary-control-reveal" type="button" onClick={reveal} disabled={reviewState.revealed}>
-                    <Eye size={20} />
-                    <span>看提示</span>
-                    <kbd>→</kbd>
-                  </button>
+                  <div className="vocabulary-decision-main">
+                    <button className="vocabulary-control vocabulary-control-known" type="button" onClick={() => decide('known')} disabled={requestBusy}>
+                      <Check size={20} />
+                      <span>认识</span>
+                      <kbd>Enter</kbd>
+                    </button>
+                    <button className="vocabulary-control vocabulary-control-unfamiliar" type="button" onClick={() => decide('unfamiliar')} disabled={requestBusy}>
+                      <BookMarked size={20} />
+                      <span>不认识，收下</span>
+                      <kbd>Shift</kbd>
+                    </button>
+                  </div>
+                  <div className="vocabulary-decision-minor">
+                    <button className="vocabulary-control vocabulary-control-back" type="button" onClick={undo} disabled={!reviewState.decisionOrder.length}>
+                      <RotateCcw size={14} />
+                      <span>上一个</span>
+                      <kbd>Delete</kbd>
+                    </button>
+                    {!reviewState.revealed && (
+                      <button className="vocabulary-control vocabulary-control-reveal" type="button" onClick={reveal}>
+                        <Eye size={14} />
+                        <span>看提示</span>
+                        <kbd>→</kbd>
+                      </button>
+                    )}
+                  </div>
                 </div>
                 {requestError && <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>}
               </>
@@ -2022,44 +2038,27 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             )}
           </section>
 
-          <aside className="vocabulary-collection-rail" aria-label="本轮生词">
-            <div className="vocabulary-collection-heading">
-              <div>
-                <h2>本轮生词</h2>
-                <span>{unfamiliarEntries.length} / {reviewState.targetUnfamiliarCount}</span>
+          {unfamiliarEntries.length > 0 && (
+            <section className="vocabulary-collected" aria-labelledby="vocabulary-collected-title">
+              <div className="vocabulary-collected-heading">
+                <h2 id="vocabulary-collected-title">本轮生词 {unfamiliarEntries.length} / {reviewState.targetUnfamiliarCount}</h2>
+                {/* 收满后上面已经有「复制清单」，这里不再放第二个。 */}
+                {completion === 'active' && (
+                  <Button tone="quiet" size="sm" className="vocabulary-collected-copy" onClick={() => void copyVocabularySet()} disabled={listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'} icon={<CopyFeedbackIcon size={14} state={listClipboard.state} />}>
+                    {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制'}
+                  </Button>
+                )}
               </div>
-              <progress max={reviewState.targetUnfamiliarCount} value={unfamiliarEntries.length} />
-            </div>
-
-            {unfamiliarEntries.length ? (
               <ol className="vocabulary-collected-list">
-                {unfamiliarEntries.map((entry, index) => (
+                {unfamiliarEntries.map((entry) => (
                   <li key={entry.id}>
-                    <span>{index + 1}</span>
-                    <div>
-                      <strong>{entry.headword}</strong>
-                      <small>{formatCoreMeanings(entry)}</small>
-                    </div>
+                    <strong>{entry.headword}</strong>
+                    <small>{getCoreMeanings(entry)[0] ?? ''}</small>
                   </li>
                 ))}
               </ol>
-            ) : (
-              <div className="vocabulary-collection-empty">
-                <BookMarked size={24} />
-                <p>按 Shift 判断“不认识”，生词会依次收在这里。</p>
-              </div>
-            )}
-
-            <div className="vocabulary-collection-actions">
-              <Button tone="strong" size="lg" onClick={() => void copyVocabularySet()} disabled={!unfamiliarEntries.length || listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'} icon={<CopyFeedbackIcon size={16} state={listClipboard.state} />}>
-                {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制'}
-              </Button>
-              {/* 等待第四轮（2026-11-15）：同上方下载键。没有生词组是 disabled，正在生成是 busy（字不换，图标自己演）。 */}
-              <Button tone="strong" size="lg" onClick={() => setDownloadMenuOpen(true)} disabled={!vocabularySet} busy={pdfDownloadBusy} iconShowsBusy icon={<DownloadFeedbackIcon size={16} working={pdfDownloadBusy} />}>
-                下载
-              </Button>
-            </div>
-          </aside>
+            </section>
+          )}
         </div>}
       </main>
 
