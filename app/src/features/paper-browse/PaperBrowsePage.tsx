@@ -2314,13 +2314,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       : { kind: 'question', questionId: lectureSelection.questionId }
   }, [lectureSelection])
 
-  // 刀 2 修复轮 ②: 七选五原文高亮 —— 讲评栏当前面板组是七选五时接入解析页
-  // harness 同款 useSevenChoicesPaperHighlights，随链条手风琴（
-  // openSevenChoiceQuestionIds）在整卷页卷面容器上亮衔接句。scroller ref
-  // 用整卷页卷面容器（`scrollerRef` → `.paper-browse-content`），不是某一
-  // 题组的局部容器 —— 该 hook 的坐标算法基于 rect 差值，document 级滚动
-  // 下与题组容器同款效果（两者都是 viewport-relative，差值不受页面滚动
-  // 影响，只随 hook 自身的 resize/effect-dep 重算刷新，见 hook 内部）。
+  // 七选五覆盖层与测量参照都在 .paper-browse-content 下。
+  // 覆盖层放在 .paper-browse-zoom 外，避免已缩放的 DOM Range 坐标再次缩放。
   const panelGroupModel = panelGroupId ? groupModels[panelGroupId] : undefined
   const sevenChoiceOverlay = useSevenChoicesPaperHighlights({
     enabled: lectureOpen && panelGroupModel?.kind === 'sevenChoices',
@@ -4433,6 +4428,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               ? null
               : renderBlock(block, index),
             )}
+          </div>
             {/*
               刀 2 修复轮 ②: 七选五衔接句高亮覆盖层。渲染条件与 hook 的
               `enabled` 同款门控（panelGroupModel?.kind === 'sevenChoices'）
@@ -4456,7 +4452,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 ))}
               </div>
             )}
-          </div>
         </div>
         {lectureOpen && (
           <aside className="paper-browse-lecture-panel" aria-label="讲评" ref={rightPanelRef}>
