@@ -69,7 +69,7 @@ import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { ensurePaperFonts, PaperFontError } from '../../shared-ui/papersurface/paperFontLoader'
 import { ListeningSegmentPlayer } from './ListeningSegmentPlayer'
 import { PaperReviewControls } from './PaperReviewControls'
-import { useCurrentUser, useIsOwnerView } from '../../auth/AuthGate'
+import { useIsOpenMode, useIsOwnerView } from '../../auth/AuthGate'
 import { firstListeningSectionRange, wholeListeningPaperRange } from '../../../../shared/paper-canonical/listeningPlayback.mjs'
 // one-sheet-paper: 卷面字体/边距 token 只读消费——同 PaperSurface.tsx /
 // WritingPaperPage.tsx 的注入手法（CSS custom properties on a shared
@@ -870,10 +870,11 @@ export function PaperBrowsePage(props: PaperBrowsePageProps): ReactNode {
 
 function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const isOwnerView = useIsOwnerView()
-  // 「检查这份卷」只给登录了的人（Owner 2026-11-16 定）：开放模式（还没有账号的新装、验证脚本的临时库）
+  // 「检查这份卷」开放模式下不出（Owner 2026-11-16 定）：开放模式（还没有账号的新装、验证脚本的临时库）
   // 也算 isOwnerView，但服务器那头 product-review 要真的 Owner 会话，开放模式下一定 403，这块只会出错；
-  // 而且开放模式部署给老师用时，老师不该看到这块。
-  const signedIn = useCurrentUser() !== null
+  // 而且开放模式部署给老师用时，老师不该看到这块。用 AuthGate 给的开放模式信号，不用「当前用户为空」——
+  // 没走 AuthGate 的验收 harness 里当前用户也为空（第一版这样写，verify-universal-nck1-publish 就找不到这块）。
+  const openMode = useIsOpenMode()
   const {
     paperId,
     reviewRevision,
@@ -4365,7 +4366,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         onBack={onBackToWorkbench}
         actionsSlot={topbarActionsSlot}
       />
-      {signedIn && (reviewRevision || (isOwnerView && canonicalConsumption?.publicationDigest && canonicalConsumption.sourceAssetVersion)) && <PaperReviewControls
+      {!openMode && (reviewRevision || (isOwnerView && canonicalConsumption?.publicationDigest && canonicalConsumption.sourceAssetVersion)) && <PaperReviewControls
         key={`${paperId}:${reviewRevision || canonicalConsumption?.publicationDigest}`}
         paperId={paperId}
         paperName={displayTitle}
