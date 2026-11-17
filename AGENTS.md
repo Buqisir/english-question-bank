@@ -148,8 +148,10 @@ uniquely supplies; otherwise keep it outside acceptance packs.
 ## GitHub Actions CI authority
 
 - `.github/workflows/verify.yml` runs on natural `pull_request` and `push` to
-  `main`. Every main push runs Full in its own SHA concurrency group without
-  replacing another push; PR runs may replace older runs for that PR. Independent workers
+  `main`. Every main push runs Full; main pushes share one queue, so the running
+  run is never cancelled and only the newest pending push waits (skipped
+  intermediate pushes show `cancelled`, which is not a failure; the next run
+  covers them). PR runs may replace older runs for that PR. Independent workers
   `verify-1`, `verify-2`, `e2e-seams-1`, `e2e-seams-2`, `e2e-render-1` and
   `e2e-render-2` use isolated runners within trusted-base boundaries; `verify`
   aggregates its two workers and `e2e` its four. Verify and render shards use
