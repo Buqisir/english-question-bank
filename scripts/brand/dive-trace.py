@@ -24,7 +24,7 @@ spec.loader.exec_module(t)
 
 PAL = np.array([[254, 254, 254], [237, 247, 242], [220, 238, 230], [111, 187, 159], [25, 29, 24]])
 BG, MUZ, BELLY, FUR, INK = range(5)
-RIM = 14
+RIM = int(__import__("os").environ.get("DIVE_RIM", "14"))
 FACE_K = 0.9  # 母版脸斑比草图的头宽，整张脸缩到 0.9，脸斑才落在头里
 FACE_SHIFT = (10, -6)  # 缩完往右上挪一点，让开头的左下沿（目测）
 MASTER_EYES = ((336.45, 371.25), (688.25, 371.25))
