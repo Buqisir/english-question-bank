@@ -303,7 +303,7 @@ P1 写的是「要什么」。下面是 Owner 实际否决或采纳时用的尺�
 | --- | --- | --- | --- | --- |
 | 放大镜 | Search（= DictionaryLookup，2026-11-17）、ZoomIn、ZoomOut、FileSearch、ReadingAnalysis | 镜内：空 / + / − / 纸上镜 / 纸角相让 | 6 枚同用镜，16px 下全靠一处细节 | 混淆矩阵重点测 Search ↔ DictionaryLookup ↔ FileSearch |
 | 纸 | Paper、PaperStudent、PaperCheck、PaperDownload、Papers、Document、QuestionGroup、Table、Clipboard、BoardList | 卷角 = 卷；无卷角 = 文档 | Paper ↔ Document 只差卷角，16px 卷角洞 1.07 × 描边，接近下限 | 卷角是「卷」的唯一身份，不得用在非卷对象 |
-| 词（实心 A 已撤销） | 实心 A 全部去掉：VocabularyNotebook、DictionaryLookup、BookMarked、Card、WordBubble | 新「词」部件：词卡（Card 单词卡 = 一张正放的卡；BookMarked 收下 = 词卡落进托盘；VocabularyReview 过生词入口 = 两张词卡错开）；WordBubble 只留气泡 | 三枚共用词卡，靠托盘 / 第二张卡区分；空卡 32px 下可能像空复选框（目测） | **Owner 2026-11-17 定全套去掉实心 A**（style.md「去掉实心 A」）：新图标不再用 A 表示「词」；查词已与 Search 同一枚，从放大镜组的区分细节里拿掉「实心 A」 |
+| 词（实心 A 已撤销） | 实心 A 全部去掉：VocabularyNotebook、DictionaryLookup、BookMarked、Card、WordBubble | 新「词」部件：词卡（Card 单词卡 = 一张向右斜的卡；BookMarked 收下 = 词卡落进托盘；VocabularyReview 过生词入口 = 两张词卡错开）；WordBubble 只留气泡 | 三枚共用词卡，靠托盘 / 第二张卡区分；单词卡正放时像空复选框（目测），所以斜放 | **Owner 2026-11-17 定全套去掉实心 A**（style.md「去掉实心 A」）：新图标不再用 A 表示「词」；查词已与 Search 同一枚，从放大镜组的区分细节里拿掉「实心 A」 |
 | 回转箭头 | RotateCcw、RefreshCw、History、Loader | — | **RotateCcw 一形多义**：重新加载、撤销、再听一遍、返回（用量表 §3） | **拆（Owner 2026-11-02，Q10）**：返回 → ArrowLeft；重新加载 → RefreshCw；RotateCcw 只留「撤销」与「再听一遍」。这两者是否再分，另议 |
 | 勾 | Check、CheckCircle、PaperCheck、ListChecks、BoardCheck、UserCheck | 勾在：裸 / 圆 / 卷 / 清单 / 板 / 人 | Check 同时表示「答对」和「完成」 | **不拆（Owner 2026-11-02）**：两者都是正向确认，属行业公认形 |
 | 复制与叠页 | Copy、Papers、QuestionBank、（相似篇章，已停） | 前后纸平移 / 双波纹卷 / 两张卷旋开 | 相似篇章已因「很像复制」否决（CR:1000） | 平移叠页只表示复制；多份卷用 Papers 的双波纹；两张卷旋开只表示题库（Owner 2026-11-13） |
