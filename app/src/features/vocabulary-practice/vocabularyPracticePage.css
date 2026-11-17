@@ -12,26 +12,9 @@
   padding: 20px 24px 48px;
 }
 
+/* 返回键是共享 Button 淡墨（2026-11-17）；左边负边距抵掉按钮内边距，字贴齐下面标题的左边。 */
 .vocabulary-practice-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  min-height: 36px;
-  padding: 6px 10px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
-  color: var(--ink);
-  font: inherit;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover);
-}
-
-.vocabulary-practice-back:hover {
-  border-color: var(--line-strong);
-  background: var(--surface-strong);
+  margin-left: calc(-1 * var(--eqb-space-3));
 }
 
 .vocabulary-practice-heading {
@@ -39,7 +22,7 @@
   align-items: end;
   justify-content: space-between;
   gap: 32px;
-  margin: 28px 0 22px;
+  margin: 20px 0 20px;
 }
 
 .vocabulary-practice-set {
@@ -65,26 +48,25 @@
   line-height: 1.5;
 }
 
+/* 轮次和配对数：原来是一个带边的小白框，2026-11-17 改成标题右边的几行字，不再多一层框。 */
 .vocabulary-practice-round {
   display: grid;
-  min-width: 190px;
-  gap: 5px;
-  padding: 14px 16px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
+  gap: 4px;
   text-align: right;
 }
 
 .vocabulary-practice-round strong {
   color: var(--eqb-color-text);
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
 }
 
 .vocabulary-practice-round span,
 .vocabulary-practice-round small {
-  color: var(--muted);
+  color: var(--eqb-color-text-muted);
   font-size: 12px;
+  font-variant-numeric: tabular-nums;
 }
 
 .vocabulary-practice-round small {
@@ -94,57 +76,12 @@
   gap: 5px;
 }
 
-.vocabulary-practice-modes {
-  display: inline-grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-  margin: 0 0 14px;
-}
-
-.vocabulary-practice-modes > span {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: center;
-  gap: 1px 8px;
-  min-width: 190px;
-  min-height: 48px;
-  box-sizing: border-box;
-  padding: 8px 12px;
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  background: var(--panel);
-  color: var(--ink);
-  font: inherit;
-  text-align: left;
-}
-
-.vocabulary-practice-modes > span {
-  border-color: var(--line-strong);
-  background: var(--surface-strong);
-}
-
-.vocabulary-practice-modes svg {
-  grid-row: 1 / span 2;
-  color: var(--ink);
-}
-
-.vocabulary-practice-modes strong {
-  font-size: 14px;
-  font-weight: 650;
-  line-height: 1.25;
-}
-
-.vocabulary-practice-modes small {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.25;
-}
-
+/* 牌桌：和过生词的卡片同一套纸面——白纸、--elev-2、卡片圆角、无描边（2026-11-17）。 */
 .vocabulary-practice-board-section {
   padding: 24px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
+  border-radius: var(--eqb-radius-card);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-2);
 }
 
 .vocabulary-match-board {
@@ -157,9 +94,9 @@
   height: 142px;
   padding: 0;
   border: 0;
-  border-radius: 12px;
+  border-radius: var(--eqb-radius-control);
   background: transparent;
-  color: var(--ink-strong);
+  color: var(--eqb-color-text);
   font: inherit;
   cursor: pointer;
   perspective: 800px;
@@ -167,7 +104,7 @@
 }
 
 .vocabulary-match-card:focus-visible {
-  outline: 2px solid var(--action);
+  outline: 2px solid var(--eqb-color-action);
   outline-offset: 3px;
 }
 
@@ -201,14 +138,15 @@
   flex-direction: column;
   gap: 8px;
   padding: 16px;
-  border: 1px solid var(--line-strong);
-  border-radius: 8px;
+  border-radius: var(--eqb-radius-control);
   backface-visibility: hidden;
 }
 
+/* 牌背：页底灰色块，没有描边；翻开的正面是白纸加一圈 --elev-1，像拿起来的一张卡。 */
 .vocabulary-match-card-back {
-  background: var(--surface-strong);
-  color: var(--muted);
+  background: var(--eqb-color-bg);
+  color: var(--eqb-color-text-faint);
+  transition: background-color var(--motion-fast) var(--ease-hover);
 }
 
 .vocabulary-match-card-back span {
@@ -217,24 +155,22 @@
 }
 
 .vocabulary-match-card:hover .vocabulary-match-card-back {
-  border-color: var(--line-strong);
-  background: var(--surface-strong);
+  background: var(--eqb-color-desk);
+  color: var(--eqb-color-text-muted);
 }
 
 .vocabulary-match-card-face {
-  border-color: var(--line-strong);
-  background: var(--panel);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-1);
   transform: rotateY(180deg);
   transition:
     background var(--motion-base) var(--ease-out),
-    border-color var(--motion-base) var(--ease-out),
     box-shadow var(--motion-base) var(--ease-out);
 }
 
+/* 配上了：内圈换成 2px 墨线，右上角墨色小勾（每页的点睛色留给别处，这里不用）。 */
 .vocabulary-match-card.is-confirming-match .vocabulary-match-card-face {
-  border-color: var(--line-strong);
-  background: var(--surface-strong);
-  box-shadow: none;
+  box-shadow: inset 0 0 0 2px var(--eqb-color-action);
   animation: vocabulary-match-confirm var(--motion-entrance) var(--ease-out);
 }
 
@@ -247,22 +183,22 @@
   height: 24px;
   place-items: center;
   border-radius: 50%;
-  background: var(--action);
-  color: var(--panel);
+  background: var(--eqb-color-action);
+  color: var(--eqb-color-paper);
   animation: vocabulary-match-confirmation-in var(--motion-base) var(--ease-out) both;
 }
 
 .vocabulary-match-card-face small {
-  color: var(--muted);
+  color: var(--eqb-color-text-faint);
   font-size: 12px;
   font-weight: 600;
 }
 
 .vocabulary-match-card-face strong {
   max-width: 100%;
-  color: var(--ink-strong);
+  color: var(--eqb-color-text);
   font-size: 16px;
-  font-weight: 650;
+  font-weight: 600;
   line-height: 1.35;
   overflow-wrap: anywhere;
   text-align: center;
@@ -301,7 +237,7 @@
 .vocabulary-practice-live {
   min-height: 20px;
   margin: 16px 0 0;
-  color: var(--muted);
+  color: var(--eqb-color-text-muted);
   font-size: 14px;
   line-height: 1.5;
   text-align: center;
@@ -315,16 +251,25 @@
   margin-top: var(--eqb-space-1);
 }
 
+/* 一轮配完：配上的卡都隐藏了，牌桌只剩一大片空白；这时收起牌桌（卡还在 DOM 里，位置不变），
+ * 只留最后一句播报和完成条，完成条居中成一张小结（2026-11-17）。 */
+.vocabulary-practice-board-section.is-complete .vocabulary-match-board {
+  display: none;
+}
+
+.vocabulary-practice-board-section.is-complete .vocabulary-practice-live {
+  margin-top: 0;
+}
+
 .vocabulary-practice-complete {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: 14px;
   margin-top: 20px;
-  padding: 16px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface-strong);
+  padding: 16px 20px;
+  border-radius: var(--eqb-radius-card);
+  background: var(--eqb-color-bg);
 }
 
 .vocabulary-practice-complete > svg {
@@ -337,27 +282,23 @@
 }
 
 .vocabulary-practice-complete h2 {
-  color: var(--ink-strong);
+  color: var(--eqb-color-text);
   font-size: 16px;
+  font-weight: 600;
 }
 
 .vocabulary-practice-complete p {
   margin-top: 4px;
-  color: var(--muted);
+  color: var(--eqb-color-text-muted);
   font-size: 14px;
 }
 
 .vocabulary-practice-complete > div:last-child {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: flex-end;
   gap: 8px;
-}
-
-.vocabulary-practice-complete button {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
 }
 
 .vocabulary-practice-status {
@@ -377,7 +318,7 @@
 .vocabulary-practice-status p {
   max-width: 46ch;
   margin: 0;
-  color: var(--muted);
+  color: var(--eqb-color-text-muted);
   line-height: 1.6;
 }
 
@@ -391,11 +332,6 @@
 .vocabulary-practice-skeleton :is(h1, p, strong, span, small) > .eqb-skeleton {
   display: inline-block;
   vertical-align: middle;
-}
-
-/* 练习方式里图标的位置：同 .vocabulary-practice-modes svg 占两行。 */
-.vocabulary-practice-modes > span > .eqb-skeleton {
-  grid-row: 1 / span 2;
 }
 
 /* 一张卡的位置：高同 .vocabulary-match-card（142，窄屏 126）。 */
@@ -415,26 +351,13 @@
     margin: 22px 0 16px;
   }
 
-  .vocabulary-practice-modes {
-    display: grid;
-    grid-template-columns: 1fr;
-    width: 100%;
-  }
-
-  .vocabulary-practice-modes > span {
-    min-width: 0;
-  }
-
+  /* 窄屏：轮次、配对数、读音排成一行，靠左。 */
   .vocabulary-practice-round {
-    min-width: 0;
-    grid-template-columns: auto auto;
-    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 12px;
     text-align: left;
-  }
-
-  .vocabulary-practice-round span,
-  .vocabulary-practice-round small {
-    justify-self: end;
   }
 
   .vocabulary-practice-board-section {

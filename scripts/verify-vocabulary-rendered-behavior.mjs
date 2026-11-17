@@ -722,6 +722,8 @@ async function verifyStudentProfiles(page) {
   await page.getByLabel('学生姓名').fill('小周')
   await page.getByRole('button', { name: '保存' }).click()
   await page.getByText('小周 · 下一词 1 / 60', { exact: true }).waitFor()
+  // 下拉的选项和页头那行字不是同一次渲染出来的：先等「小周」这一项挂上，再断言它在（2026-11-17 去抖，强度不变）。
+  await switcher.locator('option', { hasText: '小周' }).waitFor({ state: 'attached' })
   assert.equal(await switcher.locator('option').allTextContents().then((items) => items.includes('小周')), true)
   assert.equal(await page.locator('.vocabulary-recent-sets li').count(), 0)
   await page.screenshot({ path: path.join(evidenceRoot, 'student-profiles-desktop.png'), fullPage: true })
