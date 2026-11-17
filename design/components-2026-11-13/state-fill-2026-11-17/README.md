@@ -145,9 +145,39 @@ D 和 E 是第二版样张加的（artifact「灰态样张」）：D = 墨蓝 #1
 - 「已加入」「撤回」两块在小号纸里原来收成 24，Owner 2026-11-17 定也改 28：小号纸本身 28 高，悬停灰上下贴满纸、左右离纸边 2px，纸的大小和位置不变（实测 101×28，改前改后一样）。对比图 `before-after-28.png`。
 - 听写词组、复查行、听音频当前词三处本地测试站进不去，选中再悬停**只查了代码**。
 
+
+## 第三轮收尾：剩下没统一的（2026-11-17，Owner「做，按你建议的来」）
+
+扫全站 CSS：悬停 / 选中的底不是三个状态 token 的规则还有 57 条，分三类处理。
+
+**改了（约 30 条）**
+
+| 地方 | 做法 |
+|---|---|
+| 句子分析卡：图标键、难度、句中词悬停、图例悬停 | 改用悬停 / 选中 token（卡内变量 `--sa-chrome-hover`、`--sa-hover-bg` 指过去，带回退值，因为复刻台不加载 tokens.css） |
+| 句子分析卡：绿色成分标签、气泡键、局部键的悬停 / 按下 | 绿留着，上面叠同一种墨蓝：`color-mix(in srgb, #1F5A7A 8.7% / 13.9%, 绿)`。标签字在上面 5.71 / 5.31 : 1 |
+| 句子分析卡：按下的图例、按下的难度再悬停 | 改前和按下一模一样，现在深一档 |
+| 听力播放器 | 墨 7–8% 换成悬停 token；正在播是选中 token，再悬停深一档 |
+| 详情页危险键 | 淡红底换成悬停 token，危险只靠字色和边 |
+| 练字选单 | 薄荷浅底（悬停、选中同色）拆成悬停 / 选中 / 选中再悬停三档；练习方式选中加墨色边框作不靠灰的标记，单词行的标记是勾 |
+| 过生词进度格、「认识」键、生词组名输入框 | 页底色换成悬停 token；「认识」是白底键，叠层用 background-image |
+
+这些新加的悬停 / 选中范围也加进了淡墨字提一档那条（含句子分析卡自己的 `--sa-muted`）。
+
+**删了：死样式**（TSX 里没有任何地方用）
+`.analysis-disclosure*`、`.calibration-report*`、`.pi-topbar-back*`、`.pi-question-card*`、`.paper-block-actions`、`.basket-drawer-close`、`.pi-insight-panel-close`、`.teacher-difficulty-controls`。`.version-toggle` 没删：`verify-classic-retire-3` 断言它还在。
+
+**有意不改**
+- 实底主键、墨底键的悬停（不是灰底）；
+- 分段开关选中是白色胶囊浮起（听写设置、记录筛选、阅读题号、个人空间文件夹）；
+- 选中用墨底（词组序号、周次）；讲评「支持 / 陷阱」证据用语义色；
+- PaperSurface 两条（受限文件）；滚动条。
+
+句子分析卡改前改后：`before-after-sentence-analysis.png`（复刻台里拍的）。听力播放器、练字选单、过生词进度格、详情页危险键这次**没拍到**，只查了代码。
+
 ## 还没做的
 
-- 死样式（TSX 里没人用，没动）：`.version-toggle`、`.teacher-difficulty-controls`、`.pi-question-card`、`.basket-drawer-close`、`.paper-block-actions`、`.pi-insight-panel-close`。
+- 死样式只剩 `.version-toggle`（有测试断言它在）。
 
 ## 怎么复现（都用 scripts/component-inventory 的本地测试站）
 

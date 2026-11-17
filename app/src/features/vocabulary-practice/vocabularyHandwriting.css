@@ -85,10 +85,20 @@
   background: var(--panel);
 }
 
-.vocabulary-handwriting-selector-mode label:hover span,
-.vocabulary-handwriting-selector-mode label.is-selected span {
+/* 灰态底统一（Owner 2026-11-17 定 D）：原来悬停、选中都是薄荷浅底，分不开。
+ * 悬停叠悬停层；选中叠选中层，另用墨色边框当不靠灰的标记；选中再悬停深一档。白底留着，叠层用 background-image。 */
+.vocabulary-handwriting-selector-mode label:hover span {
   border-color: var(--line-strong);
-  background: var(--mint-soft);
+  background-image: linear-gradient(var(--eqb-color-state-hover), var(--eqb-color-state-hover));
+}
+
+.vocabulary-handwriting-selector-mode label.is-selected span {
+  border-color: var(--eqb-color-text);
+  background-image: linear-gradient(var(--eqb-color-state-selected), var(--eqb-color-state-selected));
+}
+
+.vocabulary-handwriting-selector-mode label.is-selected:hover span {
+  background-image: linear-gradient(var(--eqb-color-state-selected-hover), var(--eqb-color-state-selected-hover));
 }
 
 .vocabulary-handwriting-selector-mode input:focus-visible + span {
@@ -128,9 +138,17 @@
   cursor: pointer;
 }
 
-.vocabulary-handwriting-selector-list label:hover,
+/* 同上；单词行选中的标记是左边的勾。 */
+.vocabulary-handwriting-selector-list label:hover {
+  background-image: linear-gradient(var(--eqb-color-state-hover), var(--eqb-color-state-hover));
+}
+
 .vocabulary-handwriting-selector-list label.is-selected {
-  background: var(--mint-soft);
+  background-image: linear-gradient(var(--eqb-color-state-selected), var(--eqb-color-state-selected));
+}
+
+.vocabulary-handwriting-selector-list label.is-selected:hover {
+  background-image: linear-gradient(var(--eqb-color-state-selected-hover), var(--eqb-color-state-selected-hover));
 }
 
 .vocabulary-handwriting-selector-list input {

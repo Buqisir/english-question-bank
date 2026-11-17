@@ -7,8 +7,11 @@
   /* Resting capsules sit one step lighter so the selected fill reads clearly. */
   --sa-label-rest: #e5f1e9;
   --sa-label-edge: #bcd6c7;
-  --sa-action-hover: #cde5d7;
-  --sa-action-selected: #b4d8c4;
+  /* 绿色小块的悬停 / 选中：绿底上叠灰态底同一种墨蓝，深度和全站一样（Owner 2026-11-17 定 D）。
+     srgb 里 color-mix 两个不透明色 = 把墨蓝按这个比例盖在绿底上；8.7% / 13.9% 对应 tokens.css 的悬停 / 选中再悬停。
+     标签墨字在上面仍有 5.71 / 5.31 : 1。 */
+  --sa-action-hover: color-mix(in srgb, #1F5A7A 8.7%, var(--sa-label-bg));
+  --sa-action-selected: color-mix(in srgb, #1F5A7A 13.9%, var(--sa-label-bg));
   --sa-label-active: #5a8a72;
   --sa-label-ink: #2f5a45;
   --sa-ink: var(--desk-ink, #191D18);
@@ -17,7 +20,9 @@
   --sa-faint: var(--eqb-color-text-faint);
   --sa-trunk-line: var(--sa-muted);
   --sa-chrome-muted: var(--desk-muted, #60665C);
-  --sa-chrome-hover: var(--desk-hover, #E5EAE1);
+  /* 不带绿的键（图标键、难度、主键）悬停用全站灰态底；复刻台不加载 tokens.css，所以带回退值。 */
+  --sa-chrome-hover: var(--eqb-color-state-hover, rgba(31, 90, 122, 0.087));
+  --sa-chrome-selected-hover: var(--eqb-color-state-selected-hover, rgba(31, 90, 122, 0.139));
   --sa-surface: var(--eqb-color-paper, #ffffff);
   --sa-line: var(--desk-line, #E3E8DF);
   --sa-detail-bg: var(--desk-surface, #FAFCF8);
@@ -32,8 +37,8 @@
   --sa-subject-text: var(--sa-label-ink);
   /* Hover previews a click, so it stays out of the yellow answer family and
      borrows the Daydream desk colour beside the paper. */
-  /* Same sage as a hovered legend item: one hover colour across the card. */
-  --sa-hover-bg: var(--sa-label-bg);
+  /* 句子里的词悬停用全站灰态底（2026-11-17 起，原来是绿）：绿只留给「这是一个能点开的成分」本身。 */
+  --sa-hover-bg: var(--sa-chrome-hover);
   --sa-serif: 'EQB Termes', 'EQB Source Han Serif', serif;
   --sa-sans: Inter, 'PingFang SC', 'Hiragino Sans GB', ui-sans-serif, system-ui, sans-serif;
   --sa-stroke: 1.5px;
@@ -165,7 +170,7 @@
 
 .sa-icon-btn:active,
 .sa-main-btn:active {
-  background: var(--sa-chrome-hover);
+  background: var(--sa-chrome-selected-hover);
 }
 
 /* Sentence */
@@ -475,6 +480,7 @@
   cursor: pointer;
 }
 .sa-single-difficulty:hover { background: var(--sa-chrome-hover); }
+.sa-single-difficulty[aria-pressed="true"]:hover { background: var(--sa-action-hover); }
 .sa-single-difficulty[aria-pressed="true"] { background: var(--sa-label-bg); border-color: var(--sa-label-edge); color: var(--sa-label-ink); }
 
 .sa-bubble-title {
@@ -645,7 +651,7 @@ from { opacity: 0; }
 }
 
 .sa-main-btn[aria-pressed="true"] {
-  background: var(--desk-hover, #E5EAE1);
+  background: var(--eqb-color-state-selected, rgba(31, 90, 122, 0.087));
   color: var(--sa-ink);
 }
 
@@ -891,13 +897,18 @@ from { opacity: 0; }
 .sa-legend-pair > span { display: flex; flex-direction: column; align-items: center; }
 
 .sa-legend-item:hover:not(:disabled) {
-  background: var(--sa-label-bg);
+  background: var(--sa-chrome-hover);
 }
 
 .sa-legend-item[aria-pressed=true] {
   background: var(--sa-label-bg);
   border-color: var(--sa-label-edge);
   color: var(--sa-label-ink);
+}
+
+/* 按下的图例再悬停：绿底上叠一层，不换成灰（上面的悬停那条特指度更高，会把按下的绿盖掉）。 */
+.sa-legend-item[aria-pressed=true]:hover:not(:disabled) {
+  background: var(--sa-action-hover);
 }
 
 .sa-legend-item:disabled {
