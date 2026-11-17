@@ -298,9 +298,13 @@ assert('index.css imports shared tokens first', indexCss.startsWith('@import "./
 assert(
   'shared tokens expose core color and spacing variables',
   tokensCss.includes('--eqb-color-paper') &&
-    tokensCss.includes('--eqb-color-primary') &&
+    tokensCss.includes('--eqb-color-identity') &&
     tokensCss.includes('--eqb-space-1') &&
     tokensCss.includes('--eqb-space-5'),
+)
+assert(
+  'shared tokens no longer define the retired --eqb-color-primary (same value as identity, BRAND.md #125)',
+  !/--eqb-color-primary\s*:/.test(tokensCss),
 )
 
 if (failed > 0) {
