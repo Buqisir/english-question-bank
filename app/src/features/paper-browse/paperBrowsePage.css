@@ -2026,6 +2026,12 @@
   transform-origin: 20px 0;
 }
 
+/* 卷面每个文字尾巴（.ps-text-trail）各自是 z-index 5 的一层，后面的尾巴按文档顺序画在前面的上面，
+   打开的听力条会被下面几行的耳机图标压住。打开时把它所在的那层抬到卷面最上面；29/30 的讲评抽屉仍盖住它。 */
+.ps-text-trail:has(.listening-player[data-open]) {
+  z-index: 28;
+}
+
 @starting-style {
   .listening-player-card {
     opacity: 0;
