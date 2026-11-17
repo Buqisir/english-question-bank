@@ -190,9 +190,9 @@ import { isNarrativeContinuationWritingAnalysis } from '../../domain/paperAsset.
 import type { ListeningAnalysisV1 } from '../../domain/listeningAnalysis.ts'
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
+import { writingPromptBlocksForDisplay } from '../../../../shared/paper-canonical/writingPresentation.mjs'
 import {
   paperOpeningForConsumption,
-  coverNoticesCarrySourceNumbers,
   mockPaperCoverName,
   ownsCompletePaperOpening,
 } from '../../../../shared/paper-canonical/listeningPresentation.mjs'
@@ -2664,7 +2664,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     }
     if (entry.kind === 'errorCorrection') return (
       <div className="canonical-error-correction" data-canonical-group-id={groupId}>
-        {entry.paragraphs.map(paragraph => <p key={paragraph.paragraphId} data-canonical-paragraph-id={paragraph.paragraphId}>
+        {writingPromptBlocksForDisplay(entry.paragraphs).map(paragraph => <p key={paragraph.paragraphId} data-canonical-paragraph-id={paragraph.paragraphId}>
           {paragraph.nodes.map(node => node.text).join('')}
         </p>)}
       </div>
@@ -4405,10 +4405,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 )}
                 <h1 className="canonical-paper-cover-title" data-canonical-cover-title="">{listeningOpening.title}</h1>
                 <div className="canonical-paper-cover-notices" data-canonical-cover-notices="">
-                  {listeningOpening.notices.length > 0 && !coverNoticesCarrySourceNumbers(canonicalConsumption, listeningOpening) && <strong>注意事项：</strong>}
-                  {coverNoticesCarrySourceNumbers(canonicalConsumption, listeningOpening)
-                    ? listeningOpening.notices.map((notice) => <p key={notice}>{notice}</p>)
-                    : <ol>{listeningOpening.notices.map((notice) => <li key={notice}>{notice}</li>)}</ol>}
+                  <strong>注意事项：</strong>
+                  <ol>{listeningOpening.notices.map((notice) => <li key={notice}>{notice}</li>)}</ol>
                 </div>
               </header>
             )}

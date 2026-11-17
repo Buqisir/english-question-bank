@@ -2,7 +2,7 @@ import { segmentPaperText } from '../papersurface/segmentPaperText.mjs'
 import { grammarFillScreenRulingForCanonicalConsumption } from '../papersurface/blankRuling.mjs'
 import { translateAbcdPlanToPointPlacement } from '../paper-canonical/abcdLayout.mjs'
 import { projectListeningGroupPresentation } from '../paper-canonical/listeningPresentation.mjs'
-import { continuationWritingPresentation } from '../paper-canonical/writingPresentation.mjs'
+import { continuationWritingPresentation, writingPromptBlocksForDisplay } from '../paper-canonical/writingPresentation.mjs'
 import { blankPresentationParagraphs } from '../paper-canonical/blankPresentation.mjs'
 import { resolveConsumerPresentation } from '../paper-canonical/consumers.mjs'
 import {
@@ -437,7 +437,7 @@ export function buildCanonicalApplicationWritingConsumptionSurfaceData({
     ? canonicalGroup.sourceOwnedInstructions || []
     : []
   const promptBlocks = [
-    ...sourceBlocks,
+    ...writingPromptBlocksForDisplay(sourceBlocks),
     ...sourceOwnedInstructions.map((instruction) => ({
       nodeId: `source-instruction:${instruction.sourceBlockIndex}`,
       text: instruction.text,

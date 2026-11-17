@@ -1,10 +1,11 @@
-/* Source errors remain unmarked; generous leading supplies correction space. */
+/* Source errors remain unmarked; prose uses the shared paper body rhythm. */
 .canonical-error-correction {
   font-family: var(--paper-font-family, var(--ps-font-family, 'EQB Termes', 'EQB Source Han Serif', serif));
-  font-size: 12pt;
+  font-size: var(--paper-heading-size, var(--ps-font-size));
 }
 .canonical-error-correction p {
   margin: 0;
-  line-height: 2.5;
+  line-height: var(--paper-heading-line-height, var(--ps-line-height));
+  text-indent: var(--paper-passage-indent, var(--ps-passage-indent));
   white-space: pre-wrap;
 }
