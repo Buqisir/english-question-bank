@@ -35,7 +35,11 @@
   font-weight: 500;
   line-height: 1.2;
   padding: 5px 10px;
-  border-radius: 4px;
+  /* 灰态底（2026-11-17 Owner 照截图统一）：灰块最小 28、圆角 8；用负外边距抵掉多出来的尺寸，外边距盒和原来一样大，旁边的排版不动。
+     原高 14×1.2+10=26.8：现 28，上下各 −0.6。 */
+  min-height: 28px;
+  margin-block: -0.6px;
+  border-radius: var(--eqb-radius-control);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -166,9 +170,11 @@
   border: 0;
   background: transparent;
   padding: 4px;
-  min-width: 24px;
-  min-height: 24px;
-  border-radius: 4px;
+  /* 灰态底（2026-11-17 Owner 照截图统一）：灰块最小 28、圆角 8；用负外边距抵掉多出来的尺寸，外边距盒和原来一样大，旁边的排版不动。 原 24×24：现 28×28，四边 −2。 */
+  min-width: 28px;
+  min-height: 28px;
+  margin: -2px;
+  border-radius: var(--eqb-radius-control);
   color: var(--eqb-color-text-muted, #6b6e68);
   cursor: pointer;
   display: inline-flex;
@@ -470,9 +476,23 @@
   gap: 2px;
 }
 
-.paper-dictionary-ipa + .paper-dictionary-dialect,
+.paper-dictionary-ipa + .paper-dictionary-dialect {
+  margin-left: 2px;
+}
+
+/* 纯图标的发音键（没有「英 / 美」字）：原宽 14 图标 + 左右 4 = 22，撑到 28 见方，左右各 −3 抵掉。
+   跟在音标后面的原来左边多 2，所以那一个是 2 − 3 = −1。 */
+.paper-dictionary-play:not(:has(.paper-dictionary-dialect)) {
+  width: 28px;
+  margin-inline: -3px;
+}
+
 .paper-dictionary-ipa + .paper-dictionary-play {
   margin-left: 2px;
+}
+
+.paper-dictionary-ipa + .paper-dictionary-play:not(:has(.paper-dictionary-dialect)) {
+  margin-left: -1px;
 }
 
 .paper-dictionary-dialect {
@@ -503,12 +523,15 @@
 
 .paper-dictionary-play {
   align-self: center;
+  /* 灰态底（2026-11-17 Owner 照截图统一）：灰块最小 28、圆角 8；用负外边距抵掉多出来的尺寸，外边距盒和原来一样大，旁边的排版不动。
+     原高 20：现 28，上下各 −4。宽度不动（带「英 / 美」字的键本来就比 28 宽），只有纯图标的键在下一条撑成 28 见方。 */
   min-width: 20px;
-  height: 20px;
+  height: 28px;
+  margin-block: -4px;
   padding: 0 4px;
   gap: 2px;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: var(--eqb-radius-control);
   color: var(--eqb-color-text-muted, #6b6e68);
   transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
 }

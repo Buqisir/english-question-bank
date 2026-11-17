@@ -1,0 +1,92 @@
+{
+ "A 现状": {
+  "page": {
+   "hover": {
+    "hex": "#E6EDF0",
+    "dL": 3.0,
+    "muted": 4.62,
+    "text": 12.32
+   },
+   "selhover": {
+    "hex": "#DCE6EB",
+    "dL": 5.6,
+    "muted": 4.32,
+    "text": 11.5
+   }
+  },
+  "white": {
+   "hover": {
+    "hex": "#E6EDF0",
+    "dL": 6.7,
+    "muted": 4.62,
+    "text": 12.32
+   },
+   "selhover": {
+    "hex": "#DCE6EB",
+    "dL": 9.3,
+    "muted": 4.32,
+    "text": 11.5
+   }
+  }
+ },
+ "B 墨 6%/10%": {
+  "page": {
+   "hover": {
+    "hex": "#E4E9EB",
+    "dL": 4.3,
+    "muted": 4.47,
+    "text": 11.91
+   },
+   "selhover": {
+    "hex": "#DCE1E3",
+    "dL": 7.2,
+    "muted": 4.14,
+    "text": 11.04
+   }
+  },
+  "white": {
+   "hover": {
+    "hex": "#F1F2F3",
+    "dL": 4.5,
+    "muted": 4.89,
+    "text": 13.04
+   },
+   "selhover": {
+    "hex": "#E8EAEB",
+    "dL": 7.5,
+    "muted": 4.53,
+    "text": 12.07
+   }
+  }
+ },
+ "C 墨 8%/12%": {
+  "page": {
+   "hover": {
+    "hex": "#E0E5E7",
+    "dL": 5.7,
+    "muted": 4.3,
+    "text": 11.47
+   },
+   "selhover": {
+    "hex": "#D7DDDF",
+    "dL": 8.6,
+    "muted": 3.98,
+    "text": 10.62
+   }
+  },
+  "white": {
+   "hover": {
+    "hex": "#EDEEEF",
+    "dL": 6.0,
+    "muted": 4.71,
+    "text": 12.55
+   },
+   "selhover": {
+    "hex": "#E4E6E7",
+    "dL": 9.0,
+    "muted": 4.35,
+    "text": 11.6
+   }
+  }
+ }
+}

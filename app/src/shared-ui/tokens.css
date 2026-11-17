@@ -20,6 +20,13 @@
      全站灰阶，强调色每页最多一处，只给"现在最该点的那一下"。
      accent-fill = 雾薄荷，獭獭本色，给实心主按钮（配墨字 7.9）；
      accent = 同色相更纯更深的纯薄荷，给回车键、草稿卷小圆点这类细线和小点（对白 3.8）。 */
+  /* 灰态底三档（2026-11-17，Owner 要照 Claude 截图统一灰态；颜色深浅待定，先用现有两色起名）：
+     悬停 = 桌色；选中 = 桌色，但必须再带一个不靠灰的标记（字重、墨字、下划线、勾、图标、边线）；
+     鼠标停在已选中的项上 = 深一档的 border 色，否则看不出鼠标在它上面。
+     规范和清点见 design/components-2026-11-13/state-fill-2026-11-17/README.md。 */
+  --eqb-color-state-hover: var(--eqb-color-desk);
+  --eqb-color-state-selected: var(--eqb-color-desk);
+  --eqb-color-state-selected-hover: var(--eqb-color-border);
   --eqb-color-accent: #11957a;
   --eqb-color-accent-fill: #72bfa4;
   --eqb-color-accent-fill-hover: #63b497;

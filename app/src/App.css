@@ -3783,21 +3783,23 @@ p.concierge-empty {
 }
 
 .concierge-row-expand {
+  /* 灰态底（2026-11-17 Owner 照截图统一）：灰块最小 28、圆角 8；用负外边距抵掉多出来的尺寸，外边距盒和原来一样大，旁边的排版不动。
+     原 22×22、margin-top 1px：现 28×28，上 1−3=−2、其余 −3。 */
   flex: 0 0 auto;
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
+  margin: -2px -3px -3px;
   border: none;
   background: transparent;
   color: var(--desk-muted);
   font-size: 13px;
   line-height: 1;
-  border-radius: 4px;
+  border-radius: var(--eqb-radius-control);
   cursor: pointer;
   transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 1px;
 }
 
 .concierge-row-expand:hover {
@@ -4603,4 +4605,9 @@ p.concierge-empty {
 .concierge-group-index.fluid-hover-list {
   --fh-inset-x: var(--eqb-space-1);
   --fh-inset-y: var(--eqb-space-1);
+}
+
+/* 灰态底：展开着的卷头常亮桌色，鼠标停上去深一档，不然和悬停一样看不出变化。 */
+.concierge-paper-row.is-expanded .concierge-paper-row-head[data-fluid-hover-active] {
+  background: var(--eqb-color-state-selected-hover);
 }
