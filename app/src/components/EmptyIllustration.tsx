@@ -30,7 +30,8 @@ export function EmptyIllustration({ kind }: { kind: EmptyIllustrationKind }) {
         <>
           <path className="ill-paper" d="M4.365 18.617 Q4.365 20.653 6.91 20.653 H19.635 V16.326 C18.108 16.632 16.581 16.835 13.527 16.835 H6.91 Q4.365 16.835 4.365 18.617 Z" />
           <path className="ill-deep" d="M19.635 16.326 V3.347 H6.91 Q4.365 3.347 4.365 5.892 V18.617 Q4.365 16.835 6.91 16.835 H13.527 C16.581 16.835 18.108 16.632 19.635 16.326 Z" />
-          <path className="ill-paper" fillRule="evenodd" d="M8.183 13.527 L11.287 6.401 H12.713 L15.817 13.527 H14.189 L13.527 11.898 H10.473 L9.811 13.527 ZM11.023 10.524 H12.977 L12 8.03 Z" />
+          {/* 封面上原是一个 A；2026-11-17 Owner 定全套去掉实心 A，和图标一样换成书名签（图标描边 9.25–14.75、y 8，这里画成同宽的实心圆头条）。 */}
+          <rect className="ill-paper" x="8.125" y="6.875" width="7.75" height="2.25" rx="1.125" />
         </>
       )}
       {kind === 'paper-lined' && (
