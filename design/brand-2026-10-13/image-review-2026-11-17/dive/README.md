@@ -10,3 +10,8 @@
 - round2-board.png：线上线稿獭 / P3-1 描图放进登录页 / P3-1 / P3-2。
 
 累计生图 44 张。线上 login-otter.svg 未改。
+
+## 第三轮（prompts-round3.json，4 张，累计 48）
+Owner：「还是不好看，能不能给坐石獭獭参考，然后来个自然舒展的下潜」。
+R1/R2 都以坐石为参考，要求头身比例照坐石、只改姿势。R1 斜 35° 头朝左下，R2 侧身滑行。
+R1-1-trace.svg、R2-1-trace.svg 是描图；round3-board.png 是放进登录页的样子。
