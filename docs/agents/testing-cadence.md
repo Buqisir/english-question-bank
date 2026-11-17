@@ -62,7 +62,7 @@ evidence only while their inputs and running implementation remain unchanged;
 keep final outputs bound to the exact revision.
 
 默认直推后盯该 SHA 的自然 main `push` 完整 CI；部署只认最新 main 最新尝试
-的 8 个 job 全绿。main 按 SHA 分并发组，互不替换。无需强制 PR→main 两轮。
+的 8 个 job 全绿。main 的推送共用一条队列：正在跑的不取消，只留最新一次排队；被跳过的推送显示 cancelled，不算失败，由下一次运行覆盖。无需强制 PR→main 两轮。
 工具链或可选 PR 路径在触发验证前同步 main，完整 PR CI 绿后 squash 合并；
 随后 main 前进不因追平重跑 PR，部署仍等最新 main。旧 SHA/尝试不授权新版本。
 
