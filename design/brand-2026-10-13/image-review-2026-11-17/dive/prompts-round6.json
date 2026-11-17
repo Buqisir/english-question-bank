@@ -1,0 +1,15 @@
+{
+ "U1": {
+  "refs": [
+   "design/brand-2026-10-13/image-review-2026-11-17/dive/T1-1.png"
+  ],
+  "prompt": "STYLE FIRST: pure plain white background, absolutely nothing else - no water, no light rays, no bubbles, no waves, no blue. Flat vector mascot illustration with exactly four flat solid colours: fur #72BFA4, chest bib and belly #DDF1E8, muzzle #F2FAF6, eyes and nose #191D18. No gradients, no shading, no highlights, no shadows, no outlines, crisp clean edges. Redraw the attached otter in exactly the same diving pose, same angle, same small head and face, same long stretched body, same hind feet and tail. The front arms are LONG, like the sitting mascot otter: each arm is a long fur-coloured band from the shoulder folded along the chest, forearms reaching all the way to under the chin, ending in a small rounded paw; the two paws meet under the chin. Remove the whole underwater background."
+ },
+ "U2": {
+  "refs": [
+   "design/brand-2026-10-13/image-review-2026-11-17/dive/T1-1.png",
+   "design/brand-2026-10-13/image-review-2026-11-16/dive/source-otter-sit.png"
+  ],
+  "prompt": "STYLE FIRST: pure plain white background, absolutely nothing else - no water, no light rays, no bubbles, no waves, no blue. Flat vector mascot illustration with exactly four flat solid colours: fur #72BFA4, chest bib and belly #DDF1E8, muzzle #F2FAF6, eyes and nose #191D18. No gradients, no shading, no highlights, no shadows, no outlines, crisp clean edges. Image 1 gives the POSE: an otter diving diagonally toward the lower left, long relaxed stretched body, tail up at the upper right. Copy that pose exactly. Image 2 gives the CHARACTER: copy its head, face, proportions, long arms, wide flat hind feet and thick tapered tail, but do NOT copy its sitting pose or the rock. The front arms are LONG, like the sitting mascot otter: each arm is a long fur-coloured band from the shoulder folded along the chest, forearms reaching all the way to under the chin, ending in a small rounded paw; the two paws meet under the chin. "
+ }
+}
