@@ -67,7 +67,7 @@ html, body { margin: 0; background: var(--eqb-color-bg); }
 .q-actions .q-marking { min-height: 0; flex: 1 1 200px; }
 .q-submit { min-width: 160px; }
 .q-aside { font-size: var(--eqb-font-size-xs); color: var(--eqb-color-text-muted); }
-.q-card--reading .q-submit, .q-sheet .q-submit { align-self: flex-start; }
+.q-card--reading .q-submit { align-self: flex-start; }
 
 /* 2 答题卡 */
 .q-sheet { width: min(600px, 100%); padding: 32px 36px; gap: 16px; }
@@ -149,3 +149,8 @@ html, body { margin: 0; background: var(--eqb-color-bg); }
   .q-feedback-grid { grid-template-columns: minmax(0, 1fr); }
   .q-otter { width: 150px; margin-bottom: -26px; }
 }
+
+/* 答题卡：登录键居中，批改那一行放在键下面也居中（Owner 11-17「登录要不要居中一下」） */
+.q-sheet .q-actions { flex-direction: column; align-items: center; gap: 10px; }
+.q-sheet .q-actions .q-marking { flex: none; text-align: center; }
+.q-sheet .q-actions .q-marking p { justify-content: center; }
