@@ -1,9 +1,10 @@
-import { ArrowLeft, ArrowRight, Card, Check, Grid2X2, RotateCcw, Volume } from '../../icons'
+import { ArrowLeft, ArrowRight, Card, Check, RotateCcw, Volume } from '../../icons'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
 import { useAudioIconState } from '../../hooks/useAudioIconState'
 import { VolumeFeedbackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
+import { Button } from '../../shared-ui/Button.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
 import { Skeleton } from '../../shared-ui/Skeleton.tsx'
 import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
@@ -55,13 +56,6 @@ function VocabularyPracticeSkeleton() {
           <small><Skeleton width={64} height={10} />{'\u200b'}</small>
         </div>
       </header>
-      <div className="vocabulary-practice-modes">
-        <span>
-          <Skeleton width={16} height={16} />
-          <strong><Skeleton width={72} height={12} /></strong>
-          <small><Skeleton width={48} height={10} /></small>
-        </span>
-      </div>
       <section className="vocabulary-practice-board-section">
         <div className="vocabulary-match-board vocabulary-practice-skeleton-board">
           {Array.from({ length: SKELETON_CARD_COUNT }, (_, index) => (
@@ -210,10 +204,10 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
     <div className="vocabulary-practice-page">
       <AppTopbar variant="sub" pageTitle="趣味练习" {...shellNav} />
       <main className="vocabulary-practice-shell">
-        <button className="vocabulary-practice-back" type="button" onClick={onBackToSet}>
-          <ArrowLeft size={16} aria-hidden="true" />
+        {/* 2026-11-17 统一：返回键换成共享 Button 淡墨，和过生词、单词复习的返回一个样。 */}
+        <Button className="vocabulary-practice-back" tone="quiet" icon={<ArrowLeft size={16} aria-hidden="true" />} onClick={onBackToSet}>
           返回生词组
-        </button>
+        </Button>
 
         {opening && (
           <section className="vocabulary-practice-loading" role="status" aria-busy="true">
@@ -227,7 +221,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
             <Card size={32} aria-hidden="true" />
             <h1>这组卡片没有加载成功</h1>
             <p>{loadError}</p>
-            <button className="ghost-button" type="button" onClick={onBackToSet}>返回生词组</button>
+            <Button tone="strong" size="lg" onClick={onBackToSet}>返回生词组</Button>
           </section>
         )}
 
@@ -246,11 +240,7 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
               </div>
             </header>
 
-            <div className="vocabulary-practice-modes" aria-label="趣味练习方式">
-              <span aria-current="page"><Grid2X2 size={16} aria-hidden="true" /><strong>翻牌消消乐</strong><small>当前练习</small></span>
-            </div>
-
-            <section className="vocabulary-practice-board-section" aria-labelledby="vocabulary-match-board-title">
+            <section className={`vocabulary-practice-board-section${roundComplete ? ' is-complete' : ''}`} aria-labelledby="vocabulary-match-board-title">
               {/* 等待第五轮（2026-11-15）：原来写的 sr-only 全站没定义，这一行一直是看得见的大标题；改用 index.css 的 visually-hidden，只给读屏（牌桌的区域名）。 */}
               <h2 id="vocabulary-match-board-title" className="visually-hidden">单词配对卡片</h2>
               <div ref={boardRef} className="vocabulary-match-board">
@@ -309,15 +299,21 @@ export function VocabularyPracticePage({ setId, onBackToSet, shellNav }: Vocabul
                     <p>{allComplete ? `这组 ${vocabularySet.entryCount} 个生词已经全部配对。` : '下一轮会继续使用生词组中的后续单词。'}</p>
                   </div>
                   <div>
+                    <Button tone="quiet" onClick={onBackToSet}>返回生词组</Button>
+                    <Button
+                      ref={allComplete ? completionActionRef : undefined}
+                      tone={allComplete ? 'solid' : 'quiet'}
+                      size={allComplete ? 'lg' : 'md'}
+                      icon={<RotateCcw size={16} aria-hidden="true" />}
+                      onClick={() => startRound(roundIndex)}
+                    >
+                      再玩一次
+                    </Button>
                     {!allComplete && (
-                      <button ref={completionActionRef} className="primary-button" type="button" onClick={() => startRound(roundIndex + 1)}>
+                      <Button ref={completionActionRef} tone="solid" size="lg" onClick={() => startRound(roundIndex + 1)}>
                         下一轮 <ArrowRight size={16} aria-hidden="true" />
-                      </button>
+                      </Button>
                     )}
-                    <button ref={allComplete ? completionActionRef : undefined} className="ghost-button" type="button" onClick={() => startRound(roundIndex)}>
-                      <RotateCcw size={16} aria-hidden="true" /> 再玩一次
-                    </button>
-                    <button className="ghost-button" type="button" onClick={onBackToSet}>返回生词组</button>
                   </div>
                 </div>
               )}
