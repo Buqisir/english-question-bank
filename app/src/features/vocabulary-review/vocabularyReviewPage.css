@@ -34,6 +34,12 @@
   letter-spacing: -0.01em;
 }
 
+.vocabulary-review-heading-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
 .vocabulary-overall-progress {
   display: grid;
   grid-template-columns: auto 96px auto;
@@ -858,200 +864,50 @@
   font-size: 12px;
 }
 
+/* ---------- 开始页、收满、生词组（过生词改版第二步，Owner 2026-11-17）：都是居中的白卡，和过词屏的词卡同一套 ---------- */
+.vocabulary-run-setup,
+.vocabulary-completion-state,
+.vocabulary-set-panel {
+  width: min(560px, 100%);
+  margin: 8px auto 0;
+  padding: 32px;
+  border-radius: var(--eqb-radius-card);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-2);
+}
+
+.vocabulary-run-setup,
 .vocabulary-completion-state {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex: 1 1 auto;
   flex-direction: column;
   text-align: center;
 }
 
+.vocabulary-set-panel {
+  width: min(720px, 100%);
+  padding: 28px 32px;
+}
+
+.vocabulary-run-setup > svg,
 .vocabulary-completion-state > svg {
   color: var(--ink);
 }
 
+.vocabulary-run-setup h2,
 .vocabulary-completion-state h2 {
-  margin: 20px 0 8px;
+  margin: 14px 0 6px;
   color: var(--eqb-color-text);
   font-size: 20px;
   font-weight: 600;
 }
 
-.vocabulary-completion-state p {
+.vocabulary-run-setup p,
+.vocabulary-completion-state > p {
   margin: 0;
-  color: var(--eqb-color-text-muted);
-  font-size: 14px;
-}
-
-.vocabulary-completion-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 28px;
-}
-
-.vocabulary-download-menu {
-  position: relative;
-}
-
-.vocabulary-download-menu > #vocabulary-download-options {
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  z-index: 30;
-  display: grid;
-  width: 360px;
-  padding: 6px;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  background: var(--panel);
-  box-shadow: var(--elev-3);
-  transform: translateX(-50%);
-}
-
-.vocabulary-download-option {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: stretch;
-  gap: 2px;
-}
-
-#vocabulary-download-options.fluid-hover-list {
-  --fh-radius: 4px;
-}
-
-.vocabulary-download-option.is-bundle {
-  margin-top: 4px;
-  padding-top: 4px;
-  border-top: 1px solid var(--line);
-}
-
-.vocabulary-download-menu > #vocabulary-download-options button {
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  width: 100%;
-  min-height: 44px;
-  padding: 8px 10px;
-  border: 0;
-  border-radius: 4px;
-  background: transparent;
-  color: var(--ink-strong);
-  font: inherit;
-  font-size: 14px;
-  font-weight: 650;
-  text-align: left;
-}
-
-.vocabulary-download-option > button:first-child {
-  display: grid;
-}
-
-.vocabulary-download-option > button:first-child strong {
-  font-weight: 650;
-  white-space: nowrap;
-}
-
-.vocabulary-download-option > button:first-child span {
   color: var(--muted);
-  font-size: 12px;
-  font-weight: 400;
-}
-
-.vocabulary-download-menu > #vocabulary-download-options .vocabulary-download-save-as {
-  justify-content: center;
-  width: auto;
-  min-width: 96px;
-  color: var(--ink);
-  font-size: 12px;
-  font-weight: 650;
-}
-
-@media (max-width: 520px) {
-  .vocabulary-download-menu > #vocabulary-download-options {
-    width: min(340px, calc(100vw - 24px));
-  }
-
-  .vocabulary-download-option {
-    grid-template-columns: minmax(0, 1fr) 88px;
-  }
-
-  .vocabulary-download-menu > #vocabulary-download-options .vocabulary-download-save-as {
-    min-width: 0;
-  }
-}
-
-.vocabulary-share-download-confirmation {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 18px;
-  width: min(680px, 100%);
-  margin: 16px auto 0;
-  padding: 14px 16px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface-strong);
-  text-align: left;
-}
-
-.vocabulary-share-download-confirmation > div:first-child {
-  display: grid;
-  gap: 4px;
-}
-
-.vocabulary-share-download-confirmation strong {
-  color: var(--ink-strong);
   font-size: 14px;
-}
-
-/* 只管说明文字。原来写成 .vocabulary-share-download-confirmation span（0,1,1），会压过 .eqb-button-label（0,1,0），
- * 把右边两个键的字改成 12px 次要灰；构件厂第 4 步第十页收窄到左边那块。 */
-.vocabulary-share-download-confirmation > div:first-child span {
-  color: var(--muted);
-  font-size: 12px;
   line-height: 1.5;
-}
-
-.vocabulary-share-download-confirmation > div:last-child {
-  display: flex;
-  gap: 8px;
-}
-
-/* 「单词纸名称」换成 shared-ui/TextField（字段构件第二轮 2026-11-15），标签、框和「保存名称」那一行的排法归 field.css。
- * 这里只留多宽、放在哪。原来的 label / input 两条（38 高、14 / 500 字、深一档的边）删了。 */
-.vocabulary-set-title-control {
-  width: min(440px, 100%);
-  margin: 22px auto 0;
-  text-align: left;
-}
-
-.vocabulary-completion-actions > .vocabulary-set-title-control {
-  flex: 0 0 100%;
-  margin-top: 0;
-}
-
-/* 「下载读音」换成 shared-ui/SelectField（标签在左、框在右，字段构件第二轮 2026-11-15）。原来是外面一圈边、里面无边的下拉，
- * 现在边画在下拉上（和别处字段一样），外圈那几条删了。这里只留不占满、不加外边距。 */
-.vocabulary-completion-actions .vocabulary-print-accent-control {
-  width: auto;
-  margin: 0;
-}
-
-.vocabulary-run-setup {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: min(620px, calc(100vh - 180px));
-  flex-direction: column;
-  padding: 32px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
-  text-align: center;
 }
 
 /* 过词开始页的灰块（等待第五轮 2026-11-15，RunSetupSkeleton）：容器和各段用开始页同一套 class，这里只管灰块怎么坐进去。
@@ -1060,12 +916,6 @@
 .vocabulary-run-skeleton :is(h2, h3, p, span) > .eqb-skeleton {
   display: inline-block;
   vertical-align: middle;
-}
-
-/* 「开始过词」那一排真的是底对齐（align-items: end），灰块照样底对齐；「读音」分段的灰块不缩。
- * 覆盖：本条 (0,2,0) 和 .vocabulary-run-start-row (0,1,0) 不冲突属性，只是给灰块的「读音」那一格一个宽度。 */
-.vocabulary-run-skeleton .vocabulary-run-start-row > .eqb-field {
-  flex: 0 0 auto;
 }
 
 /* 右上那一栏的灰块（等待第六轮 2026-11-15，HeadingActionsSkeleton）：容器和各段用真栏同一套 class，这里只管灰块怎么坐进去。
@@ -1093,58 +943,63 @@
   padding: 0 var(--eqb-space-2);
 }
 
-.vocabulary-run-setup > svg {
-  color: var(--ink);
-}
-
-.vocabulary-run-setup h2 {
-  margin: 20px 0 8px;
-  color: var(--eqb-color-text);
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.vocabulary-run-setup p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-/* 开始页里的字段（目标生词数、直接生成词表、重新打开时的单词纸名称）换成 shared-ui/Field（字段构件第二轮 2026-11-15），
- * 原来这里管 label 的两条删了。开始页整块居中排字，字段的标签和说明要靠左：本条 (0,2,0) 覆盖外层 text-align: center（继承来的）。 */
+/* 开始页里的字段整块居中排字，标签和说明要靠左：本条 (0,2,0) 覆盖外层 text-align: center（继承来的）。 */
 .vocabulary-run-setup .eqb-field {
   text-align: left;
 }
 
-.vocabulary-run-fields {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 12px;
-  width: min(260px, 100%);
-  margin-top: 24px;
-}
-
-
+/* 目标生词数和读音一排，底对齐。 */
 .vocabulary-run-start-row {
   display: flex;
   align-items: end;
   justify-content: center;
-  gap: 12px;
-  width: min(680px, 100%);
-  margin-top: 16px;
+  gap: 16px;
+  width: 100%;
+  margin-top: 24px;
 }
 
-/* 「过词读音」换成 SegmentedField（切换组那一轮 2026-11-15）：标签在左（layout inline），样子归 field.css 分段选择。
- * 原来的外框（2px 内边距、深一档边、8px）、4px 圆角的键、600 字重几条删了。 */
+.vocabulary-run-target {
+  width: 120px;
+}
 
-/* 开始页的输入框、多行框（原来 44 高、16 字、深一档的边、textarea 至少 112 高）归 field.css 大号（36 高、14 字；多行高跟 rows）。 */
+/* 分段键 32 高、输入框 36 高：分段那一格撑到 36、竖着居中，两个标签就在同一条线上。 */
+.vocabulary-run-start-row .vocabulary-review-accent-control .eqb-field-body {
+  min-height: 36px;
+  align-items: center;
+}
 
+.vocabulary-run-skeleton .vocabulary-run-start-row > .eqb-field:not(.vocabulary-run-target) {
+  flex: 0 0 auto;
+}
+
+.vocabulary-run-start {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* 从哪个词开始：一行淡字，「换一个」打开选起点。 */
+.vocabulary-run-setup .vocabulary-run-from {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2px 4px;
+  min-height: 28px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.vocabulary-run-from strong {
+  color: var(--eqb-color-text);
+  font-weight: 600;
+}
+
+/* 已有单词直接生成：分隔线下面一段，字小一号，不和上面的主线抢。 */
 .vocabulary-direct-set {
-  width: min(580px, 100%);
-  margin-top: 32px;
+  width: 100%;
+  margin-top: 28px;
   padding-top: 24px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--eqb-color-border);
   text-align: left;
 }
 
@@ -1157,9 +1012,9 @@
 
 .vocabulary-direct-set-heading h3 {
   margin: 0;
-  color: var(--ink-strong);
-  font-size: 16px;
-  font-weight: 650;
+  color: var(--eqb-color-text);
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .vocabulary-direct-set-heading span {
@@ -1169,7 +1024,7 @@
 
 .vocabulary-run-setup .vocabulary-direct-set-input {
   width: 100%;
-  margin: 16px 0 12px;
+  margin: 12px 0;
 }
 
 .vocabulary-direct-set-feedback {
@@ -1198,15 +1053,12 @@
   overflow-wrap: anywhere;
 }
 
-.vocabulary-set-reopen .vocabulary-completion-actions {
-  margin-top: 24px;
-}
-
+/* 最近生词组：一行一张小纸（e1 影子），不再是描边框。 */
 .vocabulary-recent-sets {
-  width: min(580px, 100%);
-  margin-top: 32px;
+  width: 100%;
+  margin-top: 28px;
   padding-top: 24px;
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--eqb-color-border);
   text-align: left;
 }
 
@@ -1219,9 +1071,9 @@
 
 .vocabulary-recent-sets h3 {
   margin: 0;
-  color: var(--ink-strong);
-  font-size: 16px;
-  font-weight: 650;
+  color: var(--eqb-color-text);
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .vocabulary-recent-sets > div > span {
@@ -1232,7 +1084,7 @@
 .vocabulary-recent-set-list {
   --fh-radius: 8px;
   display: grid;
-  gap: 6px;
+  gap: 8px;
   margin: 12px 0 0;
   padding: 0;
   list-style: none;
@@ -1246,11 +1098,18 @@
   gap: 16px;
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--surface);
+  border: 0;
+  border-radius: var(--eqb-radius-control);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-1);
   color: var(--muted);
+  font: inherit;
   text-align: left;
+  cursor: pointer;
+}
+
+.vocabulary-recent-sets button:hover {
+  box-shadow: var(--elev-2);
 }
 
 .vocabulary-recent-sets button > span:first-child {
@@ -1284,6 +1143,280 @@
   -webkit-line-clamp: 2;
 }
 
+/* 词表（收满和生词组共用）：一行一个词，左词右义，编号淡字。 */
+.vocabulary-set-list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--eqb-color-border);
+  list-style: none;
+  counter-reset: vocabulary-set;
+  text-align: left;
+}
+
+.vocabulary-set-list li {
+  display: grid;
+  grid-template-columns: 28px minmax(96px, 160px) minmax(0, 1fr);
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 4px;
+  border-bottom: 1px solid var(--eqb-color-border);
+  counter-increment: vocabulary-set;
+}
+
+.vocabulary-set-list li::before {
+  content: counter(vocabulary-set);
+  color: var(--eqb-color-text-faint);
+  font-size: 12px;
+}
+
+.vocabulary-set-list strong {
+  color: var(--ink-strong);
+  font-weight: 600;
+}
+
+.vocabulary-set-list span {
+  color: var(--eqb-color-text-secondary);
+  font-size: 14px;
+}
+
+.vocabulary-completion-state .vocabulary-set-list {
+  margin-top: 24px;
+}
+
+.vocabulary-completion-primary {
+  min-width: 220px;
+  margin-top: 24px;
+}
+
+.vocabulary-completion-minor {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin-top: 8px;
+}
+
+/* 生词组卡：书签图标 + 能改名的大字标题。名字框平时不画框，指上去垫一层底，点进去才有焦点圈。 */
+.vocabulary-set-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+}
+
+.vocabulary-set-head > svg {
+  flex: 0 0 auto;
+}
+
+.vocabulary-set-title-control {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+/* 覆盖：(0,3,0) 盖过 field.css 大号 .eqb-field-control[data-size='lg'] 和窄屏那条 (0,2,0) 的字号、高、边。 */
+.vocabulary-set-title-control .eqb-field-control[data-size] {
+  height: 40px;
+  padding: 0 6px;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+  color: var(--ink-strong);
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.vocabulary-set-title-control .eqb-field-control[data-size]:hover:not(:focus-visible) {
+  background: var(--eqb-color-bg);
+}
+
+.vocabulary-set-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  min-height: 28px;
+  margin: 0 0 20px 38px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.vocabulary-set-share-on {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--eqb-color-accent);
+}
+
+.vocabulary-set-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 32px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* 一排动作：读音、下载（主键）、两种练习；最右边是「返回」或「接着过下一轮」。 */
+.vocabulary-set-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.vocabulary-set-actions-spacer {
+  flex: 1 1 0;
+}
+
+.vocabulary-set-actions .vocabulary-print-accent-control {
+  width: auto;
+  margin: 0;
+}
+
+/* 下载菜单：往下开、左边对齐，一项一行，右边「另存为…」。 */
+.vocabulary-download-menu {
+  position: relative;
+}
+
+.vocabulary-download-menu > #vocabulary-download-options {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 30;
+  display: grid;
+  width: 360px;
+  padding: 6px;
+  border-radius: var(--eqb-radius-control);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-3);
+}
+
+.vocabulary-download-option {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  gap: 2px;
+}
+
+#vocabulary-download-options.fluid-hover-list {
+  --fh-radius: 4px;
+}
+
+.vocabulary-download-option.is-bundle {
+  margin-top: 4px;
+  padding-top: 4px;
+  border-top: 1px solid var(--eqb-color-border);
+}
+
+.vocabulary-download-menu > #vocabulary-download-options button {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: var(--ink-strong);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left;
+}
+
+/* 覆盖：(1,2,1) 盖过上一条 #… button (1,1,1) 的 inline-flex，名字和说明上下两行。 */
+#vocabulary-download-options .vocabulary-download-option > button:first-child {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+}
+
+.vocabulary-download-option > button:first-child strong {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.vocabulary-download-option > button:first-child span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.vocabulary-download-menu > #vocabulary-download-options .vocabulary-download-save-as {
+  justify-content: center;
+  width: auto;
+  min-width: 88px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.vocabulary-set-actions {
+  position: relative;
+}
+
+@media (max-width: 520px) {
+  /* 窄屏下载菜单按整排动作的宽度展开（挂在 .vocabulary-set-actions 上），不从「下载」键往右伸出屏幕。 */
+  .vocabulary-set-actions .vocabulary-download-menu {
+    position: static;
+  }
+
+  .vocabulary-download-menu > #vocabulary-download-options {
+    right: 0;
+    width: auto;
+    margin-top: 4px;
+    top: auto;
+  }
+
+  .vocabulary-download-option {
+    grid-template-columns: minmax(0, 1fr) 88px;
+  }
+
+  .vocabulary-download-menu > #vocabulary-download-options .vocabulary-download-save-as {
+    min-width: 0;
+  }
+}
+
+.vocabulary-share-download-confirmation {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  width: min(680px, 100%);
+  margin: 16px auto 0;
+  padding: 14px 16px;
+  border-radius: var(--eqb-radius-control);
+  background: var(--eqb-color-bg);
+  text-align: left;
+}
+
+.vocabulary-share-download-confirmation > div:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.vocabulary-share-download-confirmation strong {
+  color: var(--ink-strong);
+  font-size: 14px;
+}
+
+/* 只管说明文字。原来写成 .vocabulary-share-download-confirmation span（0,1,1），会压过 .eqb-button-label（0,1,0），
+ * 把右边两个键的字改成 12px 次要灰；构件厂第 4 步第十页收窄到左边那块。 */
+.vocabulary-share-download-confirmation > div:first-child span {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.vocabulary-share-download-confirmation > div:last-child {
+  display: flex;
+  gap: 8px;
+}
+
 /* 过生词各处的出错行：样子归 shared-ui/Notice（2026-11-15，原来是危险色 14 号字，带三个 !important 压过 .vocabulary-run-setup p）。
  * 换成 Notice 以后不是 <p> 了，不再被那条压，!important 一起去掉；这里只留上面隔 12。
  * 类名留着：服务器出单词纸 PDF 时按它读出错的字（server/vocabulary/vocabularyPdfRenderer.mjs）。
@@ -1292,12 +1425,6 @@
 .eqb-notice.vocabulary-request-error,
 .eqb-notice.vocabulary-download-wait {
   margin-top: var(--eqb-space-3);
-}
-
-.vocabulary-share-ready {
-  margin-top: 16px !important;
-  color: var(--eqb-color-text) !important;
-  font-size: 14px !important;
 }
 
 .vocabulary-print-sheet {
@@ -1437,19 +1564,40 @@
     gap: 4px;
   }
 
+  /* 窄屏卡片内衬收小；目标数和读音仍排一行（390 宽放得下）。 */
+  .vocabulary-run-setup,
+  .vocabulary-completion-state,
+  .vocabulary-set-panel {
+    padding: 24px 18px;
+  }
+
   .vocabulary-run-start-row {
-    align-items: stretch;
-    flex-direction: column;
+    gap: 12px;
   }
 
-  /* 窄屏标签在左、分段靠右（照原来的 space-between）。字段是两列格子，控件那一格是 flex 行，往右推。
-   * 本条 (0,2,0) 给 field.css .eqb-field-body 加 justify-content，那边没写，不冲突。 */
-  .vocabulary-review-accent-control .eqb-field-body {
-    justify-content: flex-end;
+  /* 词表窄屏：编号一格，词和意思上下两行。 */
+  .vocabulary-set-list li {
+    grid-template-columns: 22px minmax(0, 1fr);
+    row-gap: 0;
   }
 
-  .vocabulary-run-start-row > .eqb-button {
+  .vocabulary-set-list span {
+    grid-column: 2;
+  }
+
+  .vocabulary-set-meta {
+    margin-left: 0;
+  }
+
+  .vocabulary-completion-primary {
     width: 100%;
+    min-width: 0;
+  }
+
+  /* 动作一排折行时，「返回 / 接着过下一轮」自己占一行靠右。 */
+  .vocabulary-set-actions-spacer {
+    flex-basis: 100%;
+    height: 0;
   }
 
   .vocabulary-share-download-confirmation {
