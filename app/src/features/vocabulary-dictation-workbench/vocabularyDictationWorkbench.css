@@ -90,7 +90,10 @@
 }
 
 .dictation-workbench-tabs {
-  --fh-radius: 0;
+  /* 灰态底（2026-11-17 Owner 照截图统一）：分区标签的灰块 32 高、8 圆角，左右各多出 8px 包住字，
+     不再是贴着整条标签栏上下通高的直角块。 */
+  --fh-inset-y: calc((var(--fh-h) - 32px) / 2);
+  --fh-inset-x: calc(-1 * var(--eqb-space-2));
   display: flex;
   min-width: 0;
   flex: 1;

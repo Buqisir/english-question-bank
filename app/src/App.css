@@ -39,7 +39,12 @@
   --fh-w: 0px;
   --fh-h: 0px;
   --fh-o: 0;
-  --fh-radius: 0px;
+  /* 灰态底（2026-11-17 Owner：照 Claude 侧栏截图的圆角和大小统一）：灰块一律 control 8 圆角；
+     放在板里的整行列表把灰块往里收 4px（--fh-inset-x/y），不贴板边，和板的 12 圆角同心（12 − 4 = 8）。
+     胶囊芯片（--eqb-radius-pill）照旧，胶囊只给标签类。 */
+  --fh-radius: var(--eqb-radius-control);
+  --fh-inset-x: 0px;
+  --fh-inset-y: 0px;
 }
 
 .fluid-hover-list::before {
@@ -47,12 +52,12 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: var(--fh-w);
-  height: var(--fh-h);
+  width: calc(var(--fh-w) - 2 * var(--fh-inset-x));
+  height: calc(var(--fh-h) - 2 * var(--fh-inset-y));
   border-radius: var(--fh-radius);
   background: var(--desk-hover, #E5EAE1);
   opacity: var(--fh-o);
-  transform: translate(var(--fh-x), var(--fh-y));
+  transform: translate(calc(var(--fh-x) + var(--fh-inset-x)), calc(var(--fh-y) + var(--fh-inset-y)));
   will-change: transform;
   pointer-events: none;
   transition:
@@ -4592,4 +4597,10 @@ p.concierge-empty {
 
 @media (prefers-reduced-motion: reduce) {
   .basket-chip-dot { animation: none; }
+}
+
+/* 灰态底（2026-11-17 Owner 照截图统一）：卷行里展开的题组列表，悬停灰块和板里的行一样往里收 4px、8 圆角。 */
+.concierge-group-index.fluid-hover-list {
+  --fh-inset-x: var(--eqb-space-1);
+  --fh-inset-y: var(--eqb-space-1);
 }

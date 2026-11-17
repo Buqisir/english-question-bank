@@ -156,7 +156,9 @@ button.my-space-folder-button { cursor: pointer; }
    --eqb-color-border-subtle；换成板的一圈 --eqb-color-border（DESIGN.md §4「板只用 1px --desk-border 一圈边」，
    和首页、浏览的列表板同一个样子），边深了一档，里面的行宽了 2px（实边原来占位）。 */
 .my-space-file-list {
-  --fh-radius: 0;
+  /* 灰态底（2026-11-17）：和别的板里的行一样，往里收 4px、8 圆角。 */
+  --fh-inset-x: var(--eqb-space-1);
+  --fh-inset-y: var(--eqb-space-1);
 }
 
 /* 文件行是 shared-ui/Row（2026-11-15）：定位、box-sizing、行间分隔线（RowList 的 li + li）在 row.css，
