@@ -29,6 +29,16 @@ export function useIsOwnerView(): boolean {
   return useContext(IsOwnerViewContext)
 }
 
+// 开放模式（authRequired: false，还没有账号的新装 / 验证脚本的临时库）的正面信号（2026-11-16 加）。
+// 只有 AuthGate 判定 'open' 时才是 true；没走到 AuthGate 的地方（验收用的单页 harness）默认 false，
+// 和上面 IsOwnerViewContext 一样按「单用户 Owner」处理，不会被误当成开放模式。
+// 用它而不是 `useCurrentUser() === null`：后者在没有 AuthGate 的 harness 里也是 null。
+const IsOpenModeContext = createContext<boolean>(false)
+
+export function useIsOpenMode(): boolean {
+  return useContext(IsOpenModeContext)
+}
+
 type GateState =
   | { status: 'loading' }
   | { status: 'open' }
@@ -85,7 +95,9 @@ export function AuthGate({ children }: { children: ReactNode }) {
   const isOwnerView = state.status !== 'authenticated' || state.user.role === 'owner'
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <IsOwnerViewContext.Provider value={isOwnerView}>{children}</IsOwnerViewContext.Provider>
+      <IsOwnerViewContext.Provider value={isOwnerView}>
+        <IsOpenModeContext.Provider value={state.status === 'open'}>{children}</IsOpenModeContext.Provider>
+      </IsOwnerViewContext.Provider>
     </CurrentUserContext.Provider>
   )
 }
