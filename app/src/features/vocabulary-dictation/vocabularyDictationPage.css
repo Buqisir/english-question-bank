@@ -42,9 +42,10 @@
 .vocabulary-dictation-answer-confirm,
 .vocabulary-dictation-answers,
 .vocabulary-dictation-resume {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
+  border: 0;
+  border-radius: var(--eqb-radius-card);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-1);
 }
 
 .vocabulary-dictation-stage {
@@ -188,9 +189,9 @@
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 1px solid var(--line);
+  border: 1px solid transparent;
   border-radius: 50%;
-  background: var(--panel);
+  background: var(--eqb-color-bg);
   color: var(--ink);
 }
 
@@ -231,17 +232,26 @@
 }
 
 .vocabulary-dictation-settings {
+  /* 宽屏下原来掉进 220 宽的左栏，七个键挤成竖排字；改成横跨两栏。 */
+  grid-column: 1 / -1;
   display: grid;
   grid-template-columns: 1fr 1.4fr;
   gap: 18px 16px;
 }
 
 .vocabulary-dictation-settings fieldset {
-  display: flex;
-  gap: 6px;
+  min-width: 0;
   margin: 0;
   padding: 0;
   border: 0;
+}
+
+/* 胶囊分段：和 SegmentedField（扫码听音频页「发音」「每词播放」用的那个）同一种做法：没有底槽，项透明，选中项纸面加 elev-1。
+   这里的键要留 role=button + aria-pressed（行为测试按「3遍」键找），所以只照抄样式，不换构件。 */
+.vocabulary-dictation-segments {
+  display: flex;
+  gap: 2px;
+  min-width: 0;
 }
 
 .vocabulary-dictation-settings legend {
@@ -258,19 +268,22 @@
   align-items: center;
   justify-content: center;
   flex: 1;
-  min-height: 36px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 650;
+  min-width: 0;
+  min-height: 32px;
+  border: 0;
+  border-radius: var(--eqb-radius-pill);
+  background: transparent;
+  color: var(--eqb-color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
 }
 
 .vocabulary-dictation-settings fieldset button.is-selected,
 .vocabulary-dictation-settings fieldset label.is-selected {
-  border-color: var(--line-strong);
-  background: var(--surface-strong);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-1);
   /* 选中态用墨，不用墨绿 #1e4a3a（BRAND.md §1.5 第 72 条：选中态不用薄荷；2026-11-16 色板外颜色收回）。 */
   color: var(--eqb-color-text);
 }
@@ -359,9 +372,9 @@
   gap: 7px;
   min-height: 40px;
   padding: 8px 14px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
+  border: 1px solid transparent;
+  border-radius: var(--eqb-radius-control);
+  background: var(--eqb-color-bg);
   color: var(--ink);
   font: inherit;
   font-size: 14px;
@@ -480,8 +493,12 @@
 @media (hover: hover) and (pointer: fine) {
   .vocabulary-dictation-page button:hover:not(:disabled),
   .vocabulary-dictation-message button:hover {
-    border-color: var(--line-strong);
-    background: var(--surface-strong);
+    border-color: transparent;
+    background: var(--eqb-color-desk);
+  }
+
+  .vocabulary-dictation-settings fieldset button.is-selected:hover {
+    background: var(--eqb-color-paper);
   }
 
   .vocabulary-dictation-page button.primary:hover,
@@ -518,7 +535,7 @@
   align-items: flex-start;
 }
 
-/* 设置里的一组（真页面是 fieldset + legend）：说明一行 12px、下空 8，下面一排 36 高的键平分一行，间距 6。 */
+/* 设置里的一组（真页面是 fieldset + legend）：说明一行 12px、下空 8，下面一排 32 高的胶囊键平分一行，间距 2。 */
 .vocabulary-dictation-skeleton-legend {
   margin: 0 0 8px;
   font-size: 12px;
@@ -526,7 +543,7 @@
 
 .vocabulary-dictation-skeleton-fieldset > div {
   display: flex;
-  gap: 6px;
+  gap: 2px;
 }
 
 .vocabulary-dictation-skeleton-fieldset > div > .eqb-skeleton {
