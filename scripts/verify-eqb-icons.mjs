@@ -335,11 +335,11 @@ try {
         else if (!paths[0].getAttribute('d').startsWith('M7.383 3.009 H16.617 Q19.776 3.009 19.776 6.168 V14.819 C')) failures.push(`paper-lined/${sample.size}: share the paper body`)
       }
       if (sample.name === 'word-bubble') {
-        // 语义第三轮 ② B2+（Owner 2026-11-03）：一只闭合圆气泡 + 与单词卡同形的实心 A，不用夹板、不加勾。
+        // 语义第三轮 ② B2+（Owner 2026-11-03）：一只闭合圆气泡，不用夹板、不加勾。2026-11-17 Owner 定全套去掉实心 A，气泡里不再放字母。
         const svgEl = parse(sample.line)
         const paths = [...svgEl.querySelectorAll('path')]
         const letter = paths.find((path) => path.getAttribute('fill') === 'currentColor')
-        if (paths.length !== 2 || !letter || !/[zZ]\s*$/.test(paths[0].getAttribute('d')) || (paths[0].getAttribute('d').match(/[mM]/g) ?? []).length !== 1 || svgEl.querySelectorAll('[stroke-width], [data-stroke-small]').length) failures.push(`word-bubble/${sample.size}: one closed bubble and one solid A`)
+        if (paths.length !== 1 || letter || !/[zZ]\s*$/.test(paths[0].getAttribute('d')) || (paths[0].getAttribute('d').match(/[mM]/g) ?? []).length !== 1 || svgEl.querySelectorAll('[stroke-width], [data-stroke-small]').length) failures.push(`word-bubble/${sample.size}: one closed bubble, no letter`)
       }
       if (sample.name === 'link') {
         // 第 6 组 G4：两段内钩沿原方向收 0.5，与对面链环留缝。
