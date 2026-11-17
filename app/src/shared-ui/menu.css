@@ -87,7 +87,7 @@
 
 /* 键盘焦点：桌色底（和悬停一样）加 2px 石板墨焦点环，环收在项里面，免得盖到相邻项。 */
 .eqb-menu-item:focus-visible {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
   outline: 2px solid var(--eqb-color-action);
   outline-offset: -2px;
 }

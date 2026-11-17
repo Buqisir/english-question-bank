@@ -55,7 +55,7 @@
   width: calc(var(--fh-w) - 2 * var(--fh-inset-x));
   height: calc(var(--fh-h) - 2 * var(--fh-inset-y));
   border-radius: var(--fh-radius);
-  background: var(--desk-hover, #E5EAE1);
+  background: var(--eqb-color-state-hover);
   opacity: var(--fh-o);
   transform: translate(calc(var(--fh-x) + var(--fh-inset-x)), calc(var(--fh-y) + var(--fh-inset-y)));
   will-change: transform;
@@ -388,7 +388,7 @@
 }
 
 .topbar-actions.fluid-hover-list::before {
-  background: var(--eqb-color-desk, #E9ECE6);
+  background: var(--eqb-color-state-hover);
 }
 
 .topbar-user-group {
@@ -486,7 +486,7 @@ button:disabled {
 }
 
 .ghost-button:hover:not(:disabled) {
-  background: var(--surface-strong);
+  background: var(--eqb-color-state-hover);
 }
 
 .detail-button {
@@ -508,7 +508,7 @@ button:disabled {
 
 .detail-button:hover {
   color: var(--ink);
-  background: var(--surface-strong);
+  background: var(--eqb-color-state-hover);
 }
 
 .workbench {
@@ -1543,7 +1543,7 @@ button:disabled {
 
 .icon-button:hover {
   color: var(--ink);
-  background: var(--surface-strong);
+  background: var(--eqb-color-state-hover);
 }
 
 .entry-form fieldset {
@@ -2756,7 +2756,7 @@ button:disabled {
 }
 
 .concierge-browse-chips.fluid-hover-list::before {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
 }
 
 /* 搜索框换成 shared-ui/SearchField（构件厂，2026-11-15）：框、输入框、清除键、提交键的样子都搬进
@@ -3227,7 +3227,7 @@ p.concierge-empty {
 .concierge-row:hover,
 .concierge-row:focus-visible,
 .concierge-row:focus-within {
-  background: var(--desk-hover);
+  background: var(--eqb-color-state-hover);
   box-shadow: none;
 }
 
@@ -3320,7 +3320,7 @@ p.concierge-empty {
 }
 
 .concierge-action:hover:not(:disabled) {
-  background: var(--desk-hover);
+  background: var(--eqb-color-state-hover);
 }
 
 .concierge-action:focus-visible {
@@ -3355,7 +3355,7 @@ p.concierge-empty {
 /* 找题台顶栏原来 64 高、导航键 36（navSize="lg"）；Owner 2026-11-16 定全站顶栏统一 48，这两条都拿掉了。 */
 
 .app-shell:has(.concierge-desk) .topbar-actions.fluid-hover-list::before {
-  background: var(--desk-hover);
+  background: var(--eqb-color-state-hover);
 }
 
 .app-shell.home-mode-ai > .topbar {
@@ -3754,7 +3754,7 @@ p.concierge-empty {
  * 看不出能点、能移除（协调方审 2026-11-14）。悬停、键盘焦点照 Button：悬停那条 (0,4,0) 也是桌色底，样子不变。
  * 覆盖：本条 (0,2,0) 盖过 button.css .eqb-button 的 background: transparent (0,1,0)。 */
 .eqb-button.concierge-active-filter-chip {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-selected);
 }
 
 /* 悬停（构件收尾 2026-11-15）：静止已经垫桌色，Button 的悬停也是桌色，原来指上去一点变化都没有。照 Button 自己
@@ -3763,7 +3763,7 @@ p.concierge-empty {
  * 覆盖：本条 (0,5,0) 盖过 button.css 墨字悬停那条 .eqb-button[data-tone='strong']:hover:not(…) (0,4,0) 的桌色底
  * （多写一个 [data-tone]，不靠两份 css 谁后加载）。 */
 .eqb-button.concierge-active-filter-chip[data-tone]:hover:not(:disabled, [aria-disabled='true']) {
-  background: var(--eqb-color-border);
+  background: var(--eqb-color-state-selected-hover);
 }
 
 /* ── Intake batch panel: quiet variant aligned with the rest of the intake page ── */
@@ -3803,7 +3803,7 @@ p.concierge-empty {
 }
 
 .concierge-row-expand:hover {
-  background: var(--desk-hover);
+  background: var(--eqb-color-state-hover);
   color: var(--desk-ink);
 }
 
@@ -3821,7 +3821,7 @@ p.concierge-empty {
 }
 
 .concierge-row-expand:focus-visible {
-  background: var(--desk-hover);
+  background: var(--eqb-color-state-hover);
   outline: var(--focus-ring);
   outline-offset: 2px;
 }
@@ -4079,7 +4079,6 @@ p.concierge-empty {
 
 .concierge-paper-row:focus-within .concierge-paper-row-head,
 .concierge-paper-row:focus-visible .concierge-paper-row-head {
-  background: var(--desk-hover);
   box-shadow: none;
 }
 
@@ -4089,11 +4088,30 @@ p.concierge-empty {
   outline-offset: -2px;
 }
 
-.concierge-paper-row.is-expanded .concierge-paper-row-head,
-.concierge-paper-row.is-expanded:hover .concierge-paper-row-head,
-.concierge-paper-row.is-expanded:focus-within .concierge-paper-row-head,
-.concierge-paper-row.is-expanded:focus-visible .concierge-paper-row-head {
-  background: var(--desk-hover);
+/* 卷头的灰块（2026-11-17 Owner 定）：不再是整条直角贴边，和别的行一样四边收 4、圆角 8。
+   画在 ::before 上，卷头本身的盒子、排版都不动；和行列表的悬停滑块（同样收 4）对齐。 */
+.concierge-paper-row-head {
+  position: relative;
+  isolation: isolate;
+}
+
+.concierge-paper-row-head::before {
+  content: '';
+  position: absolute;
+  inset: var(--eqb-space-1);
+  z-index: -1;
+  border-radius: var(--eqb-radius-control);
+  background: transparent;
+  pointer-events: none;
+}
+
+.concierge-paper-row:focus-within .concierge-paper-row-head::before,
+.concierge-paper-row:focus-visible .concierge-paper-row-head::before {
+  background: var(--eqb-color-state-hover);
+}
+
+.concierge-paper-row.is-expanded .concierge-paper-row-head::before {
+  background: var(--eqb-color-state-selected);
 }
 
 /* home-editorial round 2 (方向 C) — feed rows drop the leading year column
@@ -4607,7 +4625,39 @@ p.concierge-empty {
   --fh-inset-y: var(--eqb-space-1);
 }
 
-/* 灰态底：展开着的卷头常亮桌色，鼠标停上去深一档，不然和悬停一样看不出变化。 */
-.concierge-paper-row.is-expanded .concierge-paper-row-head[data-fluid-hover-active] {
+/* 灰态底：展开着的卷头常亮，鼠标停上去深一档，不然和悬停一样看不出变化。 */
+.concierge-paper-row.is-expanded .concierge-paper-row-head[data-fluid-hover-active]::before {
   background: var(--eqb-color-state-selected-hover);
+}
+
+/* 灰态底：别叠两层（2026-11-17 D 雾蓝是半透明的）。选中项自己画了底色，鼠标停在它上面时，
+   列表的悬停滑块就藏起来，不然两层叠在一起比「选中再悬停」还深。只列自己有底色的选中项；
+   只靠字重、下划线表示选中的（整卷左栏、听写分区标签）不在这里，它们照常用滑块。 */
+.fluid-hover-list:has(
+  .concierge-paper-row.is-expanded .concierge-paper-row-head[data-fluid-hover-active],
+  .eqb-chip[aria-pressed='true'][data-fluid-hover-active],
+  .eqb-button[aria-expanded='true'][data-fluid-hover-active],
+  .dictation-set-row.is-selected[data-fluid-hover-active],
+  button.is-current[data-fluid-hover-active]
+)::before {
+  opacity: 0;
+}
+
+/* 灰态底：灰块上的淡墨小字换成次墨。淡墨 #5A6C75 在页面底上本来只有 4.99:1，压在悬停灰上
+   掉到 4.4 左右；次墨在最深的「选中再悬停」上也有 6.05:1。用改变量的办法，块里所有用淡墨的字一起换。 */
+:where(
+  [data-fluid-hover-active],
+  .eqb-row:hover,
+  .concierge-row:hover,
+  .eqb-surface[data-interactive]:hover,
+  .eqb-chip[aria-pressed='true'],
+  .concierge-paper-row.is-expanded .concierge-paper-row-head,
+  .dictation-set-row.is-selected,
+  .dictation-task-list article.is-selected,
+  .vocabulary-listen-list li button.is-current
+) {
+  --eqb-color-text-muted: var(--eqb-color-text-secondary);
+  --desk-muted: var(--eqb-color-text-secondary);
+  --muted: var(--eqb-color-text-secondary);
+  --blue-text: var(--eqb-color-text-secondary);
 }

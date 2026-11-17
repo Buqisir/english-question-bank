@@ -740,7 +740,7 @@ console.log('\nTest 12: Quiet first-screen — landing hero gone; STARTER_CHIPS 
   assert('browse chip text uses muted ink token', /color:\s*var\(--eqb-color-text-muted\)/i.test(chipRule), '')
 
   const chipSelectedRule = chipCss.match(/\.eqb-chip\[data-kind='toggle'\]\[aria-pressed='true'\]\s*\{[^}]*\}/)?.[0] || ''
-  assert('selected chip is grey-filled, not accent (全站灰阶)', /background:\s*var\(--eqb-color-desk\)/i.test(chipSelectedRule), chipSelectedRule)
+  assert('selected chip is grey-filled, not accent (全站灰阶，Owner 2026-11-17 定 D：选中底 token)', /background:\s*var\(--eqb-color-state-selected\)/i.test(chipSelectedRule), chipSelectedRule)
   assert('selected chip text is body ink', /color:\s*var\(--eqb-color-text\)/i.test(chipSelectedRule), chipSelectedRule)
   assert('selected chip is NOT oxblood #B8323C', !/#B8323C/i.test(chipSelectedRule), chipSelectedRule)
 
@@ -806,14 +806,14 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
   // token form on the same background+box-shadow pair, still no transform.
   assert('paper-row has soft transition (no transform)', /transition:\s*background\s*var\(--motion-fast\)\s*var\(--ease-hover\),\s*box-shadow\s*var\(--motion-fast\)\s*var\(--ease-hover\)/.test(paperRowRule), `got: ${paperRowRule}`)
   // Fluid hover (2026-09-15): the row's hover surface is the shared
-  // .fluid-hover-list::before highlight (desk-hover), not a per-row :hover;
+  // .fluid-hover-list::before highlight (state-hover token), not a per-row :hover;
   // keyboard focus keeps the per-row surface.
-  assert('fluid hover highlight uses desk hover surface', /\.fluid-hover-list::before \{[\s\S]{0,400}background:\s*var\(--desk-hover/.test(css), '')
-  assert('paper-row focus keeps desk hover surface', /\.concierge-paper-row:focus-within \.concierge-paper-row-head,\s*\.concierge-paper-row:focus-visible \.concierge-paper-row-head \{\s*background:\s*var\(--desk-hover\)/.test(css), '')
+  assert('fluid hover highlight uses the hover state token', /\.fluid-hover-list::before \{[\s\S]{0,400}background:\s*var\(--eqb-color-state-hover\)/.test(css), '')
+  assert('paper-row focus paints the hover state on the inset head layer', /\.concierge-paper-row:focus-within \.concierge-paper-row-head::before,\s*\.concierge-paper-row:focus-visible \.concierge-paper-row-head::before \{\s*background:\s*var\(--eqb-color-state-hover\)/.test(css), '')
   assert('paper-row no longer paints its own :hover surface', !/\.concierge-paper-row:hover \.concierge-paper-row-head/.test(css), '')
   assert(
-    'expanded paper header stays on desk hover surface',
-    /\.concierge-paper-row\.is-expanded[\s\S]{0,120}\.concierge-paper-row-head[\s\S]{0,200}background:\s*var\(--desk-hover\)/.test(css),
+    'expanded paper header uses the selected state on the inset head layer',
+    /\.concierge-paper-row\.is-expanded \.concierge-paper-row-head::before \{\s*background:\s*var\(--eqb-color-state-selected\)/.test(css),
     '',
   )
 

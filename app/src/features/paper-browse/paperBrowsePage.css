@@ -1660,7 +1660,7 @@
 
 .similar-rcard--checked {
   border-color: var(--line-strong);
-  background: var(--surface-strong);
+  background: var(--eqb-color-state-selected);
 }
 
 .similar-rcard input[type='checkbox'] {
@@ -1812,7 +1812,7 @@
 .fluid-hover-list .similar-passages-panel .similar-rcard-actions > .eqb-button[data-tone='strong']:hover:not(:disabled, [aria-disabled='true']),
 .fluid-hover-list .similar-passages-panel .similar-rcard-actions > .eqb-draft-add > .eqb-button[data-tone='strong']:hover:not(:disabled, [aria-disabled='true']),
 .fluid-hover-list .similar-passages-panel .similar-rcard-actions > .eqb-draft-add .eqb-button.eqb-draft-add-undo:hover:not(:disabled, [aria-disabled='true']) {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
 }
 
 /* Owner 2026-11-14 决定 #1：面板头上的「收起」换成淡墨小号以后，在首页（面板整个在 FluidHoverList 里、不在任何一行里）
@@ -1821,7 +1821,7 @@
  * 覆盖：本条 (0,7,0) 盖过那条透明 (0,5,0)，也盖过「嵌在被选中行里的键垫 border 色」(0,6,0)（面板不在行里，碰不上）。
  * 同一个面板里的「重试」见下一条。 */
 .fluid-hover-list .similar-passages-panel .similar-passages-head > .eqb-button.similar-backlink:hover:not(:disabled, [aria-disabled='true']) {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
 }
 
 /* Owner 2026-11-14 第 20 条：相似篇章面板出错时的「重试」（A1 README 第 5 节第 3 问说的那个键）悬停也垫桌色，
@@ -1831,7 +1831,7 @@
  * 详情页、草稿卷换篇栏的面板不在滑动列表里，本来就垫桌色，这条碰不到它们。
  * 覆盖：本条 (0,7,0) 盖过那条透明 (0,5,0)，也盖过「嵌在被选中行里的键垫 border 色」(0,6,0)（面板不在行里，碰不上）。 */
 .fluid-hover-list .similar-passages-panel .similar-rail-error > .eqb-button.eqb-notice-action:hover:not(:disabled, [aria-disabled='true']) {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
 }
 
 .paper-browse-listening {

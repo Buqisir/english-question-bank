@@ -139,7 +139,7 @@
 }
 
 .eqb-search-submit:hover:not(:disabled) {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
 }
 
 /* 按下去缩一点：一天按几十次的提交键要确认「听到了」。 */

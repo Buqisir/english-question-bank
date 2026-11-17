@@ -3,7 +3,7 @@
  * 白底、e1、墨字，底、边、字三处一起变（BRAND.md §5.5，DESIGN.md §5「Proposal → Decision」）。
  * 不用薄荷绿、不加侧边线、不打勾动画。高度和同一档的 Button 一样，放在原来那个键的位置上。
  * 第二轮（Owner 2026-11-14）：纸里的「已加入」是个链接，点了打开草稿卷。平时样子和第一轮一样（墨字、无下划线），
- * 悬停垫桌色、键盘焦点走 2px 石板墨焦点环，照 button.css；它和「撤回」一样是纸里矮一档的小块，纸两边各留 2px。 */
+ * 悬停垫悬停灰、键盘焦点走 2px 石板墨焦点环，照 button.css；它和「撤回」一样是纸里矮一档的小块，纸两边各留 2px。 */
 
 .eqb-draft-add {
   display: inline-flex;
@@ -58,10 +58,10 @@
   height: 24px;
 }
 
-/* 悬停垫桌色，和 button.css 透明底几种语气的悬停一样；纸是白底，在被滑块选中的行里（滑块也是桌色）照样看得出。
+/* 悬停垫悬停灰，和 button.css 透明底几种语气的悬停一样；悬停灰半透明，叠在滑块上自然深一档，照样看得出。
  * 链接不是 .eqb-button，button.css 里「.fluid-hover-list .eqb-button…:hover 透明」那几条够不着它，不用另盖。 */
 .eqb-draft-add-open:hover {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
   color: var(--eqb-color-text);
 }
 

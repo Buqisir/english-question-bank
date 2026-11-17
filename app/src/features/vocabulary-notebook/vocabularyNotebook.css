@@ -33,7 +33,7 @@
 /* 空态换成共用的 EmptyState（样子在 shared-ui/emptyState.css）；这里只给它在这一页的高度，和个人空间一样。
  * 覆盖：本条 (0,2,0) 和 .eqb-empty-state (0,1,0) 不冲突属性，写成两个类只是为了不依赖样式表的先后。 */
 .eqb-empty-state.notebook-empty-state { min-height: 250px; }
-.notebook-main .home-row:hover { background: var(--desk-hover, #e9ece6); }
+.notebook-main .home-row:hover { background: var(--eqb-color-state-hover); }
 .notebook-main .home-row:hover .home-row-icon { color: var(--desk-ink, #1f1f1d); }
 
 .notebook-desk {

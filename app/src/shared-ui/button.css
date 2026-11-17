@@ -1,5 +1,5 @@
 /* 按钮构件（Button.tsx）。只用 tokens.css 里的变量，不写字面色值和影子。
- * 状态：悬停垫一层桌色（DESIGN.md 整块响应）；键盘焦点走 2px 石板墨焦点环；
+ * 状态：悬停垫一层悬停灰（--eqb-color-state-hover）（DESIGN.md 整块响应）；键盘焦点走 2px 石板墨焦点环；
  * 按下缩到 0.97（减少动态效果时不缩）；禁用、忙。 */
 
 .eqb-button {
@@ -88,7 +88,7 @@
 }
 
 .eqb-button[data-size='sm'][data-icon-only] { width: 28px; }
-.eqb-button[data-size='md'][data-icon-only] { width: 32px; }
+.eqb-button[data-size='md'][data-icon-only] { width: 28px; height: 28px; } /* 2026-11-17 Owner 定：只有图标的中号也是 28，和顶栏、Claude 一样。 */
 .eqb-button[data-size='lg'][data-icon-only] { width: 36px; }
 
 /* ── 语气 ─────────────────────────────────────────────── */
@@ -109,22 +109,22 @@
 .eqb-button[data-tone='quiet']:hover:not(:disabled, [aria-disabled='true']),
 .eqb-button[data-tone='subtle']:hover:not(:disabled, [aria-disabled='true']),
 .eqb-button[data-tone='strong']:hover:not(:disabled, [aria-disabled='true']) {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
   color: var(--eqb-color-text);
 }
 
 .eqb-button[data-tone='danger']:hover:not(:disabled, [aria-disabled='true']) {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
 }
 
-/* 打开着的触发键（菜单、弹出面板开着时 aria-expanded=true）：保持悬停的样子——桌色底、墨字，
+/* 打开着的触发键（菜单、弹出面板开着时 aria-expanded=true）：保持选中的样子——选中底、墨字，
  * 让人看得出面板是从哪里出来的（原草稿卷两个「⋯」键就是这样，构件厂第 4 步收进构件）。
  * 只认弹出类（Owner 2026-11-14 第 18 条）：带 aria-haspopup 的（Menu 的触发键都带 menu），
  * 或者调用处挂了 data-opens-popup 的（开的是弹层、面板而不是菜单，加 aria-haspopup 会改读屏语义，所以另用一个只给样式看的属性）。
  * 就地展开收起的键（「收起筛选」「文章简介」「收起进度」、词典卡三个展开键、新建学生的「取消」等）展开后静止时不垫底，
  * 照旧只在悬停时垫。两个条件放在 :where() 里，不加特指度，本条仍是 (0,3,0)，和下面各条的先后关系不变。 */
 .eqb-button:is([data-tone='quiet'], [data-tone='subtle'], [data-tone='strong'])[aria-expanded='true']:where([aria-haspopup]:not([aria-haspopup='false']), [data-opens-popup]) {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-selected);
   color: var(--eqb-color-text);
 }
 
@@ -167,9 +167,14 @@
   text-underline-offset: 2px;
 }
 
-/* 悬停：和透明底几种一样垫桌色、字提到墨色。 */
+/* 灰态底：展开着菜单的键（选中）再悬停，深一档。 */
+.eqb-button:is([data-tone='quiet'], [data-tone='subtle'], [data-tone='strong'])[aria-expanded='true']:is(:hover, [data-fluid-hover-active]):not(:disabled, [aria-disabled='true']) {
+  background: var(--eqb-color-state-selected-hover);
+}
+
+/* 悬停：和透明底几种一样垫悬停灰、字提到墨色。 */
 .eqb-button[data-tone='suggest']:hover:not(:disabled, [aria-disabled='true']) {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
   color: var(--eqb-color-text);
 }
 
@@ -186,19 +191,19 @@
 /* 键嵌在列表的行里（不是列表项本身，比如首页结果行「看整卷」、题组行「⋯」、个人空间文件行三个键）：
  * 滑块停在这一行时，键悬停或打开着自己再垫一块底，才看得出鼠标在行里的哪个键上（Owner 2026-11-14 决定 #4）。
  * 「打开着」和上面那条一样只认弹出类（第 18 条），条件放在 :where() 里，:is() 的特指度仍取 :hover 那一项的 (0,1,0)。
- * 底用 border 色：滑块是桌色，再垫桌色看不出来，所以深一档（提案 · 单一来源）。
+ * 底用悬停灰：悬停灰是半透明的，叠在滑块上自然深一档（约选中再悬停那么深），看得出手在哪个键上。
  * 只认「在被滑块选中的那一行里、自己不是列表项」的键，顶栏这种键本身是列表项的照旧不垫底。
  * 覆盖：本条 (0,6,0) 盖过上面「.fluid-hover-list .eqb-button…:hover 透明」(0,5,0)，
- * 也盖过前面打开着的触发键 [aria-expanded='true'] 的桌色底 (0,3,0)。 */
+ * 也盖过前面打开着的触发键 [aria-expanded='true'] 的选中底 (0,3,0)。 */
 .fluid-hover-list [data-fluid-hover-active] .eqb-button:is([data-tone='quiet'], [data-tone='subtle'], [data-tone='strong']):is(:hover, [aria-expanded='true']:where([aria-haspopup]:not([aria-haspopup='false']), [data-opens-popup])):not(:disabled, [aria-disabled='true'], [data-fluid-hover-active]) {
-  background: var(--eqb-color-border);
+  background: var(--eqb-color-state-hover);
   color: var(--eqb-color-text);
 }
 
-/* 危险键嵌在行里时垫桌色，不垫 border 色：danger-text 在 border 色上只有 4.42，不过 AA。
+/* 危险键嵌在行里时同样垫悬停灰。
  * 覆盖：本条 (0,6,0) 盖过上面「.fluid-hover-list .eqb-button…:hover 透明」(0,5,0)。眼下站上没有这样的键。 */
 .fluid-hover-list [data-fluid-hover-active] .eqb-button[data-tone='danger']:hover:not(:disabled, [aria-disabled='true'], [data-fluid-hover-active]) {
-  background: var(--eqb-color-desk);
+  background: var(--eqb-color-state-hover);
 }
 
 /* ── 焦点、按下、禁用、忙 ──────────────────────────────── */
