@@ -89,7 +89,7 @@ function DictationOpeningSkeleton({ showSkeleton }: { showSkeleton: boolean }) {
                 <div key={count} className="vocabulary-dictation-skeleton-fieldset">
                   <p className="vocabulary-dictation-skeleton-legend"><Skeleton width={56} height={10} /></p>
                   <div>
-                    {Array.from({ length: count }, (_, index) => <Skeleton key={index} height={36} />)}
+                    {Array.from({ length: count }, (_, index) => <Skeleton key={index} height={32} />)}
                   </div>
                 </div>
               ))}
@@ -541,12 +541,15 @@ export function VocabularyDictationPage({
               <div className="vocabulary-dictation-settings">
                 <fieldset>
                   <legend>每词播放</legend>
-                  {([1, 2, 3] as const).map((count) => (
-                    <button key={count} type="button" className={repeatCount === count ? 'is-selected' : undefined} onClick={() => setRepeatCount(count)} aria-pressed={repeatCount === count}>{count}遍</button>
-                  ))}
+                  <div className="vocabulary-dictation-segments">
+                    {([1, 2, 3] as const).map((count) => (
+                      <button key={count} type="button" className={repeatCount === count ? 'is-selected' : undefined} onClick={() => setRepeatCount(count)} aria-pressed={repeatCount === count}>{count}遍</button>
+                    ))}
+                  </div>
                 </fieldset>
                 <fieldset>
                   <legend>词间书写时间</legend>
+                  <div className="vocabulary-dictation-segments">
                   {[3, 5, 8].map((seconds) => (
                     <button
                       key={seconds}
@@ -591,6 +594,7 @@ export function VocabularyDictationPage({
                       aria-label="自定义词间书写时间，3到15秒"
                     />
                   </label>
+                  </div>
                 </fieldset>
                 <label className="vocabulary-dictation-volume">
                   <Volume size={16} aria-hidden="true" />

@@ -43,9 +43,10 @@
 .vocabulary-listen-card,
 .vocabulary-listen-controls,
 .vocabulary-listen-list {
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
+  border: 0;
+  border-radius: var(--eqb-radius-card);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-1);
 }
 
 .vocabulary-listen-card {
@@ -210,9 +211,9 @@
   width: 44px;
   height: 44px;
   padding: 0;
-  border: 1px solid var(--line);
+  border: 1px solid transparent;
   border-radius: 50%;
-  background: var(--panel);
+  background: var(--eqb-color-bg);
   color: var(--ink);
 }
 
@@ -293,7 +294,7 @@
 .vocabulary-listen-list h2 {
   margin: 0;
   color: var(--ink-strong);
-  font-size: 28px;
+  font-size: 20px;
   font-weight: 650;
 }
 
@@ -374,8 +375,8 @@
   min-height: 64px;
   padding: 8px 10px 8px 16px;
   border: 1px solid transparent;
-  border-radius: 8px;
-  background: var(--panel);
+  border-radius: var(--eqb-radius-card);
+  background: var(--eqb-color-paper);
   box-shadow: var(--elev-2);
   transform: translateY(calc(100% + 24px));
   visibility: hidden;
@@ -411,9 +412,10 @@
 .vocabulary-listen-message > div {
   width: min(420px, 100%);
   padding: 40px 28px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
+  border: 0;
+  border-radius: var(--eqb-radius-card);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-1);
 }
 
 .vocabulary-listen-message svg {
@@ -439,9 +441,9 @@
   gap: 7px;
   margin-top: 22px;
   padding: 9px 14px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel);
+  border: 1px solid transparent;
+  border-radius: var(--eqb-radius-control);
+  background: var(--eqb-color-bg);
   color: var(--ink);
   font-weight: 650;
 }
@@ -450,8 +452,8 @@
   .vocabulary-listen-control-row button:hover:not(:disabled),
   .vocabulary-listen-settings button:where(:not(.eqb-segmented-option)):hover,
   .vocabulary-listen-message button:hover {
-    border-color: var(--line-strong);
-    background: var(--surface-strong);
+    border-color: transparent;
+    background: var(--eqb-color-desk);
   }
 
   .vocabulary-listen-control-row .vocabulary-listen-primary-control:hover {
