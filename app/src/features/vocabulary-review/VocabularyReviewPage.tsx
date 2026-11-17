@@ -10,6 +10,7 @@ import {
   ChevronRight,
   Eye,
   InfoCircle,
+  QrCode,
   Grid2X2,
   RotateCcw,
   Save,
@@ -206,8 +207,8 @@ function replaceVocabularyProgramUrl(programId: string) {
 
 /**
  * 过词开始页的灰块（等待第五轮，2026-11-15；原来是这块白板正中一行「正在读取过词进度」）。
- * 读完以后多半落在开始页（「这轮准备收多少个生词？」），所以照开始页排：图标、标题、说明一行、目标生词数、
- * 读音和「开始过词」一排、下面「直接生成词表」一段。容器和各段用开始页同一套 class，白板整块居中，高度对上了才不跳。
+ * 读完以后多半落在开始页（「这轮准备收多少个生词？」），所以照开始页排：图标、标题、说明一行、目标生词数和读音一排、
+ * 撑满的「开始过词」、从哪个词开始一行、下面「直接生成词表」一段（过生词改版② 2026-11-17 跟着改）。容器和各段用开始页同一套 class，白板整块居中，高度对上了才不跳。
  * 最近生词组那一段要看数据，不画。读完落在过词中（有没过完的一轮）时整页换成过词的样子，那一下会变（见 README）。
  */
 function RunSetupSkeleton({ showSkeleton }: { showSkeleton: boolean }) {
@@ -218,19 +219,18 @@ function RunSetupSkeleton({ showSkeleton }: { showSkeleton: boolean }) {
         <Skeleton width={32} height={32} />
         <h2><Skeleton width={220} height={16} /></h2>
         <p><Skeleton width={300} height={12} /></p>
-        <div className="vocabulary-run-fields">
-          <div className="eqb-field">
+        <div className="vocabulary-run-start-row">
+          <div className="eqb-field vocabulary-run-target">
             <span className="eqb-field-label"><Skeleton width={64} height={10} /></span>
             <Skeleton height={36} />
           </div>
-        </div>
-        <div className="vocabulary-run-start-row">
-          <div className="eqb-field" data-layout="inline">
+          <div className="eqb-field">
             <span className="eqb-field-label"><Skeleton width={48} height={10} /></span>
-            <Skeleton width={120} height={32} />
+            <Skeleton width={120} height={36} />
           </div>
-          <Skeleton width={88} height={32} />
         </div>
+        <Skeleton className="vocabulary-run-start" height={36} />
+        <p className="vocabulary-run-from"><Skeleton width={220} height={12} /></p>
         <div className="vocabulary-direct-set">
           <div className="vocabulary-direct-set-heading">
             <h3><Skeleton width={168} height={12} /></h3>
@@ -1415,20 +1415,17 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       className="vocabulary-set-title-control"
       id="vocabulary-set-title"
       label="单词纸名称"
+      // 过生词改版②（2026-11-17）：名字框就是生词组的标题，标签只给读屏；「保存名称」改了名才出现。
+      hideLabel
       size="lg"
       value={setTitleInput}
       maxLength={30}
       onChange={(event) => setSetTitleInput(event.target.value)}
-      trailing={(
-        <button
-          className="ghost-button"
-          type="button"
-          onClick={() => void saveVocabularySetTitle()}
-          disabled={requestBusy || !setTitleInput.trim() || setTitleInput.trim() === vocabularySet.title}
-        >
+      trailing={setTitleInput.trim() && setTitleInput.trim() !== vocabularySet.title ? (
+        <Button tone="quiet" size="sm" onClick={() => void saveVocabularySetTitle()} disabled={requestBusy}>
           保存名称
-        </button>
-      )}
+        </Button>
+      ) : undefined}
     />
   ) : null
   const printAccentControl = vocabularySet ? (
@@ -1436,7 +1433,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       className="vocabulary-print-accent-control"
       label="下载读音"
       layout="inline"
-      size="lg"
+      size="md"
       value={printAccent}
       onChange={(event) => {
         const accent = event.target.value as VocabularyAccent
@@ -1453,6 +1450,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           下载图标自己会演（DownloadFeedbackIcon working），所以 iconShowsBusy，键上不另出所以点。 */}
       <Button
         tone="solid"
+        size="md"
         aria-expanded={downloadMenuOpen}
         // 弹出类（第 18 条）：solid 本来不归「打开着垫底」管，挂上只是标明类别，样子不变。
         data-opens-popup=""
@@ -1519,6 +1517,57 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
       </div>
     </div>
   ) : null
+  // 过生词改版②（Owner 2026-11-17 定方向）：生词组一张卡——名字（可改）、一行状态、词表、一排动作。
+  // 收满后生成的和从「最近生词组」重新打开的是同一张，只有最右边那个键不同（接着过下一轮 / 返回）。
+  const renderVocabularySetPanel = (set: VocabularySetDto, closing: React.ReactNode) => (
+    <section className="vocabulary-set-panel" aria-labelledby="vocabulary-set-reopen-title">
+      {/* 标题给读屏和页内跳转用；眼睛看到的标题就是下面能改名的框。 */}
+      <h2 id="vocabulary-set-reopen-title" className="visually-hidden">{set.title}</h2>
+      <div className="vocabulary-set-head">
+        <BookMarked size={24} aria-hidden="true" />
+        {vocabularySetTitleControl}
+      </div>
+      <div className="vocabulary-set-meta">
+        <span>{set.entryCount} 个词</span>
+        {shareId ? (
+          <>
+            <span className="vocabulary-set-share-on"><QrCode size={14} aria-hidden="true" />扫码可听音频、自动听写</span>
+            <Button tone="quiet" size="sm" disabled={shareClipboard.state === 'pending'} aria-busy={shareClipboard.state === 'pending'} onClick={() => void copyShareLink()} icon={<CopyFeedbackIcon size={14} state={shareClipboard.state} />}>
+              {shareCopyStatus === 'copied' ? '链接已复制' : shareCopyStatus === 'error' ? '复制失败' : '复制公开链接'}
+            </Button>
+            <Button tone="quiet" size="sm" onClick={() => void revokeShare()} disabled={requestBusy}>撤销二维码</Button>
+          </>
+        ) : (
+          <>
+            <span>二维码未公开</span>
+            <Button tone="quiet" size="sm" icon={<QrCode size={14} />} onClick={() => void createShare()} disabled={requestBusy}>生成公开二维码</Button>
+          </>
+        )}
+      </div>
+      <div className="vocabulary-set-list-heading">
+        <span>词表</span>
+        <Button tone="quiet" size="sm" className="vocabulary-collected-copy" onClick={() => void copyVocabularySet()} disabled={listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'} icon={<CopyFeedbackIcon size={14} state={listClipboard.state} />}>
+          {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制清单'}
+        </Button>
+      </div>
+      <ol className="vocabulary-set-list">
+        {printEntries.map((entry) => (
+          <li key={entry.id}><strong>{entry.headword}</strong><span>{getCoreMeanings(entry)[0] ?? ''}</span></li>
+        ))}
+      </ol>
+      <div className="vocabulary-set-actions">
+        {printAccentControl}
+        {downloadControl}
+        <Button tone="quiet" icon={<Grid2X2 size={16} />} onClick={() => props.onOpenVocabularyPractice(set.id)}>趣味练习</Button>
+        <Button tone="quiet" icon={<WordBubble size={16} />} onClick={() => props.onOpenVocabularyDictationWorkbench(set.id)}>看词说义</Button>
+        <span className="vocabulary-set-actions-spacer" aria-hidden="true" />
+        {closing}
+      </div>
+      {shareDownloadConfirmation}
+      {requestError ? <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>
+        : pdfDownloadSlow ? <Notice kind="waiting" className="vocabulary-download-wait">正在生成，比平时慢，可以先去做别的</Notice> : null}
+    </section>
+  )
   const handwritingSelector = handwritingSelectionMode && vocabularySet ? (
     <VocabularyHandwritingSelector
       title={setTitleInput.trim() || vocabularySet.title}
@@ -1561,6 +1610,8 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
           {/* 过生词改版第一步（Owner 2026-11-17 看过可点样张后定「一屏只突出词卡」）：页头压成一行。
               原来标题下那句「· 按原书顺序逐词判断…」是开发口吻，删掉；课程名留作标题。 */}
           <h1>{programLoadState === 'ready' ? program.title : '中考词汇一轮'}</h1>
+          {/* 词库还没读到（或读不出）时标题是写死的，跟一行小字说明是哪套词库，免得老师以为退回了 30 词样本。 */}
+          {programLoadState !== 'ready' && <p className="vocabulary-review-heading-note">万唯一轮完整1600词 · 读完词库后显示进度</p>}
           {headingSkeletonPending ? (
             <HeadingActionsSkeleton
               showSkeleton={progressOpeningPhase === 'waiting'}
@@ -1713,42 +1764,7 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
             />
           </div>
         ) : runState === 'setup' && vocabularySet ? (
-          <section className="vocabulary-run-setup vocabulary-set-reopen" aria-labelledby="vocabulary-set-reopen-title">
-            <BookMarked size={32} aria-hidden="true" />
-            <h2 id="vocabulary-set-reopen-title">{vocabularySet.title}</h2>
-            <p>这是一份内容固定的生词组，共 {vocabularySet.entryCount} 词。可以下载、重新分享或撤销原二维码链接。</p>
-            {vocabularySetTitleControl}
-            <div className="vocabulary-completion-actions">
-              {printAccentControl}
-              {downloadControl}
-              {/* 构件厂第 4 步第十页：原 .ghost-button（透明底墨字、高 36）= strong lg。
-                  两个复制键沿用原来的整键禁用和 aria-busy 写法，没改成 busy。 */}
-              {!shareId ? (
-                <Button tone="strong" size="lg" onClick={() => void createShare()} disabled={requestBusy}>生成公开二维码</Button>
-              ) : (
-                <Button tone="strong" size="lg" onClick={() => void revokeShare()} disabled={requestBusy}>撤销公开分享</Button>
-              )}
-              {shareId && (
-                <Button tone="strong" size="lg" disabled={shareClipboard.state === 'pending'} aria-busy={shareClipboard.state === 'pending'} onClick={() => void copyShareLink()} icon={<CopyFeedbackIcon size={16} state={shareClipboard.state} />}>
-                  {shareCopyStatus === 'copied' ? '链接已复制' : shareCopyStatus === 'error' ? '复制失败' : '复制公开链接'}
-                </Button>
-              )}
-              <Button tone="strong" size="lg" onClick={() => void copyVocabularySet()} disabled={listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'} icon={<CopyFeedbackIcon size={16} state={listClipboard.state} />}>
-                {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制清单'}
-              </Button>
-              <Button tone="strong" size="lg" icon={<Grid2X2 size={16} />} onClick={() => props.onOpenVocabularyPractice(vocabularySet.id)}>
-                趣味练习
-              </Button>
-              <Button tone="strong" size="lg" icon={<WordBubble size={16} />} onClick={() => props.onOpenVocabularyDictationWorkbench(vocabularySet.id)}>
-                看词说义
-              </Button>
-              <Button tone="strong" size="lg" onClick={closeVocabularySet}>返回</Button>
-            </div>
-            {shareDownloadConfirmation}
-            {shareId && <p className="vocabulary-share-ready">当前公开二维码有效：单词卡扫码听音频，听写纸扫码自动听写。</p>}
-            {requestError ? <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>
-              : pdfDownloadSlow ? <Notice kind="waiting" className="vocabulary-download-wait">正在生成，比平时慢，可以先去做别的</Notice> : null}
-          </section>
+          renderVocabularySetPanel(vocabularySet, <Button tone="quiet" onClick={closeVocabularySet}>返回</Button>)
         ) : runState === 'setup' || runState === 'error' ? (
           <section className="vocabulary-run-setup" aria-labelledby="vocabulary-run-title">
             <VocabularyReview size={32} aria-hidden="true" />
@@ -1758,9 +1774,10 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 ? `进度已保存，将从第 ${reviewState.cursor + 1} 词继续，直到收满本轮目标。`
                 : '可选 1–60 个。第一次默认 15，以后会记住上次目标。'}
             </p>
-            <div className="vocabulary-run-fields">
-              {/* 字段构件第二轮（2026-11-15）：目标生词数、直接生成词表的多行框换成 shared-ui/Field（大号 36），字没改。 */}
+            {/* 过生词改版②（2026-11-17）：目标数和读音并成一排，下面一个撑满的「开始过词」，再下面一行写从哪个词开始。 */}
+            <div className="vocabulary-run-start-row">
               <TextField
+                className="vocabulary-run-target"
                 label="目标生词数"
                 size="lg"
                 type="number"
@@ -1771,24 +1788,27 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 disabled={Boolean(runId)}
                 onChange={(event) => setTargetInput(Math.max(1, Math.min(60, Number(event.target.value) || 1)))}
               />
-            </div>
-            <div className="vocabulary-run-start-row">
-              {/* 切换组那一轮（2026-11-15）：一排 aria-pressed 的键换成 SegmentedField（单选组，一个 Tab 位，方向键切换），标签在左照旧，字没改。 */}
+              {/* 切换组那一轮（2026-11-15）：SegmentedField（单选组，一个 Tab 位，方向键切换）。 */}
               <SegmentedField
                 className="vocabulary-review-accent-control"
                 label="过词读音"
-                layout="inline"
                 value={reviewAccent}
                 options={REVIEW_ACCENT_OPTIONS}
                 onChange={chooseReviewAccent}
               />
-              <Button tone="solid" onClick={() => void startReview()} disabled={requestBusy || (!runId && mainProgressCursor >= program.entries.length)}>
-                {runId ? '继续过词' : '开始过词'}
-              </Button>
             </div>
+            <Button tone="solid" size="lg" className="vocabulary-run-start" onClick={() => void startReview()} disabled={requestBusy || (!runId && mainProgressCursor >= program.entries.length)}>
+              {runId ? '继续过词' : '开始过词'}
+            </Button>
+            {!runId && mainProgressEntry && (
+              <p className="vocabulary-run-from">
+                <span>从 <strong>{mainProgressEntry.headword}</strong>（Day {mainProgressEntry.source.group} · 第 {mainProgressCursor + 1} 词）开始</span>
+                <Button tone="quiet" size="sm" onClick={toggleProgressExplorer}>换一个</Button>
+              </p>
+            )}
             <div className="vocabulary-direct-set">
               <div className="vocabulary-direct-set-heading">
-                <h3>已有单词，直接生成词表</h3>
+                <h3>已有单词？直接生成词表</h3>
                 <span>只匹配当前课程已入库的 {program.entries.length} 词</span>
               </div>
               <TextAreaField
@@ -2002,52 +2022,47 @@ export function VocabularyReviewPage(props: VocabularyReviewPageProps) {
                 {requestError && <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>}
               </>
             ) : (
+              vocabularySet ? renderVocabularySetPanel(vocabularySet, (
+                <Button tone="quiet" icon={<RotateCcw size={16} />} onClick={() => void startAnotherReview()} disabled={requestBusy}>接着过下一轮</Button>
+              )) : (
               <div className="vocabulary-completion-state">
-                <BookMarked size={32} />
-                <h2>{completion === 'target-reached' ? `已收满${reviewState.targetUnfamiliarCount}个生词` : '当前词汇已过完'}</h2>
+                <BookMarked size={32} aria-hidden="true" />
+                <h2>{completion === 'target-reached' ? `已收满 ${reviewState.targetUnfamiliarCount} 个生词` : '当前词汇已过完'}</h2>
                 <p>
                   本轮共判断 {reviewState.decisionOrder.length} 词：认识 {knownCount} 词，收下 {unfamiliarEntries.length} 词。
                 </p>
-                <div className="vocabulary-completion-actions">
-                  {vocabularySetTitleControl}
-                  {printAccentControl}
-                  {/* 构件厂第 4 步第十页：「生成固定生词组」原是 .primary-button，在这一排里被旁边高 36 的键拉高到 36，
-                      所以用 solid lg；其余原 .ghost-button = strong lg。 */}
-                  {!vocabularySet ? <Button tone="solid" size="lg" icon={<BookMarked size={16} />} onClick={() => void generateVocabularySet()} disabled={!unfamiliarEntries.length || requestBusy}>
-                    生成固定生词组
-                  </Button> : downloadControl}
-                  {vocabularySet && !shareId && <Button tone="strong" size="lg" onClick={() => void createShare()} disabled={requestBusy}>生成公开二维码</Button>}
-                  {shareId && <Button tone="strong" size="lg" disabled={shareClipboard.state === 'pending'} aria-busy={shareClipboard.state === 'pending'} onClick={() => void copyShareLink()} icon={<CopyFeedbackIcon size={16} state={shareClipboard.state} />}>{shareCopyStatus === 'copied' ? '链接已复制' : shareCopyStatus === 'error' ? '复制失败' : '复制公开链接'}</Button>}
-                  {vocabularySet && (
-                    <Button tone="strong" size="lg" icon={<Grid2X2 size={16} />} onClick={() => props.onOpenVocabularyPractice(vocabularySet.id)}>
-                      趣味练习
-                    </Button>
-                  )}
-                  <Button tone="strong" size="lg" onClick={() => void copyVocabularySet()} disabled={!unfamiliarEntries.length || listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'} icon={<CopyFeedbackIcon size={16} state={listClipboard.state} />}>
+                {unfamiliarEntries.length > 0 && (
+                  <ol className="vocabulary-set-list">
+                    {unfamiliarEntries.map((entry) => (
+                      <li key={entry.id}><strong>{entry.headword}</strong><span>{getCoreMeanings(entry)[0] ?? ''}</span></li>
+                    ))}
+                  </ol>
+                )}
+                {/* 过生词改版②：收满只有一个主键；复制、下一轮退成字键。 */}
+                <Button tone="solid" size="lg" className="vocabulary-completion-primary" icon={<BookMarked size={16} />} onClick={() => void generateVocabularySet()} disabled={!unfamiliarEntries.length || requestBusy}>
+                  生成固定生词组
+                </Button>
+                <div className="vocabulary-completion-minor">
+                  <Button tone="quiet" onClick={() => void copyVocabularySet()} disabled={!unfamiliarEntries.length || listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'} icon={<CopyFeedbackIcon size={16} state={listClipboard.state} />}>
                     {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制清单'}
                   </Button>
-                  <Button tone="strong" size="lg" icon={<RotateCcw size={16} />} onClick={() => void startAnotherReview()} disabled={requestBusy}>
-                    开始下一轮
+                  <Button tone="quiet" icon={<RotateCcw size={16} />} onClick={() => void startAnotherReview()} disabled={requestBusy}>
+                    接着过下一轮
                   </Button>
                 </div>
-                {shareDownloadConfirmation}
-                {shareId && <p className="vocabulary-share-ready">公开二维码已固定：单词卡扫码听音频，听写纸扫码自动听写。</p>}
-                {requestError ? <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>
-              : pdfDownloadSlow ? <Notice kind="waiting" className="vocabulary-download-wait">正在生成，比平时慢，可以先去做别的</Notice> : null}
+                {requestError && <Notice kind="error" className="vocabulary-request-error" danger={requestError === unsavedError}>{requestError}</Notice>}
               </div>
+              )
             )}
           </section>
 
-          {unfamiliarEntries.length > 0 && (
+          {completion === 'active' && unfamiliarEntries.length > 0 && (
             <section className="vocabulary-collected" aria-labelledby="vocabulary-collected-title">
               <div className="vocabulary-collected-heading">
                 <h2 id="vocabulary-collected-title">本轮生词 {unfamiliarEntries.length} / {reviewState.targetUnfamiliarCount}</h2>
-                {/* 收满后上面已经有「复制清单」，这里不再放第二个。 */}
-                {completion === 'active' && (
-                  <Button tone="quiet" size="sm" className="vocabulary-collected-copy" onClick={() => void copyVocabularySet()} disabled={listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'} icon={<CopyFeedbackIcon size={14} state={listClipboard.state} />}>
-                    {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制'}
-                  </Button>
-                )}
+                <Button tone="quiet" size="sm" className="vocabulary-collected-copy" onClick={() => void copyVocabularySet()} disabled={listClipboard.state === 'pending'} aria-busy={listClipboard.state === 'pending'} icon={<CopyFeedbackIcon size={14} state={listClipboard.state} />}>
+                  {copyStatus === 'copied' ? '已复制' : copyStatus === 'error' ? '复制失败' : '复制'}
+                </Button>
               </div>
               <ol className="vocabulary-collected-list">
                 {unfamiliarEntries.map((entry) => (
