@@ -227,6 +227,33 @@ function interpolate(words) {
   return timed.filter(Boolean)
 }
 
+function interpolateSentenceTimes(timings, bounds, reasons, pass) {
+  for (let first = 0; first < timings.length;) {
+    if (timings[first].start !== null) {
+      first++
+      continue
+    }
+    let next = first + 1
+    while (next < timings.length && timings[next].start === null) next++
+    const count = next - first
+    const start = timings[first - 1]?.end ?? bounds.startSeconds
+    const end = timings[next]?.start ?? bounds.endSeconds
+    // Adjacent missing sentences share one gap without overlapping each other.
+    const duration = (end - start) / count
+    const label = `pass ${pass}, sentences ${first + 1}–${next}`
+    if (count > 2) reasons.add(`${label}: more than two consecutive interpolations`)
+    else if (duration < 0.3 - epsilon || duration > 8 + epsilon) {
+      reasons.add(`${label}: interpolated duration outside 0.3–8 seconds`)
+    } else {
+      for (let i = first; i < next; i++) {
+        Object.assign(timings[i], { start: start + (i - first) * duration,
+          end: i === next - 1 ? end : start + (i + 1 - first) * duration, approx: true, interpolated: true })
+      }
+    }
+    first = next
+  }
+}
+
 function alignPass(source, sentences, sentenceStarts, bounds, words, reasons, pass) {
   const { matched } = align(source, wordsIn(words, bounds), sentenceStarts)
   const matchRate = matched.filter(Boolean).length / Math.max(1, source.length)
@@ -237,10 +264,11 @@ function alignPass(source, sentences, sentenceStarts, bounds, words, reasons, pa
     const anchors = matched.slice(offset, offset + tokens.length)
     offset += tokens.length
     const sentenceRate = anchors.filter(Boolean).length / tokens.length
+    if (sentenceRate < (wordCount <= 3 ? 1 : 0.7)) {
+      return { start: null, end: null, matchRate: sentenceRate, approx: false }
+    }
     const label = `pass ${pass}, sentence ${index + 1}`
     const timed = interpolate(anchors)
-    if (!timed.length) reasons.add(`${label}: no anchor`)
-    else if (sentenceRate < (wordCount <= 3 ? 1 : 0.7)) reasons.add(`${label}: match below threshold`)
     const start = timed[0]?.startSeconds ?? null
     const end = timed.at(-1)?.endSeconds ?? null
     if (start !== null) {
@@ -253,6 +281,7 @@ function alignPass(source, sentences, sentenceStarts, bounds, words, reasons, pa
     }
     return { start, end, matchRate: sentenceRate, approx: timed.some(word => word.approx === true) }
   })
+  interpolateSentenceTimes(timings, bounds, reasons, pass)
   return { matchRate, timings }
 }
 
@@ -307,7 +336,11 @@ const segments = materials.map(material => {
   return { materialId, segment: segmentId, passCount, degraded: reasons.size > 0, reasons: [...reasons],
     passes: passes.map(({ matchRate }, i) => ({ ...bounds[i], matchRate })),
     sentences: sentences.map(({ tokens, wordCount, ...sentence }, i) => ({ ...sentence,
-      passes: passes.map(({ timings }) => reasons.size ? { ...timings[i], start: null, end: null } : timings[i]) })) }
+      passes: passes.map(({ timings }) => {
+        const { interpolated, ...timing } = timings[i]
+        if (reasons.size) return { ...timing, start: null, end: null }
+        return timings[i]
+      }) })) }
 })
 mkdirSync(output, { recursive: true })
 writeFileSync(join(output, 'sentences.json'), `${JSON.stringify(segments, null, 2)}\n`)
