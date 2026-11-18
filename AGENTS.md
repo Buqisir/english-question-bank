@@ -71,8 +71,9 @@ This repository builds the English Question Bank workbench at `eqbank.cc`.
 
 The natural `.github/workflows/verify.yml` run is the CI authority. Check the
 latest attempt for the reviewed PR candidate or exact main SHA. `verify` and
-`e2e` must succeed. Deployment uses the latest main SHA with all jobs in its
-Verify run successful. See the [workflow](.github/workflows/verify.yml) and
+`e2e` must succeed. Deploy only the current `origin/main` SHA after every job
+in the latest attempt of its natural Verify run succeeds. See the
+[workflow](.github/workflows/verify.yml) and
 [ADR-0026](docs/adr/0026-github-actions-ci-authority.md) for CI details.
 
 ## Owner Mac deployment

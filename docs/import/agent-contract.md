@@ -401,15 +401,16 @@ Paper, original PDF comparison and correction report before Owner review.
 These local changes have not been deployed or activated in the live controller.
 
 > 新 raw-source 导入的当前主合同是 `public-paper-v1`。本分支已接线完整源卷和逐段摘要，
-> AI OCR/提取校对、源答案抄录检查和必要的结构化检索元数据仍是硬门禁；当前 CLI 已实现
-> metadata 的 prepare/finalize/verify，不能用九份教学解析或假空字段代替。无 profile 的历史工作区和
+> AI OCR/提取校对和源答案抄录检查仍是硬门禁。结构化检索 metadata 是软项，缺失时只标注，
+> CLI 对不合格的 metadata 发出告警并剔除，送审照常。无 profile 的历史工作区和
 > external `analyzed_package` 继续原九份分析合同，恢复时不得迁移身份。
 
 本地 Amp 导一卷 NCK1 的**唯一进场文档**。先读完本文件再动手。
 Owner 在 Amp 提供题源并明确发起导题；Amp 是唯一沟通与启动入口，不再由网站提交或
 webhook 自动接卷。新卷按下文 off-ledger 本地文件流程初始化，不伪造台账记录。
 预览确认与上线是两步：提供真实 Screen 和四款 PDF，确认后仍须 Owner 明确要求
-上线才可执行单卷 promotion。改标准/程序走 PR；修订卷子数据不因此要求另提代码 PR。
+上线才可执行单卷 promotion。改标准或程序时，按
+[AGENTS.md](../../AGENTS.md#ship-to-main) 的交付范围执行，仅 CI 或部署工具链改动走 PR。
 正式私有文件存储及网站年月／产品访问已有本地候选，尚未部署；私有R2未配置，
 本地源副本仍保留。按[四产品存储合同](../product/paper-pdf-products-v1.md)执行，
 不把普通导题授权当成生产配置、R2写入或上线授权。
