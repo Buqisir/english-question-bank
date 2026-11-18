@@ -451,6 +451,37 @@ test('redo from chinese-numbering retains materialization and immutable OCR, inv
   assert(!Object.hasOwn(snapshot(ctx.paperDir), 'agent-ocr-correction-report-v2.json'))
 })
 
+test('redo after a title edit retains the installed listening review and its ASR attempt', async t => {
+  const { ctx } = fixture(t)
+  const config = path.join(ctx.paperDir, 'config.json')
+  json(config, { provenance: { paperName: '新卷名' } })
+  const listening = path.join(ctx.paperDir, 'listening-review-v1.json')
+  json(listening, { review: 'retained' })
+  const before = readFileSync(listening)
+  ctx.state.data.listeningSegmentAttempt = { review: 'retained-attempt.json' }
+  ctx.state.steps['asr-apple-rule-v2'] = completed({})
+  ctx.state.steps['listening-review'] = completed({})
+  await requestedRedo(ctx, 'build')
+  assert.deepEqual(readFileSync(listening), before)
+  assert.deepEqual(ctx.state.data.listeningSegmentAttempt, { review: 'retained-attempt.json' })
+  assert(ctx.state.steps['asr-apple-rule-v2'])
+  assert(ctx.state.steps['listening-review'])
+  assert(!ctx.state.steps.freeze, 'printed title affects the PDFs')
+})
+
+for (const redo of ['search-metadata', 'asr-apple-rule-v2']) {
+  test(`redo of ${redo} retains pagination and frozen PDFs`, async t => {
+    const { ctx } = fixture(t)
+    ctx.state.steps[redo] = completed({})
+    const products = snapshot(path.join(ctx.paperDir, 'products'))
+    const printSteps = Object.fromEntries(downstream.map(name => [name, ctx.state.steps[name]]))
+    await requestedRedo(ctx, redo)
+    assert(!ctx.state.steps[redo])
+    assert.deepEqual(snapshot(path.join(ctx.paperDir, 'products')), products)
+    assert.deepEqual(Object.fromEntries(downstream.map(name => [name, ctx.state.steps[name]])), printSteps)
+  })
+}
+
 for (const interrupted of ['source-references', 'pagination-plan', 'freeze', 'pdf-qa']) {
   test(`finish resumes after interruption in ${interrupted}`, async t => {
     const { ctx, calls, options } = fixture(t, 'old-version')

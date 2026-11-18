@@ -26,6 +26,7 @@ import { fileURLToPath } from 'node:url'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { loadNck1ReviewSource, reviewBundleFilePaths } from '../../server/import-review/revisionProjection.mjs'
 import { PRODUCT_MANIFEST, productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
+import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { sourceReferenceCellContinuations, refreshSourceReferenceCellContinuations } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import {
@@ -668,6 +669,7 @@ async function afterProofread(ctx, args) {
   })
   await step(ctx, 'answer-check', () => answerCheck(ctx, verified))
   await step(ctx, 'build', () => run(ctx, 'build', cli('universal-nck1.mjs', 'build', ctx.paperId)))
+  const retainedListening = hasListening(ctx) && await retainFastListening(ctx, verified.candidateDigest)
   await step(ctx, 'round2-requests', async () => {
     const summaries = path.join(ctx.fast, 'summaries-request.json')
     const metadata = path.join(ctx.fast, 'search-metadata-request.json')
@@ -677,7 +679,7 @@ async function afterProofread(ctx, args) {
     ctx.state.data.summaryParts = splitSummaries(ctx, 3)
     if (hasListening(ctx)) {
       await run(ctx, 'prepare-listening-review', cli('review.mjs', 'prepare-listening-review', ctx.paperId,
-        '--output', path.join(ctx.fast, 'listening-review-request.json')))
+        '--candidate-digest', verified.candidateDigest, '--output', path.join(ctx.fast, 'listening-review-request.json')))
       const segments = listeningGroups(ctx)
       const half = Math.ceil(segments.length / 2)
       ctx.state.data.listeningParts = [segments.slice(0, half), segments.slice(half)].filter((part) => part.length)
@@ -685,7 +687,7 @@ async function afterProofread(ctx, args) {
     save(ctx)
     return { summaryParts: ctx.state.data.summaryParts.length, listeningParts: ctx.state.data.listeningParts?.length ?? 0 }
   })
-  if (hasListening(ctx)) {
+  if (hasListening(ctx) && !retainedListening) {
     const cached = ctx.state.steps['asr-apple-rule-v2']
     if (cached?.finishedAt) {
       const attempt = cached.result?.attempt
@@ -832,6 +834,43 @@ async function installSummaries(ctx) {
   return { groups: request.groups.length, paragraphs: request.groups.reduce((sum, group) => sum + group.targets.length, 0) }
 }
 
+function sameListeningInputs(previous, current) {
+  return previous && digestJson({ ...previous, sourceDigest: current.sourceDigest,
+    candidateDigest: current.candidateDigest }) === digestJson(current)
+}
+
+async function retainFastListening(ctx, candidateDigest) {
+  const installed = path.join(ctx.paperDir, LISTENING_REVIEW_FILE)
+  const attempt = ctx.state.data.listeningSegmentAttempt
+  if (!existsSync(installed) && !attempt?.review) return false
+  const loaded = loadNck1ReviewSource(ctx.paperDir)
+  const { candidate } = importLocalReviewCandidate(ctx.paperDir, loaded, candidateDigest)
+  const subject = listeningReviewSubject(loaded, candidate)
+  if (existsSync(installed)) {
+    const review = readJson(installed)
+    if (sameListeningInputs(review.subject, subject)) {
+      if (digestJson(review.subject) !== digestJson(subject) && !hydratedEvidenceBase(ctx.paperDir)) {
+        const rebound = { ...review, subject }
+        validateListeningReview(ctx.paperDir, rebound, subject, loaded.materialization.listening.transcript)
+        archive(ctx, installed)
+        writeJson(installed, rebound, 'wx')
+      }
+      const retained = loadLocalReviewedListening(ctx.paperDir, loaded, candidate)
+      await step(ctx, 'listening-review', () => ({ groups: retained.review.groups.length, retained: true }))
+      return true
+    }
+    archive(ctx, installed)
+    delete ctx.state.steps['listening-review']
+  }
+  if (!attempt?.review || !existsSync(attempt.review)
+    || !sameListeningInputs(readJson(attempt.review).subject, subject)) {
+    for (const name of ['asr-wait', 'asr-apple-rule-v2', 'listening-review', 'round2-requests']) delete ctx.state.steps[name]
+    delete ctx.state.data.listeningSegmentAttempt
+    save(ctx)
+  }
+  return false
+}
+
 async function installListening(ctx) {
   const result = ctx.state.data.listeningSegmentAttempt
   if (!result?.review || !existsSync(result.review)) fail('缺少听力分段规则结果；先运行 after-proofread')
@@ -852,7 +891,14 @@ async function installListening(ctx) {
       if (sha256(readFileSync(target)) !== file.sha256) fail(`不可覆盖旧听力证据：${file.path}`)
     } else writeFileSync(target, bytes, { flag: 'wx' })
   }
-  await run(ctx, 'finalize-listening', cli('review.mjs', 'finalize-listening-review', ctx.paperId, '--input', result.review))
+  const request = path.join(ctx.fast, 'listening-review-request.json')
+  const subject = existsSync(request) ? readJson(request).report.subject : report.subject
+  let input = result.review
+  if (sameListeningInputs(report.subject, subject) && digestJson(report.subject) !== digestJson(subject)) {
+    input = path.join(ctx.fast, 'listening-review-input.json')
+    writeJson(input, { ...report, subject })
+  }
+  await run(ctx, 'finalize-listening', cli('review.mjs', 'finalize-listening-review', ctx.paperId, '--input', input))
   await run(ctx, 'verify-listening', cli('review.mjs', 'verify-listening-review', ctx.paperId))
   return { groups: report.groups.length, usable: report.groups.filter(g => g.decision === 'usable').length,
     evidence: report.evidence.length, ruleVersion: readJson(path.join(result.attempt, 'rule-result.json')).rule.version }
@@ -1606,41 +1652,46 @@ const STEP_ORDER = [
   'pagination-plan', 'freeze', 'pdf-qa', 'local-preview', 'local-screen', 'push', 'screen',
 ]
 
-// Forgets a step and everything after it, for re-deriving digest-bound outputs after an
-// upstream Materialization edit; authored round-2 parts are keyed by IDs and are reused.
+// Keep listening until its own audio/transcript binding changes. Search and
+// listening navigation edits only affect the preview and submission.
 function redoFrom(ctx, name) {
   const index = STEP_ORDER.indexOf(name)
   if (index === -1) fail(`--redo-from 只接受：${STEP_ORDER.join(', ')}`)
-  const redoPagination = index <= STEP_ORDER.indexOf('pagination-run')
+  const listening = ['asr-wait', 'asr-apple-rule-v2', 'listening-review']
+  const preview = ['local-preview', 'local-screen', 'push', 'screen']
+  const redo = new Set(listening.includes(name)
+    ? [...listening.slice(listening.indexOf(name)), ...preview]
+    : ['summaries', 'search-metadata'].includes(name)
+      ? [name, ...preview]
+      : STEP_ORDER.slice(index).filter(step => !listening.includes(step)))
+  const redoPagination = redo.has('pagination-run')
   const paginationJobs = Object.entries(ctx.state.background).filter(([key]) => key.startsWith('pagination-'))
   if (redoPagination && paginationJobs.some(([, job]) => alive(job.pid))) fail('分页仍在运行；待其退出后再重做')
   // Retain PDF QA for the superseded products, without moving upstream answer checks or Screen tiles.
   const qa = path.join(ctx.work, 'handoff/qa')
-  if (index <= STEP_ORDER.indexOf('pdf-qa') && existsSync(qa)) {
+  if (redo.has('pdf-qa') && existsSync(qa)) {
     for (const file of readdirSync(qa)) {
       if (/^(?:contact-(?:largeComplete|largeNoListening|economy8|answerOnly)\.png|(?:largeComplete|largeNoListening|economy8|answerOnly)\.txt)$/u.test(file)) {
         archive(ctx, path.join(qa, file))
       }
     }
   }
-  for (const later of STEP_ORDER.slice(index)) {
+  for (const later of redo) {
     // The old push remains the binding until a later actual push starts.
     if (later === 'push' && reconciledPush(ctx)) continue
     delete ctx.state.steps[later]
   }
-  if (index <= STEP_ORDER.indexOf('asr-apple-rule-v2')) delete ctx.state.data.listeningSegmentAttempt
+  if (redo.has('asr-apple-rule-v2')) delete ctx.state.data.listeningSegmentAttempt
   delete ctx.state.data.status
   delete ctx.state.data.localReport
   if (redoPagination) {
     archive(ctx, path.join(ctx.fast, 'pagination'))
     for (const [key] of paginationJobs) delete ctx.state.background[key]
   }
-  // A retained listening review pins its Candidate digest and makes the projection refuse the
-  // re-derived Candidate, so installed sidecars of forgotten steps move aside up front.
   for (const [owner, file] of [['summaries', 'paragraph-summaries-v1.json'], ['search-metadata', 'public-search-metadata-v1.json'],
     ['listening-review', 'listening-review-v1.json'], ['ocr-correction-report', 'agent-ocr-correction-report-v2.json'],
     ['source-references', 'source-references-v1.json'], ['pagination-plan', PAPER_PAGINATION_PLAN_FILE_NAME], ['freeze', 'products']]) {
-    if (STEP_ORDER.indexOf(owner) >= index) archive(ctx, path.join(ctx.paperDir, file))
+    if (redo.has(owner)) archive(ctx, path.join(ctx.paperDir, file))
   }
   // The producer cache is keyed by its inputs, not its code: after a producer fix the cached
   // output would come back unchanged unless output, receipt, review and media move aside.
@@ -1920,8 +1971,7 @@ export async function startOcrGeneration(ctx, planPath, checkPlan = async () => 
       ...['summaries-parts', 'search-metadata-authored.json', 'spelling-request.json', 'spelling-review.json',
         'round2.json'].map(file => path.join(ctx.fast, file)),
     ].entries()) archive(ctx, file, `ocr-generation-${index}-`)
-    // Retain old listening attempt directories as evidence; redoFrom forgets
-    // their binding so the existing rule creates a new attempt for the new input.
+    // The listening step checks whether the new OCR actually changed its input.
   })
 }
 
