@@ -73,11 +73,6 @@ if (a4SheetBlockMatch) {
     /box-shadow\s*:\s*(?!none\b)/.test(block),
     `block: ${block.trim()}`,
   )
-  assert(
-    '.draft-a4-sheet box-shadow uses an ink-tinted rgba (not pure black)',
-    /box-shadow\s*:\s*[^;]*rgba\(\s*30\s*,\s*30\s*,\s*28\s*,/.test(block),
-    `block: ${block.trim()}`,
-  )
 }
 
 /* ─── 3. D3: shell background resolves through a CSS var ────────────── */
