@@ -40,9 +40,14 @@ const calmV1HighlightDuration = 150
 const calmReadingInset = 0.08
 const calmSpring = { response: 0.62, dampingRatio: 0.88 }
 
-const calmDefaults = { beat: 150, min: 600, max: 900, perLine: 110, tail: 0.5 }
+const calmDefaults = { beat: 150, min: 620, max: 880, perLine: 100, tail: 0.6 }
 type CalmTuning = typeof calmDefaults
-const tuningStorage = 'eqb-listening-calm-v2'
+const calmPresets: { label: string; values: CalmTuning }[] = [
+  { label: '推荐', values: calmDefaults },
+  { label: '舒展', values: { beat: 170, min: 660, max: 960, perLine: 120, tail: 0.75 } },
+  { label: '利落', values: { beat: 130, min: 560, max: 820, perLine: 90, tail: 0.4 } },
+]
+const tuningStorage = 'eqb-listening-calm-v2-presets'
 const tuningRanges = [
   ['beat', '停顿', 100, 250, 1],
   ['min', '最短', 500, 750, 1],
@@ -68,6 +73,11 @@ function loadCalmTuning() {
 function CalmTuningPanel({ values, onChange }: { values: CalmTuning; onChange: (value: CalmTuning) => void }) {
   const summary = tuningRanges.map(([key]) => `${key} ${values[key]}`).join(' · ')
   return <aside className="listening-follow-tuning" aria-label="跟读动效调参">
+    <div className="listening-follow-tuning-presets" role="group" aria-label="动效预设">
+      {calmPresets.map((preset) => <Button key={preset.label} size="sm" tone="quiet"
+        aria-pressed={tuningRanges.every(([key]) => values[key] === preset.values[key])}
+        onClick={() => onChange(preset.values)}>{preset.label}</Button>)}
+    </div>
     <div className="listening-follow-tuning-sliders">
       {tuningRanges.map(([key, label, min, max, step]) => <label key={key}>
         <span>{label} {values[key]}</span>
@@ -158,6 +168,12 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
   const tune = calmV2 && params.get('tune') === '1'
   const [tuning, setTuning] = useState(() => tune ? loadCalmTuning() : calmDefaults)
   const liveTuning = useRef(tuning)
+  useEffect(() => {
+    try {
+      // Discard the old preview values without resetting choices saved with the presets.
+      localStorage.removeItem('eqb-listening-calm-v2')
+    } catch { /* Storage may be unavailable. */ }
+  }, [])
   const updateTuning = (value: CalmTuning) => {
     liveTuning.current = value
     setTuning(value)

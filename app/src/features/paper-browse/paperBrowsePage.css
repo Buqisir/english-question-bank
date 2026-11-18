@@ -2111,6 +2111,16 @@
   font-size: 12px;
 }
 
+.listening-follow-tuning-presets {
+  display: flex;
+  gap: var(--eqb-space-1);
+  margin-block-end: var(--eqb-space-1);
+}
+
+.listening-follow-tuning-presets .eqb-button[data-tone='quiet'][aria-pressed='true'] {
+  background: var(--eqb-color-state-selected);
+}
+
 .listening-follow-tuning-sliders {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2144,7 +2154,7 @@
 
 @media (min-width: 961px) and (min-height: 761px) {
   .listening-follow-lines:has(+ .listening-follow-tuning) {
-    max-block-size: calc(100dvh - 506px);
+    max-block-size: calc(100dvh - 538px);
   }
 }
 
