@@ -781,20 +781,9 @@ function pickDisplayTokens(matchedTokens: string[], tokenRunIds: Map<string, num
   return runOrder.map((runId) => bestByRun.get(runId) as string)
 }
 
-function rankKeywordCandidates(groups: QuestionGroupCard[], query: string): KeywordCandidate[] {
+function rankKeywordCandidates(groups: QuestionGroupCard[], query: string): KeywordCandidate[] | null {
   const tokens = tokenize(query).map(normalize).filter((t) => t.length > 0)
-  if (tokens.length === 0) {
-    return groups.map((group) => ({
-      group,
-      hits: 0,
-      score: 0,
-      nonGeneralScore: 0,
-      matchedTokens: [],
-      matchedTopicLabel: null,
-      hasCorpusSignal: false,
-      displayTokens: [],
-    }))
-  }
+  if (tokens.length === 0) return null
   // DF is measured against the FULL, unfiltered bank (not the possibly
   // intent-narrowed `pool` below) — a token's corpus-vocabulary status
   // should not shift depending on which dimension filter happened to fire
@@ -1046,43 +1035,32 @@ export function rankByKeywords(
   query: string,
   limit = 12,
 ): ConciergeSearchHit[] {
-  const tokens = tokenize(query).map(normalize).filter((t) => t.length > 0)
-  if (tokens.length === 0) {
+  return fallbackKeywordHits(groups, rankKeywordCandidates(groups, query), limit)
+}
+
+function fallbackKeywordHits(
+  groups: QuestionGroupCard[],
+  candidates: KeywordCandidate[] | null,
+  limit = 12,
+): ConciergeSearchHit[] {
+  if (candidates === null) {
     return groups.slice(0, limit).map((group) => ({ group, reason: '近期题组' }))
   }
-  return rankKeywordCandidates(groups, query)
+  return candidates
     .filter(isAboveNoiseFloor)
     .slice(0, limit)
     .map(toSearchHit)
 }
 
 function highConfidenceLocalHits(
-  groups: QuestionGroupCard[],
-  query: string,
+  candidates: KeywordCandidate[] | null,
   limit = 12,
 ): ConciergeSearchHit[] {
   // rankKeywordCandidates already hard-filters by any explicit intent
   // dimension (section letter / group type / region) when that filter
   // yields at least one candidate — see its doc comment.
-  const candidates = rankKeywordCandidates(groups, query)
-  const topScore = candidates[0]?.score ?? 0
-  const topNonGeneralScore = candidates[0]?.nonGeneralScore ?? 0
-
-  // Confidence requires a non-trivial signal, not just a couple of
-  // incidental general-field hits. Two ways to earn confidence:
-  //   1. The non-general score (topic / section / place tiers) alone
-  //      clears the floor — a real topic-label hit, a lettered section
-  //      match ("Reading C"), or a region/year hit. A bare section letter
-  //      with nothing else recognized (e.g. "生态主题 C 篇" against a
-  //      dataset with no ecology-tagged group) scores only the single
-  //      letter's weight and correctly stays below this floor — it still
-  //      deserves the steward's fuzzier semantic read.
-  //   2. The total score (even if entirely general-tier) clears a higher
-  //      bar — a dense/near-verbatim phrase match against the title or
-  //      passage text, not scattered single-word overlap.
-  const confident =
-    topNonGeneralScore >= HIGH_CONFIDENCE_SCORE_FLOOR || topScore >= GENERAL_ONLY_PHRASE_SCORE_FLOOR
-  if (!confident) return []
+  if (!candidates?.length || !isConfidentCandidate(candidates[0])) return []
+  const topScore = candidates[0].score
 
   return candidates
     .filter((candidate) => candidate.score === topScore)
@@ -1143,7 +1121,8 @@ export async function runConciergeSearch(
   const dailyLimitExceeded = input.dailyLimitExceeded ?? false
   const thinkingMode = input.thinkingMode ?? false
   const doStewardCall = input.doStewardCall || askQuestionBankSteward
-  const localDirectHits = highConfidenceLocalHits(input.questionGroups, intent)
+  const candidates = rankKeywordCandidates(input.questionGroups, intent)
+  const localDirectHits = highConfidenceLocalHits(candidates)
 
   if (localDirectHits.length > 0) {
     return {
@@ -1161,7 +1140,7 @@ export async function runConciergeSearch(
   }
 
   if (!apiKey && !serverKeyAvailable) {
-    const hits = rankByKeywords(input.questionGroups, intent)
+    const hits = fallbackKeywordHits(input.questionGroups, candidates)
     return {
       kind: 'results',
       hits,
@@ -1179,7 +1158,7 @@ export async function runConciergeSearch(
   // missing-api-key, but with a distinct reason/message (teacher can tell "no key
   // configured" apart from "AI ran out for today, back tomorrow").
   if (!apiKey && dailyLimitExceeded) {
-    const hits = rankByKeywords(input.questionGroups, intent)
+    const hits = fallbackKeywordHits(input.questionGroups, candidates)
     return {
       kind: 'results',
       hits,
@@ -1223,7 +1202,7 @@ export async function runConciergeSearch(
     if (typeof console !== 'undefined' && console.warn) {
       console.warn('[concierge] steward call failed; using keyword fallback:', message)
     }
-    const fallbackHits = rankByKeywords(input.questionGroups, intent)
+    const fallbackHits = fallbackKeywordHits(input.questionGroups, candidates)
     return {
       kind: 'results',
       hits: fallbackHits,
