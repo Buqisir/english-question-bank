@@ -2067,8 +2067,9 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .listening-follow-lines[data-follow='calm'][data-focused] .listening-follow-line[aria-current='true'] {
-    transition-duration: 150ms;
+  .listening-follow-lines:is([data-follow='calm'], [data-follow='calm-lively']) .listening-follow-line,
+  .listening-follow-lines:is([data-follow='calm'], [data-follow='calm-lively']) .listening-follow-line > * {
+    transition-duration: 160ms;
   }
 }
 
