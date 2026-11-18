@@ -103,10 +103,10 @@ jobs:
             echo "image=${ImageVersion:-ubuntu-24.04}"
           } >> "$GITHUB_OUTPUT"
       - &restore_apt_cache
-        name: Cache apt package archives
+        name: Restore apt package archives
         id: apt_cache
         if: ${{ steps.apt_packages.outcome == 'success' }}
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: ~/.cache/eqb-apt/*.deb
           key: eqb-apt-v1-${{ runner.os }}-${{ runner.arch }}-${{ steps.apt_packages.outputs.image }}-${{ steps.apt_packages.outputs.hash }}
@@ -160,6 +160,14 @@ jobs:
             sudo sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/' "$policy"
           fi
           magick -version
+      - &save_apt_cache
+        # Save even when a later step fails so a slow mirror only has to be survived once.
+        name: Save apt package archives
+        if: ${{ always() && steps.apt_cache.outcome == 'success' && steps.apt_cache.outputs.cache-hit != 'true' }}
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.cache/eqb-apt/*.deb
+          key: ${{ steps.apt_cache.outputs.cache-primary-key }}
       - &install_chromium
         name: Install Chromium
         run: &chromium_install_command pnpm -C app exec playwright install --with-deps --no-shell chromium
@@ -190,6 +198,7 @@ jobs:
       - *prepare_apt_cache
       - *restore_apt_cache
       - *install_full_toolchain
+      - *save_apt_cache
       - *install_chromium
       - name: Run selected verification pack
         env:
@@ -316,6 +325,7 @@ jobs:
         timeout-minutes: 30
         env: *apt_install_env
         run: *install_system_dependencies
+      - *save_apt_cache
       - &install_render_chromium
         name: Install Chromium
         if: ${{ steps.lane.outputs.count != '0' }}
@@ -363,6 +373,7 @@ jobs:
       - *prepare_apt_cache
       - *restore_apt_cache
       - *install_render_toolchain
+      - *save_apt_cache
       - *install_render_chromium
       - name: Run selected verification pack (isolated render lane)
         # The selected-pack runner owns its existing diff/build preflight.
