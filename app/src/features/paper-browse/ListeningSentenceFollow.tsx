@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import type { ListeningSentence } from '../../domain/listeningAnalysis'
 import { Check } from '../../icons'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
@@ -28,6 +28,26 @@ export function scrollListeningTarget(target: Element, block: ScrollLogicalPosit
   panel.scrollBy({ top: row.top - top - offset, behavior: 'instant' })
 }
 
+// Signature motion (DESIGN.md §6): the 700 ms phrase transition and 500 ms
+// return deliberately exceed 300 ms so readers can track the same line of text.
+const focusOffset = 0.4
+const phraseDuration = 700
+const jumpDuration = 500
+
+function followEase(progress: number) {
+  // Solve x for cubic-bezier(0.22, 1, 0.36, 1), then sample y at the same t.
+  let low = 0
+  let high = 1
+  for (let i = 0; i < 12; i++) {
+    const t = (low + high) / 2
+    const inverse = 1 - t
+    const x = 3 * inverse * inverse * t * 0.22 + 3 * inverse * t * t * 0.36 + t ** 3
+    if (x < progress) low = t
+    else high = t
+  }
+  return 1 - (1 - (low + high) / 2) ** 3
+}
+
 const noSentences: ListeningSentence[] = []
 
 export function ListeningSentenceFollow({ sentences = noSentences, audio, onActivate, onQuestion, reviewedSentence, children }: {
@@ -42,25 +62,124 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
   const [loop, setLoop] = useState(false)
   const [error, setError] = useState(false)
   const [following, setFollowing] = useState(true)
-  const [inView, setInView] = useState(true)
+  const [focused, setFocused] = useState(false)
+  const follows = useRef(true)
   const loopTarget = useRef(-1)
   const loopRepeating = useRef(false)
   const list = useRef<HTMLDivElement>(null)
+  const expectedScroll = useRef<number | null>(null)
+  const jumpToCurrent = useRef<() => void>(() => {})
   const repeatStart = sentences[0]?.repeatStart ?? Infinity
+  const flow = new URLSearchParams(window.location.search).get('follow') === 'flow'
+
+  const setFollow = useCallback((enabled: boolean) => {
+    follows.current = enabled
+    setFollowing(enabled)
+  }, [])
+
+  const positionList = useCallback((top: number) => {
+    const scroller = list.current
+    if (!scroller) return
+    scroller.scrollTop = top
+    expectedScroll.current = scroller.scrollTop
+  }, [])
+
+  useLayoutEffect(() => {
+    const scroller = list.current
+    const first = scroller?.firstElementChild
+    const last = scroller?.lastElementChild
+    if (!scroller || !first || !last) return
+    const measure = () => {
+      const height = scroller.clientHeight
+      scroller.style.paddingTop = `${Math.max(0, height * focusOffset - first.getBoundingClientRect().height / 2)}px`
+      scroller.style.paddingBottom = `${Math.max(0, height * (1 - focusOffset) - last.getBoundingClientRect().height / 2)}px`
+      expectedScroll.current = scroller.scrollTop
+    }
+    measure()
+    const observer = new ResizeObserver(measure)
+    observer.observe(scroller, { box: 'border-box' })
+    observer.observe(first)
+    if (last !== first) observer.observe(last)
+    return () => observer.disconnect()
+  }, [sentences])
 
   useEffect(() => {
-    if (!audio || !sentences.length) return
+    const scroller = list.current
+    if (!audio || !scroller || !sentences.length) return
+    const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
     let frame = 0
-    const sync = () => {
-      cancelAnimationFrame(frame)
+    let lastIndex = -1
+    let lastRepeating = false
+    let focusTimeout: number | undefined
+    let motion: { from: number; index: number; start: number; duration: number } | null = null
+    const center = (index: number) => {
+      const row = scroller.children[index] as HTMLElement | undefined
+      return row ? row.offsetTop + row.offsetHeight / 2 - scroller.clientHeight * focusOffset : scroller.scrollTop
+    }
+    const startMove = (index: number, duration: number, now: number) => {
+      motion = { from: scroller.scrollTop, index, start: now, duration }
+    }
+    const sync = (now: number, jump = false) => {
+      frame = 0
       const target = sentences[loopTarget.current]
       if (target && !audio.paused && !audio.seeking && audio.currentTime >= sentenceEnd(target, loopRepeating.current)) {
         audio.currentTime = sentenceStart(target, loopRepeating.current)
       }
-      const repeating = audio.currentTime + 0.025 >= repeatStart
-      const index = sentences.findLastIndex((sentence) => sentenceStart(sentence, repeating) <= audio.currentTime + 0.025)
-      setCurrent(target ? loopTarget.current : index)
-      if (!audio.paused) frame = requestAnimationFrame(sync)
+      const time = audio.currentTime
+      const repeating = time + 0.025 >= repeatStart
+      const index = target ? loopTarget.current
+        : sentences.findLastIndex((sentence) => sentenceStart(sentence, repeating) <= time + 0.025)
+      const continuous = flow && !reducedMotion.matches
+      if (index >= 0 && follows.current) {
+        if (reducedMotion.matches) {
+          if (jump || index !== lastIndex || motion) positionList(center(index))
+          motion = null
+        } else {
+          if (jump || (!audio.paused && (index < lastIndex || repeating !== lastRepeating))) startMove(index, jumpDuration, now)
+          else if (!continuous && index !== lastIndex) startMove(index, phraseDuration, now)
+
+          if (motion) {
+            const progress = Math.min(1, Math.max(0, (now - motion.start) / motion.duration))
+            const to = center(motion.index)
+            positionList(progress === 1 ? to : motion.from + (to - motion.from) * followEase(progress))
+            if (progress === 1) motion = null
+          } else if (continuous && !audio.paused && !audio.seeking) {
+            const from = center(index)
+            const next = sentences[index + 1]
+            let to = from
+            if (next && !target) {
+              const start = sentenceStart(sentences[index], repeating)
+              const end = sentenceStart(next, repeating)
+              const progress = end > start ? Math.min(1, Math.max(0, (time - start) / (end - start))) : 0
+              to += (center(index + 1) - from) * progress
+            }
+            const delta = to - scroller.scrollTop
+            // Snap below half a CSS pixel of movement to avoid rounding stalls.
+            positionList(scroller.scrollTop + (Math.abs(delta * 0.12) < 0.5 ? delta : delta * 0.12))
+          }
+        }
+      } else {
+        motion = null
+      }
+      if (index !== lastIndex) setCurrent(index)
+      lastIndex = index
+      lastRepeating = repeating
+      if (!audio.paused || motion) frame = requestAnimationFrame(sync)
+    }
+    const update = (jump = false) => {
+      cancelAnimationFrame(frame)
+      sync(performance.now(), jump)
+    }
+    const onPlay = () => {
+      window.clearTimeout(focusTimeout)
+      setFocused(true)
+      update()
+    }
+    const onPause = () => {
+      window.clearTimeout(focusTimeout)
+      focusTimeout = window.setTimeout(() => setFocused(false), 300)
+      if (flow && !reducedMotion.matches) motion = null
+      update()
     }
     const stopLoop = () => {
       loopTarget.current = -1
@@ -69,86 +188,64 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     const onPlayerSeek = () => {
       const target = sentences[loopTarget.current]
       const repeating = loopRepeating.current
-      if (target && (audio.currentTime < sentenceStart(target, repeating) || audio.currentTime >= sentenceEnd(target, repeating))) {
-        stopLoop()
-      }
-      sync()
+      if (target && (audio.currentTime < sentenceStart(target, repeating) || audio.currentTime >= sentenceEnd(target, repeating))) stopLoop()
+      setFollow(true)
+      update(true)
     }
-    const events = ['play', 'pause', 'seeked', 'ended', 'timeupdate'] as const
-    events.forEach((event) => audio.addEventListener(event, sync))
+    const onMediaUpdate = () => { if (!frame) update() }
+    const playbackEvents = ['timeupdate', 'seeked'] as const
+    audio.addEventListener('play', onPlay)
+    audio.addEventListener('pause', onPause)
+    audio.addEventListener('ended', onPause)
+    playbackEvents.forEach(event => audio.addEventListener(event, onMediaUpdate))
     audio.addEventListener(listeningPlayerSeekEvent, onPlayerSeek)
     audio.addEventListener(listeningPlayerSwitchEvent, stopLoop)
+    jumpToCurrent.current = () => update(true)
     stopLoop()
+    setCurrent(-1)
     setError(false)
-    sync()
+    setFocused(!audio.paused)
+    update()
     return () => {
       cancelAnimationFrame(frame)
-      events.forEach((event) => audio.removeEventListener(event, sync))
+      window.clearTimeout(focusTimeout)
+      audio.removeEventListener('play', onPlay)
+      audio.removeEventListener('pause', onPause)
+      audio.removeEventListener('ended', onPause)
+      playbackEvents.forEach(event => audio.removeEventListener(event, onMediaUpdate))
       audio.removeEventListener(listeningPlayerSeekEvent, onPlayerSeek)
       audio.removeEventListener(listeningPlayerSwitchEvent, stopLoop)
+      jumpToCurrent.current = () => {}
     }
-  }, [audio, sentences, repeatStart])
-
-  useEffect(() => {
-    const panel = list.current?.closest<HTMLElement>('.paper-browse-lecture-panel')
-    if (!panel) return
-    const stopFollowing = () => setFollowing(false)
-    const onWheel = (event: WheelEvent) => { if (event.deltaY) stopFollowing() }
-    const onKey = (event: KeyboardEvent) => {
-      const target = event.target as HTMLElement
-      if (event.defaultPrevented || (event.key === ' ' && target.closest('button, summary'))) return
-      if (target.closest('[role="slider"]') && ['Home', 'End', 'ArrowUp', 'ArrowDown'].includes(event.key)) return
-      if (['PageUp', 'PageDown', 'Home', 'End', 'ArrowUp', 'ArrowDown', ' '].includes(event.key)) stopFollowing()
-    }
-    const onPointerDown = (event: PointerEvent) => {
-      if (event.target === panel && event.clientX >= panel.getBoundingClientRect().left + panel.clientWidth) stopFollowing()
-    }
-    panel.addEventListener('wheel', onWheel, { passive: true })
-    panel.addEventListener('touchmove', stopFollowing, { passive: true })
-    panel.addEventListener('keydown', onKey)
-    panel.addEventListener('pointerdown', onPointerDown)
-    return () => {
-      panel.removeEventListener('wheel', onWheel)
-      panel.removeEventListener('touchmove', stopFollowing)
-      panel.removeEventListener('keydown', onKey)
-      panel.removeEventListener('pointerdown', onPointerDown)
-    }
-  }, [sentences])
-
-  useEffect(() => {
-    const row = list.current?.children[current]
-    if (!row) return
-    const observer = new IntersectionObserver(([entry]) => {
-      setInView(entry.isIntersecting)
-      if (following && !entry.isIntersecting) scrollListeningTarget(row, 'nearest')
-    })
-    observer.observe(row)
-    return () => observer.disconnect()
-  }, [current, following])
+  }, [audio, sentences, repeatStart, flow, positionList, setFollow])
 
   useEffect(() => {
     const row = reviewedSentence && list.current?.children[reviewedSentence.index] as HTMLElement | undefined
     if (!row) return
-    setFollowing(false)
+    setFollow(false)
+    const scroller = list.current
+    if (scroller) {
+      positionList(row.offsetTop + row.offsetHeight / 2 - scroller.clientHeight * focusOffset)
+      scrollListeningTarget(scroller, 'nearest')
+    }
     row.querySelector('button')?.focus({ preventScroll: true })
-    scrollListeningTarget(row, 'center')
     const duration = Number.parseFloat(getComputedStyle(row).getPropertyValue('--motion-fast'))
     const flash = row.animate([{ backgroundColor: 'var(--eqb-color-state-selected)' }, {}], {
       duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : duration,
       delay: 480, fill: 'backwards',
     })
     return () => flash.cancel()
-  }, [reviewedSentence])
+  }, [reviewedSentence, positionList, setFollow])
 
   function playSentence(index: number) {
     if (!audio) return
     onActivate(audio)
-    setFollowing(true)
+    setFollow(true)
     setError(false)
     if (audio.error) audio.load()
     if (loop) loopTarget.current = index
     audio.currentTime = sentenceStart(sentences[index], loop ? loopRepeating.current : audio.currentTime + 0.025 >= repeatStart)
-    setCurrent(index)
+    jumpToCurrent.current()
     void playListeningAudio(audio).catch((reason) => {
       if (!(reason instanceof DOMException && reason.name === 'AbortError')) setError(true)
     })
@@ -162,7 +259,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       loopRepeating.current = audio.currentTime + 0.025 >= repeatStart
       const start = sentenceStart(target, loopRepeating.current)
       if (audio.currentTime < start || audio.currentTime >= sentenceEnd(target, loopRepeating.current)) audio.currentTime = start
-      setCurrent(loopTarget.current)
+      jumpToCurrent.current()
     }
     setLoop(!loop)
   }
@@ -178,7 +275,13 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     {sentences.length > 0 && <section className="listening-transcript" aria-label="录音稿">
       <h6>录音稿</h6>
       {error && <p className="listening-audio-error" role="status">录音未能播放，请重试</p>}
-      <div className="listening-follow-lines" ref={list}>
+      <div className="listening-follow-lines" ref={list} tabIndex={0} role="region" aria-label="逐句录音稿"
+        data-follow={flow ? 'flow' : 'step'} data-focused={focused || undefined}
+        onWheel={(event) => { if (event.deltaY) setFollow(false) }}
+        onTouchMove={() => setFollow(false)}
+        onScroll={(event) => {
+          if (Math.abs(event.currentTarget.scrollTop - (expectedScroll.current ?? 0)) >= 1) setFollow(false)
+        }}>
         {sentences.map((sentence, index) => {
           const evidence = sentence.evidence ?? []
           const previous = sentences[index - 1]
@@ -187,6 +290,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
             .filter((question) => !previous?.evidence?.some((item) => item.question === question))
           return <div key={sentence.start} className="listening-follow-line"
             data-speaker-change={previous && speakerChange ? true : undefined}
+            data-adjacent={current >= 0 && Math.abs(index - current) === 1 || undefined}
             data-playable={audio ? '' : undefined} aria-current={audio && current === index ? 'true' : undefined}>
             <span className="listening-follow-speaker" style={{ fontFamily: paperSurfaceTokens.paperFontStack }}>
               {speakerChange && sentence.speaker && `${sentence.speaker}:`}
@@ -201,7 +305,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
               </button>
               {questionLabels.length > 0 && <span className="listening-follow-evidence">
                 {questionLabels.map((question) => <button key={question} type="button" className="listening-quiet-control"
-                  onClick={() => { setFollowing(false); onQuestion(question) }}>第 {question} 题</button>)}
+                  onClick={() => { setFollow(false); onQuestion(question) }}>第 {question} 题</button>)}
               </span>}
               <p className="listening-follow-translation">{sentence.zh}</p>
             </div>
@@ -209,14 +313,17 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
         })}
       </div>
     </section>}
-    {children}
-    {!following && audio && current >= 0 && !inView && <div className="listening-follow-return">
+    {!following && audio && current >= 0 && <div className="listening-follow-return">
       <button type="button" className="listening-quiet-control" onClick={() => {
-        const row = list.current?.children[current]
-        if (row) scrollListeningTarget(row, 'center')
-        row?.querySelector('button')?.focus({ preventScroll: true })
-        setFollowing(true)
+        const scroller = list.current
+        if (scroller) {
+          scrollListeningTarget(scroller, 'nearest')
+          scroller.focus({ preventScroll: true })
+        }
+        setFollow(true)
+        jumpToCurrent.current()
       }}>回到当前句</button>
     </div>}
+    {children}
   </>
 }

@@ -2010,7 +2010,37 @@
 }
 
 .listening-follow-lines {
-  display: grid;
+  position: relative;
+  box-sizing: border-box;
+  height: min(44dvh, 420px);
+  overflow-y: auto;
+  overflow-anchor: none;
+}
+
+.listening-follow-lines[data-focused] {
+  mask-image: linear-gradient(to bottom, transparent, black 25%, black 70%, transparent);
+}
+
+.listening-follow-line > * {
+  transition: opacity var(--motion-slow) var(--ease-out);
+}
+
+.listening-follow-lines[data-focused] .listening-follow-line > * {
+  opacity: 0.55;
+}
+
+.listening-follow-lines[data-focused] .listening-follow-line[data-adjacent] > * {
+  opacity: 0.8;
+}
+
+.listening-follow-lines[data-focused] .listening-follow-line[aria-current='true'] > * {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .listening-follow-line > * {
+    transition: none;
+  }
 }
 
 .listening-follow-line {
