@@ -91,9 +91,8 @@ jobs:
           packages=(ffmpeg poppler-utils imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip)
           # Render lanes run import preflight, which requires soffice; shard membership can move.
           packages+=(libreoffice-writer)
-          if [ "$VERIFY_TOOLCHAIN" = full ]; then
-            packages+=(python3-venv python3-numpy python3-scipy)
-          fi
+          # One package set for every lane lets all lanes share a single archive cache.
+          packages+=(python3-venv python3-numpy python3-scipy)
           mkdir -p "$HOME/.cache/eqb-apt"
           hash=$(printf '%s\n' "${packages[@]}" | sha256sum)
           {
