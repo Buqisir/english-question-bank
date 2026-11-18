@@ -33,7 +33,7 @@ export function scrollListeningTarget(target: Element, block: ScrollLogicalPosit
 const phraseDuration = 700
 const jumpDuration = 500
 const calmHighlightDuration = 150
-const calmFadeEdge = 0.08
+const calmReadingInset = 0.08
 
 function followEase(progress: number, calm: boolean) {
   const x1 = calm ? 0.4 : 0.22
@@ -58,7 +58,7 @@ function sentenceFocusTop(row: HTMLElement, height: number, calm: boolean) {
   if (!english) return bounds.height / 2 - height * 0.4
   return Math.max(
     english.top - bounds.top + english.height / 2 - height * 0.45,
-    bounds.height - height * (1 - calmFadeEdge),
+    bounds.height - height * (1 - calmReadingInset),
   )
 }
 
@@ -81,7 +81,6 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
   const loopTarget = useRef(-1)
   const loopRepeating = useRef(false)
   const list = useRef<HTMLDivElement>(null)
-  const expectedScroll = useRef<number | null>(null)
   const jumpToCurrent = useRef<() => void>(() => {})
   const repeatStart = sentences[0]?.repeatStart ?? Infinity
   const followParam = new URLSearchParams(window.location.search).get('follow')
@@ -98,7 +97,6 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     const scroller = list.current
     if (!scroller) return
     scroller.scrollTop = top
-    expectedScroll.current = scroller.scrollTop
   }, [])
 
   useLayoutEffect(() => {
@@ -110,7 +108,6 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       const height = scroller.clientHeight
       scroller.style.paddingTop = `${Math.max(0, -sentenceFocusTop(first, height, calm))}px`
       scroller.style.paddingBottom = `${Math.max(0, height + sentenceFocusTop(last, height, calm) - last.offsetHeight)}px`
-      expectedScroll.current = scroller.scrollTop
     }
     measure()
     const observer = new ResizeObserver(measure)
@@ -153,7 +150,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       const row = scroller.children[index] as HTMLElement
       const top = row.offsetTop - scroller.scrollTop
       const height = scroller.clientHeight
-      return top >= height * calmFadeEdge && top + row.offsetHeight <= height * (1 - calmFadeEdge)
+      return top >= height * calmReadingInset && top + row.offsetHeight <= height * (1 - calmReadingInset)
     }
     const sync = (now: number, jump = false) => {
       frame = 0
@@ -357,8 +354,16 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
         data-follow={mode} data-focused={focused || undefined}
         onWheel={(event) => { if (event.deltaY) setFollow(false) }}
         onTouchMove={() => setFollow(false)}
-        onScroll={(event) => {
-          if (Math.abs(event.currentTarget.scrollTop - (expectedScroll.current ?? 0)) >= 1) setFollow(false)
+        onPointerDown={(event) => {
+          const scroller = event.currentTarget
+          const gutterStart = scroller.getBoundingClientRect().left + scroller.clientWidth
+          if (event.target === scroller && event.clientX >= gutterStart) setFollow(false)
+        }}
+        onKeyDown={(event) => {
+          // A focus change can scroll the list without a scroll gesture.
+          // Suspend only on keys that actually request scrolling.
+          if (!event.defaultPrevented && (['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'].includes(event.key)
+            || (event.key === ' ' && event.target === event.currentTarget))) setFollow(false)
         }}>
         {sentences.map((sentence, index) => {
           const evidence = sentence.evidence ?? []
@@ -368,7 +373,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
             .filter((question) => !previous?.evidence?.some((item) => item.question === question))
           return <div key={sentence.start} className="listening-follow-line"
             data-speaker-change={previous && speakerChange ? true : undefined}
-            data-adjacent={current >= 0 && Math.abs(index - current) === 1 || undefined}
+            data-distance={current < 0 ? undefined : Math.min(4, Math.abs(index - current))}
             data-playable={audio ? '' : undefined} aria-current={audio && current === index ? 'true' : undefined}>
             <span className="listening-follow-speaker" style={{ fontFamily: paperSurfaceTokens.paperFontStack }}>
               {speakerChange && sentence.speaker && `${sentence.speaker}:`}
