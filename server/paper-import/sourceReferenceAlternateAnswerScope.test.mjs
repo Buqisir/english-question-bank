@@ -183,7 +183,7 @@ test('independent no-image admission rejects removed content, stolen alternate p
   missingScoring.sidecar.groups[0].scoring = { state: 'not_supplied', entries: [],
     evidence: [input.sidecar.groups[0].scoring.entries[0].paragraphs[0].source] }
   assert.throws(() => assertSourceReferenceAdmission(missingScoring),
-    { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID', message: /preserve every main sample/u })
+    { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID', message: 'Alternate scope writing references differ from the current producer' })
 })
 
 test('full boundary spelling, uniqueness, raw adjacency and main-task prerequisites fail closed', () => {
