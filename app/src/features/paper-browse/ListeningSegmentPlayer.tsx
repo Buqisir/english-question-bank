@@ -18,6 +18,8 @@ type Props = {
   marks?: ReadonlyArray<{ label: string; startSeconds: number; endSeconds: number }>
 }
 
+export const listeningPlayerSeekEvent = 'listening-player-seek'
+
 /** Slow → fast; the gauge needle points left, up, right. */
 const RATES = [0.75, 1, 1.25] as const
 const NEEDLE_DEGREES = { 0.75: -50, 1: 0, 1.25: 50 } as const
@@ -184,7 +186,10 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
     const next = Math.min(duration, Math.max(0, seconds))
     setPosition(next)
     const audio = audioRef.current
-    if (audio) audio.currentTime = startSeconds + next
+    if (audio) {
+      audio.currentTime = startSeconds + next
+      audio.dispatchEvent(new Event(listeningPlayerSeekEvent))
+    }
   }
 
   function pointerSeconds(event: PointerEvent<HTMLDivElement>) {

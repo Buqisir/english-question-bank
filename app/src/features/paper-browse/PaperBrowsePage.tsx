@@ -3659,6 +3659,10 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     const activeQuestionId = hasActiveQuestion ? lectureSelection?.questionId ?? null : null
     const activeEvidenceId = hasActiveQuestion ? lectureSelection?.evidenceId ?? null : null
     const activeOptionLabel = hasActiveQuestion ? lectureSelection?.optionLabel ?? null : null
+    const lectureEntry = lectureAnalysisByGroupId[groupId]
+    const listeningMaterial = activeQuestionId && lectureEntry?.kind === 'listening'
+      ? Object.values(lectureEntry.analysis.materials).find(({ questionIds }) => questionIds.includes(activeQuestionId))
+      : null
     return (
       <div className="paper-browse-lecture-body">
         {group.groupType === 'reading' ? (
@@ -3733,7 +3737,15 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 {range && <span className="paper-browse-lecture-range"> · {range}</span>}
               </h4>
             )}
-            {answerRow && <p className="paper-browse-answer-row">{answerRow}</p>}
+            {listeningMaterial ? (
+              <details key={listeningMaterial.segmentId} className="listening-answer-disclosure">
+                <summary className="listening-quiet-control">全节答案</summary>
+                {answerRow && <p className="paper-browse-answer-row">{answerRow}</p>}
+                <p className="listening-analysis-topic">
+                  {listeningMaterial.topic.theme} · {listeningMaterial.topic.themeGroup} · {listeningMaterial.topic.subtopic}
+                </p>
+              </details>
+            ) : answerRow && <p className="paper-browse-answer-row">{answerRow}</p>}
           </>
         )}
         <div className="paper-browse-lecture-analysis">

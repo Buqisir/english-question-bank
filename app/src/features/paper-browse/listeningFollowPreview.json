@@ -3,7 +3,7 @@
     { "speaker": "M", "en": "Hello, Sara.", "zh": "你好，Sara。", "start": 476.46, "end": 477.46 },
     { "speaker": "W", "en": "Hello, David.", "zh": "你好，David。", "start": 478.46, "end": 479.30 },
     { "speaker": "W", "en": "I can’t come for dinner tonight.", "zh": "我今晚不能来吃晚饭了。", "start": 479.66, "end": 481.48, "evidence": [{ "question": 6, "kind": "support" }] },
-    { "speaker": "W", "en": "Sorry.", "zh": "抱歉。", "start": 481.78, "end": 482.14, "evidence": [{ "question": 6, "kind": "support" }] },
+    { "speaker": "W", "en": "Sorry.", "zh": "抱歉。", "start": 481.78, "end": 482.14 },
     { "speaker": "M", "en": "Oh, what happened?", "zh": "哦，发生什么事了？", "start": 482.72, "end": 484.16 },
     { "speaker": "W", "en": "We’ve got a new case and things get pretty crazy here in the office.", "zh": "我们接了一个新案子，办公室里忙得不可开交。", "start": 484.74, "end": 489.24 },
     { "speaker": "M", "en": "Well, then I’ll come to you.", "zh": "好吧，那我去找你。", "start": 489.94, "end": 492.18 },

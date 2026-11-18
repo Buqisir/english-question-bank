@@ -23,12 +23,15 @@ export function ListeningAnalysisPanel({ analysis, groupQuestionIds, activeQuest
           .filter((questionId) => allowed.has(questionId) && (!activeQuestionId || questionId === activeQuestionId))
           .map((questionId) => analysis.questions[questionId])
           .filter(Boolean)
+        const numbers = material.questionIds.map((id) => id.split(':').at(-1))
+        const range = numbers.length > 1 && numbers.every((no, index) => Number(no) === Number(numbers[0]) + index)
+          ? `${numbers[0]}–${numbers.at(-1)}` : numbers.join('、')
         return (
           <section key={material.segmentId} className="listening-analysis-material">
-            <h5>听力材料 {material.questionIds.map((questionId) => questionId.split(':').at(-1)).join('、')}</h5>
-            <p className="listening-analysis-topic">
+            <h5>听力材料 · 第 {range} 题</h5>
+            {!activeQuestionId && <p className="listening-analysis-topic">
               {material.topic.theme} · {material.topic.themeGroup} · {material.topic.subtopic}
-            </p>
+            </p>}
             <p className="listening-analysis-summary">{material.summaryZh}</p>
             {material.sentences?.length ? <ListeningSentenceFollow
               sentences={material.sentences} audio={segmentAudio[material.segmentId]}
