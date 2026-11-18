@@ -1708,18 +1708,20 @@ const STEP_ORDER = [
   'pagination-plan', 'freeze', 'pdf-qa', 'local-preview', 'local-screen', 'push', 'screen',
 ]
 
-// Keep listening until its own audio/transcript binding changes. Search and
-// listening navigation edits only affect the preview and submission.
+// OCR generations invalidate derived listening state. Later edits retain it
+// until its own inputs change. Search and listening navigation edits only
+// affect the preview and submission.
 function redoFrom(ctx, name) {
   const index = STEP_ORDER.indexOf(name)
   if (index === -1) fail(`--redo-from 只接受：${STEP_ORDER.join(', ')}`)
   const listening = ['asr-wait', 'asr-apple-rule-v2', 'listening-review']
   const preview = ['local-preview', 'local-screen', 'push', 'screen']
+  const replacesOcr = index <= STEP_ORDER.indexOf('ocr-review')
   const redo = new Set(listening.includes(name)
     ? [...listening.slice(listening.indexOf(name)), ...preview]
     : ['summaries', 'search-metadata'].includes(name)
       ? [name, ...preview]
-      : STEP_ORDER.slice(index).filter(step => !listening.includes(step)))
+      : STEP_ORDER.slice(index).filter(step => replacesOcr || !listening.includes(step)))
   const redoPagination = redo.has('pagination-run')
   const paginationJobs = Object.entries(ctx.state.background).filter(([key]) => key.startsWith('pagination-'))
   if (redoPagination && paginationJobs.some(([, job]) => alive(job.pid))) fail('分页仍在运行；待其退出后再重做')
@@ -2034,7 +2036,6 @@ export async function startOcrGeneration(ctx, planPath, checkPlan = async () => 
       ...['summaries-parts', 'search-metadata-authored.json', 'spelling-request.json', 'spelling-review.json',
         'round2.json'].map(file => path.join(ctx.fast, file)),
     ].entries()) archive(ctx, file, `ocr-generation-${index}-`)
-    // The listening step checks whether the new OCR actually changed its input.
   })
 }
 

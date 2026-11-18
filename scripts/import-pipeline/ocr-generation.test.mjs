@@ -172,13 +172,16 @@ async function fastFixture(run) {
   const ctx = { paperId, paperDir: path.join(directory, 'paper'), work: path.join(directory, 'work'),
     fast: path.join(directory, 'work/fast'), statePath: path.join(directory, 'work/fast/state.json'),
     state: { paperId, steps: { compile: { finishedAt: 'old' }, 'ocr-review': { finishedAt: 'old' },
-      materialize: { finishedAt: 'old' }, spelling: { finishedAt: 'old' } },
+      materialize: { finishedAt: 'old' }, spelling: { finishedAt: 'old' },
+      'asr-wait': { finishedAt: 'old' }, 'asr-apple-rule-v2': { finishedAt: 'old' },
+      'listening-review': { finishedAt: 'old' }, freeze: { finishedAt: 'old' } },
       background: {}, data: { listeningSegmentAttempt: { attempt: 'old-must-not-rebind' } } } }
   const retained = {
     'paper/signals/agent-proofreading-receipt.json': JSON.stringify(f.receipt),
     'paper/materialization/nck1-ocr-source-confirmation-v1.json': JSON.stringify(f.confirmation),
     'paper/materialization/nck1-ocr-source-evidence-v1.json': 'new immutable evidence',
     'paper/agent-ocr-correction-report-v2.json': 'old report',
+    'paper/listening-review-v1.json': 'old listening review',
     'paper/canonical-evidence/teacher-confirmation-v1.json': 'old candidate confirmation',
     'work/ocr-correction-entries.json': 'old entries',
     'work/fast/summaries-parts/part-1.json': 'old authored summaries',
@@ -200,10 +203,15 @@ test('fast explicit generation archives old installs/entries/authored parts, for
   assert.equal(ctx.state.steps.compile.finishedAt, 'old')
   assert.equal(ctx.state.steps['ocr-review'], undefined)
   assert.equal(ctx.state.steps.materialize, undefined)
+  for (const step of ['asr-wait', 'asr-apple-rule-v2', 'listening-review', 'freeze']) {
+    assert.equal(ctx.state.steps[step], undefined, step)
+  }
   assert.equal(ctx.state.data.listeningSegmentAttempt, undefined)
   assert.equal(readFileSync(path.join(ctx.paperDir, 'materialization/nck1-ocr-source-evidence-v1.json'), 'utf8'), 'new immutable evidence')
   const history = readdirSync(path.join(ctx.work, 'superseded'))
-  for (const name of ['agent-proofreading-receipt.json', 'nck1-ocr-source-confirmation-v1.json', 'ocr-correction-entries.json']) {
+  assert.equal(existsSync(path.join(ctx.paperDir, 'listening-review-v1.json')), false)
+  for (const name of ['agent-proofreading-receipt.json', 'nck1-ocr-source-confirmation-v1.json',
+    'ocr-correction-entries.json', 'listening-review-v1.json']) {
     const file = history.find(file => file.endsWith(name))
     assert(file, `${name} retained`)
     const source = Object.keys(retained).find(file => file.endsWith(name))
