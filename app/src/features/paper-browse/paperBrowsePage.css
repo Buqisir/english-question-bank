@@ -2083,9 +2083,13 @@
     transition-duration: var(--listening-highlight-duration);
   }
 
-  .listening-follow-lines[data-follow='calm-v1'][data-focused] .listening-follow-line[aria-current='true'],
-  .listening-follow-lines[data-follow='calm-v1'][data-focused] .listening-follow-line[aria-current='true'] > * {
+  .listening-follow-lines[data-follow='calm-v1'] .listening-follow-line {
     transition-duration: 150ms;
+  }
+
+  /* Keep distance-based dimming from jumping on the first frame of a handoff. */
+  .listening-follow-lines:is([data-follow='calm-v1'], [data-follow='calm-v2']) .listening-follow-line > * {
+    transition-timing-function: var(--ease-hover);
   }
 }
 
