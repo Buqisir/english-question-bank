@@ -177,16 +177,17 @@ export function validateListeningAnalysis(analysis, {
   materialization,
   segmentIds = null,
   sourceAssetVersion = 1,
+  sealed = false,
   getSentenceAlignment,
 } = {}) {
   return validateListeningAnalysisInput(analysis, {
     ...buildListeningAnalysisInput(materialization, { segmentIds }),
     sourceAssetVersion,
-  }, getSentenceAlignment)
+  }, { sealed, getSentenceAlignment })
 }
 
 // The bounded input is also the exact source sent to an isolated worker.
-export function validateListeningAnalysisInput(analysis, input, getSentenceAlignment) {
+export function validateListeningAnalysisInput(analysis, input, { sealed = false, getSentenceAlignment } = {}) {
   if (!validateSchema(analysis)) fail(`Listening analysis schema invalid: ${formatSchemaErrors(validateSchema.errors)}`)
   if (analysis.paperId !== input.paperId) fail('Listening analysis paperId does not match the source')
   if (analysis.sourceAssetVersion !== input.sourceAssetVersion) fail('Listening analysis sourceAssetVersion does not match the Review Candidate')
@@ -203,7 +204,8 @@ export function validateListeningAnalysisInput(analysis, input, getSentenceAlign
     if (material.segmentId !== segmentId) fail(`${segmentId} material identity is forged`)
     if (material.transcript !== expected.transcript) fail(`${segmentId} transcript must exactly match the captured source`)
     const questionNumbers = new Set(expected.questions.map(({ questionNo }) => questionNo))
-    const sentences = material.sentences ?? []
+    // A sealed revision retains the sentence values checked when it was admitted.
+    const sentences = sealed ? [] : material.sentences ?? []
     for (const [index, sentence] of sentences.entries()) {
       const previous = sentences[index - 1]
       if (sentence.utf16Start >= sentence.utf16End || sentence.utf16End > expected.transcript.length
@@ -251,7 +253,7 @@ export function validateListeningAnalysisInput(analysis, input, getSentenceAlign
   }
   if (assignedQuestions.size !== expectedQuestions.size) fail('Listening material question coverage is incomplete')
 
-  if (getSentenceAlignment && Object.values(analysis.materials).some(material => material.sentences)) {
+  if (!sealed && getSentenceAlignment && Object.values(analysis.materials).some(material => material.sentences)) {
     const expected = mergeListeningSentenceAnalysis(analysis, getSentenceAlignment())
     for (const [segmentId, { sentences }] of Object.entries(analysis.materials)) {
       const generated = expected.materials[segmentId].sentences

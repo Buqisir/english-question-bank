@@ -372,6 +372,7 @@ export function buildNck1AnalysisProjection({
   required = true,
   analysisProfile = LEGACY_NCK1_ANALYSIS_PROFILE,
   requireTeachingContent = false,
+  sealed = false,
   getSentenceAlignment,
 }) {
   if (![LEGACY_NCK1_ANALYSIS_PROFILE, LISTENING_ANALYSIS_PROFILE].includes(analysisProfile)) {
@@ -411,6 +412,7 @@ export function buildNck1AnalysisProjection({
     validateListeningAnalysis(raw[NCK1_LISTENING_STAGED_ANALYSIS.key], {
       materialization,
       sourceAssetVersion,
+      sealed,
       getSentenceAlignment,
     })
   }

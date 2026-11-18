@@ -1969,6 +1969,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
     required: (requireAnalyses && !importProfile) || loaded.config.withTeachingAnalyses === true,
     analysisProfile,
     requireTeachingContent: Boolean(loaded.analyzedPackage) || loaded.config.withTeachingAnalyses === true,
+    sealed: Boolean(sealedListening),
     getSentenceAlignment: () => {
       try {
         return alignReviewedListeningSentences(loaded.materialization, reviewedListening?.review,

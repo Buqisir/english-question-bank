@@ -14,11 +14,11 @@ import { reviewBundleDigest } from '../../server/import-review/importReviewStore
 import { sha256, digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { listeningReviewSubject, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
-import { loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
+import { buildNck1SealedReviewProjection, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
 import { expectedListeningReadings } from './lib-listening-segment-rule.mjs'
 import { alignListeningSentences } from './listening-sentence-align.mjs'
-import { buildLocalReviewProjection } from './review.mjs'
+import { buildLocalReviewProjection, reviewManifest } from './review.mjs'
 import { prebindReviewFixtureReferences } from '../lib/syntheticReviewAnswerFixture.mjs'
 import { SOURCE_INSTRUCTION_SLOTS } from '../../shared/paper-canonical/sourcePresentation.mjs'
 
@@ -367,11 +367,24 @@ for (const [edit, expectation] of [
   assert.equal(sha256(readFileSync(path.join(reviewRoot, notePath))), note.sha256)
   if (edit === 'reading') {
     prebindReviewFixtureReferences(reviewRoot, { expectedCandidateDigest: candidate.candidateDigest })
-    const asset = buildLocalReviewProjection(reviewRoot).analysisSidecars['listening-analysis-v1.json']
-    const firstSentence = asset.materials[transcript[0].segmentId].sentences[0]
-    firstSentence.passes[0].start += .01
-    json(path.join(reviewRoot, 'analysis-listening.json'), asset)
+    const projection = buildLocalReviewProjection(reviewRoot)
+    const asset = projection.analysisSidecars['listening-analysis-v1.json']
+    const firstPass = asset.materials[transcript[0].segmentId].sentences[0].passes[0]
+    firstPass.start = Number((firstPass.start + .004).toFixed(3))
+    const staged = path.join(reviewRoot, 'analysis-listening.json')
+    json(staged, asset)
     assert.throws(() => buildLocalReviewProjection(reviewRoot), /sentences must match the program alignment/)
+
+    // Recreate the receipt that the previous aligner would have sealed.
+    const bytes = readFileSync(staged)
+    const analysisDigest = digestJson(projection.analysisSidecars)
+    const manifest = reviewManifest(reviewRoot, { ...projection, analysisDigest }, [], 'historical-sentence-fixture')
+    const revision = { id: 'rev-historical-sentences', state: 'ready', reviewKind: 'candidate',
+      finalizedAt: oldTime, ...manifest, manifest }
+    const replayed = buildNck1SealedReviewProjection(reviewRoot, revision)
+    assert.equal(replayed.analysisDigest, analysisDigest)
+    assert.deepEqual(replayed.analysisSidecars['listening-analysis-v1.json'], asset)
+    assert.deepEqual(readFileSync(staged), bytes)
   }
 })
 
