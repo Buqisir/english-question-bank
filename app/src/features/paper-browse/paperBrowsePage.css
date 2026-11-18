@@ -2017,10 +2017,6 @@
   overflow-anchor: none;
 }
 
-.listening-follow-line > * {
-  transition: opacity var(--motion-slow) var(--ease-out);
-}
-
 .listening-follow-lines[data-focused] .listening-follow-line[data-distance='2'] > * {
   opacity: 0.55;
 }
@@ -2033,12 +2029,6 @@
   opacity: 0.2;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .listening-follow-line > * {
-    transition: none;
-  }
-}
-
 .listening-follow-line {
   display: grid;
   grid-template-columns: var(--eqb-space-5) minmax(0, 1fr);
@@ -2047,7 +2037,6 @@
   padding: var(--eqb-space-1) var(--eqb-space-2) var(--eqb-space-1) 0;
   border-radius: var(--eqb-radius-control);
   color: var(--paper-ink-strong);
-  transition: background-color var(--motion-fast) var(--ease-hover);
 }
 
 .listening-follow-line[data-speaker-change] {
@@ -2068,100 +2057,12 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .listening-follow-lines[data-follow='calm'] .listening-follow-line,
-  .listening-follow-lines[data-follow='calm'] .listening-follow-line > * {
-    transition-duration: 160ms;
+  .listening-follow-line {
+    transition: background-color var(--listening-highlight-duration) var(--ease-hover);
   }
 
-  .listening-follow-lines[data-follow='calm2'] .listening-follow-line,
-  .listening-follow-lines[data-follow='calm2'] .listening-follow-line > * {
-    transition-duration: 150ms;
-  }
-
-  .listening-follow-lines[data-follow='calm-v2'] .listening-follow-line,
-  .listening-follow-lines[data-follow='calm-v2'] .listening-follow-line > * {
-    transition-duration: var(--listening-highlight-duration);
-  }
-
-  .listening-follow-lines[data-follow='calm-v1'] .listening-follow-line {
-    transition-duration: 150ms;
-  }
-
-  /* Keep distance-based dimming from jumping on the first frame of a handoff. */
-  .listening-follow-lines:is([data-follow='calm-v1'], [data-follow='calm-v2']) .listening-follow-line > * {
-    transition-timing-function: var(--ease-hover);
-  }
-}
-
-/* Preview only. Remove with the listening motion tuning panel before release. */
-.listening-follow-tuning {
-  position: fixed;
-  inset-inline-end: var(--eqb-space-5);
-  inset-block-end: calc(var(--eqb-space-5) * 2 + 28px);
-  z-index: 22;
-  inline-size: 336px;
-  max-inline-size: 100%;
-  box-sizing: border-box;
-  padding: var(--eqb-space-2);
-  border: 1px solid var(--eqb-color-border);
-  border-radius: var(--eqb-radius-card);
-  background: var(--eqb-color-paper);
-  color: var(--eqb-color-text);
-  box-shadow: var(--elev-2);
-  font-size: 12px;
-}
-
-.listening-follow-tuning-presets {
-  display: flex;
-  gap: var(--eqb-space-1);
-  margin-block-end: var(--eqb-space-1);
-}
-
-.listening-follow-tuning-presets .eqb-button[data-tone='quiet'][aria-pressed='true'] {
-  background: var(--eqb-color-state-selected);
-}
-
-.listening-follow-tuning-sliders {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 var(--eqb-space-2);
-  align-items: center;
-}
-
-.listening-follow-tuning-sliders label {
-  display: grid;
-  grid-template-columns: 52px minmax(0, 1fr);
-  align-items: center;
-  min-block-size: 28px;
-}
-
-.listening-follow-tuning-sliders input {
-  inline-size: 100%;
-  margin: 0;
-  accent-color: var(--eqb-color-action);
-}
-
-.listening-follow-tuning-summary {
-  inline-size: 100%;
-  box-sizing: border-box;
-  padding: var(--eqb-space-1) var(--eqb-space-2);
-  border: 1px solid var(--eqb-color-border);
-  border-radius: var(--eqb-radius-control);
-  background: var(--eqb-color-paper);
-  color: var(--eqb-color-text);
-  font: inherit;
-}
-
-@media (min-width: 961px) and (min-height: 761px) {
-  .listening-follow-lines:has(+ .listening-follow-tuning) {
-    max-block-size: calc(100dvh - 538px);
-  }
-}
-
-@media (max-width: 960px), (max-height: 760px) {
-  .listening-follow-tuning {
-    position: static;
-    margin: var(--eqb-space-2) 0 0 auto;
+  .listening-follow-line > * {
+    transition: opacity var(--listening-highlight-duration) var(--ease-hover);
   }
 }
 

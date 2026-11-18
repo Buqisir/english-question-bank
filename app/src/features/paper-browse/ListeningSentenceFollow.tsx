@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import type { ListeningSentence } from '../../domain/listeningAnalysis'
 import { Check } from '../../icons'
-import { Button } from '../../shared-ui/Button'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { ListeningTransport, listeningPlayerSeekEvent, listeningPlayerSwitchEvent, playListeningAudio } from './ListeningSegmentPlayer'
 
@@ -31,69 +30,15 @@ export function scrollListeningTarget(target: Element, block: ScrollLogicalPosit
 
 // Signature motion (DESIGN.md §6): the scroll may exceed 300 ms so readers
 // can track the same line of text.
-const phraseDuration = 700
-const jumpDuration = 500
 const FOLLOW_BEAT_MS = 150
-const FOLLOW_SOFT_START_MS = 140
+const FOLLOW_MIN_MS = 620
+const FOLLOW_MAX_MS = 880
+const FOLLOW_PER_LINE_MS = 100
+const FOLLOW_TAIL = 0.6
+const FOLLOW_FOCUS = 0.38
 const MAX_ANIMATION_FRAME_MS = 34
-const calmBeatDuration = 200
-const calmV1HighlightDuration = 150
-const calmReadingInset = 0.08
-const calmSpring = { response: 0.62, dampingRatio: 0.88 }
-
-const calmDefaults = { beat: 150, min: 620, max: 880, perLine: 100, tail: 0.6, focus: 40 }
-type CalmTuning = typeof calmDefaults
-const calmPresets: { label: string; values: CalmTuning }[] = [
-  { label: '推荐', values: calmDefaults },
-  { label: '舒展', values: { beat: 170, min: 660, max: 960, perLine: 120, tail: 0.75, focus: 40 } },
-  { label: '利落', values: { beat: 130, min: 560, max: 820, perLine: 90, tail: 0.4, focus: 40 } },
-]
-const tuningStorage = 'eqb-listening-calm-v2-presets'
-const tuningRanges = [
-  ['beat', '停顿', 100, 250, 1],
-  ['min', '最短', 500, 750, 1],
-  ['max', '最长', 750, 1000, 1],
-  ['perLine', '每行', 50, 150, 1],
-  ['tail', '收尾', 0, 1, 0.01],
-  ['focus', '焦点', 30, 50, 1],
-] as const
+const readingInset = 0.08
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value))
-
-// Preview-only tuning panel. Remove the panel and its persisted overrides before release.
-function loadCalmTuning() {
-  const tuning = { ...calmDefaults }
-  try {
-    const saved = JSON.parse(localStorage.getItem(tuningStorage) ?? '{}')
-    for (const [key, , min, max] of tuningRanges) {
-      const value = saved?.[key]
-      if (typeof value === 'number' && Number.isFinite(value)) tuning[key] = clamp(value, min, max)
-    }
-  } catch { /* Use defaults if storage is unavailable. */ }
-  return tuning
-}
-
-function CalmTuningPanel({ values, onChange }: { values: CalmTuning; onChange: (value: CalmTuning) => void }) {
-  const format = (key: keyof CalmTuning) => `${values[key]}${key === 'focus' ? '%' : ''}`
-  const summary = tuningRanges.map(([key]) => `${key} ${format(key)}`).join(' · ')
-  return <aside className="listening-follow-tuning" aria-label="跟读动效调参">
-    <div className="listening-follow-tuning-presets" role="group" aria-label="动效预设">
-      {calmPresets.map((preset) => <Button key={preset.label} size="sm" tone="quiet"
-        aria-pressed={tuningRanges.every(([key]) => values[key] === preset.values[key])}
-        onClick={() => onChange(preset.values)}>{preset.label}</Button>)}
-      <Button size="sm" onClick={() => onChange(calmDefaults)}>恢复默认</Button>
-    </div>
-    <div className="listening-follow-tuning-sliders">
-      {tuningRanges.map(([key, label, min, max, step]) => <label key={key}>
-        <span>{label} {format(key)}</span>
-        <input type="range" aria-label={label} aria-valuetext={key === 'focus' ? format(key) : undefined}
-          min={min} max={max} step={step} value={values[key]}
-          onChange={(event) => onChange({ ...values, [key]: event.currentTarget.valueAsNumber })} />
-      </label>)}
-    </div>
-    <input className="listening-follow-tuning-summary" aria-label="可复制的动效参数"
-      readOnly value={summary} onFocus={(event) => event.currentTarget.select()} />
-  </aside>
-}
 
 function curveParameter(progress: number, x1: number, x2: number) {
   // Solve x for the requested cubic Bézier, then sample y at the same t.
@@ -110,30 +55,25 @@ function curveParameter(progress: number, x1: number, x2: number) {
   return t
 }
 
-function followEase(progress: number, calmV1: boolean) {
-  const t = curveParameter(progress, calmV1 ? 0.4 : 0.22, calmV1 ? 0.2 : 0.36)
-  return calmV1 ? t * t * (3 - 2 * t) : 1 - (1 - t) ** 3
-}
+type FollowCurve = { x1: number; x2: number; control: number; distance: number }
 
-type CalmCurve = { x1: number; x2: number; control: number; distance: number }
-
-function sampleCalmCurve(curve: CalmCurve, progress: number, duration: number) {
+function sampleFollowCurve(curve: FollowCurve, progress: number, duration: number) {
   const { x1, x2, control, distance } = curve
   if (progress === 0) return { offset: 0, velocity: control / (x1 * duration) }
   if (progress === 1) return { offset: distance, velocity: 0 }
   const t = curveParameter(progress, x1, x2)
   const rest = 1 - t
+  // Cubic Hermite in Bézier form, with zero velocity at the destination.
   const offset = 3 * rest * rest * t * control + t * t * (3 - 2 * t) * distance
   const dx = rest * rest * x1 + 2 * rest * t * (x2 - x1) + t * t * (1 - x2)
   const dy = rest * rest * control + 2 * rest * t * (distance - control)
   return { offset, velocity: dy / (dx * duration) }
 }
 
-function sentenceFocusTop(row: HTMLElement, height: number, calm: boolean, focus: number) {
+function sentenceFocusTop(row: HTMLElement, height: number) {
   const bounds = row.getBoundingClientRect()
-  const english = calm ? row.querySelector('.listening-follow-sentence')?.getBoundingClientRect() : null
-  if (!english) return bounds.height / 2 - height * 0.4
-  return english.top - bounds.top + english.height / 2 - height * focus / 100
+  const english = row.querySelector('.listening-follow-sentence')?.getBoundingClientRect() ?? bounds
+  return english.top - bounds.top + english.height / 2 - height * FOLLOW_FOCUS
 }
 
 const noSentences: ListeningSentence[] = []
@@ -157,31 +97,6 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
   const list = useRef<HTMLDivElement>(null)
   const jumpToCurrent = useRef<() => void>(() => {})
   const repeatStart = sentences[0]?.repeatStart ?? Infinity
-  const params = new URLSearchParams(window.location.search)
-  const followParam = params.get('follow')
-  const mode = followParam === 'step' || followParam === 'flow' || followParam === 'calm-v1' || followParam === 'calm' || followParam === 'calm2'
-    ? followParam : 'calm-v2'
-  const flow = mode === 'flow'
-  const calmV1 = mode === 'calm-v1'
-  const calmV2 = mode === 'calm-v2'
-  const calm2 = mode === 'calm2'
-  const calm = mode === 'calm' || calmV1 || calmV2 || calm2
-  const tune = calmV2 && params.get('tune') === '1'
-  const [tuning, setTuning] = useState(() => tune ? loadCalmTuning() : calmDefaults)
-  const liveTuning = useRef(tuning)
-  const focus = tune ? tuning.focus : calmDefaults.focus
-  const lastFocus = useRef(focus)
-  useEffect(() => {
-    try {
-      // Discard the old preview values without resetting choices saved with the presets.
-      localStorage.removeItem('eqb-listening-calm-v2')
-    } catch { /* Storage may be unavailable. */ }
-  }, [])
-  const updateTuning = (value: CalmTuning) => {
-    liveTuning.current = value
-    setTuning(value)
-    try { localStorage.setItem(tuningStorage, JSON.stringify(value)) } catch { /* Keep live values. */ }
-  }
 
   const setFollow = useCallback((enabled: boolean) => {
     follows.current = enabled
@@ -204,18 +119,14 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     if (!scroller || !last) return
     const measure = () => {
       const height = scroller.clientHeight
-      scroller.style.paddingBottom = `${Math.max(0, height + sentenceFocusTop(last, height, calm, focus) - last.offsetHeight)}px`
+      scroller.style.paddingBottom = `${Math.max(0, height + sentenceFocusTop(last, height) - last.offsetHeight)}px`
     }
     measure()
-    if (lastFocus.current !== focus) {
-      lastFocus.current = focus
-      if (audio && !audio.paused && follows.current) jumpToCurrent.current()
-    }
     const observer = new ResizeObserver(measure)
     observer.observe(scroller, { box: 'border-box' })
     observer.observe(last)
     return () => observer.disconnect()
-  }, [audio, sentences, calm, focus])
+  }, [sentences])
 
   useEffect(() => {
     const scroller = list.current
@@ -225,53 +136,27 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     let animTime = 0
     let lastFrameTime: number | undefined
     let lastAudioTime: number | undefined
-    let flowTime: number | undefined
     let lastIndex = -1
-    let lastSentenceChange = -Infinity
     let lastRepeating = false
     let focusTimeout: number | undefined
-    let motion: {
-      from: number; index: number; start: number; duration: number; velocity: number; automatic: boolean; curve?: CalmCurve
-    } | null = null
-    let curveSample: { position: number; time: number } | null = null
-    let curveVelocity = 0
-    let spring: {
-      index: number; position: number; velocity: number; time: number; automatic: boolean; softStart: number | null
-    } | null = null
+    let motion: { from: number; index: number; start: number; duration: number; automatic: boolean; curve: FollowCurve } | null = null
     let pending: { index: number; start: number } | null = null
-    const omega = 2 * Math.PI / calmSpring.response
-    const stiffness = omega ** 2
-    const damping = 2 * calmSpring.dampingRatio * omega
     const center = (index: number) => {
       const row = scroller.children[index] as HTMLElement | undefined
       if (!row) return scroller.scrollTop
-      const top = row.offsetTop + sentenceFocusTop(row, scroller.clientHeight, calm, tune ? liveTuning.current.focus : calmDefaults.focus)
+      const top = row.offsetTop + sentenceFocusTop(row, scroller.clientHeight)
       return Math.max(0, Math.min(top, scroller.scrollHeight - scroller.clientHeight))
     }
-    const setSpringTarget = (index: number, now: number, automatic: boolean) => {
-      if (spring) {
-        if (calm2 && spring.index !== index) spring.softStart = spring.velocity === 0 ? now : null
-        spring.index = index
-        spring.time = Math.max(spring.time, now)
-        spring.automatic = automatic
-      } else {
-        spring = { index, position: scroller.scrollTop, velocity: 0, time: now, automatic, softStart: calm2 ? now : null }
-      }
-    }
-    const startCurve = (index: number, duration: number, now: number, automatic = false) => {
-      motion = { from: scroller.scrollTop, index, start: now, duration, velocity: curveVelocity, automatic }
-      if (calmV1) curveSample = { position: scroller.scrollTop, time: now }
-    }
-    const startCalmV2 = (index: number, now: number, automatic: boolean) => {
+    const startMotion = (index: number, now: number, automatic: boolean) => {
       const to = center(index)
-      if (motion?.curve && motion.index === index && to === motion.from + motion.curve.distance) {
+      if (motion?.index === index && to === motion.from + motion.curve.distance) {
         motion.automatic = automatic
         return
       }
       let from = scroller.scrollTop
       let velocity = 0
-      if (motion?.curve) {
-        const sample = sampleCalmCurve(motion.curve, clamp((now - motion.start) / motion.duration, 0, 1), motion.duration)
+      if (motion) {
+        const sample = sampleFollowCurve(motion.curve, clamp((now - motion.start) / motion.duration, 0, 1), motion.duration)
         from = motion.from + sample.offset
         velocity = sample.velocity
       }
@@ -279,19 +164,14 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       if (!distance && !velocity) return
       const english = scroller.children[index].querySelector('.listening-follow-sentence')!
       const lineHeight = Number.parseFloat(getComputedStyle(english).lineHeight)
-      const { min, max, perLine, tail } = tune ? liveTuning.current : calmDefaults
-      const duration = clamp(min + perLine * Math.max(0, Math.abs(distance) / lineHeight - 2), min, max)
-      const x2 = 0.2 - tail * 0.12 * (max > min ? (duration - min) / (max - min) : 0)
+      const duration = clamp(FOLLOW_MIN_MS + FOLLOW_PER_LINE_MS * Math.max(0, Math.abs(distance) / lineHeight - 2),
+        FOLLOW_MIN_MS, FOLLOW_MAX_MS)
+      const x2 = 0.2 - FOLLOW_TAIL * 0.12 * (duration - FOLLOW_MIN_MS) / (FOLLOW_MAX_MS - FOLLOW_MIN_MS)
       // The first control point sets the exact incoming velocity. For a close
       // forward target, shorten its time coordinate to keep all points monotonic.
       const x1 = velocity * distance > 0 ? Math.min(0.4, Math.abs(distance / (velocity * duration))) : 0.4
-      motion = { from, index, start: now, duration, velocity, automatic,
+      motion = { from, index, start: now, duration, automatic,
         curve: { x1, x2, control: velocity * x1 * duration, distance } }
-    }
-    const stopCurve = () => {
-      motion = null
-      curveSample = null
-      curveVelocity = 0
     }
     const isShortAndVisible = (index: number) => {
       const sentence = sentences[index]
@@ -299,9 +179,9 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       const row = scroller.children[index] as HTMLElement
       const top = row.offsetTop - scroller.scrollTop
       const height = scroller.clientHeight
-      return top >= height * calmReadingInset && top + row.offsetHeight <= height * (1 - calmReadingInset)
+      return top >= height * readingInset && top + row.offsetHeight <= height * (1 - readingInset)
     }
-    const sync = (now: number, elapsed: number, jump = false) => {
+    const sync = (now: number, jump = false) => {
       const target = sentences[loopTarget.current]
       if (target && !audio.paused && !audio.seeking && audio.currentTime >= sentenceEnd(target, loopRepeating.current)) {
         audio.currentTime = sentenceStart(target, loopRepeating.current)
@@ -312,165 +192,46 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       // Keep the last accepted time until playback catches up or a seek resets it.
       const time = rollback ? lastAudioTime! : reportedTime
       lastAudioTime = time
-      if (flow) {
-        flowTime = jump || audio.seeking || flowTime === undefined || time < flowTime
-          ? time : Math.min(time, flowTime + elapsed * audio.playbackRate / 1000)
-      }
       const repeating = time + 0.025 >= repeatStart
       const index = target ? loopTarget.current
         : sentences.findLastIndex((sentence) => sentenceStart(sentence, repeating) <= time + 0.025)
-      const changedSentence = index !== lastIndex || repeating !== lastRepeating
-      const continuous = flow && !reducedMotion.matches
-      if (index >= 0 && follows.current) {
-        if (reducedMotion.matches) {
-          if (jump || (!audio.paused && index !== lastIndex) || motion || spring || pending) positionList(center(index))
+      if (index < 0 || !follows.current) {
+        pending = null
+        motion = null
+      } else if (reducedMotion.matches) {
+        if (jump || (!audio.paused && index !== lastIndex) || motion || pending) positionList(center(index))
+        pending = null
+        motion = null
+      } else {
+        if (jump || (!audio.paused && (index < lastIndex || repeating !== lastRepeating))) {
           pending = null
-          stopCurve()
-          spring = null
+          startMotion(index, now, false)
         } else {
-          if (calmV2) {
-            if (jump || (!audio.paused && (index < lastIndex || repeating !== lastRepeating))) {
-              pending = null
-              startCalmV2(index, now, false)
-            } else {
-              if (index !== lastIndex && !audio.paused) {
-                const short = isShortAndVisible(index)
-                pending = short ? null : { index, start: now }
-                if (short && motion?.automatic) stopCurve()
-              }
-              if (audio.paused || (!target && time >= sentenceEnd(sentences[index], repeating))) {
-                pending = null
-                if (motion?.automatic) stopCurve()
-              }
-              if (pending && now - pending.start >= (tune ? liveTuning.current.beat : calmDefaults.beat)) {
-                startCalmV2(pending.index, now, true)
-                pending = null
-              }
-            }
-          } else if (calm && !calmV1) {
-            if (jump) {
-              pending = null
-              setSpringTarget(index, now, false)
-            } else {
-              if (changedSentence && !audio.paused) {
-                const short = isShortAndVisible(index)
-                const beat = calm2 ? FOLLOW_BEAT_MS : now - lastSentenceChange < calmBeatDuration ? 0 : calmBeatDuration
-                // Let a prior spring finish toward its own target during the beat.
-                pending = short ? null : { index, start: now + beat }
-                if (short && spring?.automatic) spring = null
-              }
-              if (audio.paused || (!target && time >= sentenceEnd(sentences[index], repeating))) {
-                pending = null
-                if (spring?.automatic) spring = null
-              }
-              if (pending && now >= pending.start) {
-                setSpringTarget(pending.index, pending.start, true)
-                pending = null
-              }
-            }
-          } else if (jump || (!audio.paused && (index < lastIndex || repeating !== lastRepeating))) {
-            pending = null
-            startCurve(index, jumpDuration, now)
-          } else if (calmV1) {
-            if (index !== lastIndex && !audio.paused) {
-              const short = isShortAndVisible(index)
-              pending = short ? null : { index, start: now + calmV1HighlightDuration }
-              if (short && motion?.automatic) stopCurve()
-            }
-            if (audio.paused || (!target && time >= sentenceEnd(sentences[index], repeating))) {
-              pending = null
-              if (motion?.automatic) stopCurve()
-            }
-            if (pending && now >= pending.start) {
-              const row = scroller.children[pending.index].querySelector('.listening-follow-sentence')!
-              const lineHeight = Number.parseFloat(getComputedStyle(row).lineHeight)
-              const distance = Math.abs(center(pending.index) - scroller.scrollTop)
-              startCurve(pending.index, distance > lineHeight * 3 ? 800 : 650, now, true)
-              pending = null
-            }
-          } else if (!continuous && !audio.paused && index !== lastIndex) {
-            startCurve(index, phraseDuration, now)
+          if (index !== lastIndex && !audio.paused) {
+            const short = isShortAndVisible(index)
+            pending = short ? null : { index, start: now }
+            if (short && motion?.automatic) motion = null
           }
-
-          if (spring) {
-            const to = center(spring.index)
-            const dt = Math.min(0.032, Math.max(0, (now - spring.time) / 1000))
-            spring.time = now
-            // Substep the semi-implicit Euler update to keep the response
-            // consistent across refresh rates and avoid excess damping.
-            const steps = Math.max(1, Math.ceil(dt / 0.004))
-            const h = dt / steps
-            for (let i = 0; i < steps; i++) {
-              let scale = 1
-              if (spring.softStart !== null) {
-                const sampleTime = now - (dt - (i + 1) * h) * 1000
-                const x = Math.min(1, Math.max(0, (sampleTime - spring.softStart) / FOLLOW_SOFT_START_MS))
-                scale = x * x * (3 - 2 * x)
-              }
-              spring.velocity += (-stiffness * scale * (spring.position - to) - damping * Math.sqrt(scale) * spring.velocity) * h
-              spring.position += spring.velocity * h
-            }
-            if (Math.abs(spring.position - to) < 0.5 && Math.abs(spring.velocity) < 5) {
-              positionList(to)
-              spring = null
-            } else {
-              positionList(spring.position)
-            }
-          } else if (motion?.curve) {
-            const progress = clamp((now - motion.start) / motion.duration, 0, 1)
-            const { offset } = sampleCalmCurve(motion.curve, progress, motion.duration)
-            positionList(motion.from + offset)
-            if (progress === 1) stopCurve()
-          } else if (motion) {
-            const elapsed = Math.max(0, now - motion.start)
-            const progress = Math.min(1, elapsed / motion.duration)
-            const to = center(motion.index)
-            const distance = to - motion.from
-            const eased = progress === 1 ? 1 : followEase(progress, calmV1)
-            let position = motion.from + distance * eased
-            if (motion.velocity) {
-              // Preserve velocity when retargeting, and brake before reversing.
-              const aligned = Math.sign(motion.velocity) === Math.sign(distance)
-              const brake = aligned ? Math.min(84, Math.abs(distance / motion.velocity)) : 84
-              const coast = Math.min(elapsed, brake)
-              if (brake > 0) position += motion.velocity * coast * (1 - coast / (2 * brake)) * (1 - eased)
-            }
-            if (calmV1) position = Math.max(0, Math.min(position, scroller.scrollHeight - scroller.clientHeight))
-            if (curveSample && now - curveSample.time >= 4) {
-              curveVelocity = (position - curveSample.position) / (now - curveSample.time)
-              curveSample = { position, time: now }
-            }
-            positionList(position)
-            if (progress === 1) stopCurve()
-          } else if (continuous && !audio.paused && !audio.seeking && elapsed > 0) {
-            const scrollTime = flowTime ?? time
-            const scrollRepeating = scrollTime + 0.025 >= repeatStart
-            const scrollIndex = target ? index
-              : Math.max(0, sentences.findLastIndex((sentence) => sentenceStart(sentence, scrollRepeating) <= scrollTime + 0.025))
-            const from = center(scrollIndex)
-            const next = sentences[scrollIndex + 1]
-            let to = from
-            if (next && !target) {
-              const start = sentenceStart(sentences[scrollIndex], scrollRepeating)
-              const end = sentenceStart(next, scrollRepeating)
-              const progress = end > start ? clamp((scrollTime - start) / (end - start), 0, 1) : 0
-              to += (center(scrollIndex + 1) - from) * progress
-            }
-            const delta = to - scroller.scrollTop
-            // Snap below half a CSS pixel of movement to avoid rounding stalls.
-            positionList(scroller.scrollTop + (Math.abs(delta * 0.12) < 0.5 ? delta : delta * 0.12))
+          if (audio.paused || (!target && time >= sentenceEnd(sentences[index], repeating))) {
+            pending = null
+            if (motion?.automatic) motion = null
+          }
+          if (pending && now - pending.start >= FOLLOW_BEAT_MS) {
+            startMotion(pending.index, now, true)
+            pending = null
           }
         }
-      } else {
-        pending = null
-        stopCurve()
-        spring = null
+        if (motion) {
+          const progress = clamp((now - motion.start) / motion.duration, 0, 1)
+          const { offset } = sampleFollowCurve(motion.curve, progress, motion.duration)
+          positionList(motion.from + offset)
+          if (progress === 1) motion = null
+        }
       }
       if (index !== lastIndex) setCurrent(index)
-      if (index >= 0 && changedSentence) lastSentenceChange = now
       lastIndex = index
       lastRepeating = repeating
-      if (!audio.paused || motion || spring) {
+      if (!audio.paused || motion) {
         lastFrameTime ??= performance.now()
         frame = requestAnimationFrame(onFrame)
       } else {
@@ -482,12 +243,12 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       const elapsed = clamp(timestamp - (lastFrameTime ?? timestamp), 0, MAX_ANIMATION_FRAME_MS)
       lastFrameTime = Math.max(timestamp, lastFrameTime ?? timestamp)
       animTime += elapsed
-      sync(animTime, elapsed)
+      sync(animTime)
     }
     const update = (jump = false) => {
       cancelAnimationFrame(frame)
       frame = 0
-      sync(animTime, 0, jump)
+      sync(animTime, jump)
     }
     const onPlay = () => {
       window.clearTimeout(focusTimeout)
@@ -497,7 +258,6 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     const onPause = () => {
       window.clearTimeout(focusTimeout)
       focusTimeout = window.setTimeout(() => setFocused(false), 300)
-      if (flow && !reducedMotion.matches) motion = null
       update()
     }
     const stopLoop = () => {
@@ -514,7 +274,6 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     const onMediaUpdate = () => { if (!frame) update() }
     const onSeeking = () => {
       lastAudioTime = undefined
-      flowTime = undefined
     }
     const playbackEvents = ['timeupdate', 'seeked'] as const
     audio.addEventListener('play', onPlay)
@@ -542,7 +301,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       audio.removeEventListener(listeningPlayerSwitchEvent, stopLoop)
       jumpToCurrent.current = () => {}
     }
-  }, [audio, sentences, repeatStart, flow, calm, calmV1, calmV2, calm2, tune, positionList, setFollow])
+  }, [audio, sentences, repeatStart, positionList, setFollow])
 
   useEffect(() => {
     const row = reviewedSentence && list.current?.children[reviewedSentence.index] as HTMLElement | undefined
@@ -550,7 +309,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     setFollow(false)
     const scroller = list.current
     if (scroller) {
-      positionList(row.offsetTop + sentenceFocusTop(row, scroller.clientHeight, calm, focus))
+      positionList(row.offsetTop + sentenceFocusTop(row, scroller.clientHeight))
       scrollListeningTarget(scroller, 'nearest')
     }
     row.querySelector('button')?.focus({ preventScroll: true })
@@ -560,7 +319,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       delay: 480, fill: 'backwards',
     })
     return () => flash.cancel()
-  }, [reviewedSentence, calm, focus, positionList, setFollow])
+  }, [reviewedSentence, positionList, setFollow])
 
   function playSentence(index: number) {
     if (!audio) return
@@ -601,8 +360,8 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       <h6>录音稿</h6>
       {error && <p className="listening-audio-error" role="status">录音未能播放，请重试</p>}
       <div className="listening-follow-lines" ref={list} tabIndex={0} role="region" aria-label="逐句录音稿"
-        data-follow={mode} data-focused={focused || undefined} data-auto-follow={focused && following || undefined}
-        style={calmV2 ? { '--listening-highlight-duration': `${tune ? tuning.beat : calmDefaults.beat}ms` } as CSSProperties : undefined}
+        data-focused={focused || undefined} data-auto-follow={focused && following || undefined}
+        style={{ '--listening-highlight-duration': `${FOLLOW_BEAT_MS}ms` } as CSSProperties}
         onWheel={(event) => { if (event.deltaY) setFollow(false) }}
         onTouchMove={() => setFollow(false)}
         onPointerDown={(event) => {
@@ -646,7 +405,6 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
           </div>
         })}
       </div>
-      {tune && <CalmTuningPanel values={tuning} onChange={updateTuning} />}
     </section>}
     {!following && audio && current >= 0 && <div className="listening-follow-return">
       <button type="button" className="listening-quiet-control" onClick={() => {
