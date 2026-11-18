@@ -318,7 +318,7 @@ assert(
 
 const openPaperBrowseBody =
   appSrc.match(
-    /const openPaperBrowse\s*=\s*useCallback\s*\(\s*\(paperId[^{]*\{([\s\S]*?)\n\s*\},\s*\[\]\)/,
+    /const openPaperBrowse\s*=\s*useCallback\s*\(\s*\(paperId[\s\S]*?\)\s*=>\s*\{([\s\S]*?)\n\s*\},\s*\[\]\)/,
   )?.[1] || ''
 assert('openPaperBrowse body extracted', openPaperBrowseBody.length > 0)
 assert(
@@ -1575,13 +1575,10 @@ assert(
 assert(
   // similar-entrypoints (E3) adds `similar` alongside `questionId`/`lecture`
   // in the same options-bag → URL/state pipeline.
-  'openPaperBrowse accepts an options bag (questionId/lecture/similar), clears reviewRevision, and writes the route',
-  /const openPaperBrowse\s*=\s*useCallback\s*\(\s*\(paperId[^{]*options\?\s*:\s*OpenPaperBrowseOptions[^{]*\{/.test(
-    appSrc,
-  ) &&
-    /url\.searchParams\.delete\(\s*['"]reviewRevision['"]\s*\)/.test(appSrc) &&
+  'openPaperBrowse clears reviewRevision and writes the question focus and lecture/similar route',
+  /url\.searchParams\.delete\(\s*['"]reviewRevision['"]\s*\)/.test(openPaperBrowseBody) &&
     /setPaperBrowseRoute\(\{\s*active:\s*true,\s*paperId,\s*focusGroupId:\s*focusGroupId\s*\|\|\s*null,\s*questionId,\s*reviewRevision:\s*null,\s*lecture,\s*similar\s*\}\)/.test(
-      appSrc,
+      openPaperBrowseBody,
     ),
   'openPaperBrowse does not accept/thread the options bag',
 )

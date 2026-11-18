@@ -52,12 +52,6 @@ import { QuestionGroupDetailView } from './features/question-detail/QuestionGrou
 // setVerifyResult(...) calls (see the retired detail-page AI-analysis
 // sections, spec 负空间①).
 
-// flow-panel 刀 3: openPaperBrowse's入口带态 options bag. A named type (not
-// an inline `{ }` literal in the callback's parameter list) — an inline
-// literal would put a `{` before the callback body and break
-// verify-paper-browse.mjs's `[^{]*\{` body-extraction regex.
-type OpenPaperBrowseOptions = { questionId?: string | null; lecture?: boolean; similar?: boolean }
-
 // 草稿卷工作台的地址：`?view=draft-paper[&draftPaperId=<id>][&focusGroupId=<gid>]`，其余参数照当前地址留着。
 // openDraftPaperWorkbench 往历史里压的就是它；加入键「已加入」链接的 href 也用它（中键开新标签、复制地址都能到同一处）。
 function draftPaperWorkbenchHref(draftPaperId?: string | null, focusGroupId?: string | null): string {
@@ -623,12 +617,13 @@ function App() {
   }, [refreshQuestionGroups])
 
   // 刀B: open the whole-paper preview page. `focusGroupId`, when given,
-  // scrolls the page to that group's card on load. flow-panel 刀 3 adds an
-  // options bag (a named type, not an inline `{ }` literal — an inline type
-  // would introduce a `{` before the callback body and break
-  // verify-paper-browse.mjs's `[^{]*\{` body-extraction regex) for入口带态:
-  // questionId预选 + lecture(讲评态) open-on-load.
-  const openPaperBrowse = useCallback((paperId: string, focusGroupId?: string | null, options?: OpenPaperBrowseOptions) => {
+  // scrolls the page to that group's card on load. Options carry question focus
+  // and lecture mode through the entry link.
+  const openPaperBrowse = useCallback((paperId: string, focusGroupId?: string | null, options?: {
+    questionId?: string | null
+    lecture?: boolean
+    similar?: boolean
+  }) => {
     const questionId = options?.questionId || null
     const lecture = Boolean(options?.lecture)
     // similar-entrypoints (E3): 只有讲评态深链才携带 similar — 挑题态入口
