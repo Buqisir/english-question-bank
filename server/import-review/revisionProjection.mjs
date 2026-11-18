@@ -1867,7 +1867,7 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
       const products = fileEvidence.find(file => file.path === PRODUCT_MANIFEST)
       const readSealedProducts = (_root, options) => {
         const manifest = products?.json
-        if (!manifest || manifest.inputDigest !== options.inputDigest
+        if (!manifest || (manifest.inputDigest !== options.inputDigest && manifest.inputDigest !== options.legacyInputDigest())
           || sourceProductEditions(options.config, options.listeningCount).length !== manifest.files.length) {
           fail('Sealed product input identity differs')
         }
@@ -2033,6 +2033,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   })
   const frozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
     ? readProducts(rootDir, { inputDigest: productInputDigest(rootDir, inventory(), reviewedListening),
+        legacyInputDigest: () => productInputDigest(rootDir, inventory(), reviewedListening, { legacy: true }),
         config: loaded.config, listeningCount: slotBindings.filter(entry => entry.familyContractId === 'listening').length,
         ...productPageLimitsForPlan(paginationPlan?.plan) }) : null
   if (frozenProducts && !sourceReferences) {

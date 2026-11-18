@@ -253,6 +253,22 @@ try {
     'adding the plan invalidates the previous product input digest')
   productManifest.inputDigest = productInputDigest(fixture.reviewRoot, reviewBundleFilePaths(fixture.reviewRoot))
   await writeFile(path.join(fixture.reviewRoot, PRODUCT_MANIFEST), JSON.stringify(productManifest))
+  const printInventory = reviewBundleFilePaths(fixture.reviewRoot)
+  const metadata = { path: 'public-search-metadata-v1.json', mediaType: 'application/json', role: 'public_search_metadata' }
+  const metadataPath = path.join(fixture.reviewRoot, metadata.path)
+  await writeFile(metadataPath, JSON.stringify({ tags: ['before'] }))
+  assert.equal(productInputDigest(fixture.reviewRoot, [...printInventory, metadata]), productManifest.inputDigest)
+  await writeFile(metadataPath, JSON.stringify({ tags: ['after'] }))
+  assert.equal(productInputDigest(fixture.reviewRoot, [...printInventory, metadata]), productManifest.inputDigest)
+  await rm(metadataPath)
+  const materializationPath = path.join(fixture.reviewRoot, printInventory.find(file => file.role === 'materialization').path)
+  const materializationBytes = await readFile(materializationPath)
+  const changedMaterialization = JSON.parse(materializationBytes)
+  const question = changedMaterialization.groups.find(group => group.questions.length).questions[0]
+  question.stem = 'Changed question text?'
+  await writeFile(materializationPath, JSON.stringify(changedMaterialization))
+  assert.notEqual(productInputDigest(fixture.reviewRoot, printInventory), productManifest.inputDigest)
+  await writeFile(materializationPath, materializationBytes)
   const projection = buildNck1ReviewProjection(fixture.reviewRoot, { requireAnalyses: true })
   assert.equal(projection.sourceDigest, inputIdentity.sourceDigest)
   assert.equal(projection.candidateDigest, inputIdentity.candidateDigest)

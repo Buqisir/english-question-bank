@@ -27,19 +27,32 @@ function reject(message) {
   throw Object.assign(new Error(`固定 PDF 产品不可用：${message}`), { code: 'FROZEN_PRODUCTS_INVALID', status: 409 })
 }
 
-export function productInputDigest(rootDir, files, reviewedListening = null) {
-  const printNeutral = listeningReviewPrintNeutralPaths(reviewedListening)
-  return digestJson(files.filter(file => !file.path.startsWith('products/') && !printNeutral.has(file.path)).map(file => {
-    const bytes = readFileSync(path.join(rootDir, file.path))
-    return { ...file, sha256: sha256(bytes), byteLength: bytes.length }
+const printInputRoles = new Set([
+  'config', 'materialization', 'spelling_review', 'listening_instruction_correction', 'ocr_source_evidence',
+  'content_media', 'content_media_candidate', 'content_media_display_variant',
+  'source_references', 'pagination_plan',
+  'analyzed_package_manifest', 'analyzed_package_content', 'analyzed_package_official_answers', 'analyzed_package_media',
+])
+
+export function productInputFiles(files, reviewedListening = null, { legacy = false } = {}) {
+  if (!legacy) return files.filter(file => printInputRoles.has(file.role)
+    // The materialization adapter reads native DOCX runs for printed emphasis.
+    || (['question_source', 'question_and_answers', 'official_answers'].includes(file.role)
+      && file.mediaType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'))
+  const neutral = listeningReviewPrintNeutralPaths(reviewedListening)
+  return files.filter(file => !file.path.startsWith('products/') && !neutral.has(file.path))
+}
+
+export function productInputDigest(rootDir, files, reviewedListening = null, options) {
+  return digestJson(productInputFiles(files, reviewedListening, options).map(({ path: relative, mediaType, role }) => {
+    const bytes = readFileSync(path.join(rootDir, relative))
+    return { path: relative, mediaType, role, sha256: sha256(bytes), byteLength: bytes.length }
   }).sort((a, b) => a.path.localeCompare(b.path)))
 }
 
-// The manifest is itself an uploaded, approval-bound Review file. The input
-// digest excludes products, avoiding a circular digest and binding config,
-// source documents, answer references, pagination and all other print inputs.
-// Only a validated navigation review may exclude its exact private evidence.
-export function readFrozenProducts(rootDir, { inputDigest, economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit, config, listeningCount, required = false, readArtifact = null } = {}) {
+// Keep already frozen manifests verifiable with their original input digest.
+// New products bind the files supplying printed content and layout.
+export function readFrozenProducts(rootDir, { inputDigest, legacyInputDigest, economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit, config, listeningCount, required = false, readArtifact = null } = {}) {
   const read = readArtifact || (relative => {
     const file = path.join(rootDir, relative)
     return existsSync(file) ? readFileSync(file) : null
@@ -64,7 +77,7 @@ export function readFrozenProducts(rootDir, { inputDigest, economyPageLimit, lar
     || (largeNoListeningPageLimit !== undefined && pageLimits.largeNoListeningPageLimit !== largeNoListeningPageLimit)
     || (economyPageLimit !== undefined && manifestPageLimit !== economyPageLimit)
     || !/^sha256:[a-f0-9]{64}$/.test(manifest.inputDigest || '')
-    || (inputDigest && manifest.inputDigest !== inputDigest)
+    || (inputDigest && manifest.inputDigest !== inputDigest && manifest.inputDigest !== legacyInputDigest?.())
     || typeof manifest.paperName !== 'string' || !manifest.paperName.trim()
     || !Array.isArray(manifest.files) || manifest.files.length !== expectedFiles.length) reject('输入或产品文件清单不一致')
   const bytes = { [PRODUCT_MANIFEST]: manifestBytes }
