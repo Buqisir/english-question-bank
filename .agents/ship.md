@@ -1,72 +1,22 @@
 # Ship one task to main
 
-Follow `AGENTS.md`. Tasks carry standing Owner authority for direct push to main,
-verification and automatic website deployment on Owner Mac (BUB-218). Do not wait for a
-separate Ship instruction. “先别推” or “先别上” keeps the task out of main unless
-Owner explicitly permits it to ship with other commits; “停自动部署” pauses every
-Agent's automatic deployment. Migration, schema, DB/R2 data operations and host
-configuration need separate authorization. Force push, bypass and changing
-branch protection remain outside this authority.
+Follow [Goal authorization](../AGENTS.md#goal-authorization) and
+[Ship to main](../AGENTS.md#ship-to-main) for trunk-based delivery and its PR exceptions.
 
 ## Prepare the exact candidate
 
-1. Preserve unrelated work; develop on a task branch based on latest origin/main.
-   Fetch origin, resolve current main SHA and inspect its latest natural attempt's
-   eight jobs plus unresolved failures still affecting main. On Owner Mac compare
-   production too: only latest green main may be deployed.
-2. Red main pauses ordinary pushes. The first failing SHA's pusher owns a fix or
-   revert pushed within 30 minutes of discovery; if absent, the first finder
-   takes over. Assess downstream dependencies and data compatibility before revert.
-3. Synchronize with origin/main, review the full diff and affected consumers,
-   classify changed paths and run L1 exactly as listed in `AGENTS.md` and
-   `docs/agents/testing-cadence.md`. Do not run local Full when the plan selects
-   all; run directly affected scripts and leave Full to main CI. Perform affected
-   real behavior/visual checks and bind high-risk Astra review to candidate SHA.
-4. Keep one understandable, verifiable change per commit. Require a clean
-   committed worktree and record exact candidate head/base. After fixes or base
-   changes repeat only local checks invalidated by code, dependency, fixture or
-   runtime changes; retain failed attempts and unaffected evidence. SKIP is not PASS.
+Synchronize with `origin/main` and follow
+[Verify the changed risk](../AGENTS.md#verify-the-changed-risk). Review the full diff
+and affected consumers, require a clean committed worktree and record candidate head/base.
 
-## Direct push, follow main, deploy
+## Direct push and delivery
 
-Run `git push origin HEAD:refs/heads/main`. If rejected, synchronize and repeat
-affected self-checks before retrying; never force-push. Only CI/deployment
-toolchain changes (see `AGENTS.md`; check-registry entries excluded) instead require the PR route below, Astra
-review and complete green PR Full/E2E before squash merge; do not open a PR by habit.
-
-The pusher actively follows their exact SHA's natural `push` run of
-`.github/workflows/verify.yml` to completion. Main has separate concurrency
-groups by SHA; one push does not replace another. Judge status by SHA and latest
-attempt, never completion order. Main always runs Full. Accept only the exact
-eight jobs `{verify-1, verify-2, verify, e2e-seams-1, e2e-seams-2,
-e2e-render-1, e2e-render-2, e2e}`, all successful, from the GitHub Actions App in
-this repository/workflow/event. Pending, skipped, cancelled, missing, failed or
-ambiguous evidence fails closed. Registered unrelated flakes allow one recorded
-whole-workflow rerun; another failure is real. See the testing cadence register.
-
-If unable to wait, record “SHA 待确认” in Linear. If off Owner Mac, record
-“已绿待部署” once green. Every Agent's startup checks pick up unattended failures;
-Owner Mac Agents also deploy current green main if not live. Pending/red current
-main never permits deploying a historical green version.
-
-After latest main's eight jobs are green, on Owner Mac use clean
-`~/Projects/eqb-deploy`, fetch origin and fast-forward main, then automatically run
-`scripts/local-deploy.sh deploy --owner-said-deploy-latest` and verify live health.
-Re-resolve main if it advances; an old green run cannot authorize the new SHA.
-For persistence-path code changes, review the complete diff from production SHA
-to target main SHA; if no migration/schema/data operations, add `--code-only`
-(the script computes the digest). Migration, schema, DB/R2 data operations and
-host configuration still need separate authority. Stop all automatic deployment
-when Owner says “停自动部署”.
-
-Deployment follows [AGENTS.md — Owner Mac deployment](../AGENTS.md#owner-mac-deployment)
-and [ADR-0027](../docs/adr/0027-owner-local-website-deployment.md). Keep Keychain
-secrets on Owner Mac and use the exact-main reader and restricted SSH route.
-
-Report exact 40-hex main SHA and parent, commit/run/aggregate-job links, machine
-risk, changed paths, review evidence, PASS/SKIP/FAIL commands with limitations,
-and deployment/health status. Update Linear with behavior, evidence and whether
-it is live. Green CI alone does not mean deployed.
+Use [Ship to main](../AGENTS.md#ship-to-main) for the push, follow-up and Linear record.
+Use [GitHub Actions CI authority](../AGENTS.md#github-actions-ci-authority) to
+reconcile the exact SHA and latest natural attempt.
+[Owner Mac deployment](../AGENTS.md#owner-mac-deployment) documents the Actions
+deployment path, Owner Mac backup command, restricted SSH, key isolation and
+read-only reconciliation for an UNKNOWN outcome.
 
 ## 可选 PR 路径
 
@@ -75,7 +25,7 @@ discussion, or when direct push is unavailable. Toolchain changes require Astra
 and complete PR Full/E2E. Before triggering PR verification synchronize main:
 the head must contain that event's base (the workflow checks ancestry). After
 complete green PR CI, squash merge without bypass; later main advancement alone
-does not require a rerun. Then follow main and deploy as above.
+does not require a rerun. Then follow the main run and reconcile delivery as above.
 
 ### PR risk-plan advice
 
@@ -182,5 +132,5 @@ success, an automatic CI rerun, or a bypass.
 After the PR wait ends, optionally register `ship_watch_main({head: mainSHA})`
 for the exact resulting main SHA (cancel a remaining PR wait first). A changed
 live main stops that fixed wait rather than following another commit silently.
-Notification loss uses read-only GitHub monitoring; the pusher still follows
-main and deploys under the default route above.
+Notification loss uses read-only GitHub monitoring. The pusher follows the
+resulting main run and reconciles delivery through the paths above.

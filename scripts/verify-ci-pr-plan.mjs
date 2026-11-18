@@ -157,13 +157,16 @@ assert.equal(execFileSync('jq', ['-er', '.pack'], { input: JSON.stringify(unicod
 
 const repository = mkdtempSync(path.join(tmpdir(), 'eqb-ci-plan-'))
 const runnerTemp = mkdtempSync(path.join(tmpdir(), 'eqb-ci-bootstrap-'))
-const workflow = readFileSync(new URL('../.github/workflows/verify.yml', import.meta.url), 'utf8')
-const selectionShells = [...workflow.matchAll(/        run: \|\n(          plan=[\s\S]*?)\n      - name: Enable pinned pnpm/gu)]
-  .map(match => match[1])
-assert.equal(selectionShells.length, 6, 'all isolated workers resolve the trusted natural-event pack')
-assert(selectionShells.every(shell => shell === selectionShells[0]),
-  'no worker may select a different pack or weaker identity check')
-const selectionShell = selectionShells[0]
+const rawWorkflow = readFileSync(new URL('../.github/workflows/verify.yml', import.meta.url), 'utf8')
+// Resolve the workflow's step and run aliases before applying the existing structure checks.
+const commands = Object.fromEntries([...rawWorkflow.matchAll(/^        run: &(\w+) (.+(?:\n          .+)*)/gm)]
+  .map(([, name, value]) => [name, value]))
+const expandedCommands = rawWorkflow.replace(/^        run: [*&](\w+) ?(.*)$/gm,
+  (_line, name, definition) => `        run: ${definition || commands[name]}`)
+const steps = Object.fromEntries([...expandedCommands.matchAll(/^      - &(\w+)\n        name: (.+(?:\n {8,}.+)*)/gm)]
+  .map(([, name, value]) => [name, value]))
+const workflow = expandedCommands.replace(/^      - &\w+\n        name: /gm, '      - name: ')
+  .replace(/^      - \*(\w+)$/gm, (_line, name) => `      - name: ${steps[name]}`)
 const jobEntries = [...workflow.slice(workflow.indexOf('\njobs:')).matchAll(/^  ([a-z][a-z0-9-]*):\n([\s\S]*?)(?=^  [a-z][a-z0-9-]*:|$(?![\s\S]))/gm)]
 const jobs = Object.fromEntries(jobEntries.map(([, name, body]) => [name, body]))
 const workerNames = ['verify-1', 'verify-2', 'e2e-seams-1', 'e2e-seams-2', 'e2e-render-1', 'e2e-render-2']
@@ -173,6 +176,14 @@ const verifyJobs = ['verify-1', 'verify-2'].map(name => jobs[name])
 const seamsJobs = ['e2e-seams-1', 'e2e-seams-2'].map(name => jobs[name])
 const renderJobs = ['e2e-render-1', 'e2e-render-2'].map(name => jobs[name])
 const verifyJob = verifyJobs[0]
+const checkoutShell = job => job.match(/- name: Verify natural PR checkout\n[\s\S]*?\n        run: \|\n((?: {10}.+\n)+)/u)?.[1]
+const packShell = job => job.match(/- name: Select verification from the trusted PR base\n[\s\S]*?\n        run: \|\n((?: {10}.+\n)+)/u)?.[1]
+assert(checkoutShell(verifyJob))
+assert(packShell(verifyJob))
+const selectionShell = checkoutShell(verifyJob) + packShell(verifyJob)
+for (const name of workerNames) assert.equal(checkoutShell(jobs[name]), checkoutShell(verifyJob))
+for (const worker of [...verifyJobs, ...renderJobs]) assert.equal(packShell(worker), packShell(verifyJob))
+for (const worker of seamsJobs) assert.equal(packShell(worker), undefined, 'fixed seams do not select a pack')
 for (const [lane, workers] of [['verify', verifyJobs], ['e2e', renderJobs]]) {
   for (const [index, worker] of workers.entries()) {
     assert(worker.includes(`--pack "$VERIFY_PACK" --lane ${lane} --shard ${index + 1} --jobs 2`))
@@ -187,8 +198,14 @@ for (const name of workerNames) {
     'persist-credentials: false', 'pnpm -C app install --frozen-lockfile', 'npm --prefix server ci',
     'pnpm -C app exec playwright install --with-deps --no-shell chromium']) assert(worker.includes(setup), setup)
 }
-for (const renderJob of renderJobs) assert(renderJob.includes("if: ${{ !cancelled() && steps.chromium.outcome == 'success' && steps.lane.outcome == 'success' && steps.lane.outputs.count != '0' }}"),
-  'render setup and nonempty lane are required for execution')
+const nonemptyLane = "if: ${{ steps.lane.outputs.count != '0' }}"
+for (const worker of renderJobs) {
+  for (const name of ['Enable pinned pnpm', 'Install app dependencies', 'Install server dependencies',
+    'Install render system dependencies', 'Install Chromium', 'Run selected verification pack (isolated render lane)']) {
+    const step = worker.split('      - name: ').find(entry => entry.startsWith(`${name}\n`))
+    assert(step?.includes(nonemptyLane), `${name}: require successful setup and a nonempty render lane`)
+  }
+}
 const seamScripts = [
   'verify-draft-pagination-renderer.mjs',
   'verify-draft-pagination-dom-contract.mjs',
@@ -232,12 +249,10 @@ for (const [name, needs, variables] of [
 }
 const systemInstall = job => job.match(/sudo apt-get install --yes [^\n]+/)?.[0]
 assert(systemInstall(verifyJob))
-for (const worker of [...verifyJobs, ...renderJobs]) assert.equal(systemInstall(worker), systemInstall(verifyJob), 'retain system dependencies')
+for (const worker of [...verifyJobs, ...renderJobs]) assert.equal(systemInstall(worker), systemInstall(verifyJob), 'share the system dependency installer')
 for (const worker of seamsJobs) assert(!systemInstall(worker), 'browser seams retain Playwright OS dependencies only')
 const laneShells = renderJobs.map(renderJob => {
-  assert(renderJob.includes("- name: Install verification system dependencies\n        if: ${{ steps.lane.outputs.count != '0' }}"),
-    'empty render partitions do not add system installation')
-  const shell = renderJob.match(/        run: \|\n(          lane=[\s\S]*?)\n      - name: Install verification system dependencies/u)?.[1]
+  const shell = renderJob.match(/        run: \|\n(          lane=[\s\S]*?)\n      - name: Enable pinned pnpm/u)?.[1]
   assert(shell, 'exercise the actual render shard planning shell')
   return shell
 })

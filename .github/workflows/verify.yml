@@ -30,13 +30,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24.21.0
-      - name: Select verification from the trusted PR base
-        id: plan
+      - &verify_pr_checkout
+        name: Verify natural PR checkout
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          plan="$RUNNER_TEMP/eqb-verification-plan.json"
           if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
             [[ "$BASE_SHA" =~ ^[a-f0-9]{40}$ && "$HEAD_SHA" =~ ^[a-f0-9]{40}$ && "$GITHUB_SHA" =~ ^[a-f0-9]{40}$ ]]
             test -z "$(git status --porcelain)"
@@ -45,6 +44,14 @@ jobs:
             git merge-base --is-ancestor "$BASE_SHA" "$HEAD_SHA"
             test "$(git rev-parse "$GITHUB_SHA^{tree}")" = "$(git rev-parse "$HEAD_SHA^{tree}")"
           fi
+      - &select_pack
+        name: Select verification from the trusted PR base
+        id: plan
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          plan="$RUNNER_TEMP/eqb-verification-plan.json"
           if [ "$GITHUB_EVENT_NAME" = pull_request ] && git cat-file -e "$BASE_SHA:scripts/ci-pr-plan.mjs"; then
             trusted="$RUNNER_TEMP/eqb-ci-policy"
             git worktree add --detach "$trusted" "$BASE_SHA"
@@ -63,40 +70,88 @@ jobs:
               jq '{actualPack: .pack, classifierPack: .classifierPack, decision: .reason, advice: (.agentAdvice // {status: "unavailable-on-base"})}' "$plan"
               echo '```'; } >> "$GITHUB_STEP_SUMMARY"
           fi
-      - name: Enable pinned pnpm
-        run: |
+      - &enable_pnpm
+        name: Enable pinned pnpm
+        run: &enable_pnpm_command |
           corepack enable
           corepack prepare pnpm@10.28.1 --activate
-      - name: Install app dependencies
-        run: pnpm -C app install --frozen-lockfile
-      - name: Install server dependencies
-        run: npm --prefix server ci
-      - name: Install verification system dependencies
-        timeout-minutes: 8
+      - &install_app
+        name: Install app dependencies
+        run: &install_app_command pnpm -C app install --frozen-lockfile
+      - &install_server
+        name: Install server dependencies
+        run: &install_server_command npm --prefix server ci
+      - &prepare_apt_cache
+        name: Prepare apt archive cache
+        id: apt_packages
+        if: ${{ !startsWith(github.job, 'e2e-render-') || steps.lane.outputs.count != '0' }}
+        env:
+          VERIFY_TOOLCHAIN: ${{ startsWith(github.job, 'verify-') && 'full' || 'render' }}
         run: |
-          # Normal setup takes ~1 minute. Bound slow downloads without interrupting dpkg.
-          for attempt in 1 2; do
-            if sudo timeout --kill-after=5s 60s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update &&
-              sudo timeout --kill-after=5s 120s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 install --download-only --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy; then
-              break
-            fi
-            if [ "$attempt" = 2 ]; then
-              echo "::error::System dependency download failed after two bounded attempts"
-              exit 1
-            fi
-            # Switch mirrors before the retry so a stalled Azure mirror is not reused.
-            # Hosted images route sources through mirror+file:/etc/apt/apt-mirrors.txt.
-            for source in /etc/apt/apt-mirrors.txt /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
-              if [ -f "$source" ]; then
-                sudo sed -i 's|://azure\.archive\.ubuntu\.com/|://archive.ubuntu.com/|g' "$source"
+          packages=(ffmpeg poppler-utils imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip)
+          # Render lanes run import preflight, which requires soffice; shard membership can move.
+          packages+=(libreoffice-writer)
+          # One package set for every lane lets all lanes share a single archive cache.
+          packages+=(python3-venv python3-numpy python3-scipy)
+          mkdir -p "$HOME/.cache/eqb-apt"
+          hash=$(printf '%s\n' "${packages[@]}" | sha256sum)
+          {
+            echo "packages=${packages[*]}"
+            echo "hash=${hash%% *}"
+            echo "profile=$VERIFY_TOOLCHAIN"
+          } >> "$GITHUB_OUTPUT"
+      - &restore_apt_cache
+        name: Restore apt package archives
+        id: apt_cache
+        if: ${{ steps.apt_packages.outcome == 'success' }}
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.cache/eqb-apt/*.deb
+          # Each run saves what it downloaded under a new key, so slow-mirror progress accumulates.
+          key: eqb-apt-v2-${{ runner.os }}-${{ runner.arch }}-${{ steps.apt_packages.outputs.hash }}-${{ github.run_id }}-${{ github.run_attempt }}-${{ github.job }}
+          restore-keys: eqb-apt-v2-${{ runner.os }}-${{ runner.arch }}-${{ steps.apt_packages.outputs.hash }}-
+      - &install_full_toolchain
+        name: Install verification system dependencies
+        id: apt_install
+        timeout-minutes: 30
+        env: &apt_install_env
+          APT_PACKAGES: ${{ steps.apt_packages.outputs.packages }}
+          APT_CACHE_HIT: ${{ steps.apt_cache.outputs.cache-matched-key != '' }}
+          VERIFY_TOOLCHAIN: ${{ steps.apt_packages.outputs.profile }}
+        run: &install_system_dependencies |
+          read -r -a packages <<< "$APT_PACKAGES"
+          archives="$HOME/.cache/eqb-apt"
+          archive_options=(-o "Dir::Cache::Archives=$archives" -o APT::Keep-Downloaded-Packages=true)
+          # A runner can require a different package version even after a cache hit.
+          if [ "$APT_CACHE_HIT" != true ] ||
+            ! sudo apt-get "${archive_options[@]}" install --no-download --download-only --yes "${packages[@]}"; then
+            echo "downloaded=true" >> "$GITHUB_OUTPUT"
+            # Bound slow downloads without interrupting dpkg.
+            for attempt in 1 2; do
+              if sudo timeout --kill-after=5s 180s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update &&
+                sudo timeout --kill-after=5s 600s apt-get "${archive_options[@]}" -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 install --download-only --yes "${packages[@]}"; then
+                break
               fi
+              if [ "$attempt" = 2 ]; then
+                echo "::error::System dependency download failed after two bounded attempts"
+                exit 1
+              fi
+              # Hosted images route sources through mirror+file:/etc/apt/apt-mirrors.txt.
+              for source in /etc/apt/apt-mirrors.txt /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
+                if [ -f "$source" ]; then
+                  sudo sed -i 's|://azure\.archive\.ubuntu\.com/|://archive.ubuntu.com/|g' "$source"
+                fi
+              done
+              echo "::warning::System dependency download failed or timed out; retrying once with the primary Ubuntu mirror"
             done
-            echo "::warning::System dependency download failed or timed out; retrying once with the primary Ubuntu mirror"
-          done
-          sudo apt-get install --yes --no-download ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy
-          /usr/bin/python3 -m venv --system-site-packages "$RUNNER_TEMP/eqb-signal-python"
-          "$RUNNER_TEMP/eqb-signal-python/bin/python3" -c 'import numpy, scipy'
-          echo "$RUNNER_TEMP/eqb-signal-python/bin" >> "$GITHUB_PATH"
+          fi
+          sudo apt-get install --yes --no-download "${archive_options[@]}" "${packages[@]}"
+          sudo find "$archives" -maxdepth 1 -type f -name '*.deb' -exec chown "$(id -u):$(id -g)" {} +
+          if [ "${VERIFY_TOOLCHAIN:-}" = full ]; then
+            /usr/bin/python3 -m venv --system-site-packages "$RUNNER_TEMP/eqb-signal-python"
+            "$RUNNER_TEMP/eqb-signal-python/bin/python3" -c 'import numpy, scipy'
+            echo "$RUNNER_TEMP/eqb-signal-python/bin" >> "$GITHUB_PATH"
+          fi
           printf '%s\n' \
             '#!/bin/sh' \
             'if [ "${1:-}" = identify ]; then shift; exec /usr/bin/identify "$@"; fi' \
@@ -107,8 +162,17 @@ jobs:
             sudo sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/' "$policy"
           fi
           magick -version
-      - name: Install Chromium
-        run: pnpm -C app exec playwright install --with-deps --no-shell chromium
+      - &save_apt_cache
+        # Save even when a later step fails so a slow mirror only has to be survived once.
+        name: Save apt package archives
+        if: ${{ always() && steps.apt_install.outputs.downloaded == 'true' }}
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.cache/eqb-apt/*.deb
+          key: ${{ steps.apt_cache.outputs.cache-primary-key }}
+      - &install_chromium
+        name: Install Chromium
+        run: &chromium_install_command pnpm -C app exec playwright install --with-deps --no-shell chromium
       - name: Run selected verification pack
         env:
           VERIFY_PACK: ${{ steps.plan.outputs.pack }}
@@ -128,85 +192,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24.21.0
-      - name: Select verification from the trusted PR base
-        id: plan
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: |
-          plan="$RUNNER_TEMP/eqb-verification-plan.json"
-          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
-            [[ "$BASE_SHA" =~ ^[a-f0-9]{40}$ && "$HEAD_SHA" =~ ^[a-f0-9]{40}$ && "$GITHUB_SHA" =~ ^[a-f0-9]{40}$ ]]
-            test -z "$(git status --porcelain)"
-            test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-            test "$(git show -s --format=%P "$GITHUB_SHA")" = "$BASE_SHA $HEAD_SHA"
-            git merge-base --is-ancestor "$BASE_SHA" "$HEAD_SHA"
-            test "$(git rev-parse "$GITHUB_SHA^{tree}")" = "$(git rev-parse "$HEAD_SHA^{tree}")"
-          fi
-          if [ "$GITHUB_EVENT_NAME" = pull_request ] && git cat-file -e "$BASE_SHA:scripts/ci-pr-plan.mjs"; then
-            trusted="$RUNNER_TEMP/eqb-ci-policy"
-            git worktree add --detach "$trusted" "$BASE_SHA"
-            node "$trusted/scripts/ci-pr-plan.mjs" "$GITHUB_WORKSPACE" "$BASE_SHA" "$HEAD_SHA" "$GITHUB_SHA" "$GITHUB_EVENT_PATH" > "$plan"
-            git worktree remove "$trusted"
-          else
-            # Main and the first rollout PR always run Full. Never bootstrap trust from candidate policy.
-            node scripts/verify-ci.mjs --plan-json --pack all > "$plan"
-          fi
-          pack=$(jq -er '.pack' "$plan")
-          case "$pack" in all|ui|feature|paper-data|import-paper) ;; *) echo "Invalid trusted pack"; exit 1 ;; esac
-          echo "pack=$pack" >> "$GITHUB_OUTPUT"
-          { echo '## Verification plan'; echo '```json'; cat "$plan"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
-            { echo '## Risk Agent selection'; echo '```json';
-              jq '{actualPack: .pack, classifierPack: .classifierPack, decision: .reason, advice: (.agentAdvice // {status: "unavailable-on-base"})}' "$plan"
-              echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-          fi
-      - name: Enable pinned pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@10.28.1 --activate
-      - name: Install app dependencies
-        run: pnpm -C app install --frozen-lockfile
-      - name: Install server dependencies
-        run: npm --prefix server ci
-      - name: Install verification system dependencies
-        timeout-minutes: 8
-        run: |
-          # Normal setup takes ~1 minute. Bound slow downloads without interrupting dpkg.
-          for attempt in 1 2; do
-            if sudo timeout --kill-after=5s 60s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update &&
-              sudo timeout --kill-after=5s 120s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 install --download-only --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy; then
-              break
-            fi
-            if [ "$attempt" = 2 ]; then
-              echo "::error::System dependency download failed after two bounded attempts"
-              exit 1
-            fi
-            # Switch mirrors before the retry so a stalled Azure mirror is not reused.
-            # Hosted images route sources through mirror+file:/etc/apt/apt-mirrors.txt.
-            for source in /etc/apt/apt-mirrors.txt /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
-              if [ -f "$source" ]; then
-                sudo sed -i 's|://azure\.archive\.ubuntu\.com/|://archive.ubuntu.com/|g' "$source"
-              fi
-            done
-            echo "::warning::System dependency download failed or timed out; retrying once with the primary Ubuntu mirror"
-          done
-          sudo apt-get install --yes --no-download ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy
-          /usr/bin/python3 -m venv --system-site-packages "$RUNNER_TEMP/eqb-signal-python"
-          "$RUNNER_TEMP/eqb-signal-python/bin/python3" -c 'import numpy, scipy'
-          echo "$RUNNER_TEMP/eqb-signal-python/bin" >> "$GITHUB_PATH"
-          printf '%s\n' \
-            '#!/bin/sh' \
-            'if [ "${1:-}" = identify ]; then shift; exec /usr/bin/identify "$@"; fi' \
-            'exec /usr/bin/convert "$@"' | sudo tee /usr/local/bin/magick >/dev/null
-          sudo chmod 755 /usr/local/bin/magick
-          policy=$(find /etc/ImageMagick-* -name policy.xml -print -quit)
-          if [ -n "$policy" ]; then
-            sudo sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/' "$policy"
-          fi
-          magick -version
-      - name: Install Chromium
-        run: pnpm -C app exec playwright install --with-deps --no-shell chromium
+      - *verify_pr_checkout
+      - *select_pack
+      - *enable_pnpm
+      - *install_app
+      - *install_server
+      - *prepare_apt_cache
+      - *restore_apt_cache
+      - *install_full_toolchain
+      - *save_apt_cache
+      - *install_chromium
       - name: Run selected verification pack
         env:
           VERIFY_PACK: ${{ steps.plan.outputs.pack }}
@@ -241,51 +236,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24.21.0
-      - name: Select verification from the trusted PR base
-        id: plan
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: |
-          plan="$RUNNER_TEMP/eqb-verification-plan.json"
-          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
-            [[ "$BASE_SHA" =~ ^[a-f0-9]{40}$ && "$HEAD_SHA" =~ ^[a-f0-9]{40}$ && "$GITHUB_SHA" =~ ^[a-f0-9]{40}$ ]]
-            test -z "$(git status --porcelain)"
-            test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-            test "$(git show -s --format=%P "$GITHUB_SHA")" = "$BASE_SHA $HEAD_SHA"
-            git merge-base --is-ancestor "$BASE_SHA" "$HEAD_SHA"
-            test "$(git rev-parse "$GITHUB_SHA^{tree}")" = "$(git rev-parse "$HEAD_SHA^{tree}")"
-          fi
-          if [ "$GITHUB_EVENT_NAME" = pull_request ] && git cat-file -e "$BASE_SHA:scripts/ci-pr-plan.mjs"; then
-            trusted="$RUNNER_TEMP/eqb-ci-policy"
-            git worktree add --detach "$trusted" "$BASE_SHA"
-            node "$trusted/scripts/ci-pr-plan.mjs" "$GITHUB_WORKSPACE" "$BASE_SHA" "$HEAD_SHA" "$GITHUB_SHA" "$GITHUB_EVENT_PATH" > "$plan"
-            git worktree remove "$trusted"
-          else
-            # Main and the first rollout PR always run Full. Never bootstrap trust from candidate policy.
-            node scripts/verify-ci.mjs --plan-json --pack all > "$plan"
-          fi
-          pack=$(jq -er '.pack' "$plan")
-          case "$pack" in all|ui|feature|paper-data|import-paper) ;; *) echo "Invalid trusted pack"; exit 1 ;; esac
-          echo "pack=$pack" >> "$GITHUB_OUTPUT"
-          { echo '## Verification plan'; echo '```json'; cat "$plan"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
-            { echo '## Risk Agent selection'; echo '```json';
-              jq '{actualPack: .pack, classifierPack: .classifierPack, decision: .reason, advice: (.agentAdvice // {status: "unavailable-on-base"})}' "$plan"
-              echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-          fi
-      - name: Enable pinned pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@10.28.1 --activate
-      - name: Install app dependencies
-        run: pnpm -C app install --frozen-lockfile
-      - name: Install server dependencies
-        run: npm --prefix server ci
+      - *verify_pr_checkout
+      - *enable_pnpm
+      - *install_app
+      - *install_server
       # Browser seams need Chromium OS dependencies, not the render-pack toolchain.
-      - name: Install Chromium
-        id: chromium
-        run: pnpm -C app exec playwright install --with-deps --no-shell chromium
+      - *install_chromium
       - name: Verify draft pagination renderer
         run: node scripts/verify-draft-pagination-renderer.mjs
       - name: Verify reorder suggestions
@@ -306,51 +262,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24.21.0
-      - name: Select verification from the trusted PR base
-        id: plan
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: |
-          plan="$RUNNER_TEMP/eqb-verification-plan.json"
-          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
-            [[ "$BASE_SHA" =~ ^[a-f0-9]{40}$ && "$HEAD_SHA" =~ ^[a-f0-9]{40}$ && "$GITHUB_SHA" =~ ^[a-f0-9]{40}$ ]]
-            test -z "$(git status --porcelain)"
-            test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-            test "$(git show -s --format=%P "$GITHUB_SHA")" = "$BASE_SHA $HEAD_SHA"
-            git merge-base --is-ancestor "$BASE_SHA" "$HEAD_SHA"
-            test "$(git rev-parse "$GITHUB_SHA^{tree}")" = "$(git rev-parse "$HEAD_SHA^{tree}")"
-          fi
-          if [ "$GITHUB_EVENT_NAME" = pull_request ] && git cat-file -e "$BASE_SHA:scripts/ci-pr-plan.mjs"; then
-            trusted="$RUNNER_TEMP/eqb-ci-policy"
-            git worktree add --detach "$trusted" "$BASE_SHA"
-            node "$trusted/scripts/ci-pr-plan.mjs" "$GITHUB_WORKSPACE" "$BASE_SHA" "$HEAD_SHA" "$GITHUB_SHA" "$GITHUB_EVENT_PATH" > "$plan"
-            git worktree remove "$trusted"
-          else
-            # Main and the first rollout PR always run Full. Never bootstrap trust from candidate policy.
-            node scripts/verify-ci.mjs --plan-json --pack all > "$plan"
-          fi
-          pack=$(jq -er '.pack' "$plan")
-          case "$pack" in all|ui|feature|paper-data|import-paper) ;; *) echo "Invalid trusted pack"; exit 1 ;; esac
-          echo "pack=$pack" >> "$GITHUB_OUTPUT"
-          { echo '## Verification plan'; echo '```json'; cat "$plan"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
-            { echo '## Risk Agent selection'; echo '```json';
-              jq '{actualPack: .pack, classifierPack: .classifierPack, decision: .reason, advice: (.agentAdvice // {status: "unavailable-on-base"})}' "$plan"
-              echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-          fi
-      - name: Enable pinned pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@10.28.1 --activate
-      - name: Install app dependencies
-        run: pnpm -C app install --frozen-lockfile
-      - name: Install server dependencies
-        run: npm --prefix server ci
+      - *verify_pr_checkout
+      - *enable_pnpm
+      - *install_app
+      - *install_server
       # Browser seams need Chromium OS dependencies, not the render-pack toolchain.
-      - name: Install Chromium
-        id: chromium
-        run: pnpm -C app exec playwright install --with-deps --no-shell chromium
+      - *install_chromium
       - name: Verify draft pagination DOM contract
         run: node scripts/verify-draft-pagination-dom-contract.mjs
       - name: Verify A3 imposition
@@ -375,47 +292,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24.21.0
-      - name: Select verification from the trusted PR base
-        id: plan
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: |
-          plan="$RUNNER_TEMP/eqb-verification-plan.json"
-          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
-            [[ "$BASE_SHA" =~ ^[a-f0-9]{40}$ && "$HEAD_SHA" =~ ^[a-f0-9]{40}$ && "$GITHUB_SHA" =~ ^[a-f0-9]{40}$ ]]
-            test -z "$(git status --porcelain)"
-            test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-            test "$(git show -s --format=%P "$GITHUB_SHA")" = "$BASE_SHA $HEAD_SHA"
-            git merge-base --is-ancestor "$BASE_SHA" "$HEAD_SHA"
-            test "$(git rev-parse "$GITHUB_SHA^{tree}")" = "$(git rev-parse "$HEAD_SHA^{tree}")"
-          fi
-          if [ "$GITHUB_EVENT_NAME" = pull_request ] && git cat-file -e "$BASE_SHA:scripts/ci-pr-plan.mjs"; then
-            trusted="$RUNNER_TEMP/eqb-ci-policy"
-            git worktree add --detach "$trusted" "$BASE_SHA"
-            node "$trusted/scripts/ci-pr-plan.mjs" "$GITHUB_WORKSPACE" "$BASE_SHA" "$HEAD_SHA" "$GITHUB_SHA" "$GITHUB_EVENT_PATH" > "$plan"
-            git worktree remove "$trusted"
-          else
-            # Main and the first rollout PR always run Full. Never bootstrap trust from candidate policy.
-            node scripts/verify-ci.mjs --plan-json --pack all > "$plan"
-          fi
-          pack=$(jq -er '.pack' "$plan")
-          case "$pack" in all|ui|feature|paper-data|import-paper) ;; *) echo "Invalid trusted pack"; exit 1 ;; esac
-          echo "pack=$pack" >> "$GITHUB_OUTPUT"
-          { echo '## Verification plan'; echo '```json'; cat "$plan"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
-            { echo '## Risk Agent selection'; echo '```json';
-              jq '{actualPack: .pack, classifierPack: .classifierPack, decision: .reason, advice: (.agentAdvice // {status: "unavailable-on-base"})}' "$plan"
-              echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-          fi
-      - name: Enable pinned pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@10.28.1 --activate
-      - name: Install app dependencies
-        run: pnpm -C app install --frozen-lockfile
-      - name: Install server dependencies
-        run: npm --prefix server ci
+      - *verify_pr_checkout
+      - *select_pack
       - name: Plan isolated render lane
         id: lane
         env:
@@ -429,49 +307,35 @@ jobs:
             echo '所选 pack 合法空集合 (scripts=0)' | tee -a "$GITHUB_STEP_SUMMARY"
           fi
           { echo '## Isolated render lane'; echo '```json'; cat "$lane"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-      - name: Install verification system dependencies
+      - &enable_render_pnpm
+        name: Enable pinned pnpm
         if: ${{ steps.lane.outputs.count != '0' }}
-        timeout-minutes: 8
-        run: |
-          # Normal setup takes ~1 minute. Bound slow downloads without interrupting dpkg.
-          for attempt in 1 2; do
-            if sudo timeout --kill-after=5s 60s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update &&
-              sudo timeout --kill-after=5s 120s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 install --download-only --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy; then
-              break
-            fi
-            if [ "$attempt" = 2 ]; then
-              echo "::error::System dependency download failed after two bounded attempts"
-              exit 1
-            fi
-            # Switch mirrors before the retry so a stalled Azure mirror is not reused.
-            # Hosted images route sources through mirror+file:/etc/apt/apt-mirrors.txt.
-            for source in /etc/apt/apt-mirrors.txt /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
-              if [ -f "$source" ]; then
-                sudo sed -i 's|://azure\.archive\.ubuntu\.com/|://archive.ubuntu.com/|g' "$source"
-              fi
-            done
-            echo "::warning::System dependency download failed or timed out; retrying once with the primary Ubuntu mirror"
-          done
-          sudo apt-get install --yes --no-download ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy
-          /usr/bin/python3 -m venv --system-site-packages "$RUNNER_TEMP/eqb-signal-python"
-          "$RUNNER_TEMP/eqb-signal-python/bin/python3" -c 'import numpy, scipy'
-          echo "$RUNNER_TEMP/eqb-signal-python/bin" >> "$GITHUB_PATH"
-          printf '%s\n' \
-            '#!/bin/sh' \
-            'if [ "${1:-}" = identify ]; then shift; exec /usr/bin/identify "$@"; fi' \
-            'exec /usr/bin/convert "$@"' | sudo tee /usr/local/bin/magick >/dev/null
-          sudo chmod 755 /usr/local/bin/magick
-          policy=$(find /etc/ImageMagick-* -name policy.xml -print -quit)
-          if [ -n "$policy" ]; then
-            sudo sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/' "$policy"
-          fi
-          magick -version
-      - name: Install Chromium
-        id: chromium
-        run: pnpm -C app exec playwright install --with-deps --no-shell chromium
+        run: *enable_pnpm_command
+      - &install_render_app
+        name: Install app dependencies
+        if: ${{ steps.lane.outputs.count != '0' }}
+        run: *install_app_command
+      - &install_render_server
+        name: Install server dependencies
+        if: ${{ steps.lane.outputs.count != '0' }}
+        run: *install_server_command
+      - *prepare_apt_cache
+      - *restore_apt_cache
+      - &install_render_toolchain
+        name: Install render system dependencies
+        id: apt_install
+        if: ${{ steps.lane.outputs.count != '0' }}
+        timeout-minutes: 30
+        env: *apt_install_env
+        run: *install_system_dependencies
+      - *save_apt_cache
+      - &install_render_chromium
+        name: Install Chromium
+        if: ${{ steps.lane.outputs.count != '0' }}
+        run: *chromium_install_command
       - name: Run selected verification pack (isolated render lane)
         # The selected-pack runner owns its existing diff/build preflight.
-        if: ${{ !cancelled() && steps.chromium.outcome == 'success' && steps.lane.outcome == 'success' && steps.lane.outputs.count != '0' }}
+        if: ${{ steps.lane.outputs.count != '0' }}
         env:
           VERIFY_PACK: ${{ steps.plan.outputs.pack }}
         run: pnpm -C app verify:all -- --pack "$VERIFY_PACK" --lane e2e --shard 1 --jobs 2
@@ -491,47 +355,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24.21.0
-      - name: Select verification from the trusted PR base
-        id: plan
-        env:
-          BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: |
-          plan="$RUNNER_TEMP/eqb-verification-plan.json"
-          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
-            [[ "$BASE_SHA" =~ ^[a-f0-9]{40}$ && "$HEAD_SHA" =~ ^[a-f0-9]{40}$ && "$GITHUB_SHA" =~ ^[a-f0-9]{40}$ ]]
-            test -z "$(git status --porcelain)"
-            test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
-            test "$(git show -s --format=%P "$GITHUB_SHA")" = "$BASE_SHA $HEAD_SHA"
-            git merge-base --is-ancestor "$BASE_SHA" "$HEAD_SHA"
-            test "$(git rev-parse "$GITHUB_SHA^{tree}")" = "$(git rev-parse "$HEAD_SHA^{tree}")"
-          fi
-          if [ "$GITHUB_EVENT_NAME" = pull_request ] && git cat-file -e "$BASE_SHA:scripts/ci-pr-plan.mjs"; then
-            trusted="$RUNNER_TEMP/eqb-ci-policy"
-            git worktree add --detach "$trusted" "$BASE_SHA"
-            node "$trusted/scripts/ci-pr-plan.mjs" "$GITHUB_WORKSPACE" "$BASE_SHA" "$HEAD_SHA" "$GITHUB_SHA" "$GITHUB_EVENT_PATH" > "$plan"
-            git worktree remove "$trusted"
-          else
-            # Main and the first rollout PR always run Full. Never bootstrap trust from candidate policy.
-            node scripts/verify-ci.mjs --plan-json --pack all > "$plan"
-          fi
-          pack=$(jq -er '.pack' "$plan")
-          case "$pack" in all|ui|feature|paper-data|import-paper) ;; *) echo "Invalid trusted pack"; exit 1 ;; esac
-          echo "pack=$pack" >> "$GITHUB_OUTPUT"
-          { echo '## Verification plan'; echo '```json'; cat "$plan"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-          if [ "$GITHUB_EVENT_NAME" = pull_request ]; then
-            { echo '## Risk Agent selection'; echo '```json';
-              jq '{actualPack: .pack, classifierPack: .classifierPack, decision: .reason, advice: (.agentAdvice // {status: "unavailable-on-base"})}' "$plan"
-              echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-          fi
-      - name: Enable pinned pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@10.28.1 --activate
-      - name: Install app dependencies
-        run: pnpm -C app install --frozen-lockfile
-      - name: Install server dependencies
-        run: npm --prefix server ci
+      - *verify_pr_checkout
+      - *select_pack
       - name: Plan isolated render lane
         id: lane
         env:
@@ -545,49 +370,17 @@ jobs:
             echo '所选 pack 合法空集合 (scripts=0)' | tee -a "$GITHUB_STEP_SUMMARY"
           fi
           { echo '## Isolated render lane'; echo '```json'; cat "$lane"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
-      - name: Install verification system dependencies
-        if: ${{ steps.lane.outputs.count != '0' }}
-        timeout-minutes: 8
-        run: |
-          # Normal setup takes ~1 minute. Bound slow downloads without interrupting dpkg.
-          for attempt in 1 2; do
-            if sudo timeout --kill-after=5s 60s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update &&
-              sudo timeout --kill-after=5s 120s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 install --download-only --yes ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy; then
-              break
-            fi
-            if [ "$attempt" = 2 ]; then
-              echo "::error::System dependency download failed after two bounded attempts"
-              exit 1
-            fi
-            # Switch mirrors before the retry so a stalled Azure mirror is not reused.
-            # Hosted images route sources through mirror+file:/etc/apt/apt-mirrors.txt.
-            for source in /etc/apt/apt-mirrors.txt /etc/apt/sources.list /etc/apt/sources.list.d/*.list /etc/apt/sources.list.d/*.sources; do
-              if [ -f "$source" ]; then
-                sudo sed -i 's|://azure\.archive\.ubuntu\.com/|://archive.ubuntu.com/|g' "$source"
-              fi
-            done
-            echo "::warning::System dependency download failed or timed out; retrying once with the primary Ubuntu mirror"
-          done
-          sudo apt-get install --yes --no-download ffmpeg poppler-utils libreoffice-writer imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip python3-venv python3-numpy python3-scipy
-          /usr/bin/python3 -m venv --system-site-packages "$RUNNER_TEMP/eqb-signal-python"
-          "$RUNNER_TEMP/eqb-signal-python/bin/python3" -c 'import numpy, scipy'
-          echo "$RUNNER_TEMP/eqb-signal-python/bin" >> "$GITHUB_PATH"
-          printf '%s\n' \
-            '#!/bin/sh' \
-            'if [ "${1:-}" = identify ]; then shift; exec /usr/bin/identify "$@"; fi' \
-            'exec /usr/bin/convert "$@"' | sudo tee /usr/local/bin/magick >/dev/null
-          sudo chmod 755 /usr/local/bin/magick
-          policy=$(find /etc/ImageMagick-* -name policy.xml -print -quit)
-          if [ -n "$policy" ]; then
-            sudo sed -i 's/rights="none" pattern="PDF"/rights="read|write" pattern="PDF"/' "$policy"
-          fi
-          magick -version
-      - name: Install Chromium
-        id: chromium
-        run: pnpm -C app exec playwright install --with-deps --no-shell chromium
+      - *enable_render_pnpm
+      - *install_render_app
+      - *install_render_server
+      - *prepare_apt_cache
+      - *restore_apt_cache
+      - *install_render_toolchain
+      - *save_apt_cache
+      - *install_render_chromium
       - name: Run selected verification pack (isolated render lane)
         # The selected-pack runner owns its existing diff/build preflight.
-        if: ${{ !cancelled() && steps.chromium.outcome == 'success' && steps.lane.outcome == 'success' && steps.lane.outputs.count != '0' }}
+        if: ${{ steps.lane.outputs.count != '0' }}
         env:
           VERIFY_PACK: ${{ steps.plan.outputs.pack }}
         run: pnpm -C app verify:all -- --pack "$VERIFY_PACK" --lane e2e --shard 2 --jobs 2
