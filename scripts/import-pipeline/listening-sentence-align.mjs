@@ -117,7 +117,7 @@ function readAsr(appleWindow, whisperWindows) {
 
 // Semi-global variant of the segment rule's edit DP. Unmatched ASR at the
 // outer edges is free. Equal-cost paths prefer more exact timed anchors.
-function align(source, words, sentenceStarts) {
+function align(source, words, sentenceStarts, seamRow = null) {
   const scale = source.length + 1
   const joined = (a, b) => (a + b).replaceAll('-', '')
   const sourceTokens = source.map(token => joined(token, ''))
@@ -125,13 +125,16 @@ function align(source, words, sentenceStarts) {
   const sourcePairs = source.map((token, i) => i && !sentenceStarts.has(i) ? joined(source[i - 1], token) : null)
   const asrPairs = words.map((word, i) => i ? joined(words[i - 1].token, word.token) : null)
   const trace = [new Uint8Array(words.length + 1)]
+  const ties = seamRow === null ? null : [new Uint8Array(words.length + 1)]
   let previous = new Int32Array(words.length + 1)
   let twoRowsBack
   for (let i = 1; i <= source.length; i++) {
     const row = new Int32Array(words.length + 1)
     const moves = new Uint8Array(words.length + 1)
+    const tiedMoves = ties && new Uint8Array(words.length + 1)
     row[0] = i * scale
     moves[0] = 1
+    if (tiedMoves) tiedMoves[0] = 1 << 1
     for (let j = 1; j <= words.length; j++) {
       const costs = [previous[j - 1] + (source[i - 1] === words[j - 1].token ? -1 : scale),
         previous[j] + scale, row[j - 1] + scale]
@@ -139,14 +142,18 @@ function align(source, words, sentenceStarts) {
         sourceTokens[i - 1] === asrPairs[j - 1] ? previous[j - 2] - 1 : Infinity)
       row[j] = Math.min(...costs)
       moves[j] = costs.indexOf(row[j])
+      if (tiedMoves) tiedMoves[j] = costs.reduce((mask, cost, move) =>
+        cost === row[j] ? mask | (1 << move) : mask, 0)
     }
     trace.push(moves)
+    ties?.push(tiedMoves)
     twoRowsBack = previous
     previous = row
   }
   const matched = Array(source.length).fill(null)
   const insertions = new Map()
   let j = previous.reduce((best, cost, index) => cost < previous[best] ? index : best, 0)
+  const seamIndex = ties && uniqueSeamIndex(ties, previous, previous[j], seamRow)
   let i = source.length
   while (i > 0) {
     switch (trace[i][j]) {
@@ -179,14 +186,40 @@ function align(source, words, sentenceStarts) {
     }
   }
   for (const inserted of insertions.values()) inserted.reverse()
-  return { matched, insertions }
+  return { matched, insertions, seamIndex }
+}
+
+function uniqueSeamIndex(ties, finalCosts, bestCost, seamRow) {
+  // Walk every optimal path back to the transition that enters the seam row.
+  // A tie wholly within either reading need not change the split.
+  const columns = finalCosts.length
+  const offsets = [columns + 1, columns, 1, 2 * columns + 1, columns + 2]
+  const pending = []
+  finalCosts.forEach((cost, j) => { if (cost === bestCost) pending.push((ties.length - 1) * columns + j) })
+  const visited = new Set()
+  let seam
+  while (pending.length) {
+    const cell = pending.pop()
+    if (visited.has(cell)) continue
+    visited.add(cell)
+    const i = Math.floor(cell / columns), j = cell % columns
+    const mask = ties[i][j]
+    if (i === seamRow && (mask & ~(1 << 2))) {
+      if (seam !== undefined && seam !== j) return null
+      seam = j
+    }
+    for (const [move, offset] of offsets.entries()) {
+      if ((mask & (1 << move)) && (i > seamRow || move === 2)) pending.push(cell - offset)
+    }
+  }
+  return seam ?? null
 }
 
 function wordsIn(words, { startSeconds, endSeconds }) {
   return words.filter(word => midpoint(word) >= startSeconds && midpoint(word) < endSeconds)
 }
 
-function passBounds(group, count, source, sentenceStarts, apple) {
+function passBounds(group, count, source, sentenceStarts, words) {
   const playback = group?.playback
   if (!playback || !Number.isFinite(playback.startSeconds) || !Number.isFinite(playback.endSeconds)
     || playback.startSeconds >= playback.endSeconds || !Number.isInteger(count) || count < 1) return []
@@ -198,10 +231,11 @@ function passBounds(group, count, source, sentenceStarts, apple) {
   if (count === 1) return [playback]
   if (count !== 2 || !source.length) return []
   const repeatedStarts = new Set([...sentenceStarts, ...[...sentenceStarts].map(start => start + source.length)])
-  const doubled = align([...source, ...source], wordsIn(apple, playback), repeatedStarts).matched
-  const tail = doubled.slice(0, source.length).filter(Boolean).at(-1)
-  const head = doubled.slice(source.length).find(Boolean)
-  if (!tail || !head || tail.endSeconds > head.startSeconds + epsilon) return []
+  const observed = wordsIn(words, playback)
+  const { seamIndex } = align([...source, ...source], observed, repeatedStarts, source.length)
+  if (seamIndex === null) return []
+  const tail = observed[seamIndex - 1], head = observed[seamIndex]
+  if (!tail || !head || tail.endSeconds > head.startSeconds) return []
   const seam = (tail.endSeconds + head.startSeconds) / 2
   return [{ ...playback, endSeconds: seam }, { ...playback, startSeconds: seam }]
 }
@@ -330,7 +364,7 @@ function alignMaterial({ material, sentences }, review, instructions, asr, gaps)
   const { expectedReadings } = expectedListeningReadings({ ...material, questionNumbers }, instructions)
   const passCount = expectedReadings === 'unknown' && group?.occurrences?.length > 1
     ? group.occurrences.length : expectedReadings
-  const bounds = passBounds(group, passCount, source, sentenceStarts, asr.apple)
+  const bounds = passBounds(group, passCount, source, sentenceStarts, asr.hybrid)
   const reasons = new Set()
   if (!bounds.length) reasons.add('pass boundaries unavailable')
   const passes = bounds.map((bound, i) => {
@@ -339,6 +373,17 @@ function alignMaterial({ material, sentences }, review, instructions, asr, gaps)
       .map(candidate => ({ materialId, segment: segmentId, pass, ...candidate })))
     return alignPass(source, sentences, sentenceStarts, bound, asr.hybrid, reasons, pass)
   })
+  if (passes.length === 2 && passes[1].timings[0]?.start < passes[0].timings.at(-1)?.end) {
+    reasons.add('pass 2 starts before pass 1 ends')
+  }
+  for (const { timings } of passes) for (const [index, timing] of timings.entries()) {
+    if (timing.start === null) continue
+    timing.start = Number(timing.start.toFixed(2))
+    timing.end = Number(timing.end.toFixed(2))
+    if (timing.start >= timing.end || timing.start < timings[index - 1]?.end) {
+      reasons.add('invalid sentence range at centisecond precision')
+    }
+  }
   return { materialId, segment: segmentId, passCount, degraded: reasons.size > 0, reasons: [...reasons],
     passes: passes.map(({ matchRate }, i) => ({ ...bounds[i], matchRate })),
     sentences: sentences.map(({ tokens, wordCount, ...sentence }, i) => ({ ...sentence,
@@ -356,6 +401,15 @@ export function alignListeningSentences({ document, review, apple, whisper = [],
   const segments = listeningSentenceTargets(document).map(target =>
     alignMaterial(target, review, instructions, asr, candidates))
   return { segments, candidates: candidates ?? [] }
+}
+
+export function alignReviewedListeningSentences(document, review, readWindow) {
+  const windows = review?.evidence?.filter(({ kind }) => kind === 'asr_window') ?? []
+  const apple = windows.find(({ settings }) => /apple/iu.test(settings.engine))
+  if (!apple) throw new Error('缺少 Apple ASR')
+  const whisper = windows.filter(({ settings }) => /whisper/iu.test(settings.engine))
+  return alignListeningSentences({ document, review, apple: readWindow(apple.path),
+    whisper: whisper.map(({ path }) => readWindow(path)) }).segments
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

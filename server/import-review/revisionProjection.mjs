@@ -18,6 +18,7 @@ import { displayVariantArtifact } from '../../shared/paper-canonical/richContent
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { LEGACY_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview, readRetainedListeningReview, readSealedListeningReview } from '../paper-import/listeningReview.mjs'
+import { alignReviewedListeningSentences } from '../../scripts/import-pipeline/listening-sentence-align.mjs'
 import { SOURCE_REFERENCES_FILE, parseSourceReferencesBytes } from '../paper-import/sourceReferences.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../paper-import/sourceReferenceSemantics.mjs'
 import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../paper-import/sourceReferenceAdmission.mjs'
@@ -1968,6 +1969,14 @@ function buildNck1ReviewProjectionUncached(rootDir, {
     required: (requireAnalyses && !importProfile) || loaded.config.withTeachingAnalyses === true,
     analysisProfile,
     requireTeachingContent: Boolean(loaded.analyzedPackage) || loaded.config.withTeachingAnalyses === true,
+    getSentenceAlignment: () => {
+      try {
+        return alignReviewedListeningSentences(loaded.materialization, reviewedListening?.review,
+          file => readJson(resolveReviewFile(rootDir, file), 'Listening ASR'))
+      } catch {
+        return []
+      }
+    },
   })
   const sourceVisuals = sourceVisualProjection(loaded)
   const paragraphSummaries = importProfile

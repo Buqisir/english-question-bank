@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import Ajv from 'ajv/dist/2020.js'
+import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 
 import {
   TOPIC_LABEL_TAXONOMY,
@@ -144,11 +145,12 @@ export function buildListeningAnalysisAgentRequest({
   }
 }
 
-export function mergeListeningSentenceAnalysis(draft, segments = []) {
+export function mergeListeningSentenceAnalysis(draft, segments = [], authored = null) {
   const analysis = structuredClone(draft)
   const byId = new Map(segments.filter(({ degraded }) => !degraded).map(segment => [segment.segment, segment.sentences]))
   for (const material of Object.values(analysis?.materials ?? {})) {
-    const translations = new Map((Array.isArray(material.sentences) ? material.sentences : [])
+    const supplied = authored?.materials?.[material.segmentId]?.sentences
+    const translations = new Map([material.sentences, supplied].flatMap(entries => Array.isArray(entries) ? entries : [])
       .filter(entry => typeof entry?.id === 'string' && typeof entry.zh === 'string' && entry.zh.trim())
       .map(({ id, zh }) => [id, zh.trim()]))
     delete material.sentences
@@ -175,15 +177,16 @@ export function validateListeningAnalysis(analysis, {
   materialization,
   segmentIds = null,
   sourceAssetVersion = 1,
+  getSentenceAlignment,
 } = {}) {
   return validateListeningAnalysisInput(analysis, {
     ...buildListeningAnalysisInput(materialization, { segmentIds }),
     sourceAssetVersion,
-  })
+  }, getSentenceAlignment)
 }
 
 // The bounded input is also the exact source sent to an isolated worker.
-export function validateListeningAnalysisInput(analysis, input) {
+export function validateListeningAnalysisInput(analysis, input, getSentenceAlignment) {
   if (!validateSchema(analysis)) fail(`Listening analysis schema invalid: ${formatSchemaErrors(validateSchema.errors)}`)
   if (analysis.paperId !== input.paperId) fail('Listening analysis paperId does not match the source')
   if (analysis.sourceAssetVersion !== input.sourceAssetVersion) fail('Listening analysis sourceAssetVersion does not match the Review Candidate')
@@ -199,9 +202,19 @@ export function validateListeningAnalysisInput(analysis, input) {
     const material = analysis.materials[segmentId]
     if (material.segmentId !== segmentId) fail(`${segmentId} material identity is forged`)
     if (material.transcript !== expected.transcript) fail(`${segmentId} transcript must exactly match the captured source`)
-    for (const sentence of material.sentences ?? []) {
-      if (sentence.utf16Start >= sentence.utf16End || sentence.passes.some(({ start, end }) => start >= end)) {
+    const questionNumbers = new Set(expected.questions.map(({ questionNo }) => questionNo))
+    const sentences = material.sentences ?? []
+    for (const [index, sentence] of sentences.entries()) {
+      const previous = sentences[index - 1]
+      if (sentence.utf16Start >= sentence.utf16End || sentence.utf16End > expected.transcript.length
+        || sentence.en !== expected.transcript.slice(sentence.utf16Start, sentence.utf16End)
+        || (previous && (sentence.utf16Start < previous.utf16End || sentence.passes.length !== previous.passes.length))
+        || sentence.passes.some(({ start, end }, pass) => start >= end || start < previous?.passes[pass]?.end)
+        || (sentence.passes[1] && sentence.passes[1].start < sentences.at(-1).passes[0].end)) {
         fail(`${segmentId} has an invalid sentence range`)
+      }
+      if (sentence.questionNumbers?.some(number => !questionNumbers.has(number))) {
+        fail(`${segmentId} has a sentence question outside the material`)
       }
     }
     if (!isExactTopicTriple(material.topic)) fail(`${segmentId} topic is not one valid taxonomy parent-child triple`)
@@ -238,5 +251,14 @@ export function validateListeningAnalysisInput(analysis, input) {
   }
   if (assignedQuestions.size !== expectedQuestions.size) fail('Listening material question coverage is incomplete')
 
+  if (getSentenceAlignment && Object.values(analysis.materials).some(material => material.sentences)) {
+    const expected = mergeListeningSentenceAnalysis(analysis, getSentenceAlignment())
+    for (const [segmentId, { sentences }] of Object.entries(analysis.materials)) {
+      const generated = expected.materials[segmentId].sentences
+      if (sentences && (!generated || digestJson(sentences) !== digestJson(generated))) {
+        fail(`${segmentId} sentences must match the program alignment`)
+      }
+    }
+  }
   return { ok: true, warnings }
 }

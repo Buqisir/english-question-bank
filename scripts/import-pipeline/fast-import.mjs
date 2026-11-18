@@ -53,7 +53,7 @@ import { reviewBundleDigest } from '../../server/import-review/importReviewStore
 import { NCK1_STAGED_ANALYSIS_FILES } from '../../server/import-review/nck1AnalysisProjection.mjs'
 import { buildListeningAnalysisAgentRequest, LISTENING_STAGED_ANALYSIS_FILE_NAME,
   mergeListeningSentenceAnalysis, validateListeningAnalysis } from '../../server/paper-import-ai/analyzeListening.mjs'
-import { alignListeningSentences, listeningSentenceTargets } from './listening-sentence-align.mjs'
+import { alignReviewedListeningSentences, listeningSentenceTargets } from './listening-sentence-align.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -901,6 +901,7 @@ async function retainFastListening(ctx, candidateDigest) {
       if (file === installed) {
         archive(ctx, installed)
         delete ctx.state.steps['listening-review']
+        delete ctx.state.steps['listening-sentences']
       }
       continue
     }
@@ -924,6 +925,7 @@ async function retainFastListening(ctx, candidateDigest) {
         ctx.state.data.listeningSegmentAttempt = result
         archive(ctx, installed)
         delete ctx.state.steps['listening-review']
+        delete ctx.state.steps['listening-sentences']
         delete ctx.state.steps['round2-requests']
         return result
       })
@@ -935,6 +937,8 @@ async function retainFastListening(ctx, candidateDigest) {
       if (file === installed) {
         archive(ctx, installed)
         writeJson(installed, rebound, 'wx')
+        delete ctx.state.steps['listening-sentences']
+        save(ctx)
       } else {
         const reboundPath = path.join(ctx.fast, 'listening-review-input.json')
         writeJson(reboundPath, rebound)
@@ -946,13 +950,15 @@ async function retainFastListening(ctx, candidateDigest) {
     await step(ctx, 'listening-review', () => ({ groups: review.groups.length, retained: true }))
     return true
   }
-  for (const name of ['asr-wait', 'asr-apple-rule-v2', 'listening-review', 'round2-requests']) delete ctx.state.steps[name]
+  for (const name of ['asr-wait', 'asr-apple-rule-v2', 'listening-review', 'listening-sentences', 'round2-requests']) delete ctx.state.steps[name]
   delete ctx.state.data.listeningSegmentAttempt
   save(ctx)
   return false
 }
 
 async function installListening(ctx) {
+  delete ctx.state.steps['listening-sentences']
+  save(ctx)
   const result = ctx.state.data.listeningSegmentAttempt
   if (!result?.review || !existsSync(result.review)) fail('缺少听力分段规则结果；先运行 after-proofread')
   const report = readJson(result.review)
@@ -978,37 +984,46 @@ async function installListening(ctx) {
     evidence: report.evidence.length, ruleVersion: readJson(path.join(result.attempt, 'rule-result.json')).rule.version }
 }
 
-export function installListeningSentenceAnalysis(ctx) {
+export function installListeningSentenceAnalysis(ctx, { useAuthored = true } = {}) {
   const stage = path.join(ctx.paperDir, LISTENING_STAGED_ANALYSIS_FILE_NAME)
   const authored = path.join(ctx.fast, 'listening-analysis-authored.json')
-  if (!existsSync(stage) && !existsSync(authored)) return { detail: '无听力讲解，保留段级展示' }
-  const { materialization: document } = loadNck1ReviewSource(ctx.paperDir)
-  if (!existsSync(stage) && NCK1_STAGED_ANALYSIS_FILES.some(({ key, path: file }) =>
-    (!key.startsWith('reading-') || document.groups.some(({ slotId }) => slotId === key.replace('-', '.')))
-    && !existsSync(path.join(ctx.paperDir, file)))) {
-    return { detail: '讲解分片未齐，保留段级展示' }
+  const staged = existsSync(stage) ? readJson(stage) : null
+  const hasAuthored = useAuthored && existsSync(authored)
+  if (!staged && !hasAuthored) return { detail: '无听力讲解，保留段级展示' }
+  const writeAnalysis = analysis => {
+    if (staged && digestJson(staged) === digestJson(analysis)) return
+    const temporary = `${stage}.partial`
+    writeJson(temporary, analysis)
+    renameSync(temporary, stage)
   }
-  const draft = readJson(existsSync(authored) ? authored : stage)
-  let segments = []
-  let detail
   try {
-    const review = readJson(path.join(ctx.paperDir, LISTENING_REVIEW_FILE))
-    const windows = review.evidence.filter(({ kind }) => kind === 'asr_window')
-      .map(({ path: file, settings }) => ({ engine: settings.engine, window: readJson(path.join(ctx.paperDir, file)) }))
-    const apple = windows.find(({ engine }) => /apple/iu.test(engine))?.window
-    if (!apple) throw new Error('缺少 Apple ASR')
-    const whisper = windows.filter(({ engine }) => /whisper/iu.test(engine)).map(({ window }) => window)
-    segments = alignListeningSentences({ document, review, apple, whisper }).segments
-    detail = `${segments.filter(segment => !segment.degraded).length}/${segments.length} 段有句时`
+    const { materialization: document } = loadNck1ReviewSource(ctx.paperDir)
+    if (!staged && NCK1_STAGED_ANALYSIS_FILES.some(({ key, path: file }) =>
+      (!key.startsWith('reading-') || document.groups.some(({ slotId }) => slotId === key.replace('-', '.')))
+      && !existsSync(path.join(ctx.paperDir, file)))) return { detail: '讲解分片未齐，保留段级展示' }
+    const draft = hasAuthored ? readJson(authored) : null
+    let segments = []
+    let detail
+    try {
+      const review = readJson(path.join(ctx.paperDir, LISTENING_REVIEW_FILE))
+      segments = alignReviewedListeningSentences(document, review, file => readJson(path.join(ctx.paperDir, file)))
+      detail = `${segments.filter(segment => !segment.degraded).length}/${segments.length} 段有句时`
+    } catch (error) {
+      detail = `句级对齐跳过（${error.message.replace(/\s+/gu, ' ')}）`
+    }
+    const analysis = mergeListeningSentenceAnalysis(staged ?? draft, segments, staged ? draft : null)
+    validateListeningAnalysis(analysis, { materialization: document })
+    writeAnalysis(analysis)
+    return { detail }
   } catch (error) {
-    detail = `句级对齐跳过（${error.message.replace(/\s+/gu, ' ')}）`
+    if (staged) writeAnalysis(mergeListeningSentenceAnalysis(staged))
+    return { detail: `句级对齐跳过（${error.message.replace(/\s+/gu, ' ')}）` }
   }
-  const analysis = mergeListeningSentenceAnalysis(draft, segments)
-  validateListeningAnalysis(analysis, { materialization: document })
-  const temporary = `${stage}.partial`
-  writeJson(temporary, analysis)
-  renameSync(temporary, stage)
-  return { detail }
+}
+
+function refreshListeningSentences(ctx, options) {
+  delete ctx.state.steps['listening-sentences']
+  return step(ctx, 'listening-sentences', () => installListeningSentenceAnalysis(ctx, options))
 }
 
 export async function sourceReferences(ctx, execute = run) {
@@ -1575,9 +1590,7 @@ export async function finish(ctx, args, { referenceStages = {}, readStatus } = {
     }
   })
   if (hasListening(ctx) && !await retainFastListening(ctx)) await step(ctx, 'listening-review', () => installListening(ctx))
-  if (hasListening(ctx)) await step(ctx, 'listening-sentences', () => Promise.resolve()
-    .then(() => installListeningSentenceAnalysis(ctx))
-    .catch(error => ({ detail: `句级对齐跳过（${error.message.replace(/\s+/gu, ' ')}）` })))
+  if (hasListening(ctx)) await refreshListeningSentences(ctx)
   await step(ctx, 'ocr-correction-report', async () => {
     const reportFile = path.join(ctx.paperDir, 'agent-ocr-correction-report-v2.json')
     const profileId = (ctx.state.data.formatProfileBinding
@@ -1893,15 +1906,19 @@ function assertRetainedListeningFiles(ctx, manifest, productsOnly = false) {
     if (file.path === 'listening-review-v1.json' || file.path.startsWith('listening-review-evidence/')
       || file.path.startsWith('products/') !== productsOnly) continue
     const local = path.join(ctx.paperDir, file.path)
-    if (!existsSync(local) || sha256(readFileSync(local)) !== file.sha256) {
-      fail(`listening-redo：原 revision 文件哈希不匹配：${file.path}`)
+    if (existsSync(local)) {
+      if (sha256(readFileSync(local)) === file.sha256) continue
+      if (file.path === LISTENING_STAGED_ANALYSIS_FILE_NAME
+        && ctx.state.data.listeningRedo?.teachingDigest === digestJson(mergeListeningSentenceAnalysis(readJson(local)))) continue
     }
+    fail(`listening-redo：原 revision 文件哈希不匹配：${file.path}`)
   }
 }
 
 function retainedListeningInputs(ctx) {
   return Object.fromEntries(reviewBundleFilePaths(ctx.paperDir, null, hydratedEvidenceBase(ctx.paperDir))
     .filter(file => !file.path.startsWith('products/') && file.path !== 'listening-review-v1.json'
+      && file.path !== LISTENING_STAGED_ANALYSIS_FILE_NAME
       && !file.path.startsWith('listening-review-evidence/'))
     .map(file => [file.path, sha256(readFileSync(path.join(ctx.paperDir, file.path)))]))
 }
@@ -1978,6 +1995,14 @@ export async function listeningRedo(ctx, args, {
       'listening-redo-products', 'pdf-qa']) delete ctx.state.steps[name]
     save(ctx)
   }
+  const redo = ctx.state.data.listeningRedo
+  const staged = originalManifest.files.find(file => file.path === LISTENING_STAGED_ANALYSIS_FILE_NAME)
+  if (staged && !redo.teachingDigest) {
+    // The original file hash was verified before binding the unchanged teaching content.
+    redo.teachingDigest = digestJson(mergeListeningSentenceAnalysis(readJson(path.join(ctx.paperDir, staged.path))))
+    delete redo.retainedInputs[staged.path]
+    save(ctx)
+  }
   if (digestJson(inputs(ctx)) !== digestJson(ctx.state.data.listeningRedo.retainedInputs)) {
     fail('listening-redo：非听力输入已变化')
   }
@@ -1993,11 +2018,13 @@ export async function listeningRedo(ctx, args, {
       '--output', path.join(ctx.fast, 'listening-segment-attempts')))
     ctx.state.data.listeningSegmentAttempt = result
     // Never retain an AI decision from a superseded attempt.
+    delete ctx.state.steps['listening-sentences']
     archive(ctx, path.join(ctx.paperDir, 'listening-review-v1.json'))
     save(ctx)
     return result
   })
   await step(ctx, 'listening-redo-install', install)
+  await refreshListeningSentences(ctx, { useAuthored: false })
   // Re-evaluate on resume, including after a fresh agent_asr_comparison.
   const digest = inputDigest(ctx)
   const manifest = path.join(ctx.paperDir, PRODUCT_MANIFEST)

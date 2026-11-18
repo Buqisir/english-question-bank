@@ -17,9 +17,29 @@ import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.
 import { loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
 import { expectedListeningReadings } from './lib-listening-segment-rule.mjs'
+import { alignListeningSentences } from './listening-sentence-align.mjs'
+import { buildLocalReviewProjection } from './review.mjs'
+import { prebindReviewFixtureReferences } from '../lib/syntheticReviewAnswerFixture.mjs'
 import { SOURCE_INSTRUCTION_SLOTS } from '../../shared/paper-canonical/sourcePresentation.mjs'
 
 const downstream = ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']
+
+test('an omitted repeated opening cannot claim the closing Right from the first reading', () => {
+  const document = { listening: { transcript: [{
+    segmentId: 's', text: 'Right. We can meet later. Right.', instruction: '读两遍', questionNumbers: [6],
+  }] } }
+  const review = { groups: [{ segmentId: 's', playback: { startSeconds: 0, endSeconds: 20 } }] }
+  const word = (text, start, duration) => ({ text, start, end: start + duration })
+  const segments = [word('Right.', 1, .4), word('We can meet later.', 3, 2), word('Right.', 8, .4),
+    word('We can meet later.', 13, 2), word('Right.', 17, .4)]
+  const align = segments => alignListeningSentences({ document, review,
+    apple: { startSeconds: 0, endSeconds: 20, segments } }).segments[0]
+  assert.equal(align(segments).degraded, true)
+  segments.splice(3, 0, word('Right.', 11.004, .4))
+  const complete = align(segments)
+  assert.equal(complete.degraded, false)
+  assert.deepEqual(complete.sentences[0].passes.map(({ start, end }) => [start, end]), [[1, 1.4], [11, 11.4]])
+})
 
 for (const mode of ['preserves all other bundle bytes', 'rejects a newer revision before writing',
   'rejects files inconsistent with the original manifest']) test(`hydrated listening-only redo ${mode}`, async t => {
@@ -36,6 +56,9 @@ for (const mode of ['preserves all other bundle bytes', 'rejects a newer revisio
   json(path.join(ctx.paperDir, 'paragraph-summaries-v1.json'), { retained: 'summaries' })
   json(path.join(ctx.paperDir, 'public-search-metadata-v1.json'), { retained: 'metadata' })
   json(path.join(ctx.paperDir, 'listening-review-v1.json'), { method: 'agent_asr_comparison', old: true })
+  const stagedListening = path.join(ctx.paperDir, 'analysis-listening.json')
+  const theirTeaching = { materials: { s: { segmentId: 's', summaryZh: '保留原讲解' } } }
+  json(stagedListening, { materials: { s: { ...theirTeaching.materials.s, sentences: [{ id: 'old' }] } } })
   const descriptors = () => Object.entries(snapshot(ctx.paperDir)).filter(([name]) => !name.startsWith('signals/'))
     .map(([name, hex]) => ({ path: name, sha256: sha256(Buffer.from(hex, 'hex')),
       byteLength: hex.length / 2, mediaType: 'application/json', role: name === 'config.json' ? 'config' : 'evidence' }))
@@ -54,7 +77,7 @@ for (const mode of ['preserves all other bundle bytes', 'rejects a newer revisio
   const options = {
     readStatus: async () => JSON.stringify(status),
     inputs: () => Object.fromEntries(Object.entries(snapshot(ctx.paperDir)).filter(([name]) =>
-      name !== 'listening-review-v1.json')),
+      !['listening-review-v1.json', 'analysis-listening.json'].includes(name))),
     inputDigest: () => printDigest,
     ensureAsr: async () => 'apple-evidence',
     execute: async (_ctx, label) => {
@@ -84,16 +107,23 @@ for (const mode of ['preserves all other bundle bytes', 'rejects a newer revisio
     json(path.join(ctx.paperDir, 'products/answerOnly.pdf'), { changed: true })
     await assert.rejects(run, /文件哈希不匹配：products\/answerOnly.pdf/)
   } else {
+    const staleSentenceStep = ctx.state.steps['listening-sentences'] = completed({ stale: true })
     await run()
+    assert.notEqual(ctx.state.steps['listening-sentences'], staleSentenceStep)
     delete bundle['listening-review-v1.json']
     const after = snapshot(ctx.paperDir)
     delete after['listening-review-v1.json']
+    delete bundle['analysis-listening.json']
+    delete after['analysis-listening.json']
     assert.deepEqual(after, bundle)
+    assert.deepEqual(JSON.parse(readFileSync(stagedListening)), theirTeaching)
     assert.equal(ctx.state.steps['listening-redo-products'].result.refrozen, false)
     assert(!ctx.state.steps['source-references'], 'must not invent authoring history')
     assert(!ctx.state.steps.freeze, 'must not invent a freeze')
     await run()
     assert.deepEqual(calls, ['prepare-listening-review', 'listening-segment-v2'])
+    json(stagedListening, { materials: { s: { segmentId: 's', summaryZh: '改过讲解' } } })
+    await assert.rejects(run, /文件哈希不匹配：analysis-listening.json/)
   }
 })
 
@@ -277,15 +307,16 @@ for (const [edit, expectation] of [
     return { path: relative, sha256: sha256(bytes), byteLength: bytes.length, kind, window, settings }
   }
   const words = transcript[0].text.toLowerCase().match(/[a-z]+/gu).map(word => word === 'dolphins' ? 'porpoises' : word)
+  const playbackEnd = edit === 'reading' ? 1 + words.length / 5 : 2
   const asr = putEvidence(asrPath, { audioSha256: subject.playbackAudioSha256, startSeconds: 0, endSeconds: subject.durationSeconds,
     result: { segments: [{ text: words.join(' '), start: 1, end: 1 + words.length / 5,
       words: words.map((word, index) => ({ word, start: 1 + index / 5, end: 1 + (index + 1) / 5 })) }] } },
     'asr_window', { startSeconds: 0, endSeconds: subject.durationSeconds },
-    { engine: 'fixture', model: 'fixture', language: 'en', vad: false, computeType: 'fixture' })
+    { engine: edit === 'reading' ? 'Apple fixture' : 'fixture', model: 'fixture', language: 'en', vad: false, computeType: 'fixture' })
   const groups = transcript.map(({ segmentId, questionNumbers }, index) => ({
     segmentId, questionNumbers, decision: index ? 'blocked' : 'usable', reason: 'fixture comparison',
-    limits: [], playback: index ? null : { startSeconds: 1, endSeconds: 2 },
-    occurrences: index ? [] : [{ startSeconds: 1, endSeconds: 2, evidencePaths: [asrPath] }],
+    limits: [], playback: index ? null : { startSeconds: 1, endSeconds: playbackEnd },
+    occurrences: index ? [] : [{ startSeconds: 1, endSeconds: playbackEnd, evidencePaths: [asrPath] }],
   }))
   const rule = { version: 'fixture', normalizationVersion: 'fixture', fuzzyAnchorsEnabled: editOption }
   const normalization = { fixture: true }
@@ -316,7 +347,9 @@ for (const [edit, expectation] of [
   const current = listeningReviewSubject(loaded, candidate)
   if (!legacy) assert.notEqual(current.candidateDigest, subject.candidateDigest)
   const asrStage = ctx.state.steps['asr-apple-rule-v2'] = completed({ retained: true })
+  const sentenceStage = ctx.state.steps['listening-sentences'] = completed({ stale: true })
   await finish(ctx, [], options)
+  assert.notEqual(ctx.state.steps['listening-sentences'], sentenceStage)
   const { review } = readListeningReview(reviewRoot, current, transcript)
   if (rerun) {
     const attempt = ctx.state.data.listeningSegmentAttempt.attempt
@@ -332,6 +365,14 @@ for (const [edit, expectation] of [
     assert.equal(ctx.state.steps['asr-apple-rule-v2'], asrStage)
   }
   assert.equal(sha256(readFileSync(path.join(reviewRoot, notePath))), note.sha256)
+  if (edit === 'reading') {
+    prebindReviewFixtureReferences(reviewRoot, { expectedCandidateDigest: candidate.candidateDigest })
+    const asset = buildLocalReviewProjection(reviewRoot).analysisSidecars['listening-analysis-v1.json']
+    const firstSentence = asset.materials[transcript[0].segmentId].sentences[0]
+    firstSentence.passes[0].start += .01
+    json(path.join(reviewRoot, 'analysis-listening.json'), asset)
+    assert.throws(() => buildLocalReviewProjection(reviewRoot), /sentences must match the program alignment/)
+  }
 })
 
 test('after-proofread forwards explicit body width to figure-sizes on resume', t => {

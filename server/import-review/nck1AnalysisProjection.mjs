@@ -372,6 +372,7 @@ export function buildNck1AnalysisProjection({
   required = true,
   analysisProfile = LEGACY_NCK1_ANALYSIS_PROFILE,
   requireTeachingContent = false,
+  getSentenceAlignment,
 }) {
   if (![LEGACY_NCK1_ANALYSIS_PROFILE, LISTENING_ANALYSIS_PROFILE].includes(analysisProfile)) {
     fail(`Unknown NCK1 analysis profile: ${analysisProfile}`)
@@ -410,6 +411,7 @@ export function buildNck1AnalysisProjection({
     validateListeningAnalysis(raw[NCK1_LISTENING_STAGED_ANALYSIS.key], {
       materialization,
       sourceAssetVersion,
+      getSentenceAlignment,
     })
   }
   const questionIds = materialization.groups.flatMap(({ groupId }) =>
