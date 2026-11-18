@@ -32,7 +32,7 @@ export function scrollListeningTarget(target: Element, block: ScrollLogicalPosit
 // can track the same line of text.
 const phraseDuration = 700
 const jumpDuration = 500
-const calmLead = 40
+const FOLLOW_BEAT_MS = 200
 const calmReadingInset = 0.08
 const calmSprings = {
   calm: { response: 0.62, dampingRatio: 0.88 },
@@ -125,6 +125,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
     let frame = 0
     let lastIndex = -1
+    let lastSentenceChange = -Infinity
     let lastRepeating = false
     let focusTimeout: number | undefined
     let motion: { from: number; index: number; start: number; duration: number } | null = null
@@ -142,6 +143,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     const setSpringTarget = (index: number, now: number, automatic: boolean) => {
       if (spring) {
         spring.index = index
+        spring.time = Math.max(spring.time, now)
         spring.automatic = automatic
       } else {
         spring = { index, position: scroller.scrollTop, velocity: 0, time: now, automatic }
@@ -165,6 +167,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       const repeating = time + 0.025 >= repeatStart
       const index = target ? loopTarget.current
         : sentences.findLastIndex((sentence) => sentenceStart(sentence, repeating) <= time + 0.025)
+      const changedSentence = index !== lastIndex || repeating !== lastRepeating
       const continuous = flow && !reducedMotion.matches
       if (index >= 0 && follows.current) {
         if (reducedMotion.matches) {
@@ -178,9 +181,11 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
               pending = null
               setSpringTarget(index, now, false)
             } else {
-              if (index !== lastIndex && !audio.paused) {
+              if (changedSentence && !audio.paused) {
                 const short = isShortAndVisible(index)
-                pending = short ? null : { index, start: now + calmLead }
+                const beat = now - lastSentenceChange < FOLLOW_BEAT_MS ? 0 : FOLLOW_BEAT_MS
+                // Let a prior spring finish toward its own target during the beat.
+                pending = short ? null : { index, start: now + beat }
                 if (short && spring?.automatic) spring = null
               }
               if (audio.paused || (!target && time >= sentenceEnd(sentences[index], repeating))) {
@@ -243,6 +248,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
         spring = null
       }
       if (index !== lastIndex) setCurrent(index)
+      if (index >= 0 && changedSentence) lastSentenceChange = now
       lastIndex = index
       lastRepeating = repeating
       if (!audio.paused || motion || spring) frame = requestAnimationFrame(sync)
