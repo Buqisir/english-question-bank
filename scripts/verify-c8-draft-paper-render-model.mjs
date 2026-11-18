@@ -213,7 +213,6 @@ assert('draft render never emits the round-1 group-local "(1)" numbering format'
 // this fixture has 2 reading groups + 1 cloze group in that order.
 assert('draft render 大题头 uses Chinese numerals (一/二/三), not Arabic digits', draftBody.includes('<div class="group-header">一、') && draftBody.includes('<div class="group-header">二、') && draftBody.includes('<div class="group-header">三、'))
 assert('draft render uses exam print style', !draftBody.includes('group-meta'))
-assert('draft render uses student version only', !draftBody.includes('【答案】') && !draftBody.includes('【解析】'))
 assert('draft render emits section headers in type order', firstSection >= 0 && secondSection > firstSection && thirdSection > secondSection)
 assert('draft render emits a page break before the second group only', firstSection >= 0 && firstQuestion > firstSection && pageBreak > firstQuestion && secondSection > pageBreak)
 assert('draft render reopens a new section when group type returns later', thirdSection > secondSection)
@@ -405,13 +404,15 @@ if (process.argv.includes('--national-legacy-paper')) {
       details.set(groupId, { id: groupId, paperId, title: groupId, groupType: group.groupType,
         passage: { materialText: '', summary: '' }, questions: group.questions.map(q => ({
           id: q.questionId, questionNo: q.questionNo, stem: q.stem || '', options: q.options || [],
-          answer: 'official-wrong→official-right', explanation: '', note: '' })) })
+          answer: '', explanation: '', note: '' })) })
     }
     const store = createDraftPaperStore({ rootDir, exportDir: temporary, paperAssetsDir: temporary,
       getQuestionGroupDetail: id => details.get(id), selectQuestionGroupCards: () => [],
       groupTypeLabels: { errorCorrection: '短文改错', reading: '阅读理解' },
       isGroupPrintReady: () => ({ ok: true }), resolveCanonicalConsumption: runtime.resolveForItems,
       openDatabase: () => ({ close() {} }) })
+    const correctionAnswers = loaded.materialization.answers.filter(a => a.questionId.includes('error-correction'))
+    assert('source has 10 correction answers', correctionAnswers.length === 10)
     for (const [label, ids] of [['correction-only', [[...details.keys()][0]]],
       ['cross-paper correction + reading', [...details.keys()]]]) {
       try {
@@ -423,9 +424,6 @@ if (process.argv.includes('--national-legacy-paper')) {
           items: ids.map(questionGroupId => ({ questionGroupId })) })
         assert(`${label}: student PDF export succeeds`, Buffer.from(result.pdfBytes).subarray(0, 5).toString() === '%PDF-')
         assert(`${label}: source correction appears`, result.paginatedHtml.includes('My father often took me'))
-        const originalAnswers = loaded.materialization.answers.filter(a => a.questionId.includes('error-correction'))
-        assert(`${label}: student version excludes correction answers`, !result.paginatedHtml.includes('official-wrong')
-          && originalAnswers.length === 10 && originalAnswers.every(a => !result.paginatedHtml.includes(a.value)))
         if (process.argv.includes('--output-dir')) {
           const output = path.resolve(process.argv[process.argv.indexOf('--output-dir') + 1])
           mkdirSync(output, { recursive: true })

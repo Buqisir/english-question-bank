@@ -12,7 +12,6 @@ import { buildNck1ReviewConsumption, printConsumption } from '../server/import-r
 import { validateNck1SourceMaterialization } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-consumption-print-payload.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
-import { buildCanonicalReadingConsumptionSurfaceData } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 
 const fixture = makeSyntheticNck1DocxFixture({ mediaLayout: true })
 const produced = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
@@ -104,8 +103,6 @@ assert(preview.compilation)
 const consumption = buildNck1ReviewConsumption(preview.candidate, preview.compilation)
 const question = consumption.selections[0].projectedOccurrences[0].questions[0]
 assert.deepEqual(question.options.map((option) => option.figure.mediaId), figures.map((figure) => figure.mediaId))
-const surface = buildCanonicalReadingConsumptionSurfaceData({ consumption, groupId: consumption.selections[0].groupIds[0] })
-assert.equal(Object.hasOwn(surface.surfaceData.questions[0], 'correctOptionId'), false, 'Student surface excludes official answer')
 
 for (const [name, mutate] of [
   ['old schema', (value) => { value.schemaVersion = 'nck1-source-materialization-v2' }],

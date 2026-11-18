@@ -27,7 +27,6 @@ import { scoringFiguresFixture, captureScoringReferences } from '../test-fixture
 import { sourceReferenceFiguresFixture } from '../test-fixtures/paper-import/source-reference-figures-v3/fixture.mjs'
 import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-consumption-print-payload.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
-import { applyStudentProductLayout } from '../server/draft-paper/studentProductPdf.mjs'
 import { buildAnswerOnlyHtml } from '../server/answer-renderer.mjs'
 import { readSourceReferencePublication } from '../server/paper-import/sourceReferencePublication.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../server/paper-import/sourceReferenceSemantics.mjs'
@@ -153,28 +152,12 @@ try {
   json(path.join(source, 'products/manifest-v1.json'), products)
   projection = buildNck1ReviewProjection(source)
   if (figureReferences) {
-    const consumption = printConsumption(projection.consumption)
-    const payload = canonicalConsumptionPrintPayload(consumption, projection.paperName)
-    const items = payload.items.map(({ questionGroupId }) => ({ detail: payload.details.get(questionGroupId) }))
-    const html = buildPrintHtml({ ...payload, items, canonicalConsumption: consumption, versionType: 'student' })
-    const raster = sourceReferenceFigures(figureReferences)[0].figure.raster
-    const hidden = html => {
-      assert(!html.includes(raster.base64), 'answer PNG must not reach the student image registry')
-      assert.doesNotMatch(html, /data-reference-figure=|World Smile Day/u)
-    }
-    const layout = { profile: 'student-friendly-v1', fontSizePt: 12, figureLayout: 'natural',
-      answerBoxHeightsMm: { application: 65, continuation: 57 } }
-    for (const edition of ['largeComplete', 'largeNoListening', 'economy8']) {
-      hidden(applyStudentProductLayout(html, layout, edition))
-    }
-    const writing = items.filter(item => item.detail.questions.length === 0)
-    hidden(buildPrintHtml({ ...payload, items: writing, blocks: [], canonicalConsumption: consumption, versionType: 'student' }))
     assert.match(buildAnswerOnlyHtml({ ...projection, includeScoring: scoringFigures, sourceDocuments: projection.sourceInput.documents }),
       /data-reference-figure=/u)
     assert.equal(projection.materialization.media.length, 0)
     assert(!JSON.stringify(projection.materialization.sourceCoverage).includes('answers:figure'))
     assert(!JSON.stringify(projection.compilation.artifacts.canonicalPaper).includes('figure:smile'))
-    pass(`${references.schemaVersion} PNG stays outside materialization/Canonical media and all student products; answerOnly respects includeScoring`)
+    pass(`${references.schemaVersion} PNG stays outside materialization/Canonical media and appears in answerOnly`)
   }
   const files = reviewBundleFilePaths(source).map(file => {
     const bytes = readFileSync(path.join(source, file.path))

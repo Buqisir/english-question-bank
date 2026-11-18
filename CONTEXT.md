@@ -166,14 +166,6 @@ _Avoid_: row, selected thing
 One selected question group inside a Draft Paper. C8 keeps group as the minimum item unit; it does not support single-question draft items.
 _Avoid_: question item when composing a draft paper
 
-**Student Version**:
-An export view that includes passages, stems, options, and answer space but hides answers and explanations.
-_Avoid_: blank version
-
-**Teacher Version**:
-An export view that includes everything in the student version plus answers and explanations.
-_Avoid_: answer version when it could mean only an answer key
-
 **Import File**:
 A locally archived DOCX, PDF, image, or other source file brought into the workbench for later review or parsing.
 _Avoid_: source file when it would confuse provenance with Source
@@ -304,7 +296,7 @@ _Avoid_: field on Vocabulary Set, permanent mastery label, manually edited score
 - An **Assembly Basket** may be migrated once into a **Draft Paper**.
 - A **Paper Set** contains many **Paper Items**.
 - A **Paper Item** points to one **Question Group** or one **Question**.
-- A **Paper Set** can produce a **Student Version** and a **Teacher Version** export.
+- A **Paper Set** can be exported. See the [PDF product contract](docs/product/paper-pdf-products-v1.md) for the current paper PDF products.
 - A **Vocabulary Program** contains ordered **Vocabulary Groups**; each Vocabulary Group contains ordered **Vocabulary Entries**.
 - A **Vocabulary Entry** retains source candidate meanings and may expose one teacher-approved **Teaching Sense** without overwriting those candidates.
 - A **Vocabulary Review Run** traverses one Vocabulary Program and records at most one current **Review Decision** per Vocabulary Entry.

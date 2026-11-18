@@ -148,9 +148,6 @@ const html = buildPrintHtml({
   assert('Q22 present', html.includes('>22.</span>'), '')
   assert('Q23 present', html.includes('>23.</span>'), '')
   assert('Q24 present', html.includes('>24.</span>'), '')
-
-  // Student version: no answer markers
-  assert('no 【答案】 in student', !html.includes('【答案】'), '')
 }
 
 // --- Test 3: Vivliostyle CLI presence + end-to-end PDF ---

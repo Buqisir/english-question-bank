@@ -18,7 +18,7 @@
 | `verify-review-recovery.mjs` | 中断恢复重复写入或丢状态 |
 | `verify-review-process-isolation.mjs` | Review 子进程失去隔离 |
 | `verify-review-memory.mjs` | Review 内存回归 |
-| `verify-review-publication-content.mjs` | 封存内容与发布内容不一致或学生产品泄露答案 |
+| `verify-review-publication-content.mjs` | 封存内容与发布内容不一致，或 PDF 产品混入不属于该款的内容 |
 
 
 听核包只读命令：`node scripts/import-pipeline/listening-owner-review-pack.mjs --help`。

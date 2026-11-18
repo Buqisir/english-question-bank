@@ -18,12 +18,11 @@ reconcile the exact SHA and latest natural attempt.
 deployment path, Owner Mac backup command, restricted SSH, key isolation and
 read-only reconciliation for an UNKNOWN outcome.
 
-## 可选 PR 路径
+## CI 和部署工具链 PR 路径
 
-Use for CI/deployment toolchain and these Ship/verification rules, voluntary
-discussion, or when direct push is unavailable. Toolchain changes require Astra
-and complete PR Full/E2E. Before triggering PR verification synchronize main:
-the head must contain that event's base (the workflow checks ancestry). After
+Use for CI and deployment toolchain changes as defined in AGENTS.md.
+These changes require Astra and complete PR Full/E2E. Synchronize main before
+triggering PR verification so the head contains the event's base. After
 complete green PR CI, squash merge without bypass; later main advancement alone
 does not require a rerun. Then follow the main run and reconcile delivery as above.
 
