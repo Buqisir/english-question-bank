@@ -116,10 +116,16 @@ function readAsr(appleWindow, whisperWindows) {
 
 // Semi-global variant of the segment rule's edit DP. Unmatched ASR at the
 // outer edges is free. Equal-cost paths prefer more exact timed anchors.
-function align(source, words) {
+function align(source, words, sentenceStarts) {
   const scale = source.length + 1
+  const joined = (a, b) => (a + b).replaceAll('-', '')
+  const sourceTokens = source.map(token => joined(token, ''))
+  const asrTokens = words.map(word => joined(word.token, ''))
+  const sourcePairs = source.map((token, i) => i && !sentenceStarts.has(i) ? joined(source[i - 1], token) : null)
+  const asrPairs = words.map((word, i) => i ? joined(words[i - 1].token, word.token) : null)
   const trace = [new Uint8Array(words.length + 1)]
   let previous = new Int32Array(words.length + 1)
+  let twoRowsBack
   for (let i = 1; i <= source.length; i++) {
     const row = new Int32Array(words.length + 1)
     const moves = new Uint8Array(words.length + 1)
@@ -128,10 +134,13 @@ function align(source, words) {
     for (let j = 1; j <= words.length; j++) {
       const costs = [previous[j - 1] + (source[i - 1] === words[j - 1].token ? -1 : scale),
         previous[j] + scale, row[j - 1] + scale]
+      costs.push(sourcePairs[i - 1] === asrTokens[j - 1] ? twoRowsBack[j - 1] - 2 : Infinity,
+        sourceTokens[i - 1] === asrPairs[j - 1] ? previous[j - 2] - 1 : Infinity)
       row[j] = Math.min(...costs)
       moves[j] = costs.indexOf(row[j])
     }
     trace.push(moves)
+    twoRowsBack = previous
     previous = row
   }
   const matched = Array(source.length).fill(null)
@@ -152,6 +161,20 @@ function align(source, words) {
         if (!insertions.has(i)) insertions.set(i, [])
         insertions.get(i).push(words[--j])
         break
+      case 3: {
+        // Both source words share the observed ASR span.
+        const word = words[--j]
+        matched[--i] = word
+        matched[--i] = word
+        break
+      }
+      case 4: {
+        const first = words[j - 2], last = words[j - 1]
+        matched[--i] = { startSeconds: first.startSeconds, endSeconds: last.endSeconds,
+          approx: first.approx || last.approx }
+        j -= 2
+        break
+      }
     }
   }
   for (const inserted of insertions.values()) inserted.reverse()
@@ -162,7 +185,7 @@ function wordsIn(words, { startSeconds, endSeconds }) {
   return words.filter(word => midpoint(word) >= startSeconds && midpoint(word) < endSeconds)
 }
 
-function passBounds(group, count, source, apple) {
+function passBounds(group, count, source, sentenceStarts, apple) {
   const playback = group?.playback
   if (!playback || !Number.isFinite(playback.startSeconds) || !Number.isFinite(playback.endSeconds)
     || playback.startSeconds >= playback.endSeconds || !Number.isInteger(count) || count < 1) return []
@@ -173,7 +196,8 @@ function passBounds(group, count, source, apple) {
   }
   if (count === 1) return [playback]
   if (count !== 2 || !source.length) return []
-  const doubled = align([...source, ...source], wordsIn(apple, playback)).matched
+  const repeatedStarts = new Set([...sentenceStarts, ...[...sentenceStarts].map(start => start + source.length)])
+  const doubled = align([...source, ...source], wordsIn(apple, playback), repeatedStarts).matched
   const tail = doubled.slice(0, source.length).filter(Boolean).at(-1)
   const head = doubled.slice(source.length).find(Boolean)
   if (!tail || !head || tail.endSeconds > head.startSeconds + epsilon) return []
@@ -203,8 +227,8 @@ function interpolate(words) {
   return timed.filter(Boolean)
 }
 
-function alignPass(source, sentences, bounds, words, reasons, pass) {
-  const { matched } = align(source, wordsIn(words, bounds))
+function alignPass(source, sentences, sentenceStarts, bounds, words, reasons, pass) {
+  const { matched } = align(source, wordsIn(words, bounds), sentenceStarts)
   const matchRate = matched.filter(Boolean).length / Math.max(1, source.length)
   if (matchRate < 0.8) reasons.add(`pass ${pass}: match below 80%`)
   let offset = 0
@@ -232,9 +256,9 @@ function alignPass(source, sentences, bounds, words, reasons, pass) {
   return { matchRate, timings }
 }
 
-function gapCandidates(source, bounds, { apple, whisper }) {
-  const left = align(source, wordsIn(whisper, bounds)).insertions
-  const right = align(source, wordsIn(apple, bounds)).insertions
+function gapCandidates(source, sentenceStarts, bounds, { apple, whisper }) {
+  const left = align(source, wordsIn(whisper, bounds), sentenceStarts).insertions
+  const right = align(source, wordsIn(apple, bounds), sentenceStarts).insertions
   const raw = words => [...new Map(words.map(word => [word.runId, word.rawRunText.trim()])).values()].join(' ')
   return [...left].flatMap(([sourceIndex, words]) => {
     const other = right.get(sourceIndex)
@@ -260,19 +284,25 @@ const segments = materials.map(material => {
   const { segmentId, materialId = material.id ?? segmentId } = material
   // The materialization export stores each transcript utterance on its own line.
   const sentences = splitSentences(material, materials, !document.materials)
-  const source = sentences.flatMap(sentence => sentence.tokens)
+  const source = []
+  const sentenceStarts = new Set()
+  for (const { tokens } of sentences) {
+    sentenceStarts.add(source.length)
+    source.push(...tokens)
+  }
   const group = review.groups.find(item => item.segmentId === segmentId)
   const questionNumbers = material.questionNumbers ?? group?.questionNumbers ?? []
   const { expectedReadings } = expectedListeningReadings({ ...material, questionNumbers }, instructions)
   const passCount = expectedReadings === 'unknown' && group?.occurrences?.length > 1
     ? group.occurrences.length : expectedReadings
-  const bounds = passBounds(group, passCount, source, asr.apple)
+  const bounds = passBounds(group, passCount, source, sentenceStarts, asr.apple)
   const reasons = new Set()
   if (!bounds.length) reasons.add('pass boundaries unavailable')
   const passes = bounds.map((bound, i) => {
     const pass = i + 1
-    candidates.push(...gapCandidates(source, bound, asr).map(candidate => ({ materialId, segment: segmentId, pass, ...candidate })))
-    return alignPass(source, sentences, bound, asr.hybrid, reasons, pass)
+    candidates.push(...gapCandidates(source, sentenceStarts, bound, asr)
+      .map(candidate => ({ materialId, segment: segmentId, pass, ...candidate })))
+    return alignPass(source, sentences, sentenceStarts, bound, asr.hybrid, reasons, pass)
   })
   return { materialId, segment: segmentId, passCount, degraded: reasons.size > 0, reasons: [...reasons],
     passes: passes.map(({ matchRate }, i) => ({ ...bounds[i], matchRate })),
