@@ -2072,6 +2072,11 @@
     transition-duration: 160ms;
   }
 
+  .listening-follow-lines[data-follow='calm2'] .listening-follow-line,
+  .listening-follow-lines[data-follow='calm2'] .listening-follow-line > * {
+    transition-duration: 150ms;
+  }
+
   .listening-follow-lines[data-follow='calm-v1'][data-focused] .listening-follow-line[aria-current='true'],
   .listening-follow-lines[data-follow='calm-v1'][data-focused] .listening-follow-line[aria-current='true'] > * {
     transition-duration: 150ms;

@@ -32,7 +32,9 @@ export function scrollListeningTarget(target: Element, block: ScrollLogicalPosit
 // can track the same line of text.
 const phraseDuration = 700
 const jumpDuration = 500
-const FOLLOW_BEAT_MS = 200
+const FOLLOW_BEAT_MS = 150
+const FOLLOW_SOFT_START_MS = 140
+const calmBeatDuration = 200
 const calmV1HighlightDuration = 150
 const calmReadingInset = 0.08
 const calmSpring = { response: 0.62, dampingRatio: 0.88 }
@@ -86,10 +88,12 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
   const jumpToCurrent = useRef<() => void>(() => {})
   const repeatStart = sentences[0]?.repeatStart ?? Infinity
   const followParam = new URLSearchParams(window.location.search).get('follow')
-  const mode = followParam === 'step' || followParam === 'flow' || followParam === 'calm-v1' ? followParam : 'calm'
+  const mode = followParam === 'step' || followParam === 'flow' || followParam === 'calm-v1' || followParam === 'calm'
+    ? followParam : 'calm2'
   const flow = mode === 'flow'
   const calmV1 = mode === 'calm-v1'
-  const calm = mode === 'calm' || calmV1
+  const calm2 = mode === 'calm2'
+  const calm = mode === 'calm' || calmV1 || calm2
 
   const setFollow = useCallback((enabled: boolean) => {
     follows.current = enabled
@@ -132,7 +136,9 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     let motion: { from: number; index: number; start: number; duration: number; velocity: number; automatic: boolean } | null = null
     let curveSample: { position: number; time: number } | null = null
     let curveVelocity = 0
-    let spring: { index: number; position: number; velocity: number; time: number; automatic: boolean } | null = null
+    let spring: {
+      index: number; position: number; velocity: number; time: number; automatic: boolean; softStart: number | null
+    } | null = null
     let pending: { index: number; start: number } | null = null
     const omega = 2 * Math.PI / calmSpring.response
     const stiffness = omega ** 2
@@ -145,11 +151,12 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     }
     const setSpringTarget = (index: number, now: number, automatic: boolean) => {
       if (spring) {
+        if (calm2 && spring.index !== index) spring.softStart = spring.velocity === 0 ? now : null
         spring.index = index
         spring.time = Math.max(spring.time, now)
         spring.automatic = automatic
       } else {
-        spring = { index, position: scroller.scrollTop, velocity: 0, time: now, automatic }
+        spring = { index, position: scroller.scrollTop, velocity: 0, time: now, automatic, softStart: calm2 ? now : null }
       }
     }
     const startCurve = (index: number, duration: number, now: number, automatic = false) => {
@@ -195,7 +202,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
             } else {
               if (changedSentence && !audio.paused) {
                 const short = isShortAndVisible(index)
-                const beat = now - lastSentenceChange < FOLLOW_BEAT_MS ? 0 : FOLLOW_BEAT_MS
+                const beat = calm2 ? FOLLOW_BEAT_MS : now - lastSentenceChange < calmBeatDuration ? 0 : calmBeatDuration
                 // Let a prior spring finish toward its own target during the beat.
                 pending = short ? null : { index, start: now + beat }
                 if (short && spring?.automatic) spring = null
@@ -242,7 +249,13 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
             const steps = Math.max(1, Math.ceil(dt / 0.004))
             const h = dt / steps
             for (let i = 0; i < steps; i++) {
-              spring.velocity += (-stiffness * (spring.position - to) - damping * spring.velocity) * h
+              let scale = 1
+              if (spring.softStart !== null) {
+                const sampleTime = now - (dt - (i + 1) * h) * 1000
+                const x = Math.min(1, Math.max(0, (sampleTime - spring.softStart) / FOLLOW_SOFT_START_MS))
+                scale = x * x * (3 - 2 * x)
+              }
+              spring.velocity += (-stiffness * scale * (spring.position - to) - damping * Math.sqrt(scale) * spring.velocity) * h
               spring.position += spring.velocity * h
             }
             if (Math.abs(spring.position - to) < 0.5 && Math.abs(spring.velocity) < 5) {
@@ -349,7 +362,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       audio.removeEventListener(listeningPlayerSwitchEvent, stopLoop)
       jumpToCurrent.current = () => {}
     }
-  }, [audio, sentences, repeatStart, flow, calm, calmV1, positionList, setFollow])
+  }, [audio, sentences, repeatStart, flow, calm, calmV1, calm2, positionList, setFollow])
 
   useEffect(() => {
     const row = reviewedSentence && list.current?.children[reviewedSentence.index] as HTMLElement | undefined
