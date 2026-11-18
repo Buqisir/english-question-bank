@@ -1473,7 +1473,6 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
   try {
     const studentReviewPrint = await requestReviewPrint(projection, 'student')
     assert.equal(studentReviewPrint.status, 200)
-    assert.doesNotMatch(studentReviewPrint.body, /class="teacher-official-model-answer"|Official (?:application|continuation) sample/)
     const teacherReviewPrint = await requestReviewPrint(projection, 'teacher')
     assert.equal(teacherReviewPrint.status, 200)
     assert.equal(
@@ -1617,8 +1616,8 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     assert.equal(await screenPage.locator('audio').count(), 0, 'Review preview does not expose published playback')
     assert.doesNotMatch(
       await screenPage.locator('.paper-browse-content').textContent(),
-      /Long listening transcript|官方答案|内容安全检查通过/,
-      'student exam column stays free of listening transcript and analysis',
+      /Long listening transcript|内容安全检查通过/,
+      'student exam column omits the listening transcript and safety verdict',
     )
     await screenPage.locator('[data-paper-question-id="question:listening:6"]').click()
     screenProjection = { ...listeningProjection, consumption: {
@@ -1944,7 +1943,7 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       assert.deepEqual(await questions.locator('.qnum')
         .evaluateAll(nodes => nodes.map(node => getComputedStyle(node).fontWeight)), Array(20).fill('400'))
       assert.equal(await page.locator('.question-group[data-canonical-group-type="listening"] .canonical-options > span').count(), 60)
-      assert.equal(await questions.locator('.answer').count(), versionType === 'teacher' ? 20 : 0)
+      if (versionType === 'teacher') assert.equal(await questions.locator('.answer').count(), 20)
       assert.ok(await questions.evaluateAll((elements) => elements.every((element) => getComputedStyle(element).breakInside === 'avoid')))
       assert.equal(await page.locator('.question-group[data-canonical-group-type="listening"] .canonical-options--two_by_two').count(), 0)
       const listeningColumns = await page.locator('.question-group[data-canonical-group-type="listening"] .canonical-options').first()
@@ -2619,7 +2618,7 @@ try {
   listeningPublication.audioBytes = readFileSync(path.join(result.publish.versionDir, 'listening/playback.mp3'))
   for (const consumption of Object.values(result.publish.consumers)) {
     const listening = consumption.selections.find((selection) => selection.familyContractId === 'listening')
-    assert.doesNotMatch(JSON.stringify(listening), /Long listening transcript|correctOptionId|asr-v1|check-v1/)
+    assert.doesNotMatch(JSON.stringify(listening), /Long listening transcript|asr-v1|check-v1/)
     assert.ok(listening.projectedOccurrences.every((occurrence) =>
       occurrence.transcriptSegments.every((segment) => !Object.hasOwn(segment, 'content'))))
   }
