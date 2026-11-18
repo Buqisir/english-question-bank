@@ -196,12 +196,21 @@ try {
   db.prepare('INSERT INTO paper_import_runs VALUES (?,2,\'published\',?)').run(manifest.paperId, JSON.stringify(report))
   db.prepare('INSERT INTO canonical_paper_publications VALUES (?,\'v2\',?)').run(manifest.paperId, consumption.publicationDigest)
   db.prepare('INSERT INTO paper_asset_versions VALUES (?,2,\'published\')').run(manifest.paperId)
-  const loaded = await loadStoredProducts({ db, paperAssetsDir: directory, consumption, blobStore: local })
-  for (const file of PRODUCT_FILES) assert.deepEqual(loaded.bytes[file.path], bytes[file.path])
-  await assert.rejects(loadStoredProducts({ db, paperAssetsDir: directory,
-    consumption: { ...consumption, publicationDigest: digest(Buffer.from('another revision')) }, blobStore: local }), /版本不一致/)
+  const calls = []
+  const blobStore = { identity: local.identity, get(file) { calls.push(file.sha256); return local.get(file) } }
+  const load = edition => loadStoredProducts({ db, consumption, edition, blobStore })
+  const inventory = await load()
+  assert.deepEqual(inventory.manifest.files, manifest.files)
+  assert.deepEqual(calls.splice(0), [files[PRODUCT_MANIFEST].sha256])
+  await assert.rejects(loadStoredProducts({ db,
+    consumption: { ...consumption, publicationDigest: digest(Buffer.from('another revision')) }, blobStore }), { code: 'FROZEN_PRODUCTS_INVALID' })
   await writeFile(path.join(directory, 'eqb-blobs/v1/sha256', files['products/answerOnly.pdf'].sha256.slice(7)), bytes['products/economy8.pdf'])
-  await assert.rejects(loadStoredProducts({ db, paperAssetsDir: directory, consumption, blobStore: local }), /integrity/)
+  assert.equal((await load()).manifest.files.length, manifest.files.length)
+  assert.deepEqual(calls.splice(0), [files[PRODUCT_MANIFEST].sha256])
+  const economy = await load('economy8')
+  assert.deepEqual(economy.bytes['products/economy8.pdf'], bytes['products/economy8.pdf'])
+  assert.deepEqual(calls.splice(0), [files[PRODUCT_MANIFEST].sha256, files['products/economy8.pdf'].sha256])
+  await assert.rejects(load('answerOnly'), /integrity/)
 
   // Reuse the source fixture without executing its full verifier. Exercise the
   // real projection/publication gates, not only a synthetic published report.
@@ -362,10 +371,12 @@ try {
       blobStore: createBlobStore({ rootDir: path.join(directory, 'publication-blobs') }) })
     const result = publishUniversalNck1Import({ ...input, fileStorage: storage })
     assert.equal(result.ok, true)
-    const official = await loadStoredProducts({ db: publicationDb, paperAssetsDir: input.paperAssetsDir,
-      consumption: Object.values(result.publish.consumers)[0],
-      blobStore: createBlobStore({ rootDir: path.join(directory, 'publication-blobs') }) })
-    for (const file of PRODUCT_FILES) assert.deepEqual(official.bytes[file.path], fixtureBytes[file.path])
+    const publicationStore = createBlobStore({ rootDir: path.join(directory, 'publication-blobs') })
+    for (const file of PRODUCT_FILES) {
+      const official = await loadStoredProducts({ db: publicationDb, consumption: Object.values(result.publish.consumers)[0],
+        edition: path.basename(file.path, '.pdf'), blobStore: publicationStore })
+      assert.deepEqual(official.bytes[file.path], fixtureBytes[file.path])
+    }
   } finally { publicationDb.close() }
 
   // GET success alone cannot catch a missing HEAD registration in this router.
