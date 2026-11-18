@@ -3709,7 +3709,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           : null}
         onActivate={activateAudio}
         onReturnToPlayback={!followPlayback && playbackGroup ? () => setFollowPlayback(true) : undefined}
-        unavailable={analysisFontError || (lectureAnalysisLoading ? '解析加载中…' : '解析未发布')}
+        fontError={analysisFontError}
+        unavailable={lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}
       />
     }
     const hasActiveQuestion = Boolean(activeQuestionId)

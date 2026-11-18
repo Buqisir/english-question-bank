@@ -20,7 +20,7 @@ function findQuoteStart(quote: string, sentences: string[]) {
 }
 
 export function ListeningAnalysisPanel({ title, answers, analysis, groupQuestionIds, activeQuestionId, segments,
-  segmentAudio, playback, onActivate, onReturnToPlayback, unavailable }: {
+  segmentAudio, playback, onActivate, onReturnToPlayback, fontError, unavailable }: {
   title: string
   answers: string | null
   analysis?: ListeningAnalysisV1
@@ -31,6 +31,7 @@ export function ListeningAnalysisPanel({ title, answers, analysis, groupQuestion
   playback: { segmentId: string | null; audio: HTMLAudioElement } | null
   onActivate: (audio: HTMLAudioElement) => void
   onReturnToPlayback?: () => void
+  fontError: string
   unavailable: string
 }) {
   const answersId = useId()
@@ -70,7 +71,7 @@ export function ListeningAnalysisPanel({ title, answers, analysis, groupQuestion
       : <>
         {heading && <h5>{heading}</h5>}
         {audio && <ListeningTransport audio={audio} onActivate={onActivate} />}
-        <p className="paper-browse-lecture-empty">{unavailable}</p>
+        <p className="paper-browse-lecture-empty" role={fontError ? 'alert' : undefined}>{fontError || unavailable}</p>
       </>}
   </div>
 }
