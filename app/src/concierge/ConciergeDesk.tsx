@@ -11,9 +11,7 @@
  * The primary list maps over retrieval.paperResults (one row per source paper),
  * and clicking expands the paper to show its matching question groups.
  *
- * `basketIds` remains a plain prop because 加入草稿卷 belongs to the Assembly
- * Basket layer, not Retrieval. The add/undo actions themselves come from
- * DraftAddContext (App provides it; shared-ui/DraftAddButton consumes it).
+ * Cards carry server draft membership. DraftAddContext provides add/undo.
  */
 
 import { useEffect, useId, useMemo, useRef, useState, type FormEvent, type ReactNode } from 'react'
@@ -56,7 +54,6 @@ import './ConciergeDesk.css'
 export type ConciergeDeskProps = {
   retrieval: ConciergeRetrievalView
   actions: ConciergeRetrievalActions
-  basketIds: Set<string>
   /** classic-retire-2-detail-view — opens the read-only detail view for a group. */
   onOpenDetail?: (group: QuestionGroupCard) => void
   /** paper-row-browse-entry — opens the whole-paper preview page (paper-browse) for a paperId, from the row's own "看整卷" button. */
@@ -222,7 +219,6 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   const {
     retrieval,
     actions,
-    basketIds,
     onOpenDetail,
     onOpenPaperBrowse,
     questionGroups,
@@ -992,7 +988,6 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                   <ConciergePaperRow
                     paper={paper}
                     expanded={expandedPaperKey === paper.key}
-                    basketIds={basketIds}
                     onTogglePaper={togglePaper}
                     onOpenDetail={onOpenDetail}
                     onOpenPaperBrowse={onOpenPaperBrowse}
@@ -1036,7 +1031,6 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                           paper={paper}
                           variant="feed"
                           expanded={expandedPaperKey === paper.key}
-                          basketIds={basketIds}
                           onTogglePaper={togglePaper}
                           onOpenDetail={onOpenDetail}
                           onOpenPaperBrowse={onOpenPaperBrowse}
@@ -1075,7 +1069,6 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
                           variant="feed"
                           recentAddition
                           expanded={expandedPaperKey === paper.key}
-                          basketIds={basketIds}
                           onTogglePaper={togglePaper}
                           onOpenDetail={onOpenDetail}
                           onOpenPaperBrowse={onOpenPaperBrowse}

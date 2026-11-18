@@ -224,8 +224,8 @@ console.log('\nTest 9: feed rows reuse ConciergePaperRow with the same wiring as
   assert('feed block renders <ConciergePaperRow', /<ConciergePaperRow/.test(feedBlockMatch), '')
   assert('feed rows wire onTogglePaper={togglePaper}', /onTogglePaper=\{togglePaper\}/.test(feedBlockMatch), '')
   // 走查第四节第 6 条（Owner 2026-11-14）：加入键换成共用 DraftAddButton，加入这件事从 DraftAddContext 拿，
-  // 行上不再接 onAdd；信息流行仍拿 basketIds（谁已在草稿卷里）。
-  assert('feed rows no longer thread onAdd; they still get basketIds', !/onAdd=/.test(feedBlockMatch) && /basketIds=\{basketIds\}/.test(feedBlockMatch), '')
+  // 行上不再接 onAdd。
+  assert('feed rows no longer thread onAdd', !/onAdd=/.test(feedBlockMatch), '')
   // similar-entrypoints (E3): 找类似/onSimilar/triggerSimilar retired — feed
   // rows no longer wire a similar-trigger callback at all (配相似 is a plain
   // deep-link owned by ConciergeGroupCard, see verify-paper-browse.mjs
@@ -498,8 +498,8 @@ console.log('\nTest 29: home-blank — browseActive/onEnterBrowse/onExitBrowse p
   assert('ConciergeDeskProps declares onExitBrowse?: () => void', /onExitBrowse\?:\s*\(\) => void/.test(desk), '')
 
   const app = readSrc('app/src/App.tsx')
-  assert('App.tsx boot-reads view=browse into browseRouteActive (same pattern as its sibling routes)', /new URLSearchParams\(window\.location\.search\)\.get\(['"]view['"]\) === ['"]browse['"]/.test(app), '')
-  assert('App.tsx popstate handler syncs browseRouteActive', /setBrowseRouteActive\(view === ['"]browse['"]\)/.test(app), '')
+  assert('App.tsx derives browse mode from the shared URL route', /useState\(parseAppRoute\)/.test(app) && /browseRouteActive = route\.view === 'browse'/.test(app), '')
+  assert('App.tsx popstate handler replays the URL route', /function onPopState\(\) \{\s*const next = parseAppRoute\(\)\s*setRoute\(next\)/.test(app), '')
   assert('ConciergeDesk receives browseActive={browseRouteActive}', /browseActive=\{browseRouteActive\}/.test(app), '')
   assert('ConciergeDesk receives onEnterBrowse={enterBrowse}', /onEnterBrowse=\{enterBrowse\}/.test(app), '')
   assert('ConciergeDesk receives onExitBrowse={exitBrowse}', /onExitBrowse=\{exitBrowse\}/.test(app), '')
@@ -546,29 +546,25 @@ console.log('\nTest 31: home-blank — rotating placeholder examples all carry t
 }
 
 // ------------------------------------------------------------------ Test 32
-console.log('\nTest 32: Detail #362 — full-route open/back handlers reset the home sub-mode flags')
+console.log('\nTest 32: Detail #362 — full-route open/back handlers leave the home sub-modes')
 {
   const app = readSrc('app/src/App.tsx')
   // The MySpace / DraftPaper / PaperBrowse open+return family used to leave
   // `adminRouteActive`/`browseRouteActive` stale: browse → 个人空间 → 返回找题
-  // re-rendered the browse feed on a plain-home URL. The exhaustive siblings
-  // (openVocabularyReview / openVocabularyDictationWorkbench) already reset
-  // both flags; these six handlers must do the same so the URL stays the
-  // source of truth for the home sub-mode.
+  // re-rendered the browse feed on a plain-home URL. All handlers now write
+  // one route, which controls both home sub-modes.
   const handlerBody = (name) =>
     app.match(new RegExp(`const ${name} = useCallback\\([\\s\\S]*?\\n  \\}, \\[[^\\]]*\\]\\)`))?.[0] || ''
-  for (const name of [
-    'openMySpace',
-    'openDraftPaperWorkbench',
-    'openPaperBrowse',
-    'mySpaceOnBackToWorkbench',
-    'draftPaperOnBackToWorkbench',
-    'paperBrowseOnBackToWorkbench',
+  for (const [name, target] of [
+    ['openMySpace', "'my-space'"],
+    ['openDraftPaperWorkbench', "'draft-paper'"],
+    ['openPaperBrowse', "'paper-browse'"],
+    ['mySpaceOnBackToWorkbench', 'null'],
+    ['draftPaperOnBackToWorkbench', 'null'],
+    ['paperBrowseOnBackToWorkbench', 'null'],
   ]) {
     const body = handlerBody(name)
-    assert(`${name} is found in App.tsx`, body.length > 0, '')
-    assert(`${name} clears adminRouteActive`, /setAdminRouteActive\(false\)/.test(body), '')
-    assert(`${name} clears browseRouteActive`, /setBrowseRouteActive\(false\)/.test(body), '')
+    assert(`${name} changes the active route`, body.includes(`navigate(${target},`), '')
   }
 }
 

@@ -291,10 +291,10 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Desk props include actions: ConciergeRetrievalActions',
     /actions\s*:\s*ConciergeRetrievalActions/.test(deskSource), '')
   // 走查第四节第 6 条（Owner 2026-11-14）：加入键换成共用 DraftAddButton，加入 / 撤回 / 打开草稿卷从
-  // DraftAddContext 拿（App 提供），不再从 Desk 一层层往下传 onAdd。basketIds 仍是 Desk 的 prop。
+  // DraftAddContext 拿（App 提供），不再从 Desk 一层层往下传 onAdd。
   const appProvidesDraftAdd = /<DraftAddContext\.Provider value=\{draftAddActions\}>/.test(appSource)
-  assert('Desk props include basketIds; add-to-draft comes from DraftAddContext (App provides it), not an onAdd prop',
-    /basketIds\s*:\s*Set<string>/.test(deskSource) && !/onAdd\s*:/.test(deskSource) && appProvidesDraftAdd, '')
+  assert('Add-to-draft comes from DraftAddContext (App provides it), not an onAdd prop',
+    !/onAdd\s*:/.test(deskSource) && appProvidesDraftAdd, '')
   assert('Desk destructures intent/state/paperResults/expandedPaperKey from retrieval',
     /const\s*\{\s*intent,\s*state,\s*paperResults,\s*expandedPaperKey\s*\}\s*=\s*retrieval/.test(deskSource), '')
   // similar-entrypoints (E3): triggerSimilar retired along with the whole
@@ -337,7 +337,6 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
   assert('Desk maps (filtered)paperResults', /[Pp]aperResults\.map\(\(paper(?:,\s*index)?\)/.test(deskSource), '')
   assert('Desk does NOT map state.hits directly', !/state\.hits\.map\(/.test(deskSource), '')
   assert('Desk uses ConciergePaperRow', /<ConciergePaperRow\b/.test(deskSource), '')
-  assert('Desk passes basketIds to row', /basketIds=\{basketIds\}/.test(deskSource), '')
   // Inner action wiring goes through the actions object, not stale prop names.
   assert('Desk wires onTogglePaper to actions.togglePaper',
     /onTogglePaper=\{togglePaper\}/.test(deskSource), '')
@@ -474,10 +473,10 @@ console.log('\nTest 9: V1.1 IA — desk maps paperResults; old expandedHitId/onP
       && passageTextSource.includes('`${match[1].toUpperCase()}篇`'), '')
   // 走查第四节第 6 条（Owner 2026-11-14）：行上的加入键换成共用 DraftAddButton（紧凑档）。原来的「再点一下移出」
   // 开关（aria-pressed、「从草稿卷移出」）按那一条换成：加入后是「已加入」链接（打开草稿卷），这一次加的旁边带「撤回」。
-  // 下面几条查的是同一份契约在新构件里的样子：卡片把 draftState 交给加入键，加入键按它出三种样子。
+  // 卡片把含服务端草稿状态的题组交给加入键。
   const draftAddSource = readFileSync(path.join(srcRoot, 'shared-ui', 'DraftAddButton.tsx'), 'utf8')
   assert('Group card hands its draft state to the shared add button',
-    /<DraftAddButton[\s\S]{0,120}target=\{\{ \.\.\.group, draftPaperButtonState: draftState \}\}/.test(groupCardSource), '')
+    /<DraftAddButton[\s\S]{0,120}target=\{group\}/.test(groupCardSource), '')
   assert('Group card has C8 draft labels (via DraftAddButton)',
     /已加入/.test(draftAddSource) && /加入草稿卷/.test(draftAddSource) && /暂不可组卷/.test(draftAddSource), '')
   assert('Joined state opens the draft; only a just-added item offers 撤回',

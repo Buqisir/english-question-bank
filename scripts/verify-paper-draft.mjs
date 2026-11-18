@@ -365,7 +365,7 @@ console.log('\nTest 3: App.tsx no longer manages basket / paperBlocksHook direct
   const here = path.dirname(new URL(import.meta.url).pathname)
   const app = readFileSync(path.resolve(here, '..', 'app', 'src', 'App.tsx'), 'utf8')
 
-  assert('App imports usePaperDraft', /import\s*\{\s*usePaperDraft\s*\}\s*from\s*['"]\.\/paperAssembly\/usePaperDraft['"]/.test(app), '')
+  assert('App leaves draft editing and exports to the server-backed workbench', !/usePaperDraft|usePaperExports/.test(app), '')
   assert('App does NOT import usePaperBlocks directly anymore', !/from\s*['"]\.\/paperAssembly\/usePaperBlocks['"]/.test(app), '')
   // legacy-import-retire (ADR-0016 cut 3, ~2026-07-06) deleted
   // handleBuildWorkflowPaperSet / handleBuildObjectivePaperSet, the only two
@@ -384,65 +384,11 @@ console.log('\nTest 3: App.tsx no longer manages basket / paperBlocksHook direct
     '',
   )
 
-  // classic-retire-3-cleanup: removeFromBasket / clearBasket / moveBasketItem /
-  // updateScore / updateBasketItem / handleDeleteQuestionGroup were thin
-  // App.tsx wrappers whose only callers lived in the classic basket-panel
-  // JSX (basket-list item controls, basket-toolbar, block-settings-panel).
-  // That JSX — and the wrappers themselves — were deleted along with the
-  // rest of the classic sidebar; DraftPaperWorkbench.tsx is the sole
-  // surviving UI for editing basket items (out of scope for this cut). As a
-  // result paperDraft.removeGroup / .clear / .moveGroup / .updateGroupScore /
-  // .updateGroupMeta now have zero call sites in App.tsx — confirm that
-  // directly instead of asserting dead wrappers.
-  // externalRemoveByGroupId came back with exactly one call site when the
-  // owner-only delete entry was re-homed to the detail view (post-#248
-  // follow-up), so it is asserted separately below.
-  for (const method of [
-    'removeGroup',
-    'clear',
-    'moveGroup',
-    'updateGroupScore',
-    'updateGroupMeta',
-  ]) {
-    assert(
-      `App.tsx no longer calls paperDraft.${method} (classic-only wrapper retired in classic-retire-3)`,
-      !new RegExp(`paperDraft\\.${method}\\(`).test(app),
-      '',
-    )
-  }
-
-  const externalRemoveCount = (app.match(/paperDraft\.externalRemoveByGroupId\(/g) || []).length
   assert(
-    'App.tsx calls paperDraft.externalRemoveByGroupId exactly once (detail-view delete entry)',
-    externalRemoveCount === 1,
-    `got ${externalRemoveCount}`,
-  )
-  assert(
-    'delete handler removes the group from the draft after the API delete',
-    // 构件收尾（2026-11-15）起删除先走确认框：handleDeleteQuestionGroup 只开 Dialog，
-    // 真正删的是 confirmDeleteQuestionGroup（API 删成功后再从草稿卷移出）。
-    /async function confirmDeleteQuestionGroup[\s\S]*?await deleteQuestionGroupRequest\(detail\.id\)[\s\S]*?paperDraft\.externalRemoveByGroupId\(detail\.id\)/.test(app),
+    'delete handler removes the group from the list after the API delete',
+    /async function confirmDeleteQuestionGroup[\s\S]*?await deleteQuestionGroupRequest\(detail\.id\)[\s\S]*?setQuestionGroups/.test(app),
     '',
   )
-
-  // legacy-import-retire (ADR-0016 cut 3, ~2026-07-06) deleted the workflow +
-  // objective build handlers that used to be this check's ≥2 sites; the load
-  // site was already retired in classic-retire-3. replaceDraft itself (the
-  // hook API) is untouched — it just has zero callers left in App.tsx.
-  const replaceCount = (app.match(/paperDraft\.replaceDraft\(/g) || []).length
-  assert('App no longer calls paperDraft.replaceDraft (workflow/objective build sites retired, ADR-0016 cut 3)',
-    replaceCount === 0, `got ${replaceCount}`)
-  assert('saved-group sync uses patchBasketItemFromSavedGroup',
-    /paperDraft\.patchBasketItemFromSavedGroup\(saved\)/.test(app), '')
-
-  assert('App routes onDraftEdited via a ref-bound effect',
-    /draftEditedHandlerRef\.current = \(\) =>/.test(app), '')
-  assert('Router resets export statuses on every edit',
-    /draftEditedHandlerRef\.current = \(\) => \{[\s\S]*?paperExports\.resetExportStatuses\(\)/.test(app), '')
-  // classic-retire-3-cleanup: saveStatus/previewStatus display state was
-  // classic-basket-panel-only and was deleted along with that JSX, so the
-  // router no longer branches on `reason` to gate a previewStatus reset —
-  // it always just resets the export cache now.
 }
 
 // ─── Test 4: usePaperBlocks.removeBlock removes block before notifying ────
@@ -583,9 +529,8 @@ console.log('\nTest 5: usePaperDraft uses a basketRef + commitBasket, never read
   }
 }
 
-// ─── Test 6: paper-level config (Step 3) — owned by usePaperDraft, App
-//             keeps thin wrappers that preserve legacy side effects ──────
-console.log('\nTest 6: paper-level config moved into usePaperDraft (App keeps legacy side effects in wrappers)')
+// ─── Test 6: legacy paper-level config and payload boundaries ──────
+console.log('\nTest 6: legacy paper-level config stays out of App')
 {
   const here = path.dirname(new URL(import.meta.url).pathname)
   const hookFull = readFileSync(path.resolve(here, '..', 'app', 'src', 'paperAssembly', 'usePaperDraft.ts'), 'utf8')
@@ -627,16 +572,6 @@ console.log('\nTest 6: paper-level config moved into usePaperDraft (App keeps le
   assert('App body has no `useState(\\\'高考阅读 B 主题训练\\\')`',
     !/const \[paperTitle, setPaperTitle\]\s*=\s*useState\(['"]高考阅读 B 主题训练['"]\)/.test(app), '')
 
-  // 6.5 App reads the four config fields from paperDraft.
-  assert('App destructures paperTitle from paperDraft',
-    /const \{[\s\S]*?\bpaperTitle\b[\s\S]*?\}\s*=\s*paperDraft/.test(app), '')
-  assert('App destructures versionType from paperDraft',
-    /const \{[\s\S]*?\bversionType\b[\s\S]*?\}\s*=\s*paperDraft/.test(app), '')
-  assert('App destructures paperExportStyle from paperDraft',
-    /const \{[\s\S]*?\bpaperExportStyle\b[\s\S]*?\}\s*=\s*paperDraft/.test(app), '')
-  assert('App destructures questionNumberStart from paperDraft',
-    /const \{[\s\S]*?\bquestionNumberStart\b[\s\S]*?\}\s*=\s*paperDraft/.test(app), '')
-
   // 6.6 classic-retire-3-cleanup (2026-07-04): the four App-level wrapper
   // handlers (handlePaperTitleChange / handleVersionTypeChange /
   // handlePaperExportStyleChange / handleQuestionNumberStartChange) and the
@@ -668,31 +603,6 @@ console.log('\nTest 6: paper-level config moved into usePaperDraft (App keeps le
   assert('replaceDraft body does NOT call setVersionType', !/setVersionType\s*\(/.test(replaceBody), '')
   assert('replaceDraft body does NOT call setQuestionNumberStart', !/setQuestionNumberStart\s*\(/.test(replaceBody), '')
   assert('replaceDraft body does NOT call setPaperExportStyle', !/setPaperExportStyle\s*\(/.test(replaceBody), '')
-  // legacy-import-retire (ADR-0016 cut 3, ~2026-07-06) deleted
-  // handleBuildWorkflowPaperSet and handleBuildObjectivePaperSet — the two
-  // "workflow/objective build" call sites this check used to require — along
-  // with the rest of the legacy import modal + "多卷闭环状态" dashboard
-  // (decisions.md D1). paperDraft.setPaperTitle/setVersionType now have zero
-  // call sites in App.tsx; paperTitle/versionType stay at their usePaperDraft
-  // defaults for the remaining member/owner flows. This is a known, tracked
-  // gap (no UI currently re-drives these), not a regression this cut is
-  // scoped to fix — see cut completion report "Known Risks".
-  assert('paperDraft.setPaperTitle has no remaining call sites in App.tsx (workflow/objective build handlers retired, ADR-0016 cut 3)',
-    (app.match(/paperDraft\.setPaperTitle\(/g) || []).length === 0, '')
-  assert('paperDraft.setVersionType has no remaining call sites in App.tsx (workflow/objective build handlers retired, ADR-0016 cut 3)',
-    (app.match(/paperDraft\.setVersionType\(/g) || []).length === 0, '')
-
-  // 6.8 usePaperExports still receives the same 4 config fields sourced from
-  // the paperDraft destructure (order in source is unrelated to correctness;
-  // match presence, not a fixed field order).
-  const paperExportsCallMatch = app.match(/const paperExports = usePaperExports\(\{[\s\S]*?\n {2}\}\)/)
-  assert('usePaperExports call site found', Boolean(paperExportsCallMatch), '')
-  if (paperExportsCallMatch) {
-    const callBody = paperExportsCallMatch[0]
-    for (const field of ['paperTitle', 'versionType', 'paperExportStyle', 'questionNumberStart']) {
-      assert(`usePaperExports call still passes ${field}`, new RegExp(`\\b${field}\\b`).test(callBody), '')
-    }
-  }
   // classic-retire-3: buildSavePayload's only call site (handleSavePaperSet,
   // the classic "保存题集" button handler) was deleted as a classic sidebar
   // orphan along with its caller. The function itself still lives in

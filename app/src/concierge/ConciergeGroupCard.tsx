@@ -36,7 +36,6 @@ const SIMILAR_SUPPORTED_GROUP_TYPES = new Set(['reading', 'cloze', 'seven_choice
 export type ConciergeGroupCardProps = {
   group: QuestionGroupCard
   reason: string
-  alreadyInBasket: boolean
   /** classic-retire-2-detail-view — opens the read-only detail view for this group. */
   onOpenDetail?: (group: QuestionGroupCard) => void
   /**
@@ -66,7 +65,6 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
   const {
     group,
     reason,
-    alreadyInBasket,
     onOpenDetail,
     dimmed,
     questionGroupById,
@@ -95,7 +93,6 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
   // （ConciergeDesk 拥有 fetch，本组件只切换 isSimilarPassagesOpen）。渲染
   // 条件同详情页：只有配方收录的四类题型才出现，写作组隐藏（池子诚实）。
   const similarEligible = SIMILAR_SUPPORTED_GROUP_TYPES.has(group.groupType)
-  const draftState = group.draftPaperButtonState || (alreadyInBasket ? 'in_current_draft' : 'add')
 
   // 题组行是共用构件 shared-ui/Row（2026-11-15）：能开详情时（onOpenDetail 在），整行目标是一个真 <a href>
   // （去详情页，有自己的地址：中键、新标签照浏览器的来，左键走站内跳转），盖满整行；「+」和「⋯」是它的兄弟，
@@ -169,7 +166,7 @@ export function ConciergeGroupCard(props: ConciergeGroupCardProps): ReactNode {
               它和整行目标是兄弟、画在整行目标上面（row.css），点它不会打开详情。 */}
           <DraftAddButton
             className="concierge-group-row-add"
-            target={{ ...group, draftPaperButtonState: draftState }}
+            target={group}
             tone="subtle"
             size="sm"
             compact

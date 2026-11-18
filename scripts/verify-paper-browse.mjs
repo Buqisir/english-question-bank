@@ -7,7 +7,7 @@
  * contract) plus one real-fixture structural check against the actual
  * paper-2026-i paper-asset.
  *
- *  1. App.tsx: paperBrowseRoute state seeded from `view=paper-browse` URL
+ *  1. App.tsx: shared route seeded from `view=paper-browse` URL
  *     param (boot-read-once pattern, same shape as draftPaperRoute /
  *     mySpaceRouteActive).
  *  2. App.tsx: openPaperBrowse pushes `view=paper-browse&paperId=...` via
@@ -307,118 +307,41 @@ const lecturePrototypeAnalysis = JSON.parse(
   read('app/public/paper-assets/paper-mock-gd-2026-m1/latest/analyses/reading-choice-analysis-v1.json'),
 )
 
-// ─── 1-2. App.tsx: paperBrowseRoute state + openPaperBrowse ───
+// ─── 1-5. Whole-paper navigation shares the App route ───
 
 assert(
-  'App.tsx declares paperBrowseRoute state seeded from view=paper-browse',
-  /const\s*\[\s*paperBrowseRoute\s*,\s*setPaperBrowseRoute\s*\]\s*=\s*useState/.test(appSrc) &&
-    /params\.get\(\s*['"]view['"]\s*\)\s*===\s*['"]paper-browse['"]/.test(appSrc),
-  'missing paperBrowseRoute useState seeded from the URL',
+  'App seeds the single route from the URL and only renders Paper Browse for its view',
+  /useState\(parseAppRoute\)/.test(appSrc) &&
+    /view:\s*params\.get\('view'\)/.test(appSrc) &&
+    /if \(route\.view === 'paper-browse' && route\.paperId\) \{[\s\S]{0,200}<PaperBrowsePage/.test(appSrc),
 )
-
-const openPaperBrowseBody =
-  appSrc.match(
-    /const openPaperBrowse\s*=\s*useCallback\s*\(\s*\(paperId[\s\S]*?\)\s*=>\s*\{([\s\S]*?)\n\s*\},\s*\[\]\)/,
-  )?.[1] || ''
-assert('openPaperBrowse body extracted', openPaperBrowseBody.length > 0)
+const handlerBody = (name) =>
+  appSrc.match(new RegExp(`const ${name} = useCallback\\([\\s\\S]*?\\n  \\}, \\[[^\\]]*\\]\\)`))?.[0] || ''
+const openPaperBrowseBody = handlerBody('openPaperBrowse')
+const backBody = handlerBody('paperBrowseOnBackToWorkbench')
 assert(
-  'openPaperBrowse sets view=paper-browse via history.pushState',
-  /url\.searchParams\.set\(\s*['"]view['"]\s*,\s*['"]paper-browse['"]\s*\)/.test(openPaperBrowseBody) &&
-    /window\.history\.pushState\s*\(/.test(openPaperBrowseBody),
-  'missing pushState wiring',
-)
-assert(
-  'openPaperBrowse sets paperId query param',
-  /url\.searchParams\.set\(\s*['"]paperId['"]\s*,\s*paperId\s*\)/.test(openPaperBrowseBody),
-  'missing paperId param set',
+  'Paper Browse pushes its view and paperId while return replaces the entry',
+  /navigate\('paper-browse', \{\s*paperId,/.test(openPaperBrowseBody) &&
+    /navigate\(null, \{[^}]*\}, \{ replace: true \}\)/.test(backBody) &&
+    /options\.replace \? 'replaceState' : 'pushState'/.test(appSrc) &&
+    /setRoute\(parseAppRoute\(url\.search\)\)/.test(appSrc),
 )
 assert(
-  'openPaperBrowse does not reload the page',
-  !/window\.location\.href\s*=/.test(openPaperBrowseBody) &&
-    !/window\.location\.reload\s*\(/.test(openPaperBrowseBody),
-  'openPaperBrowse touches window.location directly',
-)
-
-// ─── 3. paperBrowseOnBackToWorkbench ───
-
-const backBody =
-  appSrc.match(
-    /const paperBrowseOnBackToWorkbench\s*=\s*useCallback\s*\(\s*\(\)\s*=>\s*\{([\s\S]*?)\n\s*\},\s*\[\]\)/,
-  )?.[1] || ''
-assert('paperBrowseOnBackToWorkbench body extracted', backBody.length > 0)
-assert(
-  'paperBrowseOnBackToWorkbench rewrites the URL via history.replaceState',
-  /window\.history\.replaceState\s*\(/.test(backBody),
-  'missing replaceState call',
+  'Paper Browse route changes do not trigger a reload',
+  Boolean(openPaperBrowseBody && backBody) && !/window\.location\.(?:href\s*=|reload\s*\()/.test(openPaperBrowseBody + backBody),
 )
 assert(
-  'paperBrowseOnBackToWorkbench does not reload the page',
-  !/window\.location\.href\s*=/.test(backBody) && !/window\.location\.reload\s*\(/.test(backBody),
-  'paperBrowseOnBackToWorkbench touches window.location directly',
+  'Draft and My Space each replace the active view through the same navigation entry',
+  handlerBody('openDraftPaperWorkbench').includes("navigate('draft-paper',") &&
+    handlerBody('openMySpace').includes("navigate('my-space',"),
 )
 assert(
-  'paperBrowseOnBackToWorkbench flips paperBrowseRoute to inactive',
-  /setPaperBrowseRoute\s*\(\s*\{\s*active:\s*false/.test(backBody),
-  'missing setPaperBrowseRoute({ active: false, ... })',
-)
-
-// ─── 4. Early-return render branch ───
-
-const paperBrowseBranch =
-  appSrc.match(
-    /if\s*\(\s*paperBrowseRoute\.active[^)]*\)\s*\{([\s\S]*?)\n\s\s\}\n/,
-  )?.[1] || ''
-assert('paperBrowseRoute early-return branch found', paperBrowseBranch.length > 0)
-assert(
-  'paperBrowseRoute branch renders <PaperBrowsePage',
-  /<PaperBrowsePage\b/.test(paperBrowseBranch),
-  'branch does not render PaperBrowsePage',
+  'App imports PaperBrowsePage from features/paper-browse',
+  /import\s*\{\s*PaperBrowsePage\s*(?:,\s*type\s+AddGroupsOutcome\s*)?\}\s*from\s*['"]\.\/features\/paper-browse\/PaperBrowsePage['"]/.test(appSrc),
 )
 assert(
-  'App.tsx imports PaperBrowsePage from features/paper-browse',
-  /import\s*\{\s*PaperBrowsePage\s*(?:,\s*type\s+AddGroupsOutcome\s*)?\}\s*from\s*['"]\.\/features\/paper-browse\/PaperBrowsePage['"]/.test(
-    appSrc,
-  ),
-  'missing PaperBrowsePage import',
-)
-assert(
-  'paperBrowseRoute branch appears before the default workbench return',
-  appSrc.indexOf('if (paperBrowseRoute.active') <
-    appSrc.lastIndexOf("<div className=\"app-shell home-mode-ai\">"),
-  'branch ordered after the default workbench render',
-)
-assert(
-  // reading-analysis-retire (2026-07-16, A-class re-anchor, rationale):
-  // this assertion used to also require paperBrowseRoute's branch to sit
-  // before `if (currentPiRoute.kind === 'paper-intelligence') {` — that
-  // branch and the `currentPiRoute` state it read are retired along with
-  // the `?view=paper-intelligence` orphan route (plan.md Scope 步 1), so
-  // the ordering check narrows to the two routes that still exist.
-  'paperBrowseRoute branch appears alongside draftPaperRoute/mySpaceRouteActive branches',
-  appSrc.indexOf('if (draftPaperRoute.active)') <
-    appSrc.indexOf('if (paperBrowseRoute.active'),
-  'branch not ordered with the other route early-returns',
-)
-
-// ─── 5. Mutual exclusion with the other three routes ───
-
-const openDraftBody =
-  appSrc.match(
-    /const openDraftPaperWorkbench\s*=\s*useCallback\s*\(\s*\(draftPaperId[^{]*\{([\s\S]*?)\n\s*\},\s*\[\]\)/,
-  )?.[1] || ''
-assert(
-  'openDraftPaperWorkbench clears paperBrowseRoute',
-  /setPaperBrowseRoute\s*\(\s*\{\s*active:\s*false/.test(openDraftBody),
-  'openDraftPaperWorkbench does not deactivate paperBrowseRoute',
-)
-
-const openMySpaceBody =
-  appSrc.match(/const openMySpace\s*=\s*useCallback\s*\(\s*\(\)\s*=>\s*\{([\s\S]*?)\n\s*\},\s*\[\]\)/)?.[1] ||
-  ''
-assert(
-  'openMySpace clears paperBrowseRoute',
-  /setPaperBrowseRoute\s*\(\s*\{\s*active:\s*false/.test(openMySpaceBody),
-  'openMySpace does not deactivate paperBrowseRoute',
+  'Paper Browse route branch appears before the default workbench',
+  appSrc.indexOf("if (route.view === 'paper-browse'") < appSrc.indexOf('<div className="app-shell home-mode-ai">'),
 )
 
 // ─── 6. Detail-page entry follows whole-paper Screen admission ───
@@ -1573,13 +1496,11 @@ assert(
   'missing questionId/lecture boot-read on paperBrowseRoute',
 )
 assert(
-  // similar-entrypoints (E3) adds `similar` alongside `questionId`/`lecture`
-  // in the same options-bag → URL/state pipeline.
   'openPaperBrowse clears reviewRevision and writes the question focus and lecture/similar route',
-  /url\.searchParams\.delete\(\s*['"]reviewRevision['"]\s*\)/.test(openPaperBrowseBody) &&
-    /setPaperBrowseRoute\(\{\s*active:\s*true,\s*paperId,\s*focusGroupId:\s*focusGroupId\s*\|\|\s*null,\s*questionId,\s*reviewRevision:\s*null,\s*lecture,\s*similar\s*\}\)/.test(
-      openPaperBrowseBody,
-    ),
+  /questionId: options\?\.questionId \|\| null/.test(openPaperBrowseBody) &&
+    /reviewRevision: null/.test(openPaperBrowseBody) &&
+    /lecture: options\?\.lecture \? '1' : null/.test(openPaperBrowseBody) &&
+    /similar: options\?\.lecture && options\.similar \? '1' : null/.test(openPaperBrowseBody),
   'openPaperBrowse does not accept/thread the options bag',
 )
 assert(
@@ -1595,18 +1516,16 @@ assert(
 )
 assert(
   'App.tsx passes questionId/lecture through to <PaperBrowsePage>',
-  /questionId=\{paperBrowseRoute\.questionId\}/.test(appSrc) &&
-    /lecture=\{paperBrowseRoute\.lecture\}/.test(appSrc),
+  /questionId=\{route\.questionId\}/.test(appSrc) &&
+    /lecture=\{route\.lecture\}/.test(appSrc),
   'missing questionId/lecture prop pass-through to PaperBrowsePage',
 )
 assert(
-  'App.tsx registers a popstate listener that replays the four-route boot-read parse',
-  /window\.addEventListener\(\s*['"]popstate['"]\s*,\s*onPopState\s*\)/.test(appSrc) &&
-    /setAdminRouteActive\(isOwnerView\s*&&\s*view\s*===\s*['"]admin['"]\)/.test(appSrc) &&
-    /setMySpaceRouteActive\(view\s*===\s*['"]my-space['"]\)/.test(appSrc) &&
-    /setDraftPaperRoute\(\{\s*\n\s*active:\s*view\s*===\s*['"]draft-paper['"]/.test(appSrc) &&
-    /setPaperBrowseRoute\(\{\s*\n\s*active:\s*view\s*===\s*['"]paper-browse['"]/.test(appSrc),
-  'missing the popstate listener or it does not sync all four route states',
+  'App.tsx uses the shared parser on browser Back/Forward',
+  /window\.addEventListener\('popstate', onPopState\)/.test(appSrc) &&
+    /function onPopState\(\) \{\s*const next = parseAppRoute\(\)\s*setRoute\(next\)/.test(appSrc) &&
+    /isOwnerView && route\.view === 'admin'/.test(appSrc),
+  'missing popstate route sync or admin permission gate',
 )
 // reading-analysis-retire (2026-07-16, A-class re-anchor, rationale): the
 // popstate handler's `view === 'paper-intelligence' || view ===
@@ -1637,12 +1556,9 @@ assert(
   'main.tsx does not self-heal the retired reading-analysis URL aliases',
 )
 assert(
-  // similar-entrypoints (E3) adds `similar` to the stripped-param list too —
-  // otherwise a stale similar=1 would leak into the workbench URL.
   'paperBrowseOnBackToWorkbench strips reviewRevision and the ordinary Paper Browse route params',
-  /for\s*\(const param of \[\s*['"]view['"]\s*,\s*['"]paperId['"]\s*,\s*['"]focusGroupId['"]\s*,\s*['"]questionId['"]\s*,\s*['"]reviewRevision['"]\s*,\s*['"]lecture['"]\s*,\s*['"]similar['"]\s*\]\)/.test(
-    appSrc,
-  ),
+  ['paperId', 'focusGroupId', 'questionId', 'reviewRevision', 'lecture', 'similar']
+    .every((param) => backBody.includes(`${param}: null`)),
   'paperBrowseOnBackToWorkbench leaves a stale Paper Browse or review parameter in the workbench URL',
 )
 

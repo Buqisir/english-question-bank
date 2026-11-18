@@ -96,7 +96,7 @@ assert('draft service can migrate assembly basket', service.includes('migrateAss
 assert('draft service can download PDF', service.includes('downloadDraftPaperPdf'))
 
 const app = read('app/src/App.tsx')
-assert('App has draft-paper route state', app.includes("view') === 'draft-paper'"))
+assert('App has draft-paper route state', app.includes("route.view === 'draft-paper'"))
 assert('App renders DraftPaperWorkbench', app.includes('<DraftPaperWorkbench'))
 assert('App add-to-draft uses server service', app.includes('addGroupToCurrentDraftPaperRequest'))
 const addGroupsFn = app.slice(app.indexOf('async function addGroupsToBasket'), app.indexOf('function addToBasket'))
@@ -108,9 +108,9 @@ assert('App opens draft for already-added group', /draftPaperButtonState === 'in
 
 const card = read('app/src/concierge/ConciergeGroupCard.tsx')
 // 走查第四节第 6 条（Owner 2026-11-14）：卡片上的加入键换成共用 DraftAddButton，三种样子的字和停用条件都在它里面；
-// 卡片只把 draftState 交给它。加入后的字由「已在草稿卷中」改成「已加入」（点了打开草稿卷）。
+// 卡片直接交给它含服务端草稿状态的题组。
 const draftAdd = read('app/src/shared-ui/DraftAddButton.tsx')
-assert('Concierge card hands draftState to the shared add button', /target=\{\{ \.\.\.group, draftPaperButtonState: draftState \}\}/.test(card))
+assert('Concierge card hands its group to the shared add button', /<DraftAddButton[\s\S]{0,120}target=\{group\}/.test(card))
 assert('Concierge card shows joined draft label', draftAdd.includes('已加入') && /const added = state === 'in_current_draft'/.test(draftAdd))
 assert('Concierge card shows add draft label', draftAdd.includes('加入草稿卷'))
 assert('Concierge card disables only disabled state', /const unavailable = state === 'disabled' \|\| \(!added && target\.canAddToDraftPaper === false\)/.test(draftAdd))
