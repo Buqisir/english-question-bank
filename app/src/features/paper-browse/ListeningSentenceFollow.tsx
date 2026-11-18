@@ -421,7 +421,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       <h6>录音稿</h6>
       {error && <p className="listening-audio-error" role="status">录音未能播放，请重试</p>}
       <div className="listening-follow-lines" ref={list} tabIndex={0} role="region" aria-label="逐句录音稿"
-        data-follow={mode} data-focused={focused || undefined}
+        data-follow={mode} data-focused={focused || undefined} data-auto-follow={focused && following || undefined}
         onWheel={(event) => { if (event.deltaY) setFollow(false) }}
         onTouchMove={() => setFollow(false)}
         onPointerDown={(event) => {

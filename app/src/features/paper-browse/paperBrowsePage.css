@@ -2054,7 +2054,8 @@
   margin-block-start: var(--eqb-space-2);
 }
 
-.listening-follow-line[data-playable]:hover {
+/* Auto-scrolling rows can pass under a stationary pointer. */
+:where(.listening-follow-lines:not([data-auto-follow])) .listening-follow-line[data-playable]:hover {
   background: var(--eqb-color-state-hover);
 }
 
@@ -2062,7 +2063,7 @@
   background: var(--eqb-color-state-selected);
 }
 
-.listening-follow-line[aria-current='true']:hover {
+:where(.listening-follow-lines:not([data-auto-follow])) .listening-follow-line[aria-current='true']:hover {
   background: var(--eqb-color-state-selected-hover);
 }
 
