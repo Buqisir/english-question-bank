@@ -1987,13 +1987,17 @@ summary.listening-quiet-control::-webkit-details-marker {
 }
 
 .listening-follow-toolbar button:hover:enabled::before,
-.listening-follow-toolbar button[aria-pressed='true']::before,
 .listening-follow-line:hover:enabled:not([aria-current='true']) {
-  background: var(--paper-bg);
+  background: var(--eqb-color-state-hover);
 }
 
 .listening-follow-toolbar button[aria-pressed='true']::before {
-  border-color: var(--paper-border);
+  background: var(--eqb-color-state-selected);
+}
+
+.listening-follow-toolbar button[aria-pressed='true']:hover:enabled::before,
+.listening-follow-line[aria-current='true']:hover:enabled {
+  background: var(--eqb-color-state-selected-hover);
 }
 
 .listening-follow button:disabled {
@@ -2028,7 +2032,7 @@ summary.listening-quiet-control::-webkit-details-marker {
 
 /* The current sentence retains its fill under the pointer. */
 .listening-follow-line[aria-current='true'] {
-  background: var(--paper-follow-current);
+  background: var(--eqb-color-state-selected);
   color: var(--paper-ink-strong);
 }
 

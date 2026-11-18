@@ -22,11 +22,6 @@ token 的扩展用法。
 
 ## 条目
 
-## 2026-11-18 听力讲评逐句跟读（`ListeningSentenceFollow`）
-
-- **想要的值**：当前句底色浅暖灰 `#F3F1ED`。
-- **临时方案**：在 `app/src/index.css` 定义 `--paper-follow-current`，待 Owner 在真实讲评页确认。
-
 ## 2026-07-15 paperBrowsePage.css `.paper-browse-rail-panel`（整卷预览目录 rail 面板底）
 
 - **想要的值**：暖纸系的「纸面 surface」档——一张浮在暖纸桌（--paper-bg
