@@ -10,6 +10,8 @@ type Props = {
   startSeconds: number
   endSeconds: number
   onActivate: (audio: HTMLAudioElement) => void
+  segmentId?: string
+  onSegmentAudio?: (id: string, audio: HTMLAudioElement | null) => void
   /** Whole-recording player gets a longer track. */
   size?: 'segment' | 'full'
   /** Question-segment starts drawn over the whole-recording track. */
@@ -31,9 +33,13 @@ function clock(seconds: number): string {
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`
 }
 
-export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, onActivate, size = 'segment', marks }: Props) {
+export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, onActivate, segmentId, onSegmentAudio, size = 'segment', marks }: Props) {
   const rootRef = useRef<HTMLSpanElement>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
+  const attachAudio = useCallback((audio: HTMLAudioElement | null) => {
+    audioRef.current = audio
+    if (segmentId) onSegmentAudio?.(segmentId, audio)
+  }, [segmentId, onSegmentAudio])
   const cardRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
   const waveRef = useRef<HTMLDivElement>(null)
@@ -235,7 +241,7 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
     {...iconMotionInput}
     data-playing={playing || undefined} data-open={open || undefined}
     onClick={(event) => event.stopPropagation()}>
-    <audio ref={audioRef} src={src} preload="none"
+    <audio ref={attachAudio} src={src} preload="none"
       onPlay={() => { setPlaying(true); setStarted(true); onActivate(audioRef.current!) }}
       onPause={() => setPlaying(false)}
       onEnded={() => setPlaying(false)}

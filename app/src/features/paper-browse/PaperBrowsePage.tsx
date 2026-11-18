@@ -187,7 +187,7 @@ import type {
   WritingAnalysis,
 } from '../../domain/paperAsset.ts'
 import { isNarrativeContinuationWritingAnalysis } from '../../domain/paperAsset.ts'
-import type { ListeningAnalysisV1 } from '../../domain/listeningAnalysis.ts'
+import type { ListeningAnalysisV1, ListeningSentence } from '../../domain/listeningAnalysis.ts'
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
 import { writingPromptBlocksForDisplay } from '../../../../shared/paper-canonical/writingPresentation.mjs'
@@ -898,6 +898,10 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const [canonicalConsumption, setCanonicalConsumption] =
     useState<WholePaperConsumption | null>(null)
   const activeAudioRef = useRef<HTMLAudioElement | null>(null)
+  const [segmentAudio, setSegmentAudio] = useState<Record<string, HTMLAudioElement | null>>({})
+  const registerSegmentAudio = useCallback((id: string, audio: HTMLAudioElement | null) => {
+    setSegmentAudio((current) => current[id] === audio ? current : { ...current, [id]: audio })
+  }, [])
   const activateAudio = useCallback((audio: HTMLAudioElement) => {
     if (activeAudioRef.current !== audio) activeAudioRef.current?.pause()
     activeAudioRef.current = audio
@@ -1530,6 +1534,14 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         const listening = listeningResponse?.ok
           ? ((await listeningResponse.json()) as ListeningAnalysisV1)
           : null
+        if (import.meta.env.DEV && listening?.paperId === 'paper-gaokao-2023-ii') {
+          // Local preview only. Future imports supply sentences in the analysis sidecar.
+          const { default: preview } = await import('./listeningFollowPreview.json')
+          for (const [id, sentences] of Object.entries(preview as Record<string, ListeningSentence[]>)) {
+            const material = listening.materials[id]
+            if (material && !material.sentences?.length) material.sentences = sentences
+          }
+        }
         if (cancelled) return
         await ensurePaperFonts([raw, listening])
         if (cancelled) return
@@ -2687,7 +2699,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         <ListeningSegmentPlayer key={`${audio.sha256}:${segment.segmentId}`} src={audio.url}
           label={segment.questionNumbers.length === 1 ? `第 ${segment.questionNumbers[0]} 题`
             : `第 ${Math.min(...segment.questionNumbers)}–${Math.max(...segment.questionNumbers)} 题`}
-          startSeconds={segment.startSeconds} endSeconds={segment.endSeconds} onActivate={activateAudio} />,
+          startSeconds={segment.startSeconds} endSeconds={segment.endSeconds} onActivate={activateAudio}
+          segmentId={segment.segmentId} onSegmentAudio={registerSegmentAudio} />,
       ])) : undefined
       return (
         <div className="paper-browse-listening canonical-listening-surface">
@@ -3450,6 +3463,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             analysis={lectureEntry.analysis}
             groupQuestionIds={group.questionIds}
             activeQuestionId={activeQuestionId}
+            segmentAudio={segmentAudio}
           />
         )
       }

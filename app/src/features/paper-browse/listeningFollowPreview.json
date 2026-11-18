@@ -1,0 +1,22 @@
+{
+  "listening-text-6": [
+    { "speaker": "M", "en": "Hello, Sara.", "zh": "你好，Sara。", "start": 476.46, "end": 477.46 },
+    { "speaker": "W", "en": "Hello, David.", "zh": "你好，David。", "start": 478.46, "end": 479.30 },
+    { "speaker": "W", "en": "I can’t come for dinner tonight.", "zh": "我今晚不能来吃晚饭了。", "start": 479.66, "end": 481.48, "evidence": [{ "question": 6, "kind": "support" }] },
+    { "speaker": "W", "en": "Sorry.", "zh": "抱歉。", "start": 481.78, "end": 482.14, "evidence": [{ "question": 6, "kind": "support" }] },
+    { "speaker": "M", "en": "Oh, what happened?", "zh": "哦，发生什么事了？", "start": 482.72, "end": 484.16 },
+    { "speaker": "W", "en": "We’ve got a new case and things get pretty crazy here in the office.", "zh": "我们接了一个新案子，办公室里忙得不可开交。", "start": 484.74, "end": 489.24 },
+    { "speaker": "M", "en": "Well, then I’ll come to you.", "zh": "好吧，那我去找你。", "start": 489.94, "end": 492.18 },
+    { "speaker": "W", "en": "No, no, not tonight.", "zh": "不，不，今晚不行。", "start": 492.72, "end": 494.18 },
+    { "speaker": "W", "en": "Let me see if I can arrange another night.", "zh": "我看看能不能另约一个晚上。", "start": 495.04, "end": 497.58, "evidence": [{ "question": 6, "kind": "trap" }] },
+    { "speaker": "M", "en": "Sara, please.", "zh": "Sara，拜托了。", "start": 498.42, "end": 499.52 },
+    { "speaker": "M", "en": "We need to talk.", "zh": "我们得谈谈。", "start": 500.54, "end": 501.82 },
+    { "speaker": "M", "en": "It’s about my job.", "zh": "是关于我的工作的。", "start": 502.64, "end": 503.88 },
+    { "speaker": "W", "en": "Then tell me on the phone.", "zh": "那就在电话里告诉我吧。", "start": 504.64, "end": 506.02 },
+    { "speaker": "M", "en": "No, it’s better if we do it in person.", "zh": "不，我们还是当面谈比较好。", "start": 506.52, "end": 509.34, "evidence": [{ "question": 7, "kind": "support" }] },
+    { "speaker": "M", "en": "How about tomorrow night?", "zh": "明晚怎么样？", "start": 510.34, "end": 511.84 },
+    { "speaker": "W", "en": "I’m not sure.", "zh": "我还不确定。", "start": 512.70, "end": 513.72 },
+    { "speaker": "W", "en": "You can give me a call tomorrow afternoon.", "zh": "你明天下午可以给我打个电话。", "start": 514.34, "end": 516.52 },
+    { "speaker": "M", "en": "OK.", "zh": "好的。", "start": 516.96, "end": 517.36 }
+  ]
+}

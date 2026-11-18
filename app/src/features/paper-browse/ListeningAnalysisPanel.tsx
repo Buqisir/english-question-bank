@@ -1,12 +1,14 @@
 import type { ListeningAnalysisV1 } from '../../domain/listeningAnalysis.ts'
+import { ListeningSentenceFollow } from './ListeningSentenceFollow'
 
 type Props = {
   analysis: ListeningAnalysisV1
   groupQuestionIds: string[]
   activeQuestionId: string | null
+  segmentAudio: Record<string, HTMLAudioElement | null>
 }
 
-export function ListeningAnalysisPanel({ analysis, groupQuestionIds, activeQuestionId }: Props) {
+export function ListeningAnalysisPanel({ analysis, groupQuestionIds, activeQuestionId, segmentAudio }: Props) {
   const allowed = new Set(groupQuestionIds)
   const materials = Object.values(analysis.materials).filter((material) =>
     material.questionIds.some((questionId) => allowed.has(questionId))
@@ -28,12 +30,14 @@ export function ListeningAnalysisPanel({ analysis, groupQuestionIds, activeQuest
               {material.topic.theme} · {material.topic.themeGroup} · {material.topic.subtopic}
             </p>
             <p className="listening-analysis-summary">{material.summaryZh}</p>
-            <div className="listening-analysis-text">
+            {material.sentences?.length ? <ListeningSentenceFollow
+              sentences={material.sentences} audio={segmentAudio[material.segmentId]}
+            /> : <div className="listening-analysis-text">
               <h6>听力原文</h6>
               <p lang="en">{material.transcript}</p>
               <h6>参考译文</h6>
               <p>{material.translationZh}</p>
-            </div>
+            </div>}
             {questions.map((question) => (
               <article key={question.questionId} className="listening-analysis-question">
                 <header><b>{question.questionId.split(':').at(-1)}</b><span>答案 {question.officialAnswer}</span></header>
