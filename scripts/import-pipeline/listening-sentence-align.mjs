@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
+import { pathToFileURL } from 'node:url'
 import {
   expectedListeningReadings, listeningAsrTokens, normalizeListeningText, projectListeningSpokenText,
 } from './lib-listening-segment-rule.mjs'
@@ -305,19 +306,19 @@ function gapCandidates(source, sentenceStarts, bounds, { apple, whisper }) {
   })
 }
 
-const [sourcePath, reviewPath, applePath, output, ...windowPaths] = process.argv.slice(2)
-if (!output) throw new Error('Usage: listening-sentence-align.mjs SOURCE REVIEW APPLE OUTPUT [WHISPER_WINDOW ...]')
-const document = readJson(sourcePath)
-const review = readJson(reviewPath)
-const asr = readAsr(readJson(applePath), windowPaths.map(readJson))
-const materials = document.materials?.map(material => ({ ...material, text: material.transcript,
-  segmentId: material.segmentId ?? material.materialId ?? material.id })) ?? document.listening.transcript
-const instructions = document.sourcePresentation?.instructions ?? document.sourceInstructions
-const candidates = []
-const segments = materials.map(material => {
+export function listeningSentenceTargets(document) {
+  const materials = document.materials?.map(material => ({ ...material, text: material.transcript,
+    segmentId: material.segmentId ?? material.materialId ?? material.id })) ?? document.listening.transcript
+  return materials.map(material => ({
+    material,
+    // The materialization export stores each transcript utterance on its own line.
+    sentences: splitSentences(material, materials, !document.materials).map((sentence, index) =>
+      ({ id: `${material.segmentId}:${index + 1}`, ...sentence })),
+  }))
+}
+
+function alignMaterial({ material, sentences }, review, instructions, asr, gaps) {
   const { segmentId, materialId = material.id ?? segmentId } = material
-  // The materialization export stores each transcript utterance on its own line.
-  const sentences = splitSentences(material, materials, !document.materials)
   const source = []
   const sentenceStarts = new Set()
   for (const { tokens } of sentences) {
@@ -334,7 +335,7 @@ const segments = materials.map(material => {
   if (!bounds.length) reasons.add('pass boundaries unavailable')
   const passes = bounds.map((bound, i) => {
     const pass = i + 1
-    candidates.push(...gapCandidates(source, sentenceStarts, bound, asr)
+    gaps?.push(...gapCandidates(source, sentenceStarts, bound, asr)
       .map(candidate => ({ materialId, segment: segmentId, pass, ...candidate })))
     return alignPass(source, sentences, sentenceStarts, bound, asr.hybrid, reasons, pass)
   })
@@ -346,7 +347,23 @@ const segments = materials.map(material => {
         if (reasons.size) return { ...timing, start: null, end: null }
         return timings[i]
       }) })) }
-})
-mkdirSync(output, { recursive: true })
-writeFileSync(join(output, 'sentences.json'), `${JSON.stringify(segments, null, 2)}\n`)
-writeFileSync(join(output, 'gap-candidates.json'), `${JSON.stringify(candidates, null, 2)}\n`)
+}
+
+export function alignListeningSentences({ document, review, apple, whisper = [], collectGaps = false }) {
+  const asr = readAsr(apple, whisper)
+  const instructions = document.sourcePresentation?.instructions ?? document.sourceInstructions
+  const candidates = collectGaps ? [] : null
+  const segments = listeningSentenceTargets(document).map(target =>
+    alignMaterial(target, review, instructions, asr, candidates))
+  return { segments, candidates: candidates ?? [] }
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  const [sourcePath, reviewPath, applePath, output, ...windowPaths] = process.argv.slice(2)
+  if (!output) throw new Error('Usage: listening-sentence-align.mjs SOURCE REVIEW APPLE OUTPUT [WHISPER_WINDOW ...]')
+  const { segments, candidates } = alignListeningSentences({ document: readJson(sourcePath), review: readJson(reviewPath),
+    apple: readJson(applePath), whisper: windowPaths.map(readJson), collectGaps: true })
+  mkdirSync(output, { recursive: true })
+  writeFileSync(join(output, 'sentences.json'), `${JSON.stringify(segments, null, 2)}\n`)
+  writeFileSync(join(output, 'gap-candidates.json'), `${JSON.stringify(candidates, null, 2)}\n`)
+}

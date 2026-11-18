@@ -109,16 +109,27 @@ export function buildListeningAnalysisAgentRequest({
   materialization,
   segmentIds = null,
   teachingDoctrine,
+  sentenceTargets,
 }) {
   const input = buildListeningAnalysisInput(materialization, { segmentIds })
+  for (const material of input.materials) {
+    if (sentenceTargets) material.sentenceTargets = sentenceTargets[material.segmentId] ?? []
+  }
+  const responseSchema = sentenceTargets ? structuredClone(LISTENING_ANALYSIS_SCHEMA) : LISTENING_ANALYSIS_SCHEMA
+  if (sentenceTargets) responseSchema.$defs.sentence = {
+    type: 'object', additionalProperties: false, required: ['id', 'zh'],
+    properties: { id: { type: 'string', minLength: 1 }, zh: { type: 'string', minLength: 1 } },
+  }
   const outputContract = [
     readFileSync(promptPath, 'utf8').trim(),
     '',
     'Exact output JSON Schema:',
-    JSON.stringify(LISTENING_ANALYSIS_SCHEMA, null, 2),
+    JSON.stringify(responseSchema, null, 2),
     '',
     'Exact allowed topic taxonomy:',
     JSON.stringify(TOPIC_LABEL_TAXONOMY.map(({ theme, themeGroup, subtopic }) => ({ theme, themeGroup, subtopic })), null, 2),
+    ...(sentenceTargets ? ['Copy each id from sentenceTargets and translate its en. Omit entries you cannot translate. '
+      + 'The importer supplies sentence text, timing, offsets and question links.'] : []),
   ].join('\n')
   return {
     group: 'listening-unit',
@@ -131,6 +142,33 @@ export function buildListeningAnalysisAgentRequest({
     outputContract,
     teachingDoctrine,
   }
+}
+
+export function mergeListeningSentenceAnalysis(draft, segments = []) {
+  const analysis = structuredClone(draft)
+  const byId = new Map(segments.filter(({ degraded }) => !degraded).map(segment => [segment.segment, segment.sentences]))
+  for (const material of Object.values(analysis?.materials ?? {})) {
+    const translations = new Map((Array.isArray(material.sentences) ? material.sentences : [])
+      .filter(entry => typeof entry?.id === 'string' && typeof entry.zh === 'string' && entry.zh.trim())
+      .map(({ id, zh }) => [id, zh.trim()]))
+    delete material.sentences
+    const aligned = byId.get(material.segmentId)
+    if (!aligned?.length) continue
+    const questions = (material.questionIds ?? []).flatMap(id => {
+      const quote = analysis.questions?.[id]?.evidence?.quote
+      const questionNo = Number(id.split(':').at(-1))
+      if (!quote || !Number.isSafeInteger(questionNo) || questionNo < 1) return []
+      const matches = aligned.filter(({ en }) => en.includes(quote))
+      return matches.length === 1 ? [{ id: matches[0].id, questionNo }] : []
+    })
+    material.sentences = aligned.map(({ id, en, speaker, utf16Start, utf16End, passes }) => {
+      const questionNumbers = questions.filter(question => question.id === id).map(({ questionNo }) => questionNo)
+      const zh = translations.get(id)
+      return { id, en, ...(zh ? { zh } : {}), ...(speaker ? { speaker } : {}), utf16Start, utf16End,
+        passes: passes.map(({ start, end }) => ({ start, end })), ...(questionNumbers.length ? { questionNumbers } : {}) }
+    })
+  }
+  return analysis
 }
 
 export function validateListeningAnalysis(analysis, {
@@ -161,6 +199,11 @@ export function validateListeningAnalysisInput(analysis, input) {
     const material = analysis.materials[segmentId]
     if (material.segmentId !== segmentId) fail(`${segmentId} material identity is forged`)
     if (material.transcript !== expected.transcript) fail(`${segmentId} transcript must exactly match the captured source`)
+    for (const sentence of material.sentences ?? []) {
+      if (sentence.utf16Start >= sentence.utf16End || sentence.passes.some(({ start, end }) => start >= end)) {
+        fail(`${segmentId} has an invalid sentence range`)
+      }
+    }
     if (!isExactTopicTriple(material.topic)) fail(`${segmentId} topic is not one valid taxonomy parent-child triple`)
     const expectedIds = expected.questions.map(({ questionId }) => questionId)
     if (new Set(material.questionIds).size !== material.questionIds.length) fail(`${segmentId} has duplicate questionIds`)

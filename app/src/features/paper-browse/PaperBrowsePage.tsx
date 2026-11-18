@@ -187,7 +187,7 @@ import type {
   WritingAnalysis,
 } from '../../domain/paperAsset.ts'
 import { isNarrativeContinuationWritingAnalysis } from '../../domain/paperAsset.ts'
-import type { ListeningAnalysisV1, ListeningSentence } from '../../domain/listeningAnalysis.ts'
+import type { ListeningAnalysisV1 } from '../../domain/listeningAnalysis.ts'
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
 import { writingPromptBlocksForDisplay } from '../../../../shared/paper-canonical/writingPresentation.mjs'
@@ -923,20 +923,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     setActivePlayerId(id)
     setFollowPlayback(true)
   }, [])
-  const publishedAudioSegments = canonicalConsumption?.listeningAudio?.segments
-  const audioSegments = useMemo(() => {
-    if (!lectureOpen || !import.meta.env.DEV || paperId !== 'paper-gaokao-2023-ii' || !publishedAudioSegments) {
-      return publishedAudioSegments
-    }
-    // ASR windows for the two segments missing from the local preview recording's review.
-    const previewOnly = [
-      { segmentId: 'listening-text-5', questionNumbers: [5], firstQuestionId: 'question:listening:5',
-        startSeconds: 377.24, endSeconds: 393.28 },
-      { segmentId: 'listening-text-7', questionNumbers: [8, 9], firstQuestionId: 'question:listening:8',
-        startSeconds: 600.98, endSeconds: 683.26 },
-    ].filter(({ segmentId }) => !publishedAudioSegments.some((segment) => segment.segmentId === segmentId))
-    return [...publishedAudioSegments, ...previewOnly].sort((a, b) => a.startSeconds - b.startSeconds)
-  }, [lectureOpen, paperId, publishedAudioSegments])
+  const audioSegments = canonicalConsumption?.listeningAudio?.segments
   useEffect(() => {
     if (!activeAudio || !audioSegments) return
     const syncSegment = () => {
@@ -1581,14 +1568,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         const listening = listeningResponse?.ok
           ? ((await listeningResponse.json()) as ListeningAnalysisV1)
           : null
-        if (import.meta.env.DEV && listening?.paperId === 'paper-gaokao-2023-ii') {
-          // Local preview only. Future imports supply sentences in the analysis sidecar.
-          const { default: preview } = await import('./listeningFollowPreview.json')
-          for (const [id, sentences] of Object.entries(preview as Record<string, ListeningSentence[]>)) {
-            const material = listening.materials[id]
-            if (material && !material.sentences?.length) material.sentences = sentences
-          }
-        }
         if (cancelled) return
         await ensurePaperFonts([raw, listening])
         if (cancelled) return

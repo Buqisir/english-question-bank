@@ -50,6 +50,10 @@ import { importFormatBinding } from '../../shared/paper-canonical/nck1SourceMate
 import { buildLocalReviewProjection, hydratedEvidenceBase, importLocalReviewCandidate,
   loadLocalReviewedListening, reviewManifest, withLocalReviewEvidence } from './review.mjs'
 import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
+import { NCK1_STAGED_ANALYSIS_FILES } from '../../server/import-review/nck1AnalysisProjection.mjs'
+import { buildListeningAnalysisAgentRequest, LISTENING_STAGED_ANALYSIS_FILE_NAME,
+  mergeListeningSentenceAnalysis, validateListeningAnalysis } from '../../server/paper-import-ai/analyzeListening.mjs'
+import { alignListeningSentences, listeningSentenceTargets } from './listening-sentence-align.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -571,6 +575,19 @@ function round2Prompts(ctx) {
     `在 worktree ${root} 写公开检索 metadata。读 ${relative(path.join(ctx.fast, 'search-metadata-request.json'))}，按其中说明与结构`,
     `写 ${relative(path.join(ctx.fast, 'search-metadata-authored.json'))}。只写这个文件，不联网，不运行 finalize 或其他写命令。完成后回报题组数。`,
   ].join('\n') })
+  const config = readJson(path.join(ctx.paperDir, 'config.json'))
+  if (hasListening(ctx) && (!config.importProfile || config.withTeachingAnalyses === true)) {
+    const materialization = readJson(materializationPath(ctx))
+    const sentenceTargets = Object.fromEntries(listeningSentenceTargets(materialization)
+      .map(({ material, sentences }) => [material.segmentId, sentences.map(({ id, en }) => ({ id, en }))]))
+    const file = path.join(ctx.fast, 'listening-analysis-request.json')
+    const output = path.join(ctx.fast, 'listening-analysis-authored.json')
+    const request = buildListeningAnalysisAgentRequest({ materialization, sentenceTargets })
+    if (existsSync(file) && digestJson(readJson(file)) !== digestJson(request)) archive(ctx, output)
+    writeJson(file, request)
+    if (!existsSync(output)) prompts.push({ label: '听力讲解', outputs: [output], prompt:
+      `读 ${relative(file)}，按 outputContract 写 ${relative(output)}。只写该文件。` })
+  }
   return prompts
 }
 
@@ -727,6 +744,7 @@ async function afterProofread(ctx, args) {
       // An old cached installation must not survive a fresh stricter rule run.
       // Preserve the old sidecar and require finish to install this attempt.
       delete ctx.state.steps['listening-review']
+      delete ctx.state.steps['listening-sentences']
       archive(ctx, path.join(ctx.paperDir, 'listening-review-v1.json'))
       save(ctx)
       return result
@@ -958,6 +976,39 @@ async function installListening(ctx) {
   await run(ctx, 'verify-listening', cli('review.mjs', 'verify-listening-review', ctx.paperId))
   return { groups: report.groups.length, usable: report.groups.filter(g => g.decision === 'usable').length,
     evidence: report.evidence.length, ruleVersion: readJson(path.join(result.attempt, 'rule-result.json')).rule.version }
+}
+
+export function installListeningSentenceAnalysis(ctx) {
+  const stage = path.join(ctx.paperDir, LISTENING_STAGED_ANALYSIS_FILE_NAME)
+  const authored = path.join(ctx.fast, 'listening-analysis-authored.json')
+  if (!existsSync(stage) && !existsSync(authored)) return { detail: '无听力讲解，保留段级展示' }
+  const document = readJson(materializationPath(ctx))
+  if (!existsSync(stage) && NCK1_STAGED_ANALYSIS_FILES.some(({ key, path: file }) =>
+    (!key.startsWith('reading-') || document.groups.some(({ slotId }) => slotId === key.replace('-', '.')))
+    && !existsSync(path.join(ctx.paperDir, file)))) {
+    return { detail: '讲解分片未齐，保留段级展示' }
+  }
+  const draft = readJson(existsSync(authored) ? authored : stage)
+  let segments = []
+  let detail
+  try {
+    const review = readJson(path.join(ctx.paperDir, LISTENING_REVIEW_FILE))
+    const windows = review.evidence.filter(({ kind }) => kind === 'asr_window')
+      .map(({ path: file, settings }) => ({ engine: settings.engine, window: readJson(path.join(ctx.paperDir, file)) }))
+    const apple = windows.find(({ engine }) => /apple/iu.test(engine))?.window
+    if (!apple) throw new Error('缺少 Apple ASR')
+    const whisper = windows.filter(({ engine }) => /whisper/iu.test(engine)).map(({ window }) => window)
+    segments = alignListeningSentences({ document, review, apple, whisper }).segments
+    detail = `${segments.filter(segment => !segment.degraded).length}/${segments.length} 段有句时`
+  } catch (error) {
+    detail = `句级对齐跳过（${error.message.replace(/\s+/gu, ' ')}）`
+  }
+  const analysis = mergeListeningSentenceAnalysis(draft, segments)
+  validateListeningAnalysis(analysis, { materialization: document })
+  const temporary = `${stage}.partial`
+  writeJson(temporary, analysis)
+  renameSync(temporary, stage)
+  return { detail }
 }
 
 export async function sourceReferences(ctx, execute = run) {
@@ -1524,6 +1575,9 @@ export async function finish(ctx, args, { referenceStages = {}, readStatus } = {
     }
   })
   if (hasListening(ctx) && !await retainFastListening(ctx)) await step(ctx, 'listening-review', () => installListening(ctx))
+  if (hasListening(ctx)) await step(ctx, 'listening-sentences', () => Promise.resolve()
+    .then(() => installListeningSentenceAnalysis(ctx))
+    .catch(error => ({ detail: `句级对齐跳过（${error.message.replace(/\s+/gu, ' ')}）` })))
   await step(ctx, 'ocr-correction-report', async () => {
     const reportFile = path.join(ctx.paperDir, 'agent-ocr-correction-report-v2.json')
     const profileId = (ctx.state.data.formatProfileBinding
@@ -1682,6 +1736,8 @@ async function report(ctx, args) {
   archive(ctx, output)
   await run(ctx, 'preprocessing-report', cli('review.mjs', 'preprocessing-report', ctx.paperId,
     '--evidence', evidencePath, '--output', output), { review: true })
+  const sentenceDetail = steps['listening-sentences']?.result?.detail
+  if (sentenceDetail) appendFileSync(output, `\n- 听力跟读 · ${sentenceDetail}\n`)
   if (localOnly) {
     ctx.state.data.status = 'local_ready'
     ctx.state.data.localReport = path.relative(root, output)
@@ -1704,7 +1760,7 @@ function status(ctx) {
 const STEP_ORDER = [
   'flags-present', 'compile', 'ocr-review', 'materialize', 'chinese-numbering', 'presentation', 'figure-sizes', 'subtitles-watermarks',
   'spelling', 'verify', 'answer-check', 'build', 'round2-requests', 'asr-wait', 'asr-apple-rule-v2',
-  'summaries', 'search-metadata', 'listening-review', 'ocr-correction-report', 'source-references', 'pagination-run',
+  'summaries', 'search-metadata', 'listening-review', 'listening-sentences', 'ocr-correction-report', 'source-references', 'pagination-run',
   'pagination-plan', 'freeze', 'pdf-qa', 'local-preview', 'local-screen', 'push', 'screen',
 ]
 
@@ -1718,7 +1774,7 @@ function redoFrom(ctx, name) {
   const preview = ['local-preview', 'local-screen', 'push', 'screen']
   const replacesOcr = index <= STEP_ORDER.indexOf('ocr-review')
   const redo = new Set(listening.includes(name)
-    ? [...listening.slice(listening.indexOf(name)), ...preview]
+    ? [...listening.slice(listening.indexOf(name)), 'listening-sentences', ...preview]
     : ['summaries', 'search-metadata'].includes(name)
       ? [name, ...preview]
       : STEP_ORDER.slice(index).filter(step => replacesOcr || !listening.includes(step)))

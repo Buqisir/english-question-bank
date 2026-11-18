@@ -5,14 +5,15 @@ export type ListeningTopic = {
 }
 
 export type ListeningSentence = {
-  speaker: string
+  id: string
+  speaker?: string
   en: string
-  zh: string
+  zh?: string
+  utf16Start: number
+  utf16End: number
   /** Seconds on the whole-paper playback recording. */
-  start: number
-  end: number
-  repeatStart?: number
-  evidence?: Array<{ question: number; kind: 'support' | 'trap' }>
+  passes: [{ start: number; end: number }, { start: number; end: number }?]
+  questionNumbers?: number[]
 }
 
 export type ListeningMaterialAnalysis = {

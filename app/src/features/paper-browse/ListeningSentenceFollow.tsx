@@ -5,14 +5,12 @@ import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { ListeningTransport, listeningPlayerSeekEvent, listeningPlayerSwitchEvent, playListeningAudio } from './ListeningSegmentPlayer'
 
 function sentenceStart(sentence: ListeningSentence, repeating: boolean) {
-  return repeating ? sentence.repeatStart ?? sentence.start : sentence.start
+  return (repeating ? sentence.passes[1] ?? sentence.passes[0] : sentence.passes[0]).start
 }
 
 function sentenceEnd(sentences: ListeningSentence[], index: number, repeating: boolean) {
   const sentence = sentences[index]
-  if (!repeating) return sentence.end
-  const end = sentenceStart(sentence, true) + sentence.end - sentence.start
-  return Math.min(end, sentences[index + 1]?.repeatStart ?? end)
+  return (repeating ? sentence.passes[1] ?? sentence.passes[0] : sentence.passes[0]).end
 }
 
 export function scrollListeningTarget(target: Element, block: ScrollLogicalPosition) {
@@ -99,7 +97,10 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
   const loopRepeating = useRef(false)
   const list = useRef<HTMLDivElement>(null)
   const jumpToCurrent = useRef<() => void>(() => {})
-  const repeatStart = sentences[0]?.repeatStart ?? Infinity
+  const repeatStart = sentences[0]?.passes[1]?.start ?? Infinity
+  const repeatEnd = sentences.at(-1)?.passes[1]?.end ?? Infinity
+  const isPlayingRepeat = (audio: HTMLAudioElement) =>
+    !audio.paused && audio.currentTime >= repeatStart && audio.currentTime < repeatEnd
 
   const setFollow = useCallback((enabled: boolean) => {
     follows.current = enabled
@@ -177,8 +178,8 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
         curve: { x1, x2, control: velocity * x1 * duration, distance } }
     }
     const isShortAndVisible = (index: number) => {
-      const sentence = sentences[index]
-      if (sentence.end - sentence.start >= 1) return false
+      const { start, end } = sentences[index].passes[0]
+      if (end - start >= 1) return false
       const row = scroller.children[index] as HTMLElement
       const top = row.offsetTop - scroller.scrollTop
       const height = scroller.clientHeight
@@ -327,12 +328,16 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
 
   function playSentence(index: number) {
     if (!audio) return
+    const repeating = isPlayingRepeat(audio)
     onActivate(audio)
     setFollow(true)
     setError(false)
     if (audio.error) audio.load()
-    if (loop) loopTarget.current = index
-    audio.currentTime = sentenceStart(sentences[index], loop ? loopRepeating.current : audio.currentTime + 0.025 >= repeatStart)
+    if (loop) {
+      loopTarget.current = index
+      loopRepeating.current = repeating
+    }
+    audio.currentTime = sentenceStart(sentences[index], repeating)
     jumpToCurrent.current()
     void playListeningAudio(audio).catch((reason) => {
       if (!(reason instanceof DOMException && reason.name === 'AbortError')) setError(true)
@@ -382,12 +387,10 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
             || (event.key === ' ' && event.target === event.currentTarget))) setFollow(false)
         }}>
         {sentences.map((sentence, index) => {
-          const evidence = sentence.evidence ?? []
+          const questionNumbers = sentence.questionNumbers ?? []
           const previous = sentences[index - 1]
           const speakerChange = previous?.speaker !== sentence.speaker
-          const questionLabels = [...new Set(evidence.map(({ question }) => question))]
-            .filter((question) => !previous?.evidence?.some((item) => item.question === question))
-          return <div key={sentence.start} className="listening-follow-line"
+          return <div key={sentence.id} className="listening-follow-line"
             data-speaker-change={previous && speakerChange ? true : undefined}
             data-distance={current < 0 ? undefined : Math.min(4, Math.abs(index - current))}
             data-playable={audio ? '' : undefined} aria-current={audio && current === index ? 'true' : undefined}>
@@ -398,15 +401,15 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
               <button className="listening-follow-sentence" type="button" lang="en" disabled={!audio}
                 aria-description={sentence.zh} style={{ fontFamily: paperSurfaceTokens.paperFontStack }}
                 onClick={() => playSentence(index)}>
-                {evidence.length > 0
-                  ? <mark className="ps-evidence-anchor--active" data-paper-evidence-kind={evidence[0].kind}>{sentence.en}</mark>
+                {questionNumbers.length > 0
+                  ? <mark className="ps-evidence-anchor--active" data-paper-evidence-kind="support">{sentence.en}</mark>
                   : sentence.en}
               </button>
-              {questionLabels.length > 0 && <span className="listening-follow-evidence">
-                {questionLabels.map((question) => <button key={question} type="button" className="listening-quiet-control"
+              {questionNumbers.length > 0 && <span className="listening-follow-evidence">
+                {questionNumbers.map((question) => <button key={question} type="button" className="listening-quiet-control"
                   onClick={() => { setFollow(false); onQuestion(question) }}>第 {question} 题</button>)}
               </span>}
-              <p className="listening-follow-translation">{sentence.zh}</p>
+              {sentence.zh && <p className="listening-follow-translation">{sentence.zh}</p>}
             </div>
           </div>
         })}
