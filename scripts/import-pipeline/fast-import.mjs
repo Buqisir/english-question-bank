@@ -1408,10 +1408,18 @@ export async function finish(ctx, args, { referenceStages = {}, readStatus } = {
   }
   await step(ctx, 'summaries', () => installSummaries(ctx))
   await step(ctx, 'search-metadata', async () => {
-    await run(ctx, 'finalize-search-metadata', cli('review.mjs', 'finalize-search-metadata', ctx.paperId,
-      '--input', path.join(ctx.fast, 'search-metadata-authored.json')))
-    await run(ctx, 'verify-search-metadata', cli('review.mjs', 'verify-search-metadata', ctx.paperId))
-    return { ok: true }
+    const authored = path.join(ctx.fast, 'search-metadata-authored.json')
+    try {
+      if (existsSync(authored)) {
+        await run(ctx, 'finalize-search-metadata', cli('review.mjs', 'finalize-search-metadata', ctx.paperId, '--input', authored))
+      }
+      await run(ctx, 'verify-search-metadata', cli('review.mjs', 'verify-search-metadata', ctx.paperId))
+      return { ok: true }
+    } catch (error) {
+      archive(ctx, path.join(ctx.paperDir, 'public-search-metadata-v1.json'))
+      console.warn(`${ctx.paperId}: 未采用检索 metadata。${error.message}`)
+      return { ok: false, warning: error.message }
+    }
   })
   if (hasListening(ctx)) await step(ctx, 'listening-review', () => installListening(ctx))
   await step(ctx, 'ocr-correction-report', async () => {

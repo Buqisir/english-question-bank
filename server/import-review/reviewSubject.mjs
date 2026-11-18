@@ -142,7 +142,7 @@ function identity(input, profile, reviewKind = 'candidate') {
     result[key] = input[key]
   }
   const required = profile === 'public-paper-v1'
-    ? ['paragraphSummariesDigest', 'publicSearchMetadataDigest'] : ['analysisDigest']
+    ? ['paragraphSummariesDigest'] : ['analysisDigest']
   for (const key of ['analysisDigest', 'paragraphSummariesDigest', 'publicSearchMetadataDigest']) {
     if (required.includes(key) && !SHA.test(input[key])) fail('MISSING_EVIDENCE', `/identity/${key}`)
     if (input[key] != null && !SHA.test(input[key])) fail('BASELINE_UNTRUSTED', `/identity/${key}`)

@@ -535,20 +535,21 @@ export function assertPaperImportParagraphSummaries({ baseDir, packageData }) {
 }
 
 export function assertPaperImportPublicSearchMetadata({ baseDir, packageData }) {
-  if (!packageData.publicSearchMetadataBytes) {
-    throw new Error('Public-paper publication requires public search metadata')
-  }
   const filePath = path.join(baseDir, publicSearchMetadataFileName)
-  if (!existsSync(filePath)) throw new Error('Published public search metadata is missing')
-  const actual = readFileSync(filePath)
-  const expected = Buffer.from(packageData.publicSearchMetadataBytes)
-  if (!actual.equals(expected)) {
-    throw new Error('Published public search metadata differs from Review projection')
+  let publicSearchMetadataDigest = null
+  if (packageData.publicSearchMetadataBytes) {
+    if (!existsSync(filePath)) throw new Error('Published public search metadata is missing')
+    const actual = readFileSync(filePath)
+    if (!actual.equals(Buffer.from(packageData.publicSearchMetadataBytes))) {
+      throw new Error('Published public search metadata differs from Review projection')
+    }
+    publicSearchMetadataDigest = `sha256:${createHash('sha256').update(actual).digest('hex')}`
+  } else if (existsSync(filePath)) {
+    throw new Error('Published public search metadata was not in Review')
   }
-  // One durable receipt value binds both required public-profile artifacts.
   return digestJson({
     paragraphSummariesDigest: assertPaperImportParagraphSummaries({ baseDir, packageData }),
-    publicSearchMetadataDigest: `sha256:${createHash('sha256').update(actual).digest('hex')}`,
+    publicSearchMetadataDigest,
   })
 }
 

@@ -2650,16 +2650,9 @@ const publicSummary = {
   })),
 }
 writeJson(summariesPath, publicSummary)
-writeJson(
-  path.join(publicOnly.reviewRoot, 'public-search-metadata-v1.json'),
-  publicMetadataFixture(
-    publicOnly.projection.materialization,
-    publicOnly.projection.sourceDigest,
-    publicOnly.projection.candidateDigest,
-  ),
-)
 publicOnly.projection = buildNck1ReviewProjection(publicOnly.reviewRoot, { requireAnalyses: true })
 assert.equal(publicOnly.projection.analysisDigest, null)
+assert.equal(publicOnly.projection.publicSearchMetadataDigest, undefined)
 assert.equal(publicOnly.projection.importProfile, 'public-paper-v1')
 const approvedPublicIdentity = approvedIdentity(publicOnly.projection)
 rmSync(summariesPath)
@@ -2705,6 +2698,7 @@ const publicPublication = publishReviewedFixture({
   paperAssetsDir: publicOnly.paperAssetsDir,
 })
 assert.equal(publicPublication.ok, true)
+assert.equal(existsSync(path.join(publicOnly.paperAssetsDir, paperId, 'latest/public-search-metadata-v1.json')), false)
 assert.deepEqual(
   readFileSync(path.join(publicOnly.paperAssetsDir, paperId, 'latest/paragraph-summaries-v1.json')),
   readFileSync(summariesPath),

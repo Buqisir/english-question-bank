@@ -141,6 +141,7 @@ try {
   } else {
     assertSourceReferences({ ...binding, sidecar: sourceReferences })
     withLocalReviewEvidence(paperDir, () => assertSourceReferenceAdmission({ ...binding, sidecar: sourceReferences, sourceInput: loaded.sourceInput,
+      onWarning: message => console.warn(`${loaded.materialization.paperId}: ${message}`),
       referenceSourceManifest: loaded.manifest,
       referenceOcrSourceBytes: loadReferenceOcrSourceBytes(paperDir, {
         producerVersion: sourceReferences?.producerVersion, canonicalOcrSourceBytes: loaded.sourceInput.ocrSourceBytes,

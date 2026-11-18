@@ -359,11 +359,9 @@ export function validateReviewBundleManifest(input) {
             'paragraphSummariesDigest',
             160,
           ),
-          publicSearchMetadataDigest: requiredString(
-            input.publicSearchMetadataDigest,
-            'publicSearchMetadataDigest',
-            160,
-          ),
+          ...(input.publicSearchMetadataDigest == null ? {} : {
+            publicSearchMetadataDigest: requiredString(input.publicSearchMetadataDigest, 'publicSearchMetadataDigest', 160),
+          }),
           ...(input.analysisDigest
             ? { analysisDigest: requiredString(input.analysisDigest, 'analysisDigest', 160) }
             : {}),
@@ -755,7 +753,7 @@ function promotionRow(db, row) {
     if (
       manifest.importProfile !== 'public-paper-v1'
       || !SHA256.test(manifest.paragraphSummariesDigest || '')
-      || !SHA256.test(manifest.publicSearchMetadataDigest || '')
+      || (manifest.publicSearchMetadataDigest != null && !SHA256.test(manifest.publicSearchMetadataDigest))
     ) {
       throw storeError(
         'IMPORT_REVIEW_PROMOTION_IDENTITY_MISMATCH',
@@ -1288,7 +1286,7 @@ export function createImportReviewStore({
             ? [
                 [projection.importProfile, revision.manifest.importProfile, 'importProfile'],
                 [projection.paragraphSummariesDigest, revision.manifest.paragraphSummariesDigest, 'paragraphSummariesDigest'],
-                [projection.publicSearchMetadataDigest, revision.manifest.publicSearchMetadataDigest, 'publicSearchMetadataDigest'],
+                [projection.publicSearchMetadataDigest ?? null, revision.manifest.publicSearchMetadataDigest ?? null, 'publicSearchMetadataDigest'],
               ]
             : []),
         ]
@@ -2597,11 +2595,8 @@ export function createImportReviewStore({
               'paragraphSummariesDigest',
               160,
             ),
-            publicSearchMetadataDigest: requiredString(
-              input?.publicSearchMetadataDigest,
-              'publicSearchMetadataDigest',
-              160,
-            ),
+            publicSearchMetadataDigest: input.publicSearchMetadataDigest == null ? undefined
+              : requiredString(input.publicSearchMetadataDigest, 'publicSearchMetadataDigest', 160),
             ...(input?.analysisDigest
               ? { analysisDigest: requiredString(input.analysisDigest, 'analysisDigest', 160) }
               : {}),
@@ -3469,7 +3464,8 @@ export function createImportReviewStore({
         ? {
             importProfile: input.importProfile,
             paragraphSummariesDigest: requiredString(input?.paragraphSummariesDigest, 'paragraphSummariesDigest', 160),
-            publicSearchMetadataDigest: requiredString(input?.publicSearchMetadataDigest, 'publicSearchMetadataDigest', 160),
+            publicSearchMetadataDigest: input.publicSearchMetadataDigest == null ? undefined
+              : requiredString(input.publicSearchMetadataDigest, 'publicSearchMetadataDigest', 160),
             ...(input?.analysisDigest
               ? { analysisDigest: requiredString(input.analysisDigest, 'analysisDigest', 160) }
               : {}),

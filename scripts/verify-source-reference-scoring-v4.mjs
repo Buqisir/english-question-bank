@@ -22,6 +22,12 @@ import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
 const input = scoringFiguresFixture({ scoringIntro: true })
 const compiled = importCanonicalCandidate(input.sourceInput)
 assert.deepEqual(compiled.issues, [], 'real Canonical source compile remains closed')
+const wrongAnswerNumber = structuredClone(input.materialization)
+wrongAnswerNumber.answers[0].canonicalNumber = wrongAnswerNumber.answers[1].canonicalNumber
+const misnumbered = importCanonicalCandidate({ ...input.sourceInput,
+  materializationBytes: Buffer.from(JSON.stringify(wrongAnswerNumber)) })
+assert(misnumbered.issues.some(issue => issue.code === 'MATERIALIZATION_ANSWER_INVALID'),
+  'an official answer assigned to another question number still blocks admission')
 Object.assign(input, { sourceDigest: compiled.candidate.source.sha256,
   candidateDigest: compiled.candidate.candidateDigest })
 const sidecar = captureScoringReferences(input)
@@ -126,9 +132,13 @@ assert(p04FigureIndex > 1 && crossPageBlocks[p04FigureIndex - 1].kind === 'parag
 const p04Pair = crossPageBlocks.splice(p04FigureIndex - 1, 2)
 const p03Pair = crossPageBlocks.splice(0, 2, ...p04Pair)
 crossPageBlocks.splice(p04FigureIndex - 1, 0, ...p03Pair)
-assert.throws(() => assertSourceReferenceAdmission({ ...crossPageInput, sidecar: crossPageChanged }),
-  /source order|overlap/iu, 'swapped cross-page paragraph/figure pairs')
-console.log('PASS paired paragraph/figure swaps within and across pages, and overlapping blocks fail closed')
+const warnings = []
+const onWarning = message => warnings.push(message)
+assertSourceReferenceAdmission({ ...crossPageInput, sidecar: crossPageChanged, onWarning })
+assert(warnings.some(message => /source order|overlap/iu.test(message)), 'out-of-order scoring blocks are flagged')
+assert.throws(() => assertSourceReferenceAdmission({ ...crossPageInput, sidecar: crossPageSidecar, onWarning,
+  sourceInput: { ...crossPageInput.sourceInput, documents: [] } }), undefined, 'immutable source bytes still required')
+console.log('PASS scoring order mismatch warns while missing immutable source bytes still reject')
 
 // Rebind genuine OCR text so admission cannot reject merely stale evidence.
 const explanationInput = structuredClone(input)

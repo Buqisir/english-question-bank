@@ -115,7 +115,10 @@ function loadParagraphSummaries(rootDir, loaded, sourceDigest, candidateDigest) 
 
 function loadPublicSearchMetadata(rootDir, loaded, sourceDigest, candidateDigest) {
   const filePath = resolveReviewFile(rootDir, PUBLIC_SEARCH_METADATA_FILE_NAME)
-  if (!existsSync(filePath)) fail('public-paper-v1 requires public-search-metadata-v1.json')
+  if (!existsSync(filePath)) {
+    console.warn(`${loaded.materialization.paperId}: ${PUBLIC_SEARCH_METADATA_FILE_NAME} is missing`)
+    return null
+  }
   const bytes = readFileSync(filePath)
   const sidecar = JSON.parse(bytes.toString('utf8'))
   const issues = validatePublicSearchMetadata({ sidecar, materialization: loaded.materialization, sourceDigest, candidateDigest })
@@ -792,7 +795,8 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
       path: PARAGRAPH_SUMMARIES_FILE_NAME,
       mediaType: 'application/json',
       role: 'paragraph_summaries',
-    }, {
+    }] : []),
+    ...(importProfile && existsSync(resolveReviewFile(rootDir, PUBLIC_SEARCH_METADATA_FILE_NAME)) ? [{
       path: PUBLIC_SEARCH_METADATA_FILE_NAME,
       mediaType: 'application/json',
       role: 'public_search_metadata',
@@ -1972,6 +1976,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   const sourceReferences = sourceReferencesBytes ? parseSourceReferencesBytes(sourceReferencesBytes) : null
   const referenceBinding = {
     sidecar: sourceReferences,
+    onWarning: message => console.warn(`${loaded.materialization.paperId}: ${message}`),
     materialization: loaded.materialization,
     sourceDigest: preview.candidate.source.sha256,
     candidateDigest: preview.candidate.candidateDigest,
@@ -2070,7 +2075,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
     paragraphSummariesDigest: paragraphSummaries?.digest || null,
     publicSearchMetadata: publicSearchMetadata?.sidecar || null,
     publicSearchMetadataBytes: publicSearchMetadata?.bytes || null,
-    publicSearchMetadataDigest: publicSearchMetadata?.digest || null,
+    publicSearchMetadataDigest: publicSearchMetadata?.digest,
     sourceReferences,
     sourceReferencesBytes,
     sourceReferencesDigest: sourceReferencesBytes ? sha256(sourceReferencesBytes) : null,
