@@ -67,7 +67,7 @@ import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { ensurePaperFonts, PaperFontError } from '../../shared-ui/papersurface/paperFontLoader'
-import { ListeningSegmentPlayer } from './ListeningSegmentPlayer'
+import { ListeningSegmentPlayer, listeningPlayerSwitchEvent } from './ListeningSegmentPlayer'
 import { PaperReviewControls } from './PaperReviewControls'
 import { useIsOpenMode, useIsOwnerView } from '../../auth/AuthGate'
 import { firstListeningSectionRange, wholeListeningPaperRange } from '../../../../shared/paper-canonical/listeningPlayback.mjs'
@@ -908,7 +908,10 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     setSegmentAudio((current) => current[id] === audio ? current : { ...current, [id]: audio })
   }, [])
   const activateAudio = useCallback((audio: HTMLAudioElement) => {
-    if (activeAudioRef.current !== audio) activeAudioRef.current?.pause()
+    if (activeAudioRef.current !== audio) {
+      activeAudioRef.current?.dispatchEvent(new Event(listeningPlayerSwitchEvent))
+      activeAudioRef.current?.pause()
+    }
     activeAudioRef.current = audio
     setActiveAudio(audio)
     setFollowPlayback(true)
@@ -2750,7 +2753,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           label={segment.questionNumbers.length === 1 ? `第 ${segment.questionNumbers[0]} 题`
             : `第 ${Math.min(...segment.questionNumbers)}–${Math.max(...segment.questionNumbers)} 题`}
           startSeconds={segment.startSeconds} endSeconds={segment.endSeconds} onActivate={activateAudio}
-          segmentId={segment.segmentId} onSegmentAudio={registerSegmentAudio} />,
+          segmentId={segment.segmentId} onSegmentAudio={registerSegmentAudio} lecture={lectureOpen} />,
       ])) : undefined
       return (
         <div className="paper-browse-listening canonical-listening-surface">
@@ -2761,7 +2764,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               <ListeningSegmentPlayer key={`${audio.sha256}:${groupId}:section`} src={audio.url}
                 label={firstSection ? '第一节第 1–5 题' : `第二节第 6–${questionNumbers.at(-1)} 题`}
                 startSeconds={section.startSeconds} endSeconds={section.endSeconds}
-                onActivate={activateAudio} size="full"
+                onActivate={activateAudio} size="full" lecture={lectureOpen}
                 marks={section.segments.map((segment) => ({
                   startSeconds: segment.startSeconds, endSeconds: segment.endSeconds,
                   label: segment.questionNumbers.length === 1 ? String(segment.questionNumbers[0])
@@ -2770,7 +2773,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             )}
             listeningPartPlayer={audio && (
               <ListeningSegmentPlayer key={`${audio.sha256}:full`} src={audio.url} label="整卷听力"
-                startSeconds={wholePaper?.startSeconds ?? 0} endSeconds={wholePaper?.endSeconds ?? audio.durationSeconds} onActivate={activateAudio} size="full"
+                startSeconds={wholePaper?.startSeconds ?? 0} endSeconds={wholePaper?.endSeconds ?? audio.durationSeconds} onActivate={activateAudio} size="full" lecture={lectureOpen}
                 marks={audio.segments?.map((segment) => ({
                   startSeconds: segment.startSeconds,
                   endSeconds: segment.endSeconds,
@@ -3509,25 +3512,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       return <p className="paper-browse-lecture-empty" role="alert">{analysisFontError}</p>
     }
 
-    if (group.groupType === 'listening') {
-      if (lectureEntry?.kind === 'listening') {
-        return (
-          <ListeningAnalysisPanel
-            analysis={lectureEntry.analysis}
-            groupQuestionIds={group.questionIds}
-            activeQuestionId={activeQuestionId}
-            segmentAudio={segmentAudio}
-            playback={playingSegment?.audio === activeAudio ? playingSegment : null}
-            onReturnToPlayback={!followPlayback && playbackGroup && playingSegment
-              && !Object.values(lectureEntry.analysis.materials).some(({ segmentId, questionIds }) =>
-                segmentId === playingSegment.segmentId && activeQuestionId && questionIds.includes(activeQuestionId))
-              ? () => setFollowPlayback(true) : undefined}
-          />
-        )
-      }
-      return <p className="paper-browse-lecture-empty">解析未发布</p>
-    }
-
     if (group.groupType === 'sevenChoices' && entry?.kind === 'sevenChoices') {
       const chains = entry.model.chains
       if (chains.length === 0) {
@@ -3717,13 +3701,27 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     const playbackQuestion = followPlayback && playbackGroup?.groupId === groupId && playingSegment
       && selectedMaterial?.segmentId !== playingSegment.segmentId ? playingSegment.firstQuestionId : null
     const activeQuestionId = playbackQuestion ?? selectedQuestionId
+    if (group.groupType === 'listening') {
+      const lectureEntry = lectureAnalysisByGroupId[groupId]
+      return <ListeningAnalysisPanel
+        title={lectureTitle ?? group.title}
+        answers={answerRow}
+        analysis={lectureEntry?.kind === 'listening' ? lectureEntry.analysis : undefined}
+        groupQuestionIds={group.questionIds}
+        activeQuestionId={activeQuestionId}
+        segments={audioSegments ?? []}
+        segmentAudio={segmentAudio}
+        playback={activeAudio && (playingSegment?.audio === activeAudio || followPlayback)
+          ? { audio: activeAudio, segmentId: playingSegment?.audio === activeAudio ? playingSegment.segmentId : null }
+          : null}
+        onActivate={activateAudio}
+        onReturnToPlayback={!followPlayback && playbackGroup ? () => setFollowPlayback(true) : undefined}
+        unavailable={analysisFontError || (lectureAnalysisLoading ? '解析加载中…' : '解析未发布')}
+      />
+    }
     const hasActiveQuestion = Boolean(activeQuestionId)
     const activeEvidenceId = hasActiveQuestion ? lectureSelection?.evidenceId ?? null : null
     const activeOptionLabel = hasActiveQuestion ? lectureSelection?.optionLabel ?? null : null
-    const lectureEntry = lectureAnalysisByGroupId[groupId]
-    const listeningMaterial = activeQuestionId && lectureEntry?.kind === 'listening'
-      ? Object.values(lectureEntry.analysis.materials).find(({ questionIds }) => questionIds.includes(activeQuestionId))
-      : null
     return (
       <div className="paper-browse-lecture-body">
         {group.groupType === 'reading' ? (
@@ -3798,15 +3796,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 {range && <span className="paper-browse-lecture-range"> · {range}</span>}
               </h4>
             )}
-            {listeningMaterial ? (
-              <details key={listeningMaterial.segmentId} className="listening-answer-disclosure">
-                <summary className="listening-quiet-control">全节答案</summary>
-                {answerRow && <p className="paper-browse-answer-row">{answerRow}</p>}
-                <p className="listening-analysis-topic">
-                  {listeningMaterial.topic.theme} · {listeningMaterial.topic.themeGroup} · {listeningMaterial.topic.subtopic}
-                </p>
-              </details>
-            ) : answerRow && <p className="paper-browse-answer-row">{answerRow}</p>}
+            {answerRow && <p className="paper-browse-answer-row">{answerRow}</p>}
           </>
         )}
         <div className="paper-browse-lecture-analysis">

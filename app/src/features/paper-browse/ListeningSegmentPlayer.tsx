@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode, type KeyboardEvent, type PointerEvent } from 'react'
 import { Headphones } from '../../icons'
 import { PlaybackIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
@@ -12,6 +12,7 @@ type Props = {
   onActivate: (audio: HTMLAudioElement) => void
   segmentId?: string
   onSegmentAudio?: (id: string, audio: HTMLAudioElement | null) => void
+  lecture?: boolean
   /** Whole-recording player gets a longer track. */
   size?: 'segment' | 'full'
   /** Question-segment starts drawn over the whole-recording track. */
@@ -19,6 +20,22 @@ type Props = {
 }
 
 export const listeningPlayerSeekEvent = 'listening-player-seek'
+export const listeningPlayerSwitchEvent = 'listening-player-switch'
+
+const audioRanges = new WeakMap<HTMLAudioElement, Pick<Props, 'startSeconds' | 'endSeconds' | 'label' | 'marks'>>()
+
+export function playListeningAudio(audio: HTMLAudioElement) {
+  const range = audioRanges.get(audio)
+  if (audio.error) audio.load()
+  if (range && (audio.currentTime < range.startSeconds || audio.currentTime >= range.endSeconds - 0.05)) {
+    audio.currentTime = range.startSeconds
+  }
+  return audio.play()
+}
+
+function isPlaybackError(reason: unknown) {
+  return !(reason instanceof DOMException && ['AbortError', 'NotAllowedError'].includes(reason.name))
+}
 
 /** Slow → fast; the gauge needle points left, up, right. */
 const RATES = [0.75, 1, 1.25] as const
@@ -35,16 +52,19 @@ function clock(seconds: number): string {
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`
 }
 
-export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, onActivate, segmentId, onSegmentAudio, size = 'segment', marks }: Props) {
+export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, onActivate, segmentId, onSegmentAudio, lecture = false, size = 'segment', marks }: Props) {
   const rootRef = useRef<HTMLSpanElement>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
   const attachAudio = useCallback((audio: HTMLAudioElement | null) => {
     audioRef.current = audio
     if (segmentId) onSegmentAudio?.(segmentId, audio)
   }, [segmentId, onSegmentAudio])
+  useLayoutEffect(() => {
+    const audio = audioRef.current
+    if (audio) audioRanges.set(audio, { startSeconds, endSeconds, label, marks })
+  }, [startSeconds, endSeconds, label, marks])
   const cardRef = useRef<HTMLDivElement>(null)
   const triggerRef = useRef<HTMLButtonElement>(null)
-  const waveRef = useRef<HTMLDivElement>(null)
   const [open, setOpen] = useState(false)
   const [placement, setPlacement] = useState<'above' | 'below'>('above')
   const [shift, setShift] = useState(0)
@@ -55,11 +75,7 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
   // Before the first play the single clock shows the length; afterwards, elapsed time.
   const [started, setStarted] = useState(false)
   const [error, setError] = useState(false)
-  // While dragging only the caret moves; the audio seeks once on release.
-  const [dragPosition, setDragPosition] = useState<number | null>(null)
   const duration = Math.max(0, endSeconds - startSeconds)
-  const shownPosition = dragPosition ?? position
-  const progress = duration > 0 ? Math.min(1, shownPosition / duration) : 0
 
   const stopAtEnd = useCallback((audio: HTMLAudioElement) => {
     if (audio.currentTime < endSeconds) return false
@@ -81,15 +97,15 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
       const audio = audioRef.current
       if (!audio) return
       if (stopAtEnd(audio)) return
-      setPosition(Math.max(0, audio.currentTime - startSeconds))
+      if (!lecture) setPosition(Math.max(0, audio.currentTime - startSeconds))
       frame = requestAnimationFrame(tick)
     }
     frame = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(frame)
-  }, [playing, startSeconds, stopAtEnd])
+  }, [playing, lecture, startSeconds, stopAtEnd])
 
   useEffect(() => {
-    if (!open) return
+    if (!open || lecture) return
     const onPointerDown = (event: globalThis.PointerEvent) => {
       if (!rootRef.current?.contains(event.target as Node)) setOpen(false)
     }
@@ -104,7 +120,7 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
       document.removeEventListener('pointerdown', onPointerDown)
       document.removeEventListener('keydown', onKeyDown)
     }
-  }, [open])
+  }, [open, lecture])
 
   // Keep the floating card inside the paper and below the sticky header.
   // Rects are in zoomed viewport pixels; the shift is in local CSS pixels.
@@ -112,19 +128,16 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
     const card = cardRef.current
     const trigger = triggerRef.current
     const root = rootRef.current
-    if (!open || !card || !trigger || !root) return
+    if (!open || lecture || !card || !trigger || !root) return
     const container = root.closest('.paper-browse-zoom') ?? document.body
-    const lecture = root.closest('.paper-browse-shell')?.querySelector('.paper-browse-lecture-panel')
     const place = () => {
       // Measure the unanimated root, not the card's entrance transform.
       const zoom = root.getBoundingClientRect().width / (root.offsetWidth || 1) || 1
       const triggerRect = trigger.getBoundingClientRect()
       const bounds = container.getBoundingClientRect()
       const left = Math.max(8, bounds.left + 8)
-      const lectureLeft = lecture?.getBoundingClientRect().left
-      const right = Math.min(document.documentElement.clientWidth - 8, bounds.right - 8,
-        lectureLeft !== undefined && lectureLeft > left ? lectureLeft - 8 : Infinity)
-      const chrome = card.offsetWidth - (waveRef.current?.offsetWidth ?? waveWidth)
+      const right = Math.min(document.documentElement.clientWidth - 8, bounds.right - 8)
+      const chrome = card.offsetWidth - waveWidth
       const width = Math.max(3, Math.min(WAVE_WIDTH[size], Math.floor((right - left) / zoom - chrome)))
       setWaveWidth(width)
       const cardWidth = (chrome + width) * zoom
@@ -136,7 +149,6 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
     const observer = new ResizeObserver(place)
     observer.observe(container)
     observer.observe(card)
-    if (lecture) observer.observe(lecture)
     // Text wrapping moves the absolutely positioned trail after resize without
     // resizing the player. Reposition when that host commits its new anchor.
     const trail = root.closest('.ps-text-trail')
@@ -148,18 +160,15 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
       anchorObserver.disconnect()
       window.removeEventListener('resize', place)
     }
-  }, [open, size, waveWidth])
+  }, [open, lecture, size, waveWidth])
 
   async function play() {
     const audio = audioRef.current
     if (!audio) return
     setError(false)
     onActivate(audio)
-    if (audio.error) audio.load()
-    if (audio.currentTime < startSeconds || audio.currentTime >= endSeconds - 0.05) audio.currentTime = startSeconds
-    try { await audio.play() } catch (reason) {
-      // Aborted by a newer seek, or blocked until a real gesture: stay paused, not an error.
-      if (!(reason instanceof DOMException && (reason.name === 'AbortError' || reason.name === 'NotAllowedError'))) setError(true)
+    try { await playListeningAudio(audio) } catch (reason) {
+      if (isPlaybackError(reason)) setError(true)
     }
   }
 
@@ -171,11 +180,11 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
   }
 
   function changeRate(speed: number) {
-    setRate(speed)
-    if (audioRef.current) audioRef.current.playbackRate = speed
+    if (audioRef.current) audioRef.current.defaultPlaybackRate = audioRef.current.playbackRate = speed
   }
 
   function onTrigger() {
+    if (lecture) { togglePlayback(); return }
     if (open) { setOpen(false); return }
     setShift(0)
     setOpen(true)
@@ -183,32 +192,119 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
     else if (audioRef.current) onActivate(audioRef.current)
   }
 
-  function seekTo(seconds: number) {
-    const next = Math.min(duration, Math.max(0, seconds))
-    setPosition(next)
-    const audio = audioRef.current
-    if (audio) {
-      audio.currentTime = startSeconds + next
-      audio.dispatchEvent(new Event(listeningPlayerSeekEvent))
-    }
-  }
+  return <span ref={rootRef} className="listening-player" data-size={size}
+    {...iconMotionInput}
+    data-playing={playing || undefined} data-open={!lecture && open || undefined}
+    onClick={(event) => event.stopPropagation()}>
+    <audio ref={attachAudio} src={src} preload="none"
+      onPlay={() => { setPlaying(true); setStarted(true); onActivate(audioRef.current!) }}
+      onPause={() => setPlaying(false)}
+      onEnded={() => setPlaying(false)}
+      onError={() => { setError(true); setPlaying(false) }}
+      onRateChange={() => { if (!lecture) setRate(audioRef.current!.playbackRate) }}
+      onLoadedMetadata={() => {
+        const audio = audioRef.current!
+        if (audio.currentTime < startSeconds) audio.currentTime = startSeconds
+        audio.playbackRate = audio.defaultPlaybackRate
+      }}
+      onTimeUpdate={() => {
+        const audio = audioRef.current!
+        // Media events still enforce the boundary when background tabs suspend rAF.
+        if (stopAtEnd(audio)) return
+        if (!playing) setPosition(Math.min(duration, Math.max(0, audio.currentTime - startSeconds)))
+      }}
+    />
+    <button ref={triggerRef} type="button" className="listening-player-trigger"
+      aria-expanded={lecture ? undefined : open} aria-label={`${label}录音${playing ? '（播放中）' : ''}`} title={`${label}录音`}
+      onClick={onTrigger}>
+      <Headphones size={16} variant={playing ? 'fill' : 'line'} aria-hidden="true" />
+    </button>
+    {lecture && error && <span className="listening-player-audio-error" role="alert">录音未能播放，请重试</span>}
+    {!lecture && open && <div ref={cardRef} className="listening-player-card" role="group" aria-label={`${label}录音`}
+      data-placement={placement} style={{ '--listening-card-shift': `${shift}px` } as CSSProperties}>
+      <button type="button" className="listening-player-play" aria-label={playing ? '暂停' : '播放'}
+        onClick={togglePlayback}>
+        <PlaybackIcon playing={playing} size={14} variant="fill" />
+      </button>
+      <ListeningProgress key={label} {...{ label, startSeconds, endSeconds, marks, position, started }} width={waveWidth}
+        onSeek={(seconds) => seekAudio(audioRef.current, startSeconds, endSeconds, seconds)}
+        jumpTo={(seconds) => {
+          seekAudio(audioRef.current, startSeconds, endSeconds, seconds)
+          if (audioRef.current?.paused) void play()
+        }} />
+      <button type="button" className="listening-player-speed" data-label={`${rate}×`}
+        data-changed={rate === 1 ? undefined : ''}
+        aria-label={`播放速度 ${rate} 倍，点击切换`}
+        onClick={() => changeRate(CLICK_NEXT[rate as (typeof RATES)[number]])}
+        onKeyDown={(event) => {
+          const index = RATES.indexOf(rate as (typeof RATES)[number])
+          const step = { ArrowUp: 1, ArrowRight: 1, ArrowDown: -1, ArrowLeft: -1 }[event.key]
+          if (step === undefined) return
+          event.preventDefault()
+          const next = RATES[index + step]
+          if (next !== undefined) changeRate(next)
+        }}>
+        <EqbIcon size={20} aria-hidden="true">
+          <path d="M4.5 17a8.1 8.1 0 1 1 15 0" />
+          <g className="listening-player-needle"
+            style={{ transform: `rotate(${NEEDLE_DEGREES[rate as (typeof RATES)[number]]}deg)` }}>
+            <path d="M12 14V8.75" />
+          </g>
+          <circle cx="12" cy="14" r="1.6" fill="currentColor" stroke="none" />
+        </EqbIcon>
+      </button>
+      {error && <span className="listening-player-error" role="alert">录音未能播放，点 ▶ 重试</span>}
+    </div>}
+  </span>
+}
+
+function seekAudio(audio: HTMLAudioElement | null, start: number, end: number, seconds: number) {
+  if (!audio) return
+  audio.currentTime = Math.min(end, Math.max(start, start + seconds))
+  audio.dispatchEvent(new Event(listeningPlayerSeekEvent))
+}
+
+function ListeningProgress({ label, startSeconds, endSeconds, marks, position, started = true, width, showDuration, onSeek, jumpTo }: {
+  label: string
+  startSeconds: number
+  endSeconds: number
+  marks?: Props['marks']
+  position: number
+  started?: boolean
+  width?: number
+  showDuration?: boolean
+  onSeek: (seconds: number) => void
+  jumpTo: (seconds: number) => void
+}) {
+  const trackRef = useRef<HTMLSpanElement>(null)
+  const [trackWidth, setTrackWidth] = useState(0)
+  const [dragPosition, setDragPosition] = useState<number | null>(null)
+  const duration = Math.max(0, endSeconds - startSeconds)
+  const shownPosition = dragPosition ?? position
+  const progress = duration > 0 ? Math.min(1, shownPosition / duration) : 0
+  const waveWidth = width ?? trackWidth
+
+  useLayoutEffect(() => {
+    if (width !== undefined || !trackRef.current) return
+    const track = trackRef.current
+    const resize = () => setTrackWidth(track.clientWidth)
+    resize()
+    const observer = new ResizeObserver(resize)
+    observer.observe(track)
+    return () => observer.disconnect()
+  }, [width])
 
   function pointerSeconds(event: PointerEvent<HTMLDivElement>) {
     const rect = event.currentTarget.getBoundingClientRect()
     return Math.min(duration, Math.max(0, ((event.clientX - rect.left) / rect.width) * duration))
   }
 
-  function jumpTo(seconds: number) {
-    seekTo(seconds)
-    if (audioRef.current?.paused) void play()
-  }
-
   function onWaveKey(event: KeyboardEvent<HTMLDivElement>) {
     const step = event.shiftKey ? 15 : 5
     const moves: Record<string, number> = { ArrowLeft: -step, ArrowDown: -step, ArrowRight: step, ArrowUp: step }
-    if (event.key in moves) seekTo(position + moves[event.key])
-    else if (event.key === 'Home') seekTo(0)
-    else if (event.key === 'End') seekTo(duration)
+    if (event.key in moves) onSeek(position + moves[event.key])
+    else if (event.key === 'Home') onSeek(0)
+    else if (event.key === 'End') onSeek(duration)
     else return
     event.preventDefault()
   }
@@ -243,39 +339,8 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
     .map((mark) => ({ x: toX(mark.startSeconds), width: toX(mark.endSeconds) - toX(mark.startSeconds) }))
     .filter((span) => span.width > 0)
 
-  return <span ref={rootRef} className="listening-player" data-size={size}
-    {...iconMotionInput}
-    data-playing={playing || undefined} data-open={open || undefined}
-    onClick={(event) => event.stopPropagation()}>
-    <audio ref={attachAudio} src={src} preload="none"
-      onPlay={() => { setPlaying(true); setStarted(true); onActivate(audioRef.current!) }}
-      onPause={() => setPlaying(false)}
-      onEnded={() => setPlaying(false)}
-      onError={() => { setError(true); setPlaying(false) }}
-      onLoadedMetadata={() => {
-        const audio = audioRef.current!
-        if (audio.currentTime < startSeconds) audio.currentTime = startSeconds
-        audio.playbackRate = rate
-      }}
-      onTimeUpdate={() => {
-        const audio = audioRef.current!
-        // Media events still enforce the boundary when background tabs suspend rAF.
-        if (stopAtEnd(audio)) return
-        if (!playing) setPosition(Math.min(duration, Math.max(0, audio.currentTime - startSeconds)))
-      }}
-    />
-    <button ref={triggerRef} type="button" className="listening-player-trigger"
-      aria-expanded={open} aria-label={`${label}录音${playing ? '（播放中）' : ''}`} title={`${label}录音`}
-      onClick={onTrigger}>
-      <Headphones size={16} variant={playing ? 'fill' : 'line'} aria-hidden="true" />
-    </button>
-    {open && <div ref={cardRef} className="listening-player-card" role="group" aria-label={`${label}录音`}
-      data-placement={placement} style={{ '--listening-card-shift': `${shift}px` } as CSSProperties}>
-      <button type="button" className="listening-player-play" aria-label={playing ? '暂停' : '播放'}
-        onClick={togglePlayback}>
-        <PlaybackIcon playing={playing} size={14} variant="fill" />
-      </button>
-      <span className="listening-player-track" style={{ width: waveWidth }}>
+  return <>
+      <span className="listening-player-track" style={width === undefined ? undefined : { width }} ref={trackRef}>
       {markItems.length > 0 && <span className="listening-player-marks">
         {markItems.map((mark) => <button key={mark.startSeconds} type="button"
           className="listening-player-mark" style={{ left: mark.x, width: mark.width }}
@@ -286,7 +351,7 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
             style={mark.labelShift > 0 ? { left: mark.labelShift } : undefined}>{mark.label}</span>}
         </button>)}
       </span>}
-      <div ref={waveRef} className="listening-player-wave" role="slider" tabIndex={0}
+      <div className="listening-player-progress" role="slider" tabIndex={0}
         aria-label={`${label}播放进度`} aria-valuemin={0} aria-valuemax={Math.round(duration)}
         aria-valuenow={Math.round(shownPosition)} aria-valuetext={`${clock(shownPosition)} / ${clock(duration)}`}
         data-dragging={dragPosition === null ? undefined : ''}
@@ -300,7 +365,7 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
         }}
         onPointerUp={(event) => {
           if (dragPosition === null) return
-          seekTo(pointerSeconds(event))
+          onSeek(pointerSeconds(event))
           setDragPosition(null)
         }}
         onPointerCancel={() => setDragPosition(null)}>
@@ -322,30 +387,78 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
       </div>
       </span>
       <span className="listening-player-time" aria-live="off">
-        {started || dragPosition !== null ? clock(shownPosition) : clock(duration)}
+        {showDuration ? `${clock(shownPosition)} / ${clock(duration)}` : started || dragPosition !== null ? clock(shownPosition) : clock(duration)}
       </span>
-      <button type="button" className="listening-player-speed" data-label={`${rate}×`}
-        data-changed={rate === 1 ? undefined : ''}
-        aria-label={`播放速度 ${rate} 倍，点击切换`}
-        onClick={() => changeRate(CLICK_NEXT[rate as (typeof RATES)[number]])}
-        onKeyDown={(event) => {
-          const index = RATES.indexOf(rate as (typeof RATES)[number])
-          const step = { ArrowUp: 1, ArrowRight: 1, ArrowDown: -1, ArrowLeft: -1 }[event.key]
-          if (step === undefined) return
-          event.preventDefault()
-          const next = RATES[index + step]
-          if (next !== undefined) changeRate(next)
-        }}>
-        <EqbIcon size={20} aria-hidden="true">
-          <path d="M4.5 17a8.1 8.1 0 1 1 15 0" />
-          <g className="listening-player-needle"
-            style={{ transform: `rotate(${NEEDLE_DEGREES[rate as (typeof RATES)[number]]}deg)` }}>
-            <path d="M12 14V8.75" />
-          </g>
-          <circle cx="12" cy="14" r="1.6" fill="currentColor" stroke="none" />
-        </EqbIcon>
+  </>
+}
+
+export function ListeningTransport({ audio, onActivate, sentenceControls }: {
+  audio: HTMLAudioElement | null | undefined
+  onActivate: Props['onActivate']
+  sentenceControls?: ReactNode
+}) {
+  const range = audio && audioRanges.get(audio)
+  const [time, setTime] = useState(0)
+  const [playing, setPlaying] = useState(false)
+  const [rate, setRate] = useState<number>(1)
+  const [error, setError] = useState(false)
+
+  useEffect(() => {
+    if (!audio) return
+    let frame = 0
+    const sync = () => {
+      cancelAnimationFrame(frame)
+      setTime(audio.currentTime)
+      setPlaying(!audio.paused)
+      setRate(audio.playbackRate)
+      setError(Boolean(audio.error))
+      if (!audio.paused) frame = requestAnimationFrame(sync)
+    }
+    const events = ['play', 'pause', 'ended', 'seeked', 'timeupdate', 'ratechange', 'error', 'loadstart'] as const
+    events.forEach(event => audio.addEventListener(event, sync))
+    sync()
+    return () => {
+      cancelAnimationFrame(frame)
+      events.forEach(event => audio.removeEventListener(event, sync))
+    }
+  }, [audio])
+
+  async function play() {
+    if (!audio) return
+    onActivate(audio)
+    setError(false)
+    try { await playListeningAudio(audio) } catch (reason) {
+      if (isPlaybackError(reason)) setError(true)
+    }
+  }
+
+  return <div className="listening-transport" role="group" aria-label="录音播放控制">
+    <div className="listening-transport-main">
+      <button type="button" className="listening-quiet-control" disabled={!range} onClick={() => {
+        if (audio && !audio.paused) audio.pause()
+        else void play()
+      }}>
+        <PlaybackIcon playing={Boolean(range && playing)} size={16} variant="fill" />
+        {range && playing ? '暂停' : '播放'}
       </button>
-      {error && <span className="listening-player-error" role="alert">录音未能播放，点 ▶ 重试</span>}
+      {range && <ListeningProgress key={range.label} {...range} showDuration
+        position={Math.min(range.endSeconds - range.startSeconds, Math.max(0, time - range.startSeconds))}
+        onSeek={(seconds) => seekAudio(audio ?? null, range.startSeconds, range.endSeconds, seconds)}
+        jumpTo={(seconds) => {
+          seekAudio(audio ?? null, range.startSeconds, range.endSeconds, seconds)
+          if (audio?.paused) void play()
+        }} />}
+    </div>
+    {sentenceControls && <div className="listening-transport-secondary">
+      {sentenceControls}
+      <button type="button" className="listening-quiet-control listening-transport-speed" disabled={!audio}
+        aria-label={`播放速度 ${rate} 倍，点击切换`}
+        onClick={() => {
+          if (audio) audio.defaultPlaybackRate = audio.playbackRate = CLICK_NEXT[rate as (typeof RATES)[number]] ?? 1
+        }}>
+        {rate}×
+      </button>
     </div>}
-  </span>
+    {audio && error && <p className="listening-audio-error" role="status">录音未能播放，请重试</p>}
+  </div>
 }
