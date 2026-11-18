@@ -3,7 +3,8 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync, linkSync, unlinkSync } from 'node:fs'
 import { randomUUID } from 'node:crypto'
 import path from 'node:path'
-import { importNck1ReviewCandidate, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
+import { loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
+import { hydratedEvidenceBase, importLocalReviewCandidate, withLocalReviewEvidence } from './review.mjs'
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import {
   assertSourceReferences, prepareSourceReferences, SOURCE_REFERENCES_FILE, sourceReferencesSchema,
@@ -54,7 +55,8 @@ try {
     : option(command === 'finalize' ? '--input' : '--references')
   const referenceBytes = existsSync(referencePath) ? readFileSync(referencePath) : null
   let sourceReferences = referenceBytes ? JSON.parse(referenceBytes.toString('utf8')) : null
-  const imported = importNck1ReviewCandidate(paperDir, loaded, sourceReferences?.candidateDigest)
+  const imported = importLocalReviewCandidate(paperDir, loaded,
+    command === 'prepare' && hydratedEvidenceBase(paperDir) ? null : sourceReferences?.candidateDigest)
   if (!imported.candidate || imported.issues.length) throw new Error(`Invalid source candidate: ${imported.issues[0]?.code}`)
   const binding = {
     authorityRef: imported.candidate.authority,
@@ -97,9 +99,9 @@ try {
       if (cellSelectors && cellSidecar || figures || scoringFigures || figureExclusions
         || process.argv.includes('--whole-document-writing-absence')) throw new Error('Cell continuation cannot combine figures, exclusions or absence')
       const input = { ...binding, sourceInput: loaded.sourceInput }
-      const prepared = cellSidecar
+      const prepared = withLocalReviewEvidence(paperDir, () => cellSidecar
         ? refreshSourceReferenceCellContinuations(input, JSON.parse(readFileSync(option('--adjacent-cell-sidecar'), 'utf8')))
-        : prepareSourceReferenceCellContinuations(input, JSON.parse(readFileSync(option('--adjacent-cell-continuations'), 'utf8')))
+        : prepareSourceReferenceCellContinuations(input, JSON.parse(readFileSync(option('--adjacent-cell-continuations'), 'utf8'))))
       cellRequest = { proposal: prepared.sidecar, requests: prepared.requests,
         status: prepared.pending === false ? 'review_record_retained' : 'awaiting_independent_source_page_review' }
     }
@@ -121,7 +123,8 @@ try {
       }
       proposal.wholeDocumentWritingAbsence = { kind: WHOLE_DOCUMENT_ABSENCE_KIND, sourceSetDigest: evidence.sourceSetDigest,
         evidenceSha256: sha256(ocr.evidenceBytes), confirmationSha256: sha256(ocr.confirmationBytes), authorSessionId, review: null }
-      const { subject, subjectDigest } = wholeDocumentAbsenceSubject({ sidecar: proposal, ...binding, sourceInput: loaded.sourceInput, requireReview: false })
+      const { subject, subjectDigest } = withLocalReviewEvidence(paperDir, () =>
+        wholeDocumentAbsenceSubject({ sidecar: proposal, ...binding, sourceInput: loaded.sourceInput, requireReview: false }))
       absenceRequest = { proposal, subject, subjectDigest, review: null }
     }
     writeNew(output, `${JSON.stringify({
@@ -137,11 +140,11 @@ try {
     console.log(JSON.stringify({ status: 'local_capture_prepared', output, paperId: loaded.materialization.paperId }))
   } else {
     assertSourceReferences({ ...binding, sidecar: sourceReferences })
-    assertSourceReferenceAdmission({ ...binding, sidecar: sourceReferences, sourceInput: loaded.sourceInput,
+    withLocalReviewEvidence(paperDir, () => assertSourceReferenceAdmission({ ...binding, sidecar: sourceReferences, sourceInput: loaded.sourceInput,
       referenceSourceManifest: loaded.manifest,
       referenceOcrSourceBytes: loadReferenceOcrSourceBytes(paperDir, {
         producerVersion: sourceReferences?.producerVersion, canonicalOcrSourceBytes: loaded.sourceInput.ocrSourceBytes,
-      }) })
+      }) }))
     if (command === 'verify') {
       console.log(JSON.stringify({ status: 'local_capture_verified', paperId: loaded.materialization.paperId,
         sourceReferencesDigest: sha256(referenceBytes) }))
@@ -153,7 +156,8 @@ try {
       const includeScoring = process.argv.includes('--include-scoring')
       const html = buildAnswerOnlyHtml({ ...binding, sourceReferences,
         ...(['zhejiang-legacy', 'national-legacy'].includes(loaded.materialization.profileId)
-          ? { canonicalPlan: compileNck1MaterializationCandidatePreview(imported.candidate).compilation?.artifacts?.canonicalPaper?.paperPlan } : {}),
+          ? { canonicalPlan: withLocalReviewEvidence(paperDir, () =>
+              compileNck1MaterializationCandidatePreview(imported.candidate)).compilation?.artifacts?.canonicalPaper?.paperPlan } : {}),
         paperName: loaded.config.provenance.paperName, includeScoring })
       mkdirSync(output, { recursive: true })
       activeQaOutput = output

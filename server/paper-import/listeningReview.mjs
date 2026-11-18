@@ -59,7 +59,7 @@ export function validateListeningReview(rootDir, review, subject, transcript) {
   return validateReview(rootDir, review, subject, transcript, review.schemaVersion)
 }
 
-function validateReview(rootDir, review, subject, transcript, version) {
+function validateReview(rootDir, review, subject, transcript, version, retained = false) {
   if (!exactKeys(review, ['schemaVersion', 'subject', 'reviewedBy', 'reviewedAt',
     'method', 'untrustedContentHandledAsData', 'scope', 'evidence', 'groups'])
     || review.schemaVersion !== version
@@ -89,7 +89,7 @@ function validateReview(rootDir, review, subject, transcript, version) {
     const bytes = readFileSync(evidencePath(rootDir, file.path))
     if (bytes.length !== file.byteLength || sha256(bytes) !== file.sha256) fail(`changed evidence: ${file.path}`)
     const record = JSON.parse(bytes.toString('utf8'))
-    if (review.method === 'agent_asr_comparison' && file.kind === 'asr_window') {
+    if (!retained && review.method === 'agent_asr_comparison' && file.kind === 'asr_window') {
       asrWords.set(file.path, listeningAsrTokens([{ ...record, ...file.window }]).words)
     }
     if (version === LISTENING_REVIEW_VERSION && file.kind === 'asr_window'
@@ -112,7 +112,9 @@ function validateReview(rootDir, review, subject, transcript, version) {
   }
   if (version === LISTENING_REVIEW_VERSION) {
     if (ruleNotes.length > 1 || (review.method !== 'audio_source_comparison' && ruleNotes.length !== 1)) fail('requires one v2 rule summary')
-    for (const notes of ruleNotes) {
+    // A sealed review already checked the exact rule/ASR bytes with its
+    // original reader, including the word timings used for agent judgments.
+    for (const notes of retained ? [] : ruleNotes) {
       try { assertListeningRuleEvidence(notes, review, transcript, asrWords) } catch (error) { fail(error.message) }
     }
   }
@@ -173,6 +175,22 @@ export function readListeningReview(rootDir, subject, transcript) {
   const bytes = readFileSync(full)
   const validated = validateListeningReview(rootDir, JSON.parse(bytes.toString('utf8')), subject, transcript)
   return { ...validated, digest: sha256(bytes) }
+}
+
+// The sealed proof covers the entire navigation sidecar and all its evidence.
+// A changed boundary must use ordinary admission, where every group is checked.
+export function readRetainedListeningReview(rootDir, subject, transcript, retainedBytes) {
+  const bytes = retainedBytes(LISTENING_REVIEW_FILE)
+  if (!bytes) return null
+  const review = JSON.parse(bytes.toString('utf8'))
+  const previous = review.subject
+  if (!['listening-review-v1', LISTENING_REVIEW_VERSION].includes(review.schemaVersion)
+    || !previous || digestJson({ ...previous, sourceDigest: subject.sourceDigest,
+      candidateDigest: subject.candidateDigest }) !== digestJson(subject)
+    || !Array.isArray(review.evidence)
+    || review.evidence.some(file => !retainedBytes(file.path))) return null
+  const validated = validateReview(rootDir, review, previous, transcript, review.schemaVersion, true)
+  return { ...validated, review: { ...review, subject }, digest: sha256(bytes) }
 }
 
 // Only persisted revision/approval consumers call this entry, after their

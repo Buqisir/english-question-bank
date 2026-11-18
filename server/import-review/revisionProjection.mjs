@@ -17,7 +17,7 @@ import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical
 import { displayVariantArtifact } from '../../shared/paper-canonical/richContent.mjs'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { LEGACY_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
-import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview, readSealedListeningReview } from '../paper-import/listeningReview.mjs'
+import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview, readRetainedListeningReview, readSealedListeningReview } from '../paper-import/listeningReview.mjs'
 import { SOURCE_REFERENCES_FILE, parseSourceReferencesBytes } from '../paper-import/sourceReferences.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../paper-import/sourceReferenceSemantics.mjs'
 import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../paper-import/sourceReferenceAdmission.mjs'
@@ -55,8 +55,9 @@ import {
   nck1OcrSourceSetDigest,
   resolveConfirmedNck1OcrEvidence,
   validateNck1OcrSourceEvidence,
+  withRetainedNck1OcrEvidence,
 } from '../paper-import/nck1OcrSourceEvidence.mjs'
-import { assertListeningAudioManifest, assertListeningAudioSource } from '../paper-import/listeningAudioEvidence.mjs'
+import { LISTENING_AUDIO_PATHS, assertListeningAudioManifest, assertListeningAudioSource } from '../paper-import/listeningAudioEvidence.mjs'
 import {
   PAPER_PAGINATION_PLAN_FILE_NAME,
   productPageLimitsForPlan,
@@ -582,16 +583,24 @@ function primarySourceType(materialization, analyzedPackage = false) {
   return source?.mediaType?.includes('wordprocessingml') ? 'docx' : 'pdf'
 }
 
-function loadReviewedListening(rootDir, loaded, candidate = null, sealedListening = null) {
+export function loadReviewedListening(rootDir, loaded, candidate = null, sealedListening = null, retainedBytes = null, retainedBase = null) {
   if (!existsSync(resolveReviewFile(rootDir, LISTENING_REVIEW_FILE))) return null
-  const subject = listeningReviewSubject(loaded, candidate || importNck1ReviewCandidate(rootDir, loaded).candidate)
+  const subject = listeningReviewSubject(loaded, candidate
+    || importNck1ReviewCandidate(rootDir, loaded, null, retainedCandidateBinding(retainedBytes, retainedBase)).candidate)
+  const transcript = loaded.materialization.listening.transcript
+  if (retainedBytes?.(LISTENING_AUDIO_PATHS.original) && retainedBytes(LISTENING_AUDIO_PATHS.playback)) {
+    const retained = readRetainedListeningReview(rootDir, subject, transcript, retainedBytes)
+    if (retained) return retained
+  }
   return sealedListening
-    ? readSealedListeningReview(rootDir, subject, loaded.materialization.listening.transcript,
+    ? readSealedListeningReview(rootDir, subject, transcript,
       sealedListening.revision, sealedListening.manifest)
-    : readListeningReview(rootDir, subject, loaded.materialization.listening.transcript)
+    : readListeningReview(rootDir, subject, transcript)
 }
 
-export function importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest = null) {
+export function importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest = null, retainedBase = null) {
+  const requireExactIdentity = Boolean(expectedCandidateDigest)
+  expectedCandidateDigest ||= retainedBase?.candidateDigest
   const reviewPath = resolveReviewFile(rootDir, LISTENING_REVIEW_FILE)
   if (!expectedCandidateDigest && existsSync(reviewPath)) {
     expectedCandidateDigest = readJson(reviewPath, LISTENING_REVIEW_FILE)?.subject?.candidateDigest
@@ -622,15 +631,21 @@ export function importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDige
   // Keep invalid-source diagnostics distinct from an otherwise valid Candidate
   // with the wrong approval identity (publication treats those differently).
   if (!imported.candidate || imported.issues.length) return imported
-  if (expectedCandidateDigest && imported.candidate?.candidateDigest !== expectedCandidateDigest) {
+  // A byte-retained sidecar may still name the previous Candidate after a
+  // content edit. An explicit expected identity always remains strict.
+  if (expectedCandidateDigest && imported.candidate?.candidateDigest !== expectedCandidateDigest
+    && (requireExactIdentity || expectedCandidateDigest !== retainedBase?.candidateDigest)) {
     fail('Stored Candidate does not match a retained authority', 'IMPORT_REVIEW_PROJECTION_MISMATCH')
   }
   return imported
 }
 
-export function reviewBundleFilePaths(rootDir, candidate = null) {
-  const loaded = loadNck1ReviewSource(rootDir)
-  return reviewBundleFilePathsFromSource(rootDir, loaded, candidate)
+export function reviewBundleFilePaths(rootDir, candidate = null, evidenceBase = null) {
+  return withRetainedReviewEvidence(rootDir, evidenceBase, retainedBytes => {
+    const loaded = loadNck1ReviewSource(rootDir)
+    const reviewedListening = loadReviewedListening(rootDir, loaded, candidate, null, retainedBytes, evidenceBase?.revision)
+    return reviewBundleFilePathsFromSource(rootDir, loaded, candidate, { reviewedListening })
+  })
 }
 
 export function reviewBundleFilePathsForProjection(rootDir, projection) {
@@ -1097,10 +1112,11 @@ export function validateAgentOcrCorrectionSidecar(sidecar, { materialization, pa
 export function buildImportReviewProjection(
   rootDir,
   { reviewKind = 'candidate', requireAnalyses = false, expectedCandidateDigest = null } = {},
+  evidenceBase = null,
 ) {
   return reviewKind === 'ocr'
     ? buildNck1OcrReviewProjection(rootDir)
-    : buildNck1ReviewProjection(rootDir, { requireAnalyses, expectedCandidateDigest })
+    : buildNck1ReviewProjection(rootDir, { requireAnalyses, expectedCandidateDigest }, evidenceBase)
 }
 
 function visibleStructure(projected) {
@@ -1742,8 +1758,60 @@ export function buildNck1CompatibilityPackage({
   }
 }
 
-export function buildNck1ReviewProjection(rootDir, options = {}) {
-  return buildNck1ReviewProjectionInternal(rootDir, options, readFrozenProducts)
+export function buildNck1ReviewProjection(rootDir, options = {}, evidenceBase = null) {
+  return buildNck1ReviewProjectionInternal(rootDir, options, readFrozenProducts, null, null, evidenceBase)
+}
+
+const evidenceSourceRoles = new Set(['question_source', 'official_answers', 'question_and_answers', 'unofficial_listening'])
+
+// Finalize gets its base and directory from the Review store. The CLI can use
+// an authenticated hydrate receipt for local computation only.
+export function withRetainedReviewEvidence(rootDir, base, compute) {
+  const revision = base?.revision
+  const manifest = revision?.manifest
+  if (!revision?.id || revision.reviewKind !== 'candidate' || !revision.state || revision.state === 'uploading'
+    || !revision.finalizedAt || !Array.isArray(manifest?.files) || revision.bundleDigest !== manifest.bundleDigest
+    || ['paperId', 'sourceDigest', 'candidateDigest'].some(key => revision[key] !== manifest[key])
+    || reviewSubjectBundleDigest(manifest) !== revision.bundleDigest) return compute(null)
+
+  const files = new Map(manifest.files.map(file => [file.path, file]))
+  const previousDirectory = base.directory && path.resolve(base.directory) !== path.resolve(rootDir)
+    ? base.directory : null
+  const retainedBytes = relative => {
+    const file = files.get(relative)
+    if (!file) return null
+    try {
+      const read = directory => readFileSync(resolveReviewFile(directory, relative))
+      const matches = bytes => bytes.byteLength === file.byteLength && sha256(bytes) === file.sha256
+      const bytes = read(rootDir)
+      return matches(bytes) && (!previousDirectory || matches(read(previousDirectory))) ? bytes : null
+    } catch {
+      return null
+    }
+  }
+  const source = readJson(resolveReviewFile(rootDir, 'universal-source-manifest.json'), 'universal-source-manifest.json')
+  const oldDocuments = manifest.files.filter(file => evidenceSourceRoles.has(file.role))
+  if (source.paperId !== revision.paperId || !oldDocuments.length || !Array.isArray(source.documents)
+    || source.documents.length !== oldDocuments.length
+    || new Set(source.documents.map(document => document.path)).size !== oldDocuments.length
+    || !source.documents.every(document => {
+      const file = files.get(document.path)
+      return evidenceSourceRoles.has(file?.role) && file.role === document.role
+        && file.mediaType === document.mediaType && file.sha256 === document.sha256
+        && file.byteLength === document.byteLength && retainedBytes(document.path)
+    })) return compute(null)
+
+  const evidence = retainedBytes(`materialization/${NCK1_OCR_EVIDENCE_FILE_NAME}`)
+  const confirmation = retainedBytes(`materialization/${NCK1_OCR_CONFIRMATION_FILE_NAME}`)
+  const run = () => compute(retainedBytes)
+  return evidence && confirmation
+    ? withRetainedNck1OcrEvidence(revision.paperId, evidence, confirmation, run)
+    : run()
+}
+
+export function retainedCandidateBinding(retainedBytes, revision) {
+  if (!revision) return null
+  return (retainedBytes?.(LISTENING_REVIEW_FILE) || retainedBytes?.(SOURCE_REFERENCES_FILE)) ? revision : null
 }
 
 // Server replay path only: revision is loaded from the persisted Review store,
@@ -1767,7 +1835,8 @@ function sealedReferenceReceipt(revision, manifest = revision.manifest) {
 export function buildNck1SealedReviewProjection(rootDir, revision, { manifest = revision.manifest, ...options } = {}) {
   return buildNck1ReviewProjectionInternal(rootDir,
     { ...options, expectedCandidateDigest: revision.candidateDigest }, readFrozenProducts,
-    sealedReferenceReceipt(revision, manifest), { revision, manifest })
+    sealedReferenceReceipt(revision, manifest), { revision, manifest },
+    { revision: { ...revision, manifest }, directory: rootDir })
 }
 
 // Only this entry constructs the private product reader. There is no public
@@ -1816,7 +1885,8 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
       }
       const projection = buildNck1ReviewProjectionInternal(snapshot.directory,
         { requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest }, readSealedProducts,
-        sealedReferenceReceipt(revision), { revision, manifest: revision.manifest })
+        sealedReferenceReceipt(revision), { revision, manifest: revision.manifest },
+        { revision, directory: snapshot.directory })
       onMemory('projection')
       baseline = buildStoredReviewSubject({ revision, preview, storedFiles, fileEvidence,
         validatedListeningReview: projection.reviewedListening })
@@ -1836,22 +1906,26 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
   })
 }
 
-function buildNck1ReviewProjectionInternal(rootDir, options = {}, readProducts, referenceReceipt = null, sealedListening = null) {
-  return withNck1MaterializationSourceCache(() => buildNck1ReviewProjectionUncached(rootDir, options, readProducts, referenceReceipt, sealedListening))
+function buildNck1ReviewProjectionInternal(rootDir, options = {}, readProducts, referenceReceipt = null, sealedListening = null, evidenceBase = null) {
+  return withRetainedReviewEvidence(rootDir, evidenceBase, retainedBytes =>
+    withNck1MaterializationSourceCache(() => buildNck1ReviewProjectionUncached(rootDir,
+      options, readProducts, referenceReceipt, sealedListening, retainedBytes,
+      retainedBytes && evidenceBase.revision)))
 }
 
 function buildNck1ReviewProjectionUncached(rootDir, {
   requireAnalyses = false,
   analysisProfile = LEGACY_NCK1_ANALYSIS_PROFILE,
   expectedCandidateDigest = null,
-} = {}, readProducts, referenceReceipt, sealedListening) {
+} = {}, readProducts, referenceReceipt, sealedListening, retainedBytes, retainedBase) {
   const loaded = loadNck1ReviewSource(rootDir)
-  const imported = importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest)
+  const imported = importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest,
+    !expectedCandidateDigest ? retainedCandidateBinding(retainedBytes, retainedBase) : null)
   if (!imported.candidate || imported.issues.length > 0) {
     const issue = imported.issues[0]
     fail(`${issue?.code || 'MATERIALIZATION_INVALID'}: ${issue?.message || 'Candidate derivation failed'}`)
   }
-  const reviewedListening = loadReviewedListening(rootDir, loaded, imported.candidate, sealedListening)
+  const reviewedListening = loadReviewedListening(rootDir, loaded, imported.candidate, sealedListening, retainedBytes)
   const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
   if (!preview.compilation) {
     const issue = preview.unresolvedIssues?.[0]

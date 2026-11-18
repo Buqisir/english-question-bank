@@ -24,7 +24,7 @@ import { nck1OcrSourceSetDigest } from '../paper-import/nck1OcrSourceEvidence.mj
 import { assertPaperStorageMounted } from '../paper-import/paperStorageMount.mjs'
 import { reviewUploadMetrics } from './reviewUploadMetrics.mjs'
 import { acquireRevisionUpload, tryRevisionFinalization } from './reviewUploadLocks.mjs'
-import { finalizeContentSubject, finalizeInventory, ocrConfirmationComputation,
+import { finalizeContentSubject, finalizeInventory, finalizeProjection, ocrConfirmationComputation,
   validateOcrConfirmationRevision, deriveOcrConfirmationRevision, assertOcrConfirmationRevision } from './finalizeComputation.mjs'
 import { ensureReviewCompatibilityShape } from './reviewCompatibilitySchema.mjs'
 import { readReviewSubjectBackfillStatus } from './reviewSubjectBackfillStatus.mjs'
@@ -1343,6 +1343,14 @@ export function createImportReviewStore({
     ], metrics)
   }
 
+  function finalizedEvidenceBase(revision) {
+    if (revision.reviewKind !== 'candidate' || !revision.manifest.expectedBaseRevisionId) return null
+    const base = getRevision(revision.manifest.expectedBaseRevisionId)
+    if (base?.paperId !== revision.paperId || base.reviewKind !== 'candidate'
+      || !base.finalizedAt || base.state === 'uploading') return null
+    return { revision: base, directory: revisionDirectory(base.id) }
+  }
+
   async function finalizeUploadedRevision(revisionId, { metrics = {} } = {}) {
     const timer = finalizationTimer(revisionId, metrics)
     const finishActivity = beginReviewActivity('finalize')
@@ -1364,6 +1372,7 @@ export function createImportReviewStore({
         timer.phase('projection')
         prepared = await runFinalizeWorker(revisionDirectory(revisionId), {
           ...status.revision, rendererBuildId: currentRendererBuildId(),
+          evidenceBase: finalizedEvidenceBase(status.revision),
         }, {
           onPhase: name => timer.phase(name),
         })
@@ -1415,11 +1424,13 @@ export function createImportReviewStore({
       assertStoredRevisionFiles(status.revision)
       timer.phase('projection')
     }
-    const projection = prepared?.projection || projectRevision(directory, {
-      reviewKind: status.revision.reviewKind,
-      requireAnalyses: status.revision.reviewKind === 'candidate',
-      expectedCandidateDigest: status.revision.candidateDigest,
-    })
+    const projection = prepared?.projection || (projectRevision === buildImportReviewProjection
+      ? finalizeProjection(directory, status.revision, { evidenceBase: finalizedEvidenceBase(status.revision) })
+      : projectRevision(directory, {
+        reviewKind: status.revision.reviewKind,
+        requireAnalyses: status.revision.reviewKind === 'candidate',
+        expectedCandidateDigest: status.revision.candidateDigest,
+      }))
     timer.phase('identityAndReport')
     assertProjectionIdentity(projection, status.revision)
     if (status.revision.reviewKind === 'candidate'

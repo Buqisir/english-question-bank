@@ -40,13 +40,16 @@ import {
 import {
   buildNck1OcrReviewProjection,
   buildNck1ReviewProjection,
-  buildNck1SealedReviewProjection,
+  loadReviewedListening,
   loadNck1ReviewSource,
   importNck1ReviewCandidate,
   ocrReviewBundleFilePaths,
   reviewBundleFilePaths,
+  reviewBundleFilePathsForProjection,
   resolveReviewFile,
+  retainedCandidateBinding,
   validateAgentOcrCorrectionSidecar,
+  withRetainedReviewEvidence,
 } from '../../server/import-review/revisionProjection.mjs'
 import { compileNck1MaterializationCandidatePreview, importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
 import { validateInlineBlankTextBoundaries } from '../../shared/paper-canonical/inlineBlankBoundaries.mjs'
@@ -82,7 +85,7 @@ import { reuseSealedOcrConfirmation } from './lib-sealed-ocr-resume.mjs'
 import { checkOcrGenerationPlan, planOcrGeneration } from './lib-ocr-generation.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
-import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
+import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { LISTENING_REVIEW_VERSION, assertListeningUploadBudget } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
 import { applyListeningInstructionCorrection, correctedListeningCount, LISTENING_INSTRUCTION_CORRECTION_FILE, LISTENING_INSTRUCTION_CORRECTION_POLICY } from '../../server/paper-import/listeningInstructionCorrection.mjs'
 import {
@@ -276,6 +279,40 @@ function fileDescriptors(paperDir, files = reviewBundleFilePaths(paperDir)) {
   return descriptors
 }
 
+export function hydratedEvidenceBase(paperDir) {
+  const file = path.join(paperDir, 'signals', 'review-restore.json')
+  if (!existsSync(file)) return null
+  const restore = requiredJson(file, 'Review restore binding')
+  const revision = restore.sealedRevision
+  if (!revision) return null
+  const target = resolveReviewOrigin(root, { ...process.env,
+    QUESTION_BANK_IMPORT_OPS_ORIGIN: process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN || restore.origin })
+  if (restore.schemaVersion !== 'review-restore-v1' || restore.origin !== target
+    || restore.paperId !== revision.paperId || restore.revisionId !== revision.id
+    || restore.bundleDigest !== revision.bundleDigest) fail('Review restore binding does not match the retained revision')
+  return { revision }
+}
+
+export function buildLocalReviewProjection(paperDir, options) {
+  return buildNck1ReviewProjection(paperDir, options, hydratedEvidenceBase(paperDir))
+}
+
+export function withLocalReviewEvidence(paperDir, compute) {
+  return withRetainedReviewEvidence(paperDir, hydratedEvidenceBase(paperDir), compute)
+}
+
+export function importLocalReviewCandidate(paperDir, loaded, expectedDigest = null) {
+  const base = hydratedEvidenceBase(paperDir)
+  return withRetainedReviewEvidence(paperDir, base, retained =>
+    importNck1ReviewCandidate(paperDir, loaded, expectedDigest,
+      !expectedDigest ? retainedCandidateBinding(retained, base?.revision) : null))
+}
+
+export function loadLocalReviewedListening(paperDir, loaded, candidate) {
+  return withLocalReviewEvidence(paperDir, retained =>
+    loadReviewedListening(paperDir, loaded, candidate, null, retained))
+}
+
 async function uploadReviewBundle(paperDir, manifest) {
   return uploadBundle({
     paperDir, manifest, api, resolveReviewFile,
@@ -328,7 +365,7 @@ export function reviewManifest(paperDir, projection, resolvesIssueIds = [], buil
         }
       : { analysisDigest: projection.analysisDigest }),
     producerBuildId: buildId,
-    files: fileDescriptors(paperDir),
+    files: fileDescriptors(paperDir, reviewBundleFilePathsForProjection(paperDir, projection)),
     resolvesIssueIds,
   }
   return { ...manifest, bundleDigest: reviewBundleDigest(manifest) }
@@ -357,7 +394,7 @@ async function pushRevision(paperId) {
   const paperDir = paperDirectory(paperId)
   const loaded = loadNck1ReviewSource(paperDir)
   assertImportSubmissionReady(paperDir, loaded.materialization, loaded)
-  const projection = buildNck1ReviewProjection(paperDir, { requireAnalyses: true })
+  const projection = buildLocalReviewProjection(paperDir, { requireAnalyses: true })
   const boundaryIssues = validateInlineBlankTextBoundaries(projection.compilation.artifacts.canonicalPaper.questionGroups)
   if (boundaryIssues.length) fail(JSON.stringify(boundaryIssues, null, 2))
   const manifest = reviewManifest(paperDir, projection, resolvedIssueIds())
@@ -416,7 +453,7 @@ async function paginationQa(paperId) {
   let policy
   let slotByGroup = new Map()
   try {
-    projection = buildNck1ReviewProjection(paperDir, { requireAnalyses: true })
+    projection = buildLocalReviewProjection(paperDir, { requireAnalyses: true })
     assertApplicationGivenOwnership(projection.compilation.artifacts.canonicalPaper.questionGroups
       .find(group => group.variant.family === 'application-writing'))
     const sourceHasListening = projection.paginationSlotBindings.some((entry) =>
@@ -650,6 +687,8 @@ async function hydrate(paperId) {
   if (
     revision.manifest.bundleDigest !== revision.bundleDigest
     || reviewBundleDigest(revision.manifest) !== revision.bundleDigest
+    || ['sourceDigest', 'candidateDigest']
+      .some(key => revision.manifest[key] !== revision[key])
     || (revision.id === status.latest?.id
       && !exactFileDescriptors(revision.manifest.files, status.files || []))
   ) fail('Selected Review revision manifest, file inventory, or bundleDigest does not close')
@@ -672,27 +711,10 @@ async function hydrate(paperId) {
       mkdirSync(path.dirname(filePath), { recursive: true })
       writeFileSync(filePath, downloaded.bytes)
     }
-    const projection = buildNck1SealedReviewProjection(temporary, revision, { requireAnalyses: false })
-    const identity = {
-      sourceDigest: projection.sourceDigest,
-      candidateDigest: projection.candidateDigest,
-      visibleStructureDigest: projection.visibleStructureDigest,
-      ...(projection.importProfile
-        ? {
-            importProfile: projection.importProfile,
-            paragraphSummariesDigest: projection.paragraphSummariesDigest,
-            publicSearchMetadataDigest: projection.publicSearchMetadataDigest,
-            ...(projection.analysisDigest ? { analysisDigest: projection.analysisDigest } : {}),
-          }
-        : { analysisDigest: projection.analysisDigest }),
-    }
-    for (const [key, value] of Object.entries(identity)) {
-      if (revision.manifest[key] !== value) {
-        fail(`Hydrated Review ${key} does not match its finalized manifest`)
-      }
-    }
-    const report = projection.ocrCorrectionReport
-    if (report) {
+    const reportPath = 'agent-ocr-correction-report-v2.json'
+    if (revision.manifest.files.some(file => file.path === reportPath)
+      || revision.manifest.ocrCorrectionReportDigest) {
+      const report = requiredJson(resolveReviewFile(temporary, reportPath), reportPath)
       if (digestJson(report) !== revision.manifest.ocrCorrectionReportDigest) {
         fail('Hydrated OCR correction report does not match its finalized manifest')
       }
@@ -721,6 +743,8 @@ async function hydrate(paperId) {
     writeFileSync(restorePath, `${JSON.stringify({
       schemaVersion: 'review-restore-v1', paperId, origin: origin(),
       revisionId: revision.id, bundleDigest: revision.bundleDigest,
+      sealedRevision: Object.fromEntries(['id', 'paperId', 'reviewKind', 'state', 'finalizedAt',
+        'bundleDigest', 'sourceDigest', 'candidateDigest', 'manifest'].map(key => [key, revision[key]])),
     }, null, 2)}\n`, { flag: 'wx', mode: 0o600 })
     renameSync(temporary, paperDir)
   } catch (error) {
@@ -1014,7 +1038,7 @@ function verifyAnalyses(paperId) {
   if (config.importProfile === 'public-paper-v1' && config.withTeachingAnalyses !== true) {
     fail('public-paper-v1 does not use teaching analyses; run verify-summaries instead')
   }
-  const projection = buildNck1ReviewProjection(
+  const projection = buildLocalReviewProjection(
     paperDirectory(paperId),
     { requireAnalyses: true },
   )
@@ -1105,7 +1129,7 @@ function listeningReview(paperId, command) {
   if (authoredBytes && option('--method') && JSON.parse(authoredBytes).method !== method) fail('Listening review method differs from --method')
   const expectedDigest = option('--candidate-digest') || (authoredBytes
     ? JSON.parse(authoredBytes.toString('utf8'))?.subject?.candidateDigest : null)
-  const imported = importNck1ReviewCandidate(paperDir, loaded, expectedDigest)
+  const imported = importLocalReviewCandidate(paperDir, loaded, expectedDigest)
   if (!imported.candidate || imported.issues.length) fail(imported.issues[0]?.message || 'Invalid listening Candidate')
   const subject = listeningReviewSubject(loaded, imported.candidate)
   const transcript = loaded.materialization.listening.transcript
@@ -1150,7 +1174,7 @@ function listeningReview(paperId, command) {
       }
     }
     writeFileSync(active, bytes)
-  } else validated = readListeningReview(paperDir, subject, transcript)
+  } else validated = loadLocalReviewedListening(paperDir, loaded, imported.candidate)
   if (!validated) fail('No listening review exists')
   console.log(JSON.stringify({ paperId, validation: 'PASS', scope: validated.review.scope,
     method: validated.review.method,
@@ -1223,7 +1247,7 @@ async function preprocessingReport(paperId) {
   const output = option('--output')
   if (!evidencePath || !output) fail('preprocessing-report requires --evidence <evidence.json> --output <report.md>')
   const evidenceFile = path.resolve(evidencePath)
-  const projection = buildNck1ReviewProjection(paperDirectory(paperId))
+  const projection = buildLocalReviewProjection(paperDirectory(paperId))
   const evidence = requiredJson(evidenceFile, 'handoff evidence')
   const reviewStatus = ['preprocessing-handoff-evidence-v4', 'preprocessing-handoff-evidence-v5'].includes(evidence.schemaVersion) && evidence.screen
     ? await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`) : null
@@ -1242,7 +1266,7 @@ function summaryCandidate(paperDir) {
   if (loaded.config.importProfile !== 'public-paper-v1' || loaded.analyzedPackage) {
     fail('Paragraph summaries are only available for raw-source public-paper-v1 workspaces')
   }
-  const imported = importNck1ReviewCandidate(paperDir, loaded)
+  const imported = importLocalReviewCandidate(paperDir, loaded)
   if (!imported.candidate || imported.issues.length) {
     const issue = imported.issues[0]
     fail(`${issue?.code || 'MATERIALIZATION_INVALID'}: ${issue?.message || 'Candidate derivation failed'}`)
@@ -1379,7 +1403,7 @@ async function approvedLocalReview(paperId) {
   if (!approval || status.latest?.state !== 'approved') {
     fail(`${paperId} has no current approved revision`)
   }
-  const projection = buildNck1ReviewProjection(paperDir, { requireAnalyses: true })
+  const projection = buildLocalReviewProjection(paperDir, { requireAnalyses: true })
   for (const [actual, expected, label] of [
     [projection.sourceDigest, approval.sourceDigest, 'sourceDigest'],
     [projection.candidateDigest, approval.candidateDigest, 'candidateDigest'],
@@ -1800,7 +1824,9 @@ async function main() {
   }
   if (command === 'push') await pushRevision(paperId)
   else if (['search-sidecar-input', 'get-search-sidecar', 'upload-search-sidecar'].includes(command)) await searchSidecar(command, paperId)
-  else if (['prepare-listening-instruction-correction', 'finalize-listening-instruction-correction', 'verify-listening-instruction-correction'].includes(command)) listeningInstructionCorrection(paperId, command)
+  else if (['prepare-listening-instruction-correction', 'finalize-listening-instruction-correction', 'verify-listening-instruction-correction'].includes(command)) {
+    withLocalReviewEvidence(paperDirectory(paperId), () => listeningInstructionCorrection(paperId, command))
+  }
   else if (['prepare-listening-review', 'finalize-listening-review', 'verify-listening-review'].includes(command)) listeningReview(paperId, command)
   else if (command === 'pagination-qa') await paginationQa(paperId)
   else if (command === 'hydrate') await hydrate(paperId)
@@ -1812,8 +1838,12 @@ async function main() {
   else if (command === 'proofread-ocr') await proofreadOcr(paperId)
   else if (command === 'pull-ocr-confirmation') await pullOcrConfirmation(paperId)
   else if (command === 'reuse-ocr-confirmation') await reuseOcrConfirmation(paperId)
-  else if (command === 'finalize-ocr-correction-report') finalizeOcrCorrectionReport(paperId)
-  else if (['prepare-spelling', 'finalize-spelling', 'verify-spelling'].includes(command)) spellingReview(paperId, command)
+  else if (command === 'finalize-ocr-correction-report') {
+    withLocalReviewEvidence(paperDirectory(paperId), () => finalizeOcrCorrectionReport(paperId))
+  }
+  else if (['prepare-spelling', 'finalize-spelling', 'verify-spelling'].includes(command)) {
+    withLocalReviewEvidence(paperDirectory(paperId), () => spellingReview(paperId, command))
+  }
   else if (command === 'preprocessing-report') await preprocessingReport(paperId)
   else if (command === 'preflight') await preflight(paperId)
   else if (command === 'verify-analyses') verifyAnalyses(paperId)

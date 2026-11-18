@@ -31,12 +31,15 @@ export function finalizeContentSubject(directory, revision, projection) {
 }
 
 // Shared by the synchronous internal seam and the read-only worker.
-export function finalizeProjection(directory, revision, { requireAnalyses = revision.reviewKind === 'candidate' } = {}) {
+export function finalizeProjection(directory, revision, {
+  requireAnalyses = revision.reviewKind === 'candidate',
+  evidenceBase = revision.evidenceBase ?? null,
+} = {}) {
   return buildImportReviewProjection(directory, {
     reviewKind: revision.reviewKind,
     requireAnalyses,
     expectedCandidateDigest: revision.candidateDigest,
-  })
+  }, evidenceBase)
 }
 
 export function finalizeInventory(directory, revision, projection = null) {

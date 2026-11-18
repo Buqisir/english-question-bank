@@ -24,9 +24,8 @@ import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
-import { buildNck1ReviewProjection, loadNck1ReviewSource, importNck1ReviewCandidate, reviewBundleFilePaths } from '../../server/import-review/revisionProjection.mjs'
+import { loadNck1ReviewSource, reviewBundleFilePaths } from '../../server/import-review/revisionProjection.mjs'
 import { PRODUCT_MANIFEST, productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
-import { listeningReviewSubject, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { sourceReferenceCellContinuations, refreshSourceReferenceCellContinuations } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import {
@@ -44,7 +43,8 @@ import { sourceReferenceProducerVersion } from '../../server/paper-import/source
 import { normalizeMaterializationNumbering } from './materialization-numbering.mjs'
 import { retainOwnerListening } from './lib-finish-owner-listening.mjs'
 import { importFormatBinding } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
-import { reviewManifest } from './review.mjs'
+import { buildLocalReviewProjection, hydratedEvidenceBase, importLocalReviewCandidate,
+  loadLocalReviewedListening, reviewManifest, withLocalReviewEvidence } from './review.mjs'
 import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
@@ -783,7 +783,7 @@ async function mergePagination(ctx) {
     reports[edition] = readJson(file)
     if (reports[edition].status !== 'success') fail(`${edition} 分页失败，见 ${path.relative(root, file)}`)
   }
-  const projection = buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true })
+  const projection = buildLocalReviewProjection(ctx.paperDir, { requireAnalyses: true })
   productSet(ctx, projection)
   const stale = editions.filter((edition) => reports[edition].candidateDigest !== projection.candidateDigest)
   if (stale.length) fail(`分页报告绑定的 Candidate 已过期：${stale.join(', ')}；删除对应目录后重跑 finish`)
@@ -987,14 +987,18 @@ function referencesCurrent(ctx) {
     if (!Array.isArray(finalized?.groups) || (hasDraft && !Array.isArray(draft?.groups))) return false
     if (sourceReferenceCellContinuations(draft).length || sourceReferenceCellContinuations(finalized).length) {
       const loaded = loadNck1ReviewSource(ctx.paperDir)
-      const imported = importNck1ReviewCandidate(ctx.paperDir, loaded)
+      const imported = importLocalReviewCandidate(ctx.paperDir, loaded)
       if (!imported.candidate || imported.issues.length) return false
       const input = { materialization: loaded.materialization, sourceInput: loaded.sourceInput,
         sourceDigest: imported.candidate.source.sha256, candidateDigest: imported.candidate.candidateDigest }
-      const refreshed = refreshSourceReferenceCellContinuations(
-      { ...input, producerVersion: finalized.producerVersion }, draft ?? finalized)
-      if (refreshed.pending || digestJson(refreshed.sidecar) !== digestJson(finalized)) return false
-      assertSourceReferenceAdmission({ ...input, sidecar: finalized })
+      const current = withLocalReviewEvidence(ctx.paperDir, () => {
+        const refreshed = refreshSourceReferenceCellContinuations(
+          { ...input, producerVersion: finalized.producerVersion }, draft ?? finalized)
+        if (refreshed.pending || digestJson(refreshed.sidecar) !== digestJson(finalized)) return false
+        assertSourceReferenceAdmission({ ...input, sidecar: finalized })
+        return true
+      })
+      if (!current) return false
     }
     // An agent-authored role declaration is part of the reference input; any
     // edit since the last finalize invalidates the generated groups.
@@ -1174,7 +1178,7 @@ export async function rebindRejectedIssue(ctx, resolves, { readStatus, origin, g
   }
   const uploading = status.revisions.filter(revision => receipt.observation.candidates.some(candidate => candidate.id === revision.id))
   const bundleDigest = getBundleDigest ? await getBundleDigest()
-    : reviewManifest(ctx.paperDir, buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true }), issues).bundleDigest
+    : reviewManifest(ctx.paperDir, buildLocalReviewProjection(ctx.paperDir, { requireAnalyses: true }), issues).bundleDigest
   if (!uploading.length || uploading.some(revision => !/^sha256:[a-f0-9]{64}$/u.test(revision.bundleDigest || ''))
     || !/^sha256:[a-f0-9]{64}$/u.test(bundleDigest || '')) fail('rebind-rejected-issue：缺少被拒 push 或本次 bundleDigest')
   if (uploading.some(revision => revision.bundleDigest === bundleDigest)) {
@@ -1416,7 +1420,7 @@ export async function finish(ctx, args, { referenceStages = {}, readStatus } = {
       ?? readJson(path.join(ctx.paperDir, 'config.json')).formatProfileBinding)?.profileId
     if (['national-legacy', 'zhejiang-legacy'].includes(profileId) && existsSync(reportFile)) {
       // Retain source-authored entries only after the existing exact-bound projection validates them.
-      buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true })
+      buildLocalReviewProjection(ctx.paperDir, { requireAnalyses: true })
       return { entries: readJson(reportFile).entries.length, retained: true }
     }
     const entries = await run(ctx, 'report-entries', cli('ocr-proofread.mjs', 'report-entries', ctx.paperId))
@@ -1430,7 +1434,7 @@ export async function finish(ctx, args, { referenceStages = {}, readStatus } = {
   const stages = {
     'source-references': () => sourceReferences(ctx),
     'pagination-run': () => {
-      const projection = buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true })
+      const projection = buildLocalReviewProjection(ctx.paperDir, { requireAnalyses: true })
       const { candidateDigest } = projection
       productSet(ctx, projection)
       startPagination(ctx, candidateDigest)
@@ -1527,7 +1531,7 @@ async function report(ctx, args) {
   const evidencePath = path.join(handoff, 'evidence.json')
   const now = new Date().toISOString().replace(/\.\d{3}Z$/u, 'Z')
   const paper = (name) => path.join(ctx.paperDir, name)
-  const selection = productSet(ctx, buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true }))
+  const selection = productSet(ctx, buildLocalReviewProjection(ctx.paperDir, { requireAnalyses: true }))
   const selectedProducts = selection.products
   const products = selectedProducts.map((product) => paper(`products/${product}.pdf`))
   const qa = (name) => path.join(handoff, 'qa', name)
@@ -1723,7 +1727,7 @@ function assertRetainedListeningFiles(ctx, manifest, productsOnly = false) {
 }
 
 function retainedListeningInputs(ctx) {
-  return Object.fromEntries(reviewBundleFilePaths(ctx.paperDir)
+  return Object.fromEntries(reviewBundleFilePaths(ctx.paperDir, null, hydratedEvidenceBase(ctx.paperDir))
     .filter(file => !file.path.startsWith('products/') && file.path !== 'listening-review-v1.json'
       && !file.path.startsWith('listening-review-evidence/'))
     .map(file => [file.path, sha256(readFileSync(path.join(ctx.paperDir, file.path)))]))
@@ -1731,11 +1735,11 @@ function retainedListeningInputs(ctx) {
 
 function listeningProductDigest(ctx) {
   const loaded = loadNck1ReviewSource(ctx.paperDir)
-  const imported = importNck1ReviewCandidate(ctx.paperDir, loaded)
+  const imported = importLocalReviewCandidate(ctx.paperDir, loaded)
   if (!imported.candidate || imported.issues.length) fail('listening-redo：Candidate 校验失败')
-  const reviewed = readListeningReview(ctx.paperDir, listeningReviewSubject(loaded, imported.candidate),
-    loaded.materialization.listening.transcript)
-  return productInputDigest(ctx.paperDir, reviewBundleFilePaths(ctx.paperDir), reviewed)
+  const reviewed = loadLocalReviewedListening(ctx.paperDir, loaded, imported.candidate)
+  return productInputDigest(ctx.paperDir,
+    reviewBundleFilePaths(ctx.paperDir, imported.candidate, hydratedEvidenceBase(ctx.paperDir)), reviewed)
 }
 
 function assertListeningRedoReady(ctx) {
@@ -1755,7 +1759,7 @@ function assertListeningRedoReady(ctx) {
     fail('listening-redo：保留输入或冻结输入已变化；重新运行 listening-redo')
   }
   // Validate real source references, pagination, listening evidence and frozen bytes.
-  buildNck1ReviewProjection(ctx.paperDir, { requireAnalyses: true })
+  buildLocalReviewProjection(ctx.paperDir, { requireAnalyses: true })
 }
 
 // Hydrated Candidates have sealed products, not local authoring stage history.
