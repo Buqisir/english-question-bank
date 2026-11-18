@@ -897,6 +897,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const [unofficialEssays, setUnofficialEssays] = useState<Record<string, UnofficialReferenceEssay[]>>({})
   const [canonicalConsumption, setCanonicalConsumption] =
     useState<WholePaperConsumption | null>(null)
+  // URL 的 lecture=1 在首次渲染就展开讲评，避免先闪一下挑题态。
+  const [lectureOpen, setLectureOpen] = useState(() => hasExplicitLectureIntent({ focusGroupId, lecture }))
   const activeAudioRef = useRef<HTMLAudioElement | null>(null)
   const [activeAudio, setActiveAudio] = useState<HTMLAudioElement | null>(null)
   const [followPlayback, setFollowPlayback] = useState(true)
@@ -916,7 +918,20 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     setActiveAudio(audio)
     setFollowPlayback(true)
   }, [])
-  const audioSegments = canonicalConsumption?.listeningAudio?.segments
+  const publishedAudioSegments = canonicalConsumption?.listeningAudio?.segments
+  const audioSegments = useMemo(() => {
+    if (!lectureOpen || !import.meta.env.DEV || paperId !== 'paper-gaokao-2023-ii' || !publishedAudioSegments) {
+      return publishedAudioSegments
+    }
+    // ASR windows for the two segments missing from the local preview recording's review.
+    const previewOnly = [
+      { segmentId: 'listening-text-5', questionNumbers: [5], firstQuestionId: 'question:listening:5',
+        startSeconds: 377.24, endSeconds: 393.28 },
+      { segmentId: 'listening-text-7', questionNumbers: [8, 9], firstQuestionId: 'question:listening:8',
+        startSeconds: 600.98, endSeconds: 683.26 },
+    ].filter(({ segmentId }) => !publishedAudioSegments.some((segment) => segment.segmentId === segmentId))
+    return [...publishedAudioSegments, ...previewOnly].sort((a, b) => a.startSeconds - b.startSeconds)
+  }, [lectureOpen, paperId, publishedAudioSegments])
   useEffect(() => {
     if (!activeAudio || !audioSegments) return
     const syncSegment = () => {
@@ -966,11 +981,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         + `max-width:${usableWidthEm}em!important;}`,
     ).join('\n') ?? ''
   const [activeAnchor, setActiveAnchor] = useState<string | null>(null)
-  // 讲评态开关 — 挑题态(默认收起)/讲评态(展开)。刀 3: 入口带态的 `lecture`
-  // prop（URL 的 lecture=1）种下初始值——lazy initializer 而非
-  // useState(false) 是因为它必须在首次渲染就反映入口态，不能等一拍 effect
-  // 才翻开（会闪一下挑题态）。
-  const [lectureOpen, setLectureOpen] = useState(() => hasExplicitLectureIntent({ focusGroupId, lecture }))
   // 刀 2: 讲评态首次打开时按需补拉的 cloze/grammarFill/writing 解析。
   const [lectureAnalysisByGroupId, setLectureAnalysisByGroupId] = useState<
     Record<string, LectureAnalysisEntry>
@@ -1165,18 +1175,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     async function load(): Promise<void> {
       try {
         const canonicalConsumption = await loadScreenConsumption(paperId, fetch, reviewRevision)
-        const playback = canonicalConsumption.listeningAudio
-        if (import.meta.env.DEV && paperId === 'paper-gaokao-2023-ii' && playback?.segments) {
-          // ASR windows for the two segments missing from the local preview recording's review.
-          const existing = playback.segments
-          const previewOnly = [
-            { segmentId: 'listening-text-5', questionNumbers: [5], firstQuestionId: 'question:listening:5',
-              startSeconds: 377.24, endSeconds: 393.28 },
-            { segmentId: 'listening-text-7', questionNumbers: [8, 9], firstQuestionId: 'question:listening:8',
-              startSeconds: 600.98, endSeconds: 683.26 },
-          ].filter(({ segmentId }) => !existing.some((segment) => segment.segmentId === segmentId))
-          playback.segments = [...existing, ...previewOnly].sort((a, b) => a.startSeconds - b.startSeconds)
-        }
         const publishedVersion = !reviewRevision && Number.isSafeInteger(canonicalConsumption.sourceAssetVersion)
           && Number(canonicalConsumption.sourceAssetVersion) > 0 ? canonicalConsumption.sourceAssetVersion : null
         let resolvedBase = reviewRevision
@@ -2025,30 +2023,38 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     // 抖动几帧——去抖到 120ms 稳定窗口再提交 setActiveAnchor，activeAnchor
     // 不来回横跳。窗口足够短，不影响正常滚动下的响应感。
     let debounceTimer: number | null = null
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          const anchor = (entry.target as HTMLElement).getAttribute('data-paper-browse-anchor')
-          if (!anchor) continue
-          if (entry.isIntersecting) visible.add(anchor)
-          else visible.delete(anchor)
-        }
-        const current = order.find((anchor) => visible.has(anchor))
-        if (!current) return
-        if (debounceTimer != null) window.clearTimeout(debounceTimer)
-        debounceTimer = window.setTimeout(() => {
-          debounceTimer = null
-          setActiveAnchor(current)
-        }, 120)
-      },
-      { root: null, rootMargin: '0px 0px -70% 0px', threshold: 0 },
-    )
-    for (const el of anchorEls) observer.observe(el)
+    const updateVisibleAnchors: IntersectionObserverCallback = (entries) => {
+      for (const entry of entries) {
+        const anchor = (entry.target as HTMLElement).getAttribute('data-paper-browse-anchor')
+        if (!anchor) continue
+        if (entry.isIntersecting) visible.add(anchor)
+        else visible.delete(anchor)
+      }
+      const current = order.find((anchor) => visible.has(anchor))
+      if (!current) return
+      if (debounceTimer != null) window.clearTimeout(debounceTimer)
+      debounceTimer = window.setTimeout(() => {
+        debounceTimer = null
+        setActiveAnchor(current)
+      }, 120)
+    }
+    const observer = new IntersectionObserver(updateVisibleAnchors, { rootMargin: '0px 0px -70% 0px' })
+    // The tail of the previous listening section above the reading area
+    // should not win over the next section already at the top of the paper.
+    const listeningObserver = lectureOpen
+      ? new IntersectionObserver(updateVisibleAnchors, { rootMargin: '-72px 0px -70% 0px' })
+      : observer
+    for (const [index, el] of anchorEls.entries()) {
+      const group = asset.content.groups[order[index]]
+      if (group?.groupType === 'listening') listeningObserver.observe(el)
+      else observer.observe(el)
+    }
     return (): void => {
       observer.disconnect()
+      if (listeningObserver !== observer) listeningObserver.disconnect()
       if (debounceTimer != null) window.clearTimeout(debounceTimer)
     }
-  }, [asset, loading])
+  }, [asset, loading, lectureOpen])
 
   // 刀 2 修复轮 ①: 阅读 parity — 点题/点证据后把命中的原文证据句滚入视野，
   // 镜像 PaperIntelligencePaperSurfaceHarness.tsx 的 "Auto-scroll active
@@ -2739,15 +2745,15 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       const isPanelGroup = lectureOpen && panelGroupId === groupId
       const audio = canonicalConsumption?.listeningAudio
       const questionNumbers = entry.model.surfaceData.questions.map((question) => Number(question.questionNo)).sort((a, b) => a - b)
-      const firstSection = firstListeningSectionRange(audio?.segments, questionNumbers)
-      const longSegments = audio?.segments?.filter((segment) => segment.questionNumbers.every((number) => questionNumbers.includes(number)))
-      const secondSection = questionNumbers[0] === 6 && longSegments?.length
+      const firstSection = firstListeningSectionRange(audioSegments, questionNumbers)
+      const longSegments = audioSegments?.filter((segment) => segment.questionNumbers.every((number) => questionNumbers.includes(number)))
+      const secondSection = lectureOpen && questionNumbers[0] === 6 && longSegments?.length
         && longSegments.flatMap((segment) => segment.questionNumbers).join(',') === questionNumbers.join(',')
         ? { startSeconds: longSegments[0].startSeconds, endSeconds: longSegments.at(-1)!.endSeconds, segments: longSegments }
         : null
       const section = firstSection || secondSection
-      const wholePaper = wholeListeningPaperRange(audio?.segments)
-      const listeningPlayers = audio?.segments ? Object.fromEntries(audio.segments.map((segment) => [
+      const wholePaper = wholeListeningPaperRange(audioSegments)
+      const listeningPlayers = audio && audioSegments ? Object.fromEntries(audioSegments.map((segment) => [
         segment.firstQuestionId,
         <ListeningSegmentPlayer key={`${audio.sha256}:${segment.segmentId}`} src={audio.url}
           label={segment.questionNumbers.length === 1 ? `第 ${segment.questionNumbers[0]} 题`
@@ -2774,7 +2780,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             listeningPartPlayer={audio && (
               <ListeningSegmentPlayer key={`${audio.sha256}:full`} src={audio.url} label="整卷听力"
                 startSeconds={wholePaper?.startSeconds ?? 0} endSeconds={wholePaper?.endSeconds ?? audio.durationSeconds} onActivate={activateAudio} size="full" lecture={lectureOpen}
-                marks={audio.segments?.map((segment) => ({
+                marks={audioSegments?.map((segment) => ({
                   startSeconds: segment.startSeconds,
                   endSeconds: segment.endSeconds,
                   label: segment.questionNumbers.length === 1 ? String(segment.questionNumbers[0])
