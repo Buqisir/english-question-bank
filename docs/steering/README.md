@@ -20,6 +20,6 @@ Non-negotiable product posture:
   explanations require human editorial review. Users may generate/edit/save private explanations
   without platform approval; saving is not official review. See the Owner-confirmed
   [public/personal boundary](../product/public-papers-personal-analysis.md), pending implementation;
-- student versions hide answers/explanations and teacher versions include them;
+- paper PDF content follows the [PDF product contract](../product/paper-pdf-products-v1.md);
 - PaperSurface insight defaults to a short passage map;
 - visible behavior requires real browser QA and owner acceptance.

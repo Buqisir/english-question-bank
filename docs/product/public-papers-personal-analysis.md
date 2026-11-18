@@ -18,8 +18,7 @@ Owner 2026-10-06 确认公共 PDF 目标为三款题卷加独立纯答案版，�
 
 网站新增许可仅是围绕已发布卷制作个人解析，不恢复网站导题、公共改题或批量公共内容
 生产。API 供应商、Key/代付、配额、编辑粒度、个人导出和精选频率仍未决定，不能称为
-已实现能力。Passage-first、Canonical Paper、共享 Screen/Print/PDF、学生版隐藏答案、
-权限隔离和版本追溯继续有效。
+已实现能力。Passage-first、Canonical Paper、共享 Screen/Print/PDF、权限隔离和版本追溯继续有效。
 
 ## 新公共卷导入：机器核事实，Owner 验版式与可选讲评
 
