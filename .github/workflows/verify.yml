@@ -89,10 +89,8 @@ jobs:
           VERIFY_TOOLCHAIN: ${{ startsWith(github.job, 'verify-') && 'full' || 'render' }}
         run: |
           packages=(ffmpeg poppler-utils imagemagick ghostscript fonts-noto-cjk fonts-liberation sqlite3 unzip zip)
-          # The image source bundle check on render shard 2 runs import preflight.
-          if [[ "$VERIFY_TOOLCHAIN" = full || "$GITHUB_JOB" = e2e-render-2 ]]; then
-            packages+=(libreoffice-writer)
-          fi
+          # Render lanes run import preflight, which requires soffice; shard membership can move.
+          packages+=(libreoffice-writer)
           if [ "$VERIFY_TOOLCHAIN" = full ]; then
             packages+=(python3-venv python3-numpy python3-scipy)
           fi
