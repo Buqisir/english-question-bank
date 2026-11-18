@@ -2067,9 +2067,14 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .listening-follow-lines:is([data-follow='calm'], [data-follow='calm-lively']) .listening-follow-line,
-  .listening-follow-lines:is([data-follow='calm'], [data-follow='calm-lively']) .listening-follow-line > * {
+  .listening-follow-lines[data-follow='calm'] .listening-follow-line,
+  .listening-follow-lines[data-follow='calm'] .listening-follow-line > * {
     transition-duration: 160ms;
+  }
+
+  .listening-follow-lines[data-follow='calm-v1'][data-focused] .listening-follow-line[aria-current='true'],
+  .listening-follow-lines[data-follow='calm-v1'][data-focused] .listening-follow-line[aria-current='true'] > * {
+    transition-duration: 150ms;
   }
 }
 

@@ -33,24 +33,25 @@ export function scrollListeningTarget(target: Element, block: ScrollLogicalPosit
 const phraseDuration = 700
 const jumpDuration = 500
 const FOLLOW_BEAT_MS = 200
+const calmV1HighlightDuration = 150
 const calmReadingInset = 0.08
-const calmSprings = {
-  calm: { response: 0.62, dampingRatio: 0.88 },
-  'calm-lively': { response: 0.5, dampingRatio: 0.74 },
-} as const
+const calmSpring = { response: 0.62, dampingRatio: 0.88 }
 
-function followEase(progress: number) {
+function followEase(progress: number, calmV1: boolean) {
+  const x1 = calmV1 ? 0.4 : 0.22
+  const x2 = calmV1 ? 0.2 : 0.36
   // Solve x for the requested cubic Bézier, then sample y at the same t.
   let low = 0
   let high = 1
   for (let i = 0; i < 16; i++) {
     const t = (low + high) / 2
     const inverse = 1 - t
-    const x = 3 * inverse * inverse * t * 0.22 + 3 * inverse * t * t * 0.36 + t ** 3
+    const x = 3 * inverse * inverse * t * x1 + 3 * inverse * t * t * x2 + t ** 3
     if (x < progress) low = t
     else high = t
   }
-  return 1 - (1 - (low + high) / 2) ** 3
+  const t = (low + high) / 2
+  return calmV1 ? t * t * (3 - 2 * t) : 1 - (1 - t) ** 3
 }
 
 function sentenceFocusTop(row: HTMLElement, height: number, calm: boolean) {
@@ -85,10 +86,10 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
   const jumpToCurrent = useRef<() => void>(() => {})
   const repeatStart = sentences[0]?.repeatStart ?? Infinity
   const followParam = new URLSearchParams(window.location.search).get('follow')
-  const mode = followParam === 'step' || followParam === 'flow' || followParam === 'calm-lively' ? followParam : 'calm'
+  const mode = followParam === 'step' || followParam === 'flow' || followParam === 'calm-v1' ? followParam : 'calm'
   const flow = mode === 'flow'
-  const springConfig = mode === 'calm' || mode === 'calm-lively' ? calmSprings[mode] : null
-  const calm = springConfig !== null
+  const calmV1 = mode === 'calm-v1'
+  const calm = mode === 'calm' || calmV1
 
   const setFollow = useCallback((enabled: boolean) => {
     follows.current = enabled
@@ -128,12 +129,14 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     let lastSentenceChange = -Infinity
     let lastRepeating = false
     let focusTimeout: number | undefined
-    let motion: { from: number; index: number; start: number; duration: number } | null = null
+    let motion: { from: number; index: number; start: number; duration: number; velocity: number; automatic: boolean } | null = null
+    let curveSample: { position: number; time: number } | null = null
+    let curveVelocity = 0
     let spring: { index: number; position: number; velocity: number; time: number; automatic: boolean } | null = null
     let pending: { index: number; start: number } | null = null
-    const omega = springConfig ? 2 * Math.PI / springConfig.response : 0
+    const omega = 2 * Math.PI / calmSpring.response
     const stiffness = omega ** 2
-    const damping = springConfig ? 2 * springConfig.dampingRatio * omega : 0
+    const damping = 2 * calmSpring.dampingRatio * omega
     const center = (index: number) => {
       const row = scroller.children[index] as HTMLElement | undefined
       if (!row) return scroller.scrollTop
@@ -148,6 +151,15 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       } else {
         spring = { index, position: scroller.scrollTop, velocity: 0, time: now, automatic }
       }
+    }
+    const startCurve = (index: number, duration: number, now: number, automatic = false) => {
+      motion = { from: scroller.scrollTop, index, start: now, duration, velocity: curveVelocity, automatic }
+      if (calmV1) curveSample = { position: scroller.scrollTop, time: now }
+    }
+    const stopCurve = () => {
+      motion = null
+      curveSample = null
+      curveVelocity = 0
     }
     const isShortAndVisible = (index: number) => {
       const sentence = sentences[index]
@@ -173,10 +185,10 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
         if (reducedMotion.matches) {
           if (jump || index !== lastIndex || motion || spring || pending) positionList(center(index))
           pending = null
-          motion = null
+          stopCurve()
           spring = null
         } else {
-          if (calm) {
+          if (calm && !calmV1) {
             if (jump) {
               pending = null
               setSpringTarget(index, now, false)
@@ -198,9 +210,27 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
               }
             }
           } else if (jump || (!audio.paused && (index < lastIndex || repeating !== lastRepeating))) {
-            motion = { from: scroller.scrollTop, index, start: now, duration: jumpDuration }
+            pending = null
+            startCurve(index, jumpDuration, now)
+          } else if (calmV1) {
+            if (index !== lastIndex && !audio.paused) {
+              const short = isShortAndVisible(index)
+              pending = short ? null : { index, start: now + calmV1HighlightDuration }
+              if (short && motion?.automatic) stopCurve()
+            }
+            if (audio.paused || (!target && time >= sentenceEnd(sentences[index], repeating))) {
+              pending = null
+              if (motion?.automatic) stopCurve()
+            }
+            if (pending && now >= pending.start) {
+              const row = scroller.children[pending.index].querySelector('.listening-follow-sentence')!
+              const lineHeight = Number.parseFloat(getComputedStyle(row).lineHeight)
+              const distance = Math.abs(center(pending.index) - scroller.scrollTop)
+              startCurve(pending.index, distance > lineHeight * 3 ? 800 : 650, now, true)
+              pending = null
+            }
           } else if (!continuous && index !== lastIndex) {
-            motion = { from: scroller.scrollTop, index, start: now, duration: phraseDuration }
+            startCurve(index, phraseDuration, now)
           }
 
           if (spring) {
@@ -225,8 +255,23 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
             const elapsed = Math.max(0, now - motion.start)
             const progress = Math.min(1, elapsed / motion.duration)
             const to = center(motion.index)
-            positionList(progress === 1 ? to : motion.from + (to - motion.from) * followEase(progress))
-            if (progress === 1) motion = null
+            const distance = to - motion.from
+            const eased = progress === 1 ? 1 : followEase(progress, calmV1)
+            let position = motion.from + distance * eased
+            if (motion.velocity) {
+              // Preserve velocity when retargeting, and brake before reversing.
+              const aligned = Math.sign(motion.velocity) === Math.sign(distance)
+              const brake = aligned ? Math.min(84, Math.abs(distance / motion.velocity)) : 84
+              const coast = Math.min(elapsed, brake)
+              if (brake > 0) position += motion.velocity * coast * (1 - coast / (2 * brake)) * (1 - eased)
+            }
+            if (calmV1) position = Math.max(0, Math.min(position, scroller.scrollHeight - scroller.clientHeight))
+            if (curveSample && now - curveSample.time >= 4) {
+              curveVelocity = (position - curveSample.position) / (now - curveSample.time)
+              curveSample = { position, time: now }
+            }
+            positionList(position)
+            if (progress === 1) stopCurve()
           } else if (continuous && !audio.paused && !audio.seeking) {
             const from = center(index)
             const next = sentences[index + 1]
@@ -244,7 +289,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
         }
       } else {
         pending = null
-        motion = null
+        stopCurve()
         spring = null
       }
       if (index !== lastIndex) setCurrent(index)
@@ -304,7 +349,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       audio.removeEventListener(listeningPlayerSwitchEvent, stopLoop)
       jumpToCurrent.current = () => {}
     }
-  }, [audio, sentences, repeatStart, flow, calm, springConfig, positionList, setFollow])
+  }, [audio, sentences, repeatStart, flow, calm, calmV1, positionList, setFollow])
 
   useEffect(() => {
     const row = reviewedSentence && list.current?.children[reviewedSentence.index] as HTMLElement | undefined
