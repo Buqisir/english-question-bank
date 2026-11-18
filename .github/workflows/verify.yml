@@ -100,7 +100,6 @@ jobs:
             echo "packages=${packages[*]}"
             echo "hash=${hash%% *}"
             echo "profile=$VERIFY_TOOLCHAIN"
-            echo "image=${ImageVersion:-ubuntu-24.04}"
           } >> "$GITHUB_OUTPUT"
       - &restore_apt_cache
         name: Restore apt package archives
@@ -109,13 +108,16 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: ~/.cache/eqb-apt/*.deb
-          key: eqb-apt-v1-${{ runner.os }}-${{ runner.arch }}-${{ steps.apt_packages.outputs.image }}-${{ steps.apt_packages.outputs.hash }}
+          # Each run saves what it downloaded under a new key, so slow-mirror progress accumulates.
+          key: eqb-apt-v2-${{ runner.os }}-${{ runner.arch }}-${{ steps.apt_packages.outputs.hash }}-${{ github.run_id }}-${{ github.run_attempt }}-${{ github.job }}
+          restore-keys: eqb-apt-v2-${{ runner.os }}-${{ runner.arch }}-${{ steps.apt_packages.outputs.hash }}-
       - &install_full_toolchain
         name: Install verification system dependencies
+        id: apt_install
         timeout-minutes: 30
         env: &apt_install_env
           APT_PACKAGES: ${{ steps.apt_packages.outputs.packages }}
-          APT_CACHE_HIT: ${{ steps.apt_cache.outputs.cache-hit }}
+          APT_CACHE_HIT: ${{ steps.apt_cache.outputs.cache-matched-key != '' }}
           VERIFY_TOOLCHAIN: ${{ steps.apt_packages.outputs.profile }}
         run: &install_system_dependencies |
           read -r -a packages <<< "$APT_PACKAGES"
@@ -124,6 +126,7 @@ jobs:
           # A runner can require a different package version even after a cache hit.
           if [ "$APT_CACHE_HIT" != true ] ||
             ! sudo apt-get "${archive_options[@]}" install --no-download --download-only --yes "${packages[@]}"; then
+            echo "downloaded=true" >> "$GITHUB_OUTPUT"
             # Bound slow downloads without interrupting dpkg.
             for attempt in 1 2; do
               if sudo timeout --kill-after=5s 180s apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 -o Acquire::https::Timeout=30 update &&
@@ -163,7 +166,7 @@ jobs:
       - &save_apt_cache
         # Save even when a later step fails so a slow mirror only has to be survived once.
         name: Save apt package archives
-        if: ${{ always() && steps.apt_cache.outcome == 'success' && steps.apt_cache.outputs.cache-hit != 'true' }}
+        if: ${{ always() && steps.apt_install.outputs.downloaded == 'true' }}
         uses: actions/cache/save@v4
         with:
           path: ~/.cache/eqb-apt/*.deb
@@ -321,6 +324,7 @@ jobs:
       - *restore_apt_cache
       - &install_render_toolchain
         name: Install render system dependencies
+        id: apt_install
         if: ${{ steps.lane.outputs.count != '0' }}
         timeout-minutes: 30
         env: *apt_install_env
