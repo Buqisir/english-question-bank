@@ -1,6 +1,7 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import type { ListeningSentence } from '../../domain/listeningAnalysis'
 import { Check } from '../../icons'
+import { Button } from '../../shared-ui/Button'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { ListeningTransport, listeningPlayerSeekEvent, listeningPlayerSwitchEvent, playListeningAudio } from './ListeningSegmentPlayer'
 
@@ -39,9 +40,48 @@ const calmV1HighlightDuration = 150
 const calmReadingInset = 0.08
 const calmSpring = { response: 0.62, dampingRatio: 0.88 }
 
-function followEase(progress: number, calmV1: boolean) {
-  const x1 = calmV1 ? 0.4 : 0.22
-  const x2 = calmV1 ? 0.2 : 0.36
+const calmDefaults = { beat: 150, min: 600, max: 900, perLine: 110, tail: 0.5 }
+type CalmTuning = typeof calmDefaults
+const tuningStorage = 'eqb-listening-calm-v2'
+const tuningRanges = [
+  ['beat', '停顿', 100, 250, 1],
+  ['min', '最短', 500, 750, 1],
+  ['max', '最长', 750, 1000, 1],
+  ['perLine', '每行', 50, 150, 1],
+  ['tail', '收尾', 0, 1, 0.01],
+] as const
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value))
+
+// Preview-only tuning panel. Remove the panel and its persisted overrides before release.
+function loadCalmTuning() {
+  const tuning = { ...calmDefaults }
+  try {
+    const saved = JSON.parse(localStorage.getItem(tuningStorage) ?? '{}')
+    for (const [key, , min, max] of tuningRanges) {
+      const value = saved?.[key]
+      if (typeof value === 'number' && Number.isFinite(value)) tuning[key] = clamp(value, min, max)
+    }
+  } catch { /* Use defaults if storage is unavailable. */ }
+  return tuning
+}
+
+function CalmTuningPanel({ values, onChange }: { values: CalmTuning; onChange: (value: CalmTuning) => void }) {
+  const summary = tuningRanges.map(([key]) => `${key} ${values[key]}`).join(' · ')
+  return <aside className="listening-follow-tuning" aria-label="跟读动效调参">
+    <div className="listening-follow-tuning-sliders">
+      {tuningRanges.map(([key, label, min, max, step]) => <label key={key}>
+        <span>{label} {values[key]}</span>
+        <input type="range" aria-label={label} min={min} max={max} step={step} value={values[key]}
+          onChange={(event) => onChange({ ...values, [key]: event.currentTarget.valueAsNumber })} />
+      </label>)}
+      <Button size="sm" onClick={() => onChange(calmDefaults)}>恢复默认</Button>
+    </div>
+    <input className="listening-follow-tuning-summary" aria-label="可复制的动效参数"
+      readOnly value={summary} onFocus={(event) => event.currentTarget.select()} />
+  </aside>
+}
+
+function curveParameter(progress: number, x1: number, x2: number) {
   // Solve x for the requested cubic Bézier, then sample y at the same t.
   let low = 0
   let high = 1
@@ -53,7 +93,26 @@ function followEase(progress: number, calmV1: boolean) {
     else high = t
   }
   const t = (low + high) / 2
+  return t
+}
+
+function followEase(progress: number, calmV1: boolean) {
+  const t = curveParameter(progress, calmV1 ? 0.4 : 0.22, calmV1 ? 0.2 : 0.36)
   return calmV1 ? t * t * (3 - 2 * t) : 1 - (1 - t) ** 3
+}
+
+type CalmCurve = { x1: number; x2: number; control: number; distance: number }
+
+function sampleCalmCurve(curve: CalmCurve, progress: number, duration: number) {
+  const { x1, x2, control, distance } = curve
+  if (progress === 0) return { offset: 0, velocity: control / (x1 * duration) }
+  if (progress === 1) return { offset: distance, velocity: 0 }
+  const t = curveParameter(progress, x1, x2)
+  const rest = 1 - t
+  const offset = 3 * rest * rest * t * control + t * t * (3 - 2 * t) * distance
+  const dx = rest * rest * x1 + 2 * rest * t * (x2 - x1) + t * t * (1 - x2)
+  const dy = rest * rest * control + 2 * rest * t * (distance - control)
+  return { offset, velocity: dy / (dx * duration) }
 }
 
 function sentenceFocusTop(row: HTMLElement, height: number, calm: boolean) {
@@ -87,13 +146,23 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
   const list = useRef<HTMLDivElement>(null)
   const jumpToCurrent = useRef<() => void>(() => {})
   const repeatStart = sentences[0]?.repeatStart ?? Infinity
-  const followParam = new URLSearchParams(window.location.search).get('follow')
-  const mode = followParam === 'step' || followParam === 'flow' || followParam === 'calm-v1' || followParam === 'calm'
-    ? followParam : 'calm2'
+  const params = new URLSearchParams(window.location.search)
+  const followParam = params.get('follow')
+  const mode = followParam === 'step' || followParam === 'flow' || followParam === 'calm-v1' || followParam === 'calm' || followParam === 'calm2'
+    ? followParam : 'calm-v2'
   const flow = mode === 'flow'
   const calmV1 = mode === 'calm-v1'
+  const calmV2 = mode === 'calm-v2'
   const calm2 = mode === 'calm2'
-  const calm = mode === 'calm' || calmV1 || calm2
+  const calm = mode === 'calm' || calmV1 || calmV2 || calm2
+  const tune = calmV2 && params.get('tune') === '1'
+  const [tuning, setTuning] = useState(() => tune ? loadCalmTuning() : calmDefaults)
+  const liveTuning = useRef(tuning)
+  const updateTuning = (value: CalmTuning) => {
+    liveTuning.current = value
+    setTuning(value)
+    try { localStorage.setItem(tuningStorage, JSON.stringify(value)) } catch { /* Keep live values. */ }
+  }
 
   const setFollow = useCallback((enabled: boolean) => {
     follows.current = enabled
@@ -133,7 +202,9 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     let lastSentenceChange = -Infinity
     let lastRepeating = false
     let focusTimeout: number | undefined
-    let motion: { from: number; index: number; start: number; duration: number; velocity: number; automatic: boolean } | null = null
+    let motion: {
+      from: number; index: number; start: number; duration: number; velocity: number; automatic: boolean; curve?: CalmCurve
+    } | null = null
     let curveSample: { position: number; time: number } | null = null
     let curveVelocity = 0
     let spring: {
@@ -162,6 +233,31 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     const startCurve = (index: number, duration: number, now: number, automatic = false) => {
       motion = { from: scroller.scrollTop, index, start: now, duration, velocity: curveVelocity, automatic }
       if (calmV1) curveSample = { position: scroller.scrollTop, time: now }
+    }
+    const startCalmV2 = (index: number, now: number, automatic: boolean) => {
+      if (motion?.curve && motion.index === index) {
+        motion.automatic = automatic
+        return
+      }
+      let from = scroller.scrollTop
+      let velocity = 0
+      if (motion?.curve) {
+        const sample = sampleCalmCurve(motion.curve, clamp((now - motion.start) / motion.duration, 0, 1), motion.duration)
+        from = motion.from + sample.offset
+        velocity = sample.velocity
+      }
+      const distance = center(index) - from
+      if (!distance && !velocity) return
+      const english = scroller.children[index].querySelector('.listening-follow-sentence')!
+      const lineHeight = Number.parseFloat(getComputedStyle(english).lineHeight)
+      const { min, max, perLine, tail } = tune ? liveTuning.current : calmDefaults
+      const duration = clamp(min + perLine * Math.max(0, Math.abs(distance) / lineHeight - 2), min, max)
+      const x2 = 0.2 - tail * 0.12 * (max > min ? (duration - min) / (max - min) : 0)
+      // The first control point sets the exact incoming velocity. For a close
+      // forward target, shorten its time coordinate to keep all points monotonic.
+      const x1 = velocity * distance > 0 ? Math.min(0.4, Math.abs(distance / (velocity * duration))) : 0.4
+      motion = { from, index, start: now, duration, velocity, automatic,
+        curve: { x1, x2, control: velocity * x1 * duration, distance } }
     }
     const stopCurve = () => {
       motion = null
@@ -195,7 +291,26 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
           stopCurve()
           spring = null
         } else {
-          if (calm && !calmV1) {
+          if (calmV2) {
+            if (jump || (!audio.paused && (index < lastIndex || repeating !== lastRepeating))) {
+              pending = null
+              startCalmV2(index, now, false)
+            } else {
+              if (index !== lastIndex && !audio.paused) {
+                const short = isShortAndVisible(index)
+                pending = short ? null : { index, start: now }
+                if (short && motion?.automatic) stopCurve()
+              }
+              if (audio.paused || (!target && time >= sentenceEnd(sentences[index], repeating))) {
+                pending = null
+                if (motion?.automatic) stopCurve()
+              }
+              if (pending && now - pending.start >= (tune ? liveTuning.current.beat : calmDefaults.beat)) {
+                startCalmV2(pending.index, now, true)
+                pending = null
+              }
+            }
+          } else if (calm && !calmV1) {
             if (jump) {
               pending = null
               setSpringTarget(index, now, false)
@@ -264,6 +379,11 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
             } else {
               positionList(spring.position)
             }
+          } else if (motion?.curve) {
+            const progress = clamp((now - motion.start) / motion.duration, 0, 1)
+            const { offset } = sampleCalmCurve(motion.curve, progress, motion.duration)
+            positionList(motion.from + offset)
+            if (progress === 1) stopCurve()
           } else if (motion) {
             const elapsed = Math.max(0, now - motion.start)
             const progress = Math.min(1, elapsed / motion.duration)
@@ -362,7 +482,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       audio.removeEventListener(listeningPlayerSwitchEvent, stopLoop)
       jumpToCurrent.current = () => {}
     }
-  }, [audio, sentences, repeatStart, flow, calm, calmV1, calm2, positionList, setFollow])
+  }, [audio, sentences, repeatStart, flow, calm, calmV1, calmV2, calm2, tune, positionList, setFollow])
 
   useEffect(() => {
     const row = reviewedSentence && list.current?.children[reviewedSentence.index] as HTMLElement | undefined
@@ -422,6 +542,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       {error && <p className="listening-audio-error" role="status">录音未能播放，请重试</p>}
       <div className="listening-follow-lines" ref={list} tabIndex={0} role="region" aria-label="逐句录音稿"
         data-follow={mode} data-focused={focused || undefined} data-auto-follow={focused && following || undefined}
+        style={calmV2 ? { '--listening-highlight-duration': `${tune ? tuning.beat : calmDefaults.beat}ms` } as CSSProperties : undefined}
         onWheel={(event) => { if (event.deltaY) setFollow(false) }}
         onTouchMove={() => setFollow(false)}
         onPointerDown={(event) => {
@@ -465,6 +586,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
           </div>
         })}
       </div>
+      {tune && <CalmTuningPanel values={tuning} onChange={updateTuning} />}
     </section>}
     {!following && audio && current >= 0 && <div className="listening-follow-return">
       <button type="button" className="listening-quiet-control" onClick={() => {
