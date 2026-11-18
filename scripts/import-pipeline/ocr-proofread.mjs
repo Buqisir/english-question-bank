@@ -40,7 +40,7 @@ import { prepareSourceReferenceCellContinuations, replaySourceReferenceCellConti
 import { importNck1ReviewCandidate, loadNck1ReviewSource, buildNck1OcrReviewProjection,
   retainedCandidateBinding, withRetainedReviewEvidence } from '../../server/import-review/revisionProjection.mjs'
 import { deriveOcrConfirmationRevision } from '../../server/import-review/finalizeComputation.mjs'
-import { hydratedEvidenceBase } from './review.mjs'
+import { hydratedEvidenceBase } from './review-target.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_REGION_TOLERANCE, applyEssayTextCorrections, sourceReferenceBlocks } from '../../server/paper-import/sourceReferences.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'

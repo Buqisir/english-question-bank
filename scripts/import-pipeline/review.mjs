@@ -78,7 +78,8 @@ import {
 import { publishUniversalNck1Import } from '../../server/paper-import/publisher.mjs'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
-import { resolveReviewOrigin } from './review-target.mjs'
+import { hydratedEvidenceBase, resolveReviewOrigin } from './review-target.mjs'
+export { hydratedEvidenceBase } from './review-target.mjs'
 import { uploadReviewBundle as uploadBundle } from './lib-review-upload.mjs'
 import { confirmOcrWithReconciliation } from './lib-proofread-ocr.mjs'
 import { reuseSealedOcrConfirmation } from './lib-sealed-ocr-resume.mjs'
@@ -277,20 +278,6 @@ function fileDescriptors(paperDir, files = reviewBundleFilePaths(paperDir)) {
   })
   assertListeningUploadBudget(descriptors)
   return descriptors
-}
-
-export function hydratedEvidenceBase(paperDir) {
-  const file = path.join(paperDir, 'signals', 'review-restore.json')
-  if (!existsSync(file)) return null
-  const restore = requiredJson(file, 'Review restore binding')
-  const revision = restore.sealedRevision
-  if (!revision) return null
-  const target = resolveReviewOrigin(root, { ...process.env,
-    QUESTION_BANK_IMPORT_OPS_ORIGIN: process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN || restore.origin })
-  if (restore.schemaVersion !== 'review-restore-v1' || restore.origin !== target
-    || restore.paperId !== revision.paperId || restore.revisionId !== revision.id
-    || restore.bundleDigest !== revision.bundleDigest) fail('Review restore binding does not match the retained revision')
-  return { revision }
 }
 
 export function buildLocalReviewProjection(paperDir, options) {
