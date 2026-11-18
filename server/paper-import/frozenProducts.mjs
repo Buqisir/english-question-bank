@@ -2,7 +2,7 @@ import { productPageLimitsForManifest } from './pdfPageLimits.mjs'
 import { existsSync, readFileSync } from 'node:fs'
 import { execFileSync } from 'node:child_process'
 import path from 'node:path'
-import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { PAPER_PDF_PRODUCTS } from '../../shared/paperPdfProducts.mjs'
 import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
 import { configuredBlobStore } from './blobStore.mjs'
@@ -43,11 +43,41 @@ export function productInputFiles(files, reviewedListening = null, { legacy = fa
   return files.filter(file => !file.path.startsWith('products/') && !neutral.has(file.path))
 }
 
+function printConfigBytes(config) {
+  const { defaultTags: _tags, provenance, ...rest } = config
+  const { defaultTags: _provenanceTags, ...printProvenance } = provenance ?? {}
+  return Buffer.from(stableStringify({ ...rest, ...(provenance ? { provenance: printProvenance } : {}) }))
+}
+
+export function productInputDescriptor({ path, mediaType, role, sha256: digest, byteLength }, config) {
+  if (role === 'config' && config) {
+    const bytes = printConfigBytes(config)
+    digest = sha256(bytes)
+    byteLength = bytes.length
+  }
+  return { path, mediaType, role, sha256: digest, byteLength }
+}
+
 export function productInputDigest(rootDir, files, reviewedListening = null, options) {
-  return digestJson(productInputFiles(files, reviewedListening, options).map(({ path: relative, mediaType, role }) => {
-    const bytes = readFileSync(path.join(rootDir, relative))
-    return { path: relative, mediaType, role, sha256: sha256(bytes), byteLength: bytes.length }
+  return digestJson(productInputFiles(files, reviewedListening, options).map(file => {
+    const bytes = readFileSync(path.join(rootDir, file.path))
+    return productInputDescriptor({ ...file, sha256: sha256(bytes), byteLength: bytes.length },
+      !options?.legacy && file.role === 'config' ? JSON.parse(bytes) : null)
   }).sort((a, b) => a.path.localeCompare(b.path)))
+}
+
+// Only a byte-identical product manifest from a validated seal may supply the
+// original input inventory. An edited print input needs a fresh freeze.
+export function matchesSealedPrintInputs({ rootDir, inputDigest, sealedFiles, sealedConfigBytes }) {
+  if (!sealedFiles) return false
+  const oldConfig = sealedFiles.find(file => file.role === 'config')
+  if (!oldConfig) return false
+  const bytes = sealedConfigBytes ?? readFileSync(path.join(rootDir, oldConfig.path))
+  if (bytes.length !== oldConfig.byteLength || sha256(bytes) !== oldConfig.sha256) return false
+  const config = JSON.parse(bytes)
+  const sealedDigest = digestJson(productInputFiles(sealedFiles).map(file => productInputDescriptor(file, config))
+    .sort((a, b) => a.path.localeCompare(b.path)))
+  return inputDigest === sealedDigest
 }
 
 function readProductManifest(manifestBytes, { inputDigest, legacyInputDigest, economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit, config, listeningCount } = {}) {
@@ -66,7 +96,7 @@ function readProductManifest(manifestBytes, { inputDigest, legacyInputDigest, ec
     || (largeNoListeningPageLimit !== undefined && pageLimits.largeNoListeningPageLimit !== largeNoListeningPageLimit)
     || (economyPageLimit !== undefined && manifestPageLimit !== economyPageLimit)
     || !/^sha256:[a-f0-9]{64}$/.test(manifest.inputDigest || '')
-    || (inputDigest && manifest.inputDigest !== inputDigest && manifest.inputDigest !== legacyInputDigest?.())
+    || (inputDigest && manifest.inputDigest !== inputDigest && manifest.inputDigest !== legacyInputDigest?.(manifest.inputDigest))
     || typeof manifest.paperName !== 'string' || !manifest.paperName.trim()
     || !Array.isArray(manifest.files) || manifest.files.length !== expectedFiles.length) reject('输入或产品文件清单不一致')
   for (const [index, expected] of expectedFiles.entries()) {

@@ -125,9 +125,11 @@ function assertSourceReferenceContent({
 }, producerVersion) {
   let sourceInput = canonicalSourceInput
   let referenceSourceDocuments
+  const warnDocx = onWarning === reject ? null : onWarning
+  const skippedScoringFigures = new Set()
   if (sidecar?.schemaVersion === 'source-references-v7') {
     assertSourceReferences({ sidecar, materialization, sourceDigest, candidateDigest,
-      sourceDocuments: sourceInput.documents, sourceInput })
+      sourceDocuments: sourceInput.documents, sourceInput, onWarning: warnDocx })
     sidecar = sourceReferenceSourceView(sidecar)
   }
   const sealedRoleDeclarations = sidecar?.writingRoleDeclarations
@@ -182,7 +184,7 @@ function assertSourceReferenceContent({
     }
   }
   if (sidecar) assertSourceReferences({ sidecar, materialization, sourceDigest, candidateDigest,
-    sourceDocuments: sourceInput.documents, sourceInput })
+    sourceDocuments: sourceInput.documents, sourceInput, onWarning: warnDocx })
   // Scope and full-content replay precede all no-image/absence early returns.
   // Derive from sealed source first, including when the record was removed.
   if (usesAlternateAnswerScope(producerVersion)) {
@@ -311,7 +313,7 @@ function assertSourceReferenceContent({
     // These paths already rebuild/compare the complete source groups above.
     if (!usesSourceTitleCompatibility(producerVersion) || !sidecar
       || sidecar.alternateAnswerScope || sourceReferenceCellContinuations(sidecar).length || referenceSourceDocuments) return
-    if (figures.some(({ figure }) => !replayedFigures.has(figure))) {
+    if (figures.some(({ figure }) => !replayedFigures.has(figure) && !skippedScoringFigures.has(figure.figureId))) {
       reject('Current figure comparison requires independent source pixel replay for every figure')
     }
     if (!evidence) reject('Current OCR references require complete sealed evidence')
@@ -491,9 +493,14 @@ function assertSourceReferenceContent({
       [cell.source, ...(cell.adjacentPageContinuation ? [cell.adjacentPageContinuation.fragment.source] : [])].flatMap(sourceItems)) : []
 
   const seen = new Set(), figureReferences = new Map()
-  for (const { figure } of figures) {
+  for (const { figure, kind } of figures) {
     const matches = expected.filter(reference => reference.sourceRegionId === figure.sourceRegionId
       && digestJson(reference.source) === digestJson(figure.source.locator))
+    if (matches.length !== 1 && kind === 'scoring' && onWarning !== reject) {
+      onWarning(`Scoring figure ${figure.figureId} does not match a confirmed source region`)
+      skippedScoringFigures.add(figure.figureId)
+      continue
+    }
     if (matches.length !== 1 || seen.has(matches[0])) reject('Missing, extra, duplicated or substituted source figure region')
     const reference = matches[0]
     seen.add(reference)
@@ -523,6 +530,7 @@ function assertSourceReferenceContent({
         let current
         if (block.kind === 'figure') {
           const reference = figureReferences.get(block)
+          if (!reference) continue
           // Empty pictures occupy the gap after their proven anchor; pictures
           // containing OCR items also reserve their entire consumed range.
           const anchor = range([reference.afterItem])
@@ -538,18 +546,23 @@ function assertSourceReferenceContent({
   }
   for (const { figure, entry, group, kind } of figures) {
     const reference = figureReferences.get(figure)
+    if (!reference) continue
     const scoringScope = scoringScopes.get(reference.afterItem.itemId)
     if (kind === 'scoring') {
       const labels = sourceItems(entry.labelSource).filter(item => normalize(item.text) === normalize(entry.sourceLabel ?? ''))
       if (!scoringScope || scoringScope.taskType !== group.taskType
         || labels.length !== 1 || labels[0].itemId !== scoringScope.labelItemId) {
         onWarning('Scoring figure requires its exact confirmed scoring label and Writing Task')
+        skippedScoringFigures.add(figure.figureId)
+        continue
       }
       const blocks = sourceReferenceBlocks(entry)
       const index = blocks.indexOf(figure)
       const previous = index === 0 ? labels : boundaryItems(blocks[index - 1])
       if (!previous.length || previous.at(-1).itemId !== reference.afterItem.itemId) {
         onWarning('Scoring figure must follow the exact label, paragraph or final table boundary in source order')
+        skippedScoringFigures.add(figure.figureId)
+        continue
       }
       assertSourceReferenceFigureReplay({ figure,
         document: documents.find(document => document.documentId === figure.source.locator.documentId) })
@@ -578,4 +591,5 @@ function assertSourceReferenceContent({
     replayedFigures.add(figure)
   }
   assertCurrentGroupsReplay()
+  return skippedScoringFigures
 }

@@ -21,7 +21,7 @@ import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview, rea
 import { SOURCE_REFERENCES_FILE, parseSourceReferencesBytes } from '../paper-import/sourceReferences.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../paper-import/sourceReferenceSemantics.mjs'
 import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../paper-import/sourceReferenceAdmission.mjs'
-import { PRODUCT_MANIFEST, PRODUCT_FILES, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
+import { PRODUCT_MANIFEST, PRODUCT_FILES, matchesSealedPrintInputs, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
 import { productFiles, sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
 import { productPageLimitsForManifest } from '../paper-import/pdfPageLimits.mjs'
 import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
@@ -120,10 +120,15 @@ function loadPublicSearchMetadata(rootDir, loaded, sourceDigest, candidateDigest
     return null
   }
   const bytes = readFileSync(filePath)
-  const sidecar = JSON.parse(bytes.toString('utf8'))
-  const issues = validatePublicSearchMetadata({ sidecar, materialization: loaded.materialization, sourceDigest, candidateDigest })
-  if (issues.length) fail(`${issues[0].code}: ${issues[0].message}`)
-  return { sidecar, bytes, digest: sha256(bytes) }
+  try {
+    const sidecar = JSON.parse(bytes.toString('utf8'))
+    const [issue] = validatePublicSearchMetadata({ sidecar, materialization: loaded.materialization, sourceDigest, candidateDigest })
+    if (issue) throw new Error(`${issue.code}: ${issue.message}`)
+    return { sidecar, bytes, digest: sha256(bytes) }
+  } catch (error) {
+    console.warn(`${loaded.materialization.paperId}: ignoring ${PUBLIC_SEARCH_METADATA_FILE_NAME}: ${error.message}`)
+    return null
+  }
 }
 
 function fail(message, code = 'IMPORT_REVIEW_CANDIDATE_INVALID', status, details) {
@@ -653,10 +658,10 @@ export function reviewBundleFilePaths(rootDir, candidate = null, evidenceBase = 
 
 export function reviewBundleFilePathsForProjection(rootDir, projection) {
   const context = reviewBundleInventories.get(projection)
-  if (!context || context.rootDir !== path.resolve(rootDir)) {
-    return reviewBundleFilePaths(rootDir, projection?.candidate)
-  }
-  return context.inventory().map(file => ({ ...file }))
+  const files = context?.rootDir === path.resolve(rootDir)
+    ? context.inventory() : reviewBundleFilePaths(rootDir, projection?.candidate)
+  return files.filter(file => !projection?.importProfile || projection.publicSearchMetadataDigest
+    || file.path !== PUBLIC_SEARCH_METADATA_FILE_NAME).map(file => ({ ...file }))
 }
 
 function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
@@ -1858,7 +1863,7 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
     // Sealed hashes and JSON syntax are already checked. The target reopens its
     // own snapshot; retain canonical JSON digests instead of a second full parse
     // of every image bundle/materialization throughout compilation.
-    for (const file of fileEvidence) if (Object.hasOwn(file, 'json') && file.path !== PRODUCT_MANIFEST) {
+    for (const file of fileEvidence) if (Object.hasOwn(file, 'json') && ![PRODUCT_MANIFEST, 'config.json'].includes(file.path)) {
       file.jsonDigest = digestJson(file.json)
       delete file.json
     }
@@ -1867,7 +1872,7 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
       const products = fileEvidence.find(file => file.path === PRODUCT_MANIFEST)
       const readSealedProducts = (_root, options) => {
         const manifest = products?.json
-        if (!manifest || (manifest.inputDigest !== options.inputDigest && manifest.inputDigest !== options.legacyInputDigest())
+        if (!manifest || (manifest.inputDigest !== options.inputDigest && manifest.inputDigest !== options.legacyInputDigest(manifest.inputDigest))
           || sourceProductEditions(options.config, options.listeningCount).length !== manifest.files.length) {
           fail('Sealed product input identity differs')
         }
@@ -1914,17 +1919,17 @@ function buildNck1ReviewProjectionInternal(rootDir, options = {}, readProducts, 
   return withRetainedReviewEvidence(rootDir, evidenceBase, retainedBytes =>
     withNck1MaterializationSourceCache(() => buildNck1ReviewProjectionUncached(rootDir,
       options, readProducts, referenceReceipt, sealedListening, retainedBytes,
-      retainedBytes && evidenceBase.revision)))
+      retainedBytes && evidenceBase)))
 }
 
 function buildNck1ReviewProjectionUncached(rootDir, {
   requireAnalyses = false,
   analysisProfile = LEGACY_NCK1_ANALYSIS_PROFILE,
   expectedCandidateDigest = null,
-} = {}, readProducts, referenceReceipt, sealedListening, retainedBytes, retainedBase) {
+} = {}, readProducts, referenceReceipt, sealedListening, retainedBytes, evidenceBase) {
   const loaded = loadNck1ReviewSource(rootDir)
   const imported = importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest,
-    !expectedCandidateDigest ? retainedCandidateBinding(retainedBytes, retainedBase) : null)
+    !expectedCandidateDigest ? retainedCandidateBinding(retainedBytes, evidenceBase?.revision) : null)
   if (!imported.candidate || imported.issues.length > 0) {
     const issue = imported.issues[0]
     fail(`${issue?.code || 'MATERIALIZATION_INVALID'}: ${issue?.message || 'Candidate derivation failed'}`)
@@ -2031,9 +2036,19 @@ function buildNck1ReviewProjectionUncached(rootDir, {
     analysisValidated: (requireAnalyses || Boolean(importProfile))
       && preview.candidate.interpretation.sourceAssetVersion === 1,
   })
-  const frozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
-    ? readProducts(rootDir, { inputDigest: productInputDigest(rootDir, inventory(), reviewedListening),
-        legacyInputDigest: () => productInputDigest(rootDir, inventory(), reviewedListening, { legacy: true }),
+  const hasFrozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
+  const printInputDigest = hasFrozenProducts ? productInputDigest(rootDir, inventory(), reviewedListening) : null
+  const frozenProducts = hasFrozenProducts
+    ? readProducts(rootDir, { inputDigest: printInputDigest,
+        legacyInputDigest: expected => {
+          const originalManifest = retainedBytes?.(PRODUCT_MANIFEST)
+          if (originalManifest && JSON.parse(originalManifest).inputDigest === expected
+            && matchesSealedPrintInputs({ rootDir, inputDigest: printInputDigest,
+              sealedFiles: evidenceBase.revision.manifest.files,
+              sealedConfigBytes: evidenceBase.configBytes ?? (evidenceBase.directory
+                ? readReviewBytes(resolveReviewFile(evidenceBase.directory, 'config.json')) : null) })) return expected
+          return productInputDigest(rootDir, inventory(), reviewedListening, { legacy: true })
+        },
         config: loaded.config, listeningCount: slotBindings.filter(entry => entry.familyContractId === 'listening').length,
         ...productPageLimitsForPlan(paginationPlan?.plan) }) : null
   if (frozenProducts && !sourceReferences) {
@@ -2045,6 +2060,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   const projection = {
     ...loaded,
     frozenProducts,
+    printInputDigest,
     reviewedListening,
     paperId: loaded.materialization.paperId,
     paperName: loaded.config.provenance.paperName,

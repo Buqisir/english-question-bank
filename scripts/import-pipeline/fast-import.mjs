@@ -24,9 +24,11 @@ import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
+import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
 import { loadNck1ReviewSource, reviewBundleFilePaths } from '../../server/import-review/revisionProjection.mjs'
 import { PRODUCT_MANIFEST, productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview } from '../../server/paper-import/listeningReview.mjs'
+import { LISTENING_RULE_EVIDENCE_VERSION } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
 import { sourceReferenceCellContinuations, refreshSourceReferenceCellContinuations } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
 import { assertSourceReferenceAdmission } from '../../server/paper-import/sourceReferenceAdmission.mjs'
 import {
@@ -839,19 +841,44 @@ function sameListeningInputs(previous, current) {
     candidateDigest: current.candidateDigest }) === digestJson(current)
 }
 
+function rebindFastListening(directory, review, subject, transcript) {
+  validateListeningReview(directory, review, review.subject, transcript)
+  const evidence = review.evidence.map(file => {
+    if (file.kind !== 'review_notes') return file
+    const record = readJson(path.join(directory, file.path))
+    if (record.schemaVersion !== LISTENING_RULE_EVIDENCE_VERSION) return file
+    const bytes = Buffer.from(JSON.stringify({ ...record, input: { ...record.input, subject } }))
+    const digest = sha256(bytes)
+    const relative = `listening-review-evidence/rule-${digest.slice(7)}.json`
+    const target = path.join(directory, relative)
+    if (!existsSync(target)) writeFileSync(target, bytes, { flag: 'wx' })
+    return { ...file, path: relative, sha256: digest, byteLength: bytes.length }
+  })
+  const rebound = { ...review, subject, evidence }
+  validateListeningReview(directory, rebound, subject, transcript)
+  return rebound
+}
+
 async function retainFastListening(ctx, candidateDigest) {
   const installed = path.join(ctx.paperDir, LISTENING_REVIEW_FILE)
   const attempt = ctx.state.data.listeningSegmentAttempt
   if (!existsSync(installed) && !attempt?.review) return false
   const loaded = loadNck1ReviewSource(ctx.paperDir)
-  const { candidate } = importLocalReviewCandidate(ctx.paperDir, loaded, candidateDigest)
+  let imported
+  try { imported = importLocalReviewCandidate(ctx.paperDir, loaded, candidateDigest) } catch (error) {
+    if (candidateDigest || error.code !== 'IMPORT_REVIEW_PROJECTION_MISMATCH') throw error
+    imported = importCanonicalCandidate(loaded.sourceInput)
+  }
+  const { candidate, issues } = imported
+  if (!candidate || issues.length) fail('听力复用前的 Candidate 校验失败')
   const subject = listeningReviewSubject(loaded, candidate)
+  const transcript = loaded.materialization.listening.transcript
   if (existsSync(installed)) {
     const review = readJson(installed)
     if (sameListeningInputs(review.subject, subject)) {
-      if (digestJson(review.subject) !== digestJson(subject) && !hydratedEvidenceBase(ctx.paperDir)) {
-        const rebound = { ...review, subject }
-        validateListeningReview(ctx.paperDir, rebound, subject, loaded.materialization.listening.transcript)
+      if (digestJson(review.subject) !== digestJson(subject)) {
+        assertReferencesMutable(ctx)
+        const rebound = rebindFastListening(ctx.paperDir, review, subject, transcript)
         archive(ctx, installed)
         writeJson(installed, rebound, 'wx')
       }
@@ -862,8 +889,17 @@ async function retainFastListening(ctx, candidateDigest) {
     archive(ctx, installed)
     delete ctx.state.steps['listening-review']
   }
-  if (!attempt?.review || !existsSync(attempt.review)
-    || !sameListeningInputs(readJson(attempt.review).subject, subject)) {
+  const report = attempt?.review && existsSync(attempt.review) ? readJson(attempt.review) : null
+  if (sameListeningInputs(report?.subject, subject)) {
+    if (digestJson(report.subject) !== digestJson(subject)) {
+      assertReferencesMutable(ctx)
+      const rebound = rebindFastListening(attempt.attempt, report, subject, transcript)
+      const reboundPath = path.join(ctx.fast, 'listening-review-input.json')
+      writeJson(reboundPath, rebound)
+      ctx.state.data.listeningSegmentAttempt = { ...attempt, review: reboundPath }
+      save(ctx)
+    }
+  } else {
     for (const name of ['asr-wait', 'asr-apple-rule-v2', 'listening-review', 'round2-requests']) delete ctx.state.steps[name]
     delete ctx.state.data.listeningSegmentAttempt
     save(ctx)
@@ -891,14 +927,7 @@ async function installListening(ctx) {
       if (sha256(readFileSync(target)) !== file.sha256) fail(`不可覆盖旧听力证据：${file.path}`)
     } else writeFileSync(target, bytes, { flag: 'wx' })
   }
-  const request = path.join(ctx.fast, 'listening-review-request.json')
-  const subject = existsSync(request) ? readJson(request).report.subject : report.subject
-  let input = result.review
-  if (sameListeningInputs(report.subject, subject) && digestJson(report.subject) !== digestJson(subject)) {
-    input = path.join(ctx.fast, 'listening-review-input.json')
-    writeJson(input, { ...report, subject })
-  }
-  await run(ctx, 'finalize-listening', cli('review.mjs', 'finalize-listening-review', ctx.paperId, '--input', input))
+  await run(ctx, 'finalize-listening', cli('review.mjs', 'finalize-listening-review', ctx.paperId, '--input', result.review))
   await run(ctx, 'verify-listening', cli('review.mjs', 'verify-listening-review', ctx.paperId))
   return { groups: report.groups.length, usable: report.groups.filter(g => g.decision === 'usable').length,
     evidence: report.evidence.length, ruleVersion: readJson(path.join(result.attempt, 'rule-result.json')).rule.version }
@@ -1467,7 +1496,7 @@ export async function finish(ctx, args, { referenceStages = {}, readStatus } = {
       return { ok: false, warning: error.message }
     }
   })
-  if (hasListening(ctx)) await step(ctx, 'listening-review', () => installListening(ctx))
+  if (hasListening(ctx) && !await retainFastListening(ctx)) await step(ctx, 'listening-review', () => installListening(ctx))
   await step(ctx, 'ocr-correction-report', async () => {
     const reportFile = path.join(ctx.paperDir, 'agent-ocr-correction-report-v2.json')
     const profileId = (ctx.state.data.formatProfileBinding

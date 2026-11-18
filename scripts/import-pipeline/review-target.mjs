@@ -42,5 +42,6 @@ export function hydratedEvidenceBase(paperDir) {
   if (restore.schemaVersion !== 'review-restore-v1' || restore.origin !== target
     || restore.paperId !== revision.paperId || restore.revisionId !== revision.id
     || restore.bundleDigest !== revision.bundleDigest) throw new Error('Review restore binding does not match the retained revision')
-  return { revision }
+  const config = path.join(paperDir, 'signals', 'review-restore-config.json')
+  return { revision, ...(existsSync(config) ? { configBytes: readFileSync(config) } : {}) }
 }

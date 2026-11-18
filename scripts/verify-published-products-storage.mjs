@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict'
 import './lib/reviewTestLockRoot.mjs'
-import { chmod, mkdir, mkdtemp, readFile, readdir, stat, writeFile, rm } from 'node:fs/promises'
+import { chmod, cp, mkdir, mkdtemp, readFile, readdir, stat, writeFile, rm } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { createHash } from 'node:crypto'
 import { Readable } from 'node:stream'
 import { DatabaseSync } from 'node:sqlite'
 import { archiveReviewFiles, createBlobStore } from '../server/paper-import/blobStore.mjs'
-import { loadStoredProducts, productInputDigest, readFrozenProducts, PRODUCT_FILES, PRODUCT_MANIFEST } from '../server/paper-import/frozenProducts.mjs'
+import { loadStoredProducts, matchesSealedPrintInputs, productInputDigest, readFrozenProducts, PRODUCT_FILES, PRODUCT_MANIFEST } from '../server/paper-import/frozenProducts.mjs'
 import { readExamDate } from '../shared/examDate.mjs'
 import { PAPER_PDF_PRODUCTS } from '../shared/paperPdfProducts.mjs'
 import { sendListeningAudioFile } from '../server/paper-import/paperAssetStatic.mjs'
@@ -21,7 +21,7 @@ import { SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.
 import { syntheticReviewReferences } from './lib/syntheticReviewAnswerFixture.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
-import { finalizeReviewFixture, publicationFixtureInput } from './lib/reviewPublicationFixture.mjs'
+import { finalizeReviewFixture, freezeReviewFixture, publicationFixtureInput } from './lib/reviewPublicationFixture.mjs'
 
 const digest = bytes => `sha256:${createHash('sha256').update(bytes).digest('hex')}`
 const directory = await mkdtemp(path.join(os.tmpdir(), 'eqb-product-storage-'))
@@ -266,18 +266,47 @@ try {
   const metadata = { path: 'public-search-metadata-v1.json', mediaType: 'application/json', role: 'public_search_metadata' }
   const metadataPath = path.join(fixture.reviewRoot, metadata.path)
   await writeFile(metadataPath, JSON.stringify({ tags: ['before'] }))
-  assert.equal(productInputDigest(fixture.reviewRoot, [...printInventory, metadata]), productManifest.inputDigest)
+  const previousConfig = await readFile(configPath)
+  const legacyInputFiles = [...printInventory, metadata]
+  const legacy = { ...productManifest,
+    inputDigest: productInputDigest(fixture.reviewRoot, legacyInputFiles, null, { legacy: true }) }
+  await writeFile(path.join(fixture.reviewRoot, PRODUCT_MANIFEST), JSON.stringify(legacy))
+  const sealedFiles = await Promise.all(legacyInputFiles.map(async file => {
+    const data = await readFile(path.join(fixture.reviewRoot, file.path))
+    return { ...file, sha256: digest(data), byteLength: data.length }
+  }))
+  const sealed = { paperId: fixture.projection.paperId, sourceDigest: inputIdentity.sourceDigest,
+    candidateDigest: inputIdentity.candidateDigest, files: sealedFiles }
+  sealed.bundleDigest = reviewBundleDigest(sealed)
+  const base = { revision: { ...sealed, id: 'rev-old-products', reviewKind: 'candidate',
+    state: 'approved', finalizedAt: '2026-04-12T00:00:00Z', manifest: sealed }, configBytes: previousConfig }
   await writeFile(metadataPath, JSON.stringify({ tags: ['after'] }))
-  assert.equal(productInputDigest(fixture.reviewRoot, [...printInventory, metadata]), productManifest.inputDigest)
-  await rm(metadataPath)
+  await writeFile(configPath, JSON.stringify({ ...config, provenance: { ...config.provenance, defaultTags: ['changed'] } }))
+  assert.equal(productInputDigest(fixture.reviewRoot, legacyInputFiles), productManifest.inputDigest)
+  assert.throws(() => buildNck1ReviewProjection(fixture.reviewRoot), /输入或产品文件清单/)
+  const reused = buildNck1ReviewProjection(fixture.reviewRoot, {}, base)
+  assert.deepEqual(reused.frozenProducts.manifest, legacy)
+  assert.deepEqual(reused.frozenProducts.bytes['products/answerOnly.pdf'], fixtureBytes['products/answerOnly.pdf'])
   const materializationPath = path.join(fixture.reviewRoot, printInventory.find(file => file.role === 'materialization').path)
   const materializationBytes = await readFile(materializationPath)
   const changedMaterialization = JSON.parse(materializationBytes)
   const question = changedMaterialization.groups.find(group => group.questions.length).questions[0]
   question.stem = 'Changed question text?'
   await writeFile(materializationPath, JSON.stringify(changedMaterialization))
-  assert.notEqual(productInputDigest(fixture.reviewRoot, printInventory), productManifest.inputDigest)
+  const changedPrintDigest = productInputDigest(fixture.reviewRoot, printInventory)
+  assert.equal(matchesSealedPrintInputs({ rootDir: fixture.reviewRoot, inputDigest: changedPrintDigest,
+    sealedFiles, sealedConfigBytes: previousConfig }), false, 'edited question needs a new freeze')
+  const refreezeRoot = path.join(directory, 'refreeze')
+  await cp(fixture.reviewRoot, refreezeRoot, { recursive: true })
+  for (const file of ['pagination-plan.json', SOURCE_REFERENCES_FILE]) await rm(path.join(refreezeRoot, file))
+  const refrozen = freezeReviewFixture(refreezeRoot)
+  assert.notEqual(refrozen.candidateDigest, inputIdentity.candidateDigest)
+  assert.notEqual(refrozen.frozenProducts.manifest.inputDigest, legacy.inputDigest)
+  assert.equal(refrozen.frozenProducts.manifest.inputDigest, refrozen.printInputDigest)
   await writeFile(materializationPath, materializationBytes)
+  await writeFile(configPath, previousConfig)
+  await rm(metadataPath)
+  await writeFile(path.join(fixture.reviewRoot, PRODUCT_MANIFEST), JSON.stringify(productManifest))
   const projection = buildNck1ReviewProjection(fixture.reviewRoot, { requireAnalyses: true })
   assert.equal(projection.sourceDigest, inputIdentity.sourceDigest)
   assert.equal(projection.candidateDigest, inputIdentity.candidateDigest)

@@ -7,7 +7,7 @@ import { loadNck1ReviewSource } from '../../server/import-review/revisionProject
 import { hydratedEvidenceBase, importLocalReviewCandidate, withLocalReviewEvidence } from './review.mjs'
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import {
-  assertSourceReferences, prepareSourceReferences, SOURCE_REFERENCES_FILE, sourceReferencesSchema,
+  prepareSourceReferences, SOURCE_REFERENCES_FILE, sourceReferencesSchema,
   sourceReferenceBlocks, structuredSourceReferencesSchema, figureSourceReferencesSchema, scoringFigureSourceReferencesSchema,
   exclusionSourceReferencesSchema, currentSourceReferencesSchema, cellContinuationSourceReferencesSchema,
 } from '../../server/paper-import/sourceReferences.mjs'
@@ -139,9 +139,9 @@ try {
     }, null, 2)}\n`)
     console.log(JSON.stringify({ status: 'local_capture_prepared', output, paperId: loaded.materialization.paperId }))
   } else {
-    assertSourceReferences({ ...binding, sidecar: sourceReferences })
-    withLocalReviewEvidence(paperDir, () => assertSourceReferenceAdmission({ ...binding, sidecar: sourceReferences, sourceInput: loaded.sourceInput,
-      onWarning: message => console.warn(`${loaded.materialization.paperId}: ${message}`),
+    const onWarning = message => console.warn(`${loaded.materialization.paperId}: ${message}`)
+    const skippedScoringFigures = withLocalReviewEvidence(paperDir, () => assertSourceReferenceAdmission({ ...binding, sidecar: sourceReferences, sourceInput: loaded.sourceInput,
+      onWarning,
       referenceSourceManifest: loaded.manifest,
       referenceOcrSourceBytes: loadReferenceOcrSourceBytes(paperDir, {
         producerVersion: sourceReferences?.producerVersion, canonicalOcrSourceBytes: loaded.sourceInput.ocrSourceBytes,
@@ -159,7 +159,7 @@ try {
         ...(['zhejiang-legacy', 'national-legacy'].includes(loaded.materialization.profileId)
           ? { canonicalPlan: withLocalReviewEvidence(paperDir, () =>
               compileNck1MaterializationCandidatePreview(imported.candidate)).compilation?.artifacts?.canonicalPaper?.paperPlan } : {}),
-        paperName: loaded.config.provenance.paperName, includeScoring })
+        paperName: loaded.config.provenance.paperName, includeScoring, onWarning, skippedScoringFigures })
       mkdirSync(output, { recursive: true })
       activeQaOutput = output
       writeNew(path.join(output, 'answerOnly.html'), html)

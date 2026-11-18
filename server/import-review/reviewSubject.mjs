@@ -3,7 +3,7 @@ import { digestJson, stableStringify } from '../../shared/paper-canonical/stable
 import { LISTENING_AUDIO_PATHS } from '../paper-import/listeningAudioEvidence.mjs'
 import { reviewedPlaybackSegments } from '../paper-import/listeningReview.mjs'
 import { manifestProductFiles } from '../paper-import/pdfProductSet.mjs'
-import { productInputFiles } from '../paper-import/frozenProducts.mjs'
+import { productInputDescriptor, productInputFiles } from '../paper-import/frozenProducts.mjs'
 
 export const REVIEW_SUBJECT_VERSION = 'review-content-subject-v2'
 export const REVIEW_SUBJECT_MAX_BYTES = 8 * 1024 * 1024
@@ -246,7 +246,8 @@ function productsFromFiles(files, revision, validatedListeningReview) {
     fail('MISSING_VALIDATED_LISTENING_REVIEW', '/products/inputDigest')
   }
   const inputDigest = options => digestJson(productInputFiles(files, validatedListeningReview, options)
-    .map(descriptor).sort((a, b) => a.path.localeCompare(b.path)))
+    .map(file => productInputDescriptor(descriptor(file), options?.legacy ? null : file.json))
+    .sort((a, b) => a.path.localeCompare(b.path)))
   if (inputDigest() !== manifest.inputDigest && inputDigest({ legacy: true }) !== manifest.inputDigest) {
     fail('BASELINE_UNTRUSTED', '/products/inputDigest')
   }

@@ -35,6 +35,7 @@ import {
   buildNck1ReviewConsumption,
   loadNck1ReviewSource,
   reviewBundleFilePaths,
+  reviewBundleFilePathsForProjection,
   resolveReviewFile,
 } from '../server/import-review/revisionProjection.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
@@ -1079,7 +1080,7 @@ function reviewManifestFor(reviewRoot, projection) {
   if (!existsSync(path.join(reviewRoot, 'products/manifest-v1.json'))) {
     projection = freezeReviewFixture(reviewRoot, { expectedCandidateDigest: projection.candidateDigest })
   }
-  const files = reviewBundleFilePaths(reviewRoot).map((file) => {
+  const files = reviewBundleFilePathsForProjection(reviewRoot, projection).map((file) => {
     const bytes = readFileSync(resolveReviewFile(reviewRoot, file.path))
     return {
       ...file,
@@ -2650,7 +2651,18 @@ const publicSummary = {
   })),
 }
 writeJson(summariesPath, publicSummary)
-publicOnly.projection = buildNck1ReviewProjection(publicOnly.reviewRoot, { requireAnalyses: true })
+const invalidMetadata = path.join(publicOnly.reviewRoot, 'public-search-metadata-v1.json')
+const metadataWarnings = []
+const originalWarn = console.warn
+try {
+  console.warn = message => metadataWarnings.push(message)
+  for (const bytes of ['{', '{}']) {
+    writeFileSync(invalidMetadata, bytes)
+    publicOnly.projection = buildNck1ReviewProjection(publicOnly.reviewRoot, { requireAnalyses: true })
+    assert.equal(publicOnly.projection.publicSearchMetadataDigest, undefined)
+  }
+} finally { console.warn = originalWarn }
+assert.equal(metadataWarnings.filter(message => message.includes('ignoring public-search-metadata-v1.json')).length, 2)
 assert.equal(publicOnly.projection.analysisDigest, null)
 assert.equal(publicOnly.projection.publicSearchMetadataDigest, undefined)
 assert.equal(publicOnly.projection.importProfile, 'public-paper-v1')

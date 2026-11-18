@@ -11,7 +11,10 @@ import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as producerVersion } from './ocr
 import { PAPER_PAGINATION_PLAN_FILE_NAME } from '../../server/paper-import/paginationPlan.mjs'
 import { uploadReviewBundle } from './lib-review-upload.mjs'
 import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
-import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { sha256, digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { listeningReviewSubject, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
+import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
+import { loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 
 const downstream = ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']
 
@@ -212,6 +215,69 @@ function fixture(t, referencesVersion = version) {
   }]))
   return { dir, ctx, calls, options: { referenceStages } }
 }
+
+test('finish retains installed v2 listening evidence after a non-listening stem edit', async t => {
+  const { dir, ctx, options } = fixture(t)
+  const { makeReviewRoot } = await (async () => {
+    const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+    process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
+    try { return await import('../verify-universal-nck1-publish.mjs') } finally {
+      if (previous === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+      else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
+    }
+  })()
+  const { reviewRoot, projection } = makeReviewRoot(path.join(dir, 'actual'), ctx.paperId, undefined, { listening: true })
+  ctx.paperDir = reviewRoot
+  const transcript = projection.materialization.listening.transcript
+  const subject = listeningReviewSubject(projection, projection.candidate)
+  const asrPath = 'listening-review-evidence/asr.json'
+  const notePath = 'listening-review-evidence/original-rule.json'
+  const putEvidence = (relative, value, kind, window = null, settings = null) => {
+    const file = path.join(reviewRoot, relative)
+    json(file, value)
+    const bytes = readFileSync(file)
+    return { path: relative, sha256: sha256(bytes), byteLength: bytes.length, kind, window, settings }
+  }
+  const asr = putEvidence(asrPath, { segments: [] }, 'asr_window', { startSeconds: 0, endSeconds: 10 },
+    { engine: 'fixture', model: 'fixture', language: 'en', vad: false, computeType: 'fixture' })
+  const groups = transcript.map(({ segmentId, questionNumbers }, index) => ({
+    segmentId, questionNumbers, decision: index ? 'blocked' : 'usable', reason: 'fixture comparison',
+    limits: [], playback: index ? null : { startSeconds: 1, endSeconds: 2 },
+    occurrences: index ? [] : [{ startSeconds: 1, endSeconds: 2, evidencePaths: [asrPath] }],
+  }))
+  const rule = { version: 'fixture', normalizationVersion: 'fixture' }
+  const normalization = { fixture: true }
+  const hash = digestJson(null)
+  const note = putEvidence(notePath, { schemaVersion: 'listening-rule-evidence-v2', rule, normalization,
+    input: { subject, rule, normalization, sourceTextSha256: sha256(JSON.stringify(transcript)),
+      audioSha256: subject.playbackAudioSha256, materializationSha256: hash, silenceSha256: hash,
+      ruleCodeSha256: hash, adapterSha256: hash, instructionsSha256: hash, questionsSha256: hash },
+    rawEvidence: [asr], groups: groups.map(({ reason, limits, ...group }, index) => ({
+      ...group, occurrences: group.occurrences.map(({ evidencePaths, ...playback }) => ({ playback, evidencePaths })),
+      sourceText: transcript[index].text, issues: [], engineAttempts: [],
+    })), diagnostic: { schemaVersion: 'listening-diagnostics-v1', path: 'diagnostics.json.gz', encoding: 'gzip',
+      sha256: hash, byteLength: 1, decodedSha256: hash, decodedByteLength: 1 } }, 'review_notes')
+  json(path.join(reviewRoot, 'listening-review-v1.json'), { schemaVersion: 'listening-review-v2',
+    subject, reviewedBy: 'import_agent', reviewedAt: oldTime, method: 'asr_source_comparison',
+    untrustedContentHandledAsData: true, scope: { purpose: 'teacher_navigation',
+      verbatim: 'not_certified', wholeRecordingContent: 'not_certified' }, groups, evidence: [asr, note] })
+  const materializationFile = path.join(reviewRoot, 'materialization/nck1-source-materialization-v1.json')
+  const materialization = JSON.parse(readFileSync(materializationFile))
+  materialization.groups[0].questions[0].stem = 'What is the purpose of the notice?'
+  json(materializationFile, materialization)
+  const loaded = loadNck1ReviewSource(reviewRoot)
+  const { candidate, issues } = importCanonicalCandidate(loaded.sourceInput)
+  assert.deepEqual(issues, [])
+  const current = listeningReviewSubject(loaded, candidate)
+  assert.notEqual(current.candidateDigest, subject.candidateDigest)
+  const asrStage = ctx.state.steps['asr-apple-rule-v2'] = completed({ retained: true })
+  await finish(ctx, [], options)
+  const { review } = readListeningReview(reviewRoot, current, transcript)
+  assert.deepEqual(review.groups, groups)
+  assert.deepEqual(review.evidence[0], asr)
+  assert.equal(sha256(readFileSync(path.join(reviewRoot, notePath))), note.sha256)
+  assert.equal(ctx.state.steps['asr-apple-rule-v2'], asrStage)
+})
 
 test('after-proofread forwards explicit body width to figure-sizes on resume', t => {
   const paperId = `paper-synthetic-fast-body-width-${process.pid}`

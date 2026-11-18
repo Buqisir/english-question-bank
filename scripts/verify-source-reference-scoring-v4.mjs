@@ -47,6 +47,21 @@ assert.deepEqual(sourceReferenceFigures(captureScoringReferences(reversed)).map(
   sourceReferenceFigures(sidecar).map(item => item.figure.sourceRegionId), 'source sequence, never visual array order')
 console.log('PASS compile → v4 scoring capture → exact PDF/image/scope admission; p03/p04 and multiple-figure source order')
 
+const misplaced = structuredClone(sidecar)
+figure(misplaced).source.locator.region.x += .01
+const figureWarnings = []
+const skippedScoringFigures = assertSourceReferenceAdmission({ ...input, sidecar: misplaced,
+  onWarning: message => figureWarnings.push(message) })
+assert.deepEqual([...skippedScoringFigures], [figure(misplaced).figureId])
+assert(figureWarnings.some(message => /confirmed source region/u.test(message)))
+const skippedHtml = buildAnswerOnlyHtml({ ...input, sourceReferences: misplaced, includeScoring: true, skippedScoringFigures })
+assert(!skippedHtml.includes(`data-reference-figure="${figure(misplaced).figureId}"`))
+const wrongQuestionFigure = structuredClone(input.materialization)
+wrongQuestionFigure.groups[0].blocks.push({ kind: 'figure', blockId: 'block:wrong-question-figure',
+  mediaId: 'media:missing-question-figure', caption: '', source: wrongQuestionFigure.groups[0].blocks[0].source })
+assert(importCanonicalCandidate({ ...input.sourceInput, materializationBytes: Buffer.from(JSON.stringify(wrongQuestionFigure)) })
+  .issues.some(issue => issue.code === 'MATERIALIZATION_MEDIA_UNRESOLVED'))
+
 for (const [name, change, code] of [
   ['duplicate figure ID', value => { figure(value).figureId = sourceReferenceFigures(value)[1].figure.figureId }, 'SOURCE_REFERENCES_ID_DUPLICATE'],
   ['duplicate source region', value => { scoring(value).blocks.push(structuredClone(figure(value))) }, 'SOURCE_REFERENCES_FIGURE_DUPLICATE'],

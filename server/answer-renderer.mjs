@@ -204,11 +204,18 @@ function legacyAnswerSections({ canonicalPlan, materialization, authorityRef, so
 export function buildAnswerOnlyHtml({
   paperName, materialization, sourceReferences, sourceDigest, candidateDigest,
   includeScoring = false, sourceDocuments = null, sourceInput = null, authorityRef = null,
-  canonicalPlan = null,
+  canonicalPlan = null, onWarning = null, skippedScoringFigures = null,
 }) {
   if (typeof paperName !== 'string' || !paperName.trim()) throw new Error('Owner-provided paper name is required')
   assertAnswerSource(materialization, sourceInput, authorityRef)
-  assertSourceReferences({ sidecar: sourceReferences, materialization, sourceDigest, candidateDigest, sourceDocuments, sourceInput })
+  assertSourceReferences({ sidecar: sourceReferences, materialization, sourceDigest, candidateDigest, sourceDocuments, sourceInput, onWarning })
+  if (includeScoring && skippedScoringFigures?.size) {
+    sourceReferences = { ...sourceReferences, groups: sourceReferences.groups.map(group => ({
+      ...group, scoring: { ...group.scoring, entries: group.scoring.entries.map(entry => entry.blocks ? ({
+        ...entry, blocks: entry.blocks.filter(block => !skippedScoringFigures.has(block.figureId)),
+      }) : entry) },
+    })) }
+  }
   const answers = [...materialization.answers].sort((a, b) => a.canonicalNumber - b.canonicalNumber)
   const listening = materialization.listening
   const slice = (first, last) => answers.filter(answer => answer.canonicalNumber >= first && answer.canonicalNumber <= last)

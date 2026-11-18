@@ -91,8 +91,9 @@ export function readSourceReferencePublication({ db, paperAssetsDir, consumption
     return { documentId: document.documentId, bytes: decoded(matches[0]) }
   })
   const sourceReferences = parseSourceReferencesBytes(referenceBytes)
+  const onWarning = message => console.warn(`${consumption.paperId}: ${message}`)
   assertSourceReferences({ sidecar: sourceReferences, materialization,
-    sourceDigest: commitment.sourceDigest, candidateDigest: commitment.candidateDigest, sourceDocuments, sourceInput })
+    sourceDigest: commitment.sourceDigest, candidateDigest: commitment.candidateDigest, sourceDocuments, sourceInput, onWarning })
   return { canonicalPlan: validated.plan, authorityRef: consumption.authorityRef, paperName: commitment.paperName, materialization, sourceReferences, sourceReferencesBytes: referenceBytes, sourceDocuments,
-    sourceDigest: commitment.sourceDigest, candidateDigest: commitment.candidateDigest, commitment, ...(sourceInput ? { sourceInput } : {}) }
+    sourceDigest: commitment.sourceDigest, candidateDigest: commitment.candidateDigest, commitment, onWarning, ...(sourceInput ? { sourceInput } : {}) }
 }

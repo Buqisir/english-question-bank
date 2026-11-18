@@ -32,6 +32,7 @@ import { materializeNck1CanonicalRequest } from '../../server/paper-canonical/nc
 import { loadCanonicalImportRequest } from '../../server/paper-canonical/importRequest.mjs'
 import { createFileSystemCanonicalPublicationStore, loadCanonicalOnlyConsumers } from '../../server/paper-canonical/publication.mjs'
 import { readSourceReferencePublication } from '../../server/paper-import/sourceReferencePublication.mjs'
+import { PRODUCT_MANIFEST } from '../../server/paper-import/frozenProducts.mjs'
 import {
   ocrReviewBundleDigest,
   reviewBundleDigest,
@@ -381,9 +382,19 @@ async function pushRevision(paperId) {
   const paperDir = paperDirectory(paperId)
   const loaded = loadNck1ReviewSource(paperDir)
   assertImportSubmissionReady(paperDir, loaded.materialization, loaded)
-  const projection = buildLocalReviewProjection(paperDir, { requireAnalyses: true })
+  let projection = buildLocalReviewProjection(paperDir, { requireAnalyses: true })
   const boundaryIssues = validateInlineBlankTextBoundaries(projection.compilation.artifacts.canonicalPaper.questionGroups)
   if (boundaryIssues.length) fail(JSON.stringify(boundaryIssues, null, 2))
+  const products = projection.frozenProducts
+  if (products && products.manifest.inputDigest !== projection.printInputDigest) {
+    // The projection proved reuse against the original seal or legacy digest.
+    // Only the local manifest is rebound, so the uploaded revision stands alone.
+    const file = resolveReviewFile(paperDir, PRODUCT_MANIFEST)
+    const staging = `${file}.${randomUUID()}`
+    writeFileSync(staging, `${JSON.stringify({ ...products.manifest, inputDigest: projection.printInputDigest }, null, 2)}\n`, { flag: 'wx' })
+    renameSync(staging, file)
+    projection = buildLocalReviewProjection(paperDir, { requireAnalyses: true })
+  }
   const manifest = reviewManifest(paperDir, projection, resolvedIssueIds())
   const finalized = await uploadReviewBundle(paperDir, manifest)
   console.log(JSON.stringify({
@@ -727,6 +738,8 @@ async function hydrate(paperId) {
     }
     const restorePath = path.join(temporary, 'signals', 'review-restore.json')
     mkdirSync(path.dirname(restorePath), { recursive: true })
+    writeFileSync(path.join(temporary, 'signals', 'review-restore-config.json'),
+      readFileSync(resolveReviewFile(temporary, 'config.json')), { flag: 'wx', mode: 0o600 })
     writeFileSync(restorePath, `${JSON.stringify({
       schemaVersion: 'review-restore-v1', paperId, origin: origin(),
       revisionId: revision.id, bundleDigest: revision.bundleDigest,
