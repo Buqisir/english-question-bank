@@ -282,6 +282,11 @@ function alignPass(source, sentences, sentenceStarts, bounds, words, reasons, pa
     return { start, end, matchRate: sentenceRate, approx: timed.some(word => word.approx === true) }
   })
   interpolateSentenceTimes(timings, bounds, reasons, pass)
+  for (const [i, timing] of timings.entries()) {
+    if (timing.start === null || timing.end - timing.start >= 0.35) continue
+    const end = Math.min(timing.start + 0.35, timings[i + 1]?.start ?? bounds.endSeconds)
+    if (end - timing.start >= 0.35 - epsilon) timing.end = end
+  }
   return { matchRate, timings }
 }
 
