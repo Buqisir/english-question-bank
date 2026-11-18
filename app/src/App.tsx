@@ -533,6 +533,10 @@ function App() {
     navigate('vocabulary-review', { setId: typeof setId === 'string' ? setId : null }, { replace: true })
   }, [navigate])
 
+  const clearMeaningRecallSet = useCallback(() => {
+    navigate('vocabulary-dictation-workbench', { meaningRecallSetId: null }, { replace: true })
+  }, [navigate])
+
   const openVocabularyPractice = useCallback((setId: string) => {
     navigate('vocabulary-review', { setId, mode: null }, { replace: true })
     navigate('vocabulary-practice', { setId, mode: 'match' }, {
@@ -625,6 +629,7 @@ function App() {
       <VocabularyDictationWorkbench
         onBackToVocabulary={vocabularyDictationOnBackToReview}
         requestedSetId={route.meaningRecallSetId}
+        onRequestedSetOpened={clearMeaningRecallSet}
         shellNav={{ ...shellNav, onOpenVocabularyReview: vocabularyDictationOnBackToReview }}
       />
     )
