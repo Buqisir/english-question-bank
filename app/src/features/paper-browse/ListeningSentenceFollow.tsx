@@ -35,6 +35,7 @@ const phraseDuration = 700
 const jumpDuration = 500
 const FOLLOW_BEAT_MS = 150
 const FOLLOW_SOFT_START_MS = 140
+const MAX_ANIMATION_FRAME_MS = 34
 const calmBeatDuration = 200
 const calmV1HighlightDuration = 150
 const calmReadingInset = 0.08
@@ -214,6 +215,10 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     if (!audio || !scroller || !sentences.length) return
     const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)')
     let frame = 0
+    let animTime = 0
+    let lastFrameTime: number | undefined
+    let lastAudioTime: number | undefined
+    let flowTime: number | undefined
     let lastIndex = -1
     let lastSentenceChange = -Infinity
     let lastRepeating = false
@@ -288,13 +293,21 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       const height = scroller.clientHeight
       return top >= height * calmReadingInset && top + row.offsetHeight <= height * (1 - calmReadingInset)
     }
-    const sync = (now: number, jump = false) => {
-      frame = 0
+    const sync = (now: number, elapsed: number, jump = false) => {
       const target = sentences[loopTarget.current]
       if (target && !audio.paused && !audio.seeking && audio.currentTime >= sentenceEnd(target, loopRepeating.current)) {
         audio.currentTime = sentenceStart(target, loopRepeating.current)
       }
-      const time = audio.currentTime
+      const reportedTime = audio.currentTime
+      const rollback = !jump && !audio.seeking && lastAudioTime !== undefined
+        && reportedTime < lastAudioTime && lastAudioTime - reportedTime < 0.5
+      // Keep the last accepted time until playback catches up or a seek resets it.
+      const time = rollback ? lastAudioTime! : reportedTime
+      lastAudioTime = time
+      if (flow) {
+        flowTime = jump || audio.seeking || flowTime === undefined || time < flowTime
+          ? time : Math.min(time, flowTime + elapsed * audio.playbackRate / 1000)
+      }
       const repeating = time + 0.025 >= repeatStart
       const index = target ? loopTarget.current
         : sentences.findLastIndex((sentence) => sentenceStart(sentence, repeating) <= time + 0.025)
@@ -421,15 +434,19 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
             }
             positionList(position)
             if (progress === 1) stopCurve()
-          } else if (continuous && !audio.paused && !audio.seeking) {
-            const from = center(index)
-            const next = sentences[index + 1]
+          } else if (continuous && !audio.paused && !audio.seeking && elapsed > 0) {
+            const scrollTime = flowTime ?? time
+            const scrollRepeating = scrollTime + 0.025 >= repeatStart
+            const scrollIndex = target ? index
+              : Math.max(0, sentences.findLastIndex((sentence) => sentenceStart(sentence, scrollRepeating) <= scrollTime + 0.025))
+            const from = center(scrollIndex)
+            const next = sentences[scrollIndex + 1]
             let to = from
             if (next && !target) {
-              const start = sentenceStart(sentences[index], repeating)
-              const end = sentenceStart(next, repeating)
-              const progress = end > start ? Math.min(1, Math.max(0, (time - start) / (end - start))) : 0
-              to += (center(index + 1) - from) * progress
+              const start = sentenceStart(sentences[scrollIndex], scrollRepeating)
+              const end = sentenceStart(next, scrollRepeating)
+              const progress = end > start ? clamp((scrollTime - start) / (end - start), 0, 1) : 0
+              to += (center(scrollIndex + 1) - from) * progress
             }
             const delta = to - scroller.scrollTop
             // Snap below half a CSS pixel of movement to avoid rounding stalls.
@@ -445,11 +462,24 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       if (index >= 0 && changedSentence) lastSentenceChange = now
       lastIndex = index
       lastRepeating = repeating
-      if (!audio.paused || motion || spring) frame = requestAnimationFrame(sync)
+      if (!audio.paused || motion || spring) {
+        lastFrameTime ??= performance.now()
+        frame = requestAnimationFrame(onFrame)
+      } else {
+        lastFrameTime = undefined
+      }
+    }
+    const onFrame = (timestamp: number) => {
+      frame = 0
+      const elapsed = clamp(timestamp - (lastFrameTime ?? timestamp), 0, MAX_ANIMATION_FRAME_MS)
+      lastFrameTime = Math.max(timestamp, lastFrameTime ?? timestamp)
+      animTime += elapsed
+      sync(animTime, elapsed)
     }
     const update = (jump = false) => {
       cancelAnimationFrame(frame)
-      sync(performance.now(), jump)
+      frame = 0
+      sync(animTime, 0, jump)
     }
     const onPlay = () => {
       window.clearTimeout(focusTimeout)
@@ -474,10 +504,15 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       update(true)
     }
     const onMediaUpdate = () => { if (!frame) update() }
+    const onSeeking = () => {
+      lastAudioTime = undefined
+      flowTime = undefined
+    }
     const playbackEvents = ['timeupdate', 'seeked'] as const
     audio.addEventListener('play', onPlay)
     audio.addEventListener('pause', onPause)
     audio.addEventListener('ended', onPause)
+    audio.addEventListener('seeking', onSeeking)
     playbackEvents.forEach(event => audio.addEventListener(event, onMediaUpdate))
     audio.addEventListener(listeningPlayerSeekEvent, onPlayerSeek)
     audio.addEventListener(listeningPlayerSwitchEvent, stopLoop)
@@ -493,6 +528,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       audio.removeEventListener('play', onPlay)
       audio.removeEventListener('pause', onPause)
       audio.removeEventListener('ended', onPause)
+      audio.removeEventListener('seeking', onSeeking)
       playbackEvents.forEach(event => audio.removeEventListener(event, onMediaUpdate))
       audio.removeEventListener(listeningPlayerSeekEvent, onPlayerSeek)
       audio.removeEventListener(listeningPlayerSwitchEvent, stopLoop)

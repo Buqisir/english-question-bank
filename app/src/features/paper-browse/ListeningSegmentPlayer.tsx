@@ -46,6 +46,7 @@ const WAVE_WIDTH = { segment: 216, full: 384 } as const
 const MARK_CHAR_PX = 8
 const MARK_LABEL_MAX_SHIFT_PX = 12
 const HEADER_CLEARANCE = 72
+const PROGRESS_UPDATE_MS = 250
 
 function clock(seconds: number): string {
   const whole = Math.max(0, Math.floor(seconds))
@@ -93,16 +94,20 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
   useEffect(() => {
     if (!playing) return
     let frame: number
-    const tick = () => {
+    let lastUpdate = -Infinity
+    const tick = (now: number) => {
       const audio = audioRef.current
       if (!audio) return
       if (stopAtEnd(audio)) return
-      if (!lecture) setPosition(Math.max(0, audio.currentTime - startSeconds))
+      if (!lecture && open && now - lastUpdate >= PROGRESS_UPDATE_MS) {
+        lastUpdate = now
+        setPosition(Math.max(0, audio.currentTime - startSeconds))
+      }
       frame = requestAnimationFrame(tick)
     }
     frame = requestAnimationFrame(tick)
     return () => cancelAnimationFrame(frame)
-  }, [playing, lecture, startSeconds, stopAtEnd])
+  }, [playing, lecture, open, startSeconds, stopAtEnd])
 
   useEffect(() => {
     if (!open || lecture) return
@@ -213,6 +218,9 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
         if (stopAtEnd(audio)) return
         if (!playing) setPosition(Math.min(duration, Math.max(0, audio.currentTime - startSeconds)))
       }}
+      onSeeked={() => {
+        if (!lecture) setPosition(Math.min(duration, Math.max(0, audioRef.current!.currentTime - startSeconds)))
+      }}
     />
     <button ref={triggerRef} type="button" className="listening-player-trigger"
       aria-expanded={lecture ? undefined : open} aria-label={`${label}录音${playing ? '（播放中）' : ''}`} title={`${label}录音`}
@@ -227,6 +235,7 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
         <PlaybackIcon playing={playing} size={14} variant="fill" />
       </button>
       <ListeningProgress key={label} {...{ label, startSeconds, endSeconds, marks, position, started }} width={waveWidth}
+        readPosition={() => (audioRef.current?.currentTime ?? startSeconds) - startSeconds}
         onSeek={(seconds) => seekAudio(audioRef.current, startSeconds, endSeconds, seconds)}
         jumpTo={(seconds) => {
           seekAudio(audioRef.current, startSeconds, endSeconds, seconds)
@@ -264,7 +273,7 @@ function seekAudio(audio: HTMLAudioElement | null, start: number, end: number, s
   audio.dispatchEvent(new Event(listeningPlayerSeekEvent))
 }
 
-function ListeningProgress({ label, startSeconds, endSeconds, marks, position, started = true, width, showDuration, onSeek, jumpTo }: {
+function ListeningProgress({ label, startSeconds, endSeconds, marks, position, started = true, width, showDuration, readPosition, onSeek, jumpTo }: {
   label: string
   startSeconds: number
   endSeconds: number
@@ -273,6 +282,7 @@ function ListeningProgress({ label, startSeconds, endSeconds, marks, position, s
   started?: boolean
   width?: number
   showDuration?: boolean
+  readPosition: () => number
   onSeek: (seconds: number) => void
   jumpTo: (seconds: number) => void
 }) {
@@ -302,7 +312,7 @@ function ListeningProgress({ label, startSeconds, endSeconds, marks, position, s
   function onWaveKey(event: KeyboardEvent<HTMLDivElement>) {
     const step = event.shiftKey ? 15 : 5
     const moves: Record<string, number> = { ArrowLeft: -step, ArrowDown: -step, ArrowRight: step, ArrowUp: step }
-    if (event.key in moves) onSeek(position + moves[event.key])
+    if (event.key in moves) onSeek(readPosition() + moves[event.key])
     else if (event.key === 'Home') onSeek(0)
     else if (event.key === 'End') onSeek(duration)
     else return
@@ -405,21 +415,27 @@ export function ListeningTransport({ audio, onActivate, sentenceControls }: {
 
   useEffect(() => {
     if (!audio) return
-    let frame = 0
-    const sync = () => {
-      cancelAnimationFrame(frame)
+    let lastUpdate = -Infinity
+    const syncProgress = () => {
+      lastUpdate = performance.now()
       setTime(audio.currentTime)
+    }
+    const onTimeUpdate = () => {
+      if (performance.now() - lastUpdate >= PROGRESS_UPDATE_MS) syncProgress()
+    }
+    const sync = () => {
+      syncProgress()
       setPlaying(!audio.paused)
       setRate(audio.playbackRate)
       setError(Boolean(audio.error))
-      if (!audio.paused) frame = requestAnimationFrame(sync)
     }
-    const events = ['play', 'pause', 'ended', 'seeked', 'timeupdate', 'ratechange', 'error', 'loadstart'] as const
+    const events = ['play', 'pause', 'ended', 'seeked', 'ratechange', 'error', 'loadstart'] as const
     events.forEach(event => audio.addEventListener(event, sync))
+    audio.addEventListener('timeupdate', onTimeUpdate)
     sync()
     return () => {
-      cancelAnimationFrame(frame)
       events.forEach(event => audio.removeEventListener(event, sync))
+      audio.removeEventListener('timeupdate', onTimeUpdate)
     }
   }, [audio])
 
@@ -443,6 +459,7 @@ export function ListeningTransport({ audio, onActivate, sentenceControls }: {
       </button>
       {range && <ListeningProgress key={range.label} {...range} showDuration
         position={Math.min(range.endSeconds - range.startSeconds, Math.max(0, time - range.startSeconds))}
+        readPosition={() => (audio?.currentTime ?? range.startSeconds) - range.startSeconds}
         onSeek={(seconds) => seekAudio(audio ?? null, range.startSeconds, range.endSeconds, seconds)}
         jumpTo={(seconds) => {
           seekAudio(audio ?? null, range.startSeconds, range.endSeconds, seconds)
