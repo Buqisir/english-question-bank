@@ -106,8 +106,6 @@ uniquely supplies; otherwise keep it outside acceptance packs.
 - At startup and before push, fetch origin, resolve current main SHA and inspect
   its latest natural Actions attempt's eight jobs, plus unresolved failures
   still affecting main. Judge by SHA, never by run completion order.
-  On Owner Mac also compare production: deploy only if current main is all green
-  and not already live; pending/red main never permits an older green deployment.
 - Classify the complete changed-path set (and individual paths when investigating)
   with `node scripts/verify-ci.mjs --plan-json --changed-file <path>` (repeat flags).
   Treat `risk` as the primary machine result; high-risk behavior still needs
@@ -131,9 +129,10 @@ uniquely supplies; otherwise keep it outside acceptance packs.
   Synchronize main before triggering PR verification so head contains the event
   base; after complete green PR CI, squash merge. Later main advancement alone
   does not require another PR run. Deployment still waits for latest main CI.
-- The pusher follows their exact SHA's natural main run to completion and deploys
-  latest green main on Owner Mac. If unable to wait, record “SHA 待确认” in Linear;
-  off Mac record “已绿待部署” once green. Startup checks pick up unattended work.
+- The pusher follows their exact SHA's natural main run and reconciles website
+  delivery under [Owner Mac deployment](#owner-mac-deployment). If unable to
+  wait, record “SHA 待确认” in Linear. Record “已绿待部署” if CI is green and
+  deployment remains pending. Startup checks pick up unattended work.
 - Red main pauses ordinary pushes; only fixes/reverts may proceed. The pusher of
   the first failing SHA owns a fix/revert pushed within 30 minutes of discovery.
   If absent, the first finder takes over. Before reverting, assess dependent
@@ -209,16 +208,15 @@ uniquely supplies; otherwise keep it outside acceptance packs.
 - Owner Mac remains the backup through `scripts/local-deploy.sh`.
   The private key lives only in the Owner Mac Keychain; never copy it into a
   repository, worktree, log, Agent prompt, CI, or development Orb.
-- Standing Owner `部署最新版` authority includes automatic deployment, diagnosis,
-  health and agreed recovery after latest main's eight jobs are green. Only on
-  Owner Mac, use clean `~/Projects/eqb-deploy`, fetch origin and fast-forward main,
-  then run `scripts/local-deploy.sh deploy --owner-said-deploy-latest`.
+- For the Owner Mac backup, standing Owner `部署最新版` authority covers deployment,
+  diagnosis, health checks and agreed recovery after latest main's eight jobs
+  are green. Use clean `~/Projects/eqb-deploy`, fetch origin and fast-forward
+  main, then run `scripts/local-deploy.sh deploy --owner-said-deploy-latest`.
   Re-resolve if main advances; never use an old green SHA or ask Owner to copy one.
   For persistence-path code changes, review the complete production-SHA-to-target
   diff and confirm no migration/schema/data operation, then add `--code-only`;
   the script computes its digest. Migration, schema, DB/R2 data operations and
   host configuration require separate authority. “停自动部署” pauses all Agents.
-  Off Mac, record “已绿待部署” in Linear for an Owner Mac Agent to pick up.
 - The deploy command requires the exact-main successful natural GitHub Actions
   `Verify` workflow with both `verify` and `e2e` jobs, then sends that SHA
   through pinned restricted SSH to the root-owned fixed host controller.
