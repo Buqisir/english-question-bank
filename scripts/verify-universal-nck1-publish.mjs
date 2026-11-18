@@ -1652,6 +1652,7 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     await trigger.waitFor()
     await screenPage.locator('[data-paper-question-id="question:listening:6"]').click()
     await screenPage.locator('.listening-analysis-panel').waitFor()
+    const lecturePlayer = screenPage.locator('.listening-analysis-panel .listening-transport-main')
     assert.equal(await screenPage.locator('.ps-listening-player').count(), 0,
       'Listening controls must not occupy standalone paper rows')
     assert.equal(await screenPage.locator('.ps-listening-section .ps-text-trail .listening-player').count(), 1)
@@ -1714,21 +1715,22 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     await screenPage.waitForFunction(() => document.querySelector('audio')?.readyState >= 1)
     assert.equal(await audio.evaluate((element) => Math.round(element.duration)), 12)
     await screenPage.waitForFunction(() => document.querySelector('audio').currentTime > 0)
-    await fullPlayer.getByRole('button', { name: '暂停', exact: true }).click()
-    await fullPlayer.getByRole('slider').press('Home')
-    await fullPlayer.getByRole('slider').press('ArrowRight')
+    await lecturePlayer.getByRole('button', { name: '暂停', exact: true }).click()
+    assert.equal(await audio.evaluate(element => element.paused), true)
+    await lecturePlayer.getByRole('slider').press('Home')
+    await lecturePlayer.getByRole('slider').press('ArrowRight')
     await screenPage.waitForFunction(() => !document.querySelector('audio').seeking)
     assert.equal(await audio.evaluate((element) => Math.round(element.currentTime)), 5)
-    await fullPlayer.getByRole('button', { name: '播放速度 1 倍，点击切换', exact: true }).click()
+    await lecturePlayer.getByRole('button', { name: '播放速度 1 倍，点击切换', exact: true }).click()
     assert.equal(await audio.evaluate((element) => element.playbackRate), 1.25)
-    const lineGeometry = await fullPlayer.locator('.listening-player-line-spans:not(.listening-player-line-spans--played)')
+    const lineGeometry = await lecturePlayer.locator('.listening-player-line-spans:not(.listening-player-line-spans--played)')
       .evaluate(element => [...element.children].map(line => ({
         x: parseFloat(line.style.left) / element.clientWidth,
         width: parseFloat(line.style.width) / element.clientWidth,
       })))
     const cueTimes = [[0, .7], [1.2, 2], [2.3, 3.3], [3.8, 4.5], [5.1, 6], [6.5, 8.2]]
     assert.equal(lineGeometry.length, cueTimes.length)
-    const recordingDuration = Number(await fullPlayer.getByRole('slider').getAttribute('aria-valuemax'))
+    const recordingDuration = Number(await lecturePlayer.getByRole('slider').getAttribute('aria-valuemax'))
     // aria-valuemax is whole seconds, while the encoded fixture's published duration carries MP3
     // frame padding that differs between ffmpeg builds; derive the track scale from the lines instead.
     const lastLine = lineGeometry.at(-1)
@@ -1741,7 +1743,7 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
         && Math.abs(line.width * secondsPerTrack - (end - start)) < .02,
       `Question lines preserve real timestamps and instruction/silence gaps: ${JSON.stringify({ index, line, secondsPerTrack })}`)
     })
-    const slider = fullPlayer.getByRole('slider')
+    const slider = lecturePlayer.getByRole('slider')
     const beforeDrag = await audio.evaluate(element => element.currentTime)
     const trackBox = await slider.boundingBox()
     await screenPage.mouse.move(trackBox.x + trackBox.width * .3, trackBox.y + trackBox.height / 2)
@@ -1750,23 +1752,26 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     assert.equal(await audio.evaluate(element => element.currentTime), beforeDrag, 'Dragging previews without seeking audio')
     assert.ok(Math.abs(Number(await slider.getAttribute('aria-valuenow')) - recordingDuration * .6) <= 1)
     await screenPage.mouse.up()
-    assert.ok(Math.abs(await audio.evaluate(element => element.currentTime) - recordingDuration * .6) < .1,
-      'Pointer release commits one seek')
+    const afterDrag = await audio.evaluate(element => element.currentTime)
+    assert.ok(Math.abs(afterDrag - secondsPerTrack * .6) < .1,
+      `Pointer release commits one seek to ${secondsPerTrack * .6}s, got ${afterDrag}s`)
     await slider.press('Home')
     await slider.press('Shift+ArrowRight')
     assert.equal(await audio.evaluate(element => Math.round(element.currentTime)), recordingDuration,
       'Shift steps 15 seconds, clamped to the recording end')
     await slider.press('ArrowLeft')
     assert.equal(await audio.evaluate(element => Math.round(element.currentTime)), recordingDuration - 5)
-    await fullPlayer.getByRole('button', { name: '跳到第 3 题', exact: true }).click()
+    const thirdMark = lecturePlayer.getByRole('button', { name: '跳到第 3 题', exact: true })
+    await thirdMark.click()
     await screenPage.waitForFunction(() => {
       const audio = document.querySelector('.ps-listening-part audio')
-      const mark = document.querySelector('.ps-listening-part [aria-label="跳到第 3 题"]')
+      const mark = document.querySelector('.listening-analysis-panel [aria-label="跳到第 3 题"]')
       return !audio.paused && audio.currentTime >= 2.3 && audio.currentTime < 3.3
         && mark.getAttribute('aria-current') === 'true'
     })
-    await fullPlayer.getByRole('button', { name: '暂停', exact: true }).click()
-    assert.equal(await fullPlayer.getByRole('button', { name: '跳到第 3 题', exact: true }).getAttribute('aria-current'), 'true')
+    await lecturePlayer.getByRole('button', { name: '暂停', exact: true }).click()
+    assert.equal(await audio.evaluate(element => element.paused), true)
+    assert.equal(await thirdMark.getAttribute('aria-current'), 'true')
     // Cold-start a nonzero segment, then switch players before its end. A full
     // recording that merely plays successfully cannot prove these boundaries.
     const questionPlayers = screenPage.locator('.ps-question > .ps-text-trail .listening-player')
@@ -1796,12 +1801,13 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       const audio = document.querySelectorAll('.ps-question > .ps-text-trail audio')[2]
       return audio?.paused && Math.abs(audio.currentTime - 3.3) < .01
     })
-    await thirdPlayer.getByRole('button', { name: '播放', exact: true }).click()
+    await lecturePlayer.getByRole('button', { name: '播放', exact: true }).click()
     await screenPage.waitForFunction(() => {
       const audio = document.querySelectorAll('.ps-question > .ps-text-trail audio')[2]
       return audio && !audio.paused && audio.currentTime >= 2.3 && audio.currentTime < 3.3
     })
-    await thirdPlayer.getByRole('button', { name: '暂停', exact: true }).click()
+    await lecturePlayer.getByRole('button', { name: '暂停', exact: true }).click()
+    assert.equal(await thirdPlayer.locator('audio').evaluate(element => element.paused), true)
     for (const [player, start, plays] of [[secondPlayer, 1.2, 1], [thirdPlayer, 2.3, 2]]) {
       const starts = await player.locator('audio').evaluate(element => JSON.parse(element.dataset.playStarts))
       assert.equal(starts.length, plays)
@@ -1881,7 +1887,7 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
         })
         // No forced click: also proves that the visible controls are not covered.
         await player.locator('.listening-player-speed').click()
-        assert.ok(await player.locator('.listening-player-wave').evaluate((element) => element.getBoundingClientRect().width > 80),
+        assert.ok(await player.getByRole('slider').evaluate((element) => element.getBoundingClientRect().width > 80),
           'fitting the popup must leave a usable seek track')
         if (process.env.LISTENING_QA_ARTIFACT_DIR && width === 390) {
           await screenPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, `listening-${await player.getAttribute('data-size')}-narrow.png`) })

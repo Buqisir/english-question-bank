@@ -900,22 +900,27 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   // URL 的 lecture=1 在首次渲染就展开讲评，避免先闪一下挑题态。
   const [lectureOpen, setLectureOpen] = useState(() => hasExplicitLectureIntent({ focusGroupId, lecture }))
   const activeAudioRef = useRef<HTMLAudioElement | null>(null)
-  const [activeAudio, setActiveAudio] = useState<HTMLAudioElement | null>(null)
+  const playerIdByAudio = useRef(new WeakMap<HTMLAudioElement, string>())
+  const [activePlayerId, setActivePlayerId] = useState<string | null>(null)
   const [followPlayback, setFollowPlayback] = useState(true)
   const [playingSegment, setPlayingSegment] = useState<{
     audio: HTMLAudioElement; segmentId: string; firstQuestionId: string
   } | null>(null)
-  const [segmentAudio, setSegmentAudio] = useState<Record<string, HTMLAudioElement | null>>({})
-  const registerSegmentAudio = useCallback((id: string, audio: HTMLAudioElement | null) => {
-    setSegmentAudio((current) => current[id] === audio ? current : { ...current, [id]: audio })
+  const [mountedAudio, setMountedAudio] = useState<Record<string, HTMLAudioElement | null>>({})
+  const activeAudio = activePlayerId ? mountedAudio[activePlayerId] ?? null : null
+  const registerPlayerAudio = useCallback((id: string, audio: HTMLAudioElement | null) => {
+    if (audio) playerIdByAudio.current.set(audio, id)
+    setMountedAudio((current) => current[id] === audio ? current : { ...current, [id]: audio })
   }, [])
   const activateAudio = useCallback((audio: HTMLAudioElement) => {
+    const id = playerIdByAudio.current.get(audio)
+    if (!id || !audio.isConnected) return
     if (activeAudioRef.current !== audio) {
       activeAudioRef.current?.dispatchEvent(new Event(listeningPlayerSwitchEvent))
       activeAudioRef.current?.pause()
     }
     activeAudioRef.current = audio
-    setActiveAudio(audio)
+    setActivePlayerId(id)
     setFollowPlayback(true)
   }, [])
   const publishedAudioSegments = canonicalConsumption?.listeningAudio?.segments
@@ -1161,7 +1166,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     setCanonicalConsumption(null)
     activeAudioRef.current?.pause()
     activeAudioRef.current = null
-    setActiveAudio(null)
+    setActivePlayerId(null)
     setPlayingSegment(null)
     setFollowPlayback(true)
     setGroupModels({})
@@ -2743,6 +2748,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     }
     if (entry.kind === 'listening') {
       const isPanelGroup = lectureOpen && panelGroupId === groupId
+      const useLecturePlayer = lectureOpen && Boolean(audioSegments?.length) && !(similarView === 'similar' && similarSeed)
       const audio = canonicalConsumption?.listeningAudio
       const questionNumbers = entry.model.surfaceData.questions.map((question) => Number(question.questionNo)).sort((a, b) => a - b)
       const firstSection = firstListeningSectionRange(audioSegments, questionNumbers)
@@ -2759,7 +2765,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           label={segment.questionNumbers.length === 1 ? `第 ${segment.questionNumbers[0]} 题`
             : `第 ${Math.min(...segment.questionNumbers)}–${Math.max(...segment.questionNumbers)} 题`}
           startSeconds={segment.startSeconds} endSeconds={segment.endSeconds} onActivate={activateAudio}
-          segmentId={segment.segmentId} onSegmentAudio={registerSegmentAudio} lecture={lectureOpen} />,
+          playerId={segment.segmentId} onPlayerAudio={registerPlayerAudio} lecture={useLecturePlayer} />,
       ])) : undefined
       return (
         <div className="paper-browse-listening canonical-listening-surface">
@@ -2770,7 +2776,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               <ListeningSegmentPlayer key={`${audio.sha256}:${groupId}:section`} src={audio.url}
                 label={firstSection ? '第一节第 1–5 题' : `第二节第 6–${questionNumbers.at(-1)} 题`}
                 startSeconds={section.startSeconds} endSeconds={section.endSeconds}
-                onActivate={activateAudio} size="full" lecture={lectureOpen}
+                onActivate={activateAudio} size="full" lecture={useLecturePlayer}
+                playerId={`section:${groupId}`} onPlayerAudio={registerPlayerAudio}
                 marks={section.segments.map((segment) => ({
                   startSeconds: segment.startSeconds, endSeconds: segment.endSeconds,
                   label: segment.questionNumbers.length === 1 ? String(segment.questionNumbers[0])
@@ -2779,7 +2786,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             )}
             listeningPartPlayer={audio && (
               <ListeningSegmentPlayer key={`${audio.sha256}:full`} src={audio.url} label="整卷听力"
-                startSeconds={wholePaper?.startSeconds ?? 0} endSeconds={wholePaper?.endSeconds ?? audio.durationSeconds} onActivate={activateAudio} size="full" lecture={lectureOpen}
+                startSeconds={wholePaper?.startSeconds ?? 0} endSeconds={wholePaper?.endSeconds ?? audio.durationSeconds} onActivate={activateAudio} size="full" lecture={useLecturePlayer}
+                playerId="whole-paper" onPlayerAudio={registerPlayerAudio}
                 marks={audioSegments?.map((segment) => ({
                   startSeconds: segment.startSeconds,
                   endSeconds: segment.endSeconds,
@@ -3716,8 +3724,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         groupQuestionIds={group.questionIds}
         activeQuestionId={activeQuestionId}
         segments={audioSegments ?? []}
-        segmentAudio={segmentAudio}
-        playback={activeAudio && (playingSegment?.audio === activeAudio || followPlayback)
+        segmentAudio={mountedAudio}
+        playback={audioSegments?.length && activeAudio && (playingSegment?.audio === activeAudio || followPlayback)
           ? { audio: activeAudio, segmentId: playingSegment?.audio === activeAudio ? playingSegment.segmentId : null }
           : null}
         onActivate={activateAudio}

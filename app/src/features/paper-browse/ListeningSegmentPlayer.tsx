@@ -10,8 +10,8 @@ type Props = {
   startSeconds: number
   endSeconds: number
   onActivate: (audio: HTMLAudioElement) => void
-  segmentId?: string
-  onSegmentAudio?: (id: string, audio: HTMLAudioElement | null) => void
+  playerId: string
+  onPlayerAudio: (id: string, audio: HTMLAudioElement | null) => void
   lecture?: boolean
   /** Whole-recording player gets a longer track. */
   size?: 'segment' | 'full'
@@ -53,13 +53,13 @@ function clock(seconds: number): string {
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`
 }
 
-export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, onActivate, segmentId, onSegmentAudio, lecture = false, size = 'segment', marks }: Props) {
+export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, onActivate, playerId, onPlayerAudio, lecture = false, size = 'segment', marks }: Props) {
   const rootRef = useRef<HTMLSpanElement>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
   const attachAudio = useCallback((audio: HTMLAudioElement | null) => {
     audioRef.current = audio
-    if (segmentId) onSegmentAudio?.(segmentId, audio)
-  }, [segmentId, onSegmentAudio])
+    onPlayerAudio(playerId, audio)
+  }, [playerId, onPlayerAudio])
   useLayoutEffect(() => {
     const audio = audioRef.current
     if (audio) audioRanges.set(audio, { startSeconds, endSeconds, label, marks })
@@ -465,17 +465,15 @@ export function ListeningTransport({ audio, onActivate, sentenceControls }: {
           seekAudio(audio ?? null, range.startSeconds, range.endSeconds, seconds)
           if (audio?.paused) void play()
         }} />}
-    </div>
-    {sentenceControls && <div className="listening-transport-secondary">
-      {sentenceControls}
-      <button type="button" className="listening-quiet-control listening-transport-speed" disabled={!audio}
+      {range && <button type="button" className="listening-quiet-control listening-transport-speed"
         aria-label={`播放速度 ${rate} 倍，点击切换`}
         onClick={() => {
           if (audio) audio.defaultPlaybackRate = audio.playbackRate = CLICK_NEXT[rate as (typeof RATES)[number]] ?? 1
         }}>
         {rate}×
-      </button>
-    </div>}
+      </button>}
+    </div>
+    {sentenceControls && <div className="listening-transport-secondary">{sentenceControls}</div>}
     {audio && error && <p className="listening-audio-error" role="status">录音未能播放，请重试</p>}
   </div>
 }

@@ -1992,7 +1992,8 @@
 }
 
 .listening-transport-speed {
-  margin-inline-start: auto;
+  /* Keep the seek track the same width when the rate label changes. */
+  min-inline-size: calc(5ch + 2 * var(--eqb-space-2));
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }

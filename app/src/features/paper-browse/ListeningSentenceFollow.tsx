@@ -8,8 +8,11 @@ function sentenceStart(sentence: ListeningSentence, repeating: boolean) {
   return repeating ? sentence.repeatStart ?? sentence.start : sentence.start
 }
 
-function sentenceEnd(sentence: ListeningSentence, repeating: boolean) {
-  return sentenceStart(sentence, repeating) + sentence.end - sentence.start
+function sentenceEnd(sentences: ListeningSentence[], index: number, repeating: boolean) {
+  const sentence = sentences[index]
+  if (!repeating) return sentence.end
+  const end = sentenceStart(sentence, true) + sentence.end - sentence.start
+  return Math.min(end, sentences[index + 1]?.repeatStart ?? end)
 }
 
 export function scrollListeningTarget(target: Element, block: ScrollLogicalPosition) {
@@ -183,7 +186,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     }
     const sync = (now: number, jump = false) => {
       const target = sentences[loopTarget.current]
-      if (target && !audio.paused && !audio.seeking && audio.currentTime >= sentenceEnd(target, loopRepeating.current)) {
+      if (target && !audio.paused && !audio.seeking && audio.currentTime >= sentenceEnd(sentences, loopTarget.current, loopRepeating.current)) {
         audio.currentTime = sentenceStart(target, loopRepeating.current)
       }
       const reportedTime = audio.currentTime
@@ -212,7 +215,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
             pending = short ? null : { index, start: now }
             if (short && motion?.automatic) motion = null
           }
-          if (audio.paused || (!target && time >= sentenceEnd(sentences[index], repeating))) {
+          if (audio.paused || (!target && time >= sentenceEnd(sentences, index, repeating))) {
             pending = null
             if (motion?.automatic) motion = null
           }
@@ -267,7 +270,8 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     const onPlayerSeek = () => {
       const target = sentences[loopTarget.current]
       const repeating = loopRepeating.current
-      if (target && (audio.currentTime < sentenceStart(target, repeating) || audio.currentTime >= sentenceEnd(target, repeating))) stopLoop()
+      if (target && (audio.currentTime < sentenceStart(target, repeating)
+        || audio.currentTime >= sentenceEnd(sentences, loopTarget.current, repeating))) stopLoop()
       setFollow(true)
       update(true)
     }
@@ -342,7 +346,9 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     if (target) {
       loopRepeating.current = audio.currentTime + 0.025 >= repeatStart
       const start = sentenceStart(target, loopRepeating.current)
-      if (audio.currentTime < start || audio.currentTime >= sentenceEnd(target, loopRepeating.current)) audio.currentTime = start
+      if (audio.currentTime < start || audio.currentTime >= sentenceEnd(sentences, loopTarget.current, loopRepeating.current)) {
+        audio.currentTime = start
+      }
       jumpToCurrent.current()
     }
     setLoop(!loop)
