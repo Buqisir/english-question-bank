@@ -16,6 +16,8 @@ import { listeningReviewSubject, readListeningReview } from '../../server/paper-
 import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
 import { loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
+import { expectedListeningReadings } from './lib-listening-segment-rule.mjs'
+import { SOURCE_INSTRUCTION_SLOTS } from '../../shared/paper-canonical/sourcePresentation.mjs'
 
 const downstream = ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']
 
@@ -220,9 +222,13 @@ function fixture(t, referencesVersion = version) {
   return { dir, ctx, calls, options: { referenceStages } }
 }
 
-for (const editOption of [false, true]) test(editOption
-  ? 'finish reruns the listening rule for an edited option using the original ASR'
-  : 'finish retains installed v2 listening evidence after a non-listening stem edit', async t => {
+for (const [edit, expectation] of [
+  ['stem', 'retains installed v2 listening evidence after a non-listening stem edit'],
+  ['option', 'reruns the listening rule for an edited option using the original ASR'],
+  ['legacy', 'reruns the listening rule when the old report has no rule summary'],
+  ['reading', 'retains the listening rule after a reading instruction changes'],
+]) test(`finish ${expectation}`, async t => {
+  const editOption = edit === 'option', legacy = edit === 'legacy', rerun = editOption || legacy
   const { dir, ctx, options } = fixture(t)
   const { makeReviewRoot } = await (async () => {
     const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
@@ -232,17 +238,33 @@ for (const editOption of [false, true]) test(editOption
       else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
     }
   })()
-  if (editOption) ctx.paperId = `paper-synthetic-listening-rule-${process.pid}`
-  const { reviewRoot, projection } = makeReviewRoot(path.join(dir, 'actual'), ctx.paperId, undefined, {
+  if (rerun) ctx.paperId = `paper-synthetic-listening-rule-${edit}-${process.pid}`
+  let { reviewRoot, projection } = makeReviewRoot(path.join(dir, 'actual'), ctx.paperId, undefined, {
     listening: true, openingListeningText: editOption
       ? 'Blue dolphins travel beyond distant islands while young sailors carefully study maps beside the harbor and curious children quietly gather orange leaves around their peaceful village during bright summer holidays'
       : undefined,
   })
   ctx.paperDir = reviewRoot
-  if (editOption) {
+  if (rerun) {
     const cliRoot = path.join(import.meta.dirname, 'papers', ctx.paperId)
     symlinkSync(reviewRoot, cliRoot, 'dir')
     t.after(() => rmSync(cliRoot))
+  }
+  const materializationFile = path.join(reviewRoot, 'materialization/nck1-source-materialization-v1.json')
+  const materialization = JSON.parse(readFileSync(materializationFile))
+  if (edit === 'reading') {
+    const source = materialization.groups[0].blocks[0].source
+    materialization.schemaVersion = 'nck1-source-materialization-v4'
+    materialization.sourcePresentation = {
+      instructions: Object.keys(SOURCE_INSTRUCTION_SLOTS).map(slotId => ({
+        slotId, text: slotId.startsWith('listening.') ? '每段录音读一遍。' : 'Source instruction.', source,
+      })),
+      listeningExample: { state: 'not_supplied', source },
+    }
+    json(materializationFile, materialization)
+    const loaded = loadNck1ReviewSource(reviewRoot)
+    projection = { ...loaded, ...importCanonicalCandidate(loaded.sourceInput) }
+    assert.deepEqual(projection.issues, [])
   }
   const transcript = projection.materialization.listening.transcript
   const subject = listeningReviewSubject(projection, projection.candidate)
@@ -277,33 +299,33 @@ for (const editOption of [false, true]) test(editOption
     rawEvidence: [asr], groups: groups.map(({ reason, limits, ...group }, index) => ({
       ...group, occurrences: group.occurrences.map(({ evidencePaths, ...playback }) => ({ playback, evidencePaths })),
       sourceText: transcript[index].text, issues: [], engineAttempts: [],
+      sources: expectedListeningReadings(transcript[index], projection.materialization.sourcePresentation?.instructions).sources,
     })), diagnostic: { schemaVersion: 'listening-diagnostics-v1', path: 'diagnostics.json.gz', encoding: 'gzip',
       sha256: hash, byteLength: 1, decodedSha256: hash, decodedByteLength: 1 } }, 'review_notes')
-  json(path.join(reviewRoot, 'listening-review-v1.json'), { schemaVersion: 'listening-review-v2',
+  json(path.join(reviewRoot, 'listening-review-v1.json'), { schemaVersion: legacy ? 'listening-review-v1' : 'listening-review-v2',
     subject, reviewedBy: 'import_agent', reviewedAt: oldTime, method: 'asr_source_comparison',
     untrustedContentHandledAsData: true, scope: { purpose: 'teacher_navigation',
-      verbatim: 'not_certified', wholeRecordingContent: 'not_certified' }, groups, evidence: [asr, note] })
-  const materializationFile = path.join(reviewRoot, 'materialization/nck1-source-materialization-v1.json')
-  const materialization = JSON.parse(readFileSync(materializationFile))
+      verbatim: 'not_certified', wholeRecordingContent: 'not_certified' }, groups, evidence: legacy ? [asr] : [asr, note] })
   if (editOption) materialization.listening.questions[0].options[0].text = 'Porpoises.'
-  else materialization.groups[0].questions[0].stem = 'What is the purpose of the notice?'
-  json(materializationFile, materialization)
+  if (edit === 'stem') materialization.groups[0].questions[0].stem = 'What is the purpose of the notice?'
+  if (edit === 'reading') materialization.sourcePresentation.instructions.find(item => item.slotId === 'reading.a').text = 'Choose the best answer.'
+  if (!legacy) json(materializationFile, materialization)
   const loaded = loadNck1ReviewSource(reviewRoot)
   const { candidate, issues } = importCanonicalCandidate(loaded.sourceInput)
   assert.deepEqual(issues, [])
   const current = listeningReviewSubject(loaded, candidate)
-  assert.notEqual(current.candidateDigest, subject.candidateDigest)
+  if (!legacy) assert.notEqual(current.candidateDigest, subject.candidateDigest)
   const asrStage = ctx.state.steps['asr-apple-rule-v2'] = completed({ retained: true })
   await finish(ctx, [], options)
   const { review } = readListeningReview(reviewRoot, current, transcript)
-  if (editOption) {
+  if (rerun) {
     const attempt = ctx.state.data.listeningSegmentAttempt.attempt
     const ruleInput = JSON.parse(readFileSync(path.join(attempt, 'input.json')))
     assert.equal(ruleInput.inference, 'not_run')
     assert.equal(ruleInput.questionsSha256, digestJson(materialization.listening.questions))
     assert.equal(review.evidence[0].sha256, asr.sha256)
     assert.equal(review.groups[0].decision, 'review_required')
-    assert.match(review.groups[0].reason, /FUZZY_ANCHOR_PROTECTED_WORD/u)
+    if (editOption) assert.match(review.groups[0].reason, /FUZZY_ANCHOR_PROTECTED_WORD/u)
   } else {
     assert.deepEqual(review.groups, groups)
     assert.deepEqual(review.evidence[0], asr)

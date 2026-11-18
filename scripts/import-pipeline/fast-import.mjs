@@ -39,7 +39,7 @@ import { LARGE_PAGE_LIMIT_AUTHORIZATION, EXTENDED_PAGE_LIMIT_AUTHORIZATION } fro
 import { trailingHeadingHints, trailingHeadingMessage } from './trailing-heading-guard.mjs'
 import { declareFastListening, fastProductSet } from './lib-fast-products.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
-import { LISTENING_SEGMENT_RULE } from './lib-listening-segment-rule.mjs'
+import { LISTENING_SEGMENT_RULE, expectedListeningReadings } from './lib-listening-segment-rule.mjs'
 import { segmentListening } from './listening-segment.mjs'
 import { answerKeyValuesMatch } from './lib-answer-key-comparison.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
@@ -892,15 +892,17 @@ async function retainFastListening(ctx, candidateDigest) {
     const notes = review.evidence.filter(item => item.kind === 'review_notes')
       .map(item => readJson(path.join(directory, item.path)))
       .find(record => record.schemaVersion === LISTENING_RULE_EVIDENCE_VERSION)
-    if (notes && (notes.input.questionsSha256 !== digestJson(questions)
-      || notes.input.instructionsSha256 !== digestJson(sourceInstructions))) {
+    // The input digest covers every section. The summary records the sources each listening group used.
+    if (notes?.input.questionsSha256 !== digestJson(questions)
+      || transcript.some(group => digestJson(notes.groups.find(old => old.segmentId === group.segmentId)?.sources ?? null)
+        !== digestJson(expectedListeningReadings(group, sourceInstructions).sources))) {
       assertReferencesMutable(ctx)
       delete ctx.state.steps['asr-apple-rule-v2']
       await step(ctx, 'asr-apple-rule-v2', () => {
         const result = segmentListening({ paperDir: ctx.paperDir,
           request: { transcript, sourceInstructions, report: { ...review, subject } },
           output: path.join(ctx.fast, 'listening-segment-attempts'), retainedReview: { directory, review },
-          fuzzyAnchors: notes.rule.fuzzyAnchorsEnabled })
+          fuzzyAnchors: notes?.rule.fuzzyAnchorsEnabled })
         ctx.state.data.listeningSegmentAttempt = result
         archive(ctx, installed)
         delete ctx.state.steps['listening-review']
