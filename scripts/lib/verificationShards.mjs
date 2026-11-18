@@ -26,7 +26,6 @@ export const verificationShardOverrides = Object.freeze({
     'scripts/verify-generated-docx-output-deleted.mjs',
   ]),
   '2': Object.freeze([
-    'scripts/verify-review-subject-backfill.mjs',
     'scripts/verify-docx-source-media-input.mjs',
     'scripts/verify-listening-signal.mjs',
     'scripts/verify-scoped-publication.mjs',

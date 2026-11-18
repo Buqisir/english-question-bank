@@ -29,6 +29,7 @@ export const isReviewCompatible = compatibility => {
 
 export function reviewCompatibilityMessage(compatibility) {
   if (isReviewCompatible(compatibility)) return ''
+  if (compatibility?.reasonCode === 'SEALED_PUBLICATION_REQUIRED') return '此版本需重新送审'
   if (compatibility?.pending || compatibility?.result === 'pending'
     || (compatibility?.result === 'unknown' && compatibility.reasonCode === 'BACKFILL_PENDING')) return '正在核验预览版本…'
   if (compatibility?.result === 'different') return '预览内容有变化，请在 Droid 中核验后重新送审'
@@ -129,12 +130,13 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
     const pending = uncertain.has(paper.paperId)
     const block = publicationBlocks.get(draftKey(paper))
     const canPublish = !busy && fresh && !pending
-      && !paper.promotionState && paper.unresolvedCount === 0
+      && !paper.rendererStale && !paper.promotionState && paper.unresolvedCount === 0
       && ['awaiting_review', 'changes_requested', 'approved'].includes(paper.state)
     const frozen = Boolean(paper.promotionState)
     const hint = pending ? '请求结果待核实，请刷新状态；不要重复提交。'
       : state === 'publishing' ? '服务器正在处理。如长时间未完成，请在 Amp 核实，不要重试。'
       : state === 'failed' ? '请在 Amp 核实失败原因，保留原发布记录。'
+      : !frozen && paper.rendererStale ? reviewCompatibilityMessage(paper.compatibility)
       : block ? block.message
       : paper.unresolvedCount ? `${paper.unresolvedCount} 条反馈尚未确认解决。` : ''
     return `<li class="owner-review-item" data-review-paper="${escapeHtml(paper.paperId)}">
@@ -143,7 +145,7 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
           <a href="${escapeHtml(screenUrl(paper))}" target="_blank" rel="noopener noreferrer">${escapeHtml(paper.paperName)}</a>
           <span>R${escapeHtml(paper.revisionNumber)} · Screen</span>
           ${paper.hasTeachingAnalyses ? `<a href="${escapeHtml(screenUrl(paper))}&amp;lecture=1" target="_blank" rel="noopener noreferrer">查看讲评</a>` : ''}
-          ${paper.hasMediaCandidates && !frozen ? `<button class="owner-review-media-link" type="button" data-media-review="${escapeHtml(paper.paperId)}" aria-expanded="${expanded === paper.paperId && expandedKind === 'media'}" ${busy || !fresh ? 'disabled' : ''}>核对候选图</button>` : ''}
+          ${paper.hasMediaCandidates && !frozen && !paper.rendererStale ? `<button class="owner-review-media-link" type="button" data-media-review="${escapeHtml(paper.paperId)}" aria-expanded="${expanded === paper.paperId && expandedKind === 'media'}" ${busy || !fresh ? 'disabled' : ''}>核对候选图</button>` : ''}
         </div>
         <span class="owner-review-state">${escapeHtml(labels[state] || state)}</span>
         <div class="owner-review-actions">

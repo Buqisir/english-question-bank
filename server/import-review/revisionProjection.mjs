@@ -23,11 +23,7 @@ import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../paper-import/sourceRe
 import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../paper-import/sourceReferenceAdmission.mjs'
 import { PRODUCT_MANIFEST, PRODUCT_FILES, matchesSealedPrintInputs, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
 import { productFiles, sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
-import { productPageLimitsForManifest } from '../paper-import/pdfPageLimits.mjs'
-import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
-import { withSealedReviewSnapshot } from './sealedReviewFiles.mjs'
-import { buildStoredReviewSubject, buildTargetReviewSubject, reviewSubjectBundleDigest } from './reviewSubject.mjs'
-import { reviewProjectionForTrustedBaseline } from './reviewComparisonProjection.mjs'
+import { reviewSubjectBundleDigest } from './reviewSubject.mjs'
 import {
   assertCanonicalConsumptionVisibleStructure,
   assertCanonicalVisibleStructure,
@@ -1846,73 +1842,6 @@ export function buildNck1SealedReviewProjection(rootDir, revision, { manifest = 
     { ...options, expectedCandidateDigest: revision.candidateDigest }, readFrozenProducts,
     sealedReferenceReceipt(revision, manifest), { revision, manifest },
     { revision: { ...revision, manifest }, directory: rootDir })
-}
-
-// Only this entry constructs the private product reader. There is no public
-// skip-pdfinfo option and callers cannot supply projection/listening objects.
-export function computeSealedReviewSubjects({ directory, revision, preview, storedFiles, onMemory = () => {} }) {
-  return withSealedReviewSnapshot(directory, revision.manifest.files, snapshot => {
-    const { fileEvidence } = snapshot
-    onMemory('sealed-snapshot')
-    let baseline = buildStoredReviewSubject({ revision, preview, storedFiles, fileEvidence })
-    const changed = fileEvidence.find(file => {
-      const expected = revision.manifest.files.find(item => item.path === file.path)
-      return file.sha256 !== expected.sha256 || file.byteLength !== expected.byteLength
-    })
-    if (changed) return { baseline: { ok: false, reasonCode: 'SEALED_FILE_CHANGED', differences: [changed.path] }, target: null }
-    // Sealed hashes and JSON syntax are already checked. The target reopens its
-    // own snapshot; retain canonical JSON digests instead of a second full parse
-    // of every image bundle/materialization throughout compilation.
-    for (const file of fileEvidence) if (Object.hasOwn(file, 'json') && ![PRODUCT_MANIFEST, 'config.json'].includes(file.path)) {
-      file.jsonDigest = digestJson(file.json)
-      delete file.json
-    }
-    onMemory('compacted-evidence')
-    try {
-      const products = fileEvidence.find(file => file.path === PRODUCT_MANIFEST)
-      const readSealedProducts = (_root, options) => {
-        const manifest = products?.json
-        if (!manifest || (manifest.inputDigest !== options.inputDigest && manifest.inputDigest !== options.legacyInputDigest(manifest.inputDigest))
-          || sourceProductEditions(options.config, options.listeningCount).length !== manifest.files.length) {
-          fail('Sealed product input identity differs')
-        }
-        const pageLimits = productPageLimitsForManifest(manifest)
-        for (const key of Object.keys(pageLimits)) {
-          if (options[key] !== undefined && options[key] !== pageLimits[key]) fail('Sealed product page limit differs')
-        }
-        for (const file of manifest.files) {
-          const edition = path.basename(file.path, '.pdf')
-          if (edition === 'answerOnly') continue
-          const policy = studentProductPolicy(edition, 2, pageLimits)
-          if (policy.atMost ? file.pageCount > policy.targetPages : file.pageCount !== policy.targetPages) {
-            fail('Sealed product page count differs')
-          }
-        }
-        // Byte hashes and all product descriptors are checked by subject
-        // extraction. No PDF bytes are materialized or returned to the API.
-        return { manifest, digest: products.sha256, bytes: {} }
-      }
-      const projection = buildNck1ReviewProjectionInternal(snapshot.directory,
-        { requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest }, readSealedProducts,
-        sealedReferenceReceipt(revision), { revision, manifest: revision.manifest },
-        { revision, directory: snapshot.directory })
-      onMemory('projection')
-      baseline = buildStoredReviewSubject({ revision, preview, storedFiles, fileEvidence,
-        validatedListeningReview: projection.reviewedListening })
-      const expected = reviewBundleFilePathsForProjection(snapshot.directory, projection)
-      const inventory = expected.map(file => ({
-        ...file, sha256: fileEvidence.find(item => item.path === file.path)?.sha256,
-        byteLength: fileEvidence.find(item => item.path === file.path)?.byteLength,
-      }))
-      if (!baseline.ok) return { baseline, target: { ok: false, reasonCode: 'BASELINE_UNTRUSTED' } }
-      const comparisonProjection = reviewProjectionForTrustedBaseline(baseline.subject, projection)
-      const target = buildTargetReviewSubject({ revision, projection: comparisonProjection, inventory, fileEvidence })
-      if (target.ok) target.provenance.source = 'current-validated-projection-with-declared-consumer-comparison'
-      return { baseline, target }
-    } catch {
-      return { baseline, target: { ok: false, reasonCode: 'TARGET_COMPUTATION_FAILED' } }
-    }
-  })
 }
 
 function buildNck1ReviewProjectionInternal(rootDir, options = {}, readProducts, referenceReceipt = null, sealedListening = null, evidenceBase = null) {

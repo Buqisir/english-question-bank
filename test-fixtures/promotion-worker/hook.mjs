@@ -5,8 +5,6 @@ const replacements = {
     ["    findSimilar: (db, input) =>", "    __promotionFixtureRawIndex: getRawIndex,\n    findSimilar: (db, input) =>"],
   ],
   '/server/import-review/runPromotionWorker.mjs': [
-    ["          await compatibilityStore.ready()", "          __promotionFault('before-compatibility');\n          await compatibilityStore.ready()"],
-    ["        if (compatibility.result !== 'equal' || compatibility.pending) {", "        __promotionFault('after-compatibility', { result: compatibility.result });\n        if (compatibility.result !== 'equal' || compatibility.pending) {"],
     ["      row = operations.reserve(", "      __promotionFault('after-host-slot');\n      row = operations.reserve("],
     ["    return supervise(row, nonce)", "    __promotionFault('after-job-before-fork');\n    await __promotionAsyncFault('live-reserve-before-fork');\n    return supervise(row, nonce)"],
     ["phase = 'running'; send('go')", "phase = 'running'; __promotionFault('api-before-go'); send('go'); __promotionFault('api-after-go', { phase, result })"],
@@ -47,9 +45,6 @@ const replacements = {
     ["        const receipt = store.markPromotionPublished(\n          paperId,", "        __promotionFault('before-mark-published');\n        const receipt = store.markPromotionPublished(\n          paperId,"],
     ["        return {\n          status: result.status", "        __promotionFault('after-mark-published');\n        return {\n          status: result.status"],
     ["              target,\n            )", "              target,\n            );\n            __promotionFault('after-target-binding')"],
-  ],
-  '/server/import-review/reviewCompatibilityWorker.mjs': [
-    ["const samples = []", "__promotionFault('compatibility-input');\nconst samples = []"],
   ],
   '/server/import-review/promotionWorker.mjs': [
     ["    const execution = { id: row.id", "    __promotionFault('executor-before-begin', {}, { operationId: row.id, nonce: message.nonce });\n    const execution = { id: row.id"],

@@ -18,7 +18,7 @@ const driver = new URL('./api.mjs', import.meta.url)
 // equal; allow cold identity/preparation as well as the original publish work.
 // IPC/HTTP must outlive checkpoints and the deliberately gated ACK.
 const checkpointBudgets = { control: 20_000, publication: 90_000, recovery: 90_000 }
-const publicationStages = ['before-compatibility', 'compatibility-input', 'after-compatibility', 'before-publisher', 'after-bank-commit',
+const publicationStages = ['before-publisher', 'after-bank-commit',
   'before-mark-published', 'after-mark-published', 'before-worker-ipc']
 const publicationRecords = Object.fromEntries(publicationStages.map(stage => [stage, 'record']))
 const safeTail = value => String(value).replace(/(bearer\s+)\S+/gi, '$1<redacted>')
@@ -843,59 +843,6 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       assert.equal(audit.rejectUnbegun(registered), false)
       assert.deepEqual(audit.get(snapshot.id), claimed)
     })
-  await trial('compatibility child survives API SIGKILL and blocks promotion until exact old tree is dead',
-    'compatibility-input', 'block', async t => {
-      const a = await t.client()
-      const running = a.call({ type: 'compatibility' })
-      const checkpoint = await t.checkpoint('compatibility-input', running, { flow: 'control', transport: 'ipc' })
-      const identity = await reviewProcessIdentity(checkpoint.pid)
-      assert.ok(identity)
-      t.ownedIdentities.push(identity)
-      assert.equal(path.dirname(checkpoint.workspace), tmpdir())
-      assert.ok(path.basename(checkpoint.workspace).startsWith('eqb-review-job-'))
-      t.ownedWorkspaces.push(checkpoint.workspace)
-      assert.equal(await matchingReviewProcess(identity), 'live')
-      a.child.kill('SIGKILL')
-      await until(() => a.child.signalCode, 'compatibility API killed')
-      const b = await t.client({ faults: false })
-      const busy = await b.call(shipMessage)
-      assert.equal(busy.code, 'IMPORT_REVIEW_PROMOTION_BUSY', JSON.stringify(busy))
-      assert.equal(await matchingReviewProcess(identity), 'live', 'promotion admission must not kill compatibility work')
-      assert.equal(t.rows().length, 0)
-      assert.equal(t.promotions().length, 0)
-      assert.equal(query(t.env.QUESTION_BANK_DB, 'SELECT COUNT(*) n FROM paper_asset_versions')[0].n, 0)
-      // Explicit test cleanup only AFTER proving admission preserved the child.
-      await killReviewProcessTree({ pid: identity.pid })
-      await until(async () => await matchingReviewProcess(identity) === 'dead', 'exact compatibility child dead')
-      assert.deepEqual(await reviewProcessGroupMembers(identity.pid), [])
-      await b.call({ type: 'reconcile' })
-      const published = await b.call(shipMessage)
-      assert.equal(published.result?.status, 'published', JSON.stringify(published))
-      await t.deadWorker(t.rows()[0])
-    })
-  await trial('same lease pending native group blocks another worker until exact old group dies',
-    null, null, async t => {
-      const a = await t.client({ faults: false })
-      const response = await a.call({ type: 'pending-lease' })
-      assert.equal(response.type, 'result', JSON.stringify(response))
-      const proof = response.result
-      assert.equal(proof.oldState, 'dead')
-      assert.equal(proof.finishRefused, true)
-      assert.ok(proof.nativeGroupBefore > 0)
-      assert.ok(proof.nativeGroupAfter > 0)
-      assert.equal(proof.busyReason, 'LEADER_BUSY')
-      assert.equal(proof.recordsBefore, 1)
-      assert.equal(proof.recordsAfter, proof.recordsBefore, 'busy same-lease call must not fork')
-      assert.equal(proof.oldGroupDead, true)
-      assert.equal(proof.finishAfterDeath, true)
-      assert.equal(proof.readmittedReason, 'TARGET_IDENTITY_MISMATCH')
-      assert.equal(proof.recordsReadmitted, proof.recordsBefore + 1)
-      assert.equal(proof.allOwnedGroupsDead, true)
-      assert.equal(proof.leaderReleased, true)
-      assert.equal(t.promotions().length, 0)
-      assert.equal(t.rows().length, 0)
-      console.log(`  pending lease proof=${JSON.stringify(proof)}`)
-    })
   await trial('rejected explicit retry can be repaired and resubmitted with same promotion version and audited attempts',
     null, null, async t => {
       t.plan({ 'before-publisher': 'reject-content' })
@@ -1034,7 +981,7 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       assert.equal(query(t.env.QUESTION_BANK_DB, 'SELECT COUNT(*) n FROM paper_asset_versions')[0].n, 1)
       await t.deadWorker(t.rows().at(-1))
     })
-  await trial('cross-process two papers, same request and three entrypoints share one slot; scanner/backfills never overlap',
+  await trial('cross-process two papers, same request and three entrypoints share one slot',
     'before-archive', 'block', async t => {
       const a = await t.client(), b = await t.client({ faults: false })
       const running = a.call(shipMessage)
@@ -1049,16 +996,13 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
         assert.equal(busy.code, 'IMPORT_REVIEW_PROMOTION_BUSY')
         assert.equal(busy.operationId, operationId)
       }
-      const competition = (await b.call({ type: 'compete' })).result
-      assert.equal(competition.single.comparison.reasonCode, 'LEADER_BUSY')
-      for (const kind of ['scan', 'manual', 'automatic']) assert.equal(competition[kind].paused, 'LEADER_BUSY')
       assert.equal(query(t.dbPath, 'SELECT approval_receipt_json FROM import_review_revisions WHERE id=?', [owner.revisionId])[0].approval_receipt_json, null)
       assert.equal(query(t.dbPath, 'SELECT state FROM import_review_publication_requests WHERE id=?', [scoped.requestId])[0].state, 'granted')
       process.kill(t.rows()[0].worker_pid, 'SIGKILL')
       assert.equal((await running).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
       assert.equal(t.promotions().length, 1)
     })
-  await trial('SIGKILL after rollback cleanup can terminate pending promotion and compare on explicit retry',
+  await trial('SIGKILL after rollback cleanup preserves the exact sealed target for explicit retry',
     'after-version-rename', 'block', async t => {
       const a = await t.client()
       const first = a.call(shipMessage)
@@ -1072,9 +1016,6 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       process.kill(prepared.pid, 'SIGKILL')
       assert.equal((await first).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
       await t.recoveryReady(a, t.rows().at(-1))
-      const review = new DatabaseSync(t.dbPath)
-      try { review.prepare('DELETE FROM review_compatibility WHERE revision_id=?').run(ship.revisionId) }
-      finally { review.close() }
       t.plan({ 'after-promotion-rollback': 'block' })
       const recovering = a.call(retryMessage)
       const rolledBack = await t.checkpoint('after-promotion-rollback', recovering, { flow: 'recovery', transport: 'ipc' })
@@ -1085,19 +1026,10 @@ export async function verifyPromotionWorkerMatrix({ root, seedDb, ship, scoped, 
       assert.equal((await recovering).code, 'IMPORT_REVIEW_PROMOTION_UNKNOWN')
       await t.recoveryReady(a, t.rows().at(-1))
       t.plan({})
-      const stopped = await a.call(retryMessage)
-      assert.equal(stopped.result?.status, 'failed', JSON.stringify(stopped))
-      assert.equal(t.promotions()[0].id, original.id)
-      assert.equal(t.promotions()[0].state, 'failed')
-      assert.equal(t.rows().at(-1).state, 'rejected')
-      assert.equal(query(t.dbPath, 'SELECT count(*) n FROM import_review_shipping_guards')[0].n, 0)
-      assert.equal(t.slot(t.rows().at(-1)), 'closed')
       const retried = await a.call(retryMessage)
       assert.equal(retried.result?.status, 'published', JSON.stringify(retried))
       assert.equal(retried.result.promotion.promotionId, original.id)
       assert.equal(retried.result.promotion.assetVersion, original.asset_version)
-      assert.equal(query(t.dbPath, 'SELECT result FROM review_compatibility WHERE revision_id=?',
-        [ship.revisionId])[0].result, 'equal')
       assert.equal(query(t.env.QUESTION_BANK_DB, 'SELECT count(*) n FROM paper_asset_versions')[0].n, 1)
       assert.equal(t.rows().at(-1).state, 'completed')
       assert.ok(t.rows().every(row => ['completed', 'rejected'].includes(row.state)))

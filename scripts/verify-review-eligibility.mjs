@@ -1,30 +1,22 @@
 #!/usr/bin/env node
 import './lib/reviewTestLockRoot.mjs'
 import assert from 'node:assert/strict'
-import { execFileSync, spawn } from 'node:child_process'
 import { randomUUID } from 'node:crypto'
-import { createServer } from 'node:http'
-import { copyFileSync, cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
-import { pathToFileURL } from 'node:url'
 import { DatabaseSync } from 'node:sqlite'
-import { setTimeout as yieldFor } from 'node:timers/promises'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { createImportReviewStore } from '../server/import-review/importReviewStore.mjs'
 import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
 import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
-import { buildNck1ReviewProjection } from '../server/import-review/revisionProjection.mjs'
 import { prepareNck1AnalyzedPackageReview } from '../server/paper-import/analyzedPackage.mjs'
 import { readSourceReferencePublication } from '../server/paper-import/sourceReferencePublication.mjs'
 import { validateSourceReferences } from '../server/paper-import/sourceReferences.mjs'
 import { buildAnswerOnlyHtml } from '../server/answer-renderer.mjs'
 import { enumerateParagraphSummaryTargets } from '../server/paper-import-ai/paragraphSummaries.mjs'
 import { runRoutes } from '../server/router/index.mjs'
-import { makeReviewRelease } from '../test-fixtures/review-compatibility/release.mjs'
 import { finalizeReviewFixture, freezeReviewFixture } from './lib/reviewPublicationFixture.mjs'
-import { preflightPaper } from '../import-ops/lib/probe.mjs'
-import { reviewBuildIdentityProvider } from '../server/import-review/reviewBuildIdentity.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
@@ -40,104 +32,39 @@ const dbRun = (file, callback) => {
   const db = new DatabaseSync(file)
   try { return callback(db) } finally { db.close() }
 }
-let api
 try {
-  await reviewBuildIdentityProvider().ready()
-  const release = makeReviewRelease(path.join(root, 'release'))
-  const module = async name => import(pathToFileURL(path.join(release, `server/import-review/${name}.mjs`)).href)
-  const { createImportReviewStore: createReleaseStore } = await module('importReviewStore')
-  const { createReviewCompatibilityStore } = await module('reviewCompatibilityStore')
-  const releaseIdentity = (await module('reviewBuildIdentity')).reviewBuildIdentityProvider()
-  let renderer = 'historical-original-renderer'
   const output = path.join(root, 'guards')
-  const dbPath = path.join(output, 'review.sqlite')
-  const filesRoot = path.join(output, 'files')
-  const store = createReleaseStore({ dbPath, filesRoot, rendererBuildId: () => renderer })
-  await store.ready()
   const native = makeReviewRoot(path.join(root, 'native'), 'paper-eligibility-native', undefined, { listening: true })
   const projection = freezeReviewFixture(native.reviewRoot)
-  const fixture = finalizeReviewFixture({ directory: native.reviewRoot, output, projection, store })
-  const { revision, approval } = fixture
-  assert.equal(store.compatibilityForRevision(revision.id).reasonCode, 'SEALED_PUBLICATION')
-  // This section exercises the #668 historical path deliberately.
-  dbRun(dbPath, db => db.prepare(`UPDATE import_review_product_previews
-    SET sealed_publication_manifest_digest=NULL WHERE revision_id=?`).run(revision.id))
-  const opsRoot = path.join(root, 'ops')
-  const opsPaper = path.join(opsRoot, 'scripts/import-pipeline/papers', revision.paperId)
-  cpSync(native.reviewRoot, opsPaper, { recursive: true })
-  mkdirSync(path.join(opsPaper, 'signals'), { recursive: true })
-  mkdirSync(path.join(opsPaper, 'canonical-evidence'), { recursive: true })
-  // Local readiness signals are fixture data. Every Review credential below
-  // comes from the actual finalized store and its executing release.
-  json(path.join(opsPaper, 'signals/ai-answer-check.json'), { ok: true })
-  json(path.join(opsPaper, 'canonical-evidence/candidate-summary.json'), {
-    paperId: revision.paperId, sourceDigest: revision.sourceDigest, candidateDigest: revision.candidateDigest,
+  const { store, revision, approval, dbPath } = finalizeReviewFixture({ directory: native.reviewRoot, output, projection })
+  const originalPreview = store.productPreviewForRevision(revision.id).preview
+  const requestId = `publication-request-${randomUUID()}`
+  const secretHash = sha256('synthetic-grant')
+  store.registerPublicationRequest(revision.paperId, { requestId, revisionId: revision.id, secretHash }, 'agent')
+  store.grantPublicationRequest(requestId, 'owner')
+  dbRun(dbPath, db => {
+    // Even a retained equal row cannot stand in for a sealed publication.
+    db.exec(`INSERT INTO review_compatibility (revision_id, target_build_id, comparator_version, attempt_no,
+      subject_digest, bundle_digest, result, reason_code, evidence_digest, evidence_json, checked_at)
+      SELECT revision_id, 'sha256:' || printf('%064d', 1), 'review-comparator-v1', 1,
+      subject_digest, bundle_digest, 'equal', 'CONTENT_EQUAL', subject_digest, '{}', created_at FROM review_subject`)
+    db.prepare('UPDATE import_review_product_previews SET sealed_publication_manifest_digest=NULL WHERE revision_id=?').run(revision.id)
   })
-  function assertOpsNext(action) {
-    const reviewStatus = store.agentPaperStatus(revision.paperId)
-    const result = preflightPaper({ repoRoot: opsRoot, paperId: revision.paperId,
-      reviewStatus, reviewChecked: true, paperAssetsDir: path.join(root, 'ops-assets'),
-      dbPath: path.join(root, 'ops-bank.sqlite') })
-    assert.equal(result.state, 'approved', JSON.stringify(result.blockers))
-    assert.deepEqual(result.review.compatibility, reviewStatus.compatibility)
-    assert.equal(result.next.action, action)
-    assert.equal(result.next.mutatesProduction, false)
-  }
-  const requestInput = secret => ({ requestId: `publication-request-${randomUUID()}`, revisionId: revision.id,
-    secretHash: sha256(secret), ttlSeconds: 3600 })
-  const granted = store.registerPublicationRequest(revision.paperId, requestInput('granted'), 'agent')
-  store.grantPublicationRequest(granted.requestId, 'owner')
-  const pending = store.registerPublicationRequest(revision.paperId, requestInput('pending'), 'agent')
-  const originalApproval = JSON.stringify(store.getRevision(revision.id).approval)
-  const originalRevision = JSON.stringify(store.getRevision(revision.id))
-  const originalPreview = JSON.stringify(store.productPreviewForRevision(revision.id).preview)
-  renderer = 'new-frontend-renderer'
-  assert.equal(store.listPapers()[0].compatibility.result, 'equal')
-  assert.equal(store.paperDetail(revision.paperId).rendererStale, false)
-  assert.equal(store.createRevision(fixture.manifest).created, false)
-  pass('different historical renderer permits equal detail/list/reuse without rewriting the revision or approval')
-  assertOpsNext('accept_approval')
-
-  const frontend = path.join(release, 'app/src/deployment.css')
-  writeFileSync(frontend, 'body { color: red }')
-  assert.equal(store.compatibilityForRevision(revision.id).result, 'equal')
-  pass('frontend-only deployment retains current content eligibility')
-  const parser = path.join(release, 'scripts/import-pipeline/lib.mjs')
-  writeFileSync(parser, `${readFileSync(parser)}\n// Same output, new server target.\n`)
-  await releaseIdentity.fresh()
-  const compatibility = createReviewCompatibilityStore({ dbPath, filesRoot })
-  const blockedEntrances = () => {
-    // Approval accepts the frozen review independently of current-code status.
-    const approvalPath = path.join(root, `approval-${randomUUID()}.sqlite`)
-    copyFileSync(dbPath, approvalPath)
-    dbRun(approvalPath, db => db.prepare(
-      "UPDATE import_review_revisions SET state='awaiting_review', approval_receipt_json=NULL WHERE id=?").run(revision.id))
-    const approvalStore = createReleaseStore({ dbPath: approvalPath, filesRoot, rendererBuildId: () => renderer })
-    assert.equal(approvalStore.approveRevision(revision.paperId, revision.id,
-      { bundleDigest: revision.bundleDigest }, 'owner').revisionId, revision.id)
-    assert.deepEqual(store.agentPaperStatus(revision.paperId).approval, approval)
-    const delegated = requestInput('current-target-pending')
-    assert.equal(store.registerPublicationRequest(revision.paperId, delegated, 'agent').state, 'pending')
-    assert.equal(store.registerPublicationRequest(revision.paperId, delegated, 'agent').state, 'pending')
-    assert.equal(store.grantPublicationRequest(delegated.requestId, 'owner').state, 'granted')
-    for (const operation of [
-      () => store.beginPromotion(revision.paperId, { ...approval, intent: 'ship' }, 'owner'),
-      () => store.beginScopedPromotion(revision.paperId, granted.requestId, sha256('granted'), 'agent'),
-      () => store.acquireShippingGuard(revision.paperId, approval, 'ship-agent'),
-      () => store.mintExternalListeningPublicationProof(revision.paperId, approval),
-      () => store.projectionForRevision(revision.id),
-    ]) assert.throws(operation, { code: 'IMPORT_REVIEW_RENDERER_STALE' })
-    assert.equal(dbRun(dbPath, db => db.prepare('SELECT count(*) n FROM import_review_shipping_guards').get().n), 0)
-    assert.equal(dbRun(dbPath, db => db.prepare('SELECT count(*) n FROM import_review_promotions').get().n), 0)
-    assert.equal(JSON.stringify(store.getRevision(revision.id)), originalRevision)
-    assert.equal(JSON.stringify(store.productPreviewForRevision(revision.id).preview), originalPreview)
-    store.prepareProductPreview(revision.id)
-  }
-  assert.equal(store.compatibilityForRevision(revision.id).result, 'pending')
-  assert.equal(store.grantPublicationRequest(pending.requestId, 'owner').state, 'granted')
-  blockedEntrances()
-  pass('pending preserves Agent approval and exact delegation; direct publication/live guards still require compatibility')
-  assertOpsNext('wait_for_content_check')
+  const denied = { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'SEALED_PUBLICATION_REQUIRED', message: '此版本需重新送审' }
+  for (const operation of [
+    () => store.beginPromotion(revision.paperId, { ...approval, intent: 'ship' }, 'owner'),
+    () => store.beginScopedPromotion(revision.paperId, requestId, secretHash, 'agent'),
+    () => store.acquireShippingGuard(revision.paperId, approval, 'ship-agent'),
+    () => store.projectionForRevision(revision.id),
+  ]) assert.throws(operation, denied)
+  assert.equal(store.latestPromotion(revision.paperId), null)
+  assert.equal(store.listPapers()[0].rendererStale, true)
+  assert.equal(store.paperDetail(revision.paperId).rendererStale, true)
+  assert.deepEqual(store.productPreviewForRevision(revision.id).preview, originalPreview)
+  dbRun(dbPath, db => db.prepare("UPDATE import_review_revisions SET state='awaiting_review', approval_receipt_json=NULL WHERE id=?").run(revision.id))
+  assert.throws(() => store.approveRevision(revision.paperId, revision.id,
+    { bundleDigest: revision.bundleDigest }, 'owner'), denied)
+  pass('unsealed Candidate cannot be approved or published even with retained equal')
   const routes = createImportReviewRoutes({ getStore: () => store, buildPrintHtml() { throw new Error('Must not derive pending content') } })
   async function readRoute(suffix) {
     const result = { headers: {} }
@@ -152,62 +79,18 @@ try {
   for (const suffix of ['consumption', 'asset/paper-asset.json', 'products', 'pdf?edition=economy8', 'print?edition=economy8']) {
     const value = await readRoute(suffix)
     assert.equal(value.status, 200, suffix)
-    if (suffix === 'consumption') assert.equal(value.headers['x-eqb-review-compatibility'], 'pending')
+    if (suffix === 'consumption') assert.equal(value.headers['x-eqb-review-compatibility'], 'unknown')
   }
   for (const suffix of ['pagination', 'print', 'pdf']) {
     const value = await readRoute(suffix)
     assert.equal(value.status, 409, suffix)
-    assert.equal(value.body.compatibility.result, 'pending')
+    assert.equal(value.body.reasonCode, 'SEALED_PUBLICATION_REQUIRED')
   }
-  pass('cached payload and frozen originals remain readable; live routes expose pending and structured reason')
-  const equal = await compatibility.checkRevision(revision.id)
-  assert.equal(equal.comparison.result, 'equal', JSON.stringify(equal.comparison))
-  assert.equal(equal.committed, true)
-  assert.equal(store.compatibilityForRevision(revision.id).result, 'equal')
-  assert.equal(JSON.stringify(store.getRevision(revision.id).approval), originalApproval)
-  assert.equal(JSON.stringify(store.productPreviewForRevision(revision.id).preview), originalPreview)
-  pass('server code change with identical output rechecks to equal without changing historical approval or preview')
-  assertOpsNext('accept_approval')
-
-  const originalPreviewRow = dbRun(dbPath, db => db.prepare(
-    'SELECT * FROM import_review_product_previews WHERE revision_id=?').get(revision.id))
+  pass('cached payload and frozen originals remain readable; live routes expose the resubmission error')
   dbRun(dbPath, db => db.prepare('DELETE FROM import_review_product_previews WHERE revision_id=?').run(revision.id))
-  assert.equal(store.compatibilityForRevision(revision.id).reasonCode, 'MISSING_BASELINE')
-  assert.equal(store.listPapers()[0].compatibility.result, 'unknown')
-  for (const operation of [
-    () => store.beginPromotion(revision.paperId, { ...approval, intent: 'ship' }, 'owner'),
-    () => store.acquireShippingGuard(revision.paperId, approval, 'ship-agent'),
-  ]) assert.throws(operation, error => error.compatibility?.reasonCode === 'MISSING_BASELINE')
-  assert.throws(() => store.prepareProductPreview(revision.id), { reasonCode: 'MISSING_BASELINE' })
-  assert.equal((await readRoute('consumption')).status, 409)
+  assert.equal((await readRoute('consumption')).body.code, 'IMPORT_REVIEW_PREVIEW_NOT_PREPARED')
   assert.equal(dbRun(dbPath, db => db.prepare('SELECT count(*) n FROM import_review_product_previews').get().n), 0)
-  dbRun(dbPath, db => db.prepare(`INSERT INTO import_review_product_previews (${Object.keys(originalPreviewRow).join(',')})
-    VALUES (${Object.keys(originalPreviewRow).map(() => '?').join(',')})`).run(...Object.values(originalPreviewRow)))
-  assert.equal(store.compatibilityForRevision(revision.id).result, 'equal')
-  pass('missing original preview invalidates cached equal for list and mutation gates; GET and prepare never recreate it')
-
-  const projectionFile = path.join(release, 'server/import-review/revisionProjection.mjs')
-  const projectionSource = readFileSync(projectionFile, 'utf8')
-  writeFileSync(projectionFile, projectionSource.replace('  reviewBundleInventories.set(projection,',
-    '  projection.consumption.fixtureAdditionalContent = true;\n  reviewBundleInventories.set(projection,'))
-  await releaseIdentity.fresh()
-  assert.equal(store.compatibilityForRevision(revision.id).result, 'pending')
-  const different = await compatibility.checkRevision(revision.id)
-  assert.equal(different.comparison.result, 'different', JSON.stringify(different.comparison))
-  blockedEntrances()
-  pass('a new target cannot reuse old equal; content differences block publication while frozen review can be approved')
-  assertOpsNext('inspect_content_difference')
-  writeFileSync(projectionFile, projectionSource)
-  await releaseIdentity.fresh()
-  dbRun(dbPath, db => db.exec('DELETE FROM review_compatibility; DELETE FROM review_subject'))
-  const missing = await compatibility.checkRevision(revision.id)
-  assert.equal(missing.comparison.result, 'unknown')
-  assert.equal(missing.comparison.reasonCode, 'MISSING_BASELINE')
-  blockedEntrances()
-  assert.equal(dbRun(dbPath, db => db.prepare('SELECT count(*) n FROM review_subject').get().n), 0)
-  pass('missing subject becomes unknown without automatic baseline creation or renderer fallback')
-  assertOpsNext('inspect_content_compatibility')
-  pass('OPS probe retains approved business state and exposes real equal/pending/different/unknown without resubmit')
+  pass('missing original Screen is rejected without creating a replacement')
 
   for (const profile of ['external', 'public']) {
     const directory = path.join(root, profile)
@@ -271,112 +154,7 @@ try {
     for (const file of projection.frozenProducts.manifest.files) assert.deepEqual(readFileSync(
       path.join(directory, 'assets', projection.paperId, 'versions/v1', file.path)), projection.frozenProducts.bytes[file.path])
     assert.equal(JSON.stringify(fixture.store.getRevision(fixture.revision.id).approval), JSON.stringify(fixture.approval))
-    pass(`${profile} real finalize/equal/approval/archive/admission/writer/DB/answer-source replay preserves frozen bytes and original approval`)
+    pass(`${profile} real finalize/seal/approval/archive/admission/writer/DB/answer-source replay preserves frozen bytes and original approval`)
   }
-  const recoveryOutput = path.join(root, 'recovery')
-  const recoveryDb = path.join(recoveryOutput, 'review.sqlite')
-  const recoveryFiles = path.join(recoveryOutput, 'files')
-  const recoveryStore = createReleaseStore({ dbPath: recoveryDb, filesRoot: recoveryFiles,
-    rendererBuildId: 'historical-recovery-renderer' })
-  const recoveryFixture = finalizeReviewFixture({ directory: native.reviewRoot,
-    output: recoveryOutput, projection, store: recoveryStore })
-  dbRun(recoveryDb, db => db.prepare(`UPDATE import_review_product_previews
-    SET sealed_publication_manifest_digest=NULL WHERE revision_id=?`).run(recoveryFixture.revision.id))
-  const recoveryBank = path.join(recoveryOutput, 'bank.sqlite')
-  dbRun(recoveryBank, db => db.exec(readFileSync(path.join(repository, 'data/sql/schema.sql'), 'utf8')))
-  const { createSinglePaperPromotionService: createReleasePromotion } = await module('singlePaperPromotion')
-  const recoveryAssets = path.join(recoveryOutput, 'assets')
-  const interrupted = createReleasePromotion({ getStore: () => recoveryStore,
-    openDatabase: () => new DatabaseSync(recoveryBank), paperAssetsDir: recoveryAssets,
-    blobStore: (await import('../server/paper-import/blobStore.mjs')).createBlobStore({ rootDir: path.join(recoveryOutput, 'blobs') }),
-    afterPublish() { throw new Error('forced recovery receipt loss') } })
-  await assert.rejects(async () => interrupted.promote(recoveryFixture.revision.paperId,
-    { ...recoveryFixture.approval, intent: 'ship' }, 'synthetic-owner'), /forced recovery receipt loss/)
-  const recoveryProgram = `
-    import assert from 'node:assert/strict';
-    import { DatabaseSync } from 'node:sqlite';
-    import { createImportReviewStore } from ${JSON.stringify(pathToFileURL(path.join(release, 'server/import-review/importReviewStore.mjs')).href)};
-    import { createSinglePaperPromotionService } from ${JSON.stringify(pathToFileURL(path.join(release, 'server/import-review/singlePaperPromotion.mjs')).href)};
-    const [dbPath, filesRoot, bankPath, paperAssetsDir, revisionId] = process.argv.slice(1);
-    const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'new-recovery-renderer' });
-    const revision = store.getRevision(revisionId);
-    assert.equal(store.compatibilityForRevision(revisionId).result, 'pending');
-    const result = await createSinglePaperPromotionService({ getStore: () => store,
-      openDatabase: () => new DatabaseSync(bankPath), paperAssetsDir,
-      publish() { throw new Error('Committed recovery cannot publish again'); }
-    }).promote(revision.paperId, { ...revision.approval, intent: 'retry_ship' }, 'synthetic-owner');
-    assert.equal(result.status, 'idempotent');
-    assert.equal(result.promotion.state, 'published');
-    assert.deepEqual(store.getRevision(revisionId).approval, revision.approval);
-    const bank = new DatabaseSync(bankPath, { readOnly: true });
-    assert.equal(bank.prepare('SELECT count(*) n FROM paper_asset_versions').get().n, 1);
-    bank.close();
-  `
-  writeFileSync(projectionFile, projectionSource.replace(
-    'export function buildNck1ReviewProjection(rootDir, options = {}) {',
-    'export function buildNck1ReviewProjection(rootDir, options = {}) { throw new Error("Current projection must not run during recovery");'))
-  try {
-    execFileSync(process.execPath, ['--input-type=module', '-e', recoveryProgram, recoveryDb,
-      recoveryFiles, recoveryBank, recoveryAssets, recoveryFixture.revision.id], { encoding: 'utf8', timeout: 30_000 })
-  } finally { writeFileSync(projectionFile, projectionSource) }
-  pass('new server with pending eligibility and failing current projection reconciles the exact committed target without republishing')
-
-  const apiOutput = path.join(root, 'api')
-  const apiFixture = finalizeReviewFixture({ directory: native.reviewRoot, output: apiOutput, projection })
-  dbRun(apiFixture.dbPath, db => db.exec(`DELETE FROM review_compatibility;
-    UPDATE import_review_product_previews SET sealed_publication_manifest_digest=NULL`))
-  assert.equal(apiFixture.store.compatibilityForRevision(apiFixture.revision.id).result, 'pending')
-  const bankPath = path.join(apiOutput, 'bank.sqlite')
-  dbRun(bankPath, db => db.exec(readFileSync(path.join(repository, 'data/sql/schema.sql'), 'utf8')))
-  const reservation = createServer()
-  await new Promise(resolve => reservation.listen(0, '127.0.0.1', resolve))
-  const port = reservation.address().port
-  await new Promise(resolve => reservation.close(resolve))
-  const token = randomUUID()
-  let apiLog = ''
-  api = spawn(process.execPath, ['server/api.mjs'], { cwd: repository, env: {
-    ...process.env, QUESTION_BANK_API_PORT: String(port), QUESTION_BANK_DB: bankPath,
-    USER_DATA_DB: path.join(apiOutput, 'users.sqlite'), QUESTION_BANK_BUILD_ID: 'new-frontend-renderer',
-    QUESTION_BANK_IMPORT_OPS_DB: apiFixture.dbPath, QUESTION_BANK_IMPORT_OPS_ROOT: path.join(apiOutput, 'files'),
-    QUESTION_BANK_PAPER_ASSET_ROOT: path.join(apiOutput, 'assets'),
-    QUESTION_BANK_USER_SPACE_ROOT: path.join(apiOutput, 'user-space'),
-    QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN: token,
-  }, stdio: ['ignore', 'pipe', 'pipe'] })
-  api.stdout.on('data', bytes => { apiLog += bytes })
-  api.stderr.on('data', bytes => { apiLog += bytes })
-  await new Promise((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error(`API startup timed out: ${apiLog}`)), 15_000)
-    const ready = () => {
-      if (apiLog.includes('API listening')) { clearTimeout(timer); resolve() }
-    }
-    api.stdout.on('data', ready)
-    api.once('error', reject)
-    api.once('exit', code => { clearTimeout(timer); reject(new Error(`API exited ${code}: ${apiLog}`)) })
-  })
-  let status
-  for (let attempt = 0; attempt < 60; attempt++) {
-    const response = await fetch(`http://127.0.0.1:${port}/api/import-agent-reviews/papers/${apiFixture.revision.paperId}`, {
-      headers: { authorization: `Bearer ${token}` }, signal: AbortSignal.timeout(3000),
-    })
-    assert.equal(response.status, 200, apiLog)
-    status = await response.json()
-    if (status.compatibility.result === 'pending') break
-    await yieldFor(250)
-  }
-  await yieldFor(500)
-  assert.equal(status.compatibility.result, 'pending', apiLog)
-  assert.equal(dbRun(apiFixture.dbPath, db => db.prepare('SELECT COUNT(*) n FROM review_compatibility').get().n), 0)
-  assert.equal(apiFixture.store.getRevision(apiFixture.revision.id).approval.approvalId, apiFixture.approval.approvalId)
-  const exited = new Promise((resolve, reject) => {
-    const timer = setTimeout(() => reject(new Error('API shutdown timed out')), 10_000)
-    api.once('exit', (code, signal) => { clearTimeout(timer); resolve({ code, signal }) })
-  })
-  api.kill('SIGTERM')
-  assert.deepEqual(await exited, { code: 0, signal: null })
-  assert.equal(existsSync(path.join(process.env.EQB_REVIEW_COMPATIBILITY_TEST_LOCK_ROOT, 'leader')), false)
-  pass('real API startup leaves pending revisions unchecked; frozen approval is preserved; SIGTERM releases host leader')
   console.log(`PASS ${checks} review eligibility checks`)
-} finally {
-  if (api && api.exitCode === null) api.kill('SIGTERM')
-  rmSync(root, { recursive: true, force: true })
-}
+} finally { rmSync(root, { recursive: true, force: true }) }

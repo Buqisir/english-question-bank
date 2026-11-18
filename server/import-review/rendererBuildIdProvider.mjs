@@ -2,7 +2,7 @@
 // request. A production process serves one sealed release directory and restarts on each
 // deploy, so it hashes once; development keeps rehashing to record new submissions.
 // This is only historical receipt identity. Eligibility uses the independently
-// computed server target in reviewBuildIdentity.mjs and persisted compatibility.
+// sealed publication commitment used for approval and promotion.
 export function rendererBuildIdProvider({ explicitBuildId, production, compute }) {
   if (explicitBuildId) return explicitBuildId
   if (!production) return compute

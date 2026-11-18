@@ -57,9 +57,6 @@ import { createSynonymDifficultyImplementation, loadSynonymDifficultyKnowledge, 
 import { createQuestionGroupParseImplementation } from './ai-parse/questionGroupParseService.mjs'
 import { createImportReviewStore } from './import-review/importReviewStore.mjs'
 import { rendererBuildId } from './import-review/promotionBootstrap.mjs'
-import { createReviewCompatibilityStore } from './import-review/reviewCompatibilityStore.mjs'
-import { startReviewCompatibilityWorker } from './import-review/runReviewCompatibilityWorker.mjs'
-import { createAutomaticReviewSubjectBackfillStore } from './import-review/automaticReviewSubjectBackfill.mjs'
 import { createImportReviewRoutes } from './import-review/importReviewRoutes.mjs'
 import { createPromotionWorkerService } from './import-review/runPromotionWorker.mjs'
 import { inspectPromotionReservation, acquireReviewCompatibilityLeader } from './import-review/reviewCompatibilityScheduling.mjs'
@@ -4104,20 +4101,11 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.a
   ensureMySpaceFilesRoot(userSpaceFilesDir)
   getImportReviewStore()
   void singlePaperPromotionService.ready().catch(error => console.error('[promotion-recovery]', error.code || 'RECOVERY_BLOCKED'))
-  // Both stores share the executing identity worker/cache. The scheduler awaits
-  // initialization; requests remain available and report pending meanwhile.
-  const compatibilityStore = createReviewCompatibilityStore({
-    dbPath: importReviewDbPath, filesRoot: importReviewFilesRoot,
-  })
-  const compatibilityWorker = startReviewCompatibilityWorker(compatibilityStore, {
-    backfillStore: createAutomaticReviewSubjectBackfillStore({ dbPath: importReviewDbPath, filesRoot: importReviewFilesRoot }),
-    onError(error) { console.error('[review-compatibility]', error.code || 'WORKER_FAILED') },
-  })
-  server.once('close', () => { singlePaperPromotionService.stop(); void compatibilityWorker.stop() })
+  server.once('close', () => singlePaperPromotionService.stop())
   const shutdown = async () => {
     const closed = new Promise(resolve => server.close(resolve))
     server.closeIdleConnections()
-    await Promise.all([closed, compatibilityWorker.stop()])
+    await closed
   }
   process.once('SIGTERM', shutdown)
   process.once('SIGINT', shutdown)

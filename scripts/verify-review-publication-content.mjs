@@ -13,7 +13,6 @@ import { buildNck1ReviewProjection, importNck1ReviewCandidate, loadNck1ReviewSou
 import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
 import { nck1MaterializationHistoricalAuthorityRef58 } from '../shared/paper-canonical/authority.mjs'
 import { createSinglePaperPromotionService } from '../server/import-review/singlePaperPromotion.mjs'
-import { createReviewCompatibilityStore } from '../server/import-review/reviewCompatibilityStore.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
 import { buildPaperImportOutputInventory, readPaperAssetNormalizationBundle, writePaperImportVersion } from '../server/paper-import/storage.mjs'
 import { materializeNck1CanonicalRequest } from '../server/paper-canonical/nck1MaterializationCanonicalRequest.mjs'
@@ -585,7 +584,6 @@ try {
       const { printConsumption } = await import(${JSON.stringify(new URL('../server/import-review/revisionProjection.mjs', import.meta.url).href)});
       const { canonicalConsumptionPrintPayload } = await import(${JSON.stringify(new URL('./import-pipeline/canonical-consumption-print-payload.mjs', import.meta.url).href)});
       const { buildPrintHtml } = await import(${JSON.stringify(new URL('../server/print-renderer.mjs', import.meta.url).href)});
-      const { createReviewCompatibilityStore } = await import(${JSON.stringify(new URL('../server/import-review/reviewCompatibilityStore.mjs', import.meta.url).href)});
       const [dbPath, filesRoot, bank, assets, blobs, revisionId] = process.argv.slice(1);
       const store = createImportReviewStore({ dbPath, filesRoot, rendererBuildId: 'changed-with-rebuild-disabled' });
       const revision = store.getRevision(revisionId);
@@ -595,8 +593,6 @@ try {
       reviewDb.close();
       assert.equal(store.compatibilityForRevision(revisionId).reasonCode, 'SEALED_PUBLICATION');
       assert.equal(store.listPapers()[0].compatibility.reasonCode, 'SEALED_PUBLICATION');
-      assert.deepEqual(await createReviewCompatibilityStore({ dbPath, filesRoot }).checkRevision(revisionId),
-        { committed: false, reasonCode: 'SEALED_PUBLICATION' });
       const make = crash => createSinglePaperPromotionService({ getStore: () => store,
         openDatabase: () => new DatabaseSync(bank), paperAssetsDir: assets,
         blobStore: createBlobStore({ rootDir: blobs }),
@@ -652,10 +648,6 @@ try {
     pass('all rebuilding/normalizing entries disabled; sealed v7 publication and committed retry succeed')
   }
   if (!process.argv.includes('--references-only')) {
-  // Remaining race/comparison probes deliberately retain #668 behavior.
-  dbRun(db => db.prepare(`UPDATE import_review_product_previews
-    SET sealed_publication_manifest_digest=NULL WHERE revision_id=?`).run(revision.id))
-
   // Promotion exercises the real store guard around the same publisher.
   const intent = { ...approval, intent: 'ship' }
   let archived = 0
@@ -681,96 +673,9 @@ try {
   dbRun(db => db.prepare('UPDATE import_review_revisions SET updated_at=? WHERE id=?').run(oldUpdatedAt, revision.id))
   pass('asynchronous archive revision race rejects and retains guard/evidence without publishing')
 
-  // A target-identity race is a content-binding test. A cold/pending target
-  // legitimately uses the legacy renderer guard, which does not bind origin.
-  // Close the preceding proven pre-write rejection and establish real equal
-  // before capturing the archive guard, as for the onPrepared race below.
-  await refreshEqualAfterRejectedFixture()
-  const beforeOrigin = process.env.QUESTION_BANK_PUBLIC_ORIGIN
-  let changedTarget = false
-  const targetRace = { identity: blobStore.identity, async put(bytes, mediaType) {
-    const result = await blobStore.put(bytes, mediaType)
-    if (!changedTarget) {
-      const current = store.latestPromotion(projection.paperId)
-      const context = store.withPromotionContentGuard(projection.paperId, current.promotionId, null, value => value)
-      assert.ok(context.subject, 'target race must start with a real content-bound subject')
-      assert.notEqual(context.binding.guard, 'legacy_renderer')
-      changedTarget = true
-      process.env.QUESTION_BANK_PUBLIC_ORIGIN = 'https://review-target.invalid'
-    }
-    return result
-  } }
-  try {
-    await assert.rejects(Promise.resolve().then(() => service({ blobStore: targetRace })
-      .promote(projection.paperId, { ...intent, intent: 'retry_ship' }, 'fixture')),
-    error => error.code === 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED'
-      && ['TARGET_CHANGED', 'TARGET_IDENTITY_PENDING', 'CAS_CHANGED'].includes(error.reasonCode))
-    assert.equal(changedTarget, true)
-    assert.equal(store.latestPromotion(projection.paperId).assetVersion, null)
-    assert.equal(store.latestPromotion(projection.paperId).state, 'publishing')
-    assert.equal(dbRun(db => db.prepare('SELECT COUNT(*) AS n FROM import_review_shipping_guards').get().n), 1)
-  } finally {
-    if (beforeOrigin === undefined) delete process.env.QUESTION_BANK_PUBLIC_ORIGIN
-    else process.env.QUESTION_BANK_PUBLIC_ORIGIN = beforeOrigin
-    await store.ready()
-  }
-  pass('asynchronous archive target identity race rejects')
-  const originalPreviewDigest = dbRun(db => db.prepare(
-    'SELECT payload_digest FROM import_review_product_previews WHERE revision_id=?',
-  ).get(revision.id).payload_digest)
-  try {
-    const changedDigest = sha256('corrupted original preview record')
-    assert.notEqual(changedDigest, originalPreviewDigest)
-    dbRun(db => db.prepare('UPDATE import_review_product_previews SET payload_digest=? WHERE revision_id=?').run(changedDigest, revision.id))
-    const unavailable = store.compatibilityForRevision(revision.id)
-    assert.equal(unavailable.fallback, true)
-    assert.notEqual(unavailable.result, 'equal')
-    assert.equal(unavailable.guard, 'legacy_renderer')
-    const current = store.latestPromotion(projection.paperId)
-    const context = store.withPromotionContentGuard(projection.paperId, current.promotionId, null, value => value)
-    assert.equal(context.subject, null)
-    assert.equal(context.binding.guard, 'legacy_renderer')
-    assert.equal(current.assetVersion, null)
-  } finally {
-    dbRun(db => db.prepare('UPDATE import_review_product_previews SET payload_digest=? WHERE revision_id=?').run(originalPreviewDigest, revision.id))
-  }
-  pass('damaged preview invalidates cached equal and selects explicit legacy guard without manufacturing evidence')
-  async function refreshEqualAfterRejectedFixture() {
-    // Each preceding injected guard failure happened before any target write.
-    // Finish that fixture operation through the store, then let a real worker
-    // establish current equal before testing the content-binding writer again.
-    assert.equal(existsSync(path.join(root, 'promoted', projection.paperId, 'versions')), false)
-    store.markPromotionFailed(projection.paperId, store.latestPromotion(projection.paperId).promotionId, {
-      failureCode: 'FIXTURE_PRE_WRITE_REJECTION', failureMessage: 'Injected fixture rejected before publisher write',
-    })
-    const compatibility = await createReviewCompatibilityStore({
-      dbPath: reviewDb, filesRoot: path.join(root, 'revisions'),
-    }).checkRevision(revision.id)
-    assert.equal(compatibility.comparison?.result, 'equal', JSON.stringify(compatibility))
-    await store.ready()
-    assert.equal(store.compatibilityForRevision(revision.id).result, 'equal')
-  }
-  await refreshEqualAfterRejectedFixture()
-  try {
-    await assert.rejects(Promise.resolve().then(() => service({
-      publish(options) {
-        return publishUniversalNck1Import({ ...options, onPrepared(target) {
-          options.onPrepared(target)
-          process.env.QUESTION_BANK_PUBLIC_ORIGIN = 'https://review-target-after-prepared.invalid'
-        } })
-      },
-    }).promote(projection.paperId, { ...intent, intent: 'retry_ship' }, 'fixture')),
-    error => error.code === 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED'
-      && ['TARGET_CHANGED', 'TARGET_IDENTITY_PENDING', 'CAS_CHANGED'].includes(error.reasonCode))
-    assert.equal(store.latestPromotion(projection.paperId).state, 'publishing')
-    assert.equal(dbRun(db => db.prepare('SELECT COUNT(*) AS n FROM import_review_shipping_guards').get().n), 1)
-  } finally {
-    if (beforeOrigin === undefined) delete process.env.QUESTION_BANK_PUBLIC_ORIGIN
-    else process.env.QUESTION_BANK_PUBLIC_ORIGIN = beforeOrigin
-    await store.ready()
-  }
-  pass('target change after prepared callback is rejected by the final transaction before writing')
-  await refreshEqualAfterRejectedFixture()
+  store.markPromotionFailed(projection.paperId, store.latestPromotion(projection.paperId).promotionId, {
+    failureCode: 'FIXTURE_PRE_WRITE_REJECTION', failureMessage: 'Injected archive race before any write',
+  })
   await assert.rejects(Promise.resolve().then(() => service({
     publish(options) {
       return publishUniversalNck1Import({ ...options, withPreparedReviewSubject(snapshot, write) {

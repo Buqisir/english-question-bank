@@ -366,23 +366,6 @@ export function buildStoredReviewSubject({ revision, preview, storedFiles, fileE
   })
 }
 
-// Target path: caller runs current strict projection/admission and supplies its
-// exact inventory. No projection code is invoked here (it would run pdfinfo).
-export function buildTargetReviewSubject({ revision, projection, inventory: targetInventory, fileEvidence }) {
-  return attempt(() => {
-    revisionEvidence(revision, revision.manifest.files)
-    if (!projection) fail('TARGET_COMPUTATION_FAILED')
-    if (projection.importProfile !== profileOf(revision.manifest)) fail('UNSUPPORTED_PROFILE')
-    const files = inventory(targetInventory)
-    const payload = buildProductPreviewPayload(revision, projection)
-    const components = componentsFor(revision, identity(projection, projection.importProfile), payload,
-      verifiedFiles(files, fileEvidence), projection.reviewedListening)
-    return makeSubject(revision, components, 'finalize', {
-      extractorVersion: REVIEW_SUBJECT_VERSION, source: 'current-validated-projection',
-    })
-  })
-}
-
 export function validateReviewSubject(subject) {
   return attempt(() => {
     if (subject?.subjectVersion !== REVIEW_SUBJECT_VERSION || !subject.revisionId

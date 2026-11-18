@@ -145,33 +145,18 @@ try {
   }
   assert.deepEqual(asyncCase.store.productPreviewForRevision(asyncResult.id).preview,
     buildProductPreviewPayload(asyncResult, synchronous))
-  assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).reasonCode, 'MISSING_FROZEN_PRODUCTS')
-  assert.equal(asyncCase.store.listPapers()[0].compatibility.reasonCode, 'MISSING_FROZEN_PRODUCTS')
+  assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).reasonCode, 'SEALED_PUBLICATION_REQUIRED')
+  assert.equal(asyncCase.store.listPapers()[0].compatibility.reasonCode, 'SEALED_PUBLICATION_REQUIRED')
   assert.throws(() => asyncCase.store.projectionForRevision(asyncResult.id),
-    { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'MISSING_FROZEN_PRODUCTS' },
+    { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'SEALED_PUBLICATION_REQUIRED' },
     'a legacy fixture without frozen products retains its original preview but cannot derive live content')
   assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).eligible, false)
   assert.equal(asyncCase.store.listPapers()[0].compatibility.eligible, false)
-  const frozenApproval = asyncCase.store.approveRevision(asyncResult.paperId, asyncResult.id,
-    { bundleDigest: asyncResult.bundleDigest }, 'owner')
-  assert.equal(frozenApproval.revisionId, asyncResult.id)
-  const frozenRequest = asyncCase.store.registerPublicationRequest(asyncResult.paperId, {
-    revisionId: asyncResult.id, requestId: 'publication-request-00000000-0000-4000-8000-000000000001',
-    secretHash: sha256('missing-products'),
-  }, 'agent')
-  assert.equal(asyncCase.store.grantPublicationRequest(frozenRequest.requestId, 'owner').state, 'granted')
-  assert.equal(asyncCase.store.getRevision(asyncResult.id).approval.approvalId, frozenApproval.approvalId,
-    'unknown compatibility allows frozen review approval while publication remains guarded')
+  assert.throws(() => asyncCase.store.approveRevision(asyncResult.paperId, asyncResult.id,
+    { bundleDigest: asyncResult.bundleDigest }, 'owner'),
+  { code: 'IMPORT_REVIEW_RENDERER_STALE', reasonCode: 'SEALED_PUBLICATION_REQUIRED' })
   const evidenceDb = new DatabaseSync(asyncCase.dbPath)
   try {
-    const evidence = evidenceDb.prepare('SELECT evidence_json FROM review_compatibility WHERE revision_id=?')
-      .get(asyncResult.id).evidence_json
-    evidenceDb.prepare('UPDATE review_compatibility SET evidence_json=? WHERE revision_id=?')
-      .run('{}', asyncResult.id)
-    assert.equal(asyncCase.store.compatibilityForRevision(asyncResult.id).reasonCode, 'BASELINE_UNTRUSTED',
-      'unknown diagnostics without a subject still require intact evidence')
-    evidenceDb.prepare('UPDATE review_compatibility SET evidence_json=? WHERE revision_id=?')
-      .run(evidence, asyncResult.id)
     // Historical production manifests may omit `files`; the fallback guard must
     // treat that as missing frozen products instead of failing the whole list.
     const manifestJson = evidenceDb.prepare('SELECT manifest_json FROM import_review_revisions WHERE id=?')

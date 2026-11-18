@@ -1,7 +1,5 @@
 import assert from 'node:assert/strict'
-import { spawn } from 'node:child_process'
-import { setTimeout as yieldFor } from 'node:timers/promises'
-import { cpSync, existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { cpSync, readFileSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { createServer } from 'node:http'
 import { createImportReviewStore } from '../../server/import-review/importReviewStore.mjs'
@@ -11,86 +9,6 @@ import { freezeReviewFixture, finalizeReviewFixture } from '../../scripts/lib/re
 import { createPaperSurfaceAnalysisAvailability } from '../../server/search/paperSurfaceAvailability.mjs'
 import { createTeachingFacetIndex } from '../../server/search/teachingFacets.mjs'
 import { createSimilarQuestionsStore } from '../../server/search/similarQuestions.mjs'
-
-async function pendingLeaseProof() {
-  const { acquireReviewCompatibilityLeader, beginReviewCompatibilityWork } = await import('../../server/import-review/reviewCompatibilityScheduling.mjs')
-  const { reviewProcessIdentity, matchingReviewProcess, reviewProcessGroupMembers } = await import('../../server/import-review/reviewProcessTree.mjs')
-  const { runReviewCompatibilityWorker } = await import('../../server/import-review/runReviewCompatibilityWorker.mjs')
-  const root = process.env.EQB_REVIEW_COMPATIBILITY_TEST_LOCK_ROOT
-  assert.ok(root && path.isAbsolute(root), 'pending lease regression requires an isolated lock root')
-  const records = () => readdirSync(root)
-    .filter(name => /^\.compatibility-(?:work|closed)-/.test(name))
-    .map(name => path.join(root, name, 'worker.json')).filter(existsSync)
-    .map(file => JSON.parse(readFileSync(file, 'utf8')))
-  const wait = async (predicate, label) => {
-    for (let i = 0; i < 400; i++) {
-      if (await predicate()) return
-      await yieldFor(25)
-    }
-    throw new Error(`Timed out: ${label}`)
-  }
-  const leader = acquireReviewCompatibilityLeader()
-  assert.ok(leader)
-  let custody, old, identity, finished = false
-  const proof = {}
-  try {
-    custody = beginReviewCompatibilityWork(leader.lease)
-    assert.ok(custody)
-    old = spawn(process.execPath, ['-e', 'const {spawn}=require("node:child_process");spawn(process.execPath,["-e","Atomics.wait(new Int32Array(new SharedArrayBuffer(4)),0,0)"],{stdio:"ignore"});setTimeout(()=>process.exit(0),1000)'],
-      { detached: true, stdio: 'ignore' })
-    const exited = new Promise(resolve => old.once('exit', resolve))
-    identity = await reviewProcessIdentity(old.pid)
-    assert.ok(identity)
-    custody.record(identity)
-    await exited
-    proof.oldState = await matchingReviewProcess(identity)
-    proof.nativeGroupBefore = (await reviewProcessGroupMembers(old.pid)).length
-    assert.equal(proof.oldState, 'dead')
-    assert.ok(proof.nativeGroupBefore > 0, 'old parent exited but its native group must survive')
-    proof.finishRefused = !(await custody.finish())
-    assert.equal(proof.finishRefused, true)
-    proof.recordsBefore = records().length
-    const input = { mode: 'compatibility', targetBuildId: 'pending-lease-diagnostic' }
-    const blocked = await runReviewCompatibilityWorker(input, { leaderLease: leader.lease })
-    proof.busyReason = blocked.comparison.reasonCode
-    proof.recordsAfter = records().length
-    proof.nativeGroupAfter = (await reviewProcessGroupMembers(old.pid)).length
-    // These assertions precede any explicit cleanup and the finally block.
-    assert.equal(proof.busyReason, 'LEADER_BUSY')
-    assert.equal(proof.recordsAfter, proof.recordsBefore, 'retained group must prevent a new fork')
-    assert.ok(proof.nativeGroupAfter > 0, 'admission must preserve the original native group')
-    process.kill(-old.pid, 'SIGKILL')
-    await wait(async () => !(await reviewProcessGroupMembers(old.pid)).length, 'owned old native group death')
-    proof.oldGroupDead = true
-    proof.finishAfterDeath = await custody.finish()
-    assert.equal(proof.finishAfterDeath, true)
-    finished = true
-    const readmitted = await runReviewCompatibilityWorker(input, { leaderLease: leader.lease })
-    proof.readmittedReason = readmitted.comparison.reasonCode
-    proof.recordsReadmitted = records().length
-    assert.equal(proof.readmittedReason, 'TARGET_IDENTITY_MISMATCH')
-    assert.equal(proof.recordsReadmitted, proof.recordsBefore + 1)
-    for (const record of records()) {
-      assert.equal(await matchingReviewProcess(record), 'dead')
-      assert.deepEqual(await reviewProcessGroupMembers(record.pid), [])
-    }
-    proof.allOwnedGroupsDead = true
-  } finally {
-    if (old?.pid) {
-      try { process.kill(-old.pid, 'SIGKILL') } catch (error) { if (error.code !== 'ESRCH') throw error }
-      await wait(async () => !(await reviewProcessGroupMembers(old.pid)).length, 'owned group exit before leader release')
-    }
-    if (custody && !finished && identity) assert.equal(await custody.finish(), true)
-    for (const record of records()) {
-      assert.equal(await matchingReviewProcess(record), 'dead')
-      assert.deepEqual(await reviewProcessGroupMembers(record.pid), [])
-    }
-    leader.release()
-    proof.leaderReleased = !existsSync(path.join(root, 'leader'))
-    assert.equal(proof.leaderReleased, true)
-  }
-  return proof
-}
 
 const store = createImportReviewStore({ dbPath: process.env.QUESTION_BANK_IMPORT_OPS_DB,
   filesRoot: process.env.QUESTION_BANK_IMPORT_OPS_ROOT, rendererBuildId: 'fixture-original-renderer',
@@ -151,8 +69,7 @@ process.on('message', async message => {
       result = { invalidations: cacheInvalidations,
         refreshed: Object.fromEntries(Object.keys(current).map(key => [key, current[key] !== primedCaches[key]])),
         sizes: { similar: current.similar.paperMetaByGroupId.size, facets: current.facets.size, availability: current.availability.size } }
-    } else if (message.type === 'pending-lease') result = await pendingLeaseProof()
-    else if (message.type === 'reconcile') result = await service.reconcile()
+    } else if (message.type === 'reconcile') result = await service.reconcile()
     else if (message.type === 'legacy-start') {
       const { createSinglePaperPromotionService } = await import('../../server/import-review/singlePaperPromotion.mjs')
       const { promotionBootstrap, openPromotionBank } = await import('../../server/import-review/promotionBootstrap.mjs')
@@ -162,10 +79,7 @@ process.on('message', async message => {
         openDatabase: options => openPromotionBank(config, options), paperAssetsDir: config.paperAssetsDir })
       result = await legacy.promote(message.paperId, message.input, 'synthetic-ship')
     }
-    else if (message.type === 'compatibility') {
-      const { runReviewCompatibilityWorker } = await import('../../server/import-review/runReviewCompatibilityWorker.mjs')
-      result = await runReviewCompatibilityWorker({ mode: 'compatibility', targetBuildId: 'test' })
-    } else if (message.type === 'new-revision') {
+    else if (message.type === 'new-revision') {
       const directory = path.join(path.dirname(process.env.QUESTION_BANK_IMPORT_OPS_DB), 'new-revision')
       cpSync(store.revisionDirectory(message.revisionId), directory, { recursive: true })
       const configPath = path.join(directory, 'config.json')
@@ -174,19 +88,6 @@ process.on('message', async message => {
       writeFileSync(configPath, JSON.stringify(config))
       const projection = freezeReviewFixture(directory)
       result = finalizeReviewFixture({ directory, output: path.dirname(directory), projection, store }).approval
-    }
-    else if (message.type === 'compete') {
-      const { runReviewCompatibilityWorker, runReviewCompatibilityBatch } = await import('../../server/import-review/runReviewCompatibilityWorker.mjs')
-      const { backfillReviewSubjects } = await import('../../server/import-review/reviewSubjectBackfill.mjs')
-      const { createAutomaticReviewSubjectBackfillStore } = await import('../../server/import-review/automaticReviewSubjectBackfill.mjs')
-      result = {
-        single: await runReviewCompatibilityWorker({ mode: 'compatibility', targetBuildId: 'test' }),
-        scan: await runReviewCompatibilityBatch({}),
-        manual: await backfillReviewSubjects({ dbPath: process.env.QUESTION_BANK_IMPORT_OPS_DB,
-          filesRoot: process.env.QUESTION_BANK_IMPORT_OPS_ROOT }),
-        automatic: await createAutomaticReviewSubjectBackfillStore({ dbPath: process.env.QUESTION_BANK_IMPORT_OPS_DB,
-          filesRoot: process.env.QUESTION_BANK_IMPORT_OPS_ROOT }).runBatch(),
-      }
     }
     else if (message.type === 'operation') result = operations.unresolved()
     else if (message.type === 'stop') {

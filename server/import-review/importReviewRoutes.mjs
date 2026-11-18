@@ -312,7 +312,9 @@ export function createImportReviewRoutes({
     const request = store.publicationRequest(match[1])
     const hasAnalyses = Boolean(request.analysisDigest)
     const expired = Date.parse(request.expiresAt) <= Date.now()
-    const disabled = expired || request.state !== 'pending'
+    const resubmit = ['pending', 'granted'].includes(request.state)
+      && store.compatibilityForRevision(request.revisionId).reasonCode === 'SEALED_PUBLICATION_REQUIRED'
+    const disabled = expired || resubmit || request.state !== 'pending'
     const preview = `/?view=paper-browse&paperId=${encodeURIComponent(request.paperId)}&reviewRevision=${encodeURIComponent(request.revisionId)}`
     sendHtml(response, `<!doctype html><html lang="zh-CN"><head>
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>确认试卷与发布</title>
@@ -326,7 +328,7 @@ ${hasAnalyses ? `<p><a href="${escapeHtml(preview)}&amp;lecture=1" target="_blan
 <button id="approve" ${request.approvalId || disabled ? 'disabled' : ''}>${hasAnalyses ? '认可版式与讲评' : '认可这个版式'}</button></section>
 <section class="step"><h2>2. 委托发布</h2><p>另行允许导题 Agent 仅发布上面这一份精确版本。</p>
 <button id="grant" ${!request.approvalId || disabled ? 'disabled' : ''}>授予这一次发布权限</button></section></div>
-<p class="state" id="result" role="status">${request.state === 'consumed' ? `权限已使用。发布状态：${escapeHtml(request.promotion?.state || '待核实')}。` : request.state === 'revoked' ? '权限已撤销。' : expired ? '请求已过期，不能再确认。' : request.state === 'granted' ? '发布权限已授予，等待 Agent 兑换。' : request.approvalId ? '版式已认可，等待单独的发布委托。' : '等待确认。'}</p>
+<p class="state" id="result" role="status">${request.state === 'consumed' ? `权限已使用。发布状态：${escapeHtml(request.promotion?.state || '待核实')}。` : request.state === 'revoked' ? '权限已撤销。' : expired ? '请求已过期，不能再确认。' : resubmit ? '此版本需重新送审。' : request.state === 'granted' ? '发布权限已授予，等待 Agent 兑换。' : request.approvalId ? '版式已认可，等待单独的发布委托。' : '等待确认。'}</p>
 <button id="revoke" ${['pending', 'granted'].includes(request.state) ? '' : 'disabled hidden'}>撤销这次请求</button>
 <details><summary>技术绑定</summary><p><code>${escapeHtml(request.paperId)} · ${escapeHtml(request.revisionId)} · ${escapeHtml(request.bundleDigest)} · ${escapeHtml(request.rendererBuildId)}</code></p></details>
 </section></main><script>

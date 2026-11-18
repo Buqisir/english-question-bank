@@ -89,7 +89,6 @@ import { freezeReviewFixture, finalizeReviewFixture, publicationFixtureInput } f
 import { syntheticReviewAnswerPdf, syntheticReviewReferences, syntheticApplicationSample, syntheticContinuationSample,
   prebindReviewFixtureReferences, removeOwnedReviewReferences } from './lib/syntheticReviewAnswerFixture.mjs'
 import { makeCurrentReviewSource, locateCurrentReviewQuestions } from '../test-fixtures/paper-import/review-source-references-v26/fixture.mjs'
-import { reviewBuildIdentityProvider } from '../server/import-review/reviewBuildIdentity.mjs'
 import { enumerateParagraphSummaryTargets } from '../server/paper-import-ai/paragraphSummaries.mjs'
 import {
   finalizePublicSearchMetadata,
@@ -2357,7 +2356,6 @@ export async function verifyPublicPaperTeachingAnalyses() {
 }
 
 if (process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY !== '1') {
-await reviewBuildIdentityProvider().ready()
 await verifyPublicPaperTeachingAnalyses()
 verifyHistoricalAuthorityReplay()
 verifyPaperHeaderTitlePublication()
@@ -3358,7 +3356,6 @@ try {
     publishedScreen: result.publish.consumers.screen,
     publishedPrint: result.publish.consumers.print_pdf,
   })
-  await reviewBuildIdentityProvider().ready()
 } finally {
   close(happy)
 }
@@ -3465,7 +3462,6 @@ console.log('verify-universal-nck1-publish: PASS')
 }
 
 export async function verifyUniversalSourceReferencePublication() {
-await reviewBuildIdentityProvider().ready()
 // The sidecar is optional for legacy versions, but a claimed reviewed sidecar
 // must survive the same atomic receipt, recovery and rollback as Canonical.
 // These cases are authored here for Ship; preview builds do not execute them.
@@ -3626,7 +3622,6 @@ console.log('PASS universal source-reference publication, frozen bytes, rollback
 }
 
 export async function verifyUniversalOwnerPromotion() {
-await reviewBuildIdentityProvider().ready()
 // An approved historical paper without listening/navigation must publish under
 // its retained authority, not today's default; summary bindings make drift fail.
 const retainedOnline = makeOnlinePromotionContext('retained-v66', paperId, null, {
@@ -4516,7 +4511,6 @@ console.log('PASS universal Owner HTTP/browser publication and recovery')
 }
 
 export async function verifyUniversalCliPromotion() {
-  await reviewBuildIdentityProvider().ready()
   const context = makeOnlinePromotionContext('cli-guarded')
   let started = null
   try {
@@ -4618,7 +4612,6 @@ export async function verifyUniversalCliHistoricalSourceReferenceHydration() {
 }
 
 export async function verifyUniversalCliHydration() {
-await reviewBuildIdentityProvider().ready()
 const cliTempRoot = mkdtempSync(path.join(tmpdir(), 'eqb-universal-publish-cli-'))
 const cliPaperId = `paper-mock-contract-2026-cli-${process.pid}`
 const cliPaperDir = path.join(

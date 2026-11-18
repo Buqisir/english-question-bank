@@ -12,6 +12,8 @@ import {
 } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
+import { DatabaseSync } from 'node:sqlite'
+import { sealReviewPublication } from '../server/import-review/sealedPublication.mjs'
 
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
@@ -562,7 +564,16 @@ try {
   await store.ready()
   const firstDigest = sha256(encoder.encode('candidate-1'))
   const first = createAndFinalize({ candidateDigest: firstDigest, candidateSha256 })
-  assert.equal(first.finalize().state, 'awaiting_review')
+  const firstFinalized = first.finalize()
+  assert.equal(firstFinalized.state, 'awaiting_review')
+  // The injected projector skips the default finalizer's seal writer.
+  const firstDirectory = store.revisionDirectory(firstFinalized.id)
+  const commitment = sealReviewPublication(firstDirectory, firstFinalized, projectionForMarker(firstDirectory))
+  const reviewDb = new DatabaseSync(path.join(temp, 'review.sqlite'))
+  try {
+    reviewDb.prepare('UPDATE import_review_product_previews SET sealed_publication_manifest_digest=? WHERE revision_id=?')
+      .run(commitment, firstFinalized.id)
+  } finally { reviewDb.close() }
   const receipt = store.confirmMediaDerivation(
     paperId,
     first.revision.id,

@@ -7,9 +7,6 @@ import {
   loadCanonicalOnlyConsumers,
 } from '../paper-canonical/publication.mjs'
 import {
-  materializeNck1CanonicalRequest,
-} from '../paper-canonical/nck1MaterializationCanonicalRequest.mjs'
-import {
   publishUniversalNck1Import,
   recoverInterruptedPaperImportPublish,
 } from '../paper-import/publisher.mjs'
@@ -20,19 +17,11 @@ import {
   assertPaperImportPaginationPlan,
   assertPaperImportSourceReferences,
 } from '../paper-import/storage.mjs'
-import { buildProductPreviewPayload } from './reviewSubject.mjs'
-import { reviewProjectionForTrustedBaseline } from './reviewComparisonProjection.mjs'
-import { reviewContentDifferences } from './reviewCompatibility.mjs'
-import { inspectSealedReviewFiles } from './sealedReviewFiles.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { PAPER_PAGINATION_PLAN_FILE_NAME } from '../paper-import/paginationPlan.mjs'
 import { readSourceReferencePublication } from '../paper-import/sourceReferencePublication.mjs'
 import { readPublishedProducts } from '../paper-import/frozenProducts.mjs'
 import { archiveReviewFiles, configuredBlobStore } from '../paper-import/blobStore.mjs'
-import {
-  buildNck1CompatibilityPackage,
-  buildNck1SealedReviewProjection,
-} from './revisionProjection.mjs'
 
 function promotionError(code, message, status = 409) {
   const error = new Error(message)
@@ -65,24 +54,7 @@ function originalPromotionEvidence(store, revision) {
   if (commitment) return restoreSealedReviewPublication({
     directory: store.revisionDirectory(revision.id), revision, ...commitment,
   }).packageData
-  let original
-  try { original = store.originalReviewEvidenceForRevision(revision.id) } catch (error) {
-    const compatibility = store.compatibilityForRevision(revision.id)
-    if (!compatibility.fallback || !compatibility.eligible) throw error
-    // The pre-fix reconciliation path derives the package from the sealed
-    // revision only after the old renderer/file/projection guards pass.
-    const { projection } = store.projectionForRevision(revision.id)
-    return buildNck1CompatibilityPackage({
-      config: projection.config, manifest: projection.manifest,
-      materialization: projection.materialization, sourceProvenance: projection.sourceProvenance,
-      sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
-      analysisSidecars: projection.analysisSidecars, paragraphSummariesBytes: projection.paragraphSummariesBytes,
-      publicSearchMetadataBytes: projection.publicSearchMetadataBytes, sourceReferencesBytes: projection.sourceReferencesBytes,
-      frozenProducts: projection.frozenProducts, paginationPlan: projection.paginationPlan,
-      paginationBindingIdentity: projection,
-    })
-  }
-  const { preview, subject } = original
+  const { preview, subject } = store.originalReviewEvidenceForRevision(revision.id)
   const bytes = relativePath => {
     const file = revision.manifest.files.find(file => file.path === relativePath)
     if (!file) return null
@@ -283,69 +255,21 @@ function failureFromResult(result) {
 // entering publisher. Only the second (or non-archiving) pass owns write inputs.
 function preparePromotionContent({ store, paperId, promotion, revision, reviewRootDir, contentBinding, fileStorage }) {
   const sealedPublicationCommitment = store.sealedPublicationCommitmentForRevision(revision.id)
-  if (sealedPublicationCommitment) {
-    return store.withPromotionContentGuard(paperId, promotion.promotionId, contentBinding, context => {
-      const restored = restoreSealedReviewPublication({
-        directory: reviewRootDir, revision, ...sealedPublicationCommitment,
-      })
-      const archiveRequired = Boolean(restored.packageData.frozenProducts && !fileStorage)
-      return { context, binding: context.binding, archiveRequired, packageData: restored.packageData,
-        sealedPublicationCommitment, profileIdentity: restored.manifest.importProfile ? {
-          importProfile: restored.manifest.importProfile,
-          paragraphSummariesDigest: revision.manifest.paragraphSummariesDigest,
-          publicSearchMetadataDigest: revision.manifest.publicSearchMetadataDigest,
-        } : {} }
-    })
+  if (!sealedPublicationCommitment) {
+    throw promotionError('IMPORT_REVIEW_RENDERER_STALE', '此版本需重新送审')
   }
-  const projection = buildNck1SealedReviewProjection(reviewRootDir, revision, {
-    requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest,
-  })
-  const materialized = materializeNck1CanonicalRequest(projection.sourceInput, {
-    schemaVersion: 'teacher-confirmation-v1',
-    candidateDigest: promotion.candidateDigest,
-    sourceDigest: promotion.sourceDigest,
-    confirmed: true,
-  })
-  const packageData = buildNck1CompatibilityPackage({
-    config: projection.config,
-    manifest: projection.manifest,
-    materialization: projection.materialization,
-    sourceProvenance: projection.sourceProvenance,
-    sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
-    analysisSidecars: projection.analysisSidecars,
-    paragraphSummariesBytes: projection.paragraphSummariesBytes,
-    publicSearchMetadataBytes: projection.publicSearchMetadataBytes,
-    sourceReferencesBytes: projection.sourceReferencesBytes,
-    frozenProducts: projection.frozenProducts,
-    paginationPlan: projection.paginationPlan,
-    paginationBindingIdentity: projection,
-  })
-  const context = store.withPromotionContentGuard(paperId, promotion.promotionId, contentBinding, value => {
-    const differences = value.subject ? reviewContentDifferences(value.subject.components.consumer,
-      buildProductPreviewPayload(revision, reviewProjectionForTrustedBaseline(value.subject, projection))).differences : []
-    const evidence = inspectSealedReviewFiles(reviewRootDir, revision.manifest.files)
-    const changed = evidence.find(file => {
-      const expected = revision.manifest.files.find(item => item.path === file.path)
-      return file.sha256 !== expected.sha256 || file.byteLength !== expected.byteLength
+  return store.withPromotionContentGuard(paperId, promotion.promotionId, contentBinding, context => {
+    const restored = restoreSealedReviewPublication({
+      directory: reviewRootDir, revision, ...sealedPublicationCommitment,
     })
-    if (changed || differences.length) {
-      const error = promotionError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Projected content differs from the approved Review')
-      error.reasonCode = changed ? 'SEALED_FILE_CHANGED' : 'SUBJECT_CHANGED'
-      error.publicationNotWritten = true
-      throw error
-    }
-    return value
+    const archiveRequired = Boolean(restored.packageData.frozenProducts && !fileStorage)
+    return { context, binding: context.binding, archiveRequired, packageData: restored.packageData,
+      sealedPublicationCommitment, profileIdentity: restored.manifest.importProfile ? {
+        importProfile: restored.manifest.importProfile,
+        paragraphSummariesDigest: revision.manifest.paragraphSummariesDigest,
+        publicSearchMetadataDigest: revision.manifest.publicSearchMetadataDigest,
+      } : {} }
   })
-  const archiveRequired = Boolean(projection.frozenProducts && !fileStorage)
-  if (archiveRequired) return { binding: context.binding, archiveRequired }
-  return {
-    context, archiveRequired, packageData, canonicalRequest: materialized.request,
-    profileIdentity: projection.importProfile ? {
-      importProfile: projection.importProfile,
-      paragraphSummariesDigest: projection.paragraphSummariesDigest,
-      publicSearchMetadataDigest: projection.publicSearchMetadataDigest,
-    } : {},
-  }
 }
 
 export function createSinglePaperPromotionService({
@@ -437,32 +361,16 @@ export function createSinglePaperPromotionService({
           const receipt = store.markPromotionPublished(paperId, promotion.promotionId, committed)
           return { status: 'idempotent', promotion: receipt, consumers: committed.consumers }
         }
-        if (begun.action === 'resume' && begun.requireCurrentEqual
+        if (begun.action === 'resume' && !store.sealedPublicationCommitmentForRevision(revision.id)
           && (uncommitted || promotionTargetAbsent({ db, paperAssetsDir, promotion }))) {
-          // beginPromotion matched the guard and linked this worker operation;
-          // markPromotionFailed rechecks that same guard before releasing it.
-          const compatibility = store.compatibilityForRevision(revision.id)
-          if (compatibility.result !== 'equal' || compatibility.pending) {
-            const failure = { failureCode: compatibility.reasonCode || 'NOT_CHECKED',
-              failureMessage: '旧发布未提交或已安全回滚。请再次明确重试，核验当前内容后发布。' }
-            const receipt = store.markPromotionFailed(paperId, promotion.promotionId, failure)
-            return { status: 'failed', promotion: receipt, failure }
-          }
+          const failure = { failureCode: 'SEALED_PUBLICATION_REQUIRED', failureMessage: '此版本需重新送审' }
+          const receipt = store.markPromotionFailed(paperId, promotion.promotionId, failure)
+          return { status: 'failed', promotion: receipt, failure }
         }
-        // Reconciliation cannot authorize a new write. Require current content
-        // eligibility before running any current projection or compiler.
-        store.withPromotionContentGuard(paperId, promotion.promotionId, contentBinding, ({ subject, compatibility }) => {
-          if (begun.requireCurrentEqual && !subject) {
-            throw Object.assign(promotionError('IMPORT_REVIEW_PUBLICATION_COMPATIBILITY_REJECTED',
-              '本次核验未完成，未发布。请稍后重试。', 503), { compatibility, retryable: true })
-          }
-        })
-        const { context, binding, archiveRequired, packageData, canonicalRequest, profileIdentity,
+        const { context, binding, archiveRequired, packageData, profileIdentity,
           sealedPublicationCommitment } = preparePromotionContent({
           store, paperId, promotion, revision, reviewRootDir, contentBinding, fileStorage,
         })
-        const externalListeningReviewProof = sealedPublicationCommitment ? null
-          : store.mintExternalListeningPublicationProof(paperId, promotion)
         // The first context is captured before the asynchronous archive. A
         // second pass must match it exactly, including target and confirmations.
         if (archiveRequired) {
@@ -473,12 +381,11 @@ export function createSinglePaperPromotionService({
         const result = publish({
           sealedPublicationProof: context.sealedPublicationProof,
           approvedReviewSubject: context.subject,
-          legacyRendererBuildId: context.binding.guard === 'legacy_renderer' ? context.binding.rendererBuildId : null,
           withPreparedReviewSubject(snapshot, write) {
             return store.withPromotionContentGuard(paperId, promotion.promotionId, context.binding, current => {
               if (current.promotion.assetVersion !== snapshot.version
                 || current.promotion.canonicalPublicationDigest !== snapshot.admission.sealed.manifest.publicationDigest
-                || snapshot.reviewGuard !== (current.subject ? 'content_binding' : 'legacy_renderer')) {
+                || snapshot.reviewGuard !== 'content_binding') {
                 const error = promotionError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Prepared publication target changed')
                 error.reasonCode = 'CAS_CHANGED'
                 throw error
@@ -494,9 +401,7 @@ export function createSinglePaperPromotionService({
             rendererBuildId: revision.rendererBuildId,
             ...profileIdentity,
           },
-          canonicalRequest,
           sealedPublicationCommitment,
-          externalListeningReviewProof,
           db,
           paperAssetsDir,
           onPrepared(target) {
@@ -604,18 +509,15 @@ export function createSinglePaperPromotionService({
       // Both calls are synchronous until the durable guard is acquired. The
       // store rechecks latest revision, content compatibility, approval and issues in its
       // transaction, including races with another process.
-      return execute(paperId, { ...store.beginPromotion(paperId, { ...approval, intent: 'ship' }, actor, operation),
-        requireCurrentEqual: Boolean(operation) })
+      return execute(paperId, store.beginPromotion(paperId, { ...approval, intent: 'ship' }, actor, operation))
     },
     promote(paperId, input, actor, operation = null) {
       const store = getStore()
-      return execute(paperId, { ...store.beginPromotion(paperId, input, actor, operation),
-        requireCurrentEqual: Boolean(operation) })
+      return execute(paperId, store.beginPromotion(paperId, input, actor, operation))
     },
     promoteScoped(paperId, requestId, secretHash, actor, operation = null) {
       const store = getStore()
-      return execute(paperId, { ...store.beginScopedPromotion(paperId, requestId, secretHash, actor, operation),
-        requireCurrentEqual: Boolean(operation) })
+      return execute(paperId, store.beginScopedPromotion(paperId, requestId, secretHash, actor, operation))
     },
   }
 }

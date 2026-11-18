@@ -1,4 +1,3 @@
-import { reviewCompatibilityEligibility } from './reviewRecoveryPolicy.mjs'
 import { sealReviewPublication } from './sealedPublication.mjs'
 import { ensurePromotionOperationShape, linkPromotionOperation, operationForExecution,
   promotionOperationError } from './promotionOperationStore.mjs'
@@ -27,12 +26,9 @@ import { acquireRevisionUpload, tryRevisionFinalization } from './reviewUploadLo
 import { finalizeContentSubject, finalizeInventory, finalizeProjection, ocrConfirmationComputation,
   validateOcrConfirmationRevision, deriveOcrConfirmationRevision, assertOcrConfirmationRevision } from './finalizeComputation.mjs'
 import { ensureReviewCompatibilityShape } from './reviewCompatibilitySchema.mjs'
-import { readReviewSubjectBackfillStatus } from './reviewSubjectBackfillStatus.mjs'
-import { checkedStoredReviewSubject } from './reviewCompatibilityWrite.mjs'
-import { appendReviewCompatibility, retainedReviewDifference, enforceRetainedReviewDifference, getReviewCompatibility, getReviewCompatibilitySummary, getLatestReviewCompatibilities } from './reviewCompatibilityStore.mjs'
+import { checkedStoredReviewSubject, insertReviewSubject } from './reviewCompatibilityWrite.mjs'
 import { buildProductPreviewPayload } from './reviewSubject.mjs'
-import { compareReviewSubjects, REVIEW_COMPARATOR_VERSION } from './reviewCompatibility.mjs'
-import { reviewBuildIdentityProvider } from './reviewBuildIdentity.mjs'
+import { REVIEW_COMPARATOR_VERSION } from './reviewCompatibility.mjs'
 import { beginReviewActivity } from './reviewCompatibilityScheduling.mjs'
 import { restoreFinalizeError, runFinalizeWorker } from './runFinalizeWorker.mjs'
 import {
@@ -865,7 +861,6 @@ export function createImportReviewStore({
     } finally { initialize.close() }
   }
   const projectionCache = new Map()
-  const targetBuild = reviewBuildIdentityProvider()
 
   function currentRendererBuildId() {
     return requiredString(
@@ -875,67 +870,32 @@ export function createImportReviewStore({
     )
   }
 
-  // Historical renderer identities are immutable receipt data. Definitive content
-  // results take precedence; unavailable checks retain the accepted legacy guard.
-  function eligibility(revision, compatibility) {
-    const value = reviewCompatibilityEligibility(compatibility, revision?.rendererBuildId !== currentRendererBuildId())
-    // Renderer fallback cannot supply missing frozen products. Check the sealed
-    // inventory even when target identity is unavailable and masks that reason.
-    if (value.fallback && revision?.reviewKind === 'candidate'
-      && (!Array.isArray(revision.manifest?.files)
-        || !revision.manifest.files.some(file => file?.path === 'products/manifest-v1.json'))) {
-      return { ...value, eligible: false }
+  function compatibilityFor(db, revision, sealed = undefined) {
+    if (revision?.reviewKind !== 'candidate') return {
+      result: 'unknown', reasonCode: revision ? 'OCR_NOT_APPLICABLE' : 'NOT_FOUND', pending: false, eligible: false,
     }
-    return value
-  }
-  function compatibilityFor(db, revision, target = null, summary = false) {
-    return eligibility(revision, rawCompatibilityFor(db, revision, target, summary))
-  }
-  function rawCompatibilityFor(db, revision, target = null, summary = false) {
-    if (!revision) return { result: 'unknown', reasonCode: 'NOT_FOUND', pending: false }
-    if (revision.reviewKind === 'ocr') return {
-      result: 'unknown', reasonCode: 'OCR_NOT_APPLICABLE', pending: false,
-    }
-    const sealed = db.prepare(`SELECT sealed_publication_manifest_digest FROM import_review_product_previews
-      WHERE revision_id = ?`).get(revision.id)?.sealed_publication_manifest_digest
-    if (sealed != null) {
-      const baseline = checkedStoredReviewSubject(db.prepare('SELECT * FROM review_subject WHERE revision_id = ?').get(revision.id))
-      return { result: 'equal', reasonCode: 'SEALED_PUBLICATION', pending: false,
-        sealedPublicationManifestDigest: sealed, subjectDigest: baseline?.row.subject_digest,
-        targetBuildId: sealed, comparatorVersion: REVIEW_COMPARATOR_VERSION }
-    }
-    const difference = retainedReviewDifference(db, revision.id)
-    const finish = value => enforceRetainedReviewDifference(db, revision.id, difference, value, target)
-    try {
-      target ||= targetBuild()
-      const value = (summary ? getReviewCompatibilitySummary : getReviewCompatibility)(db, revision, target)
-      return finish({ ...value, result: value.pending ? 'pending' : value.result,
-        targetBuildId: target.targetBuildId, comparatorVersion: value.comparatorVersion || REVIEW_COMPARATOR_VERSION })
-    } catch (error) {
-      if (error.code === 'REVIEW_TARGET_IDENTITY_PENDING') {
-        return finish({ result: 'pending', reasonCode: 'TARGET_IDENTITY_PENDING', pending: true })
-      }
-      return finish({ result: 'unknown', reasonCode: error.code === 'REVIEW_TARGET_IDENTITY_UNAVAILABLE'
-        ? 'TARGET_IDENTITY_UNAVAILABLE' : 'TARGET_IDENTITY_INVALID', pending: false })
-    }
+    if (sealed === undefined) sealed = db.prepare(`SELECT sealed_publication_manifest_digest
+      FROM import_review_product_previews WHERE revision_id = ?`).get(revision.id)?.sealed_publication_manifest_digest
+    if (!sealed) return { result: 'unknown', reasonCode: 'SEALED_PUBLICATION_REQUIRED', pending: false, eligible: false }
+    return { result: 'equal', reasonCode: 'SEALED_PUBLICATION', pending: false, eligible: true,
+      sealedPublicationManifestDigest: sealed, targetBuildId: sealed, comparatorVersion: REVIEW_COMPARATOR_VERSION }
   }
 
-  function assertReviewCompatible(db, revision, target = null) {
-    const compatibility = compatibilityFor(db, revision, target)
-    if (compatibility.fallback) console.info(JSON.stringify({ event: 'review-compatibility-fallback',
-      revisionId: revision.id, reasonCode: compatibility.fallbackReason, allowed: compatibility.eligible }))
+  function assertReviewCompatible(db, revision) {
+    const compatibility = compatibilityFor(db, revision)
     if (!compatibility.eligible) {
-      const error = storeError('IMPORT_REVIEW_RENDERER_STALE', 'Review content compatibility is not equal')
-      Object.assign(error, { reasonCode: compatibility.reasonCode, compatibility })
-      throw error
+      throw Object.assign(storeError('IMPORT_REVIEW_RENDERER_STALE', '此版本需重新送审'),
+        { reasonCode: compatibility.reasonCode, compatibility })
     }
-    return compatibility
+    const baseline = checkedStoredReviewSubject(db.prepare('SELECT * FROM review_subject WHERE revision_id = ?').get(revision.id))
+    if (!baseline) throw storeError('BASELINE_UNTRUSTED', 'Original Review subject is missing')
+    return { ...compatibility, subjectDigest: baseline.row.subject_digest }
   }
 
   function compatibilityForRevision(revisionId) {
     const revision = getRevision(revisionId)
     if (!revision) throw storeError('IMPORT_REVIEW_NOT_FOUND', 'Revision not found', 404)
-    return withDb(false, db => compatibilityFor(db, revision, null, true))
+    return withDb(false, db => compatibilityFor(db, revision))
   }
 
   function withDb(write, callback) {
@@ -1374,9 +1334,6 @@ export function createImportReviewStore({
         }, {
           onPhase: name => timer.phase(name),
         })
-        // The executing-server identity uses its trusted worker too; computing
-        // the module graph here synchronously would block concurrent requests.
-        if (prepared.contentSubject) prepared.targetBuildId = (await targetBuild.fresh()).targetBuildId
       }
       const revision = finalizeRevisionMeasured(revisionId, timer, prepared, status)
       timer.finish()
@@ -1481,9 +1438,6 @@ export function createImportReviewStore({
     const finalizedIdentity = { ...status.revision, rendererBuildId: rendererId, state: 'awaiting_review' }
     const baseline = status.revision.reviewKind === 'candidate'
       ? prepared?.contentSubject || finalizeContentSubject(directory, finalizedIdentity, projection) : null
-    const comparison = baseline ? compareReviewSubjects({
-      baseline, target: baseline, targetBuildId: prepared?.targetBuildId || targetBuild().targetBuildId,
-    }) : null
     const sealedPublicationManifestDigest = baseline?.ok && projectRevision === buildImportReviewProjection
       ? prepared?.sealedPublicationManifestDigest || sealReviewPublication(directory, finalizedIdentity, projection) : null
     withDb(true, (db) => {
@@ -1556,7 +1510,7 @@ export function createImportReviewStore({
         }
         if (current.reviewKind === 'candidate') {
           saveProductPreview(db, current, rendererId, projection, sealedPublicationManifestDigest)
-          appendReviewCompatibility(db, finalizedIdentity, baseline, comparison)
+          insertReviewSubject(db, finalizedIdentity, baseline)
         }
         db.exec('COMMIT')
       } catch (error) {
@@ -1587,14 +1541,6 @@ export function createImportReviewStore({
   }
 
   function listPapers() {
-    let target
-    let unavailable
-    try { target = targetBuild() } catch (error) {
-      unavailable = error.code === 'REVIEW_TARGET_IDENTITY_PENDING'
-        ? { result: 'pending', reasonCode: 'TARGET_IDENTITY_PENDING', pending: true }
-        : { result: 'unknown', reasonCode: error.code === 'REVIEW_TARGET_IDENTITY_UNAVAILABLE'
-          ? 'TARGET_IDENTITY_UNAVAILABLE' : 'TARGET_IDENTITY_INVALID', pending: false }
-    }
     return withDb(false, (db) => {
       const rows = db.prepare(`
       SELECT p.paper_id, p.paper_name, p.latest_revision_id, p.updated_at,
@@ -1615,22 +1561,11 @@ export function createImportReviewStore({
         CASE r.state WHEN 'changes_requested' THEN 0 WHEN 'awaiting_review' THEN 1 WHEN 'approved' THEN 2 ELSE 3 END,
         p.updated_at DESC
     `).all()
-      const compatibilities = target ? getLatestReviewCompatibilities(db, rows.map(row => ({
-        id: row.latest_revision_id, bundleDigest: row.bundle_digest, rendererBuildId: row.renderer_build_id,
-      })), target) : new Map()
       return rows.map((row) => {
       const manifest = parseJson(row.manifest_json, {})
       const kind = reviewKind(manifest)
-      const rawCompatibility = kind === 'ocr' ? { result: 'unknown', reasonCode: 'OCR_NOT_APPLICABLE', pending: false }
-        : target ? { ...compatibilities.get(row.latest_revision_id),
-          result: compatibilities.get(row.latest_revision_id).pending ? 'pending' : compatibilities.get(row.latest_revision_id).result,
-          targetBuildId: target.targetBuildId, comparatorVersion: REVIEW_COMPARATOR_VERSION }
-          : unavailable
-      const compatibility = row.sealed_publication_manifest_digest != null
-        ? compatibilityFor(db, { id: row.latest_revision_id, rendererBuildId: row.renderer_build_id, reviewKind: kind, manifest })
-        : eligibility({ rendererBuildId: row.renderer_build_id, reviewKind: kind, manifest },
-        kind === 'ocr' ? rawCompatibility : enforceRetainedReviewDifference(db, row.latest_revision_id,
-          retainedReviewDifference(db, row.latest_revision_id), rawCompatibility, target))
+      const compatibility = compatibilityFor(db, row.latest_revision_id
+        ? { id: row.latest_revision_id, reviewKind: kind } : null, row.sealed_publication_manifest_digest)
       return {
         paperId: row.paper_id,
         paperName: row.paper_name,
@@ -1702,7 +1637,7 @@ export function createImportReviewStore({
           SELECT * FROM import_review_files WHERE revision_id = ? ORDER BY path
         `).all(latest.id).map(fileRow))
       : []
-    const compatibility = latest ? withDb(false, db => compatibilityFor(db, latest, null, true)) : null
+    const compatibility = latest ? withDb(false, db => compatibilityFor(db, latest)) : null
     const latestProjection = includeProjection && latest && latest.state !== 'uploading'
       && (latest.reviewKind === 'ocr' || compatibility.result === 'equal')
       ? (cachedProjectionOnly ? projectionCache.get(latest.id) || null : projectionForRevision(latest.id).projection)
@@ -2290,6 +2225,7 @@ export function createImportReviewStore({
             'OCR review must be confirmed before a Candidate revision can be approved',
           )
         }
+        assertReviewCompatible(db, revision)
         if (request && (request.renderer_build_id !== revision.rendererBuildId || request.bundle_digest !== revision.bundleDigest)) {
           throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_STALE', 'Publication request identity changed')
         }
@@ -2324,13 +2260,13 @@ export function createImportReviewStore({
         }
         assertStoredRevisionFiles(revision, db)
         // Approval binds the immutable preview the Owner actually reviewed.
-        // Current-code equivalence is checked only when publishing.
+        // Publication also verifies the sealed package and its subject.
         const { preview: consumer } = productPreviewForRevision(revision.id)
         const baseline = checkedStoredReviewSubject(db.prepare(
           'SELECT * FROM review_subject WHERE revision_id = ?').get(revision.id))
-        if (baseline && (baseline.subject.bundleDigest !== revision.bundleDigest
+        if (!baseline || baseline.subject.bundleDigest !== revision.bundleDigest
           || baseline.subject.sourceRendererBuildId !== revision.rendererBuildId
-          || baseline.row.consumer_digest !== digestJson(consumer))) {
+          || baseline.row.consumer_digest !== digestJson(consumer)) {
           throw storeError('BASELINE_UNTRUSTED', 'Original subject and stored preview disagree')
         }
         const audio = consumer?.consumption.listeningAudio
@@ -2345,8 +2281,8 @@ export function createImportReviewStore({
             )
           }
           let listening
-          for (const file of baseline?.subject.components.sidecar || revision.manifest.files) {
-            if (baseline ? !file.jsonDigest : !file.path.endsWith('.json')) continue
+          for (const file of baseline.subject.components.sidecar) {
+            if (!file.jsonDigest) continue
             const bytes = readFileSync(resolveReviewFile(revisionDirectory(revision.id), file.path))
             if (sha256(bytes) !== file.sha256 || bytes.byteLength !== file.byteLength) {
               throw storeError('IMPORT_REVIEW_FILE_DIGEST_MISMATCH', 'Original listening evidence changed')
@@ -2626,7 +2562,7 @@ export function createImportReviewStore({
     }
   }
 
-  function assertCurrentApprovedRevision(db, paperId, expected, { reconciliation = false, target = null } = {}) {
+  function assertCurrentApprovedRevision(db, paperId, expected, { reconciliation = false } = {}) {
     const paper = db.prepare(`
       SELECT latest_revision_id FROM import_review_papers WHERE paper_id = ?
     `).get(paperId)
@@ -2647,7 +2583,7 @@ export function createImportReviewStore({
         'Only the current approved Candidate can be promoted',
       )
     }
-    const compatibility = reconciliation ? null : assertReviewCompatible(db, revision, target)
+    const compatibility = reconciliation ? null : assertReviewCompatible(db, revision)
     for (const key of [
       'approvalId',
       'revisionId',
@@ -2904,7 +2840,7 @@ export function createImportReviewStore({
       paperName: paper?.paper_name || row.paper_id,
       revisionId: row.revision_id,
       revisionNumber: revision?.revisionNumber || null,
-      compatibility: compatibilityFor(db, revision, null, true),
+      compatibility: compatibilityFor(db, revision),
       approvalId: row.approval_id,
       sourceDigest: row.source_digest,
       candidateDigest: row.candidate_digest,
@@ -2959,6 +2895,7 @@ export function createImportReviewStore({
         if (!revision || revision.reviewKind !== 'candidate' || !['awaiting_review', 'approved'].includes(revision.state)) {
           throw storeError('IMPORT_REVIEW_REVISION_NOT_REVIEWABLE', 'Publication request requires the finalized awaiting-review or approved Candidate')
         }
+        assertReviewCompatible(db, revision)
         if (Number(db.prepare("SELECT COUNT(*) count FROM import_review_issues WHERE paper_id = ? AND state IN ('open','fixed_pending_review')").get(paperId).count)) {
           throw storeError('IMPORT_REVIEW_ISSUES_UNRESOLVED', 'Unresolved issues block publication delegation')
         }
@@ -3004,7 +2941,7 @@ export function createImportReviewStore({
         if (row.state !== 'pending') throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_NOT_PENDING', 'Publication request is not pending')
         if (Date.parse(row.expires_at) <= Date.now()) throw storeError('IMPORT_REVIEW_PUBLICATION_REQUEST_EXPIRED', 'Publication request expired', 410)
         const revision = revisionRow(db.prepare('SELECT * FROM import_review_revisions WHERE id = ?').get(row.revision_id))
-        assertCurrentApprovedRevision(db, row.paper_id, revision.approval, { reconciliation: true })
+        assertCurrentApprovedRevision(db, row.paper_id, revision.approval)
         if (revision.rendererBuildId !== row.renderer_build_id || revision.bundleDigest !== row.bundle_digest
           || revision.sourceDigest !== row.source_digest || revision.candidateDigest !== row.candidate_digest
           || revision.visibleStructureDigest !== row.visible_structure_digest
@@ -3119,46 +3056,7 @@ export function createImportReviewStore({
           throw storeError('IMPORT_REVIEW_PROMOTION_GUARD_MISSING', 'Promotion guard changed')
         }
         const { revision, compatibility } = assertCurrentApprovedRevision(db, paperId, promotion)
-        // An unavailable content check uses precisely the old renderer guard.
-        // Freeze the same Review rows across the asynchronous archive; never
-        // manufacture or persist a subject from the current projection.
-        if (compatibility.fallback) {
-          const binding = {
-            guard: 'legacy_renderer', rendererBuildId: currentRendererBuildId(),
-            tokenDigest: digestJson({
-              paper: db.prepare('SELECT * FROM import_review_papers WHERE paper_id = ?').get(paperId),
-              revision: db.prepare('SELECT * FROM import_review_revisions WHERE id = ?').get(revision.id),
-              preview: db.prepare('SELECT * FROM import_review_product_previews WHERE revision_id = ?').get(revision.id) || null,
-              files: db.prepare('SELECT * FROM import_review_files WHERE revision_id = ? ORDER BY path').all(revision.id),
-              confirmations: db.prepare('SELECT * FROM import_review_media_confirmations WHERE paper_id = ? ORDER BY rowid').all(paperId),
-              issues: db.prepare('SELECT * FROM import_review_issues WHERE paper_id = ? ORDER BY rowid').all(paperId),
-              guard,
-            }),
-          }
-          if (expected?.tokenDigest && (expected.guard !== binding.guard
-            || expected.rendererBuildId !== binding.rendererBuildId || expected.tokenDigest !== binding.tokenDigest)) {
-            throw Object.assign(storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Legacy Review guard changed'),
-              { reasonCode: 'CAS_CHANGED' })
-          }
-          // A context prepared under a definitive subject cannot silently
-          // downgrade after archive or during the final writer callback.
-          if (expected?.subjectDigest && expected.guard !== 'legacy_renderer') {
-            throw Object.assign(storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Publication guard mode changed'),
-              { reasonCode: expected.targetBuildId && compatibility.targetBuildId
-                && expected.targetBuildId !== compatibility.targetBuildId ? 'TARGET_CHANGED'
-                : compatibility.reasonCode === 'TARGET_IDENTITY_PENDING' ? 'TARGET_IDENTITY_PENDING' : 'CAS_CHANGED' })
-          }
-          const value = callback({ subject: null, binding, revision, promotion, compatibility })
-          if (value instanceof Promise) throw storeError('REVIEW_TRANSACTION_ASYNC', 'Publication guard must remain synchronous')
-          db.exec('COMMIT')
-          return value
-        }
-        if (expected?.guard === 'legacy_renderer' && expected.tokenDigest) {
-          throw Object.assign(storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Publication guard mode changed'),
-            { reasonCode: 'CAS_CHANGED' })
-        }
-        const target = compatibility.sealedPublicationManifestDigest
-          ? { targetBuildId: compatibility.sealedPublicationManifestDigest } : targetBuild()
+        const target = { targetBuildId: compatibility.sealedPublicationManifestDigest }
         if (expected && target.targetBuildId !== expected.targetBuildId) {
           const error = storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Publication target changed during preparation')
           error.reasonCode = 'TARGET_CHANGED'
@@ -3167,7 +3065,8 @@ export function createImportReviewStore({
         const baseline = checkedStoredReviewSubject(db.prepare(
           'SELECT * FROM review_subject WHERE revision_id = ?',
         ).get(revision.id))
-        if (!baseline || baseline.row.subject_digest !== compatibility.subjectDigest) {
+        if (!baseline || baseline.subject.bundleDigest !== revision.bundleDigest
+          || baseline.subject.sourceRendererBuildId !== revision.rendererBuildId) {
           throw Object.assign(storeError('IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED', 'Publication subject is missing or untrusted'),
             { reasonCode: 'BASELINE_UNTRUSTED' })
         }
@@ -3203,27 +3102,19 @@ export function createImportReviewStore({
           error.reasonCode = binding.targetBuildId !== expected.targetBuildId ? 'TARGET_CHANGED' : 'CAS_CHANGED'
           throw error
         }
-        let sealedPublicationProof = null
-        if (compatibility.sealedPublicationManifestDigest) {
-          sealedPublicationProof = Object.freeze({})
-          liveSealedPublicationProofs.set(sealedPublicationProof, {
-            manifestDigest: compatibility.sealedPublicationManifestDigest,
-            previewDigest: preview.payload_digest, revisionId: revision.id,
-            paperId: revision.paperId, approvalId: promotion.approvalId,
-            bundleDigest: revision.bundleDigest, sourceDigest: revision.sourceDigest, candidateDigest: revision.candidateDigest,
-          })
-        }
+        const sealedPublicationProof = Object.freeze({})
+        liveSealedPublicationProofs.set(sealedPublicationProof, {
+          manifestDigest: compatibility.sealedPublicationManifestDigest,
+          previewDigest: preview.payload_digest, revisionId: revision.id,
+          paperId: revision.paperId, approvalId: promotion.approvalId,
+          bundleDigest: revision.bundleDigest, sourceDigest: revision.sourceDigest, candidateDigest: revision.candidateDigest,
+        })
         const value = callback({ subject: baseline.subject, binding, revision, promotion, sealedPublicationProof })
         if (value instanceof Promise) throw storeError('REVIEW_TRANSACTION_ASYNC', 'Publication guard must remain synchronous')
         db.exec('COMMIT')
         return value
       } catch (error) {
         if (db.isTransaction) db.exec('ROLLBACK')
-        if (error.code === 'REVIEW_TARGET_IDENTITY_PENDING') {
-          Object.assign(error, { code: 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED',
-            reasonCode: 'TARGET_IDENTITY_PENDING',
-            compatibility: { result: 'pending', reasonCode: 'TARGET_IDENTITY_PENDING', pending: true } })
-        }
         if (error.code === 'IMPORT_REVIEW_RENDERER_STALE' && error.compatibility) {
           error.code = 'IMPORT_REVIEW_PUBLICATION_CONTENT_REJECTED'
         }
@@ -3435,7 +3326,6 @@ export function createImportReviewStore({
       promotion: detail.promotion,
       rendererStale: detail.rendererStale,
       compatibility: detail.compatibility,
-      subjectBackfill: withDb(false, db => readReviewSubjectBackfillStatus(db, detail.latestRevisionId)),
       unresolvedCount: detail.unresolvedCount,
       approval: detail.latest?.reviewKind === 'candidate'
         && detail.latest.state === 'approved'
@@ -3614,7 +3504,7 @@ export function createImportReviewStore({
     acquireShippingGuard,
     addIssueMessage,
     approveRevision,
-    ready: targetBuild.ready,
+    ready: async () => {},
     compatibilityForRevision,
     agentPaperStatus,
     preparePromotionOperation,

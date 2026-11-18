@@ -26,7 +26,6 @@ import { nck1MaterializationHistoricalAuthorityRef66 } from '../shared/paper-can
 import { buildNck1ReviewProjection, buildNck1SealedReviewProjection, loadNck1ReviewSource,
   reviewBundleFilePaths, PARAGRAPH_SUMMARIES_FILE_NAME, PUBLIC_SEARCH_METADATA_FILE_NAME } from '../server/import-review/revisionProjection.mjs'
 import { SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
-import { reviewBuildIdentityProvider } from '../server/import-review/reviewBuildIdentity.mjs'
 import { NCK1_OCR_EVIDENCE_FILE_NAME, NCK1_OCR_CONFIRMATION_FILE_NAME } from '../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { freezeReviewFixture, finalizeReviewFixture, reviewFixtureManifest } from './lib/reviewPublicationFixture.mjs'
 import { prepareSpellingReview, SPELLING_REVIEW_FILE, TEXT_REVIEW_POLICY } from '../server/paper-import/spellingReview.mjs'
@@ -662,7 +661,6 @@ try {
     assert.throws(() => buildNck1ReviewProjection(unpackedRoot), /Reference OCR|ENOENT/u)
     writeFileSync(located, bytes)
   }
-  await reviewBuildIdentityProvider().ready()
   const sealed = finalizeReviewFixture({ directory: unpackedRoot, output: path.join(tempRoot, 'sealed-review'),
     projection: afterTransport, approve: false })
   const sealedRoot = sealed.store.revisionDirectory(sealed.revision.id)
