@@ -273,6 +273,7 @@ try {
               throw new Error(`Rendered source label changed: ${entry.referenceId}`)
             }
             for (const block of sourceReferenceBlocks(entry)) {
+              if (block.kind === 'figure' && skippedScoringFigures?.has(block.figureId)) continue
               referenceBlocks.push(block.kind === 'figure' ? block.figureId : block.kind === 'table' ? block.tableId : block.paragraph.paragraphId)
               if (block.kind === 'figure') {
                 if (!rendered.inspection.figures.some(item => item.id === block.figureId && item.loaded)) {

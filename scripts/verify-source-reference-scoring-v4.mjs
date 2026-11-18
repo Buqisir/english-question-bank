@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 // verify-resource: browser-render
 import assert from 'node:assert/strict'
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
@@ -56,6 +59,31 @@ assert.deepEqual([...skippedScoringFigures], [figure(misplaced).figureId])
 assert(figureWarnings.some(message => /confirmed source region/u.test(message)))
 const skippedHtml = buildAnswerOnlyHtml({ ...input, sourceReferences: misplaced, includeScoring: true, skippedScoringFigures })
 assert(!skippedHtml.includes(`data-reference-figure="${figure(misplaced).figureId}"`))
+const qaRoot = mkdtempSync(path.join(tmpdir(), 'eqb-scoring-qa-'))
+try {
+  const put = (name, bytes) => {
+    const file = path.join(qaRoot, name)
+    mkdirSync(path.dirname(file), { recursive: true })
+    writeFileSync(file, bytes)
+  }
+  const { paperId, documents } = input.materialization
+  put('config.json', JSON.stringify({ paperId, provenance: { paperName: input.paperName } }))
+  put('universal-source-manifest.json', JSON.stringify({
+    schemaVersion: 'universal-nck1-source-manifest-v1', paperId,
+    materializationPath: 'materialization/source.json', mediaDirectory: 'materialization/media',
+    documents: documents.map(document => ({ ...document, path: `source/${document.documentId}.pdf` })),
+  }))
+  for (const document of input.sourceDocuments) put(`source/${document.documentId}.pdf`, document.bytes)
+  put('materialization/source.json', input.sourceInput.materializationBytes)
+  put('materialization/nck1-ocr-source-evidence-v1.json', input.sourceInput.ocrSourceBytes.evidenceBytes)
+  put('materialization/nck1-ocr-source-confirmation-v1.json', input.sourceInput.ocrSourceBytes.confirmationBytes)
+  put('references.json', JSON.stringify(misplaced))
+  const qaOutput = path.join(qaRoot, 'output')
+  execFileSync(process.execPath, [fileURLToPath(new URL('./import-pipeline/answer-products.mjs', import.meta.url)),
+    'qa', '--paper-dir', qaRoot, '--references', path.join(qaRoot, 'references.json'),
+    '--output', qaOutput, '--include-scoring'], { timeout: 60_000, encoding: 'utf8' })
+  assert(readFileSync(path.join(qaOutput, 'answerOnly.pdf')).subarray(0, 5).equals(Buffer.from('%PDF-')))
+} finally { rmSync(qaRoot, { recursive: true, force: true }) }
 const wrongQuestionFigure = structuredClone(input.materialization)
 wrongQuestionFigure.groups[0].blocks.push({ kind: 'figure', blockId: 'block:wrong-question-figure',
   mediaId: 'media:missing-question-figure', caption: '', source: wrongQuestionFigure.groups[0].blocks[0].source })

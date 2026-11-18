@@ -448,7 +448,7 @@ export function makeReviewRoot(
   parentDir,
   fixturePaperId = paperId,
   questionSourceLabel = 'deterministic NCK1 question source',
-  { listening = false, sourceType = '自编题', historicalSource = false } = {},
+  { listening = false, sourceType = '自编题', historicalSource = false, openingListeningText } = {},
 ) {
   const reviewRoot = path.join(parentDir, 'review')
   const { questionBytes, answerBytes, evidence: sourceEvidence, confirmation: sourceConfirmation } =
@@ -464,7 +464,7 @@ export function makeReviewRoot(
   materialization.paperId = fixturePaperId
   if (!historicalSource) locateCurrentReviewQuestions(materialization)
   if (listening) {
-    materialization.listening.transcript[0].text =
+    materialization.listening.transcript[0].text = openingListeningText ??
       'Where will you meet your sister tomorrow morning? I will meet her beside the central library before lunch.'
     materialization.listening.questions[5].options[2].text =
       'Ask the librarian for information about the new community reading programme.'

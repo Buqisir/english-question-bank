@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
 import fs from 'node:fs'
-import { appendFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { appendFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import { syncBuiltinESMExports } from 'node:module'
 import path from 'node:path'
 import test from 'node:test'
@@ -15,6 +15,7 @@ import { sha256, digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { listeningReviewSubject, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
 import { loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
+import { productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
 
 const downstream = ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']
 
@@ -30,14 +31,17 @@ for (const mode of ['preserves all other bundle bytes', 'rejects a newer revisio
   const bindingPath = path.resolve(import.meta.dirname, '../../.amp/import-review-origin')
   const binding = fs.existsSync(bindingPath) ? readFileSync(bindingPath, 'utf8').trim() : ''
   if (binding && !/^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?\/?$/u.test(binding)) restore.origin = new URL(binding).origin
-  json(path.join(ctx.paperDir, 'products/manifest-v1.json'), { inputDigest: 'print-input' })
   json(path.join(ctx.paperDir, 'paragraph-summaries-v1.json'), { retained: 'summaries' })
   json(path.join(ctx.paperDir, 'public-search-metadata-v1.json'), { retained: 'metadata' })
   json(path.join(ctx.paperDir, 'listening-review-v1.json'), { method: 'agent_asr_comparison', old: true })
-  const manifest = { schemaVersion: 'web-import-review-bundle-v3', paperId: ctx.paperId,
-    files: Object.entries(snapshot(ctx.paperDir)).filter(([name]) => !name.startsWith('signals/'))
-      .map(([name, hex]) => ({ path: name, sha256: sha256(Buffer.from(hex, 'hex')),
-        byteLength: hex.length / 2, mediaType: 'application/octet-stream', role: 'evidence' })) }
+  const descriptors = () => Object.entries(snapshot(ctx.paperDir)).filter(([name]) => !name.startsWith('signals/'))
+    .map(([name, hex]) => ({ path: name, sha256: sha256(Buffer.from(hex, 'hex')),
+      byteLength: hex.length / 2, mediaType: 'application/json', role: name === 'config.json' ? 'config' : 'evidence' }))
+  const legacyDigest = productInputDigest(ctx.paperDir, descriptors(), null, { legacy: true })
+  json(path.join(ctx.paperDir, 'products/manifest-v1.json'), { inputDigest: legacyDigest })
+  const manifest = { schemaVersion: 'web-import-review-bundle-v3', paperId: ctx.paperId, files: descriptors() }
+  const printDigest = productInputDigest(ctx.paperDir, manifest.files)
+  assert.notEqual(legacyDigest, printDigest)
   restore.bundleDigest = reviewBundleDigest(manifest)
   json(path.join(ctx.paperDir, 'signals/review-restore.json'), restore)
   const status = { ...JSON.parse(fakeStatus(ctx, [{ id: stale ? 'rev-new' : restore.revisionId,
@@ -49,7 +53,7 @@ for (const mode of ['preserves all other bundle bytes', 'rejects a newer revisio
     readStatus: async () => JSON.stringify(status),
     inputs: () => Object.fromEntries(Object.entries(snapshot(ctx.paperDir)).filter(([name]) =>
       name !== 'listening-review-v1.json')),
-    inputDigest: () => 'print-input',
+    inputDigest: () => printDigest,
     ensureAsr: async () => 'apple-evidence',
     execute: async (_ctx, label) => {
       calls.push(label)
@@ -216,7 +220,9 @@ function fixture(t, referencesVersion = version) {
   return { dir, ctx, calls, options: { referenceStages } }
 }
 
-test('finish retains installed v2 listening evidence after a non-listening stem edit', async t => {
+for (const editOption of [false, true]) test(editOption
+  ? 'finish reruns the listening rule for an edited option using the original ASR'
+  : 'finish retains installed v2 listening evidence after a non-listening stem edit', async t => {
   const { dir, ctx, options } = fixture(t)
   const { makeReviewRoot } = await (async () => {
     const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
@@ -226,11 +232,21 @@ test('finish retains installed v2 listening evidence after a non-listening stem 
       else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
     }
   })()
-  const { reviewRoot, projection } = makeReviewRoot(path.join(dir, 'actual'), ctx.paperId, undefined, { listening: true })
+  if (editOption) ctx.paperId = `paper-synthetic-listening-rule-${process.pid}`
+  const { reviewRoot, projection } = makeReviewRoot(path.join(dir, 'actual'), ctx.paperId, undefined, {
+    listening: true, openingListeningText: editOption
+      ? 'Blue dolphins travel beyond distant islands while young sailors carefully study maps beside the harbor and curious children quietly gather orange leaves around their peaceful village during bright summer holidays'
+      : undefined,
+  })
   ctx.paperDir = reviewRoot
+  if (editOption) {
+    const cliRoot = path.join(import.meta.dirname, 'papers', ctx.paperId)
+    symlinkSync(reviewRoot, cliRoot, 'dir')
+    t.after(() => rmSync(cliRoot))
+  }
   const transcript = projection.materialization.listening.transcript
   const subject = listeningReviewSubject(projection, projection.candidate)
-  const asrPath = 'listening-review-evidence/asr.json'
+  const asrPath = 'listening-review-evidence/original-apple.json'
   const notePath = 'listening-review-evidence/original-rule.json'
   const putEvidence = (relative, value, kind, window = null, settings = null) => {
     const file = path.join(reviewRoot, relative)
@@ -238,20 +254,26 @@ test('finish retains installed v2 listening evidence after a non-listening stem 
     const bytes = readFileSync(file)
     return { path: relative, sha256: sha256(bytes), byteLength: bytes.length, kind, window, settings }
   }
-  const asr = putEvidence(asrPath, { segments: [] }, 'asr_window', { startSeconds: 0, endSeconds: 10 },
+  const words = transcript[0].text.toLowerCase().match(/[a-z]+/gu).map(word => word === 'dolphins' ? 'porpoises' : word)
+  const asr = putEvidence(asrPath, { audioSha256: subject.playbackAudioSha256, startSeconds: 0, endSeconds: subject.durationSeconds,
+    result: { segments: [{ text: words.join(' '), start: 1, end: 1 + words.length / 5,
+      words: words.map((word, index) => ({ word, start: 1 + index / 5, end: 1 + (index + 1) / 5 })) }] } },
+    'asr_window', { startSeconds: 0, endSeconds: subject.durationSeconds },
     { engine: 'fixture', model: 'fixture', language: 'en', vad: false, computeType: 'fixture' })
   const groups = transcript.map(({ segmentId, questionNumbers }, index) => ({
     segmentId, questionNumbers, decision: index ? 'blocked' : 'usable', reason: 'fixture comparison',
     limits: [], playback: index ? null : { startSeconds: 1, endSeconds: 2 },
     occurrences: index ? [] : [{ startSeconds: 1, endSeconds: 2, evidencePaths: [asrPath] }],
   }))
-  const rule = { version: 'fixture', normalizationVersion: 'fixture' }
+  const rule = { version: 'fixture', normalizationVersion: 'fixture', fuzzyAnchorsEnabled: editOption }
   const normalization = { fixture: true }
   const hash = digestJson(null)
   const note = putEvidence(notePath, { schemaVersion: 'listening-rule-evidence-v2', rule, normalization,
     input: { subject, rule, normalization, sourceTextSha256: sha256(JSON.stringify(transcript)),
       audioSha256: subject.playbackAudioSha256, materializationSha256: hash, silenceSha256: hash,
-      ruleCodeSha256: hash, adapterSha256: hash, instructionsSha256: hash, questionsSha256: hash },
+      ruleCodeSha256: hash, adapterSha256: hash,
+      instructionsSha256: digestJson(projection.materialization.sourcePresentation?.instructions || []),
+      questionsSha256: digestJson(projection.materialization.listening.questions) },
     rawEvidence: [asr], groups: groups.map(({ reason, limits, ...group }, index) => ({
       ...group, occurrences: group.occurrences.map(({ evidencePaths, ...playback }) => ({ playback, evidencePaths })),
       sourceText: transcript[index].text, issues: [], engineAttempts: [],
@@ -263,7 +285,8 @@ test('finish retains installed v2 listening evidence after a non-listening stem 
       verbatim: 'not_certified', wholeRecordingContent: 'not_certified' }, groups, evidence: [asr, note] })
   const materializationFile = path.join(reviewRoot, 'materialization/nck1-source-materialization-v1.json')
   const materialization = JSON.parse(readFileSync(materializationFile))
-  materialization.groups[0].questions[0].stem = 'What is the purpose of the notice?'
+  if (editOption) materialization.listening.questions[0].options[0].text = 'Porpoises.'
+  else materialization.groups[0].questions[0].stem = 'What is the purpose of the notice?'
   json(materializationFile, materialization)
   const loaded = loadNck1ReviewSource(reviewRoot)
   const { candidate, issues } = importCanonicalCandidate(loaded.sourceInput)
@@ -273,10 +296,20 @@ test('finish retains installed v2 listening evidence after a non-listening stem 
   const asrStage = ctx.state.steps['asr-apple-rule-v2'] = completed({ retained: true })
   await finish(ctx, [], options)
   const { review } = readListeningReview(reviewRoot, current, transcript)
-  assert.deepEqual(review.groups, groups)
-  assert.deepEqual(review.evidence[0], asr)
+  if (editOption) {
+    const attempt = ctx.state.data.listeningSegmentAttempt.attempt
+    const ruleInput = JSON.parse(readFileSync(path.join(attempt, 'input.json')))
+    assert.equal(ruleInput.inference, 'not_run')
+    assert.equal(ruleInput.questionsSha256, digestJson(materialization.listening.questions))
+    assert.equal(review.evidence[0].sha256, asr.sha256)
+    assert.equal(review.groups[0].decision, 'review_required')
+    assert.match(review.groups[0].reason, /FUZZY_ANCHOR_PROTECTED_WORD/u)
+  } else {
+    assert.deepEqual(review.groups, groups)
+    assert.deepEqual(review.evidence[0], asr)
+    assert.equal(ctx.state.steps['asr-apple-rule-v2'], asrStage)
+  }
   assert.equal(sha256(readFileSync(path.join(reviewRoot, notePath))), note.sha256)
-  assert.equal(ctx.state.steps['asr-apple-rule-v2'], asrStage)
 })
 
 test('after-proofread forwards explicit body width to figure-sizes on resume', t => {

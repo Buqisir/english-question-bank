@@ -26,7 +26,7 @@ import { fileURLToPath } from 'node:url'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
 import { loadNck1ReviewSource, reviewBundleFilePaths } from '../../server/import-review/revisionProjection.mjs'
-import { PRODUCT_MANIFEST, productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
+import { PRODUCT_MANIFEST, matchesSealedPrintInputs, productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { LISTENING_RULE_EVIDENCE_VERSION } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
 import { sourceReferenceCellContinuations, refreshSourceReferenceCellContinuations } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
@@ -40,6 +40,7 @@ import { trailingHeadingHints, trailingHeadingMessage } from './trailing-heading
 import { declareFastListening, fastProductSet } from './lib-fast-products.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { LISTENING_SEGMENT_RULE } from './lib-listening-segment-rule.mjs'
+import { segmentListening } from './listening-segment.mjs'
 import { answerKeyValuesMatch } from './lib-answer-key-comparison.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from './ocr-source-references-version.mjs'
 import { sourceReferenceProducerVersion } from '../../server/paper-import/sourceReferenceSemantics.mjs'
@@ -842,7 +843,6 @@ function sameListeningInputs(previous, current) {
 }
 
 function rebindFastListening(directory, review, subject, transcript) {
-  validateListeningReview(directory, review, review.subject, transcript)
   const evidence = review.evidence.map(file => {
     if (file.kind !== 'review_notes') return file
     const record = readJson(path.join(directory, file.path))
@@ -873,37 +873,62 @@ async function retainFastListening(ctx, candidateDigest) {
   if (!candidate || issues.length) fail('听力复用前的 Candidate 校验失败')
   const subject = listeningReviewSubject(loaded, candidate)
   const transcript = loaded.materialization.listening.transcript
-  if (existsSync(installed)) {
-    const review = readJson(installed)
-    if (sameListeningInputs(review.subject, subject)) {
-      if (digestJson(review.subject) !== digestJson(subject)) {
-        assertReferencesMutable(ctx)
-        const rebound = rebindFastListening(ctx.paperDir, review, subject, transcript)
+  const sourceInstructions = loaded.materialization.sourcePresentation?.instructions || []
+  // The segmenter uses raw question text and Review's effective instructions.
+  const questions = JSON.parse(Buffer.from(loaded.sourceInput.materializationBytes)).listening.questions || []
+  for (const [file, directory] of [[installed, ctx.paperDir], [attempt?.review, attempt?.attempt]]) {
+    if (!file || !existsSync(file)) continue
+    const review = readJson(file)
+    if (!sameListeningInputs(review.subject, subject)) {
+      if (file === installed) {
+        archive(ctx, installed)
+        delete ctx.state.steps['listening-review']
+      }
+      continue
+    }
+    const rebind = digestJson(review.subject) !== digestJson(subject)
+    if (rebind || file !== installed) validateListeningReview(directory, review, review.subject, transcript)
+    else loadLocalReviewedListening(ctx.paperDir, loaded, candidate)
+    const notes = review.evidence.filter(item => item.kind === 'review_notes')
+      .map(item => readJson(path.join(directory, item.path)))
+      .find(record => record.schemaVersion === LISTENING_RULE_EVIDENCE_VERSION)
+    if (notes && (notes.input.questionsSha256 !== digestJson(questions)
+      || notes.input.instructionsSha256 !== digestJson(sourceInstructions))) {
+      assertReferencesMutable(ctx)
+      delete ctx.state.steps['asr-apple-rule-v2']
+      await step(ctx, 'asr-apple-rule-v2', () => {
+        const result = segmentListening({ paperDir: ctx.paperDir,
+          request: { transcript, sourceInstructions, report: { ...review, subject } },
+          output: path.join(ctx.fast, 'listening-segment-attempts'), retainedReview: { directory, review },
+          fuzzyAnchors: notes.rule.fuzzyAnchorsEnabled })
+        ctx.state.data.listeningSegmentAttempt = result
+        archive(ctx, installed)
+        delete ctx.state.steps['listening-review']
+        delete ctx.state.steps['round2-requests']
+        return result
+      })
+      return false
+    }
+    if (rebind) {
+      assertReferencesMutable(ctx)
+      const rebound = rebindFastListening(directory, review, subject, transcript)
+      if (file === installed) {
         archive(ctx, installed)
         writeJson(installed, rebound, 'wx')
+      } else {
+        const reboundPath = path.join(ctx.fast, 'listening-review-input.json')
+        writeJson(reboundPath, rebound)
+        ctx.state.data.listeningSegmentAttempt = { ...attempt, review: reboundPath }
+        save(ctx)
       }
-      const retained = loadLocalReviewedListening(ctx.paperDir, loaded, candidate)
-      await step(ctx, 'listening-review', () => ({ groups: retained.review.groups.length, retained: true }))
-      return true
     }
-    archive(ctx, installed)
-    delete ctx.state.steps['listening-review']
+    if (file !== installed) return false
+    await step(ctx, 'listening-review', () => ({ groups: review.groups.length, retained: true }))
+    return true
   }
-  const report = attempt?.review && existsSync(attempt.review) ? readJson(attempt.review) : null
-  if (sameListeningInputs(report?.subject, subject)) {
-    if (digestJson(report.subject) !== digestJson(subject)) {
-      assertReferencesMutable(ctx)
-      const rebound = rebindFastListening(attempt.attempt, report, subject, transcript)
-      const reboundPath = path.join(ctx.fast, 'listening-review-input.json')
-      writeJson(reboundPath, rebound)
-      ctx.state.data.listeningSegmentAttempt = { ...attempt, review: reboundPath }
-      save(ctx)
-    }
-  } else {
-    for (const name of ['asr-wait', 'asr-apple-rule-v2', 'listening-review', 'round2-requests']) delete ctx.state.steps[name]
-    delete ctx.state.data.listeningSegmentAttempt
-    save(ctx)
-  }
+  for (const name of ['asr-wait', 'asr-apple-rule-v2', 'listening-review', 'round2-requests']) delete ctx.state.steps[name]
+  delete ctx.state.data.listeningSegmentAttempt
+  save(ctx)
   return false
 }
 
@@ -1921,12 +1946,19 @@ export async function listeningRedo(ctx, args, {
     delete ctx.state.steps['pdf-qa']
   }
   await step(ctx, 'listening-redo-products', async () => {
-    const refrozen = !existsSync(manifest) || readJson(manifest).inputDigest !== digest
+    let refrozen = true
+    if (existsSync(manifest)) {
+      const bytes = readFileSync(manifest)
+      const sealed = originalManifest.files.find(file => file.path === PRODUCT_MANIFEST)
+      refrozen = JSON.parse(bytes).inputDigest !== digest
+        && !(sealed && sha256(bytes) === sealed.sha256 && bytes.length === sealed.byteLength
+          && matchesSealedPrintInputs({ rootDir: ctx.paperDir, inputDigest: digest, sealedFiles: originalManifest.files }))
+    }
     if (refrozen) {
       archive(ctx, path.join(ctx.paperDir, 'products'))
       await execute(ctx, 'freeze', cli('freeze-products.mjs', '--paper-dir', ctx.paperDir, '--parallel'))
+      if (readJson(manifest).inputDigest !== digest) fail('listening-redo：PDF 冻结输入不匹配')
     }
-    if (readJson(manifest).inputDigest !== digest) fail('listening-redo：PDF 冻结输入不匹配')
     return { inputDigest: digest, refrozen }
   })
   if (!ctx.state.steps['listening-redo-products'].result.refrozen) assertRetainedListeningFiles(ctx, originalManifest, true)
