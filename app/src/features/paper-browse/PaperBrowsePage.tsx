@@ -898,6 +898,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const [canonicalConsumption, setCanonicalConsumption] =
     useState<WholePaperConsumption | null>(null)
   const activeAudioRef = useRef<HTMLAudioElement | null>(null)
+  const [activeAudio, setActiveAudio] = useState<HTMLAudioElement | null>(null)
+  const [followPlayback, setFollowPlayback] = useState(true)
+  const [playingSegment, setPlayingSegment] = useState<{
+    audio: HTMLAudioElement; segmentId: string; firstQuestionId: string
+  } | null>(null)
   const [segmentAudio, setSegmentAudio] = useState<Record<string, HTMLAudioElement | null>>({})
   const registerSegmentAudio = useCallback((id: string, audio: HTMLAudioElement | null) => {
     setSegmentAudio((current) => current[id] === audio ? current : { ...current, [id]: audio })
@@ -905,7 +910,26 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const activateAudio = useCallback((audio: HTMLAudioElement) => {
     if (activeAudioRef.current !== audio) activeAudioRef.current?.pause()
     activeAudioRef.current = audio
+    setActiveAudio(audio)
+    setFollowPlayback(true)
   }, [])
+  const audioSegments = canonicalConsumption?.listeningAudio?.segments
+  useEffect(() => {
+    if (!activeAudio || !audioSegments) return
+    const syncSegment = () => {
+      const segment = audioSegments.find(({ startSeconds, endSeconds }) =>
+        activeAudio.currentTime >= startSeconds && activeAudio.currentTime < endSeconds)
+      setPlayingSegment((previous) => {
+        if (!segment) return previous?.audio === activeAudio ? previous : null
+        if (previous?.audio === activeAudio && previous.segmentId === segment.segmentId) return previous
+        return { audio: activeAudio, segmentId: segment.segmentId, firstQuestionId: segment.firstQuestionId }
+      })
+    }
+    const events = ['play', 'timeupdate', 'seeked'] as const
+    events.forEach((event) => activeAudio.addEventListener(event, syncSegment))
+    syncSegment()
+    return () => events.forEach((event) => activeAudio.removeEventListener(event, syncSegment))
+  }, [activeAudio, audioSegments])
   const [groupModels, setGroupModels] = useState<Record<string, GroupModel>>({})
   const [loadingAsset, setLoading] = useState(true)
   // 等待第四轮（2026-11-15）：首屏灰块走门槛。灰块出了要留够 500ms，这期间真卷面先不挂，
@@ -1122,6 +1146,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     setAssetBase(null)
     setUnofficialEssays({})
     setCanonicalConsumption(null)
+    activeAudioRef.current?.pause()
+    activeAudioRef.current = null
+    setActiveAudio(null)
+    setPlayingSegment(null)
+    setFollowPlayback(true)
     setGroupModels({})
     setLectureAnalysisByGroupId({})
     setLectureAnalysisFetched(false)
@@ -1133,6 +1162,18 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     async function load(): Promise<void> {
       try {
         const canonicalConsumption = await loadScreenConsumption(paperId, fetch, reviewRevision)
+        const playback = canonicalConsumption.listeningAudio
+        if (import.meta.env.DEV && paperId === 'paper-gaokao-2023-ii' && playback?.segments) {
+          // ASR windows for the two segments missing from the local preview recording's review.
+          const existing = playback.segments
+          const previewOnly = [
+            { segmentId: 'listening-text-5', questionNumbers: [5], firstQuestionId: 'question:listening:5',
+              startSeconds: 377.24, endSeconds: 393.28 },
+            { segmentId: 'listening-text-7', questionNumbers: [8, 9], firstQuestionId: 'question:listening:8',
+              startSeconds: 600.98, endSeconds: 683.26 },
+          ].filter(({ segmentId }) => !existing.some((segment) => segment.segmentId === segmentId))
+          playback.segments = [...existing, ...previewOnly].sort((a, b) => a.startSeconds - b.startSeconds)
+        }
         const publishedVersion = !reviewRevision && Number.isSafeInteger(canonicalConsumption.sourceAssetVersion)
           && Number(canonicalConsumption.sourceAssetVersion) > 0 ? canonicalConsumption.sourceAssetVersion : null
         let resolvedBase = reviewRevision
@@ -2308,10 +2349,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     }
   }, [loading, asset])
 
-  // 讲评栏只认左边的显式点选，不跟随 scrollspy。
-  const panelGroupId = useMemo(() => {
-    return lectureSelection?.groupId ?? null
-  }, [lectureSelection])
+  const playbackGroup = playingSegment?.audio === activeAudio && playingSegment
+    ? Object.values(asset?.content.groups ?? {}).find((group) =>
+      group.groupType === 'listening' && group.questionIds.includes(playingSegment.firstQuestionId))
+    : null
+  const panelGroupId = (followPlayback ? playbackGroup?.groupId : null) ?? lectureSelection?.groupId ?? null
 
   // 刀 2: 当前显式选中题的 lectureFocus —— 只喂给 panelGroupId 对应那组的
   // PaperSurface 挂载，其余题组永远拿 null（讲评开着也不跨组高亮）。
@@ -2505,6 +2547,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   // （cloze/grammarFill 取首条证据行，reading 取 supportEvidenceId+answer，
   // 其余(sevenChoices/writing/未发布解析)不种子，面板自行走空态）。
   function selectLectureQuestion(groupId: string, questionId: string): void {
+    setFollowPlayback(false)
     // similar-rail (E2): 换到新题时讲评栏 body 回落到解析态——「配相似」
     // 结果列表只在同一道题上跨滚动/跨面板持续，换题就该重新走 CTA。不清
     // similarRequest/selection 本身，只切视图态：这样若用户误点又点回原题
@@ -2553,6 +2596,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   }
 
   function selectLectureGroup(groupId: string): void {
+    setFollowPlayback(false)
     setSimilarView('analysis')
     setLectureSelection({
       groupId,
@@ -2691,8 +2735,14 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     if (entry.kind === 'listening') {
       const isPanelGroup = lectureOpen && panelGroupId === groupId
       const audio = canonicalConsumption?.listeningAudio
-      const firstSection = firstListeningSectionRange(audio?.segments,
-        entry.model.surfaceData.questions.map((question) => Number(question.questionNo)).sort((a, b) => a - b))
+      const questionNumbers = entry.model.surfaceData.questions.map((question) => Number(question.questionNo)).sort((a, b) => a - b)
+      const firstSection = firstListeningSectionRange(audio?.segments, questionNumbers)
+      const longSegments = audio?.segments?.filter((segment) => segment.questionNumbers.every((number) => questionNumbers.includes(number)))
+      const secondSection = questionNumbers[0] === 6 && longSegments?.length
+        && longSegments.flatMap((segment) => segment.questionNumbers).join(',') === questionNumbers.join(',')
+        ? { startSeconds: longSegments[0].startSeconds, endSeconds: longSegments.at(-1)!.endSeconds, segments: longSegments }
+        : null
+      const section = firstSection || secondSection
       const wholePaper = wholeListeningPaperRange(audio?.segments)
       const listeningPlayers = audio?.segments ? Object.fromEntries(audio.segments.map((segment) => [
         segment.firstQuestionId,
@@ -2707,12 +2757,15 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           <PaperSurface
             {...entry.model.surfaceData}
             listeningPlayers={listeningPlayers}
-            listeningSectionPlayer={audio && firstSection && (
-              <ListeningSegmentPlayer key={`${audio.sha256}:first-section`} src={audio.url} label="第一节第 1–5 题"
-                startSeconds={firstSection.startSeconds} endSeconds={firstSection.endSeconds}
+            listeningSectionPlayer={audio && section && (
+              <ListeningSegmentPlayer key={`${audio.sha256}:${groupId}:section`} src={audio.url}
+                label={firstSection ? '第一节第 1–5 题' : `第二节第 6–${questionNumbers.at(-1)} 题`}
+                startSeconds={section.startSeconds} endSeconds={section.endSeconds}
                 onActivate={activateAudio} size="full"
-                marks={firstSection.segments.map((segment) => ({
-                  startSeconds: segment.startSeconds, endSeconds: segment.endSeconds, label: String(segment.questionNumbers[0]),
+                marks={section.segments.map((segment) => ({
+                  startSeconds: segment.startSeconds, endSeconds: segment.endSeconds,
+                  label: segment.questionNumbers.length === 1 ? String(segment.questionNumbers[0])
+                    : `${segment.questionNumbers[0]}–${segment.questionNumbers.at(-1)}`,
                 }))} />
             )}
             listeningPartPlayer={audio && (
@@ -3464,6 +3517,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             groupQuestionIds={group.questionIds}
             activeQuestionId={activeQuestionId}
             segmentAudio={segmentAudio}
+            playback={playingSegment?.audio === activeAudio ? playingSegment : null}
+            onReturnToPlayback={!followPlayback && playbackGroup && playingSegment
+              && !Object.values(lectureEntry.analysis.materials).some(({ segmentId, questionIds }) =>
+                segmentId === playingSegment.segmentId && activeQuestionId && questionIds.includes(activeQuestionId))
+              ? () => setFollowPlayback(true) : undefined}
           />
         )
       }
@@ -3651,12 +3709,15 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         ),
       })?.section?.text ?? null
     }
-    const hasActiveQuestion = Boolean(
-      lectureSelection
-      && lectureSelection.groupId === groupId
-      && lectureSelection.questionId,
-    )
-    const activeQuestionId = hasActiveQuestion ? lectureSelection?.questionId ?? null : null
+    const selectedQuestionId = lectureSelection?.groupId === groupId ? lectureSelection.questionId : null
+    const visibleListening = lectureAnalysisByGroupId[groupId]
+    const selectedMaterial = visibleListening?.kind === 'listening' && selectedQuestionId
+      ? Object.values(visibleListening.analysis.materials).find(({ questionIds }) => questionIds.includes(selectedQuestionId))
+      : null
+    const playbackQuestion = followPlayback && playbackGroup?.groupId === groupId && playingSegment
+      && selectedMaterial?.segmentId !== playingSegment.segmentId ? playingSegment.firstQuestionId : null
+    const activeQuestionId = playbackQuestion ?? selectedQuestionId
+    const hasActiveQuestion = Boolean(activeQuestionId)
     const activeEvidenceId = hasActiveQuestion ? lectureSelection?.evidenceId ?? null : null
     const activeOptionLabel = hasActiveQuestion ? lectureSelection?.optionLabel ?? null : null
     const lectureEntry = lectureAnalysisByGroupId[groupId]

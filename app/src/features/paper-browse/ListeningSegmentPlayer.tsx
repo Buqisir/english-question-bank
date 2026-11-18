@@ -180,6 +180,7 @@ export function ListeningSegmentPlayer({ src, label, startSeconds, endSeconds, o
     setShift(0)
     setOpen(true)
     if (audioRef.current?.paused) void play()
+    else if (audioRef.current) onActivate(audioRef.current)
   }
 
   function seekTo(seconds: number) {

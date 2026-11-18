@@ -6,9 +6,11 @@ type Props = {
   groupQuestionIds: string[]
   activeQuestionId: string | null
   segmentAudio: Record<string, HTMLAudioElement | null>
+  playback: { segmentId: string; audio: HTMLAudioElement } | null
+  onReturnToPlayback?: () => void
 }
 
-export function ListeningAnalysisPanel({ analysis, groupQuestionIds, activeQuestionId, segmentAudio }: Props) {
+export function ListeningAnalysisPanel({ analysis, groupQuestionIds, activeQuestionId, segmentAudio, playback, onReturnToPlayback }: Props) {
   const allowed = new Set(groupQuestionIds)
   const materials = Object.values(analysis.materials).filter((material) =>
     material.questionIds.some((questionId) => allowed.has(questionId))
@@ -18,6 +20,7 @@ export function ListeningAnalysisPanel({ analysis, groupQuestionIds, activeQuest
 
   return (
     <div className="listening-analysis-panel">
+      {onReturnToPlayback && <button type="button" className="listening-quiet-control" onClick={onReturnToPlayback}>回到当前句</button>}
       {materials.map((material) => {
         const questions = material.questionIds
           .filter((questionId) => allowed.has(questionId) && (!activeQuestionId || questionId === activeQuestionId))
@@ -34,7 +37,8 @@ export function ListeningAnalysisPanel({ analysis, groupQuestionIds, activeQuest
             </p>}
             <p className="listening-analysis-summary">{material.summaryZh}</p>
             {material.sentences?.length ? <ListeningSentenceFollow
-              sentences={material.sentences} audio={segmentAudio[material.segmentId]}
+              sentences={material.sentences}
+              audio={playback?.segmentId === material.segmentId ? playback.audio : segmentAudio[material.segmentId]}
             /> : <div className="listening-analysis-text">
               <h6>听力原文</h6>
               <p lang="en">{material.transcript}</p>

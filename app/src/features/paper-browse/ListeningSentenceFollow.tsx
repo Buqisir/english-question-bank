@@ -4,6 +4,14 @@ import { Check, Pause, Play } from '../../icons'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
 import { listeningPlayerSeekEvent } from './ListeningSegmentPlayer'
 
+function sentenceStart(sentence: ListeningSentence, repeating: boolean) {
+  return repeating ? sentence.repeatStart ?? sentence.start : sentence.start
+}
+
+function sentenceEnd(sentence: ListeningSentence, repeating: boolean) {
+  return sentenceStart(sentence, repeating) + sentence.end - sentence.start
+}
+
 export function ListeningSentenceFollow({ sentences, audio }: {
   sentences: ListeningSentence[]
   audio?: HTMLAudioElement | null
@@ -14,26 +22,30 @@ export function ListeningSentenceFollow({ sentences, audio }: {
   const [error, setError] = useState(false)
   const [following, setFollowing] = useState(true)
   const loopTarget = useRef(-1)
+  const loopRepeating = useRef(false)
   const list = useRef<HTMLDivElement>(null)
   const autoScrolling = useRef(false)
 
+  const repeatStart = sentences[0]?.repeatStart ?? Infinity
   useEffect(() => {
     if (!audio) return
     let frame = 0
     const sync = () => {
       cancelAnimationFrame(frame)
       const target = sentences[loopTarget.current]
-      if (target && !audio.paused && !audio.seeking && audio.currentTime >= target.end) {
-        audio.currentTime = target.start
+      if (target && !audio.paused && !audio.seeking && audio.currentTime >= sentenceEnd(target, loopRepeating.current)) {
+        audio.currentTime = sentenceStart(target, loopRepeating.current)
       }
-      const index = sentences.findLastIndex((sentence) => sentence.start <= audio.currentTime + 0.025)
+      const repeating = audio.currentTime + 0.025 >= repeatStart
+      const index = sentences.findLastIndex((sentence) => sentenceStart(sentence, repeating) <= audio.currentTime + 0.025)
       setCurrent(target ? loopTarget.current : index)
       setPlaying(!audio.paused)
       if (!audio.paused) frame = requestAnimationFrame(sync)
     }
     const onPlayerSeek = () => {
       const target = sentences[loopTarget.current]
-      if (!target || (audio.currentTime >= target.start && audio.currentTime < target.end)) return
+      const repeating = loopRepeating.current
+      if (!target || (audio.currentTime >= sentenceStart(target, repeating) && audio.currentTime < sentenceEnd(target, repeating))) return
       loopTarget.current = -1
       setLoop(false)
       sync()
@@ -47,7 +59,7 @@ export function ListeningSentenceFollow({ sentences, audio }: {
       events.forEach((event) => audio.removeEventListener(event, sync))
       audio.removeEventListener(listeningPlayerSeekEvent, onPlayerSeek)
     }
-  }, [audio, sentences])
+  }, [audio, sentences, repeatStart])
 
   useEffect(() => {
     if (!following) return
@@ -79,7 +91,7 @@ export function ListeningSentenceFollow({ sentences, audio }: {
     if (audio.error) audio.load()
     if (index !== undefined) {
       if (loop) loopTarget.current = index
-      audio.currentTime = sentences[index].start
+      audio.currentTime = sentenceStart(sentences[index], loop ? loopRepeating.current : audio.currentTime + 0.025 >= repeatStart)
       setCurrent(index)
     }
     void audio.play().catch((reason) => {
@@ -92,7 +104,9 @@ export function ListeningSentenceFollow({ sentences, audio }: {
     loopTarget.current = loop ? -1 : Math.max(0, current)
     const target = sentences[loopTarget.current]
     if (target) {
-      if (audio.currentTime < target.start || audio.currentTime >= target.end) audio.currentTime = target.start
+      loopRepeating.current = audio.currentTime + 0.025 >= repeatStart
+      const start = sentenceStart(target, loopRepeating.current)
+      if (audio.currentTime < start || audio.currentTime >= sentenceEnd(target, loopRepeating.current)) audio.currentTime = start
       setCurrent(loopTarget.current)
     }
     setLoop(!loop)
@@ -106,11 +120,13 @@ export function ListeningSentenceFollow({ sentences, audio }: {
     }
     const index = loopTarget.current
     const target = sentences[index]
-    if (target && (audio.currentTime < target.start || audio.currentTime >= target.end)) {
+    if (target && (audio.currentTime < sentenceStart(target, loopRepeating.current)
+      || audio.currentTime >= sentenceEnd(target, loopRepeating.current))) {
       playSentence(index)
       return
     }
-    playSentence(current < 0 || audio.currentTime >= sentences[sentences.length - 1].end ? 0 : undefined)
+    const repeating = audio.currentTime >= repeatStart
+    playSentence(current < 0 || audio.currentTime >= sentenceEnd(sentences[sentences.length - 1], repeating) ? 0 : undefined)
   }
 
   return <div className="listening-analysis-text listening-follow">

@@ -11,6 +11,7 @@ export type ListeningSentence = {
   /** Seconds on the whole-paper playback recording. */
   start: number
   end: number
+  repeatStart?: number
   evidence?: Array<{ question: number; kind: 'support' | 'trap' }>
 }
 
