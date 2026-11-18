@@ -7,6 +7,7 @@ import { Skeleton, SkeletonGate } from '../../shared-ui/Skeleton.tsx'
 import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate.tsx'
 import { ensurePaperFonts } from '../../shared-ui/papersurface/paperFontLoader.ts'
+import { fetchQuestionGroups } from '../../services/questionGroups.ts'
 import {
   fetchNotebookPaper,
   fetchNotebookPapers,
@@ -17,8 +18,9 @@ import {
 } from '../../services/vocabularyNotebook.ts'
 import './vocabularyNotebook.css'
 
-function notebookPaperTitle({ paperTitle, paperId }: Pick<NotebookPaper, 'paperTitle' | 'paperId'>) {
-  return paperTitle === '未命名试卷' ? paperId : paperTitle
+type PaperTitles = {
+  title: string
+  groups: Record<string, string>
 }
 
 function pronounce(entry: NotebookEntry) {
@@ -57,8 +59,32 @@ function MarkedTranslation({ text, ranges }: { text: string; ranges: NotebookCon
   )
 }
 
-function NotebookSheet({ detail }: { detail: NotebookPaperDetail }) {
-  const title = notebookPaperTitle(detail)
+async function loadPaperTitles(paperId: string): Promise<PaperTitles | null> {
+  let response = await fetch(`/paper-assets/${encodeURIComponent(paperId)}/latest/paper-asset.json`)
+  if (!response.ok) response = await fetch(`/paper-assets/${encodeURIComponent(paperId)}/paper-asset.json`)
+  if (!response.ok) return null
+  const asset = await response.json()
+  const groups: Record<string, string> = {}
+  for (const part of asset.layoutTree?.parts || []) {
+    for (const section of part.sections || []) {
+      for (const group of section.groups || []) {
+        if (group.groupId && group.title) groups[group.groupId] = group.title
+      }
+    }
+  }
+  const cards = await fetchQuestionGroups().catch(() => [])
+  const named = cards.find((card) => card.canonicalPaperId === paperId && card.paperName.trim())
+  return { title: named?.paperName.trim() || asset.paper?.title || '', groups }
+}
+
+function NotebookSheet({
+  detail,
+  titles,
+}: {
+  detail: NotebookPaperDetail
+  titles: PaperTitles | null
+}) {
+  const title = titles?.title || (detail.paperTitle === '未命名试卷' ? detail.paperId : detail.paperTitle)
   return (
     <article className="notebook-sheet" aria-label={title}>
       <h1 className="canonical-paper-cover-title">{title}</h1>
@@ -66,7 +92,7 @@ function NotebookSheet({ detail }: { detail: NotebookPaperDetail }) {
         <section key={revision.sourceRevision}>
           {revision.groups.map((group) => (
             <div key={group.groupId}>
-              <h2 className="notebook-passage">{group.groupLabel}</h2>
+              <h2 className="notebook-passage">{titles?.groups[group.groupId] || group.groupLabel}</h2>
               {group.entries.map((entry) => (
                 <section key={entry.id} className="notebook-word">
                   <p className="notebook-head">
@@ -149,7 +175,10 @@ export function VocabularyNotebookPage({
   // 等待第四轮（2026-11-15）：收藏的卷第一次读回来时，一行行依次淡入；从一张纸返回列表不再演（once）。
   const paperListRef = useRef<HTMLElement>(null)
   useRowReveal(paperListRef, '.home-row-list > li', (papers?.length ?? 0) > 0, { once: true })
+  const [paperNames, setPaperNames] = useState<Record<string, string>>({})
   const [detail, setDetail] = useState<NotebookPaperDetail | null>(null)
+  const [resolvedTitles, setResolvedTitles] = useState<{ paperId: string; titles: PaperTitles | null } | null>(null)
+  const titles = resolvedTitles?.paperId === paperId ? resolvedTitles.titles : null
   const [error, setError] = useState('')
 
   useEffect(() => {
@@ -167,6 +196,11 @@ export function VocabularyNotebookPage({
       })
     }
     reload()
+    if (paperId) {
+      loadPaperTitles(paperId).catch(() => null).then((nextTitles) => {
+        if (!cancelled) setResolvedTitles({ paperId, titles: nextTitles })
+      })
+    }
     // 纸面字体和这张纸一起读（灰块挪出 PaperFontGate 以后，免得等纸到了才开始读字体）。读不到由 PaperFontGate 照旧报。
     if (paperId) void ensurePaperFonts('').catch(() => undefined)
     const channel = new BroadcastChannel('eqb-vocabulary-notebook')
@@ -177,6 +211,21 @@ export function VocabularyNotebookPage({
       channel.close()
     }
   }, [paperId])
+
+  useEffect(() => {
+    if (!papers?.length) return
+    let cancelled = false
+    fetchQuestionGroups().then((cards) => {
+      if (cancelled) return
+      const names: Record<string, string> = {}
+      for (const paper of papers) {
+        const named = cards.find((card) => card.canonicalPaperId === paper.paperId && card.paperName.trim())
+        if (named) names[paper.paperId] = named.paperName.trim()
+      }
+      setPaperNames(names)
+    }).catch(() => undefined)
+    return () => { cancelled = true }
+  }, [papers])
 
   return (
     <div className="notebook-page">
@@ -190,10 +239,10 @@ export function VocabularyNotebookPage({
         // 原来 PaperFontGate 包着整块（连「正在打开这张纸」那一行），字体和这张纸一起读；挪出来以后在下面的 effect 里先读通用字体，仍是一起读。
         <main className="notebook-desk">
           {error ? <Notice kind="error" className="notebook-status">{error}</Notice> : null}
-          <SkeletonGate pending={!detail && !error} label="正在打开这张纸" skeleton={<NotebookSheetSkeleton />}>
-            {detail ? (
+          <SkeletonGate pending={detail?.paperId !== paperId && !error} label="正在打开这张纸" skeleton={<NotebookSheetSkeleton />}>
+            {detail?.paperId === paperId ? (
               <PaperFontGate>
-                <NotebookSheet detail={detail} />
+                <NotebookSheet detail={detail} titles={titles} />
               </PaperFontGate>
             ) : null}
           </SkeletonGate>
@@ -211,7 +260,8 @@ export function VocabularyNotebookPage({
               <h2 className="home-section-label">已收藏</h2>
               <ul className="home-row-list">
                 {papers.map((paper) => {
-                  const title = notebookPaperTitle(paper)
+                  const title = paperNames[paper.paperId]
+                    || (paper.paperTitle !== '未命名试卷' ? paper.paperTitle : paper.paperId)
                   return (
                     <li key={paper.paperId}>
                       <button type="button" className="home-row" onClick={() => onOpenPaper(paper.paperId)} aria-label={title}>
