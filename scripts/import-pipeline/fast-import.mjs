@@ -577,7 +577,7 @@ function round2Prompts(ctx) {
   ].join('\n') })
   const config = readJson(path.join(ctx.paperDir, 'config.json'))
   if (hasListening(ctx) && (!config.importProfile || config.withTeachingAnalyses === true)) {
-    const materialization = readJson(materializationPath(ctx))
+    const { materialization } = loadNck1ReviewSource(ctx.paperDir)
     const sentenceTargets = Object.fromEntries(listeningSentenceTargets(materialization)
       .map(({ material, sentences }) => [material.segmentId, sentences.map(({ id, en }) => ({ id, en }))]))
     const file = path.join(ctx.fast, 'listening-analysis-request.json')
@@ -982,7 +982,7 @@ export function installListeningSentenceAnalysis(ctx) {
   const stage = path.join(ctx.paperDir, LISTENING_STAGED_ANALYSIS_FILE_NAME)
   const authored = path.join(ctx.fast, 'listening-analysis-authored.json')
   if (!existsSync(stage) && !existsSync(authored)) return { detail: '无听力讲解，保留段级展示' }
-  const document = readJson(materializationPath(ctx))
+  const { materialization: document } = loadNck1ReviewSource(ctx.paperDir)
   if (!existsSync(stage) && NCK1_STAGED_ANALYSIS_FILES.some(({ key, path: file }) =>
     (!key.startsWith('reading-') || document.groups.some(({ slotId }) => slotId === key.replace('-', '.')))
     && !existsSync(path.join(ctx.paperDir, file)))) {
