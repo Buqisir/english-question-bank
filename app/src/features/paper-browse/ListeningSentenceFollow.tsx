@@ -41,12 +41,12 @@ const calmV1HighlightDuration = 150
 const calmReadingInset = 0.08
 const calmSpring = { response: 0.62, dampingRatio: 0.88 }
 
-const calmDefaults = { beat: 150, min: 620, max: 880, perLine: 100, tail: 0.6 }
+const calmDefaults = { beat: 150, min: 620, max: 880, perLine: 100, tail: 0.6, focus: 40 }
 type CalmTuning = typeof calmDefaults
 const calmPresets: { label: string; values: CalmTuning }[] = [
   { label: '推荐', values: calmDefaults },
-  { label: '舒展', values: { beat: 170, min: 660, max: 960, perLine: 120, tail: 0.75 } },
-  { label: '利落', values: { beat: 130, min: 560, max: 820, perLine: 90, tail: 0.4 } },
+  { label: '舒展', values: { beat: 170, min: 660, max: 960, perLine: 120, tail: 0.75, focus: 40 } },
+  { label: '利落', values: { beat: 130, min: 560, max: 820, perLine: 90, tail: 0.4, focus: 40 } },
 ]
 const tuningStorage = 'eqb-listening-calm-v2-presets'
 const tuningRanges = [
@@ -55,6 +55,7 @@ const tuningRanges = [
   ['max', '最长', 750, 1000, 1],
   ['perLine', '每行', 50, 150, 1],
   ['tail', '收尾', 0, 1, 0.01],
+  ['focus', '焦点', 30, 50, 1],
 ] as const
 const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value))
 
@@ -72,20 +73,22 @@ function loadCalmTuning() {
 }
 
 function CalmTuningPanel({ values, onChange }: { values: CalmTuning; onChange: (value: CalmTuning) => void }) {
-  const summary = tuningRanges.map(([key]) => `${key} ${values[key]}`).join(' · ')
+  const format = (key: keyof CalmTuning) => `${values[key]}${key === 'focus' ? '%' : ''}`
+  const summary = tuningRanges.map(([key]) => `${key} ${format(key)}`).join(' · ')
   return <aside className="listening-follow-tuning" aria-label="跟读动效调参">
     <div className="listening-follow-tuning-presets" role="group" aria-label="动效预设">
       {calmPresets.map((preset) => <Button key={preset.label} size="sm" tone="quiet"
         aria-pressed={tuningRanges.every(([key]) => values[key] === preset.values[key])}
         onClick={() => onChange(preset.values)}>{preset.label}</Button>)}
+      <Button size="sm" onClick={() => onChange(calmDefaults)}>恢复默认</Button>
     </div>
     <div className="listening-follow-tuning-sliders">
       {tuningRanges.map(([key, label, min, max, step]) => <label key={key}>
-        <span>{label} {values[key]}</span>
-        <input type="range" aria-label={label} min={min} max={max} step={step} value={values[key]}
+        <span>{label} {format(key)}</span>
+        <input type="range" aria-label={label} aria-valuetext={key === 'focus' ? format(key) : undefined}
+          min={min} max={max} step={step} value={values[key]}
           onChange={(event) => onChange({ ...values, [key]: event.currentTarget.valueAsNumber })} />
       </label>)}
-      <Button size="sm" onClick={() => onChange(calmDefaults)}>恢复默认</Button>
     </div>
     <input className="listening-follow-tuning-summary" aria-label="可复制的动效参数"
       readOnly value={summary} onFocus={(event) => event.currentTarget.select()} />
@@ -126,14 +129,11 @@ function sampleCalmCurve(curve: CalmCurve, progress: number, duration: number) {
   return { offset, velocity: dy / (dx * duration) }
 }
 
-function sentenceFocusTop(row: HTMLElement, height: number, calm: boolean) {
+function sentenceFocusTop(row: HTMLElement, height: number, calm: boolean, focus: number) {
   const bounds = row.getBoundingClientRect()
   const english = calm ? row.querySelector('.listening-follow-sentence')?.getBoundingClientRect() : null
   if (!english) return bounds.height / 2 - height * 0.4
-  return Math.max(
-    english.top - bounds.top + english.height / 2 - height * 0.45,
-    bounds.height - height * (1 - calmReadingInset),
-  )
+  return english.top - bounds.top + english.height / 2 - height * focus / 100
 }
 
 const noSentences: ListeningSentence[] = []
@@ -169,6 +169,8 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
   const tune = calmV2 && params.get('tune') === '1'
   const [tuning, setTuning] = useState(() => tune ? loadCalmTuning() : calmDefaults)
   const liveTuning = useRef(tuning)
+  const focus = tune ? tuning.focus : calmDefaults.focus
+  const lastFocus = useRef(focus)
   useEffect(() => {
     try {
       // Discard the old preview values without resetting choices saved with the presets.
@@ -193,22 +195,27 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
   }, [])
 
   useLayoutEffect(() => {
+    positionList(0)
+  }, [audio, sentences, positionList])
+
+  useLayoutEffect(() => {
     const scroller = list.current
-    const first = scroller?.firstElementChild as HTMLElement | null
     const last = scroller?.lastElementChild as HTMLElement | null
-    if (!scroller || !first || !last) return
+    if (!scroller || !last) return
     const measure = () => {
       const height = scroller.clientHeight
-      scroller.style.paddingTop = `${Math.max(0, -sentenceFocusTop(first, height, calm))}px`
-      scroller.style.paddingBottom = `${Math.max(0, height + sentenceFocusTop(last, height, calm) - last.offsetHeight)}px`
+      scroller.style.paddingBottom = `${Math.max(0, height + sentenceFocusTop(last, height, calm, focus) - last.offsetHeight)}px`
     }
     measure()
+    if (lastFocus.current !== focus) {
+      lastFocus.current = focus
+      if (audio && !audio.paused && follows.current) jumpToCurrent.current()
+    }
     const observer = new ResizeObserver(measure)
     observer.observe(scroller, { box: 'border-box' })
-    observer.observe(first)
-    if (last !== first) observer.observe(last)
+    observer.observe(last)
     return () => observer.disconnect()
-  }, [sentences, calm])
+  }, [audio, sentences, calm, focus])
 
   useEffect(() => {
     const scroller = list.current
@@ -238,7 +245,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     const center = (index: number) => {
       const row = scroller.children[index] as HTMLElement | undefined
       if (!row) return scroller.scrollTop
-      const top = row.offsetTop + sentenceFocusTop(row, scroller.clientHeight, calm)
+      const top = row.offsetTop + sentenceFocusTop(row, scroller.clientHeight, calm, tune ? liveTuning.current.focus : calmDefaults.focus)
       return Math.max(0, Math.min(top, scroller.scrollHeight - scroller.clientHeight))
     }
     const setSpringTarget = (index: number, now: number, automatic: boolean) => {
@@ -256,7 +263,8 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       if (calmV1) curveSample = { position: scroller.scrollTop, time: now }
     }
     const startCalmV2 = (index: number, now: number, automatic: boolean) => {
-      if (motion?.curve && motion.index === index) {
+      const to = center(index)
+      if (motion?.curve && motion.index === index && to === motion.from + motion.curve.distance) {
         motion.automatic = automatic
         return
       }
@@ -267,7 +275,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
         from = motion.from + sample.offset
         velocity = sample.velocity
       }
-      const distance = center(index) - from
+      const distance = to - from
       if (!distance && !velocity) return
       const english = scroller.children[index].querySelector('.listening-follow-sentence')!
       const lineHeight = Number.parseFloat(getComputedStyle(english).lineHeight)
@@ -315,7 +323,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       const continuous = flow && !reducedMotion.matches
       if (index >= 0 && follows.current) {
         if (reducedMotion.matches) {
-          if (jump || index !== lastIndex || motion || spring || pending) positionList(center(index))
+          if (jump || (!audio.paused && index !== lastIndex) || motion || spring || pending) positionList(center(index))
           pending = null
           stopCurve()
           spring = null
@@ -380,7 +388,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
               startCurve(pending.index, distance > lineHeight * 3 ? 800 : 650, now, true)
               pending = null
             }
-          } else if (!continuous && index !== lastIndex) {
+          } else if (!continuous && !audio.paused && index !== lastIndex) {
             startCurve(index, phraseDuration, now)
           }
 
@@ -542,7 +550,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
     setFollow(false)
     const scroller = list.current
     if (scroller) {
-      positionList(row.offsetTop + sentenceFocusTop(row, scroller.clientHeight, calm))
+      positionList(row.offsetTop + sentenceFocusTop(row, scroller.clientHeight, calm, focus))
       scrollListeningTarget(scroller, 'nearest')
     }
     row.querySelector('button')?.focus({ preventScroll: true })
@@ -552,7 +560,7 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       delay: 480, fill: 'backwards',
     })
     return () => flash.cancel()
-  }, [reviewedSentence, calm, positionList, setFollow])
+  }, [reviewedSentence, calm, focus, positionList, setFollow])
 
   function playSentence(index: number) {
     if (!audio) return
