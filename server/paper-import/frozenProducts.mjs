@@ -28,7 +28,7 @@ function reject(message) {
 }
 
 const printInputRoles = new Set([
-  'config', 'materialization', 'spelling_review', 'listening_instruction_correction', 'ocr_source_evidence',
+  'config', 'materialization', 'spelling_review', 'listening_instruction_correction', 'answer_corrections', 'ocr_source_evidence',
   'content_media', 'content_media_candidate', 'content_media_display_variant',
   'source_references', 'pagination_plan',
   'analyzed_package_manifest', 'analyzed_package_content', 'analyzed_package_official_answers', 'analyzed_package_media',

@@ -26,6 +26,7 @@ import { fileURLToPath } from 'node:url'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
 import { loadNck1ReviewSource, reviewBundleFilePaths } from '../../server/import-review/revisionProjection.mjs'
+import { projectEffectiveAnswers } from '../../server/paper-import/answerCorrections.mjs'
 import { PRODUCT_MANIFEST, matchesSealedPrintInputs, productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { LISTENING_RULE_EVIDENCE_VERSION } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
@@ -578,12 +579,14 @@ function round2Prompts(ctx) {
   ].join('\n') })
   const config = readJson(path.join(ctx.paperDir, 'config.json'))
   if (hasListening(ctx) && (!config.importProfile || config.withTeachingAnalyses === true)) {
-    const { materialization } = loadNck1ReviewSource(ctx.paperDir)
+    const { materialization, answerCorrections } = loadNck1ReviewSource(ctx.paperDir)
     const sentenceTargets = Object.fromEntries(listeningSentenceTargets(materialization)
       .map(({ material, sentences }) => [material.segmentId, sentences.map(({ id, en }) => ({ id, en }))]))
     const file = path.join(ctx.fast, 'listening-analysis-request.json')
     const output = path.join(ctx.fast, 'listening-analysis-authored.json')
-    const request = buildListeningAnalysisAgentRequest({ materialization, sentenceTargets })
+    const request = buildListeningAnalysisAgentRequest({
+      materialization: projectEffectiveAnswers(materialization, answerCorrections), sentenceTargets,
+    })
     if (existsSync(file) && digestJson(readJson(file)) !== digestJson(request)) archive(ctx, output)
     writeJson(file, request)
     if (!existsSync(output)) prompts.push({ label: '听力讲解', outputs: [output], prompt:
@@ -998,7 +1001,7 @@ export function installListeningSentenceAnalysis(ctx, { useAuthored = true } = {
     renameSync(temporary, stage)
   }
   try {
-    const { materialization: document } = loadNck1ReviewSource(ctx.paperDir)
+    const { materialization: document, answerCorrections } = loadNck1ReviewSource(ctx.paperDir)
     if (!staged && NCK1_STAGED_ANALYSIS_FILES.some(({ key, path: file }) =>
       (!key.startsWith('reading-') || document.groups.some(({ slotId }) => slotId === key.replace('-', '.')))
       && !existsSync(path.join(ctx.paperDir, file)))) return { detail: '讲解分片未齐，保留段级展示' }
@@ -1012,7 +1015,12 @@ export function installListeningSentenceAnalysis(ctx, { useAuthored = true } = {
     } catch (error) {
       detail = `句级对齐跳过（${error.message.replace(/\s+/gu, ' ')}）`
     }
-    const analysis = mergeReviewedListeningAnalysis(document, segments, { staged, authored: draft })
+    const effective = projectEffectiveAnswers(document, answerCorrections)
+    const staleCorrection = draft && staged && answerCorrections?.corrections.some(({ questionId, correctedAnswer }) =>
+      questionId.startsWith('question:listening:') && staged.questions?.[questionId]?.officialAnswer !== correctedAnswer)
+    const analysis = mergeReviewedListeningAnalysis(effective, segments, {
+      staged: staleCorrection ? null : staged, authored: draft,
+    })
     writeAnalysis(analysis)
     return { detail }
   } catch (error) {

@@ -3,6 +3,7 @@ import path from 'node:path'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { validateCanonicalPublicationBundle } from '../paper-canonical/publication.mjs'
 import { applySpellingReview } from './spellingReview.mjs'
+import { validateAnswerCorrections } from './answerCorrections.mjs'
 import { SOURCE_REFERENCES_FILE, assertSourceReferences, parseSourceReferencesBytes } from './sourceReferences.mjs'
 import { deriveNck1AnalyzedPackageBundle, NCK1_ANALYZED_PACKAGE_INPUT_KIND, parseStrictPackageJson } from '../paper-canonical/nck1AnalyzedPackageAdapter.mjs'
 
@@ -63,8 +64,9 @@ export function readSourceReferencePublication({ db, paperAssetsDir, consumption
   if (overlays.length > 1) reject('源校订身份不唯一')
   let materialization
   let sourceInput = null
+  let sourceBytes
   if (materializations.length === 1) {
-    const materializationBytes = decoded(materializations[0])
+    const materializationBytes = sourceBytes = decoded(materializations[0])
     const audio = documents.find(document => document.inputKey === 'listening_audio_descriptor')
     materialization = overlays.length
       ? applySpellingReview(materializationBytes, decoded(overlays[0]), audio && JSON.parse(decoded(audio)))
@@ -72,7 +74,7 @@ export function readSourceReferencePublication({ db, paperAssetsDir, consumption
   } else {
     const packages = documents.filter(document => document.inputKey === 'nck1_analyzed_package_manifest')
     if (materializations.length || packages.length !== 1 || overlays.length) reject('此版本没有唯一可回放的源材料化或分析包')
-    const manifestBytes = decoded(packages[0])
+    const manifestBytes = sourceBytes = decoded(packages[0])
     const packageManifest = parseStrictPackageJson(manifestBytes)
     sourceInput = { kind: NCK1_ANALYZED_PACKAGE_INPUT_KIND, manifestBytes,
       members: packageManifest.members.map(member => {
@@ -92,9 +94,15 @@ export function readSourceReferencePublication({ db, paperAssetsDir, consumption
     return { documentId: document.documentId, bytes: decoded(matches[0]) }
   })
   const sourceReferences = parseSourceReferencesBytes(referenceBytes)
+  const correction = report.answerCorrections
+  if (correction && (['approvalId', 'revisionId', 'bundleDigest'].some(key => correction[key] !== commitment[key])
+    || typeof correction.approvedBy !== 'string' || !correction.approvedBy
+    || !Number.isFinite(Date.parse(correction.approvedAt)))) reject('答案更正与已审版本不一致')
+  const answerCorrections = correction ? validateAnswerCorrections(correction.declaration,
+    materialization, sha256(sourceBytes)) : null
   const onWarning = message => console.warn(`${consumption.paperId}: ${message}`)
   assertSourceReferences({ sidecar: sourceReferences, materialization,
     sourceDigest: commitment.sourceDigest, candidateDigest: commitment.candidateDigest, sourceDocuments, sourceInput, onWarning })
   return { canonicalPlan: validated.plan, authorityRef: consumption.authorityRef, paperName: commitment.paperName, materialization, sourceReferences, sourceReferencesBytes: referenceBytes, sourceDocuments,
-    sourceDigest: commitment.sourceDigest, candidateDigest: commitment.candidateDigest, commitment, onWarning, ...(sourceInput ? { sourceInput } : {}) }
+    sourceDigest: commitment.sourceDigest, candidateDigest: commitment.candidateDigest, commitment, answerCorrections, onWarning, ...(sourceInput ? { sourceInput } : {}) }
 }

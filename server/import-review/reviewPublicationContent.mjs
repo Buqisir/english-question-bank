@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto'
 import path from 'node:path'
 import { configuredPaperHeader } from '../../shared/paper-canonical/headerTitle.mjs'
 import { digestJson, stableStringify } from '../../shared/paper-canonical/stable.mjs'
+import { ANSWER_CORRECTIONS_FILE, officialAnswerEntries } from '../paper-import/answerCorrections.mjs'
 import { reviewContentDifferences } from './reviewCompatibility.mjs'
 import { assertReviewPreviewPayload, validateReviewSubject } from './reviewSubject.mjs'
 
@@ -164,7 +165,7 @@ export const REVIEW_PUBLICATION_PACKAGE_FIELDS = Object.freeze([
   'paragraphSummariesBytes', 'publicSearchMetadataBytes', 'sourceReferencesBytes',
   'paginationPlan', 'frozenProducts', 'importMeta', 'sourceAssetDigest', 'paperHeader',
   'sourceReferenceApproval', 'pdfProductApproval', 'fileStorage', 'paginationPlanBinding',
-  'normalizedGroupsSidecar',
+  'normalizedGroupsSidecar', 'answerCorrectionsJson',
 ])
 
 export function compareReviewPublicationContent({ subject, packageData, consumption, sealedManifest, version,
@@ -222,8 +223,13 @@ export function compareReviewPublicationContent({ subject, packageData, consumpt
     exactKeys(answer, ['schemaVersion', 'paperId', 'sourceAssetVersion', 'answers'], '/answerKey')
     if (answer.schemaVersion !== 'answer-key-v1' || answer.paperId !== subject.components.identity.paperId
       || ![original.paperAsset.paper.assetVersion, version].includes(answer.sourceAssetVersion)) unknown('/answerKey')
-    if (!same(answer.answers, original.paperAsset.answerKey.answers)) result.differences.push('/answerKey/answers')
+    if (!same(answer.answers, officialAnswerEntries(original.paperAsset.answerKey.answers))) result.differences.push('/answerKey/answers')
     result.coverage.push('answerKey')
+    const corrections = subject.components.inventory.find(file => file.path === ANSWER_CORRECTIONS_FILE)
+    const declaration = packageData.answerCorrectionsJson
+    if (corrections ? typeof declaration !== 'string' || byteDigest(Buffer.from(declaration)) !== corrections.sha256
+      : declaration != null) result.differences.push('/packageData/answerCorrectionsJson')
+    if (corrections) result.coverage.push('answerCorrectionsJson')
     for (const [field, path] of [
       ['paragraphSummariesBytes', 'paragraph-summaries-v1.json'],
       ['publicSearchMetadataBytes', 'public-search-metadata-v1.json'],

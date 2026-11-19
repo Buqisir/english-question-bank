@@ -39,6 +39,7 @@ const noDraft = () => {}
 const emptyFilters = { year: '', sourceType: '', region: '', status: '', coverage: '' }
 type ListPosition = { view: ListView; query: string; filters: typeof emptyFilters; page: number; top: number; tableLeft: number }
 type PaperRoute = { paperId: string; revisionId: string | null }
+type AnswerCorrectionChange = { questionId: string; label: string; from: string; to: string; reason: string; withdrawn: boolean }
 
 function readPaperRoute(): PaperRoute | null {
   const params = new URLSearchParams(window.location.search)
@@ -199,6 +200,24 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
   const sameRevision = latest && pinnedRoute && reviewKey(latest) === reviewKey(pinnedRoute)
   const selected = sameRevision ? latest : pinnedRoute
   const selectedKey = selected ? reviewKey(selected) : null
+  const correctionsUrl = selected
+    ? `${endpoint(selected)}/revisions/${encodeURIComponent(selected.latestRevisionId)}/answer-corrections`
+    : null
+  const correctionsKey = `${correctionsUrl}:${listVersion}`
+  const [correctionResult, setCorrectionResult] = useState<{ key: string; changes?: AnswerCorrectionChange[]; failed?: boolean }>()
+  useEffect(() => {
+    if (!correctionsUrl) return
+    const controller = new AbortController()
+    void request<{ corrections: AnswerCorrectionChange[] }>(correctionsUrl, { signal: controller.signal })
+      .then(({ corrections }) => {
+        if (!controller.signal.aborted) setCorrectionResult({ key: correctionsKey, changes: corrections })
+      }).catch(() => {
+        if (!controller.signal.aborted) setCorrectionResult({ key: correctionsKey, failed: true })
+      })
+    return () => controller.abort()
+  }, [correctionsUrl, correctionsKey])
+  const correctionState = correctionResult?.key === correctionsKey ? correctionResult : undefined
+  const answerChanges = correctionState?.changes
   const canWrite = Boolean(selected && sameRevision && readyScreenKey === selectedKey && tab === 'screen'
     && fresh && !busy && !selected.promotionState && !uncertain.current.has(selected.paperId))
   const onScreenReady = useCallback((ready: boolean) => {
@@ -352,7 +371,7 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
             <Button disabled={!canWrite && !(sameRevision && selected.unresolvedCount > 0)}
               onClick={() => setFeedbackKey(feedbackKey === selectedKey ? null : selectedKey)}
               aria-expanded={feedbackKey === selectedKey}>{selected.unresolvedCount ? '查看反馈' : '退回修改'}</Button>
-            <Button tone="solid" disabled={!canWrite || selected.unresolvedCount > 0
+            <Button tone="solid" disabled={!canWrite || !answerChanges || selected.unresolvedCount > 0
               || !['awaiting_review', 'changes_requested', 'approved'].includes(selected.state)}
               onClick={() => void mutate(selected, `${endpoint(selected)}/revisions/${encodeURIComponent(selected.latestRevisionId)}/publish`,
                 { intent: 'publish', bundleDigest: selected.bundleDigest, rendererBuildId: selected.rendererBuildId },
@@ -366,6 +385,8 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
         label: '切换查看', onClick: () => showRevision(latest, 'replaceState'),
       }}>{`有新版本 R${latest.revisionNumber}`}</Notice>}
       {selected && <>
+        {correctionState?.failed && <Notice kind="error">答案更正读取失败。请刷新状态。</Notice>}
+        {tab !== 'history' && <AnswerCorrectionSummary changes={answerChanges} />}
         {!selected.promotionState && sameRevision && <small>发布即认可并公开这一版{selected.hasTeachingAnalyses ? '，并认可附带讲解为精选官方参考' : ''}。</small>}
         {selected.hasMediaCandidates && <ButtonLink href="/ops/?view=review">到旧审卷页核对候选图</ButtonLink>}
         {selected.promotionState === 'publishing' && <Notice kind="waiting">服务器正在发布，请刷新查看状态。</Notice>}
@@ -396,7 +417,7 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
     /> : <>
       {renderToolbar()}
       {selected ? tab === 'pdf' ? <ReviewPdf key={selectedKey} paper={selected} />
-        : <ReviewHistory key={`${selectedKey}:${listVersion}`} paper={selected} />
+        : <ReviewHistory key={`${selectedKey}:${listVersion}`} paper={selected} answerChanges={answerChanges} />
         : !error && !routeError && <Skeleton height={112} />}
     </>}
     <Toast message={notice} kind="info" duration={6000} onClose={() => setNotice(null)} />
@@ -545,11 +566,23 @@ function ReviewFeedback({ paper, disabled, draft, onDraft, onCancel, onStale, mu
   </div>
 }
 
-function ReviewHistory({ paper }: { paper: ReviewPaper }) {
+function AnswerCorrectionSummary({ changes }: { changes?: AnswerCorrectionChange[] }) {
+  if (!changes?.length) return null
+  return <Surface as="section" variant="board" padding="md" aria-label="答案更正">
+    <h3>答案更正</h3>
+    <ul>{changes.map(change => <li key={change.questionId}>
+      <strong>{change.withdrawn ? '撤销更正 · ' : ''}{change.label}：{change.from} → {change.to}</strong>
+      <p>{change.reason}</p>
+    </li>)}</ul>
+  </Surface>
+}
+
+function ReviewHistory({ paper, answerChanges }: { paper: ReviewPaper; answerChanges?: AnswerCorrectionChange[] }) {
   const { detail, error } = useReviewDetail(paper)
   if (error) return <Notice kind="error">{error}</Notice>
   if (!detail) return <Skeleton height={96} />
   return <div className="ops-review-history">
+    <AnswerCorrectionSummary changes={answerChanges} />
     <h3>版本历史</h3>
     {detail.revisions.length ? <ul>{detail.revisions.map(revision => <li key={revision.id}>
       R{revision.revisionNumber} · {stateName(revision.state)} · <time dateTime={revision.createdAt}>

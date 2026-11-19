@@ -65,6 +65,7 @@ import {
 import { validateReviewBundleManifest } from '../import-review/importReviewStore.mjs'
 import { SOURCE_REFERENCES_FILE } from './sourceReferences.mjs'
 import { readSourceReferencePublication } from './sourceReferencePublication.mjs'
+import { answerCorrectionPublication, answerCorrectionsByQuestion, effectiveAnswer } from './answerCorrections.mjs'
 import { PRODUCT_MANIFEST, readPublishedProducts } from './frozenProducts.mjs'
 import { TOPIC_LABEL_TAXONOMY } from '../../shared/topics/topicTaxonomy.mjs'
 import {
@@ -333,6 +334,7 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
   const { paperAsset, answerKey, importMeta } = packageData
   const paper = paperAsset.paper
   const answers = answerKey.answers || {}
+  const corrections = answerCorrectionsByQuestion(options.answerCorrections)
   const sourceType = sourceTypeMap[importMeta.paper.sourceType] || 'other'
   const defaultTags = Array.isArray(importMeta.paper.defaultTags) ? importMeta.paper.defaultTags : []
   const publicSearchMetadata = packageData.publicSearchMetadataBytes
@@ -454,7 +456,8 @@ function upsertPaperAssetToDb(db, packageData, version, options = {}) {
     for (const [questionIndex, questionId] of (group.questionIds || []).entries()) {
       const question = paperAsset.content.questions[questionId]
       if (!question) continue
-      const answer = answers[questionId]?.answer || paperAsset.answerKey?.answers?.[questionId]?.answer || ''
+      const answer = effectiveAnswer(corrections, questionId,
+        answers[questionId]?.answer || paperAsset.answerKey?.answers?.[questionId]?.answer || '')
       const score = Number(answers[questionId]?.score || defaultScore || 0)
       db.prepare(
         `
@@ -1433,6 +1436,8 @@ function prepareUniversalNck1ImportSnapshot({
     config: projection.config,
     manifest: projection.manifest,
     materialization: projection.materialization,
+    answerCorrections: projection.answerCorrections,
+    answerCorrectionsJson: projection.answerCorrectionsJson,
     sourceProvenance: projection.sourceProvenance,
     sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
     analysisSidecars: projection.analysisSidecars,
@@ -1494,6 +1499,7 @@ function publishUniversalNck1ImportFacts({
     packageData,
     publicValidation,
     sealedNormalizedGroupsSidecar: preparedFacts.sealedCompatibility?.normalizedGroupsSidecar,
+    answerCorrections: answerCorrectionPublication(packageData.answerCorrectionsJson, approvedIdentity),
     forceDbFailure,
     failurePoint,
     onPrepared,
@@ -1621,6 +1627,7 @@ function publishPreparedPaperImport({
   verifyAnalysisSidecars = false,
   requireParagraphSummaries = false,
   sealedNormalizedGroupsSidecar = null,
+  answerCorrections = null,
 }) {
   const paperId = packageData.paperAsset.paper.paperId
   const preflightVersion = computeNextPublishVersion({
@@ -1762,6 +1769,7 @@ function publishPreparedPaperImport({
     versionName: `v${version}`,
     canonicalPublicationDigest: admission.sealed.manifest.publicationDigest,
     ...(packageData.sourceReferenceApproval ? { sourceReferencePublication: packageData.sourceReferenceApproval } : {}),
+    ...(answerCorrections ? { answerCorrections } : {}),
     ...(packageData.pdfProductApproval ? { pdfProducts: packageData.pdfProductApproval } : {}),
     ...(packageData.fileStorage ? { fileStorage: packageData.fileStorage } : {}),
     searchHref: '/?q=2024%20九省联考',
@@ -1839,7 +1847,7 @@ function publishPreparedPaperImport({
       paperAsset: writtenVersion.artifacts.paperAsset,
       answerKey: writtenVersion.artifacts.answerKey,
       readingAnalysis: writtenVersion.artifacts.readingAnalysis,
-    }, version)
+    }, version, { answerCorrections: answerCorrections?.declaration })
     if (forceDbFailure || failurePoint === 'db-write') {
       throw new Error(
         forceDbFailure
@@ -2082,7 +2090,7 @@ export function rollbackPaperImportPublication({
       db,
       loadPublishedCompatibilityPackage(targetVersionDir),
       target.sourceAssetVersion,
-      { recordAssetVersion: false },
+      { recordAssetVersion: false, answerCorrections: targetReferences?.answerCorrections },
     )
     selectCanonicalPublicationCurrent(db, target)
     latestSwap = swapPaperImportLatest({

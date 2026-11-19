@@ -27,8 +27,9 @@ import { scoringFiguresFixture, captureScoringReferences } from '../test-fixture
 import { sourceReferenceFiguresFixture } from '../test-fixtures/paper-import/source-reference-figures-v3/fixture.mjs'
 import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-consumption-print-payload.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
-import { buildAnswerOnlyHtml } from '../server/answer-renderer.mjs'
+import { buildAnswerOnlyHtml, buildAssembledAnswerOnlyHtml } from '../server/answer-renderer.mjs'
 import { readSourceReferencePublication } from '../server/paper-import/sourceReferencePublication.mjs'
+import { ANSWER_CORRECTIONS_FILE, answerCorrectionChanges } from '../server/paper-import/answerCorrections.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../server/paper-import/sourceReferenceSemantics.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
@@ -139,6 +140,36 @@ try {
     }
   }
   json(path.join(source, SOURCE_REFERENCES_FILE), references)
+  const questionId = 'question:listening:20'
+  const correctionPath = path.join(source, ANSWER_CORRECTIONS_FILE)
+  const uncorrectedInputs = productInputDigest(source, reviewBundleFilePaths(source))
+  const declaration = {
+    paperId: projection.paperId, sourceDigest: sha256(projection.sourceInput.materializationBytes),
+    corrections: [{ questionId, officialAnswer: 'A', correctedAnswer: 'B', reason: '合成听力证据 01:20' }],
+  }
+  for (const [change, message] of [[{ officialAnswer: 'C' }, /封存抄录不符/u],
+    [{ correctedAnswer: 'D' }, /不属于本题选项/u]]) {
+    json(correctionPath, { ...declaration, corrections: [{ ...declaration.corrections[0], ...change }] })
+    assert.throws(() => buildNck1ReviewProjection(source), message)
+  }
+  json(correctionPath, { ...declaration, corrections: [...declaration.corrections, ...declaration.corrections] })
+  assert.throws(() => buildNck1ReviewProjection(source), /重复声明/u)
+  json(correctionPath, declaration)
+  assert.throws(() => buildNck1ReviewProjection(source), /question:listening:20 official answer disagrees/u)
+  const listeningPath = path.join(source, 'analysis-listening.json')
+  const listening = readJson(listeningPath)
+  listening.questions[questionId].officialAnswer = 'B'
+  listening.questions[questionId].reasonZh = '录音中的信息与选项 B 一致。'
+  json(listeningPath, listening)
+  projection = buildNck1ReviewProjection(source)
+  assert.equal(projection.paperAsset.answerKey.answers[questionId].answer, 'B')
+  assert.equal(projection.compilation.artifacts.sourceCapture.assertions.find(item => item.questionId === questionId).answer, 'A')
+  assert.notEqual(productInputDigest(source, reviewBundleFilePaths(source)), uncorrectedInputs)
+  assert.deepEqual(answerCorrectionChanges(null, declaration), [
+    { questionId, label: '听力 20', from: 'B', to: 'A', reason: '合成听力证据 01:20', withdrawn: true },
+  ])
+  pass('sealed official A remains enforceable, while teacher data and admitted listening analysis use B')
+
   mkdirSync(path.join(source, 'products'))
   const products = { schemaVersion: 'paper-pdf-products-v1',
     paperId: projection.paperId, paperName: projection.paperName,
@@ -454,6 +485,12 @@ try {
   const published = publish('normal-envelope')
   assert.equal(published.ok, true)
   assert.equal(published.publish.assetVersion, 1)
+  assert.deepEqual(published.publish.answerCorrections, {
+    declaration, approvalId: approval.approvalId, revisionId: approval.revisionId, bundleDigest: approval.bundleDigest,
+    approvedBy: approval.approvedBy, approvedAt: approval.approvedAt,
+  })
+  const officialKey = readJson(path.join(root, 'normal-envelope', projection.paperId, 'versions/v1/answer-key.json'))
+  assert.equal(officialKey.answers[questionId].answer, 'A')
   const second = publish('normal-envelope-v2')
   assert.equal(second.ok, true)
   assert.equal(second.publish.assetVersion, 2)
@@ -470,6 +507,16 @@ try {
       paperAssetsDir: path.join(root, 'normal-envelope'), consumption: Object.values(published.publish.consumers)[0] })
     assert(frozen.sourceReferencesBytes.equals(retained))
     const html = buildAnswerOnlyHtml(frozen)
+    assert.match(html, /data-answer-number="20" aria-label="第20题 B">B</u)
+    assert.equal(publishedDb.prepare('SELECT answer FROM questions WHERE id = ?').get(questionId).answer, 'B')
+    const groupId = `group:${projection.paperId}:listening.long-form`
+    const questions = projection.paperAsset.content.groups[groupId].questionIds.map(questionId => ({ questionId }))
+    const assembled = buildAssembledAnswerOnlyHtml({ paperName: projection.paperName, questionNumberStart: 6, items: [{
+      source: frozen, detail: { id: groupId, paperId: projection.paperId, groupType: 'listening',
+        questions: questions.map(({ questionId }) => ({ id: questionId })) },
+      canonicalGroup: { groupId, paperId: projection.paperId, groupType: 'listening', questions },
+    }] })
+    assert.match(assembled, /data-answer-number="20" aria-label="第20题 B">B</u)
     assert.equal(html.includes('data-reference-figure='), Boolean(figureReferences) && !scoringFigures)
     if (scoringFigures) {
       const included = buildAnswerOnlyHtml({ ...frozen, includeScoring: true })

@@ -43,6 +43,7 @@ import { validateParagraphSummaries } from '../paper-import-ai/paragraphSummarie
 import { validatePublicSearchMetadata } from '../paper-import-ai/publicSearchMetadata.mjs'
 import { applySpellingReview, loadSpellingReview, summarizeSpellingReview, verifyListeningInsertionOccurrences, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
 import { applyListeningInstructionCorrection, LISTENING_INSTRUCTION_CORRECTION_FILE } from '../paper-import/listeningInstructionCorrection.mjs'
+import { ANSWER_CORRECTIONS_FILE, answerCorrectionsByQuestion, effectiveAnswer, officialAnswerEntries, projectEffectiveAnswers, validateAnswerCorrections } from '../paper-import/answerCorrections.mjs'
 import {
   NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
   assertNck1ImageBundlePageArtifacts,
@@ -289,6 +290,7 @@ function loadNck1AnalyzedPackageReviewSource(rootDir, config, manifest) {
     config,
     manifest,
     materialization: derived.materialization,
+    ...loadAnswerCorrections(rootDir, derived.materialization, manifestBytes),
     sourceInput,
     listeningAudioEvidence: null,
     listeningAudioBytes: audioMember
@@ -302,6 +304,14 @@ function loadNck1AnalyzedPackageReviewSource(rootDir, config, manifest) {
       members: manifest.members.map((member) => ({ ...structuredClone(member) })),
     },
   }
+}
+
+function loadAnswerCorrections(rootDir, materialization, sourceBytes) {
+  const file = resolveReviewFile(rootDir, ANSWER_CORRECTIONS_FILE)
+  if (!existsSync(file)) return {}
+  const answerCorrectionsJson = new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(readReviewBytes(file))
+  const answerCorrections = validateAnswerCorrections(JSON.parse(answerCorrectionsJson), materialization, sha256(sourceBytes))
+  return { answerCorrections, answerCorrectionsJson }
 }
 
 export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, preparingListeningCorrection = false } = {}) {
@@ -452,6 +462,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
     // the validated count overlay in sourceInput for later Candidate replay,
     // but do not mix its corrected projection into a raw spelling request.
     materialization: preparingSpelling ? materialization : reviewedMaterialization,
+    ...loadAnswerCorrections(rootDir, materialization, materializationBytes),
     spellingReviewSummary: spellingReviewBytes
       ? summarizeSpellingReview(JSON.parse(new TextDecoder().decode(spellingReviewBytes)))
       : null,
@@ -684,13 +695,14 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
     const paperAsset = buildNck1CompatibilityPaperAsset({
       config: loaded.config,
       materialization,
+      answerCorrections: loaded.answerCorrections,
       sourceAssetVersion: 1,
       primarySourceType: primarySourceType(materialization, Boolean(loaded.analyzedPackage)),
       sourceProvenance: loaded.analyzedPackage ? loaded.sourceProvenance : null,
     })
     buildNck1AnalysisProjection({
       rootDir,
-      materialization,
+      materialization: projectEffectiveAnswers(materialization, loaded.answerCorrections),
       paperAsset,
       required: !importProfile || loaded.config.withTeachingAnalyses === true,
       allowPartialAnalyses: true,
@@ -782,6 +794,9 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
     }] : []),
     ...(loaded.sourceInput.listeningInstructionCorrectionBytes ? [{
       path: LISTENING_INSTRUCTION_CORRECTION_FILE, mediaType: 'application/json', role: 'listening_instruction_correction',
+    }] : []),
+    ...(loaded.answerCorrections ? [{
+      path: ANSWER_CORRECTIONS_FILE, mediaType: 'application/json', role: 'answer_corrections',
     }] : []),
     ...(loaded.sourceInput.ocrSourceBytes || loadReferenceOcrSourceBytes(rootDir, {
       producerVersion: existsSync(resolveReviewFile(rootDir, SOURCE_REFERENCES_FILE))
@@ -1365,6 +1380,7 @@ function compatibilityText(
 export function buildNck1CompatibilityPaperAsset({
   config,
   materialization,
+  answerCorrections,
   sourceAssetVersion,
   primarySourceType = 'pdf',
   sourceProvenance = null,
@@ -1522,6 +1538,14 @@ export function buildNck1CompatibilityPaperAsset({
       }
     }
   }
+  const corrections = answerCorrectionsByQuestion(answerCorrections)
+  for (const [questionId, entry] of Object.entries(answerKey)) {
+    const effective = effectiveAnswer(corrections, questionId, entry.answer)
+    if (effective !== entry.answer) {
+      entry.officialAnswer = entry.answer
+      entry.answer = effective
+    }
+  }
   return {
     schemaVersion: 'paper-asset-v1',
     paper: {
@@ -1655,6 +1679,8 @@ export function buildNck1CompatibilityPackage({
   config,
   manifest,
   materialization,
+  answerCorrections,
+  answerCorrectionsJson,
   sourceProvenance = null,
   sourceAssetVersion = 1,
   analysisSidecars = {},
@@ -1692,6 +1718,7 @@ export function buildNck1CompatibilityPackage({
   const paperAsset = buildNck1CompatibilityPaperAsset({
     config,
     materialization,
+    answerCorrections,
     sourceAssetVersion,
     primarySourceType: primarySourceType(materialization, externalPackage),
     sourceProvenance: externalPackage ? sourceProvenance : null,
@@ -1700,7 +1727,7 @@ export function buildNck1CompatibilityPackage({
     schemaVersion: 'answer-key-v1',
     paperId: materialization.paperId,
     sourceAssetVersion,
-    answers: structuredClone(paperAsset.answerKey.answers),
+    answers: officialAnswerEntries(paperAsset.answerKey.answers),
   }
   const analysisByFamily = {
     reading: analysisSidecars['reading-choice-analysis-v1.json'],
@@ -1728,6 +1755,7 @@ export function buildNck1CompatibilityPackage({
     }]))
   return {
     paperAsset,
+    ...(answerCorrectionsJson ? { answerCorrectionsJson } : {}),
     ...(config.headerTitle !== undefined ? { paperHeader: configuredPaperHeader(config) } : {}),
     answerKey,
     readingAnalysis: analysisSidecars['reading-choice-analysis-v1.json'] || null,
@@ -1959,6 +1987,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   const paperAsset = buildNck1CompatibilityPaperAsset({
     config: loaded.config,
     materialization: loaded.materialization,
+    answerCorrections: loaded.answerCorrections,
     sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
     primarySourceType: primarySourceType(
       loaded.materialization,
@@ -1968,7 +1997,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   })
   const analysisProjection = buildNck1AnalysisProjection({
     rootDir,
-    materialization: loaded.materialization,
+    materialization: projectEffectiveAnswers(loaded.materialization, loaded.answerCorrections),
     paperAsset,
     sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
     required: (requireAnalyses && !importProfile) || loaded.config.withTeachingAnalyses === true,
