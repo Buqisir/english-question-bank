@@ -3785,11 +3785,10 @@ try {
   assert.equal((await ownerPublish()).status, 409)
   online.reviewStore.updateIssue(paperId, returnedIssue.id, { action: 'dismiss' })
   await reviewPage.reload()
-  const [promoted] = await Promise.all([
-    reviewPage.waitForResponse(response => new URL(response.url()).pathname === ownerPath),
-    reviewRow.getByRole('button', { name: '发布到题库', exact: true }).click(),
-  ])
-  assert.equal(promoted.status(), 200)
+  assert.equal(await reviewRow.getByRole('link', { name: '前往发布' }).getAttribute('href'),
+    `/?${new URLSearchParams({ view: 'ops-review', paper: paperId, rev: online.revision.id })}`)
+  const promoted = await ownerPublish()
+  assert.equal(promoted.status, 200)
   const promotedBody = await promoted.json()
   online.approval = online.reviewStore.getRevision(online.revision.id).approval
   body = JSON.stringify(promotionRequest(online.approval))
@@ -3818,7 +3817,7 @@ try {
   }
   await reviewPage.reload()
   await reviewRow.getByText('已发布', { exact: true }).waitFor()
-  assert.equal(await reviewRow.getByRole('button', { name: '发布到题库' }).count(), 0)
+  assert.equal(await reviewRow.getByRole('link', { name: '前往发布' }).count(), 0)
   assert.equal(await reviewRow.getByRole('link', { name: '查看已发布' }).count(), 1)
 
   const afterDb = online.openDatabase({ readOnly: true })
@@ -3987,7 +3986,8 @@ try {
   await reviewRow.getByText('已批准', { exact: true }).waitFor()
   assert.equal(await reviewRow.getByText('已发布', { exact: true }).count(), 0,
     'a newer unshipped revision is not labelled published by the old receipt')
-  assert.equal(await reviewRow.getByRole('button', { name: '发布到题库' }).isEnabled(), true)
+  assert.equal(await reviewRow.getByRole('link', { name: '前往发布' }).getAttribute('href'),
+    `/?${new URLSearchParams({ view: 'ops-review', paper: paperId, rev: nextRevision.id })}`)
   assert.equal((await ownerPublish()).status, 409, 'old browser version cannot publish a newer revision')
 
   const discussionThreadId = `T-${randomUUID()}`

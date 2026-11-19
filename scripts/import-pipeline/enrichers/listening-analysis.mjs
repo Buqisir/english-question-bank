@@ -2,6 +2,7 @@ import {
   buildListeningAnalysisAgentRequest, LISTENING_STAGED_ANALYSIS_FILE_NAME as output,
 } from '../../../server/paper-import-ai/analyzeListening.mjs'
 import { loadNck1ReviewSource } from '../../../server/import-review/revisionProjection.mjs'
+import { projectEffectiveAnswers } from '../../../server/paper-import/answerCorrections.mjs'
 import { LISTENING_REVIEW_FILE } from '../../../server/paper-import/listeningReview.mjs'
 import { digestJson } from '../../../shared/paper-canonical/stable.mjs'
 import { mergeReviewedListeningAnalysis } from '../lib-listening-analysis.mjs'
@@ -23,7 +24,8 @@ async function plan(ctx) {
 }
 
 async function run(ctx, { reason }) {
-  const { materialization: document } = loadNck1ReviewSource(ctx.bundle)
+  const { materialization, answerCorrections } = loadNck1ReviewSource(ctx.bundle)
+  const document = projectEffectiveAnswers(materialization, answerCorrections)
   const review = await ctx.readBase(LISTENING_REVIEW_FILE)
   const windows = new Map()
   for (const file of review.evidence ?? []) {

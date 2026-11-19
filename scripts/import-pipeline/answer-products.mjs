@@ -4,6 +4,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync, linkSync, unlinkSyn
 import { randomUUID } from 'node:crypto'
 import path from 'node:path'
 import { loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
+import { projectEffectiveAnswers } from '../../server/paper-import/answerCorrections.mjs'
 import { hydratedEvidenceBase, importLocalReviewCandidate, withLocalReviewEvidence } from './review.mjs'
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import {
@@ -156,6 +157,7 @@ try {
       if (existsSync(output)) throw new Error('QA output must be a new directory; preserve previous evidence')
       const includeScoring = process.argv.includes('--include-scoring')
       const html = buildAnswerOnlyHtml({ ...binding, sourceReferences,
+        answerCorrections: loaded.answerCorrections,
         ...(['zhejiang-legacy', 'national-legacy'].includes(loaded.materialization.profileId)
           ? { canonicalPlan: withLocalReviewEvidence(paperDir, () =>
               compileNck1MaterializationCandidatePreview(imported.candidate)).compilation?.artifacts?.canonicalPaper?.paperPlan } : {}),
@@ -242,15 +244,16 @@ try {
         || body.fontSize !== 16 || body.lineHeight !== 26 || Math.abs(geometry.headingGap - 8 * 96 / 72) > 0.1) {
         throw new Error('Rendered answer typography is not the selected layout draft')
       }
-      const listening = binding.materialization.listening
+      const effective = projectEffectiveAnswers(binding.materialization, loaded.answerCorrections)
+      const listening = effective.listening
       const expectedKeys = [
         ...(listening.state === 'captured' ? listening.answers : []),
-        ...binding.materialization.answers,
+        ...effective.answers,
       ].sort((a, b) => a.canonicalNumber - b.canonicalNumber)
       if (rendered.inspection.keys.length !== expectedKeys.length
         || expectedKeys.some((answer, index) => rendered.inspection.keys[index].number !== answer.canonicalNumber
           || normalize(rendered.inspection.keys[index].text) !== normalize(answer.value))) {
-        throw new Error('Rendered answers changed their source values, coverage or order')
+        throw new Error('Rendered answers differ from effective values, coverage or order')
       }
       const ranges = [
         ...(listening.state === 'captured' ? [[1, 5], [6, 10], [11, 15], [16, 20]] : []),

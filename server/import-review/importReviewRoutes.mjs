@@ -301,7 +301,12 @@ export function createImportReviewRoutes({
         }
       } finally { db.close() }
     }
-    return answerCorrectionChanges(read(current), { corrections: [...before.values()] })
+    const declaration = read(current)
+    for (const entry of declaration?.corrections || []) before.delete(entry.questionId)
+    const currentAnswers = before.size
+      ? store.productPreviewForRevision(revisionId).preview.paperAsset.answerKey.answers
+      : undefined
+    return answerCorrectionChanges(declaration, { corrections: [...before.values()] }, currentAnswers)
   }
 
   routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/papers\/([^/]+)\/publication-requests$/, route(async ({ request, response, context, match }) => {

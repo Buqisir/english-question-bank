@@ -158,9 +158,12 @@ if (sourcePdf) {
 }
 
 const printHtml = new Map()
+const corrected = question.options.find(option => option.optionId !== question.correctOptionId)
+assert(question.correctOptionId)
 for (const versionType of ['student', 'teacher']) {
   const print = printConsumption(consumption)
-  const payload = canonicalConsumptionPrintPayload(print, 'Synthetic figure-option paper')
+  const payload = canonicalConsumptionPrintPayload(print, 'Synthetic figure-option paper',
+    new Map([[question.questionId, corrected.label]]))
   const html = buildPrintHtml({
     title: payload.title, versionType, printStyle: payload.printStyle,
     items: payload.items.map((item) => ({ detail: payload.details.get(item.questionGroupId), note: '', score: 0, sectionTitle: '' })),
@@ -169,6 +172,13 @@ for (const versionType of ['student', 'teacher']) {
   assert.equal((html.match(/data-canonical-figure-options/g) || []).length, 1)
   for (const figure of figures) assert(html.includes(`data-canonical-media-id="${figure.mediaId}"`))
   assert.equal(html.includes('data-canonical-correct-option-id='), versionType === 'teacher')
+  assert.equal(html.includes(`data-canonical-correct-option-id="${corrected.optionId}"`), versionType === 'teacher')
+  if (versionType === 'teacher') {
+    assert(html.slice(html.indexOf(`data-canonical-question-id="${question.questionId}"`))
+      .includes(`<strong>【答案】</strong>${corrected.label}`))
+  } else {
+    assert(!html.includes('<strong>【答案】</strong>'))
+  }
   printHtml.set(versionType, html)
 }
 

@@ -64,7 +64,7 @@ import {
 } from '../import-review/revisionProjection.mjs'
 import { validateReviewBundleManifest } from '../import-review/importReviewStore.mjs'
 import { SOURCE_REFERENCES_FILE } from './sourceReferences.mjs'
-import { readSourceReferencePublication } from './sourceReferencePublication.mjs'
+import { readPublishedAnswerCorrections, readSourceReferencePublication } from './sourceReferencePublication.mjs'
 import { answerCorrectionPublication, answerCorrectionsByQuestion, effectiveAnswer } from './answerCorrections.mjs'
 import { PRODUCT_MANIFEST, readPublishedProducts } from './frozenProducts.mjs'
 import { TOPIC_LABEL_TAXONOMY } from '../../shared/topics/topicTaxonomy.mjs'
@@ -2090,7 +2090,8 @@ export function rollbackPaperImportPublication({
       db,
       loadPublishedCompatibilityPackage(targetVersionDir),
       target.sourceAssetVersion,
-      { recordAssetVersion: false, answerCorrections: targetReferences?.answerCorrections },
+      { recordAssetVersion: false, answerCorrections: targetReferences?.answerCorrections
+        ?? readPublishedAnswerCorrections({ db, consumption: target }) },
     )
     selectCanonicalPublicationCurrent(db, target)
     latestSwap = swapPaperImportLatest({

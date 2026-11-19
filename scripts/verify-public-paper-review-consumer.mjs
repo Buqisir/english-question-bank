@@ -92,7 +92,8 @@ try {
   assert.equal(await page.getByRole('heading', { name: '逐段摘要' }).count(), 0)
   assert.equal(await page.locator('.paragraph-summaries-section').count(), 0)
   assert.equal(await page.locator('iframe, [role="tab"], .approval-check').count(), 0)
-  assert.equal(await page.getByRole('button', { name: '发布到题库' }).isEnabled(), true)
+  assert.equal(await page.getByRole('link', { name: '前往发布' }).getAttribute('href'),
+    '/?view=ops-review&paper=public-paper&rev=revision-public')
   assert.match(await page.getByRole('link', { name: baseDetail.paperName }).getAttribute('href'), /reviewRevision=revision-public/)
   assert.equal(await page.getByRole('link', { name: '查看讲评' }).count(), 0)
   mode = 'teaching'
@@ -100,7 +101,6 @@ try {
   const lecture = page.getByRole('link', { name: '查看讲评' })
   await lecture.waitFor()
   assert.match(await lecture.getAttribute('href'), /reviewRevision=revision-public&lecture=1/u)
-  assert.match(await page.locator('.owner-review-intro').textContent(), /一并认可为精选官方参考/u)
   if (process.env.EQB_REVIEW_SCREENSHOT) await page.screenshot({ path: process.env.EQB_REVIEW_SCREENSHOT, fullPage: true })
 
   mode = 'old'
@@ -108,10 +108,11 @@ try {
   await page.getByRole('link', { name: '旧解析卷 fixture' }).waitFor()
   assert.equal(await page.getByRole('heading', { name: '逐段摘要' }).count(), 0)
   assert.equal(await page.locator('iframe, [role="tab"], .approval-check').count(), 0)
-  assert.equal(await page.getByRole('button', { name: '发布到题库' }).isEnabled(), true)
+  assert.equal(await page.getByRole('link', { name: '前往发布' }).getAttribute('href'),
+    '/?view=ops-review&paper=old-analyzed&rev=revision-public')
 } finally {
   await browser.close()
   await new Promise((resolve) => server.close(resolve))
 }
 
-console.log('PASS public-paper summary bindings remain internal; both profiles use direct Screen links and Owner publication without embedded review panels')
+console.log('PASS public-paper summary bindings remain internal; both profiles link to the exact Screen and publication workspace')

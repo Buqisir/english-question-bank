@@ -2098,6 +2098,8 @@ export function buildPrintHtml({
           : undefined
         for (const question of canonicalGroup?.groupType === 'errorCorrection' ? [] : detail.questions) {
           const canonicalQuestion = canonicalQuestionById?.get(question.id)
+          const correctOption = canonicalQuestion?.options.find(option => option.label === question.answer)
+            ?? canonicalQuestion?.options.find(option => option.optionId === canonicalQuestion.correctOptionId)
           const listeningCue = listeningPresentation?.segmentCues.find((cue) =>
             cue.beforeQuestionId === canonicalQuestion?.questionId)
           if (listeningCue) groupHtml += `<p class="canonical-listening-segment-cue" data-canonical-listening-segment-cue>${escapeHtml(listeningCue.text)}</p>`
@@ -2122,12 +2124,7 @@ export function buildPrintHtml({
                       canonicalQuestion.layoutPlan,
                     )
                   : null,
-                answer: canonicalQuestion.correctOptionId
-                  ? canonicalQuestion.options.find(
-                      (option) =>
-                        option.optionId === canonicalQuestion.correctOptionId,
-                    )?.label || ''
-                  : question.answer,
+                answer: correctOption?.label ?? question.answer,
               }
             : question
           const stemText = String(printQuestion.stem || '').trim()
@@ -2136,7 +2133,7 @@ export function buildPrintHtml({
             ? canonicalQuestion.questionNo
             : questionNum
           const canonicalQuestionAttrs = canonicalQuestion
-            ? ` data-canonical-question-id="${escapeHtml(canonicalQuestion.questionId)}"${canonicalQuestion.stemFigures?.length ? ' data-canonical-stem-figures="" style="container-type:inline-size"' : ''}${canonicalGroup?.groupType === 'reading' ? ' data-canonical-reading-rhythm-role="question_block"' : isCanonicalCloze ? ' data-canonical-cloze-rhythm-role="choice_row"' : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingSuccessorGroupId ? ` data-canonical-reading-last-question-for="${escapeHtml(readingSuccessorGroupId)}"` : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingFollowingSectionId ? ` data-canonical-reading-last-question-before-section="${escapeHtml(readingFollowingSectionId)}"` : ''}${isCanonicalCloze && canonicalQuestion.questionId === lastClozeQuestionId && followingClozeSectionId ? ` data-canonical-cloze-before-section="${escapeHtml(followingClozeSectionId)}"` : ''}${isCanonicalGrammarFill && canonicalQuestion.questionId === lastGrammarFillQuestionId && followingGrammarFillSectionId ? ` data-canonical-grammar-fill-before-section="${escapeHtml(followingGrammarFillSectionId)}"` : ''}${isTeacher ? ` data-canonical-correct-option-id="${escapeHtml(canonicalQuestion.correctOptionId || '')}"` : ''}`
+            ? ` data-canonical-question-id="${escapeHtml(canonicalQuestion.questionId)}"${canonicalQuestion.stemFigures?.length ? ' data-canonical-stem-figures="" style="container-type:inline-size"' : ''}${canonicalGroup?.groupType === 'reading' ? ' data-canonical-reading-rhythm-role="question_block"' : isCanonicalCloze ? ' data-canonical-cloze-rhythm-role="choice_row"' : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingSuccessorGroupId ? ` data-canonical-reading-last-question-for="${escapeHtml(readingSuccessorGroupId)}"` : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingFollowingSectionId ? ` data-canonical-reading-last-question-before-section="${escapeHtml(readingFollowingSectionId)}"` : ''}${isCanonicalCloze && canonicalQuestion.questionId === lastClozeQuestionId && followingClozeSectionId ? ` data-canonical-cloze-before-section="${escapeHtml(followingClozeSectionId)}"` : ''}${isCanonicalGrammarFill && canonicalQuestion.questionId === lastGrammarFillQuestionId && followingGrammarFillSectionId ? ` data-canonical-grammar-fill-before-section="${escapeHtml(followingGrammarFillSectionId)}"` : ''}${isTeacher ? ` data-canonical-correct-option-id="${escapeHtml(correctOption?.optionId || '')}"` : ''}`
             : ''
           // 空题干:挖空题号已在文中(语法填空/完形/七选五)。有选项则题号与选项同行
           // (真卷完形形态);无选项且非教师版则整行不出(语法填空文后无内容)。

@@ -75,6 +75,9 @@ try {
   }))
   for (const document of input.sourceDocuments) put(`source/${document.documentId}.pdf`, document.bytes)
   put('materialization/source.json', input.sourceInput.materializationBytes)
+  const original = input.materialization.answers[0]
+  put('answer-corrections.json', JSON.stringify({ paperId, sourceDigest: sha256(input.sourceInput.materializationBytes),
+    corrections: [{ questionId: original.questionId, officialAnswer: original.value, correctedAnswer: 'B', reason: 'Synthetic correction' }] }))
   put('materialization/nck1-ocr-source-evidence-v1.json', input.sourceInput.ocrSourceBytes.evidenceBytes)
   put('materialization/nck1-ocr-source-confirmation-v1.json', input.sourceInput.ocrSourceBytes.confirmationBytes)
   put('references.json', JSON.stringify(misplaced))
@@ -83,6 +86,9 @@ try {
     'qa', '--paper-dir', qaRoot, '--references', path.join(qaRoot, 'references.json'),
     '--output', qaOutput, '--include-scoring'], { timeout: 60_000, encoding: 'utf8' })
   assert(readFileSync(path.join(qaOutput, 'answerOnly.pdf')).subarray(0, 5).equals(Buffer.from('%PDF-')))
+  assert(readFileSync(path.join(qaOutput, 'answerOnly.html'), 'utf8')
+    .includes(`data-answer-number="${original.canonicalNumber}" aria-label="第${original.canonicalNumber}题 B">B<`))
+  console.log('PASS local answerOnly QA renders and checks the effective answer')
 } finally { rmSync(qaRoot, { recursive: true, force: true }) }
 const wrongQuestionFigure = structuredClone(input.materialization)
 wrongQuestionFigure.groups[0].blocks.push({ kind: 'figure', blockId: 'block:wrong-question-figure',

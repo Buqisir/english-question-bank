@@ -83,7 +83,7 @@ export function projectEffectiveAnswers(materialization, declaration) {
   }
 }
 
-export function answerCorrectionChanges(current, previous) {
+export function answerCorrectionChanges(current, previous, currentAnswers = {}) {
   const next = answerCorrectionsByQuestion(current)
   const old = answerCorrectionsByQuestion(previous)
   return [...new Set([...next.keys(), ...old.keys()])].flatMap(questionId => {
@@ -94,7 +94,7 @@ export function answerCorrectionChanges(current, previous) {
       questionId,
       label: questionId.startsWith('question:listening:') ? `听力 ${questionId.split(':').at(-1)}` : questionId,
       from: after ? entry.officialAnswer : before.correctedAnswer,
-      to: after?.correctedAnswer ?? entry.officialAnswer,
+      to: after?.correctedAnswer ?? currentAnswers[questionId]?.answer ?? '无答案',
       reason: entry.reason,
       withdrawn: !after,
     }]

@@ -11,21 +11,40 @@ function reject(message) {
   throw Object.assign(new Error(`纯答案版不可用：${message}`), { code: 'SOURCE_REFERENCE_PUBLICATION_INVALID' })
 }
 
+function readVersionReport(db, { paperId, sourceAssetVersion, publicationDigest }) {
+  if (!/^[a-z0-9][a-z0-9._-]{0,127}$/.test(paperId || '') || !Number.isInteger(sourceAssetVersion)
+    || sourceAssetVersion < 1 || !/^sha256:[a-f0-9]{64}$/.test(publicationDigest || '')) reject('精确版本身份缺失')
+  const hasRuns = db.prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'paper_import_runs'").get()
+  if (!hasRuns) return null
+  const runs = db.prepare(`SELECT publish_report_json FROM paper_import_runs
+    WHERE paper_id = ? AND asset_version = ? AND status = 'published'`).all(paperId, sourceAssetVersion)
+  if (runs.length > 1) reject('同一版本存在多条成功发布记录')
+  return runs.length ? JSON.parse(runs[0].publish_report_json) : null
+}
+
+function correctionFromReport(report, { paperId, sourceAssetVersion, publicationDigest }) {
+  const correction = report?.answerCorrections
+  if (!correction) return null
+  const commitment = report.sourceReferencePublication
+  if (report.paperId !== paperId || report.assetVersion !== sourceAssetVersion
+    || report.versionName !== `v${sourceAssetVersion}` || report.canonicalPublicationDigest !== publicationDigest
+    || correction.declaration?.paperId !== paperId || !Array.isArray(correction.declaration.corrections)
+    || !correction.approvalId || !correction.revisionId || !correction.bundleDigest
+    || (commitment && ['approvalId', 'revisionId', 'bundleDigest'].some(key => correction[key] !== commitment[key]))
+    || typeof correction.approvedBy !== 'string' || !correction.approvedBy
+    || !Number.isFinite(Date.parse(correction.approvedAt))) reject('答案更正与已审版本不一致')
+  return correction.declaration
+}
+
+export function readPublishedAnswerCorrections({ db, consumption }) {
+  return correctionFromReport(readVersionReport(db, consumption), consumption)
+}
+
 // SQLite is the commitment authority, not a self-declared filesystem report.
 // The caller supplies a successfully validated, exact Canonical consumption.
 export function readSourceReferencePublication({ db, paperAssetsDir, consumption, expected = null }) {
   const { paperId, sourceAssetVersion, publicationDigest } = consumption
-  if (!/^[a-z0-9][a-z0-9._-]{0,127}$/.test(paperId || '') || !Number.isInteger(sourceAssetVersion)
-    || sourceAssetVersion < 1 || !/^sha256:[a-f0-9]{64}$/.test(publicationDigest || '')) reject('精确版本身份缺失')
-  const hasRuns = db.prepare("SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'paper_import_runs'").get()
-  if (!hasRuns) {
-    if (expected) reject('已审答案的发布记录缺失')
-    return null
-  }
-  const runs = db.prepare(`SELECT publish_report_json FROM paper_import_runs
-    WHERE paper_id = ? AND asset_version = ? AND status = 'published'`).all(paperId, sourceAssetVersion)
-  if (runs.length > 1) reject('同一版本存在多条成功发布记录')
-  const report = runs.length ? JSON.parse(runs[0].publish_report_json) : null
+  const report = readVersionReport(db, consumption)
   const commitment = report?.sourceReferencePublication
   if (!commitment) {
     if (expected) reject('此版本没有已审源参考答案承诺')
@@ -94,11 +113,8 @@ export function readSourceReferencePublication({ db, paperAssetsDir, consumption
     return { documentId: document.documentId, bytes: decoded(matches[0]) }
   })
   const sourceReferences = parseSourceReferencesBytes(referenceBytes)
-  const correction = report.answerCorrections
-  if (correction && (['approvalId', 'revisionId', 'bundleDigest'].some(key => correction[key] !== commitment[key])
-    || typeof correction.approvedBy !== 'string' || !correction.approvedBy
-    || !Number.isFinite(Date.parse(correction.approvedAt)))) reject('答案更正与已审版本不一致')
-  const answerCorrections = correction ? validateAnswerCorrections(correction.declaration,
+  const correction = correctionFromReport(report, consumption)
+  const answerCorrections = correction ? validateAnswerCorrections(correction,
     materialization, sha256(sourceBytes)) : null
   const onWarning = message => console.warn(`${consumption.paperId}: ${message}`)
   assertSourceReferences({ sidecar: sourceReferences, materialization,

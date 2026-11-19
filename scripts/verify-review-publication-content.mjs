@@ -29,8 +29,13 @@ import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-co
 import { buildPrintHtml } from '../server/print-renderer.mjs'
 import { buildAnswerOnlyHtml, buildAssembledAnswerOnlyHtml } from '../server/answer-renderer.mjs'
 import { readSourceReferencePublication } from '../server/paper-import/sourceReferencePublication.mjs'
-import { ANSWER_CORRECTIONS_FILE, answerCorrectionChanges } from '../server/paper-import/answerCorrections.mjs'
+import { ANSWER_CORRECTIONS_FILE } from '../server/paper-import/answerCorrections.mjs'
+import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
+import { runRoutes } from '../server/router/index.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../server/paper-import/sourceReferenceSemantics.mjs'
+import listeningAnalysisEnricher from './import-pipeline/enrichers/listening-analysis.mjs'
+import listeningSentencesEnricher from './import-pipeline/enrichers/listening-sentences.mjs'
+import { LISTENING_REVIEW_FILE } from '../server/paper-import/listeningReview.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
 process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
@@ -165,9 +170,71 @@ try {
   assert.equal(projection.paperAsset.answerKey.answers[questionId].answer, 'B')
   assert.equal(projection.compilation.artifacts.sourceCapture.assertions.find(item => item.questionId === questionId).answer, 'A')
   assert.notEqual(productInputDigest(source, reviewBundleFilePaths(source)), uncorrectedInputs)
-  assert.deepEqual(answerCorrectionChanges(null, declaration), [
-    { questionId, label: '听力 20', from: 'B', to: 'A', reason: '合成听力证据 01:20', withdrawn: true },
+  const withdrawalRoutes = createImportReviewRoutes({ getStore: () => ({
+    paperDetail: () => ({ revisions: [2, 1].map(revisionNumber => ({
+      id: `r${revisionNumber}`, revisionNumber, reviewKind: 'candidate', finalizedAt: true,
+      manifest: { files: revisionNumber === 1 ? [{ path: ANSWER_CORRECTIONS_FILE }] : [] },
+    })) }),
+    verifiedFileForRead: () => ({ filePath: correctionPath }),
+    productPreviewForRevision: id => {
+      assert.equal(id, 'r2')
+      return { preview: { paperAsset: { answerKey: { answers: { [questionId]: { answer: 'C' } } } } } }
+    },
+  }) })
+  let withdrawal
+  await runRoutes(withdrawalRoutes, {
+    request: { method: 'GET' }, response: {},
+    url: new URL(`/api/import-reviews/papers/${projection.paperId}/revisions/r2/answer-corrections`, 'https://fixture.test'),
+    context: { session: { role: 'owner' }, sendJson: (_response, status, data) => { withdrawal = { status, data } } },
+  })
+  assert.equal(withdrawal.status, 200)
+  assert.deepEqual(withdrawal.data.corrections, [
+    { questionId, label: '听力 20', from: 'B', to: 'C', reason: '合成听力证据 01:20', withdrawn: true },
   ])
+  const evidence = {
+    groups: [], evidence: [],
+  }
+  const enrichContext = {
+    paperId: projection.paperId, baseRev: 'fixture', bundle: source, files: [],
+    readBase: async () => evidence,
+  }
+  const draftListening = await listeningAnalysisEnricher.run(enrichContext, { reason: '' })
+  const listeningRequest = listeningAnalysisEnricher.agentRequest(enrichContext, draftListening)
+  assert.equal(listeningRequest.authoritativeAnswers[questionId], 'B')
+
+  const segment = projection.materialization.listening.transcript[0]
+  const words = segment.text.split(/\s+/u)
+  const windowPath = 'synthetic-asr.json'
+  const playback = { startSeconds: 0, endSeconds: words.length * 2 }
+  evidence.groups.push({ segmentId: segment.segmentId, playback, occurrences: [
+    { startSeconds: 0, endSeconds: words.length },
+    { startSeconds: words.length, endSeconds: playback.endSeconds },
+  ] })
+  evidence.evidence.push({ kind: 'asr_window', path: windowPath, settings: { engine: 'whisper' } })
+  const window = { startSeconds: 0, endSeconds: playback.endSeconds, segments: [{
+    words: [...words, ...words].map((word, index) => ({ word, start: index + 0.1, end: index + 0.8 })),
+  }] }
+  const materializationPath = projection.manifest.materializationPath
+  const inputs = new Map([
+    [materializationPath, readJson(path.join(source, materializationPath))],
+    ['analysis-listening.json', listening], [ANSWER_CORRECTIONS_FILE, declaration],
+    [LISTENING_REVIEW_FILE, evidence], [windowPath, window],
+  ])
+  let mergedListening
+  const sentenceContext = { ...enrichContext,
+    files: [...inputs.keys()].map(file => ({ path: file, ...(file === materializationPath
+      ? { role: 'materialization', sha256: declaration.sourceDigest } : {}) })),
+    readBase: async file => inputs.get(file),
+    writeJson: (_file, value) => { mergedListening = value },
+  }
+  const sentencePlan = await listeningSentencesEnricher.plan(sentenceContext)
+  assert.equal(sentencePlan.state, 'ok', sentencePlan.reason)
+  const sentenceResult = listeningSentencesEnricher.run(sentenceContext, sentencePlan)
+  const sentenceRequest = listeningSentencesEnricher.agentRequest(sentenceContext, sentenceResult)
+  listeningSentencesEnricher.mergeAgentResponse(sentenceContext, sentenceResult, sentenceRequest,
+    { ...sentenceRequest, sentences: sentenceRequest.sentences.map(sentence => ({ ...sentence, zh: '合成译文' })) })
+  assert.equal(mergedListening.questions[questionId].officialAnswer, 'B')
+  assert(mergedListening.materials[segment.segmentId].sentences.length)
   pass('sealed official A remains enforceable, while teacher data and admitted listening analysis use B')
 
   mkdirSync(path.join(source, 'products'))
@@ -660,7 +727,13 @@ try {
       assert.equal(read('paper-asset.json').paper.assetVersion, 7);
       assert.equal(read('answer-key.json').sourceAssetVersion, 7);
       assert.equal(read('paper-normalized-groups-v1.json').sourceAssetVersion, 7);
-      assert.deepEqual(read('answer-key.json').answers, review.paperAsset.answerKey.answers);
+      const official = read('answer-key.json').answers;
+      const effective = review.paperAsset.answerKey.answers;
+      const { ['question:listening:20']: official20, ...otherOfficial } = official;
+      const { ['question:listening:20']: effective20, ...otherEffective } = effective;
+      assert.equal(official20.answer, 'A');
+      assert.equal(effective20.answer, 'B');
+      assert.deepEqual(otherOfficial, otherEffective);
       for (const [file, expected] of Object.entries(review.analysisSidecars)) {
         const actual = read('analyses/' + file);
         if (file !== 'writing-analysis-v1.json') assert.equal(actual.sourceAssetVersion, 7);

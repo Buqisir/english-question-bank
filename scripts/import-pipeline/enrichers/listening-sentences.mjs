@@ -1,6 +1,7 @@
 import {
   LISTENING_STAGED_ANALYSIS_FILE_NAME as output, mergeListeningSentenceAnalysis, validateListeningAnalysis,
 } from '../../../server/paper-import-ai/analyzeListening.mjs'
+import { ANSWER_CORRECTIONS_FILE, projectEffectiveAnswers, validateAnswerCorrections } from '../../../server/paper-import/answerCorrections.mjs'
 import { LISTENING_REVIEW_FILE } from '../../../server/paper-import/listeningReview.mjs'
 import { alignReviewedListeningSentences } from '../listening-sentence-align.mjs'
 
@@ -15,7 +16,11 @@ async function plan(ctx) {
   const materialization = ctx.files.find(file => file.role === 'materialization')
   if (!materialization) return skip('无封存听力原文')
   const analysis = await ctx.readBase(output)
-  const document = await ctx.readBase(materialization.path)
+  const source = await ctx.readBase(materialization.path)
+  const corrections = has(ANSWER_CORRECTIONS_FILE)
+    ? validateAnswerCorrections(await ctx.readBase(ANSWER_CORRECTIONS_FILE), source, materialization.sha256)
+    : null
+  const document = projectEffectiveAnswers(source, corrections)
   const transcript = document.listening?.transcript ?? []
   if (!transcript.length) return skip('无封存听力原文')
   const pending = new Set(transcript.filter(({ segmentId }) =>
