@@ -379,6 +379,10 @@ async function linkThread(paperId) {
   }), null, 2))
 }
 
+export function reboundProductManifestBytes(manifest, inputDigest) {
+  return Buffer.from(`${JSON.stringify({ ...manifest, inputDigest }, null, 2)}\n`)
+}
+
 export function prepareReviewPush(paperDir, { resolvesIssueIds = [], expectedBaseRevisionId } = {}) {
   const loaded = loadNck1ReviewSource(paperDir)
   assertImportSubmissionReady(paperDir, loaded.materialization, loaded)
@@ -391,7 +395,7 @@ export function prepareReviewPush(paperDir, { resolvesIssueIds = [], expectedBas
     // Only the local manifest is rebound, so the uploaded revision stands alone.
     const file = resolveReviewFile(paperDir, PRODUCT_MANIFEST)
     const staging = `${file}.${randomUUID()}`
-    writeFileSync(staging, `${JSON.stringify({ ...products.manifest, inputDigest: projection.printInputDigest }, null, 2)}\n`, { flag: 'wx' })
+    writeFileSync(staging, reboundProductManifestBytes(products.manifest, projection.printInputDigest), { flag: 'wx' })
     renameSync(staging, file)
     projection = buildLocalReviewProjection(paperDir, { requireAnalyses: true })
   }

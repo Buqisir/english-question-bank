@@ -2,7 +2,6 @@ import {
   LISTENING_STAGED_ANALYSIS_FILE_NAME as output, mergeListeningSentenceAnalysis, validateListeningAnalysis,
 } from '../../../server/paper-import-ai/analyzeListening.mjs'
 import { LISTENING_REVIEW_FILE } from '../../../server/paper-import/listeningReview.mjs'
-import { PRODUCT_MANIFEST } from '../../../server/paper-import/frozenProducts.mjs'
 import { alignReviewedListeningSentences } from '../listening-sentence-align.mjs'
 
 const engine = /apple|whisper/iu
@@ -76,6 +75,5 @@ function mergeAgentResponse(ctx, result, request, response) {
   ctx.writeJson(output, merged)
 }
 
-// Review's existing push preparation may refresh the frozen product manifest's input digest.
-export default { name: 'listening-sentences', allowedOutputs: [output, PRODUCT_MANIFEST], needsAnalysis: true,
+export default { name: 'listening-sentences', allowedOutputs: [output], needsAnalysis: true,
   plan, run, agentRequest, mergeAgentResponse }

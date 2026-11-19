@@ -10,14 +10,16 @@ import { pathToFileURL } from 'node:url'
 import { parseArgs } from 'node:util'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { resolveReviewFile } from '../../server/import-review/revisionProjection.mjs'
+import { PRODUCT_MANIFEST, productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
 import {
   downloadReviewFile, hydrateReviewRevision, hydratedEvidenceBase, listReviewPapers,
-  prepareReviewPush, reviewCandidate, uploadReviewBundle,
+  prepareReviewPush, reboundProductManifestBytes, reviewCandidate, uploadReviewBundle,
 } from './review.mjs'
 
 const cache = path.join(homedir(), '.cache', 'eqbank')
 const readJson = file => JSON.parse(readFileSync(file, 'utf8'))
 const hardFile = ({ role = '', mediaType = '' }) => /^(audio|image)\//u.test(mediaType)
+  || role === 'pdf_product'
   || /^(source_manifest|materialization|question_|official_|ocr_source_|content_media|listening_audio_|analyzed_package_)/u.test(role)
 
 function hashFile(file) {
@@ -148,9 +150,19 @@ async function enrichPaper(enricher, paper, options, directory) {
     }
     const plan = await enricher.plan(ctx)
     if (plan.state === 'skip' || options.plan) return { ...plan, baseRev }
+    const sealedProducts = files.some(file => file.path === PRODUCT_MANIFEST) ? await ctx.readBase(PRODUCT_MANIFEST) : null
+    const printInputDigest = sealedProducts ? productInputDigest(baseDir, files) : null
+    const reboundHash = sealedProducts && sealedProducts.inputDigest !== printInputDigest
+      ? sha256(reboundProductManifestBytes(sealedProducts, printInputDigest)) : null
     const result = await enricher.run(ctx, plan)
     const evidence = result.evidence ?? []
-    checkEnrichmentDiff(bundle, baseFiles, enricher.allowedOutputs, evidence)
+    const checkDiff = () => {
+      // Resume a prior preparation only if it changed exactly the input digest.
+      const outputs = reboundHash && hashFile(resolveReviewFile(bundle, PRODUCT_MANIFEST)) === reboundHash
+        ? [...enricher.allowedOutputs, PRODUCT_MANIFEST] : enricher.allowedOutputs
+      return checkEnrichmentDiff(bundle, baseFiles, outputs, evidence)
+    }
+    checkDiff()
     const request = await enricher.agentRequest?.(ctx, result)
     if (request) {
       const requestPath = path.join(workDir, 'agent-request.json')
@@ -162,20 +174,23 @@ async function enrichPaper(enricher, paper, options, directory) {
       }
       await enricher.mergeAgentResponse(ctx, result, request, readJson(responsePath))
     }
-    if (!checkEnrichmentDiff(bundle, baseFiles, enricher.allowedOutputs, evidence).length) {
+    if (!checkDiff().some(file => file !== PRODUCT_MANIFEST)) {
       return { state: 'unchanged', reason: result.reason, baseRev }
     }
-    const { manifest } = prepareReviewPush(bundle, { expectedBaseRevisionId: baseRev })
-    const changed = checkEnrichmentDiff(bundle, baseFiles, enricher.allowedOutputs, evidence)
+    const { manifest, projection } = prepareReviewPush(bundle, { expectedBaseRevisionId: baseRev })
+    const changed = checkDiff()
+    const rebound = changed.includes(PRODUCT_MANIFEST)
+    if (rebound && projection.printInputDigest !== printInputDigest) throw new Error('封存 PDF 的打印输入已变化')
     checkPushManifest(revision.manifest, manifest, changed, evidence)
+    const detail = `${result.reason}；硬门哈希一致${rebound ? '；沿用原 PDF，仅更新清单输入摘要' : ''}`
     const prepared = path.join(workDir, 'prepared.json')
     if (!options.push && existsSync(prepared) && readJson(prepared).bundleDigest === manifest.bundleDigest) {
-      return { state: 'unchanged', reason: `${result.reason}；硬门哈希一致`, baseRev }
+      return { state: 'unchanged', reason: detail, baseRev }
     }
     const pushed = options.push ? await uploadReviewBundle(bundle, manifest, path.join(workDir, 'upload-timeline.jsonl')) : null
     if (!pushed) writeAtomic(prepared, `${JSON.stringify({ bundleDigest: manifest.bundleDigest })}\n`)
     const state = pushed ? `已推 ${pushed.revision.id}` : '可 push'
-    return { state: 'ok', reason: `${state}；${changed.join(', ')}；${result.reason}；硬门哈希一致`, baseRev }
+    return { state: 'ok', reason: `${state}；${changed.join(', ')}；${detail}`, baseRev }
   } catch (error) {
     return { state: 'fail', reason: error.message, baseRev }
   }
