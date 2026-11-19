@@ -253,6 +253,7 @@ export function publicPaperReviewDetail(store, paperId) {
 
 export function createImportReviewRoutes({
   getStore,
+  openDatabase = null,
   searchSidecars = null,
   getBlobStore = null,
   agentToken,
@@ -665,7 +666,24 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
 
   routes.push(defineRoute('GET', /^\/api\/import-reviews$/, route(({ response, context }) => {
     if (!requireOwner(response, context)) return
-    context.sendJson(response, 200, { papers: store.listPapers() })
+    const papers = store.listPapers({ includeMetadata: true })
+    if (openDatabase && papers.some(paper => paper.state === 'awaiting_review' && !paper.promotionState)) {
+      const db = openDatabase({ readOnly: true })
+      try {
+        const hasRegistry = db.prepare(`SELECT 1 FROM sqlite_master
+          WHERE type = 'table' AND name = 'canonical_paper_publications'`).get()
+        if (hasRegistry) {
+          const publishedIds = new Set(db.prepare(`SELECT paper_id FROM canonical_paper_publications
+            WHERE is_current = 1`).all().map(row => row.paper_id))
+          for (const paper of papers) {
+            if (paper.state === 'awaiting_review' && !paper.promotionState) {
+              paper.hasEarlierPublication = publishedIds.has(paper.paperId)
+            }
+          }
+        }
+      } finally { db.close() }
+    }
+    context.sendJson(response, 200, { papers })
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-reviews\/papers\/([^/]+)\/review-state$/, route(({

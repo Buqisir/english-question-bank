@@ -500,6 +500,7 @@ const serverRoutes = [
   ...createPaperCanonicalConsumerRoutes(),
   ...createImportReviewRoutes({
     getStore: getImportReviewStore,
+    openDatabase,
     searchSidecars: createSearchSidecarStore({ openDatabase }),
     getBlobStore: configuredBlobStore,
     agentToken: process.env.QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN || '',

@@ -44,6 +44,14 @@ import {
 const PAPER_ID = /^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/
 const SHA256 = /^sha256:[a-f0-9]{64}$/
 const MAX_FILE_BYTES = 64 * 1024 * 1024
+const LIST_ANALYSIS_FILES = {
+  listening: 'listening-analysis-v1.json',
+  reading: 'reading-choice-analysis-v1.json',
+  sevenChoice: 'seven-choices-analysis-v1.json',
+  cloze: 'cloze-analysis-v1.json',
+  grammar: 'grammar-fill-analysis-v1.json',
+  writing: 'writing-analysis-v1.json',
+}
 const MAX_BUNDLE_BYTES = 256 * 1024 * 1024
 const MAX_FILES = 200
 const SURFACES = new Set(['paper', 'screen', 'student_print', 'teacher_print', 'pdf', 'source'])
@@ -865,6 +873,7 @@ export function createImportReviewStore({
     } finally { initialize.close() }
   }
   const projectionCache = new Map()
+  const paperListMetadataCache = new Map()
   const targetBuild = reviewBuildIdentityProvider()
 
   function currentRendererBuildId() {
@@ -1586,7 +1595,50 @@ export function createImportReviewStore({
     })
   }
 
-  function listPapers() {
+  function paperListMetadata(db, row, manifest) {
+    const cacheKey = `${row.latest_revision_id}:${row.bundle_digest}:${row.preview_digest}`
+    const cached = paperListMetadataCache.get(row.paper_id)
+    if (cached?.key === cacheKey) return cached.value
+
+    let provenance = null
+    const config = Array.isArray(manifest.files) && manifest.files.find(file => file?.path === 'config.json')
+    if (row.bundle_digest && config?.byteLength <= 256 * 1024) {
+      try {
+        const filePath = resolveReviewFile(revisionDirectory(row.latest_revision_id), config.path)
+        if (statSync(filePath).size === config.byteLength) {
+          const bytes = readFileSync(filePath)
+          if (`sha256:${createHash('sha256').update(bytes).digest('hex')}` === config.sha256) {
+            provenance = parseJson(bytes.toString('utf8'))?.provenance
+          }
+        }
+      } catch {
+        // Older or unavailable metadata is optional for this list.
+      }
+    }
+    let sidecars = null
+    if (row.preview_digest) {
+      const preview = db.prepare(`SELECT payload_json FROM import_review_product_previews
+        WHERE revision_id = ? AND bundle_digest = ? AND renderer_build_id = ?`)
+        .get(row.latest_revision_id, row.bundle_digest, row.renderer_build_id)
+      sidecars = parseJson(preview?.payload_json)?.analysisSidecars
+    }
+    const year = Number(provenance?.year)
+    const region = provenance?.region || provenance?.source
+    const sourceType = provenance?.sourceType
+    const value = {
+      year: Number.isInteger(year) && year >= 1900 && year <= 9999 ? year : 'unknown',
+      region: typeof region === 'string' && region.trim() ? region.trim() : 'unknown',
+      sourceType: sourceType === '真题' ? '真题' : ['模拟题', '模拟'].includes(sourceType) ? '模拟' : 'unknown',
+      analysisCoverage: Object.fromEntries(Object.entries(LIST_ANALYSIS_FILES).map(([section, file]) => [
+        section, sidecars && typeof sidecars === 'object' && !Array.isArray(sidecars)
+          ? (sidecars[file] ? 'yes' : 'no') : 'unknown',
+      ])),
+    }
+    paperListMetadataCache.set(row.paper_id, { key: cacheKey, value })
+    return value
+  }
+
+  function listPapers({ includeMetadata = false } = {}) {
     let target
     let unavailable
     try { target = targetBuild() } catch (error) {
@@ -1600,6 +1652,10 @@ export function createImportReviewStore({
       SELECT p.paper_id, p.paper_name, p.latest_revision_id, p.updated_at,
              r.revision_number, r.state, r.bundle_digest, r.manifest_json,
              r.approval_receipt_json, r.renderer_build_id, v.sealed_publication_manifest_digest,
+             ${includeMetadata ? `v.payload_digest AS preview_digest,
+             EXISTS (SELECT 1 FROM import_review_promotions pr
+              WHERE pr.paper_id = p.paper_id AND pr.state = 'published'
+                AND pr.revision_id <> p.latest_revision_id) AS has_earlier_publication,` : ''}
              (SELECT pr.state FROM import_review_promotions pr
               WHERE pr.paper_id = p.paper_id
               ORDER BY pr.requested_at DESC, pr.rowid DESC LIMIT 1) AS promotion_state,
@@ -1651,6 +1707,10 @@ export function createImportReviewStore({
             : null,
         unresolvedCount: Number(row.unresolved_count || 0),
         updatedAt: row.updated_at,
+        ...(includeMetadata ? {
+          ...paperListMetadata(db, row, manifest),
+          hasEarlierPublication: Boolean(row.has_earlier_publication),
+        } : {}),
       }
       })
     })
