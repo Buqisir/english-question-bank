@@ -252,6 +252,35 @@ function fixture(t, referencesVersion = version) {
   return { dir, ctx, calls, options: { referenceStages } }
 }
 
+test('local enrichment replays only byte-identical sealed source references', async t => {
+  const { dir } = fixture(t)
+  const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+  process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
+  const { makeReviewRoot } = await import('../verify-universal-nck1-publish.mjs').finally(() => {
+    if (previous === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+    else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
+  })
+  const { reviewRoot, projection } = makeReviewRoot(dir)
+  const manifest = reviewManifest(reviewRoot, projection, [], 'historical-references-fixture')
+  const file = path.join(reviewRoot, 'source-references-v1.json')
+  const references = JSON.parse(readFileSync(file))
+  delete references.producerVersion
+  json(file, references)
+  const bytes = readFileSync(file)
+  Object.assign(manifest.files.find(file => file.path === 'source-references-v1.json'),
+    { sha256: sha256(bytes), byteLength: bytes.length })
+  manifest.bundleDigest = reviewBundleDigest(manifest)
+  const revision = { ...manifest, manifest, id: 'rev-historical-references', state: 'ready',
+    reviewKind: 'candidate', finalizedAt: oldTime }
+  json(path.join(reviewRoot, 'signals/review-restore.json'), { schemaVersion: 'review-restore-v1',
+    origin: process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN || 'http://127.0.0.1:18890',
+    paperId: revision.paperId, revisionId: revision.id, bundleDigest: revision.bundleDigest, sealedRevision: revision })
+  const project = () => buildLocalReviewProjection(reviewRoot, { replayReferencesFromRevisionId: revision.id })
+  assert.deepEqual(project().sourceReferencesBytes, bytes)
+  appendFileSync(file, ' ')
+  assert.throws(project, { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+})
+
 for (const [edit, expectation] of [
   ['stem', 'retains installed v2 listening evidence after a non-listening stem edit'],
   ['option', 'reruns the listening rule for an edited option using the original ASR'],

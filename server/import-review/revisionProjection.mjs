@@ -1960,6 +1960,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   requireAnalyses = false,
   analysisProfile = LEGACY_NCK1_ANALYSIS_PROFILE,
   expectedCandidateDigest = null,
+  replayReferencesFromRevisionId = null,
 } = {}, readProducts, referenceReceipt, sealedListening, retainedBytes, evidenceBase) {
   const loaded = loadNck1ReviewSource(rootDir)
   const imported = importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest,
@@ -2037,8 +2038,12 @@ function buildNck1ReviewProjectionUncached(rootDir, {
       canonicalOcrSourceBytes: loaded.sourceInput.ocrSourceBytes,
     }),
   }
-  if (referenceReceipt) assertSealedSourceReferenceReplay({ ...referenceBinding,
-    sourceReferencesBytes, receipt: referenceReceipt })
+  const baseline = evidenceBase?.revision
+  const receipt = referenceReceipt ?? (replayReferencesFromRevisionId && baseline?.id === replayReferencesFromRevisionId
+    && retainedBytes(SOURCE_REFERENCES_FILE)?.equals(sourceReferencesBytes ?? Buffer.alloc(0))
+    ? sealedReferenceReceipt(baseline) : null)
+  if (receipt) assertSealedSourceReferenceReplay({ ...referenceBinding,
+    sourceReferencesBytes, receipt })
   else assertSourceReferenceAdmission(referenceBinding)
   const slotBindings = paginationSlotBindings(consumption)
   // Historical analyzed packages without a PDF commitment retain their separate

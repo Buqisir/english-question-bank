@@ -387,7 +387,8 @@ export function reboundProductManifestBytes(manifest, inputDigest) {
 export function prepareReviewPush(paperDir, { resolvesIssueIds = [], expectedBaseRevisionId } = {}) {
   const loaded = loadNck1ReviewSource(paperDir)
   assertImportSubmissionReady(paperDir, loaded.materialization, loaded)
-  let projection = buildLocalReviewProjection(paperDir, { requireAnalyses: true })
+  const options = { requireAnalyses: true, replayReferencesFromRevisionId: expectedBaseRevisionId }
+  let projection = buildLocalReviewProjection(paperDir, options)
   const boundaryIssues = validateInlineBlankTextBoundaries(projection.compilation.artifacts.canonicalPaper.questionGroups)
   if (boundaryIssues.length) fail(JSON.stringify(boundaryIssues, null, 2))
   const products = projection.frozenProducts
@@ -398,7 +399,7 @@ export function prepareReviewPush(paperDir, { resolvesIssueIds = [], expectedBas
     const staging = `${file}.${randomUUID()}`
     writeFileSync(staging, reboundProductManifestBytes(products.manifest, projection.printInputDigest), { flag: 'wx' })
     renameSync(staging, file)
-    projection = buildLocalReviewProjection(paperDir, { requireAnalyses: true })
+    projection = buildLocalReviewProjection(paperDir, options)
   }
   return { manifest: reviewManifest(paperDir, projection, resolvesIssueIds, undefined, expectedBaseRevisionId), projection }
 }
