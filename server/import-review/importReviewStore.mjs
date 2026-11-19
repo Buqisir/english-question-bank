@@ -859,6 +859,7 @@ export function createImportReviewStore({
   filesRoot,
   rendererBuildId,
   projectRevision = buildImportReviewProjection,
+  deduplicateSealedFiles = false,
   busyTimeoutMs = 5000,
   initializeSchema = true,
 }) {
@@ -1178,7 +1179,7 @@ export function createImportReviewStore({
     const status = uploadStatus(revisionId)
     if (status.revision.state !== 'uploading') return
     for (const file of status.files) {
-      if (file.uploadedAt || !/^(audio\/|image\/|application\/pdf$)/.test(file.mediaType)) continue
+      if (file.uploadedAt || !/^(audio\/|image\/|application\/(?:pdf|json)$)/.test(file.mediaType)) continue
       const source = withDb(false, db => db.prepare(`
         SELECT f.revision_id, f.path FROM import_review_files f
         JOIN import_review_revisions r ON r.id = f.revision_id
@@ -1383,6 +1384,7 @@ export function createImportReviewStore({
           evidenceBase: finalizedEvidenceBase(status.revision),
         }, {
           onPhase: name => timer.phase(name),
+          deduplicateSealedFiles,
         })
         // The executing-server identity uses its trusted worker too; computing
         // the module graph here synchronously would block concurrent requests.

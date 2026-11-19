@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import './lib/reviewTestLockRoot.mjs'
-import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs'
 import { createServer } from 'node:http'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
@@ -17,6 +17,8 @@ import { buildProductPreviewPayload } from '../server/import-review/reviewSubjec
 import { saveProductPreview as legacySaveProductPreview } from '../test-fixtures/review-compatibility/legacy-preview-6dc7530b.mjs'
 import { prebindReviewFixtureReferences, removeOwnedReviewReferences } from './lib/syntheticReviewAnswerFixture.mjs'
 import { listeningReviewSubject } from '../server/paper-import/listeningReview.mjs'
+import { LISTENING_AUDIO_PATHS } from '../server/paper-import/listeningAudioEvidence.mjs'
+import { configuredBlobStore } from '../server/paper-import/blobStore.mjs'
 import { productInputDigest, PRODUCT_MANIFEST } from '../server/paper-import/frozenProducts.mjs'
 
 const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
@@ -238,7 +240,7 @@ try {
   const sealedManifest = reviewFixtureManifest(sealedSource.reviewRoot, sealedProjection)
   const sealedDb = path.join(root, 'sealed.sqlite')
   const sealedStore = createImportReviewStore({ dbPath: sealedDb, filesRoot: path.join(root, 'sealed-files'),
-    rendererBuildId: 'finalize-worker-test' })
+    rendererBuildId: 'finalize-worker-test', deduplicateSealedFiles: true })
   const sealedDraft = sealedStore.createRevision(sealedManifest).revision
   for (const file of sealedManifest.files) {
     const { destination } = sealedStore.fileForUpload(sealedDraft.id, file.path)
@@ -246,7 +248,24 @@ try {
     writeFileSync(destination, readFileSync(path.join(sealedSource.reviewRoot, file.path)))
     sealedStore.completeFileUpload(sealedDraft.id, file.path, file)
   }
-  await sealedStore.finalizeUploadedRevision(sealedDraft.id)
+  const blobRoot = path.join(root, 'sealed-blobs')
+  const blobPath = digest => path.join(blobRoot, 'eqb-blobs/v1/sha256', digest.slice(7))
+  const localStorage = { QUESTION_BANK_BLOB_ROOT: blobRoot, QUESTION_BANK_FILE_STORE: 'local' }
+  const previousStorage = Object.fromEntries(Object.keys(localStorage).map(key => [key, process.env[key]]))
+  const playbackPath = 'listening/playback.mp3'
+  const playback = await configuredBlobStore(localStorage).put(
+    readFileSync(path.join(sealedSource.reviewRoot, LISTENING_AUDIO_PATHS.playback)),
+  )
+  const playbackInode = statSync(blobPath(playback.sha256)).ino
+  try {
+    Object.assign(process.env, localStorage)
+    await sealedStore.finalizeUploadedRevision(sealedDraft.id)
+  } finally {
+    for (const [key, value] of Object.entries(previousStorage)) {
+      if (value === undefined) delete process.env[key]
+      else process.env[key] = value
+    }
+  }
   const sealedCommitment = sealedStore.sealedPublicationCommitmentForRevision(sealedDraft.id)
   const sealedDirectory = path.join(sealedStore.revisionDirectory(sealedDraft.id), 'sealed-publication')
   const sealedBytes = readFileSync(path.join(sealedDirectory, 'manifest.json'))
@@ -262,6 +281,11 @@ try {
   assert(sealed.files.some(file => file.origin === 'revision' && file.path === 'products/manifest-v1.json'))
   assert(sealed.files.some(file => file.path === 'canonical/source-asset.bin'))
   assert(sealed.files.some(file => file.path === 'listening/playback.mp3'))
+  assert.equal(statSync(path.join(sealedDirectory, playbackPath)).ino, playbackInode)
+  const sourceAsset = sealed.files.find(file => file.path === 'canonical/source-asset.bin')
+  const sourceInode = statSync(path.join(sealedDirectory, sourceAsset.path)).ino
+  assert.notEqual(sourceInode, playbackInode)
+  assert.equal(statSync(blobPath(sourceAsset.sha256)).ino, sourceInode, 'previously unseen bytes are adopted')
   console.log('PASS worker finalize atomically commits complete sealed bytes, preview digest and awaiting_review without duplicating PDFs')
 
   const repair = path.join(root, 'local-repair')

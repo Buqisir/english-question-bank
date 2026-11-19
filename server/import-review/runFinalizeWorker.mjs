@@ -17,6 +17,7 @@ export async function runFinalizeWorker(directory, revision, {
   input,
   reviewerKind,
   expectedConfirmation,
+  deduplicateSealedFiles,
 } = {}) {
   // Reuse the existing FIFO lease mechanism: at most one finalize worker in
   // this server process, including when different revisions finalize together.
@@ -25,7 +26,7 @@ export async function runFinalizeWorker(directory, revision, {
   let timeout
   try {
     worker = new Worker(new URL('./finalizeWorker.mjs', import.meta.url), {
-      workerData: { directory, operation, input, reviewerKind, revision, expectedConfirmation },
+      workerData: { directory, operation, input, reviewerKind, revision, expectedConfirmation, deduplicateSealedFiles },
     })
     return await new Promise((resolve, reject) => {
       timeout = setTimeout(() => reject(workerError(

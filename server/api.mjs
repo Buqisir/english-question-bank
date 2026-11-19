@@ -94,6 +94,7 @@ function getImportReviewStore() {
       dbPath: importReviewDbPath,
       filesRoot: importReviewFilesRoot,
       rendererBuildId,
+      deduplicateSealedFiles: true,
       busyTimeoutMs: 0,
       // An accepted executor can outlive this API. Its Review transaction must
       // not be blocked by re-running DDL during restart.

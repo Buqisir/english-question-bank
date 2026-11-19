@@ -545,8 +545,8 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
         context.sendJson(response, 200, { ...status, metrics })
         return
       }
-      const largeAsset = /^(audio\/|image\/|application\/pdf$)/.test(upload.file.mediaType)
-      const blobStore = largeAsset ? getBlobStore?.() : null
+      const reusable = /^(audio\/|image\/|application\/(?:pdf|json)$)/.test(upload.file.mediaType)
+      const blobStore = reusable ? getBlobStore?.() : null
       timer.phase('receive')
       const received = await receiveVerifiedUpload(request, upload.destination, upload.file, {
         validateTemporaryFile: async (temporary, expected) => {
