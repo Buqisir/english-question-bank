@@ -35,9 +35,13 @@ export type ReviewIssue = {
 
 export type ReviewDetail = {
   paperId: string
+  paperName: string
   latestRevisionId: string
   issues: ReviewIssue[]
-  revisions: { id: string; revisionNumber: number; state: string; createdAt: string }[]
+  revisions: {
+    id: string; revisionNumber: number; state: string; createdAt: string
+    reviewKind: string; bundleDigest: string; rendererBuildId: string
+  }[]
 }
 
 export const stateLabels: Record<string, string> = {

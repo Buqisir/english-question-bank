@@ -1,8 +1,9 @@
-import { Fragment, useCallback, useEffect, useRef, useState } from 'react'
+import { Fragment, useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import { PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
 import { useCurrentUser } from '../../auth/AuthGate.tsx'
 import { logout } from '../../auth/session'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
+import { ArrowLeft } from '../../icons'
 import { Button, ButtonLink } from '../../shared-ui/Button'
 import { ChipToggle } from '../../shared-ui/Chip'
 import { EmptyState } from '../../shared-ui/EmptyState'
@@ -28,6 +29,7 @@ const batches = {
   returned: { title: '退回修改', description: '查看已退回、等待修正的试卷。' },
 } as const
 type Batch = keyof typeof batches
+type ListView = 'home' | 'all' | Batch
 type Tab = 'screen' | 'pdf' | 'history'
 const tabs: Record<Tab, string> = { screen: '卷面', pdf: 'PDF', history: '改动摘要' }
 const pageSize = 24
@@ -35,6 +37,24 @@ const emptyQuestionGroups = new Map()
 const goHome = () => { window.location.href = '/' }
 const noDraft = () => {}
 const emptyFilters = { year: '', sourceType: '', region: '', status: '', coverage: '' }
+type ListPosition = { view: ListView; query: string; filters: typeof emptyFilters; page: number; top: number; tableLeft: number }
+type PaperRoute = { paperId: string; revisionId: string | null }
+
+function readPaperRoute(): PaperRoute | null {
+  const params = new URLSearchParams(window.location.search)
+  const paperId = params.get('paper')
+  return paperId ? { paperId, revisionId: params.get('rev') } : null
+}
+
+function writePaperRoute(route: PaperRoute | null, state: object, method: 'pushState' | 'replaceState') {
+  const url = new URL(window.location.href)
+  if (route) url.searchParams.set('paper', route.paperId)
+  else url.searchParams.delete('paper')
+  if (route?.revisionId) url.searchParams.set('rev', route.revisionId)
+  else url.searchParams.delete('rev')
+  window.history[method](state, '', url)
+}
+
 const reviewState = (paper: ReviewPaper) => paper.promotionState || paper.state
 const stateName = (state: string) => stateLabels[state] || '未知状态'
 const display = (value: string | number) => value === 'unknown' ? '未知' : value
@@ -66,12 +86,15 @@ export function OpsReviewPage() {
 }
 
 function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
+  const [route, setRoute] = useState(readPaperRoute)
+  const [initialList] = useState<ListPosition | undefined>(() => window.history.state?.opsReviewList)
   const [papers, setPapers] = useState<ReviewPaper[]>([])
-  const [view, setView] = useState<'home' | 'all' | Batch>('home')
-  const [query, setQuery] = useState('')
-  const [filters, setFilters] = useState(emptyFilters)
-  const [page, setPage] = useState(0)
+  const [view, setView] = useState<ListView>(initialList?.view ?? (route ? 'all' : 'home'))
+  const [query, setQuery] = useState(initialList?.query ?? '')
+  const [filters, setFilters] = useState(initialList?.filters ?? emptyFilters)
+  const [page, setPage] = useState(initialList?.page ?? 0)
   const [pinned, setPinned] = useState<ReviewPaper | null>(null)
+  const [routeError, setRouteError] = useState('')
   const [readyScreenKey, setReadyScreenKey] = useState<string | null>(null)
   const [tab, setTab] = useState<Tab>('screen')
   const [loading, setLoading] = useState(true)
@@ -85,7 +108,8 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
   const drafts = useRef(new Map<string, string>())
   const uncertain = useRef(new Set<string>())
   const writing = useRef(false)
-  const preview = useRef<HTMLElement>(null)
+  const table = useRef<HTMLDivElement>(null)
+  const restoreList = useRef(route ? undefined : initialList)
 
   const load = useCallback(async (signal?: AbortSignal) => {
     setFresh(false)
@@ -126,12 +150,6 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
     setQuery('')
     setPage(0)
     setFilters({ ...emptyFilters, sourceType })
-  }
-
-  function closePreview() {
-    setPinned(null)
-    setReadyScreenKey(null)
-    setFeedbackKey(null)
   }
 
   async function mutate(paper: ReviewPaper, url: string, body: object, success: string, method?: 'PATCH') {
@@ -176,10 +194,10 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
   const pageCount = Math.max(1, Math.ceil(ordered.length / pageSize))
   const pageIndex = Math.min(page, pageCount - 1)
   const pagePapers = ordered.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
-  const latest = pinned && papers.find(paper => paper.paperId === pinned.paperId)
-  const sameRevision = latest && pinned && reviewKey(latest) === reviewKey(pinned)
-  const selected = sameRevision ? latest : pinned
-  const selectedId = selected?.paperId
+  const latest = route && papers.find(paper => paper.paperId === route.paperId)
+  const pinnedRoute = pinned && route?.paperId === pinned.paperId && route.revisionId === pinned.latestRevisionId ? pinned : null
+  const sameRevision = latest && pinnedRoute && reviewKey(latest) === reviewKey(pinnedRoute)
+  const selected = sameRevision ? latest : pinnedRoute
   const selectedKey = selected ? reviewKey(selected) : null
   const canWrite = Boolean(selected && sameRevision && readyScreenKey === selectedKey && tab === 'screen'
     && fresh && !busy && !selected.promotionState && !uncertain.current.has(selected.paperId))
@@ -189,25 +207,107 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
   const selectedBlock = publicationBlock?.key === selectedKey ? publicationBlock?.error : undefined
   const markStale = useCallback(() => setFresh(false), [])
 
-  useEffect(() => {
-    if (selectedKey && window.matchMedia('(max-width: 900px)').matches) {
-      preview.current?.scrollIntoView({ block: 'start' })
+  useLayoutEffect(() => {
+    const previous = window.history.scrollRestoration
+    window.history.scrollRestoration = 'manual'
+    const onPop = (event: PopStateEvent) => {
+      const next = readPaperRoute()
+      setRoute(next)
+      setTab('screen')
+      setReadyScreenKey(null)
+      setFeedbackKey(null)
+      setRouteError('')
+      if (next) {
+        window.scrollTo(0, 0)
+      } else {
+        const saved: ListPosition | undefined = event.state?.opsReviewList
+        if (saved) {
+          setView(saved.view)
+          setQuery(saved.query)
+          setFilters(saved.filters)
+          setPage(saved.page)
+          restoreList.current = saved
+        }
+      }
     }
-  }, [selectedKey])
+    window.addEventListener('popstate', onPop)
+    return () => {
+      window.removeEventListener('popstate', onPop)
+      window.history.scrollRestoration = previous
+    }
+  }, [])
 
-  function select(paper: ReviewPaper) {
-    if (paper.paperId === selectedId) {
-      changeTab('screen')
+  useLayoutEffect(() => {
+    if (route || loading || !restoreList.current) return
+    window.scrollTo(0, restoreList.current.top)
+    if (table.current) table.current.scrollLeft = restoreList.current.tableLeft
+    restoreList.current = undefined
+  }, [route, loading])
+
+  useEffect(() => {
+    if (!route || pinnedRoute || loading || !fresh) return
+    setRouteError('')
+    if (!latest) {
+      setRouteError('找不到这套待审试卷。请返回列表或刷新状态。')
       return
     }
-    showRevision(paper)
+    if (!route.revisionId || route.revisionId === latest.latestRevisionId) {
+      if (!route.revisionId) {
+        const exact = { paperId: latest.paperId, revisionId: latest.latestRevisionId }
+        writePaperRoute(exact, window.history.state, 'replaceState')
+        setRoute(exact)
+      }
+      setPinned(latest)
+      return
+    }
+    const controller = new AbortController()
+    void request<ReviewDetail>(endpoint(latest), { signal: controller.signal }).then(detail => {
+      if (controller.signal.aborted) return
+      const revision = detail.paperId === route.paperId && detail.revisions.find(item =>
+        item.id === route.revisionId && item.reviewKind === 'candidate' && item.state !== 'uploading')
+      if (!revision) throw new Error('找不到链接中的审卷版本。')
+      setPinned({
+        ...latest, paperName: detail.paperName, latestRevisionId: revision.id, revisionNumber: revision.revisionNumber,
+        state: revision.state, bundleDigest: revision.bundleDigest, rendererBuildId: revision.rendererBuildId,
+        promotionState: null, hasEarlierPublication: 'unknown', hasTeachingAnalyses: false,
+        hasMediaCandidates: false, unresolvedCount: 0,
+      })
+    }).catch(failure => {
+      if (!controller.signal.aborted) setRouteError(failure.message)
+    })
+    return () => controller.abort()
+  }, [route, latest, pinnedRoute, loading, fresh])
+
+  function select(paper: ReviewPaper) {
+    const opsReviewList: ListPosition = { view, query, filters, page: pageIndex, top: window.scrollY, tableLeft: table.current?.scrollLeft ?? 0 }
+    const state = { ...window.history.state, opsReviewList }
+    window.history.replaceState(state, '')
+    showRevision(paper, 'pushState', { ...state, opsReviewFromList: true })
   }
 
-  function showRevision(paper: ReviewPaper) {
+  function showRevision(paper: ReviewPaper, method: 'pushState' | 'replaceState', state = window.history.state) {
+    const next = { paperId: paper.paperId, revisionId: paper.latestRevisionId }
+    writePaperRoute(next, state, method)
+    setRoute(next)
     setPinned(paper)
     setReadyScreenKey(null)
     setTab('screen')
     setFeedbackKey(null)
+    setRouteError('')
+    window.scrollTo(0, 0)
+  }
+
+  function returnToList() {
+    if (window.history.state?.opsReviewFromList) {
+      window.history.back()
+      return
+    }
+    writePaperRoute(null, window.history.state, 'replaceState')
+    setRoute(null)
+    setReadyScreenKey(null)
+    setFeedbackKey(null)
+    setRouteError('')
+    window.scrollTo(0, 0)
   }
 
   function changeTab(next: Tab) {
@@ -228,6 +328,79 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
   const search = <SearchField tier="compact" label="搜索试卷" placeholder="搜索卷名或试卷 ID" submitLabel="搜索试卷"
     value={query} onValueChange={value => { setQuery(value); setPage(0) }}
     onClear={() => { setQuery(''); setPage(0) }} onSubmit={event => event.preventDefault()} />
+
+  function renderToolbar(lectureToggle?: ReactNode) {
+    return <header className="ops-review-toolbar">
+      <div className="ops-review-toolbar-row">
+        <Button icon={<ArrowLeft size={16} aria-hidden="true" />} onClick={returnToList}>返回列表</Button>
+        <div className="ops-review-paper-title">
+          <h1>{selected?.paperName ?? '试卷审核'}</h1>
+          {selected && <p>R{selected.revisionNumber} · {stateName(reviewState(selected))}
+            {selected.hasEarlierPublication === 'unknown' && ' · 发布记录未知'}
+          </p>}
+        </div>
+        {selected && <nav className="ops-review-actions" aria-label="预览内容">
+          {(Object.keys(tabs) as Tab[]).map(key => <ChipToggle key={key} pressed={key === tab}
+            onClick={() => changeTab(key)}>{tabs[key]}</ChipToggle>)}
+          {lectureToggle}
+        </nav>}
+        <div className="ops-review-actions">
+          <Button onClick={() => void load()} disabled={busy || loading}>刷新状态</Button>
+          {selected?.promotionState === 'published' ? <ButtonLink href={`/?view=paper-browse&paperId=${encodeURIComponent(selected.paperId)}`}>
+            查看已发布
+          </ButtonLink> : selected && <>
+            <Button disabled={!canWrite && !(sameRevision && selected.unresolvedCount > 0)}
+              onClick={() => setFeedbackKey(feedbackKey === selectedKey ? null : selectedKey)}
+              aria-expanded={feedbackKey === selectedKey}>{selected.unresolvedCount ? '查看反馈' : '退回修改'}</Button>
+            <Button tone="solid" disabled={!canWrite || selected.unresolvedCount > 0
+              || !['awaiting_review', 'changes_requested', 'approved'].includes(selected.state)}
+              onClick={() => void mutate(selected, `${endpoint(selected)}/revisions/${encodeURIComponent(selected.latestRevisionId)}/publish`,
+                { intent: 'publish', bundleDigest: selected.bundleDigest, rendererBuildId: selected.rendererBuildId },
+                '发布请求已处理，请以列表中的状态为准')}>发布到题库</Button>
+          </>}
+        </div>
+      </div>
+      {error && <Notice kind="error">{error}</Notice>}
+      {routeError && <Notice kind="error">{routeError}</Notice>}
+      {selected && latest && !sameRevision && <Notice kind="info" action={{
+        label: '切换查看', onClick: () => showRevision(latest, 'replaceState'),
+      }}>{`有新版本 R${latest.revisionNumber}`}</Notice>}
+      {selected && <>
+        {!selected.promotionState && sameRevision && <small>发布即认可并公开这一版{selected.hasTeachingAnalyses ? '，并认可附带讲解为精选官方参考' : ''}。</small>}
+        {selected.hasMediaCandidates && <ButtonLink href="/ops/?view=review">到旧审卷页核对候选图</ButtonLink>}
+        {selected.promotionState === 'publishing' && <Notice kind="waiting">服务器正在发布，请刷新查看状态。</Notice>}
+        {selected.promotionState === 'failed' && <Notice kind="error">请在 Amp 核实失败原因，保留原发布记录。</Notice>}
+        {selectedBlock && <>
+          <Notice kind="error">{selectedBlock.message}</Notice>
+          {selectedBlock.compatibility?.differences?.length ? <ul>
+            {selectedBlock.compatibility.differences.map(pointer => <li key={pointer}>{pointer}</li>)}
+          </ul> : null}
+          {selectedBlock.compatibility?.differencesTruncated && <p>差异较多，仅显示部分位置。</p>}
+        </>}
+        {sameRevision && selectedKey && feedbackKey === selectedKey && <ReviewFeedback key={`${selectedKey}:${listVersion}`} paper={selected}
+          disabled={!canWrite}
+          draft={drafts.current.get(selectedKey) ?? ''} onDraft={value => drafts.current.set(selectedKey, value)}
+          onCancel={() => setFeedbackKey(null)} onStale={markStale}
+          mutate={(url, body, success, method) => void mutate(selected, url, body, success, method)} />}
+      </>}
+    </header>
+  }
+
+  if (route) return <main className="ops-review">
+    {selected && tab === 'screen' ? <PaperBrowsePage key={selectedKey}
+      embeddedReview renderEmbeddedToolbar={renderToolbar}
+      paperId={selected.paperId} reviewRevision={selected.latestRevisionId} onEmbeddedScreenReady={onScreenReady}
+      questionGroupById={emptyQuestionGroups} onAddGroupsToBasket={async () => ({ kind: 'none' })}
+      currentDraftPaperId={null} currentDraftGroupCount={0} onOpenDraftPaperWorkbench={noDraft}
+      onBackToWorkbench={returnToList} shellNav={shellNav}
+    /> : <>
+      {renderToolbar()}
+      {selected ? tab === 'pdf' ? <ReviewPdf key={selectedKey} paper={selected} />
+        : <ReviewHistory key={`${selectedKey}:${listVersion}`} paper={selected} />
+        : !error && !routeError && <Skeleton height={112} />}
+    </>}
+    <Toast message={notice} kind="info" duration={6000} onClose={() => setNotice(null)} />
+  </main>
 
   return <div className="ops-review">
     <AppTopbar {...shellNav} pageTitle="试卷审核" onBack={goHome} actionsSlot={<div role="group" aria-label="试卷审核">
@@ -272,100 +445,43 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
           {filter('coverage', '讲解', sectionKeys.flatMap(section => (Object.keys(coverageLabels) as Coverage[])
             .map((coverage): [string, string] => [`${section}/${coverage}`, `${sections[section]} · ${coverageLabels[coverage]}`])))}
         </Surface>}
-        <div className={`ops-review-columns${selected ? ' ops-review-columns--preview' : ''}`}>
-          <section className="ops-review-results" aria-label="试卷列表">
-            <p className="ops-review-count">{visible.length} 套试卷</p>
-            {view !== 'all' && search}
-            {pagePapers.length === 0 ? <EmptyState primitive="paper">暂无符合条件的试卷</EmptyState> : view === 'all' ? (
-              <Surface variant="board" padding="none" className="ops-review-table">
-                <table>
-                  <thead><tr>
-                    <th scope="col">试卷</th><th scope="col">年份</th><th scope="col">地区</th><th scope="col">类型</th>
-                    {sectionKeys.map(section => <th key={section} scope="col">{sections[section]}</th>)}
-                    <th scope="col">未解决</th>
-                  </tr></thead>
-                  {Array.from(groupByState(pagePapers), ([state, rows]) => <tbody key={state}>
-                    <tr className="ops-review-status"><th scope="rowgroup" colSpan={11}>{stateName(state)} · {grouped.get(state)?.length} 套</th></tr>
-                    {rows.map(paper => <tr key={paper.paperId} data-selected={selectedId === paper.paperId}
-                      onClick={() => select(paper)}>
-                      <td><button type="button" aria-pressed={selectedId === paper.paperId} onClick={event => {
-                        event.stopPropagation(); select(paper)
-                      }}>{paper.paperName}</button></td>
-                      <td>{display(paper.year)}</td><td>{display(paper.region)}</td><td>{display(paper.sourceType)}</td>
-                      {sectionKeys.map(section => <td key={section}>{coverageLabels[paper.analysisCoverage[section]]}</td>)}
-                      <td>{paper.unresolvedCount}</td>
-                    </tr>)}
-                  </tbody>)}
-                </table>
-              </Surface>
-            ) : <RowList aria-label={batches[view].title}>
-              {pagePapers.map(paper => <Row key={paper.paperId} data-selected={selectedId === paper.paperId}
-                action={{ kind: 'button', label: paper.paperName, onClick: () => select(paper) }}>
-                <div><strong>{paper.paperName}</strong><small>{display(paper.year)} · {display(paper.region)} · {display(paper.sourceType)}</small></div>
-              </Row>)}
-            </RowList>}
-            {pageCount > 1 && <nav className="ops-review-pagination" aria-label="试卷分页">
-              <Button disabled={pageIndex === 0} onClick={() => setPage(pageIndex - 1)}>上一页</Button>
-              <span>{pageIndex + 1} / {pageCount}</span>
-              <Button disabled={pageIndex + 1 >= pageCount} onClick={() => setPage(pageIndex + 1)}>下一页</Button>
-            </nav>}
-          </section>
-          {selected && <Surface ref={preview} variant="board" padding="none" as="section" className="ops-review-preview" aria-label="试卷预览">
-            <header className="ops-review-preview-head">
-              <div className="ops-review-heading"><h2>{selected.paperName}</h2>
-                  <Button onClick={closePreview}>关闭预览</Button></div>
-              <p>R{selected.revisionNumber} · {stateName(reviewState(selected))}
-                {selected.hasEarlierPublication === 'unknown' && ' · 发布记录未知'}
-              </p>
-              {latest && !sameRevision && <Notice kind="info" action={{
-                label: '切换查看', onClick: () => showRevision(latest),
-              }}>{`有新版本 R${latest.revisionNumber}`}</Notice>}
-              <div className="ops-review-actions">
-                {selected.promotionState === 'published' ? <ButtonLink href={`/?view=paper-browse&paperId=${encodeURIComponent(selected.paperId)}`}>
-                  查看已发布
-                </ButtonLink> : <>
-                  <Button tone="solid" disabled={!canWrite || selected.unresolvedCount > 0
-                    || !['awaiting_review', 'changes_requested', 'approved'].includes(selected.state)}
-                    onClick={() => void mutate(selected, `${endpoint(selected)}/revisions/${encodeURIComponent(selected.latestRevisionId)}/publish`,
-                      { intent: 'publish', bundleDigest: selected.bundleDigest, rendererBuildId: selected.rendererBuildId },
-                      '发布请求已处理，请以列表中的状态为准')}>发布到题库</Button>
-                  <Button disabled={!canWrite && !(sameRevision && selected.unresolvedCount > 0)}
-                    onClick={() => setFeedbackKey(feedbackKey === selectedKey ? null : reviewKey(selected))}
-                    aria-expanded={feedbackKey === selectedKey}>{selected.unresolvedCount ? '查看反馈' : '退回修改'}</Button>
-                  {selected.hasMediaCandidates && <ButtonLink href="/ops/?view=review">到旧审卷页核对候选图</ButtonLink>}
-                </>}
-              </div>
-              {!selected.promotionState && <small>发布即认可并公开这一版{selected.hasTeachingAnalyses ? '，并认可附带讲解为精选官方参考' : ''}。</small>}
-              {selected.promotionState === 'publishing' && <Notice kind="waiting">服务器正在发布，请刷新查看状态。</Notice>}
-              {selected.promotionState === 'failed' && <Notice kind="error">请在 Amp 核实失败原因，保留原发布记录。</Notice>}
-              {selectedBlock && <>
-                <Notice kind="error">{selectedBlock.message}</Notice>
-                {selectedBlock.compatibility?.differences?.length ? <ul>
-                  {selectedBlock.compatibility.differences.map(pointer => <li key={pointer}>{pointer}</li>)}
-                </ul> : null}
-                {selectedBlock.compatibility?.differencesTruncated && <p>差异较多，仅显示部分位置。</p>}
-              </>}
-              {sameRevision && selectedKey && feedbackKey === selectedKey && <ReviewFeedback key={`${selectedKey}:${listVersion}`} paper={selected}
-                disabled={!canWrite}
-                draft={drafts.current.get(selectedKey) ?? ''} onDraft={value => drafts.current.set(selectedKey, value)}
-                onCancel={() => setFeedbackKey(null)} onStale={markStale}
-                mutate={(url, body, success, method) => void mutate(selected, url, body, success, method)} />}
-              <nav aria-label="预览内容">
-                {(Object.keys(tabs) as Tab[]).map(key => <ChipToggle key={key} pressed={key === tab}
-                  onClick={() => changeTab(key)}>{tabs[key]}</ChipToggle>)}
-              </nav>
-            </header>
-            <div className="ops-review-preview-body" key={`${selectedKey}:${tab}`}>
-              {tab === 'screen' ? <PaperBrowsePage
-                embeddedReview paperId={selected.paperId} reviewRevision={selected.latestRevisionId}
-                onEmbeddedScreenReady={onScreenReady}
-                questionGroupById={emptyQuestionGroups} onAddGroupsToBasket={async () => ({ kind: 'none' })}
-                currentDraftPaperId={null} currentDraftGroupCount={0} onOpenDraftPaperWorkbench={noDraft}
-                onBackToWorkbench={closePreview} shellNav={shellNav}
-              /> : tab === 'pdf' ? <ReviewPdf paper={selected} /> : <ReviewHistory key={listVersion} paper={selected} />}
-            </div>
-          </Surface>}
-        </div>
+        <section className="ops-review-results" aria-label="试卷列表">
+          <p className="ops-review-count">{visible.length} 套试卷</p>
+          {view !== 'all' && search}
+          {pagePapers.length === 0 ? <EmptyState primitive="paper">暂无符合条件的试卷</EmptyState> : view === 'all' ? (
+            <Surface ref={table} variant="board" padding="none" className="ops-review-table">
+              <table>
+                <thead><tr>
+                  <th scope="col">试卷</th><th scope="col">年份</th><th scope="col">地区</th><th scope="col">类型</th>
+                  {sectionKeys.map(section => <th key={section} scope="col">{sections[section]}</th>)}
+                  <th scope="col">未解决</th>
+                </tr></thead>
+                {Array.from(groupByState(pagePapers), ([state, rows]) => <tbody key={state}>
+                  <tr className="ops-review-status"><th scope="rowgroup" colSpan={11}>{stateName(state)} · {grouped.get(state)?.length} 套</th></tr>
+                  {rows.map(paper => <tr key={paper.paperId}
+                    onClick={() => select(paper)}>
+                    <td><button type="button" onClick={event => {
+                      event.stopPropagation(); select(paper)
+                    }}>{paper.paperName}</button></td>
+                    <td>{display(paper.year)}</td><td>{display(paper.region)}</td><td>{display(paper.sourceType)}</td>
+                    {sectionKeys.map(section => <td key={section}>{coverageLabels[paper.analysisCoverage[section]]}</td>)}
+                    <td>{paper.unresolvedCount}</td>
+                  </tr>)}
+                </tbody>)}
+              </table>
+            </Surface>
+          ) : <RowList aria-label={batches[view].title}>
+            {pagePapers.map(paper => <Row key={paper.paperId}
+              action={{ kind: 'button', label: paper.paperName, onClick: () => select(paper) }}>
+              <div><strong>{paper.paperName}</strong><small>{display(paper.year)} · {display(paper.region)} · {display(paper.sourceType)}</small></div>
+            </Row>)}
+          </RowList>}
+          {pageCount > 1 && <nav className="ops-review-pagination" aria-label="试卷分页">
+            <Button disabled={pageIndex === 0} onClick={() => setPage(pageIndex - 1)}>上一页</Button>
+            <span>{pageIndex + 1} / {pageCount}</span>
+            <Button disabled={pageIndex + 1 >= pageCount} onClick={() => setPage(pageIndex + 1)}>下一页</Button>
+          </nav>}
+        </section>
       </>}
       <Toast message={notice} kind="info" duration={6000} onClose={() => setNotice(null)} />
     </main>

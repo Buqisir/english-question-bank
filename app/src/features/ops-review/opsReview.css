@@ -18,14 +18,14 @@
 .ops-review-heading > :is(h1, h2),
 .ops-review-batch > :is(h2, p),
 .ops-review-results > p,
-.ops-review-preview-head > p,
+.ops-review-paper-title > :is(h1, p),
 .ops-review-feedback > p,
 .ops-review-history > :is(h3, p) {
   margin: 0;
 }
 
 .ops-review-heading h1,
-.ops-review-heading h2,
+.ops-review-paper-title h1,
 .ops-review-batch h2,
 .ops-review-history h3 {
   font-size: var(--eqb-font-size-sm);
@@ -42,7 +42,6 @@
 .ops-review-actions,
 .ops-review-filters,
 .ops-review-pagination,
-.ops-review-preview nav[aria-label="预览内容"],
 .ops-review .topbar-actions-page [role="group"] {
   display: flex;
   flex-wrap: wrap;
@@ -51,7 +50,7 @@
 }
 
 .ops-review-heading h1,
-.ops-review-heading h2 {
+.ops-review-paper-title h1 {
   flex: 1 1 auto;
   overflow-wrap: anywhere;
 }
@@ -86,10 +85,10 @@
 
 .ops-review-batch p,
 .ops-review-count,
-.ops-review-preview-head > p,
+.ops-review-paper-title p,
 .ops-review-batch small,
 .ops-review-results small,
-.ops-review-preview-head small {
+.ops-review-toolbar small {
   color: var(--eqb-color-text-muted);
   font-size: var(--eqb-font-size-xs);
 }
@@ -104,7 +103,6 @@
 }
 .ops-review .eqb-search-submit:not(:disabled) { color: var(--eqb-color-text-muted); }
 
-.ops-review-columns,
 .ops-review-results {
   display: grid;
   align-items: start;
@@ -112,24 +110,10 @@
   gap: var(--eqb-space-3);
 }
 
-.ops-review-columns--preview {
-  grid-template-columns: minmax(300px, 1fr) minmax(0, 2fr);
-  gap: var(--eqb-space-4);
-}
-
 .ops-review-results .eqb-row div { min-width: 0; overflow-wrap: anywhere; }
 .ops-review-results .eqb-row small { display: block; }
 .ops-review-results .eqb-row strong { font-weight: 500; }
-.ops-review-results .eqb-row[data-selected="true"] {
-  /* Keep the selected paper marked when the shared hover highlight moves. */
-  background: var(--eqb-color-desk);
-}
-
-.ops-review-table {
-  /* The board normally clips its children at the rounded edge. Scroll only
-     the table when its columns share the workspace with the preview. */
-  overflow: auto;
-}
+.ops-review-table { overflow: auto; }
 
 .ops-review-table table {
   width: 100%;
@@ -149,9 +133,8 @@
 .ops-review-table td:first-child { width: 42%; }
 .ops-review-table thead,
 .ops-review-status { background: var(--eqb-color-bg); }
-.ops-review-table tr[data-selected] { cursor: pointer; }
-.ops-review-table tr[data-selected]:is(:hover, :focus-within),
-.ops-review-table tr[data-selected="true"] { background: var(--eqb-color-desk); }
+.ops-review-table td { cursor: pointer; }
+.ops-review-table tbody tr:has(td):is(:hover, :focus-within) { background: var(--eqb-color-desk); }
 
 .ops-review-table td button {
   border: 0;
@@ -170,13 +153,33 @@
 }
 
 .ops-review-pagination { justify-content: center; }
-.ops-review-preview {
-  min-width: 0;
-  position: sticky;
-  top: var(--eqb-space-4);
+.ops-review-toolbar {
+  display: grid;
+  gap: var(--eqb-space-2);
+  padding: var(--eqb-space-3) var(--eqb-space-5);
+  border-bottom: 1px solid var(--eqb-color-border);
+  background: var(--desk-surface);
 }
 
-.ops-review-preview-head,
+.ops-review-toolbar-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--eqb-space-2) var(--eqb-space-4);
+}
+
+.ops-review-paper-title {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+
+.ops-review-toolbar > .eqb-button { justify-self: start; }
+
+@media (max-width: 1439.98px) {
+  /* Keep the active toggle above PaperBrowsePage's narrow-screen drawer. */
+  .ops-review-toolbar .paper-browse-lecture-toggle[aria-expanded="true"] { z-index: 31; }
+}
+
 .ops-review-feedback,
 .ops-review-pdf,
 .ops-review-history {
@@ -207,53 +210,8 @@
   border: 1px solid var(--eqb-color-border);
 }
 
-.ops-review-preview-body {
-  max-height: 68vh;
-  overflow: auto;
-  border-top: 1px solid var(--eqb-color-border-subtle);
-}
-
-/* Keep the lecture panel inside the preview so the paper stays interactive. */
-.ops-review-preview-body .paper-browse-page { min-height: 0; }
-.ops-review-preview-body .paper-browse-embedded-actions {
-  padding: var(--eqb-space-2) var(--eqb-space-4) 0;
-}
-.ops-review-preview-body .paper-browse-shell {
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--eqb-space-3);
-  padding: var(--eqb-space-4);
-}
-.ops-review-preview-body .paper-browse-shell--lecture-open {
-  grid-template-columns: minmax(0, 1fr) min(360px, 48%);
-}
-.ops-review-preview-body .paper-browse-shell .paper-browse-content {
-  max-height: 58vh;
-  overflow: auto;
-  transform: none;
-}
-.ops-review-preview-body .paper-browse-zoom {
-  min-width: min(560px, calc(100vw - 2 * var(--eqb-space-5) - 2 * var(--eqb-space-4)));
-}
-.ops-review-preview-body .paper-browse-lecture-panel {
-  position: static;
-  width: auto;
-  height: auto;
-  max-height: 58vh;
-  padding: var(--eqb-space-3);
-  overflow: auto;
-  border-radius: var(--eqb-radius-control);
-  box-shadow: none;
-  z-index: auto;
-}
-.ops-review-preview-body .paper-browse-lecture-backdrop { display: none; }
-
-@media (max-width: 900px) {
-  .ops-review-columns--preview { grid-template-columns: minmax(0, 1fr); }
-  .ops-review-preview { grid-row: 1; position: static; }
-}
-
 @media (max-width: 640px) {
   .ops-review-batches { grid-template-columns: minmax(0, 1fr); }
   .ops-review-batch--screen { grid-row: auto; }
-  .ops-review-main { padding: var(--eqb-space-3); }
+  .ops-review-main, .ops-review-toolbar { padding: var(--eqb-space-3); }
 }

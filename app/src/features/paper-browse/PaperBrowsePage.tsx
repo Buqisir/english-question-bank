@@ -392,6 +392,7 @@ export type PaperBrowsePageProps = {
    * reviewer API while keeping this exact Screen renderer. */
   reviewRevision?: string | null
   embeddedReview?: boolean
+  renderEmbeddedToolbar?: (lectureToggle?: ReactNode) => ReactNode
   onEmbeddedScreenReady?: (ready: boolean) => void
   focusGroupId?: string | null
   /** flow-panel 刀 3: 入口带态——预选的题（asset 加载完成后走
@@ -881,6 +882,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     paperId,
     reviewRevision,
     embeddedReview,
+    renderEmbeddedToolbar,
     onEmbeddedScreenReady,
     focusGroupId,
     questionId,
@@ -2174,7 +2176,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     return parts
   }, [asset, canonicalConsumption, writingSkipIndices])
 
-  const dockedLecture = lectureOpen && viewportDocked && !embeddedReview
+  const dockedLecture = lectureOpen && viewportDocked
 
   const railGroupAnchors = useMemo(() => {
     const anchors = new Set<string>()
@@ -4374,8 +4376,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   if (loading) {
     return (
       <div className="paper-browse-page">
-        {!embeddedReview && <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />}
-        {embeddedReview ? <Skeleton height={112} /> : <PaperBrowseOpeningSkeleton showSkeleton={openingPhase === 'waiting'} />}
+        {embeddedReview ? renderEmbeddedToolbar?.()
+          : <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />}
+        <PaperBrowseOpeningSkeleton showSkeleton={openingPhase === 'waiting'} />
       </div>
     )
   }
@@ -4384,14 +4387,15 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     const ErrorSurface = embeddedReview ? 'div' : 'main'
     return (
       <div className="paper-browse-page">
-        {!embeddedReview && <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />}
+        {embeddedReview ? renderEmbeddedToolbar?.()
+          : <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />}
         <ErrorSurface className="paper-browse-error">
           {/* 共用提示行：哪里没成功、东西还在不在（自己的话），后面照登原话（No-Literal-Fallback，
               原来没原话时补的「这份卷可能还没上线或已被移除…」去掉），行尾「返回找题」。 */}
           <Notice
             kind="error"
             detail={error || null}
-            action={{ label: embeddedReview ? '关闭预览' : '返回找题', icon: <ArrowLeft size={16} aria-hidden="true" />, onClick: onBackToWorkbench }}
+            action={{ label: embeddedReview ? '返回列表' : '返回找题', icon: <ArrowLeft size={16} aria-hidden="true" />, onClick: onBackToWorkbench }}
           >
             整卷预览没打开，题库和草稿卷都没动
           </Notice>
@@ -4425,7 +4429,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   )
   return (
     <div className={`paper-browse-page${reviewRevision || isOwnerView ? ' paper-browse-page--review' : ''}`}>
-      {embeddedReview && <div className="paper-browse-embedded-actions">{lectureToggle}</div>}
+      {embeddedReview && (renderEmbeddedToolbar ? renderEmbeddedToolbar(lectureToggle) : lectureToggle)}
       {!embeddedReview && <AppTopbar
         {...shellNav}
         pageTitle={displayTitle}
@@ -4455,7 +4459,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         aria-labelledby="paper-browse-title"
       >
         <h1 id="paper-browse-title" className="visually-hidden">{displayTitle}</h1>
-        {!embeddedReview && <nav
+        <nav
           className={`paper-browse-rail${
             railVerticallyCentered && !reviewRevision ? ' paper-browse-rail--centered' : ''
           }`}
@@ -4463,7 +4467,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           aria-label="目录"
         >
           {renderQuietRail(dockedLecture)}
-        </nav>}
+        </nav>
         {paperSelection.overlay}
         <div className="paper-browse-content" ref={scrollerRef} style={paperBrowseContentMergedStyle}>
           <div className="paper-browse-zoom">
