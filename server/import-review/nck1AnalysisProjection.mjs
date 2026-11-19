@@ -384,15 +384,25 @@ export function buildNck1AnalysisProjection({
     .sort((a, b) => a.slotId.localeCompare(b.slotId))
   const stagedFiles = NCK1_STAGED_ANALYSIS_FILES.filter(({ key }) =>
     !key.startsWith('reading-') || readingSources.some(({ slotId }) => slotId === key.replace('-', '.')))
-  const present = NCK1_STAGED_ANALYSIS_FILES.filter(({ path: relativePath }) =>
+  const eligibleFiles = sealed || !allowPartialAnalyses ? stagedFiles : NCK1_STAGED_ANALYSIS_FILES
+  const present = eligibleFiles.filter(({ path: relativePath }) =>
     existsSync(path.join(rootDir, relativePath)))
+  const presentKeys = new Set(present.map(({ key }) => key))
+  const groupsBySlot = new Map(materialization.groups.map((group) => [group.slotId, group]))
+  const hasReading = present.some(({ key }) => key.startsWith('reading-'))
+  const writingKeys = ['application', 'continuation']
+  const hasWriting = writingKeys.some(key => presentKeys.has(key))
   const listeningPresent = existsSync(path.join(rootDir, NCK1_LISTENING_STAGED_ANALYSIS.path))
   if (!present.length && !required && !listeningPresent
     && analysisProfile !== LISTENING_ANALYSIS_PROFILE) return null
-  if ((!present.length && required && !listeningPresent) || (!allowPartialAnalyses && present.length !== stagedFiles.length)) {
-    const missing = stagedFiles
-      .filter(({ path: relativePath }) => !existsSync(path.join(rootDir, relativePath)))
-      .map(({ path: relativePath }) => relativePath)
+  const requireAll = !allowPartialAnalyses || (required && !present.length && !listeningPresent)
+  const missing = stagedFiles.filter(({ key }) => !presentKeys.has(key) && (
+    requireAll || (!sealed && (
+      (hasReading && key.startsWith('reading-')) ||
+      (hasWriting && writingKeys.includes(key) && groupsBySlot.has(`writing.${key}`))
+    ))
+  )).map(({ path: relativePath }) => relativePath)
+  if (missing.length) {
     fail(`Incomplete staged analyses; missing: ${missing.join(', ')}`, 'NCK1_ANALYSIS_INCOMPLETE')
   }
 
@@ -424,7 +434,6 @@ export function buildNck1AnalysisProjection({
     fail('Analysis projection requires all authoritative objective answers')
   }
 
-  const groupsBySlot = new Map(materialization.groups.map((group) => [group.slotId, group]))
   const getGroup = (slotId, order) => {
     const group = groupsBySlot.get(slotId)
     if (!group) fail(`Materialization is missing ${slotId}`)
@@ -533,8 +542,11 @@ export function buildNck1AnalysisProjection({
     fail(`Writing analysis schema invalid: ${formatSchemaErrors(validateWritingSchema.errors)}`)
   }
 
-  const expectedReadingIds = analyzedReadings.flatMap((group) => group.questions.map(({ id }) => id))
-  exactKeys(sidecars['reading-choice-analysis-v1.json']?.questions, expectedReadingIds, 'reading questions')
+  if (hasReading) {
+    const expectedReadingIds = (sealed ? analyzedReadings : readingGroups)
+      .flatMap((group) => group.questions.map(({ id }) => id))
+    exactKeys(sidecars['reading-choice-analysis-v1.json']?.questions, expectedReadingIds, 'reading questions')
+  }
 
   return {
     inputs: raw,

@@ -668,6 +668,7 @@ export function reviewBundleFilePathsForProjection(rootDir, projection) {
 function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
   reviewedListening = loadReviewedListening(rootDir, loaded, candidate),
   analysisValidated = false,
+  sealed = false,
 } = {}) {
   const { manifest, materialization } = loaded
   const playback = loaded.sourceInput.listeningAudio || loaded.analyzedPackage?.listeningAudio
@@ -691,6 +692,7 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
       paperAsset,
       required: !importProfile || loaded.config.withTeachingAnalyses === true,
       allowPartialAnalyses: true,
+      sealed,
       analysisProfile: LEGACY_NCK1_ANALYSIS_PROFILE,
       requireTeachingContent: Boolean(loaded.analyzedPackage) || loaded.config.withTeachingAnalyses === true,
     })
@@ -2042,6 +2044,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   let bundleFiles
   const inventory = () => bundleFiles ||= reviewBundleFilePathsFromSource(rootDir, loaded, imported.candidate, {
     reviewedListening,
+    sealed: Boolean(sealedListening),
     // Inventory historically requires analyses for legacy bundles even when
     // a Screen projection did not, and checks sourceAssetVersion 1. Reuse only
     // an equivalent (or stricter) analysis validation.

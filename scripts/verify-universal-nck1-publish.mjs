@@ -1756,10 +1756,13 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     assert.ok(Math.abs(afterDrag - secondsPerTrack * .6) < .1,
       `Pointer release commits one seek to ${secondsPerTrack * .6}s, got ${afterDrag}s`)
     await slider.press('Home')
+    await screenPage.waitForFunction(() => !document.querySelector('audio').seeking)
     await slider.press('Shift+ArrowRight')
+    await screenPage.waitForFunction(() => !document.querySelector('audio').seeking)
     assert.equal(await audio.evaluate(element => Math.round(element.currentTime)), recordingDuration,
       'Shift steps 15 seconds, clamped to the recording end')
     await slider.press('ArrowLeft')
+    await screenPage.waitForFunction(() => !document.querySelector('audio').seeking)
     assert.equal(await audio.evaluate(element => Math.round(element.currentTime)), recordingDuration - 5)
     const thirdMark = lecturePlayer.getByRole('button', { name: '跳到第 3 题', exact: true })
     await thirdMark.click()
