@@ -10,8 +10,7 @@ import { mapSourceEmphasisEdits } from '../../server/paper-canonical/sourceEmpha
 
 const at = (text, flag) => findSourceFlagTargets([{ before: text }], flag).flatMap(hit => hit.at)
 
-test('recording evidence allows inserting a missing sentence without editing existing sentences', () => {
-  const text = 'W: I like working with Gov. Smith. I climbed Mt. Everest.\nM: What else should I do?'
+function listeningInsertionFixture(text, afterSentence) {
   const transcript = [{ segmentId: 'listening-text-1', text }]
   const bytes = Buffer.from(JSON.stringify({ listening: { state: 'captured', transcript } }))
   const report = prepareSpellingReview(bytes)
@@ -19,20 +18,23 @@ test('recording evidence allows inserting a missing sentence without editing exi
   report.reviewedAt = '2026-11-19T00:00:00Z'
   report.targets[0].decision = 'unchanged'
   const audio = { sha256: `sha256:${'a'.repeat(64)}`, durationSeconds: 60 }
-  const evidence = { segmentId: 'listening-text-1', afterSentence: 'I climbed Mt. Everest.',
+  const evidence = { segmentId: 'listening-text-1', afterSentence,
     text: 'It is my favorite part of the day.', model: 'gpt-transcribe',
     audioSha256: audio.sha256, startSeconds: 20, endSeconds: 24, occurrence: { startSeconds: 10, endSeconds: 30 } }
   const withInsertion = insertion => Buffer.from(JSON.stringify({ ...report, listeningInsertions: [insertion] }))
   const apply = insertion => applySpellingReview(bytes, withInsertion(insertion), audio)
+  return { audio, evidence, withInsertion, apply }
+}
+
+test('recording evidence allows inserting missing sentences with the expected speakers', () => {
+  const { audio, evidence, withInsertion, apply } = listeningInsertionFixture(
+    'W: I agree. We should go.\nM: What else should I do?', 'We should go.')
 
   assert.equal(apply(evidence).listening.transcript[0].text,
-    'W: I like working with Gov. Smith. I climbed Mt. Everest. It is my favorite part of the day.\nM: What else should I do?')
-  assert.throws(() => apply({ ...evidence, before: 'I like working with Gov. Smith.' }), /listening insertion/)
-  assert.throws(() => apply({ ...evidence, afterSentence: 'I like working with Gov.' }), /one complete existing sentence/)
-  assert.throws(() => apply({ ...evidence, afterSentence: 'I climbed Mt.' }), /one complete existing sentence/)
-  assert.throws(() => apply({ ...evidence, afterSentence: 'I like working with Gov. Smith.', text: 'M:Why?' }), /speaker turns/)
-  assert.equal(apply({ ...evidence, text: 'M:Why?' }).listening.transcript[0].text,
-    'W: I like working with Gov. Smith. I climbed Mt. Everest.\nM:Why?\nM: What else should I do?')
+    'W: I agree. We should go. It is my favorite part of the day.\nM: What else should I do?')
+  assert.throws(() => apply({ ...evidence, before: 'I agree.' }), /listening insertion/)
+  assert.equal(apply({ ...evidence, text: 'M:Why? I am curious.' }).listening.transcript[0].text,
+    'W: I agree. We should go.\nM:Why? I am curious.\nM: What else should I do?')
   assert.throws(() => apply({ ...evidence, endSeconds: 31 }), /outside the reviewed occurrence/)
   const review = { subject: { playbackAudioSha256: audio.sha256 }, groups: [
     { segmentId: evidence.segmentId, decision: 'usable', occurrences: [evidence.occurrence] },
@@ -47,6 +49,20 @@ test('recording evidence allows inserting a missing sentence without editing exi
   }
   assert.throws(() => apply({ ...evidence, audioSha256: `sha256:${'b'.repeat(64)}` }), /playback hash/)
   assert.throws(() => apply({ ...evidence, endSeconds: 61 }), /audio interval/)
+})
+
+test('recording insertions reject ambiguous boundaries and changes to displayed sentences or speakers', () => {
+  for (const [source, afterSentence, text, error] of [
+    ['W: I met Capt. Smith.', 'I met Capt.', 'It snowed.', /sentence boundary/],
+    ['W: I met Gov. Smith.', 'I met Gov.', 'It snowed.', /sentence boundary/],
+    ['W: I climbed Mt. Everest.', 'I climbed Mt.', 'It snowed.', /sentence boundary/],
+    ['W: I agree. I will go.', 'I agree.', 'M:Why?', /expected sentences or speakers/],
+    ['W: I agree.\nM: I will go.', 'I agree.', 'M：Why?', /expected sentences or speakers/],
+    ['W: I agree', 'I agree', 'It snowed.', /expected sentences or speakers/],
+  ]) {
+    const { evidence, apply } = listeningInsertionFixture(source, afterSentence)
+    assert.throws(() => apply({ ...evidence, text }), error, `${source} + ${text}`)
+  }
 })
 
 test('uncertain source phrase survives an OCR line wrap', () => {

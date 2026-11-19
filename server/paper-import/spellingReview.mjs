@@ -198,10 +198,21 @@ export function verifyListeningInsertionOccurrences(reportBytes, readReview) {
   }
 }
 
-const speakerLabel = '(?:[A-Z][A-Za-z]*|[A-Z]\\d|Speaker \\d+)\\s*[:：]'
-const startsWithSpeaker = new RegExp(`^\\s*${speakerLabel}`, 'u')
-const beforeLabeledSentence = new RegExp(`^\\s*${speakerLabel}\\s*$`, 'u')
-const containsSpeaker = new RegExp(`(?:^|\\s)${speakerLabel}`, 'u')
+const speakerLabels = /(^|\s)([A-Z][A-Za-z]*|[A-Z]\d|Speaker \d+)\s*[:：][ \t]*/gu
+const sentenceAndSpeaker = ({ en, speaker }) => ({ en, speaker })
+
+function expectedInsertedSentences(segmentId, text, inheritedSpeaker) {
+  // Interpret the author's labels independently of what the page recognizes.
+  // Use known labels in this isolated parse so a misread label cannot pass.
+  const speakers = new Map()
+  const expectedText = text.replace(speakerLabels, (_, prefix, speaker) => {
+    const label = `Speaker ${speakers.size + 1}`
+    speakers.set(label, speaker)
+    return `${prefix}${label}: `
+  })
+  const [{ sentences }] = listeningSentenceTargets({ listening: { transcript: [{ segmentId, text: expectedText }] } })
+  return sentences.map(({ en, speaker }) => ({ en, speaker: speakers.get(speaker) ?? inheritedSpeaker }))
+}
 
 // Resolve the exact sentence against the existing reviewed transcript first.
 // Apply from right to left so every offset still addresses that transcript.
@@ -238,24 +249,36 @@ function insertListeningSentences(materialization, insertions, listeningAudio) {
     if (insertion.afterSentence !== null && anchors.length !== 1) {
       fail('listening insertion must match one complete existing sentence')
     }
-    const start = anchors[0]?.utf16End ?? 0
-    const next = sentences.find(sentence => sentence.utf16Start >= start)
-    const startsTurn = next && beforeLabeledSentence.test(segment.text.slice(start, next.utf16Start))
-    if (containsSpeaker.test(insertion.text) && !startsTurn && (next || segment.text.slice(start).trim())) {
-      fail('labeled listening insertion must preserve existing speaker turns')
-    }
+    const anchor = anchors[0]
+    const start = anchor?.utf16End ?? 0
+    const index = anchor ? sentences.indexOf(anchor) + 1 : 0
     if (!bySegment.has(segment)) bySegment.set(segment, new Map())
     const offsets = bySegment.get(segment)
     if (offsets.has(start)) fail('duplicate listening sentence insertion position')
-    offsets.set(start, { text: insertion.text, startsTurn })
+    offsets.set(start, { text: insertion.text, index,
+      added: expectedInsertedSentences(segment.segmentId, insertion.text, anchor?.speaker ?? null) })
   }
+  const expected = new Map([...targets.values()].map(({ material, sentences }) =>
+    [material, sentences.map(sentenceAndSpeaker)]))
   for (const [segment, offsets] of bySegment) {
-    for (const [start, { text, startsTurn }] of [...offsets].sort(([left], [right]) => right - left)) {
+    const sentences = expected.get(segment)
+    for (const [start, { text, index, added }] of [...offsets].sort(([left], [right]) => right - left)) {
       const before = segment.text.slice(0, start)
       const after = segment.text.slice(start)
-      const separator = startsWithSpeaker.test(text) ? '\n' : ' '
+      // A short capitalized word followed by a name on the same line can
+      // be an abbreviation even when the shared splitter reports a boundary.
+      if (!added.length || (/\b\p{Lu}\p{Ll}{1,4}\.$/u.test(before) && /^[ \t]+\p{Lu}\p{Ll}/u.test(after))) {
+        fail('listening insertion has no unambiguous sentence boundary')
+      }
+      const separator = text.search(speakerLabels) === 0 ? '\n' : ' '
       segment.text = before + (before && !/\s$/u.test(before) ? separator : '') + text
-        + (after && !/^\s/u.test(after) ? (startsTurn ? '\n' : ' ') : '') + after
+        + (after && !/^\s/u.test(after) ? ' ' : '') + after
+      sentences.splice(index, 0, ...added)
+    }
+  }
+  for (const { material, sentences } of listeningSentenceTargets(materialization)) {
+    if (digestJson(sentences.map(sentenceAndSpeaker)) !== digestJson(expected.get(material))) {
+      fail('listening insertion changes the expected sentences or speakers')
     }
   }
 }
