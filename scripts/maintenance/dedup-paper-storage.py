@@ -8,11 +8,12 @@ import os
 from pathlib import Path
 import re
 import stat
-from uuid import uuid4
 
 
 TEMP_PREFIXES = (".upload-", ".staging", ".candidate", ".owner-maintenance", ".sealed-publication-")
 TEMP_SUFFIX = re.compile(r"\.(?:upload-|blob-|reuse-)[0-9a-f-]+$|\.[0-9a-f-]+\.tmp$")
+DEDUP_SUFFIX = ".eqb-dedup-tmp"
+DEDUP_TEMP = re.compile(rf"^\..+{re.escape(DEDUP_SUFFIX)}$")
 
 
 def identity(info):
@@ -40,7 +41,7 @@ def hash_file(path, expected):
         return digest.digest()
 
 
-def files_by_size(root, device, skipped):
+def files_by_size(root, device, skipped, apply):
     sizes = defaultdict(list)
     mountinfo = Path("/proc/self/mountinfo")
     mounts = set()
@@ -62,6 +63,13 @@ def files_by_size(root, device, skipped):
                     skipped["symbolic link"] += 1
                 elif info.st_dev != device or str(path) in mounts or (name in children and path.is_mount()):
                     skipped["other mount"] += 1
+                elif stat.S_ISREG(info.st_mode) and DEDUP_TEMP.fullmatch(name):
+                    # A second name for this inode, including the final path, makes unlink safe.
+                    if apply and info.st_nlink > 1:
+                        print(f"Removing stale temporary link: {path}", flush=True)
+                        path.unlink()
+                    else:
+                        skipped["dedup temporary link"] += 1
                 elif name.startswith(TEMP_PREFIXES) or TEMP_SUFFIX.search(name) or name == "lost+found":
                     skipped["temporary or excluded path"] += 1
                 elif name in children:
@@ -81,7 +89,7 @@ def replace_with_link(source, source_info, path, info, digest):
     if (hash_file(source, source_info) != digest or hash_file(path, info) != digest
             or attributes(source) != attributes(path)):
         raise ValueError("file changed")
-    temporary = path.with_name(f".owner-maintenance-dedup-{uuid4().hex}")
+    temporary = path.with_name(f".{path.name}{DEDUP_SUFFIX}")
     os.link(source, temporary, follow_symlinks=False)
     try:
         current = path.lstat()
@@ -107,14 +115,18 @@ def main():
         parser.error("default paper storage filesystem is not mounted")
     skipped = Counter()
     merged = saved = 0
-    for candidates in files_by_size(root, root.stat().st_dev, skipped).values():
+    for candidates in files_by_size(root, root.stat().st_dev, skipped, args.apply).values():
         if len({info.st_ino for _, info in candidates}) < 2:
             skipped["no separate same-size inode"] += len(candidates)
             continue
         groups = defaultdict(list)
         hashes = {}
-        for path, info in candidates:
+        for path, scanned in candidates:
             try:
+                # An interrupted run may have left a link to this inode in another directory.
+                info = path.lstat()
+                if identity(info) != identity(scanned):
+                    raise ValueError("file changed")
                 if info.st_ino not in hashes:
                     hashes[info.st_ino] = hash_file(path, info)
                 key = (hashes[info.st_ino], info.st_uid, info.st_gid, info.st_mode, attributes(path))
@@ -122,7 +134,12 @@ def main():
             except (OSError, ValueError):
                 skipped["read error or changed file"] += 1
         for (digest, *_), copies in groups.items():
-            source, source_info = max(copies, key=lambda entry: entry[1].st_nlink)
+            seen = Counter(info.st_ino for _, info in copies)
+            sources = [entry for entry in copies if entry[1].st_nlink == seen[entry[1].st_ino]]
+            if not sources:
+                skipped["all inodes have unscanned links"] += len(copies)
+                continue
+            source, source_info = max(sources, key=lambda entry: entry[1].st_nlink)
             remaining_links = {}
             for path, info in copies:
                 if info.st_ino == source_info.st_ino:
