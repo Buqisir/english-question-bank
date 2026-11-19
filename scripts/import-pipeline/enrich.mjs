@@ -196,6 +196,8 @@ async function main() {
   const papers = options.all ? (await listReviewPapers()).filter(paper => paper.reviewKind === 'candidate')
     : [...new Set(options.paper)].map(paperId => ({ paperId }))
   const directory = path.join(cache, 'enrich', name)
+  const scope = options.all ? 'all' : digestJson(papers.map(({ paperId }) => paperId).sort()).split(':')[1].slice(0, 12)
+  const report = `report-${name}-${scope}-${Date.now()}-${process.pid}.md`
   const locks = path.join(cache, 'enrich', 'locks')
   mkdirSync(locks, { recursive: true, mode: 0o700 })
   mkdirSync(directory, { recursive: true, mode: 0o700 })
@@ -208,8 +210,18 @@ async function main() {
       if (!/^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(paper.paperId)) throw new Error('无效的 paperId')
       lock = path.join(locks, `${paper.paperId}.lock`)
       closeSync(openSync(lock, 'wx', 0o600))
-      try { result = await enrichPaper(enricher, paper, options, directory) }
-      finally { unlinkSync(lock) }
+      try {
+        try { result = await enrichPaper(enricher, paper, options, directory) }
+        catch (error) { result = { state: 'fail', reason: error.message } }
+        const baseRev = result.baseRev ?? paper.latestRevisionId ?? ''
+        const revisionDir = /^rev-[a-z0-9-]+$/iu.test(baseRev) ? baseRev : 'no-revision'
+        const workDir = path.join(directory, paper.paperId, revisionDir)
+        mkdirSync(workDir, { recursive: true, mode: 0o700 })
+        const file = path.join(workDir, 'result.json')
+        writeAtomic(file, `${JSON.stringify({ paperId: paper.paperId, baseRev, state: result.state, reason: result.reason }, null, 2)}\n`)
+        // Snapshot this run's row while the per-paper lock still protects the result.
+        result = readJson(file)
+      } finally { unlinkSync(lock) }
     } catch (error) {
       result = { state: 'fail', reason: error.code === 'EEXIST' && error.path === lock ? '该卷正在追补' : error.message }
     }
@@ -220,7 +232,7 @@ async function main() {
     lines.push(row)
     console.log(row)
   }
-  writeAtomic(path.join(directory, 'report.md'), `${lines.join('\n')}\n`)
+  writeAtomic(path.join(directory, report), `${lines.join('\n')}\n`)
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main().catch(error => {

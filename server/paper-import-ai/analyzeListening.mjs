@@ -246,7 +246,9 @@ export function validateListeningAnalysisInput(analysis, input, { sealed = false
     if (question.segmentId !== expected.segmentId) fail(`${questionId} is bound to the wrong listening material`)
     if (question.officialAnswer !== expected.officialAnswer) fail(`${questionId} official answer disagrees with source authority`)
     const material = analysis.materials[expected.segmentId]
-    if (!material.transcript.includes(question.evidence.quote)) fail(`${questionId} evidence quote must exactly occur in its transcript`)
+    const { quote } = question.evidence
+    if (!quote.trim()) fail(`${questionId} evidence quote must not be blank`)
+    if (!material.transcript.includes(quote)) fail(`${questionId} evidence quote must exactly occur in its transcript`)
     const distractorLabels = (question.distractors || []).map(({ label }) => label)
     if (new Set(distractorLabels).size !== distractorLabels.length) fail(`${questionId} has duplicate distractor labels`)
     if (distractorLabels.includes(question.officialAnswer)) fail(`${questionId} marks the official answer as a distractor`)
