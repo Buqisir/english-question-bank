@@ -182,7 +182,56 @@ export function prepareSpellingReview(materializationBytes, policy = SPELLING_RE
   }
 }
 
-export function applySpellingReview(materializationBytes, reportBytes) {
+// Offsets refer to the transcript after its existing text review has been applied.
+// Apply from right to left so all offsets continue to address that same text.
+function insertListeningSentences(materialization, insertions, listeningAudio) {
+  if (materialization.listening?.state !== 'captured' || !Array.isArray(insertions)
+    || !insertions.length || !listeningAudio) fail('missing listening insertion evidence')
+  const bySegment = new Map()
+  for (const insertion of insertions) {
+    if (!exactKeys(insertion, ['segmentId', 'start', 'text', 'model', 'audioSha256', 'startSeconds', 'endSeconds'])
+      || !['gpt-4o-transcribe', 'whisper-1'].includes(insertion.model)
+      || typeof insertion.audioSha256 !== 'string' || !/^sha256:[a-f0-9]{64}$/u.test(insertion.audioSha256)
+      || insertion.audioSha256 !== listeningAudio.sha256
+      || !Number.isFinite(insertion.startSeconds) || !Number.isFinite(insertion.endSeconds)
+      || !Number.isFinite(listeningAudio.durationSeconds) || insertion.startSeconds < 0
+      || insertion.endSeconds <= insertion.startSeconds || insertion.endSeconds > listeningAudio.durationSeconds) {
+      fail('invalid listening insertion model, playback hash, or audio interval')
+    }
+    const segment = materialization.listening.transcript.find(item => item.segmentId === insertion.segmentId)
+    if (!segment || !Number.isInteger(insertion.start) || insertion.start < 0 || insertion.start > segment.text.length
+      || typeof insertion.text !== 'string' || insertion.text.trim() !== insertion.text
+      || !/[A-Za-z]/u.test(insertion.text) || !/[.!?]["'’”)\]]*$/u.test(insertion.text)) {
+      fail('invalid listening sentence insertion')
+    }
+    if (!bySegment.has(segment)) bySegment.set(segment, new Map())
+    const offsets = bySegment.get(segment)
+    if (offsets.has(insertion.start)) fail('duplicate listening sentence insertion offset')
+    offsets.set(insertion.start, insertion.text)
+  }
+  const segmenter = new Intl.Segmenter('en', { granularity: 'sentence' })
+  for (const [segment, offsets] of bySegment) {
+    const source = segment.text
+    const boundaries = new Set([0, source.length])
+    for (const { index, segment: sentence } of segmenter.segment(source)) {
+      const trimmed = sentence.trimEnd()
+      if (/[.!?]["'’”)\]]*$/u.test(trimmed)
+        && !/\b(?:Mr|Mrs|Ms|Dr|Prof|St|[A-Z]|(?:[A-Za-z]\.){2,})\.?$/u.test(trimmed)) {
+        boundaries.add(index + trimmed.length)
+      }
+    }
+    for (const [start, text] of [...offsets].sort(([left], [right]) => right - left)) {
+      if (!boundaries.has(start)) fail('listening insertion must preserve existing sentences')
+      const before = segment.text.slice(0, start)
+      const after = segment.text.slice(start)
+      const separator = /^(?:[A-Z]\d?|Speaker \d+|Man|Woman):\s/u.test(text) ? '\n' : ' '
+      segment.text = before + (before && !/\s$/u.test(before) ? separator : '') + text
+        + (after && !/^\s/u.test(after) ? ' ' : '') + after
+    }
+  }
+}
+
+export function applySpellingReview(materializationBytes, reportBytes, listeningAudio) {
   const original = JSON.parse(new TextDecoder().decode(materializationBytes))
   const report = JSON.parse(new TextDecoder().decode(reportBytes))
   const correctionIds = new Set(original.groups?.filter(group => group.family === 'error-correction')
@@ -194,7 +243,10 @@ export function applySpellingReview(materializationBytes, reportBytes) {
       || answer && correctionIds.has(original.answers?.[Number(answer[1])]?.questionId)
   })) fail('error-correction source text is immutable')
   const targets = enumerateSpellingTargets(original)
-  if (!exactKeys(report, ['schemaVersion', 'materializationSha256', 'reviewedBy', 'reviewedAt', 'targets'])
+  const reportKeys = ['schemaVersion', 'materializationSha256', 'reviewedBy', 'reviewedAt', 'targets']
+  const hasInsertions = Object.hasOwn(report, 'listeningInsertions')
+  if (hasInsertions) reportKeys.push('listeningInsertions')
+  if (!exactKeys(report, reportKeys)
     || !reviewPolicies.includes(report.schemaVersion)
     || report.materializationSha256 !== sha256(materializationBytes)
     || report.reviewedBy !== 'import_agent'
@@ -272,6 +324,7 @@ export function applySpellingReview(materializationBytes, reportBytes) {
     const key = keys.pop()
     keys.reduce((node, part) => node[part], effective)[key] = corrected
   }
+  if (hasInsertions) insertListeningSentences(effective, report.listeningInsertions, listeningAudio)
   return effective
 }
 

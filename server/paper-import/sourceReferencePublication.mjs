@@ -65,8 +65,9 @@ export function readSourceReferencePublication({ db, paperAssetsDir, consumption
   let sourceInput = null
   if (materializations.length === 1) {
     const materializationBytes = decoded(materializations[0])
+    const audio = documents.find(document => document.inputKey === 'listening_audio_descriptor')
     materialization = overlays.length
-      ? applySpellingReview(materializationBytes, decoded(overlays[0]))
+      ? applySpellingReview(materializationBytes, decoded(overlays[0]), audio && JSON.parse(decoded(audio)))
       : JSON.parse(materializationBytes.toString('utf8'))
   } else {
     const packages = documents.filter(document => document.inputKey === 'nck1_analyzed_package_manifest')

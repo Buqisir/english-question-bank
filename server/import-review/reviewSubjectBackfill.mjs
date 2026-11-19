@@ -27,16 +27,16 @@ const eligible = value => value?.paper.latest_revision_id === value?.revision.id
 export function extractStoredListeningReview(directory, revision, preview, evidence) {
   if (!evidence.some(file => file.path === 'listening-review-v1.json')) return null
   const source = evidence.find(file => file.path === 'universal-source-manifest.json')?.json
+  const audio = JSON.parse(preview.payload_json).consumption?.listeningAudio
   let materialization = evidence.find(file => file.path === source?.materializationPath)?.json
   // Use the same sealed-byte spelling replay as loadNck1ReviewSource/finalize;
   // do not compile a new Candidate to manufacture historical evidence.
   if (materialization && evidence.some(file => file.path === SPELLING_REVIEW_FILE)) {
     materialization = applySpellingReview(
       readFileSync(path.join(directory, source.materializationPath)),
-      readFileSync(path.join(directory, SPELLING_REVIEW_FILE)))
+      readFileSync(path.join(directory, SPELLING_REVIEW_FILE)), audio)
   }
   const transcript = materialization?.listening?.transcript
-  const audio = JSON.parse(preview.payload_json).consumption?.listeningAudio
   const original = evidence.find(file => file.path === LISTENING_AUDIO_PATHS.original)
   const playback = evidence.find(file => file.path === LISTENING_AUDIO_PATHS.playback)
   if (!transcript || !audio || !original || !playback

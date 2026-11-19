@@ -427,7 +427,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
     }),
   }
   let reviewedMaterialization = spellingReviewBytes
-    ? applySpellingReview(materializationBytes, spellingReviewBytes)
+    ? applySpellingReview(materializationBytes, spellingReviewBytes, listeningAudio)
     : materialization
   if (spellingReviewBytes) {
     verifyTerminalWhitespaceSourceEvidence(materializationBytes, spellingReviewBytes, sourceInput.documents)

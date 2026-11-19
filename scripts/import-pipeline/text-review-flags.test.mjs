@@ -9,6 +9,34 @@ import { applySpellingReview, isSourceMarkCorrection, prepareSpellingReview, SPE
 import { mapSourceEmphasisEdits } from '../../server/paper-canonical/sourceEmphasis.mjs'
 
 const at = (text, flag) => findSourceFlagTargets([{ before: text }], flag).flatMap(hit => hit.at)
+
+test('recording evidence allows inserting a missing sentence without editing existing sentences', () => {
+  const text = 'W: I like working with Dr. Smith.\nM: What else should I do?'
+  const transcript = [{ segmentId: 'listening-text-1', text }]
+  const bytes = Buffer.from(JSON.stringify({ listening: { state: 'captured', transcript } }))
+  const report = prepareSpellingReview(bytes)
+  report.reviewedBy = 'import_agent'
+  report.reviewedAt = '2026-11-19T00:00:00Z'
+  report.targets[0].decision = 'unchanged'
+  const audio = { sha256: `sha256:${'a'.repeat(64)}`, durationSeconds: 60 }
+  const evidence = { segmentId: 'listening-text-1', start: text.indexOf('\n'),
+    text: 'It is my favorite part of the day.', model: 'gpt-4o-transcribe',
+    audioSha256: audio.sha256, startSeconds: 20, endSeconds: 24 }
+  const apply = insertion => applySpellingReview(bytes,
+    Buffer.from(JSON.stringify({ ...report, listeningInsertions: [insertion] })), audio)
+
+  assert.equal(apply(evidence).listening.transcript[0].text,
+    'W: I like working with Dr. Smith. It is my favorite part of the day.\nM: What else should I do?')
+  assert.throws(() => apply({ ...evidence, before: 'I like working with Dr. Smith.' }), /listening insertion/)
+  assert.throws(() => apply({ ...evidence, start: text.indexOf('work') }), /preserve existing sentences/)
+  assert.throws(() => apply({ ...evidence, start: text.indexOf('Dr.') + 3 }), /preserve existing sentences/)
+  for (const key of ['model', 'audioSha256', 'startSeconds', 'endSeconds']) {
+    assert.throws(() => apply({ ...evidence, [key]: undefined }), /listening insertion/)
+  }
+  assert.throws(() => apply({ ...evidence, audioSha256: `sha256:${'b'.repeat(64)}` }), /playback hash/)
+  assert.throws(() => apply({ ...evidence, endSeconds: 61 }), /audio interval/)
+})
+
 test('uncertain source phrase survives an OCR line wrap', () => {
   assert.deepEqual(at('children’s desire\nof learning can be inspired',
     { quote: 'desire of learning', decision: 'uncertain' }), [11])
