@@ -1606,14 +1606,21 @@ assert(
     /selectLectureQuestion\(targetGroupId,\s*questionId\)/.test(pageSrc),
   'missing the questionId/lecture props or the deep-link selection effect',
 )
+const lectureUrlSyncDeps = '  }, [embeddedReview, lectureOpen, lectureSelection, similarView, similarSeed])'
+const lectureUrlSyncEnd = pageSrc.indexOf(lectureUrlSyncDeps)
+const lectureUrlSyncStart = pageSrc.lastIndexOf('  useEffect(() => {', lectureUrlSyncEnd)
+const lectureUrlSyncEffect = lectureUrlSyncEnd >= 0 && lectureUrlSyncStart >= 0
+  ? pageSrc.slice(lectureUrlSyncStart, lectureUrlSyncEnd) : ''
 assert(
-  // similar-entrypoints (E3) extends this effect's deps with
-  // similarView/similarSeed so it can also sync `similar=1` in/out of the URL.
   'PaperBrowsePage replaceState-syncs lectureOpen/lectureSelection/similarView/similarSeed into the URL (lecture=1 + focusGroupId/questionId when selected, similar=1 when the CTA result is open; all cleared when 讲评关)',
-  /\}, \[lectureOpen, lectureSelection, similarView, similarSeed\]\)/.test(pageSrc) &&
-    /window\.history\.replaceState\(window\.history\.state,\s*['"]['"],\s*nextUrl\)/.test(pageSrc) &&
-    /urlSyncMountedRef/.test(pageSrc),
+  /window\.history\.replaceState\(window\.history\.state,\s*['"]['"],\s*nextUrl\)/.test(lectureUrlSyncEffect) &&
+    /if \(!urlSyncMountedRef\.current\) \{\s*urlSyncMountedRef\.current = true\s*return\s*\}/.test(lectureUrlSyncEffect),
   'missing the URL-sync effect, or it does not skip the first mount commit',
+)
+assert(
+  'PaperBrowsePage embedded review skips lecture URL sync',
+  /^  useEffect\(\(\) => \{\s*if \(embeddedReview\) return\b/.test(lectureUrlSyncEffect),
+  'embedded review must return before the lecture URL-sync effect runs',
 )
 assert(
   'lecture panel follows an explicit left-side click, not scrollspy',
