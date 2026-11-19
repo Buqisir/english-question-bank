@@ -1624,7 +1624,7 @@ export function listeningReviewProjection(
   }
 }
 
-function configuredSourceType(config, paperId) {
+export function configuredSourceType(config, paperId) {
   const sourceType = config.provenance?.sourceType
     || (paperId.startsWith('paper-mock-') ? '模拟题' : '真题')
   if (!['真题', '模拟题', '校本题', '自编题'].includes(sourceType)) {

@@ -41,7 +41,7 @@ const display = (value: string | number) => value === 'unknown' ? '未知' : val
 const matchesBatch = (paper: ReviewPaper, batch: Batch) => {
   const state = reviewState(paper)
   if (batch === 'returned') return state === 'changes_requested'
-  return state === 'awaiting_review' && Boolean(paper.hasEarlierPublication) === (batch === 'followUp')
+  return state === 'awaiting_review' && (paper.hasEarlierPublication === true) === (batch === 'followUp')
 }
 
 function groupByState(papers: ReviewPaper[]) {
@@ -71,7 +71,8 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
   const [query, setQuery] = useState('')
   const [filters, setFilters] = useState(emptyFilters)
   const [page, setPage] = useState(0)
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [pinned, setPinned] = useState<ReviewPaper | null>(null)
+  const [readyScreenKey, setReadyScreenKey] = useState<string | null>(null)
   const [tab, setTab] = useState<Tab>('screen')
   const [loading, setLoading] = useState(true)
   const [listVersion, setListVersion] = useState(0)
@@ -105,7 +106,6 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
       if (discardedDraft) setNotice('待审版本已变化。请查看新版后重新填写反馈。')
       setPapers(next)
       setListVersion(version => version + 1)
-      setFeedbackKey(null)
       uncertain.current.clear()
       setFresh(true)
     } catch (failure) {
@@ -126,12 +126,16 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
     setQuery('')
     setPage(0)
     setFilters({ ...emptyFilters, sourceType })
-    setSelectedId(null)
+  }
+
+  function closePreview() {
+    setPinned(null)
+    setReadyScreenKey(null)
     setFeedbackKey(null)
   }
 
   async function mutate(paper: ReviewPaper, url: string, body: object, success: string, method?: 'PATCH') {
-    if (!fresh || writing.current || uncertain.current.has(paper.paperId)) return
+    if (!canWrite || reviewKey(paper) !== selectedKey || writing.current) return
     writing.current = true
     setBusy(true)
     setError('')
@@ -172,8 +176,16 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
   const pageCount = Math.max(1, Math.ceil(ordered.length / pageSize))
   const pageIndex = Math.min(page, pageCount - 1)
   const pagePapers = ordered.slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
-  const selected = visible.find(paper => paper.paperId === selectedId)
-  const selectedKey = selected && reviewKey(selected)
+  const latest = pinned && papers.find(paper => paper.paperId === pinned.paperId)
+  const sameRevision = latest && pinned && reviewKey(latest) === reviewKey(pinned)
+  const selected = sameRevision ? latest : pinned
+  const selectedId = selected?.paperId
+  const selectedKey = selected ? reviewKey(selected) : null
+  const canWrite = Boolean(selected && sameRevision && readyScreenKey === selectedKey && tab === 'screen'
+    && fresh && !busy && !selected.promotionState && !uncertain.current.has(selected.paperId))
+  const onScreenReady = useCallback((ready: boolean) => {
+    setReadyScreenKey(current => ready ? selectedKey : current === selectedKey ? null : current)
+  }, [selectedKey])
   const selectedBlock = publicationBlock?.key === selectedKey ? publicationBlock?.error : undefined
   const markStale = useCallback(() => setFresh(false), [])
 
@@ -184,9 +196,24 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
   }, [selectedKey])
 
   function select(paper: ReviewPaper) {
-    setSelectedId(paper.paperId)
+    if (paper.paperId === selectedId) {
+      changeTab('screen')
+      return
+    }
+    showRevision(paper)
+  }
+
+  function showRevision(paper: ReviewPaper) {
+    setPinned(paper)
+    setReadyScreenKey(null)
     setTab('screen')
     setFeedbackKey(null)
+  }
+
+  function changeTab(next: Tab) {
+    if (next === tab) return
+    setReadyScreenKey(null)
+    setTab(next)
   }
 
   function filter(name: keyof typeof emptyFilters, label: string, values: [string, string][]) {
@@ -286,19 +313,23 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
           {selected && <Surface ref={preview} variant="board" padding="none" as="section" className="ops-review-preview" aria-label="试卷预览">
             <header className="ops-review-preview-head">
               <div className="ops-review-heading"><h2>{selected.paperName}</h2>
-                  <Button onClick={() => { setSelectedId(null); setFeedbackKey(null) }}>关闭预览</Button></div>
-              <p>R{selected.revisionNumber} · {stateName(reviewState(selected))}</p>
+                  <Button onClick={closePreview}>关闭预览</Button></div>
+              <p>R{selected.revisionNumber} · {stateName(reviewState(selected))}
+                {selected.hasEarlierPublication === 'unknown' && ' · 发布记录未知'}
+              </p>
+              {latest && !sameRevision && <Notice kind="info" action={{
+                label: '切换查看', onClick: () => showRevision(latest),
+              }}>{`有新版本 R${latest.revisionNumber}`}</Notice>}
               <div className="ops-review-actions">
                 {selected.promotionState === 'published' ? <ButtonLink href={`/?view=paper-browse&paperId=${encodeURIComponent(selected.paperId)}`}>
                   查看已发布
                 </ButtonLink> : <>
-                  <Button tone="solid" disabled={!fresh || busy || Boolean(selected.promotionState)
-                    || uncertain.current.has(selected.paperId) || selected.unresolvedCount > 0
+                  <Button tone="solid" disabled={!canWrite || selected.unresolvedCount > 0
                     || !['awaiting_review', 'changes_requested', 'approved'].includes(selected.state)}
                     onClick={() => void mutate(selected, `${endpoint(selected)}/revisions/${encodeURIComponent(selected.latestRevisionId)}/publish`,
                       { intent: 'publish', bundleDigest: selected.bundleDigest, rendererBuildId: selected.rendererBuildId },
                       '发布请求已处理，请以列表中的状态为准')}>发布到题库</Button>
-                  <Button disabled={!fresh || busy || Boolean(selected.promotionState)}
+                  <Button disabled={!canWrite && !(sameRevision && selected.unresolvedCount > 0)}
                     onClick={() => setFeedbackKey(feedbackKey === selectedKey ? null : reviewKey(selected))}
                     aria-expanded={feedbackKey === selectedKey}>{selected.unresolvedCount ? '查看反馈' : '退回修改'}</Button>
                   {selected.hasMediaCandidates && <ButtonLink href="/ops/?view=review">到旧审卷页核对候选图</ButtonLink>}
@@ -314,22 +345,23 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
                 </ul> : null}
                 {selectedBlock.compatibility?.differencesTruncated && <p>差异较多，仅显示部分位置。</p>}
               </>}
-              {selectedKey && feedbackKey === selectedKey && <ReviewFeedback key={selectedKey} paper={selected}
-                disabled={!fresh || busy || uncertain.current.has(selected.paperId)}
+              {sameRevision && selectedKey && feedbackKey === selectedKey && <ReviewFeedback key={`${selectedKey}:${listVersion}`} paper={selected}
+                disabled={!canWrite}
                 draft={drafts.current.get(selectedKey) ?? ''} onDraft={value => drafts.current.set(selectedKey, value)}
                 onCancel={() => setFeedbackKey(null)} onStale={markStale}
                 mutate={(url, body, success, method) => void mutate(selected, url, body, success, method)} />}
               <nav aria-label="预览内容">
                 {(Object.keys(tabs) as Tab[]).map(key => <ChipToggle key={key} pressed={key === tab}
-                  onClick={() => setTab(key)}>{tabs[key]}</ChipToggle>)}
+                  onClick={() => changeTab(key)}>{tabs[key]}</ChipToggle>)}
               </nav>
             </header>
             <div className="ops-review-preview-body" key={`${selectedKey}:${tab}`}>
               {tab === 'screen' ? <PaperBrowsePage
                 embeddedReview paperId={selected.paperId} reviewRevision={selected.latestRevisionId}
+                onEmbeddedScreenReady={onScreenReady}
                 questionGroupById={emptyQuestionGroups} onAddGroupsToBasket={async () => ({ kind: 'none' })}
                 currentDraftPaperId={null} currentDraftGroupCount={0} onOpenDraftPaperWorkbench={noDraft}
-                onBackToWorkbench={() => setSelectedId(null)} shellNav={shellNav}
+                onBackToWorkbench={closePreview} shellNav={shellNav}
               /> : tab === 'pdf' ? <ReviewPdf paper={selected} /> : <ReviewHistory key={listVersion} paper={selected} />}
             </div>
           </Surface>}

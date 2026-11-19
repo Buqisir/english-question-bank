@@ -38,6 +38,7 @@ import { restoreFinalizeError, runFinalizeWorker } from './runFinalizeWorker.mjs
 import {
   buildImportReviewProjection,
   buildNck1SealedReviewProjection,
+  configuredSourceType,
   resolveReviewFile,
 } from './revisionProjection.mjs'
 
@@ -1601,6 +1602,7 @@ export function createImportReviewStore({
     if (cached?.key === cacheKey) return cached.value
 
     let provenance = null
+    let sourceType
     const config = Array.isArray(manifest.files) && manifest.files.find(file => file?.path === 'config.json')
     if (row.bundle_digest && config?.byteLength <= 256 * 1024) {
       try {
@@ -1608,7 +1610,11 @@ export function createImportReviewStore({
         if (statSync(filePath).size === config.byteLength) {
           const bytes = readFileSync(filePath)
           if (`sha256:${createHash('sha256').update(bytes).digest('hex')}` === config.sha256) {
-            provenance = parseJson(bytes.toString('utf8'))?.provenance
+            const verifiedConfig = parseJson(bytes.toString('utf8'))
+            if (verifiedConfig && typeof verifiedConfig === 'object' && !Array.isArray(verifiedConfig)) {
+              provenance = verifiedConfig.provenance
+              sourceType = provenance?.sourceType || configuredSourceType(verifiedConfig, row.paper_id)
+            }
           }
         }
       } catch {
@@ -1616,15 +1622,19 @@ export function createImportReviewStore({
       }
     }
     let sidecars = null
+    let cacheable = true
     if (row.preview_digest) {
-      const preview = db.prepare(`SELECT payload_json FROM import_review_product_previews
-        WHERE revision_id = ? AND bundle_digest = ? AND renderer_build_id = ?`)
-        .get(row.latest_revision_id, row.bundle_digest, row.renderer_build_id)
-      sidecars = parseJson(preview?.payload_json)?.analysisSidecars
+      try {
+        const preview = db.prepare(`SELECT payload_json FROM import_review_product_previews
+          WHERE revision_id = ? AND bundle_digest = ? AND renderer_build_id = ?`)
+          .get(row.latest_revision_id, row.bundle_digest, row.renderer_build_id)
+        sidecars = parseJson(preview?.payload_json)?.analysisSidecars
+      } catch {
+        cacheable = false
+      }
     }
     const year = Number(provenance?.year)
     const region = provenance?.region || provenance?.source
-    const sourceType = provenance?.sourceType
     const value = {
       year: Number.isInteger(year) && year >= 1900 && year <= 9999 ? year : 'unknown',
       region: typeof region === 'string' && region.trim() ? region.trim() : 'unknown',
@@ -1634,7 +1644,7 @@ export function createImportReviewStore({
           ? (sidecars[file] ? 'yes' : 'no') : 'unknown',
       ])),
     }
-    paperListMetadataCache.set(row.paper_id, { key: cacheKey, value })
+    if (cacheable) paperListMetadataCache.set(row.paper_id, { key: cacheKey, value })
     return value
   }
 

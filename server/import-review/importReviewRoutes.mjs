@@ -667,21 +667,28 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
   routes.push(defineRoute('GET', /^\/api\/import-reviews$/, route(({ response, context }) => {
     if (!requireOwner(response, context)) return
     const papers = store.listPapers({ includeMetadata: true })
-    if (openDatabase && papers.some(paper => paper.state === 'awaiting_review' && !paper.promotionState)) {
-      const db = openDatabase({ readOnly: true })
+    const pending = papers.filter(paper => paper.state === 'awaiting_review' && !paper.promotionState)
+    if (pending.length) {
+      let publishedIds
       try {
-        const hasRegistry = db.prepare(`SELECT 1 FROM sqlite_master
-          WHERE type = 'table' AND name = 'canonical_paper_publications'`).get()
-        if (hasRegistry) {
-          const publishedIds = new Set(db.prepare(`SELECT paper_id FROM canonical_paper_publications
-            WHERE is_current = 1`).all().map(row => row.paper_id))
-          for (const paper of papers) {
-            if (paper.state === 'awaiting_review' && !paper.promotionState) {
-              paper.hasEarlierPublication = publishedIds.has(paper.paperId)
+        const db = openDatabase?.({ readOnly: true })
+        if (db) {
+          try {
+            const hasRegistry = db.prepare(`SELECT 1 FROM sqlite_master
+              WHERE type = 'table' AND name = 'canonical_paper_publications'`).get()
+            if (hasRegistry) {
+              publishedIds = new Set(db.prepare(`SELECT paper_id FROM canonical_paper_publications
+                WHERE is_current = 1`).all().map(row => row.paper_id))
             }
-          }
+          } finally { db.close() }
         }
-      } finally { db.close() }
+      } catch {
+        // The review list remains available when the canonical registry cannot be read.
+        publishedIds = undefined
+      }
+      for (const paper of pending) {
+        paper.hasEarlierPublication = publishedIds?.has(paper.paperId) ?? 'unknown'
+      }
     }
     context.sendJson(response, 200, { papers })
   })))

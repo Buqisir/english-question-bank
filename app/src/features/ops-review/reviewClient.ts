@@ -14,7 +14,7 @@ export type ReviewPaper = {
   reviewKind: string
   state: string
   promotionState: string | null
-  hasEarlierPublication: boolean
+  hasEarlierPublication: boolean | 'unknown'
   hasTeachingAnalyses: boolean
   hasMediaCandidates: boolean
   unresolvedCount: number

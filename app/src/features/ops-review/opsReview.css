@@ -97,6 +97,13 @@
 .ops-review-filters { align-items: end; }
 .ops-review-filters form { flex: 1 1 240px; }
 
+.ops-review .eqb-search { border-color: var(--eqb-color-border-strong); }
+.ops-review .eqb-search:focus-within {
+  outline: 2px solid var(--eqb-color-text-muted);
+  outline-offset: 2px;
+}
+.ops-review .eqb-search-submit:not(:disabled) { color: var(--eqb-color-text-muted); }
+
 .ops-review-columns,
 .ops-review-results {
   display: grid;
@@ -206,17 +213,39 @@
   border-top: 1px solid var(--eqb-color-border-subtle);
 }
 
-/* The embedded Screen has its own scroll container and no separate rail.
-   Override only the full-page shell geometry, keeping the paper's renderer. */
+/* Keep the lecture panel inside the preview so the paper stays interactive. */
 .ops-review-preview-body .paper-browse-page { min-height: 0; }
+.ops-review-preview-body .paper-browse-embedded-actions {
+  padding: var(--eqb-space-2) var(--eqb-space-4) 0;
+}
 .ops-review-preview-body .paper-browse-shell {
   grid-template-columns: minmax(0, 1fr);
+  gap: var(--eqb-space-3);
   padding: var(--eqb-space-4);
 }
+.ops-review-preview-body .paper-browse-shell--lecture-open {
+  grid-template-columns: minmax(0, 1fr) min(360px, 48%);
+}
 .ops-review-preview-body .paper-browse-shell .paper-browse-content {
-  min-width: min(560px, calc(100vw - 2 * var(--eqb-space-5) - 2 * var(--eqb-space-4)));
+  max-height: 58vh;
+  overflow: auto;
   transform: none;
 }
+.ops-review-preview-body .paper-browse-zoom {
+  min-width: min(560px, calc(100vw - 2 * var(--eqb-space-5) - 2 * var(--eqb-space-4)));
+}
+.ops-review-preview-body .paper-browse-lecture-panel {
+  position: static;
+  width: auto;
+  height: auto;
+  max-height: 58vh;
+  padding: var(--eqb-space-3);
+  overflow: auto;
+  border-radius: var(--eqb-radius-control);
+  box-shadow: none;
+  z-index: auto;
+}
+.ops-review-preview-body .paper-browse-lecture-backdrop { display: none; }
 
 @media (max-width: 900px) {
   .ops-review-columns--preview { grid-template-columns: minmax(0, 1fr); }

@@ -392,6 +392,7 @@ export type PaperBrowsePageProps = {
    * reviewer API while keeping this exact Screen renderer. */
   reviewRevision?: string | null
   embeddedReview?: boolean
+  onEmbeddedScreenReady?: (ready: boolean) => void
   focusGroupId?: string | null
   /** flow-panel 刀 3: 入口带态——预选的题（asset 加载完成后走
    * selectLectureQuestion 同款路径），groupId 缺省时用来推导所属题组。 */
@@ -880,6 +881,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     paperId,
     reviewRevision,
     embeddedReview,
+    onEmbeddedScreenReady,
     focusGroupId,
     questionId,
     lecture,
@@ -1541,6 +1543,12 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     }
   }, [paperId, reviewRevision])
 
+  useLayoutEffect(() => {
+    if (!embeddedReview || !onEmbeddedScreenReady || loading || error || !asset || !canonicalConsumption) return
+    onEmbeddedScreenReady(true)
+    return () => onEmbeddedScreenReady(false)
+  }, [embeddedReview, onEmbeddedScreenReady, loading, error, asset, canonicalConsumption])
+
   // Writing and listening teaching sidecars are prefetched so their source-owned
   // answer-box/question interactions can open lecture immediately. Transcript
   // and teaching content remain outside the student Canonical payload.
@@ -2166,7 +2174,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     return parts
   }, [asset, canonicalConsumption, writingSkipIndices])
 
-  const dockedLecture = lectureOpen && viewportDocked
+  const dockedLecture = lectureOpen && viewportDocked && !embeddedReview
 
   const railGroupAnchors = useMemo(() => {
     const anchors = new Set<string>()
@@ -4284,23 +4292,23 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     )
   }
 
+  const lectureToggle = (
+    <Button
+      ref={lectureToggleRef}
+      className="paper-browse-lecture-toggle"
+      tone={lectureOpen ? 'solid' : 'quiet'}
+      size="sm"
+      icon={<Presentation size={16} aria-hidden="true" />}
+      onClick={toggleLecturePanel}
+      aria-pressed={lectureOpen}
+      aria-expanded={lectureOpen}
+    >
+      讲评
+    </Button>
+  )
   const topbarActionsSlot = !reviewRevision ? (
     <>
-      {/* 构件厂第 4 步（2026-11-13，提案 · 单一来源）：讲评开关换成 Button。关着淡墨（和顶栏导航一样），
-          开着石板墨填充（solid，纸白字）。原来按下态的白字被 App.css `.topbar .ghost-button` 的字色盖掉，
-          深底深字几乎看不清；换构件后这个问题没了。图标 14 → 16，和顶栏其余图标一样。 */}
-      <Button
-        ref={lectureToggleRef}
-        className="paper-browse-lecture-toggle"
-        tone={lectureOpen ? 'solid' : 'quiet'}
-        size="sm"
-        icon={<Presentation size={16} aria-hidden="true" />}
-        onClick={toggleLecturePanel}
-        aria-pressed={lectureOpen}
-        aria-expanded={lectureOpen}
-      >
-        讲评
-      </Button>
+      {lectureToggle}
       {/* 字段构件第二轮（2026-11-15）：原来是套了 .ghost-button 的原生下拉，换成 shared-ui/SelectField 小号（28，和旁边的小号键同高），
           标签「PDF 版本」只给读屏（原来是 aria-label，看得见的字没有）。用不了的版本服务器不列出来（usePaperPdfProducts 只拿到能用的），
           没有「为什么用不了」可写，所以用原生下拉，不用 OptionSelectField。 */}
@@ -4339,20 +4347,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         <Button size="sm" onClick={retryPdfProducts}>刷新 PDF 版本</Button>
       </span>}
     </>
-  ) : (
-    <Button
-      ref={lectureToggleRef}
-      className="paper-browse-lecture-toggle"
-      tone={lectureOpen ? 'solid' : 'quiet'}
-      size="sm"
-      icon={<Presentation size={16} aria-hidden="true" />}
-      onClick={toggleLecturePanel}
-      aria-pressed={lectureOpen}
-      aria-expanded={lectureOpen}
-    >
-      讲评
-    </Button>
-  )
+  ) : lectureToggle
 
   async function downloadPaperProduct(): Promise<void> {
     if (!asset || !canonicalConsumption?.publicationDigest || !pdfEdition || reviewRevision || analysisPdfBusy) return
@@ -4430,6 +4425,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   )
   return (
     <div className={`paper-browse-page${reviewRevision || isOwnerView ? ' paper-browse-page--review' : ''}`}>
+      {embeddedReview && <div className="paper-browse-embedded-actions">{lectureToggle}</div>}
       {!embeddedReview && <AppTopbar
         {...shellNav}
         pageTitle={displayTitle}
