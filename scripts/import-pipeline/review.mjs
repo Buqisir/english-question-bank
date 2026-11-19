@@ -301,10 +301,11 @@ export function loadLocalReviewedListening(paperDir, loaded, candidate) {
     loadReviewedListening(paperDir, loaded, candidate, null, retained))
 }
 
-async function uploadReviewBundle(paperDir, manifest) {
+export async function uploadReviewBundle(paperDir, manifest, timelinePath = path.join(
+  root, 'imports/ocr-proofread', manifest.paperId, 'fast/upload-timeline.jsonl',
+)) {
   return uploadBundle({
-    paperDir, manifest, api, resolveReviewFile,
-    timelinePath: path.join(root, 'imports/ocr-proofread', manifest.paperId, 'fast/upload-timeline.jsonl'),
+    paperDir, manifest, api, resolveReviewFile, timelinePath,
   })
 }
 
@@ -378,8 +379,7 @@ async function linkThread(paperId) {
   }), null, 2))
 }
 
-async function pushRevision(paperId) {
-  const paperDir = paperDirectory(paperId)
+export function prepareReviewPush(paperDir, { resolvesIssueIds = [], expectedBaseRevisionId } = {}) {
   const loaded = loadNck1ReviewSource(paperDir)
   assertImportSubmissionReady(paperDir, loaded.materialization, loaded)
   let projection = buildLocalReviewProjection(paperDir, { requireAnalyses: true })
@@ -395,7 +395,12 @@ async function pushRevision(paperId) {
     renameSync(staging, file)
     projection = buildLocalReviewProjection(paperDir, { requireAnalyses: true })
   }
-  const manifest = reviewManifest(paperDir, projection, resolvedIssueIds())
+  return { manifest: reviewManifest(paperDir, projection, resolvesIssueIds, undefined, expectedBaseRevisionId), projection }
+}
+
+async function pushRevision(paperId) {
+  const paperDir = paperDirectory(paperId)
+  const { manifest, projection } = prepareReviewPush(paperDir, { resolvesIssueIds: resolvedIssueIds() })
   const finalized = await uploadReviewBundle(paperDir, manifest)
   console.log(JSON.stringify({
     paperId,
@@ -658,17 +663,14 @@ async function paginationQa(paperId) {
   }
 }
 
-async function hydrate(paperId) {
-  const paperDir = paperDirectory(paperId)
-  if (existsSync(paperDir)) fail(`Local paper workspace already exists: ${paperId}`)
-  const requestedRevisionId = option('--revision')
-  if (process.argv.includes('--revision')
-    && (!requestedRevisionId || requestedRevisionId.startsWith('--'))) {
-    fail('hydrate --revision requires an exact revision id')
-  }
-  const status = await api(
-    `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
-  )
+export async function listReviewPapers() {
+  return (await api('/api/import-agent-reviews')).papers
+}
+
+export async function reviewCandidate(paperId, requestedRevisionId) {
+  const status = await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
+    {}, { allowNotFound: true })
+  if (!status) return null
   const revision = requestedRevisionId && requestedRevisionId !== status.latest?.id
     ? status.revisions?.find((item) => item.id === requestedRevisionId)
     : status.latest
@@ -679,7 +681,7 @@ async function hydrate(paperId) {
     || !revision.finalizedAt
     || !revision.manifest
     || revision.manifest.paperId !== paperId
-  ) fail(`${paperId} has no finalized Candidate revision to hydrate${requestedRevisionId ? `: ${requestedRevisionId}` : ''}`)
+  ) return null
   // status.files belongs only to latest. Historical files are checked against
   // their own immutable manifest below, never the current revision's inventory.
   if (
@@ -690,24 +692,32 @@ async function hydrate(paperId) {
     || (revision.id === status.latest?.id
       && !exactFileDescriptors(revision.manifest.files, status.files || []))
   ) fail('Selected Review revision manifest, file inventory, or bundleDigest does not close')
+  return revision
+}
 
-  mkdirSync(papersRoot, { recursive: true })
-  const temporary = mkdtempSync(path.join(papersRoot, '.hydrate-'))
+export async function downloadReviewFile(revision, file) {
+  const { bytes } = await api(
+    `/api/import-agent-reviews/revisions/${encodeURIComponent(revision.id)}`
+      + `/files?path=${encodeURIComponent(file.path)}`,
+    {}, { binary: true },
+  )
+  if (bytes.byteLength !== file.byteLength || sha256(bytes) !== file.sha256) {
+    fail(`Hydrated Review file changed in transit: ${file.path}`)
+  }
+  return bytes
+}
+
+export async function hydrateReviewRevision(revision, paperDir) {
+  const { paperId } = revision
+  if (existsSync(paperDir)) fail(`Local paper workspace already exists: ${paperDir}`)
+  mkdirSync(path.dirname(paperDir), { recursive: true, mode: 0o700 })
+  const temporary = mkdtempSync(path.join(path.dirname(paperDir), '.hydrate-'))
   try {
     for (const file of revision.manifest.files) {
-      const downloaded = await api(
-        `/api/import-agent-reviews/revisions/${encodeURIComponent(revision.id)}`
-          + `/files?path=${encodeURIComponent(file.path)}`,
-        {},
-        { binary: true },
-      )
-      if (
-        downloaded.bytes.byteLength !== file.byteLength
-        || sha256(downloaded.bytes) !== file.sha256
-      ) fail(`Hydrated Review file changed in transit: ${file.path}`)
+      const bytes = await downloadReviewFile(revision, file)
       const filePath = resolveReviewFile(temporary, file.path)
       mkdirSync(path.dirname(filePath), { recursive: true })
-      writeFileSync(filePath, downloaded.bytes)
+      writeFileSync(filePath, bytes)
     }
     const reportPath = 'agent-ocr-correction-report-v2.json'
     if (revision.manifest.files.some(file => file.path === reportPath)
@@ -751,6 +761,19 @@ async function hydrate(paperId) {
     rmSync(temporary, { recursive: true, force: true })
     throw error
   }
+}
+
+async function hydrate(paperId) {
+  const paperDir = paperDirectory(paperId)
+  if (existsSync(paperDir)) fail(`Local paper workspace already exists: ${paperId}`)
+  const requestedRevisionId = option('--revision')
+  if (process.argv.includes('--revision')
+    && (!requestedRevisionId || requestedRevisionId.startsWith('--'))) {
+    fail('hydrate --revision requires an exact revision id')
+  }
+  const revision = await reviewCandidate(paperId, requestedRevisionId)
+  if (!revision) fail(`${paperId} has no finalized Candidate revision to hydrate${requestedRevisionId ? `: ${requestedRevisionId}` : ''}`)
+  await hydrateReviewRevision(revision, paperDir)
   console.log(JSON.stringify({
     paperId,
     revisionId: revision.id,

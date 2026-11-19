@@ -96,23 +96,24 @@ function mergeDottedInitials(words) {
 }
 
 function readAsr(appleWindow, whisperWindows) {
-  const segments = (appleWindow.result?.segments ?? appleWindow.segments).map(segment => ({
+  const segments = (appleWindow?.result?.segments ?? appleWindow?.segments ?? []).map(segment => ({
     ...segment,
     runs: (segment.runs?.length ? segment.runs : [segment]).flatMap(appleRuns),
   }))
-  const apple = mergeDottedInitials(listeningAsrTokens([{ ...appleWindow,
-    endSeconds: appleWindow.endSeconds ?? segments.at(-1)?.end, result: { segments } }]).words)
+  const apple = mergeDottedInitials(listeningAsrTokens(segments.length ? [{ ...appleWindow,
+    endSeconds: appleWindow.endSeconds ?? segments.at(-1)?.end, result: { segments } }] : []).words)
     .map(word => ({ ...word, approx: true }))
   const whisperInput = whisperWindows.map(window => ({
     ...window,
-    segments: window.segments.map(segment => ({ ...segment, runs: segment.words ?? [] })),
+    result: { segments: (window.result?.segments ?? window.segments ?? [])
+      .map(segment => ({ ...segment, runs: segment.words ?? [] })) },
   }))
   const { words, observedWindows } = listeningAsrTokens(whisperInput)
   const whisper = mergeDottedInitials(words)
   const coverage = observedWindows.filter(window => window.words.length)
   const hybrid = [...whisper, ...apple.filter(word => !coverage.some(window =>
     midpoint(word) >= window.startSeconds && midpoint(word) < window.endSeconds))].sort(byTime)
-  return { apple, whisper, hybrid }
+  return { apple, whisper, hybrid, coverage }
 }
 
 // Semi-global variant of the segment rule's edit DP. Unmatched ASR at the
@@ -366,9 +367,19 @@ function alignMaterial({ material, sentences }, review, instructions, asr, gaps)
     ? group.occurrences.length : expectedReadings
   const bounds = passBounds(group, passCount, source, sentenceStarts, asr.hybrid)
   const reasons = new Set()
-  if (!bounds.length) reasons.add('pass boundaries unavailable')
+  if (!asr.hybrid.length || (group?.playback && !wordsIn(asr.hybrid, group.playback).length)) {
+    reasons.add('word-level ASR unavailable')
+  }
+  else if (!bounds.length) reasons.add('pass boundaries unavailable')
   const passes = bounds.map((bound, i) => {
     const pass = i + 1
+    if (!asr.apple.length) {
+      let coveredThrough = bound.startSeconds
+      for (const window of asr.coverage) {
+        if (window.startSeconds <= coveredThrough + epsilon) coveredThrough = Math.max(coveredThrough, window.endSeconds)
+      }
+      if (coveredThrough < bound.endSeconds - epsilon) reasons.add('word-level ASR unavailable')
+    }
     gaps?.push(...gapCandidates(source, sentenceStarts, bound, asr)
       .map(candidate => ({ materialId, segment: segmentId, pass, ...candidate })))
     return alignPass(source, sentences, sentenceStarts, bound, asr.hybrid, reasons, pass)
@@ -405,10 +416,9 @@ export function alignListeningSentences({ document, review, apple, whisper = [],
 
 export function alignReviewedListeningSentences(document, review, readWindow) {
   const windows = review?.evidence?.filter(({ kind }) => kind === 'asr_window') ?? []
-  const apple = windows.find(({ settings }) => /apple/iu.test(settings.engine))
-  if (!apple) throw new Error('缺少 Apple ASR')
-  const whisper = windows.filter(({ settings }) => /whisper/iu.test(settings.engine))
-  return alignListeningSentences({ document, review, apple: readWindow(apple.path),
+  const apple = windows.find(({ settings }) => /apple/iu.test(settings?.engine))
+  const whisper = windows.filter(({ settings }) => /whisper/iu.test(settings?.engine))
+  return alignListeningSentences({ document, review, apple: apple ? readWindow(apple.path) : null,
     whisper: whisper.map(({ path }) => readWindow(path)) }).segments
 }
 
