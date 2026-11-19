@@ -165,6 +165,7 @@ export async function mountOwnerReview({ root, user, request, mediaConfirmationC
     root.innerHTML = `<div class="owner-review">
       <header class="owner-review-header">
         <a href="/">英语题库</a>
+        <a href="/?view=ops-review">打开新审卷工作台</a>
         <span>${escapeHtml(user.username)}</span>
       </header>
       <main>

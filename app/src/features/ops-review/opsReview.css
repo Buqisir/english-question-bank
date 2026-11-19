@@ -1,0 +1,230 @@
+.ops-review {
+  min-height: 100vh;
+  color: var(--eqb-color-text);
+  background: var(--eqb-color-bg);
+  font-size: var(--eqb-font-size-sm);
+}
+
+.ops-review-main {
+  width: min(100%, 1440px);
+  margin-inline: auto;
+  padding: var(--eqb-space-5);
+  display: grid;
+  gap: var(--eqb-space-4);
+}
+
+.ops-review-main:not([data-view="all"]) { max-width: 1160px; }
+
+.ops-review-heading > :is(h1, h2),
+.ops-review-batch > :is(h2, p),
+.ops-review-results > p,
+.ops-review-preview-head > p,
+.ops-review-feedback > p,
+.ops-review-history > :is(h3, p) {
+  margin: 0;
+}
+
+.ops-review-heading h1,
+.ops-review-heading h2,
+.ops-review-batch h2,
+.ops-review-history h3 {
+  font-size: var(--eqb-font-size-sm);
+  font-weight: 600;
+}
+
+.ops-review .topbar-brand-title,
+.ops-review .topbar-page-title {
+  /* Use the tool type ramp in this workspace's shared topbar. */
+  font-size: var(--eqb-font-size-sm);
+}
+
+.ops-review-heading,
+.ops-review-actions,
+.ops-review-filters,
+.ops-review-pagination,
+.ops-review-preview nav[aria-label="预览内容"],
+.ops-review .topbar-actions-page [role="group"] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--eqb-space-2);
+}
+
+.ops-review-heading h1,
+.ops-review-heading h2 {
+  flex: 1 1 auto;
+  overflow-wrap: anywhere;
+}
+
+.ops-review-batches {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 3fr);
+  gap: var(--eqb-space-4);
+}
+
+.ops-review-batch {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: var(--eqb-space-3);
+}
+
+.ops-review-batch--screen { grid-row: span 2; }
+
+.ops-review-batch h2,
+.ops-review-batch .eqb-row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--eqb-space-2);
+}
+
+.ops-review-batch .eqb-row-list {
+  width: 100%;
+  border-block: 1px solid var(--eqb-color-border-subtle);
+}
+
+.ops-review-batch p,
+.ops-review-count,
+.ops-review-preview-head > p,
+.ops-review-batch small,
+.ops-review-results small,
+.ops-review-preview-head small {
+  color: var(--eqb-color-text-muted);
+  font-size: var(--eqb-font-size-xs);
+}
+
+.ops-review-filters { align-items: end; }
+.ops-review-filters form { flex: 1 1 240px; }
+
+.ops-review-columns,
+.ops-review-results {
+  display: grid;
+  align-items: start;
+  min-width: 0;
+  gap: var(--eqb-space-3);
+}
+
+.ops-review-columns--preview {
+  grid-template-columns: minmax(300px, 1fr) minmax(0, 2fr);
+  gap: var(--eqb-space-4);
+}
+
+.ops-review-results .eqb-row div { min-width: 0; overflow-wrap: anywhere; }
+.ops-review-results .eqb-row small { display: block; }
+.ops-review-results .eqb-row strong { font-weight: 500; }
+.ops-review-results .eqb-row[data-selected="true"] {
+  /* Keep the selected paper marked when the shared hover highlight moves. */
+  background: var(--eqb-color-desk);
+}
+
+.ops-review-table {
+  /* The board normally clips its children at the rounded edge. Scroll only
+     the table when its columns share the workspace with the preview. */
+  overflow: auto;
+}
+
+.ops-review-table table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: var(--eqb-font-size-control);
+}
+
+.ops-review-table :is(th, td) {
+  padding: var(--eqb-space-2);
+  border-bottom: 1px solid var(--eqb-color-border-subtle);
+}
+
+.ops-review-table :is(th, td):not(:first-child) { white-space: nowrap; }
+.ops-review-table th { font-weight: 600; }
+.ops-review-table td:first-child { width: 42%; }
+.ops-review-table thead,
+.ops-review-status { background: var(--eqb-color-bg); }
+.ops-review-table tr[data-selected] { cursor: pointer; }
+.ops-review-table tr[data-selected]:is(:hover, :focus-within),
+.ops-review-table tr[data-selected="true"] { background: var(--eqb-color-desk); }
+
+.ops-review-table td button {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ops-review-table button:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+  border-radius: var(--eqb-radius-badge);
+}
+
+.ops-review-pagination { justify-content: center; }
+.ops-review-preview {
+  min-width: 0;
+  position: sticky;
+  top: var(--eqb-space-4);
+}
+
+.ops-review-preview-head,
+.ops-review-feedback,
+.ops-review-pdf,
+.ops-review-history {
+  display: grid;
+  gap: var(--eqb-space-2);
+  padding: var(--eqb-space-4);
+}
+
+.ops-review-feedback {
+  border: 1px solid var(--eqb-color-border);
+  border-radius: var(--eqb-radius-control);
+}
+
+.ops-review-feedback form {
+  display: grid;
+  gap: var(--eqb-space-2);
+}
+
+.ops-review-history ul {
+  margin: 0 0 var(--eqb-space-3);
+  padding-inline-start: var(--eqb-space-5);
+  overflow-wrap: anywhere;
+}
+
+.ops-review-pdf iframe {
+  width: 100%;
+  height: 60vh;
+  border: 1px solid var(--eqb-color-border);
+}
+
+.ops-review-preview-body {
+  max-height: 68vh;
+  overflow: auto;
+  border-top: 1px solid var(--eqb-color-border-subtle);
+}
+
+/* The embedded Screen has its own scroll container and no separate rail.
+   Override only the full-page shell geometry, keeping the paper's renderer. */
+.ops-review-preview-body .paper-browse-page { min-height: 0; }
+.ops-review-preview-body .paper-browse-shell {
+  grid-template-columns: minmax(0, 1fr);
+  padding: var(--eqb-space-4);
+}
+.ops-review-preview-body .paper-browse-shell .paper-browse-content {
+  min-width: min(560px, calc(100vw - 2 * var(--eqb-space-5) - 2 * var(--eqb-space-4)));
+  transform: none;
+}
+
+@media (max-width: 900px) {
+  .ops-review-columns--preview { grid-template-columns: minmax(0, 1fr); }
+  .ops-review-preview { grid-row: 1; position: static; }
+}
+
+@media (max-width: 640px) {
+  .ops-review-batches { grid-template-columns: minmax(0, 1fr); }
+  .ops-review-batch--screen { grid-row: auto; }
+  .ops-review-main { padding: var(--eqb-space-3); }
+}
