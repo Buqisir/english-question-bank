@@ -168,7 +168,12 @@ async function enrichPaper(enricher, paper, options, directory) {
     const { manifest } = prepareReviewPush(bundle, { expectedBaseRevisionId: baseRev })
     const changed = checkEnrichmentDiff(bundle, baseFiles, enricher.allowedOutputs, evidence)
     checkPushManifest(revision.manifest, manifest, changed, evidence)
+    const prepared = path.join(workDir, 'prepared.json')
+    if (!options.push && existsSync(prepared) && readJson(prepared).bundleDigest === manifest.bundleDigest) {
+      return { state: 'unchanged', reason: `${result.reason}；硬门哈希一致`, baseRev }
+    }
     const pushed = options.push ? await uploadReviewBundle(bundle, manifest, path.join(workDir, 'upload-timeline.jsonl')) : null
+    if (!pushed) writeAtomic(prepared, `${JSON.stringify({ bundleDigest: manifest.bundleDigest })}\n`)
     const state = pushed ? `已推 ${pushed.revision.id}` : '可 push'
     return { state: 'ok', reason: `${state}；${changed.join(', ')}；${result.reason}；硬门哈希一致`, baseRev }
   } catch (error) {

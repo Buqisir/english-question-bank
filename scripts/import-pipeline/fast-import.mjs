@@ -52,8 +52,9 @@ import { buildLocalReviewProjection, hydratedEvidenceBase, importLocalReviewCand
 import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
 import { NCK1_STAGED_ANALYSIS_FILES } from '../../server/import-review/nck1AnalysisProjection.mjs'
 import { buildListeningAnalysisAgentRequest, LISTENING_STAGED_ANALYSIS_FILE_NAME,
-  mergeListeningSentenceAnalysis, validateListeningAnalysis } from '../../server/paper-import-ai/analyzeListening.mjs'
+  mergeListeningSentenceAnalysis } from '../../server/paper-import-ai/analyzeListening.mjs'
 import { alignReviewedListeningSentences, listeningSentenceTargets } from './listening-sentence-align.mjs'
+import { mergeReviewedListeningAnalysis } from './lib-listening-analysis.mjs'
 
 const root = path.resolve(import.meta.dirname, '../..')
 const scripts = path.join(root, 'scripts/import-pipeline')
@@ -1011,8 +1012,7 @@ export function installListeningSentenceAnalysis(ctx, { useAuthored = true } = {
     } catch (error) {
       detail = `句级对齐跳过（${error.message.replace(/\s+/gu, ' ')}）`
     }
-    const analysis = mergeListeningSentenceAnalysis(staged ?? draft, segments, staged ? draft : null)
-    validateListeningAnalysis(analysis, { materialization: document })
+    const analysis = mergeReviewedListeningAnalysis(document, segments, { staged, authored: draft })
     writeAnalysis(analysis)
     return { detail }
   } catch (error) {
