@@ -56,9 +56,10 @@ test('recording insertions reject ambiguous boundaries and changes to displayed 
     ['W: I met Capt. Smith.', 'I met Capt.', 'It snowed.', /sentence boundary/],
     ['W: I met Gov. Smith.', 'I met Gov.', 'It snowed.', /sentence boundary/],
     ['W: I climbed Mt. Everest.', 'I climbed Mt.', 'It snowed.', /sentence boundary/],
+    ['W: Take the No. 5 bus.', 'Take the No.', 'It snowed.', /sentence boundary/],
     ['W: I agree. I will go.', 'I agree.', 'M:Why?', /expected sentences or speakers/],
     ['W: I agree.\nM: I will go.', 'I agree.', 'M：Why?', /expected sentences or speakers/],
-    ['W: I agree', 'I agree', 'It snowed.', /expected sentences or speakers/],
+    ['W: I agree', 'I agree', 'It snowed.', /sentence boundary/],
   ]) {
     const { evidence, apply } = listeningInsertionFixture(source, afterSentence)
     assert.throws(() => apply({ ...evidence, text }), error, `${source} + ${text}`)

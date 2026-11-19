@@ -251,6 +251,10 @@ function insertListeningSentences(materialization, insertions, listeningAudio) {
     }
     const anchor = anchors[0]
     const start = anchor?.utf16End ?? 0
+    if (anchor && (!/[.!?]["'‘’“”]*$/u.test(anchor.en)
+      || !/^(?:$|[^\S\r\n]*[\r\n]|[^\S\r\n]+[\p{Lu}"'‘’“”])/u.test(segment.text.slice(start)))) {
+      fail('listening insertion has no unambiguous sentence boundary')
+    }
     const index = anchor ? sentences.indexOf(anchor) + 1 : 0
     if (!bySegment.has(segment)) bySegment.set(segment, new Map())
     const offsets = bySegment.get(segment)
