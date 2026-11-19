@@ -352,7 +352,7 @@ export function listeningSentenceTargets(document) {
   }))
 }
 
-function alignMaterial({ material, sentences }, review, instructions, asr, gaps) {
+function alignMaterial({ material, sentences }, review, instructions, asr, gaps, words = asr.hybrid) {
   const { segmentId, materialId = material.id ?? segmentId } = material
   const source = []
   const sentenceStarts = new Set()
@@ -363,11 +363,17 @@ function alignMaterial({ material, sentences }, review, instructions, asr, gaps)
   const group = review.groups.find(item => item.segmentId === segmentId)
   const questionNumbers = material.questionNumbers ?? group?.questionNumbers ?? []
   const { expectedReadings } = expectedListeningReadings({ ...material, questionNumbers }, instructions)
-  const passCount = expectedReadings === 'unknown' && group?.occurrences?.length > 1
-    ? group.occurrences.length : expectedReadings
-  const bounds = passBounds(group, passCount, source, sentenceStarts, asr.hybrid)
+  let passCount = expectedReadings
+  if (passCount === 'unknown' && group?.occurrences?.length > 1) {
+    passCount = group.occurrences.length
+  } else if (passCount === 'unknown' && group?.occurrences?.length === 1) {
+    // One sealed playback interval can contain both readings.
+    const observed = group.reason?.match(/^listening-segment-rule-v8：原文为准，观察遍数 ([12])，/u)?.[1]
+    if (observed) passCount = Number(observed)
+  }
+  const bounds = passBounds(group, passCount, source, sentenceStarts, words)
   const reasons = new Set()
-  if (!asr.hybrid.length || (group?.playback && !wordsIn(asr.hybrid, group.playback).length)) {
+  if (!words.length || (group?.playback && !wordsIn(words, group.playback).length)) {
     reasons.add('word-level ASR unavailable')
   }
   else if (!bounds.length) reasons.add('pass boundaries unavailable')
@@ -382,7 +388,7 @@ function alignMaterial({ material, sentences }, review, instructions, asr, gaps)
     }
     gaps?.push(...gapCandidates(source, sentenceStarts, bound, asr)
       .map(candidate => ({ materialId, segment: segmentId, pass, ...candidate })))
-    return alignPass(source, sentences, sentenceStarts, bound, asr.hybrid, reasons, pass)
+    return alignPass(source, sentences, sentenceStarts, bound, words, reasons, pass)
   })
   if (passes.length === 2 && passes[1].timings[0]?.start < passes[0].timings.at(-1)?.end) {
     reasons.add('pass 2 starts before pass 1 ends')
@@ -409,8 +415,12 @@ export function alignListeningSentences({ document, review, apple, whisper = [],
   const asr = readAsr(apple, whisper)
   const instructions = document.sourcePresentation?.instructions ?? document.sourceInstructions
   const candidates = collectGaps ? [] : null
-  const segments = listeningSentenceTargets(document).map(target =>
-    alignMaterial(target, review, instructions, asr, candidates))
+  const segments = listeningSentenceTargets(document).map(target => {
+    const mixed = alignMaterial(target, review, instructions, asr, candidates)
+    if (!mixed.degraded || !asr.apple.length || !asr.whisper.length) return mixed
+    const fallback = alignMaterial(target, review, instructions, asr, null, asr.apple)
+    return fallback.degraded ? mixed : fallback
+  })
   return { segments, candidates: candidates ?? [] }
 }
 
