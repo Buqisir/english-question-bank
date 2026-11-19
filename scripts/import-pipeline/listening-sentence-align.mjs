@@ -28,11 +28,11 @@ function splitSentences(material, corpus, lineTurns) {
   for (const label of [...speakers, { start: text.length }]) {
     const turn = text.slice(start, label.start)
     const protectedPeriods = new Set()
-    for (const abbreviation of turn.matchAll(/\b(?:(?:Mr|Mrs|Ms|Dr|Prof|St)\.|(?:[A-Za-z]\.){2,})/gu)) {
+    for (const abbreviation of turn.matchAll(/\b(?:(Mr|Mrs|Ms|Dr|Prof|St|Mt|Gov)\.|(?:[A-Za-z]\.){2,})/gu)) {
       const following = turn.slice(abbreviation.index + abbreviation[0].length)
       const continues = /^(?:[’'][a-z]|[ \t]*[,:;]|[ \t]+[a-z])/u
         .test(following)
-      const title = /^(?:Mr|Mrs|Ms|Dr|Prof|St)\.$/u.test(abbreviation[0])
+      const title = Boolean(abbreviation[1])
       const acronymBeforeName = /^(?:[A-Z]\.){2,}$/u.test(abbreviation[0]) && /^[ \t]+[A-Z]/u.test(following)
       for (const period of abbreviation[0].matchAll(/\./gu)) {
         if (period.index < abbreviation[0].length - 1 || continues || title || acronymBeforeName) {

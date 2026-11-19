@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
+import { listeningSentenceTargets } from '../../scripts/import-pipeline/listening-sentence-align.mjs'
 import { digestJson, exactKeys, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { extractDocxDocumentParagraphs, DOCX_MEDIA_TYPE } from '../paper-canonical/docxSourceAdapter.mjs'
 
@@ -197,19 +198,20 @@ export function verifyListeningInsertionOccurrences(reportBytes, readReview) {
   }
 }
 
-const speakerLabel = '(?:[A-Z]\\d?|Speaker \\d+|Man|Woman):\\s'
-const startsWithSpeaker = new RegExp(`^[ \\t]*${speakerLabel}`, 'u')
-const startsWithNextTurn = new RegExp(`^[ \\t]*\\r?\\n[ \\t]*${speakerLabel}`, 'u')
+const speakerLabel = '(?:[A-Z][A-Za-z]*|[A-Z]\\d|Speaker \\d+)\\s*[:：]'
+const startsWithSpeaker = new RegExp(`^\\s*${speakerLabel}`, 'u')
+const beforeLabeledSentence = new RegExp(`^\\s*${speakerLabel}\\s*$`, 'u')
 const containsSpeaker = new RegExp(`(?:^|\\s)${speakerLabel}`, 'u')
 
-// Offsets refer to the transcript after its existing text review has been applied.
-// Apply from right to left so all offsets continue to address that same text.
+// Resolve the exact sentence against the existing reviewed transcript first.
+// Apply from right to left so every offset still addresses that transcript.
 function insertListeningSentences(materialization, insertions, listeningAudio) {
   if (materialization.listening?.state !== 'captured' || !Array.isArray(insertions)
     || !insertions.length || !listeningAudio) fail('missing listening insertion evidence')
   const bySegment = new Map()
+  const targets = new Map(listeningSentenceTargets(materialization).map(target => [target.material.segmentId, target]))
   for (const insertion of insertions) {
-    if (!exactKeys(insertion, ['segmentId', 'start', 'text', 'model', 'audioSha256', 'startSeconds', 'endSeconds', 'occurrence'])
+    if (!exactKeys(insertion, ['segmentId', 'afterSentence', 'text', 'model', 'audioSha256', 'startSeconds', 'endSeconds', 'occurrence'])
       || insertion.model !== 'gpt-transcribe'
       || typeof insertion.audioSha256 !== 'string' || !/^sha256:[a-f0-9]{64}$/u.test(insertion.audioSha256)
       || insertion.audioSha256 !== listeningAudio.sha256
@@ -225,35 +227,30 @@ function insertListeningSentences(materialization, insertions, listeningAudio) {
       || insertion.startSeconds < occurrence.startSeconds || insertion.endSeconds > occurrence.endSeconds) {
       fail('listening insertion interval falls outside the reviewed occurrence')
     }
-    const segment = materialization.listening.transcript.find(item => item.segmentId === insertion.segmentId)
-    if (!segment || !Number.isInteger(insertion.start) || insertion.start < 0 || insertion.start > segment.text.length
+    const target = targets.get(insertion.segmentId)
+    if (!target
       || typeof insertion.text !== 'string' || insertion.text.trim() !== insertion.text
       || !/[A-Za-z]/u.test(insertion.text) || !/[.!?]["'’”)\]]*$/u.test(insertion.text)) {
       fail('invalid listening sentence insertion')
     }
+    const { material: segment, sentences } = target
+    const anchors = sentences.filter(sentence => sentence.en === insertion.afterSentence)
+    if (insertion.afterSentence !== null && anchors.length !== 1) {
+      fail('listening insertion must match one complete existing sentence')
+    }
+    const start = anchors[0]?.utf16End ?? 0
+    const next = sentences.find(sentence => sentence.utf16Start >= start)
+    const startsTurn = next && beforeLabeledSentence.test(segment.text.slice(start, next.utf16Start))
+    if (containsSpeaker.test(insertion.text) && !startsTurn && (next || segment.text.slice(start).trim())) {
+      fail('labeled listening insertion must preserve existing speaker turns')
+    }
     if (!bySegment.has(segment)) bySegment.set(segment, new Map())
     const offsets = bySegment.get(segment)
-    if (offsets.has(insertion.start)) fail('duplicate listening sentence insertion offset')
-    offsets.set(insertion.start, insertion.text)
+    if (offsets.has(start)) fail('duplicate listening sentence insertion position')
+    offsets.set(start, { text: insertion.text, startsTurn })
   }
-  const segmenter = new Intl.Segmenter('en', { granularity: 'sentence' })
   for (const [segment, offsets] of bySegment) {
-    const source = segment.text
-    const boundaries = new Set([0, source.length])
-    for (const { index, segment: sentence } of segmenter.segment(source)) {
-      const trimmed = sentence.trimEnd()
-      if (/[.!?]["'’”)\]]*$/u.test(trimmed)
-        && !/(?:\.\.|…|\b(?:Mr|Mrs|Ms|Dr|Prof|St|Mt|Sr|Jr|Rev|Gen|Capt|Lt|Sgt|Ave|Rd|No|vs|etc|[A-Z]|(?:[A-Za-z]\.)+[A-Za-z])\.)["'’”)\]]*$/iu.test(trimmed)) {
-        boundaries.add(index + trimmed.length)
-      }
-    }
-    for (const [start, text] of [...offsets].sort(([left], [right]) => right - left)) {
-      if (!boundaries.has(start)) fail('listening insertion must preserve existing sentences')
-      const rest = source.slice(start)
-      const startsTurn = (start === 0 ? startsWithSpeaker : startsWithNextTurn).test(rest)
-      if (containsSpeaker.test(text) && rest && !startsTurn) {
-        fail('labeled listening insertion must preserve existing speaker turns')
-      }
+    for (const [start, { text, startsTurn }] of [...offsets].sort(([left], [right]) => right - left)) {
       const before = segment.text.slice(0, start)
       const after = segment.text.slice(start)
       const separator = startsWithSpeaker.test(text) ? '\n' : ' '
