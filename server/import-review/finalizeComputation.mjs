@@ -43,6 +43,7 @@ export function finalizeProjection(directory, revision, {
     reviewKind: revision.reviewKind,
     requireAnalyses,
     expectedCandidateDigest: revision.candidateDigest,
+    replayReferencesFromRevisionId: evidenceBase?.directory ? revision.manifest?.expectedBaseRevisionId : null,
   }, evidenceBase)
   if (revision.manifest?.files?.some(file => file.path === SPELLING_REVIEW_FILE)) {
     verifyListeningInsertionOccurrences(readFileSync(resolveReviewFile(directory, SPELLING_REVIEW_FILE)), () => {

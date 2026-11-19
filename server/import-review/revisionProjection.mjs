@@ -1141,12 +1141,15 @@ export function validateAgentOcrCorrectionSidecar(sidecar, { materialization, pa
 
 export function buildImportReviewProjection(
   rootDir,
-  { reviewKind = 'candidate', requireAnalyses = false, expectedCandidateDigest = null } = {},
+  { reviewKind = 'candidate', requireAnalyses = false, expectedCandidateDigest = null,
+    replayReferencesFromRevisionId = null } = {},
   evidenceBase = null,
 ) {
   return reviewKind === 'ocr'
     ? buildNck1OcrReviewProjection(rootDir)
-    : buildNck1ReviewProjection(rootDir, { requireAnalyses, expectedCandidateDigest }, evidenceBase)
+    : buildNck1ReviewProjection(rootDir, {
+        requireAnalyses, expectedCandidateDigest, replayReferencesFromRevisionId,
+      }, evidenceBase)
 }
 
 function visibleStructure(projected) {

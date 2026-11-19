@@ -10,6 +10,7 @@ import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as version } from './ocr-source-
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as producerVersion } from './ocr-proofread.mjs'
 import { PAPER_PAGINATION_PLAN_FILE_NAME } from '../../server/paper-import/paginationPlan.mjs'
 import { uploadReviewBundle } from './lib-review-upload.mjs'
+import { finalizeProjection } from '../../server/import-review/finalizeComputation.mjs'
 import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
 import { sha256, digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { listeningReviewSubject, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
@@ -252,7 +253,7 @@ function fixture(t, referencesVersion = version) {
   return { dir, ctx, calls, options: { referenceStages } }
 }
 
-test('local enrichment replays only byte-identical sealed source references', async t => {
+test('local enrichment and finalize replay only byte-identical sealed source references', async t => {
   const { dir } = fixture(t)
   const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
   process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
@@ -272,13 +273,26 @@ test('local enrichment replays only byte-identical sealed source references', as
   manifest.bundleDigest = reviewBundleDigest(manifest)
   const revision = { ...manifest, manifest, id: 'rev-historical-references', state: 'ready',
     reviewKind: 'candidate', finalizedAt: oldTime }
+  const baseline = path.join(dir, 'baseline')
+  fs.cpSync(reviewRoot, baseline, { recursive: true })
+  const finalize = () => finalizeProjection(reviewRoot, {
+    ...revision, id: 'rev-new-references', state: 'uploading', finalizedAt: null,
+    manifest: { ...manifest, expectedBaseRevisionId: revision.id },
+    evidenceBase: { revision, directory: baseline },
+  })
   json(path.join(reviewRoot, 'signals/review-restore.json'), { schemaVersion: 'review-restore-v1',
     origin: process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN || 'http://127.0.0.1:18890',
     paperId: revision.paperId, revisionId: revision.id, bundleDigest: revision.bundleDigest, sealedRevision: revision })
   const project = () => buildLocalReviewProjection(reviewRoot, { replayReferencesFromRevisionId: revision.id })
   assert.deepEqual(project().sourceReferencesBytes, bytes)
+  await t.test('finalize accepts unchanged sealed reference bytes', () => {
+    assert.deepEqual(finalize().sourceReferencesBytes, bytes)
+  })
   appendFileSync(file, ' ')
   assert.throws(project, { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+  await t.test('finalize rejects changed reference bytes missing the producer version', () => {
+    assert.throws(finalize, { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+  })
 })
 
 for (const [edit, expectation] of [
