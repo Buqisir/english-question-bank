@@ -66,6 +66,7 @@ import {
   TEXT_REVIEW_INSTRUCTIONS_V2,
   TEXT_REVIEW_POLICY_V4,
   TEXT_REVIEW_INSTRUCTIONS_V4,
+  verifyListeningInsertionOccurrences,
 } from '../../server/paper-import/spellingReview.mjs'
 import {
   enumerateParagraphSummaryTargets,
@@ -1244,6 +1245,8 @@ function spellingReview(paperId, command) {
   const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
   if (!preview.compilation) fail(preview.unresolvedIssues?.[0]?.message || 'Corrected Candidate does not compile')
   if (command === 'finalize-spelling') {
+    verifyListeningInsertionOccurrences(loaded.sourceInput.spellingReviewBytes,
+      () => requiredJson(resolveReviewFile(paperDir, LISTENING_REVIEW_FILE), LISTENING_REVIEW_FILE))
     const activePath = path.join(paperDir, SPELLING_REVIEW_FILE)
     if (existsSync(activePath)) {
       const previous = new Uint8Array(readFileSync(activePath))

@@ -5,13 +5,13 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { findSourceFlagTargets } from './text-review-parts.mjs'
-import { applySpellingReview, isSourceMarkCorrection, prepareSpellingReview, SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4 } from '../../server/paper-import/spellingReview.mjs'
+import { applySpellingReview, isSourceMarkCorrection, prepareSpellingReview, SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4, verifyListeningInsertionOccurrences } from '../../server/paper-import/spellingReview.mjs'
 import { mapSourceEmphasisEdits } from '../../server/paper-canonical/sourceEmphasis.mjs'
 
 const at = (text, flag) => findSourceFlagTargets([{ before: text }], flag).flatMap(hit => hit.at)
 
 test('recording evidence allows inserting a missing sentence without editing existing sentences', () => {
-  const text = 'W: I like working with Dr. Smith.\nM: What else should I do?'
+  const text = 'W: I like working with Dr. Smith. I climbed Mt. Everest.\nM: What else should I do?'
   const transcript = [{ segmentId: 'listening-text-1', text }]
   const bytes = Buffer.from(JSON.stringify({ listening: { state: 'captured', transcript } }))
   const report = prepareSpellingReview(bytes)
@@ -20,16 +20,27 @@ test('recording evidence allows inserting a missing sentence without editing exi
   report.targets[0].decision = 'unchanged'
   const audio = { sha256: `sha256:${'a'.repeat(64)}`, durationSeconds: 60 }
   const evidence = { segmentId: 'listening-text-1', start: text.indexOf('\n'),
-    text: 'It is my favorite part of the day.', model: 'gpt-4o-transcribe',
-    audioSha256: audio.sha256, startSeconds: 20, endSeconds: 24 }
-  const apply = insertion => applySpellingReview(bytes,
-    Buffer.from(JSON.stringify({ ...report, listeningInsertions: [insertion] })), audio)
+    text: 'It is my favorite part of the day.', model: 'gpt-transcribe',
+    audioSha256: audio.sha256, startSeconds: 20, endSeconds: 24, occurrence: { startSeconds: 10, endSeconds: 30 } }
+  const withInsertion = insertion => Buffer.from(JSON.stringify({ ...report, listeningInsertions: [insertion] }))
+  const apply = insertion => applySpellingReview(bytes, withInsertion(insertion), audio)
 
   assert.equal(apply(evidence).listening.transcript[0].text,
-    'W: I like working with Dr. Smith. It is my favorite part of the day.\nM: What else should I do?')
+    'W: I like working with Dr. Smith. I climbed Mt. Everest. It is my favorite part of the day.\nM: What else should I do?')
   assert.throws(() => apply({ ...evidence, before: 'I like working with Dr. Smith.' }), /listening insertion/)
   assert.throws(() => apply({ ...evidence, start: text.indexOf('work') }), /preserve existing sentences/)
   assert.throws(() => apply({ ...evidence, start: text.indexOf('Dr.') + 3 }), /preserve existing sentences/)
+  assert.throws(() => apply({ ...evidence, start: text.indexOf('Mt.') + 3 }), /preserve existing sentences/)
+  assert.throws(() => apply({ ...evidence, start: text.indexOf('Smith.') + 6, text: 'M: Why?' }), /speaker turns/)
+  assert.throws(() => apply({ ...evidence, endSeconds: 31 }), /outside the reviewed occurrence/)
+  const review = { subject: { playbackAudioSha256: audio.sha256 }, groups: [
+    { segmentId: evidence.segmentId, decision: 'usable', occurrences: [evidence.occurrence] },
+    { segmentId: 'listening-text-2', decision: 'usable', occurrences: [{ startSeconds: 30, endSeconds: 50 }] },
+  ] }
+  verifyListeningInsertionOccurrences(withInsertion(evidence), () => review)
+  assert.throws(() => verifyListeningInsertionOccurrences(withInsertion({
+    ...evidence, startSeconds: 35, endSeconds: 38, occurrence: review.groups[1].occurrences[0],
+  }), () => review), /match a reviewed occurrence of listening-text-1/)
   for (const key of ['model', 'audioSha256', 'startSeconds', 'endSeconds']) {
     assert.throws(() => apply({ ...evidence, [key]: undefined }), /listening insertion/)
   }

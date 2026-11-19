@@ -41,7 +41,7 @@ import {
 import { LEGACY_NCK1_ANALYSIS_PROFILE } from '../paper-import-ai/analyzeListening.mjs'
 import { validateParagraphSummaries } from '../paper-import-ai/paragraphSummaries.mjs'
 import { validatePublicSearchMetadata } from '../paper-import-ai/publicSearchMetadata.mjs'
-import { applySpellingReview, loadSpellingReview, summarizeSpellingReview, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
+import { applySpellingReview, loadSpellingReview, summarizeSpellingReview, verifyListeningInsertionOccurrences, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
 import { applyListeningInstructionCorrection, LISTENING_INSTRUCTION_CORRECTION_FILE } from '../paper-import/listeningInstructionCorrection.mjs'
 import {
   NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
@@ -430,6 +430,8 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
     ? applySpellingReview(materializationBytes, spellingReviewBytes, listeningAudio)
     : materialization
   if (spellingReviewBytes) {
+    verifyListeningInsertionOccurrences(spellingReviewBytes,
+      () => readJson(resolveReviewFile(rootDir, LISTENING_REVIEW_FILE), LISTENING_REVIEW_FILE))
     verifyTerminalWhitespaceSourceEvidence(materializationBytes, spellingReviewBytes, sourceInput.documents)
   }
   const correctionPath = resolveReviewFile(rootDir, LISTENING_INSTRUCTION_CORRECTION_FILE)
