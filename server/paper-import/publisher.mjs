@@ -1509,7 +1509,7 @@ function publishUniversalNck1ImportFacts({
         return write(outputInventory)
       })
     },
-    requireCompleteAnalyses: !importProfile || Boolean(packageData.readingAnalysis),
+    verifyAnalysisSidecars: Boolean(approvedIdentity.analysisDigest),
     requireParagraphSummaries: Boolean(importProfile),
     admitPackage(version) {
       if (sealedReviewPublication) {
@@ -1618,7 +1618,7 @@ function publishPreparedPaperImport({
   onPrepared = null,
   withPreparedWrite = null,
   validatePrepared = null,
-  requireCompleteAnalyses = false,
+  verifyAnalysisSidecars = false,
   requireParagraphSummaries = false,
   sealedNormalizedGroupsSidecar = null,
 }) {
@@ -1638,9 +1638,9 @@ function publishPreparedPaperImport({
     db,
     paperAssetsDir,
     paperId,
-    validateCommittedAssets: requireCompleteAnalyses || requireParagraphSummaries
+    validateCommittedAssets: verifyAnalysisSidecars || requireParagraphSummaries
       ? (targetVersion) => {
-          if (requireCompleteAnalyses) assertPaperImportAnalysisSidecars({
+          if (verifyAnalysisSidecars) assertPaperImportAnalysisSidecars({
             baseDir: path.join(
               paperAssetsDir,
               paperId,
@@ -1662,7 +1662,7 @@ function publishPreparedPaperImport({
             baseDir: path.join(paperAssetsDir, paperId, 'versions', `v${targetVersion}`),
             packageData,
           })
-          if (requireCompleteAnalyses) assertPaperImportAnalysisSidecars({
+          if (verifyAnalysisSidecars) assertPaperImportAnalysisSidecars({
             baseDir: path.join(paperAssetsDir, paperId, 'latest'),
             packageData,
             version: targetVersion,
@@ -1804,7 +1804,7 @@ function publishPreparedPaperImport({
     if (failurePoint === 'process-exit-after-version-rename') {
       process.exit(87)
     }
-    if (requireCompleteAnalyses) {
+    if (verifyAnalysisSidecars) {
       assertPaperImportAnalysisSidecars({
         baseDir: writtenVersion.versionDir,
         packageData,
@@ -1862,7 +1862,7 @@ function publishPreparedPaperImport({
       deferCleanup: true,
       forceFailureAt: failurePoint,
     })
-    if (requireCompleteAnalyses) {
+    if (verifyAnalysisSidecars) {
       assertPaperImportAnalysisSidecars({
         baseDir: latestSwap.latestDir,
         packageData,

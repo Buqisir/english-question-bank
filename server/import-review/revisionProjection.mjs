@@ -690,6 +690,7 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
       materialization,
       paperAsset,
       required: !importProfile || loaded.config.withTeachingAnalyses === true,
+      allowPartialAnalyses: true,
       analysisProfile: LEGACY_NCK1_ANALYSIS_PROFILE,
       requireTeachingContent: Boolean(loaded.analyzedPackage) || loaded.config.withTeachingAnalyses === true,
     })
@@ -791,7 +792,7 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
     ...(legacyWaveform ? [{ path: LEGACY_LISTENING_WAVEFORM_FILE, mediaType: 'application/json', role: 'listening_audio_waveform' }] : []),
     ...(reviewedListening?.files || []),
     ...NCK1_STAGED_ANALYSIS_FILES
-      .filter(({ path: relativePath }) => !importProfile || existsSync(resolveReviewFile(rootDir, relativePath)))
+      .filter(({ path: relativePath }) => existsSync(resolveReviewFile(rootDir, relativePath)))
       .map(({ path: relativePath, role }) => ({
       path: relativePath,
       mediaType: 'application/json',
@@ -1967,6 +1968,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
     paperAsset,
     sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
     required: (requireAnalyses && !importProfile) || loaded.config.withTeachingAnalyses === true,
+    allowPartialAnalyses: true,
     analysisProfile,
     requireTeachingContent: Boolean(loaded.analyzedPackage) || loaded.config.withTeachingAnalyses === true,
     sealed: Boolean(sealedListening),

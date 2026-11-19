@@ -2314,11 +2314,22 @@ export async function verifyPublicPaperTeachingAnalyses() {
     assert.equal(JSON.parse((await runReviewCommand(['verify-analyses', fixtureId])).stdout).previewSidecars.length, 5)
     writeFileSync(path.join(reviewRoot, 'analysis-listening.json'), staged.get('analysis-listening.json'))
     rejectChanged('analysis-listening.json', value => { value.paperId = 'another-paper' }, /paperId|paper/u)
-    rejectChanged('analysis-reading-a.json', null, { code: 'NCK1_ANALYSIS_INCOMPLETE' })
     try {
       for (const file of staged.keys()) rmSync(path.join(reviewRoot, file))
       assert.throws(() => buildNck1ReviewProjection(reviewRoot), { code: 'NCK1_ANALYSIS_INCOMPLETE' })
       await assert.rejects(runReviewCommand(['verify-analyses', fixtureId]), /NCK1_ANALYSIS_INCOMPLETE/u)
+      const listeningFile = 'analysis-listening.json'
+      writeFileSync(path.join(reviewRoot, listeningFile), staged.get(listeningFile))
+      const partial = buildNck1ReviewProjection(reviewRoot)
+      assert.deepEqual(Object.keys(partial.analysisSidecars), ['listening-analysis-v1.json'])
+      assert.equal(buildNck1ReviewProjection(reviewRoot).analysisDigest, partial.analysisDigest)
+      assert.notEqual(partial.analysisDigest, first.analysisDigest)
+      rejectChanged(listeningFile, value => { delete value.materials[Object.keys(value.materials)[0]] }, /materials identity closure/u)
+      rejectChanged(listeningFile, value => { Object.values(value.questions)[0].questionId = 'question:listening:99' }, /identity is forged/u)
+      rejectChanged(listeningFile, value => {
+        const question = Object.values(value.questions)[0]
+        question.officialAnswer = question.officialAnswer === 'A' ? 'B' : 'A'
+      }, /official answer disagrees/u)
     } finally {
       for (const [file, bytes] of staged) writeFileSync(path.join(reviewRoot, file), bytes)
     }
@@ -2779,12 +2790,11 @@ try {
     'analysis-cloze.json',
     'analysis-grammar.json',
   ]) rmSync(path.join(incomplete.reviewRoot, fileName))
-  assert.throws(
-    () => publish(incomplete),
-    /Incomplete staged analyses/,
-  )
-  assert(!existsSync(incomplete.paperAssetsDir))
-  assert.equal(publishedVersionCount(incomplete), 0)
+  incomplete.projection = buildNck1ReviewProjection(incomplete.reviewRoot)
+  assert.equal(publish(incomplete).ok, true)
+  assert.deepEqual(readdirSync(path.join(incomplete.paperAssetsDir, paperId, 'latest', 'analyses')),
+    ['writing-analysis-v1.json'])
+  assert.equal(publishedVersionCount(incomplete), 1)
 } finally {
   close(incomplete)
 }

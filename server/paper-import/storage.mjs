@@ -38,7 +38,6 @@ const analysisArtifacts = Object.freeze([
   ['writingAnalysis', writingAnalysisFileName],
   ['listeningAnalysis', listeningAnalysisFileName],
 ])
-const requiredAnalysisArtifactCount = 5
 const latestSwapJournalFileName = '.latest-swap.json'
 
 export function resolvePaperAssetReadPaths(paperAssetsDir, paperId, version = null) {
@@ -503,9 +502,6 @@ export function assertPaperImportPaginationPlan({ baseDir, packageData, version 
 export function assertPaperImportAnalysisSidecars({ baseDir, packageData, version }) {
   const expected = makeVersionedAnalysisSidecars(packageData, version)
   const expectedFiles = analysisArtifacts.filter(([key]) => expected[key])
-  if (expectedFiles.filter(([key]) => key !== 'listeningAnalysis').length !== requiredAnalysisArtifactCount) {
-    throw new Error('Complete NCK1 analysis publication requires all five sidecars')
-  }
   const actual = {}
   for (const [key, fileName] of expectedFiles) {
     const filePath = path.join(baseDir, 'analyses', fileName)

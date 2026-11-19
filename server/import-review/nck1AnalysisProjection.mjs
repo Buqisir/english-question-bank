@@ -4,6 +4,7 @@ import Ajv from 'ajv/dist/2020.js'
 
 import {
   buildPaperImportAiPackageFiles,
+  resolveFormatProfile,
 } from '../paper-import-ai/packageBuilder.mjs'
 import { validateReadingAnalysisShape } from '../paper-import-ai/analyzeReading.mjs'
 import { validateSevenChoicesShape } from '../paper-import-ai/analyzeSevenChoices.mjs'
@@ -370,6 +371,7 @@ export function buildNck1AnalysisProjection({
   paperAsset,
   sourceAssetVersion = 1,
   required = true,
+  allowPartialAnalyses = false,
   analysisProfile = LEGACY_NCK1_ANALYSIS_PROFILE,
   requireTeachingContent = false,
   sealed = false,
@@ -382,19 +384,19 @@ export function buildNck1AnalysisProjection({
     .sort((a, b) => a.slotId.localeCompare(b.slotId))
   const stagedFiles = NCK1_STAGED_ANALYSIS_FILES.filter(({ key }) =>
     !key.startsWith('reading-') || readingSources.some(({ slotId }) => slotId === key.replace('-', '.')))
-  const presentCount = stagedFiles.filter(({ path: relativePath }) =>
-    existsSync(path.join(rootDir, relativePath))).length
+  const present = NCK1_STAGED_ANALYSIS_FILES.filter(({ path: relativePath }) =>
+    existsSync(path.join(rootDir, relativePath)))
   const listeningPresent = existsSync(path.join(rootDir, NCK1_LISTENING_STAGED_ANALYSIS.path))
-  if (presentCount === 0 && !required && !listeningPresent
+  if (!present.length && !required && !listeningPresent
     && analysisProfile !== LISTENING_ANALYSIS_PROFILE) return null
-  if (presentCount !== stagedFiles.length) {
+  if ((!present.length && required && !listeningPresent) || (!allowPartialAnalyses && present.length !== stagedFiles.length)) {
     const missing = stagedFiles
       .filter(({ path: relativePath }) => !existsSync(path.join(rootDir, relativePath)))
       .map(({ path: relativePath }) => relativePath)
     fail(`Incomplete staged analyses; missing: ${missing.join(', ')}`, 'NCK1_ANALYSIS_INCOMPLETE')
   }
 
-  const raw = Object.fromEntries(stagedFiles.map((descriptor) => [
+  const raw = Object.fromEntries(present.map((descriptor) => [
     descriptor.key,
     readAnalysis(rootDir, descriptor),
   ]))
@@ -432,8 +434,8 @@ export function buildNck1AnalysisProjection({
   const seven = getGroup('seven-choices', 5)
   const cloze = getGroup('cloze', 6)
   const grammar = getGroup('grammar-fill', 7)
-  const application = getGroup('writing.application', 8)
-  const continuation = getGroup('writing.continuation', 9)
+  const application = groupsBySlot.has('writing.application') ? getGroup('writing.application', 8) : null
+  const continuation = groupsBySlot.has('writing.continuation') ? getGroup('writing.continuation', 9) : null
   const paper = {
     paperId: materialization.paperId,
     sourceFilename: 'nck1-source-materialization-v1.json',
@@ -441,8 +443,14 @@ export function buildNck1AnalysisProjection({
     sourceAssetVersion,
   }
 
+  const readingKey = index => readingSources[index].slotId.replace('.', '-')
+  const analyzedReadings = readingGroups.filter((_, index) => Object.hasOwn(raw, readingKey(index)))
+  if (present.filter(({ key }) => key.startsWith('reading-')).length !== analyzedReadings.length) {
+    fail('Staged reading analysis has no matching Materialization group')
+  }
   for (const [index, group] of readingGroups.entries()) {
-    const analysis = raw[readingSources[index].slotId.replace('.', '-')]
+    const analysis = raw[readingKey(index)]
+    if (!Object.hasOwn(raw, readingKey(index))) continue
     if (!validateReadingSchema(analysis)) {
       fail(`Reading analysis schema invalid: ${formatSchemaErrors(validateReadingSchema.errors)}`)
     }
@@ -457,63 +465,36 @@ export function buildNck1AnalysisProjection({
     assertSourceVersion(analysis, sourceAssetVersion, group.groupId)
     assertReadingOptionClosure(analysis, group)
   }
-  exactKeys(raw.seven.groups, [seven.groupId], `${seven.groupId} analysis groups`)
-  exactKeys(raw.cloze.groups, [cloze.groupId], `${cloze.groupId} analysis groups`)
-  exactKeys(raw.grammar.groups, [grammar.groupId], `${grammar.groupId} analysis groups`)
-  validateSevenChoicesShape(raw.seven, {
-    paper,
-    group: seven,
-    requireFullTranslation: true,
-    requireSelectedLongSentences: true,
-    requireTeachingContent,
-  })
-  validateClozeShape(raw.cloze, {
-    paper,
-    group: cloze,
-    requireFullTranslation: true,
-    requireSelectedLongSentences: true,
-    requireTeachingContent,
-  })
-  stampGrammarFillDerivedFields(raw.grammar)
-  validateGrammarFillShape(raw.grammar, {
-    paper,
-    group: grammar,
-    requireFullTranslation: true,
-    requireSelectedLongSentences: true,
-    requireTeachingContent,
-  })
-  assertSourceVersion(raw.seven, sourceAssetVersion, seven.groupId)
-  assertSourceVersion(raw.cloze, sourceAssetVersion, cloze.groupId)
-  assertSourceVersion(raw.grammar, sourceAssetVersion, grammar.groupId)
-  assertBlankIdClosure(raw.seven, seven, 'questions')
-  assertBlankIdClosure(raw.cloze, cloze, 'blanks')
-  assertBlankIdClosure(raw.grammar, grammar, 'blanks')
-  assertAnswerClosure(raw.seven, seven, 'questions', (item) =>
-    item.optionFit?.correctOptionLabel)
-  assertAnswerClosure(raw.cloze, cloze, 'blanks', (item) =>
-    item.correctFit?.optionLabel)
-  assertAnswerClosure(raw.grammar, grammar, 'blanks', (item) => item.answer)
-  assertAnswerAgreement(raw.seven, seven, 'questions', (item) =>
-    item.optionFit?.correctOptionLabel)
-  assertAnswerAgreement(raw.cloze, cloze, 'blanks', (item) =>
-    item.correctFit?.optionLabel)
-  // validateGrammarFillShape already checks membership in the official answers;
-  // a second literal comparison would reject valid slash-separated alternatives.
+  for (const [key, group, validator, collection, answerAt] of [
+    ['seven', seven, validateSevenChoicesShape, 'questions', item => item.optionFit?.correctOptionLabel],
+    ['cloze', cloze, validateClozeShape, 'blanks', item => item.correctFit?.optionLabel],
+    ['grammar', grammar, validateGrammarFillShape, 'blanks', item => item.answer],
+  ]) {
+    if (!Object.hasOwn(raw, key)) continue
+    const analysis = raw[key]
+    exactKeys(analysis?.groups, [group.groupId], `${group.groupId} analysis groups`)
+    if (key === 'grammar') stampGrammarFillDerivedFields(analysis)
+    validator(analysis, { paper, group, requireFullTranslation: true, requireSelectedLongSentences: true, requireTeachingContent })
+    assertSourceVersion(analysis, sourceAssetVersion, group.groupId)
+    assertBlankIdClosure(analysis, group, collection)
+    assertAnswerClosure(analysis, group, collection, answerAt)
+    // Grammar's validator already checks membership in the official alternatives.
+    if (key !== 'grammar') assertAnswerAgreement(analysis, group, collection, answerAt)
+  }
 
-  const applicationWriting = withOfficialModelAnswer(
-    projectNck1StagedWritingAnalysis(raw.application),
-    groupsBySlot.get('writing.application'),
-  )
-  const continuationWriting = withOfficialModelAnswer(
-    projectNck1StagedWritingAnalysis(raw.continuation),
-    groupsBySlot.get('writing.continuation'),
-  )
-  validateWritingAnalysisCandidate(applicationWriting)
-  validateWritingAnalysisCandidate(continuationWriting)
-  validateNarrativeContinuationAnalysis(continuationWriting.continuationAnalysis, {
-    writingTask: writingTask(paperAsset, continuation.groupId),
-  })
+  const writingGroups = {}
+  for (const [key, group] of [['application', application], ['continuation', continuation]]) {
+    if (!Object.hasOwn(raw, key)) continue
+    if (!group || raw[key]?.taskType !== key) fail(`Writing task identity mismatch: ${key}`)
+    const writing = withOfficialModelAnswer(projectNck1StagedWritingAnalysis(raw[key]), groupsBySlot.get(`writing.${key}`))
+    validateWritingAnalysisCandidate(writing)
+    if (key === 'continuation') validateNarrativeContinuationAnalysis(writing.continuationAnalysis, {
+      writingTask: writingTask(paperAsset, group.groupId),
+    })
+    writingGroups[group.groupId] = { writing }
+  }
 
+  const { requireWritingFamilies } = resolveFormatProfile(cloze, readingGroups)
   const files = buildPaperImportAiPackageFiles({
     parseResult: { paper, readingGroups },
     analysesByGroupId: Object.fromEntries(readingGroups.map((group, index) => [
@@ -526,41 +507,34 @@ export function buildNck1AnalysisProjection({
     clozeAnalysis: structuredClone(raw.cloze),
     grammarFillGroup: grammar,
     grammarFillAnalysis: structuredClone(raw.grammar),
-    applicationGroup: application,
-    continuationGroup: continuation,
+    ...(requireWritingFamilies && { applicationGroup: application, continuationGroup: continuation }),
     sourceDocx: null,
+    allowPartialAnalyses: true,
   })
   const sidecars = {
-    'reading-choice-analysis-v1.json': parsedSidecar(files, 'reading-choice-analysis-v1.json'),
-    'seven-choices-analysis-v1.json': parsedSidecar(files, 'seven-choices-analysis-v1.json'),
-    'cloze-analysis-v1.json': parsedSidecar(files, 'cloze-analysis-v1.json'),
-    'grammar-fill-analysis-v1.json': parsedSidecar(files, 'grammar-fill-analysis-v1.json'),
-    'writing-analysis-v1.json': {
+    ...(analyzedReadings.length
+      ? { 'reading-choice-analysis-v1.json': parsedSidecar(files, 'reading-choice-analysis-v1.json') } : {}),
+    ...(raw.seven ? { 'seven-choices-analysis-v1.json': parsedSidecar(files, 'seven-choices-analysis-v1.json') } : {}),
+    ...(raw.cloze ? { 'cloze-analysis-v1.json': parsedSidecar(files, 'cloze-analysis-v1.json') } : {}),
+    ...(raw.grammar ? { 'grammar-fill-analysis-v1.json': parsedSidecar(files, 'grammar-fill-analysis-v1.json') } : {}),
+    ...(Object.keys(writingGroups).length ? { 'writing-analysis-v1.json': {
       schemaVersion: 'writing-analysis-v1',
       paperId: materialization.paperId,
-      groups: {
-        [application.groupId]: { writing: applicationWriting },
-        [continuation.groupId]: { writing: continuationWriting },
-      },
-    },
+      groups: writingGroups,
+    } } : {}),
     ...(raw[NCK1_LISTENING_STAGED_ANALYSIS.key]
       ? { [LISTENING_ANALYSIS_FILE_NAME]: structuredClone(raw[NCK1_LISTENING_STAGED_ANALYSIS.key]) }
       : {}),
   }
   for (const fileName of NCK1_ANALYSIS_SIDECAR_FILES.slice(0, 4)) {
-    sidecars[fileName].sourceAssetVersion = sourceAssetVersion
+    if (sidecars[fileName]) sidecars[fileName].sourceAssetVersion = sourceAssetVersion
   }
-  if (!validateWritingSchema(sidecars['writing-analysis-v1.json'])) {
+  if (sidecars['writing-analysis-v1.json'] && !validateWritingSchema(sidecars['writing-analysis-v1.json'])) {
     fail(`Writing analysis schema invalid: ${formatSchemaErrors(validateWritingSchema.errors)}`)
   }
 
-  const expectedReadingIds = readingGroups.flatMap((group) => group.questions.map(({ id }) => id))
-  exactKeys(sidecars['reading-choice-analysis-v1.json'].questions, expectedReadingIds, 'reading questions')
-  exactKeys(
-    sidecars['writing-analysis-v1.json'].groups,
-    [application.groupId, continuation.groupId],
-    'writing groups',
-  )
+  const expectedReadingIds = analyzedReadings.flatMap((group) => group.questions.map(({ id }) => id))
+  exactKeys(sidecars['reading-choice-analysis-v1.json']?.questions, expectedReadingIds, 'reading questions')
 
   return {
     inputs: raw,
