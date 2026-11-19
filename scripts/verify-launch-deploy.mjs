@@ -244,6 +244,7 @@ const fixtureDir = mkdtempSync(join(tmpdir(), 'eqb-backup-verify-'))
 try {
   const fixtureDb = join(fixtureDir, 'fixture.sqlite')
   const snapshotDir = join(fixtureDir, 'snapshots')
+  const backupRemote = join(fixtureDir, 'remote')
   const paperAssetRoot = join(fixtureDir, 'paper-assets')
   const userSpaceRoot = join(fixtureDir, 'user-space')
   const importOpsRoot = join(fixtureDir, 'import-ops-files')
@@ -272,6 +273,7 @@ try {
         QUESTION_BANK_IMPORT_OPS_ROOT: importOpsRoot,
         QUESTION_BANK_BLOB_ROOT: blobRoot,
         QUESTION_BANK_FILE_STORE: 'local',
+        EQB_R2_REMOTE: backupRemote,
         EQB_SNAPSHOT_DIR: snapshotDir,
       },
     },
@@ -280,8 +282,10 @@ try {
     run.status === 0,
     `backup-to-r2.sh --dry-run exits 0 against temp fixture (no rclone required)${run.status !== 0 ? ' — stderr: ' + (run.stderr || '').trim() : ''}`,
   )
-  assert(run.stdout.includes(`${blobRoot}/ (private immutable blobs)`),
-    'backup inventory includes the immutable files referenced by Review and publication')
+  assert(run.stdout.includes(`${importOpsRoot}/ (import-review files) -> ${backupRemote}/files/import-ops/files`),
+    'backup inventory places Review revisions under the shared files prefix')
+  assert(run.stdout.includes(`${blobRoot}/ (private immutable blobs) -> ${backupRemote}/files/published-blobs`),
+    'backup inventory places the immutable blobs under the shared files prefix')
 
   const snapPath = join(snapshotDir, 'question-bank.sqlite')
   const importOpsSnapPath = join(snapshotDir, 'import-ops.sqlite')
