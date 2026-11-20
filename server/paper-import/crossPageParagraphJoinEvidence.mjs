@@ -1,6 +1,5 @@
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
-import { resolveCrossPageParagraphJoins, paragraphFragmentText, paragraphJoinSourceLocator, isContinuationMaterialBlock,
-  CROSS_PAGE_PARAGRAPH_JOIN_FAMILIES,
+import { resolveCrossPageParagraphJoins, paragraphFragmentText, paragraphJoinSourceLocator,
   CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
 import { validateNck1ProducerGroups } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef, nck1InImageOptionLabelsV2AuthorityRef, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
@@ -16,7 +15,6 @@ function scopedProducerIssue(issue, materialization, relation, evidence, confirm
   const answer = materialization.documents.filter(document => !document.renditionOf && document.role === 'official_answers')
   const questions = materialization.documents.filter(document => !document.renditionOf && document.role === 'question_source')
   if (answer.length !== 1 || questions.length !== 1 || answer[0].documentId === questions[0].documentId
-    || !CROSS_PAGE_PARAGRAPH_JOIN_FAMILIES.includes(relation.group.family)
     || relation.join.fragments.some(fragment => fragment.source.documentId !== questions[0].documentId)) return false
   const src = issue.source
   if (!src || typeof src !== 'object' || Array.isArray(src) || src.documentId !== answer[0].documentId) return false
@@ -124,12 +122,11 @@ export function verifyCrossPageParagraphJoinEvidence(materialization, { evidence
       if (owners.length !== 1 || owners[0].owner.family !== group.family
         || owners[0].owner.groupId !== group.groupId || owners[0].owner.slotId !== group.slotId
         || owners[0].block.kind !== 'paragraph' || owners[0].block.role !== 'body'
-        || (group.family === 'continuation-writing' && !isContinuationMaterialBlock(owners[0].owner, owners[0].block))
         || (mixed ? !same(owners[0].block.content, blocks[index].content)
           : paragraphFragmentText(owners[0].block) !== items[0].text)) reject('must retain exact content in the same source-derived group')
       return { page, item: items[0], owner: owners[0] }
     })
-    if (mixed && group.family !== 'reading') verifyBlankIdentity(group, verified[0].owner.owner, blocks, reject)
+    if (mixed) verifyBlankIdentity(group, verified[0].owner.owner, blocks, reject)
     if (verified[0].page.orderedItems.at(-1) !== verified[0].item
       || verified[1].page.orderedItems[0] !== verified[1].item
       || verified[1].owner.position !== verified[0].owner.position + 1) reject('intervening content is not confirmed furniture')

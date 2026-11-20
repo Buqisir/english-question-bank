@@ -9,7 +9,7 @@ import { deriveNck1MaterializationBundle } from '../../server/paper-canonical/nc
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../../shared/paper-canonical/compiler.mjs'
 import { nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
 import { verifyCrossPageParagraphJoinEvidence } from '../../server/paper-import/crossPageParagraphJoinEvidence.mjs'
-import { resolveConfirmedNck1OcrEvidence } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
+import { resolveConfirmedNck1OcrEvidence, retainedParagraphJoinBaseline, withRetainedNck1OcrEvidence } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { paragraphJoinSourceLocator } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
 import { projectCanonicalConsumerGroup } from '../../shared/paper-canonical/consumerProjection.mjs'
@@ -288,7 +288,7 @@ test('sealed v2 Reading/cloze/grammar joins preserve blanks, marks, pointers and
     ocrSourceBytes: { ...input.ocrSourceBytes, confirmationBytes: encode(split) } }).issues.length)
 })
 
-test('seven-choice and continuation joins preserve inline order and the writing response', async () => {
+test('seven-choice and writing joins preserve inline order, prompts and responses', async () => {
   const fixture = await makeSyntheticNck1OcrFixture({ crossPageSevenAndContinuation: true })
   const confirmation = { ...fixture.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v2' }
   const produced = produceNck1OcrMaterialization({ paperId: fixture.paperId,
@@ -305,6 +305,7 @@ test('seven-choice and continuation joins preserve inline order and the writing 
   const joins = []
   for (const [family, starts] of [
     ['seven-choices', ['A short guide has 37.', 'They can practice']],
+    ['application-writing', ['Write a short notice', 'for the reading club.']],
     ['continuation-writing', ['The owner name was written', 'on its first page']],
   ]) {
     const group = m.groups.find(g => g.family === family)
@@ -322,6 +323,17 @@ test('seven-choice and continuation joins preserve inline order and the writing 
   assert.deepEqual(imported.issues, [])
   const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
   assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
+  const proposed = decode(input.materializationBytes)
+  const { evidenceBytes, confirmationBytes } = input.ocrSourceBytes
+  withRetainedNck1OcrEvidence(m.paperId, evidenceBytes, confirmationBytes, () => {
+    const retained = value => retainedParagraphJoinBaseline(value, fixture.evidence, confirmation)
+    assert.deepEqual(retained(proposed), m)
+    const changedAnswer = structuredClone(proposed)
+    changedAnswer.answers[0].value = 'different'
+    assert.equal(retained(changedAnswer), null)
+    assert.equal(retainedParagraphJoinBaseline(proposed, fixture.evidence, { ...confirmation, confirmed: false }), null)
+  }, encode(m))
+  assert.equal(retainedParagraphJoinBaseline(proposed, fixture.evidence, confirmation), null)
   for (const { groupId, fragments } of joins) {
     const before = original.candidate.interpretation.groups.find(g => g.groupId === groupId)
     const after = imported.candidate.interpretation.groups.find(g => g.groupId === groupId)
@@ -333,13 +345,19 @@ test('seven-choice and continuation joins preserve inline order and the writing 
     if (before.family === 'seven-choices') {
       assert.equal(left.inlines[1].blankId, `blank:${m.paperId}:37`)
       assert.equal(right.inlines[0].text, 'They can practice every day.')
-    } else {
+    } else if (before.family === 'continuation-writing') {
       before.variant.materialBlockRefs = before.variant.materialBlockRefs.filter(id => id !== right.nodeId)
+    } else {
+      assert.equal(after.content.blocks[index].inlines.map(inline => inline.text).join(''), 'Write a short notice for the reading club.')
+      assert.deepEqual(after.variant.promptBlockRefs, before.variant.promptBlockRefs.filter(id => id !== right.nodeId))
+      assert.deepEqual(after.variant.givenSkeleton, before.variant.givenSkeleton)
+      assert.deepEqual(after.variant.response, before.variant.response)
+      assert.equal(after.variant.contentRequirements[1].contentRef.blockId, left.nodeId)
     }
     left.inlines.push(separator, ...right.inlines)
     expected.blocks.splice(index + 1, 1)
     assert.deepEqual(after.content, expected)
-    assert.deepEqual(after.variant, before.variant)
+    if (before.family !== 'application-writing') assert.deepEqual(after.variant, before.variant)
   }
 })
 

@@ -76,14 +76,30 @@ const MAX_BUFFER = 50 * 1024 * 1024
 // finalized Candidate after checking the original documents and both retained
 // OCR files against the sealed inventory. Other callers still replay pixels.
 let retainedOcr = null
-export function withRetainedNck1OcrEvidence(paperId, evidenceBytes, confirmationBytes, compute) {
+export function withRetainedNck1OcrEvidence(paperId, evidenceBytes, confirmationBytes, compute, sealedMaterializationBytes = null) {
   const previous = retainedOcr
   retainedOcr = {
     paperId,
     evidence: digestJson(JSON.parse(new TextDecoder().decode(evidenceBytes))),
     confirmation: digestJson(JSON.parse(new TextDecoder().decode(confirmationBytes))),
+    sealedMaterializationBytes,
   }
   try { return compute() } finally { retainedOcr = previous }
+}
+
+// A boundary-only revision may retain previous adjudications. Neither a source
+// edit nor removal of an existing relation can inherit that adjudication.
+export function retainedParagraphJoinBaseline(materialization, evidence, confirmation) {
+  if (!materialization.paragraphJoins || retainedOcr?.paperId !== materialization.paperId
+    || !retainedOcr.sealedMaterializationBytes
+    || retainedOcr.evidence !== digestJson(evidence)
+    || retainedOcr.confirmation !== digestJson(confirmation)) return null
+  const { schemaVersion, paragraphJoins, ...proposed } = materialization
+  const sealed = JSON.parse(new TextDecoder().decode(retainedOcr.sealedMaterializationBytes))
+  const { schemaVersion: sealedVersion, paragraphJoins: sealedJoins = [], ...original } = sealed
+  return digestJson(proposed) === digestJson(original)
+    && sealedJoins.every(join => paragraphJoins.some(proposal => digestJson(join) === digestJson(proposal)))
+    ? sealed : null
 }
 
 function isRecord(value) {
