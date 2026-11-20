@@ -110,7 +110,7 @@ test('listening edits bind UTF-16 coordinates after spelling and retained insert
   verifyListeningEditOccurrences(reportBytes, null, () => review)
   assert.throws(() => verifyListeningEditOccurrences(reportBytes, null), /match a reviewed occurrence/)
   const apply = (...listeningEdits) => applySpellingReview(bytes, encode({ listeningEdits }), audio)
-  assert.throws(() => apply(edits[1], edit(edits[1].start + 1, 'o', 'walk', 'should g walk. It is')), /overlapping/)
+  assert.throws(() => apply(edits[1], edit(edits[1].start, 'go. It', 'walk. It', 'We should walk. It is my')), /overlapping/)
   assert.throws(() => apply({ ...edits[1], before: 'no' }), /before does not match/)
   assert.throws(() => apply({ ...edits[0], start: baseline.length + 1 }), /before does not match/)
   assert.throws(() => apply({ ...edits[1], segmentId: 'other-paper-segment' }), /before does not match/)
@@ -147,7 +147,7 @@ test('Text 7 insertions reject replay against a restored transcript and require 
   assert.throws(() => apply(base, `Wrong place.${after}`), /two engines/)
 })
 
-test('listening edits distinguish repeated phrases by both neighboring words', () => {
+test('listening edits require the complete evidence to identify exactly the declared occurrence', () => {
   const text = 'I can go today. I can go tomorrow.'
   const { audio, evidence } = listeningInsertionFixture(text, null)
   const apply = (source, start, before, after, heard) => {
@@ -169,6 +169,14 @@ test('listening edits distinguish repeated phrases by both neighboring words', (
   assert.equal(apply(text, text.lastIndexOf('go'), '', 'not ', heard), 'I can go today. I can not go tomorrow.')
   assert.throws(() => apply('I can go today.', 2, 'can', 'could', 'I could go tomorrow'), /two engines/)
   assert.throws(() => apply('I can go today.', 2, 'can ', '', 'I go tomorrow'), /two engines/)
+  const repeated = 'Today I can go home. Tomorrow I can go home.'
+  for (const start of [repeated.indexOf('go'), repeated.lastIndexOf('go')]) {
+    assert.throws(() => apply(repeated, start, '', 'not ', 'I can not go home'), /two engines/)
+  }
+  const distinct = 'Tomorrow, I can not go home.'
+  assert.throws(() => apply(repeated, repeated.indexOf('go'), '', 'not ', distinct), /two engines/)
+  assert.equal(apply(repeated, repeated.lastIndexOf('go'), '', 'not ', distinct),
+    'Today I can go home. Tomorrow I can not go home.')
 })
 
 test('uncertain source phrase survives an OCR line wrap', () => {

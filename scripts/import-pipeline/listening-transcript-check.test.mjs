@@ -30,3 +30,15 @@ test('changes that share an anchor are combined into a single replacement', asyn
     { before: 'hamburger at this former', after: 'a hamburger from a fast food' },
   ])
 })
+
+test('repeated phrases expand local evidence to a unique anchor or go to listening review', async () => {
+  const text = 'Today I can go home. Tomorrow I can go home.'
+  const { edits, review } = await run(text, 'Today I can go home. Tomorrow I can not go home.')
+  assert.deepEqual(review, [])
+  assert.equal(edits.length, 1)
+  assert.equal(edits[0].start, text.lastIndexOf('go'))
+  assert.match(edits[0].evidence.apple, /^Tomorrow I can not go home$/u)
+  const unresolved = await run(text, 'Today I can go home. Later I can not go home.')
+  assert.ok(unresolved.edits.every(edit => edit.after.trim() !== 'not'))
+  assert.ok(unresolved.review.some(item => Object.values(item.evidence ?? {}).some(heard => heard.includes('not'))))
+})

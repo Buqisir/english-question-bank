@@ -2,7 +2,7 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { parseArgs } from 'node:util'
-import { applySpellingReview, supportsListeningEdit } from '../../server/paper-import/spellingReview.mjs'
+import { applySpellingReview, listeningEditEvidenceMatch, listeningEditWords } from '../../server/paper-import/spellingReview.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { appleSource, localEngines, parakeet, readJson, remoteEngine, withWork } from './listening-transcript-check-engines.mjs'
 import { align, observation, sites, speakerLabels, timedReading, units } from './listening-transcript-check-alignment.mjs'
@@ -44,11 +44,33 @@ function editSpan(text, source, site, { value, punctuation }) {
 
 function evidenceRange(occurrence, votes) {
   const words = votes.flatMap(vote => vote.context)
+    .filter(word => Number.isFinite(word.startSeconds) && Number.isFinite(word.endSeconds))
   const { startSeconds, endSeconds } = occurrence
   if (!words.length) return null
   const start = Math.max(startSeconds, Math.floor((startSeconds + Math.min(...words.map(w => w.startSeconds)) - 0.35) * 100) / 100)
   const end = Math.min(endSeconds, Math.ceil((startSeconds + Math.max(...words.map(w => w.endSeconds)) + 0.35) * 100) / 100)
   return Number.isFinite(start) && Number.isFinite(end) && end > start ? { startSeconds: start, endSeconds: end } : null
+}
+
+function uniqueEvidence(text, span, vote) {
+  const { availableLeft, availableRight, window } = vote
+  const spoken = listeningEditWords(vote.value).length
+  let left = 0, right = 0
+  while (left < availableLeft && listeningEditWords(window(left, 0).evidence).length < spoken + 2) left++
+  while (right < availableRight && listeningEditWords(window(0, right).evidence).length < spoken + 2) right++
+  const pending = [[left, right]]
+  const visited = new Set()
+  for (const [l, r] of pending) {
+    if (visited.has(`${l}:${r}`)) continue
+    visited.add(`${l}:${r}`)
+    const sample = window(l, r)
+    const match = listeningEditEvidenceMatch(text, span, sample.evidence)
+    if (match === 'unique') return { engine: vote.engine, ...sample }
+    if (match !== 'ambiguous') continue
+    if (l < availableLeft) pending.push([l + 1, r])
+    if (r < availableRight) pending.push([l, r + 1])
+  }
+  return null
 }
 
 function remoteObservation(text, source, site) {
@@ -100,12 +122,23 @@ export async function adjudicate(group, text, engines, remote, audioSha256) {
         review.push({ segmentId, occurrence, ...interval, before: '', evidence, reason: '插入点在两位说话人之间，请听核句子归属。' })
         continue
       }
-      const span = candidates.map(vote => editSpan(text, source, site, vote)).find(candidate =>
-        candidate.before !== candidate.after && !candidate.before.match(speakerLabels)
-        && candidates.filter(vote => supportsListeningEdit(text, candidate, vote.evidence)).length >= 2)
+      let span, support
+      for (const vote of candidates) {
+        const candidate = editSpan(text, source, site, vote)
+        if (candidate.before === candidate.after || candidate.before.match(speakerLabels)) continue
+        const samples = candidates.map(peer => uniqueEvidence(text, candidate, peer)).filter(Boolean)
+        if (samples.length < 2) continue
+        span = candidate
+        support = samples
+        break
+      }
       const previous = edits.at(-1)
       if (span && (!previous || previous.start !== span.start && previous.start + previous.before.length <= span.start)) {
-        edits.push({ segmentId, ...span, audioSha256, occurrence, ...interval, evidence,
+        const expanded = evidenceRange(occurrence, support)
+        for (const sample of support) evidence[sample.engine] = sample.evidence
+        edits.push({ segmentId, ...span, audioSha256, occurrence,
+          startSeconds: Math.min(interval.startSeconds, expanded?.startSeconds ?? interval.startSeconds),
+          endSeconds: Math.max(interval.endSeconds, expanded?.endSeconds ?? interval.endSeconds), evidence,
           reason: localAgree ? 'Apple 与 Parakeet v2 独立转写一致。' : '本地引擎有分歧，短片复核后两家转写一致。' })
         continue
       }

@@ -205,20 +205,36 @@ export function listeningEditWords(value) {
     .match(/[\p{L}\p{N}]+(?:'[\p{L}\p{N}]+)*/gu) ?? []
 }
 
-export function supportsListeningEdit(text, { start, before, after }, heard) {
+export function listeningEditEvidenceMatch(text, { start, before, after }, heard) {
   const words = listeningEditWords(heard)
+  const baseline = listeningEditWords(text)
   const left = listeningEditWords(text.slice(0, start))
   const right = listeningEditWords(text.slice(start + before.length))
+  const removed = listeningEditWords(before)
   const added = listeningEditWords(after)
   const matches = (sequence, at, phrase) => at >= 0
     && phrase.every((word, offset) => sequence[at + offset] === word)
-  if (after && !added.length) return false
-  if (!before && (matches(left, left.length - added.length, added) || matches(right, 0, added))) return false
-  const expected = [...left.slice(-2), ...added, ...right.slice(0, 2)]
-  return expected.length > 0 && words.some((_, index) =>
-    (left.length || index === 0)
-    && (right.length || index + expected.length === words.length)
-    && matches(words, index, expected))
+  if (!words.length || (after && !added.length) || baseline.length !== left.length + removed.length + right.length
+    || !matches(baseline, 0, [...left, ...removed, ...right])
+    || (!before && (matches(left, left.length - added.length, added) || matches(right, 0, added)))) return 'mismatch'
+  const positions = new Set()
+  for (let split = 0; split + added.length <= words.length; split++) {
+    if (!matches(words, split, added)) continue
+    const anchor = [...words.slice(0, split), ...removed, ...words.slice(split + added.length)]
+    const rightCount = words.length - split - added.length
+    for (let offset = 0; offset + anchor.length <= baseline.length; offset++) {
+      const position = offset + split
+      if (split >= Math.min(2, position)
+        && rightCount >= Math.min(2, baseline.length - position - removed.length)
+        && matches(baseline, offset, anchor)) positions.add(position)
+    }
+  }
+  if (!positions.has(left.length)) return 'mismatch'
+  return positions.size === 1 ? 'unique' : 'ambiguous'
+}
+
+export function supportsListeningEdit(text, edit, heard) {
+  return listeningEditEvidenceMatch(text, edit, heard) === 'unique'
 }
 
 export function verifyListeningEditOccurrences(reportBytes, current, readBaseReview = () => null) {
