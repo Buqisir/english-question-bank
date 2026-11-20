@@ -38,6 +38,7 @@
 #   QUESTION_BANK_PAPER_STORAGE_UUID / QUESTION_BANK_PAPER_STORAGE_MOUNT
 #                                  optional reviewed data-disk guard; never mounts
 #   EQB_R2_REMOTE                 default: r2:eqb-backup (rclone remote:bucket)
+#   EQB_R2_BWLIMIT                default: 1M (rclone bandwidth limit, 1 MiB/s)
 #   EQB_SNAPSHOT_DIR               if set, snapshots are written there and NOT
 #                                  cleaned up (lets a caller/verifier inspect
 #                                  them); otherwise a mktemp -d dir is used and
@@ -183,15 +184,15 @@ fi
 
 # Copy the files referenced by the snapshots before exposing the dated prefix.
 echo "==> Copying immutable files to $FILES_PREFIX"
-[[ -d "$IMPORT_OPS_ROOT" ]] && rclone copy "$IMPORT_OPS_ROOT" "$FILES_PREFIX/import-ops/files"
-[[ -d "$BLOB_ROOT" ]] && rclone copy "$BLOB_ROOT" "$FILES_PREFIX/published-blobs"
+[[ -d "$IMPORT_OPS_ROOT" ]] && rclone copy "$IMPORT_OPS_ROOT" "$FILES_PREFIX/import-ops/files" --bwlimit "${EQB_R2_BWLIMIT:-1M}"
+[[ -d "$BLOB_ROOT" ]] && rclone copy "$BLOB_ROOT" "$FILES_PREFIX/published-blobs" --bwlimit "${EQB_R2_BWLIMIT:-1M}"
 
 echo "==> Copying snapshots and mutable files to $REMOTE_PREFIX"
-rclone copy "$SNAPSHOT_DIR/question-bank.sqlite" "$REMOTE_PREFIX/"
-rclone copy "$SNAPSHOT_DIR/user-data.sqlite" "$REMOTE_PREFIX/"
-rclone copy "$SNAPSHOT_DIR/import-ops.sqlite" "$REMOTE_PREFIX/"
-[[ -d "$PAPER_ASSET_ROOT" ]] && rclone copy "$PAPER_ASSET_ROOT" "$REMOTE_PREFIX/paper-assets"
-[[ -d "$USER_SPACE_ROOT" ]] && rclone copy "$USER_SPACE_ROOT" "$REMOTE_PREFIX/user-space"
+rclone copy "$SNAPSHOT_DIR/question-bank.sqlite" "$REMOTE_PREFIX/" --bwlimit "${EQB_R2_BWLIMIT:-1M}"
+rclone copy "$SNAPSHOT_DIR/user-data.sqlite" "$REMOTE_PREFIX/" --bwlimit "${EQB_R2_BWLIMIT:-1M}"
+rclone copy "$SNAPSHOT_DIR/import-ops.sqlite" "$REMOTE_PREFIX/" --bwlimit "${EQB_R2_BWLIMIT:-1M}"
+[[ -d "$PAPER_ASSET_ROOT" ]] && rclone copy "$PAPER_ASSET_ROOT" "$REMOTE_PREFIX/paper-assets" --bwlimit "${EQB_R2_BWLIMIT:-1M}"
+[[ -d "$USER_SPACE_ROOT" ]] && rclone copy "$USER_SPACE_ROOT" "$REMOTE_PREFIX/user-space" --bwlimit "${EQB_R2_BWLIMIT:-1M}"
 
 echo "==> Push complete. Remote size/manifest:"
 rclone size "$REMOTE_PREFIX" || true
