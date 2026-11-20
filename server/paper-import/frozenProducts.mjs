@@ -74,7 +74,8 @@ export function matchesSealedPrintInputs({ rootDir, inputDigest, sealedFiles, se
   if (!oldConfig) return false
   const bytes = sealedConfigBytes ?? readFileSync(path.join(rootDir, oldConfig.path))
   if (bytes.length !== oldConfig.byteLength || sha256(bytes) !== oldConfig.sha256) return false
-  const config = JSON.parse(bytes)
+  // Review reads return a plain Uint8Array, whose toString() is not the JSON text.
+  const config = JSON.parse(new TextDecoder().decode(bytes))
   const sealedDigest = digestJson(productInputFiles(sealedFiles).map(file => productInputDescriptor(file, config))
     .sort((a, b) => a.path.localeCompare(b.path)))
   return inputDigest === sealedDigest
