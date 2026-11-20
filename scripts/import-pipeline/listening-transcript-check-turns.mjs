@@ -1,4 +1,4 @@
-import { listeningEditSpeakerLabels, listeningEditTurns, listeningEditWords } from '../../server/paper-import/spellingReview.mjs'
+import { hasListeningTurnSpeakerLabel, listeningEditSpeakerLabels, listeningEditTurns, listeningEditWords } from '../../server/paper-import/spellingReview.mjs'
 import { alignListeningSentences } from './listening-sentence-align.mjs'
 import { align, preserveSourceForms, sameProperNameSound, timedReading, units } from './listening-transcript-check-alignment.mjs'
 
@@ -135,6 +135,8 @@ export async function rewriteTurns(group, text, readings, engines, audioSha256, 
   })
   const turns = listeningEditTurns(text)
   if (turns.some(turn => turn.ambiguous)) return manual('行首标签的说话人不明，请整段听核。')
+  const embeddedLabel = '轮次正文疑似含说话人标签，请整段听核。'
+  if (turns.some(({ start, end }) => hasListeningTurnSpeakerLabel(text.slice(start, end)))) return manual(embeddedLabel)
   const runs = readings.map(({ engine }) => [engine, withoutAnnouncements(engines[engine][group.key] ?? [])])
   if (runs.some(([, spoken]) => !spoken)) return manual('疑似报幕的归属不明，请整段听核。')
   const cleaned = Object.fromEntries(runs.map(([engine, spoken]) => [engine, { [group.key]: spoken }]))
@@ -160,6 +162,7 @@ export async function rewriteTurns(group, text, readings, engines, audioSha256, 
       after = chooseListeningTurn(before, evidence)
     }
     if (after === null) return manual('有轮次未获逐词两家支持，请整段听核。')
+    if (hasListeningTurnSpeakerLabel(after)) return manual(embeddedLabel)
     if (before === after) continue
     edits.push({ segmentId, scope: 'turn', turnIndex: i, start, before, after, audioSha256, occurrence,
       startSeconds, endSeconds, evidence, reason: '按逐词录音共识整轮替换。' })

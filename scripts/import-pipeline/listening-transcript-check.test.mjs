@@ -108,6 +108,20 @@ test('whole-turn replacements apply together or leave the entire passage for lis
   assert.equal(resolved.edits[1].evidence['gpt-transcribe'], resolved.edits[1].after)
 })
 
+test('whole turns route embedded speaker labels to listening review', async () => {
+  const text = 'I carried the brown boxes to the front door today.'
+  for (const label of ['Mary:', 'M/W:']) {
+    const speech = `${text} I can help.`
+    const withLabel = `${text} ${label} I can help.`
+    const original = await decideTurns(`M: ${withLabel}`, speech)
+    const replacement = await decideTurns(`M: ${speech}`, withLabel)
+    for (const result of [original, replacement]) {
+      assert.deepEqual(result.edits, [])
+      assert.match(result.review[0].reason, /正文疑似含说话人标签/)
+    }
+  }
+})
+
 test('whole turns drop announcements and route unassigned words to listening review', async () => {
   const text = 'W: I carried the brown boxes to the front door today.\nM: My sister put the red bag next to my chair.'
   const first = 'I carried the green boxes to the front door today.'

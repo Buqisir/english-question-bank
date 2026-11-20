@@ -238,13 +238,12 @@ test('whole-turn admission binds the original turn and only changes transcript t
 })
 
 test('whole-turn edits preserve named speakers and reject ambiguous speaker prefixes', () => {
-  function apply(text, before) {
+  function apply(text, before, after = 'Where are you going?') {
     const { audio, evidence } = listeningInsertionFixture(text, null)
     const bytes = Buffer.from(JSON.stringify({ listening: { state: 'captured',
       transcript: [{ segmentId: evidence.segmentId, text }] } }))
     const report = { ...prepareSpellingReview(bytes), reviewedBy: 'import_agent', reviewedAt: '2026-11-20T00:00:00Z' }
     report.targets[0].decision = 'unchanged'
-    const after = 'Where are you going?'
     report.listeningEdits = [{ scope: 'turn', turnIndex: 0, segmentId: evidence.segmentId, start: text.indexOf(before),
       before, after, audioSha256: audio.sha256, occurrence: evidence.occurrence, startSeconds: 14, endSeconds: 19,
       evidence: { apple: after, 'parakeet-v2': after }, reason: '整轮替换。' }]
@@ -258,6 +257,12 @@ test('whole-turn edits preserve named speakers and reject ambiguous speaker pref
 
   const ambiguous = 'Where are you headed?\nvoice-2：To the library.'
   assert.throws(() => apply(`M: ${ambiguous}`, ambiguous), /unrecognized speaker label/)
+  const first = 'Where are you headed?'
+  for (const label of ['Mary:', 'M/W:']) {
+    const combined = `${first} ${label} To the library.`
+    assert.throws(() => apply(`M: ${combined}`, combined), /speaker label/)
+    assert.throws(() => apply(`M: ${first}`, first, combined), /speaker label/)
+  }
 })
 
 test('audio that says Well cannot assign it to either side of a speaker change', () => {
