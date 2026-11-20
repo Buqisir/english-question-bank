@@ -1849,9 +1849,20 @@ export function withRetainedReviewEvidence(rootDir, base, compute) {
 
   const evidence = retainedBytes(`materialization/${NCK1_OCR_EVIDENCE_FILE_NAME}`)
   const confirmation = retainedBytes(`materialization/${NCK1_OCR_CONFIRMATION_FILE_NAME}`)
+  const readSealedMaterialization = () => {
+    if (!previousDirectory) return retainedBytes(source.materializationPath)
+    const file = files.get(source.materializationPath)
+    if (!file) return null
+    try {
+      const bytes = readFileSync(resolveReviewFile(previousDirectory, source.materializationPath))
+      return bytes.length === file.byteLength && sha256(bytes) === file.sha256 ? bytes : null
+    } catch {
+      return null
+    }
+  }
   const run = () => compute(retainedBytes)
   return evidence && confirmation
-    ? withRetainedNck1OcrEvidence(revision.paperId, evidence, confirmation, run)
+    ? withRetainedNck1OcrEvidence(revision.paperId, evidence, confirmation, run, readSealedMaterialization())
     : run()
 }
 

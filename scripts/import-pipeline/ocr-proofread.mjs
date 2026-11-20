@@ -44,6 +44,7 @@ import { hydratedEvidenceBase } from './review-target.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_REGION_TOLERANCE, applyEssayTextCorrections, sourceReferenceBlocks } from '../../server/paper-import/sourceReferences.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { isAdjacentCjkText } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
 import {
   NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2,
   NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3,
@@ -1181,7 +1182,7 @@ function joinLines(lines, { reference = false } = {}) {
   // reference/annotation CJK spacing intentionally differs from speech hyphens.
   return lines.reduce((text, line) => {
     if (!text) return line
-    const cjk = /[\u3000-\u9fff\uff00-\uffef]$/u.test(text) && /^[\u3000-\u9fff\uff00-\uffef]/u.test(line)
+    const cjk = isAdjacentCjkText(text, line)
     const hyphen = reference && /[A-Za-z]-$/u.test(text) && /^[a-z]/u.test(line)
     return `${text}${cjk || hyphen ? '' : ' '}${line}`
   }, '')

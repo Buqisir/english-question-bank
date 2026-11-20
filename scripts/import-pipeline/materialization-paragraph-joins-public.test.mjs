@@ -9,7 +9,7 @@ import { deriveNck1MaterializationBundle } from '../../server/paper-canonical/nc
 import { importCanonicalCandidate, compileNck1MaterializationCandidatePreview } from '../../shared/paper-canonical/compiler.mjs'
 import { nck1WritingGivenRefsAuthorityRef, nck1ParagraphJoinAuthorityRef, nck1OcrOptionEmphasisAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1CrossPageProducerIssueAuthorityRef, nck1MultipleWritingNoticesAuthorityRef } from '../../shared/paper-canonical/authority.mjs'
 import { verifyCrossPageParagraphJoinEvidence } from '../../server/paper-import/crossPageParagraphJoinEvidence.mjs'
-import { resolveConfirmedNck1OcrEvidence } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
+import { resolveConfirmedNck1OcrEvidence, retainedParagraphJoinBaseline, withRetainedNck1OcrEvidence } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { paragraphJoinSourceLocator } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
 import { projectCanonicalConsumerGroup } from '../../shared/paper-canonical/consumerProjection.mjs'
@@ -286,6 +286,103 @@ test('sealed v2 Reading/cloze/grammar joins preserve blanks, marks, pointers and
   for (const relation of splitRaw.paragraphJoins) relation.confirmationSha256 = sha256(encode(split))
   assert(importCanonicalCandidate({ ...input, materializationBytes: encode(splitRaw),
     ocrSourceBytes: { ...input.ocrSourceBytes, confirmationBytes: encode(split) } }).issues.length)
+})
+
+test('seven-choice and writing joins preserve inline order, prompts and responses', async () => {
+  const fixture = await makeSyntheticNck1OcrFixture({ crossPageSevenAndContinuation: true })
+  const confirmation = { ...fixture.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v2' }
+  const produced = produceNck1OcrMaterialization({ paperId: fixture.paperId,
+    documents: fixture.sourceDocuments, evidence: fixture.evidence, confirmation })
+  assert.equal(produced.disposition, 'ready_for_verification', JSON.stringify(produced.issues))
+  const m = produced.materialization
+  const receipt = encode({ paperId: m.paperId, revisionId: 'sealed-ocr-revision', confirmationId: 'sealed-confirmation',
+    reviewerKind: 'import_agent', sourceSetDigest: confirmation.sourceSetDigest, evidenceDigest: confirmation.evidenceDigest, confirmation })
+  let input = { kind: 'nck1-source-materialization', materializationBytes: encode(m),
+    documents: fixture.sourceDocuments.map(d => ({ documentId: d.documentId, bytes: d.bytes })),
+    media: produced.mediaFiles, ocrSourceBytes: { evidenceBytes: encode(fixture.evidence), confirmationBytes: encode(confirmation) } }
+  const original = importCanonicalCandidate(input)
+  assert.deepEqual(original.issues, [])
+  const joins = []
+  for (const [family, starts] of [
+    ['seven-choices', ['A short guide has 37.', 'They can practice']],
+    ['application-writing', ['请为读书俱乐部的活', '动写一则通知。']],
+    ['continuation-writing', ['The owner name was written', 'on its first page']],
+  ]) {
+    const group = m.groups.find(g => g.family === family)
+    const items = confirmation.documents[0].pages.flatMap(page => page.orderedItems)
+    const itemIds = starts.map(start => items.find(item => item.text.startsWith(start)).itemId)
+    const plan = planMaterializationParagraphJoin(input, receipt,
+      { groupId: group.groupId, itemIds, reason: '原页续行未缩进，同一自然段' })
+    assert.equal(plan.relation.joiner, 'ocr')
+    const applied = applyMaterializationParagraphJoinPlan(input, receipt, plan, { confirmed: true })
+    assert.deepEqual(applied.materialization.groups, m.groups)
+    assert.deepEqual(applied.materialization.answers, m.answers)
+    input = { ...input, materializationBytes: applied.materializationBytes }
+    joins.push(plan.relation)
+  }
+  const imported = importCanonicalCandidate(input)
+  assert.deepEqual(imported.issues, [])
+  const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+  assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
+  const proposed = decode(input.materializationBytes)
+  const legacy = structuredClone(proposed)
+  for (const relation of legacy.paragraphJoins) delete relation.joiner
+  const replay = importCanonicalCandidate({ ...input, materializationBytes: encode(legacy) })
+  assert.deepEqual(replay.issues, [])
+  const applicationJoin = legacy.paragraphJoins.find(relation => relation.groupId.endsWith(':writing-application'))
+  const legacyApplication = replay.candidate.interpretation.groups.find(group => group.groupId === applicationJoin.groupId)
+  const originalApplication = original.candidate.interpretation.groups.find(group => group.groupId === applicationJoin.groupId)
+  const [leftFragment, rightFragment, ...remaining] = originalApplication.content.blocks
+  const historicalContent = { ...originalApplication.content, blocks: [
+    { ...leftFragment, inlines: [...leftFragment.inlines,
+      { kind: 'text', nodeId: `text:paragraph-join:${applicationJoin.joinId}:separator`, text: ' ' },
+      ...rightFragment.inlines] }, ...remaining,
+  ] }
+  assert.equal(digestJson(legacyApplication.content), digestJson(historicalContent))
+  const replayPreview = compileNck1MaterializationCandidatePreview(replay.candidate)
+  assert(replayPreview.compilation, JSON.stringify(replayPreview.unresolvedIssues))
+  assert.equal(replayPreview.candidate.candidateDigest, replay.candidate.candidateDigest)
+  const invalidJoiner = structuredClone(proposed)
+  invalidJoiner.paragraphJoins[0].joiner = 'unknown'
+  assert(importCanonicalCandidate({ ...input, materializationBytes: encode(invalidJoiner) }).issues.length)
+  const { evidenceBytes, confirmationBytes } = input.ocrSourceBytes
+  withRetainedNck1OcrEvidence(m.paperId, evidenceBytes, confirmationBytes, () => {
+    const retained = value => retainedParagraphJoinBaseline(value, fixture.evidence, confirmation)
+    assert.deepEqual(retained(proposed), m)
+    const changedAnswer = structuredClone(proposed)
+    changedAnswer.answers[0].value = 'different'
+    assert.equal(retained(changedAnswer), null)
+    assert.equal(retainedParagraphJoinBaseline(proposed, fixture.evidence, { ...confirmation, confirmed: false }), null)
+  }, encode(m))
+  assert.equal(retainedParagraphJoinBaseline(proposed, fixture.evidence, confirmation), null)
+  for (const { groupId, fragments } of joins) {
+    const before = original.candidate.interpretation.groups.find(g => g.groupId === groupId)
+    const after = imported.candidate.interpretation.groups.find(g => g.groupId === groupId)
+    const expected = structuredClone(before.content)
+    const index = expected.blocks.findIndex(block => block.nodeId === fragments[0].blockId)
+    const [left, right] = expected.blocks.slice(index, index + 2)
+    if (before.family !== 'application-writing') {
+      const separator = after.content.blocks[index].inlines[left.inlines.length]
+      assert.equal(separator.text, ' ')
+      left.inlines.push(separator)
+    }
+    if (before.family === 'seven-choices') {
+      assert.equal(left.inlines[1].blankId, `blank:${m.paperId}:37`)
+      assert.equal(right.inlines[0].text, 'They can practice every day.')
+    } else if (before.family === 'continuation-writing') {
+      before.variant.materialBlockRefs = before.variant.materialBlockRefs.filter(id => id !== right.nodeId)
+    } else {
+      assert.equal(after.content.blocks[index].inlines.map(inline => inline.text).join(''), '请为读书俱乐部的活动写一则通知。')
+      assert.deepEqual(after.variant.promptBlockRefs, before.variant.promptBlockRefs.filter(id => id !== right.nodeId))
+      assert.deepEqual(after.variant.givenSkeleton, before.variant.givenSkeleton)
+      assert.deepEqual(after.variant.response, before.variant.response)
+      assert.equal(after.variant.contentRequirements[1].contentRef.blockId, left.nodeId)
+    }
+    left.inlines.push(...right.inlines)
+    expected.blocks.splice(index + 1, 1)
+    assert.deepEqual(after.content, expected)
+    if (before.family !== 'application-writing') assert.deepEqual(after.variant, before.variant)
+  }
 })
 
 test('v12 cross-page join admits a bound listening-count correction and rejects digest drift', async () => {

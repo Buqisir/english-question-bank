@@ -129,7 +129,7 @@ export function SevenChoicesAnalysisPanel({
               key={`jump-${option.label}`}
               type="button"
               className="pi-seven-option-jump-chip"
-              data-seven-color={chain?.colorIndex ?? undefined}
+              data-seven-color={isOpen ? chain.colorIndex : undefined}
               data-active={isOpen ? 'true' : undefined}
               onClick={() => jumpToOption(option.label, chain)}
               aria-pressed={isOpen}
@@ -157,7 +157,7 @@ export function SevenChoicesAnalysisPanel({
                 isCorrect ? 'pi-seven-option-card--correct' : '',
                 isOpen ? 'pi-seven-option-card--open' : '',
               ].filter(Boolean).join(' ')}
-              data-seven-color={chain?.colorIndex ?? undefined}
+              data-seven-color={isOpen ? chain.colorIndex : undefined}
             >
               <button
                 type="button"

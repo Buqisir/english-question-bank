@@ -36,8 +36,9 @@ export function planMaterializationParagraphJoin(input, receiptBytes, { groupId,
   if (!Array.isArray(itemIds) || itemIds.length !== 2 || itemIds[0] === itemIds[1]
     || typeof reason !== 'string' || !reason.trim()) throw new Error('Specify two distinct complete item IDs and the original-page review reason')
   const groups = materialization.groups.filter(group => group.groupId === groupId)
-  if (groups.length !== 1 || !['reading', 'cloze', 'grammar-fill'].includes(groups[0].family)) throw new Error('Select exactly one Reading, cloze or grammar-fill group')
+  if (groups.length !== 1) throw new Error('Select exactly one source group')
   const before = []
+  let hasBlanks = false
   const fragments = itemIds.map(itemId => {
     const items = confirmation.documents.flatMap(document => document.pages.flatMap(page =>
       page.orderedItems.filter(item => item.itemId === itemId).map(item => ({ document, page, item }))))
@@ -50,16 +51,17 @@ export function planMaterializationParagraphJoin(input, receiptBytes, { groupId,
     const blocks = groups[0].blocks.filter(block => block.kind === 'paragraph' && block.role === 'body'
       && same(block.source, locator))
     if (blocks.length !== 1) throw new Error(`Complete source item must resolve to one body block: ${itemId}`)
+    hasBlanks ||= blocks[0].content.some(part => part.kind === 'blank_ref')
     before.push(item.text)
     return { blockId: blocks[0].blockId, itemId, observationIds: [...item.observationIds], source: structuredClone(blocks[0].source) }
   })
   const relation = {
     schemaVersion: /^nck1-source-materialization-v1[45]$/u.test(materialization.schemaVersion)
-      && confirmation.schemaVersion === 'nck1-ocr-source-confirmation-v3' && groups[0].family === 'reading'
+      && confirmation.schemaVersion === 'nck1-ocr-source-confirmation-v3' && !hasBlanks
       ? CROSS_PAGE_PARAGRAPH_JOIN_VERSION : CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2,
     joinId: `paragraph-join:${digestJson([groupId, fragments.map(fragment => fragment.itemId), reason]).slice(7, 31)}`,
     groupId, sourceSetDigest: evidence.sourceSetDigest, evidenceDigest: evidence.evidenceDigest,
-    confirmationSha256: binding.confirmationSha256, separator: ' ',
+    confirmationSha256: binding.confirmationSha256, separator: ' ', joiner: 'ocr',
     sourceReview: { reviewedBy: 'import_agent', sameNaturalParagraph: true, continuationLineUnindented: true, reason },
     fragments,
   }

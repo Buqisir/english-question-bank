@@ -78,9 +78,10 @@ function reading(letter, from, to, { table = false, crossPageParagraph = false }
   ].join('')
 }
 
-function questionHtml({ includeTable = true, crossPageParagraph = false, crossPageBlanks = false, listening = false } = {}) {
+function questionHtml({ includeTable = true, crossPageParagraph = false, crossPageBlanks = false, crossPageSevenAndContinuation = false, listening = false } = {}) {
   const sevenParagraphs = Array.from({ length: 5 }, (_, index) =>
-    paragraph(`A short guide has ${36 + index}._____ for learners.`)).join('')
+    paragraph(`A short guide has ${36 + index}._____ for learners.`)
+    + (crossPageSevenAndContinuation && index === 1 ? '<p style="break-before:page">They can practice every day.</p>' : '')).join('')
   const sevenOptions = 'ABCDEFG'.split('').map((label) =>
     paragraph(`${label}. ${label} option sentence.`)).join('')
   const clozeText = Array.from({ length: 15 }, (_, index) =>
@@ -127,7 +128,9 @@ function questionHtml({ includeTable = true, crossPageParagraph = false, crossPa
     ] : [paragraph(`Practice helps: ${grammarText}.`)]),
     paragraph('第四部分 写作 (共两节，满分40分)'),
     paragraph('第一节(满分15分)'),
-    paragraph('Write a short notice for the reading club.'),
+    ...(crossPageSevenAndContinuation
+      ? [paragraph('请为读书俱乐部的活'), '<p style="break-before:page">动写一则通知。</p>']
+      : [paragraph('Write a short notice for the reading club.')]),
     paragraph('内容包括：'),
     paragraph('1. Share the meeting time;'),
     paragraph('2. Invite new members.'),
@@ -138,7 +141,9 @@ function questionHtml({ includeTable = true, crossPageParagraph = false, crossPa
     paragraph('第二节(满分25分)'),
     paragraph('阅读下面材料，根据其内容和所给段落开头语续写两段。'),
     paragraph('Mia found a lost notebook after class.'),
-    paragraph('The owner name was written on its first page.'),
+    ...(crossPageSevenAndContinuation
+      ? [paragraph('The owner name was written'), '<p style="break-before:page">on its first page.</p>']
+      : [paragraph('The owner name was written on its first page.')]),
     paragraph('注意：'),
     paragraph('1. 续写词数应为150左右；'),
     paragraph('2. 请按如下格式在答题卡的相应位置作答。'),
@@ -269,11 +274,12 @@ export async function makeSyntheticNck1PdfFixture({
   includeExtractionCases = true,
   crossPageParagraph = false,
   crossPageBlanks = false,
+  crossPageSevenAndContinuation = false,
   listening = false,
 } = {}) {
   const browser = await playwright.chromium.launch({ headless: true, channel: 'chromium' })
   try {
-    const questionBytes = await renderPdf(browser, documentHtml(questionHtml({ includeTable, crossPageParagraph, crossPageBlanks, listening })))
+    const questionBytes = await renderPdf(browser, documentHtml(questionHtml({ includeTable, crossPageParagraph, crossPageBlanks, crossPageSevenAndContinuation, listening })))
     const answerBytes = await renderPdf(browser, documentHtml(answerHtml({ listening })))
     const answerShapeBytes = includeAnswerShapes ? {
       keyOnly: await renderPdf(browser, documentHtml(answerHtml({ answerShape: 'key_only' }))),

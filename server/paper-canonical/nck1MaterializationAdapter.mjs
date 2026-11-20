@@ -1,5 +1,5 @@
 import { validateInImageLabelMeasurementBinding } from '../../shared/paper-canonical/readingFigureLayout.mjs'
-import { paragraphJoinBoundaryNeedsTrim, CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
+import { isAdjacentCjkText, paragraphJoinBoundaryNeedsTrim, CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
 import { resolveInImageOptionLabels, IN_IMAGE_OPTION_LABELS_VERSION_V2, verifyInImageOptionLabelsV2Ownership } from '../../shared/paper-canonical/inImageOptionLabels.mjs'
 import { execFileSync } from 'node:child_process'
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
@@ -48,7 +48,7 @@ import {
 import { extractDocxDocumentParagraphs, extractDocxParagraphEmphasis } from './docxSourceAdapter.mjs'
 import { mapSourceEmphasisEdits, splitSourceEmphasis } from './sourceEmphasis.mjs'
 import { resolveOcrQuestionTextEmphasis } from './ocrQuestionTextEmphasis.mjs'
-import { resolveConfirmedNck1OcrEvidence, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3 } from '../paper-import/nck1OcrSourceEvidence.mjs'
+import { resolveConfirmedNck1OcrEvidence, retainedParagraphJoinBaseline, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V2, NCK1_OCR_CONFIRMATION_SCHEMA_VERSION_V3 } from '../paper-import/nck1OcrSourceEvidence.mjs'
 import { produceNck1MaterializationFromStructures } from '../paper-import/nck1DocxMaterializationProducer.mjs'
 import { resolveListeningSourceDecision } from '../paper-import/listeningSourceDecision.mjs'
 import { verifyCrossPageParagraphJoinEvidence } from '../paper-import/crossPageParagraphJoinEvidence.mjs'
@@ -2684,7 +2684,8 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
       }).materialization : { groups: [], sourceCoverage: { visuals: resolved.sourceVisuals } })
       if (raw.paragraphJoins && ['nck1-source-materialization-v8', 'nck1-source-materialization-v9', 'nck1-source-materialization-v10', 'nck1-source-materialization-v11', 'nck1-source-materialization-v12', 'nck1-source-materialization-v13', 'nck1-source-materialization-v14', 'nck1-source-materialization-v15'].includes(raw.schemaVersion)) {
         paragraphJoins = verifyCrossPageParagraphJoinEvidence(raw, {
-          evidence, confirmation, confirmationBytes: ocrSourceBytes.confirmationBytes, resolved, expected, authorityRef,
+          evidence, confirmation, confirmationBytes: ocrSourceBytes.confirmationBytes, resolved,
+          expected: retainedParagraphJoinBaseline(raw, evidence, confirmation) ?? expected, authorityRef,
         })
       }
     }
@@ -2910,8 +2911,8 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
       const left = group.content.blocks[index], right = group.content.blocks[index + 1]
       if (left?.kind !== 'paragraph' || right?.kind !== 'paragraph' || right.nodeId !== blocks[1].blockId
         || [left, right].some(paragraph => paragraph.inlines.some(node => node.kind !== 'text'
-          && !(join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 && group.family !== 'reading' && node.kind === 'blank_ref')))
-        || paragraphJoinBoundaryNeedsTrim(left.inlines) || paragraphJoinBoundaryNeedsTrim(right.inlines)) {
+          && !(join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 && node.kind === 'blank_ref')))
+        || (!join.joiner && [left, right].some(block => paragraphJoinBoundaryNeedsTrim(block.inlines)))) {
         throw new Error('Cross-page paragraph join cannot map its two effective text segments')
       }
       const refs = join.fragments.map((fragment, fragmentIndex) => {
@@ -2929,12 +2930,32 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
         }
         return ref
       })
-      const separator = { kind: 'text', nodeId: `text:paragraph-join:${join.joinId}:separator`, text: ' ' }
       group.sourceSpanRefsByTarget[`content_node:${left.nodeId}`] = refs
-      group.sourceSpanRefsByTarget[`content_node:${separator.nodeId}`] = refs
       if (join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2) delete group.sourceSpanRefsByTarget[`content_node:${right.nodeId}`]
-      left.inlines.push(separator, ...right.inlines)
+      const leftText = left.inlines.at(-1)?.text ?? ''
+      const rightText = right.inlines[0]?.text ?? ''
+      if (!join.joiner || (!/\s$/u.test(leftText) && !/^\s/u.test(rightText) && !isAdjacentCjkText(leftText, rightText))) {
+        const separator = { kind: 'text', nodeId: `text:paragraph-join:${join.joinId}:separator`, text: join.separator }
+        group.sourceSpanRefsByTarget[`content_node:${separator.nodeId}`] = refs
+        left.inlines.push(separator)
+      }
+      left.inlines.push(...right.inlines)
       group.content.blocks.splice(index + 1, 1)
+      const { variant } = group
+      const writingRefs = variant.promptBlockRefs ?? variant.materialBlockRefs
+      if (writingRefs) {
+        if (![left, right].every(block => writingRefs.includes(block.nodeId))) {
+          throw new Error('Cross-page paragraph join must keep writing prompt and response blocks distinct')
+        }
+        writingRefs.splice(writingRefs.indexOf(right.nodeId), 1)
+        for (const ref of [
+          ...Object.values(variant.situation ?? {}),
+          ...(variant.contentRequirements ?? []).map(requirement => requirement.contentRef),
+          variant.wordCountRuling?.sourceRef,
+        ]) {
+          if (ref?.blockId === right.nodeId) ref.blockId = left.nodeId
+        }
+      }
     }
   } catch (error) {
     issues.push(adapterIssue((error.code === 'MATERIALIZATION_PARAGRAPH_JOIN_PRODUCER_ISSUE' || error.code?.startsWith('OCR_STRUCTURED_ANSWER_REGION_'))

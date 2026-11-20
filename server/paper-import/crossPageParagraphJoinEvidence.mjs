@@ -15,7 +15,6 @@ function scopedProducerIssue(issue, materialization, relation, evidence, confirm
   const answer = materialization.documents.filter(document => !document.renditionOf && document.role === 'official_answers')
   const questions = materialization.documents.filter(document => !document.renditionOf && document.role === 'question_source')
   if (answer.length !== 1 || questions.length !== 1 || answer[0].documentId === questions[0].documentId
-    || !['reading', 'cloze', 'grammar-fill'].includes(relation.group.family)
     || relation.join.fragments.some(fragment => fragment.source.documentId !== questions[0].documentId)) return false
   const src = issue.source
   if (!src || typeof src !== 'object' || Array.isArray(src) || src.documentId !== answer[0].documentId) return false
@@ -127,7 +126,7 @@ export function verifyCrossPageParagraphJoinEvidence(materialization, { evidence
           : paragraphFragmentText(owners[0].block) !== items[0].text)) reject('must retain exact content in the same source-derived group')
       return { page, item: items[0], owner: owners[0] }
     })
-    if (mixed && group.family !== 'reading') verifyBlankIdentity(group, verified[0].owner.owner, blocks, reject)
+    if (mixed) verifyBlankIdentity(group, verified[0].owner.owner, blocks, reject)
     if (verified[0].page.orderedItems.at(-1) !== verified[0].item
       || verified[1].page.orderedItems[0] !== verified[1].item
       || verified[1].owner.position !== verified[0].owner.position + 1) reject('intervening content is not confirmed furniture')
