@@ -199,8 +199,23 @@ export function verifyListeningInsertionOccurrences(reportBytes, readReview) {
 }
 
 const listeningEditEngines = new Set(['apple', 'parakeet-v2', 'gpt-transcribe'])
+export const listeningEditSpeakerLabels = /^[ \t]*([A-Z]\d?|[MW]\/[MW]|Speaker \d+|Man|Woman)[ \t]*[:：][ \t]*/gimu
+
+export function touchesListeningSpeakerBoundary(text, { start, before }) {
+  const labels = [...text.matchAll(listeningEditSpeakerLabels)]
+  return labels.some((label, index) => {
+    const speaker = match => match?.[1].toLowerCase()
+    if (speaker(label) === speaker(labels[index - 1])) return false
+    const prefix = text.slice(0, label.index)
+    const gap = prefix.match(/[^\p{L}\p{N}]*$/u)[0]
+    const left = label.index - gap.length
+    const right = label.index + label[0].length
+    return left > 0 && (before ? start < right && start + before.length > left : start >= left && start <= right)
+  })
+}
+
 export function listeningEditWords(value) {
-  return value.replace(/^[ \t]*(?:[MW](?:\/[MW])?|Speaker \d+)[ \t]*[:：]/gimu, '')
+  return value.replace(listeningEditSpeakerLabels, '')
     .normalize('NFKC').toLowerCase().replace(/’/gu, "'")
     .match(/[\p{L}\p{N}]+(?:'[\p{L}\p{N}]+)*/gu) ?? []
 }
@@ -280,6 +295,7 @@ function applyListeningEdits(materialization, edits, audio) {
     const text = segments[0]?.text
     if (segments.length !== 1 || typeof text !== 'string' || start + before.length > text.length
       || text.slice(start, start + before.length) !== before) fail(`listening edit before does not match ${segmentId}`)
+    if (touchesListeningSpeakerBoundary(text, edit)) fail('listening edit touches a speaker change')
     const engines = evidence && typeof evidence === 'object' && !Array.isArray(evidence) ? Object.entries(evidence) : []
     if (engines.some(([engine, heard]) => !listeningEditEngines.has(engine) || typeof heard !== 'string' || !heard.trim())
       || engines.filter(([, heard]) => supportsListeningEdit(text, edit, heard)).length < 2) {

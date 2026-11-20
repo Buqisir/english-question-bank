@@ -2,23 +2,14 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { parseArgs } from 'node:util'
-import { applySpellingReview, listeningEditEvidenceMatch, listeningEditWords } from '../../server/paper-import/spellingReview.mjs'
+import { applySpellingReview, listeningEditEvidenceMatch, listeningEditSpeakerLabels as speakerLabels,
+  listeningEditWords, touchesListeningSpeakerBoundary } from '../../server/paper-import/spellingReview.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { appleSource, localEngines, parakeet, readJson, remoteEngine, withWork } from './listening-transcript-check-engines.mjs'
-import { align, observation, sites, speakerLabels, timedReading, units } from './listening-transcript-check-alignment.mjs'
+import { align, observation, sites, timedReading, units } from './listening-transcript-check-alignment.mjs'
 
 const wordText = (words, separator = ' ') => words.map(word => word.token).join(separator)
 const sameWords = (first, second) => wordText(first.words) === wordText(second.words)
-
-function crossesSpeakerBoundary(text, source, { start, end }) {
-  const previous = source[start - 1], next = source[start]
-  if (start !== end || !previous || !next) return false
-  const followingLabel = text.slice(previous.end, next.start).match(speakerLabels)?.at(-1)
-  if (!followingLabel) return false
-  const precedingLabel = text.slice(0, previous.start).match(speakerLabels)?.at(-1)
-  const speaker = label => label?.replace(/[\s:：]/gu, '').toLowerCase()
-  return speaker(precedingLabel) !== speaker(followingLabel)
-}
 
 function editSpan(text, source, site, { value, punctuation }) {
   const next = source[site.start]
@@ -97,7 +88,9 @@ export async function adjudicate(group, text, engines, remote, audioSha256) {
     return { edits: [], review: [{ segmentId, occurrence, reason: '本地转写与该段大范围对不上，请先听核段号。' }] }
   }
   const edits = [], review = []
-  const canJoin = (left, right) => !crossesSpeakerBoundary(text, source, left) && !crossesSpeakerBoundary(text, source, right)
+  const atSpeakerChange = site => touchesListeningSpeakerBoundary(text,
+    editSpan(text, source, site, { value: ' ', punctuation: '' }))
+  const canJoin = (left, right) => !atSpeakerChange(left) && !atSpeakerChange(right)
   for (const site of sites(readings, canJoin)) {
     const votes = readings.map(reading => ({ engine: reading.engine, ...observation(reading, site) }))
     const sourceWords = source.slice(site.start, site.end)
@@ -114,18 +107,18 @@ export async function adjudicate(group, text, engines, remote, audioSha256) {
     const original = { words: sourceWords }
     const winner = votes.find(vote => !vote.unaligned && votes.filter(peer => !peer.unaligned && sameWords(vote, peer)).length >= 2)
     if (winner && (sameWords(winner, original) || wordText(winner.words, '') === wordText(sourceWords, ''))) continue
+    if (atSpeakerChange(site)) {
+      const { before } = editSpan(text, source, site, { value: ' ', punctuation: '' })
+      review.push({ segmentId, occurrence, ...interval, before, evidence, reason: '更正位置碰到说话人换行，请听核归属。' })
+      continue
+    }
     if (winner && interval) {
-      const consensus = votes.filter(vote => !vote.unaligned && sameWords(vote, winner))
-      const boundary = crossesSpeakerBoundary(text, source, site)
-      const candidates = boundary ? consensus.filter(vote => vote.nextSentencePrefix) : consensus
-      if (boundary && candidates.length < 2) {
-        review.push({ segmentId, occurrence, ...interval, before: '', evidence, reason: '插入点在两位说话人之间，请听核句子归属。' })
-        continue
-      }
+      const candidates = votes.filter(vote => !vote.unaligned && sameWords(vote, winner))
       let span, support
       for (const vote of candidates) {
         const candidate = editSpan(text, source, site, vote)
-        if (candidate.before === candidate.after || candidate.before.match(speakerLabels)) continue
+        if (candidate.before === candidate.after || candidate.before.match(speakerLabels)
+          || touchesListeningSpeakerBoundary(text, candidate)) continue
         const samples = candidates.map(peer => uniqueEvidence(text, candidate, peer)).filter(Boolean)
         if (samples.length < 2) continue
         span = candidate

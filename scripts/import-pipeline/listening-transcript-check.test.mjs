@@ -9,16 +9,13 @@ const run = (text, heard) => {
     () => assert.fail('local engines agree'), 'sha256:test')
 }
 
-test('a standalone insertion at a speaker change needs listening review', async () => {
+test('both standalone sentences and attached words at a speaker change need listening review', async () => {
   const text = 'W: Hello there.\nM: I agree with you.'
-  const ambiguous = await run(text, 'Hello there. Yes. I agree with you.')
-  assert.deepEqual(ambiguous.edits, [])
-  assert.match(ambiguous.review[0].reason, /说话人/)
-
-  const attached = await run(text, 'Hello there. Oh, I agree with you.')
-  assert.deepEqual(attached.review, [])
-  assert.equal(attached.edits[0].start, text.indexOf('I agree'))
-  assert.equal(attached.edits[0].after, 'Oh, ')
+  for (const heard of ['Hello there. Yes. I agree with you.', 'Hello there. Well, I agree with you.']) {
+    const result = await run(text, heard)
+    assert.deepEqual(result.edits, [])
+    assert.match(result.review[0].reason, /说话人/)
+  }
 })
 
 test('changes that share an anchor are combined into a single replacement', async () => {

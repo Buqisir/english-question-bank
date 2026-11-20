@@ -1,7 +1,6 @@
 import { normalizeListeningUnits } from './lib-listening-segment-rule.mjs'
 
 const variants = { woollen: 'woolen', dr: 'doctor', mr: 'mister', mrs: 'missus', yeah: 'yes' }
-export const speakerLabels = /^[ \t]*(?:[MW](?:\/[MW])?|Speaker \d+)[ \t]*[:：][ \t]*/gimu
 const nameSounds = word => word.replace(/'s$/u, '').replace(/[sz]/gu, 's')
   .replace(/([a-z])\1+/gu, '$1').replace(/[aeiouy]/gu, '')
 
@@ -110,9 +109,6 @@ export function observation(reading, site) {
     const evidence = context.length ? text.slice(context[0].start, context.at(-1).end) : ''
     return { context, evidence }
   }
-  const nextSentencePrefix = punctuation === ',' && !/[.!?]/u.test(value)
-    && words[start - 1] && words[end]
-    && /[.!?]/u.test(text.slice(words[start - 1].end, candidate[0].start))
-  return { value, punctuation, nextSentencePrefix, words: candidate, window,
+  return { value, punctuation, words: candidate, window,
     availableLeft: start, availableRight: words.length - end, ...window(3, 3) }
 }

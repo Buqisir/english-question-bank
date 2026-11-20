@@ -147,23 +147,25 @@ test('Text 7 insertions reject replay against a restored transcript and require 
   assert.throws(() => apply(base, `Wrong place.${after}`), /two engines/)
 })
 
+function applyListeningEditFixture(source, start, before, after, heard) {
+  const { audio, evidence } = listeningInsertionFixture(source, null)
+  const bytes = Buffer.from(JSON.stringify({ listening: { state: 'captured',
+    transcript: [{ segmentId: evidence.segmentId, text: source }] } }))
+  const report = prepareSpellingReview(bytes)
+  report.reviewedBy = 'import_agent'
+  report.reviewedAt = '2026-11-20T00:00:00Z'
+  report.targets[0].decision = 'unchanged'
+  report.listeningEdits = [{
+    segmentId: evidence.segmentId, start, before, after, audioSha256: audio.sha256,
+    startSeconds: evidence.startSeconds, endSeconds: evidence.endSeconds, occurrence: evidence.occurrence,
+    evidence: { apple: heard, 'parakeet-v2': heard }, reason: '按录音更正。',
+  }]
+  return applySpellingReview(bytes, Buffer.from(JSON.stringify(report)), audio).listening.transcript[0].text
+}
+
 test('listening edits require the complete evidence to identify exactly the declared occurrence', () => {
   const text = 'I can go today. I can go tomorrow.'
-  const { audio, evidence } = listeningInsertionFixture(text, null)
-  const apply = (source, start, before, after, heard) => {
-    const bytes = Buffer.from(JSON.stringify({ listening: { state: 'captured',
-      transcript: [{ segmentId: evidence.segmentId, text: source }] } }))
-    const report = prepareSpellingReview(bytes)
-    report.reviewedBy = 'import_agent'
-    report.reviewedAt = '2026-11-20T00:00:00Z'
-    report.targets[0].decision = 'unchanged'
-    report.listeningEdits = [{
-      segmentId: evidence.segmentId, start, before, after, audioSha256: audio.sha256,
-      startSeconds: evidence.startSeconds, endSeconds: evidence.endSeconds, occurrence: evidence.occurrence,
-      evidence: { apple: heard, 'parakeet-v2': heard }, reason: '按录音更正。',
-    }]
-    return applySpellingReview(bytes, Buffer.from(JSON.stringify(report)), audio).listening.transcript[0].text
-  }
+  const apply = applyListeningEditFixture
   const heard = 'I can not go tomorrow'
   assert.throws(() => apply(text, text.indexOf('go'), '', 'not ', heard), /two engines/)
   assert.equal(apply(text, text.lastIndexOf('go'), '', 'not ', heard), 'I can go today. I can not go tomorrow.')
@@ -177,6 +179,21 @@ test('listening edits require the complete evidence to identify exactly the decl
   assert.throws(() => apply(repeated, repeated.indexOf('go'), '', 'not ', distinct), /two engines/)
   assert.equal(apply(repeated, repeated.lastIndexOf('go'), '', 'not ', distinct),
     'Today I can go home. Tomorrow I can not go home.')
+})
+
+test('audio that says Well cannot assign it to either side of a speaker change', () => {
+  const text = 'W: Tell me more.\nM: I can explain.'
+  const heard = 'Tell me more. Well, I can explain.'
+  for (const start of [text.indexOf('\n'), text.indexOf('I can')]) {
+    assert.throws(() => applyListeningEditFixture(text, start, '', ' Well, ', heard), /speaker change/)
+  }
+  const spanning = 'more.\nM: I'
+  for (const after of ['', 'more. Well, I']) {
+    assert.throws(() => applyListeningEditFixture(text, text.indexOf(spanning), spanning, after, heard), /speaker change/)
+  }
+  const same = text.replace('\nM:', '\nW:')
+  assert.equal(applyListeningEditFixture(same, same.indexOf('I can'), '', 'Well, ', heard),
+    'W: Tell me more.\nW: Well, I can explain.')
 })
 
 test('uncertain source phrase survives an OCR line wrap', () => {
