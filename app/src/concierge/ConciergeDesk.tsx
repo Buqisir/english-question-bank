@@ -412,6 +412,7 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   // 比出来（「出现 · 自己占一块的」160ms）快一档（shared-ui/motion.css；2026-11-20 从 80 跟着改）。
   const filterPanelPresence = usePresence(filterPanelExpanded, 120)
   const filterPanelId = useId()
+  const thinkingHintId = useId()
   const activeFilterCount = [
     filters.groupType,
     filters.year,
@@ -750,13 +751,17 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
             </div>
           )}
           {state.kind !== 'empty' && onThinkingModeChange && (
-            <label className="concierge-thinking-toggle">
+            // 说明不占位置（home-editorial 第二轮定的）：鼠标停上去看 title，读屏念 aria-describedby。
+            // 开了以后 AI 规划找题前先推理一步，等得更久（最长 60 秒，关着 20 秒，conciergeSearch.ts）。
+            <label className="concierge-thinking-toggle" title="AI 先多想一步再找题，适合复杂的要求，会慢一些">
               <input
                 type="checkbox"
                 checked={Boolean(thinkingMode)}
+                aria-describedby={thinkingHintId}
                 onChange={(event) => onThinkingModeChange(event.target.checked)}
               />
               思考模式
+              <span id={thinkingHintId} className="visually-hidden">AI 先多想一步再找题，适合复杂的要求，会慢一些</span>
             </label>
           )}
           {state.kind === 'results' && !dataLoading && (
