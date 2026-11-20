@@ -263,6 +263,11 @@ test('whole-turn edits preserve named speakers and reject ambiguous speaker pref
     assert.throws(() => apply(`M: ${combined}`, combined), /speaker label/)
     assert.throws(() => apply(`M: ${first}`, first, combined), /speaker label/)
   }
+  for (const after of ['Where are you going?\n(Mary): To the library.',
+    'Where are you going?\u2028To the library.', 'meet me: at six.', 'Meet me at 6: 00.', '']) {
+    assert.throws(() => apply(`M: ${first}`, first, after), /one line with the same speaker label/)
+  }
+  assert.equal(apply(`(Mary): ${first}`, first, 'Meet me at 6:00.'), '(Mary): Meet me at 6:00.')
 })
 
 test('audio that says Well cannot assign it to either side of a speaker change', () => {

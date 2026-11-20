@@ -110,15 +110,17 @@ test('whole-turn replacements apply together or leave the entire passage for lis
 
 test('whole turns route embedded speaker labels to listening review', async () => {
   const text = 'I carried the brown boxes to the front door today.'
-  for (const label of ['Mary:', 'M/W:']) {
+  for (const label of ['Mary:', 'M/W:', '(Mary):']) {
     const speech = `${text} I can help.`
     const withLabel = `${text} ${label} I can help.`
-    const original = await decideTurns(`M: ${withLabel}`, speech)
-    const replacement = await decideTurns(`M: ${speech}`, withLabel)
-    for (const result of [original, replacement]) {
-      assert.deepEqual(result.edits, [])
-      assert.match(result.review[0].reason, /正文疑似含说话人标签/)
+    if (label !== '(Mary):') {
+      const original = await decideTurns(`M: ${withLabel}`, speech)
+      assert.deepEqual(original.edits, [])
+      assert.match(original.review[0].reason, /正文疑似含说话人标签/)
     }
+    const replacement = await decideTurns(`M: ${speech}`, withLabel)
+    assert.deepEqual(replacement.edits, [])
+    assert.match(replacement.review[0].reason, /同一说话人的单行正文/)
   }
 })
 

@@ -300,16 +300,17 @@ function listeningTurnLabels(text) {
 export function listeningEditTurns(text) {
   const { labels, ambiguous } = listeningTurnLabels(text)
   const turns = []
-  let start = 0, speaker = null
+  let start = 0, labelStart = 0, speaker = null
   for (const label of [...labels, { index: text.length }]) {
     if (label.index < start) continue
     const body = text.slice(start, label.index).trimEnd()
     if (body.trim()) {
       const first = start + body.length - body.trimStart().length
       const end = start + body.length
-      turns.push({ start: first, end, speaker, ambiguous: ambiguous.some(offset => offset >= first && offset < end) })
+      turns.push({ start: first, end, labelStart, speaker, ambiguous: ambiguous.some(offset => offset >= first && offset < end) })
     }
     start = label.end
+    labelStart = label.index
     speaker = label.speaker
   }
   return turns
@@ -320,14 +321,21 @@ export function hasListeningTurnSpeakerLabel(body) {
     || body.search(listeningEditSpeakerLabels) !== -1 || body.search(speakerLabels) !== -1
 }
 
+export function isListeningTurnReplacement(text, turn, after) {
+  if (after.trim() !== after || /[\n\r\v\f\u0085\u2028\u2029]|(?<!\p{Nd})[:：]|[:：](?!\p{Nd})/u.test(after)) return false
+  const label = text.slice(turn.labelStart, turn.start)
+  const parsed = listeningEditTurns(label + after)
+  return parsed.length === 1 && parsed[0].speaker === turn.speaker
+    && parsed[0].start === label.length && parsed[0].end === label.length + after.length
+}
+
 function resolveTurnEdit(edit, original, text, spelling, insertions) {
   const turn = listeningEditTurns(original)[edit.turnIndex]
   if (!turn || turn.start !== edit.start || original.slice(turn.start, turn.end) !== edit.before) {
     fail('listening edit before must match the complete original turn')
   }
   if (turn.ambiguous) fail('listening turn contains an unrecognized speaker label')
-  if (hasListeningTurnSpeakerLabel(edit.before) || hasListeningTurnSpeakerLabel(edit.after)
-    || edit.after.trim() !== edit.after) fail('listening turn edit contains or changes a speaker label')
+  if (hasListeningTurnSpeakerLabel(edit.before)) fail('listening turn edit contains a speaker label')
   let { start, end } = turn
   for (const { start: offset, before, after } of spelling) {
     const limit = offset + before.length
@@ -344,12 +352,16 @@ function resolveTurnEdit(edit, original, text, spelling, insertions) {
     else if (offset < spelledEnd) fail('overlapping listening edits')
     if (offset < spelledEnd) end += length
   }
-  if (!listeningEditTurns(text).some(item => item.start === start && item.end === end
-    && item.speaker === turn.speaker && !item.ambiguous)) {
+  const resolved = listeningEditTurns(text).find(item => item.start === start && item.end === end
+    && item.speaker === turn.speaker && !item.ambiguous)
+  if (!resolved) {
     fail('listening turn boundary changed before replacement')
   }
   const before = text.slice(start, end)
-  if (hasListeningTurnSpeakerLabel(before)) fail('listening turn edit contains or changes a speaker label')
+  if (hasListeningTurnSpeakerLabel(before)) fail('listening turn edit contains a speaker label')
+  if (!isListeningTurnReplacement(text, resolved, edit.after)) {
+    fail('listening turn replacement must be one line with the same speaker label and only numeric colons')
+  }
   return { ...edit, start, before }
 }
 

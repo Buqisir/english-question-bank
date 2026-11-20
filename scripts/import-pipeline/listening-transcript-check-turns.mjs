@@ -1,4 +1,5 @@
-import { hasListeningTurnSpeakerLabel, listeningEditSpeakerLabels, listeningEditTurns, listeningEditWords } from '../../server/paper-import/spellingReview.mjs'
+import { hasListeningTurnSpeakerLabel, isListeningTurnReplacement, listeningEditSpeakerLabels,
+  listeningEditTurns, listeningEditWords } from '../../server/paper-import/spellingReview.mjs'
 import { alignListeningSentences } from './listening-sentence-align.mjs'
 import { align, preserveSourceForms, sameProperNameSound, timedReading, units } from './listening-transcript-check-alignment.mjs'
 
@@ -162,7 +163,9 @@ export async function rewriteTurns(group, text, readings, engines, audioSha256, 
       after = chooseListeningTurn(before, evidence)
     }
     if (after === null) return manual('有轮次未获逐词两家支持，请整段听核。')
-    if (hasListeningTurnSpeakerLabel(after)) return manual(embeddedLabel)
+    if (!isListeningTurnReplacement(text, turn, after)) {
+      return manual('替换稿须为同一说话人的单行正文，冒号两侧须为数字，请整段听核。')
+    }
     if (before === after) continue
     edits.push({ segmentId, scope: 'turn', turnIndex: i, start, before, after, audioSha256, occurrence,
       startSeconds, endSeconds, evidence, reason: '按逐词录音共识整轮替换。' })
