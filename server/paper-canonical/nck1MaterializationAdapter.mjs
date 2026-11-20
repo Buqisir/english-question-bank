@@ -1,5 +1,5 @@
 import { validateInImageLabelMeasurementBinding } from '../../shared/paper-canonical/readingFigureLayout.mjs'
-import { paragraphJoinBoundaryNeedsTrim, CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
+import { isAdjacentCjkText, CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
 import { resolveInImageOptionLabels, IN_IMAGE_OPTION_LABELS_VERSION_V2, verifyInImageOptionLabelsV2Ownership } from '../../shared/paper-canonical/inImageOptionLabels.mjs'
 import { execFileSync } from 'node:child_process'
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs'
@@ -2911,8 +2911,7 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
       const left = group.content.blocks[index], right = group.content.blocks[index + 1]
       if (left?.kind !== 'paragraph' || right?.kind !== 'paragraph' || right.nodeId !== blocks[1].blockId
         || [left, right].some(paragraph => paragraph.inlines.some(node => node.kind !== 'text'
-          && !(join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 && node.kind === 'blank_ref')))
-        || paragraphJoinBoundaryNeedsTrim(left.inlines) || paragraphJoinBoundaryNeedsTrim(right.inlines)) {
+          && !(join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 && node.kind === 'blank_ref')))) {
         throw new Error('Cross-page paragraph join cannot map its two effective text segments')
       }
       const refs = join.fragments.map((fragment, fragmentIndex) => {
@@ -2930,11 +2929,16 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
         }
         return ref
       })
-      const separator = { kind: 'text', nodeId: `text:paragraph-join:${join.joinId}:separator`, text: ' ' }
       group.sourceSpanRefsByTarget[`content_node:${left.nodeId}`] = refs
-      group.sourceSpanRefsByTarget[`content_node:${separator.nodeId}`] = refs
       if (join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2) delete group.sourceSpanRefsByTarget[`content_node:${right.nodeId}`]
-      left.inlines.push(separator, ...right.inlines)
+      const leftText = left.inlines.at(-1)?.text ?? ''
+      const rightText = right.inlines[0]?.text ?? ''
+      if (!/\s$/u.test(leftText) && !/^\s/u.test(rightText) && !isAdjacentCjkText(leftText, rightText)) {
+        const separator = { kind: 'text', nodeId: `text:paragraph-join:${join.joinId}:separator`, text: join.separator }
+        group.sourceSpanRefsByTarget[`content_node:${separator.nodeId}`] = refs
+        left.inlines.push(separator)
+      }
+      left.inlines.push(...right.inlines)
       group.content.blocks.splice(index + 1, 1)
       const { variant } = group
       const writingRefs = variant.promptBlockRefs ?? variant.materialBlockRefs

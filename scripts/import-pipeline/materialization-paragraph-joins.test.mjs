@@ -95,7 +95,6 @@ test('structural boundaries reject cross-group, skipped pages, duplicate consump
     m => { m.paragraphJoins[0].fragments[0].source.region.x += 0.01 },
     m => { m.paragraphJoins[0].separator = '  ' },
     m => { m.paragraphJoins[0].sourceReview.sameNaturalParagraph = false },
-    m => { m.groups[0].blocks[0].content[0].text += ' ' },
     m => { m.groups[1].blocks.push({ ...structuredClone(m.groups[0].blocks[0]), blockId: 'duplicate-source' }) },
     m => { m.groups[0].blocks.splice(1, 0, { ...structuredClone(m.groups[1].blocks[0]), blockId: 'intervening' }) },
     m => { m.paragraphJoins = [] },
@@ -115,6 +114,7 @@ test('immutable stream rejects intervening item/image, wrong ownership, observat
     f => { f.proof.resolved.structures.get('paper').body.splice(1, 0, { kind: 'paragraph', materializedMedia: { mediaId: 'image' } }) },
     f => { f.proof.expected.groups[0].family = 'cloze' },
     f => { f.result.groups[0].blocks[0].content[0].text += ' changed' },
+    f => { f.result.groups[0].blocks[0].content[0].text += ' ' },
     f => { f.proof.confirmation.documents[0].pages[0].visualClassifications.push({ classification: 'content_media', itemIds: ['paper:item-1'] }) },
   ]
   for (const change of changes) {

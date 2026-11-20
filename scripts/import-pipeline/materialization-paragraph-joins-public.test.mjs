@@ -305,7 +305,7 @@ test('seven-choice and writing joins preserve inline order, prompts and response
   const joins = []
   for (const [family, starts] of [
     ['seven-choices', ['A short guide has 37.', 'They can practice']],
-    ['application-writing', ['Write a short notice', 'for the reading club.']],
+    ['application-writing', ['请为读书俱乐部的活', '动写一则通知。']],
     ['continuation-writing', ['The owner name was written', 'on its first page']],
   ]) {
     const group = m.groups.find(g => g.family === family)
@@ -340,21 +340,24 @@ test('seven-choice and writing joins preserve inline order, prompts and response
     const expected = structuredClone(before.content)
     const index = expected.blocks.findIndex(block => block.nodeId === fragments[0].blockId)
     const [left, right] = expected.blocks.slice(index, index + 2)
-    const separator = after.content.blocks[index].inlines[left.inlines.length]
-    assert.equal(separator.text, ' ')
+    if (before.family !== 'application-writing') {
+      const separator = after.content.blocks[index].inlines[left.inlines.length]
+      assert.equal(separator.text, ' ')
+      left.inlines.push(separator)
+    }
     if (before.family === 'seven-choices') {
       assert.equal(left.inlines[1].blankId, `blank:${m.paperId}:37`)
       assert.equal(right.inlines[0].text, 'They can practice every day.')
     } else if (before.family === 'continuation-writing') {
       before.variant.materialBlockRefs = before.variant.materialBlockRefs.filter(id => id !== right.nodeId)
     } else {
-      assert.equal(after.content.blocks[index].inlines.map(inline => inline.text).join(''), 'Write a short notice for the reading club.')
+      assert.equal(after.content.blocks[index].inlines.map(inline => inline.text).join(''), '请为读书俱乐部的活动写一则通知。')
       assert.deepEqual(after.variant.promptBlockRefs, before.variant.promptBlockRefs.filter(id => id !== right.nodeId))
       assert.deepEqual(after.variant.givenSkeleton, before.variant.givenSkeleton)
       assert.deepEqual(after.variant.response, before.variant.response)
       assert.equal(after.variant.contentRequirements[1].contentRef.blockId, left.nodeId)
     }
-    left.inlines.push(separator, ...right.inlines)
+    left.inlines.push(...right.inlines)
     expected.blocks.splice(index + 1, 1)
     assert.deepEqual(after.content, expected)
     if (before.family !== 'application-writing') assert.deepEqual(after.variant, before.variant)

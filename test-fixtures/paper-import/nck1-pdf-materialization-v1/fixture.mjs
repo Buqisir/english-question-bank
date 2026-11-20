@@ -129,7 +129,7 @@ function questionHtml({ includeTable = true, crossPageParagraph = false, crossPa
     paragraph('第四部分 写作 (共两节，满分40分)'),
     paragraph('第一节(满分15分)'),
     ...(crossPageSevenAndContinuation
-      ? [paragraph('Write a short notice'), '<p style="break-before:page">for the reading club.</p>']
+      ? [paragraph('请为读书俱乐部的活'), '<p style="break-before:page">动写一则通知。</p>']
       : [paragraph('Write a short notice for the reading club.')]),
     paragraph('内容包括：'),
     paragraph('1. Share the meeting time;'),

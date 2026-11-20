@@ -7,12 +7,8 @@ const digest = value => /^sha256:[a-f0-9]{64}$/u.test(value || '')
 const same = (a, b) => digestJson(a) === digestJson(b)
 export const paragraphFragmentText = block => block?.content?.map(part => part.text).join('')
 
-// No blank sentinel/number reconstruction: source replay owns blank identity.
-export const paragraphJoinBoundaryNeedsTrim = inlines => {
-  const first = inlines?.[0], last = inlines?.at(-1)
-  return (first?.kind === 'text' && /^\s/u.test(first.text))
-    || (last?.kind === 'text' && /\s$/u.test(last.text))
-}
+export const isAdjacentCjkText = (left, right) =>
+  /[\u3000-\u9fff\uff00-\uffef]$/u.test(left) && /^[\u3000-\u9fff\uff00-\uffef]/u.test(right)
 
 export function paragraphJoinSourceLocator(documentId, page, item, observations) {
   const regions = item.observationIds.map(id => observations.find(value => value.observationId === id)?.region)
@@ -72,7 +68,6 @@ export function resolveCrossPageParagraphJoins(materialization) {
         ? block.columns.flatMap(column => flatten(column.blocks)) : [block])
       if (materialization.groups.flatMap(group => flatten(group.blocks))
         .filter(candidate => same(candidate.source, block.source)).length !== 1) reject('source fragment is consumed by more than one block')
-      if (mixed ? paragraphJoinBoundaryNeedsTrim(block.content) : /^\s|\s$/u.test(paragraphFragmentText(block))) reject('fragment boundaries must not require trimming or extra whitespace')
       const document = materialization.documents?.find(document => document.documentId === block.source.documentId)
       if (document?.role !== 'question_source' || document.mediaType !== 'application/pdf') reject('requires a separate question-source PDF')
       consumed.add(fragment.itemId)
