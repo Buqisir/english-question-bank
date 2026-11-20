@@ -396,7 +396,7 @@ Deadpan 尚未实现；切换入口与记忆方式尚未定案。采用两套配
 | 出现 | `--motion-reveal`（贴着键的：菜单、浮层、工具条）/ `-panel`（自己占一块的：对话框、底部提示、卡片、筛选行）/ `-drawer`（侧边抽屉） | 淡入，再从锚点方向挪 `--motion-reveal-shift`（4px）；居中的对话框、定了 `transform-origin` 从键边上长出来的浮层从 `--motion-reveal-scale`（0.97）放大。讲评抽屉打开时卷面让位也走 `-drawer`，和抽屉一起走 | 120 / 160 / 220 · ease-out | 只淡入，不挪不放大 |
 | 离开 | `--motion-dismiss` | 上面那些走 | 120 · ease-out（比出来快或一样快） | 只淡出 |
 | 换向 | `--motion-turn` | 小部件在原地转、滑、伸：展开箭头、开关圆钮、进度条、拖把手 | 120 · ease-out | 直接到位 |
-| 移动 | `--motion-travel` | 成块的东西走一段：翻牌、听力倍速指针 | 220 · ease-in-out | 直接到位 |
+| 移动 | `--motion-travel` | 成块的东西走一段：翻牌、听力倍速指针、草稿卷左栏换顺序时的行（2026-11-20） | 220 · ease-in-out | 直接到位 |
 
 - **等待**不在这七个里：灰块呼吸、所以点走 `waiting.css` 和 `--wait-*`（见下面 Waiting）。
 - **签名时刻**不走角色，代码里在同一条规则写注释 `motion-signature` 说明为什么：登录页獭獭（BRAND.md §4.6）、图标状态动效（`design/icon-system-2026-09-15/motion-rules.md`）、句子分析、选词卡上「文」的点、加卷计数小点（放大到 1.35 再回到 1，是一下脉冲，不越过 1 再弹回，不算回弹；2026-11-20 定留着）、配对成功、听写播放时的音量条。没人用的旧样式注 `motion-dead`，确认后就删（2026-11-20 删了 `.group-card`、`.basket-panel` 抽屉、`.pi-toast`、`.pi-basket-preview`、`.pi-insight`）。
