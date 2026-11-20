@@ -33,6 +33,7 @@ import {
   buildNck1ReviewProjection,
   buildNck1SealedReviewProjection,
   buildNck1ReviewConsumption,
+  importNck1ReviewCandidate,
   loadNck1ReviewSource,
   reviewBundleFilePaths,
   reviewBundleFilePathsForProjection,
@@ -72,6 +73,7 @@ import { digestJson, sha256, stableStringify } from '../shared/paper-canonical/s
 import { subjectFreeHeaderTitle } from '../shared/paper-canonical/headerTitle.mjs'
 import { nck1OcrSourceSetDigest } from '../server/paper-import/nck1OcrSourceEvidence.mjs'
 import {
+  nck1CrossPageJoinV2AuthorityRef,
   nck1MaterializationCandidateAuthorityRef,
   nck1MaterializationHistoricalAuthorityRef58,
   nck1MaterializationHistoricalAuthorityRef66,
@@ -901,6 +903,14 @@ function verifyHistoricalAuthorityReplay() {
   try {
     const { reviewRoot } = makeReviewRoot(root, paperId, undefined, { historicalSource: true })
     const loaded = loadNck1ReviewSource(reviewRoot)
+    const v78 = importCanonicalCandidate(loaded.sourceInput, undefined, {
+      materializationAuthorityRef: nck1CrossPageJoinV2AuthorityRef,
+    })
+    assert.deepEqual(v78.issues, [])
+    assert.equal(
+      importNck1ReviewCandidate(reviewRoot, loaded, v78.candidate.candidateDigest).candidate.authority.manifestVersion,
+      '78',
+    )
     const previous = importCanonicalCandidate(loaded.sourceInput, undefined, {
       materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef58,
     })

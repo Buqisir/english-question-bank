@@ -10,7 +10,7 @@ import {
   compileNck1MaterializationCandidatePreview,
   importCanonicalCandidate,
 } from '../../shared/paper-canonical/compiler.mjs'
-import { nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66, zhejiangLegacyMaterializationAuthorityRef, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
+import { nck1CrossPageJoinV2AuthorityRef, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66, zhejiangLegacyMaterializationAuthorityRef, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
 import { consumerContractRefsForAuthority } from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
@@ -645,7 +645,7 @@ export function importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDige
   // default authority. Re-derive the requested identity; never trust its label.
   if (expectedCandidateDigest && imported.candidate?.candidateDigest !== expectedCandidateDigest
     && !loaded.analyzedPackage) {
-    for (const materializationAuthorityRef of [zhejiangLegacyMaterializationAuthorityRef, nck1MaterializationHistoricalAuthorityRef66, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef58]) {
+    for (const materializationAuthorityRef of [zhejiangLegacyMaterializationAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1MaterializationHistoricalAuthorityRef66, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef58]) {
       const historical = importCanonicalCandidate(loaded.sourceInput, undefined, { materializationAuthorityRef })
       if (historical.candidate?.candidateDigest === expectedCandidateDigest) { imported = historical; break }
     }
