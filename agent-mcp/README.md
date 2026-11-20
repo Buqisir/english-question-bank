@@ -1,6 +1,6 @@
 # EQB Agent MCP
 
-面向开发/测试的只读 stdio MCP，直接访问现有 `/api/agent/v1`。需要 Node 24.22.3 或更高版本。
+面向开发/测试的只读 stdio MCP，直接访问现有 `/api/agent/v1`。需要 Node >=24。
 
 ```bash
 cd /absolute/path/to/english-question-bank/agent-mcp

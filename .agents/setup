@@ -77,11 +77,11 @@ if [[ -n "$image_magick_policy" ]] && grep -Fq 'rights="none" pattern="PDF"' "$i
 fi
 fi
 
-node_version="$(<.nvmrc)"
 node_home="$HOME/.local/node-24"
-if [[ ! -x "$node_home/bin/node" ]] || [[ "$($node_home/bin/node --version)" != "v$node_version" ]]; then
-  node_archive="node-v$node_version-linux-x64.tar.xz"
-  node_url="https://nodejs.org/dist/v$node_version/$node_archive"
+if [[ ! -x "$node_home/bin/node" ]] || [[ "$($node_home/bin/node --version)" != v24.* ]]; then
+  node_archive="$(curl -fsSL https://nodejs.org/dist/latest-v24.x/SHASUMS256.txt \
+    | awk '/linux-x64\.tar\.xz$/ { print $2; exit }')"
+  node_url="https://nodejs.org/dist/latest-v24.x/$node_archive"
   temp_dir="$(mktemp -d)"
   trap 'rm -rf "$temp_dir"' EXIT
   step "downloading Node.js 24" curl -fsSLo "$temp_dir/$node_archive" "$node_url"
