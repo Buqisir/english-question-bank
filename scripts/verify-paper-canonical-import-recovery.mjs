@@ -494,6 +494,27 @@ try {
     4,
   )
 
+  const targetDir = path.join(importAssets, importPaperId, 'versions/v1')
+  const officialKey = JSON.parse(readFileSync(path.join(targetDir, 'answer-key.json'), 'utf8'))
+  const [questionId, { answer: officialAnswer }] = Object.entries(officialKey.answers)
+    .find(([, entry]) => /^[ABCD]$/u.test(entry.answer))
+  const correctedAnswer = officialAnswer === 'A' ? 'B' : 'A'
+  const targetRun = importDb.prepare(`SELECT id, publish_report_json FROM paper_import_runs
+    WHERE paper_id = ? AND asset_version = 1 AND status = 'published'`).get(importPaperId)
+  const targetReport = JSON.parse(targetRun.publish_report_json)
+  assert.equal(targetReport.sourceReferencePublication, undefined)
+  assert.equal(existsSync(path.join(targetDir, 'source-references-v1.json')), false)
+  targetReport.answerCorrections = {
+    declaration: { paperId: importPaperId, sourceDigest: targetReport.canonicalPublicationDigest,
+      corrections: [{ questionId, officialAnswer, correctedAnswer, reason: 'Synthetic correction' }] },
+    approvalId: 'fixture-approval', revisionId: 'fixture-revision', bundleDigest: targetReport.canonicalPublicationDigest,
+    approvedBy: 'synthetic-owner', approvedAt: '2026-01-01T00:00:00Z',
+  }
+  importDb.prepare('UPDATE paper_import_runs SET publish_report_json = ? WHERE id = ?')
+    .run(JSON.stringify(targetReport), targetRun.id)
+  const currentAnswer = () => importDb.prepare('SELECT answer FROM questions WHERE id = ?').get(questionId).answer
+  assert.equal(currentAnswer(), officialAnswer)
+
   const beforeFailedRollback = {
     tree: snapshotTree(importAssets),
     database: snapshotDatabase(importDb),
@@ -530,6 +551,7 @@ try {
     versionName: 'v1',
   })
   assert.equal(recoveredRollback.status, 'idempotent')
+  assert.equal(currentAnswer(), correctedAnswer, 'rollback restores the target receipt without source references')
   assert.deepEqual(Object.keys(recoveredRollback.consumers).sort(), [
     'print_pdf',
     'screen',

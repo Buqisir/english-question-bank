@@ -311,10 +311,12 @@ function countMeaningRecordResults(record: VocabularyMeaningRecallRecordDto) {
 export function VocabularyDictationWorkbench({
   onBackToVocabulary,
   requestedSetId,
+  onRequestedSetOpened,
   shellNav,
 }: {
   onBackToVocabulary: () => void
   requestedSetId?: string | null
+  onRequestedSetOpened: () => void
   shellNav: AppTopbarNav
 }) {
   const [students, setStudents] = useState<VocabularyStudentDto[]>([])
@@ -533,14 +535,12 @@ export function VocabularyDictationWorkbench({
       }
       setSelectedSets([libraryItem])
       setTab('meaning')
-      const url = new URL(window.location.href)
-      url.searchParams.delete('meaningRecallSetId')
-      window.history.replaceState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
+      onRequestedSetOpened()
     }).catch((nextError: unknown) => {
       if (!cancelled) setError(nextError instanceof Error ? nextError.message : '词组加载失败。')
     })
     return () => { cancelled = true }
-  }, [activeStudentId, requestedSetId])
+  }, [activeStudentId, onRequestedSetOpened, requestedSetId])
 
   useEffect(() => {
     const timer = window.setTimeout(() => {

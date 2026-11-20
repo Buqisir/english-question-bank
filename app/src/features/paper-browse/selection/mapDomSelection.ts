@@ -174,9 +174,13 @@ export function mapDomRangeToSegments(
     if (!leaf) return null
     const rootText = textOf(target.root)
     const leafText = stream.text.slice(leaf.start, leaf.end)
-    if (rootText !== leafText && !rootText.includes(leafText)) return null
-    const localBase = rootText === leafText ? 0 : rootText.indexOf(leafText)
-    if (localBase < 0) return null
+    // Display may drop a leading source question number ("66. "), so the DOM
+    // can show only a suffix of the leaf; a negative base skips that prefix.
+    const localBase = rootText === leafText ? 0
+      : rootText.includes(leafText) ? rootText.indexOf(leafText)
+        : rootText && leafText.endsWith(rootText) ? rootText.length - leafText.length
+          : null
+    if (localBase === null) return null
 
     const nodeStart = offsetInRoot(target.root, node, 0)
     const selectedStart = node === range.startContainer
@@ -260,8 +264,13 @@ export function streamRangeToDomRange(
     return id === leaf.id
   })
   if (!root) return null
-  const localStart = start - leaf.start
-  const localEnd = end - leaf.start
+  const leafText = stream.text.slice(leaf.start, leaf.end)
+  const rootText = root.textContent ?? ''
+  const hiddenPrefix = rootText !== leafText && rootText && leafText.endsWith(rootText)
+    ? leafText.length - rootText.length : 0
+  const localStart = Math.max(0, start - leaf.start - hiddenPrefix)
+  const localEnd = end - leaf.start - hiddenPrefix
+  if (localEnd <= localStart) return null
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT)
   let consumed = 0
   let startNode: Node | null = null

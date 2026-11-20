@@ -105,7 +105,7 @@ try {
   const redo = await create(redoInput)
   const candidate = await create(manifest('candidate'))
   for (const result of [redo, candidate]) {
-    assert.deepEqual(result.missingFiles, [json.path], 'OCR redo and OCR to Candidate reuse assets, never JSON')
+    assert.deepEqual(result.missingFiles, [json.path], 'historical JSON absent from the blob store still requires upload')
     assert.equal(statSync(destination(result.revision)).ino,
       statSync(path.join(root, 'blobs/eqb-blobs/v1/sha256', file.sha256.slice(7))).ino)
     assert.equal(result.revision.approval, null)
@@ -319,6 +319,18 @@ try {
     && log.sourceRevisionId && log.sourcePath && log.verifiedAt && log.sha256 === file.sha256))
   assert(logs.some(log => log.metrics?.operation === 'put' && log.metrics.outcome === 'succeeded'))
   assert(logs.some(log => log.metrics?.operation === 'register' && log.metrics.durationsMs.reuse >= 0))
+
+  const jsonPaper = 'paper-json-reuse'
+  const jsonOriginal = await create(manifest('ocr', jsonPaper))
+  const jsonPut = await call('PUT', `/api/import-agent-reviews/revisions/${jsonOriginal.revision.id}/files?path=${json.path}`,
+    Readable.from([jsonBytes]))
+  assert.equal(jsonPut.status, 200)
+  const jsonRevision = await create(manifest('candidate', jsonPaper))
+  assert(!jsonRevision.missingFiles.includes(json.path))
+  assert.equal(statSync(destination(jsonRevision.revision, json)).ino, statSync(destination(jsonOriginal.revision, json)).ino)
+  const changedJson = { ...json, sha256: digest('[]') }
+  const changedRevision = await create(manifest('candidate', jsonPaper, [file, changedJson]))
+  assert(changedRevision.missingFiles.includes(json.path))
   console.info = originalLog
   console.info('PASS import-review upload reuse, async mutex, single source hash, and response metrics')
 } finally {

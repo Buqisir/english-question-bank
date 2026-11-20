@@ -32,6 +32,7 @@ import { materializeNck1CanonicalRequest } from '../../server/paper-canonical/nc
 import { loadCanonicalImportRequest } from '../../server/paper-canonical/importRequest.mjs'
 import { createFileSystemCanonicalPublicationStore, loadCanonicalOnlyConsumers } from '../../server/paper-canonical/publication.mjs'
 import { readSourceReferencePublication } from '../../server/paper-import/sourceReferencePublication.mjs'
+import { PRODUCT_MANIFEST } from '../../server/paper-import/frozenProducts.mjs'
 import {
   ocrReviewBundleDigest,
   reviewBundleDigest,
@@ -40,13 +41,16 @@ import {
 import {
   buildNck1OcrReviewProjection,
   buildNck1ReviewProjection,
-  buildNck1SealedReviewProjection,
+  loadReviewedListening,
   loadNck1ReviewSource,
   importNck1ReviewCandidate,
   ocrReviewBundleFilePaths,
   reviewBundleFilePaths,
+  reviewBundleFilePathsForProjection,
   resolveReviewFile,
+  retainedCandidateBinding,
   validateAgentOcrCorrectionSidecar,
+  withRetainedReviewEvidence,
 } from '../../server/import-review/revisionProjection.mjs'
 import { compileNck1MaterializationCandidatePreview, importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
 import { validateInlineBlankTextBoundaries } from '../../shared/paper-canonical/inlineBlankBoundaries.mjs'
@@ -62,6 +66,7 @@ import {
   TEXT_REVIEW_INSTRUCTIONS_V2,
   TEXT_REVIEW_POLICY_V4,
   TEXT_REVIEW_INSTRUCTIONS_V4,
+  verifyListeningInsertionOccurrences,
 } from '../../server/paper-import/spellingReview.mjs'
 import {
   enumerateParagraphSummaryTargets,
@@ -75,14 +80,15 @@ import {
 import { publishUniversalNck1Import } from '../../server/paper-import/publisher.mjs'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { assertNotNck1SourceOnly } from './nck1-source-only.mjs'
-import { resolveReviewOrigin } from './review-target.mjs'
+import { hydratedEvidenceBase, resolveReviewOrigin } from './review-target.mjs'
+export { hydratedEvidenceBase } from './review-target.mjs'
 import { uploadReviewBundle as uploadBundle } from './lib-review-upload.mjs'
 import { confirmOcrWithReconciliation } from './lib-proofread-ocr.mjs'
 import { reuseSealedOcrConfirmation } from './lib-sealed-ocr-resume.mjs'
 import { checkOcrGenerationPlan, planOcrGeneration } from './lib-ocr-generation.mjs'
 import { assertImportSubmissionReady } from './lib-import-submit-gate.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
-import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
+import { LISTENING_REVIEW_FILE, listeningReviewSubject, validateListeningReview } from '../../server/paper-import/listeningReview.mjs'
 import { LISTENING_REVIEW_VERSION, assertListeningUploadBudget } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
 import { applyListeningInstructionCorrection, correctedListeningCount, LISTENING_INSTRUCTION_CORRECTION_FILE, LISTENING_INSTRUCTION_CORRECTION_POLICY } from '../../server/paper-import/listeningInstructionCorrection.mjs'
 import {
@@ -276,10 +282,31 @@ function fileDescriptors(paperDir, files = reviewBundleFilePaths(paperDir)) {
   return descriptors
 }
 
-async function uploadReviewBundle(paperDir, manifest) {
+export function buildLocalReviewProjection(paperDir, options) {
+  return buildNck1ReviewProjection(paperDir, options, hydratedEvidenceBase(paperDir))
+}
+
+export function withLocalReviewEvidence(paperDir, compute) {
+  return withRetainedReviewEvidence(paperDir, hydratedEvidenceBase(paperDir), compute)
+}
+
+export function importLocalReviewCandidate(paperDir, loaded, expectedDigest = null) {
+  const base = hydratedEvidenceBase(paperDir)
+  return withRetainedReviewEvidence(paperDir, base, retained =>
+    importNck1ReviewCandidate(paperDir, loaded, expectedDigest,
+      !expectedDigest ? retainedCandidateBinding(retained, base?.revision) : null))
+}
+
+export function loadLocalReviewedListening(paperDir, loaded, candidate) {
+  return withLocalReviewEvidence(paperDir, retained =>
+    loadReviewedListening(paperDir, loaded, candidate, null, retained))
+}
+
+export async function uploadReviewBundle(paperDir, manifest, timelinePath = path.join(
+  root, 'imports/ocr-proofread', manifest.paperId, 'fast/upload-timeline.jsonl',
+)) {
   return uploadBundle({
-    paperDir, manifest, api, resolveReviewFile,
-    timelinePath: path.join(root, 'imports/ocr-proofread', manifest.paperId, 'fast/upload-timeline.jsonl'),
+    paperDir, manifest, api, resolveReviewFile, timelinePath,
   })
 }
 
@@ -328,7 +355,7 @@ export function reviewManifest(paperDir, projection, resolvesIssueIds = [], buil
         }
       : { analysisDigest: projection.analysisDigest }),
     producerBuildId: buildId,
-    files: fileDescriptors(paperDir),
+    files: fileDescriptors(paperDir, reviewBundleFilePathsForProjection(paperDir, projection)),
     resolvesIssueIds,
   }
   return { ...manifest, bundleDigest: reviewBundleDigest(manifest) }
@@ -353,14 +380,33 @@ async function linkThread(paperId) {
   }), null, 2))
 }
 
-async function pushRevision(paperId) {
-  const paperDir = paperDirectory(paperId)
+export function reboundProductManifestBytes(manifest, inputDigest) {
+  return Buffer.from(`${JSON.stringify({ ...manifest, inputDigest }, null, 2)}\n`)
+}
+
+export function prepareReviewPush(paperDir, { resolvesIssueIds = [], expectedBaseRevisionId } = {}) {
   const loaded = loadNck1ReviewSource(paperDir)
   assertImportSubmissionReady(paperDir, loaded.materialization, loaded)
-  const projection = buildNck1ReviewProjection(paperDir, { requireAnalyses: true })
+  const options = { requireAnalyses: true, replayReferencesFromRevisionId: expectedBaseRevisionId }
+  let projection = buildLocalReviewProjection(paperDir, options)
   const boundaryIssues = validateInlineBlankTextBoundaries(projection.compilation.artifacts.canonicalPaper.questionGroups)
   if (boundaryIssues.length) fail(JSON.stringify(boundaryIssues, null, 2))
-  const manifest = reviewManifest(paperDir, projection, resolvedIssueIds())
+  const products = projection.frozenProducts
+  if (products && products.manifest.inputDigest !== projection.printInputDigest) {
+    // The projection proved reuse against the original seal or legacy digest.
+    // Only the local manifest is rebound, so the uploaded revision stands alone.
+    const file = resolveReviewFile(paperDir, PRODUCT_MANIFEST)
+    const staging = `${file}.${randomUUID()}`
+    writeFileSync(staging, reboundProductManifestBytes(products.manifest, projection.printInputDigest), { flag: 'wx' })
+    renameSync(staging, file)
+    projection = buildLocalReviewProjection(paperDir, options)
+  }
+  return { manifest: reviewManifest(paperDir, projection, resolvesIssueIds, undefined, expectedBaseRevisionId), projection }
+}
+
+async function pushRevision(paperId) {
+  const paperDir = paperDirectory(paperId)
+  const { manifest, projection } = prepareReviewPush(paperDir, { resolvesIssueIds: resolvedIssueIds() })
   const finalized = await uploadReviewBundle(paperDir, manifest)
   console.log(JSON.stringify({
     paperId,
@@ -416,7 +462,7 @@ async function paginationQa(paperId) {
   let policy
   let slotByGroup = new Map()
   try {
-    projection = buildNck1ReviewProjection(paperDir, { requireAnalyses: true })
+    projection = buildLocalReviewProjection(paperDir, { requireAnalyses: true })
     assertApplicationGivenOwnership(projection.compilation.artifacts.canonicalPaper.questionGroups
       .find(group => group.variant.family === 'application-writing'))
     const sourceHasListening = projection.paginationSlotBindings.some((entry) =>
@@ -623,17 +669,14 @@ async function paginationQa(paperId) {
   }
 }
 
-async function hydrate(paperId) {
-  const paperDir = paperDirectory(paperId)
-  if (existsSync(paperDir)) fail(`Local paper workspace already exists: ${paperId}`)
-  const requestedRevisionId = option('--revision')
-  if (process.argv.includes('--revision')
-    && (!requestedRevisionId || requestedRevisionId.startsWith('--'))) {
-    fail('hydrate --revision requires an exact revision id')
-  }
-  const status = await api(
-    `/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
-  )
+export async function listReviewPapers() {
+  return (await api('/api/import-agent-reviews')).papers
+}
+
+export async function reviewCandidate(paperId, requestedRevisionId) {
+  const status = await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`,
+    {}, { allowNotFound: true })
+  if (!status) return null
   const revision = requestedRevisionId && requestedRevisionId !== status.latest?.id
     ? status.revisions?.find((item) => item.id === requestedRevisionId)
     : status.latest
@@ -644,55 +687,48 @@ async function hydrate(paperId) {
     || !revision.finalizedAt
     || !revision.manifest
     || revision.manifest.paperId !== paperId
-  ) fail(`${paperId} has no finalized Candidate revision to hydrate${requestedRevisionId ? `: ${requestedRevisionId}` : ''}`)
+  ) return null
   // status.files belongs only to latest. Historical files are checked against
   // their own immutable manifest below, never the current revision's inventory.
   if (
     revision.manifest.bundleDigest !== revision.bundleDigest
     || reviewBundleDigest(revision.manifest) !== revision.bundleDigest
+    || ['sourceDigest', 'candidateDigest']
+      .some(key => revision.manifest[key] !== revision[key])
     || (revision.id === status.latest?.id
       && !exactFileDescriptors(revision.manifest.files, status.files || []))
   ) fail('Selected Review revision manifest, file inventory, or bundleDigest does not close')
+  return revision
+}
 
-  mkdirSync(papersRoot, { recursive: true })
-  const temporary = mkdtempSync(path.join(papersRoot, '.hydrate-'))
+export async function downloadReviewFile(revision, file) {
+  const { bytes } = await api(
+    `/api/import-agent-reviews/revisions/${encodeURIComponent(revision.id)}`
+      + `/files?path=${encodeURIComponent(file.path)}`,
+    {}, { binary: true },
+  )
+  if (bytes.byteLength !== file.byteLength || sha256(bytes) !== file.sha256) {
+    fail(`Hydrated Review file changed in transit: ${file.path}`)
+  }
+  return bytes
+}
+
+export async function hydrateReviewRevision(revision, paperDir) {
+  const { paperId } = revision
+  if (existsSync(paperDir)) fail(`Local paper workspace already exists: ${paperDir}`)
+  mkdirSync(path.dirname(paperDir), { recursive: true, mode: 0o700 })
+  const temporary = mkdtempSync(path.join(path.dirname(paperDir), '.hydrate-'))
   try {
     for (const file of revision.manifest.files) {
-      const downloaded = await api(
-        `/api/import-agent-reviews/revisions/${encodeURIComponent(revision.id)}`
-          + `/files?path=${encodeURIComponent(file.path)}`,
-        {},
-        { binary: true },
-      )
-      if (
-        downloaded.bytes.byteLength !== file.byteLength
-        || sha256(downloaded.bytes) !== file.sha256
-      ) fail(`Hydrated Review file changed in transit: ${file.path}`)
+      const bytes = await downloadReviewFile(revision, file)
       const filePath = resolveReviewFile(temporary, file.path)
       mkdirSync(path.dirname(filePath), { recursive: true })
-      writeFileSync(filePath, downloaded.bytes)
+      writeFileSync(filePath, bytes)
     }
-    const projection = buildNck1SealedReviewProjection(temporary, revision, { requireAnalyses: false })
-    const identity = {
-      sourceDigest: projection.sourceDigest,
-      candidateDigest: projection.candidateDigest,
-      visibleStructureDigest: projection.visibleStructureDigest,
-      ...(projection.importProfile
-        ? {
-            importProfile: projection.importProfile,
-            paragraphSummariesDigest: projection.paragraphSummariesDigest,
-            publicSearchMetadataDigest: projection.publicSearchMetadataDigest,
-            ...(projection.analysisDigest ? { analysisDigest: projection.analysisDigest } : {}),
-          }
-        : { analysisDigest: projection.analysisDigest }),
-    }
-    for (const [key, value] of Object.entries(identity)) {
-      if (revision.manifest[key] !== value) {
-        fail(`Hydrated Review ${key} does not match its finalized manifest`)
-      }
-    }
-    const report = projection.ocrCorrectionReport
-    if (report) {
+    const reportPath = 'agent-ocr-correction-report-v2.json'
+    if (revision.manifest.files.some(file => file.path === reportPath)
+      || revision.manifest.ocrCorrectionReportDigest) {
+      const report = requiredJson(resolveReviewFile(temporary, reportPath), reportPath)
       if (digestJson(report) !== revision.manifest.ocrCorrectionReportDigest) {
         fail('Hydrated OCR correction report does not match its finalized manifest')
       }
@@ -718,15 +754,32 @@ async function hydrate(paperId) {
     }
     const restorePath = path.join(temporary, 'signals', 'review-restore.json')
     mkdirSync(path.dirname(restorePath), { recursive: true })
+    writeFileSync(path.join(temporary, 'signals', 'review-restore-config.json'),
+      readFileSync(resolveReviewFile(temporary, 'config.json')), { flag: 'wx', mode: 0o600 })
     writeFileSync(restorePath, `${JSON.stringify({
       schemaVersion: 'review-restore-v1', paperId, origin: origin(),
       revisionId: revision.id, bundleDigest: revision.bundleDigest,
+      sealedRevision: Object.fromEntries(['id', 'paperId', 'reviewKind', 'state', 'finalizedAt',
+        'bundleDigest', 'sourceDigest', 'candidateDigest', 'manifest'].map(key => [key, revision[key]])),
     }, null, 2)}\n`, { flag: 'wx', mode: 0o600 })
     renameSync(temporary, paperDir)
   } catch (error) {
     rmSync(temporary, { recursive: true, force: true })
     throw error
   }
+}
+
+async function hydrate(paperId) {
+  const paperDir = paperDirectory(paperId)
+  if (existsSync(paperDir)) fail(`Local paper workspace already exists: ${paperId}`)
+  const requestedRevisionId = option('--revision')
+  if (process.argv.includes('--revision')
+    && (!requestedRevisionId || requestedRevisionId.startsWith('--'))) {
+    fail('hydrate --revision requires an exact revision id')
+  }
+  const revision = await reviewCandidate(paperId, requestedRevisionId)
+  if (!revision) fail(`${paperId} has no finalized Candidate revision to hydrate${requestedRevisionId ? `: ${requestedRevisionId}` : ''}`)
+  await hydrateReviewRevision(revision, paperDir)
   console.log(JSON.stringify({
     paperId,
     revisionId: revision.id,
@@ -1014,7 +1067,7 @@ function verifyAnalyses(paperId) {
   if (config.importProfile === 'public-paper-v1' && config.withTeachingAnalyses !== true) {
     fail('public-paper-v1 does not use teaching analyses; run verify-summaries instead')
   }
-  const projection = buildNck1ReviewProjection(
+  const projection = buildLocalReviewProjection(
     paperDirectory(paperId),
     { requireAnalyses: true },
   )
@@ -1096,13 +1149,16 @@ function listeningInstructionCorrection(paperId, command) {
 
 function listeningReview(paperId, command) {
   const paperDir = paperDirectory(paperId)
+  const method = option('--method') || 'asr_source_comparison'
+  if (!['asr_source_comparison', 'audio_source_comparison', 'agent_asr_comparison'].includes(method)) fail('Unknown listening review method')
   const loaded = loadNck1ReviewSource(paperDir)
   const input = command === 'finalize-listening-review' ? option('--input') : null
   if (command === 'finalize-listening-review' && !input) fail('finalize-listening-review requires --input <review.json>')
   const authoredBytes = input ? readFileSync(path.resolve(input)) : null
+  if (authoredBytes && option('--method') && JSON.parse(authoredBytes).method !== method) fail('Listening review method differs from --method')
   const expectedDigest = option('--candidate-digest') || (authoredBytes
     ? JSON.parse(authoredBytes.toString('utf8'))?.subject?.candidateDigest : null)
-  const imported = importNck1ReviewCandidate(paperDir, loaded, expectedDigest)
+  const imported = importLocalReviewCandidate(paperDir, loaded, expectedDigest)
   if (!imported.candidate || imported.issues.length) fail(imported.issues[0]?.message || 'Invalid listening Candidate')
   const subject = listeningReviewSubject(loaded, imported.candidate)
   const transcript = loaded.materialization.listening.transcript
@@ -1115,7 +1171,7 @@ function listeningReview(paperId, command) {
       sourceInstructions: loaded.materialization.sourcePresentation?.instructions || [],
       report: {
         schemaVersion: LISTENING_REVIEW_VERSION, subject, reviewedBy: 'import_agent', reviewedAt: null,
-        method: 'asr_source_comparison', untrustedContentHandledAsData: true,
+        method, untrustedContentHandledAsData: true,
         scope: { purpose: 'teacher_navigation', verbatim: 'not_certified', wholeRecordingContent: 'not_certified' },
         evidence: [],
         groups: [...transcript].sort((a, b) => Math.min(...a.questionNumbers) - Math.min(...b.questionNumbers))
@@ -1147,9 +1203,11 @@ function listeningReview(paperId, command) {
       }
     }
     writeFileSync(active, bytes)
-  } else validated = readListeningReview(paperDir, subject, transcript)
+  } else validated = loadLocalReviewedListening(paperDir, loaded, imported.candidate)
   if (!validated) fail('No listening review exists')
   console.log(JSON.stringify({ paperId, validation: 'PASS', scope: validated.review.scope,
+    method: validated.review.method,
+    ...(validated.review.method === 'agent_asr_comparison' ? { label: 'AI 对照 ASR 判定', ownerReviewed: false } : {}),
     usableGroups: validated.review.groups.filter(group => group.decision === 'usable').length,
     unresolvedGroups: validated.review.groups.filter(group => group.decision !== 'usable').map(group => group.segmentId),
     semanticJudgment: 'import_agent_attestation', revision: 'not_submitted', publication: null }, null, 2))
@@ -1188,6 +1246,8 @@ function spellingReview(paperId, command) {
   const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
   if (!preview.compilation) fail(preview.unresolvedIssues?.[0]?.message || 'Corrected Candidate does not compile')
   if (command === 'finalize-spelling') {
+    verifyListeningInsertionOccurrences(loaded.sourceInput.spellingReviewBytes,
+      () => requiredJson(resolveReviewFile(paperDir, LISTENING_REVIEW_FILE), LISTENING_REVIEW_FILE))
     const activePath = path.join(paperDir, SPELLING_REVIEW_FILE)
     if (existsSync(activePath)) {
       const previous = new Uint8Array(readFileSync(activePath))
@@ -1218,7 +1278,7 @@ async function preprocessingReport(paperId) {
   const output = option('--output')
   if (!evidencePath || !output) fail('preprocessing-report requires --evidence <evidence.json> --output <report.md>')
   const evidenceFile = path.resolve(evidencePath)
-  const projection = buildNck1ReviewProjection(paperDirectory(paperId))
+  const projection = buildLocalReviewProjection(paperDirectory(paperId))
   const evidence = requiredJson(evidenceFile, 'handoff evidence')
   const reviewStatus = ['preprocessing-handoff-evidence-v4', 'preprocessing-handoff-evidence-v5'].includes(evidence.schemaVersion) && evidence.screen
     ? await api(`/api/import-agent-reviews/papers/${encodeURIComponent(paperId)}`) : null
@@ -1237,7 +1297,7 @@ function summaryCandidate(paperDir) {
   if (loaded.config.importProfile !== 'public-paper-v1' || loaded.analyzedPackage) {
     fail('Paragraph summaries are only available for raw-source public-paper-v1 workspaces')
   }
-  const imported = importNck1ReviewCandidate(paperDir, loaded)
+  const imported = importLocalReviewCandidate(paperDir, loaded)
   if (!imported.candidate || imported.issues.length) {
     const issue = imported.issues[0]
     fail(`${issue?.code || 'MATERIALIZATION_INVALID'}: ${issue?.message || 'Candidate derivation failed'}`)
@@ -1374,7 +1434,7 @@ async function approvedLocalReview(paperId) {
   if (!approval || status.latest?.state !== 'approved') {
     fail(`${paperId} has no current approved revision`)
   }
-  const projection = buildNck1ReviewProjection(paperDir, { requireAnalyses: true })
+  const projection = buildLocalReviewProjection(paperDir, { requireAnalyses: true })
   for (const [actual, expected, label] of [
     [projection.sourceDigest, approval.sourceDigest, 'sourceDigest'],
     [projection.candidateDigest, approval.candidateDigest, 'candidateDigest'],
@@ -1795,7 +1855,9 @@ async function main() {
   }
   if (command === 'push') await pushRevision(paperId)
   else if (['search-sidecar-input', 'get-search-sidecar', 'upload-search-sidecar'].includes(command)) await searchSidecar(command, paperId)
-  else if (['prepare-listening-instruction-correction', 'finalize-listening-instruction-correction', 'verify-listening-instruction-correction'].includes(command)) listeningInstructionCorrection(paperId, command)
+  else if (['prepare-listening-instruction-correction', 'finalize-listening-instruction-correction', 'verify-listening-instruction-correction'].includes(command)) {
+    withLocalReviewEvidence(paperDirectory(paperId), () => listeningInstructionCorrection(paperId, command))
+  }
   else if (['prepare-listening-review', 'finalize-listening-review', 'verify-listening-review'].includes(command)) listeningReview(paperId, command)
   else if (command === 'pagination-qa') await paginationQa(paperId)
   else if (command === 'hydrate') await hydrate(paperId)
@@ -1807,8 +1869,12 @@ async function main() {
   else if (command === 'proofread-ocr') await proofreadOcr(paperId)
   else if (command === 'pull-ocr-confirmation') await pullOcrConfirmation(paperId)
   else if (command === 'reuse-ocr-confirmation') await reuseOcrConfirmation(paperId)
-  else if (command === 'finalize-ocr-correction-report') finalizeOcrCorrectionReport(paperId)
-  else if (['prepare-spelling', 'finalize-spelling', 'verify-spelling'].includes(command)) spellingReview(paperId, command)
+  else if (command === 'finalize-ocr-correction-report') {
+    withLocalReviewEvidence(paperDirectory(paperId), () => finalizeOcrCorrectionReport(paperId))
+  }
+  else if (['prepare-spelling', 'finalize-spelling', 'verify-spelling'].includes(command)) {
+    withLocalReviewEvidence(paperDirectory(paperId), () => spellingReview(paperId, command))
+  }
   else if (command === 'preprocessing-report') await preprocessingReport(paperId)
   else if (command === 'preflight') await preflight(paperId)
   else if (command === 'verify-analyses') verifyAnalyses(paperId)

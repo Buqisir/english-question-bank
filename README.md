@@ -24,7 +24,7 @@ Copyright (c) 2026 Buqisir. **All rights reserved（保留所有权利）。**
 
 生产 / 消费分界（ADR-0015 / ADR-0016）：**内容生产在后台 Agent**
 （`scripts/import-pipeline/` 离线导题、出题 skill、backfill 脚本），
-**网站只做消费**（找题 → 看题 → 组卷 → 导出学生版 / 教师版）。
+**网站只做消费**（找题 → 看题 → 组卷 → 导出）。
 网站端没有导题入口，这是产品决策，不是缺失。
 
 ## 目录
@@ -56,7 +56,7 @@ pnpm dev   # 初始化本地 SQLite 后同时起 API (8787) 和 Vite 前端
 
 - 首次上机手册：`docs/cuts/launch-deploy/runbook.md`
 - 服务器实况记录：`docs/cuts/launch-deploy/go-live-record.md`
-- 日常代码发布：`scripts/deploy.sh`；R2 备份：`scripts/backup-to-r2.sh`；
+- 日常代码发布见 [AGENTS.md](AGENTS.md#owner-mac-deployment)。R2 备份：`scripts/backup-to-r2.sh`；
   Review-backed 内容上线走服务端单卷 promotion；`scripts/pull-run-push.mjs` 只保留
   pull/manifest 与历史维护兼容
 
@@ -71,4 +71,4 @@ pnpm dev   # 初始化本地 SQLite 后同时起 API (8787) 和 Vite 前端
 
 - 语篇中心：阅读、完形、七选五都围绕完整材料建模。
 - 教学可用：服务找题、组题、讲评和训练，不做 AI 数据面板。
-- 人工把关：AI 可以建议，不替代教师判断；学生版永不露答案。
+- 人工把关：AI 可以建议，不替代教师判断。

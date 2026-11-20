@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict'
 import './lib/reviewTestLockRoot.mjs'
-import { chmod, mkdir, mkdtemp, readFile, readdir, stat, writeFile, rm } from 'node:fs/promises'
+import { chmod, cp, mkdir, mkdtemp, readFile, readdir, stat, writeFile, rm } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
 import { createHash } from 'node:crypto'
 import { Readable } from 'node:stream'
 import { DatabaseSync } from 'node:sqlite'
 import { archiveReviewFiles, createBlobStore } from '../server/paper-import/blobStore.mjs'
-import { loadStoredProducts, productInputDigest, readFrozenProducts, PRODUCT_FILES, PRODUCT_MANIFEST } from '../server/paper-import/frozenProducts.mjs'
+import { loadStoredProducts, matchesSealedPrintInputs, productInputDigest, readFrozenProducts, PRODUCT_FILES, PRODUCT_MANIFEST } from '../server/paper-import/frozenProducts.mjs'
 import { readExamDate } from '../shared/examDate.mjs'
 import { PAPER_PDF_PRODUCTS } from '../shared/paperPdfProducts.mjs'
 import { sendListeningAudioFile } from '../server/paper-import/paperAssetStatic.mjs'
@@ -21,7 +21,7 @@ import { SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.
 import { syntheticReviewReferences } from './lib/syntheticReviewAnswerFixture.mjs'
 import { publishUniversalNck1Import } from '../server/paper-import/publisher.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
-import { finalizeReviewFixture, publicationFixtureInput } from './lib/reviewPublicationFixture.mjs'
+import { finalizeReviewFixture, freezeReviewFixture, publicationFixtureInput } from './lib/reviewPublicationFixture.mjs'
 
 const digest = bytes => `sha256:${createHash('sha256').update(bytes).digest('hex')}`
 const directory = await mkdtemp(path.join(os.tmpdir(), 'eqb-product-storage-'))
@@ -196,12 +196,21 @@ try {
   db.prepare('INSERT INTO paper_import_runs VALUES (?,2,\'published\',?)').run(manifest.paperId, JSON.stringify(report))
   db.prepare('INSERT INTO canonical_paper_publications VALUES (?,\'v2\',?)').run(manifest.paperId, consumption.publicationDigest)
   db.prepare('INSERT INTO paper_asset_versions VALUES (?,2,\'published\')').run(manifest.paperId)
-  const loaded = await loadStoredProducts({ db, paperAssetsDir: directory, consumption, blobStore: local })
-  for (const file of PRODUCT_FILES) assert.deepEqual(loaded.bytes[file.path], bytes[file.path])
-  await assert.rejects(loadStoredProducts({ db, paperAssetsDir: directory,
-    consumption: { ...consumption, publicationDigest: digest(Buffer.from('another revision')) }, blobStore: local }), /版本不一致/)
+  const calls = []
+  const blobStore = { identity: local.identity, get(file) { calls.push(file.sha256); return local.get(file) } }
+  const load = edition => loadStoredProducts({ db, consumption, edition, blobStore })
+  const inventory = await load()
+  assert.deepEqual(inventory.manifest.files, manifest.files)
+  assert.deepEqual(calls.splice(0), [files[PRODUCT_MANIFEST].sha256])
+  await assert.rejects(loadStoredProducts({ db,
+    consumption: { ...consumption, publicationDigest: digest(Buffer.from('another revision')) }, blobStore }), { code: 'FROZEN_PRODUCTS_INVALID' })
   await writeFile(path.join(directory, 'eqb-blobs/v1/sha256', files['products/answerOnly.pdf'].sha256.slice(7)), bytes['products/economy8.pdf'])
-  await assert.rejects(loadStoredProducts({ db, paperAssetsDir: directory, consumption, blobStore: local }), /integrity/)
+  assert.equal((await load()).manifest.files.length, manifest.files.length)
+  assert.deepEqual(calls.splice(0), [files[PRODUCT_MANIFEST].sha256])
+  const economy = await load('economy8')
+  assert.deepEqual(economy.bytes['products/economy8.pdf'], bytes['products/economy8.pdf'])
+  assert.deepEqual(calls.splice(0), [files[PRODUCT_MANIFEST].sha256, files['products/economy8.pdf'].sha256])
+  await assert.rejects(load('answerOnly'), /integrity/)
 
   // Reuse the source fixture without executing its full verifier. Exercise the
   // real projection/publication gates, not only a synthetic published report.
@@ -252,6 +261,51 @@ try {
   assert.throws(() => buildNck1ReviewProjection(fixture.reviewRoot), /输入或产品文件清单/,
     'adding the plan invalidates the previous product input digest')
   productManifest.inputDigest = productInputDigest(fixture.reviewRoot, reviewBundleFilePaths(fixture.reviewRoot))
+  await writeFile(path.join(fixture.reviewRoot, PRODUCT_MANIFEST), JSON.stringify(productManifest))
+  const printInventory = reviewBundleFilePaths(fixture.reviewRoot)
+  const metadata = { path: 'public-search-metadata-v1.json', mediaType: 'application/json', role: 'public_search_metadata' }
+  const metadataPath = path.join(fixture.reviewRoot, metadata.path)
+  await writeFile(metadataPath, JSON.stringify({ tags: ['before'] }))
+  const previousConfig = await readFile(configPath)
+  const legacyInputFiles = [...printInventory, metadata]
+  const legacy = { ...productManifest,
+    inputDigest: productInputDigest(fixture.reviewRoot, legacyInputFiles, null, { legacy: true }) }
+  await writeFile(path.join(fixture.reviewRoot, PRODUCT_MANIFEST), JSON.stringify(legacy))
+  const sealedFiles = await Promise.all(legacyInputFiles.map(async file => {
+    const data = await readFile(path.join(fixture.reviewRoot, file.path))
+    return { ...file, sha256: digest(data), byteLength: data.length }
+  }))
+  const sealed = { paperId: fixture.projection.paperId, sourceDigest: inputIdentity.sourceDigest,
+    candidateDigest: inputIdentity.candidateDigest, files: sealedFiles }
+  sealed.bundleDigest = reviewBundleDigest(sealed)
+  const base = { revision: { ...sealed, id: 'rev-old-products', reviewKind: 'candidate',
+    state: 'approved', finalizedAt: '2026-04-12T00:00:00Z', manifest: sealed }, configBytes: previousConfig }
+  await writeFile(metadataPath, JSON.stringify({ tags: ['after'] }))
+  await writeFile(configPath, JSON.stringify({ ...config, provenance: { ...config.provenance, defaultTags: ['changed'] } }))
+  assert.equal(productInputDigest(fixture.reviewRoot, legacyInputFiles), productManifest.inputDigest)
+  assert.throws(() => buildNck1ReviewProjection(fixture.reviewRoot), /输入或产品文件清单/)
+  const reused = buildNck1ReviewProjection(fixture.reviewRoot, {}, base)
+  assert.deepEqual(reused.frozenProducts.manifest, legacy)
+  assert.deepEqual(reused.frozenProducts.bytes['products/answerOnly.pdf'], fixtureBytes['products/answerOnly.pdf'])
+  const materializationPath = path.join(fixture.reviewRoot, printInventory.find(file => file.role === 'materialization').path)
+  const materializationBytes = await readFile(materializationPath)
+  const changedMaterialization = JSON.parse(materializationBytes)
+  const question = changedMaterialization.groups.find(group => group.questions.length).questions[0]
+  question.stem = 'Changed question text?'
+  await writeFile(materializationPath, JSON.stringify(changedMaterialization))
+  const changedPrintDigest = productInputDigest(fixture.reviewRoot, printInventory)
+  assert.equal(matchesSealedPrintInputs({ rootDir: fixture.reviewRoot, inputDigest: changedPrintDigest,
+    sealedFiles, sealedConfigBytes: previousConfig }), false, 'edited question needs a new freeze')
+  const refreezeRoot = path.join(directory, 'refreeze')
+  await cp(fixture.reviewRoot, refreezeRoot, { recursive: true })
+  for (const file of ['pagination-plan.json', SOURCE_REFERENCES_FILE]) await rm(path.join(refreezeRoot, file))
+  const refrozen = freezeReviewFixture(refreezeRoot)
+  assert.notEqual(refrozen.candidateDigest, inputIdentity.candidateDigest)
+  assert.notEqual(refrozen.frozenProducts.manifest.inputDigest, legacy.inputDigest)
+  assert.equal(refrozen.frozenProducts.manifest.inputDigest, refrozen.printInputDigest)
+  await writeFile(materializationPath, materializationBytes)
+  await writeFile(configPath, previousConfig)
+  await rm(metadataPath)
   await writeFile(path.join(fixture.reviewRoot, PRODUCT_MANIFEST), JSON.stringify(productManifest))
   const projection = buildNck1ReviewProjection(fixture.reviewRoot, { requireAnalyses: true })
   assert.equal(projection.sourceDigest, inputIdentity.sourceDigest)
@@ -346,10 +400,12 @@ try {
       blobStore: createBlobStore({ rootDir: path.join(directory, 'publication-blobs') }) })
     const result = publishUniversalNck1Import({ ...input, fileStorage: storage })
     assert.equal(result.ok, true)
-    const official = await loadStoredProducts({ db: publicationDb, paperAssetsDir: input.paperAssetsDir,
-      consumption: Object.values(result.publish.consumers)[0],
-      blobStore: createBlobStore({ rootDir: path.join(directory, 'publication-blobs') }) })
-    for (const file of PRODUCT_FILES) assert.deepEqual(official.bytes[file.path], fixtureBytes[file.path])
+    const publicationStore = createBlobStore({ rootDir: path.join(directory, 'publication-blobs') })
+    for (const file of PRODUCT_FILES) {
+      const official = await loadStoredProducts({ db: publicationDb, consumption: Object.values(result.publish.consumers)[0],
+        edition: path.basename(file.path, '.pdf'), blobStore: publicationStore })
+      assert.deepEqual(official.bytes[file.path], fixtureBytes[file.path])
+    }
   } finally { publicationDb.close() }
 
   // GET success alone cannot catch a missing HEAD registration in this router.

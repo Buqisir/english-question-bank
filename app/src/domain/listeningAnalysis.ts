@@ -4,6 +4,18 @@ export type ListeningTopic = {
   subtopic: string
 }
 
+export type ListeningSentence = {
+  id: string
+  speaker?: string
+  en: string
+  zh?: string
+  utf16Start: number
+  utf16End: number
+  /** Seconds on the whole-paper playback recording. */
+  passes: [{ start: number; end: number }, { start: number; end: number }?]
+  questionNumbers?: number[]
+}
+
 export type ListeningMaterialAnalysis = {
   segmentId: string
   questionIds: string[]
@@ -11,6 +23,7 @@ export type ListeningMaterialAnalysis = {
   translationZh: string
   topic: ListeningTopic
   summaryZh: string
+  sentences?: ListeningSentence[]
 }
 
 export type ListeningQuestionAnalysis = {

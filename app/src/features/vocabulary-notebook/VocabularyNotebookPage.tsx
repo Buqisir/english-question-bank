@@ -177,17 +177,16 @@ export function VocabularyNotebookPage({
   useRowReveal(paperListRef, '.home-row-list > li', (papers?.length ?? 0) > 0, { once: true })
   const [paperNames, setPaperNames] = useState<Record<string, string>>({})
   const [detail, setDetail] = useState<NotebookPaperDetail | null>(null)
-  const [titles, setTitles] = useState<PaperTitles | null>(null)
+  const [resolvedTitles, setResolvedTitles] = useState<{ paperId: string; titles: PaperTitles | null } | null>(null)
+  const titles = resolvedTitles?.paperId === paperId ? resolvedTitles.titles : null
   const [error, setError] = useState('')
 
   useEffect(() => {
     let cancelled = false
     const reload = () => {
       const request = paperId
-        ? Promise.all([fetchNotebookPaper(paperId), loadPaperTitles(paperId)]).then(([nextDetail, nextTitles]) => {
-          if (cancelled) return
-          setDetail(nextDetail)
-          setTitles(nextTitles)
+        ? fetchNotebookPaper(paperId).then((nextDetail) => {
+          if (!cancelled) setDetail(nextDetail)
         })
         : fetchNotebookPapers().then((result) => {
           if (!cancelled) setPapers(result.papers)
@@ -197,6 +196,11 @@ export function VocabularyNotebookPage({
       })
     }
     reload()
+    if (paperId) {
+      loadPaperTitles(paperId).catch(() => null).then((nextTitles) => {
+        if (!cancelled) setResolvedTitles({ paperId, titles: nextTitles })
+      })
+    }
     // 纸面字体和这张纸一起读（灰块挪出 PaperFontGate 以后，免得等纸到了才开始读字体）。读不到由 PaperFontGate 照旧报。
     if (paperId) void ensurePaperFonts('').catch(() => undefined)
     const channel = new BroadcastChannel('eqb-vocabulary-notebook')
@@ -235,8 +239,8 @@ export function VocabularyNotebookPage({
         // 原来 PaperFontGate 包着整块（连「正在打开这张纸」那一行），字体和这张纸一起读；挪出来以后在下面的 effect 里先读通用字体，仍是一起读。
         <main className="notebook-desk">
           {error ? <Notice kind="error" className="notebook-status">{error}</Notice> : null}
-          <SkeletonGate pending={!detail && !error} label="正在打开这张纸" skeleton={<NotebookSheetSkeleton />}>
-            {detail ? (
+          <SkeletonGate pending={detail?.paperId !== paperId && !error} label="正在打开这张纸" skeleton={<NotebookSheetSkeleton />}>
+            {detail?.paperId === paperId ? (
               <PaperFontGate>
                 <NotebookSheet detail={detail} titles={titles} />
               </PaperFontGate>

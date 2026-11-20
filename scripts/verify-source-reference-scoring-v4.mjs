@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 // verify-resource: browser-render
 import assert from 'node:assert/strict'
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import { importCanonicalCandidate } from '../shared/paper-canonical/compiler.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
@@ -22,6 +25,12 @@ import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
 const input = scoringFiguresFixture({ scoringIntro: true })
 const compiled = importCanonicalCandidate(input.sourceInput)
 assert.deepEqual(compiled.issues, [], 'real Canonical source compile remains closed')
+const wrongAnswerNumber = structuredClone(input.materialization)
+wrongAnswerNumber.answers[0].canonicalNumber = wrongAnswerNumber.answers[1].canonicalNumber
+const misnumbered = importCanonicalCandidate({ ...input.sourceInput,
+  materializationBytes: Buffer.from(JSON.stringify(wrongAnswerNumber)) })
+assert(misnumbered.issues.some(issue => issue.code === 'MATERIALIZATION_ANSWER_INVALID'),
+  'an official answer assigned to another question number still blocks admission')
 Object.assign(input, { sourceDigest: compiled.candidate.source.sha256,
   candidateDigest: compiled.candidate.candidateDigest })
 const sidecar = captureScoringReferences(input)
@@ -40,6 +49,52 @@ for (const document of reversed.confirmation.documents) for (const page of docum
 assert.deepEqual(sourceReferenceFigures(captureScoringReferences(reversed)).map(item => item.figure.sourceRegionId),
   sourceReferenceFigures(sidecar).map(item => item.figure.sourceRegionId), 'source sequence, never visual array order')
 console.log('PASS compile → v4 scoring capture → exact PDF/image/scope admission; p03/p04 and multiple-figure source order')
+
+const misplaced = structuredClone(sidecar)
+figure(misplaced).source.locator.region.x += .01
+const figureWarnings = []
+const skippedScoringFigures = assertSourceReferenceAdmission({ ...input, sidecar: misplaced,
+  onWarning: message => figureWarnings.push(message) })
+assert.deepEqual([...skippedScoringFigures], [figure(misplaced).figureId])
+assert(figureWarnings.some(message => /confirmed source region/u.test(message)))
+const skippedHtml = buildAnswerOnlyHtml({ ...input, sourceReferences: misplaced, includeScoring: true, skippedScoringFigures })
+assert(!skippedHtml.includes(`data-reference-figure="${figure(misplaced).figureId}"`))
+const qaRoot = mkdtempSync(path.join(tmpdir(), 'eqb-scoring-qa-'))
+try {
+  const put = (name, bytes) => {
+    const file = path.join(qaRoot, name)
+    mkdirSync(path.dirname(file), { recursive: true })
+    writeFileSync(file, bytes)
+  }
+  const { paperId, documents } = input.materialization
+  put('config.json', JSON.stringify({ paperId, provenance: { paperName: input.paperName } }))
+  put('universal-source-manifest.json', JSON.stringify({
+    schemaVersion: 'universal-nck1-source-manifest-v1', paperId,
+    materializationPath: 'materialization/source.json', mediaDirectory: 'materialization/media',
+    documents: documents.map(document => ({ ...document, path: `source/${document.documentId}.pdf` })),
+  }))
+  for (const document of input.sourceDocuments) put(`source/${document.documentId}.pdf`, document.bytes)
+  put('materialization/source.json', input.sourceInput.materializationBytes)
+  const original = input.materialization.answers[0]
+  put('answer-corrections.json', JSON.stringify({ paperId, sourceDigest: sha256(input.sourceInput.materializationBytes),
+    corrections: [{ questionId: original.questionId, officialAnswer: original.value, correctedAnswer: 'B', reason: 'Synthetic correction' }] }))
+  put('materialization/nck1-ocr-source-evidence-v1.json', input.sourceInput.ocrSourceBytes.evidenceBytes)
+  put('materialization/nck1-ocr-source-confirmation-v1.json', input.sourceInput.ocrSourceBytes.confirmationBytes)
+  put('references.json', JSON.stringify(misplaced))
+  const qaOutput = path.join(qaRoot, 'output')
+  execFileSync(process.execPath, [fileURLToPath(new URL('./import-pipeline/answer-products.mjs', import.meta.url)),
+    'qa', '--paper-dir', qaRoot, '--references', path.join(qaRoot, 'references.json'),
+    '--output', qaOutput, '--include-scoring'], { timeout: 60_000, encoding: 'utf8' })
+  assert(readFileSync(path.join(qaOutput, 'answerOnly.pdf')).subarray(0, 5).equals(Buffer.from('%PDF-')))
+  assert(readFileSync(path.join(qaOutput, 'answerOnly.html'), 'utf8')
+    .includes(`data-answer-number="${original.canonicalNumber}" aria-label="第${original.canonicalNumber}题 B">B<`))
+  console.log('PASS local answerOnly QA renders and checks the effective answer')
+} finally { rmSync(qaRoot, { recursive: true, force: true }) }
+const wrongQuestionFigure = structuredClone(input.materialization)
+wrongQuestionFigure.groups[0].blocks.push({ kind: 'figure', blockId: 'block:wrong-question-figure',
+  mediaId: 'media:missing-question-figure', caption: '', source: wrongQuestionFigure.groups[0].blocks[0].source })
+assert(importCanonicalCandidate({ ...input.sourceInput, materializationBytes: Buffer.from(JSON.stringify(wrongQuestionFigure)) })
+  .issues.some(issue => issue.code === 'MATERIALIZATION_MEDIA_UNRESOLVED'))
 
 for (const [name, change, code] of [
   ['duplicate figure ID', value => { figure(value).figureId = sourceReferenceFigures(value)[1].figure.figureId }, 'SOURCE_REFERENCES_ID_DUPLICATE'],
@@ -126,9 +181,13 @@ assert(p04FigureIndex > 1 && crossPageBlocks[p04FigureIndex - 1].kind === 'parag
 const p04Pair = crossPageBlocks.splice(p04FigureIndex - 1, 2)
 const p03Pair = crossPageBlocks.splice(0, 2, ...p04Pair)
 crossPageBlocks.splice(p04FigureIndex - 1, 0, ...p03Pair)
-assert.throws(() => assertSourceReferenceAdmission({ ...crossPageInput, sidecar: crossPageChanged }),
-  /source order|overlap/iu, 'swapped cross-page paragraph/figure pairs')
-console.log('PASS paired paragraph/figure swaps within and across pages, and overlapping blocks fail closed')
+const warnings = []
+const onWarning = message => warnings.push(message)
+assertSourceReferenceAdmission({ ...crossPageInput, sidecar: crossPageChanged, onWarning })
+assert(warnings.some(message => /source order|overlap/iu.test(message)), 'out-of-order scoring blocks are flagged')
+assert.throws(() => assertSourceReferenceAdmission({ ...crossPageInput, sidecar: crossPageSidecar, onWarning,
+  sourceInput: { ...crossPageInput.sourceInput, documents: [] } }), undefined, 'immutable source bytes still required')
+console.log('PASS scoring order mismatch warns while missing immutable source bytes still reject')
 
 // Rebind genuine OCR text so admission cannot reject merely stale evidence.
 const explanationInput = structuredClone(input)

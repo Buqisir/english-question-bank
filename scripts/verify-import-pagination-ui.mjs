@@ -4,14 +4,20 @@ import { readFileSync, mkdirSync } from 'node:fs'
 import { createServer } from 'node:http'
 import path from 'node:path'
 import { chromium } from '../app/node_modules/playwright/index.mjs'
+import { createServer as createViteServer } from '../app/node_modules/vite/dist/node/index.js'
 import { productPdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
 
-// Owner no longer embeds pagination UI in OPS. PDF selection lives on the real
-// Screen; this fixture guards the compact list, exact links and action states.
+// The legacy list links to the real review workspace for publication.
 const root = path.resolve(import.meta.dirname, '..')
+const appRoot = path.join(root, 'app')
+const appHtml = readFileSync(path.join(appRoot, 'index.html'), 'utf8')
 const artifactDir = process.env.EQB_OWNER_REVIEW_ARTIFACT_DIR || path.join(root, '.amp/in/artifacts/owner-review')
 const paperId = 'paper-owner-review-fixture'
 const revisionId = 'revision-owner-review-fixture'
+const reviewPath = `/api/import-reviews/papers/${paperId}/revisions/${revisionId}`
+const publishPath = `${reviewPath}/publish`
+const previewPath = `/api/import-review-preview/revisions/${revisionId}`
+const publicationUrl = `/?${new URLSearchParams({ view: 'ops-review', paper: paperId, rev: revisionId })}`
 const initial = {
   paperId, paperName: '2026 年高三英语模拟卷（交互演示）', latestRevisionId: revisionId,
   revisionNumber: 2, state: 'awaiting_review', reviewKind: 'candidate',
@@ -19,13 +25,18 @@ const initial = {
   rendererStale: false, unresolvedCount: 0, promotionState: null,
   compatibility: { result: 'equal', pending: false, reasonCode: 'CONTENT_EQUAL' },
 }
+const previewAsset = {
+  schemaVersion: 'paper-asset-v1',
+  paper: { paperId, title: initial.paperName, assetVersion: 1 },
+  content: { blocks: [], groups: {}, questions: {} },
+  answerKey: { answers: {} },
+}
 let paper = { ...initial }
 let issues = []
 let publishCount = 0
+let publishOutcome
 let capturedIssue
 let failList = false
-let dropPublishResponse = false
-let releasePublish
 const send = (response, body, type = 'application/json', status = 200) => {
   response.writeHead(status, { 'content-type': type })
   response.end(type === 'application/json' ? JSON.stringify(body) : body)
@@ -49,30 +60,36 @@ const server = createServer(async (request, response) => {
   if (url.pathname === '/api/import-reviews') return failList
     ? send(response, { error: '演示网络中断' }, 'application/json', 503)
     : send(response, { papers: [paper] })
+  if (url.pathname === `${reviewPath}/answer-corrections`) return send(response, { corrections: [] })
+  if (url.pathname === `${previewPath}/consumption`) {
+    return send(response, { disposition: 'ready', paperId, sourceAssetVersion: 1, selections: [] })
+  }
+  if (url.pathname === `${previewPath}/asset/paper-asset.json`) return send(response, previewAsset)
   if (url.pathname.endsWith('/review-state')) return send(response, { paperId, latestRevisionId: paper.latestRevisionId, issues, discussionThreadId: null })
   if (request.method === 'POST' || request.method === 'PATCH') {
     let body = ''
     for await (const chunk of request) body += chunk
     const input = JSON.parse(body)
     assert.equal(request.headers['x-eqb-csrf'], 'owner-review')
-    if (url.pathname.endsWith('/publish')) {
-      assert.equal(input.intent, 'publish')
-      assert.equal(input.bundleDigest, initial.bundleDigest)
-      assert.equal(input.rendererBuildId, initial.rendererBuildId)
-      assert(url.pathname.includes(`/revisions/${revisionId}/`))
+    if (url.pathname === publishPath) {
+      assert.deepEqual(input, { intent: 'publish', bundleDigest: initial.bundleDigest, rendererBuildId: initial.rendererBuildId })
       publishCount += 1
-      if (['different', 'unknown'].includes(paper.compatibility?.result)) {
-        const different = paper.compatibility.result === 'different'
-        return send(response, { code: 'IMPORT_REVIEW_PUBLICATION_COMPATIBILITY_REJECTED',
+      if (publishOutcome === 'different' || publishOutcome === 'unknown') {
+        const different = publishOutcome === 'different'
+        return send(response, {
+          code: 'IMPORT_REVIEW_PUBLICATION_COMPATIBILITY_REJECTED',
           error: different ? '预览内容有变化，未发布。' : '本次核验未完成，未发布。请稍后重试。',
-          retryable: !different, compatibility: { ...paper.compatibility,
-            differences: different ? ['/consumer/paperAsset/content/questions/question~1a/stem',
-              '/consumer/paperAsset/content/groups/group-a/title'] : [] } }, 'application/json', different ? 409 : 503)
+          retryable: !different,
+          compatibility: { result: publishOutcome, differences: different
+            ? ['/consumer/paperAsset/content/questions/question~1a/stem'] : [] },
+        }, 'application/json', different ? 409 : 503)
       }
-      paper.compatibility = { result: 'equal', pending: false }
-      paper.promotionState = 'publishing'
-      if (dropPublishResponse) { response.destroy(); return }
-      if (!process.argv.includes('--serve')) await new Promise(resolve => { releasePublish = resolve })
+      if (publishOutcome === 'lost') {
+        paper.promotionState = 'publishing'
+        // The server accepted the write, but the browser loses the receipt mid-response.
+        response.writeHead(200, { 'content-type': 'application/json', 'content-length': 100 })
+        return response.write('{"status":', () => response.destroy())
+      }
       paper.promotionState = 'published'
       return send(response, { status: 'published' })
     }
@@ -91,26 +108,30 @@ const server = createServer(async (request, response) => {
     }
   }
   const pdfUrl = `/api/import-review-preview/revisions/${revisionId}/pdf`
-  if (url.pathname.endsWith('/asset/paper-asset.json')) return send(response, { content: {
-    questions: { 'question/a': { questionId: 'question/a', questionNo: 21 } },
-    groups: { 'group-a': { groupId: 'group-a', questionIds: ['question/a'] } },
-  } })
   if (url.pathname === pdfUrl) {
     if (url.searchParams.has('download')) response.setHeader('content-disposition', 'attachment; filename="frozen-review.pdf"')
     return send(response, productPdfBytes(1, 'economy8'), 'application/pdf')
+  }
+  if (url.pathname === '/' && url.searchParams.get('view') === 'ops-review') {
+    return send(response, await vite.transformIndexHtml(request.url, appHtml), 'text/html')
   }
   if (url.pathname === '/') return send(response,
     `<!doctype html><meta charset="utf-8"><h1>Screen 链接目标（接口夹具）</h1>
     <p>只验证精确路由，不冒充真实卷面。</p>
     <a href="${pdfUrl}?edition=economy8" target="_blank">查看冻结 PDF</a>
     <a href="${pdfUrl}?edition=economy8&download=1" download>下载冻结 PDF</a>`, 'text/html')
-  send(response, { error: 'Fixture route missing' }, 'application/json', 404)
+  if (url.pathname.startsWith('/api/') || url.pathname.startsWith('/paper-assets/')) {
+    return send(response, { error: 'Fixture route missing' }, 'application/json', 404)
+  }
+  vite.middlewares(request, response, () => send(response, { error: 'Fixture route missing' }, 'application/json', 404))
 })
+const vite = await createViteServer({ root: appRoot, appType: 'custom',
+  server: { middlewareMode: true, hmr: { server } }, logLevel: 'error' })
 await new Promise(resolve => server.listen(process.argv.includes('--serve') ? 5199 : 0, '127.0.0.1', resolve))
 const origin = `http://127.0.0.1:${server.address().port}`
 if (process.argv.includes('--serve')) {
   console.log(`Owner review UI fixture (no real publication) at ${origin}/ops/`)
-  process.once('SIGTERM', () => server.close(() => process.exit(0)))
+  process.once('SIGTERM', () => server.close(async () => { await vite.close(); process.exit(0) }))
 } else {
   let browser
   try {
@@ -118,17 +139,10 @@ if (process.argv.includes('--serve')) {
     const page = await browser.newPage({ viewport: { width: 1440, height: 900 } })
     const errors = []
     page.on('pageerror', error => errors.push(error.message))
-    await page.addInitScript(() => {
-      window.ownerPublishFetches = 0
-      const fetch = window.fetch.bind(window)
-      window.fetch = (input, init) => {
-        if (String(input).endsWith('/publish') && init?.method === 'POST') window.ownerPublishFetches += 1
-        return fetch(input, init)
-      }
-    })
     await page.goto(`${origin}/ops/`)
     const row = page.locator(`[data-review-paper="${paperId}"]`)
-    const publish = row.getByRole('button', { name: '发布到题库', exact: true })
+    const publish = row.getByRole('link', { name: '前往发布' })
+    const publishDisabled = row.getByRole('button', { name: '前往发布' })
     await row.waitFor()
     assert.equal(await page.locator('iframe, [role="tab"], #approval-check').count(), 0)
     const [screen] = await Promise.all([
@@ -171,19 +185,21 @@ if (process.argv.includes('--serve')) {
     assert.equal(capturedIssue.surface, 'paper')
     assert.equal(capturedIssue.revisionId, revisionId)
     assert.equal(capturedIssue.bundleDigest, initial.bundleDigest)
-    assert.equal(await publish.isDisabled(), true)
+    assert.equal(await publishDisabled.isDisabled(), true)
     issues[0].state = 'fixed_pending_review'
     await row.getByRole('button', { name: '查看反馈' }).click()
     await page.getByRole('button', { name: '确认已解决' }).click()
     await page.getByRole('status').filter({ hasText: '反馈已更新' }).waitFor()
-    assert.equal(await publish.isEnabled(), true)
-    await publish.click()
-    await page.getByText('正在核验这份卷并发布，请勿重复提交…', { exact: true }).waitFor()
-    assert.equal(await publish.isDisabled(), true)
+    await Promise.all([page.waitForURL(`${origin}${publicationUrl}`), publish.click()])
+    assert.equal(publishCount, 0)
+    paper.promotionState = 'publishing'
+    await page.goto(`${origin}/ops/`)
+    await row.getByText('发布中', { exact: true }).waitFor()
+    assert.equal(await publishDisabled.isDisabled(), true)
     await page.screenshot({ path: path.join(artifactDir, 'publishing.png') })
-    releasePublish()
+    paper.promotionState = 'published'
+    await page.getByRole('button', { name: '刷新状态' }).click()
     await row.getByText('已发布', { exact: true }).waitFor()
-    assert.equal(publishCount, 1)
     assert.equal(await publish.count(), 0)
     assert.equal(await row.getByRole('link', { name: '查看已发布' }).count(), 1)
     await page.screenshot({ path: path.join(artifactDir, 'published.png') })
@@ -194,9 +210,7 @@ if (process.argv.includes('--serve')) {
           reasonCode: backfillPending ? 'BACKFILL_PENDING' : 'MISSING_BASELINE' } }
       await page.reload()
       await row.getByText('已批准', { exact: true }).waitFor()
-      assert.equal(await publish.isEnabled(), true)
-      assert.equal(await row.locator('.owner-review-hint').count(), 0,
-        'compatibility hints appear only after an attempted publication is rejected')
+      assert.equal(await publish.getAttribute('href'), publicationUrl)
       const [frozenScreen] = await Promise.all([
         page.waitForEvent('popup'), row.getByRole('link', { name: initial.paperName }).click(),
       ])
@@ -209,54 +223,25 @@ if (process.argv.includes('--serve')) {
       assert.deepEqual(readFileSync(downloadPath), productPdfBytes(1, 'economy8'))
       await frozenScreen.close()
       await page.screenshot({ path: path.join(artifactDir, `${result}.png`) })
-      await publish.click()
-      if (['different', 'unknown', 'backfill_pending'].includes(result)) {
-        await row.locator('.owner-review-hint').waitFor()
-        assert.equal(await row.getByText('已发布', { exact: true }).count(), 0)
-        if (result === 'different') {
-          await row.getByText('第 21 题 · 字段：题干', { exact: false }).waitFor()
-          await row.getByText('第 21 题 · 字段：标题', { exact: false }).waitFor()
-          await page.screenshot({ path: path.join(artifactDir, 'different-blocked.png') })
-        }
-        assert.equal(await publish.isEnabled(), true, 'a definite pre-publication rejection permits an explicit retry')
-      } else {
-        await page.getByText('正在核验这份卷并发布，请勿重复提交…', { exact: true }).waitFor()
-        releasePublish()
-        await row.getByText('已发布', { exact: true }).waitFor()
-      }
     }
-    assert.equal(publishCount, 6, 'each explicit click requests verification of only the selected revision')
     paper = { ...initial, compatibility: { result: 'unknown', reasonCode: 'MISSING_BASELINE',
       fallback: true, guard: 'legacy_renderer', eligible: true, legacyRendererStale: false } }
     await page.reload()
-    assert.equal(await publish.isEnabled(), true, 'unknown does not disable the on-demand publication action')
+    assert.equal(await publish.getAttribute('href'), publicationUrl)
     assert.equal(await row.locator('.owner-review-hint').count(), 0)
     paper = { ...initial, compatibility: undefined }
     await page.reload()
     await row.waitFor()
-    assert.equal(await publish.isEnabled(), true, 'missing compatibility defers checking until publication')
-    paper = { ...initial }
-    dropPublishResponse = true
-    await page.reload()
-    await publish.click()
-    await page.getByRole('alert').waitFor()
-    assert.equal(await publish.isDisabled(), true)
-    await page.getByRole('button', { name: '刷新状态' }).click()
-    await row.getByText('发布中', { exact: true }).waitFor()
-    assert.equal(await publish.isDisabled(), true)
-    // Chromium can retry a closed socket below fetch. Count application calls;
-    // the real publisher's duplicate-request guard is covered by its route tests.
-    assert.equal(await page.evaluate(() => window.ownerPublishFetches), 1,
-      'lost response and status refresh never cause an application-level publish retry')
+    assert.equal(await publish.getAttribute('href'), publicationUrl)
     paper.promotionState = 'failed'
     await page.getByRole('button', { name: '刷新状态' }).click()
     await row.getByText('发布失败', { exact: true }).waitFor()
-    assert.equal(await publish.isDisabled(), true)
+    assert.equal(await publishDisabled.isDisabled(), true)
     await page.screenshot({ path: path.join(artifactDir, 'failed.png') })
     failList = true
     await page.getByRole('button', { name: '刷新状态' }).click()
     await page.getByRole('alert').filter({ hasText: '状态读取失败' }).waitFor()
-    assert.equal(await publish.isDisabled(), true)
+    assert.equal(await publishDisabled.isDisabled(), true)
     failList = false
     paper = { ...initial }
     await page.reload()
@@ -265,10 +250,56 @@ if (process.argv.includes('--serve')) {
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true)
     await page.screenshot({ path: path.join(artifactDir, 'mobile.png') })
     assert.deepEqual(errors, [])
-    console.log('PASS compact Owner list: compatibility never disables frozen approval; explicit publication checks one revision, rejects different/unknown with fields and question numbers; frozen PDF, response-loss and mobile states remain intact')
+    console.log('PASS compact Owner list: publication navigates to the exact revision; frozen PDF, feedback and mobile states remain intact')
+
+    await page.setViewportSize({ width: 1440, height: 900 })
+    const publishButton = page.getByRole('button', { name: '发布到题库', exact: true })
+    const publishedLink = page.getByRole('link', { name: '查看已发布', exact: true })
+    const isPublish = request => request.method() === 'POST' && new URL(request.url()).pathname === publishPath
+    for (const [outcome, status, message] of [
+      ['different', 409, '预览内容有变化，未发布。'],
+      ['unknown', 503, '本次核验未完成，未发布。请稍后重试。'],
+    ]) {
+      paper = { ...initial }
+      publishOutcome = outcome
+      await page.goto(`${origin}${publicationUrl}`)
+      const before = publishCount
+      const [rejected] = await Promise.all([
+        page.waitForResponse(response => isPublish(response.request())), publishButton.click(),
+      ])
+      assert.equal(rejected.status(), status)
+      await page.getByRole('alert').filter({ hasText: message }).waitFor()
+      assert.equal(await publishedLink.count(), 0)
+      assert.equal(await publishButton.isEnabled(), true)
+      assert.equal(publishCount, before + 1)
+
+      publishOutcome = 'success'
+      await publishButton.click()
+      await publishedLink.waitFor()
+      assert.equal(publishCount, before + 2)
+    }
+
+    paper = { ...initial }
+    publishOutcome = 'lost'
+    await page.goto(`${origin}${publicationUrl}`)
+    const before = publishCount
+    let browserPublishes = 0
+    page.on('request', request => { if (isPublish(request)) browserPublishes += 1 })
+    await publishButton.click()
+    await page.getByRole('alert').filter({ hasText: '操作结果需核实' }).waitFor()
+    assert.equal(await publishButton.isDisabled(), true)
+    await page.getByRole('button', { name: '刷新状态' }).click()
+    await page.getByText('服务器正在发布，请刷新查看状态。').waitFor()
+    assert.equal(await publishButton.isDisabled(), true)
+    await page.reload()
+    await page.getByText('服务器正在发布，请刷新查看状态。').waitFor()
+    assert.equal(browserPublishes, 1)
+    assert.equal(publishCount, before + 1)
+    assert.deepEqual(errors, [])
+    console.log('PASS review workspace: 409 and 503 show rejection, an explicit retry publishes, and refreshing a lost response never resubmits')
   } finally {
-    releasePublish?.()
     await browser?.close()
     await new Promise(resolve => server.close(resolve))
+    await vite.close()
   }
 }

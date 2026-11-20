@@ -99,12 +99,11 @@ import {
 import {
   canonicalSourceConsumptionForGroup,
 } from './paper-canonical/consumerRuntime.mjs'
-import { continuationWritingPresentation } from '../shared/paper-canonical/writingPresentation.mjs'
+import { continuationWritingPresentation, writingPromptBlocksForDisplay } from '../shared/paper-canonical/writingPresentation.mjs'
 import { blankPresentationParagraphs } from '../shared/paper-canonical/blankPresentation.mjs'
 import { resolveConsumerPresentation } from '../shared/paper-canonical/consumers.mjs'
 import {
   paperOpeningForConsumption,
-  coverNoticesCarrySourceNumbers,
   mockPaperCoverName,
   ownsCompletePaperOpening,
   projectListeningGroupPresentation,
@@ -805,7 +804,7 @@ function renderCanonicalOpaqueWriting(
     previousFamilyBoundary,
   )
   const presentation = application ? null : continuationWritingPresentation(canonicalGroup, consumerContractRef)
-  const sourceBlocks = presentation?.materialBlocks || canonicalGroup.sourceBlocks
+  const sourceBlocks = presentation?.materialBlocks || writingPromptBlocksForDisplay(canonicalGroup.sourceBlocks)
   const source = [
     ...sourceBlocks.map((block) =>
       `<p data-canonical-block-id="${escapeHtml(block.nodeId)}" data-canonical-legacy-opaque-source-block="">${renderCanonicalInlineNodes(block.inlines)}</p>`),
@@ -888,7 +887,7 @@ function renderCanonicalApplicationWriting(
   }
   const renderGivenParts = (parts, position) => parts.map((part) =>
     `<p class="canonical-application-given canonical-application-given--${position}" data-canonical-given-part-id="${escapeHtml(part.givenPartId)}" data-canonical-given-role="${escapeHtml(part.role)}" data-canonical-given-placement="${escapeHtml(part.placement)}" data-canonical-application-writing-rhythm-role="${part.role === 'title' ? 'given_title' : position === 'bottom' ? 'given_closing' : 'given_addressee'}">${renderCanonicalInlineNodes(part.inlines)}</p>`).join('')
-  const prompt = renderCanonicalWritingBlocks(canonicalGroup.promptBlocks, 'application', canonicalGroup.multipleApplicationNotices)
+  const prompt = renderCanonicalWritingBlocks(writingPromptBlocksForDisplay(canonicalGroup.promptBlocks), 'application', canonicalGroup.multipleApplicationNotices)
   const response = canonicalGroup.answerRegion
   const css = style => Object.entries(style).map(([key, value]) =>
     `${key.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}:${value}`).join(';')
@@ -1211,9 +1210,7 @@ export function buildPrintHtml({
       .map((block) => block.questionGroupId)
     : items.map((item) => item.detail.id)
   const listeningOpening = paperOpeningForConsumption(canonicalConsumption)
-  const coverNoticesHtml = coverNoticesCarrySourceNumbers(canonicalConsumption, listeningOpening)
-    ? listeningOpening.notices.map(notice => `<p>${escapeHtml(notice)}</p>`).join('')
-    : `<ol>${listeningOpening.notices.map(notice => `<li>${escapeHtml(notice)}</li>`).join('')}</ol>`
+  const coverNoticesHtml = `<ol>${listeningOpening.notices.map(notice => `<li>${escapeHtml(notice)}</li>`).join('')}</ol>`
   const canonicalListeningOwnsOpening = ownsCompletePaperOpening(
     canonicalConsumption,
     renderedGroupIds,
@@ -1955,7 +1952,7 @@ export function buildPrintHtml({
             // passage/transcript block belongs in the student question area.
             groupHtml += `<header class="canonical-listening-chrome" data-canonical-listening-chrome>${listeningPresentation.partHeading ? `<h2 class="canonical-listening-part">${escapeHtml(listeningPresentation.partHeading)}</h2>` : ''}${listeningPresentation.transferNotice ? `<p class="canonical-listening-transfer-notice">${escapeHtml(listeningPresentation.transferNotice)}</p>` : ''}<h3 class="canonical-listening-section">${escapeHtml(listeningPresentation.sectionHeading)}</h3><p class="canonical-listening-instruction">${escapeHtml(listeningPresentation.instruction)}</p>${listeningPresentation.example ? `<div class="canonical-listening-example" data-canonical-listening-example><p>例：${escapeHtml(listeningPresentation.example.stem)}</p><div class="canonical-listening-example-options">${listeningPresentation.example.options.map((option) => `<span>${option.label}. ${escapeHtml(option.text)}</span>`).join('')}</div><p class="canonical-listening-example-answer">答案是 ${escapeHtml(listeningPresentation.example.answer)}。</p></div>` : ''}</header>`
           } else if (canonicalGroup.groupType === 'errorCorrection') {
-            groupHtml += groupLeadHtml + `<div class="canonical-error-correction">${canonicalGroup.paragraphs.map(paragraph =>
+            groupHtml += groupLeadHtml + `<div class="canonical-error-correction">${writingPromptBlocksForDisplay(canonicalGroup.paragraphs).map(paragraph =>
               `<p data-canonical-paragraph-id="${escapeHtml(paragraph.paragraphId)}">${paragraph.nodes.map(node => escapeHtml(node.text)).join('')}</p>`).join('')}</div>`
           } else if (canonicalGroup.groupType === 'reading') {
             groupHtml += renderCanonicalReadingBlocks(
@@ -2101,6 +2098,8 @@ export function buildPrintHtml({
           : undefined
         for (const question of canonicalGroup?.groupType === 'errorCorrection' ? [] : detail.questions) {
           const canonicalQuestion = canonicalQuestionById?.get(question.id)
+          const correctOption = canonicalQuestion?.options.find(option => option.label === question.answer)
+            ?? canonicalQuestion?.options.find(option => option.optionId === canonicalQuestion.correctOptionId)
           const listeningCue = listeningPresentation?.segmentCues.find((cue) =>
             cue.beforeQuestionId === canonicalQuestion?.questionId)
           if (listeningCue) groupHtml += `<p class="canonical-listening-segment-cue" data-canonical-listening-segment-cue>${escapeHtml(listeningCue.text)}</p>`
@@ -2125,12 +2124,7 @@ export function buildPrintHtml({
                       canonicalQuestion.layoutPlan,
                     )
                   : null,
-                answer: canonicalQuestion.correctOptionId
-                  ? canonicalQuestion.options.find(
-                      (option) =>
-                        option.optionId === canonicalQuestion.correctOptionId,
-                    )?.label || ''
-                  : question.answer,
+                answer: correctOption?.label ?? question.answer,
               }
             : question
           const stemText = String(printQuestion.stem || '').trim()
@@ -2139,7 +2133,7 @@ export function buildPrintHtml({
             ? canonicalQuestion.questionNo
             : questionNum
           const canonicalQuestionAttrs = canonicalQuestion
-            ? ` data-canonical-question-id="${escapeHtml(canonicalQuestion.questionId)}"${canonicalQuestion.stemFigures?.length ? ' data-canonical-stem-figures="" style="container-type:inline-size"' : ''}${canonicalGroup?.groupType === 'reading' ? ' data-canonical-reading-rhythm-role="question_block"' : isCanonicalCloze ? ' data-canonical-cloze-rhythm-role="choice_row"' : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingSuccessorGroupId ? ` data-canonical-reading-last-question-for="${escapeHtml(readingSuccessorGroupId)}"` : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingFollowingSectionId ? ` data-canonical-reading-last-question-before-section="${escapeHtml(readingFollowingSectionId)}"` : ''}${isCanonicalCloze && canonicalQuestion.questionId === lastClozeQuestionId && followingClozeSectionId ? ` data-canonical-cloze-before-section="${escapeHtml(followingClozeSectionId)}"` : ''}${isCanonicalGrammarFill && canonicalQuestion.questionId === lastGrammarFillQuestionId && followingGrammarFillSectionId ? ` data-canonical-grammar-fill-before-section="${escapeHtml(followingGrammarFillSectionId)}"` : ''}${isTeacher ? ` data-canonical-correct-option-id="${escapeHtml(canonicalQuestion.correctOptionId || '')}"` : ''}`
+            ? ` data-canonical-question-id="${escapeHtml(canonicalQuestion.questionId)}"${canonicalQuestion.stemFigures?.length ? ' data-canonical-stem-figures="" style="container-type:inline-size"' : ''}${canonicalGroup?.groupType === 'reading' ? ' data-canonical-reading-rhythm-role="question_block"' : isCanonicalCloze ? ' data-canonical-cloze-rhythm-role="choice_row"' : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingSuccessorGroupId ? ` data-canonical-reading-last-question-for="${escapeHtml(readingSuccessorGroupId)}"` : ''}${canonicalQuestion.questionId === lastReadingQuestionId && readingFollowingSectionId ? ` data-canonical-reading-last-question-before-section="${escapeHtml(readingFollowingSectionId)}"` : ''}${isCanonicalCloze && canonicalQuestion.questionId === lastClozeQuestionId && followingClozeSectionId ? ` data-canonical-cloze-before-section="${escapeHtml(followingClozeSectionId)}"` : ''}${isCanonicalGrammarFill && canonicalQuestion.questionId === lastGrammarFillQuestionId && followingGrammarFillSectionId ? ` data-canonical-grammar-fill-before-section="${escapeHtml(followingGrammarFillSectionId)}"` : ''}${isTeacher ? ` data-canonical-correct-option-id="${escapeHtml(correctOption?.optionId || '')}"` : ''}`
             : ''
           // 空题干:挖空题号已在文中(语法填空/完形/七选五)。有选项则题号与选项同行
           // (真卷完形形态);无选项且非教师版则整行不出(语法填空文后无内容)。
@@ -3280,7 +3274,7 @@ ${isTeacher ? `
 </style>
 </head>
 <body class="${densityClass} paper-print">
-${canonicalListeningOwnsOpening ? `<header class="canonical-paper-opening" data-canonical-paper-opening>${mockPaperCoverName(canonicalConsumption?.paperSourceType, title, canonicalConsumption?.paperHeaderTitle) ? `<p class="canonical-paper-mock-name" data-canonical-mock-name>${escapeHtml(mockPaperCoverName(canonicalConsumption.paperSourceType, title, canonicalConsumption.paperHeaderTitle))}</p>` : ''}<h1 class="canonical-paper-cover-title" data-canonical-cover-title>${escapeHtml(listeningOpening.title)}</h1><div class="canonical-paper-cover-notices" data-canonical-cover-notices>${listeningOpening.notices.length && !coverNoticesCarrySourceNumbers(canonicalConsumption, listeningOpening) ? '<strong>注意事项：</strong>' : ''}${coverNoticesHtml}</div></header>` : canonicalWritingChromeOwnsDocument ? '' : `
+${canonicalListeningOwnsOpening ? `<header class="canonical-paper-opening" data-canonical-paper-opening>${mockPaperCoverName(canonicalConsumption?.paperSourceType, title, canonicalConsumption?.paperHeaderTitle) ? `<p class="canonical-paper-mock-name" data-canonical-mock-name>${escapeHtml(mockPaperCoverName(canonicalConsumption.paperSourceType, title, canonicalConsumption.paperHeaderTitle))}</p>` : ''}<h1 class="canonical-paper-cover-title" data-canonical-cover-title>${escapeHtml(listeningOpening.title)}</h1><div class="canonical-paper-cover-notices" data-canonical-cover-notices><strong>注意事项：</strong>${coverNoticesHtml}</div></header>` : canonicalWritingChromeOwnsDocument ? '' : `
 <div class="paper-header">
   <h1>${escapeHtml(title || '英语试题')}</h1>
   ${versionLabel ? `<p class="version-label">${escapeHtml(versionLabel)}</p>` : ''}

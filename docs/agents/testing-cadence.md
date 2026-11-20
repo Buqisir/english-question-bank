@@ -13,10 +13,10 @@ authority. `SKIP` is never `PASS`.
 - 工作台组件：再加 `node scripts/verify-similar-workbench-swap.mjs`（裸 fetch 守卫）
 - 其他：`node scripts/verify-ci.mjs --changed --base-ref origin/main`（必须显式写基线）。先加 `--plan-json` 看选出哪一档；选出 `all` 时不在本地跑 Full，只跑直接受影响的脚本，Full 交给 main CI
 - 统一：`git diff --check origin/main...HEAD`，并实际操作一次受影响的行为
-- 高风险（鉴权、答案隔离、持久化、题号和答案对应、准入、共享 Paper 契约）：另加一次独立审查（Astra），审查结论绑定候选 SHA，但不开 PR
-- **CI 和部署工具链**（`.github/workflows/`、`scripts/verify-ci.mjs`、`scripts/ci-pr-plan.mjs`、部署脚本和控制器）：继续走 PR，PR 完整 CI 绿、Astra 审过再合。这类改动改的是裁判本身，推上 main 以后它自己那次绿灯证明不了它没被改松
+- 按改动挑最窄的真实检查，推前单独跑，不用「main CI 会跑」代替：从 `--plan-json` 选出的脚本里挑和改动直接相关的浏览器或行为检查。例：改句子解析、讲评交互的 CSS 或颜色变量 → `node scripts/verify-sentence-analysis-browser.mjs`（11-17 `8842f6e69` 漏跑它，main 红约 50 分钟）。改共享 token 时按用到它的页面挑，不只按文件名
+- 独立审查和直推 / PR 的适用范围见 [AGENTS.md](../../AGENTS.md#ship-to-main)。
 
-Ship/验证规则本身同样走工具链 PR 路径。缺失的局部验收只补一次，
+缺失的局部验收只补一次，
 main 自然运行覆盖的 Full/E2E 不在本地重复；不叠加 focused/Paper/Full。
 可见改动先检查真实渲染，部署后在线上做 Owner QA。
 
@@ -35,7 +35,7 @@ require strict input validation, immutable source/candidate identity,
 candidate-bound Teacher Confirmation, deterministic data checks, atomic
 publication/reload behavior, and a light canary proportionate to the paper.
 Do not require a full suite, independent code review, authority bump, or deep
-per-paper Screen/Student/Teacher Print/PDF proof merely because another paper
+per-paper Screen/Print/PDF proof merely because another paper
 was added. Discovery of a new content shape or shared-behavior change exits this
 lane.
 
@@ -62,9 +62,13 @@ evidence only while their inputs and running implementation remain unchanged;
 keep final outputs bound to the exact revision.
 
 默认直推后盯该 SHA 的自然 main `push` 完整 CI；部署只认最新 main 最新尝试
-的 8 个 job 全绿。main 按 SHA 分并发组，互不替换。无需强制 PR→main 两轮。
-工具链或可选 PR 路径在触发验证前同步 main，完整 PR CI 绿后 squash 合并；
+的 8 个 job 全绿。main 的推送共用一条队列：正在跑的不取消，只留最新一次排队；被跳过的推送显示 cancelled，不算失败，由下一次运行覆盖。无需强制 PR→main 两轮。
+工具链 PR 在触发验证前同步 main，完整 PR CI 绿后 squash 合并；
 随后 main 前进不因追平重跑 PR，部署仍等最新 main。旧 SHA/尝试不授权新版本。
+
+## 检查的去留
+
+新增或修改一个检查时，在脚本开头或提交说明里写明它独立防住的错误，最好指向那次事故的 SHA 或 issue。改到某个检查时，发现另一个检查已覆盖同一错误，就合并或删掉重复的那个，并在提交说明里写原因。随改动顺手做，不单独开清理任务。
 
 ## 不稳定测试登记表
 

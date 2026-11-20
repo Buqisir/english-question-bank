@@ -1,0 +1,74 @@
+name: Deploy
+on:
+  workflow_run:
+    workflows: [Verify]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 部署分类（保护路径需要 Owner 批准）
+        type: choice
+        options: [auto, code-only, migration]
+        default: auto
+permissions:
+  contents: read
+  actions: read
+  checks: read
+  issues: write
+concurrency:
+  group: eqb-production-deployment
+  cancel-in-progress: false
+env:
+  GH_TOKEN: ${{ github.token }}
+  EQB_DEPLOY_MODE: ${{ inputs.mode || 'auto' }}
+  EQB_DEPLOY_SSH_HOST: ${{ vars.EQB_DEPLOY_SSH_HOST }}
+  EQB_DEPLOY_KNOWN_HOSTS: ${{ vars.EQB_DEPLOY_KNOWN_HOSTS }}
+jobs:
+  plan:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.head_repository.full_name == github.repository))
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    environment: production
+    outputs:
+      sha: ${{ steps.plan.outputs.sha }}
+      production: ${{ steps.plan.outputs.production }}
+      digest: ${{ steps.plan.outputs.digest }}
+      deploy: ${{ steps.plan.outputs.deploy }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.3
+      - id: plan
+        env:
+          EQB_DEPLOY_SSH_KEY: ${{ secrets.EQB_DEPLOY_SSH_KEY }}
+        run: node scripts/amp-orb-deploy.mjs ci-plan
+  deploy:
+    needs: plan
+    if: needs.plan.outputs.deploy == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    environment: ${{ (inputs.mode == 'code-only' || inputs.mode == 'migration') && 'production-reviewed' || 'production' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.3
+      - env:
+          EQB_DEPLOY_SSH_KEY: ${{ secrets.EQB_DEPLOY_SSH_KEY }}
+          EQB_EXPECTED_SHA: ${{ needs.plan.outputs.sha }}
+          EQB_EXPECTED_PRODUCTION: ${{ needs.plan.outputs.production }}
+          EQB_EXPECTED_DIGEST: ${{ needs.plan.outputs.digest }}
+        run: node scripts/amp-orb-deploy.mjs ci-deploy

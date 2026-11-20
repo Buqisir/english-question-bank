@@ -19,6 +19,7 @@ import { FIXED_PAGINATION_EDITIONS } from '../paper-import/paginationPlan.mjs'
 import { frozenProductResult, PRODUCT_MANIFEST } from '../paper-import/frozenProducts.mjs'
 import { manifestProductFiles } from '../paper-import/pdfProductSet.mjs'
 import { SOURCE_REFERENCES_FILE } from '../paper-import/sourceReferences.mjs'
+import { ANSWER_CORRECTIONS_FILE, answerCorrectionChanges } from '../paper-import/answerCorrections.mjs'
 import { resolveReviewFile } from './revisionProjection.mjs'
 import { PAPER_PDF_PRODUCTS, requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
 import {
@@ -253,6 +254,7 @@ export function publicPaperReviewDetail(store, paperId) {
 
 export function createImportReviewRoutes({
   getStore,
+  openDatabase = null,
   searchSidecars = null,
   getBlobStore = null,
   agentToken,
@@ -273,6 +275,39 @@ export function createImportReviewRoutes({
     },
   })
   const routes = []
+
+  function answerChanges(paperId, revisionId) {
+    const detail = store.paperDetail(paperId, { includeProjection: false })
+    const revisions = detail.revisions.filter(revision => revision.reviewKind === 'candidate' && revision.finalizedAt)
+    const current = revisions.find(revision => revision.id === revisionId)
+    if (!current) throw reviewError('IMPORT_REVIEW_NOT_FOUND', 'Finalized revision not found', 404)
+    const previous = revisions.find(revision => revision.revisionNumber < current.revisionNumber)
+    const read = revision => revision?.manifest.files.some(file => file.path === ANSWER_CORRECTIONS_FILE)
+      ? JSON.parse(readFileSync(store.verifiedFileForRead(revision.id, ANSWER_CORRECTIONS_FILE).filePath, 'utf8'))
+      : null
+    const before = new Map((read(previous)?.corrections || []).map(entry => [entry.questionId, entry]))
+    if (openDatabase && revisions.some(revision => revision.revisionNumber < current.revisionNumber
+      && revision.manifest.files.some(file => file.path === ANSWER_CORRECTIONS_FILE))) {
+      const db = openDatabase({ readOnly: true })
+      try {
+        const tables = db.prepare(`SELECT COUNT(*) AS count FROM sqlite_schema
+          WHERE type = 'table' AND name IN ('paper_import_runs', 'canonical_paper_publications')`).get()
+        const live = tables.count === 2 ? db.prepare(`SELECT runs.publish_report_json FROM paper_import_runs runs
+          JOIN canonical_paper_publications live ON live.paper_id = runs.paper_id AND live.source_asset_version = runs.asset_version
+          WHERE runs.paper_id = ? AND runs.status = 'published' AND live.is_current = 1`).get(paperId) : null
+        const committed = live && JSON.parse(live.publish_report_json).answerCorrections
+        if (committed?.revisionId !== revisionId) {
+          for (const entry of committed?.declaration.corrections || []) before.set(entry.questionId, entry)
+        }
+      } finally { db.close() }
+    }
+    const declaration = read(current)
+    for (const entry of declaration?.corrections || []) before.delete(entry.questionId)
+    const currentAnswers = before.size
+      ? store.productPreviewForRevision(revisionId).preview.paperAsset.answerKey.answers
+      : undefined
+    return answerCorrectionChanges(declaration, { corrections: [...before.values()] }, currentAnswers)
+  }
 
   routes.push(defineRoute('POST', /^\/api\/import-agent-reviews\/papers\/([^/]+)\/publication-requests$/, route(async ({ request, response, context, match }) => {
     if (!scopedPublicationEnabled) throw reviewError('IMPORT_REVIEW_SCOPED_PUBLICATION_DISABLED', 'Scoped publication is disabled', 404)
@@ -314,6 +349,7 @@ export function createImportReviewRoutes({
     const expired = Date.parse(request.expiresAt) <= Date.now()
     const disabled = expired || request.state !== 'pending'
     const preview = `/?view=paper-browse&paperId=${encodeURIComponent(request.paperId)}&reviewRevision=${encodeURIComponent(request.revisionId)}`
+    const corrections = answerChanges(request.paperId, request.revisionId)
     sendHtml(response, `<!doctype html><html lang="zh-CN"><head>
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>确认试卷与发布</title>
 <style>:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#F3F6F0;color:#191D18;font:14px/1.55 Inter,'PingFang SC',system-ui,sans-serif}.page{max-width:680px;margin:0 auto;padding:64px 24px 80px}.eyebrow{font-size:12px;color:#60665C}.sheet{margin-top:16px;padding:32px;background:#FAFCF8;border:1px solid #D5DACF;border-radius:12px}h1{font-size:24px;line-height:1.25;margin:8px 0}a{color:#191D18;text-underline-offset:3px}.steps{display:grid;gap:24px;margin-top:32px}.step{padding-top:24px;border-top:1px solid #E3E8DF}.step h2{font-size:16px;margin:0 0 8px}.muted{color:#60665C}button{font:inherit;font-weight:600;padding:9px 16px;border:1px solid #191D18;border-radius:8px;background:#191D18;color:#FAFCF8}button:disabled{border-color:#D5DACF;background:#E5EAE1;color:#60665C}details{margin-top:28px;color:#60665C}code{font-size:12px;overflow-wrap:anywhere}.state{margin-top:20px}#revoke{background:transparent;color:#60665C;border-color:#D5DACF}@media(max-width:560px){.page{padding:24px 16px}.sheet{padding:24px 20px}}</style>
@@ -321,6 +357,8 @@ export function createImportReviewRoutes({
 <h1>${escapeHtml(request.paperName || request.paperId)}</h1>
 <p>R${escapeHtml(request.revisionNumber || request.revisionId)} · <a href="${escapeHtml(preview)}" target="_blank" rel="noopener">查看这个精确预览</a></p>
 <p class="muted">查看不会写入。审阅认可与发布委托是两项独立确认。</p>
+${corrections.length ? `<section class="step"><h2>答案更正</h2><ul>${corrections.map(change =>
+  `<li><strong>${change.withdrawn ? '撤销更正 · ' : ''}${escapeHtml(change.label)}：${escapeHtml(change.from)} → ${escapeHtml(change.to)}</strong><p>${escapeHtml(change.reason)}</p></li>`).join('')}</ul></section>` : ''}
 ${hasAnalyses ? `<p><a href="${escapeHtml(preview)}&amp;lecture=1" target="_blank" rel="noopener">查看这版讲评</a>。认可时一并将讲评选为精选官方参考。</p>` : ''}
 <div class="steps"><section class="step"><h2>1. ${hasAnalyses ? '认可版式与讲评' : '认可版式'}</h2><p>确认网页预览与 PDF 中的这一版布局${hasAnalyses ? '，并已审阅附带讲评' : ''}。</p>
 <button id="approve" ${request.approvalId || disabled ? 'disabled' : ''}>${hasAnalyses ? '认可版式与讲评' : '认可这个版式'}</button></section>
@@ -544,8 +582,8 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
         context.sendJson(response, 200, { ...status, metrics })
         return
       }
-      const largeAsset = /^(audio\/|image\/|application\/pdf$)/.test(upload.file.mediaType)
-      const blobStore = largeAsset ? getBlobStore?.() : null
+      const reusable = /^(audio\/|image\/|application\/(?:pdf|json)$)/.test(upload.file.mediaType)
+      const blobStore = reusable ? getBlobStore?.() : null
       timer.phase('receive')
       const received = await receiveVerifiedUpload(request, upload.destination, upload.file, {
         validateTemporaryFile: async (temporary, expected) => {
@@ -665,7 +703,31 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
 
   routes.push(defineRoute('GET', /^\/api\/import-reviews$/, route(({ response, context }) => {
     if (!requireOwner(response, context)) return
-    context.sendJson(response, 200, { papers: store.listPapers() })
+    const papers = store.listPapers({ includeMetadata: true })
+    const pending = papers.filter(paper => paper.state === 'awaiting_review' && !paper.promotionState)
+    if (pending.length) {
+      let publishedIds
+      try {
+        const db = openDatabase?.({ readOnly: true })
+        if (db) {
+          try {
+            const hasRegistry = db.prepare(`SELECT 1 FROM sqlite_master
+              WHERE type = 'table' AND name = 'canonical_paper_publications'`).get()
+            if (hasRegistry) {
+              publishedIds = new Set(db.prepare(`SELECT paper_id FROM canonical_paper_publications
+                WHERE is_current = 1`).all().map(row => row.paper_id))
+            }
+          } finally { db.close() }
+        }
+      } catch {
+        // The review list remains available when the canonical registry cannot be read.
+        publishedIds = undefined
+      }
+      for (const paper of pending) {
+        paper.hasEarlierPublication = publishedIds?.has(paper.paperId) ?? 'unknown'
+      }
+    }
+    context.sendJson(response, 200, { papers })
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-reviews\/papers\/([^/]+)\/review-state$/, route(({
@@ -677,6 +739,13 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
       paperId: detail.paperId, latestRevisionId: detail.latestRevisionId,
       issues: detail.issues, discussionThreadId: detail.discussionThreadId,
     })
+  })))
+
+  routes.push(defineRoute('GET', /^\/api\/import-reviews\/papers\/([^/]+)\/revisions\/([^/]+)\/answer-corrections$/, route(({
+    response, context, match,
+  }) => {
+    if (!requireOwner(response, context)) return
+    context.sendJson(response, 200, { corrections: answerChanges(decodeURIComponent(match[1]), match[2]) })
   })))
 
   routes.push(defineRoute('POST', /^\/api\/import-reviews\/papers\/([^/]+)\/revisions\/([^/]+)\/publish$/, route(async ({

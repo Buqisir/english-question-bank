@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
+import { listeningSentenceTargets } from '../../scripts/import-pipeline/listening-sentence-align.mjs'
 import { digestJson, exactKeys, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { extractDocxDocumentParagraphs, DOCX_MEDIA_TYPE } from '../paper-canonical/docxSourceAdapter.mjs'
 
@@ -182,7 +183,111 @@ export function prepareSpellingReview(materializationBytes, policy = SPELLING_RE
   }
 }
 
-export function applySpellingReview(materializationBytes, reportBytes) {
+// Review admission checks these ranges against the navigation sidecar. Keep the
+// exact range in the overlay so the confirmed Canonical source can replay it.
+export function verifyListeningInsertionOccurrences(reportBytes, readReview) {
+  const { listeningInsertions } = JSON.parse(new TextDecoder().decode(reportBytes))
+  if (!listeningInsertions?.length) return
+  const review = readReview()
+  for (const { segmentId, audioSha256, occurrence } of listeningInsertions) {
+    const group = review?.groups?.find(item => item.segmentId === segmentId && item.decision === 'usable')
+    if (audioSha256 !== review?.subject?.playbackAudioSha256 || !group?.occurrences?.some(item =>
+      item.startSeconds === occurrence.startSeconds && item.endSeconds === occurrence.endSeconds)) {
+      fail(`listening insertion must match a reviewed occurrence of ${segmentId}`)
+    }
+  }
+}
+
+const speakerLabels = /(^|\s)([A-Z][A-Za-z]*|[A-Z]\d|Speaker \d+)\s*[:：][ \t]*/gu
+const sentenceAndSpeaker = ({ en, speaker }) => ({ en, speaker })
+
+function expectedInsertedSentences(segmentId, text, inheritedSpeaker) {
+  // Interpret the author's labels independently of what the page recognizes.
+  // Use known labels in this isolated parse so a misread label cannot pass.
+  const speakers = new Map()
+  const expectedText = text.replace(speakerLabels, (_, prefix, speaker) => {
+    const label = `Speaker ${speakers.size + 1}`
+    speakers.set(label, speaker)
+    return `${prefix}${label}: `
+  })
+  const [{ sentences }] = listeningSentenceTargets({ listening: { transcript: [{ segmentId, text: expectedText }] } })
+  return sentences.map(({ en, speaker }) => ({ en, speaker: speakers.get(speaker) ?? inheritedSpeaker }))
+}
+
+// Resolve the exact sentence against the existing reviewed transcript first.
+// Apply from right to left so every offset still addresses that transcript.
+function insertListeningSentences(materialization, insertions, listeningAudio) {
+  if (materialization.listening?.state !== 'captured' || !Array.isArray(insertions)
+    || !insertions.length || !listeningAudio) fail('missing listening insertion evidence')
+  const bySegment = new Map()
+  const targets = new Map(listeningSentenceTargets(materialization).map(target => [target.material.segmentId, target]))
+  for (const insertion of insertions) {
+    if (!exactKeys(insertion, ['segmentId', 'afterSentence', 'text', 'model', 'audioSha256', 'startSeconds', 'endSeconds', 'occurrence'])
+      || insertion.model !== 'gpt-transcribe'
+      || typeof insertion.audioSha256 !== 'string' || !/^sha256:[a-f0-9]{64}$/u.test(insertion.audioSha256)
+      || insertion.audioSha256 !== listeningAudio.sha256
+      || !Number.isFinite(insertion.startSeconds) || !Number.isFinite(insertion.endSeconds)
+      || !Number.isFinite(listeningAudio.durationSeconds) || insertion.startSeconds < 0
+      || insertion.endSeconds <= insertion.startSeconds || insertion.endSeconds > listeningAudio.durationSeconds) {
+      fail('invalid listening insertion model, playback hash, or audio interval')
+    }
+    const { occurrence } = insertion
+    if (!exactKeys(occurrence, ['startSeconds', 'endSeconds'])
+      || !Number.isFinite(occurrence.startSeconds) || !Number.isFinite(occurrence.endSeconds)
+      || occurrence.startSeconds < 0 || occurrence.endSeconds > listeningAudio.durationSeconds
+      || insertion.startSeconds < occurrence.startSeconds || insertion.endSeconds > occurrence.endSeconds) {
+      fail('listening insertion interval falls outside the reviewed occurrence')
+    }
+    const target = targets.get(insertion.segmentId)
+    if (!target
+      || typeof insertion.text !== 'string' || insertion.text.trim() !== insertion.text
+      || !/[A-Za-z]/u.test(insertion.text) || !/[.!?]["'’”)\]]*$/u.test(insertion.text)) {
+      fail('invalid listening sentence insertion')
+    }
+    const { material: segment, sentences } = target
+    const anchors = sentences.filter(sentence => sentence.en === insertion.afterSentence)
+    if (insertion.afterSentence !== null && anchors.length !== 1) {
+      fail('listening insertion must match one complete existing sentence')
+    }
+    const anchor = anchors[0]
+    const start = anchor?.utf16End ?? 0
+    if (anchor && (!/[.!?]["'‘’“”]*$/u.test(anchor.en)
+      || !/^(?:$|[^\S\r\n]*[\r\n]|[^\S\r\n]+[\p{Lu}"'‘’“”])/u.test(segment.text.slice(start)))) {
+      fail('listening insertion has no unambiguous sentence boundary')
+    }
+    const index = anchor ? sentences.indexOf(anchor) + 1 : 0
+    if (!bySegment.has(segment)) bySegment.set(segment, new Map())
+    const offsets = bySegment.get(segment)
+    if (offsets.has(start)) fail('duplicate listening sentence insertion position')
+    offsets.set(start, { text: insertion.text, index,
+      added: expectedInsertedSentences(segment.segmentId, insertion.text, anchor?.speaker ?? null) })
+  }
+  const expected = new Map([...targets.values()].map(({ material, sentences }) =>
+    [material, sentences.map(sentenceAndSpeaker)]))
+  for (const [segment, offsets] of bySegment) {
+    const sentences = expected.get(segment)
+    for (const [start, { text, index, added }] of [...offsets].sort(([left], [right]) => right - left)) {
+      const before = segment.text.slice(0, start)
+      const after = segment.text.slice(start)
+      // A short capitalized word followed by a name on the same line can
+      // be an abbreviation even when the shared splitter reports a boundary.
+      if (!added.length || (/\b\p{Lu}\p{Ll}{1,4}\.$/u.test(before) && /^[ \t]+\p{Lu}\p{Ll}/u.test(after))) {
+        fail('listening insertion has no unambiguous sentence boundary')
+      }
+      const separator = text.search(speakerLabels) === 0 ? '\n' : ' '
+      segment.text = before + (before && !/\s$/u.test(before) ? separator : '') + text
+        + (after && !/^\s/u.test(after) ? ' ' : '') + after
+      sentences.splice(index, 0, ...added)
+    }
+  }
+  for (const { material, sentences } of listeningSentenceTargets(materialization)) {
+    if (digestJson(sentences.map(sentenceAndSpeaker)) !== digestJson(expected.get(material))) {
+      fail('listening insertion changes the expected sentences or speakers')
+    }
+  }
+}
+
+export function applySpellingReview(materializationBytes, reportBytes, listeningAudio) {
   const original = JSON.parse(new TextDecoder().decode(materializationBytes))
   const report = JSON.parse(new TextDecoder().decode(reportBytes))
   const correctionIds = new Set(original.groups?.filter(group => group.family === 'error-correction')
@@ -194,7 +299,10 @@ export function applySpellingReview(materializationBytes, reportBytes) {
       || answer && correctionIds.has(original.answers?.[Number(answer[1])]?.questionId)
   })) fail('error-correction source text is immutable')
   const targets = enumerateSpellingTargets(original)
-  if (!exactKeys(report, ['schemaVersion', 'materializationSha256', 'reviewedBy', 'reviewedAt', 'targets'])
+  const reportKeys = ['schemaVersion', 'materializationSha256', 'reviewedBy', 'reviewedAt', 'targets']
+  const hasInsertions = Object.hasOwn(report, 'listeningInsertions')
+  if (hasInsertions) reportKeys.push('listeningInsertions')
+  if (!exactKeys(report, reportKeys)
     || !reviewPolicies.includes(report.schemaVersion)
     || report.materializationSha256 !== sha256(materializationBytes)
     || report.reviewedBy !== 'import_agent'
@@ -272,6 +380,7 @@ export function applySpellingReview(materializationBytes, reportBytes) {
     const key = keys.pop()
     keys.reduce((node, part) => node[part], effective)[key] = corrected
   }
+  if (hasInsertions) insertListeningSentences(effective, report.listeningInsertions, listeningAudio)
   return effective
 }
 

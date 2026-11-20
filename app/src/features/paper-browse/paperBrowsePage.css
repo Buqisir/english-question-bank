@@ -327,8 +327,14 @@
     white-space: normal;
   }
 
-  /* Preserve Canonical's equal thirds when the row fits. Only its Print-only
-   * one_column fallback needs content-sized tracks on Screen.
+  /* Canonical measures "A. text" with one space after the label; a wider
+   * label gap lets a measured-to-fit 2x2 option wrap on Screen. */
+  .paper-browse-content .ps-option-list--canonical .ps-option {
+    gap: 0.25em;
+  }
+
+  /* Preserve Canonical's equal thirds when the row fits; its one_column
+   * fallback stays one option per line, as on the source paper.
    * Keep specificity low so the mobile single-column rule still wins. */
   .paper-browse-content :where(.canonical-listening-surface) .ps-option-list--three_columns {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
@@ -337,9 +343,7 @@
   }
 
   .paper-browse-content :where(.canonical-listening-surface) .ps-option-list--one_column {
-    grid-template-columns: repeat(3, auto) !important;
-    /* Override Canonical's inline gap: 0 so adjacent options stay distinct. */
-    column-gap: 1em !important;
+    grid-template-columns: minmax(0, 1fr) !important;
   }
 
   /* Override one_column's block flow and inline Print hanging indent;
@@ -1843,98 +1847,335 @@
 }
 
 .listening-analysis-panel,
-.listening-analysis-material,
-.listening-analysis-text,
-.listening-analysis-question {
+.listening-analysis-material {
   display: flex;
   flex-direction: column;
+  gap: var(--eqb-space-5);
 }
 
-.listening-analysis-panel {
-  gap: 24px;
-}
-
-.listening-analysis-material {
-  gap: 12px;
-}
-
-.listening-analysis-material h5,
-.listening-analysis-material h6,
-.listening-analysis-material p,
-.listening-analysis-material ol,
-.listening-analysis-material blockquote {
+.listening-analysis-panel :is(h4, h5, h6, p, ul, blockquote) {
   margin: 0;
 }
 
-.listening-analysis-material h5 {
+.listening-analysis-section-heading {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: var(--eqb-space-2);
+}
+
+.listening-analysis-section-heading h4 {
   color: var(--paper-ink-strong);
-  font-size: 14px;
+  font-size: var(--eqb-font-size-sm);
+  font-weight: 600;
 }
 
-.listening-analysis-topic {
-  color: var(--eqb-color-text-muted, #5A6C75);
-  font-size: 12px;
+.listening-analysis-section-heading > p {
+  grid-column: 1 / -1;
 }
 
-.listening-analysis-summary {
-  color: var(--paper-ink);
-  font-size: var(--pb-lecture-font-body);
+.listening-analysis-panel summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.listening-analysis-panel summary::-webkit-details-marker {
+  display: none;
+}
+
+.listening-analysis-panel :focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+.listening-quiet-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--eqb-space-1);
+  align-self: flex-start;
+  width: fit-content;
+  min-height: 32px;
+  padding-inline: var(--eqb-space-2);
+  border: 0;
+  border-radius: var(--eqb-radius-control);
+  background: transparent;
+  color: var(--paper-ink-muted);
+  font: inherit;
+  font-size: var(--eqb-font-size-control);
+  font-weight: 400;
+  cursor: pointer;
+  transition: background-color var(--motion-fast) var(--ease-hover);
+}
+
+.listening-quiet-control:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.listening-quiet-control:hover:enabled,
+.listening-analysis-panel summary.listening-quiet-control:hover {
+  background: var(--eqb-color-state-hover);
+}
+
+.listening-quiet-control[aria-pressed='true'] {
+  background: var(--eqb-color-state-selected);
+  color: var(--paper-ink-strong);
+}
+
+.listening-quiet-control[aria-pressed='true']:hover:enabled {
+  background: var(--eqb-color-state-selected-hover);
+}
+
+.listening-analysis-intro,
+.listening-transcript,
+.listening-analysis-explanation {
+  display: grid;
+  gap: var(--eqb-space-2);
+}
+
+.listening-analysis-panel h5 {
+  color: var(--paper-ink-strong);
+  font-size: var(--eqb-font-size-md);
+  font-weight: 600;
+}
+
+.listening-analysis-panel h6 {
+  color: var(--paper-ink-strong);
+  font-size: var(--eqb-font-size-sm);
+  font-weight: 600;
+}
+
+.listening-analysis-summary,
+.listening-follow-translation {
+  color: var(--paper-ink-muted);
+  font-size: var(--eqb-font-size-control);
   line-height: 1.6;
 }
 
-.listening-analysis-text {
-  gap: 8px;
-  padding-block: 12px;
-  border-block: 1px solid var(--paper-border);
+.listening-transport {
+  display: grid;
+  gap: var(--eqb-space-2);
+  color: var(--paper-ink-strong);
 }
 
-.listening-analysis-text h6 {
-  color: var(--eqb-color-text-muted, #5A6C75);
-  font-size: 12px;
+.listening-transport-main,
+.listening-transport-secondary {
+  display: flex;
+  align-items: stretch;
+  gap: var(--eqb-space-2);
+}
+
+.listening-transport-main {
+  align-items: center;
+}
+
+.listening-transport-main > button {
+  align-self: center;
+  color: var(--paper-ink-strong);
   font-weight: 600;
-  line-height: 1.5;
+  white-space: nowrap;
 }
 
-.listening-analysis-text p,
-.listening-analysis-question > p,
-.listening-analysis-question > ol,
-.listening-analysis-question > blockquote,
-.listening-analysis-distractors p {
-  color: var(--paper-ink);
-  font: 400 14px/1.7 var(--ps-font-stack);
+.listening-transport-main > .listening-player-track {
+  flex: 1;
+  min-width: 0;
+}
+
+.listening-transport-main .listening-player-time {
+  color: var(--paper-ink-muted);
+  white-space: nowrap;
+}
+
+.listening-transport-secondary {
+  flex-wrap: wrap;
+}
+
+.listening-transport-speed {
+  /* Keep the seek track the same width when the rate label changes. */
+  min-inline-size: calc(5ch + 2 * var(--eqb-space-2));
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.listening-transport .listening-player-mark {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.listening-audio-error {
+  color: var(--eqb-color-danger);
+  font-size: var(--eqb-font-size-control);
+}
+
+.listening-follow-lines {
+  position: relative;
+  box-sizing: border-box;
+  height: min(44dvh, 420px);
+  overflow-y: auto;
+  overflow-anchor: none;
+}
+
+.listening-follow-lines[data-focused] .listening-follow-line[data-distance='2'] > * {
+  opacity: 0.55;
+}
+
+.listening-follow-lines[data-focused] .listening-follow-line[data-distance='3'] > * {
+  opacity: 0.35;
+}
+
+.listening-follow-lines[data-focused] .listening-follow-line[data-distance='4'] > * {
+  opacity: 0.2;
+}
+
+.listening-follow-line {
+  display: grid;
+  grid-template-columns: var(--eqb-space-5) minmax(0, 1fr);
+  align-items: start;
+  column-gap: var(--eqb-space-1);
+  padding: var(--eqb-space-1) var(--eqb-space-2) var(--eqb-space-1) 0;
+  border-radius: var(--eqb-radius-control);
+  color: var(--paper-ink-strong);
+}
+
+.listening-follow-line[data-speaker-change] {
+  margin-block-start: var(--eqb-space-2);
+}
+
+/* Auto-scrolling rows can pass under a stationary pointer. */
+:where(.listening-follow-lines:not([data-auto-follow])) .listening-follow-line[data-playable]:hover {
+  background: var(--eqb-color-state-hover);
+}
+
+.listening-follow-line[aria-current='true'] {
+  background: var(--eqb-color-state-selected);
+}
+
+:where(.listening-follow-lines:not([data-auto-follow])) .listening-follow-line[aria-current='true']:hover {
+  background: var(--eqb-color-state-selected-hover);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .listening-follow-line {
+    transition: background-color var(--listening-highlight-duration) var(--ease-hover);
+  }
+
+  .listening-follow-line > * {
+    transition: opacity var(--listening-highlight-duration) var(--ease-hover);
+  }
+}
+
+.listening-follow-sentence {
+  display: inline;
+  padding: 0;
+  border: 0;
+  border-radius: inherit;
+  background: transparent;
+  color: inherit;
+  text-align: start;
+  font: inherit;
+  cursor: pointer;
+}
+
+.listening-follow-sentence:disabled {
+  cursor: default;
+}
+
+.listening-follow-speaker {
+  color: var(--paper-ink-muted);
+  text-align: center;
+  line-height: 1.9;
+}
+
+.listening-follow-sentence,
+.listening-transcript-plain > [lang='en'] {
+  font-size: var(--eqb-font-size-md);
+  line-height: 1.7;
+}
+
+.listening-transcript-plain > [lang='en'] {
+  font-family: var(--ps-font-stack);
+  color: var(--paper-ink-strong);
+  white-space: pre-line;
+}
+
+.listening-follow-evidence {
+  margin-inline-start: var(--eqb-space-2);
+}
+
+.listening-follow-evidence button {
+  color: var(--paper-ink-muted);
+  font-size: var(--eqb-font-size-xs);
+  min-height: var(--eqb-space-5);
+  white-space: nowrap;
+}
+
+.listening-follow-return {
+  position: sticky;
+  bottom: var(--eqb-space-2);
+  z-index: 1;
+  align-self: flex-start;
+  border: 1px solid var(--paper-border);
+  border-radius: var(--eqb-radius-control);
+  background: var(--desk-surface);
+}
+
+.listening-analysis-questions {
+  display: grid;
+  gap: var(--eqb-space-2);
 }
 
 .listening-analysis-question {
-  gap: 8px;
-  padding-top: 16px;
+  padding-block: var(--eqb-space-1);
+  scroll-margin-block-start: var(--eqb-space-4);
 }
 
 .listening-analysis-question + .listening-analysis-question {
   border-top: 1px solid var(--paper-border);
 }
 
-.listening-analysis-question header {
+.listening-analysis-question > summary {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
-}
-
-.listening-analysis-question ol {
-  padding-left: 20px;
-}
-
-.listening-analysis-question blockquote {
-  padding: 8px 12px;
-  background: var(--paper-bg);
+  gap: var(--eqb-space-4);
+  border-radius: var(--eqb-radius-control);
+  padding: var(--eqb-space-1) var(--eqb-space-2);
   color: var(--paper-ink-strong);
+  font-variant-numeric: tabular-nums;
+  transition: background-color var(--motion-fast) var(--ease-hover);
 }
 
-.listening-analysis-distractors {
-  padding-top: 8px;
-  border-top: 1px dashed var(--paper-border);
+.listening-analysis-question > summary:hover {
+  background: var(--eqb-color-state-hover);
 }
 
-/* ─── Listening player: headphone trigger after the paper text + floating card ─── */
+.listening-analysis-explanation {
+  padding: var(--eqb-space-2) var(--eqb-space-2) var(--eqb-space-4);
+  color: var(--paper-ink);
+  font-size: var(--eqb-font-size-sm);
+  line-height: 1.7;
+}
+
+.listening-analysis-explanation blockquote {
+  padding: var(--eqb-space-2);
+  background: var(--paper-bg);
+  font-family: var(--ps-font-stack);
+}
+
+.listening-analysis-translation ul {
+  list-style: none;
+  padding: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .listening-analysis-panel :is(.listening-follow-line, .listening-quiet-control, .listening-analysis-question > summary) {
+    transition: none;
+  }
+}
+
+/* ─── 卷面耳机与音频进度 ─── */
 
 .listening-player {
   position: relative;
@@ -2026,6 +2267,12 @@
   transform-origin: 20px 0;
 }
 
+/* 卷面每个文字尾巴（.ps-text-trail）各自是 z-index 5 的一层，后面的尾巴按文档顺序画在前面的上面，
+   打开的听力条会被下面几行的耳机图标压住。打开时把它所在的那层抬到卷面最上面；29/30 的讲评抽屉仍盖住它。 */
+.ps-text-trail:has(.listening-player[data-open]) {
+  z-index: 28;
+}
+
 @starting-style {
   .listening-player-card {
     opacity: 0;
@@ -2077,7 +2324,7 @@
   height: 16px;
 }
 
-.listening-player .listening-player-mark {
+:is(.listening-player, .listening-transport) .listening-player-mark {
   position: absolute;
   bottom: 0;
   display: grid;
@@ -2099,7 +2346,7 @@
   white-space: nowrap;
 }
 
-.listening-player .listening-player-mark[data-current] {
+:is(.listening-player, .listening-transport) .listening-player-mark[data-current] {
   color: var(--desk-ink);
   font-weight: 600;
 }
@@ -2124,7 +2371,7 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .listening-player .listening-player-mark:hover { color: var(--paper-ink-strong); }
+  :is(.listening-player, .listening-transport) .listening-player-mark:hover { color: var(--paper-ink-strong); }
 
   .listening-player-mark:hover::after {
     opacity: 1;
@@ -2132,12 +2379,12 @@
   }
 }
 
-.listening-player .listening-player-mark:focus-visible::after {
+:is(.listening-player, .listening-transport) .listening-player-mark:focus-visible::after {
   opacity: 1;
   transform: translate(-50%, 0);
 }
 
-.listening-player-wave {
+.listening-player-progress {
   position: relative;
   height: 28px;
   cursor: pointer;
@@ -2180,7 +2427,7 @@
 }
 
 /* Hover/focus/drag enlarges the handle, without moving the line or card. */
-.listening-player-wave:is(:hover, :focus-visible, [data-dragging]) .listening-player-line-thumb {
+.listening-player-progress:is(:hover, :focus-visible, [data-dragging]) .listening-player-line-thumb {
   transform: translate(-50%, -50%) scale(1.5);
 }
 
@@ -2254,6 +2501,14 @@
 
 @media (prefers-reduced-motion: reduce) {
   .listening-player-needle { transition: none; }
+}
+
+.listening-player-audio-error {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
 }
 
 .listening-player-error {

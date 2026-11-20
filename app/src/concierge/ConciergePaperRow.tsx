@@ -163,7 +163,6 @@ function bucketGroupsBySection(groups: PaperResultGroup[]): GroupBucket[] {
 export type ConciergePaperRowProps = {
   paper: PaperResult
   expanded: boolean
-  basketIds: Set<string>
   onTogglePaper: (key: string) => void
   /** classic-retire-2-detail-view — opens the read-only detail view for a group. */
   onOpenDetail?: (group: QuestionGroupCard) => void
@@ -202,7 +201,6 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
   const {
     paper,
     expanded,
-    basketIds,
     onTogglePaper,
     onOpenDetail,
     onOpenPaperBrowse,
@@ -420,7 +418,6 @@ export function ConciergePaperRow(props: ConciergePaperRowProps): ReactNode {
                           group={group}
                           reason={reason}
                           onOpenDetail={onOpenDetail}
-                          alreadyInBasket={basketIds.has(group.id)}
                           dimmed={!isHit}
                           questionGroupById={questionGroupById}
                           isSimilarPassagesOpen={expandedSimilarGroupId === group.id}

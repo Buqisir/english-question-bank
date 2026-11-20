@@ -8,7 +8,7 @@ function failure(error) {
 }
 
 try {
-  const { directory, revision, operation, input, reviewerKind, expectedConfirmation } = workerData
+  const { directory, revision, operation, input, reviewerKind, expectedConfirmation, deduplicateSealedFiles } = workerData
   const projection = finalizeProjection(directory, revision,
     operation === 'ocr-confirmation' ? { requireAnalyses: false } : undefined)
   if (operation === 'ocr-confirmation') {
@@ -45,8 +45,13 @@ try {
     // v8 serialization preserves Buffer fields, unlike structured clone.
     const contentSubject = revision.id && revision.reviewKind === 'candidate' && !inventoryError
       ? finalizeContentSubject(directory, revision, projection) : null
+    let blobStore
+    if (contentSubject?.ok && deduplicateSealedFiles && (process.env.QUESTION_BANK_FILE_STORE || 'local') === 'local') {
+      const { configuredBlobStore } = await import('../paper-import/blobStore.mjs')
+      blobStore = configuredBlobStore()
+    }
     const sealedPublicationManifestDigest = contentSubject?.ok
-      ? sealReviewPublication(directory, revision, projection) : null
+      ? await sealReviewPublication(directory, revision, projection, blobStore) : null
     const bytes = serialize({ projection, expectedFiles, inventoryError, contentSubject, sealedPublicationManifestDigest })
     parentPort.postMessage({ bytes }, [bytes.buffer])
   }

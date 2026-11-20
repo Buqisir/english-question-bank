@@ -24,7 +24,7 @@ import { nck1OcrSourceSetDigest } from '../paper-import/nck1OcrSourceEvidence.mj
 import { assertPaperStorageMounted } from '../paper-import/paperStorageMount.mjs'
 import { reviewUploadMetrics } from './reviewUploadMetrics.mjs'
 import { acquireRevisionUpload, tryRevisionFinalization } from './reviewUploadLocks.mjs'
-import { finalizeContentSubject, finalizeInventory, ocrConfirmationComputation,
+import { finalizeContentSubject, finalizeInventory, finalizeProjection, ocrConfirmationComputation,
   validateOcrConfirmationRevision, deriveOcrConfirmationRevision, assertOcrConfirmationRevision } from './finalizeComputation.mjs'
 import { ensureReviewCompatibilityShape } from './reviewCompatibilitySchema.mjs'
 import { readReviewSubjectBackfillStatus } from './reviewSubjectBackfillStatus.mjs'
@@ -38,12 +38,21 @@ import { restoreFinalizeError, runFinalizeWorker } from './runFinalizeWorker.mjs
 import {
   buildImportReviewProjection,
   buildNck1SealedReviewProjection,
+  configuredSourceType,
   resolveReviewFile,
 } from './revisionProjection.mjs'
 
 const PAPER_ID = /^paper-[a-z0-9]+(?:-[a-z0-9]+)*$/
 const SHA256 = /^sha256:[a-f0-9]{64}$/
 const MAX_FILE_BYTES = 64 * 1024 * 1024
+const LIST_ANALYSIS_FILES = {
+  listening: 'listening-analysis-v1.json',
+  reading: 'reading-choice-analysis-v1.json',
+  sevenChoice: 'seven-choices-analysis-v1.json',
+  cloze: 'cloze-analysis-v1.json',
+  grammar: 'grammar-fill-analysis-v1.json',
+  writing: 'writing-analysis-v1.json',
+}
 const MAX_BUNDLE_BYTES = 256 * 1024 * 1024
 const MAX_FILES = 200
 const SURFACES = new Set(['paper', 'screen', 'student_print', 'teacher_print', 'pdf', 'source'])
@@ -359,11 +368,9 @@ export function validateReviewBundleManifest(input) {
             'paragraphSummariesDigest',
             160,
           ),
-          publicSearchMetadataDigest: requiredString(
-            input.publicSearchMetadataDigest,
-            'publicSearchMetadataDigest',
-            160,
-          ),
+          ...(input.publicSearchMetadataDigest == null ? {} : {
+            publicSearchMetadataDigest: requiredString(input.publicSearchMetadataDigest, 'publicSearchMetadataDigest', 160),
+          }),
           ...(input.analysisDigest
             ? { analysisDigest: requiredString(input.analysisDigest, 'analysisDigest', 160) }
             : {}),
@@ -755,7 +762,7 @@ function promotionRow(db, row) {
     if (
       manifest.importProfile !== 'public-paper-v1'
       || !SHA256.test(manifest.paragraphSummariesDigest || '')
-      || !SHA256.test(manifest.publicSearchMetadataDigest || '')
+      || (manifest.publicSearchMetadataDigest != null && !SHA256.test(manifest.publicSearchMetadataDigest))
     ) {
       throw storeError(
         'IMPORT_REVIEW_PROMOTION_IDENTITY_MISMATCH',
@@ -852,6 +859,7 @@ export function createImportReviewStore({
   filesRoot,
   rendererBuildId,
   projectRevision = buildImportReviewProjection,
+  deduplicateSealedFiles = false,
   busyTimeoutMs = 5000,
   initializeSchema = true,
 }) {
@@ -867,6 +875,7 @@ export function createImportReviewStore({
     } finally { initialize.close() }
   }
   const projectionCache = new Map()
+  const paperListMetadataCache = new Map()
   const targetBuild = reviewBuildIdentityProvider()
 
   function currentRendererBuildId() {
@@ -1170,7 +1179,7 @@ export function createImportReviewStore({
     const status = uploadStatus(revisionId)
     if (status.revision.state !== 'uploading') return
     for (const file of status.files) {
-      if (file.uploadedAt || !/^(audio\/|image\/|application\/pdf$)/.test(file.mediaType)) continue
+      if (file.uploadedAt || !/^(audio\/|image\/|application\/(?:pdf|json)$)/.test(file.mediaType)) continue
       const source = withDb(false, db => db.prepare(`
         SELECT f.revision_id, f.path FROM import_review_files f
         JOIN import_review_revisions r ON r.id = f.revision_id
@@ -1288,7 +1297,7 @@ export function createImportReviewStore({
             ? [
                 [projection.importProfile, revision.manifest.importProfile, 'importProfile'],
                 [projection.paragraphSummariesDigest, revision.manifest.paragraphSummariesDigest, 'paragraphSummariesDigest'],
-                [projection.publicSearchMetadataDigest, revision.manifest.publicSearchMetadataDigest, 'publicSearchMetadataDigest'],
+                [projection.publicSearchMetadataDigest ?? null, revision.manifest.publicSearchMetadataDigest ?? null, 'publicSearchMetadataDigest'],
               ]
             : []),
         ]
@@ -1343,6 +1352,14 @@ export function createImportReviewStore({
     ], metrics)
   }
 
+  function finalizedEvidenceBase(revision) {
+    if (revision.reviewKind !== 'candidate' || !revision.manifest.expectedBaseRevisionId) return null
+    const base = getRevision(revision.manifest.expectedBaseRevisionId)
+    if (base?.paperId !== revision.paperId || base.reviewKind !== 'candidate'
+      || !base.finalizedAt || base.state === 'uploading') return null
+    return { revision: base, directory: revisionDirectory(base.id) }
+  }
+
   async function finalizeUploadedRevision(revisionId, { metrics = {} } = {}) {
     const timer = finalizationTimer(revisionId, metrics)
     const finishActivity = beginReviewActivity('finalize')
@@ -1364,8 +1381,10 @@ export function createImportReviewStore({
         timer.phase('projection')
         prepared = await runFinalizeWorker(revisionDirectory(revisionId), {
           ...status.revision, rendererBuildId: currentRendererBuildId(),
+          evidenceBase: finalizedEvidenceBase(status.revision),
         }, {
           onPhase: name => timer.phase(name),
+          deduplicateSealedFiles,
         })
         // The executing-server identity uses its trusted worker too; computing
         // the module graph here synchronously would block concurrent requests.
@@ -1415,11 +1434,13 @@ export function createImportReviewStore({
       assertStoredRevisionFiles(status.revision)
       timer.phase('projection')
     }
-    const projection = prepared?.projection || projectRevision(directory, {
-      reviewKind: status.revision.reviewKind,
-      requireAnalyses: status.revision.reviewKind === 'candidate',
-      expectedCandidateDigest: status.revision.candidateDigest,
-    })
+    const projection = prepared?.projection || (projectRevision === buildImportReviewProjection
+      ? finalizeProjection(directory, status.revision, { evidenceBase: finalizedEvidenceBase(status.revision) })
+      : projectRevision(directory, {
+        reviewKind: status.revision.reviewKind,
+        requireAnalyses: status.revision.reviewKind === 'candidate',
+        expectedCandidateDigest: status.revision.candidateDigest,
+      }))
     timer.phase('identityAndReport')
     assertProjectionIdentity(projection, status.revision)
     if (status.revision.reviewKind === 'candidate'
@@ -1577,7 +1598,59 @@ export function createImportReviewStore({
     })
   }
 
-  function listPapers() {
+  function paperListMetadata(db, row, manifest) {
+    const cacheKey = `${row.latest_revision_id}:${row.bundle_digest}:${row.preview_digest}`
+    const cached = paperListMetadataCache.get(row.paper_id)
+    if (cached?.key === cacheKey) return cached.value
+
+    let provenance = null
+    let sourceType
+    const config = Array.isArray(manifest.files) && manifest.files.find(file => file?.path === 'config.json')
+    if (row.bundle_digest && config?.byteLength <= 256 * 1024) {
+      try {
+        const filePath = resolveReviewFile(revisionDirectory(row.latest_revision_id), config.path)
+        if (statSync(filePath).size === config.byteLength) {
+          const bytes = readFileSync(filePath)
+          if (`sha256:${createHash('sha256').update(bytes).digest('hex')}` === config.sha256) {
+            const verifiedConfig = parseJson(bytes.toString('utf8'))
+            if (verifiedConfig && typeof verifiedConfig === 'object' && !Array.isArray(verifiedConfig)) {
+              provenance = verifiedConfig.provenance
+              sourceType = provenance?.sourceType || configuredSourceType(verifiedConfig, row.paper_id)
+            }
+          }
+        }
+      } catch {
+        // Older or unavailable metadata is optional for this list.
+      }
+    }
+    let sidecars = null
+    let cacheable = true
+    if (row.preview_digest) {
+      try {
+        const preview = db.prepare(`SELECT payload_json FROM import_review_product_previews
+          WHERE revision_id = ? AND bundle_digest = ? AND renderer_build_id = ?`)
+          .get(row.latest_revision_id, row.bundle_digest, row.renderer_build_id)
+        sidecars = parseJson(preview?.payload_json)?.analysisSidecars
+      } catch {
+        cacheable = false
+      }
+    }
+    const year = Number(provenance?.year)
+    const region = provenance?.region || provenance?.source
+    const value = {
+      year: Number.isInteger(year) && year >= 1900 && year <= 9999 ? year : 'unknown',
+      region: typeof region === 'string' && region.trim() ? region.trim() : 'unknown',
+      sourceType: sourceType === '真题' ? '真题' : ['模拟题', '模拟'].includes(sourceType) ? '模拟' : 'unknown',
+      analysisCoverage: Object.fromEntries(Object.entries(LIST_ANALYSIS_FILES).map(([section, file]) => [
+        section, sidecars && typeof sidecars === 'object' && !Array.isArray(sidecars)
+          ? (sidecars[file] ? 'yes' : 'no') : 'unknown',
+      ])),
+    }
+    if (cacheable) paperListMetadataCache.set(row.paper_id, { key: cacheKey, value })
+    return value
+  }
+
+  function listPapers({ includeMetadata = false } = {}) {
     let target
     let unavailable
     try { target = targetBuild() } catch (error) {
@@ -1591,6 +1664,10 @@ export function createImportReviewStore({
       SELECT p.paper_id, p.paper_name, p.latest_revision_id, p.updated_at,
              r.revision_number, r.state, r.bundle_digest, r.manifest_json,
              r.approval_receipt_json, r.renderer_build_id, v.sealed_publication_manifest_digest,
+             ${includeMetadata ? `v.payload_digest AS preview_digest,
+             EXISTS (SELECT 1 FROM import_review_promotions pr
+              WHERE pr.paper_id = p.paper_id AND pr.state = 'published'
+                AND pr.revision_id <> p.latest_revision_id) AS has_earlier_publication,` : ''}
              (SELECT pr.state FROM import_review_promotions pr
               WHERE pr.paper_id = p.paper_id
               ORDER BY pr.requested_at DESC, pr.rowid DESC LIMIT 1) AS promotion_state,
@@ -1642,6 +1719,10 @@ export function createImportReviewStore({
             : null,
         unresolvedCount: Number(row.unresolved_count || 0),
         updatedAt: row.updated_at,
+        ...(includeMetadata ? {
+          ...paperListMetadata(db, row, manifest),
+          hasEarlierPublication: Boolean(row.has_earlier_publication),
+        } : {}),
       }
       })
     })
@@ -2586,11 +2667,8 @@ export function createImportReviewStore({
               'paragraphSummariesDigest',
               160,
             ),
-            publicSearchMetadataDigest: requiredString(
-              input?.publicSearchMetadataDigest,
-              'publicSearchMetadataDigest',
-              160,
-            ),
+            publicSearchMetadataDigest: input.publicSearchMetadataDigest == null ? undefined
+              : requiredString(input.publicSearchMetadataDigest, 'publicSearchMetadataDigest', 160),
             ...(input?.analysisDigest
               ? { analysisDigest: requiredString(input.analysisDigest, 'analysisDigest', 160) }
               : {}),
@@ -3458,7 +3536,8 @@ export function createImportReviewStore({
         ? {
             importProfile: input.importProfile,
             paragraphSummariesDigest: requiredString(input?.paragraphSummariesDigest, 'paragraphSummariesDigest', 160),
-            publicSearchMetadataDigest: requiredString(input?.publicSearchMetadataDigest, 'publicSearchMetadataDigest', 160),
+            publicSearchMetadataDigest: input.publicSearchMetadataDigest == null ? undefined
+              : requiredString(input.publicSearchMetadataDigest, 'publicSearchMetadataDigest', 160),
             ...(input?.analysisDigest
               ? { analysisDigest: requiredString(input.analysisDigest, 'analysisDigest', 160) }
               : {}),

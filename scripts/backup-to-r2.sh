@@ -14,9 +14,8 @@
 # `PRAGMA integrity_check` == 'ok' before anything is pushed. A corrupt
 # snapshot aborts the whole run rather than getting pushed.
 #
-# Push uses rclone `copy` (never `sync`, SW-1): copy only adds objects at
-# the destination, so a local mis-delete (or a bad prune) can never
-# propagate to the off-site copy, which is the last line of defense.
+# Push uses rclone `copy` (never `sync`, SW-1), which leaves destination-only
+# objects intact. Immutable files share a fixed prefix across dated snapshots.
 # Retention/pruning of old dated prefixes is a separate, explicitly-guarded
 # step — never `sync`, never an unguarded `rm -rf`.
 #
@@ -84,6 +83,7 @@ fi
 
 STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
 REMOTE_PREFIX="$R2_REMOTE/$STAMP"
+FILES_PREFIX="$R2_REMOTE/files"
 
 # ── Snapshot dir (VA6 seam) ──────────────────────────────────────────────
 CLEANUP_SNAPSHOT_DIR=1
@@ -139,8 +139,8 @@ echo "    $SNAPSHOT_DIR/user-data.sqlite"
 echo "    $SNAPSHOT_DIR/import-ops.sqlite"
 [[ -d "$PAPER_ASSET_ROOT" ]] && echo "    $PAPER_ASSET_ROOT/ (paper-assets, incl. versions/)"
 [[ -d "$USER_SPACE_ROOT" ]] && echo "    $USER_SPACE_ROOT/ (user-space files)"
-[[ -d "$IMPORT_OPS_ROOT" ]] && echo "    $IMPORT_OPS_ROOT/ (import-review files)"
-[[ -d "$BLOB_ROOT" ]] && echo "    $BLOB_ROOT/ (private immutable blobs)"
+[[ -d "$IMPORT_OPS_ROOT" ]] && echo "    $IMPORT_OPS_ROOT/ (import-review files) -> $FILES_PREFIX/import-ops/files"
+[[ -d "$BLOB_ROOT" ]] && echo "    $BLOB_ROOT/ (private immutable blobs) -> $FILES_PREFIX/published-blobs"
 
 HAVE_RCLONE=1
 if ! command -v rclone >/dev/null 2>&1; then
@@ -152,25 +152,25 @@ if [[ "$DRY_RUN" -eq 1 ]]; then
   if [[ "$HAVE_RCLONE" -eq 0 ]]; then
     echo "NOTE: rclone is not installed on this machine — real push is unavailable."
     echo "Plan (would run when rclone is present):"
+    [[ -d "$IMPORT_OPS_ROOT" ]] && echo "  rclone copy \"$IMPORT_OPS_ROOT\" \"$FILES_PREFIX/import-ops/files\""
+    [[ -d "$BLOB_ROOT" ]] && echo "  rclone copy \"$BLOB_ROOT\" \"$FILES_PREFIX/published-blobs\""
     echo "  rclone copy \"$SNAPSHOT_DIR/question-bank.sqlite\" \"$REMOTE_PREFIX/\""
     echo "  rclone copy \"$SNAPSHOT_DIR/user-data.sqlite\" \"$REMOTE_PREFIX/\""
     echo "  rclone copy \"$SNAPSHOT_DIR/import-ops.sqlite\" \"$REMOTE_PREFIX/\""
     [[ -d "$PAPER_ASSET_ROOT" ]] && echo "  rclone copy \"$PAPER_ASSET_ROOT\" \"$REMOTE_PREFIX/paper-assets\""
     [[ -d "$USER_SPACE_ROOT" ]] && echo "  rclone copy \"$USER_SPACE_ROOT\" \"$REMOTE_PREFIX/user-space\""
-    [[ -d "$IMPORT_OPS_ROOT" ]] && echo "  rclone copy \"$IMPORT_OPS_ROOT\" \"$REMOTE_PREFIX/import-ops-files\""
-    [[ -d "$BLOB_ROOT" ]] && echo "  rclone copy \"$BLOB_ROOT\" \"$REMOTE_PREFIX/private-blobs\""
     echo "==> Dry run complete (no rclone binary present, no push attempted)."
     exit 0
   fi
 
   echo "==> Dry run: invoking rclone copy --dry-run"
+  [[ -d "$IMPORT_OPS_ROOT" ]] && rclone copy "$IMPORT_OPS_ROOT" "$FILES_PREFIX/import-ops/files" --dry-run
+  [[ -d "$BLOB_ROOT" ]] && rclone copy "$BLOB_ROOT" "$FILES_PREFIX/published-blobs" --dry-run
   rclone copy "$SNAPSHOT_DIR/question-bank.sqlite" "$REMOTE_PREFIX/" --dry-run
   rclone copy "$SNAPSHOT_DIR/user-data.sqlite" "$REMOTE_PREFIX/" --dry-run
   rclone copy "$SNAPSHOT_DIR/import-ops.sqlite" "$REMOTE_PREFIX/" --dry-run
   [[ -d "$PAPER_ASSET_ROOT" ]] && rclone copy "$PAPER_ASSET_ROOT" "$REMOTE_PREFIX/paper-assets" --dry-run
   [[ -d "$USER_SPACE_ROOT" ]] && rclone copy "$USER_SPACE_ROOT" "$REMOTE_PREFIX/user-space" --dry-run
-  [[ -d "$IMPORT_OPS_ROOT" ]] && rclone copy "$IMPORT_OPS_ROOT" "$REMOTE_PREFIX/import-ops-files" --dry-run
-  [[ -d "$BLOB_ROOT" ]] && rclone copy "$BLOB_ROOT" "$REMOTE_PREFIX/private-blobs" --dry-run
   echo "==> Dry run complete."
   exit 0
 fi
@@ -181,14 +181,17 @@ if [[ "$HAVE_RCLONE" -eq 0 ]]; then
   exit 1
 fi
 
-echo "==> Pushing to $REMOTE_PREFIX (rclone copy — additive only)"
+# Copy the files referenced by the snapshots before exposing the dated prefix.
+echo "==> Copying immutable files to $FILES_PREFIX"
+[[ -d "$IMPORT_OPS_ROOT" ]] && rclone copy "$IMPORT_OPS_ROOT" "$FILES_PREFIX/import-ops/files"
+[[ -d "$BLOB_ROOT" ]] && rclone copy "$BLOB_ROOT" "$FILES_PREFIX/published-blobs"
+
+echo "==> Copying snapshots and mutable files to $REMOTE_PREFIX"
 rclone copy "$SNAPSHOT_DIR/question-bank.sqlite" "$REMOTE_PREFIX/"
 rclone copy "$SNAPSHOT_DIR/user-data.sqlite" "$REMOTE_PREFIX/"
 rclone copy "$SNAPSHOT_DIR/import-ops.sqlite" "$REMOTE_PREFIX/"
 [[ -d "$PAPER_ASSET_ROOT" ]] && rclone copy "$PAPER_ASSET_ROOT" "$REMOTE_PREFIX/paper-assets"
 [[ -d "$USER_SPACE_ROOT" ]] && rclone copy "$USER_SPACE_ROOT" "$REMOTE_PREFIX/user-space"
-[[ -d "$IMPORT_OPS_ROOT" ]] && rclone copy "$IMPORT_OPS_ROOT" "$REMOTE_PREFIX/import-ops-files"
-[[ -d "$BLOB_ROOT" ]] && rclone copy "$BLOB_ROOT" "$REMOTE_PREFIX/private-blobs"
 
 echo "==> Push complete. Remote size/manifest:"
 rclone size "$REMOTE_PREFIX" || true

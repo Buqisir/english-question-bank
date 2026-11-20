@@ -171,6 +171,7 @@ export function prepareSourceReferences({ materialization, sourceDigest, candida
 
 export function validateSourceReferences({
   sidecar, materialization, sourceDigest, candidateDigest, requireComplete = true, sourceDocuments = null, sourceInput = null,
+  onWarning = null,
 }) {
   const supplemented = sidecar?.schemaVersion === 'source-references-v7' ? sidecar : null
   if (supplemented) {
@@ -207,6 +208,7 @@ export function validateSourceReferences({
   }
   const issues = []
   const issue = (code, path, message) => issues.push({ code, path, message })
+  const docxIssue = (code, path, message) => onWarning ? onWarning(`${code}: ${path}: ${message}`) : issue(code, path, message)
   const figures = sourceReferenceFigures(sidecar).map(item => item.figure)
   if (['source-references-v3', 'source-references-v4', 'source-references-v5'].includes(sidecar.schemaVersion)
     && (figures.length > SOURCE_REFERENCE_IMAGE_LIMITS.sidecarFigures
@@ -280,7 +282,7 @@ export function validateSourceReferences({
     } else if (sourceInput && !materialization.documents) {
       issue('SOURCE_REFERENCES_LOCATION_INVALID', path, 'Analyzed-package references require JSON pointers')
     } else if (document.mediaType.includes('wordprocessingml') && locator.kind !== 'docx_part') {
-      issue('SOURCE_REFERENCES_LOCATION_INVALID', path, 'Native DOCX references use replayable paragraph selectors, not unverifiable page regions')
+      docxIssue('SOURCE_REFERENCES_LOCATION_INVALID', path, 'Native DOCX references use replayable paragraph selectors, not unverifiable page regions')
     } else if (locator.kind === 'page_region') {
       const { x, y, width, height } = locator.region
       if (locator.page > document.pageCount || x + width > 1 || y + height > 1) {
@@ -288,11 +290,12 @@ export function validateSourceReferences({
       }
     } else if (!document.mediaType.includes('wordprocessingml')
       || locator.part !== 'word/document.xml') {
-      issue('SOURCE_REFERENCES_LOCATION_INVALID', path, 'DOCX reference must locate its main source document')
+      const report = document.mediaType.includes('wordprocessingml') ? docxIssue : issue
+      report('SOURCE_REFERENCES_LOCATION_INVALID', path, 'DOCX reference must locate its main source document')
     } else {
       const index = /^\(\/w:document\/w:body\/\/w:p\)\[([1-9][0-9]*)\]$/u.exec(locator.selector)?.[1]
       if (!index) {
-        issue('SOURCE_REFERENCES_LOCATION_INVALID', path, 'DOCX reference needs a replayable main-document paragraph selector')
+        docxIssue('SOURCE_REFERENCES_LOCATION_INVALID', path, 'DOCX reference needs a replayable main-document paragraph selector')
         return
       }
       if (!actualSources) return
@@ -300,7 +303,7 @@ export function validateSourceReferences({
         extractDocxDocumentParagraphs(actualSources.get(document.documentId)))
       const paragraph = sourceParagraphs.get(document.documentId)[Number(index) - 1]
       if (!paragraph || (text !== null && paragraph.text !== text)) {
-        issue('SOURCE_REFERENCES_TEXT_DISAGREES', path, 'DOCX reference must replay the exact located source paragraph; no AI rewrite or wrong-paragraph substitution')
+        docxIssue('SOURCE_REFERENCES_TEXT_DISAGREES', path, 'DOCX reference must replay the exact located source paragraph; no AI rewrite or wrong-paragraph substitution')
       }
     }
   }
@@ -429,7 +432,7 @@ export function validateSourceReferences({
                     cell.columnSpan === 1 && !cell.verticalMerge && !cell.containsDrawing
                     && !cell.containsNestedTable && cell.sourceParagraphIndexes.length === 1
                     && block.rows[r][c].source.locator.selector === `(/w:document/w:body//w:p)[${cell.sourceParagraphIndexes[0]}]`)))
-              if (matches.length !== 1) issue('SOURCE_REFERENCES_TABLE_INVALID', blockPath,
+              if (matches.length !== 1) docxIssue('SOURCE_REFERENCES_TABLE_INVALID', blockPath,
                 'Native scoring cells must replay one complete unmerged source table in row/column order; multi-paragraph cells are not yet supported')
             }
           }

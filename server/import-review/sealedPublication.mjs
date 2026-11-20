@@ -36,7 +36,7 @@ const descriptor = (file, bytes, origin) => ({
 // Called with the SAME strict projection that produced the finalized preview.
 // Files install before the DB commitment; a failed transaction leaves no
 // publishable promise. A finalize retry replaces only an uncommitted snapshot.
-export function sealReviewPublication(directory, revision, projection) {
+export function sealReviewPublication(directory, revision, projection, blobStore = null) {
   const sourceCapture = projection.compilation.artifacts.sourceCapture
   const sourceDocument = projection.analyzedPackage
     ? sourceCapture.documents.find(document => document.inputKey
@@ -63,15 +63,22 @@ export function sealReviewPublication(directory, revision, projection) {
   const target = path.join(directory, directoryName)
   const temporary = mkdtempSync(path.join(directory, '.sealed-publication-'))
   const files = []
+  const pendingAdoptions = []
   const packageFiles = {}
   const add = (file, bytes) => {
     if (!validReviewRelativePath(file)) reject(`unsafe file ${file}`)
     const destination = path.join(temporary, file)
-    mkdirSync(path.dirname(destination), { recursive: true })
-    writeFileSync(destination, bytes)
-    files.push(descriptor(file, bytes, 'sealed'))
+    const entry = descriptor(file, bytes, 'sealed')
+    if (!blobStore?.reuseLocalFile(destination, entry)) {
+      mkdirSync(path.dirname(destination), { recursive: true })
+      writeFileSync(destination, bytes, { flag: 'wx' })
+      if (blobStore) pendingAdoptions.push([destination, entry])
+    }
+    files.push(entry)
   }
   const addJson = (file, value) => add(file, stableUtf8Bytes(value))
+  const cleanup = () => rmSync(temporary, { recursive: true, force: true })
+  let installation
   try {
     add('canonical/source-asset.bin', sourceAsset)
     for (const [file, bytes] of Object.entries(sealed.artifacts)) add(file, bytes)
@@ -110,11 +117,19 @@ export function sealReviewPublication(directory, revision, projection) {
       ],
     }
     const manifestBytes = stableUtf8Bytes(manifest)
-    writeFileSync(path.join(temporary, 'manifest.json'), manifestBytes)
-    if (existsSync(target)) rmSync(target, { recursive: true })
-    renameSync(temporary, target)
-    return sha256(manifestBytes)
-  } finally { rmSync(temporary, { recursive: true, force: true }) }
+    const install = () => {
+      writeFileSync(path.join(temporary, 'manifest.json'), manifestBytes)
+      if (existsSync(target)) rmSync(target, { recursive: true })
+      renameSync(temporary, target)
+      return sha256(manifestBytes)
+    }
+    if (pendingAdoptions.length === 0) return install()
+    installation = (async () => {
+      for (const [destination, entry] of pendingAdoptions) await blobStore.adoptLocalFile(destination, entry)
+      return install()
+    })().finally(cleanup)
+    return installation
+  } finally { if (!installation) cleanup() }
 }
 
 // Never treats missing/corrupt bytes as a historical revision. All reads use

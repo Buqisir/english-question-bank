@@ -67,7 +67,7 @@ import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import { PaperSurface } from '../../shared-ui/papersurface/PaperSurface'
 import { PaperFontGate } from '../../shared-ui/papersurface/PaperFontGate'
 import { ensurePaperFonts, PaperFontError } from '../../shared-ui/papersurface/paperFontLoader'
-import { ListeningSegmentPlayer } from './ListeningSegmentPlayer'
+import { ListeningSegmentPlayer, listeningPlayerSwitchEvent } from './ListeningSegmentPlayer'
 import { PaperReviewControls } from './PaperReviewControls'
 import { useIsOpenMode, useIsOwnerView } from '../../auth/AuthGate'
 import { firstListeningSectionRange, wholeListeningPaperRange } from '../../../../shared/paper-canonical/listeningPlayback.mjs'
@@ -190,9 +190,9 @@ import { isNarrativeContinuationWritingAnalysis } from '../../domain/paperAsset.
 import type { ListeningAnalysisV1 } from '../../domain/listeningAnalysis.ts'
 import type { QuestionGroupCard } from '../../domain/questionBank'
 import type { LectureFocus, PaperSurfaceFocusIntent } from '../../../../shared/papersurface/types'
+import { writingPromptBlocksForDisplay } from '../../../../shared/paper-canonical/writingPresentation.mjs'
 import {
   paperOpeningForConsumption,
-  coverNoticesCarrySourceNumbers,
   mockPaperCoverName,
   ownsCompletePaperOpening,
 } from '../../../../shared/paper-canonical/listeningPresentation.mjs'
@@ -391,6 +391,9 @@ export type PaperBrowsePageProps = {
   /** Import review only: read the immutable Candidate revision through the
    * reviewer API while keeping this exact Screen renderer. */
   reviewRevision?: string | null
+  embeddedReview?: boolean
+  renderEmbeddedToolbar?: (lectureToggle?: ReactNode) => ReactNode
+  onEmbeddedScreenReady?: (ready: boolean) => void
   focusGroupId?: string | null
   /** flow-panel 刀 3: 入口带态——预选的题（asset 加载完成后走
    * selectLectureQuestion 同款路径），groupId 缺省时用来推导所属题组。 */
@@ -878,6 +881,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const {
     paperId,
     reviewRevision,
+    embeddedReview,
+    renderEmbeddedToolbar,
+    onEmbeddedScreenReady,
     focusGroupId,
     questionId,
     lecture,
@@ -897,11 +903,49 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   const [unofficialEssays, setUnofficialEssays] = useState<Record<string, UnofficialReferenceEssay[]>>({})
   const [canonicalConsumption, setCanonicalConsumption] =
     useState<WholePaperConsumption | null>(null)
+  // URL 的 lecture=1 在首次渲染就展开讲评，避免先闪一下挑题态。
+  const [lectureOpen, setLectureOpen] = useState(() => hasExplicitLectureIntent({ focusGroupId, lecture }))
   const activeAudioRef = useRef<HTMLAudioElement | null>(null)
-  const activateAudio = useCallback((audio: HTMLAudioElement) => {
-    if (activeAudioRef.current !== audio) activeAudioRef.current?.pause()
-    activeAudioRef.current = audio
+  const playerIdByAudio = useRef(new WeakMap<HTMLAudioElement, string>())
+  const [activePlayerId, setActivePlayerId] = useState<string | null>(null)
+  const [followPlayback, setFollowPlayback] = useState(true)
+  const [playingSegment, setPlayingSegment] = useState<{
+    audio: HTMLAudioElement; segmentId: string; firstQuestionId: string
+  } | null>(null)
+  const [mountedAudio, setMountedAudio] = useState<Record<string, HTMLAudioElement | null>>({})
+  const activeAudio = activePlayerId ? mountedAudio[activePlayerId] ?? null : null
+  const registerPlayerAudio = useCallback((id: string, audio: HTMLAudioElement | null) => {
+    if (audio) playerIdByAudio.current.set(audio, id)
+    setMountedAudio((current) => current[id] === audio ? current : { ...current, [id]: audio })
   }, [])
+  const activateAudio = useCallback((audio: HTMLAudioElement) => {
+    const id = playerIdByAudio.current.get(audio)
+    if (!id || !audio.isConnected) return
+    if (activeAudioRef.current !== audio) {
+      activeAudioRef.current?.dispatchEvent(new Event(listeningPlayerSwitchEvent))
+      activeAudioRef.current?.pause()
+    }
+    activeAudioRef.current = audio
+    setActivePlayerId(id)
+    setFollowPlayback(true)
+  }, [])
+  const audioSegments = canonicalConsumption?.listeningAudio?.segments
+  useEffect(() => {
+    if (!activeAudio || !audioSegments) return
+    const syncSegment = () => {
+      const segment = audioSegments.find(({ startSeconds, endSeconds }) =>
+        activeAudio.currentTime >= startSeconds && activeAudio.currentTime < endSeconds)
+      setPlayingSegment((previous) => {
+        if (!segment) return previous?.audio === activeAudio ? previous : null
+        if (previous?.audio === activeAudio && previous.segmentId === segment.segmentId) return previous
+        return { audio: activeAudio, segmentId: segment.segmentId, firstQuestionId: segment.firstQuestionId }
+      })
+    }
+    const events = ['play', 'timeupdate', 'seeked'] as const
+    events.forEach((event) => activeAudio.addEventListener(event, syncSegment))
+    syncSegment()
+    return () => events.forEach((event) => activeAudio.removeEventListener(event, syncSegment))
+  }, [activeAudio, audioSegments])
   const [groupModels, setGroupModels] = useState<Record<string, GroupModel>>({})
   const [loadingAsset, setLoading] = useState(true)
   // 等待第四轮（2026-11-15）：首屏灰块走门槛。灰块出了要留够 500ms，这期间真卷面先不挂，
@@ -935,11 +979,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         + `max-width:${usableWidthEm}em!important;}`,
     ).join('\n') ?? ''
   const [activeAnchor, setActiveAnchor] = useState<string | null>(null)
-  // 讲评态开关 — 挑题态(默认收起)/讲评态(展开)。刀 3: 入口带态的 `lecture`
-  // prop（URL 的 lecture=1）种下初始值——lazy initializer 而非
-  // useState(false) 是因为它必须在首次渲染就反映入口态，不能等一拍 effect
-  // 才翻开（会闪一下挑题态）。
-  const [lectureOpen, setLectureOpen] = useState(() => hasExplicitLectureIntent({ focusGroupId, lecture }))
   // 刀 2: 讲评态首次打开时按需补拉的 cloze/grammarFill/writing 解析。
   const [lectureAnalysisByGroupId, setLectureAnalysisByGroupId] = useState<
     Record<string, LectureAnalysisEntry>
@@ -1063,6 +1102,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   // 落回同一姿态同选题。跳过 mount 的第一次 commit——初始态已经是 URL
   // boot-read 的镜像（含入口带态的 lecture/questionId），不需要立刻覆盖。
   useEffect(() => {
+    if (embeddedReview) return
     if (!urlSyncMountedRef.current) {
       urlSyncMountedRef.current = true
       return
@@ -1104,7 +1144,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     } catch {
       /* URL sync is best-effort — state above is the authoritative UI change. */
     }
-  }, [lectureOpen, lectureSelection, similarView, similarSeed])
+  }, [embeddedReview, lectureOpen, lectureSelection, similarView, similarSeed])
 
   useEffect(() => {
     let cancelled = false
@@ -1118,6 +1158,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     setAssetBase(null)
     setUnofficialEssays({})
     setCanonicalConsumption(null)
+    activeAudioRef.current?.pause()
+    activeAudioRef.current = null
+    setActivePlayerId(null)
+    setPlayingSegment(null)
+    setFollowPlayback(true)
     setGroupModels({})
     setLectureAnalysisByGroupId({})
     setLectureAnalysisFetched(false)
@@ -1499,6 +1544,12 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       cancelled = true
     }
   }, [paperId, reviewRevision])
+
+  useLayoutEffect(() => {
+    if (!embeddedReview || !onEmbeddedScreenReady || loading || error || !asset || !canonicalConsumption) return
+    onEmbeddedScreenReady(true)
+    return () => onEmbeddedScreenReady(false)
+  }, [embeddedReview, onEmbeddedScreenReady, loading, error, asset, canonicalConsumption])
 
   // Writing and listening teaching sidecars are prefetched so their source-owned
   // answer-box/question interactions can open lecture immediately. Transcript
@@ -1969,30 +2020,38 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     // 抖动几帧——去抖到 120ms 稳定窗口再提交 setActiveAnchor，activeAnchor
     // 不来回横跳。窗口足够短，不影响正常滚动下的响应感。
     let debounceTimer: number | null = null
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          const anchor = (entry.target as HTMLElement).getAttribute('data-paper-browse-anchor')
-          if (!anchor) continue
-          if (entry.isIntersecting) visible.add(anchor)
-          else visible.delete(anchor)
-        }
-        const current = order.find((anchor) => visible.has(anchor))
-        if (!current) return
-        if (debounceTimer != null) window.clearTimeout(debounceTimer)
-        debounceTimer = window.setTimeout(() => {
-          debounceTimer = null
-          setActiveAnchor(current)
-        }, 120)
-      },
-      { root: null, rootMargin: '0px 0px -70% 0px', threshold: 0 },
-    )
-    for (const el of anchorEls) observer.observe(el)
+    const updateVisibleAnchors: IntersectionObserverCallback = (entries) => {
+      for (const entry of entries) {
+        const anchor = (entry.target as HTMLElement).getAttribute('data-paper-browse-anchor')
+        if (!anchor) continue
+        if (entry.isIntersecting) visible.add(anchor)
+        else visible.delete(anchor)
+      }
+      const current = order.find((anchor) => visible.has(anchor))
+      if (!current) return
+      if (debounceTimer != null) window.clearTimeout(debounceTimer)
+      debounceTimer = window.setTimeout(() => {
+        debounceTimer = null
+        setActiveAnchor(current)
+      }, 120)
+    }
+    const observer = new IntersectionObserver(updateVisibleAnchors, { rootMargin: '0px 0px -70% 0px' })
+    // The tail of the previous listening section above the reading area
+    // should not win over the next section already at the top of the paper.
+    const listeningObserver = lectureOpen
+      ? new IntersectionObserver(updateVisibleAnchors, { rootMargin: '-72px 0px -70% 0px' })
+      : observer
+    for (const [index, el] of anchorEls.entries()) {
+      const group = asset.content.groups[order[index]]
+      if (group?.groupType === 'listening') listeningObserver.observe(el)
+      else observer.observe(el)
+    }
     return (): void => {
       observer.disconnect()
+      if (listeningObserver !== observer) listeningObserver.disconnect()
       if (debounceTimer != null) window.clearTimeout(debounceTimer)
     }
-  }, [asset, loading])
+  }, [asset, loading, lectureOpen])
 
   // 刀 2 修复轮 ①: 阅读 parity — 点题/点证据后把命中的原文证据句滚入视野，
   // 镜像 PaperIntelligencePaperSurfaceHarness.tsx 的 "Auto-scroll active
@@ -2296,10 +2355,11 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     }
   }, [loading, asset])
 
-  // 讲评栏只认左边的显式点选，不跟随 scrollspy。
-  const panelGroupId = useMemo(() => {
-    return lectureSelection?.groupId ?? null
-  }, [lectureSelection])
+  const playbackGroup = playingSegment?.audio === activeAudio && playingSegment
+    ? Object.values(asset?.content.groups ?? {}).find((group) =>
+      group.groupType === 'listening' && group.questionIds.includes(playingSegment.firstQuestionId))
+    : null
+  const panelGroupId = (followPlayback ? playbackGroup?.groupId : null) ?? lectureSelection?.groupId ?? null
 
   // 刀 2: 当前显式选中题的 lectureFocus —— 只喂给 panelGroupId 对应那组的
   // PaperSurface 挂载，其余题组永远拿 null（讲评开着也不跨组高亮）。
@@ -2314,13 +2374,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       : { kind: 'question', questionId: lectureSelection.questionId }
   }, [lectureSelection])
 
-  // 刀 2 修复轮 ②: 七选五原文高亮 —— 讲评栏当前面板组是七选五时接入解析页
-  // harness 同款 useSevenChoicesPaperHighlights，随链条手风琴（
-  // openSevenChoiceQuestionIds）在整卷页卷面容器上亮衔接句。scroller ref
-  // 用整卷页卷面容器（`scrollerRef` → `.paper-browse-content`），不是某一
-  // 题组的局部容器 —— 该 hook 的坐标算法基于 rect 差值，document 级滚动
-  // 下与题组容器同款效果（两者都是 viewport-relative，差值不受页面滚动
-  // 影响，只随 hook 自身的 resize/effect-dep 重算刷新，见 hook 内部）。
+  // 七选五覆盖层与测量参照都在 .paper-browse-content 下。
+  // 覆盖层放在 .paper-browse-zoom 外，避免已缩放的 DOM Range 坐标再次缩放。
   const panelGroupModel = panelGroupId ? groupModels[panelGroupId] : undefined
   const sevenChoiceOverlay = useSevenChoicesPaperHighlights({
     enabled: lectureOpen && panelGroupModel?.kind === 'sevenChoices',
@@ -2498,6 +2553,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   // （cloze/grammarFill 取首条证据行，reading 取 supportEvidenceId+answer，
   // 其余(sevenChoices/writing/未发布解析)不种子，面板自行走空态）。
   function selectLectureQuestion(groupId: string, questionId: string): void {
+    setFollowPlayback(false)
     // similar-rail (E2): 换到新题时讲评栏 body 回落到解析态——「配相似」
     // 结果列表只在同一道题上跨滚动/跨面板持续，换题就该重新走 CTA。不清
     // similarRequest/selection 本身，只切视图态：这样若用户误点又点回原题
@@ -2546,6 +2602,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   }
 
   function selectLectureGroup(groupId: string): void {
+    setFollowPlayback(false)
     setSimilarView('analysis')
     setLectureSelection({
       groupId,
@@ -2669,7 +2726,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     }
     if (entry.kind === 'errorCorrection') return (
       <div className="canonical-error-correction" data-canonical-group-id={groupId}>
-        {entry.paragraphs.map(paragraph => <p key={paragraph.paragraphId} data-canonical-paragraph-id={paragraph.paragraphId}>
+        {writingPromptBlocksForDisplay(entry.paragraphs).map(paragraph => <p key={paragraph.paragraphId} data-canonical-paragraph-id={paragraph.paragraphId}>
           {paragraph.nodes.map(node => node.text).join('')}
         </p>)}
       </div>
@@ -2683,34 +2740,47 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     }
     if (entry.kind === 'listening') {
       const isPanelGroup = lectureOpen && panelGroupId === groupId
+      const useLecturePlayer = lectureOpen && Boolean(audioSegments?.length) && !(similarView === 'similar' && similarSeed)
       const audio = canonicalConsumption?.listeningAudio
-      const firstSection = firstListeningSectionRange(audio?.segments,
-        entry.model.surfaceData.questions.map((question) => Number(question.questionNo)).sort((a, b) => a - b))
-      const wholePaper = wholeListeningPaperRange(audio?.segments)
-      const listeningPlayers = audio?.segments ? Object.fromEntries(audio.segments.map((segment) => [
+      const questionNumbers = entry.model.surfaceData.questions.map((question) => Number(question.questionNo)).sort((a, b) => a - b)
+      const firstSection = firstListeningSectionRange(audioSegments, questionNumbers)
+      const longSegments = audioSegments?.filter((segment) => segment.questionNumbers.every((number) => questionNumbers.includes(number)))
+      const secondSection = lectureOpen && questionNumbers[0] === 6 && longSegments?.length
+        && longSegments.flatMap((segment) => segment.questionNumbers).join(',') === questionNumbers.join(',')
+        ? { startSeconds: longSegments[0].startSeconds, endSeconds: longSegments.at(-1)!.endSeconds, segments: longSegments }
+        : null
+      const section = firstSection || secondSection
+      const wholePaper = wholeListeningPaperRange(audioSegments)
+      const listeningPlayers = audio && audioSegments ? Object.fromEntries(audioSegments.map((segment) => [
         segment.firstQuestionId,
         <ListeningSegmentPlayer key={`${audio.sha256}:${segment.segmentId}`} src={audio.url}
           label={segment.questionNumbers.length === 1 ? `第 ${segment.questionNumbers[0]} 题`
             : `第 ${Math.min(...segment.questionNumbers)}–${Math.max(...segment.questionNumbers)} 题`}
-          startSeconds={segment.startSeconds} endSeconds={segment.endSeconds} onActivate={activateAudio} />,
+          startSeconds={segment.startSeconds} endSeconds={segment.endSeconds} onActivate={activateAudio}
+          playerId={segment.segmentId} onPlayerAudio={registerPlayerAudio} lecture={useLecturePlayer} />,
       ])) : undefined
       return (
         <div className="paper-browse-listening canonical-listening-surface">
           <PaperSurface
             {...entry.model.surfaceData}
             listeningPlayers={listeningPlayers}
-            listeningSectionPlayer={audio && firstSection && (
-              <ListeningSegmentPlayer key={`${audio.sha256}:first-section`} src={audio.url} label="第一节第 1–5 题"
-                startSeconds={firstSection.startSeconds} endSeconds={firstSection.endSeconds}
-                onActivate={activateAudio} size="full"
-                marks={firstSection.segments.map((segment) => ({
-                  startSeconds: segment.startSeconds, endSeconds: segment.endSeconds, label: String(segment.questionNumbers[0]),
+            listeningSectionPlayer={audio && section && (
+              <ListeningSegmentPlayer key={`${audio.sha256}:${groupId}:section`} src={audio.url}
+                label={firstSection ? '第一节第 1–5 题' : `第二节第 6–${questionNumbers.at(-1)} 题`}
+                startSeconds={section.startSeconds} endSeconds={section.endSeconds}
+                onActivate={activateAudio} size="full" lecture={useLecturePlayer}
+                playerId={`section:${groupId}`} onPlayerAudio={registerPlayerAudio}
+                marks={section.segments.map((segment) => ({
+                  startSeconds: segment.startSeconds, endSeconds: segment.endSeconds,
+                  label: segment.questionNumbers.length === 1 ? String(segment.questionNumbers[0])
+                    : `${segment.questionNumbers[0]}–${segment.questionNumbers.at(-1)}`,
                 }))} />
             )}
             listeningPartPlayer={audio && (
               <ListeningSegmentPlayer key={`${audio.sha256}:full`} src={audio.url} label="整卷听力"
-                startSeconds={wholePaper?.startSeconds ?? 0} endSeconds={wholePaper?.endSeconds ?? audio.durationSeconds} onActivate={activateAudio} size="full"
-                marks={audio.segments?.map((segment) => ({
+                startSeconds={wholePaper?.startSeconds ?? 0} endSeconds={wholePaper?.endSeconds ?? audio.durationSeconds} onActivate={activateAudio} size="full" lecture={useLecturePlayer}
+                playerId="whole-paper" onPlayerAudio={registerPlayerAudio}
+                marks={audioSegments?.map((segment) => ({
                   startSeconds: segment.startSeconds,
                   endSeconds: segment.endSeconds,
                   label: segment.questionNumbers.length === 1 ? String(segment.questionNumbers[0])
@@ -3448,19 +3518,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       return <p className="paper-browse-lecture-empty" role="alert">{analysisFontError}</p>
     }
 
-    if (group.groupType === 'listening') {
-      if (lectureEntry?.kind === 'listening') {
-        return (
-          <ListeningAnalysisPanel
-            analysis={lectureEntry.analysis}
-            groupQuestionIds={group.questionIds}
-            activeQuestionId={activeQuestionId}
-          />
-        )
-      }
-      return <p className="paper-browse-lecture-empty">解析未发布</p>
-    }
-
     if (group.groupType === 'sevenChoices' && entry?.kind === 'sevenChoices') {
       const chains = entry.model.chains
       if (chains.length === 0) {
@@ -3642,12 +3699,34 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         ),
       })?.section?.text ?? null
     }
-    const hasActiveQuestion = Boolean(
-      lectureSelection
-      && lectureSelection.groupId === groupId
-      && lectureSelection.questionId,
-    )
-    const activeQuestionId = hasActiveQuestion ? lectureSelection?.questionId ?? null : null
+    const selectedQuestionId = lectureSelection?.groupId === groupId ? lectureSelection.questionId : null
+    const visibleListening = lectureAnalysisByGroupId[groupId]
+    const selectedMaterial = visibleListening?.kind === 'listening' && selectedQuestionId
+      ? Object.values(visibleListening.analysis.materials).find(({ questionIds }) => questionIds.includes(selectedQuestionId))
+      : null
+    const playbackQuestion = followPlayback && playbackGroup?.groupId === groupId && playingSegment
+      && selectedMaterial?.segmentId !== playingSegment.segmentId ? playingSegment.firstQuestionId : null
+    const activeQuestionId = playbackQuestion ?? selectedQuestionId
+    if (group.groupType === 'listening') {
+      const lectureEntry = lectureAnalysisByGroupId[groupId]
+      return <ListeningAnalysisPanel
+        title={lectureTitle ?? group.title}
+        answers={answerRow}
+        analysis={lectureEntry?.kind === 'listening' ? lectureEntry.analysis : undefined}
+        groupQuestionIds={group.questionIds}
+        activeQuestionId={activeQuestionId}
+        segments={audioSegments ?? []}
+        segmentAudio={mountedAudio}
+        playback={audioSegments?.length && activeAudio && (playingSegment?.audio === activeAudio || followPlayback)
+          ? { audio: activeAudio, segmentId: playingSegment?.audio === activeAudio ? playingSegment.segmentId : null }
+          : null}
+        onActivate={activateAudio}
+        onReturnToPlayback={!followPlayback && playbackGroup ? () => setFollowPlayback(true) : undefined}
+        fontError={analysisFontError}
+        unavailable={lectureAnalysisLoading ? '解析加载中…' : '解析未发布'}
+      />
+    }
+    const hasActiveQuestion = Boolean(activeQuestionId)
     const activeEvidenceId = hasActiveQuestion ? lectureSelection?.evidenceId ?? null : null
     const activeOptionLabel = hasActiveQuestion ? lectureSelection?.optionLabel ?? null : null
     return (
@@ -4215,23 +4294,23 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     )
   }
 
+  const lectureToggle = (
+    <Button
+      ref={lectureToggleRef}
+      className="paper-browse-lecture-toggle"
+      tone={lectureOpen ? 'solid' : 'quiet'}
+      size="sm"
+      icon={<Presentation size={16} aria-hidden="true" />}
+      onClick={toggleLecturePanel}
+      aria-pressed={lectureOpen}
+      aria-expanded={lectureOpen}
+    >
+      讲评
+    </Button>
+  )
   const topbarActionsSlot = !reviewRevision ? (
     <>
-      {/* 构件厂第 4 步（2026-11-13，提案 · 单一来源）：讲评开关换成 Button。关着淡墨（和顶栏导航一样），
-          开着石板墨填充（solid，纸白字）。原来按下态的白字被 App.css `.topbar .ghost-button` 的字色盖掉，
-          深底深字几乎看不清；换构件后这个问题没了。图标 14 → 16，和顶栏其余图标一样。 */}
-      <Button
-        ref={lectureToggleRef}
-        className="paper-browse-lecture-toggle"
-        tone={lectureOpen ? 'solid' : 'quiet'}
-        size="sm"
-        icon={<Presentation size={16} aria-hidden="true" />}
-        onClick={toggleLecturePanel}
-        aria-pressed={lectureOpen}
-        aria-expanded={lectureOpen}
-      >
-        讲评
-      </Button>
+      {lectureToggle}
       {/* 字段构件第二轮（2026-11-15）：原来是套了 .ghost-button 的原生下拉，换成 shared-ui/SelectField 小号（28，和旁边的小号键同高），
           标签「PDF 版本」只给读屏（原来是 aria-label，看得见的字没有）。用不了的版本服务器不列出来（usePaperPdfProducts 只拿到能用的），
           没有「为什么用不了」可写，所以用原生下拉，不用 OptionSelectField。 */}
@@ -4270,20 +4349,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         <Button size="sm" onClick={retryPdfProducts}>刷新 PDF 版本</Button>
       </span>}
     </>
-  ) : (
-    <Button
-      ref={lectureToggleRef}
-      className="paper-browse-lecture-toggle"
-      tone={lectureOpen ? 'solid' : 'quiet'}
-      size="sm"
-      icon={<Presentation size={16} aria-hidden="true" />}
-      onClick={toggleLecturePanel}
-      aria-pressed={lectureOpen}
-      aria-expanded={lectureOpen}
-    >
-      讲评
-    </Button>
-  )
+  ) : lectureToggle
 
   async function downloadPaperProduct(): Promise<void> {
     if (!asset || !canonicalConsumption?.publicationDigest || !pdfEdition || reviewRevision || analysisPdfBusy) return
@@ -4310,27 +4376,30 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   if (loading) {
     return (
       <div className="paper-browse-page">
-        <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />
+        {embeddedReview ? renderEmbeddedToolbar?.()
+          : <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />}
         <PaperBrowseOpeningSkeleton showSkeleton={openingPhase === 'waiting'} />
       </div>
     )
   }
 
   if (error || !asset) {
+    const ErrorSurface = embeddedReview ? 'div' : 'main'
     return (
       <div className="paper-browse-page">
-        <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />
-        <main className="paper-browse-error">
+        {embeddedReview ? renderEmbeddedToolbar?.()
+          : <AppTopbar {...shellNav} pageTitle="整卷预览" onBack={onBackToWorkbench} />}
+        <ErrorSurface className="paper-browse-error">
           {/* 共用提示行：哪里没成功、东西还在不在（自己的话），后面照登原话（No-Literal-Fallback，
               原来没原话时补的「这份卷可能还没上线或已被移除…」去掉），行尾「返回找题」。 */}
           <Notice
             kind="error"
             detail={error || null}
-            action={{ label: '返回找题', icon: <ArrowLeft size={16} aria-hidden="true" />, onClick: onBackToWorkbench }}
+            action={{ label: embeddedReview ? '返回列表' : '返回找题', icon: <ArrowLeft size={16} aria-hidden="true" />, onClick: onBackToWorkbench }}
           >
             整卷预览没打开，题库和草稿卷都没动
           </Notice>
-        </main>
+        </ErrorSurface>
       </div>
     )
   }
@@ -4360,13 +4429,14 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
   )
   return (
     <div className={`paper-browse-page${reviewRevision || isOwnerView ? ' paper-browse-page--review' : ''}`}>
-      <AppTopbar
+      {embeddedReview && (renderEmbeddedToolbar ? renderEmbeddedToolbar(lectureToggle) : lectureToggle)}
+      {!embeddedReview && <AppTopbar
         {...shellNav}
         pageTitle={displayTitle}
         onBack={onBackToWorkbench}
         actionsSlot={topbarActionsSlot}
-      />
-      {!openMode && (reviewRevision || (isOwnerView && canonicalConsumption?.publicationDigest && canonicalConsumption.sourceAssetVersion)) && <PaperReviewControls
+      />}
+      {!embeddedReview && !openMode && (reviewRevision || (isOwnerView && canonicalConsumption?.publicationDigest && canonicalConsumption.sourceAssetVersion)) && <PaperReviewControls
         key={`${paperId}:${reviewRevision || canonicalConsumption?.publicationDigest}`}
         paperId={paperId}
         paperName={displayTitle}
@@ -4385,7 +4455,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           lectureOpen ? ' paper-browse-shell--lecture-open' : ''
         }`}
         ref={shellRef}
-        role="main"
+        role={embeddedReview ? 'region' : 'main'}
         aria-labelledby="paper-browse-title"
       >
         <h1 id="paper-browse-title" className="visually-hidden">{displayTitle}</h1>
@@ -4410,10 +4480,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 )}
                 <h1 className="canonical-paper-cover-title" data-canonical-cover-title="">{listeningOpening.title}</h1>
                 <div className="canonical-paper-cover-notices" data-canonical-cover-notices="">
-                  {listeningOpening.notices.length > 0 && !coverNoticesCarrySourceNumbers(canonicalConsumption, listeningOpening) && <strong>注意事项：</strong>}
-                  {coverNoticesCarrySourceNumbers(canonicalConsumption, listeningOpening)
-                    ? listeningOpening.notices.map((notice) => <p key={notice}>{notice}</p>)
-                    : <ol>{listeningOpening.notices.map((notice) => <li key={notice}>{notice}</li>)}</ol>}
+                  <strong>注意事项：</strong>
+                  <ol>{listeningOpening.notices.map((notice) => <li key={notice}>{notice}</li>)}</ol>
                 </div>
               </header>
             )}
@@ -4433,6 +4501,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
               ? null
               : renderBlock(block, index),
             )}
+          </div>
             {/*
               刀 2 修复轮 ②: 七选五衔接句高亮覆盖层。渲染条件与 hook 的
               `enabled` 同款门控（panelGroupModel?.kind === 'sevenChoices'）
@@ -4456,7 +4525,6 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                 ))}
               </div>
             )}
-          </div>
         </div>
         {lectureOpen && (
           <aside className="paper-browse-lecture-panel" aria-label="讲评" ref={rightPanelRef}>

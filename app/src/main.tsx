@@ -124,6 +124,14 @@ async function bootstrap() {
     return
   }
 
+  if (new URLSearchParams(window.location.search).get('view') === 'ops-review') {
+    const [{ OpsReviewPage }, { AuthGate }] = await Promise.all([
+      import('./features/ops-review/OpsReviewPage.tsx'), import('./auth/AuthGate.tsx'),
+    ])
+    root.render(<StrictMode><AuthGate><OpsReviewPage /></AuthGate></StrictMode>)
+    return
+  }
+
   const [{ default: App }, { AuthGate }] = await Promise.all([
     import('./App.tsx'),
     import('./auth/AuthGate.tsx'),

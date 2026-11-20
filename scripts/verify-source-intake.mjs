@@ -330,7 +330,7 @@ async function verifyCorrectedReviewUploadBaseRevision() {
       INSERT INTO import_review_papers
         (paper_id, paper_name, latest_revision_id, created_at, updated_at)
       VALUES (?, ?, ?, ?, ?)
-    `).run('paper-corrected-upload', 'Corrected upload fixture', 'rev-base', timestamp, timestamp)
+    `).run('paper-corrected-upload', 'Corrected upload fixture', 'rev-00000000-0000-4000-8000-0000000000ba', timestamp, timestamp)
     db.prepare(`
       INSERT INTO import_review_revisions (
         id, paper_id, revision_number, state, source_digest, candidate_digest,
@@ -338,7 +338,7 @@ async function verifyCorrectedReviewUploadBaseRevision() {
         manifest_json, created_at, finalized_at, updated_at
       ) VALUES (?, ?, 1, 'changes_requested', ?, ?, ?, ?, ?, '{}', ?, ?, ?)
     `).run(
-      'rev-base',
+      'rev-00000000-0000-4000-8000-0000000000ba',
       'paper-corrected-upload',
       digest(Buffer.from('base-source')),
       digest(Buffer.from('base-candidate')),
@@ -356,7 +356,7 @@ async function verifyCorrectedReviewUploadBaseRevision() {
     const projection = freezeReviewFixture(source.reviewRoot)
     const manifest = {
       ...reviewFixtureManifest(source.reviewRoot, projection),
-      expectedBaseRevisionId: 'rev-base',
+      expectedBaseRevisionId: 'rev-00000000-0000-4000-8000-0000000000ba',
       producerBuildId: 'correction-build',
     }
     manifest.bundleDigest = reviewBundleDigest(manifest)

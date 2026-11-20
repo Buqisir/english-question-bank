@@ -1,15 +1,8 @@
 import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import { chromium } from '../app/node_modules/playwright/index.mjs'
-import { consumerContractRefs, resolveConsumerPresentation } from '../shared/paper-canonical/consumers.mjs'
-import { canonicalAuthorityRef, nck1MaterializationCandidateAuthorityRef } from '../shared/paper-canonical/authority.mjs'
 import { listeningOpening } from '../shared/paper-canonical/listeningPresentation.mjs'
 
-assert.equal(canonicalAuthorityRef.manifestVersion, '36')
-assert.equal(nck1MaterializationCandidateAuthorityRef.manifestVersion, '57')
-for (const ref of Object.values(consumerContractRefs)) {
-  assert.equal(resolveConsumerPresentation(ref).policy.version, '3')
-}
 const sharedCss = readFileSync('shared/papersurface/paperLayout.css', 'utf8')
 const screenCss = readFileSync('app/src/features/paper-browse/paperBrowsePage.css', 'utf8')
   .replace(/^@import[^;]+;/gm, '')

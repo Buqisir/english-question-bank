@@ -75,6 +75,7 @@ function originalPromotionEvidence(store, revision) {
     return buildNck1CompatibilityPackage({
       config: projection.config, manifest: projection.manifest,
       materialization: projection.materialization, sourceProvenance: projection.sourceProvenance,
+      answerCorrections: projection.answerCorrections, answerCorrectionsJson: projection.answerCorrectionsJson,
       sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
       analysisSidecars: projection.analysisSidecars, paragraphSummariesBytes: projection.paragraphSummariesBytes,
       publicSearchMetadataBytes: projection.publicSearchMetadataBytes, sourceReferencesBytes: projection.sourceReferencesBytes,
@@ -310,6 +311,8 @@ function preparePromotionContent({ store, paperId, promotion, revision, reviewRo
     config: projection.config,
     manifest: projection.manifest,
     materialization: projection.materialization,
+    answerCorrections: projection.answerCorrections,
+    answerCorrectionsJson: projection.answerCorrectionsJson,
     sourceProvenance: projection.sourceProvenance,
     sourceAssetVersion: projection.candidate.interpretation.sourceAssetVersion,
     analysisSidecars: projection.analysisSidecars,
@@ -491,6 +494,8 @@ export function createSinglePaperPromotionService({
           fileStorage,
           approvedIdentity: {
             ...promotion,
+            approvedBy: revision.approval?.approvedBy,
+            approvedAt: revision.approval?.approvedAt,
             rendererBuildId: revision.rendererBuildId,
             ...profileIdentity,
           },

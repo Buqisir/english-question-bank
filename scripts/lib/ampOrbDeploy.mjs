@@ -1232,7 +1232,9 @@ export function parseDeploymentControllerOutput(output, expectedSha) {
     !receipt
     || typeof receipt !== 'object'
     || Array.isArray(receipt)
-    || Object.keys(receipt).sort().join('\n') !== expectedKeys.join('\n')
+    || Object.keys(receipt).sort().join('\n') !== [
+      ...expectedKeys, ...(Object.hasOwn(receipt, 'rolledBackFrom') ? ['rolledBackFrom'] : []),
+    ].sort().join('\n')
   ) {
     throw new Error('Deployment controller response shape is invalid')
   }
@@ -1242,6 +1244,8 @@ export function parseDeploymentControllerOutput(output, expectedSha) {
     || receipt.state !== 'reported'
     || !['success', 'failure'].includes(receipt.conclusion)
     || receipt.targetSha !== sha
+    || (Object.hasOwn(receipt, 'rolledBackFrom')
+      && (!SHA.test(receipt.rolledBackFrom || '') || receipt.rolledBackFrom !== receipt.previousSha))
     || (receipt.previousSha !== null && !SHA.test(receipt.previousSha))
     || !['boolean'].includes(typeof receipt.staged)
     || !['boolean'].includes(typeof receipt.noOp)
@@ -1506,6 +1510,7 @@ export function parseDeploymentControllerPreflight(output) {
       'layout',
       'productionSha',
       'schemaVersion',
+      ...(Object.hasOwn(preflight, 'previousSha') ? ['previousSha'] : []),
       ...(preflight.protocol === 'eqb-controlled-ssh-v1' ? ['protocol', 'hostConfigurationSha'] : []),
     ].sort().join('\n')
     || (preflight.protocol !== undefined && (preflight.protocol !== 'eqb-controlled-ssh-v1'
@@ -1513,6 +1518,8 @@ export function parseDeploymentControllerPreflight(output) {
     || preflight.schemaVersion !== 'eqb-deployment-preflight-v2'
     || preflight.controllerVersion !== 'eqb-deploy-controller-v1'
     || !SHA.test(preflight.productionSha || '')
+    || (Object.hasOwn(preflight, 'previousSha')
+      && preflight.previousSha !== null && !SHA.test(preflight.previousSha || ''))
     || !/^[a-z-]+$/u.test(preflight.eqb || '')
     || !/^[a-z-]+$/u.test(preflight.caddy || '')
     || !['legacy', 'release'].includes(preflight.layout)

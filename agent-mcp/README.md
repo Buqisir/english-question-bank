@@ -4,7 +4,7 @@
 
 ```bash
 cd /absolute/path/to/english-question-bank/agent-mcp
-npm install --no-package-lock
+npm ci
 ```
 
 在 https://eqbank.cc/?view=admin 的「Agent 口令」中创建可撤销口令，通过本机安全配置向启动客户端的进程提供 `EQB_AGENT_TOKEN`。不要把口令写入仓库、命令行参数或日志。

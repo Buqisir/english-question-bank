@@ -185,10 +185,13 @@ try {
     ...publicationFixtureInput(reviewed), fileStorage,
     canonicalRequest: loadCanonicalImportRequest(fixture.requestPath), db, paperAssetsDir })
   assert.equal(result.ok, true)
-  const stored = await loadStoredProducts({ db, paperAssetsDir, blobStore,
-    consumption: Object.values(result.publish.consumers)[0] })
+  const consumption = Object.values(result.publish.consumers)[0]
+  const stored = await loadStoredProducts({ db, blobStore, consumption })
   assert.equal(stored.manifest.files.length, 3)
-  for (const file of manifest.files) assert.deepEqual(stored.bytes[file.path], frozen.frozenProducts.bytes[file.path])
+  for (const file of manifest.files) {
+    const product = await loadStoredProducts({ db, blobStore, consumption, edition: path.basename(file.path, '.pdf') })
+    assert.deepEqual(product.bytes[file.path], frozen.frozenProducts.bytes[file.path])
+  }
   console.log(`PASS explicit no-listening declaration, three-product freeze/validation/report/publication/storage${previewRoot ? `; real PDFs retained at ${root}/products` : ''}`)
 } finally {
   db.close()

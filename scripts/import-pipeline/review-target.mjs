@@ -24,3 +24,24 @@ export function resolveReviewOrigin(root, environment = process.env) {
   }
   return actual
 }
+
+export function hydratedEvidenceBase(paperDir) {
+  const file = path.join(paperDir, 'signals', 'review-restore.json')
+  if (!existsSync(file)) return null
+  let restore
+  try {
+    restore = JSON.parse(readFileSync(file, 'utf8'))
+  } catch {
+    throw new Error('Review restore binding is not valid JSON')
+  }
+  const revision = restore.sealedRevision
+  if (!revision) return null
+  const root = path.resolve(import.meta.dirname, '../..')
+  const target = resolveReviewOrigin(root, { ...process.env,
+    QUESTION_BANK_IMPORT_OPS_ORIGIN: process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN || restore.origin })
+  if (restore.schemaVersion !== 'review-restore-v1' || restore.origin !== target
+    || restore.paperId !== revision.paperId || restore.revisionId !== revision.id
+    || restore.bundleDigest !== revision.bundleDigest) throw new Error('Review restore binding does not match the retained revision')
+  const config = path.join(paperDir, 'signals', 'review-restore-config.json')
+  return { revision, ...(existsSync(config) ? { configBytes: readFileSync(config) } : {}) }
+}

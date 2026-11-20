@@ -46,7 +46,32 @@
         "transcript": { "type": "string", "minLength": 1 },
         "translationZh": { "type": "string", "minLength": 1 },
         "topic": { "$ref": "#/$defs/topic" },
-        "summaryZh": { "type": "string", "minLength": 1 }
+        "summaryZh": { "type": "string", "minLength": 1 },
+        "sentences": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/sentence" } }
+      }
+    },
+    "sentence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "en", "utf16Start", "utf16End", "passes"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "en": { "type": "string", "minLength": 1 },
+        "zh": { "type": "string", "minLength": 1 },
+        "speaker": { "type": "string", "minLength": 1 },
+        "utf16Start": { "type": "integer", "minimum": 0 },
+        "utf16End": { "type": "integer", "minimum": 1 },
+        "passes": {
+          "type": "array", "minItems": 1, "maxItems": 2,
+          "items": {
+            "type": "object", "additionalProperties": false, "required": ["start", "end"],
+            "properties": {
+              "start": { "type": "number", "minimum": 0 },
+              "end": { "type": "number", "exclusiveMinimum": 0 }
+            }
+          }
+        },
+        "questionNumbers": { "type": "array", "uniqueItems": true, "items": { "type": "integer", "minimum": 1 } }
       }
     },
     "distractor": {

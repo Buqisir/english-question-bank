@@ -319,9 +319,20 @@ try {
   delete missing.answerKey.answers['question:36']
   assert.throws(() => buildNck1AnalysisProjection({ rootDir: root,
     materialization: zhejiang, paperAsset: missing }), /authoritative objective answers/)
+  const projectReview = (sealed = false) => buildNck1AnalysisProjection({ rootDir: root,
+    materialization: zhejiang, paperAsset, allowPartialAnalyses: true, sealed })
+  const extraReading = path.join(root, 'analysis-reading-d.json')
+  writeFileSync(extraReading, '{}')
+  assert.equal(projectReview(true).digest, projected.digest)
+  assert.throws(() => projectReview(), /no matching Materialization group/)
+  rmSync(extraReading)
+  const continuation = path.join(root, 'analysis-continuation.json')
+  const continuationBytes = readFileSync(continuation)
+  rmSync(continuation)
+  assert.throws(() => projectReview(), /analysis-continuation\.json/)
+  writeFileSync(continuation, continuationBytes)
   rmSync(path.join(root, 'analysis-reading-c.json'))
-  assert.throws(() => buildNck1AnalysisProjection({ rootDir: root,
-    materialization: zhejiang, paperAsset }), /analysis-reading-c.json/)
+  assert.throws(() => projectReview(), /analysis-reading-c\.json/)
   console.log('PASS Zhejiang: reading A–C/10, seven 31–35, cloze 36–55/20; single/full validation; missing analysis/answer rejected')
 
   const usage = spawnSync(process.execPath, ['scripts/import-pipeline/validate-analysis.mjs'], { encoding: 'utf8' })

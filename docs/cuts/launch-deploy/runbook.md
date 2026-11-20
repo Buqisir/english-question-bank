@@ -831,14 +831,14 @@ handwritten SHA is involved.
 
 ### Daily backup to R2 (Slice 3)
 
-`scripts/backup-to-r2.sh` takes an online `.backup` snapshot of both
-sqlite dbs (`question-bank.sqlite` + `user-data.sqlite` — a backup is a
-read-only off-site copy, so user data IS in scope here, unlike
-pull-run-push), gates each snapshot on `PRAGMA integrity_check == ok`, and
-pushes the snapshots + `app/public/paper-assets/` + `data/user-space/files/`
-to R2 with `rclone copy` (never `sync` — copy only adds, so a local
-mis-delete can never propagate to the off-site copy). It then prunes old
-dated prefixes as a separate, retention-guarded step.
+`scripts/backup-to-r2.sh` takes online `.backup` snapshots of `question-bank.sqlite`,
+`user-data.sqlite`, and `import-ops.sqlite`, and checks each with
+`PRAGMA integrity_check`. It uses `rclone copy` to store Review revisions and
+local private blobs under `files/import-ops/files/` and `files/published-blobs/`
+respectively. The three snapshots, `paper-assets/`, and `user-space/` go under
+the UTC timestamp prefix. Retention prunes dated prefixes only. For restore,
+use the selected dated prefix and its `import-ops-files/` and `private-blobs/`
+directories for older backups, or the shared `files/` locations for new backups.
 
 **1. Install rclone** on the server:
 

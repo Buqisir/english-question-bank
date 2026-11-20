@@ -3791,6 +3791,108 @@ function pruningResult(fixture) {
   return JSON.parse(fixture.state.pruningLogs.at(-1).slice('EQB_RELEASE_PRUNE '.length))
 }
 
+section('Actions pause, protected-path decision and approved-candidate binding')
+const ciSource = deploymentCliSource.slice(deploymentCliSource.indexOf('const repoApi ='),
+  deploymentCliSource.lastIndexOf('\ntry {'))
+for (const scenario of ['paused', 'protected', 'auto', 'approved', 'changed-current', 'changed-target', 'rollback']) {
+  const mutations = [], issues = [], output = []
+  const paths = scenario === 'protected' || scenario === 'approved' ? ['server/api.mjs'] : []
+  let live = oldSha
+  const env = { GITHUB_ACTIONS: 'true', GITHUB_REF: 'refs/heads/main', GITHUB_OUTPUT: 'output',
+    EQB_DEPLOY_MODE: scenario === 'approved' ? 'code-only' : 'auto',
+    EQB_EXPECTED_SHA: scenario === 'changed-target' ? oldSha : newSha,
+    EQB_EXPECTED_PRODUCTION: scenario === 'changed-current' ? newSha : oldSha,
+    EQB_EXPECTED_DIGEST: paths.length ? deploymentChangedPathDigest(paths) : '', EQB_ROLLBACK_CONFIRM: 'ROLLBACK' }
+  let error
+  try {
+    await runInNewContext(`(async () => { ${ciSource}\nawait ci('${scenario === 'rollback'
+      ? 'ci-rollback' : ['paused', 'protected'].includes(scenario) ? 'ci-plan' : 'ci-deploy'}') })()`, {
+      process: { env }, console: { log() {} }, AMP_ORB_DEPLOY_REPOSITORY,
+      EQB_PERSISTENCE_AUTHORITY_PATHS, deploymentChangedPathDigest, deployLatestRelease,
+      parseDeploymentControllerPreflight, parseDeploymentControllerOutput,
+      appendFileSync: (file, value) => { if (file === 'output') output.push(value) },
+      execFileSync: (_command, args, options) => {
+        if (args.includes('--method')) { issues.push(JSON.parse(options.input)); return '{"html_url":"fixture://issue"}' }
+        return JSON.stringify([args[1].includes('labels=deploy-paused') && scenario === 'paused'
+          ? [{ number: 1 }] : []])
+      },
+      candidate: async () => ({ sha: newSha }), assertCandidateStillAuthoritative: async () => {},
+      runGit: () => paths.join('\n'), withDeploymentCredentials: async callback => callback({}),
+      invokeController: args => {
+        if (args[0] === 'preflight') return JSON.stringify({
+          schemaVersion: 'eqb-deployment-preflight-v2', controllerVersion: EQB_DEPLOY_CONTROLLER_VERSION,
+          productionSha: live, previousSha: prunePreviousSha, eqb: 'active', caddy: 'active', layout: 'release',
+        })
+        mutations.push(args); live = args[1]
+        const receipt = JSON.parse(controllerReceipt({ targetSha: live }).slice('EQB_DEPLOY_RECEIPT '.length))
+        if (scenario === 'rollback') receipt.rolledBackFrom = oldSha
+        return `EQB_DEPLOY_RECEIPT ${JSON.stringify(receipt)}`
+      },
+    })
+  } catch (caught) { error = caught }
+  const blocked = ['changed-current', 'changed-target'].includes(scenario)
+  assert(Boolean(error) === blocked && mutations.length === (['auto', 'approved', 'rollback'].includes(scenario) ? 1 : 0),
+    `${scenario}: Actions admits only the intended mutation`)
+  if (scenario === 'protected') assert(output.includes('deploy=false\n')
+    && issues.some(issue => issue.body?.includes('server/api.mjs')), 'protected auto opens decision issue without deploying')
+  if (scenario === 'approved') assert(mutations[0][2] === 'code-only', 'approved classification reaches shared controller path')
+  if (scenario === 'rollback') assert(mutations[0][1] === prunePreviousSha
+    && issues.some(issue => issue.labels?.includes('deploy-paused')), 'rollback selects previous release then pauses deployments')
+}
+
+section('Explicit previous-release rollback through the existing deploy command')
+for (const scenario of ['success', 'migration', 'missing', 'ambiguous', 'marker', 'health', 'older']) {
+  const fixture = controllerFixture()
+  try {
+    writeReleaseMarker(fixture.root, prunePreviousSha)
+    if (scenario !== 'missing') writePruneHistory(fixture, {
+      ...(scenario === 'migration' ? { schemaVersion: 'eqb-reviewed-persistence-receipt-v1' } : {}),
+    })
+    if (scenario === 'ambiguous') writePruneHistory(fixture,
+      { previousSha: pruneObsoleteSha }, 'conflict.json')
+    if (scenario === 'marker') rmSync(path.join(fixture.root, 'releases', prunePreviousSha, '.eqb-release.json'))
+    const originalRun = fixture.dependencies.runSystem
+    if (scenario === 'health') fixture.dependencies.runSystem = (command, args, options) => {
+      if (command === '/usr/bin/curl' && fixture.currentSha() === prunePreviousSha) throw new Error('unhealthy previous')
+      return originalRun(command, args, options)
+    }
+    const before = await runController({ originalCommand: 'preflight', config: fixture.config,
+      dependencies: fixture.dependencies })
+    assert(before.output.previousSha === (['success', 'health', 'older'].includes(scenario) ? prunePreviousSha : null),
+      `${scenario}: preflight exposes only safe rollback target`)
+    assert(parseDeploymentControllerPreflight(JSON.stringify(before.output)).productionSha === oldSha,
+      'Mac preflight parser accepts optional previousSha')
+    const result = await runPruneFixture(fixture, scenario === 'older' ? pruneObsoleteSha : prunePreviousSha)
+    assert(result.exitCode === (scenario === 'success' ? 0 : 1), `${scenario}: rollback conclusion`)
+    assert(fixture.currentSha() === (scenario === 'success' ? prunePreviousSha : oldSha),
+      `${scenario}: current pointer is preserved or restored`)
+    if (scenario === 'success') {
+      assert(result.output.rolledBackFrom === oldSha && fixture.state.sourceCalls.length === 0
+        && fixture.state.buildCalls.length === 0, 'rollback records origin and bypasses main fetch/build')
+      assert(parseDeploymentControllerOutput(formatControllerOutput({ ...result.output,
+        receiptPath: `/opt/eqb/deployments/receipts/rollback-${oldSha}.json` }),
+      prunePreviousSha).rolledBackFrom === oldSha, 'rollback receipt passes compatible parser')
+      fixture.state.mainSha = oldSha
+      fixture.state.persistenceAuthorityChange = true
+      const resumed = await runController({ originalCommand: `deploy ${oldSha} code-only ${deploymentChangedPathDigest(['server/api.mjs'])}`,
+        config: fixture.config, dependencies: fixture.dependencies })
+      assert(resumed.exitCode === 0 && resumed.output.previousSha === prunePreviousSha && !resumed.output.rolledBackFrom
+        && fixture.state.sourceCalls.some(call => call.includes('fetch')),
+      'reviewed resume of the former current release still uses exact-main and protected-diff admission')
+      fixture.state.mainSha = newSha
+      fixture.state.persistenceAuthorityChange = false
+      const next = await runPruneFixture(fixture)
+      assert(next.exitCode === 0 && next.output.previousSha === oldSha
+        && existsSync(path.join(fixture.root, 'releases', prunePreviousSha)),
+      'subsequent deployment uses the actual current and retains its recorded previous release')
+    }
+    if (scenario === 'migration') assert(result.output.failureCode === 'ROLLBACK_AFTER_MIGRATION_REFUSED',
+      'migrated current cannot roll back code without data recovery')
+    if (scenario === 'health') assert(result.output.rolledBack && result.output.rollbackHealthy,
+      'unhealthy rollback candidate automatically restores original healthy release')
+  } finally { rmSync(fixture.root, { recursive: true, force: true }) }
+}
+
 {
   const fixture = controllerFixture()
   try {

@@ -33,7 +33,7 @@ export function listeningNavigationGroup(group) {
       ? group.occurrences.map(occurrence => ({ ...occurrence.playback, evidencePaths: occurrence.evidencePaths })) : [] }
 }
 
-export function assertListeningRuleEvidence(value, review, transcript) {
+export function assertListeningRuleEvidence(value, review, transcript, asrWords = new Map()) {
   const fail = detail => { throw new Error(`Listening rule evidence: ${detail}`) }
   if (!exactKeys(value, ['schemaVersion', 'rule', 'normalization', 'input', 'rawEvidence', 'groups', 'diagnostic'])
     || value.schemaVersion !== LISTENING_RULE_EVIDENCE_VERSION
@@ -61,9 +61,38 @@ export function assertListeningRuleEvidence(value, review, transcript) {
       || Object.keys(group).some(key => ![...groupKeys, 'partialOccurrences', 'observedWindowBindings', 'engineAttempts'].includes(key))
       || group.engineAttempts.some(attempt => Object.keys(attempt).some(key =>
         ![...engineKeys, 'partialOccurrences', 'observedWindowBindings'].includes(key)))) fail('invalid group summary')
-    if (review.method === 'asr_source_comparison'
+    const differs = review.method !== 'audio_source_comparison'
       && digestJson(listeningNavigationGroup(group)) !== digestJson(pick(review.groups[i],
-        ['segmentId', 'questionNumbers', 'decision', 'playback', 'occurrences']))) fail('navigation differs from rule')
+      ['segmentId', 'questionNumbers', 'decision', 'playback', 'occurrences']))
+    if (differs && (review.method === 'asr_source_comparison'
+      || (review.method === 'agent_asr_comparison' && group.decision !== 'review_required'))) fail('navigation differs from rule')
+    if (review.method === 'agent_asr_comparison'
+      && (differs || Object.hasOwn(review.groups[i], 'boundaryJudgment'))) {
+      const basis = review.groups[i].boundaryJudgment
+      const nonempty = text => typeof text === 'string' && text.trim().length > 0
+      if (!exactKeys(basis, ['start', 'end'])) fail('missing agent ASR boundary basis')
+      for (const [side, edge] of Object.entries(basis)) {
+        if (!exactKeys(edge, ['sourceText', 'words']) || !nonempty(edge.sourceText)
+          || !Array.isArray(edge.words) || !edge.words.length) fail('missing agent ASR boundary basis')
+        for (const word of edge.words) {
+          if (!exactKeys(word, ['text', 'startSeconds', 'endSeconds', 'evidencePath'])
+            || !nonempty(word.text) || !Number.isFinite(word.startSeconds) || !Number.isFinite(word.endSeconds)
+            || word.startSeconds < 0 || word.endSeconds <= word.startSeconds
+            || word.endSeconds > review.subject.durationSeconds
+            || !review.evidence.some(file => file.kind === 'asr_window' && file.path === word.evidencePath)) {
+            fail('invalid agent ASR boundary basis')
+          }
+          const nearby = side === 'start' ? word.startSeconds - review.groups[i].playback?.startSeconds
+            : review.groups[i].playback?.endSeconds - word.endSeconds
+          if (!(nearby >= 0 && nearby <= 1.5)
+            || !asrWords.get(word.evidencePath)?.some(observed => observed.rawRunText === word.text
+              && Math.abs(observed.runStartSeconds - word.startSeconds) <= 0.05 + 1e-9
+              && Math.abs(observed.runEndSeconds - word.endSeconds) <= 0.05 + 1e-9)) {
+            fail('agent ASR boundary word missing or far from playback')
+          }
+        }
+      }
+    }
   }
   const d = value.diagnostic
   if (!exactKeys(d, ['schemaVersion', 'path', 'encoding', 'sha256', 'byteLength', 'decodedSha256', 'decodedByteLength'])

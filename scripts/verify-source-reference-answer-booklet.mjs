@@ -15,6 +15,7 @@ import { materializationSlotSpecs, profileHeadingSpecs } from '../shared/paper-c
 import { SOURCE_INSTRUCTION_SLOTS } from '../shared/paper-canonical/sourcePresentation.mjs'
 import { resolveCanonicalAuthority, zhejiangLegacyReadingRangesAuthorityRef } from '../shared/paper-canonical/authority.mjs'
 import { prepareSourceReferences, validateSourceReferences, sourceReferenceBlocks, sourceReferenceSourceView } from '../server/paper-import/sourceReferences.mjs'
+import { assertSourceReferenceAdmission } from '../server/paper-import/sourceReferenceAdmission.mjs'
 import { buildAnswerOnlyHtml, buildAssembledAnswerOnlyHtml } from '../server/answer-renderer.mjs'
 import { renderPaginatedPaper } from '../server/draft-paper/paginationRenderer.mjs'
 import { closeChromiumPool } from '../server/draft-paper/chromiumPool.mjs'
@@ -513,6 +514,17 @@ function contractChecks() {
     change(sidecar.groups[0].scoring.entries[0].blocks[1])
     assert(validateSourceReferences({ ...structured, sidecar }).some(issue => issue.code === code), code)
   }
+  const sidecar = structuredClone(structured.sourceReferences)
+  sidecar.groups[0].essays.entries[0].paragraphs[0].text = 'Mismatched DOCX sample title'
+  sidecar.groups[0].scoring.entries[0].blocks[1].rows.reverse()
+  const warnings = []
+  const onWarning = message => warnings.push(message)
+  const sourceInput = { documents: structured.sourceDocuments }
+  assertSourceReferenceAdmission({ ...structured, sidecar, sourceInput, onWarning })
+  assert(warnings.some(message => message.includes('SOURCE_REFERENCES_TEXT_DISAGREES')))
+  assert(warnings.some(message => message.includes('SOURCE_REFERENCES_TABLE_INVALID')))
+  assert.throws(() => assertSourceReferenceAdmission({ ...structured, sidecar, onWarning,
+    sourceInput: { documents: [] } }), /SOURCE_REFERENCES_SOURCE_BYTES_CHANGED/)
   console.log('PASS source-reference binding, native paragraph replay, absence, variants and independent answer content')
 }
 

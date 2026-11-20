@@ -1,12 +1,16 @@
+import { readFileSync } from 'node:fs'
 import {
   buildAgentOcrCorrectionReport,
   buildImportReviewProjection,
   ocrReviewBundleFilePaths,
   reviewBundleFilePaths,
   reviewBundleFilePathsForProjection,
+  resolveReviewFile,
   validateNck1OcrReviewConfirmation,
 } from './revisionProjection.mjs'
-import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { LISTENING_REVIEW_FILE } from '../paper-import/listeningReview.mjs'
+import { SPELLING_REVIEW_FILE, verifyListeningInsertionOccurrences } from '../paper-import/spellingReview.mjs'
 import { buildProductPreviewPayload, buildStoredReviewSubject } from './reviewSubject.mjs'
 import { inspectSealedReviewFiles } from './sealedReviewFiles.mjs'
 
@@ -31,12 +35,25 @@ export function finalizeContentSubject(directory, revision, projection) {
 }
 
 // Shared by the synchronous internal seam and the read-only worker.
-export function finalizeProjection(directory, revision, { requireAnalyses = revision.reviewKind === 'candidate' } = {}) {
-  return buildImportReviewProjection(directory, {
+export function finalizeProjection(directory, revision, {
+  requireAnalyses = revision.reviewKind === 'candidate',
+  evidenceBase = revision.evidenceBase ?? null,
+} = {}) {
+  const projection = buildImportReviewProjection(directory, {
     reviewKind: revision.reviewKind,
     requireAnalyses,
     expectedCandidateDigest: revision.candidateDigest,
-  })
+    replayReferencesFromRevisionId: evidenceBase?.directory ? revision.manifest?.expectedBaseRevisionId : null,
+  }, evidenceBase)
+  if (revision.manifest?.files?.some(file => file.path === SPELLING_REVIEW_FILE)) {
+    verifyListeningInsertionOccurrences(readFileSync(resolveReviewFile(directory, SPELLING_REVIEW_FILE)), () => {
+      const descriptor = evidenceBase?.revision?.manifest?.files?.find(file => file.path === LISTENING_REVIEW_FILE)
+      if (!descriptor) return null
+      const bytes = readFileSync(resolveReviewFile(evidenceBase.directory, LISTENING_REVIEW_FILE))
+      return bytes.length === descriptor.byteLength && sha256(bytes) === descriptor.sha256 ? JSON.parse(bytes) : null
+    })
+  }
+  return projection
 }
 
 export function finalizeInventory(directory, revision, projection = null) {

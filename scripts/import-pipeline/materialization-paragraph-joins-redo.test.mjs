@@ -44,7 +44,7 @@ test('paragraph join redo archives downstream while retaining sealed OCR; stale 
   json(stateFile, state)
   await invalidateParagraphJoinDownstream(paperId, digest)
   const retained = JSON.parse(readFileSync(stateFile))
-  assert.deepEqual(Object.keys(retained.steps), names.slice(0, 4))
+  assert.deepEqual(Object.keys(retained.steps), [...names.slice(0, 4), 'listening-review'])
   assert.equal(sha256(readFileSync(materialization)), digest)
   for (const file of sealed) assert.equal(snapshot(paper)[`materialization/${file}`], before.paper[`materialization/${file}`])
   assert.equal(snapshot(paper)['signals/agent-proofreading-receipt.json'], before.paper['signals/agent-proofreading-receipt.json'])

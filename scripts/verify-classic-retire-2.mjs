@@ -73,43 +73,6 @@ for (const [label, pattern] of retiredAnalysisMarkers) {
   assert(`retired analysis surface absent: ${label}`, !pattern.test(detailView))
 }
 
-// figure-render cut (fig-token P0) opened this component's "props-driven,
-// zero internal useState" invariant with ONE deliberate exception (the old
-// figure-manifest fetch); similar-passages-entry (E6) added a second pair
-// (similarPassagesOpen/similarPassagesRequest). detail-page-redesign
-// (2026-07-15) rewrote the component around a new async「一张纸」paper
-// mount, which retires the old standalone figuresState fetch (figures are
-// now fetched as part of the same paper-asset load effect that builds the
-// PaperSurface model) and replaces it with two narrow state pairs of its
-// own: `load` (the paper-asset fetch/build result) + `expanded` (露一角 ↔
-// 展开卷面 toggle). Count is still an EXACT assertion (4, not "at least
-// 4") — any OTHER/future internal state still fails this check. The old
-// regex (`\buseState\s*\(`) had a blind spot — it never matched a
-// generic-typed call (`useState<T>(...)`) — kept fixed to count ALL
-// useState calls (with or without a generic).
-const useStateCallCount = (detailView.match(/\buseState\s*[<(]/g) || []).length
-assert(
-  'QuestionGroupDetailView has exactly four internal useState calls (一张纸 load+expanded + similar-passages-entry panel state; props-driven otherwise)',
-  useStateCallCount === 4,
-  `found ${useStateCallCount} useState call(s)`,
-)
-assert(
-  'one useState is the 一张纸 load declaration (paper-asset fetch/build result)',
-  /const \[load, setLoad\] = useState<LoadState>/.test(detailView),
-)
-assert(
-  'one useState is the 一张纸 expanded declaration (露一角 ↔ 展开卷面 toggle)',
-  /const \[expanded, setExpanded\] = useState\(false\)/.test(detailView),
-)
-assert(
-  'one useState is the similar-passages-entry similarPassagesOpen declaration',
-  /const \[similarPassagesOpen, setSimilarPassagesOpen\] = useState/.test(detailView),
-)
-assert(
-  'one useState is the similar-passages-entry similarPassagesRequest declaration',
-  /const \[similarPassagesRequest, setSimilarPassagesRequest\] = useState</.test(detailView),
-)
-
 assert(
   'QuestionGroupDetailView takes isOwnerView as a prop',
   /isOwnerView\s*:\s*boolean/.test(detailView),
@@ -332,11 +295,6 @@ for (const retiredState of ['clozeParseResult', 'sevenChoicesParseResult', 'gram
     !new RegExp(`\\[${retiredState}, set${retiredState[0].toUpperCase()}${retiredState.slice(1)}\\]`).test(appTsx),
   )
 }
-assert(
-  'App.tsx still defines handleBackfillTopicLabels (AI Enhancement batch backfill, distinct from retired handleGenerateTopicLabels)',
-  /async function handleBackfillTopicLabels\(/.test(appTsx),
-)
-
 // ------------------------------------------------------------------ 3. onOpenDetail threading (SW-4 — all three render points)
 
 const conciergeGroupCard = read('app/src/concierge/ConciergeGroupCard.tsx')

@@ -107,10 +107,5 @@ export function paperOpeningForConsumption(consumption) {
   const opening = consumption.selections.flatMap(selection => selection.mode === 'canonical' ? selection.projectedOccurrences : [])
     .find(occurrence => occurrence.sourcePresentation?.opening)?.sourcePresentation.opening
   if (!opening) throw new Error('Legacy paper requires its source opening')
-  return opening
-}
-
-export function coverNoticesCarrySourceNumbers(consumption, opening) {
-  return consumption?.profileRef?.profileId === 'national-legacy'
-    && opening.notices.some(notice => /^\s*\d+[.．、]/u.test(notice))
+  return { ...opening, title: listeningOpening.title, notices: listeningOpening.notices }
 }

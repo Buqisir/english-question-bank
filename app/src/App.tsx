@@ -9,8 +9,6 @@ import {
   type QuestionGroupDetail,
   type ReadingParseQuestionGroupResult,
 } from './domain/questionBank'
-import { usePaperDraft } from './paperAssembly/usePaperDraft'
-import type { PaperDraftEditReason } from './paperAssembly/paperDraftModel'
 import { ConciergeDesk } from './concierge/ConciergeDesk'
 import {
   RECENTLY_OPENED_OPEN_SCOPE,
@@ -20,13 +18,10 @@ import {
 } from './concierge/recentlyOpened.ts'
 import { parsePaperIdFromHref } from './concierge/paperSurfaceHref'
 import { useConciergeDesk } from './concierge/useConciergeDesk'
-import { usePaperExports } from './paperAssembly/usePaperExports'
 import {
   deleteQuestionGroup as deleteQuestionGroupRequest,
   fetchQuestionGroupDetail,
   fetchQuestionGroups,
-  backfillTopicLabels,
-  type BackfillTopicLabelsResult,
 } from './services/questionGroups'
 import { PaperBrowsePage, type AddGroupsOutcome } from './features/paper-browse/PaperBrowsePage'
 import { DraftPaperWorkbench } from './features/draft-paper/DraftPaperWorkbench'
@@ -48,56 +43,40 @@ import { logout } from './auth/session.ts'
 import { EntryModal } from './workbench/EntryModal'
 import { QuestionGroupDetailView } from './features/question-detail/QuestionGroupDetailView'
 
-const DEEPSEEK_MODELS = [
-  { value: 'deepseek-v4-flash', label: 'deepseek-v4-flash（推荐）' },
-  { value: 'deepseek-v4-pro', label: 'deepseek-v4-pro（高性能）' },
-] as const
-
-const DEEPSEEK_MODEL_ALIASES: Record<string, string> = {
-  'deepseek-v4-pro': 'deepseek-v4-pro',
-  'deepseek-v4-flash': 'deepseek-v4-flash',
-}
-
-function normalizeAiModel(value: string) {
-  const rawModel = String(value || '').trim()
-  if (!rawModel) return DEEPSEEK_MODELS[0].value
-  const normalized = rawModel.toLowerCase().replace(/\s+/g, '').replace(/_/g, '-')
-  return DEEPSEEK_MODEL_ALIASES[normalized] || DEEPSEEK_MODELS[0].value
-}
-
-const DEFAULT_AI_MODEL = DEEPSEEK_MODELS[0].value
-
 // detail-page-redesign (2026-07-15): buildGrammarVerifyResult /
 // buildClozeVerifyResult / buildSevenChoicesVerifyResult retired — their
 // only call sites were the openDetail backfill's now-deleted
 // setVerifyResult(...) calls (see the retired detail-page AI-analysis
 // sections, spec 负空间①).
 
-// flow-panel 刀 3: openPaperBrowse's入口带态 options bag. A named type (not
-// an inline `{ }` literal in the callback's parameter list) — an inline
-// literal would put a `{` before the callback body and break
-// verify-paper-browse.mjs's `[^{]*\{` body-extraction regex.
-type OpenPaperBrowseOptions = { questionId?: string | null; lecture?: boolean; similar?: boolean }
+function parseAppRoute(search = typeof window === 'undefined' ? '' : window.location.search) {
+  const params = new URLSearchParams(search)
+  return {
+    view: params.get('view'),
+    groupId: params.get('groupId'),
+    paperId: params.get('paperId'),
+    draftPaperId: params.get('draftPaperId'),
+    focusGroupId: params.get('focusGroupId'),
+    questionId: params.get('questionId'),
+    reviewRevision: params.get('reviewRevision'),
+    lecture: params.get('lecture') === '1',
+    similar: params.get('similar') === '1',
+    setId: params.get('setId'),
+    meaningRecallSetId: params.get('meaningRecallSetId'),
+  }
+}
 
-// 草稿卷工作台的地址：`?view=draft-paper[&draftPaperId=<id>][&focusGroupId=<gid>]`，其余参数照当前地址留着。
-// openDraftPaperWorkbench 往历史里压的就是它；加入键「已加入」链接的 href 也用它（中键开新标签、复制地址都能到同一处）。
-function draftPaperWorkbenchHref(draftPaperId?: string | null, focusGroupId?: string | null): string {
+function appRouteUrl(view: string | null, changes: Record<string, string | null>) {
   const url = new URL(window.location.href)
-  url.searchParams.set('view', 'draft-paper')
-  // C3b — clear groupId when navigating away from the detail view so it
-  // doesn't linger as an orphan param on an unrelated route.
-  url.searchParams.delete('groupId')
-  if (draftPaperId) {
-    url.searchParams.set('draftPaperId', draftPaperId)
-  } else {
-    url.searchParams.delete('draftPaperId')
+  for (const [key, value] of Object.entries({ view, ...changes })) {
+    if (value === null) url.searchParams.delete(key)
+    else url.searchParams.set(key, value)
   }
-  if (focusGroupId) {
-    url.searchParams.set('focusGroupId', focusGroupId)
-  } else {
-    url.searchParams.delete('focusGroupId')
-  }
-  return `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`
+  return url
+}
+
+function draftPaperRouteParams(draftPaperId?: string | null, focusGroupId?: string | null) {
+  return { groupId: null, draftPaperId: draftPaperId || null, focusGroupId: focusGroupId || null }
 }
 
 function App() {
@@ -106,94 +85,28 @@ function App() {
   // translates open-mode/owner/member into this boolean — consume it directly,
   // never re-derive from `currentUser`.
   const isOwnerView = useIsOwnerView()
-  const [adminRouteActive, setAdminRouteActive] = useState(() => {
-    if (!isOwnerView) return false
-    if (typeof window === 'undefined') return false
-    return new URLSearchParams(window.location.search).get('view') === 'admin'
-  })
-  const [mySpaceRouteActive, setMySpaceRouteActive] = useState(() => {
-    if (typeof window === 'undefined') return false
-    return new URLSearchParams(window.location.search).get('view') === 'my-space'
-  })
-  const [vocabularyReviewRouteActive, setVocabularyReviewRouteActive] = useState(() => {
-    if (typeof window === 'undefined') return false
-    return new URLSearchParams(window.location.search).get('view') === 'vocabulary-review'
-  })
-  const [vocabularyNotebookRoute, setVocabularyNotebookRoute] = useState(() => {
-    if (typeof window === 'undefined') return { active: false, paperId: null as string | null }
-    const params = new URLSearchParams(window.location.search)
-    return {
-      active: params.get('view') === 'vocabulary-notebook',
-      paperId: params.get('paperId'),
+  const [route, setRoute] = useState(parseAppRoute)
+  const adminRouteActive = isOwnerView && route.view === 'admin'
+  const browseRouteActive = route.view === 'browse'
+  // In-page detail and admin returns keep the browse mode they opened from.
+  const returnToBrowse = useRef(false)
+
+  const navigate = useCallback((
+    view: string | null,
+    changes: Record<string, string | null> = {},
+    options: { replace?: boolean; state?: object } = {},
+  ) => {
+    const url = appRouteUrl(view, changes)
+    try {
+      const method = options.replace ? 'replaceState' : 'pushState'
+      window.history[method](options.state ?? window.history.state, '', `${url.pathname}${url.search}${url.hash}`)
+    } catch {
+      // Keep the in-app transition usable even if history is unavailable.
     }
-  })
-  const [vocabularyDictationRouteActive, setVocabularyDictationRouteActive] = useState(() => {
-    if (typeof window === 'undefined') return false
-    return new URLSearchParams(window.location.search).get('view') === 'vocabulary-dictation-workbench'
-  })
-  const [vocabularyReviewSetId, setVocabularyReviewSetId] = useState(() => {
-    if (typeof window === 'undefined') return null as string | null
-    const params = new URLSearchParams(window.location.search)
-    return params.get('view') === 'vocabulary-review' ? params.get('setId') : null
-  })
-  const [vocabularyPracticeRoute, setVocabularyPracticeRoute] = useState(() => {
-    if (typeof window === 'undefined') return { active: false, setId: null as string | null }
-    const params = new URLSearchParams(window.location.search)
-    return {
-      active: params.get('view') === 'vocabulary-practice',
-      setId: params.get('setId'),
-    }
-  })
-  // home-blank — `?view=browse`: the home list surface's browse mode. Unlike
-  // its sibling routes above this does NOT swap out a top-level component —
-  // it's a boolean handed straight into ConciergeDesk (still viewMode
-  // 'list'), which combines it with its own `f.*`-derived hasActiveFilters
-  // into the showListSurface invariant (plan.md 硬契约). Same
-  // boot-read-URL-once + popstate-sync pattern as the routes above.
-  const [browseRouteActive, setBrowseRouteActive] = useState(() => {
-    if (typeof window === 'undefined') return false
-    return new URLSearchParams(window.location.search).get('view') === 'browse'
-  })
-  const [draftPaperRoute, setDraftPaperRoute] = useState(() => {
-    if (typeof window === 'undefined') {
-      return { active: false, draftPaperId: null as string | null, focusGroupId: null as string | null }
-    }
-    const params = new URLSearchParams(window.location.search)
-    return {
-      active: params.get('view') === 'draft-paper',
-      draftPaperId: params.get('draftPaperId'),
-      focusGroupId: params.get('focusGroupId'),
-    }
-  })
-  // 刀B 整卷预览页 (paper-browse): `?view=paper-browse&paperId=<id>
-  // [&focusGroupId=<gid>][&questionId=<qid>][&lecture=1]`. Same
-  // boot-read-URL-once pattern as draftPaperRoute/mySpaceRouteActive above.
-  // flow-panel 刀 3 adds questionId/lecture — carries the入口带态 (讲评态
-  // open + predetermined 题) through a full page load, and is also what the
-  // popstate handler below replays on Back/Forward.
-  const [paperBrowseRoute, setPaperBrowseRoute] = useState(() => {
-    if (typeof window === 'undefined') {
-      return {
-        active: false,
-        paperId: null as string | null,
-        focusGroupId: null as string | null,
-        questionId: null as string | null,
-        reviewRevision: null as string | null,
-        lecture: false,
-        similar: false,
-      }
-    }
-    const params = new URLSearchParams(window.location.search)
-    return {
-      active: params.get('view') === 'paper-browse',
-      paperId: params.get('paperId'),
-      focusGroupId: params.get('focusGroupId'),
-      questionId: params.get('questionId'),
-      reviewRevision: params.get('reviewRevision'),
-      lecture: params.get('lecture') === '1',
-      similar: params.get('similar') === '1',
-    }
-  })
+    if (view !== 'detail' && view !== 'admin') returnToBrowse.current = false
+    setRoute(parseAppRoute(url.search))
+  }, [])
+
   const [questionGroups, setQuestionGroups] = useState<QuestionGroupCard[]>([])
   // 走查第四节第 7 条（Owner 2026-11-14）：题库没拿到时不再悄悄换成仓库里的样例题（原来退到
   // data/sampleQuestionGroups，首页看着像有题，草稿丸却变成 0 组），改成 'error' + 原话，首页说「题库没连上」给「重试」。
@@ -201,28 +114,6 @@ function App() {
   const [dataError, setDataError] = useState<string | null>(null)
   // 题库没拿到时草稿丸的数：单独问一次当前草稿卷（不新建）拿真数；问不到就是不知道（不写 0）。
   const [draftFallback, setDraftFallback] = useState<{ id: string; count: number } | null>(null)
-  // Edit-status orchestration is forwarded into usePaperDraft via a ref so the
-  // hook can be created BEFORE paperExports / saveStatus / previewStatus
-  // setters exist in this scope. The ref is wired up below as soon as the
-  // dependent state is in place.
-  const draftEditedHandlerRef = useRef<(reason: PaperDraftEditReason) => void>(() => {})
-  // C3a (trust-cracks) — `openDetail` is a plain function redeclared every
-  // render (not a useCallback), so the boot mount-effect and the popstate
-  // handler below reach it through this always-current ref instead of
-  // listing it as a hook dependency (which would either resubscribe on
-  // every render or go stale).
-  const openDetailRef = useRef<(id: string, opts?: { writeUrl?: boolean }) => void>(() => {})
-  const paperDraft = usePaperDraft({
-    onDraftEdited: (reason) => draftEditedHandlerRef.current(reason),
-  })
-  const {
-    basket,
-    paperBlocks,
-    paperTitle,
-    questionNumberStart,
-    paperExportStyle,
-    versionType,
-  } = paperDraft
   const [isEntryOpen, setEntryOpen] = useState(false)
   const [entryInitialDetail, setEntryInitialDetail] = useState<QuestionGroupDetail | null>(null)
   const [viewMode, setViewMode] = useState<'list' | 'detail'>('list')
@@ -239,10 +130,6 @@ function App() {
   // for the matching anchor update.
   const [readingParseResult, setReadingParseResult] = useState<ReadingParseQuestionGroupResult | null>(null)
   const [aiApiKey] = useState(() => localStorage.getItem('ai-api-key') || '')
-  const [aiModel] = useState(() => normalizeAiModel(localStorage.getItem('ai-model') || DEFAULT_AI_MODEL))
-  const [backfillStatus, setBackfillStatus] = useState<'idle' | 'loading'>('idle')
-  const [backfillResult, setBackfillResult] = useState<BackfillTopicLabelsResult | null>(null)
-  const [backfillError, setBackfillError] = useState('')
   const [aiThinkingMode, setAiThinkingMode] = useState(() => localStorage.getItem('ai-thinking-mode') === 'on')
   // 首页是归来 — the teacher's own trail of opened passages (localStorage only).
   // Scoped by user id so a shared browser never shows another teacher's trail;
@@ -254,7 +141,7 @@ function App() {
     apiKey: aiApiKey,
     thinkingMode: aiThinkingMode,
   })
-  const aiRunIdRef = useRef(0)
+  const detailRequestRef = useRef(0)
   const refreshQuestionGroups = useCallback(async (ignore?: () => boolean) => {
     try {
       const groups = await fetchQuestionGroups()
@@ -281,27 +168,6 @@ function App() {
     setDataStatus((status) => (status === 'error' ? 'loading' : status))
     void refreshQuestionGroups()
   }, [refreshQuestionGroups])
-  // Paper export flow hook — manages the supported Print HTML/PDF state and actions.
-  const paperExports = usePaperExports({
-    basket,
-    paperBlocks,
-    questionNumberStart,
-    paperExportStyle,
-    paperTitle,
-    versionType,
-  })
-
-  // Wire the Paper Set Draft edit-event router. usePaperDraft is created above
-  // before paperExports exists; this effect binds the actual handler in once
-  // the dependent setters are reachable. saveStatus/previewStatus tracking
-  // was classic-basket-panel-only display state, retired in classic-retire-3;
-  // the draft-edit hook only needs to keep the export cache fresh now.
-  useEffect(() => {
-    draftEditedHandlerRef.current = () => {
-      paperExports.resetExportStatuses()
-    }
-  }, [paperExports])
-
   useEffect(() => {
     let ignore = false
 
@@ -432,34 +298,15 @@ function App() {
     add: addGroupToDraft,
     undo: undoAddGroupToDraft,
     openDraft: (draftPaperId, groupId) => openDraftPaperWorkbench(draftPaperId, groupId),
-    draftHref: (draftPaperId, groupId) => draftPaperWorkbenchHref(draftPaperId, groupId),
+    draftHref: (draftPaperId, groupId) => {
+      const url = appRouteUrl('draft-paper', draftPaperRouteParams(draftPaperId, groupId))
+      return `${url.pathname}${url.search}${url.hash}`
+    },
   }
 
 
-  // C3a (trust-cracks) — 详情进 URL: `?view=detail&groupId=<id>` via
-  // pushState (a real navigation — Back should retreat to the list), mirrors
-  // `openPaperBrowse`'s pattern. `opts.writeUrl` defaults to true for normal
-  // in-app calls (ConciergeGroupCard's 详情 link/click, App's own onOpenDetail
-  // wiring); boot (mount effect below) and the popstate replay both pass
-  // `writeUrl: false` so they don't push a second, redundant history entry
-  // for a navigation the browser itself already recorded.
-  async function openDetail(id: string, opts?: { writeUrl?: boolean }) {
-    const writeUrl = opts?.writeUrl !== false
-    if (writeUrl && typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
-      try {
-        const url = new URL(window.location.href)
-        url.searchParams.set('view', 'detail')
-        url.searchParams.set('groupId', id)
-        for (const param of ['draftPaperId', 'focusGroupId', 'paperId', 'questionId', 'lecture', 'similar']) {
-          url.searchParams.delete(param)
-        }
-        window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
-      } catch {
-        // URL rewrite is best-effort; the state flip below is what actually
-        // shows the detail view.
-      }
-    }
-    aiRunIdRef.current += 1
+  const loadDetail = useCallback(async (id: string) => {
+    const requestId = ++detailRequestRef.current
     setRecentlyOpened(recordRecentlyOpened(recentlyOpenedScope, id))
     setViewMode('detail')
     setDetailStatus('loading')
@@ -468,55 +315,48 @@ function App() {
 
     try {
       const detail = await fetchQuestionGroupDetail(id)
+      if (requestId !== detailRequestRef.current) return
       setSelectedDetail(detail)
-      if (detail.readingParseResult) {
-        setReadingParseResult(detail.readingParseResult)
-      }
+      setReadingParseResult(detail.readingParseResult ?? null)
       setDetailStatus('loaded')
     } catch (error) {
+      if (requestId !== detailRequestRef.current) return
       setDetailStatus('error')
       setDetailError(error instanceof Error ? error.message : String(error))
     }
+  }, [recentlyOpenedScope])
+
+  function openDetail(id: string) {
+    returnToBrowse.current = browseRouteActive
+    navigate('detail', { groupId: id, draftPaperId: null, focusGroupId: null, paperId: null, questionId: null, lecture: null, similar: null })
+    void loadDetail(id)
   }
 
-  // C3a — leaving the detail view is likewise a real URL transition: strip
-  // `view`+`groupId` via replaceState (a precision revert, not a new history
-  // entry — the pushState from openDetail is what Back should already
-  // retreat through).
   function backToList() {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
-      try {
-        const url = new URL(window.location.href)
-        url.searchParams.delete('view')
-        url.searchParams.delete('groupId')
-        const nextSearch = url.searchParams.toString()
-        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
-        window.history.replaceState(window.history.state, '', nextUrl)
-      } catch {
-        // State flip below is the authoritative UI change.
-      }
-    }
+    detailRequestRef.current += 1
+    navigate(returnToBrowse.current ? 'browse' : null, { groupId: null }, { replace: true })
     setViewMode('list')
   }
 
-  // Keep the ref pointed at this render's openDetail closure (see the ref's
-  // declaration comment above).
   useEffect(() => {
-    openDetailRef.current = openDetail
-  })
-
-  // C3a — boot auto-open: if the page loaded directly on `?view=detail
-  // &groupId=<id>` (a refresh, a shared link, a new tab from a mid-click),
-  // replay that into the detail view once at mount. `writeUrl: false` — the
-  // URL already says this, so don't push a second history entry for it.
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    const params = new URLSearchParams(window.location.search)
-    if (params.get('view') !== 'detail') return
-    const groupId = params.get('groupId')
-    if (!groupId) return
-    openDetailRef.current(groupId, { writeUrl: false })
-  }, [])
+    function onPopState() {
+      const next = parseAppRoute()
+      setRoute(next)
+      returnToBrowse.current = false
+      if (next.view === 'detail' && next.groupId) {
+        void loadDetail(next.groupId)
+      } else {
+        detailRequestRef.current += 1
+        setViewMode('list')
+      }
+    }
+    onPopState()
+    window.addEventListener('popstate', onPopState)
+    return () => {
+      detailRequestRef.current += 1
+      window.removeEventListener('popstate', onPopState)
+    }
+  }, [loadDetail])
 
   // 删除题组：从题库删掉，不可恢复，也没有回收站，照 DESIGN.md Deletion-Cost Rule 用具名确认框（Dialog alert），
   // 不改成即删撤销（构件收尾 2026-11-15，原来是浏览器自带的 window.confirm / window.alert）。
@@ -547,7 +387,6 @@ function App() {
       await deleteQuestionGroupRequest(detail.id)
       deletedGroupRef.current = true
       setQuestionGroups((groups) => groups.filter((group) => group.id !== detail.id))
-      paperDraft.externalRemoveByGroupId(detail.id)
       setSelectedDetail(null)
       setDeleteGroupOpen(false)
       backToList()
@@ -570,7 +409,6 @@ function App() {
         ? groups.map((group) => (group.id === saved.id ? saved : group))
         : [saved, ...groups.filter((group) => group.id !== saved.id)],
     )
-    paperDraft.patchBasketItemFromSavedGroup(saved)
     if (context.mode === 'edit') {
       const detail = await fetchQuestionGroupDetail(saved.id)
       setSelectedDetail(detail)
@@ -579,23 +417,6 @@ function App() {
     setDataStatus('sqlite')
     setEntryOpen(false)
     setEntryInitialDetail(null)
-  }
-
-  async function handleBackfillTopicLabels() {
-    const key = aiApiKey.trim()
-    localStorage.setItem('ai-api-key', key)
-    setBackfillStatus('loading')
-    setBackfillResult(null)
-    setBackfillError('')
-    try {
-      const result = await backfillTopicLabels({ apiKey: key, model: aiModel })
-      setBackfillResult(result)
-      setBackfillStatus('idle')
-      await refreshQuestionGroups()
-    } catch (error) {
-      setBackfillError(error instanceof Error ? error.message : String(error))
-      setBackfillStatus('idle')
-    }
   }
 
   // Derived on render; React Compiler memoizes this (manual useMemo here
@@ -627,93 +448,25 @@ function App() {
   }, [questionGroupById, selectedDetail])
 
   const openDraftPaperWorkbench = useCallback((draftPaperId?: string | null, focusGroupId?: string | null) => {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
-      window.history.pushState(window.history.state, '', draftPaperWorkbenchHref(draftPaperId, focusGroupId))
-    }
-    setAdminRouteActive(false)
-    setBrowseRouteActive(false)
-    setMySpaceRouteActive(false)
-    setVocabularyReviewRouteActive(false)
-    setVocabularyNotebookRoute({ active: false, paperId: null })
-    setVocabularyPracticeRoute({ active: false, setId: null })
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
-    setDraftPaperRoute({
-      active: true,
-      draftPaperId: draftPaperId || null,
-      focusGroupId: focusGroupId || null,
-    })
-  }, [])
+    navigate('draft-paper', draftPaperRouteParams(draftPaperId, focusGroupId))
+  }, [navigate])
 
   const draftPaperOnBackToWorkbench = useCallback(() => {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
-      try {
-        const url = new URL(window.location.href)
-        for (const param of ['view', 'draftPaperId', 'focusGroupId']) {
-          url.searchParams.delete(param)
-        }
-        const nextSearch = url.searchParams.toString()
-        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
-        window.history.replaceState(window.history.state, '', nextUrl)
-      } catch {
-        // State flip below is the authoritative UI change.
-      }
-    }
-    setAdminRouteActive(false)
-    setBrowseRouteActive(false)
-    setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
+    navigate(null, { draftPaperId: null, focusGroupId: null }, { replace: true })
     void refreshQuestionGroups()
-  }, [refreshQuestionGroups])
+  }, [navigate, refreshQuestionGroups])
 
-  // 刀B: open the whole-paper preview page. `focusGroupId`, when given,
-  // scrolls the page to that group's card on load. flow-panel 刀 3 adds an
-  // options bag (a named type, not an inline `{ }` literal — an inline type
-  // would introduce a `{` before the callback body and break
-  // verify-paper-browse.mjs's `[^{]*\{` body-extraction regex) for入口带态:
-  // questionId预选 + lecture(讲评态) open-on-load.
-  const openPaperBrowse = useCallback((paperId: string, focusGroupId?: string | null, options?: OpenPaperBrowseOptions) => {
-    const questionId = options?.questionId || null
-    const lecture = Boolean(options?.lecture)
-    // similar-entrypoints (E3): 只有讲评态深链才携带 similar — 挑题态入口
-    // 永远拿 false（镜像 lecture 的同款收窄，避免无意义的 URL 组合）。
-    const similar = lecture && Boolean(options?.similar)
-    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
-      const url = new URL(window.location.href)
-      url.searchParams.set('view', 'paper-browse')
-      url.searchParams.set('paperId', paperId)
-      url.searchParams.delete('reviewRevision')
-      // C3b — clear groupId when navigating away from the detail view.
-      url.searchParams.delete('groupId')
-      if (focusGroupId) {
-        url.searchParams.set('focusGroupId', focusGroupId)
-      } else {
-        url.searchParams.delete('focusGroupId')
-      }
-      if (questionId) {
-        url.searchParams.set('questionId', questionId)
-      } else {
-        url.searchParams.delete('questionId')
-      }
-      if (lecture) {
-        url.searchParams.set('lecture', '1')
-      } else {
-        url.searchParams.delete('lecture')
-      }
-      if (similar) {
-        url.searchParams.set('similar', '1')
-      } else {
-        url.searchParams.delete('similar')
-      }
-      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
-    }
-    setAdminRouteActive(false)
-    setBrowseRouteActive(false)
-    setMySpaceRouteActive(false)
-    setVocabularyReviewRouteActive(false)
-    setVocabularyNotebookRoute({ active: false, paperId: null })
-    setVocabularyPracticeRoute({ active: false, setId: null })
-    setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
-    setPaperBrowseRoute({ active: true, paperId, focusGroupId: focusGroupId || null, questionId, reviewRevision: null, lecture, similar })
-  }, [])
+  const openPaperBrowse = useCallback((paperId: string, focusGroupId?: string | null, options?: {
+    questionId?: string | null
+    lecture?: boolean
+    similar?: boolean
+  }) => {
+    navigate('paper-browse', {
+      paperId, focusGroupId: focusGroupId || null, questionId: options?.questionId || null,
+      reviewRevision: null, groupId: null, lecture: options?.lecture ? '1' : null,
+      similar: options?.lecture && options.similar ? '1' : null,
+    })
+  }, [navigate])
 
   // Whole-paper navigation follows Screen admission, not analysis availability.
   const openPaperBrowseFromDetail = useCallback(
@@ -741,324 +494,82 @@ function App() {
   )
 
   const paperBrowseOnBackToWorkbench = useCallback(() => {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
-      try {
-        const url = new URL(window.location.href)
-        for (const param of ['view', 'paperId', 'focusGroupId', 'questionId', 'reviewRevision', 'lecture', 'similar']) {
-          url.searchParams.delete(param)
-        }
-        const nextSearch = url.searchParams.toString()
-        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
-        window.history.replaceState(window.history.state, '', nextUrl)
-      } catch {
-        // State flip below is the authoritative UI change.
-      }
-    }
-    setAdminRouteActive(false)
-    setBrowseRouteActive(false)
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
-    setVocabularyNotebookRoute({ active: false, paperId: null })
-  }, [])
+    navigate(null, { paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: null, similar: null }, { replace: true })
+  }, [navigate])
 
-  // flow-panel 刀 3: Back/Forward support. Every `open*`/`*OnBackToWorkbench`
-  // callback above already writes the URL via pushState/replaceState — this
-  // is the other half, replaying the same boot-read parse (main.tsx /
-  // this component's four useState initializers above) whenever the user
-  // navigates via the browser's own Back/Forward instead of an in-app
-  // callback. Verified surface is paper-browse Back/Forward (per plan); the
-  // other three routes (admin/my-space/draft-paper) are synced too but their
-  // in-page state debt is out of this cut's scope.
-  //
-  // reading-analysis-retire (2026-07-16): the `view === 'paper-intelligence'
-  // || view === 'reading-analysis'` full-reload short-circuit that used to
-  // live here is retired along with both routes. Neither route pushes a
-  // history entry a user could Back/Forward into any more — main.tsx
-  // self-heals the URL via `replaceState` at boot, before this listener (or
-  // any render) ever runs.
-  useEffect(() => {
-    function onPopState(): void {
-      if (typeof window === 'undefined') return
-      const params = new URLSearchParams(window.location.search)
-      const view = params.get('view')
-      setAdminRouteActive(isOwnerView && view === 'admin')
-      setMySpaceRouteActive(view === 'my-space')
-      setVocabularyReviewRouteActive(view === 'vocabulary-review')
-      setVocabularyNotebookRoute({
-        active: view === 'vocabulary-notebook',
-        paperId: params.get('paperId'),
-      })
-      setVocabularyDictationRouteActive(view === 'vocabulary-dictation-workbench')
-      setVocabularyReviewSetId(view === 'vocabulary-review' ? params.get('setId') : null)
-      setVocabularyPracticeRoute({
-        active: view === 'vocabulary-practice',
-        setId: params.get('setId'),
-      })
-      setBrowseRouteActive(view === 'browse')
-      setDraftPaperRoute({
-        active: view === 'draft-paper',
-        draftPaperId: params.get('draftPaperId'),
-        focusGroupId: params.get('focusGroupId'),
-      })
-      setPaperBrowseRoute({
-        active: view === 'paper-browse',
-        paperId: params.get('paperId'),
-        focusGroupId: params.get('focusGroupId'),
-        questionId: params.get('questionId'),
-        reviewRevision: params.get('reviewRevision'),
-        lecture: params.get('lecture') === '1',
-        similar: params.get('similar') === '1',
-      })
-      // C3a — replay the detail view the same way boot does (writeUrl:
-      // false — the browser already owns this history entry). Any other
-      // `view` value (including none, i.e. back to the plain list) falls
-      // through to 'list'; the routes set above already take render
-      // precedence over viewMode when one of them is active.
-      if (view === 'detail') {
-        const groupId = params.get('groupId')
-        setViewMode('detail')
-        if (groupId) {
-          openDetailRef.current(groupId, { writeUrl: false })
-        }
-      } else {
-        setViewMode('list')
-      }
-    }
-    window.addEventListener('popstate', onPopState)
-    return () => window.removeEventListener('popstate', onPopState)
-  }, [isOwnerView])
-
-  // home-blank — whisper click: push `?view=browse`. A real navigation (Back
-  // retreats out of browse), mirroring openDetail/openMySpace's pushState
-  // pattern; only the `view` param is touched here (f.* / other params, if
-  // any, survive untouched).
-  const enterBrowse = useCallback(() => {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
-      try {
-        const url = new URL(window.location.href)
-        url.searchParams.set('view', 'browse')
-        window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
-      } catch {
-        // State flip below is the authoritative UI change.
-      }
-    }
-    setBrowseRouteActive(true)
-  }, [])
-
-  // home-blank — 词标 click (logo=home semantics): clears the `view=browse`
-  // param via replaceState (a precision revert of this one param, not a new
-  // navigation — Back is the other, separate way out of browse per plan.md).
-  const exitBrowse = useCallback(() => {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
-      try {
-        const url = new URL(window.location.href)
-        url.searchParams.delete('view')
-        const nextSearch = url.searchParams.toString()
-        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
-        window.history.replaceState(window.history.state, '', nextUrl)
-      } catch {
-        // State flip below is the authoritative UI change.
-      }
-    }
-    setBrowseRouteActive(false)
-  }, [])
+  const enterBrowse = useCallback(() => navigate('browse'), [navigate])
+  const exitBrowse = useCallback(() => navigate(null, {}, { replace: true }), [navigate])
 
   const openMySpace = useCallback(() => {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
-      const url = new URL(window.location.href)
-      url.searchParams.set('view', 'my-space')
-      url.searchParams.delete('draftPaperId')
-      url.searchParams.delete('focusGroupId')
-      // C3b — clear groupId when navigating away from the detail view.
-      url.searchParams.delete('groupId')
-      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
-    }
-    setAdminRouteActive(false)
-    setBrowseRouteActive(false)
-    setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
-    setVocabularyReviewRouteActive(false)
-    setVocabularyDictationRouteActive(false)
-    setVocabularyPracticeRoute({ active: false, setId: null })
-    setVocabularyNotebookRoute({ active: false, paperId: null })
-    setMySpaceRouteActive(true)
-  }, [])
+    navigate('my-space', { draftPaperId: null, focusGroupId: null, groupId: null })
+  }, [navigate])
 
   const openVocabularyNotebook = useCallback((nextPaperId?: string | null) => {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
-      const url = new URL(window.location.href)
-      url.searchParams.set('view', 'vocabulary-notebook')
-      if (nextPaperId) url.searchParams.set('paperId', nextPaperId)
-      else url.searchParams.delete('paperId')
-      for (const param of ['draftPaperId', 'focusGroupId', 'groupId', 'questionId', 'lecture', 'similar', 'setId', 'mode']) {
-        url.searchParams.delete(param)
-      }
-      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
-    }
-    setAdminRouteActive(false)
-    setMySpaceRouteActive(false)
-    setBrowseRouteActive(false)
-    setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
-    setVocabularyPracticeRoute({ active: false, setId: null })
-    setVocabularyDictationRouteActive(false)
-    setVocabularyReviewRouteActive(false)
-    setVocabularyNotebookRoute({ active: true, paperId: nextPaperId || null })
-  }, [])
+    navigate('vocabulary-notebook', {
+      paperId: nextPaperId || null, draftPaperId: null, focusGroupId: null, groupId: null,
+      questionId: null, lecture: null, similar: null, setId: null, mode: null,
+    })
+  }, [navigate])
 
   const openVocabularyReview = useCallback(() => {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
-      const url = new URL(window.location.href)
-      url.searchParams.set('view', 'vocabulary-review')
-      for (const param of ['draftPaperId', 'paperId', 'focusGroupId', 'groupId', 'questionId', 'lecture', 'similar']) {
-        url.searchParams.delete(param)
-      }
-      url.searchParams.delete('setId')
-      url.searchParams.delete('mode')
-      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
-    }
-    setAdminRouteActive(false)
-    setMySpaceRouteActive(false)
-    setBrowseRouteActive(false)
-    setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
-    setVocabularyPracticeRoute({ active: false, setId: null })
-    setVocabularyDictationRouteActive(false)
-    setVocabularyReviewSetId(null)
-    setVocabularyNotebookRoute({ active: false, paperId: null })
-    setVocabularyReviewRouteActive(true)
-  }, [])
+    navigate('vocabulary-review', {
+      paperId: null, draftPaperId: null, focusGroupId: null, groupId: null,
+      questionId: null, lecture: null, similar: null, setId: null, mode: null,
+    })
+  }, [navigate])
 
   const openVocabularyDictationWorkbench = useCallback((meaningRecallSetId?: string) => {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.pushState === 'function') {
-      const url = new URL(window.location.href)
-      url.searchParams.set('view', 'vocabulary-dictation-workbench')
-      for (const param of ['setId', 'mode', 'draftPaperId', 'paperId', 'focusGroupId', 'groupId', 'questionId', 'lecture', 'similar']) {
-        url.searchParams.delete(param)
-      }
-      if (meaningRecallSetId) url.searchParams.set('meaningRecallSetId', meaningRecallSetId)
-      else url.searchParams.delete('meaningRecallSetId')
-      window.history.pushState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
-    }
-    setAdminRouteActive(false)
-    setMySpaceRouteActive(false)
-    setBrowseRouteActive(false)
-    setDraftPaperRoute({ active: false, draftPaperId: null, focusGroupId: null })
-    setPaperBrowseRoute({ active: false, paperId: null, focusGroupId: null, questionId: null, reviewRevision: null, lecture: false, similar: false })
-    setVocabularyPracticeRoute({ active: false, setId: null })
-    setVocabularyReviewRouteActive(false)
-    setVocabularyNotebookRoute({ active: false, paperId: null })
-    setVocabularyDictationRouteActive(true)
-  }, [])
+    navigate('vocabulary-dictation-workbench', {
+      paperId: null, draftPaperId: null, focusGroupId: null, groupId: null,
+      questionId: null, lecture: null, similar: null, setId: null, mode: null,
+      meaningRecallSetId: meaningRecallSetId || null,
+    }, {
+      state: { ...window.history.state, vocabularyDictationReturnSetId: route.setId },
+    })
+  }, [navigate, route.setId])
 
   const vocabularyDictationOnBackToReview = useCallback(() => {
-    if (typeof window !== 'undefined' && window.history?.replaceState) {
-      const url = new URL(window.location.href)
-      url.searchParams.set('view', 'vocabulary-review')
-      window.history.replaceState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
-    }
-    setVocabularyDictationRouteActive(false)
-    setVocabularyReviewRouteActive(true)
-  }, [])
+    const setId = window.history.state?.vocabularyDictationReturnSetId
+    navigate('vocabulary-review', { setId: typeof setId === 'string' ? setId : null }, { replace: true })
+  }, [navigate])
+
+  const clearMeaningRecallSet = useCallback(() => {
+    navigate('vocabulary-dictation-workbench', { meaningRecallSetId: null }, { replace: true })
+  }, [navigate])
 
   const openVocabularyPractice = useCallback((setId: string) => {
-    if (typeof window !== 'undefined' && window.history) {
-      const currentUrl = new URL(window.location.href)
-      currentUrl.searchParams.set('view', 'vocabulary-review')
-      currentUrl.searchParams.set('setId', setId)
-      currentUrl.searchParams.delete('mode')
-      window.history.replaceState(window.history.state, '', `${currentUrl.pathname}?${currentUrl.searchParams.toString()}${currentUrl.hash || ''}`)
-
-      const practiceUrl = new URL(currentUrl.href)
-      practiceUrl.searchParams.set('view', 'vocabulary-practice')
-      practiceUrl.searchParams.set('mode', 'match')
-      window.history.pushState(
-        { ...(window.history.state ?? {}), vocabularyPracticeSetId: setId },
-        '',
-        `${practiceUrl.pathname}?${practiceUrl.searchParams.toString()}${practiceUrl.hash || ''}`,
-      )
-    }
-    setVocabularyReviewSetId(setId)
-    setVocabularyReviewRouteActive(false)
-    setVocabularyPracticeRoute({ active: true, setId })
-  }, [])
+    navigate('vocabulary-review', { setId, mode: null }, { replace: true })
+    navigate('vocabulary-practice', { setId, mode: 'match' }, {
+      state: { ...window.history.state, vocabularyPracticeSetId: setId },
+    })
+  }, [navigate])
 
   const vocabularyPracticeOnBackToSet = useCallback((setId: string) => {
-    if (
-      typeof window !== 'undefined'
-      && window.history
-      && window.history.state?.vocabularyPracticeSetId === setId
-    ) {
+    if (window.history.state?.vocabularyPracticeSetId === setId) {
       window.history.back()
       return
     }
-    if (typeof window !== 'undefined' && window.history?.replaceState) {
-      const url = new URL(window.location.href)
-      url.searchParams.set('view', 'vocabulary-review')
-      url.searchParams.set('setId', setId)
-      url.searchParams.delete('mode')
-      window.history.replaceState(window.history.state, '', `${url.pathname}?${url.searchParams.toString()}${url.hash || ''}`)
-    }
-    setVocabularyPracticeRoute({ active: false, setId: null })
-    setVocabularyReviewSetId(setId)
-    setVocabularyReviewRouteActive(true)
-  }, [])
+    navigate('vocabulary-review', { setId, mode: null }, { replace: true })
+  }, [navigate])
 
   const vocabularyReviewOnBackToWorkbench = useCallback(() => {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
-      const url = new URL(window.location.href)
-      url.searchParams.delete('view')
-      url.searchParams.delete('setId')
-      url.searchParams.delete('mode')
-      const nextSearch = url.searchParams.toString()
-      window.history.replaceState(window.history.state, '', `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`)
-    }
-    setVocabularyReviewSetId(null)
-    setVocabularyReviewRouteActive(false)
-  }, [])
+    navigate(null, { setId: null, mode: null }, { replace: true })
+  }, [navigate])
 
   const mySpaceOnBackToWorkbench = useCallback(() => {
-    if (typeof window !== 'undefined' && window.history && typeof window.history.replaceState === 'function') {
-      try {
-        const url = new URL(window.location.href)
-        url.searchParams.delete('view')
-        const nextSearch = url.searchParams.toString()
-        const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
-        window.history.replaceState(window.history.state, '', nextUrl)
-      } catch {
-        // State flip below is the authoritative UI change.
-      }
-    }
-    setAdminRouteActive(false)
-    setBrowseRouteActive(false)
-    setMySpaceRouteActive(false)
+    navigate(null, {}, { replace: true })
     void refreshQuestionGroups()
-  }, [refreshQuestionGroups])
+  }, [navigate, refreshQuestionGroups])
 
   const toggleAdminRoute = useCallback(() => {
-    setAdminRouteActive((current) => {
-      const next = !current
-      if (typeof window !== 'undefined' && window.history) {
-        try {
-          const url = new URL(window.location.href)
-          if (next) {
-            url.searchParams.set('view', 'admin')
-          } else {
-            url.searchParams.delete('view')
-          }
-          const nextSearch = url.searchParams.toString()
-          const nextUrl = `${url.pathname}${nextSearch ? `?${nextSearch}` : ''}${url.hash || ''}`
-          if (next && typeof window.history.pushState === 'function') {
-            window.history.pushState(window.history.state, '', nextUrl)
-          } else if (!next && typeof window.history.replaceState === 'function') {
-            window.history.replaceState(window.history.state, '', nextUrl)
-          }
-        } catch {
-          // State flip below is the authoritative UI change.
-        }
-      }
-      return next
-    })
-  }, [])
+    if (!isOwnerView) return
+    if (adminRouteActive) {
+      navigate(returnToBrowse.current ? 'browse' : null, {}, { replace: true })
+    } else {
+      returnToBrowse.current = browseRouteActive
+      navigate('admin')
+    }
+  }, [isOwnerView, adminRouteActive, browseRouteActive, navigate])
 
   const handleLogout = useCallback(() => {
     void logout().finally(() => window.location.reload())
@@ -1075,12 +586,11 @@ function App() {
     onOpenMySpace: openMySpace,
   }
 
-  // ─── Paper Intelligence route rendering ───
-  if (draftPaperRoute.active) {
+  if (route.view === 'draft-paper') {
     return (
       <DraftPaperWorkbench
-        draftPaperId={draftPaperRoute.draftPaperId}
-        focusGroupId={draftPaperRoute.focusGroupId}
+        draftPaperId={route.draftPaperId}
+        focusGroupId={route.focusGroupId}
         onBackToWorkbench={draftPaperOnBackToWorkbench}
         onDraftChanged={() => void refreshQuestionGroups()}
         shellNav={shellNav}
@@ -1089,10 +599,10 @@ function App() {
     )
   }
 
-  if (vocabularyNotebookRoute.active) {
+  if (route.view === 'vocabulary-notebook') {
     return (
       <VocabularyNotebookPage
-        paperId={vocabularyNotebookRoute.paperId}
+        paperId={route.paperId}
         shellNav={shellNav}
         onBack={paperBrowseOnBackToWorkbench}
         onOpenPaper={(nextPaperId) => openVocabularyNotebook(nextPaperId)}
@@ -1101,41 +611,42 @@ function App() {
     )
   }
 
-  if (vocabularyReviewRouteActive) {
+  if (route.view === 'vocabulary-review') {
     return (
       <VocabularyReviewPage
         onBackToWorkbench={vocabularyReviewOnBackToWorkbench}
         onOpenVocabularyPractice={openVocabularyPractice}
         onOpenVocabularyDictationWorkbench={openVocabularyDictationWorkbench}
-        onVocabularySetRouteChange={setVocabularyReviewSetId}
-        requestedSetId={vocabularyReviewSetId}
+        onVocabularySetRouteChange={(setId) => setRoute((current) => ({ ...current, setId }))}
+        requestedSetId={route.setId}
         shellNav={{ ...shellNav, onOpenVocabularyReview: undefined }}
       />
     )
   }
 
-  if (vocabularyDictationRouteActive) {
+  if (route.view === 'vocabulary-dictation-workbench') {
     return (
       <VocabularyDictationWorkbench
         onBackToVocabulary={vocabularyDictationOnBackToReview}
-        requestedSetId={typeof window === 'undefined' ? null : new URLSearchParams(window.location.search).get('meaningRecallSetId')}
+        requestedSetId={route.meaningRecallSetId}
+        onRequestedSetOpened={clearMeaningRecallSet}
         shellNav={{ ...shellNav, onOpenVocabularyReview: vocabularyDictationOnBackToReview }}
       />
     )
   }
 
-  if (vocabularyPracticeRoute.active) {
+  if (route.view === 'vocabulary-practice') {
     return (
       <VocabularyPracticePage
-        key={vocabularyPracticeRoute.setId ?? 'missing-set'}
-        setId={vocabularyPracticeRoute.setId ?? ''}
-        onBackToSet={() => vocabularyPracticeOnBackToSet(vocabularyPracticeRoute.setId ?? '')}
+        key={route.setId ?? 'missing-set'}
+        setId={route.setId ?? ''}
+        onBackToSet={() => vocabularyPracticeOnBackToSet(route.setId ?? '')}
         shellNav={{ ...shellNav, onOpenVocabularyReview: undefined }}
       />
     )
   }
 
-  if (mySpaceRouteActive) {
+  if (route.view === 'my-space') {
     return (
       <MySpacePage
         onBackToWorkbench={mySpaceOnBackToWorkbench}
@@ -1145,16 +656,16 @@ function App() {
     )
   }
 
-  if (paperBrowseRoute.active && paperBrowseRoute.paperId) {
+  if (route.view === 'paper-browse' && route.paperId) {
     return (
       <DraftAddContext.Provider value={draftAddActions}>
       <PaperBrowsePage
-        paperId={paperBrowseRoute.paperId}
-        reviewRevision={paperBrowseRoute.reviewRevision}
-        focusGroupId={paperBrowseRoute.focusGroupId}
-        questionId={paperBrowseRoute.questionId}
-        lecture={paperBrowseRoute.lecture}
-        similar={paperBrowseRoute.similar}
+        paperId={route.paperId}
+        reviewRevision={route.reviewRevision}
+        focusGroupId={route.focusGroupId}
+        questionId={route.questionId}
+        lecture={route.lecture}
+        similar={route.similar}
         questionGroupById={questionGroupById}
         onAddGroupsToBasket={addGroupsToBasket}
         currentDraftPaperId={currentDraftPaperId}
@@ -1185,12 +696,7 @@ function App() {
       />
 
       {adminRouteActive && (
-        <AdminWorkbench
-          backfillStatus={backfillStatus}
-          backfillResult={backfillResult}
-          backfillError={backfillError}
-          onBackfillTopicLabels={() => void handleBackfillTopicLabels()}
-        />
+        <AdminWorkbench />
       )}
 
       {!adminRouteActive && (
@@ -1216,7 +722,6 @@ function App() {
               <ConciergeDesk
                 retrieval={conciergeDesk.retrieval}
                 actions={conciergeDesk.actions}
-                basketIds={new Set(basket.map((item) => item.id))}
                 onOpenDetail={(group) => openDetail(group.id)}
                 onOpenPaperBrowse={(paperId) => openPaperBrowse(paperId)}
                 questionGroups={questionGroups}

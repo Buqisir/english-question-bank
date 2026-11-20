@@ -23,7 +23,7 @@ function reseal(input) {
     input.sidecar.alternateAnswerScope.confirmationSha256 = sha256(input.sourceInput.ocrSourceBytes.confirmationBytes)
   }
 }
-function fixture() {
+function fixture(requestedProducerVersion) {
   const input = scoringFiguresFixture()
   for (const document of input.confirmation.documents) for (const page of document.pages) page.visualClassifications = []
   for (const document of input.evidence.documents) for (const page of document.pages) {
@@ -46,7 +46,7 @@ function fixture() {
   }))
   reseal(input)
   const capture = buildSourceReferences(input.materialization, input.evidence, input.confirmation, {
-    sourceInput: input.sourceInput, sourceDocuments: input.sourceInput.documents,
+    sourceInput: input.sourceInput, sourceDocuments: input.sourceInput.documents, producerVersion: requestedProducerVersion,
   })
   const { groups, producerVersion, alternateAnswerScope } = capture
   input.sidecar = { ...prepareSourceReferences(input), groups, producerVersion, alternateAnswerScope }
@@ -62,7 +62,7 @@ function changeText(input, itemId, text) {
   }
 }
 const produce = input => buildSourceReferences(input.materialization, input.evidence, input.confirmation, {
-  sourceInput: input.sourceInput, sourceDocuments: input.sourceInput.documents,
+  sourceInput: input.sourceInput, sourceDocuments: input.sourceInput.documents, producerVersion: input.sidecar.producerVersion,
 })
 
 test('no-image public admission preserves all main content and scans through the alternate interval', () => {
@@ -114,7 +114,7 @@ test('v26 native answer PDF requires both OCR bytes even when scope and scoring 
 })
 
 test('v26 alternate scope rejects all later writing and rubric reopening across producer, scoring and admission', () => {
-  const input = fixture()
+  const input = fixture(version)
   for (const texts of [
     ['第一节（满分15分）', '评分标准', 'Later main-task scoring.'],
     ['第一节 应用文写作', '参考范文', 'Later original sample.'],
@@ -183,11 +183,11 @@ test('independent no-image admission rejects removed content, stolen alternate p
   missingScoring.sidecar.groups[0].scoring = { state: 'not_supplied', entries: [],
     evidence: [input.sidecar.groups[0].scoring.entries[0].paragraphs[0].source] }
   assert.throws(() => assertSourceReferenceAdmission(missingScoring),
-    { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID', message: /preserve every main sample/u })
+    { code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID', message: 'Alternate scope writing references differ from the current producer' })
 })
 
 test('full boundary spelling, uniqueness, raw adjacency and main-task prerequisites fail closed', () => {
-  const input = fixture()
+  const input = fixture(version)
   for (const [name, mutate] of [
     ['missing start', x => changeText(x, 'answers:extra-0', '普通附录')],
     ['partial start', x => changeText(x, 'answers:extra-0', '备选参考答案')],

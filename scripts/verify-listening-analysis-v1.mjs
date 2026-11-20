@@ -93,6 +93,7 @@ rejected((candidate) => { delete candidate.questions['question:listening:20'] },
 rejected((candidate) => { candidate.materials['text:1'].questionIds.push('question:listening:1') }, /uniqueItems|duplicate/u)
 rejected((candidate) => { candidate.questions['question:listening:1'].segmentId = 'text:2' }, /wrong listening material/u)
 rejected((candidate) => { candidate.questions['question:listening:1'].evidence.quote = 'FORGED QUOTE' }, /exactly occur/u)
+rejected((candidate) => { candidate.questions['question:listening:1'].evidence.quote = ' ' }, /evidence quote must not be blank/u)
 rejected((candidate) => { candidate.questions['question:listening:1'].officialAnswer = 'B' }, /disagrees/u)
 rejected((candidate) => { candidate.materials['text:1'].topic.themeGroup = '科学与技术' }, /taxonomy parent-child triple/u)
 

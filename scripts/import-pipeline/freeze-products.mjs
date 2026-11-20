@@ -7,7 +7,8 @@ import { fileURLToPath } from 'node:url'
 import { randomUUID } from 'node:crypto'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { readExamDate } from '../../shared/examDate.mjs'
-import { buildNck1ReviewProjection, reviewBundleFilePaths } from '../../server/import-review/revisionProjection.mjs'
+import { reviewBundleFilePaths } from '../../server/import-review/revisionProjection.mjs'
+import { buildLocalReviewProjection, hydratedEvidenceBase } from './review.mjs'
 import { renderReviewPdfProduct } from '../../server/import-review/reviewPagination.mjs'
 import { PRODUCT_MANIFEST, productInputDigest, readFrozenProducts } from '../../server/paper-import/frozenProducts.mjs'
 import { ABSENT_BY_EXAM_DESIGN, NO_LISTENING_PRODUCT_SCHEMA, productFiles, sourceProductEditions } from '../../server/paper-import/pdfProductSet.mjs'
@@ -19,7 +20,8 @@ import { closeChromiumPool } from '../../server/draft-paper/chromiumPool.mjs'
 const usage = 'Use freeze-products.mjs --paper-dir <local workspace> [--parallel]'
 
 function currentInputDigest(rootDir, projection) {
-  return productInputDigest(rootDir, reviewBundleFilePaths(rootDir), projection.reviewedListening)
+  return productInputDigest(rootDir,
+    reviewBundleFilePaths(rootDir, projection.candidate, hydratedEvidenceBase(rootDir)), projection.reviewedListening)
 }
 
 // The resident Chromium pool renders serially within one process, so
@@ -27,7 +29,7 @@ function currentInputDigest(rootDir, projection) {
 async function renderOne([edition, dirFlag, dir, outputFlag, output, digestFlag, inputDigest]) {
   if (dirFlag !== '--paper-dir' || outputFlag !== '--output' || digestFlag !== '--input-digest') throw new Error(usage)
   const rootDir = path.resolve(dir)
-  const projection = buildNck1ReviewProjection(rootDir, { requireAnalyses: true })
+  const projection = buildLocalReviewProjection(rootDir, { requireAnalyses: true })
   const listeningCount = projection.paginationSlotBindings.filter(entry => entry.familyContractId === 'listening').length
   if (!sourceProductEditions(projection.config, listeningCount).includes(edition)) throw new Error(usage)
   if (currentInputDigest(rootDir, projection) !== inputDigest) throw new Error('生成期间输入改变')
@@ -57,7 +59,7 @@ async function freeze(args) {
   if ((args.length !== 2 && !parallel) || args[0] !== '--paper-dir') throw new Error(usage)
   const rootDir = path.resolve(args[1])
   if (existsSync(path.join(rootDir, 'products'))) throw new Error('产品目录已存在；保留旧字节，请在新 revision 工作副本生成')
-  const projection = buildNck1ReviewProjection(rootDir, { requireAnalyses: true })
+  const projection = buildLocalReviewProjection(rootDir, { requireAnalyses: true })
   const examDate = readExamDate(projection.config.provenance, { required: true })
   const pageLimits = productPageLimitsForPlan(projection.paginationPlan)
   const { economyPageLimit } = pageLimits

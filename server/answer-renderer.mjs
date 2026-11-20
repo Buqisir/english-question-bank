@@ -6,6 +6,7 @@ import { assertSourceReferences, sourceReferenceBlocks, sourceReferenceSourceVie
 import { deriveNck1AnalyzedPackageBundle } from './paper-canonical/nck1AnalyzedPackageAdapter.mjs'
 import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import { sourceReferenceFigurePresentation, sourceReferenceFigureItemPresentation } from './paper-import/sourceReferencePresentation.mjs'
+import { projectEffectiveAnswers } from './paper-import/answerCorrections.mjs'
 
 const unofficialListeningLabel = '听力答案（非官方，据录音整理）'
 const unofficialTranscriptLabel = '听力稿（非官方，据录音整理）'
@@ -204,11 +205,19 @@ function legacyAnswerSections({ canonicalPlan, materialization, authorityRef, so
 export function buildAnswerOnlyHtml({
   paperName, materialization, sourceReferences, sourceDigest, candidateDigest,
   includeScoring = false, sourceDocuments = null, sourceInput = null, authorityRef = null,
-  canonicalPlan = null,
+  canonicalPlan = null, onWarning = null, skippedScoringFigures = null, answerCorrections,
 }) {
   if (typeof paperName !== 'string' || !paperName.trim()) throw new Error('Owner-provided paper name is required')
   assertAnswerSource(materialization, sourceInput, authorityRef)
-  assertSourceReferences({ sidecar: sourceReferences, materialization, sourceDigest, candidateDigest, sourceDocuments, sourceInput })
+  assertSourceReferences({ sidecar: sourceReferences, materialization, sourceDigest, candidateDigest, sourceDocuments, sourceInput, onWarning })
+  materialization = projectEffectiveAnswers(materialization, answerCorrections)
+  if (includeScoring && skippedScoringFigures?.size) {
+    sourceReferences = { ...sourceReferences, groups: sourceReferences.groups.map(group => ({
+      ...group, scoring: { ...group.scoring, entries: group.scoring.entries.map(entry => entry.blocks ? ({
+        ...entry, blocks: entry.blocks.filter(block => !skippedScoringFigures.has(block.figureId)),
+      }) : entry) },
+    })) }
+  }
   const answers = [...materialization.answers].sort((a, b) => a.canonicalNumber - b.canonicalNumber)
   const listening = materialization.listening
   const slice = (first, last) => answers.filter(answer => answer.canonicalNumber >= first && answer.canonicalNumber <= last)
@@ -282,8 +291,9 @@ export function buildAssembledAnswerOnlyHtml({ paperName, items, questionNumberS
       || canonicalGroup.paperId !== materialization.paperId || canonicalGroup.groupType !== 'listening')) {
       throw new Error('听力题组需要精确 Canonical 归属')
     }
-    const answers = listening ? materialization.listening.answers.map(answer => ({ ...answer,
-      questionId: `question:listening:${answer.canonicalNumber}` })) : materialization.answers
+    const effective = projectEffectiveAnswers(materialization, source.answerCorrections)
+    const answers = listening ? effective.listening.answers.map(answer => ({ ...answer,
+      questionId: `question:listening:${answer.canonicalNumber}` })) : effective.answers
     const byId = new Map(answers.map(answer => [answer.questionId, answer]))
     const expectedIds = listening ? canonicalGroup.questions.map(question => question.questionId)
       : group.questions.map(question => question.questionId)

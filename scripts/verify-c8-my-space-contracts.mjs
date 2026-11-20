@@ -155,7 +155,7 @@ assert('My Space page handles missing source draft', mySpacePage.includes('åŸè
 assert('My Space page deletes artifacts with a custom confirm dialog, not window.confirm', !mySpacePage.includes('window.confirm') && mySpacePage.includes('<Dialog') && mySpacePage.includes('tone="alert"'))
 
 const app = read('app/src/App.tsx')
-assert('App parses my-space route', app.includes("get('view') === 'my-space'"))
+assert('App branches on the parsed my-space route', app.includes("route.view === 'my-space'"))
 assert('App renders MySpacePage', app.includes('<MySpacePage'))
 assert('App can navigate from draft to My Space', app.includes('onOpenMySpace={openMySpace}'))
 

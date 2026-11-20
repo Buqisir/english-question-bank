@@ -39,6 +39,7 @@ import {
 } from '../server/vocabulary/vocabularyStore.mjs'
 import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
 import { createImportReviewStore, reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
+import { runRoutes } from '../server/router/index.mjs'
 import { sha256 } from '../shared/paper-canonical/stable.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -577,18 +578,53 @@ async function main() {
       dbPath: importOpsDbPath, filesRoot: importOpsFilesRoot,
       rendererBuildId: 'auth-readback-fixture', projectRevision: () => fileIdentity,
     })
+    const configBytes = Buffer.from(JSON.stringify({ provenance: { year: 2026 } }))
     const fileManifest = {
       schemaVersion: 'web-import-review-bundle-v1', ...fileIdentity,
       producerBuildId: 'auth-readback-fixture',
-      files: [{ path: 'projection.json', sha256: sha256(fileBytes),
-        byteLength: fileBytes.length, mediaType: 'application/json', role: 'materialization' }],
+      files: [
+        { path: 'projection.json', sha256: sha256(fileBytes),
+          byteLength: fileBytes.length, mediaType: 'application/json', role: 'materialization' },
+        { path: 'config.json', sha256: sha256(configBytes),
+          byteLength: configBytes.length, mediaType: 'application/json', role: 'config' },
+      ],
     }
     const fileRevision = fileStore.createRevision({ ...fileManifest, bundleDigest: reviewBundleDigest(fileManifest) }).revision
-    const upload = fileStore.fileForUpload(fileRevision.id, 'projection.json')
-    writeFileSync(upload.destination, fileBytes)
-    fileStore.completeFileUpload(fileRevision.id, 'projection.json', fileManifest.files[0])
+    for (const [file, bytes] of [[fileManifest.files[0], fileBytes], [fileManifest.files[1], configBytes]]) {
+      const upload = fileStore.fileForUpload(fileRevision.id, file.path)
+      writeFileSync(upload.destination, bytes)
+      fileStore.completeFileUpload(fileRevision.id, file.path, file)
+    }
     await fileStore.ready()
     fileStore.finalizeRevision(fileRevision.id)
+
+    let openedMainDatabase = false
+    const outageRoutes = createImportReviewRoutes({
+      getStore: () => fileStore,
+      openDatabase() {
+        openedMainDatabase = true
+        throw new Error('Main database unavailable')
+      },
+    })
+    let outage
+    await runRoutes(outageRoutes, {
+      request: { method: 'GET' }, response: {},
+      url: new URL('http://fixture/api/import-reviews'),
+      context: {
+        session: { role: 'owner' },
+        sendJson(_response, status, body) { outage = { status, body } },
+      },
+    })
+    const outagePaper = outage?.body?.papers?.find(paper => paper.paperId === fileIdentity.paperId)
+    assert('(c) Owner review list keeps pending rows during a main database outage',
+      openedMainDatabase && outage?.status === 200 && outagePaper?.paperName === fileIdentity.paperName
+        && outagePaper?.latestRevisionId === fileRevision.id && outagePaper?.state === 'awaiting_review'
+        && outagePaper?.bundleDigest === fileRevision.bundleDigest
+        && outagePaper?.hasEarlierPublication === 'unknown',
+      JSON.stringify(outage))
+    assert('(c) Owner list uses the canonical default for an omitted source type',
+      outagePaper?.year === 2026 && outagePaper?.sourceType === '真题', JSON.stringify(outagePaper))
+
     const agentFilePath = `/api/import-agent-reviews/revisions/${fileRevision.id}/files?path=projection.json`
     const ownerFilePath = `/api/import-review-preview/revisions/${fileRevision.id}/files?path=projection.json`
     const readback = await req(agentFilePath, { authorization: `Bearer ${importAgentToken}` })

@@ -1690,24 +1690,24 @@ export function createDraftPaperStore({
 
   // Published products are immutable reviewed bytes, never a render-on-download.
   // Assemblies below still render because teachers can change their selection.
-  async function getPublishedPaperProducts(paperId, expectedPublicationDigest) {
-    if (!loadCanonicalConsumption) throw new Error('Canonical paper loader unavailable')
+  async function getPublishedPaperProducts(paperId, expectedPublicationDigest, edition) {
     if (!/^sha256:[a-f0-9]{64}$/.test(expectedPublicationDigest || '')) throw new Error('缺少精确试卷版本')
     const db = openDatabase({ readOnly: true })
     try {
-      const version = db.prepare(`SELECT version_name FROM canonical_paper_publications
-        WHERE paper_id = ? AND publication_digest = ?`).get(paperId, expectedPublicationDigest)
+      const version = db.prepare(`SELECT v.asset_version FROM canonical_paper_publications AS c
+        JOIN paper_asset_versions AS v ON v.paper_id = c.paper_id AND c.version_name = 'v' || v.asset_version
+        WHERE c.paper_id = ? AND c.publication_digest = ? AND v.status = 'published'`).get(paperId, expectedPublicationDigest)
       if (!version) throw new Error('此试卷版本尚未发布')
-      const consumption = loadCanonicalConsumption({ paperId, consumerId: 'print_pdf', version: version.version_name })
-      if (consumption.publicationDigest !== expectedPublicationDigest) throw new Error('试卷版本身份不一致')
-      return await loadStoredProducts({ db, paperAssetsDir, consumption })
+      return await loadStoredProducts({ db, edition, consumption: {
+        paperId, sourceAssetVersion: version.asset_version, publicationDigest: expectedPublicationDigest,
+      } })
     } finally {
       db.close()
     }
   }
   async function getPublishedPaperProduct(paperId, edition, expectedPublicationDigest) {
     requirePaperPdfEdition(edition)
-    return frozenProductResult(await getPublishedPaperProducts(paperId, expectedPublicationDigest), edition)
+    return frozenProductResult(await getPublishedPaperProducts(paperId, expectedPublicationDigest, edition), edition)
   }
   async function getPublishedPaperProductInventory(paperId, expectedPublicationDigest) {
     const { manifest } = await getPublishedPaperProducts(paperId, expectedPublicationDigest)

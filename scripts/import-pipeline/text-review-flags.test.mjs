@@ -5,10 +5,67 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { findSourceFlagTargets } from './text-review-parts.mjs'
-import { applySpellingReview, isSourceMarkCorrection, prepareSpellingReview, SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4 } from '../../server/paper-import/spellingReview.mjs'
+import { applySpellingReview, isSourceMarkCorrection, prepareSpellingReview, SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4, verifyListeningInsertionOccurrences } from '../../server/paper-import/spellingReview.mjs'
 import { mapSourceEmphasisEdits } from '../../server/paper-canonical/sourceEmphasis.mjs'
 
 const at = (text, flag) => findSourceFlagTargets([{ before: text }], flag).flatMap(hit => hit.at)
+
+function listeningInsertionFixture(text, afterSentence) {
+  const transcript = [{ segmentId: 'listening-text-1', text }]
+  const bytes = Buffer.from(JSON.stringify({ listening: { state: 'captured', transcript } }))
+  const report = prepareSpellingReview(bytes)
+  report.reviewedBy = 'import_agent'
+  report.reviewedAt = '2026-11-19T00:00:00Z'
+  report.targets[0].decision = 'unchanged'
+  const audio = { sha256: `sha256:${'a'.repeat(64)}`, durationSeconds: 60 }
+  const evidence = { segmentId: 'listening-text-1', afterSentence,
+    text: 'It is my favorite part of the day.', model: 'gpt-transcribe',
+    audioSha256: audio.sha256, startSeconds: 20, endSeconds: 24, occurrence: { startSeconds: 10, endSeconds: 30 } }
+  const withInsertion = insertion => Buffer.from(JSON.stringify({ ...report, listeningInsertions: [insertion] }))
+  const apply = insertion => applySpellingReview(bytes, withInsertion(insertion), audio)
+  return { audio, evidence, withInsertion, apply }
+}
+
+test('recording evidence allows inserting missing sentences with the expected speakers', () => {
+  const { audio, evidence, withInsertion, apply } = listeningInsertionFixture(
+    'W: I agree. We should go.\nM: What else should I do?', 'We should go.')
+
+  assert.equal(apply(evidence).listening.transcript[0].text,
+    'W: I agree. We should go. It is my favorite part of the day.\nM: What else should I do?')
+  assert.throws(() => apply({ ...evidence, before: 'I agree.' }), /listening insertion/)
+  assert.equal(apply({ ...evidence, text: 'M:Why? I am curious.' }).listening.transcript[0].text,
+    'W: I agree. We should go.\nM:Why? I am curious.\nM: What else should I do?')
+  assert.throws(() => apply({ ...evidence, endSeconds: 31 }), /outside the reviewed occurrence/)
+  const review = { subject: { playbackAudioSha256: audio.sha256 }, groups: [
+    { segmentId: evidence.segmentId, decision: 'usable', occurrences: [evidence.occurrence] },
+    { segmentId: 'listening-text-2', decision: 'usable', occurrences: [{ startSeconds: 30, endSeconds: 50 }] },
+  ] }
+  verifyListeningInsertionOccurrences(withInsertion(evidence), () => review)
+  assert.throws(() => verifyListeningInsertionOccurrences(withInsertion({
+    ...evidence, startSeconds: 35, endSeconds: 38, occurrence: review.groups[1].occurrences[0],
+  }), () => review), /match a reviewed occurrence of listening-text-1/)
+  for (const key of ['model', 'audioSha256', 'startSeconds', 'endSeconds']) {
+    assert.throws(() => apply({ ...evidence, [key]: undefined }), /listening insertion/)
+  }
+  assert.throws(() => apply({ ...evidence, audioSha256: `sha256:${'b'.repeat(64)}` }), /playback hash/)
+  assert.throws(() => apply({ ...evidence, endSeconds: 61 }), /audio interval/)
+})
+
+test('recording insertions reject ambiguous boundaries and changes to displayed sentences or speakers', () => {
+  for (const [source, afterSentence, text, error] of [
+    ['W: I met Capt. Smith.', 'I met Capt.', 'It snowed.', /sentence boundary/],
+    ['W: I met Gov. Smith.', 'I met Gov.', 'It snowed.', /sentence boundary/],
+    ['W: I climbed Mt. Everest.', 'I climbed Mt.', 'It snowed.', /sentence boundary/],
+    ['W: Take the No. 5 bus.', 'Take the No.', 'It snowed.', /sentence boundary/],
+    ['W: I agree. I will go.', 'I agree.', 'M:Why?', /expected sentences or speakers/],
+    ['W: I agree.\nM: I will go.', 'I agree.', 'M：Why?', /expected sentences or speakers/],
+    ['W: I agree', 'I agree', 'It snowed.', /sentence boundary/],
+  ]) {
+    const { evidence, apply } = listeningInsertionFixture(source, afterSentence)
+    assert.throws(() => apply({ ...evidence, text }), error, `${source} + ${text}`)
+  }
+})
+
 test('uncertain source phrase survives an OCR line wrap', () => {
   assert.deepEqual(at('children’s desire\nof learning can be inspired',
     { quote: 'desire of learning', decision: 'uncertain' }), [11])

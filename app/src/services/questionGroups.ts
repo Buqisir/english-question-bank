@@ -7,7 +7,6 @@ import type {
   PrintExportResult,
   QuestionGroupCard,
   QuestionGroupDetail,
-  TopicLabel,
   UpdateQuestionGroupInput,
 } from '../domain/questionBank'
 
@@ -330,54 +329,6 @@ export async function generateQuestionGroupSummary(
   return (await response.json()) as GenerateQuestionGroupSummaryResult
 }
 
-export type GenerateTopicLabelsResult = {
-  questionGroupId: string
-  title: string
-  topicLabels: TopicLabel[]
-  provider?: string
-  model?: string
-  thinkingMode?: boolean
-  keySource?: string
-  keyFingerprint?: string
-  keyMask?: string
-  requestId?: string
-  totalLatencyMs?: number
-  pipeline?: string
-  fallbackUsed?: boolean
-}
-
-export async function generateTopicLabels(
-  questionGroupId: string,
-  apiKey: string,
-  model: string,
-  thinkingMode = false,
-): Promise<GenerateTopicLabelsResult> {
-  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(questionGroupId)}/topic-labels`), {
-    body: JSON.stringify({ apiKey, model, thinkingMode, requestId: crypto.randomUUID?.() || '' }),
-    headers: { 'content-type': 'application/json' },
-    method: 'POST',
-  })
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to generate topic labels: ${response.status}`))
-  }
-  return (await response.json()) as GenerateTopicLabelsResult
-}
-
-export async function bindTopicLabels(
-  questionGroupId: string,
-  topicLabels: TopicLabel[],
-): Promise<{ questionGroupId: string; topicLabels: TopicLabel[] }> {
-  const response = await fetch(apiPath(`/api/question-groups/${encodeURIComponent(questionGroupId)}/topic-labels`), {
-    body: JSON.stringify({ topicLabels }),
-    headers: { 'content-type': 'application/json' },
-    method: 'PUT',
-  })
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `Failed to bind topic labels: ${response.status}`))
-  }
-  return (await response.json()) as { questionGroupId: string; topicLabels: TopicLabel[] }
-}
-
 export type SemanticSearchMatch = {
   questionGroupId: string
   score: number
@@ -533,26 +484,4 @@ export async function exportPrintPdf(input: PrintExportInput): Promise<PrintExpo
     blob: await response.blob(),
     fileName: decodeHeaderValue(response.headers.get('x-file-name')) || `${input.title}-精排.pdf`,
   }
-}
-
-export type BackfillTopicLabelsResult = {
-  processed: number
-  labeled: number
-  skipped: number
-  failed: Array<{ id: string; error: string }>
-}
-
-export async function backfillTopicLabels(input: {
-  apiKey: string
-  model?: string
-}): Promise<BackfillTopicLabelsResult> {
-  const response = await fetch(apiPath('/api/topic-labels/backfill'), {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(input),
-  })
-  if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `批量打主题标签失败：${response.status}`))
-  }
-  return response.json() as Promise<BackfillTopicLabelsResult>
 }

@@ -154,7 +154,10 @@ test('real retained v1 OCR captures current text without changing Canonical iden
         confirmationBytes: Buffer.from(JSON.stringify(confirmation)) } }), /closure/u, label)
   }
   const altered = structuredClone(sidecar); altered.groups[0].essays.entries[0].paragraphs[0].text += ' changed'
-  assert.throws(() => assertSourceReferenceAdmission({ ...binding, sidecar: altered }), /exactly replay/u)
+  assert.throws(() => assertSourceReferenceAdmission({ ...binding, sidecar: altered }), {
+    code: 'SOURCE_REFERENCES_FIGURE_COVERAGE_INVALID',
+    message: 'Reference-only v1 writing references differ from the current producer',
+  })
   const missingRendition = { ...sourceInput, documents: sourceInput.documents.slice(0, -1) }
   assert.throws(() => assertSourceReferenceAdmission({ ...binding, sidecar, sourceInput: missingRendition }), /including renditions/u)
   const changedBytes = { ...sourceInput, documents: sourceInput.documents.map((doc, index) => {

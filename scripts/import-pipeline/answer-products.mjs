@@ -3,10 +3,12 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync, linkSync, unlinkSync } from 'node:fs'
 import { randomUUID } from 'node:crypto'
 import path from 'node:path'
-import { importNck1ReviewCandidate, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
+import { loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
+import { projectEffectiveAnswers } from '../../server/paper-import/answerCorrections.mjs'
+import { hydratedEvidenceBase, importLocalReviewCandidate, withLocalReviewEvidence } from './review.mjs'
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import {
-  assertSourceReferences, prepareSourceReferences, SOURCE_REFERENCES_FILE, sourceReferencesSchema,
+  prepareSourceReferences, SOURCE_REFERENCES_FILE, sourceReferencesSchema,
   sourceReferenceBlocks, structuredSourceReferencesSchema, figureSourceReferencesSchema, scoringFigureSourceReferencesSchema,
   exclusionSourceReferencesSchema, currentSourceReferencesSchema, cellContinuationSourceReferencesSchema,
 } from '../../server/paper-import/sourceReferences.mjs'
@@ -54,7 +56,8 @@ try {
     : option(command === 'finalize' ? '--input' : '--references')
   const referenceBytes = existsSync(referencePath) ? readFileSync(referencePath) : null
   let sourceReferences = referenceBytes ? JSON.parse(referenceBytes.toString('utf8')) : null
-  const imported = importNck1ReviewCandidate(paperDir, loaded, sourceReferences?.candidateDigest)
+  const imported = importLocalReviewCandidate(paperDir, loaded,
+    command === 'prepare' && hydratedEvidenceBase(paperDir) ? null : sourceReferences?.candidateDigest)
   if (!imported.candidate || imported.issues.length) throw new Error(`Invalid source candidate: ${imported.issues[0]?.code}`)
   const binding = {
     authorityRef: imported.candidate.authority,
@@ -97,9 +100,9 @@ try {
       if (cellSelectors && cellSidecar || figures || scoringFigures || figureExclusions
         || process.argv.includes('--whole-document-writing-absence')) throw new Error('Cell continuation cannot combine figures, exclusions or absence')
       const input = { ...binding, sourceInput: loaded.sourceInput }
-      const prepared = cellSidecar
+      const prepared = withLocalReviewEvidence(paperDir, () => cellSidecar
         ? refreshSourceReferenceCellContinuations(input, JSON.parse(readFileSync(option('--adjacent-cell-sidecar'), 'utf8')))
-        : prepareSourceReferenceCellContinuations(input, JSON.parse(readFileSync(option('--adjacent-cell-continuations'), 'utf8')))
+        : prepareSourceReferenceCellContinuations(input, JSON.parse(readFileSync(option('--adjacent-cell-continuations'), 'utf8'))))
       cellRequest = { proposal: prepared.sidecar, requests: prepared.requests,
         status: prepared.pending === false ? 'review_record_retained' : 'awaiting_independent_source_page_review' }
     }
@@ -121,7 +124,8 @@ try {
       }
       proposal.wholeDocumentWritingAbsence = { kind: WHOLE_DOCUMENT_ABSENCE_KIND, sourceSetDigest: evidence.sourceSetDigest,
         evidenceSha256: sha256(ocr.evidenceBytes), confirmationSha256: sha256(ocr.confirmationBytes), authorSessionId, review: null }
-      const { subject, subjectDigest } = wholeDocumentAbsenceSubject({ sidecar: proposal, ...binding, sourceInput: loaded.sourceInput, requireReview: false })
+      const { subject, subjectDigest } = withLocalReviewEvidence(paperDir, () =>
+        wholeDocumentAbsenceSubject({ sidecar: proposal, ...binding, sourceInput: loaded.sourceInput, requireReview: false }))
       absenceRequest = { proposal, subject, subjectDigest, review: null }
     }
     writeNew(output, `${JSON.stringify({
@@ -136,12 +140,13 @@ try {
     }, null, 2)}\n`)
     console.log(JSON.stringify({ status: 'local_capture_prepared', output, paperId: loaded.materialization.paperId }))
   } else {
-    assertSourceReferences({ ...binding, sidecar: sourceReferences })
-    assertSourceReferenceAdmission({ ...binding, sidecar: sourceReferences, sourceInput: loaded.sourceInput,
+    const onWarning = message => console.warn(`${loaded.materialization.paperId}: ${message}`)
+    const skippedScoringFigures = withLocalReviewEvidence(paperDir, () => assertSourceReferenceAdmission({ ...binding, sidecar: sourceReferences, sourceInput: loaded.sourceInput,
+      onWarning,
       referenceSourceManifest: loaded.manifest,
       referenceOcrSourceBytes: loadReferenceOcrSourceBytes(paperDir, {
         producerVersion: sourceReferences?.producerVersion, canonicalOcrSourceBytes: loaded.sourceInput.ocrSourceBytes,
-      }) })
+      }) }))
     if (command === 'verify') {
       console.log(JSON.stringify({ status: 'local_capture_verified', paperId: loaded.materialization.paperId,
         sourceReferencesDigest: sha256(referenceBytes) }))
@@ -152,9 +157,11 @@ try {
       if (existsSync(output)) throw new Error('QA output must be a new directory; preserve previous evidence')
       const includeScoring = process.argv.includes('--include-scoring')
       const html = buildAnswerOnlyHtml({ ...binding, sourceReferences,
+        answerCorrections: loaded.answerCorrections,
         ...(['zhejiang-legacy', 'national-legacy'].includes(loaded.materialization.profileId)
-          ? { canonicalPlan: compileNck1MaterializationCandidatePreview(imported.candidate).compilation?.artifacts?.canonicalPaper?.paperPlan } : {}),
-        paperName: loaded.config.provenance.paperName, includeScoring })
+          ? { canonicalPlan: withLocalReviewEvidence(paperDir, () =>
+              compileNck1MaterializationCandidatePreview(imported.candidate)).compilation?.artifacts?.canonicalPaper?.paperPlan } : {}),
+        paperName: loaded.config.provenance.paperName, includeScoring, onWarning, skippedScoringFigures })
       mkdirSync(output, { recursive: true })
       activeQaOutput = output
       writeNew(path.join(output, 'answerOnly.html'), html)
@@ -237,15 +244,16 @@ try {
         || body.fontSize !== 16 || body.lineHeight !== 26 || Math.abs(geometry.headingGap - 8 * 96 / 72) > 0.1) {
         throw new Error('Rendered answer typography is not the selected layout draft')
       }
-      const listening = binding.materialization.listening
+      const effective = projectEffectiveAnswers(binding.materialization, loaded.answerCorrections)
+      const listening = effective.listening
       const expectedKeys = [
         ...(listening.state === 'captured' ? listening.answers : []),
-        ...binding.materialization.answers,
+        ...effective.answers,
       ].sort((a, b) => a.canonicalNumber - b.canonicalNumber)
       if (rendered.inspection.keys.length !== expectedKeys.length
         || expectedKeys.some((answer, index) => rendered.inspection.keys[index].number !== answer.canonicalNumber
           || normalize(rendered.inspection.keys[index].text) !== normalize(answer.value))) {
-        throw new Error('Rendered answers changed their source values, coverage or order')
+        throw new Error('Rendered answers differ from effective values, coverage or order')
       }
       const ranges = [
         ...(listening.state === 'captured' ? [[1, 5], [6, 10], [11, 15], [16, 20]] : []),
@@ -268,6 +276,7 @@ try {
               throw new Error(`Rendered source label changed: ${entry.referenceId}`)
             }
             for (const block of sourceReferenceBlocks(entry)) {
+              if (block.kind === 'figure' && skippedScoringFigures?.has(block.figureId)) continue
               referenceBlocks.push(block.kind === 'figure' ? block.figureId : block.kind === 'table' ? block.tableId : block.paragraph.paragraphId)
               if (block.kind === 'figure') {
                 if (!rendered.inspection.figures.some(item => item.id === block.figureId && item.loaded)) {

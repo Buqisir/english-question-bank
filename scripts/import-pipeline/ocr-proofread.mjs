@@ -37,8 +37,10 @@ import { wholeDocumentAbsenceSubject } from '../../server/paper-import/sourceRef
 import { bindAlternateAnswerScope } from '../../server/paper-import/sourceReferenceAlternateAnswerScope.mjs'
 import { prepareSourceReferenceCellContinuations, replaySourceReferenceCellContinuations,
   refreshSourceReferenceCellContinuations, sourceReferenceCellContinuations } from '../../server/paper-import/sourceReferenceCellContinuation.mjs'
-import { importNck1ReviewCandidate, loadNck1ReviewSource, buildNck1OcrReviewProjection } from '../../server/import-review/revisionProjection.mjs'
+import { importNck1ReviewCandidate, loadNck1ReviewSource, buildNck1OcrReviewProjection,
+  retainedCandidateBinding, withRetainedReviewEvidence } from '../../server/import-review/revisionProjection.mjs'
 import { deriveOcrConfirmationRevision } from '../../server/import-review/finalizeComputation.mjs'
+import { hydratedEvidenceBase } from './review-target.mjs'
 import { captureSourceReferenceFigure } from '../../server/paper-import/sourceReferenceImages.mjs'
 import { SOURCE_REFERENCE_REGION_TOLERANCE, applyEssayTextCorrections, sourceReferenceBlocks } from '../../server/paper-import/sourceReferences.mjs'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
@@ -1534,7 +1536,13 @@ export function readSourceReferenceWritingRoles(work, context, read = readJson) 
 // from line geometry (first-line indent or a short previous line), never from the Materialization,
 // so the sidecar stays a source capture. Doubtful joins are listed for visual review before finalize.
 function references(paperId) {
-  const { paperDir, work, documents, paperName } = context(paperId)
+  const input = context(paperId)
+  const base = hydratedEvidenceBase(input.paperDir)
+  return withRetainedReviewEvidence(input.paperDir, base, retainedBytes =>
+    deriveReferences(input, retainedCandidateBinding(retainedBytes, base?.revision)))
+}
+
+function deriveReferences({ paperDir, work, documents, paperName, paperId }, retainedCandidate) {
   const directory = path.join(paperDir, 'materialization')
   const materialization = readJson(path.join(directory, 'nck1-source-materialization-v1.json'), 'Materialization')
   const evidence = readJson(path.join(directory, NCK1_OCR_EVIDENCE_FILE_NAME), 'Staged OCR evidence')
@@ -1547,7 +1555,7 @@ function references(paperId) {
       ? readJson(path.join(paperDir, 'source-references-v1.json'), 'Source references') : null
   if (sourceReferenceCellContinuations(retained).length) {
     const loaded = loadNck1ReviewSource(paperDir)
-    const imported = importNck1ReviewCandidate(paperDir, loaded)
+    const imported = importNck1ReviewCandidate(paperDir, loaded, null, retainedCandidate)
     if (!imported.candidate || imported.issues.length) throw new Error('Invalid source candidate for cell continuation')
     const refreshed = refreshSourceReferenceCellContinuations({ materialization: loaded.materialization,
       sourceInput: loaded.sourceInput, sourceDigest: imported.candidate.source.sha256,

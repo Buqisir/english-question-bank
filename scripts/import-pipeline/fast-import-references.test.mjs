@@ -1,18 +1,151 @@
 import assert from 'node:assert/strict'
 import { spawnSync } from 'node:child_process'
 import fs from 'node:fs'
-import { appendFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
+import { appendFileSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, symlinkSync, writeFileSync } from 'node:fs'
 import { syncBuiltinESMExports } from 'node:module'
 import path from 'node:path'
 import test from 'node:test'
-import { assertReferenceProductsReady, finish, rebindRejectedIssue, reconcilePush, requestedRedo, submit } from './fast-import.mjs'
+import { assertReferenceProductsReady, finish, listeningRedo, rebindRejectedIssue, reconcilePush, requestedRedo, submit } from './fast-import.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as version } from './ocr-source-references-version.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION as producerVersion } from './ocr-proofread.mjs'
 import { PAPER_PAGINATION_PLAN_FILE_NAME } from '../../server/paper-import/paginationPlan.mjs'
 import { uploadReviewBundle } from './lib-review-upload.mjs'
+import { finalizeProjection } from '../../server/import-review/finalizeComputation.mjs'
 import { reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
+import { sha256, digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { listeningReviewSubject, readListeningReview } from '../../server/paper-import/listeningReview.mjs'
+import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
+import { buildNck1SealedReviewProjection, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
+import { productInputDigest } from '../../server/paper-import/frozenProducts.mjs'
+import { expectedListeningReadings } from './lib-listening-segment-rule.mjs'
+import { alignListeningSentences } from './listening-sentence-align.mjs'
+import { buildLocalReviewProjection, reviewManifest } from './review.mjs'
+import { prebindReviewFixtureReferences } from '../lib/syntheticReviewAnswerFixture.mjs'
+import { SOURCE_INSTRUCTION_SLOTS } from '../../shared/paper-canonical/sourcePresentation.mjs'
 
 const downstream = ['source-references', 'pagination-run', 'pagination-plan', 'freeze', 'pdf-qa']
+
+test('an omitted repeated opening cannot claim the closing Right from the first reading', () => {
+  const document = { listening: { transcript: [{
+    segmentId: 's', text: 'Right. We can meet later. Right.', instruction: '读两遍', questionNumbers: [6],
+  }] } }
+  const review = { groups: [{ segmentId: 's', playback: { startSeconds: 0, endSeconds: 20 } }] }
+  const word = (text, start, duration) => ({ text, start, end: start + duration })
+  const segments = [word('Right.', 1, .4), word('We can meet later.', 3, 2), word('Right.', 8, .4),
+    word('We can meet later.', 13, 2), word('Right.', 17, .4)]
+  const align = segments => alignListeningSentences({ document, review,
+    apple: { startSeconds: 0, endSeconds: 20, segments } }).segments[0]
+  assert.equal(align(segments).degraded, true)
+  segments.splice(3, 0, word('Right.', 11.004, .4))
+  const complete = align(segments)
+  assert.equal(complete.degraded, false)
+  assert.deepEqual(complete.sentences[0].passes.map(({ start, end }) => [start, end]), [[1, 1.4], [11, 11.4]])
+})
+
+for (const mode of ['preserves all other bundle bytes', 'rejects a newer revision before writing',
+  'rejects files inconsistent with the original manifest']) test(`hydrated listening-only redo ${mode}`, async t => {
+  const stale = mode.includes('newer revision'), mismatch = mode.includes('original manifest')
+  fakeReviewOrigin(t)
+  const { dir, ctx } = fixture(t)
+  ctx.state = { paperId: ctx.paperId, steps: {}, background: {}, data: {} }
+  rmSync(ctx.statePath)
+  const restore = { schemaVersion: 'review-restore-v1', paperId: ctx.paperId,
+    origin: 'http://127.0.0.1:18890', revisionId: 'rev-hydrated', bundleDigest: `sha256:${'1'.repeat(64)}` }
+  const bindingPath = path.resolve(import.meta.dirname, '../../.amp/import-review-origin')
+  const binding = fs.existsSync(bindingPath) ? readFileSync(bindingPath, 'utf8').trim() : ''
+  if (binding && !/^http:\/\/(127\.0\.0\.1|localhost)(:\d+)?\/?$/u.test(binding)) restore.origin = new URL(binding).origin
+  json(path.join(ctx.paperDir, 'paragraph-summaries-v1.json'), { retained: 'summaries' })
+  json(path.join(ctx.paperDir, 'public-search-metadata-v1.json'), { retained: 'metadata' })
+  json(path.join(ctx.paperDir, 'listening-review-v1.json'), { method: 'agent_asr_comparison', old: true })
+  const stagedListening = path.join(ctx.paperDir, 'analysis-listening.json')
+  const theirTeaching = { materials: { s: { segmentId: 's', summaryZh: '保留原讲解' } } }
+  json(stagedListening, { materials: { s: { ...theirTeaching.materials.s, sentences: [{ id: 'old' }] } } })
+  const descriptors = () => Object.entries(snapshot(ctx.paperDir)).filter(([name]) => !name.startsWith('signals/'))
+    .map(([name, hex]) => ({ path: name, sha256: sha256(Buffer.from(hex, 'hex')),
+      byteLength: hex.length / 2, mediaType: 'application/json', role: name === 'config.json' ? 'config' : 'evidence' }))
+  const legacyDigest = productInputDigest(ctx.paperDir, descriptors(), null, { legacy: true })
+  json(path.join(ctx.paperDir, 'products/manifest-v1.json'), { inputDigest: legacyDigest })
+  const manifest = { schemaVersion: 'web-import-review-bundle-v3', paperId: ctx.paperId, files: descriptors() }
+  const printDigest = productInputDigest(ctx.paperDir, manifest.files)
+  assert.notEqual(legacyDigest, printDigest)
+  restore.bundleDigest = reviewBundleDigest(manifest)
+  json(path.join(ctx.paperDir, 'signals/review-restore.json'), restore)
+  const status = { ...JSON.parse(fakeStatus(ctx, [{ id: stale ? 'rev-new' : restore.revisionId,
+    state: 'changes_requested', bundleDigest: restore.bundleDigest, manifest }])),
+    issues: [{ id: 'issue-listening', paperId: ctx.paperId, state: 'open' }] }
+  const before = snapshot(dir), bundle = snapshot(ctx.paperDir)
+  const calls = []
+  const options = {
+    readStatus: async () => JSON.stringify(status),
+    inputs: () => Object.fromEntries(Object.entries(snapshot(ctx.paperDir)).filter(([name]) =>
+      !['listening-review-v1.json', 'analysis-listening.json'].includes(name))),
+    inputDigest: () => printDigest,
+    ensureAsr: async () => 'apple-evidence',
+    execute: async (_ctx, label) => {
+      calls.push(label)
+      if (label === 'freeze') assert.fail('print-neutral change must retain frozen PDF')
+      return label === 'listening-segment-v2' ? { attempt: 'fresh', review: 'fresh-review' } : {}
+    },
+    install: async () => {
+      assert(!fs.existsSync(path.join(ctx.paperDir, 'listening-review-v1.json')), 'old AI review must be removed')
+      json(path.join(ctx.paperDir, 'listening-review-v1.json'), { fresh: true })
+      return { groups: 10 }
+    },
+    qa: async () => ({ dir: 'actual-qa' }),
+  }
+  const run = () => listeningRedo(ctx, ['--feedback-fix', 'issue-listening'], options)
+  if (stale) {
+    await assert.rejects(run, /最新修订/)
+    assert.deepEqual(snapshot(dir), before)
+    assert.deepEqual(calls, [])
+  } else if (mismatch) {
+    const file = path.join(ctx.paperDir, 'public-search-metadata-v1.json')
+    const original = readFileSync(file)
+    json(file, { changed: true })
+    await assert.rejects(run, /文件哈希不匹配：public-search-metadata-v1.json/)
+    assert.deepEqual(calls, [])
+    writeFileSync(file, original)
+    json(path.join(ctx.paperDir, 'products/answerOnly.pdf'), { changed: true })
+    await assert.rejects(run, /文件哈希不匹配：products\/answerOnly.pdf/)
+  } else {
+    const staleSentenceStep = ctx.state.steps['listening-sentences'] = completed({ stale: true })
+    await run()
+    assert.notEqual(ctx.state.steps['listening-sentences'], staleSentenceStep)
+    delete bundle['listening-review-v1.json']
+    const after = snapshot(ctx.paperDir)
+    delete after['listening-review-v1.json']
+    delete bundle['analysis-listening.json']
+    delete after['analysis-listening.json']
+    assert.deepEqual(after, bundle)
+    assert.deepEqual(JSON.parse(readFileSync(stagedListening)), theirTeaching)
+    assert.equal(ctx.state.steps['listening-redo-products'].result.refrozen, false)
+    assert(!ctx.state.steps['source-references'], 'must not invent authoring history')
+    assert(!ctx.state.steps.freeze, 'must not invent a freeze')
+    await run()
+    assert.deepEqual(calls, ['prepare-listening-review', 'listening-segment-v2'])
+    json(stagedListening, { materials: { s: { segmentId: 's', summaryZh: '改过讲解' } } })
+    await assert.rejects(run, /文件哈希不匹配：analysis-listening.json/)
+  }
+})
+
+test('hydrated listening-only redo submit rejects invalid or unordered step times', async t => {
+  const { dir, ctx } = fixture(t)
+  const names = ['listening-redo-request', 'listening-redo-segment', 'listening-redo-install',
+    'listening-redo-products', 'pdf-qa']
+  ctx.state.data.listeningRedo = {}
+  const before = snapshot(dir)
+  for (const name of names) for (const invalid of [true, 'not-a-date', '2025-01-01T00:00:00Z']) {
+    for (const step of names) ctx.state.steps[step] = completed({})
+    ctx.state.steps[name].finishedAt = invalid
+    await assert.rejects(() => submit(ctx, []), error => {
+      assert.equal(error.code, 'SOURCE_REFERENCES_QA_REQUIRED')
+      assert(error.message.includes(name))
+      return true
+    })
+    assert.deepEqual(snapshot(dir), before)
+    assert(!ctx.state.steps.push)
+  }
+})
 const oldTime = '2026-01-01T00:00:00.000Z'
 
 function fakeReviewOrigin(t) {
@@ -119,6 +252,184 @@ function fixture(t, referencesVersion = version) {
   }]))
   return { dir, ctx, calls, options: { referenceStages } }
 }
+
+test('local enrichment and finalize replay only byte-identical sealed source references', async t => {
+  const { dir } = fixture(t)
+  const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+  process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
+  const { makeReviewRoot } = await import('../verify-universal-nck1-publish.mjs').finally(() => {
+    if (previous === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+    else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
+  })
+  const { reviewRoot, projection } = makeReviewRoot(dir)
+  const manifest = reviewManifest(reviewRoot, projection, [], 'historical-references-fixture')
+  const file = path.join(reviewRoot, 'source-references-v1.json')
+  const references = JSON.parse(readFileSync(file))
+  delete references.producerVersion
+  json(file, references)
+  const bytes = readFileSync(file)
+  Object.assign(manifest.files.find(file => file.path === 'source-references-v1.json'),
+    { sha256: sha256(bytes), byteLength: bytes.length })
+  manifest.bundleDigest = reviewBundleDigest(manifest)
+  const revision = { ...manifest, manifest, id: 'rev-historical-references', state: 'ready',
+    reviewKind: 'candidate', finalizedAt: oldTime }
+  const baseline = path.join(dir, 'baseline')
+  fs.cpSync(reviewRoot, baseline, { recursive: true })
+  const finalize = () => finalizeProjection(reviewRoot, {
+    ...revision, id: 'rev-new-references', state: 'uploading', finalizedAt: null,
+    manifest: { ...manifest, expectedBaseRevisionId: revision.id },
+    evidenceBase: { revision, directory: baseline },
+  })
+  json(path.join(reviewRoot, 'signals/review-restore.json'), { schemaVersion: 'review-restore-v1',
+    origin: process.env.QUESTION_BANK_IMPORT_OPS_ORIGIN || 'http://127.0.0.1:18890',
+    paperId: revision.paperId, revisionId: revision.id, bundleDigest: revision.bundleDigest, sealedRevision: revision })
+  const project = () => buildLocalReviewProjection(reviewRoot, { replayReferencesFromRevisionId: revision.id })
+  assert.deepEqual(project().sourceReferencesBytes, bytes)
+  await t.test('finalize accepts unchanged sealed reference bytes', () => {
+    assert.deepEqual(finalize().sourceReferencesBytes, bytes)
+  })
+  appendFileSync(file, ' ')
+  assert.throws(project, { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+  await t.test('finalize rejects changed reference bytes missing the producer version', () => {
+    assert.throws(finalize, { code: 'SOURCE_REFERENCES_PRODUCER_VERSION_INVALID' })
+  })
+})
+
+for (const [edit, expectation] of [
+  ['stem', 'retains installed v2 listening evidence after a non-listening stem edit'],
+  ['option', 'reruns the listening rule for an edited option using the original ASR'],
+  ['legacy', 'reruns the listening rule when the old report has no rule summary'],
+  ['reading', 'retains the listening rule after a reading instruction changes'],
+]) test(`finish ${expectation}`, async t => {
+  const editOption = edit === 'option', legacy = edit === 'legacy', rerun = editOption || legacy
+  const { dir, ctx, options } = fixture(t)
+  const { makeReviewRoot } = await (async () => {
+    const previous = process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+    process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = '1'
+    try { return await import('../verify-universal-nck1-publish.mjs') } finally {
+      if (previous === undefined) delete process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY
+      else process.env.EQB_ANALYZED_PACKAGE_FIXTURE_ONLY = previous
+    }
+  })()
+  if (rerun) ctx.paperId = `paper-synthetic-listening-rule-${edit}-${process.pid}`
+  let { reviewRoot, projection } = makeReviewRoot(path.join(dir, 'actual'), ctx.paperId, undefined, {
+    listening: true, openingListeningText: editOption
+      ? 'Blue dolphins travel beyond distant islands while young sailors carefully study maps beside the harbor and curious children quietly gather orange leaves around their peaceful village during bright summer holidays'
+      : undefined,
+  })
+  ctx.paperDir = reviewRoot
+  if (rerun) {
+    const cliRoot = path.join(import.meta.dirname, 'papers', ctx.paperId)
+    symlinkSync(reviewRoot, cliRoot, 'dir')
+    t.after(() => rmSync(cliRoot))
+  }
+  const materializationFile = path.join(reviewRoot, 'materialization/nck1-source-materialization-v1.json')
+  const materialization = JSON.parse(readFileSync(materializationFile))
+  if (edit === 'reading') {
+    const source = materialization.groups[0].blocks[0].source
+    materialization.schemaVersion = 'nck1-source-materialization-v4'
+    materialization.sourcePresentation = {
+      instructions: Object.keys(SOURCE_INSTRUCTION_SLOTS).map(slotId => ({
+        slotId, text: slotId.startsWith('listening.') ? '每段录音读一遍。' : 'Source instruction.', source,
+      })),
+      listeningExample: { state: 'not_supplied', source },
+    }
+    json(materializationFile, materialization)
+    const loaded = loadNck1ReviewSource(reviewRoot)
+    projection = { ...loaded, ...importCanonicalCandidate(loaded.sourceInput) }
+    assert.deepEqual(projection.issues, [])
+  }
+  const transcript = projection.materialization.listening.transcript
+  const subject = listeningReviewSubject(projection, projection.candidate)
+  const asrPath = 'listening-review-evidence/original-apple.json'
+  const notePath = 'listening-review-evidence/original-rule.json'
+  const putEvidence = (relative, value, kind, window = null, settings = null) => {
+    const file = path.join(reviewRoot, relative)
+    json(file, value)
+    const bytes = readFileSync(file)
+    return { path: relative, sha256: sha256(bytes), byteLength: bytes.length, kind, window, settings }
+  }
+  const words = transcript[0].text.toLowerCase().match(/[a-z]+/gu).map(word => word === 'dolphins' ? 'porpoises' : word)
+  const playbackEnd = edit === 'reading' ? 1 + words.length / 5 : 2
+  const asr = putEvidence(asrPath, { audioSha256: subject.playbackAudioSha256, startSeconds: 0, endSeconds: subject.durationSeconds,
+    result: { segments: [{ text: words.join(' '), start: 1, end: 1 + words.length / 5,
+      words: words.map((word, index) => ({ word, start: 1 + index / 5, end: 1 + (index + 1) / 5 })) }] } },
+    'asr_window', { startSeconds: 0, endSeconds: subject.durationSeconds },
+    { engine: edit === 'reading' ? 'Apple fixture' : 'fixture', model: 'fixture', language: 'en', vad: false, computeType: 'fixture' })
+  const groups = transcript.map(({ segmentId, questionNumbers }, index) => ({
+    segmentId, questionNumbers, decision: index ? 'blocked' : 'usable', reason: 'fixture comparison',
+    limits: [], playback: index ? null : { startSeconds: 1, endSeconds: playbackEnd },
+    occurrences: index ? [] : [{ startSeconds: 1, endSeconds: playbackEnd, evidencePaths: [asrPath] }],
+  }))
+  const rule = { version: 'fixture', normalizationVersion: 'fixture', fuzzyAnchorsEnabled: editOption }
+  const normalization = { fixture: true }
+  const hash = digestJson(null)
+  const note = putEvidence(notePath, { schemaVersion: 'listening-rule-evidence-v2', rule, normalization,
+    input: { subject, rule, normalization, sourceTextSha256: sha256(JSON.stringify(transcript)),
+      audioSha256: subject.playbackAudioSha256, materializationSha256: hash, silenceSha256: hash,
+      ruleCodeSha256: hash, adapterSha256: hash,
+      instructionsSha256: digestJson(projection.materialization.sourcePresentation?.instructions || []),
+      questionsSha256: digestJson(projection.materialization.listening.questions) },
+    rawEvidence: [asr], groups: groups.map(({ reason, limits, ...group }, index) => ({
+      ...group, occurrences: group.occurrences.map(({ evidencePaths, ...playback }) => ({ playback, evidencePaths })),
+      sourceText: transcript[index].text, issues: [], engineAttempts: [],
+      sources: expectedListeningReadings(transcript[index], projection.materialization.sourcePresentation?.instructions).sources,
+    })), diagnostic: { schemaVersion: 'listening-diagnostics-v1', path: 'diagnostics.json.gz', encoding: 'gzip',
+      sha256: hash, byteLength: 1, decodedSha256: hash, decodedByteLength: 1 } }, 'review_notes')
+  json(path.join(reviewRoot, 'listening-review-v1.json'), { schemaVersion: legacy ? 'listening-review-v1' : 'listening-review-v2',
+    subject, reviewedBy: 'import_agent', reviewedAt: oldTime, method: 'asr_source_comparison',
+    untrustedContentHandledAsData: true, scope: { purpose: 'teacher_navigation',
+      verbatim: 'not_certified', wholeRecordingContent: 'not_certified' }, groups, evidence: legacy ? [asr] : [asr, note] })
+  if (editOption) materialization.listening.questions[0].options[0].text = 'Porpoises.'
+  if (edit === 'stem') materialization.groups[0].questions[0].stem = 'What is the purpose of the notice?'
+  if (edit === 'reading') materialization.sourcePresentation.instructions.find(item => item.slotId === 'reading.a').text = 'Choose the best answer.'
+  if (!legacy) json(materializationFile, materialization)
+  const loaded = loadNck1ReviewSource(reviewRoot)
+  const { candidate, issues } = importCanonicalCandidate(loaded.sourceInput)
+  assert.deepEqual(issues, [])
+  const current = listeningReviewSubject(loaded, candidate)
+  if (!legacy) assert.notEqual(current.candidateDigest, subject.candidateDigest)
+  const asrStage = ctx.state.steps['asr-apple-rule-v2'] = completed({ retained: true })
+  const sentenceStage = ctx.state.steps['listening-sentences'] = completed({ stale: true })
+  await finish(ctx, [], options)
+  assert.notEqual(ctx.state.steps['listening-sentences'], sentenceStage)
+  const { review } = readListeningReview(reviewRoot, current, transcript)
+  if (rerun) {
+    const attempt = ctx.state.data.listeningSegmentAttempt.attempt
+    const ruleInput = JSON.parse(readFileSync(path.join(attempt, 'input.json')))
+    assert.equal(ruleInput.inference, 'not_run')
+    assert.equal(ruleInput.questionsSha256, digestJson(materialization.listening.questions))
+    assert.equal(review.evidence[0].sha256, asr.sha256)
+    assert.equal(review.groups[0].decision, 'review_required')
+    if (editOption) assert.match(review.groups[0].reason, /FUZZY_ANCHOR_PROTECTED_WORD/u)
+  } else {
+    assert.deepEqual(review.groups, groups)
+    assert.deepEqual(review.evidence[0], asr)
+    assert.equal(ctx.state.steps['asr-apple-rule-v2'], asrStage)
+  }
+  assert.equal(sha256(readFileSync(path.join(reviewRoot, notePath))), note.sha256)
+  if (edit === 'reading') {
+    prebindReviewFixtureReferences(reviewRoot, { expectedCandidateDigest: candidate.candidateDigest })
+    const projection = buildLocalReviewProjection(reviewRoot)
+    const asset = projection.analysisSidecars['listening-analysis-v1.json']
+    const firstPass = asset.materials[transcript[0].segmentId].sentences[0].passes[0]
+    firstPass.start = Number((firstPass.start + .004).toFixed(3))
+    const staged = path.join(reviewRoot, 'analysis-listening.json')
+    json(staged, asset)
+    assert.throws(() => buildLocalReviewProjection(reviewRoot), /sentences must match the program alignment/)
+
+    // Recreate the receipt that the previous aligner would have sealed.
+    const bytes = readFileSync(staged)
+    const analysisDigest = digestJson(projection.analysisSidecars)
+    const manifest = reviewManifest(reviewRoot, { ...projection, analysisDigest }, [], 'historical-sentence-fixture')
+    const revision = { id: 'rev-historical-sentences', state: 'ready', reviewKind: 'candidate',
+      finalizedAt: oldTime, ...manifest, manifest }
+    const replayed = buildNck1SealedReviewProjection(reviewRoot, revision)
+    assert.equal(replayed.analysisDigest, analysisDigest)
+    assert.deepEqual(replayed.analysisSidecars['listening-analysis-v1.json'], asset)
+    assert.deepEqual(readFileSync(staged), bytes)
+  }
+})
 
 test('after-proofread forwards explicit body width to figure-sizes on resume', t => {
   const paperId = `paper-synthetic-fast-body-width-${process.pid}`
@@ -357,6 +668,37 @@ test('redo from chinese-numbering retains materialization and immutable OCR, inv
   }
   assert(!Object.hasOwn(snapshot(ctx.paperDir), 'agent-ocr-correction-report-v2.json'))
 })
+
+test('redo after a title edit retains the installed listening review and its ASR attempt', async t => {
+  const { ctx } = fixture(t)
+  const config = path.join(ctx.paperDir, 'config.json')
+  json(config, { provenance: { paperName: '新卷名' } })
+  const listening = path.join(ctx.paperDir, 'listening-review-v1.json')
+  json(listening, { review: 'retained' })
+  const before = readFileSync(listening)
+  ctx.state.data.listeningSegmentAttempt = { review: 'retained-attempt.json' }
+  ctx.state.steps['asr-apple-rule-v2'] = completed({})
+  ctx.state.steps['listening-review'] = completed({})
+  await requestedRedo(ctx, 'build')
+  assert.deepEqual(readFileSync(listening), before)
+  assert.deepEqual(ctx.state.data.listeningSegmentAttempt, { review: 'retained-attempt.json' })
+  assert(ctx.state.steps['asr-apple-rule-v2'])
+  assert(ctx.state.steps['listening-review'])
+  assert(!ctx.state.steps.freeze, 'printed title affects the PDFs')
+})
+
+for (const redo of ['search-metadata', 'asr-apple-rule-v2']) {
+  test(`redo of ${redo} retains pagination and frozen PDFs`, async t => {
+    const { ctx } = fixture(t)
+    ctx.state.steps[redo] = completed({})
+    const products = snapshot(path.join(ctx.paperDir, 'products'))
+    const printSteps = Object.fromEntries(downstream.map(name => [name, ctx.state.steps[name]]))
+    await requestedRedo(ctx, redo)
+    assert(!ctx.state.steps[redo])
+    assert.deepEqual(snapshot(path.join(ctx.paperDir, 'products')), products)
+    assert.deepEqual(Object.fromEntries(downstream.map(name => [name, ctx.state.steps[name]])), printSteps)
+  })
+}
 
 for (const interrupted of ['source-references', 'pagination-plan', 'freeze', 'pdf-qa']) {
   test(`finish resumes after interruption in ${interrupted}`, async t => {

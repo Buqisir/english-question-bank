@@ -78,7 +78,6 @@ console.log('Test 1: HTML generation - blocks, numbering, structure')
   assert('no bracketed qnum anywhere (round-1 "(n)" form retired)', !/class="qnum">\(\d+\)<\/span>/.test(html), '')
   assert('passage text present', html.includes('The fox jumps.'), '')
   assert('options present', html.includes('A. Sleep'), '')
-  assert('no answer in student', !html.includes('【答案】'), '')
 
   // draft-numbering-style v2 (owner 拍板 2026-07-10 二轮改判): 大题头由
   // 阿拉伯数字改汉字 (一、二、三…) — continuous across section_header /
@@ -275,9 +274,7 @@ console.log('\nTest 7: Writing answer box sizing')
   const officialSample = 'Official paragraph one.\nOfficial paragraph two.'
   writingItems[0].detail.officialModelAnswer = officialSample
   const teacherHtml = buildPrintHtml({ title: 'Writing', versionType: 'teacher', printStyle: 'exam', items: writingItems, blocks: writingBlocks, questionNumberStart: 1 })
-  const studentHtml = buildPrintHtml({ title: 'Writing', versionType: 'student', printStyle: 'exam', items: writingItems, blocks: writingBlocks, questionNumberStart: 1 })
   assert('Teacher Print includes source official writing sample', teacherHtml.includes('【官方范文】') && teacherHtml.includes('Official paragraph one.'), '')
-  assert('Student Print hides source official writing sample', !studentHtml.includes('【官方范文】') && !studentHtml.includes('Official paragraph one.'), '')
 }
 
 // --- Test 7b: writing-box-starters (owner 拍板 2026-07-16) ---

@@ -1,8 +1,9 @@
 import { createHash } from 'node:crypto'
 import { digestJson, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { LISTENING_AUDIO_PATHS } from '../paper-import/listeningAudioEvidence.mjs'
-import { listeningReviewPrintNeutralPaths, reviewedPlaybackSegments } from '../paper-import/listeningReview.mjs'
+import { reviewedPlaybackSegments } from '../paper-import/listeningReview.mjs'
 import { manifestProductFiles } from '../paper-import/pdfProductSet.mjs'
+import { productInputDescriptor, productInputFiles } from '../paper-import/frozenProducts.mjs'
 
 export const REVIEW_SUBJECT_VERSION = 'review-content-subject-v2'
 export const REVIEW_SUBJECT_MAX_BYTES = 8 * 1024 * 1024
@@ -142,7 +143,7 @@ function identity(input, profile, reviewKind = 'candidate') {
     result[key] = input[key]
   }
   const required = profile === 'public-paper-v1'
-    ? ['paragraphSummariesDigest', 'publicSearchMetadataDigest'] : ['analysisDigest']
+    ? ['paragraphSummariesDigest'] : ['analysisDigest']
   for (const key of ['analysisDigest', 'paragraphSummariesDigest', 'publicSearchMetadataDigest']) {
     if (required.includes(key) && !SHA.test(input[key])) fail('MISSING_EVIDENCE', `/identity/${key}`)
     if (input[key] != null && !SHA.test(input[key])) fail('BASELINE_UNTRUSTED', `/identity/${key}`)
@@ -244,11 +245,12 @@ function productsFromFiles(files, revision, validatedListeningReview) {
   if (files.some(file => file.path === 'listening-review-v1.json') && !validatedListeningReview) {
     fail('MISSING_VALIDATED_LISTENING_REVIEW', '/products/inputDigest')
   }
-  const neutral = listeningReviewPrintNeutralPaths(validatedListeningReview)
-  const inputs = files.filter(file => !file.path.startsWith('products/') && !neutral.has(file.path))
-    .map(file => ({ path: file.path, mediaType: file.mediaType, role: file.role,
-      sha256: file.sha256, byteLength: file.byteLength })).sort((a, b) => a.path.localeCompare(b.path))
-  if (digestJson(inputs) !== manifest.inputDigest) fail('BASELINE_UNTRUSTED', '/products/inputDigest')
+  const inputDigest = options => digestJson(productInputFiles(files, validatedListeningReview, options)
+    .map(file => productInputDescriptor(descriptor(file), options?.legacy ? null : file.json))
+    .sort((a, b) => a.path.localeCompare(b.path)))
+  if (inputDigest() !== manifest.inputDigest && inputDigest({ legacy: true }) !== manifest.inputDigest) {
+    fail('BASELINE_UNTRUSTED', '/products/inputDigest')
+  }
   const products = expected.map((expectedFile, index) => {
     const item = manifest.files[index]
     const actual = files.find(file => file.path === expectedFile.path)

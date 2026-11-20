@@ -35,7 +35,7 @@ const hasSamePageContinuation = paragraph => {
 // A task heading, an explicit sample label and its immediate English text
 // independently disprove absence. Do not infer a sample from rubric prose or
 // a label followed by "略"/nothing. This check also runs for books without images.
-function assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingStates, producerVersion) {
+function assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingStates, producerVersion, onWarning) {
   const sampleLabel = /^(?:参考范文|考场作文|作答示例|范文|(?:(?:A|One)\s+)?Possible\s+Versions?)\s*[:：]?$/iu
   for (const document of confirmation.documents.filter(document => answerIds.has(document.documentId))) {
     const items = document.pages.flatMap(page => page.orderedItems)
@@ -51,8 +51,11 @@ function assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingSt
         const kind = explicitBody ? state.kind : 'essays'
         const section = sidecar?.groups.find(group => group.taskType === state.task)?.[kind]
         if (section?.state !== 'captured' || !section.entries.length) {
-          throw Object.assign(new Error('Confirmed writing reference body cannot be declared not_supplied'),
-            { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+          const message = 'Confirmed writing reference body cannot be declared not_supplied'
+          if (!sidecar || onWarning === reject) {
+            throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+          }
+          onWarning(message)
         }
       }
     }
@@ -118,12 +121,15 @@ export function assertSealedSourceReferenceReplay({ sourceReferencesBytes, recei
 
 function assertSourceReferenceContent({
   sidecar, materialization, sourceDigest, candidateDigest, sourceInput: canonicalSourceInput, referenceOcrSourceBytes, referenceSourceManifest,
+  onWarning = reject,
 }, producerVersion) {
   let sourceInput = canonicalSourceInput
   let referenceSourceDocuments
+  const warnDocx = onWarning === reject ? null : onWarning
+  const skippedScoringFigures = new Set()
   if (sidecar?.schemaVersion === 'source-references-v7') {
     assertSourceReferences({ sidecar, materialization, sourceDigest, candidateDigest,
-      sourceDocuments: sourceInput.documents, sourceInput })
+      sourceDocuments: sourceInput.documents, sourceInput, onWarning: warnDocx })
     sidecar = sourceReferenceSourceView(sidecar)
   }
   const sealedRoleDeclarations = sidecar?.writingRoleDeclarations
@@ -174,11 +180,11 @@ function assertSourceReferenceContent({
       writingRoleDeclarations: sealedRoleDeclarations, essayTextCorrections,
     })
     if (baseline.alternateAnswerScope || digestJson(sidecar?.groups ?? null) !== digestJson(baseline.groups)) {
-      reject('Reference-only v1 groups must exactly replay the current producer')
+      onWarning('Reference-only v1 writing references differ from the current producer')
     }
   }
   if (sidecar) assertSourceReferences({ sidecar, materialization, sourceDigest, candidateDigest,
-    sourceDocuments: sourceInput.documents, sourceInput })
+    sourceDocuments: sourceInput.documents, sourceInput, onWarning: warnDocx })
   // Scope and full-content replay precede all no-image/absence early returns.
   // Derive from sealed source first, including when the record was removed.
   if (usesAlternateAnswerScope(producerVersion)) {
@@ -218,7 +224,7 @@ function assertSourceReferenceContent({
         // v6's subsequent replay independently rebuilds and compares all groups
         // after the reviewed cell transformation; ordinary content compares here.
         if (!sourceReferenceCellContinuations(sidecar).length && digestJson(sidecar.groups) !== digestJson(baseline.groups)) {
-          reject('Alternate scope must preserve every main sample, scoring block, table, figure and source locator in order')
+          onWarning('Alternate scope writing references differ from the current producer')
         }
       }
     }
@@ -269,7 +275,7 @@ function assertSourceReferenceContent({
   const evidence = ocr.evidenceBytes ? JSON.parse(Buffer.from(ocr.evidenceBytes).toString('utf8')) : undefined
   const writingStates = sourceReferenceEssayTaskStates(confirmation, answerIds, materialization, evidence,
     { producerVersion, referenceSourceDocuments, writingRoleDeclarations: sealedRoleDeclarations })
-  assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingStates, producerVersion)
+  assertLabeledSamplesPresent(sidecar, confirmation, answerIds, writingStates, producerVersion, onWarning)
   // Repeated task headings must not let a sidecar omit one of the preserved
   // samples. Bind each captured source body to its own entry and label.
   if (sidecar && [...writingStates.values()].some(state => state.repeatedTask && state.capturing && state.action === 'body')) {
@@ -293,8 +299,11 @@ function assertSourceReferenceContent({
           (!state.labelItemId || (label && entry.labelSource && containsSource(entry.labelSource, label.sourceIndex)))
           && sourceReferenceBlocks(entry).some(block => block.kind === 'paragraph'
             && paragraphSources(block.paragraph).some(source => containsSource(source, item.sourceIndex))))
-        if (!covered) throw Object.assign(new Error('Repeated writing task omits a confirmed sample body'),
-          { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+        if (!covered) {
+          const message = 'Repeated writing task omits a confirmed sample body'
+          if (onWarning === reject) throw Object.assign(new Error(message), { code: 'SOURCE_REFERENCES_ESSAY_COVERAGE_INVALID' })
+          onWarning(message)
+        }
       }
     }
   }
@@ -304,7 +313,7 @@ function assertSourceReferenceContent({
     // These paths already rebuild/compare the complete source groups above.
     if (!usesSourceTitleCompatibility(producerVersion) || !sidecar
       || sidecar.alternateAnswerScope || sourceReferenceCellContinuations(sidecar).length || referenceSourceDocuments) return
-    if (figures.some(({ figure }) => !replayedFigures.has(figure))) {
+    if (figures.some(({ figure }) => !replayedFigures.has(figure) && !skippedScoringFigures.has(figure.figureId))) {
       reject('Current figure comparison requires independent source pixel replay for every figure')
     }
     if (!evidence) reject('Current OCR references require complete sealed evidence')
@@ -362,7 +371,7 @@ function assertSourceReferenceContent({
       }
     }
     if (digestJson(submittedGroups) !== digestJson(baselineGroups)) {
-      reject('Current references must preserve every confirmed sample, scoring paragraph, label, task and source locator')
+      onWarning('Current references must preserve every confirmed sample, scoring paragraph, label, task and source locator')
     }
   }
   if (!hasReferenceVisual && !figures.length && !continued && !sidecar?.figureExclusions?.length) {
@@ -395,7 +404,7 @@ function assertSourceReferenceContent({
     && (!objectiveFigures.has(sourceReferenceFigureIdentity(reference))
     || figures.some(({ figure }) => reference.sourceRegionId === figure.sourceRegionId
       && digestJson(reference.source) === digestJson(figure.source.locator))))
-  if (expected.length !== figures.length) reject('All confirmed official-answer content figures must match sidecar figures one-to-one')
+  if (expected.length !== figures.length) onWarning('All confirmed official-answer content figures must match sidecar figures one-to-one')
   // Layout resolution moves table items out of paragraphs. Index validated
   // confirmation text before layout, excluding only picture-consumed identities.
   const confirmedTexts = survivingConfirmedText(confirmation, evidence, allExpected)
@@ -455,7 +464,8 @@ function assertSourceReferenceContent({
       essayTextCorrections.filter(correction => correction.paragraphId === text.paragraphId))
     if (fragments.some(fragment => !fragment.length) || new Set(surviving).size !== surviving.length
       || joinedText(replayText) !== joinedText(text.text)) {
-      reject('Reference text must replay surviving confirmed OCR items; image observations cannot reappear as prose, labels or table cells')
+      onWarning('Reference text must replay surviving confirmed OCR items; image observations cannot reappear as prose, labels or table cells')
+      continue
     }
     if (hasSamePageContinuation(text)) {
       const labelItemId = sourceOwners.get(surviving[0].itemId)?.labelItemId
@@ -483,9 +493,14 @@ function assertSourceReferenceContent({
       [cell.source, ...(cell.adjacentPageContinuation ? [cell.adjacentPageContinuation.fragment.source] : [])].flatMap(sourceItems)) : []
 
   const seen = new Set(), figureReferences = new Map()
-  for (const { figure } of figures) {
+  for (const { figure, kind } of figures) {
     const matches = expected.filter(reference => reference.sourceRegionId === figure.sourceRegionId
       && digestJson(reference.source) === digestJson(figure.source.locator))
+    if (matches.length !== 1 && kind === 'scoring' && onWarning !== reject) {
+      onWarning(`Scoring figure ${figure.figureId} does not match a confirmed source region`)
+      skippedScoringFigures.add(figure.figureId)
+      continue
+    }
     if (matches.length !== 1 || seen.has(matches[0])) reject('Missing, extra, duplicated or substituted source figure region')
     const reference = matches[0]
     seen.add(reference)
@@ -504,7 +519,8 @@ function assertSourceReferenceContent({
         const selected = items.map(item => positions.get(item.itemId))
         documentId ??= selected[0]?.documentId
         if (!selected.length || selected.some(position => !position || position.documentId !== documentId)) {
-          reject('Scoring blocks require confirmed source order in one answer document')
+          onWarning('Scoring blocks require confirmed source order in one answer document')
+          return { start: Infinity, end: -1 }
         }
         return { start: Math.min(...selected.map(position => position.index)),
           end: Math.max(...selected.map(position => position.index)) }
@@ -514,6 +530,7 @@ function assertSourceReferenceContent({
         let current
         if (block.kind === 'figure') {
           const reference = figureReferences.get(block)
+          if (!reference) continue
           // Empty pictures occupy the gap after their proven anchor; pictures
           // containing OCR items also reserve their entire consumed range.
           const anchor = range([reference.afterItem])
@@ -521,7 +538,7 @@ function assertSourceReferenceContent({
             ? range(reference.itemIds.map(itemId => ({ itemId }))).end : anchor.end + .5 }
         } else current = range(boundaryItems(block))
         if (current.start <= previousEnd) {
-          reject('Scoring blocks must follow confirmed source order without overlapping source ranges')
+          onWarning('Scoring blocks must follow confirmed source order without overlapping source ranges')
         }
         previousEnd = current.end
       }
@@ -529,18 +546,23 @@ function assertSourceReferenceContent({
   }
   for (const { figure, entry, group, kind } of figures) {
     const reference = figureReferences.get(figure)
+    if (!reference) continue
     const scoringScope = scoringScopes.get(reference.afterItem.itemId)
     if (kind === 'scoring') {
       const labels = sourceItems(entry.labelSource).filter(item => normalize(item.text) === normalize(entry.sourceLabel ?? ''))
       if (!scoringScope || scoringScope.taskType !== group.taskType
         || labels.length !== 1 || labels[0].itemId !== scoringScope.labelItemId) {
-        reject('Scoring figure requires its exact confirmed scoring label and Writing Task')
+        onWarning('Scoring figure requires its exact confirmed scoring label and Writing Task')
+        skippedScoringFigures.add(figure.figureId)
+        continue
       }
       const blocks = sourceReferenceBlocks(entry)
       const index = blocks.indexOf(figure)
       const previous = index === 0 ? labels : boundaryItems(blocks[index - 1])
       if (!previous.length || previous.at(-1).itemId !== reference.afterItem.itemId) {
-        reject('Scoring figure must follow the exact label, paragraph or final table boundary in source order')
+        onWarning('Scoring figure must follow the exact label, paragraph or final table boundary in source order')
+        skippedScoringFigures.add(figure.figureId)
+        continue
       }
       assertSourceReferenceFigureReplay({ figure,
         document: documents.find(document => document.documentId === figure.source.locator.documentId) })
@@ -569,4 +591,5 @@ function assertSourceReferenceContent({
     replayedFigures.add(figure)
   }
   assertCurrentGroupsReplay()
+  return skippedScoringFigures
 }

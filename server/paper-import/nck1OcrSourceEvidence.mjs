@@ -72,6 +72,20 @@ const RASTER_DENSITY = 144
 const FULL_PAGE = Object.freeze({ x: 0, y: 0, width: 1, height: 1 })
 const MAX_BUFFER = 50 * 1024 * 1024
 
+// A synchronous Review projection can borrow the raster verification of a
+// finalized Candidate after checking the original documents and both retained
+// OCR files against the sealed inventory. Other callers still replay pixels.
+let retainedOcr = null
+export function withRetainedNck1OcrEvidence(paperId, evidenceBytes, confirmationBytes, compute) {
+  const previous = retainedOcr
+  retainedOcr = {
+    paperId,
+    evidence: digestJson(JSON.parse(new TextDecoder().decode(evidenceBytes))),
+    confirmation: digestJson(JSON.parse(new TextDecoder().decode(confirmationBytes))),
+  }
+  try { return compute() } finally { retainedOcr = previous }
+}
+
 function isRecord(value) {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value)
 }
@@ -410,6 +424,7 @@ function inspectEvidencePage({
   observationIds,
   regionIds,
   includeReviewFindings,
+  retainRaster,
 }) {
   const page = evidencePage?.page
   const pageSource = source(document.documentId, page, FULL_PAGE)
@@ -426,9 +441,9 @@ function inspectEvidencePage({
     ))
     return
   }
-  let expectedRaster
+  let expectedRaster = evidencePage.raster
   try {
-    expectedRaster = rasterPage(document, page)
+    if (!retainRaster) expectedRaster = rasterPage(document, page)
   } catch {
     issues.push(issue(
       'NCK1_OCR_PAGE_COVERAGE_INCOMPLETE',
@@ -443,7 +458,7 @@ function inspectEvidencePage({
     !exactKeys(evidencePage.raster, ['recipe', 'sha256', 'pixelWidth', 'pixelHeight'])
     || stableStringify(evidencePage.raster) !== stableStringify(expectedRaster)
   ) {
-    const toolchain = pdfRasterToolchain()
+    const toolchain = retainRaster ? null : pdfRasterToolchain()
     issues.push({ ...issue(
       'NCK1_OCR_PAGE_COVERAGE_INCOMPLETE',
       `documents.${document.documentId}.pages.${page}.raster`,
@@ -578,12 +593,16 @@ function inspectEvidencePage({
   }
 }
 
-export function validateNck1OcrSourceEvidence({
+export function validateNck1OcrSourceEvidence(input) {
+  return inspectNck1OcrSourceEvidence(input, false)
+}
+
+function inspectNck1OcrSourceEvidence({
   paperId,
   documents,
   evidence,
   includeReviewFindings = true,
-}) {
+}, retainRaster) {
   const issues = []
   const fallback = firstSource(documents)
   if (!exactKeys(evidence, [
@@ -657,6 +676,7 @@ export function validateNck1OcrSourceEvidence({
         observationIds,
         regionIds,
         includeReviewFindings,
+        retainRaster: retainRaster && document.mediaType === PDF,
       })
     }
   }
@@ -693,12 +713,15 @@ export function resolveConfirmedNck1OcrEvidence({
   confirmation,
   retainItemIds = false,
 }) {
-  const structuralIssues = validateNck1OcrSourceEvidence({
+  const retainRaster = retainedOcr?.paperId === paperId
+    && retainedOcr.evidence === digestJson(evidence)
+    && retainedOcr.confirmation === digestJson(confirmation)
+  const structuralIssues = inspectNck1OcrSourceEvidence({
     paperId,
     documents,
     evidence,
     includeReviewFindings: false,
-  })
+  }, retainRaster)
   if (structuralIssues.length > 0) {
     return { issues: structuralIssues, structures: new Map(), sourceVisuals: [] }
   }

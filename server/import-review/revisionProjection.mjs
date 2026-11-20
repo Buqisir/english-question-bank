@@ -10,18 +10,19 @@ import {
   compileNck1MaterializationCandidatePreview,
   importCanonicalCandidate,
 } from '../../shared/paper-canonical/compiler.mjs'
-import { nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66, zhejiangLegacyMaterializationAuthorityRef, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
+import { nck1CrossPageJoinV2AuthorityRef, nck1MaterializationHistoricalAuthorityRef58, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef66, zhejiangLegacyMaterializationAuthorityRef, resolveCanonicalAuthority } from '../../shared/paper-canonical/authority.mjs'
 import { consumerContractRefsForAuthority } from '../../shared/paper-canonical/consumers.mjs'
 import { projectCanonicalPaper } from '../../shared/paper-canonical/projector.mjs'
 import { decorateProjectedMediaPresentation } from '../../shared/paper-canonical/mediaPresentation.mjs'
 import { displayVariantArtifact } from '../../shared/paper-canonical/richContent.mjs'
 import { digestJson, sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { LEGACY_LISTENING_WAVEFORM_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
-import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview, readSealedListeningReview } from '../paper-import/listeningReview.mjs'
+import { LISTENING_REVIEW_FILE, listeningReviewSubject, readListeningReview, readRetainedListeningReview, readSealedListeningReview } from '../paper-import/listeningReview.mjs'
+import { alignReviewedListeningSentences } from '../../scripts/import-pipeline/listening-sentence-align.mjs'
 import { SOURCE_REFERENCES_FILE, parseSourceReferencesBytes } from '../paper-import/sourceReferences.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../paper-import/sourceReferenceSemantics.mjs'
 import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../paper-import/sourceReferenceAdmission.mjs'
-import { PRODUCT_MANIFEST, PRODUCT_FILES, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
+import { PRODUCT_MANIFEST, PRODUCT_FILES, matchesSealedPrintInputs, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
 import { productFiles, sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
 import { productPageLimitsForManifest } from '../paper-import/pdfPageLimits.mjs'
 import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
@@ -40,8 +41,9 @@ import {
 import { LEGACY_NCK1_ANALYSIS_PROFILE } from '../paper-import-ai/analyzeListening.mjs'
 import { validateParagraphSummaries } from '../paper-import-ai/paragraphSummaries.mjs'
 import { validatePublicSearchMetadata } from '../paper-import-ai/publicSearchMetadata.mjs'
-import { applySpellingReview, loadSpellingReview, summarizeSpellingReview, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
+import { applySpellingReview, loadSpellingReview, summarizeSpellingReview, verifyListeningInsertionOccurrences, verifyTerminalWhitespaceSourceEvidence, SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
 import { applyListeningInstructionCorrection, LISTENING_INSTRUCTION_CORRECTION_FILE } from '../paper-import/listeningInstructionCorrection.mjs'
+import { ANSWER_CORRECTIONS_FILE, answerCorrectionsByQuestion, effectiveAnswer, officialAnswerEntries, projectEffectiveAnswers, validateAnswerCorrections } from '../paper-import/answerCorrections.mjs'
 import {
   NCK1_IMAGE_BUNDLE_MEDIA_TYPE,
   assertNck1ImageBundlePageArtifacts,
@@ -55,8 +57,9 @@ import {
   nck1OcrSourceSetDigest,
   resolveConfirmedNck1OcrEvidence,
   validateNck1OcrSourceEvidence,
+  withRetainedNck1OcrEvidence,
 } from '../paper-import/nck1OcrSourceEvidence.mjs'
-import { assertListeningAudioManifest, assertListeningAudioSource } from '../paper-import/listeningAudioEvidence.mjs'
+import { LISTENING_AUDIO_PATHS, assertListeningAudioManifest, assertListeningAudioSource } from '../paper-import/listeningAudioEvidence.mjs'
 import {
   PAPER_PAGINATION_PLAN_FILE_NAME,
   productPageLimitsForPlan,
@@ -114,12 +117,20 @@ function loadParagraphSummaries(rootDir, loaded, sourceDigest, candidateDigest) 
 
 function loadPublicSearchMetadata(rootDir, loaded, sourceDigest, candidateDigest) {
   const filePath = resolveReviewFile(rootDir, PUBLIC_SEARCH_METADATA_FILE_NAME)
-  if (!existsSync(filePath)) fail('public-paper-v1 requires public-search-metadata-v1.json')
+  if (!existsSync(filePath)) {
+    console.warn(`${loaded.materialization.paperId}: ${PUBLIC_SEARCH_METADATA_FILE_NAME} is missing`)
+    return null
+  }
   const bytes = readFileSync(filePath)
-  const sidecar = JSON.parse(bytes.toString('utf8'))
-  const issues = validatePublicSearchMetadata({ sidecar, materialization: loaded.materialization, sourceDigest, candidateDigest })
-  if (issues.length) fail(`${issues[0].code}: ${issues[0].message}`)
-  return { sidecar, bytes, digest: sha256(bytes) }
+  try {
+    const sidecar = JSON.parse(bytes.toString('utf8'))
+    const [issue] = validatePublicSearchMetadata({ sidecar, materialization: loaded.materialization, sourceDigest, candidateDigest })
+    if (issue) throw new Error(`${issue.code}: ${issue.message}`)
+    return { sidecar, bytes, digest: sha256(bytes) }
+  } catch (error) {
+    console.warn(`${loaded.materialization.paperId}: ignoring ${PUBLIC_SEARCH_METADATA_FILE_NAME}: ${error.message}`)
+    return null
+  }
 }
 
 function fail(message, code = 'IMPORT_REVIEW_CANDIDATE_INVALID', status, details) {
@@ -279,6 +290,7 @@ function loadNck1AnalyzedPackageReviewSource(rootDir, config, manifest) {
     config,
     manifest,
     materialization: derived.materialization,
+    ...loadAnswerCorrections(rootDir, derived.materialization, manifestBytes),
     sourceInput,
     listeningAudioEvidence: null,
     listeningAudioBytes: audioMember
@@ -292,6 +304,14 @@ function loadNck1AnalyzedPackageReviewSource(rootDir, config, manifest) {
       members: manifest.members.map((member) => ({ ...structuredClone(member) })),
     },
   }
+}
+
+function loadAnswerCorrections(rootDir, materialization, sourceBytes) {
+  const file = resolveReviewFile(rootDir, ANSWER_CORRECTIONS_FILE)
+  if (!existsSync(file)) return {}
+  const answerCorrectionsJson = new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(readReviewBytes(file))
+  const answerCorrections = validateAnswerCorrections(JSON.parse(answerCorrectionsJson), materialization, sha256(sourceBytes))
+  return { answerCorrections, answerCorrectionsJson }
 }
 
 export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, preparingListeningCorrection = false } = {}) {
@@ -417,9 +437,11 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
     }),
   }
   let reviewedMaterialization = spellingReviewBytes
-    ? applySpellingReview(materializationBytes, spellingReviewBytes)
+    ? applySpellingReview(materializationBytes, spellingReviewBytes, listeningAudio)
     : materialization
   if (spellingReviewBytes) {
+    verifyListeningInsertionOccurrences(spellingReviewBytes,
+      () => readJson(resolveReviewFile(rootDir, LISTENING_REVIEW_FILE), LISTENING_REVIEW_FILE))
     verifyTerminalWhitespaceSourceEvidence(materializationBytes, spellingReviewBytes, sourceInput.documents)
   }
   const correctionPath = resolveReviewFile(rootDir, LISTENING_INSTRUCTION_CORRECTION_FILE)
@@ -440,6 +462,7 @@ export function loadNck1ReviewSource(rootDir, { preparingSpelling = false, prepa
     // the validated count overlay in sourceInput for later Candidate replay,
     // but do not mix its corrected projection into a raw spelling request.
     materialization: preparingSpelling ? materialization : reviewedMaterialization,
+    ...loadAnswerCorrections(rootDir, materialization, materializationBytes),
     spellingReviewSummary: spellingReviewBytes
       ? summarizeSpellingReview(JSON.parse(new TextDecoder().decode(spellingReviewBytes)))
       : null,
@@ -582,16 +605,24 @@ function primarySourceType(materialization, analyzedPackage = false) {
   return source?.mediaType?.includes('wordprocessingml') ? 'docx' : 'pdf'
 }
 
-function loadReviewedListening(rootDir, loaded, candidate = null, sealedListening = null) {
+export function loadReviewedListening(rootDir, loaded, candidate = null, sealedListening = null, retainedBytes = null, retainedBase = null) {
   if (!existsSync(resolveReviewFile(rootDir, LISTENING_REVIEW_FILE))) return null
-  const subject = listeningReviewSubject(loaded, candidate || importNck1ReviewCandidate(rootDir, loaded).candidate)
+  const subject = listeningReviewSubject(loaded, candidate
+    || importNck1ReviewCandidate(rootDir, loaded, null, retainedCandidateBinding(retainedBytes, retainedBase)).candidate)
+  const transcript = loaded.materialization.listening.transcript
+  if (retainedBytes?.(LISTENING_AUDIO_PATHS.original) && retainedBytes(LISTENING_AUDIO_PATHS.playback)) {
+    const retained = readRetainedListeningReview(rootDir, subject, transcript, retainedBytes)
+    if (retained) return retained
+  }
   return sealedListening
-    ? readSealedListeningReview(rootDir, subject, loaded.materialization.listening.transcript,
+    ? readSealedListeningReview(rootDir, subject, transcript,
       sealedListening.revision, sealedListening.manifest)
-    : readListeningReview(rootDir, subject, loaded.materialization.listening.transcript)
+    : readListeningReview(rootDir, subject, transcript)
 }
 
-export function importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest = null) {
+export function importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest = null, retainedBase = null) {
+  const requireExactIdentity = Boolean(expectedCandidateDigest)
+  expectedCandidateDigest ||= retainedBase?.candidateDigest
   const reviewPath = resolveReviewFile(rootDir, LISTENING_REVIEW_FILE)
   if (!expectedCandidateDigest && existsSync(reviewPath)) {
     expectedCandidateDigest = readJson(reviewPath, LISTENING_REVIEW_FILE)?.subject?.candidateDigest
@@ -614,7 +645,7 @@ export function importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDige
   // default authority. Re-derive the requested identity; never trust its label.
   if (expectedCandidateDigest && imported.candidate?.candidateDigest !== expectedCandidateDigest
     && !loaded.analyzedPackage) {
-    for (const materializationAuthorityRef of [zhejiangLegacyMaterializationAuthorityRef, nck1MaterializationHistoricalAuthorityRef66, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef58]) {
+    for (const materializationAuthorityRef of [zhejiangLegacyMaterializationAuthorityRef, nck1CrossPageJoinV2AuthorityRef, nck1MaterializationHistoricalAuthorityRef66, nck1MaterializationHistoricalAuthorityRef64, nck1MaterializationHistoricalAuthorityRef62, nck1MaterializationHistoricalAuthorityRef61, nck1MaterializationHistoricalAuthorityRef59, nck1MaterializationHistoricalAuthorityRef58]) {
       const historical = importCanonicalCandidate(loaded.sourceInput, undefined, { materializationAuthorityRef })
       if (historical.candidate?.candidateDigest === expectedCandidateDigest) { imported = historical; break }
     }
@@ -622,28 +653,35 @@ export function importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDige
   // Keep invalid-source diagnostics distinct from an otherwise valid Candidate
   // with the wrong approval identity (publication treats those differently).
   if (!imported.candidate || imported.issues.length) return imported
-  if (expectedCandidateDigest && imported.candidate?.candidateDigest !== expectedCandidateDigest) {
+  // A byte-retained sidecar may still name the previous Candidate after a
+  // content edit. An explicit expected identity always remains strict.
+  if (expectedCandidateDigest && imported.candidate?.candidateDigest !== expectedCandidateDigest
+    && (requireExactIdentity || expectedCandidateDigest !== retainedBase?.candidateDigest)) {
     fail('Stored Candidate does not match a retained authority', 'IMPORT_REVIEW_PROJECTION_MISMATCH')
   }
   return imported
 }
 
-export function reviewBundleFilePaths(rootDir, candidate = null) {
-  const loaded = loadNck1ReviewSource(rootDir)
-  return reviewBundleFilePathsFromSource(rootDir, loaded, candidate)
+export function reviewBundleFilePaths(rootDir, candidate = null, evidenceBase = null) {
+  return withRetainedReviewEvidence(rootDir, evidenceBase, retainedBytes => {
+    const loaded = loadNck1ReviewSource(rootDir)
+    const reviewedListening = loadReviewedListening(rootDir, loaded, candidate, null, retainedBytes, evidenceBase?.revision)
+    return reviewBundleFilePathsFromSource(rootDir, loaded, candidate, { reviewedListening })
+  })
 }
 
 export function reviewBundleFilePathsForProjection(rootDir, projection) {
   const context = reviewBundleInventories.get(projection)
-  if (!context || context.rootDir !== path.resolve(rootDir)) {
-    return reviewBundleFilePaths(rootDir, projection?.candidate)
-  }
-  return context.inventory().map(file => ({ ...file }))
+  const files = context?.rootDir === path.resolve(rootDir)
+    ? context.inventory() : reviewBundleFilePaths(rootDir, projection?.candidate)
+  return files.filter(file => !projection?.importProfile || projection.publicSearchMetadataDigest
+    || file.path !== PUBLIC_SEARCH_METADATA_FILE_NAME).map(file => ({ ...file }))
 }
 
 function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
   reviewedListening = loadReviewedListening(rootDir, loaded, candidate),
   analysisValidated = false,
+  sealed = false,
 } = {}) {
   const { manifest, materialization } = loaded
   const playback = loaded.sourceInput.listeningAudio || loaded.analyzedPackage?.listeningAudio
@@ -657,15 +695,18 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
     const paperAsset = buildNck1CompatibilityPaperAsset({
       config: loaded.config,
       materialization,
+      answerCorrections: loaded.answerCorrections,
       sourceAssetVersion: 1,
       primarySourceType: primarySourceType(materialization, Boolean(loaded.analyzedPackage)),
       sourceProvenance: loaded.analyzedPackage ? loaded.sourceProvenance : null,
     })
     buildNck1AnalysisProjection({
       rootDir,
-      materialization,
+      materialization: projectEffectiveAnswers(materialization, loaded.answerCorrections),
       paperAsset,
       required: !importProfile || loaded.config.withTeachingAnalyses === true,
+      allowPartialAnalyses: true,
+      sealed,
       analysisProfile: LEGACY_NCK1_ANALYSIS_PROFILE,
       requireTeachingContent: Boolean(loaded.analyzedPackage) || loaded.config.withTeachingAnalyses === true,
     })
@@ -754,6 +795,9 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
     ...(loaded.sourceInput.listeningInstructionCorrectionBytes ? [{
       path: LISTENING_INSTRUCTION_CORRECTION_FILE, mediaType: 'application/json', role: 'listening_instruction_correction',
     }] : []),
+    ...(loaded.answerCorrections ? [{
+      path: ANSWER_CORRECTIONS_FILE, mediaType: 'application/json', role: 'answer_corrections',
+    }] : []),
     ...(loaded.sourceInput.ocrSourceBytes || loadReferenceOcrSourceBytes(rootDir, {
       producerVersion: existsSync(resolveReviewFile(rootDir, SOURCE_REFERENCES_FILE))
         ? parseSourceReferencesBytes(readFileSync(resolveReviewFile(rootDir, SOURCE_REFERENCES_FILE))).producerVersion : undefined,
@@ -767,7 +811,7 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
     ...(legacyWaveform ? [{ path: LEGACY_LISTENING_WAVEFORM_FILE, mediaType: 'application/json', role: 'listening_audio_waveform' }] : []),
     ...(reviewedListening?.files || []),
     ...NCK1_STAGED_ANALYSIS_FILES
-      .filter(({ path: relativePath }) => !importProfile || existsSync(resolveReviewFile(rootDir, relativePath)))
+      .filter(({ path: relativePath }) => existsSync(resolveReviewFile(rootDir, relativePath)))
       .map(({ path: relativePath, role }) => ({
       path: relativePath,
       mediaType: 'application/json',
@@ -777,7 +821,8 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
       path: PARAGRAPH_SUMMARIES_FILE_NAME,
       mediaType: 'application/json',
       role: 'paragraph_summaries',
-    }, {
+    }] : []),
+    ...(importProfile && existsSync(resolveReviewFile(rootDir, PUBLIC_SEARCH_METADATA_FILE_NAME)) ? [{
       path: PUBLIC_SEARCH_METADATA_FILE_NAME,
       mediaType: 'application/json',
       role: 'public_search_metadata',
@@ -1096,11 +1141,15 @@ export function validateAgentOcrCorrectionSidecar(sidecar, { materialization, pa
 
 export function buildImportReviewProjection(
   rootDir,
-  { reviewKind = 'candidate', requireAnalyses = false, expectedCandidateDigest = null } = {},
+  { reviewKind = 'candidate', requireAnalyses = false, expectedCandidateDigest = null,
+    replayReferencesFromRevisionId = null } = {},
+  evidenceBase = null,
 ) {
   return reviewKind === 'ocr'
     ? buildNck1OcrReviewProjection(rootDir)
-    : buildNck1ReviewProjection(rootDir, { requireAnalyses, expectedCandidateDigest })
+    : buildNck1ReviewProjection(rootDir, {
+        requireAnalyses, expectedCandidateDigest, replayReferencesFromRevisionId,
+      }, evidenceBase)
 }
 
 function visibleStructure(projected) {
@@ -1334,6 +1383,7 @@ function compatibilityText(
 export function buildNck1CompatibilityPaperAsset({
   config,
   materialization,
+  answerCorrections,
   sourceAssetVersion,
   primarySourceType = 'pdf',
   sourceProvenance = null,
@@ -1491,6 +1541,14 @@ export function buildNck1CompatibilityPaperAsset({
       }
     }
   }
+  const corrections = answerCorrectionsByQuestion(answerCorrections)
+  for (const [questionId, entry] of Object.entries(answerKey)) {
+    const effective = effectiveAnswer(corrections, questionId, entry.answer)
+    if (effective !== entry.answer) {
+      entry.officialAnswer = entry.answer
+      entry.answer = effective
+    }
+  }
   return {
     schemaVersion: 'paper-asset-v1',
     paper: {
@@ -1595,7 +1653,7 @@ export function listeningReviewProjection(
   }
 }
 
-function configuredSourceType(config, paperId) {
+export function configuredSourceType(config, paperId) {
   const sourceType = config.provenance?.sourceType
     || (paperId.startsWith('paper-mock-') ? '模拟题' : '真题')
   if (!['真题', '模拟题', '校本题', '自编题'].includes(sourceType)) {
@@ -1624,6 +1682,8 @@ export function buildNck1CompatibilityPackage({
   config,
   manifest,
   materialization,
+  answerCorrections,
+  answerCorrectionsJson,
   sourceProvenance = null,
   sourceAssetVersion = 1,
   analysisSidecars = {},
@@ -1661,6 +1721,7 @@ export function buildNck1CompatibilityPackage({
   const paperAsset = buildNck1CompatibilityPaperAsset({
     config,
     materialization,
+    answerCorrections,
     sourceAssetVersion,
     primarySourceType: primarySourceType(materialization, externalPackage),
     sourceProvenance: externalPackage ? sourceProvenance : null,
@@ -1669,7 +1730,7 @@ export function buildNck1CompatibilityPackage({
     schemaVersion: 'answer-key-v1',
     paperId: materialization.paperId,
     sourceAssetVersion,
-    answers: structuredClone(paperAsset.answerKey.answers),
+    answers: officialAnswerEntries(paperAsset.answerKey.answers),
   }
   const analysisByFamily = {
     reading: analysisSidecars['reading-choice-analysis-v1.json'],
@@ -1697,6 +1758,7 @@ export function buildNck1CompatibilityPackage({
     }]))
   return {
     paperAsset,
+    ...(answerCorrectionsJson ? { answerCorrectionsJson } : {}),
     ...(config.headerTitle !== undefined ? { paperHeader: configuredPaperHeader(config) } : {}),
     answerKey,
     readingAnalysis: analysisSidecars['reading-choice-analysis-v1.json'] || null,
@@ -1742,8 +1804,60 @@ export function buildNck1CompatibilityPackage({
   }
 }
 
-export function buildNck1ReviewProjection(rootDir, options = {}) {
-  return buildNck1ReviewProjectionInternal(rootDir, options, readFrozenProducts)
+export function buildNck1ReviewProjection(rootDir, options = {}, evidenceBase = null) {
+  return buildNck1ReviewProjectionInternal(rootDir, options, readFrozenProducts, null, null, evidenceBase)
+}
+
+const evidenceSourceRoles = new Set(['question_source', 'official_answers', 'question_and_answers', 'unofficial_listening'])
+
+// Finalize gets its base and directory from the Review store. The CLI can use
+// an authenticated hydrate receipt for local computation only.
+export function withRetainedReviewEvidence(rootDir, base, compute) {
+  const revision = base?.revision
+  const manifest = revision?.manifest
+  if (!revision?.id || revision.reviewKind !== 'candidate' || !revision.state || revision.state === 'uploading'
+    || !revision.finalizedAt || !Array.isArray(manifest?.files) || revision.bundleDigest !== manifest.bundleDigest
+    || ['paperId', 'sourceDigest', 'candidateDigest'].some(key => revision[key] !== manifest[key])
+    || reviewSubjectBundleDigest(manifest) !== revision.bundleDigest) return compute(null)
+
+  const files = new Map(manifest.files.map(file => [file.path, file]))
+  const previousDirectory = base.directory && path.resolve(base.directory) !== path.resolve(rootDir)
+    ? base.directory : null
+  const retainedBytes = relative => {
+    const file = files.get(relative)
+    if (!file) return null
+    try {
+      const read = directory => readFileSync(resolveReviewFile(directory, relative))
+      const matches = bytes => bytes.byteLength === file.byteLength && sha256(bytes) === file.sha256
+      const bytes = read(rootDir)
+      return matches(bytes) && (!previousDirectory || matches(read(previousDirectory))) ? bytes : null
+    } catch {
+      return null
+    }
+  }
+  const source = readJson(resolveReviewFile(rootDir, 'universal-source-manifest.json'), 'universal-source-manifest.json')
+  const oldDocuments = manifest.files.filter(file => evidenceSourceRoles.has(file.role))
+  if (source.paperId !== revision.paperId || !oldDocuments.length || !Array.isArray(source.documents)
+    || source.documents.length !== oldDocuments.length
+    || new Set(source.documents.map(document => document.path)).size !== oldDocuments.length
+    || !source.documents.every(document => {
+      const file = files.get(document.path)
+      return evidenceSourceRoles.has(file?.role) && file.role === document.role
+        && file.mediaType === document.mediaType && file.sha256 === document.sha256
+        && file.byteLength === document.byteLength && retainedBytes(document.path)
+    })) return compute(null)
+
+  const evidence = retainedBytes(`materialization/${NCK1_OCR_EVIDENCE_FILE_NAME}`)
+  const confirmation = retainedBytes(`materialization/${NCK1_OCR_CONFIRMATION_FILE_NAME}`)
+  const run = () => compute(retainedBytes)
+  return evidence && confirmation
+    ? withRetainedNck1OcrEvidence(revision.paperId, evidence, confirmation, run)
+    : run()
+}
+
+export function retainedCandidateBinding(retainedBytes, revision) {
+  if (!revision) return null
+  return (retainedBytes?.(LISTENING_REVIEW_FILE) || retainedBytes?.(SOURCE_REFERENCES_FILE)) ? revision : null
 }
 
 // Server replay path only: revision is loaded from the persisted Review store,
@@ -1767,7 +1881,8 @@ function sealedReferenceReceipt(revision, manifest = revision.manifest) {
 export function buildNck1SealedReviewProjection(rootDir, revision, { manifest = revision.manifest, ...options } = {}) {
   return buildNck1ReviewProjectionInternal(rootDir,
     { ...options, expectedCandidateDigest: revision.candidateDigest }, readFrozenProducts,
-    sealedReferenceReceipt(revision, manifest), { revision, manifest })
+    sealedReferenceReceipt(revision, manifest), { revision, manifest },
+    { revision: { ...revision, manifest }, directory: rootDir })
 }
 
 // Only this entry constructs the private product reader. There is no public
@@ -1785,7 +1900,7 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
     // Sealed hashes and JSON syntax are already checked. The target reopens its
     // own snapshot; retain canonical JSON digests instead of a second full parse
     // of every image bundle/materialization throughout compilation.
-    for (const file of fileEvidence) if (Object.hasOwn(file, 'json') && file.path !== PRODUCT_MANIFEST) {
+    for (const file of fileEvidence) if (Object.hasOwn(file, 'json') && ![PRODUCT_MANIFEST, 'config.json'].includes(file.path)) {
       file.jsonDigest = digestJson(file.json)
       delete file.json
     }
@@ -1794,7 +1909,7 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
       const products = fileEvidence.find(file => file.path === PRODUCT_MANIFEST)
       const readSealedProducts = (_root, options) => {
         const manifest = products?.json
-        if (!manifest || manifest.inputDigest !== options.inputDigest
+        if (!manifest || (manifest.inputDigest !== options.inputDigest && manifest.inputDigest !== options.legacyInputDigest(manifest.inputDigest))
           || sourceProductEditions(options.config, options.listeningCount).length !== manifest.files.length) {
           fail('Sealed product input identity differs')
         }
@@ -1816,7 +1931,8 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
       }
       const projection = buildNck1ReviewProjectionInternal(snapshot.directory,
         { requireAnalyses: true, expectedCandidateDigest: revision.candidateDigest }, readSealedProducts,
-        sealedReferenceReceipt(revision), { revision, manifest: revision.manifest })
+        sealedReferenceReceipt(revision), { revision, manifest: revision.manifest },
+        { revision, directory: snapshot.directory })
       onMemory('projection')
       baseline = buildStoredReviewSubject({ revision, preview, storedFiles, fileEvidence,
         validatedListeningReview: projection.reviewedListening })
@@ -1836,22 +1952,27 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
   })
 }
 
-function buildNck1ReviewProjectionInternal(rootDir, options = {}, readProducts, referenceReceipt = null, sealedListening = null) {
-  return withNck1MaterializationSourceCache(() => buildNck1ReviewProjectionUncached(rootDir, options, readProducts, referenceReceipt, sealedListening))
+function buildNck1ReviewProjectionInternal(rootDir, options = {}, readProducts, referenceReceipt = null, sealedListening = null, evidenceBase = null) {
+  return withRetainedReviewEvidence(rootDir, evidenceBase, retainedBytes =>
+    withNck1MaterializationSourceCache(() => buildNck1ReviewProjectionUncached(rootDir,
+      options, readProducts, referenceReceipt, sealedListening, retainedBytes,
+      retainedBytes && evidenceBase)))
 }
 
 function buildNck1ReviewProjectionUncached(rootDir, {
   requireAnalyses = false,
   analysisProfile = LEGACY_NCK1_ANALYSIS_PROFILE,
   expectedCandidateDigest = null,
-} = {}, readProducts, referenceReceipt, sealedListening) {
+  replayReferencesFromRevisionId = null,
+} = {}, readProducts, referenceReceipt, sealedListening, retainedBytes, evidenceBase) {
   const loaded = loadNck1ReviewSource(rootDir)
-  const imported = importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest)
+  const imported = importNck1ReviewCandidate(rootDir, loaded, expectedCandidateDigest,
+    !expectedCandidateDigest ? retainedCandidateBinding(retainedBytes, evidenceBase?.revision) : null)
   if (!imported.candidate || imported.issues.length > 0) {
     const issue = imported.issues[0]
     fail(`${issue?.code || 'MATERIALIZATION_INVALID'}: ${issue?.message || 'Candidate derivation failed'}`)
   }
-  const reviewedListening = loadReviewedListening(rootDir, loaded, imported.candidate, sealedListening)
+  const reviewedListening = loadReviewedListening(rootDir, loaded, imported.candidate, sealedListening, retainedBytes)
   const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
   if (!preview.compilation) {
     const issue = preview.unresolvedIssues?.[0]
@@ -1870,6 +1991,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   const paperAsset = buildNck1CompatibilityPaperAsset({
     config: loaded.config,
     materialization: loaded.materialization,
+    answerCorrections: loaded.answerCorrections,
     sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
     primarySourceType: primarySourceType(
       loaded.materialization,
@@ -1879,12 +2001,22 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   })
   const analysisProjection = buildNck1AnalysisProjection({
     rootDir,
-    materialization: loaded.materialization,
+    materialization: projectEffectiveAnswers(loaded.materialization, loaded.answerCorrections),
     paperAsset,
     sourceAssetVersion: preview.candidate.interpretation.sourceAssetVersion,
     required: (requireAnalyses && !importProfile) || loaded.config.withTeachingAnalyses === true,
+    allowPartialAnalyses: true,
     analysisProfile,
     requireTeachingContent: Boolean(loaded.analyzedPackage) || loaded.config.withTeachingAnalyses === true,
+    sealed: Boolean(sealedListening),
+    getSentenceAlignment: () => {
+      try {
+        return alignReviewedListeningSentences(loaded.materialization, reviewedListening?.review,
+          file => readJson(resolveReviewFile(rootDir, file), 'Listening ASR'))
+      } catch {
+        return []
+      }
+    },
   })
   const sourceVisuals = sourceVisualProjection(loaded)
   const paragraphSummaries = importProfile
@@ -1898,6 +2030,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   const sourceReferences = sourceReferencesBytes ? parseSourceReferencesBytes(sourceReferencesBytes) : null
   const referenceBinding = {
     sidecar: sourceReferences,
+    onWarning: message => console.warn(`${loaded.materialization.paperId}: ${message}`),
     materialization: loaded.materialization,
     sourceDigest: preview.candidate.source.sha256,
     candidateDigest: preview.candidate.candidateDigest,
@@ -1908,8 +2041,12 @@ function buildNck1ReviewProjectionUncached(rootDir, {
       canonicalOcrSourceBytes: loaded.sourceInput.ocrSourceBytes,
     }),
   }
-  if (referenceReceipt) assertSealedSourceReferenceReplay({ ...referenceBinding,
-    sourceReferencesBytes, receipt: referenceReceipt })
+  const baseline = evidenceBase?.revision
+  const receipt = referenceReceipt ?? (replayReferencesFromRevisionId && baseline?.id === replayReferencesFromRevisionId
+    && retainedBytes(SOURCE_REFERENCES_FILE)?.equals(sourceReferencesBytes ?? Buffer.alloc(0))
+    ? sealedReferenceReceipt(baseline) : null)
+  if (receipt) assertSealedSourceReferenceReplay({ ...referenceBinding,
+    sourceReferencesBytes, receipt })
   else assertSourceReferenceAdmission(referenceBinding)
   const slotBindings = paginationSlotBindings(consumption)
   // Historical analyzed packages without a PDF commitment retain their separate
@@ -1946,14 +2083,26 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   let bundleFiles
   const inventory = () => bundleFiles ||= reviewBundleFilePathsFromSource(rootDir, loaded, imported.candidate, {
     reviewedListening,
+    sealed: Boolean(sealedListening),
     // Inventory historically requires analyses for legacy bundles even when
     // a Screen projection did not, and checks sourceAssetVersion 1. Reuse only
     // an equivalent (or stricter) analysis validation.
     analysisValidated: (requireAnalyses || Boolean(importProfile))
       && preview.candidate.interpretation.sourceAssetVersion === 1,
   })
-  const frozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
-    ? readProducts(rootDir, { inputDigest: productInputDigest(rootDir, inventory(), reviewedListening),
+  const hasFrozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
+  const printInputDigest = hasFrozenProducts ? productInputDigest(rootDir, inventory(), reviewedListening) : null
+  const frozenProducts = hasFrozenProducts
+    ? readProducts(rootDir, { inputDigest: printInputDigest,
+        legacyInputDigest: expected => {
+          const originalManifest = retainedBytes?.(PRODUCT_MANIFEST)
+          if (originalManifest && JSON.parse(originalManifest).inputDigest === expected
+            && matchesSealedPrintInputs({ rootDir, inputDigest: printInputDigest,
+              sealedFiles: evidenceBase.revision.manifest.files,
+              sealedConfigBytes: evidenceBase.configBytes ?? (evidenceBase.directory
+                ? readReviewBytes(resolveReviewFile(evidenceBase.directory, 'config.json')) : null) })) return expected
+          return productInputDigest(rootDir, inventory(), reviewedListening, { legacy: true })
+        },
         config: loaded.config, listeningCount: slotBindings.filter(entry => entry.familyContractId === 'listening').length,
         ...productPageLimitsForPlan(paginationPlan?.plan) }) : null
   if (frozenProducts && !sourceReferences) {
@@ -1965,6 +2114,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   const projection = {
     ...loaded,
     frozenProducts,
+    printInputDigest,
     reviewedListening,
     paperId: loaded.materialization.paperId,
     paperName: loaded.config.provenance.paperName,
@@ -1996,7 +2146,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
     paragraphSummariesDigest: paragraphSummaries?.digest || null,
     publicSearchMetadata: publicSearchMetadata?.sidecar || null,
     publicSearchMetadataBytes: publicSearchMetadata?.bytes || null,
-    publicSearchMetadataDigest: publicSearchMetadata?.digest || null,
+    publicSearchMetadataDigest: publicSearchMetadata?.digest,
     sourceReferences,
     sourceReferencesBytes,
     sourceReferencesDigest: sourceReferencesBytes ? sha256(sourceReferencesBytes) : null,

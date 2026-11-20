@@ -12,7 +12,6 @@ import { buildNck1ReviewConsumption, printConsumption } from '../server/import-r
 import { validateNck1SourceMaterialization } from '../shared/paper-canonical/nck1SourceMaterialization.mjs'
 import { canonicalConsumptionPrintPayload } from './import-pipeline/canonical-consumption-print-payload.mjs'
 import { buildPrintHtml } from '../server/print-renderer.mjs'
-import { buildCanonicalReadingConsumptionSurfaceData } from '../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 
 const fixture = makeSyntheticNck1DocxFixture({ mediaLayout: true })
 const produced = produceNck1DocxMaterialization({ paperId: fixture.paperId, documents: fixture.sourceDocuments })
@@ -104,8 +103,6 @@ assert(preview.compilation)
 const consumption = buildNck1ReviewConsumption(preview.candidate, preview.compilation)
 const question = consumption.selections[0].projectedOccurrences[0].questions[0]
 assert.deepEqual(question.options.map((option) => option.figure.mediaId), figures.map((figure) => figure.mediaId))
-const surface = buildCanonicalReadingConsumptionSurfaceData({ consumption, groupId: consumption.selections[0].groupIds[0] })
-assert.equal(Object.hasOwn(surface.surfaceData.questions[0], 'correctOptionId'), false, 'Student surface excludes official answer')
 
 for (const [name, mutate] of [
   ['old schema', (value) => { value.schemaVersion = 'nck1-source-materialization-v2' }],
@@ -161,9 +158,12 @@ if (sourcePdf) {
 }
 
 const printHtml = new Map()
+const corrected = question.options.find(option => option.optionId !== question.correctOptionId)
+assert(question.correctOptionId)
 for (const versionType of ['student', 'teacher']) {
   const print = printConsumption(consumption)
-  const payload = canonicalConsumptionPrintPayload(print, 'Synthetic figure-option paper')
+  const payload = canonicalConsumptionPrintPayload(print, 'Synthetic figure-option paper',
+    new Map([[question.questionId, corrected.label]]))
   const html = buildPrintHtml({
     title: payload.title, versionType, printStyle: payload.printStyle,
     items: payload.items.map((item) => ({ detail: payload.details.get(item.questionGroupId), note: '', score: 0, sectionTitle: '' })),
@@ -172,6 +172,13 @@ for (const versionType of ['student', 'teacher']) {
   assert.equal((html.match(/data-canonical-figure-options/g) || []).length, 1)
   for (const figure of figures) assert(html.includes(`data-canonical-media-id="${figure.mediaId}"`))
   assert.equal(html.includes('data-canonical-correct-option-id='), versionType === 'teacher')
+  assert.equal(html.includes(`data-canonical-correct-option-id="${corrected.optionId}"`), versionType === 'teacher')
+  if (versionType === 'teacher') {
+    assert(html.slice(html.indexOf(`data-canonical-question-id="${question.questionId}"`))
+      .includes(`<strong>【答案】</strong>${corrected.label}`))
+  } else {
+    assert(!html.includes('<strong>【答案】</strong>'))
+  }
   printHtml.set(versionType, html)
 }
 

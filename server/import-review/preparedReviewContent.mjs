@@ -4,6 +4,7 @@ import { validatedPaperHeaderTitle } from '../../shared/paper-canonical/headerTi
 import { PUBLISHED_LISTENING_PLAYBACK_UI_FILE } from '../../shared/paper-canonical/listeningPlayback.mjs'
 import { loadCanonicalOnlyConsumers } from '../paper-canonical/publication.mjs'
 import { buildPaperImportOutputInventory } from '../paper-import/storage.mjs'
+import { answerCorrectionPublication } from '../paper-import/answerCorrections.mjs'
 import { rebindPaperNormalizedGroupsSidecar } from '../paper-import/normalization.mjs'
 import { buildNck1ReviewConsumption } from './revisionProjection.mjs'
 import { compareReviewPublicationContent } from './reviewPublicationContent.mjs'
@@ -34,10 +35,12 @@ function assertPreparedReviewContentInternal({
   if (!subject) reject('MISSING_BASELINE')
   const { sealed } = admission
   const manifest = sealed.manifest
+  const answerCorrections = answerCorrectionPublication(packageData.answerCorrectionsJson, approvedIdentity)
   const report = {
     ok: true, paperId: manifest.paperId, assetVersion: version, versionName: `v${version}`,
     canonicalPublicationDigest: manifest.publicationDigest,
     ...(packageData.sourceReferenceApproval ? { sourceReferencePublication: packageData.sourceReferenceApproval } : {}),
+    ...(answerCorrections ? { answerCorrections } : {}),
     ...(packageData.pdfProductApproval ? { pdfProducts: packageData.pdfProductApproval } : {}),
     ...(packageData.fileStorage ? { fileStorage: packageData.fileStorage } : {}),
     searchHref: publishReport?.searchHref, generatedAt: publishReport?.generatedAt,

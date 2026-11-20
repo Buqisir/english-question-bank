@@ -4,7 +4,7 @@ import path from 'node:path'
 import { DatabaseSync } from 'node:sqlite'
 import { sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { createImportReviewStore, reviewBundleDigest } from '../../server/import-review/importReviewStore.mjs'
-import { buildNck1ReviewProjection, loadNck1ReviewSource, reviewBundleFilePaths } from '../../server/import-review/revisionProjection.mjs'
+import { buildNck1ReviewProjection, loadNck1ReviewSource, reviewBundleFilePaths, reviewBundleFilePathsForProjection } from '../../server/import-review/revisionProjection.mjs'
 import { manifestProductFiles, ABSENT_BY_EXAM_DESIGN } from '../../server/paper-import/pdfProductSet.mjs'
 import { productInputDigest, PRODUCT_MANIFEST } from '../../server/paper-import/frozenProducts.mjs'
 import { productPdfBytes } from '../../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
@@ -55,7 +55,7 @@ export function reviewFixtureManifest(directory, projection) {
       publicSearchMetadataDigest: projection.publicSearchMetadataDigest } : {}),
     ...(projection.analysisDigest ? { analysisDigest: projection.analysisDigest } : {}),
     producerBuildId: 'reviewed-publication-fixture', resolvesIssueIds: [],
-    files: reviewBundleFilePaths(directory).map(file => {
+    files: reviewBundleFilePathsForProjection(directory, projection).map(file => {
       const bytes = readFileSync(path.join(directory, file.path))
       return { ...file, sha256: sha256(bytes), byteLength: bytes.length }
     }) }

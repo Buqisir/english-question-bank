@@ -8,9 +8,6 @@
  *   - The desk expands ONE paper at a time (`expandedPaperKey`).
  *   - Expanding a paper does NOT fetch question-group detail. We render the
  *     groups inside the paper card from the cards we already have.
- *   - `detailCache` is preserved (and exported on `retrieval.groupDetail.cache`)
- *     for future per-group detail drawers, but no longer driven by the paper
- *     expand toggle.
  *
  * Public surface:
  *   - retrieval: a stable view object with the current 取题流 state.
@@ -22,14 +19,10 @@
  * E3 retired the old text-search-fill 找类似 flow that used to live here —
  * 配相似 is now a plain deep-link owned by ConciergeGroupCard, not a hook
  * action.)
- *
- * Important: this hook owns its own detailCache, separate from App.tsx's
- * previewDetails / loadPreviewForBasketItems. They are NOT shared.
  */
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import type { QuestionGroupCard, QuestionGroupDetail } from '../domain/questionBank.ts'
-import { fetchQuestionGroupDetail } from '../services/questionGroups.ts'
+import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { fetchAiStatus } from '../services/aiStatus.ts'
 import {
   runConciergeSearch,
@@ -45,13 +38,6 @@ export type ConciergeDeskState =
   | { kind: 'clarification'; question: string; assistantMessage: string; pendingQuery: string }
   | { kind: 'error'; message: string; query: string }
 
-export type ConciergeDetailEntry =
-  | { status: 'loading' }
-  | { status: 'ready'; detail: QuestionGroupDetail }
-  | { status: 'error'; error: string }
-
-export type ConciergeDetailCache = Record<string, ConciergeDetailEntry>
-
 export type UseConciergeDeskInput = {
   questionGroups: QuestionGroupCard[]
   apiKey: string
@@ -59,8 +45,6 @@ export type UseConciergeDeskInput = {
   thinkingMode?: boolean
   /** Test seam — replace network call. */
   searchOverride?: typeof runConciergeSearch
-  /** Test seam — replace the detail fetch. */
-  detailFetchOverride?: typeof fetchQuestionGroupDetail
   /** Test seam — replace the AI-status fetch (cut ai-key-server-fallback). */
   aiStatusFetchOverride?: typeof fetchAiStatus
 }
@@ -71,9 +55,6 @@ export type ConciergeRetrievalView = {
   state: ConciergeDeskState
   paperResults: PaperResult[]
   expandedPaperKey: string | null
-  groupDetail: {
-    cache: ConciergeDetailCache
-  }
 }
 
 /** Action slice of the 取题流: every command ConciergeDesk can fire. */
@@ -81,7 +62,6 @@ export type ConciergeRetrievalActions = {
   setIntent: (value: string) => void
   submit: (intentOverride?: string) => Promise<void>
   togglePaper: (paperKey: string) => void
-  retryGroupDetail: (groupId: string) => void
   reset: () => void
 }
 
@@ -94,7 +74,6 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
   const [intent, setIntent] = useState('')
   const [state, setState] = useState<ConciergeDeskState>({ kind: 'empty' })
   const [expandedPaperKey, setExpandedPaperKey] = useState<string | null>(null)
-  const [detailCache, setDetailCache] = useState<ConciergeDetailCache>({})
   // Reset/new submissions revoke older requests, including their error paths.
   // Keep this synchronous: clearing the input must win before a response settles.
   const searchRequestRef = useRef(0)
@@ -110,7 +89,6 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
   // searches behave exactly like before this cut).
   const [dailyLimitExceeded, setDailyLimitExceeded] = useState(false)
 
-  const fetchDetail = input.detailFetchOverride || fetchQuestionGroupDetail
   const fetchStatus = input.aiStatusFetchOverride || fetchAiStatus
 
   useEffect(() => {
@@ -126,39 +104,6 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
     }
   }, [fetchStatus])
 
-  const loadDetail = useCallback(
-    (groupId: string) => {
-      setDetailCache((prev) => ({ ...prev, [groupId]: { status: 'loading' } }))
-      Promise.resolve()
-        .then(() => fetchDetail(groupId))
-        .then((detail: QuestionGroupDetail | null | undefined) => {
-          if (!detail) {
-            setDetailCache((prev) => ({
-              ...prev,
-              [groupId]: { status: 'error', error: '没找到这个题组，可能已被移除。刷新试试，或换一组。' },
-            }))
-            return
-          }
-          setDetailCache((prev) => ({ ...prev, [groupId]: { status: 'ready', detail } }))
-        })
-        .catch((error: unknown) => {
-          const message = error instanceof Error ? error.message : String(error)
-          if (typeof console !== 'undefined' && console.warn) {
-            console.warn('[concierge] group detail fetch failed:', message)
-          }
-          setDetailCache((prev) => ({ ...prev, [groupId]: { status: 'error', error: message } }))
-        })
-    },
-    [fetchDetail],
-  )
-
-  const retryGroupDetail = useCallback(
-    (groupId: string) => {
-      loadDetail(groupId)
-    },
-    [loadDetail],
-  )
-
   // Single-paper auto-expand: when a fresh result set resolves to exactly one
   // bucket, open it ONCE. After that, the user's explicit collapse (set to
   // null via togglePaper) wins — do not snap it back open. We track which
@@ -167,7 +112,6 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
 
   const clearExpansion = useCallback(() => {
     setExpandedPaperKey(null)
-    setDetailCache({})
     lastAutoExpandKeyRef.current = null
   }, [])
 
@@ -205,8 +149,7 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
 
   const togglePaper = useCallback((paperKey: string) => {
     // Toggle: if already expanded, collapse; otherwise switch to this one.
-    // No fetch. No detail-cache touch. The paper expand renders directly from
-    // the cards we already have.
+    // The expanded paper renders directly from the cards we already have.
     setExpandedPaperKey((current) => (current === paperKey ? null : paperKey))
   }, [])
 
@@ -300,11 +243,8 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
       state,
       paperResults,
       expandedPaperKey,
-      groupDetail: {
-        cache: detailCache,
-      },
     }),
-    [intent, state, paperResults, expandedPaperKey, detailCache],
+    [intent, state, paperResults, expandedPaperKey],
   )
 
   const actions = useMemo<ConciergeRetrievalActions>(
@@ -312,10 +252,9 @@ export function useConciergeDesk(input: UseConciergeDeskInput): UseConciergeDesk
       setIntent,
       submit,
       togglePaper,
-      retryGroupDetail,
       reset,
     }),
-    [setIntent, submit, togglePaper, retryGroupDetail, reset],
+    [setIntent, submit, togglePaper, reset],
   )
 
   return {

@@ -3106,7 +3106,7 @@ export function deriveNck1MaterializationBundle(rawInput, authorityRef = nck1Mat
   const rawMaterialization = materialization
   if (input.spellingReviewBytes) {
     try {
-      materialization = applySpellingReview(input.materializationBytes, input.spellingReviewBytes)
+      materialization = applySpellingReview(input.materializationBytes, input.spellingReviewBytes, input.listeningAudio)
       verifyTerminalWhitespaceSourceEvidence(input.materializationBytes, input.spellingReviewBytes, input.documents)
       const correctedIssues = validateNck1SourceMaterialization(materialization, options)
       if (correctedIssues.length) throw new Error(correctedIssues[0].message)

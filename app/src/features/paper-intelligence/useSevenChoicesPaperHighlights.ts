@@ -77,11 +77,19 @@ export function useSevenChoicesPaperHighlights(args: {
     schedule()
     const scroller = leftScrollerRef.current
     scroller?.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('scroll', schedule, { passive: true })
     window.addEventListener('resize', schedule)
+    // Match the reading connector: layout/zoom changes can settle after resize.
+    const observer = new ResizeObserver(schedule)
+    if (scroller) observer.observe(scroller)
+    document.fonts.addEventListener('loadingdone', schedule)
     return (): void => {
       cancelAnimationFrame(frame)
       scroller?.removeEventListener('scroll', schedule)
+      window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', schedule)
+      observer.disconnect()
+      document.fonts.removeEventListener('loadingdone', schedule)
     }
   }, [enabled, leftScrollerRef, openQuestionIds, chains])
 

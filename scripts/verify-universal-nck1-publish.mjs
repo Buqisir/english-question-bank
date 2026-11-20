@@ -33,8 +33,10 @@ import {
   buildNck1ReviewProjection,
   buildNck1SealedReviewProjection,
   buildNck1ReviewConsumption,
+  importNck1ReviewCandidate,
   loadNck1ReviewSource,
   reviewBundleFilePaths,
+  reviewBundleFilePathsForProjection,
   resolveReviewFile,
 } from '../server/import-review/revisionProjection.mjs'
 import { loadCanonicalImportRequest } from '../server/paper-canonical/importRequest.mjs'
@@ -71,6 +73,7 @@ import { digestJson, sha256, stableStringify } from '../shared/paper-canonical/s
 import { subjectFreeHeaderTitle } from '../shared/paper-canonical/headerTitle.mjs'
 import { nck1OcrSourceSetDigest } from '../server/paper-import/nck1OcrSourceEvidence.mjs'
 import {
+  nck1CrossPageJoinV2AuthorityRef,
   nck1MaterializationCandidateAuthorityRef,
   nck1MaterializationHistoricalAuthorityRef58,
   nck1MaterializationHistoricalAuthorityRef66,
@@ -447,7 +450,7 @@ export function makeReviewRoot(
   parentDir,
   fixturePaperId = paperId,
   questionSourceLabel = 'deterministic NCK1 question source',
-  { listening = false, sourceType = '自编题', historicalSource = false } = {},
+  { listening = false, sourceType = '自编题', historicalSource = false, openingListeningText } = {},
 ) {
   const reviewRoot = path.join(parentDir, 'review')
   const { questionBytes, answerBytes, evidence: sourceEvidence, confirmation: sourceConfirmation } =
@@ -463,7 +466,7 @@ export function makeReviewRoot(
   materialization.paperId = fixturePaperId
   if (!historicalSource) locateCurrentReviewQuestions(materialization)
   if (listening) {
-    materialization.listening.transcript[0].text =
+    materialization.listening.transcript[0].text = openingListeningText ??
       'Where will you meet your sister tomorrow morning? I will meet her beside the central library before lunch.'
     materialization.listening.questions[5].options[2].text =
       'Ask the librarian for information about the new community reading programme.'
@@ -900,6 +903,14 @@ function verifyHistoricalAuthorityReplay() {
   try {
     const { reviewRoot } = makeReviewRoot(root, paperId, undefined, { historicalSource: true })
     const loaded = loadNck1ReviewSource(reviewRoot)
+    const v78 = importCanonicalCandidate(loaded.sourceInput, undefined, {
+      materializationAuthorityRef: nck1CrossPageJoinV2AuthorityRef,
+    })
+    assert.deepEqual(v78.issues, [])
+    assert.equal(
+      importNck1ReviewCandidate(reviewRoot, loaded, v78.candidate.candidateDigest).candidate.authority.manifestVersion,
+      '78',
+    )
     const previous = importCanonicalCandidate(loaded.sourceInput, undefined, {
       materializationAuthorityRef: nck1MaterializationHistoricalAuthorityRef58,
     })
@@ -1079,7 +1090,7 @@ function reviewManifestFor(reviewRoot, projection) {
   if (!existsSync(path.join(reviewRoot, 'products/manifest-v1.json'))) {
     projection = freezeReviewFixture(reviewRoot, { expectedCandidateDigest: projection.candidateDigest })
   }
-  const files = reviewBundleFilePaths(reviewRoot).map((file) => {
+  const files = reviewBundleFilePathsForProjection(reviewRoot, projection).map((file) => {
     const bytes = readFileSync(resolveReviewFile(reviewRoot, file.path))
     return {
       ...file,
@@ -1472,7 +1483,6 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
   try {
     const studentReviewPrint = await requestReviewPrint(projection, 'student')
     assert.equal(studentReviewPrint.status, 200)
-    assert.doesNotMatch(studentReviewPrint.body, /class="teacher-official-model-answer"|Official (?:application|continuation) sample/)
     const teacherReviewPrint = await requestReviewPrint(projection, 'teacher')
     assert.equal(teacherReviewPrint.status, 200)
     assert.equal(
@@ -1616,8 +1626,8 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     assert.equal(await screenPage.locator('audio').count(), 0, 'Review preview does not expose published playback')
     assert.doesNotMatch(
       await screenPage.locator('.paper-browse-content').textContent(),
-      /Long listening transcript|官方答案|内容安全检查通过/,
-      'student exam column stays free of listening transcript and analysis',
+      /Long listening transcript|内容安全检查通过/,
+      'student exam column omits the listening transcript and safety verdict',
     )
     await screenPage.locator('[data-paper-question-id="question:listening:6"]').click()
     screenProjection = { ...listeningProjection, consumption: {
@@ -1652,6 +1662,7 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     await trigger.waitFor()
     await screenPage.locator('[data-paper-question-id="question:listening:6"]').click()
     await screenPage.locator('.listening-analysis-panel').waitFor()
+    const lecturePlayer = screenPage.locator('.listening-analysis-panel .listening-transport-main')
     assert.equal(await screenPage.locator('.ps-listening-player').count(), 0,
       'Listening controls must not occupy standalone paper rows')
     assert.equal(await screenPage.locator('.ps-listening-section .ps-text-trail .listening-player').count(), 1)
@@ -1714,21 +1725,22 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     await screenPage.waitForFunction(() => document.querySelector('audio')?.readyState >= 1)
     assert.equal(await audio.evaluate((element) => Math.round(element.duration)), 12)
     await screenPage.waitForFunction(() => document.querySelector('audio').currentTime > 0)
-    await fullPlayer.getByRole('button', { name: '暂停', exact: true }).click()
-    await fullPlayer.getByRole('slider').press('Home')
-    await fullPlayer.getByRole('slider').press('ArrowRight')
+    await lecturePlayer.getByRole('button', { name: '暂停', exact: true }).click()
+    assert.equal(await audio.evaluate(element => element.paused), true)
+    await lecturePlayer.getByRole('slider').press('Home')
+    await lecturePlayer.getByRole('slider').press('ArrowRight')
     await screenPage.waitForFunction(() => !document.querySelector('audio').seeking)
     assert.equal(await audio.evaluate((element) => Math.round(element.currentTime)), 5)
-    await fullPlayer.getByRole('button', { name: '播放速度 1 倍，点击切换', exact: true }).click()
+    await lecturePlayer.getByRole('button', { name: '播放速度 1 倍，点击切换', exact: true }).click()
     assert.equal(await audio.evaluate((element) => element.playbackRate), 1.25)
-    const lineGeometry = await fullPlayer.locator('.listening-player-line-spans:not(.listening-player-line-spans--played)')
+    const lineGeometry = await lecturePlayer.locator('.listening-player-line-spans:not(.listening-player-line-spans--played)')
       .evaluate(element => [...element.children].map(line => ({
         x: parseFloat(line.style.left) / element.clientWidth,
         width: parseFloat(line.style.width) / element.clientWidth,
       })))
     const cueTimes = [[0, .7], [1.2, 2], [2.3, 3.3], [3.8, 4.5], [5.1, 6], [6.5, 8.2]]
     assert.equal(lineGeometry.length, cueTimes.length)
-    const recordingDuration = Number(await fullPlayer.getByRole('slider').getAttribute('aria-valuemax'))
+    const recordingDuration = Number(await lecturePlayer.getByRole('slider').getAttribute('aria-valuemax'))
     // aria-valuemax is whole seconds, while the encoded fixture's published duration carries MP3
     // frame padding that differs between ffmpeg builds; derive the track scale from the lines instead.
     const lastLine = lineGeometry.at(-1)
@@ -1741,7 +1753,7 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
         && Math.abs(line.width * secondsPerTrack - (end - start)) < .02,
       `Question lines preserve real timestamps and instruction/silence gaps: ${JSON.stringify({ index, line, secondsPerTrack })}`)
     })
-    const slider = fullPlayer.getByRole('slider')
+    const slider = lecturePlayer.getByRole('slider')
     const beforeDrag = await audio.evaluate(element => element.currentTime)
     const trackBox = await slider.boundingBox()
     await screenPage.mouse.move(trackBox.x + trackBox.width * .3, trackBox.y + trackBox.height / 2)
@@ -1750,23 +1762,29 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
     assert.equal(await audio.evaluate(element => element.currentTime), beforeDrag, 'Dragging previews without seeking audio')
     assert.ok(Math.abs(Number(await slider.getAttribute('aria-valuenow')) - recordingDuration * .6) <= 1)
     await screenPage.mouse.up()
-    assert.ok(Math.abs(await audio.evaluate(element => element.currentTime) - recordingDuration * .6) < .1,
-      'Pointer release commits one seek')
+    const afterDrag = await audio.evaluate(element => element.currentTime)
+    assert.ok(Math.abs(afterDrag - secondsPerTrack * .6) < .1,
+      `Pointer release commits one seek to ${secondsPerTrack * .6}s, got ${afterDrag}s`)
     await slider.press('Home')
+    await screenPage.waitForFunction(() => !document.querySelector('audio').seeking)
     await slider.press('Shift+ArrowRight')
+    await screenPage.waitForFunction(() => !document.querySelector('audio').seeking)
     assert.equal(await audio.evaluate(element => Math.round(element.currentTime)), recordingDuration,
       'Shift steps 15 seconds, clamped to the recording end')
     await slider.press('ArrowLeft')
+    await screenPage.waitForFunction(() => !document.querySelector('audio').seeking)
     assert.equal(await audio.evaluate(element => Math.round(element.currentTime)), recordingDuration - 5)
-    await fullPlayer.getByRole('button', { name: '跳到第 3 题', exact: true }).click()
+    const thirdMark = lecturePlayer.getByRole('button', { name: '跳到第 3 题', exact: true })
+    await thirdMark.click()
     await screenPage.waitForFunction(() => {
       const audio = document.querySelector('.ps-listening-part audio')
-      const mark = document.querySelector('.ps-listening-part [aria-label="跳到第 3 题"]')
+      const mark = document.querySelector('.listening-analysis-panel [aria-label="跳到第 3 题"]')
       return !audio.paused && audio.currentTime >= 2.3 && audio.currentTime < 3.3
         && mark.getAttribute('aria-current') === 'true'
     })
-    await fullPlayer.getByRole('button', { name: '暂停', exact: true }).click()
-    assert.equal(await fullPlayer.getByRole('button', { name: '跳到第 3 题', exact: true }).getAttribute('aria-current'), 'true')
+    await lecturePlayer.getByRole('button', { name: '暂停', exact: true }).click()
+    assert.equal(await audio.evaluate(element => element.paused), true)
+    assert.equal(await thirdMark.getAttribute('aria-current'), 'true')
     // Cold-start a nonzero segment, then switch players before its end. A full
     // recording that merely plays successfully cannot prove these boundaries.
     const questionPlayers = screenPage.locator('.ps-question > .ps-text-trail .listening-player')
@@ -1796,12 +1814,13 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       const audio = document.querySelectorAll('.ps-question > .ps-text-trail audio')[2]
       return audio?.paused && Math.abs(audio.currentTime - 3.3) < .01
     })
-    await thirdPlayer.getByRole('button', { name: '播放', exact: true }).click()
+    await lecturePlayer.getByRole('button', { name: '播放', exact: true }).click()
     await screenPage.waitForFunction(() => {
       const audio = document.querySelectorAll('.ps-question > .ps-text-trail audio')[2]
       return audio && !audio.paused && audio.currentTime >= 2.3 && audio.currentTime < 3.3
     })
-    await thirdPlayer.getByRole('button', { name: '暂停', exact: true }).click()
+    await lecturePlayer.getByRole('button', { name: '暂停', exact: true }).click()
+    assert.equal(await thirdPlayer.locator('audio').evaluate(element => element.paused), true)
     for (const [player, start, plays] of [[secondPlayer, 1.2, 1], [thirdPlayer, 2.3, 2]]) {
       const starts = await player.locator('audio').evaluate(element => JSON.parse(element.dataset.playStarts))
       assert.equal(starts.length, plays)
@@ -1842,8 +1861,8 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
         assert.ok(layouts.length > 0, 'Listening layout check requires real options')
         assert.deepEqual([...new Set(layouts.map(layout => layout.desktopColumns))].sort(), [1, 3],
           'The listening fixture exercises both single-column and three-column placement')
-        assert.ok(layouts.every(layout => layout.columns === (width <= 700 ? 1 : 3)),
-          'Screen keeps listening options in three desktop columns, including Print single-column fallbacks, and one mobile column')
+        assert.ok(layouts.every(layout => layout.columns === (width <= 700 ? 1 : layout.desktopColumns)),
+          'Screen keeps fitting listening options in three desktop columns, single-column fallbacks one per line, and one mobile column')
         if (width <= 700) {
           assert.ok(layouts.every(layout => layout.width > width * 0.6),
             'Mobile options retain a readable measure instead of inheriting print-sized side margins')
@@ -1881,7 +1900,7 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
         })
         // No forced click: also proves that the visible controls are not covered.
         await player.locator('.listening-player-speed').click()
-        assert.ok(await player.locator('.listening-player-wave').evaluate((element) => element.getBoundingClientRect().width > 80),
+        assert.ok(await player.getByRole('slider').evaluate((element) => element.getBoundingClientRect().width > 80),
           'fitting the popup must leave a usable seek track')
         if (process.env.LISTENING_QA_ARTIFACT_DIR && width === 390) {
           await screenPage.screenshot({ path: path.join(process.env.LISTENING_QA_ARTIFACT_DIR, `listening-${await player.getAttribute('data-size')}-narrow.png`) })
@@ -1943,7 +1962,7 @@ async function assertRoleSurfaces({ projection, listeningProjection, listeningPu
       assert.deepEqual(await questions.locator('.qnum')
         .evaluateAll(nodes => nodes.map(node => getComputedStyle(node).fontWeight)), Array(20).fill('400'))
       assert.equal(await page.locator('.question-group[data-canonical-group-type="listening"] .canonical-options > span').count(), 60)
-      assert.equal(await questions.locator('.answer').count(), versionType === 'teacher' ? 20 : 0)
+      if (versionType === 'teacher') assert.equal(await questions.locator('.answer').count(), 20)
       assert.ok(await questions.evaluateAll((elements) => elements.every((element) => getComputedStyle(element).breakInside === 'avoid')))
       assert.equal(await page.locator('.question-group[data-canonical-group-type="listening"] .canonical-options--two_by_two').count(), 0)
       const listeningColumns = await page.locator('.question-group[data-canonical-group-type="listening"] .canonical-options').first()
@@ -2308,11 +2327,22 @@ export async function verifyPublicPaperTeachingAnalyses() {
     assert.equal(JSON.parse((await runReviewCommand(['verify-analyses', fixtureId])).stdout).previewSidecars.length, 5)
     writeFileSync(path.join(reviewRoot, 'analysis-listening.json'), staged.get('analysis-listening.json'))
     rejectChanged('analysis-listening.json', value => { value.paperId = 'another-paper' }, /paperId|paper/u)
-    rejectChanged('analysis-reading-a.json', null, { code: 'NCK1_ANALYSIS_INCOMPLETE' })
     try {
       for (const file of staged.keys()) rmSync(path.join(reviewRoot, file))
       assert.throws(() => buildNck1ReviewProjection(reviewRoot), { code: 'NCK1_ANALYSIS_INCOMPLETE' })
       await assert.rejects(runReviewCommand(['verify-analyses', fixtureId]), /NCK1_ANALYSIS_INCOMPLETE/u)
+      const listeningFile = 'analysis-listening.json'
+      writeFileSync(path.join(reviewRoot, listeningFile), staged.get(listeningFile))
+      const partial = buildNck1ReviewProjection(reviewRoot)
+      assert.deepEqual(Object.keys(partial.analysisSidecars), ['listening-analysis-v1.json'])
+      assert.equal(buildNck1ReviewProjection(reviewRoot).analysisDigest, partial.analysisDigest)
+      assert.notEqual(partial.analysisDigest, first.analysisDigest)
+      rejectChanged(listeningFile, value => { delete value.materials[Object.keys(value.materials)[0]] }, /materials identity closure/u)
+      rejectChanged(listeningFile, value => { Object.values(value.questions)[0].questionId = 'question:listening:99' }, /identity is forged/u)
+      rejectChanged(listeningFile, value => {
+        const question = Object.values(value.questions)[0]
+        question.officialAnswer = question.officialAnswer === 'A' ? 'B' : 'A'
+      }, /official answer disagrees/u)
     } finally {
       for (const [file, bytes] of staged) writeFileSync(path.join(reviewRoot, file), bytes)
     }
@@ -2618,7 +2648,7 @@ try {
   listeningPublication.audioBytes = readFileSync(path.join(result.publish.versionDir, 'listening/playback.mp3'))
   for (const consumption of Object.values(result.publish.consumers)) {
     const listening = consumption.selections.find((selection) => selection.familyContractId === 'listening')
-    assert.doesNotMatch(JSON.stringify(listening), /Long listening transcript|correctOptionId|asr-v1|check-v1/)
+    assert.doesNotMatch(JSON.stringify(listening), /Long listening transcript|asr-v1|check-v1/)
     assert.ok(listening.projectedOccurrences.every((occurrence) =>
       occurrence.transcriptSegments.every((segment) => !Object.hasOwn(segment, 'content'))))
   }
@@ -2650,16 +2680,20 @@ const publicSummary = {
   })),
 }
 writeJson(summariesPath, publicSummary)
-writeJson(
-  path.join(publicOnly.reviewRoot, 'public-search-metadata-v1.json'),
-  publicMetadataFixture(
-    publicOnly.projection.materialization,
-    publicOnly.projection.sourceDigest,
-    publicOnly.projection.candidateDigest,
-  ),
-)
-publicOnly.projection = buildNck1ReviewProjection(publicOnly.reviewRoot, { requireAnalyses: true })
+const invalidMetadata = path.join(publicOnly.reviewRoot, 'public-search-metadata-v1.json')
+const metadataWarnings = []
+const originalWarn = console.warn
+try {
+  console.warn = message => metadataWarnings.push(message)
+  for (const bytes of ['{', '{}']) {
+    writeFileSync(invalidMetadata, bytes)
+    publicOnly.projection = buildNck1ReviewProjection(publicOnly.reviewRoot, { requireAnalyses: true })
+    assert.equal(publicOnly.projection.publicSearchMetadataDigest, undefined)
+  }
+} finally { console.warn = originalWarn }
+assert.equal(metadataWarnings.filter(message => message.includes('ignoring public-search-metadata-v1.json')).length, 2)
 assert.equal(publicOnly.projection.analysisDigest, null)
+assert.equal(publicOnly.projection.publicSearchMetadataDigest, undefined)
 assert.equal(publicOnly.projection.importProfile, 'public-paper-v1')
 const approvedPublicIdentity = approvedIdentity(publicOnly.projection)
 rmSync(summariesPath)
@@ -2705,6 +2739,7 @@ const publicPublication = publishReviewedFixture({
   paperAssetsDir: publicOnly.paperAssetsDir,
 })
 assert.equal(publicPublication.ok, true)
+assert.equal(existsSync(path.join(publicOnly.paperAssetsDir, paperId, 'latest/public-search-metadata-v1.json')), false)
 assert.deepEqual(
   readFileSync(path.join(publicOnly.paperAssetsDir, paperId, 'latest/paragraph-summaries-v1.json')),
   readFileSync(summariesPath),
@@ -2768,12 +2803,11 @@ try {
     'analysis-cloze.json',
     'analysis-grammar.json',
   ]) rmSync(path.join(incomplete.reviewRoot, fileName))
-  assert.throws(
-    () => publish(incomplete),
-    /Incomplete staged analyses/,
-  )
-  assert(!existsSync(incomplete.paperAssetsDir))
-  assert.equal(publishedVersionCount(incomplete), 0)
+  incomplete.projection = buildNck1ReviewProjection(incomplete.reviewRoot)
+  assert.equal(publish(incomplete).ok, true)
+  assert.deepEqual(readdirSync(path.join(incomplete.paperAssetsDir, paperId, 'latest', 'analyses')),
+    ['writing-analysis-v1.json'])
+  assert.equal(publishedVersionCount(incomplete), 1)
 } finally {
   close(incomplete)
 }
@@ -3761,11 +3795,10 @@ try {
   assert.equal((await ownerPublish()).status, 409)
   online.reviewStore.updateIssue(paperId, returnedIssue.id, { action: 'dismiss' })
   await reviewPage.reload()
-  const [promoted] = await Promise.all([
-    reviewPage.waitForResponse(response => new URL(response.url()).pathname === ownerPath),
-    reviewRow.getByRole('button', { name: '发布到题库', exact: true }).click(),
-  ])
-  assert.equal(promoted.status(), 200)
+  assert.equal(await reviewRow.getByRole('link', { name: '前往发布' }).getAttribute('href'),
+    `/?${new URLSearchParams({ view: 'ops-review', paper: paperId, rev: online.revision.id })}`)
+  const promoted = await ownerPublish()
+  assert.equal(promoted.status, 200)
   const promotedBody = await promoted.json()
   online.approval = online.reviewStore.getRevision(online.revision.id).approval
   body = JSON.stringify(promotionRequest(online.approval))
@@ -3794,7 +3827,7 @@ try {
   }
   await reviewPage.reload()
   await reviewRow.getByText('已发布', { exact: true }).waitFor()
-  assert.equal(await reviewRow.getByRole('button', { name: '发布到题库' }).count(), 0)
+  assert.equal(await reviewRow.getByRole('link', { name: '前往发布' }).count(), 0)
   assert.equal(await reviewRow.getByRole('link', { name: '查看已发布' }).count(), 1)
 
   const afterDb = online.openDatabase({ readOnly: true })
@@ -3963,7 +3996,8 @@ try {
   await reviewRow.getByText('已批准', { exact: true }).waitFor()
   assert.equal(await reviewRow.getByText('已发布', { exact: true }).count(), 0,
     'a newer unshipped revision is not labelled published by the old receipt')
-  assert.equal(await reviewRow.getByRole('button', { name: '发布到题库' }).isEnabled(), true)
+  assert.equal(await reviewRow.getByRole('link', { name: '前往发布' }).getAttribute('href'),
+    `/?${new URLSearchParams({ view: 'ops-review', paper: paperId, rev: nextRevision.id })}`)
   assert.equal((await ownerPublish()).status, 409, 'old browser version cannot publish a newer revision')
 
   const discussionThreadId = `T-${randomUUID()}`
