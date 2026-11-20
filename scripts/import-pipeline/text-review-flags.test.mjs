@@ -93,7 +93,7 @@ test('listening edits bind UTF-16 coordinates after spelling and retained insert
     evidence: { apple: heard, 'parakeet-v2': heard }, reason: '两家转写一致。',
   })
   const edits = [
-    edit(baseline.indexOf('leave'), '', 'just ', 'Did you really just leave today?'),
+    edit(baseline.indexOf('leave'), '', 'just ', 'Did you really already just leave today?'),
     edit(baseline.indexOf('go.'), 'go', 'walk', 'We should walk.'),
     edit(baseline.indexOf('already'), 'already ', '', 'Did you really leave today?'),
   ]
@@ -118,6 +118,33 @@ test('listening edits bind UTF-16 coordinates after spelling and retained insert
   assert.throws(() => apply({ ...edits[1], endSeconds: 31 }), /outside the reviewed occurrence/)
   assert.throws(() => apply({ ...edits[2], evidence: { ...edits[2].evidence, apple: 'Did you really already leave today?' } }),
     /two engines/)
+})
+
+test('Text 7 insertions reject replay against a restored transcript and require adjacent evidence', () => {
+  const base = 'W: We know that birds sing quieter on the weekend mornings.'
+  const after = ' Here, I’ve recorded a call. Listen for the difference.'
+  const { audio, evidence } = listeningInsertionFixture(base, null)
+  const apply = (text, heard, start = base.length) => {
+    const bytes = Buffer.from(JSON.stringify({ listening: { state: 'captured',
+      transcript: [{ segmentId: 'listening-text-7', text }] } }))
+    const report = prepareSpellingReview(bytes)
+    report.reviewedBy = 'import_agent'
+    report.reviewedAt = '2026-11-20T00:00:00Z'
+    report.targets[0].decision = 'unchanged'
+    report.listeningEdits = [{
+      segmentId: 'listening-text-7', start, before: '', after,
+      audioSha256: audio.sha256, startSeconds: evidence.startSeconds, endSeconds: evidence.endSeconds,
+      occurrence: evidence.occurrence, evidence: { apple: heard, 'parakeet-v2': heard }, reason: '补录两句。',
+    }]
+    return applySpellingReview(bytes, Buffer.from(JSON.stringify(report)), audio)
+  }
+  const heard = `weekend mornings.${after}`
+  assert.equal(apply(base, heard).listening.transcript[0].text, base + after)
+  const restored = `${base}${after.toUpperCase().replace('’', "'")}`
+  assert.throws(() => apply(restored, heard), /two engines/)
+  assert.throws(() => apply(restored, heard, restored.length), /two engines/)
+  assert.throws(() => apply(`${base} W: What happened?`, heard), /two engines/)
+  assert.throws(() => apply(base, `Wrong place.${after}`), /two engines/)
 })
 
 test('uncertain source phrase survives an OCR line wrap', () => {
