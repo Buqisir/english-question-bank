@@ -197,7 +197,7 @@ import {
   ownsCompletePaperOpening,
 } from '../../../../shared/paper-canonical/listeningPresentation.mjs'
 import { exportPaperProductPdf, paperProductPdfUrl } from '../../services/questionGroups.ts'
-import { PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
+import { FROZEN_PAPER_PDF_PRODUCTS, type FrozenPaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
 import { usePaperPdfProducts } from './usePaperPdfProducts'
 import { prepareFileSaveTarget, saveBlobToTarget } from '../../services/fileDownload.ts'
 import { fetchSimilarPassages, fetchSimilarQuestions } from '../../services/similarQuestions.ts'
@@ -4327,10 +4327,10 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         value={pdfEdition ?? ''}
         disabled={analysisPdfBusy || !pdfEdition}
         onChange={(event) => {
-          setPdfEdition(event.target.value as PaperPdfEdition)
+          setPdfEdition(event.target.value as FrozenPaperPdfEdition)
           setAnalysisPdfError('')
         }}
-        options={pdfEditions.map((edition) => ({ value: edition, label: PAPER_PDF_PRODUCTS[edition] }))}
+        options={pdfEditions.map((edition) => ({ value: edition, label: FROZEN_PAPER_PDF_PRODUCTS[edition] }))}
       />}
       {/* 构件厂第 4 步第九页（2026-11-14，提案 · 单一来源）：「PDF Screen」换成 ButtonLink（淡墨小号，和旁边「下载 PDF」一样）。
           仍是 <a>，中键开新标签、复制地址都还在。原来 .ghost-button 没去掉链接的下划线，换了以后没有下划线。
@@ -4360,7 +4360,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     try {
       const target = await prepareFileSaveTarget({
         mode: 'download',
-        suggestedName: `${asset.paper.title}-${PAPER_PDF_PRODUCTS[pdfEdition]}.pdf`,
+        suggestedName: `${asset.paper.title}-${FROZEN_PAPER_PDF_PRODUCTS[pdfEdition]}.pdf`,
         mimeType: 'application/pdf',
       })
       if (!target) return

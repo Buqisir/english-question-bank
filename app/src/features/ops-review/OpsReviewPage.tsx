@@ -1,5 +1,5 @@
 import { Fragment, useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
-import { PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
+import { FROZEN_PAPER_PDF_PRODUCTS, type FrozenPaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
 import { useCurrentUser } from '../../auth/AuthGate.tsx'
 import { logout } from '../../auth/session'
 import { AppTopbar, type AppTopbarNav } from '../../components/AppTopbar'
@@ -625,10 +625,10 @@ function ReviewPdf({ paper }: { paper: ReviewPaper }) {
   return <div className="ops-review-pdf">
     <div className="ops-review-actions">
       <SelectField label="PDF 版本" value={edition} size="sm"
-        options={editions.map(value => ({ value, label: PAPER_PDF_PRODUCTS[value] }))}
-        onChange={event => setEdition(event.target.value as PaperPdfEdition)} />
+        options={editions.map(value => ({ value, label: FROZEN_PAPER_PDF_PRODUCTS[value] }))}
+        onChange={event => setEdition(event.target.value as FrozenPaperPdfEdition)} />
       <ButtonLink href={pdfUrl} target="_blank" rel="noopener noreferrer">在新标签打开 PDF</ButtonLink>
     </div>
-    <iframe title={`${paper.paperName} · ${PAPER_PDF_PRODUCTS[edition]}`} src={pdfUrl} />
+    <iframe title={`${paper.paperName} · ${FROZEN_PAPER_PDF_PRODUCTS[edition]}`} src={pdfUrl} />
   </div>
 }

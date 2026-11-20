@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
+import { FROZEN_PAPER_PDF_PRODUCTS, type FrozenPaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
 import { usePaperPdfProducts } from './usePaperPdfProducts'
 import { Button, ButtonLink } from '../../shared-ui/Button.tsx'
 import { SelectField, TextAreaField } from '../../shared-ui/Field.tsx'
@@ -123,8 +123,8 @@ export function PaperReviewControls({ paperId, paperName, revisionId, publicatio
           标签「查看哪款 PDF」只给读屏（原来是 aria-label）。 */}
       {/* PDF 版本还没读到（出错或在读）时不放下拉：原来是一个空的框带箭头，点开什么都没有（UI 体检 2026-11-16）。 */}
       {revisionId && <>{editions.length > 0 && <SelectField className="paper-review-edition" label="查看哪款 PDF" hideLabel size="lg" value={edition ?? ''}
-        disabled={!edition} onChange={event => setEdition(event.target.value as PaperPdfEdition)}
-        options={editions.map(edition => ({ value: edition, label: PAPER_PDF_PRODUCTS[edition] }))} />}
+        disabled={!edition} onChange={event => setEdition(event.target.value as FrozenPaperPdfEdition)}
+        options={editions.map(edition => ({ value: edition, label: FROZEN_PAPER_PDF_PRODUCTS[edition] }))} />}
       {/* 构件厂第 4 步第九页（2026-11-14，提案 · 单一来源）：这一排的链接和按钮换成 ButtonLink / Button。
           原来的全站 .ghost-button 是透明底墨字、高 36，对上 strong lg；这一行 44 的最小高度仍由 paperReviewControls.css 给。
           等待第四轮（2026-11-15，Owner「把这个都换了」）：原来「复制中…」换字 + 整键禁用，改成 Button busy——字不换、宽度不变，

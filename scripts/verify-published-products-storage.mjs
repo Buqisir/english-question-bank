@@ -384,6 +384,24 @@ try {
   })
   assert.equal(subjects.target?.ok, true, JSON.stringify(subjects.target ?? subjects.baseline))
   assert.equal(subjects.target.subjectDigest, subjects.baseline.subjectDigest)
+  const analysisPreviewRoutes = createImportReviewRoutes({ getStore: () => refreshStore })
+  for (const [suffix, role, status] of [
+    ['products', 'owner', 200], ['pdf?edition=analysis', 'owner', 200],
+    ['products', 'member', 403], ['pdf?edition=analysis', 'member', 403],
+  ]) {
+    const output = {}
+    const response = { writeHead(status, headers) { Object.assign(output, { status, headers }) },
+      end(body) { output.body = body } }
+    const url = new URL(`http://fixture/api/import-review-preview/revisions/${refreshRevision.id}/${suffix}`)
+    await runRoutes(analysisPreviewRoutes, { request: { method: 'GET' }, response, url,
+      context: { session: { role }, sendJson(_response, status, body) { Object.assign(output, { status, body }) } } })
+    assert.equal(output.status, status)
+    if (status === 200 && suffix === 'products') assert.equal(output.body.analysisAvailable, true)
+    if (status === 200 && suffix !== 'products') {
+      assert.deepEqual(output.body, refreshed.frozenProducts.bytes[analysisPath])
+      assert.equal(output.headers['x-eqb-pagination-edition'], 'analysis')
+    }
+  }
 
   const reviewFiles = reviewBundleFilePaths(fixture.reviewRoot).map(file => {
     const data = projection.frozenProducts.bytes[file.path]
@@ -478,12 +496,12 @@ try {
     async getPublishedPaperProductInventory(paperId, publicationDigest) {
       assert.equal(paperId, manifest.paperId)
       if (publicationDigest !== consumption.publicationDigest) throw new Error('publication mismatch')
-      return { paperId, publicationDigest, editions: Object.keys(PAPER_PDF_PRODUCTS) }
+      return { paperId, publicationDigest, editions: Object.keys(PAPER_PDF_PRODUCTS), analysisAvailable: true }
     },
     async getPublishedPaperProduct(paperId, edition, publicationDigest) {
       assert.equal(paperId, manifest.paperId)
       assert.equal(publicationDigest, consumption.publicationDigest)
-      return { draftPaper: { title: '源卷名' }, pdfBytes: bytes[`products/${edition}.pdf`],
+      return { draftPaper: { title: '源卷名' }, pdfBytes: withAnalysis[`products/${edition}.pdf`],
         paginatedHtml: '<!doctype html><title>源卷名</title>' }
     },
   } }
@@ -497,10 +515,10 @@ try {
     assert.equal(output['cache-control'], 'private, no-store')
     assert.equal(output.status, publicationDigest === consumption.publicationDigest ? 200 : 409)
     if (output.status === 200) assert.deepEqual(output.body, {
-      paperId: manifest.paperId, publicationDigest, editions: Object.keys(PAPER_PDF_PRODUCTS),
+      paperId: manifest.paperId, publicationDigest, editions: Object.keys(PAPER_PDF_PRODUCTS), analysisAvailable: true,
     })
   }
-  for (const edition of ['largeComplete', 'largeNoListening', 'economy8', 'answerOnly']) {
+  for (const edition of [...Object.keys(PAPER_PDF_PRODUCTS), 'analysis']) {
     for (const product of ['pdf', 'print']) {
       const url = new URL(`http://localhost/api/exports/papers/${manifest.paperId}/${product}`)
       url.searchParams.set('edition', edition)
@@ -521,7 +539,7 @@ try {
       assert.equal(outputs.GET.headers['content-length'], Buffer.byteLength(outputs.GET.body))
       if (product === 'pdf') {
         assert.equal(outputs.GET.headers['content-type'], 'application/pdf')
-        assert.deepEqual(outputs.GET.body, bytes[`products/${edition}.pdf`])
+        assert.deepEqual(outputs.GET.body, withAnalysis[`products/${edition}.pdf`])
       } else {
         assert.equal(outputs.GET.headers['content-type'], 'text/html; charset=utf-8')
         assert.equal(outputs.GET.body, '<!doctype html><title>源卷名</title>')

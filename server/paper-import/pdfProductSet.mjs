@@ -1,10 +1,10 @@
 import { productPageLimitsForManifest } from './pdfPageLimits.mjs'
-import { PAPER_PDF_EDITIONS, PAPER_PDF_PRODUCTS, requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
+import { FROZEN_PAPER_PDF_PRODUCTS, PAPER_PDF_EDITIONS, requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
 
 export const ANALYSIS_PDF_EDITION = 'analysis'
 
 export function frozenProductLabel(edition) {
-  return edition === ANALYSIS_PDF_EDITION ? '解析 PDF' : PAPER_PDF_PRODUCTS[requirePaperPdfEdition(edition)]
+  return FROZEN_PAPER_PDF_PRODUCTS[edition === ANALYSIS_PDF_EDITION ? edition : requirePaperPdfEdition(edition)]
 }
 
 export function frozenProductInventory(files) {

@@ -2,6 +2,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
 import { unofficialListeningLabel } from '../answer-renderer.mjs'
+import { sourceReferenceBlocks, sourceReferenceSourceView } from '../paper-import/sourceReferences.mjs'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 import { projectApplicationReviewCardDisplay } from '../../shared/writing/applicationReviewCard.mjs'
 import { projectContinuationAnalysisDisplay } from '../../shared/writing/continuationAnalysis.mjs'
@@ -697,20 +698,36 @@ function renderContinuationAnalysis(analysis) {
     </section>`
 }
 
-function renderWritingGroup({ group, title, analysis }) {
+function renderRevisionModels(source, model, isContinuation) {
+  const essays = array(source?.essays?.entries)
+    .map(entry => sourceReferenceBlocks(entry)
+      .filter(block => block.kind === 'paragraph')
+      .map(block => block.paragraph.text).join('\n'))
+    .filter(essay => essay.trim())
+  const content = essays.length
+    ? essays.map(essay => `<div lang="en">${renderParagraphs(essay)}</div>`).join('')
+    : model ? `<div lang="en">${renderParagraphs(model)}</div>` : ''
+  if (!content) return ''
+  return `<section class="writing-block model-answer"${isContinuation ? ' data-continuation-section="modelAnswer"' : ''}><h4>${essays.length ? '参考范文' : '参考范文（AI 撰写）'}</h4>${content}</section>`
+}
+
+function renderWritingGroup({ group, title, analysis, sourceReferencesByGroup }) {
   const writing = analysis?.groups?.[group.groupId]?.writing
-  if (!writing) return ''
-  const isContinuation = writing.taskType === 'continuation'
-  const official = nonEmptyString(writing.officialModelAnswer)
-  const model = nonEmptyString(writing.modelAnswer)
+  const source = sourceReferencesByGroup?.get(group.groupId)
+  const isContinuation = (source?.taskType ?? writing?.taskType) === 'continuation'
+  const official = nonEmptyString(writing?.officialModelAnswer)
+  const model = nonEmptyString(writing?.modelAnswer)
+  const models = sourceReferencesByGroup
+    ? renderRevisionModels(source, model, isContinuation)
+    : isContinuation ? renderContinuationModels(official, model)
+      : `${official ? renderModelAnswer(official, '原卷参考范文') : ''}${model && model !== official ? renderModelAnswer(model, official ? '讲评范文' : '参考范文') : ''}`
+  if (!writing && !models) return ''
   return `<section class="analysis-group analysis-group--writing">
     <h3 class="group-title">${escapeHtml(title || group.title || (isContinuation ? '读后续写' : '应用文写作'))}</h3>
     ${isContinuation
-      ? renderContinuationAnalysis(writing.continuationAnalysis)
-      : renderReviewCard(writing.reviewCard)}
-    ${isContinuation
-      ? renderContinuationModels(official, model)
-      : `${official ? renderModelAnswer(official, '原卷参考范文') : ''}${model && model !== official ? renderModelAnswer(model, official ? '讲评范文' : '参考范文') : ''}`}
+      ? renderContinuationAnalysis(writing?.continuationAnalysis)
+      : renderReviewCard(writing?.reviewCard)}
+    ${models}
   </section>`
 }
 
@@ -740,13 +757,14 @@ function renderGroup(input) {
   }
 }
 
-function renderAnalysisBody(parts, paperAsset, analyses, figuresByGroup) {
+function renderAnalysisBody(parts, paperAsset, analyses, figuresByGroup, sourceReferencesByGroup) {
   return parts.map((part) => {
     const sections = part.sections.map((section) => {
       const groups = section.groups.map((entry) => renderGroup({
         ...entry,
         paperAsset,
         analyses,
+        sourceReferencesByGroup,
         figures: figuresByGroup?.get(entry.group.groupId) ?? (figuresByGroup ? [] : null),
       })).filter(Boolean).join('')
       if (!groups) return ''
@@ -798,7 +816,7 @@ const revisionGroupTitles = {
 }
 
 function revisionAnalysisSource(projection) {
-  const { paperAsset, analysisSidecars, consumption, materialization } = projection
+  const { paperAsset, analysisSidecars, consumption, materialization, sourceReferences } = projection
   const nodes = array(consumption?.visibleStructure)
   const titles = new Map(nodes.filter(node => node.kind === 'instruction')
     .map(node => [node.instructionId, node.text]))
@@ -831,6 +849,8 @@ function revisionAnalysisSource(projection) {
     paperAsset: { ...paperAsset, answerKey: { ...paperAsset.answerKey, answers }, layoutTree: { parts } },
     analyses: Object.fromEntries(Object.entries(ANALYSIS_FILES)
       .map(([key, fileName]) => [key, analysisSidecars[fileName]])),
+    sourceReferencesByGroup: new Map(array(sourceReferenceSourceView(sourceReferences)?.groups)
+      .map(group => [group.groupId, group])),
     figuresByGroup: new Map(array(materialization?.groups).map(group => [group.groupId,
       group.blocks.filter(block => block.kind === 'figure').map(block => ({
         ...block, textRegions: media.get(block.mediaId)?.textRegions,
@@ -839,12 +859,12 @@ function revisionAnalysisSource(projection) {
 }
 
 export function buildCompanionAnalysisHtml(input) {
-  const { paperAsset, analyses, figuresByGroup } = input.projection ? revisionAnalysisSource(input.projection) : input
+  const { paperAsset, analyses, figuresByGroup, sourceReferencesByGroup } = input.projection ? revisionAnalysisSource(input.projection) : input
   if (!paperAsset?.paper?.paperId) throw new Error('paperAsset is required')
   const title = cleanPaperTitle(paperAsset.paper.title)
   const parts = orderedGroups(paperAsset)
   const answerOverview = renderAnswerOverview(parts)
-  const analysisBody = renderAnalysisBody(parts, paperAsset, analyses || {}, figuresByGroup)
+  const analysisBody = renderAnalysisBody(parts, paperAsset, analyses || {}, figuresByGroup, sourceReferencesByGroup)
   return `<!DOCTYPE html>
 <html lang="zh-CN">
 <head>

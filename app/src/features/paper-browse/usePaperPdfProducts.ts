@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { PAPER_PDF_EDITIONS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
+import { PAPER_PDF_EDITIONS, type FrozenPaperPdfEdition, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
 
 type ProductInventory = {
   paperId: string
   revisionId?: string
   publicationDigest?: string
   editions: PaperPdfEdition[]
+  analysisAvailable?: boolean
 }
 
 export function usePaperPdfProducts({
@@ -17,8 +18,8 @@ export function usePaperPdfProducts({
   defaultEdition?: PaperPdfEdition
 }) {
   const key = JSON.stringify([paperId, revisionId, publicationDigest])
-  const [result, setResult] = useState<{ key: string; editions: PaperPdfEdition[]; error: string } | null>(null)
-  const [selection, setSelection] = useState<{ key: string; edition: PaperPdfEdition } | null>(null)
+  const [result, setResult] = useState<{ key: string; editions: FrozenPaperPdfEdition[]; error: string } | null>(null)
+  const [selection, setSelection] = useState<{ key: string; edition: FrozenPaperPdfEdition } | null>(null)
   const [refresh, setRefresh] = useState(0)
   const endpoint = revisionId
     ? `/api/import-review-preview/revisions/${encodeURIComponent(revisionId)}/products`
@@ -40,7 +41,9 @@ export function usePaperPdfProducts({
           || inventory.editions.some(edition => !PAPER_PDF_EDITIONS.includes(edition))) {
           throw new Error('PDF 与查看版本不一致，请刷新重试。')
         }
-        if (!controller.signal.aborted) setResult({ key, editions: inventory.editions, error: '' })
+        const editions: FrozenPaperPdfEdition[] = [...inventory.editions]
+        if (inventory.analysisAvailable === true) editions.push('analysis')
+        if (!controller.signal.aborted) setResult({ key, editions, error: '' })
       })
       .catch(() => {
         if (!controller.signal.aborted) setResult({ key, editions: [], error: 'PDF 版本加载失败，请刷新重试。' })
@@ -56,7 +59,7 @@ export function usePaperPdfProducts({
     ? selection.edition : preferred
   return {
     editions, edition,
-    setEdition: (edition: PaperPdfEdition) => setSelection({ key, edition }),
+    setEdition: (edition: FrozenPaperPdfEdition) => setSelection({ key, edition }),
     error: endpoint && result?.key === key ? result.error : '',
     retry: () => setRefresh(value => value + 1),
   }
