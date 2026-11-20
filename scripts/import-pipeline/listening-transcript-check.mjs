@@ -79,7 +79,7 @@ function remoteObservation(text, source, site) {
   return { ...observation({ ...result, words, text }, localSite), evidence: text }
 }
 
-export async function adjudicate(group, text, engines, remote, audioSha256) {
+export async function adjudicate(group, text, engines, remote, audioSha256, originalText = text) {
   const { key, segmentId, occurrence } = group
   const source = units(text.replace(speakerLabels, label => ' '.repeat(label.length)))
   const readings = Object.entries(engines).map(([engine, results]) => {
@@ -95,7 +95,7 @@ export async function adjudicate(group, text, engines, remote, audioSha256) {
   const canJoin = (left, right) => !atSpeakerChange(left) && !atSpeakerChange(right)
   const parakeet = readings.find(reading => reading.engine === 'parakeet-v2')
   const plan = sentenceSites(text, source, sites(readings, canJoin), parakeet)
-  if (plan.rewritten) return rewriteTurns(group, text, readings, engines, audioSha256)
+  if (plan.rewritten) return rewriteTurns(group, originalText, readings, engines, audioSha256, remote)
   for (const site of plan.sites) {
     const votes = readings.map(reading => ({ engine: reading.engine, ...observation(reading, site) }))
     const sourceWords = source.slice(site.start, site.end)
@@ -180,7 +180,8 @@ async function main() {
   const audioSha256 = sha256(audioBytes)
   if (review.subject.playbackAudioSha256 !== audioSha256) throw new Error('播放音频与分段的哈希不一致')
   const audioBinding = { sha256: audioSha256, durationSeconds: review.subject.durationSeconds }
-  let transcript = JSON.parse(transcriptBytes)
+  const original = JSON.parse(transcriptBytes)
+  let transcript = original
   if (values['spelling-review']) {
     const report = JSON.parse(await readFile(values['spelling-review'], 'utf8'))
     delete report.listeningEdits
@@ -188,6 +189,7 @@ async function main() {
   }
   if (transcript.paperId && transcript.paperId !== review.subject.paperId) throw new Error('原文稿与分段卷号不一致')
   const texts = new Map((transcript.listening?.transcript ?? transcript).map(item => [item.segmentId, item.text]))
+  const originalTexts = new Map((original.listening?.transcript ?? original).map(item => [item.segmentId, item.text]))
   const groups = review.groups.filter(group => group.decision === 'usable').map((group, index) => {
     const occurrence = group.occurrences.find(o => o.startSeconds === group.playback.startSeconds && o.endSeconds === group.playback.endSeconds)
     if (!occurrence || !texts.has(group.segmentId) || !Number.isFinite(occurrence.startSeconds)
@@ -207,7 +209,7 @@ async function main() {
     .map(({ segmentId }) => ({ segmentId, reason: '缺少可用 occurrence，请先听核段号。' }))
   for (const group of groups) {
     const { edits, review, rewrite } = await adjudicate(group, texts.get(group.segmentId), engines,
-      interval => remoteEngine(audio, interval, cache), audioSha256)
+      interval => remoteEngine(audio, interval, cache), audioSha256, originalTexts.get(group.segmentId))
     listeningEdits.push(...edits)
     needsReview.push(...review)
     if (rewrite) rewritten.push(rewrite)

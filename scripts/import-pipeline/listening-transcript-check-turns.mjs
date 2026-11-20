@@ -1,7 +1,6 @@
-import { listeningEditEvidenceMatch, listeningEditSpeakerLabels, listeningEditWords,
-  touchesListeningSpeakerBoundary } from '../../server/paper-import/spellingReview.mjs'
+import { listeningEditSpeakerLabels, listeningEditTurns, listeningEditWords } from '../../server/paper-import/spellingReview.mjs'
 import { alignListeningSentences } from './listening-sentence-align.mjs'
-import { align, preserveSourceForms, timedReading } from './listening-transcript-check-alignment.mjs'
+import { align, preserveSourceForms, sameProperNameSound, timedReading, units } from './listening-transcript-check-alignment.mjs'
 
 const spokenNumber = String.raw`(?:\d{1,2}|(?:twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen)`
 const chineseNumber = '[一二两三四五六七八九十0-9]+'
@@ -26,22 +25,41 @@ function withoutAnnouncements(runs) {
   })
 }
 
-function sourceTurns(text) {
-  const turns = []
-  const labels = [...text.matchAll(listeningEditSpeakerLabels)]
-  let start = 0, speaker = null
-  for (const label of [...labels, { index: text.length, 0: '' }]) {
-    const before = text.slice(start, label.index).trimEnd()
-    const content = before.trimStart()
-    if (content) {
-      const previous = turns.at(-1)
-      if (previous && previous.speaker === speaker) previous.end = start + before.length
-      else turns.push({ start: start + before.length - content.length, end: start + before.length, speaker })
-    } else if (speaker) return null
-    start = label.index + label[0].length
-    speaker = label[1]?.toLowerCase()
+const turnEngines = ['parakeet-v2', 'gpt-transcribe', 'apple']
+const turnCompounds = new Map([
+  ['any more', 'anymore'], ['story book', 'storybook'], ['story books', 'storybooks'],
+  ['text book', 'textbook'], ['text books', 'textbooks'], ['note book', 'notebook'], ['note books', 'notebooks'],
+])
+
+function turnWords(text) {
+  const words = listeningEditWords(text)
+  if (words.some(word => /[^a-z0-9']/u.test(word))) return words.map(token => ({ token }))
+  const parts = units(text)
+  const merged = []
+  for (let i = 0; i < parts.length; i++) {
+    const first = parts[i], second = parts[i + 1]
+    const compound = turnCompounds.get(`${first.token} ${second?.token}`)
+    if (compound && /^[ \t-]+$/u.test(text.slice(first.end, second.start))) {
+      merged.push({ ...first, token: compound, end: second.end })
+      i++
+    } else merged.push(first)
   }
-  return turns
+  return merged
+}
+
+export function listeningTurnWordVotes(before, after, evidence) {
+  const wanted = turnWords(after)
+  const retainedNames = new Set(turnWords(before).filter(word => word.name).map(word => word.token))
+  const votes = wanted.map(word => ({ ...word, engines: [] }))
+  for (const [engine, heard] of Object.entries(evidence)) {
+    if (!turnEngines.includes(engine)) continue
+    const { matches } = align(wanted, turnWords(heard), (expected, word) => expected.token === word.token
+      || retainedNames.has(expected.token) && sameProperNameSound(expected, word))
+    for (const { start, end } of matches) {
+      for (let i = start; i < end; i++) votes[i].engines.push(engine)
+    }
+  }
+  return votes
 }
 
 function turnTimes(group, text, engines, turns) {
@@ -56,7 +74,8 @@ function turnTimes(group, text, engines, turns) {
   if (alignment.degraded) return null
   const times = turns.map(turn => {
     const sentences = alignment.sentences.filter(s => s.utf16Start >= turn.start && s.utf16End <= turn.end)
-    if (!sentences.length || sentences.some(s => (s.speaker?.toLowerCase() ?? null) !== turn.speaker)) return null
+    if (!sentences.length || sentences.some(s => (s.speaker?.toLowerCase() ?? null) !== turn.speaker
+      || s.passes[0]?.interpolated)) return null
     return { start: sentences[0].passes[0].start, end: sentences.at(-1).passes[0].end, count: sentences.length }
   })
   if (times.some(time => !time || !Number.isFinite(time.start) || !Number.isFinite(time.end))
@@ -75,7 +94,9 @@ function timedTurns(reading, times, { startSeconds }) {
     previous = middle
     while (middle >= turns[turn]?.endSeconds) turn++
     const bucket = turns[turn]
-    if (!bucket || middle < bucket.startSeconds) return null
+    // Sentence times are rounded to hundredths of a second.
+    if (!bucket || startSeconds + word.startSeconds < bucket.startSeconds - 0.005
+      || startSeconds + word.endSeconds > bucket.endSeconds + 0.005) return null
     if (!bucket.words.length) bucket.first = index
     bucket.words.push(word)
     bucket.last = index
@@ -86,39 +107,25 @@ function timedTurns(reading, times, { startSeconds }) {
   return turns
 }
 
-function turnSpan(text, turn, reading, bucket, lastTurn) {
-  const first = bucket.words[0].start
-  const end = bucket.words.at(-1).end
-  const next = reading.words[bucket.last + 1]?.start ?? reading.text.length
+function turnText(reading, { words, last }, lastTurn) {
+  const end = words.at(-1).end
+  const next = reading.words[last + 1]?.start ?? reading.text.length
   const mark = reading.text.slice(end, next).trimEnd()
   if (!lastTurn && !/^[.!?]+["'’”)\]]*$/u.test(mark)) return null
-  let before = text.slice(turn.start, turn.end)
-  let after = preserveSourceForms(before, reading.text.slice(first, end) + mark, listeningEditSpeakerLabels)
-  if (touchesListeningSpeakerBoundary(text, { start: turn.start, before })) {
-    // Admission protects the punctuation in front of a new speaker label too.
-    const tail = before.match(/[^\p{L}\p{N}]+$/u)?.[0]
-    if (!tail || !after.endsWith(tail)) return null
-    before = before.slice(0, -tail.length)
-    after = after.slice(0, -tail.length)
+  return reading.text.slice(words[0].start, end) + mark
+}
+
+export function chooseListeningTurn(before, evidence) {
+  for (const engine of turnEngines) {
+    if (!evidence[engine]) continue
+    const after = preserveSourceForms(before, evidence[engine], listeningEditSpeakerLabels)
+    const votes = listeningTurnWordVotes(before, after, evidence)
+    if (votes.length && votes.every(word => word.engines.length >= 2)) return after
   }
-  const span = { start: turn.start, before, after }
-  return touchesListeningSpeakerBoundary(text, span) ? null : span
+  return null
 }
 
-function evidenceFor(text, span, reading, { first, last }) {
-  const removed = listeningEditWords(span.before).length
-  const left = listeningEditWords(text.slice(0, span.start)).length
-  const right = listeningEditWords(text).length - left - removed
-  const { words, text: heardText } = reading
-  let start = first, end = last
-  // Alignment units may split contractions that admission counts as one word.
-  while (start > 0 && listeningEditWords(heardText.slice(words[start].start, words[first].start)).length < Math.min(left, 2)) start--
-  while (end < words.length - 1 && listeningEditWords(heardText.slice(words[last].end, words[end].end)).length < Math.min(right, 2)) end++
-  const heard = heardText.slice(words[start].start, words[end].end)
-  return listeningEditEvidenceMatch(text, span, heard) === 'unique' ? heard : null
-}
-
-export function rewriteTurns(group, text, readings, engines, audioSha256) {
+export async function rewriteTurns(group, text, readings, engines, audioSha256, remote) {
   const { segmentId, occurrence } = group
   const manual = reason => ({
     edits: [],
@@ -126,7 +133,7 @@ export function rewriteTurns(group, text, readings, engines, audioSha256) {
     review: [{ segmentId, occurrence, before: text, reason,
       evidence: Object.fromEntries(readings.map(reading => [reading.engine, reading.text.trim()])) }],
   })
-  const turns = sourceTurns(text)
+  const turns = listeningEditTurns(text)
   const runs = readings.map(({ engine }) => [engine, withoutAnnouncements(engines[engine][group.key] ?? [])])
   if (runs.some(([, spoken]) => !spoken)) return manual('疑似报幕的归属不明，请整段听核。')
   const cleaned = Object.fromEntries(runs.map(([engine, spoken]) => [engine, { [group.key]: spoken }]))
@@ -139,20 +146,22 @@ export function rewriteTurns(group, text, readings, engines, audioSha256) {
   if (!appleTurns || !recorded) return manual('录音词无法完整归到说话轮次，请整段听核。')
   const edits = []
   for (const [i, turn] of turns.entries()) {
-    const { words, startSeconds, endSeconds } = recorded[i]
-    if (align(words, appleTurns[i].words).similarity < 0.8) {
-      return manual('两家引擎有轮次分歧，请整段听核。')
+    const { startSeconds, endSeconds } = recorded[i]
+    const { start, end } = turn
+    const before = text.slice(start, end)
+    const last = i === turns.length - 1
+    const evidence = { apple: turnText(apple, appleTurns[i], last), 'parakeet-v2': turnText(parakeet, recorded[i], last) }
+    if (!evidence.apple || !evidence['parakeet-v2']) return manual('录音句界与说话人边界不兼容，请整段听核。')
+    let after = chooseListeningTurn(before, evidence)
+    if (after === null && remote) {
+      const { text: heard } = await remote({ startSeconds, endSeconds })
+      if (heard?.trim()) evidence['gpt-transcribe'] = heard.trim()
+      after = chooseListeningTurn(before, evidence)
     }
-    const span = turnSpan(text, turn, parakeet, recorded[i], i === turns.length - 1)
-    if (!span) return manual('录音句界或标点与说话人边界不兼容，请整段听核。')
-    if (span.before === span.after) continue
-    const evidence = { apple: evidenceFor(text, span, apple, appleTurns[i]),
-      'parakeet-v2': evidenceFor(text, span, parakeet, recorded[i]) }
-    if (Object.values(evidence).some(heard => !heard)) {
-      return manual('有轮次缺少两家可唯一定位的录音证据，请整段听核。')
-    }
-    edits.push({ segmentId, ...span, audioSha256, occurrence, startSeconds, endSeconds, evidence,
-      reason: '按两家录音共识整轮替换。' })
+    if (after === null) return manual('有轮次未获逐词两家支持，请整段听核。')
+    if (before === after) continue
+    edits.push({ segmentId, scope: 'turn', turnIndex: i, start, before, after, audioSha256, occurrence,
+      startSeconds, endSeconds, evidence, reason: '按逐词录音共识整轮替换。' })
   }
   return { edits, review: [], rewrite: { segmentId, reason: '已按录音共识逐轮替换。' } }
 }
