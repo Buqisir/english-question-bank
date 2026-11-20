@@ -1963,7 +1963,7 @@ assert(
   !pageSrc.slice(pageSrc.indexOf('function computeZoom()'), pageSrc.indexOf('    computeZoom()')).includes('lectureOpen') &&
     /@media screen and \(min-width: 1440px\)\s*\{\s*\.paper-browse-shell(?:,\s*\.paper-browse-skeleton-shell)?\s*\{\s*grid-template-columns: 72px minmax\(0, 1fr\) 440px/.test(pageCssSrc) &&
     /const DOCKED_LECTURE_MIN_WIDTH = 1440/.test(pageSrc) &&
-    /transition: transform var\(--motion-slow\) var\(--ease-out\)/.test(pageCssSrc),
+    /transition: transform var\(--motion-travel\)/.test(pageCssSrc),
   'lecture still resizes the paper instead of translating the fixed-width column',
 )
 assert(
@@ -2005,8 +2005,8 @@ assert(
     pageSrc.includes('Math.abs(previousButton.getBoundingClientRect().left - buttonRect.left) < 1') &&
     pageSrc.includes('const syncGeometry = (): void => updateRailActivePlate(false)') &&
     pageSrc.includes('new ResizeObserver(syncGeometry)') &&
-    /\.paper-browse-rail-current--adjacent\s*\{[^}]*var\(--motion-base\)[^}]*var\(--ease-out\)/.test(pageCssSrc) &&
-    /\.paper-browse-rail-current--relocate\s*\{[^}]*animation:[^}]*var\(--motion-fast\)[^}]*var\(--ease-out\)/.test(pageCssSrc) &&
+    /\.paper-browse-rail-current--adjacent\s*\{[^}]*transition:\s*transform var\(--motion-glide\)/.test(pageCssSrc) &&
+    /\.paper-browse-rail-current--relocate\s*\{[^}]*animation:[^}]*var\(--motion-reveal\)/.test(pageCssSrc) &&
     /@media \(prefers-reduced-motion: no-preference\)[\s\S]{0,500}paper-browse-rail-current--relocate/.test(pageCssSrc),
   'selected plate can sweep on far/cross-column jumps, animate stale resize geometry, or ignore reduced motion',
 )

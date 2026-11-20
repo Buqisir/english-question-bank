@@ -242,9 +242,9 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // 它里面是表单字段，不是菜单项，所以不换 Menu，仍是自己的弹出面板。
   const [moreMenuOpen, setMoreMenuOpen] = useState(false)
   // 复评工艺账（2026-07-17 C 路）：菜单入场有 keyframe、关闭裸卸载=可感的
-  // 不对称。与 toast/模态同走 usePresence——退（motion-micro）快于入
-  // （motion-fast），播完 exit 再卸载。
-  const moreMenuPresence = usePresence(moreMenuOpen, 80)
+  // 不对称。与 toast/模态同走 usePresence，播完收起再卸载。收起走动效角色「离开」
+  // （--motion-dismiss = 120ms，shared-ui/motion.css；2026-11-20 从 80 跟着改）。
+  const moreMenuPresence = usePresence(moreMenuOpen, 120)
   const titleSaveTimerRef = useRef<number | null>(null)
   const focusedOnceRef = useRef(false)
   const a4SheetRef = useRef<HTMLDivElement | null>(null)

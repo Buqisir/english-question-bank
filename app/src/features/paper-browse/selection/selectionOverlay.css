@@ -18,7 +18,8 @@
   border-radius: 8px;
   padding: 3px;
   box-shadow: var(--elev-3);
-  animation: paper-selection-pop var(--motion-fast) var(--ease-out);
+  /* 动效角色「出现 · 贴着键出来的」：从选区那边放大出来（motion.css 的共用 eqb-reveal-scale）。 */
+  animation: eqb-reveal-scale var(--motion-reveal);
   transform-origin: var(--paper-selection-origin, top left);
 }
 
@@ -45,7 +46,7 @@
   align-items: center;
   gap: 6px;
   white-space: nowrap;
-  transition: background var(--motion-fast) var(--ease-hover), transform var(--motion-micro) var(--ease-out);
+  transition: background var(--motion-state), transform var(--motion-press);
   user-select: none;
 }
 
@@ -73,7 +74,7 @@
 .paper-selection-translate:active,
 .paper-selection-lookup:active,
 .paper-selection-analyze:active {
-  transform: scale(0.96);
+  transform: scale(var(--motion-press-scale));
 }
 
 .paper-selection-analyze:active {
@@ -100,7 +101,8 @@
   border: 1px solid transparent;
   border-radius: 12px;
   box-shadow: var(--elev-3);
-  animation: paper-selection-card-enter var(--motion-base) var(--ease-out);
+  /* 动效角色「出现 · 自己占一块的」。 */
+  animation: paper-selection-card-enter var(--motion-reveal-panel);
   transform-origin: var(--paper-selection-origin, top left);
   scrollbar-width: thin;
   scrollbar-color: transparent transparent;
@@ -156,6 +158,7 @@
 .paper-selection-kicker-icon circle {
   transform-box: fill-box;
   transform-origin: center;
+  /* motion-signature：卡片落地时「文」上的点盖一下，只此一处。减少动态效果时不动（文件末尾）。 */
   animation: paper-selection-dot-tap var(--motion-slow) var(--ease-out) both;
 }
 
@@ -180,7 +183,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover), transform var(--motion-micro) var(--ease-out);
+  transition: background var(--motion-state), color var(--motion-state), transform var(--motion-press);
 }
 
 .paper-selection-action-btn:hover {
@@ -189,7 +192,7 @@
 }
 
 .paper-selection-action-btn:active {
-  transform: scale(0.92);
+  transform: scale(var(--motion-press-scale-icon));
 }
 
 .paper-selection-action-btn:focus-visible {
@@ -279,7 +282,7 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: background var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover), transform var(--motion-micro) var(--ease-out);
+  transition: background var(--motion-state), border-color var(--motion-state), transform var(--motion-press);
 }
 
 .paper-selection-retry:not(.eqb-button):hover {
@@ -287,7 +290,7 @@
 }
 
 .paper-selection-retry:not(.eqb-button):active {
-  transform: scale(0.96);
+  transform: scale(var(--motion-press-scale));
 }
 
 .paper-selection-retry:not(.eqb-button):focus-visible {
@@ -316,25 +319,10 @@
   clip: rect(0 0 0 0);
 }
 
-@keyframes paper-selection-pop {
-  from {
-    opacity: 0;
-    transform: scale(0.94);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
 @keyframes paper-selection-card-enter {
   from {
     opacity: 0;
-    transform: scale(0.96) translateY(-2px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: scale(var(--motion-reveal-scale)) translateY(calc(var(--motion-reveal-shift) * -1));
   }
 }
 
@@ -533,7 +521,7 @@
   justify-content: center;
   border-radius: var(--eqb-radius-control);
   color: var(--eqb-color-text-muted, #6b6e68);
-  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+  transition: background var(--motion-state), color var(--motion-state);
 }
 
 .paper-dictionary-play:hover {
@@ -808,10 +796,9 @@
   color: inherit;
 }
 
+/* 减少动态效果：工具条和释义卡只淡入、不放大不挪，归 motion.css 的角色变量管（原来这里连淡入一起关掉，2026-11-20 删）。
+   下面只关签名时刻：「文」上的点、句子分析。 */
 @media (prefers-reduced-motion: reduce) {
-  .paper-selection-overlay,
-  .paper-selection-toolbar,
-  .paper-selection-card,
   .paper-selection-kicker-icon circle,
   .paper-sentence-analysis,
   .paper-sentence-analysis .sa-token,

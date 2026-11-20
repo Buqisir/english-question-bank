@@ -169,16 +169,17 @@
   top: 100%;
   transform-origin: top right;
   z-index: 20;
-  /* 复评工艺账：入退对称制（原先和 D5 导出菜单面板同一套；导出菜单已换成 Menu） */
+  /* 动效角色：出来走「出现 · 贴着键出来的」，收起走「离开」（入退同轴，data-visible）。
+     从键那边落下 4px、从 0.97 放大；减少动态效果时只淡入淡出（motion.css）。 */
   opacity: 0;
-  transform: translateY(-2px) scale(0.98);
-  transition: opacity var(--motion-micro) var(--ease-out), transform var(--motion-micro) var(--ease-out);
+  transform: translateY(calc(var(--motion-reveal-shift) * -1)) scale(var(--motion-reveal-scale));
+  transition: opacity var(--motion-dismiss), transform var(--motion-dismiss);
 }
 
 .draft-more-menu-panel[data-visible='true'] {
   opacity: 1;
   transform: scale(1);
-  transition-duration: var(--motion-fast);
+  transition: opacity var(--motion-reveal), transform var(--motion-reveal);
 }
 
 /* workbench-header-unify Locked Decision 2/5: wraps the head-row (wide)
@@ -261,9 +262,9 @@
   line-height: 1.55;
   padding: 10px 12px;
   transition:
-    background var(--motion-fast) var(--ease-out),
-    color var(--motion-fast) var(--ease-out),
-    box-shadow var(--motion-fast) var(--ease-out);
+    background var(--motion-state),
+    color var(--motion-state),
+    box-shadow var(--motion-state);
 }
 
 .draft-reorder-suggestion[data-state='decided'] {
@@ -307,7 +308,7 @@
   padding: 2px 4px;
   text-decoration: underline;
   text-underline-offset: 2px;
-  transition: color var(--motion-fast) var(--ease-hover);
+  transition: color var(--motion-state);
 }
 
 .draft-reorder-suggestion .draft-reorder-suggestion-undo:hover {
@@ -514,7 +515,7 @@
   display: flex;
   min-height: 32px;
   justify-content: center;
-  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover), transform var(--motion-base) var(--ease-out);
+  transition: background var(--motion-state), color var(--motion-state), transform var(--motion-press);
   width: 32px;
 }
 
@@ -524,7 +525,7 @@
 }
 
 .draft-group-actions button:where(:not(.eqb-button)):active {
-  transform: scale(0.94);
+  transform: scale(var(--motion-press-scale-icon));
 }
 
 .draft-group-actions button:where(:not(.eqb-button))[aria-pressed='true'] {
@@ -704,12 +705,13 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  /* 动效角色：相邻两格之间「滑块」滑过去；跳远了不滑，原地「出现」。 */
   .draft-paper-rail-current--adjacent {
-    transition: transform var(--motion-base) var(--ease-out);
+    transition: transform var(--motion-glide);
   }
 
   .draft-paper-rail-current--relocate {
-    animation: draft-paper-rail-relocate var(--motion-fast) var(--ease-out);
+    animation: draft-paper-rail-relocate var(--motion-reveal);
   }
 }
 
@@ -750,7 +752,7 @@
   gap: var(--eqb-space-2);
   padding: 0 var(--eqb-space-2);
   user-select: none;
-  transition: color var(--motion-fast) var(--ease-hover);
+  transition: color var(--motion-state);
 }
 
 /* 滑块停在整行目标上（DraftPaperRail.tsx itemSelector），悬停时字提到墨色。 */

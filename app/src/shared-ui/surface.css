@@ -1,5 +1,5 @@
-/* 卡片 / 板（Surface.tsx）。颜色、圆角、影子、间距只用 tokens.css 里的变量；动效时长和曲线用 App.css :root 的
- * 全站动效 token（--motion-* / --ease-*，DESIGN.md §6），和 button.css 一样。
+/* 卡片 / 板（Surface.tsx）。颜色、圆角、影子、间距只用 tokens.css 里的变量；动效用全站动效角色
+ * （shared-ui/motion.css，DESIGN.md §5「Motion 动效」），和 button.css 一样。
  * DESIGN.md §4：板 e0（不投影，一圈 1px --desk-border 边），纸 e1（墨圈就是边）；§5 Cards：白底、12 圆角。
  * 构件不管自己在页面里的位置（外边距、宽、sticky 这些归调用处），只管底、边、圆角、影子、内边距。 */
 
@@ -51,8 +51,8 @@
   text-align: start;
   cursor: pointer;
   transition:
-    background-color var(--motion-fast) var(--ease-hover),
-    transform var(--motion-fast) var(--ease-out);
+    background-color var(--motion-state),
+    transform var(--motion-press);
 }
 
 .eqb-surface[data-interactive]:hover:not(:disabled) {
@@ -66,7 +66,7 @@
 
 .eqb-surface[data-interactive]:active:not(:disabled) {
   background: var(--eqb-color-state-selected-hover);
-  transform: scale(0.99);
+  transform: scale(var(--motion-press-scale-surface));
 }
 
 .eqb-surface[data-interactive]:disabled {
@@ -74,14 +74,4 @@
   color: var(--eqb-color-text-muted);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  /* 覆盖：本条 (0,2,0) 和上面 [data-interactive] 那条同级、写在后面，减少动态效果时只过渡底色，不过渡缩放。 */
-  .eqb-surface[data-interactive] {
-    transition: background-color var(--motion-fast) var(--ease-hover);
-  }
-
-  /* 覆盖：本条 (0,4,0) 和上面按下那条同级、写在后面，减少动态效果时按下只垫底、不缩。 */
-  .eqb-surface[data-interactive]:active:not(:disabled) {
-    transform: none;
-  }
-}
+/* 减少动态效果时按下只垫底、不缩：--motion-press-scale-surface 在 motion.css 里变成 1。 */

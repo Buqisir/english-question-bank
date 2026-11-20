@@ -28,10 +28,11 @@
   white-space: nowrap;
   text-decoration: none;
   cursor: pointer;
+  /* 动效角色（shared-ui/motion.css）：底色、字色走「状态」，按下缩一点走「按下」。 */
   transition:
-    background-color var(--motion-fast) var(--ease-hover),
-    color var(--motion-fast) var(--ease-hover),
-    transform var(--motion-fast) var(--ease-out);
+    background-color var(--motion-state),
+    color var(--motion-state),
+    transform var(--motion-press);
 }
 
 .eqb-button > svg {
@@ -219,8 +220,14 @@
   color: var(--eqb-color-text);
 }
 
+/* 按下：有字的键缩到 0.97，只有图标的键（28–36px）缩到 0.94，两种都是缩下去约 2px（motion.css 按大小分三档）。
+ * 减少动态效果时两档都是 1，不缩，只垫底（motion.css 一处管）。 */
 .eqb-button:active:not(:disabled, [aria-disabled='true']) {
-  transform: scale(0.97);
+  transform: scale(var(--motion-press-scale));
+}
+
+.eqb-button[data-icon-only]:active:not(:disabled, [aria-disabled='true']) {
+  transform: scale(var(--motion-press-scale-icon));
 }
 
 .eqb-button:disabled {
@@ -252,7 +259,7 @@
 /* 字和图标隐去、回来都走同一个淡入淡出。 */
 .eqb-button-label,
 .eqb-button-wait-icon > :not(.eqb-wait-dots) {
-  transition: opacity var(--motion-fast) var(--ease-hover);
+  transition: opacity var(--motion-state);
 }
 
 /* 有图标的键：图标留在原位只隐去，所以点叠在图标正中（图标是 12 / 14px 时所以点照样 16px，往外多出一点，不撑宽）。 */
@@ -285,14 +292,4 @@
 
 .eqb-button[data-wait='leaving'] .eqb-wait-dots {
   opacity: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .eqb-button {
-    transition: background-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
-  }
-
-  .eqb-button:active:not(:disabled, [aria-disabled='true']) {
-    transform: none;
-  }
 }

@@ -729,7 +729,7 @@ button.pi-analysis-distractor:hover {
   border-radius: 8px;
   padding: 4px 10px;
   cursor: pointer;
-  transition: border-color var(--motion-micro) var(--ease-hover), background var(--motion-micro) var(--ease-hover), color var(--motion-micro) var(--ease-hover);
+  transition: border-color var(--motion-state), background var(--motion-state), color var(--motion-state);
   white-space: nowrap;
 }
 
@@ -807,12 +807,14 @@ button.pi-analysis-distractor:hover {
   text-align: center;
   opacity: 0;
   transform: translate(-50%, 6px);
+  /* motion-dead：.pi-toast 已没有页面在用（2026-11-20 查），等 Owner 同意删。 */
   transition: opacity var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
 }
 
 .pi-toast[data-visible='true'] {
   opacity: 1;
   transform: translate(-50%, 0);
+  /* motion-dead：同上，.pi-toast 等删。 */
   transition-duration: var(--motion-base);
 }
 
@@ -878,7 +880,7 @@ button.pi-analysis-distractor:hover {
    * the new interactivity. The `--open` modifier inverts the fill while
    * the popover is mounted so the trigger reads as "active".
    */
-  transition: background var(--motion-micro) var(--ease-hover), border-color var(--motion-micro) var(--ease-hover), color var(--motion-micro) var(--ease-hover);
+  transition: background var(--motion-state), border-color var(--motion-state), color var(--motion-state);
 }
 
 .pi-topbar-basket:hover {
@@ -936,6 +938,7 @@ button.pi-analysis-distractor:hover {
   padding: 12px 16px;
   max-height: 60vh;
   overflow-y: auto;
+/* motion-dead：.pi-basket-preview-popover 已没有页面在用（2026-11-20 查），等 Owner 同意删。 */
   animation: pi-basket-preview-fade-in var(--motion-fast) var(--ease-out);
   font-size: 13px;
   color: var(--ink);
@@ -1080,7 +1083,7 @@ button.pi-analysis-distractor:hover {
   padding: 3px 10px;
   cursor: pointer;
   white-space: nowrap;
-  transition: background var(--motion-micro) var(--ease-hover), border-color var(--motion-micro) var(--ease-hover);
+  transition: background var(--motion-state), border-color var(--motion-state);
 }
 
 .pi-insight-chip:hover {
@@ -1132,6 +1135,7 @@ button.pi-analysis-distractor:hover {
   box-shadow: var(--elev-3);
   max-height: 60vh;
   overflow-y: auto;
+/* motion-dead：.pi-insight-panel 已没有页面在用（2026-11-20 查），等 Owner 同意删。 */
   animation: pi-insight-fade-in var(--motion-fast) var(--ease-out);
 }
 

@@ -283,7 +283,7 @@
   font: inherit;
   text-align: left;
   cursor: pointer;
-  transition: background-color var(--motion-fast) var(--ease-hover), box-shadow var(--motion-fast) var(--ease-hover);
+  transition: background-color var(--motion-state), box-shadow var(--motion-state);
 }
 
 .vocabulary-progress-word:hover {

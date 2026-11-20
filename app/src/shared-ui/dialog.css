@@ -1,5 +1,5 @@
-/* 对话框（Dialog.tsx）。颜色、间距、圆角、影子只用 tokens.css 里的变量；动效用全站 --motion-* / --ease-*
- * （App.css :root，DESIGN.md §6）。tokens.css 里没有的取值（对话框宽度、遮罩色）先写成本文件里的局部变量，
+/* 对话框（Dialog.tsx）。颜色、间距、圆角、影子只用 tokens.css 里的变量；动效用全站动效角色
+ * （shared-ui/motion.css，DESIGN.md §5「Motion 动效」）。tokens.css 里没有的取值（对话框宽度、遮罩色）先写成本文件里的局部变量，
  * 每个注明出处，缺口记在 docs/design-gaps.md 和 design/components-2026-11-13/migrate-dialog/README.md「缺的变量」。
  *
  * DESIGN.md 依据：
@@ -46,8 +46,8 @@
   color: var(--eqb-color-text);
   overscroll-behavior: contain;
   opacity: 0;
-  /* 退场快一档（motion-fast），入场 motion-base（下面 data-visible='true' 那条）。 */
-  transition: opacity var(--motion-fast) var(--ease-out);
+  /* 动效角色：退场走「离开」，入场走「出现 · 自己占一块的」（下面 data-visible='true' 那条），比退场慢一档。 */
+  transition: opacity var(--motion-dismiss);
 }
 
 .eqb-dialog:not([open]) {
@@ -62,7 +62,7 @@
 /* 覆盖：本条 (0,2,0) 盖过 .eqb-dialog (0,1,0) 的不透明度和过渡时长：打开着时显出来，入场比退场慢一档。 */
 .eqb-dialog[data-visible='true'] {
   opacity: 1;
-  transition-duration: var(--motion-base);
+  transition: opacity var(--motion-reveal-panel);
 }
 
 .eqb-dialog[data-size='sm'] { --eqb-dialog-width: var(--eqb-dialog-width-sm); }
@@ -82,17 +82,19 @@
   background: var(--eqb-color-paper);
   box-shadow: var(--elev-3);
   opacity: 0;
-  transform: scale(0.97);
+  transform: scale(var(--motion-reveal-scale));
   transition:
-    opacity var(--motion-fast) var(--ease-out),
-    transform var(--motion-fast) var(--ease-out);
+    opacity var(--motion-dismiss),
+    transform var(--motion-dismiss);
 }
 
 /* 覆盖：本条 (0,3,0) 盖过 .eqb-dialog-panel (0,1,0) 的不透明度、缩放和过渡时长，理由同遮罩那条。 */
 .eqb-dialog[data-visible='true'] .eqb-dialog-panel {
   opacity: 1;
   transform: none;
-  transition-duration: var(--motion-base);
+  transition:
+    opacity var(--motion-reveal-panel),
+    transform var(--motion-reveal-panel);
 }
 
 .eqb-dialog-head {
@@ -189,13 +191,16 @@
   width: min(var(--eqb-dialog-width), calc(100% - var(--eqb-space-4)));
   height: 100%;
   border-radius: var(--eqb-radius-card) 0 0 var(--eqb-radius-card);
-  transform: translateX(var(--eqb-space-5));
+  /* 从右边 24px 外滑进来：出现挪动距离（4px）的 6 倍，减少动态效果时跟着归零（motion.css）。 */
+  transform: translateX(calc(var(--motion-reveal-shift) * 6));
 }
 
-/* 覆盖：本条 (0,4,0) 盖过上面打开着的 (0,3,0)：抽屉入场用 --motion-slow（DESIGN.md 动效档「面板 / 抽屉级」）。 */
+/* 覆盖：本条 (0,4,0) 盖过上面打开着的 (0,3,0)：抽屉入场走「出现 · 从边上滑进来的」。 */
 .eqb-dialog[data-placement='side'][data-visible='true'] .eqb-dialog-panel {
   transform: none;
-  transition-duration: var(--motion-slow);
+  transition:
+    opacity var(--motion-reveal-drawer),
+    transform var(--motion-reveal-drawer);
 }
 
 /* 抽屉里的表单很长：标题下、动作上各一条发丝线，滚动时看得出哪里是固定的。 */
@@ -218,10 +223,4 @@
   }
 }
 
-/* 减少动态效果：不做过渡，直接出现、直接消失（DESIGN.md §6）。 */
-@media (prefers-reduced-motion: reduce) {
-  .eqb-dialog,
-  .eqb-dialog .eqb-dialog-panel {
-    transition: none;
-  }
-}
+/* 减少动态效果：不缩放、不滑，只淡入淡出（motion.css 把 --motion-reveal-scale 设成 1、--motion-reveal-shift 设成 0）。 */

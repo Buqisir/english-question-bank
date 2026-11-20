@@ -109,7 +109,7 @@
   border: 1px solid rgba(44, 40, 32, 0.14);
   border-radius: 12px;
   background: transparent;
-  transition: background-color var(--motion-fast) var(--ease-hover), border-color var(--motion-fast) var(--ease-hover);
+  transition: background-color var(--motion-state), border-color var(--motion-state);
 }
 .pi-ps-analysis-option-section--active {
   border-color: rgba(44, 40, 32, 0.32);

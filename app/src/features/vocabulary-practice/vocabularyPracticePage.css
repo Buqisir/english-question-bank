@@ -100,7 +100,8 @@
   font: inherit;
   cursor: pointer;
   perspective: 800px;
-  transition: opacity var(--motion-base) var(--ease-out), visibility var(--motion-base) var(--ease-out);
+  /* 动效角色「离开」：配上的两张淡出。 */
+  transition: opacity var(--motion-dismiss), visibility var(--motion-dismiss);
 }
 
 .vocabulary-match-card:focus-visible {
@@ -119,7 +120,8 @@
   display: block;
   width: 100%;
   height: 100%;
-  transition: transform var(--motion-slow) var(--ease-in-out);
+  /* 动效角色「移动」：翻牌，起得稳、停得稳。减少动态效果时直接翻到（--motion-travel 是 1ms）。 */
+  transition: transform var(--motion-travel);
   transform-style: preserve-3d;
 }
 
@@ -146,7 +148,7 @@
 .vocabulary-match-card-back {
   background: var(--eqb-color-bg);
   color: var(--eqb-color-text-faint);
-  transition: background-color var(--motion-fast) var(--ease-hover);
+  transition: background-color var(--motion-state);
 }
 
 .vocabulary-match-card-back span {
@@ -164,13 +166,14 @@
   box-shadow: var(--elev-1);
   transform: rotateY(180deg);
   transition:
-    background var(--motion-base) var(--ease-out),
-    box-shadow var(--motion-base) var(--ease-out);
+    background var(--motion-state),
+    box-shadow var(--motion-state);
 }
 
 /* 配上了：内圈换成 2px 墨线，右上角墨色小勾（每页的点睛色留给别处，这里不用）。 */
 .vocabulary-match-card.is-confirming-match .vocabulary-match-card-face {
   box-shadow: inset 0 0 0 2px var(--eqb-color-action);
+  /* motion-signature：配对成功，牌面轻轻鼓一下（1.025）。减少动态效果时不动（文件末尾）。 */
   animation: vocabulary-match-confirm var(--motion-entrance) var(--ease-out);
 }
 
@@ -185,6 +188,7 @@
   border-radius: 50%;
   background: var(--eqb-color-action);
   color: var(--eqb-color-paper);
+  /* motion-signature：配对成功的小勾从 0.7 放大出来。 */
   animation: vocabulary-match-confirmation-in var(--motion-base) var(--ease-out) both;
 }
 
@@ -399,12 +403,10 @@
   }
 }
 
+/* 减少动态效果：翻牌直接到位、配上的牌只淡出，归 motion.css 的角色变量管；这里只关两个签名时刻。 */
 @media (prefers-reduced-motion: reduce) {
-  .vocabulary-match-card,
-  .vocabulary-match-card-inner,
   .vocabulary-match-card-face,
   .vocabulary-match-confirmation {
     animation: none;
-    transition: none;
   }
 }

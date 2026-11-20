@@ -794,7 +794,7 @@ console.log('\nTest 14: Paper row hover + clickable + 草稿卷 wording in App')
   // motion-pass: transition duration/curve literals were collected into
   // --motion-*/--ease-* tokens (docs/cuts/motion-pass/plan.md #2); assert the
   // token form on the same background+box-shadow pair, still no transform.
-  assert('paper-row has soft transition (no transform)', /transition:\s*background\s*var\(--motion-fast\)\s*var\(--ease-hover\),\s*box-shadow\s*var\(--motion-fast\)\s*var\(--ease-hover\)/.test(paperRowRule), `got: ${paperRowRule}`)
+  assert('paper-row has soft transition (no transform)', /transition:\s*background\s*var\(--motion-state\),\s*box-shadow\s*var\(--motion-state\)/.test(paperRowRule), `got: ${paperRowRule}`)
   // Fluid hover (2026-09-15): the row's hover surface is the shared
   // .fluid-hover-list::before highlight (state-hover token), not a per-row :hover;
   // keyboard focus keeps the per-row surface.

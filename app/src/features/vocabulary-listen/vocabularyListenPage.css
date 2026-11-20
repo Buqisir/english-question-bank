@@ -193,7 +193,8 @@
   border-radius: 999px;
   background: var(--action);
   transform-origin: left center;
-  transition: transform var(--motion-base) var(--ease-out);
+  /* 动效角色「换向」：进度条原地伸长。 */
+  transition: transform var(--motion-turn);
 }
 
 .vocabulary-listen-control-row {
@@ -380,7 +381,8 @@
   box-shadow: var(--elev-2);
   transform: translateY(calc(100% + 24px));
   visibility: hidden;
-  transition: transform var(--motion-base) var(--ease-out), visibility var(--motion-base);
+  /* 动效角色「出现 · 自己占一块的」：底栏从下面升上来。整条要走 100% + 24px，比出现挪动距离大得多，减少动态效果时另外关掉（文件末尾）。 */
+  transition: transform var(--motion-reveal-panel), visibility var(--motion-reveal-panel);
 }
 
 .vocabulary-listen-sticky > div {
@@ -557,7 +559,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .vocabulary-listen-progress span,
   .vocabulary-listen-sticky {
     transition: none;
   }

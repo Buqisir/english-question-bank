@@ -1,0 +1,86 @@
+/* 动效构件（DESIGN.md §5「Motion 动效」，2026-11-20 提案 · 单一来源，等 Owner 看样张拍板）。
+ *
+ * 全站的动效只按「它在干什么」分成七个角色，写 CSS 时选角色，不选时长和曲线：
+ *
+ *   状态 --motion-state     悬停、选中、焦点：只变颜色、底色、边、影子，不动位置。
+ *   按下 --motion-press     :active 缩一点，配 --motion-press-scale*（按大小三档，缩下去的像素差不多，约 2px）。
+ *   滑块 --motion-glide     列表里那块悬停灰跟着鼠标走（components/useFluidHover.ts）。
+ *   出现 --motion-reveal*   菜单、浮层、提示、对话框、抽屉出来：淡入，再从锚点方向挪一点（--motion-reveal-shift）
+ *                           或从小一点放大（--motion-reveal-scale，只给居中的对话框）。东西越大越慢一档。
+ *   离开 --motion-dismiss   它们走：比出来快一档，只淡出、往回挪一点。
+ *   换向 --motion-turn      小部件在原地转、滑：展开箭头、开关的钮、进度条、滑轨上的点。
+ *   移动 --motion-travel    成块的东西走一段距离：翻牌、指针、卷面让位。
+ *   等待                    灰块呼吸、所以点：不在这里，见 waiting.css 和 tokens.css 的 --wait-*。
+ *
+ * 这七个以外的动作（獭獭、图标状态动效、七选五跳卡、句子分析、加卷计数、配对成功）是「签名时刻」，
+ * 各有自己的规则（BRAND.md §4.6、design/icon-system-2026-09-15/motion-rules.md），不走角色，
+ * 代码里注 `motion-signature` 说明为什么（scripts/verify-motion-tokens.mjs 认这个注释；没人用、等删的注 `motion-dead`）。
+ *
+ * 减少动态效果在这里一处写好：位移、缩放、转动归零或直接到位，颜色和淡入淡出照常（颜色变化不算「动」，
+ * 淡入能告诉人东西是新出来的）。用角色写的地方不用再各写一段 @media (prefers-reduced-motion)。
+ *
+ * 角色只是给五档时长、三条曲线起名字（下面最上面那一段，原来在 App.css 和 index.css 各抄一份，2026-11-20 收到这里）。
+ * transition 里直接写 `background-color var(--motion-state)`：变量展开成「时长 曲线」，浏览器照常解析。 */
+
+:root {
+  /* ── 五档时长、三条曲线（motion-pass 2026-07-12，数值没改） ── */
+  --motion-micro: 80ms;     /* 只给签名时刻里的小步（图标勾的揭示等）；界面角色不用 */
+  --motion-fast: 120ms;
+  --motion-base: 160ms;
+  --motion-slow: 220ms;
+  --motion-entrance: 260ms; /* 只给签名时刻（加卷计数、配对成功）；界面角色不用 */
+  --ease-hover: ease;                             /* 颜色 */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);     /* 出现、按下、小部件：一开始就快，马上有反应 */
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* 成块移动：起得稳、停得稳 */
+
+  /* ── 角色 ── */
+  --motion-state: var(--motion-fast) var(--ease-hover);
+
+  --motion-press: var(--motion-fast) var(--ease-out);
+  --motion-press-scale-icon: 0.94;   /* 图标键（28–32px）：缩约 2px */
+  --motion-press-scale: 0.97;        /* 有字的键（60–100px 宽）：缩约 2–3px */
+  --motion-press-scale-surface: 0.99; /* 能点的卡片、板（200px 以上）：缩约 2–4px */
+
+  --motion-glide: var(--motion-fast) var(--ease-out);
+
+  --motion-reveal: var(--motion-fast) var(--ease-out);       /* 贴着键出来的：菜单、浮层、工具条 */
+  --motion-reveal-panel: var(--motion-base) var(--ease-out); /* 自己占一块的：对话框、底部提示、卡片 */
+  --motion-reveal-drawer: var(--motion-slow) var(--ease-out); /* 从边上滑进来的：侧边抽屉 */
+  --motion-dismiss: var(--motion-fast) var(--ease-out);
+  --motion-reveal-shift: 4px;   /* 出现时挪多远；抽屉、提示条按它的倍数走 */
+  --motion-reveal-scale: 0.97;  /* 居中的对话框从多小放大 */
+
+  --motion-turn: var(--motion-fast) var(--ease-out);
+  --motion-travel: var(--motion-slow) var(--ease-in-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-press-scale-icon: 1;
+    --motion-press-scale: 1;
+    --motion-press-scale-surface: 1;
+    --motion-reveal-shift: 0px;
+    --motion-reveal-scale: 1;
+    /* 直接到位。写 1ms 不写 0s：0s 的过渡不发 transitionend，等这个事件的代码（滑块收起、卷面让位后重量）会卡住。 */
+    --motion-glide: 1ms linear;
+    --motion-turn: 1ms linear;
+    --motion-travel: 1ms linear;
+  }
+}
+
+/* ── 共用的出现动画（菜单、浮层这类用 animation 出来的）──
+ * 用 translate / scale 两个独立属性，不占 transform：按下时的 transform: scale() 和它们叠得上，不互相盖。
+ * 方向：默认从上往下落（贴在键下面的菜单）；贴在键上面的设 --motion-reveal-from: 1（从下往上），居中的不挪。 */
+@keyframes eqb-reveal {
+  from {
+    opacity: 0;
+    translate: 0 calc(var(--motion-reveal-shift) * var(--motion-reveal-from, -1));
+  }
+}
+
+@keyframes eqb-reveal-scale {
+  from {
+    opacity: 0;
+    scale: var(--motion-reveal-scale);
+  }
+}

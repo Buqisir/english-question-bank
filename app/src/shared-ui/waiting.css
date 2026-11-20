@@ -1,5 +1,5 @@
 /* 等待构件（DESIGN.md §5「Waiting 等待」，2026-11-15）：所以点 WaitDots.tsx、灰块 Skeleton.tsx。
- * 颜色、圆角、过渡只用 tokens.css / App.css :root 里的变量。DESIGN 给定、全站 token 里没有的几个数
+ * 颜色、圆角、过渡只用 tokens.css / shared-ui/motion.css 里的变量。DESIGN 给定、全站 token 里没有的几个数
  * （所以点 16px、透明度 0.6）写成本文件里的具名变量，出处都是 DESIGN §5 Waiting。灰块一呼一吸 1.8 秒等待第六轮收进了
  * tokens.css 的 --wait-breathe-cycle。 */
 

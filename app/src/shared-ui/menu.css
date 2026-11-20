@@ -17,29 +17,17 @@
   background: var(--eqb-color-paper);
   box-shadow: var(--elev-3);
   color: var(--eqb-color-text);
-  animation: eqb-menu-in var(--motion-fast) var(--ease-out);
+  /* 动效角色「出现 · 贴着键出来的」：淡入，从键那边落下 4px（motion.css 的共用 eqb-reveal）。 */
+  animation: eqb-reveal var(--motion-reveal);
 }
 
 .eqb-menu.fluid-hover-list {
   --fh-radius: var(--eqb-radius-control);
 }
 
-@keyframes eqb-menu-in {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-}
-
+/* 菜单在键上面时从下往上升。 */
 .eqb-menu[data-side='above'] {
-  animation-name: eqb-menu-in-above;
-}
-
-@keyframes eqb-menu-in-above {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
+  --motion-reveal-from: 1;
 }
 
 .eqb-menu-item {
@@ -145,9 +133,4 @@
   background: var(--eqb-color-border-subtle);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .eqb-menu,
-  .eqb-menu[data-side='above'] {
-    animation: none;
-  }
-}
+/* 减少动态效果：只淡入，不挪（motion.css 把 --motion-reveal-shift 设成 0）。 */

@@ -12,8 +12,8 @@
  * - 开着时背后页面不能滚（把根元素的 overflow 关掉，关上时还原）。
  * - 点遮罩关不关：closeOnBackdrop，默认不关。确认、填表这类防误关；只有调用处原来就点遮罩关的才打开。
  * - busy：正在做（保存、生成、作废中），Esc、点遮罩、右上角关闭、「取消」都不关，「取消」和关闭键变禁用。
- * - 入场：遮罩淡入，面板淡入并从 0.97 放大（侧边抽屉从右边滑进来）；退场快一档。时长、曲线用全站
- *   --motion-* / --ease-*（App.css :root）。系统设了「减少动态效果」时不做过渡（dialog.css）。
+ * - 入场：遮罩淡入，面板淡入并从 0.97 放大（侧边抽屉从右边滑进来）；退场快一档。用全站动效角色
+ *   「出现」「离开」（shared-ui/motion.css）。系统设了「减少动态效果」时不放大不滑，只淡入淡出。
  *   退场要等动画播完才卸载：调用处让 <Dialog> 一直挂着、只切 open。退场这段时间里标题、正文、动作照
  *   最后一次打开时的样子画（调用处的数据这时可能已经清空了）。这段时间面板是 inert：点不到、按回车不提交、
  *   Tab 不进去，免得快速连点把确认键（比如删除）再触发一次。
@@ -97,7 +97,7 @@ export type DialogProps = {
   children?: ReactNode
 }
 
-// 退场时长：和 dialog.css 里退场用的 --motion-fast（120ms）一致，播完再卸载。
+// 退场时长：和 dialog.css 里退场用的动效角色「离开」--motion-dismiss（120ms）一致，播完再卸载。
 const EXIT_MS = 120
 
 const FOCUSABLE = 'button, input, select, textarea, a[href], [tabindex]'
