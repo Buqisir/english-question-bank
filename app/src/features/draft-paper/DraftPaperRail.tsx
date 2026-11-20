@@ -1,5 +1,5 @@
 import { ArrowDown, ArrowUp, Grip, Trash } from '../../icons'
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode, type Ref } from 'react'
 import { FluidHoverList } from '../../components/FluidHoverList'
 import { Button } from '../../shared-ui/Button.tsx'
 import { Notice } from '../../shared-ui/Notice.tsx'
@@ -165,6 +165,8 @@ export type DraftPaperRailProps = {
      "目录 ⇄ 抽屉两态原地切换", never both at once. `<nav>` itself (width/
      sticky positioning) is unchanged either way. */
   swapDrawer?: DraftPaperSwapDrawerProps | null
+  /** 目录列表（<ul>）的 ref，给草稿卷工作台的 useFlipRows：老师动了顺序时行走过去，不在一帧里换位。 */
+  listRef?: Ref<HTMLElement>
 }
 
 type ActivePlate = {
@@ -177,7 +179,7 @@ type ActivePlate = {
 }
 
 export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
-  const { items, activeGroupId, onItemClick, onDragStart, onDrop, onMoveItem, onDeleteItem, metaText, swapDrawer } = props
+  const { items, activeGroupId, onItemClick, onDragStart, onDrop, onMoveItem, onDeleteItem, metaText, swapDrawer, listRef } = props
 
   const panelRef = useRef<HTMLDivElement>(null)
   const swapPanelRef = useRef<HTMLElement>(null)
@@ -294,6 +296,7 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
           as="ul"
           axis="y"
           className="draft-paper-rail-list"
+          ref={listRef}
           itemSelector=".draft-paper-rail-item > .eqb-row-hit, .draft-paper-rail-item.is-missing"
         >
           {items.map((item) => {
@@ -325,6 +328,7 @@ export function DraftPaperRail(props: DraftPaperRailProps): ReactNode {
                 padding="none"
                 size="sm"
                 data-draft-group-id={item.groupId}
+                data-flip-key={item.id}
                 aria-current={isActive ? 'location' : undefined}
                 draggable
                 onDragOver={(event) => event.preventDefault()}

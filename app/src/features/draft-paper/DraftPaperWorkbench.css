@@ -453,6 +453,19 @@
     pointer-events: auto;
   }
 
+  /* 重排完了遮罩淡出（动效角色「离开」，Owner 2026-11-20）：出来照旧一下就在（这里不给出来的过渡），走的时候
+     透明度到 0，淡完由 hidden 收起（DraftPaperWorkbench.tsx useToastPresence，120ms 同 --motion-dismiss）。
+     本条覆盖上一条 .is-waiting 和下面 .draft-a4-wait-line.eqb-notice 的 pointer-events: auto，因为淡出这一下旧卷面已经能点了。 */
+  .draft-a4-wait.is-leaving,
+  .draft-a4-wait.is-leaving .draft-a4-wait-line {
+    pointer-events: none;
+  }
+
+  .draft-a4-wait.is-leaving {
+    opacity: 0;
+    transition: opacity var(--motion-dismiss);
+  }
+
   /* 这一行换成了 shared-ui/Notice 的 over 放法（垫桌色、e1、字色字号都由 notice.css 给）。
      这里只管它在遮罩里的位置：居中、离纸顶 16px，往下滚时贴在视口上沿。
      覆盖：本条 (0,2,0) 盖过 notice.css 里 .eqb-notice (0,1,0) 的 margin: 0 和 max-width: 100%，因为这一行在遮罩里要居中、离纸顶 16px、两边留 16px；其余照 notice.css。 */
@@ -470,6 +483,21 @@
   border: 0;
   display: block;
   width: 100%;
+}
+
+/* 预览 iframe 是 Tab 停点（键盘用户要靠它滚卷面），焦点环照全站（surface.css 能点的板）：2px 动作色、外扩 2px。
+   画在外面那层 .draft-a4-sheet 上、不画在 iframe 上：iframe 窄了会整个 transform: scale 缩小，环也跟着变细；
+   .draft-a4-sheet 的高是按缩小以后的高写的，宽是纸栏宽，环正好套住看得见的卷面。
+   .is-key-focus 是脚本认出的「按键进来的」（Chromium 里 Tab 进去的 iframe 不算 :focus-visible，见 DraftPaperWorkbench.tsx），
+   :has(:focus-visible) 留给认这个的浏览器。 */
+.draft-a4-sheet.is-key-focus,
+.draft-a4-sheet:has(> iframe:focus-visible) {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
+.draft-a4-sheet > iframe:focus-visible {
+  outline: none;
 }
 
 .draft-a4-empty {
@@ -771,6 +799,22 @@
    写 opacity: 0 灰块会先闪一下再淡掉；visibility 不过渡，也不和那边的 var(--fh-o) 争层叠。 */
 .draft-paper-rail-list:has(> .draft-paper-rail-item.is-missing[data-fluid-hover-active])::before {
   visibility: hidden;
+}
+
+/* 老师改顺序时行走过去（DraftPaperWorkbench.tsx useFlipRows，Owner 2026-11-20）：transform 由脚本先挪回原处再放开，
+   这里给「移动」角色走回 0；新出来的行（撤销删）只淡入（「出现」）。本条覆盖上面 .draft-paper-rail-item 的
+   transition，所以把那条的字色过渡也带上。减少动态效果时 --motion-travel 是 1ms，直接到位。 */
+.draft-paper-rail-item[data-flip='move'] {
+  transition: color var(--motion-state), transform var(--motion-travel);
+}
+
+.draft-paper-rail-item[data-flip='enter'] {
+  animation: draft-paper-rail-relocate var(--motion-reveal);
+}
+
+/* 当前格的白底板跟着它那一行走：它自己用 transform 定位，FLIP 走独立的 translate 属性，不和定位打架。 */
+.draft-paper-rail-current[data-flip='move'] {
+  transition: translate var(--motion-travel);
 }
 
 .draft-paper-rail-item.active {

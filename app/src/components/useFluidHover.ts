@@ -104,6 +104,7 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
   const activeRef = useRef<number | null>(null)
   const insideRef = useRef(false)
   const shownRef = useRef(false)
+  const pointerRef = useRef<{ x: number; y: number } | null>(null)
   const gapClickPx = gapClick === false ? 0 : gapClick === true ? DEFAULT_GAP_CLICK_PX : gapClick
   const gapAxis = axis === 'xy' || gapMax === undefined ? null : axis
 
@@ -200,6 +201,20 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
   }, [measure, paint])
 
   /**
+   * Rows that slide into a new order (草稿卷左栏的 FLIP) end at new boxes while
+   * the pointer stays put: once an item's transform transition ends, measure
+   * again and light whatever is under the last pointer position.
+   */
+  const repick = useCallback(() => {
+    measure()
+    const pointer = pointerRef.current
+    const local = pointer ? toLocal(pointer.x, pointer.y) : null
+    if (!local) return
+    const next = pick(...local)
+    paint(next, next !== null && !inExtraArea(next, ...local))
+  }, [measure, toLocal, pick, paint, inExtraArea])
+
+  /**
    * A hidden highlight keeps its last box while it fades out in place, but a
    * transparent box still counts as scrollable overflow — after a viewport
    * shrink it can poke past the now-narrower container and widen the page.
@@ -220,6 +235,7 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
     if (!container) return
     const onTransitionEnd = (event: TransitionEvent) => {
       if (event.target === container && event.pseudoElement === '::before' && event.propertyName === 'opacity') collapse()
+      else if (event.target !== container && event.propertyName === 'transform' && insideRef.current) repick()
     }
     container.addEventListener('transitionend', onTransitionEnd)
     const observer = typeof ResizeObserver === 'undefined'
@@ -233,7 +249,7 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
       container.removeEventListener('transitionend', onTransitionEnd)
       observer?.disconnect()
     }
-  }, [remeasure, collapse])
+  }, [remeasure, repick, collapse])
 
   useEffect(() => () => {
     const active = activeRef.current
@@ -251,6 +267,7 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
     onMouseEnter: (event: MouseEvent<HTMLElement>) => {
       if (!isOwnEvent(event)) return
       insideRef.current = true
+      pointerRef.current = { x: event.clientX, y: event.clientY }
       measure()
       const local = toLocal(event.clientX, event.clientY)
       if (!local) return
@@ -259,6 +276,7 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
     },
     onMouseMove: (event: MouseEvent<HTMLElement>) => {
       if (!insideRef.current || !isOwnEvent(event)) return
+      pointerRef.current = { x: event.clientX, y: event.clientY }
       const local = toLocal(event.clientX, event.clientY)
       if (!local) return
       const next = pick(...local)
@@ -267,6 +285,7 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
     },
     onMouseLeave: () => {
       insideRef.current = false
+      pointerRef.current = null
       paint(null)
     },
     onClick: (event: MouseEvent<HTMLElement>) => {
