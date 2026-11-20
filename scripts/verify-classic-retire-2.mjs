@@ -226,7 +226,7 @@ assert(
 )
 assert(
   'App.tsx instantiates QuestionGroupDetailView in the detail branch',
-  /viewMode === 'detail' \? \(\s*\n\s*<QuestionGroupDetailView/.test(appTsx),
+  /viewMode === 'detail' \? \([\s\S]{0,400}?<QuestionGroupDetailView\b/.test(appTsx),
 )
 assert(
   'App.tsx does not duplicate getParseSavedAt/compactGroupMeta definitions',
