@@ -101,6 +101,15 @@
 @media (pointer: coarse) {
   .eqb-chip[data-kind='toggle'] {
     height: 36px;
+    /* 触屏点击区扩到 44（Owner 2026-11-20 定，tokens.css --eqb-target-touch）：透明 ::after 上下各伸 4，样子不变。
+     * 胶囊自己的 overflow: hidden 会把 ::after 裁掉，这里放开；省略号由里面的 .eqb-chip-label 自己裁，不受影响。 */
+    overflow: visible;
+  }
+
+  .eqb-chip[data-kind='toggle']::after {
+    content: '';
+    position: absolute;
+    inset: min(0px, calc(50% - var(--eqb-target-touch) / 2));
   }
 }
 

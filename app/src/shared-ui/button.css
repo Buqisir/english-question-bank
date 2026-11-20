@@ -58,6 +58,17 @@
   min-width: 36px;
 }
 
+/* 触屏点击区扩到 44（Owner 2026-11-20 定，tokens.css --eqb-target-touch）：中号、大号用透明 ::after 往外扩，样子不变。
+ * 小号（28）不扩：顶栏导航、行里的「⋯」「加入草稿卷」都是小号，挨得近，扩了会压到旁边的键（2026-11-20 手机全站清点）。
+ * 按钮本身是 position: relative（上面），::after 以它为准；按钮自己不裁内容（省略号由 .eqb-button-label 裁），扩出去的部分点得到。 */
+@media (pointer: coarse) {
+  .eqb-button:not([data-size='sm'])::after {
+    content: '';
+    position: absolute;
+    inset: min(0px, calc(50% - var(--eqb-target-touch) / 2));
+  }
+}
+
 /* 胶囊大号（2026-11-15 加，Owner 当天定，DESIGN.md §5 Waiting 末条）：照登录键原来手写的样子
  * （auth/LoginPage.css 原 .login-submit，换前实量见 design/components-2026-11-13/migrate-waiting-3/README.md）。
  * 2026-11-16 Owner 选登录键方案 A：胶囊形留着（品牌例外），字号从 15 归到阶梯上的 md 16，影子归到 --elev-3（下一条）。

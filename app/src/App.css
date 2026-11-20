@@ -210,6 +210,15 @@
   margin-block: -3px;
 }
 
+/* 触屏点击区扩到 44（Owner 2026-11-20 定，tokens.css --eqb-target-touch）：卷名改名键本身裁字（省略号），::after 会被裁掉，
+ * 所以用同一个内边距加负外边距的办法往上下多伸：18 高的字 + 上下各 13 = 44，布局不动。它没有底色和边，多出的内边距看不出来。 */
+@media (pointer: coarse) {
+  .topbar-page-title-editable {
+    padding-block: 13px;
+    margin-block: -13px;
+  }
+}
+
 .topbar-page-title-pencil {
   flex-shrink: 0;
   opacity: 0;

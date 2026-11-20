@@ -614,6 +614,15 @@
   border-radius: var(--eqb-radius-control);
 }
 
+/* 触屏点击区：题组工具条是竖着挨在一起的「换篇」「⋯」，属于挤着的，不扩到 44（DESIGN.md「点击区」，Owner 2026-11-20 定）。
+ * 「⋯」是中号键，button.css 会给它透明 ::after 往外扩，2026-11-20 手机清点量到它压住上面「换篇」一截（32×32 → 32×24），这里关掉。
+ * 覆盖：本条 (0,3,1) 盖过 button.css 的 .eqb-button:not([data-size='sm'])::after (0,2,1)。 */
+@media (pointer: coarse) {
+  .draft-group-actions .eqb-button.draft-group-menu-trigger::after {
+    content: none;
+  }
+}
+
 /* a3-imposition (plan.md Must Do 3, 裁点2): the A3-only seam-anchored
    sibling of .draft-group-suggestion above — centered on the paper column (the seam it sits on spans the full face
    width) instead of right-aligned in a per-group action column. */
