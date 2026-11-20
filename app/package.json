@@ -2,7 +2,6 @@
   "name": "app",
   "private": true,
   "version": "0.0.0",
-  "packageManager": "pnpm@10.34.9",
   "type": "module",
   "scripts": {
     "api": "node ../server/api.mjs",
