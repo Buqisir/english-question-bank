@@ -286,6 +286,8 @@ try {
   assert.throws(() => buildNck1ReviewProjection(fixture.reviewRoot), /输入或产品文件清单/)
   const reused = buildNck1ReviewProjection(fixture.reviewRoot, {}, base)
   assert.deepEqual(reused.frozenProducts.manifest, legacy)
+  const reusedFromView = buildNck1ReviewProjection(fixture.reviewRoot, {}, { ...base, configBytes: new Uint8Array(previousConfig) })
+  assert.deepEqual(reusedFromView.frozenProducts.manifest, legacy)
   assert.deepEqual(reused.frozenProducts.bytes['products/answerOnly.pdf'], fixtureBytes['products/answerOnly.pdf'])
   const materializationPath = path.join(fixture.reviewRoot, printInventory.find(file => file.role === 'materialization').path)
   const materializationBytes = await readFile(materializationPath)
