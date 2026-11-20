@@ -92,9 +92,10 @@
 }
 
 @media screen and (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
-  /* 动效角色「移动」：讲评打开时整张卷让到一边，成块走一段距离，起得稳、停得稳。 */
+  /* 动效角色「出现 · 侧边抽屉」：讲评抽屉从右边进来时整张卷让到一边，和抽屉同一条曲线一起走，
+     不用「移动」的 ease-in-out（起步慢，抽屉已经在走、卷还没动）。 */
   .paper-browse-content {
-    transition: transform var(--motion-travel);
+    transition: transform var(--motion-reveal-drawer);
   }
 }
 
@@ -252,8 +253,9 @@
 
 /* The shared hover keeps tracking continuously, but the current row owns the
    white plate: hovering it must not cover that persistent location state. */
+/* visibility 不过渡，立刻藏；写 opacity: 0 会走 ::before 的 opacity 过渡，停上来时灰块先闪一下再淡掉。 */
 .paper-browse-rail-group-list:has(.paper-browse-rail-group--active[data-fluid-hover-active])::before {
-  opacity: 0;
+  visibility: hidden;
 }
 
 .paper-browse-rail-group--active {
@@ -2252,10 +2254,10 @@
   box-shadow: var(--elev-3);
   color: var(--paper-ink-strong);
   white-space: nowrap;
-  /* 动效角色「出现 · 自己占一块的」（入场用 @starting-style，下面）。 */
+  /* 动效角色「出现 · 贴着键的」：它贴着耳机键出来，和菜单一样（入场用 @starting-style，下面）。 */
   transition:
-    opacity var(--motion-reveal-panel),
-    transform var(--motion-reveal-panel);
+    opacity var(--motion-reveal),
+    transform var(--motion-reveal);
 }
 
 .listening-player-card[data-placement="above"] {
@@ -2274,10 +2276,16 @@
   z-index: 28;
 }
 
+/* 从耳机键那边长出来：在键上面的往上落一点，在键下面的往下落一点。 */
 @starting-style {
-  .listening-player-card {
+  .listening-player-card[data-placement="above"] {
     opacity: 0;
     transform: scale(var(--motion-reveal-scale)) translateY(var(--motion-reveal-shift));
+  }
+
+  .listening-player-card[data-placement="below"] {
+    opacity: 0;
+    transform: scale(var(--motion-reveal-scale)) translateY(calc(var(--motion-reveal-shift) * -1));
   }
 }
 

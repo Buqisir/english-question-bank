@@ -763,13 +763,14 @@
 /* The current row already owns the white plate; its hover surface stays
    transparent so location and hover never read as two selected states. */
 .draft-paper-rail-list:has(> .draft-paper-rail-item.active > .eqb-row-hit[data-fluid-hover-active])::before {
-  opacity: 0;
+  visibility: hidden;
 }
 
 /* 缺题项不可点，没有悬停：滑块停在它上面时藏起来（它在滑块的停靠表里，只是为了鼠标停在它上面时滑块不去挑别的项）。
-   显式层叠：本条 (0,3,1) 和上一条一样只改 ::before 的 opacity，盖过 App.css .fluid-hover-list::before 的 var(--fh-o)。 */
+   这两条都用 visibility 藏，不用 opacity: 0：App.css .fluid-hover-list::before 的 opacity 有过渡，
+   写 opacity: 0 灰块会先闪一下再淡掉；visibility 不过渡，也不和那边的 var(--fh-o) 争层叠。 */
 .draft-paper-rail-list:has(> .draft-paper-rail-item.is-missing[data-fluid-hover-active])::before {
-  opacity: 0;
+  visibility: hidden;
 }
 
 .draft-paper-rail-item.active {

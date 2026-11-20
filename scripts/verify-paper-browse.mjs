@@ -1963,7 +1963,7 @@ assert(
   !pageSrc.slice(pageSrc.indexOf('function computeZoom()'), pageSrc.indexOf('    computeZoom()')).includes('lectureOpen') &&
     /@media screen and \(min-width: 1440px\)\s*\{\s*\.paper-browse-shell(?:,\s*\.paper-browse-skeleton-shell)?\s*\{\s*grid-template-columns: 72px minmax\(0, 1fr\) 440px/.test(pageCssSrc) &&
     /const DOCKED_LECTURE_MIN_WIDTH = 1440/.test(pageSrc) &&
-    /transition: transform var\(--motion-travel\)/.test(pageCssSrc),
+    /transition: transform var\(--motion-reveal-drawer\)/.test(pageCssSrc),
   'lecture still resizes the paper instead of translating the fixed-width column',
 )
 assert(
@@ -1993,7 +1993,7 @@ assert(
     pageSrc.includes('paper-browse-rail-current') &&
     /\.paper-browse-rail-current\s*\{[^}]*background:\s*#fff[^}]*box-shadow:\s*var\(--elev-1\)/.test(pageCssSrc) &&
     /\.paper-browse-rail-group-list\.fluid-hover-list\s*\{[^}]*--fh-radius:\s*8px/.test(pageCssSrc) &&
-    /\.paper-browse-rail-group-list:has\(\.paper-browse-rail-group--active\[data-fluid-hover-active\]\)::before\s*\{[^}]*opacity:\s*0/.test(pageCssSrc) &&
+    /\.paper-browse-rail-group-list:has\(\.paper-browse-rail-group--active\[data-fluid-hover-active\]\)::before\s*\{[^}]*visibility:\s*hidden/.test(pageCssSrc) &&
     pageSrc.includes('itemSelector=".paper-browse-rail-group"') &&
     pageSrc.includes('gapClick={false}') &&
     !/\.paper-browse-rail-group--active::before/.test(pageCssSrc),

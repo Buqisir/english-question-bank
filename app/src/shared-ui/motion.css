@@ -7,10 +7,11 @@
  *   滑块 --motion-glide     当前位置挪到相邻一格：整卷、草稿卷左栏的当前格。跳远了不滑，原地「出现」。
  *                           列表的悬停灰块不滑（Owner 2026-11-20）：原地出现，只淡入淡出，走「状态」。
  *   出现 --motion-reveal*   菜单、浮层、提示、对话框、抽屉出来：淡入，再从锚点方向挪一点（--motion-reveal-shift）
- *                           或从小一点放大（--motion-reveal-scale，只给居中的对话框）。东西越大越慢一档。
+ *                           或从小一点放大（--motion-reveal-scale：居中的对话框，和定了 transform-origin、从键边上长出来的浮层）。
+ *                           东西越大越慢一档。
  *   离开 --motion-dismiss   它们走：比出来快一档，只淡出、往回挪一点。
  *   换向 --motion-turn      小部件在原地转、滑：展开箭头、开关的钮、进度条、滑轨上的点。
- *   移动 --motion-travel    成块的东西走一段距离：翻牌、指针、卷面让位。
+ *   移动 --motion-travel    成块的东西走一段距离：翻牌、指针。
  *   等待                    灰块呼吸、所以点：不在这里，见 waiting.css 和 tokens.css 的 --wait-*。
  *
  * 这七个以外的动作（獭獭、图标状态动效、七选五跳卡、句子分析、加卷计数、配对成功）是「签名时刻」，
@@ -49,7 +50,7 @@
   --motion-reveal-drawer: var(--motion-slow) var(--ease-out); /* 从边上滑进来的：侧边抽屉 */
   --motion-dismiss: var(--motion-fast) var(--ease-out);
   --motion-reveal-shift: 4px;   /* 出现时挪多远；抽屉、提示条按它的倍数走 */
-  --motion-reveal-scale: 0.97;  /* 居中的对话框从多小放大 */
+  --motion-reveal-scale: 0.97;  /* 从多小放大：居中的对话框、从键边上长出来的浮层 */
 
   --motion-turn: var(--motion-fast) var(--ease-out);
   --motion-travel: var(--motion-slow) var(--ease-in-out);
@@ -62,7 +63,7 @@
     --motion-press-scale-surface: 1;
     --motion-reveal-shift: 0px;
     --motion-reveal-scale: 1;
-    /* 直接到位。写 1ms 不写 0s：0s 的过渡不发 transitionend，等这个事件的代码（滑块收起、卷面让位后重量）会卡住。 */
+    /* 直接到位。写 1ms 不写 0s：0s 的过渡不发 transitionend，以后有代码等这个事件时不会卡住。 */
     --motion-glide: 1ms linear;
     --motion-turn: 1ms linear;
     --motion-travel: 1ms linear;
