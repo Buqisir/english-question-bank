@@ -56,7 +56,7 @@ assert.match(stagedPrompt, /"relationship"/)
 assert.match(stagedPrompt, /actual count \(including one or three\)/)
 assert.doesNotMatch(stagedPrompt, /"highlightExpressions"\s*:/)
 assert.match(stagedPrompt, /exactly\s+these top-level keys and no others/)
-assert.equal(buildApplicationStagedAnalysisContract(), `${v3Prompt}\n\n${stagedPrompt}`)
+assert.equal(buildApplicationStagedAnalysisContract(), `${v3Prompt}\n\n---\n\n${doctrine}\n\n${stagedPrompt}`)
 
 assert.match(v3Prompt, /110词左右为目标，推荐100—120词/)
 assert.doesNotMatch(v3Prompt, /85—100|约105词/)

@@ -4,7 +4,10 @@ import assert from 'node:assert/strict'
 import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { buildApplicationModelAnswerMessages } from '../server/paper-import-ai/applicationWritingWorkflow.mjs'
+import {
+  buildApplicationModelAnswerMessages,
+  buildApplicationStagedAnalysisContract,
+} from '../server/paper-import-ai/applicationWritingWorkflow.mjs'
 import {
   assertFullTranslationZh,
   assertObjectiveTeachingAnnotations,
@@ -13,10 +16,15 @@ import {
 import { buildObjectiveTeachingFixture } from './lib/objective-teaching-fixture.mjs'
 import { buildClozeAnalysisMessages } from '../server/paper-import-ai/analyzeCloze.mjs'
 import { buildGrammarFillAnalysisMessages } from '../server/paper-import-ai/analyzeGrammarFill.mjs'
-import { buildNarrativeContinuationAnalysisMessages } from '../server/paper-import-ai/analyzeNarrativeContinuation.mjs'
+import { buildListeningAnalysisAgentRequest, buildListeningAnalysisMessages } from '../server/paper-import-ai/analyzeListening.mjs'
+import {
+  buildNarrativeContinuationAnalysisMessages,
+  buildNarrativeContinuationStagedAnalysisContract,
+} from '../server/paper-import-ai/analyzeNarrativeContinuation.mjs'
 import { buildReadingAnalysisMessages } from '../server/paper-import-ai/analyzeReading.mjs'
 import { buildSevenChoicesAnalysisMessages } from '../server/paper-import-ai/analyzeSevenChoices.mjs'
 import { buildReadingAnalysisMessages as buildImportPipelineReadingAnalysisMessages } from './import-pipeline/lib.mjs'
+import { makeFixture } from './verify-nck1-source-materialization.mjs'
 
 const rootDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const referenceDir = path.join(
@@ -241,6 +249,7 @@ const question = {
   prompt: 'answer',
 }
 
+const listeningInput = { materialization: makeFixture({ listening: true }) }
 const messages = [
   buildReadingAnalysisMessages({
     paper,
@@ -296,6 +305,10 @@ const messages = [
       wordCountTarget: 150,
     },
   })[0].content,
+  buildListeningAnalysisMessages(listeningInput)[0].content,
+  buildListeningAnalysisAgentRequest(listeningInput).outputContract,
+  buildApplicationStagedAnalysisContract(),
+  buildNarrativeContinuationStagedAnalysisContract(),
 ]
 
 for (const [index, content] of messages.entries()) {
