@@ -103,6 +103,9 @@ export function observation(reading, site) {
   const punctuation = edge === undefined ? '' : text.slice(edge).match(/^[,.?!][”"’']?/u)?.[0] ?? ''
   const value = candidate.length ? text.slice(candidate[0].start, edge) : ''
   const context = words.slice(Math.max(0, start - 3), end + 3)
-  return { value, punctuation, words: candidate, context,
+  const nextSentencePrefix = punctuation === ',' && !/[.!?]/u.test(value)
+    && words[start - 1] && words[end]
+    && /[.!?]/u.test(text.slice(words[start - 1].end, candidate[0].start))
+  return { value, punctuation, nextSentencePrefix, words: candidate, context,
     evidence: context.length ? text.slice(context[0].start, context.at(-1).end) : '' }
 }

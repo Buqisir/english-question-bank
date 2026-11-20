@@ -10,6 +10,16 @@ import { align, observation, sites, speakerLabels, timedReading, units } from '.
 const wordText = (words, separator = ' ') => words.map(word => word.token).join(separator)
 const sameWords = (first, second) => wordText(first.words) === wordText(second.words)
 
+function crossesSpeakerBoundary(text, source, { start, end }) {
+  const previous = source[start - 1], next = source[start]
+  if (start !== end || !previous || !next) return false
+  const followingLabel = text.slice(previous.end, next.start).match(speakerLabels)?.at(-1)
+  if (!followingLabel) return false
+  const precedingLabel = text.slice(0, previous.start).match(speakerLabels)?.at(-1)
+  const speaker = label => label?.replace(/[\s:：]/gu, '').toLowerCase()
+  return speaker(precedingLabel) !== speaker(followingLabel)
+}
+
 function editSpan(text, source, site, { value, punctuation }) {
   const next = source[site.start]
   const prev = source[site.start - 1]
@@ -54,7 +64,7 @@ function remoteObservation(text, source, site) {
   return { ...observation({ ...result, words, text }, localSite), evidence: text }
 }
 
-async function adjudicate(group, text, engines, remote, audioSha256) {
+export async function adjudicate(group, text, engines, remote, audioSha256) {
   const { key, segmentId, occurrence } = group
   const source = units(text.replace(speakerLabels, label => ' '.repeat(label.length)))
   const readings = Object.entries(engines).map(([engine, results]) => {
@@ -83,9 +93,15 @@ async function adjudicate(group, text, engines, remote, audioSha256) {
     if (winner && (sameWords(winner, original) || wordText(winner.words, '') === wordText(sourceWords, ''))) continue
     if (winner && interval) {
       const consensus = votes.filter(vote => !vote.unaligned && sameWords(vote, winner))
-      const span = consensus.map(vote => editSpan(text, source, site, vote)).find(candidate =>
+      const boundary = crossesSpeakerBoundary(text, source, site)
+      const candidates = boundary ? consensus.filter(vote => vote.nextSentencePrefix) : consensus
+      if (boundary && candidates.length < 2) {
+        review.push({ segmentId, occurrence, ...interval, before: '', evidence, reason: '插入点在两位说话人之间，请听核句子归属。' })
+        continue
+      }
+      const span = candidates.map(vote => editSpan(text, source, site, vote)).find(candidate =>
         candidate.before !== candidate.after && !candidate.before.match(speakerLabels)
-        && consensus.filter(vote => supportsListeningEdit(text, candidate, vote.evidence)).length >= 2)
+        && candidates.filter(vote => supportsListeningEdit(text, candidate, vote.evidence)).length >= 2)
       const previous = edits.at(-1)
       if (span && (!previous || previous.start !== span.start && previous.start + previous.before.length <= span.start)) {
         edits.push({ segmentId, ...span, audioSha256, occurrence, ...interval, evidence,
