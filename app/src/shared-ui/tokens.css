@@ -102,6 +102,11 @@
   --eqb-space-4: 16px;
   --eqb-space-5: 24px;
 
+  /* 触屏点击区（DESIGN.md §5「点击区」，Owner 2026-11-20 定）：触屏（pointer: coarse）上，旁边有空地的键用透明 ::after
+     往外扩到这么大，样子不变；挤着的（顶栏导航、行里的小图标键）不扩。鼠标下仍按 24 的底线（WCAG 2.2 2.5.8）。
+     44 是苹果的触控建议、WCAG 2.5.5 的 AAA 档。外扩写成 inset: min(0px, calc(50% - var(--eqb-target-touch) / 2))：够 44 的那一边不伸。 */
+  --eqb-target-touch: 44px;
+
   /* 等待（DESIGN.md §5「Waiting 等待」：门槛、灰块）。等待第六轮（2026-11-15）从各处字面量收进来（docs/design-gaps.md 2026-11-15 条）：
      JS 的 useDelayedBusy（门槛、最短停留）、main.tsx 启动壳（灰块对相位）都读这里，CSS 的 waiting.css 灰块、index.css 启动壳门槛也用这里。
      show-delay 等这么久还没好才出等待的样子；min-visible 出了就至少留这么久；breathe-cycle 灰块一呼一吸一圈。
