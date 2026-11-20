@@ -5,7 +5,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { findSourceFlagTargets } from './text-review-parts.mjs'
-import { applySpellingReview, isSourceMarkCorrection, listeningEditTurns, prepareSpellingReview, SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4, verifyListeningEditOccurrences, verifyListeningInsertionOccurrences } from '../../server/paper-import/spellingReview.mjs'
+import { applySpellingReview, isSourceMarkCorrection, listeningEditTurns, listeningTurnWordVotes, prepareSpellingReview, SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4, verifyListeningEditOccurrences, verifyListeningInsertionOccurrences } from '../../server/paper-import/spellingReview.mjs'
 import { mapSourceEmphasisEdits } from '../../server/paper-canonical/sourceEmphasis.mjs'
 import { listeningSentenceTargets } from './listening-sentence-align.mjs'
 
@@ -206,13 +206,13 @@ test('whole-turn edits bind the original turn and use ordered evidence without a
     segmentId: evidence.segmentId,
     sentences: sentences.map((sentence, index) => ({ ...sentence,
       passes: [{ start: [11, 14, 15, 21][index], end: [13, 15, 19, 23][index] }] })),
-    engines: Object.fromEntries(['apple', 'parakeet-v2', 'faster-whisper'].map(engine =>
+    engines: Object.fromEntries(['apple', 'parakeet-v2', 'gpt-transcribe'].map(engine =>
       [engine, [{ text: after, startSeconds: 14, endSeconds: 19 }]])),
   }] }
   const apply = (...listeningEdits) => applySpellingReview(bytes,
     Buffer.from(JSON.stringify({ ...report, listeningEdits })), audio, source)
   assert.equal(apply(turn).listening.transcript[0].text, `W: We walked to work.\nM: ${after}\nW: I will help.`)
-  assert.equal(apply({ ...turn, evidence: { 'faster-whisper': after, 'parakeet-v2': after } }).listening.transcript[0].text,
+  assert.equal(apply({ ...turn, evidence: { 'gpt-transcribe': after, 'parakeet-v2': after } }).listening.transcript[0].text,
     `W: We walked to work.\nM: ${after}\nW: I will help.`)
   assert.throws(() => apply({ ...turn, before: 'I agre.' }), /complete original turn/)
   assert.throws(() => apply({ ...turn, before: before.replace('agre', 'agree') }), /complete original turn/)
@@ -260,6 +260,23 @@ test('turn evidence from another speaker window and an unspoken negation are rej
   const negated = { ...ownTime, after: second.replace('have', 'have not'), evidence: { apple: second, 'parakeet-v2': second } }
   assert.throws(() => apply(negated), /two engines/)
   assert.throws(() => apply(negated, null), /no verified turn time window/)
+})
+
+test('turn words can use different pairs in order and share limited spelling equivalences', () => {
+  const after = "I'm sure Allan said they're taking their second storybooks home, and won't need any more."
+  const voted = listeningTurnWordVotes('Allan already had his 2nd book.', after, {
+    apple: "I am Allan said they are taking their 2nd story books home, and won't need anymore.",
+    'parakeet-v2': "I'm sure Alan said they're taking their second storybooks home, and won't need any more.",
+    'gpt-transcribe': "I'm sure Allan said they are taking their second storybooks home, and won't need.",
+  })
+  assert.ok(voted.every(word => word.engines.length >= 2))
+  assert.deepEqual(voted.find(word => word.token === 'sure').engines, ['parakeet-v2', 'gpt-transcribe'])
+  assert.deepEqual(voted.find(word => word.token === 'anymore').engines, ['apple', 'parakeet-v2'])
+  const reordered = listeningTurnWordVotes('', 'First take the books home today.', {
+    apple: 'First take the books home today.',
+    'parakeet-v2': 'First take the books today home.',
+  })
+  assert.ok(reordered.some(word => word.engines.length < 2))
 })
 
 test('audio that says Well cannot assign it to either side of a speaker change', () => {

@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
-import { sameProperNameSound, units } from '../../scripts/import-pipeline/listening-transcript-check-alignment.mjs'
+import { align, sameProperNameSound, units } from '../../scripts/import-pipeline/listening-transcript-check-alignment.mjs'
 import { listeningSentenceTargets } from '../../scripts/import-pipeline/listening-sentence-align.mjs'
 import { digestJson, exactKeys, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { extractDocxDocumentParagraphs, DOCX_MEDIA_TYPE } from '../paper-canonical/docxSourceAdapter.mjs'
@@ -290,20 +290,39 @@ export function listeningEditTurns(text) {
   return turns
 }
 
+const turnCompounds = new Map([
+  ['any more', 'anymore'], ['story book', 'storybook'], ['story books', 'storybooks'],
+  ['text book', 'textbook'], ['text books', 'textbooks'], ['note book', 'notebook'], ['note books', 'notebooks'],
+])
+
 function turnWords(text) {
   const words = listeningEditWords(text)
   if (words.some(word => /[^a-z0-9']/u.test(word))) return words.map(token => ({ token }))
-  return units(text)
+  const parts = units(text)
+  const merged = []
+  for (let i = 0; i < parts.length; i++) {
+    const first = parts[i], second = parts[i + 1]
+    const compound = turnCompounds.get(`${first.token} ${second?.token}`)
+    if (compound && /^[ \t-]+$/u.test(text.slice(first.end, second.start))) {
+      merged.push({ ...first, token: compound, end: second.end })
+      i++
+    } else merged.push(first)
+  }
+  return merged
 }
 
-function turnEvidence(after, heard, retainedNames) {
-  let index = 0
-  for (const word of turnWords(heard)) {
-    const expected = after[index]
-    if (expected && (expected.token === word.token
-      || retainedNames.has(expected.token) && sameProperNameSound(expected, word))) index++
+export function listeningTurnWordVotes(before, after, evidence) {
+  const wanted = turnWords(after)
+  const retainedNames = new Set(turnWords(before).filter(word => word.name).map(word => word.token))
+  const votes = wanted.map(word => ({ ...word, engines: [] }))
+  for (const [engine, heard] of Object.entries(evidence)) {
+    const { matches } = align(wanted, turnWords(heard), (expected, word) => expected.token === word.token
+      || retainedNames.has(expected.token) && sameProperNameSound(expected, word))
+    for (const { start, end } of matches) {
+      for (let i = start; i < end; i++) votes[i].engines.push(engine)
+    }
   }
-  return after.length > 0 && index === after.length
+  return votes
 }
 
 function turnTimeWindow(edit, original, evidence) {
@@ -410,15 +429,16 @@ function applyListeningEdits(materialization, edits, audio, original, spelling, 
       if (touchesListeningSpeakerBoundary(text, edit)) fail('listening edit touches a speaker change')
     }
     const engines = evidence && typeof evidence === 'object' && !Array.isArray(evidence) ? Object.entries(evidence) : []
-    const after = turn ? turnWords(edit.after) : null
-    const retainedNames = turn ? new Set(turnWords(edit.before).filter(word => word.name).map(word => word.token)) : null
     const window = turn ? turnTimeWindow(edit, original, turnEvidenceSource) : null
     if (turn && engines.some(([engine, heard]) => typeof heard === 'string' && !scopedTurnEvidence(window, engine, heard))) {
       fail('listening edit evidence is outside the verified turn')
     }
-    if (engines.some(([engine, heard]) => !(listeningEditEngines.has(engine) || turn && engine === 'faster-whisper')
-      || typeof heard !== 'string' || !heard.trim())
-      || engines.filter(([, heard]) => turn ? turnEvidence(after, heard, retainedNames) : supportsListeningEdit(text, edit, heard)).length < 2) {
+    if (engines.some(([engine, heard]) => !listeningEditEngines.has(engine) || typeof heard !== 'string' || !heard.trim())) {
+      fail('invalid listening edit engine evidence')
+    }
+    const votes = turn ? listeningTurnWordVotes(edit.before, edit.after, Object.fromEntries(engines)) : null
+    if (turn ? !votes.length || votes.some(word => word.engines.length < 2)
+      : engines.filter(([, heard]) => supportsListeningEdit(text, edit, heard)).length < 2) {
       fail('listening edit requires supporting transcription from two engines')
     }
     if (!bySegment.has(segments[0])) bySegment.set(segments[0], [])
