@@ -5,7 +5,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { findSourceFlagTargets } from './text-review-parts.mjs'
-import { applySpellingReview, isSourceMarkCorrection, prepareSpellingReview, SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4, verifyListeningInsertionOccurrences } from '../../server/paper-import/spellingReview.mjs'
+import { applySpellingReview, isSourceMarkCorrection, prepareSpellingReview, SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4, verifyListeningEditOccurrences, verifyListeningInsertionOccurrences } from '../../server/paper-import/spellingReview.mjs'
 import { mapSourceEmphasisEdits } from '../../server/paper-canonical/sourceEmphasis.mjs'
 
 const at = (text, flag) => findSourceFlagTargets([{ before: text }], flag).flatMap(hit => hit.at)
@@ -64,6 +64,60 @@ test('recording insertions reject ambiguous boundaries and changes to displayed 
     const { evidence, apply } = listeningInsertionFixture(source, afterSentence)
     assert.throws(() => apply({ ...evidence, text }), error, `${source} + ${text}`)
   }
+})
+
+test('listening edits bind UTF-16 coordinates after spelling and retained insertions', () => {
+  const text = 'W: 😀 I agre. We should go.\nM: Did you really already leave today?'
+  const original = {
+    paperId: 'paper-listening-edit',
+    listening: { state: 'captured', transcript: [{ segmentId: 'listening-text-1', text }] },
+    groups: [{ groupId: 'g', questions: [{ questionId: 'q', number: 1, options: [{ label: 'A', text: 'Yes' }] }] }],
+    answers: [{ questionId: 'q', value: 'A' }],
+  }
+  const bytes = Buffer.from(JSON.stringify(original))
+  const report = prepareSpellingReview(bytes)
+  report.reviewedBy = 'import_agent'
+  report.reviewedAt = '2026-11-20T00:00:00Z'
+  for (const target of report.targets) target.decision = 'unchanged'
+  Object.assign(report.targets.find(target => target.before === text), { decision: 'correct', corrections: [{
+    start: text.indexOf('agre'), before: 'agre', after: 'agree', category: 'spelling', certainty: 'unambiguous', reason: '拼写。',
+  }] })
+  const { audio, evidence: insertion } = listeningInsertionFixture(text, 'We should go.')
+  report.listeningInsertions = [insertion]
+  const encode = extra => Buffer.from(JSON.stringify({ ...report, ...extra }))
+  const baseline = applySpellingReview(bytes, encode(), audio).listening.transcript[0].text
+  assert.equal(baseline, 'W: 😀 I agree. We should go. It is my favorite part of the day.\nM: Did you really already leave today?')
+  const edit = (start, before, after, heard) => ({
+    segmentId: insertion.segmentId, start, before, after, audioSha256: audio.sha256,
+    startSeconds: 12, endSeconds: 15, occurrence: insertion.occurrence,
+    evidence: { apple: heard, 'parakeet-v2': heard }, reason: '两家转写一致。',
+  })
+  const edits = [
+    edit(baseline.indexOf('leave'), '', 'just ', 'Did you really just leave today?'),
+    edit(baseline.indexOf('go.'), 'go', 'walk', 'We should walk.'),
+    edit(baseline.indexOf('already'), 'already ', '', 'Did you really leave today?'),
+  ]
+  const reportBytes = encode({ listeningEdits: edits })
+  const effective = applySpellingReview(bytes, reportBytes, audio)
+  assert.deepEqual(effective, { ...original, listening: { ...original.listening, transcript: [{
+    segmentId: insertion.segmentId,
+    text: 'W: 😀 I agree. We should walk. It is my favorite part of the day.\nM: Did you really just leave today?',
+  }] } })
+  const review = { subject: { playbackAudioSha256: audio.sha256 }, groups: [
+    { segmentId: insertion.segmentId, decision: 'usable', occurrences: [insertion.occurrence] },
+  ] }
+  verifyListeningEditOccurrences(reportBytes, review, () => assert.fail('current occurrence should be sufficient'))
+  verifyListeningEditOccurrences(reportBytes, null, () => review)
+  assert.throws(() => verifyListeningEditOccurrences(reportBytes, null), /match a reviewed occurrence/)
+  const apply = (...listeningEdits) => applySpellingReview(bytes, encode({ listeningEdits }), audio)
+  assert.throws(() => apply(edits[1], { ...edits[1], start: edits[1].start + 1, before: 'o' }), /overlapping/)
+  assert.throws(() => apply({ ...edits[1], before: 'no' }), /before does not match/)
+  assert.throws(() => apply({ ...edits[0], start: baseline.length + 1 }), /before does not match/)
+  assert.throws(() => apply({ ...edits[1], segmentId: 'other-paper-segment' }), /before does not match/)
+  assert.throws(() => apply({ ...edits[1], audioSha256: `sha256:${'b'.repeat(64)}` }), /playback hash/)
+  assert.throws(() => apply({ ...edits[1], endSeconds: 31 }), /outside the reviewed occurrence/)
+  assert.throws(() => apply({ ...edits[2], evidence: { ...edits[2].evidence, apple: 'Did you really already leave today?' } }),
+    /two engines/)
 })
 
 test('uncertain source phrase survives an OCR line wrap', () => {
