@@ -233,7 +233,7 @@ function renderQuestionHeader(questionNo, answer, answerText = '', provenanceLab
   </header>`
 }
 
-function renderListeningGroup({ group, title, paperAsset, analysis }) {
+function renderListeningGroup({ group, title, paperAsset, analysis, answers }) {
   const groupQuestionIds = new Set(array(group.questionIds))
   const materials = Object.values(analysis?.materials || {}).filter((material) =>
     array(material?.questionIds).some((questionId) => groupQuestionIds.has(questionId)))
@@ -267,19 +267,20 @@ function renderListeningGroup({ group, title, paperAsset, analysis }) {
     </article>`
   }).join('')
   return `<section class="analysis-group analysis-group--listening">
-    <h3 class="group-title">${escapeHtml(title || group.title || '听力')}</h3>${renderedMaterials}
+    ${renderGroupHeading(title || group.title || '听力', answers)}${renderedMaterials}
   </section>`
 }
 
 function orderedGroups(paperAsset) {
   const groups = paperAsset?.content?.groups || {}
   const parts = array(paperAsset?.layoutTree?.parts)
+  const entryFor = (group, title) => ({ group, title, answers: groupAnswers(paperAsset, group) })
   if (parts.length === 0) {
     return [{
       title: '答案与解析',
       sections: [{
         title: '全部题目',
-        groups: Object.values(groups).map((group) => ({ group, title: group?.title || '' })),
+        groups: Object.values(groups).filter(Boolean).map((group) => entryFor(group, group.title || '')),
       }],
     }]
   }
@@ -287,10 +288,10 @@ function orderedGroups(paperAsset) {
     title: nonEmptyString(part?.title),
     sections: array(part?.sections).map((section) => ({
       title: nonEmptyString(section?.title),
-      groups: array(section?.groups).map((entry) => ({
-        group: groups[entry?.groupId] || null,
-        title: nonEmptyString(entry?.title),
-      })).filter(({ group }) => group),
+      groups: array(section?.groups).flatMap((entry) => {
+        const group = groups[entry?.groupId]
+        return group ? [entryFor(group, nonEmptyString(entry?.title))] : []
+      }),
     })),
   }))
 }
@@ -307,26 +308,63 @@ function answerOptionText(question, answer) {
   return nonEmptyString(array(question?.options).find((option) => option?.label === answer)?.text)
 }
 
-function renderAnswerOverview(paperAsset) {
-  const sections = []
-  for (const part of orderedGroups(paperAsset)) {
+const overviewLabels = {
+  listening: '听力',
+  reading: '阅读',
+  sevenChoices: '七选五',
+  seven_choices: '七选五',
+  cloze: '完形',
+  grammarFill: '语填',
+  grammar_cloze: '语填',
+}
+
+function groupAnswers(paperAsset, group) {
+  return array(group.questionIds).flatMap((questionId) => {
+    const question = questionData(paperAsset, questionId)
+    const answer = answerData(paperAsset, questionId)
+    return question && nonEmptyString(answer?.answer)
+      ? [{ questionId, number: question.questionNo, value: answer.answer, provenance: answer.provenance }]
+      : []
+  })
+}
+
+function renderAnswerCells(answers, separated = false) {
+  return answers.map(({ questionId, number, value }, index) => {
+    const prefix = index && separated ? '<span class="answer-separator" aria-hidden="true">·</span> ' : ''
+    return `<span class="answer-cell" data-question-id="${escapeHtml(questionId)}">${prefix}<b>${escapeHtml(number)}</b> <span>${escapeHtml(value)}</span></span>`
+  }).join('')
+}
+
+function renderAnswerOverview(parts) {
+  const rows = new Map()
+  for (const part of parts) {
     for (const section of part.sections) {
-      const answers = section.groups.flatMap(({ group }) => array(group?.questionIds).map((questionId) => {
-        const question = questionData(paperAsset, questionId)
-        const answer = answerData(paperAsset, questionId)
-        if (!question || !nonEmptyString(answer?.answer)) return ''
-        return `<span class="answer-cell"><b>${escapeHtml(question.questionNo)}</b><span>${escapeHtml(answer.answer)}</span></span>`
-      }).filter(Boolean))
-      if (answers.length === 0) continue
-      const unofficial = section.groups.some(({ group }) => group.groupType === 'listening'
-        && group.questionIds.some(questionId => answerData(paperAsset, questionId)?.provenance === 'unofficial'))
-      sections.push(`<section class="answer-overview-section">
-        <h3>${escapeHtml(section.title)}${unofficial ? ` · ${unofficialListeningLabel}` : ''}</h3>
-        <div class="answer-grid">${answers.join('')}</div>
-      </section>`)
+      for (const { group, title, answers } of section.groups) {
+        if (!answers.length) continue
+        const label = overviewLabels[group.groupType] || title || group.title || '其它'
+        if (!rows.has(label)) rows.set(label, [])
+        rows.get(label).push(...answers)
+      }
     }
   }
-  return sections.join('')
+  return Array.from(rows, ([label, answers]) => {
+    const unofficial = answers.some(({ provenance }) => provenance === 'unofficial')
+    return `<section class="answer-overview-section">
+      <h3>${escapeHtml(label)}${unofficial ? `<small>${unofficialListeningLabel}</small>` : ''}</h3>
+      <div class="answer-grid">${renderAnswerCells(answers)}</div>
+    </section>`
+  }).join('')
+}
+
+function renderGroupHeading(title, answers) {
+  const heading = `<h3 class="group-title">${escapeHtml(title)}</h3>`
+  if (!answers.length) return heading
+  const label = answers.some(({ provenance }) => provenance === 'unofficial')
+    ? unofficialListeningLabel : '答案'
+  return `<header class="group-heading">
+    ${heading}
+    <div class="group-key"><span>${label}</span><div class="group-key-answers">${renderAnswerCells(answers, true)}</div></div>
+  </header>`
 }
 
 function readingDistractors(entry) {
@@ -364,7 +402,7 @@ function readingAnnexQuotes(groupAnalysis, questionId, group, figures) {
   }))
 }
 
-function renderReadingGroup({ group, title, paperAsset, analysis, figures }) {
+function renderReadingGroup({ group, title, paperAsset, analysis, answers, figures }) {
   const groupAnalysis = analysis?.groups?.[group.groupId] || {}
   const letter = nonEmptyString(title || group.title).match(/([A-D])\s*$/u)?.[1]
   const displayTitle = letter ? `阅读理解 ${letter} 篇` : (title || group.title || '阅读理解')
@@ -395,7 +433,7 @@ function renderReadingGroup({ group, title, paperAsset, analysis, figures }) {
     </section>`
   }).join('')
   return `<section class="analysis-group analysis-group--reading">
-    <h3 class="group-title">${escapeHtml(displayTitle)}</h3>
+    ${renderGroupHeading(displayTitle, answers)}
     ${renderOverview(groupAnalysis.overview)}
     ${renderReadingDiscourse(groupAnalysis.discourseStructure, group)}
     ${renderFullTranslation(groupAnalysis, paperAsset)}
@@ -421,7 +459,7 @@ function renderContextChain(entry, optionText, group, questionNo) {
   </div>`
 }
 
-function renderSevenChoicesGroup({ group, title, paperAsset, analysis, figures }) {
+function renderSevenChoicesGroup({ group, title, paperAsset, analysis, answers, figures }) {
   const groupAnalysis = analysis?.groups?.[group.groupId] || {}
   const optionByLabel = new Map(array(group.optionBank).map((option) => [option?.label, option?.text]))
   const questions = array(group.questionIds).map((questionId) => {
@@ -439,7 +477,7 @@ function renderSevenChoicesGroup({ group, title, paperAsset, analysis, figures }
     </section>`
   }).join('')
   return `<section class="analysis-group analysis-group--seven">
-    <h3 class="group-title">${escapeHtml(title || group.title || '七选五')}</h3>
+    ${renderGroupHeading(title || group.title || '七选五', answers)}
     ${renderOverview(groupAnalysis.overview)}
     ${renderFullTranslation(groupAnalysis, paperAsset)}
     ${renderSourceRelationships(groupAnalysis, group, paperAsset)}
@@ -448,7 +486,7 @@ function renderSevenChoicesGroup({ group, title, paperAsset, analysis, figures }
   </section>`
 }
 
-function renderClozeGroup({ group, title, paperAsset, analysis }) {
+function renderClozeGroup({ group, title, paperAsset, analysis, answers }) {
   const groupAnalysis = analysis?.groups?.[group.groupId] || {}
   const questions = array(group.questionIds).map((questionId) => {
     const question = questionData(paperAsset, questionId)
@@ -463,7 +501,7 @@ function renderClozeGroup({ group, title, paperAsset, analysis }) {
     </section>`
   }).join('')
   return `<section class="analysis-group analysis-group--cloze">
-    <h3 class="group-title">${escapeHtml(title || group.title || '完形填空')}</h3>
+    ${renderGroupHeading(title || group.title || '完形填空', answers)}
     ${renderOverview(groupAnalysis.overview)}
     ${renderFullTranslation(groupAnalysis, paperAsset)}
     ${renderSourceRelationships(groupAnalysis, group, paperAsset)}
@@ -472,7 +510,7 @@ function renderClozeGroup({ group, title, paperAsset, analysis }) {
   </section>`
 }
 
-function renderGrammarFillGroup({ group, title, paperAsset, analysis }) {
+function renderGrammarFillGroup({ group, title, paperAsset, analysis, answers }) {
   const groupAnalysis = analysis?.groups?.[group.groupId] || {}
   const questions = array(group.questionIds).map((questionId) => {
     const question = questionData(paperAsset, questionId)
@@ -487,7 +525,7 @@ function renderGrammarFillGroup({ group, title, paperAsset, analysis }) {
     </section>`
   }).join('')
   return `<section class="analysis-group analysis-group--grammar">
-    <h3 class="group-title">${escapeHtml(title || group.title || '语法填空')}</h3>
+    ${renderGroupHeading(title || group.title || '语法填空', answers)}
     ${renderOverview(groupAnalysis.overview)}
     ${renderFullTranslation(groupAnalysis, paperAsset)}
     ${renderSourceRelationships(groupAnalysis, group, paperAsset)}
@@ -686,15 +724,14 @@ function renderGroup(input) {
   }
 }
 
-function renderAnalysisBody(paperAsset, analyses, figuresByGroup) {
-  return orderedGroups(paperAsset).map((part) => {
+function renderAnalysisBody(parts, paperAsset, analyses, figuresByGroup) {
+  return parts.map((part) => {
     const sections = part.sections.map((section) => {
-      const groups = section.groups.map(({ group, title }) => renderGroup({
-        group,
-        title,
+      const groups = section.groups.map((entry) => renderGroup({
+        ...entry,
         paperAsset,
         analyses,
-        figures: figuresByGroup?.get(group.groupId) ?? (figuresByGroup ? [] : null),
+        figures: figuresByGroup?.get(entry.group.groupId) ?? (figuresByGroup ? [] : null),
       })).filter(Boolean).join('')
       if (!groups) return ''
       const heading = !figuresByGroup || section.groups.length > 1
@@ -789,8 +826,9 @@ export function buildCompanionAnalysisHtml(input) {
   const { paperAsset, analyses, figuresByGroup } = input.projection ? revisionAnalysisSource(input.projection) : input
   if (!paperAsset?.paper?.paperId) throw new Error('paperAsset is required')
   const title = cleanPaperTitle(paperAsset.paper.title)
-  const answerOverview = renderAnswerOverview(paperAsset)
-  const analysisBody = renderAnalysisBody(paperAsset, analyses || {}, figuresByGroup)
+  const parts = orderedGroups(paperAsset)
+  const answerOverview = renderAnswerOverview(parts)
+  const analysisBody = renderAnalysisBody(parts, paperAsset, analyses || {}, figuresByGroup)
   return `<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -944,47 +982,94 @@ h5 {
 }
 
 .answer-overview > h2 {
-  margin: 0 0 5mm;
+  margin: 0 0 3mm;
   font: 700 13pt/18pt var(--sans);
 }
 
 .answer-overview-section {
-  margin-top: 5mm;
+  display: grid;
+  grid-template-columns: 19mm minmax(0, 1fr);
+  gap: 2mm;
+  padding: 0.8mm 0;
+  border-top: 0.35pt solid var(--line);
   break-inside: avoid;
 }
 
 .answer-overview-section h3 {
-  margin: 0 0 2mm;
+  margin: 0;
+  padding: 0.65mm 0;
   color: var(--muted);
-  font: 600 8.5pt/12pt var(--sans);
+  font: 600 8.5pt/10pt var(--sans);
+}
+
+.answer-overview-section h3 small {
+  display: block;
+  margin-top: 0.6mm;
+  font: 400 7pt/9pt var(--sans);
 }
 
 .answer-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  border-top: 0.35pt solid var(--line);
+  grid-template-columns: repeat(10, minmax(0, 1fr));
 }
 
 .answer-cell {
-  display: grid;
-  grid-template-columns: 8mm 1fr;
-  align-items: baseline;
-  gap: 2mm;
-  padding: 1.8mm 2mm 1.6mm 0;
-  border-bottom: 0.35pt solid var(--line-soft);
-  font: 400 9pt/12pt var(--sans);
+  color: var(--green-deep);
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
+}
+
+.answer-grid .answer-cell {
+  padding: 0.65mm 0.65mm 0.65mm 0;
+  font: 700 8pt/10pt var(--sans);
+  overflow-wrap: anywhere;
 }
 
 .answer-cell b {
   color: var(--muted);
   font-weight: 500;
+}
+
+.answer-grid .answer-cell b {
+  display: inline-block;
+  min-width: 3.5mm;
   text-align: right;
 }
 
-.answer-cell span {
-  color: var(--green-deep);
-  font-weight: 700;
+.group-heading {
+  break-inside: avoid;
+  break-after: avoid;
+}
+
+.group-heading .group-title {
+  margin-bottom: 1mm;
+}
+
+.group-key {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 2mm;
+  margin: 0 0 3mm;
+  padding: 1mm 0;
+  border-top: 0.35pt solid var(--line);
+  border-bottom: 0.35pt solid var(--line-soft);
+  color: var(--muted);
+  font: 600 8pt/11pt var(--sans);
+}
+
+.group-key-answers {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1.2mm;
+}
+
+.group-key .answer-cell {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.answer-separator {
+  color: var(--muted);
 }
 
 .analysis-body {

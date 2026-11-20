@@ -182,8 +182,15 @@ const revisionHtml = buildCompanionAnalysisHtml({ projection: {
 } })
 assert.doesNotMatch(revisionHtml, /<span>空前<\/span><p lang="en">Later\.<\/p>/)
 assert.match(revisionHtml, /<span>空后<\/span><p lang="en">Later\.<\/p>/)
-assert.match(revisionHtml, /<h3>听力短对话 · 听力答案（非官方，据录音整理）<\/h3>/)
+assert.match(revisionHtml, /<h3>听力<small>听力答案（非官方，据录音整理）<\/small><\/h3>/)
 assert.match(revisionHtml, /<small>听力答案（非官方，据录音整理）<\/small>/)
+const answerCells = markup => [...markup.matchAll(/data-question-id="([^"]+)">(?:<span class="answer-separator" aria-hidden="true">·<\/span> )?<b>([^<]+)<\/b> <span>([^<]+)<\/span>/gu)]
+  .map(([, id, number, answer]) => [id, `${number} ${answer}`])
+for (const document of [html, revisionHtml]) {
+  const [frontmatter, body] = document.split('<div class="analysis-body">')
+  const groups = [...body.matchAll(/<div class="group-key-answers">(.*?)<\/div>/gu)]
+  assert.deepEqual(groups.flatMap(([, cells]) => answerCells(cells)), answerCells(frontmatter))
+}
 assert.doesNotMatch(html, /[。．.!！?？]）：|[。．.!！?？]；作用：/)
 
 const tempDir = mkdtempSync(path.join(tmpdir(), 'verify-companion-analysis-'))
