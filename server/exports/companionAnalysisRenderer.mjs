@@ -598,15 +598,17 @@ const evidenceSourceLabel = Object.freeze({
   instruction: '题干', material: '原文', paragraph1Starter: '段首句 1', paragraph2Starter: '段首句 2',
 })
 
-function renderContinuationEvidence(evidence) {
+function renderContinuationEvidence(evidence, { withinList = false } = {}) {
   const items = array(evidence)
   if (items.length === 0) return ''
-  return `<ul class="continuation-evidence">${items.map((item) => `<li><b>${escapeHtml(evidenceSourceLabel[item?.source] || item?.source)}</b>：“${escapeHtml(item?.excerpt)}”</li>`).join('')}</ul>`
+  const itemTag = withinList ? 'p' : 'li'
+  const lines = items.map((item) => `<${itemTag}><b>${escapeHtml(evidenceSourceLabel[item?.source] || item?.source)}</b>：“${escapeHtml(item?.excerpt)}”</${itemTag}>`).join('')
+  return withinList ? lines : `<ul class="continuation-evidence">${lines}</ul>`
 }
 
-function renderGrounded(value) {
+function renderGrounded(value, options) {
   if (!value) return ''
-  return `<div class="continuation-grounded"><p>${escapeHtml(statementAt(value))}</p>${renderContinuationEvidence(value.evidence)}</div>`
+  return `<div class="continuation-grounded"><p>${escapeHtml(statementAt(value))}</p>${renderContinuationEvidence(value.evidence, options)}</div>`
 }
 
 function renderGroundedList(values) {
@@ -634,7 +636,7 @@ function renderContinuationStory(story) {
 }
 
 function renderConstraints(values) {
-  return array(values).map((item) => `<li>${renderGrounded(item)}</li>`).join('')
+  return array(values).map((item) => `<li>${renderGrounded(item, { withinList: true })}</li>`).join('')
 }
 
 function renderContinuationContract(contract) {
@@ -654,7 +656,7 @@ function renderContinuationContract(contract) {
 function renderDevelopmentParagraph(paragraph) {
   const emotions = array(paragraph.emotionChanges).map((item) => `<li>${escapeHtml(item.trigger)}：${escapeHtml(item.from)} → ${escapeHtml(item.to)}；${escapeHtml(item.visibleAction)}</li>`).join('')
   const relationships = array(paragraph.relationshipChanges).map((item) => `<li>${escapeHtml(array(item.participants).join(' · '))}：${escapeHtml(item.from)} → ${escapeHtml(item.to)}；${escapeHtml(item.cause)}</li>`).join('')
-  const payoffs = array(paragraph.cluePayoffs).map((item) => `<li>${renderContinuationEvidence([item.clue])}<p>${escapeHtml(item.payoff)}</p></li>`).join('')
+  const payoffs = array(paragraph.cluePayoffs).map((item) => `<li>${renderContinuationEvidence([item.clue], { withinList: true })}<p>${escapeHtml(item.payoff)}</p></li>`).join('')
   return `<div class="route-paragraph"><h5>第 ${paragraph.paragraphIndex} 段</h5>
     <p><b>${paragraph.paragraphPurpose !== undefined ? '段落作用' : '起因'}</b>：${escapeHtml(paragraph.paragraphPurpose ?? paragraph.cause)}</p><p><b>行动</b>：${escapeHtml(paragraph.action)}</p><p><b>结果</b>：${escapeHtml(paragraph.result)}</p>
     ${renderContinuationEvidence(paragraph.sourceEvidence)}${payoffs ? `<b>线索回收</b><ul>${payoffs}</ul>` : ''}
@@ -680,7 +682,6 @@ function renderLegacyContinuationDetails(legacy) {
       ...array(legacy.languageAlignment.cohesionPlan).map((item) => `${item.relation}：${item.use}`),
       ...array(legacy.languageAlignment.descriptionPriorities),
       ...array(legacy.languageAlignment.functionLedLanguage),
-      ...array(legacy.languageAlignment.languageRisks),
     ].join('；'))}</p></div>`
 }
 
@@ -693,7 +694,6 @@ function renderContinuationAnalysis(analysis) {
       <p><b>选定路线</b>：${escapeHtml(plan.selectedRoute)}</p>${renderGroundedList(plan.routeRationale)}
       ${array(plan.paragraphs).map(renderDevelopmentParagraph).join('')}
       ${array(plan.alternatives).length ? `<b>其他可行路线</b><ul>${array(plan.alternatives).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : ''}
-      ${array(plan.qualityRisks).length ? `<b>质量风险</b><ul>${array(plan.qualityRisks).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : ''}
       ${renderLegacyContinuationDetails(display.legacyDetails)}
     </section>`
 }

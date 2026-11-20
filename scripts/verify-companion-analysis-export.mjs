@@ -53,12 +53,20 @@ v2Writing.continuationAnalysis.developmentPlan.paragraphs[0].emotionChanges = [{
   to: 'resolved',
   visibleAction: 'VISIBLE_ACTION_SENTINEL',
 }]
+v2Writing.continuationAnalysis.developmentPlan.paragraphs[0].cluePayoffs = [{
+  clue: { source: 'material', excerpt: 'CLUE_SENTINEL' }, payoff: 'PAYOFF_SENTINEL',
+}]
+Object.assign(v2Writing.continuationAnalysis.developmentPlan, {
+  qualityRisks: ['QUALITY_RISK_SENTINEL'], reviewNotes: ['REVIEW_NOTE_SENTINEL'], internal: 'INTERNAL_SENTINEL',
+})
 v2Writing.officialModelAnswer = 'OFFICIAL_MODEL_SENTINEL'
 v2Writing.modelAnswer = 'GENERATED_MODEL_SENTINEL'
 const v2ContinuationHtml = buildCompanionAnalysisHtml(v2ContinuationSource)
 assert.equal((v2ContinuationHtml.match(/data-continuation-section=/gu) || []).length, 4)
 assert.ok(v2ContinuationHtml.includes('EMOTION_TRIGGER_SENTINEL'))
 assert.ok(v2ContinuationHtml.includes('VISIBLE_ACTION_SENTINEL'))
+assert.match(v2ContinuationHtml, /<li><p><b>原文<\/b>：“CLUE_SENTINEL”<\/p><p>PAYOFF_SENTINEL<\/p><\/li>/u)
+assert.doesNotMatch(v2ContinuationHtml, /质量风险|QUALITY_RISK_SENTINEL|REVIEW_NOTE_SENTINEL|INTERNAL_SENTINEL/u)
 assert.ok(v2ContinuationHtml.includes('OFFICIAL_MODEL_SENTINEL'))
 assert.ok(v2ContinuationHtml.includes('GENERATED_MODEL_SENTINEL'))
 assert.ok(v2ContinuationHtml.indexOf('官方参考范文') < v2ContinuationHtml.indexOf('生成参考范文'))
