@@ -5,7 +5,7 @@ import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { findSourceFlagTargets } from './text-review-parts.mjs'
-import { applySpellingReview, isSourceMarkCorrection, prepareSpellingReview, SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4, verifyListeningEditOccurrences, verifyListeningInsertionOccurrences } from '../../server/paper-import/spellingReview.mjs'
+import { applySpellingReview, isSourceMarkCorrection, listeningEditTurns, prepareSpellingReview, SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4, verifyListeningEditOccurrences, verifyListeningInsertionOccurrences } from '../../server/paper-import/spellingReview.mjs'
 import { mapSourceEmphasisEdits } from '../../server/paper-canonical/sourceEmphasis.mjs'
 
 const at = (text, flag) => findSourceFlagTargets([{ before: text }], flag).flatMap(hit => hit.at)
@@ -179,6 +179,95 @@ test('listening edits require the complete evidence to identify exactly the decl
   assert.throws(() => apply(repeated, repeated.indexOf('go'), '', 'not ', distinct), /two engines/)
   assert.equal(apply(repeated, repeated.lastIndexOf('go'), '', 'not ', distinct),
     'Today I can go home. Tomorrow I can not go home.')
+})
+
+test('whole-turn admission binds the original turn and only changes transcript text', () => {
+  const text = 'W: We walk to work.\nM: I agre. Could you carry these over to the car today?\nW: I will help.'
+  const inline = text.replaceAll('\n', ' ')
+  assert.deepEqual(listeningEditTurns(inline).map(({ start, end }) => inline.slice(start, end)),
+    ['We walk to work.', 'I agre. Could you carry these over to the car today?', 'I will help.'])
+  const before = 'I agre. Could you carry these over to the car today?'
+  const after = 'Of course. Could you take those things into the car today?'
+  const { audio, evidence } = listeningInsertionFixture(text, null)
+  const document = { listening: { state: 'captured', transcript: [{ segmentId: evidence.segmentId, text }] },
+    groups: [{ groupId: 'g', questions: [{ questionId: 'q', number: 1, options: [{ label: 'A', text: 'Yes' }] }] }],
+    answers: [{ questionId: 'q', value: 'A' }] }
+  const bytes = Buffer.from(JSON.stringify(document))
+  const report = prepareSpellingReview(bytes)
+  Object.assign(report, { reviewedBy: 'import_agent', reviewedAt: '2026-11-20T00:00:00Z' })
+  for (const target of report.targets) target.decision = 'unchanged'
+  Object.assign(report.targets.find(target => target.before === text), { decision: 'correct', corrections: [
+    { start: text.indexOf('walk'), before: 'walk', after: 'walked', category: 'spelling', certainty: 'unambiguous', reason: '拼写。' },
+    { start: text.indexOf('agre'), before: 'agre', after: 'agree', category: 'spelling', certainty: 'unambiguous', reason: '拼写。' },
+  ] })
+  const turn = { scope: 'turn', turnIndex: 1, segmentId: evidence.segmentId, start: text.indexOf(before), before, after,
+    audioSha256: audio.sha256, occurrence: evidence.occurrence, startSeconds: 14, endSeconds: 19,
+    evidence: { apple: after, 'parakeet-v2': after },
+    reason: '整轮替换。' }
+  const encode = (...listeningEdits) => Buffer.from(JSON.stringify({ ...report, listeningEdits }))
+  const apply = (...listeningEdits) => applySpellingReview(bytes, encode(...listeningEdits), audio)
+  const effective = apply({ ...turn, evidence: { apple: 'Recorded Apple evidence.', 'gpt-transcribe': 'Recorded second evidence.' } })
+  assert.equal(effective.listening.transcript[0].text, `W: We walked to work.\nM: ${after}\nW: I will help.`)
+  assert.deepEqual(effective.groups, document.groups)
+  assert.deepEqual(effective.answers, document.answers)
+  assert.throws(() => apply({ ...turn, segmentId: 'q' }), /before does not match/)
+  assert.throws(() => apply({ ...turn, jsonPointer: '/groups/0/questions/0/options/0/text' }), /invalid listening edit/)
+  assert.throws(() => apply({ ...turn, evidence: { apple: after } }), /two engines/)
+  assert.throws(() => apply({ ...turn, evidence: { apple: after, 'parakeet-v2': '  ' } }), /invalid listening edit engine/)
+  assert.throws(() => apply({ ...turn, endSeconds: 31 }), /outside the reviewed occurrence/)
+  assert.throws(() => apply({ ...turn, audioSha256: `sha256:${'b'.repeat(64)}` }), /playback hash/)
+  const review = { subject: { playbackAudioSha256: audio.sha256 }, groups: [{
+    segmentId: turn.segmentId, decision: 'usable', occurrences: [turn.occurrence],
+  }] }
+  verifyListeningEditOccurrences(encode(turn), review)
+  assert.throws(() => verifyListeningEditOccurrences(encode({ ...turn, occurrence: { startSeconds: 10, endSeconds: 31 } }), review),
+    /match a reviewed occurrence/)
+  assert.throws(() => apply({ ...turn, before: 'I agre.' }), /complete original turn/)
+  assert.throws(() => apply({ ...turn, before: before.replace('agre', 'agree') }), /complete original turn/)
+  assert.throws(() => apply({ ...turn, turnIndex: 0 }), /complete original turn/)
+  assert.throws(() => apply({ ...turn, after: `${after}\nW: Sure.` }), /speaker label/)
+  const { scope, turnIndex, ...local } = turn
+  assert.throws(() => apply(turn, { ...local, start: text.indexOf('carry') + 3, before: 'carry', after: 'move',
+    evidence: { apple: 'Could you move these over', 'parakeet-v2': 'Could you move these over' } }), /overlapping listening edits/)
+  assert.throws(() => apply(turn, turn), /overlapping listening edits/)
+  const applyWithInsertion = afterSentence => applySpellingReview(bytes, Buffer.from(JSON.stringify({ ...report,
+    listeningInsertions: [{ ...evidence, afterSentence }], listeningEdits: [turn] })), audio)
+  assert.equal(applyWithInsertion('We walked to work.').listening.transcript[0].text,
+    `W: We walked to work. ${evidence.text}\nM: ${after}\nW: I will help.`)
+  assert.throws(() => applyWithInsertion('I agree.'), /overlapping listening edits/)
+})
+
+test('whole-turn edits preserve named speakers and reject ambiguous speaker prefixes', () => {
+  function apply(text, before, after = 'Where are you going?') {
+    const { audio, evidence } = listeningInsertionFixture(text, null)
+    const bytes = Buffer.from(JSON.stringify({ listening: { state: 'captured',
+      transcript: [{ segmentId: evidence.segmentId, text }] } }))
+    const report = { ...prepareSpellingReview(bytes), reviewedBy: 'import_agent', reviewedAt: '2026-11-20T00:00:00Z' }
+    report.targets[0].decision = 'unchanged'
+    report.listeningEdits = [{ scope: 'turn', turnIndex: 0, segmentId: evidence.segmentId, start: text.indexOf(before),
+      before, after, audioSha256: audio.sha256, occurrence: evidence.occurrence, startSeconds: 14, endSeconds: 19,
+      evidence: { apple: after, 'parakeet-v2': after }, reason: '整轮替换。' }]
+    return applySpellingReview(bytes, Buffer.from(JSON.stringify(report)), audio).listening.transcript[0].text
+  }
+
+  const named = 'M: Where are you headed?\nMary: To the library.'
+  assert.throws(() => apply(named, 'Where are you headed?\nMary: To the library.'), /complete original turn/)
+  assert.equal(apply(named, 'Where are you headed?'), 'M: Where are you going?\nMary: To the library.')
+  assert.deepEqual(listeningEditTurns(`${named}\nMary: It opens at nine.`).map(({ speaker }) => speaker), ['m', 'mary', 'mary'])
+
+  const ambiguous = 'Where are you headed?\nvoice-2：To the library.'
+  assert.throws(() => apply(`M: ${ambiguous}`, ambiguous), /unrecognized speaker label/)
+  const first = 'Where are you headed?'
+  for (const label of ['Mary:', 'M/W:']) {
+    const combined = `${first} ${label} To the library.`
+    assert.throws(() => apply(`M: ${combined}`, combined), /speaker label/)
+    assert.throws(() => apply(`M: ${first}`, first, combined), /speaker label/)
+  }
+  for (const after of ['Where are you going?\n(Mary): To the library.',
+    'Where are you going?\u2028To the library.', 'meet me: at six.', 'Meet me at 6: 00.', '']) {
+    assert.throws(() => apply(`M: ${first}`, first, after), /one line with the same speaker label/)
+  }
+  assert.equal(apply(`(Mary): ${first}`, first, 'Meet me at 6:00.'), '(Mary): Meet me at 6:00.')
 })
 
 test('audio that says Well cannot assign it to either side of a speaker change', () => {

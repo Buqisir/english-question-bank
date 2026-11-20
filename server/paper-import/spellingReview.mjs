@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { listeningSentenceTargets } from '../../scripts/import-pipeline/listening-sentence-align.mjs'
+import { speakerLabel } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
 import { digestJson, exactKeys, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { extractDocxDocumentParagraphs, DOCX_MEDIA_TYPE } from '../paper-canonical/docxSourceAdapter.mjs'
 
@@ -267,7 +268,104 @@ export function verifyListeningEditOccurrences(reportBytes, current, readBaseRev
   }
 }
 
-function applyListeningEdits(materialization, edits, audio) {
+function listeningTurnLabels(text) {
+  const fixed = [...text.matchAll(listeningEditSpeakerLabels)]
+  const fixedStarts = new Set(fixed.map(label => label.index))
+  const labels = fixed.map(label => ({
+    index: label.index, end: label.index + label[0].length, speaker: label[1].toLowerCase(),
+  }))
+  const ambiguous = []
+  let offset = 0
+  for (const line of text.split('\n')) {
+    const content = line.trimStart()
+    const label = speakerLabel(content)
+    if (!fixedStarts.has(offset)) {
+      if (label) {
+        labels.push({ index: offset, end: offset + line.length - content.length + label.length,
+          speaker: label.slice(0, -1).trim().toLowerCase() })
+      } else if (content.includes(':') || content.includes('：')) {
+        ambiguous.push(offset + line.length - content.length)
+      }
+    }
+    offset += line.length + 1
+  }
+  // Preserve fixed role markers in transcripts stored on a single line.
+  for (const label of text.matchAll(/(?<!\S)([A-Z]\d?|Speaker \d+|Man|Woman)[ \t]*[:：][ \t]*/gu)) {
+    labels.push({ index: label.index, end: label.index + label[0].length, speaker: label[1].toLowerCase() })
+  }
+  return { labels: labels.sort((a, b) => a.index - b.index), ambiguous }
+}
+
+// Turn indices are zero-based. Keep each label and the separators outside the edit.
+export function listeningEditTurns(text) {
+  const { labels, ambiguous } = listeningTurnLabels(text)
+  const turns = []
+  let start = 0, labelStart = 0, speaker = null
+  for (const label of [...labels, { index: text.length }]) {
+    if (label.index < start) continue
+    const body = text.slice(start, label.index).trimEnd()
+    if (body.trim()) {
+      const first = start + body.length - body.trimStart().length
+      const end = start + body.length
+      turns.push({ start: first, end, labelStart, speaker, ambiguous: ambiguous.some(offset => offset >= first && offset < end) })
+    }
+    start = label.end
+    labelStart = label.index
+    speaker = label.speaker
+  }
+  return turns
+}
+
+export function hasListeningTurnSpeakerLabel(body) {
+  return /(?<![\p{L}\p{M}\p{N}])\p{Lu}[\p{L}\p{M}\p{N}]*(?:[ \t]*\/[ \t]*[\p{L}\p{M}\p{N}]+)*[ \t]*[:：]/u.test(body)
+    || body.search(listeningEditSpeakerLabels) !== -1 || body.search(speakerLabels) !== -1
+}
+
+export function isListeningTurnReplacement(text, turn, after) {
+  if (after.trim() !== after || /[\n\r\v\f\u0085\u2028\u2029]|(?<!\p{Nd})[:：]|[:：](?!\p{Nd})/u.test(after)) return false
+  const label = text.slice(turn.labelStart, turn.start)
+  const parsed = listeningEditTurns(label + after)
+  return parsed.length === 1 && parsed[0].speaker === turn.speaker
+    && parsed[0].start === label.length && parsed[0].end === label.length + after.length
+}
+
+function resolveTurnEdit(edit, original, text, spelling, insertions) {
+  const turn = listeningEditTurns(original)[edit.turnIndex]
+  if (!turn || turn.start !== edit.start || original.slice(turn.start, turn.end) !== edit.before) {
+    fail('listening edit before must match the complete original turn')
+  }
+  if (turn.ambiguous) fail('listening turn contains an unrecognized speaker label')
+  if (hasListeningTurnSpeakerLabel(edit.before)) fail('listening turn edit contains a speaker label')
+  let { start, end } = turn
+  for (const { start: offset, before, after } of spelling) {
+    const limit = offset + before.length
+    const delta = after.length - before.length
+    if (limit <= turn.start) start += delta
+    else if (offset < turn.end && (offset < turn.start || limit > turn.end)) {
+      fail('spelling correction crosses a listening turn boundary')
+    }
+    if (limit <= turn.end) end += delta
+  }
+  const spelledStart = start, spelledEnd = end
+  for (const { start: offset, length } of insertions) {
+    if (offset <= spelledStart) start += length
+    else if (offset < spelledEnd) fail('overlapping listening edits')
+    if (offset < spelledEnd) end += length
+  }
+  const resolved = listeningEditTurns(text).find(item => item.start === start && item.end === end
+    && item.speaker === turn.speaker && !item.ambiguous)
+  if (!resolved) {
+    fail('listening turn boundary changed before replacement')
+  }
+  const before = text.slice(start, end)
+  if (hasListeningTurnSpeakerLabel(before)) fail('listening turn edit contains a speaker label')
+  if (!isListeningTurnReplacement(text, resolved, edit.after)) {
+    fail('listening turn replacement must be one line with the same speaker label and only numeric colons')
+  }
+  return { ...edit, start, before }
+}
+
+function applyListeningEdits(materialization, edits, audio, original, spelling, insertions) {
   const { listening } = materialization
   if (listening?.state !== 'captured' || !Array.isArray(edits)) fail('invalid listening edits')
   const untouched = () => digestJson({ ...materialization, listening: { ...listening,
@@ -275,8 +373,10 @@ function applyListeningEdits(materialization, edits, audio) {
   const unchangedDigest = untouched()
   const bySegment = new Map()
   for (const edit of edits) {
+    const turn = edit?.scope === 'turn'
     if (!exactKeys(edit, ['segmentId', 'start', 'before', 'after', 'audioSha256', 'occurrence',
-      'startSeconds', 'endSeconds', 'evidence', 'reason'])
+      'startSeconds', 'endSeconds', 'evidence', 'reason', ...(turn ? ['scope', 'turnIndex'] : [])])
+      || turn && (!Number.isSafeInteger(edit.turnIndex) || edit.turnIndex < 0)
       || typeof edit.segmentId !== 'string' || typeof edit.before !== 'string' || typeof edit.after !== 'string'
       || edit.before === edit.after || !Number.isSafeInteger(edit.start) || edit.start < 0
       || typeof edit.reason !== 'string' || !edit.reason.trim()) fail('invalid listening edit')
@@ -293,23 +393,36 @@ function applyListeningEdits(materialization, edits, audio) {
     }
     const segments = listening.transcript.filter(segment => segment.segmentId === segmentId)
     const text = segments[0]?.text
-    if (segments.length !== 1 || typeof text !== 'string' || start + before.length > text.length
-      || text.slice(start, start + before.length) !== before) fail(`listening edit before does not match ${segmentId}`)
-    if (touchesListeningSpeakerBoundary(text, edit)) fail('listening edit touches a speaker change')
+    if (segments.length !== 1 || typeof text !== 'string') fail(`listening edit before does not match ${segmentId}`)
+    let resolved = edit
+    if (turn) {
+      const baseline = original.listening.transcript.find(segment => segment.segmentId === segmentId).text
+      resolved = resolveTurnEdit(edit, baseline, text, spelling.get(segmentId) ?? [], insertions.get(segmentId) ?? [])
+    } else {
+      if (start + before.length > text.length || text.slice(start, start + before.length) !== before) {
+        fail(`listening edit before does not match ${segmentId}`)
+      }
+      if (touchesListeningSpeakerBoundary(text, edit)) fail('listening edit touches a speaker change')
+    }
     const engines = evidence && typeof evidence === 'object' && !Array.isArray(evidence) ? Object.entries(evidence) : []
-    if (engines.some(([engine, heard]) => !listeningEditEngines.has(engine) || typeof heard !== 'string' || !heard.trim())
-      || engines.filter(([, heard]) => supportsListeningEdit(text, edit, heard)).length < 2) {
+    if (engines.some(([engine, heard]) => !listeningEditEngines.has(engine) || typeof heard !== 'string' || !heard.trim())) {
+      fail('invalid listening edit engine evidence')
+    }
+    const supported = turn ? engines.length : engines.filter(([, heard]) => supportsListeningEdit(text, edit, heard)).length
+    if (supported < 2) {
       fail('listening edit requires supporting transcription from two engines')
     }
     if (!bySegment.has(segments[0])) bySegment.set(segments[0], [])
-    bySegment.get(segments[0]).push(edit)
+    bySegment.get(segments[0]).push(resolved)
   }
   for (const [segment, edits] of bySegment) {
-    let nextStart = Infinity
-    for (const { start, before, after } of edits.sort((a, b) => b.start - a.start)) {
-      if (start === nextStart || start + before.length > nextStart) fail('overlapping listening edits')
+    let next
+    for (const edit of edits.sort((a, b) => b.start - a.start)) {
+      const { start, before, after } = edit
+      if (next && (start === next.start || start + before.length > next.start
+        || edit.scope === 'turn' && start + before.length === next.start && !next.before)) fail('overlapping listening edits')
       segment.text = segment.text.slice(0, start) + after + segment.text.slice(start + before.length)
-      nextStart = start
+      next = edit
     }
   }
   if (untouched() !== unchangedDigest) fail('listening edits changed material outside transcript text')
@@ -333,7 +446,7 @@ function expectedInsertedSentences(segmentId, text, inheritedSpeaker) {
 
 // Resolve the exact sentence against the existing reviewed transcript first.
 // Apply from right to left so every offset still addresses that transcript.
-function insertListeningSentences(materialization, insertions, listeningAudio) {
+function insertListeningSentences(materialization, insertions, listeningAudio, positions) {
   if (materialization.listening?.state !== 'captured' || !Array.isArray(insertions)
     || !insertions.length || !listeningAudio) fail('missing listening insertion evidence')
   const bySegment = new Map()
@@ -392,8 +505,10 @@ function insertListeningSentences(materialization, insertions, listeningAudio) {
         fail('listening insertion has no unambiguous sentence boundary')
       }
       const separator = text.search(speakerLabels) === 0 ? '\n' : ' '
-      segment.text = before + (before && !/\s$/u.test(before) ? separator : '') + text
-        + (after && !/^\s/u.test(after) ? ' ' : '') + after
+      const addedText = (before && !/\s$/u.test(before) ? separator : '') + text + (after && !/^\s/u.test(after) ? ' ' : '')
+      segment.text = before + addedText + after
+      if (!positions.has(segment.segmentId)) positions.set(segment.segmentId, [])
+      positions.get(segment.segmentId).push({ start, length: addedText.length })
       sentences.splice(index, 0, ...added)
     }
   }
@@ -430,6 +545,7 @@ export function applySpellingReview(materializationBytes, reportBytes, listening
     fail('missing, stale, incomplete, or invalid review identity/coverage')
   }
   const effective = structuredClone(original)
+  const listeningSpelling = new Map(), listeningInsertions = new Map()
   for (let index = 0; index < targets.length; index++) {
     const expected = targets[index]
     const target = report.targets[index]
@@ -498,9 +614,12 @@ export function applySpellingReview(materializationBytes, reportBytes, listening
     const keys = expected.jsonPointer.slice(1).split('/')
     const key = keys.pop()
     keys.reduce((node, part) => node[part], effective)[key] = corrected
+    if (hasEdits && keys[0] === 'listening' && keys[1] === 'transcript' && key === 'text' && target.corrections.length) {
+      listeningSpelling.set(original.listening.transcript[keys[2]].segmentId, target.corrections)
+    }
   }
-  if (hasInsertions) insertListeningSentences(effective, report.listeningInsertions, listeningAudio)
-  if (hasEdits) applyListeningEdits(effective, report.listeningEdits, listeningAudio)
+  if (hasInsertions) insertListeningSentences(effective, report.listeningInsertions, listeningAudio, listeningInsertions)
+  if (hasEdits) applyListeningEdits(effective, report.listeningEdits, listeningAudio, original, listeningSpelling, listeningInsertions)
   return effective
 }
 
