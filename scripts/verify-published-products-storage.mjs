@@ -184,6 +184,23 @@ try {
     const snapshot = { ...bytes, [name]: pdf, [PRODUCT_MANIFEST]: Buffer.from(JSON.stringify(changed)) }
     assert.throws(() => readFrozenProducts(directory, { readArtifact: file => snapshot[file] }), expected)
   }
+  const analysisPath = 'products/analysis.pdf'
+  const analysisPdf = pdfBytes(17, 'naturally paginated revision analysis')
+  const analysisDigest = digest(Buffer.from('same-revision analysis sidecars'))
+  const analysisManifest = { ...manifest, analysisDigest, files: [...manifest.files,
+    { path: analysisPath, mediaType: 'application/pdf', role: 'pdf_product',
+      pageCount: 17, byteLength: analysisPdf.length, sha256: digest(analysisPdf) }] }
+  const analysisManifestBytes = Buffer.from(JSON.stringify(analysisManifest))
+  const withAnalysis = { ...bytes, [PRODUCT_MANIFEST]: analysisManifestBytes, [analysisPath]: analysisPdf }
+  const readAnalysis = file => withAnalysis[file]
+  assert.equal(readFrozenProducts(directory, { readArtifact: readAnalysis, analysisDigest,
+    config: {}, listeningCount: 2 }).manifest.files.length, 5)
+  assert.throws(() => readFrozenProducts(directory, { readArtifact: readAnalysis, analysisDigest: null }),
+    /输入或产品文件清单/)
+  assert.throws(() => readFrozenProducts(directory, { readArtifact: file => file === analysisPath ? null : readAnalysis(file) }),
+    /文件缺失或已改变/)
+  assert.equal(readFrozenProducts(directory, { readArtifact: file => bytes[file], analysisDigest }).manifest.files.length, 4)
+
   const files = {}
   for (const [name, data] of Object.entries(bytes)) files[name] = await local.put(data)
   const consumption = { paperId: manifest.paperId, sourceAssetVersion: 2, publicationDigest: digest(Buffer.from('publication-two')) }
@@ -211,6 +228,14 @@ try {
   assert.deepEqual(economy.bytes['products/economy8.pdf'], bytes['products/economy8.pdf'])
   assert.deepEqual(calls.splice(0), [files[PRODUCT_MANIFEST].sha256, files['products/economy8.pdf'].sha256])
   await assert.rejects(load('answerOnly'), /integrity/)
+  await assert.rejects(load('analysis'), /产品不存在/)
+  const manifestBlob = await local.put(analysisManifestBytes)
+  const analysisBlob = await local.put(analysisPdf)
+  const analysisReport = { ...report, pdfProducts: { ...report.pdfProducts, manifestDigest: manifestBlob.sha256 },
+    fileStorage: { ...report.fileStorage, files: { ...files,
+      [PRODUCT_MANIFEST]: manifestBlob, [analysisPath]: analysisBlob } } }
+  db.prepare('UPDATE paper_import_runs SET publish_report_json = ?').run(JSON.stringify(analysisReport))
+  assert.deepEqual((await load('analysis')).bytes[analysisPath], analysisPdf)
 
   // Reuse the source fixture without executing its full verifier. Exercise the
   // real projection/publication gates, not only a synthetic published report.

@@ -7,6 +7,18 @@ Owner 2026-10-06 对 reference-v2 县域样稿回复“OK”，确认本文件�
 本文件承接 [格式总入口](exam-paper-format-standards.md)，不改历史 Canonical authority。
 下方各日期的出样和接线记录保留当时状态，不代替当前 Ship／部署／发布证据。
 
+## 解析 PDF（BUB-241）
+
+新冻结的 revision 有讲评投影时，现有 `products/manifest-v1.json` 追加
+`products/analysis.pdf`，自然分页。`inputDigest` 继续绑定卷面和答案，
+新增 `analysisDigest` 绑定同版、与讲评栏共用的投影。无该字段的旧清单
+继续按原产品集合验证。解析缺项时仅省略对应讲评，答案速查仍取同版答案。
+
+审卷和正式下载以 `edition=analysis` 读取封存或已批准的 PDF 字节。
+产品目录通过 `analysisAvailable` 表示可用，现有题卷和答案选择继续使用 `editions`。
+原「配套解析」HTTP 入口继续返回 410。
+本次是本地候选，未送审、发布或接入网页选择器。
+
 ## 已确认的产品边界
 
 当前目标只有一个 `edition` 选择，不再是 Student/Teacher × pageLayout 的组合。

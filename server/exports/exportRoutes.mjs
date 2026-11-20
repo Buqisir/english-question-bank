@@ -1,4 +1,5 @@
 import { defineRoute } from '../router/index.mjs'
+import { frozenProductLabel } from '../paper-import/pdfProductSet.mjs'
 import { PAPER_PDF_PRODUCTS, requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
 
 function routeError(error) {
@@ -52,10 +53,11 @@ export function createExportRoutes(exportImplementation) {
     ...['GET', 'HEAD'].map(method => defineRoute(method, /^\/api\/exports\/papers\/([^/]+)\/(pdf|print)$/, async ({ request, response, url, match, context }) => {
       try {
         if (url.searchParams.has('versionType') || url.searchParams.has('pageLayout')) throw new Error('当前产品只使用 edition')
-        const edition = requirePaperPdfEdition(url.searchParams.get('edition'))
+        const edition = url.searchParams.get('edition')
+        const label = frozenProductLabel(edition)
         const result = await context.draftPaperStore.getPublishedPaperProduct(decodeURIComponent(match[1]), edition,
           url.searchParams.get('publicationDigest'))
-        const name = `${result.draftPaper.title.replace(/[\\/:*?"<>|]/g, '-')}-${PAPER_PDF_PRODUCTS[edition]}`
+        const name = `${result.draftPaper.title.replace(/[\\/:*?"<>|]/g, '-')}-${label}`
         response.setHeader('cache-control', 'private, no-store')
         if (match[2] === 'print') sendHtml(response, { body: result.paginatedHtml, fileName: `${name}.html` }, request.method === 'HEAD')
         else {

@@ -11,9 +11,11 @@ import { reviewBundleFilePaths } from '../../server/import-review/revisionProjec
 import { buildLocalReviewProjection, hydratedEvidenceBase } from './review.mjs'
 import { renderReviewPdfProduct } from '../../server/import-review/reviewPagination.mjs'
 import { PRODUCT_MANIFEST, productInputDigest, readFrozenProducts } from '../../server/paper-import/frozenProducts.mjs'
-import { ABSENT_BY_EXAM_DESIGN, NO_LISTENING_PRODUCT_SCHEMA, productFiles, sourceProductEditions } from '../../server/paper-import/pdfProductSet.mjs'
+import { ABSENT_BY_EXAM_DESIGN, ANALYSIS_PDF_EDITION, NO_LISTENING_PRODUCT_SCHEMA, productFiles, sourceProductEditions } from '../../server/paper-import/pdfProductSet.mjs'
 import { productPageLimitsForPlan } from '../../server/paper-import/paginationPlan.mjs'
 import { LARGE_PAGE_LIMIT_AUTHORIZATION, EXTENDED_PAGE_LIMIT_AUTHORIZATION } from '../../server/paper-import/pdfPageLimits.mjs'
+import { buildCompanionAnalysisHtml } from '../../server/exports/companionAnalysisRenderer.mjs'
+import { renderPaginatedPaper } from '../../server/draft-paper/paginationRenderer.mjs'
 import { buildPrintHtml } from '../../server/print-renderer.mjs'
 import { closeChromiumPool } from '../../server/draft-paper/chromiumPool.mjs'
 
@@ -24,6 +26,23 @@ function currentInputDigest(rootDir, projection) {
     reviewBundleFilePaths(rootDir, projection.candidate, hydratedEvidenceBase(rootDir)), projection.reviewedListening)
 }
 
+function selectedEditions(projection, listeningCount) {
+  const editions = sourceProductEditions(projection.config, listeningCount)
+  return projection.analysisDigest ? [...editions, ANALYSIS_PDF_EDITION] : editions
+}
+
+function renderBinding(rootDir, projection) {
+  return `${currentInputDigest(rootDir, projection)} ${projection.analysisDigest ?? ''}`
+}
+
+async function renderProduct(projection, edition, output) {
+  const result = edition === ANALYSIS_PDF_EDITION
+    ? await renderPaginatedPaper(buildCompanionAnalysisHtml({ projection }))
+    : await renderReviewPdfProduct(projection, edition, buildPrintHtml)
+  writeFileSync(output, result.pdfBytes, { flag: 'wx' })
+  return { sha256: sha256(result.pdfBytes), byteLength: result.pdfBytes.length, pageCount: result.pageCount }
+}
+
 // The resident Chromium pool renders serially within one process, so
 // --parallel renders each product in its own child against the same inputs.
 async function renderOne([edition, dirFlag, dir, outputFlag, output, digestFlag, inputDigest]) {
@@ -31,11 +50,9 @@ async function renderOne([edition, dirFlag, dir, outputFlag, output, digestFlag,
   const rootDir = path.resolve(dir)
   const projection = buildLocalReviewProjection(rootDir, { requireAnalyses: true })
   const listeningCount = projection.paginationSlotBindings.filter(entry => entry.familyContractId === 'listening').length
-  if (!sourceProductEditions(projection.config, listeningCount).includes(edition)) throw new Error(usage)
-  if (currentInputDigest(rootDir, projection) !== inputDigest) throw new Error('生成期间输入改变')
-  const result = await renderReviewPdfProduct(projection, edition, buildPrintHtml)
-  writeFileSync(output, result.pdfBytes, { flag: 'wx' })
-  console.log(JSON.stringify({ sha256: sha256(result.pdfBytes), byteLength: result.pdfBytes.length, pageCount: result.pageCount }))
+  if (!selectedEditions(projection, listeningCount).includes(edition)) throw new Error(usage)
+  if (renderBinding(rootDir, projection) !== inputDigest) throw new Error('生成期间输入改变')
+  console.log(JSON.stringify(await renderProduct(projection, edition, output)))
 }
 
 function renderInChild(rootDir, edition, output, inputDigest) {
@@ -65,33 +82,34 @@ async function freeze(args) {
   const { economyPageLimit } = pageLimits
   const extendedLarge = projection.paginationPlan?.schemaVersion === 'paper-pagination-plan-v6'
   const listeningCount = projection.paginationSlotBindings.filter(entry => entry.familyContractId === 'listening').length
-  const selectedFiles = productFiles(sourceProductEditions(projection.config, listeningCount))
+  const selectedFiles = productFiles(selectedEditions(projection, listeningCount))
   const inputDigest = currentInputDigest(rootDir, projection)
+  const binding = `${inputDigest} ${projection.analysisDigest ?? ''}`
   const staging = path.join(rootDir, `.products-${randomUUID()}`)
   mkdirSync(path.join(staging, 'products'), { recursive: true })
   const files = []
   if (parallel) {
     const results = await Promise.all(selectedFiles.map((file) =>
-      renderInChild(rootDir, path.basename(file.path, '.pdf'), path.join(staging, file.path), inputDigest)))
+      renderInChild(rootDir, path.basename(file.path, '.pdf'), path.join(staging, file.path), binding)))
     selectedFiles.forEach((file, index) => files.push({ ...file, ...results[index] }))
   } else {
     for (const file of selectedFiles) {
       const edition = path.basename(file.path, '.pdf')
-      const result = await renderReviewPdfProduct(projection, edition, buildPrintHtml)
-      writeFileSync(path.join(staging, file.path), result.pdfBytes, { flag: 'wx' })
-      files.push({ ...file, sha256: sha256(result.pdfBytes), byteLength: result.pdfBytes.length, pageCount: result.pageCount })
+      files.push({ ...file, ...await renderProduct(projection, edition, path.join(staging, file.path)) })
     }
   }
-  if (currentInputDigest(rootDir, projection) !== inputDigest) throw new Error(`生成期间输入改变；保留失败产物 ${staging}`)
+  const current = buildLocalReviewProjection(rootDir, { requireAnalyses: true })
+  if (renderBinding(rootDir, current) !== binding) throw new Error(`生成期间输入改变；保留失败产物 ${staging}`)
   const noListening = projection.config.listening === ABSENT_BY_EXAM_DESIGN
   const manifest = { schemaVersion: extendedLarge ? 'paper-pdf-products-v4' : noListening ? NO_LISTENING_PRODUCT_SCHEMA : economyPageLimit === 9 ? 'paper-pdf-products-v2' : 'paper-pdf-products-v1',
     ...(extendedLarge ? { pageLimits, pageLimitAuthorization: (pageLimits.largeCompletePageLimit === 14
       || pageLimits.largeNoListeningPageLimit === 12 || pageLimits.economyPageLimit === 10
         ? EXTENDED_PAGE_LIMIT_AUTHORIZATION : LARGE_PAGE_LIMIT_AUTHORIZATION),
       ...(noListening ? { listening: ABSENT_BY_EXAM_DESIGN } : {}) } : noListening ? { listening: ABSENT_BY_EXAM_DESIGN, economyPageLimit } : economyPageLimit === 9 ? { economyPageLimit } : {}), paperId: projection.paperId,
-    paperName: projection.paperName, examDate, inputDigest, files }
+    paperName: projection.paperName, examDate, inputDigest,
+    ...(projection.analysisDigest ? { analysisDigest: projection.analysisDigest } : {}), files }
   writeFileSync(path.join(staging, PRODUCT_MANIFEST), `${JSON.stringify(manifest, null, 2)}\n`, { flag: 'wx' })
-  readFrozenProducts(staging, { inputDigest, ...pageLimits, config: projection.config, listeningCount, required: true })
+  readFrozenProducts(staging, { inputDigest, analysisDigest: projection.analysisDigest, ...pageLimits, config: projection.config, listeningCount, required: true })
   renameSync(path.join(staging, 'products'), path.join(rootDir, 'products'))
   rmdirSync(staging)
   console.log(JSON.stringify({ status: 'local_products_frozen', paperId: projection.paperId, files,

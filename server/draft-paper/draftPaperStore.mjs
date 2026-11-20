@@ -13,6 +13,7 @@ import { PAPER_PDF_EDITIONS, PAPER_PDF_PRODUCTS, requirePaperPdfEdition } from '
 import { canonicalSourceConsumptionForGroup } from '../paper-canonical/consumerRuntime.mjs'
 import { projectCanonicalConsumerGroup, selectedFamilyContractIdForGroup } from '../../shared/paper-canonical/consumerProjection.mjs'
 import { readSourceReferencePublication } from '../paper-import/sourceReferencePublication.mjs'
+import { frozenProductInventory, frozenProductLabel } from '../paper-import/pdfProductSet.mjs'
 import { frozenProductResult, loadStoredProducts } from '../paper-import/frozenProducts.mjs'
 import {
   loadCanonicalGrammarFillPrintChrome,
@@ -1706,13 +1707,13 @@ export function createDraftPaperStore({
     }
   }
   async function getPublishedPaperProduct(paperId, edition, expectedPublicationDigest) {
-    requirePaperPdfEdition(edition)
+    frozenProductLabel(edition)
     return frozenProductResult(await getPublishedPaperProducts(paperId, expectedPublicationDigest, edition), edition)
   }
   async function getPublishedPaperProductInventory(paperId, expectedPublicationDigest) {
     const { manifest } = await getPublishedPaperProducts(paperId, expectedPublicationDigest)
     return { paperId, publicationDigest: expectedPublicationDigest,
-      editions: manifest.files.map(file => path.basename(file.path, '.pdf')) }
+      ...frozenProductInventory(manifest.files) }
   }
 
   async function getAssemblyPaperProduct(input, exactConsumption = null) {

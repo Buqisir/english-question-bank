@@ -4,6 +4,7 @@ import path from 'node:path'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 import { projectApplicationReviewCardDisplay } from '../../shared/writing/applicationReviewCard.mjs'
 import { projectContinuationAnalysisDisplay } from '../../shared/writing/continuationAnalysis.mjs'
+import { resolveFigureTextRegion } from '../../shared/paper-canonical/richContent.mjs'
 import { partitionAnalysisText } from '../../shared/analysis/analysisTextRanges.mjs'
 
 const ANALYSIS_FILES = Object.freeze({
@@ -19,7 +20,6 @@ const HOUSE_MARK = 'EQBANK 教师解析'
 
 function escapeHtml(value) {
   return String(value ?? '')
-    .replace(/(?<=[a-zA-Z])[‘’](?=[a-zA-Z])/gu, "'")
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
@@ -113,6 +113,17 @@ function renderFullTranslation(groupAnalysis, paperAsset) {
   return `<section class="full-translation"><h4>全文译文</h4>${paragraphs.join('')}</section>`
 }
 
+function exactTextRange(text, { start, end, quote }) {
+  return typeof text === 'string' && Number.isSafeInteger(start) && Number.isSafeInteger(end)
+    && start >= 0 && end > start && end <= Array.from(text).length
+    && Array.from(text).slice(start, end).join('') === quote
+}
+
+function passageQuote(group, paragraphId, quote) {
+  const paragraph = array(group.passage?.paragraphs).find(item => item.paragraphId === paragraphId)
+  return quote && paragraph?.text.includes(quote) ? quote : ''
+}
+
 function renderSourceRelationships(groupAnalysis, group, paperAsset) {
   const teaching = groupAnalysis?.teachingContent
   if (teaching?.schemaVersion !== 'objective-teaching-content-v1') return ''
@@ -132,7 +143,7 @@ function renderSourceRelationships(groupAnalysis, group, paperAsset) {
     const ranges = array(teaching.annotations).flatMap((annotation) =>
       array(annotation.sourceRanges)
         .filter((range) => range.textId === source.textId
-          && range.paragraphId === source.paragraphId)
+          && range.paragraphId === source.paragraphId && exactTextRange(source.text, range))
         .map((range) => ({ ...range, annotation })))
     if (ranges.length === 0) return ''
     const parts = partitionAnalysisText(source.text, ranges.map(({ start, end, quote }) => ({
@@ -225,12 +236,13 @@ function renderListeningGroup({ group, title, paperAsset, analysis }) {
     const questions = array(material.questionIds).filter((questionId) => groupQuestionIds.has(questionId)).map((questionId) => {
       const sourceQuestion = questionData(paperAsset, questionId)
       const question = analysis?.questions?.[questionId]
-      if (!sourceQuestion || !question) return ''
+      const answer = answerData(paperAsset, questionId)?.answer
+      if (!sourceQuestion || !question || !answer) return ''
       const options = ['A', 'B', 'C'].map((label) =>
         `<li><b>${label}</b> ${escapeHtml(question.optionTranslationsZh?.[label])}</li>`).join('')
       const distractors = array(question.distractors)
       return `<section class="question question--listening">
-        ${renderQuestionHeader(sourceQuestion.questionNo, question.officialAnswer)}
+        ${renderQuestionHeader(sourceQuestion.questionNo, answer)}
         <p class="question-stem">${escapeHtml(question.stemTranslationZh)}</p>
         <ol class="listening-options">${options}</ol>
         ${renderEvidenceQuote([question.evidence?.quote])}
@@ -315,14 +327,35 @@ function readingDistractors(entry) {
     && (nonEmptyString(option?.trap?.explanation) || nonEmptyString(option?.trap?.relationNote)))
 }
 
-function renderReadingDiscourse(discourse) {
+function renderReadingDiscourse(discourse, group) {
   const paragraphs = array(discourse?.paragraphs).filter((item) =>
     nonEmptyString(item?.summary) || nonEmptyString(item?.function))
   if (!nonEmptyString(discourse?.summary) && paragraphs.length === 0) return ''
-  return `<section class="reading-discourse"><h4>篇章结构</h4>${discourse?.summary ? `<p>${escapeHtml(discourse.summary)}</p>` : ''}${paragraphs.map((item) => `<p><b>${escapeHtml(item.paragraphId)}</b> ${escapeHtml(item.summary)}${item.function ? `；作用：${escapeHtml(item.function)}` : ''}</p>`).join('')}</section>`
+  const rows = paragraphs.map((item) => {
+    const index = array(group.passage?.paragraphs).findIndex(({ paragraphId }) => paragraphId === item.paragraphId)
+    return `<p>${index >= 0 ? `<b>第 ${index + 1} 段</b> ` : ''}${escapeHtml(item.summary)}${item.function ? `；作用：${escapeHtml(item.function)}` : ''}</p>`
+  })
+  return `<section class="reading-discourse"><h4>篇章结构</h4>${discourse?.summary ? `<p>${escapeHtml(discourse.summary)}</p>` : ''}${rows.join('')}</section>`
 }
 
-function renderReadingGroup({ group, title, paperAsset, analysis }) {
+function readingAnnexQuotes(groupAnalysis, questionId, group, figures) {
+  const teaching = groupAnalysis.teachingContent
+  return array(teaching?.annotations).filter(annotation => annotation.kind === 'answer-evidence'
+    && annotation.questionIds.includes(questionId)).flatMap(annotation => annotation.sourceRanges.map(range => {
+    if (range.regionId) {
+      try {
+        const region = resolveFigureTextRegion(range, figures)
+        return range.quote ?? region.text
+      } catch {
+        return ''
+      }
+    }
+    const paragraph = array(group.passage?.paragraphs).find(item => item.paragraphId === range.paragraphId)
+    return range.textId === teaching.sourceTextId && exactTextRange(paragraph?.text, range) ? range.quote : ''
+  }))
+}
+
+function renderReadingGroup({ group, title, paperAsset, analysis, figures }) {
   const groupAnalysis = analysis?.groups?.[group.groupId] || {}
   const letter = nonEmptyString(title || group.title).match(/([A-D])\s*$/u)?.[1]
   const displayTitle = letter ? `阅读理解 ${letter} 篇` : (title || group.title || '阅读理解')
@@ -332,7 +365,10 @@ function renderReadingGroup({ group, title, paperAsset, analysis }) {
     const entry = analysis?.questions?.[questionId]
     if (!question || !answer || !entry) return ''
     const correct = array(entry.optionAnalysis).find((option) => option?.label === answer)
-    const quotes = array(correct?.evidence).map((item) => item?.quote)
+    const quotes = array(correct?.evidence).map(item => figures
+      ? passageQuote(group, item.paragraphId, item.quote)
+      : item.quote)
+    if (figures) quotes.push(...readingAnnexQuotes(groupAnalysis, questionId, group, figures))
     const underlineTexts = array(entry.locationParaphrases)
       .map((relation) => relation?.targetText)
     const reasoning = [...new Set(array(entry.locationParaphrases)
@@ -350,7 +386,7 @@ function renderReadingGroup({ group, title, paperAsset, analysis }) {
   return `<section class="analysis-group analysis-group--reading">
     <h3 class="group-title">${escapeHtml(displayTitle)}</h3>
     ${renderOverview(groupAnalysis.overview)}
-    ${renderReadingDiscourse(groupAnalysis.discourseStructure)}
+    ${renderReadingDiscourse(groupAnalysis.discourseStructure, group)}
     ${renderFullTranslation(groupAnalysis, paperAsset)}
     ${renderSourceRelationships(groupAnalysis, group, paperAsset)}
     ${questions}
@@ -358,17 +394,18 @@ function renderReadingGroup({ group, title, paperAsset, analysis }) {
   </section>`
 }
 
-function renderContextChain(entry, optionText) {
-  const before = nonEmptyString(entry?.contextEvidence?.beforeQuote)
-  const after = nonEmptyString(entry?.contextEvidence?.afterQuote)
+function renderContextChain(entry, optionText, group) {
+  const { paragraphId, beforeQuote, afterQuote } = entry.contextEvidence || {}
+  const before = group ? passageQuote(group, paragraphId, beforeQuote) : nonEmptyString(beforeQuote) || '段首'
+  const after = group ? passageQuote(group, paragraphId, afterQuote) : nonEmptyString(afterQuote) || '段末'
   return `<div class="context-chain">
-    <div><span>空前</span><p lang="en">${escapeHtml(before || '段首')}</p></div>
+    ${before ? `<div><span>空前</span><p lang="en">${escapeHtml(before)}</p></div>` : ''}
     <div class="context-chain-answer"><span>答案</span><p lang="en">${escapeHtml(optionText)}</p></div>
-    <div><span>空后</span><p lang="en">${escapeHtml(after || '段末')}</p></div>
+    ${after ? `<div><span>空后</span><p lang="en">${escapeHtml(after)}</p></div>` : ''}
   </div>`
 }
 
-function renderSevenChoicesGroup({ group, title, paperAsset, analysis }) {
+function renderSevenChoicesGroup({ group, title, paperAsset, analysis, figures }) {
   const groupAnalysis = analysis?.groups?.[group.groupId] || {}
   const optionByLabel = new Map(array(group.optionBank).map((option) => [option?.label, option?.text]))
   const questions = array(group.questionIds).map((questionId) => {
@@ -380,7 +417,7 @@ function renderSevenChoicesGroup({ group, title, paperAsset, analysis }) {
     const optionText = nonEmptyString(optionByLabel.get(answer))
     return `<section class="question question--seven">
       ${renderQuestionHeader(question.questionNo, answer)}
-      ${renderContextChain(entry, optionText)}
+      ${renderContextChain(entry, optionText, figures && group)}
       ${entry.optionFit?.fitSummary ? `<p class="analysis-prose">${escapeHtml(entry.optionFit.fitSummary)}</p>` : ''}
       ${distractors.length ? `<div class="distractor"><span class="micro-heading">干扰项辨析</span>${distractors.map((item) => `<p><b>${escapeHtml(item.optionLabel)} 项</b>：${escapeHtml(item.reason)}</p>`).join('')}</div>` : ''}
     </section>`
@@ -425,7 +462,7 @@ function renderGrammarFillGroup({ group, title, paperAsset, analysis }) {
     const question = questionData(paperAsset, questionId)
     const authoritativeAnswer = answerData(paperAsset, questionId)?.answer
     const entry = analysis?.blanks?.[questionId]
-    const answer = nonEmptyString(authoritativeAnswer) || nonEmptyString(entry?.answer)
+    const answer = nonEmptyString(authoritativeAnswer)
     if (!question || !answer || !entry) return ''
     const hint = nonEmptyString(entry.hint)
     return `<section class="question question--grammar">
@@ -612,14 +649,18 @@ function renderGroup(input) {
     case 'listening':
       return renderListeningGroup({ ...input, analysis: input.analyses.listening })
     case 'reading':
+      if (!input.analyses.reading?.groups?.[input.group.groupId]) return ''
       return renderReadingGroup({ ...input, analysis: input.analyses.reading })
     case 'sevenChoices':
     case 'seven_choices':
+      if (!input.analyses.sevenChoices?.groups?.[input.group.groupId]) return ''
       return renderSevenChoicesGroup({ ...input, analysis: input.analyses.sevenChoices })
     case 'cloze':
+      if (!input.analyses.cloze?.groups?.[input.group.groupId]) return ''
       return renderClozeGroup({ ...input, analysis: input.analyses.cloze })
     case 'grammarFill':
     case 'grammar_cloze':
+      if (!input.analyses.grammarFill?.groups?.[input.group.groupId]) return ''
       return renderGrammarFillGroup({ ...input, analysis: input.analyses.grammarFill })
     case 'writing':
     case 'continuation':
@@ -629,7 +670,7 @@ function renderGroup(input) {
   }
 }
 
-function renderAnalysisBody(paperAsset, analyses) {
+function renderAnalysisBody(paperAsset, analyses, figuresByGroup) {
   return orderedGroups(paperAsset).map((part) => {
     const sections = part.sections.map((section) => {
       const groups = section.groups.map(({ group, title }) => renderGroup({
@@ -637,9 +678,12 @@ function renderAnalysisBody(paperAsset, analyses) {
         title,
         paperAsset,
         analyses,
+        figures: figuresByGroup?.get(group.groupId) ?? (figuresByGroup ? [] : null),
       })).filter(Boolean).join('')
       if (!groups) return ''
-      return `<section class="paper-section"><h2 class="section-title">${escapeHtml(section.title)}</h2>${groups}</section>`
+      const heading = !figuresByGroup || section.groups.length > 1
+        ? `<h2 class="section-title">${escapeHtml(section.title)}</h2>` : ''
+      return `<section class="paper-section">${heading}${groups}</section>`
     }).filter(Boolean).join('')
     if (!sections) return ''
     return `<article class="paper-part"><h2 class="part-title">${escapeHtml(part.title)}</h2>${sections}</article>`
@@ -674,11 +718,56 @@ export function companionAnalysisFileName(paperAsset, extension = 'pdf') {
   return `${safeFileTitle(paperAsset?.paper?.title)}-配套解析.${extension}`
 }
 
-export function buildCompanionAnalysisHtml({ paperAsset, analyses }) {
+const revisionGroupTitles = {
+  'listening.short-dialogue': '听力短对话',
+  'listening.long-form': '听力长对话与独白',
+  sevenChoices: '七选五',
+  cloze: '完形填空',
+  grammarFill: '语法填空',
+  'writing.application': '应用文写作',
+  'writing.continuation': '读后续写',
+}
+
+function revisionAnalysisSource(projection) {
+  const { paperAsset, analysisSidecars, consumption, materialization } = projection
+  const nodes = array(consumption?.visibleStructure)
+  const titles = new Map(nodes.filter(node => node.kind === 'instruction')
+    .map(node => [node.instructionId, node.text]))
+  const groupsBySlot = new Map(Object.values(paperAsset.content.groups).map(group => [group.title, group]))
+  const parts = []
+  for (const node of nodes) {
+    if (node.kind === 'part') parts.push({ title: titles.get(node.instructionId), sections: [] })
+    if (node.kind === 'section') parts.at(-1).sections.push({ title: titles.get(node.instructionId), groups: [] })
+    if (node.kind === 'group') {
+      const group = paperAsset.content.groups[node.groupId] ?? groupsBySlot.get(node.slotId)
+      if (!group) continue
+      const section = parts.at(-1).sections.at(-1)
+      const isReading = /^reading\.[a-d]$/u.test(node.slotId)
+      const sectionTitle = isReading ? '阅读理解'
+        : revisionGroupTitles[node.slotId] ?? revisionGroupTitles[group.groupType]
+      if (sectionTitle && !section.groups.length) section.title = sectionTitle
+      section.groups.push({ groupId: group.groupId,
+        title: isReading ? node.slotId.at(-1).toUpperCase() : sectionTitle ?? section.title })
+    }
+  }
+  const media = new Map(array(materialization?.media).map(item => [item.mediaId, item]))
+  return {
+    paperAsset: { ...paperAsset, layoutTree: { parts } },
+    analyses: Object.fromEntries(Object.entries(ANALYSIS_FILES)
+      .map(([key, fileName]) => [key, analysisSidecars[fileName]])),
+    figuresByGroup: new Map(array(materialization?.groups).map(group => [group.groupId,
+      group.blocks.filter(block => block.kind === 'figure').map(block => ({
+        ...block, textRegions: media.get(block.mediaId)?.textRegions,
+      }))])),
+  }
+}
+
+export function buildCompanionAnalysisHtml(input) {
+  const { paperAsset, analyses, figuresByGroup } = input.projection ? revisionAnalysisSource(input.projection) : input
   if (!paperAsset?.paper?.paperId) throw new Error('paperAsset is required')
   const title = cleanPaperTitle(paperAsset.paper.title)
   const answerOverview = renderAnswerOverview(paperAsset)
-  const analysisBody = renderAnalysisBody(paperAsset, analyses || {})
+  const analysisBody = renderAnalysisBody(paperAsset, analyses || {}, figuresByGroup)
   return `<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -1310,6 +1399,25 @@ dd {
     column-count: 1;
   }
 }
+${input.projection ? `
+/* Paged.js must fragment lengthy writing explanations inside a column. */
+.story-map,
+.story-map > div {
+  display: block;
+}
+.story-map > div,
+.continuation-section .route-paragraph {
+  break-inside: auto;
+}
+.story-map dt {
+  margin-bottom: 1mm;
+  break-after: avoid;
+}
+.pagedjs_first_page .pagedjs_margin-top-left,
+.pagedjs_first_page .pagedjs_margin-top-right {
+  visibility: hidden;
+}
+` : ''}
 </style>
 </head>
 <body><!--

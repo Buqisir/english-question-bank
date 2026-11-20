@@ -23,7 +23,7 @@ import { SOURCE_REFERENCES_FILE, parseSourceReferencesBytes } from '../paper-imp
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../paper-import/sourceReferenceSemantics.mjs'
 import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../paper-import/sourceReferenceAdmission.mjs'
 import { PRODUCT_MANIFEST, PRODUCT_FILES, matchesSealedPrintInputs, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
-import { productFiles, sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
+import { ANALYSIS_PDF_EDITION, productFiles, sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
 import { productPageLimitsForManifest } from '../paper-import/pdfPageLimits.mjs'
 import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
 import { withSealedReviewSnapshot } from './sealedReviewFiles.mjs'
@@ -850,6 +850,10 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
         loaded.config, materialization.listening.state === 'captured' ? 2 : 0))),
     ] : []),
   ]
+  const productManifestPath = resolveReviewFile(rootDir, PRODUCT_MANIFEST)
+  if (existsSync(productManifestPath) && readJson(productManifestPath, PRODUCT_MANIFEST).analysisDigest !== undefined) {
+    files.push(...productFiles([ANALYSIS_PDF_EDITION]))
+  }
   const byPath = new Map()
   for (const file of files) {
     const existing = byPath.get(file.path)
@@ -2104,7 +2108,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   const hasFrozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
   const printInputDigest = hasFrozenProducts ? productInputDigest(rootDir, inventory(), reviewedListening) : null
   const frozenProducts = hasFrozenProducts
-    ? readProducts(rootDir, { inputDigest: printInputDigest,
+    ? readProducts(rootDir, { inputDigest: printInputDigest, analysisDigest: analysisProjection?.digest ?? null,
         legacyInputDigest: expected => {
           const originalManifest = retainedBytes?.(PRODUCT_MANIFEST)
           if (originalManifest && JSON.parse(originalManifest).inputDigest === expected
