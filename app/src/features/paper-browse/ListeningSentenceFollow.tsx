@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import type { ListeningSentence } from '../../domain/listeningAnalysis'
 import { Check } from '../../icons'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
@@ -372,7 +372,6 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       {error && <p className="listening-audio-error" role="status">录音未能播放，请重试</p>}
       <div className="listening-follow-lines" ref={list} tabIndex={0} role="region" aria-label="逐句录音稿"
         data-focused={focused || undefined} data-auto-follow={focused && following || undefined}
-        style={{ '--listening-highlight-duration': `${FOLLOW_BEAT_MS}ms` } as CSSProperties}
         onWheel={(event) => { if (event.deltaY) setFollow(false) }}
         onTouchMove={() => setFollow(false)}
         onPointerDown={(event) => {
