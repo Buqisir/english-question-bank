@@ -233,6 +233,10 @@ function renderQuestionHeader(questionNo, answer, answerText = '', provenanceLab
   </header>`
 }
 
+function renderQuestionLead(heading, content) {
+  return `<div class="question-lead">${heading}${content || ''}</div>`
+}
+
 function renderListeningGroup({ group, title, paperAsset, analysis, answers }) {
   const groupQuestionIds = new Set(array(group.questionIds))
   const materials = Object.values(analysis?.materials || {}).filter((material) =>
@@ -247,11 +251,11 @@ function renderListeningGroup({ group, title, paperAsset, analysis, answers }) {
       const options = ['A', 'B', 'C'].map((label) =>
         `<li><b>${label}</b> ${escapeHtml(question.optionTranslationsZh?.[label])}</li>`).join('')
       const distractors = array(question.distractors)
+      const heading = renderQuestionHeader(sourceQuestion.questionNo, answer.answer, '',
+        answer.provenance === 'unofficial' ? unofficialListeningLabel : '')
       return `<section class="question question--listening">
-        ${renderQuestionHeader(sourceQuestion.questionNo, answer.answer, '',
-          answer.provenance === 'unofficial' ? unofficialListeningLabel : '')}
-        <p class="question-stem">${escapeHtml(question.stemTranslationZh)}</p>
-        <ol class="listening-options">${options}</ol>
+        ${renderQuestionLead(heading, `<p class="question-stem">${escapeHtml(question.stemTranslationZh)}</p>`)}
+        <ul class="listening-options">${options}</ul>
         ${renderEvidenceQuote([question.evidence?.quote])}
         <p class="analysis-prose">${escapeHtml(question.reasonZh)}</p>
         ${distractors.length ? `<div class="distractor"><span class="micro-heading">干扰项辨析</span>${distractors.map((item) => `<p><b>${escapeHtml(item.label)} 项</b>：${escapeHtml(item.explanationZh)}</p>`).join('')}</div>` : ''}
@@ -349,9 +353,10 @@ function renderAnswerOverview(parts) {
   }
   return Array.from(rows, ([label, answers]) => {
     const unofficial = answers.some(({ provenance }) => provenance === 'unofficial')
+    const textAnswers = label === '语填' || answers.some(({ value }) => !/^[A-Z]$/u.test(value.trim()))
     return `<section class="answer-overview-section">
       <h3>${escapeHtml(label)}${unofficial ? `<small>${unofficialListeningLabel}</small>` : ''}</h3>
-      <div class="answer-grid">${renderAnswerCells(answers)}</div>
+      <div class="answer-grid${textAnswers ? ' answer-grid--text' : ''}">${renderAnswerCells(answers)}</div>
     </section>`
   }).join('')
 }
@@ -374,15 +379,22 @@ function readingDistractors(entry) {
     && (nonEmptyString(option?.trap?.explanation) || nonEmptyString(option?.trap?.relationNote)))
 }
 
-function renderReadingDiscourse(discourse, group) {
+function renderReadingDiscourse(discourse, group, overview) {
+  let summary = nonEmptyString(discourse?.summary)
+  const firstSentence = summary.match(/^.+?(?:[。！？!?]|\.(?=\s))/u)?.[0]
+  const overviewText = withoutClosingPunctuation(overview)
+  if (withoutClosingPunctuation(summary) === overviewText) summary = ''
+  else if (firstSentence && withoutClosingPunctuation(firstSentence) === overviewText) {
+    summary = summary.slice(firstSentence.length).trimStart()
+  }
   const paragraphs = array(discourse?.paragraphs).filter((item) =>
     nonEmptyString(item?.summary) || nonEmptyString(item?.function))
-  if (!nonEmptyString(discourse?.summary) && paragraphs.length === 0) return ''
+  if (!summary && paragraphs.length === 0) return ''
   const rows = paragraphs.map((item) => {
     const index = array(group.passage?.paragraphs).findIndex(({ paragraphId }) => paragraphId === item.paragraphId)
     return `<p>${index >= 0 ? `<b>第 ${index + 1} 段</b> ` : ''}${escapeHtml(item.function ? withoutClosingPunctuation(item.summary) : item.summary)}${item.function ? `${item.summary ? '；' : ''}作用：${escapeHtml(item.function)}` : ''}</p>`
   })
-  return `<section class="reading-discourse"><h4>篇章结构</h4>${discourse?.summary ? `<p>${escapeHtml(discourse.summary)}</p>` : ''}${rows.join('')}</section>`
+  return `<section class="reading-discourse"><h4>篇章结构</h4>${summary ? `<p>${escapeHtml(summary)}</p>` : ''}${rows.join('')}</section>`
 }
 
 function readingAnnexQuotes(groupAnalysis, questionId, group, figures) {
@@ -424,18 +436,21 @@ function renderReadingGroup({ group, title, paperAsset, analysis, answers, figur
     const distractors = readingDistractors(entry).map(option => ({
       ...option, optionTranslationZh: withoutClosingPunctuation(option.optionTranslationZh),
     }))
+    const [first, ...details] = [
+      entry.stemTranslationZh ? `<p class="question-stem">${escapeHtml(entry.stemTranslationZh)}</p>` : '',
+      ...reasoning.map((item) => `<p class="analysis-prose">${escapeHtml(item)}</p>`),
+      renderEvidenceQuote(quotes, underlineTexts),
+      distractors.length > 0 ? `<div class="distractor distractor--reading"><span class="micro-heading">干扰项辨析</span><div>${distractors.map((distractor) => `<p class="reading-distractor-item"><b>${escapeHtml(distractor.label)} 项</b>${distractor.optionTranslationZh ? `（${escapeHtml(distractor.optionTranslationZh)}）` : ''}：${escapeHtml(nonEmptyString(distractor.trap.explanation) || distractor.trap.relationNote)}</p>`).join('')}</div></div>` : '',
+    ].filter(Boolean)
     return `<section class="question question--reading">
-      ${renderQuestionHeader(question.questionNo, answer)}
-      ${entry.stemTranslationZh ? `<p class="question-stem">${escapeHtml(entry.stemTranslationZh)}</p>` : ''}
-      ${reasoning.map((item) => `<p class="analysis-prose">${escapeHtml(item)}</p>`).join('')}
-      ${renderEvidenceQuote(quotes, underlineTexts)}
-      ${distractors.length > 0 ? `<div class="distractor distractor--reading"><span class="micro-heading">干扰项辨析</span><div>${distractors.map((distractor) => `<p class="reading-distractor-item"><b>${escapeHtml(distractor.label)} 项</b>${distractor.optionTranslationZh ? `（${escapeHtml(distractor.optionTranslationZh)}）` : ''}：${escapeHtml(nonEmptyString(distractor.trap.explanation) || distractor.trap.relationNote)}</p>`).join('')}</div></div>` : ''}
+      ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer), first)}
+      ${details.join('')}
     </section>`
   }).join('')
   return `<section class="analysis-group analysis-group--reading">
     ${renderGroupHeading(displayTitle, answers)}
     ${renderOverview(groupAnalysis.overview)}
-    ${renderReadingDiscourse(groupAnalysis.discourseStructure, group)}
+    ${renderReadingDiscourse(groupAnalysis.discourseStructure, group, groupAnalysis.overview)}
     ${renderFullTranslation(groupAnalysis, paperAsset)}
     ${renderSourceRelationships(groupAnalysis, group, paperAsset)}
     ${questions}
@@ -470,8 +485,8 @@ function renderSevenChoicesGroup({ group, title, paperAsset, analysis, answers, 
     const distractors = array(entry.keyDistractors).filter((item) => nonEmptyString(item?.reason))
     const optionText = nonEmptyString(optionByLabel.get(answer))
     return `<section class="question question--seven">
-      ${renderQuestionHeader(question.questionNo, answer)}
-      ${renderContextChain(entry, optionText, figures && group, question.questionNo)}
+      ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer),
+        renderContextChain(entry, optionText, figures && group, question.questionNo))}
       ${entry.optionFit?.fitSummary ? `<p class="analysis-prose">${escapeHtml(entry.optionFit.fitSummary)}</p>` : ''}
       ${distractors.length ? `<div class="distractor"><span class="micro-heading">干扰项辨析</span>${distractors.map((item) => `<p><b>${escapeHtml(item.optionLabel)} 项</b>：${escapeHtml(item.reason)}</p>`).join('')}</div>` : ''}
     </section>`
@@ -494,10 +509,11 @@ function renderClozeGroup({ group, title, paperAsset, analysis, answers }) {
     const entry = analysis?.blanks?.[questionId]
     if (!question || !answer || !entry) return ''
     const glosses = array(entry.distractorGlosses).filter((item) => item?.optionLabel && item?.meaning)
+    const reason = entry.correctFit?.reason ? `<p class="analysis-prose">${escapeHtml(entry.correctFit.reason)}</p>` : ''
+    const distractors = glosses.length > 0 ? `<div class="distractor distractor--cloze"><span class="micro-heading">干扰项辨析</span><div>${glosses.map((item) => `<p class="cloze-distractor-item"><b>${escapeHtml(item.optionLabel)} ${escapeHtml(item.optionText)}</b>：${escapeHtml(item.meaning)}</p>`).join('')}</div></div>` : ''
     return `<section class="question question--cloze">
-      ${renderQuestionHeader(question.questionNo, answer, answerOptionText(question, answer))}
-      ${entry.correctFit?.reason ? `<p class="analysis-prose">${escapeHtml(entry.correctFit.reason)}</p>` : ''}
-      ${glosses.length > 0 ? `<div class="distractor distractor--cloze"><span class="micro-heading">干扰项辨析</span><div>${glosses.map((item) => `<p class="cloze-distractor-item"><b>${escapeHtml(item.optionLabel)} ${escapeHtml(item.optionText)}</b>：${escapeHtml(item.meaning)}</p>`).join('')}</div></div>` : ''}
+      ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer, answerOptionText(question, answer)), reason || distractors)}
+      ${reason ? distractors : ''}
     </section>`
   }).join('')
   return `<section class="analysis-group analysis-group--cloze">
@@ -520,8 +536,8 @@ function renderGrammarFillGroup({ group, title, paperAsset, analysis, answers })
     if (!question || !answer || !entry) return ''
     const hint = nonEmptyString(entry.hint)
     return `<section class="question question--grammar">
-      ${renderQuestionHeader(question.questionNo, answer, hint ? `提示词 ${hint}` : '')}
-      ${entry.reason ? `<p class="analysis-prose">${escapeHtml(entry.reason)}</p>` : ''}
+      ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer, hint ? `提示词 ${hint}` : ''),
+        entry.reason ? `<p class="analysis-prose">${escapeHtml(entry.reason)}</p>` : '')}
     </section>`
   }).join('')
   return `<section class="analysis-group analysis-group--grammar">
@@ -1013,6 +1029,10 @@ h5 {
   grid-template-columns: repeat(10, minmax(0, 1fr));
 }
 
+.answer-grid--text {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
 .answer-cell {
   color: var(--green-deep);
   font-weight: 700;
@@ -1022,7 +1042,6 @@ h5 {
 .answer-grid .answer-cell {
   padding: 0.65mm 0.65mm 0.65mm 0;
   font: 700 8pt/10pt var(--sans);
-  overflow-wrap: anywhere;
 }
 
 .answer-cell b {
@@ -1242,6 +1261,10 @@ h5 {
   break-after: avoid;
 }
 
+.question-lead {
+  break-inside: avoid;
+}
+
 .question-number {
   min-width: 8mm;
   color: var(--ink);
@@ -1268,8 +1291,16 @@ h5 {
   font-weight: 600;
 }
 
+.listening-options {
+  margin: 0 0 3mm;
+  padding: 0;
+  list-style: none;
+}
+
 .analysis-prose + .evidence-quote,
 .analysis-prose + .distractor,
+.question-lead:has(> .analysis-prose:last-child) + .evidence-quote,
+.question-lead:has(> .analysis-prose:last-child) + .distractor,
 .evidence-quote + .distractor {
   margin-top: 2.5mm;
 }
