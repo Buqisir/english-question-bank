@@ -148,6 +148,44 @@ assert.ok(!html.includes('--green-pale'))
 assert.ok(html.includes('orphans: 3'))
 assert.ok(html.includes('widows: 3'))
 
+const sevenGroupId = 'group-2025-i-seven-choices'
+const sevenQuestionId = source.paperAsset.content.groups[sevenGroupId].questionIds[0]
+const listeningGroupId = 'listening-fixture'
+const listeningQuestionId = 'question:listening:1'
+const revisionAsset = structuredClone(source.paperAsset)
+revisionAsset.content.groups[sevenGroupId].passage.paragraphs = [{
+  paragraphId: 'seven-fixture', text: 'Earlier. __36__ Later.',
+}]
+revisionAsset.content.groups[listeningGroupId] = { groupId: listeningGroupId, groupType: 'listening',
+  questionIds: [listeningQuestionId] }
+revisionAsset.content.questions[listeningQuestionId] = { questionNo: 1 }
+revisionAsset.answerKey.answers[listeningQuestionId] = { answer: 'C' }
+const sevenAnalysis = structuredClone(source.analyses.sevenChoices)
+sevenAnalysis.questions[sevenQuestionId].contextEvidence = {
+  paragraphId: 'seven-fixture', beforeQuote: 'Later.', afterQuote: 'Later.',
+}
+const revisionHtml = buildCompanionAnalysisHtml({ projection: {
+  paperAsset: revisionAsset,
+  materialization: { listening: { answers: [{ canonicalNumber: 1, value: 'C', provenance: 'unofficial' }] } },
+  consumption: { visibleStructure: [
+    { kind: 'part' }, { kind: 'section' },
+    { kind: 'group', groupId: listeningGroupId, slotId: 'listening.short-dialogue' },
+    { kind: 'section' }, { kind: 'group', groupId: sevenGroupId, slotId: 'seven-choices' },
+  ] },
+  analysisSidecars: {
+    'seven-choices-analysis-v1.json': sevenAnalysis,
+    'listening-analysis-v1.json': {
+      materials: { m: { segmentId: 'm', questionIds: [listeningQuestionId], topic: {} } },
+      questions: { [listeningQuestionId]: {} },
+    },
+  },
+} })
+assert.doesNotMatch(revisionHtml, /<span>空前<\/span><p lang="en">Later\.<\/p>/)
+assert.match(revisionHtml, /<span>空后<\/span><p lang="en">Later\.<\/p>/)
+assert.match(revisionHtml, /<h3>听力短对话 · 听力答案（非官方，据录音整理）<\/h3>/)
+assert.match(revisionHtml, /<small>听力答案（非官方，据录音整理）<\/small>/)
+assert.doesNotMatch(html, /[。．.!！?？]）：|[。．.!！?？]；作用：/)
+
 const tempDir = mkdtempSync(path.join(tmpdir(), 'verify-companion-analysis-'))
 try {
   const implementation = createExportImplementation({

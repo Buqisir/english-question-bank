@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
+import { unofficialListeningLabel } from '../answer-renderer.mjs'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 import { projectApplicationReviewCardDisplay } from '../../shared/writing/applicationReviewCard.mjs'
 import { projectContinuationAnalysisDisplay } from '../../shared/writing/continuationAnalysis.mjs'
@@ -29,6 +30,10 @@ function escapeHtml(value) {
 
 function nonEmptyString(value) {
   return typeof value === 'string' && value.trim() ? value.trim() : ''
+}
+
+function withoutClosingPunctuation(value) {
+  return nonEmptyString(value).replace(/[。．.!！?？；;，,]+$/u, '')
 }
 
 function array(value) {
@@ -219,11 +224,12 @@ function renderSelectedLongSentences(sentences, paperAsset) {
   </article>`).join('')}</section>`
 }
 
-function renderQuestionHeader(questionNo, answer, answerText = '') {
+function renderQuestionHeader(questionNo, answer, answerText = '', provenanceLabel = '') {
   return `<header class="question-heading">
     <span class="question-number">${escapeHtml(questionNo)}</span>
     <span class="question-answer">${escapeHtml(answer)}</span>
     ${answerText ? `<span class="answer-text" lang="en">${escapeHtml(answerText)}</span>` : ''}
+    ${provenanceLabel ? `<small>${escapeHtml(provenanceLabel)}</small>` : ''}
   </header>`
 }
 
@@ -236,13 +242,14 @@ function renderListeningGroup({ group, title, paperAsset, analysis }) {
     const questions = array(material.questionIds).filter((questionId) => groupQuestionIds.has(questionId)).map((questionId) => {
       const sourceQuestion = questionData(paperAsset, questionId)
       const question = analysis?.questions?.[questionId]
-      const answer = answerData(paperAsset, questionId)?.answer
-      if (!sourceQuestion || !question || !answer) return ''
+      const answer = answerData(paperAsset, questionId)
+      if (!sourceQuestion || !question || !answer?.answer) return ''
       const options = ['A', 'B', 'C'].map((label) =>
         `<li><b>${label}</b> ${escapeHtml(question.optionTranslationsZh?.[label])}</li>`).join('')
       const distractors = array(question.distractors)
       return `<section class="question question--listening">
-        ${renderQuestionHeader(sourceQuestion.questionNo, answer)}
+        ${renderQuestionHeader(sourceQuestion.questionNo, answer.answer, '',
+          answer.provenance === 'unofficial' ? unofficialListeningLabel : '')}
         <p class="question-stem">${escapeHtml(question.stemTranslationZh)}</p>
         <ol class="listening-options">${options}</ol>
         ${renderEvidenceQuote([question.evidence?.quote])}
@@ -311,8 +318,10 @@ function renderAnswerOverview(paperAsset) {
         return `<span class="answer-cell"><b>${escapeHtml(question.questionNo)}</b><span>${escapeHtml(answer.answer)}</span></span>`
       }).filter(Boolean))
       if (answers.length === 0) continue
+      const unofficial = section.groups.some(({ group }) => group.groupType === 'listening'
+        && group.questionIds.some(questionId => answerData(paperAsset, questionId)?.provenance === 'unofficial'))
       sections.push(`<section class="answer-overview-section">
-        <h3>${escapeHtml(section.title)}</h3>
+        <h3>${escapeHtml(section.title)}${unofficial ? ` · ${unofficialListeningLabel}` : ''}</h3>
         <div class="answer-grid">${answers.join('')}</div>
       </section>`)
     }
@@ -333,7 +342,7 @@ function renderReadingDiscourse(discourse, group) {
   if (!nonEmptyString(discourse?.summary) && paragraphs.length === 0) return ''
   const rows = paragraphs.map((item) => {
     const index = array(group.passage?.paragraphs).findIndex(({ paragraphId }) => paragraphId === item.paragraphId)
-    return `<p>${index >= 0 ? `<b>第 ${index + 1} 段</b> ` : ''}${escapeHtml(item.summary)}${item.function ? `；作用：${escapeHtml(item.function)}` : ''}</p>`
+    return `<p>${index >= 0 ? `<b>第 ${index + 1} 段</b> ` : ''}${escapeHtml(item.function ? withoutClosingPunctuation(item.summary) : item.summary)}${item.function ? `${item.summary ? '；' : ''}作用：${escapeHtml(item.function)}` : ''}</p>`
   })
   return `<section class="reading-discourse"><h4>篇章结构</h4>${discourse?.summary ? `<p>${escapeHtml(discourse.summary)}</p>` : ''}${rows.join('')}</section>`
 }
@@ -374,7 +383,9 @@ function renderReadingGroup({ group, title, paperAsset, analysis, figures }) {
     const reasoning = [...new Set(array(entry.locationParaphrases)
       .map((relation) => nonEmptyString(relation?.note)).filter(Boolean))]
     if (reasoning.length === 0 && nonEmptyString(entry.questionFocus)) reasoning.push(entry.questionFocus)
-    const distractors = readingDistractors(entry)
+    const distractors = readingDistractors(entry).map(option => ({
+      ...option, optionTranslationZh: withoutClosingPunctuation(option.optionTranslationZh),
+    }))
     return `<section class="question question--reading">
       ${renderQuestionHeader(question.questionNo, answer)}
       ${entry.stemTranslationZh ? `<p class="question-stem">${escapeHtml(entry.stemTranslationZh)}</p>` : ''}
@@ -394,10 +405,15 @@ function renderReadingGroup({ group, title, paperAsset, analysis, figures }) {
   </section>`
 }
 
-function renderContextChain(entry, optionText, group) {
+function renderContextChain(entry, optionText, group, questionNo) {
   const { paragraphId, beforeQuote, afterQuote } = entry.contextEvidence || {}
-  const before = group ? passageQuote(group, paragraphId, beforeQuote) : nonEmptyString(beforeQuote) || '段首'
-  const after = group ? passageQuote(group, paragraphId, afterQuote) : nonEmptyString(afterQuote) || '段末'
+  const paragraph = array(group?.passage?.paragraphs).find(item => item.paragraphId === paragraphId)
+  const sides = paragraph?.text.split(`__${questionNo}__`)
+  const hasBlank = sides?.length === 2
+  const before = group ? (hasBlank && beforeQuote && sides[0].includes(beforeQuote) ? beforeQuote : '')
+    : nonEmptyString(beforeQuote) || '段首'
+  const after = group ? (hasBlank && afterQuote && sides[1].includes(afterQuote) ? afterQuote : '')
+    : nonEmptyString(afterQuote) || '段末'
   return `<div class="context-chain">
     ${before ? `<div><span>空前</span><p lang="en">${escapeHtml(before)}</p></div>` : ''}
     <div class="context-chain-answer"><span>答案</span><p lang="en">${escapeHtml(optionText)}</p></div>
@@ -417,7 +433,7 @@ function renderSevenChoicesGroup({ group, title, paperAsset, analysis, figures }
     const optionText = nonEmptyString(optionByLabel.get(answer))
     return `<section class="question question--seven">
       ${renderQuestionHeader(question.questionNo, answer)}
-      ${renderContextChain(entry, optionText, figures && group)}
+      ${renderContextChain(entry, optionText, figures && group, question.questionNo)}
       ${entry.optionFit?.fitSummary ? `<p class="analysis-prose">${escapeHtml(entry.optionFit.fitSummary)}</p>` : ''}
       ${distractors.length ? `<div class="distractor"><span class="micro-heading">干扰项辨析</span>${distractors.map((item) => `<p><b>${escapeHtml(item.optionLabel)} 项</b>：${escapeHtml(item.reason)}</p>`).join('')}</div>` : ''}
     </section>`
@@ -751,8 +767,15 @@ function revisionAnalysisSource(projection) {
     }
   }
   const media = new Map(array(materialization?.media).map(item => [item.mediaId, item]))
+  const answers = { ...paperAsset.answerKey?.answers }
+  for (const answer of array(materialization?.listening?.answers)) {
+    const questionId = `question:listening:${answer.canonicalNumber}`
+    if (answer.provenance === 'unofficial' && answers[questionId]) {
+      answers[questionId] = { ...answers[questionId], provenance: answer.provenance }
+    }
+  }
   return {
-    paperAsset: { ...paperAsset, layoutTree: { parts } },
+    paperAsset: { ...paperAsset, answerKey: { ...paperAsset.answerKey, answers }, layoutTree: { parts } },
     analyses: Object.fromEntries(Object.entries(ANALYSIS_FILES)
       .map(([key, fileName]) => [key, analysisSidecars[fileName]])),
     figuresByGroup: new Map(array(materialization?.groups).map(group => [group.groupId,

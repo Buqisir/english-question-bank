@@ -3,9 +3,11 @@ import './lib/reviewTestLockRoot.mjs'
 import { chmod, cp, mkdir, mkdtemp, readFile, readdir, stat, writeFile, rm } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
+import { spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { Readable } from 'node:stream'
 import { DatabaseSync } from 'node:sqlite'
+import { fileURLToPath } from 'node:url'
 import { archiveReviewFiles, createBlobStore } from '../server/paper-import/blobStore.mjs'
 import { loadStoredProducts, matchesSealedPrintInputs, productInputDigest, readFrozenProducts, PRODUCT_FILES, PRODUCT_MANIFEST } from '../server/paper-import/frozenProducts.mjs'
 import { readExamDate } from '../shared/examDate.mjs'
@@ -15,7 +17,7 @@ import { createExportRoutes } from '../server/exports/exportRoutes.mjs'
 import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
 import { runRoutes } from '../server/router/index.mjs'
 import { productPdfBytes as pdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
-import { buildNck1ReviewProjection, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
+import { buildNck1ReviewProjection, computeSealedReviewSubjects, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
 import { createImportReviewStore, reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
 import { SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
 import { syntheticReviewReferences } from './lib/syntheticReviewAnswerFixture.mjs'
@@ -348,6 +350,41 @@ try {
   }, 'confirmed source samples cannot disappear when the reference sidecar is removed')
   await writeFile(referencesPath, JSON.stringify(references))
   await writeFile(path.join(fixture.reviewRoot, PRODUCT_MANIFEST), JSON.stringify(productManifest))
+  const refreshRoot = path.join(directory, 'analysis-refresh')
+  await cp(fixture.reviewRoot, refreshRoot, { recursive: true })
+  await writeFile(path.join(refreshRoot, analysisPath), analysisPdf)
+  await writeFile(path.join(refreshRoot, PRODUCT_MANIFEST), JSON.stringify({
+    ...productManifest, analysisDigest: projection.analysisDigest,
+    files: [...productManifest.files, analysisManifest.files.at(-1)],
+  }))
+  const readingPath = path.join(refreshRoot, 'analysis-reading-a.json')
+  const reading = JSON.parse(await readFile(readingPath, 'utf8'))
+  Object.values(reading.groups)[0].overview += ' 更新讲评。'
+  await writeFile(readingPath, JSON.stringify(reading))
+  const refresh = spawnSync(process.execPath, [
+    fileURLToPath(new URL('./import-pipeline/freeze-products.mjs', import.meta.url)), '--paper-dir', refreshRoot,
+  ], { encoding: 'utf8', timeout: 60_000 })
+  assert.equal(refresh.status, 0, refresh.stderr || String(refresh.error))
+  const refreshed = buildNck1ReviewProjection(refreshRoot, { requireAnalyses: true })
+  assert.notEqual(refreshed.analysisDigest, projection.analysisDigest)
+  assert.equal(refreshed.frozenProducts.manifest.analysisDigest, refreshed.analysisDigest)
+  assert.deepEqual(refreshed.frozenProducts.manifest.files.slice(0, 4), productManifest.files)
+  for (const file of productManifest.files) assert.deepEqual(refreshed.frozenProducts.bytes[file.path], fixtureBytes[file.path])
+  assert.notDeepEqual(refreshed.frozenProducts.bytes[analysisPath], analysisPdf)
+
+  const { store: refreshStore, revision: refreshRevision, dbPath: refreshDbPath } = finalizeReviewFixture({
+    directory: refreshRoot, output: path.join(directory, 'sealed-analysis-refresh'), projection: refreshed, approve: false,
+  })
+  const refreshDb = new DatabaseSync(refreshDbPath, { readOnly: true })
+  const preview = refreshDb.prepare('SELECT * FROM import_review_product_previews WHERE revision_id = ?').get(refreshRevision.id)
+  refreshDb.close()
+  const subjects = computeSealedReviewSubjects({
+    directory: refreshStore.revisionDirectory(refreshRevision.id), revision: refreshRevision, preview,
+    storedFiles: refreshRevision.manifest.files,
+  })
+  assert.equal(subjects.target?.ok, true, JSON.stringify(subjects.target ?? subjects.baseline))
+  assert.equal(subjects.target.subjectDigest, subjects.baseline.subjectDigest)
+
   const reviewFiles = reviewBundleFilePaths(fixture.reviewRoot).map(file => {
     const data = projection.frozenProducts.bytes[file.path]
     return { ...file, ...(data ? { sha256: digest(data), byteLength: data.length } : {}) }
