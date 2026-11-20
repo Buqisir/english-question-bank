@@ -2935,6 +2935,9 @@ function appendOcrReadingSourceEmphasis(source, raw, documentsById, ocrSourceByt
       if (join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2) delete group.sourceSpanRefsByTarget[`content_node:${right.nodeId}`]
       left.inlines.push(separator, ...right.inlines)
       group.content.blocks.splice(index + 1, 1)
+      if (group.family === 'continuation-writing') {
+        group.variant.materialBlockRefs = group.variant.materialBlockRefs.filter(id => id !== right.nodeId)
+      }
     }
   } catch (error) {
     issues.push(adapterIssue((error.code === 'MATERIALIZATION_PARAGRAPH_JOIN_PRODUCER_ISSUE' || error.code?.startsWith('OCR_STRUCTURED_ANSWER_REGION_'))

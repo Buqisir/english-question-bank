@@ -288,6 +288,61 @@ test('sealed v2 Reading/cloze/grammar joins preserve blanks, marks, pointers and
     ocrSourceBytes: { ...input.ocrSourceBytes, confirmationBytes: encode(split) } }).issues.length)
 })
 
+test('seven-choice and continuation joins preserve inline order and the writing response', async () => {
+  const fixture = await makeSyntheticNck1OcrFixture({ crossPageSevenAndContinuation: true })
+  const confirmation = { ...fixture.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v2' }
+  const produced = produceNck1OcrMaterialization({ paperId: fixture.paperId,
+    documents: fixture.sourceDocuments, evidence: fixture.evidence, confirmation })
+  assert.equal(produced.disposition, 'ready_for_verification', JSON.stringify(produced.issues))
+  const m = produced.materialization
+  const receipt = encode({ paperId: m.paperId, revisionId: 'sealed-ocr-revision', confirmationId: 'sealed-confirmation',
+    reviewerKind: 'import_agent', sourceSetDigest: confirmation.sourceSetDigest, evidenceDigest: confirmation.evidenceDigest, confirmation })
+  let input = { kind: 'nck1-source-materialization', materializationBytes: encode(m),
+    documents: fixture.sourceDocuments.map(d => ({ documentId: d.documentId, bytes: d.bytes })),
+    media: produced.mediaFiles, ocrSourceBytes: { evidenceBytes: encode(fixture.evidence), confirmationBytes: encode(confirmation) } }
+  const original = importCanonicalCandidate(input)
+  assert.deepEqual(original.issues, [])
+  const joins = []
+  for (const [family, starts] of [
+    ['seven-choices', ['A short guide has 37.', 'They can practice']],
+    ['continuation-writing', ['The owner name was written', 'on its first page']],
+  ]) {
+    const group = m.groups.find(g => g.family === family)
+    const items = confirmation.documents[0].pages.flatMap(page => page.orderedItems)
+    const itemIds = starts.map(start => items.find(item => item.text.startsWith(start)).itemId)
+    const plan = planMaterializationParagraphJoin(input, receipt,
+      { groupId: group.groupId, itemIds, reason: '原页续行未缩进，同一自然段' })
+    const applied = applyMaterializationParagraphJoinPlan(input, receipt, plan, { confirmed: true })
+    assert.deepEqual(applied.materialization.groups, m.groups)
+    assert.deepEqual(applied.materialization.answers, m.answers)
+    input = { ...input, materializationBytes: applied.materializationBytes }
+    joins.push(plan.relation)
+  }
+  const imported = importCanonicalCandidate(input)
+  assert.deepEqual(imported.issues, [])
+  const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
+  assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
+  for (const { groupId, fragments } of joins) {
+    const before = original.candidate.interpretation.groups.find(g => g.groupId === groupId)
+    const after = imported.candidate.interpretation.groups.find(g => g.groupId === groupId)
+    const expected = structuredClone(before.content)
+    const index = expected.blocks.findIndex(block => block.nodeId === fragments[0].blockId)
+    const [left, right] = expected.blocks.slice(index, index + 2)
+    const separator = after.content.blocks[index].inlines[left.inlines.length]
+    assert.equal(separator.text, ' ')
+    if (before.family === 'seven-choices') {
+      assert.equal(left.inlines[1].blankId, `blank:${m.paperId}:37`)
+      assert.equal(right.inlines[0].text, 'They can practice every day.')
+    } else {
+      before.variant.materialBlockRefs = before.variant.materialBlockRefs.filter(id => id !== right.nodeId)
+    }
+    left.inlines.push(separator, ...right.inlines)
+    expected.blocks.splice(index + 1, 1)
+    assert.deepEqual(after.content, expected)
+    assert.deepEqual(after.variant, before.variant)
+  }
+})
+
 test('v12 cross-page join admits a bound listening-count correction and rejects digest drift', async () => {
   const fixture = await makeSyntheticNck1OcrFixture({ listening: true, crossPageParagraph: true })
   const confirmation = { ...fixture.confirmation, schemaVersion: 'nck1-ocr-source-confirmation-v3' }

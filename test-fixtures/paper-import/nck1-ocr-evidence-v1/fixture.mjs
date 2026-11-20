@@ -164,6 +164,7 @@ export async function makeSyntheticNck1OcrFixture({
   paperId = 'paper-synthetic-ocr-evidence',
   crossPageParagraph = false,
   crossPageBlanks = false,
+  crossPageSevenAndContinuation = false,
   listening = false,
 } = {}) {
   const textFixture = await makeSyntheticNck1PdfFixture({
@@ -171,6 +172,7 @@ export async function makeSyntheticNck1OcrFixture({
     includeExtractionCases: false,
     crossPageParagraph,
     crossPageBlanks,
+    crossPageSevenAndContinuation,
     listening,
   })
   const structures = textFixture.sourceDocuments.map((document) => ({

@@ -2,10 +2,22 @@ import { digestJson, exactKeys } from './stable.mjs'
 
 export const CROSS_PAGE_PARAGRAPH_JOIN_VERSION = 'cross-page-paragraph-join-v1'
 export const CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2 = 'cross-page-paragraph-join-v2'
+export const CROSS_PAGE_PARAGRAPH_JOIN_FAMILIES = Object.freeze([
+  'reading', 'seven-choices', 'cloze', 'grammar-fill', 'continuation-writing',
+])
 const nonempty = value => typeof value === 'string' && value.trim().length > 0
 const digest = value => /^sha256:[a-f0-9]{64}$/u.test(value || '')
 const same = (a, b) => digestJson(a) === digestJson(b)
 export const paragraphFragmentText = block => block?.content?.map(part => part.text).join('')
+
+export function isContinuationMaterialBlock(group, block) {
+  const task = group.writingTask
+  if (!task?.prompt || !Array.isArray(task.material)) return false
+  const prompt = group.blocks.findIndex(candidate => candidate.kind === 'paragraph'
+    && paragraphFragmentText(candidate) === task.prompt)
+  const index = group.blocks.indexOf(block)
+  return prompt >= 0 && index > prompt && index <= prompt + task.material.length
+}
 
 // No blank sentinel/number reconstruction: source replay owns blank identity.
 export const paragraphJoinBoundaryNeedsTrim = inlines => {
@@ -52,7 +64,7 @@ export function resolveCrossPageParagraphJoins(materialization) {
       || !Array.isArray(join.fragments) || join.fragments.length !== 2) reject('closed relation or explicit source review is invalid')
     ids.add(join.joinId)
     const groups = materialization.groups?.filter(group => group.groupId === join.groupId) || []
-    if (groups.length !== 1 || !(mixed ? ['reading', 'cloze', 'grammar-fill'] : ['reading']).includes(groups[0].family)) reject('requires exactly one supported source group')
+    if (groups.length !== 1 || !(mixed ? CROSS_PAGE_PARAGRAPH_JOIN_FAMILIES : ['reading']).includes(groups[0].family)) reject('requires exactly one supported source group')
     const group = groups[0]
     const blocks = join.fragments.map(fragment => {
       if (!exactKeys(fragment, ['blockId', 'itemId', 'observationIds', 'source'])
@@ -66,7 +78,9 @@ export function resolveCrossPageParagraphJoins(materialization) {
       if (matches.length !== 1 || block.kind !== 'paragraph' || block.role !== 'body'
         || !block.content?.length || block.content.some(part => part.kind === 'text'
           ? !(mixed ? typeof part.text === 'string' && part.text.length > 0 : nonempty(part.text))
-          : !(mixed && group.family !== 'reading' && part.kind === 'blank_ref' && nonempty(part.blankId)))
+          : !(mixed && !['reading', 'continuation-writing'].includes(group.family)
+            && part.kind === 'blank_ref' && nonempty(part.blankId)))
+        || (group.family === 'continuation-writing' && !isContinuationMaterialBlock(group, block))
         || block.source?.kind !== 'page_region' || !same(block.source, fragment.source)) reject('fragment must preserve one source-backed body paragraph')
       const flatten = blocks => blocks.flatMap(block => block.kind === 'framed_columns'
         ? block.columns.flatMap(column => flatten(column.blocks)) : [block])

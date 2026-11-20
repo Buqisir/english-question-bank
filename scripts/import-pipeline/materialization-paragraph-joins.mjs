@@ -1,6 +1,6 @@
 import { digestJson, exactKeys, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { validateNck1SourceMaterialization } from '../../shared/paper-canonical/nck1SourceMaterialization.mjs'
-import { CROSS_PAGE_PARAGRAPH_JOIN_VERSION, CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2, paragraphJoinSourceLocator } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
+import { CROSS_PAGE_PARAGRAPH_JOIN_FAMILIES, CROSS_PAGE_PARAGRAPH_JOIN_VERSION, CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2, paragraphJoinSourceLocator } from '../../shared/paper-canonical/crossPageParagraphJoin.mjs'
 
 export const PARAGRAPH_JOIN_PLAN_VERSION = 'cross-page-paragraph-join-plan-v2'
 const parse = bytes => JSON.parse(new TextDecoder().decode(bytes))
@@ -36,7 +36,7 @@ export function planMaterializationParagraphJoin(input, receiptBytes, { groupId,
   if (!Array.isArray(itemIds) || itemIds.length !== 2 || itemIds[0] === itemIds[1]
     || typeof reason !== 'string' || !reason.trim()) throw new Error('Specify two distinct complete item IDs and the original-page review reason')
   const groups = materialization.groups.filter(group => group.groupId === groupId)
-  if (groups.length !== 1 || !['reading', 'cloze', 'grammar-fill'].includes(groups[0].family)) throw new Error('Select exactly one Reading, cloze or grammar-fill group')
+  if (groups.length !== 1 || !CROSS_PAGE_PARAGRAPH_JOIN_FAMILIES.includes(groups[0].family)) throw new Error('Select exactly one supported source group')
   const before = []
   const fragments = itemIds.map(itemId => {
     const items = confirmation.documents.flatMap(document => document.pages.flatMap(page =>
