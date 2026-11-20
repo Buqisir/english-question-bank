@@ -222,6 +222,14 @@
   text-align: center;
 }
 
+/* 目录两种键（部分名、题组）原来用浏览器默认的 1px 焦点环，换成 DESIGN.md §4 的墨焦点环（UI 体检 2026-11-20）。
+ * 面板左右各有 6px 内衬，外扩 4px 的环不会被目录栏的 overflow 切掉。 */
+.paper-browse-rail-part-head:focus-visible,
+.paper-browse-rail-group:focus-visible {
+  outline: 2px solid var(--eqb-color-action);
+  outline-offset: 2px;
+}
+
 .paper-browse-rail-group-label {
   display: flex;
   align-items: center;
@@ -741,6 +749,20 @@
   .paper-browse-group-actions {
     opacity: 1;
     pointer-events: auto;
+  }
+}
+
+/* 右边放不下「加入」时收进卷面（UI 体检 2026-11-20：640 宽时页面横向多出 91px，200% 缩放就是这个宽度）。
+ * 键在卷面右边 16px 处、约 111px 宽，题组离纸边 91px 页边距，要整块落在内容栏里，内容栏得比纸宽 2×(16+111−91)=72px，
+ * 即 794+72=866px；1440 以下内容栏 = 视口 − 192（左右内衬 48、目录 120、间距 24），所以 1058 以下收进来。
+ * 700 以下页边距只剩 24px、内容栏比纸还窄，一定放不下，同一条管住。屏幕放大（--paper-screen-zoom）只在更宽时才大于 1。
+ * 收进来以后排在题组最上面、靠右，占一行；会不会显照旧（悬停 / 焦点在组内 / 触屏常显），不显时也占着位，悬停时卷面不跳。 */
+@media screen and (max-width: 1057.98px) {
+  .paper-browse-group-actions {
+    position: static;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
   }
 }
 

@@ -4314,7 +4314,8 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
       {/* 字段构件第二轮（2026-11-15）：原来是套了 .ghost-button 的原生下拉，换成 shared-ui/SelectField 小号（28，和旁边的小号键同高），
           标签「PDF 版本」只给读屏（原来是 aria-label，看得见的字没有）。用不了的版本服务器不列出来（usePaperPdfProducts 只拿到能用的），
           没有「为什么用不了」可写，所以用原生下拉，不用 OptionSelectField。 */}
-      <SelectField
+      {/* PDF 版本还没读到（出错或在读）时不放下拉，和 PaperReviewControls 一样：原来是一个空框带箭头，点开什么都没有（UI 体检 2026-11-20）。 */}
+      {pdfEditions.length > 0 && <SelectField
         className="paper-browse-pdf-edition"
         label="PDF 版本"
         hideLabel
@@ -4326,28 +4327,26 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           setAnalysisPdfError('')
         }}
         options={pdfEditions.map((edition) => ({ value: edition, label: PAPER_PDF_PRODUCTS[edition] }))}
-      />
+      />}
       {/* 构件厂第 4 步第九页（2026-11-14，提案 · 单一来源）：「PDF Screen」换成 ButtonLink（淡墨小号，和旁边「下载 PDF」一样）。
           仍是 <a>，中键开新标签、复制地址都还在。原来 .ghost-button 没去掉链接的下划线，换了以后没有下划线。
           Owner 2026-11-14 决定 #13：会开新标签，前面加图标库的外链图标（对读屏隐藏），不恢复下划线；
           读屏名字靠只给读屏看的一句补上「在新标签页打开」，看得见的字不变。 */}
       {pdfEdition && canonicalConsumption?.publicationDigest && <ButtonLink size="sm" icon={<ExternalLink size={16} aria-hidden="true" />} href={paperProductPdfUrl(paperId, pdfEdition, canonicalConsumption.publicationDigest)} target="_blank" rel="noopener noreferrer">PDF Screen<span className="visually-hidden">（在新标签页打开）</span></ButtonLink>}
-      {/* 生成中用 Button 的 busy（保持原样、点了不触发、读屏念「忙」），不再整键变淡；没有版本时才禁用。 */}
-      <Button
+      {/* 生成中用 Button 的 busy（保持原样、点了不触发、读屏念「忙」），不再整键变淡。
+          没有可下的版本就不放这个键，和 PaperReviewControls 的「查看 PDF」一样（原来是一个按不动的灰键，UI 体检 2026-11-20）。 */}
+      {pdfEdition && <Button
         size="sm"
         busy={analysisPdfBusy}
         // 图标自己演「正在做」（下载图标的箭头往复），不换成所以点（DESIGN.md §5 Waiting「图标自己演」）。
         iconShowsBusy
-        disabled={!pdfEdition}
         icon={<DownloadFeedbackIcon size={16} icon="paper" working={analysisPdfBusy} />}
         onClick={() => void downloadPaperProduct()}
       >
         {/* 2026-11-15 第二轮：生成中字不换（原来换成「生成 PDF 中…」，键会变宽），图标自己演，读屏靠 busy 念「忙」。 */}
         下载 PDF
-      </Button>
-      {pdfProductsError && <span role="alert">{pdfProductsError}{' '}
-        <Button size="sm" onClick={retryPdfProducts}>刷新 PDF 版本</Button>
-      </span>}
+      </Button>}
+      {/* 「PDF 版本加载失败」不再挤在顶栏里（原来是 16px 墨字加一个键，比卷名还响），挪到顶栏下面那一行共用 Notice，见下方 pdfProductsError。 */}
     </>
   ) : lectureToggle
 
@@ -4449,6 +4448,10 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
           10 秒内什么都不加；这一行出来会把卷面往下推一行，见 migrate-waiting-4/README.md。 */}
       {analysisPdfSlow && <Notice kind="waiting" className="paper-browse-export-wait">正在生成 PDF，比平时慢，可以先去做别的</Notice>}
       {analysisPdfError && <Notice kind="error" className="paper-browse-export-error">{analysisPdfError}</Notice>}
+      {/* PDF 版本没读到：和 PaperReviewControls 一样用共用 Notice（出错图标 + 出错色小字，role=alert 由 Notice 给），
+          「刷新 PDF 版本」是 Notice 自带的小号键；放在导出出错那一行的位置，不进顶栏。只在顶栏有 PDF 控件时出（非审阅、非内嵌）。 */}
+      {!embeddedReview && !reviewRevision && pdfProductsError && <Notice kind="error" className="paper-browse-export-error"
+        action={{ label: '刷新 PDF 版本', onClick: retryPdfProducts }}>{pdfProductsError}</Notice>}
       {analysisFontError && !lectureOpen && <Notice kind="error" className="paper-browse-export-error">{analysisFontError}</Notice>}
       <div
         className={`paper-browse-shell${
@@ -4472,7 +4475,9 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
         <div className="paper-browse-content" ref={scrollerRef} style={paperBrowseContentMergedStyle}>
           <div className="paper-browse-zoom">
             {showListeningOpening && (
-              <header className="canonical-paper-opening" data-canonical-paper-opening="">
+              // 卷头是 div 不是 <header>：它在 main 地标里面，用 <header> 会多出一个放错地方的 banner（axe landmark-banner-is-top-level）。
+              // 样子只靠 class，Print 那边的卷头（print-renderer）不归这里管。
+              <div className="canonical-paper-opening" data-canonical-paper-opening="">
                 {mockPaperCoverName(canonicalConsumption?.paperSourceType, asset.paper.title, canonicalConsumption?.paperHeaderTitle) && (
                   <p className="canonical-paper-mock-name" data-canonical-mock-name="">
                     {mockPaperCoverName(canonicalConsumption?.paperSourceType, asset.paper.title, canonicalConsumption?.paperHeaderTitle)}
@@ -4483,7 +4488,7 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
                   <strong>注意事项：</strong>
                   <ol>{listeningOpening.notices.map((notice) => <li key={notice}>{notice}</li>)}</ol>
                 </div>
-              </header>
+              </div>
             )}
             {grammarFillGeometryFixture && (
               <style data-canonical-grammar-fill-geometry-fixture={grammarFillGeometryVariantId}>
