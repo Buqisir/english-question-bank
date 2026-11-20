@@ -29,14 +29,14 @@ function equivalent(a, b) {
 }
 
 // The match wins ties so a shared word remains an anchor between changes.
-export function align(source, heard) {
+export function align(source, heard, matchesWord = equivalent) {
   const trace = [new Uint8Array(heard.length + 1).fill(3)]
   let previous = Array.from({ length: heard.length + 1 }, (_, i) => i)
   for (let i = 1; i <= source.length; i++) {
     const row = [i], moves = new Uint8Array(heard.length + 1)
     moves[0] = 2
     for (let j = 1; j <= heard.length; j++) {
-      const match = equivalent(source[i - 1], heard[j - 1])
+      const match = matchesWord(source[i - 1], heard[j - 1])
       const costs = [match ? previous[j - 1] : Infinity, previous[j - 1] + 1, previous[j] + 1, row[j - 1] + 1]
       moves[j] = costs.indexOf(Math.min(...costs))
       row[j] = costs[moves[j]]
@@ -53,7 +53,7 @@ export function align(source, heard) {
     if (move !== 2) j--
     steps.push({ start: i, end, heardStart: j, heardEnd, match: move === 0 })
   }
-  const changes = []
+  const changes = [], matches = []
   const sharedSpan = (words, index) => words[index - 1]?.end > words[index]?.start
   let block = null
   for (const step of steps.reverse()) {
@@ -61,13 +61,30 @@ export function align(source, heard) {
     else Object.assign(block, { end: step.end, heardEnd: step.heardEnd, match: block.match && step.match })
     // Expanded tokens must travel with every token occupying the same raw span.
     if (sharedSpan(source, step.end) || sharedSpan(heard, step.heardEnd)) continue
+    if (block.match) matches.push(block)
     const last = changes.at(-1)
     if (!block.match && last?.end === block.start && last.heardEnd === block.heardStart) {
       Object.assign(last, { end: block.end, heardEnd: block.heardEnd })
     } else if (!block.match) changes.push(block)
     block = null
   }
-  return { changes, similarity: 1 - previous[heard.length] / Math.max(source.length, heard.length, 1) }
+  return { changes, matches, similarity: 1 - previous[heard.length] / Math.max(source.length, heard.length, 1) }
+}
+
+export function preserveSourceForms(before, after, speakerLabels) {
+  const source = units(before.replace(speakerLabels, label => ' '.repeat(label.length)))
+  const heard = units(after)
+  const { matches } = align(source, heard, (a, b) => equivalent(a, b) || nearProperName([a], [b]))
+  const rawEnd = (text, word) => word.end + Number(/^(?:dr|mr|mrs)$/iu.test(word.expressionText) && text[word.end] === '.')
+  // Use aligned raw spans so equivalent expressions can cover different numbers of written words.
+  for (const { start, end, heardStart, heardEnd } of matches.reverse()) {
+    const original = before.slice(source[start].start, rawEnd(before, source[end - 1]))
+    const first = heard[heardStart].start, last = rawEnd(after, heard[heardEnd - 1])
+    if (original.toLowerCase() !== after.slice(first, last).toLowerCase()) {
+      after = after.slice(0, first) + original + after.slice(last)
+    }
+  }
+  return after
 }
 
 export function timedReading(runs, source) {

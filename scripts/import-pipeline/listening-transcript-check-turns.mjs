@@ -1,7 +1,30 @@
 import { listeningEditEvidenceMatch, listeningEditSpeakerLabels, listeningEditWords,
   touchesListeningSpeakerBoundary } from '../../server/paper-import/spellingReview.mjs'
 import { alignListeningSentences } from './listening-sentence-align.mjs'
-import { align } from './listening-transcript-check-alignment.mjs'
+import { align, preserveSourceForms, timedReading } from './listening-transcript-check-alignment.mjs'
+
+const spokenNumber = String.raw`(?:\d{1,2}|(?:twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)(?:[- ](?:one|two|three|four|five|six|seven|eight|nine))?|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen)`
+const chineseNumber = '[一二两三四五六七八九十0-9]+'
+const announcementStart = String.raw`(?:^|(?<=[.!?。！？:：]))\s*(?:`
+  + String.raw`(?:text|questions?)\s+${spokenNumber}(?:\s*(?:to|through|[-–])\s*${spokenNumber})?`
+  + String.raw`|第\s*${chineseNumber}\s*(?:段|小?题)`
+  + String.raw`|听下面(?:\s*${chineseNumber}\s*段)?的?(?:对话|独白|录音)(?:\s*[,，]\s*回答第\s*${chineseNumber}(?:\s*(?:至|到|和)\s*第?\s*${chineseNumber})?\s*小?题)?`
+  + String.raw`)`
+const announcement = new RegExp(announcementStart + String.raw`\s*(?:[.!?。！？:：]+|$)`, 'giu')
+const unclearAnnouncement = new RegExp(announcementStart + String.raw`(?=\s)`, 'iu')
+
+function withoutAnnouncements(runs) {
+  const text = runs.map(run => run.text.trim()).join(' ')
+  const masked = text.replace(announcement, value => ' '.repeat(value.length))
+  if (unclearAnnouncement.test(masked)) return null
+  let offset = 0
+  return runs.flatMap(run => {
+    const end = offset + run.text.trim().length
+    const spoken = masked.slice(offset, end).trim()
+    offset = end + 1
+    return spoken ? [{ ...run, text: spoken }] : []
+  })
+}
 
 function sourceTurns(text) {
   const turns = []
@@ -41,23 +64,23 @@ function turnTimes(group, text, engines, turns) {
   return times
 }
 
-function timedTurns(reading, times, { startSeconds, endSeconds }) {
-  const cuts = times.slice(1).map((time, i) => (times[i].end + time.start) / 2 - startSeconds)
-  const edges = [0, ...cuts, endSeconds - startSeconds]
-  const turns = times.map((_, i) => ({ words: [], first: -1, last: -1, startSeconds: edges[i] + startSeconds,
-    endSeconds: i === times.length - 1 ? endSeconds : edges[i + 1] + startSeconds }))
-  let turn = 0, previous = -Infinity
+function timedTurns(reading, times, { startSeconds }) {
+  const turns = times.map(({ start, end }) => ({ words: [], first: -1, last: -1, startSeconds: start, endSeconds: end }))
+  let turn = 0, previous = -Infinity, covered = 0
   for (const [index, word] of reading.words.entries()) {
-    const middle = (word.startSeconds + word.endSeconds) / 2
-    if (!Number.isFinite(middle) || middle < previous || middle < 0 || middle >= edges.at(-1)) return null
+    if (/[\p{L}\p{N}]/u.test(reading.text.slice(covered, word.start))) return null
+    covered = Math.max(covered, word.end)
+    const middle = startSeconds + (word.startSeconds + word.endSeconds) / 2
+    if (!Number.isFinite(middle) || middle < previous) return null
     previous = middle
-    while (middle >= edges[turn + 1]) turn++
+    while (middle >= turns[turn]?.endSeconds) turn++
     const bucket = turns[turn]
+    if (!bucket || middle < bucket.startSeconds) return null
     if (!bucket.words.length) bucket.first = index
     bucket.words.push(word)
     bucket.last = index
   }
-  if (turns.some(bucket => !bucket.words.length)) return null
+  if (turns.some(bucket => !bucket.words.length) || /[\p{L}\p{N}]/u.test(reading.text.slice(covered))) return null
   // A single written word can expand to several normalized units. Keep them together.
   if (turns.slice(1).some(bucket => reading.words[bucket.first - 1].end > reading.words[bucket.first].start)) return null
   return turns
@@ -70,7 +93,7 @@ function turnSpan(text, turn, reading, bucket, lastTurn) {
   const mark = reading.text.slice(end, next).trimEnd()
   if (!lastTurn && !/^[.!?]+["'’”)\]]*$/u.test(mark)) return null
   let before = text.slice(turn.start, turn.end)
-  let after = reading.text.slice(first, end) + mark
+  let after = preserveSourceForms(before, reading.text.slice(first, end) + mark, listeningEditSpeakerLabels)
   if (touchesListeningSpeakerBoundary(text, { start: turn.start, before })) {
     // Admission protects the punctuation in front of a new speaker label too.
     const tail = before.match(/[^\p{L}\p{N}]+$/u)?.[0]
@@ -104,10 +127,13 @@ export function rewriteTurns(group, text, readings, engines, audioSha256) {
       evidence: Object.fromEntries(readings.map(reading => [reading.engine, reading.text.trim()])) }],
   })
   const turns = sourceTurns(text)
-  const times = turns?.length && turnTimes(group, text, engines, turns)
+  const runs = readings.map(({ engine }) => [engine, withoutAnnouncements(engines[engine][group.key] ?? [])])
+  if (runs.some(([, spoken]) => !spoken)) return manual('疑似报幕的归属不明，请整段听核。')
+  const cleaned = Object.fromEntries(runs.map(([engine, spoken]) => [engine, { [group.key]: spoken }]))
+  const times = turns?.length && turnTimes(group, text, cleaned, turns)
   if (!times?.length) return manual('逐句时间不足，无法确认全部说话轮次，请整段听核。')
-  const apple = readings.find(reading => reading.engine === 'apple')
-  const parakeet = readings.find(reading => reading.engine === 'parakeet-v2')
+  const apple = timedReading(cleaned.apple[group.key], [])
+  const parakeet = timedReading(cleaned['parakeet-v2'][group.key], [])
   const appleTurns = timedTurns(apple, times, occurrence)
   const recorded = timedTurns(parakeet, times, occurrence)
   if (!appleTurns || !recorded) return manual('录音词无法完整归到说话轮次，请整段听核。')
