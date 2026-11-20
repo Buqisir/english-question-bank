@@ -1581,7 +1581,6 @@ function PaperSurfaceQuestionItem({
           type="button"
           className="ps-question-stem-button"
           aria-pressed={isActive}
-          aria-label={`Focus question ${question.questionNo}`}
           style={clozeChoiceMapping
             ? {
                 display: 'grid',
@@ -1663,7 +1662,6 @@ function PaperSurfaceQuestionItem({
             type="button"
             className="ps-question-stem-button"
             aria-pressed={isActive}
-            aria-label={`Focus question ${question.questionNo}`}
             style={question.canonicalPlacement?.questionStemStartPt !== undefined
               ? {
                   display: 'grid',
