@@ -1,5 +1,5 @@
 /**
- * A list container whose hover highlight glides between items instead of
+ * A list container whose hover highlight stays on the nearest item instead of
  * blinking at gaps. Wraps `useFluidHover`; the highlight is the container's
  * `::before` (see `.fluid-hover-list` in App.css), so the children stay
  * whatever they already are — `<li>`s, buttons, chips.
@@ -17,8 +17,7 @@ type FluidHoverListOwnProps = {
   itemSelector: string
   hitArea?: (item: HTMLElement) => HTMLElement
   gapClick?: boolean | number
-  glideGapMax?: number
-  glide?: boolean
+  gapMax?: number
   className?: string
   children?: ReactNode
   /** Optional outside ref to the container (menus that watch outside clicks, etc.). */
@@ -34,14 +33,13 @@ export function FluidHoverList({
   itemSelector,
   hitArea,
   gapClick,
-  glideGapMax,
-  glide,
+  gapMax,
   className,
   children,
   ref: outerRef,
   ...rest
 }: FluidHoverListProps) {
-  const { containerRef, handlers } = useFluidHover<HTMLElement>({ axis, itemSelector, hitArea, gapClick, glideGapMax, glide })
+  const { containerRef, handlers } = useFluidHover<HTMLElement>({ axis, itemSelector, hitArea, gapClick, gapMax })
   const setRef = useCallback((node: HTMLElement | null) => {
     containerRef.current = node
     if (typeof outerRef === 'function') outerRef(node)

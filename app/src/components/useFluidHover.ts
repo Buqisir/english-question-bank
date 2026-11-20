@@ -1,14 +1,19 @@
 /**
- * Fluid hover — one shared highlight per list that glides to the item
- * nearest the cursor instead of blinking off at every gap.
+ * Fluid hover — one shared highlight per list that sits on the item nearest
+ * the cursor instead of blinking off at every gap.
  *
  * Own implementation of the Fluid Functionalism "Fluid Hover" idea
  * (https://www.fluidfunctionalism.com/docs/fluid-hover), written for this
  * app's plain-CSS stack: no Tailwind, no framer-motion, no extra DOM. The
  * highlight is the container's `::before`, driven by four CSS custom
- * properties (`--fh-x/--fh-y/--fh-w/--fh-h`) and `--fh-o` for opacity; the
- * travel is a plain CSS transition on `transform`, so `prefers-reduced-motion`
- * is honoured in App.css, not here.
+ * properties (`--fh-x/--fh-y/--fh-w/--fh-h`) and `--fh-o` for opacity.
+ *
+ * The highlight never travels (Owner 2026-11-20, DESIGN.md §5 Motion): on each
+ * item it appears in place, and only its opacity animates — in when the
+ * pointer enters the list, out when it leaves. Between items it moves at once,
+ * like an ordinary hover. The pointer already shows where the hand is; a block
+ * sliding after it was a second moving thing saying the same, and on fast
+ * moves it swept across the rows in between.
  *
  * Algorithm (the whole of it): measure item boxes once per pointer entry
  * (and on resize), then on every move light the item with the smallest
@@ -43,19 +48,12 @@ export type FluidHoverOptions = {
    */
   gapClick?: boolean | number
   /**
-   * The highlight never glides across a gap between neighbouring items wider
-   * than this many px — something else sits there (an avatar and a name in
-   * the topbar). Over such a gap it fades out where it is; on the next item it
-   * appears in place. Only for `x` and `y` lists; off when left out.
+   * Over a gap between neighbouring items wider than this many px nothing is
+   * lit — something else sits there (an avatar and a name in the topbar), so
+   * the highlight fades out instead of staying on the nearer item. Only for
+   * `x` and `y` lists; off when left out.
    */
-  glideGapMax?: number
-  /**
-   * The highlight slides from item to item (default). `false`: it appears in
-   * place on each item and only fades, never travels — for lists where a
-   * sliding block would sweep across rows of content on the way (DESIGN.md §5
-   * 动效角色「滑块」).
-   */
-  glide?: boolean
+  gapMax?: number
 }
 
 export type FluidHoverHandlers = {
@@ -75,7 +73,6 @@ export type FluidHover<C extends HTMLElement> = {
 type Rect = { left: number; top: number; width: number; height: number }
 
 const ACTIVE_ATTR = 'data-fluid-hover-active'
-const FRESH_ATTR = 'data-fluid-hover-fresh'
 const DEFAULT_GAP_CLICK_PX = 6
 
 function contains(rect: Rect, x: number, y: number): boolean {
@@ -99,7 +96,7 @@ function gapAfter(rects: Rect[], index: number, axis: 'x' | 'y'): number {
 }
 
 export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions): FluidHover<C> {
-  const { axis = 'y', itemSelector, isItemDisabled, hitArea, gapClick = true, glideGapMax, glide = true } = options
+  const { axis = 'y', itemSelector, isItemDisabled, hitArea, gapClick = true, gapMax } = options
   const containerRef = useRef<C>(null)
   const itemsRef = useRef<HTMLElement[]>([])
   const rectsRef = useRef<Rect[]>([])
@@ -108,17 +105,7 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
   const insideRef = useRef(false)
   const shownRef = useRef(false)
   const gapClickPx = gapClick === false ? 0 : gapClick === true ? DEFAULT_GAP_CLICK_PX : gapClick
-  const glideAxis = axis === 'xy' || glideGapMax === undefined ? null : axis
-
-  /** Some gap between items `from` and `to` (in list order) is too wide to glide across. */
-  const crossesWideGap = useCallback((from: number, to: number): boolean => {
-    if (glideAxis === null || glideGapMax === undefined) return false
-    const rects = rectsRef.current
-    for (let index = Math.min(from, to); index < Math.max(from, to); index += 1) {
-      if (gapAfter(rects, index, glideAxis) > glideGapMax) return true
-    }
-    return false
-  }, [glideAxis, glideGapMax])
+  const gapAxis = axis === 'xy' || gapMax === undefined ? null : axis
 
   const measure = useCallback(() => {
     const container = containerRef.current
@@ -144,8 +131,7 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
    * Marks `index` active and shows the highlight on it. With `visible: false`
    * the item stays active but the highlight fades out where it is — used when
    * the pointer is inside an item's extra hit area (an expanded body) rather
-   * than on the box the highlight paints. Showing after a hidden or absent
-   * highlight appears in place instead of travelling from the last rest.
+   * than on the box the highlight paints.
    */
   const paint = useCallback((index: number | null, visible = true) => {
     const container = containerRef.current
@@ -160,21 +146,13 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
       shownRef.current = false
       return
     }
-    const fresh = !glide || !shownRef.current || (previous !== null && index !== null && crossesWideGap(previous, index))
-    if (fresh) container.setAttribute(FRESH_ATTR, '')
     container.style.setProperty('--fh-x', `${rect.left}px`)
     container.style.setProperty('--fh-y', `${rect.top}px`)
     container.style.setProperty('--fh-w', `${rect.width}px`)
     container.style.setProperty('--fh-h', `${rect.height}px`)
     container.style.setProperty('--fh-o', '1')
     shownRef.current = true
-    if (fresh) {
-      // Flushing computed style commits the transition-free position before
-      // the attribute comes off, so only the opacity animates.
-      void getComputedStyle(container, '::before').transform
-      container.removeAttribute(FRESH_ATTR)
-    }
-  }, [crossesWideGap, glide])
+  }, [])
 
   const toLocal = useCallback((clientX: number, clientY: number): [number, number] | null => {
     const container = containerRef.current
@@ -205,16 +183,16 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
       }
     })
     // Inside a wide gap (between two items, not past either end) nothing is lit.
-    if (best !== null && bestDistance > 0 && glideAxis !== null && glideGapMax !== undefined) {
-      const along = glideAxis === 'x' ? x : y
-      const start = (rect: Rect) => (glideAxis === 'x' ? rect.left : rect.top)
+    if (best !== null && bestDistance > 0 && gapAxis !== null && gapMax !== undefined) {
+      const along = gapAxis === 'x' ? x : y
+      const start = (rect: Rect) => (gapAxis === 'x' ? rect.left : rect.top)
       for (let index = 0; index < rects.length - 1; index += 1) {
-        const end = start(rects[index]) + (glideAxis === 'x' ? rects[index].width : rects[index].height)
-        if (along > end && along < start(rects[index + 1]) && gapAfter(rects, index, glideAxis) > glideGapMax) return null
+        const end = start(rects[index]) + (gapAxis === 'x' ? rects[index].width : rects[index].height)
+        if (along > end && along < start(rects[index + 1]) && gapAfter(rects, index, gapAxis) > gapMax) return null
       }
     }
     return best
-  }, [axis, glideAxis, glideGapMax])
+  }, [axis, gapAxis, gapMax])
 
   const remeasure = useCallback(() => {
     measure()
@@ -226,18 +204,15 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
    * transparent box still counts as scrollable overflow — after a viewport
    * shrink it can poke past the now-narrower container and widen the page.
    * So once the fade has ended (or the container resizes while the pointer is
-   * away) the box collapses to nothing, without a transition.
+   * away) the box collapses to nothing.
    */
   const collapse = useCallback(() => {
     const container = containerRef.current
     if (!container || shownRef.current) return
-    container.setAttribute(FRESH_ATTR, '')
     container.style.setProperty('--fh-x', '0px')
     container.style.setProperty('--fh-y', '0px')
     container.style.setProperty('--fh-w', '0px')
     container.style.setProperty('--fh-h', '0px')
-    void getComputedStyle(container, '::before').transform
-    container.removeAttribute(FRESH_ATTR)
   }, [])
 
   useEffect(() => {
