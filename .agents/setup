@@ -132,8 +132,8 @@ export PATH="$import_python/bin:$PATH"
 step "checking signal audio dependencies" python3 -c 'import numpy, scipy; print("signal audio ready")'
 
 if [[ "$analysis_only" == --import ]]; then
-  step "activating pnpm 10.28.1" corepack enable
-  step "preparing pnpm 10.28.1" corepack prepare pnpm@10.28.1 --activate
+  step "activating pnpm 10.34.9" corepack enable
+  step "preparing pnpm 10.34.9" corepack prepare pnpm@10.34.9 --activate
   step "installing locked preview dependencies" env CI=true pnpm -C app install --frozen-lockfile
   step "installing locked import dependencies" npm ci --prefix server --no-audit --no-fund
   step "preparing preview Chromium" pnpm -C app exec playwright install --with-deps --no-shell chromium
@@ -196,8 +196,8 @@ for directory in \
   sudo install -d -o "$ci_user" -g "$ci_user" -m 0700 "$directory"
 done
 
-step "activating pnpm 10.28.1" corepack enable
-step "preparing pnpm 10.28.1" corepack prepare pnpm@10.28.1 --activate
+step "activating pnpm 10.34.9" corepack enable
+step "preparing pnpm 10.34.9" corepack prepare pnpm@10.34.9 --activate
 step "installing app dependencies" pnpm -C app install --frozen-lockfile
 step "installing server dependencies" npm ci --prefix server
 

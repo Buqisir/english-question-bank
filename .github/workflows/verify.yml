@@ -29,7 +29,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
-          node-version: 24.21.0
+          node-version: 24.22.3
       - &verify_pr_checkout
         name: Verify natural PR checkout
         env:
@@ -74,7 +74,7 @@ jobs:
         name: Enable pinned pnpm
         run: &enable_pnpm_command |
           corepack enable
-          corepack prepare pnpm@10.28.1 --activate
+          corepack prepare pnpm@10.34.9 --activate
       - &install_app
         name: Install app dependencies
         run: &install_app_command pnpm -C app install --frozen-lockfile
@@ -191,7 +191,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
-          node-version: 24.21.0
+          node-version: 24.22.3
       - *verify_pr_checkout
       - *select_pack
       - *enable_pnpm
@@ -235,7 +235,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
-          node-version: 24.21.0
+          node-version: 24.22.3
       - *verify_pr_checkout
       - *enable_pnpm
       - *install_app
@@ -261,7 +261,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
-          node-version: 24.21.0
+          node-version: 24.22.3
       - *verify_pr_checkout
       - *enable_pnpm
       - *install_app
@@ -291,7 +291,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
-          node-version: 24.21.0
+          node-version: 24.22.3
       - *verify_pr_checkout
       - *select_pack
       - name: Plan isolated render lane
@@ -354,7 +354,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v4
         with:
-          node-version: 24.21.0
+          node-version: 24.22.3
       - *verify_pr_checkout
       - *select_pack
       - name: Plan isolated render lane
