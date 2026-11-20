@@ -45,9 +45,10 @@ import {
 } from '../../paperAssembly/basketPersistence'
 import { fetchSimilarPassages } from '../../services/similarQuestions.ts'
 import { describeError } from '../shared/errorCopy'
-import { usePresence } from '../shared/useToastPresence.ts'
+import { usePresence, useToastPresence } from '../shared/useToastPresence.ts'
 import { similarPassagesRecipeSummary, type SimilarPassagesRequestState } from '../similar-passages/SimilarPassagesPanel'
 import { DraftPaperRail } from './DraftPaperRail'
+import { useFlipRows } from './useFlipRows.ts'
 import { A3_FACE_NATIVE_WIDTH_PX, applyA3Imposition, buildA4PreviewHtml } from './draftPaperPreviewHtml'
 import { PAPER_PDF_EDITIONS, PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../../shared/paperPdfProducts.mjs'
 import './DraftPaperWorkbench.css'
@@ -245,6 +246,15 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // 不对称。与 toast/模态同走 usePresence，播完收起再卸载。收起走动效角色「离开」
   // （--motion-dismiss = 120ms，shared-ui/motion.css；2026-11-20 从 80 跟着改）。
   const moreMenuPresence = usePresence(moreMenuOpen, 120)
+  // 左栏目录的行在老师改顺序时走过去（Owner 2026-11-20）：改之前 railFlip.arm()，新顺序画出来以后演 FLIP。
+  // 只在老师的动作前面 arm（上移 / 下移、拖、删、撤销删、采用 / 撤回重排建议）；首次读、重新读不 arm，不演。
+  // 当前格的白底板跟着它那一行一起走。
+  const railFlip = useFlipRows<HTMLElement>(draftPaper?.items, {
+    itemSelector: '.draft-paper-rail-item',
+    keyAttribute: 'data-flip-key',
+    leaderSelector: '[aria-current="location"]',
+    followerSelector: '.draft-paper-rail-current',
+  })
   const titleSaveTimerRef = useRef<number | null>(null)
   const focusedOnceRef = useRef(false)
   const a4SheetRef = useRef<HTMLDivElement | null>(null)
@@ -257,6 +267,27 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // onLoad tick; it snaps to the real value almost immediately since srcDoc
   // content has no network round-trip.
   const iframeRef = useRef<HTMLIFrameElement | null>(null)
+  // 预览 iframe 的键盘焦点环：Chromium 里 Tab 进 iframe 时，iframe 元素既不算 :focus 也不算 :focus-visible，
+  // 也不收 focus 事件，父页面只收到一次 window blur、activeElement 变成这个 iframe（2026-11-20 实测）。
+  // 所以自己认「是按键进来的」：父页面刚有过按键、紧接着焦点进了 iframe，就画环；鼠标点进卷面（父页面没有按键）不画。
+  // 焦点回到父页面（window focus）就收。
+  const [previewKeyFocus, setPreviewKeyFocus] = useState(false)
+  useEffect(() => {
+    let lastKeydownAt = -Infinity
+    const onKeydown = () => { lastKeydownAt = performance.now() }
+    const onWindowBlur = () => {
+      if (iframeRef.current && document.activeElement === iframeRef.current) setPreviewKeyFocus(performance.now() - lastKeydownAt < 500)
+    }
+    const onWindowFocus = () => setPreviewKeyFocus(false)
+    window.addEventListener('keydown', onKeydown, true)
+    window.addEventListener('blur', onWindowBlur)
+    window.addEventListener('focus', onWindowFocus)
+    return () => {
+      window.removeEventListener('keydown', onKeydown, true)
+      window.removeEventListener('blur', onWindowBlur)
+      window.removeEventListener('focus', onWindowFocus)
+    }
+  }, [])
   const paperColRef = useRef<HTMLDivElement | null>(null)
   const scrollSettleCancelRef = useRef<(() => void) | null>(null)
   const [nativeContentHeight, setNativeContentHeight] = useState(1200)
@@ -724,9 +755,20 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
   // 卷面落后于左栏：分页还没按当前的题组表排出来，或者删、加的保存还没回来。
   const previewStale = renderedPaginationKey !== paginationKey || layoutSavesPending > 0
   const previewFailed = !previewStale && paginationStatus === 'error'
+  // 「正在重排」遮罩：出来照旧一下就在；走的时候淡出（动效角色「离开」，--motion-dismiss = 120ms），淡完再 hidden。
+  // 淡出那 120ms 里留着上一刻的样子（遮罩底色和那一行字），不先变空再淡。
+  const waitKind: 'waiting' | 'failed' | null = previewStale ? 'waiting' : previewFailed ? 'failed' : null
+  const waitPresence = useToastPresence(waitKind, 120)
+  const waitShown = waitKind ?? waitPresence.rendered
+  const waitLeaving = waitKind === null && waitShown !== null
   // 等待第五轮（2026-11-15）：重排等过 10 秒，那一行改说大概要多久。本地重排一次约 37 秒、每次都这么久，
   // 所以不说「比平时慢」（DESIGN.md §5 Waiting，午第四轮建议、协调人排进第五轮）。
   const reflowSlow = useSlowWait(previewStale)
+  // 淡出时这一行字照上一刻的留着：重排一完 reflowSlow 就回到 false，不留住的话淡出那一下字会先变短。
+  const waitLineText = useToastPresence(
+    previewStale ? (reflowSlow ? '正在重排卷面，大约要半分钟，旧卷面先留着' : '正在重排卷面，旧卷面先留着') : null,
+    120,
+  ).rendered
   // 等待第四轮（2026-11-15）：打开草稿卷、第一次排出卷面之前，纸的位置画灰块。两段（读草稿卷、分页）接成一段等，
   // 走同一个门槛：读完草稿卷换上真目录时，纸上的灰块不断、不重新数 300ms。
   const sheetPending = loadStatus === 'loading'
@@ -1250,6 +1292,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     clearReplaceUndo()
     const nextItems = reorderItems(draftPaper.items, itemId, direction)
     if (nextItems === draftPaper.items) return
+    railFlip.arm()
     setDraftPaper({ ...draftPaper, items: nextItems })
     void persistItems(nextItems)
   }
@@ -1261,6 +1304,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     const nextItems = moveItemTo(draftPaper.items, draggedItemId, targetId)
     setDraggedItemId(null)
     if (nextItems === draftPaper.items) return
+    railFlip.arm()
     setDraftPaper({ ...draftPaper, items: nextItems })
     void persistItems(nextItems)
   }
@@ -1302,6 +1346,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     try {
       const result = await deleteDraftPaperItem(draftPaper.id, item.id)
       if (!isCurrentDraft()) return
+      railFlip.arm()
       setDraftPaper(result.draftPaper)
       setTitleDraft(result.draftPaper.title)
       setRemovedItem({
@@ -1344,6 +1389,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
         placed: null,
         waitForGroupId: groupId,
       }
+      railFlip.arm()
       setDraftPaper(next)
       setTitleDraft(next.title)
       setRemovedItem(null)
@@ -1378,6 +1424,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     // than silently dropping an item.
     const coveredIds = new Set(orderedItems.map((item) => item.id))
     const nextItems = renumberItems([...orderedItems, ...draftPaper.items.filter((item) => !coveredIds.has(item.id))])
+    railFlip.arm()
     setDraftPaper({ ...draftPaper, items: nextItems })
     // 先在原处变成「已采用」，保存在后台走；保存失败就收起（报错走 saveError）。
     setReorderRestoredText(null)
@@ -1391,6 +1438,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
       setReorderUndoSnapshot(null)
       setReorderRestoredText(cardText)
       reorderFocusPendingRef.current = true
+      railFlip.arm()
       setDraftPaper((current) => (current ? { ...current, items: snapshot } : current))
       await persistItems(snapshot)
       return
@@ -1412,6 +1460,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
     if (!sameItems) return
     setReorderRestoredText(text)
     reorderFocusPendingRef.current = true
+    railFlip.arm()
     setDraftPaper({ ...draftPaper, items: snapshot })
     await persistItems(snapshot)
   }
@@ -1991,6 +2040,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
             onMoveItem={moveItem}
             onDeleteItem={removeFromRail}
             metaText={pagesMetaText}
+            listRef={railFlip.containerRef}
             swapDrawer={
               swapSeedItem && swapRequest
                 ? {
@@ -2010,7 +2060,7 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
 
           <div className={`draft-paper-col${draftPaper.printForm === 'a3' ? ' is-a3' : ''}`} ref={paperColRef}>
             <div
-              className={`draft-a4-sheet${draftPaper.printForm === 'a3' ? ' is-a3' : ''}`}
+              className={`draft-a4-sheet${draftPaper.printForm === 'a3' ? ' is-a3' : ''}${previewKeyFocus ? ' is-key-focus' : ''}`}
               ref={a4SheetRef}
               style={{ height: `${nativeContentHeight * previewScale}px` }}
             >
@@ -2047,13 +2097,18 @@ export function DraftPaperWorkbench(props: DraftPaperWorkbenchProps): ReactNode 
                       留着，上面盖一层遮罩和一行字；没成功时去掉遮罩，留旧卷面，写
                       一行原因和「重试」。遮罩挂在 .draft-a4-sheet 上、iframe 外面，
                       不进卷面，也不进服务器出的打印稿和 PDF。 */}
-                  <div className={`draft-a4-wait${previewStale ? ' is-waiting' : ''}`} hidden={!previewStale && !previewFailed}>
+                  {/* 淡出时读屏不再念它（aria-hidden），也不再挡着点旧卷面（.is-leaving 去掉 pointer-events）；淡完 hidden。 */}
+                  <div
+                    className={`draft-a4-wait${waitShown === 'waiting' ? ' is-waiting' : ''}${waitLeaving ? ' is-leaving' : ''}`}
+                    hidden={waitShown === null}
+                    aria-hidden={waitLeaving || undefined}
+                  >
                     {/* 共用提示行的 over 放法（垫桌色、e1）；sticky 的位置仍由 .draft-a4-wait-line 给。 */}
-                    {previewStale ? (
+                    {waitShown === 'waiting' ? (
                       <Notice kind="waiting" placement="over" className="draft-a4-wait-line">
-                        {reflowSlow ? '正在重排卷面，大约要半分钟，旧卷面先留着' : '正在重排卷面，旧卷面先留着'}
+                        {previewStale ? (reflowSlow ? '正在重排卷面，大约要半分钟，旧卷面先留着' : '正在重排卷面，旧卷面先留着') : waitLineText ?? ''}
                       </Notice>
-                    ) : previewFailed && paginationError ? (
+                    ) : waitShown === 'failed' && paginationError ? (
                       <Notice
                         kind="error"
                         placement="over"
