@@ -4,7 +4,8 @@
  *
  *   状态 --motion-state     悬停、选中、焦点：只变颜色、底色、边、影子，不动位置。
  *   按下 --motion-press     :active 缩一点，配 --motion-press-scale*（按大小三档，缩下去的像素差不多，约 2px）。
- *   滑块 --motion-glide     列表里那块悬停灰跟着鼠标走（components/useFluidHover.ts）。
+ *   滑块 --motion-glide     当前位置挪到相邻一格：整卷、草稿卷左栏的当前格。跳远了不滑，原地「出现」。
+ *                           列表的悬停灰块不滑（Owner 2026-11-20）：原地出现，只淡入淡出，走「状态」。
  *   出现 --motion-reveal*   菜单、浮层、提示、对话框、抽屉出来：淡入，再从锚点方向挪一点（--motion-reveal-shift）
  *                           或从小一点放大（--motion-reveal-scale，只给居中的对话框）。东西越大越慢一档。
  *   离开 --motion-dismiss   它们走：比出来快一档，只淡出、往回挪一点。

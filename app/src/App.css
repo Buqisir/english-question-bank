@@ -14,16 +14,16 @@
   color: var(--ink);
 }
 
-/* Fluid hover (2026-09-15) — one highlight per list glides to the item
-   nearest the cursor; see components/useFluidHover.ts. The highlight is the
+/* Fluid hover (2026-09-15) — one highlight per list sits on the item nearest
+   the cursor, so it never blinks in the gaps; see components/useFluidHover.ts. The highlight is the
    container's ::before, positioned by --fh-* vars the hook writes; items
    stack above it with position: relative and paint no opaque background of
    their own. The ::before is the container's first positioned child with
    z-index auto, so positioned items paint over it in tree order — no
    stacking context on the container, which would trap popovers (export
-   menus in the topbar) beneath later page content. [data-fluid-hover-fresh]
-   is set for the first paint after the pointer enters, so the highlight
-   appears in place instead of travelling. */
+   menus in the topbar) beneath later page content.
+   Since 2026-11-20 (Owner) it no longer slides: it appears in place on each
+   item and only its opacity animates (DESIGN.md §5 Motion). */
 .fluid-hover-list {
   position: relative;
   --fh-x: 0px;
@@ -50,22 +50,13 @@
   background: var(--eqb-color-state-hover);
   opacity: var(--fh-o);
   transform: translate(calc(var(--fh-x) + var(--fh-inset-x)), calc(var(--fh-y) + var(--fh-inset-y)));
-  will-change: transform;
   pointer-events: none;
-  /* 动效角色「滑块」：减少动态效果时 --motion-glide 是 1ms，直接到位，只淡入淡出（motion.css）。 */
-  transition:
-    transform var(--motion-glide),
-    width var(--motion-glide),
-    height var(--motion-glide),
-    opacity var(--motion-state);
-}
-
-.fluid-hover-list[data-fluid-hover-fresh]::before {
+  /* 悬停灰块不滑（Owner 2026-11-20）：每一项上原地出现，只有进出列表时淡入淡出（动效角色「状态」）。 */
   transition: opacity var(--motion-state);
 }
 
 /* Touch screens: taps would leave the highlight stranded (no mouseleave), so
-   the glide is pointer-only; tap feedback stays with :active on the items.
+   the highlight is pointer-only; tap feedback stays with :active on the items.
    `pointer: coarse` is part of the test so headless browsers (hover: none,
    pointer: none) still render the highlight for verification. */
 @media (hover: none) and (pointer: coarse) {
@@ -4213,7 +4204,7 @@ p.concierge-empty {
 }
 
 /* Hover surface comes from the enclosing `.concierge-group-index` fluid list
-   (one glide across buckets and section heads); the line paints none. */
+   (one highlight across buckets and section heads); the line paints none. */
 
 .concierge-group-row > .similar-passages-panel {
   margin: 0 12px 12px;
