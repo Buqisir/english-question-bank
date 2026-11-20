@@ -19,6 +19,7 @@ import { QuestionBank, RotateCcw } from '../icons'
 import type { QuestionGroupCard } from '../domain/questionBank.ts'
 import { aggregatePaperResults, type PaperResult } from './aggregatePaperResults.ts'
 import { ConciergePaperRow } from './ConciergePaperRow.tsx'
+import { SOURCE_TYPE_LABEL } from './sourceTypeLabel.ts'
 import { pickClarificationLine, pickResultsNoticeLine } from './clarificationCopy.ts'
 import { buildDefaultFeed, buildRecentFeed } from './defaultFeed.ts'
 import { HomeContinueSection, HomeDailyPassage } from './ConciergeHomeSections.tsx'
@@ -429,7 +430,10 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       .filter((dim) => filters[dim] !== undefined)
       .map((dim) => {
         const option = filterOptions[dim].find((candidate) => candidate.value === String(filters[dim]))
-        return { key: dim, text: option?.label ?? String(filters[dim]) }
+        // 浏览页「真题 / 模拟」胶囊设的来源不一定在当前结果的分面里（比如还没有模拟卷），
+        // 这时退回中文名，不把 mock_exam 这样的原始值露给老师。
+        const fallback = dim === 'sourceType' ? SOURCE_TYPE_LABEL[String(filters[dim])] : undefined
+        return { key: dim, text: option?.label ?? fallback ?? String(filters[dim]) }
       })
   }, [filters, filterOptions])
 
@@ -614,6 +618,8 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
       data-surface={isBrowseScreen ? 'browse' : state.kind === 'empty' ? 'home' : 'list'}
       data-screen={isBrowseScreen ? 'browse' : 'home'}
     >
+      {/* 每页一个 h1，给读屏和标题导航用（看得见的段标题是 h2）；Impeccable audit 2026-11-20 量到首页、浏览页没有 h1。 */}
+      <h1 className="visually-hidden">{isBrowseScreen ? '浏览题库' : '题库'}</h1>
       <div className="concierge-stage">
         <div className="concierge-stage-inner concierge-stage-inner--risen">
           <div className="concierge-command-bar">

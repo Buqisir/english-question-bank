@@ -50,7 +50,8 @@
 .eqb-search-input {
   flex: 1;
   min-width: 0;
-  height: 100%;
+  /* 上下撑满框（不用 height: 100%：窄屏框换行时百分比高度算不出来，量到只有 20 高）。 */
+  align-self: stretch;
   padding: 0 48px 0 0;
   border: none;
   outline: none;

@@ -300,10 +300,11 @@ export function MySpacePage({ onBackToWorkbench, onOpenDraft, shellNav }: MySpac
     <div className="my-space-page">
       <AppTopbar {...shellNav} onBack={onBackToWorkbench} />
       <div className="my-space-shell">
-        <header className="my-space-heading">
+        {/* 用 div 不用 header：它在 <main> 外面，header 会成第二个 banner（顶栏已经是 banner；Impeccable audit 2026-11-20）。 */}
+        <div className="my-space-heading">
           <h1>个人空间</h1>
           <p>已保存的 PDF</p>
-        </header>
+        </div>
 
         {/* 页面提示行换成共用 Notice（构件收尾，2026-11-15）：一行次要灰字加 16px 图标；出错读屏马上念（role=alert）。
             位置照原来（.my-space-message 的外边距）。 */}

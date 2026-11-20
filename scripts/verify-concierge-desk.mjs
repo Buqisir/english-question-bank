@@ -931,7 +931,8 @@ console.log('\nTest 19: cut a11y-concierge-three-gaps — focus-ring visibility 
   assert('prefers-reduced-motion block exists', /@media \(prefers-reduced-motion: reduce\)/.test(css), '')
   assert('reduced-motion does not use a global wildcard kill switch', !/@media \(prefers-reduced-motion: reduce\)\s*\{\s*\*,\s*\*::before,\s*\*::after/.test(css), '')
   assert('reduced-motion has no 0.01ms duration override', !/0\.01ms/.test(css), '')
-  assert('reduced-motion removes group-card movement', /@media \(prefers-reduced-motion: reduce\)[\s\S]{0,1200}\.group-card\s*\{[^}]*animation:\s*none/.test(css), '')
+  // 2026-11-20：旧 .group-card 卡片（连同 fadeInUp 入场和它的减少动态效果规则）没人用了，整段删掉；这里改查它没有再回来。
+  assert('retired group-card entrance animation stays removed', !/\.group-card\s*\{[^}]*animation/.test(css) && !/@keyframes fadeInUp/.test(css), '')
   // 2026-11-15：首页灰块换成共用灰块 shared-ui/Skeleton（呼吸，不扫光），减少动态效果的规则跟着搬到 shared-ui/waiting.css。
   const waitingCss = readFileSync(path.resolve(here, '..', 'app', 'src', 'shared-ui', 'waiting.css'), 'utf8')
   assert('reduced-motion stops skeleton breathing while keeping a static placeholder', /@media \(prefers-reduced-motion: reduce\)\s*\{\s*\.eqb-skeleton\s*\{\s*animation:\s*none/.test(waitingCss), '')

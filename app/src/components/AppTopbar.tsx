@@ -54,6 +54,9 @@ export type AppTopbarNav = {
   onOpenVocabularyReview?: () => void
   onOpenVocabularyNotebook?: () => void
   onOpenMySpace?: () => void
+  /* 当前在哪一页：这一项照样留在顶栏（不在自己页上消失），图标用实心、aria-current="page"（DESIGN §5 Navigation「激活项 variant="fill"」）。
+     没传它的处理函数时点了不动；传了就照常走（比如从一张生词纸回到生词本列表）。 */
+  currentNav?: 'vocabulary-notebook' | 'vocabulary-review' | 'my-space'
   showAdmin?: boolean
   adminActive?: boolean
   onToggleAdmin?: () => void
@@ -203,18 +206,33 @@ export function AppTopbar(props: AppTopbarProps): ReactNode {
             <span aria-hidden="true" className="topbar-actions-divider" />
           </>
         )}
-        {props.onOpenVocabularyNotebook && (
-          <Button size={navSize} icon={<VocabularyNotebook size={16} />} onClick={props.onOpenVocabularyNotebook}>
+        {(props.onOpenVocabularyNotebook || props.currentNav === 'vocabulary-notebook') && (
+          <Button
+            size={navSize}
+            icon={<VocabularyNotebook size={16} variant={props.currentNav === 'vocabulary-notebook' ? 'fill' : 'line'} />}
+            onClick={props.onOpenVocabularyNotebook}
+            aria-current={props.currentNav === 'vocabulary-notebook' ? 'page' : undefined}
+          >
             生词本
           </Button>
         )}
-        {props.onOpenVocabularyReview && (
-          <Button size={navSize} icon={<VocabularyReview size={16} />} onClick={props.onOpenVocabularyReview}>
+        {(props.onOpenVocabularyReview || props.currentNav === 'vocabulary-review') && (
+          <Button
+            size={navSize}
+            icon={<VocabularyReview size={16} variant={props.currentNav === 'vocabulary-review' ? 'fill' : 'line'} />}
+            onClick={props.onOpenVocabularyReview}
+            aria-current={props.currentNav === 'vocabulary-review' ? 'page' : undefined}
+          >
             过生词
           </Button>
         )}
-        {props.onOpenMySpace && (
-          <Button size={navSize} icon={<Archive size={16} />} onClick={props.onOpenMySpace}>
+        {(props.onOpenMySpace || props.currentNav === 'my-space') && (
+          <Button
+            size={navSize}
+            icon={<Archive size={16} variant={props.currentNav === 'my-space' ? 'fill' : 'line'} />}
+            onClick={props.onOpenMySpace}
+            aria-current={props.currentNav === 'my-space' ? 'page' : undefined}
+          >
             个人空间
           </Button>
         )}

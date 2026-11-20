@@ -86,7 +86,19 @@ export function SearchField({
   const inputId = id ?? generated
   const showClear = Boolean(onClear) && value.length > 0 && !disabled
   return (
-    <form className={join('eqb-search', hooks?.form)} data-tier={tier} onSubmit={onSubmit} role="search">
+    <form
+      className={join('eqb-search', hooks?.form)}
+      data-tier={tier}
+      onSubmit={onSubmit}
+      role="search"
+      // 整个框都能点进去：点到框的内边距（输入框左边、上下）时把焦点交给输入框，不停在 form 上（Impeccable audit 2026-11-20：
+      // 390 宽量到看得见的框 54 高，点得进去的只有中间一条）。只认点在 form 自己身上，点提交键、清除键照常。
+      onMouseDown={(event) => {
+        if (event.target !== event.currentTarget || disabled) return
+        event.preventDefault()
+        event.currentTarget.querySelector<HTMLInputElement>('.eqb-search-input')?.focus()
+      }}
+    >
       <label htmlFor={inputId} className="visually-hidden">
         {label}
       </label>
