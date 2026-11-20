@@ -60,7 +60,11 @@ const server = createServer(async (request, response) => {
   if (url.pathname === '/api/import-reviews') return failList
     ? send(response, { error: '演示网络中断' }, 'application/json', 503)
     : send(response, { papers: [paper] })
-  if (url.pathname === `${reviewPath}/answer-corrections`) return send(response, { corrections: [] })
+  if (url.pathname === `${reviewPath}/answer-corrections`) return send(response, { corrections: [], listeningEdits: [{
+    segmentId: 'listening-text-7', start: 10, before: '', after: 'The room was quieter.',
+    startSeconds: 20.1, endSeconds: 21.25, evidence: { apple: 'The room was quieter.', 'parakeet-v2': 'The room was quieter.' },
+    reason: '两个引擎转写一致。',
+  }] })
   if (url.pathname === `${previewPath}/consumption`) {
     return send(response, { disposition: 'ready', paperId, sourceAssetVersion: 1, selections: [] })
   }
@@ -191,6 +195,11 @@ if (process.argv.includes('--serve')) {
     await page.getByRole('button', { name: '确认已解决' }).click()
     await page.getByRole('status').filter({ hasText: '反馈已更新' }).waitFor()
     await Promise.all([page.waitForURL(`${origin}${publicationUrl}`), publish.click()])
+    const listeningSummary = page.getByRole('region', { name: '听力原文更正' })
+    await listeningSummary.getByText('listening-text-7 · 20.10–21.25 秒').waitFor()
+    assert.ok(await listeningSummary.getByText('（缺文） → The room was quieter.').isVisible())
+    assert.ok(await listeningSummary.getByText('apple：The room was quieter.').isVisible())
+    assert.ok(await listeningSummary.getByText('parakeet-v2：The room was quieter.').isVisible())
     assert.equal(publishCount, 0)
     paper.promotionState = 'publishing'
     await page.goto(`${origin}/ops/`)
