@@ -1,1 +1,4 @@
 app/public/vocabulary-assets/**/*.svg whitespace=-blank-at-eof
+
+# Windows batch launchers (Impeccable skill): stored LF, checked out CRLF; cmd.exe breaks on LF-only .cmd files (upstream pbakaus/impeccable #1098).
+*.cmd text eol=crlf
