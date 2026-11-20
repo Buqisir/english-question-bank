@@ -8,6 +8,7 @@ import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { appleSource, localEngines, parakeet, readJson, remoteEngine, withWork } from './listening-transcript-check-engines.mjs'
 import { align, nearProperName, observation, sites, timedReading, units } from './listening-transcript-check-alignment.mjs'
 import { questionMarkerSpan, sentenceSites } from './listening-transcript-check-sentences.mjs'
+import { rewriteTurns } from './listening-transcript-check-turns.mjs'
 
 const wordText = (words, separator = ' ') => words.map(word => word.token).join(separator)
 const sameWords = (first, second) => wordText(first.words) === wordText(second.words)
@@ -94,7 +95,7 @@ export async function adjudicate(group, text, engines, remote, audioSha256) {
   const canJoin = (left, right) => !atSpeakerChange(left) && !atSpeakerChange(right)
   const parakeet = readings.find(reading => reading.engine === 'parakeet-v2')
   const plan = sentenceSites(text, source, sites(readings, canJoin), parakeet)
-  if (plan.rewritten) review.push({ segmentId, occurrence, rewritten: true, reason: '整段改写版，多数句子与录音有明显差异。' })
+  if (plan.rewritten) return rewriteTurns(group, text, readings, engines, audioSha256)
   for (const site of plan.sites) {
     const votes = readings.map(reading => ({ engine: reading.engine, ...observation(reading, site) }))
     const sourceWords = source.slice(site.start, site.end)
@@ -155,7 +156,7 @@ export async function adjudicate(group, text, engines, remote, audioSha256) {
   return { edits, review }
 }
 
-function markdown(edits, review) {
+function markdown(edits, review, rewritten) {
   const details = ({ segmentId, startSeconds, endSeconds, before, after, evidence, reason }) => [
     `### ${segmentId}${startSeconds === undefined ? '' : ` · ${startSeconds}–${endSeconds} 秒`}`,
     `- 改前 \`${before?.trim() || '（空）'}\``,
@@ -163,11 +164,10 @@ function markdown(edits, review) {
     ...Object.entries(evidence ?? {}).map(([engine, heard]) => `- ${engine} · ${heard.replace(/\r?\n/gu, ' ')}`),
     `- ${reason}`, '',
   ].join('\n')
-  const rewritten = review.filter(item => item.rewritten)
   return ['# 听力原文稿核对', '',
     ...(rewritten.length ? ['## 整段改写版', '', ...rewritten.map(({ segmentId, reason }) => `- ${segmentId} · ${reason}`), ''] : []),
     `## 建议更正（${edits.length}）`, '', ...edits.map(details),
-    `## 人工听核（${review.length}）`, '', ...review.filter(item => !item.rewritten).map(details)].join('\n')
+    `## 人工听核（${review.length}）`, '', ...review.map(details)].join('\n')
 }
 
 async function main() {
@@ -203,17 +203,18 @@ async function main() {
     apple: sha256(await readFile(appleSource)), parakeet: sha256(await readFile(parakeet)) }).slice(7))
   await mkdir(cache, { recursive: true, mode: 0o700 })
   const engines = await withWork((work, env) => localEngines(audio, groups, cache, work, env))
-  const listeningEdits = [], needsReview = review.groups.filter(group => group.decision !== 'usable')
+  const listeningEdits = [], rewritten = [], needsReview = review.groups.filter(group => group.decision !== 'usable')
     .map(({ segmentId }) => ({ segmentId, reason: '缺少可用 occurrence，请先听核段号。' }))
   for (const group of groups) {
-    const { edits, review } = await adjudicate(group, texts.get(group.segmentId), engines,
+    const { edits, review, rewrite } = await adjudicate(group, texts.get(group.segmentId), engines,
       interval => remoteEngine(audio, interval, cache), audioSha256)
     listeningEdits.push(...edits)
     needsReview.push(...review)
+    if (rewrite) rewritten.push(rewrite)
   }
   await Promise.all([
     writeFile(path.join(output, 'listening-edits.json'), `${JSON.stringify({ listeningEdits }, null, 2)}\n`, { mode: 0o600 }),
-    writeFile(path.join(output, 'listening-edits.md'), markdown(listeningEdits, needsReview), { mode: 0o600 }),
+    writeFile(path.join(output, 'listening-edits.md'), markdown(listeningEdits, needsReview, rewritten), { mode: 0o600 }),
   ])
   console.log(`建议更正 ${listeningEdits.length} 处，人工听核 ${needsReview.length} 处。${output}`)
 }

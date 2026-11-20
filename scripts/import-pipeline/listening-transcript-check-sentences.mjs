@@ -20,9 +20,7 @@ export function sentenceSites(text, source, changes, parakeet) {
     const sites = changes.filter(change => change.start >= start && change.start < end && change.end <= end)
     return [{ start, end, sentenceStart: utf16Start, sentenceEnd: utf16End,
       affected: altered.length > 0, fragmented: altered.length > 3,
-      highBurden: burden >= 3 && burden / (end - start) > 0.3, multipleSites: sites.length > 1,
-      phraseRewrite: altered.length > 1
-        || altered.some(change => change.end - change.start >= 2 && change.heardEnd - change.heardStart >= 4) }]
+      highBurden: burden >= 3 && burden / (end - start) > 0.3, multipleSites: sites.length > 1 }]
   })
   const substantial = original.filter(site => site.end - site.start >= 6)
   const rewritten = (original.length >= 3 && original.filter(site => site.fragmented
@@ -32,7 +30,7 @@ export function sentenceSites(text, source, changes, parakeet) {
   const dense = []
   let previous
   for (const site of original) {
-    const isDense = site.fragmented || (site.highBurden && (site.multipleSites || (rewritten && site.phraseRewrite)))
+    const isDense = site.fragmented || (site.highBurden && site.multipleSites)
     if (isDense) {
       const last = dense.at(-1)
       if (previous && last.end === site.start && !/[\r\n]/u.test(text.slice(last.sentenceEnd, site.sentenceStart))) {
