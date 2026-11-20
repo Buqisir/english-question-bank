@@ -16,7 +16,7 @@
   background: var(--eqb-color-paper);
   /* 边线占位、颜色透明：hero 的边是 e1 的墨圈（DESIGN.md §4「一条边，不画两条」）；焦点时边线深一档。 */
   border: 1px solid transparent;
-  transition: border-color var(--motion-base) var(--ease-hover), box-shadow var(--motion-base) var(--ease-hover);
+  transition: border-color var(--motion-state), box-shadow var(--motion-state);
 }
 
 /* hero：高 54、圆角 16、e1。左内边距 18、右 10（原值）。 */
@@ -125,7 +125,7 @@
   font-size: var(--eqb-font-size-control);
   line-height: 1;
   cursor: pointer;
-  transition: background-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
+  transition: background-color var(--motion-state), transform var(--motion-press);
 }
 
 .eqb-search[data-tier='hero'] .eqb-search-submit {
@@ -144,7 +144,7 @@
 
 /* 按下去缩一点：一天按几十次的提交键要确认「听到了」。 */
 .eqb-search-submit:active:not(:disabled) {
-  transform: scale(0.97);
+  transform: scale(var(--motion-press-scale));
 }
 
 /* §4 墨焦点环。 */
@@ -173,9 +173,4 @@
   color: var(--eqb-color-text-muted);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  /* 减少动效时按下只缩一点点。本条和上面 :active 同为 (0,3,0)，写在后面，按先后赢。 */
-  .eqb-search-submit:active:not(:disabled) {
-    transform: scale(0.995);
-  }
-}
+/* 减少动态效果时按下不缩（motion.css 把 --motion-press-scale 设成 1）。原来这里另写一段缩到 0.995，仍在动，2026-11-20 删。 */

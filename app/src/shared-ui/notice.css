@@ -1,5 +1,5 @@
 /* 提示行（Notice.tsx）。颜色、间距、影子只用 tokens.css 里的变量，不写字面色值和影子；
- * 浮着那种的入场退场用全站动效 token（--motion-* / --ease-*，App.css :root，DESIGN.md §6）。
+ * 浮着那种的入场退场用全站动效角色（shared-ui/motion.css，DESIGN.md §5「Motion 动效」）。
  * DESIGN.md §5「Notices 提示条」：一行次要灰字，前面一个 16px 图标，没有底和边；只有「没保存」「会丢东西」上危险色。
  * 「质感六条·现代」：每条提示不超过一行——这里不折行，太长截断，整句在 title 和读屏里。 */
 

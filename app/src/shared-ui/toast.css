@@ -1,5 +1,5 @@
-/* 底部提示 / 撤销（Toast.tsx）。颜色、间距、圆角、影子只用 tokens.css 里的变量；动效用全站动效 token
- * （--motion-* / --ease-*，App.css :root，DESIGN.md §6）。
+/* 底部提示 / 撤销（Toast.tsx）。颜色、间距、圆角、影子只用 tokens.css 里的变量；动效用全站动效角色
+ * （shared-ui/motion.css，DESIGN.md §5「Motion 动效」）。
  * 样子照原来共用提示行的 floating 放法（notice.css，这一轮收进这里）：白底、e3、8 圆角，16px 图标加一行 14px 次要灰字，
  * 行尾一个墨字小号键。DESIGN.md §4：浮层是不透明白底加 e3，不用玻璃。 */
 
@@ -42,9 +42,10 @@
   font-size: var(--eqb-font-size-sm);
   line-height: 20px;
   pointer-events: auto;
+  /* 动效角色：退场走「离开」，入场走「出现 · 自己占一块的」（下面 data-visible='true' 那条）。 */
   transition:
-    opacity var(--motion-fast) var(--ease-out),
-    transform var(--motion-fast) var(--ease-out);
+    opacity var(--motion-dismiss),
+    transform var(--motion-dismiss);
 }
 
 .eqb-toast > svg {
@@ -68,16 +69,18 @@
   margin-left: calc(-1 * var(--eqb-space-1));
 }
 
-/* 退场：淡出、下沉 8px（--motion-fast）。 */
+/* 退场：淡出、下沉 8px（出现挪动距离的 2 倍，减少动态效果时归零）。 */
 .eqb-toast[data-visible='false'] {
   opacity: 0;
-  transform: translateY(var(--eqb-space-2));
+  transform: translateY(calc(var(--motion-reveal-shift) * 2));
 }
 
-/* 入场比退场慢一档（--motion-base，同原来的撤销提示条）。
- * 覆盖：本条 (0,2,0) 盖过 .eqb-toast (0,1,0) 的 transition 时长。 */
+/* 入场比退场慢一档（同原来的撤销提示条）。
+ * 覆盖：本条 (0,2,0) 盖过 .eqb-toast (0,1,0) 的 transition。 */
 .eqb-toast[data-visible='true'] {
-  transition-duration: var(--motion-base);
+  transition:
+    opacity var(--motion-reveal-panel),
+    transform var(--motion-reveal-panel);
 }
 
 /* 窄屏：离底 16 再加手机底部的安全区。宽度和宽屏一样跟着内容走、居中，最宽到左右各留 16（播报区的内边距）。
@@ -88,13 +91,4 @@
   }
 }
 
-/* 减少动态效果：不做动画，直接出现、直接消失。
- * 覆盖：本条盖过上面两条 transition（含 [data-visible='true'] 的 (0,2,0)），也不下沉。 */
-@media (prefers-reduced-motion: reduce) {
-  .eqb-toast,
-  .eqb-toast[data-visible='true'],
-  .eqb-toast[data-visible='false'] {
-    transition: none;
-    transform: none;
-  }
-}
+/* 减少动态效果：只淡入淡出，不下沉（motion.css 把 --motion-reveal-shift 设成 0）。 */

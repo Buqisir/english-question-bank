@@ -115,6 +115,7 @@
 
 .vocabulary-dictation-question > span.is-playing i {
   background: var(--action);
+  /* motion-signature：正在播的三根音量条，播放期间一直起落（等待类的循环，只在播放时有）。减少动态效果时整页不动（文件末尾）。 */
   animation: vocabulary-dictation-meter calc(var(--motion-slow) * 4) ease-in-out infinite alternate;
 }
 
@@ -166,7 +167,8 @@
   border-radius: var(--eqb-radius-pill);
   background: var(--action);
   transform-origin: left center;
-  transition: transform var(--motion-base) var(--ease-out);
+  /* 动效角色「换向」：进度条原地伸长。 */
+  transition: transform var(--motion-turn);
 }
 
 .vocabulary-dictation-controls {
@@ -277,7 +279,7 @@
   font-size: 13px;
   font-weight: 500;
   white-space: nowrap;
-  transition: background-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+  transition: background-color var(--motion-state), color var(--motion-state);
 }
 
 .vocabulary-dictation-settings fieldset button.is-selected,

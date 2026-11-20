@@ -28,8 +28,17 @@ export function useToastPresence<T>(
         exitTimerRef.current = null
       }
       setRendered(value)
-      const raf = requestAnimationFrame(() => setVisible(true))
-      return () => cancelAnimationFrame(raf)
+      // 等两帧再切到显示：第一帧让刚挂上的元素按「隐藏」样子（data-visible="false"）算一次样式、画出来，
+      // 第二帧再切，过渡才有起点。只等一帧时，挂上和切换常落在同一次绘制前，浏览器第一次算样式就是「显示」，
+      // 入场不播（2026-11-20 逐帧量到：草稿卷「⋯」面板第一帧就是不透明度 1）。
+      let second = 0
+      const first = requestAnimationFrame(() => {
+        second = requestAnimationFrame(() => setVisible(true))
+      })
+      return () => {
+        cancelAnimationFrame(first)
+        cancelAnimationFrame(second)
+      }
     }
     setVisible(false)
     exitTimerRef.current = window.setTimeout(() => {

@@ -5,15 +5,7 @@
 :root {
   --focus-ring: 2px solid var(--eqb-color-action, #1F1F1D);
 
-  /* Motion tokens（motion-pass 2026-07-12）。五档时长 + 三曲线。 */
-  --motion-micro: 80ms;     /* 高频密集微反馈（pi chip 类）；不用于面板/抽屉级过渡（那用 --motion-slow） */
-  --motion-fast: 120ms;     /* hover / 颜色 / 小反馈；不用于页面级入场（那用 --motion-entrance） */
-  --motion-base: 160ms;     /* toast、显形、小入场；不用于高频密集反馈（那用 --motion-micro） */
-  --motion-slow: 220ms;     /* 面板 / rail / 抽屉级；不用于常规 hover（那用 --motion-fast） */
-  --motion-entrance: 260ms; /* 低频页面级入场；不用于常规 hover/toast（那用 --motion-fast/--motion-base） */
-  --ease-hover: ease;                             /* 颜色/hover；不用于位移类入场（那用 --ease-out） */
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);     /* 入场/位移（强）；不用于纯颜色过渡（那用 --ease-hover） */
-  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* 在屏形变（强）；不用于一次性入场（那用 --ease-out） */
+  /* 动效时长、曲线和角色在 shared-ui/motion.css（index.css 引进来），这里不再抄一份。 */
 }
 
 .app-shell {
@@ -60,21 +52,16 @@
   transform: translate(calc(var(--fh-x) + var(--fh-inset-x)), calc(var(--fh-y) + var(--fh-inset-y)));
   will-change: transform;
   pointer-events: none;
+  /* 动效角色「滑块」：减少动态效果时 --motion-glide 是 1ms，直接到位，只淡入淡出（motion.css）。 */
   transition:
-    transform var(--motion-fast) var(--ease-out),
-    width var(--motion-fast) var(--ease-out),
-    height var(--motion-fast) var(--ease-out),
-    opacity var(--motion-fast) var(--ease-hover);
+    transform var(--motion-glide),
+    width var(--motion-glide),
+    height var(--motion-glide),
+    opacity var(--motion-state);
 }
 
 .fluid-hover-list[data-fluid-hover-fresh]::before {
-  transition: opacity var(--motion-fast) var(--ease-hover);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .fluid-hover-list::before {
-    transition: opacity var(--motion-fast) var(--ease-hover);
-  }
+  transition: opacity var(--motion-state);
 }
 
 /* Touch screens: taps would leave the highlight stranded (no mouseleave), so
@@ -229,7 +216,7 @@
 .topbar-page-title-pencil {
   flex-shrink: 0;
   opacity: 0;
-  transition: opacity var(--motion-fast) var(--ease-hover);
+  transition: opacity var(--motion-state);
 }
 
 .topbar-page-title-editable:hover .topbar-page-title-pencil,
@@ -452,7 +439,7 @@ button:disabled {
   border-radius: 8px;
   font-size: 13px;
   font-weight: 600;
-  transition: background-color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
+  transition: background-color var(--motion-state), transform var(--motion-press);
 }
 
 .primary-button:hover:not(:disabled),
@@ -475,14 +462,14 @@ button:disabled {
 .add-button:active:not(:disabled),
 .save-button:active:not(:disabled),
 .export-button:active:not(:disabled) {
-  transform: scale(0.97);
+  transform: scale(var(--motion-press-scale));
 }
 
 .ghost-button {
   color: var(--ink);
   background: transparent;
   border: 0;
-  transition: background-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+  transition: background-color var(--motion-state), color var(--motion-state);
 }
 
 .ghost-button:hover:not(:disabled) {
@@ -493,7 +480,7 @@ button:disabled {
   color: var(--muted);
   background: transparent;
   border: 0;
-  transition: color var(--motion-fast) var(--ease-hover), background-color var(--motion-fast) var(--ease-hover);
+  transition: color var(--motion-state), background-color var(--motion-state);
 }
 
 .primary-button:focus-visible,
@@ -569,7 +556,7 @@ button:disabled {
   border-radius: 8px;
   background: var(--surface-strong);
   color: var(--muted);
-  transition: border-color var(--motion-base) var(--ease-hover);
+  transition: border-color var(--motion-state);
 }
 
 .search-field:focus-within {
@@ -623,7 +610,7 @@ button:disabled {
   background: transparent;
   font-size: 13px;
   font-weight: 500;
-  transition: background var(--motion-base) var(--ease-hover), color var(--motion-base) var(--ease-hover), box-shadow var(--motion-base) var(--ease-hover);
+  transition: background var(--motion-state), color var(--motion-state), box-shadow var(--motion-state);
 }
 
 .version-toggle .active {
@@ -1491,7 +1478,7 @@ button:disabled {
   border-radius: 8px;
   color: var(--muted);
   background: transparent;
-  transition: color var(--motion-base) var(--ease-hover), background var(--motion-base) var(--ease-hover), border-color var(--motion-base) var(--ease-hover);
+  transition: color var(--motion-state), background var(--motion-state), border-color var(--motion-state);
 }
 
 .icon-button:hover {
@@ -2080,6 +2067,7 @@ button:disabled {
 }
 
 .group-card {
+  /* motion-dead：.group-card 已没有页面在用（2026-11-20 查），连同 @keyframes fadeInUp 等 Owner 同意删。 */
   animation: fadeInUp var(--motion-entrance) var(--ease-out) both;
 }
 
@@ -2630,12 +2618,13 @@ button:disabled {
 @media (hover: hover) and (pointer: fine) {
   .concierge-thinking-toggle input[type='checkbox'] {
     transition:
-      background-color var(--motion-base) var(--ease-hover),
-      border-color var(--motion-base) var(--ease-hover);
+      background-color var(--motion-state),
+      border-color var(--motion-state);
   }
 
+  /* 动效角色「换向」：圆钮在原地滑过去。 */
   .concierge-thinking-toggle input[type='checkbox']::before {
-    transition: transform var(--motion-base) var(--ease-out);
+    transition: transform var(--motion-turn);
   }
 }
 
@@ -2810,7 +2799,7 @@ p.concierge-empty {
   background: transparent;
   color: var(--desk-ink);
   text-align: left;
-  transition: background var(--motion-fast) var(--ease-hover);
+  transition: background var(--motion-state);
 }
 
 /* Rows without a leading icon (e.g. 今天翻到) must not leave their text in
@@ -2825,7 +2814,7 @@ p.concierge-empty {
   width: 16px;
   height: 16px;
   color: var(--desk-muted);
-  transition: color var(--motion-fast) var(--ease-hover);
+  transition: color var(--motion-state);
 }
 
 .home-row[data-fluid-hover-active] .home-row-icon,
@@ -2895,7 +2884,7 @@ p.concierge-empty {
   display: grid;
   place-items: center;
   color: var(--desk-muted);
-  transition: color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
+  transition: color var(--motion-state), transform var(--motion-turn);
 }
 
 .home-row[data-fluid-hover-active] .home-row-chevron,
@@ -3021,7 +3010,7 @@ p.concierge-empty {
   background: #FFFFFF;
   outline: none;
   border-radius: 12px;
-  transition: background var(--motion-fast) var(--ease-hover), box-shadow var(--motion-fast) var(--ease-hover);
+  transition: background var(--motion-state), box-shadow var(--motion-state);
   cursor: pointer;
 }
 
@@ -3117,7 +3106,7 @@ p.concierge-empty {
   padding: 4px 10px;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover), transform var(--motion-fast) var(--ease-out);
+  transition: background-color var(--motion-state), color var(--motion-state), transform var(--motion-press);
 }
 
 .concierge-action:hover:not(:disabled) {
@@ -3136,7 +3125,7 @@ p.concierge-empty {
 
 /* home-editorial — emil-processing: primary/secondary press feedback. */
 .concierge-action:active:not(:disabled) {
-  transform: scale(0.97);
+  transform: scale(var(--motion-press-scale));
 }
 
 /* 首页结果行的加入键 2026-11-14 换成共用 DraftAddButton（app/src/shared-ui/），原来的 .concierge-action-add 几条删掉了。 */
@@ -3328,7 +3317,8 @@ p.concierge-empty {
   box-shadow: var(--elev-3);
   z-index: 26;
   transform: translateX(100%);
-  transition: transform var(--motion-base) var(--ease-out);
+  /* motion-dead：.basket-panel 已没有页面在用（2026-11-20 查），等 Owner 同意删。 */
+  transition: transform var(--motion-reveal-drawer);
   overflow-y: auto;
   padding: 48px 16px 24px;
 }
@@ -3392,18 +3382,17 @@ p.concierge-empty {
   align-items: flex-start;
   gap: 8px;
   margin: 16px 0 0;
-  /* 复评工艺账 keyframe→transition：入退同轴（data-visible + usePresence
-     延迟卸载），退出（本规则 motion-micro）快于入场（[data-visible='true']
-     覆盖回原 motion-slow 展开处方；global reduced-motion reset covers）。 */
+  /* 动效角色：出来走「出现 · 自己占一块的」，收起走「离开」，比出来快一档（data-visible + usePresence 延迟卸载）。
+     往上收 4px；减少动态效果时不挪，只淡入淡出（motion.css 把 --motion-reveal-shift 设成 0）。 */
   opacity: 0;
-  transform: translateY(-4px);
-  transition: opacity var(--motion-micro) var(--ease-out), transform var(--motion-micro) var(--ease-out);
+  transform: translateY(calc(var(--motion-reveal-shift) * -1));
+  transition: opacity var(--motion-dismiss), transform var(--motion-dismiss);
 }
 
 .concierge-filter-row[data-visible='true'] {
   opacity: 1;
   transform: translateY(0);
-  transition-duration: var(--motion-slow);
+  transition: opacity var(--motion-reveal-panel), transform var(--motion-reveal-panel);
 }
 
 .concierge-filter-dim-row {
@@ -3574,7 +3563,7 @@ p.concierge-empty {
   line-height: 1;
   border-radius: var(--eqb-radius-control);
   cursor: pointer;
-  transition: background var(--motion-fast) var(--ease-hover), color var(--motion-fast) var(--ease-hover);
+  transition: background var(--motion-state), color var(--motion-state);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -3641,31 +3630,15 @@ p.concierge-empty {
 /* 首页灰块里的每一条（原 .concierge-skeleton-line、.short、扫光 ::after 和 @keyframes concierge-skeleton-shimmer）
    2026-11-15 换成共用灰块 shared-ui/Skeleton（呼吸，不扫光；DESIGN.md §5 Waiting），删了。尺寸搬进 ConciergeDesk.tsx。 */
 
+/* 减少动态效果：按下不缩、开关圆钮和箭头直接到位、筛选行只淡入淡出，都由 motion.css 的角色变量管，这里不再另写。
+   原来这里按下还缩到 0.995（仍在动），2026-11-20 删。 */
 @media (prefers-reduced-motion: reduce) {
   .group-card {
     animation: none;
   }
 
-  .concierge-stage-inner,
-  .concierge-thinking-toggle input[type='checkbox'],
-  .concierge-thinking-toggle input[type='checkbox']::before,
   .basket-panel.basket-panel-drawer {
     transition: none;
-  }
-
-  .concierge-filter-row,
-  .concierge-filter-row[data-visible='true'] {
-    transform: none;
-    transition: opacity var(--motion-micro) var(--ease-hover);
-  }
-
-  .primary-button:active:not(:disabled),
-  .add-button:active:not(:disabled),
-  .save-button:active:not(:disabled),
-  .export-button:active:not(:disabled),
-  .concierge-action:active:not(:disabled),
-  .basket-chip:active:not(:disabled) {
-    transform: scale(0.995);
   }
 }
 
@@ -3835,7 +3808,7 @@ p.concierge-empty {
   background: transparent;
   outline: none;
   border-radius: 0;
-  transition: background var(--motion-fast) var(--ease-hover), box-shadow var(--motion-fast) var(--ease-hover);
+  transition: background var(--motion-state), box-shadow var(--motion-state);
 }
 
 /* 行头是 shared-ui/Row（2026-11-15）：最小高 48、内衬 10 / 14（首页 12 / 16）、定位、整行目标的手形光标、
@@ -3852,7 +3825,7 @@ p.concierge-empty {
   align-items: center;
   gap: 16px;
   background: transparent;
-  transition: background var(--motion-fast) var(--ease-hover);
+  transition: background var(--motion-state);
 }
 
 .concierge-paper-row:focus-within .concierge-paper-row-head,
@@ -3976,7 +3949,7 @@ p.concierge-empty {
   display: grid;
   place-items: center;
   transform: rotate(-90deg);
-  transition: transform var(--motion-fast) var(--ease-out), color var(--motion-fast) var(--ease-hover);
+  transition: transform var(--motion-turn), color var(--motion-state);
 }
 
 .concierge-paper-row-head[data-fluid-hover-active] .concierge-row-chevron,
@@ -4155,7 +4128,7 @@ p.concierge-empty {
   color: var(--eqb-color-text-muted);
   white-space: nowrap;
   opacity: 0;
-  transition: opacity var(--motion-fast) var(--ease-out);
+  transition: opacity var(--motion-state);
   /* quiet-chrome: hint 末尾的 ↑/↓ 字形换 Lucide SVG，inline-flex 对齐。 */
   display: inline-flex;
   align-items: center;
@@ -4383,6 +4356,7 @@ p.concierge-empty {
   border-radius: 50%;
   background: var(--eqb-color-accent);
   flex: none;
+  /* motion-signature：加卷计数的小点冒一下（先放大到 1.35 再落回），一次性的确认，不走角色。减少动态效果时不动（下面）。 */
   animation: basket-chip-dot-pop var(--motion-entrance) var(--ease-out);
 }
 

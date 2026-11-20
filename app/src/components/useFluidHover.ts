@@ -49,6 +49,13 @@ export type FluidHoverOptions = {
    * appears in place. Only for `x` and `y` lists; off when left out.
    */
   glideGapMax?: number
+  /**
+   * The highlight slides from item to item (default). `false`: it appears in
+   * place on each item and only fades, never travels — for lists where a
+   * sliding block would sweep across rows of content on the way (DESIGN.md §5
+   * 动效角色「滑块」).
+   */
+  glide?: boolean
 }
 
 export type FluidHoverHandlers = {
@@ -92,7 +99,7 @@ function gapAfter(rects: Rect[], index: number, axis: 'x' | 'y'): number {
 }
 
 export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions): FluidHover<C> {
-  const { axis = 'y', itemSelector, isItemDisabled, hitArea, gapClick = true, glideGapMax } = options
+  const { axis = 'y', itemSelector, isItemDisabled, hitArea, gapClick = true, glideGapMax, glide = true } = options
   const containerRef = useRef<C>(null)
   const itemsRef = useRef<HTMLElement[]>([])
   const rectsRef = useRef<Rect[]>([])
@@ -153,7 +160,7 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
       shownRef.current = false
       return
     }
-    const fresh = !shownRef.current || (previous !== null && index !== null && crossesWideGap(previous, index))
+    const fresh = !glide || !shownRef.current || (previous !== null && index !== null && crossesWideGap(previous, index))
     if (fresh) container.setAttribute(FRESH_ATTR, '')
     container.style.setProperty('--fh-x', `${rect.left}px`)
     container.style.setProperty('--fh-y', `${rect.top}px`)
@@ -167,7 +174,7 @@ export function useFluidHover<C extends HTMLElement>(options: FluidHoverOptions)
       void getComputedStyle(container, '::before').transform
       container.removeAttribute(FRESH_ATTR)
     }
-  }, [crossesWideGap])
+  }, [crossesWideGap, glide])
 
   const toLocal = useCallback((clientX: number, clientY: number): [number, number] | null => {
     const container = containerRef.current

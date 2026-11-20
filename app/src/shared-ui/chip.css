@@ -54,9 +54,9 @@
   font-weight: 400;
   cursor: pointer;
   transition:
-    background-color var(--motion-fast) var(--ease-hover),
-    color var(--motion-fast) var(--ease-hover),
-    border-color var(--motion-fast) var(--ease-hover);
+    background-color var(--motion-state),
+    color var(--motion-state),
+    border-color var(--motion-state);
 }
 
 .eqb-chip[data-kind='toggle']:hover:not(:disabled) {

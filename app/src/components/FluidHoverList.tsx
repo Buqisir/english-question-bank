@@ -18,6 +18,7 @@ type FluidHoverListOwnProps = {
   hitArea?: (item: HTMLElement) => HTMLElement
   gapClick?: boolean | number
   glideGapMax?: number
+  glide?: boolean
   className?: string
   children?: ReactNode
   /** Optional outside ref to the container (menus that watch outside clicks, etc.). */
@@ -34,12 +35,13 @@ export function FluidHoverList({
   hitArea,
   gapClick,
   glideGapMax,
+  glide,
   className,
   children,
   ref: outerRef,
   ...rest
 }: FluidHoverListProps) {
-  const { containerRef, handlers } = useFluidHover<HTMLElement>({ axis, itemSelector, hitArea, gapClick, glideGapMax })
+  const { containerRef, handlers } = useFluidHover<HTMLElement>({ axis, itemSelector, hitArea, gapClick, glideGapMax, glide })
   const setRef = useCallback((node: HTMLElement | null) => {
     containerRef.current = node
     if (typeof outerRef === 'function') outerRef(node)

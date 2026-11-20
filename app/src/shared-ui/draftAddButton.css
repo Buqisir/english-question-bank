@@ -51,8 +51,8 @@
   text-decoration: none;
   cursor: pointer;
   transition:
-    background-color var(--motion-fast) var(--ease-hover),
-    transform var(--motion-fast) var(--ease-out);
+    background-color var(--motion-state),
+    transform var(--motion-press);
 }
 
 /* 悬停垫悬停灰，和 button.css 透明底几种语气的悬停一样；悬停灰半透明，叠在滑块上自然深一档，照样看得出。
@@ -69,17 +69,7 @@
 }
 
 .eqb-draft-add-open:active {
-  transform: scale(0.97);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .eqb-draft-add-open {
-    transition: background-color var(--motion-fast) var(--ease-hover);
-  }
-
-  .eqb-draft-add-open:active {
-    transform: none;
-  }
+  transform: scale(var(--motion-press-scale));
 }
 
 /* 撤回键在纸里用 sm 28px。小号纸也是 28 时同样不收，和「已加入」一样上下贴满纸（Owner 2026-11-17，原来收成 24）。 */

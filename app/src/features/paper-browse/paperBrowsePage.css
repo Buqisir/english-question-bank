@@ -92,8 +92,9 @@
 }
 
 @media screen and (min-width: 1440px) and (prefers-reduced-motion: no-preference) {
+  /* 动效角色「移动」：讲评打开时整张卷让到一边，成块走一段距离，起得稳、停得稳。 */
   .paper-browse-content {
-    transition: transform var(--motion-slow) var(--ease-out);
+    transition: transform var(--motion-travel);
   }
 }
 
@@ -158,12 +159,13 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  /* 动效角色：相邻两格之间「滑块」滑过去；跳远了不滑，原地「出现」。 */
   .paper-browse-rail-current--adjacent {
-    transition: transform var(--motion-base) var(--ease-out);
+    transition: transform var(--motion-glide);
   }
 
   .paper-browse-rail-current--relocate {
-    animation: paper-browse-rail-relocate var(--motion-fast) var(--ease-out);
+    animation: paper-browse-rail-relocate var(--motion-reveal);
   }
 }
 
@@ -808,11 +810,11 @@
   .paper-browse-scissor-line,
   .paper-browse-group-card::after,
   .paper-browse-content .pi-writing-section + *::before {
-    transition: opacity var(--motion-base) var(--ease-out);
+    transition: opacity var(--motion-state);
   }
 
   .paper-browse-group-actions {
-    transition: opacity var(--motion-fast) var(--ease-out);
+    transition: opacity var(--motion-state);
   }
 
   .paper-browse-group-card:hover > .paper-browse-scissor-line,
@@ -933,10 +935,11 @@
   line-height: 1.7;
   opacity: 1;
   transform: translateY(0);
-  transition: opacity var(--motion-micro) var(--ease-out), transform var(--motion-fast) var(--ease-out);
+  /* 动效角色「出现 · 贴着键出来的」：从键那边落下 4px。减少动态效果时只淡入（--motion-reveal-shift 归零）。 */
+  transition: opacity var(--motion-reveal), transform var(--motion-reveal);
   @starting-style {
     opacity: 0;
-    transform: translateY(-2px);
+    transform: translateY(calc(var(--motion-reveal-shift) * -1));
   }
 }
 
@@ -944,9 +947,6 @@
   transition: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .paper-browse-reading-overview { transition-property: opacity; transform: none; }
-}
 
 .paper-browse-reading-question-nav {
   --fh-radius: 8px;
@@ -1380,8 +1380,8 @@
 .paper-browse-page .pi-writing-answer-box--lecture-trigger {
   cursor: pointer;
   transition:
-    border-color var(--motion-base) var(--ease-hover),
-    box-shadow var(--motion-base) var(--ease-hover);
+    border-color var(--motion-state),
+    box-shadow var(--motion-state);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -1654,7 +1654,7 @@
   gap: 10px;
   align-items: flex-start;
   cursor: pointer;
-  transition: border-color var(--motion-fast) var(--ease-hover), background-color var(--motion-fast) var(--ease-hover);
+  transition: border-color var(--motion-state), background-color var(--motion-state);
 }
 
 .similar-rcard[data-fluid-hover-active] {
@@ -1905,7 +1905,7 @@
   font-size: var(--eqb-font-size-control);
   font-weight: 400;
   cursor: pointer;
-  transition: background-color var(--motion-fast) var(--ease-hover);
+  transition: background-color var(--motion-state);
 }
 
 .listening-quiet-control:disabled {
@@ -2059,11 +2059,11 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .listening-follow-line {
-    transition: background-color var(--listening-highlight-duration) var(--ease-hover);
+    transition: background-color var(--motion-state);
   }
 
   .listening-follow-line > * {
-    transition: opacity var(--listening-highlight-duration) var(--ease-hover);
+    transition: opacity var(--motion-state);
   }
 }
 
@@ -2144,7 +2144,7 @@
   padding: var(--eqb-space-1) var(--eqb-space-2);
   color: var(--paper-ink-strong);
   font-variant-numeric: tabular-nums;
-  transition: background-color var(--motion-fast) var(--ease-hover);
+  transition: background-color var(--motion-state);
 }
 
 .listening-analysis-question > summary:hover {
@@ -2211,12 +2211,12 @@
   height: 24px;
   border-radius: 999px;
   transition:
-    color var(--motion-fast) var(--ease-hover),
-    background-color var(--motion-fast) var(--ease-hover),
-    transform var(--motion-fast) var(--ease-out);
+    color var(--motion-state),
+    background-color var(--motion-state),
+    transform var(--motion-press);
 }
 
-.listening-player-trigger:active { transform: scale(0.94); }
+.listening-player-trigger:active { transform: scale(var(--motion-press-scale-icon)); }
 
 .listening-player[data-open] .listening-player-trigger,
 .listening-player[data-playing] .listening-player-trigger {
@@ -2252,9 +2252,10 @@
   box-shadow: var(--elev-3);
   color: var(--paper-ink-strong);
   white-space: nowrap;
+  /* 动效角色「出现 · 自己占一块的」（入场用 @starting-style，下面）。 */
   transition:
-    opacity var(--motion-base) var(--ease-out),
-    transform var(--motion-base) var(--ease-out);
+    opacity var(--motion-reveal-panel),
+    transform var(--motion-reveal-panel);
 }
 
 .listening-player-card[data-placement="above"] {
@@ -2276,7 +2277,7 @@
 @starting-style {
   .listening-player-card {
     opacity: 0;
-    transform: scale(0.96) translateY(2px);
+    transform: scale(var(--motion-reveal-scale)) translateY(var(--motion-reveal-shift));
   }
 }
 
@@ -2287,11 +2288,11 @@
   height: 32px;
   border-radius: 999px;
   transition:
-    background-color var(--motion-fast) var(--ease-hover),
-    transform var(--motion-fast) var(--ease-out);
+    background-color var(--motion-state),
+    transform var(--motion-press);
 }
 
-.listening-player-play:active { transform: scale(0.94); }
+.listening-player-play:active { transform: scale(var(--motion-press-scale-icon)); }
 
 /* Solid glyphs for the one ink-action control, like the reference transport. */
 .listening-player-play :is(path, rect) {
@@ -2338,7 +2339,7 @@
   line-height: 12px;
   letter-spacing: 0;
   font-variant-numeric: tabular-nums lining-nums;
-  transition: color var(--motion-fast) var(--ease-hover);
+  transition: color var(--motion-state);
 }
 
 .listening-player-mark-label {
@@ -2365,9 +2366,10 @@
   white-space: nowrap;
   content: attr(data-label);
   opacity: 0;
-  transform: translate(-50%, 2px);
+  /* 动效角色「出现」：悬停提示从下面升 2px（出现挪动距离的一半）。 */
+  transform: translate(-50%, calc(var(--motion-reveal-shift) / 2));
   pointer-events: none;
-  transition: opacity var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
+  transition: opacity var(--motion-reveal), transform var(--motion-reveal);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -2423,7 +2425,8 @@
   border-radius: 50%;
   background: var(--desk-ink);
   transform: translate(-50%, -50%);
-  transition: transform var(--motion-fast) var(--ease-out);
+  /* 动效角色「换向」：拖把手原地放大。 */
+  transition: transform var(--motion-turn);
 }
 
 /* Hover/focus/drag enlarges the handle, without moving the line or card. */
@@ -2431,9 +2434,6 @@
   transform: translate(-50%, -50%) scale(1.5);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .listening-player-line-thumb { transition: none; }
-}
 
 /* Speed: one small gauge. The needle's angle is the speed (left 0.75,
    up 1, right 1.25); a click sweeps it to the next step. */
@@ -2447,12 +2447,12 @@
   color: var(--paper-ink-muted);
   background: rgba(var(--paper-ink-strong-rgb), 0.05);
   transition:
-    color var(--motion-fast) var(--ease-hover),
-    background-color var(--motion-fast) var(--ease-hover),
-    transform var(--motion-fast) var(--ease-out);
+    color var(--motion-state),
+    background-color var(--motion-state),
+    transform var(--motion-press);
 }
 
-.listening-player .listening-player-speed:active { transform: scale(0.94); }
+.listening-player .listening-player-speed:active { transform: scale(var(--motion-press-scale-icon)); }
 
 /* Off the default speed, the gauge darkens as a reminder. */
 .listening-player .listening-player-speed[data-changed] { color: var(--paper-ink-strong); }
@@ -2460,7 +2460,8 @@
 .listening-player-needle {
   transform-box: view-box;
   transform-origin: 12px 14px;
-  transition: transform var(--motion-slow) var(--ease-in-out);
+  /* 动效角色「移动」：指针扫到下一档，起得稳、停得稳。减少动态效果时直接指到（--motion-travel 是 1ms）。 */
+  transition: transform var(--motion-travel);
 }
 
 .listening-player-speed::after {
@@ -2477,9 +2478,10 @@
   white-space: nowrap;
   content: attr(data-label);
   opacity: 0;
-  transform: translate(-50%, 2px);
+  /* 动效角色「出现」：悬停提示从下面升 2px（出现挪动距离的一半）。 */
+  transform: translate(-50%, calc(var(--motion-reveal-shift) / 2));
   pointer-events: none;
-  transition: opacity var(--motion-fast) var(--ease-out), transform var(--motion-fast) var(--ease-out);
+  transition: opacity var(--motion-reveal), transform var(--motion-reveal);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -2499,9 +2501,6 @@
   transform: translate(-50%, 0);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .listening-player-needle { transition: none; }
-}
 
 .listening-player-audio-error {
   position: absolute;
@@ -2519,11 +2518,6 @@
   font-size: 12px;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  @starting-style {
-    .listening-player-card { transform: none; }
-  }
-}
 
 @media print {
   .ps-text-trail { display: none; }

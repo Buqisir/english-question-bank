@@ -407,8 +407,9 @@ export function ConciergeDesk(props: ConciergeDeskProps): ReactNode {
   // once the panel itself is open).
   const [filterPanelExpanded, setFilterPanelExpanded] = useState(false)
   // 复评工艺账（2026-07-17 C 路）：面板入场有 keyframe、关闭裸卸载。
-  // usePresence 延迟卸载补退场，退（motion-micro）快于入（motion-slow）。
-  const filterPanelPresence = usePresence(filterPanelExpanded, 80)
+  // usePresence 延迟卸载补退场。收起走动效角色「离开」（--motion-dismiss = 120ms），
+  // 比出来（「出现 · 自己占一块的」160ms）快一档（shared-ui/motion.css；2026-11-20 从 80 跟着改）。
+  const filterPanelPresence = usePresence(filterPanelExpanded, 120)
   const filterPanelId = useId()
   const activeFilterCount = [
     filters.groupType,

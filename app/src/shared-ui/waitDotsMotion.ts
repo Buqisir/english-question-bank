@@ -263,7 +263,7 @@ export function waitDotsTracks(kind: WaitDotsKind, sink: { ms: number; easing: s
   return tracks
 }
 
-// ── 读全站动效 token（App.css :root） ───────────────────────
+// ── 读全站动效 token（shared-ui/motion.css :root） ─────────────
 /** 读一个时长 token（如 --motion-base），读不到返回 null（调用处就不演那一段，直接到位）。 */
 export function readMotionMs(name: string): number | null {
   if (typeof document === 'undefined') return null
