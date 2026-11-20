@@ -40,6 +40,8 @@ const emptyFilters = { year: '', sourceType: '', region: '', status: '', coverag
 type ListPosition = { view: ListView; query: string; filters: typeof emptyFilters; page: number; top: number; tableLeft: number }
 type PaperRoute = { paperId: string; revisionId: string | null }
 type AnswerCorrectionChange = { questionId: string; label: string; from: string; to: string; reason: string; withdrawn: boolean }
+type ListeningEdit = { segmentId: string; start: number; before: string; after: string; startSeconds: number;
+  endSeconds: number; evidence: Record<string, string>; reason: string }
 
 function readPaperRoute(): PaperRoute | null {
   const params = new URLSearchParams(window.location.search)
@@ -204,13 +206,14 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
     ? `${endpoint(selected)}/revisions/${encodeURIComponent(selected.latestRevisionId)}/answer-corrections`
     : null
   const correctionsKey = `${correctionsUrl}:${listVersion}`
-  const [correctionResult, setCorrectionResult] = useState<{ key: string; changes?: AnswerCorrectionChange[]; failed?: boolean }>()
+  const [correctionResult, setCorrectionResult] = useState<{ key: string; changes?: AnswerCorrectionChange[];
+    listeningEdits?: ListeningEdit[]; failed?: boolean }>()
   useEffect(() => {
     if (!correctionsUrl) return
     const controller = new AbortController()
-    void request<{ corrections: AnswerCorrectionChange[] }>(correctionsUrl, { signal: controller.signal })
-      .then(({ corrections }) => {
-        if (!controller.signal.aborted) setCorrectionResult({ key: correctionsKey, changes: corrections })
+    void request<{ corrections: AnswerCorrectionChange[]; listeningEdits?: ListeningEdit[] }>(correctionsUrl, { signal: controller.signal })
+      .then(({ corrections, listeningEdits }) => {
+        if (!controller.signal.aborted) setCorrectionResult({ key: correctionsKey, changes: corrections, listeningEdits })
       }).catch(() => {
         if (!controller.signal.aborted) setCorrectionResult({ key: correctionsKey, failed: true })
       })
@@ -385,8 +388,9 @@ function OpsReviewWorkspace({ shellNav }: { shellNav: AppTopbarNav }) {
         label: '切换查看', onClick: () => showRevision(latest, 'replaceState'),
       }}>{`有新版本 R${latest.revisionNumber}`}</Notice>}
       {selected && <>
-        {correctionState?.failed && <Notice kind="error">答案更正读取失败。请刷新状态。</Notice>}
+        {correctionState?.failed && <Notice kind="error">更正记录读取失败。请刷新状态。</Notice>}
         {tab !== 'history' && <AnswerCorrectionSummary changes={answerChanges} />}
+        <ListeningCorrectionSummary changes={correctionState?.listeningEdits} />
         {!selected.promotionState && sameRevision && <small>发布即认可并公开这一版{selected.hasTeachingAnalyses ? '，并认可附带讲解为精选官方参考' : ''}。</small>}
         {selected.hasMediaCandidates && <ButtonLink href="/ops/?view=review">到旧审卷页核对候选图</ButtonLink>}
         {selected.promotionState === 'publishing' && <Notice kind="waiting">服务器正在发布，请刷新查看状态。</Notice>}
@@ -573,6 +577,20 @@ function AnswerCorrectionSummary({ changes }: { changes?: AnswerCorrectionChange
     <ul>{changes.map(change => <li key={change.questionId}>
       <strong>{change.withdrawn ? '撤销更正 · ' : ''}{change.label}：{change.from} → {change.to}</strong>
       <p>{change.reason}</p>
+    </li>)}</ul>
+  </Surface>
+}
+
+function ListeningCorrectionSummary({ changes }: { changes?: ListeningEdit[] }) {
+  if (!changes?.length) return null
+  return <Surface as="section" variant="board" padding="md" aria-label="听力原文更正">
+    <h3>听力原文更正</h3>
+    <p>请核对涉及这些句子的译文和讲解。</p>
+    <ul>{changes.map(change => <li key={`${change.segmentId}:${change.start}`}>
+      <strong>{change.segmentId} · {change.startSeconds.toFixed(2)}–{change.endSeconds.toFixed(2)} 秒</strong>
+      <p>{change.before || '（缺文）'} → {change.after || '（删除）'}</p>
+      <p>{change.reason}</p>
+      <ul>{Object.entries(change.evidence).map(([engine, words]) => <li key={engine}>{engine}：{words}</li>)}</ul>
     </li>)}</ul>
   </Surface>
 }

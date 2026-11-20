@@ -6,11 +6,36 @@ import { gzipSync } from 'node:zlib'
 import { sha256, stableStringify } from '../../shared/paper-canonical/stable.mjs'
 import { loadListeningResult, writeListeningEvidence } from './lib-listening-evidence.mjs'
 import { assertListeningUploadBudget } from '../../shared/paper-canonical/listeningRuleEvidence.mjs'
-import { readListeningReview, readSealedListeningReview, validateListeningReview } from '../../server/paper-import/listeningReview.mjs'
+import { readListeningReview, readSealedListeningReview, RETAINED_LISTENING_NAVIGATION,
+  validateListeningReview, verifyRetainedListeningNavigation } from '../../server/paper-import/listeningReview.mjs'
 import { reviewSubjectBundleDigest } from '../../server/import-review/reviewSubject.mjs'
 import { withListeningRuleFixture } from '../lib/listeningRuleEvidenceFixture.mjs'
 
 const write = (file, data) => writeFileSync(file, JSON.stringify(data))
+
+test('transcript repair can rebind identities while retaining exact playback, occurrences and evidence', () => {
+  const base = { method: 'agent_asr_comparison',
+    subject: { candidateDigest: 'old', sourceDigest: 'old source', transcriptDigest: 'old text', playbackAudioSha256: 'audio' },
+    evidence: [{ path: 'apple', sha256: 'evidence' }],
+    groups: [{ segmentId: 's1', playback: { startSeconds: 1, endSeconds: 5 },
+      occurrences: [{ startSeconds: 1, endSeconds: 5, evidencePaths: ['apple'] }] }],
+  }
+  const repair = { ...structuredClone(base), method: RETAINED_LISTENING_NAVIGATION,
+    subject: { ...base.subject, candidateDigest: 'new', sourceDigest: 'new source', transcriptDigest: 'new text' } }
+  assert.doesNotThrow(() => verifyRetainedListeningNavigation(repair, () => base))
+  assert.throws(() => verifyRetainedListeningNavigation(repair, () => null), /finalized base/u)
+  for (const mutate of [
+    value => { value.groups[0].playback.endSeconds -= 0.36 },
+    value => { value.groups[0].occurrences[0].endSeconds -= 0.36 },
+    value => { value.subject.playbackAudioSha256 = 'different audio' },
+    value => { value.evidence[0].sha256 = 'different evidence' },
+  ]) {
+    const changed = structuredClone(repair)
+    mutate(changed)
+    assert.throws(() => verifyRetainedListeningNavigation(changed, () => base), /finalized base/u)
+  }
+})
+
 function workspace(t) {
   const parent = path.resolve('.scratch')
   mkdirSync(parent, { recursive: true })

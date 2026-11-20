@@ -161,7 +161,7 @@ function lexemeWords(raw) {
 }
 // One normalization path for source text and timed ASR, retaining raw character
 // ranges. A run boundary cannot split "1" + ".15pm" or "o" + "'clock".
-function normalizeListeningUnits(value, aliases = []) {
+export function normalizeListeningUnits(value, aliases = []) {
   const text = String(value ?? '')
   // Only exact, valid colon clocks in the source license these ambiguous ASR
   // spellings. Match whole numeric expressions; never a price or digit suffix.

@@ -198,6 +198,123 @@ export function verifyListeningInsertionOccurrences(reportBytes, readReview) {
   }
 }
 
+const listeningEditEngines = new Set(['apple', 'parakeet-v2', 'gpt-transcribe'])
+export const listeningEditSpeakerLabels = /^[ \t]*([A-Z]\d?|[MW]\/[MW]|Speaker \d+|Man|Woman)[ \t]*[:：][ \t]*/gimu
+
+export function touchesListeningSpeakerBoundary(text, { start, before }) {
+  const labels = [...text.matchAll(listeningEditSpeakerLabels)]
+  return labels.some((label, index) => {
+    const speaker = match => match?.[1].toLowerCase()
+    if (speaker(label) === speaker(labels[index - 1])) return false
+    const prefix = text.slice(0, label.index)
+    const gap = prefix.match(/[^\p{L}\p{N}]*$/u)[0]
+    const left = label.index - gap.length
+    const right = label.index + label[0].length
+    return left > 0 && (before ? start < right && start + before.length > left : start >= left && start <= right)
+  })
+}
+
+export function listeningEditWords(value) {
+  return value.replace(listeningEditSpeakerLabels, '')
+    .normalize('NFKC').toLowerCase().replace(/’/gu, "'")
+    .match(/[\p{L}\p{N}]+(?:'[\p{L}\p{N}]+)*/gu) ?? []
+}
+
+export function listeningEditEvidenceMatch(text, { start, before, after }, heard) {
+  const words = listeningEditWords(heard)
+  const baseline = listeningEditWords(text)
+  const left = listeningEditWords(text.slice(0, start))
+  const right = listeningEditWords(text.slice(start + before.length))
+  const removed = listeningEditWords(before)
+  const added = listeningEditWords(after)
+  const matches = (sequence, at, phrase) => at >= 0
+    && phrase.every((word, offset) => sequence[at + offset] === word)
+  if (!words.length || (after && !added.length) || baseline.length !== left.length + removed.length + right.length
+    || !matches(baseline, 0, [...left, ...removed, ...right])
+    || (!before && (matches(left, left.length - added.length, added) || matches(right, 0, added)))) return 'mismatch'
+  const positions = new Set()
+  for (let split = 0; split + added.length <= words.length; split++) {
+    if (!matches(words, split, added)) continue
+    const anchor = [...words.slice(0, split), ...removed, ...words.slice(split + added.length)]
+    const rightCount = words.length - split - added.length
+    for (let offset = 0; offset + anchor.length <= baseline.length; offset++) {
+      const position = offset + split
+      if (split >= Math.min(2, position)
+        && rightCount >= Math.min(2, baseline.length - position - removed.length)
+        && matches(baseline, offset, anchor)) positions.add(position)
+    }
+  }
+  if (!positions.has(left.length)) return 'mismatch'
+  return positions.size === 1 ? 'unique' : 'ambiguous'
+}
+
+export function supportsListeningEdit(text, edit, heard) {
+  return listeningEditEvidenceMatch(text, edit, heard) === 'unique'
+}
+
+export function verifyListeningEditOccurrences(reportBytes, current, readBaseReview = () => null) {
+  const { listeningEdits } = JSON.parse(new TextDecoder().decode(reportBytes))
+  if (!listeningEdits?.length) return
+  let base
+  for (const { segmentId, audioSha256, occurrence } of listeningEdits) {
+    const matches = review => audioSha256 === review?.subject?.playbackAudioSha256
+      && review.groups?.some(group => group.segmentId === segmentId && group.decision === 'usable'
+        && group.occurrences?.some(item => item.startSeconds === occurrence.startSeconds
+          && item.endSeconds === occurrence.endSeconds))
+    if (!matches(current) && !matches(base ??= readBaseReview())) {
+      fail(`listening edit must match a reviewed occurrence of ${segmentId}`)
+    }
+  }
+}
+
+function applyListeningEdits(materialization, edits, audio) {
+  const { listening } = materialization
+  if (listening?.state !== 'captured' || !Array.isArray(edits)) fail('invalid listening edits')
+  const untouched = () => digestJson({ ...materialization, listening: { ...listening,
+    transcript: listening.transcript.map(({ text, ...segment }) => segment) } })
+  const unchangedDigest = untouched()
+  const bySegment = new Map()
+  for (const edit of edits) {
+    if (!exactKeys(edit, ['segmentId', 'start', 'before', 'after', 'audioSha256', 'occurrence',
+      'startSeconds', 'endSeconds', 'evidence', 'reason'])
+      || typeof edit.segmentId !== 'string' || typeof edit.before !== 'string' || typeof edit.after !== 'string'
+      || edit.before === edit.after || !Number.isSafeInteger(edit.start) || edit.start < 0
+      || typeof edit.reason !== 'string' || !edit.reason.trim()) fail('invalid listening edit')
+    const { segmentId, start, before, occurrence, startSeconds, endSeconds, evidence } = edit
+    if (typeof edit.audioSha256 !== 'string' || !/^sha256:[a-f0-9]{64}$/u.test(edit.audioSha256)
+      || edit.audioSha256 !== audio?.sha256 || !Number.isFinite(audio.durationSeconds)) {
+      fail('invalid listening edit playback hash or duration')
+    }
+    if (!exactKeys(occurrence, ['startSeconds', 'endSeconds'])
+      || ![occurrence.startSeconds, occurrence.endSeconds, startSeconds, endSeconds].every(Number.isFinite)
+      || occurrence.startSeconds < 0 || occurrence.endSeconds > audio.durationSeconds
+      || startSeconds < occurrence.startSeconds || endSeconds > occurrence.endSeconds || startSeconds >= endSeconds) {
+      fail('listening edit interval falls outside the reviewed occurrence')
+    }
+    const segments = listening.transcript.filter(segment => segment.segmentId === segmentId)
+    const text = segments[0]?.text
+    if (segments.length !== 1 || typeof text !== 'string' || start + before.length > text.length
+      || text.slice(start, start + before.length) !== before) fail(`listening edit before does not match ${segmentId}`)
+    if (touchesListeningSpeakerBoundary(text, edit)) fail('listening edit touches a speaker change')
+    const engines = evidence && typeof evidence === 'object' && !Array.isArray(evidence) ? Object.entries(evidence) : []
+    if (engines.some(([engine, heard]) => !listeningEditEngines.has(engine) || typeof heard !== 'string' || !heard.trim())
+      || engines.filter(([, heard]) => supportsListeningEdit(text, edit, heard)).length < 2) {
+      fail('listening edit requires supporting transcription from two engines')
+    }
+    if (!bySegment.has(segments[0])) bySegment.set(segments[0], [])
+    bySegment.get(segments[0]).push(edit)
+  }
+  for (const [segment, edits] of bySegment) {
+    let nextStart = Infinity
+    for (const { start, before, after } of edits.sort((a, b) => b.start - a.start)) {
+      if (start === nextStart || start + before.length > nextStart) fail('overlapping listening edits')
+      segment.text = segment.text.slice(0, start) + after + segment.text.slice(start + before.length)
+      nextStart = start
+    }
+  }
+  if (untouched() !== unchangedDigest) fail('listening edits changed material outside transcript text')
+}
+
 const speakerLabels = /(^|\s)([A-Z][A-Za-z]*|[A-Z]\d|Speaker \d+)\s*[:：][ \t]*/gu
 const sentenceAndSpeaker = ({ en, speaker }) => ({ en, speaker })
 
@@ -301,7 +418,9 @@ export function applySpellingReview(materializationBytes, reportBytes, listening
   const targets = enumerateSpellingTargets(original)
   const reportKeys = ['schemaVersion', 'materializationSha256', 'reviewedBy', 'reviewedAt', 'targets']
   const hasInsertions = Object.hasOwn(report, 'listeningInsertions')
+  const hasEdits = Object.hasOwn(report, 'listeningEdits')
   if (hasInsertions) reportKeys.push('listeningInsertions')
+  if (hasEdits) reportKeys.push('listeningEdits')
   if (!exactKeys(report, reportKeys)
     || !reviewPolicies.includes(report.schemaVersion)
     || report.materializationSha256 !== sha256(materializationBytes)
@@ -381,6 +500,7 @@ export function applySpellingReview(materializationBytes, reportBytes, listening
     keys.reduce((node, part) => node[part], effective)[key] = corrected
   }
   if (hasInsertions) insertListeningSentences(effective, report.listeningInsertions, listeningAudio)
+  if (hasEdits) applyListeningEdits(effective, report.listeningEdits, listeningAudio)
   return effective
 }
 
