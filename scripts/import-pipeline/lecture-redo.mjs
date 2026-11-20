@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { deepStrictEqual } from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync } from 'node:fs'
+import { cpSync, existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, renameSync, rmSync, writeFileSync } from 'node:fs'
 import { homedir } from 'node:os'
 import path from 'node:path'
 import { parseArgs } from 'node:util'
@@ -41,6 +41,60 @@ const stagedKey = source => source.writingTask?.taskType ?? {
   'seven-choices': 'seven', 'grammar-fill': 'grammar',
 }[source.slotId] ?? source.slotId.replace('.', '-')
 const range = numbers => numbers.length ? `${Math.min(...numbers)}–${Math.max(...numbers)}` : '写作任务'
+const draftName = (base, key) => `${base.paperId}__${base.id.slice(4, 12)}__${key}.json`
+
+function checkDraftIdentity(draft, request, base) {
+  const { material } = request.sourceGroup
+  const groupId = material.group?.groupId ?? material.groupId
+  const questionIds = new Set(Object.keys(request.authoritativeAnswers))
+  const expected = { paperId: base.paperId, baseRevisionId: base.id, groupId }
+  function visit(value) {
+    if (!value || typeof value !== 'object') return
+    for (const [key, entry] of Object.entries(value)) {
+      if (Object.hasOwn(expected, key) && entry !== expected[key]
+        || key === 'questionId' && !questionIds.has(entry)
+        || key === 'questionIds' && (!Array.isArray(entry) || entry.some(id => !questionIds.has(id)))
+        || key === 'targetGroups' && (!Array.isArray(entry) || entry.some(id => id !== groupId))) {
+        throw new Error(`草稿身份与请求不一致：${request.group}.${key}`)
+      }
+      visit(entry)
+    }
+  }
+  visit(draft)
+}
+
+export function draftsForMerge(work, base, requested, only) {
+  const directory = path.join(work, 'drafts')
+  const filenames = new Set(readdirSync(directory).filter(file => file.endsWith('.json')))
+  const known = new Set(requested.map(({ key }) => draftName(base, key)))
+  for (const file of filenames) {
+    if (!known.has(file)) throw new Error(`草稿文件名与本次请求不符：${file}`)
+  }
+  const selected = only === undefined ? requested : only.split(',').map(name => {
+    const descriptor = requested.find(({ key, path: output }) =>
+      [key, output, draftName(base, key)].includes(name.trim()))
+    if (!descriptor) throw new Error(`--only 项不在本次请求中：${name}`)
+    return descriptor
+  })
+  if (!selected.length || new Set(selected).size !== selected.length) throw new Error('没有选中题组或 --only 有重复项')
+  const missing = selected.map(({ key }) => draftName(base, key)).filter(file => !filenames.has(file))
+  if (missing.length) throw new Error(`缺少草稿：${missing.join(', ')}`)
+  return selected.map(({ key, path: output }) => {
+    const draftPath = path.join(directory, draftName(base, key))
+    const requestPath = path.join(work, 'requests', `${key}.request.json`)
+    const request = readJson(requestPath)
+    const material = request.sourceGroup?.material
+    if (request.baseRevisionId !== base.id || request.group !== key || request.sourceGroup?.groupKey !== key
+      || (material?.paper?.paperId ?? material?.paperId) !== base.paperId
+      || request.draftPath !== draftPath || !lstatSync(draftPath).isFile()) {
+      throw new Error(`草稿路径或请求基线不一致：${key}`)
+    }
+    const bytes = readFileSync(draftPath)
+    const draft = JSON.parse(bytes)
+    checkDraftIdentity(draft, request, base)
+    return { key, output, requestPath, bytes, draft }
+  })
+}
 
 function listening(directory, projection) {
   return alignReviewedListeningSentences(projection.materialization, projection.reviewedListening.review,
@@ -92,13 +146,14 @@ async function prepare(work, paperId) {
   const staging = mkdtempSync(path.join(work, '.requests-'))
   try {
     const index = [`# ${paperId} · ${base.id}`, '',
+      '合入结果见 `../ready/INDEX.md`。', '',
       '| 请求 | 讲评文件 | 题号 | 草稿路径 |', '| --- | --- | --- | --- |']
     function add(descriptor, request, numbers) {
       const file = `${descriptor.key}.request.json`
-      writeJson(path.join(staging, file), { ...request, baseRevisionId: base.id,
+      const draftPath = path.join(work, 'drafts', draftName(base, descriptor.key))
+      writeJson(path.join(staging, file), { ...request, baseRevisionId: base.id, draftPath,
         instructions: '按权威答案写完整 JSON。精确引用题面，保留来源 ID。只输出讲评对象。' })
-      const draft = path.join(work, 'drafts', `${descriptor.key}.json`)
-      index.push(`| ${file} | ${descriptor.path} | ${range(numbers)} | \`${draft}\` |`)
+      index.push(`| ${file} | ${descriptor.path} | ${range(numbers)} | \`${draftPath}\` |`)
     }
     const skipped = []
     projection.materialization.groups.forEach((source, order) => {
@@ -129,37 +184,32 @@ async function prepare(work, paperId) {
   }
 }
 
-function merge(work) {
+function merge(work, only) {
   const sealed = path.join(work, 'sealed')
   const base = hydratedEvidenceBase(sealed)?.revision
   if (!base || !existsSync(path.join(work, 'requests', 'INDEX.md'))) throw new Error('请先运行 prepare')
   const ready = path.join(work, 'ready')
   if (existsSync(ready)) throw new Error('该工作目录已有通过 finalize 的合稿')
+  const before = buildNck1SealedReviewProjection(sealed, base, { requireAnalyses: true })
+  const keys = new Set(before.materialization.groups.map(stagedKey))
+  if (before.materialization.listening?.state === 'captured') keys.add(NCK1_LISTENING_STAGED_ANALYSIS.key)
+  const drafts = draftsForMerge(work, base, descriptors.filter(({ key }) => keys.has(key)), only)
   const staging = mkdtempSync(path.join(work, '.merge-'))
   try {
     const bundle = path.join(staging, 'bundle')
-    const before = buildNck1SealedReviewProjection(sealed, base, { requireAnalyses: true })
     cpSync(path.join(work, 'bundle'), bundle, { recursive: true })
-    const merged = []
-    for (const filename of readdirSync(path.join(work, 'drafts')).filter(file => file.endsWith('.json')).sort()) {
-      const descriptor = descriptors.find(item => `${item.key}.json` === filename)
-      if (!descriptor) throw new Error(`无法识别的草稿：${filename}`)
-      const { key, path: output } = descriptor
-      const draft = path.join(work, 'drafts', filename)
-      const request = path.join(work, 'requests', `${key}.request.json`)
-      deepStrictEqual(readJson(request).baseRevisionId, base.id, `${key} 的请求版本不同`)
+    for (const { key, output, requestPath, bytes, draft } of drafts) {
       const target = path.join(bundle, output)
       if (key === NCK1_LISTENING_STAGED_ANALYSIS.key) {
         const effective = projectEffectiveAnswers(before.materialization, before.answerCorrections)
-        const analysis = mergeReviewedListeningAnalysis(effective, listening(sealed, before), { authored: readJson(draft) })
+        const analysis = mergeReviewedListeningAnalysis(effective, listening(sealed, before), { authored: draft })
         writeFileSync(target, `${JSON.stringify(analysis, null, 2)}\n`)
       } else {
-        cpSync(draft, target)
+        writeFileSync(target, bytes)
       }
-      run('validate-analysis.mjs', request, target)
-      merged.push(output)
+      run('validate-analysis.mjs', requestPath, target)
     }
-    if (!merged.length) throw new Error('没有可合入的草稿')
+    const merged = drafts.map(({ output }) => output)
     run('freeze-products.mjs', '--paper-dir', bundle)
     const { manifest } = prepareReviewPush(bundle, { expectedBaseRevisionId: base.id })
     const mutable = new Set([...merged, PRODUCT_MANIFEST, analysisPdf])
@@ -185,6 +235,9 @@ function merge(work) {
     const pdfs = manifest.files.filter(file => file.role === 'pdf_product')
     if (!pdfs.some(file => file.path === analysisPdf)) throw new Error('缺少解析 PDF')
     writeJson(path.join(staging, 'manifest.json'), manifest)
+    writeJson(path.join(staging, 'merge-receipt.json'), { baseRevisionId: base.id, bundleDigest: manifest.bundleDigest, merged })
+    writeFileSync(path.join(staging, 'INDEX.md'), [`# ${base.paperId} · ${base.id}`, '', '本次合入', '',
+      ...merged.map(file => `- ${file}`), '', '[请求清单](../requests/INDEX.md)', ''].join('\n'))
     renameSync(staging, ready)
     const media = manifest.files.filter(file => /^(audio|image)\//u.test(file.mediaType))
     console.log(JSON.stringify({ status: 'local_finalized', bundle: path.join(ready, 'bundle'), merged,
@@ -200,6 +253,8 @@ async function push(work) {
   const bundle = path.join(ready, 'bundle')
   const manifest = readJson(path.join(ready, 'manifest.json'))
   const base = manifest.expectedBaseRevisionId
+  const { baseRevisionId, bundleDigest, merged } = readJson(path.join(ready, 'merge-receipt.json'))
+  deepStrictEqual([baseRevisionId, bundleDigest], [base, manifest.bundleDigest], '合稿回执与待上传清单不一致')
   const attempt = path.join(work, 'upload-attempt.json')
   if (existsSync(attempt)) throw new Error('已有上传尝试，请先只读对账上传回执和生产 Candidate')
   const latest = await reviewCandidate(manifest.paperId)
@@ -211,22 +266,25 @@ async function push(work) {
   // Preserve this marker if registration or finalize returns an unknown outcome.
   writeJson(attempt, { base, bundleDigest: manifest.bundleDigest })
   const result = await uploadReviewBundle(bundle, manifest, path.join(work, 'upload-timeline.jsonl'))
-  writeJson(path.join(work, 'upload-receipt.json'), result)
+  writeJson(path.join(work, 'upload-receipt.json'), { ...result, baseRevisionId, merged })
   rmSync(path.join(homedir(), '.cache', 'eqbank', 'revisions', base), { recursive: true, force: true })
   console.log(JSON.stringify({ revisionId: result.revision.id }))
 }
 
-try {
+async function main() {
   const [command, ...args] = process.argv.slice(2)
-  const { values } = parseArgs({ args, options: { paper: { type: 'string' }, work: { type: 'string' } } })
-  if (!['prepare', 'merge', 'push'].includes(command) || !values.work || (command === 'prepare') !== Boolean(values.paper)) {
-    throw new Error('用法：lecture-redo.mjs prepare --paper ID --work DIR | (merge|push) --work DIR')
+  const { values } = parseArgs({ args, options: { paper: { type: 'string' }, work: { type: 'string' }, only: { type: 'string' } } })
+  if (!['prepare', 'merge', 'push'].includes(command) || !values.work || (command === 'prepare') !== Boolean(values.paper)
+    || (command !== 'merge' && values.only !== undefined)) {
+    throw new Error('用法：lecture-redo.mjs prepare --paper ID --work DIR | merge --work DIR [--only FILE,...] | push --work DIR')
   }
   const work = path.resolve(values.work)
   if (command === 'prepare') await prepare(work, values.paper)
-  else if (command === 'merge') merge(work)
+  else if (command === 'merge') merge(work, values.only)
   else await push(work)
-} catch (error) {
+}
+
+if (import.meta.main) main().catch(error => {
   console.error(error.message)
   process.exitCode = 1
-}
+})
