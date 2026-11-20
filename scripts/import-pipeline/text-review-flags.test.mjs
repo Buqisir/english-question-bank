@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url'
 import { findSourceFlagTargets } from './text-review-parts.mjs'
 import { applySpellingReview, isSourceMarkCorrection, listeningEditTurns, prepareSpellingReview, SPELLING_REVIEW_POLICY, TEXT_REVIEW_POLICY_V2, TEXT_REVIEW_POLICY, TEXT_REVIEW_POLICY_V4, verifyListeningEditOccurrences, verifyListeningInsertionOccurrences } from '../../server/paper-import/spellingReview.mjs'
 import { mapSourceEmphasisEdits } from '../../server/paper-canonical/sourceEmphasis.mjs'
+import { listeningSentenceTargets } from './listening-sentence-align.mjs'
 
 const at = (text, flag) => findSourceFlagTargets([{ before: text }], flag).flatMap(hit => hit.at)
 
@@ -198,9 +199,18 @@ test('whole-turn edits bind the original turn and use ordered evidence without a
   ] })
   const turn = { scope: 'turn', turnIndex: 1, segmentId: evidence.segmentId, start: text.indexOf(before), before, after,
     audioSha256: audio.sha256, occurrence: evidence.occurrence, startSeconds: 14, endSeconds: 19,
-    evidence: { apple: `May I join you? ${after} Sure.`, 'parakeet-v2': after.replace('those', 'these') },
+    evidence: { apple: after, 'parakeet-v2': after },
     reason: '整轮替换。' }
-  const apply = (...listeningEdits) => applySpellingReview(bytes, Buffer.from(JSON.stringify({ ...report, listeningEdits })), audio)
+  const { sentences } = listeningSentenceTargets(JSON.parse(bytes))[0]
+  const source = { audioSha256: audio.sha256, materializationSha256: report.materializationSha256, segments: [{
+    segmentId: evidence.segmentId,
+    sentences: sentences.map((sentence, index) => ({ ...sentence,
+      passes: [{ start: [11, 14, 15, 21][index], end: [13, 15, 19, 23][index] }] })),
+    engines: Object.fromEntries(['apple', 'parakeet-v2', 'faster-whisper'].map(engine =>
+      [engine, [{ text: after, startSeconds: 14, endSeconds: 19 }]])),
+  }] }
+  const apply = (...listeningEdits) => applySpellingReview(bytes,
+    Buffer.from(JSON.stringify({ ...report, listeningEdits })), audio, source)
   assert.equal(apply(turn).listening.transcript[0].text, `W: We walked to work.\nM: ${after}\nW: I will help.`)
   assert.equal(apply({ ...turn, evidence: { 'faster-whisper': after, 'parakeet-v2': after } }).listening.transcript[0].text,
     `W: We walked to work.\nM: ${after}\nW: I will help.`)
@@ -208,17 +218,48 @@ test('whole-turn edits bind the original turn and use ordered evidence without a
   assert.throws(() => apply({ ...turn, before: before.replace('agre', 'agree') }), /complete original turn/)
   assert.throws(() => apply({ ...turn, turnIndex: 0 }), /complete original turn/)
   assert.throws(() => apply({ ...turn, evidence: { ...turn.evidence,
-    apple: after.split(' ').reverse().join(' ') } }), /two engines/)
+    apple: after.split(' ').reverse().join(' ') } }), /outside the verified turn/)
   assert.throws(() => apply({ ...turn, after: `${after}\nW: Sure.` }), /speaker label/)
   const { scope, turnIndex, ...local } = turn
   assert.throws(() => apply(turn, { ...local, start: text.indexOf('carry') + 3, before: 'carry', after: 'move',
     evidence: { apple: 'Could you move these over', 'parakeet-v2': 'Could you move these over' } }), /overlapping listening edits/)
   assert.throws(() => apply(turn, turn), /overlapping listening edits/)
   const applyWithInsertion = afterSentence => applySpellingReview(bytes, Buffer.from(JSON.stringify({ ...report,
-    listeningInsertions: [{ ...evidence, afterSentence }], listeningEdits: [turn] })), audio)
+    listeningInsertions: [{ ...evidence, afterSentence }], listeningEdits: [turn] })), audio, source)
   assert.equal(applyWithInsertion('We walked to work.').listening.transcript[0].text,
     `W: We walked to work. ${evidence.text}\nM: ${after}\nW: I will help.`)
   assert.throws(() => applyWithInsertion('I agree.'), /overlapping listening edits/)
+})
+
+test('turn evidence from another speaker window and an unspoken negation are rejected', () => {
+  const first = 'We can take some things into the car when we leave today.'
+  const second = 'We have already brought everything we need to the garage today.'
+  const text = `M: ${first}\nW: ${second}`
+  const segmentId = 'listening-text-1'
+  const document = { listening: { state: 'captured', transcript: [{ segmentId, text }] } }
+  const bytes = Buffer.from(JSON.stringify(document))
+  const report = prepareSpellingReview(bytes)
+  Object.assign(report, { reviewedBy: 'import_agent', reviewedAt: '2026-11-20T00:00:00Z' })
+  report.targets[0].decision = 'unchanged'
+  const { audio } = listeningInsertionFixture(text, null)
+  const runs = [{ text: first, startSeconds: 11, endSeconds: 15 }, { text: second, startSeconds: 20, endSeconds: 25 }]
+  const source = { audioSha256: audio.sha256, materializationSha256: report.materializationSha256, segments: [{
+    segmentId,
+    sentences: listeningSentenceTargets(document)[0].sentences.map((sentence, index) => ({ ...sentence,
+      passes: [{ start: runs[index].startSeconds, end: runs[index].endSeconds }] })),
+    engines: { apple: runs, 'parakeet-v2': runs },
+  }] }
+  const edit = { scope: 'turn', turnIndex: 1, segmentId, start: text.indexOf(second), before: second, after: first,
+    audioSha256: audio.sha256, occurrence: { startSeconds: 10, endSeconds: 30 }, startSeconds: 11, endSeconds: 15,
+    evidence: { apple: first, 'parakeet-v2': first }, reason: '整轮替换。' }
+  const apply = (entry, verified = source) => applySpellingReview(bytes,
+    Buffer.from(JSON.stringify({ ...report, listeningEdits: [entry] })), audio, verified)
+  assert.throws(() => apply(edit), /interval falls outside the verified turn/)
+  const ownTime = { ...edit, startSeconds: 20, endSeconds: 25 }
+  assert.throws(() => apply(ownTime), /evidence is outside the verified turn/)
+  const negated = { ...ownTime, after: second.replace('have', 'have not'), evidence: { apple: second, 'parakeet-v2': second } }
+  assert.throws(() => apply(negated), /two engines/)
+  assert.throws(() => apply(negated, null), /no verified turn time window/)
 })
 
 test('audio that says Well cannot assign it to either side of a speaker change', () => {

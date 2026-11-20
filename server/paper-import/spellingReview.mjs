@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
-import { normalizeListeningText } from '../../scripts/import-pipeline/lib-listening-segment-rule.mjs'
+import { sameProperNameSound, units } from '../../scripts/import-pipeline/listening-transcript-check-alignment.mjs'
 import { listeningSentenceTargets } from '../../scripts/import-pipeline/listening-sentence-align.mjs'
 import { digestJson, exactKeys, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { extractDocxDocumentParagraphs, DOCX_MEDIA_TYPE } from '../paper-canonical/docxSourceAdapter.mjs'
@@ -292,27 +292,53 @@ export function listeningEditTurns(text) {
 
 function turnWords(text) {
   const words = listeningEditWords(text)
-  return words.some(word => /[^a-z0-9']/u.test(word)) ? words : normalizeListeningText(text)
+  if (words.some(word => /[^a-z0-9']/u.test(word))) return words.map(token => ({ token }))
+  return units(text)
 }
 
-function turnEvidence(after, heard) {
-  if (!after.length) return false
-  const words = turnWords(heard)
-  const required = Math.ceil(after.length * 0.9)
-  if (words.length < required) return false
-  // Longest common subsequence, with an early exit once enough replacement
-  // words have appeared in order. Words from adjoining turns are optional.
-  const counts = new Uint32Array(after.length + 1)
-  for (const word of words) {
-    let previous = 0
-    for (let i = 1; i < counts.length; i++) {
-      const prior = counts[i]
-      counts[i] = word === after[i - 1] ? previous + 1 : Math.max(prior, counts[i - 1])
-      previous = prior
-    }
-    if (counts[after.length] >= required) return true
+function turnEvidence(after, heard, retainedNames) {
+  let index = 0
+  for (const word of turnWords(heard)) {
+    const expected = after[index]
+    if (expected && (expected.token === word.token
+      || retainedNames.has(expected.token) && sameProperNameSound(expected, word))) index++
   }
-  return false
+  return after.length > 0 && index === after.length
+}
+
+function turnTimeWindow(edit, original, evidence) {
+  const segment = evidence?.segments?.find(item => item.segmentId === edit.segmentId)
+  const material = original.listening.transcript.find(item => item.segmentId === edit.segmentId)
+  const turn = listeningEditTurns(material.text)[edit.turnIndex]
+  const expected = listeningSentenceTargets({ listening: { transcript: [material] } })[0].sentences
+    .filter(sentence => sentence.utf16Start >= turn.start && sentence.utf16End <= turn.end)
+  const sentences = expected.map(({ en, utf16Start, utf16End }) => segment?.sentences?.find(sentence =>
+    sentence.en === en && sentence.utf16Start === utf16Start && sentence.utf16End === utf16End))
+  const { startSeconds, endSeconds } = edit.occurrence
+  const passes = (sentences[0]?.passes ?? []).flatMap((_, index) => {
+    const timings = sentences.map(sentence => sentence?.passes?.[index])
+    if (timings.some((time, i) => !Number.isFinite(time?.start) || !Number.isFinite(time?.end)
+      || time.interpolated || time.start < startSeconds || time.end > endSeconds || time.start >= time.end
+      || i > 0 && time.start < timings[i - 1].end)) return []
+    return [{ start: timings[0].start, end: timings.at(-1).end }]
+  })
+  if (passes.length !== 1) fail('listening edit has no verified turn time window')
+  const [{ start, end }] = passes
+  if (edit.startSeconds < start - 1.5 || edit.endSeconds > end + 1.5
+    || edit.endSeconds <= start || edit.startSeconds >= end) fail('listening edit interval falls outside the verified turn')
+  return { start, end, engines: segment.engines }
+}
+
+function scopedTurnEvidence({ start, end, engines }, engine, heard) {
+  const runs = engines?.[engine]
+  if (!Array.isArray(runs)) return false
+  const words = listeningEditWords(runs.filter(run => typeof run.text === 'string'
+    && Number.isFinite(run.startSeconds) && Number.isFinite(run.endSeconds) && run.endSeconds > run.startSeconds
+    && run.startSeconds >= start - 0.005 && run.endSeconds <= end + 0.005)
+    .sort((a, b) => a.startSeconds - b.startSeconds).map(run => run.text).join(' '))
+  const quote = listeningEditWords(heard)
+  return quote.length > 0 && words.some((word, index) => word === quote[0]
+    && quote.every((token, offset) => words[index + offset] === token))
 }
 
 function resolveTurnEdit(edit, original, text, spelling, insertions) {
@@ -344,7 +370,7 @@ function resolveTurnEdit(edit, original, text, spelling, insertions) {
   return { ...edit, start, before: text.slice(start, end) }
 }
 
-function applyListeningEdits(materialization, edits, audio, original, spelling, insertions) {
+function applyListeningEdits(materialization, edits, audio, original, spelling, insertions, turnEvidenceSource) {
   const { listening } = materialization
   if (listening?.state !== 'captured' || !Array.isArray(edits)) fail('invalid listening edits')
   const untouched = () => digestJson({ ...materialization, listening: { ...listening,
@@ -385,9 +411,14 @@ function applyListeningEdits(materialization, edits, audio, original, spelling, 
     }
     const engines = evidence && typeof evidence === 'object' && !Array.isArray(evidence) ? Object.entries(evidence) : []
     const after = turn ? turnWords(edit.after) : null
+    const retainedNames = turn ? new Set(turnWords(edit.before).filter(word => word.name).map(word => word.token)) : null
+    const window = turn ? turnTimeWindow(edit, original, turnEvidenceSource) : null
+    if (turn && engines.some(([engine, heard]) => typeof heard === 'string' && !scopedTurnEvidence(window, engine, heard))) {
+      fail('listening edit evidence is outside the verified turn')
+    }
     if (engines.some(([engine, heard]) => !(listeningEditEngines.has(engine) || turn && engine === 'faster-whisper')
       || typeof heard !== 'string' || !heard.trim())
-      || engines.filter(([, heard]) => turn ? turnEvidence(after, heard) : supportsListeningEdit(text, edit, heard)).length < 2) {
+      || engines.filter(([, heard]) => turn ? turnEvidence(after, heard, retainedNames) : supportsListeningEdit(text, edit, heard)).length < 2) {
       fail('listening edit requires supporting transcription from two engines')
     }
     if (!bySegment.has(segments[0])) bySegment.set(segments[0], [])
@@ -497,7 +528,8 @@ function insertListeningSentences(materialization, insertions, listeningAudio, p
   }
 }
 
-export function applySpellingReview(materializationBytes, reportBytes, listeningAudio) {
+// Turn evidence comes from the caller's verified playback records, never the spelling report.
+export function applySpellingReview(materializationBytes, reportBytes, listeningAudio, turnEvidenceSource) {
   const original = JSON.parse(new TextDecoder().decode(materializationBytes))
   const report = JSON.parse(new TextDecoder().decode(reportBytes))
   const correctionIds = new Set(original.groups?.filter(group => group.family === 'error-correction')
@@ -597,7 +629,10 @@ export function applySpellingReview(materializationBytes, reportBytes, listening
     }
   }
   if (hasInsertions) insertListeningSentences(effective, report.listeningInsertions, listeningAudio, listeningInsertions)
-  if (hasEdits) applyListeningEdits(effective, report.listeningEdits, listeningAudio, original, listeningSpelling, listeningInsertions)
+  const boundTurnEvidence = turnEvidenceSource?.audioSha256 === listeningAudio?.sha256
+    && turnEvidenceSource?.materializationSha256 === report.materializationSha256 ? turnEvidenceSource : null
+  if (hasEdits) applyListeningEdits(effective, report.listeningEdits, listeningAudio, original, listeningSpelling, listeningInsertions,
+    boundTurnEvidence)
   return effective
 }
 

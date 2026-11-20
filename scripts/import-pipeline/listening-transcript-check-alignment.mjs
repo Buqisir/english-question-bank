@@ -23,9 +23,12 @@ export function units(text) {
   }))
 }
 
+export function sameProperNameSound(a, b) {
+  return a.name && b.name && a.token.length > 3 && b.token.length > 3 && nameSounds(a.token) === nameSounds(b.token)
+}
+
 function equivalent(a, b) {
-  return a.token === b.token || (a.name && b.name && a.token.length > 3 && b.token.length > 3
-    && nameSounds(a.token) === nameSounds(b.token))
+  return a.token === b.token || sameProperNameSound(a, b)
 }
 
 // The match wins ties so a shared word remains an anchor between changes.
