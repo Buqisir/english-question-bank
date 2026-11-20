@@ -9,7 +9,7 @@ import {
   validateNck1OcrReviewConfirmation,
 } from './revisionProjection.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
-import { LISTENING_REVIEW_FILE } from '../paper-import/listeningReview.mjs'
+import { LISTENING_REVIEW_FILE, verifyRetainedListeningNavigation } from '../paper-import/listeningReview.mjs'
 import { SPELLING_REVIEW_FILE, verifyListeningEditOccurrences, verifyListeningInsertionOccurrences } from '../paper-import/spellingReview.mjs'
 import { buildProductPreviewPayload, buildStoredReviewSubject } from './reviewSubject.mjs'
 import { inspectSealedReviewFiles } from './sealedReviewFiles.mjs'
@@ -45,17 +45,21 @@ export function finalizeProjection(directory, revision, {
     expectedCandidateDigest: revision.candidateDigest,
     replayReferencesFromRevisionId: evidenceBase?.directory ? revision.manifest?.expectedBaseRevisionId : null,
   }, evidenceBase)
+  const readBaseReview = () => {
+    if (!evidenceBase?.directory || evidenceBase.revision?.id !== revision.manifest?.expectedBaseRevisionId
+      || evidenceBase.revision?.paperId !== projection.paperId) return null
+    const descriptor = evidenceBase.revision.manifest?.files?.find(file => file.path === LISTENING_REVIEW_FILE)
+    if (!descriptor) return null
+    const bytes = readFileSync(resolveReviewFile(evidenceBase.directory, LISTENING_REVIEW_FILE))
+    return bytes.length === descriptor.byteLength && sha256(bytes) === descriptor.sha256 ? JSON.parse(bytes) : null
+  }
+  const listening = projection.reviewedListening?.review
+  verifyRetainedListeningNavigation(listening, readBaseReview)
   if (revision.manifest?.files?.some(file => file.path === SPELLING_REVIEW_FILE)) {
     const spellingReview = readFileSync(resolveReviewFile(directory, SPELLING_REVIEW_FILE))
-    const readBaseReview = () => {
-      const descriptor = evidenceBase?.revision?.manifest?.files?.find(file => file.path === LISTENING_REVIEW_FILE)
-      if (!descriptor) return null
-      const bytes = readFileSync(resolveReviewFile(evidenceBase.directory, LISTENING_REVIEW_FILE))
-      return bytes.length === descriptor.byteLength && sha256(bytes) === descriptor.sha256 ? JSON.parse(bytes) : null
-    }
     verifyListeningInsertionOccurrences(spellingReview, readBaseReview)
     // A new Candidate can bind to its own validated navigation sidecar.
-    verifyListeningEditOccurrences(spellingReview, projection.reviewedListening?.review, () => {
+    verifyListeningEditOccurrences(spellingReview, listening, () => {
       const base = readBaseReview()
       return base?.subject?.paperId === revision.manifest.paperId ? base : null
     })

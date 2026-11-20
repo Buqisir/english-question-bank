@@ -7,6 +7,7 @@ import { reviewSubjectBundleDigest } from '../import-review/reviewSubject.mjs'
 import { listeningAsrTokens } from '../../scripts/import-pipeline/lib-listening-segment-rule.mjs'
 
 export const LISTENING_REVIEW_FILE = 'listening-review-v1.json'
+export const RETAINED_LISTENING_NAVIGATION = 'retained_navigation'
 const evidencePrefix = 'listening-review-evidence/'
 const nonempty = value => typeof value === 'string' && value.trim().length > 0
 const digest = value => /^sha256:[a-f0-9]{64}$/.test(value || '')
@@ -60,12 +61,13 @@ export function validateListeningReview(rootDir, review, subject, transcript) {
 }
 
 function validateReview(rootDir, review, subject, transcript, version, retained = false) {
+  const retainedNavigation = review?.method === RETAINED_LISTENING_NAVIGATION
   if (!exactKeys(review, ['schemaVersion', 'subject', 'reviewedBy', 'reviewedAt',
     'method', 'untrustedContentHandledAsData', 'scope', 'evidence', 'groups'])
     || review.schemaVersion !== version
     || digestJson(review.subject) !== digestJson(subject)
     || review.reviewedBy !== 'import_agent' || !Number.isFinite(Date.parse(review.reviewedAt))
-    || !['asr_source_comparison', 'audio_source_comparison', 'agent_asr_comparison'].includes(review.method)
+    || !['asr_source_comparison', 'audio_source_comparison', 'agent_asr_comparison', RETAINED_LISTENING_NAVIGATION].includes(review.method)
     || review.untrustedContentHandledAsData !== true
     || digestJson(review.scope) !== digestJson({ purpose: 'teacher_navigation',
       verbatim: 'not_certified', wholeRecordingContent: 'not_certified' })) fail('invalid subject, attestation or scope')
@@ -95,7 +97,7 @@ function validateReview(rootDir, review, subject, transcript, version, retained 
     if (version === LISTENING_REVIEW_VERSION && file.kind === 'asr_window'
       && (record.rule || record.groups || record.engineAttempts
         || /^listening-rule-evidence-/u.test(record.schemaVersion || ''))) fail('rule evidence cannot claim ASR settings')
-    if (version === LISTENING_REVIEW_VERSION && file.kind === 'review_notes') {
+    if (version === LISTENING_REVIEW_VERSION && file.kind === 'review_notes' && !retainedNavigation) {
       if (record.schemaVersion === LISTENING_RULE_EVIDENCE_VERSION) ruleNotes.push(record)
       else {
         // Do not guess authority from a filename. A second legacy/stripped rule
@@ -110,7 +112,8 @@ function validateReview(rootDir, review, subject, transcript, version, retained 
     }
     paths.add(file.path)
   }
-  if (version === LISTENING_REVIEW_VERSION) {
+  // Finalize checks these historical notes and judgments against the sealed base.
+  if (version === LISTENING_REVIEW_VERSION && !retainedNavigation) {
     if (ruleNotes.length > 1 || (review.method !== 'audio_source_comparison' && ruleNotes.length !== 1)) fail('requires one v2 rule summary')
     // A sealed review already checked the exact rule/ASR bytes with its
     // original reader, including the word timings used for agent judgments.
@@ -118,7 +121,7 @@ function validateReview(rootDir, review, subject, transcript, version, retained 
       try { assertListeningRuleEvidence(notes, review, transcript, asrWords) } catch (error) { fail(error.message) }
     }
   }
-  if (review.method !== 'audio_source_comparison' && !review.evidence.some(file => file.kind === 'asr_window')) {
+  if (!retainedNavigation && review.method !== 'audio_source_comparison' && !review.evidence.some(file => file.kind === 'asr_window')) {
     fail('ASR comparison requires retained ASR windows')
   }
   const groups = [...transcript].sort((a, b) => Math.min(...a.questionNumbers) - Math.min(...b.questionNumbers))
@@ -127,7 +130,7 @@ function validateReview(rootDir, review, subject, transcript, version, retained 
   for (const [index, group] of review.groups.entries()) {
     const source = groups[index]
     if (!exactKeys(group, ['segmentId', 'questionNumbers', 'decision', 'reason', 'limits', 'playback', 'occurrences',
-      ...(review.method === 'agent_asr_comparison' && Object.hasOwn(group, 'boundaryJudgment') ? ['boundaryJudgment'] : [])])
+      ...((retainedNavigation || review.method === 'agent_asr_comparison') && Object.hasOwn(group, 'boundaryJudgment') ? ['boundaryJudgment'] : [])])
       || group.segmentId !== source.segmentId
       || digestJson(group.questionNumbers) !== digestJson(source.questionNumbers)
       || !['usable', 'review_required', 'blocked'].includes(group.decision)
@@ -167,6 +170,16 @@ function validateReview(rootDir, review, subject, transcript, version, retained 
     ...review.evidence.map(file => ({ path: file.path, mediaType: 'application/json', role: 'listening_review_evidence' })),
   ]
   return { review, files }
+}
+
+export function verifyRetainedListeningNavigation(review, readBase) {
+  if (review?.method !== RETAINED_LISTENING_NAVIGATION) return
+  const base = readBase()
+  const navigation = ({ method, subject: { sourceDigest, candidateDigest, transcriptDigest, ...audio }, ...rest }) =>
+    ({ audio, ...rest })
+  if (!base || digestJson(navigation(review)) !== digestJson(navigation(base))) {
+    fail('retained navigation must match the finalized base exactly')
+  }
 }
 
 export function readListeningReview(rootDir, subject, transcript) {

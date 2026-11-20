@@ -864,7 +864,7 @@ function sameListeningInputs(previous, current) {
     candidateDigest: current.candidateDigest }) === digestJson(current)
 }
 
-export function rebindFastListening(directory, review, subject, transcript) {
+function rebindFastListening(directory, review, subject, transcript) {
   const evidence = review.evidence.map(file => {
     if (file.kind !== 'review_notes') return file
     const record = readJson(path.join(directory, file.path))
