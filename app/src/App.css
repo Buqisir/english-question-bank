@@ -317,6 +317,18 @@
   }
 }
 
+/* 首页顶栏触屏点击区只加高到 44（Owner 2026-11-20 定，DESIGN.md「触屏上旁边有空地的键」那条）：
+ * 顶栏 48 高、一行，28 高的导航键上下有空地，透明 ::after 上下各伸 8，32×28 → 32×44，样子不变。
+ * 不加宽：键和键之间只隔 4，往左右伸会盖到隔壁。子页顶栏（.topbar-sub，草稿卷那种两行的）不扩。
+ * 覆盖：button.css 那条把小号排除在外，这里只给首页顶栏的小号补上，按钮本身 position: relative。 */
+@media (pointer: coarse) {
+  header.topbar:not(.topbar-sub) .eqb-button[data-size='sm']::after {
+    content: '';
+    position: absolute;
+    inset: min(0px, calc(50% - var(--eqb-target-touch) / 2)) 0;
+  }
+}
+
 .topbar h1,
 .library-header h2,
 .panel-heading h2 {
