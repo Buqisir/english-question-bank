@@ -47,7 +47,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: 24.21.0
+          node-version: 24.22.3
       - id: plan
         env:
           EQB_DEPLOY_SSH_KEY: ${{ secrets.EQB_DEPLOY_SSH_KEY }}
@@ -65,7 +65,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
-          node-version: 24.21.0
+          node-version: 24.22.3
       - env:
           EQB_DEPLOY_SSH_KEY: ${{ secrets.EQB_DEPLOY_SSH_KEY }}
           EQB_EXPECTED_SHA: ${{ needs.plan.outputs.sha }}

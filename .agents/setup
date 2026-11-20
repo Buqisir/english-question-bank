@@ -77,11 +77,11 @@ if [[ -n "$image_magick_policy" ]] && grep -Fq 'rights="none" pattern="PDF"' "$i
 fi
 fi
 
+node_version="$(<.nvmrc)"
 node_home="$HOME/.local/node-24"
-if [[ ! -x "$node_home/bin/node" ]] || [[ "$($node_home/bin/node --version)" != v24.* ]]; then
-  node_archive="$(curl -fsSL https://nodejs.org/dist/latest-v24.x/SHASUMS256.txt \
-    | awk '/linux-x64\.tar\.xz$/ { print $2; exit }')"
-  node_url="https://nodejs.org/dist/latest-v24.x/$node_archive"
+if [[ ! -x "$node_home/bin/node" ]] || [[ "$($node_home/bin/node --version)" != "v$node_version" ]]; then
+  node_archive="node-v$node_version-linux-x64.tar.xz"
+  node_url="https://nodejs.org/dist/v$node_version/$node_archive"
   temp_dir="$(mktemp -d)"
   trap 'rm -rf "$temp_dir"' EXIT
   step "downloading Node.js 24" curl -fsSLo "$temp_dir/$node_archive" "$node_url"
@@ -132,8 +132,8 @@ export PATH="$import_python/bin:$PATH"
 step "checking signal audio dependencies" python3 -c 'import numpy, scipy; print("signal audio ready")'
 
 if [[ "$analysis_only" == --import ]]; then
-  step "activating pnpm 10.28.1" corepack enable
-  step "preparing pnpm 10.28.1" corepack prepare pnpm@10.28.1 --activate
+  step "activating pnpm 10.34.9" corepack enable
+  step "preparing pnpm 10.34.9" corepack prepare pnpm@10.34.9 --activate
   step "installing locked preview dependencies" env CI=true pnpm -C app install --frozen-lockfile
   step "installing locked import dependencies" npm ci --prefix server --no-audit --no-fund
   step "preparing preview Chromium" pnpm -C app exec playwright install --with-deps --no-shell chromium
@@ -196,8 +196,8 @@ for directory in \
   sudo install -d -o "$ci_user" -g "$ci_user" -m 0700 "$directory"
 done
 
-step "activating pnpm 10.28.1" corepack enable
-step "preparing pnpm 10.28.1" corepack prepare pnpm@10.28.1 --activate
+step "activating pnpm 10.34.9" corepack enable
+step "preparing pnpm 10.34.9" corepack prepare pnpm@10.34.9 --activate
 step "installing app dependencies" pnpm -C app install --frozen-lockfile
 step "installing server dependencies" npm ci --prefix server
 
