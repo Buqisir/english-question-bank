@@ -75,7 +75,8 @@ export async function adjudicate(group, text, engines, remote, audioSha256) {
     return { edits: [], review: [{ segmentId, occurrence, reason: '本地转写与该段大范围对不上，请先听核段号。' }] }
   }
   const edits = [], review = []
-  for (const site of sites(readings)) {
+  const canJoin = (left, right) => !crossesSpeakerBoundary(text, source, left) && !crossesSpeakerBoundary(text, source, right)
+  for (const site of sites(readings, canJoin)) {
     const votes = readings.map(reading => ({ engine: reading.engine, ...observation(reading, site) }))
     const sourceWords = source.slice(site.start, site.end)
     if (votes.every(vote => wordText(vote.words, '') === wordText(sourceWords, ''))) continue

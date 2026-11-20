@@ -79,13 +79,16 @@ export function timedReading(runs, source) {
   return { text, words: repeat < 0 ? words : words.slice(0, repeat) }
 }
 
-export function sites(readings) {
+export function sites(readings, canJoin) {
   const combined = readings.flatMap(reading => reading.changes).map(({ start, end }) => ({ start, end }))
     .sort((a, b) => a.start - b.start || a.end - b.end)
   const merged = []
   for (const site of combined) {
     const last = merged.at(-1)
-    if (last && site.start <= last.end) last.end = Math.max(last.end, site.end)
+    // With one shared word between two changes, they touch each other's two-word anchors.
+    if (last && (site.start <= last.end || site.start === last.end + 1 && canJoin(last, site))) {
+      last.end = Math.max(last.end, site.end)
+    }
     else merged.push(site)
   }
   return merged

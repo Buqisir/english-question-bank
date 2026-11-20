@@ -94,7 +94,7 @@ test('listening edits bind UTF-16 coordinates after spelling and retained insert
   })
   const edits = [
     edit(baseline.indexOf('leave'), '', 'just ', 'Did you really already just leave today?'),
-    edit(baseline.indexOf('go.'), 'go', 'walk', 'We should walk.'),
+    edit(baseline.indexOf('go.'), 'go', 'walk', 'We should walk. It is'),
     edit(baseline.indexOf('already'), 'already ', '', 'Did you really leave today?'),
   ]
   const reportBytes = encode({ listeningEdits: edits })
@@ -110,7 +110,7 @@ test('listening edits bind UTF-16 coordinates after spelling and retained insert
   verifyListeningEditOccurrences(reportBytes, null, () => review)
   assert.throws(() => verifyListeningEditOccurrences(reportBytes, null), /match a reviewed occurrence/)
   const apply = (...listeningEdits) => applySpellingReview(bytes, encode({ listeningEdits }), audio)
-  assert.throws(() => apply(edits[1], { ...edits[1], start: edits[1].start + 1, before: 'o' }), /overlapping/)
+  assert.throws(() => apply(edits[1], edit(edits[1].start + 1, 'o', 'walk', 'should g walk. It is')), /overlapping/)
   assert.throws(() => apply({ ...edits[1], before: 'no' }), /before does not match/)
   assert.throws(() => apply({ ...edits[0], start: baseline.length + 1 }), /before does not match/)
   assert.throws(() => apply({ ...edits[1], segmentId: 'other-paper-segment' }), /before does not match/)
@@ -145,6 +145,30 @@ test('Text 7 insertions reject replay against a restored transcript and require 
   assert.throws(() => apply(restored, heard, restored.length), /two engines/)
   assert.throws(() => apply(`${base} W: What happened?`, heard), /two engines/)
   assert.throws(() => apply(base, `Wrong place.${after}`), /two engines/)
+})
+
+test('listening edits distinguish repeated phrases by both neighboring words', () => {
+  const text = 'I can go today. I can go tomorrow.'
+  const { audio, evidence } = listeningInsertionFixture(text, null)
+  const apply = (source, start, before, after, heard) => {
+    const bytes = Buffer.from(JSON.stringify({ listening: { state: 'captured',
+      transcript: [{ segmentId: evidence.segmentId, text: source }] } }))
+    const report = prepareSpellingReview(bytes)
+    report.reviewedBy = 'import_agent'
+    report.reviewedAt = '2026-11-20T00:00:00Z'
+    report.targets[0].decision = 'unchanged'
+    report.listeningEdits = [{
+      segmentId: evidence.segmentId, start, before, after, audioSha256: audio.sha256,
+      startSeconds: evidence.startSeconds, endSeconds: evidence.endSeconds, occurrence: evidence.occurrence,
+      evidence: { apple: heard, 'parakeet-v2': heard }, reason: '按录音更正。',
+    }]
+    return applySpellingReview(bytes, Buffer.from(JSON.stringify(report)), audio).listening.transcript[0].text
+  }
+  const heard = 'I can not go tomorrow'
+  assert.throws(() => apply(text, text.indexOf('go'), '', 'not ', heard), /two engines/)
+  assert.equal(apply(text, text.lastIndexOf('go'), '', 'not ', heard), 'I can go today. I can not go tomorrow.')
+  assert.throws(() => apply('I can go today.', 2, 'can', 'could', 'I could go tomorrow'), /two engines/)
+  assert.throws(() => apply('I can go today.', 2, 'can ', '', 'I go tomorrow'), /two engines/)
 })
 
 test('uncertain source phrase survives an OCR line wrap', () => {

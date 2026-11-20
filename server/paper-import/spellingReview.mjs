@@ -207,23 +207,18 @@ export function listeningEditWords(value) {
 
 export function supportsListeningEdit(text, { start, before, after }, heard) {
   const words = listeningEditWords(heard)
-  if (!before) {
-    const left = listeningEditWords(text.slice(0, start))
-    const right = listeningEditWords(text.slice(start))
-    const added = listeningEditWords(after)
-    const matches = (sequence, at, phrase) => at >= 0
-      && phrase.every((word, offset) => sequence[at + offset] === word)
-    if (!added.length || matches(left, left.length - added.length, added) || matches(right, 0, added)) return false
-    const anchored = [...left.slice(-1), ...added, ...right.slice(0, 1)]
-    return words.some((_, index) => matches(words, index, anchored))
-  }
-  const left = after ? [] : listeningEditWords(text.slice(0, start)).slice(-2)
-  const right = after ? [] : listeningEditWords(text.slice(start + before.length)).slice(0, 2)
-  const expected = after ? listeningEditWords(after) : [...left, ...right]
+  const left = listeningEditWords(text.slice(0, start))
+  const right = listeningEditWords(text.slice(start + before.length))
+  const added = listeningEditWords(after)
+  const matches = (sequence, at, phrase) => at >= 0
+    && phrase.every((word, offset) => sequence[at + offset] === word)
+  if (after && !added.length) return false
+  if (!before && (matches(left, left.length - added.length, added) || matches(right, 0, added))) return false
+  const expected = [...left.slice(-2), ...added, ...right.slice(0, 2)]
   return expected.length > 0 && words.some((_, index) =>
-    (after || left.length || index === 0)
-    && (after || right.length || index + expected.length === words.length)
-    && expected.every((word, offset) => words[index + offset] === word))
+    (left.length || index === 0)
+    && (right.length || index + expected.length === words.length)
+    && matches(words, index, expected))
 }
 
 export function verifyListeningEditOccurrences(reportBytes, current, readBaseReview = () => null) {
