@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
+import { normalizeListeningText } from '../../scripts/import-pipeline/lib-listening-segment-rule.mjs'
 import { listeningSentenceTargets } from '../../scripts/import-pipeline/listening-sentence-align.mjs'
 import { digestJson, exactKeys, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { extractDocxDocumentParagraphs, DOCX_MEDIA_TYPE } from '../paper-canonical/docxSourceAdapter.mjs'
@@ -267,7 +268,83 @@ export function verifyListeningEditOccurrences(reportBytes, current, readBaseRev
   }
 }
 
-function applyListeningEdits(materialization, edits, audio) {
+// Turn indices are zero-based. Keep the first speaker label and the separators
+// outside the edit. Consecutive labels for the same speaker form one turn.
+export function listeningEditTurns(text) {
+  const labels = [...text.matchAll(listeningEditSpeakerLabels),
+    ...text.matchAll(/(?<!\S)([A-Z]\d?|Speaker \d+|Man|Woman)[ \t]*[:：][ \t]*/gu)]
+    .sort((a, b) => a.index - b.index)
+  const turns = []
+  let start = 0, speaker = null
+  for (const label of [...labels, { index: text.length, 0: '' }]) {
+    if (label.index < start) continue
+    const body = text.slice(start, label.index).trimEnd()
+    if (body.trim()) {
+      const previous = turns.at(-1)
+      if (previous?.speaker === speaker) previous.end = start + body.length
+      else turns.push({ start: start + body.length - body.trimStart().length, end: start + body.length, speaker })
+    }
+    start = label.index + label[0].length
+    speaker = label[1]?.toLowerCase()
+  }
+  return turns
+}
+
+function turnWords(text) {
+  const words = listeningEditWords(text)
+  return words.some(word => /[^a-z0-9']/u.test(word)) ? words : normalizeListeningText(text)
+}
+
+function turnEvidence(after, heard) {
+  if (!after.length) return false
+  const words = turnWords(heard)
+  const required = Math.ceil(after.length * 0.9)
+  if (words.length < required) return false
+  // Longest common subsequence, with an early exit once enough replacement
+  // words have appeared in order. Words from adjoining turns are optional.
+  const counts = new Uint32Array(after.length + 1)
+  for (const word of words) {
+    let previous = 0
+    for (let i = 1; i < counts.length; i++) {
+      const prior = counts[i]
+      counts[i] = word === after[i - 1] ? previous + 1 : Math.max(prior, counts[i - 1])
+      previous = prior
+    }
+    if (counts[after.length] >= required) return true
+  }
+  return false
+}
+
+function resolveTurnEdit(edit, original, text, spelling, insertions) {
+  const turn = listeningEditTurns(original)[edit.turnIndex]
+  if (!turn || turn.start !== edit.start || original.slice(turn.start, turn.end) !== edit.before) {
+    fail('listening edit before must match the complete original turn')
+  }
+  if (edit.after.trim() !== edit.after || edit.after.search(listeningEditSpeakerLabels) !== -1
+    || edit.after.search(speakerLabels) !== -1) fail('listening turn edit changes a speaker label')
+  let { start, end } = turn
+  for (const { start: offset, before, after } of spelling) {
+    const limit = offset + before.length
+    const delta = after.length - before.length
+    if (limit <= turn.start) start += delta
+    else if (offset < turn.end && (offset < turn.start || limit > turn.end)) {
+      fail('spelling correction crosses a listening turn boundary')
+    }
+    if (limit <= turn.end) end += delta
+  }
+  const spelledStart = start, spelledEnd = end
+  for (const { start: offset, length } of insertions) {
+    if (offset <= spelledStart) start += length
+    else if (offset < spelledEnd) fail('overlapping listening edits')
+    if (offset < spelledEnd) end += length
+  }
+  if (!listeningEditTurns(text).some(item => item.start === start && item.end === end && item.speaker === turn.speaker)) {
+    fail('listening turn boundary changed before replacement')
+  }
+  return { ...edit, start, before: text.slice(start, end) }
+}
+
+function applyListeningEdits(materialization, edits, audio, original, spelling, insertions) {
   const { listening } = materialization
   if (listening?.state !== 'captured' || !Array.isArray(edits)) fail('invalid listening edits')
   const untouched = () => digestJson({ ...materialization, listening: { ...listening,
@@ -275,8 +352,10 @@ function applyListeningEdits(materialization, edits, audio) {
   const unchangedDigest = untouched()
   const bySegment = new Map()
   for (const edit of edits) {
+    const turn = edit?.scope === 'turn'
     if (!exactKeys(edit, ['segmentId', 'start', 'before', 'after', 'audioSha256', 'occurrence',
-      'startSeconds', 'endSeconds', 'evidence', 'reason'])
+      'startSeconds', 'endSeconds', 'evidence', 'reason', ...(turn ? ['scope', 'turnIndex'] : [])])
+      || turn && (!Number.isSafeInteger(edit.turnIndex) || edit.turnIndex < 0)
       || typeof edit.segmentId !== 'string' || typeof edit.before !== 'string' || typeof edit.after !== 'string'
       || edit.before === edit.after || !Number.isSafeInteger(edit.start) || edit.start < 0
       || typeof edit.reason !== 'string' || !edit.reason.trim()) fail('invalid listening edit')
@@ -293,23 +372,35 @@ function applyListeningEdits(materialization, edits, audio) {
     }
     const segments = listening.transcript.filter(segment => segment.segmentId === segmentId)
     const text = segments[0]?.text
-    if (segments.length !== 1 || typeof text !== 'string' || start + before.length > text.length
-      || text.slice(start, start + before.length) !== before) fail(`listening edit before does not match ${segmentId}`)
-    if (touchesListeningSpeakerBoundary(text, edit)) fail('listening edit touches a speaker change')
+    if (segments.length !== 1 || typeof text !== 'string') fail(`listening edit before does not match ${segmentId}`)
+    let resolved = edit
+    if (turn) {
+      const baseline = original.listening.transcript.find(segment => segment.segmentId === segmentId).text
+      resolved = resolveTurnEdit(edit, baseline, text, spelling.get(segmentId) ?? [], insertions.get(segmentId) ?? [])
+    } else {
+      if (start + before.length > text.length || text.slice(start, start + before.length) !== before) {
+        fail(`listening edit before does not match ${segmentId}`)
+      }
+      if (touchesListeningSpeakerBoundary(text, edit)) fail('listening edit touches a speaker change')
+    }
     const engines = evidence && typeof evidence === 'object' && !Array.isArray(evidence) ? Object.entries(evidence) : []
-    if (engines.some(([engine, heard]) => !listeningEditEngines.has(engine) || typeof heard !== 'string' || !heard.trim())
-      || engines.filter(([, heard]) => supportsListeningEdit(text, edit, heard)).length < 2) {
+    const after = turn ? turnWords(edit.after) : null
+    if (engines.some(([engine, heard]) => !(listeningEditEngines.has(engine) || turn && engine === 'faster-whisper')
+      || typeof heard !== 'string' || !heard.trim())
+      || engines.filter(([, heard]) => turn ? turnEvidence(after, heard) : supportsListeningEdit(text, edit, heard)).length < 2) {
       fail('listening edit requires supporting transcription from two engines')
     }
     if (!bySegment.has(segments[0])) bySegment.set(segments[0], [])
-    bySegment.get(segments[0]).push(edit)
+    bySegment.get(segments[0]).push(resolved)
   }
   for (const [segment, edits] of bySegment) {
-    let nextStart = Infinity
-    for (const { start, before, after } of edits.sort((a, b) => b.start - a.start)) {
-      if (start === nextStart || start + before.length > nextStart) fail('overlapping listening edits')
+    let next
+    for (const edit of edits.sort((a, b) => b.start - a.start)) {
+      const { start, before, after } = edit
+      if (next && (start === next.start || start + before.length > next.start
+        || edit.scope === 'turn' && start + before.length === next.start && !next.before)) fail('overlapping listening edits')
       segment.text = segment.text.slice(0, start) + after + segment.text.slice(start + before.length)
-      nextStart = start
+      next = edit
     }
   }
   if (untouched() !== unchangedDigest) fail('listening edits changed material outside transcript text')
@@ -333,7 +424,7 @@ function expectedInsertedSentences(segmentId, text, inheritedSpeaker) {
 
 // Resolve the exact sentence against the existing reviewed transcript first.
 // Apply from right to left so every offset still addresses that transcript.
-function insertListeningSentences(materialization, insertions, listeningAudio) {
+function insertListeningSentences(materialization, insertions, listeningAudio, positions) {
   if (materialization.listening?.state !== 'captured' || !Array.isArray(insertions)
     || !insertions.length || !listeningAudio) fail('missing listening insertion evidence')
   const bySegment = new Map()
@@ -392,8 +483,10 @@ function insertListeningSentences(materialization, insertions, listeningAudio) {
         fail('listening insertion has no unambiguous sentence boundary')
       }
       const separator = text.search(speakerLabels) === 0 ? '\n' : ' '
-      segment.text = before + (before && !/\s$/u.test(before) ? separator : '') + text
-        + (after && !/^\s/u.test(after) ? ' ' : '') + after
+      const addedText = (before && !/\s$/u.test(before) ? separator : '') + text + (after && !/^\s/u.test(after) ? ' ' : '')
+      segment.text = before + addedText + after
+      if (!positions.has(segment.segmentId)) positions.set(segment.segmentId, [])
+      positions.get(segment.segmentId).push({ start, length: addedText.length })
       sentences.splice(index, 0, ...added)
     }
   }
@@ -430,6 +523,7 @@ export function applySpellingReview(materializationBytes, reportBytes, listening
     fail('missing, stale, incomplete, or invalid review identity/coverage')
   }
   const effective = structuredClone(original)
+  const listeningSpelling = new Map(), listeningInsertions = new Map()
   for (let index = 0; index < targets.length; index++) {
     const expected = targets[index]
     const target = report.targets[index]
@@ -498,9 +592,12 @@ export function applySpellingReview(materializationBytes, reportBytes, listening
     const keys = expected.jsonPointer.slice(1).split('/')
     const key = keys.pop()
     keys.reduce((node, part) => node[part], effective)[key] = corrected
+    if (hasEdits && keys[0] === 'listening' && keys[1] === 'transcript' && key === 'text' && target.corrections.length) {
+      listeningSpelling.set(original.listening.transcript[keys[2]].segmentId, target.corrections)
+    }
   }
-  if (hasInsertions) insertListeningSentences(effective, report.listeningInsertions, listeningAudio)
-  if (hasEdits) applyListeningEdits(effective, report.listeningEdits, listeningAudio)
+  if (hasInsertions) insertListeningSentences(effective, report.listeningInsertions, listeningAudio, listeningInsertions)
+  if (hasEdits) applyListeningEdits(effective, report.listeningEdits, listeningAudio, original, listeningSpelling, listeningInsertions)
   return effective
 }
 
