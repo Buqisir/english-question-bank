@@ -2837,14 +2837,18 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
     }
 
     const isPanelGroup = lectureOpen && panelGroupId === groupId
-    const selectedTeachingEvidenceId = isPanelGroup && lectureSelection?.questionId
+    const showSelectedEvidence = entry.kind !== 'sevenChoices'
+      || (lectureSelection?.questionId != null && openSevenChoiceQuestionIds.includes(lectureSelection.questionId))
+    const selectedTeachingEvidenceId = isPanelGroup && showSelectedEvidence && lectureSelection?.questionId
       ? surfaceData.evidence.find((item) =>
           item.questionId === lectureSelection.questionId && item.id.includes(':source:'))?.id
       : undefined
     const surfaceLectureFocus = isPanelGroup && lectureFocusForSelection
       ? {
           ...lectureFocusForSelection,
-          activeEvidenceId: selectedTeachingEvidenceId ?? lectureFocusForSelection.activeEvidenceId,
+          activeEvidenceId: showSelectedEvidence
+            ? selectedTeachingEvidenceId ?? lectureFocusForSelection.activeEvidenceId
+            : undefined,
         }
       : null
     const sourceTaskType = writingTaskTypeForSurface({
@@ -4516,18 +4520,20 @@ function PaperBrowsePageContent(props: PaperBrowsePageProps): ReactNode {
             */}
             {lectureOpen && panelGroupModel?.kind === 'sevenChoices' && sevenChoiceOverlay.marks.length > 0 && (
               <div className="paper-browse-seven-blank-overlay" aria-hidden="true">
-                {sevenChoiceOverlay.marks.map((mark) => (
-                  <span
-                    key={mark.id}
-                    className={`paper-browse-seven-clue-mark paper-browse-seven-clue-mark--${mark.kind}`}
-                    data-seven-color={mark.colorIndex}
-                    style={{
-                      transform: `translate(${mark.left}px, ${mark.top}px)`,
-                      width: `${mark.width}px`,
-                      height: `${mark.height}px`,
-                    }}
-                  />
-                ))}
+                {sevenChoiceOverlay.marks
+                  .filter((mark) => openSevenChoiceQuestionIds.includes(mark.questionId))
+                  .map((mark) => (
+                    <span
+                      key={mark.id}
+                      className={`paper-browse-seven-clue-mark paper-browse-seven-clue-mark--${mark.kind}`}
+                      data-seven-color={mark.colorIndex}
+                      style={{
+                        transform: `translate(${mark.left}px, ${mark.top}px)`,
+                        width: `${mark.width}px`,
+                        height: `${mark.height}px`,
+                      }}
+                    />
+                  ))}
               </div>
             )}
         </div>
