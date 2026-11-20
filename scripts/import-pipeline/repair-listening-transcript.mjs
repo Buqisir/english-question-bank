@@ -10,6 +10,7 @@ import { validateAgentOcrCorrectionReceipt } from '../../server/import-review/im
 import { buildNck1SealedReviewProjection, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { LISTENING_STAGED_ANALYSIS_FILE_NAME, mergeListeningSentenceAnalysis } from '../../server/paper-import-ai/analyzeListening.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, RETAINED_LISTENING_NAVIGATION } from '../../server/paper-import/listeningReview.mjs'
+import { LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../../server/paper-import/sourceReferenceSemantics.mjs'
 import { SOURCE_REFERENCES_FILE } from '../../server/paper-import/sourceReferences.mjs'
 import { SPELLING_REVIEW_FILE, verifyListeningEditOccurrences } from '../../server/paper-import/spellingReview.mjs'
 import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
@@ -105,7 +106,17 @@ async function prepare({ paper, revision, edits, analysis, 'work-dir': workDir, 
   for (const file of boundSidecars) {
     const target = path.join(bundle, file)
     if (!existsSync(target)) continue
-    const sidecar = readJson(target)
+    const bytes = readFileSync(target)
+    const sidecar = JSON.parse(bytes.toString('utf8'))
+    if (file === SOURCE_REFERENCES_FILE && !Object.hasOwn(sidecar, 'producerVersion')
+      && /^source-references-v[1-5]$/u.test(sidecar.schemaVersion)) {
+      // The sealed projection above has already replayed these exact bytes as v17.
+      const descriptor = base.manifest.files.find(entry => entry.path === file)
+      if (!descriptor || bytes.length !== descriptor.byteLength || sha256(bytes) !== descriptor.sha256) {
+        throw new Error(`封存文件已变化：${file}`)
+      }
+      sidecar.producerVersion = LEGACY_OCR_SOURCE_REFERENCES_PRODUCER_VERSION
+    }
     writeJson(target, { ...sidecar, ...binding, ...(file === SOURCE_REFERENCES_FILE
       ? { materializationDigest: digestJson(loaded.materialization) } : {}) })
   }
