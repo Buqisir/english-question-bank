@@ -2543,6 +2543,8 @@ button:disabled {
   align-items: center;
   gap: 6px;
   flex: 0 0 auto;
+  /* 只占开关加字那么宽：父级不是 flex 行时（比如搜出结果后），整行都算 label，点一行空白也会切换（2026-11-20 实测宽 856）。 */
+  width: fit-content;
   white-space: nowrap;
 }
 
@@ -3184,7 +3186,8 @@ p.concierge-empty {
 .app-shell.home-mode-ai .detail-view {
   max-width: 920px;
   margin: 0 auto;
-  padding: 24px;
+  /* 左右不留内边距：详情页内容和顶栏同一条左边线（DESIGN.md「同宽同左边线」；原来左右各 24，标题比顶栏往里 24px）。 */
+  padding: 24px 0;
   box-sizing: border-box;
   min-width: 0;
   width: 100%;
@@ -3201,7 +3204,7 @@ p.concierge-empty {
 
 @media (max-width: 640px) {
   .app-shell.home-mode-ai .detail-view {
-    padding: 16px;
+    padding: 16px 0;
   }
 }
 
