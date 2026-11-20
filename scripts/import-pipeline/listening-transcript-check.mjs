@@ -6,7 +6,8 @@ import { applySpellingReview, listeningEditEvidenceMatch, listeningEditSpeakerLa
   listeningEditWords, touchesListeningSpeakerBoundary } from '../../server/paper-import/spellingReview.mjs'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { appleSource, localEngines, parakeet, readJson, remoteEngine, withWork } from './listening-transcript-check-engines.mjs'
-import { align, observation, sites, timedReading, units } from './listening-transcript-check-alignment.mjs'
+import { align, nearProperName, observation, sites, timedReading, units } from './listening-transcript-check-alignment.mjs'
+import { questionMarkerSpan, sentenceSites } from './listening-transcript-check-sentences.mjs'
 
 const wordText = (words, separator = ' ') => words.map(word => word.token).join(separator)
 const sameWords = (first, second) => wordText(first.words) === wordText(second.words)
@@ -91,7 +92,10 @@ export async function adjudicate(group, text, engines, remote, audioSha256) {
   const atSpeakerChange = site => touchesListeningSpeakerBoundary(text,
     editSpan(text, source, site, { value: ' ', punctuation: '' }))
   const canJoin = (left, right) => !atSpeakerChange(left) && !atSpeakerChange(right)
-  for (const site of sites(readings, canJoin)) {
+  const parakeet = readings.find(reading => reading.engine === 'parakeet-v2')
+  const plan = sentenceSites(text, source, sites(readings, canJoin), parakeet)
+  if (plan.rewritten) review.push({ segmentId, occurrence, rewritten: true, reason: '整段改写版，多数句子与录音有明显差异。' })
+  for (const site of plan.sites) {
     const votes = readings.map(reading => ({ engine: reading.engine, ...observation(reading, site) }))
     const sourceWords = source.slice(site.start, site.end)
     if (votes.every(vote => wordText(vote.words, '') === wordText(sourceWords, ''))) continue
@@ -107,6 +111,11 @@ export async function adjudicate(group, text, engines, remote, audioSha256) {
     const original = { words: sourceWords }
     const winner = votes.find(vote => !vote.unaligned && votes.filter(peer => !peer.unaligned && sameWords(vote, peer)).length >= 2)
     if (winner && (sameWords(winner, original) || wordText(winner.words, '') === wordText(sourceWords, ''))) continue
+    if (winner && nearProperName(sourceWords, winner.words)) {
+      const { before } = editSpan(text, source, site, { value: ' ', punctuation: '' })
+      review.push({ segmentId, occurrence, ...interval, before, evidence, reason: '专有名词读音相近，保留原拼写待听核。' })
+      continue
+    }
     if (atSpeakerChange(site)) {
       const { before } = editSpan(text, source, site, { value: ' ', punctuation: '' })
       review.push({ segmentId, occurrence, ...interval, before, evidence, reason: '更正位置碰到说话人换行，请听核归属。' })
@@ -116,8 +125,10 @@ export async function adjudicate(group, text, engines, remote, audioSha256) {
       const candidates = votes.filter(vote => !vote.unaligned && sameWords(vote, winner))
       let span, support
       for (const vote of candidates) {
-        const candidate = editSpan(text, source, site, vote)
-        if (candidate.before === candidate.after || candidate.before.match(speakerLabels)
+        if (site.sentenceStart !== undefined && vote.engine !== 'parakeet-v2') continue
+        const draft = site.sentenceStart === undefined ? editSpan(text, source, site, vote) : plan.sentenceSpan(site, vote)
+        const candidate = draft && questionMarkerSpan(text, draft)
+        if (!candidate || candidate.before === candidate.after || candidate.before.match(speakerLabels)
           || touchesListeningSpeakerBoundary(text, candidate)) continue
         const samples = candidates.map(peer => uniqueEvidence(text, candidate, peer)).filter(Boolean)
         if (samples.length < 2) continue
@@ -132,12 +143,14 @@ export async function adjudicate(group, text, engines, remote, audioSha256) {
         edits.push({ segmentId, ...span, audioSha256, occurrence,
           startSeconds: Math.min(interval.startSeconds, expanded?.startSeconds ?? interval.startSeconds),
           endSeconds: Math.max(interval.endSeconds, expanded?.endSeconds ?? interval.endSeconds), evidence,
-          reason: localAgree ? 'Apple 与 Parakeet v2 独立转写一致。' : '本地引擎有分歧，短片复核后两家转写一致。' })
+          reason: site.sentenceStart !== undefined ? '改写密集，按两家录音共识整句替换。'
+            : localAgree ? 'Apple 与 Parakeet v2 独立转写一致。' : '本地引擎有分歧，短片复核后两家转写一致。' })
         continue
       }
     }
     const { before } = editSpan(text, source, site, { value: '', punctuation: '' })
-    review.push({ segmentId, occurrence, ...interval, before, evidence, reason: '转写或相邻词未能共同证实同一处更正。' })
+    review.push({ segmentId, occurrence, ...interval, before, evidence, reason: site.sentenceStart !== undefined
+      ? '该句改写密集，录音共识或句界不足，请整句听核。' : '转写或相邻词未能共同证实同一处更正。' })
   }
   return { edits, review }
 }
@@ -150,8 +163,11 @@ function markdown(edits, review) {
     ...Object.entries(evidence ?? {}).map(([engine, heard]) => `- ${engine} · ${heard.replace(/\r?\n/gu, ' ')}`),
     `- ${reason}`, '',
   ].join('\n')
-  return ['# 听力原文稿核对', '', `## 建议更正（${edits.length}）`, '', ...edits.map(details),
-    `## 人工听核（${review.length}）`, '', ...review.map(details)].join('\n')
+  const rewritten = review.filter(item => item.rewritten)
+  return ['# 听力原文稿核对', '',
+    ...(rewritten.length ? ['## 整段改写版', '', ...rewritten.map(({ segmentId, reason }) => `- ${segmentId} · ${reason}`), ''] : []),
+    `## 建议更正（${edits.length}）`, '', ...edits.map(details),
+    `## 人工听核（${review.length}）`, '', ...review.filter(item => !item.rewritten).map(details)].join('\n')
 }
 
 async function main() {

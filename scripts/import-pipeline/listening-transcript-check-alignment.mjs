@@ -4,6 +4,17 @@ const variants = { woollen: 'woolen', dr: 'doctor', mr: 'mister', mrs: 'missus',
 const nameSounds = word => word.replace(/'s$/u, '').replace(/[sz]/gu, 's')
   .replace(/([a-z])\1+/gu, '$1').replace(/[aeiouy]/gu, '')
 
+export function nearProperName(source, heard) {
+  const spelling = word => word.token.replace(/'s$/u, '')
+  const sound = word => nameSounds(word.replace(/^(?:q|ch)/u, 'ch'))
+  return source.some(word => word.name && spelling(word).length >= 4 && heard.some(other => {
+    if (!other.name) return false
+    const a = spelling(word), b = spelling(other)
+    return a !== b && b.length >= 4 && (sound(a) === sound(b)
+      || (a.length === b.length && [...a].filter((letter, i) => letter !== b[i]).length === 1))
+  }))
+}
+
 export function units(text) {
   return normalizeListeningUnits(text).map((unit, index, list) => ({
     ...unit, token: variants[unit.token] ?? unit.token,
