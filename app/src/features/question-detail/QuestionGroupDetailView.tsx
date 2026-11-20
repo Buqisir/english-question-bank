@@ -353,7 +353,14 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
     if (!selectedDetail) return
     const detail = selectedDetail
     if (!paperId) {
-      setLoad({ status: 'error', message: '这份卷还没上线，回到题库换一份看看。' })
+      // 卷面预览要等整卷上线；题组本身能不能加入草稿卷由服务器另算（draftPaperButtonState）。
+      // 能加入时别再叫老师「换一份」，和旁边亮着的「加入草稿卷」打架。
+      setLoad({
+        status: 'error',
+        message: detail.draftPaperButtonState === 'disabled'
+          ? '这份卷还没上线，回到题库换一份看看。'
+          : '这份卷的卷面预览还没上线，这里先看不到题；加入草稿卷不受影响。',
+      })
       return
     }
     const resolvedPaperId = paperId
