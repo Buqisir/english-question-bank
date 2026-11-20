@@ -603,7 +603,7 @@ function App() {
     return (
       <VocabularyNotebookPage
         paperId={route.paperId}
-        shellNav={shellNav}
+        shellNav={{ ...shellNav, currentNav: 'vocabulary-notebook' }}
         onBack={paperBrowseOnBackToWorkbench}
         onOpenPaper={(nextPaperId) => openVocabularyNotebook(nextPaperId)}
         onOpenList={() => openVocabularyNotebook(null)}
@@ -619,7 +619,7 @@ function App() {
         onOpenVocabularyDictationWorkbench={openVocabularyDictationWorkbench}
         onVocabularySetRouteChange={(setId) => setRoute((current) => ({ ...current, setId }))}
         requestedSetId={route.setId}
-        shellNav={{ ...shellNav, onOpenVocabularyReview: undefined }}
+        shellNav={{ ...shellNav, onOpenVocabularyReview: undefined, currentNav: 'vocabulary-review' }}
       />
     )
   }
@@ -630,7 +630,7 @@ function App() {
         onBackToVocabulary={vocabularyDictationOnBackToReview}
         requestedSetId={route.meaningRecallSetId}
         onRequestedSetOpened={clearMeaningRecallSet}
-        shellNav={{ ...shellNav, onOpenVocabularyReview: vocabularyDictationOnBackToReview }}
+        shellNav={{ ...shellNav, onOpenVocabularyReview: vocabularyDictationOnBackToReview, currentNav: 'vocabulary-review' }}
       />
     )
   }
@@ -641,7 +641,7 @@ function App() {
         key={route.setId ?? 'missing-set'}
         setId={route.setId ?? ''}
         onBackToSet={() => vocabularyPracticeOnBackToSet(route.setId ?? '')}
-        shellNav={{ ...shellNav, onOpenVocabularyReview: undefined }}
+        shellNav={{ ...shellNav, onOpenVocabularyReview: undefined, currentNav: 'vocabulary-review' }}
       />
     )
   }
@@ -651,7 +651,7 @@ function App() {
       <MySpacePage
         onBackToWorkbench={mySpaceOnBackToWorkbench}
         onOpenDraft={(draftPaperId) => openDraftPaperWorkbench(draftPaperId)}
-        shellNav={{ ...shellNav, onOpenMySpace: undefined }}
+        shellNav={{ ...shellNav, onOpenMySpace: undefined, currentNav: 'my-space' }}
       />
     )
   }
@@ -742,6 +742,9 @@ function App() {
                 onOpenDraftPaper={(draftPaperId) => openDraftPaperWorkbench(draftPaperId)}
               />
           ) : viewMode === 'detail' ? (
+            <>
+            {/* 每页一个 h1，给读屏和标题导航用；详情页的看得见的标题是题组名（h3），这里只给读屏。 */}
+            <h1 className="visually-hidden">题组详情</h1>
             <QuestionGroupDetailView
               isOwnerView={isOwnerView}
               detail={{ selectedDetail: selectedDetailForView, detailStatus, detailError }}
@@ -753,6 +756,7 @@ function App() {
               onOpenPaperBrowseLecture={openPaperBrowseLectureFromDetail}
               questionGroupById={questionGroupById}
             />
+            </>
           ) : null}
         </section>
       </main>

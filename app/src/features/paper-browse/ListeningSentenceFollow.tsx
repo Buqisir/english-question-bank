@@ -318,9 +318,10 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
       scrollListeningTarget(scroller, 'nearest')
     }
     row.querySelector('button')?.focus({ preventScroll: true })
+    // 底色闪一下再淡掉，告诉老师刚才点的是哪一句。只变颜色，减少动态效果时照常（motion.css：颜色变化不算「动」）。
     const duration = Number.parseFloat(getComputedStyle(row).getPropertyValue('--motion-fast'))
     const flash = row.animate([{ backgroundColor: 'var(--eqb-color-state-selected)' }, {}], {
-      duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : duration,
+      duration,
       delay: 480, fill: 'backwards',
     })
     return () => flash.cancel()

@@ -52,13 +52,7 @@ import { FluidHoverList } from '../components/FluidHoverList.tsx'
 import { Button } from '../shared-ui/Button.tsx'
 import { Row } from '../shared-ui/Row.tsx'
 import type { SimilarPassagesRequestState } from '../features/similar-passages/SimilarPassagesPanel'
-
-const SOURCE_TYPE_LABEL: Record<string, string> = {
-  real_exam: '真题',
-  mock_exam: '模拟',
-  self_made: '自建',
-  other: '其他',
-}
+import { SOURCE_TYPE_LABEL } from './sourceTypeLabel.ts'
 
 function buildSourceTypeLabel(paper: PaperResult): string {
   if (!paper.sourceType) return ''
