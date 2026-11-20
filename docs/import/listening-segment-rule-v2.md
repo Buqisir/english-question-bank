@@ -2,6 +2,7 @@
 
 沿用 `listening-review-v2` / `listening-rule-evidence-v2` schema，只提升 producer 规则版本与代码摘要。
 Apple SpeechAnalyzer 为主引擎；需要复核的组使用既有 Whisper `small.en` 路径。
+复核引擎计划换成 Parakeet TDT 0.6B v2（Owner 2026-11-19，BUB-237，见 [droid-fast-path.md](droid-fast-path.md) 前置）；换掉之前照旧。
 保留原始 ASR、失败信息和诊断；不改写原文、历史 attempt 或已送审 revision。
 
 ## Owner 2026-11-15 规格
