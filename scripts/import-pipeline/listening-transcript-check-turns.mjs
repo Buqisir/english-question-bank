@@ -134,6 +134,7 @@ export async function rewriteTurns(group, text, readings, engines, audioSha256, 
       evidence: Object.fromEntries(readings.map(reading => [reading.engine, reading.text.trim()])) }],
   })
   const turns = listeningEditTurns(text)
+  if (turns.some(turn => turn.ambiguous)) return manual('行首标签的说话人不明，请整段听核。')
   const runs = readings.map(({ engine }) => [engine, withoutAnnouncements(engines[engine][group.key] ?? [])])
   if (runs.some(([, spoken]) => !spoken)) return manual('疑似报幕的归属不明，请整段听核。')
   const cleaned = Object.fromEntries(runs.map(([engine, spoken]) => [engine, { [group.key]: spoken }]))

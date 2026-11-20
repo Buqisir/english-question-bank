@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import { listeningSentenceTargets } from '../../scripts/import-pipeline/listening-sentence-align.mjs'
+import { speakerLabel } from '../../scripts/import-pipeline/ocr-line-roles.mjs'
 import { digestJson, exactKeys, sha256 } from '../../shared/paper-canonical/stable.mjs'
 import { extractDocxDocumentParagraphs, DOCX_MEDIA_TYPE } from '../paper-canonical/docxSourceAdapter.mjs'
 
@@ -267,24 +268,49 @@ export function verifyListeningEditOccurrences(reportBytes, current, readBaseRev
   }
 }
 
-// Turn indices are zero-based. Keep the first speaker label and the separators
-// outside the edit. Consecutive labels for the same speaker form one turn.
+function listeningTurnLabels(text) {
+  const fixed = [...text.matchAll(listeningEditSpeakerLabels)]
+  const fixedStarts = new Set(fixed.map(label => label.index))
+  const labels = fixed.map(label => ({
+    index: label.index, end: label.index + label[0].length, speaker: label[1].toLowerCase(),
+  }))
+  const ambiguous = []
+  let offset = 0
+  for (const line of text.split('\n')) {
+    const content = line.trimStart()
+    const label = speakerLabel(content)
+    if (!fixedStarts.has(offset)) {
+      if (label) {
+        labels.push({ index: offset, end: offset + line.length - content.length + label.length,
+          speaker: label.slice(0, -1).trim().toLowerCase() })
+      } else if (content.includes(':') || content.includes('：')) {
+        ambiguous.push(offset + line.length - content.length)
+      }
+    }
+    offset += line.length + 1
+  }
+  // Preserve fixed role markers in transcripts stored on a single line.
+  for (const label of text.matchAll(/(?<!\S)([A-Z]\d?|Speaker \d+|Man|Woman)[ \t]*[:：][ \t]*/gu)) {
+    labels.push({ index: label.index, end: label.index + label[0].length, speaker: label[1].toLowerCase() })
+  }
+  return { labels: labels.sort((a, b) => a.index - b.index), ambiguous }
+}
+
+// Turn indices are zero-based. Keep each label and the separators outside the edit.
 export function listeningEditTurns(text) {
-  const labels = [...text.matchAll(listeningEditSpeakerLabels),
-    ...text.matchAll(/(?<!\S)([A-Z]\d?|Speaker \d+|Man|Woman)[ \t]*[:：][ \t]*/gu)]
-    .sort((a, b) => a.index - b.index)
+  const { labels, ambiguous } = listeningTurnLabels(text)
   const turns = []
   let start = 0, speaker = null
-  for (const label of [...labels, { index: text.length, 0: '' }]) {
+  for (const label of [...labels, { index: text.length }]) {
     if (label.index < start) continue
     const body = text.slice(start, label.index).trimEnd()
     if (body.trim()) {
-      const previous = turns.at(-1)
-      if (previous?.speaker === speaker) previous.end = start + body.length
-      else turns.push({ start: start + body.length - body.trimStart().length, end: start + body.length, speaker })
+      const first = start + body.length - body.trimStart().length
+      const end = start + body.length
+      turns.push({ start: first, end, speaker, ambiguous: ambiguous.some(offset => offset >= first && offset < end) })
     }
-    start = label.index + label[0].length
-    speaker = label[1]?.toLowerCase()
+    start = label.end
+    speaker = label.speaker
   }
   return turns
 }
@@ -294,7 +320,8 @@ function resolveTurnEdit(edit, original, text, spelling, insertions) {
   if (!turn || turn.start !== edit.start || original.slice(turn.start, turn.end) !== edit.before) {
     fail('listening edit before must match the complete original turn')
   }
-  if (edit.after.trim() !== edit.after || edit.after.search(listeningEditSpeakerLabels) !== -1
+  if (turn.ambiguous) fail('listening turn contains an unrecognized speaker label')
+  if (edit.after.trim() !== edit.after || listeningTurnLabels(edit.after).labels.length
     || edit.after.search(speakerLabels) !== -1) fail('listening turn edit changes a speaker label')
   let { start, end } = turn
   for (const { start: offset, before, after } of spelling) {
@@ -312,7 +339,8 @@ function resolveTurnEdit(edit, original, text, spelling, insertions) {
     else if (offset < spelledEnd) fail('overlapping listening edits')
     if (offset < spelledEnd) end += length
   }
-  if (!listeningEditTurns(text).some(item => item.start === start && item.end === end && item.speaker === turn.speaker)) {
+  if (!listeningEditTurns(text).some(item => item.start === start && item.end === end
+    && item.speaker === turn.speaker && !item.ambiguous)) {
     fail('listening turn boundary changed before replacement')
   }
   return { ...edit, start, before: text.slice(start, end) }

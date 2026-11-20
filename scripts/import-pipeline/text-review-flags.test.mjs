@@ -237,6 +237,29 @@ test('whole-turn admission binds the original turn and only changes transcript t
   assert.throws(() => applyWithInsertion('I agree.'), /overlapping listening edits/)
 })
 
+test('whole-turn edits preserve named speakers and reject ambiguous speaker prefixes', () => {
+  function apply(text, before) {
+    const { audio, evidence } = listeningInsertionFixture(text, null)
+    const bytes = Buffer.from(JSON.stringify({ listening: { state: 'captured',
+      transcript: [{ segmentId: evidence.segmentId, text }] } }))
+    const report = { ...prepareSpellingReview(bytes), reviewedBy: 'import_agent', reviewedAt: '2026-11-20T00:00:00Z' }
+    report.targets[0].decision = 'unchanged'
+    const after = 'Where are you going?'
+    report.listeningEdits = [{ scope: 'turn', turnIndex: 0, segmentId: evidence.segmentId, start: text.indexOf(before),
+      before, after, audioSha256: audio.sha256, occurrence: evidence.occurrence, startSeconds: 14, endSeconds: 19,
+      evidence: { apple: after, 'parakeet-v2': after }, reason: '整轮替换。' }]
+    return applySpellingReview(bytes, Buffer.from(JSON.stringify(report)), audio).listening.transcript[0].text
+  }
+
+  const named = 'M: Where are you headed?\nMary: To the library.'
+  assert.throws(() => apply(named, 'Where are you headed?\nMary: To the library.'), /complete original turn/)
+  assert.equal(apply(named, 'Where are you headed?'), 'M: Where are you going?\nMary: To the library.')
+  assert.deepEqual(listeningEditTurns(`${named}\nMary: It opens at nine.`).map(({ speaker }) => speaker), ['m', 'mary', 'mary'])
+
+  const ambiguous = 'Where are you headed?\nvoice-2：To the library.'
+  assert.throws(() => apply(`M: ${ambiguous}`, ambiguous), /unrecognized speaker label/)
+})
+
 test('audio that says Well cannot assign it to either side of a speaker change', () => {
   const text = 'W: Tell me more.\nM: I can explain.'
   const heard = 'Tell me more. Well, I can explain.'
