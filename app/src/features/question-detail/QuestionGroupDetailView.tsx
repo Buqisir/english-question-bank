@@ -530,8 +530,6 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
   if (!selectedDetail) {
     return (
       <div className="detail-view">
-        {/* 每页一个 h1，给读屏和标题导航用；详情页看得见的标题是题组名（h3），这里只给读屏。 */}
-        <h1 className="visually-hidden">题组详情</h1>
         <Button className="detail-back" tone="subtle" size="sm" icon={<ArrowLeft size={16} aria-hidden="true" />} onClick={onBack}>
           返回找题
         </Button>
@@ -556,7 +554,6 @@ export function QuestionGroupDetailView(props: QuestionGroupDetailViewProps) {
 
   return (
     <div className="detail-view">
-      <h1 className="visually-hidden">题组详情</h1>
       <Button className="detail-back" tone="subtle" size="sm" icon={<ArrowLeft size={16} aria-hidden="true" />} onClick={onBack}>
         返回找题
       </Button>

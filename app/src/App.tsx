@@ -742,6 +742,9 @@ function App() {
                 onOpenDraftPaper={(draftPaperId) => openDraftPaperWorkbench(draftPaperId)}
               />
           ) : viewMode === 'detail' ? (
+            <>
+            {/* 每页一个 h1，给读屏和标题导航用；详情页的看得见的标题是题组名（h3），这里只给读屏。 */}
+            <h1 className="visually-hidden">题组详情</h1>
             <QuestionGroupDetailView
               isOwnerView={isOwnerView}
               detail={{ selectedDetail: selectedDetailForView, detailStatus, detailError }}
@@ -753,6 +756,7 @@ function App() {
               onOpenPaperBrowseLecture={openPaperBrowseLectureFromDetail}
               questionGroupById={questionGroupById}
             />
+            </>
           ) : null}
         </section>
       </main>
