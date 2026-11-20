@@ -61,7 +61,7 @@ export function planMaterializationParagraphJoin(input, receiptBytes, { groupId,
       ? CROSS_PAGE_PARAGRAPH_JOIN_VERSION : CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2,
     joinId: `paragraph-join:${digestJson([groupId, fragments.map(fragment => fragment.itemId), reason]).slice(7, 31)}`,
     groupId, sourceSetDigest: evidence.sourceSetDigest, evidenceDigest: evidence.evidenceDigest,
-    confirmationSha256: binding.confirmationSha256, separator: ' ',
+    confirmationSha256: binding.confirmationSha256, separator: ' ', joiner: 'ocr',
     sourceReview: { reviewedBy: 'import_agent', sameNaturalParagraph: true, continuationLineUnindented: true, reason },
     fragments,
   }

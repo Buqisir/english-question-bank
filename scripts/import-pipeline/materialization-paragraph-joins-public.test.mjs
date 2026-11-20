@@ -313,6 +313,7 @@ test('seven-choice and writing joins preserve inline order, prompts and response
     const itemIds = starts.map(start => items.find(item => item.text.startsWith(start)).itemId)
     const plan = planMaterializationParagraphJoin(input, receipt,
       { groupId: group.groupId, itemIds, reason: '原页续行未缩进，同一自然段' })
+    assert.equal(plan.relation.joiner, 'ocr')
     const applied = applyMaterializationParagraphJoinPlan(input, receipt, plan, { confirmed: true })
     assert.deepEqual(applied.materialization.groups, m.groups)
     assert.deepEqual(applied.materialization.answers, m.answers)
@@ -324,6 +325,26 @@ test('seven-choice and writing joins preserve inline order, prompts and response
   const preview = compileNck1MaterializationCandidatePreview(imported.candidate)
   assert(preview.compilation, JSON.stringify(preview.unresolvedIssues))
   const proposed = decode(input.materializationBytes)
+  const legacy = structuredClone(proposed)
+  for (const relation of legacy.paragraphJoins) delete relation.joiner
+  const replay = importCanonicalCandidate({ ...input, materializationBytes: encode(legacy) })
+  assert.deepEqual(replay.issues, [])
+  const applicationJoin = legacy.paragraphJoins.find(relation => relation.groupId.endsWith(':writing-application'))
+  const legacyApplication = replay.candidate.interpretation.groups.find(group => group.groupId === applicationJoin.groupId)
+  const originalApplication = original.candidate.interpretation.groups.find(group => group.groupId === applicationJoin.groupId)
+  const [leftFragment, rightFragment, ...remaining] = originalApplication.content.blocks
+  const historicalContent = { ...originalApplication.content, blocks: [
+    { ...leftFragment, inlines: [...leftFragment.inlines,
+      { kind: 'text', nodeId: `text:paragraph-join:${applicationJoin.joinId}:separator`, text: ' ' },
+      ...rightFragment.inlines] }, ...remaining,
+  ] }
+  assert.equal(digestJson(legacyApplication.content), digestJson(historicalContent))
+  const replayPreview = compileNck1MaterializationCandidatePreview(replay.candidate)
+  assert(replayPreview.compilation, JSON.stringify(replayPreview.unresolvedIssues))
+  assert.equal(replayPreview.candidate.candidateDigest, replay.candidate.candidateDigest)
+  const invalidJoiner = structuredClone(proposed)
+  invalidJoiner.paragraphJoins[0].joiner = 'unknown'
+  assert(importCanonicalCandidate({ ...input, materializationBytes: encode(invalidJoiner) }).issues.length)
   const { evidenceBytes, confirmationBytes } = input.ocrSourceBytes
   withRetainedNck1OcrEvidence(m.paperId, evidenceBytes, confirmationBytes, () => {
     const retained = value => retainedParagraphJoinBaseline(value, fixture.evidence, confirmation)

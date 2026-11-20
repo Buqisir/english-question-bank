@@ -10,6 +10,10 @@ export const paragraphFragmentText = block => block?.content?.map(part => part.t
 export const isAdjacentCjkText = (left, right) =>
   /[\u3000-\u9fff\uff00-\uffef]$/u.test(left) && /^[\u3000-\u9fff\uff00-\uffef]/u.test(right)
 
+export function paragraphJoinBoundaryNeedsTrim(inlines) {
+  return /^\s/u.test(inlines[0]?.text ?? '') || /\s$/u.test(inlines.at(-1)?.text ?? '')
+}
+
 export function paragraphJoinSourceLocator(documentId, page, item, observations) {
   const regions = item.observationIds.map(id => observations.find(value => value.observationId === id)?.region)
   if (!regions.length || regions.some(region => !region)) throw new Error('Paragraph join source observations are missing')
@@ -33,13 +37,15 @@ export function resolveCrossPageParagraphJoins(materialization) {
   const ids = new Set()
   return joins.map(join => {
     const mixed = join?.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION_V2
+    const hasJoiner = Object.hasOwn(join ?? {}, 'joiner')
     if (!exactKeys(join, ['schemaVersion', 'joinId', 'groupId', 'sourceSetDigest',
-      'evidenceDigest', 'confirmationSha256', 'separator', 'sourceReview', 'fragments'])
+      'evidenceDigest', 'confirmationSha256', 'separator', 'sourceReview', 'fragments', ...(hasJoiner ? ['joiner'] : [])])
       || !(join.schemaVersion === CROSS_PAGE_PARAGRAPH_JOIN_VERSION
         || (mixed && ['nck1-source-materialization-v12', 'nck1-source-materialization-v13'].includes(materialization.schemaVersion)))
       || !nonempty(join.joinId) || ids.has(join.joinId) || !nonempty(join.groupId)
       || ![join.sourceSetDigest, join.evidenceDigest, join.confirmationSha256].every(digest)
       || join.separator !== ' '
+      || (hasJoiner && join.joiner !== 'ocr')
       || !exactKeys(join.sourceReview, ['reviewedBy', 'sameNaturalParagraph', 'continuationLineUnindented', 'reason'])
       || join.sourceReview.reviewedBy !== 'import_agent'
       || join.sourceReview.sameNaturalParagraph !== true
@@ -68,6 +74,9 @@ export function resolveCrossPageParagraphJoins(materialization) {
         ? block.columns.flatMap(column => flatten(column.blocks)) : [block])
       if (materialization.groups.flatMap(group => flatten(group.blocks))
         .filter(candidate => same(candidate.source, block.source)).length !== 1) reject('source fragment is consumed by more than one block')
+      if (!hasJoiner && (mixed ? paragraphJoinBoundaryNeedsTrim(block.content) : /^\s|\s$/u.test(paragraphFragmentText(block)))) {
+        reject('fragment boundaries must not require trimming or extra whitespace')
+      }
       const document = materialization.documents?.find(document => document.documentId === block.source.documentId)
       if (document?.role !== 'question_source' || document.mediaType !== 'application/pdf') reject('requires a separate question-source PDF')
       consumed.add(fragment.itemId)
