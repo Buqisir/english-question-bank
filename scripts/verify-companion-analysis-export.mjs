@@ -72,6 +72,19 @@ assert.ok(v2ContinuationHtml.includes('GENERATED_MODEL_SENTINEL'))
 assert.ok(v2ContinuationHtml.indexOf('官方参考范文') < v2ContinuationHtml.indexOf('生成参考范文'))
 assert.ok(!v2ContinuationHtml.includes('continuationDesign'))
 assert.ok(!v2ContinuationHtml.includes('highlightExpressions'))
+const [continuationGroupId] = Object.entries(v2ContinuationSource.analyses.writing.groups)
+  .find(([, { writing }]) => writing === v2Writing)
+const revisionWithoutSourceEssay = buildCompanionAnalysisHtml({ projection: {
+  paperAsset: v2ContinuationSource.paperAsset,
+  analysisSidecars: { 'writing-analysis-v1.json': v2ContinuationSource.analyses.writing },
+  consumption: { visibleStructure: [
+    { kind: 'part' }, { kind: 'section' },
+    { kind: 'group', groupId: continuationGroupId, slotId: 'writing.continuation' },
+  ] },
+  sourceReferences: { groups: [{ groupId: continuationGroupId, taskType: 'continuation', essays: { entries: [] } }] },
+} })
+assert.match(revisionWithoutSourceEssay,
+  /data-continuation-section="modelAnswer"><h4>参考范文<\/h4><div lang="en"><p>OFFICIAL_MODEL_SENTINEL<\/p><\/div><\/section>/u)
 const translatedSource = structuredClone(source)
 for (const group of Object.values(translatedSource.analyses.reading.groups)) {
   group.fullTranslationZh = '这是阅读文章的完整中文译文。'

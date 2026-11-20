@@ -698,17 +698,17 @@ function renderContinuationAnalysis(analysis) {
     </section>`
 }
 
-function renderRevisionModels(source, model, isContinuation) {
+function renderRevisionModels(source, official, model, isContinuation) {
   const essays = array(source?.essays?.entries)
     .map(entry => sourceReferenceBlocks(entry)
       .filter(block => block.kind === 'paragraph')
       .map(block => block.paragraph.text).join('\n'))
     .filter(essay => essay.trim())
-  const content = essays.length
-    ? essays.map(essay => `<div lang="en">${renderParagraphs(essay)}</div>`).join('')
-    : model ? `<div lang="en">${renderParagraphs(model)}</div>` : ''
+  const selected = essays.length ? essays : [official || model].filter(Boolean)
+  const content = selected.map(essay => `<div lang="en">${renderParagraphs(essay)}</div>`).join('')
   if (!content) return ''
-  return `<section class="writing-block model-answer"${isContinuation ? ' data-continuation-section="modelAnswer"' : ''}><h4>${essays.length ? '参考范文' : '参考范文（AI 撰写）'}</h4>${content}</section>`
+  const heading = essays.length || official ? '参考范文' : '参考范文（AI 撰写）'
+  return `<section class="writing-block model-answer"${isContinuation ? ' data-continuation-section="modelAnswer"' : ''}><h4>${heading}</h4>${content}</section>`
 }
 
 function renderWritingGroup({ group, title, analysis, sourceReferencesByGroup }) {
@@ -718,7 +718,7 @@ function renderWritingGroup({ group, title, analysis, sourceReferencesByGroup })
   const official = nonEmptyString(writing?.officialModelAnswer)
   const model = nonEmptyString(writing?.modelAnswer)
   const models = sourceReferencesByGroup
-    ? renderRevisionModels(source, model, isContinuation)
+    ? renderRevisionModels(source, official, model, isContinuation)
     : isContinuation ? renderContinuationModels(official, model)
       : `${official ? renderModelAnswer(official, '原卷参考范文') : ''}${model && model !== official ? renderModelAnswer(model, official ? '讲评范文' : '参考范文') : ''}`
   if (!writing && !models) return ''
