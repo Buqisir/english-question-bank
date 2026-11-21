@@ -1,4 +1,4 @@
-import { AgentTokens } from './AgentTokens'
+import { AgentReports, AgentTokens } from './AgentTokens'
 import './adminWorkbench.css'
 
 export function AdminWorkbench() {
@@ -10,6 +10,7 @@ export function AdminWorkbench() {
       </header>
 
       <AgentTokens />
+      <AgentReports />
     </main>
   )
 }

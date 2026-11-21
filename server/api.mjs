@@ -37,6 +37,7 @@ import { countUsers, ensureAuthDatabaseShape, readSession, readSessionTokenFromR
 import { createAuthRoutes } from './auth/authRoutes.mjs'
 import { createAgentRoutes } from './agent-api/agentRoutes.mjs'
 import { createAgentAuthGate, ensureAgentTokenShape } from './agent-api/agentTokens.mjs'
+import { ensureAgentSubmissionShape } from './agent-api/agentSubmissions.mjs'
 import { createPaperSurfaceAnalysisAvailability } from './search/paperSurfaceAvailability.mjs'
 import { listCanonicalPaperCatalog } from './search/canonicalPaperCatalog.mjs'
 import { createSearchSidecarStore, ensureSearchSidecarDatabaseShape } from './search/searchSidecars.mjs'
@@ -675,6 +676,7 @@ export function ensureUserDatabaseShape(db) {
   ensureMySpaceDatabaseShape(db)
   ensureAuthDatabaseShape(db)
   ensureAgentTokenShape(db)
+  ensureAgentSubmissionShape(db)
   ensureUserVocabularyShape(db)
 
   const userVersionRow = db.prepare('PRAGMA user_version').get()
@@ -3919,7 +3921,7 @@ function isAuthPublicRoute(method, pathname) {
 // session, and that must NOT read as bootstrap-open.
 const agentAuthGate = createAgentAuthGate({ openUserDatabase, sendJson })
 function applyAuthGate(request, response, pathname) {
-  if (pathname.startsWith('/api/agent/v1/')) return agentAuthGate(request, response)
+  if (pathname.startsWith('/api/agent/v1/')) return agentAuthGate(request, response, pathname)
   const isPublic = isAuthPublicRoute(request.method, pathname)
 
   const readDb = openUserDatabase({ readOnly: true })

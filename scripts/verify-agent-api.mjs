@@ -27,6 +27,7 @@ const assets = path.join(temp, 'assets')
 const files = path.join(temp, 'review-files')
 const api = '/api/agent/v1'
 const admin = '/api/admin/agent-tokens'
+const adminReports = '/api/admin/agent-reports'
 let child
 let logs = ''
 function jsonFile(file, value) {
@@ -146,6 +147,13 @@ const owner = createUser(users, { username: 'agent-test-owner', passwordHash: 'u
 const member = createUser(users, { username: 'agent-test-member', passwordHash: 'unused', role: 'member' })
 const ownerCookie = `eqb_session=${createSession(users, owner.id)}`
 const memberCookie = `eqb_session=${createSession(users, member.id)}`
+const legacyToken = `eqb_agent_${'L'.repeat(43)}`
+users.exec(`CREATE TABLE agent_tokens (
+  id TEXT PRIMARY KEY, name TEXT NOT NULL, token_hash TEXT NOT NULL UNIQUE,
+  created_at TEXT NOT NULL, revoked_at TEXT, last_used_at TEXT
+)`)
+users.prepare('INSERT INTO agent_tokens (id, name, token_hash, created_at) VALUES (?, ?, ?, ?)')
+  .run('legacy', '存量口令', sha256(legacyToken).slice('sha256:'.length), new Date().toISOString())
 users.close()
 
 const probe = createServer()
@@ -262,18 +270,21 @@ try {
 
   const credential = await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '组卷 Agent' } }, 201)
   assert.match(credential.token, /^eqb_agent_[A-Za-z0-9_-]{43}$/)
+  assert.deepEqual(credential.scope, ['read'])
   await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '' } }, 400)
+  await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '无效', scope: ['publish'] } }, 400)
   const tokenRows = await expectStatus(admin, { cookie: ownerCookie }, 200)
   assert(!JSON.stringify(tokenRows).includes(credential.token))
-  assert(tokenRows.tokens.every(row => !('token_hash' in row) && !('token' in row) && !('scope' in row)))
+  assert(tokenRows.tokens.every(row => !('token_hash' in row) && !('token' in row)))
+  assert.deepEqual(tokenRows.tokens.find(row => row.id === 'legacy').scope, ['read'])
   const tokenDb = new DatabaseSync(userPath, { readOnly: true })
   assert.equal(tokenDb.prepare('SELECT token_hash FROM agent_tokens WHERE id = ?').get(credential.id).token_hash, sha256(credential.token).replace(/^sha256:/, ''))
-  assert(!tokenDb.prepare('PRAGMA table_info(agent_tokens)').all().some(column => column.name === 'scope'))
   tokenDb.close()
   await expectStatus(`${api}/papers`, { token: credential.token, method: 'POST', body: {} }, 405)
   await expectStatus(`${api}/papers`, { token: credential.token, method: 'OPTIONS' }, 405)
   await expectStatus('/api/draft-papers', { token: credential.token }, 401)
-  console.log('PASS token creation, digest-only storage, redaction, GET-only access')
+  await expectStatus(`${api}/papers`, { token: legacyToken }, 200)
+  console.log('PASS legacy token migration and read access, new read default, digest-only storage and redaction')
 
   const list = await expectStatus(`${api}/papers`, { token: credential.token }, 200)
   assert.deepEqual(list.papers.map(item => item.paperId), [pendingId, publishedId])
@@ -476,15 +487,82 @@ try {
   assert(!JSON.stringify(meta).includes(userPath))
   console.log('PASS NDJSON detail parity and ETags, two since cutoffs, and deployment meta fields')
 
-  const rate = await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '限流' } }, 201)
+  const reportPath = `${api}/reports`
+  const questionId = `question-${publishedId}`
+  const draftPath = `${api}/drafts/${publishedId}/${questionId}`
+  const reportBody = { paperId: publishedId, questionId, kind: 'answer', note: '复核选项 A', evidence: '答案页第 2 页' }
+  const fullScope = ['read', 'report:append', 'drafts:write']
+  const makeWriter = async (name, scope = fullScope) => (await expectStatus(admin, {
+    cookie: ownerCookie, method: 'POST', body: { name, scope },
+  }, 201)).token
+  const writer = { token: await makeWriter('复核 Agent') }
+  const other = { token: await makeWriter('另一 Agent') }
+  const reportOnly = { token: await makeWriter('上报 Agent', ['report:append']) }
+  assert.doesNotMatch(reportOnly.token, /^eqb_agent_[A-Za-z0-9_-]{43}$/)
+  await expectStatus(`${api}/papers`, reportOnly, 403)
+  assert.deepEqual((await expectStatus(`${api}/meta?include=scope`, reportOnly, 200)).scope, ['report:append'])
+  for (const [route, method, body] of [[reportPath, 'POST', reportBody], [draftPath, 'PUT', {}]]) {
+    await expectStatus(route, { method, body }, 401)
+    await expectStatus(route, { token: legacyToken, method, body }, 403)
+    await expectStatus(route, { token: legacyToken }, 403)
+  }
+  const postReport = (body, status = 201) => expectStatus(reportPath, { ...writer, method: 'POST', body }, status)
+  const report = await postReport(reportBody)
+  const reportForGroup = await postReport({ ...reportBody, questionId: undefined, groupId: `group-${publishedId}` })
+  for (const bad of [{ groupId: `group-${publishedId}` }, { questionId: undefined }, { note: 'n'.repeat(2001) }]) {
+    await postReport({ ...reportBody, ...bad }, 400)
+  }
+  for (const bad of [{ questionId: `question-${pendingId}` }, { paperId: 'paper-agent-changes_requested' },
+    { questionId: undefined, groupId: `group-${pendingId}` }]) await postReport({ ...reportBody, ...bad }, 404)
+  const myReports = (await expectStatus(reportPath, writer, 200)).reports
+  assert.deepEqual(myReports.map(item => item.id).sort(), [report.id, reportForGroup.id].sort())
+  assert(myReports.every(item => item.status === 'pending'))
+  assert.deepEqual((await expectStatus(reportPath, other, 200)).reports, [])
+  for (const method of ['PUT', 'PATCH', 'DELETE']) {
+    for (const route of [reportPath, `${reportPath}/${report.id}`]) await expectStatus(route, { ...writer, method }, 405)
+  }
+  await expectStatus(adminReports, {}, 401)
+  await expectStatus(adminReports, { cookie: memberCookie }, 403)
+  const ownerReports = (await expectStatus(adminReports, { cookie: ownerCookie }, 200)).reports
+  assert.deepEqual(ownerReports.map(item => [item.id, item.tokenName]).sort(),
+    myReports.map(item => [item.id, '复核 Agent']).sort())
+
+  const draftMarker = 'agent-draft-private-marker'
+  const screenPath = `/paper-assets/${publishedId}/latest/paper-asset.json`
+  const screenBefore = await expectStatus(screenPath, { cookie: ownerCookie }, 200)
+  await expectStatus(`${api}/drafts/${publishedId}/question-${pendingId}`, { ...writer, method: 'PUT', body: {} }, 404)
+  await expectStatus(draftPath, { ...writer, method: 'PUT', body: [] }, 400)
+  await expectStatus(draftPath, { ...writer, method: 'PUT', body: { content: 'x'.repeat(32768) } }, 413)
+  for (const content of ['first draft', draftMarker]) {
+    await expectStatus(draftPath, { ...writer, method: 'PUT', body: { content } }, 200)
+  }
+  assert.deepEqual((await expectStatus(draftPath, writer, 200)).body, { content: draftMarker })
+  await expectStatus(draftPath, other, 404)
+  await expectStatus(draftPath, { ...other, method: 'PUT', body: { content: 'separate draft' } }, 200)
+  assert.deepEqual((await expectStatus(draftPath, writer, 200)).body, { content: draftMarker })
+  for (const route of ['papers', `papers/${publishedId}`, 'groups', `groups/group-${publishedId}`, 'export']) {
+    const data = await expectStatus(`${api}/${route}`, route === 'export' ? ndjson : auth, 200)
+    assert(!JSON.stringify(data).includes(draftMarker))
+  }
+  assert.deepEqual(await expectStatus(screenPath, { cookie: ownerCookie }, 200), screenBefore)
+  console.log('PASS scoped reports, target validation, append-only routes, Owner list and draft overwrite/isolation from paper reads')
+
+  const rate = await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '限流', scope: fullScope } }, 201)
   for (let count = 0; count < 118; count++) await expectStatus(`${api}/papers`, { token: rate.token }, 200)
   assert.equal((await req(passage.blocks[1].mediaUrl, { token: rate.token, format: 'bytes' })).status, 200)
   assert.equal((await expectStatus(`${api}/export`, { token: rate.token, format: 'ndjson' }, 200)).length, 2)
   const limited = await req(`${api}/papers`, { token: rate.token })
   assert.equal(limited.status, 429)
   assert(Number(limited.headers.get('retry-after')) > 0)
+  for (const [route, method, body, readStatus, writeStatus] of [
+    [reportPath, 'POST', reportBody, 200, 201], [draftPath, 'PUT', {}, 404, 200],
+  ]) {
+    for (let count = 0; count < 29; count++) await expectStatus(route, { token: rate.token }, readStatus)
+    await expectStatus(route, { token: rate.token, method, body }, writeStatus)
+    await expectStatus(route, { token: rate.token, method, body }, 429)
+  }
   assert((await expectStatus(admin, { cookie: ownerCookie }, 200)).tokens.find(row => row.id === rate.id).lastUsedAt)
-  console.log('PASS 120/min limit includes media and counts export of two papers once, activity timestamp')
+  console.log('PASS independent read, report and draft limits, read includes media and counts export once, activity timestamp')
   await expectStatus(`${api}/groups?limit=-1`, { token: credential.token }, 400)
   seedReview(pendingId, { number: 3 })
   const refreshed = await expectStatus(`${api}/papers/${pendingId}`, { token: credential.token }, 200)

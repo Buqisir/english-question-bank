@@ -4,7 +4,8 @@ import { Readable } from 'node:stream'
 import { pipeline } from 'node:stream/promises'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { defineRoute } from '../router/index.mjs'
-import { createAgentToken, listAgentTokens, revokeAgentToken } from './agentTokens.mjs'
+import { createAgentToken, draftsPath, listAgentTokens, reportsPath, revokeAgentToken } from './agentTokens.mjs'
+import { insertAgentReport, listAdminAgentReports, listAgentReports, putAgentDraft, readAgentDraft } from './agentSubmissions.mjs'
 import { agentGroup, agentPaperDetail, groupPreview, groupText, listAgentPapers, matchesPaper, matchesQuery, paperSummary, readAgentSource } from './agentCatalog.mjs'
 import { agentAnswerSource, agentMedia } from './agentSources.mjs'
 
@@ -25,12 +26,25 @@ export function agentDeploymentMeta(releaseDir = path.resolve(import.meta.dirnam
 
 function findPaper(papers, encodedId) {
   try {
-    const paper = papers.find(paper => paper.paperId === decodeURIComponent(encodedId))
-    return paper?.load ? paper.load() : paper
+    return loadPaper(papers, decodeURIComponent(encodedId))
   } catch (error) {
     if (error instanceof URIError) return null
     throw error
   }
+}
+
+function loadPaper(papers, paperId) {
+  const paper = papers.find(paper => paper.paperId === paperId)
+  return paper?.load ? paper.load() : paper
+}
+
+const bounded = (value, max) => typeof value === 'string' && value.trim().length > 0 && value.length <= max
+const record = value => value && typeof value === 'object' && !Array.isArray(value)
+const maxSubmissionBytes = 32 * 1024
+
+function containsQuestion(paper, questionId) {
+  return paper && Object.hasOwn(paper.asset.content.questions, questionId) && paper.groupIds.some(groupId =>
+    paper.asset.content.groups[groupId]?.questionIds?.includes(questionId))
 }
 
 export function createAgentRoutes({ getReviewStore } = {}) {
@@ -47,13 +61,37 @@ export function createAgentRoutes({ getReviewStore } = {}) {
     catch (error) { context.sendJson(response, error.status || 400, { error: error.status ? error.message : '口令操作失败，请重试。' }) }
     finally { db.close() }
   }, { ownerOnly: true })
-  const authorized = (pattern, action) => defineRoute('GET', pattern, input => {
+  const authorized = (pattern, action, method = 'GET') => defineRoute(method, pattern, input => {
     if (!input.context.agent) { input.context.sendJson(input.response, 401, { error: 'not_authenticated' }); return }
     return action(input)
   })
-  const read = (pattern, action) => authorized(pattern, input =>
-    action(input, listAgentPapers(input.context, getReviewStore?.())))
+  const catalog = context => listAgentPapers(context, getReviewStore?.())
+  const read = (pattern, action) => authorized(pattern, input => action(input, catalog(input.context)))
+  const submission = (method, pattern, action) => authorized(pattern, async input => {
+    const { context, request, response } = input
+    let body
+    if (method !== 'GET') {
+      if (Number(request.headers['content-length']) > maxSubmissionBytes) {
+        return context.sendJson(response, 413, { error: 'body_too_large' })
+      }
+      try { body = await context.readJsonBody(request, { maxBytes: maxSubmissionBytes }) }
+      catch { return context.sendJson(response, 400, { error: 'invalid_body' }) }
+    }
+    const db = context.openUserDatabase({ readOnly: method === 'GET' })
+    try { return action(input, db, context.agent.tokenId, body) }
+    finally { db.close() }
+  }, method)
   const notFound = ({ context, response }) => context.sendJson(response, 404, { error: 'not_found' })
+  const invalid = ({ context, response }) => context.sendJson(response, 400, { error: 'invalid_fields' })
+  const draft = (method, action) => submission(method, draftsPath, (input, db, tokenId, body) => {
+    let paperId, questionId
+    try { [paperId, questionId] = input.match.slice(1).map(decodeURIComponent) }
+    catch { return notFound(input) }
+    if (!bounded(paperId, 256) || !bounded(questionId, 256) || (method === 'PUT' && !record(body))) return invalid(input)
+    const result = action(input, db, tokenId, paperId, questionId, body)
+    if (!result) return notFound(input)
+    input.context.sendJson(input.response, 200, result)
+  })
   return [
     admin('GET', /^\/api\/admin\/agent-tokens$/, ({ context, response }, db) =>
       context.sendJson(response, 200, { tokens: listAgentTokens(db) })),
@@ -62,6 +100,26 @@ export function createAgentRoutes({ getReviewStore } = {}) {
     admin('POST', /^\/api\/admin\/agent-tokens\/([^/]+)\/revoke$/, (input, db) => {
       if (!revokeAgentToken(db, input.match[1])) return notFound(input)
       input.context.sendJson(input.response, 200, { revoked: true })
+    }),
+    admin('GET', /^\/api\/admin\/agent-reports$/, ({ context, response }, db) =>
+      context.sendJson(response, 200, { reports: listAdminAgentReports(db) })),
+    submission('POST', reportsPath, (input, db, tokenId, body) => {
+      if (!record(body)) return invalid(input)
+      const { paperId, questionId = null, groupId = null, kind, note, evidence } = body
+      if ((questionId === null) === (groupId === null) || !bounded(questionId ?? groupId, 256)
+        || !bounded(paperId, 256) || !bounded(kind, 80) || !bounded(note, 2000)
+        || !bounded(evidence, 4000)) return invalid(input)
+      const paper = loadPaper(catalog(input.context), paperId)
+      if (!(questionId === null ? paper?.groupIds.includes(groupId) : containsQuestion(paper, questionId))) return notFound(input)
+      const report = insertAgentReport(db, tokenId, { paperId, questionId, groupId, kind, note, evidence })
+      input.context.sendJson(input.response, 201, report)
+    }),
+    submission('GET', reportsPath, ({ context, response }, db, tokenId) =>
+      context.sendJson(response, 200, { reports: listAgentReports(db, tokenId) })),
+    draft('GET', (_input, db, tokenId, paperId, questionId) => readAgentDraft(db, tokenId, paperId, questionId)),
+    draft('PUT', (input, db, tokenId, paperId, questionId, body) => {
+      const paper = loadPaper(catalog(input.context), paperId)
+      return containsQuestion(paper, questionId) && putAgentDraft(db, tokenId, paperId, questionId, body)
     }),
     read(/^\/api\/agent\/v1\/papers$/, ({ context, response, url }, papers) =>
       context.sendJson(response, 200, { papers: papers.filter(paper => matchesPaper(paper, url.searchParams)
@@ -114,8 +172,10 @@ export function createAgentRoutes({ getReviewStore } = {}) {
       try { await pipeline(Readable.from(lines()), response) }
       catch (error) { if (error.code !== 'ERR_STREAM_PREMATURE_CLOSE') throw error }
     }),
-    authorized(/^\/api\/agent\/v1\/meta$/, ({ context, response }) =>
-      context.sendJson(response, 200, agentDeploymentMeta())),
+    authorized(/^\/api\/agent\/v1\/meta$/, ({ context, response, url }) => {
+      const meta = agentDeploymentMeta()
+      context.sendJson(response, 200, url.searchParams.get('include') === 'scope' ? { ...meta, scope: context.agent.scope } : meta)
+    }),
     read(/^\/api\/agent\/v1\/groups$/, ({ context, response, url }, papers) => {
       const params = url.searchParams
       const limit = Number(params.get('limit') ?? 50)

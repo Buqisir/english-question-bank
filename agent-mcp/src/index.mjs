@@ -34,12 +34,27 @@ const textResult = (value, isError = false) => ({
   ...(isError ? { isError: true } : {}),
 })
 
-function createServer({ base, token }) {
+async function discoverScope({ base, token }) {
+  try {
+    const response = await fetch(new URL('/api/agent/v1/meta?include=scope', base), {
+      headers: { Authorization: `Bearer ${token}` },
+      redirect: 'error',
+      signal: AbortSignal.timeout(2_000),
+    })
+    if (response.ok) {
+      const { scope } = await response.json()
+      if (Array.isArray(scope)) return scope
+    }
+  } catch { /* Keep existing read tools available during temporary outages. */ }
+  return ['read']
+}
+
+function createServer({ base, token }, scope) {
   const server = new McpServer({ name: 'eqb-agent', version: '1.0.0' })
   // Clients may omit `arguments` for tools whose fields are all optional; the SDK rejects undefined.
   const validateToolInput = server.validateToolInput.bind(server)
   server.validateToolInput = (tool, args, name) => validateToolInput(tool, args ?? {}, name)
-  async function get(path, query = {}, image = false) {
+  async function call(path, { query = {}, image = false, method = 'GET', body } = {}) {
     const url = new URL(`/api/agent/v1/${path}`, base)
     for (const [key, value] of Object.entries(query)) {
       if (value !== undefined) url.searchParams.set(key, String(value))
@@ -47,8 +62,10 @@ function createServer({ base, token }) {
     let response
     try {
       response = await fetch(url, {
-        method: 'GET',
-        headers: { Authorization: `Bearer ${token}`, Accept: image ? 'image/*' : 'application/json' },
+        method,
+        headers: { Authorization: `Bearer ${token}`, Accept: image ? 'image/*' : 'application/json',
+          ...(body === undefined ? {} : { 'Content-Type': 'application/json' }) },
+        body: body === undefined ? undefined : JSON.stringify(body),
         redirect: 'error',
         signal: AbortSignal.timeout(30_000),
       })
@@ -57,8 +74,11 @@ function createServer({ base, token }) {
     }
     if (!response.ok) {
       const messages = {
+        400: '字段无效，请核对内容与长度。',
         401: 'Agent 口令无效或已撤销，请在管理页新建口令并更新环境变量。',
-        404: '找不到请求的试卷、题组或图片，请核对 ID。',
+        403: 'Agent 口令没有这项权限。',
+        404: '找不到请求的对象，请核对 ID。',
+        413: '请求体过大，请缩短内容。',
         429: '请求过于频繁，请稍后重试。',
       }
       return textResult({
@@ -79,6 +99,35 @@ function createServer({ base, token }) {
     try { return textResult(await response.json()) }
     catch { return textResult({ error: '题库接口未返回有效 JSON，请检查服务状态。' }, true) }
   }
+  const get = (path, query, image) => call(path, { query, image })
+  if (scope.includes('read')) registerReadTools(server, get)
+  const targetId = identifier.pipe(z.string().max(256))
+  const writeAnnotations = { ...annotations, readOnlyHint: false }
+  if (scope.includes('report:append')) {
+    server.registerTool('report_issue', {
+      description: '追加一条试卷问题上报。questionId 与 groupId 二选一。',
+      inputSchema: { paperId: targetId, questionId: targetId.optional(), groupId: targetId.optional(),
+        kind: z.string().min(1).max(80), note: z.string().min(1).max(2000), evidence: z.string().min(1).max(4000) },
+      annotations: { ...writeAnnotations, idempotentHint: false },
+    }, body => call('reports', { method: 'POST', body }))
+    server.registerTool('list_reports', {
+      description: '列出当前口令上报的问题及处理状态。',
+      inputSchema: {},
+      annotations,
+    }, () => get('reports'))
+  }
+  if (scope.includes('drafts:write')) {
+    server.registerTool('put_draft', {
+      description: '覆盖当前口令对一道题的独立草稿。草稿正文为 JSON 对象。',
+      inputSchema: { paperId: targetId, questionId: targetId, body: z.record(z.unknown()) },
+      annotations: writeAnnotations,
+    }, ({ paperId, questionId, body }) =>
+      call(`drafts/${encodeURIComponent(paperId)}/${encodeURIComponent(questionId)}`, { method: 'PUT', body }))
+  }
+  return server
+}
+
+function registerReadTools(server, get) {
   server.registerTool('list_papers', {
     description: '列出已发布及待审试卷，按年份、类型筛选或搜索卷名/paperId。',
     inputSchema: { ...paperFilters, ...searchFilter },
@@ -118,11 +167,11 @@ function createServer({ base, token }) {
     },
     annotations,
   }, ({ paperId, mediaId }) => get(`media/${encodeURIComponent(paperId)}/${encodeURIComponent(mediaId)}`, {}, true))
-  return server
 }
 
 try {
-  const server = createServer(readConfig())
+  const config = readConfig()
+  const server = createServer(config, await discoverScope(config))
   await server.connect(new StdioServerTransport())
 } catch (error) {
   // Only configuration errors have safe, locally authored messages.
