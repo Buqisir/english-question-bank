@@ -1583,7 +1583,7 @@ export function createImportReviewStore({
   function listAwaitingCandidateRevisions() {
     return withDb(false, db => {
       const latest = new Map()
-      for (const row of db.prepare(`SELECT r.id, r.paper_id, r.bundle_digest,
+      for (const row of db.prepare(`SELECT r.id, r.paper_id, r.bundle_digest, r.updated_at,
           json_extract(r.manifest_json, '$.paperName') AS paper_name
         FROM import_review_revisions r
         WHERE r.state = 'awaiting_review'
@@ -1591,7 +1591,7 @@ export function createImportReviewStore({
         ORDER BY r.revision_number DESC`).all()) {
         if (!latest.has(row.paper_id)) {
           latest.set(row.paper_id, { id: row.id, paperId: row.paper_id, bundleDigest: row.bundle_digest,
-            paperName: row.paper_name })
+            paperName: row.paper_name, updatedAt: row.updated_at })
         }
       }
       return [...latest.values()]
@@ -1891,7 +1891,7 @@ export function createImportReviewStore({
     productPreviewForRevision(revisionId)
   }
 
-  // The stored JSON has its own digest; Agent reads never inspect bundle media.
+  // Agent reads the digest-bound preview and only the requested bundle JSON.
   function agentRevisionIdsForGroup(groupId) {
     return withDb(false, db => db.prepare(`SELECT v.revision_id
       FROM import_review_product_previews v JOIN import_review_revisions r ON r.id = v.revision_id
@@ -1907,7 +1907,18 @@ export function createImportReviewStore({
     const configFile = revision.manifest.files.find(file => file.role === 'config')
     const config = configFile
       ? JSON.parse(readFileSync(verifiedFileForRead(revisionId, configFile.path).filePath, 'utf8')) : null
-    return { paperAsset: preview.paperAsset, meta: config?.provenance }
+    const readJsonRole = (role, basename) => {
+      const entry = revision.manifest.files.find(file =>
+        file.role === role && (!basename || path.posix.basename(file.path) === basename))
+      return entry ? JSON.parse(readFileSync(verifiedFileForRead(revisionId, entry.path).filePath, 'utf8')) : null
+    }
+    return {
+      paperAsset: preview.paperAsset,
+      meta: config?.provenance,
+      media: preview.consumption?.mediaArtifacts,
+      readMaterialization: () => readJsonRole('materialization'),
+      readAnswerOcr: () => readJsonRole('ocr_source_evidence', 'nck1-ocr-source-evidence-v1.json'),
+    }
   }
 
   function storedProductPreviewForRevision(revisionId) {

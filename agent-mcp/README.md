@@ -37,9 +37,13 @@ Claude Code 和 Droid 均可在 MCP 配置的 `mcpServers` 下添加：
 | `list_groups` | `/api/agent/v1/groups` | 可选 `year`、`type`、`q`（卷名及题组全文）、`section`（精确名称）、`limit`（1–200，默认 50）、`offset`（非负，默认 0） |
 | `list_sections` | `/api/agent/v1/sections` | 可选 `year`、`type`；返回 `{sections:[{section,count}]}` |
 | `get_group` | `/api/agent/v1/groups/:groupId` | `groupId` |
+| `get_media` | `/api/agent/v1/media/:paperId/:mediaId` | `paperId`、`mediaId`，返回 MCP `image` 内容 |
+| HTTP 直连 | `/api/agent/v1/papers/:paperId/answer-source` | `paperId`，返回带页码与区域的 OCR 原文，缺失时返回 `{notice:"none"}` |
+| HTTP 直连 | `/api/agent/v1/export` | 可选 `since`（ISO 8601），每行一份试卷详情及 `etag`、`updatedAt` |
+| HTTP 直连 | `/api/agent/v1/meta` | 部署 SHA、激活时间、API 版本。本地运行时部署字段可以为 `null` |
 
 `q` 忽略大小写，按空白分词，全部词都须以子串命中；空查询不限。题组搜索不受 80 字预览限制。
 
-工具以 JSON 文本原样返回 API 成功响应，包含已发布和最新待审 Candidate 的内容及答案。待审预览缺失或不可读时，内容列表跳过该卷，详情返回 404。401 表示口令无效或已撤销，404 表示对象不存在或不可读，429 表示服务端限流；请求超时为 30 秒。错误作为 MCP `isError` 返回，不输出请求头或上游错误正文；不跟随重定向。
+查询工具以 JSON 文本返回已发布和最新待审 Candidate 的内容及答案。篇章详情保留 `paragraphs`，并提供按来源顺序排列的 `blocks`。`naturalParagraph` 只针对正文，无法确定时为 `null` 并附原因。取图工具返回图片。待审预览缺失或不可读时，内容列表跳过该卷，详情返回 404。401 表示口令无效或已撤销，404 表示对象不存在或不可读，429 表示服务端限流。请求超时为 30 秒。错误作为 MCP `isError` 返回，不输出请求头或上游错误正文，不跟随重定向。
 
-本包不包含写操作、审卷意见、个人数据、OCR/校对过程、听力切点或日志工具。`ops-mcp/` 仍独立负责运维。
+本包提供只读题库查询与取图。`ops-mcp/` 负责运维。

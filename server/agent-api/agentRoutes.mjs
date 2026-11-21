@@ -1,6 +1,37 @@
+import { lstatSync, readFileSync, realpathSync } from 'node:fs'
+import path from 'node:path'
+import { Readable } from 'node:stream'
+import { pipeline } from 'node:stream/promises'
+import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import { defineRoute } from '../router/index.mjs'
 import { createAgentToken, listAgentTokens, revokeAgentToken } from './agentTokens.mjs'
-import { agentGroup, groupPreview, groupText, listAgentPapers, matchesPaper, matchesQuery, paperSummary } from './agentCatalog.mjs'
+import { agentGroup, agentPaperDetail, groupPreview, groupText, listAgentPapers, matchesPaper, matchesQuery, paperSummary, readAgentSource } from './agentCatalog.mjs'
+import { agentAnswerSource, agentMedia } from './agentSources.mjs'
+
+export function agentDeploymentMeta(releaseDir = path.resolve(import.meta.dirname, '../..')) {
+  const result = { deployedSha: null, deployedAt: null, apiVersion: 'v1' }
+  try {
+    const active = path.resolve(releaseDir, '../../current')
+    const release = JSON.parse(readFileSync(path.join(releaseDir, '.eqb-release.json'), 'utf8'))
+    if (release.schemaVersion !== 'eqb-release-v1' || !/^[a-f0-9]{40}$/.test(release.sha)) return result
+    result.deployedSha = release.sha
+    const link = lstatSync(active)
+    if (link.isSymbolicLink() && realpathSync(active) === realpathSync(releaseDir)) {
+      result.deployedAt = link.mtime.toISOString()
+    }
+  } catch { /* Local and inactive releases may have no activation metadata. */ }
+  return result
+}
+
+function findPaper(papers, encodedId) {
+  try {
+    const paper = papers.find(paper => paper.paperId === decodeURIComponent(encodedId))
+    return paper?.load ? paper.load() : paper
+  } catch (error) {
+    if (error instanceof URIError) return null
+    throw error
+  }
+}
 
 export function createAgentRoutes({ getReviewStore } = {}) {
   const admin = (method, pattern, action) => defineRoute(method, pattern, async input => {
@@ -16,11 +47,12 @@ export function createAgentRoutes({ getReviewStore } = {}) {
     catch (error) { context.sendJson(response, error.status || 400, { error: error.status ? error.message : '口令操作失败，请重试。' }) }
     finally { db.close() }
   }, { ownerOnly: true })
-  const read = (pattern, action) => defineRoute('GET', pattern, input => {
+  const authorized = (pattern, action) => defineRoute('GET', pattern, input => {
     if (!input.context.agent) { input.context.sendJson(input.response, 401, { error: 'not_authenticated' }); return }
-    const papers = listAgentPapers(input.context, getReviewStore?.())
-    action(input, papers)
+    return action(input)
   })
+  const read = (pattern, action) => authorized(pattern, input =>
+    action(input, listAgentPapers(input.context, getReviewStore?.())))
   const notFound = ({ context, response }) => context.sendJson(response, 404, { error: 'not_found' })
   return [
     admin('GET', /^\/api\/admin\/agent-tokens$/, ({ context, response }, db) =>
@@ -35,11 +67,55 @@ export function createAgentRoutes({ getReviewStore } = {}) {
       context.sendJson(response, 200, { papers: papers.filter(paper => matchesPaper(paper, url.searchParams)
         && matchesQuery(`${paper.title} ${paper.paperId}`, url.searchParams.get('q') || '')).map(paperSummary) })),
     read(/^\/api\/agent\/v1\/papers\/([^/]+)$/, (input, papers) => {
-      const paper = papers.find(paper => paper.paperId === decodeURIComponent(input.match[1]))
+      const paper = findPaper(papers, input.match[1])
       if (!paper) return notFound(input)
-      if (paper.load && !paper.load()) return notFound(input)
-      input.context.sendJson(input.response, 200, { ...paperSummary(paper), groups: paper.groupIds.map(id => agentGroup(paper, id)) })
+      input.context.sendJson(input.response, 200, agentPaperDetail(paper))
     }),
+    read(/^\/api\/agent\/v1\/papers\/([^/]+)\/answer-source$/, (input, papers) => {
+      const paper = findPaper(papers, input.match[1])
+      if (!paper) return notFound(input)
+      input.context.sendJson(input.response, 200, agentAnswerSource(readAgentSource(paper)))
+    }),
+    read(/^\/api\/agent\/v1\/media\/([^/]+)\/([^/]+)$/, (input, papers) => {
+      const paper = findPaper(papers, input.match[1])
+      if (!paper) return notFound(input)
+      let mediaId
+      try { mediaId = decodeURIComponent(input.match[2]) } catch { return notFound(input) }
+      const media = agentMedia(readAgentSource(paper), mediaId)
+      if (!media) return notFound(input)
+      const { request, response } = input
+      response.setHeader('ETag', media.etag)
+      if (request.headers['if-none-match'] === media.etag) {
+        response.writeHead(304).end()
+        return
+      }
+      response.writeHead(200, {
+        'Content-Type': media.mimeType,
+        'Content-Length': media.bytes.length,
+        'Content-Security-Policy': "sandbox; default-src 'none'",
+        'X-Content-Type-Options': 'nosniff',
+      }).end(media.bytes)
+    }),
+    read(/^\/api\/agent\/v1\/export$/, async ({ context, response, url }, papers) => {
+      const since = url.searchParams.get('since')
+      const cutoff = since ? Date.parse(since) : -Infinity
+      if (since && (!/^\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2}))?$/u.test(since)
+        || !Number.isFinite(cutoff))) {
+        return context.sendJson(response, 400, { error: 'since must be an ISO 8601 timestamp' })
+      }
+      function* lines() {
+        for (const paper of papers) {
+          if (Date.parse(paper.updatedAt) <= cutoff || (paper.load && !paper.load())) continue
+          const detail = agentPaperDetail(paper)
+          yield `${JSON.stringify({ ...detail, etag: digestJson(detail), updatedAt: paper.updatedAt })}\n`
+        }
+      }
+      response.setHeader('Content-Type', 'application/x-ndjson; charset=utf-8')
+      try { await pipeline(Readable.from(lines()), response) }
+      catch (error) { if (error.code !== 'ERR_STREAM_PREMATURE_CLOSE') throw error }
+    }),
+    authorized(/^\/api\/agent\/v1\/meta$/, ({ context, response }) =>
+      context.sendJson(response, 200, agentDeploymentMeta())),
     read(/^\/api\/agent\/v1\/groups$/, ({ context, response, url }, papers) => {
       const params = url.searchParams
       const limit = Number(params.get('limit') ?? 50)
@@ -67,7 +143,7 @@ export function createAgentRoutes({ getReviewStore } = {}) {
       }
       if (!paper) return notFound(input)
       if (paper.load && !paper.load()) return notFound(input)
-      input.context.sendJson(input.response, 200, { ...agentGroup(paper, id), paperId: paper.paperId,
+      input.context.sendJson(input.response, 200, { ...agentGroup(paper, id, readAgentSource(paper)), paperId: paper.paperId,
         paperTitle: paper.title })
     }),
     read(/^\/api\/agent\/v1\/sections$/, ({ context, response, url }, papers) => {

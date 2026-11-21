@@ -4,7 +4,7 @@ import assert from 'node:assert/strict'
 import { spawn } from 'node:child_process'
 import { once } from 'node:events'
 import { createServer } from 'node:net'
-import { closeSync, ftruncateSync, openSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs'
+import { closeSync, ftruncateSync, openSync, mkdtempSync, mkdirSync, writeFileSync, rmSync, symlinkSync, utimesSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { randomUUID } from 'node:crypto'
@@ -13,6 +13,9 @@ import { createSession, createUser, ensureAuthDatabaseShape } from '../server/au
 import { ensureCanonicalPublicationDatabaseShape } from '../server/paper-canonical/publication.mjs'
 import { createImportReviewStore } from '../server/import-review/importReviewStore.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
+import { agentDeploymentMeta } from '../server/agent-api/agentRoutes.mjs'
+import { projectAgentPassage } from '../server/agent-api/agentPassage.mjs'
+import { auditParagraphRefs } from './agent-paragraph-ref-audit.mjs'
 
 const root = path.resolve(import.meta.dirname, '..')
 const temp = mkdtempSync(path.join(tmpdir(), 'eqb-agent-api-'))
@@ -27,7 +30,39 @@ let child
 let logs = ''
 function jsonFile(file, value) {
   mkdirSync(path.dirname(file), { recursive: true })
-  writeFileSync(file, JSON.stringify(value))
+  const bytes = Buffer.from(JSON.stringify(value))
+  writeFileSync(file, bytes)
+  return { sha256: sha256(bytes), byteLength: bytes.length }
+}
+const picture = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a3n0AAAAASUVORK5CYII=', 'base64')
+const materializationFilename = 'materialization/nck1-source-materialization-v1.json'
+const ocrFilename = 'materialization/nck1-ocr-source-evidence-v1.json'
+const region = { x: 0.1, y: 0.2, width: 0.3, height: 0.1 }
+const source = { kind: 'page_region', documentId: 'questions', page: 1, region }
+const ocrFor = paperId => ({ paperId, schemaVersion: 'nck1-ocr-source-evidence-v1',
+  documents: [{ documentId: 'answers', pages: [{ page: 2, observations: [{ region, text: '21. A' }] }] }] })
+const mediaFor = paperId => ({ mediaId: `media:${paperId}:fixture`, mimeType: 'image/png', sha256: sha256(picture),
+  pixelWidth: 1, pixelHeight: 1 })
+const unreferencedMedia = { ...mediaFor('unreferenced'), usage: 'visual_proof' }
+const passageFor = paperId => paperId === 'paper-agent-pending' ? [] : [
+  { paragraphId: 'p1', text: 'A teacher prepares a lesson.' },
+  { paragraphId: 'p2', text: 'She always remembers' },
+  { paragraphId: 'p3', text: 'to bring her notes.' },
+]
+function materializationFor(paperId) {
+  const paragraphs = passageFor(paperId).map(({ paragraphId, text }) =>
+    ({ kind: 'paragraph', blockId: paragraphId, role: 'body', source, content: [{ kind: 'text', text }] }))
+  const figure = { kind: 'figure', blockId: 'figure', mediaId: mediaFor(paperId).mediaId, caption: 'Figure', source }
+  const table = { kind: 'table', blockId: 'table', columnCount: 2, source, rows: [{ cells: [
+    { cellId: 'cell', columnStart: 1, columnSpan: 2, rowSpan: 1, content: [{ kind: 'text', text: 'Merged' }] },
+  ] }] }
+  const blocks = paragraphs.length ? [paragraphs[0], figure, ...paragraphs.slice(1), table,
+    { kind: 'paragraph', blockId: 'title', role: 'title', source, content: [{ kind: 'text', text: 'Title' }] },
+    { kind: 'paragraph', blockId: 'ambiguous', role: 'body', source, content: [{ kind: 'text', text: 'One.\n\nTwo.' }] },
+    { kind: 'paragraph', blockId: 'after-ambiguous', role: 'body', source, content: [{ kind: 'text', text: 'Three.' }] },
+  ] : [figure]
+  return { paperId, schemaVersion: 'nck1-source-materialization-v11', documents: [{ documentId: 'answers', role: 'official_answers' }],
+    groups: [{ groupId: `group-${paperId}`, blocks }], answers: [], media: [mediaFor(paperId), unreferencedMedia] }
 }
 function assetFor(paperId) {
   const groupId = `group-${paperId}`
@@ -38,7 +73,7 @@ function assetFor(paperId) {
     content: {
       blocks: [{ type: 'group', groupId }],
       groups: { [groupId]: { groupId, groupType: 'reading', title: '阅读 A',
-        passage: { paragraphs: [{ text: 'A teacher prepares a lesson.' }] }, questionIds: [questionId] } },
+        passage: { paragraphs: passageFor(paperId) }, questionIds: [questionId] } },
       questions: { [questionId]: { questionId, groupId, questionNo: 21, stem: 'What does the teacher prepare?',
         options: [{ label: 'A', text: 'A lesson.' }, { label: 'B', text: 'A trip.' }] } },
     },
@@ -53,14 +88,30 @@ ensureCanonicalPublicationDatabaseShape(bank)
 const publishedId = 'paper-agent-published'
 const pendingId = 'paper-agent-pending'
 const pubAsset = assetFor(publishedId)
-const ref = { paperId: publishedId, versionName: 'v1', sourceAssetVersion: 1, publicationDigest: 'fixture-digest' }
+const versionDir = path.join(assets, publishedId, 'versions/v1')
+const materialization = jsonFile(path.join(versionDir, 'canonical/source-asset.bin'), materializationFor(publishedId))
+const ocrEvidence = jsonFile(path.join(versionDir, 'source-evidence/ocr.bin'), ocrFor(publishedId))
+writeFileSync(path.join(versionDir, 'source-evidence/picture.bin'), picture)
+const ocrCommitment = digestJson({ digest: ocrEvidence.sha256, roles: ['source_provenance'], inputKey: 'ocr_source_evidence' })
+const publication = {
+  sourceAssetDigest: materialization.sha256,
+  sourceEvidence: [
+    { documentId: `document:${ocrCommitment.slice('sha256:'.length).slice(0, 28)}`, relativePath: 'source-evidence/ocr.bin', ...ocrEvidence },
+    { documentId: 'picture', relativePath: 'source-evidence/picture.bin', byteLength: picture.length, sha256: sha256(picture) },
+  ],
+}
+const ref = { paperId: publishedId, versionName: 'v1', sourceAssetVersion: 1, publicationDigest: digestJson(publication) }
+jsonFile(path.join(versionDir, 'canonical/canonical-paper-publication-v1.json'), { ...publication, publicationDigest: ref.publicationDigest })
 bank.prepare(`INSERT INTO canonical_paper_publications
-  (paper_id, version_name, source_asset_version, publication_digest, is_current) VALUES (?, 'v1', 1, ?, 1)`)
+  (paper_id, version_name, source_asset_version, publication_digest, is_current, created_at)
+  VALUES (?, 'v1', 1, ?, 1, '2026-01-01 00:00:00')`)
   .run(publishedId, ref.publicationDigest)
 bank.close()
 jsonFile(path.join(assets, publishedId, 'latest/paper-asset.json'), pubAsset)
 jsonFile(path.join(assets, publishedId, 'latest/import-meta.json'), { paper: { year: 2026, paperName: '正式测试卷' } })
 jsonFile(path.join(assets, publishedId, 'latest/canonical-paper-publication-ref-v1.json'), ref)
+const publicationTime = new Date('2026-01-01T00:00:00Z')
+utimesSync(path.join(assets, publishedId, 'latest/canonical-paper-publication-ref-v1.json'), publicationTime, publicationTime)
 jsonFile(path.join(assets, publishedId, 'versions/v1/canonical/canonical-paper-plan-v1.json'), {
   paperId: publishedId, slotBindings: [{ state: 'bound', groupRef: { groupId: `group-${publishedId}` } }],
 })
@@ -77,13 +128,17 @@ await new Promise(resolve => probe.listen(0, '127.0.0.1', resolve))
 const port = probe.address().port
 await new Promise(resolve => probe.close(resolve))
 const origin = `http://127.0.0.1:${port}`
-async function req(route, { token, cookie, method = 'GET', body } = {}) {
+async function req(route, { token, cookie, method = 'GET', body, ifNoneMatch, format = 'json' } = {}) {
   const response = await fetch(origin + route, { method, headers: {
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...(cookie ? { Cookie: cookie } : {}),
     ...(body ? { 'Content-Type': 'application/json' } : {}),
+    ...(ifNoneMatch ? { 'If-None-Match': ifNoneMatch } : {}),
   }, ...(body ? { body: JSON.stringify(body) } : {}) })
-  return { status: response.status, headers: response.headers, data: await response.json().catch(() => null) }
+  const data = format === 'bytes' ? Buffer.from(await response.arrayBuffer())
+    : format === 'ndjson' ? (await response.text()).trim().split('\n').filter(Boolean).map(line => JSON.parse(line))
+      : await response.json().catch(() => null)
+  return { status: response.status, headers: response.headers, data }
 }
 async function expectStatus(route, options, status) {
   const result = await req(route, options)
@@ -92,13 +147,17 @@ async function expectStatus(route, options, status) {
 }
 function seedReview(paperId = pendingId, { state = 'awaiting_review', number = 1, ocr = false, largeMedia = false, textSize = 0 } = {}) {
   const db = new DatabaseSync(reviewPath)
-  const timestamp = new Date().toISOString()
+  const timestamp = `2026-01-0${number + 1}T00:00:00.000Z`
   const id = `rev-${randomUUID()}`
   const config = { paperId, provenance: { year: 2026, sourceType: '模拟题', paperName: '待审测试卷' } }
   const bytes = Buffer.from(JSON.stringify(config))
   jsonFile(path.join(files, id, 'config.json'), config)
   const manifest = { schemaVersion: ocr ? 'web-import-ocr-review-bundle-v1' : 'web-import-review-bundle-v1', paperId, paperName: '待审测试卷',
     files: [{ path: 'config.json', sha256: sha256(bytes), byteLength: bytes.length, mediaType: 'application/json', role: 'config' }] }
+  if (paperId === pendingId) for (const [file, role, value] of [[materializationFilename, 'materialization', materializationFor(paperId)],
+    [ocrFilename, 'ocr_source_evidence', ocrFor(paperId)]]) {
+    manifest.files.push({ path: file, role, mediaType: 'application/json', ...jsonFile(path.join(files, id, file), value) })
+  }
   if (largeMedia) for (const [extension, mediaType] of [['pdf', 'application/pdf'], ['mp3', 'audio/mpeg']]) {
     const file = { path: `agent-large.${extension}`, byteLength: 64 * 1024 * 1024,
       sha256: sha256('deliberately different'), mediaType, role: 'source' }
@@ -116,6 +175,7 @@ function seedReview(paperId = pendingId, { state = 'awaiting_review', number = 1
     VALUES (?, ?, ?, ?, 'source', 'candidate', 'visible', 'bundle', 'fixture', 'fixture', ?, ?, ?, ?)`)
     .run(id, paperId, number, state, JSON.stringify(manifest), timestamp, timestamp, timestamp)
   const preview = { paperAsset: assetFor(paperId) }
+  if (paperId === pendingId) preview.consumption = { mediaArtifacts: [{ ...mediaFor(paperId), encodedBytes: picture.toString('base64') }] }
   if (textSize) preview.paperAsset.content.groups[`group-${paperId}`].passage.paragraphs[0].text = 'Reading text. '.repeat(textSize)
   db.prepare(`INSERT INTO import_review_product_previews
     (revision_id,bundle_digest,renderer_build_id,payload_digest,payload_json) VALUES (?, 'bundle', 'fixture', ?, ?)`)
@@ -229,6 +289,7 @@ try {
     .run(JSON.stringify(longPreview), digestJson(longPreview), longRevision)
   longDb.close()
   assert.equal((await query('groups', 'beyondpreview')).total, 1)
+  assert.deepEqual(await expectStatus(`${api}/papers/paper-agent-long/answer-source`, { token: credential.token }, 200), { notice: 'none' })
   const hideLong = new DatabaseSync(reviewPath)
   hideLong.prepare("UPDATE import_review_revisions SET state = 'changes_requested' WHERE id = ?").run(longRevision)
   hideLong.close()
@@ -262,11 +323,95 @@ try {
   assert(!('revisionId' in detail))
   const groups = await expectStatus(`${api}/groups?section=${encodeURIComponent('阅读理解')}&type=real&year=2026&limit=1&offset=0`, { token: credential.token }, 200)
   assert.equal(groups.total, 1)
-  assert.equal(groups.groups[0].preview, 'A teacher prepares a lesson.')
+  assert.equal(groups.groups[0].preview, 'A teacher prepares a lesson. She always remembers to bring her notes.')
   assert(!('status' in groups.groups[0]) && !('revision' in groups.groups[0]))
   const group = await expectStatus(`${api}/groups/group-${publishedId}`, { token: credential.token }, 200)
   assert.equal(group.questions[0].answer, 'A')
   assert(!('status' in group) && !('revision' in group))
+  const auth = { token: credential.token }
+  const passage = detail.groups[0].passage
+  assert.deepEqual(passage.paragraphs, passageFor(publishedId).map((paragraph, index) => ({
+    ...paragraph, naturalParagraph: [1, 2, 2][index], naturalParagraphBasis: index === 2 ? 'merged' : 'order',
+  })))
+  assert.deepEqual(group.passage, passage)
+  assert.deepEqual(passage.blocks.map(block => block.kind),
+    ['paragraph', 'figure', 'paragraph', 'paragraph', 'table', 'paragraph', 'paragraph', 'paragraph'])
+  assert.deepEqual(passage.blocks[2], { kind: 'paragraph', blockId: 'p2', paragraphId: 'p2', role: 'body',
+    page: 1, naturalParagraph: 2, naturalParagraphBasis: 'order' })
+  assert.deepEqual(passage.blocks[4], { kind: 'table', blockId: 'table', columnCount: 2, rows: [[{ text: 'Merged', columnSpan: 2 }]] })
+  assert.deepEqual(passage.blocks[5], { kind: 'paragraph', blockId: 'title', paragraphId: null, role: 'title', page: 1 })
+  assert.deepEqual(passage.blocks[6], { kind: 'paragraph', blockId: 'ambiguous', paragraphId: null, role: 'body',
+    page: 1, naturalParagraph: null, naturalParagraphBasis: null, naturalParagraphReason: 'multiple_paragraphs_in_block' })
+  assert.equal(passage.blocks[7].naturalParagraph, null)
+  const pendingPassage = pendingDetail.groups[0].passage
+  assert.equal(pendingPassage.notice, 'image_only')
+  assert.deepEqual(pendingPassage.paragraphs, [])
+  for (const [figure, paperId] of [[passage.blocks[1], publishedId], [pendingPassage.blocks[0], pendingId]]) {
+    const item = mediaFor(paperId)
+    assert.deepEqual(figure, { kind: 'figure', blockId: 'figure', mediaId: item.mediaId, caption: 'Figure', page: 1,
+      mimeType: 'image/png', width: 1, height: 1, mediaUrl: `${api}/media/${paperId}/${encodeURIComponent(item.mediaId)}` })
+    const image = await req(figure.mediaUrl, { ...auth, format: 'bytes' })
+    assert.equal(image.status, 200)
+    assert.equal(image.headers.get('content-type'), 'image/png')
+    assert.equal(image.headers.get('etag'), `"${item.sha256}"`)
+    assert.equal(sha256(image.data), item.sha256)
+    await expectStatus(figure.mediaUrl, { ...auth, ifNoneMatch: image.headers.get('etag') }, 304)
+    const ocr = await expectStatus(`${api}/papers/${paperId}/answer-source`, auth, 200)
+    assert.deepEqual(ocr, { entries: [{ documentId: 'answers', page: 2, region, text: '21. A' }] })
+  }
+  await expectStatus(passage.blocks[1].mediaUrl, {}, 401)
+  await expectStatus(`${api}/media/${publishedId}/${encodeURIComponent(pendingPassage.blocks[0].mediaId)}`, auth, 404)
+  await expectStatus(`${api}/media/${publishedId}/${encodeURIComponent(unreferencedMedia.mediaId)}`, auth, 404)
+  await expectStatus(`${api}/media/${publishedId}/%ff`, auth, 404)
+  assert.equal(projectAgentPassage(publishedId, { paragraphs: [] }, undefined).notice, 'empty')
+  const inverted = materializationFor(publishedId).groups[0]
+  inverted.blocks[0].source = { ...source, page: 2 }
+  assert.equal(projectAgentPassage(publishedId, { paragraphs: passageFor(publishedId) }, inverted)
+    .blocks.find(block => block.blockId === 'p2').naturalParagraphReason, 'source_order_conflict')
+  const syntheticAudit = { paperId: publishedId, groups: [{ ...group, questions: [
+    { number: 21, stem: 'Why does the author mention her notes in the first paragraph?', options: [] },
+    { number: 22, stem: 'Why does the author mention her notes in Para. 1?', options: [] },
+    { number: 23, stem: 'What does “her notes” mean in the 2nd paragraph?', options: [] },
+  ] }] }
+  assert.deepEqual(auditParagraphRefs(syntheticAudit).map(issue => [issue.questionNo, issue.citedParagraph, issue.actualParagraph]),
+    [[21, 1, 2], [22, 1, 2]])
+  console.log('PASS original paragraphs, ordered blocks, natural paragraph numbering, merged table, image-only notice, scoped media and answer OCR')
+
+  const ndjson = { ...auth, format: 'ndjson' }
+  const exported = await req(`${api}/export`, ndjson)
+  assert.equal(exported.status, 200)
+  assert.match(exported.headers.get('content-type'), /^application\/x-ndjson/)
+  assert.deepEqual(exported.data.map(({ etag, updatedAt, ...paper }) => {
+    assert.equal(etag, digestJson(paper))
+    assert.equal(updatedAt, new Date(updatedAt).toISOString())
+    return paper
+  }), [pendingDetail, detail])
+  assert.deepEqual((await expectStatus(`${api}/export?since=2026-01-01T12:00:00Z`, ndjson, 200)).map(row => row.paperId), [pendingId])
+  assert.deepEqual(await expectStatus(`${api}/export?since=2026-01-03T00:00:00Z`, ndjson, 200), [])
+  await expectStatus(`${api}/export?since=yesterday`, auth, 400)
+  await expectStatus(`${api}/export`, {}, 401)
+  await expectStatus(`${api}/meta`, {}, 401)
+  assert.deepEqual(Object.keys(await expectStatus(`${api}/meta`, auth, 200)).sort(), ['apiVersion', 'deployedAt', 'deployedSha'])
+  const deployedSha = 'a'.repeat(40)
+  const releaseDir = path.join(temp, 'deploy', 'releases', deployedSha)
+  jsonFile(path.join(releaseDir, '.eqb-release.json'), {
+    schemaVersion: 'eqb-release-v1', sha: deployedSha, secretPath: userPath,
+  })
+  symlinkSync(releaseDir, path.join(temp, 'deploy/current'), 'dir')
+  const meta = agentDeploymentMeta(releaseDir)
+  assert.deepEqual(meta, { deployedSha, deployedAt: new Date(meta.deployedAt).toISOString(), apiVersion: 'v1' })
+  assert(!JSON.stringify(meta).includes(userPath))
+  console.log('PASS NDJSON detail parity and ETags, two since cutoffs, and deployment meta fields')
+
+  const rate = await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '限流' } }, 201)
+  for (let count = 0; count < 118; count++) await expectStatus(`${api}/papers`, { token: rate.token }, 200)
+  assert.equal((await req(passage.blocks[1].mediaUrl, { token: rate.token, format: 'bytes' })).status, 200)
+  assert.equal((await expectStatus(`${api}/export`, { token: rate.token, format: 'ndjson' }, 200)).length, 2)
+  const limited = await req(`${api}/papers`, { token: rate.token })
+  assert.equal(limited.status, 429)
+  assert(Number(limited.headers.get('retry-after')) > 0)
+  assert((await expectStatus(admin, { cookie: ownerCookie }, 200)).tokens.find(row => row.id === rate.id).lastUsedAt)
+  console.log('PASS 120/min limit includes media and counts export of two papers once, activity timestamp')
   await expectStatus(`${api}/groups?limit=-1`, { token: credential.token }, 400)
   seedReview(pendingId, { number: 3 })
   const refreshed = await expectStatus(`${api}/papers/${pendingId}`, { token: credential.token }, 200)
@@ -277,7 +422,7 @@ try {
   assert.equal((await expectStatus(`${api}/papers?type=mock`, { token: credential.token }, 200)).papers.length, 0)
   await expectStatus(`${api}/papers/${pendingId}`, { token: credential.token }, 404)
   console.log('PASS published priority, latest awaiting Candidate, status exclusion, cache refresh, filters and answers')
-  console.log('EXAMPLES', JSON.stringify({ papers: filtered, paper: detail, groups, group }))
+  console.log('EXAMPLES', JSON.stringify({ papers: filtered, groups, media: passage.blocks[1], meta }))
   const benchmarkRevisions = Array.from({ length: 10 }, (_, i) =>
     seedReview(`paper-agent-benchmark-${i}`, { state: 'changes_requested', textSize: 10000 }))
   const reviewStore = createImportReviewStore({ dbPath: reviewPath, filesRoot: files,
@@ -292,16 +437,10 @@ try {
     minMs: Math.min(...timings), maxMs: Math.max(...timings),
   }))
 
-  const rate = await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '限流' } }, 201)
-  for (let count = 0; count < 120; count++) await expectStatus(`${api}/papers`, { token: rate.token }, 200)
-  const limited = await req(`${api}/papers`, { token: rate.token })
-  assert.equal(limited.status, 429)
-  assert(Number(limited.headers.get('retry-after')) > 0)
-  assert((await expectStatus(admin, { cookie: ownerCookie }, 200)).tokens.find(row => row.id === rate.id).lastUsedAt)
   await expectStatus(`${admin}/${credential.id}/revoke`, { cookie: ownerCookie, method: 'POST', body: {} }, 200)
   await expectStatus(`${api}/papers`, { token: credential.token }, 401)
   await expectStatus('/api/draft-papers', { cookie: ownerCookie }, 200)
-  console.log('PASS 120/min limit, activity timestamp, immediate revocation, unchanged sessions')
+  console.log('PASS immediate revocation and unchanged sessions')
   const bootstrap = new DatabaseSync(userPath)
   bootstrap.exec('DELETE FROM users')
   bootstrap.close()

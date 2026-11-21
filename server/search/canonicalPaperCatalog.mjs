@@ -23,7 +23,8 @@ export function listCanonicalPaperCatalog({ db, rootDir, paperId = null }) {
       if (asset.paper?.paperId !== ref.paper_id || groupIds.some(id => asset.content?.groups?.[id]?.groupId !== id)) continue
       const blockIds = asset.content.blocks.filter(block => block.type === 'group').map(block => block.groupId)
       if (!groupIds.length || blockIds.length !== groupIds.length || new Set(blockIds).size !== groupIds.length || blockIds.some(id => !groupIds.includes(id))) continue
-      papers.push({ paperId: ref.paper_id, publishedAt: ref.created_at, asset, groupIds })
+      papers.push({ paperId: ref.paper_id, publishedAt: ref.created_at, asset, groupIds,
+        versionName: ref.version_name, publicationDigest: ref.publication_digest })
     } catch {
       // Missing/unreadable projections are not advertised. Deep integrity errors
       // are reported by the authoritative consumption endpoint on open/export.

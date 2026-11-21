@@ -39,7 +39,7 @@ function createServer({ base, token }) {
   // Clients may omit `arguments` for tools whose fields are all optional; the SDK rejects undefined.
   const validateToolInput = server.validateToolInput.bind(server)
   server.validateToolInput = (tool, args, name) => validateToolInput(tool, args ?? {}, name)
-  async function get(path, query = {}) {
+  async function get(path, query = {}, image = false) {
     const url = new URL(`/api/agent/v1/${path}`, base)
     for (const [key, value] of Object.entries(query)) {
       if (value !== undefined) url.searchParams.set(key, String(value))
@@ -48,7 +48,7 @@ function createServer({ base, token }) {
     try {
       response = await fetch(url, {
         method: 'GET',
-        headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' },
+        headers: { Authorization: `Bearer ${token}`, Accept: image ? 'image/*' : 'application/json' },
         redirect: 'error',
         signal: AbortSignal.timeout(30_000),
       })
@@ -58,13 +58,23 @@ function createServer({ base, token }) {
     if (!response.ok) {
       const messages = {
         401: 'Agent 口令无效或已撤销，请在管理页新建口令并更新环境变量。',
-        404: '未找到已发布的试卷或题组，请重新查询列表。',
+        404: '找不到请求的试卷、题组或图片，请核对 ID。',
         429: '请求过于频繁，请稍后重试。',
       }
       return textResult({
         status: response.status,
         error: messages[response.status] || '题库接口请求失败，请稍后重试。',
       }, true)
+    }
+    if (image) {
+      try {
+        const mimeType = response.headers.get('content-type')?.split(';')[0]
+        if (!mimeType?.startsWith('image/')) throw new Error('Expected image')
+        const data = Buffer.from(await response.arrayBuffer()).toString('base64')
+        return { content: [{ type: 'image', mimeType, data }] }
+      } catch {
+        return textResult({ error: '题库接口未返回有效图片，请检查服务状态。' }, true)
+      }
     }
     try { return textResult(await response.json()) }
     catch { return textResult({ error: '题库接口未返回有效 JSON，请检查服务状态。' }, true) }
@@ -100,6 +110,14 @@ function createServer({ base, token }) {
     inputSchema: { groupId: identifier.describe('list_groups 或 get_paper 返回的 groupId。') },
     annotations,
   }, ({ groupId }) => get(`groups/${encodeURIComponent(groupId)}`))
+  server.registerTool('get_media', {
+    description: '读取该卷篇章块或题目选项引用的图片，返回 MCP 图片内容。',
+    inputSchema: {
+      paperId: identifier.describe('图片所属试卷的 paperId。'),
+      mediaId: identifier.describe('篇章 figure 块里的 mediaId。'),
+    },
+    annotations,
+  }, ({ paperId, mediaId }) => get(`media/${encodeURIComponent(paperId)}/${encodeURIComponent(mediaId)}`, {}, true))
   return server
 }
 
