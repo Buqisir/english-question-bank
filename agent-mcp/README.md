@@ -41,7 +41,7 @@ Claude Code 和 Droid 均可在 MCP 配置的 `mcpServers` 下添加：
 | HTTP 直连 | `/api/agent/v1/papers/:paperId/answer-source` | `paperId`，返回带页码与区域的 OCR 原文，缺失时返回 `{notice:"none"}` |
 | HTTP 直连 | `/api/agent/v1/export` | 可选 `since`（ISO 8601），每行一份试卷详情及 `etag`、`updatedAt` |
 | `report_issue` | `POST /api/agent/v1/reports` | `report:append`。`paperId`，`questionId` 或 `groupId` 二选一，`kind`（最多 80 字符）、`note`（2000）、`evidence`（4000）。ID 最多 256 字符 |
-| `list_reports` | `/api/agent/v1/reports` | `report:append`。返回本口令的上报及 `pending` 状态 |
+| `list_reports` | `/api/agent/v1/reports` | `report:append`。可选 `limit`（1–200，默认 50）、`offset`（非负，默认 0）。返回本口令的上报及 `pending` 状态，`nextOffset` 为下一页偏移量，末页为 `null` |
 | `put_draft` | `PUT /api/agent/v1/drafts/:paperId/:questionId` | `drafts:write`。`paperId`、`questionId` 和 `body`（JSON 对象，HTTP 请求体最多 32 KiB），覆盖本口令的同题草稿 |
 | HTTP 直连 | `/api/agent/v1/drafts/:paperId/:questionId` | `drafts:write`。读取本口令的同题草稿 |
 | HTTP 直连 | `/api/agent/v1/meta` | 部署 SHA、激活时间、API 版本。`?include=scope` 加入口令权限。本地运行时部署字段可以为 `null` |

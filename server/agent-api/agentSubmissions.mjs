@@ -10,6 +10,7 @@ export function ensureAgentSubmissionShape(db) {
       CHECK ((question_id IS NULL) <> (group_id IS NULL))
     );
     CREATE INDEX IF NOT EXISTS idx_agent_reports_token ON agent_reports(token_id, created_at);
+    CREATE INDEX IF NOT EXISTS idx_agent_reports_created ON agent_reports(created_at DESC, id);
     CREATE TABLE IF NOT EXISTS agent_drafts (
       token_id TEXT NOT NULL REFERENCES agent_tokens(id), paper_id TEXT NOT NULL, question_id TEXT NOT NULL,
       body_json TEXT NOT NULL, updated_at TEXT NOT NULL,
@@ -21,14 +22,14 @@ export function ensureAgentSubmissionShape(db) {
 const reportColumns = `r.id, r.paper_id AS paperId, r.question_id AS questionId, r.group_id AS groupId,
   r.kind, r.note, r.evidence, r.created_at AS createdAt, 'pending' AS status`
 
-export function listAgentReports(db, tokenId) {
+export function listAgentReports(db, tokenId, limit, offset) {
   return db.prepare(`SELECT ${reportColumns} FROM agent_reports r
-    WHERE r.token_id = ? ORDER BY r.created_at DESC, r.id`).all(tokenId)
+    WHERE r.token_id = ? ORDER BY r.created_at DESC, r.id LIMIT ? OFFSET ?`).all(tokenId, limit, offset)
 }
 
-export function listAdminAgentReports(db) {
+export function listAdminAgentReports(db, limit, offset) {
   return db.prepare(`SELECT ${reportColumns}, t.name AS tokenName FROM agent_reports r
-    JOIN agent_tokens t ON t.id = r.token_id ORDER BY r.created_at DESC, r.id`).all()
+    JOIN agent_tokens t ON t.id = r.token_id ORDER BY r.created_at DESC, r.id LIMIT ? OFFSET ?`).all(limit, offset)
 }
 
 export function insertAgentReport(db, tokenId, { paperId, questionId, groupId, kind, note, evidence }) {

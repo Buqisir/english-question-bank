@@ -3,7 +3,7 @@ import path from 'node:path'
 import { Readable } from 'node:stream'
 import { pipeline } from 'node:stream/promises'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
-import { defineRoute } from '../router/index.mjs'
+import { defineRoute, readJsonRouteBody } from '../router/index.mjs'
 import { createAgentToken, draftsPath, listAgentTokens, reportsPath, revokeAgentToken } from './agentTokens.mjs'
 import { insertAgentReport, listAdminAgentReports, listAgentReports, putAgentDraft, readAgentDraft } from './agentSubmissions.mjs'
 import { agentGroup, agentPaperDetail, groupPreview, groupText, listAgentPapers, matchesPaper, matchesQuery, paperSummary, readAgentSource } from './agentCatalog.mjs'
@@ -42,6 +42,17 @@ const bounded = (value, max) => typeof value === 'string' && value.trim().length
 const record = value => value && typeof value === 'object' && !Array.isArray(value)
 const maxSubmissionBytes = 32 * 1024
 
+function sendReportPage({ context, response, url }, list) {
+  const limit = Number(url.searchParams.get('limit') ?? 50)
+  const offset = Number(url.searchParams.get('offset') ?? 0)
+  if (!Number.isSafeInteger(limit) || limit < 1 || limit > 200 || !Number.isSafeInteger(offset) || offset < 0) {
+    return context.sendJson(response, 400, { error: 'limit must be 1–200; offset must be a nonnegative integer' })
+  }
+  const rows = list(limit + 1, offset)
+  context.sendJson(response, 200, { reports: rows.slice(0, limit), limit, offset,
+    nextOffset: rows.length > limit ? offset + limit : null })
+}
+
 function containsQuestion(paper, questionId) {
   return paper && Object.hasOwn(paper.asset.content.questions, questionId) && paper.groupIds.some(groupId =>
     paper.asset.content.groups[groupId]?.questionIds?.includes(questionId))
@@ -74,7 +85,7 @@ export function createAgentRoutes({ getReviewStore } = {}) {
       if (Number(request.headers['content-length']) > maxSubmissionBytes) {
         return context.sendJson(response, 413, { error: 'body_too_large' })
       }
-      try { body = await context.readJsonBody(request, { maxBytes: maxSubmissionBytes }) }
+      try { body = await readJsonRouteBody(request, { maxBytes: maxSubmissionBytes, requireBody: method === 'PUT' }) }
       catch { return context.sendJson(response, 400, { error: 'invalid_body' }) }
     }
     const db = context.openUserDatabase({ readOnly: method === 'GET' })
@@ -101,8 +112,8 @@ export function createAgentRoutes({ getReviewStore } = {}) {
       if (!revokeAgentToken(db, input.match[1])) return notFound(input)
       input.context.sendJson(input.response, 200, { revoked: true })
     }),
-    admin('GET', /^\/api\/admin\/agent-reports$/, ({ context, response }, db) =>
-      context.sendJson(response, 200, { reports: listAdminAgentReports(db) })),
+    admin('GET', /^\/api\/admin\/agent-reports$/, (input, db) =>
+      sendReportPage(input, (limit, offset) => listAdminAgentReports(db, limit, offset))),
     submission('POST', reportsPath, (input, db, tokenId, body) => {
       if (!record(body)) return invalid(input)
       const { paperId, questionId = null, groupId = null, kind, note, evidence } = body
@@ -114,8 +125,8 @@ export function createAgentRoutes({ getReviewStore } = {}) {
       const report = insertAgentReport(db, tokenId, { paperId, questionId, groupId, kind, note, evidence })
       input.context.sendJson(input.response, 201, report)
     }),
-    submission('GET', reportsPath, ({ context, response }, db, tokenId) =>
-      context.sendJson(response, 200, { reports: listAgentReports(db, tokenId) })),
+    submission('GET', reportsPath, (input, db, tokenId) =>
+      sendReportPage(input, (limit, offset) => listAgentReports(db, tokenId, limit, offset))),
     draft('GET', (_input, db, tokenId, paperId, questionId) => readAgentDraft(db, tokenId, paperId, questionId)),
     draft('PUT', (input, db, tokenId, paperId, questionId, body) => {
       const paper = loadPaper(catalog(input.context), paperId)

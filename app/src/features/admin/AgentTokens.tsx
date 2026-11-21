@@ -79,8 +79,20 @@ export function AgentTokens() {
     <form onSubmit={event => {
       event.preventDefault()
       setCreating(true)
+      setSecret('')
       void mutate(async () => {
         const { token, ...item }: AgentToken & { token: string } = await request('', { name, scope })
+        if (!Array.isArray(item.scope) || item.scope.length !== scope.length || !scope.every(value => item.scope.includes(value))) {
+          try {
+            await request(`/${encodeURIComponent(item.id)}/revoke`, {})
+            setError('口令权限与所选权限不符，已作废新口令。')
+          } catch {
+            setLoading(true)
+            setLoadAttempt(n => n + 1)
+            setError('口令权限与所选权限不符。自动作废失败，请在列表中作废新口令。')
+          }
+          return
+        }
         setSecret(token); setName(''); setScope(['read'])
         setTokens(current => [item, ...current])
       }).finally(() => setCreating(false))

@@ -547,6 +547,42 @@ try {
   assert.deepEqual(await expectStatus(screenPath, { cookie: ownerCookie }, 200), screenBefore)
   console.log('PASS scoped reports, target validation, append-only routes, Owner list and draft overwrite/isolation from paper reads')
 
+  const regressions = await Promise.allSettled([
+    (async () => {
+      await expectStatus(draftPath, { ...writer, method: 'PUT' }, 400)
+      const chunked = await fetch(origin + draftPath, {
+        method: 'PUT', headers: { Authorization: `Bearer ${writer.token}` }, duplex: 'half',
+        body: new ReadableStream({ start(controller) { controller.close() } }),
+      })
+      assert.equal(chunked.status, 400)
+      await chunked.json()
+      assert.deepEqual((await expectStatus(draftPath, writer, 200)).body, { content: draftMarker })
+      assert.deepEqual((await expectStatus(draftPath, { ...writer, method: 'PUT', body: {} }, 200)).body, {})
+    })(),
+    (async () => {
+      const db = new DatabaseSync(userPath)
+      try {
+        const { id } = db.prepare('SELECT id FROM agent_tokens WHERE name = ?').get('复核 Agent')
+        const insert = db.prepare(`INSERT INTO agent_reports (id, token_id, paper_id, question_id, kind, note, evidence, created_at)
+          VALUES (?, ?, ?, ?, 'answer', 'fixture', 'fixture', '2026-01-02T00:00:00.000Z')`)
+        for (let i = 0; i < 201; i++) insert.run(`fixture-${String(i).padStart(3, '0')}`, id, publishedId, questionId)
+      } finally { db.close() }
+      for (const [route, credentials] of [[reportPath, writer], [adminReports, { cookie: ownerCookie }]]) {
+        const first = await expectStatus(route, credentials, 200)
+        assert.equal(first.reports.length, 50, `${route} default page length`)
+        assert.equal(first.nextOffset, 50)
+        const second = await expectStatus(`${route}?limit=200&offset=50`, credentials, 200)
+        assert.equal(second.reports.length, 153)
+        assert.equal(second.reports[0].id, 'fixture-048')
+        assert.equal(second.nextOffset, null)
+        await expectStatus(`${route}?limit=201`, credentials, 400)
+        await expectStatus(`${route}?offset=-1`, credentials, 400)
+      }
+    })(),
+  ])
+  assert.deepEqual(regressions.flatMap(result => result.status === 'rejected' ? [result.reason.message] : []), [])
+  console.log('PASS empty draft PUT preserves data, explicit object allowed, both report lists are paginated')
+
   const rate = await expectStatus(admin, { cookie: ownerCookie, method: 'POST', body: { name: '限流', scope: fullScope } }, 201)
   for (let count = 0; count < 118; count++) await expectStatus(`${api}/papers`, { token: rate.token }, 200)
   assert.equal((await req(passage.blocks[1].mediaUrl, { token: rate.token, format: 'bytes' })).status, 200)

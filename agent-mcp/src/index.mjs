@@ -111,10 +111,13 @@ function createServer({ base, token }, scope) {
       annotations: { ...writeAnnotations, idempotentHint: false },
     }, body => call('reports', { method: 'POST', body }))
     server.registerTool('list_reports', {
-      description: '列出当前口令上报的问题及处理状态。',
-      inputSchema: {},
+      description: '分页列出当前口令的上报及处理状态。用 nextOffset 读取下一页。',
+      inputSchema: {
+        limit: z.number().int().min(1).max(200).optional(),
+        offset: z.number().int().nonnegative().optional(),
+      },
       annotations,
-    }, () => get('reports'))
+    }, args => get('reports', args))
   }
   if (scope.includes('drafts:write')) {
     server.registerTool('put_draft', {

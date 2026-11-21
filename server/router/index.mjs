@@ -43,7 +43,7 @@ export async function runRoutes(routes, { request, response, url, context }, { b
   return false
 }
 
-export function readJsonRouteBody(request, { maxBytes = 1_000_000 } = {}) {
+export function readJsonRouteBody(request, { maxBytes = 1_000_000, requireBody = false } = {}) {
   return new Promise((resolve, reject) => {
     const chunks = []
     let bytes = 0
@@ -60,7 +60,8 @@ export function readJsonRouteBody(request, { maxBytes = 1_000_000 } = {}) {
     request.on('end', () => {
       try {
         const body = chunks.length ? Buffer.concat(chunks).toString('utf8') : ''
-        resolve(body ? JSON.parse(body) : {})
+        if (!body && !requireBody) resolve({})
+        else resolve(JSON.parse(body))
       } catch {
         reject(new Error('Invalid JSON body'))
       }
