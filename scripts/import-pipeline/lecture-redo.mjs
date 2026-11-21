@@ -131,7 +131,7 @@ function groupRequest(projection, source, order, key) {
   return { group: key, sourceGroup: { groupKey: key, material }, authoritativeAnswers, outputContract }
 }
 
-async function prepare(work, paperId) {
+export async function prepareSealedCandidate(work, paperId) {
   const base = await reviewCandidate(paperId)
   if (!base || !/^rev-[a-z0-9-]+$/iu.test(base.id)) throw new Error(`没有可用的封存 Candidate：${paperId}`)
   const sealed = path.join(work, 'sealed')
@@ -140,6 +140,11 @@ async function prepare(work, paperId) {
   }
   const restored = hydratedEvidenceBase(sealed)?.revision
   deepStrictEqual([restored?.id, restored?.bundleDigest], [base.id, base.bundleDigest], '工作目录基线已变')
+  return { base, sealed }
+}
+
+async function prepare(work, paperId) {
+  const { base, sealed } = await prepareSealedCandidate(work, paperId)
   if (existsSync(path.join(work, 'requests'))) throw new Error('请求已准备，请使用 merge')
 
   const projection = buildNck1SealedReviewProjection(sealed, base, { requireAnalyses: true })
@@ -248,7 +253,7 @@ function merge(work, only) {
   }
 }
 
-async function push(work) {
+export async function pushPreparedCandidate(work) {
   const ready = path.join(work, 'ready')
   const bundle = path.join(ready, 'bundle')
   const manifest = readJson(path.join(ready, 'manifest.json'))
@@ -281,7 +286,7 @@ async function main() {
   const work = path.resolve(values.work)
   if (command === 'prepare') await prepare(work, values.paper)
   else if (command === 'merge') merge(work, values.only)
-  else await push(work)
+  else await pushPreparedCandidate(work)
 }
 
 if (import.meta.main) main().catch(error => {
