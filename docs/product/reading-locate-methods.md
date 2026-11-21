@@ -1,6 +1,6 @@
 # 阅读做题心法
 
-状态：v13 草稿（2026-11-21）。v1 和 Owner 逐条讨论后写成；v2 到 v13 按实题试做改，改了哪些见文末「版本记录」。
+状态：v14 草稿（2026-11-22）。v1 和 Owner 逐条讨论后写成；v2 到 v14 按实题试做改，改了哪些见文末「版本记录」。
 用途：做题时照它找定位、排除干扰项；写解析时把同一个过程写出来，就是定位行、证据和干扰项说明。
 下一步改写成 `prompts/reading-choice-analysis-v1.md` 的「定位」一节。关联 BUB-255。
 
@@ -153,7 +153,7 @@
 | How did X manage to do | 细节 | 答案是真正起作用的那个办法或交换条件，说话、提问只是外壳（广西南宁 2026 年 4 月 Q25，她靠问「If I volunteer to go first, could I join the class?」进了班，答案是自愿第一个交作品，不是向老师提问） |
 | What is the key innovation / solution；How did they solve X | 细节 | 找 overcame this by、solved、the key is 那句 |
 | Which applicant best meets；Who is most likely to be chosen（条件是原文写明的招聘要求、报名规则） | 细节 | 反向核对：先列出原文写明的条件，按选项逐条对；条件要从研究结论里推出来的归推断，见上 |
-| What does the last paragraph / paragraph N emphasize | 主旨标题 | 只看这一段，落到强调词那句：so important、That's why、the key、above all；不要求盖住整段（广东佛山 2026 年 4 月 Q35，That's why it's so important to have some kind of standard，答案 The significance of standards） |
+| What does the last paragraph / paragraph N emphasize | 主旨标题 | 和别的单段题一样按选项回这一段核对，找法写定在强调词那句：so important、That's why、the key、above all；不要求盖住整段（广东佛山 2026 年 4 月 Q35，That's why it's so important to have some kind of standard，答案 The significance of standards） |
 | What is paragraph N mainly about；What does paragraph N mainly tell us；What phenomenon is described in paragraph N；What does the last paragraph convey | 主旨标题 | 段落大意： 只看这一段，按选项回段核对；看段首句、主句主语、转折后的话和段末总结句（2026 新课标Ⅱ Q29，段末 This is how I began my search） |
 | Which will result in X；Which is against the rules；What will definitely disqualify | 细节 | 反向核对：题干带 definitely、must 时，带例外条款的规则不算（山东潍坊 2026 年 4 月 Q22，没贴邮票的信封对学生有例外，答案是漏填 contest division，原文 Incomplete information will cause disqualification）。从题干定位到总述规则的那句（没有总述句时，小标题也算定位处），按选项逐条对后面的规则条目，记前后文展开；附表的方向规则在这里用不上（2020 新课标Ⅰ Q23，120 词的诗违反 100 words or fewer 这条，是答案） |
 | 应用文问哪一项、在哪里、怎么联系：Which program / website；Where can you …；What can sb do with X | 细节 | 先用描述定出是哪一块，再在这一块里取网址、地址、时间，记多处合并；干扰项多是别的块里确有的项目（2022 全国甲 Q22、Q23）。题眼是 only、exclusively 时，要拿别的块对照才能排除 |
@@ -271,12 +271,18 @@
   不是 doubtful、opposed（福建泉州 Q31，C4 That said, the book's perspective isn't universal，答案 Appreciative yet critical）。
 - 选项里没有支持、客观，只有几个负面词和 cautious、reserved 这类词时，「肯定为主再加提醒」选 cautious；cautious 不算负面。
   例：浙江台州 2026 年二模 Q35，末段 a positive social tool，又说 balancing mimicry with self-identity is crucial、use the effect wisely，答案 Cautious。
+- Optimistic 和 Cautious 同在选项里：看人物最后的原话讲的是前景还是挑战。前面讲成果、最后落到挑战和要认真对待的问题，选 Cautious。
+  例：辽宁大连 2026 年 1 月 Q31 问 Yang 对太阳能电池前景的态度，他最后说 We are keenly aware of the possible challenges and will take them seriously，答案 Cautious。
 - 幽默文章里叙述者夸自己（ahead of your time、she is grateful for my assistance）常是反话，要看他实际做了什么；
   照搬他自夸原话的选项是陷阱（浙江温州 2026 年二模 Q27，叙述者盯着发电 app 关掉妻子正在用的灯、半夜睡不着，答案 Technology is a good servant but a bad master）。
 - 评价者先说局限，再用 Despite this、Even so、Still 下总评时，态度看总评：江苏八市 2026 年 5 月 Q31，Aaron Kucyi 先说 A key limitation，
   再说 Despite this, the study is influential，答案 Supportive，不是 Reserved。
 - 支持和客观同在选项里：作者只陈述成果和不足、没有评价词时选客观；有赞扬词、替它辩护或呼吁推广时选支持。
   例：河南四市 Q30，先写算法 quickly identified nearly two million previously hidden tiny quakes，再写 There was a drawback, however，答案 Objective。
+- 选项是判断句（It serves …、It provides …）时，先找作者表态的那句；两个选项各照搬这句的一部分原词时，选能盖住整句意思的那项。
+  例：山东九五 2026 年最后一卷 Q27，作者说读评论是 trying to find peace within ourselves，
+  It's not about reviews but about gaining a sense of identity, and emotional closure；答案 It serves emotional purposes，
+  It confirms personal identity 只抓了 identity 一个词。
 - 带条件的肯定仍是支持：take advantage of … without sacrificing …、as long as、provided that。
   前文的担忧是条件，不是否定；态度看最后的主张句。
 - 人物情绪题先锁时间点（when、while、at first、later），同一人物不同时刻的情绪常被拿来设陷阱。
@@ -398,6 +404,12 @@
 - 别的对象也有的共性冒充 special 的特点：答非所问。
 - 换掉核心动作（appreciate 变 evaluate，calculate 变 adjust）、按字面理解习语（million-dollar question）：原词变形。
 - 作者要纠正一个看法，选项说成批评一个现象：张冠李戴。
+- 研究用的是别的项目的数据时，那个项目怎么收数据（问卷、手腕追踪器、随访）不是本研究的做法，拿它答「研究怎么做的」：张冠李戴。
+  例：福建南平 2026 年 5 月 Q29 问 How was the study carried out，问卷、追踪器、随访都写在 In that project 后面，
+  本研究是 used a statistical model，答案 By using a data model。
+- 原文用 if、whether 表示还没定的事，选项把它写成已经定了的前提或做法：原词变形。
+  例：江苏常州 2026 年 1 月 Q30，原文 How cats and dogs guide their own recall – if they need reminders to activate it – is a mystery，
+  How cats and dogs use reminders to relive memories 把「是否需要提醒」改成了「怎样用提醒」。
 - 拿被文章否定或排除的说法设陷阱：正反颠倒。
 - 时间上的三种分清：别的时刻、别的阶段的事被安到问的这一刻或原因的位置，是张冠李戴；
   同一时刻原文确有、但答的不是问的这一点，是答非所问；把先后次序本身说反，是计算比较错。
@@ -596,3 +608,10 @@
 - 滨州 Q21 错在缺表；接口现在会给图表和图片选项的图片，从第 13 轮起做题时给图。
 - 记一笔、没立规则：南京盐城 Q35 前三段讲旁观者效应，后两段用新研究推翻，题库答案是 The Blind Eye，
   不是盖住推翻后结论的 A Willing Heart，和「转折后是重点」不一致；答案有争议，不立规则。
+
+**v14（2026-11-22）**，依据第 13 轮试做：8 套没用过的 2026 年模拟卷（辽宁大连 1 月、湖南株洲 1 月、广东惠州 1 月、江苏常州 1 月、
+福建漳州 5 月、福建南平 5 月、安徽江南十校 3 月、山东九五最后一卷），120/120。这一轮第一次按原卷自然段出题、并把图表和图片选项给到做题的人，
+5 套卷子带图表的题全对。下面引的模拟卷例子都回原文核对过。这一版的规则都只从模拟卷得出，且都来自做对但把握不高的题。
+- 态度：Optimistic 和 Cautious 同在时看最后原话讲前景还是挑战（大连 Q31）；判断句选项选盖住整句的（九五 Q27）。
+- 干扰项：别的项目收数据的方式冒充本研究做法是张冠李戴（南平 Q29）；if、whether 的未定改成已定是原词变形（常州 Q30）。
+- 统一说法：emphasize 题和别的单段题一样按选项，找法写定在强调词那句（漳州 Q26 发现两处说法不一致）。
