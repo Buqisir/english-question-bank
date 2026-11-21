@@ -8,6 +8,8 @@
 
 ## 云端逐卷审阅
 
+只审讲评内容。解析 PDF 的版式（分页、字号、排列）不在云端范围：它由共用渲染器统一生成，改渲染器时由本地对照真实 PDF 检查。PDF 里的讲评文字和网页讲评同出一份数据，审网页讲评就覆盖了。
+
 用 `agent-cloud`（`owner` 角色）登录 [eqbank.cc](https://eqbank.cc)。按单中指定的 revision **逐卷看完全部讲评**，逐题核对，按[讲评审阅标准](lecture-review-standard.md)记录问题。
 
 - **审卷页** `https://eqbank.cc/?view=ops-review&paper=<paperId>&rev=<revisionId>`。在网页预览打开「讲评」，沿卷面的题型和篇章目录逐组、逐题阅读。
