@@ -23,6 +23,32 @@ function isOcrEvidence(descriptor) {
   return descriptor.documentId === `document:${commitment.slice('sha256:'.length).slice(0, 28)}`
 }
 
+function publishedMedia(versionDir, manifest, media) {
+  const displayById = new Map()
+  if (media.some(item => item.displayVariant)) {
+    const file = 'canonical/canonical-question-groups-v1.json'
+    const descriptor = manifest.artifacts?.find(item => item.role === 'question_groups' && item.relativePath === file)
+    if (descriptor) {
+      const bytes = readFileSync(path.join(versionDir, file))
+      if (bytes.length === descriptor.byteLength && sha256(bytes) === descriptor.sha256) {
+        for (const group of JSON.parse(bytes).groups) {
+          for (const item of group.media || []) {
+            if (item.displayVariant) displayById.set(item.mediaId, item.displayVariant)
+          }
+        }
+      }
+    }
+  }
+  return media.map(item => {
+    const display = displayById.get(item.mediaId)
+    const selected = item.displayVariant
+      ? (display && display.sha256 === item.displayVariant.sha256 ? display : item.displayVariant)
+      : item.publication && item.publication.selection !== 'source_crop' ? item.publication.candidate : item
+    const { sha256, mimeType, pixelWidth, pixelHeight } = selected
+    return { mediaId: item.mediaId, sha256, mimeType, pixelWidth, pixelHeight }
+  })
+}
+
 export function publishedAgentSource(versionDir, publicationDigest) {
   const dir = path.join(versionDir, 'canonical')
   try {
@@ -36,7 +62,7 @@ export function publishedAgentSource(versionDir, publicationDigest) {
     if (!materialization.schemaVersion?.startsWith('nck1-source-materialization-v')) return {}
     return {
       materialization,
-      media: materialization.media,
+      media: publishedMedia(versionDir, manifest, materialization.media ?? []),
       readMedia(item) {
         const descriptor = manifest.sourceEvidence?.find(entry => entry.sha256 === item.sha256)
         return readEvidence(versionDir, descriptor)
@@ -52,9 +78,15 @@ export function publishedAgentSource(versionDir, publicationDigest) {
 }
 
 function referencesMedia(materialization, mediaId) {
+  function blockReferences(block) {
+    if (block.kind === 'figure') return block.mediaId === mediaId
+    return block.kind === 'table' && block.rows.some(row => row.cells.some(cell =>
+      cell.content.some(inline => inline.kind === 'media_ref' && inline.mediaId === mediaId)))
+  }
   return materialization?.groups?.some(group =>
-    Array.from(sourceBlocks(group.blocks)).some(block => block.kind === 'figure' && block.mediaId === mediaId)
-    || group.questions?.some(question => question.options?.some(option => option.figure?.mediaId === mediaId)))
+    Array.from(sourceBlocks(group.blocks)).some(blockReferences)
+    || group.questions?.some(question => question.stemFigures?.some(blockReferences)
+      || question.options?.some(option => option.figure?.mediaId === mediaId)))
 }
 
 export function agentMedia(source, mediaId) {
@@ -62,7 +94,7 @@ export function agentMedia(source, mediaId) {
   const item = source.media?.find(item => item.mediaId === mediaId)
   if (!item || !IMAGE_MIME_TYPES.has(item.mimeType)) return null
   try {
-    const bytes = item.encodedBytes ? Buffer.from(item.encodedBytes, 'base64') : source.readMedia?.(item)
+    const bytes = source.readMedia?.(item)
     if (!bytes?.length || sha256(bytes) !== item.sha256) return null
     return { bytes, mimeType: item.mimeType, etag: `"${item.sha256}"` }
   } catch {

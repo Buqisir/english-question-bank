@@ -69,7 +69,10 @@ export function listAgentPapers(context, reviewStore) {
           try {
             const { paperAsset, meta, media, readMaterialization, readAnswerOcr } = reviewStore.agentPaperAssetForRevision(revision.id)
             Object.assign(paper, paperEntry(revision.paperId, paperAsset, meta), {
-              readSource: () => ({ materialization: readMaterialization(), media, readAnswerOcr }),
+              readSource: () => ({
+                materialization: readMaterialization(), media, readAnswerOcr,
+                readMedia: item => reviewStore.agentMediaForRevision(revision.id, item.mediaId),
+              }),
             })
             cache.set(key, paper)
           } catch { return null } // An unreadable Candidate must not break other papers.
@@ -124,7 +127,7 @@ export function agentGroup(paper, groupId, source) {
   const writingTask = paper.asset.content.writingTasks?.[group.writingTaskId]
   if (source && (content.passage || group.groupType === 'reading')) {
     const sourceGroup = source.materialization?.groups?.find(item => item.groupId === groupId)
-    content.passage = projectAgentPassage(paper.paperId, content.passage, sourceGroup, source.media)
+    content.passage = projectAgentPassage(paper.paperId, content.passage, sourceGroup, source.media, source.materialization?.paragraphJoins)
   }
   return { ...content, groupId, section, ...(writingTask ? { writingTask } : {}), questions }
 }

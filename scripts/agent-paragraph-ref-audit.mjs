@@ -76,7 +76,7 @@ function localPapers(roots) {
         .map(block => ({ paragraphId: block.blockId, text: inlineText(block.content) }))
       return {
         groupId: group.groupId,
-        passage: projectAgentPassage(materialization.paperId, { paragraphs }, group),
+        passage: projectAgentPassage(materialization.paperId, { paragraphs }, group, undefined, materialization.paragraphJoins),
         questions: group.questions.map(question => ({ number: question.canonicalNumber, stem: question.stem,
           options: (question.options?.length ? question.options : group.optionBank || []).map(option => ({ content: option.text })) })),
       }

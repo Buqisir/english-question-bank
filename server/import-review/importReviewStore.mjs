@@ -1915,10 +1915,20 @@ export function createImportReviewStore({
     return {
       paperAsset: preview.paperAsset,
       meta: config?.provenance,
-      media: preview.consumption?.mediaArtifacts,
+      media: preview.consumption?.mediaArtifacts?.map(item => {
+        const { mimeType, sha256, pixelWidth, pixelHeight } = item.displayVariant ?? item
+        return { mediaId: item.mediaId, mimeType, sha256, pixelWidth, pixelHeight }
+      }),
       readMaterialization: () => readJsonRole('materialization'),
       readAnswerOcr: () => readJsonRole('ocr_source_evidence', 'nck1-ocr-source-evidence-v1.json'),
     }
+  }
+
+  function agentMediaForRevision(revisionId, mediaId) {
+    const { preview } = storedProductPreviewForRevision(revisionId)
+    const item = preview.consumption?.mediaArtifacts?.find(item => item.mediaId === mediaId)
+    const encoded = (item?.displayVariant ?? item)?.encodedBytes
+    return typeof encoded === 'string' ? Buffer.from(encoded, 'base64') : null
   }
 
   function storedProductPreviewForRevision(revisionId) {
@@ -3717,6 +3727,7 @@ export function createImportReviewStore({
     linkDiscussionThread,
     listAwaitingCandidateRevisions,
     agentPaperAssetForRevision,
+    agentMediaForRevision,
     agentRevisionIdsForGroup,
     listPapers,
     markPromotionFailed,

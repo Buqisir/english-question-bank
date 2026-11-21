@@ -14,6 +14,7 @@ import { ensureCanonicalPublicationDatabaseShape } from '../server/paper-canonic
 import { createImportReviewStore } from '../server/import-review/importReviewStore.mjs'
 import { digestJson, sha256 } from '../shared/paper-canonical/stable.mjs'
 import { agentDeploymentMeta } from '../server/agent-api/agentRoutes.mjs'
+import { agentGroup } from '../server/agent-api/agentCatalog.mjs'
 import { projectAgentPassage } from '../server/agent-api/agentPassage.mjs'
 import { auditParagraphRefs } from './agent-paragraph-ref-audit.mjs'
 
@@ -35,6 +36,10 @@ function jsonFile(file, value) {
   return { sha256: sha256(bytes), byteLength: bytes.length }
 }
 const picture = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+a3n0AAAAASUVORK5CYII=', 'base64')
+const redraw = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAYAAACddGYaAAAAE0lEQVQI12NkYGD4zwAFTAxIAAAWOAEDGPDUFQAAAABJRU5ErkJggg==', 'base64')
+const redrawMeta = { mimeType: 'image/png', sha256: sha256(redraw), pixelWidth: 3, pixelHeight: 2 }
+const display = Buffer.from('UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoCAAMAAgA0JaQAA3AA/vuUAAA=', 'base64')
+const displayMeta = { mimeType: 'image/webp', sha256: sha256(display), pixelWidth: 2, pixelHeight: 3 }
 const materializationFilename = 'materialization/nck1-source-materialization-v1.json'
 const ocrFilename = 'materialization/nck1-ocr-source-evidence-v1.json'
 const region = { x: 0.1, y: 0.2, width: 0.3, height: 0.1 }
@@ -44,6 +49,8 @@ const ocrFor = paperId => ({ paperId, schemaVersion: 'nck1-ocr-source-evidence-v
 const mediaFor = paperId => ({ mediaId: `media:${paperId}:fixture`, mimeType: 'image/png', sha256: sha256(picture),
   pixelWidth: 1, pixelHeight: 1 })
 const unreferencedMedia = { ...mediaFor('unreferenced'), usage: 'visual_proof' }
+const tableMedia = mediaFor('table-cell')
+const stemMedia = mediaFor('stem')
 const passageFor = paperId => paperId === 'paper-agent-pending' ? [] : [
   { paragraphId: 'p1', text: 'A teacher prepares a lesson.' },
   { paragraphId: 'p2', text: 'She always remembers' },
@@ -53,16 +60,26 @@ function materializationFor(paperId) {
   const paragraphs = passageFor(paperId).map(({ paragraphId, text }) =>
     ({ kind: 'paragraph', blockId: paragraphId, role: 'body', source, content: [{ kind: 'text', text }] }))
   const figure = { kind: 'figure', blockId: 'figure', mediaId: mediaFor(paperId).mediaId, caption: 'Figure', source }
-  const table = { kind: 'table', blockId: 'table', columnCount: 2, source, rows: [{ cells: [
+  const table = { kind: 'table', blockId: 'table', columnCount: 3, source, rows: [{ cells: [
     { cellId: 'cell', columnStart: 1, columnSpan: 2, rowSpan: 1, content: [{ kind: 'text', text: 'Merged' }] },
+    { cellId: 'image-cell', columnStart: 3, columnSpan: 1, rowSpan: 1, content: [{ kind: 'media_ref', mediaId: tableMedia.mediaId, alt: '' }] },
   ] }] }
   const blocks = paragraphs.length ? [paragraphs[0], figure, ...paragraphs.slice(1), table,
     { kind: 'paragraph', blockId: 'title', role: 'title', source, content: [{ kind: 'text', text: 'Title' }] },
     { kind: 'paragraph', blockId: 'ambiguous', role: 'body', source, content: [{ kind: 'text', text: 'One.\n\nTwo.' }] },
     { kind: 'paragraph', blockId: 'after-ambiguous', role: 'body', source, content: [{ kind: 'text', text: 'Three.' }] },
   ] : [figure]
+  const media = mediaFor(paperId)
+  const questions = []
+  if (paragraphs.length) {
+    media.publication = { selection: 'human_confirmed_ai_candidate', candidate: redrawMeta }
+    media.displayVariant = { sha256: displayMeta.sha256, byteLength: display.length, path: 'materialization/media/display.webp',
+      generator: 'codex-cli', textCheck: 'verified' }
+    questions.push({ stemFigures: [{ kind: 'figure', mediaId: stemMedia.mediaId }] })
+  }
   return { paperId, schemaVersion: 'nck1-source-materialization-v11', documents: [{ documentId: 'answers', role: 'official_answers' }],
-    groups: [{ groupId: `group-${paperId}`, blocks }], answers: [], media: [mediaFor(paperId), unreferencedMedia] }
+    groups: [{ groupId: `group-${paperId}`, blocks, questions }], answers: [], media: [media, unreferencedMedia, tableMedia,
+      { ...stemMedia, publication: { selection: 'human_confirmed_ai_candidate', candidate: redrawMeta } }] }
 }
 function assetFor(paperId) {
   const groupId = `group-${paperId}`
@@ -92,12 +109,20 @@ const versionDir = path.join(assets, publishedId, 'versions/v1')
 const materialization = jsonFile(path.join(versionDir, 'canonical/source-asset.bin'), materializationFor(publishedId))
 const ocrEvidence = jsonFile(path.join(versionDir, 'source-evidence/ocr.bin'), ocrFor(publishedId))
 writeFileSync(path.join(versionDir, 'source-evidence/picture.bin'), picture)
+writeFileSync(path.join(versionDir, 'source-evidence/redraw.bin'), redraw)
+writeFileSync(path.join(versionDir, 'source-evidence/display.bin'), display)
+const canonicalGroups = jsonFile(path.join(versionDir, 'canonical/canonical-question-groups-v1.json'), {
+  groups: [{ media: [{ mediaId: mediaFor(publishedId).mediaId, displayVariant: displayMeta }] }],
+})
 const ocrCommitment = digestJson({ digest: ocrEvidence.sha256, roles: ['source_provenance'], inputKey: 'ocr_source_evidence' })
 const publication = {
   sourceAssetDigest: materialization.sha256,
+  artifacts: [{ role: 'question_groups', relativePath: 'canonical/canonical-question-groups-v1.json', ...canonicalGroups }],
   sourceEvidence: [
     { documentId: `document:${ocrCommitment.slice('sha256:'.length).slice(0, 28)}`, relativePath: 'source-evidence/ocr.bin', ...ocrEvidence },
     { documentId: 'picture', relativePath: 'source-evidence/picture.bin', byteLength: picture.length, sha256: sha256(picture) },
+    { documentId: 'redraw', relativePath: 'source-evidence/redraw.bin', byteLength: redraw.length, sha256: redrawMeta.sha256 },
+    { documentId: 'display', relativePath: 'source-evidence/display.bin', byteLength: display.length, sha256: displayMeta.sha256 },
   ],
 }
 const ref = { paperId: publishedId, versionName: 'v1', sourceAssetVersion: 1, publicationDigest: digestJson(publication) }
@@ -330,6 +355,53 @@ try {
   assert(!('status' in group) && !('revision' in group))
   const auth = { token: credential.token }
   const passage = detail.groups[0].passage
+  const mediaUrlFor = (paperId, mediaId) => `${api}/media/${paperId}/${encodeURIComponent(mediaId)}`
+  const regressionCases = [
+    ['Candidate media bytes loaded on demand', async () => {
+      const db = new DatabaseSync(reviewPath)
+      const row = db.prepare('SELECT payload_digest FROM import_review_product_previews WHERE revision_id = ?').get(pendingRevisionId)
+      const update = db.prepare('UPDATE import_review_product_previews SET payload_digest = ? WHERE revision_id = ?')
+      try {
+        update.run('invalid', pendingRevisionId)
+        await expectStatus(pendingDetail.groups[0].passage.blocks[0].mediaUrl, auth, 404)
+      } finally {
+        update.run(row.payload_digest, pendingRevisionId)
+        db.close()
+      }
+    }],
+    ['published display variant metadata and bytes', async () => {
+      const figure = passage.blocks[1]
+      const image = await req(figure.mediaUrl, { ...auth, format: 'bytes' })
+      assert.deepEqual([figure.mimeType, figure.width, figure.height, image.headers.get('content-type'), sha256(image.data)],
+        [displayMeta.mimeType, displayMeta.pixelWidth, displayMeta.pixelHeight, displayMeta.mimeType, displayMeta.sha256])
+      const selected = await req(mediaUrlFor(publishedId, stemMedia.mediaId), { ...auth, format: 'bytes' })
+      assert.equal(sha256(selected.data), redrawMeta.sha256)
+    }],
+    ['stem and table image references', async () => {
+      const stem = await req(mediaUrlFor(publishedId, stemMedia.mediaId), { ...auth, format: 'bytes' })
+      const cell = await req(mediaUrlFor(publishedId, tableMedia.mediaId), { ...auth, format: 'bytes' })
+      assert.deepEqual([stem.status, cell.status, passage.blocks[4].rows[0][1]],
+        [200, 200, { mediaId: tableMedia.mediaId, mediaUrl: mediaUrlFor(publishedId, tableMedia.mediaId) }])
+    }],
+    ['confirmed uppercase cross-page continuation', () => {
+      const joined = materializationFor(publishedId)
+      const continuation = joined.groups[0].blocks.find(block => block.blockId === 'p3')
+      continuation.content[0].text = 'London was on her list.'
+      continuation.source = { ...source, page: 2 }
+      joined.paragraphJoins = [{ groupId: `group-${publishedId}`, sourceReview: { sameNaturalParagraph: true },
+        fragments: [{ blockId: 'p2' }, { blockId: 'p3' }] }]
+      const result = agentGroup({ paperId: publishedId, asset: pubAsset }, `group-${publishedId}`, { materialization: joined })
+      assert.deepEqual(result.passage.paragraphs.map(p => [p.naturalParagraph, p.naturalParagraphBasis]),
+        [[1, 'order'], [2, 'order'], [2, 'merged']])
+    }],
+  ]
+  const results = await Promise.allSettled(regressionCases.map(async ([name, check]) => {
+    await check()
+    console.log(`PASS ${name}`)
+  }))
+  const failures = results.flatMap((result, index) => result.status === 'rejected'
+    ? [`${regressionCases[index][0]}: ${result.reason.message}`] : [])
+  assert.deepEqual(failures, [])
   assert.deepEqual(passage.paragraphs, passageFor(publishedId).map((paragraph, index) => ({
     ...paragraph, naturalParagraph: [1, 2, 2][index], naturalParagraphBasis: index === 2 ? 'merged' : 'order',
   })))
@@ -338,7 +410,8 @@ try {
     ['paragraph', 'figure', 'paragraph', 'paragraph', 'table', 'paragraph', 'paragraph', 'paragraph'])
   assert.deepEqual(passage.blocks[2], { kind: 'paragraph', blockId: 'p2', paragraphId: 'p2', role: 'body',
     page: 1, naturalParagraph: 2, naturalParagraphBasis: 'order' })
-  assert.deepEqual(passage.blocks[4], { kind: 'table', blockId: 'table', columnCount: 2, rows: [[{ text: 'Merged', columnSpan: 2 }]] })
+  assert.deepEqual(passage.blocks[4], { kind: 'table', blockId: 'table', columnCount: 3,
+    rows: [[{ text: 'Merged', columnSpan: 2 }, { mediaId: tableMedia.mediaId, mediaUrl: mediaUrlFor(publishedId, tableMedia.mediaId) }]] })
   assert.deepEqual(passage.blocks[5], { kind: 'paragraph', blockId: 'title', paragraphId: null, role: 'title', page: 1 })
   assert.deepEqual(passage.blocks[6], { kind: 'paragraph', blockId: 'ambiguous', paragraphId: null, role: 'body',
     page: 1, naturalParagraph: null, naturalParagraphBasis: null, naturalParagraphReason: 'multiple_paragraphs_in_block' })
@@ -347,12 +420,12 @@ try {
   assert.equal(pendingPassage.notice, 'image_only')
   assert.deepEqual(pendingPassage.paragraphs, [])
   for (const [figure, paperId] of [[passage.blocks[1], publishedId], [pendingPassage.blocks[0], pendingId]]) {
-    const item = mediaFor(paperId)
+    const item = paperId === publishedId ? { ...mediaFor(paperId), ...displayMeta } : mediaFor(paperId)
     assert.deepEqual(figure, { kind: 'figure', blockId: 'figure', mediaId: item.mediaId, caption: 'Figure', page: 1,
-      mimeType: 'image/png', width: 1, height: 1, mediaUrl: `${api}/media/${paperId}/${encodeURIComponent(item.mediaId)}` })
+      mimeType: item.mimeType, width: item.pixelWidth, height: item.pixelHeight, mediaUrl: mediaUrlFor(paperId, item.mediaId) })
     const image = await req(figure.mediaUrl, { ...auth, format: 'bytes' })
     assert.equal(image.status, 200)
-    assert.equal(image.headers.get('content-type'), 'image/png')
+    assert.equal(image.headers.get('content-type'), item.mimeType)
     assert.equal(image.headers.get('etag'), `"${item.sha256}"`)
     assert.equal(sha256(image.data), item.sha256)
     await expectStatus(figure.mediaUrl, { ...auth, ifNoneMatch: image.headers.get('etag') }, 304)
