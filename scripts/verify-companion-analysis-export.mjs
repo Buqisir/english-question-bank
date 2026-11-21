@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import assert from 'node:assert/strict'
-import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
+import { mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -246,11 +246,11 @@ assert.match(revisionHtml, /<small>听力答案（非官方，据录音整理）
 assert.match(revisionHtml, /第 1 段材料（第 1 题）[\s\S]*第 3 段材料（第 3–4 题）/u)
 assert.deepEqual([...revisionHtml.matchAll(/class="translation-marker">(\[[\d、]+\])<\/b>/gu)]
   .map(([, marker]) => marker), ['[36、37]', '[36]'])
-const answerCells = markup => [...markup.matchAll(/data-question-id="([^"]+)">(?:<span class="answer-separator" aria-hidden="true">·<\/span> )?<b>([^<]+)<\/b> <span>([^<]+)<\/span>/gu)]
+const answerCells = markup => [...markup.matchAll(/data-question-id="([^"]+)"><b>([^<]+)<\/b> <span>([^<]+)<\/span>/gu)]
   .map(([, id, number, answer]) => [id, `${number} ${answer}`])
 for (const document of [html, revisionHtml]) {
   const [frontmatter, body] = document.split('<div class="analysis-body">')
-  const groups = [...body.matchAll(/<div class="group-key-answers">(.*?)<\/div>/gu)]
+  const groups = [...body.matchAll(/<div class="group-key-answers[^"]*">(.*?)<\/div>/gu)]
   assert.deepEqual(groups.flatMap(([, cells]) => answerCells(cells)), answerCells(frontmatter))
 }
 assert.doesNotMatch(html, /[。．.!！?？]）：|[。．.!！?？]；作用：/)
@@ -278,3 +278,44 @@ try {
 }
 
 console.log('Companion analysis HTML/PDF export: PASS')
+
+// No dot separators anywhere the renderer writes its own text: answers align in
+// columns, lists use 、, labels use ：. (A 间隔号 inside a translated foreign
+// name such as 马克·吐温 comes from the analysis text and is correct.)
+for (const file of readdirSync(new URL('../server/exports/companion-analysis/', import.meta.url))) {
+  const source = readFileSync(new URL(`../server/exports/companion-analysis/${file}`, import.meta.url), 'utf8')
+  assert.ok(!source.includes('·'), `${file} writes a · separator`)
+}
+
+// One printed passage per blank paragraph: the completed text carries both the
+// clue moved over from the original and the filled answer; a paragraph whose
+// texts do not line up keeps the old 原题 / 答案补全 pair.
+{
+  const { renderSourceRelationships } = await import('../server/exports/companion-analysis/blocks.mjs')
+  const original = 'Yet now I live in the countryside, __56__ tea grows, and __57__ (center) heating fails.'
+  const completed = 'Yet now I live in the countryside, where tea grows, and central heating fails.'
+  const at = (text, quote) => { const start = Array.from(text.slice(0, text.indexOf(quote))).length; return { start, end: start + Array.from(quote).length, quote } }
+  const teaching = (completedText) => ({
+    schemaVersion: 'objective-teaching-content-v1',
+    sourceTextId: 'src',
+    completedSourceTexts: [{ textId: 'done', paragraphId: 'p1', text: completedText }],
+    annotations: [
+      { annotationId: 'e56', kind: 'answer-evidence', questionIds: ['q56'], sourceRanges: [{ textId: 'src', paragraphId: 'p1', ...at(original, 'the countryside') }] },
+      { annotationId: 'i56', kind: 'answer-insertion', questionIds: ['q56'], sourceRanges: [{ textId: 'done', paragraphId: 'p1', ...at(completedText, 'where') }] },
+      { annotationId: 'i57', kind: 'answer-insertion', questionIds: ['q57'], sourceRanges: [{ textId: 'done', paragraphId: 'p1', ...at(completedText, 'central') }] },
+      { annotationId: 'e57', kind: 'answer-evidence', questionIds: ['q57'], sourceRanges: [{ textId: 'src', paragraphId: 'p1', ...at(original, 'heating fails') }] },
+    ],
+  })
+  const group = { groupType: 'grammarFill', passage: { paragraphs: [{ paragraphId: 'p1', text: original }] } }
+  const paper = { content: { questions: { q56: { questionNo: 56 }, q57: { questionNo: 57 } } } }
+  const merged = renderSourceRelationships({ teachingContent: teaching(completed) }, group, paper)
+  assert.equal([...merged.matchAll(/data-source-text-state="merged"/gu)].length, 1)
+  assert.doesNotMatch(merged, /原题|答案补全|__56__/u)
+  for (const [kind, text] of [['answer-evidence', 'the countryside'], ['answer-insertion', 'where'], ['answer-insertion', 'central'], ['answer-evidence', 'heating fails']]) {
+    assert.match(merged, new RegExp(`data-annotation-kinds="${kind}"[^>]*>${text}</span>`, 'u'))
+  }
+  const edited = 'Yet now I live in the countryside, where tea grows, and central heating often fails.'
+  const unaligned = renderSourceRelationships({ teachingContent: teaching(edited) }, group, paper)
+  assert.match(unaligned, /原题[\s\S]*答案补全/u, 'texts that do not line up keep both paragraphs')
+}
+console.log('Companion analysis merged passage and separators: PASS')

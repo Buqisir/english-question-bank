@@ -55,47 +55,138 @@ export function renderFullTranslation(groupAnalysis, paperAsset) {
   return `<section class="full-translation">${renderHeadingLead('<h4>全文译文</h4>', ...paragraphs)}</section>`
 }
 
+// A blank in the original passage, with the hint word that follows it in
+// grammar fill ("__57__ (center)"); the completed text drops both.
+const BLANK_WITH_HINT = /_{2,}\s*\d+\s*_{2,}(?:\s*[（(][^）)\n]{1,40}[）)])?/gu
+const BLANK_ONLY = /_{2,}\s*\d+\s*_{2,}/gu
+
+// Offset map from the original paragraph onto its completed text, or null.
+// The completed text must be exactly the original with each blank replaced,
+// in order, by the text of its answer-insertion range; anything else (an
+// unexpected edit, a hint the completed text keeps) returns null so the caller
+// prints both texts as before. Offsets are Unicode code points, as in the data.
+function completedOffsetMap(original, completed, insertions) {
+  const codePoints = (text) => Array.from(text).length
+  // Seven-choices titles and subtitles have no blank: completed is the same text.
+  if (original === completed && insertions.length === 0) return (offset) => offset
+  for (const pattern of [BLANK_WITH_HINT, BLANK_ONLY]) {
+    const blanks = [...original.matchAll(pattern)].map((match) => ({
+      start: codePoints(original.slice(0, match.index)),
+      end: codePoints(original.slice(0, match.index + match[0].length)),
+    }))
+    if (blanks.length === 0 || blanks.length !== insertions.length) continue
+    const originalPoints = Array.from(original)
+    const completedPoints = Array.from(completed)
+    const segments = []
+    let from = 0
+    let to = 0
+    let aligned = true
+    for (let index = 0; index <= blanks.length; index += 1) {
+      const originalEnd = index < blanks.length ? blanks[index].start : originalPoints.length
+      const completedEnd = index < blanks.length ? insertions[index].start : completedPoints.length
+      if (originalPoints.slice(from, originalEnd).join('') !== completedPoints.slice(to, completedEnd).join('')) {
+        aligned = false
+        break
+      }
+      segments.push({ start: from, end: originalEnd, target: to })
+      if (index < blanks.length) {
+        from = blanks[index].end
+        to = insertions[index].end
+      }
+    }
+    if (!aligned) continue
+    return (offset) => {
+      const segment = segments.find(({ start, end }) => offset >= start && offset <= end)
+      return segment ? segment.target + offset - segment.start : null
+    }
+  }
+  return null
+}
+
+function rangesOn(teaching, textId, paragraphId, text) {
+  return array(teaching.annotations).flatMap((annotation) =>
+    array(annotation.sourceRanges)
+      .filter((range) => range.textId === textId
+        && range.paragraphId === paragraphId && exactTextRange(text, range))
+      .map((range) => ({ ...range, annotation })))
+}
+
+// One printed paragraph for a blank paragraph: the completed text, carrying
+// both the answers (answer-insertion) and the clues and long-sentence marks
+// moved over from the original. Null when any original range cannot move.
+function mergedParagraph(teaching, paragraph, completed) {
+  const insertions = rangesOn(teaching, completed.textId, paragraph.paragraphId, completed.text)
+  const blanksFilled = insertions
+    .filter(({ annotation }) => annotation.kind === 'answer-insertion')
+    .sort((left, right) => left.start - right.start)
+  const toCompleted = completedOffsetMap(paragraph.text, completed.text, blanksFilled)
+  if (!toCompleted) return null
+  const moved = []
+  for (const range of rangesOn(teaching, teaching.sourceTextId, paragraph.paragraphId, paragraph.text)) {
+    const start = toCompleted(range.start)
+    const end = toCompleted(range.end)
+    if (start === null || end === null || end <= start) return null
+    moved.push({ ...range, start, end, quote: Array.from(completed.text).slice(start, end).join('') })
+  }
+  return { ...paragraph, text: completed.text, state: 'merged', ranges: [...moved, ...insertions] }
+}
+
+function renderRelationshipParagraph(source, label, paperAsset) {
+  const { ranges } = source
+  const parts = partitionAnalysisText(source.text, ranges.map(({ start, end, quote }) => ({
+    start, end, quote,
+  })))
+  let previousNumbers = []
+  const html = parts.map((part) => {
+    if (part.rangeIndices.length === 0) { previousNumbers = []; return escapeHtml(part.text) }
+    const relationships = part.rangeIndices.map((index) => ranges[index].annotation)
+    const annotationIds = [...new Set(relationships.map(({ annotationId }) => annotationId))]
+    const kinds = [...new Set(relationships.map(({ kind }) => kind))]
+    const numbers = [...new Set(relationships.flatMap(({ questionIds }) =>
+      array(questionIds).map((questionId) => questionData(paperAsset, questionId)?.questionNo).filter(Boolean)))].sort((a, b) => Number(a) - Number(b))
+    const marker = newQuestionMarkers(numbers, previousNumbers)
+    previousNumbers = numbers
+    return `${marker}<span class="source-relationship source-underline" data-annotation-ids="${escapeHtml(annotationIds.join(' '))}" data-annotation-kinds="${escapeHtml(kinds.join(' '))}" data-question-nos="${escapeHtml(numbers.join(' '))}">${escapeHtml(part.text)}</span>`
+  }).join('')
+  const lead = label ? `<span class="inline-label">${label}</span>` : ''
+  return `<p lang="en" data-source-text-state="${source.state}" data-source-paragraph-id="${escapeHtml(source.paragraphId)}">${lead}${html}</p>`
+}
+
+// The data anchors clues to the original passage and answers to the completed
+// passage (docs/cuts/analyzed-package-intake/contract-v1-design.md), so the
+// old print showed every annotated paragraph twice: 原题, then 答案补全. Print
+// needs only one: each paragraph appears once, completed where it had blanks,
+// with the clue underlines and the filled answers (bold) on the same line.
+// A paragraph whose texts do not line up exactly keeps the old pair.
 export function renderSourceRelationships(groupAnalysis, group, paperAsset) {
   const teaching = groupAnalysis?.teachingContent
   if (teaching?.schemaVersion !== 'objective-teaching-content-v1') return ''
   const reading = group.groupType === 'reading'
   const sevenChoices = ['sevenChoices', 'seven_choices'].includes(group.groupType)
-  const original = array(group?.passage?.paragraphs).map((paragraph) => ({
-    ...paragraph, textId: teaching.sourceTextId, state: 'original',
-  }))
-  const completed = array(teaching.completedSourceTexts)
-  const completedByParagraph = new Map(completed.map((paragraph) => [paragraph.paragraphId, paragraph]))
-  const completedInOrder = sevenChoices ? original.flatMap((paragraph) => {
+  const completedByParagraph = new Map(array(teaching.completedSourceTexts)
+    .map((paragraph) => [paragraph.paragraphId, paragraph]))
+  const rendered = array(group?.passage?.paragraphs).flatMap((paragraph) => {
+    const original = {
+      ...paragraph,
+      state: 'original',
+      ranges: rangesOn(teaching, teaching.sourceTextId, paragraph.paragraphId, paragraph.text),
+    }
     const block = completedByParagraph.get(paragraph.paragraphId)
-    if (block) return [{ ...paragraph, ...block }]
-    return /__\d+__/u.test(paragraph.text) ? [] : [paragraph]
-  }) : completed
-  const texts = [...original, ...completedInOrder.map((paragraph) => ({ ...paragraph, state: 'completed' }))]
-  const rendered = texts.map((source) => {
-    const ranges = array(teaching.annotations).flatMap((annotation) =>
-      array(annotation.sourceRanges)
-        .filter((range) => range.textId === source.textId
-          && range.paragraphId === source.paragraphId && exactTextRange(source.text, range))
-        .map((range) => ({ ...range, annotation })))
-    if (!sevenChoices && ranges.length === 0) return ''
-    const parts = partitionAnalysisText(source.text, ranges.map(({ start, end, quote }) => ({
-      start, end, quote,
-    })))
-    let previousNumbers = []
-    const html = parts.map((part) => {
-      if (part.rangeIndices.length === 0) { previousNumbers = []; return escapeHtml(part.text) }
-      const relationships = part.rangeIndices.map((index) => ranges[index].annotation)
-      const annotationIds = [...new Set(relationships.map(({ annotationId }) => annotationId))]
-      const kinds = [...new Set(relationships.map(({ kind }) => kind))]
-      const numbers = [...new Set(relationships.flatMap(({ questionIds }) =>
-        array(questionIds).map((questionId) => questionData(paperAsset, questionId)?.questionNo).filter(Boolean)))].sort((a, b) => Number(a) - Number(b))
-      const marker = newQuestionMarkers(numbers, previousNumbers)
-      previousNumbers = numbers
-      return `${marker}<span class="source-relationship source-underline" data-annotation-ids="${escapeHtml(annotationIds.join(' '))}" data-annotation-kinds="${escapeHtml(kinds.join(' '))}" data-question-nos="${escapeHtml(numbers.join(' '))}">${escapeHtml(part.text)}</span>`
-    }).join('')
-    const label = reading ? '原文' : source.state === 'original' ? '原题' : '答案补全'
-    return `<p lang="en" data-source-text-state="${source.state}" data-source-paragraph-id="${escapeHtml(source.paragraphId)}"><span class="inline-label">${label}</span>${html}</p>`
-  }).filter(Boolean)
+    if (reading || !block) {
+      if (!sevenChoices && original.ranges.length === 0) return []
+      return [renderRelationshipParagraph(original, reading ? '原文' : '', paperAsset)]
+    }
+    const completed = { ...block, state: 'completed' }
+    const merged = mergedParagraph(teaching, paragraph, completed)
+    if (merged) {
+      if (!sevenChoices && merged.ranges.length === 0) return []
+      return [renderRelationshipParagraph(merged, '', paperAsset)]
+    }
+    completed.ranges = rangesOn(teaching, block.textId, paragraph.paragraphId, block.text)
+    return [original, completed]
+      .filter((source) => sevenChoices || source.ranges.length > 0)
+      .map((source) => renderRelationshipParagraph(source, source.state === 'original' ? '原题' : '答案补全', paperAsset))
+  })
   if (rendered.length === 0) return ''
   return `<section class="source-relationships">${renderHeadingLead(reading ? '<h4>原文证据段落</h4>' : '<h4>原文与补全关系</h4>', ...rendered)}</section>`
 }
@@ -179,11 +270,10 @@ export const overviewLabels = {
   grammar_cloze: '语法填空',
 }
 
-export function renderAnswerCells(answers, separated = false) {
-  return answers.map(({ questionId, number, value }, index) => {
-    const prefix = index && separated ? '<span class="answer-separator" aria-hidden="true">·</span> ' : ''
-    return `<span class="answer-cell" data-question-id="${escapeHtml(questionId)}">${prefix}<b>${escapeHtml(number)}</b> <span>${escapeHtml(value)}</span></span>`
-  }).join('')
+// Answers are separated by column alignment, never by a dot between them.
+export function renderAnswerCells(answers) {
+  return answers.map(({ questionId, number, value }) =>
+    `<span class="answer-cell" data-question-id="${escapeHtml(questionId)}"><b>${escapeHtml(number)}</b> <span>${escapeHtml(value)}</span></span>`).join('')
 }
 
 export function renderAnswerOverview(parts) {
@@ -223,6 +313,6 @@ export function renderGroupHeading(title, answers) {
     ? unofficialListeningLabel : '答案'
   return `<header class="group-heading">
     ${heading}
-    <div class="group-key"><span>${label}</span><div class="group-key-answers">${renderAnswerCells(answers, true)}</div></div>
+    <div class="group-key"><span>${label}</span><div class="group-key-answers${answers.every(({ value }) => Array.from(String(value ?? '')).length <= 1) ? ' group-key-answers--letters' : ''}">${renderAnswerCells(answers)}</div></div>
   </header>`
 }

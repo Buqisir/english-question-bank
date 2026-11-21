@@ -358,20 +358,22 @@ h5 {
 }
 
 .group-key-answers {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 1.4mm;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(6.8em, 1fr));
+  column-gap: 1em;
   font-family: var(--en);
   font-size: var(--fs);
+}
+
+/* Letter keys: five to a row, the answer-key grouping of 41–45, 46–50. */
+.group-key-answers--letters {
+  grid-template-columns: repeat(5, max-content);
+  column-gap: 1.2em;
 }
 
 .group-key .answer-cell {
   max-width: 100%;
   overflow-wrap: anywhere;
-}
-
-.answer-separator {
-  color: var(--muted);
 }
 
 /* Run-in labels: one style for every teaching label. */
@@ -441,6 +443,11 @@ h5 {
   text-decoration-thickness: 0.6pt;
   text-underline-offset: 1.6pt;
   text-decoration-skip-ink: auto;
+}
+
+/* The filled answer inside the one printed passage. */
+.source-relationship[data-annotation-kinds~="answer-insertion"] {
+  font-weight: 700;
 }
 
 .translation-marker {

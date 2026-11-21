@@ -36,7 +36,7 @@ export function renderListeningGroup({ group, title, paperAsset, analysis, answe
     const numbers = questionIds.map(questionNo)
     const questionRange = numbers.length > 1 ? `${numbers[0]}–${numbers.at(-1)}` : numbers[0]
     const materialHeading = `<h4>第 ${segmentNo} 段材料${numbers.length ? `（第 ${escapeHtml(questionRange)} 题）` : ''}</h4>`
-    const topic = `<p class="listening-topic">${escapeHtml(`${material.topic.theme} · ${material.topic.themeGroup} · ${material.topic.subtopic}`)}</p>`
+    const topic = `<p class="listening-topic">${escapeHtml(`${material.topic.theme}　${material.topic.themeGroup}　${material.topic.subtopic}`)}</p>`
     return `<article class="listening-material" data-listening-segment-id="${escapeHtml(material.segmentId)}">
       ${renderHeadingLead(groupHeadings + materialHeading, topic)}
       ${renderOverview(material.summaryZh)}

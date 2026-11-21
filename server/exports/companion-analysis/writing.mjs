@@ -54,9 +54,9 @@ export function renderGroundedList(values) {
 }
 
 export function renderContinuationStory(story) {
-  const characters = array(story.characters).map((character) => `<div class="route-paragraph"><h5>${escapeHtml(character.name)} · ${escapeHtml(character.role)}</h5>${renderGroundedList(character.establishedTraits)}${renderGroundedList(character.motivations)}${renderGrounded(character.currentState)}</div>`).join('')
+  const characters = array(story.characters).map((character) => `<div class="route-paragraph"><h5>${escapeHtml(character.name)}：${escapeHtml(character.role)}</h5>${renderGroundedList(character.establishedTraits)}${renderGroundedList(character.motivations)}${renderGrounded(character.currentState)}</div>`).join('')
   const relationships = array(story.relationships).map((item) => renderHeadingLead(
-    `<b>${escapeHtml(array(item.participants).join(' · '))}</b>`, renderGrounded(item.currentRelation))).join('')
+    `<b>${escapeHtml(array(item.participants).join('、'))}</b>`, renderGrounded(item.currentRelation))).join('')
   const causal = array(story.causalChain).map((item) => `<div class="route-paragraph"><h5>因果</h5>${renderGrounded(item.cause)}${renderGrounded(item.effect)}</div>`).join('')
   return `<section class="writing-block continuation-section" data-continuation-section="storyUnderstanding"><h4>原文理解</h4>
     <dl class="story-map">
@@ -96,7 +96,7 @@ export function renderDevelopmentParagraph(paragraph) {
   const field = value => escapeHtml(withoutClosingPunctuation(value))
   const emotions = array(paragraph.emotionChanges).map((item) =>
     `<li><p>触发：${field(item.trigger)}</p><p>变化：${field(item.from)} → ${field(item.to)}</p><p>表现：${field(item.visibleAction)}</p></li>`).join('')
-  const relationships = array(paragraph.relationshipChanges).map((item) => `<li>${escapeHtml(array(item.participants).join(' · '))}：${escapeHtml(item.from)} → ${escapeHtml(item.to)}；${escapeHtml(item.cause)}</li>`).join('')
+  const relationships = array(paragraph.relationshipChanges).map((item) => `<li>${escapeHtml(array(item.participants).join('、'))}：${escapeHtml(item.from)} → ${escapeHtml(item.to)}；${escapeHtml(item.cause)}</li>`).join('')
   const clues = array(paragraph.cluePayoffs)
   const payoffs = clues.map((item) => `<li>${renderContinuationEvidence([item.clue], { withinList: true })}<p>${escapeHtml(item.payoff)}</p></li>`).join('')
   const evidence = array(paragraph.sourceEvidence).filter(item =>
@@ -115,7 +115,7 @@ export function renderLegacyContinuationDetails(legacy) {
     ${renderGrounded(legacy.coreTension)}${renderGroundedList(legacy.drivingMotivations)}${renderGroundedList(legacy.requiredTurningPoints)}
     ${array(legacy.eventChain).map((item) => `<p>${escapeHtml(item.cause)} → ${escapeHtml(item.event)} → ${escapeHtml(item.immediateEffect)}</p>${renderContinuationEvidence(item.evidence)}`).join('')}
     ${array(legacy.emotionLogic).map((item) => `<p>${escapeHtml(item.trigger)}：${escapeHtml(item.internalResponse)}；${escapeHtml(item.visibleAction)}</p>`).join('')}
-    ${array(legacy.relationshipMovement).map((item) => `<p>${escapeHtml(array(item.participants).join(' · '))}：${escapeHtml(item.from)} → ${escapeHtml(item.to)}；${escapeHtml(item.cause)}</p>`).join('')}
+    ${array(legacy.relationshipMovement).map((item) => `<p>${escapeHtml(array(item.participants).join('、'))}：${escapeHtml(item.from)} → ${escapeHtml(item.to)}；${escapeHtml(item.cause)}</p>`).join('')}
     ${array(legacy.interactionMoves).map((item) => `<p>${escapeHtml(item.speaker)} → ${escapeHtml(item.listener)}：${escapeHtml(item.purpose)}；${escapeHtml(item.relationshipNeed)}；${escapeHtml(item.expectedEffect)}</p>${renderContinuationEvidence(item.evidence)}`).join('')}
     ${array(legacy.cluePayoffs).map((item) => `${renderContinuationEvidence([item.clue])}<p>${escapeHtml(item.payoff)}</p>`).join('')}
     ${array(legacy.characterActionsByParagraph).map((item) => `<p><b>第 ${item.paragraphIndex} 段人物行动</b>：${array(item.items).map(escapeHtml).join('；')}</p>`).join('')}
