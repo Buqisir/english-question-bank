@@ -725,6 +725,26 @@ dd {
   display: block;
 }
 
+/* 读后续写原文理解: the row name runs in as a Label, like 干扰项辨析, so the
+   story map is one level under 原文理解 instead of two. */
+.story-map > div {
+  clear: both;
+}
+
+.story-map dd > .route-paragraph:first-child {
+  margin-top: 0;
+}
+
+.story-map dt {
+  float: left;
+  margin-right: 0.5em;
+  color: var(--green-deep);
+}
+
+.continuation-evidence {
+  margin: 0.4mm 0 0;
+}
+
 .review-points {
   margin: 0;
   padding-left: 1.5em;

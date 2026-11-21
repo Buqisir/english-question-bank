@@ -32,21 +32,23 @@ export function statementAt(value) {
   return nonEmptyString(value?.statement) || nonEmptyString(value)
 }
 
+// One evidence line everywhere in the print: a run-in Label, then the quote
+// (docs/product/companion-analysis-components.md). The passage source says
+// 原文依据 as reading and listening do; the prompt and the starters keep
+// their own names so the teacher can tell where the quote comes from.
 export const evidenceSourceLabel = Object.freeze({
-  instruction: '题干', material: '原文', paragraph1Starter: '段首句 1', paragraph2Starter: '段首句 2',
+  instruction: '题干依据', material: '原文依据', paragraph1Starter: '段首句 1', paragraph2Starter: '段首句 2',
 })
 
-export function renderContinuationEvidence(evidence, { withinList = false } = {}) {
+export function renderContinuationEvidence(evidence) {
   const items = array(evidence)
   if (items.length === 0) return ''
-  const itemTag = withinList ? 'p' : 'li'
-  const lines = items.map((item) => `<${itemTag}><b>${escapeHtml(evidenceSourceLabel[item?.source] || item?.source)}</b>：“${escapeHtml(innerQuote(item?.excerpt))}”</${itemTag}>`).join('')
-  return withinList ? lines : `<ul class="continuation-evidence">${lines}</ul>`
+  return items.map((item) => `<p class="continuation-evidence"><span class="inline-label">${escapeHtml(evidenceSourceLabel[item?.source] || item?.source)}</span><span lang="en">“${escapeHtml(innerQuote(item?.excerpt))}”</span></p>`).join('')
 }
 
-export function renderGrounded(value, options) {
+export function renderGrounded(value) {
   if (!value) return ''
-  return `<div class="continuation-grounded"><p>${escapeHtml(statementAt(value))}</p>${renderContinuationEvidence(value.evidence, options)}</div>`
+  return `<div class="continuation-grounded"><p>${escapeHtml(statementAt(value))}</p>${renderContinuationEvidence(value.evidence)}</div>`
 }
 
 export function renderGroundedList(values) {
@@ -75,7 +77,7 @@ export function renderContinuationStory(story) {
 }
 
 export function renderConstraints(values) {
-  return array(values).map((item) => `<li>${renderGrounded(item, { withinList: true })}</li>`).join('')
+  return array(values).map((item) => `<li>${renderGrounded(item)}</li>`).join('')
 }
 
 export function renderContinuationContract(contract) {
@@ -98,7 +100,7 @@ export function renderDevelopmentParagraph(paragraph) {
     `<li><p>触发：${field(item.trigger)}</p><p>变化：${field(item.from)} → ${field(item.to)}</p><p>表现：${field(item.visibleAction)}</p></li>`).join('')
   const relationships = array(paragraph.relationshipChanges).map((item) => `<li>${escapeHtml(array(item.participants).join('、'))}：${escapeHtml(item.from)} → ${escapeHtml(item.to)}；${escapeHtml(item.cause)}</li>`).join('')
   const clues = array(paragraph.cluePayoffs)
-  const payoffs = clues.map((item) => `<li>${renderContinuationEvidence([item.clue], { withinList: true })}<p>${escapeHtml(item.payoff)}</p></li>`).join('')
+  const payoffs = clues.map((item) => `<li>${renderContinuationEvidence([item.clue])}<p>${escapeHtml(item.payoff)}</p></li>`).join('')
   const evidence = array(paragraph.sourceEvidence).filter(item =>
     !clues.some(({ clue }) => clue?.source === item.source && clue?.excerpt === item.excerpt))
   return `<div class="route-paragraph"><h5>第 ${paragraph.paragraphIndex} 段</h5>

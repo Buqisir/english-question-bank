@@ -64,7 +64,9 @@ v2Writing.modelAnswer = 'GENERATED_MODEL_SENTINEL'
 const v2ContinuationHtml = buildCompanionAnalysisHtml(v2ContinuationSource)
 assert.equal((v2ContinuationHtml.match(/data-continuation-section=/gu) || []).length, 4)
 assert.match(v2ContinuationHtml, /<p>触发：EMOTION_TRIGGER_SENTINEL<\/p><p>变化：uncertain → resolved<\/p><p>表现：VISIBLE_ACTION_SENTINEL<\/p>/u)
-assert.match(v2ContinuationHtml, /<li><p><b>原文<\/b>：“CLUE_SENTINEL”<\/p><p>PAYOFF_SENTINEL<\/p><\/li>/u)
+assert.match(v2ContinuationHtml, /<li><p class="continuation-evidence"><span class="inline-label">原文依据<\/span><span lang="en">“CLUE_SENTINEL”<\/span><\/p><p>PAYOFF_SENTINEL<\/p><\/li>/u)
+// Evidence is one run-in line everywhere: no bullet list, no colon after the label.
+assert.doesNotMatch(v2ContinuationHtml, /<ul class="continuation-evidence">|<b>(?:原文|题干)<\/b>：/u)
 assert.doesNotMatch(v2ContinuationHtml, /质量风险|QUALITY_RISK_SENTINEL|REVIEW_NOTE_SENTINEL|INTERNAL_SENTINEL/u)
 assert.ok(v2ContinuationHtml.includes('LEGACY_SOURCE_SENTINEL'))
 assert.ok(v2ContinuationHtml.includes('GENERATED_MODEL_SENTINEL'))
