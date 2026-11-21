@@ -1,6 +1,6 @@
 # 阅读做题心法
 
-状态：v11 草稿（2026-11-21）。v1 和 Owner 逐条讨论后写成；v2 到 v11 按实题试做改，改了哪些见文末「版本记录」。
+状态：v12 草稿（2026-11-21）。v1 和 Owner 逐条讨论后写成；v2 到 v12 按实题试做改，改了哪些见文末「版本记录」。
 用途：做题时照它找定位、排除干扰项；写解析时把同一个过程写出来，就是定位行、证据和干扰项说明。
 下一步改写成 `prompts/reading-choice-analysis-v1.md` 的「定位」一节。关联 BUB-255。
 
@@ -131,7 +131,7 @@
 | 问法 | 归类 | 怎么定位 |
 |---|---|---|
 | Which would the author / X agree with；Which viewpoint might X agree with；Which is X's idea；What does X argue about Y | 是非 | 按选项；有人名先定到这个人的话 |
-| What does the experience / story show；What does the story tell us；What can we learn from X's story；Which is true of X's story（选项是谚语）；What can be learned from the text（选项是谚语或道理） | 推断 | 问的是故事的道理，按选项；首段和末段都看，首段常先点出结果（2020 新课标Ⅰ Q27，首段 That willpower bore fruit 对应 Hard work pays off） |
+| What does the experience / story show；What does the story tell us；What can we learn from X's story；Which is true of X's story（选项是谚语）；What can be learned from the text；What message does the text convey（选项是谚语或道理） | 推断 | 问的是故事的道理，按选项；首段和末段都看，首段常先点出结果（2020 新课标Ⅰ Q27，首段 That willpower bore fruit 对应 Hard work pays off） |
 | Which (word) best describes X / X's job / X's relationship with … / the impact of X；What was X like，选项是一个形容词或名词 | 推断 | 按选项；有对象词先定段，回到描述 X 的几处逐件核对，只盖一两件的选项算太窄（2020 新课标Ⅰ Q30，Eventful 盖住乌兹别克斯坦一路四件事，Dangerous 只盖警察那一件）；成对的词先核对两个都有原文对应的那项（总原则第 1 条） |
 | What does X reveal / indicate / prove / show；What conclusion can be drawn from X；What inspiration / lesson does X bring | 推断 | 题眼能定句：落到 proving、showing、suggesting、indicating that 那句（江西南昌 2026 年 4 月 Q34，proving that the unseen pollution secretly governed the electrical reaction）。问的是某人的反应、做法时，先看反应本身的内容；后面 says as much about 这类评论句的原词常被干扰项照搬、改掉关系（湖北武汉 2026 年 4 月 Q25，学者惊讶作品出自八十多岁的老人，答案 Ducrot's works mask her age；Ducrot's works limit his imagination 照搬 limitations of the observer's imagination，写原词变形） |
 | Who might benefit；Which is most likely；Who is most likely to do X（把原文的研究结论套到新人物、新情境上） | 推断 | 按选项；might、most likely 表推测。套到新人物时，先从原文列出结论里的条件，再逐个人物对：福建 2026 年 M1 Q29 问谁最可能坚持 4 小时拳击课，原文 Highly hardworking and reliable individuals demonstrated strong self-discipline，答案 a disciplined teacher who seeks weight loss；「爱看拳赛」是拿常识凑的条件。原文直接写着受益、有用的对象时归细节，从题干定位（江苏苏锡常镇 2026 年 3 月 Q30，Who will benefit most according to the author，原文 the most significant benefit to people who explore the world through touch） |
@@ -139,6 +139,7 @@
 | How does the author view X；What is the author's view on X（X 是文中一个具体对象） | 态度 | 用对象词从题干定位，找作者表态的那句（山东青岛 2026 年 5 月 Q27，I am not to discourage ambition, but it needs a reality check，答案 It should be grounded in life）；问全文话题的态度才看全文 |
 | How does the author find X，选项是「A but B」 | 态度 | 用对象词从题干定位，拿定位句里的 but 两边去对选项的两半（广东深圳 2026 年 4 月 Q26，I've walked along the Thames a hundred times, but the banks look different each time，答案 Familiar but refreshing） |
 | What is the (main) purpose of the text；Why does the author write the text；What is the author trying to express | 写作意图 | 全文，按主旨题的办法。选项是 inform、persuade、entertain 这类单词时：给实用信息、网址、联系方式的是 inform，有主张和呼吁的是 persuade，讲趣事的是 entertain |
+| Why is X compared to Y；Why does the author use the metaphor / simile | 写作意图 | 从题干定位到比方那句；先看喻体本身的特点（sunlit petals 是明亮、美），再对全文主题，选两头都接得上的（江苏苏锡常镇 2026 年 5 月 Q27，Maria 笑时 her wrinkles deepening like sunlit petals，末段 proving beauty lives in ordinary hearts，答案 To reveal her shining inner beauty；To describe her natural aging 只看了皱纹） |
 | How does the author introduce the topic；How does the text begin | 写作意图 | 看首段的引入方式：提问、故事、数据、现象、常见看法 |
 | What will the author talk about next；What may follow the last paragraph；What might the author continue talking about | 推断 | 全文（passage）；看末段末句；首段预告了几点时，看正文讲到了第几点；末段列出几点风险或问题时，下文要接住全部几点，只接最后一点的算太窄 |
 | What is the purpose of paragraphs N and M | 写作意图 | 按选项回这几段，正确项可能两半各对一段 |
@@ -152,7 +153,7 @@
 | Which applicant best meets；Who is most likely to be chosen（条件是原文写明的招聘要求、报名规则） | 细节 | 反向核对：先列出原文写明的条件，按选项逐条对；条件要从研究结论里推出来的归推断，见上 |
 | What does the last paragraph / paragraph N emphasize | 主旨标题 | 只看这一段，落到强调词那句：so important、That's why、the key、above all；不要求盖住整段（广东佛山 2026 年 4 月 Q35，That's why it's so important to have some kind of standard，答案 The significance of standards） |
 | What is paragraph N mainly about；What does paragraph N mainly tell us；What phenomenon is described in paragraph N；What does the last paragraph convey | 主旨标题 | 段落大意： 只看这一段，按选项回段核对；看段首句、主句主语、转折后的话和段末总结句（2026 新课标Ⅱ Q29，段末 This is how I began my search） |
-| Which will result in X；Which is against the rules | 细节 | 反向核对：从题干定位到总述规则的那句（没有总述句时，小标题也算定位处），按选项逐条对后面的规则条目，记前后文展开；附表的方向规则在这里用不上（2020 新课标Ⅰ Q23，120 词的诗违反 100 words or fewer 这条，是答案） |
+| Which will result in X；Which is against the rules；What will definitely disqualify | 细节 | 反向核对：题干带 definitely、must 时，带例外条款的规则不算（山东潍坊 2026 年 4 月 Q22，没贴邮票的信封对学生有例外，答案是漏填 contest division，原文 Incomplete information will cause disqualification）。从题干定位到总述规则的那句（没有总述句时，小标题也算定位处），按选项逐条对后面的规则条目，记前后文展开；附表的方向规则在这里用不上（2020 新课标Ⅰ Q23，120 词的诗违反 100 words or fewer 这条，是答案） |
 | 应用文问哪一项、在哪里、怎么联系：Which program / website；Where can you …；What can sb do with X | 细节 | 先用描述定出是哪一块，再在这一块里取网址、地址、时间，记多处合并；干扰项多是别的块里确有的项目（2022 全国甲 Q22、Q23）。题眼是 only、exclusively 时，要拿别的块对照才能排除 |
 
 ### 1. 细节题（Who / What / When / Where / How many）
@@ -262,6 +263,10 @@
 - 高考文章的作者大多支持或客观；文中提出主张的专家、研究者也一样。indifferent 几乎不会是答案。
 - 书评、影评常是肯定为主、再用 That said、However 指出局限，态度写成 appreciative yet critical 这类，
   不是 doubtful、opposed（福建泉州 Q31，C4 That said, the book's perspective isn't universal，答案 Appreciative yet critical）。
+- 选项里没有支持、客观，只有几个负面词和 cautious、reserved 这类词时，「肯定为主再加提醒」选 cautious；cautious 不算负面。
+  例：浙江台州 2026 年二模 Q35，末段 a positive social tool，又说 balancing mimicry with self-identity is crucial、use the effect wisely，答案 Cautious。
+- 幽默文章里叙述者夸自己（ahead of your time、she is grateful for my assistance）常是反话，要看他实际做了什么；
+  照搬他自夸原话的选项是陷阱（浙江温州 2026 年二模 Q27，叙述者盯着发电 app 关掉妻子正在用的灯、半夜睡不着，答案 Technology is a good servant but a bad master）。
 - 评价者先说局限，再用 Despite this、Even so、Still 下总评时，态度看总评：江苏八市 2026 年 5 月 Q31，Aaron Kucyi 先说 A key limitation，
   再说 Despite this, the study is influential，答案 Supportive，不是 Reserved。
 - 支持和客观同在选项里：作者只陈述成果和不足、没有评价词时选客观；有赞扬词、替它辩护或呼吁推广时选支持。
@@ -564,3 +569,10 @@
 - 「问法归哪类」：emphasize 落到强调词那句；What can be learned from the text 选项是谚语归推断；reveal 题先看反应本身，评论句的原词常被照搬。
 - 建议：the key to … is、Hopefully X will；作者引述又顺着展开的专家主张算作者建议。态度：局限后 Despite this 的总评定态度。
 - 例子作用：作者点明例子说的是什么时选点明的那层。细节：招聘文 required 和 preferred 分开。
+
+**v12（2026-11-21）**，依据第 11 轮试做：8 套没用过的 2026 年模拟卷（广东汕头、山东潍坊、重庆巴蜀十模、福建厦门 5 月、浙江温州二模、
+山西太原 3 月、江苏苏锡常镇 5 月、浙江台州二模），117/120。错的 3 题都是试卷数据缺内容：厦门 Q29、潍坊 Q21 的选项是图片、数据里是空的，
+厦门 Q22 的礼品清单在篇末缺了、段号没跳号所以没插上占位。能靠文字做的 117 题全对。下面引的模拟卷例子都回原文核对过。这一版的规则都只从模拟卷得出。
+- 态度：没有支持、客观选项时，肯定加提醒选 cautious；幽默文章的自夸是反话。
+- 「问法归哪类」：比方作用题归写作意图，喻体特点加全文主题；What message does the text convey 归推断；definitely 类反向核对排除带例外的规则。
+- 记一笔、没立规则：汕头 Q34 段落大意的答案用了 universally，比原文两地实验说得强，题库答案仍是它；证据只有一题，先不写成规则。
