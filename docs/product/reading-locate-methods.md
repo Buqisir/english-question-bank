@@ -1,6 +1,6 @@
 # 阅读做题心法
 
-状态：v8 草稿（2026-11-21）。v1 和 Owner 逐条讨论后写成；v2 到 v8 按实题试做改，改了哪些见文末「版本记录」。
+状态：v9 草稿（2026-11-21）。v1 和 Owner 逐条讨论后写成；v2 到 v9 按实题试做改，改了哪些见文末「版本记录」。
 用途：做题时照它找定位、排除干扰项；写解析时把同一个过程写出来，就是定位行、证据和干扰项说明。
 下一步改写成 `prompts/reading-choice-analysis-v1.md` 的「定位」一节。关联 BUB-255。
 
@@ -34,6 +34,8 @@
    自己推出「表现变好只能解释差距缩小」去选前一句的 skip critical thinking，是放掉了写着的原因。
    四个选项都没有写着的改写时，先排除另外三项的明确错误，再选归纳出来的那个
    （2024 全国甲 Q24 的 survival skill 概括 get the mother's attention and be fed）。
+   三项和原文正面相反、剩下那项说得比原文弱时，照样选它：重庆 2026 年 1 月 Q32，原文说 a faulty understanding、
+   the backwards logic of offsets，答案 The logic of offsets, maybe imperfect, is to be discussed。
    两句都能对上题干线索时，定位到能回答题眼的那句：2023 全国甲 Q26 问 How did Terri avoid losing the deposit，
    段首句 DIY also saves her from losing any deposit 原词更多，回答 how 的是后一句的
    cover up holes and repaint a room to avoid any charges。
@@ -46,7 +48,7 @@
      advantage、in common、philosophy、view、belief 这类。对象词定段以后按选项回这一段核对，
      对上正确项的那句就是定位句，也就是答案句。推断题的 infer、imply 也算泛题眼；
      推断题的对象词只落在一句时例外，见第二部分第 6 类。
-   - 泛题眼还有 selling point、discover、find（研究发现）。
+   - 泛题眼还有 selling point、offer、discover、find（研究发现）、agree on、share。
    - 对象词就是全文话题词（PV cells、rewriting）、定不了段时，用题目顺序（第 5 条）缩到相应几段，再按题眼或选项核对；
      态度题问的正是全文话题时，按全文看。
    - 题干里泛题眼和能定句的词同时出现时，按能定句的那个走，从题干定位。例：山西 T8 2026 年 4 月 Q34
@@ -81,6 +83,9 @@
    - 定位句先下判断、后文讲经过时，写前后文展开，不写叙事因果。例：浙江强基联盟 2026 年 5 月 Q26，
      But that early spring afternoon was unusual 先下判断，答案在后文 Leo 反问 "How was your day, Mom?"。
    - 表格在试卷数据里可能被拆成一格一段（舱位名一段，服务一段）。按行还原，同一行的格子算一处，不写多处合并。
+   - 多处合并只管几处彼此独立、各给一部分信息的情况。一处解释或展开另一处（概括句加后面的具体说明），
+     写前后文展开；定位句的代词或概括词同时指回前面几句，写指代回指。例：湖北襄阳 2026 年 3 月 Q32 问 Why was John Hester impressed，
+     定位句 "It's so amazing" 的 It 指回前两句（让 AI 写游戏、两小时后就能玩），写指代回指。
    - 多处合并时，定位句写题眼落的那一处，其余几处都列进答案。
    - 关系只在从题干定位时写。按选项或看全文时没有定位句，关系留空；答案要几处合起来，就把几处都列进答案句。
    - 六种都不是，多半是定位错了，回头重找。
@@ -93,10 +98,12 @@
      转折前后说的得是同一个对象。However 后主语换了（厦门 Q26 从 hope 换成作者），这条不适用。
      But 反驳的是定位句后面另一句铺垫，不是定位句本身时，关系写前后文展开；对话里人物回嘴的 But 不算转折。
      Beyond、more than、What's more 这类递进词后面也常是重点。
+     While、Although 引出的让步从句，重点在主句：山东东营 2026 年 4 月 Q30 问第 4 段大意，While this isn't an entirely new connection … it
+     outperforms many earlier studies，答案 Distinct strengths of the study。让步部分是实打实的反面论据、篇幅和正面相当时，选两面都盖住的选项。
      题干问 first、at first、originally 时，答案常在转折前，转折后是退而求其次的做法：2024 九省联考 Q25
      问 first response，答案是 Their first choice is to take flight，However 后的 fight 是陷阱。
    - 人名定位后，答案在这个人的整段话里找，不一定在带人名的那句。
-   - 题干说「第 N 段」，按原卷自然段数；试卷数据换页时可能把一段拆成两段。
+   - 题干说「第 N 段」，按原卷自然段数；试卷数据换页时可能把一段拆成两段，也可能把两段合成一段。段号对不上时，以对象词落的那段为准。
    - 题目顺序大致同原文顺序（主旨题除外），可用来缩小定位范围。
 
 ## 二、题型心法
@@ -105,15 +112,15 @@
 
 | 问法 | 归类 | 怎么定位 |
 |---|---|---|
-| Which would the author / X agree with；Which viewpoint might X agree with；Which is X's idea | 是非 | 按选项；有人名先定到这个人的话 |
+| Which would the author / X agree with；Which viewpoint might X agree with；Which is X's idea；What does X argue about Y | 是非 | 按选项；有人名先定到这个人的话 |
 | What does the experience / story show；What does the story tell us；What can we learn from X's story；Which is true of X's story（选项是谚语） | 推断 | 问的是故事的道理，按选项；首段和末段都看，首段常先点出结果（2020 新课标Ⅰ Q27，首段 That willpower bore fruit 对应 Hard work pays off） |
 | Which (word) best describes X / X's job / X's relationship with … / the impact of X；What was X like，选项是一个形容词或名词 | 推断 | 按选项；有对象词先定段，回到描述 X 的几处逐件核对，只盖一两件的选项算太窄（2020 新课标Ⅰ Q30，Eventful 盖住乌兹别克斯坦一路四件事，Dangerous 只盖警察那一件）；成对的词先核对两个都有原文对应的那项（总原则第 1 条） |
-| What does X reveal / indicate / prove / show；What conclusion can be drawn from X | 推断 | 题眼能定句：落到 proving、showing、suggesting、indicating that 那句（江西南昌 2026 年 4 月 Q34，proving that the unseen pollution secretly governed the electrical reaction） |
+| What does X reveal / indicate / prove / show；What conclusion can be drawn from X；What inspiration / lesson does X bring | 推断 | 题眼能定句：落到 proving、showing、suggesting、indicating that 那句（江西南昌 2026 年 4 月 Q34，proving that the unseen pollution secretly governed the electrical reaction） |
 | Who might benefit；Which is most likely | 推断 | 按选项；might、most likely 表推测。原文直接写着受益、有用的对象时归细节，从题干定位（江苏苏锡常镇 2026 年 3 月 Q30，Who will benefit most according to the author，原文 the most significant benefit to people who explore the world through touch） |
 | Which is an example of X；Which fits X（X 是文中下过定义的概念） | 推断 | 先找到定义句，把定义的每个条件拿去套选项 |
 | How does the author view X；What is the author's view on X（X 是文中一个具体对象） | 态度 | 用对象词从题干定位，找作者表态的那句（山东青岛 2026 年 5 月 Q27，I am not to discourage ambition, but it needs a reality check，答案 It should be grounded in life）；问全文话题的态度才看全文 |
 | How does the author find X，选项是「A but B」 | 态度 | 用对象词从题干定位，拿定位句里的 but 两边去对选项的两半（广东深圳 2026 年 4 月 Q26，I've walked along the Thames a hundred times, but the banks look different each time，答案 Familiar but refreshing） |
-| What is the (main) purpose of the text；Why does the author write the text | 写作意图 | 全文，按主旨题的办法。选项是 inform、persuade、entertain 这类单词时：给实用信息、网址、联系方式的是 inform，有主张和呼吁的是 persuade，讲趣事的是 entertain |
+| What is the (main) purpose of the text；Why does the author write the text；What is the author trying to express | 写作意图 | 全文，按主旨题的办法。选项是 inform、persuade、entertain 这类单词时：给实用信息、网址、联系方式的是 inform，有主张和呼吁的是 persuade，讲趣事的是 entertain |
 | How does the author introduce the topic；How does the text begin | 写作意图 | 看首段的引入方式：提问、故事、数据、现象、常见看法 |
 | What will the author talk about next；What may follow the last paragraph；What might the author continue talking about | 推断 | 全文（passage）；看末段末句；首段预告了几点时，看正文讲到了第几点；末段列出几点风险或问题时，下文要接住全部几点，只接最后一点的算太窄 |
 | What is the purpose of paragraphs N and M；What do paragraphs N–M mainly talk about | 写作意图或主旨 | 按选项回这几段，正确项可能两半各对一段 |
@@ -126,7 +133,7 @@
 | Which applicant best meets；Who is most likely to be chosen | 细节（反向核对） | 先列出条件，按选项逐条对 |
 | What is paragraph N mainly about；What does paragraph N mainly tell us；What phenomenon is described in paragraph N；What does the last paragraph convey | 主旨（段落大意） | 只看这一段，按选项回段核对；看段首句、主句主语、转折后的话和段末总结句（2026 新课标Ⅱ Q29，段末 This is how I began my search） |
 | Which will result in X；Which is against the rules | 细节（反向核对） | 从题干定位到总述规则的那句（没有总述句时，小标题也算定位处），按选项逐条对后面的规则条目，记前后文展开；附表的方向规则在这里用不上（2020 新课标Ⅰ Q23，120 词的诗违反 100 words or fewer 这条，是答案） |
-| 应用文问哪一项、在哪里、怎么联系：Which program / website；Where can you … | 细节 | 先用描述定出是哪一块，再在这一块里取网址、地址、时间，记多处合并；干扰项多是别的块里确有的项目（2022 全国甲 Q22、Q23）。题眼是 only、exclusively 时，要拿别的块对照才能排除 |
+| 应用文问哪一项、在哪里、怎么联系：Which program / website；Where can you …；What can sb do with X | 细节 | 先用描述定出是哪一块，再在这一块里取网址、地址、时间，记多处合并；干扰项多是别的块里确有的项目（2022 全国甲 Q22、Q23）。题眼是 only、exclusively 时，要拿别的块对照才能排除 |
 
 ### 1. 细节题（Who / What / When / Where / How many）
 
@@ -135,7 +142,9 @@
 - 数字题：先圈出原文所有数字，再看要不要算；注意 half、double、twice as many，
   百分比先看比较的基准是谁。日期题原文常给 last day、deadline，要比早晚。
   计数、计算题的答案是多处合并，证据列全参与计算的几处。
-  题干给的年份段、百分比在原文文字里找不到，先怀疑原卷有图表没给出；缺图时选项里成对的数常暴露比例和基准，把握写低。
+  题干给的年份段、百分比在原文文字里找不到，先怀疑原卷有图表没给出。缺图时把握写低，再按这几步排除：
+  选项里成对的数常暴露比例和基准；和原文文字里的数字一模一样的选项先怀疑，图里的数多半是另一组；
+  用常识上下限排除（一年的天数不超过 365）；选项不是数字时，用图前后文字对图的概括去推。
 - 正确项常用上位词概括原文的具体东西（study guide、lessons → educational resources），
   细节题里这不算太宽。
 - 题眼太泛（feature、findings）时，先用对象词定段，再按选项回这一段核对。
@@ -159,6 +168,11 @@
   按选项去对后面列出的各条（浙江杭州 2026 年 5 月 Q29，答案在第二种解释 grab attention instantly）。
 - 原文写「不这样做会怎样」（when … eaten alone、Without these fat droplets），原因或目的就是它的反面：
   浙江强基联盟 Q29 问为什么吃羽衣甘蓝要加油，they do not dissolve well … when kale is eaten alone，答案 To get more nutrients。
+- 题干带 directly、mainly、most 时，在因果链上取离结果最近的那一环：山东菏泽 2026 年 5 月 Q24 问 What directly drove Heller，
+  Seeing her mother replace the water filter membranes time and again, Heller set out to find a better solution，答案 Frequent maintenance；
+  读报、水污染是更早的起因。
+- 并列几条原因或障碍时，More critically、Above all、Most importantly 后面的是主要的：福建泉州 2026 年 3 月 Q35 问 What prevents
+  the application，More critically, farmers currently get no financial motivation，答案 Lack of economic benefit for farmers。
 - 「A 改善 B」也是因果：A can improve / boost / increase B，A 就是原因（福建福州 2026 年 5 月 Q25，
   letting students choose their writing topics can improve engagement，答案 Personal choice of topics）。
 - 先分清问的是原因还是目的：两者都能回答 why，选项常互换来设陷阱。选项全是 to do 时，问的是目的。
@@ -191,7 +205,9 @@
   - I suggest、I'd recommend、My advice is、If I were you、The best way is to；
   - you can / you may / you might、we could … if we just …；
   - 陈述句表建议：X simply takes / requires / only needs Y、All it takes is；
-  - 反面条件：if we're not careful、otherwise、or else，说的是不这样做的后果，建议是它的反面。
+  - 反面条件：if we're not careful、otherwise、or else，说的是不这样做的后果，建议是它的反面；
+  - 反问句：do we really need …?、Why should we …?，建议是它的反面（浙江金华义乌 2026 年 5 月 Q31，
+    But do we really need all the data that we produce?，答案 Stop over-storage of data）。
 - 题眼还包括 advocate、call for、recommend。一段里有几处建议信号时，落在和选项改写对得上的那句。
 - 题干问单数（the secret、the key、the best way），原文一句并列几条做法时，只盖一条的选项算太窄，
   选能盖住这几条、或说出它们共同目的的那个。例：河南郑州 2026 年 4 月 Q31，并列三条做法，
@@ -218,6 +234,8 @@
 - 定位：作者对全文话题的态度看全文；作者对某个具体对象的态度、人物态度，用对象词或人名从题干定位。
 - 对应：带感情色彩的形容词、副词、情态动词；转折后的话；引语。
 - 高考文章的作者大多支持或客观；文中提出主张的专家、研究者也一样。indifferent 几乎不会是答案。
+- 书评、影评常是肯定为主、再用 That said、However 指出局限，态度写成 appreciative yet critical 这类，
+  不是 doubtful、opposed（福建泉州 Q31，C4 That said, the book's perspective isn't universal，答案 Appreciative yet critical）。
 - 支持和客观同在选项里：作者只陈述成果和不足、没有评价词时选客观；有赞扬词、替它辩护或呼吁推广时选支持。
   例：河南四市 Q30，先写算法 quickly identified nearly two million previously hidden tiny quakes，再写 There was a drawback, however，答案 Objective。
 - 带条件的肯定仍是支持：take advantage of … without sacrificing …、as long as、provided that。
@@ -277,6 +295,10 @@
     某项研究变 science），或加 all、every、the world。检验：它能不能拿去当另一篇
     文章的标题，能就太宽。只看检验，不看单个词是不是上位词：2024 九省联考 Q35 用 love 概括
     friendship、fondness，话题没丢，也套不到别的文章上，不算太宽。
+    这条只在核心话题词还在时成立：把话题词换成更大的词（color 换成 vision），话题就丢了，算太宽。
+    标题为了短常省掉 perception、the study of 这类层次词，不算原词变形；话题词齐全、意思大体对的选项优先。
+    例：湖北随州 2026 年 1 月 Q35，原文说气味 affect our perception of colors，答案 The Influence of Smells on Colors；
+    How Odors Shape Our Vision 把 color 换成 vision，太宽。
   - **太窄**：只盖住某一段或某个例子。最容易上当的是首段引入话题的故事，和末段的
     一条建议或结论。例：2025 新课标Ⅱ Q31 的 A「Time to Replace Houseplants」
     只盖末段一条建议。检验：它能不能盖住中间各段，不能就太窄。
@@ -327,6 +349,8 @@
 - 时间上的三种分清：别的时刻、别的阶段的事被安到问的这一刻或原因的位置，是张冠李戴；
   同一时刻原文确有、但答的不是问的这一点，是答非所问；把先后次序本身说反，是计算比较错。
 - 应用文里把别的块的项目安到问的这一块：张冠李戴；问哪一块符合要求，选了别的块：答非所问。
+- 论证方法题里原文没用到的方法（下定义、分析数据、描述）：无中生有。
+- 作者明确表了态，选项却是 unclear、uncertain、neutral：正反颠倒。
 - 成对的形容词一半对一半错：按错的那一半归类（福州 Q27 的 Thoughtful and brave，原文没有体现 brave，写无中生有）。
 
 偷换范围的写法例子：「太窄：只盖住末段一条建议，拿它作标题会把全文的身心益处缩成更换植物。」
@@ -465,3 +489,14 @@
 - 因果目的补：反面条件、A improves B、研究的待解问题；附表补 owe … to 和 improve 类动词。
 - 态度：支持和客观怎么分；推断：suggest 两种意思；词义：四项都不贴切先排除；写作意图：方式和作用选作用、指导类目的；
   文体：没有广告选项选载体；干扰项：一半对一半错按错的一半归类；缺图时先怀疑图表。
+
+**v9（2026-11-21）**，依据第 8 轮试做：8 套没用过的 2026 年模拟卷（山东东营、福建泉州、湖北随州、重庆一诊、浙江金华义乌、
+山东菏泽、湖北襄阳、江西赣州），117/120。v8 针对的「放掉写着的」这一轮没再出现。错的 3 题：泉州 Q21 缺图；
+随州 Q34 题库答案存疑（原文 perceived a color enriched in blue as grey，按感知补偿推灰色应偏黄，答案却是偏蓝），没有拿它立规则；
+随州 Q35 是心法问题，把换了上位词、丢了话题词 color 的标题当成正确项。下面引的模拟卷例子都回原文核对过。
+- 标题题：近义上位词不算太宽只在核心话题词还在时成立；省掉 perception 这类层次词不算原词变形。
+- 第 4 条：多处合并只管彼此独立的几处；概括加展开写前后文展开，代词指回几句写指代回指。
+- 因果：directly 取最近一环；More critically 后是主要原因。建议：反问句取反面。态度：书评的肯定加局限。
+- 转折：While、Although 让步句重点在主句。数字题：缺图时的四步排除。段号对不上以对象词为准。
+- 总原则第 1 条：三项正面相反时，剩下那项说得弱也选它。问法表补 argue、trying to express、inspiration、do with X；泛题眼补 offer、agree on、share。
+- 干扰项：没用到的论证方法写无中生有；作者明确表态时 unclear 类选项写正反颠倒。
