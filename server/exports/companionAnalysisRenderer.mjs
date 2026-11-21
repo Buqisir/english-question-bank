@@ -61,20 +61,27 @@ function safeFileTitle(title) {
   return cleanPaperTitle(title).replace(/[\\/:*?"<>|]/gu, '-')
 }
 
-function renderParagraphs(value, className = '') {
+function paragraphBlocks(value, className = '') {
   const paragraphs = nonEmptyString(value)
     .split(/\n\s*\n|\n/u)
     .map((part) => part.trim())
     .filter(Boolean)
   return paragraphs
     .map((paragraph) => `<p${className ? ` class="${className}"` : ''}>${escapeHtml(paragraph)}</p>`)
-    .join('')
+}
+
+function renderParagraphs(value, className = '') {
+  return paragraphBlocks(value, className).join('')
 }
 
 function renderOverview(text) {
   const overview = nonEmptyString(text)
   if (!overview) return ''
   return `<div class="overview"><span class="micro-heading">篇章大意</span><p>${escapeHtml(overview)}</p></div>`
+}
+
+function renderHeadingLead(heading, firstBlock = '', ...rest) {
+  return `<div class="heading-lead">${heading}${firstBlock}</div>${rest.join('')}`
 }
 
 function renderFullTranslation(groupAnalysis, paperAsset) {
@@ -86,7 +93,7 @@ function renderFullTranslation(groupAnalysis, paperAsset) {
   if (teaching?.schemaVersion !== 'objective-teaching-content-v1') {
     // Explicit legacy readback: retain historical bytes, including ordinary
     // text such as "[36]". Never guess that bracketed digits are annotations.
-    return `<section class="full-translation"><h4>全文译文</h4><p>${escapeHtml(text)}</p></section>`
+    return `<section class="full-translation">${renderHeadingLead('<h4>全文译文</h4>', `<p>${escapeHtml(text)}</p>`)}</section>`
   }
   const questionNo = (questionId) => questionData(paperAsset, questionId)?.questionNo
   const paragraphs = array(teaching.translation?.paragraphs).map((paragraph) => {
@@ -116,7 +123,7 @@ function renderFullTranslation(groupAnalysis, paperAsset) {
     }).join('')
     return `<p data-translation-paragraph-id="${escapeHtml(paragraph.paragraphId)}">${html}</p>`
   })
-  return `<section class="full-translation"><h4>全文译文</h4>${paragraphs.join('')}</section>`
+  return `<section class="full-translation">${renderHeadingLead('<h4>全文译文</h4>', ...paragraphs)}</section>`
 }
 
 function exactTextRange(text, { start, end, quote }) {
@@ -170,7 +177,7 @@ function renderSourceRelationships(groupAnalysis, group, paperAsset) {
     return `<p lang="en" data-source-text-state="${source.state}" data-source-paragraph-id="${escapeHtml(source.paragraphId)}"><span class="inline-label">${source.state === 'original' ? '原题' : '答案补全'}</span>${html}</p>`
   }).filter(Boolean)
   if (rendered.length === 0) return ''
-  return `<section class="source-relationships"><h4>原文与补全关系</h4>${rendered.join('')}</section>`
+  return `<section class="source-relationships">${renderHeadingLead('<h4>原文与补全关系</h4>', ...rendered)}</section>`
 }
 
 function renderUnderlinedText(value, underlineTexts) {
@@ -213,7 +220,7 @@ function renderSelectedLongSentences(sentences, paperAsset) {
     && nonEmptyString(sentence?.analysisZh)
     && nonEmptyString(sentence?.translationZh))
   if (selected.length === 0) return ''
-  return `<section class="long-sentences"><h4>长难句解析</h4>${selected.map((sentence) => `<article class="long-sentence" data-selected-sentence-id="${escapeHtml(sentence.sentenceId)}">
+  const blocks = selected.map((sentence) => `<article class="long-sentence" data-selected-sentence-id="${escapeHtml(sentence.sentenceId)}">
     <p class="long-sentence-related">关联题目 ${array(sentence.relatedQuestionIds).map((questionId) => questionData(paperAsset, questionId)?.questionNo).filter(Boolean).map(escapeHtml).join('、')}</p>
     <p class="long-sentence-source" lang="en">${sentence.underlineRanges !== undefined
       ? partitionAnalysisText(sentence.displayText, sentence.underlineRanges).map((part) => part.rangeIndices.length
@@ -222,7 +229,8 @@ function renderSelectedLongSentences(sentences, paperAsset) {
       : renderUnderlinedText(sentence.displayText, sentence.underlineTexts)}</p>
     <p><span class="inline-label">句子解析</span>${escapeHtml(sentence.analysisZh)}</p>
     <p><span class="inline-label">参考译文</span>${escapeHtml(sentence.translationZh)}</p>
-  </article>`).join('')}</section>`
+  </article>`)
+  return `<section class="long-sentences">${renderHeadingLead('<h4>长难句解析</h4>', ...blocks)}</section>`
 }
 
 function renderQuestionHeader(questionNo, answer, answerText = '', provenanceLabel = '') {
@@ -238,12 +246,12 @@ function renderQuestionLead(heading, content) {
   return `<div class="question-lead">${heading}${content || ''}</div>`
 }
 
-function renderListeningGroup({ group, title, paperAsset, analysis, answers }) {
+function renderListeningGroup({ group, title, paperAsset, analysis, answers, openingHeadings }) {
   const groupQuestionIds = new Set(array(group.questionIds))
   const materials = Object.values(analysis?.materials || {}).filter((material) =>
     array(material?.questionIds).some((questionId) => groupQuestionIds.has(questionId)))
   if (materials.length === 0) return ''
-  const renderedMaterials = materials.map((material) => {
+  const renderedMaterials = materials.map((material, index) => {
     const questions = array(material.questionIds).filter((questionId) => groupQuestionIds.has(questionId)).map((questionId) => {
       const sourceQuestion = questionData(paperAsset, questionId)
       const question = analysis?.questions?.[questionId]
@@ -262,17 +270,19 @@ function renderListeningGroup({ group, title, paperAsset, analysis, answers }) {
         ${distractors.length ? `<div class="distractor"><span class="micro-heading">干扰项辨析</span>${distractors.map((item) => `<p><b>${escapeHtml(item.label)} 项</b>：${escapeHtml(item.explanationZh)}</p>`).join('')}</div>` : ''}
       </section>`
     }).join('')
+    const groupHeadings = index === 0 ? openingHeadings + renderGroupHeading(title || group.title || '听力', answers) : ''
+    const materialHeading = `<h4>听力材料 ${escapeHtml(array(material.questionIds).map((questionId) => questionData(paperAsset, questionId)?.questionNo).filter(Boolean).join('、'))}</h4>`
+    const topic = `<p class="listening-topic">${escapeHtml(`${material.topic.theme} · ${material.topic.themeGroup} · ${material.topic.subtopic}`)}</p>`
     return `<article class="listening-material" data-listening-segment-id="${escapeHtml(material.segmentId)}">
-      <h4>听力材料 ${escapeHtml(array(material.questionIds).map((questionId) => questionData(paperAsset, questionId)?.questionNo).filter(Boolean).join('、'))}</h4>
-      <p class="listening-topic">${escapeHtml(`${material.topic.theme} · ${material.topic.themeGroup} · ${material.topic.subtopic}`)}</p>
+      ${renderHeadingLead(groupHeadings + materialHeading, topic)}
       ${renderOverview(material.summaryZh)}
-      <section class="listening-transcript"><h5>听力原文</h5>${renderParagraphs(material.transcript, 'listening-source')}</section>
-      <section class="listening-translation"><h5>参考译文</h5>${renderParagraphs(material.translationZh)}</section>
+      <section class="listening-transcript">${renderHeadingLead('<h5>听力原文</h5>', ...paragraphBlocks(material.transcript, 'listening-source'))}</section>
+      <section class="listening-translation">${renderHeadingLead('<h5>参考译文</h5>', ...paragraphBlocks(material.translationZh))}</section>
       ${questions}
     </article>`
   }).join('')
   return `<section class="analysis-group analysis-group--listening">
-    ${renderGroupHeading(title || group.title || '听力', answers)}${renderedMaterials}
+    ${renderedMaterials}
   </section>`
 }
 
@@ -395,7 +405,8 @@ function renderReadingDiscourse(discourse, group, overview) {
     const index = array(group.passage?.paragraphs).findIndex(({ paragraphId }) => paragraphId === item.paragraphId)
     return `<p>${index >= 0 ? `<b>第 ${index + 1} 段</b> ` : ''}${escapeHtml(item.function ? withoutClosingPunctuation(item.summary) : item.summary)}${item.function ? `${item.summary ? '；' : ''}作用：${escapeHtml(item.function)}` : ''}</p>`
   })
-  return `<section class="reading-discourse"><h4>篇章结构</h4>${summary ? `<p>${escapeHtml(summary)}</p>` : ''}${rows.join('')}</section>`
+  if (summary) rows.unshift(`<p>${escapeHtml(summary)}</p>`)
+  return `<section class="reading-discourse">${renderHeadingLead('<h4>篇章结构</h4>', ...rows)}</section>`
 }
 
 function readingAnnexQuotes(groupAnalysis, questionId, group, figures) {
@@ -415,7 +426,7 @@ function readingAnnexQuotes(groupAnalysis, questionId, group, figures) {
   }))
 }
 
-function renderReadingGroup({ group, title, paperAsset, analysis, answers, figures }) {
+function renderReadingGroup({ group, title, paperAsset, analysis, answers, figures, openingHeadings }) {
   const groupAnalysis = analysis?.groups?.[group.groupId] || {}
   const letter = nonEmptyString(title || group.title).match(/([A-D])\s*$/u)?.[1]
   const displayTitle = letter ? `阅读理解 ${letter} 篇` : (title || group.title || '阅读理解')
@@ -449,8 +460,7 @@ function renderReadingGroup({ group, title, paperAsset, analysis, answers, figur
     </section>`
   }).join('')
   return `<section class="analysis-group analysis-group--reading">
-    ${renderGroupHeading(displayTitle, answers)}
-    ${renderOverview(groupAnalysis.overview)}
+    ${renderHeadingLead(openingHeadings + renderGroupHeading(displayTitle, answers), renderOverview(groupAnalysis.overview))}
     ${renderReadingDiscourse(groupAnalysis.discourseStructure, group, groupAnalysis.overview)}
     ${renderFullTranslation(groupAnalysis, paperAsset)}
     ${renderSourceRelationships(groupAnalysis, group, paperAsset)}
@@ -475,7 +485,7 @@ function renderContextChain(entry, optionText, group, questionNo) {
   </div>`
 }
 
-function renderSevenChoicesGroup({ group, title, paperAsset, analysis, answers, figures }) {
+function renderSevenChoicesGroup({ group, title, paperAsset, analysis, answers, figures, openingHeadings }) {
   const groupAnalysis = analysis?.groups?.[group.groupId] || {}
   const optionByLabel = new Map(array(group.optionBank).map((option) => [option?.label, option?.text]))
   const questions = array(group.questionIds).map((questionId) => {
@@ -493,8 +503,7 @@ function renderSevenChoicesGroup({ group, title, paperAsset, analysis, answers, 
     </section>`
   }).join('')
   return `<section class="analysis-group analysis-group--seven">
-    ${renderGroupHeading(title || group.title || '七选五', answers)}
-    ${renderOverview(groupAnalysis.overview)}
+    ${renderHeadingLead(openingHeadings + renderGroupHeading(title || group.title || '七选五', answers), renderOverview(groupAnalysis.overview))}
     ${renderFullTranslation(groupAnalysis, paperAsset)}
     ${renderSourceRelationships(groupAnalysis, group, paperAsset)}
     ${questions}
@@ -502,7 +511,7 @@ function renderSevenChoicesGroup({ group, title, paperAsset, analysis, answers, 
   </section>`
 }
 
-function renderClozeGroup({ group, title, paperAsset, analysis, answers }) {
+function renderClozeGroup({ group, title, paperAsset, analysis, answers, openingHeadings }) {
   const groupAnalysis = analysis?.groups?.[group.groupId] || {}
   const questions = array(group.questionIds).map((questionId) => {
     const question = questionData(paperAsset, questionId)
@@ -518,8 +527,7 @@ function renderClozeGroup({ group, title, paperAsset, analysis, answers }) {
     </section>`
   }).join('')
   return `<section class="analysis-group analysis-group--cloze">
-    ${renderGroupHeading(title || group.title || '完形填空', answers)}
-    ${renderOverview(groupAnalysis.overview)}
+    ${renderHeadingLead(openingHeadings + renderGroupHeading(title || group.title || '完形填空', answers), renderOverview(groupAnalysis.overview))}
     ${renderFullTranslation(groupAnalysis, paperAsset)}
     ${renderSourceRelationships(groupAnalysis, group, paperAsset)}
     ${questions}
@@ -527,7 +535,7 @@ function renderClozeGroup({ group, title, paperAsset, analysis, answers }) {
   </section>`
 }
 
-function renderGrammarFillGroup({ group, title, paperAsset, analysis, answers }) {
+function renderGrammarFillGroup({ group, title, paperAsset, analysis, answers, openingHeadings }) {
   const groupAnalysis = analysis?.groups?.[group.groupId] || {}
   const questions = array(group.questionIds).map((questionId) => {
     const question = questionData(paperAsset, questionId)
@@ -542,8 +550,7 @@ function renderGrammarFillGroup({ group, title, paperAsset, analysis, answers })
     </section>`
   }).join('')
   return `<section class="analysis-group analysis-group--grammar">
-    ${renderGroupHeading(title || group.title || '语法填空', answers)}
-    ${renderOverview(groupAnalysis.overview)}
+    ${renderHeadingLead(openingHeadings + renderGroupHeading(title || group.title || '语法填空', answers), renderOverview(groupAnalysis.overview))}
     ${renderFullTranslation(groupAnalysis, paperAsset)}
     ${renderSourceRelationships(groupAnalysis, group, paperAsset)}
     ${questions}
@@ -551,7 +558,7 @@ function renderGrammarFillGroup({ group, title, paperAsset, analysis, answers })
   </section>`
 }
 
-function renderReviewCard(reviewCard) {
+function renderReviewCard(reviewCard, groupHeading) {
   const display = projectApplicationReviewCardDisplay(reviewCard)
   if (!display) return ''
   const row = (label, values) => `<div><dt>${escapeHtml(label)}</dt><dd>${values
@@ -569,10 +576,9 @@ function renderReviewCard(reviewCard) {
     ['写作价值', [display.value]],
   ]
   return `<section class="writing-block review-card" data-review-card-version="${display.sourceVersion}">
-    <h4>审题卡</h4>
-    <section class="review-group"><h5>基本审题</h5><dl class="review-facts">${primaryRows.map(([label, values]) => row(label, values)).join('')}</dl></section>
-    <section class="review-group"><h5>内容要点</h5><ol class="review-points">${display.points.map((point) => `<li>${escapeHtml(point)}</li>`).join('')}</ol></section>
-    <section class="review-group"><h5>读者意识</h5><dl class="reader-facts">${readerRows.map(([label, values]) => row(label, values)).join('')}</dl></section>
+    ${renderHeadingLead(groupHeading + '<h4>审题卡</h4>', `<section class="review-group"><h5>基本审题</h5><dl class="review-facts">${primaryRows.map(([label, values]) => row(label, values)).join('')}</dl></section>`)}
+    <section class="review-group heading-lead"><h5>内容要点</h5><ol class="review-points">${display.points.map((point) => `<li>${escapeHtml(point)}</li>`).join('')}</ol></section>
+    <section class="review-group heading-lead"><h5>读者意识</h5><dl class="reader-facts">${readerRows.map(([label, values]) => row(label, values)).join('')}</dl></section>
   </section>`
 }
 
@@ -617,7 +623,8 @@ function renderGroundedList(values) {
 
 function renderContinuationStory(story) {
   const characters = array(story.characters).map((character) => `<div class="route-paragraph"><h5>${escapeHtml(character.name)} · ${escapeHtml(character.role)}</h5>${renderGroundedList(character.establishedTraits)}${renderGroundedList(character.motivations)}${renderGrounded(character.currentState)}</div>`).join('')
-  const relationships = array(story.relationships).map((item) => `<div><b>${escapeHtml(array(item.participants).join(' · '))}</b>${renderGrounded(item.currentRelation)}</div>`).join('')
+  const relationships = array(story.relationships).map((item) => renderHeadingLead(
+    `<b>${escapeHtml(array(item.participants).join(' · '))}</b>`, renderGrounded(item.currentRelation))).join('')
   const causal = array(story.causalChain).map((item) => `<div class="route-paragraph"><h5>因果</h5>${renderGrounded(item.cause)}${renderGrounded(item.effect)}</div>`).join('')
   return `<section class="writing-block continuation-section" data-continuation-section="storyUnderstanding"><h4>原文理解</h4>
     <dl class="story-map">
@@ -690,8 +697,8 @@ function renderContinuationAnalysis(analysis) {
   if (!display) return ''
   const plan = display.developmentPlan
   return `${renderContinuationStory(display.storyUnderstanding)}${renderContinuationContract(display.continuationContract)}
-    <section class="writing-block continuation-section" data-continuation-section="developmentPlan"><h4>两段发展方案</h4>
-      <p><b>选定路线</b>：${escapeHtml(plan.selectedRoute)}</p>${renderGroundedList(plan.routeRationale)}
+    <section class="writing-block continuation-section" data-continuation-section="developmentPlan">
+      ${renderHeadingLead('<h4>两段发展方案</h4>', `<p><b>选定路线</b>：${escapeHtml(plan.selectedRoute)}</p>`)}${renderGroundedList(plan.routeRationale)}
       ${array(plan.paragraphs).map(renderDevelopmentParagraph).join('')}
       ${array(plan.alternatives).length ? `<b>其他可行路线</b><ul>${array(plan.alternatives).map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>` : ''}
       ${renderLegacyContinuationDetails(display.legacyDetails)}
@@ -711,7 +718,7 @@ function renderRevisionModels(source, official, model, isContinuation) {
   return `<section class="writing-block model-answer"${isContinuation ? ' data-continuation-section="modelAnswer"' : ''}><h4>${heading}</h4>${content}</section>`
 }
 
-function renderWritingGroup({ group, title, analysis, sourceReferencesByGroup }) {
+function renderWritingGroup({ group, title, analysis, sourceReferencesByGroup, openingHeadings }) {
   const writing = analysis?.groups?.[group.groupId]?.writing
   const source = sourceReferencesByGroup?.get(group.groupId)
   const isContinuation = (source?.taskType ?? writing?.taskType) === 'continuation'
@@ -722,11 +729,11 @@ function renderWritingGroup({ group, title, analysis, sourceReferencesByGroup })
     : isContinuation ? renderContinuationModels(official, model)
       : `${official ? renderModelAnswer(official, '原卷参考范文') : ''}${model && model !== official ? renderModelAnswer(model, official ? '讲评范文' : '参考范文') : ''}`
   if (!writing && !models) return ''
+  const groupHeading = `${openingHeadings}<h3 class="group-title">${escapeHtml(title || group.title || (isContinuation ? '读后续写' : '应用文写作'))}</h3>`
+  const reviewCard = isContinuation ? '' : renderReviewCard(writing?.reviewCard, groupHeading)
   return `<section class="analysis-group analysis-group--writing">
-    <h3 class="group-title">${escapeHtml(title || group.title || (isContinuation ? '读后续写' : '应用文写作'))}</h3>
-    ${isContinuation
-      ? renderContinuationAnalysis(writing?.continuationAnalysis)
-      : renderReviewCard(writing?.reviewCard)}
+    ${reviewCard || renderHeadingLead(groupHeading)}
+    ${isContinuation ? renderContinuationAnalysis(writing?.continuationAnalysis) : ''}
     ${models}
   </section>`
 }
@@ -759,21 +766,31 @@ function renderGroup(input) {
 
 function renderAnalysisBody(parts, paperAsset, analyses, figuresByGroup, sourceReferencesByGroup) {
   return parts.map((part) => {
+    const partTitle = escapeHtml(part.title)
+    let partHeading = `<h2 class="part-title">${partTitle}</h2>`
     const sections = part.sections.map((section) => {
-      const groups = section.groups.map((entry) => renderGroup({
-        ...entry,
-        paperAsset,
-        analyses,
-        sourceReferencesByGroup,
-        figures: figuresByGroup?.get(entry.group.groupId) ?? (figuresByGroup ? [] : null),
-      })).filter(Boolean).join('')
-      if (!groups) return ''
-      const heading = !figuresByGroup || section.groups.length > 1
+      let sectionHeading = !figuresByGroup || section.groups.length > 1
         ? `<h2 class="section-title">${escapeHtml(section.title)}</h2>` : ''
-      return `<section class="paper-section">${heading}${groups}</section>`
+      const groups = section.groups.map((entry) => {
+        const html = renderGroup({
+          ...entry,
+          paperAsset,
+          analyses,
+          sourceReferencesByGroup,
+          figures: figuresByGroup?.get(entry.group.groupId) ?? (figuresByGroup ? [] : null),
+          openingHeadings: partHeading + sectionHeading,
+        })
+        if (html) {
+          partHeading = ''
+          sectionHeading = ''
+        }
+        return html
+      }).join('')
+      if (!groups) return ''
+      return `<section class="paper-section">${groups}</section>`
     }).filter(Boolean).join('')
     if (!sections) return ''
-    return `<article class="paper-part"><h2 class="part-title">${escapeHtml(part.title)}</h2>${sections}</article>`
+    return `<article class="paper-part" data-part-title="${partTitle}">${sections}</article>`
   }).filter(Boolean).join('')
 }
 
@@ -899,7 +916,7 @@ export function buildCompanionAnalysisHtml(input) {
   }
 
   @top-right {
-    content: string(running-section);
+    content: string(running-section, first);
     color: var(--muted);
     font: 400 8pt/1 var(--sans);
     vertical-align: bottom;
@@ -1120,21 +1137,26 @@ h5 {
 
 .paper-part {
   margin-top: 0;
+  /* Paged.js clones the article on continuation pages. */
+  string-set: running-section attr(data-part-title);
 }
 
 .paper-part + .paper-part {
   margin-top: 8mm;
 }
 
+.heading-lead {
+  break-inside: avoid;
+}
+
 .part-title {
-  display: inline-block;
+  width: fit-content;
   margin: 0 0 4mm;
   padding: 1.2mm 2.4mm 1mm;
   border: 0.35pt solid var(--green);
   border-radius: 2px;
   color: var(--green-deep);
   font: 700 10pt/13pt var(--sans);
-  string-set: running-section content();
   break-after: avoid;
 }
 
@@ -1241,7 +1263,8 @@ h5 {
   break-inside: auto;
 }
 
-.overview + .question {
+.overview + .question,
+.heading-lead:has(> .overview:last-child) + .question {
   margin-top: 0;
 }
 
@@ -1262,7 +1285,8 @@ h5 {
   white-space: pre-line;
 }
 
-.full-translation p + p {
+.full-translation p + p,
+.full-translation .heading-lead + p {
   margin-top: 0.8mm;
 }
 
@@ -1360,6 +1384,10 @@ h5 {
   font-weight: 600;
 }
 
+.distractor {
+  break-inside: avoid;
+}
+
 .context-chain {
   margin: 1mm 0 2.5mm;
   break-inside: avoid;
@@ -1390,7 +1418,12 @@ h5 {
   margin-top: 6mm;
 }
 
-.writing-block > h4 {
+.analysis-group--writing > .review-card:first-child {
+  margin-top: 0;
+}
+
+.writing-block > h4,
+.writing-block > .heading-lead > h4 {
   margin: 0 0 3mm;
   padding-bottom: 2mm;
   border-bottom: 0.35pt solid var(--line);
@@ -1399,7 +1432,12 @@ h5 {
   break-after: avoid;
 }
 
-.review-group + .review-group {
+.review-card .group-title + h4 {
+  margin-top: 6mm;
+}
+
+.review-group + .review-group,
+.review-card > .heading-lead + .review-group {
   margin-top: 4mm;
   padding-top: 3mm;
   border-top: 0.35pt solid var(--line-soft);
