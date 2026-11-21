@@ -581,6 +581,17 @@ h5 {
   font-weight: 700;
 }
 
+/* Reading prints the English stem as on the paper, in body weight so the
+   bold 定位词 inside it stands out, and the Chinese translation on its own
+   line in muted ink. */
+.question-stem--en {
+  font-weight: 400;
+}
+
+.question-stem-zh {
+  color: var(--muted);
+}
+
 .question-lead > .question-stem + p,
 .question-lead > .question-stem + .listening-options {
   margin-top: 0.4mm;

@@ -228,6 +228,21 @@ function renderDataLocate(locate, entry, question, group, evidence) {
     ? `<span class="locate-where">答案不在定位句，在${escapeHtml(where)}</span>` : ''}</p>`
 }
 
+// The English stem as printed on the paper, with the 定位词 in bold when the
+// question is located from the stem, then the Chinese translation in muted
+// ink: the reader sees the stem words that the 定位 line and the passage
+// quote pick up again.
+function renderReadingStem(question, entry, locate) {
+  const english = nonEmptyString(question?.stem).trim()
+  const chinese = nonEmptyString(entry?.stemTranslationZh)
+  if (!english) return chinese ? `<p class="question-stem">${escapeHtml(chinese)}</p>` : ''
+  const cueAt = locate?.by === 'stem' ? english.indexOf(locate.sourceText) : -1
+  const stemHtml = cueAt < 0 ? escapeHtml(english)
+    : `${escapeHtml(english.slice(0, cueAt))}<b class="locate-cue">${escapeHtml(locate.sourceText)}</b>${escapeHtml(english.slice(cueAt + locate.sourceText.length))}`
+  return `<p class="question-stem question-stem--en" lang="en">${stemHtml}</p>${chinese
+    ? `<p class="question-stem-zh">${escapeHtml(chinese)}</p>` : ''}`
+}
+
 function renderLocate(entry, question, group, evidence) {
   if (entry?.similarityProfile?.family === 'main-idea' && entry?.similarityProfile?.subtype !== 'paragraph-main-idea') return ''
   const paragraphIds = [...new Set(array(evidence).map(item => item?.paragraphId).filter(Boolean))]
@@ -310,7 +325,7 @@ export function renderReadingGroup({ group, title, paperAsset, analysis, answers
       ...option, optionTranslationZh: withoutClosingPunctuation(option.optionTranslationZh),
     }))
     const [first, ...details] = [
-      entry.stemTranslationZh ? `<p class="question-stem">${escapeHtml(entry.stemTranslationZh)}</p>` : '',
+      renderReadingStem(question, entry, locate),
       locate ? renderDataLocate(locate, entry, question, group, correct?.evidence) : renderLocate(entry, question, group, correct?.evidence),
       locate?.by === 'stem' ? renderLocateQuote(locate, group, correct, underlineTexts) : renderEvidenceQuote(quotes, underlineTexts),
       renderParaphrase(entry, answer),
