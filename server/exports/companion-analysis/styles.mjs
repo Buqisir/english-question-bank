@@ -627,6 +627,22 @@ h5 {
   font-weight: 700;
 }
 
+/* The 定位 line: 「原词」 and the paragraph are muted; 「答案不在定位句，在前
+   两句」 stays in body ink, since it is what sends the reader on from the
+   定位句. */
+.evidence-locate .locate-note {
+  margin-left: 0.6em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* Its own line, lined up with the words after 「定位」 (two characters plus
+   the label's 0.5em gap). */
+.evidence-locate .locate-where {
+  display: block;
+  padding-left: 2.5em;
+}
+
 .evidence-quote .evidence-bridge {
   display: block;
   color: var(--muted);

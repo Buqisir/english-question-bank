@@ -186,13 +186,46 @@ function renderLocateQuote(locate, group, correct, underlineTexts) {
     ? `<p class="evidence-bridge">→ ${escapeHtml(locate.bridge)}</p>` : ''}</div>`
 }
 
+const SENTENCE_STEPS = ['', '一', '两']
+
+// Where the answer is when the 定位句 does not hold it, worked out from
+// positions: 「前一句」「后两句」「同段前文」「下一段」「第 4 段」.
+function answerWhere(locate, group) {
+  if (locate.same) return ''
+  const place = passagePlace(group, locate.paragraphId)
+  const answerPlace = passagePlace(group, locate.answer.paragraphId)
+  if (locate.answer.paragraphId !== locate.paragraphId && answerPlace !== place) {
+    const number = value => Number(/^第 (\d+) 段$/u.exec(value)?.[1])
+    const step = number(answerPlace) - number(place)
+    return step === 1 ? '下一段' : step === -1 ? '上一段' : answerPlace || '别段'
+  }
+  if (locate.answer.paragraphId !== locate.paragraphId) {
+    const order = array(group?.passage?.paragraphs).map(paragraph => paragraph.paragraphId)
+    return order.indexOf(locate.answer.paragraphId) > order.indexOf(locate.paragraphId) ? '同段后文' : '同段前文'
+  }
+  const indices = passageSentences(paragraphTexts(group).get(locate.paragraphId))
+    .map((sentence, index) => ({ ...sentence, index }))
+    .filter(sentence => sentence.end > locate.answer.start && sentence.start < locate.answer.end)
+    .map(sentence => sentence.index)
+  const before = indices[0] < locate.sentence.index
+  const step = before ? locate.sentence.index - indices[0] : indices.at(-1) - locate.sentence.index
+  return step <= 2 ? `${before ? '前' : '后'}${SENTENCE_STEPS[step]}句` : `同段${before ? '前' : '后'}文`
+}
+
 function renderDataLocate(locate, entry, question, group, evidence) {
   if (locate.by === 'options') return '<p class="evidence-locate"><span class="inline-label">定位</span>按选项回原文</p>'
   if (locate.by === 'passage') {
     return entry?.similarityProfile?.subtype === 'paragraph-main-idea' ? renderLocate(entry, question, group, evidence) : ''
   }
   const place = passagePlace(group, locate.paragraphId)
-  return `<p class="evidence-locate"><span class="inline-label">定位</span><b lang="en">${escapeHtml(locate.sourceText)}</b>${place ? ` → ${escapeHtml(place)}` : ''}</p>`
+  // Same words in the passage: write them once. Other words: stem → passage.
+  const sameWords = locate.cue.text.toLowerCase() === locate.sourceText.toLowerCase()
+  const note = value => `<span class="locate-note">${escapeHtml(value)}</span>`
+  const words = `<b lang="en">${escapeHtml(locate.sourceText)}</b>${sameWords
+    ? note('原词') : ` → <b lang="en">${escapeHtml(locate.cue.text)}</b>`}${place ? note(place) : ''}`
+  const where = answerWhere(locate, group)
+  return `<p class="evidence-locate"><span class="inline-label">定位</span>${words}${where
+    ? `<span class="locate-where">答案不在定位句，在${escapeHtml(where)}</span>` : ''}</p>`
 }
 
 function renderLocate(entry, question, group, evidence) {
@@ -295,7 +328,7 @@ export function renderReadingGroup({ group, title, paperAsset, analysis, answers
   return `<section class="analysis-group analysis-group--reading">
     ${renderHeadingLead(openingHeadings + renderGroupHeading(displayTitle, answers), renderOverview(groupAnalysis.overview))}
     ${openingHeadings && array(group.questionIds).some(questionId => hasReadingLocate(analysis?.questions?.[questionId]))
-    ? '<p class="locate-legend"><b class="locate-cue">粗体</b>是题干定位词，<span class="source-underline">淡绿底</span>是答案所在</p>' : ''}
+    ? '<p class="locate-legend"><b class="locate-cue">粗体</b>是定位词，<span class="source-underline">淡绿底</span>是答案所在</p>' : ''}
     ${renderReadingDiscourse(groupAnalysis.discourseStructure, group, groupAnalysis.overview)}
     ${renderFullTranslation(groupAnalysis, paperAsset)}
     ${questions}

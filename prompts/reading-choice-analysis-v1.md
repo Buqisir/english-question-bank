@@ -658,10 +658,14 @@ Fields of that item:
 - `targetText` — 定位句: ONE complete passage sentence, copied exactly,
   containing the locating words or their counterpart.
 - `targetParagraphId` — the paragraph of `targetText`.
-- `targetCue` — the exact words inside `targetText` that match `sourceText`.
-  REQUIRED when the passage words differ from the stem words (stem
-  “started”, passage “opened”); omit it when `sourceText` appears in
-  `targetText` as is (case does not matter).
+- `targetCue` — the exact words inside `targetText` that match `sourceText`,
+  1-5 English words: the counterpart a reader circles, not a clause (stem
+  “Ho's job”, passage “hospital teacher”, not “what it means to be a
+  hospital teacher”). REQUIRED when the passage words differ from the stem
+  words (stem “started”, passage “opened”); omit it when `sourceText`
+  appears in `targetText` as is (case does not matter). The PDF prints
+  `sourceText → targetCue`, or `sourceText 原词` when there is no
+  `targetCue`, so both must read well side by side.
 - `answerText` — the exact passage words where the answer is. It MUST be a
   substring of one `quote` in the correct option's `evidence`. Keep it to
   the deciding words, not the whole evidence.
@@ -670,6 +674,8 @@ Fields of that item:
   word counts as one), saying WHY the answer is in the context. Name the
   link: a pronoun (指代), a contrast (转折), a cause (因果), a list that
   continues, the next sentence giving the reason. Do not repeat the answer.
+  Do not say WHERE (前一句, 后一句, 下一段): the PDF works that out from
+  the positions and prints it on the 定位 line.
   When `answerText` is inside `targetText`, omit `bridgeZh`.
 - `note` — as for every item: a short Chinese line; for this item say which
   stem words lead to which passage words.
@@ -714,7 +720,7 @@ Example, the passage uses other words:
   "relationType": "locationCue",
   "targetCue": "opened",
   "answerText": "the shop was full every morning",
-  "bridgeZh": "But 转折，答案在后一句",
+  "bridgeZh": "But 转折，实际情况和预期相反",
   "note": "题干 started 对应原文 opened。"
 }
 ```

@@ -36,7 +36,7 @@ const evidence = {
 const locate = {
   q1: { locateBy: 'stem', locate: { sourceText: 'Magna Carta', targetText: 'One of the four original copies of the Magna Carta is displayed there.', targetParagraphId: 'p1', answerText: 'The Hereford Cathedral', bridgeZh: 'there 指前两句的 Hereford Cathedral', note: '题干 Magna Carta 原词出现在第 1 段。' } },
   q2: { locateBy: 'stem', locate: { sourceText: 'market town', targetText: 'Hereford has remained a lively market town since 1189.', targetParagraphId: 'p1', answerText: 'since 1189', note: '题干 market town 原词出现在第 1 段。' } },
-  q3: { locateBy: 'stem', locate: { sourceText: 'started', targetText: 'When Mia opened her bakery, she expected few customers.', targetParagraphId: 'p2', targetCue: 'opened', answerText: 'the shop was full every morning', bridgeZh: 'But 转折，答案在后一句', note: '题干 started 对应原文 opened。' } },
+  q3: { locateBy: 'stem', locate: { sourceText: 'started', targetText: 'When Mia opened her bakery, she expected few customers.', targetParagraphId: 'p2', targetCue: 'opened', answerText: 'the shop was full every morning', bridgeZh: 'But 转折，实际情况和预期相反', note: '题干 started 对应原文 opened。' } },
   q4: { locateBy: 'options' },
 }
 
@@ -101,6 +101,7 @@ ok('same sentence vs context is computed from positions', () => {
   assert.equal(resolve('q1').same, false)
   assert.equal(P1.slice(resolve('q1').cue.start, resolve('q1').cue.end), 'Magna Carta')
   assert.equal(P2.slice(resolve('q3').cue.start, resolve('q3').cue.end), 'opened')
+  assert.equal(resolve('q3').cue.text, 'opened')
 })
 
 ok('the cue is matched as a whole word ("it" is not found inside "lit")', () => {
@@ -122,6 +123,7 @@ const rejects = [
   ['a bridge when the answer is in the 定位句', 'q2', (entry, item) => { item.bridgeZh = '答案就在这句' }, /不写 bridgeZh/u],
   ['no bridge when the answer is in the context', 'q1', (entry, item) => { delete item.bridgeZh }, /必须用 bridgeZh/u],
   ['different wording without targetCue', 'q3', (entry, item) => { delete item.targetCue }, /必须写 targetCue/u],
+  ['a targetCue longer than 5 words', 'q3', (entry, item) => { item.targetCue = 'When Mia opened her bakery, she' }, /targetCue 必须是 1–5 个英文词/u],
   ['an answerText outside the correct evidence', 'q2', (entry, item) => { item.answerText = 'the most impressive building' }, /落在正确项已有的原文依据/u],
   ['a stem locating item on an options question', 'q4', entry => { entry.locationParaphrases.unshift({ ...located().questions.q2.locationParaphrases[0] }) }, /locateBy=options 时不写/u],
   ['two stem locating items', 'q2', entry => { entry.locationParaphrases.push({ ...entry.locationParaphrases[0] }) }, /恰好有一项/u],

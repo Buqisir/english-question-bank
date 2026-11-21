@@ -42,7 +42,7 @@
     "targetText": "The last time I used a phone box for its intended purpose was …2006.",
     "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
     "answerText": "Suddenly I was locked outside. My mobile phone was inside",
-    "bridgeZh": "下一段讲述当年使用电话亭的经过",
+    "bridgeZh": "讲述当年使用电话亭的经过",
     "note": "题干 2006 原词出现在第 1 段。"
    }
   },
@@ -63,7 +63,7 @@
     "targetText": "For a few months after the “library” opened, I didn’t bother taking a look, as I had assumed that it would be stuffed full of cheesy love stories.",
     "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
     "answerText": "these books were free",
-    "bridgeZh": "Then 引出态度转变，原因在后两句",
+    "bridgeZh": "Then 引出态度转变，原因随后给出",
     "note": "题干 library 对应第 4 段首句的 “library”。"
    }
   },
@@ -73,9 +73,8 @@
     "sourceText": "project",
     "targetText": "As a result, since 1996 a group of insurance companies have spent about $2 million per year on the Alberta Hail Suppression Project.",
     "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
-    "targetCue": "Project",
     "answerText": "before they can grow into dangerous hailstones",
-    "bridgeZh": "下一句说明项目的具体做法和目的",
+    "bridgeZh": "说明项目的具体做法和目的",
     "note": "题干 project 对应第 1 段 Alberta Hail Suppression Project。"
    }
   },
@@ -97,7 +96,7 @@
     "targetText": "“In 1999, I personally saw significant tornadoes(龙卷风) form from a seeded storm cell in Kansas,” Dr. Doswell says.",
     "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:4",
     "answerText": "One doubter about the safety of cloud seeding",
-    "bridgeZh": "前一句交代他举此例时的立场",
+    "bridgeZh": "交代他举此例时的立场",
     "note": "题干 1999 和 tornadoes 原词出现在第 4 段。"
    }
   },

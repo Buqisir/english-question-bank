@@ -100,6 +100,8 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence 
   let cue
   if (targetCue) {
     if (!targetText.includes(targetCue)) return fail('targetCue 必须是定位句里的原词。')
+    const cueWords = targetCue.match(LATIN_WORD)?.length ?? 0
+    if (cueWords < 1 || cueWords > CUE_MAX_WORDS) return fail(`targetCue 必须是 1–${CUE_MAX_WORDS} 个英文词。`)
     cue = findWord(sentenceText, targetCue) ?? { index: sentenceText.indexOf(targetCue), text: targetCue }
   } else {
     cue = findWord(sentenceText, sourceText, { ignoreCase: true })
@@ -136,7 +138,7 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence 
       sourceText,
       paragraphId,
       sentence: { index: sentenceIndex, start: sentence.start, end: sentence.end },
-      cue: { start: cueOffset, end: cueOffset + cueText.length },
+      cue: { start: cueOffset, end: cueOffset + cueText.length, text: cueText },
       answer,
       same,
       bridge,
