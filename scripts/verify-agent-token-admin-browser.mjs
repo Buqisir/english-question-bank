@@ -17,13 +17,17 @@ try {
   const { port } = vite.httpServer.address()
   browser = await chromium.launch({ channel: 'chromium' })
   const page = await browser.newPage()
+  const reports = Array.from({ length: 51 }, (_, index) => ({
+    id: `report-${index + 1}`, kind: '复核', note: `上报第 ${index + 1} 条`, status: 'pending',
+    createdAt: '2026-01-02T00:00:00.000Z', tokenName: '测试口令', paperId: 'paper-fixture', questionId: 'q1',
+  }))
   for (const returnedScope of [undefined, ['read'], ['drafts:write', 'report:append']]) {
     const requested = ['report:append', 'drafts:write']
     const revoked = []
     let issuedScope
     await page.route('**/api/**', async route => {
       const request = route.request()
-      const { pathname } = new URL(request.url())
+      const { pathname, searchParams } = new URL(request.url())
       if (pathname === '/api/auth/me') return route.fulfill({ json: {
         authRequired: true, user: { id: 'owner', username: 'Owner', role: 'owner' },
       } })
@@ -39,7 +43,10 @@ try {
         return route.fulfill({ json: { revoked: true } })
       }
       if (pathname === '/api/admin/agent-tokens') return route.fulfill({ json: { tokens: [] } })
-      if (pathname === '/api/admin/agent-reports') return route.fulfill({ json: { reports: [] } })
+      if (pathname === '/api/admin/agent-reports') {
+        const offset = Number(searchParams.get('offset') ?? 0)
+        return route.fulfill({ json: { reports: reports.slice(offset, offset + 50), nextOffset: offset === 0 ? 50 : null } })
+      }
       return route.fulfill({ status: 404, json: {} })
     })
     await page.goto(`http://127.0.0.1:${port}/?view=admin`)
@@ -55,6 +62,15 @@ try {
     if (returnedScope?.length === requested.length) {
       assert.equal(await secret.textContent(), 'fixture-secret')
       assert.equal(revoked.length, 0)
+      const list = page.getByRole('region', { name: 'Agent 上报' })
+      const loadMore = list.getByRole('button', { name: '加载更多' })
+      await list.getByText('上报第 50 条', { exact: true }).waitFor()
+      assert.equal(await list.getByRole('listitem').count(), 50)
+      await loadMore.click({ timeout: 5000 })
+      await list.getByText('上报第 51 条', { exact: true }).waitFor()
+      assert.equal(await list.getByRole('listitem').count(), 51)
+      assert.equal(await list.getByRole('listitem').last().locator('p').textContent(), '上报第 51 条')
+      assert.equal(await loadMore.count(), 0)
     } else {
       assert.equal(await secret.count(), 0, 'Forbidden: shown secret from an incompatible server')
       assert.equal(revoked.length, 1)
@@ -63,6 +79,7 @@ try {
     await page.unroute('**/api/**')
   }
   console.log('PASS agent token UI revokes missing or mismatched scopes and accepts equivalent scopes')
+  console.log('PASS admin reports append the 51st entry and hide Load more on the last page')
 } finally {
   await browser?.close()
   await vite.close()

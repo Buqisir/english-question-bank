@@ -185,27 +185,41 @@ type AgentReport = {
 
 export function AgentReports() {
   const [reports, setReports] = useState<AgentReport[]>([])
+  const [nextOffset, setNextOffset] = useState<number | null>(null)
   const [loading, setLoading] = useState(true)
   const [failed, setFailed] = useState(false)
-  const [attempt, setAttempt] = useState(0)
+  const [pageRequest, setPageRequest] = useState({ offset: 0 })
   useEffect(() => {
     const controller = new AbortController()
-    fetch('/api/admin/agent-reports', { signal: controller.signal }).then(async response => {
+    const { offset } = pageRequest
+    const query = offset === 0 ? '' : `?offset=${offset}`
+    fetch(`/api/admin/agent-reports${query}`, { signal: controller.signal }).then(async response => {
       if (!response.ok) throw await errorFromResponse(response, '上报列表读取失败。')
-      const data = await response.json()
-      if (!controller.signal.aborted) { setReports(data.reports); setLoading(false) }
+      const data: { reports: AgentReport[]; nextOffset: number | null } = await response.json()
+      if (controller.signal.aborted) return
+      setReports(current => {
+        if (offset === 0) return data.reports
+        const seen = new Set(current.map(report => report.id))
+        return [...current, ...data.reports.filter(report => !seen.has(report.id))]
+      })
+      setNextOffset(data.nextOffset ?? null)
+      setLoading(false)
     }).catch(() => {
       if (!controller.signal.aborted) { setFailed(true); setLoading(false) }
     })
     return () => controller.abort()
-  }, [attempt])
+  }, [pageRequest])
+
+  function loadPage(offset: number) {
+    setFailed(false)
+    setLoading(true)
+    setPageRequest({ offset })
+  }
 
   return <section className="agent-reports" aria-labelledby="agent-reports-heading">
     <h2 id="agent-reports-heading">Agent 上报</h2>
-    {loading ? <Notice kind="waiting">正在读取上报</Notice> :
-      failed ? <Notice kind="error" action={{ label: '重试', onClick: () => {
-        setFailed(false); setLoading(true); setAttempt(n => n + 1)
-      } }}>上报列表没有加载出来。</Notice> :
+    {loading && reports.length === 0 ? <Notice kind="waiting">正在读取上报</Notice> :
+      failed && reports.length === 0 ? <Notice kind="error" action={{ label: '重试', onClick: () => loadPage(0) }}>上报列表没有加载出来。</Notice> :
       reports.length === 0 ? <p>还没有上报记录。</p> :
       <ul>{reports.map(item => <li key={item.id}>
         <div>
@@ -215,5 +229,7 @@ export function AgentReports() {
           <small>卷 {item.paperId} · {item.questionId ? `题 ${item.questionId}` : `题组 ${item.groupId}`}</small>
         </div>
       </li>)}</ul>}
+    {failed && reports.length > 0 && <Notice kind="error">更多上报没有加载出来。</Notice>}
+    {nextOffset !== null && <Button tone="strong" size="sm" busy={loading} onClick={() => loadPage(nextOffset)}>加载更多</Button>}
   </section>
 }
