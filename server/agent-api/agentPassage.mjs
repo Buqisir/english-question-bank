@@ -27,7 +27,7 @@ function contradictsOrder(previous, current) {
     && b.y + b.height < a.y
 }
 
-function mediaReference(paperId, mediaId) {
+export function mediaReference(paperId, mediaId) {
   return { mediaId, mediaUrl: `/api/agent/v1/media/${encodeURIComponent(paperId)}/${encodeURIComponent(mediaId)}` }
 }
 

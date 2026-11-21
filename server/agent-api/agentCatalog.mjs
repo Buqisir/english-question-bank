@@ -2,7 +2,7 @@ import path from 'node:path'
 import { readFileSync, statSync } from 'node:fs'
 import { listCanonicalPaperCatalog } from '../search/canonicalPaperCatalog.mjs'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
-import { publishedAgentSource } from './agentSources.mjs'
+import { projectAgentOption, publishedAgentSource } from './agentSources.mjs'
 import { projectAgentPassage } from './agentPassage.mjs'
 
 const reviewPaperCaches = new WeakMap()
@@ -108,16 +108,22 @@ export function agentPaperDetail(paper) {
 
 export function agentGroup(paper, groupId, source) {
   const group = paper.asset.content.groups[groupId]
+  const sourceGroup = source?.materialization?.groups?.find(item => item.groupId === groupId)
+  const mediaById = source && new Map(source.media?.map(item => [item.mediaId, item]))
   const section = paper.asset.layoutTree?.parts?.flatMap(part => part.sections?.flatMap(section =>
     section.groups?.some(item => item.groupId === groupId) ? [section.title || part.title] : []) || [])
     .find(Boolean) || group.section || group.groupType
   const questions = (group.questionIds || []).map(questionId => {
     const question = paper.asset.content.questions[questionId]
     const answer = paper.asset.answerKey?.answers?.[questionId]
+    const usesOwnOptions = Boolean(question.options?.length)
+    const sourceOptions = usesOwnOptions
+      ? sourceGroup?.questions?.find(item => item.questionId === questionId)?.options
+      : sourceGroup?.optionBank
     return {
       questionId, number: question.questionNo, stem: question.stem ?? question.blankId ?? '',
-      options: (question.options?.length ? question.options : group.optionBank || [])
-        .map(option => ({ label: option.label, content: option.text ?? option.content ?? '' })),
+      options: (usesOwnOptions ? question.options : group.optionBank || []).map(option =>
+        projectAgentOption(paper.paperId, option, sourceOptions?.find(item => item.label === option.label), mediaById)),
       answer: answer?.answer ?? null,
     }
   })
@@ -126,7 +132,6 @@ export function agentGroup(paper, groupId, source) {
   const { questionIds, ...content } = group
   const writingTask = paper.asset.content.writingTasks?.[group.writingTaskId]
   if (source && (content.passage || group.groupType === 'reading')) {
-    const sourceGroup = source.materialization?.groups?.find(item => item.groupId === groupId)
     content.passage = projectAgentPassage(paper.paperId, content.passage, sourceGroup, source.media, source.materialization?.paragraphJoins)
   }
   return { ...content, groupId, section, ...(writingTask ? { writingTask } : {}), questions }

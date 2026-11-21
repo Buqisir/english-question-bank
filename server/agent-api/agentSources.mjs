@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync } from 'node:fs'
 import path from 'node:path'
 import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
-import { sourceBlocks } from './agentPassage.mjs'
+import { inlineText, mediaReference, sourceBlocks } from './agentPassage.mjs'
 
 const OCR_EVIDENCE = 'nck1-ocr-source-evidence-v1'
 const IMAGE_MIME_TYPES = new Set(['image/png', 'image/jpeg', 'image/webp', 'image/svg+xml'])
@@ -77,7 +77,37 @@ export function publishedAgentSource(versionDir, publicationDigest) {
   }
 }
 
-function referencesMedia(materialization, mediaId) {
+function optionMediaIds(option) {
+  const ids = Array.isArray(option?.content)
+    ? option.content.filter(inline => inline.kind === 'media_ref').map(inline => inline.mediaId)
+    : []
+  if (option?.figure) ids.push(option.figure.mediaId)
+  return ids.filter(Boolean)
+}
+
+export function projectAgentOption(paperId, option, sourceOption, mediaById) {
+  const content = option.text ?? option.content ?? ''
+  const result = { label: option.label, content }
+  if (!mediaById) return result
+  const ids = new Set([...optionMediaIds(option), ...optionMediaIds(sourceOption)])
+  const hasText = value => Array.isArray(value)
+    ? Boolean(inlineText(value).trim())
+    : typeof value === 'string' && Boolean(value.trim())
+  const hasContent = hasText(content)
+  if (!ids.size && hasContent) return result
+  const media = []
+  for (const id of ids) {
+    const item = mediaById.get(id)
+    if (!IMAGE_MIME_TYPES.has(item?.mimeType)) continue
+    media.push({ ...mediaReference(paperId, id), mimeType: item.mimeType,
+      width: item.pixelWidth ?? null, height: item.pixelHeight ?? null })
+  }
+  const kind = ids.size && (hasContent || hasText(sourceOption?.text ?? sourceOption?.content)) ? 'mixed' : 'image'
+  return { ...result, kind, media, ...(media.length ? {} : { notice: 'media_missing' }) }
+}
+
+function referencesMedia(materialization, mediaId, paper) {
+  const optionsReference = options => options?.some(option => optionMediaIds(option).includes(mediaId))
   function blockReferences(block) {
     if (block.kind === 'figure') return block.mediaId === mediaId
     return block.kind === 'table' && block.rows.some(row => row.cells.some(cell =>
@@ -86,13 +116,19 @@ function referencesMedia(materialization, mediaId) {
   return materialization?.groups?.some(group =>
     Array.from(sourceBlocks(group.blocks)).some(blockReferences)
     || group.questions?.some(question => question.stemFigures?.some(blockReferences)
-      || question.options?.some(option => option.figure?.mediaId === mediaId)))
+      || optionsReference(question.options))
+    || optionsReference(group.optionBank))
+    || paper.groupIds.some(groupId => {
+      const group = paper.asset.content.groups[groupId]
+      return optionsReference(group.optionBank) || group.questionIds?.some(questionId =>
+        optionsReference(paper.asset.content.questions[questionId]?.options))
+    })
 }
 
-export function agentMedia(source, mediaId) {
-  if (!referencesMedia(source.materialization, mediaId)) return null
+export function agentMedia(source, mediaId, paper) {
   const item = source.media?.find(item => item.mediaId === mediaId)
   if (!item || !IMAGE_MIME_TYPES.has(item.mimeType)) return null
+  if (!referencesMedia(source.materialization, mediaId, paper)) return null
   try {
     const bytes = source.readMedia?.(item)
     if (!bytes?.length || sha256(bytes) !== item.sha256) return null

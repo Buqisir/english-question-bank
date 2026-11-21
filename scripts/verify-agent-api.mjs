@@ -52,6 +52,9 @@ const mediaFor = paperId => ({ mediaId: `media:${paperId}:fixture`, mimeType: 'i
 const unreferencedMedia = { ...mediaFor('unreferenced'), usage: 'visual_proof' }
 const tableMedia = mediaFor('table-cell')
 const stemMedia = mediaFor('stem')
+const optionMedia = mediaFor('option')
+const secondOptionMedia = mediaFor('option-second')
+const pendingOptionMedia = mediaFor('pending-option')
 const passageFor = paperId => paperId === 'paper-agent-pending' ? [] : [
   { paragraphId: 'p1', text: 'A teacher prepares a lesson.' },
   { paragraphId: 'p2', text: 'She always remembers' },
@@ -71,20 +74,27 @@ function materializationFor(paperId) {
     { kind: 'paragraph', blockId: 'after-ambiguous', role: 'body', source, content: [{ kind: 'text', text: 'Three.' }] },
   ] : [figure]
   const media = mediaFor(paperId)
-  const questions = []
+  const question = { questionId: `question-${paperId}`,
+    options: [{ label: 'B', figure: { mediaId: (paragraphs.length ? optionMedia : pendingOptionMedia).mediaId } }] }
   if (paragraphs.length) {
     media.publication = { selection: 'human_confirmed_ai_candidate', candidate: redrawMeta }
     media.displayVariant = { sha256: displayMeta.sha256, byteLength: display.length, path: 'materialization/media/display.webp',
       generator: 'codex-cli', textCheck: 'verified' }
-    questions.push({ stemFigures: [{ kind: 'figure', mediaId: stemMedia.mediaId }] })
+    question.stemFigures = [{ kind: 'figure', mediaId: stemMedia.mediaId }]
   }
   return { paperId, schemaVersion: 'nck1-source-materialization-v11', documents: [{ documentId: 'answers', role: 'official_answers' }],
-    groups: [{ groupId: `group-${paperId}`, blocks, questions }], answers: [], media: [media, unreferencedMedia, tableMedia,
-      { ...stemMedia, publication: { selection: 'human_confirmed_ai_candidate', candidate: redrawMeta } }] }
+    groups: [{ groupId: `group-${paperId}`, blocks, questions: [question] }], answers: [], media: [media, unreferencedMedia, tableMedia,
+      { ...stemMedia, publication: { selection: 'human_confirmed_ai_candidate', candidate: redrawMeta } },
+      { ...optionMedia, publication: { selection: 'human_confirmed_ai_candidate', candidate: redrawMeta } },
+      secondOptionMedia, pendingOptionMedia] }
 }
 function assetFor(paperId) {
   const groupId = `group-${paperId}`
   const questionId = `question-${paperId}`
+  const optionC = { label: 'C', text: 'A trip.' }
+  if (paperId === 'paper-agent-published') optionC.content = [
+    { kind: 'media_ref', mediaId: secondOptionMedia.mediaId }, { kind: 'media_ref', mediaId: optionMedia.mediaId },
+  ]
   return {
     paper: { paperId, title: '不应替代元数据标题' },
     layoutTree: { parts: [{ title: '阅读', sections: [{ title: '阅读理解', groups: [{ groupId }] }] }] },
@@ -93,7 +103,8 @@ function assetFor(paperId) {
       groups: { [groupId]: { groupId, groupType: 'reading', title: '阅读 A',
         passage: { paragraphs: passageFor(paperId) }, questionIds: [questionId] } },
       questions: { [questionId]: { questionId, groupId, questionNo: 21, stem: 'What does the teacher prepare?',
-        options: [{ label: 'A', text: 'A lesson.' }, { label: 'B', text: 'A trip.' }] } },
+        options: [{ label: 'A', text: 'A lesson.' }, { label: 'B', text: '' }, optionC,
+        { label: 'D', text: '' }] } },
     },
     answerKey: { answers: { [questionId]: { questionNo: 21, answer: 'A' } } },
   }
@@ -208,7 +219,8 @@ function seedReview(paperId = pendingId, { state = 'awaiting_review', number = 1
     VALUES (?, ?, ?, ?, 'source', 'candidate', 'visible', 'bundle', 'fixture', 'fixture', ?, ?, ?, ?)`)
     .run(id, paperId, number, state, JSON.stringify(manifest), timestamp, timestamp, timestamp)
   const preview = { paperAsset: assetFor(paperId) }
-  if (paperId === pendingId) preview.consumption = { mediaArtifacts: [{ ...mediaFor(paperId), encodedBytes: picture.toString('base64') }] }
+  if (paperId === pendingId) preview.consumption = { mediaArtifacts: [mediaFor(paperId), pendingOptionMedia, secondOptionMedia]
+    .map(item => ({ ...item, encodedBytes: picture.toString('base64') })) }
   if (textSize) preview.paperAsset.content.groups[`group-${paperId}`].passage.paragraphs[0].text = 'Reading text. '.repeat(textSize)
   db.prepare(`INSERT INTO import_review_product_previews
     (revision_id,bundle_digest,renderer_build_id,payload_digest,payload_json) VALUES (?, 'bundle', 'fixture', ?, ?)`)
@@ -368,7 +380,38 @@ try {
   const passage = detail.groups[0].passage
   const mediaUrlFor = (paperId, mediaId) => `${api}/media/${paperId}/${encodeURIComponent(mediaId)}`
   const regressionCases = [
+    ['option media projected and served only for its paper', async () => {
+      const options = detail.groups[0].questions[0].options
+      const projected = (item, variant = item) => ({
+        mediaId: item.mediaId, mimeType: variant.mimeType, width: variant.pixelWidth, height: variant.pixelHeight,
+        mediaUrl: mediaUrlFor(publishedId, item.mediaId),
+      })
+      assert.deepEqual(options, [
+        { label: 'A', content: 'A lesson.' },
+        { label: 'B', content: '', kind: 'image', media: [projected(optionMedia, redrawMeta)] },
+        { label: 'C', content: 'A trip.', kind: 'mixed', media: [projected(secondOptionMedia), projected(optionMedia, redrawMeta)] },
+        { label: 'D', content: '', kind: 'image', media: [], notice: 'media_missing' },
+      ])
+      assert.deepEqual(group.questions[0].options, options)
+      for (const item of options[2].media) {
+        const image = await req(item.mediaUrl, { ...auth, format: 'bytes' })
+        assert.equal(image.status, 200)
+        assert.equal(image.headers.get('content-type'), item.mimeType)
+        assert.equal(image.headers.get('etag'), `"${sha256(image.data)}"`)
+        assert.equal(sha256(image.data), item.mediaId === optionMedia.mediaId ? redrawMeta.sha256 : secondOptionMedia.sha256)
+        await expectStatus(mediaUrlFor(pendingId, item.mediaId), auth, 404)
+      }
+    }],
     ['Candidate media bytes loaded on demand', async () => {
+      const option = pendingDetail.groups[0].questions[0].options[1]
+      assert.deepEqual(option, { label: 'B', content: '', kind: 'image', media: [{
+        mediaId: pendingOptionMedia.mediaId, mimeType: 'image/png', width: 1, height: 1,
+        mediaUrl: mediaUrlFor(pendingId, pendingOptionMedia.mediaId),
+      }] })
+      const image = await req(option.media[0].mediaUrl, { ...auth, format: 'bytes' })
+      assert.equal(image.status, 200)
+      assert.equal(image.headers.get('etag'), `"${sha256(image.data)}"`)
+      assert.equal(sha256(image.data), pendingOptionMedia.sha256)
       const db = new DatabaseSync(reviewPath)
       const row = db.prepare('SELECT payload_digest FROM import_review_product_previews WHERE revision_id = ?').get(pendingRevisionId)
       const update = db.prepare('UPDATE import_review_product_previews SET payload_digest = ? WHERE revision_id = ?')
@@ -406,12 +449,15 @@ try {
         [[1, 'order'], [2, 'order'], [2, 'merged']])
     }],
   ]
-  const results = await Promise.allSettled(regressionCases.map(async ([name, check]) => {
-    await check()
-    console.log(`PASS ${name}`)
-  }))
-  const failures = results.flatMap((result, index) => result.status === 'rejected'
-    ? [`${regressionCases[index][0]}: ${result.reason.message}`] : [])
+  const failures = []
+  for (const [name, check] of regressionCases) {
+    try {
+      await check()
+      console.log(`PASS ${name}`)
+    } catch (error) {
+      failures.push(`${name}: ${error.message}`)
+    }
+  }
   assert.deepEqual(failures, [])
   assert.deepEqual(passage.paragraphs, passageFor(publishedId).map((paragraph, index) => ({
     ...paragraph, naturalParagraph: [1, 2, 2][index], naturalParagraphBasis: index === 2 ? 'merged' : 'order',

@@ -150,7 +150,7 @@ export function createAgentRoutes({ getReviewStore } = {}) {
       if (!paper) return notFound(input)
       let mediaId
       try { mediaId = decodeURIComponent(input.match[2]) } catch { return notFound(input) }
-      const media = agentMedia(readAgentSource(paper), mediaId)
+      const media = agentMedia(readAgentSource(paper), mediaId, paper)
       if (!media) return notFound(input)
       const { request, response } = input
       response.setHeader('ETag', media.etag)

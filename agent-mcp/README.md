@@ -37,7 +37,7 @@ Claude Code 和 Droid 均可在 MCP 配置的 `mcpServers` 下添加：
 | `list_groups` | `/api/agent/v1/groups` | 可选 `year`、`type`、`q`（卷名及题组全文）、`section`（精确名称）、`limit`（1–200，默认 50）、`offset`（非负，默认 0） |
 | `list_sections` | `/api/agent/v1/sections` | 可选 `year`、`type`；返回 `{sections:[{section,count}]}` |
 | `get_group` | `/api/agent/v1/groups/:groupId` | `groupId` |
-| `get_media` | `/api/agent/v1/media/:paperId/:mediaId` | `paperId`、`mediaId`，返回 MCP `image` 内容 |
+| `get_media` | `/api/agent/v1/media/:paperId/:mediaId` | `paperId`、`mediaId`，返回该卷引用的图片（含选项图片），MCP 内容类型为 `image` |
 | HTTP 直连 | `/api/agent/v1/papers/:paperId/answer-source` | `paperId`，返回带页码与区域的 OCR 原文，缺失时返回 `{notice:"none"}` |
 | HTTP 直连 | `/api/agent/v1/export` | 可选 `since`（ISO 8601），每行一份试卷详情及 `etag`、`updatedAt` |
 | `report_issue` | `POST /api/agent/v1/reports` | `report:append`。`paperId`，`questionId` 或 `groupId` 二选一，`kind`（最多 80 字符）、`note`（2000）、`evidence`（4000）。ID 最多 256 字符 |
@@ -47,6 +47,8 @@ Claude Code 和 Droid 均可在 MCP 配置的 `mcpServers` 下添加：
 | HTTP 直连 | `/api/agent/v1/meta` | 部署 SHA、激活时间、API 版本。`?include=scope` 加入口令权限。本地运行时部署字段可以为 `null` |
 
 `q` 忽略大小写，按空白分词，全部词都须以子串命中；空查询不限。题组搜索不受 80 字预览限制。
+
+试卷详情、题组详情和导出中的 `questions[].options` 保留 `label` 和原有的 `content`。纯文字选项只有这两个字段。图片选项附 `kind: "image"`，图文混合选项附 `kind: "mixed"`。`media` 按引用顺序提供 `{mediaId, mimeType, width, height, mediaUrl}`，其中 `mediaUrl` 是站内需口令的取图路径。空选项找不到对应图片时返回 `kind: "image"`、`media: []` 和 `notice: "media_missing"`。
 
 查询工具以 JSON 文本返回已发布和最新待审 Candidate 的内容及答案。篇章详情保留 `paragraphs`，并提供按来源顺序排列的 `blocks`。`naturalParagraph` 只针对正文，无法确定时为 `null` 并附原因。取图工具返回图片。待审预览缺失或不可读时，内容列表跳过该卷，详情返回 404。401 表示口令无效或已撤销，404 表示对象不存在或不可读，429 表示服务端限流。请求超时为 30 秒。错误作为 MCP `isError` 返回，不输出请求头或上游错误正文，不跟随重定向。
 
