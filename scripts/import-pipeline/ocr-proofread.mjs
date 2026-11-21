@@ -574,8 +574,20 @@ function emphasisRanges(item, label) {
     let start = -1
     for (let count = 0; count < (entry.occurrence || 1); count += 1) {
       start = item.text.indexOf(entry.text, start + 1)
-      if (start === -1) fail(`${label}: emphasis text "${entry.text}" is not in the item text`)
+      if (start === -1) break
     }
+    // Explicit occurrences use the original substring numbering.
+    if (entry.occurrence == null && marks.includes('underline')) {
+      const startsWithWord = /^[\p{L}\p{M}\p{N}]/u.test(entry.text)
+      const endsWithWord = /[\p{L}\p{M}\p{N}]$/u.test(entry.text)
+      while (start !== -1 && (
+        (startsWithWord && /[\p{L}\p{M}\p{N}]['’‐‑-]?$/u.test(item.text.slice(0, start)))
+        || (endsWithWord && /^['’‐‑-]?[\p{L}\p{M}\p{N}]/u.test(item.text.slice(start + entry.text.length)))
+      )) {
+        start = item.text.indexOf(entry.text, start + 1)
+      }
+    }
+    if (start === -1) fail(`${label}: emphasis text "${entry.text}" is not in the item text at the requested occurrence or word boundary`)
     return { start, end: start + entry.text.length, marks }
   }).sort((left, right) => left.start - right.start)
   result.forEach((range, index) => {

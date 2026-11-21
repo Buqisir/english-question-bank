@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import Ajv from 'ajv/dist/2020.js'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { readTeachingAnalysisPrompt } from './analyzerProviderShell.mjs'
 
 import {
   TOPIC_LABEL_TAXONOMY,
@@ -82,7 +83,7 @@ export function buildListeningAnalysisInput(materialization, { segmentIds = null
 
 export function buildListeningAnalysisMessages({ materialization, segmentIds = null }) {
   const input = buildListeningAnalysisInput(materialization, { segmentIds })
-  const prompt = readFileSync(promptPath, 'utf8').trim()
+  const prompt = readTeachingAnalysisPrompt(promptPath)
   return [{
     role: 'system',
     content: [
@@ -122,7 +123,7 @@ export function buildListeningAnalysisAgentRequest({
     properties: { id: { type: 'string', minLength: 1 }, zh: { type: 'string', minLength: 1 } },
   }
   const outputContract = [
-    readFileSync(promptPath, 'utf8').trim(),
+    readTeachingAnalysisPrompt(promptPath),
     '',
     'Exact output JSON Schema:',
     JSON.stringify(responseSchema, null, 2),

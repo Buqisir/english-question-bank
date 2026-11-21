@@ -3,9 +3,11 @@ import './lib/reviewTestLockRoot.mjs'
 import { chmod, cp, mkdir, mkdtemp, readFile, readdir, stat, writeFile, rm } from 'node:fs/promises'
 import os from 'node:os'
 import path from 'node:path'
+import { spawnSync } from 'node:child_process'
 import { createHash } from 'node:crypto'
 import { Readable } from 'node:stream'
 import { DatabaseSync } from 'node:sqlite'
+import { fileURLToPath } from 'node:url'
 import { archiveReviewFiles, createBlobStore } from '../server/paper-import/blobStore.mjs'
 import { loadStoredProducts, matchesSealedPrintInputs, productInputDigest, readFrozenProducts, PRODUCT_FILES, PRODUCT_MANIFEST } from '../server/paper-import/frozenProducts.mjs'
 import { readExamDate } from '../shared/examDate.mjs'
@@ -15,7 +17,7 @@ import { createExportRoutes } from '../server/exports/exportRoutes.mjs'
 import { createImportReviewRoutes } from '../server/import-review/importReviewRoutes.mjs'
 import { runRoutes } from '../server/router/index.mjs'
 import { productPdfBytes as pdfBytes } from '../test-fixtures/paper-import/frozen-products-v1/fixture.mjs'
-import { buildNck1ReviewProjection, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
+import { buildNck1ReviewProjection, computeSealedReviewSubjects, reviewBundleFilePaths } from '../server/import-review/revisionProjection.mjs'
 import { createImportReviewStore, reviewBundleDigest } from '../server/import-review/importReviewStore.mjs'
 import { SOURCE_REFERENCES_FILE } from '../server/paper-import/sourceReferences.mjs'
 import { syntheticReviewReferences } from './lib/syntheticReviewAnswerFixture.mjs'
@@ -184,6 +186,23 @@ try {
     const snapshot = { ...bytes, [name]: pdf, [PRODUCT_MANIFEST]: Buffer.from(JSON.stringify(changed)) }
     assert.throws(() => readFrozenProducts(directory, { readArtifact: file => snapshot[file] }), expected)
   }
+  const analysisPath = 'products/analysis.pdf'
+  const analysisPdf = pdfBytes(17, 'naturally paginated revision analysis')
+  const analysisDigest = digest(Buffer.from('same-revision analysis sidecars'))
+  const analysisManifest = { ...manifest, analysisDigest, files: [...manifest.files,
+    { path: analysisPath, mediaType: 'application/pdf', role: 'pdf_product',
+      pageCount: 17, byteLength: analysisPdf.length, sha256: digest(analysisPdf) }] }
+  const analysisManifestBytes = Buffer.from(JSON.stringify(analysisManifest))
+  const withAnalysis = { ...bytes, [PRODUCT_MANIFEST]: analysisManifestBytes, [analysisPath]: analysisPdf }
+  const readAnalysis = file => withAnalysis[file]
+  assert.equal(readFrozenProducts(directory, { readArtifact: readAnalysis, analysisDigest,
+    config: {}, listeningCount: 2 }).manifest.files.length, 5)
+  assert.throws(() => readFrozenProducts(directory, { readArtifact: readAnalysis, analysisDigest: null }),
+    /输入或产品文件清单/)
+  assert.throws(() => readFrozenProducts(directory, { readArtifact: file => file === analysisPath ? null : readAnalysis(file) }),
+    /文件缺失或已改变/)
+  assert.equal(readFrozenProducts(directory, { readArtifact: file => bytes[file], analysisDigest }).manifest.files.length, 4)
+
   const files = {}
   for (const [name, data] of Object.entries(bytes)) files[name] = await local.put(data)
   const consumption = { paperId: manifest.paperId, sourceAssetVersion: 2, publicationDigest: digest(Buffer.from('publication-two')) }
@@ -211,6 +230,14 @@ try {
   assert.deepEqual(economy.bytes['products/economy8.pdf'], bytes['products/economy8.pdf'])
   assert.deepEqual(calls.splice(0), [files[PRODUCT_MANIFEST].sha256, files['products/economy8.pdf'].sha256])
   await assert.rejects(load('answerOnly'), /integrity/)
+  await assert.rejects(load('analysis'), /产品不存在/)
+  const manifestBlob = await local.put(analysisManifestBytes)
+  const analysisBlob = await local.put(analysisPdf)
+  const analysisReport = { ...report, pdfProducts: { ...report.pdfProducts, manifestDigest: manifestBlob.sha256 },
+    fileStorage: { ...report.fileStorage, files: { ...files,
+      [PRODUCT_MANIFEST]: manifestBlob, [analysisPath]: analysisBlob } } }
+  db.prepare('UPDATE paper_import_runs SET publish_report_json = ?').run(JSON.stringify(analysisReport))
+  assert.deepEqual((await load('analysis')).bytes[analysisPath], analysisPdf)
 
   // Reuse the source fixture without executing its full verifier. Exercise the
   // real projection/publication gates, not only a synthetic published report.
@@ -323,6 +350,59 @@ try {
   }, 'confirmed source samples cannot disappear when the reference sidecar is removed')
   await writeFile(referencesPath, JSON.stringify(references))
   await writeFile(path.join(fixture.reviewRoot, PRODUCT_MANIFEST), JSON.stringify(productManifest))
+  const refreshRoot = path.join(directory, 'analysis-refresh')
+  await cp(fixture.reviewRoot, refreshRoot, { recursive: true })
+  await writeFile(path.join(refreshRoot, analysisPath), analysisPdf)
+  await writeFile(path.join(refreshRoot, PRODUCT_MANIFEST), JSON.stringify({
+    ...productManifest, analysisDigest: projection.analysisDigest,
+    files: [...productManifest.files, analysisManifest.files.at(-1)],
+  }))
+  const readingPath = path.join(refreshRoot, 'analysis-reading-a.json')
+  const reading = JSON.parse(await readFile(readingPath, 'utf8'))
+  Object.values(reading.groups)[0].overview += ' 更新讲评。'
+  await writeFile(readingPath, JSON.stringify(reading))
+  const refresh = spawnSync(process.execPath, [
+    fileURLToPath(new URL('./import-pipeline/freeze-products.mjs', import.meta.url)), '--paper-dir', refreshRoot,
+  ], { encoding: 'utf8', timeout: 60_000 })
+  assert.equal(refresh.status, 0, refresh.stderr || String(refresh.error))
+  const refreshed = buildNck1ReviewProjection(refreshRoot, { requireAnalyses: true })
+  assert.notEqual(refreshed.analysisDigest, projection.analysisDigest)
+  assert.equal(refreshed.frozenProducts.manifest.analysisDigest, refreshed.analysisDigest)
+  assert.deepEqual(refreshed.frozenProducts.manifest.files.slice(0, 4), productManifest.files)
+  for (const file of productManifest.files) assert.deepEqual(refreshed.frozenProducts.bytes[file.path], fixtureBytes[file.path])
+  assert.notDeepEqual(refreshed.frozenProducts.bytes[analysisPath], analysisPdf)
+
+  const { store: refreshStore, revision: refreshRevision, dbPath: refreshDbPath } = finalizeReviewFixture({
+    directory: refreshRoot, output: path.join(directory, 'sealed-analysis-refresh'), projection: refreshed, approve: false,
+  })
+  const refreshDb = new DatabaseSync(refreshDbPath, { readOnly: true })
+  const preview = refreshDb.prepare('SELECT * FROM import_review_product_previews WHERE revision_id = ?').get(refreshRevision.id)
+  refreshDb.close()
+  const subjects = computeSealedReviewSubjects({
+    directory: refreshStore.revisionDirectory(refreshRevision.id), revision: refreshRevision, preview,
+    storedFiles: refreshRevision.manifest.files,
+  })
+  assert.equal(subjects.target?.ok, true, JSON.stringify(subjects.target ?? subjects.baseline))
+  assert.equal(subjects.target.subjectDigest, subjects.baseline.subjectDigest)
+  const analysisPreviewRoutes = createImportReviewRoutes({ getStore: () => refreshStore })
+  for (const [suffix, role, status] of [
+    ['products', 'owner', 200], ['pdf?edition=analysis', 'owner', 200],
+    ['products', 'member', 403], ['pdf?edition=analysis', 'member', 403],
+  ]) {
+    const output = {}
+    const response = { writeHead(status, headers) { Object.assign(output, { status, headers }) },
+      end(body) { output.body = body } }
+    const url = new URL(`http://fixture/api/import-review-preview/revisions/${refreshRevision.id}/${suffix}`)
+    await runRoutes(analysisPreviewRoutes, { request: { method: 'GET' }, response, url,
+      context: { session: { role }, sendJson(_response, status, body) { Object.assign(output, { status, body }) } } })
+    assert.equal(output.status, status)
+    if (status === 200 && suffix === 'products') assert.equal(output.body.analysisAvailable, true)
+    if (status === 200 && suffix !== 'products') {
+      assert.deepEqual(output.body, refreshed.frozenProducts.bytes[analysisPath])
+      assert.equal(output.headers['x-eqb-pagination-edition'], 'analysis')
+    }
+  }
+
   const reviewFiles = reviewBundleFilePaths(fixture.reviewRoot).map(file => {
     const data = projection.frozenProducts.bytes[file.path]
     return { ...file, ...(data ? { sha256: digest(data), byteLength: data.length } : {}) }
@@ -416,12 +496,12 @@ try {
     async getPublishedPaperProductInventory(paperId, publicationDigest) {
       assert.equal(paperId, manifest.paperId)
       if (publicationDigest !== consumption.publicationDigest) throw new Error('publication mismatch')
-      return { paperId, publicationDigest, editions: Object.keys(PAPER_PDF_PRODUCTS) }
+      return { paperId, publicationDigest, editions: Object.keys(PAPER_PDF_PRODUCTS), analysisAvailable: true }
     },
     async getPublishedPaperProduct(paperId, edition, publicationDigest) {
       assert.equal(paperId, manifest.paperId)
       assert.equal(publicationDigest, consumption.publicationDigest)
-      return { draftPaper: { title: '源卷名' }, pdfBytes: bytes[`products/${edition}.pdf`],
+      return { draftPaper: { title: '源卷名' }, pdfBytes: withAnalysis[`products/${edition}.pdf`],
         paginatedHtml: '<!doctype html><title>源卷名</title>' }
     },
   } }
@@ -435,10 +515,10 @@ try {
     assert.equal(output['cache-control'], 'private, no-store')
     assert.equal(output.status, publicationDigest === consumption.publicationDigest ? 200 : 409)
     if (output.status === 200) assert.deepEqual(output.body, {
-      paperId: manifest.paperId, publicationDigest, editions: Object.keys(PAPER_PDF_PRODUCTS),
+      paperId: manifest.paperId, publicationDigest, editions: Object.keys(PAPER_PDF_PRODUCTS), analysisAvailable: true,
     })
   }
-  for (const edition of ['largeComplete', 'largeNoListening', 'economy8', 'answerOnly']) {
+  for (const edition of [...Object.keys(PAPER_PDF_PRODUCTS), 'analysis']) {
     for (const product of ['pdf', 'print']) {
       const url = new URL(`http://localhost/api/exports/papers/${manifest.paperId}/${product}`)
       url.searchParams.set('edition', edition)
@@ -459,7 +539,7 @@ try {
       assert.equal(outputs.GET.headers['content-length'], Buffer.byteLength(outputs.GET.body))
       if (product === 'pdf') {
         assert.equal(outputs.GET.headers['content-type'], 'application/pdf')
-        assert.deepEqual(outputs.GET.body, bytes[`products/${edition}.pdf`])
+        assert.deepEqual(outputs.GET.body, withAnalysis[`products/${edition}.pdf`])
       } else {
         assert.equal(outputs.GET.headers['content-type'], 'text/html; charset=utf-8')
         assert.equal(outputs.GET.body, '<!doctype html><title>源卷名</title>')

@@ -138,6 +138,29 @@ test('joins source bold spans and Chinese glosses without losing their occurrenc
   assert.equal(result.items[2].text, 'W: Hello.')
 })
 
+test('defaults to a whole-word underline and preserves explicit substring occurrences', () => {
+  const { items, lines } = fixture(['Text 1', 'M: Its owner keeps its door shut and it stays closed', 'during the day.'])
+  items[1].emphasis = [
+    { text: 'it', marks: ['underline'], occurrence: 1 },
+    { text: 'it', marks: ['underline'] },
+  ]
+  const result = joinTranscriptTurns(items, lines, {}, 'fixture')
+  assert.deepEqual(result.items[1].emphasis.map(entry => entry.occurrence), [1, 2])
+})
+
+test('skips partial words in default underlines', () => {
+  const { items, lines } = fixture(['Text 1', "M: it's well-known at the café, but it is known", 'by another name.'])
+  items[1].emphasis = [
+    { text: 'it', marks: ['underline'] },
+    { text: 'known', marks: ['underline'] },
+  ]
+  const result = joinTranscriptTurns(items, lines, {}, 'fixture')
+  assert.deepEqual(result.items[1].emphasis.map(entry => entry.occurrence), [2, 2])
+
+  items[1].emphasis = [{ text: 'caf', marks: ['underline'] }]
+  assert.throws(() => joinTranscriptTurns(items, lines, {}, 'fixture'), /caf.*word boundary/)
+})
+
 test('keeps speakers, Text headings and genuine paragraph indents separate', () => {
   const { items, lines } = fixture([
     'Text 1', 'M: These are some words', 'W: These are other words',

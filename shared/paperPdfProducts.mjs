@@ -6,6 +6,8 @@ export const PAPER_PDF_PRODUCTS = Object.freeze({
 })
 export const PAPER_PDF_EDITIONS = Object.freeze(Object.keys(PAPER_PDF_PRODUCTS))
 
+export const FROZEN_PAPER_PDF_PRODUCTS = Object.freeze({ ...PAPER_PDF_PRODUCTS, analysis: '解析 PDF' })
+
 export function requirePaperPdfEdition(edition) {
   if (!PAPER_PDF_EDITIONS.includes(edition)) throw Object.assign(new Error('edition 必须是四款 PDF 产品之一'), { status: 400 })
   return edition

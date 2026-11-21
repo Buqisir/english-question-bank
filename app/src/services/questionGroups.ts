@@ -11,7 +11,7 @@ import type {
 } from '../domain/questionBank'
 
 import { apiPath, decodeHeaderValue, errorMessageFromResponse as readErrorMessage } from './httpClient.ts'
-import { PAPER_PDF_PRODUCTS, type PaperPdfEdition } from '../../../shared/paperPdfProducts.mjs'
+import { FROZEN_PAPER_PDF_PRODUCTS, type FrozenPaperPdfEdition } from '../../../shared/paperPdfProducts.mjs'
 
 type QuestionGroupsResponse = {
   questionGroups: QuestionGroupCard[]
@@ -411,11 +411,11 @@ export async function askQuestionBankSteward(message: string, apiKey: string, th
   return (await response.json()) as QuestionBankStewardResult
 }
 
-export function paperProductPdfUrl(paperId: string, edition: PaperPdfEdition, publicationDigest: string) {
+export function paperProductPdfUrl(paperId: string, edition: FrozenPaperPdfEdition, publicationDigest: string) {
   return apiPath(`/api/exports/papers/${encodeURIComponent(paperId)}/pdf?edition=${edition}&publicationDigest=${encodeURIComponent(publicationDigest)}`)
 }
 
-export async function exportPaperProductPdf(paperId: string, edition: PaperPdfEdition, publicationDigest: string): Promise<PrintExportResult> {
+export async function exportPaperProductPdf(paperId: string, edition: FrozenPaperPdfEdition, publicationDigest: string): Promise<PrintExportResult> {
   let response: Response
   try {
     response = await fetch(paperProductPdfUrl(paperId, edition, publicationDigest))
@@ -423,11 +423,11 @@ export async function exportPaperProductPdf(paperId: string, edition: PaperPdfEd
     throw new Error('题库 API 服务无法连接：请确认后端进程已启动')
   }
   if (!response.ok) {
-    throw new Error(await readErrorMessage(response, `${PAPER_PDF_PRODUCTS[edition]}生成失败：${response.status}`))
+    throw new Error(await readErrorMessage(response, `${FROZEN_PAPER_PDF_PRODUCTS[edition]}生成失败：${response.status}`))
   }
   return {
     blob: await response.blob(),
-    fileName: decodeHeaderValue(response.headers.get('x-file-name')) || `英语试题-${PAPER_PDF_PRODUCTS[edition]}.pdf`,
+    fileName: decodeHeaderValue(response.headers.get('x-file-name')) || `英语试题-${FROZEN_PAPER_PDF_PRODUCTS[edition]}.pdf`,
   }
 }
 

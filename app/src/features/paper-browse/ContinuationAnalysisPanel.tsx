@@ -199,7 +199,6 @@ export function ContinuationAnalysisPanel({
   const development = display.developmentPlan as ContinuationDevelopmentPlan
   const legacy = display.legacyDetails
   const alternatives = development.alternatives ?? []
-  const qualityRisks = development.qualityRisks ?? []
 
   return (
     <div className="retained-writing-card continuation-analysis-card">
@@ -340,7 +339,6 @@ export function ContinuationAnalysisPanel({
             </div>
           </Field>
           {alternatives.length > 0 && <Field label="其他可行路线"><StringList items={alternatives} /></Field>}
-          {qualityRisks.length > 0 && <Field label="质量风险"><StringList items={qualityRisks} /></Field>}
           {legacy && (
             <Field label="历史分析保留">
               <div className="continuation-analysis-stack">

@@ -235,6 +235,7 @@ function productsFromFiles(files, revision, validatedListeningReview) {
   try { expected = manifestProductFiles(manifest) }
   catch { fail('BASELINE_UNTRUSTED', '/products/manifest') }
   if (manifest.paperId !== revision.paperId || manifest.paperName !== revision.manifest.paperName
+    || (manifest.analysisDigest !== undefined && manifest.analysisDigest !== revision.manifest.analysisDigest)
     || !SHA.test(manifest.inputDigest) || !Array.isArray(manifest.files)
     || manifest.files.length !== expected.length
     || (manifest.schemaVersion === 'paper-pdf-products-v2' && manifest.economyPageLimit !== 9)) {

@@ -430,6 +430,10 @@ check('schema and prompt artifacts name the same contract', () => {
     path.join(rootDir, 'prompts/continuation-writing-staged-analysis-v2.md'),
     'utf8',
   ).trim()
+  const doctrine = readFileSync(
+    path.join(rootDir, '.agents/skills/importing-nck1-papers/reference/teaching-analysis-style-v1.md'),
+    'utf8',
+  ).trim()
   assert.equal(schema.$id, 'continuation-analysis-v2.schema.json')
   assert.equal(schema.properties.schemaVersion.const, 'continuation-analysis-v2')
   assert.match(prompt, /continuation-analysis-v2/)
@@ -445,7 +449,7 @@ check('schema and prompt artifacts name the same contract', () => {
   assert.doesNotMatch(stagedPrompt, /brothers|twins|first-person|150 student-written/i)
   assert.equal(
     buildNarrativeContinuationStagedAnalysisContract(),
-    `${prompt.trimEnd()}\n\nExact nested continuationAnalysis schema:\n${JSON.stringify(schema)}\n\n${stagedPrompt}`,
+    `${prompt.trimEnd()}\n\n---\n\n${doctrine}\n\nExact nested continuationAnalysis schema:\n${JSON.stringify(schema)}\n\n${stagedPrompt}`,
   )
   const system = buildNarrativeContinuationAnalysisMessages({ writingTask })[0].content
   assert.ok(system.includes(JSON.stringify(schema)))

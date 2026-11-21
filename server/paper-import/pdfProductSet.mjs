@@ -1,5 +1,19 @@
 import { productPageLimitsForManifest } from './pdfPageLimits.mjs'
-import { PAPER_PDF_EDITIONS } from '../../shared/paperPdfProducts.mjs'
+import { FROZEN_PAPER_PDF_PRODUCTS, PAPER_PDF_EDITIONS, requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
+
+export const ANALYSIS_PDF_EDITION = 'analysis'
+
+export function frozenProductLabel(edition) {
+  return FROZEN_PAPER_PDF_PRODUCTS[edition === ANALYSIS_PDF_EDITION ? edition : requirePaperPdfEdition(edition)]
+}
+
+export function frozenProductInventory(files) {
+  const editions = files.map(file => file.path.slice('products/'.length, -'.pdf'.length))
+  return {
+    editions: editions.filter(edition => edition !== ANALYSIS_PDF_EDITION),
+    ...(editions.includes(ANALYSIS_PDF_EDITION) ? { analysisAvailable: true } : {}),
+  }
+}
 
 export const ABSENT_BY_EXAM_DESIGN = 'absent-by-exam-design'
 export const NO_LISTENING_PRODUCT_SCHEMA = 'paper-pdf-products-v3'
@@ -26,6 +40,17 @@ export function productFiles(editions) {
 
 // Historical v1/v2 four-product records keep their original meaning.
 export function manifestProductFiles(manifest) {
+  const files = baseManifestProductFiles(manifest)
+  if (manifest.analysisDigest === undefined) return files
+  if (!/^sha256:[a-f0-9]{64}$/.test(manifest.analysisDigest || '')) {
+    throw Object.assign(new Error('固定 PDF 产品不可用：讲评摘要无效'), {
+      code: 'FROZEN_PRODUCTS_INVALID', status: 409,
+    })
+  }
+  return files.concat(productFiles([ANALYSIS_PDF_EDITION]))
+}
+
+function baseManifestProductFiles(manifest) {
   if (manifest?.schemaVersion === 'paper-pdf-products-v4') {
     productPageLimitsForManifest(manifest)
     if (manifest.listening === undefined) return productFiles(PAPER_PDF_EDITIONS)

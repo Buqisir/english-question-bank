@@ -7,7 +7,7 @@ import { PAPER_PDF_PRODUCTS } from '../../shared/paperPdfProducts.mjs'
 import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
 import { configuredBlobStore } from './blobStore.mjs'
 import { listeningReviewPrintNeutralPaths } from './listeningReview.mjs'
-import { manifestProductFiles, NO_LISTENING_PRODUCT_SCHEMA, sourceProductEditions } from './pdfProductSet.mjs'
+import { ANALYSIS_PDF_EDITION, manifestProductFiles, NO_LISTENING_PRODUCT_SCHEMA, sourceProductEditions } from './pdfProductSet.mjs'
 
 export const PRODUCT_MANIFEST = 'products/manifest-v1.json'
 export const PRODUCT_FILES = Object.keys(PAPER_PDF_PRODUCTS).map(edition => ({
@@ -81,12 +81,13 @@ export function matchesSealedPrintInputs({ rootDir, inputDigest, sealedFiles, se
   return inputDigest === sealedDigest
 }
 
-function readProductManifest(manifestBytes, { inputDigest, legacyInputDigest, economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit, config, listeningCount } = {}) {
-  const manifest = JSON.parse(manifestBytes.toString('utf8'))
+export function validateFrozenProductManifest(manifest, { inputDigest, legacyInputDigest, analysisDigest, economyPageLimit, largeCompletePageLimit, largeNoListeningPageLimit, config, listeningCount } = {}) {
   const expectedFiles = manifestProductFiles(manifest)
   if (config !== undefined || listeningCount !== undefined) {
     const editions = sourceProductEditions(config, listeningCount)
-    if (editions.length !== expectedFiles.length) reject('听力声明与产品清单不同')
+    if (editions.length + Number(manifest.analysisDigest !== undefined) !== expectedFiles.length) {
+      reject('听力声明与产品清单不同')
+    }
   }
   let pageLimits
   try { pageLimits = productPageLimitsForManifest(manifest) } catch (error) { reject(error.message) }
@@ -98,6 +99,7 @@ function readProductManifest(manifestBytes, { inputDigest, legacyInputDigest, ec
     || (economyPageLimit !== undefined && manifestPageLimit !== economyPageLimit)
     || !/^sha256:[a-f0-9]{64}$/.test(manifest.inputDigest || '')
     || (inputDigest && manifest.inputDigest !== inputDigest && manifest.inputDigest !== legacyInputDigest?.(manifest.inputDigest))
+    || (manifest.analysisDigest !== undefined && analysisDigest !== undefined && manifest.analysisDigest !== analysisDigest)
     || typeof manifest.paperName !== 'string' || !manifest.paperName.trim()
     || !Array.isArray(manifest.files) || manifest.files.length !== expectedFiles.length) reject('输入或产品文件清单不一致')
   for (const [index, expected] of expectedFiles.entries()) {
@@ -107,7 +109,17 @@ function readProductManifest(manifestBytes, { inputDigest, legacyInputDigest, ec
       || !Number.isSafeInteger(file.byteLength) || file.byteLength < 5
       || !/^sha256:[a-f0-9]{64}$/.test(file.sha256 || '')) reject('产品文件描述无效')
   }
-  return { manifest, pageLimits }
+  return pageLimits
+}
+
+export function assertFrozenProductPagePolicy(file, pageLimits) {
+  const edition = path.basename(file.path, '.pdf')
+  if (edition !== 'answerOnly' && edition !== ANALYSIS_PDF_EDITION) {
+    const policy = studentProductPolicy(edition, 2, pageLimits)
+    if (policy.atMost ? file.pageCount > policy.targetPages : file.pageCount !== policy.targetPages) {
+      reject(`PDF 页数不符合产品规格：${file.path}`)
+    }
+  }
 }
 
 function assertPdfBytes(buffer, file) {
@@ -127,7 +139,8 @@ export function readFrozenProducts(rootDir, { required = false, readArtifact = n
     if (required) reject('请先生成所需产品，再提交新的 Review')
     return null
   }
-  const { manifest, pageLimits } = readProductManifest(manifestBytes, options)
+  const manifest = JSON.parse(manifestBytes.toString('utf8'))
+  const pageLimits = validateFrozenProductManifest(manifest, options)
   const bytes = { [PRODUCT_MANIFEST]: manifestBytes }
   for (const file of manifest.files) {
     const buffer = read(file.path)
@@ -139,13 +152,7 @@ export function readFrozenProducts(rootDir, { required = false, readArtifact = n
       actualPages = Number(/^Pages:\s+(\d+)\s*$/m.exec(info)?.[1])
     } catch { reject(`PDF 无法解析：${file.path}`) }
     if (actualPages !== file.pageCount) reject(`PDF 实际页数与清单不同：${file.path}`)
-    const edition = path.basename(file.path, '.pdf')
-    if (edition !== 'answerOnly') {
-      const policy = studentProductPolicy(edition, 2, pageLimits)
-      if (policy.atMost ? actualPages > policy.targetPages : actualPages !== policy.targetPages) {
-        reject(`PDF 页数不符合产品规格：${file.path}`)
-      }
-    }
+    assertFrozenProductPagePolicy(file, pageLimits)
     bytes[file.path] = buffer
   }
   return { manifest, bytes, digest: sha256(manifestBytes) }
@@ -197,7 +204,8 @@ export async function loadStoredProducts({ db, consumption, edition, blobStore =
   const manifestBytes = await blobStore.get(storage.files?.[PRODUCT_MANIFEST])
   const digest = sha256(manifestBytes)
   if (digest !== report.pdfProducts.manifestDigest) reject('已审产品清单字节不同')
-  const { manifest } = readProductManifest(manifestBytes)
+  const manifest = JSON.parse(manifestBytes.toString('utf8'))
+  validateFrozenProductManifest(manifest)
   if (manifest.paperId !== consumption.paperId) reject('已审产品字节不同')
   const bytes = { [PRODUCT_MANIFEST]: manifestBytes }
   if (edition !== undefined) {

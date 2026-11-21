@@ -1,0 +1,215 @@
+#!/usr/bin/env node
+import { deepStrictEqual } from 'node:assert/strict'
+import { execFileSync } from 'node:child_process'
+import { cpSync, existsSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs'
+import path from 'node:path'
+import { parseArgs } from 'node:util'
+import { finalizeContentSubject, finalizeInventory, finalizeProjection } from '../../server/import-review/finalizeComputation.mjs'
+import { validateAgentOcrCorrectionReceipt } from '../../server/import-review/importReviewStore.mjs'
+import { buildNck1SealedReviewProjection, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
+import { LISTENING_REVIEW_FILE, listeningReviewSubject, RETAINED_LISTENING_NAVIGATION } from '../../server/paper-import/listeningReview.mjs'
+import { NCK1_OCR_CONFIRMATION_FILE_NAME } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
+import { ANALYSIS_PDF_EDITION } from '../../server/paper-import/pdfProductSet.mjs'
+import { SOURCE_REFERENCES_FILE } from '../../server/paper-import/sourceReferences.mjs'
+import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
+import { digestJson } from '../../shared/paper-canonical/stable.mjs'
+import { prepareSealedCandidate, pushPreparedCandidate } from './lecture-redo.mjs'
+import { hydratedEvidenceBase, prepareReviewPush, withLocalReviewEvidence } from './review.mjs'
+
+const confirmationFile = `materialization/${NCK1_OCR_CONFIRMATION_FILE_NAME}`
+const reportFile = 'agent-ocr-correction-report-v2.json'
+const bindingFiles = ['paragraph-summaries-v1.json', 'public-search-metadata-v1.json',
+  reportFile, 'pagination-plan.json', SOURCE_REFERENCES_FILE]
+const readJson = file => JSON.parse(readFileSync(file, 'utf8'))
+const writeJson = (file, value, flag = 'w') => writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`, { flag })
+
+export function moveUnderline(item, from, to, text, bold = false) {
+  if (bold && from !== 'none') throw new Error('--bold 仅用于新增画线')
+  function coordinates(value) {
+    if (!/^\d+,\d+$/u.test(value ?? '')) throw new Error('坐标必须为 start,end')
+    const [start, end] = value.split(',').map(Number)
+    if (!Number.isSafeInteger(start) || !Number.isSafeInteger(end) || end <= start
+      || end > item.text.length || !text || item.text.slice(start, end) !== text) {
+      throw new Error('坐标文本与 --text 不符')
+    }
+    return { start, end }
+  }
+  const next = coordinates(to)
+  if (!/^[\p{L}\p{M}\p{N}].*[\p{L}\p{M}\p{N}]$|^[\p{L}\p{M}\p{N}]$/u.test(text)
+    || /[\p{L}\p{M}\p{N}]['’‐‑-]?$/u.test(item.text.slice(0, next.start))
+    || /^['’‐‑-]?[\p{L}\p{M}\p{N}]/u.test(item.text.slice(next.end))) {
+    throw new Error('新坐标必须匹配整词')
+  }
+  const ranges = item.sourceEmphasis ?? []
+  const previous = from === 'none' ? null : coordinates(from)
+  const matched = previous && ranges.find(range => range.start === previous.start
+    && range.end === previous.end && range.marks.includes('underline'))
+  if (previous && (!matched || (previous.start === next.start && previous.end === next.end))) {
+    throw new Error('旧坐标须匹配一处待移动的画线')
+  }
+  const remaining = ranges.filter(range => range !== matched)
+  if (remaining.some(range => range.start < next.end && range.end > next.start)) {
+    throw new Error('新坐标与现有标注重叠')
+  }
+  return [...remaining, { ...next, marks: matched?.marks ?? (bold ? ['bold', 'underline'] : ['underline']) }]
+    .sort((a, b) => a.start - b.start)
+}
+
+export function markParagraph(items, paragraph, { item: requestedItem, from, to, text, bold }) {
+  const matches = []
+  for (const [start, first] of items.entries()) {
+    if (!paragraph.startsWith(first.text)) continue
+    let joined = first.text
+    let end = start + 1
+    while (joined !== paragraph && end < items.length && paragraph.startsWith(`${joined} ${items[end].text}`)) {
+      joined += ` ${items[end++].text}`
+    }
+    if (joined === paragraph) matches.push({ start, end })
+  }
+  if (matches.length !== 1) throw new Error('正文段落须唯一对应同页连续 OCR 条目')
+  const [{ start, end }] = matches
+  const parts = items.slice(start, end)
+  const [first] = parts
+  if (!requestedItem && parts.length !== 1) throw new Error('正文段落跨多个 OCR 条目，须指定 --item')
+  const target = requestedItem ? parts.find(part => part.itemId === requestedItem) : first
+  if (!target) throw new Error('--item 不属于指定正文段落')
+  const marks = moveUnderline(target, from, to, text, bold)
+  if (parts.length === 1) {
+    target.sourceEmphasis = marks
+    return target.itemId
+  }
+  // Canonical matches the paragraph's full source region. Combine only the
+  // exact contiguous text it already holds, retaining every observation.
+  let offset = 0
+  const sourceEmphasis = parts.flatMap(part => {
+    const ranges = (part === target ? marks : part.sourceEmphasis ?? []).map(range =>
+      ({ ...range, start: range.start + offset, end: range.end + offset }))
+    offset += part.text.length + 1
+    return ranges
+  })
+  items.splice(start, parts.length, { ...first, text: paragraph,
+    observationIds: parts.flatMap(part => part.observationIds), sourceEmphasis })
+  return target.itemId
+}
+
+function editConfirmation(sealed, { block: blockId, ...edit }) {
+  const { materialization } = loadNck1ReviewSource(sealed)
+  const block = materialization.groups.filter(group => group.family === 'reading')
+    .flatMap(group => group.blocks).find(block => block.blockId === blockId)
+  if (block?.kind !== 'paragraph' || block.source.kind !== 'page_region'
+    || !block.content.every(run => run.kind === 'text')) throw new Error('须指定一处 OCR 阅读正文段落')
+  const paragraph = block.content.map(run => run.text).join('')
+  const confirmation = readJson(path.join(sealed, confirmationFile))
+  const page = confirmation.documents.find(doc => doc.documentId === block.source.documentId)
+    ?.pages.find(page => page.page === block.source.page)
+  if (!page) throw new Error('正文段落的 OCR 页缺失')
+  const itemId = markParagraph(page.orderedItems, paragraph, edit)
+  return { confirmation, itemId, source: block.source }
+}
+
+function merge(work, sealed, base) {
+  const edit = readJson(path.join(work, 'mark-receipt.json'))
+  deepStrictEqual([edit.baseRevisionId, edit.bundleDigest], [base.id, base.bundleDigest], '修订回执与基线不符')
+  const ready = path.join(work, 'ready')
+  if (existsSync(ready)) throw new Error('该工作目录已有通过 finalize 的候选')
+  const before = buildNck1SealedReviewProjection(sealed, base, { requireAnalyses: true })
+  const staging = mkdtempSync(path.join(work, '.mark-merge-'))
+  try {
+    const bundle = path.join(staging, 'bundle')
+    cpSync(sealed, bundle, { recursive: true, filter: source => source !== path.join(sealed, 'products') })
+    const { confirmation, itemId, source } = editConfirmation(sealed, edit)
+    deepStrictEqual([itemId, source], [edit.itemId, edit.source])
+    writeJson(path.join(bundle, confirmationFile), confirmation)
+    const loaded = loadNck1ReviewSource(bundle)
+    const { candidate, issues } = withLocalReviewEvidence(bundle, () => importCanonicalCandidate(loaded.sourceInput,
+      undefined, { materializationAuthorityRef: before.consumption.authorityRef }))
+    if (!candidate || issues.length) throw new Error(issues[0]?.message ?? '无法重建 Candidate')
+    const binding = { sourceDigest: candidate.source.sha256, candidateDigest: candidate.candidateDigest }
+    for (const file of bindingFiles) {
+      const target = path.join(bundle, file)
+      if (existsSync(target)) writeJson(target, { ...readJson(target), ...binding })
+    }
+    if (before.reviewedListening) {
+      writeJson(path.join(bundle, LISTENING_REVIEW_FILE), { ...before.reviewedListening.review,
+        subject: listeningReviewSubject(loaded, candidate), method: RETAINED_LISTENING_NAVIGATION })
+    }
+    execFileSync(process.execPath, [path.join(import.meta.dirname, 'freeze-products.mjs'), '--paper-dir', bundle],
+      { stdio: 'inherit' })
+    const { manifest } = prepareReviewPush(bundle, { expectedBaseRevisionId: base.id })
+    const mutable = new Set([confirmationFile, ...bindingFiles, LISTENING_REVIEW_FILE])
+    const unchanged = files => files.filter(file => !mutable.has(file.path) && !file.path.startsWith('products/'))
+      .sort((a, b) => a.path.localeCompare(b.path))
+    deepStrictEqual(unchanged(manifest.files), unchanged(base.manifest.files), '题文、源文件、媒体或讲评字节有变化')
+    const local = { ...manifest, manifest, id: 'rev-local-mark-redo', reviewKind: 'candidate',
+      rendererBuildId: manifest.producerBuildId, evidenceBase: { revision: base, directory: sealed } }
+    const after = finalizeProjection(bundle, local)
+    const content = projection => ({ materialization: digestJson(projection.materialization),
+      questions: digestJson(projection.paperAsset.content.questions),
+      answers: digestJson(projection.paperAsset.answerKey), analysis: projection.analysisDigest })
+    deepStrictEqual(content(after), content(before), '题文、题号、选项、答案或讲评有变化')
+    if (after.ocrCorrectionReport) {
+      validateAgentOcrCorrectionReceipt(after.ocrCorrectionReport, readJson(path.join(sealed, 'signals/agent-proofreading-receipt.json')),
+        JSON.parse(Buffer.from(after.sourceInput.materializationBytes).toString('utf8')))
+    }
+    deepStrictEqual(finalizeInventory(bundle, local, after), manifest.files.map(file => `${file.path}\0${file.mediaType}\0${file.role}`).sort())
+    const subject = finalizeContentSubject(bundle, local, after)
+    if (!subject.ok) throw new Error(`本地 finalize 失败：${subject.reasonCode}`)
+    const pdfs = revision => revision.files.filter(file => file.role === 'pdf_product')
+      .map(({ path, sha256 }) => ({ path, sha256 }))
+    const expectedPdfs = new Set(pdfs(base.manifest).map(file => file.path))
+    // Older Candidates can have staged analyses but no frozen analysis PDF.
+    if (before.analysisDigest) expectedPdfs.add(`products/${ANALYSIS_PDF_EDITION}.pdf`)
+    deepStrictEqual(pdfs(manifest).map(file => file.path).sort(), [...expectedPdfs].sort())
+    const comparison = { before: content(before), after: content(after),
+      unchangedFiles: unchanged(manifest.files), pdfs: { before: pdfs(base.manifest), after: pdfs(manifest) } }
+    writeJson(path.join(staging, 'manifest.json'), manifest)
+    writeJson(path.join(staging, 'merge-receipt.json'), { baseRevisionId: base.id,
+      bundleDigest: manifest.bundleDigest, merged: [confirmationFile], edit, comparison })
+    renameSync(staging, ready)
+    console.log(JSON.stringify({ status: 'local_finalized', baseRevisionId: base.id, ...binding, comparison }))
+  } finally {
+    rmSync(staging, { recursive: true, force: true })
+  }
+}
+
+export function assertMarkPushReceipt(mergeReceipt, edit) {
+  if (!mergeReceipt?.edit || !edit) throw new Error('缺少画线修订回执，请重新合并')
+  deepStrictEqual(mergeReceipt.edit, edit, '已合并的画线修订与当前回执不符，请重新合并')
+}
+
+async function main() {
+  const [command, ...args] = process.argv.slice(2)
+  const { values } = parseArgs({ args, options: {
+    ...Object.fromEntries(['paper', 'work', 'block', 'from', 'to', 'text', 'item'].map(name => [name, { type: 'string' }])),
+    bold: { type: 'boolean' },
+  } })
+  const required = { prepare: ['paper'], fix: ['block', 'from', 'to', 'text'], merge: [], push: [] }[command]
+  const { work: workDir, ...options } = values
+  const allowed = command === 'fix' ? [...required, 'item', 'bold'] : required
+  if (!workDir || !required || Object.keys(options).some(key => !allowed.includes(key)) || required.some(key => !options[key])) {
+    throw new Error('用法：mark-redo.mjs prepare --paper ID --work DIR | fix --work DIR --block ID --from START,END|none --to START,END --text WORD [--item OCR_ID] [--bold] | merge|push --work DIR')
+  }
+  const work = path.resolve(workDir)
+  if (command === 'prepare') {
+    const { base, sealed } = await prepareSealedCandidate(work, options.paper)
+    console.log(JSON.stringify({ baseRevisionId: base.id, sealed }))
+    return
+  }
+  if (command === 'push') {
+    assertMarkPushReceipt(readJson(path.join(work, 'ready', 'merge-receipt.json')),
+      readJson(path.join(work, 'mark-receipt.json')))
+    return pushPreparedCandidate(work)
+  }
+  const sealed = path.join(work, 'sealed')
+  const base = hydratedEvidenceBase(sealed)?.revision
+  if (!base) throw new Error('请先运行 prepare')
+  if (command === 'merge') return merge(work, sealed, base)
+  const { itemId, source } = editConfirmation(sealed, options)
+  writeJson(path.join(work, 'mark-receipt.json'), { baseRevisionId: base.id, bundleDigest: base.bundleDigest,
+    ...options, itemId, source }, 'wx')
+}
+
+if (import.meta.main) main().catch(error => {
+  console.error(error.message)
+  process.exitCode = 1
+})

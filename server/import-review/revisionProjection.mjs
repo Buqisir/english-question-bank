@@ -22,10 +22,8 @@ import { alignReviewedListeningSentences } from '../../scripts/import-pipeline/l
 import { SOURCE_REFERENCES_FILE, parseSourceReferencesBytes } from '../paper-import/sourceReferences.mjs'
 import { OCR_SOURCE_REFERENCES_PRODUCER_VERSION } from '../paper-import/sourceReferenceSemantics.mjs'
 import { assertSourceReferenceAdmission, assertSealedSourceReferenceReplay } from '../paper-import/sourceReferenceAdmission.mjs'
-import { PRODUCT_MANIFEST, PRODUCT_FILES, matchesSealedPrintInputs, productInputDigest, readFrozenProducts } from '../paper-import/frozenProducts.mjs'
-import { productFiles, sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
-import { productPageLimitsForManifest } from '../paper-import/pdfPageLimits.mjs'
-import { studentProductPolicy } from '../draft-paper/studentProductPdf.mjs'
+import { PRODUCT_MANIFEST, PRODUCT_FILES, assertFrozenProductPagePolicy, matchesSealedPrintInputs, productInputDigest, readFrozenProducts, validateFrozenProductManifest } from '../paper-import/frozenProducts.mjs'
+import { ANALYSIS_PDF_EDITION, productFiles, sourceProductEditions } from '../paper-import/pdfProductSet.mjs'
 import { withSealedReviewSnapshot } from './sealedReviewFiles.mjs'
 import { buildStoredReviewSubject, buildTargetReviewSubject, reviewSubjectBundleDigest } from './reviewSubject.mjs'
 import { reviewProjectionForTrustedBaseline } from './reviewComparisonProjection.mjs'
@@ -850,6 +848,10 @@ function reviewBundleFilePathsFromSource(rootDir, loaded, candidate, {
         loaded.config, materialization.listening.state === 'captured' ? 2 : 0))),
     ] : []),
   ]
+  const productManifestPath = resolveReviewFile(rootDir, PRODUCT_MANIFEST)
+  if (existsSync(productManifestPath) && readJson(productManifestPath, PRODUCT_MANIFEST).analysisDigest !== undefined) {
+    files.push(...productFiles([ANALYSIS_PDF_EDITION]))
+  }
   const byPath = new Map()
   for (const file of files) {
     const existing = byPath.get(file.path)
@@ -1808,6 +1810,13 @@ export function buildNck1ReviewProjection(rootDir, options = {}, evidenceBase = 
   return buildNck1ReviewProjectionInternal(rootDir, options, readFrozenProducts, null, null, evidenceBase)
 }
 
+// Local refresh reuses verified print bytes even when the analysis digest has changed.
+export function buildNck1ProductRefreshProjection(rootDir, options, evidenceBase) {
+  const readProducts = (directory, { analysisDigest: _previousAnalysis, ...printOptions }) =>
+    readFrozenProducts(directory, printOptions)
+  return buildNck1ReviewProjectionInternal(rootDir, options, readProducts, null, null, evidenceBase)
+}
+
 const evidenceSourceRoles = new Set(['question_source', 'official_answers', 'question_and_answers', 'unofficial_listening'])
 
 // Finalize gets its base and directory from the Review store. The CLI can use
@@ -1920,22 +1929,9 @@ export function computeSealedReviewSubjects({ directory, revision, preview, stor
       const products = fileEvidence.find(file => file.path === PRODUCT_MANIFEST)
       const readSealedProducts = (_root, options) => {
         const manifest = products?.json
-        if (!manifest || (manifest.inputDigest !== options.inputDigest && manifest.inputDigest !== options.legacyInputDigest(manifest.inputDigest))
-          || sourceProductEditions(options.config, options.listeningCount).length !== manifest.files.length) {
-          fail('Sealed product input identity differs')
-        }
-        const pageLimits = productPageLimitsForManifest(manifest)
-        for (const key of Object.keys(pageLimits)) {
-          if (options[key] !== undefined && options[key] !== pageLimits[key]) fail('Sealed product page limit differs')
-        }
-        for (const file of manifest.files) {
-          const edition = path.basename(file.path, '.pdf')
-          if (edition === 'answerOnly') continue
-          const policy = studentProductPolicy(edition, 2, pageLimits)
-          if (policy.atMost ? file.pageCount > policy.targetPages : file.pageCount !== policy.targetPages) {
-            fail('Sealed product page count differs')
-          }
-        }
+        if (!manifest) fail('Sealed product manifest is missing')
+        const pageLimits = validateFrozenProductManifest(manifest, options)
+        for (const file of manifest.files) assertFrozenProductPagePolicy(file, pageLimits)
         // Byte hashes and all product descriptors are checked by subject
         // extraction. No PDF bytes are materialized or returned to the API.
         return { manifest, digest: products.sha256, bytes: {} }
@@ -2104,7 +2100,7 @@ function buildNck1ReviewProjectionUncached(rootDir, {
   const hasFrozenProducts = existsSync(resolveReviewFile(rootDir, PRODUCT_MANIFEST))
   const printInputDigest = hasFrozenProducts ? productInputDigest(rootDir, inventory(), reviewedListening) : null
   const frozenProducts = hasFrozenProducts
-    ? readProducts(rootDir, { inputDigest: printInputDigest,
+    ? readProducts(rootDir, { inputDigest: printInputDigest, analysisDigest: analysisProjection?.digest ?? null,
         legacyInputDigest: expected => {
           const originalManifest = retainedBytes?.(PRODUCT_MANIFEST)
           if (originalManifest && JSON.parse(originalManifest).inputDigest === expected

@@ -17,12 +17,11 @@ import { cropNck1SourceImage } from '../paper-import/nck1ImageSourceBundle.mjs'
 import { sendListeningAudioFile } from '../paper-import/paperAssetStatic.mjs'
 import { FIXED_PAGINATION_EDITIONS } from '../paper-import/paginationPlan.mjs'
 import { frozenProductResult, PRODUCT_MANIFEST } from '../paper-import/frozenProducts.mjs'
-import { manifestProductFiles } from '../paper-import/pdfProductSet.mjs'
+import { frozenProductInventory, frozenProductLabel, manifestProductFiles } from '../paper-import/pdfProductSet.mjs'
 import { SOURCE_REFERENCES_FILE } from '../paper-import/sourceReferences.mjs'
 import { ANSWER_CORRECTIONS_FILE, answerCorrectionChanges } from '../paper-import/answerCorrections.mjs'
 import { SPELLING_REVIEW_FILE } from '../paper-import/spellingReview.mjs'
 import { resolveReviewFile } from './revisionProjection.mjs'
-import { PAPER_PDF_PRODUCTS, requirePaperPdfEdition } from '../../shared/paperPdfProducts.mjs'
 import {
   renderReviewFixedEdition,
   reviewPaginationMetadata,
@@ -156,7 +155,7 @@ function candidateProjectionForRevision(store, revisionId) {
 }
 
 function frozenProductForRevision(store, revisionId, edition) {
-  requirePaperPdfEdition(edition)
+  frozenProductLabel(edition)
   const { revision, filePath: manifestPath } = store.verifiedFileForRead(revisionId, PRODUCT_MANIFEST)
   if (revision.reviewKind !== 'candidate') {
     throw reviewError('IMPORT_REVIEW_CANDIDATE_REQUIRED', 'A finalized Candidate is required', 409)
@@ -173,17 +172,6 @@ function frozenProductForRevision(store, revisionId, edition) {
     rendered: frozenProductResult({
     manifest, bytes: { [relativePath]: readFileSync(filePath) },
   }, edition) }
-}
-
-function companionAnalyses(sidecars = {}) {
-  return {
-    reading: sidecars['reading-choice-analysis-v1.json'] || null,
-    sevenChoices: sidecars['seven-choices-analysis-v1.json'] || null,
-    cloze: sidecars['cloze-analysis-v1.json'] || null,
-    grammarFill: sidecars['grammar-fill-analysis-v1.json'] || null,
-    writing: sidecars['writing-analysis-v1.json'] || null,
-    listening: sidecars['listening-analysis-v1.json'] || null,
-  }
 }
 
 function paragraphText(block) {
@@ -802,10 +790,7 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
       context.sendJson(response, 404, { error: 'Review revision not found for paper' })
       return
     }
-    sendHtml(response, buildCompanionAnalysisHtml({
-      paperAsset: projection.paperAsset,
-      analyses: companionAnalyses(projection.analysisSidecars),
-    }))
+    sendHtml(response, buildCompanionAnalysisHtml({ projection }))
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-reviews\/papers\/([^/]+)\/product-review$/, route(({
@@ -1202,7 +1187,7 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
       }
     }
     context.sendJson(response, 200, { paperId: manifest.paperId, revisionId,
-      editions: expectedFiles.map(file => path.basename(file.path, '.pdf')) })
+      ...frozenProductInventory(expectedFiles) })
   })))
 
   routes.push(defineRoute('GET', /^\/api\/import-review-preview\/revisions\/([^/]+)\/pagination$/, route(({
@@ -1254,10 +1239,10 @@ for(const kind of ['approve','grant','revoke'])document.querySelector('#'+kind).
       if (url.searchParams.has('version') || url.searchParams.has('pageLayout')) {
         throw reviewError('IMPORT_REVIEW_EDITION_INVALID', 'edition 不与旧 version/pageLayout 混用', 400)
       }
-      const edition = requirePaperPdfEdition(url.searchParams.get('edition'))
+      const edition = url.searchParams.get('edition')
       const { revision, sourceReferencesDigest, rendered } = frozenProductForRevision(store, match[1], edition)
       const title = revision.manifest.paperName.replace(/[\\/:*?"<>|]/g, '-')
-      sendBinary(response, rendered.pdfBytes, 'application/pdf', `${title}-${PAPER_PDF_PRODUCTS[edition]}.pdf`, 'inline', {
+      sendBinary(response, rendered.pdfBytes, 'application/pdf', `${title}-${frozenProductLabel(edition)}.pdf`, 'inline', {
         'x-eqb-pagination-edition': edition,
         'x-eqb-pagination-mode': rendered.mode,
         'x-eqb-pagination-pages': String(rendered.pageCount),

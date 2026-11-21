@@ -99,7 +99,7 @@ function optionsObject(options = []) {
   return Object.fromEntries(options.map(({ label, text }) => [label, text]))
 }
 
-function legacyGroup(paperAsset, materializationGroup, order, media = []) {
+export function buildNck1AnalysisGroup(paperAsset, materializationGroup, order, media = []) {
   const group = paperAsset.content.groups[materializationGroup.groupId]
   if (!group) fail(`Paper projection is missing group ${materializationGroup.groupId}`)
   return {
@@ -437,7 +437,7 @@ export function buildNck1AnalysisProjection({
   const getGroup = (slotId, order) => {
     const group = groupsBySlot.get(slotId)
     if (!group) fail(`Materialization is missing ${slotId}`)
-    return legacyGroup(paperAsset, group, order, materialization.media)
+    return buildNck1AnalysisGroup(paperAsset, group, order, materialization.media)
   }
   const readingGroups = readingSources.map(({ slotId }, index) => getGroup(slotId, index + 1))
   const seven = getGroup('seven-choices', 5)

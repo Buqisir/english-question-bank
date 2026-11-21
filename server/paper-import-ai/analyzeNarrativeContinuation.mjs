@@ -80,7 +80,7 @@ export function buildNarrativeContinuationAnalysisMessages({ writingTask }) {
 
 export function buildNarrativeContinuationStagedAnalysisContract() {
   return [
-    readPromptFile(promptPath).trimEnd(),
+    readTeachingAnalysisPrompt(promptPath),
     '',
     'Exact nested continuationAnalysis schema:',
     JSON.stringify(schema),

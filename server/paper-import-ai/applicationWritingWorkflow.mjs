@@ -166,7 +166,7 @@ export function buildApplicationModelAnswerMessages(writingTask, groupPassage) {
 
 export function buildApplicationStagedAnalysisContract() {
   return [
-    readPromptFile(promptPath).trimEnd(),
+    readTeachingAnalysisPrompt(promptPath),
     '',
     readPromptFile(stagedAnalysisContractPath).trim(),
   ].join('\n')

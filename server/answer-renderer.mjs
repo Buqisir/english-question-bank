@@ -8,7 +8,7 @@ import { digestJson } from '../shared/paper-canonical/stable.mjs'
 import { sourceReferenceFigurePresentation, sourceReferenceFigureItemPresentation } from './paper-import/sourceReferencePresentation.mjs'
 import { projectEffectiveAnswers } from './paper-import/answerCorrections.mjs'
 
-const unofficialListeningLabel = '听力答案（非官方，据录音整理）'
+export const unofficialListeningLabel = '听力答案（非官方，据录音整理）'
 const unofficialTranscriptLabel = '听力稿（非官方，据录音整理）'
 const hasUnofficialListening = materialization => materialization.listening.answers?.some(answer => answer.provenance === 'unofficial')
 

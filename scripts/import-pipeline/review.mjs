@@ -701,11 +701,11 @@ export async function reviewCandidate(paperId, requestedRevisionId) {
   return revision
 }
 
-export async function downloadReviewFile(revision, file) {
+export async function downloadReviewFile(revision, file, signal) {
   const { bytes } = await api(
     `/api/import-agent-reviews/revisions/${encodeURIComponent(revision.id)}`
       + `/files?path=${encodeURIComponent(file.path)}`,
-    {}, { binary: true },
+    { signal }, { binary: true },
   )
   if (bytes.byteLength !== file.byteLength || sha256(bytes) !== file.sha256) {
     fail(`Hydrated Review file changed in transit: ${file.path}`)
@@ -713,17 +713,43 @@ export async function downloadReviewFile(revision, file) {
   return bytes
 }
 
-export async function hydrateReviewRevision(revision, paperDir) {
+async function retryHydrationRead(read) {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await read(AbortSignal.timeout(90_000))
+    } catch (error) {
+      if (attempt === 3 || !(error.name === 'TimeoutError' || error instanceof TypeError
+        || [408, 429, 500, 502, 503, 504].includes(error.status))) throw error
+      await new Promise(resolve => setTimeout(resolve, 1000 * attempt))
+    }
+  }
+}
+
+export async function hydrateReviewRevision(revision, paperDir, { resumeDirectory } = {}) {
   const { paperId } = revision
   if (existsSync(paperDir)) fail(`Local paper workspace already exists: ${paperDir}`)
   mkdirSync(path.dirname(paperDir), { recursive: true, mode: 0o700 })
-  const temporary = mkdtempSync(path.join(path.dirname(paperDir), '.hydrate-'))
+  const temporary = resumeDirectory ?? mkdtempSync(path.join(path.dirname(paperDir), '.hydrate-'))
+  if (resumeDirectory) mkdirSync(temporary, { recursive: true, mode: 0o700 })
+  const read = resumeDirectory ? retryHydrationRead : operation => operation()
+  const signalOptions = { flag: resumeDirectory ? 'w' : 'wx', mode: 0o600 }
   try {
-    for (const file of revision.manifest.files) {
-      const bytes = await downloadReviewFile(revision, file)
+    const download = async file => {
       const filePath = resolveReviewFile(temporary, file.path)
+      if (resumeDirectory && existsSync(filePath)) {
+        const existing = readFileSync(filePath)
+        if (existing.byteLength === file.byteLength && sha256(existing) === file.sha256) return
+      }
+      const bytes = await read(signal => downloadReviewFile(revision, file, signal))
       mkdirSync(path.dirname(filePath), { recursive: true })
       writeFileSync(filePath, bytes)
+    }
+    const files = revision.manifest.files
+    const concurrency = resumeDirectory ? 4 : 1
+    for (let start = 0; start < files.length; start += concurrency) {
+      const settled = await Promise.allSettled(files.slice(start, start + concurrency).map(download))
+      const failure = settled.find(result => result.status === 'rejected')
+      if (failure) throw failure.reason
     }
     const reportPath = 'agent-ocr-correction-report-v2.json'
     if (revision.manifest.files.some(file => file.path === reportPath)
@@ -732,9 +758,10 @@ export async function hydrateReviewRevision(revision, paperDir) {
       if (digestJson(report) !== revision.manifest.ocrCorrectionReportDigest) {
         fail('Hydrated OCR correction report does not match its finalized manifest')
       }
-      const { receipt } = await api(
+      const { receipt } = await read(signal => api(
         `/api/import-agent-reviews/revisions/${encodeURIComponent(report.ocrRevisionId)}/ocr-confirmation`,
-      )
+        { signal },
+      ))
       if (receipt?.schemaVersion !== 'web-import-ocr-review-confirmation-v1'
         || receipt.paperId !== paperId
         || receipt.revisionId !== report.ocrRevisionId
@@ -750,21 +777,21 @@ export async function hydrateReviewRevision(revision, paperDir) {
       // the previous worker's source-intake lease. This is outside the bundle.
       const receiptPath = path.join(temporary, 'signals', 'agent-proofreading-receipt.json')
       mkdirSync(path.dirname(receiptPath), { recursive: true })
-      writeFileSync(receiptPath, `${JSON.stringify(receipt, null, 2)}\n`, { flag: 'wx', mode: 0o600 })
+      writeFileSync(receiptPath, `${JSON.stringify(receipt, null, 2)}\n`, signalOptions)
     }
     const restorePath = path.join(temporary, 'signals', 'review-restore.json')
     mkdirSync(path.dirname(restorePath), { recursive: true })
     writeFileSync(path.join(temporary, 'signals', 'review-restore-config.json'),
-      readFileSync(resolveReviewFile(temporary, 'config.json')), { flag: 'wx', mode: 0o600 })
+      readFileSync(resolveReviewFile(temporary, 'config.json')), signalOptions)
     writeFileSync(restorePath, `${JSON.stringify({
       schemaVersion: 'review-restore-v1', paperId, origin: origin(),
       revisionId: revision.id, bundleDigest: revision.bundleDigest,
       sealedRevision: Object.fromEntries(['id', 'paperId', 'reviewKind', 'state', 'finalizedAt',
         'bundleDigest', 'sourceDigest', 'candidateDigest', 'manifest'].map(key => [key, revision[key]])),
-    }, null, 2)}\n`, { flag: 'wx', mode: 0o600 })
+    }, null, 2)}\n`, signalOptions)
     renameSync(temporary, paperDir)
   } catch (error) {
-    rmSync(temporary, { recursive: true, force: true })
+    if (!resumeDirectory) rmSync(temporary, { recursive: true, force: true })
     throw error
   }
 }
