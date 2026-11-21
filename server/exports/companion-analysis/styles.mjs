@@ -535,20 +535,26 @@ h5 {
 .question-number {
   /* The one filled shape on the page: a pine block with the number reversed
      out, so a teacher scanning a column finds question 47 by its block. One-
-     and two-digit numbers get the same block, the figures centred in it. */
+     and two-digit numbers get the same block, the figures centred in it.
+     The figures sit on the text baseline at about the cap height of the
+     answer letter beside them; the line box is cut to the figure height and
+     the padding puts the same pine above and below them (Termes figures
+     leave 0.29em more room under the line box than over it), so the block
+     reaches only a little under the baseline instead of hanging below. */
   display: inline-block;
   box-sizing: border-box;
-  min-width: 2.15em;
+  min-width: 2em;
   margin-right: 0.4em;
-  padding: 0 0.3em;
+  /* The two paddings add to 3.75pt, five CSS pixels, so every block snaps
+     to the same height. */
+  padding: 3.375pt 0.3em 0.375pt;
   border-radius: 1.5pt;
   background: var(--green-deep);
   color: var(--paper);
   text-align: center;
   /* The body sets text-align-last: start, which a one-line block inherits. */
   text-align-last: center;
-  letter-spacing: 0.02em;
-  font: 700 9.5pt/12.5pt var(--en);
+  font: 700 10.5pt/7.5pt var(--en);
   font-variant-numeric: lining-nums tabular-nums;
   string-set: running-question content();
 }
