@@ -138,6 +138,16 @@ test('joins source bold spans and Chinese glosses without losing their occurrenc
   assert.equal(result.items[2].text, 'W: Hello.')
 })
 
+test('defaults to a whole-word underline and preserves explicit substring occurrences', () => {
+  const { items, lines } = fixture(['Text 1', 'M: Its owner keeps its door shut and it stays closed', 'during the day.'])
+  items[1].emphasis = [
+    { text: 'it', marks: ['underline'], occurrence: 1 },
+    { text: 'it', marks: ['underline'] },
+  ]
+  const result = joinTranscriptTurns(items, lines, {}, 'fixture')
+  assert.deepEqual(result.items[1].emphasis.map(entry => entry.occurrence), [1, 2])
+})
+
 test('keeps speakers, Text headings and genuine paragraph indents separate', () => {
   const { items, lines } = fixture([
     'Text 1', 'M: These are some words', 'W: These are other words',
