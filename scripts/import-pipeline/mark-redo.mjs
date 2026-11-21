@@ -131,6 +131,11 @@ function merge(work, sealed, base) {
   }
 }
 
+export function assertMarkPushReceipt(mergeReceipt, edit) {
+  if (!mergeReceipt?.edit || !edit) throw new Error('缺少画线修订回执，请重新合并')
+  deepStrictEqual(mergeReceipt.edit, edit, '已合并的画线修订与当前回执不符，请重新合并')
+}
+
 async function main() {
   const [command, ...args] = process.argv.slice(2)
   const { values } = parseArgs({ args, options: Object.fromEntries(
@@ -147,7 +152,11 @@ async function main() {
     console.log(JSON.stringify({ baseRevisionId: base.id, sealed }))
     return
   }
-  if (command === 'push') return pushPreparedCandidate(work)
+  if (command === 'push') {
+    assertMarkPushReceipt(readJson(path.join(work, 'ready', 'merge-receipt.json')),
+      readJson(path.join(work, 'mark-receipt.json')))
+    return pushPreparedCandidate(work)
+  }
   const sealed = path.join(work, 'sealed')
   const base = hydratedEvidenceBase(sealed)?.revision
   if (!base) throw new Error('请先运行 prepare')
