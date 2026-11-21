@@ -1,6 +1,6 @@
 # 阅读做题心法
 
-状态：v14 草稿（2026-11-22）。v1 和 Owner 逐条讨论后写成；v2 到 v14 按实题试做改，改了哪些见文末「版本记录」。
+状态：v15 草稿（2026-11-22）。v1 和 Owner 逐条讨论后写成；v2 到 v15 按实题试做改，改了哪些见文末「版本记录」。
 用途：做题时照它找定位、排除干扰项；写解析时把同一个过程写出来，就是定位行、证据和干扰项说明。
 下一步改写成 `prompts/reading-choice-analysis-v1.md` 的「定位」一节。关联 BUB-255。
 
@@ -50,6 +50,9 @@
    两句都能对上题干线索时，定位到能回答题眼的那句：2023 全国甲 Q26 问 How did Terri avoid losing the deposit，
    段首句 DIY also saves her from losing any deposit 原词更多，回答 how 的是后一句的
    cover up holes and repaint a room to avoid any charges。
+   题眼原词所在的那句只用代词回指前文（this is the real reason、that's why）时，定位到被指的那句，不写指代回指：
+   江苏镇江 2026 年 2 月 Q33 问 the real reason for pet travel planning，末句 After all, this is the real reason why people choose to travel with pets
+   指回前一句 green spaces drive pet travel planning，定位句是前一句，答案 Access to green spaces。
 2. **线索来自题干，一到两个，照真实做题思路选，不定死步骤。** 对象词（人名、地名、
    数字、专有名词）缩小范围；题眼词（why、suggest、态度、mention 等）决定找哪一种信息。
    **对象词定段，题眼定句**：两个线索落在不同句子时，以题眼落的那句为定位句。
@@ -131,7 +134,7 @@
 | 问法 | 归类 | 怎么定位 |
 |---|---|---|
 | Which would the author / X agree with；Which viewpoint might X agree with；Which is X's idea；What does X argue about Y | 是非 | 按选项；有人名先定到这个人的话 |
-| What does the experience / story show；What does the story tell us；What can we learn from X's story；Which is true of X's story（选项是谚语）；What can be learned from the text；What message does the text convey（选项是谚语或道理） | 推断 | 问的是故事的道理，按选项；首段和末段都看，首段常先点出结果（2020 新课标Ⅰ Q27，首段 That willpower bore fruit 对应 Hard work pays off） |
+| What does the experience / story show；What does the story tell us；What can we learn from X's story；Which is true of X's story（选项是谚语）；What can be learned from the text；What message does the text convey；What is the main theme / moral of the story（选项是谚语或道理） | 推断 | 问的是故事的道理，按选项；首段和末段都看，首段常先点出结果（2020 新课标Ⅰ Q27，首段 That willpower bore fruit 对应 Hard work pays off） |
 | Which (word) best describes X / X's job / X's relationship with … / the impact of X；What was X like，选项是一个形容词或名词 | 推断 | 按选项；有对象词先定段，回到描述 X 的几处逐件核对，只盖一两件的选项算太窄（2020 新课标Ⅰ Q30，Eventful 盖住乌兹别克斯坦一路四件事，Dangerous 只盖警察那一件）；成对的词先核对两个都有原文对应的那项（总原则第 1 条） |
 | What does X reveal / indicate / prove / show；What conclusion can be drawn from X；What inspiration / lesson does X bring | 推断 | 题眼能定句：落到 proving、showing、suggesting、indicating that 那句（江西南昌 2026 年 4 月 Q34，proving that the unseen pollution secretly governed the electrical reaction）。问的是某人的反应、做法时，先看反应本身的内容；后面 says as much about 这类评论句的原词常被干扰项照搬、改掉关系（湖北武汉 2026 年 4 月 Q25，学者惊讶作品出自八十多岁的老人，答案 Ducrot's works mask her age；Ducrot's works limit his imagination 照搬 limitations of the observer's imagination，写原词变形） |
 | Who might benefit；Which is most likely；Who is most likely to do X（把原文的研究结论套到新人物、新情境上） | 推断 | 按选项；might、most likely 表推测。套到新人物时，先从原文列出结论里的条件，再逐个人物对：福建 2026 年 M1 Q29 问谁最可能坚持 4 小时拳击课，原文 Highly hardworking and reliable individuals demonstrated strong self-discipline，答案 a disciplined teacher who seeks weight loss；「爱看拳赛」是拿常识凑的条件。原文直接写着受益、有用的对象时归细节，从题干定位（江苏苏锡常镇 2026 年 3 月 Q30，Who will benefit most according to the author，原文 the most significant benefit to people who explore the world through touch） |
@@ -153,6 +156,7 @@
 | How did X manage to do | 细节 | 答案是真正起作用的那个办法或交换条件，说话、提问只是外壳（广西南宁 2026 年 4 月 Q25，她靠问「If I volunteer to go first, could I join the class?」进了班，答案是自愿第一个交作品，不是向老师提问） |
 | What is the key innovation / solution；How did they solve X | 细节 | 找 overcame this by、solved、the key is 那句 |
 | Which applicant best meets；Who is most likely to be chosen（条件是原文写明的招聘要求、报名规则） | 细节 | 反向核对：先列出原文写明的条件，按选项逐条对；条件要从研究结论里推出来的归推断，见上 |
+| What can we learn from the text；What can be learned from the text，选项是概括全文的名词短语 | 主旨标题 | 按选项形式分：概括全文的名词短语归这里，按主旨题的办法看全文；选项是谚语、道理归推断，选项是具体事实归细节或是非（湖南怀化 2026 年 3 月 Q31，全文讲吃饱后还想吃甜食的神经机制，答案 Explanation of brain mechanism of sugar desire） |
 | What does the last paragraph / paragraph N emphasize | 主旨标题 | 和别的单段题一样按选项回这一段核对，找法写定在强调词那句：so important、That's why、the key、above all；不要求盖住整段（广东佛山 2026 年 4 月 Q35，That's why it's so important to have some kind of standard，答案 The significance of standards） |
 | What is paragraph N mainly about；What does paragraph N mainly tell us；What phenomenon is described in paragraph N；What does the last paragraph convey | 主旨标题 | 段落大意： 只看这一段，按选项回段核对；看段首句、主句主语、转折后的话和段末总结句（2026 新课标Ⅱ Q29，段末 This is how I began my search） |
 | Which will result in X；Which is against the rules；What will definitely disqualify | 细节 | 反向核对：题干带 definitely、must 时，带例外条款的规则不算（山东潍坊 2026 年 4 月 Q22，没贴邮票的信封对学生有例外，答案是漏填 contest division，原文 Incomplete information will cause disqualification）。从题干定位到总述规则的那句（没有总述句时，小标题也算定位处），按选项逐条对后面的规则条目，记前后文展开；附表的方向规则在这里用不上（2020 新课标Ⅰ Q23，120 词的诗违反 100 words or fewer 这条，是答案） |
@@ -257,6 +261,9 @@
 - 上下文线索：同位或解释（that is、or、破折号、括号）、对比（but、unlike、instead）、
   举例（such as、like）、因果、构词法（前缀、后缀、词根）。
 - 指代：就近往前找；单复数、人和物一致；把选项代回原句读一遍。
+  最近的名词选项里没有时，回到段首的主题句，再用画线词所在句的动词去核对。
+  例：湖北五地市 2026 年 9 月 Q24，I wanted to take some of that back，紧挨着的 independence 选项里没有；
+  take back 对上段首 I longed for a change – something similar to the way I'd lived life before MS，答案 The bright way of life she had before MS。
 - 画线词带 not（not oblivious to）先去掉否定再释义，再代回去核对。
 - 四项都不太贴切时，先排除明确错的三项，再选剩下那项。
 - 陷阱：代回不通，包括选了词典里的常用义而不是文中义、单复数或人和物对不上、
@@ -615,3 +622,10 @@
 - 态度：Optimistic 和 Cautious 同在时看最后原话讲前景还是挑战（大连 Q31）；判断句选项选盖住整句的（九五 Q27）。
 - 干扰项：别的项目收数据的方式冒充本研究做法是张冠李戴（南平 Q29）；if、whether 的未定改成已定是原词变形（常州 Q30）。
 - 统一说法：emphasize 题和别的单段题一样按选项，找法写定在强调词那句（漳州 Q26 发现两处说法不一致）。
+
+**v15（2026-11-22）**，依据第 14 轮试做：8 套没用过的 2026 年模拟卷（江苏镇江零模、扬州 1 月、无锡 1 月、苏州 1 月、山东德州 1 月、
+湖南怀化 3 月、湖北五地市 9 月、华中师大一附中 5 月），120/120，连续两轮全对。下面引的模拟卷例子都回原文核对过。这一版的规则都只从模拟卷得出，且都来自做对的题。
+- 「问法归哪类」：learn from the text 按选项形式分，概括全文的名词短语归主旨标题（怀化 Q31）；main theme / moral of the story 选项是道理归推断（华师一附中 Q27）。
+- 指代：最近的名词不在选项时回段首主题句、用动词核对（湖北五地市 Q24）。
+- 定位：题眼原词所在句只用代词回指时，定位到被指的那句（镇江 Q33）。
+- 下一轮改用没引用过的真题，检查 v10 以来只从模拟卷得出的规则会不会把真题做坏。
