@@ -209,20 +209,23 @@ h5 {
 }
 
 .answer-overview > h2 {
-  margin: 0 0 2mm;
+  margin: 0 0 2.4mm;
   font: 700 12pt/16.8pt var(--zh);
 }
 
+/* 答案速查 is a table without rules: the numbers sit on a pale band, five to
+   a block as on the answer sheet, and the white gaps between cells are the
+   table's lines. */
 .answer-overview-section {
   display: grid;
-  grid-template-columns: 20mm minmax(0, 1fr);
-  gap: 2mm;
-  padding: 0.8mm 0;
+  grid-template-columns: 17mm minmax(0, 1fr);
+  column-gap: 2mm;
+  margin-top: 2mm;
   break-inside: avoid;
 }
 
 .answer-overview-section h3 {
-  padding: 0.5mm 0;
+  padding-top: 0.6mm;
   color: var(--ink);
   font: 700 var(--fs)/var(--lh) var(--zh);
 }
@@ -235,11 +238,18 @@ h5 {
 
 .answer-grid {
   display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.6mm 2mm;
+}
+
+.answer-run {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: 0.5mm;
 }
 
 .answer-grid--text {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .answer-cell {
@@ -249,8 +259,11 @@ h5 {
 }
 
 .answer-grid .answer-cell {
-  padding: 0.5mm 0.6mm 0.5mm 0;
-  font: 700 var(--fs)/var(--lh) var(--en);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  text-align: center;
+  text-align-last: center;
 }
 
 .answer-cell b {
@@ -259,9 +272,22 @@ h5 {
 }
 
 .answer-grid .answer-cell b {
-  display: inline-block;
-  min-width: 5mm;
-  text-align: right;
+  border-radius: 1pt 1pt 0 0;
+  background: var(--tint);
+  color: var(--green-deep);
+  font: 400 7.5pt/11pt var(--en);
+  font-variant-numeric: tabular-nums;
+}
+
+.answer-grid .answer-cell > span {
+  padding: 0.3mm 0.4mm 0;
+  font: 700 11pt/15pt var(--en);
+  overflow-wrap: break-word;
+}
+
+.answer-grid--text .answer-cell > span {
+  font-size: var(--fs);
+  line-height: var(--lh);
 }
 
 /* ---------- Body grid ---------- */
@@ -508,17 +534,22 @@ h5 {
 
 .question-number {
   /* The one filled shape on the page: a pine block with the number reversed
-     out, so a teacher scanning a column finds question 47 by its block. */
+     out, so a teacher scanning a column finds question 47 by its block. One-
+     and two-digit numbers get the same block, the figures centred in it. */
   display: inline-block;
-  min-width: 1.75em;
-  margin-right: 0.35em;
-  padding: 0 0.22em;
-  border-radius: 1.2pt;
+  box-sizing: border-box;
+  min-width: 2.15em;
+  margin-right: 0.4em;
+  padding: 0 0.3em;
+  border-radius: 1.5pt;
   background: var(--green-deep);
   color: var(--paper);
   text-align: center;
-  font: 700 9pt/12pt var(--en);
-  font-variant-numeric: tabular-nums;
+  /* The body sets text-align-last: start, which a one-line block inherits. */
+  text-align-last: center;
+  letter-spacing: 0.02em;
+  font: 700 9.5pt/12.5pt var(--en);
+  font-variant-numeric: lining-nums tabular-nums;
   string-set: running-question content();
 }
 
@@ -551,6 +582,8 @@ h5 {
 
 .analysis-prose,
 .evidence-quote,
+.evidence-locate,
+.evidence-paraphrase,
 .distractor {
   margin-top: 0.6mm;
 }

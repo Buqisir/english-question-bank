@@ -365,3 +365,60 @@ for (const file of readdirSync(new URL('../server/exports/companion-analysis/', 
   assert.doesNotMatch(readingHtml, /source-relationships|原文证据段落/u)
 }
 console.log('Companion analysis merged passage and separators: PASS')
+
+{
+  // 定位: stem words found in the clue paragraph, and the paragraph counted the
+  // way the exam paper counts it.
+  const { stemLocators, passagePlace, renderReadingGroup } = await import('../server/exports/companion-analysis/reading.mjs')
+  assert.deepEqual(stemLocators('Where can you find an original copy of the Magna Carta?',
+    'It’s also home to an ancient library. One of the four original copies of the Magna Carta is displayed there.'),
+  ['Magna Carta', 'original copy'])
+  assert.deepEqual(stemLocators('Why does Dr. Doswell mention the tornadoes?', 'Dr. Doswell saw tornadoes in 1999.'), ['Dr. Doswell', 'tornadoes'])
+  assert.deepEqual(stemLocators('Which is the best title for the text?', 'A title.'), [])
+  const plain = { passage: { paragraphs: [
+    { paragraphId: 'p1', text: 'First paragraph ends here.' },
+    { paragraphId: 'p2', text: 'Second paragraph is cut at a page break and goes on' },
+    { paragraphId: 'p3', text: 'in lower case after the break.' },
+    { paragraphId: 'p4', text: 'Third paragraph.' },
+  ] } }
+  assert.equal(passagePlace(plain, 'p3'), '第 2 段', 'a page-break half counts as the paragraph it continues')
+  assert.equal(passagePlace(plain, 'p4'), '第 3 段')
+  const titled = { passage: { paragraphs: [{ paragraphId: 't', text: 'A Title Without a Full Stop' }, ...plain.passage.paragraphs] } }
+  assert.equal(passagePlace(titled, 't'), '标题')
+  assert.equal(passagePlace(titled, 'p4'), '第 3 段', 'the title is not a paragraph')
+  const sectioned = { passage: { paragraphs: [
+    { paragraphId: 't', text: 'Market Towns to Visit' },
+    { paragraphId: 'i', text: 'An opening paragraph.' },
+    { paragraphId: 'h1', text: 'Hereford, Herefordshire' },
+    { paragraphId: 'b1', text: 'Hereford has a cathedral.' },
+    { paragraphId: 'h2', text: 'Ludlow, Shropshire' },
+    { paragraphId: 'b2', text: 'Ludlow has food.' },
+  ] } }
+  assert.equal(passagePlace(sectioned, 'b1'), 'Hereford, Herefordshire')
+  assert.equal(passagePlace(sectioned, 'h2'), '小标题')
+  assert.equal(passagePlace(sectioned, 'i'), '开头')
+
+  const group = { groupId: 'g', groupType: 'reading', title: 'reading.a', questionIds: ['q1'], passage: plain.passage }
+  const paper = { content: { questions: { q1: { questionId: 'q1', questionNo: 21, groupId: 'g', stem: 'What does the third paragraph say?', options: [] } } },
+    answerKey: { answers: { q1: { answer: 'B' } } } }
+  const html = renderReadingGroup({ group, paperAsset: paper, answers: [], openingHeadings: '', analysis: { groups: {}, questions: { q1: {
+    stemTranslationZh: '第三段说了什么？', similarityProfile: { family: 'detail' },
+    optionAnalysis: [{ label: 'B', status: 'correct', evidence: [{ paragraphId: 'p4', quote: 'Third paragraph.' }] }],
+    locationParaphrases: [{ sourceText: 'The third one.', sourceRole: 'correctOption', targetText: 'Third paragraph.', relationType: 'paraphrase', note: 'NOTE_SENTINEL' }],
+  } } } })
+  if (html.includes('question-number')) {
+    assert.match(html, /<p class="evidence-locate"><span class="inline-label">定位<\/span><b lang="en">third<\/b> → 第 3 段<\/p>/u)
+    assert.match(html, /<p class="evidence-paraphrase"><span class="inline-label">同义替换<\/span><b>B 项<\/b> <span lang="en">The third one\.<\/span><\/p>/u)
+    assert.ok(html.indexOf('evidence-locate') < html.indexOf('evidence-quote')
+      && html.indexOf('evidence-quote') < html.indexOf('evidence-paraphrase')
+      && html.indexOf('evidence-paraphrase') < html.indexOf('NOTE_SENTINEL'), '定位 → 原文依据 → 同义替换 → 分析')
+  } else assert.fail(`reading fixture did not render a question: ${html.slice(0, 200)}`)
+
+  const { renderAnswerRuns } = await import('../server/exports/companion-analysis/blocks.mjs')
+  const runs = renderAnswerRuns(Array.from({ length: 12 }, (_, index) => ({ questionId: `q${index}`, number: index + 1, value: 'A' })))
+  assert.equal((runs.match(/<div class="answer-run">/gu) || []).length, 3, 'answers come five to a block')
+  const { companionAnalysisStyles } = await import('../server/exports/companion-analysis/styles.mjs')
+  const numberRule = companionAnalysisStyles({ houseMark: '', paginated: true }).match(/\.question-number \{[^}]*\}/u)?.[0] || ''
+  assert.match(numberRule, /text-align-last: center;/u, 'the body’s text-align-last: start would pin the figures to the block’s left edge')
+}
+console.log('Companion analysis 定位, paragraph count and answer table: PASS')

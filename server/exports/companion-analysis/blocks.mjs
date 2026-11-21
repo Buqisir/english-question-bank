@@ -304,6 +304,14 @@ export function renderAnswerCells(answers) {
     `<span class="answer-cell" data-question-id="${escapeHtml(questionId)}"><b>${escapeHtml(number)}</b> <span>${escapeHtml(value)}</span></span>`).join('')
 }
 
+// The answer table reads like the answer sheet a class fills in: five
+// questions to a block, the numbers on a pale band, the answers under them.
+export function renderAnswerRuns(answers) {
+  const runs = []
+  for (let index = 0; index < answers.length; index += 5) runs.push(answers.slice(index, index + 5))
+  return runs.map(run => `<div class="answer-run">${renderAnswerCells(run)}</div>`).join('')
+}
+
 export function renderAnswerOverview(parts) {
   const rows = new Map()
   for (const part of parts) {
@@ -321,7 +329,7 @@ export function renderAnswerOverview(parts) {
     const textAnswers = label === '语法填空' || answers.some(({ value }) => !/^[A-Z]$/u.test(value.trim()))
     return `<section class="answer-overview-section">
       <h3>${escapeHtml(label)}${unofficial ? `<small>${unofficialListeningLabel}</small>` : ''}</h3>
-      <div class="answer-grid${textAnswers ? ' answer-grid--text' : ''}">${renderAnswerCells(answers)}</div>
+      <div class="answer-grid${textAnswers ? ' answer-grid--text' : ''}">${renderAnswerRuns(answers)}</div>
     </section>`
   }).join('')
 }
