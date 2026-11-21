@@ -354,5 +354,14 @@ for (const file of readdirSync(new URL('../server/exports/companion-analysis/', 
   const edited = 'Yet now I live in the countryside, where tea grows, and central heating often fails.'
   const unaligned = renderSourceRelationships({ teachingContent: teaching(edited) }, group, paper)
   assert.match(unaligned, /原题[\s\S]*答案补全/u, 'texts that do not line up keep both paragraphs')
+  // Reading quotes its clues once, in each question's 原文依据, and prints no
+  // passage of its own, even when the passage carries clue marks.
+  const { renderReadingGroup } = await import('../server/exports/companion-analysis/reading.mjs')
+  const readingHtml = renderReadingGroup({
+    group: { groupId: 'g', groupType: 'reading', title: '阅读 A', questionIds: [], passage: group.passage },
+    paperAsset: paper, analysis: { groups: { g: { teachingContent: teaching(completed) } } }, answers: [], openingHeadings: '',
+  })
+  assert.match(readingHtml, /analysis-group--reading/u)
+  assert.doesNotMatch(readingHtml, /source-relationships|原文证据段落/u)
 }
 console.log('Companion analysis merged passage and separators: PASS')

@@ -186,7 +186,6 @@ function renderRelationshipParagraph(source, label, paperAsset) {
 export function renderSourceRelationships(groupAnalysis, group, paperAsset) {
   const teaching = groupAnalysis?.teachingContent
   if (teaching?.schemaVersion !== 'objective-teaching-content-v1') return ''
-  const reading = group.groupType === 'reading'
   const sevenChoices = ['sevenChoices', 'seven_choices'].includes(group.groupType)
   const completedByParagraph = new Map(array(teaching.completedSourceTexts)
     .map((paragraph) => [paragraph.paragraphId, paragraph]))
@@ -201,9 +200,9 @@ export function renderSourceRelationships(groupAnalysis, group, paperAsset) {
       ranges: rangesOn(teaching, teaching.sourceTextId, paragraph.paragraphId, paragraph.text),
     }
     const block = completedByParagraph.get(paragraph.paragraphId)
-    if (reading || !block) {
+    if (!block) {
       if (!printable(original.ranges)) return []
-      return [renderRelationshipParagraph(original, reading ? '原文' : '', paperAsset)]
+      return [renderRelationshipParagraph(original, '', paperAsset)]
     }
     const completed = { ...block, state: 'completed' }
     const merged = mergedParagraph(teaching, paragraph, completed)
@@ -217,7 +216,7 @@ export function renderSourceRelationships(groupAnalysis, group, paperAsset) {
       .map((source) => renderRelationshipParagraph(source, source.state === 'original' ? '原题' : '答案补全', paperAsset))
   })
   if (rendered.length === 0) return ''
-  return `<section class="source-relationships">${renderHeadingLead(reading ? '<h4>原文证据段落</h4>' : '<h4>原文</h4>', ...rendered)}</section>`
+  return `<section class="source-relationships">${renderHeadingLead('<h4>原文</h4>', ...rendered)}</section>`
 }
 
 export function renderUnderlinedText(value, underlineTexts) {

@@ -1,5 +1,5 @@
 import { resolveFigureTextRegion } from '../../../shared/paper-canonical/richContent.mjs'
-import { renderEvidenceQuote, renderFullTranslation, renderGroupHeading, renderHeadingLead, renderOverview, renderQuestionHeader, renderQuestionLead, renderSelectedLongSentences, renderSourceRelationships } from './blocks.mjs'
+import { renderEvidenceQuote, renderFullTranslation, renderGroupHeading, renderHeadingLead, renderOverview, renderQuestionHeader, renderQuestionLead, renderSelectedLongSentences } from './blocks.mjs'
 import { answerData, passageQuote, questionData } from './paper.mjs'
 import { array, escapeHtml, exactTextRange, nonEmptyString, withoutClosingPunctuation } from './text.mjs'
 
@@ -79,11 +79,13 @@ export function renderReadingGroup({ group, title, paperAsset, analysis, answers
       ${details.join('')}
     </section>`
   }).join('')
+  // Reading prints no passage of its own: each question quotes its clue in
+  // 原文依据, and the full translation carries the same marks (Owner
+  // 2026-11-21, docs/product/companion-analysis-components.md).
   return `<section class="analysis-group analysis-group--reading">
     ${renderHeadingLead(openingHeadings + renderGroupHeading(displayTitle, answers), renderOverview(groupAnalysis.overview))}
     ${renderReadingDiscourse(groupAnalysis.discourseStructure, group, groupAnalysis.overview)}
     ${renderFullTranslation(groupAnalysis, paperAsset)}
-    ${renderSourceRelationships(groupAnalysis, group, paperAsset)}
     ${questions}
     ${renderSelectedLongSentences(groupAnalysis.selectedLongSentences, paperAsset)}
   </section>`
