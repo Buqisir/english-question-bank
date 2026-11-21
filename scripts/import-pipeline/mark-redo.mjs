@@ -9,6 +9,7 @@ import { validateAgentOcrCorrectionReceipt } from '../../server/import-review/im
 import { buildNck1SealedReviewProjection, loadNck1ReviewSource } from '../../server/import-review/revisionProjection.mjs'
 import { LISTENING_REVIEW_FILE, listeningReviewSubject, RETAINED_LISTENING_NAVIGATION } from '../../server/paper-import/listeningReview.mjs'
 import { NCK1_OCR_CONFIRMATION_FILE_NAME } from '../../server/paper-import/nck1OcrSourceEvidence.mjs'
+import { ANALYSIS_PDF_EDITION } from '../../server/paper-import/pdfProductSet.mjs'
 import { SOURCE_REFERENCES_FILE } from '../../server/paper-import/sourceReferences.mjs'
 import { importCanonicalCandidate } from '../../shared/paper-canonical/compiler.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
@@ -22,7 +23,8 @@ const bindingFiles = ['paragraph-summaries-v1.json', 'public-search-metadata-v1.
 const readJson = file => JSON.parse(readFileSync(file, 'utf8'))
 const writeJson = (file, value, flag = 'w') => writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`, { flag })
 
-export function moveUnderline(item, from, to, text) {
+export function moveUnderline(item, from, to, text, bold = false) {
+  if (bold && from !== 'none') throw new Error('--bold 仅用于新增画线')
   function coordinates(value) {
     if (!/^\d+,\d+$/u.test(value ?? '')) throw new Error('坐标必须为 start,end')
     const [start, end] = value.split(',').map(Number)
@@ -49,10 +51,48 @@ export function moveUnderline(item, from, to, text) {
   if (remaining.some(range => range.start < next.end && range.end > next.start)) {
     throw new Error('新坐标与现有标注重叠')
   }
-  return [...remaining, { ...next, marks: matched?.marks ?? ['underline'] }].sort((a, b) => a.start - b.start)
+  return [...remaining, { ...next, marks: matched?.marks ?? (bold ? ['bold', 'underline'] : ['underline']) }]
+    .sort((a, b) => a.start - b.start)
 }
 
-function editConfirmation(sealed, { block: blockId, from, to, text }) {
+export function markParagraph(items, paragraph, { item: requestedItem, from, to, text, bold }) {
+  const matches = []
+  for (const [start, first] of items.entries()) {
+    if (!paragraph.startsWith(first.text)) continue
+    let joined = first.text
+    let end = start + 1
+    while (joined !== paragraph && end < items.length && paragraph.startsWith(`${joined} ${items[end].text}`)) {
+      joined += ` ${items[end++].text}`
+    }
+    if (joined === paragraph) matches.push({ start, end })
+  }
+  if (matches.length !== 1) throw new Error('正文段落须唯一对应同页连续 OCR 条目')
+  const [{ start, end }] = matches
+  const parts = items.slice(start, end)
+  const [first] = parts
+  if (!requestedItem && parts.length !== 1) throw new Error('正文段落跨多个 OCR 条目，须指定 --item')
+  const target = requestedItem ? parts.find(part => part.itemId === requestedItem) : first
+  if (!target) throw new Error('--item 不属于指定正文段落')
+  const marks = moveUnderline(target, from, to, text, bold)
+  if (parts.length === 1) {
+    target.sourceEmphasis = marks
+    return target.itemId
+  }
+  // Canonical matches the paragraph's full source region. Combine only the
+  // exact contiguous text it already holds, retaining every observation.
+  let offset = 0
+  const sourceEmphasis = parts.flatMap(part => {
+    const ranges = (part === target ? marks : part.sourceEmphasis ?? []).map(range =>
+      ({ ...range, start: range.start + offset, end: range.end + offset }))
+    offset += part.text.length + 1
+    return ranges
+  })
+  items.splice(start, parts.length, { ...first, text: paragraph,
+    observationIds: parts.flatMap(part => part.observationIds), sourceEmphasis })
+  return target.itemId
+}
+
+function editConfirmation(sealed, { block: blockId, ...edit }) {
   const { materialization } = loadNck1ReviewSource(sealed)
   const block = materialization.groups.filter(group => group.family === 'reading')
     .flatMap(group => group.blocks).find(block => block.blockId === blockId)
@@ -60,13 +100,11 @@ function editConfirmation(sealed, { block: blockId, from, to, text }) {
     || !block.content.every(run => run.kind === 'text')) throw new Error('须指定一处 OCR 阅读正文段落')
   const paragraph = block.content.map(run => run.text).join('')
   const confirmation = readJson(path.join(sealed, confirmationFile))
-  const items = confirmation.documents.filter(doc => doc.documentId === block.source.documentId)
-    .flatMap(doc => doc.pages.filter(page => page.page === block.source.page))
-    .flatMap(page => page.orderedItems.filter(item => item.text === paragraph))
-  if (items.length !== 1) throw new Error('正文段落须唯一对应同页一个 OCR 条目')
-  const [item] = items
-  item.sourceEmphasis = moveUnderline(item, from, to, text)
-  return { confirmation, itemId: item.itemId, source: block.source }
+  const page = confirmation.documents.find(doc => doc.documentId === block.source.documentId)
+    ?.pages.find(page => page.page === block.source.page)
+  if (!page) throw new Error('正文段落的 OCR 页缺失')
+  const itemId = markParagraph(page.orderedItems, paragraph, edit)
+  return { confirmation, itemId, source: block.source }
 }
 
 function merge(work, sealed, base) {
@@ -118,7 +156,10 @@ function merge(work, sealed, base) {
     if (!subject.ok) throw new Error(`本地 finalize 失败：${subject.reasonCode}`)
     const pdfs = revision => revision.files.filter(file => file.role === 'pdf_product')
       .map(({ path, sha256 }) => ({ path, sha256 }))
-    deepStrictEqual(pdfs(manifest).map(file => file.path).sort(), pdfs(base.manifest).map(file => file.path).sort())
+    const expectedPdfs = new Set(pdfs(base.manifest).map(file => file.path))
+    // Older Candidates can have staged analyses but no frozen analysis PDF.
+    if (before.analysisDigest) expectedPdfs.add(`products/${ANALYSIS_PDF_EDITION}.pdf`)
+    deepStrictEqual(pdfs(manifest).map(file => file.path).sort(), [...expectedPdfs].sort())
     const comparison = { before: content(before), after: content(after),
       unchangedFiles: unchanged(manifest.files), pdfs: { before: pdfs(base.manifest), after: pdfs(manifest) } }
     writeJson(path.join(staging, 'manifest.json'), manifest)
@@ -138,13 +179,15 @@ export function assertMarkPushReceipt(mergeReceipt, edit) {
 
 async function main() {
   const [command, ...args] = process.argv.slice(2)
-  const { values } = parseArgs({ args, options: Object.fromEntries(
-    ['paper', 'work', 'block', 'from', 'to', 'text'].map(name => [name, { type: 'string' }]),
-  ) })
+  const { values } = parseArgs({ args, options: {
+    ...Object.fromEntries(['paper', 'work', 'block', 'from', 'to', 'text', 'item'].map(name => [name, { type: 'string' }])),
+    bold: { type: 'boolean' },
+  } })
   const required = { prepare: ['paper'], fix: ['block', 'from', 'to', 'text'], merge: [], push: [] }[command]
   const { work: workDir, ...options } = values
-  if (!workDir || !required || required.length !== Object.keys(options).length || required.some(key => !options[key])) {
-    throw new Error('用法：mark-redo.mjs prepare --paper ID --work DIR | fix --work DIR --block ID --from START,END|none --to START,END --text WORD | merge|push --work DIR')
+  const allowed = command === 'fix' ? [...required, 'item', 'bold'] : required
+  if (!workDir || !required || Object.keys(options).some(key => !allowed.includes(key)) || required.some(key => !options[key])) {
+    throw new Error('用法：mark-redo.mjs prepare --paper ID --work DIR | fix --work DIR --block ID --from START,END|none --to START,END --text WORD [--item OCR_ID] [--bold] | merge|push --work DIR')
   }
   const work = path.resolve(workDir)
   if (command === 'prepare') {
