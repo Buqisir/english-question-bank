@@ -271,24 +271,14 @@ h5 {
   column-fill: auto;
   column-gap: calc(2 * var(--char));
   column-rule: 0.35pt solid var(--line);
-  text-align: justify;
+  /* Ragged right everywhere (Owner 2026-11-21). Justified mixed lines spread
+     the Chinese characters in front of an English word that does not fit;
+     left-aligned, a line of fixed-width Chinese ends at most a character or
+     two short. */
+  text-align: start;
   /* Paged.js turns an implicit last-line alignment into "justify" on split
-     fragments, which spreads every <br>-ended transcript line letter by
-     letter. An explicit start keeps the last line ragged. */
+     fragments; an explicit start keeps every last line ragged. */
   text-align-last: start;
-}
-
-[lang="en"],
-.analysis-body [lang="en"],
-.listening-source,
-.listening-transcript .heading-lead,
-.evidence-quote,
-.continuation-evidence li,
-.model-paragraph,
-.model-signoff {
-  /* English-led lines stay ragged-right: justifying a line with few word
-     spaces letter-spaces its Chinese label (原 文) instead. */
-  text-align: left;
 }
 
 .paper-part {
@@ -727,11 +717,8 @@ dt {
   font-size: var(--fs);
 }
 
-/* Short facts beside a label: justifying them spreads the characters of a
-   line that ends before a long English word, so they stay ragged. */
 dd {
   margin: 0;
-  text-align: start;
 }
 
 .review-card dd span {
@@ -758,7 +745,6 @@ dd {
   font-family: var(--en);
   font-size: var(--fs);
   line-height: var(--lh);
-  text-align: left;
 }
 
 .model-paragraph + .model-paragraph {
