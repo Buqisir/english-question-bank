@@ -59,24 +59,22 @@ v2Writing.continuationAnalysis.developmentPlan.paragraphs[0].cluePayoffs = [{
 Object.assign(v2Writing.continuationAnalysis.developmentPlan, {
   qualityRisks: ['QUALITY_RISK_SENTINEL'], reviewNotes: ['REVIEW_NOTE_SENTINEL'], internal: 'INTERNAL_SENTINEL',
 })
-v2Writing.officialModelAnswer = 'OFFICIAL_MODEL_SENTINEL'
+v2Writing.officialModelAnswer = 'LEGACY_SOURCE_SENTINEL'
 v2Writing.modelAnswer = 'GENERATED_MODEL_SENTINEL'
 const v2ContinuationHtml = buildCompanionAnalysisHtml(v2ContinuationSource)
 assert.equal((v2ContinuationHtml.match(/data-continuation-section=/gu) || []).length, 4)
 assert.match(v2ContinuationHtml, /<p>触发：EMOTION_TRIGGER_SENTINEL<\/p><p>变化：uncertain → resolved<\/p><p>表现：VISIBLE_ACTION_SENTINEL<\/p>/u)
 assert.match(v2ContinuationHtml, /<li><p><b>原文<\/b>：“CLUE_SENTINEL”<\/p><p>PAYOFF_SENTINEL<\/p><\/li>/u)
 assert.doesNotMatch(v2ContinuationHtml, /质量风险|QUALITY_RISK_SENTINEL|REVIEW_NOTE_SENTINEL|INTERNAL_SENTINEL/u)
-assert.ok(v2ContinuationHtml.includes('OFFICIAL_MODEL_SENTINEL'))
+assert.ok(v2ContinuationHtml.includes('LEGACY_SOURCE_SENTINEL'))
 assert.ok(v2ContinuationHtml.includes('GENERATED_MODEL_SENTINEL'))
-assert.match(v2ContinuationHtml, /<h4>参考范文<\/h4>[\s\S]*OFFICIAL_MODEL_SENTINEL[\s\S]*<h4>参考范文（AI 撰写）<\/h4>[\s\S]*GENERATED_MODEL_SENTINEL/u)
+assert.match(v2ContinuationHtml, /<h4>参考范文<\/h4>[\s\S]*LEGACY_SOURCE_SENTINEL[\s\S]*<h4>参考范文（AI 撰写）<\/h4>[\s\S]*GENERATED_MODEL_SENTINEL/u)
 assert.ok(!v2ContinuationHtml.includes('continuationDesign'))
 assert.ok(!v2ContinuationHtml.includes('highlightExpressions'))
 const [continuationGroupId] = Object.entries(v2ContinuationSource.analyses.writing.groups)
   .find(([, { writing }]) => writing === v2Writing)
 const writingProjection = {
-  paperAsset: { ...v2ContinuationSource.paperAsset, paper: {
-    ...v2ContinuationSource.paperAsset.paper, source: '学科网转载，含非官方参考范文',
-  } },
+  paperAsset: v2ContinuationSource.paperAsset,
   analysisSidecars: { 'writing-analysis-v1.json': v2ContinuationSource.analyses.writing },
   consumption: { visibleStructure: [
     { kind: 'part' }, { kind: 'section' },
@@ -84,18 +82,21 @@ const writingProjection = {
   ] },
   sourceReferences: { groups: [{ groupId: continuationGroupId, taskType: 'continuation', essays: { entries: [] } }] },
 }
-const revisionWithoutSourceEssay = buildCompanionAnalysisHtml({ projection: writingProjection })
-assert.match(revisionWithoutSourceEssay,
-  /data-continuation-section="modelAnswer">[\s\S]*<h4>参考范文<\/h4><p class="model-paragraph">OFFICIAL_MODEL_SENTINEL<\/p>[\s\S]*<h4>参考范文（AI 撰写）<\/h4><p class="model-paragraph">GENERATED_MODEL_SENTINEL<\/p>/u)
-writingProjection.sourceReferences.groups[0].essays.entries.push({
-  provenance: 'unofficial', paragraphs: [{ text: 'UNOFFICIAL_SOURCE_SENTINEL' }],
-}, {
-  sourceLabel: '【答案】', paragraphs: [{ text: 'OFFICIAL_SOURCE_SENTINEL' }],
-})
-const revisionWithSourceEssay = buildCompanionAnalysisHtml({ projection: writingProjection })
-assert.match(revisionWithSourceEssay,
-  /<h4>非官方参考范文<\/h4><p class="model-paragraph">UNOFFICIAL_SOURCE_SENTINEL<\/p>[\s\S]*<h4>参考范文<\/h4><p class="model-paragraph">OFFICIAL_SOURCE_SENTINEL<\/p>[\s\S]*<h4>参考范文（AI 撰写）<\/h4><p class="model-paragraph">GENERATED_MODEL_SENTINEL<\/p>/u)
-assert.doesNotMatch(revisionWithSourceEssay, /OFFICIAL_MODEL_SENTINEL/u)
+delete v2Writing.officialModelAnswer
+const sourceEssay = ['参考范文', 'SOURCE_ESSAY_SENTINEL']
+const aiEssay = ['参考范文（AI 撰写）', 'GENERATED_MODEL_SENTINEL']
+for (const [hasSource, hasAi, expected] of [
+  [true, true, [sourceEssay, aiEssay]], [true, false, [sourceEssay]],
+  [false, true, [aiEssay]], [false, false, []],
+]) {
+  writingProjection.sourceReferences.groups[0].essays.entries = hasSource
+    ? [{ provenance: 'unofficial', paragraphs: [{ text: sourceEssay[1] }] }] : []
+  v2Writing.modelAnswer = hasAi ? aiEssay[1] : ''
+  const revision = buildCompanionAnalysisHtml({ projection: writingProjection })
+  assert.deepEqual([...revision.matchAll(/<h4>([^<]*范文[^<]*)<\/h4><p class="model-paragraph">([^<]+)<\/p>/gu)]
+    .map(([, label, text]) => [label, text]), expected)
+  assert.equal(revision.includes('data-continuation-section="modelAnswer"'), expected.length > 0)
+}
 const translatedSource = structuredClone(source)
 for (const group of Object.values(translatedSource.analyses.reading.groups)) {
   group.fullTranslationZh = '这是阅读文章的完整中文译文。'

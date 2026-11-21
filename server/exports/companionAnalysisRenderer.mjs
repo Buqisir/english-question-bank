@@ -721,18 +721,14 @@ function renderContinuationAnalysis(analysis) {
     </section>`
 }
 
-function renderWritingModels(source, official, model, isContinuation) {
-  const entries = array(source?.essays?.entries)
-    .map(entry => ({
-      text: sourceReferenceBlocks(entry)
-        .filter(block => block.kind === 'paragraph')
-        .map(block => block.paragraph.text).join('\n'),
-      unofficial: entry.provenance === 'unofficial'
-        || (!entry.provenance && /非官方|学科网/u.test(entry.sourceLabel ?? '')
-          && !/考试院|命题方|(?<!非)官方/u.test(entry.sourceLabel ?? '')),
-    })).filter(({ text }) => text.trim())
-  if (entries.length === 0 && official) entries.push({ text: official, unofficial: false })
-  const essays = entries.map(({ text, unofficial }) => ({ text, label: unofficial ? '非官方参考范文' : '参考范文' }))
+function renderWritingModels(source, legacySourceEssay, model, isContinuation) {
+  const sourceEssays = array(source?.essays?.entries)
+    .map(entry => sourceReferenceBlocks(entry)
+      .filter(block => block.kind === 'paragraph')
+      .map(block => block.paragraph.text).join('\n'))
+    .filter(text => text.trim())
+  if (sourceEssays.length === 0 && legacySourceEssay) sourceEssays.push(legacySourceEssay)
+  const essays = sourceEssays.map(text => ({ text, label: '参考范文' }))
   if (model) essays.push({ text: model, label: '参考范文（AI 撰写）' })
   if (essays.length === 0) return ''
   const content = essays.map(({ text, label }) => {
@@ -752,9 +748,9 @@ function renderWritingGroup({ group, title, analysis, sourceReferencesByGroup, o
   const writing = analysis?.groups?.[group.groupId]?.writing
   const source = sourceReferencesByGroup?.get(group.groupId)
   const isContinuation = (source?.taskType ?? writing?.taskType) === 'continuation'
-  const official = nonEmptyString(writing?.officialModelAnswer)
+  const legacySourceEssay = nonEmptyString(writing?.officialModelAnswer)
   const model = nonEmptyString(writing?.modelAnswer)
-  const models = renderWritingModels(source, official, model, isContinuation)
+  const models = renderWritingModels(source, legacySourceEssay, model, isContinuation)
   if (!writing && !models) return ''
   const groupHeading = `${openingHeadings}<h3 class="group-title">${escapeHtml(title || group.title || (isContinuation ? '读后续写' : '应用文写作'))}</h3>`
   const reviewCard = isContinuation ? '' : renderReviewCard(writing?.reviewCard, groupHeading)
