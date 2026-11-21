@@ -244,8 +244,10 @@ assert.match(revisionHtml, /<span>空后<\/span><p lang="en">Later\.<\/p>/)
 assert.match(revisionHtml, /<h3>听力<small>听力答案（非官方，据录音整理）<\/small><\/h3>/)
 assert.match(revisionHtml, /<small>听力答案（非官方，据录音整理）<\/small>/)
 assert.match(revisionHtml, /第 1 段材料（第 1 题）[\s\S]*第 3 段材料（第 3–4 题）/u)
-assert.deepEqual([...revisionHtml.matchAll(/class="translation-marker">(\[[\d、]+\])<\/b>/gu)]
-  .map(([, marker]) => marker), ['[36、37]', '[36]'])
+// Each clue's number appears once, after its last character (甲 ends the 37
+// clue, 乙 ends the 36 clue), however the two clues overlap.
+assert.deepEqual([...revisionHtml.matchAll(/class="clue-no">([\d,]+)<\/sup>/gu)]
+  .map(([, marker]) => marker), ['37', '36'])
 const answerCells = markup => [...markup.matchAll(/data-question-id="([^"]+)"><b>([^<]+)<\/b> <span>([^<]+)<\/span>/gu)]
   .map(([, id, number, answer]) => [id, `${number} ${answer}`])
 for (const document of [html, revisionHtml]) {
@@ -311,9 +313,14 @@ for (const file of readdirSync(new URL('../server/exports/companion-analysis/', 
   const merged = renderSourceRelationships({ teachingContent: teaching(completed) }, group, paper)
   assert.equal([...merged.matchAll(/data-source-text-state="merged"/gu)].length, 1)
   assert.doesNotMatch(merged, /原题|答案补全|__56__/u)
-  for (const [kind, text] of [['answer-evidence', 'the countryside'], ['answer-insertion', 'where'], ['answer-insertion', 'central'], ['answer-evidence', 'heating fails']]) {
+  for (const [kind, text] of [['answer-evidence', 'the countrysid'], ['answer-insertion', 'where'], ['answer-insertion', 'central'], ['answer-evidence', 'heating fail']]) {
     assert.match(merged, new RegExp(`data-annotation-kinds="${kind}"[^>]*>${text}</span>`, 'u'))
   }
+  // The answer carries its number in front; the clue its number after.
+  assert.match(merged, /<b class="blank-no">56<\/b><span class="source-relationship answer-fill"/u)
+  assert.match(merged, /e<\/span><sup class="clue-no">56<\/sup><\/span>, /u)
+  const plain = merged.replace(/<sup[^>]*>.*?<\/sup>|<b class="blank-no">.*?<\/b>|<[^>]+>/gu, '')
+  assert.ok(plain.endsWith(completed), 'the printed passage reads as the completed text')
   const edited = 'Yet now I live in the countryside, where tea grows, and central heating often fails.'
   const unaligned = renderSourceRelationships({ teachingContent: teaching(edited) }, group, paper)
   assert.match(unaligned, /原题[\s\S]*答案补全/u, 'texts that do not line up keep both paragraphs')

@@ -241,7 +241,7 @@ const html = buildCompanionAnalysisHtml({
 assert.match(html, /same <span class="source-underline" data-range-indices="0">same<\/span>\.<\/p>/)
 assert.match(html, /data-translation-paragraph-id="zh-p2"/)
 assert.match(html, /data-question-nos="21 22"/)
-assert.match(html, /\[21、22\]/)
+assert.match(html, /<sup class="clue-no">21,22<\/sup>/)
 assert.match(html, /data-source-text-state="original"/)
 assert.match(html, /data-annotation-ids="[^"]*shared-second-occurrence/)
 assert.match(html, /data-question-nos="21 22"/)
@@ -372,5 +372,5 @@ const legacyMarkerHtml = buildCompanionAnalysisHtml({
   analyses: { reading: { groups: { g1: { fullTranslationZh: '手写 [36] 不是标注。' } }, questions: {} } },
 })
 assert.match(legacyMarkerHtml, /手写 \[36\] 不是标注。/)
-assert.doesNotMatch(legacyMarkerHtml, /class="translation-marker"/)
+assert.doesNotMatch(legacyMarkerHtml, /class="(?:clue|blank)-no"/)
 console.log('Analysis text ranges: Unicode, CRLF, second occurrence, overlap/many-to-many, stale revision/translation, authoritative insertion, legacy readback and both consumers PASS')

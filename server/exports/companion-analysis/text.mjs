@@ -19,11 +19,6 @@ export function innerQuote(value) {
   return String(value ?? '').replace(/"([^"]*)"/gu, '‘$1’').replaceAll('“', '‘').replaceAll('”', '’')
 }
 
-export function newQuestionMarkers(numbers, previousNumbers) {
-  const changed = numbers.length !== previousNumbers.length || numbers.some((number, index) => number !== previousNumbers[index])
-  return changed && numbers.length ? `<b class="translation-marker">[${numbers.map(escapeHtml).join('、')}]</b>` : ''
-}
-
 export function array(value) {
   return Array.isArray(value) ? value : []
 }

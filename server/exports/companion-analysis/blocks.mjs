@@ -1,7 +1,7 @@
 import { unofficialListeningLabel } from '../../answer-renderer.mjs'
 import { partitionAnalysisText } from '../../../shared/analysis/analysisTextRanges.mjs'
 import { questionData } from './paper.mjs'
-import { array, escapeHtml, exactTextRange, innerQuote, newQuestionMarkers, nonEmptyString } from './text.mjs'
+import { array, escapeHtml, exactTextRange, innerQuote, nonEmptyString } from './text.mjs'
 
 export function renderOverview(text) {
   const overview = nonEmptyString(text)
@@ -11,6 +11,50 @@ export function renderOverview(text) {
 
 export function renderHeadingLead(heading, firstBlock = '', ...rest) {
   return `<div class="heading-lead">${heading}${firstBlock}</div>${rest.join('')}`
+}
+
+// Marks on the printed passage and on its translation, one rule for both:
+// - a filled answer is bold, with its question number in front, as on the
+//   exam paper ("41 exercise");
+// - a clue is underlined, with its question number as a superscript after its
+//   last character, once per clue however other marks cut through it;
+// - long-sentence marks are left out here: 长难句解析 quotes the sentence with
+//   its 关联题目, and printing them too buried each clue under repeated numbers.
+const CJK_CLOSING = /[。，、；：！？）」』”’]/u
+
+function renderMarkedRun(text, ranges, questionNo, spanClass) {
+  const shown = ranges.filter(({ annotation }) => annotation.kind !== 'sentence-structure')
+  const isFill = (index) => shown[index].annotation.kind === 'answer-insertion'
+  const numbersOf = (indices) => [...new Set(indices.flatMap((index) =>
+    array(shown[index].annotation.questionIds).map(questionNo).filter(Boolean)))]
+    .sort((a, b) => Number(a) - Number(b))
+  const parts = partitionAnalysisText(text, shown.map(({ start, end, quote }) => ({ start, end, quote })))
+  return parts.map((part) => {
+    const indices = part.rangeIndices
+    if (indices.length === 0) return escapeHtml(part.text)
+    const annotations = indices.map((index) => shown[index].annotation)
+    const ids = [...new Set(annotations.map(({ annotationId }) => annotationId).filter(Boolean))]
+    const kinds = [...new Set(annotations.map(({ kind }) => kind))]
+    const opening = numbersOf(indices.filter((index) => isFill(index) && shown[index].start === part.start))
+    const closing = numbersOf(indices.filter((index) => !isFill(index) && shown[index].end === part.end))
+    const underline = (indices.some((index) => !isFill(index)) ? ' source-underline' : '')
+      + (indices.some(isFill) ? ' answer-fill' : '')
+    const idAttribute = ids.length ? ` data-annotation-ids="${escapeHtml(ids.join(' '))}"` : ''
+    // The clue number rides on the clue's last character, so a line never
+    // starts with a bare superscript. In Chinese it goes before closing
+    // punctuation, as citation marks do (GB/T 7714): 一座岛²²。 not 一座岛。²²
+    const points = Array.from(part.text)
+    let tailAt = points.length - 1
+    while (tailAt > 0 && CJK_CLOSING.test(points[tailAt])) tailAt -= 1
+    const open = `<span class="${spanClass}${underline}"${idAttribute} data-annotation-kinds="${escapeHtml(kinds.join(' '))}" data-question-nos="${escapeHtml(numbersOf(indices).join(' '))}">`
+    const fill = opening.length ? `<b class="blank-no">${escapeHtml(opening.join('、'))}</b>` : ''
+    if (!closing.length) return `${fill}${open}${escapeHtml(part.text)}</span>`
+    // The number sits outside the underlined run (so the rule stops at the
+    // text) but in one unbreakable unit with the last character.
+    return `${fill}${open}${escapeHtml(points.slice(0, tailAt).join(''))}</span>`
+      + `<span class="clue-tail"><span class="${spanClass}${underline}">${escapeHtml(points[tailAt])}</span>`
+      + `<sup class="clue-no">${escapeHtml(closing.join(','))}</sup></span>${escapeHtml(points.slice(tailAt + 1).join(''))}`
+  }).join('')
 }
 
 export function renderFullTranslation(groupAnalysis, paperAsset) {
@@ -34,22 +78,7 @@ export function renderFullTranslation(groupAnalysis, paperAsset) {
       .filter((range) => range.textId === teaching.translation.textId
         && range.paragraphId === paragraph.paragraphId)
       .map((range) => ({ ...range, annotation })))
-    const rangeValues = ranges.map(({ start, end, quote }) => ({ start, end, quote }))
-    const parts = rangeValues.length ? partitionAnalysisText(paragraph.quote, rangeValues) : [{
-      text: paragraph.quote,
-      rangeIndices: [],
-    }]
-    let previousNumbers = []
-    const html = parts.map((part) => {
-      if (part.rangeIndices.length === 0) { previousNumbers = []; return escapeHtml(part.text) }
-      const annotations = part.rangeIndices.map((index) => ranges[index].annotation)
-      const numbers = [...new Set(annotations.flatMap(({ questionIds }) =>
-        array(questionIds).map(questionNo).filter(Boolean)))].sort((a, b) => Number(a) - Number(b))
-      const kinds = [...new Set(annotations.map(({ kind }) => kind))]
-      const marker = newQuestionMarkers(numbers, previousNumbers)
-      previousNumbers = numbers
-      return `<span class="translation-annotation" data-annotation-kinds="${escapeHtml(kinds.join(' '))}" data-question-nos="${escapeHtml(numbers.join(' '))}">${marker}<span class="source-underline">${escapeHtml(part.text)}</span></span>`
-    }).join('')
+    const html = renderMarkedRun(paragraph.quote, ranges, questionNo, 'translation-annotation')
     return `<p data-translation-paragraph-id="${escapeHtml(paragraph.paragraphId)}">${html}</p>`
   })
   return `<section class="full-translation">${renderHeadingLead('<h4>全文译文</h4>', ...paragraphs)}</section>`
@@ -132,22 +161,8 @@ function mergedParagraph(teaching, paragraph, completed) {
 }
 
 function renderRelationshipParagraph(source, label, paperAsset) {
-  const { ranges } = source
-  const parts = partitionAnalysisText(source.text, ranges.map(({ start, end, quote }) => ({
-    start, end, quote,
-  })))
-  let previousNumbers = []
-  const html = parts.map((part) => {
-    if (part.rangeIndices.length === 0) { previousNumbers = []; return escapeHtml(part.text) }
-    const relationships = part.rangeIndices.map((index) => ranges[index].annotation)
-    const annotationIds = [...new Set(relationships.map(({ annotationId }) => annotationId))]
-    const kinds = [...new Set(relationships.map(({ kind }) => kind))]
-    const numbers = [...new Set(relationships.flatMap(({ questionIds }) =>
-      array(questionIds).map((questionId) => questionData(paperAsset, questionId)?.questionNo).filter(Boolean)))].sort((a, b) => Number(a) - Number(b))
-    const marker = newQuestionMarkers(numbers, previousNumbers)
-    previousNumbers = numbers
-    return `${marker}<span class="source-relationship source-underline" data-annotation-ids="${escapeHtml(annotationIds.join(' '))}" data-annotation-kinds="${escapeHtml(kinds.join(' '))}" data-question-nos="${escapeHtml(numbers.join(' '))}">${escapeHtml(part.text)}</span>`
-  }).join('')
+  const questionNo = (questionId) => questionData(paperAsset, questionId)?.questionNo
+  const html = renderMarkedRun(source.text, source.ranges, questionNo, 'source-relationship')
   const lead = label ? `<span class="inline-label">${label}</span>` : ''
   return `<p lang="en" data-source-text-state="${source.state}" data-source-paragraph-id="${escapeHtml(source.paragraphId)}">${lead}${html}</p>`
 }
@@ -165,6 +180,10 @@ export function renderSourceRelationships(groupAnalysis, group, paperAsset) {
   const sevenChoices = ['sevenChoices', 'seven_choices'].includes(group.groupType)
   const completedByParagraph = new Map(array(teaching.completedSourceTexts)
     .map((paragraph) => [paragraph.paragraphId, paragraph]))
+  // Long-sentence marks are not printed in the passage, so they alone do not
+  // make a paragraph worth printing.
+  const printable = (ranges) => sevenChoices
+    || ranges.some(({ annotation }) => annotation.kind !== 'sentence-structure')
   const rendered = array(group?.passage?.paragraphs).flatMap((paragraph) => {
     const original = {
       ...paragraph,
@@ -173,22 +192,22 @@ export function renderSourceRelationships(groupAnalysis, group, paperAsset) {
     }
     const block = completedByParagraph.get(paragraph.paragraphId)
     if (reading || !block) {
-      if (!sevenChoices && original.ranges.length === 0) return []
+      if (!printable(original.ranges)) return []
       return [renderRelationshipParagraph(original, reading ? '原文' : '', paperAsset)]
     }
     const completed = { ...block, state: 'completed' }
     const merged = mergedParagraph(teaching, paragraph, completed)
     if (merged) {
-      if (!sevenChoices && merged.ranges.length === 0) return []
+      if (!printable(merged.ranges)) return []
       return [renderRelationshipParagraph(merged, '', paperAsset)]
     }
     completed.ranges = rangesOn(teaching, block.textId, paragraph.paragraphId, block.text)
     return [original, completed]
-      .filter((source) => sevenChoices || source.ranges.length > 0)
+      .filter((source) => printable(source.ranges))
       .map((source) => renderRelationshipParagraph(source, source.state === 'original' ? '原题' : '答案补全', paperAsset))
   })
   if (rendered.length === 0) return ''
-  return `<section class="source-relationships">${renderHeadingLead(reading ? '<h4>原文证据段落</h4>' : '<h4>原文与补全关系</h4>', ...rendered)}</section>`
+  return `<section class="source-relationships">${renderHeadingLead(reading ? '<h4>原文证据段落</h4>' : '<h4>原文</h4>', ...rendered)}</section>`
 }
 
 export function renderUnderlinedText(value, underlineTexts) {

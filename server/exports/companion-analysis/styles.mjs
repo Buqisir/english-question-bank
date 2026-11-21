@@ -445,14 +445,29 @@ h5 {
   text-decoration-skip-ink: auto;
 }
 
-/* The filled answer inside the one printed passage. */
-.source-relationship[data-annotation-kinds~="answer-insertion"] {
+/* The filled answer: bold, its number in front as on the exam paper. */
+.answer-fill {
   font-weight: 700;
 }
 
-.translation-marker {
+.blank-no {
   color: var(--green-deep);
   font: 700 var(--small)/1 var(--en);
+  margin-right: 0.2em;
+  white-space: nowrap;
+}
+
+/* A clue's number trails it, small and raised, so the blank numbers stay the
+   only full-size numbers in the line. line-height 0 keeps the leading even. */
+.clue-tail {
+  white-space: nowrap;
+}
+
+.clue-no {
+  color: var(--green-deep);
+  font: 700 0.62em/0 var(--en);
+  vertical-align: 0.5em;
+  margin-left: 0.08em;
   white-space: nowrap;
 }
 

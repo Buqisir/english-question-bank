@@ -231,8 +231,8 @@ try {
     assert((await target.innerText()).length > 40, `${name}: actual teaching text, not just a tab or heading`)
     if (artifactDir) await teachingDocument.screenshot({ path: path.join(artifactDir, `external-review-${name}.png`) })
   }
-  assert.equal(await frame.locator('.source-relationships p').first().locator('.translation-marker').count(), 1,
-    'overlapping evidence and sentence-structure must not print the same question marker inside a word')
+  assert.equal(await frame.locator('.source-relationships p').first().locator('.clue-no').count(), 1,
+    'a clue overlapped by a long-sentence mark still prints its number once, and the long-sentence mark prints none')
   assert.equal(await frame.locator('[data-continuation-section="modelAnswer"] div[lang="en"]').last().locator('p').count(), 2,
     'both synthetic continuation paragraphs survive sealed projection and companion rendering')
   const teaching = await page.context().request.get(origin + teachingPath)
