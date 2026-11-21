@@ -578,11 +578,11 @@ function emphasisRanges(item, label) {
     }
     // Explicit occurrences use the original substring numbering.
     if (entry.occurrence == null && marks.includes('underline')) {
-      const startsWithWord = /^\w/u.test(entry.text)
-      const endsWithWord = /\w$/u.test(entry.text)
+      const startsWithWord = /^[\p{L}\p{M}\p{N}]/u.test(entry.text)
+      const endsWithWord = /[\p{L}\p{M}\p{N}]$/u.test(entry.text)
       while (start !== -1 && (
-        (startsWithWord && /\w/u.test(item.text[start - 1] ?? ''))
-        || (endsWithWord && /\w/u.test(item.text[start + entry.text.length] ?? ''))
+        (startsWithWord && /[\p{L}\p{M}\p{N}]['’‐‑-]?$/u.test(item.text.slice(0, start)))
+        || (endsWithWord && /^['’‐‑-]?[\p{L}\p{M}\p{N}]/u.test(item.text.slice(start + entry.text.length)))
       )) {
         start = item.text.indexOf(entry.text, start + 1)
       }
