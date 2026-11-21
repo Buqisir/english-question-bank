@@ -380,6 +380,20 @@ try {
   const passage = detail.groups[0].passage
   const mediaUrlFor = (paperId, mediaId) => `${api}/media/${paperId}/${encodeURIComponent(mediaId)}`
   const regressionCases = [
+    ['partial option media resolves available images and reports missing IDs', () => {
+      const asset = structuredClone(pubAsset)
+      const groupId = `group-${publishedId}`
+      const option = asset.content.questions[`question-${publishedId}`].options[2]
+      const missingId = 'media:missing-option:fixture'
+      option.content[1].mediaId = missingId
+      const result = agentGroup({ paperId: publishedId, asset }, groupId, { media: [secondOptionMedia] })
+      assert.deepEqual(result.questions[0].options[2], {
+        ...detail.groups[0].questions[0].options[2],
+        media: detail.groups[0].questions[0].options[2].media.slice(0, 1),
+        notice: 'media_missing',
+        missingMediaIds: [missingId],
+      })
+    }],
     ['option media projected and served only for its paper', async () => {
       const options = detail.groups[0].questions[0].options
       const projected = (item, variant = item) => ({

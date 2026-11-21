@@ -96,14 +96,21 @@ export function projectAgentOption(paperId, option, sourceOption, mediaById) {
   const hasContent = hasText(content)
   if (!ids.size && hasContent) return result
   const media = []
+  const missingMediaIds = []
   for (const id of ids) {
     const item = mediaById.get(id)
-    if (!IMAGE_MIME_TYPES.has(item?.mimeType)) continue
+    if (!IMAGE_MIME_TYPES.has(item?.mimeType)) {
+      missingMediaIds.push(id)
+      continue
+    }
     media.push({ ...mediaReference(paperId, id), mimeType: item.mimeType,
       width: item.pixelWidth ?? null, height: item.pixelHeight ?? null })
   }
   const kind = ids.size && (hasContent || hasText(sourceOption?.text ?? sourceOption?.content)) ? 'mixed' : 'image'
-  return { ...result, kind, media, ...(media.length ? {} : { notice: 'media_missing' }) }
+  return { ...result, kind, media,
+    ...(!media.length || missingMediaIds.length ? { notice: 'media_missing' } : {}),
+    ...(missingMediaIds.length ? { missingMediaIds } : {}),
+  }
 }
 
 function referencesMedia(materialization, mediaId, paper) {

@@ -48,7 +48,7 @@ Claude Code 和 Droid 均可在 MCP 配置的 `mcpServers` 下添加：
 
 `q` 忽略大小写，按空白分词，全部词都须以子串命中；空查询不限。题组搜索不受 80 字预览限制。
 
-试卷详情、题组详情和导出中的 `questions[].options` 保留 `label` 和原有的 `content`。纯文字选项只有这两个字段。图片选项附 `kind: "image"`，图文混合选项附 `kind: "mixed"`。`media` 按引用顺序提供 `{mediaId, mimeType, width, height, mediaUrl}`，其中 `mediaUrl` 是站内需口令的取图路径。空选项找不到对应图片时返回 `kind: "image"`、`media: []` 和 `notice: "media_missing"`。
+试卷详情、题组详情和导出中的 `questions[].options` 保留 `label` 和原有的 `content`。纯文字选项只有这两个字段。图片选项附 `kind: "image"`，图文混合选项附 `kind: "mixed"`。`media` 按引用顺序提供 `{mediaId, mimeType, width, height, mediaUrl}`，其中 `mediaUrl` 是站内需口令的取图路径。任一图片引用无法解析时返回 `notice: "media_missing"`，用 `missingMediaIds` 列出缺失的引用，并在 `media` 中保留已解析的图片。空选项没有图片引用时返回 `kind: "image"`、`media: []` 和 `notice: "media_missing"`。
 
 查询工具以 JSON 文本返回已发布和最新待审 Candidate 的内容及答案。篇章详情保留 `paragraphs`，并提供按来源顺序排列的 `blocks`。`naturalParagraph` 只针对正文，无法确定时为 `null` 并附原因。取图工具返回图片。待审预览缺失或不可读时，内容列表跳过该卷，详情返回 404。401 表示口令无效或已撤销，404 表示对象不存在或不可读，429 表示服务端限流。请求超时为 30 秒。错误作为 MCP `isError` 返回，不输出请求头或上游错误正文，不跟随重定向。
 
