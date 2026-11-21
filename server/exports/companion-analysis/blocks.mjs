@@ -208,8 +208,16 @@ export function renderAnswerOverview(parts) {
   }).join('')
 }
 
+// The running head names the group and its question range, set from the
+// group's own heading so a teacher flipping pages can find "question 26".
+export function runningGroupLabel(title, answers = []) {
+  const numbers = answers.map(({ number }) => number)
+  const range = numbers.length > 1 ? `${numbers[0]}–${numbers.at(-1)}` : numbers[0]
+  return range === undefined ? title : `${title}　${range}`
+}
+
 export function renderGroupHeading(title, answers) {
-  const heading = `<h3 class="group-title">${escapeHtml(title)}</h3>`
+  const heading = `<h3 class="group-title" data-running="${escapeHtml(runningGroupLabel(title, answers))}">${escapeHtml(title)}</h3>`
   if (!answers.length) return heading
   const label = answers.some(({ provenance }) => provenance === 'unofficial')
     ? unofficialListeningLabel : '答案'

@@ -1,59 +1,108 @@
 // Print stylesheet for the teacher analysis PDF. `paginated` is true for
 // revision projections, which Paged.js fragments into A4 pages.
+//
+// Base grid (基本版式, W3C clreq §7.1): A4, two columns of about 24 Han
+// characters at 10pt with a two-character column gap; the type area is 177.8mm
+// wide. Leading 15pt gives a line gap of 50% of the type size: the low end of
+// clreq's 50–100% band, which clreq allows for short lines like these. 10pt is
+// the largest size that keeps the 2025 新课标Ⅱ companion within the page count
+// of the old 9pt layout (22 pages against 23).
+//
+// Fonts are the exam paper's own stack (shared/papersurface/paperFonts.mjs):
+// TeX Gyre Termes for every Latin glyph, Source Han Serif CN for Chinese, so
+// English reads the same in a quote, a transcript or a Chinese sentence and
+// matches the paper the companion sits beside. Hierarchy comes from Bold, size
+// and the pine-green signature, not a sans.
+//
+// Three levels only: part band → group heading with its answer line →
+// question, whose number and answer open the first line of its explanation.
+// Every other label is a bold run-in at body size, never a ruled sub-heading.
+import { paperFontStack } from '../../../shared/papersurface/paperFonts.mjs'
+
 export function companionAnalysisStyles({ houseMark, paginated }) {
   return `:root {
   --green: #596a58;
   --green-deep: #3b4e3d;
   --ink: #1e1e1c;
-  --muted: #62625d;
+  --muted: #5d5d58;
   --line: #c6c6c0;
-  --line-soft: #e8e8e4;
+  --line-soft: #e4e4df;
   --paper: #ffffff;
-  --serif: "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
-  --sans: "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
-  --latin: "Times New Roman", "Noto Serif", Times, serif;
+  --zh: ${paperFontStack};
+  --en: ${paperFontStack};
+  --fs: 10pt;
+  --lh: 15pt;
+  --small: 9pt;
+  --char: 10pt;
 }
 
 @page {
   size: A4 portrait;
-  margin: 17mm 17mm 19mm 21mm;
+  margin: 17mm 14.2mm 18mm 18mm;
 
   @top-left {
     content: "${houseMark}";
     color: var(--green-deep);
-    font: 600 8pt/1 var(--sans);
+    font: 700 8.5pt/1 var(--zh);
     letter-spacing: 0.04em;
     vertical-align: bottom;
-    padding-bottom: 3mm;
+    padding-bottom: 3.5mm;
   }
 
   @top-right {
-    content: string(running-section, first);
-    color: var(--muted);
-    font: 400 8pt/1 var(--sans);
+    content: string(running-group, start);
+    color: var(--ink);
+    font: 700 8.5pt/1 var(--zh);
     vertical-align: bottom;
-    padding-bottom: 3mm;
+    padding-bottom: 3.5mm;
   }
 
   @bottom-left {
     content: string(paper-title);
     color: var(--muted);
-    font: 400 8pt/1 var(--sans);
+    font: 400 8pt/1 var(--zh);
     vertical-align: top;
-    padding-top: 3mm;
+    padding-top: 3.5mm;
   }
 
   @bottom-right {
     content: counter(page);
     color: var(--ink);
-    font: 600 8pt/1 var(--sans);
+    font: 700 9pt/1 var(--en);
     vertical-align: top;
-    padding-top: 3mm;
+    padding-top: 3.5mm;
   }
 }
 
+/* Mirrored for duplex: binding margin inside, running group and page number
+   on the outer edge where a thumb flips. */
 @page:left {
-  margin: 17mm 21mm 19mm 17mm;
+  margin: 17mm 18mm 18mm 14.2mm;
+
+  @top-left {
+    content: string(running-group, start);
+    color: var(--ink);
+    font: 700 8.5pt/1 var(--zh);
+  }
+
+  @top-right {
+    content: "${houseMark}";
+    color: var(--green-deep);
+    font: 700 8.5pt/1 var(--zh);
+    letter-spacing: 0.04em;
+  }
+
+  @bottom-left {
+    content: counter(page);
+    color: var(--ink);
+    font: 700 9pt/1 var(--en);
+  }
+
+  @bottom-right {
+    content: string(paper-title);
+    color: var(--muted);
+    font: 400 8pt/1 var(--zh);
+  }
 }
 
 @page:first {
@@ -68,10 +117,10 @@ export function companionAnalysisStyles({ houseMark, paginated }) {
 html {
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--serif);
-  font-size: 9pt;
-  line-height: 13.6pt;
-  hanging-punctuation: first allow-end last;
+  font-family: var(--zh);
+  font-size: var(--fs);
+  line-height: var(--lh);
+  font-kerning: normal;
   text-rendering: optimizeLegibility;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
@@ -90,40 +139,55 @@ body *::selection {
 p,
 li,
 dd {
-  orphans: 3;
-  widows: 3;
+  orphans: 2;
+  widows: 2;
 }
 
 p {
   margin: 0;
 }
 
+b,
+strong,
+h1,
+h2,
+h3,
+h4,
+h5,
+dt {
+  font-weight: 700;
+}
+
+h1,
+h2,
+h3,
 h4,
 h5 {
+  margin: 0;
   break-after: avoid;
 }
 
 [lang="en"] {
-  font-family: var(--latin);
+  font-family: var(--en);
 }
 
+/* ---------- First page ---------- */
+
 .frontmatter {
-  margin-bottom: 8mm;
+  margin-bottom: 6mm;
 }
 
 .house-mark {
-  margin: 0 0 5mm;
+  margin: 0 0 4mm;
   color: var(--green-deep);
-  font: 600 9pt/1 var(--sans);
+  font: 700 9pt/1 var(--zh);
   letter-spacing: 0.08em;
 }
 
 .frontmatter h1 {
-  margin: 0;
-  max-width: 142mm;
+  max-width: 150mm;
   color: var(--ink);
-  font: 700 18pt/24pt var(--sans);
-  letter-spacing: -0.015em;
+  font: 700 17pt/24pt var(--zh);
   string-set: paper-title content();
 }
 
@@ -135,7 +199,7 @@ h5 {
   display: grid;
   grid-template-columns: 18mm 1fr;
   gap: 2mm;
-  margin: 8mm 0 11mm;
+  margin: 5mm 0 6mm;
 }
 
 .title-rule::before,
@@ -151,30 +215,29 @@ h5 {
 }
 
 .answer-overview > h2 {
-  margin: 0 0 3mm;
-  font: 700 13pt/18pt var(--sans);
+  margin: 0 0 2mm;
+  font: 700 12pt/16.8pt var(--zh);
 }
 
 .answer-overview-section {
   display: grid;
-  grid-template-columns: 19mm minmax(0, 1fr);
+  grid-template-columns: 20mm minmax(0, 1fr);
   gap: 2mm;
-  padding: 0.8mm 0;
+  padding: 1mm 0;
   border-top: 0.35pt solid var(--line);
   break-inside: avoid;
 }
 
 .answer-overview-section h3 {
-  margin: 0;
-  padding: 0.65mm 0;
-  color: var(--muted);
-  font: 600 8.5pt/10pt var(--sans);
+  padding: 0.5mm 0;
+  color: var(--ink);
+  font: 700 var(--fs)/var(--lh) var(--zh);
 }
 
 .answer-overview-section h3 small {
   display: block;
-  margin-top: 0.6mm;
-  font: 400 7pt/9pt var(--sans);
+  color: var(--muted);
+  font: 400 7.5pt/10pt var(--zh);
 }
 
 .answer-grid {
@@ -193,19 +256,88 @@ h5 {
 }
 
 .answer-grid .answer-cell {
-  padding: 0.65mm 0.65mm 0.65mm 0;
-  font: 700 8pt/10pt var(--sans);
+  padding: 0.5mm 0.6mm 0.5mm 0;
+  font: 700 var(--fs)/var(--lh) var(--en);
 }
 
 .answer-cell b {
   color: var(--muted);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .answer-grid .answer-cell b {
   display: inline-block;
-  min-width: 3.5mm;
+  min-width: 5mm;
   text-align: right;
+}
+
+/* ---------- Body grid ---------- */
+
+.analysis-body {
+  column-count: 2;
+  column-fill: auto;
+  column-gap: calc(2 * var(--char));
+  column-rule: 0.35pt solid var(--line);
+  text-align: justify;
+  /* Paged.js turns an implicit last-line alignment into "justify" on split
+     fragments, which spreads every <br>-ended transcript line letter by
+     letter. An explicit start keeps the last line ragged. */
+  text-align-last: start;
+}
+
+[lang="en"],
+.analysis-body [lang="en"],
+.listening-source,
+.listening-transcript .heading-lead,
+.evidence-quote,
+.continuation-evidence li,
+.model-paragraph,
+.model-signoff {
+  /* English-led lines stay ragged-right: justifying a line with few word
+     spaces letter-spaces its Chinese label (原 文) instead. */
+  text-align: left;
+}
+
+.paper-part {
+  /* Paged.js clones the article on continuation pages. */
+  string-set: running-section attr(data-part-title);
+}
+
+.paper-part + .paper-part {
+  margin-top: var(--lh);
+}
+
+.heading-lead,
+.continuation-grounded {
+  break-inside: avoid;
+}
+
+/* Level 1: part band. */
+.part-title {
+  margin: 0 0 calc(var(--lh) / 2);
+  padding: 0.8mm 0 0.6mm;
+  border-top: 0.7pt solid var(--green);
+  border-bottom: 0.35pt solid var(--green);
+  color: var(--green-deep);
+  font: 700 11pt/var(--lh) var(--zh);
+}
+
+.section-title {
+  margin: 0 0 calc(var(--lh) / 3);
+  color: var(--green-deep);
+  font: 700 var(--fs)/var(--lh) var(--zh);
+}
+
+.paper-section + .paper-section,
+.analysis-group + .analysis-group {
+  margin-top: var(--lh);
+}
+
+/* Level 2: group heading and its answer line. */
+.group-title {
+  color: var(--ink);
+  font: 700 12pt/var(--lh) var(--zh);
+  string-set: running-group attr(data-running);
 }
 
 .group-heading {
@@ -213,26 +345,24 @@ h5 {
   break-after: avoid;
 }
 
-.group-heading .group-title {
-  margin-bottom: 1mm;
-}
-
 .group-key {
   display: grid;
   grid-template-columns: max-content minmax(0, 1fr);
   gap: 2mm;
-  margin: 0 0 3mm;
-  padding: 1mm 0;
+  margin: 0.6mm 0 calc(var(--lh) / 3);
+  padding: 0.6mm 0;
   border-top: 0.35pt solid var(--line);
-  border-bottom: 0.35pt solid var(--line-soft);
+  border-bottom: 0.35pt solid var(--line);
   color: var(--muted);
-  font: 600 8pt/11pt var(--sans);
+  font: 400 var(--small)/var(--lh) var(--zh);
 }
 
 .group-key-answers {
   display: flex;
   flex-wrap: wrap;
-  column-gap: 1.2mm;
+  column-gap: 1.4mm;
+  font-family: var(--en);
+  font-size: var(--fs);
 }
 
 .group-key .answer-cell {
@@ -244,291 +374,268 @@ h5 {
   color: var(--muted);
 }
 
-.analysis-body {
-  column-count: 2;
-  column-fill: auto;
-  column-gap: 8mm;
-  column-rule: 0.35pt solid var(--line);
-  text-align: left;
-}
-
-.paper-part {
-  margin-top: 0;
-  /* Paged.js clones the article on continuation pages. */
-  string-set: running-section attr(data-part-title);
-}
-
-.paper-part + .paper-part {
-  margin-top: 8mm;
-}
-
-.heading-lead,
-.continuation-grounded {
-  break-inside: avoid;
-}
-
-.part-title {
-  width: fit-content;
-  margin: 0 0 4mm;
-  padding: 1.2mm 2.4mm 1mm;
-  border: 0.35pt solid var(--green);
-  border-radius: 2px;
+/* Run-in labels: one style for every teaching label. */
+.micro-heading,
+.inline-label,
+.overview .micro-heading {
+  margin-right: 0.5em;
   color: var(--green-deep);
-  font: 700 10pt/13pt var(--sans);
-  break-after: avoid;
-}
-
-.paper-section + .paper-section {
-  margin-top: 7mm;
-}
-
-.section-title {
-  margin: 0 0 3.5mm;
-  color: var(--green-deep);
-  font: 700 10.5pt/14pt var(--sans);
-  break-after: avoid;
-}
-
-.analysis-group + .analysis-group {
-  margin-top: 6mm;
-}
-
-.group-title {
-  margin: 0 0 2.8mm;
-  color: var(--ink);
-  font: 700 10pt/14pt var(--sans);
-  break-after: avoid;
-}
-
-.overview {
-  display: grid;
-  grid-template-columns: 14mm 1fr;
-  gap: 2.5mm;
-  margin: 0 0 3.5mm;
-  padding: 2.2mm 0;
-  border-top: 0.35pt solid var(--line);
-  border-bottom: 0.35pt solid var(--line);
-  break-inside: avoid;
-}
-
-.micro-heading {
-  color: var(--green-deep);
-  font: 600 8.5pt/12pt var(--sans);
+  font: 700 var(--fs)/var(--lh) var(--zh);
   white-space: nowrap;
 }
 
-.source-underline {
-  text-decoration-line: underline;
-  text-decoration-color: var(--green);
-  text-decoration-thickness: 0.55pt;
-  text-underline-offset: 1.4pt;
-  text-decoration-skip-ink: auto;
-}
-
+/* Group-level teaching blocks: bold run-in heading, no rule. */
+.overview,
 .reading-discourse,
 .full-translation,
 .source-relationships,
 .long-sentences {
-  margin-top: 5mm;
+  margin-top: calc(var(--lh) / 3);
+}
+
+.overview {
+  break-inside: avoid;
+}
+
+.overview p {
+  display: inline;
 }
 
 .reading-discourse h4,
 .full-translation h4,
 .source-relationships h4,
 .long-sentences h4 {
-  margin: 0 0 2mm;
-  padding-bottom: 1.2mm;
-  border-bottom: 0.35pt solid var(--line);
-  color: var(--green-deep);
-  font: 700 9.5pt/13pt var(--sans);
-  break-after: avoid;
-}
-
-.long-sentence {
-  padding-bottom: 2.4mm;
-  break-inside: avoid;
-}
-
-.long-sentence p + p {
-  margin-top: 1.2mm;
-}
-
-.long-sentence-related {
-  color: var(--muted);
-  font: 600 8.2pt/12pt var(--sans);
-}
-
-.long-sentence-source {
-  color: var(--ink);
-  font-size: 9.1pt;
-  line-height: 14pt;
-  text-align: left;
-}
-
-.inline-label {
+  display: inline;
   margin-right: 0.5em;
   color: var(--green-deep);
-  font: 600 8.3pt/12pt var(--sans);
-  white-space: nowrap;
+  font: 700 var(--fs)/var(--lh) var(--zh);
 }
 
-.overview p,
-.full-translation p,
-.analysis-prose,
-.distractor p {
-  text-wrap: pretty;
-}
-
-.question {
-  margin-top: 3.6mm;
-  padding-top: 2.8mm;
-  border-top: 0.35pt solid var(--line-soft);
-  break-inside: auto;
-}
-
-.overview + .question,
-.heading-lead:has(> .overview:last-child) + .question {
-  margin-top: 0;
-}
-
-.full-translation {
-  margin: 0 0 4mm;
+.reading-discourse .heading-lead > h4 + p,
+.full-translation .heading-lead > h4 + p,
+.long-sentences .heading-lead > h4 + .long-sentence {
+  display: inline;
 }
 
 .full-translation p {
   text-indent: 2em;
-  text-wrap: pretty;
   white-space: pre-line;
 }
 
-.full-translation p + p,
-.full-translation .heading-lead + p {
-  margin-top: 0.8mm;
+.full-translation .heading-lead > h4 + p {
+  text-indent: 0;
+}
+
+.source-relationships .heading-lead > h4 {
+  display: block;
+}
+
+.source-relationships p + p,
+.source-relationships .heading-lead + p {
+  margin-top: 0.6mm;
+}
+
+.source-underline {
+  text-decoration-line: underline;
+  text-decoration-color: var(--green);
+  text-decoration-thickness: 0.6pt;
+  text-underline-offset: 1.6pt;
+  text-decoration-skip-ink: auto;
 }
 
 .translation-marker {
-  font-family: var(--sans);
-  font-size: 8.5pt;
-  font-weight: 700;
+  color: var(--green-deep);
+  font: 700 var(--small)/1 var(--en);
   white-space: nowrap;
 }
 
-.question-heading {
-  display: flex;
-  align-items: baseline;
-  gap: 2.2mm;
-  margin-bottom: 1.5mm;
-  font-family: var(--sans);
-  break-after: avoid;
+.long-sentence {
+  break-inside: avoid;
+}
+
+.long-sentences .heading-lead > h4 + .long-sentence {
+  display: block;
+}
+
+.long-sentence + .long-sentence {
+  margin-top: calc(var(--lh) / 3);
+}
+
+.long-sentence-related {
+  color: var(--muted);
+  font-size: var(--small);
+}
+
+/* Level 3: a question opens with number and answer on its first line. */
+.question {
+  margin-top: calc(var(--lh) / 2);
+  break-inside: auto;
 }
 
 .question-lead {
   break-inside: avoid;
 }
 
+.question-heading {
+  display: inline;
+  margin-right: 0.4em;
+}
+
+.question-heading + p,
+.question-heading + .evidence-quote {
+  display: inline;
+}
+
 .question-number {
-  min-width: 8mm;
+  display: inline-block;
+  min-width: 1.6em;
+  margin-right: 0.3em;
   color: var(--ink);
-  font-size: 10pt;
-  font-weight: 700;
+  font: 700 11pt/var(--lh) var(--en);
   font-variant-numeric: tabular-nums;
+  string-set: running-question content();
 }
 
 .question-answer {
-  min-width: 6mm;
+  margin-right: 0.4em;
   color: var(--green-deep);
-  font-size: 10pt;
-  font-weight: 800;
+  font: 700 11pt/var(--lh) var(--en);
 }
 
 .answer-text {
-  color: var(--ink);
-  font-size: 9pt;
-  font-weight: 600;
+  margin-right: 0.3em;
+  color: var(--green-deep);
+  font-weight: 700;
+}
+
+.question-heading small {
+  margin-right: 0.4em;
+  color: var(--muted);
+  font-size: var(--small);
 }
 
 .question-stem {
-  margin-bottom: 1.5mm;
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.question-lead > .question-stem + p,
+.question-lead > .question-stem + .listening-options {
+  margin-top: 0.4mm;
+}
+
+.analysis-prose,
+.evidence-quote,
+.distractor {
+  margin-top: 0.6mm;
 }
 
 .listening-options {
-  margin: 0 0 3mm;
+  margin: 0.4mm 0 0;
   padding: 0;
   list-style: none;
 }
 
-.analysis-prose + .evidence-quote,
-.analysis-prose + .distractor,
-.question-lead:has(> .analysis-prose:last-child) + .evidence-quote,
-.question-lead:has(> .analysis-prose:last-child) + .distractor,
-.evidence-quote + .distractor {
-  margin-top: 2.5mm;
+/* Short options share a row, as on the exam paper; a long one keeps its own. */
+.listening-options li {
+  display: inline-block;
+  max-width: 100%;
+  margin-right: 1.5em;
+  vertical-align: top;
+}
+
+.listening-options b {
+  font-family: var(--en);
 }
 
 .evidence-quote {
   break-inside: avoid;
 }
 
-.evidence-quote .micro-heading {
-  margin-right: 2mm;
-}
-
 .evidence-quote p {
   display: inline;
-  font-size: 9pt;
-  line-height: 13.6pt;
-}
-
-.distractor--reading .micro-heading,
-.distractor--cloze .micro-heading {
-  display: block;
-  margin-bottom: 0.8mm;
-  break-after: avoid;
-}
-
-.reading-distractor-item + .reading-distractor-item,
-.cloze-distractor-item + .cloze-distractor-item {
-  margin-top: 0.8mm;
-}
-
-.distractor b {
-  font-family: var(--sans);
-  font-weight: 600;
 }
 
 .distractor {
   break-inside: avoid;
 }
 
+.distractor > div {
+  display: contents;
+}
+
+/* The label runs in beside the first item instead of taking a line. */
+.distractor > .micro-heading {
+  float: left;
+}
+
+.distractor b {
+  font-family: var(--en);
+}
+
+.reading-distractor-item,
+.cloze-distractor-item {
+  display: block;
+}
+
+/* Seven-choices: the blank in its context. */
 .context-chain {
-  margin: 1mm 0 2.5mm;
+  margin: 0.4mm 0 0;
   break-inside: avoid;
 }
 
 .context-chain > div {
   display: grid;
-  grid-template-columns: 11mm 1fr;
-  gap: 2mm;
-}
-
-.context-chain > div + div {
-  margin-top: 0.8mm;
+  grid-template-columns: 2.6em 1fr;
+  gap: 0.4em;
 }
 
 .context-chain span {
   color: var(--muted);
-  font: 600 8.5pt/12pt var(--sans);
+  font-size: var(--small);
 }
 
 .context-chain-answer span,
 .context-chain-answer p {
   color: var(--green-deep);
-  font-weight: 600;
+  font-weight: 700;
 }
 
+/* Listening materials. */
+.listening-material + .listening-material {
+  margin-top: var(--lh);
+}
+
+.listening-material h4 {
+  color: var(--ink);
+  font: 700 var(--fs)/var(--lh) var(--zh);
+}
+
+.listening-topic {
+  color: var(--muted);
+  font-size: var(--small);
+}
+
+.listening-transcript,
+.listening-translation {
+  margin-top: calc(var(--lh) / 3);
+}
+
+.listening-transcript h5,
+.listening-translation h5 {
+  display: inline;
+  margin-right: 0.5em;
+  color: var(--green-deep);
+  font: 700 var(--fs)/var(--lh) var(--zh);
+}
+
+.listening-transcript .heading-lead > h5 + p,
+.listening-translation .heading-lead > h5 + p {
+  display: inline;
+}
+
+/* Writing. */
 .writing-block {
-  margin-top: 6mm;
+  margin-top: var(--lh);
 }
 
 .analysis-group--writing > .review-card:first-child {
@@ -538,30 +645,25 @@ h5 {
 .writing-block > h4,
 .writing-block > .heading-lead > h4,
 .model-essay > .heading-lead > h4 {
-  margin: 0 0 3mm;
-  padding-bottom: 2mm;
-  border-bottom: 0.35pt solid var(--line);
-  color: var(--ink);
-  font: 700 10.5pt/15pt var(--sans);
-  break-after: avoid;
+  margin: 0 0 calc(var(--lh) / 4);
+  color: var(--green-deep);
+  font: 700 11pt/var(--lh) var(--zh);
 }
 
 .review-card .group-title + h4 {
-  margin-top: 6mm;
+  margin-top: calc(var(--lh) / 2);
 }
 
 .review-group + .review-group,
 .review-card > .heading-lead + .review-group {
-  margin-top: 4mm;
-  padding-top: 3mm;
-  border-top: 0.35pt solid var(--line-soft);
+  margin-top: calc(var(--lh) / 2);
 }
 
-.review-group > h5 {
-  margin: 0 0 1.5mm;
+.review-group > h5,
+.route-paragraph h5 {
+  margin: 0 0 0.4mm;
   color: var(--green-deep);
-  font: 700 8.5pt/12pt var(--sans);
-  break-after: avoid;
+  font: 700 var(--fs)/var(--lh) var(--zh);
 }
 
 .review-facts,
@@ -576,16 +678,16 @@ h5 {
 .reader-facts > div,
 .story-map > div {
   display: grid;
-  grid-template-columns: 18mm 1fr;
-  gap: 2mm;
-  padding: 1.7mm 0;
+  grid-template-columns: 5em 1fr;
+  gap: 0.5em;
+  padding: 0.6mm 0;
   border-bottom: 0.35pt solid var(--line-soft);
   break-inside: avoid;
 }
 
 dt {
   color: var(--muted);
-  font: 600 8.5pt/12pt var(--sans);
+  font-size: var(--fs);
 }
 
 dd {
@@ -596,84 +698,42 @@ dd {
   display: block;
 }
 
-.review-card dd span + span {
-  margin-top: 0.8mm;
-}
-
 .review-points {
   margin: 0;
-  padding-left: 5mm;
+  padding-left: 1.5em;
 }
 
-.review-points li + li {
-  margin-top: 1mm;
+.route-paragraph ul,
+.continuation-section ul {
+  margin: 0;
+  padding-left: 1.5em;
 }
 
-.writing-points,
-.review-value,
-.selected-route,
-.theme {
-  margin-top: 4mm;
-}
-
-.writing-points ol,
-.writing-points ul,
-.route-paragraph ul {
-  margin: 1.5mm 0 0;
-  padding-left: 5mm;
+.route-paragraph {
+  margin-top: calc(var(--lh) / 2);
+  break-inside: avoid;
 }
 
 .model-paragraph {
-  font-family: var(--latin);
-  font-size: 9.2pt;
-  line-height: 14.4pt;
+  font-family: var(--en);
+  font-size: var(--fs);
+  line-height: var(--lh);
+  text-align: left;
 }
 
-.model-essay + .model-essay,
+.model-paragraph + .model-paragraph {
+  text-indent: 0;
+}
+
+.model-essay + .model-essay {
+  margin-top: var(--lh);
+}
+
 .model-paragraph + .model-paragraph,
 .model-essay > .heading-lead + .model-paragraph,
 .model-essay > .heading-lead + .model-signoff,
 .model-paragraph + .model-signoff {
-  margin-top: 2.2mm;
-}
-
-.expressions ol {
-  margin: 0;
-  padding-left: 6mm;
-}
-
-.expressions li {
-  padding: 2.2mm 0 2.7mm 1mm;
-  border-bottom: 0.35pt solid var(--line-soft);
-  break-inside: avoid;
-}
-
-.expressions li p {
-  text-wrap: pretty;
-}
-
-.expression-text {
-  margin-bottom: 1mm;
-  color: var(--green-deep);
-  font-weight: 600;
-}
-
-.route-paragraph {
-  margin-top: 4mm;
-  padding-bottom: 4mm;
-  border-bottom: 0.35pt solid var(--line-soft);
-  break-inside: avoid;
-}
-
-.route-paragraph h5 {
-  margin: 0 0 1.5mm;
-  color: var(--green-deep);
-  font: 700 9pt/13pt var(--sans);
-}
-
-.route-paragraph p,
-.route-paragraph li {
-  text-wrap: pretty;
+  margin-top: 1mm;
 }
 
 @media screen {
@@ -685,11 +745,10 @@ dd {
     width: 210mm;
     min-height: 297mm;
     margin: 12mm auto;
-    padding: 17mm 17mm 19mm 21mm;
+    padding: 17mm 14.2mm 18mm 18mm;
     background: var(--paper);
     box-shadow: 0 8px 24px rgba(30, 30, 28, 0.12);
   }
-
 }
 
 @media screen and (max-width: 210mm) {
@@ -699,15 +758,6 @@ dd {
     margin: 0;
     padding: 16px;
     box-shadow: none;
-  }
-
-  .frontmatter {
-    min-height: 0;
-  }
-
-  .frontmatter + .analysis-body {
-    margin-top: 32px;
-    break-before: auto;
   }
 
   .analysis-body {
@@ -725,13 +775,11 @@ ${paginated ? `
   break-inside: auto;
 }
 .story-map dt {
-  margin-bottom: 1mm;
   break-after: avoid;
 }
 .pagedjs_first_page .pagedjs_margin-top-left,
 .pagedjs_first_page .pagedjs_margin-top-right {
   visibility: hidden;
 }
-` : ''}
-`
+` : ''}`
 }

@@ -9,6 +9,7 @@ import { renderGrammarFillGroup } from './companion-analysis/grammarFill.mjs'
 import { renderWritingGroup } from './companion-analysis/writing.mjs'
 import { revisionAnalysisSource } from './companion-analysis/source.mjs'
 import { companionAnalysisStyles } from './companion-analysis/styles.mjs'
+import { embeddedPaperFontCss } from '../paper-fonts.mjs'
 
 export { companionAnalysisFileName, loadCompanionAnalysisSource } from './companion-analysis/source.mjs'
 
@@ -84,6 +85,11 @@ export function buildCompanionAnalysisHtml(input) {
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(title)}｜配套解析</title>
+<!-- Font data is browser CSS, not paged-media CSS. Keep it out of Paged.js's
+     CSS-tree parser (24-bit offsets cannot address a full OTF bundle). -->
+<style data-pagedjs-ignore>
+${embeddedPaperFontCss()}
+</style>
 <style>
 ${companionAnalysisStyles({ houseMark: HOUSE_MARK, paginated: Boolean(input.projection) })}</style>
 </head>

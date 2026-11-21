@@ -173,7 +173,8 @@ export function renderWritingGroup({ group, title, analysis, sourceReferencesByG
   const model = nonEmptyString(writing?.modelAnswer)
   const models = renderWritingModels(source, legacySourceEssay, model, isContinuation)
   if (!writing && !models) return ''
-  const groupHeading = `${openingHeadings}<h3 class="group-title">${escapeHtml(title || group.title || (isContinuation ? '读后续写' : '应用文写作'))}</h3>`
+  const groupTitle = title || group.title || (isContinuation ? '读后续写' : '应用文写作')
+  const groupHeading = `${openingHeadings}<h3 class="group-title" data-running="${escapeHtml(groupTitle)}">${escapeHtml(groupTitle)}</h3>`
   const reviewCard = isContinuation ? '' : renderReviewCard(writing?.reviewCard, groupHeading)
   return `<section class="analysis-group analysis-group--writing">
     ${reviewCard || renderHeadingLead(groupHeading)}
