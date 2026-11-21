@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 
 import { unofficialListeningLabel } from '../answer-renderer.mjs'
-import { sourceReferenceBlocks, sourceReferenceSourceView } from '../paper-import/sourceReferences.mjs'
+import { sourceReferenceBlocks } from '../paper-import/sourceReferences.mjs'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
 import { projectApplicationReviewCardDisplay } from '../../shared/writing/applicationReviewCard.mjs'
 import { projectContinuationAnalysisDisplay } from '../../shared/writing/continuationAnalysis.mjs'
@@ -37,6 +37,15 @@ function withoutClosingPunctuation(value) {
   return nonEmptyString(value).replace(/[。．.!！?？；;，,]+$/u, '')
 }
 
+function innerQuote(value) {
+  return String(value ?? '').replace(/"([^"]*)"/gu, '‘$1’').replaceAll('“', '‘').replaceAll('”', '’')
+}
+
+function newQuestionMarkers(numbers, previousNumbers) {
+  const added = numbers.filter((number) => !previousNumbers.includes(number))
+  return added.length ? `<b class="translation-marker">[${added.map(escapeHtml).join('、')}]</b>` : ''
+}
+
 function array(value) {
   return Array.isArray(value) ? value : []
 }
@@ -57,21 +66,25 @@ function cleanPaperTitle(title) {
   return nonEmptyString(title).replace(/[-—－]\s*答案版\s*$/u, '') || '英语试题'
 }
 
+function renderPaperTitle(title) {
+  const match = title.match(/^(.*全国统一考试)([（(][^）)]+[）)].*)$/u)
+  return match ? `${escapeHtml(match[1])}<br><span>${escapeHtml(match[2])}</span>` : escapeHtml(title)
+}
+
 function safeFileTitle(title) {
   return cleanPaperTitle(title).replace(/[\\/:*?"<>|]/gu, '-')
 }
 
-function paragraphBlocks(value, className = '') {
-  const paragraphs = nonEmptyString(value)
+function paragraphLines(value) {
+  return nonEmptyString(value)
     .split(/\n\s*\n|\n/u)
     .map((part) => part.trim())
     .filter(Boolean)
-  return paragraphs
-    .map((paragraph) => `<p${className ? ` class="${className}"` : ''}>${escapeHtml(paragraph)}</p>`)
 }
 
-function renderParagraphs(value, className = '') {
-  return paragraphBlocks(value, className).join('')
+function paragraphBlocks(value, className = '') {
+  return paragraphLines(value).map((paragraph) =>
+    `<p${className ? ` class="${className}"` : ''}>${escapeHtml(paragraph)}</p>`)
 }
 
 function renderOverview(text) {
@@ -110,16 +123,16 @@ function renderFullTranslation(groupAnalysis, paperAsset) {
       text: paragraph.quote,
       rangeIndices: [],
     }]
-    let previousNumbers = ''
+    let previousNumbers = []
     const html = parts.map((part) => {
-      if (part.rangeIndices.length === 0) { previousNumbers = ''; return escapeHtml(part.text) }
+      if (part.rangeIndices.length === 0) { previousNumbers = []; return escapeHtml(part.text) }
       const annotations = part.rangeIndices.map((index) => ranges[index].annotation)
       const numbers = [...new Set(annotations.flatMap(({ questionIds }) =>
         array(questionIds).map(questionNo).filter(Boolean)))].sort((a, b) => Number(a) - Number(b))
       const kinds = [...new Set(annotations.map(({ kind }) => kind))]
-      const showMarker = numbers.length && numbers.join(' ') !== previousNumbers
-      previousNumbers = numbers.join(' ')
-      return `<span class="translation-annotation" data-annotation-kinds="${escapeHtml(kinds.join(' '))}" data-question-nos="${escapeHtml(numbers.join(' '))}">${showMarker ? `<b class="translation-marker">[${numbers.map(escapeHtml).join('、')}]</b>` : ''}<span class="source-underline">${escapeHtml(part.text)}</span></span>`
+      const marker = newQuestionMarkers(numbers, previousNumbers)
+      previousNumbers = numbers
+      return `<span class="translation-annotation" data-annotation-kinds="${escapeHtml(kinds.join(' '))}" data-question-nos="${escapeHtml(numbers.join(' '))}">${marker}<span class="source-underline">${escapeHtml(part.text)}</span></span>`
     }).join('')
     return `<p data-translation-paragraph-id="${escapeHtml(paragraph.paragraphId)}">${html}</p>`
   })
@@ -140,44 +153,46 @@ function passageQuote(group, paragraphId, quote) {
 function renderSourceRelationships(groupAnalysis, group, paperAsset) {
   const teaching = groupAnalysis?.teachingContent
   if (teaching?.schemaVersion !== 'objective-teaching-content-v1') return ''
-  const texts = [
-    ...array(group?.passage?.paragraphs).map((paragraph) => ({
-      textId: teaching.sourceTextId,
-      paragraphId: paragraph.paragraphId,
-      text: paragraph.text,
-      state: 'original',
-    })),
-    ...array(teaching.completedSourceTexts).map((paragraph) => ({
-      ...paragraph,
-      state: 'completed',
-    })),
-  ]
+  const reading = group.groupType === 'reading'
+  const sevenChoices = ['sevenChoices', 'seven_choices'].includes(group.groupType)
+  const original = array(group?.passage?.paragraphs).map((paragraph) => ({
+    ...paragraph, textId: teaching.sourceTextId, state: 'original',
+  }))
+  const completed = array(teaching.completedSourceTexts)
+  const completedByParagraph = new Map(completed.map((paragraph) => [paragraph.paragraphId, paragraph]))
+  const completedInOrder = sevenChoices ? original.flatMap((paragraph) => {
+    const block = completedByParagraph.get(paragraph.paragraphId)
+    if (block) return [{ ...paragraph, ...block }]
+    return /__\d+__/u.test(paragraph.text) ? [] : [paragraph]
+  }) : completed
+  const texts = [...original, ...completedInOrder.map((paragraph) => ({ ...paragraph, state: 'completed' }))]
   const rendered = texts.map((source) => {
     const ranges = array(teaching.annotations).flatMap((annotation) =>
       array(annotation.sourceRanges)
         .filter((range) => range.textId === source.textId
           && range.paragraphId === source.paragraphId && exactTextRange(source.text, range))
         .map((range) => ({ ...range, annotation })))
-    if (ranges.length === 0) return ''
+    if (!sevenChoices && ranges.length === 0) return ''
     const parts = partitionAnalysisText(source.text, ranges.map(({ start, end, quote }) => ({
       start, end, quote,
     })))
-    let previousNumbers = ''
+    let previousNumbers = []
     const html = parts.map((part) => {
-      if (part.rangeIndices.length === 0) { previousNumbers = ''; return escapeHtml(part.text) }
+      if (part.rangeIndices.length === 0) { previousNumbers = []; return escapeHtml(part.text) }
       const relationships = part.rangeIndices.map((index) => ranges[index].annotation)
       const annotationIds = [...new Set(relationships.map(({ annotationId }) => annotationId))]
       const kinds = [...new Set(relationships.map(({ kind }) => kind))]
       const numbers = [...new Set(relationships.flatMap(({ questionIds }) =>
         array(questionIds).map((questionId) => questionData(paperAsset, questionId)?.questionNo).filter(Boolean)))].sort((a, b) => Number(a) - Number(b))
-      const showMarker = numbers.length && numbers.join(' ') !== previousNumbers
-      previousNumbers = numbers.join(' ')
-      return `<span class="source-relationship source-underline" data-annotation-ids="${escapeHtml(annotationIds.join(' '))}" data-annotation-kinds="${escapeHtml(kinds.join(' '))}" data-question-nos="${escapeHtml(numbers.join(' '))}">${showMarker ? `<b class="translation-marker">[${numbers.map(escapeHtml).join('、')}]</b>` : ''}${escapeHtml(part.text)}</span>`
+      const marker = newQuestionMarkers(numbers, previousNumbers)
+      previousNumbers = numbers
+      return `${marker}<span class="source-relationship source-underline" data-annotation-ids="${escapeHtml(annotationIds.join(' '))}" data-annotation-kinds="${escapeHtml(kinds.join(' '))}" data-question-nos="${escapeHtml(numbers.join(' '))}">${escapeHtml(part.text)}</span>`
     }).join('')
-    return `<p lang="en" data-source-text-state="${source.state}" data-source-paragraph-id="${escapeHtml(source.paragraphId)}"><span class="inline-label">${source.state === 'original' ? '原题' : '答案补全'}</span>${html}</p>`
+    const label = reading ? '原文' : source.state === 'original' ? '原题' : '答案补全'
+    return `<p lang="en" data-source-text-state="${source.state}" data-source-paragraph-id="${escapeHtml(source.paragraphId)}"><span class="inline-label">${label}</span>${html}</p>`
   }).filter(Boolean)
   if (rendered.length === 0) return ''
-  return `<section class="source-relationships">${renderHeadingLead('<h4>原文与补全关系</h4>', ...rendered)}</section>`
+  return `<section class="source-relationships">${renderHeadingLead(reading ? '<h4>原文证据段落</h4>' : '<h4>原文与补全关系</h4>', ...rendered)}</section>`
 }
 
 function renderUnderlinedText(value, underlineTexts) {
@@ -210,8 +225,8 @@ function renderEvidenceQuote(quotes, underlineTexts = []) {
   const uniqueQuotes = [...new Set(array(quotes).map(nonEmptyString).filter(Boolean))]
   if (uniqueQuotes.length === 0) return ''
   return `<div class="evidence-quote"><span class="micro-heading">原文依据</span>${uniqueQuotes
-    .map((quote) => `<p lang="en">“${renderUnderlinedText(quote, underlineTexts)}”</p>`)
-    .join('')}</div>`
+    .map((quote) => `<p lang="en">“${renderUnderlinedText(innerQuote(quote), underlineTexts.map(innerQuote))}”</p>`)
+    .join('；')}</div>`
 }
 
 function renderSelectedLongSentences(sentences, paperAsset) {
@@ -220,8 +235,10 @@ function renderSelectedLongSentences(sentences, paperAsset) {
     && nonEmptyString(sentence?.analysisZh)
     && nonEmptyString(sentence?.translationZh))
   if (selected.length === 0) return ''
-  const blocks = selected.map((sentence) => `<article class="long-sentence" data-selected-sentence-id="${escapeHtml(sentence.sentenceId)}">
-    <p class="long-sentence-related">关联题目 ${array(sentence.relatedQuestionIds).map((questionId) => questionData(paperAsset, questionId)?.questionNo).filter(Boolean).map(escapeHtml).join('、')}</p>
+  const blocks = selected.map((sentence) => {
+    const related = array(sentence.relatedQuestionIds).map((questionId) => questionData(paperAsset, questionId)?.questionNo).filter(Boolean)
+    return `<article class="long-sentence" data-selected-sentence-id="${escapeHtml(sentence.sentenceId)}">
+    ${related.length ? `<p class="long-sentence-related">关联题目 ${related.map(escapeHtml).join('、')}</p>` : ''}
     <p class="long-sentence-source" lang="en">${sentence.underlineRanges !== undefined
       ? partitionAnalysisText(sentence.displayText, sentence.underlineRanges).map((part) => part.rangeIndices.length
         ? `<span class="source-underline" data-range-indices="${part.rangeIndices.join(' ')}">${escapeHtml(part.text)}</span>`
@@ -229,7 +246,8 @@ function renderSelectedLongSentences(sentences, paperAsset) {
       : renderUnderlinedText(sentence.displayText, sentence.underlineTexts)}</p>
     <p><span class="inline-label">句子解析</span>${escapeHtml(sentence.analysisZh)}</p>
     <p><span class="inline-label">参考译文</span>${escapeHtml(sentence.translationZh)}</p>
-  </article>`)
+  </article>`
+  })
   return `<section class="long-sentences">${renderHeadingLead('<h4>长难句解析</h4>', ...blocks)}</section>`
 }
 
@@ -248,10 +266,10 @@ function renderQuestionLead(heading, content) {
 
 function renderListeningGroup({ group, title, paperAsset, analysis, answers, openingHeadings }) {
   const groupQuestionIds = new Set(array(group.questionIds))
-  const materials = Object.values(analysis?.materials || {}).filter((material) =>
-    array(material?.questionIds).some((questionId) => groupQuestionIds.has(questionId)))
+  const materials = Object.values(analysis?.materials || {}).map((material, index) => ({ material, segmentNo: index + 1 }))
+    .filter(({ material }) => array(material?.questionIds).some((questionId) => groupQuestionIds.has(questionId)))
   if (materials.length === 0) return ''
-  const renderedMaterials = materials.map((material, index) => {
+  const renderedMaterials = materials.map(({ material, segmentNo }, index) => {
     const questions = array(material.questionIds).filter((questionId) => groupQuestionIds.has(questionId)).map((questionId) => {
       const sourceQuestion = questionData(paperAsset, questionId)
       const question = analysis?.questions?.[questionId]
@@ -263,15 +281,16 @@ function renderListeningGroup({ group, title, paperAsset, analysis, answers, ope
       const heading = renderQuestionHeader(sourceQuestion.questionNo, answer.answer, '',
         answer.provenance === 'unofficial' ? unofficialListeningLabel : '')
       return `<section class="question question--listening">
-        ${renderQuestionLead(heading, `<p class="question-stem">${escapeHtml(question.stemTranslationZh)}</p>`)}
-        <ul class="listening-options">${options}</ul>
-        ${renderEvidenceQuote([question.evidence?.quote])}
+        ${renderQuestionLead(heading, `<p class="question-stem">${escapeHtml(question.stemTranslationZh)}</p>
+          <ul class="listening-options">${options}</ul>${renderEvidenceQuote([question.evidence?.quote])}`)}
         <p class="analysis-prose">${escapeHtml(question.reasonZh)}</p>
         ${distractors.length ? `<div class="distractor"><span class="micro-heading">干扰项辨析</span>${distractors.map((item) => `<p><b>${escapeHtml(item.label)} 项</b>：${escapeHtml(item.explanationZh)}</p>`).join('')}</div>` : ''}
       </section>`
     }).join('')
     const groupHeadings = index === 0 ? openingHeadings + renderGroupHeading(title || group.title || '听力', answers) : ''
-    const materialHeading = `<h4>听力材料 ${escapeHtml(array(material.questionIds).map((questionId) => questionData(paperAsset, questionId)?.questionNo).filter(Boolean).join('、'))}</h4>`
+    const numbers = array(material.questionIds).map((questionId) => questionData(paperAsset, questionId)?.questionNo).filter(Boolean)
+    const questionRange = numbers.length > 1 ? `${numbers[0]}–${numbers.at(-1)}` : numbers[0]
+    const materialHeading = `<h4>第 ${segmentNo} 段材料${numbers.length ? `（第 ${escapeHtml(questionRange)} 题）` : ''}</h4>`
     const topic = `<p class="listening-topic">${escapeHtml(`${material.topic.theme} · ${material.topic.themeGroup} · ${material.topic.subtopic}`)}</p>`
     return `<article class="listening-material" data-listening-segment-id="${escapeHtml(material.segmentId)}">
       ${renderHeadingLead(groupHeadings + materialHeading, topic)}
@@ -329,8 +348,8 @@ const overviewLabels = {
   sevenChoices: '七选五',
   seven_choices: '七选五',
   cloze: '完形',
-  grammarFill: '语填',
-  grammar_cloze: '语填',
+  grammarFill: '语法填空',
+  grammar_cloze: '语法填空',
 }
 
 function groupAnswers(paperAsset, group) {
@@ -364,7 +383,7 @@ function renderAnswerOverview(parts) {
   }
   return Array.from(rows, ([label, answers]) => {
     const unofficial = answers.some(({ provenance }) => provenance === 'unofficial')
-    const textAnswers = label === '语填' || answers.some(({ value }) => !/^[A-Z]$/u.test(value.trim()))
+    const textAnswers = label === '语法填空' || answers.some(({ value }) => !/^[A-Z]$/u.test(value.trim()))
     return `<section class="answer-overview-section">
       <h3>${escapeHtml(label)}${unofficial ? `<small>${unofficialListeningLabel}</small>` : ''}</h3>
       <div class="answer-grid${textAnswers ? ' answer-grid--text' : ''}">${renderAnswerCells(answers)}</div>
@@ -582,20 +601,6 @@ function renderReviewCard(reviewCard, groupHeading) {
   </section>`
 }
 
-function renderModelAnswer(answer, heading) {
-  const text = nonEmptyString(answer)
-  if (!text) return ''
-  return `<section class="writing-block model-answer"><h4>${escapeHtml(heading)}</h4><div lang="en">${renderParagraphs(text)}</div></section>`
-}
-
-function renderContinuationModels(official, model) {
-  if (!official && !model) return ''
-  return `<section class="writing-block model-answer" data-continuation-section="modelAnswer"><h4>完整范文</h4>
-    ${official ? `<h5>官方参考范文</h5><div lang="en">${renderParagraphs(official)}</div>` : ''}
-    ${model && model !== official ? `<h5>生成参考范文</h5><div lang="en">${renderParagraphs(model)}</div>` : ''}
-  </section>`
-}
-
 function statementAt(value) {
   return nonEmptyString(value?.statement) || nonEmptyString(value)
 }
@@ -608,7 +613,7 @@ function renderContinuationEvidence(evidence, { withinList = false } = {}) {
   const items = array(evidence)
   if (items.length === 0) return ''
   const itemTag = withinList ? 'p' : 'li'
-  const lines = items.map((item) => `<${itemTag}><b>${escapeHtml(evidenceSourceLabel[item?.source] || item?.source)}</b>：“${escapeHtml(item?.excerpt)}”</${itemTag}>`).join('')
+  const lines = items.map((item) => `<${itemTag}><b>${escapeHtml(evidenceSourceLabel[item?.source] || item?.source)}</b>：“${escapeHtml(innerQuote(item?.excerpt))}”</${itemTag}>`).join('')
   return withinList ? lines : `<ul class="continuation-evidence">${lines}</ul>`
 }
 
@@ -661,12 +666,17 @@ function renderContinuationContract(contract) {
 }
 
 function renderDevelopmentParagraph(paragraph) {
-  const emotions = array(paragraph.emotionChanges).map((item) => `<li>${escapeHtml(item.trigger)}：${escapeHtml(item.from)} → ${escapeHtml(item.to)}；${escapeHtml(item.visibleAction)}</li>`).join('')
+  const field = value => escapeHtml(withoutClosingPunctuation(value))
+  const emotions = array(paragraph.emotionChanges).map((item) =>
+    `<li><p>触发：${field(item.trigger)}</p><p>变化：${field(item.from)} → ${field(item.to)}</p><p>表现：${field(item.visibleAction)}</p></li>`).join('')
   const relationships = array(paragraph.relationshipChanges).map((item) => `<li>${escapeHtml(array(item.participants).join(' · '))}：${escapeHtml(item.from)} → ${escapeHtml(item.to)}；${escapeHtml(item.cause)}</li>`).join('')
-  const payoffs = array(paragraph.cluePayoffs).map((item) => `<li>${renderContinuationEvidence([item.clue], { withinList: true })}<p>${escapeHtml(item.payoff)}</p></li>`).join('')
+  const clues = array(paragraph.cluePayoffs)
+  const payoffs = clues.map((item) => `<li>${renderContinuationEvidence([item.clue], { withinList: true })}<p>${escapeHtml(item.payoff)}</p></li>`).join('')
+  const evidence = array(paragraph.sourceEvidence).filter(item =>
+    !clues.some(({ clue }) => clue?.source === item.source && clue?.excerpt === item.excerpt))
   return `<div class="route-paragraph"><h5>第 ${paragraph.paragraphIndex} 段</h5>
     <p><b>${paragraph.paragraphPurpose !== undefined ? '段落作用' : '起因'}</b>：${escapeHtml(paragraph.paragraphPurpose ?? paragraph.cause)}</p><p><b>行动</b>：${escapeHtml(paragraph.action)}</p><p><b>结果</b>：${escapeHtml(paragraph.result)}</p>
-    ${renderContinuationEvidence(paragraph.sourceEvidence)}${payoffs ? `<b>线索回收</b><ul>${payoffs}</ul>` : ''}
+    ${renderContinuationEvidence(evidence)}${payoffs ? `<b>线索回收</b><ul>${payoffs}</ul>` : ''}
     ${emotions ? `<b>情绪变化</b><ul>${emotions}</ul>` : ''}${relationships ? `<b>关系变化</b><ul>${relationships}</ul>` : ''}
     ${paragraph.languageReminder ? `<p><b>语言提醒</b>：${escapeHtml(paragraph.languageReminder)}</p>` : ''}
     <p><b>${paragraph.paragraphIndex === 1 ? '段间衔接' : '结尾落点'}</b>：${escapeHtml(paragraph.bridge || paragraph.ending)}</p></div>`
@@ -705,29 +715,40 @@ function renderContinuationAnalysis(analysis) {
     </section>`
 }
 
-function renderRevisionModels(source, official, model, isContinuation) {
-  const essays = array(source?.essays?.entries)
-    .map(entry => sourceReferenceBlocks(entry)
-      .filter(block => block.kind === 'paragraph')
-      .map(block => block.paragraph.text).join('\n'))
-    .filter(essay => essay.trim())
-  const selected = essays.length ? essays : [official || model].filter(Boolean)
-  const content = selected.map(essay => `<div lang="en">${renderParagraphs(essay)}</div>`).join('')
-  if (!content) return ''
-  const heading = essays.length || official ? '参考范文' : '参考范文（AI 撰写）'
-  return `<section class="writing-block model-answer"${isContinuation ? ' data-continuation-section="modelAnswer"' : ''}><h4>${heading}</h4>${content}</section>`
+function renderWritingModels(source, official, model, paperSource, isContinuation) {
+  const sourceDescribesUnofficialEssays = /(?:学科网|非官方)[^。；\n]{0,40}范文/u.test(paperSource ?? '')
+  const entries = array(source?.essays?.entries)
+    .map(entry => ({
+      text: sourceReferenceBlocks(entry)
+        .filter(block => block.kind === 'paragraph')
+        .map(block => block.paragraph.text).join('\n'),
+      unofficial: entry.provenance === 'unofficial'
+        || (!entry.provenance && (/学科网|非官方/u.test(entry.sourceLabel ?? '') || sourceDescribesUnofficialEssays)),
+    })).filter(({ text }) => text.trim())
+  if (entries.length === 0 && official) entries.push({ text: official, unofficial: sourceDescribesUnofficialEssays })
+  const essays = entries.map(({ text, unofficial }) => ({ text, label: unofficial ? '非官方参考范文' : '参考范文' }))
+  if (model) essays.push({ text: model, label: '参考范文（AI 撰写）' })
+  if (essays.length === 0) return ''
+  const content = essays.map(({ text, label }) => {
+    const paragraphs = paragraphBlocks(text, 'model-paragraph')
+    const signoff = isContinuation ? -1 : paragraphLines(text)
+      .findLastIndex(line => /^(?:Yours(?:[ ,]+(?:sincerely|faithfully|truly))?|Sincerely|Best (?:regards|wishes)|Kind regards|Regards)[,.]?$/iu.test(line))
+    if (signoff > 0) {
+      const tail = paragraphs.splice(signoff - 1)
+      paragraphs.push(`<div class="heading-lead model-signoff">${tail.join('')}</div>`)
+    }
+    return `<div class="model-essay">${renderHeadingLead(`<h4>${label}</h4>`, ...paragraphs)}</div>`
+  }).join('')
+  return `<section class="writing-block model-answer"${isContinuation ? ' data-continuation-section="modelAnswer"' : ''}>${content}</section>`
 }
 
-function renderWritingGroup({ group, title, analysis, sourceReferencesByGroup, openingHeadings }) {
+function renderWritingGroup({ group, title, paperAsset, analysis, sourceReferencesByGroup, openingHeadings }) {
   const writing = analysis?.groups?.[group.groupId]?.writing
   const source = sourceReferencesByGroup?.get(group.groupId)
   const isContinuation = (source?.taskType ?? writing?.taskType) === 'continuation'
   const official = nonEmptyString(writing?.officialModelAnswer)
   const model = nonEmptyString(writing?.modelAnswer)
-  const models = sourceReferencesByGroup
-    ? renderRevisionModels(source, official, model, isContinuation)
-    : isContinuation ? renderContinuationModels(official, model)
-      : `${official ? renderModelAnswer(official, '原卷参考范文') : ''}${model && model !== official ? renderModelAnswer(model, official ? '讲评范文' : '参考范文') : ''}`
+  const models = renderWritingModels(source, official, model, paperAsset.paper.source, isContinuation)
   if (!writing && !models) return ''
   const groupHeading = `${openingHeadings}<h3 class="group-title">${escapeHtml(title || group.title || (isContinuation ? '读后续写' : '应用文写作'))}</h3>`
   const reviewCard = isContinuation ? '' : renderReviewCard(writing?.reviewCard, groupHeading)
@@ -866,7 +887,7 @@ function revisionAnalysisSource(projection) {
     paperAsset: { ...paperAsset, answerKey: { ...paperAsset.answerKey, answers }, layoutTree: { parts } },
     analyses: Object.fromEntries(Object.entries(ANALYSIS_FILES)
       .map(([key, fileName]) => [key, analysisSidecars[fileName]])),
-    sourceReferencesByGroup: new Map(array(sourceReferenceSourceView(sourceReferences)?.groups)
+    sourceReferencesByGroup: new Map(array(sourceReferences?.groups)
       .map(group => [group.groupId, group])),
     figuresByGroup: new Map(array(materialization?.groups).map(group => [group.groupId,
       group.blocks.filter(block => block.kind === 'figure').map(block => ({
@@ -1015,6 +1036,10 @@ h5 {
   string-set: paper-title content();
 }
 
+.frontmatter h1 span {
+  white-space: nowrap;
+}
+
 .title-rule {
   display: grid;
   grid-template-columns: 18mm 1fr;
@@ -1133,6 +1158,7 @@ h5 {
   column-fill: auto;
   column-gap: 8mm;
   column-rule: 0.35pt solid var(--line);
+  text-align: left;
 }
 
 .paper-part {
@@ -1145,7 +1171,8 @@ h5 {
   margin-top: 8mm;
 }
 
-.heading-lead {
+.heading-lead,
+.continuation-grounded {
   break-inside: avoid;
 }
 
@@ -1207,21 +1234,27 @@ h5 {
   text-decoration-skip-ink: auto;
 }
 
+.reading-discourse,
+.full-translation,
+.source-relationships,
 .long-sentences {
   margin-top: 5mm;
-  break-inside: auto;
 }
 
+.reading-discourse h4,
+.full-translation h4,
+.source-relationships h4,
 .long-sentences h4 {
   margin: 0 0 2mm;
+  padding-bottom: 1.2mm;
+  border-bottom: 0.35pt solid var(--line);
   color: var(--green-deep);
   font: 700 9.5pt/13pt var(--sans);
   break-after: avoid;
 }
 
 .long-sentence {
-  padding: 2.4mm 0;
-  border-top: 0.35pt solid var(--line);
+  padding-bottom: 2.4mm;
   break-inside: avoid;
 }
 
@@ -1252,7 +1285,6 @@ h5 {
 .full-translation p,
 .analysis-prose,
 .distractor p {
-  text-align: justify;
   text-wrap: pretty;
 }
 
@@ -1272,13 +1304,6 @@ h5 {
   margin: 0 0 4mm;
 }
 
-.full-translation h4 {
-  margin: 0 0 1.8mm;
-  color: var(--ink);
-  font: 700 9pt/13pt var(--sans);
-  break-after: avoid;
-}
-
 .full-translation p {
   text-indent: 2em;
   text-wrap: pretty;
@@ -1294,6 +1319,7 @@ h5 {
   font-family: var(--sans);
   font-size: 8.5pt;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .question-heading {
@@ -1363,10 +1389,6 @@ h5 {
   line-height: 13.6pt;
 }
 
-.evidence-quote p + p::before {
-  content: " ";
-}
-
 .distractor--reading .micro-heading,
 .distractor--cloze .micro-heading {
   display: block;
@@ -1423,7 +1445,8 @@ h5 {
 }
 
 .writing-block > h4,
-.writing-block > .heading-lead > h4 {
+.writing-block > .heading-lead > h4,
+.model-essay > .heading-lead > h4 {
   margin: 0 0 3mm;
   padding-bottom: 2mm;
   border-bottom: 0.35pt solid var(--line);
@@ -1509,12 +1532,17 @@ dd {
   padding-left: 5mm;
 }
 
-.model-answer > div {
+.model-paragraph {
+  font-family: var(--latin);
   font-size: 9.2pt;
   line-height: 14.4pt;
 }
 
-.model-answer p + p {
+.model-essay + .model-essay,
+.model-paragraph + .model-paragraph,
+.model-essay > .heading-lead + .model-paragraph,
+.model-essay > .heading-lead + .model-signoff,
+.model-paragraph + .model-signoff {
   margin-top: 2.2mm;
 }
 
@@ -1554,7 +1582,6 @@ dd {
 
 .route-paragraph p,
 .route-paragraph li {
-  text-align: justify;
   text-wrap: pretty;
 }
 
@@ -1627,7 +1654,7 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 --><main>
   <section class="frontmatter">
     <p class="house-mark">${HOUSE_MARK}</p>
-    <h1>${escapeHtml(title)}</h1>
+    <h1>${renderPaperTitle(title)}</h1>
     <div class="title-rule" aria-hidden="true"></div>
     <section class="answer-overview">
       <h2>答案速查</h2>

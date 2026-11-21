@@ -48,10 +48,10 @@ v2Writing.continuationAnalysis = {
   developmentPlan: projected.developmentPlan,
 }
 v2Writing.continuationAnalysis.developmentPlan.paragraphs[0].emotionChanges = [{
-  trigger: 'EMOTION_TRIGGER_SENTINEL',
+  trigger: 'EMOTION_TRIGGER_SENTINEL。',
   from: 'uncertain',
   to: 'resolved',
-  visibleAction: 'VISIBLE_ACTION_SENTINEL',
+  visibleAction: 'VISIBLE_ACTION_SENTINEL。',
 }]
 v2Writing.continuationAnalysis.developmentPlan.paragraphs[0].cluePayoffs = [{
   clue: { source: 'material', excerpt: 'CLUE_SENTINEL' }, payoff: 'PAYOFF_SENTINEL',
@@ -63,18 +63,17 @@ v2Writing.officialModelAnswer = 'OFFICIAL_MODEL_SENTINEL'
 v2Writing.modelAnswer = 'GENERATED_MODEL_SENTINEL'
 const v2ContinuationHtml = buildCompanionAnalysisHtml(v2ContinuationSource)
 assert.equal((v2ContinuationHtml.match(/data-continuation-section=/gu) || []).length, 4)
-assert.ok(v2ContinuationHtml.includes('EMOTION_TRIGGER_SENTINEL'))
-assert.ok(v2ContinuationHtml.includes('VISIBLE_ACTION_SENTINEL'))
+assert.match(v2ContinuationHtml, /<p>触发：EMOTION_TRIGGER_SENTINEL<\/p><p>变化：uncertain → resolved<\/p><p>表现：VISIBLE_ACTION_SENTINEL<\/p>/u)
 assert.match(v2ContinuationHtml, /<li><p><b>原文<\/b>：“CLUE_SENTINEL”<\/p><p>PAYOFF_SENTINEL<\/p><\/li>/u)
 assert.doesNotMatch(v2ContinuationHtml, /质量风险|QUALITY_RISK_SENTINEL|REVIEW_NOTE_SENTINEL|INTERNAL_SENTINEL/u)
 assert.ok(v2ContinuationHtml.includes('OFFICIAL_MODEL_SENTINEL'))
 assert.ok(v2ContinuationHtml.includes('GENERATED_MODEL_SENTINEL'))
-assert.ok(v2ContinuationHtml.indexOf('官方参考范文') < v2ContinuationHtml.indexOf('生成参考范文'))
+assert.match(v2ContinuationHtml, /<h4>参考范文<\/h4>[\s\S]*OFFICIAL_MODEL_SENTINEL[\s\S]*<h4>参考范文（AI 撰写）<\/h4>[\s\S]*GENERATED_MODEL_SENTINEL/u)
 assert.ok(!v2ContinuationHtml.includes('continuationDesign'))
 assert.ok(!v2ContinuationHtml.includes('highlightExpressions'))
 const [continuationGroupId] = Object.entries(v2ContinuationSource.analyses.writing.groups)
   .find(([, { writing }]) => writing === v2Writing)
-const revisionWithoutSourceEssay = buildCompanionAnalysisHtml({ projection: {
+const writingProjection = {
   paperAsset: v2ContinuationSource.paperAsset,
   analysisSidecars: { 'writing-analysis-v1.json': v2ContinuationSource.analyses.writing },
   consumption: { visibleStructure: [
@@ -82,9 +81,17 @@ const revisionWithoutSourceEssay = buildCompanionAnalysisHtml({ projection: {
     { kind: 'group', groupId: continuationGroupId, slotId: 'writing.continuation' },
   ] },
   sourceReferences: { groups: [{ groupId: continuationGroupId, taskType: 'continuation', essays: { entries: [] } }] },
-} })
+}
+const revisionWithoutSourceEssay = buildCompanionAnalysisHtml({ projection: writingProjection })
 assert.match(revisionWithoutSourceEssay,
-  /data-continuation-section="modelAnswer"><h4>参考范文<\/h4><div lang="en"><p>OFFICIAL_MODEL_SENTINEL<\/p><\/div><\/section>/u)
+  /data-continuation-section="modelAnswer">[\s\S]*<h4>参考范文<\/h4><p class="model-paragraph">OFFICIAL_MODEL_SENTINEL<\/p>[\s\S]*<h4>参考范文（AI 撰写）<\/h4><p class="model-paragraph">GENERATED_MODEL_SENTINEL<\/p>/u)
+writingProjection.sourceReferences.groups[0].essays.entries.push({
+  provenance: 'unofficial', paragraphs: [{ text: 'UNOFFICIAL_SOURCE_SENTINEL' }],
+})
+const revisionWithSourceEssay = buildCompanionAnalysisHtml({ projection: writingProjection })
+assert.match(revisionWithSourceEssay,
+  /<h4>非官方参考范文<\/h4><p class="model-paragraph">UNOFFICIAL_SOURCE_SENTINEL<\/p>[\s\S]*<h4>参考范文（AI 撰写）<\/h4><p class="model-paragraph">GENERATED_MODEL_SENTINEL<\/p>/u)
+assert.doesNotMatch(revisionWithSourceEssay, /OFFICIAL_MODEL_SENTINEL/u)
 const translatedSource = structuredClone(source)
 for (const group of Object.values(translatedSource.analyses.reading.groups)) {
   group.fullTranslationZh = '这是阅读文章的完整中文译文。'
@@ -139,7 +146,7 @@ assert.ok(html.includes('margin-bottom: 0.8mm;\n  break-after: avoid;'))
 assert.ok(html.includes('参考范文'))
 assert.ok(!html.includes('精选表达'))
 assert.ok(!html.includes('续写路线'))
-assert.ok(html.includes('生成参考范文'))
+assert.ok(html.includes('参考范文（AI 撰写）'))
 assert.equal((translatedHtml.match(/class="full-translation"/gu) || []).length, 7)
 assert.equal((translatedHtml.match(/class="translation-marker"/gu) || []).length, 0)
 assert.ok(translatedHtml.includes('[36]七选五译文。'))
