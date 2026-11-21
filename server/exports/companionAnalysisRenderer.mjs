@@ -42,8 +42,8 @@ function innerQuote(value) {
 }
 
 function newQuestionMarkers(numbers, previousNumbers) {
-  const added = numbers.filter((number) => !previousNumbers.includes(number))
-  return added.length ? `<b class="translation-marker">[${added.map(escapeHtml).join('、')}]</b>` : ''
+  const changed = numbers.length !== previousNumbers.length || numbers.some((number, index) => number !== previousNumbers[index])
+  return changed && numbers.length ? `<b class="translation-marker">[${numbers.map(escapeHtml).join('、')}]</b>` : ''
 }
 
 function array(value) {
@@ -264,13 +264,19 @@ function renderQuestionLead(heading, content) {
   return `<div class="question-lead">${heading}${content || ''}</div>`
 }
 
-function renderListeningGroup({ group, title, paperAsset, analysis, answers, openingHeadings }) {
+function renderListeningGroup({ group, title, paperAsset, analysis, answers, openingHeadings, listeningSegmentOrder }) {
   const groupQuestionIds = new Set(array(group.questionIds))
-  const materials = Object.values(analysis?.materials || {}).map((material, index) => ({ material, segmentNo: index + 1 }))
-    .filter(({ material }) => array(material?.questionIds).some((questionId) => groupQuestionIds.has(questionId)))
+  const questionNo = id => questionData(paperAsset, id)?.questionNo
+  const materials = Object.values(analysis?.materials || {}).filter(Boolean).map((material) => {
+    const questionIds = array(material.questionIds).filter(id => questionNo(id)).sort((a, b) => questionNo(a) - questionNo(b))
+    return { material, questionIds, sourceOrder: listeningSegmentOrder?.get(material.segmentId) }
+  }).sort((a, b) => (a.sourceOrder ?? Infinity) - (b.sourceOrder ?? Infinity)
+    || (questionNo(a.questionIds[0]) ?? Infinity) - (questionNo(b.questionIds[0]) ?? Infinity))
+    .map((entry, index) => ({ ...entry, segmentNo: entry.sourceOrder ?? index + 1 }))
+    .filter(({ questionIds }) => questionIds.some(id => groupQuestionIds.has(id)))
   if (materials.length === 0) return ''
-  const renderedMaterials = materials.map(({ material, segmentNo }, index) => {
-    const questions = array(material.questionIds).filter((questionId) => groupQuestionIds.has(questionId)).map((questionId) => {
+  const renderedMaterials = materials.map(({ material, questionIds, segmentNo }, index) => {
+    const questions = questionIds.filter((questionId) => groupQuestionIds.has(questionId)).map((questionId) => {
       const sourceQuestion = questionData(paperAsset, questionId)
       const question = analysis?.questions?.[questionId]
       const answer = answerData(paperAsset, questionId)
@@ -288,7 +294,7 @@ function renderListeningGroup({ group, title, paperAsset, analysis, answers, ope
       </section>`
     }).join('')
     const groupHeadings = index === 0 ? openingHeadings + renderGroupHeading(title || group.title || '听力', answers) : ''
-    const numbers = array(material.questionIds).map((questionId) => questionData(paperAsset, questionId)?.questionNo).filter(Boolean)
+    const numbers = questionIds.map(questionNo)
     const questionRange = numbers.length > 1 ? `${numbers[0]}–${numbers.at(-1)}` : numbers[0]
     const materialHeading = `<h4>第 ${segmentNo} 段材料${numbers.length ? `（第 ${escapeHtml(questionRange)} 题）` : ''}</h4>`
     const topic = `<p class="listening-topic">${escapeHtml(`${material.topic.theme} · ${material.topic.themeGroup} · ${material.topic.subtopic}`)}</p>`
@@ -715,17 +721,17 @@ function renderContinuationAnalysis(analysis) {
     </section>`
 }
 
-function renderWritingModels(source, official, model, paperSource, isContinuation) {
-  const sourceDescribesUnofficialEssays = /(?:学科网|非官方)[^。；\n]{0,40}范文/u.test(paperSource ?? '')
+function renderWritingModels(source, official, model, isContinuation) {
   const entries = array(source?.essays?.entries)
     .map(entry => ({
       text: sourceReferenceBlocks(entry)
         .filter(block => block.kind === 'paragraph')
         .map(block => block.paragraph.text).join('\n'),
       unofficial: entry.provenance === 'unofficial'
-        || (!entry.provenance && (/学科网|非官方/u.test(entry.sourceLabel ?? '') || sourceDescribesUnofficialEssays)),
+        || (!entry.provenance && /非官方|学科网/u.test(entry.sourceLabel ?? '')
+          && !/考试院|命题方|(?<!非)官方/u.test(entry.sourceLabel ?? '')),
     })).filter(({ text }) => text.trim())
-  if (entries.length === 0 && official) entries.push({ text: official, unofficial: sourceDescribesUnofficialEssays })
+  if (entries.length === 0 && official) entries.push({ text: official, unofficial: false })
   const essays = entries.map(({ text, unofficial }) => ({ text, label: unofficial ? '非官方参考范文' : '参考范文' }))
   if (model) essays.push({ text: model, label: '参考范文（AI 撰写）' })
   if (essays.length === 0) return ''
@@ -742,13 +748,13 @@ function renderWritingModels(source, official, model, paperSource, isContinuatio
   return `<section class="writing-block model-answer"${isContinuation ? ' data-continuation-section="modelAnswer"' : ''}>${content}</section>`
 }
 
-function renderWritingGroup({ group, title, paperAsset, analysis, sourceReferencesByGroup, openingHeadings }) {
+function renderWritingGroup({ group, title, analysis, sourceReferencesByGroup, openingHeadings }) {
   const writing = analysis?.groups?.[group.groupId]?.writing
   const source = sourceReferencesByGroup?.get(group.groupId)
   const isContinuation = (source?.taskType ?? writing?.taskType) === 'continuation'
   const official = nonEmptyString(writing?.officialModelAnswer)
   const model = nonEmptyString(writing?.modelAnswer)
-  const models = renderWritingModels(source, official, model, paperAsset.paper.source, isContinuation)
+  const models = renderWritingModels(source, official, model, isContinuation)
   if (!writing && !models) return ''
   const groupHeading = `${openingHeadings}<h3 class="group-title">${escapeHtml(title || group.title || (isContinuation ? '读后续写' : '应用文写作'))}</h3>`
   const reviewCard = isContinuation ? '' : renderReviewCard(writing?.reviewCard, groupHeading)
@@ -785,7 +791,7 @@ function renderGroup(input) {
   }
 }
 
-function renderAnalysisBody(parts, paperAsset, analyses, figuresByGroup, sourceReferencesByGroup) {
+function renderAnalysisBody(parts, paperAsset, analyses, figuresByGroup, sourceReferencesByGroup, listeningSegmentOrder) {
   return parts.map((part) => {
     const partTitle = escapeHtml(part.title)
     let partHeading = `<h2 class="part-title">${partTitle}</h2>`
@@ -798,6 +804,7 @@ function renderAnalysisBody(parts, paperAsset, analyses, figuresByGroup, sourceR
           paperAsset,
           analyses,
           sourceReferencesByGroup,
+          listeningSegmentOrder,
           figures: figuresByGroup?.get(entry.group.groupId) ?? (figuresByGroup ? [] : null),
           openingHeadings: partHeading + sectionHeading,
         })
@@ -889,6 +896,8 @@ function revisionAnalysisSource(projection) {
       .map(([key, fileName]) => [key, analysisSidecars[fileName]])),
     sourceReferencesByGroup: new Map(array(sourceReferences?.groups)
       .map(group => [group.groupId, group])),
+    listeningSegmentOrder: new Map(array(materialization?.listening?.transcript)
+      .map(({ segmentId }, index) => [segmentId, index + 1])),
     figuresByGroup: new Map(array(materialization?.groups).map(group => [group.groupId,
       group.blocks.filter(block => block.kind === 'figure').map(block => ({
         ...block, textRegions: media.get(block.mediaId)?.textRegions,
@@ -897,12 +906,12 @@ function revisionAnalysisSource(projection) {
 }
 
 export function buildCompanionAnalysisHtml(input) {
-  const { paperAsset, analyses, figuresByGroup, sourceReferencesByGroup } = input.projection ? revisionAnalysisSource(input.projection) : input
+  const { paperAsset, analyses, figuresByGroup, sourceReferencesByGroup, listeningSegmentOrder } = input.projection ? revisionAnalysisSource(input.projection) : input
   if (!paperAsset?.paper?.paperId) throw new Error('paperAsset is required')
   const title = cleanPaperTitle(paperAsset.paper.title)
   const parts = orderedGroups(paperAsset)
   const answerOverview = renderAnswerOverview(parts)
-  const analysisBody = renderAnalysisBody(parts, paperAsset, analyses || {}, figuresByGroup, sourceReferencesByGroup)
+  const analysisBody = renderAnalysisBody(parts, paperAsset, analyses || {}, figuresByGroup, sourceReferencesByGroup, listeningSegmentOrder)
   return `<!DOCTYPE html>
 <html lang="zh-CN">
 <head>

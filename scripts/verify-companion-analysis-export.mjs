@@ -74,7 +74,9 @@ assert.ok(!v2ContinuationHtml.includes('highlightExpressions'))
 const [continuationGroupId] = Object.entries(v2ContinuationSource.analyses.writing.groups)
   .find(([, { writing }]) => writing === v2Writing)
 const writingProjection = {
-  paperAsset: v2ContinuationSource.paperAsset,
+  paperAsset: { ...v2ContinuationSource.paperAsset, paper: {
+    ...v2ContinuationSource.paperAsset.paper, source: '学科网转载，含非官方参考范文',
+  } },
   analysisSidecars: { 'writing-analysis-v1.json': v2ContinuationSource.analyses.writing },
   consumption: { visibleStructure: [
     { kind: 'part' }, { kind: 'section' },
@@ -87,10 +89,12 @@ assert.match(revisionWithoutSourceEssay,
   /data-continuation-section="modelAnswer">[\s\S]*<h4>参考范文<\/h4><p class="model-paragraph">OFFICIAL_MODEL_SENTINEL<\/p>[\s\S]*<h4>参考范文（AI 撰写）<\/h4><p class="model-paragraph">GENERATED_MODEL_SENTINEL<\/p>/u)
 writingProjection.sourceReferences.groups[0].essays.entries.push({
   provenance: 'unofficial', paragraphs: [{ text: 'UNOFFICIAL_SOURCE_SENTINEL' }],
+}, {
+  sourceLabel: '【答案】', paragraphs: [{ text: 'OFFICIAL_SOURCE_SENTINEL' }],
 })
 const revisionWithSourceEssay = buildCompanionAnalysisHtml({ projection: writingProjection })
 assert.match(revisionWithSourceEssay,
-  /<h4>非官方参考范文<\/h4><p class="model-paragraph">UNOFFICIAL_SOURCE_SENTINEL<\/p>[\s\S]*<h4>参考范文（AI 撰写）<\/h4><p class="model-paragraph">GENERATED_MODEL_SENTINEL<\/p>/u)
+  /<h4>非官方参考范文<\/h4><p class="model-paragraph">UNOFFICIAL_SOURCE_SENTINEL<\/p>[\s\S]*<h4>参考范文<\/h4><p class="model-paragraph">OFFICIAL_SOURCE_SENTINEL<\/p>[\s\S]*<h4>参考范文（AI 撰写）<\/h4><p class="model-paragraph">GENERATED_MODEL_SENTINEL<\/p>/u)
 assert.doesNotMatch(revisionWithSourceEssay, /OFFICIAL_MODEL_SENTINEL/u)
 const translatedSource = structuredClone(source)
 for (const group of Object.values(translatedSource.analyses.reading.groups)) {
@@ -177,24 +181,38 @@ assert.ok(html.includes('orphans: 3'))
 assert.ok(html.includes('widows: 3'))
 
 const sevenGroupId = 'group-2025-i-seven-choices'
-const sevenQuestionId = source.paperAsset.content.groups[sevenGroupId].questionIds[0]
+const [sevenQuestionId, nextSevenQuestionId] = source.paperAsset.content.groups[sevenGroupId].questionIds
 const listeningGroupId = 'listening-fixture'
 const listeningQuestionId = 'question:listening:1'
+const listeningIds = [1, 3, 4].map(number => `question:listening:${number}`)
 const revisionAsset = structuredClone(source.paperAsset)
 revisionAsset.content.groups[sevenGroupId].passage.paragraphs = [{
   paragraphId: 'seven-fixture', text: 'Earlier. __36__ Later.',
 }]
 revisionAsset.content.groups[listeningGroupId] = { groupId: listeningGroupId, groupType: 'listening',
-  questionIds: [listeningQuestionId] }
-revisionAsset.content.questions[listeningQuestionId] = { questionNo: 1 }
-revisionAsset.answerKey.answers[listeningQuestionId] = { answer: 'C' }
+  questionIds: listeningIds }
+for (const id of listeningIds) {
+  revisionAsset.content.questions[id] = { questionNo: Number(id.at(-1)) }
+  revisionAsset.answerKey.answers[id] = { answer: 'C' }
+}
 const sevenAnalysis = structuredClone(source.analyses.sevenChoices)
 sevenAnalysis.questions[sevenQuestionId].contextEvidence = {
   paragraphId: 'seven-fixture', beforeQuote: 'Later.', afterQuote: 'Later.',
 }
+sevenAnalysis.groups[sevenGroupId].fullTranslationZh = '甲乙'
+sevenAnalysis.groups[sevenGroupId].teachingContent = {
+  schemaVersion: 'objective-teaching-content-v1',
+  translation: { textId: 'translation', paragraphs: [{ paragraphId: 'p', quote: '甲乙' }] },
+  annotations: [[sevenQuestionId, 2, '甲乙'], [nextSevenQuestionId, 1, '甲']].map(([id, end, quote]) => ({
+    kind: 'evidence', questionIds: [id], translationRanges: [{ textId: 'translation', paragraphId: 'p', start: 0, end, quote }],
+  })),
+}
 const revisionHtml = buildCompanionAnalysisHtml({ projection: {
   paperAsset: revisionAsset,
-  materialization: { listening: { answers: [{ canonicalNumber: 1, value: 'C', provenance: 'unofficial' }] } },
+  materialization: { listening: {
+    answers: [{ canonicalNumber: 1, value: 'C', provenance: 'unofficial' }],
+    transcript: [{ segmentId: 'm' }, { segmentId: 'missing' }, { segmentId: 'n' }],
+  } },
   consumption: { visibleStructure: [
     { kind: 'part' }, { kind: 'section' },
     { kind: 'group', groupId: listeningGroupId, slotId: 'listening.short-dialogue' },
@@ -203,7 +221,10 @@ const revisionHtml = buildCompanionAnalysisHtml({ projection: {
   analysisSidecars: {
     'seven-choices-analysis-v1.json': sevenAnalysis,
     'listening-analysis-v1.json': {
-      materials: { m: { segmentId: 'm', questionIds: [listeningQuestionId], topic: {} } },
+      materials: {
+        n: { segmentId: 'n', questionIds: [listeningIds[2], listeningIds[1]], topic: {} },
+        m: { segmentId: 'm', questionIds: [listeningQuestionId], topic: {} },
+      },
       questions: { [listeningQuestionId]: {} },
     },
   },
@@ -212,6 +233,9 @@ assert.doesNotMatch(revisionHtml, /<span>空前<\/span><p lang="en">Later\.<\/p>
 assert.match(revisionHtml, /<span>空后<\/span><p lang="en">Later\.<\/p>/)
 assert.match(revisionHtml, /<h3>听力<small>听力答案（非官方，据录音整理）<\/small><\/h3>/)
 assert.match(revisionHtml, /<small>听力答案（非官方，据录音整理）<\/small>/)
+assert.match(revisionHtml, /第 1 段材料（第 1 题）[\s\S]*第 3 段材料（第 3–4 题）/u)
+assert.deepEqual([...revisionHtml.matchAll(/class="translation-marker">(\[[\d、]+\])<\/b>/gu)]
+  .map(([, marker]) => marker), ['[36、37]', '[36]'])
 const answerCells = markup => [...markup.matchAll(/data-question-id="([^"]+)">(?:<span class="answer-separator" aria-hidden="true">·<\/span> )?<b>([^<]+)<\/b> <span>([^<]+)<\/span>/gu)]
   .map(([, id, number, answer]) => [id, `${number} ${answer}`])
 for (const document of [html, revisionHtml]) {
