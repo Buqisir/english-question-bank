@@ -14,9 +14,13 @@
 // matches the paper the companion sits beside. Hierarchy comes from Bold, size
 // and the pine-green signature, not a sans.
 //
-// Three levels only: part band → group heading with its answer line →
-// question, whose number and answer open the first line of its explanation.
-// Every other label is a bold run-in at body size, never a ruled sub-heading.
+// Three levels only: part title → group heading with its answer line →
+// question, whose number block and answer open the first line of its
+// explanation. Every other label is a bold run-in at body size. No horizontal
+// rules anywhere in the body (the column rule is the only line); clues are a
+// tint, long-sentence chunks are bracketed. Each class belongs to one
+// component in components.mjs, the spec in
+// docs/product/companion-analysis-components.md.
 import { paperFontStack } from '../../../shared/papersurface/paperFonts.mjs'
 
 export function companionAnalysisStyles({ houseMark, paginated }) {
@@ -27,6 +31,9 @@ export function companionAnalysisStyles({ houseMark, paginated }) {
   --muted: #5d5d58;
   --line: #c6c6c0;
   --line-soft: #e4e4df;
+  /* Clue tint: the pine green at about 17% on white. Prints as a pale grey on
+     a monochrome laser, still visible, never a rule. */
+  --tint: #e2e7df;
   --paper: #ffffff;
   --zh: ${paperFontStack};
   --en: ${paperFontStack};
@@ -196,22 +203,9 @@ h5 {
 }
 
 .title-rule {
-  display: grid;
-  grid-template-columns: 18mm 1fr;
-  gap: 2mm;
+  width: 18mm;
   margin: 5mm 0 6mm;
-}
-
-.title-rule::before,
-.title-rule::after {
-  height: 0;
   border-top: 0.7pt solid var(--green);
-  content: "";
-}
-
-.title-rule::after {
-  border-color: var(--line);
-  border-top-width: 0.35pt;
 }
 
 .answer-overview > h2 {
@@ -223,8 +217,7 @@ h5 {
   display: grid;
   grid-template-columns: 20mm minmax(0, 1fr);
   gap: 2mm;
-  padding: 1mm 0;
-  border-top: 0.35pt solid var(--line);
+  padding: 0.8mm 0;
   break-inside: avoid;
 }
 
@@ -312,12 +305,9 @@ h5 {
   break-inside: avoid;
 }
 
-/* Level 1: part band. */
+/* Level 1: part title. Weight, colour and space set it off; no rules. */
 .part-title {
-  margin: 0 0 calc(var(--lh) / 2);
-  padding: 0.8mm 0 0.6mm;
-  border-top: 0.7pt solid var(--green);
-  border-bottom: 0.35pt solid var(--green);
+  margin: 0 0 calc(var(--lh) / 3);
   color: var(--green-deep);
   font: 700 11pt/var(--lh) var(--zh);
 }
@@ -349,10 +339,7 @@ h5 {
   display: grid;
   grid-template-columns: max-content minmax(0, 1fr);
   gap: 2mm;
-  margin: 0.6mm 0 calc(var(--lh) / 3);
-  padding: 0.6mm 0;
-  border-top: 0.35pt solid var(--line);
-  border-bottom: 0.35pt solid var(--line);
+  margin: 0.4mm 0 calc(var(--lh) / 3);
   color: var(--muted);
   font: 400 var(--small)/var(--lh) var(--zh);
 }
@@ -437,12 +424,33 @@ h5 {
   margin-top: 0.6mm;
 }
 
+/* Clue mark (class name kept from when it was an underline): a pale tint
+   over the words, the way answer books shade an evidence sentence, so a
+   passage full of clues does not become a page of lines. */
 .source-underline {
-  text-decoration-line: underline;
-  text-decoration-color: var(--green);
-  text-decoration-thickness: 0.6pt;
-  text-underline-offset: 1.6pt;
-  text-decoration-skip-ink: auto;
+  background: var(--tint);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* In a long sentence the marked chunks are its structure, not clues: square
+   brackets around each, as grammar notes print them. */
+.long-sentence-source .source-underline {
+  background: none;
+}
+
+.long-sentence-source .source-underline::before,
+.long-sentence-source .source-underline::after {
+  color: var(--green);
+  font-weight: 400;
+}
+
+.long-sentence-source .source-underline::before {
+  content: "[";
+}
+
+.long-sentence-source .source-underline::after {
+  content: "]";
 }
 
 /* The filled answer: bold, its number in front as on the exam paper. */
@@ -509,11 +517,17 @@ h5 {
 }
 
 .question-number {
+  /* The one filled shape on the page: a pine block with the number reversed
+     out, so a teacher scanning a column finds question 47 by its block. */
   display: inline-block;
-  min-width: 1.6em;
-  margin-right: 0.3em;
-  color: var(--ink);
-  font: 700 11pt/var(--lh) var(--en);
+  min-width: 1.75em;
+  margin-right: 0.35em;
+  padding: 0 0.22em;
+  border-radius: 1.2pt;
+  background: var(--green-deep);
+  color: var(--paper);
+  text-align: center;
+  font: 700 9pt/12pt var(--en);
   font-variant-numeric: tabular-nums;
   string-set: running-question content();
 }
@@ -669,22 +683,24 @@ h5 {
 .model-essay > .heading-lead > h4 {
   margin: 0 0 calc(var(--lh) / 4);
   color: var(--green-deep);
-  font: 700 11pt/var(--lh) var(--zh);
+  font: 700 var(--fs)/var(--lh) var(--zh);
 }
 
-.review-card .group-title + h4 {
-  margin-top: calc(var(--lh) / 2);
-}
-
+.review-card .group-title + .review-group,
 .review-group + .review-group,
 .review-card > .heading-lead + .review-group {
   margin-top: calc(var(--lh) / 2);
 }
 
-.review-group > h5,
+.review-group > h5 {
+  margin: 0 0 calc(var(--lh) / 4);
+  color: var(--green-deep);
+  font: 700 var(--fs)/var(--lh) var(--zh);
+}
+
 .route-paragraph h5 {
   margin: 0 0 0.4mm;
-  color: var(--green-deep);
+  color: var(--ink);
   font: 700 var(--fs)/var(--lh) var(--zh);
 }
 
@@ -702,8 +718,7 @@ h5 {
   display: grid;
   grid-template-columns: 5em 1fr;
   gap: 0.5em;
-  padding: 0.6mm 0;
-  border-bottom: 0.35pt solid var(--line-soft);
+  padding: 0.4mm 0;
   break-inside: avoid;
 }
 
@@ -712,8 +727,11 @@ dt {
   font-size: var(--fs);
 }
 
+/* Short facts beside a label: justifying them spreads the characters of a
+   line that ends before a long English word, so they stay ragged. */
 dd {
   margin: 0;
+  text-align: start;
 }
 
 .review-card dd span {

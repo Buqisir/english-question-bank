@@ -281,6 +281,30 @@ try {
 
 console.log('Companion analysis HTML/PDF export: PASS')
 
+// One function, one component, one look: every class on the page and every
+// class the stylesheet styles belongs to a component in components.mjs.
+{
+  const { analysisComponentByClass } = await import('../server/exports/companion-analysis/components.mjs')
+  const { companionAnalysisStyles } = await import('../server/exports/companion-analysis/styles.mjs')
+  for (const document of [html, revisionHtml]) {
+    const body = document.slice(document.indexOf('<body'))
+    for (const [, classes] of body.matchAll(/class="([^"]+)"/gu)) {
+      for (const className of classes.split(/\s+/u)) {
+        assert.ok(analysisComponentByClass.has(className), `class "${className}" belongs to no component`)
+      }
+    }
+  }
+  const css = companionAnalysisStyles({ houseMark: 'X', paginated: true }).replace(/\/\*[\s\S]*?\*\//gu, '')
+  for (const [, className] of css.matchAll(/\.([a-z][a-z0-9-]*)/gu)) {
+    if (className.startsWith('pagedjs')) continue
+    assert.ok(analysisComponentByClass.has(className), `styles.mjs styles "${className}", which belongs to no component`)
+  }
+  // No horizontal rule in the body: the column rule is the only line, the
+  // masthead's short bar the only rule outside it.
+  assert.deepEqual([...css.matchAll(/^\s*([^{}]+?)\s*\{[^}]*border(?:-top|-bottom)?:\s*[^;]*solid/gmu)].map(([, selector]) => selector), ['.title-rule'])
+}
+console.log('Companion analysis components: PASS')
+
 // No dot separators anywhere the renderer writes its own text: answers align in
 // columns, lists use 、, labels use ：. (A 间隔号 inside a translated foreign
 // name such as 马克·吐温 comes from the analysis text and is correct.)
@@ -314,13 +338,17 @@ for (const file of readdirSync(new URL('../server/exports/companion-analysis/', 
   assert.equal([...merged.matchAll(/data-source-text-state="merged"/gu)].length, 1)
   assert.doesNotMatch(merged, /原题|答案补全|__56__/u)
   for (const [kind, text] of [['answer-evidence', 'the countrysid'], ['answer-insertion', 'where'], ['answer-insertion', 'central'], ['answer-evidence', 'heating fail']]) {
-    assert.match(merged, new RegExp(`data-annotation-kinds="${kind}"[^>]*>${text}</span>`, 'u'))
+    assert.match(merged, new RegExp(`data-annotation-kinds="${kind}"[^>]*>${text} ?</span>`, 'u'))
   }
   // The answer carries its number in front; the clue its number after.
   assert.match(merged, /<b class="blank-no">56<\/b><span class="source-relationship answer-fill"/u)
   assert.match(merged, /e<\/span><sup class="clue-no">56<\/sup><\/span>, /u)
   const plain = merged.replace(/<sup[^>]*>.*?<\/sup>|<b class="blank-no">.*?<\/b>|<[^>]+>/gu, '')
   assert.ok(plain.endsWith(completed), 'the printed passage reads as the completed text')
+  // Paged.js drops whitespace-only text nodes: the space between the answer
+  // and the clue after it ("central heating") must live inside a mark.
+  assert.doesNotMatch(merged, /<\/span>[\t\n\r ]+<(?:span class="source-relationship|b class="blank-no)/u)
+  assert.match(merged, /answer-fill"[^>]*>central <\/span><span class="source-relationship source-underline"/u)
   const edited = 'Yet now I live in the countryside, where tea grows, and central heating often fails.'
   const unaligned = renderSourceRelationships({ teachingContent: teaching(edited) }, group, paper)
   assert.match(unaligned, /原题[\s\S]*答案补全/u, 'texts that do not line up keep both paragraphs')

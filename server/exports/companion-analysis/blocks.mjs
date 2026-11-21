@@ -29,7 +29,7 @@ function renderMarkedRun(text, ranges, questionNo, spanClass) {
     array(shown[index].annotation.questionIds).map(questionNo).filter(Boolean)))]
     .sort((a, b) => Number(a) - Number(b))
   const parts = partitionAnalysisText(text, shown.map(({ start, end, quote }) => ({ start, end, quote })))
-  return parts.map((part) => {
+  const html = parts.map((part) => {
     const indices = part.rangeIndices
     if (indices.length === 0) return escapeHtml(part.text)
     const annotations = indices.map((index) => shown[index].annotation)
@@ -54,7 +54,17 @@ function renderMarkedRun(text, ranges, questionNo, spanClass) {
     return `${fill}${open}${escapeHtml(points.slice(0, tailAt).join(''))}</span>`
       + `<span class="clue-tail"><span class="${spanClass}${underline}">${escapeHtml(points[tailAt])}</span>`
       + `<sup class="clue-no">${escapeHtml(closing.join(','))}</sup></span>${escapeHtml(points.slice(tailAt + 1).join(''))}`
-  }).join('')
+  })
+  // Paged.js drops text nodes that are only whitespace, so the space between
+  // two marks ("absence of smog") would vanish from the page. Keep it inside
+  // the end of the mark before it, where it is a plain break opportunity.
+  for (let index = 1; index < html.length; index += 1) {
+    if (/^[\t\n\r ]+$/u.test(html[index]) && html[index - 1].endsWith('</span>')) {
+      html[index - 1] = `${html[index - 1].slice(0, -'</span>'.length)}${html[index]}</span>`
+      html[index] = ''
+    }
+  }
+  return html.join('')
 }
 
 export function renderFullTranslation(groupAnalysis, paperAsset) {

@@ -22,7 +22,7 @@ export function renderReviewCard(reviewCard, groupHeading) {
     ['写作价值', [display.value]],
   ]
   return `<section class="writing-block review-card" data-review-card-version="${display.sourceVersion}">
-    ${renderHeadingLead(groupHeading + '<h4>审题卡</h4>', `<section class="review-group"><h5>基本审题</h5><dl class="review-facts">${primaryRows.map(([label, values]) => row(label, values)).join('')}</dl></section>`)}
+    ${renderHeadingLead(groupHeading, `<section class="review-group"><h5>基本审题</h5><dl class="review-facts">${primaryRows.map(([label, values]) => row(label, values)).join('')}</dl></section>`)}
     <section class="review-group heading-lead"><h5>内容要点</h5><ol class="review-points">${display.points.map((point) => `<li>${escapeHtml(point)}</li>`).join('')}</ol></section>
     <section class="review-group heading-lead"><h5>读者意识</h5><dl class="reader-facts">${readerRows.map(([label, values]) => row(label, values)).join('')}</dl></section>
   </section>`
