@@ -163,6 +163,7 @@ const registry = {
   'scripts/verify-print-form.mjs',
   'scripts/verify-print-renderer.mjs',
   'scripts/verify-companion-analysis-export.mjs',
+  'scripts/verify-companion-analysis-snapshots.mjs',
   'scripts/verify-figure-render.mjs',
   'scripts/verify-verification-command-runner.mjs',
   'scripts/verify-verification-scheduler.mjs',
