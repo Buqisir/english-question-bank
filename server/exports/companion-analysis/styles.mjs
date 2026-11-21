@@ -620,6 +620,24 @@ h5 {
   display: inline;
 }
 
+/* 定位 written by the analysis: the stem's locating words in bold inside the
+   quote, the answer on the clue tint, and, when the answer is not in the
+   定位句, one line saying why, under the quote. */
+.locate-cue {
+  font-weight: 700;
+}
+
+.evidence-quote .evidence-bridge {
+  display: block;
+  color: var(--muted);
+}
+
+.locate-legend {
+  margin-top: 0.6mm;
+  color: var(--muted);
+  font-size: var(--small);
+}
+
 .distractor {
   break-inside: avoid;
 }

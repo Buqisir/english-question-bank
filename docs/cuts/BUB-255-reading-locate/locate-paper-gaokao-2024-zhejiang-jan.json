@@ -1,0 +1,142 @@
+{
+ "paperId": "paper-gaokao-2024-zhejiang-jan",
+ "questions": {
+  "question:paper-gaokao-2024-zhejiang-jan:21": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "music",
+    "targetText": "It is adapted by Joe McDonough, with music by David Kisor.",
+    "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:3",
+    "answerText": "music by David Kisor",
+    "note": "题干 music 原词出现在第 2 段 with music by 处。"
+   }
+  },
+  "question:paper-gaokao-2024-zhejiang-jan:22": {
+   "locateBy": "options"
+  },
+  "question:paper-gaokao-2024-zhejiang-jan:23": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "teachers",
+    "targetText": "Note to teachers: Children’s Theatre has a study guide demonstrating how math and science can be taught",
+    "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-a:7",
+    "answerText": "a study guide",
+    "note": "题干 teachers 对应原文 Note to teachers 一句。"
+   }
+  },
+  "question:paper-gaokao-2024-zhejiang-jan:24": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "it",
+    "targetText": "Hoping to impress some talented actors to come and work for me for nothing, I spread some throws over the sofas and lit candles to make it seem a bit more “young professional”.",
+    "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+    "answerText": "shared house",
+    "bridgeZh": "it 指前一句中举办试演的地方",
+    "note": "题干划线词 it 出现在第 1 段末句 make it seem 处。"
+   }
+  },
+  "question:paper-gaokao-2024-zhejiang-jan:25": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "2006",
+    "targetText": "The last time I used a phone box for its intended purpose was …2006.",
+    "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:1",
+    "answerText": "Suddenly I was locked outside. My mobile phone was inside",
+    "bridgeZh": "下一段讲述当年使用电话亭的经过",
+    "note": "题干 2006 原词出现在第 1 段。"
+   }
+  },
+  "question:paper-gaokao-2024-zhejiang-jan:26": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "mini community library",
+    "targetText": "The last one standing has just been turned into a “mini community library”: any passer-by can “borrow” a book from its shelves, return it later, or replace it with another title from their own collection.",
+    "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:3",
+    "answerText": "replace it with another title from their own collection",
+    "note": "题干 mini community library 原词出现在第 3 段。"
+   }
+  },
+  "question:paper-gaokao-2024-zhejiang-jan:27": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "library",
+    "targetText": "For a few months after the “library” opened, I didn’t bother taking a look, as I had assumed that it would be stuffed full of cheesy love stories.",
+    "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-b:4",
+    "answerText": "these books were free",
+    "bridgeZh": "Then 引出态度转变，原因在后两句",
+    "note": "题干 library 对应第 4 段首句的 “library”。"
+   }
+  },
+  "question:paper-gaokao-2024-zhejiang-jan:28": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "project",
+    "targetText": "As a result, since 1996 a group of insurance companies have spent about $2 million per year on the Alberta Hail Suppression Project.",
+    "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+    "targetCue": "Project",
+    "answerText": "before they can grow into dangerous hailstones",
+    "bridgeZh": "下一句说明项目的具体做法和目的",
+    "note": "题干 project 对应第 1 段 Alberta Hail Suppression Project。"
+   }
+  },
+  "question:paper-gaokao-2024-zhejiang-jan:29": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "opposed to",
+    "targetText": "But farmers in east-central Alberta -downwind of the hail project flights-worry that precious moisture(水分) is being stolen from their thirsty land by the cloud seeding.",
+    "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:1",
+    "targetCue": "worry",
+    "answerText": "farmers in east-central Alberta",
+    "note": "题干 opposed to 对应原文 worry，所在句开头即是反对者。"
+   }
+  },
+  "question:paper-gaokao-2024-zhejiang-jan:30": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "1999",
+    "targetText": "“In 1999, I personally saw significant tornadoes(龙卷风) form from a seeded storm cell in Kansas,” Dr. Doswell says.",
+    "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-c:4",
+    "answerText": "One doubter about the safety of cloud seeding",
+    "bridgeZh": "前一句交代他举此例时的立场",
+    "note": "题干 1999 和 tornadoes 原词出现在第 4 段。"
+   }
+  },
+  "question:paper-gaokao-2024-zhejiang-jan:31": {
+   "locateBy": "options"
+  },
+  "question:paper-gaokao-2024-zhejiang-jan:32": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "second treat",
+    "targetText": "Each child was told if they waited for 15 minutes before eating the treat, they would be given a second treat.",
+    "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:1",
+    "answerText": "waited for 15 minutes before eating the treat",
+    "note": "题干 second treat 原词出现在第 1 段。"
+   }
+  },
+  "question:paper-gaokao-2024-zhejiang-jan:33": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "mismatch",
+    "targetText": "But as we’ve reshaped the world around us, dramatically reducing the cost and effort involved in obtaining calories, we still have the same brains we had thousands of years ago, and this mismatch is at the heart of why so many of us struggle to resist tempting foods that we know we shouldn’t eat.",
+    "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:3",
+    "answerText": "we still have the same brains we had thousands of years ago",
+    "note": "题干 paragraph 3 与 mismatch 指向第 3 段末句。"
+   }
+  },
+  "question:paper-gaokao-2024-zhejiang-jan:34": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "suggest",
+    "targetText": "Therefore, just as we need to be more thoughtful about our caloric consumption, we also need to be more thoughtful about our information consumption, resisting the temptation of the mental “junk food” in order to manage our time most effectively.",
+    "targetParagraphId": "block:paper-gaokao-2024-zhejiang-jan:reading-d:4",
+    "targetCue": "need to",
+    "answerText": "be more thoughtful about our information consumption",
+    "note": "题干 suggest 对应末段末句 we also need to 提出的建议。"
+   }
+  },
+  "question:paper-gaokao-2024-zhejiang-jan:35": {
+   "locateBy": "passage"
+  }
+ }
+}

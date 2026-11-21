@@ -294,6 +294,7 @@ For each reading question:
     },
     "questionFocus": "Chinese description of what the question tests",
     "stemTranslationZh": "...",
+    "locateBy": "stem | options | passage",
     "optionAnalysis": [ ... ],
     "locationParaphrases": [ ... ]
   }
@@ -582,7 +583,7 @@ May be used for: `scopeShift`, `entityMismatch`
 
 UI title: 定位关系 / 同义替换
 
-Each reading question MUST include 1-2 items:
+Each reading question MUST include 1-3 items:
 
 ```json
 "locationParaphrases": [
@@ -627,6 +628,97 @@ Rules:
 }
 ```
 
+### 定位 (locateBy and the stem locating item)
+
+Purpose: show the reader how to get from the question to the passage. The
+stem gives the locating words (定位词); they find one passage sentence
+(定位句); the answer is either in that sentence or in its context.
+
+`locateBy` (question level, required):
+- `stem` — words in the stem point to one place in the passage. Most detail,
+  inference, reference and word-meaning questions.
+- `options` — the stem names no place (for example “What can we learn from
+  the text?”, “Which is true about X?” when X runs through the whole text);
+  the reader checks each option against the passage. The options' own
+  evidence already shows where.
+- `passage` — the question is about a whole text or a whole paragraph (best
+  title, main idea of the passage or of a named paragraph, writing purpose of
+  the whole text). No locating words; the paragraph the question names is
+  shown from the correct option's evidence.
+
+When `locateBy` is `stem`, add exactly ONE `locationParaphrases` item with
+`sourceRole: "stem"` and `relationType: "locationCue"`. When it is `options`
+or `passage`, add NO such item.
+
+Fields of that item:
+- `sourceText` — 定位词: 1-5 English words copied exactly from the stem.
+  Never the whole stem. Prefer names, numbers, dates and rare content words;
+  never pick question words or words that appear everywhere in the passage.
+  For a reference or word-meaning question, use the quoted word itself.
+- `targetText` — 定位句: ONE complete passage sentence, copied exactly,
+  containing the locating words or their counterpart.
+- `targetParagraphId` — the paragraph of `targetText`.
+- `targetCue` — the exact words inside `targetText` that match `sourceText`.
+  REQUIRED when the passage words differ from the stem words (stem
+  “started”, passage “opened”); omit it when `sourceText` appears in
+  `targetText` as is (case does not matter).
+- `answerText` — the exact passage words where the answer is. It MUST be a
+  substring of one `quote` in the correct option's `evidence`. Keep it to
+  the deciding words, not the whole evidence.
+- `bridgeZh` — only when `answerText` is NOT inside `targetText`: one short
+  Chinese line, at most 25 units (each Chinese character and each English
+  word counts as one), saying WHY the answer is in the context. Name the
+  link: a pronoun (指代), a contrast (转折), a cause (因果), a list that
+  continues, the next sentence giving the reason. Do not repeat the answer.
+  When `answerText` is inside `targetText`, omit `bridgeZh`.
+- `note` — as for every item: a short Chinese line; for this item say which
+  stem words lead to which passage words.
+
+Example, answer in the 定位句:
+
+```json
+{
+  "sourceText": "Lake Mora",
+  "sourceRole": "stem",
+  "targetText": "Visitors to Lake Mora can rent a boat for ten dollars an hour.",
+  "targetParagraphId": "para-...",
+  "relationType": "locationCue",
+  "answerText": "rent a boat for ten dollars an hour",
+  "note": "题干 Lake Mora 原词出现在第 2 段。"
+}
+```
+
+Example, answer in the context (a pronoun points back):
+
+```json
+{
+  "sourceText": "the golden key",
+  "sourceRole": "stem",
+  "targetText": "The golden key was hidden there for forty years.",
+  "targetParagraphId": "para-...",
+  "relationType": "locationCue",
+  "answerText": "an old clock tower stands at the edge of the village",
+  "bridgeZh": "there 指前一句的 old clock tower",
+  "note": "题干 the golden key 原词出现在第 3 段。"
+}
+```
+
+Example, the passage uses other words:
+
+```json
+{
+  "sourceText": "started",
+  "sourceRole": "stem",
+  "targetText": "When Mia opened her bakery, she expected few customers.",
+  "targetParagraphId": "para-...",
+  "relationType": "locationCue",
+  "targetCue": "opened",
+  "answerText": "the shop was full every morning",
+  "bridgeZh": "But 转折，答案在后一句",
+  "note": "题干 started 对应原文 opened。"
+}
+```
+
 ---
 
 ## Analysis Meta
@@ -666,4 +758,5 @@ Output must:
 - `unsupportedClaim` must not have `sourceQuote` or `trapEvidence`
 - Every wrong option must have trap diagnosis
 - Every question must have `stemTranslationZh` and `locationParaphrases`
+- Every question must have `locateBy`; a `stem` question has exactly one stem `locationCue` item whose `sourceText` is copied from the stem, whose `targetText` is one whole passage sentence, and whose `answerText` lies inside the correct option's evidence quote; `bridgeZh` appears exactly when `answerText` is outside `targetText`
 - If source information is sufficient, output immediately without unrelated deliberation text
