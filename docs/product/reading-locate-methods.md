@@ -1,6 +1,6 @@
 # 阅读做题心法
 
-状态：v12 草稿（2026-11-21）。v1 和 Owner 逐条讨论后写成；v2 到 v12 按实题试做改，改了哪些见文末「版本记录」。
+状态：v13 草稿（2026-11-21）。v1 和 Owner 逐条讨论后写成；v2 到 v13 按实题试做改，改了哪些见文末「版本记录」。
 用途：做题时照它找定位、排除干扰项；写解析时把同一个过程写出来，就是定位行、证据和干扰项说明。
 下一步改写成 `prompts/reading-choice-analysis-v1.md` 的「定位」一节。关联 BUB-255。
 
@@ -135,6 +135,8 @@
 | Which (word) best describes X / X's job / X's relationship with … / the impact of X；What was X like，选项是一个形容词或名词 | 推断 | 按选项；有对象词先定段，回到描述 X 的几处逐件核对，只盖一两件的选项算太窄（2020 新课标Ⅰ Q30，Eventful 盖住乌兹别克斯坦一路四件事，Dangerous 只盖警察那一件）；成对的词先核对两个都有原文对应的那项（总原则第 1 条） |
 | What does X reveal / indicate / prove / show；What conclusion can be drawn from X；What inspiration / lesson does X bring | 推断 | 题眼能定句：落到 proving、showing、suggesting、indicating that 那句（江西南昌 2026 年 4 月 Q34，proving that the unseen pollution secretly governed the electrical reaction）。问的是某人的反应、做法时，先看反应本身的内容；后面 says as much about 这类评论句的原词常被干扰项照搬、改掉关系（湖北武汉 2026 年 4 月 Q25，学者惊讶作品出自八十多岁的老人，答案 Ducrot's works mask her age；Ducrot's works limit his imagination 照搬 limitations of the observer's imagination，写原词变形） |
 | Who might benefit；Which is most likely；Who is most likely to do X（把原文的研究结论套到新人物、新情境上） | 推断 | 按选项；might、most likely 表推测。套到新人物时，先从原文列出结论里的条件，再逐个人物对：福建 2026 年 M1 Q29 问谁最可能坚持 4 小时拳击课，原文 Highly hardworking and reliable individuals demonstrated strong self-discipline，答案 a disciplined teacher who seeks weight loss；「爱看拳赛」是拿常识凑的条件。原文直接写着受益、有用的对象时归细节，从题干定位（江苏苏锡常镇 2026 年 3 月 Q30，Who will benefit most according to the author，原文 the most significant benefit to people who explore the world through touch） |
+| Who will least likely benefit；Who is least likely to …（反向） | 推断 | 按选项；先圈出原文写到的受益者、适用的人，原文没提到的那项是答案；不选的几项写「原文属实」，再引原文那句（浙江宁波 2026 年 3 月 Q34，原文写到 medical uses、physics research、air chemistry，答案 A psychologist） |
+| What is the author's primary concern / main worry about X | 推断 | 全文，重点看末段；末段用反问收尾时，这个反问问的就是作者最担心的事（重庆康德 2026 年 5 月 Q35，末句 who should pay for its mistakes，答案 Its responsibility for making errors） |
 | Which is an example of X；Which fits X（X 是文中下过定义的概念） | 推断 | 先找到定义句，把定义的每个条件拿去套选项 |
 | How does the author view X；What is the author's view on X（X 是文中一个具体对象） | 态度 | 用对象词从题干定位，找作者表态的那句（山东青岛 2026 年 5 月 Q27，I am not to discourage ambition, but it needs a reality check，答案 It should be grounded in life）；问全文话题的态度才看全文 |
 | How does the author find X，选项是「A but B」 | 态度 | 用对象词从题干定位，拿定位句里的 but 两边去对选项的两半（广东深圳 2026 年 4 月 Q26，I've walked along the Thames a hundred times, but the banks look different each time，答案 Familiar but refreshing） |
@@ -171,6 +173,10 @@
 - 正确项常用上位词概括原文的具体东西（study guide、lessons → educational resources），
   细节题里这不算太宽。
 - 题眼太泛（feature、findings）时，先用对象词定段，再按选项回这一段核对。
+  同一段里作者的论断句和后面的例子各对上一个选项时，拿两项的实词逐个回原文找同义替换，选落得全的那项：
+  动词强弱对不上（explore 对 glimpse）、出现原文没有的名词（mysteries），这项就输。
+  例：湖南雅礼 2026 年一模 Q29 问 the role of the arts，第三段 glimpse into the nature and meaning of life 对不上
+  They explore mysteries of life；例子 wanted to cry、stimulated a sudden awakening 对得上 They spark emotional responses，答案是后者。
 - What can we learn / What do we know about X 归这一类或是非题：答案多是原文的直接改写，
   用对象词定位，再按选项核对。问故事的道理（learn from X's story）归推断，见「问法归哪类」。
 - 顺序题（first step、second stage、after doing X）：按 First、Then、Next、Finally 排出步骤，
@@ -286,6 +292,9 @@
   对象词只能定到一两段时，按选项回这几段核对；没有对象词才整篇按选项找。
 - 对应：原文的一步改写或概括，常是把具体情节概括成性格、品质或结论。
   人物品质看转折处的行为（受挫之后 Yet 仍坚持）；比较结构 more of A than B、rather than 常是推断依据。
+- 成对的词两组都能在原文找到对应时，选和转折后、让步句主句方向一致，又把两面都盖住的那项。
+  例：山东泰安 2026 年 4 月 Q26，末段 Growing up as a TCK was tough, but I wouldn't trade it for anything，
+  答案 Adventurous but beneficial；Tough and confusing 只盖住 but 前面那一面。
 - 陷阱：推过头（「有些人担心」变「普遍反对」）；用常识代替原文（选项本身对，但原文推不出）。
 
 ### 7. 写作意图、例子作用题（Why does the author mention X / The purpose of paragraph N）
@@ -340,6 +349,8 @@
   - **太窄**：只盖住某一段或某个例子。最容易上当的是首段引入话题的故事，和末段的
     一条建议或结论。例：2025 新课标Ⅱ Q31 的 A「Time to Replace Houseplants」
     只盖末段一条建议。检验：它能不能盖住中间各段，不能就太窄。
+    把话题词换成更小的词（下位词）也算太窄，和换成上位词算太宽对称：山东滨州 2026 年 5 月二模 Q35，
+    全文说的是 forests，Monitoring Sounds: An Approach to Protecting Trees 把 forests 换成 trees。
   - 只说对一半。
   - 用被文章否定或排除的说法设陷阱（研究排除了「心情好」这个解释，选项却拿它当发现）。
     先看原文否定的是哪一层意思：2025 浙江 1 月 Q31 的 While matrix gardens appear wild, they are carefully planned
@@ -394,7 +405,7 @@
 - 论证方法题里原文没用到的方法（下定义、分析数据、描述）：无中生有。
 - 作者明确表了态，选项却是 unclear、uncertain、neutral：正反颠倒。
 - 成对的形容词一半对一半错：按错的那一半归类（福州 Q27 的 Thoughtful and brave，原文没有体现 brave，写无中生有）。
-- NOT 题里不选的几项是原文属实的，不硬套十一类，说明开头写「原文属实」，再引原文那句。
+- NOT 题和 least likely 这类反向题里，不选的几项是原文属实的，不硬套十一类，trap 写「原文属实」，再引原文那句。
 - 把结论套到新人物的题，人物条件和原文结论相反写正反颠倒，原文没提的条件（爱看比赛）写无中生有。
 
 偷换范围的写法例子：「太窄：只盖住末段一条建议，拿它作标题会把全文的身心益处缩成更换植物。」
@@ -576,3 +587,12 @@
 - 态度：没有支持、客观选项时，肯定加提醒选 cautious；幽默文章的自夸是反话。
 - 「问法归哪类」：比方作用题归写作意图，喻体特点加全文主题；What message does the text convey 归推断；definitely 类反向核对排除带例外的规则。
 - 记一笔、没立规则：汕头 Q34 段落大意的答案用了 universally，比原文两地实验说得强，题库答案仍是它；证据只有一题，先不写成规则。
+
+**v13（2026-11-21）**，依据第 12 轮试做：8 套没用过的 2026 年模拟卷（山东滨州二模、江苏南京盐城一模、湖南雅礼一模、福建莆田、
+山东泰安 4 月、浙江金华二模、浙江宁波 3 月、重庆康德 5 月），117/120。下面引的模拟卷例子都回原文核对过。这一版的规则都只从模拟卷得出。
+- 细节：泛题眼题里论断句和例子各对一项时，比实词落不落得下（雅礼 Q29，这一轮错题）。
+- 「问法归哪类」：least likely benefit 归推断，不选的写「原文属实」（宁波 Q34）；primary concern 归推断，末段反问就是关切（康德 Q35）。
+- 推断：成对的词两组都有对应时，跟转折和让步句主句的方向（泰安 Q26）。标题：话题词换成下位词算太窄（滨州 Q35）。
+- 滨州 Q21 错在缺表；接口现在会给图表和图片选项的图片，从第 13 轮起做题时给图。
+- 记一笔、没立规则：南京盐城 Q35 前三段讲旁观者效应，后两段用新研究推翻，题库答案是 The Blind Eye，
+  不是盖住推翻后结论的 A Willing Heart，和「转折后是重点」不一致；答案有争议，不立规则。
