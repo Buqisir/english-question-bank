@@ -1,8 +1,13 @@
 # 阅读做题心法
 
-状态：v9 草稿（2026-11-21）。v1 和 Owner 逐条讨论后写成；v2 到 v9 按实题试做改，改了哪些见文末「版本记录」。
+状态：v10 草稿（2026-11-21）。v1 和 Owner 逐条讨论后写成；v2 到 v10 按实题试做改，改了哪些见文末「版本记录」。
 用途：做题时照它找定位、排除干扰项；写解析时把同一个过程写出来，就是定位行、证据和干扰项说明。
 下一步改写成 `prompts/reading-choice-analysis-v1.md` 的「定位」一节。关联 BUB-255。
+
+出处：例子都标了卷名。写年份加全国、新课标、浙江、九省联考的是真题，写城市或联盟名的是模拟卷。
+- 真题例子得出的规则和模拟卷例子得出的规则冲突时，以真题为准；
+- 只从模拟卷得出的规则，不能拿来推翻真题规则；
+- 题库答案有争议的题不拿来立规则，只在版本记录里记一笔。
 
 ## 一、总原则
 
@@ -24,6 +29,10 @@
    直接对应 It drives progress；浙江 Z20 2026 年 5 月 Q25，the same gesture in the US to represent something
    awesome 直接对应「在美国是正面的」，而「数字俚语都靠发音」在 2333 这个例子上不成立。
    这条管细节、因果、推断和 best describes 这几类题；只有主旨、标题、段落大意比的是覆盖面，见第二部分第 8 类。
+   推断题里有一个例外：选项只复述题干对象本身是什么（它的定义、组成、做法），没有回答「能推出什么」，不算写着的答案。
+   例：浙江杭州三省联考 2026 年 4 月 Q35 问 What can be inferred about the integrated approach，
+   It combines satellite radar with ground-based methods 只复述这个办法由什么组成；
+   答案 It enables more efficient archaeological exploration，由前文传统发掘费时费力加末段 demonstrate the effectiveness 推出（只从模拟卷得出）。
    成对的形容词、名词选项要两个都成立；两个都有原文直接对应的那项先核对，对得上就不要再用「逐件核对」把它判成太窄。
    例：河南四市 2026 年 1 月 Q25 问 best describes Jiang，Skilled 对 Applying first aid skills，considerate 对
    Only after ensuring his classmate was receiving professional medical care，答案 C；自己归纳的 Responsible and selfless 是陷阱
@@ -83,8 +92,12 @@
    - 定位句先下判断、后文讲经过时，写前后文展开，不写叙事因果。例：浙江强基联盟 2026 年 5 月 Q26，
      But that early spring afternoon was unusual 先下判断，答案在后文 Leo 反问 "How was your day, Mom?"。
    - 表格在试卷数据里可能被拆成一格一段（舱位名一段，服务一段）。按行还原，同一行的格子算一处，不写多处合并。
+   - 定位句由 So、Therefore、That's why 这类结果标志引出、原因在前一句时，写前后文展开；叙事因果只管没有标志词的。
+     例：重庆南开 2026 年 4 月 Q26 问为什么提前一天送礼，定位句 So, on Nov. 12, he asked the kids to help deliver an early birthday present，
+     原因在前一句 he was worried that word might get out about his surprise。
    - 多处合并只管几处彼此独立、各给一部分信息的情况。一处解释或展开另一处（概括句加后面的具体说明），
-     写前后文展开；定位句的代词或概括词同时指回前面几句，写指代回指。例：湖北襄阳 2026 年 3 月 Q32 问 Why was John Hester impressed，
+     写前后文展开；概括句后面两句各解释一半，也写前后文展开（浙江镇海 2026 年 5 月 Q29，a dangerous capability mismatch
+     后面一句讲 Level 4 autonomy、一句讲 security judgment 只有 Level 2，答案 Strong autonomy and low safety assessment）；定位句的代词或概括词同时指回前面几句，写指代回指。例：湖北襄阳 2026 年 3 月 Q32 问 Why was John Hester impressed，
      定位句 "It's so amazing" 的 It 指回前两句（让 AI 写游戏、两小时后就能玩），写指代回指。
    - 多处合并时，定位句写题眼落的那一处，其余几处都列进答案。
    - 关系只在从题干定位时写。按选项或看全文时没有定位句，关系留空；答案要几处合起来，就把几处都列进答案句。
@@ -110,29 +123,33 @@
 
 ### 问法归哪类
 
+归类只用下面十个名字，和后面十节的标题一一对应：细节、因果目的、建议、词义指代、态度、推断、写作意图、主旨标题、文体出处、是非。
+以后按题型统计也用这十个名字。
+
 | 问法 | 归类 | 怎么定位 |
 |---|---|---|
 | Which would the author / X agree with；Which viewpoint might X agree with；Which is X's idea；What does X argue about Y | 是非 | 按选项；有人名先定到这个人的话 |
 | What does the experience / story show；What does the story tell us；What can we learn from X's story；Which is true of X's story（选项是谚语） | 推断 | 问的是故事的道理，按选项；首段和末段都看，首段常先点出结果（2020 新课标Ⅰ Q27，首段 That willpower bore fruit 对应 Hard work pays off） |
 | Which (word) best describes X / X's job / X's relationship with … / the impact of X；What was X like，选项是一个形容词或名词 | 推断 | 按选项；有对象词先定段，回到描述 X 的几处逐件核对，只盖一两件的选项算太窄（2020 新课标Ⅰ Q30，Eventful 盖住乌兹别克斯坦一路四件事，Dangerous 只盖警察那一件）；成对的词先核对两个都有原文对应的那项（总原则第 1 条） |
 | What does X reveal / indicate / prove / show；What conclusion can be drawn from X；What inspiration / lesson does X bring | 推断 | 题眼能定句：落到 proving、showing、suggesting、indicating that 那句（江西南昌 2026 年 4 月 Q34，proving that the unseen pollution secretly governed the electrical reaction） |
-| Who might benefit；Which is most likely | 推断 | 按选项；might、most likely 表推测。原文直接写着受益、有用的对象时归细节，从题干定位（江苏苏锡常镇 2026 年 3 月 Q30，Who will benefit most according to the author，原文 the most significant benefit to people who explore the world through touch） |
+| Who might benefit；Which is most likely；Who is most likely to do X（把原文的研究结论套到新人物、新情境上） | 推断 | 按选项；might、most likely 表推测。套到新人物时，先从原文列出结论里的条件，再逐个人物对：福建 2026 年 M1 Q29 问谁最可能坚持 4 小时拳击课，原文 Highly hardworking and reliable individuals demonstrated strong self-discipline，答案 a disciplined teacher who seeks weight loss；「爱看拳赛」是拿常识凑的条件。原文直接写着受益、有用的对象时归细节，从题干定位（江苏苏锡常镇 2026 年 3 月 Q30，Who will benefit most according to the author，原文 the most significant benefit to people who explore the world through touch） |
 | Which is an example of X；Which fits X（X 是文中下过定义的概念） | 推断 | 先找到定义句，把定义的每个条件拿去套选项 |
 | How does the author view X；What is the author's view on X（X 是文中一个具体对象） | 态度 | 用对象词从题干定位，找作者表态的那句（山东青岛 2026 年 5 月 Q27，I am not to discourage ambition, but it needs a reality check，答案 It should be grounded in life）；问全文话题的态度才看全文 |
 | How does the author find X，选项是「A but B」 | 态度 | 用对象词从题干定位，拿定位句里的 but 两边去对选项的两半（广东深圳 2026 年 4 月 Q26，I've walked along the Thames a hundred times, but the banks look different each time，答案 Familiar but refreshing） |
 | What is the (main) purpose of the text；Why does the author write the text；What is the author trying to express | 写作意图 | 全文，按主旨题的办法。选项是 inform、persuade、entertain 这类单词时：给实用信息、网址、联系方式的是 inform，有主张和呼吁的是 persuade，讲趣事的是 entertain |
 | How does the author introduce the topic；How does the text begin | 写作意图 | 看首段的引入方式：提问、故事、数据、现象、常见看法 |
 | What will the author talk about next；What may follow the last paragraph；What might the author continue talking about | 推断 | 全文（passage）；看末段末句；首段预告了几点时，看正文讲到了第几点；末段列出几点风险或问题时，下文要接住全部几点，只接最后一点的算太窄 |
-| What is the purpose of paragraphs N and M；What do paragraphs N–M mainly talk about | 写作意图或主旨 | 按选项回这几段，正确项可能两半各对一段 |
+| What is the purpose of paragraphs N and M | 写作意图 | 按选项回这几段，正确项可能两半各对一段 |
+| What do paragraphs N–M mainly talk about | 主旨标题 | 按选项回这几段，正确项可能两半各对一段 |
 | How does the author / X develop / support paragraph N / his idea | 写作意图 | 看这一段的论证方法：举例、对比、类比（打比方）、引用、数据、因果；making a comparison 也常指类比（重庆南开 2026 年 5 月 Q29，nature is like an airplane, and species are the rivets） |
 | What is special / unique about X；What do A and B have in common | 细节 | 泛题眼，按选项；special 要排除别的对象也有的共性 |
 | Why is X unique / different | 细节 | 问的是特点，不是原因；对应物常是对比结构 While、unlike |
 | What is the first step；In which stage does … | 细节 | 找 First、Then、Finally 这类顺序词排出步骤 |
 | How did X manage to do | 细节 | 答案是真正起作用的那个办法或交换条件，说话、提问只是外壳（广西南宁 2026 年 4 月 Q25，她靠问「If I volunteer to go first, could I join the class?」进了班，答案是自愿第一个交作品，不是向老师提问） |
 | What is the key innovation / solution；How did they solve X | 细节 | 找 overcame this by、solved、the key is 那句 |
-| Which applicant best meets；Who is most likely to be chosen | 细节（反向核对） | 先列出条件，按选项逐条对 |
-| What is paragraph N mainly about；What does paragraph N mainly tell us；What phenomenon is described in paragraph N；What does the last paragraph convey | 主旨（段落大意） | 只看这一段，按选项回段核对；看段首句、主句主语、转折后的话和段末总结句（2026 新课标Ⅱ Q29，段末 This is how I began my search） |
-| Which will result in X；Which is against the rules | 细节（反向核对） | 从题干定位到总述规则的那句（没有总述句时，小标题也算定位处），按选项逐条对后面的规则条目，记前后文展开；附表的方向规则在这里用不上（2020 新课标Ⅰ Q23，120 词的诗违反 100 words or fewer 这条，是答案） |
+| Which applicant best meets；Who is most likely to be chosen（条件是原文写明的招聘要求、报名规则） | 细节 | 反向核对：先列出原文写明的条件，按选项逐条对；条件要从研究结论里推出来的归推断，见上 |
+| What is paragraph N mainly about；What does paragraph N mainly tell us；What phenomenon is described in paragraph N；What does the last paragraph convey | 主旨标题 | 段落大意： 只看这一段，按选项回段核对；看段首句、主句主语、转折后的话和段末总结句（2026 新课标Ⅱ Q29，段末 This is how I began my search） |
+| Which will result in X；Which is against the rules | 细节 | 反向核对：从题干定位到总述规则的那句（没有总述句时，小标题也算定位处），按选项逐条对后面的规则条目，记前后文展开；附表的方向规则在这里用不上（2020 新课标Ⅰ Q23，120 词的诗违反 100 words or fewer 这条，是答案） |
 | 应用文问哪一项、在哪里、怎么联系：Which program / website；Where can you …；What can sb do with X | 细节 | 先用描述定出是哪一块，再在这一块里取网址、地址、时间，记多处合并；干扰项多是别的块里确有的项目（2022 全国甲 Q22、Q23）。题眼是 only、exclusively 时，要拿别的块对照才能排除 |
 
 ### 1. 细节题（Who / What / When / Where / How many）
@@ -145,6 +162,8 @@
   题干给的年份段、百分比在原文文字里找不到，先怀疑原卷有图表没给出。缺图时把握写低，再按这几步排除：
   选项里成对的数常暴露比例和基准；和原文文字里的数字一模一样的选项先怀疑，图里的数多半是另一组；
   用常识上下限排除（一年的天数不超过 365）；选项不是数字时，用图前后文字对图的概括去推。
+  选项是地名、项目名，前后文字也没概括图表时，只能用常识推，把握写低，缺口里记「缺图」或「缺表」：
+  山东枣庄 2026 年 5 月 Q22 问哪个区 12 小时停车最高收费最贵，收费表缺了，按常识选 Manhattan。缺的是文字清单时也照这样记。
 - 正确项常用上位词概括原文的具体东西（study guide、lessons → educational resources），
   细节题里这不算太宽。
 - 题眼太泛（feature、findings）时，先用对象词定段，再按选项回这一段核对。
@@ -283,6 +302,8 @@
   David Bond 把自然当品牌推销给孩子、户外成习惯，答案 Market Nature to Children；
   Let Children Have Fun 只呼应末段 let them play，丢了自然和户外，盯屏幕也算 fun，太宽。
   「名词：短语」式的标题，先看冒号前的主题词贴不贴，冒号后泛一点可以接受。
+  末段原词本身是全文话题的双关或比方时，话题词没有丢，不算太宽：山东济宁 2026 年 5 月 Q27，全文讲拼图，
+  末段 Perhaps it was the very piece that I had failed to notice in my life，答案 The Missing Piece of My Life，piece 既是拼图块，也是生活里缺的那块。
 - 段落大意题只看那一段，先确认第 N 段是原卷哪一段，按选项回这一段核对；看主句的主语讲的是什么。
   正确项要盖住整段，只改写一句的选项算太窄；「写着的改写优先」在这里不适用。段里有 known as、is called 这类命名句时，
   被命名的概念多半是这一段的中心（山东青岛 Q28，答案 An introduction of a key scientific concept，
@@ -319,6 +340,10 @@
 ### 10. 是非题（Which is true / NOT true / mentioned）
 
 - 定位：按选项回原文逐个对。
+- NOT 题先看题干问的是哪一层（consequences、reasons、benefits、steps），把原文里属于这一层的几处圈出来，
+  再拿选项去对。四项在原文里都有对应词时，不属于这一层的那项（机制、过程、原因）是答案。
+  例：浙江稽阳 2026 年 4 月 Q31 问哪项不是 biophobia 的后果，末段 that reinforcing cycle 说的是越躲越少接触的循环过程，
+  后果是 thin people's relationship with the natural world、greater challenges for conservation，答案 The reinforcing cycle of less outdoor exposure。
 - 陷阱：选项一半对一半错（时间对、人物错）。
 
 ## 三、干扰项怎么写
@@ -352,6 +377,8 @@
 - 论证方法题里原文没用到的方法（下定义、分析数据、描述）：无中生有。
 - 作者明确表了态，选项却是 unclear、uncertain、neutral：正反颠倒。
 - 成对的形容词一半对一半错：按错的那一半归类（福州 Q27 的 Thoughtful and brave，原文没有体现 brave，写无中生有）。
+- NOT 题里不选的几项是原文属实的，不硬套十一类，说明开头写「原文属实」，再引原文那句。
+- 把结论套到新人物的题，人物条件和原文结论相反写正反颠倒，原文没提的条件（爱看比赛）写无中生有。
 
 偷换范围的写法例子：「太窄：只盖住末段一条建议，拿它作标题会把全文的身心益处缩成更换植物。」
 「太宽：用 nature 替换 plants，范围超出了文章。」数据里的分类代码（scopeShift）不变，
@@ -410,6 +437,12 @@
 | 动词 | aim to, intend to, mean to, seek to, try to, hope to, plan to, be designed to, be intended to, be meant to |
 | 名词作表语 | the goal / purpose / aim / mission / idea is to … |
 | 否定目的 | to avoid, so as not to, in order not to, prevent / keep / stop sb from doing |
+
+**目的，答案在标志词前面**
+
+| 类别 | 标志词 |
+|---|---|
+| 指回前文 | to this end, for this purpose, with this in mind, with this goal（目的在 this 指的前一两句；安徽合肥 2026 年 2 月 Q29，To this end 指回前一句改善教育效果要定期进行，答案 To enhance learning through museum visits） |
 
 ## 版本记录
 
@@ -500,3 +533,13 @@
 - 转折：While、Although 让步句重点在主句。数字题：缺图时的四步排除。段号对不上以对象词为准。
 - 总原则第 1 条：三项正面相反时，剩下那项说得弱也选它。问法表补 argue、trying to express、inspiration、do with X；泛题眼补 offer、agree on、share。
 - 干扰项：没用到的论证方法写无中生有；作者明确表态时 unclear 类选项写正反颠倒。
+
+**v10（2026-11-21）**，依据第 9 轮试做：8 套没用过的 2026 年模拟卷（安徽合肥 2 月、重庆南开 4 月、福建 M1、山东济宁、山东枣庄、
+浙江杭州三省联考、浙江稽阳、浙江镇海），118/120。错的 2 题：合肥 Q21 缺图；杭州三省联考 Q35 是 v8 的副作用，
+「写着的优先」管到推断题后，子代理选了只复述办法组成的选项。下面引的模拟卷例子都回原文核对过。这一版的规则都只从模拟卷得出。
+- 开头加出处说明：真题和模拟卷的规则冲突时以真题为准，模拟卷规则不推翻真题，答案有争议的题不立规则。
+- 总原则第 1 条：推断题里只复述题干对象本身的选项不算写着的答案。
+- 第 4 条：So 类标志引出的定位句、原因在前一句，写前后文展开；概括句后两句各解释一半也写前后文展开（南开 Q26、镇海 Q29）。
+- 「问法归哪类」：归类只用十个固定名字；把结论套到新人物的 Who is most likely 归推断，招聘要求类的归细节（福建 M1 Q29）。
+- 标题题：末段原词是话题的双关时不算太宽（济宁 Q27）。是非题：NOT 题先按题干的层次筛（稽阳 Q31），不选的几项写「原文属实」。
+- 附表加「目的，答案在标志词前面」：to this end、for this purpose（合肥 Q29）。缺图时选项是地名，用常识推、把握写低（枣庄 Q22）。
