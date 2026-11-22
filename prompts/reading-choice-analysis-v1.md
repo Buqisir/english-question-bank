@@ -663,7 +663,9 @@ Step 1. Read the stem for one or two clues.
   him most, reveal, indicate, prove, show, a quoted or underlined word.
   Others cannot fix a sentence: true, mentioned, learn, What do we know,
   feature, findings, special, unique, in common, advantage, view, belief,
-  offer, share, agree on, infer, imply.
+  offer, share, agree on, infer, imply. special, unique, feature and
+  advantage do fix one when the passage words them about the same thing in
+  one sentence (unlike, the only, the first, stands out, few others): Step 3.
 - 对象词定段，题眼定句: when the object word and a sentence-fixing 题眼 land
   in different sentences, the 定位句 is where the 题眼 lands. A 题眼 lands
   through words (because, the reason, a lesson, a date). An imperative or
@@ -711,7 +713,9 @@ Step 3. Choose the 定位句 (`targetText`).
   to `options` because the answer is a few sentences away.
 - Test first: if the answer sentence itself holds the stem's object word,
   or its plain counterpart (stem "the birth of Gordon", passage "Gordon was
-  born"), locate there; an object word that runs through most of the
+  born"), or a real counterpart of another stem phrase (a verb phrase,
+  or special worded as "unlike any other"), locate there, even when a name
+  from the stem sits in an earlier sentence; an object word that runs through most of the
   passage (the town a text is about, its topic word) does not count here; do not land on another sentence and bridge back.
   If the answer sentence does not hold it, locate on the sentence that
   does, and let the bridge lead on to the answer. Never skip the stem's
@@ -747,7 +751,11 @@ Step 3. Choose the 定位句 (`targetText`).
   or benefit with a loosely related passage word: when no natural pair
   exists, locate on the sentence with the object word. When the 定位句
   holds a distinguishing object word (a name, a number, a rare term), that
-  object word is `sourceText`, even if the 题眼 also matches.
+  object word is `sourceText`, even if the 题眼 also matches. A name the
+  passage keeps naming (the people or animals the text is about) is not
+  distinguishing: when another stem phrase has its real counterpart in the
+  定位句, that pair is `sourceText` and `targetCue` (stem "give up the
+  shop", passage "closed its doors for good").
 
 Step 4. Where the answer usually sits, as seen from the 定位句.
 - After but, however, yet, in fact, actually, the opposite, and after
@@ -777,8 +785,8 @@ or `passage`, add NO such item.
 Fields of that item:
 - `sourceText` — 定位词: 1-5 English words copied exactly from the stem.
   Never the whole stem. Prefer names, numbers, dates and rare content words
-  that appear in the 定位句, then a stem phrase with one real counterpart
-  there (Step 3); use a 题眼 only when the 定位句 holds none of them. Never pick question words, or words that appear everywhere
+  that appear in the 定位句 and not all through the passage, then a stem
+  phrase with one real counterpart there (Step 3); use a 题眼 only when the 定位句 holds none of them. Never pick question words, or words that appear everywhere
   in the passage.
   For a reference or word-meaning question, use the quoted word itself.
 - `targetText` — 定位句: ONE complete passage sentence, copied exactly,
