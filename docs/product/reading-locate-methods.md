@@ -1,6 +1,6 @@
 # 阅读做题心法
 
-状态：v21 草稿（2026-11-22）。v1 和 Owner 逐条讨论后写成；v2 到 v16 按实题试做改，v17 到 v19 按写进提示词后的盲评改第四部分，v20、v21 按样卷改前改后页修变差的题，改了哪些见文末「版本记录」。
+状态：v22 草稿（2026-11-22）。v1 和 Owner 逐条讨论后写成；v2 到 v16 按实题试做改，v17 到 v19 按写进提示词后的盲评改第四部分，v20、v21 按样卷改前改后页修变差的题，v22 修人名句压过同义替换，改了哪些见文末「版本记录」。
 用途：做题时照它找定位、排除干扰项；写解析时把同一个过程写出来，就是定位行、证据和干扰项说明。
 下一步改写成 `prompts/reading-choice-analysis-v1.md` 的「定位」一节。关联 BUB-255。
 
@@ -57,13 +57,16 @@
    数字、专有名词）缩小范围；题眼词（why、suggest、态度、mention 等）决定找哪一种信息。
    **对象词定段，题眼定句**：两个线索落在不同句子时，以题眼落的那句为定位句。
    题眼要靠词落句（because、the reason、a lesson、日期）；只靠祈使句、should 这类句式对上时不算落句，
-   题干里的人名、地名能落到一句就定在那句，再桥接到建议：2025 新课标Ⅱ Q23 问 suggest visitors do in Mevagissey，
+   题干里的人名、地名能落到一句就定在那句，再桥接到建议（答案句本身对得上题干另一处说法时除外，见下一条）：2025 新课标Ⅱ Q23 问 suggest visitors do in Mevagissey，
    定位到 Mevagissey 所在的段首句，桥接到后面的祈使句 Don't leave the harbor without a traditional Cornish pie。
+   **全文反复出现的人名不算有区分度的对象词。** 题干的动词短语或泛题眼在答案句里有真对应时，用这一对当定位词，
+   定在答案句，不先落人名句再桥接（题干 give up the shop，原文 closed its doors for good）。
    题眼分两种：
    - 具体题眼能定句：why、suggest、when、how many、struck him most 这类，指明要找哪种信息；
    - 泛题眼定不了句：findings、feature、learn、What do we know、true、mentioned、special、unique、
      advantage、in common、philosophy、view、belief 这类。对象词定段以后按选项回这一段核对，
-     对上正确项的那句就是定位句，也就是答案句。推断题的 infer、imply 也算泛题眼；
+     对上正确项的那句就是定位句，也就是答案句。special、unique、feature、advantage 在原文某一句里有直接说法
+     （unlike、the only、the first、stand out、few others）时能定句，定在那句。推断题的 infer、imply 也算泛题眼；
      推断题的对象词只落在一句时例外，见第二部分第 6 类。
    - 泛题眼还有 selling point、offer、discover、find（研究发现）、agree on、share。
    - 对象词就是全文话题词（PV cells、rewriting）、定不了段时，用题目顺序（第 5 条）缩到相应几段，再按题眼或选项核对；
@@ -688,3 +691,5 @@
 **v21（2026-11-22）**，Owner 定了先修新课标Ⅱ Q32：答案底色要盖住正确项改写的每一处，选项的事实和动词分在两处时两处都留，中间的词一起留，只删选项没改写的词。
 例子是自编的，没用样卷原词。重跑两套样卷后 Q32 底色回到 children starving 到 reminder of fact，v20 修回的 3 题保持不变。
 同一份提示词重跑有出入：新课标Ⅱ Q26 的桥接退回和改前差不多，Q30 定位行变成 doctors and lawyers → Doctors practice medicine and lawyers，读着不顺。
+
+**v22（2026-11-22）**，Owner 定了先修人名句那条：第四轮两位评审都判旧版好的 4 题里有 2 题是新版先落到人名句再桥接，旧版用同义替换一步落到答案句。改成：答案句对得上题干另一处说法（动词短语，或 special 对 unlike 一类）时直接定答案句；全文反复出现的人名不算有区分度，不压过真对应。例句是自编的，没用那两道题的原词。
