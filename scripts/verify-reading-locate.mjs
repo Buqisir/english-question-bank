@@ -228,6 +228,13 @@ ok('找法 findZh: merged as locateFindZh, sits beside the bridge, short, one si
   assert.match(resolve('q3', '看[[p9]]的 But 后').errors[0], /不是这篇的段落/u)
   assert.match(resolve('q4', '').errors[0], /不能是空的/u)
   assert.deepEqual(resolve('q4', '逐项回[[p1]]和[[p2]]核对').errors, [])
+  // Checking the options and whole-text questions get more room than one move from the stem.
+  assert.deepEqual(resolve('q4', '四个说法各带人名回原文，看谁的话里写着 market town').errors, [])
+  assert.match(resolve('q4', '四个说法各带一个人名回原文，逐个看谁的原话里写着 market town 和 since').errors[0], /locateBy=options 时 findZh 不超过 24 字|英文最多 3 个词/u)
+  const passage = (findZh) => resolve('q4', findZh, entry => { entry.locateBy = 'passage' })
+  assert.deepEqual(passage('[[p1]]写小镇从 1189 年起就是 market town，[[p2]] Dr. Melinda Knuth 讲它今天的样子；问能学到什么，就要盖住这一前一后').errors, [])
+  assert.match(passage('看全文'.repeat(17)).errors[0], /locateBy=passage 时 findZh 不超过 48 字/u)
+  assert.match(passage('[[p1]] one two three four five six seven eight nine').errors[0], /locateBy=passage 时 findZh 里英文最多 8 个词/u)
 })
 
 console.log(`Reading 定位 verify PASSED: ${passed} checks`)

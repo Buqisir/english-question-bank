@@ -12,8 +12,18 @@ import { splitSentences } from '../../shared/paper-selection/segmentation.mjs'
 export const LOCATE_BY = Object.freeze(['stem', 'options', 'passage'])
 export const BRIDGE_MAX_UNITS = 25
 export const CUE_MAX_WORDS = 5
-export const FIND_MAX_UNITS = 16
-export const FIND_MAX_ENGLISH_WORDS = 2
+// 找法 length by locateBy. From the stem it is one move from the 定位句 with
+// one signal word. A whole-text or whole-paragraph question has to say how this
+// passage is built and where the answer comes from, quoting the few passage
+// words that show it, so it gets more room (Owner 2026-11-22: 每道题的定位要讲出
+// 怎么把这道题做好，不写套话); checking the options gets a little more too.
+export const FIND_LIMITS = Object.freeze({
+  stem: Object.freeze({ units: 16, englishWords: 2 }),
+  options: Object.freeze({ units: 24, englishWords: 3 }),
+  passage: Object.freeze({ units: 48, englishWords: 8 }),
+})
+export const FIND_MAX_UNITS = FIND_LIMITS.stem.units
+export const FIND_MAX_ENGLISH_WORDS = FIND_LIMITS.stem.englishWords
 // 找法 (`locateFindZh`): the second line under the 定位 skeleton (the 定位词
 // and its paragraph, 核对选项 or 看全文): one move from where the reader lands
 // and what to look for there (往前一句找原因, 看 but 后), with at most one
@@ -151,8 +161,13 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence,
     if (missing) return fail(`findZh 里的 [[${missing}]] 不是这篇的段落。`)
     if (/\[\[|\]\]/u.test(find.replace(PARAGRAPH_TOKEN, ''))) return fail('findZh 里段落只能写成 [[paragraphId]]。')
     if (/第\s*[\d一二三四五六七八九十]+\s*段/u.test(find)) return fail('findZh 里不自己数段，段落写成 [[paragraphId]]。')
-    if (bridgeUnits(find.replace(PARAGRAPH_TOKEN, '第几段')) > FIND_MAX_UNITS) return fail(`findZh 不超过 ${FIND_MAX_UNITS} 字（一个英文词算一个字）。`)
-    if ((find.replace(PARAGRAPH_TOKEN, ' ').match(LATIN_WORD) ?? []).length > FIND_MAX_ENGLISH_WORDS) return fail(`findZh 里英文最多 ${FIND_MAX_ENGLISH_WORDS} 个词（一个信号词），别抄原文短语。`)
+    const limit = FIND_LIMITS[by]
+    if (bridgeUnits(find.replace(PARAGRAPH_TOKEN, '第几段')) > limit.units) return fail(`locateBy=${by} 时 findZh 不超过 ${limit.units} 字（一个英文词算一个字）。`)
+    if ((find.replace(PARAGRAPH_TOKEN, ' ').match(LATIN_WORD) ?? []).length > limit.englishWords) {
+      return fail(by === 'stem'
+        ? `findZh 里英文最多 ${limit.englishWords} 个词（一个信号词），别抄原文短语。`
+        : `locateBy=${by} 时 findZh 里英文最多 ${limit.englishWords} 个词，只抄最能说明问题的几个原文词。`)
+    }
   }
   if (by !== 'stem') {
     if (items.length) return fail(`locateBy=${by} 时不写题干定位项（sourceRole stem + locationCue）。`)
