@@ -167,21 +167,15 @@ claim fails when returned to the passage. Do not stop after naming the trap.
 the passage actually discusses so the student can see the boundary. Never turn
 “not mentioned” into “does not exist in reality.”
 
-How the wrong-option sentence prints: 「**B 项**（译文）错在<名>：<your sentence>」.
+How the wrong-option sentence prints: 「**B 项**（译文）错在：<your sentence>」.
 The reader already sees 错在, so say only what the option claims and what the
-passage actually says; never restate that it is wrong. Type names:
-- `unsupportedClaim` (无中生有): never write the name. 「原文只要求穿耐脏的衣服、按天气增减，没提团队制服。」
-- `sourceLexicalTrap` (原文词钩): no name either; name the borrowed English word
-  and what it means in the passage.
-- The other three may end with exactly one of 「，属张冠李戴。」「，属正反颠倒。」
-  「，属偷换范围。」 (the wording teachers know), matching `primaryType`
-  (`entityMismatch`, `polarityReversal`, `scopeShift`), and only when the sentence
-  itself shows the trick: 张冠李戴 names both objects (「是 A，不是 B」); 正反颠倒
-  gives the passage's words and the option's opposite; 偷换范围 says whether the
-  option is too wide or too narrow and gives the passage's scope. The export
-  moves the name to after 错在. If the sentence cannot show it, write no name.
-- Never coin other names (词族干扰, 数字钩子, 程度夸大, 属正面内容 ...) and do
-  not use 对象错配, 黑白颠倒, 范围偷换. The validator refuses other names.
+passage actually says; never restate that it is wrong. Never write a trap type
+name anywhere in the sentence: no 「，属无中生有。」「，对象错配。」「属黑白颠倒」
+「属词钩干扰」 or any other label, coined or not. `primaryType` carries the type;
+the sentence shows the trick in plain words instead. 「原文只要求穿耐脏的衣服、
+按天气增减，没提团队制服。」 For `sourceLexicalTrap`, name the borrowed English
+word and what it means in the passage. The validator flags a label at the end of
+the sentence.
 
 `questionFocus` is one concise, concrete Chinese sentence about the work this
 question asks the student to do. It may name the familiar exam question type,

@@ -190,7 +190,7 @@ const registry = {
   'scripts/verify-h10b-ai-proxy-routes.mjs',
   'scripts/verify-i1-paper-import-analysis.mjs',
   'scripts/verify-reading-locate.mjs',
-  'scripts/verify-trap-verdict.mjs',
+  'scripts/verify-trap-name-tail.mjs',
   'scripts/verify-i2-seven-choices-ai-import.mjs',
   'scripts/verify-i3-cloze-ai-import.mjs',
   'scripts/verify-i4-grammar-fill-ai-import.mjs',

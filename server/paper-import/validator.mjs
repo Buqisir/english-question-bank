@@ -1,5 +1,5 @@
 import Ajv from 'ajv/dist/2020.js'
-import { trapTailIssue } from './trapVerdict.mjs'
+import { trapNameIssue } from './trapNameTail.mjs'
 import { createHash } from 'node:crypto'
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -387,10 +387,11 @@ function validateReadingAnalysisBundle({ asset, answerKey, analyses, blockingIss
       }
       for (const option of analysis.optionAnalysis || []) {
         const isCorrect = option.status === 'correct'
-        const trapTail = isCorrect ? '' : trapTailIssue(option.trap)
+        const trapTail = isCorrect ? '' : trapNameIssue(option.trap)
+        // A warning, not a block: the export drops the tail anyway, and frozen papers that are re-imported still carry such tails.
         if (trapTail) {
-          blockingIssues.push(issue('blocking', 'analysis.trapNameTail', `${questionId} ${option.label}: ${trapTail}`, {
-            suggestedFix: '无中生有、原文词钩不写名；张冠李戴、正反颠倒、偷换范围只在句子写出骗法时句尾写「，属<名>。」，否则不写名字。',
+          warnings.push(issue('warning', 'analysis.trapNameTail', `${questionId} ${option.label}: ${trapTail}`, {
+            suggestedFix: '解析不写陷阱类型名（无中生有、对象错配、黑白颠倒等都不写），只写原文怎么说、选项改成了什么。',
           }))
         }
         const evidenceRows = isCorrect ? option.evidence || [] : option.trapEvidence || []

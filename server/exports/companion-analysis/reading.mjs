@@ -2,13 +2,12 @@ import { resolveFigureTextRegion } from '../../../shared/paper-canonical/richCon
 import { renderEvidenceQuote, renderFullTranslation, renderGroupHeading, renderHeadingLead, renderOverview, renderQuestionHeader, renderQuestionLead, renderSelectedLongSentences, renderUnderlinedText } from './blocks.mjs'
 import { answerData, passageQuote, questionData } from './paper.mjs'
 import { array, escapeHtml, exactTextRange, innerQuote, nonEmptyString, passageHtml, withoutClosingPunctuation } from './text.mjs'
-import { trapVerdict } from '../../paper-import/trapVerdict.mjs'
+import { stripTrapName } from '../../paper-import/trapNameTail.mjs'
 import { PARAGRAPH_TOKEN, hasReadingLocate, passageSentences, resolveReadingLocate, stemLocateItems } from '../../paper-import-ai/readingLocate.mjs'
 
-// 「错在<名>：」 only when the writer's tail name, primaryType and the sentence agree (trapVerdict.mjs).
-function renderTrapVerdict(trap) {
-  const verdict = trapVerdict(trap)
-  return `错在${escapeHtml(verdict.name)}：${escapeHtml(verdict.text)}`
+// 「错在：」 then the sentence, without a trailing type label (trapNameTail.mjs).
+function renderTrapReason(trap) {
+  return `错在：${escapeHtml(stripTrapName(trap).text)}`
 }
 
 export function readingDistractors(entry) {
@@ -421,7 +420,7 @@ export function renderReadingGroup({ group, title, paperAsset, analysis, answers
       locate?.by === 'stem' ? renderLocateQuote(locate, group, correct, underlineTexts) : renderEvidenceQuote(quotes, underlineTexts),
       renderParaphrase(entry, answer),
       ...reasoning.map((item) => `<p class="analysis-prose">${escapeHtml(item)}</p>`),
-      distractors.length > 0 ? `<div class="distractor distractor--reading"><div>${distractors.map((distractor) => `<p class="reading-distractor-item"><b>${escapeHtml(distractor.label)} 项</b>${distractor.optionTranslationZh ? `（${escapeHtml(distractor.optionTranslationZh)}）` : ''}${renderTrapVerdict(distractor.trap)}</p>`).join('')}</div></div>` : '',
+      distractors.length > 0 ? `<div class="distractor distractor--reading"><div>${distractors.map((distractor) => `<p class="reading-distractor-item"><b>${escapeHtml(distractor.label)} 项</b>${distractor.optionTranslationZh ? `（${escapeHtml(distractor.optionTranslationZh)}）` : ''}${renderTrapReason(distractor.trap)}</p>`).join('')}</div></div>` : '',
     ].filter(Boolean)
     return `<section class="question question--reading">
       ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer), first)}
