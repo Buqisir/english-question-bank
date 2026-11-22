@@ -124,7 +124,7 @@ for (const sentinel of Object.values(sentinels)) assert.match(owner.body, new Re
 assert.match(owner.body, /完整范文|参考范文/u)
 assert.match(owner.body, /听力原文/u)
 assert.match(owner.body, /参考译文/u)
-assert.match(owner.body, /干扰项辨析/u)
+assert.match(owner.body, /项<\/b>(?:（[^）]*）)?错在：/u)
 
 assert.equal((await invoke(null)).status, 403)
 assert.equal((await invoke({ role: 'owner', accountKind: 'import_agent', username: 'agent' })).status, 403)

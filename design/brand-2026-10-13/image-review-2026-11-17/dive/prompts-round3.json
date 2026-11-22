@@ -1,0 +1,10 @@
+{
+ "R1": {
+  "ref": true,
+  "prompt": "The attached image is our mascot: a mint green sea otter sitting. Keep EXACTLY this character: the same head shape and size, the same ears, the same face (white puffy muzzle, ink dot eyes, wide ink nose, whisker dots), the same body proportions, the same four flat colours (fur #72BFA4, belly #DDF1E8, muzzle #F2FAF6, ink #191D18) and the same flat vector style with no outlines, no gradients, no shading. Only change the pose. Pure white background, nothing else in the image. New pose: the same otter swimming underwater in a natural, relaxed, fully stretched dive, the way a real sea otter dives: head first toward the lower left at about 35 degrees, the whole body long and extended in one easy line, spine gently arched, front paws folded softly against the chest, hind feet stretched straight back together with the webbed soles showing, the tail extending straight behind as a continuation of the body. Calm, effortless, graceful, not cartoonishly squashed. The face turned slightly toward the viewer so both eyes are visible."
+ },
+ "R2": {
+  "ref": true,
+  "prompt": "The attached image is our mascot: a mint green sea otter sitting. Keep EXACTLY this character: the same head shape and size, the same ears, the same face (white puffy muzzle, ink dot eyes, wide ink nose, whisker dots), the same body proportions, the same four flat colours (fur #72BFA4, belly #DDF1E8, muzzle #F2FAF6, ink #191D18) and the same flat vector style with no outlines, no gradients, no shading. Only change the pose. Pure white background, nothing else in the image. New pose: the same otter gliding down through the water, seen from the side, body stretched out long and loose like a swimmer in mid-glide, diving toward the lower left. Relaxed and natural, a smooth gentle curve from the nose along the back to the tail tip, belly facing the viewer a little, small front paws tucked under the chin, hind feet and tail trailing behind and slightly up. Same head-to-body ratio as the sitting otter, the head is not enlarged."
+ }
+}

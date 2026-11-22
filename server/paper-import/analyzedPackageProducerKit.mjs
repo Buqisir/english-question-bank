@@ -34,6 +34,7 @@ const trackedFiles = [
   'shared/writing/applicationReviewCard.d.ts',
   'shared/writing/continuationAnalysis.d.ts',
   'server/paper-import-ai/analyzeReading.mjs',
+  'server/paper-import-ai/readingLocate.mjs',
   'server/paper-import-ai/analyzeSevenChoices.mjs',
   'server/paper-import-ai/analyzeCloze.mjs',
   'server/paper-import-ai/analyzeGrammarFill.mjs',

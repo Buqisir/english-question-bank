@@ -167,6 +167,16 @@ claim fails when returned to the passage. Do not stop after naming the trap.
 the passage actually discusses so the student can see the boundary. Never turn
 “not mentioned” into “does not exist in reality.”
 
+How the wrong-option sentence prints: 「**B 项**（译文）错在：<your sentence>」.
+The reader already sees 错在, so say only what the option claims and what the
+passage actually says; never restate that it is wrong. Never write a trap type
+name anywhere in the sentence: no 「，属无中生有。」「，对象错配。」「属黑白颠倒」
+「属词钩干扰」 or any other label, coined or not. `primaryType` carries the type;
+the sentence shows the trick in plain words instead. 「原文只要求穿耐脏的衣服、
+按天气增减，没提团队制服。」 For `sourceLexicalTrap`, name the borrowed English
+word and what it means in the passage. The validator flags a label at the end of
+the sentence.
+
 `questionFocus` is one concise, concrete Chinese sentence about the work this
 question asks the student to do. It may name the familiar exam question type,
 but it must not expose internal enum names or repeat the full answer analysis.
@@ -294,6 +304,8 @@ For each reading question:
     },
     "questionFocus": "Chinese description of what the question tests",
     "stemTranslationZh": "...",
+    "locateBy": "stem | options | passage",
+    "locateFindZh": "找法 line, see 定位",
     "optionAnalysis": [ ... ],
     "locationParaphrases": [ ... ]
   }
@@ -544,7 +556,7 @@ Chinese label: 无中生有
 {
   "primaryType": "unsupportedClaim",
   "claim": "the unsupported claim text",
-  "explanation": "Chinese explanation stating 原文未提及"
+  "explanation": "Chinese explanation stating what the passage does not say; no type name"
 }
 ```
 
@@ -582,7 +594,7 @@ May be used for: `scopeShift`, `entityMismatch`
 
 UI title: 定位关系 / 同义替换
 
-Each reading question MUST include 1-2 items:
+Each reading question MUST include 1-3 items:
 
 ```json
 "locationParaphrases": [
@@ -627,6 +639,343 @@ Rules:
 }
 ```
 
+### 定位 (locateBy and the stem locating item)
+
+Purpose: help the reader understand the answer (where in the passage it
+comes from, and how the stem and the correct option match the passage), and
+on the way show, on this question's own words and paragraphs, how to get
+back to the passage, so the reader can do the same next time. The stem gives
+the locating words (定位词); they find one passage sentence (定位句); the
+answer is either in that sentence or in its context.
+
+Locating means finding, in the passage, the paraphrase that answers the
+question. The answer key is given; show the path a strong reader takes to it,
+in concrete words, never as a general tip.
+Three things are each decided by one thing only:
+- the 定位句 (`targetText`) is decided by the stem's clues;
+- the answer (`answerText`) is decided by the correct option: the passage
+  words the correct option rewrites are the answer;
+- signal words (so, because, but, however) only tell which way to look from
+  the 定位句 to the answer.
+Best is a 定位句 that also holds the answer. When it does not, a second
+line (`locateFindZh`) says which way to go and what to look for, and the
+bridge under the quote says why the answer follows (see `bridgeZh`).
+
+`locateBy` (question level, required):
+- `stem` — words in the stem point to one sentence.
+- `options` — no single sentence can carry the answer: the options have to
+  be checked one by one in different places. The options' own evidence
+  already shows where. Use it only for the forms marked `options` below.
+- `passage` — the question is about a whole text or one named paragraph as a
+  whole. No locating words; the paragraph the question names is shown from
+  the correct option's evidence.
+
+Step 1. Read the stem for one or two clues.
+- 对象词 (object words): names, places, numbers, dates, terms. They narrow
+  the search to a paragraph.
+- 题眼 (the asking word): says what kind of information is wanted. Some fix
+  a sentence: why, what caused / led to / prompted, suggest, advise, urge,
+  when, how many, how long, directly, first, at the start, initially, struck
+  him most, reveal, indicate, prove, show, a quoted or underlined word.
+  Others cannot fix a sentence: true, mentioned, learn, What do we know,
+  feature, findings, special, unique, in common, advantage, view, belief,
+  offer, share, agree on, infer, imply. special, unique, feature and
+  advantage do fix one when the passage words them about the same thing in
+  one sentence (unlike, the only, the first, stands out, few others): Step 3.
+- 对象词定段，题眼定句: when the object word and a sentence-fixing 题眼 land
+  in different sentences, the 定位句 is where the 题眼 lands. A 题眼 lands
+  through words (because, the reason, a lesson, a date). An imperative or
+  should / must alone does not move the 定位句 off the sentence holding a
+  name or place from the stem: locate there and bridge on to the advice.
+- When the stem has both a sentence-fixing word and one that cannot fix a
+  sentence ("What does humans' absence imply"), follow the one that fixes a
+  sentence and locate from the stem.
+
+Step 2. Choose `locateBy` by the question form. A reader should see a
+定位句 whenever one exists, so `options` is kept for the few forms where
+no single sentence can carry the answer.
+
+| Question form | `locateBy` |
+| --- | --- |
+| why, what caused / led to / prompted / made sb do; what X is aimed at | `stem` |
+| suggest / advise / recommend / urge / What should …, when the options are actions | `stem` |
+| who / what / when / where / how many / how long; how did X manage; the key solution | `stem` |
+| What does X (a named person) say / think about Y; the answer may be anywhere in that person's words | `stem` |
+| a quoted or underlined word, phrase or sentence; what a pronoun refers to | `stem` |
+| Why does the author mention X; Why is X compared to Y | `stem` |
+| the author's view of one named thing (How does the author view / find X) | `stem` |
+| What does X reveal / indicate / prove / show; What conclusion can be drawn from X | `stem` |
+| infer / imply / suggest (meaning 暗示) when the object word lands in one sentence | `stem` |
+| Who will benefit, when the passage names who benefits | `stem` |
+| Which will result in X; What will definitely disqualify: the sentence stating the general rule | `stem` |
+| Which best describes X; What was X like; What can we learn / What do we know about X; What is special / unique about X; infer / imply about X — when X, or a time, place or event in the stem, lands on one sentence and the correct option's evidence is that sentence or comes a few sentences later in the same paragraph (locate there and bridge on to it) | `stem` |
+| What do A and B / the listed things have in common, when one sentence states what they share ("All these stadiums are still …") | `stem` |
+| What do A and B have in common; What similar experience do A and B have; any comparison of two or more things, when no single sentence states it | `options` |
+| Which is true / NOT true / mentioned, and What can we learn / do we know about X, when the options' facts come from different places | `options` |
+| Which would X agree with; What does X argue (checking the options against X's words) | `options` |
+| Who is most / least likely to …; Who might benefit (applying the passage to new people) | `options` |
+| the purpose of paragraphs N and M; how paragraph N is developed; What do paragraphs N–M talk about | `options` |
+| How many parts / items / steps, or a sum, when the answer means adding up three or more headings, items or numbers | `options` |
+| the correct option's number is not written in the text (read off a chart or table, or worked out) and no sentence states it in words | `options` |
+| the main idea, best title or purpose of the whole text; the author's attitude to the whole topic | `passage` |
+| Where is the text taken from; Who is it written for; What will follow; the author's primary concern | `passage` |
+| What can be learned from the text, when the options are noun phrases summing up the text | `passage` |
+| What can we infer / learn from paragraph N or the last paragraph: read that paragraph as a whole | `passage` |
+| the main idea or emphasis of one named paragraph | `passage` |
+
+Step 3. Choose the 定位句 (`targetText`).
+- When a name or place in the stem lands on one sentence and the answer
+  follows later in the same paragraph (a list of what X does, the turn
+  after However), locate on that sentence and bridge on; do not fall back
+  to `options` because the answer is a few sentences away.
+- Test first: if the answer sentence itself holds the stem's object word,
+  or its plain counterpart (stem "the birth of Gordon", passage "Gordon was
+  born"), or a real counterpart of another stem phrase (a verb phrase,
+  or special worded as "unlike any other"), locate there, even when a name
+  from the stem sits in an earlier sentence; an object word that runs through most of the
+  passage (the town a text is about, its topic word) does not count here; do not land on another sentence and bridge back.
+  If the answer sentence does not hold it, locate on the sentence that
+  does, and let the bridge lead on to the answer. Never skip the stem's
+  anchor (a name, a time, a place, a source such as "the study in
+  Science") to land on a sentence that only shares a common word.
+- Read the 定位句 to its end. A dash, colon or closing clause is often the
+  answer.
+- When two sentences both match the clue, choose the one that answers the
+  题眼 (the how, the why), not the one sharing more words with the stem.
+- When the sentence holding the 题眼 words only points back with a pronoun
+  ("this is the real reason", "that's why"), locate the sentence it points
+  to.
+- A verb phrase or adjective in the stem that has a real counterpart in
+  exactly one sentence is a strong 定位词: stem "avoid touching", passage
+  "never actually touch"; "unwelcome", "hate"; "learn from", "a lesson";
+  "moved to London", "arrived at Heathrow, London". Use it as `sourceText`
+  with its counterpart as `targetCue`, and prefer it to an object word that
+  appears all through the passage. The counterpart must mean the same
+  thing, not just sit nearby.
+- A stance word in the stem (be opposed to, support, doubt, be in favor
+  of) pairs with the passage words that show that stance toward the same
+  thing (raise concerns about, protest, welcome, a doubter about). Prefer it
+  to the stem's topic noun (the plan, the program, the study): a topic noun the
+  passage keeps naming counts as a word that runs through the passage,
+  even when it also sits in the 定位句.
+- The counterpart may be a sentence feature, not a word: an imperative, or
+  should / must / need to / it is essential that, for advice; a because
+  clause for a cause; to do / so that / in order to for a purpose; an if
+  clause for a condition. Only for advice (suggest, advise, recommend,
+  urge, should), and only when the 定位句 holds no object word, use the 题眼
+  as `sourceText` and the feature words as `targetCue` (stem "suggest",
+  passage "Don't leave"). Never pair words such as purpose, parts, happen
+  or benefit with a loosely related passage word: when no natural pair
+  exists, locate on the sentence with the object word. When the 定位句
+  holds a distinguishing object word (a name, a number, a rare term), that
+  object word is `sourceText`, even if the 题眼 also matches. A name the
+  passage keeps naming (the people or animals the text is about) is not
+  distinguishing: when another stem phrase has its real counterpart in the
+  定位句, that pair is `sourceText` and `targetCue` (stem "give up the
+  shop", passage "closed its doors for good").
+
+Step 4. Where the answer usually sits, as seen from the 定位句.
+- After but, however, yet, in fact, actually, the opposite, and after
+  surprisingly, fortunately, unfortunately, when both halves are about the
+  same thing. A But inside a quoted reply in a dialogue is not a turn.
+- In a While / Although concession, the main clause is the point. Two
+  exceptions: when the stem asks about at the start or initially, the answer
+  is often the concession clause, which tells how things were at first; when
+  it asks first, at first or originally, the answer is often before the
+  turn, and what follows the turn is the fallback.
+- directly, mainly, most in a chain of causes: the link nearest the result.
+  A direct result of X: the link right after X, not a later one.
+- owe X to Y, attribute X to Y, This is because: the cause these words name.
+- When So, Therefore or That's why begins the 定位句, the cause is in the
+  sentence before.
+- After a person's name, the answer may be anywhere in that person's words,
+  not only in the sentence with the name.
+- For a pronoun or a word in context, try the nearest noun first; when it is
+  not among the options, go back to the topic sentence and check it with the
+  verb.
+- Questions mostly follow the passage order; use it to narrow the search.
+
+When `locateBy` is `stem`, add exactly ONE `locationParaphrases` item with
+`sourceRole: "stem"` and `relationType: "locationCue"`. When it is `options`
+or `passage`, add NO such item.
+
+Fields of that item:
+- `sourceText` — 定位词: 1-5 English words copied exactly from the stem.
+  Never the whole stem. Prefer names, numbers, dates and rare content words
+  that appear in the 定位句 and not all through the passage, then a stem
+  phrase with one real counterpart there (Step 3); use a 题眼 only when the 定位句 holds none of them. Never pick question words, or words that appear everywhere
+  in the passage.
+  For a reference or word-meaning question, use the quoted word itself.
+- `targetText` — 定位句: ONE complete passage sentence, copied exactly,
+  containing the locating words or their counterpart.
+- `targetParagraphId` — the paragraph of `targetText`.
+- `targetCue` — the exact words inside `targetText` that match `sourceText`,
+  1-5 English words: the counterpart a reader circles, not a clause (stem
+  “Ho's job”, passage “hospital teacher”, not “what it means to be a
+  hospital teacher”). REQUIRED when the passage words differ from the stem
+  words (stem “started”, passage “opened”); omit it when `sourceText`
+  appears in `targetText` as is (case does not matter). The PDF prints
+  `sourceText → targetCue`, or `sourceText 原词` when there is no
+  `targetCue`, so both must read well side by side.
+- `answerText` — the exact passage words where the answer is. It MUST be a
+  substring of one `quote` in the correct option's `evidence`. Keep it to
+  the deciding words, not the whole evidence. The deciding words cover every
+  part of the correct option: when the option's fact and its verb sit in
+  different phrases of the quote, keep both and the words between them
+  (option "She overcame a fear of water", quote "swimming had always
+  terrified her, but last summer she finally swam across the lake": keep
+  from "swimming had always terrified her" through "swam across the lake").
+  Trim only words the option does not rewrite.
+  For a word-meaning question, `answerText` is the context clue that gives
+  the meaning (a restatement, a contrast, an example next to the word), not
+  the word or its own phrase.
+- `bridgeZh` — only when `answerText` is NOT inside `targetText`: one short
+  Chinese line, at most 25 units (each Chinese character and each English
+  word counts as one), saying WHY the answer is in the context. Say the
+  concrete link in plain words: which word points to what ("she 指新生的
+  小犀牛"), what the turn is ("But 后才是实际情况"), which sentence gives the
+  cause. When the answer sentence or the 定位句 holds a word pointing back
+  (that belief, this, it, such), first say what it points to ("that belief
+  指女孩认为本性别不够聪明"). Do not write the link's name; the six links below only help you
+  decide what to say:
+  - 指代回指 — a pronoun or summary word in the 定位句 (it, there, this,
+    such, the issue) points to the answer elsewhere;
+  - 例子 — the 定位句 is an example, a figure or a quoted expert, and the
+    answer is the point it serves;
+  - 转折 — the 定位句 is the expectation, set-up or concession, and the
+    answer comes after but, yet, however, not … but; "not because X"
+    followed by the real cause also counts;
+  - 前后文展开 — the 定位句 raises a topic, a claim or a key question, and
+    a sentence or two around it explains it, gives its background or
+    follows the cause on; also when So, Therefore, That's why begins the
+    定位句 and the cause is before it;
+  - 叙事因果 — no signal word; the cause lies in what happened in the story;
+  - 多处合并 — the answer needs two or more places put together (counting,
+    sums, what several things share). Put the place the 题眼 lands on in
+    `targetText` and the most telling other place in `answerText`.
+  "Why does the author mention X", "What does the author want to show by
+  telling X": the link is 例子.
+  To choose, first ask whether the correct option is incomplete without
+  one of several places: if so, 多处合并. Otherwise take the first that
+  fits, in this order: 例子, 转折, 指代回指, 叙事因果, 前后文展开. The order
+  only picks the link; the answer is always where the correct option points.
+  A pronoun in the answer sentence pointing back to the 定位句 is
+  前后文展开; only a pronoun in the 定位句 pointing away is 指代回指.
+  If none of the six fits, the 定位句 is probably wrong; locate again.
+  The page prints it under the quote, after the reader has read the
+  passage words with the answer highlighted. So tell the link the way you
+  would tell a classmate, in plain Chinese and in the passage's own logic
+  ("她先发现了买船票的机会，紧接着就决定要去"); copy English only to say
+  what a pointing word stands for.
+  Say the link in the correct option's sense: never use an English word
+  that only a wrong option uses, which leads the student to that option.
+  Do not repeat the answer. Do not say WHERE (前一句, 后一句, 下一段):
+  `locateFindZh` says that.
+  When `answerText` is inside `targetText`, omit `bridgeZh`.
+- `note` — as for every item: a short Chinese line; for this item say which
+  stem words lead to which passage words.
+
+`locateFindZh` (question level, on every question; called 找法 below) — the
+second line of the 定位 block. The page prints a fixed first line:
+- `stem`: the 定位词 in bold, → the passage words (`targetCue`) when they
+  differ, and the paragraph, e.g. 「定位 started → opened 第 2 段」;
+- `options`: 「定位 核对选项」;
+- `passage`: 「定位 看全文」, or the paragraph the question names.
+`locateFindZh` goes under it. It shows how to do THIS question well: the move a
+strong reader makes on this question, in this passage's words. Test it: if
+the line would still fit another question or another passage unchanged, it
+is a template and teaches nothing; rewrite it.
+- `stem`: from where the reader lands, ONE move and what to look for. At
+  most 16 units (each Chinese character and each English word counts as
+  one), and at most one English signal word (but, this, there, if, so,
+  For example) copied from the passage. Never copy a passage phrase: the
+  quote and its highlight show the content.
+  - answer outside the 定位句: say which way and what to look for:
+    「往前一句找原因」「看 but 后」「this 指什么，往前找」「往后两句读她的话」.
+  - answer inside the 定位句: write it only when a signal in that sentence
+    is the handle (「看同句 but 后」「看 if 后的条件」); otherwise write ""
+    (the page then prints nothing under the first line).
+  - Never repeat the 定位词, its counterpart or the paragraph; never write
+    template phrases (原词, 答案在定位句, 答案不在定位句).
+- `options`: say what to carry back from each option here and what decides
+  it in this passage: 「四个队名逐个回表里数出场次」「各取一个地名回原文找
+  free」. Not 「逐项回原文核对」「各取关键词找依据」: those fit any question.
+  At most 24 units and 3 English words.
+- `passage` (the whole text, or one named paragraph as a whole): say how
+  THIS text or paragraph is built, in its own content, and where the answer
+  comes from: what it starts with, what changes or what it argues, where it
+  lands. Name each place as [[paragraphId]] and copy the two to four passage
+  words that show each step, so the reader can see it in the passage. Then
+  say in a few words what the answer has to cover. At most 48 units and 8
+  English words.
+  Good (made-up passage on a town that rebuilt its river): 「[[para-1]]写河
+  被 factories 污染，[[para-3]]镇民 clean it up，[[para-5]] fish return；
+  标题要盖住从脏到净的经过」.
+  Not: 「看全文」「看首段加末段」「盯住反复出现的 X」「看每段首句」 on their
+  own: those fit any passage. A frequent word is a handle only after you
+  have counted it and it really carries the text; then say what it shows.
+  For where the text is taken from or who it is written for, name the
+  features of THIS text that decide it (a price and a booking line, a
+  book's author and publisher, a research finding with its journal).
+- Name a paragraph only as [[paragraphId]]; the page prints it the way the
+  passage is labelled. Never write 第 N 段 yourself.
+- Never use an English word that only a wrong option uses. Do not give the
+  answer or the answer letter.
+
+Example, answer in the 定位句:
+
+```json
+{
+  "sourceText": "Lake Mora",
+  "sourceRole": "stem",
+  "targetText": "Visitors to Lake Mora can rent a boat for ten dollars an hour.",
+  "targetParagraphId": "para-...",
+  "relationType": "locationCue",
+  "answerText": "rent a boat for ten dollars an hour",
+  "note": "题干 Lake Mora 原词出现在第 2 段。"
+}
+```
+Its `locateFindZh`: "" (the answer is in the 定位句 and no signal is the handle).
+
+Example, answer in the context (a pronoun points back):
+
+```json
+{
+  "sourceText": "the golden key",
+  "sourceRole": "stem",
+  "targetText": "The golden key was hidden there for forty years.",
+  "targetParagraphId": "para-...",
+  "relationType": "locationCue",
+  "answerText": "an old clock tower stands at the edge of the village",
+  "bridgeZh": "there 指 old clock tower",
+  "note": "题干 the golden key 原词出现在第 3 段。"
+}
+```
+Its `locateFindZh`: "there 指哪里，往前找".
+
+Example, the passage uses other words:
+
+```json
+{
+  "sourceText": "started",
+  "sourceRole": "stem",
+  "targetText": "When Mia opened her bakery, she expected few customers.",
+  "targetParagraphId": "para-...",
+  "relationType": "locationCue",
+  "targetCue": "opened",
+  "answerText": "the shop was full every morning",
+  "bridgeZh": "But 后是实际情况，和预期相反",
+  "note": "题干 started 对应原文 opened。"
+}
+```
+Its `locateFindZh`: "往后读，看 But 后".
+`locateFindZh` for an `options` question: "各取一个地名回原文找 free".
+`locateFindZh` for a `passage` question on a made-up passage that opens with
+a question about sleep and ends with a study's answer: "[[para-1]]问 why we
+dream，[[para-4]]研究说 sorting memories；主旨要盖住这个问答".
+
+---
+
 ---
 
 ## Analysis Meta
@@ -666,4 +1015,6 @@ Output must:
 - `unsupportedClaim` must not have `sourceQuote` or `trapEvidence`
 - Every wrong option must have trap diagnosis
 - Every question must have `stemTranslationZh` and `locationParaphrases`
+- Every question must have `locateBy`; a `stem` question has exactly one stem `locationCue` item whose `sourceText` is copied from the stem, whose `targetText` is one whole passage sentence, and whose `answerText` lies inside the correct option's evidence quote; `bridgeZh` appears exactly when `answerText` is outside `targetText`
+- Every question has `locateFindZh`: "" only for a `stem` question whose answer is in the 定位句 with no signal word as the handle; otherwise the line says how to do this question well and would not fit another question unchanged (stem: one move, at most 16 units and one English signal word; options: what to carry back and what decides it, at most 24 units; passage: how this text is built, with [[paragraphId]] places and a few passage words, then what the answer must cover, at most 48 units); paragraphs only as [[paragraphId]]
 - If source information is sufficient, output immediately without unrelated deliberation text

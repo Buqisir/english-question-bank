@@ -5,7 +5,7 @@
         <div style={{ alignItems: 'center', boxSizing: 'border-box', display: 'flex', gap: '12px' }}>
           <div style={{ backgroundImage: 'url(../../logo/mint/mark.svg)', backgroundPosition: '50%', backgroundRepeat: 'no-repeat', backgroundSize: '100% 100%', boxSizing: 'border-box', flexShrink: 0, height: '20px', width: '31px' }} />
           <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
-            视觉规范手册 · 草案 0.10
+            视觉规范手册 · 草案 0.11
           </div>
         </div>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', letterSpacing: '0.04em', lineHeight: '16px' }}>
@@ -123,10 +123,10 @@
             </div>
             <div style={{ boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '2px', paddingTop: '10px' }}>
               <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Semibold", "PingFang SC", system-ui, sans-serif', fontSize: '12px', fontWeight: 600, lineHeight: '18px' }}>
-                先留着
+                出版标记已定
               </div>
               <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '13px', lineHeight: '175%' }}>
-                配套解析 PDF 的「EQBANK 教师解析」和松烟绿 #596A58 不在色板里。名字和字标都已定（第 121 条），这个出版标记照第 89 条先留着；松烟绿换不换还没定。
+                配套解析 PDF 的页眉和卷头印「獭石试题解析」（第 131 条）。松烟绿 #596A58 不在色板里，换不换还没定。
               </div>
             </div>
           </div>
@@ -185,7 +185,7 @@
       </div>
       <div style={{ alignItems: 'center', borderTopColor: '#E3E8DF', borderTopStyle: 'solid', borderTopWidth: '1px', boxSizing: 'border-box', display: 'flex', flexShrink: '0', justifyContent: 'space-between', paddingTop: '16px' }}>
         <div style={{ boxSizing: 'border-box', color: '#60665C', fontFamily: '"PingFangSC-Regular", "PingFang SC", system-ui, sans-serif', fontSize: '12px', lineHeight: '16px' }}>
-          出处：BRAND.md §4.4–§4.8、§1.6 · 第 31、50、52、67、89、114、118、119、121、130 条 · 截图 evidence/login-2026-11-17-green.png、states-2026-11-14/5-my-space-empty-with、3-not-found-with.png
+          出处：BRAND.md §4.4–§4.8、§1.6 · 第 31、50、52、67、89、114、118、119、121、130、131 条 · 截图 evidence/login-2026-11-17-green.png、states-2026-11-14/5-my-space-empty-with、3-not-found-with.png
         </div>
         <div style={{ boxSizing: 'border-box', color: '#191D18', fontFamily: '"Inter", system-ui, sans-serif', fontSize: '13px', fontWeight: 500, lineHeight: '16px' }}>
           19

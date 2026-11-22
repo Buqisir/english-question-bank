@@ -1,0 +1,123 @@
+/* 登录页样张 A / B / C（2026-11-17，提案 · 单一来源）。只用 tokens.css 的变量，组件用 shared-ui 真件。 */
+body { margin: 0; background: var(--eqb-color-bg); color: var(--eqb-color-text); }
+
+.abc-page { min-height: 100vh; box-sizing: border-box; }
+.abc-brand { display: flex; align-items: center; gap: 8px; height: 48px; }
+.abc-brand img { display: block; }
+
+.abc-heading h1 { margin: 0; font-weight: 600; color: var(--eqb-color-text-strong); letter-spacing: 0.02em; }
+.abc-heading p { margin: 8px 0 0; font-size: var(--eqb-font-size-sm); color: var(--eqb-color-text-muted); }
+.abc-heading--card h1 { font-size: var(--eqb-font-size-xl); line-height: 1.3; }
+.abc-heading--page h1 { font-size: 48px; line-height: 1.2; }
+
+.abc-form { display: grid; gap: 16px; margin-top: 28px; }
+.abc-submit { width: 100%; margin-top: 8px; }
+
+.abc-footer { margin: 0; font-size: var(--eqb-font-size-xs); color: var(--eqb-color-text-muted); }
+
+.abc-sheet {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px;
+  padding: 36px 32px 32px;
+  border-radius: var(--eqb-radius-card);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-2);
+}
+
+/* ---------- A 纸在桌上 ---------- */
+.abc-topbar { max-width: 856px; margin: 0 auto; } /* 和登录后首页同一条内容栏：1440 宽时标志在 x=292 */
+.abc-a-main {
+  display: flex; flex-direction: column; align-items: center; gap: 24px;
+  padding: 72px 16px 48px;
+}
+
+/* ---------- B 收着的雾海 ---------- */
+.abc-b { overflow: hidden; display: grid; grid-template-columns: minmax(360px, 520px) 1fr; }
+.abc-b-left { display: flex; flex-direction: column; padding: 0 64px 32px 88px; min-height: 100vh; box-sizing: border-box; }
+.abc-b-left .abc-brand { margin-top: 24px; }
+.abc-b-body { flex: 1; display: flex; flex-direction: column; justify-content: center; max-width: 360px; }
+.abc-b-scene { position: relative; }
+.abc-b-mist {
+  position: absolute; inset: 22% 12% 18% 6%;
+  border-radius: var(--eqb-radius-circle);
+  background: #C4ECDD; /* 雾薄荷（BRAND.md §1.5 雾色，第 67 条） */
+  filter: blur(80px); opacity: 0.7;
+}
+.abc-b-otter { position: absolute; width: min(40%, 360px); left: 28%; top: 50%; transform: translateY(-50%); }
+.abc-b-otter svg { display: block; width: 100%; height: auto; }
+
+/* ---------- C 题海 ---------- */
+.abc-c { display: grid; grid-template-columns: minmax(400px, 560px) 1fr; }
+.abc-c-left { display: flex; flex-direction: column; padding: 0 48px 32px 88px; min-height: 100vh; box-sizing: border-box; }
+.abc-c-left .abc-brand { margin-top: 24px; }
+.abc-c-body { flex: 1; display: flex; align-items: center; }
+.abc-c-sea {
+  position: relative; overflow: hidden;
+}
+.abc-c-slips {
+  position: absolute; inset: -24px -40px;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;
+  align-content: center;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse at 50% 50%, #000 20%, transparent 68%);
+}
+.abc-c-slip {
+  padding: 10px 12px; border-radius: var(--eqb-radius-control);
+  background: var(--eqb-color-paper);
+  box-shadow: var(--elev-1);
+  color: var(--eqb-color-text-faint);
+}
+.abc-c-slip:nth-child(4n + 2), .abc-c-slip:nth-child(4n + 4) { transform: translateY(24px); }
+.abc-c-slip span { font-size: var(--eqb-font-size-xs); }
+.abc-c-slip p { margin: 4px 0 0; font-size: var(--eqb-font-size-xs); line-height: 1.5; }
+.abc-c-pick {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: min(78%, 420px);
+}
+.abc-c-otter { width: 62%; margin: 0 auto -18px; position: relative; z-index: 1; }
+.abc-c-otter svg { display: block; width: 100%; height: auto; }
+.abc-c-card {
+  position: relative; z-index: 0;
+  padding: 24px 24px 20px; border-radius: var(--eqb-radius-card);
+  background: var(--eqb-color-paper); box-shadow: var(--elev-3);
+}
+.abc-c-card span { font-size: var(--eqb-font-size-xs); color: var(--eqb-color-text-muted); }
+.abc-c-card p { margin: 8px 0 12px; font-size: var(--eqb-font-size-md); font-weight: 600; }
+.abc-c-card ol { margin: 0; padding-left: 20px; list-style: upper-alpha; display: grid; gap: 6px; font-size: var(--eqb-font-size-sm); color: var(--eqb-color-text-secondary); }
+
+/* ---------- 窄屏 390 ---------- */
+@media (max-width: 760px) {
+  .abc-topbar { padding: 0 16px; }
+  .abc-a-main { padding-top: 32px; }
+  .abc-sheet { padding: 28px 20px 24px; }
+
+  .abc-b, .abc-c { grid-template-columns: 1fr; align-content: start; }
+  .abc-b-left, .abc-c-left { padding: 0 16px 24px; min-height: 0; gap: 24px; }
+  .abc-b-left .abc-brand, .abc-c-left .abc-brand { margin-top: 8px; }
+  .abc-b-body { max-width: none; padding-top: 24px; }
+  .abc-heading--page h1 { font-size: 32px; }
+  .abc-b-scene { order: -1; height: 200px; }
+  .abc-b-otter { width: 150px; left: 50%; top: 56%; transform: translate(-50%, -50%); }
+  .abc-b-left { order: 0; }
+  .abc-b-left .abc-brand { position: absolute; top: 8px; left: 16px; }
+  .abc-c-sea { order: -1; height: 330px; }
+  .abc-c-pick { width: 290px; top: 56%; }
+  .abc-c-otter { width: 50%; margin-bottom: -12px; }
+  .abc-c-card p { font-size: var(--eqb-font-size-sm); margin: 4px 0 8px; }
+  .abc-c-card ol { font-size: var(--eqb-font-size-control); }
+  .abc-c-card { padding: 16px; }
+  .abc-c-card ol { gap: 2px; }
+  .abc-c-body { padding-top: 16px; }
+  .abc-c-left .abc-brand { position: absolute; top: 8px; left: 16px; z-index: 2; }
+}
+
+/* 样张的切换条，不属于设计。 */
+.abc-switch {
+  position: fixed; right: 16px; bottom: 16px; z-index: 10;
+  display: flex; gap: 2px; padding: 2px;
+  border-radius: var(--eqb-radius-pill); background: var(--eqb-color-desk);
+  font-size: var(--eqb-font-size-control);
+}
+.abc-switch a { padding: 6px 12px; border-radius: var(--eqb-radius-pill); color: var(--eqb-color-text-secondary); text-decoration: none; }
+.abc-switch a[aria-current='page'] { background: var(--eqb-color-paper); box-shadow: var(--elev-1); color: var(--eqb-color-text); }

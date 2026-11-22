@@ -1,0 +1,143 @@
+{
+ "paperId": "paper-gaokao-2025-ii",
+ "questions": {
+  "question:paper-gaokao-2025-ii:21": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "Magna Carta",
+    "targetText": "One of the four original copies of the Magna Carta is displayed there.",
+    "targetParagraphId": "block:paper-gaokao-2025-ii:reading-a:4",
+    "answerText": "The Hereford Cathedral",
+    "bridgeZh": "there 指代前文的大教堂",
+    "note": "题干 Magna Carta 原词出现在 Hereford 一节的末句。"
+   }
+  },
+  "question:paper-gaokao-2025-ii:22": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "Shrewsbury Town Center",
+    "targetText": "The River Severn has a significant turn through town, almost making an island of Shrewsbury Town Center.",
+    "targetParagraphId": "block:paper-gaokao-2025-ii:reading-a:8",
+    "answerText": "almost making an island of Shrewsbury Town Center",
+    "note": "题干 Shrewsbury Town Center 原词出现在河流绕城的句子里。"
+   }
+  },
+  "question:paper-gaokao-2025-ii:23": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "Mevagissey",
+    "targetText": "Even if you haven’t been to the small fishing village Mevagissey, you’ve probably seen it in a movie or British TV show.",
+    "targetParagraphId": "block:paper-gaokao-2025-ii:reading-a:10",
+    "answerText": "Don’t leave the harbor without a traditional Cornish pie",
+    "bridgeZh": "后文的祈使句就是作者的建议",
+    "note": "题干 Mevagissey 原词出现在该节首句。"
+   }
+  },
+  "question:paper-gaokao-2025-ii:24": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "LPCH",
+    "targetText": "“Here” is room 386, where each year, about 500 LPCH patients also become students.",
+    "targetParagraphId": "block:paper-gaokao-2025-ii:reading-b:2",
+    "answerText": "LPCH patients also become students",
+    "note": "题干 LPCH 原词出现在第 2 段介绍学生的句子里。"
+   }
+  },
+  "question:paper-gaokao-2025-ii:25": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "Ho’s job",
+    "targetText": "“I’m a coach, an adviser, and a comforter, and that's what it means to be a hospital teacher.”",
+    "targetParagraphId": "block:paper-gaokao-2025-ii:reading-b:3",
+    "targetCue": "hospital teacher",
+    "answerText": "I’m a coach, an adviser, and a comforter",
+    "note": "题干 Ho’s job 对应原文 hospital teacher（Ho 的职业）。"
+   }
+  },
+  "question:paper-gaokao-2025-ii:26": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "it",
+    "targetText": "“I feel like it is a disservice to the kids,” Ho says.",
+    "targetParagraphId": "block:paper-gaokao-2025-ii:reading-b:4",
+    "answerText": "Some teachers don’t give the kids any assignments",
+    "bridgeZh": "it 指代前一句部分老师的做法",
+    "note": "题干划线词 it 出现在第 4 段 Ho 的评论里。"
+   }
+  },
+  "question:paper-gaokao-2025-ii:27": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "Good",
+    "targetText": "“I actually think the medicine is only a small piece for some problems,” says Julie Good, director of pain management services at LPCH.",
+    "targetParagraphId": "block:paper-gaokao-2025-ii:reading-b:5",
+    "answerText": "School can keep those dreams alive",
+    "bridgeZh": "Good 的话延续到后文，结论在段末",
+    "note": "题干 Good 原词出现在第 5 段 Julie Good 的引语处。"
+   }
+  },
+  "question:paper-gaokao-2025-ii:28": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "started",
+    "targetText": "When Sonja Detrinidad opened her online shop selling houseplants, she didn't have high hopes for it.",
+    "targetParagraphId": "block:paper-gaokao-2025-ii:reading-c:1",
+    "targetCue": "opened",
+    "answerText": "But the opposite happened: She was flooded",
+    "bridgeZh": "But 转折，实际情况和预期相反",
+    "note": "题干 started 对应原文 opened her online shop。"
+   }
+  },
+  "question:paper-gaokao-2025-ii:29": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "Knuth",
+    "targetText": "“Students who are around plants perform better academically than students who are in a classroom without plants,” says Knuth.",
+    "targetParagraphId": "block:paper-gaokao-2025-ii:reading-c:3",
+    "answerText": "perform better academically",
+    "note": "题干 Knuth 原词出现在定位句。"
+   }
+  },
+  "question:paper-gaokao-2025-ii:30": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "doctors",
+    "targetText": "“Doctors practice medicine and lawyers practice law and you should allow yourself the practice it takes to sustain a plant.",
+    "targetParagraphId": "block:paper-gaokao-2025-ii:reading-c:4",
+    "answerText": "allow yourself the practice it takes to sustain a plant",
+    "note": "题干 doctors and lawyers 对应原文 Doctors … lawyers。"
+   }
+  },
+  "question:paper-gaokao-2025-ii:31": {
+   "locateBy": "passage"
+  },
+  "question:paper-gaokao-2025-ii:32": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "early life",
+    "targetText": "Maybe that feeling comes from growing up in South Africa, where the phrase “there are children starving in Africa” was more of an uncomfortable reminder of fact than a prayer at dinner time.",
+    "targetParagraphId": "block:paper-gaokao-2025-ii:reading-d:1",
+    "targetCue": "growing up",
+    "answerText": "children starving in Africa” was more of an uncomfortable reminder of fact",
+    "note": "题干 early life 对应原文 growing up in South Africa。"
+   }
+  },
+  "question:paper-gaokao-2025-ii:33": {
+   "locateBy": "stem",
+   "locate": {
+    "sourceText": "Blue Hill",
+    "targetText": "For two weeks in March, Greenwich Village's Blue Hill restaurant was renamed wastED, and served items like fried skate cartilage, a juice pulp burger, and a dumpster diver's vegetable salad.",
+    "targetParagraphId": "block:paper-gaokao-2025-ii:reading-d:4",
+    "answerText": "raise awareness regarding food waste",
+    "bridgeZh": "Each dish 承接上句的菜，说明目的",
+    "note": "题干 Blue Hill 原词出现在第 4 段介绍 wastED 的句子里。"
+   }
+  },
+  "question:paper-gaokao-2025-ii:34": {
+   "locateBy": "passage"
+  },
+  "question:paper-gaokao-2025-ii:35": {
+   "locateBy": "options"
+  }
+ }
+}

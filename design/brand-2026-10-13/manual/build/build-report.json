@@ -1,10 +1,13 @@
 {
-  "generatedAt": "2026-11-17T13:21:11.001Z",
+  "generatedAt": "2026-11-22T15:20:52.392Z",
   "src": "design/brand-2026-10-13/manual/src",
-  "out": "design/brand-2026-10-13/manual/视觉规范手册-草案0.10-预览.pdf",
+  "out": "design/brand-2026-10-13/manual/视觉规范手册-草案0.11-预览.pdf",
   "font": {
-    "fallback": false,
-    "packages": []
+    "fallback": true,
+    "packages": [
+      "@fontsource-variable/noto-sans-sc@5.3.1",
+      "@fontsource-variable/noto-serif-sc@5.3.1"
+    ]
   },
   "pages": [
     {
@@ -168,7 +171,7 @@
           "rect": [
             96,
             1124,
-            886,
+            921,
             1140
           ]
         },

@@ -13,6 +13,7 @@ import {
   assertSelectedLongSentences,
 } from '../server/paper-import-ai/analyzerProviderShell.mjs'
 import { buildCompanionAnalysisHtml } from '../server/exports/companionAnalysisRenderer.mjs'
+import { renderSourceRelationships } from '../server/exports/companion-analysis/blocks.mjs'
 import {
   buildObjectiveTeachingView,
   projectObjectiveTeachingSource,
@@ -241,9 +242,18 @@ const html = buildCompanionAnalysisHtml({
 assert.match(html, /same <span class="source-underline" data-range-indices="0">same<\/span>\.<\/p>/)
 assert.match(html, /data-translation-paragraph-id="zh-p2"/)
 assert.match(html, /data-question-nos="21 22"/)
-assert.match(html, /\[21、22\]/)
-assert.match(html, /data-source-text-state="original"/)
-assert.match(html, /data-annotation-ids="[^"]*shared-second-occurrence/)
+assert.match(html, /<sup class="clue-no">21,22<\/sup>/)
+// Reading prints no passage of its own (each question quotes its clue in
+// 原文依据). The passage marks still print for 七选五, 完形 and 语法填空, so
+// check the second occurrence and the long-sentence overlap there.
+assert.doesNotMatch(html, /class="source-relationships"/)
+const passageHtml = renderSourceRelationships(preciseAnalysis, {
+  groupType: 'cloze', passage: { paragraphs: [{ paragraphId: 'p1', text: preciseGroup.paragraphs[0].text }] },
+}, { content: { questions: { q1: { questionNo: 21 }, q2: { questionNo: 22 } } } })
+assert.match(passageHtml, /data-source-text-state="original"/)
+assert.match(passageHtml, /data-annotation-ids="[^"]*shared-second-occurrence/)
+assert.equal((passageHtml.match(/class="clue-no"/gu) || []).length, 1,
+  'a clue overlapped by a long-sentence mark prints its number once, and the long-sentence mark prints none')
 assert.match(html, /data-question-nos="21 22"/)
 
 const preciseTextMap = {
@@ -372,5 +382,5 @@ const legacyMarkerHtml = buildCompanionAnalysisHtml({
   analyses: { reading: { groups: { g1: { fullTranslationZh: '手写 [36] 不是标注。' } }, questions: {} } },
 })
 assert.match(legacyMarkerHtml, /手写 \[36\] 不是标注。/)
-assert.doesNotMatch(legacyMarkerHtml, /class="translation-marker"/)
+assert.doesNotMatch(legacyMarkerHtml, /class="(?:clue|blank)-no"/)
 console.log('Analysis text ranges: Unicode, CRLF, second occurrence, overlap/many-to-many, stale revision/translation, authoritative insertion, legacy readback and both consumers PASS')

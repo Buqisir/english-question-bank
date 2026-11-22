@@ -9,6 +9,7 @@ import {
   readTeachingAnalysisPrompt,
   rewriteApiPrompt,
 } from './analyzerProviderShell.mjs'
+import { assertClozeTeachingLines, deriveClozeLegacyFields } from './clozeMainLine.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -130,6 +131,7 @@ export function validateClozeShape(analysis, {
   requireFullTranslation = false,
   requireSelectedLongSentences = false,
   requireTeachingContent = false,
+  requireTeachingLines = false,
 }) {
   if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) throw new Error('AI 未返回 JSON 对象。')
   if (analysis.schemaVersion !== 'cloze-analysis-v1') throw new Error('AI JSON schemaVersion 不正确。')
@@ -251,7 +253,8 @@ export function validateClozeShape(analysis, {
         }
       }
     }
-  }
+  }  // 主线、脉络、找法：新生成必填，旧解析写了才查。
+  assertClozeTeachingLines(analysis, group, { required: requireTeachingLines })
 }
 
 function isRetryableClozeError(error) {
@@ -287,7 +290,11 @@ export const analyzeClozeImportCandidate = createAnalyzerProviderShell({
     requireFullTranslation: true,
     requireSelectedLongSentences: true,
     requireTeachingContent: true,
+    requireTeachingLines: true,
   }),
   isRetryable: isRetryableClozeError,
-  beforeValidate: stampClozeMeta,
+  beforeValidate: (analysis, context) => {
+    stampClozeMeta(analysis, context)
+    deriveClozeLegacyFields(analysis)
+  },
 })

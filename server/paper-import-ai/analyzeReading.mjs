@@ -9,6 +9,7 @@ import {
   readTeachingAnalysisPrompt,
 } from './analyzerProviderShell.mjs'
 import { countQuoteMatches } from '../paper-import/validator.mjs'
+import { hasReadingLocate, resolveReadingLocate } from './readingLocate.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -184,6 +185,7 @@ export function validateReadingAnalysisShape(analysis, {
   requireFullTranslation = false,
   requireSelectedLongSentences = false,
   requireTeachingContent = false,
+  requireLocate = false,
 }) {
   if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) throw new Error('AI 未返回 JSON 对象。')
   if (analysis.schemaVersion !== 'reading-choice-analysis-v1') throw new Error('AI JSON schemaVersion 不正确。')
@@ -277,6 +279,15 @@ export function validateReadingAnalysisShape(analysis, {
       if (option?.trap?.sourceQuote) assertTrapSourceQuoteMatch(questionId, option)
     }
     for (const relation of item.locationParaphrases) assertExactQuote(questionId, 'locationParaphrases.targetText', relation)
+    // 定位 (BUB-255): checked whenever an analysis carries it, and required
+    // when the caller asks for it.
+    if (requireLocate || hasReadingLocate(item)) {
+      const { errors } = resolveReadingLocate({
+        entry: item, stem: sourceQuestion?.stem, paragraphs: paragraphsById, correctEvidence: correctOption?.evidence,
+        options: sourceQuestion?.options, answer: correctOption?.label,
+      })
+      if (errors.length) throw new Error(`${questionId}: ${errors[0]}`)
+    }
   }
 }
 
@@ -294,6 +305,8 @@ export const analyzeReadingImportCandidate = createAnalyzerProviderShell({
     requireFullTranslation: true,
     requireSelectedLongSentences: true,
     requireTeachingContent: true,
+    // 定位 stays optional for new imports until the Owner accepts the two
+    // sample papers (BUB-255); an analysis that carries it is always checked.
   }),
   isRetryable: isRetryableReadingError,
 })

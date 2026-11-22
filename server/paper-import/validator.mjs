@@ -1,4 +1,5 @@
 import Ajv from 'ajv/dist/2020.js'
+import { trapNameIssue } from './trapNameTail.mjs'
 import { createHash } from 'node:crypto'
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -386,6 +387,13 @@ function validateReadingAnalysisBundle({ asset, answerKey, analyses, blockingIss
       }
       for (const option of analysis.optionAnalysis || []) {
         const isCorrect = option.status === 'correct'
+        const trapTail = isCorrect ? '' : trapNameIssue(option.trap)
+        // A warning, not a block: the export drops the tail anyway, and frozen papers that are re-imported still carry such tails.
+        if (trapTail) {
+          warnings.push(issue('warning', 'analysis.trapNameTail', `${questionId} ${option.label}: ${trapTail}`, {
+            suggestedFix: '解析不写陷阱类型名（无中生有、对象错配、黑白颠倒等都不写），只写原文怎么说、选项改成了什么。',
+          }))
+        }
         const evidenceRows = isCorrect ? option.evidence || [] : option.trapEvidence || []
         if (option.trap?.primaryType === 'unsupportedClaim' && Array.isArray(option.trapEvidence) && option.trapEvidence.length > 0) {
           delete option.trapEvidence

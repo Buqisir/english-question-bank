@@ -1,0 +1,14 @@
+{
+ "W1": {
+  "refs": [
+   "design/brand-2026-10-13/image-review-2026-11-17/dive/V1-2.png"
+  ],
+  "prompt": "STYLE FIRST: pure plain white background, nothing else. Flat vector mascot illustration, exactly four flat solid colours: fur #72BFA4, chest and belly #DDF1E8, muzzle #F2FAF6, eyes and nose #191D18. No gradients, no shading, no shadows, no outlines. Redraw the attached otter in exactly the same diving pose, same angle, same small head and face, same long body, hind feet and tail. Only add the front leg. FRONT LEG: the near front leg lies flat along the pale belly, pointing backward toward the tail, from the shoulder just behind the head to a small paw resting on the middle of the belly. The front leg stays INSIDE the body silhouette - nothing sticks out below the chin or the body - but it is clearly READABLE as an arm: it is a fur-green shape lying on top of the pale belly, so the pale belly colour shows all around it and outlines it, exactly like the arms lying over the pale chest in the sitting mascot otter. The arm is fairly long and slim with a small rounded paw at the end."
+ },
+ "W2": {
+  "refs": [
+   "design/brand-2026-10-13/image-review-2026-11-17/dive/V1-2.png"
+  ],
+  "prompt": "STYLE FIRST: pure plain white background, nothing else. Flat vector mascot illustration, exactly four flat solid colours: fur #72BFA4, chest and belly #DDF1E8, muzzle #F2FAF6, eyes and nose #191D18. No gradients, no shading, no shadows, no outlines. Redraw the attached otter in exactly the same diving pose, same angle, same small head and face, same long body, hind feet and tail. Only add the front leg. FRONT LEG: the near front leg is bent and folded across the pale chest, elbow pointing back toward the tail, forearm coming forward so the small paw rests on the chest just below the chin. The front leg stays INSIDE the body silhouette - nothing sticks out below the chin or the body - but it is clearly READABLE as an arm: it is a fur-green shape lying on top of the pale belly, so the pale belly colour shows all around it and outlines it, exactly like the arms lying over the pale chest in the sitting mascot otter. The arm is fairly long and slim with a small rounded paw at the end."
+ }
+}

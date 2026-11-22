@@ -231,8 +231,10 @@ try {
     assert((await target.innerText()).length > 40, `${name}: actual teaching text, not just a tab or heading`)
     if (artifactDir) await teachingDocument.screenshot({ path: path.join(artifactDir, `external-review-${name}.png`) })
   }
-  assert.equal(await frame.locator('.source-relationships p').first().locator('.translation-marker').count(), 1,
-    'overlapping evidence and sentence-structure must not print the same question marker inside a word')
+  // Reading quotes each clue once, in 原文依据; the overlap of a clue and a
+  // long-sentence mark is checked on the printed passage in verify-analysis-text-ranges.
+  assert.equal(await frame.locator('.analysis-group--reading .source-relationships').count(), 0,
+    'reading prints no passage of its own')
   assert.equal(await frame.locator('[data-continuation-section="modelAnswer"] div[lang="en"]').last().locator('p').count(), 2,
     'both synthetic continuation paragraphs survive sealed projection and companion rendering')
   const teaching = await page.context().request.get(origin + teachingPath)
