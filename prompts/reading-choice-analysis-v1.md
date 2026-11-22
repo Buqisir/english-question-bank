@@ -630,12 +630,16 @@ Rules:
 
 ### 定位 (locateBy and the stem locating item)
 
-Purpose: show the reader how to get from the question to the passage. The
-stem gives the locating words (定位词); they find one passage sentence
-(定位句); the answer is either in that sentence or in its context.
+Purpose: help the reader understand the answer (where in the passage it
+comes from, and how the stem and the correct option match the passage), and
+on the way show, on this question's own words and paragraphs, how to get
+back to the passage, so the reader can do the same next time. The stem gives
+the locating words (定位词); they find one passage sentence (定位句); the
+answer is either in that sentence or in its context.
 
 Locating means finding, in the passage, the paraphrase that answers the
-question. The answer key is given; show the path a strong reader takes to it.
+question. The answer key is given; show the path a strong reader takes to it,
+in concrete words, never as a general tip.
 Three things are each decided by one thing only:
 - the 定位句 (`targetText`) is decided by the stem's clues;
 - the answer (`answerText`) is decided by the correct option: the passage
