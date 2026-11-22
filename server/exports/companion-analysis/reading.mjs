@@ -2,7 +2,7 @@ import { resolveFigureTextRegion } from '../../../shared/paper-canonical/richCon
 import { renderEvidenceQuote, renderFullTranslation, renderGroupHeading, renderHeadingLead, renderOverview, renderQuestionHeader, renderQuestionLead, renderSelectedLongSentences, renderUnderlinedText } from './blocks.mjs'
 import { answerData, passageQuote, questionData } from './paper.mjs'
 import { array, escapeHtml, exactTextRange, innerQuote, nonEmptyString, withoutClosingPunctuation } from './text.mjs'
-import { hasReadingLocate, passageSentences, resolveReadingLocate, stemLocateItems } from '../../paper-import-ai/readingLocate.mjs'
+import { PARAGRAPH_TOKEN, hasReadingLocate, passageSentences, resolveReadingLocate, stemLocateItems } from '../../paper-import-ai/readingLocate.mjs'
 
 export function readingDistractors(entry) {
   return array(entry?.optionAnalysis).filter((option) =>
@@ -232,7 +232,21 @@ function answerWhere(locate, group) {
   return step <= 2 ? `${before ? '前' : '后'}${SENTENCE_STEPS[step]}句` : `同段${before ? '前' : '后'}文`
 }
 
+// 找法 written by the analysis: the line itself, each [[paragraphId]] printed
+// the way this passage labels it. The stem words stay bold above and the
+// passage keeps its marks, so the line can point at them by name.
+function renderFind(find, group) {
+  let html = ''
+  let last = 0
+  for (const match of find.matchAll(PARAGRAPH_TOKEN)) {
+    html += escapeHtml(find.slice(last, match.index)) + escapeHtml(passagePlace(group, match[1]) || '原文')
+    last = match.index + match[0].length
+  }
+  return `<p class="evidence-locate"><span class="inline-label">定位</span>${html}${escapeHtml(find.slice(last))}</p>`
+}
+
 function renderDataLocate(locate, entry, question, group, evidence) {
+  if (locate.find) return renderFind(locate.find, group)
   if (locate.by === 'options') {
     // A method name alone tells the reader nothing: say where the correct
     // option comes from, in passage order, from its own evidence.

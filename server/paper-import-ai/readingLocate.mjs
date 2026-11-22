@@ -12,6 +12,14 @@ import { splitSentences } from '../../shared/paper-selection/segmentation.mjs'
 export const LOCATE_BY = Object.freeze(['stem', 'options', 'passage'])
 export const BRIDGE_MAX_UNITS = 25
 export const CUE_MAX_WORDS = 5
+export const FIND_MAX_UNITS = 45
+// 找法 (`locateFindZh`): one Chinese line, written on this question's own
+// words, on how a reader gets from the question back to the answer's place.
+// It names paragraphs as [[paragraphId]]; the page prints each one the way
+// the passage is labelled (第 3 段, a section head), so the line never counts
+// paragraphs on its own. With it the line says the link itself, so no
+// bridgeZh is written.
+export const PARAGRAPH_TOKEN = /\[\[([^\]\s]+)\]\]/gu
 
 const ABBREVIATION = /\b(?:Dr|Mr|Mrs|Ms|St|Prof|Jr|Sr|Mt|vs|etc|No|Co|Inc|Ltd|U\.S|e\.g|i\.e)\.\s*$/u
 const EDGE = /^[\s“"‘'(（]+|[\s”"’')）]+$/gu
@@ -132,9 +140,19 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence,
   const by = entry?.locateBy
   if (!LOCATE_BY.includes(by)) return fail('locateBy 必须是 stem、options 或 passage。')
   const items = stemLocateItems(entry)
+  const find = Object.hasOwn(entry, 'locateFindZh') ? text(entry.locateFindZh) : null
+  if (find !== null) {
+    if (!find) return fail('findZh 不能是空的。')
+    const ids = [...find.matchAll(PARAGRAPH_TOKEN)].map(match => match[1])
+    const missing = ids.find(id => typeof paragraphs.get(id) !== 'string')
+    if (missing) return fail(`findZh 里的 [[${missing}]] 不是这篇的段落。`)
+    if (/\[\[|\]\]/u.test(find.replace(PARAGRAPH_TOKEN, ''))) return fail('findZh 里段落只能写成 [[paragraphId]]。')
+    if (/第\s*[\d一二三四五六七八九十]+\s*段/u.test(find)) return fail('findZh 里不自己数段，段落写成 [[paragraphId]]。')
+    if (bridgeUnits(find.replace(PARAGRAPH_TOKEN, '第几段')) > FIND_MAX_UNITS) return fail(`findZh 不超过 ${FIND_MAX_UNITS} 字（一个英文词算一个字）。`)
+  }
   if (by !== 'stem') {
     if (items.length) return fail(`locateBy=${by} 时不写题干定位项（sourceRole stem + locationCue）。`)
-    return { errors, locate: { by } }
+    return { errors, locate: { by, ...(find ? { find } : {}) } }
   }
   if (items.length !== 1) return fail('locateBy=stem 时必须恰好有一项题干定位（sourceRole stem + locationCue）。')
   const [item] = items
@@ -187,8 +205,9 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence,
 
   const same = answer.paragraphId === paragraphId && answer.start >= sentence.start && answer.end <= sentence.end
   const bridge = text(item.bridgeZh)
+  if (find && bridge) return fail('写了 findZh 就不写 bridgeZh：找法那一句自己说清怎么从定位句到答案。')
   if (same && bridge) return fail('答案就在定位句里，不写 bridgeZh。')
-  if (!same && !bridge) return fail('答案不在定位句里，必须用 bridgeZh 写清原因。')
+  if (!find && !same && !bridge) return fail('答案不在定位句里，必须用 bridgeZh 写清原因。')
   if (bridge && bridgeUnits(bridge) > BRIDGE_MAX_UNITS) return fail(`bridgeZh 不超过 ${BRIDGE_MAX_UNITS} 字（一个英文词算一个字）。`)
 
   const optionTexts = Array.isArray(options)
@@ -203,6 +222,8 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence,
       .filter(([label, value]) => label !== answerLabel && typeof value === 'string').map(([, value]) => value)
     const echoed = bridge ? bridgeTowardDistractor({ bridge, correctText, wrongTexts, stemText }) : null
     if (echoed) return fail(`bridgeZh 里的 ${echoed} 只出现在错项里，会把学生引向干扰项，换个说法。`)
+    const findEcho = find ? bridgeTowardDistractor({ bridge: find.replace(PARAGRAPH_TOKEN, ' '), correctText, wrongTexts, stemText }) : null
+    if (findEcho) return fail(`findZh 里的 ${findEcho} 只出现在错项里，会把学生引向干扰项，换个说法。`)
   }
 
   return {
@@ -216,6 +237,7 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence,
       answer,
       same,
       bridge,
+      ...(find ? { find } : {}),
     },
   }
 }
@@ -229,6 +251,7 @@ export function withoutReadingLocate(analysis) {
   const copy = structuredClone(analysis)
   for (const entry of Object.values(copy?.questions ?? {})) {
     delete entry.locateBy
+    delete entry.locateFindZh
     if (Array.isArray(entry.locationParaphrases)) {
       entry.locationParaphrases = entry.locationParaphrases
         .filter(item => !(item?.sourceRole === 'stem' && item?.relationType === 'locationCue'))
@@ -244,8 +267,8 @@ export function mergeReadingLocate(analysis, response) {
   for (const [questionId, answer] of Object.entries(answers)) {
     const entry = merged.questions?.[questionId]
     if (!entry) throw new Error(`定位补全回复里有不存在的题：${questionId}`)
-    const unknown = Object.keys(answer ?? {}).filter(key => !['locateBy', 'locate'].includes(key))
-    if (unknown.length) throw new Error(`${questionId}: 定位补全只写 locateBy 和 locate，多了 ${unknown.join(', ')}`)
+    const unknown = Object.keys(answer ?? {}).filter(key => !['locateBy', 'locate', 'findZh'].includes(key))
+    if (unknown.length) throw new Error(`${questionId}: 定位补全只写 locateBy、locate 和 findZh，多了 ${unknown.join(', ')}`)
     const extra = Object.keys(answer.locate ?? {}).filter(key => !LOCATE_FIELDS.includes(key))
     if (extra.length) throw new Error(`${questionId}: locate 里只能有 ${LOCATE_FIELDS.join(', ')}，多了 ${extra.join(', ')}`)
     const kept = (entry.locationParaphrases ?? [])
@@ -262,6 +285,8 @@ export function mergeReadingLocate(analysis, response) {
       note: answer.locate.note,
     }] : []
     entry.locateBy = answer.locateBy
+    if (answer.findZh !== undefined) entry.locateFindZh = answer.findZh
+    else delete entry.locateFindZh
     entry.locationParaphrases = [...items, ...kept]
   }
   if (JSON.stringify(withoutReadingLocate(merged)) !== JSON.stringify(withoutReadingLocate(analysis))) {

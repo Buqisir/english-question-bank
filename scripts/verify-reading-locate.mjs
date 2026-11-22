@@ -200,8 +200,30 @@ ok('定位补全 changes nothing but 定位, and replaces an earlier stem locati
   assert.equal(merged.questions.q2.locationParaphrases.filter(item => item.sourceRole === 'stem').length, 1)
   assert.equal(merged.questions.q2.locationParaphrases[0].sourceText, 'market town')
   assert.deepEqual(withoutReadingLocate(merged), withoutReadingLocate(before))
-  assert.throws(() => mergeReadingLocate(before, { questions: { q2: { ...locate.q2, questionFocus: '改了' } } }), /只写 locateBy 和 locate/u)
+  assert.throws(() => mergeReadingLocate(before, { questions: { q2: { ...locate.q2, questionFocus: '改了' } } }), /只写 locateBy、locate 和 findZh/u)
   assert.throws(() => mergeReadingLocate(before, { questions: { q9: locate.q2 } }), /不存在的题/u)
+})
+
+ok('找法 findZh: merged as locateFindZh, replaces the bridge, names paragraphs only as [[id]]', () => {
+  const paragraphs = new Map([['p1', P1], ['p2', P2]])
+  const resolve = (questionId, findZh, change = () => {}) => {
+    const response = { [questionId]: structuredClone({ ...locate[questionId], findZh }) }
+    change(response[questionId])
+    const entry = mergeReadingLocate(analysis(), { questions: response }).questions[questionId]
+    const question = group.questions.find(item => item.id === questionId)
+    return resolveReadingLocate({ entry, stem: question.stem, paragraphs, correctEvidence: evidence[questionId], options: question.options, answer: question.answerKey })
+  }
+  const merged = mergeReadingLocate(analysis(), { questions: { q4: { locateBy: 'options', findZh: '逐项回原文对' } } })
+  assert.equal(merged.questions.q4.locateFindZh, '逐项回原文对')
+  assert.equal(withoutReadingLocate(merged).questions.q4.locateFindZh, undefined)
+  const noBridge = r => { delete r.locate.bridgeZh }
+  assert.deepEqual(resolve('q3', '抓 started 回[[p2]]，But 后才是开张后的实情', noBridge).errors, [])
+  assert.equal(resolve('q3', '抓 started 回[[p2]]', noBridge).locate.find, '抓 started 回[[p2]]')
+  assert.match(resolve('q3', '抓 started 回[[p2]]').errors[0], /不写 bridgeZh/u)
+  assert.match(resolve('q3', '抓 started 回第 2 段', noBridge).errors[0], /不自己数段/u)
+  assert.match(resolve('q3', '抓 started 回[[p9]]', noBridge).errors[0], /不是这篇的段落/u)
+  assert.match(resolve('q4', '').errors[0], /不能是空的/u)
+  assert.deepEqual(resolve('q4', '四个选项逐个回[[p1]]和[[p2]]核对').errors, [])
 })
 
 console.log(`Reading 定位 verify PASSED: ${passed} checks`)
