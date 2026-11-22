@@ -79,11 +79,26 @@ export function passagePlace(group, paragraphId) {
   }
   const labels = paragraphs.map((_, index) => short[index] ? label(index) : undefined)
   const field = index => labels[index] !== undefined && labels.filter(other => other === labels[index]).length >= 2
-  const heading = (paragraph, index) => short[index] && (index === 0 || paragraph?.role === 'subtitle' || (!listed(index) && !field(index)))
+  // A short last line heads nothing (Park Place, Cardiff CF10 3LN under the
+  // last venue), nor does a source credit (©2026 The Pew Charitable Trusts):
+  // both stay in the section above.
+  const credit = index => /^[©◎]/u.test(nonEmptyString(paragraphs[index]?.text).trim())
+  const heading = (paragraph, index) => short[index] && (index === 0 || paragraph?.role === 'subtitle'
+    || (index < paragraphs.length - 1 && !credit(index) && !listed(index) && !field(index)))
+  // On such a glued line the head is the part after the join (New Theatre in
+  // Senghennydd Road, Cardiff CF24 4YEwww. shermancymru. co. ukNew Theatre);
+  // the address before it is still the last line of the section above.
+  const glued = index => {
+    const text = nonEmptyString(paragraphs[index]?.text).trim()
+    const join = [...text.matchAll(/[a-z0-9](?=[A-Z][a-z])/gu)].at(-1)
+    return index > 0 && join && /\d/u.test(text.slice(0, join.index)) ? text.slice(join.index + 1).trim() : undefined
+  }
   const sections = []
   for (const [index, paragraph] of paragraphs.entries()) {
     if (heading(paragraph, index)) {
-      if (index > 0) sections.push({ heading: paragraph.text.trim(), ids: [] })
+      const tail = glued(index)
+      if (tail && sections.length > 0) sections.at(-1).ids.push(paragraph.paragraphId)
+      if (index > 0) sections.push({ heading: tail || paragraph.text.trim(), ids: [] })
       else sections.push({ heading: '', ids: [] })
       continue
     }
@@ -95,7 +110,7 @@ export function passagePlace(group, paragraphId) {
     else ids.push(paragraph.paragraphId)
   }
   const headingIndex = paragraphs.findIndex(paragraph => paragraph.paragraphId === paragraphId)
-  if (headingIndex >= 0 && heading(paragraphs[headingIndex], headingIndex)) return headingIndex === 0 ? '标题' : '小标题'
+  if (headingIndex >= 0 && heading(paragraphs[headingIndex], headingIndex) && !glued(headingIndex)) return headingIndex === 0 ? '标题' : '小标题'
   const headed = sections.filter(section => section.heading).length >= 2
   if (!headed) {
     const index = sections.flatMap(section => section.ids).findIndex(id => [id].flat().includes(paragraphId))

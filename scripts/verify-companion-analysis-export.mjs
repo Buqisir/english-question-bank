@@ -416,6 +416,20 @@ console.log('Companion analysis merged passage and separators: PASS')
     { paragraphId: 'd2', text: 'Walk Duration: 5 hours' },
   ] } }
   assert.equal(passagePlace(fields, 'd2'), 'Walk 2: Hills 第 2 段', 'a Label: value line whose label repeats is an info line, not a head')
+  const glued = { passage: { paragraphs: [
+    { paragraphId: 't', text: 'Theatres' },
+    { paragraphId: 'h1', text: 'St David’s Hall' },
+    { paragraphId: 'b1', text: 'St David’s Hall is the National Concert Hall of Wales.' },
+    { paragraphId: 'g1', text: 'The Hayes, Cardiff CF10 1AHwww. stdavidshallcardiff. co. ukThe Glee Club' },
+    { paragraphId: 'b2', text: 'Every weekend this is a comedy club.' },
+    { paragraphId: 'c', text: '©2026 The Glee Club' },
+    { paragraphId: 'b3', text: 'Tickets sell fast at weekends, so book early.' },
+    { paragraphId: 'e', text: 'Mermaid Quay, Cardiff CF10 5BZ' },
+  ] } }
+  assert.equal(passagePlace(glued, 'b2'), 'The Glee Club 第 1 段', 'a line with the next head glued on names that head by the glued part')
+  assert.equal(passagePlace(glued, 'g1'), 'St David’s Hall 第 2 段', 'the address before the glued head stays in the section above')
+  assert.equal(passagePlace(glued, 'b3'), 'The Glee Club 第 3 段', 'a source credit is not a head')
+  assert.equal(passagePlace(glued, 'e'), 'The Glee Club 第 4 段', 'a short last line heads nothing')
   assert.equal(passagePlace(fields, 'h1'), '小标题')
   const { passageHtml } = await import('../server/exports/companion-analysis/text.mjs')
   assert.equal(passageHtml('Raeburn\u2028Thursday 30 Oct. <b>'), 'Raeburn<br>Thursday 30 Oct. &lt;b&gt;', 'a line separator in passage words prints as a line break')

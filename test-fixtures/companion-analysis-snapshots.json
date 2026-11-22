@@ -4,12 +4,12 @@
   "test-fixtures/retired-paper-assets/paper-2020-ii": "c602334a982a0bf0356bcc38e910bf415e4437f64ea2d7e68d93c6f5bae8ab5c",
   "test-fixtures/retired-paper-assets/paper-2020-jia": "078df53d9e153127ec2bfddbda3b52910323d62cd0ffd5208251e17c6e9eeaee",
   "test-fixtures/retired-paper-assets/paper-2021-i": "1cde321a81f248b90077192680e25bc3b691c18c6873ddfa2577d032e37fdcd3",
-  "test-fixtures/retired-paper-assets/paper-2021-ii": "8022c41cd670651f0aa153278145abecfa4d4e229f32cfe05fe1ce934580301a",
+  "test-fixtures/retired-paper-assets/paper-2021-ii": "233a58498229b65d66ad9af25f36d18a2ea2eaa07c64b61db714a02027861bbc",
   "test-fixtures/retired-paper-assets/paper-2021-jia": "11e17823dea14cfff0de55832343db272fdc059f1634606b82b04b2cfbc2add7",
   "test-fixtures/retired-paper-assets/paper-2021-yi": "8a1997a45663d4306deb3e2ef61e347637a56f9d75395207d7f7e43328a15067",
   "test-fixtures/retired-paper-assets/paper-2022-i": "d6dc9128b2d8a91296f6039245206c80b026f584d9e1c09254c814184ad103a7",
   "test-fixtures/retired-paper-assets/paper-2022-ii": "f1b0eba229d61a45d3a8ff6e0e2e30ff840a4f23e7394420c42d40478aa9ce38",
-  "test-fixtures/retired-paper-assets/paper-2022-jia": "43037acc2c111da49d1048b1ce8a153fbd68ebff3292f187a3fac975af56a49b",
+  "test-fixtures/retired-paper-assets/paper-2022-jia": "27b45bab4c0670b8028c5472a501ac7f8969bc622b85ae39ec0fde4eb4670daa",
   "test-fixtures/retired-paper-assets/paper-2022-yi": "aa75c7a3647f6c9f88a349bc5967d806908cd2e00e414dd486b82121691dcded",
   "test-fixtures/retired-paper-assets/paper-2023-i": "0ab92a5fd9c3a053bed70dc329fcf8095fae6ca9006dd973fca87133840be2ae",
   "test-fixtures/retired-paper-assets/paper-2023-ii": "e66dfeee9af1ff0f57182691ceaab5cb982e81279f20e9298657cca97ffc7730",
@@ -31,7 +31,7 @@
   "test-fixtures/retired-paper-assets/paper-zj-2024-jan": "67b03a2db1ec8c8863c49e62e12ac3b0587d71956ba8680898e93d7c9b31cdab",
   "test-fixtures/retired-paper-assets/paper-zj-2025-jan": "100cf90414f6a5e29cbcf0b4331e643141b5f464bf7642a22a92eb4083b6dcc3",
   "test-fixtures/retired-paper-assets/paper-zj-2026-jan": "89a2cdec27e3f2c5512187fbf257f8e26368a07f182d338aca649acee4d2191b",
-  "app/public/paper-assets/paper-960d0f8d": "61169d8f1c03406212d5d2a7105dabd3e0e5060731f5c289e039159393bb3994",
+  "app/public/paper-assets/paper-960d0f8d": "c216f2906d3db96cac21e050f8a7498fe27eedff02a6effed0873caf87c88e9f",
   "app/public/paper-assets/paper-mock-gd-2026-m1": "2fb09985ba54804f3b4cd98b20549f5c48ae3add4823c026fb4c062eb01aceee",
   "app/public/paper-assets/paper-mock-sz-2026-m1": "1dd04cf662dfba0c1b1ece70f9e11fd7840a56521c6181d766720284d5ca6f62"
 }
