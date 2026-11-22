@@ -61,9 +61,17 @@ function isPassageHeading(paragraph) {
 // 「标题」 and 「小标题」 for the heads themselves.
 export function passagePlace(group, paragraphId) {
   const paragraphs = array(group?.passage?.paragraphs)
+  // Short lines in a row that share one shape (Week 1 | July 8 -- 12,
+  // Week 2 | July 15 -- 19: the same first two words once digits are set
+  // aside) are a list, not section heads; a marked subtitle stays a head.
+  const short = paragraphs.map(isPassageHeading)
+  const shape = index => nonEmptyString(paragraphs[index]?.text).trim().replace(/\d+/gu, '#').split(/\s+/u).slice(0, 2).join(' ')
+  const listed = index => index > 0 && ((index > 1 && short[index - 1] && shape(index - 1) === shape(index))
+    || (short[index + 1] && shape(index + 1) === shape(index)))
+  const heading = (paragraph, index) => short[index] && (index === 0 || paragraph?.role === 'subtitle' || !listed(index))
   const sections = []
   for (const [index, paragraph] of paragraphs.entries()) {
-    if (isPassageHeading(paragraph)) {
+    if (heading(paragraph, index)) {
       if (index > 0) sections.push({ heading: paragraph.text.trim(), ids: [] })
       else sections.push({ heading: '', ids: [] })
       continue
@@ -76,7 +84,7 @@ export function passagePlace(group, paragraphId) {
     else ids.push(paragraph.paragraphId)
   }
   const headingIndex = paragraphs.findIndex(paragraph => paragraph.paragraphId === paragraphId)
-  if (headingIndex >= 0 && isPassageHeading(paragraphs[headingIndex])) return headingIndex === 0 ? '标题' : '小标题'
+  if (headingIndex >= 0 && heading(paragraphs[headingIndex], headingIndex)) return headingIndex === 0 ? '标题' : '小标题'
   const headed = sections.filter(section => section.heading).length >= 2
   if (!headed) {
     const index = sections.flatMap(section => section.ids).findIndex(id => [id].flat().includes(paragraphId))
@@ -214,7 +222,15 @@ function answerWhere(locate, group) {
 }
 
 function renderDataLocate(locate, entry, question, group, evidence) {
-  if (locate.by === 'options') return '<p class="evidence-locate"><span class="inline-label">定位</span>按选项回原文</p>'
+  if (locate.by === 'options') {
+    // A method name alone tells the reader nothing: say where the correct
+    // option comes from, in passage order, from its own evidence.
+    const order = array(group?.passage?.paragraphs).map(paragraph => paragraph.paragraphId)
+    const places = [...new Set(array(evidence).map(item => item?.paragraphId).filter(id => order.includes(id))
+      .sort((left, right) => order.indexOf(left) - order.indexOf(right)).map(id => passagePlace(group, id)).filter(Boolean))]
+    return `<p class="evidence-locate"><span class="inline-label">定位</span>按选项回原文${places.length
+      ? `<span class="locate-where">正确项出自${escapeHtml(places.join('、'))}</span>` : ''}</p>`
+  }
   if (locate.by === 'passage') {
     return entry?.similarityProfile?.subtype === 'paragraph-main-idea' ? renderLocate(entry, question, group, evidence) : ''
   }

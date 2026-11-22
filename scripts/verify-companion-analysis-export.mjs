@@ -397,6 +397,24 @@ console.log('Companion analysis merged passage and separators: PASS')
   assert.equal(passagePlace(sectioned, 'b1'), 'Hereford, Herefordshire')
   assert.equal(passagePlace(sectioned, 'h2'), '小标题')
   assert.equal(passagePlace(sectioned, 'i'), '开头')
+  const listed = { passage: { paragraphs: [
+    { paragraphId: 't', text: 'Explorers Camp' },
+    { paragraphId: 'a', text: '• Full day camp for kids aged 5 -- 13.' },
+    { paragraphId: 'w1', text: 'Week 1 | July 8 -- 12' },
+    { paragraphId: 'w2', text: 'Week 2 | July 15 -- 19' },
+    { paragraphId: 'r', text: '• The last day to cancel is June 15.' },
+  ] } }
+  assert.equal(passagePlace(listed, 'r'), '第 4 段', 'short lines of one shape in a row are a list, not section heads')
+  assert.equal(passagePlace(listed, 'w2'), '第 3 段')
+
+  const optionsGroup = { groupId: 'g', groupType: 'reading', title: 'reading.a', questionIds: ['q1'], passage: plain.passage }
+  const optionsHtml = renderReadingGroup({ group: optionsGroup, answers: [], openingHeadings: '',
+    paperAsset: { content: { questions: { q1: { questionId: 'q1', questionNo: 21, groupId: 'g', stem: 'Which is true?', options: [] } } }, answerKey: { answers: { q1: { answer: 'B' } } } },
+    analysis: { groups: {}, questions: { q1: { locateBy: 'options', stemTranslationZh: '哪项正确？', similarityProfile: { family: 'detail' }, locationParaphrases: [],
+      optionAnalysis: [{ label: 'B', status: 'correct', evidence: [{ paragraphId: 'p4', quote: 'Third paragraph.' }, { paragraphId: 'p1', quote: 'First paragraph ends here.' }] }] } } } })
+  if (optionsHtml.includes('question-number')) {
+    assert.match(optionsHtml, /按选项回原文<span class="locate-where">正确项出自第 1 段、第 3 段<\/span>/u, 'the options line names where the correct option comes from')
+  }
 
   const group = { groupId: 'g', groupType: 'reading', title: 'reading.a', questionIds: ['q1'], passage: plain.passage }
   const paper = { content: { questions: { q1: { questionId: 'q1', questionNo: 21, groupId: 'g', stem: 'What does the third paragraph say?', options: [] } } },
