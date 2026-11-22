@@ -1,10 +1,10 @@
 # 阅读做题心法
 
-状态：v15 草稿（2026-11-22）。v1 和 Owner 逐条讨论后写成；v2 到 v15 按实题试做改，改了哪些见文末「版本记录」。
+状态：v16 草稿（2026-11-22），迭代收尾。v1 和 Owner 逐条讨论后写成；v2 到 v16 按实题试做改，改了哪些见文末「版本记录」。
 用途：做题时照它找定位、排除干扰项；写解析时把同一个过程写出来，就是定位行、证据和干扰项说明。
 下一步改写成 `prompts/reading-choice-analysis-v1.md` 的「定位」一节。关联 BUB-255。
 
-出处：例子都标了卷名。写年份加全国、新课标、浙江、九省联考的是真题，写城市或联盟名的是模拟卷。
+出处：例子都标了卷名。写年份加全国、新课标、浙江、九省联考、八省联考的是真题，写城市或联盟名的是模拟卷。
 - 真题例子得出的规则和模拟卷例子得出的规则冲突时，以真题为准；
 - 只从模拟卷得出的规则，不能拿来推翻真题规则；
 - 题库答案有争议的题不拿来立规则，只在版本记录里记一笔。
@@ -120,6 +120,10 @@
      outperforms many earlier studies，答案 Distinct strengths of the study。让步部分是实打实的反面论据、篇幅和正面相当时，选两面都盖住的选项。
      题干问 first、at first、originally 时，答案常在转折前，转折后是退而求其次的做法：2024 九省联考 Q25
      问 first response，答案是 Their first choice is to take flight，However 后的 fight 是陷阱。
+     题干问 at the start、initially 时，答案常在 Though、Although 引出的让步从句里，主句写的是后来的样子：2023 新课标Ⅱ Q25
+     问 What was a problem facing Jaramillo at the start of the program，Though some are initially scared of the insects and
+     turned off by the dirt, most are eager to try something new，答案 Some kids disliked garden work。
+     这和「让步句重点在主句」不冲突：题干问的是起初，答案就落在写起初的那半句。
    - 人名定位后，答案在这个人的整段话里找，不一定在带人名的那句。
    - 题干说「第 N 段」，按原卷自然段数；图、表、小标题不算一段（山东济南 Q30，缺图那块不计数，第 4 段落到图后的第三段文字）；试卷数据换页时可能把一段拆成两段，也可能把两段合成一段。段号对不上时，以对象词落的那段为准。
    - 题目顺序大致同原文顺序（主旨题除外），可用来缩小定位范围。
@@ -135,7 +139,7 @@
 |---|---|---|
 | Which would the author / X agree with；Which viewpoint might X agree with；Which is X's idea；What does X argue about Y | 是非 | 按选项；有人名先定到这个人的话 |
 | What does the experience / story show；What does the story tell us；What can we learn from X's story；Which is true of X's story（选项是谚语）；What can be learned from the text；What message does the text convey；What is the main theme / moral of the story（选项是谚语或道理） | 推断 | 问的是故事的道理，按选项；首段和末段都看，首段常先点出结果（2020 新课标Ⅰ Q27，首段 That willpower bore fruit 对应 Hard work pays off） |
-| Which (word) best describes X / X's job / X's relationship with … / the impact of X；What was X like，选项是一个形容词或名词 | 推断 | 按选项；有对象词先定段，回到描述 X 的几处逐件核对，只盖一两件的选项算太窄（2020 新课标Ⅰ Q30，Eventful 盖住乌兹别克斯坦一路四件事，Dangerous 只盖警察那一件）；成对的词先核对两个都有原文对应的那项（总原则第 1 条） |
+| Which (word) best describes X / X's job / X's relationship with … / the impact of X；What was X like，选项是一个形容词或名词；What do we know about X，选项是性格形容词（2025 八省联考 Q24） | 推断 | 按选项；有对象词先定段，回到描述 X 的几处逐件核对，只盖一两件的选项算太窄（2020 新课标Ⅰ Q30，Eventful 盖住乌兹别克斯坦一路四件事，Dangerous 只盖警察那一件）；成对的词先核对两个都有原文对应的那项（总原则第 1 条） |
 | What does X reveal / indicate / prove / show；What conclusion can be drawn from X；What inspiration / lesson does X bring | 推断 | 题眼能定句：落到 proving、showing、suggesting、indicating that 那句（江西南昌 2026 年 4 月 Q34，proving that the unseen pollution secretly governed the electrical reaction）。问的是某人的反应、做法时，先看反应本身的内容；后面 says as much about 这类评论句的原词常被干扰项照搬、改掉关系（湖北武汉 2026 年 4 月 Q25，学者惊讶作品出自八十多岁的老人，答案 Ducrot's works mask her age；Ducrot's works limit his imagination 照搬 limitations of the observer's imagination，写原词变形） |
 | Who might benefit；Which is most likely；Who is most likely to do X（把原文的研究结论套到新人物、新情境上） | 推断 | 按选项；might、most likely 表推测。套到新人物时，先从原文列出结论里的条件，再逐个人物对：福建 2026 年 M1 Q29 问谁最可能坚持 4 小时拳击课，原文 Highly hardworking and reliable individuals demonstrated strong self-discipline，答案 a disciplined teacher who seeks weight loss；「爱看拳赛」是拿常识凑的条件。原文直接写着受益、有用的对象时归细节，从题干定位（江苏苏锡常镇 2026 年 3 月 Q30，Who will benefit most according to the author，原文 the most significant benefit to people who explore the world through touch） |
 | Who will least likely benefit；Who is least likely to …（反向） | 推断 | 按选项；先圈出原文写到的受益者、适用的人，原文没提到的那项是答案；不选的几项写「原文属实」，再引原文那句（浙江宁波 2026 年 3 月 Q34，原文写到 medical uses、physics research、air chemistry，答案 A psychologist） |
@@ -183,6 +187,8 @@
   They explore mysteries of life；例子 wanted to cry、stimulated a sudden awakening 对得上 They spark emotional responses，答案是后者。
 - What can we learn / What do we know about X 归这一类或是非题：答案多是原文的直接改写，
   用对象词定位，再按选项核对。问故事的道理（learn from X's story）归推断，见「问法归哪类」。
+  选项是描写人品性格的形容词时归推断：2025 八省联考 Q24 问 What do we know about Jim Johnson from the first paragraph，
+  第 1 段写他叫得出每个孩子和宠物的名字、帮人搬东西、留意没锁的门、教人园艺，没有一句直接说他热心，答案 He's warm-hearted。
 - 顺序题（first step、second stage、after doing X）：按 First、Then、Next、Finally 排出步骤，
   分清设备自动做的事和人要做的操作；干扰项多是把后面的步骤提前。
 - 题眼落在列举上（problems like A, B and C），正确项却可能改写同一句的另一部分（which 从句）；
@@ -206,6 +212,9 @@
 - 题干带 directly、mainly、most 时，在因果链上取离结果最近的那一环：山东菏泽 2026 年 5 月 Q24 问 What directly drove Heller，
   Seeing her mother replace the water filter membranes time and again, Heller set out to find a better solution，答案 Frequent maintenance；
   读报、水污染是更早的起因。
+- 题干问 a direct result of X 时，方向反过来，在因果链上取紧跟 X 的那一环：2021 新课标Ⅰ Q30 问 What is a direct result of the Act passed in 1934，
+  Under this Act, all waterfowl hunters 16 years of age and over must annually purchase and carry a Federal Duck Stamp，
+  答案 The government has collected money；拿卖票的钱保护湿地和候鸟是更后面的结果。
 - 并列几条原因或障碍时，More critically、Above all、Most importantly 后面的是主要的：福建泉州 2026 年 3 月 Q35 问 What prevents
   the application，More critically, farmers currently get no financial motivation，答案 Lack of economic benefit for farmers。
 - 「A 改善 B」也是因果：A can improve / boost / increase B，A 就是原因（福建福州 2026 年 5 月 Q25，
@@ -233,7 +242,7 @@
 
 - 对应：
   - 祈使句；
-  - should、ought to、must、need to、had better；
+  - should、ought to、must、need to、had better、it is essential that；
   - It's a good idea to、It's worth doing、It pays to；
   - Try to、Make sure、Be sure to、Remember to、Don't forget to、require sb to；
   - Why not / Why don't you、How about / What about、Let's；
@@ -244,7 +253,9 @@
   - 反面条件：if we're not careful、otherwise、or else，说的是不这样做的后果，建议是它的反面；
   - 反问句：do we really need …?、Why should we …?，建议是它的反面（浙江金华义乌 2026 年 5 月 Q31，
     But do we really need all the data that we produce?，答案 Stop over-storage of data）。
-- 题眼还包括 advocate、call for、recommend。一段里有几处建议信号时，落在和选项改写对得上的那句。
+- 题眼还包括 advocate、call for、recommend、urge：2024 新课标Ⅱ Q34 问 What does Campbell urge people to do regarding AI development，
+  落在 She says it is essential that we keep control of artificial intelligence，答案 Make joint efforts to keep it under control。
+  一段里有几处建议信号时，落在和选项改写对得上的那句。
 - 题干问单数（the secret、the key、the best way），原文一句并列几条做法时，只盖一条的选项算太窄，
   选能盖住这几条、或说出它们共同目的的那个。例：河南郑州 2026 年 4 月 Q31，并列三条做法，
   答案对应段末 balance financial goals with personal well-being。
@@ -299,7 +310,7 @@
 
 - suggest 的两种意思：选项是做法（动词原形、to do）按建议题；选项是判断、结论按推断。
 - 只有 infer、imply、表示「暗示」的 suggest，和「问法归哪类」里归推断的几种（故事的道理、best describes X、reveal、conclusion、might 等）算这一类；
-  What can we learn / What do we know about X 归细节或是非题。
+  What can we learn / What do we know about X 归细节或是非题，选项是性格形容词时除外，归这一类。
 - 定位：题干的对象词只落在一句时，从题干定位到这句，答案不在这句就按总原则第 4 条写关系
   （2026Ⅰ Q28 的 Oaks and sweetgums 落到 produce huge amounts of … isoprene，危害在下一句，前后文展开）；
   对象词只能定到一两段时，按选项回这几段核对；没有对象词才整篇按选项找。
@@ -629,3 +640,12 @@
 - 指代：最近的名词不在选项时回段首主题句、用动词核对（湖北五地市 Q24）。
 - 定位：题眼原词所在句只用代词回指时，定位到被指的那句（镇江 Q33）。
 - 下一轮改用没引用过的真题，检查 v10 以来只从模拟卷得出的规则会不会把真题做坏。
+
+**v16（2026-11-22）**，依据第 15 轮试做：8 套心法里没引用过的真题（2021 新课标Ⅰ、Ⅱ，2023 新课标Ⅰ、Ⅱ，2024 新课标Ⅰ、Ⅱ，
+2025 新课标Ⅰ，2025 八省联考 1 月），120/120，v10 以来只从模拟卷得出的规则没有把真题做坏。这几套真题年份较早，做题的人可能见过原题，
+这一轮全对只算回归检查，不算独立证据。这一版的规则都从真题得出，且都来自做对但把握不高的题，回原文核对过。
+- 因果：direct result of X 取紧跟 X 的那一环（2021 新课标Ⅰ Q30）。
+- 「问法归哪类」：What do we know about X 选项是性格形容词时归推断（2025 八省联考 Q24），正文两处只说归细节或是非题的地方一并改了。
+- 建议：题眼补 urge，对应物补 it is essential that（2024 新课标Ⅱ Q34）。
+- 转折：问 at the start、initially 时答案常在让步从句里（2023 新课标Ⅱ Q25）。
+- 迭代到这一版收尾：模拟卷连续两轮全对，真题回归全对。接下来按开头说的，改写成 `prompts/reading-choice-analysis-v1.md` 的「定位」一节。
