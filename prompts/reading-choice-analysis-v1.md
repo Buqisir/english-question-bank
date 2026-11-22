@@ -687,7 +687,7 @@ no single sentence can carry the answer.
 | infer / imply / suggest (meaning 暗示) when the object word lands in one sentence | `stem` |
 | Who will benefit, when the passage names who benefits | `stem` |
 | Which will result in X; What will definitely disqualify: the sentence stating the general rule | `stem` |
-| Which best describes X; What was X like; What can we learn / What do we know about X; What is special / unique about X; infer / imply about X — when X, or a time, place or event in the stem, lands on one sentence and the correct option's evidence is that sentence or right next to it | `stem` |
+| Which best describes X; What was X like; What can we learn / What do we know about X; What is special / unique about X; infer / imply about X — when X, or a time, place or event in the stem, lands on one sentence and the correct option's evidence is that sentence or comes a few sentences later in the same paragraph (locate there and bridge on to it) | `stem` |
 | What do A and B / the listed things have in common, when one sentence states what they share ("All these stadiums are still …") | `stem` |
 | What do A and B have in common; What similar experience do A and B have; any comparison of two or more things, when no single sentence states it | `options` |
 | Which is true / NOT true / mentioned, and What can we learn / do we know about X, when the options' facts come from different places | `options` |
@@ -701,6 +701,10 @@ no single sentence can carry the answer.
 | the main idea or emphasis of one named paragraph | `passage` |
 
 Step 3. Choose the 定位句 (`targetText`).
+- When a name or place in the stem lands on one sentence and the answer
+  follows later in the same paragraph (a list of what X does, the turn
+  after However), locate on that sentence and bridge on; do not fall back
+  to `options` because the answer is a few sentences away.
 - Test first: if the answer sentence itself holds the stem's object word,
   or its plain counterpart (stem "the birth of Gordon", passage "Gordon was
   born"), locate there; an object word that runs through most of the
