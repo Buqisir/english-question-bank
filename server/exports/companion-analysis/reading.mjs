@@ -251,9 +251,9 @@ function answerWhere(locate, group) {
   return step <= 2 ? `${before ? '前' : '后'}${SENTENCE_STEPS[step]}句` : `同段${before ? '前' : '后'}文`
 }
 
-// 找法 written by the analysis: the line itself, each [[paragraphId]] printed
-// the way this passage labels it. The stem words stay bold above and the
-// passage keeps its marks, so the line can point at them by name.
+// The short line written by the analysis after the 定位 skeleton: from where
+// the reader lands, which way to go and what to look at. Each [[paragraphId]]
+// is printed the way this passage labels it.
 function renderFind(find, group) {
   let html = ''
   let last = 0
@@ -261,11 +261,31 @@ function renderFind(find, group) {
     html += escapeHtml(find.slice(last, match.index)) + escapeHtml(passagePlace(group, match[1]) || '原文')
     last = match.index + match[0].length
   }
-  return `<p class="evidence-locate"><span class="inline-label">定位</span>${html}${escapeHtml(find.slice(last))}</p>`
+  return `<span class="locate-find">${html}${escapeHtml(find.slice(last))}</span>`
+}
+
+// Skeleton + short line: the skeleton is printed the same way on every
+// question so the reader can scan it (the 定位词 and the paragraph, or how
+// the question is checked); the short line is this question's own words.
+function renderSkeletonLocate(locate, entry, group, evidence) {
+  const note = value => `<span class="locate-note">${escapeHtml(value)}</span>`
+  let skeleton
+  if (locate.by === 'options') skeleton = '核对选项'
+  else if (locate.by === 'passage') {
+    const named = entry?.similarityProfile?.subtype === 'paragraph-main-idea'
+      ? [...new Set(array(evidence).map(item => passagePlace(group, item?.paragraphId)).filter(Boolean))] : []
+    skeleton = named.length ? `看${escapeHtml(named.join('、'))}` : '看全文'
+  } else {
+    const place = passagePlace(group, locate.paragraphId)
+    const sameWords = locate.cue.text.toLowerCase() === locate.sourceText.toLowerCase()
+    skeleton = `<b lang="en">${escapeHtml(locate.sourceText)}</b> → ${sameWords
+      ? '' : `<b lang="en">${escapeHtml(locate.cue.text)}</b>`}${place ? note(place) : ''}`
+  }
+  return `<p class="evidence-locate"><span class="inline-label">定位</span>${skeleton}${renderFind(locate.find, group)}</p>`
 }
 
 function renderDataLocate(locate, entry, question, group, evidence) {
-  if (locate.find) return renderFind(locate.find, group)
+  if (locate.find) return renderSkeletonLocate(locate, entry, group, evidence)
   if (locate.by === 'options') {
     // A method name alone tells the reader nothing: say where the correct
     // option comes from, in passage order, from its own evidence.

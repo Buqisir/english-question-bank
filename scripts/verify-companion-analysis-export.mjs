@@ -443,6 +443,17 @@ console.log('Companion analysis merged passage and separators: PASS')
     assert.match(optionsHtml, /按选项回原文<span class="locate-where">正确项出自第 1 段、第 3 段<\/span>/u, 'the options line names where the correct option comes from')
   }
 
+  const skeleton = (locateBy, family, locateFindZh) => renderReadingGroup({ group: optionsGroup, answers: [], openingHeadings: '',
+    paperAsset: { content: { questions: { q1: { questionId: 'q1', questionNo: 21, groupId: 'g', stem: 'Which is true?', options: [] } } }, answerKey: { answers: { q1: { answer: 'B' } } } },
+    analysis: { groups: {}, questions: { q1: { locateBy, locateFindZh, stemTranslationZh: '哪项正确？', similarityProfile: { family }, locationParaphrases: [],
+      optionAnalysis: [{ label: 'B', status: 'correct', evidence: [{ paragraphId: 'p4', quote: 'Third paragraph.' }] }] } } } })
+  const checked = skeleton('options', 'detail', '四项各带地名回原文，只有 harbour 在[[p4]]写着 free')
+  if (checked.includes('question-number')) {
+    assert.match(checked, /定位<\/span>核对选项<span class="locate-find">四项各带地名回原文，只有 harbour 在第 3 段写着 free<\/span><\/p>/u,
+      'with a short line the 定位 line is the skeleton and that line, the paragraph printed the page’s way')
+    assert.match(skeleton('passage', 'main-idea', '盯住反复出现的 trust'), /定位<\/span>看全文<span class="locate-find">盯住反复出现的 trust<\/span>/u)
+  }
+
   const group = { groupId: 'g', groupType: 'reading', title: 'reading.a', questionIds: ['q1'], passage: plain.passage }
   const paper = { content: { questions: { q1: { questionId: 'q1', questionNo: 21, groupId: 'g', stem: 'What does the third paragraph say?', options: [] } } },
     answerKey: { answers: { q1: { answer: 'B' } } } }

@@ -12,12 +12,13 @@ import { splitSentences } from '../../shared/paper-selection/segmentation.mjs'
 export const LOCATE_BY = Object.freeze(['stem', 'options', 'passage'])
 export const BRIDGE_MAX_UNITS = 25
 export const CUE_MAX_WORDS = 5
-export const FIND_MAX_UNITS = 45
-// 找法 (`locateFindZh`): one Chinese line, written on this question's own
-// words, on how a reader gets from the question back to the answer's place.
-// It names paragraphs as [[paragraphId]]; the page prints each one the way
-// the passage is labelled (第 3 段, a section head), so the line never counts
-// paragraphs on its own. With it the line says the link itself, so no
+export const FIND_MAX_UNITS = 25
+// 找法 (`locateFindZh`): the short line the page prints after the 定位
+// skeleton (the 定位词 and its paragraph, 核对选项 or 看全文): from where the
+// reader lands, which way to go and what to look at, on this question's own
+// words. It names paragraphs as [[paragraphId]]; the page prints each one the
+// way the passage is labelled (第 3 段, a section head), so the line never
+// counts paragraphs on its own. With it the line says the link itself, so no
 // bridgeZh is written.
 export const PARAGRAPH_TOKEN = /\[\[([^\]\s]+)\]\]/gu
 

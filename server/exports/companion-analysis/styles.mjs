@@ -654,6 +654,12 @@ h5 {
   padding-left: 2.5em;
 }
 
+/* The short line after the 定位 skeleton: body ink, on the same line,
+   set off from the skeleton by a gap rather than a label. */
+.evidence-locate .locate-find {
+  margin-left: 0.9em;
+}
+
 .evidence-quote .evidence-bridge {
   display: block;
   color: var(--muted);
