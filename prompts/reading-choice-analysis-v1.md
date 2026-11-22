@@ -171,15 +171,17 @@ How the wrong-option sentence prints: 「**B 项**（译文）错在<名>：<you
 The reader already sees 错在, so say only what the option claims and what the
 passage actually says; never restate that it is wrong. Type names:
 - `unsupportedClaim` (无中生有): never write the name. 「原文只要求穿耐脏的衣服、按天气增减，没提团队制服。」
-- The other four may end with exactly one of 「，属黑白颠倒。」「，属对象错配。」
-  「，属范围偷换。」「，属原文词钩。」, matching `primaryType`, and only when the
-  sentence itself shows the trick: 黑白颠倒 gives the passage's words and the
-  option's opposite; 对象错配 names both objects (「是 A，不是 B」); 范围偷换 gives
-  the passage's scope and the option's wider or narrower one; 原文词钩 names the
-  borrowed English word and what it means in the passage. The export moves the
-  name to after 错在. If the sentence cannot show it, write no name.
-- Never coin other names (词族干扰, 数字钩子, 程度夸大, 属正面内容 ...). The
-  validator refuses them.
+- `sourceLexicalTrap` (原文词钩): no name either; name the borrowed English word
+  and what it means in the passage.
+- The other three may end with exactly one of 「，属张冠李戴。」「，属正反颠倒。」
+  「，属偷换范围。」 (the wording teachers know), matching `primaryType`
+  (`entityMismatch`, `polarityReversal`, `scopeShift`), and only when the sentence
+  itself shows the trick: 张冠李戴 names both objects (「是 A，不是 B」); 正反颠倒
+  gives the passage's words and the option's opposite; 偷换范围 says whether the
+  option is too wide or too narrow and gives the passage's scope. The export
+  moves the name to after 错在. If the sentence cannot show it, write no name.
+- Never coin other names (词族干扰, 数字钩子, 程度夸大, 属正面内容 ...) and do
+  not use 对象错配, 黑白颠倒, 范围偷换. The validator refuses other names.
 
 `questionFocus` is one concise, concrete Chinese sentence about the work this
 question asks the student to do. It may name the familiar exam question type,

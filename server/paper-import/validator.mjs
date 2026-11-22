@@ -390,7 +390,7 @@ function validateReadingAnalysisBundle({ asset, answerKey, analyses, blockingIss
         const trapTail = isCorrect ? '' : trapTailIssue(option.trap)
         if (trapTail) {
           blockingIssues.push(issue('blocking', 'analysis.trapNameTail', `${questionId} ${option.label}: ${trapTail}`, {
-            suggestedFix: '无中生有不写名；其余四类只在句子写出骗法时句尾写「，属<名>。」，否则不写名字。',
+            suggestedFix: '无中生有、原文词钩不写名；张冠李戴、正反颠倒、偷换范围只在句子写出骗法时句尾写「，属<名>。」，否则不写名字。',
           }))
         }
         const evidenceRows = isCorrect ? option.evidence || [] : option.trapEvidence || []
