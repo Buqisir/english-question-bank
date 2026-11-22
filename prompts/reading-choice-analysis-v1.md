@@ -647,8 +647,9 @@ says how the two are linked (see `bridgeZh`).
 
 `locateBy` (question level, required):
 - `stem` — words in the stem point to one sentence.
-- `options` — the stem points to a paragraph at most; the reader checks each
-  option against the passage. The options' own evidence already shows where.
+- `options` — no single sentence can carry the answer: the options have to
+  be checked one by one in different places. The options' own evidence
+  already shows where. Use it only for the forms marked `options` below.
 - `passage` — the question is about a whole text or one named paragraph as a
   whole. No locating words; the paragraph the question names is shown from
   the correct option's evidence.
@@ -669,7 +670,9 @@ Step 1. Read the stem for one or two clues.
   sentence ("What does humans' absence imply"), follow the one that fixes a
   sentence and locate from the stem.
 
-Step 2. Choose `locateBy` by the question form.
+Step 2. Choose `locateBy` by the question form. A reader should see a
+定位句 whenever one exists, so `options` is kept for the few forms where
+no single sentence can carry the answer.
 
 | Question form | `locateBy` |
 | --- | --- |
@@ -684,11 +687,10 @@ Step 2. Choose `locateBy` by the question form.
 | infer / imply / suggest (meaning 暗示) when the object word lands in one sentence | `stem` |
 | Who will benefit, when the passage names who benefits | `stem` |
 | Which will result in X; What will definitely disqualify: the sentence stating the general rule | `stem` |
-| Which is true / NOT true / mentioned; Which would X agree with; What does X argue | `options` |
-| What can we learn / What do we know about X, when the options are facts or character adjectives | `options` |
-| What is special / unique about X; What do A and B have in common; findings, features | `options` |
-| Which best describes X; What was X like | `options` |
-| infer / imply about X when X only fixes a paragraph | `options` |
+| Which best describes X; What was X like; What can we learn / What do we know about X; What is special / unique about X; infer / imply about X — when X, or a time, place or event in the stem, lands on one sentence and the correct option's evidence is that sentence or right next to it | `stem` |
+| What do A and B have in common; What similar experience do A and B have; any comparison of two or more things | `options` |
+| Which is true / NOT true / mentioned, and What can we learn / do we know about X, when the options' facts come from different places | `options` |
+| Which would X agree with; What does X argue (checking the options against X's words) | `options` |
 | Who is most / least likely to …; Who might benefit (applying the passage to new people) | `options` |
 | the purpose of paragraphs N and M; how paragraph N is developed; What do paragraphs N–M talk about | `options` |
 | the main idea, best title or purpose of the whole text; the author's attitude to the whole topic | `passage` |
@@ -697,8 +699,13 @@ Step 2. Choose `locateBy` by the question form.
 | the main idea or emphasis of one named paragraph | `passage` |
 
 Step 3. Choose the 定位句 (`targetText`).
-- Test first: if the answer sentence itself holds a counterpart of the stem
-  clue, locate there. Do not land on another sentence and bridge back.
+- Test first: if the answer sentence itself holds the stem's object word,
+  or its plain counterpart (stem "the birth of Gordon", passage "Gordon was
+  born"), locate there; do not land on another sentence and bridge back.
+  If the answer sentence does not hold it, locate on the sentence that
+  does, and let the bridge lead on to the answer. Never skip the stem's
+  anchor (a name, a time, a place, a source such as "the study in
+  Science") to land on a sentence that only shares a common word.
 - Read the 定位句 to its end. A dash, colon or closing clause is often the
   answer.
 - When two sentences both match the clue, choose the one that answers the
@@ -709,9 +716,12 @@ Step 3. Choose the 定位句 (`targetText`).
 - The counterpart may be a sentence feature, not a word: an imperative, or
   should / must / need to / it is essential that, for advice; a because
   clause for a cause; to do / so that / in order to for a purpose; an if
-  clause for a condition. When the 定位句 holds the feature but not the
-  object word, use the 题眼 as `sourceText` and the feature words as
-  `targetCue` (stem "suggest", passage "Don't leave"). When the 定位句
+  clause for a condition. Only for advice (suggest, advise, recommend,
+  urge, should), and only when the 定位句 holds no object word, use the 题眼
+  as `sourceText` and the feature words as `targetCue` (stem "suggest",
+  passage "Don't leave"). Never pair words such as purpose, parts, happen
+  or benefit with a loosely related passage word: when no natural pair
+  exists, locate on the sentence with the object word. When the 定位句
   holds the object word, the object word is `sourceText`, even if the 题眼
   also matches.
 
@@ -763,9 +773,11 @@ Fields of that item:
   the deciding words, not the whole evidence.
 - `bridgeZh` — only when `answerText` is NOT inside `targetText`: one short
   Chinese line, at most 25 units (each Chinese character and each English
-  word counts as one), saying WHY the answer is in the context. Start with
-  the name of the link, then a colon, then the reason. There are six links;
-  use exactly one:
+  word counts as one), saying WHY the answer is in the context. Say the
+  concrete link in plain words: which word points to what ("she 指新生的
+  小犀牛"), what the turn is ("But 后才是实际情况"), which sentence gives the
+  cause. Do not write the link's name; the six links below only help you
+  decide what to say:
   - 指代回指 — a pronoun or summary word in the 定位句 (it, there, this,
     such, the issue) points to the answer elsewhere;
   - 例子 — the 定位句 is an example, a figure or a quoted expert, and the
@@ -783,10 +795,10 @@ Fields of that item:
     `targetText` and the most telling other place in `answerText`.
   "Why does the author mention X", "What does the author want to show by
   telling X": the link is 例子.
-  To name it, first ask whether the correct option is incomplete without
+  To choose, first ask whether the correct option is incomplete without
   one of several places: if so, 多处合并. Otherwise take the first that
   fits, in this order: 例子, 转折, 指代回指, 叙事因果, 前后文展开. The order
-  only names the link; the answer is always where the correct option points.
+  only picks the link; the answer is always where the correct option points.
   A pronoun in the answer sentence pointing back to the 定位句 is
   前后文展开; only a pronoun in the 定位句 pointing away is 指代回指.
   If none of the six fits, the 定位句 is probably wrong; locate again.
@@ -820,7 +832,7 @@ Example, answer in the context (a pronoun points back):
   "targetParagraphId": "para-...",
   "relationType": "locationCue",
   "answerText": "an old clock tower stands at the edge of the village",
-  "bridgeZh": "指代回指：there 指 old clock tower",
+  "bridgeZh": "there 指 old clock tower",
   "note": "题干 the golden key 原词出现在第 3 段。"
 }
 ```
@@ -836,7 +848,7 @@ Example, the passage uses other words:
   "relationType": "locationCue",
   "targetCue": "opened",
   "answerText": "the shop was full every morning",
-  "bridgeZh": "转折：But 后是实际情况，和预期相反",
+  "bridgeZh": "But 后是实际情况，和预期相反",
   "note": "题干 started 对应原文 opened。"
 }
 ```
