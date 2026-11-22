@@ -654,10 +654,11 @@ h5 {
   padding-left: 2.5em;
 }
 
-/* The short line after the 定位 skeleton: body ink, on the same line,
-   set off from the skeleton by a gap rather than a label. */
+/* The analysis's own line under the 定位 skeleton: like 「答案不在定位句」,
+   on its own line in body ink, lined up with the skeleton. */
 .evidence-locate .locate-find {
-  margin-left: 0.9em;
+  display: block;
+  padding-left: 2.5em;
 }
 
 .evidence-quote .evidence-bridge {

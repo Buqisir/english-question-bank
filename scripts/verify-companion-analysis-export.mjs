@@ -447,17 +447,18 @@ console.log('Companion analysis merged passage and separators: PASS')
     paperAsset: { content: { questions: { q1: { questionId: 'q1', questionNo: 21, groupId: 'g', stem: 'Which is true?', options: [] } } }, answerKey: { answers: { q1: { answer: 'B' } } } },
     analysis: { groups: {}, questions: { q1: { locateBy, locateFindZh, stemTranslationZh: '哪项正确？', similarityProfile: { family }, locationParaphrases: [],
       optionAnalysis: [{ label: 'B', status: 'correct', evidence: [{ paragraphId: 'p4', quote: 'Third paragraph.' }] }] } } } })
-  const checked = skeleton('options', 'detail', '四项各带地名回原文，只有 harbour 在[[p4]]写着 free')
+  const checked = skeleton('options', 'detail', '各带地名回原文，[[p4]]写着 free')
   if (checked.includes('question-number')) {
-    assert.match(checked, /定位<\/span>核对选项<span class="locate-find">四项各带地名回原文，只有 harbour 在第 3 段写着 free<\/span><\/p>/u,
+    assert.match(checked, /定位<\/span>核对选项<span class="locate-find">各带地名回原文，第 3 段写着 free<\/span><\/p>/u,
       'with a short line the 定位 line is the skeleton and that line, the paragraph printed the page’s way')
     assert.match(skeleton('passage', 'main-idea', '盯住反复出现的 trust'), /定位<\/span>看全文<span class="locate-find">盯住反复出现的 trust<\/span>/u)
     const same = renderReadingGroup({ group: optionsGroup, answers: [], openingHeadings: '',
       paperAsset: { content: { questions: { q1: { questionId: 'q1', questionNo: 21, groupId: 'g', stem: 'What happens here?', options: [] } } }, answerKey: { answers: { q1: { answer: 'B' } } } },
-      analysis: { groups: {}, questions: { q1: { locateBy: 'stem', locateFindZh: '往后读', stemTranslationZh: '这里发生了什么？', similarityProfile: { family: 'detail' },
+      analysis: { groups: {}, questions: { q1: { locateBy: 'stem', locateFindZh: '', stemTranslationZh: '这里发生了什么？', similarityProfile: { family: 'detail' },
         locationParaphrases: [{ sourceText: 'here', sourceRole: 'stem', targetText: 'First paragraph ends here.', targetParagraphId: 'p1', relationType: 'locationCue', answerText: 'First paragraph ends' }],
         optionAnalysis: [{ label: 'B', status: 'correct', evidence: [{ paragraphId: 'p1', quote: 'First paragraph ends here.' }] }] } } } })
-    assert.match(same, /定位<\/span><b lang="en">here<\/b><span class="locate-note">/u, 'when the passage repeats the stem word the skeleton prints it once, with no arrow')
+    assert.match(same, /定位<\/span><b lang="en">here<\/b><span class="locate-note">第 1 段<\/span><\/p>/u,
+      'when the passage repeats the stem word the skeleton prints it once, with no arrow; an empty line under it prints nothing, not 原词')
   }
 
   const group = { groupId: 'g', groupType: 'reading', title: 'reading.a', questionIds: ['q1'], passage: plain.passage }

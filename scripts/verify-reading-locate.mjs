@@ -204,7 +204,7 @@ ok('定位补全 changes nothing but 定位, and replaces an earlier stem locati
   assert.throws(() => mergeReadingLocate(before, { questions: { q9: locate.q2 } }), /不存在的题/u)
 })
 
-ok('找法 findZh: merged as locateFindZh, replaces the bridge, names paragraphs only as [[id]]', () => {
+ok('找法 findZh: merged as locateFindZh, sits beside the bridge, short, one signal word, names paragraphs only as [[id]]', () => {
   const paragraphs = new Map([['p1', P1], ['p2', P2]])
   const resolve = (questionId, findZh, change = () => {}) => {
     const response = { [questionId]: structuredClone({ ...locate[questionId], findZh }) }
@@ -217,13 +217,17 @@ ok('找法 findZh: merged as locateFindZh, replaces the bridge, names paragraphs
   assert.equal(merged.questions.q4.locateFindZh, '逐项回原文对')
   assert.equal(withoutReadingLocate(merged).questions.q4.locateFindZh, undefined)
   const noBridge = r => { delete r.locate.bridgeZh }
-  assert.deepEqual(resolve('q3', '抓 started 回[[p2]]，But 后才是开张后的实情', noBridge).errors, [])
-  assert.equal(resolve('q3', '抓 started 回[[p2]]', noBridge).locate.find, '抓 started 回[[p2]]')
-  assert.match(resolve('q3', '抓 started 回[[p2]]').errors[0], /不写 bridgeZh/u)
-  assert.match(resolve('q3', '抓 started 回第 2 段', noBridge).errors[0], /不自己数段/u)
-  assert.match(resolve('q3', '抓 started 回[[p9]]', noBridge).errors[0], /不是这篇的段落/u)
+  assert.deepEqual(resolve('q3', '往后读，看 But 后').errors, [])
+  assert.equal(resolve('q3', '看[[p2]]的 But 后').locate.find, '看[[p2]]的 But 后')
+  assert.match(resolve('q3', '看 But 后', noBridge).errors[0], /必须用 bridgeZh/u)
+  assert.match(resolve('q3', '', noBridge).errors[0], /必须用 bridgeZh/u)
+  assert.match(resolve('q3', '').errors[0], /往哪走、找什么/u)
+  assert.match(resolve('q3', '看 But 后的 the shop was empty').errors[0], /英文最多/u)
+  assert.match(resolve('q3', '往后读两句再看转折之后的实际情况是什么').errors[0], /不超过 16 字/u)
+  assert.match(resolve('q3', '看第 2 段 But 后').errors[0], /不自己数段/u)
+  assert.match(resolve('q3', '看[[p9]]的 But 后').errors[0], /不是这篇的段落/u)
   assert.match(resolve('q4', '').errors[0], /不能是空的/u)
-  assert.deepEqual(resolve('q4', '四个选项逐个回[[p1]]和[[p2]]核对').errors, [])
+  assert.deepEqual(resolve('q4', '逐项回[[p1]]和[[p2]]核对').errors, [])
 })
 
 console.log(`Reading 定位 verify PASSED: ${passed} checks`)

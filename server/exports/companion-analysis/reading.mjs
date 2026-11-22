@@ -251,9 +251,9 @@ function answerWhere(locate, group) {
   return step <= 2 ? `${before ? '前' : '后'}${SENTENCE_STEPS[step]}句` : `同段${before ? '前' : '后'}文`
 }
 
-// The short line written by the analysis after the 定位 skeleton: from where
-// the reader lands, which way to go and what to look at. Each [[paragraphId]]
-// is printed the way this passage labels it.
+// The analysis's own second line under the 定位 skeleton: one move from where
+// the reader lands and what to look for. Each [[paragraphId]] is printed the
+// way this passage labels it.
 function renderFind(find, group) {
   let html = ''
   let last = 0
@@ -261,12 +261,13 @@ function renderFind(find, group) {
     html += escapeHtml(find.slice(last, match.index)) + escapeHtml(passagePlace(group, match[1]) || '原文')
     last = match.index + match[0].length
   }
-  return `<span class="locate-find">${html}${escapeHtml(find.slice(last))}</span>`
+  return find ? `<span class="locate-find">${html}${escapeHtml(find.slice(last))}</span>` : ''
 }
 
-// Skeleton + short line: the skeleton is printed the same way on every
+// Skeleton + second line: the skeleton is printed the same way on every
 // question so the reader can scan it (the 定位词 and the paragraph, or how
-// the question is checked); the short line is this question's own words.
+// the question is checked); the second line, under it, is this question's
+// own move. Why the answer follows is the bridge under the quote.
 function renderSkeletonLocate(locate, entry, group, evidence) {
   const note = value => `<span class="locate-note">${escapeHtml(value)}</span>`
   let skeleton
@@ -285,7 +286,7 @@ function renderSkeletonLocate(locate, entry, group, evidence) {
 }
 
 function renderDataLocate(locate, entry, question, group, evidence) {
-  if (locate.find) return renderSkeletonLocate(locate, entry, group, evidence)
+  if (typeof locate.find === 'string') return renderSkeletonLocate(locate, entry, group, evidence)
   if (locate.by === 'options') {
     // A method name alone tells the reader nothing: say where the correct
     // option comes from, in passage order, from its own evidence.

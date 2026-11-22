@@ -12,14 +12,16 @@ import { splitSentences } from '../../shared/paper-selection/segmentation.mjs'
 export const LOCATE_BY = Object.freeze(['stem', 'options', 'passage'])
 export const BRIDGE_MAX_UNITS = 25
 export const CUE_MAX_WORDS = 5
-export const FIND_MAX_UNITS = 25
-// 找法 (`locateFindZh`): the short line the page prints after the 定位
-// skeleton (the 定位词 and its paragraph, 核对选项 or 看全文): from where the
-// reader lands, which way to go and what to look at, on this question's own
-// words. It names paragraphs as [[paragraphId]]; the page prints each one the
-// way the passage is labelled (第 3 段, a section head), so the line never
-// counts paragraphs on its own. With it the line says the link itself, so no
-// bridgeZh is written.
+export const FIND_MAX_UNITS = 16
+export const FIND_MAX_ENGLISH_WORDS = 2
+// 找法 (`locateFindZh`): the second line under the 定位 skeleton (the 定位词
+// and its paragraph, 核对选项 or 看全文): one move from where the reader lands
+// and what to look for there (往前一句找原因, 看 but 后), with at most one
+// signal word in English. It names paragraphs as [[paragraphId]]; the page
+// prints each one the way the passage is labelled (第 3 段, a section head),
+// so the line never counts paragraphs on its own. An empty string means the
+// answer is in the 定位句 and there is nothing more to point at. Why the
+// answer follows stays in bridgeZh, under the quote.
 export const PARAGRAPH_TOKEN = /\[\[([^\]\s]+)\]\]/gu
 
 const ABBREVIATION = /\b(?:Dr|Mr|Mrs|Ms|St|Prof|Jr|Sr|Mt|vs|etc|No|Co|Inc|Ltd|U\.S|e\.g|i\.e)\.\s*$/u
@@ -143,17 +145,18 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence,
   const items = stemLocateItems(entry)
   const find = Object.hasOwn(entry, 'locateFindZh') ? text(entry.locateFindZh) : null
   if (find !== null) {
-    if (!find) return fail('findZh 不能是空的。')
+    if (!find && by !== 'stem') return fail(`locateBy=${by} 时 findZh 不能是空的。`)
     const ids = [...find.matchAll(PARAGRAPH_TOKEN)].map(match => match[1])
     const missing = ids.find(id => typeof paragraphs.get(id) !== 'string')
     if (missing) return fail(`findZh 里的 [[${missing}]] 不是这篇的段落。`)
     if (/\[\[|\]\]/u.test(find.replace(PARAGRAPH_TOKEN, ''))) return fail('findZh 里段落只能写成 [[paragraphId]]。')
     if (/第\s*[\d一二三四五六七八九十]+\s*段/u.test(find)) return fail('findZh 里不自己数段，段落写成 [[paragraphId]]。')
     if (bridgeUnits(find.replace(PARAGRAPH_TOKEN, '第几段')) > FIND_MAX_UNITS) return fail(`findZh 不超过 ${FIND_MAX_UNITS} 字（一个英文词算一个字）。`)
+    if ((find.replace(PARAGRAPH_TOKEN, ' ').match(LATIN_WORD) ?? []).length > FIND_MAX_ENGLISH_WORDS) return fail(`findZh 里英文最多 ${FIND_MAX_ENGLISH_WORDS} 个词（一个信号词），别抄原文短语。`)
   }
   if (by !== 'stem') {
     if (items.length) return fail(`locateBy=${by} 时不写题干定位项（sourceRole stem + locationCue）。`)
-    return { errors, locate: { by, ...(find ? { find } : {}) } }
+    return { errors, locate: { by, ...(find !== null ? { find } : {}) } }
   }
   if (items.length !== 1) return fail('locateBy=stem 时必须恰好有一项题干定位（sourceRole stem + locationCue）。')
   const [item] = items
@@ -206,9 +209,9 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence,
 
   const same = answer.paragraphId === paragraphId && answer.start >= sentence.start && answer.end <= sentence.end
   const bridge = text(item.bridgeZh)
-  if (find && bridge) return fail('写了 findZh 就不写 bridgeZh：找法那一句自己说清怎么从定位句到答案。')
   if (same && bridge) return fail('答案就在定位句里，不写 bridgeZh。')
-  if (!find && !same && !bridge) return fail('答案不在定位句里，必须用 bridgeZh 写清原因。')
+  if (!same && !bridge) return fail('答案不在定位句里，必须用 bridgeZh 写清原因。')
+  if (find === '' && !same) return fail('答案不在定位句里，findZh 要写往哪走、找什么。')
   if (bridge && bridgeUnits(bridge) > BRIDGE_MAX_UNITS) return fail(`bridgeZh 不超过 ${BRIDGE_MAX_UNITS} 字（一个英文词算一个字）。`)
 
   const optionTexts = Array.isArray(options)
@@ -238,7 +241,7 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence,
       answer,
       same,
       bridge,
-      ...(find ? { find } : {}),
+      ...(find !== null ? { find } : {}),
     },
   }
 }
