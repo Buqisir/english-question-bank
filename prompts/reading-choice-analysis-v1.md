@@ -167,6 +167,20 @@ claim fails when returned to the passage. Do not stop after naming the trap.
 the passage actually discusses so the student can see the boundary. Never turn
 “not mentioned” into “does not exist in reality.”
 
+How the wrong-option sentence prints: 「**B 项**（译文）错在<名>：<your sentence>」.
+The reader already sees 错在, so say only what the option claims and what the
+passage actually says; never restate that it is wrong. Type names:
+- `unsupportedClaim` (无中生有): never write the name. 「原文只要求穿耐脏的衣服、按天气增减，没提团队制服。」
+- The other four may end with exactly one of 「，属黑白颠倒。」「，属对象错配。」
+  「，属范围偷换。」「，属原文词钩。」, matching `primaryType`, and only when the
+  sentence itself shows the trick: 黑白颠倒 gives the passage's words and the
+  option's opposite; 对象错配 names both objects (「是 A，不是 B」); 范围偷换 gives
+  the passage's scope and the option's wider or narrower one; 原文词钩 names the
+  borrowed English word and what it means in the passage. The export moves the
+  name to after 错在. If the sentence cannot show it, write no name.
+- Never coin other names (词族干扰, 数字钩子, 程度夸大, 属正面内容 ...). The
+  validator refuses them.
+
 `questionFocus` is one concise, concrete Chinese sentence about the work this
 question asks the student to do. It may name the familiar exam question type,
 but it must not expose internal enum names or repeat the full answer analysis.
@@ -545,7 +559,7 @@ Chinese label: 无中生有
 {
   "primaryType": "unsupportedClaim",
   "claim": "the unsupported claim text",
-  "explanation": "Chinese explanation stating 原文未提及"
+  "explanation": "Chinese explanation stating what the passage does not say; no type name"
 }
 ```
 

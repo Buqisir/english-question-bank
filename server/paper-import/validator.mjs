@@ -1,4 +1,5 @@
 import Ajv from 'ajv/dist/2020.js'
+import { trapTailIssue } from './trapVerdict.mjs'
 import { createHash } from 'node:crypto'
 import { existsSync, readdirSync, readFileSync } from 'node:fs'
 import path from 'node:path'
@@ -386,6 +387,12 @@ function validateReadingAnalysisBundle({ asset, answerKey, analyses, blockingIss
       }
       for (const option of analysis.optionAnalysis || []) {
         const isCorrect = option.status === 'correct'
+        const trapTail = isCorrect ? '' : trapTailIssue(option.trap)
+        if (trapTail) {
+          blockingIssues.push(issue('blocking', 'analysis.trapNameTail', `${questionId} ${option.label}: ${trapTail}`, {
+            suggestedFix: '无中生有不写名；其余四类只在句子写出骗法时句尾写「，属<名>。」，否则不写名字。',
+          }))
+        }
         const evidenceRows = isCorrect ? option.evidence || [] : option.trapEvidence || []
         if (option.trap?.primaryType === 'unsupportedClaim' && Array.isArray(option.trapEvidence) && option.trapEvidence.length > 0) {
           delete option.trapEvidence
