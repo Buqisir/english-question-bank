@@ -703,7 +703,7 @@ no single sentence can carry the answer.
 | the main idea, best title or purpose of the whole text; the author's attitude to the whole topic | `passage` |
 | Where is the text taken from; Who is it written for; What will follow; the author's primary concern | `passage` |
 | What can be learned from the text, when the options are noun phrases summing up the text | `passage` |
-| What can we infer / learn from paragraph N or the last paragraph, when the options are separate claims to check against that paragraph | `options` |
+| What can we infer / learn from paragraph N or the last paragraph: read that paragraph as a whole | `passage` |
 | the main idea or emphasis of one named paragraph | `passage` |
 
 Step 3. Choose the 定位句 (`targetText`).
@@ -809,6 +809,9 @@ Fields of that item:
   terrified her, but last summer she finally swam across the lake": keep
   from "swimming had always terrified her" through "swam across the lake").
   Trim only words the option does not rewrite.
+  For a word-meaning question, `answerText` is the context clue that gives
+  the meaning (a restatement, a contrast, an example next to the word), not
+  the word or its own phrase.
 - `bridgeZh` — only when `answerText` is NOT inside `targetText`: one short
   Chinese line, at most 25 units (each Chinese character and each English
   word counts as one), saying WHY the answer is in the context. Say the
