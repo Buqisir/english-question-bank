@@ -138,7 +138,9 @@ assert.ok(html.indexOf('第三部分 语言运用') < html.indexOf('第四部分
 assert.equal((html.match(/class="question question--/gu) || []).length, 45)
 
 assert.ok(html.includes('篇章大意'))
-assert.ok(html.includes('干扰项辨析'))
+assert.ok(!html.includes('干扰项辨析'))
+assert.match(html, /class="reading-distractor-item"><b>[A-D] 项<\/b>(?:（[^）]*）)?错在：/u)
+assert.match(html, /class="cloze-distractor-item"><b>[A-D] 项<\/b>（[^）]*）意为：/u)
 assert.equal((html.match(/class="reading-distractor-item"/gu) || []).length, 45)
 assert.equal((html.match(/class="cloze-distractor-item"/gu) || []).length, 45)
 assert.ok(html.includes('原文依据'))

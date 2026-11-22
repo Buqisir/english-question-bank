@@ -29,7 +29,7 @@ export function renderListeningGroup({ group, title, paperAsset, analysis, answe
         ${renderQuestionLead(heading, `<p class="question-stem">${escapeHtml(question.stemTranslationZh)}</p>
           <ul class="listening-options">${options}</ul>${renderEvidenceQuote([question.evidence?.quote])}`)}
         <p class="analysis-prose">${escapeHtml(question.reasonZh)}</p>
-        ${distractors.length ? `<div class="distractor"><span class="micro-heading">干扰项辨析</span>${distractors.map((item) => `<p><b>${escapeHtml(item.label)} 项</b>：${escapeHtml(item.explanationZh)}</p>`).join('')}</div>` : ''}
+        ${distractors.length ? `<div class="distractor">${distractors.map((item) => `<p><b>${escapeHtml(item.label)} 项</b>错在：${escapeHtml(item.explanationZh)}</p>`).join('')}</div>` : ''}
       </section>`
     }).join('')
     const groupHeadings = index === 0 ? openingHeadings + renderGroupHeading(title || group.title || '听力', answers) : ''

@@ -32,7 +32,7 @@ export function renderSevenChoicesGroup({ group, title, paperAsset, analysis, an
       ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer),
         renderContextChain(entry, optionText, figures && group, question.questionNo))}
       ${entry.optionFit?.fitSummary ? `<p class="analysis-prose">${escapeHtml(entry.optionFit.fitSummary)}</p>` : ''}
-      ${distractors.length ? `<div class="distractor"><span class="micro-heading">干扰项辨析</span>${distractors.map((item) => `<p><b>${escapeHtml(item.optionLabel)} 项</b>：${escapeHtml(item.reason)}</p>`).join('')}</div>` : ''}
+      ${distractors.length ? `<div class="distractor">${distractors.map((item) => `<p><b>${escapeHtml(item.optionLabel)} 项</b>错在：${escapeHtml(item.reason)}</p>`).join('')}</div>` : ''}
     </section>`
   }).join('')
   return `<section class="analysis-group analysis-group--seven">

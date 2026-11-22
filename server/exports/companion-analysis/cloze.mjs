@@ -11,7 +11,7 @@ export function renderClozeGroup({ group, title, paperAsset, analysis, answers, 
     if (!question || !answer || !entry) return ''
     const glosses = array(entry.distractorGlosses).filter((item) => item?.optionLabel && item?.meaning)
     const reason = entry.correctFit?.reason ? `<p class="analysis-prose">${escapeHtml(entry.correctFit.reason)}</p>` : ''
-    const distractors = glosses.length > 0 ? `<div class="distractor distractor--cloze"><span class="micro-heading">干扰项辨析</span><div>${glosses.map((item) => `<p class="cloze-distractor-item"><b>${escapeHtml(item.optionLabel)} 项</b>（${escapeHtml(item.optionText)}）：${escapeHtml(item.meaning)}</p>`).join('')}</div></div>` : ''
+    const distractors = glosses.length > 0 ? `<div class="distractor distractor--cloze"><div>${glosses.map((item) => `<p class="cloze-distractor-item"><b>${escapeHtml(item.optionLabel)} 项</b>（${escapeHtml(item.optionText)}）意为：${escapeHtml(item.meaning)}</p>`).join('')}</div></div>` : ''
     return `<section class="question question--cloze">
       ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer, answerOptionText(question, answer)), reason || distractors)}
       ${reason ? distractors : ''}

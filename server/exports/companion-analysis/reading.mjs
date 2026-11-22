@@ -414,7 +414,7 @@ export function renderReadingGroup({ group, title, paperAsset, analysis, answers
       locate?.by === 'stem' ? renderLocateQuote(locate, group, correct, underlineTexts) : renderEvidenceQuote(quotes, underlineTexts),
       renderParaphrase(entry, answer),
       ...reasoning.map((item) => `<p class="analysis-prose">${escapeHtml(item)}</p>`),
-      distractors.length > 0 ? `<div class="distractor distractor--reading"><span class="micro-heading">干扰项辨析</span><div>${distractors.map((distractor) => `<p class="reading-distractor-item"><b>${escapeHtml(distractor.label)} 项</b>${distractor.optionTranslationZh ? `（${escapeHtml(distractor.optionTranslationZh)}）` : ''}：${escapeHtml(nonEmptyString(distractor.trap.explanation) || distractor.trap.relationNote)}</p>`).join('')}</div></div>` : '',
+      distractors.length > 0 ? `<div class="distractor distractor--reading"><div>${distractors.map((distractor) => `<p class="reading-distractor-item"><b>${escapeHtml(distractor.label)} 项</b>${distractor.optionTranslationZh ? `（${escapeHtml(distractor.optionTranslationZh)}）` : ''}错在：${escapeHtml(nonEmptyString(distractor.trap.explanation) || distractor.trap.relationNote)}</p>`).join('')}</div></div>` : '',
     ].filter(Boolean)
     return `<section class="question question--reading">
       ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer), first)}

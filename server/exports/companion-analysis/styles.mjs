@@ -680,11 +680,6 @@ h5 {
   display: contents;
 }
 
-/* The label runs in beside the first item instead of taking a line. */
-.distractor > .micro-heading {
-  float: left;
-}
-
 .distractor b {
   font-family: var(--en);
 }
@@ -816,7 +811,7 @@ dd {
   display: block;
 }
 
-/* 读后续写原文理解: the row name runs in as a Label, like 干扰项辨析, so the
+/* 读后续写原文理解: the row name runs in as a Label, so the
    story map is one level under 原文理解 instead of two. */
 .story-map > div {
   clear: both;

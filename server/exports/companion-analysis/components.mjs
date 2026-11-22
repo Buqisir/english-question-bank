@@ -35,7 +35,7 @@ export const analysisComponents = [
     classes: ['analysis-prose'] },
   { name: 'EvidenceQuote', role: '原文依据：定位（题干词 → 第几段）、引号引原句并淡绿底、同义替换（对应选项）；分析写了定位时，引文按原文顺序合并定位句和答案句，定位词加粗，答案不在定位句里时下接一行原因，阅读开头一行图例',
     classes: ['evidence-quote', 'evidence-locate', 'evidence-paraphrase', 'evidence-bridge', 'locate-cue', 'locate-legend', 'locate-note', 'locate-where', 'locate-find'] },
-  { name: 'Distractors', role: '干扰项辨析：选项字母粗体，一项一行',
+  { name: 'Distractors', role: '干扰项：不设标签，一项一行，写「X 项（选项译文）错在：」，完形写「意为：」；选项字母粗体',
     classes: ['distractor', 'distractor--reading', 'distractor--cloze', 'reading-distractor-item', 'cloze-distractor-item'] },
   { name: 'ContextChain', role: '七选五：空前、答案、空后三行',
     classes: ['context-chain', 'context-chain-answer'] },
