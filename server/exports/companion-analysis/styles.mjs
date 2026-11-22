@@ -392,6 +392,8 @@ h5 {
 /* Group-level teaching blocks: bold run-in heading, no rule. */
 .overview,
 .reading-discourse,
+.cloze-main-line,
+.cloze-thread,
 .full-translation,
 .source-relationships,
 .long-sentences {
@@ -407,6 +409,8 @@ h5 {
 }
 
 .reading-discourse h4,
+.cloze-main-line h4,
+.cloze-thread h4,
 .full-translation h4,
 .source-relationships h4,
 .long-sentences h4 {
@@ -417,6 +421,8 @@ h5 {
 }
 
 .reading-discourse .heading-lead > h4 + p,
+.cloze-main-line .heading-lead > h4 + p,
+.cloze-thread .heading-lead > h4 + p,
 .full-translation .heading-lead > h4 + p,
 .long-sentences .heading-lead > h4 + .long-sentence {
   display: inline;
