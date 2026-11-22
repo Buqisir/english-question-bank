@@ -13,7 +13,7 @@ import { embeddedPaperFontCss } from '../paper-fonts.mjs'
 
 export { companionAnalysisFileName, loadCompanionAnalysisSource } from './companion-analysis/source.mjs'
 
-const HOUSE_MARK = 'EQBANK 教师解析'
+const HOUSE_MARK = '獭石试题解析'
 
 function renderGroup(input) {
   switch (input.group?.groupType) {
