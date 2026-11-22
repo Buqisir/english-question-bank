@@ -665,7 +665,10 @@ Step 1. Read the stem for one or two clues.
   feature, findings, special, unique, in common, advantage, view, belief,
   offer, share, agree on, infer, imply.
 - 对象词定段，题眼定句: when the object word and a sentence-fixing 题眼 land
-  in different sentences, the 定位句 is where the 题眼 lands.
+  in different sentences, the 定位句 is where the 题眼 lands. A 题眼 lands
+  through words (because, the reason, a lesson, a date). An imperative or
+  should / must alone does not move the 定位句 off the sentence holding a
+  name or place from the stem: locate there and bridge on to the advice.
 - When the stem has both a sentence-fixing word and one that cannot fix a
   sentence ("What does humans' absence imply"), follow the one that fixes a
   sentence and locate from the stem.
@@ -698,6 +701,7 @@ no single sentence can carry the answer.
 | the main idea, best title or purpose of the whole text; the author's attitude to the whole topic | `passage` |
 | Where is the text taken from; Who is it written for; What will follow; the author's primary concern | `passage` |
 | What can be learned from the text, when the options are noun phrases summing up the text | `passage` |
+| What can we infer / learn from paragraph N or the last paragraph, when the options are separate claims to check against that paragraph | `options` |
 | the main idea or emphasis of one named paragraph | `passage` |
 
 Step 3. Choose the 定位句 (`targetText`).
@@ -727,6 +731,12 @@ Step 3. Choose the 定位句 (`targetText`).
   with its counterpart as `targetCue`, and prefer it to an object word that
   appears all through the passage. The counterpart must mean the same
   thing, not just sit nearby.
+- A stance word in the stem (be opposed to, support, doubt, be in favor
+  of) pairs with the passage words that show that stance toward the same
+  thing (raise concerns about, protest, welcome, a doubter about). Prefer it
+  to the stem's topic noun (the plan, the program, the study): a topic noun the
+  passage keeps naming counts as a word that runs through the passage,
+  even when it also sits in the 定位句.
 - The counterpart may be a sentence feature, not a word: an imperative, or
   should / must / need to / it is essential that, for advice; a because
   clause for a cause; to do / so that / in order to for a purpose; an if

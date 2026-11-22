@@ -1,6 +1,6 @@
 # 阅读做题心法
 
-状态：v19 草稿（2026-11-22）。v1 和 Owner 逐条讨论后写成；v2 到 v16 按实题试做改，v17 到 v19 按写进提示词后的盲评改第四部分，改了哪些见文末「版本记录」。
+状态：v20 草稿（2026-11-22）。v1 和 Owner 逐条讨论后写成；v2 到 v16 按实题试做改，v17 到 v19 按写进提示词后的盲评改第四部分，v20 按样卷改前改后页修三处变差，改了哪些见文末「版本记录」。
 用途：做题时照它找定位、排除干扰项；写解析时把同一个过程写出来，就是定位行、证据和干扰项说明。
 下一步改写成 `prompts/reading-choice-analysis-v1.md` 的「定位」一节。关联 BUB-255。
 
@@ -56,6 +56,9 @@
 2. **线索来自题干，一到两个，照真实做题思路选，不定死步骤。** 对象词（人名、地名、
    数字、专有名词）缩小范围；题眼词（why、suggest、态度、mention 等）决定找哪一种信息。
    **对象词定段，题眼定句**：两个线索落在不同句子时，以题眼落的那句为定位句。
+   题眼要靠词落句（because、the reason、a lesson、日期）；只靠祈使句、should 这类句式对上时不算落句，
+   题干里的人名、地名能落到一句就定在那句，再桥接到建议：2025 新课标Ⅱ Q23 问 suggest visitors do in Mevagissey，
+   定位到 Mevagissey 所在的段首句，桥接到后面的祈使句 Don't leave the harbor without a traditional Cornish pie。
    题眼分两种：
    - 具体题眼能定句：why、suggest、when、how many、struck him most 这类，指明要找哪种信息；
    - 泛题眼定不了句：findings、feature、learn、What do we know、true、mentioned、special、unique、
@@ -447,7 +450,7 @@
 | 题型 | 定位方式 | 页面上的定位行 |
 |---|---|---|
 | 细节、why、建议、词义指代、人物态度、作者对具体对象的态度、例子作用、对象词落在一句的推断、reveal 和 conclusion 类推断、原文写着受益对象的 Who benefits；泛题眼的题（best describes、learn about X、special）对象词、时间、地点落在一句，正确项依据就是这句，或在同段后面几句（定位到这句再桥接）时；共同点原文有一句直接说出时（All these stadiums are still ...） | 从题干（stem） | 题干词 原词 段落，或 题干词 → 原文词 段落；对应物是句子特征时加一个短说明（「祈使句表建议」「because 引出原因」） |
-| 比较和共同点（没有一句直接说出时）、选项分散在几处的是非和泛题眼题、agree with 和 argue、套到新人物（most likely、least likely）、多段合问、作用和论证方法、要把三处以上加起来的计数和计算（成绩由几部分组成） | 按选项（options），只留给没有一句能落的题；有对象词先用它定段，找法一句写明定在哪段 | 「按选项回原文」，各选项在干扰项辨析里对原文 |
+| 比较和共同点（没有一句直接说出时）、选项分散在几处的是非和泛题眼题、agree with 和 argue、套到新人物（most likely、least likely）、多段合问、作用和论证方法、要把三处以上加起来的计数和计算（成绩由几部分组成）、从某一段推断而选项是几条各自要回这段核对的说法（What can we infer from the last paragraph） | 按选项（options），只留给没有一句能落的题；有对象词先用它定段，找法一句写明定在哪段 | 「按选项回原文」，各选项在干扰项辨析里对原文 |
 | 主旨、标题、出处、读者、作者对全文话题的态度、全文写作目的、全文的论证方法、预测下文 | 全文（passage） | 一句找法：「首段加末段，高频词 plant」「看文体特征：价格、联系方式」 |
 
 - 题干里用到的线索词在英文题干里加粗，定位行和原文里对应的词也加粗。
@@ -456,6 +459,9 @@
   不写关系名；六种关系只用来想清楚该怎么说。遇到 that belief、this、it 这类回指，先说它指什么。多处合并时引文列出每一处。
 - 定位词：题干里的动词短语、形容词在原文只有一处真对得上（avoid touching 对 never actually touch，unwelcome 对 hate，
   learn 对 a lesson），就用它，比全文反复出现的对象词（文章讲的那个城市、话题词）好；意思要真相同，不是挨得近。
+- 题干里的立场词（be opposed to、support、doubt、be in favor of）对原文里表这个立场的说法，比题干里的话题名词
+  （the project、the plan、the study）好；话题名词全文一再出现，哪怕也在定位句里，也不拿来定位。
+  例：2024 浙江 1 月 Q29 Who are opposed to the project，用 opposed to 对 worry，不用 project。
 - 第二部分「问法归哪类」里写的「按选项」说的是做题时怎么核对；落到页面上，只要对象词能落到一句，就给定位句，按上表。
 
 目前已实现的：一个线索、词对词的对应、程序算位置、桥接。还没实现、待这一版心法试过后再改的：
