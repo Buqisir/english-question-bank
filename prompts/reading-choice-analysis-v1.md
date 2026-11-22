@@ -688,11 +688,13 @@ no single sentence can carry the answer.
 | Who will benefit, when the passage names who benefits | `stem` |
 | Which will result in X; What will definitely disqualify: the sentence stating the general rule | `stem` |
 | Which best describes X; What was X like; What can we learn / What do we know about X; What is special / unique about X; infer / imply about X — when X, or a time, place or event in the stem, lands on one sentence and the correct option's evidence is that sentence or right next to it | `stem` |
-| What do A and B have in common; What similar experience do A and B have; any comparison of two or more things | `options` |
+| What do A and B / the listed things have in common, when one sentence states what they share ("All these stadiums are still …") | `stem` |
+| What do A and B have in common; What similar experience do A and B have; any comparison of two or more things, when no single sentence states it | `options` |
 | Which is true / NOT true / mentioned, and What can we learn / do we know about X, when the options' facts come from different places | `options` |
 | Which would X agree with; What does X argue (checking the options against X's words) | `options` |
 | Who is most / least likely to …; Who might benefit (applying the passage to new people) | `options` |
 | the purpose of paragraphs N and M; how paragraph N is developed; What do paragraphs N–M talk about | `options` |
+| How many parts / items / steps, or a sum, when the answer means adding up three or more headings, items or numbers | `options` |
 | the main idea, best title or purpose of the whole text; the author's attitude to the whole topic | `passage` |
 | Where is the text taken from; Who is it written for; What will follow; the author's primary concern | `passage` |
 | What can be learned from the text, when the options are noun phrases summing up the text | `passage` |
@@ -701,7 +703,8 @@ no single sentence can carry the answer.
 Step 3. Choose the 定位句 (`targetText`).
 - Test first: if the answer sentence itself holds the stem's object word,
   or its plain counterpart (stem "the birth of Gordon", passage "Gordon was
-  born"), locate there; do not land on another sentence and bridge back.
+  born"), locate there; an object word that runs through most of the
+  passage (the town a text is about, its topic word) does not count here; do not land on another sentence and bridge back.
   If the answer sentence does not hold it, locate on the sentence that
   does, and let the bridge lead on to the answer. Never skip the stem's
   anchor (a name, a time, a place, a source such as "the study in
@@ -713,6 +716,13 @@ Step 3. Choose the 定位句 (`targetText`).
 - When the sentence holding the 题眼 words only points back with a pronoun
   ("this is the real reason", "that's why"), locate the sentence it points
   to.
+- A verb phrase or adjective in the stem that has a real counterpart in
+  exactly one sentence is a strong 定位词: stem "avoid touching", passage
+  "never actually touch"; "unwelcome", "hate"; "learn from", "a lesson";
+  "moved to London", "arrived at Heathrow, London". Use it as `sourceText`
+  with its counterpart as `targetCue`, and prefer it to an object word that
+  appears all through the passage. The counterpart must mean the same
+  thing, not just sit nearby.
 - The counterpart may be a sentence feature, not a word: an imperative, or
   should / must / need to / it is essential that, for advice; a because
   clause for a cause; to do / so that / in order to for a purpose; an if
@@ -722,8 +732,8 @@ Step 3. Choose the 定位句 (`targetText`).
   passage "Don't leave"). Never pair words such as purpose, parts, happen
   or benefit with a loosely related passage word: when no natural pair
   exists, locate on the sentence with the object word. When the 定位句
-  holds the object word, the object word is `sourceText`, even if the 题眼
-  also matches.
+  holds a distinguishing object word (a name, a number, a rare term), that
+  object word is `sourceText`, even if the 题眼 also matches.
 
 Step 4. Where the answer usually sits, as seen from the 定位句.
 - After but, however, yet, in fact, actually, the opposite, and after
@@ -753,8 +763,8 @@ or `passage`, add NO such item.
 Fields of that item:
 - `sourceText` — 定位词: 1-5 English words copied exactly from the stem.
   Never the whole stem. Prefer names, numbers, dates and rare content words
-  that appear in the 定位句; use a 题眼 only when the 定位句 holds none of
-  them (Step 3). Never pick question words, or words that appear everywhere
+  that appear in the 定位句, then a stem phrase with one real counterpart
+  there (Step 3); use a 题眼 only when the 定位句 holds none of them. Never pick question words, or words that appear everywhere
   in the passage.
   For a reference or word-meaning question, use the quoted word itself.
 - `targetText` — 定位句: ONE complete passage sentence, copied exactly,
@@ -776,7 +786,9 @@ Fields of that item:
   word counts as one), saying WHY the answer is in the context. Say the
   concrete link in plain words: which word points to what ("she 指新生的
   小犀牛"), what the turn is ("But 后才是实际情况"), which sentence gives the
-  cause. Do not write the link's name; the six links below only help you
+  cause. When the answer sentence or the 定位句 holds a word pointing back
+  (that belief, this, it, such), first say what it points to ("that belief
+  指女孩认为本性别不够聪明"). Do not write the link's name; the six links below only help you
   decide what to say:
   - 指代回指 — a pronoun or summary word in the 定位句 (it, there, this,
     such, the issue) points to the answer elsewhere;
