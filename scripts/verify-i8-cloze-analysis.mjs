@@ -236,10 +236,13 @@ async function assertAnalysisValidation() {
     const derivedInput = validClAnalysis(input)
     delete derivedInput.blanks[firstId].correctFit.reason
     derivedInput.blanks[firstId].find.check = 'action-sequence'
+    derivedInput.groups[input.group.groupId].mainLine.emotion = '专注→入迷'
+    delete derivedInput.groups[input.group.groupId].affectiveArc
     const derived = await analyzeClozeImportCandidate(input, { providerCallers: { deepseek: stubProvider(derivedInput) } })
     const blank = derived.analysis.blanks[firstId]
     assert('cloze reason is derived from 脉络 and 找法', blank.correctFit.reason === '男孩走进屋坐下，这里要一个进屋的动作。动词看动作顺序：后面是 slowly into the room，慢慢进屋的动作是走。')
     assert('cloze signatureFacet is derived from pos and check', blank.signatureFacet === 'cloze.signature.verb.action-sequence')
+    assert('cloze affectiveArc is derived from 情感线', derived.analysis.groups[input.group.groupId].affectiveArc === '专注→入迷')
 
     const legacy = validClAnalysis(input)
     delete legacy.groups[input.group.groupId].mainLine

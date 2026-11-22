@@ -50,7 +50,8 @@ export function hasClozeTeachingLines(blank) {
   return Boolean(text(blank?.context) && text(blank?.find?.text) && CLOZE_CHECK_LABELS[blank?.find?.check])
 }
 
-// 新字段齐全时，补上旧字段：reason 由脉络和找法拼成；没写 signatureFacet 的，由词性和考点推出。
+// 新字段齐全时，补上旧字段：reason 由脉络和找法拼成；没写 signatureFacet 的，由词性和考点推出；
+// affectiveArc 由情感线补。
 export function deriveClozeLegacyFields(analysis) {
   for (const blank of Object.values(analysis?.blanks || {})) {
     if (!blank || typeof blank !== 'object' || !hasClozeTeachingLines(blank)) continue
@@ -58,6 +59,11 @@ export function deriveClozeLegacyFields(analysis) {
     if (!text(blank.correctFit.reason)) blank.correctFit.reason = `${text(blank.context)}${clozeFindLabel(blank)}：${text(blank.find.text)}`
     const facet = SIGNATURE_BY_POS_CHECK[`${blank.pos}:${blank.find.check}`]
     if (facet && !blank.signatureFacet) blank.signatureFacet = facet
+  }
+  // 情感线是站内面板 affectiveArc 的来源；没写情感线的说明文不补。
+  for (const group of Object.values(analysis?.groups || {})) {
+    const emotion = text(group?.mainLine?.emotion)
+    if (emotion && !text(group.affectiveArc)) group.affectiveArc = emotion
   }
 }
 
