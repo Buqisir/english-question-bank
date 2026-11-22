@@ -284,6 +284,7 @@ export function validateReadingAnalysisShape(analysis, {
     if (requireLocate || hasReadingLocate(item)) {
       const { errors } = resolveReadingLocate({
         entry: item, stem: sourceQuestion?.stem, paragraphs: paragraphsById, correctEvidence: correctOption?.evidence,
+        options: sourceQuestion?.options, answer: correctOption?.label,
       })
       if (errors.length) throw new Error(`${questionId}: ${errors[0]}`)
     }

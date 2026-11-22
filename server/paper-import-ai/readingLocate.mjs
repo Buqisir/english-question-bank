@@ -88,10 +88,42 @@ function findWord(haystack, needle, { ignoreCase = false } = {}) {
   return match ? { index: match.index, text: match[0] } : null
 }
 
+// Two guards on a stem 定位, checked when the caller passes the option texts.
+// A chart answer: the correct option states a number the passage text never
+// writes, and answerText gives no number of its own, so the answer is read off
+// a chart or worked out, and a 定位句 would point at the wrong place. A bridge
+// toward a distractor: bridgeZh echoes an English word that only a wrong
+// option uses, which steers the student to that option.
+const NUMBER = /\d[\d,.]*\d|\d/gu
+const NUMBER_WORD = /\b(?:half|thirds?|quarters?|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|twenty|thirty|forty|fifty|hundred|thousand|million|billion|twice|double|triple|dozen|percent)\b/iu
+const STOPWORDS = new Set(('a an the of to in on at for and or but is are was were be been it its they them their he she his her '
+  + 'this that these those with by from as not no do does did can could will would should have has had i we you our your my me '
+  + 'us so than then there here what which who why how when where also just very more most less much many some any all one').split(' '))
+const contentWords = value => new Set((plain(String(value ?? '')).toLowerCase().match(/[a-z][a-z’'-]*/gu) ?? [])
+  .filter(word => !STOPWORDS.has(word)))
+
+function chartAnswer({ correctText, paragraphs, answerText, stemText }) {
+  const passage = [...paragraphs.values()].filter(value => typeof value === 'string').map(plain).join('\n')
+  const unwritten = (correctText.match(NUMBER) ?? []).some(number => !passage.includes(number))
+  if (!unwritten) return false
+  const ownNumber = (answerText.match(NUMBER) ?? []).some(number => !stemText.includes(number)) || NUMBER_WORD.test(answerText)
+  return !ownNumber
+}
+
+function bridgeTowardDistractor({ bridge, correctText, wrongTexts, stemText }) {
+  const words = contentWords(bridge)
+  if (!words.size) return null
+  const kept = new Set([...contentWords(correctText), ...contentWords(stemText)])
+  const wrong = new Set(wrongTexts.flatMap(value => [...contentWords(value)]))
+  return [...words].find(word => wrong.has(word) && !kept.has(word)) ?? null
+}
+
 // Resolve and check one question's 定位. `paragraphs` maps paragraph id to its
-// text; `correctEvidence` is the correct option's evidence list. Returns
-// `{ errors, locate }`; `locate` is null whenever there are errors.
-export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence }) {
+// text; `correctEvidence` is the correct option's evidence list. `options`
+// (label to text, or a list of { label, text }) and `answer` (the correct label) are optional; with them the
+// two guards above run too. Returns `{ errors, locate }`; `locate` is null
+// whenever there are errors.
+export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence, options, answer: answerLabel }) {
   const errors = []
   const fail = message => {
     errors.push(message)
@@ -158,6 +190,20 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence 
   if (same && bridge) return fail('答案就在定位句里，不写 bridgeZh。')
   if (!same && !bridge) return fail('答案不在定位句里，必须用 bridgeZh 写清原因。')
   if (bridge && bridgeUnits(bridge) > BRIDGE_MAX_UNITS) return fail(`bridgeZh 不超过 ${BRIDGE_MAX_UNITS} 字（一个英文词算一个字）。`)
+
+  const optionTexts = Array.isArray(options)
+    ? Object.fromEntries(options.map(option => [option?.label, option?.text]))
+    : (options && typeof options === 'object' ? options : null)
+  const correctText = optionTexts && typeof optionTexts[answerLabel] === 'string' ? plain(optionTexts[answerLabel]) : null
+  if (correctText != null) {
+    if (chartAnswer({ correctText, paragraphs, answerText, stemText })) {
+      return fail('正确项里的数字原文没写，answerText 也没有数字：答案多半在图表里或要自己算，不给定位句，locateBy 改用 options。')
+    }
+    const wrongTexts = Object.entries(optionTexts)
+      .filter(([label, value]) => label !== answerLabel && typeof value === 'string').map(([, value]) => value)
+    const echoed = bridge ? bridgeTowardDistractor({ bridge, correctText, wrongTexts, stemText }) : null
+    if (echoed) return fail(`bridgeZh 里的 ${echoed} 只出现在错项里，会把学生引向干扰项，换个说法。`)
+  }
 
   return {
     errors,

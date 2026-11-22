@@ -102,6 +102,7 @@ function dataLocate(entry, question, group, correct) {
   if (!hasReadingLocate(entry)) return null
   return resolveReadingLocate({
     entry, stem: question?.stem, paragraphs: paragraphTexts(group), correctEvidence: correct?.evidence,
+    options: question?.options, answer: correct?.label,
   }).locate
 }
 

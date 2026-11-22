@@ -148,6 +148,33 @@ ok('the cue is matched as a whole word ("it" is not found inside "lit")', () => 
   assert.equal(found.cue.start, paragraph.indexOf(' it ') + 1)
 })
 
+ok('chart guard: a number the passage never writes needs a number in answerText, and runs only when options are passed', () => {
+  const stem = 'How many members did the club have?'
+  const options = [{ label: 'A', text: '40.' }, { label: 'B', text: '55.' }]
+  const check = (passage, answerText) => {
+    const entry = { locateBy: 'stem', locationParaphrases: [{ sourceRole: 'stem', relationType: 'locationCue', sourceText: 'club', targetText: passage, targetParagraphId: 'p', answerText }] }
+    const base = { entry, stem, paragraphs: new Map([['p', passage]]), correctEvidence: [{ paragraphId: 'p', quote: passage }] }
+    return { guarded: resolveReadingLocate({ ...base, options, answer: 'B' }).errors, plain: resolveReadingLocate(base).errors }
+  }
+  const chart = check('The club grew fast that year.', 'The club grew fast')
+  assert.match(chart.guarded[0] ?? '', /答案多半在图表里/u)
+  assert.deepEqual(chart.plain, [])
+  assert.deepEqual(check('The club grew to fifty-five members.', 'fifty-five members').guarded, [])
+  assert.deepEqual(check('The club had 55 members.', 'The club had 55 members').guarded, [])
+})
+
+ok('bridge guard: bridgeZh may not echo an English word that only a wrong option uses', () => {
+  const passage = 'Tom asked many questions. In the end he found the answer himself.'
+  const options = { A: 'He asked his teacher.', B: 'He solved it alone.' }
+  const resolve = bridgeZh => resolveReadingLocate({
+    entry: { locateBy: 'stem', locationParaphrases: [{ sourceRole: 'stem', relationType: 'locationCue', sourceText: 'Tom', targetText: 'Tom asked many questions.', targetParagraphId: 'p', answerText: 'he found the answer himself', bridgeZh }] },
+    stem: 'What did Tom do at last?', paragraphs: new Map([['p', passage]]),
+    correctEvidence: [{ paragraphId: 'p', quote: 'In the end he found the answer himself.' }], options, answer: 'B',
+  }).errors
+  assert.match(resolve('下一句说 teacher 没帮上')[0] ?? '', /teacher 只出现在错项里/u)
+  assert.deepEqual(resolve('下一句 himself 说他自己找到答案'), [])
+})
+
 const rejects = [
   ['the whole stem as 定位词', 'q2', (entry, item) => { item.sourceText = 'Since when has Hereford been a market town?' }, /1–5 个英文词|整句题干/u],
   ['a 定位词 not copied from the stem', 'q2', (entry, item) => { item.sourceText = 'lively town' }, /从题干原样抄/u],

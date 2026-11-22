@@ -700,6 +700,7 @@ no single sentence can carry the answer.
 | Who is most / least likely to …; Who might benefit (applying the passage to new people) | `options` |
 | the purpose of paragraphs N and M; how paragraph N is developed; What do paragraphs N–M talk about | `options` |
 | How many parts / items / steps, or a sum, when the answer means adding up three or more headings, items or numbers | `options` |
+| the correct option's number is not written in the text (read off a chart or table, or worked out) and no sentence states it in words | `options` |
 | the main idea, best title or purpose of the whole text; the author's attitude to the whole topic | `passage` |
 | Where is the text taken from; Who is it written for; What will follow; the author's primary concern | `passage` |
 | What can be learned from the text, when the options are noun phrases summing up the text | `passage` |
@@ -845,6 +846,8 @@ Fields of that item:
   A pronoun in the answer sentence pointing back to the 定位句 is
   前后文展开; only a pronoun in the 定位句 pointing away is 指代回指.
   If none of the six fits, the 定位句 is probably wrong; locate again.
+  Say the link in the correct option's sense: never use an English word
+  that only a wrong option uses, which leads the student to that option.
   Do not repeat the answer. Do not say WHERE (前一句, 后一句, 下一段): the
   PDF works that out from the positions and prints it on the 定位 line.
   When `answerText` is inside `targetText`, omit `bridgeZh`.
