@@ -457,8 +457,8 @@ console.log('Companion analysis merged passage and separators: PASS')
       analysis: { groups: {}, questions: { q1: { locateBy: 'stem', locateFindZh: '', stemTranslationZh: '这里发生了什么？', similarityProfile: { family: 'detail' },
         locationParaphrases: [{ sourceText: 'here', sourceRole: 'stem', targetText: 'First paragraph ends here.', targetParagraphId: 'p1', relationType: 'locationCue', answerText: 'First paragraph ends' }],
         optionAnalysis: [{ label: 'B', status: 'correct', evidence: [{ paragraphId: 'p1', quote: 'First paragraph ends here.' }] }] } } } })
-    assert.match(same, /定位<\/span><b lang="en">here<\/b><span class="locate-note">第 1 段<\/span><\/p>/u,
-      'when the passage repeats the stem word the skeleton prints it once, with no arrow; an empty line under it prints nothing, not 原词')
+    assert.match(same, /定位<\/span><b lang="en">here<\/b> →<span class="locate-note">第 1 段<\/span><\/p>/u,
+      'when the passage repeats the stem word the skeleton prints it once and the arrow leads to the paragraph; an empty line under it prints nothing, not 原词')
   }
 
   const group = { groupId: 'g', groupType: 'reading', title: 'reading.a', questionIds: ['q1'], passage: plain.passage }
