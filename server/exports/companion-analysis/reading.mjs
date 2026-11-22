@@ -278,8 +278,8 @@ function renderSkeletonLocate(locate, entry, group, evidence) {
   } else {
     const place = passagePlace(group, locate.paragraphId)
     const sameWords = locate.cue.text.toLowerCase() === locate.sourceText.toLowerCase()
-    skeleton = `<b lang="en">${escapeHtml(locate.sourceText)}</b> → ${sameWords
-      ? '' : `<b lang="en">${escapeHtml(locate.cue.text)}</b>`}${place ? note(place) : ''}`
+    skeleton = `<b lang="en">${escapeHtml(locate.sourceText)}</b>${sameWords
+      ? '' : ` → <b lang="en">${escapeHtml(locate.cue.text)}</b>`}${place ? note(place) : ''}`
   }
   return `<p class="evidence-locate"><span class="inline-label">定位</span>${skeleton}${renderFind(locate.find, group)}</p>`
 }
