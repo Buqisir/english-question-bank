@@ -78,6 +78,30 @@ ok('sentences: "Dr." and a lower-case continuation stay in one sentence', () => 
   assert.equal(passageSentences('Don’t beat yourself up if one (or a few!) doesn’t make it. Try again.').length, 2)
 })
 
+ok('sentences: initials and reported speech stay in one sentence; quoted dialogue still splits', () => {
+  const split = value => passageSentences(value).map(sentence => sentence.text.trim())
+  assert.deepEqual(split('Curtin works in Washington, D. C., which recovers food. Last year it grew.'), [
+    'Curtin works in Washington, D. C., which recovers food.', 'Last year it grew.',
+  ])
+  assert.deepEqual(split('The students would say, “That’s okay. Put it in the box.” Then they left.'), [
+    'The students would say, “That’s okay. Put it in the box.”', 'Then they left.',
+  ])
+  assert.deepEqual(split('My friends shouted: “Safe! Safe! Safe!” And that mattered.'), [
+    'My friends shouted: “Safe! Safe! Safe!”', 'And that mattered.',
+  ])
+  assert.deepEqual(split('“I am tired. Let us go.” She left. He took vitamin C. Then he slept.'), [
+    '“I am tired.', 'Let us go.”', 'She left.', 'He took vitamin C.', 'Then he slept.',
+  ])
+  assert.deepEqual(split('He said, “Wait. I am coming.'), ['He said, “Wait.', 'I am coming.'])
+})
+
+ok('a no-break space in the passage matches a plain space in the stem words', () => {
+  const paragraphs = new Map([['p', 'Take a view of the hills. It is quiet.']])
+  const entry = { locateBy: 'stem', locationParaphrases: [{ sourceText: 'Take a view', sourceRole: 'stem', relationType: 'locationCue', targetText: 'Take a view of the hills.', targetParagraphId: 'p', answerText: 'of the hills', note: '原词' }] }
+  const result = resolveReadingLocate({ entry, stem: 'Why Take a view here?', paragraphs, correctEvidence: [{ paragraphId: 'p', quote: 'Take a view of the hills.' }] })
+  assert.deepEqual(result.errors, [])
+})
+
 ok('bridge length counts Chinese characters and English words once each', () => {
   assert.equal(bridgeUnits('there 指前两句的 Hereford Cathedral'), 8)
 })

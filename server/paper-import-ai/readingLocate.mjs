@@ -21,14 +21,29 @@ const CJK = /[㐀-鿿]/gu
 const text = value => (typeof value === 'string' ? value.trim() : '')
 const core = value => String(value ?? '').replace(EDGE, '')
 
-// Sentences of one passage paragraph. Intl.Segmenter splits after "Dr." and
-// inside "(or a few!) doesn't"; a piece that follows an abbreviation or starts
-// in lower case belongs to the sentence before it.
+// Sentences of one passage paragraph. Intl.Segmenter splits after "Dr.",
+// between the initials of "D. C." and inside "(or a few!) doesn't", and it
+// ends a sentence inside reported speech (say, “That’s okay. Put it …”).
+// A piece belongs to the sentence before it when that one ends in an
+// abbreviation, when both sides of the break are single-letter initials, when
+// the piece starts in lower case, or when the sentence before it opened a
+// quotation after some words of its own and the quotation closes later in the
+// paragraph (a quotation running on into the next paragraph is left alone).
+const INITIAL_END = /(?:^|[\s(])[A-Z]\.\s*$/u
+const INITIAL_START = /^[A-Z]\.(?:[\s,;:]|$)/u
+function insideReportedSpeech(sentence, paragraphText) {
+  const open = sentence.text.lastIndexOf('“')
+  return open > 0 && sentence.text.slice(0, open).trim() !== '' && !sentence.text.slice(open).includes('”')
+    && paragraphText.indexOf('”', sentence.end) >= 0
+}
+
 export function passageSentences(paragraphText) {
   const sentences = []
   for (const piece of splitSentences(paragraphText)) {
     const previous = sentences.at(-1)
-    if (previous && (ABBREVIATION.test(previous.text) || /^[a-z]/u.test(piece.text))) {
+    if (previous && (ABBREVIATION.test(previous.text) || /^[a-z]/u.test(piece.text)
+      || (INITIAL_END.test(previous.text) && INITIAL_START.test(piece.text))
+      || insideReportedSpeech(previous, paragraphText))) {
       previous.end = piece.end
       previous.text = paragraphText.slice(previous.start, previous.end)
     } else {
@@ -55,7 +70,8 @@ export function hasReadingLocate(entry) {
 
 // Whole-word search, so the cue "it" is not found inside "lit".
 function findWord(haystack, needle, { ignoreCase = false } = {}) {
-  const escaped = needle.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&')
+  // A no-break space in the passage still matches a plain space in the stem.
+  const escaped = needle.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&').replace(/\s+/gu, '\\s+')
   const match = new RegExp(`(?<![A-Za-z0-9])${escaped}(?![A-Za-z0-9])`, ignoreCase ? 'iu' : 'u').exec(haystack)
   return match ? { index: match.index, text: match[0] } : null
 }

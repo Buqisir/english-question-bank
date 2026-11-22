@@ -676,6 +676,7 @@ Step 2. Choose `locateBy` by the question form.
 | why, what caused / led to / prompted / made sb do; what X is aimed at | `stem` |
 | suggest / advise / recommend / urge / What should …, when the options are actions | `stem` |
 | who / what / when / where / how many / how long; how did X manage; the key solution | `stem` |
+| What does X (a named person) say / think about Y; the answer may be anywhere in that person's words | `stem` |
 | a quoted or underlined word, phrase or sentence; what a pronoun refers to | `stem` |
 | Why does the author mention X; Why is X compared to Y | `stem` |
 | the author's view of one named thing (How does the author view / find X) | `stem` |
@@ -710,7 +711,9 @@ Step 3. Choose the 定位句 (`targetText`).
   clause for a cause; to do / so that / in order to for a purpose; an if
   clause for a condition. When the 定位句 holds the feature but not the
   object word, use the 题眼 as `sourceText` and the feature words as
-  `targetCue` (stem "suggest", passage "Don't leave").
+  `targetCue` (stem "suggest", passage "Don't leave"). When the 定位句
+  holds the object word, the object word is `sourceText`, even if the 题眼
+  also matches.
 
 Step 4. Where the answer usually sits, as seen from the 定位句.
 - After but, however, yet, in fact, actually, the opposite, and after
@@ -739,8 +742,10 @@ or `passage`, add NO such item.
 
 Fields of that item:
 - `sourceText` — 定位词: 1-5 English words copied exactly from the stem.
-  Never the whole stem. Prefer names, numbers, dates and rare content words;
-  never pick question words or words that appear everywhere in the passage.
+  Never the whole stem. Prefer names, numbers, dates and rare content words
+  that appear in the 定位句; use a 题眼 only when the 定位句 holds none of
+  them (Step 3). Never pick question words, or words that appear everywhere
+  in the passage.
   For a reference or word-meaning question, use the quoted word itself.
 - `targetText` — 定位句: ONE complete passage sentence, copied exactly,
   containing the locating words or their counterpart.
@@ -776,6 +781,8 @@ Fields of that item:
   - 多处合并 — the answer needs two or more places put together (counting,
     sums, what several things share). Put the place the 题眼 lands on in
     `targetText` and the most telling other place in `answerText`.
+  "Why does the author mention X", "What does the author want to show by
+  telling X": the link is 例子.
   To name it, first ask whether the correct option is incomplete without
   one of several places: if so, 多处合并. Otherwise take the first that
   fits, in this order: 例子, 转折, 指代回指, 叙事因果, 前后文展开. The order
