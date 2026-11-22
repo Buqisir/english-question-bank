@@ -159,6 +159,9 @@ function validClAnalysis(input = clFixtureInput()) {
       blankId: q.blankId,
       blankNo: no,
       pos: 'verb',
+      role: no <= 43 ? 'main' : 'detail',
+      context: '男孩走进屋坐下，这里要一个进屋的动作。',
+      find: { check: 'collocation', text: '后面是 slowly into the room，慢慢进屋的动作是走。', quotes: ['slowly into the room'] },
       correctFit: {
         optionLabel: q.answerKey,
         reason: '搭配合理，主语与动词语义相符。',
@@ -166,7 +169,8 @@ function validClAnalysis(input = clFixtureInput()) {
       distractorGlosses: distractorLabels.map((l) => ({
         optionLabel: l,
         optionText: q.options[l],
-        meaning: `在此语境中表示"${q.options[l]}"的动作。`,
+        meaning: `${q.options[l]} 放进去说不通；原文是 slowly into the room。`,
+        quote: 'slowly into the room',
       })),
       evidence: [
         {
@@ -194,6 +198,12 @@ function validClAnalysis(input = clFixtureInput()) {
     groups: {
       [group.groupId]: {
         overview: '男孩因专心读书没有回应母亲，母亲误以为他没有听见，事情在双方误会中继续发展。',
+        mainLine: {
+          theme: { text: '男孩读得入迷，听不见母亲：completely absorbed in the story。', quote: 'completely absorbed in the story' },
+          paragraphs: group.paragraphs.map((paragraph) => ({ paragraphId: paragraph.id, text: '男孩进屋坐下读书。' })),
+          emotion: '',
+          thread: { text: 'walked 进屋，ran 去拿书，jumped 起来又坐下。', blankNos: [41, 42, 43] },
+        },
         ...buildObjectiveTeachingFixture(group),
       },
     },
@@ -219,6 +229,49 @@ async function assertAnalysisValidation() {
     requestId: 'i8-verify',
   })
   assert('valid cloze analysis passes', result.analysis.schemaVersion === 'cloze-analysis-v1' && result.requestId === 'i8-verify')
+
+  // --- 完形讲法：主线、脉络、找法 ---
+  {
+    const firstId = input.group.questions[0].id
+    const derivedInput = validClAnalysis(input)
+    delete derivedInput.blanks[firstId].correctFit.reason
+    derivedInput.blanks[firstId].find.check = 'action-sequence'
+    const derived = await analyzeClozeImportCandidate(input, { providerCallers: { deepseek: stubProvider(derivedInput) } })
+    const blank = derived.analysis.blanks[firstId]
+    assert('cloze reason is derived from 脉络 and 找法', blank.correctFit.reason === '男孩走进屋坐下，这里要一个进屋的动作。动词看动作顺序：后面是 slowly into the room，慢慢进屋的动作是走。')
+    assert('cloze signatureFacet is derived from pos and check', blank.signatureFacet === 'cloze.signature.verb.action-sequence')
+
+    const legacy = validClAnalysis(input)
+    delete legacy.groups[input.group.groupId].mainLine
+    for (const item of Object.values(legacy.blanks)) {
+      delete item.role; delete item.context; delete item.find
+      for (const gloss of item.distractorGlosses) delete gloss.quote
+    }
+    let legacyOk = true
+    try { validateClozeShape(legacy, { ...input, requireFullTranslation: true, requireSelectedLongSentences: true, requireTeachingContent: true }) } catch { legacyOk = false }
+    assert('frozen cloze analysis without teaching lines still validates', legacyOk)
+    await assertRejects('new cloze generation requires teaching lines', () =>
+      analyzeClozeImportCandidate(input, { providerCallers: { deepseek: stubProvider(legacy) } }), /role|context|mainLine/)
+
+    const cases = [
+      ['cloze 脉络 must not repeat its own blank number', (bad) => { bad.blanks[firstId].context = '41 是男孩进屋的动作。' }, /题号/],
+      ['cloze 看逻辑 is only for connector options', (bad) => { bad.blanks[firstId].find.check = 'logic' }, /看逻辑/],
+      ['cloze 找法 quote must be in the passage', (bad) => { bad.blanks[firstId].find.quotes = ['NOT IN PASSAGE'] }, /不在原文/],
+      ['cloze 找法 quote must appear in its line', (bad) => { bad.blanks[firstId].find.quotes = ['the old book'] }, /没有原样出现/],
+      ['cloze distractor needs a passage quote', (bad) => { delete bad.blanks[firstId].distractorGlosses[0].quote }, /引文为空/],
+      ['cloze 脉络 rejects lofty filler', (bad) => { bad.blanks[firstId].context = '这一句体现了男孩热爱读书的精神。' }, /空话/],
+      ['cloze main line covers every paragraph', (bad) => { bad.groups[input.group.groupId].mainLine.paragraphs.pop() }, /对应原文/],
+      ['cloze thread uses only main blanks', (bad) => { bad.groups[input.group.groupId].mainLine.thread.blankNos = [41, 42, 44] }, /没标 main/],
+      ['cloze thread names each answer word', (bad) => { bad.groups[input.group.groupId].mainLine.thread.text = '他进屋，跑去拿书，又跳起来。' }, /答案词/],
+    ]
+    for (const [name, mutate, pattern] of cases) {
+      await assertRejects(name, () => {
+        const bad = validClAnalysis(input)
+        mutate(bad)
+        return analyzeClozeImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) }, analysisRetries: 0 })
+      }, pattern)
+    }
+  }
 
   await assertRejects('missing shared cloze overview blocks', () => {
     const bad = validClAnalysis(input)
