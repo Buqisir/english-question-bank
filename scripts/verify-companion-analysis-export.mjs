@@ -406,6 +406,17 @@ console.log('Companion analysis merged passage and separators: PASS')
   ] } }
   assert.equal(passagePlace(listed, 'r'), '第 4 段', 'short lines of one shape in a row are a list, not section heads')
   assert.equal(passagePlace(listed, 'w2'), '第 3 段')
+  const fields = { passage: { paragraphs: [
+    { paragraphId: 't', text: 'Weekend Walks' },
+    { paragraphId: 'h1', text: 'Walk 1: The Natural World' },
+    { paragraphId: 'a1', text: 'This walk takes you along the river.' },
+    { paragraphId: 'd1', text: 'Walk Duration: 6 hours' },
+    { paragraphId: 'h2', text: 'Walk 2: Hills' },
+    { paragraphId: 'a2', text: 'This walk climbs the hill.' },
+    { paragraphId: 'd2', text: 'Walk Duration: 5 hours' },
+  ] } }
+  assert.equal(passagePlace(fields, 'd2'), 'Walk 2: Hills 第 2 段', 'a Label: value line whose label repeats is an info line, not a head')
+  assert.equal(passagePlace(fields, 'h1'), '小标题')
 
   const optionsGroup = { groupId: 'g', groupType: 'reading', title: 'reading.a', questionIds: ['q1'], passage: plain.passage }
   const optionsHtml = renderReadingGroup({ group: optionsGroup, answers: [], openingHeadings: '',

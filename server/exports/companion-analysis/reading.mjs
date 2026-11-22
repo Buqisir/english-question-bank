@@ -68,7 +68,18 @@ export function passagePlace(group, paragraphId) {
   const shape = index => nonEmptyString(paragraphs[index]?.text).trim().replace(/\d+/gu, '#').split(/\s+/u).slice(0, 2).join(' ')
   const listed = index => index > 0 && ((index > 1 && short[index - 1] && shape(index - 1) === shape(index))
     || (short[index + 1] && shape(index + 1) === shape(index)))
-  const heading = (paragraph, index) => short[index] && (index === 0 || paragraph?.role === 'subtitle' || !listed(index))
+  // A short "Label: value" line whose label comes back elsewhere in the
+  // passage (Walk Duration: 6 hours, Walk Duration: 1.5 hours) is an info
+  // line under a section, not a head; Walk 1: The Natural World stays a head.
+  // A line with the next head glued on (Tickets: £12–£96Jodie’s Fitness
+  // Summer Classes) still opens the next section.
+  const label = index => {
+    const text = nonEmptyString(paragraphs[index]?.text).trim()
+    return /[a-z0-9][A-Z][a-z]/u.test(text) ? undefined : (text.match(/^([^:：]{2,30})[:：]\s*\S/u) || [])[1]?.trim()
+  }
+  const labels = paragraphs.map((_, index) => short[index] ? label(index) : undefined)
+  const field = index => labels[index] !== undefined && labels.filter(other => other === labels[index]).length >= 2
+  const heading = (paragraph, index) => short[index] && (index === 0 || paragraph?.role === 'subtitle' || (!listed(index) && !field(index)))
   const sections = []
   for (const [index, paragraph] of paragraphs.entries()) {
     if (heading(paragraph, index)) {
