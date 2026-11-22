@@ -1,7 +1,7 @@
 import { resolveFigureTextRegion } from '../../../shared/paper-canonical/richContent.mjs'
 import { renderEvidenceQuote, renderFullTranslation, renderGroupHeading, renderHeadingLead, renderOverview, renderQuestionHeader, renderQuestionLead, renderSelectedLongSentences, renderUnderlinedText } from './blocks.mjs'
 import { answerData, passageQuote, questionData } from './paper.mjs'
-import { array, escapeHtml, exactTextRange, innerQuote, nonEmptyString, withoutClosingPunctuation } from './text.mjs'
+import { array, escapeHtml, exactTextRange, innerQuote, nonEmptyString, passageHtml, withoutClosingPunctuation } from './text.mjs'
 import { PARAGRAPH_TOKEN, hasReadingLocate, passageSentences, resolveReadingLocate, stemLocateItems } from '../../paper-import-ai/readingLocate.mjs'
 
 export function readingDistractors(entry) {
@@ -135,7 +135,7 @@ function markedHtml(text, marks) {
   for (let index = 0; index + 1 < cuts.length; index += 1) {
     const [start, end] = [cuts[index], cuts[index + 1]]
     const inside = kind => marks.some(mark => mark.kind === kind && mark.start <= start && mark.end >= end)
-    let piece = escapeHtml(text.slice(start, end))
+    let piece = passageHtml(text.slice(start, end))
     if (inside('cue')) piece = `<b class="locate-cue">${piece}</b>`
     if (inside('answer')) piece = `<span class="source-underline">${piece}</span>`
     html += piece
@@ -185,7 +185,11 @@ function locateExcerpt(locate, group) {
     const marks = []
     if (piece.paragraphId === locate.paragraphId) marks.push({ kind: 'cue', start: locate.cue.start - start, end: locate.cue.end - start })
     if (piece.paragraphId === locate.answer.paragraphId) marks.push({ kind: 'answer', start: locate.answer.start - start, end: locate.answer.end - start })
-    html += `${position === 0 ? '' : joined ? ' ' : ' …… '}${markedHtml(innerQuote(paragraph.slice(start, end)), marks)}`
+    // Two sentences in a row join with a space, or with a line break where
+    // the paper starts a new line between them (a lecture's name, then its date).
+    const gap = joined ? paragraph.slice(previous.start, piece.start) : ''
+    const join = position === 0 ? '' : !joined ? ' …… ' : gap.includes('\u2028') ? '<br>' : ' '
+    html += `${join}${markedHtml(innerQuote(paragraph.slice(start, end)), marks)}`
   })
   return { html, pieces }
 }

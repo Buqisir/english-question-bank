@@ -7,6 +7,13 @@ export function escapeHtml(value) {
     .replaceAll("'", '&#39;')
 }
 
+// Passage words as printed: a line separator inside a paragraph (a lecture
+// list keeps each lecture's name and date on lines of their own) stays a
+// line break, so 「下一行」 on the page means the next line of the paper.
+export function passageHtml(value) {
+  return escapeHtml(value).replaceAll('\u2028', '<br>')
+}
+
 export function nonEmptyString(value) {
   return typeof value === 'string' && value.trim() ? value.trim() : ''
 }

@@ -1,7 +1,7 @@
 import { unofficialListeningLabel } from '../../answer-renderer.mjs'
 import { partitionAnalysisText } from '../../../shared/analysis/analysisTextRanges.mjs'
 import { questionData } from './paper.mjs'
-import { array, escapeHtml, exactTextRange, innerQuote, nonEmptyString } from './text.mjs'
+import { array, escapeHtml, exactTextRange, innerQuote, nonEmptyString, passageHtml } from './text.mjs'
 
 export function renderOverview(text) {
   const overview = nonEmptyString(text)
@@ -234,15 +234,15 @@ export function renderUnderlinedText(value, underlineTexts) {
   for (const candidate of candidates) {
     if (spans.length === 0 || candidate.start >= spans.at(-1).end) spans.push(candidate)
   }
-  if (spans.length === 0) return escapeHtml(text)
+  if (spans.length === 0) return passageHtml(text)
   let cursor = 0
   let html = ''
   for (const span of spans) {
-    html += escapeHtml(text.slice(cursor, span.start))
-    html += `<span class="source-underline">${escapeHtml(text.slice(span.start, span.end))}</span>`
+    html += passageHtml(text.slice(cursor, span.start))
+    html += `<span class="source-underline">${passageHtml(text.slice(span.start, span.end))}</span>`
     cursor = span.end
   }
-  return `${html}${escapeHtml(text.slice(cursor))}`
+  return `${html}${passageHtml(text.slice(cursor))}`
 }
 
 export function renderEvidenceQuote(quotes, underlineTexts = []) {

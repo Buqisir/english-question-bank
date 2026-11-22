@@ -417,6 +417,8 @@ console.log('Companion analysis merged passage and separators: PASS')
   ] } }
   assert.equal(passagePlace(fields, 'd2'), 'Walk 2: Hills 第 2 段', 'a Label: value line whose label repeats is an info line, not a head')
   assert.equal(passagePlace(fields, 'h1'), '小标题')
+  const { passageHtml } = await import('../server/exports/companion-analysis/text.mjs')
+  assert.equal(passageHtml('Raeburn\u2028Thursday 30 Oct. <b>'), 'Raeburn<br>Thursday 30 Oct. &lt;b&gt;', 'a line separator in passage words prints as a line break')
 
   const optionsGroup = { groupId: 'g', groupType: 'reading', title: 'reading.a', questionIds: ['q1'], passage: plain.passage }
   const optionsHtml = renderReadingGroup({ group: optionsGroup, answers: [], openingHeadings: '',
