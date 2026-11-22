@@ -18,7 +18,15 @@ const EDGE = /^[\s“"‘'(（]+|[\s”"’')）]+$/gu
 const LATIN_WORD = /[A-Za-z0-9][A-Za-z0-9’'.-]*/gu
 const CJK = /[㐀-鿿]/gu
 
-const text = value => (typeof value === 'string' ? value.trim() : '')
+// Passages carry no-break spaces where the stem and the agent write plain
+// ones; compare with every no-break space read as a space. One character
+// stands for one, so positions in the stored text stay the same.
+const plain = value => value.replace(/\u00a0/gu, ' ')
+const text = value => (typeof value === 'string' ? plain(value).trim() : '')
+const plainParagraph = (paragraphs, id) => {
+  const value = paragraphs.get(id)
+  return typeof value === 'string' ? plain(value) : value
+}
 const core = value => String(value ?? '').replace(EDGE, '')
 
 // Sentences of one passage paragraph. Intl.Segmenter splits after "Dr.",
@@ -27,13 +35,17 @@ const core = value => String(value ?? '').replace(EDGE, '')
 // A piece belongs to the sentence before it when that one ends in an
 // abbreviation, when both sides of the break are single-letter initials, when
 // the piece starts in lower case, or when the sentence before it opened a
-// quotation after some words of its own and the quotation closes later in the
-// paragraph (a quotation running on into the next paragraph is left alone).
+// short quotation (“Safe!”, “That’s okay.”) after some words of its own and
+// the quotation closes later in the paragraph. A quoted speech of full
+// sentences still splits, so each of its sentences can be a 定位句.
+const SHORT_QUOTE_WORDS = 3
 const INITIAL_END = /(?:^|[\s(])[A-Z]\.\s*$/u
 const INITIAL_START = /^[A-Z]\.(?:[\s,;:]|$)/u
 function insideReportedSpeech(sentence, paragraphText) {
   const open = sentence.text.lastIndexOf('“')
-  return open > 0 && sentence.text.slice(0, open).trim() !== '' && !sentence.text.slice(open).includes('”')
+  if (open <= 0 || sentence.text.slice(0, open).trim() === '') return false
+  const quoted = sentence.text.slice(open)
+  return !quoted.includes('”') && (quoted.match(LATIN_WORD)?.length ?? 0) <= SHORT_QUOTE_WORDS
     && paragraphText.indexOf('”', sentence.end) >= 0
 }
 
@@ -95,14 +107,14 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence 
   if (items.length !== 1) return fail('locateBy=stem 时必须恰好有一项题干定位（sourceRole stem + locationCue）。')
   const [item] = items
   const sourceText = text(item.sourceText)
-  const stemText = String(stem ?? '')
+  const stemText = plain(String(stem ?? ''))
   if (!sourceText || !stemText.includes(sourceText)) return fail('定位词 sourceText 必须从题干原样抄。')
   const words = sourceText.match(LATIN_WORD)?.length ?? 0
   if (words < 1 || words > CUE_MAX_WORDS) return fail(`定位词 sourceText 必须是 1–${CUE_MAX_WORDS} 个英文词。`)
   if (core(sourceText).toLowerCase() === core(stemText).toLowerCase()) return fail('定位词 sourceText 不能是整句题干。')
 
   const paragraphId = text(item.targetParagraphId)
-  const paragraph = paragraphs.get(paragraphId)
+  const paragraph = plainParagraph(paragraphs, paragraphId)
   if (typeof paragraph !== 'string') return fail(`定位句引用了不存在的 targetParagraphId：${paragraphId || '空'}。`)
   const targetText = text(item.targetText)
   if (!targetText || !paragraph.includes(targetText)) return fail('定位句 targetText 必须精确匹配原文。')
@@ -131,7 +143,7 @@ export function resolveReadingLocate({ entry, stem, paragraphs, correctEvidence 
   let answer = null
   for (const evidence of Array.isArray(correctEvidence) ? correctEvidence : []) {
     const quote = text(evidence?.quote)
-    const evidenceParagraph = paragraphs.get(evidence?.paragraphId)
+    const evidenceParagraph = plainParagraph(paragraphs, evidence?.paragraphId)
     if (!quote.includes(answerText) || typeof evidenceParagraph !== 'string') continue
     const quoteStart = evidenceParagraph.indexOf(quote)
     if (quoteStart < 0) continue

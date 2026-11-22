@@ -93,13 +93,22 @@ ok('sentences: initials and reported speech stay in one sentence; quoted dialogu
     '“I am tired.', 'Let us go.”', 'She left.', 'He took vitamin C.', 'Then he slept.',
   ])
   assert.deepEqual(split('He said, “Wait. I am coming.'), ['He said, “Wait.', 'I am coming.'])
+  assert.deepEqual(split('Wendy said: “Residents really welcome the idea of the project. We look forward to it.”'), [
+    'Wendy said: “Residents really welcome the idea of the project.', 'We look forward to it.”',
+  ])
 })
 
-ok('a no-break space in the passage matches a plain space in the stem words', () => {
-  const paragraphs = new Map([['p', 'Take a view of the hills. It is quiet.']])
-  const entry = { locateBy: 'stem', locationParaphrases: [{ sourceText: 'Take a view', sourceRole: 'stem', relationType: 'locationCue', targetText: 'Take a view of the hills.', targetParagraphId: 'p', answerText: 'of the hills', note: '原词' }] }
-  const result = resolveReadingLocate({ entry, stem: 'Why Take a view here?', paragraphs, correctEvidence: [{ paragraphId: 'p', quote: 'Take a view of the hills.' }] })
+ok('a no-break space in the passage matches a plain space in the stem words and in a copied sentence', () => {
+  const paragraphs = new Map([['p', 'Take\u00a0a view of the hills. It is quiet.']])
+  const entry = { locateBy: 'stem', locationParaphrases: [{ sourceText: 'Take a view', sourceRole: 'stem', relationType: 'locationCue', targetText: 'Take\u00a0a view of the hills.', targetParagraphId: 'p', answerText: 'of the hills', note: '原词' }] }
+  const result = resolveReadingLocate({ entry, stem: 'Why Take a view here?', paragraphs, correctEvidence: [{ paragraphId: 'p', quote: 'Take\u00a0a view of the hills.' }] })
   assert.deepEqual(result.errors, [])
+  const typed = structuredClone(entry)
+  typed.locationParaphrases[0].targetText = 'Take a view of the hills.'
+  typed.locationParaphrases[0].answerText = 'of the hills'
+  const plainResult = resolveReadingLocate({ entry: typed, stem: 'Why Take a view here?', paragraphs, correctEvidence: [{ paragraphId: 'p', quote: 'Take\u00a0a view of the hills.' }] })
+  assert.deepEqual(plainResult.errors, [])
+  assert.equal(plainResult.locate.sentence.start, 0)
 })
 
 ok('bridge length counts Chinese characters and English words once each', () => {
