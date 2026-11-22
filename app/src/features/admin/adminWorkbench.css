@@ -25,14 +25,18 @@
   margin: 8px 0 0;
 }
 
-.agent-tokens {
+:is(.agent-tokens, .agent-reports) {
   margin-top: 32px;
   color: var(--eqb-color-text);
   font-size: 13px;
 }
-.agent-tokens h2 { font-size: 14px; margin: 0 0 8px; }
-.agent-tokens p { color: var(--eqb-color-text-muted); line-height: 1.5; }
+:is(.agent-tokens, .agent-reports) h2 { font-size: 14px; margin: 0 0 8px; }
+:is(.agent-tokens, .agent-reports) p { color: var(--eqb-color-text-muted); line-height: 1.5; }
 .agent-tokens form { display: flex; flex-wrap: wrap; align-items: end; gap: 8px; }
+.agent-token-scopes { flex-basis: 100%; border: 0; padding: 0; margin: 4px 0 0; }
+.agent-token-scopes legend { padding: 0; margin-bottom: 4px; }
+.agent-token-scopes label { display: inline-flex; align-items: center; gap: 4px; margin-right: 16px; min-height: 28px; }
+.agent-token-scopes input { margin: 0; accent-color: var(--eqb-color-action); }
 /* 「名称」换成 shared-ui/TextField（字段构件第二轮 2026-11-15）：标签、框、占位符、焦点归 field.css，
  * 原来这里的 label / input / ::placeholder / input:focus-visible 几条删了。框宽 228 是换前实测的输入框宽（浏览器给的默认宽，fields2-shots 量的）。 */
 .agent-token-name { width: 228px; max-width: 100%; }
@@ -42,11 +46,12 @@
 .eqb-button.agent-token-submit { border: 1px solid var(--eqb-color-border); }
 .eqb-button.agent-token-submit:disabled { color: var(--eqb-color-text-muted); }
 /* .agent-token-load-failed 的排布（字和「重试」一行）构件收尾（2026-11-15）归共用 Notice，这条删了。 */
-.agent-tokens ul { list-style: none; padding: 0; margin: 16px 0 0; }
-.agent-tokens li { display: flex; gap: 16px; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--eqb-color-border-subtle); }
-.agent-tokens li > div { min-width: 0; overflow-wrap: anywhere; }
-.agent-tokens li span { margin-left: 8px; color: var(--eqb-color-text-muted); }
-.agent-tokens li small { display: block; margin-top: 4px; font-size: 12px; color: var(--eqb-color-text-muted); }
+:is(.agent-tokens, .agent-reports) ul { list-style: none; padding: 0; margin: 16px 0 0; }
+:is(.agent-tokens, .agent-reports) li { display: flex; gap: 16px; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--eqb-color-border-subtle); }
+:is(.agent-tokens, .agent-reports) li > div { min-width: 0; overflow-wrap: anywhere; }
+:is(.agent-tokens, .agent-reports) li span { margin-left: 8px; color: var(--eqb-color-text-muted); }
+:is(.agent-tokens, .agent-reports) li small { display: block; margin-top: 4px; font-size: 12px; color: var(--eqb-color-text-muted); }
+.agent-reports li p { margin: 4px 0; color: var(--eqb-color-text); white-space: pre-wrap; }
 /* 口令列表在等时（等待第六轮 2026-11-15，AgentTokens.tsx AgentTokenListSkeleton）。灰块本身是 <span>：
  * 覆盖：第一条 (0,2,2) 盖过上面 .agent-tokens li span (0,1,2) 的 margin-left: 8px——那条是给「有效 / 已作废」的，灰块套在它里面不再多空一次。
  * 第二条 (0,2,0)：「作废口令」的灰块放在键上字的位置，右边留出键的内衬。 */

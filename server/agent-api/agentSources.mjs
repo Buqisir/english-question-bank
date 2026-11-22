@@ -1,0 +1,174 @@
+import { readFileSync, readdirSync } from 'node:fs'
+import path from 'node:path'
+import { digestJson, sha256 } from '../../shared/paper-canonical/stable.mjs'
+import { inlineText, mediaReference, sourceBlocks } from './agentPassage.mjs'
+
+const OCR_EVIDENCE = 'nck1-ocr-source-evidence-v1'
+const IMAGE_MIME_TYPES = new Set(['image/png', 'image/jpeg', 'image/webp', 'image/svg+xml'])
+
+function readJson(file) {
+  return JSON.parse(readFileSync(file, 'utf8'))
+}
+
+function readEvidence(versionDir, descriptor) {
+  if (!/^source-evidence\/[a-z0-9._-]+\.bin$/i.test(descriptor?.relativePath ?? '')) return null
+  const bytes = readFileSync(path.join(versionDir, descriptor.relativePath))
+  return bytes.length === descriptor.byteLength && sha256(bytes) === descriptor.sha256 ? bytes : null
+}
+
+function isOcrEvidence(descriptor) {
+  // Source Capture's compiler keys document IDs by the original bytes, roles
+  // and input key. Resolve this descriptor without opening the embedded PDFs.
+  const commitment = digestJson({ digest: descriptor.sha256, roles: ['source_provenance'], inputKey: 'ocr_source_evidence' })
+  return descriptor.documentId === `document:${commitment.slice('sha256:'.length).slice(0, 28)}`
+}
+
+function publishedMedia(versionDir, manifest, media) {
+  const displayById = new Map()
+  if (media.some(item => item.displayVariant)) {
+    const file = 'canonical/canonical-question-groups-v1.json'
+    const descriptor = manifest.artifacts?.find(item => item.role === 'question_groups' && item.relativePath === file)
+    if (descriptor) {
+      const bytes = readFileSync(path.join(versionDir, file))
+      if (bytes.length === descriptor.byteLength && sha256(bytes) === descriptor.sha256) {
+        for (const group of JSON.parse(bytes).groups) {
+          for (const item of group.media || []) {
+            if (item.displayVariant) displayById.set(item.mediaId, item.displayVariant)
+          }
+        }
+      }
+    }
+  }
+  return media.map(item => {
+    const display = displayById.get(item.mediaId)
+    const selected = item.displayVariant
+      ? (display && display.sha256 === item.displayVariant.sha256 ? display : item.displayVariant)
+      : item.publication && item.publication.selection !== 'source_crop' ? item.publication.candidate : item
+    const { sha256, mimeType, pixelWidth, pixelHeight } = selected
+    return { mediaId: item.mediaId, sha256, mimeType, pixelWidth, pixelHeight }
+  })
+}
+
+export function publishedAgentSource(versionDir, publicationDigest) {
+  const dir = path.join(versionDir, 'canonical')
+  try {
+    const manifests = readdirSync(dir).filter(name => /^canonical-paper-publication-v\d+\.json$/.test(name))
+    const manifest = manifests.map(name => readJson(path.join(dir, name)))
+      .find(({ publicationDigest: digest, ...value }) => digest === publicationDigest && digestJson(value) === digest)
+    if (!manifest) return {}
+    const bytes = readFileSync(path.join(dir, 'source-asset.bin'))
+    if (sha256(bytes) !== manifest.sourceAssetDigest) return {}
+    const materialization = JSON.parse(bytes)
+    if (!materialization.schemaVersion?.startsWith('nck1-source-materialization-v')) return {}
+    return {
+      materialization,
+      media: publishedMedia(versionDir, manifest, materialization.media ?? []),
+      readMedia(item) {
+        const descriptor = manifest.sourceEvidence?.find(entry => entry.sha256 === item.sha256)
+        return readEvidence(versionDir, descriptor)
+      },
+      readAnswerOcr() {
+        const bytes = readEvidence(versionDir, manifest.sourceEvidence?.find(isOcrEvidence))
+        return bytes ? JSON.parse(bytes) : null
+      },
+    }
+  } catch {
+    return {}
+  }
+}
+
+function optionMediaIds(option) {
+  const ids = Array.isArray(option?.content)
+    ? option.content.filter(inline => inline.kind === 'media_ref').map(inline => inline.mediaId)
+    : []
+  if (option?.figure) ids.push(option.figure.mediaId)
+  return ids.filter(Boolean)
+}
+
+export function projectAgentOption(paperId, option, sourceOption, mediaById) {
+  const content = option.text ?? option.content ?? ''
+  const result = { label: option.label, content }
+  if (!mediaById) return result
+  const ids = new Set([...optionMediaIds(option), ...optionMediaIds(sourceOption)])
+  const hasText = value => Array.isArray(value)
+    ? Boolean(inlineText(value).trim())
+    : typeof value === 'string' && Boolean(value.trim())
+  const hasContent = hasText(content)
+  if (!ids.size && hasContent) return result
+  const media = []
+  const missingMediaIds = []
+  for (const id of ids) {
+    const item = mediaById.get(id)
+    if (!IMAGE_MIME_TYPES.has(item?.mimeType)) {
+      missingMediaIds.push(id)
+      continue
+    }
+    media.push({ ...mediaReference(paperId, id), mimeType: item.mimeType,
+      width: item.pixelWidth ?? null, height: item.pixelHeight ?? null })
+  }
+  const kind = ids.size && (hasContent || hasText(sourceOption?.text ?? sourceOption?.content)) ? 'mixed' : 'image'
+  return { ...result, kind, media,
+    ...(!media.length || missingMediaIds.length ? { notice: 'media_missing' } : {}),
+    ...(missingMediaIds.length ? { missingMediaIds } : {}),
+  }
+}
+
+function referencesMedia(materialization, mediaId, paper) {
+  const optionsReference = options => options?.some(option => optionMediaIds(option).includes(mediaId))
+  function blockReferences(block) {
+    if (block.kind === 'figure') return block.mediaId === mediaId
+    return block.kind === 'table' && block.rows.some(row => row.cells.some(cell =>
+      cell.content.some(inline => inline.kind === 'media_ref' && inline.mediaId === mediaId)))
+  }
+  return materialization?.groups?.some(group =>
+    Array.from(sourceBlocks(group.blocks)).some(blockReferences)
+    || group.questions?.some(question => question.stemFigures?.some(blockReferences)
+      || optionsReference(question.options))
+    || optionsReference(group.optionBank))
+    || paper.groupIds.some(groupId => {
+      const group = paper.asset.content.groups[groupId]
+      return optionsReference(group.optionBank) || group.questionIds?.some(questionId =>
+        optionsReference(paper.asset.content.questions[questionId]?.options))
+    })
+}
+
+export function agentMedia(source, mediaId, paper) {
+  const item = source.media?.find(item => item.mediaId === mediaId)
+  if (!item || !IMAGE_MIME_TYPES.has(item.mimeType)) return null
+  if (!referencesMedia(source.materialization, mediaId, paper)) return null
+  try {
+    const bytes = source.readMedia?.(item)
+    if (!bytes?.length || sha256(bytes) !== item.sha256) return null
+    return { bytes, mimeType: item.mimeType, etag: `"${item.sha256}"` }
+  } catch {
+    return null
+  }
+}
+
+export function agentAnswerSource(source) {
+  const entries = []
+  try {
+    const { materialization } = source
+    const ocr = source.readAnswerOcr?.()
+    if (ocr?.schemaVersion !== OCR_EVIDENCE || ocr.paperId !== materialization?.paperId) return { notice: 'none' }
+    for (const doc of ocr.documents) {
+      const role = materialization.documents.find(item => item.documentId === doc.documentId)?.role
+      if (role !== 'official_answers' && role !== 'question_and_answers') continue
+      const authorities = [...materialization.answers, ...(materialization.listening?.answers || [])]
+        .map(answer => answer.authority).filter(locator => locator?.documentId === doc.documentId && locator.kind === 'page_region')
+        .sort((a, b) => a.page - b.page || a.region.y - b.region.y)
+      const start = authorities[0]
+      for (const { page, observations } of doc.pages) {
+        for (const { text, region } of observations) {
+          if (!text || !region) continue
+          if (role === 'question_and_answers' && (!start || page < start.page
+            || (page === start.page && region.y + region.height <= start.region.y))) continue
+          entries.push({ documentId: doc.documentId, page, region, text })
+        }
+      }
+    }
+  } catch {
+    return { notice: 'none' }
+  }
+  return entries.length ? { entries } : { notice: 'none' }
+}

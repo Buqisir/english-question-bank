@@ -1,7 +1,9 @@
 import path from 'node:path'
-import { readFileSync } from 'node:fs'
+import { readFileSync, statSync } from 'node:fs'
 import { listCanonicalPaperCatalog } from '../search/canonicalPaperCatalog.mjs'
 import { resolvePaperAssetReadPaths } from '../paper-import/storage.mjs'
+import { projectAgentOption, publishedAgentSource } from './agentSources.mjs'
+import { projectAgentPassage } from './agentPassage.mjs'
 
 const reviewPaperCaches = new WeakMap()
 
@@ -36,11 +38,19 @@ export function listAgentPapers(context, reviewStore) {
     }
   }
   finally { db.close() }
-  const papers = published.map(({ paperId, asset, sourceType }) => {
+  const papers = published.map(({ paperId, asset, sourceType, publishedAt, versionName, publicationDigest }) => {
     const { baseDir } = resolvePaperAssetReadPaths(context.paperAssetsDir, paperId)
     let meta
     try { meta = JSON.parse(readFileSync(path.join(baseDir, 'import-meta.json'), 'utf8')).paper } catch { /* Unknown metadata stays null. */ }
-    return { ...paperEntry(paperId, asset, { ...meta, sourceType: meta?.sourceType ?? sourceType }), status: 'published' }
+    const versionDir = path.join(context.paperAssetsDir, paperId, 'versions', versionName)
+    // Rollback replaces the current ref but keeps the old version's original creation date.
+    let updatedAt = Date.parse(publishedAt.includes('T') ? publishedAt : `${publishedAt.replace(' ', 'T')}Z`)
+    try {
+      updatedAt = Math.max(updatedAt, statSync(path.join(baseDir, 'canonical-paper-publication-ref-v1.json')).mtimeMs)
+    } catch { /* Keep the indexed publication timestamp. */ }
+    return { ...paperEntry(paperId, asset, { ...meta, sourceType: meta?.sourceType ?? sourceType }),
+      status: 'published', updatedAt: new Date(updatedAt).toISOString(),
+      readSource: () => publishedAgentSource(versionDir, publicationDigest) }
   })
   const publishedIds = new Set(papers.map(paper => paper.paperId))
   if (reviewStore) {
@@ -57,13 +67,19 @@ export function listAgentPapers(context, reviewStore) {
       paper.load = () => {
         if (!paper.asset) {
           try {
-            const { paperAsset, meta } = reviewStore.agentPaperAssetForRevision(revision.id)
-            Object.assign(paper, paperEntry(revision.paperId, paperAsset, meta))
+            const { paperAsset, meta, media, readMaterialization, readAnswerOcr } = reviewStore.agentPaperAssetForRevision(revision.id)
+            Object.assign(paper, paperEntry(revision.paperId, paperAsset, meta), {
+              readSource: () => ({
+                materialization: readMaterialization(), media, readAnswerOcr,
+                readMedia: item => reviewStore.agentMediaForRevision(revision.id, item.mediaId),
+              }),
+            })
             cache.set(key, paper)
           } catch { return null } // An unreadable Candidate must not break other papers.
         }
         return paper
       }
+      paper.updatedAt = revision.updatedAt
       papers.push(paper)
     }
     for (const key of cache.keys()) if (!activeKeys.has(key)) cache.delete(key)
@@ -72,22 +88,42 @@ export function listAgentPapers(context, reviewStore) {
 }
 
 export function paperSummary(paper) {
-  const { asset, groupIds, load, ...summary } = paper
+  const { asset, groupIds, load, updatedAt, readSource, ...summary } = paper
   return { ...summary, groupCount: groupIds?.length ?? null }
 }
 
-export function agentGroup(paper, groupId) {
+export function readAgentSource(paper) {
+  try {
+    const source = paper.readSource()
+    return source.materialization?.paperId === paper.paperId ? source : {}
+  } catch {
+    return {}
+  }
+}
+
+export function agentPaperDetail(paper) {
+  const source = readAgentSource(paper)
+  return { ...paperSummary(paper), groups: paper.groupIds.map(id => agentGroup(paper, id, source)) }
+}
+
+export function agentGroup(paper, groupId, source) {
   const group = paper.asset.content.groups[groupId]
+  const sourceGroup = source?.materialization?.groups?.find(item => item.groupId === groupId)
+  const mediaById = source && new Map(source.media?.map(item => [item.mediaId, item]))
   const section = paper.asset.layoutTree?.parts?.flatMap(part => part.sections?.flatMap(section =>
     section.groups?.some(item => item.groupId === groupId) ? [section.title || part.title] : []) || [])
     .find(Boolean) || group.section || group.groupType
   const questions = (group.questionIds || []).map(questionId => {
     const question = paper.asset.content.questions[questionId]
     const answer = paper.asset.answerKey?.answers?.[questionId]
+    const usesOwnOptions = Boolean(question.options?.length)
+    const sourceOptions = usesOwnOptions
+      ? sourceGroup?.questions?.find(item => item.questionId === questionId)?.options
+      : sourceGroup?.optionBank
     return {
       questionId, number: question.questionNo, stem: question.stem ?? question.blankId ?? '',
-      options: (question.options?.length ? question.options : group.optionBank || [])
-        .map(option => ({ label: option.label, content: option.text ?? option.content ?? '' })),
+      options: (usesOwnOptions ? question.options : group.optionBank || []).map(option =>
+        projectAgentOption(paper.paperId, option, sourceOptions?.find(item => item.label === option.label), mediaById)),
       answer: answer?.answer ?? null,
     }
   })
@@ -95,6 +131,9 @@ export function agentGroup(paper, groupId) {
   // options, listening material, writing task) rather than flattening the text.
   const { questionIds, ...content } = group
   const writingTask = paper.asset.content.writingTasks?.[group.writingTaskId]
+  if (source && (content.passage || group.groupType === 'reading')) {
+    content.passage = projectAgentPassage(paper.paperId, content.passage, sourceGroup, source.media, source.materialization?.paragraphJoins)
+  }
   return { ...content, groupId, section, ...(writingTask ? { writingTask } : {}), questions }
 }
 

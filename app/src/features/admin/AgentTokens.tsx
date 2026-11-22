@@ -10,7 +10,9 @@ import { useDelayedBusy } from '../../shared-ui/useDelayedBusy.ts'
 import { useRowReveal } from '../../shared-ui/useRowReveal.ts'
 import { errorFromResponse } from '../../services/httpClient'
 
-type AgentToken = { id: string; name: string; createdAt: string; revokedAt: string | null; lastUsedAt: string | null }
+const scopeLabels = { read: '读取试卷', 'report:append': '上报问题', 'drafts:write': '写入草稿' }
+type AgentScope = keyof typeof scopeLabels
+type AgentToken = { id: string; name: string; scope: AgentScope[]; createdAt: string; revokedAt: string | null; lastUsedAt: string | null }
 const endpoint = '/api/admin/agent-tokens'
 async function request(path = '', body?: object) {
   const response = await fetch(endpoint + path, body ? {
@@ -35,6 +37,7 @@ function AgentTokenListSkeleton() {
 export function AgentTokens() {
   const [tokens, setTokens] = useState<AgentToken[]>([])
   const [name, setName] = useState('')
+  const [scope, setScope] = useState<AgentScope[]>(['read'])
   const [secret, setSecret] = useState('')
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
@@ -73,14 +76,24 @@ export function AgentTokens() {
   }
   return <section ref={sectionRef} className="agent-tokens" aria-labelledby="agent-tokens-heading">
     <h2 id="agent-tokens-heading" ref={headingRef}>Agent 口令</h2>
-    <p>口令可只读访问已发布卷，包含来源答案。</p>
     <form onSubmit={event => {
       event.preventDefault()
       setCreating(true)
+      setSecret('')
       void mutate(async () => {
-        const created = await request('', { name })
-        setSecret(created.token); setName('')
-        const { token: _token, ...item } = created
+        const { token, ...item }: AgentToken & { token: string } = await request('', { name, scope })
+        if (!Array.isArray(item.scope) || item.scope.length !== scope.length || !scope.every(value => item.scope.includes(value))) {
+          try {
+            await request(`/${encodeURIComponent(item.id)}/revoke`, {})
+            setError('口令权限与所选权限不符，已作废新口令。')
+          } catch {
+            setLoading(true)
+            setLoadAttempt(n => n + 1)
+            setError('口令权限与所选权限不符。自动作废失败，请在列表中作废新口令。')
+          }
+          return
+        }
+        setSecret(token); setName(''); setScope(['read'])
         setTokens(current => [item, ...current])
       }).finally(() => setCreating(false))
     }}>
@@ -88,7 +101,17 @@ export function AgentTokens() {
       <TextField className="agent-token-name" label="名称" size="lg" required maxLength={100} value={name} onChange={event => setName(event.target.value)} placeholder="例如：组卷 Agent" />
       {/* 等待第二轮（2026-11-15，DESIGN.md §5 Waiting）：原生 .ghost-button 换成 Button 墨字大号（同高 36、同 13 / 500、墨字），
           一圈边照旧由 .agent-token-submit 画。新建中用 busy：字不换（原来换成「保存中…」）、宽度不变，字隐去、所以点在正中。 */}
-      <Button tone="strong" size="lg" className="agent-token-submit" type="submit" busy={creating} disabled={!creating && (busy || !name.trim())}>新建口令</Button>
+      <Button tone="strong" size="lg" className="agent-token-submit" type="submit" busy={creating} disabled={!creating && (busy || !name.trim() || !scope.length)}>新建口令</Button>
+      <fieldset className="agent-token-scopes" disabled={busy}>
+        <legend>权限</legend>
+        {(Object.keys(scopeLabels) as AgentScope[]).map(item => <label key={item}>
+          <input type="checkbox" checked={scope.includes(item)} onChange={event => {
+            const checked = event.target.checked
+            setScope(current => checked ? [...current, item] : current.filter(value => value !== item))
+          }} />
+          {scopeLabels[item]}
+        </label>)}
+      </fieldset>
     </form>
     {secret && <Surface padding="md" className="agent-token-secret">
       <p>口令只显示这一次，请妥善保存。离开页面后无法再次查看。</p>
@@ -110,7 +133,8 @@ export function AgentTokens() {
       action={{ label: '重试', onClick: () => { setLoading(true); setLoadAttempt(n => n + 1) } }}>口令列表没有加载出来。</Notice> : tokens.length === 0 ? <p>还没有口令。</p> :
       <ul>{tokens.map(item => <li key={item.id} data-token-id={item.id}>
         <div><strong>{item.name}</strong><span>{item.revokedAt ? '已作废' : '有效'}</span>
-          <small>创建于 {new Date(item.createdAt).toLocaleDateString()} · {item.lastUsedAt ? `最近使用 ${new Date(item.lastUsedAt).toLocaleString()}` : '尚未使用'}</small></div>
+          <small>创建于 {new Date(item.createdAt).toLocaleDateString()} · {item.lastUsedAt ? `最近使用 ${new Date(item.lastUsedAt).toLocaleString()}` : '尚未使用'}</small>
+          <small>{(item.scope ?? ['read']).map(scope => scopeLabels[scope]).join(' · ')}</small></div>
         {!item.revokedAt && <button type="button" className="ghost-button agent-token-revoke" disabled={busy} onClick={(event) => {
           focusAfterRevokeRef.current = planFocusAfterRemoval(event.currentTarget, {
             item: '.agent-tokens li', key: 'data-token-id', control: '.agent-token-revoke',
@@ -151,5 +175,61 @@ export function AgentTokens() {
       {/* 作废没成功：写在框里（框不关），同样换成 Notice，字没改。 */}
       {error ? <Notice kind="error">{error}</Notice> : null}
     </Dialog>
+  </section>
+}
+
+type AgentReport = {
+  id: string; tokenName: string; paperId: string; questionId: string | null; groupId: string | null
+  kind: string; note: string; createdAt: string; status: 'pending'
+}
+
+export function AgentReports() {
+  const [reports, setReports] = useState<AgentReport[]>([])
+  const [nextOffset, setNextOffset] = useState<number | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [failed, setFailed] = useState(false)
+  const [pageRequest, setPageRequest] = useState({ offset: 0 })
+  useEffect(() => {
+    const controller = new AbortController()
+    const { offset } = pageRequest
+    const query = offset === 0 ? '' : `?offset=${offset}`
+    fetch(`/api/admin/agent-reports${query}`, { signal: controller.signal }).then(async response => {
+      if (!response.ok) throw await errorFromResponse(response, '上报列表读取失败。')
+      const data: { reports: AgentReport[]; nextOffset: number | null } = await response.json()
+      if (controller.signal.aborted) return
+      setReports(current => {
+        if (offset === 0) return data.reports
+        const seen = new Set(current.map(report => report.id))
+        return [...current, ...data.reports.filter(report => !seen.has(report.id))]
+      })
+      setNextOffset(data.nextOffset ?? null)
+      setLoading(false)
+    }).catch(() => {
+      if (!controller.signal.aborted) { setFailed(true); setLoading(false) }
+    })
+    return () => controller.abort()
+  }, [pageRequest])
+
+  function loadPage(offset: number) {
+    setFailed(false)
+    setLoading(true)
+    setPageRequest({ offset })
+  }
+
+  return <section className="agent-reports" aria-labelledby="agent-reports-heading">
+    <h2 id="agent-reports-heading">Agent 上报</h2>
+    {loading && reports.length === 0 ? <Notice kind="waiting">正在读取上报</Notice> :
+      failed && reports.length === 0 ? <Notice kind="error" action={{ label: '重试', onClick: () => loadPage(0) }}>上报列表没有加载出来。</Notice> :
+      reports.length === 0 ? <p>还没有上报记录。</p> :
+      <ul>{reports.map(item => <li key={item.id}>
+        <div>
+          <strong>{item.kind}</strong><span>{item.status === 'pending' ? '待处理' : item.status}</span>
+          <p>{item.note}</p>
+          <small><time dateTime={item.createdAt}>{new Date(item.createdAt).toLocaleString()}</time> · {item.tokenName}</small>
+          <small>卷 {item.paperId} · {item.questionId ? `题 ${item.questionId}` : `题组 ${item.groupId}`}</small>
+        </div>
+      </li>)}</ul>}
+    {failed && reports.length > 0 && <Notice kind="error">更多上报没有加载出来。</Notice>}
+    {nextOffset !== null && <Button tone="strong" size="sm" busy={loading} onClick={() => loadPage(nextOffset)}>加载更多</Button>}
   </section>
 }
