@@ -794,7 +794,13 @@ Fields of that item:
   `targetCue`, so both must read well side by side.
 - `answerText` — the exact passage words where the answer is. It MUST be a
   substring of one `quote` in the correct option's `evidence`. Keep it to
-  the deciding words, not the whole evidence.
+  the deciding words, not the whole evidence. The deciding words cover every
+  part of the correct option: when the option's fact and its verb sit in
+  different phrases of the quote, keep both and the words between them
+  (option "She overcame a fear of water", quote "swimming had always
+  terrified her, but last summer she finally swam across the lake": keep
+  from "swimming had always terrified her" through "swam across the lake").
+  Trim only words the option does not rewrite.
 - `bridgeZh` — only when `answerText` is NOT inside `targetText`: one short
   Chinese line, at most 25 units (each Chinese character and each English
   word counts as one), saying WHY the answer is in the context. Say the
