@@ -7,14 +7,14 @@ import { splitClueTail } from '../../../../shared/analysis/questionMarks.mjs'
 type TranslationSegment = ObjectiveTeachingView['translationParagraphs'][number]['segments'][number]
 
 // The same marks as the companion PDF (shared/analysis/questionMarks.mjs): an
-// answer is bold with its number in front, as on the exam paper; a clue is
-// underlined with its number after its last character.
+// answer is bold with its number in brackets in front ([41]); a clue is on a
+// pale tint with a plain superscript number after its last character.
 function TranslationSegmentMark({ segment }: { segment: TranslationSegment }): ReactNode {
   if (!segment.answer && !segment.clue) return segment.text
   const className = ['pi-objective-mark', segment.answer && 'is-answer', segment.clue && 'is-clue']
     .filter(Boolean).join(' ')
   const number = segment.before.length > 0
-    && <b className="pi-objective-mark-no">{segment.before.join('、')}</b>
+    && <b className="pi-objective-mark-no">[{segment.before.join('、')}]</b>
   if (segment.after.length === 0) {
     return <>{number}<span className={className} data-annotation-kinds={segment.kinds.join(' ')}>{segment.text}</span></>
   }

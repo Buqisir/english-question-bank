@@ -87,7 +87,7 @@ export type ObjectiveTeachingView = {
     paragraphId: string
     // Cut by shared/analysis/questionMarks.mjs, the one rule for question
     // numbers in every objective type: an answer is bold with its number in
-    // front (before), a clue is underlined with its number after (after).
+    // front (before), a clue is tinted with its number after (after).
     segments: Array<{
       text: string
       answer: boolean

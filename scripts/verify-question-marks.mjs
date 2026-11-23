@@ -1,6 +1,6 @@
 // One rule for every question number in a passage or translation
 // (shared/analysis/questionMarks.mjs): answers bold with the number in front,
-// clues underlined with the number after, one number per question per place.
+// clues tinted with the number after, one number per question per place.
 import assert from 'node:assert/strict'
 import { questionMarkRuns } from '../shared/analysis/questionMarks.mjs'
 

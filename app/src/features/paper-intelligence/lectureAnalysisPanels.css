@@ -719,8 +719,9 @@ button.pi-ps-analysis-distractor--selected {
   font-size: 0.75rem;
 }
 /* Question numbers in a translation: one rule with the companion PDF
-   (shared/analysis/questionMarks.mjs). Answer bold, number in front; clue
-   underlined, number after its last character. */
+   (shared/analysis/questionMarks.mjs). Answer bold, number in brackets in
+   front ([41]); clue on a pale tint, plain superscript number after its last
+   character. */
 .pi-objective-mark.is-answer {
   font-weight: 700;
 }
@@ -743,7 +744,11 @@ button.pi-ps-analysis-distractor--selected {
   line-height: 0;
   vertical-align: 0.5em;
 }
-.pi-objective-mark.is-clue,
+.pi-objective-mark.is-clue {
+  background: var(--mint-soft);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
 .pi-objective-long-sentences u {
   text-decoration: underline;
   text-decoration-thickness: 1px;

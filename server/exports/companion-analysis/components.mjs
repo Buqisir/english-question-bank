@@ -24,7 +24,7 @@ export const analysisComponents = [
     classes: ['micro-heading', 'inline-label', 'heading-lead'] },
   { name: 'PassageBlock', role: '篇章级的块：篇章大意、篇章结构、完形主线和串空、全文译文、原文',
     classes: ['overview', 'reading-discourse', 'cloze-main-line', 'cloze-thread', 'full-translation', 'source-relationships'] },
-  { name: 'Mark', role: '原文和译文里的标注：线索淡绿底加题号上标，填入的答案粗体加前置题号',
+  { name: 'Mark', role: '原文和译文里的标注：线索淡绿底加题号上标（不加括号），填入的答案粗体加前置题号 [41]',
     classes: ['source-relationship', 'translation-annotation', 'source-underline', 'answer-fill',
       'blank-no', 'clue-tail', 'clue-no'] },
   { name: 'QuestionHead', role: '题头：绿底反白题号块、答案，接排讲解第一行；阅读接英文题干（定位词粗体），下一行淡墨中文译文',
