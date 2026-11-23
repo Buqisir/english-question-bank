@@ -2,35 +2,7 @@ import type { ReactNode } from 'react'
 import type { ObjectiveTeachingView } from './objectiveTeachingContentAdapter.ts'
 import { DisclosureIcon } from '../../icons/MotionIcons'
 import { iconMotionInput } from '../../icons/motionInput'
-import { splitClueTail } from '../../../../shared/analysis/questionMarks.mjs'
-
-type TranslationSegment = ObjectiveTeachingView['translationParagraphs'][number]['segments'][number]
-
-// The same marks as the companion PDF (shared/analysis/questionMarks.mjs): an
-// answer is bold with its number in brackets in front ([41]); a clue is on a
-// pale tint with a plain superscript number after its last character.
-function TranslationSegmentMark({ segment }: { segment: TranslationSegment }): ReactNode {
-  if (!segment.answer && !segment.clue) return segment.text
-  const className = ['pi-objective-mark', segment.answer && 'is-answer', segment.clue && 'is-clue']
-    .filter(Boolean).join(' ')
-  const number = segment.before.length > 0
-    && <b className="pi-objective-mark-no">[{segment.before.join('、')}]</b>
-  if (segment.after.length === 0) {
-    return <>{number}<span className={className} data-annotation-kinds={segment.kinds.join(' ')}>{segment.text}</span></>
-  }
-  const [head, last, rest] = splitClueTail(segment.text)
-  return (
-    <>
-      {number}
-      <span className={className} data-annotation-kinds={segment.kinds.join(' ')}>{head}</span>
-      <span className="pi-objective-mark-tail">
-        <span className={className}>{last}</span>
-        <sup className="pi-objective-mark-clue-no">{segment.after.join(',')}</sup>
-      </span>
-      {rest}
-    </>
-  )
-}
+import { QuestionMark } from './QuestionMark'
 
 export function ObjectiveTeachingContent({ content }: { content: ObjectiveTeachingView | null }): ReactNode {
   if (!content) return null
@@ -55,7 +27,7 @@ export function ObjectiveTeachingContent({ content }: { content: ObjectiveTeachi
             {content.translationParagraphs.map((paragraph) => (
               <p key={paragraph.paragraphId} data-translation-paragraph-id={paragraph.paragraphId}>
                 {paragraph.segments.map((segment, index) => (
-                  <TranslationSegmentMark key={`${paragraph.paragraphId}-${index}`} segment={segment} />
+                  <QuestionMark key={`${paragraph.paragraphId}-${index}`} segment={segment} />
                 ))}
               </p>
             ))}

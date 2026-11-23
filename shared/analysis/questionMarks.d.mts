@@ -25,3 +25,10 @@ export function questionMarkRuns(
 ): QuestionMarkRun[]
 
 export function splitClueTail(text: string): [string, string, string]
+
+export function quoteRanges(
+  text: string,
+  quotes: { quote: string, questionIds: string[] }[],
+): QuestionMarkRange[]
+
+export function rangesInPiece(text: string, ranges: QuestionMarkRange[], from: number, to: number): QuestionMarkRange[]

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
+import { QuestionMark, type QuestionMarkSegment } from '../paper-intelligence/QuestionMark'
 import type { ListeningSentence } from '../../domain/listeningAnalysis'
 import { Check } from '../../icons'
 import { paperSurfaceTokens } from '../../../../shared/papersurface/tokens.mjs'
@@ -79,8 +80,10 @@ function sentenceFocusTop(row: HTMLElement, height: number) {
 
 const noSentences: ListeningSentence[] = []
 
-export function ListeningSentenceFollow({ sentences = noSentences, audio, onActivate, onQuestion, reviewedSentence, children }: {
+export function ListeningSentenceFollow({ sentences = noSentences, marks, audio, onActivate, onQuestion, reviewedSentence, children }: {
   sentences?: ListeningSentence[]
+  /** Per sentence, its text cut into question-mark runs (shared/analysis/questionMarks.mjs). */
+  marks?: QuestionMarkSegment[][]
   audio?: HTMLAudioElement | null
   onActivate: (audio: HTMLAudioElement) => void
   onQuestion: (question: number) => void
@@ -401,8 +404,8 @@ export function ListeningSentenceFollow({ sentences = noSentences, audio, onActi
               <button className="listening-follow-sentence" type="button" lang="en" disabled={!audio}
                 aria-description={sentence.zh} style={{ fontFamily: paperSurfaceTokens.paperFontStack }}
                 onClick={() => playSentence(index)}>
-                {questionNumbers.length > 0
-                  ? <mark className="ps-evidence-anchor--active" data-paper-evidence-kind="support">{sentence.en}</mark>
+                {marks?.[index]?.some((run) => run.clue)
+                  ? marks[index].map((run, part) => <QuestionMark key={part} segment={run} />)
                   : sentence.en}
               </button>
               {questionNumbers.length > 0 && <span className="listening-follow-evidence">

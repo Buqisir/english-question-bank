@@ -2,7 +2,7 @@
 // (shared/analysis/questionMarks.mjs): answers bold with the number in front,
 // clues tinted with the number after, one number per question per place.
 import assert from 'node:assert/strict'
-import { questionMarkRuns } from '../shared/analysis/questionMarks.mjs'
+import { questionMarkRuns, quoteRanges, rangesInPiece } from '../shared/analysis/questionMarks.mjs'
 
 const at = (text, quote, from = 0) => {
   const index = text.indexOf(quote, from)
@@ -60,6 +60,26 @@ const numbers = (runs) => runs.flatMap((run) => [...run.before.map((n) => `${n}>
   assert.equal(marked.text, '洛杉矶公羊队对阵达拉斯牛仔队')
   assert.equal(marked.answer, false)
 }
+// Listening marks each question's verbatim quote; one that runs over two
+// lines (or spoken sentences) is numbered once, where it starts.
+{
+  const text = 'W: Would you like a menu?\nM: Yes. Email it to me.\nW: Fine.'
+  const ranges = quoteRanges(text, [
+    { quote: 'Would you like a menu?\nM: Yes.', questionIds: ['10'] },
+    { quote: 'not in the transcript', questionIds: ['11'] },
+  ])
+  assert.equal(ranges.length, 1)
+  const lines = text.split('\n')
+  let from = 0
+  const perLine = lines.map((line) => {
+    const runs = questionMarkRuns(line, rangesInPiece(text, ranges, from, from + Array.from(line).length), { questionNo, answersInText: false })
+    from += Array.from(line).length + 1
+    return runs
+  })
+  assert.deepEqual(perLine.map(numbers), [['10>'], [], []])
+  assert.deepEqual(perLine.map((runs) => runs.filter((run) => run.clue).map((run) => run.text)),
+    [['Would you like a menu?'], ['M: Yes.'], []])
+}
 // clues: false (grammar-fill translation) draws the answers only.
 {
   const text = '在这里竹子野生野长，集中供暖也没有'
@@ -73,4 +93,4 @@ const numbers = (runs) => runs.flatMap((run) => [...run.before.map((n) => `${n}>
   const runs = questionMarkRuns(text, [{ ...at(text, 'A long sentence.'), annotation: { kind: 'sentence-structure', questionIds: ['56'] } }], { questionNo })
   assert.deepEqual(runs.map((run) => [run.answer, run.clue]), [[false, false]])
 }
-console.log('Question marks: same, overlap, touch, apart, shared clue, reading, answers-only and long-sentence cases PASS')
+console.log('Question marks: same, overlap, touch, apart, shared clue, reading, listening quote, answers-only and long-sentence cases PASS')

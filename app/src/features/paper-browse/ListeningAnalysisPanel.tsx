@@ -2,6 +2,8 @@ import { useId, useLayoutEffect, useRef, useState } from 'react'
 import type { ListeningAnalysisV1, ListeningMaterialAnalysis } from '../../domain/listeningAnalysis'
 import { ListeningTransport } from './ListeningSegmentPlayer'
 import { ListeningSentenceFollow, scrollListeningTarget } from './ListeningSentenceFollow'
+import { QuestionMark } from '../paper-intelligence/QuestionMark'
+import { questionMarkRuns, quoteRanges, rangesInPiece } from '../../../../shared/analysis/questionMarks.mjs'
 
 function spokenWords(text: string) {
   return text.normalize('NFKC').toLowerCase().replace(/[’‘'ʼ]/g, '').match(/[\p{L}\p{N}]+/gu)?.join(' ') ?? ''
@@ -90,6 +92,16 @@ function ListeningMaterial({ material, analysis, allowed, heading, audio, onActi
   const questionsRef = useRef<HTMLDivElement>(null)
   const questions = material.questionIds.filter((id) => allowed.has(id)).map((id) => analysis.questions[id]).filter(Boolean)
   const sentenceWords = (material.sentences ?? []).map(({ en }) => spokenWords(en))
+  // Each question's quote, marked by the shared rule: listening answers are
+  // option letters, so the quote is where the question is answered and takes
+  // its bracketed number in front ([3]); a quote over several sentences is
+  // numbered once, where it starts.
+  const markOptions = { questionNo: (id: string) => id.split(':').at(-1), answersInText: false }
+  const ranges = quoteRanges(material.transcript, questions.map((question) =>
+    ({ quote: question.evidence.quote, questionIds: [question.questionId] })))
+  const codePoint = (utf16: number) => Array.from(material.transcript.slice(0, utf16)).length
+  const sentenceMarks = material.sentences?.map(({ en, utf16Start, utf16End }) => questionMarkRuns(en,
+    rangesInPiece(material.transcript, ranges, codePoint(utf16Start), codePoint(utf16End)), markOptions))
 
   useLayoutEffect(() => {
     materialRef.current?.closest('.paper-browse-lecture-panel')?.scrollTo({ top: 0, behavior: 'instant' })
@@ -109,12 +121,13 @@ function ListeningMaterial({ material, analysis, allowed, heading, audio, onActi
       <h5>{heading}</h5>
       <p className="listening-analysis-summary">{material.summaryZh}</p>
     </header>
-    <ListeningSentenceFollow sentences={material.sentences} audio={audio} onActivate={onActivate}
+    <ListeningSentenceFollow sentences={material.sentences} marks={sentenceMarks} audio={audio} onActivate={onActivate}
       onQuestion={(number) => setQuestionJump({ number })} reviewedSentence={reviewedSentence}>
       {!material.sentences?.length && <section className="listening-transcript listening-transcript-plain">
         <h6>录音稿</h6>
         <p className="listening-analysis-summary">本段可整段播放</p>
-        <p lang="en">{material.transcript}</p>
+        <p lang="en">{questionMarkRuns(material.transcript, ranges, markOptions)
+          .map((run, part) => <QuestionMark key={part} segment={run} />)}</p>
         <p className="listening-follow-translation">{material.translationZh}</p>
       </section>}
       {questions.length > 0 && <div className="listening-analysis-questions" ref={questionsRef}>

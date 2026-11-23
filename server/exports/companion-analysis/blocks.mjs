@@ -17,7 +17,7 @@ export function renderHeadingLead(heading, firstBlock = '', ...rest) {
 // Marks on the printed passage and on its translation. Which question number
 // goes where is one shared rule for every objective type, on paper and on
 // screen: shared/analysis/questionMarks.mjs. Here it only becomes print markup.
-function renderMarkedRun(text, ranges, questionNo, spanClass, { clues = true, answersInText = true } = {}) {
+export function renderMarkedRun(text, ranges, questionNo, spanClass, { clues = true, answersInText = true } = {}) {
   const html = questionMarkRuns(text, ranges, { questionNo, clues, answersInText }).map((run) => {
     if (!run.answer && !run.clue) return escapeHtml(run.text)
     const underline = (run.clue ? ' source-underline' : '') + (run.answer ? ' answer-fill' : '')
