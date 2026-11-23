@@ -395,7 +395,6 @@ h5 {
 .cloze-main-line,
 .cloze-thread,
 .full-translation,
-.source-relationships,
 .long-sentences {
   margin-top: calc(var(--lh) / 3);
 }
@@ -412,7 +411,6 @@ h5 {
 .cloze-main-line h4,
 .cloze-thread h4,
 .full-translation h4,
-.source-relationships h4,
 .long-sentences h4 {
   display: inline;
   margin-right: 0.5em;
@@ -435,15 +433,6 @@ h5 {
 
 .full-translation .heading-lead > h4 + p {
   text-indent: 0;
-}
-
-.source-relationships .heading-lead > h4 {
-  display: block;
-}
-
-.source-relationships p + p,
-.source-relationships .heading-lead + p {
-  margin-top: 0.6mm;
 }
 
 /* Clue mark (class name kept from when it was an underline): a pale tint

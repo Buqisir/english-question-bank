@@ -1,5 +1,5 @@
 import { clozeFindLabel, hasClozeTeachingLines } from '../../paper-import-ai/clozeMainLine.mjs'
-import { renderFullTranslation, renderGroupHeading, renderHeadingLead, renderOverview, renderQuestionHeader, renderQuestionLead, renderSelectedLongSentences, renderSourceRelationships } from './blocks.mjs'
+import { renderFullTranslation, renderGroupHeading, renderHeadingLead, renderOverview, renderQuestionHeader, renderQuestionLead, renderSelectedLongSentences } from './blocks.mjs'
 import { answerData, answerOptionText, questionData } from './paper.mjs'
 import { passagePlace } from './reading.mjs'
 import { array, escapeHtml, nonEmptyString } from './text.mjs'
@@ -86,7 +86,6 @@ export function renderClozeGroup({ group, title, paperAsset, analysis, answers, 
     ${renderHeadingLead(openingHeadings + renderGroupHeading(title || group.title || '完形填空', answers), renderOverview(groupAnalysis.overview))}
     ${renderClozeMainLine(groupAnalysis.mainLine, group)}
     ${renderFullTranslation(groupAnalysis, paperAsset)}
-    ${renderSourceRelationships(groupAnalysis, group, paperAsset)}
     ${questions}
     ${renderClozeThread(groupAnalysis.mainLine, group, paperAsset)}
     ${renderSelectedLongSentences(groupAnalysis.selectedLongSentences, paperAsset)}

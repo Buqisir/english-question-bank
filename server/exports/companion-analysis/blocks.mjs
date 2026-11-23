@@ -149,53 +149,21 @@ function mergedParagraph(teaching, paragraph, completed) {
   return { ...paragraph, text: completed.text, state: 'merged', ranges: [...moved, ...insertions] }
 }
 
-function renderRelationshipParagraph(source, label, paperAsset) {
-  const questionNo = (questionId) => questionData(paperAsset, questionId)?.questionNo
-  const html = renderMarkedRun(source.text, source.ranges, questionNo, 'source-relationship')
-  const lead = label ? `<span class="inline-label">${label}</span>` : ''
-  return `<p lang="en" data-source-text-state="${source.state}" data-source-paragraph-id="${escapeHtml(source.paragraphId)}">${lead}${html}</p>`
-}
-
 // The data anchors clues to the original passage and answers to the completed
-// passage (docs/cuts/analyzed-package-intake/contract-v1-design.md), so the
-// old print showed every annotated paragraph twice: 原题, then 答案补全. Print
-// needs only one: each paragraph appears once, completed where it had blanks,
-// with the clue underlines and the filled answers (bold) on the same line.
-// A paragraph whose texts do not line up exactly keeps the old pair.
-export function renderSourceRelationships(groupAnalysis, group, paperAsset) {
+// passage (docs/cuts/analyzed-package-intake/contract-v1-design.md). Each
+// paragraph whose two texts line up becomes one completed text carrying both
+// (see mergedParagraph); grammar fill cuts its per-question sentence from it.
+// The passage itself is not reprinted: the teacher has the paper.
+export function mergedSourceParagraphs(groupAnalysis, group) {
   const teaching = groupAnalysis?.teachingContent
-  if (teaching?.schemaVersion !== 'objective-teaching-content-v1') return ''
-  const sevenChoices = ['sevenChoices', 'seven_choices'].includes(group.groupType)
+  if (teaching?.schemaVersion !== 'objective-teaching-content-v1') return []
   const completedByParagraph = new Map(array(teaching.completedSourceTexts)
     .map((paragraph) => [paragraph.paragraphId, paragraph]))
-  // Long-sentence marks are not printed in the passage, so they alone do not
-  // make a paragraph worth printing.
-  const printable = (ranges) => sevenChoices
-    || ranges.some(({ annotation }) => annotation.kind !== 'sentence-structure')
-  const rendered = array(group?.passage?.paragraphs).flatMap((paragraph) => {
-    const original = {
-      ...paragraph,
-      state: 'original',
-      ranges: rangesOn(teaching, teaching.sourceTextId, paragraph.paragraphId, paragraph.text),
-    }
+  return array(group?.passage?.paragraphs).flatMap((paragraph) => {
     const block = completedByParagraph.get(paragraph.paragraphId)
-    if (!block) {
-      if (!printable(original.ranges)) return []
-      return [renderRelationshipParagraph(original, '', paperAsset)]
-    }
-    const completed = { ...block, state: 'completed' }
-    const merged = mergedParagraph(teaching, paragraph, completed)
-    if (merged) {
-      if (!printable(merged.ranges)) return []
-      return [renderRelationshipParagraph(merged, '', paperAsset)]
-    }
-    completed.ranges = rangesOn(teaching, block.textId, paragraph.paragraphId, block.text)
-    return [original, completed]
-      .filter((source) => printable(source.ranges))
-      .map((source) => renderRelationshipParagraph(source, source.state === 'original' ? '原题' : '答案补全', paperAsset))
+    const merged = block && mergedParagraph(teaching, paragraph, { ...block, state: 'completed' })
+    return merged ? [merged] : []
   })
-  if (rendered.length === 0) return ''
-  return `<section class="source-relationships">${renderHeadingLead('<h4>原文</h4>', ...rendered)}</section>`
 }
 
 export function renderUnderlinedText(value, underlineTexts) {

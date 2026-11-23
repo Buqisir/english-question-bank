@@ -1,4 +1,4 @@
-import { renderFullTranslation, renderGroupHeading, renderHeadingLead, renderOverview, renderQuestionHeader, renderQuestionLead, renderSelectedLongSentences, renderSourceRelationships } from './blocks.mjs'
+import { renderFullTranslation, renderGroupHeading, renderHeadingLead, renderOverview, renderQuestionHeader, renderQuestionLead, renderSelectedLongSentences } from './blocks.mjs'
 import { answerData, questionData } from './paper.mjs'
 import { array, escapeHtml, nonEmptyString } from './text.mjs'
 import { hasSevenChoicesTeachingLines, locateSevenChoicesBlank } from '../../paper-import-ai/sevenChoicesTeaching.mjs'
@@ -174,7 +174,6 @@ export function renderSevenChoicesGroup({ group, title, paperAsset, analysis, an
   return `<section class="analysis-group analysis-group--seven">
     ${renderHeadingLead(openingHeadings + renderGroupHeading(title || group.title || '七选五', answers), renderOverview(groupAnalysis.overview))}
     ${renderFullTranslation(groupAnalysis, paperAsset)}
-    ${renderSourceRelationships(groupAnalysis, group, paperAsset)}
     ${questions}
     ${renderUnaimedExtras(extraOptions, optionByLabel)}
     ${renderSelectedLongSentences(groupAnalysis.selectedLongSentences, paperAsset)}
