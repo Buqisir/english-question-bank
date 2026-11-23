@@ -393,7 +393,6 @@ h5 {
 .overview,
 .reading-discourse,
 .cloze-main-line,
-.cloze-thread,
 .full-translation,
 .long-sentences {
   margin-top: calc(var(--lh) / 3);
@@ -409,7 +408,6 @@ h5 {
 
 .reading-discourse h4,
 .cloze-main-line h4,
-.cloze-thread h4,
 .full-translation h4,
 .long-sentences h4 {
   display: inline;
@@ -420,7 +418,6 @@ h5 {
 
 .reading-discourse .heading-lead > h4 + p,
 .cloze-main-line .heading-lead > h4 + p,
-.cloze-thread .heading-lead > h4 + p,
 .full-translation .heading-lead > h4 + p,
 .long-sentences .heading-lead > h4 + .long-sentence {
   display: inline;
@@ -564,6 +561,11 @@ h5 {
   margin-right: 0.3em;
   color: var(--green-deep);
   font-weight: 700;
+}
+
+/* 完形正确项在这句里的意思，紧跟答案词，正文墨色、不加粗。 */
+.answer-gloss {
+  margin-right: 0.4em;
 }
 
 .question-heading small {

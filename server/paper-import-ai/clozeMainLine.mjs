@@ -1,4 +1,4 @@
-// 完形讲法（docs/product/cloze-methods.md）：题组的主线层和每个空的脉络、找法、错项。
+// 完形讲法（docs/product/cloze-methods.md）：题组的主线层和每个空的脉络、找法、正确项语境义、错项。
 // 新生成的完形必须带这些字段；已冻结的旧解析没有它们，照旧通过。
 // correctFit.reason 和 signatureFacet 由脉络和找法推出，供站内面板、组卷文本和检索继续使用。
 
@@ -28,7 +28,7 @@ const SIGNATURE_BY_POS_CHECK = {
   'phrase:contextual-meaning': 'cloze.signature.phrase.contextual-composition',
 }
 
-const LIMITS = { context: 45, find: 55, distractor: 45, theme: 40, paragraph: 30, emotion: 40, thread: 80 }
+const LIMITS = { context: 45, find: 55, distractor: 45, theme: 40, paragraph: 30, emotion: 40, meaning: 12 }
 const LOFTY = /(体现了?|升华|彰显|表达了?)[^，。；,;]{0,10}(精神|品质|主题|道理|情怀|情感)/
 const ABSENCE = /(没有|并无|未提|没提|不涉及|无)[^，。；,;]{0,8}(情节|情境|事件|话题|活动|经历)/
 const BLANK_MARKER = /__\d*__|_{2,}/
@@ -120,6 +120,13 @@ function assertBlankLines({ questionId, item, question, quoteCheck }) {
     if (ownNo.test(value)) throw new Error(`${where} ${label}: 不写本空题号，题头已经印了。`)
     assertNoDot(value, `${where} ${label}`)
   }
+  // 正确项的语境义：答案词在这句里的意思，印在题头答案词后面（Owner 2026-11-23）。
+  const meaning = text(item.correctFit?.meaning)
+  if (!meaning) throw new Error(`${where}: 缺少 correctFit.meaning（正确项在这句里的意思）。`)
+  assertLength(meaning, LIMITS.meaning, `${where} 语境义`)
+  if (/[A-Za-z]/.test(meaning)) throw new Error(`${where} 语境义: 只写中文意思，答案词题头已经印了。`)
+  if (/^(意为|意思是|指)/.test(meaning) || /[。；;]/.test(meaning)) throw new Error(`${where} 语境义: 只写意思本身，一个短语，不写「意为」、不写理由。`)
+  assertNoDot(meaning, `${where} 语境义`)
   for (const gloss of item.distractorGlosses) {
     const label = `${where} ${gloss?.optionLabel} 项`
     const meaning = text(gloss?.meaning)
@@ -131,7 +138,7 @@ function assertBlankLines({ questionId, item, question, quoteCheck }) {
   }
 }
 
-function assertMainLine({ mainLine, group, analysis, quoteCheck }) {
+function assertMainLine({ mainLine, group, quoteCheck }) {
   if (!mainLine || typeof mainLine !== 'object') throw new Error('groups.mainLine 不能为空。')
   const theme = text(mainLine.theme?.text)
   if (!theme) throw new Error('主题意义: 缺少 mainLine.theme.text。')
@@ -150,22 +157,7 @@ function assertMainLine({ mainLine, group, analysis, quoteCheck }) {
   }
   if (typeof mainLine.emotion !== 'string') throw new Error('情感线: mainLine.emotion 要是字符串，没有就写空字符串。')
   assertLength(mainLine.emotion, LIMITS.emotion, '情感线')
-  const thread = text(mainLine.thread?.text)
-  if (!thread) throw new Error('串空: 缺少 mainLine.thread.text。')
-  assertLength(thread, LIMITS.thread, '串空')
-  const blankNos = Array.isArray(mainLine.thread?.blankNos) ? mainLine.thread.blankNos : []
-  if (blankNos.length < 3) throw new Error('串空: blankNos 至少 3 个。')
-  if (blankNos.some((no, index) => index > 0 && no <= blankNos[index - 1])) throw new Error('串空: blankNos 要按题号从小到大。')
-  for (const no of blankNos) {
-    const question = group.questions.find((q) => Number(q.stem) === no)
-    if (!question) throw new Error(`串空: 没有第 ${no} 题。`)
-    if (analysis.blanks?.[question.id]?.role !== 'main') throw new Error(`串空: 第 ${no} 题没标 main。`)
-    const answerText = text(question.options?.[question.answerKey])
-    if (answerText && !normalize(thread).includes(normalize(answerText))) {
-      throw new Error(`串空: 第 ${no} 题的答案词「${answerText}」没有原样出现在 thread.text 里。`)
-    }
-  }
-  for (const value of [theme, mainLine.emotion, thread, ...lines.map((line) => text(line.text))]) assertNoDot(value, '题组主线')
+  for (const value of [theme, mainLine.emotion, ...lines.map((line) => text(line.text))]) assertNoDot(value, '题组主线')
 }
 
 // required：新生成必须齐全。否则只校验已经写了的部分，旧解析不受影响。
@@ -179,6 +171,6 @@ export function assertClozeTeachingLines(analysis, group, { required = false } =
     if (required || present) assertBlankLines({ questionId: question.id, item, question, quoteCheck })
   }
   if (required || groupAnalysis.mainLine !== undefined) {
-    assertMainLine({ mainLine: groupAnalysis.mainLine, group, analysis, quoteCheck })
+    assertMainLine({ mainLine: groupAnalysis.mainLine, group, quoteCheck })
   }
 }
