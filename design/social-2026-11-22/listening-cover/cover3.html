@@ -1,0 +1,54 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:SS;font-weight:500;src:url(FONTS_SANS/noto-sans-sc-chinese-simplified-500-normal.woff2)}
+@font-face{font-family:SS;font-weight:700;src:url(FONTS_SANS/noto-sans-sc-chinese-simplified-700-normal.woff2)}
+@font-face{font-family:SS;font-weight:900;src:url(FONTS_SANS/noto-sans-sc-chinese-simplified-900-normal.woff2)}
+@font-face{font-family:SSL;font-weight:500;src:url(FONTS_SANS/noto-sans-sc-latin-500-normal.woff2)}
+@font-face{font-family:SSL;font-weight:900;src:url(FONTS_SANS/noto-sans-sc-latin-900-normal.woff2)}
+@font-face{font-family:NS;font-weight:400;src:url(FONTS_SERIF/noto-serif-sc-chinese-simplified-400-normal.woff2)}
+@font-face{font-family:NS;font-weight:900;src:url(FONTS_SERIF/noto-serif-sc-chinese-simplified-900-normal.woff2)}
+:root{--ink:#1E4A3B;--deep:#2C6E56;--mint:#72BFA4;--paper:#F3F4EF}
+*{margin:0;box-sizing:border-box}
+body{width:1080px;height:1440px;position:relative;overflow:hidden;background:#fff;font-family:SSL,SS,sans-serif}
+.bg{position:absolute;inset:0;background:url(L4.png) center/cover}
+.head{position:absolute;left:60px;top:84px;width:960px;transform:rotate(-3deg);transform-origin:left top}
+.kicker{display:inline-block;font:700 28px SS;color:#fff;background:var(--deep);border-radius:999px;padding:6px 20px;letter-spacing:1px}
+h1{margin-top:22px;font:900 124px/1.1 SS;color:var(--ink);font-style:italic;letter-spacing:-1px;transform:skewX(-6deg);text-shadow:0 4px 0 rgba(255,255,255,.9),0 10px 24px rgba(255,255,255,.7)}
+h1 em{font-style:normal;color:var(--deep);position:relative}
+h1 em::after{content:"";position:absolute;left:-4px;right:-4px;bottom:6px;height:16px;background:var(--mint);opacity:.55;z-index:-1;border-radius:4px}
+.swoosh{display:block;width:620px;height:22px;margin-top:10px}
+.sub{margin-top:14px;font:700 30px SS;color:var(--ink);line-height:1.5;transform:skewX(-6deg)}
+.ui{position:absolute;right:46px;top:640px;width:540px;background:#fff;border-radius:26px;padding:26px 30px 28px;box-shadow:0 24px 60px rgba(10,50,40,.35);transform:rotate(3deg);font-family:"Liberation Serif",SS,serif;color:#1d2420}
+.ui .t{font:900 30px SS}
+.player{display:flex;align-items:center;gap:16px;margin:20px 0 10px;font:500 22px SS;color:#555}
+.pz{display:flex;gap:5px}.pz i{width:7px;height:28px;border:3px solid #1d2420;border-radius:3px}
+.bar{flex:1;height:5px;background:#E1E5E3;border-radius:3px;position:relative}
+.bar b{position:absolute;left:0;top:0;bottom:0;width:38%;background:#1d2420;border-radius:3px}
+.bar b::after{content:"";position:absolute;right:-8px;top:-6px;width:16px;height:16px;border-radius:50%;background:#1d2420}
+.btns{display:flex;gap:30px;font:500 22px SS;color:#555;margin-bottom:16px}
+.btns .on{color:#fff;background:var(--deep);border-radius:999px;padding:2px 14px;margin:-2px -14px;font-weight:700}
+.hl{background:#EAEEEC;border-radius:16px;padding:16px 18px}
+.hl .en{font-size:29px;line-height:1.45}
+.hl .en u{text-decoration:none;border-bottom:3px solid var(--mint)}
+.hl .q{display:inline-block;margin:8px 0 4px;font:700 20px SS;color:#fff;background:var(--ink);border-radius:6px;padding:1px 10px}
+.hl .zh{font:500 21px SS;color:#555}
+.cta{position:absolute;right:56px;bottom:136px;background:#fff;color:var(--ink);border-radius:999px;font:900 34px SS;padding:16px 34px;box-shadow:0 14px 34px rgba(10,50,40,.35)}
+.cta span{margin-left:10px}
+.foot{position:absolute;left:56px;right:56px;bottom:44px;border-top:2px solid rgba(255,255,255,.45);padding-top:24px;display:flex;justify-content:space-between;font:500 24px NS;color:#fff;text-shadow:0 1px 6px rgba(0,40,30,.4)}
+.foot b{font-weight:900}
+</style></head><body>
+<div class="bg"></div>
+<div class="head">
+  <span class="kicker">听力，换一种讲法</span>
+  <h1>答案，<br>就在<em>那一句</em>。</h1>
+  <svg class="swoosh" viewBox="0 0 620 22"><path d="M4 16 C180 4 420 2 616 10" stroke="#2C6E56" stroke-width="7" fill="none" stroke-linecap="round"/></svg>
+  <div class="sub">录音稿逐句对照 · 题号标在原句上 · 听不清就单句循环</div>
+</div>
+<div class="ui">
+  <div class="t">第 6 段 · 第 6–7 题</div>
+  <div class="player"><span class="pz"><i></i><i></i></span><span style="font-weight:700;color:#1d2420">暂停</span><span class="bar"><b></b></span><span>0:27 / 1:15</span></div>
+  <div class="btns"><span>上一句</span><span>下一句</span><span class="on">单句循环</span></div>
+  <div class="hl"><div class="en">W: <u>No, I originally came for a <span style="white-space:nowrap">3-month</span> project at a law firm.</u></div><span class="q">第 7 题</span><div class="zh">不是，我最初是来一家律师事务所做一个为期三个月的项目。</div></div>
+</div>
+<div class="cta">右划，看听力新讲法<span>→</span></div>
+<div class="foot"><b>獭石试题解析</b><span>高考英语　听力</span></div>
+</body></html>
