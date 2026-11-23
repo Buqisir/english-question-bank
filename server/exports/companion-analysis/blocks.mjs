@@ -17,12 +17,15 @@ export function renderHeadingLead(heading, firstBlock = '', ...rest) {
 // Marks on the printed passage and on its translation. Which question number
 // goes where is one shared rule for every objective type, on paper and on
 // screen: shared/analysis/questionMarks.mjs. Here it only becomes print markup.
-export function renderMarkedRun(text, ranges, questionNo, spanClass, { clues = true, answersInText = true } = {}) {
+// `numbers: false` keeps the marks but prints no [56] or superscript: the
+// grammar-fill sentence line sits under its own question block (Owner 2026-11-23).
+export function renderMarkedRun(text, ranges, questionNo, spanClass, { clues = true, answersInText = true, numbers = true } = {}) {
   const html = questionMarkRuns(text, ranges, { questionNo, clues, answersInText }).map((run) => {
     if (!run.answer && !run.clue) return escapeHtml(run.text)
     const underline = (run.clue ? ' source-underline' : '') + (run.answer ? ' answer-fill' : '')
     const idAttribute = run.annotationIds.length ? ` data-annotation-ids="${escapeHtml(run.annotationIds.join(' '))}"` : ''
     const open = `<span class="${spanClass}${underline}"${idAttribute} data-annotation-kinds="${escapeHtml(run.kinds.join(' '))}" data-question-nos="${escapeHtml(run.questionNos.join(' '))}">`
+    if (!numbers) return `${open}${escapeHtml(run.text)}</span>`
     const fill = run.before.length ? `<b class="blank-no">[${escapeHtml(run.before.join('、'))}]</b>` : ''
     if (!run.after.length) return `${fill}${open}${escapeHtml(run.text)}</span>`
     // The number sits outside the underlined run (so the rule stops at the
@@ -222,11 +225,11 @@ export function renderSelectedLongSentences(sentences, paperAsset) {
   return `<section class="long-sentences">${renderHeadingLead('<h4>长难句解析</h4>', ...blocks)}</section>`
 }
 
-export function renderQuestionHeader(questionNo, answer, answerText = '', provenanceLabel = '') {
+export function renderQuestionHeader(questionNo, answer, answerText = '', provenanceLabel = '', answerGloss = '') {
   return `<header class="question-heading">
     <span class="question-number">${escapeHtml(questionNo)}</span>
     <span class="question-answer">${escapeHtml(answer)}</span>
-    ${answerText ? `<span class="answer-text" lang="en">${escapeHtml(answerText)}</span>` : ''}
+    ${answerText ? `<span class="answer-text" lang="en">${escapeHtml(answerText)}</span>` : ''}${answerGloss ? `<span class="answer-gloss">${escapeHtml(answerGloss)}</span>` : ''}
     ${provenanceLabel ? `<small>${escapeHtml(provenanceLabel)}</small>` : ''}
   </header>`
 }

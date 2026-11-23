@@ -354,25 +354,26 @@ for (const file of readdirSync(new URL('../server/exports/companion-analysis/', 
   assert.doesNotMatch(html, /source-relationships|原题|答案补全|__56__/u, 'no passage is reprinted')
   const lines = [...html.matchAll(/<p class="question-stem question-stem--en" lang="en">([\s\S]*?)<\/p>/gu)].map((match) => match[1])
   assert.equal(lines.length, 2, 'one sentence line per question')
-  const plain = (line) => line.replace(/<sup[^>]*>.*?<\/sup>|<b class="blank-no">.*?<\/b>|<[^>]+>/gu, '')
+  const plain = (line) => line.replace(/<[^>]+>/gu, '')
   for (const line of lines) assert.equal(plain(line), 'Yet now I live in the countryside, where tea grows, and central heating fails.', 'the line is the answer\'s sentence, completed')
   const [line56, line57] = lines
-  // The answer carries its number in front. The clue touches its own answer
-  // (only ", " between), so the number is not printed twice.
-  assert.match(line56, /<b class="blank-no">\[56\]<\/b><span class="source-relationship answer-fill"[^>]*>where<\/span>/u)
+  // The line sits under its own question block, so it prints no [56] and no
+  // superscript (Owner 2026-11-23): the answer is bold, the clue tinted.
+  for (const line of lines) assert.doesNotMatch(line, /blank-no|clue-no|\[5[67]\]/u, 'no question numbers in the sentence line')
+  assert.match(line56, /<span class="source-relationship answer-fill"[^>]*>where<\/span>/u)
   assert.match(line56, /data-annotation-kinds="answer-evidence"[^>]*>the countryside/u)
   assert.doesNotMatch(line56, /\[57\]|data-annotation-ids="(?:i57|e57)"/u, 'the other blank is filled in plain')
-  assert.doesNotMatch(line56, /class="clue-no"/u)
-  assert.match(line57, /<b class="blank-no">\[57\]<\/b>/u)
+  assert.match(line57, /answer-fill"[^>]*>central /u)
   // Paged.js drops whitespace-only text nodes: the space between the answer
   // and the clue after it ("central heating") must live inside a mark.
   assert.doesNotMatch(line57, /<\/span>[\t\n\r ]+<(?:span class="source-relationship|b class="blank-no)/u)
   assert.match(line57, /answer-fill"[^>]*>central <\/span><span class="source-relationship source-underline"/u)
-  assert.ok(html.indexOf('R56') > html.indexOf('[56]'), 'the sentence comes before the explanation')
+  const line56At = html.indexOf('<p class="question-stem question-stem--en"')
+  assert.ok(html.indexOf('R56') > line56At, 'the sentence comes before the explanation')
   // 考点 runs in after the heading, before the sentence line, spelled from
   // the facet fields; a facet the export does not know prints no line.
   const topic56 = '<p class="grammar-topic"><span class="inline-label">考点</span>定语从句</p>'
-  assert.ok(html.includes(topic56) && html.indexOf(topic56) < html.indexOf('[56]</b>'))
+  assert.ok(html.includes(topic56) && html.indexOf(topic56) < line56At)
   assert.ok(html.includes('<span class="inline-label">考点</span>词形转换（名词变形容词）</p>'))
   const { grammarTopic } = await import('../server/exports/companion-analysis/grammarTopic.mjs')
   const finite = 'grammar-fill.given.verb.finite'

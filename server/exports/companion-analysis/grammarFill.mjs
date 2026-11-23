@@ -56,7 +56,7 @@ function completedSentence(merged, questionId, paperAsset) {
       ...range, annotation: { ...range.annotation, questionIds: [questionId] },
     })), from, to)
     const questionNo = (id) => questionData(paperAsset, id)?.questionNo
-    const html = renderMarkedRun(points.slice(from, to).join(''), ranges, questionNo, 'source-relationship')
+    const html = renderMarkedRun(points.slice(from, to).join(''), ranges, questionNo, 'source-relationship', { numbers: false })
     return { html: `<p class="question-stem question-stem--en" lang="en">${html}</p>`, lead }
   }
   return { html: '', lead: '' }

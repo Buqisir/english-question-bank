@@ -164,6 +164,7 @@ function validClAnalysis(input = clFixtureInput()) {
       find: { check: 'collocation', text: '后面是 slowly into the room，慢慢进屋的动作是走。', quotes: ['slowly into the room'] },
       correctFit: {
         optionLabel: q.answerKey,
+        meaning: '走进',
         reason: '搭配合理，主语与动词语义相符。',
       },
       distractorGlosses: distractorLabels.map((l) => ({
@@ -202,7 +203,6 @@ function validClAnalysis(input = clFixtureInput()) {
           theme: { text: '男孩读得入迷，听不见母亲：completely absorbed in the story。', quote: 'completely absorbed in the story' },
           paragraphs: group.paragraphs.map((paragraph) => ({ paragraphId: paragraph.id, text: '男孩进屋坐下读书。' })),
           emotion: '',
-          thread: { text: 'walked 进屋，ran 去拿书，jumped 起来又坐下。', blankNos: [41, 42, 43] },
         },
         ...buildObjectiveTeachingFixture(group),
       },
@@ -264,8 +264,9 @@ async function assertAnalysisValidation() {
       ['cloze distractor needs a passage quote', (bad) => { delete bad.blanks[firstId].distractorGlosses[0].quote }, /引文为空/],
       ['cloze 脉络 rejects lofty filler', (bad) => { bad.blanks[firstId].context = '这一句体现了男孩热爱读书的精神。' }, /空话/],
       ['cloze main line covers every paragraph', (bad) => { bad.groups[input.group.groupId].mainLine.paragraphs.pop() }, /对应原文/],
-      ['cloze thread uses only main blanks', (bad) => { bad.groups[input.group.groupId].mainLine.thread.blankNos = [41, 42, 44] }, /没标 main/],
-      ['cloze thread names each answer word', (bad) => { bad.groups[input.group.groupId].mainLine.thread.text = '他进屋，跑去拿书，又跳起来。' }, /答案词/],
+      ['cloze needs the answer word\'s 语境义', (bad) => { delete bad.blanks[firstId].correctFit.meaning }, /correctFit\.meaning/],
+      ['cloze 语境义 is a short phrase', (bad) => { bad.blanks[firstId].correctFit.meaning = '走进屋里坐下来然后慢慢地翻开那本旧书' }, /语境义: \d+ 字，超过 12/],
+      ['cloze 语境义 has no reason or English', (bad) => { bad.blanks[firstId].correctFit.meaning = '意为 walk 走进' }, /语境义/],
     ]
     for (const [name, mutate, pattern] of cases) {
       await assertRejects(name, () => {

@@ -46,19 +46,6 @@ function renderClozeMainLine(mainLine, group) {
   return `<section class="cloze-main-line">${renderHeadingLead('<h4>主线</h4>', ...rows)}</section>`
 }
 
-// 题组结尾：把主线空的答案串成一句，答案词粗体。
-function renderClozeThread(mainLine, group, paperAsset) {
-  const thread = nonEmptyString(mainLine?.thread?.text)
-  if (!thread) return ''
-  const blankNos = new Set(array(mainLine.thread.blankNos).map(Number))
-  const answers = array(group.questionIds).flatMap((questionId) => {
-    const question = questionData(paperAsset, questionId)
-    if (!question || !blankNos.has(Number(question.questionNo))) return []
-    return [answerOptionText(question, answerData(paperAsset, questionId)?.answer)]
-  })
-  return `<section class="cloze-thread">${renderHeadingLead('<h4>串空</h4>', `<p>${boldPhrases(thread, answers)}</p>`)}</section>`
-}
-
 // 脉络一行、找法一行；找法以「词性加考点名」开头，引的原文粗体。
 function renderClozeTeachingLines(entry) {
   return `<p class="evidence-locate"><span class="inline-label">脉络</span>${escapeHtml(entry.context)}</p>
@@ -78,7 +65,7 @@ export function renderClozeGroup({ group, title, paperAsset, analysis, answers, 
       : entry.correctFit?.reason ? `<p class="analysis-prose">${escapeHtml(entry.correctFit.reason)}</p>` : ''
     const distractors = glosses.length > 0 ? `<div class="distractor distractor--cloze"><div>${glosses.map((item) => `<p class="cloze-distractor-item"><b>${escapeHtml(item.optionLabel)} 项</b>（${escapeHtml(item.optionText)}）意为：${escapeHtml(item.meaning)}</p>`).join('')}</div></div>` : ''
     return `<section class="question question--cloze">
-      ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer, answerOptionText(question, answer)), reason || distractors)}
+      ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer, answerOptionText(question, answer), '', nonEmptyString(entry.correctFit?.meaning)), reason || distractors)}
       ${reason ? distractors : ''}
     </section>`
   }).join('')
@@ -87,7 +74,6 @@ export function renderClozeGroup({ group, title, paperAsset, analysis, answers, 
     ${renderClozeMainLine(groupAnalysis.mainLine, group)}
     ${renderFullTranslation(groupAnalysis, paperAsset)}
     ${questions}
-    ${renderClozeThread(groupAnalysis.mainLine, group, paperAsset)}
     ${renderSelectedLongSentences(groupAnalysis.selectedLongSentences, paperAsset)}
   </section>`
 }

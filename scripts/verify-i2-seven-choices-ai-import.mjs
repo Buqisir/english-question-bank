@@ -324,6 +324,7 @@ async function assertAnalysisValidation() {
     ['the blank\'s own number in 讲解', (bad) => { bad.questions[firstId].explain = '36 空接上空后。' }, /不写题号 36/],
     ['a spare option as 错项', (bad) => { bad.questions[firstId].distractors = [{ label: 'C', text: '它接不上 "fixture end."。', quotes: ['fixture end.'] }] }, /不是另一空的正确答案/],
     ['an afterQuote from another paragraph', (bad) => { bad.questions[firstId].contextEvidence.afterQuote = 'keep these things in mind' }, /afterQuote 只抄本段/],
+    ['a 找法 quote the student cannot see beside the blank', (bad) => { bad.questions[firstId].find = { text: '先看 "Comparing yourself"。', quotes: ['Comparing yourself'] } }, /引文「Comparing yourself」不在卷面/],
     ['a lock word that is not in the chain', (bad) => { bad.questions[firstId].lock = ['marathon'] }, /锁定词「marathon」/],
     ['a missing spare option', (bad) => { delete bad.groups[input.group.groupId].extraOptions.F }, /多余选项 F: 缺这一条/],
     ['a shadow option without a shared word', (bad) => { Object.assign(bad.groups[input.group.groupId].extraOptions.C, { kind: 'shadow', shadowOf: 'B', shared: ['marathon'] }) }, /共同词「marathon」/],

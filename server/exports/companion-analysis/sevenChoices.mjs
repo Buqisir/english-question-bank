@@ -1,18 +1,9 @@
 import { renderFullTranslation, renderGroupHeading, renderHeadingLead, renderOverview, renderQuestionHeader, renderQuestionLead, renderSelectedLongSentences } from './blocks.mjs'
 import { answerData, questionData } from './paper.mjs'
 import { array, escapeHtml, nonEmptyString } from './text.mjs'
-import { hasSevenChoicesTeachingLines, locateSevenChoicesBlank } from '../../paper-import-ai/sevenChoicesTeaching.mjs'
+import { contextChainRows, hasSevenChoicesTeachingLines } from '../../paper-import-ai/sevenChoicesTeaching.mjs'
 
-const SENTENCE_BREAK = /(?<=[.!?。！？]["”’)]?)\s+/
-const normalize = (value) => String(value || '').replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, ' ')
-const looseIncludes = (haystack, needle) => Boolean(needle) && normalize(haystack).includes(normalize(needle))
-// A heading line: short, and either bulleted or without a full stop. Some papers bullet
-// whole paragraphs (「• Before you open the book, … __37__ 2」); those are not headings.
-const isHeading = (value) => value.trim().length < 80 && (/^\s*[●•]/.test(value) || !/[.!?。！？]["”’)]?\s*$/.test(value))
-const tidy = (value) => String(value || '').replace(/^\s*[●•]\s*/, '').replace(/(__\d+__)\s+\d{1,2}(?=\s|$)/g, '$1')
-  .replace(/\s+/g, ' ').replace(/ ([,.;:!?])/g, '$1').trim()
-const sentencesOf = (value) => tidy(value).split(SENTENCE_BREAK).filter(Boolean)
-const onlyGap = (value) => !/[A-Za-z0-9]/.test(value.replace(/^\s*\d{1,2}(?=\s|$)/, ''))
+export { contextChainRows }
 
 // The words in bold: the analysis's 锁定词, wherever they appear in a row.
 function boldLocks(value, locks) {
@@ -33,61 +24,6 @@ function boldLocks(value, locks) {
     last = e
   }
   return html + escapeHtml(value.slice(last))
-}
-
-// The paragraph next to the blank's own one, shown only when the analysis uses
-// it: its 找法 quotes or 锁定词 come from there, or an older analysis quoted it as
-// 空前 or 空后. Owner 2026-11-23: a blank at a paragraph's start shows 上段末尾,
-// one at the end shows 下段开头; nothing is printed where the passage begins or ends.
-function neighbourRow(paragraph, side, used) {
-  if (!paragraph) return null
-  const raw = String(paragraph.text || '')
-  if (!used.some((quote) => looseIncludes(raw, quote))) return null
-  if (isHeading(raw)) return { label: '小标题', text: tidy(raw) }
-  const sentences = sentencesOf(raw)
-  if (side === 'before') {
-    const last = sentences.length - 1
-    const at = sentences.findIndex((sentence) => used.some((quote) => looseIncludes(sentence, quote)))
-    if (at === -1 || at === last) return { label: '上段末尾', text: sentences[last] }
-    return { label: '上段', text: `${sentences.slice(at, at + 1).join(' ')} ……` }
-  }
-  const at = sentences.findIndex((sentence) => used.some((quote) => looseIncludes(sentence, quote)))
-  if (at <= 0) return { label: '下段开头', text: sentences[0] }
-  return { label: '下段', text: `…… ${sentences[at]}` }
-}
-
-// A quote from the blank's own paragraph; 「……」 marks words left out between it and the blank.
-function ownRow(quote, side, own) {
-  if (!quote) return null
-  const at = normalize(own).indexOf(normalize(quote))
-  if (at === -1) return null
-  const gap = side === 'before' ? normalize(own).slice(at + normalize(quote).length) : normalize(own).slice(0, at)
-  const text = onlyGap(gap) ? quote : side === 'before' ? `${quote} ……` : `…… ${quote}`
-  return { label: side === 'before' ? '空前' : '空后', text }
-}
-
-function nearestSentence(own, side) {
-  const sentences = sentencesOf(own)
-  return side === 'before' ? sentences.at(-1) : sentences[0]
-}
-
-export function contextChainRows(entry, paragraphs, questionNo) {
-  const evidence = entry?.contextEvidence || {}
-  const beforeQuote = nonEmptyString(evidence.beforeQuote)
-  const afterQuote = nonEmptyString(evidence.afterQuote)
-  const located = locateSevenChoicesBlank(paragraphs, questionNo, evidence.paragraphId)
-  if (!located) {
-    return { before: beforeQuote ? { label: '空前', text: beforeQuote } : null, after: afterQuote ? { label: '空后', text: afterQuote } : null }
-  }
-  const used = [...array(entry?.find?.quotes), ...array(entry?.lock), beforeQuote, afterQuote].map((item) => nonEmptyString(item)).filter(Boolean)
-  const list = array(paragraphs)
-  const before = located.before
-    ? ownRow(beforeQuote, 'before', located.before) || { label: '空前', text: nearestSentence(located.before, 'before') }
-    : neighbourRow(list[located.index - 1], 'before', used)
-  const after = located.after
-    ? ownRow(afterQuote, 'after', located.after) || { label: '空后', text: nearestSentence(located.after, 'after') }
-    : neighbourRow(list[located.index + 1], 'after', used)
-  return { before, after }
 }
 
 export function renderContextChain(entry, optionText, group, questionNo) {
