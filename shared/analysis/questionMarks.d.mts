@@ -21,7 +21,7 @@ export type QuestionMarkRun = {
 export function questionMarkRuns(
   text: string,
   ranges: QuestionMarkRange[],
-  options?: { questionNo?: (questionId: string) => string | undefined, clues?: boolean },
+  options?: { questionNo?: (questionId: string) => string | undefined, clues?: boolean, answersInText?: boolean },
 ): QuestionMarkRun[]
 
 export function splitClueTail(text: string): [string, string, string]

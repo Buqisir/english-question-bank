@@ -435,7 +435,7 @@ export function renderReadingGroup({ group, title, paperAsset, analysis, answers
     ${openingHeadings && array(group.questionIds).some(questionId => hasReadingLocate(analysis?.questions?.[questionId]))
     ? '<p class="locate-legend"><b class="locate-cue">粗体</b>是定位词，<span class="source-underline">淡绿底</span>是答案所在</p>' : ''}
     ${renderReadingDiscourse(groupAnalysis.discourseStructure, group, groupAnalysis.overview)}
-    ${renderFullTranslation(groupAnalysis, paperAsset)}
+    ${renderFullTranslation(groupAnalysis, paperAsset, { answersInText: false })}
     ${questions}
     ${renderSelectedLongSentences(groupAnalysis.selectedLongSentences, paperAsset)}
   </section>`

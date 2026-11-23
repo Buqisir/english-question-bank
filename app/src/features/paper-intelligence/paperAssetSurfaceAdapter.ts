@@ -246,7 +246,8 @@ export function buildPaperAssetSurfaceModel(
         questionId,
         String(asset.content.questions[questionId]?.questionNo ?? ''),
       ]),
-    ))
+    // Reading answers are option letters: the clue is where it is answered.
+    ), { answersInText: false })
     teachingSource = source
   } catch (error) {
     console.warn(`[paper-asset] teaching unavailable for ${groupId}`, error)
