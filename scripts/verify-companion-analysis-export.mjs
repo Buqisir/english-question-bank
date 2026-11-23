@@ -383,6 +383,13 @@ for (const file of readdirSync(new URL('../server/exports/companion-analysis/', 
   assert.equal(grammarTopic({ facetKey: 'grammar-fill.given.pronoun', similarityProfile: { route: 'reflexive-pronoun' } }), '代词（有提示词，反身代词）')
   assert.equal(grammarTopic({ facetKey: 'grammar-fill.no-hint.article', answer: 'an' }), '冠词（不定冠词）')
   assert.equal(grammarTopic({ facetKey: 'grammar-fill.something-new' }), '')
+  const nonFinite = { facetKey: 'grammar-fill.given.verb.non-finite', role: 'subject', form: 'to-be-done' }
+  assert.equal(grammarTopic(nonFinite, 'It is also common for them '), '非谓语动词（作真正主语，to be done）')
+  assert.equal(grammarTopic(nonFinite, 'These days, it is not unusual for children '), '非谓语动词（作真正主语，to be done）')
+  assert.equal(grammarTopic({ ...nonFinite, form: 'to-do' }, 'It can be easy '), '非谓语动词（作真正主语，to do）')
+  assert.equal(grammarTopic(nonFinite, ''), '非谓语动词（作主语，to be done）')
+  assert.equal(grammarTopic({ ...nonFinite, role: 'object' }, 'It is clear that we hope '), '非谓语动词（作宾语，to be done）')
+  assert.equal(grammarTopic({ facetKey: 'grammar-fill.given.conversion.noun-to-noun' }), '词形转换（名词加后缀）')
   const unaligned = render('I grew up in a city. Yet now I live in the countryside, where tea grows, and central heating often fails. It is cold.')
   assert.doesNotMatch(unaligned, /question-stem--en/u, 'texts that do not line up print no sentence')
   assert.match(unaligned, /R56/u)
