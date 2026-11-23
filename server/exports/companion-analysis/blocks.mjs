@@ -17,8 +17,8 @@ export function renderHeadingLead(heading, firstBlock = '', ...rest) {
 // Marks on the printed passage and on its translation. Which question number
 // goes where is one shared rule for every objective type, on paper and on
 // screen: shared/analysis/questionMarks.mjs. Here it only becomes print markup.
-function renderMarkedRun(text, ranges, questionNo, spanClass, { clues = true } = {}) {
-  const html = questionMarkRuns(text, ranges, { questionNo, clues }).map((run) => {
+function renderMarkedRun(text, ranges, questionNo, spanClass, { clues = true, answersInText = true } = {}) {
+  const html = questionMarkRuns(text, ranges, { questionNo, clues, answersInText }).map((run) => {
     if (!run.answer && !run.clue) return escapeHtml(run.text)
     const underline = (run.clue ? ' source-underline' : '') + (run.answer ? ' answer-fill' : '')
     const idAttribute = run.annotationIds.length ? ` data-annotation-ids="${escapeHtml(run.annotationIds.join(' '))}"` : ''
@@ -46,7 +46,7 @@ function renderMarkedRun(text, ranges, questionNo, spanClass, { clues = true } =
 
 // `clues: false` prints only the answers in the translation (grammar fill:
 // its clues are English form, which the Chinese does not show).
-export function renderFullTranslation(groupAnalysis, paperAsset, { clues = true } = {}) {
+export function renderFullTranslation(groupAnalysis, paperAsset, { clues = true, answersInText = true } = {}) {
   const text = typeof groupAnalysis?.fullTranslationZh === 'string'
     ? groupAnalysis.fullTranslationZh
     : ''
@@ -67,7 +67,7 @@ export function renderFullTranslation(groupAnalysis, paperAsset, { clues = true 
       .filter((range) => range.textId === teaching.translation.textId
         && range.paragraphId === paragraph.paragraphId)
       .map((range) => ({ ...range, annotation })))
-    const html = renderMarkedRun(paragraph.quote, ranges, questionNo, 'translation-annotation', { clues })
+    const html = renderMarkedRun(paragraph.quote, ranges, questionNo, 'translation-annotation', { clues, answersInText })
     return `<p data-translation-paragraph-id="${escapeHtml(paragraph.paragraphId)}">${html}</p>`
   })
   return `<section class="full-translation">${renderHeadingLead('<h4>全文译文</h4>', ...paragraphs)}</section>`

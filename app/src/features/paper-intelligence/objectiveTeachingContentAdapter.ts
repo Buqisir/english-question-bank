@@ -309,11 +309,13 @@ export function projectObjectiveTeachingSource(
 }
 
 // `clues: false` shows only the answers in the translation (grammar fill: its
-// clues are English form, which the Chinese does not show).
+// clues are English form, which the Chinese does not show). `answersInText:
+// false` (reading) puts the bracketed number in front of each clue, since
+// that is where the question is answered.
 export function buildObjectiveTeachingView(
   group: ObjectiveTeachingGroup | null | undefined,
   questionNoById: Readonly<Record<string, string>>,
-  { clues = true }: { clues?: boolean } = {},
+  { clues = true, answersInText = true }: { clues?: boolean, answersInText?: boolean } = {},
 ): ObjectiveTeachingView | null {
   if (!group) return null
   const teaching = group.teachingContent
@@ -329,6 +331,7 @@ export function buildObjectiveTeachingView(
           segments: questionMarkRuns(paragraph.quote, ranges, {
             questionNo: (id) => questionNoById[id],
             clues,
+            answersInText,
           }).map(({ text, answer, clue, before, after, questionNos, kinds }) => ({
             text,
             answer,

@@ -247,7 +247,10 @@ const html = buildCompanionAnalysisHtml({
 assert.match(html, /same <span class="source-underline" data-range-indices="0">same<\/span>\.<\/p>/)
 assert.match(html, /data-translation-paragraph-id="zh-p2"/)
 assert.match(html, /data-question-nos="21 22"/)
-assert.match(html, /<sup class="clue-no">21,22<\/sup>/)
+// Reading has no answers in the text: the clue is where 21 and 22 are
+// answered, so their bracketed numbers go in front and no superscript follows.
+assert.match(html, /<b class="blank-no">\[21、22\]<\/b><span class="translation-annotation source-underline"/)
+assert.doesNotMatch(html.slice(html.indexOf('data-translation-paragraph-id')), /class="clue-no"/)
 // Reading prints no passage of its own (each question quotes its clue in
 // 原文依据). The passage marks still print for 七选五, 完形 and 语法填空, so
 // check the second occurrence and the long-sentence overlap there.

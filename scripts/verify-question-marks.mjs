@@ -49,11 +49,16 @@ const numbers = (runs) => runs.flatMap((run) => [...run.before.map((n) => `${n}>
   const runs = questionMarkRuns(text, [clue(text, 'the dates and', ['57', '58']), answer(text, 'frequency', '57')], { questionNo })
   assert.deepEqual(numbers(runs), ['<58', '57>'])
 }
-// Reading has no answers in the text: every clue keeps its number.
+// Reading and listening have no answers in the text (the answer is an option
+// letter): the clue is where the question is answered, so its number goes in
+// front, bracketed like an answer's, and the clue is not bold.
 {
-  const text = '洛杉矶公羊队对阵达拉斯牛仔队'
-  const runs = questionMarkRuns(text, [clue(text, '洛杉矶公羊队对阵达拉斯牛仔队', ['21'])], { questionNo })
-  assert.deepEqual(numbers(runs), ['<21'])
+  const text = '比赛有：洛杉矶公羊队对阵达拉斯牛仔队，还有别的。'
+  const runs = questionMarkRuns(text, [clue(text, '洛杉矶公羊队对阵达拉斯牛仔队', ['21', '22'])], { questionNo, answersInText: false })
+  assert.deepEqual(numbers(runs), ['21>', '22>'])
+  const marked = runs.find((run) => run.clue)
+  assert.equal(marked.text, '洛杉矶公羊队对阵达拉斯牛仔队')
+  assert.equal(marked.answer, false)
 }
 // clues: false (grammar-fill translation) draws the answers only.
 {

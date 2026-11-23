@@ -1,11 +1,16 @@
 import { partitionAnalysisText } from './analysisTextRanges.mjs'
 
 // Where a question number goes in a passage or its translation. One rule for
-// reading, seven choices, cloze and grammar fill, on paper (the companion PDF)
-// and on screen (the teaching panels):
+// every objective type, on paper (the companion PDF) and on screen (the
+// teaching panels). The bracketed number comes first: it tells the reader
+// where each question is answered.
 // - an answer (answer-insertion) is bold, with its number in brackets in
 //   front, where the exam paper had the blank: "[41] realization". The big
-//   number says "this is question 41's answer";
+//   number says "question 41 is answered here";
+// - where the text holds no answers (reading, listening: the answer is an
+//   option letter), the clue is where the question is answered, so it takes
+//   the bracketed number in front instead, on the pale tint
+//   (`answersInText: false`);
 // - a clue (answer-evidence) sits on a pale tint, with a plain superscript
 //   number after its last character. The small number says "this is the
 //   evidence for question 38";
@@ -46,7 +51,7 @@ function relation(points, clue, answer) {
 // ranges: [{ start, end, quote, annotation: { kind, questionIds, annotationId } }]
 // questionNo: questionId → printed number (string), or undefined.
 // Returns the text cut into runs; each run says what to draw on it.
-export function questionMarkRuns(text, ranges, { questionNo = () => undefined, clues = true } = {}) {
+export function questionMarkRuns(text, ranges, { questionNo = () => undefined, clues = true, answersInText = true } = {}) {
   const points = Array.from(text)
   // Anything that is neither an answer nor a long-sentence mark is a clue.
   const drawable = ranges.filter(({ annotation }) => annotation.kind === 'answer-insertion'
@@ -56,7 +61,11 @@ export function questionMarkRuns(text, ranges, { questionNo = () => undefined, c
   for (const range of drawable) {
     const questionIds = range.annotation.questionIds ?? []
     if (range.annotation.kind === 'answer-insertion') {
-      shown.push({ ...range, numbered: questionIds })
+      shown.push({ ...range, front: questionIds, numbered: [] })
+      continue
+    }
+    if (!answersInText) {
+      shown.push({ ...range, front: questionIds, numbered: [] })
       continue
     }
     const kept = []
@@ -68,10 +77,10 @@ export function questionMarkRuns(text, ranges, { questionNo = () => undefined, c
       kept.push(questionId)
       if (!relations.includes('near')) numbered.push(questionId)
     }
-    if (kept.length > 0) shown.push({ ...range, numbered })
+    if (kept.length > 0) shown.push({ ...range, front: [], numbered })
   }
-  const numbersOf = (list) => [...new Set(list.flatMap((range) =>
-    range.numbered.map(questionNo).filter(Boolean)))]
+  const numbersOf = (list, key) => [...new Set(list.flatMap((range) =>
+    range[key].map(questionNo).filter(Boolean)))]
     .sort((a, b) => Number(a) - Number(b))
   return partitionAnalysisText(text, shown.map(({ start, end, quote }) => ({ start, end, quote })))
     .map((part) => {
@@ -84,10 +93,11 @@ export function questionMarkRuns(text, ranges, { questionNo = () => undefined, c
         end: part.end,
         answer: answer.length > 0,
         clue: clue.length > 0,
-        // number in front of an answer, where that answer starts
-        before: numbersOf(answer.filter((range) => range.start === part.start)),
-        // number after a clue, where that clue ends
-        after: numbersOf(clue.filter((range) => range.end === part.end)),
+        // bracketed number where an answer (or, with no answers in the text,
+        // a clue) starts
+        before: numbersOf(on.filter((range) => range.start === part.start), 'front'),
+        // plain number after a clue, where that clue ends
+        after: numbersOf(clue.filter((range) => range.end === part.end), 'numbered'),
         annotationIds: [...new Set(on.map(({ annotation }) => annotation.annotationId).filter(Boolean))],
         kinds: [...new Set(on.map(({ annotation }) => annotation.kind))],
         questionNos: [...new Set(on.flatMap(({ annotation }) => (annotation.questionIds ?? [])
