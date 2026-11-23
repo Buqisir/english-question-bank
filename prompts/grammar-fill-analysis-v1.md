@@ -174,7 +174,7 @@ find oneself doing 是固定搭配。
   "groups": {
     "group-...-grammar-fill": {
       "overview": "50–80字软目标的中文内容简介，供教学、列表、搜索及未来相似检索共用",
-      "fullTranslationZh": "填入正答后的全文中文翻译，每空保留 [56]...[65] 标记",
+      "fullTranslationZh": "填入正答后的全文中文翻译，不写 [56] 这类空号",
       "selectedLongSentences": [
         {
           "paragraphId": "para-...",

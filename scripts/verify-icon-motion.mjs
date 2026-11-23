@@ -60,7 +60,7 @@ function DisclosureFixtures() {
 // 讲解面板的真实折叠段（篇章结构 / 全文译文 / 长难句解析）：原生 details，B 类箭头跟随 details[open]。
 const lectureContent = {
  discourseSummary:'先提出问题，再分两层回答。', discourseItems:[{ id:'d1', label:'第一段', summary:'提出问题', functionText:'引出话题' }],
- translationParagraphs:[{ paragraphId:'p1', segments:[{ text:'这是一段译文。', questionNos:[], kinds:[] }] }],
+ translationParagraphs:[{ paragraphId:'p1', segments:[{ text:'这是一段译文。', answer:false, clue:false, before:[], after:[], questionNos:[], kinds:[] }] }],
  longSentences:[{ sentenceId:'s1', segments:[{ text:'What matters is ', underlined:false }, { text:'how we respond', underlined:true }], questionNos:['21'], analysisZh:'主语从句。', translationZh:'重要的是我们如何回应。' }],
 };
 // 加入草稿卷：window.setDraft[id] 模拟数据刷新带来的变化（不是用户在这个按钮上的操作）。

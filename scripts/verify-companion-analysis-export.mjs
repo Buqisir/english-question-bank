@@ -341,12 +341,14 @@ for (const file of readdirSync(new URL('../server/exports/companion-analysis/', 
   const merged = renderSourceRelationships({ teachingContent: teaching(completed) }, group, paper)
   assert.equal([...merged.matchAll(/data-source-text-state="merged"/gu)].length, 1)
   assert.doesNotMatch(merged, /原题|答案补全|__56__/u)
-  for (const [kind, text] of [['answer-evidence', 'the countrysid'], ['answer-insertion', 'where'], ['answer-insertion', 'central'], ['answer-evidence', 'heating fail']]) {
+  for (const [kind, text] of [['answer-evidence', 'the countryside'], ['answer-insertion', 'where'], ['answer-insertion', 'central'], ['answer-evidence', 'heating fails']]) {
     assert.match(merged, new RegExp(`data-annotation-kinds="${kind}"[^>]*>${text} ?</span>`, 'u'))
   }
-  // The answer carries its number in front; the clue its number after.
+  // The answer carries its number in front. Both clues touch their own answer
+  // (only ", " or a space between), so the number is not printed twice: the
+  // clues stay underlined without one (shared/analysis/questionMarks.mjs).
   assert.match(merged, /<b class="blank-no">56<\/b><span class="source-relationship answer-fill"/u)
-  assert.match(merged, /e<\/span><sup class="clue-no">56<\/sup><\/span>, /u)
+  assert.doesNotMatch(merged, /class="clue-no"/u)
   const plain = merged.replace(/<sup[^>]*>.*?<\/sup>|<b class="blank-no">.*?<\/b>|<[^>]+>/gu, '')
   assert.ok(plain.endsWith(completed), 'the printed passage reads as the completed text')
   // Paged.js drops whitespace-only text nodes: the space between the answer

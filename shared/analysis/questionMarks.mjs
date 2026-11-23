@@ -1,0 +1,95 @@
+import { partitionAnalysisText } from './analysisTextRanges.mjs'
+
+// Where a question number goes in a passage or its translation. One rule for
+// reading, seven choices, cloze and grammar fill, on paper (the companion PDF)
+// and on screen (the teaching panels):
+// - an answer (answer-insertion) is bold, with its number in front, as on the
+//   exam paper: "41 realization";
+// - a clue (answer-evidence) is underlined, with its number after its last
+//   character;
+// - one number per question in one place: a clue that is exactly its own
+//   answer is not drawn (the answer already says it); a clue that overlaps its
+//   answer, or touches it with only spaces and punctuation between, keeps its
+//   underline but not its number ("41 很快意识到 41" and "stories.³⁶ 36 In
+//   short" printed one question twice);
+// - long-sentence marks (sentence-structure) are not drawn: 长难句解析 quotes
+//   the sentence with its own 关联题目.
+// `clues: false` leaves clues out altogether. Grammar fill uses it for the
+// translation: its clues are English form (plenty of → plural), which Chinese
+// does not show, and the data mostly anchors them to the answer's own words.
+
+const BETWEEN_TOUCHING = /^[\s\p{P}]*$/u
+const CJK_CLOSING = /[。，、；：！？）」』”’]/u
+
+// Where a clue's number attaches: to its last character, so a line never
+// starts with a bare number, and in Chinese before closing punctuation, as
+// citation marks do (GB/T 7714): 一座岛²²。 not 一座岛。²²
+// Returns [text before the last character, the last character, what follows].
+export function splitClueTail(text) {
+  const points = Array.from(text)
+  let tailAt = points.length - 1
+  while (tailAt > 0 && CJK_CLOSING.test(points[tailAt])) tailAt -= 1
+  return [points.slice(0, tailAt).join(''), points[tailAt] ?? '', points.slice(tailAt + 1).join('')]
+}
+
+function relation(points, clue, answer) {
+  if (clue.start === answer.start && clue.end === answer.end) return 'same'
+  if (clue.start < answer.end && answer.start < clue.end) return 'near'
+  const gap = clue.end <= answer.start
+    ? points.slice(clue.end, answer.start)
+    : points.slice(answer.end, clue.start)
+  return BETWEEN_TOUCHING.test(gap.join('')) ? 'near' : 'apart'
+}
+
+// ranges: [{ start, end, quote, annotation: { kind, questionIds, annotationId } }]
+// questionNo: questionId → printed number (string), or undefined.
+// Returns the text cut into runs; each run says what to draw on it.
+export function questionMarkRuns(text, ranges, { questionNo = () => undefined, clues = true } = {}) {
+  const points = Array.from(text)
+  // Anything that is neither an answer nor a long-sentence mark is a clue.
+  const drawable = ranges.filter(({ annotation }) => annotation.kind === 'answer-insertion'
+    || (clues && annotation.kind !== 'sentence-structure'))
+  const answers = drawable.filter(({ annotation }) => annotation.kind === 'answer-insertion')
+  const shown = []
+  for (const range of drawable) {
+    const questionIds = range.annotation.questionIds ?? []
+    if (range.annotation.kind === 'answer-insertion') {
+      shown.push({ ...range, numbered: questionIds })
+      continue
+    }
+    const kept = []
+    const numbered = []
+    for (const questionId of questionIds) {
+      const own = answers.filter(({ annotation }) => (annotation.questionIds ?? []).includes(questionId))
+      const relations = own.map((answer) => relation(points, range, answer))
+      if (relations.includes('same')) continue
+      kept.push(questionId)
+      if (!relations.includes('near')) numbered.push(questionId)
+    }
+    if (kept.length > 0) shown.push({ ...range, numbered })
+  }
+  const numbersOf = (list) => [...new Set(list.flatMap((range) =>
+    range.numbered.map(questionNo).filter(Boolean)))]
+    .sort((a, b) => Number(a) - Number(b))
+  return partitionAnalysisText(text, shown.map(({ start, end, quote }) => ({ start, end, quote })))
+    .map((part) => {
+      const on = part.rangeIndices.map((index) => shown[index])
+      const answer = on.filter(({ annotation }) => annotation.kind === 'answer-insertion')
+      const clue = on.filter(({ annotation }) => annotation.kind !== 'answer-insertion')
+      return {
+        text: part.text,
+        start: part.start,
+        end: part.end,
+        answer: answer.length > 0,
+        clue: clue.length > 0,
+        // number in front of an answer, where that answer starts
+        before: numbersOf(answer.filter((range) => range.start === part.start)),
+        // number after a clue, where that clue ends
+        after: numbersOf(clue.filter((range) => range.end === part.end)),
+        annotationIds: [...new Set(on.map(({ annotation }) => annotation.annotationId).filter(Boolean))],
+        kinds: [...new Set(on.map(({ annotation }) => annotation.kind))],
+        questionNos: [...new Set(on.flatMap(({ annotation }) => (annotation.questionIds ?? [])
+          .map(questionNo).filter(Boolean)))].sort((a, b) => Number(a) - Number(b)),
+      }
+    })
+}

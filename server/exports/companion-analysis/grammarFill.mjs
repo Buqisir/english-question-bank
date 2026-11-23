@@ -18,7 +18,7 @@ export function renderGrammarFillGroup({ group, title, paperAsset, analysis, ans
   }).join('')
   return `<section class="analysis-group analysis-group--grammar">
     ${renderHeadingLead(openingHeadings + renderGroupHeading(title || group.title || '语法填空', answers), renderOverview(groupAnalysis.overview))}
-    ${renderFullTranslation(groupAnalysis, paperAsset)}
+    ${renderFullTranslation(groupAnalysis, paperAsset, { clues: false })}
     ${renderSourceRelationships(groupAnalysis, group, paperAsset)}
     ${questions}
     ${renderSelectedLongSentences(groupAnalysis.selectedLongSentences, paperAsset)}

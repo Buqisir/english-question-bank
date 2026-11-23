@@ -293,7 +293,8 @@ export function buildGrammarFillAnalysisSurfaceModel(input: {
             questionId,
             String(asset.content.questions[questionId]?.questionNo ?? ''),
           ]),
-        )),
+        // Grammar-fill clues are English form, which the Chinese does not show.
+        ), { clues: false }),
       }
     : null
 
