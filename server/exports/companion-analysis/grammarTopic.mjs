@@ -1,7 +1,8 @@
 // The 考点 line of a grammar-fill blank, built only from fields the analysis
 // already carries: the facet the model chose (facetKey), what a non-finite
 // verb does in the sentence (role), and what the server derives from the
-// answer (tense, voice, form). The model never writes this text. Taxonomy and
+// answer (tense, voice, form), plus the answer's own sentence up to the
+// answer (`lead`) for the formal-it case. The model never writes this text. Taxonomy and
 // names: docs/product/grammar-fill-methods.md §六 (Owner reviewed 40 blanks,
 // 2026-11-23). A detail the data does not settle is left out rather than
 // guessed; an unknown facet prints no line.
@@ -54,17 +55,26 @@ function finiteDetails(blank) {
   return [tense, blank.voice === 'passive' ? '被动' : null]
 }
 
-const nonFiniteDetails = (blank, role) => [ROLE[role], FORM[blank.similarityForm] || FORM[blank.form]]
+// A non-finite subject after "it is / it can be ..." in its own sentence is
+// the real subject the formal it stands for (It is common for them to be held).
+const FORMAL_IT = /\bit\s+(?:(?:is|was|'s)|(?:can|could|may|might|must|should|will|would)\s+(?:not\s+)?be|(?:has|had|have)\s+(?:not\s+)?been)\b/iu
+const nonFiniteDetails = (blank, role, lead = '') => [
+  role === 'subject' && FORMAL_IT.test(lead) ? '作真正主语' : ROLE[role],
+  FORM[blank.similarityForm] || FORM[blank.form],
+]
 
-export function grammarTopic(blank) {
+export function grammarTopic(blank, lead = '') {
   const facet = String(blank?.facetKey || '').replace(/^grammar-fill\./u, '')
   const route = blank?.similarityProfile?.route
   if (facet === 'given.verb.finite') return join('谓语动词', finiteDetails(blank))
-  if (facet === 'given.verb.non-finite') return join('非谓语动词', nonFiniteDetails(blank, blank.role))
+  if (facet === 'given.verb.non-finite') return join('非谓语动词', nonFiniteDetails(blank, blank.role, lead))
   if (facet === 'given.conversion.noun-to-verb') return join('词形转换', ['名词变动词'])
   const conversion = facet.match(/^given\.conversion\.(\w+)-to-(\w+)$/u)
   if (conversion && POS[conversion[1]] && POS[conversion[2]]) {
-    return join('词形转换', [`${POS[conversion[1]]}变${POS[conversion[2]]}`])
+    // Same part of speech on both sides (engineer → engineering): what is
+    // tested is the suffix, not a change of part of speech.
+    const [, from, to] = conversion
+    return join('词形转换', [from === to ? `${POS[from]}加后缀` : `${POS[from]}变${POS[to]}`])
   }
   if (facet === 'given.noun.number') return '名词的数'
   if (facet === 'given.noun.genitive') return '名词的格'

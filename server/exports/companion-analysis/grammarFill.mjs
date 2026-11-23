@@ -35,7 +35,8 @@ const SENTENCE_LIMIT = 360
 // One line per question: the sentence with every blank filled, only this
 // question's answer ([n], bold) and its clues (tint and superscript) marked,
 // by the shared rule. The passage itself is not reprinted: this line is where
-// the question is answered.
+// the question is answered. `lead` is the answer's own sentence up to the
+// answer, for the 考点 line.
 function completedSentence(merged, questionId, paperAsset) {
   for (const paragraph of merged) {
     const own = paragraph.ranges.filter(({ annotation }) =>
@@ -44,6 +45,7 @@ function completedSentence(merged, questionId, paperAsset) {
     if (!answer) continue
     const points = Array.from(paragraph.text)
     let [from, to] = sentenceAround(points, answer.start, answer.end)
+    const lead = points.slice(from, answer.start).join('')
     for (const clue of own) {
       if (clue.start >= from && clue.end <= to) continue
       const [clueFrom, clueTo] = sentenceAround(points, clue.start, clue.end)
@@ -55,9 +57,9 @@ function completedSentence(merged, questionId, paperAsset) {
     })), from, to)
     const questionNo = (id) => questionData(paperAsset, id)?.questionNo
     const html = renderMarkedRun(points.slice(from, to).join(''), ranges, questionNo, 'source-relationship')
-    return `<p class="question-stem question-stem--en" lang="en">${html}</p>`
+    return { html: `<p class="question-stem question-stem--en" lang="en">${html}</p>`, lead }
   }
-  return ''
+  return { html: '', lead: '' }
 }
 
 export function renderGrammarFillGroup({ group, title, paperAsset, analysis, answers, openingHeadings }) {
@@ -70,11 +72,12 @@ export function renderGrammarFillGroup({ group, title, paperAsset, analysis, ans
     const answer = nonEmptyString(authoritativeAnswer)
     if (!question || !answer || !entry) return ''
     const hint = nonEmptyString(entry.hint)
-    const topic = grammarTopic(entry)
+    const sentence = completedSentence(merged, questionId, paperAsset)
+    const topic = grammarTopic(entry, sentence.lead)
     return `<section class="question question--grammar">
       ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer, hint ? `提示词 ${hint}` : ''),
         (topic ? `<p class="grammar-topic"><span class="inline-label">考点</span>${escapeHtml(topic)}</p>` : '')
-          + completedSentence(merged, questionId, paperAsset)
+          + sentence.html
           + (entry.reason ? `<p class="analysis-prose">${escapeHtml(entry.reason)}</p>` : ''))}
     </section>`
   }).join('')
