@@ -1,0 +1,8 @@
+Keep the otter, its face, fur, headphones, the glowing play/pause disc, its pose, size and position EXACTLY as they are. Only restyle the LIGHT EFFECTS of the background to a calmer, more professional "misty sea" feel with a strict palette:
+- Remove all rainbow / iridescent / prismatic colours (no pink, purple, orange or yellow fringes anywhere).
+- The big sweeping diagonal curve stays, but its rim becomes a soft pale mint-white glow (#DDF1E8 / #F2FAF6), clean and thin, no rainbow.
+- Replace the other light streaks with a few soft, slightly blurred mist-mint light ribbons (#C4ECDD) and pale sky-teal haze (#A9DFF0, #C6E3E9) drifting across the teal area, plus two or three faint white light beams fading out diagonally from the upper right.
+- The teal gradient stays (#2C6E56 deep to #72BFA4 mint), slightly calmer, with gentle depth, like light under water.
+- The white sound-wave lines around the headphones stay white and subtle.
+- The upper area stays calm, light and mostly empty (soft white to pale mint, #F2FAF6 / #F4F8FA).
+No text, no letters, no logo.
