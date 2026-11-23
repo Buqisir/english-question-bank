@@ -105,3 +105,31 @@ export function questionMarkRuns(text, ranges, { questionNo = () => undefined, c
       }
     })
 }
+
+// Listening has no annotation ranges, only each question's verbatim quote.
+// quotes: [{ quote, questionIds }] → ranges on `text` (code points) at each
+// quote's first occurrence; a quote that is not in the text is skipped.
+export function quoteRanges(text, quotes) {
+  return quotes.flatMap(({ quote, questionIds }) => {
+    const index = quote ? text.indexOf(quote) : -1
+    if (index < 0) return []
+    const start = Array.from(text.slice(0, index)).length
+    return [{ start, end: start + Array.from(quote).length, quote,
+      annotation: { kind: 'answer-evidence', questionIds } }]
+  })
+}
+
+// The ranges of a whole text that fall in one piece of it (a line, a spoken
+// sentence), [from, to) in code points, shifted to the piece. A quote that
+// runs on from an earlier piece keeps its tint there but not its number: the
+// number goes once, where the quote starts.
+export function rangesInPiece(text, ranges, from, to) {
+  const points = Array.from(text)
+  return ranges.flatMap((range) => {
+    const start = Math.max(range.start, from)
+    const end = Math.min(range.end, to)
+    if (start >= end) return []
+    return [{ start: start - from, end: end - from, quote: points.slice(start, end).join(''),
+      annotation: { ...range.annotation, questionIds: range.start >= from ? range.annotation.questionIds : [] } }]
+  })
+}
