@@ -10,6 +10,18 @@ function renderTrapReason(trap) {
   return `错在：${escapeHtml(stripTrapName(trap).text)}`
 }
 
+// Options that one condition rules out together carry the same sentence; they
+// print as one line, 「A、B 项（…；…）错在：」, where the first of them stands.
+function distractorRows(distractors) {
+  const rows = new Map()
+  for (const distractor of distractors) {
+    const key = stripTrapName(distractor.trap).text.trim()
+    if (!rows.has(key)) rows.set(key, [])
+    rows.get(key).push(distractor)
+  }
+  return [...rows.values()]
+}
+
 export function readingDistractors(entry) {
   return array(entry?.optionAnalysis).filter((option) =>
     option?.status === 'wrong'
@@ -233,6 +245,21 @@ function renderLocateQuote(locate, group, correct, underlineTexts) {
 
 const SENTENCE_STEPS = ['', '一', '两']
 
+// 句位 of the 定位句, counted the way a teacher points on the paper: 首句,
+// 末句, 第 M 句. A one-sentence paragraph needs none.
+function sentencePlace(group, paragraphId, index) {
+  const count = passageSentences(paragraphTexts(group).get(paragraphId)).length
+  if (!Number.isInteger(index) || count < 2 || index < 0 || index >= count) return ''
+  return index === 0 ? '首句' : index === count - 1 ? '末句' : `第 ${index + 1} 句`
+}
+
+function placeWithSentence(group, locate) {
+  const place = passagePlace(group, locate.paragraphId)
+  const sentence = sentencePlace(group, locate.paragraphId, locate.sentence?.index)
+  if (!place || !sentence) return place
+  return /段$/u.test(place) ? `${place}${sentence}` : `${place} ${sentence}`
+}
+
 // Where the answer is when the 定位句 does not hold it, worked out from
 // positions: 「前一句」「后两句」「同段前文」「下一段」「第 4 段」.
 function answerWhere(locate, group) {
@@ -283,7 +310,7 @@ function renderSkeletonLocate(locate, entry, group, evidence) {
       ? [...new Set(array(evidence).map(item => passagePlace(group, item?.paragraphId)).filter(Boolean))] : []
     skeleton = named.length ? `看${escapeHtml(named.join('、'))}` : '看全文'
   } else {
-    const place = passagePlace(group, locate.paragraphId)
+    const place = placeWithSentence(group, locate)
     const sameWords = locate.cue.text.toLowerCase() === locate.sourceText.toLowerCase()
     // The arrow always leads on: to the passage's own words when they
     // differ, else straight to the paragraph.
@@ -307,7 +334,7 @@ function renderDataLocate(locate, entry, question, group, evidence) {
   if (locate.by === 'passage') {
     return entry?.similarityProfile?.subtype === 'paragraph-main-idea' ? renderLocate(entry, question, group, evidence) : ''
   }
-  const place = passagePlace(group, locate.paragraphId)
+  const place = placeWithSentence(group, locate)
   // Same words in the passage: write them once. Other words: stem → passage.
   const sameWords = locate.cue.text.toLowerCase() === locate.sourceText.toLowerCase()
   const note = value => `<span class="locate-note">${escapeHtml(value)}</span>`
@@ -345,12 +372,12 @@ function renderLocate(entry, question, group, evidence) {
     ? `${words.map(word => `<b lang="en">${escapeHtml(word)}</b>`).join('、')} → ` : ''}${places.map(escapeHtml).join('、')}</p>`
 }
 
-function renderParaphrase(entry, answer) {
+function renderParaphrase(entry, answer, translation) {
   const options = [...new Set(array(entry?.locationParaphrases)
     .filter(relation => relation?.sourceRole === 'correctOption' && relation?.relationType === 'paraphrase')
     .map(relation => nonEmptyString(relation.sourceText)).filter(Boolean))]
   if (options.length === 0) return ''
-  return `<p class="evidence-paraphrase"><span class="inline-label">同义替换</span><b>${escapeHtml(answer)} 项</b> <span lang="en">${options.map(escapeHtml).join(' ')}</span></p>`
+  return `<p class="evidence-paraphrase"><span class="inline-label">同义替换</span><b>${escapeHtml(answer)} 项</b>${translation ? `（${escapeHtml(translation)}）` : ' '}<span lang="en">${options.map(escapeHtml).join(' ')}</span></p>`
 }
 
 export function renderReadingDiscourse(discourse, group, overview) {
@@ -418,9 +445,9 @@ export function renderReadingGroup({ group, title, paperAsset, analysis, answers
       renderReadingStem(question, entry, locate),
       locate ? renderDataLocate(locate, entry, question, group, correct?.evidence) : renderLocate(entry, question, group, correct?.evidence),
       locate?.by === 'stem' ? renderLocateQuote(locate, group, correct, underlineTexts) : renderEvidenceQuote(quotes, underlineTexts),
-      renderParaphrase(entry, answer),
+      renderParaphrase(entry, answer, withoutClosingPunctuation(correct?.optionTranslationZh)),
       ...reasoning.map((item) => `<p class="analysis-prose">${escapeHtml(item)}</p>`),
-      distractors.length > 0 ? `<div class="distractor distractor--reading"><div>${distractors.map((distractor) => `<p class="reading-distractor-item"><b>${escapeHtml(distractor.label)} 项</b>${distractor.optionTranslationZh ? `（${escapeHtml(distractor.optionTranslationZh)}）` : ''}${renderTrapReason(distractor.trap)}</p>`).join('')}</div></div>` : '',
+      distractors.length > 0 ? `<div class="distractor distractor--reading"><div>${distractorRows(distractors).map((row) => `<p class="reading-distractor-item"><b>${row.map(item => escapeHtml(item.label)).join('、')} 项</b>${row.some(item => item.optionTranslationZh) ? `（${row.map(item => escapeHtml(item.optionTranslationZh || '')).join('；')}）` : ''}${renderTrapReason(row[0].trap)}</p>`).join('')}</div></div>` : '',
     ].filter(Boolean)
     return `<section class="question question--reading">
       ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer), first)}
