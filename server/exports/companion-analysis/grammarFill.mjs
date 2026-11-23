@@ -1,5 +1,6 @@
 import { renderFullTranslation, renderGroupHeading, renderHeadingLead, renderOverview, renderQuestionHeader, renderQuestionLead, renderMarkedRun, renderSelectedLongSentences, mergedSourceParagraphs } from './blocks.mjs'
 import { rangesInPiece } from '../../../shared/analysis/questionMarks.mjs'
+import { grammarTopic } from './grammarTopic.mjs'
 import { answerData, questionData } from './paper.mjs'
 import { array, escapeHtml, nonEmptyString } from './text.mjs'
 
@@ -69,9 +70,11 @@ export function renderGrammarFillGroup({ group, title, paperAsset, analysis, ans
     const answer = nonEmptyString(authoritativeAnswer)
     if (!question || !answer || !entry) return ''
     const hint = nonEmptyString(entry.hint)
+    const topic = grammarTopic(entry)
     return `<section class="question question--grammar">
       ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer, hint ? `提示词 ${hint}` : ''),
-        completedSentence(merged, questionId, paperAsset)
+        (topic ? `<p class="grammar-topic"><span class="inline-label">考点</span>${escapeHtml(topic)}</p>` : '')
+          + completedSentence(merged, questionId, paperAsset)
           + (entry.reason ? `<p class="analysis-prose">${escapeHtml(entry.reason)}</p>` : ''))}
     </section>`
   }).join('')

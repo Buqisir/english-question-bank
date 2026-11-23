@@ -345,7 +345,10 @@ for (const file of readdirSync(new URL('../server/exports/companion-analysis/', 
   }
   const render = (completedText) => renderGrammarFillGroup({
     group, title: '语法填空', paperAsset: paper, answers: [], openingHeadings: '',
-    analysis: { groups: { g: { teachingContent: teaching(completedText) } }, blanks: { q56: { reason: 'R56' }, q57: { reason: 'R57' } } },
+    analysis: { groups: { g: { teachingContent: teaching(completedText) } }, blanks: {
+      q56: { reason: 'R56', facetKey: 'grammar-fill.no-hint.conjunction.relative-clause' },
+      q57: { reason: 'R57', facetKey: 'grammar-fill.given.conversion.noun-to-adjective' },
+    } },
   })
   const html = render(completed)
   assert.doesNotMatch(html, /source-relationships|原题|答案补全|__56__/u, 'no passage is reprinted')
@@ -366,6 +369,20 @@ for (const file of readdirSync(new URL('../server/exports/companion-analysis/', 
   assert.doesNotMatch(line57, /<\/span>[\t\n\r ]+<(?:span class="source-relationship|b class="blank-no)/u)
   assert.match(line57, /answer-fill"[^>]*>central <\/span><span class="source-relationship source-underline"/u)
   assert.ok(html.indexOf('R56') > html.indexOf('[56]'), 'the sentence comes before the explanation')
+  // 考点 runs in after the heading, before the sentence line, spelled from
+  // the facet fields; a facet the export does not know prints no line.
+  const topic56 = '<p class="grammar-topic"><span class="inline-label">考点</span>定语从句</p>'
+  assert.ok(html.includes(topic56) && html.indexOf(topic56) < html.indexOf('[56]</b>'))
+  assert.ok(html.includes('<span class="inline-label">考点</span>词形转换（名词变形容词）</p>'))
+  const { grammarTopic } = await import('../server/exports/companion-analysis/grammarTopic.mjs')
+  const finite = 'grammar-fill.given.verb.finite'
+  assert.equal(grammarTopic({ facetKey: finite, tense: 'progressive', answer: 'was fixing' }), '谓语动词（过去进行时）')
+  assert.equal(grammarTopic({ facetKey: finite, tense: 'other', voice: 'passive' }), '谓语动词（情态动词后，被动）')
+  assert.equal(grammarTopic({ facetKey: finite, tense: 'other', voice: 'active' }), '谓语动词', 'an unsettled detail is left out')
+  assert.equal(grammarTopic({ facetKey: 'grammar-fill.given.verb.non-finite', role: 'attributive', form: 'done', similarityForm: 'done' }), '非谓语动词（作定语，done）')
+  assert.equal(grammarTopic({ facetKey: 'grammar-fill.given.pronoun', similarityProfile: { route: 'reflexive-pronoun' } }), '代词（有提示词，反身代词）')
+  assert.equal(grammarTopic({ facetKey: 'grammar-fill.no-hint.article', answer: 'an' }), '冠词（不定冠词）')
+  assert.equal(grammarTopic({ facetKey: 'grammar-fill.something-new' }), '')
   const unaligned = render('I grew up in a city. Yet now I live in the countryside, where tea grows, and central heating often fails. It is cold.')
   assert.doesNotMatch(unaligned, /question-stem--en/u, 'texts that do not line up print no sentence')
   assert.match(unaligned, /R56/u)
