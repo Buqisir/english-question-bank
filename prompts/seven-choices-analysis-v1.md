@@ -64,22 +64,95 @@ enum values exact, but do not begin `fitSummary`, `relation`, or `reason`
 with labels such as referential cohesion, topic-field alignment,
 or lexical repetition. First reconstruct what the passage is doing.
 
-`optionFit.fitSummary` should normally read as:
-
-```text
-空前正在做/问/说明什么 → 选项补上什么 → 空后为何能从这里继续
-```
-
-For example, say “饮品做好后喊出杯上名字，顾客才会上前取走”，before naming
-that movement an action chain. For a question-answer gap, state the question and
-the solution. For a topic-sentence gap, state what all following examples have
-in common. For a reference gap, name the exact referent instead of only saying
-“形成指代”。
+The Chinese teaching lines are `find`, `explain`, `distractors` and the group's
+`extraOptions`; write them by the 讲法 section below. `optionFit.fitSummary` and
+`keyDistractors` are derived by the server from them (see "Legacy Fields the
+Server Derives").
 
 `mechanismSignals[].relation` should explain what the highlighted words connect,
-not simply announce that they belong to the same topic field. `keyDistractors`
-may contain 0–2 genuinely teachable options; say which small part appears to fit
-and exactly where the connection breaks. Do not fill it for symmetry.
+not simply announce that they belong to the same topic field.
+
+## 讲法（七选五心法，详见 docs/product/seven-choices-methods.md）
+
+给中国高中生和老师看的七选五解析。七个选项填五个空，多两个。要写清两件事：每个空怎么找到答案；两个多余选项各自想骗哪一空、骗在哪、断在哪。读者手上有试卷。讲解用中文，英文原词照抄。按题号讲，不写做题顺序。
+
+### 每个空（`questions[questionId]`）
+
+1. **上下文** `contextEvidence`：`paragraphId` 是空所在的段落；`beforeQuote`、`afterQuote` 只抄**本段**里空前、空后的一小段原文（不含空位标记）。空在段首 `beforeQuote` 写空串，空在段尾 `afterQuote` 写空串。上一段末尾、下一段开头由导出自己取：只要 `find.quotes` 或 `lock` 用到了相邻段的词，导出就印「上段末尾」或「下段开头」那一行，没用到就不印。所以承上启下的空，要在找法里引上一段或下一段的原词；段首总起、段尾总结的空不必引。
+2. **锁定词** `lock`：1 到 3 个锁定答案的英文词，原样出现在空前、空后、答案或相邻段里，导出会加粗。锁定词在本段但离空远时，把 `beforeQuote` 或 `afterQuote` 抄长一点把它包进来，不要换成不关键的词。
+3. **找法** `find`（`text` 55 字以内，`quotes` 至少一条）：先看哪边，凭哪个词，为什么七个里只能是它。引的英文原样放进 `quotes`，并原样出现在 `text` 里。
+4. **讲解** `explain`（80 字以内）：这句在段里干什么，前后怎么接上。找法说「凭什么选」，讲解说「这句在这里起什么作用」，两句不说同一句话；不复述答案的中文意思。
+5. **错项** `distractors`（0 或 1 条，每条 `text` 45 字以内）：只在**另一空的正确答案**放到这里也说得通一半、学生真会填错时写，说它哪里接得上、原文哪个词让它不成立。`label` 必须是另一空的正确答案；两个多余选项不写在这里。
+
+找法：先看空后。错的选项多半空前接得上、空后接不上。
+
+1. 看空的位置：段首、段中、段尾、小标题。
+2. 看空后有没有指向前文的词：代词（he、they、this、it、them）、指代短语（do this、such a plan）、连接词（Yet、But、So、also、For example）、数字、专名。有，就找能给它铺垫的选项。
+3. 空后没有指向词，再看空前：问句要答案，冒号要内容，列举要同类。
+4. 小标题空和段首总起空看整段讲什么，找原词或同义复现。只有小标题空、或答案要概括后面几段才看得出的空，才在找法第一句写「先跳过，做完后面几段再回来」；空前空后就能定的空不写这句。
+
+常见的招：指代回指、原词或同义复现、转折对比、段首总起、并列平行、因果、问答呼应、承上启下、小标题概括段意、段尾总结、举例说明。招式名可以用，但放在具体解释之后，不单独当结论。这些是帮着想到该看哪里，不是对应表。
+
+### 两个多余选项（`groups[groupId].extraOptions`）
+
+这是这份解析的特点，要讲好。命题人常常照某一空的正确答案改出一个多余选项，专门骗那一空：共用一个核心词，把对象或方向改掉；或者把答案的陈述改成问句；或者对同一个问题给另一种回答；或者仿答案开头的 This、They、But。也有的照某空前后的原文词改，还有的只和全文话题沾边。
+
+两个多余选项各写一条，键是选项字母：
+
+- `target`：它最能骗的那一空的题号（数字）。哪一空都接不实写 `null`，这时 `kind` 必须是 `topic`。
+- `secondary`：还能骗的第二空的题号，没有写 `null`。不硬凑。
+- `kind`：`shadow`（影子项，照某空答案改的）、`context`（语境项，照某空前后的原文词改的）、`topic`（话题项，只和全文话题沾边）。判断顺序：先拿它和五个正确答案逐个比，共用一个核心词（单复数、大小写、词形不同也算，如 plant 和 plants、This 和 this）、仿同一种开头（This、They、But、Both）、或是同一句话换成问句或反过来说，就是影子项，哪怕它同时也借了空前后的原文词；都不是，再看语境项、话题项。
+- `shadowOf`：影子项写它照着改的那个正确答案的字母，其余写 `null`。
+- `shared`：影子项写两边共同的英文词，取两边都有的那一段字母（plant 和 plants 写 "plant"，This 和 this 写 "this"，不分大小写）；其余写空数组。
+- `text`（100 字以内）：依次说**像在哪**（选项里哪个词和那一空前后哪个词看似接得上）；**断在哪**（原文哪个具体的词让它不成立，优先找空后：代词没有先行词、连接词转不过来、空后的伏笔没人接、和原文事实矛盾、对象换了；说不出具体的词就是没找到，接着找）；影子项再加一句它是照哪个答案改的、都有什么词、答案说什么、它改成什么；有次目标就用一句话说它为什么也像那一空。话题项直说「它和全文话题有关，但哪一空都接不上」，再说最接近的那一空断在哪。
+- `quotes`：`text` 里引的英文，原样抄。
+
+导出把多余选项印在 `target` 那一空后面，标「多余项」，并替你印「也可能误填第 N 空」；`target` 为 `null` 的印在题组末尾。所以 `text` 里不写任何题号，用「这一空」「那一空」「答案 X」指代。
+
+### 写死的
+
+- 每个空、两个多余选项都要有一条。
+- 所有英文引文（`beforeQuote`、`afterQuote`、`lock`、`find.quotes`、`distractors[].quotes`、`extraOptions.*.quotes`、`shared`）是原文或选项里一字不差的子串，不含空位标记；`quotes` 里的每一条都原样出现在它所属的那段中文里。原文里的弯引号、不间断空格照原样抄。
+- 字数：一个汉字算 1，一个英文词算 1，标点不算。找法 55，讲解 80，错项每条 45，多余选项每条 100。
+- 找法、讲解、错项里不写本空题号（题头已印）；提别的空说「前一空」「后面那一空」或引原文。多余选项的 `text` 里不写任何题号。
+- 不写「第几段」：段落编号和卷面不一定对得上。说「上一段」「下一段」「最后一段」或引原文。
+- 不用「·」。不写空话：「能统领整段」「不符合语境」「不如……切题」「衔接自然」「使文章更完整」「语意连贯」「起到……的作用」。
+
+### 你自己判断的
+
+用哪一招；措辞；先看哪边；多余选项算哪一类、骗哪一空、有没有次目标；每空写不写错项。
+
+写完做**搬家检验**：把一句找法、讲解或断点原样搬到另一个空上，如果还成立，就是套话，重写，直到它只在这一空成立。
+
+### 例子（编的，和你要做的卷子无关）
+
+原文片段：
+
+> Many people think a garden needs a lot of space. __2__ A few pots on a balcony can grow herbs, tomatoes and even small lemon trees. They only need sun for about six hours a day.
+
+答案：「In fact, a small corner is often enough.」
+
+- 找法：「空后 "A few pots on a balcony" 是例子，要空里先有一句总说。只有 "a small corner is often enough" 能被它证明，又和空前 "a lot of space" 唱反调。」
+- 讲解：「空前是一般人的想法，这句马上纠正：小角落就够；空后用阳台几盆菜把纠正坐实。」
+- 坏的讲解：「承上启下，使文章衔接自然。」搬到哪一空都成立，什么也没说。
+
+多余选项「In fact, a big garden is often better.」（`kind: "shadow"`，`shadowOf` 是答案的字母，`shared: ["In fact", "is often"]`）：
+
+- text：「它和答案一样以 "In fact" 开头，也像在纠正空前 "a lot of space"。但空后 "A few pots on a balcony" 是在证明小也行，它却说大园子更好，方向反了。它是照答案改的：都有 "In fact" 和 "is often"，答案说小角落就够，它改成大园子更好。」
+
+多余选项「They should be watered every morning.」（`kind: "context"`）：
+
+- text：「开头 They 像在接空后的 "They only need sun"，又都在说怎么照料。但放进这一空，They 前面只有 "a garden"，没有复数名词可指；照料是下一句的事，它抢在例子前面说了。」
+
+## Legacy Fields the Server Derives
+
+Do NOT write these; the server fills them from your new fields so older consumers
+(site panel, draft-paper text) keep working:
+
+- `optionFit.fitSummary` — copied from `explain`.
+- `optionFit.correctOptionLabel` — the supplied answer label.
+- `keyDistractors` — your `distractors`, then the spare options whose `target`
+  is this blank.
 
 ## Required Top-Level Shape
 
@@ -144,6 +217,22 @@ Include:
 - `selectedLongSentences`
 - `discourseStructure.summary`
 - `discourseStructure.units[]`
+- `extraOptions` — the two spare options, keyed by option label (see 讲法):
+
+```json
+"extraOptions": {
+  "C": {
+    "target": 38, "secondary": 40, "kind": "shadow", "shadowOf": "E",
+    "shared": ["plant"],
+    "text": "Chinese, no question numbers",
+    "quotes": ["exact English quoted in text"]
+  },
+  "A": {
+    "target": null, "secondary": null, "kind": "topic", "shadowOf": null,
+    "shared": [], "text": "…", "quotes": ["…"]
+  }
+}
+```
 
 `overview` is the one canonical introduction shared by teaching, list/search
 and future similarity consumers. Aim for 50–80 Chinese characters without
@@ -223,9 +312,14 @@ Each `questions[questionId]` item analyzes one blank.
       "relation": "If 引出适用条件，与空后祈使句构成条件—建议关系。"
     }
   ],
+  "lock": ["keep these things in mind"],
+  "find": {
+    "text": "先看空后 \"keep these things in mind\"：要先有一个条件，只有 \"If you are just starting out\" 是条件。",
+    "quotes": ["keep these things in mind", "If you are just starting out"]
+  },
+  "explain": "空前说人人都能跑，这句把话收到新手身上，空后的几条建议才有了对象。",
+  "distractors": [],
   "optionFit": {
-    "correctOptionLabel": "G",
-    "fitSummary": "Chinese explanation of why the option fits",
     "matchedClues": [
       {
         "contextSide": "training program / risk of injury",
@@ -233,13 +327,7 @@ Each `questions[questionId]` item analyzes one blank.
         "relation": "Chinese explanation of the match"
       }
     ]
-  },
-  "keyDistractors": [
-    {
-      "optionLabel": "A",
-      "reason": "Chinese explanation of the tempting but wrong fit"
-    }
-  ]
+  }
 }
 ```
 
@@ -437,9 +525,7 @@ The bad examples may belong in `optionFit.matchedClues[].optionSide`, not in
 - `correctOptionLabel` must match the supplied answer label.
 - `matchedClues` must compare option-side language with context-side clues.
   It is expanded explanation detail, not a UI highlighting source.
-- `fitSummary` must explain the main solving move in Chinese.
-- `fitSummary` should be 1-2 Chinese sentences. It explains why this option
-  fits this blank.
+- `fitSummary` is derived from `explain`; do not write it.
 
 ## Context Evidence
 
@@ -453,13 +539,9 @@ context-side topic-field chunks in `topicClues`.
 
 ## Distractors
 
-`keyDistractors` is optional and may contain at most 2 items.
-
-Use it only for the most teachable wrong options. Do NOT give distractors their
-own facet keys.
-
-Do not spend effort filling distractors if it harms the correct-option signal
-quality. The current surface does not display distractors.
+Write `distractors` (0 or 1 item, another blank's correct answer) and the
+group's `extraOptions` by the 讲法 section. Do NOT write `keyDistractors`; the
+server derives it. Do NOT give distractors their own facet keys.
 
 ## Final Literal-Substring Check
 
@@ -474,7 +556,9 @@ Before returning JSON, silently run this check on every
    intended word family. Replace `signalText` with a shorter character-for-
    character substring that actually exists on that side.
 4. Repeat the same literal check for `contextEvidence.beforeQuote` and
-   `contextEvidence.afterQuote` against the passage.
+   `contextEvidence.afterQuote` against the blank's own paragraph, and for
+   `lock`, `find.quotes`, `distractors[].quotes`, `extraOptions.*.quotes` and
+   `shared` against the passage and options.
 
 Meaning-equivalent, lemma-equivalent, differently inflected, or normalized text
 still fails this check. Do not return until every literal search succeeds.

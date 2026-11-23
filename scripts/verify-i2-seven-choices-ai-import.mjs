@@ -227,21 +227,30 @@ function validScAnalysis(input = scFixtureInput()) {
         overview: '跑步新手常见错误及建议。',
         discourseStructure: { summary: '介绍五个跑步误区。', units: [] },
         ...buildObjectiveTeachingFixture(group),
+        // 七选五讲法：两个多余选项 C、F。
+        extraOptions: {
+          C: { target: 36, secondary: null, kind: 'context', shadowOf: null, shared: [], text: '它也说跑步的人，但空后 "fixture end." 接不上 "Comparing yourself"。', quotes: ['fixture end.', 'Comparing yourself'] },
+          F: { target: null, secondary: null, kind: 'topic', shadowOf: null, shared: [], text: '它和全文话题有关，但哪一空都接不上 "While you do not need"。', quotes: ['While you do not need'] },
+        },
       },
     },
     questions: Object.fromEntries(
       group.questions.map((q) => [
         q.id,
         {
+          lock: ['fixture end'],
+          find: { text: '先看空后 "fixture end."，只有答案能接上它。', quotes: ['fixture end.'] },
+          explain: '空前铺开话题，答案补上要点，空后接着收束。',
+          distractors: [],
           blankId: q.blankId,
           positionFacet: 'seven-choices.position.paragraph-middle',
           roleFacet: 'seven-choices.role.cohesion',
           primaryMechanismFacet: 'seven-choices.cohesion.lexical.topic-field-alignment',
           topicClues: ['running', 'training', 'injury'],
           contextEvidence: {
-            paragraphId: group.paragraphs[0].id,
-            beforeQuote: 'Running is a great way',
-            afterQuote: 'keep these things in mind',
+            paragraphId: `objective-fixture:${q.blankId}`,
+            beforeQuote: 'Fixture context',
+            afterQuote: 'fixture end.',
           },
           mechanismSignals: [
             {
@@ -260,8 +269,6 @@ function validScAnalysis(input = scFixtureInput()) {
             },
           ],
           optionFit: {
-            correctOptionLabel: q.answerKey,
-            fitSummary: '选项与上下文话题场匹配。',
             matchedClues: [{ contextSide: 'keep these things in mind', optionSide: q.answerKey, relation: 'topic match' }],
           },
           teachingNote: '通过话题场匹配解题。',
@@ -297,11 +304,39 @@ async function assertAnalysisValidation() {
     Object.values(admittedWithoutNotes.analysis.questions).every((item) =>
       !Object.hasOwn(item, 'teachingNote') && item.optionFit.fitSummary && item.mechanismSignals.length >= 2))
 
+  assert('seven choices derives fitSummary, answer label and keyDistractors from the new lines',
+    Object.entries(result.analysis.questions).every(([questionId, item]) => {
+      const question = input.group.questions.find(({ id }) => id === questionId)
+      const aimed = question.stem === '36' ? ['C'] : []
+      return item.optionFit.fitSummary === item.explain && item.optionFit.correctOptionLabel === question.answerKey
+        && JSON.stringify(item.keyDistractors.map(({ optionLabel }) => optionLabel)) === JSON.stringify(aimed)
+    }))
+
   await assertRejects('a legacy teachingNote cannot replace the seven-choices reasoning', () => {
     const bad = validScAnalysis(input)
-    bad.questions[input.group.questions[0].id].optionFit.fitSummary = '   '
+    bad.questions[input.group.questions[0].id].explain = '   '
     return analyzeSevenChoicesImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
-  }, /optionFit\.fitSummary/)
+  }, /讲解: 空的/)
+
+  const firstId = input.group.questions[0].id
+  const teachingRejections = [
+    ['a paragraph number in 找法', (bad) => { bad.questions[firstId].find.text = '看第二段 "fixture end."。' }, /不写「第二段」/],
+    ['the blank\'s own number in 讲解', (bad) => { bad.questions[firstId].explain = '36 空接上空后。' }, /不写题号 36/],
+    ['a spare option as 错项', (bad) => { bad.questions[firstId].distractors = [{ label: 'C', text: '它接不上 "fixture end."。', quotes: ['fixture end.'] }] }, /不是另一空的正确答案/],
+    ['an afterQuote from another paragraph', (bad) => { bad.questions[firstId].contextEvidence.afterQuote = 'keep these things in mind' }, /afterQuote 只抄本段/],
+    ['a lock word that is not in the chain', (bad) => { bad.questions[firstId].lock = ['marathon'] }, /锁定词「marathon」/],
+    ['a missing spare option', (bad) => { delete bad.groups[input.group.groupId].extraOptions.F }, /多余选项 F: 缺这一条/],
+    ['a shadow option without a shared word', (bad) => { Object.assign(bad.groups[input.group.groupId].extraOptions.C, { kind: 'shadow', shadowOf: 'B', shared: ['marathon'] }) }, /共同词「marathon」/],
+    ['a question number in a spare option', (bad) => { bad.groups[input.group.groupId].extraOptions.C.text = '它最像 36 空 "fixture end."，但 "Comparing yourself" 接不上。' }, /不写题号 36/],
+    ['empty talk', (bad) => { bad.questions[firstId].explain = '答案和空后衔接自然。' }, /衔接自然/],
+  ]
+  for (const [label, mutate, pattern] of teachingRejections) {
+    await assertRejects(`seven choices rejects ${label}`, () => {
+      const bad = validScAnalysis(input)
+      mutate(bad)
+      return analyzeSevenChoicesImportCandidate(input, { providerCallers: { deepseek: stubProvider(bad) } })
+    }, pattern)
+  }
 
   for (const field of ['positionFacet', 'roleFacet', 'primaryMechanismFacet']) {
     await assertRejects(`uncontrolled ${field} fails for seven-choices`, () => {

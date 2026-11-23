@@ -695,21 +695,54 @@ h5 {
   display: block;
 }
 
-/* Seven-choices: the blank in its context. */
+/* Seven-choices: the blank in its context. One grid for the whole chain, so
+   「空前」 and 「上段末尾」 rows keep their text on one left edge. */
 .context-chain {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  column-gap: 0.6em;
   margin: 0.4mm 0 0;
   break-inside: avoid;
 }
 
 .context-chain > div {
-  display: grid;
-  grid-template-columns: 2.6em 1fr;
-  gap: 0.4em;
+  display: contents;
+}
+
+.context-chain p {
+  margin: 0;
+  min-width: 0;
 }
 
 .context-chain span {
   color: var(--muted);
   font-size: var(--small);
+  line-height: var(--lh);
+}
+
+/* A spare option under the blank it aims at: tagged so it is not read as
+   one of this blank's 错项. */
+.extra-tag {
+  display: inline-block;
+  margin-right: 0.5em;
+  padding: 0 0.4em;
+  border-radius: 1mm;
+  background: var(--tint);
+  color: var(--green-deep);
+  font: 700 var(--small)/var(--lh) var(--zh);
+}
+
+.extra-options {
+  margin-top: var(--lh);
+  break-inside: avoid;
+}
+
+.extra-options p {
+  margin: 0;
+}
+
+.extra-options b {
+  font-family: var(--en);
 }
 
 .context-chain-answer span,
