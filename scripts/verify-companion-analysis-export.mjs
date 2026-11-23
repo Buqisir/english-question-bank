@@ -517,6 +517,30 @@ console.log('Companion analysis grammar-fill sentence lines, no reprinted passag
       && html.indexOf('evidence-paraphrase') < html.indexOf('NOTE_SENTINEL'), '定位 → 原文依据 → 同义替换 → 分析')
   } else assert.fail(`reading fixture did not render a question: ${html.slice(0, 200)}`)
 
+  // 2026-11-23, learnt from the 答案详解 book on our own lines: the 定位 note
+  // carries the 定位句's place in its paragraph, the correct option prints
+  // its translation like a wrong one, and options ruled out by one sentence
+  // share one line.
+  const three = { groupId: 'g', groupType: 'reading', title: 'reading.a', questionIds: ['q1'], passage: { paragraphs: [
+    { paragraphId: 'p1', text: 'Ann runs a farm. Her cows give milk. She sells cheese.' }] } }
+  const learnt = renderReadingGroup({ group: three, answers: [], openingHeadings: '',
+    paperAsset: { content: { questions: { q1: { questionId: 'q1', questionNo: 21, groupId: 'g', stem: 'What do the cows give?', options: [] } } }, answerKey: { answers: { q1: { answer: 'B' } } } },
+    analysis: { groups: {}, questions: { q1: { locateBy: 'stem', locateFindZh: '', stemTranslationZh: '牛产什么？', similarityProfile: { family: 'detail' },
+      locationParaphrases: [
+        { sourceText: 'cows', sourceRole: 'stem', targetText: 'Her cows give milk.', targetParagraphId: 'p1', relationType: 'locationCue', answerText: 'milk' },
+        { sourceText: 'Milk.', sourceRole: 'correctOption', targetText: 'milk', relationType: 'paraphrase', note: '讲解' }],
+      optionAnalysis: [
+        { label: 'A', status: 'wrong', optionTranslationZh: '肉。', trap: { explanation: '原文只说产奶和奶酪。' } },
+        { label: 'B', status: 'correct', optionTranslationZh: '牛奶。', evidence: [{ paragraphId: 'p1', quote: 'Her cows give milk.' }] },
+        { label: 'C', status: 'wrong', optionTranslationZh: '羊毛。', trap: { explanation: '原文只说产奶和奶酪。' } },
+        { label: 'D', status: 'wrong', optionTranslationZh: '蛋。', trap: { explanation: '另一个理由。' } }] } } } })
+  if (learnt.includes('question-number')) {
+    assert.match(learnt, /<span class="locate-note">第 1 段第 2 句<\/span>/u, 'the 定位 note names the 定位句: 首句, 末句 or 第 M 句')
+    assert.match(learnt, /同义替换<\/span><b>B 项<\/b>（牛奶）<span lang="en">Milk\.<\/span>/u, 'the correct option prints its translation once, as a wrong one does')
+    assert.match(learnt, /<b>A、C 项<\/b>（肉；羊毛）错在：原文只说产奶和奶酪。/u, 'two options with one sentence share one line')
+    assert.equal((learnt.match(/class="reading-distractor-item"/gu) || []).length, 2)
+  } else assert.fail('the 定位 + 同义替换 fixture did not render a question')
+
   const { renderAnswerRuns } = await import('../server/exports/companion-analysis/blocks.mjs')
   const runs = renderAnswerRuns(Array.from({ length: 12 }, (_, index) => ({ questionId: `q${index}`, number: index + 1, value: 'A' })))
   assert.equal((runs.match(/<div class="answer-run">/gu) || []).length, 3, 'answers come five to a block')
