@@ -164,7 +164,8 @@ function validClAnalysis(input = clFixtureInput()) {
       find: { check: 'collocation', text: '后面是 slowly into the room，慢慢进屋的动作是走。', quotes: ['slowly into the room'] },
       correctFit: {
         optionLabel: q.answerKey,
-        meaning: '走进',
+        dictMeaning: '走',
+        meaning: '走进屋',
         reason: '搭配合理，主语与动词语义相符。',
       },
       distractorGlosses: distractorLabels.map((l) => ({
@@ -264,9 +265,11 @@ async function assertAnalysisValidation() {
       ['cloze distractor needs a passage quote', (bad) => { delete bad.blanks[firstId].distractorGlosses[0].quote }, /引文为空/],
       ['cloze 脉络 rejects lofty filler', (bad) => { bad.blanks[firstId].context = '这一句体现了男孩热爱读书的精神。' }, /空话/],
       ['cloze main line covers every paragraph', (bad) => { bad.groups[input.group.groupId].mainLine.paragraphs.pop() }, /对应原文/],
-      ['cloze needs the answer word\'s 语境义', (bad) => { delete bad.blanks[firstId].correctFit.meaning }, /correctFit\.meaning/],
+      ['cloze needs the answer word\'s dictionary sense', (bad) => { delete bad.blanks[firstId].correctFit.dictMeaning }, /correctFit\.dictMeaning/],
       ['cloze 语境义 is a short phrase', (bad) => { bad.blanks[firstId].correctFit.meaning = '走进屋里坐下来然后慢慢地翻开那本旧书' }, /语境义: \d+ 字，超过 12/],
       ['cloze 语境义 has no reason or English', (bad) => { bad.blanks[firstId].correctFit.meaning = '意为 walk 走进' }, /语境义/],
+      ['cloze 语境义 is not written as 此处指', (bad) => { bad.blanks[firstId].correctFit.meaning = '此处指走进屋' }, /此处指/],
+      ['cloze 语境义 the same as the dictionary sense is left out', (bad) => { bad.blanks[firstId].correctFit.meaning = '走' }, /只留 dictMeaning/],
     ]
     for (const [name, mutate, pattern] of cases) {
       await assertRejects(name, () => {
