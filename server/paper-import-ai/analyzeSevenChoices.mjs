@@ -9,6 +9,7 @@ import {
   readTeachingAnalysisPrompt,
   rewriteApiPrompt,
 } from './analyzerProviderShell.mjs'
+import { assertSevenChoicesTeachingLines, deriveSevenChoicesLegacyFields } from './sevenChoicesTeaching.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '../..')
@@ -127,6 +128,7 @@ export function validateSevenChoicesShape(analysis, {
   requireFullTranslation = false,
   requireSelectedLongSentences = false,
   requireTeachingContent = false,
+  requireTeachingLines = false,
 }) {
   if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) throw new Error('AI 未返回 JSON 对象。')
   if (analysis.schemaVersion !== 'seven-choices-analysis-v1') throw new Error('AI JSON schemaVersion 不正确。')
@@ -156,6 +158,7 @@ export function validateSevenChoicesShape(analysis, {
   }
 
   const expectedQuestionIds = group.questions.map((q) => q.id).sort()
+  assertSevenChoicesTeachingLines(analysis, group, { required: requireTeachingLines })
   const actualQuestionIds = Object.keys(analysis.questions).sort()
   if (JSON.stringify(actualQuestionIds) !== JSON.stringify(expectedQuestionIds)) {
     throw new Error(`AI JSON questionIds 不匹配：expected ${expectedQuestionIds.join(', ')}, got ${actualQuestionIds.join(', ')}`)
@@ -254,11 +257,15 @@ function isRetryableSevenChoicesError(error) {
 export const analyzeSevenChoicesImportCandidate = createAnalyzerProviderShell({
   assertInput: assertSevenChoicesAnalyzeInput,
   buildMessages: buildSevenChoicesAnalysisMessages,
-  validate: (analysis, input) => validateSevenChoicesShape(analysis, {
-    ...input,
-    requireFullTranslation: true,
-    requireSelectedLongSentences: true,
-    requireTeachingContent: true,
-  }),
+  validate: (analysis, input) => {
+    if (analysis && typeof analysis === 'object' && input?.group) deriveSevenChoicesLegacyFields(analysis, input.group)
+    validateSevenChoicesShape(analysis, {
+      ...input,
+      requireFullTranslation: true,
+      requireSelectedLongSentences: true,
+      requireTeachingContent: true,
+      requireTeachingLines: true,
+    })
+  },
   isRetryable: isRetryableSevenChoicesError,
 })
