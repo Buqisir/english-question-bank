@@ -18,7 +18,7 @@ export const FACET_FRAMEWORKS: Record<string, { labelZh: string }> = {
   'grammar-fill.given.conversion.verb-to-adjective': { labelZh: '词形转换（动词→形容词）' },
   'grammar-fill.given.conversion.verb-to-noun': { labelZh: '词形转换（动词→名词）' },
   'grammar-fill.given.conversion.verb-to-adverb': { labelZh: '词形转换（动词→副词）' },
-  'grammar-fill.given.pronoun': { labelZh: '代词（给定）' },
+  'grammar-fill.given.pronoun': { labelZh: '代词（有提示词）' },
   'grammar-fill.given.numeral': { labelZh: '数词' },
   'grammar-fill.no-hint.preposition': { labelZh: '介词' },
   'grammar-fill.no-hint.article': { labelZh: '冠词' },
@@ -27,5 +27,5 @@ export const FACET_FRAMEWORKS: Record<string, { labelZh: string }> = {
   'grammar-fill.no-hint.conjunction.relative-clause': { labelZh: '定语从句' },
   'grammar-fill.no-hint.conjunction.noun-clause': { labelZh: '名词性从句' },
   'grammar-fill.no-hint.conjunction.adverbial-clause': { labelZh: '状语从句' },
-  'grammar-fill.no-hint.conjunction.cleft': { labelZh: '强调句连接标记' },
+  'grammar-fill.no-hint.conjunction.cleft': { labelZh: '强调句' },
 }
