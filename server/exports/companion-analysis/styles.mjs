@@ -587,6 +587,7 @@ h5 {
   color: var(--muted);
 }
 
+.question-lead > .grammar-topic + .question-stem,
 .question-lead > .question-stem + p,
 .question-lead > .question-stem + .listening-options {
   margin-top: 0.4mm;
