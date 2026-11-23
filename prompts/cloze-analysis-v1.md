@@ -56,7 +56,7 @@ inventing a grammar rule or a missing event to justify the answer.
 讲解分两层：
 
 - **题组开头**（`groups[groupId].mainLine`）：主题意义、每段一句主线、情感线。
-- **每个空**（`blanks[questionId]`）：先分主线空还是细节空；脉络说这个空在这里必须是什么意思；找法说原文哪几个词把答案锁定，从词性入手；正确项写出它在这句里的意思；三个错项都写。
+- **每个空**（`blanks[questionId]`）：先分主线空还是细节空；脉络说这个空在这里必须是什么意思；找法说原文哪几个词把答案锁定，从词性入手；正确项先写词典义、再写此处指什么；三个错项都写。
 
 不写串空：不要把主线空的答案再串成一句（Owner 2026-11-23 定，`mainLine` 里不要 `thread`）。
 
@@ -114,7 +114,13 @@ inventing a grammar rule or a missing event to justify the answer.
 
 主线往往直接告诉你看哪里：情感线定下形容词、副词和表态度的词的正负；主线上的动作链就是动作顺序；主线上一件事说完，后面常用一个名词概括它；段与段之间的转折常落在逻辑词上。用上了就写出原文的词，不要只说「符合情感线」。
 
-**正确项的语境义** `correctFit.meaning`：答案词放进这句里是什么意思，一个中文短语，不超过 12 字，页面印在题头答案词后面（如「41 C exercise 锻炼身体」）。写这句里的意思，不写词典的第一个义项：熟词僻义、词组的整体意思尤其要写对。只写意思，不写「意为」，不写理由（理由在脉络和找法里），不写英文。
+**正确项的词义** `correctFit.dictMeaning` 和 `correctFit.meaning`：页面印在题头答案词后面，印成「词典义；此处指语境义」。
+
+- `dictMeaning`（必写，不超过 8 字）：词典里的义项，取最接近这句语境的那一个。这是学生要记住的词义，必须是这个词本身的意思，不能是它在这句里临时指的东西。
+- `meaning`（语境义，不超过 12 字）：这个词在这句里具体指什么。和词典义一样时不写，页面只印词典义。熟词僻义、词组的整体意思要写对。
+- 两项都只写中文短语，不写「意为」「此处指」，不写理由（理由在脉络和找法里），不写英文。
+
+例：exercise 只写词典义「锻炼」；inspiration 写词典义「鼓舞人心的人或事」、语境义「激励别人的榜样」，印成「inspiration 鼓舞人心的人或事；此处指激励别人的榜样」。只写「榜样」不行：基础弱的学生会把 inspiration 记成「榜样」。
 
 **错项** `distractorGlosses`：三个错项都写，每项一句，不超过 45 字。写 what the word or phrase would mean here（这个词放进这句是什么意思），再写原文哪个词让它不成立，也就是放回当前语境为何不成立。`meaning` 先写词义，用「；」接上排除的理由，开头不重复选项词本身（页面会印）。好的空放进去语法都对，错项靠意思排除；只说「原文没有这回事」不算排除，要说出原文写的是什么。有的错项放进这一句也说得通，但会让主线断掉，这时就用主线排除，说出放进去以后前后哪件事对不上。`quote` 是你在 `meaning` 里引的那处原文。
 
@@ -167,9 +173,9 @@ motive or broader rule, and never give only a reusable dictionary gloss such as
 
 每个空（页面印出来的样子）：
 
-- 第一空（细节）题头：1 A put up 竖起。脉络：她立了一块提醒别踩土的牌子，这里要「竖起、挂出」的意思。找法：词组看语境义：宾语是 a sign，牌子上写着 Please don't step on the soil，是把牌子立起来。错项 B：推迟；a sign 是立起来给人看的，推迟一块牌子说不通。
-- 第二空（主线）题头：2 B discouraged 泄气的。脉络：坚持几周没有结果，这是全文的低谷，要一个负面的情绪。找法：形容词看情感：前面 nothing grew，even 说连坚持的 Mia 也动摇了，四个里负面的只有 discouraged。错项 A：充满希望；前面是 nothing grew，even 表示连她也撑不住了，和 hopeful 反着。
-- 第三空（主线）题头：3 A shoots 嫩芽。脉络：低谷后的转机，要一样从土里长出来的东西。找法：名词看话题：讲的是 garden，又是 pushing through the soil，长出来的绿色东西是 shoots。错项 C：昆虫；虫子不会 pushing through the soil，也长不成后面的 tomatoes。
+- 第一空（细节）题头：1 A put up 竖起；此处指立起（牌子）。脉络：她立了一块提醒别踩土的牌子，这里要「竖起、挂出」的意思。找法：词组看语境义：宾语是 a sign，牌子上写着 Please don't step on the soil，是把牌子立起来。错项 B：推迟；a sign 是立起来给人看的，推迟一块牌子说不通。
+- 第二空（主线）题头：2 B discouraged 灰心的。脉络：坚持几周没有结果，这是全文的低谷，要一个负面的情绪。找法：形容词看情感：前面 nothing grew，even 说连坚持的 Mia 也动摇了，四个里负面的只有 discouraged。错项 A：充满希望；前面是 nothing grew，even 表示连她也撑不住了，和 hopeful 反着。
+- 第三空（主线）题头：3 A shoots 嫩芽，新枝。脉络：低谷后的转机，要一样从土里长出来的东西。找法：名词看话题：讲的是 garden，又是 pushing through the soil，长出来的绿色东西是 shoots。错项 C：昆虫；虫子不会 pushing through the soil，也长不成后面的 tomatoes。
 - 第四空（主线）题头：4 B However 然而。脉络：前句说大家笑话这事，后句说他们要加入，态度翻过来了。找法：副词看逻辑：laughed at the idea 和 asked to join 前后相反，用转折。错项 C：因此；laughed at the idea 推不出 asked to join，不是因果。
 
 
@@ -241,7 +247,7 @@ Do NOT write these; the server fills them from your new fields so older consumer
         "text": "前面 nothing grew，even 说连坚持的 Mia 也动摇了，四个里负面的只有 discouraged。",
         "quotes": ["nothing grew"]
       },
-      "correctFit": { "optionLabel": "B", "meaning": "泄气的" },
+      "correctFit": { "optionLabel": "B", "dictMeaning": "灰心的" },
       "distractorGlosses": [
         { "optionLabel": "A", "optionText": "hopeful", "meaning": "充满希望；前面是 nothing grew，even 表示连她也撑不住了，和 hopeful 反着。", "quote": "nothing grew" },
         { "optionLabel": "C", "optionText": "proud", "meaning": "……", "quote": "……" },
@@ -281,9 +287,10 @@ Every `blanks[questionId]` MUST include:
 - `role` — `main` or `detail`
 - `context` — 脉络，≤45
 - `find` — `{ "check", "text", "quotes" }`，`text` ≤55；`posLabel` only when `pos` is `"other"`
-- `correctFit` — object with `meaning` (required: the answer word's meaning in
-  this sentence, a Chinese phrase of at most 12 units, no English, no 「意为」, no
-  reason); `optionLabel` is recommended and MUST match the supplied answer key
+- `correctFit` — object with `dictMeaning` (required: the dictionary sense
+  closest to this sentence, a Chinese phrase of at most 8 units) and `meaning`
+  (only when what the word refers to here differs from that sense: at most 12
+  units; leave it out when the same). Chinese only, no 「意为」/「此处指」, no reason; `optionLabel` is recommended and MUST match the supplied answer key
   when present. Leave `reason` out; the server derives it.
 - `distractorGlosses` — one entry per non-answer option, each with
   `optionLabel`, `optionText`, `meaning` (≤45, contextual meaning + what in the

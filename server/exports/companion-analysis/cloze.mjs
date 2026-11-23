@@ -52,6 +52,14 @@ function renderClozeTeachingLines(entry) {
       <p class="evidence-locate"><span class="inline-label">找法</span><b>${escapeHtml(clozeFindLabel(entry))}</b>：${boldPhrases(entry.find.text, entry.find.quotes)}</p>`
 }
 
+// 正确项：词典义；此处指语境义。两者相同或只有一项时只印一项。
+function answerGloss(fit) {
+  const dict = nonEmptyString(fit?.dictMeaning)
+  const meaning = nonEmptyString(fit?.meaning)
+  if (dict && meaning && meaning !== dict) return `${dict}；此处指${meaning}`
+  return dict || meaning
+}
+
 export function renderClozeGroup({ group, title, paperAsset, analysis, answers, openingHeadings }) {
   const groupAnalysis = analysis?.groups?.[group.groupId] || {}
   const questions = array(group.questionIds).map((questionId) => {
@@ -65,7 +73,7 @@ export function renderClozeGroup({ group, title, paperAsset, analysis, answers, 
       : entry.correctFit?.reason ? `<p class="analysis-prose">${escapeHtml(entry.correctFit.reason)}</p>` : ''
     const distractors = glosses.length > 0 ? `<div class="distractor distractor--cloze"><div>${glosses.map((item) => `<p class="cloze-distractor-item"><b>${escapeHtml(item.optionLabel)} 项</b>（${escapeHtml(item.optionText)}）意为：${escapeHtml(item.meaning)}</p>`).join('')}</div></div>` : ''
     return `<section class="question question--cloze">
-      ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer, answerOptionText(question, answer), '', nonEmptyString(entry.correctFit?.meaning)), reason || distractors)}
+      ${renderQuestionLead(renderQuestionHeader(question.questionNo, answer, answerOptionText(question, answer), '', answerGloss(entry.correctFit)), reason || distractors)}
       ${reason ? distractors : ''}
     </section>`
   }).join('')

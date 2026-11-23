@@ -27,7 +27,7 @@ export const analysisComponents = [
   { name: 'Mark', role: '译文和语法填空原句行里的标注：译文里前置题号 [41] 标作答位置，填入的答案粗体（语法填空原句行不标题号、不挂上标）；阅读、听力的答案是选项字母，依据就是作答位置，依据淡绿底前加 [21]；别的线索淡绿底加题号上标（不加括号）',
     classes: ['source-relationship', 'translation-annotation', 'listening-evidence', 'source-underline', 'answer-fill',
       'blank-no', 'clue-tail', 'clue-no'] },
-  { name: 'QuestionHead', role: '题头：绿底反白题号块、答案，接排讲解第一行；阅读接英文题干（定位词粗体），下一行淡墨中文译文；完形在答案词后接正确项的语境义（正文墨色）；语法填空在题头同一行接考点（由分析的考点字段拼出，不由模型写），下一行接答案所在的那一句（各空填好，只标本题）',
+  { name: 'QuestionHead', role: '题头：绿底反白题号块、答案，接排讲解第一行；阅读接英文题干（定位词粗体），下一行淡墨中文译文；完形在答案词后接正确项「词典义；此处指语境义」（正文墨色）；语法填空在题头同一行接考点（由分析的考点字段拼出，不由模型写），下一行接答案所在的那一句（各空填好，只标本题）',
     classes: ['question', 'question--reading', 'question--seven', 'question--cloze', 'question--grammar',
       'question--listening', 'question-lead', 'question-heading', 'question-number', 'question-answer',
       'answer-text', 'answer-gloss', 'question-stem', 'question-stem--en', 'question-stem-zh', 'grammar-topic'] },

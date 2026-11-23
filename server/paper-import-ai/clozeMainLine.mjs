@@ -28,7 +28,7 @@ const SIGNATURE_BY_POS_CHECK = {
   'phrase:contextual-meaning': 'cloze.signature.phrase.contextual-composition',
 }
 
-const LIMITS = { context: 45, find: 55, distractor: 45, theme: 40, paragraph: 30, emotion: 40, meaning: 12 }
+const LIMITS = { context: 45, find: 55, distractor: 45, theme: 40, paragraph: 30, emotion: 40, dictMeaning: 8, meaning: 12 }
 const LOFTY = /(体现了?|升华|彰显|表达了?)[^，。；,;]{0,10}(精神|品质|主题|道理|情怀|情感)/
 const ABSENCE = /(没有|并无|未提|没提|不涉及|无)[^，。；,;]{0,8}(情节|情境|事件|话题|活动|经历)/
 const BLANK_MARKER = /__\d*__|_{2,}/
@@ -120,13 +120,19 @@ function assertBlankLines({ questionId, item, question, quoteCheck }) {
     if (ownNo.test(value)) throw new Error(`${where} ${label}: 不写本空题号，题头已经印了。`)
     assertNoDot(value, `${where} ${label}`)
   }
-  // 正确项的语境义：答案词在这句里的意思，印在题头答案词后面（Owner 2026-11-23）。
+  // 正确项：先词典义（最接近这句的义项，学生要记住的词义），不同时再写语境义（此处具体指什么）。
+  // 题头印「词典义；此处指语境义」（Owner 2026-11-23）。
+  const dictMeaning = text(item.correctFit?.dictMeaning)
   const meaning = text(item.correctFit?.meaning)
-  if (!meaning) throw new Error(`${where}: 缺少 correctFit.meaning（正确项在这句里的意思）。`)
-  assertLength(meaning, LIMITS.meaning, `${where} 语境义`)
-  if (/[A-Za-z]/.test(meaning)) throw new Error(`${where} 语境义: 只写中文意思，答案词题头已经印了。`)
-  if (/^(意为|意思是|指)/.test(meaning) || /[。；;]/.test(meaning)) throw new Error(`${where} 语境义: 只写意思本身，一个短语，不写「意为」、不写理由。`)
-  assertNoDot(meaning, `${where} 语境义`)
+  if (!dictMeaning) throw new Error(`${where}: 缺少 correctFit.dictMeaning（正确项的词典义，取最接近这句的义项）。`)
+  for (const [value, limit, label] of [[dictMeaning, LIMITS.dictMeaning, '词典义'], [meaning, LIMITS.meaning, '语境义']]) {
+    if (!value) continue
+    assertLength(value, limit, `${where} ${label}`)
+    if (/[A-Za-z]/.test(value)) throw new Error(`${where} ${label}: 只写中文意思，答案词题头已经印了。`)
+    if (/^(意为|意思是|指|此处|这里|文中)/.test(value) || /[。；;]/.test(value)) throw new Error(`${where} ${label}: 只写意思本身，一个短语，不写「意为」「此处指」、不写理由。`)
+    assertNoDot(value, `${where} ${label}`)
+  }
+  if (meaning && meaning === dictMeaning) throw new Error(`${where} 语境义: 和词典义一样就不写 meaning，只留 dictMeaning。`)
   for (const gloss of item.distractorGlosses) {
     const label = `${where} ${gloss?.optionLabel} 项`
     const meaning = text(gloss?.meaning)
