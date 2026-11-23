@@ -347,7 +347,7 @@ for (const file of readdirSync(new URL('../server/exports/companion-analysis/', 
   // The answer carries its number in front. Both clues touch their own answer
   // (only ", " or a space between), so the number is not printed twice: the
   // clues stay underlined without one (shared/analysis/questionMarks.mjs).
-  assert.match(merged, /<b class="blank-no">56<\/b><span class="source-relationship answer-fill"/u)
+  assert.match(merged, /<b class="blank-no">\[56\]<\/b><span class="source-relationship answer-fill"/u)
   assert.doesNotMatch(merged, /class="clue-no"/u)
   const plain = merged.replace(/<sup[^>]*>.*?<\/sup>|<b class="blank-no">.*?<\/b>|<[^>]+>/gu, '')
   assert.ok(plain.endsWith(completed), 'the printed passage reads as the completed text')

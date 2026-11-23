@@ -3,14 +3,16 @@ import { partitionAnalysisText } from './analysisTextRanges.mjs'
 // Where a question number goes in a passage or its translation. One rule for
 // reading, seven choices, cloze and grammar fill, on paper (the companion PDF)
 // and on screen (the teaching panels):
-// - an answer (answer-insertion) is bold, with its number in front, as on the
-//   exam paper: "41 realization";
-// - a clue (answer-evidence) is underlined, with its number after its last
-//   character;
+// - an answer (answer-insertion) is bold, with its number in brackets in
+//   front, where the exam paper had the blank: "[41] realization". The big
+//   number says "this is question 41's answer";
+// - a clue (answer-evidence) sits on a pale tint, with a plain superscript
+//   number after its last character. The small number says "this is the
+//   evidence for question 38";
 // - one number per question in one place: a clue that is exactly its own
 //   answer is not drawn (the answer already says it); a clue that overlaps its
 //   answer, or touches it with only spaces and punctuation between, keeps its
-//   underline but not its number ("41 很快意识到 41" and "stories.³⁶ 36 In
+//   tint but not its number ("41 很快意识到 41" and "stories.³⁶ 36 In
 //   short" printed one question twice);
 // - long-sentence marks (sentence-structure) are not drawn: 长难句解析 quotes
 //   the sentence with its own 关联题目.

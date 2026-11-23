@@ -23,7 +23,7 @@ function renderMarkedRun(text, ranges, questionNo, spanClass, { clues = true } =
     const underline = (run.clue ? ' source-underline' : '') + (run.answer ? ' answer-fill' : '')
     const idAttribute = run.annotationIds.length ? ` data-annotation-ids="${escapeHtml(run.annotationIds.join(' '))}"` : ''
     const open = `<span class="${spanClass}${underline}"${idAttribute} data-annotation-kinds="${escapeHtml(run.kinds.join(' '))}" data-question-nos="${escapeHtml(run.questionNos.join(' '))}">`
-    const fill = run.before.length ? `<b class="blank-no">${escapeHtml(run.before.join('、'))}</b>` : ''
+    const fill = run.before.length ? `<b class="blank-no">[${escapeHtml(run.before.join('、'))}]</b>` : ''
     if (!run.after.length) return `${fill}${open}${escapeHtml(run.text)}</span>`
     // The number sits outside the underlined run (so the rule stops at the
     // text) but in one unbreakable unit with the last character.
