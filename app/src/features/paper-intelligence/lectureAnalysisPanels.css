@@ -718,12 +718,32 @@ button.pi-ps-analysis-distractor--selected {
   font-family: var(--paper-font-sans);
   font-size: 0.75rem;
 }
-.pi-objective-translation-range > b {
-  margin-inline-end: 2px;
+/* Question numbers in a translation: one rule with the companion PDF
+   (shared/analysis/questionMarks.mjs). Answer bold, number in front; clue
+   underlined, number after its last character. */
+.pi-objective-mark.is-answer {
+  font-weight: 700;
+}
+.pi-objective-mark-no {
+  margin-inline-end: 0.2em;
+  color: var(--mint-text);
   font-family: var(--paper-font-sans);
   font-size: 0.75rem;
+  white-space: nowrap;
 }
-.pi-objective-translation-range > span,
+.pi-objective-mark-tail {
+  white-space: nowrap;
+}
+.pi-objective-mark-clue-no {
+  margin-inline-start: 0.08em;
+  color: var(--mint-text);
+  font-family: var(--paper-font-sans);
+  font-size: 0.62em;
+  font-weight: 700;
+  line-height: 0;
+  vertical-align: 0.5em;
+}
+.pi-objective-mark.is-clue,
 .pi-objective-long-sentences u {
   text-decoration: underline;
   text-decoration-thickness: 1px;

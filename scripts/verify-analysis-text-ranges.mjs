@@ -224,6 +224,11 @@ assert.deepEqual(multipleInsertions, [
 const teachingView = buildObjectiveTeachingView(preciseAnalysis, { q1: '21', q2: '22' })
 assert.deepEqual(teachingView.translationParagraphs[1].segments.at(-2).questionNos, ['21', '22'])
 assert.equal(teachingView.translationParagraphs[1].segments.map((part) => part.text).join(''), '重复 重复。')
+// The screen uses the shared question-mark rule: the clue for 21 and 22 is
+// underlined with its numbers after it; the long-sentence mark is not drawn.
+assert.deepEqual(teachingView.translationParagraphs[1].segments.map(({ text, clue, after }) => [text, clue, after]), [
+  ['重复 ', false, []], ['重复', true, ['21', '22']], ['。', false, []],
+])
 
 const html = buildCompanionAnalysisHtml({
   paperAsset: {

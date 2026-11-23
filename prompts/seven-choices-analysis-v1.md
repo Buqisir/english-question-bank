@@ -170,7 +170,7 @@ Do NOT write these; the server fills them from your new fields so older consumer
   "groups": {
     "group-...": {
       "overview": "50–80字软目标的中文内容简介，概括主题及核心内容",
-      "fullTranslationZh": "Answer-completed full Chinese passage translation with [36]...[40] markers",
+      "fullTranslationZh": "Answer-completed full Chinese passage translation; no hand-written [36]-style markers",
       "selectedLongSentences": [
         {
           "paragraphId": "para-...",

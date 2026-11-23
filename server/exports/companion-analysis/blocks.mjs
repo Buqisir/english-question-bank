@@ -1,5 +1,6 @@
 import { unofficialListeningLabel } from '../../answer-renderer.mjs'
 import { partitionAnalysisText } from '../../../shared/analysis/analysisTextRanges.mjs'
+import { questionMarkRuns, splitClueTail } from '../../../shared/analysis/questionMarks.mjs'
 import { questionData } from './paper.mjs'
 import { array, escapeHtml, exactTextRange, innerQuote, nonEmptyString, passageHtml } from './text.mjs'
 
@@ -13,47 +14,23 @@ export function renderHeadingLead(heading, firstBlock = '', ...rest) {
   return `<div class="heading-lead">${heading}${firstBlock}</div>${rest.join('')}`
 }
 
-// Marks on the printed passage and on its translation, one rule for both:
-// - a filled answer is bold, with its question number in front, as on the
-//   exam paper ("41 exercise");
-// - a clue is underlined, with its question number as a superscript after its
-//   last character, once per clue however other marks cut through it;
-// - long-sentence marks are left out here: 长难句解析 quotes the sentence with
-//   its 关联题目, and printing them too buried each clue under repeated numbers.
-const CJK_CLOSING = /[。，、；：！？）」』”’]/u
-
-function renderMarkedRun(text, ranges, questionNo, spanClass) {
-  const shown = ranges.filter(({ annotation }) => annotation.kind !== 'sentence-structure')
-  const isFill = (index) => shown[index].annotation.kind === 'answer-insertion'
-  const numbersOf = (indices) => [...new Set(indices.flatMap((index) =>
-    array(shown[index].annotation.questionIds).map(questionNo).filter(Boolean)))]
-    .sort((a, b) => Number(a) - Number(b))
-  const parts = partitionAnalysisText(text, shown.map(({ start, end, quote }) => ({ start, end, quote })))
-  const html = parts.map((part) => {
-    const indices = part.rangeIndices
-    if (indices.length === 0) return escapeHtml(part.text)
-    const annotations = indices.map((index) => shown[index].annotation)
-    const ids = [...new Set(annotations.map(({ annotationId }) => annotationId).filter(Boolean))]
-    const kinds = [...new Set(annotations.map(({ kind }) => kind))]
-    const opening = numbersOf(indices.filter((index) => isFill(index) && shown[index].start === part.start))
-    const closing = numbersOf(indices.filter((index) => !isFill(index) && shown[index].end === part.end))
-    const underline = (indices.some((index) => !isFill(index)) ? ' source-underline' : '')
-      + (indices.some(isFill) ? ' answer-fill' : '')
-    const idAttribute = ids.length ? ` data-annotation-ids="${escapeHtml(ids.join(' '))}"` : ''
-    // The clue number rides on the clue's last character, so a line never
-    // starts with a bare superscript. In Chinese it goes before closing
-    // punctuation, as citation marks do (GB/T 7714): 一座岛²²。 not 一座岛。²²
-    const points = Array.from(part.text)
-    let tailAt = points.length - 1
-    while (tailAt > 0 && CJK_CLOSING.test(points[tailAt])) tailAt -= 1
-    const open = `<span class="${spanClass}${underline}"${idAttribute} data-annotation-kinds="${escapeHtml(kinds.join(' '))}" data-question-nos="${escapeHtml(numbersOf(indices).join(' '))}">`
-    const fill = opening.length ? `<b class="blank-no">${escapeHtml(opening.join('、'))}</b>` : ''
-    if (!closing.length) return `${fill}${open}${escapeHtml(part.text)}</span>`
+// Marks on the printed passage and on its translation. Which question number
+// goes where is one shared rule for every objective type, on paper and on
+// screen: shared/analysis/questionMarks.mjs. Here it only becomes print markup.
+function renderMarkedRun(text, ranges, questionNo, spanClass, { clues = true } = {}) {
+  const html = questionMarkRuns(text, ranges, { questionNo, clues }).map((run) => {
+    if (!run.answer && !run.clue) return escapeHtml(run.text)
+    const underline = (run.clue ? ' source-underline' : '') + (run.answer ? ' answer-fill' : '')
+    const idAttribute = run.annotationIds.length ? ` data-annotation-ids="${escapeHtml(run.annotationIds.join(' '))}"` : ''
+    const open = `<span class="${spanClass}${underline}"${idAttribute} data-annotation-kinds="${escapeHtml(run.kinds.join(' '))}" data-question-nos="${escapeHtml(run.questionNos.join(' '))}">`
+    const fill = run.before.length ? `<b class="blank-no">${escapeHtml(run.before.join('、'))}</b>` : ''
+    if (!run.after.length) return `${fill}${open}${escapeHtml(run.text)}</span>`
     // The number sits outside the underlined run (so the rule stops at the
     // text) but in one unbreakable unit with the last character.
-    return `${fill}${open}${escapeHtml(points.slice(0, tailAt).join(''))}</span>`
-      + `<span class="clue-tail"><span class="${spanClass}${underline}">${escapeHtml(points[tailAt])}</span>`
-      + `<sup class="clue-no">${escapeHtml(closing.join(','))}</sup></span>${escapeHtml(points.slice(tailAt + 1).join(''))}`
+    const [head, last, rest] = splitClueTail(run.text)
+    return `${fill}${open}${escapeHtml(head)}</span>`
+      + `<span class="clue-tail"><span class="${spanClass}${underline}">${escapeHtml(last)}</span>`
+      + `<sup class="clue-no">${escapeHtml(run.after.join(','))}</sup></span>${escapeHtml(rest)}`
   })
   // Paged.js drops text nodes that are only whitespace, so the space between
   // two marks ("absence of smog") would vanish from the page. Keep it inside
@@ -67,7 +44,9 @@ function renderMarkedRun(text, ranges, questionNo, spanClass) {
   return html.join('')
 }
 
-export function renderFullTranslation(groupAnalysis, paperAsset) {
+// `clues: false` prints only the answers in the translation (grammar fill:
+// its clues are English form, which the Chinese does not show).
+export function renderFullTranslation(groupAnalysis, paperAsset, { clues = true } = {}) {
   const text = typeof groupAnalysis?.fullTranslationZh === 'string'
     ? groupAnalysis.fullTranslationZh
     : ''
@@ -88,7 +67,7 @@ export function renderFullTranslation(groupAnalysis, paperAsset) {
       .filter((range) => range.textId === teaching.translation.textId
         && range.paragraphId === paragraph.paragraphId)
       .map((range) => ({ ...range, annotation })))
-    const html = renderMarkedRun(paragraph.quote, ranges, questionNo, 'translation-annotation')
+    const html = renderMarkedRun(paragraph.quote, ranges, questionNo, 'translation-annotation', { clues })
     return `<p data-translation-paragraph-id="${escapeHtml(paragraph.paragraphId)}">${html}</p>`
   })
   return `<section class="full-translation">${renderHeadingLead('<h4>全文译文</h4>', ...paragraphs)}</section>`

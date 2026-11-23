@@ -1,6 +1,7 @@
 import { resolveFigureTextRegion } from '../../../../shared/paper-canonical/richContent.mjs'
 import type { CanonicalReadingSurfaceFigureBlock } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import { assertAnalysisTextRanges, partitionAnalysisText } from '../../../../shared/analysis/analysisTextRanges.mjs'
+import { questionMarkRuns } from '../../../../shared/analysis/questionMarks.mjs'
 import { canonicalizeVisibleEnglishTypography } from '../../../../shared/paper-canonical/visibleTypography.mjs'
 import { formatCanonicalBlankVisibleText } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
 import type { CanonicalSurfaceParagraph } from '../../../../shared/paper-normalization/canonicalPaperGroupSurfaceAdapter.mjs'
@@ -84,8 +85,15 @@ export type ObjectiveTeachingView = {
   discourseItems: Array<{ id: string; label: string; summary: string; functionText: string }>
   translationParagraphs: Array<{
     paragraphId: string
+    // Cut by shared/analysis/questionMarks.mjs, the one rule for question
+    // numbers in every objective type: an answer is bold with its number in
+    // front (before), a clue is underlined with its number after (after).
     segments: Array<{
       text: string
+      answer: boolean
+      clue: boolean
+      before: string[]
+      after: string[]
       questionNos: string[]
       kinds: TeachingAnnotation['kind'][]
     }>
@@ -300,9 +308,12 @@ export function projectObjectiveTeachingSource(
   return { annotations, evidence, figureEvidence }
 }
 
+// `clues: false` shows only the answers in the translation (grammar fill: its
+// clues are English form, which the Chinese does not show).
 export function buildObjectiveTeachingView(
   group: ObjectiveTeachingGroup | null | undefined,
   questionNoById: Readonly<Record<string, string>>,
+  { clues = true }: { clues?: boolean } = {},
 ): ObjectiveTeachingView | null {
   if (!group) return null
   const teaching = group.teachingContent
@@ -312,26 +323,30 @@ export function buildObjectiveTeachingView(
           annotation.translationRanges
             .filter((range) => range.textId === teaching.translation.textId
               && range.paragraphId === paragraph.paragraphId)
-            .map((range) => ({ range, annotation })))
-        const parts = ranges.length > 0
-          ? partitionAnalysisText(paragraph.quote, ranges.map(({ range: { start, end, quote } }) => ({ start, end, quote })))
-          : [{ text: paragraph.quote, rangeIndices: [] as number[] }]
+            .map(({ start, end, quote }) => ({ start, end, quote, annotation })))
         return {
           paragraphId: paragraph.paragraphId,
-          segments: parts.map((part) => {
-            const annotations = part.rangeIndices.map((index) => ranges[index].annotation)
-            return {
-              text: part.text,
-              questionNos: [...new Set(annotations.flatMap(({ questionIds }) =>
-                questionIds.map((id) => questionNoById[id]).filter(Boolean)))],
-              kinds: [...new Set(annotations.map(({ kind }) => kind))],
-            }
-          }),
+          segments: questionMarkRuns(paragraph.quote, ranges, {
+            questionNo: (id) => questionNoById[id],
+            clues,
+          }).map(({ text, answer, clue, before, after, questionNos, kinds }) => ({
+            text,
+            answer,
+            clue,
+            before,
+            after,
+            questionNos,
+            kinds: kinds as TeachingAnnotation['kind'][],
+          })),
         }
       })
     : group.fullTranslationZh?.trim()
       ? [{ paragraphId: 'legacy-full-translation', segments: [{
           text: group.fullTranslationZh,
+          answer: false,
+          clue: false,
+          before: [],
+          after: [],
           questionNos: [],
           kinds: [],
         }] }]
