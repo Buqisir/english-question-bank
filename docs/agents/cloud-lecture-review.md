@@ -51,3 +51,48 @@
 云端对题库和审卷页只读。写入限于 Linear 评论和上述标签更换。批准、发布、删除和修改讲评数据均不属于云端审阅操作。
 
 本地收到反馈后，由 Medium 修改并送新 revision，把新版本和处理结果在工单里逐条回复，再关单。
+
+## 云端写讲评（本地下载与送审）
+
+Owner 2026-11-22 定：云端只写讲评，本地负责下载冻结卷和送审。云端不需要送审账号。
+
+**约定**
+
+- 两边用 main 的同一个提交；交接时在工单写明提交号，有更新先对齐。
+- work 目录固定为 `/tmp/eqb-lecture/<paperId>`。请求文件里写死了 `draftPath`，merge 会逐字比对，两边路径必须一致。
+- 交接分支 `claude/lecture/<paperId>`，孤立分支（`git checkout --orphan`），不合进 main，送审后删除。
+- 交接后、云端回报前，本地不改这套卷。
+
+**1. 本地：prepare 并交出**
+
+```bash
+paperId=<卷号>; work=/tmp/eqb-lecture/$paperId
+node scripts/import-pipeline/lecture-redo.mjs prepare --paper "$paperId" --work "$work"
+tar -C /tmp/eqb-lecture --exclude='.hydrate-*' -czf work.tgz "$paperId"
+split -b 90m work.tgz work.tgz.part-   # 单个文件超过 90 MB 时
+```
+
+核对 `$work/requests/INDEX.md` 首行的 revision。把包提交到孤立分支 `claude/lecture/$paperId` 并推送。在工单写明 paperId、基线 revisionId、main 提交号、分支名和包大小。
+
+**2. 云端：写讲评、merge、看 PDF**
+
+拉分支，合并分片（`cat work.tgz.part-* > work.tgz`），解包到 `/tmp/eqb-lecture/`。按 `requests/` 里的请求和[讲评审阅标准](lecture-review-standard.md)写草稿，保存到请求中的 `draftPath`。
+
+```bash
+node scripts/import-pipeline/lecture-redo.mjs merge --work "$work"
+pdftoppm -r 120 -png "$work/ready/bundle/products/analysis.pdf" "$work/analysis-page"
+```
+
+逐页核对题号、解析和排版。通过后只把 `drafts/` 目录提交到同一分支的 `drafts/` 下并推送（不推整个 work，不推 `ready/`）。分支推不上时推到自己的会话分支，在工单写明分支名。在工单回报改过的题组和检查结果。
+
+**3. 本地：merge 并送审**
+
+```bash
+rm -rf "$work/drafts" && cp -R <分支检出>/drafts "$work/drafts"
+node scripts/import-pipeline/lecture-redo.mjs merge --work "$work"
+node scripts/import-pipeline/lecture-redo.mjs push --work "$work"
+```
+
+先确认 `$work` 里没有 `upload-attempt.json`。两边代码和草稿相同时，本地 merge 的结果与云端看过的一致。push 会重新核对最新 Candidate 和每个文件的哈希，失败就停，不重试，把报错贴到工单。成功后在工单回报新 revisionId 和审卷链接，再删除交接分支。
+
+云端写稿只改讲评。禁止改题文、官方或生效答案、听力音频和图片，禁止批准、发布或删除。
