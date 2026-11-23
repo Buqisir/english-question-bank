@@ -51,3 +51,42 @@
 云端对题库和审卷页只读。写入限于 Linear 评论和上述标签更换。批准、发布、删除和修改讲评数据均不属于云端审阅操作。
 
 本地收到反馈后，由 Medium 修改并送新 revision，把新版本和处理结果在工单里逐条回复，再关单。
+
+## 云端写讲评并送审
+
+本节用于单独认领的写稿任务。由本地在 Linear 逐卷交接 `paperId` 和冻结的 Candidate `revisionId`，云端确认认领后，本地暂停改这套卷，直到云端回报新 revision 或明确退回。仅接最新 Candidate，版本不符时请交接人重新确认。
+
+Claude Code 云端的 setup script 运行 `bash .agents/cloud-lecture-setup.sh`。每个新容器重新准备依赖。在写稿 shell 中配置以下变量：
+
+```bash
+export PATH="$HOME/.local/node-24/bin:$PATH"
+export PLAYWRIGHT_BROWSERS_PATH="${PLAYWRIGHT_BROWSERS_PATH:-/opt/pw-browsers}"
+export QUESTION_BANK_IMPORT_OPS_ORIGIN=https://eqbank.cc
+export QUESTION_BANK_IMPORT_OPS_AGENT_USERNAME=agent-cloud-import
+```
+
+通过云端环境密钥注入 `QUESTION_BANK_IMPORT_OPS_AGENT_PASSWORD`。账号类型为 `import_agent`，角色为 `member`。保持 `QUESTION_BANK_IMPORT_OPS_AGENT_TOKEN` 未设置，现有客户端会用账号换会话 cookie。
+
+在仓库根目录，将 `paperId` 设为交接卷号，为这套卷选一个新的工作目录 `work`：
+
+```bash
+node scripts/import-pipeline/lecture-redo.mjs prepare --paper "$paperId" --work "$work"
+```
+
+对照 `$work/requests/INDEX.md` 首行确认基线 revision 与交接一致。按请求和[讲评审阅标准](lecture-review-standard.md)逐题写讲评 JSON，保存到请求中的 `draftPath`。按实际题组填草稿，输出仅含讲评对象。
+
+```bash
+node scripts/import-pipeline/lecture-redo.mjs merge --work "$work"
+# 只改指定题组时，在 merge 后加 --only reading-a,reading-b 等对应键。
+pdftoppm -r 120 -png "$work/ready/bundle/products/analysis.pdf" "$work/analysis-page"
+```
+
+`merge` 校验草稿、生成解析 PDF，并校验题目、答案和冻结文件。翻看导出的各页 PNG，核对题号、解析和排版。通过后送审：
+
+```bash
+node scripts/import-pipeline/lecture-redo.mjs push --work "$work"
+```
+
+在同一个 Linear 工单回报 `paperId`、原 revisionId、新 revisionId、改过的题组和检查结果，附新版本审卷链接并署名。若已生成 `upload-attempt.json` 但没有成功回执，先只读核对 Candidate 和回执，勿重试上传。
+
+云端写稿只改讲评。禁止改题文、官方或生效答案、听力音频和图片，禁止批准、发布或删除。
