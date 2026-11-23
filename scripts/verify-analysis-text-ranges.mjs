@@ -13,7 +13,7 @@ import {
   assertSelectedLongSentences,
 } from '../server/paper-import-ai/analyzerProviderShell.mjs'
 import { buildCompanionAnalysisHtml } from '../server/exports/companionAnalysisRenderer.mjs'
-import { renderSourceRelationships } from '../server/exports/companion-analysis/blocks.mjs'
+import { renderMarkedRun } from '../server/exports/companion-analysis/blocks.mjs'
 import {
   buildObjectiveTeachingView,
   projectObjectiveTeachingSource,
@@ -251,14 +251,14 @@ assert.match(html, /data-question-nos="21 22"/)
 // answered, so their bracketed numbers go in front and no superscript follows.
 assert.match(html, /<b class="blank-no">\[21、22\]<\/b><span class="translation-annotation source-underline"/)
 assert.doesNotMatch(html.slice(html.indexOf('data-translation-paragraph-id')), /class="clue-no"/)
-// Reading prints no passage of its own (each question quotes its clue in
-// 原文依据). The passage marks still print for 七选五, 完形 and 语法填空, so
-// check the second occurrence and the long-sentence overlap there.
+// No type reprints the passage (the teacher has the paper; grammar fill
+// prints one completed sentence per question). The shared marking still has
+// to pick the second occurrence and keep a long-sentence overlap quiet.
 assert.doesNotMatch(html, /class="source-relationships"/)
-const passageHtml = renderSourceRelationships(preciseAnalysis, {
-  groupType: 'cloze', passage: { paragraphs: [{ paragraphId: 'p1', text: preciseGroup.paragraphs[0].text }] },
-}, { content: { questions: { q1: { questionNo: 21 }, q2: { questionNo: 22 } } } })
-assert.match(passageHtml, /data-source-text-state="original"/)
+const passageRanges = preciseAnalysis.teachingContent.annotations.flatMap((annotation) =>
+  annotation.sourceRanges.map((range) => ({ ...range, annotation })))
+const passageHtml = renderMarkedRun(preciseGroup.paragraphs[0].text, passageRanges,
+  (id) => ({ q1: 21, q2: 22 })[id], 'source-relationship')
 assert.match(passageHtml, /data-annotation-ids="[^"]*shared-second-occurrence/)
 assert.equal((passageHtml.match(/class="clue-no"/gu) || []).length, 1,
   'a clue overlapped by a long-sentence mark prints its number once, and the long-sentence mark prints none')

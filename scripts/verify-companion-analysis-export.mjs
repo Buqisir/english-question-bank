@@ -317,13 +317,15 @@ for (const file of readdirSync(new URL('../server/exports/companion-analysis/', 
   assert.ok(!source.includes('·'), `${file} writes a · separator`)
 }
 
-// One printed passage per blank paragraph: the completed text carries both the
-// clue moved over from the original and the filled answer; a paragraph whose
-// texts do not line up keeps the old 原题 / 答案补全 pair.
+// No passage is reprinted. Grammar fill prints, under each question, the one
+// sentence with every blank filled: this question's answer carries [n] and
+// bold, its clue (moved over from the original passage) is tinted, and the
+// other blanks are filled in plain. A paragraph whose texts do not line up
+// prints no sentence rather than a wrong one.
 {
-  const { renderSourceRelationships } = await import('../server/exports/companion-analysis/blocks.mjs')
-  const original = 'Yet now I live in the countryside, __56__ tea grows, and __57__ (center) heating fails.'
-  const completed = 'Yet now I live in the countryside, where tea grows, and central heating fails.'
+  const { renderGrammarFillGroup } = await import('../server/exports/companion-analysis/grammarFill.mjs')
+  const original = 'I grew up in a city. Yet now I live in the countryside, __56__ tea grows, and __57__ (center) heating fails. It is cold.'
+  const completed = 'I grew up in a city. Yet now I live in the countryside, where tea grows, and central heating fails. It is cold.'
   const at = (text, quote) => { const start = Array.from(text.slice(0, text.indexOf(quote))).length; return { start, end: start + Array.from(quote).length, quote } }
   const teaching = (completedText) => ({
     schemaVersion: 'objective-teaching-content-v1',
@@ -336,28 +338,37 @@ for (const file of readdirSync(new URL('../server/exports/companion-analysis/', 
       { annotationId: 'e57', kind: 'answer-evidence', questionIds: ['q57'], sourceRanges: [{ textId: 'src', paragraphId: 'p1', ...at(original, 'heating fails') }] },
     ],
   })
-  const group = { groupType: 'grammarFill', passage: { paragraphs: [{ paragraphId: 'p1', text: original }] } }
-  const paper = { content: { questions: { q56: { questionNo: 56 }, q57: { questionNo: 57 } } } }
-  const merged = renderSourceRelationships({ teachingContent: teaching(completed) }, group, paper)
-  assert.equal([...merged.matchAll(/data-source-text-state="merged"/gu)].length, 1)
-  assert.doesNotMatch(merged, /原题|答案补全|__56__/u)
-  for (const [kind, text] of [['answer-evidence', 'the countryside'], ['answer-insertion', 'where'], ['answer-insertion', 'central'], ['answer-evidence', 'heating fails']]) {
-    assert.match(merged, new RegExp(`data-annotation-kinds="${kind}"[^>]*>${text} ?</span>`, 'u'))
+  const group = { groupId: 'g', groupType: 'grammarFill', questionIds: ['q56', 'q57'], passage: { paragraphs: [{ paragraphId: 'p1', text: original }] } }
+  const paper = {
+    content: { questions: { q56: { questionNo: 56 }, q57: { questionNo: 57 } } },
+    answerKey: { answers: { q56: { answer: 'where' }, q57: { answer: 'central' } } },
   }
-  // The answer carries its number in front. Both clues touch their own answer
-  // (only ", " or a space between), so the number is not printed twice: the
-  // clues stay underlined without one (shared/analysis/questionMarks.mjs).
-  assert.match(merged, /<b class="blank-no">\[56\]<\/b><span class="source-relationship answer-fill"/u)
-  assert.doesNotMatch(merged, /class="clue-no"/u)
-  const plain = merged.replace(/<sup[^>]*>.*?<\/sup>|<b class="blank-no">.*?<\/b>|<[^>]+>/gu, '')
-  assert.ok(plain.endsWith(completed), 'the printed passage reads as the completed text')
+  const render = (completedText) => renderGrammarFillGroup({
+    group, title: '语法填空', paperAsset: paper, answers: [], openingHeadings: '',
+    analysis: { groups: { g: { teachingContent: teaching(completedText) } }, blanks: { q56: { reason: 'R56' }, q57: { reason: 'R57' } } },
+  })
+  const html = render(completed)
+  assert.doesNotMatch(html, /source-relationships|原题|答案补全|__56__/u, 'no passage is reprinted')
+  const lines = [...html.matchAll(/<p class="question-stem question-stem--en" lang="en">([\s\S]*?)<\/p>/gu)].map((match) => match[1])
+  assert.equal(lines.length, 2, 'one sentence line per question')
+  const plain = (line) => line.replace(/<sup[^>]*>.*?<\/sup>|<b class="blank-no">.*?<\/b>|<[^>]+>/gu, '')
+  for (const line of lines) assert.equal(plain(line), 'Yet now I live in the countryside, where tea grows, and central heating fails.', 'the line is the answer\'s sentence, completed')
+  const [line56, line57] = lines
+  // The answer carries its number in front. The clue touches its own answer
+  // (only ", " between), so the number is not printed twice.
+  assert.match(line56, /<b class="blank-no">\[56\]<\/b><span class="source-relationship answer-fill"[^>]*>where<\/span>/u)
+  assert.match(line56, /data-annotation-kinds="answer-evidence"[^>]*>the countryside/u)
+  assert.doesNotMatch(line56, /\[57\]|data-annotation-ids="(?:i57|e57)"/u, 'the other blank is filled in plain')
+  assert.doesNotMatch(line56, /class="clue-no"/u)
+  assert.match(line57, /<b class="blank-no">\[57\]<\/b>/u)
   // Paged.js drops whitespace-only text nodes: the space between the answer
   // and the clue after it ("central heating") must live inside a mark.
-  assert.doesNotMatch(merged, /<\/span>[\t\n\r ]+<(?:span class="source-relationship|b class="blank-no)/u)
-  assert.match(merged, /answer-fill"[^>]*>central <\/span><span class="source-relationship source-underline"/u)
-  const edited = 'Yet now I live in the countryside, where tea grows, and central heating often fails.'
-  const unaligned = renderSourceRelationships({ teachingContent: teaching(edited) }, group, paper)
-  assert.match(unaligned, /原题[\s\S]*答案补全/u, 'texts that do not line up keep both paragraphs')
+  assert.doesNotMatch(line57, /<\/span>[\t\n\r ]+<(?:span class="source-relationship|b class="blank-no)/u)
+  assert.match(line57, /answer-fill"[^>]*>central <\/span><span class="source-relationship source-underline"/u)
+  assert.ok(html.indexOf('R56') > html.indexOf('[56]'), 'the sentence comes before the explanation')
+  const unaligned = render('I grew up in a city. Yet now I live in the countryside, where tea grows, and central heating often fails. It is cold.')
+  assert.doesNotMatch(unaligned, /question-stem--en/u, 'texts that do not line up print no sentence')
+  assert.match(unaligned, /R56/u)
   // Reading quotes its clues once, in each question's 原文依据, and prints no
   // passage of its own, even when the passage carries clue marks.
   const { renderReadingGroup } = await import('../server/exports/companion-analysis/reading.mjs')
@@ -368,7 +379,7 @@ for (const file of readdirSync(new URL('../server/exports/companion-analysis/', 
   assert.match(readingHtml, /analysis-group--reading/u)
   assert.doesNotMatch(readingHtml, /source-relationships|原文证据段落/u)
 }
-console.log('Companion analysis merged passage and separators: PASS')
+console.log('Companion analysis grammar-fill sentence lines, no reprinted passage and separators: PASS')
 
 {
   // 定位: stem words found in the clue paragraph, and the paragraph counted the
