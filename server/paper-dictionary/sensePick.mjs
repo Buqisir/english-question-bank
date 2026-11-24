@@ -159,18 +159,18 @@ export function createSensePickAdapter({
           : usage.prompt_tokens + usage.completion_tokens,
       }
       : null
-    if (typeof content !== 'string' || content.trim() === '') {
+    const text = typeof content === 'string' ? content.trim() : ''
+    if (!otterOccurrence && !text) {
       throw senseError('SENSE_EMPTY', 'Sense pick was empty', { usage: observedUsage })
     }
     if (!observedUsage) {
       throw senseError('SENSE_USAGE_MISSING', 'Sense pick usage was missing', { status: 502 })
     }
     if (otterOccurrence) {
-      const senseId = content.trim()
       const complete = !finishReason || finishReason === 'stop'
-      const picked = complete && candidates.filter(item => item.senseId === senseId).length === 1
+      const picked = text && complete && candidates.filter(item => item.senseId === text).length === 1
       return {
-        ...(picked ? { kind: 'otter-sense', senseId } : { kind: 'none' }),
+        ...(picked ? { kind: 'otter-sense', senseId: text } : { kind: 'none' }),
         usage: observedUsage,
         model: payload.model || model,
       }

@@ -139,7 +139,9 @@ export function openOtterDictionary(rootDir) {
       const { leaf, sentence, sentenceNumber } = occurrence
       const start = [...sentence.slice(0, occurrence.start).trimStart()].length
       const end = start + [...word.surface].length
-      const locator = leaf.kind === 'option' ? leaf.id.replace(/:([^:]+)$/, '#option=$1') : leaf.id
+      let locator = leaf.id
+      if (leaf.kind === 'option') locator = leaf.id.replace(/:([^:]+)$/, '#option=$1')
+      if (leaf.kind === 'option-bank') locator = `option-bank:${leaf.id}`
       const key = occurrenceKey(paperId, stream.groupId, locator, sentenceNumber, start, end, word.surface, entry.entryId)
       const senseId = occurrences.get(key)
       return entry.senses.some(sense => sense.senseId === senseId) ? senseId : null
