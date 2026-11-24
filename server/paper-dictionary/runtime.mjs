@@ -333,16 +333,16 @@ export function createPaperDictionaryRuntime({
       body, context, userId, schemaVersion: DICTIONARY_REQUEST_SCHEMA,
     })
     const entry = otter?.find(word.surface) ?? null
-    const lexical = dictionary().available || !entry
-      ? lexicalEntry(word.surface)
-      : { dictionaryVersion: DICTIONARY_SCHEMA, status: 'found', entries: [], attribution: '' }
+    const lexical = entry
+      ? { dictionaryVersion: dictionary().meta?.dictionary_version || DICTIONARY_SCHEMA, status: 'found', entries: [], attribution: '' }
+      : lexicalEntry(word.surface)
     return fitPayload({
       schemaVersion: DICTIONARY_RESPONSE_SCHEMA,
       requestId,
       sourceRevision: source.sourceRevision,
       dictionaryVersion: lexical.dictionaryVersion,
       selectedText: word.surface,
-      status: entry ? 'found' : lexical.status,
+      status: lexical.status,
       entries: lexical.entries,
       truncated: false,
       attribution: lexical.attribution,

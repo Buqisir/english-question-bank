@@ -621,6 +621,8 @@ export function usePaperSelectionTranslation({
     setTranslation('')
     setErrorMessage('')
     setDictionaryResult(null)
+    setFullEntryOpen(false)
+    setRestoreQuickFocus(false)
     setLookupError('')
     setPlayErrorId('')
     resetCopy()

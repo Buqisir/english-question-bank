@@ -93,7 +93,8 @@ function readOptional(read, fallback) {
 }
 
 export function openOtterDictionary(rootDir) {
-  const dir = path.join(rootDir, 'data', 'otter-dictionary')
+  // Keep the bundled dictionary in the release, whose top-level data directory is shared.
+  const dir = path.join(rootDir, 'server', 'paper-dictionary', 'otter-data')
   const entriesDir = path.join(dir, 'entries')
   const entries = readOptional(() => readdirSync(entriesDir), [])
     .filter(name => name.endsWith('.json')).sort()
