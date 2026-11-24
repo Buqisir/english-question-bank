@@ -9,12 +9,18 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import Ajv from '../server/node_modules/ajv/dist/2020.js'
 
-import { validateApplicationAnalysisV4 } from '../server/paper-import-ai/applicationWritingWorkflow.mjs'
+import {
+  buildApplicationStagedAnalysisContract,
+  validateApplicationAnalysisV4,
+} from '../server/paper-import-ai/applicationWritingWorkflow.mjs'
 import {
   APPLICATION_ANALYSIS_V4,
   isApplicationAnalysisV4,
 } from '../shared/writing/applicationAnalysisV4.mjs'
-import { projectNck1StagedWritingAnalysis } from '../server/import-review/nck1AnalysisProjection.mjs'
+import {
+  projectNck1StagedWritingAnalysis,
+  validateNck1StagedAnalysis,
+} from '../server/import-review/nck1AnalysisProjection.mjs'
 import {
   persistWritingAnalysisGroup,
   validateWritingAnalysisCandidate,
@@ -107,6 +113,25 @@ assert.deepEqual(
   projectNck1StagedWritingAnalysis({ taskType: 'application', modelAnswer: 'A.', reviewCard: v2Card }),
   { taskType: 'application', modelAnswer: 'A.', reviewCard: v2Card },
 )
+
+// Staged route (D4): the request contract is V4 plus the V2 packaging contract,
+// and a packaged V4 draft passes the same gate validate-analysis.mjs runs.
+const stagedRequest = {
+  group: 'application',
+  sourceGroup: { groupKey: 'application', material: {
+    paper: { paperId: 'paper-v4', sourceAssetVersion: 1 },
+    group: { groupId: 'g' },
+    writingTask: { ...base.writingTask, groupId: 'g', taskType: 'application' },
+  } },
+  authoritativeAnswers: { officialModelAnswer: null },
+  outputContract: buildApplicationStagedAnalysisContract(),
+}
+assert.match(stagedRequest.outputContract, /^# Application Writing Model Answer Prompt — V4\n/)
+assert.match(stagedRequest.outputContract, /^# NCK1 Staged Application Analysis Packaging Contract — V2$/m)
+assert.equal(validateNck1StagedAnalysis(stagedRequest, stored).ok, true)
+assert.throws(() => validateNck1StagedAnalysis(stagedRequest, {
+  ...stored, applicationAnalysis: { ...stored.applicationAnalysis, standard: { ...stored.applicationAnalysis.standard, essay: stored.modelAnswer.replace(firstSentence, 'Hello.') } },
+}), /must equal the standard essay|given text/)
 
 // Backfill: candidate checks and persistence keep the V4 object.
 validateWritingAnalysisCandidate(stored)

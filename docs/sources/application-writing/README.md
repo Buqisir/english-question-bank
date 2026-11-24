@@ -30,7 +30,8 @@ For ordinary model-answer generation, read:
 
 1. [`../../product/application-writing-doctrine-v1.md`](../../product/application-writing-doctrine-v1.md)
 2. [`curriculum/application-writing-crosswalk.md`](curriculum/application-writing-crosswalk.md)
-3. [`../../../prompts/application-writing-model-answer-v3.md`](../../../prompts/application-writing-model-answer-v3.md)
+3. [`../../../prompts/application-writing-model-answer-v4.md`](../../../prompts/application-writing-model-answer-v4.md)
+   (production since 2026-11-24; at runtime it is sent without the doctrine)
 
 Read the two full papers when reviewing or revising the doctrine, resolving an
 ambiguous task, or checking whether a compressed rule still reflects its

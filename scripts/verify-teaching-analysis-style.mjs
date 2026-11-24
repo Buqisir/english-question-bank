@@ -77,7 +77,7 @@ const prompts = {
   sevenChoices: read('prompts/seven-choices-analysis-v1.md'),
   cloze: read('prompts/cloze-analysis-v1.md'),
   grammarFill: read('prompts/grammar-fill-analysis-v1.md'),
-  application: read('prompts/application-writing-model-answer-v3.md'),
+  application: read('prompts/application-writing-model-answer-v4.md'),
   continuation: read('prompts/continuation-analysis-v1.md'),
 }
 
@@ -116,8 +116,9 @@ assert.match(prompts.grammarFill, /`selectedLongSentences`/)
 assert.match(prompts.grammarFill, /find oneself doing 是固定搭配/)
 assert.match(prompts.grammarFill, /Controlled `similarityProfile`/)
 assert.match(prompts.grammarFill, /similarityForm.*server stamps/s)
-assert.match(prompts.application, /礼貌不能反过来取消核心任务/)
-assert.match(prompts.application, /考场可复现的完成路线/)
+assert.match(prompts.application, /读者读完知道该怎么想、怎么做/)
+assert.match(prompts.application, /讲不清的修饰就不要写/)
+assert.match(prompts.application, /先讲人话再给名字/)
 assert.doesNotMatch(prompts.application, /similaritySummary|Embedding vector/)
 assert.match(prompts.continuation, /one teachable route, never the hidden answer/)
 assert.match(prompts.continuation, /because starter 2 says/)
@@ -217,10 +218,11 @@ assert.doesNotThrow(() => assertFullTranslationZh(
   { fullTranslationZh: '先出现[37]，后出现[36]，再出现[36]。' }, translationGroup,
 ))
 
-const applicationStaged = read('prompts/application-writing-staged-analysis-v1.md')
+const applicationStaged = read('prompts/application-writing-staged-analysis-v2.md')
 const continuationStaged = read('prompts/continuation-writing-staged-analysis-v1.md')
 assert.match(applicationStaged, /"taskType": "application"/)
-assert.match(applicationStaged, /"reviewCard"/)
+assert.match(applicationStaged, /"schemaVersion": "application-analysis-v4"/)
+assert.doesNotMatch(applicationStaged, /"reviewCard"\s*:/)
 assert.match(continuationStaged, /"taskType": "continuation"/)
 assert.match(continuationStaged, /"continuationAnalysis"/)
 assert.doesNotMatch(continuationStaged, /brothers|twins|first-person|150 student-written/i)
@@ -285,13 +287,6 @@ const messages = [
     paper,
     group: { groupId: 'group-grammar', paragraphs: [paragraph], questions: [question] },
   })[0].content,
-  buildApplicationModelAnswerMessages({
-    writingTaskId: 'wt-application-style-fixture',
-    groupId: 'group-application',
-    taskType: 'application',
-    instruction: '假定你是李华，请给朋友写一封邮件分享一次活动。',
-    wordCountTarget: 80,
-  }, null)[0].content,
   buildNarrativeContinuationAnalysisMessages({
     writingTask: {
       writingTaskId: 'wt-continuation-style-fixture',
@@ -308,9 +303,24 @@ const messages = [
   })[0].content,
   buildListeningAnalysisMessages(listeningInput)[0].content,
   buildListeningAnalysisAgentRequest(listeningInput).outputContract,
-  buildApplicationStagedAnalysisContract(),
   buildNarrativeContinuationStagedAnalysisContract(),
 ]
+
+// Application V4 is voted and run without the shared doctrine (application-writing-v4 spec D2).
+const applicationRuntimes = [
+  buildApplicationModelAnswerMessages({
+    writingTaskId: 'wt-application-style-fixture',
+    groupId: 'group-application',
+    taskType: 'application',
+    instruction: '假定你是李华，请给朋友写一封邮件分享一次活动。',
+    wordCountTarget: 80,
+  }, null)[0].content,
+  buildApplicationStagedAnalysisContract(),
+]
+for (const content of applicationRuntimes) {
+  assert.match(content, /^# Application Writing Model Answer Prompt — V4$/m)
+  assert.doesNotMatch(content, /^# Teaching Analysis Style — V1$/m)
+}
 
 for (const [index, content] of messages.entries()) {
   const headingCount = content.match(/^# Teaching Analysis Style — V1$/gm)?.length || 0
@@ -396,4 +406,4 @@ for (const item of benchmark.cases) {
   }
 }
 
-console.log('PASS teaching-analysis doctrine is loaded by all live builders and the 25-case benchmark resolves to tracked assets')
+console.log('PASS teaching-analysis doctrine is loaded by every live builder except application V4, which runs without it, and the 25-case benchmark resolves to tracked assets')
