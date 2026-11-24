@@ -38,6 +38,7 @@ function cardHarness() {
   const overlayCss = fsUrl(path.join(rootDir, 'app/src/features/paper-browse/selection/selectionOverlay.css'))
   return `
 import React from 'react'
+import { flushSync } from 'react-dom'
 import { createRoot } from 'react-dom/client'
 import { SentenceAnalysisCard } from ${JSON.stringify(card)}
 import { coreFixtures } from ${JSON.stringify(sample)}
@@ -68,7 +69,7 @@ function render(status, sampleId = 'core-main', textSize = null) {
 }
 window.__saCard = {
   render,
-  escape() { return Boolean(escapeRef.current && escapeRef.current()) },
+  escape() { return flushSync(() => Boolean(escapeRef.current?.())) },
   // The words the restore should show, in order, as the card prints them.
   expected(restoreId) {
     const items = restoreLayout(analysis, restoreId)
@@ -614,7 +615,9 @@ try {
   check('the card has no colored side bar', bars === 0)
 
   await page.evaluate(() => window.__saCard.render('ok', 'core-main', 17))
-  await page.waitForSelector('.sa-sentence [data-sa-token]')
+  await page.waitForFunction(() =>
+    document.querySelector('.paper-sentence-analysis')?.style.getPropertyValue('--sa-text-size') === '17px',
+  )
   check('the sentence follows the paper text size it was picked from', await page.locator('.sa-sentence').evaluate((node) => getComputedStyle(node).fontSize) === '17px')
 
   await page.evaluate(() => window.__saCard.render('ok', 'object-complement'))
@@ -790,9 +793,12 @@ try {
   await page.evaluate(({ start, end }) => window.__saSelect(start, end), { start: wordStart, end: wordStart + 'Reading'.length })
   await page.waitForSelector('.paper-selection-lookup')
   await page.locator('.paper-selection-lookup').click()
-  await page.waitForSelector('.paper-dictionary-analyze')
-  check('the word card offers 分析所在句', (await page.locator('.paper-dictionary-analyze').innerText()).includes('分析所在句'))
-  await page.locator('.paper-dictionary-analyze').click()
+  await page.getByRole('button', { name: '更多查词操作', exact: true }).click()
+  const analyzeWord = page.getByRole('menu', { name: '更多查词操作' })
+    .getByRole('menuitem', { name: '分析所在句', exact: true })
+  await analyzeWord.waitFor({ state: 'visible' })
+  check('the word card offers 分析所在句', await analyzeWord.isVisible())
+  await analyzeWord.click()
   await page.waitForFunction(() => document.querySelector('.sa-sentence')?.textContent?.includes('Reading every day improves fluency.'), null, { timeout: 4000 })
   check('分析所在句 opens the whole sentence around the word', true)
   const clickBoundary = await page.evaluate(() => ({

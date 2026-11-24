@@ -1073,10 +1073,10 @@ assert(
   'missing the toggle handler',
 )
 assert(
-  'PaperBrowsePage gates the lecture panel + backdrop behind lectureOpen (not rendered when collapsed)',
-  /\{lectureOpen\s*&&[\s\S]{0,80}paper-browse-lecture-panel/.test(pageSrc) &&
-    /\{lectureOpen\s*&&[\s\S]{0,80}paper-browse-lecture-backdrop/.test(pageSrc),
-  'panel or backdrop not gated on lectureOpen',
+  'PaperBrowsePage renders the lecture panel and backdrop only when lecture is open and the dictionary panel is absent',
+  /\{paperSelection\.dictionaryPanel\s*\?\?\s*\(lectureOpen\s*&&\s*\(\s*<aside className="paper-browse-lecture-panel"/.test(pageSrc) &&
+    /\{lectureOpen\s*&&\s*!paperSelection\.dictionaryPanel\s*&&\s*<div className="paper-browse-lecture-backdrop"/.test(pageSrc),
+  'panel or backdrop missing the lecture and dictionary panel guards',
 )
 
 const buildAnswerRowFnBody =
