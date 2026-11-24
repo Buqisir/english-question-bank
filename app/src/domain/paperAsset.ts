@@ -266,10 +266,32 @@ export type ApplicationWritingAnalysis = {
   modelAnswer?: string
   officialModelAnswer?: string
   reviewCard?: ReviewCard
+  applicationAnalysis?: ApplicationAnalysisV4
   highlightExpressions?: HighlightExpression[]
 }
 
 export type ReviewCard = ApplicationReviewCard
+
+export type ApplicationQuoteNote = { quote: string; explain: string }
+
+export type ApplicationPointMapEntry = { point: string; quote: string }
+
+/** V4 application analysis. When present, `modelAnswer` equals `standard.essay`. */
+export type ApplicationAnalysisV4 = {
+  schemaVersion: 'application-analysis-v4'
+  taskCard: { taskRequires: string[]; thisEssayChooses: string }
+  standard: {
+    essay: string
+    pointMap: ApplicationPointMapEntry[]
+    notes: { paragraph: number; role: string; items: ApplicationQuoteNote[] }[]
+    expressions: { expression: string; function: string }[]
+  }
+  advanced: {
+    essay: string
+    pointMap: ApplicationPointMapEntry[]
+    beyondStandard: ApplicationQuoteNote[]
+  }
+}
 
 export type ContinuationWritingAnalysis =
   | ContinuationWritingAnalysisV1

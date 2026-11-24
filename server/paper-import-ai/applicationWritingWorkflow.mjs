@@ -4,6 +4,10 @@ import {
   readPromptFile,
   readTeachingAnalysisPrompt,
 } from './analyzerProviderShell.mjs'
+import {
+  APPLICATION_ANALYSIS_V4,
+  checkApplicationAnalysisV4,
+} from '../../shared/writing/applicationAnalysisV4.mjs'
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const promptPath = path.join(repoRoot, 'prompts/application-writing-model-answer-v3.md')
@@ -261,4 +265,36 @@ export function validateApplicationReview(review) {
     }
   }
   return review
+}
+
+/**
+ * Validates a V4 application analysis against its task (spec D3) and returns
+ * the stored form `{ taskType, modelAnswer, applicationAnalysis }` plus warnings.
+ * Accepts either the raw V4 model output (with `taskType` and `blocked`) or the
+ * stored `applicationAnalysis` object.
+ */
+export function validateApplicationAnalysisV4({ analysis, writingTask, groupPassage }) {
+  if (!analysis || typeof analysis !== 'object' || Array.isArray(analysis)) {
+    throw new Error('application analysis V4 is not an object')
+  }
+  let stored = analysis
+  if ('blocked' in analysis || 'taskType' in analysis) {
+    if (analysis.blocked != null) throw new Error(`application analysis V4 is blocked: ${analysis.blocked}`)
+    if (analysis.taskType !== 'application') throw new Error('application analysis V4 taskType must be application')
+    const { taskType: _taskType, blocked: _blocked, ...rest } = analysis
+    stored = { schemaVersion: APPLICATION_ANALYSIS_V4, ...rest }
+  }
+  const given = expectedGiven(writingTask, groupPassage)
+  const { problems, warnings, wordCounts } = checkApplicationAnalysisV4(stored, {
+    given,
+    wordCountTarget: writingTask?.wordCountTarget,
+  })
+  if (problems.length > 0) {
+    throw new Error(`application analysis V4 failed: ${problems.join('; ')}`)
+  }
+  return {
+    writing: { taskType: 'application', modelAnswer: stored.standard.essay, applicationAnalysis: stored },
+    warnings,
+    wordCounts,
+  }
 }

@@ -152,7 +152,7 @@ function assertNoRetiredAnalysisFields(analysisKey, value) {
     cloze: ['schemaVersion', 'paperId', 'sourceAssetVersion', 'targetGroups', 'meta', 'groups', 'blanks'],
     grammar: ['schemaVersion', 'paperId', 'sourceAssetVersion', 'targetGroups', 'meta', 'groups', 'blanks'],
     'listening-unit': ['schemaVersion', 'paperId', 'sourceAssetVersion', 'materials', 'questions'],
-    application: ['taskType', 'modelAnswer', 'reviewCard', 'officialModelAnswer'],
+    application: ['taskType', 'modelAnswer', 'reviewCard', 'applicationAnalysis', 'officialModelAnswer'],
     continuation: ['taskType', 'modelAnswer', 'continuationAnalysis', 'officialModelAnswer'],
   })[analysisKey]
   const unknownRootKeys = Object.keys(value).filter((key) => !rootKeys.includes(key))

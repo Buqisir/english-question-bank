@@ -34,6 +34,7 @@
                   { "$ref": "#/$defs/legacyApplicationReviewCard" }
                 ]
               },
+              "applicationAnalysis": { "$ref": "#/$defs/applicationAnalysisV4" },
               "highlightExpressions": {
                 "type": "array",
                 "minItems": 3,
@@ -107,13 +108,28 @@
                       "required": ["reviewCard"]
                     },
                     "then": { "not": { "required": ["highlightExpressions"] } }
+                  },
+                  {
+                    "if": { "required": ["applicationAnalysis"] },
+                    "then": {
+                      "required": ["modelAnswer"],
+                      "not": {
+                        "anyOf": [
+                          { "required": ["reviewCard"] },
+                          { "required": ["highlightExpressions"] }
+                        ]
+                      }
+                    }
                   }
                 ]
               },
               {
                 "properties": { "taskType": { "const": "continuation" } },
                 "not": {
-                  "required": ["reviewCard"]
+                  "anyOf": [
+                    { "required": ["reviewCard"] },
+                    { "required": ["applicationAnalysis"] }
+                  ]
                 },
                 "oneOf": [
                   {
@@ -138,6 +154,112 @@
     }
   },
   "$defs": {
+    "applicationAnalysisV4": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "taskCard", "standard", "advanced"],
+      "properties": {
+        "schemaVersion": { "const": "application-analysis-v4" },
+        "taskCard": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["taskRequires", "thisEssayChooses"],
+          "properties": {
+            "taskRequires": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 4,
+              "items": { "$ref": "#/$defs/applicationAnalysisText" }
+            },
+            "thisEssayChooses": { "$ref": "#/$defs/applicationAnalysisText" }
+          }
+        },
+        "standard": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["essay", "pointMap", "notes", "expressions"],
+          "properties": {
+            "essay": { "$ref": "#/$defs/applicationAnalysisText" },
+            "pointMap": { "$ref": "#/$defs/applicationPointMap" },
+            "notes": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["paragraph", "role", "items"],
+                "properties": {
+                  "paragraph": { "type": "integer", "minimum": 1 },
+                  "role": { "$ref": "#/$defs/applicationAnalysisText" },
+                  "items": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 4,
+                    "items": { "$ref": "#/$defs/applicationQuoteNote" }
+                  }
+                }
+              }
+            },
+            "expressions": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 3,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["expression", "function"],
+                "properties": {
+                  "expression": { "$ref": "#/$defs/applicationAnalysisText" },
+                  "function": { "$ref": "#/$defs/applicationAnalysisText" }
+                }
+              }
+            }
+          }
+        },
+        "advanced": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["essay", "pointMap", "beyondStandard"],
+          "properties": {
+            "essay": { "$ref": "#/$defs/applicationAnalysisText" },
+            "pointMap": { "$ref": "#/$defs/applicationPointMap" },
+            "beyondStandard": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 3,
+              "items": { "$ref": "#/$defs/applicationQuoteNote" }
+            }
+          }
+        }
+      }
+    },
+    "applicationPointMap": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["point", "quote"],
+        "properties": {
+          "point": { "$ref": "#/$defs/applicationAnalysisText" },
+          "quote": { "$ref": "#/$defs/applicationAnalysisText" }
+        }
+      }
+    },
+    "applicationQuoteNote": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["quote", "explain"],
+      "properties": {
+        "quote": { "$ref": "#/$defs/applicationAnalysisText" },
+        "explain": { "$ref": "#/$defs/applicationAnalysisText" }
+      }
+    },
+    "applicationAnalysisText": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
     "applicationReviewCardV2": {
       "type": "object",
       "additionalProperties": false,

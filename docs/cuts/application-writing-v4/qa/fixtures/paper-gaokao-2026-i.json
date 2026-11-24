@@ -1,0 +1,158 @@
+{
+  "source": "blind trial 2026-11-24, paper-gaokao-2026-i.out2.json",
+  "writingTask": {
+    "taskType": "application",
+    "instruction": "你校英文报“Opinion”栏目正在征稿，请同学们对未来大学生活中的学习（Study）、社交（Socialize）、睡眠（Sleep）这三件事按重要性进行排序，并阐述理由。",
+    "wordCountTarget": 80,
+    "applicationGiven": {
+      "top": [
+        "Ranking My College Life Essentials"
+      ],
+      "bottom": []
+    }
+  },
+  "groupPassage": null,
+  "output": {
+    "taskType": "application",
+    "blocked": null,
+    "taskCard": {
+      "taskRequires": [
+        "读者是校英文报“Opinion”栏目的同学；身份是投稿的高中生，要表明个人观点。",
+        "要点：把学习、社交、睡眠三件事按重要性排序，并说明理由；标题“Ranking My College Life Essentials”须照抄在文首。"
+      ],
+      "thisEssayChooses": "本范文选择“睡眠第一、学习第二、社交第三”的排序，用“熬夜后听课一个字也听不进”这一具体情形撑住睡眠的理由，社交放第三但先肯定它的价值；语气是同龄人对未来大一新生说话，结尾给一句可以照做的建议。排序和例子都可以换，交代清楚排序、每项有理由、结尾落到行动这三件事不能少。"
+    },
+    "standard": {
+      "essay": "Ranking My College Life Essentials\n\nOf the three essentials of college life, I would rank sleep first, study second and socializing third.\n\nSleep comes first because everything else depends on it. A student who stays up past midnight may sit through the next morning's lecture without taking in a word. With enough rest, I can think clearly and make the most of every class.\n\nStudy ranks second, since learning is why we go to college. Socializing matters too: joining a club or chatting with roommates helps me make friends and learn teamwork. Still, it comes third, because good friends will understand if I say no to a late-night party.\n\nSo, future freshmen, protect your sleep first. A clear mind makes everything else easier.",
+      "pointMap": [
+        {
+          "point": "对学习、社交、睡眠按重要性排序",
+          "quote": "Of the three essentials of college life, I would rank sleep first, study second and socializing third."
+        },
+        {
+          "point": "阐述睡眠排第一的理由",
+          "quote": "Sleep comes first because everything else depends on it."
+        },
+        {
+          "point": "阐述学习排第二的理由",
+          "quote": "Study ranks second, since learning is why we go to college."
+        },
+        {
+          "point": "阐述社交排第三的理由",
+          "quote": "Still, it comes third, because good friends will understand if I say no to a late-night party."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "一句话亮出完整排序，读者不用读完全文就知道作者的立场。",
+          "items": [
+            {
+              "quote": "I would rank sleep first, study second and socializing third",
+              "explain": "题目要的就是“排序”，所以开头直接给出三项的名次。用 first, second, third 并列，省掉重复的动词，干净好记，后面三段也按这个顺序展开。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "说明睡眠为什么排第一：它是另外两件事的前提。",
+          "items": [
+            {
+              "quote": "everything else depends on it",
+              "explain": "理由不是“我喜欢睡觉”，而是讲清睡眠和学习、社交的关系：另外两件事都靠它撑着。这样排第一才有说服力。"
+            },
+            {
+              "quote": "A student who stays up past midnight may sit through the next morning's lecture without taking in a word.",
+              "explain": "用一个读者熟悉的场景代替“睡眠对健康很重要”这种空话。sit through（硬撑着坐完）和 take in（听进去、吸收）都是地道搭配，比 listen to the class 更准确地写出“人在心不在”。"
+            },
+            {
+              "quote": "make the most of every class",
+              "explain": "把话题拉回学习，为下一段“学习排第二”铺路，同时说明睡好觉的实际好处。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "交代学习第二、社交第三，并回应“社交不重要吗”这个顾虑。",
+          "items": [
+            {
+              "quote": "since learning is why we go to college",
+              "explain": "学习的理由一句就够：上大学本来就是为了学习。理由短而硬，把篇幅留给更需要解释的社交。"
+            },
+            {
+              "quote": "Socializing matters too",
+              "explain": "先承认社交有价值，再说它为什么排最后。读者可能会想“交朋友不重要吗”，这句先接住这个顾虑，立场显得客观。"
+            },
+            {
+              "quote": "good friends will understand if I say no to a late-night party",
+              "explain": "排第三的理由落在一个具体选择上：为了睡觉推掉深夜聚会，真朋友会理解。这句又呼应了第二段的睡眠，三项排序因此连成一体。"
+            }
+          ]
+        },
+        {
+          "paragraph": 4,
+          "role": "直接对读者说话，给出一条能照做的建议。",
+          "items": [
+            {
+              "quote": "So, future freshmen, protect your sleep first.",
+              "explain": "Opinion 栏目的读者是同龄人，直接称呼 future freshmen 并用祈使句给建议，读者读完知道该怎么做，比 In a word, all three are important 这类套话有用。"
+            },
+            {
+              "quote": "A clear mind makes everything else easier.",
+              "explain": "最后一句回到“睡眠是基础”的中心，与第二段首句呼应，收得紧。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "I would rank A first, B second and C third",
+          "function": "一句话交代完整排序，适合所有“排序/选择”类观点题的开头。"
+        },
+        {
+          "expression": "everything else depends on it",
+          "function": "说明某一项排第一的原因：它是其他各项的基础。"
+        },
+        {
+          "expression": "Still, it comes third, because ...",
+          "function": "先肯定、再说明名次，用来解释排最后的一项，避免显得否定它。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Ranking My College Life Essentials\n\nWhen people picture college life, they often imagine late-night parties or long hours in the library. For me, however, the ranking is clear: sleep first, study second and socializing third.\n\nSleep tops my list because it is the foundation for everything. A student who stays up past midnight scrolling through videos may sit through the next morning's lecture without taking in a word. A good night's rest, by contrast, keeps my mind sharp and my mood steady.\n\nStudy comes second, as it is the very reason we go to college. Socializing is not far behind: joining a club or chatting with roommates teaches me teamwork and opens my eyes to new ways of thinking. Still, it ranks third, because true friends will understand when I turn down a late-night party.\n\nSo, future freshmen, guard your sleep above all. A rested mind will take care of the rest.",
+      "pointMap": [
+        {
+          "point": "对学习、社交、睡眠按重要性排序",
+          "quote": "For me, however, the ranking is clear: sleep first, study second and socializing third."
+        },
+        {
+          "point": "阐述睡眠排第一的理由",
+          "quote": "Sleep tops my list because it is the foundation for everything."
+        },
+        {
+          "point": "阐述学习排第二的理由",
+          "quote": "Study comes second, as it is the very reason we go to college."
+        },
+        {
+          "point": "阐述社交排第三的理由",
+          "quote": "Still, it ranks third, because true friends will understand when I turn down a late-night party."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "When people picture college life, they often imagine late-night parties or long hours in the library.",
+          "explain": "先写大家对大学生活的常见想象，再用 however 推出自己的排序。这种“常见看法—我的看法”的开头适合 Opinion 栏目，也让“睡眠第一”这个立场显得更有新意。"
+        },
+        {
+          "quote": "A good night's rest, by contrast, keeps my mind sharp and my mood steady.",
+          "explain": "标准版只说“想得清楚”，这里用 by contrast 与熬夜的学生对比，并用 keeps my mind sharp and my mood steady 两个并列短语，同时写到头脑和情绪，理由更完整。"
+        },
+        {
+          "quote": "A rested mind will take care of the rest.",
+          "explain": "rested 和 the rest 一词两用：睡足的头脑会把其余的事处理好。结尾既落到建议上，又有一点同龄人之间的俏皮。"
+        }
+      ]
+    }
+  }
+}

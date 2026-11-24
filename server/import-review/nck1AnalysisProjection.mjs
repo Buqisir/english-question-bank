@@ -17,8 +17,9 @@ import {
   validateNarrativeContinuationAnalysis,
 } from '../paper-import-ai/analyzeNarrativeContinuation.mjs'
 import { validateWritingAnalysisCandidate } from '../writing-analysis/writingAnalysisBackfillService.mjs'
-import { validateApplicationModelAnswer } from '../paper-import-ai/applicationWritingWorkflow.mjs'
+import { validateApplicationAnalysisV4, validateApplicationModelAnswer } from '../paper-import-ai/applicationWritingWorkflow.mjs'
 import { isApplicationReviewCardV2 } from '../../shared/writing/applicationReviewCard.mjs'
+import { applicationAnalysisV4ShapeProblems } from '../../shared/writing/applicationAnalysisV4.mjs'
 import { digestJson } from '../../shared/paper-canonical/stable.mjs'
 import {
   LEGACY_NCK1_ANALYSIS_PROFILE,
@@ -212,13 +213,32 @@ export function projectNck1StagedWritingAnalysis(raw) {
     if (raw.highlightExpressions !== undefined) {
       fail('New-paper application analysis must not include retired highlightExpressions')
     }
+    if (raw.applicationAnalysis !== undefined) {
+      exactKeys(raw, [
+        'taskType', 'modelAnswer', 'applicationAnalysis',
+        ...(raw.officialModelAnswer === undefined ? [] : ['officialModelAnswer']),
+      ], 'application staged analysis')
+      const problems = applicationAnalysisV4ShapeProblems(raw.applicationAnalysis)
+      if (problems.length > 0) fail(`New-paper application analysis V4 is malformed: ${problems.join('; ')}`)
+      if (raw.modelAnswer !== raw.applicationAnalysis.standard.essay) {
+        fail('New-paper application analysis V4 modelAnswer must equal the standard essay')
+      }
+      return {
+        taskType: 'application',
+        modelAnswer: raw.modelAnswer,
+        applicationAnalysis: structuredClone(raw.applicationAnalysis),
+        ...(typeof raw.officialModelAnswer === 'string' && raw.officialModelAnswer.trim()
+          ? { officialModelAnswer: raw.officialModelAnswer }
+          : {}),
+      }
+    }
     exactKeys(raw, [
       'taskType', 'reviewCard',
       ...(raw.modelAnswer === undefined ? [] : ['modelAnswer']),
       ...(raw.officialModelAnswer === undefined ? [] : ['officialModelAnswer']),
     ], 'application staged analysis')
     if (!isApplicationReviewCardV2(raw.reviewCard)) {
-      fail('New-paper application analysis requires application-review-card-v2')
+      fail('New-paper application analysis requires application-review-card-v2 or application-analysis-v4')
     }
     return {
       taskType: 'application',
@@ -329,6 +349,7 @@ export function validateNck1StagedAnalysis(request, raw) {
     if (!validateWritingSchema(envelope)) fail(`Writing analysis schema invalid: ${formatSchemaErrors(validateWritingSchema.errors)}`)
     validateWritingAnalysisCandidate(writing)
     if (key === 'continuation') validateNarrativeContinuationAnalysis(writing.continuationAnalysis, { writingTask })
+    else if (writing.applicationAnalysis !== undefined) validateApplicationAnalysisV4({ analysis: writing.applicationAnalysis, writingTask, groupPassage: group })
     else if (writing.modelAnswer !== undefined) validateApplicationModelAnswer({ modelAnswer: writing.modelAnswer, writingTask, groupPassage: group })
     return { ok: true, warnings: [] }
   }

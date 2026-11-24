@@ -1,0 +1,136 @@
+{
+  "source": "blind trial 2026-11-24, paper-gaokao-2026-ii.out.json",
+  "writingTask": {
+    "taskType": "application",
+    "instruction": "假定你是李华，外教Kate计划将你们班的英语作文汇编成册。请给Kate写封邮件，内容包括：",
+    "wordCountTarget": 80,
+    "applicationGiven": {
+      "top": [
+        "Dear Kate,",
+        "It’s a great idea to make a collection of our English essays."
+      ],
+      "bottom": [
+        "Yours,",
+        "Li Hua"
+      ]
+    }
+  },
+  "groupPassage": null,
+  "output": {
+    "taskType": "application",
+    "blocked": null,
+    "taskCard": {
+      "taskRequires": [
+        "读者与身份：李华写给外教 Kate 的邮件；Kate 计划把全班英语作文汇编成册。",
+        "两个要点：（1）建议配图；（2）自荐承担画图工作。格式给定：称呼 Dear Kate,、首句 It’s a great idea to make a collection of our English essays.、结尾 Yours, / Li Hua。"
+      ],
+      "thisEssayChooses": "本范文选择“每篇作文配一幅图”，理由从读者出发（先吸引目光、帮英语弱的同学读懂）；自荐时补了“学过三年素描、每月给黑板报画漫画”这类能核实的经历，并先接住 Kate 可能的顾虑（会不会耽误学习）；结尾落在具体下一步（请她月底前把作文给我、我先交样稿定风格）。语气是对熟悉的外教：热情、礼貌，但不卑微。这些细节都可以换成你自己的真实经历。"
+    },
+    "standard": {
+      "essay": "Dear Kate,\n\nIt’s a great idea to make a collection of our English essays.\nTo make it even better, I suggest adding a picture to each essay. A simple drawing of each story would catch readers’ eyes before they read a word, and it would help classmates with weaker English follow the main idea.\n\nI’d also love to do the drawing myself. I’ve taken sketching lessons for three years, and my cartoons appear on our class blackboard newspaper every month. Simple line drawings don’t take long, so I could finish three or four a week without falling behind in my studies.\n\nIf you agree, could you send me the essays by the end of this month? I’ll show you a few sample sketches first so you can decide on the style.\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "建议配图",
+          "quote": "To make it even better, I suggest adding a picture to each essay."
+        },
+        {
+          "point": "自荐承担画图工作",
+          "quote": "I’d also love to do the drawing myself."
+        }
+      ],
+      "notes": [
+        {
+          "paragraph": 1,
+          "role": "接住题面首句，提出“配图”建议并给出理由（要点1）。",
+          "items": [
+            {
+              "quote": "To make it even better, I suggest adding a picture to each essay.",
+              "explain": "先肯定 Kate 的计划（even better 说明原计划已经很好），再提建议，对老师既直接又不冒犯。suggest 后接 doing，是这里最容易写错的搭配。"
+            },
+            {
+              "quote": "would catch readers’ eyes before they read a word",
+              "explain": "理由从读者角度说：图片的作用是让人愿意翻开读。比“pictures are beautiful”具体，Kate 一读就能想象到效果。"
+            },
+            {
+              "quote": "help classmates with weaker English follow the main idea",
+              "explain": "第二个理由照顾到全班，说明配图对“汇编作文集”这个共同目标有用，而不只是“我喜欢画画”。help sb do 结构简洁地道。"
+            }
+          ]
+        },
+        {
+          "paragraph": 2,
+          "role": "自荐画图（要点2），用经历证明能做，再打消顾虑。",
+          "items": [
+            {
+              "quote": "I’d also love to do the drawing myself.",
+              "explain": "用 also 承上启下，一句话就让 Kate 知道“建议”和“自荐”是同一件事的两步；I’d love to 比 I want to 更热情也更礼貌。"
+            },
+            {
+              "quote": "my cartoons appear on our class blackboard newspaper every month",
+              "explain": "自荐要拿出能核实的证据：三年课程加每月黑板报，比 I am good at drawing 更可信，这是真实高中生会有的经历。"
+            },
+            {
+              "quote": "so I could finish three or four a week without falling behind in my studies",
+              "explain": "老师最可能担心“会不会影响学习”，这里先一步接住，并给出每周三四幅的具体量，让承诺显得可行。"
+            }
+          ]
+        },
+        {
+          "paragraph": 3,
+          "role": "收尾落在下一步：Kate 需要做什么、我会做什么。",
+          "items": [
+            {
+              "quote": "could you send me the essays by the end of this month?",
+              "explain": "用 could you 委婉提出请求，并给出时间，Kate 读完就知道该回复什么，而不是一句可以贴到任何信末的套话。"
+            },
+            {
+              "quote": "I’ll show you a few sample sketches first so you can decide on the style.",
+              "explain": "把决定权留给负责汇编的 Kate，体现对老师的尊重；so (that) 引出目的，让行动和理由连在一起。"
+            }
+          ]
+        }
+      ],
+      "expressions": [
+        {
+          "expression": "To make it even better, I suggest doing ...",
+          "function": "先肯定对方的计划再补充建议，适合向老师提建议时开口，不会显得在挑毛病。"
+        },
+        {
+          "expression": "I’d love to do ... myself.",
+          "function": "热情又礼貌地自荐承担某项工作，接在建议后面，让“提议”自然变成“我来做”。"
+        },
+        {
+          "expression": "... without falling behind in my studies",
+          "function": "主动回应老师对学业的顾虑，说明自荐的事情可行，适用于各类自荐、报名题。"
+        }
+      ]
+    },
+    "advanced": {
+      "essay": "Dear Kate,\n\nIt’s a great idea to make a collection of our English essays.\nTo make it something we’ll treasure, I’d suggest giving each essay an illustration of the moment the writer cares about most, such as a rainy walk home or Grandma’s dumplings. A picture like that would draw readers in before they read a word and give classmates who find English hard a way into every story.\n\nAs for the drawing, I’d love to volunteer. I’ve been taking sketching lessons since junior high, and most cartoons on our class blackboard newspaper are mine, so I’m used to drawing to a theme. To keep each picture true to its essay, I’ll chat with the writer first. Pencil sketches are quick, so this won’t eat into my study time.\n\nIf that works for you, could you pass me the essays by the end of the month? I’ll bring you two sample sketches next Monday so you can pick a style first.\n\nYours,\nLi Hua",
+      "pointMap": [
+        {
+          "point": "建议配图",
+          "quote": "To make it something we’ll treasure, I’d suggest giving each essay an illustration of the moment the writer cares about most, such as a rainy walk home or Grandma’s dumplings."
+        },
+        {
+          "point": "自荐承担画图工作",
+          "quote": "As for the drawing, I’d love to volunteer."
+        }
+      ],
+      "beyondStandard": [
+        {
+          "quote": "an illustration of the moment the writer cares about most, such as a rainy walk home or Grandma’s dumplings",
+          "explain": "标准版只说“每篇配一幅图”，这里说清楚画什么：作者最在意的那个瞬间，并举出两个具体画面。建议因此更具体，也更贴近“班级作文集”值得珍藏的意义。"
+        },
+        {
+          "quote": "To keep each picture true to its essay, I’ll chat with the writer first.",
+          "explain": "多想了一步：画图的人不能替作者理解作文。先和作者聊一聊，既保证图文一致，也尊重同学，让 Kate 更放心把工作交给我。"
+        },
+        {
+          "quote": "give classmates who find English hard a way into every story",
+          "explain": "a way into a story 是母语者常用的说法，比 help them understand 更形象；who find English hard 也比 weaker English 说得更体贴。"
+        }
+      ]
+    }
+  }
+}
