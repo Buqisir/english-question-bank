@@ -1,0 +1,384 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "A few weeks later, when I almost forgot the contest, there came the news. My teacher stopped me in the hallway, waving a letter. My story about Paul Revere's horse had won first prize. I stared at him, unable to believe it. Me? The kid who had once acted out the Titanic because writing about it was too hard? On the day of the award presentation, I walked onto the stage with shaking knees. When the judge read a few lines from the horse's mouth, the whole hall burst into laughter, and for the first time I felt proud of something I had written in English.\n\nI went to my teacher's office after the award presentation. He was sitting at his desk, smiling as if he had won the prize himself. \"Thank you,\" I said, holding up my certificate. \"You made me do it.\" He shook his head. \"No, you did it yourself. I only knew you had stories worth telling.\" On my way home, I realized something had changed. Like Revere's horse, I had kept going through a long night of doubts, and at the end of the road I had found more than a prize. Writing in my second language was no longer only painful; it had become a way to share my stories. That evening, I took out a new notebook and began my next story.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v2",
+    "storyUnderstanding": {
+      "centralSituation": {
+        "statement": "英语是第二语言、原本害怕写作的“我”，在老师的鼓励下参加写作比赛，以保罗·里维尔的马为视角写故事，并在反复修改中从想赢转向享受写作。",
+        "evidence": [
+          {"source": "material", "excerpt": "my social studies teacher asked me to enter a writing contest"},
+          {"source": "material", "excerpt": "English was only my second language"},
+          {"source": "material", "excerpt": "My story would come straight from the horse"}
+        ]
+      },
+      "sourceEndState": {
+        "statement": "原文结束时，“我”已按老师要求多次重写并最终完成作品，心态从想赢变成享受写作，自认输赢都无所谓；比赛结果尚未公布。",
+        "evidence": [
+          {"source": "material", "excerpt": "I wrote it again, and again and again."},
+          {"source": "material", "excerpt": "the thought of winning had given way to the enjoyment of writing"}
+        ]
+      },
+      "narrativePerspective": {
+        "statement": "第一人称回忆视角，“我”讲述中学时的经历，基础时态为一般过去时。",
+        "evidence": [
+          {"source": "material", "excerpt": "When I was in middle school"}
+        ]
+      },
+      "timeAndPlaceFrame": {
+        "statement": "时间是“我”上中学期间，地点以学校和老师为中心；比赛结果在作品交出后的几周里到来。",
+        "evidence": [
+          {"source": "material", "excerpt": "When I was in middle school"},
+          {"source": "paragraph1Starter", "excerpt": "A few weeks later"}
+        ]
+      },
+      "characters": [
+        {
+          "name": "I",
+          "role": "叙述者、参赛者",
+          "establishedTraits": [
+            {
+              "statement": "写作基础弱、起初缺乏自信：先是不假思索地拒绝，又认定自己必输。",
+              "evidence": [
+                {"source": "material", "excerpt": "I said no without thinking."},
+                {"source": "material", "excerpt": "something at which I was sure to fail"}
+              ]
+            },
+            {
+              "statement": "有幽默感和讲故事的能力：用一人分饰多角的短剧呈现泰坦尼克号，选了有趣又少见的马的视角。",
+              "evidence": [
+                {"source": "material", "excerpt": "where I played all the parts"},
+                {"source": "material", "excerpt": "Not a brilliant idea, but funny"}
+              ]
+            },
+            {
+              "statement": "一旦答应就肯下功夫：检查拼写、请姐姐改语法、借书查资料，并反复重写。",
+              "evidence": [
+                {"source": "material", "excerpt": "I worked hard. I checked my spelling."},
+                {"source": "material", "excerpt": "I asked my older sister to correct my grammar."}
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "因老师的肯定而愿意一试，后来写作本身成了动力。",
+              "evidence": [
+                {"source": "material", "excerpt": "Encouraged by his words, I agreed to give it a try."},
+                {"source": "material", "excerpt": "the thought of winning had given way to the enjoyment of writing"}
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "作品已完成，享受写作，对输赢不再在意，正等待结果。",
+            "evidence": [
+              {"source": "material", "excerpt": "When I finally finished it"}
+            ]
+          }
+        },
+        {
+          "name": "my social studies teacher",
+          "role": "鼓励者、引导者",
+          "establishedTraits": [
+            {
+              "statement": "欣赏“我”的故事、相信“我”的潜力，并用反复要求重写的方式严格把关。",
+              "evidence": [
+                {"source": "material", "excerpt": "Because I love your stories."},
+                {"source": "material", "excerpt": "Now, write it again."}
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "希望“我”肯用功，发挥讲故事的长处。",
+              "evidence": [
+                {"source": "material", "excerpt": "I think you have a good shot at this"}
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "读过“我”的稿子并笑出声，督促“我”一改再改；原文未写他对最终稿的反应。",
+            "evidence": [
+              {"source": "material", "excerpt": "he read it, laughed out loud, and said"}
+            ]
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "participants": ["I", "my social studies teacher"],
+          "currentRelation": {
+            "statement": "老师理解并欣赏“我”，曾为“我”变通作业形式，又推动“我”参赛；“我”因他的话而愿意尝试。",
+            "evidence": [
+              {"source": "material", "excerpt": "my teacher had allowed me to present my paper on the sinking of the Titanic by acting out a play"},
+              {"source": "material", "excerpt": "Encouraged by his words, I agreed to give it a try."}
+            ]
+          }
+        }
+      ],
+      "causalChain": [
+        {
+          "cause": {
+            "statement": "老师说喜欢“我”的故事，认为“我”肯用功就有机会。",
+            "evidence": [{"source": "material", "excerpt": "Because I love your stories."}]
+          },
+          "effect": {
+            "statement": "“我”答应参赛。",
+            "evidence": [{"source": "material", "excerpt": "I agreed to give it a try"}]
+          }
+        },
+        {
+          "cause": {
+            "statement": "老师要求重写，“我”一遍遍修改。",
+            "evidence": [{"source": "material", "excerpt": "I wrote it again, and again and again."}]
+          },
+          "effect": {
+            "statement": "“我”从想赢转为享受写作。",
+            "evidence": [{"source": "material", "excerpt": "the thought of winning had given way to the enjoyment of writing"}]
+          }
+        }
+      ],
+      "unresolvedProblem": {
+        "statement": "比赛结果未知；“我”对写作的新态度、与老师之间的这段经历还没有落到结果和回应上。",
+        "evidence": [
+          {"source": "paragraph1Starter", "excerpt": "there came the news"},
+          {"source": "paragraph2Starter", "excerpt": "I went to my teacher's office after the award presentation."}
+        ]
+      },
+      "usableClues": [
+        {
+          "statement": "老师当初的预言“你有很大机会”，可在结果揭晓时得到回应。",
+          "evidence": [{"source": "material", "excerpt": "I think you have a good shot at this"}]
+        },
+        {
+          "statement": "“我”像里维尔的马一样坚持下去，可用来概括自己的经历。",
+          "evidence": [{"source": "material", "excerpt": "I kept going"}]
+        },
+        {
+          "statement": "老师总是被“我”的故事逗笑，马的视角本身有趣。",
+          "evidence": [
+            {"source": "material", "excerpt": "No one laughed harder than he did."},
+            {"source": "material", "excerpt": "Not a brilliant idea, but funny"}
+          ]
+        }
+      ],
+      "meaningDirection": {
+        "statement": "由害怕写作到享受写作的转变已在原文出现；续写更可能落在“我”对老师鼓励的认识和对写作的新态度上，而不只是获奖本身。",
+        "confidence": "stronglyInferred",
+        "evidence": [
+          {"source": "material", "excerpt": "the thought of winning had given way to the enjoyment of writing"},
+          {"source": "paragraph2Starter", "excerpt": "I went to my teacher's office"}
+        ]
+      },
+      "sourceStyle": {
+        "statement": "第一人称回忆，语气轻松自嘲；多用短句并列（如连续的 I got tired. I had doubts.），对话少而短，直接引用老师的关键话语。",
+        "evidence": [
+          {"source": "material", "excerpt": "I got tired. I had doubts. I wanted to quit."},
+          {"source": "material", "excerpt": "I even read a few of them."}
+        ]
+      }
+    },
+    "continuationContract": {
+      "hardConstraints": [
+        {
+          "id": "hc-first-person-past",
+          "statement": "保持第一人称、一般过去时的回忆叙述。",
+          "evidence": [{"source": "material", "excerpt": "When I was in middle school"}]
+        },
+        {
+          "id": "hc-two-paragraphs",
+          "statement": "续写两段，分别以给定段首语开头，与原文构成完整短文。",
+          "evidence": [{"source": "instruction", "excerpt": "根据其内容和所给段落开头语续写两段"}]
+        },
+        {
+          "id": "hc-award-presentation",
+          "statement": "比赛有颁奖环节，且在第二段开头时已经结束。",
+          "evidence": [{"source": "paragraph2Starter", "excerpt": "after the award presentation"}]
+        }
+      ],
+      "softAffordances": [
+        {
+          "statement": "“我”获奖与老师“有机会”的判断和颁奖仪式最契合，但段首语没有直接说“我”获奖或得了几等奖。",
+          "evidence": [
+            {"source": "material", "excerpt": "I think you have a good shot at this"},
+            {"source": "paragraph2Starter", "excerpt": "after the award presentation"}
+          ]
+        },
+        {
+          "statement": "马的视角写得有趣，可让读者或评委的笑声再次出现。",
+          "evidence": [{"source": "material", "excerpt": "Not a brilliant idea, but funny"}]
+        }
+      ],
+      "openChoices": [
+        "消息由谁、以何种方式传来",
+        "获奖等级和颁奖场合的细节",
+        "在办公室里与老师交谈的具体内容",
+        "“我”此后与写作关系的具体表现"
+      ],
+      "forbiddenContradictions": [
+        {
+          "id": "fc-no-native-writer",
+          "statement": "不能把“我”写成本来就擅长、热爱写作的人，抹去英语是第二语言、写作曾很痛苦的背景。",
+          "evidence": [{"source": "material", "excerpt": "Writing was so difficult and painful for me"}]
+        },
+        {
+          "id": "fc-no-win-obsession",
+          "statement": "不能让“我”重新把输赢当作唯一目标，否则与原文结尾“享受写作”的转变相矛盾。",
+          "evidence": [{"source": "material", "excerpt": "the thought of winning had given way to the enjoyment of writing"}]
+        }
+      ],
+      "paragraphs": [
+        {
+          "paragraphIndex": 1,
+          "entryState": {
+            "statement": "交稿几周后，“我”几乎忘了比赛，这时比赛的消息传来。",
+            "evidence": [{"source": "paragraph1Starter", "excerpt": "when I almost forgot the contest, there came the news"}]
+          },
+          "starterFunction": {
+            "statement": "引出比赛结果；“几乎忘了”呼应原文结尾不在乎输赢的心态，让消息显得出乎意料。",
+            "evidence": [{"source": "paragraph1Starter", "excerpt": "when I almost forgot the contest"}]
+          },
+          "requiredMoves": [
+            {
+              "id": "p1-reveal-news",
+              "statement": "交代传来的消息是什么，即比赛结果。",
+              "evidence": [{"source": "paragraph1Starter", "excerpt": "there came the news"}]
+            }
+          ],
+          "requiredExitState": [
+            {
+              "id": "p1-exit-presentation-done",
+              "statement": "因为第二段说“颁奖之后”去老师办公室，第一段结束时颁奖环节必须已经发生或被推进到完成，且“我”与这次颁奖有关。",
+              "evidence": [{"source": "paragraph2Starter", "excerpt": "after the award presentation"}]
+            }
+          ],
+          "supportedOptions": [
+            {
+              "statement": "可由老师告诉“我”获奖，与他的预言呼应。",
+              "evidence": [{"source": "material", "excerpt": "I think you have a good shot at this"}]
+            }
+          ]
+        },
+        {
+          "paragraphIndex": 2,
+          "entryState": {
+            "statement": "颁奖结束后，“我”主动去老师办公室。",
+            "evidence": [{"source": "paragraph2Starter", "excerpt": "I went to my teacher's office after the award presentation."}]
+          },
+          "starterFunction": {
+            "statement": "把焦点从比赛结果转到“我”与老师之间，承接老师一路的鼓励。",
+            "evidence": [
+              {"source": "paragraph2Starter", "excerpt": "I went to my teacher's office"},
+              {"source": "material", "excerpt": "Encouraged by his words"}
+            ]
+          },
+          "requiredMoves": [
+            {
+              "id": "p2-meet-teacher",
+              "statement": "写出“我”在办公室见到老师后发生了什么，交代此行的目的或结果。",
+              "evidence": [{"source": "paragraph2Starter", "excerpt": "I went to my teacher's office"}]
+            }
+          ],
+          "requiredExitState": [
+            {
+              "id": "p2-exit-closure",
+              "statement": "故事收束，与原文“我”对写作态度的变化相呼应。",
+              "evidence": [{"source": "material", "excerpt": "the enjoyment of writing"}]
+            }
+          ],
+          "supportedOptions": [
+            {
+              "statement": "可让“我”向老师道谢，或回顾当初拒绝与必输的想法。",
+              "evidence": [{"source": "material", "excerpt": "I said no without thinking."}]
+            }
+          ]
+        }
+      ],
+      "closureRequirements": [
+        {
+          "id": "cr-attitude-resolved",
+          "statement": "结尾要落在比赛之后“我”与写作或与老师关系上的结果，而不是停在领奖这一刻。",
+          "evidence": [
+            {"source": "paragraph2Starter", "excerpt": "I went to my teacher's office after the award presentation."},
+            {"source": "material", "excerpt": "the thought of winning had given way to the enjoyment of writing"}
+          ]
+        }
+      ]
+    },
+    "developmentPlan": {
+      "selectedRoute": "本范文选择：老师带来“我”获一等奖的消息，颁奖时评委朗读马的故事引来笑声，“我”第一次为英语写作感到自豪；颁奖后“我”到办公室向老师道谢，老师把功劳归还给“我”，“我”意识到写作已成为分享故事的方式，并开始写下一个故事。",
+      "routeRationale": [
+        {
+          "statement": "老师当初说“你有很大机会”，让“我”获奖并由老师报信，使他的判断得到回应；但这只是一种选择，原文和段首语并未规定获奖等级。",
+          "evidence": [{"source": "material", "excerpt": "I think you have a good shot at this"}]
+        },
+        {
+          "statement": "原文结尾已说“我”从想赢转向享受写作，所以第二段重点放在“我”对写作和对老师的认识上，而不是再写领奖的激动。",
+          "evidence": [{"source": "material", "excerpt": "the thought of winning had given way to the enjoyment of writing"}]
+        }
+      ],
+      "paragraphs": [
+        {
+          "paragraphIndex": 1,
+          "cause": "“我”几乎忘了比赛时，老师拿着信带来消息。",
+          "action": "“我”得知马的故事获奖，不敢相信，想起自己当初连泰坦尼克号的论文都写不出；颁奖时“我”紧张地上台，评委朗读了马的独白。",
+          "result": "全场大笑，“我”第一次为自己用英语写的东西感到自豪，颁奖环节完成。",
+          "sourceEvidence": [
+            {"source": "paragraph1Starter", "excerpt": "there came the news"},
+            {"source": "material", "excerpt": "acting out a play"}
+          ],
+          "cluePayoffs": [
+            {
+              "clue": {"source": "material", "excerpt": "Not a brilliant idea, but funny"},
+              "payoff": "评委读到马的视角时全场大笑，证明这个“有趣”的选题打动了读者。"
+            }
+          ],
+          "bridge": "颁奖已在段末完成，第二段可直接从“颁奖后去老师办公室”接上。",
+          "emotionChanges": [
+            {
+              "trigger": "得知获奖，听到全场为自己的故事大笑",
+              "from": "惊讶、不敢相信",
+              "to": "对自己的英语写作感到自豪",
+              "visibleAction": "盯着老师发愣，双腿发抖地走上台"
+            }
+          ]
+        },
+        {
+          "paragraphIndex": 2,
+          "cause": "老师的鼓励让“我”走到了这一步，“我”想当面道谢。",
+          "action": "“我”举着证书说是老师让“我”做到的；老师却说是“我”自己做到的，他只是知道“我”有值得讲的故事。",
+          "result": "“我”明白自己像里维尔的马一样坚持了下来，写作不再只是痛苦，而是分享故事的方式。",
+          "sourceEvidence": [
+            {"source": "material", "excerpt": "Because I love your stories."},
+            {"source": "material", "excerpt": "I kept going"}
+          ],
+          "cluePayoffs": [
+            {
+              "clue": {"source": "material", "excerpt": "Because I love your stories."},
+              "payoff": "老师再次提到“我”的故事，把成功归于“我”自己的坚持与天赋。"
+            },
+            {
+              "clue": {"source": "material", "excerpt": "I kept going"},
+              "payoff": "“我”用里维尔的马在黑夜中坚持奔跑来概括自己克服怀疑的过程。"
+            }
+          ],
+          "ending": "当晚“我”拿出新本子开始写下一个故事，以行动表明写作已成为“我”愿意继续做的事。",
+          "relationshipChanges": [
+            {
+              "participants": ["I", "my social studies teacher"],
+              "from": "被老师推着尝试的学生",
+              "to": "认识到老师的信任、也认可了自己的学生",
+              "cause": "老师把功劳归还给“我”"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        "“我”只获得较低奖项或鼓励奖，到办公室后与老师谈到自己已不在乎名次。"
+      ],
+      "qualityRisks": [
+        "不要在第一段就写去老师办公室的对话，抢占第二段的内容。",
+        "结尾避免空洞口号，用“开始写下一个故事”这样的动作收束。"
+      ]
+    }
+  }
+}

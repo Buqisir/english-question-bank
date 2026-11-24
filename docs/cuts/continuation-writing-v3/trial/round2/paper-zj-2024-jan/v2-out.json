@@ -1,0 +1,452 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "When Coach Pitt said “Nice work!” to her at the finish line, Eva was surprised. Still breathing hard, she turned around and saw several classmates jogging behind her. She had not come in last after all. In fact, she had finished the whole mile without stopping. The mile had not grown any shorter. By breaking it into small parts, from the oak tree’s shadow to the curve of the track, she had turned a frightening task into something she could manage. Walking back toward the huge building, she thought of the endless hallways waiting inside.\n\nEva decided to use the same trick to deal with the school building. Instead of trying to remember all six floors at once, she would learn them one part at a time. That afternoon, she followed one hallway on the first floor and found the cafeteria, then took another to the gym. The next day, she explored the second floor and found the library. Each time she reached a new place, she added it to a simple map in her notebook. Within two weeks, the hallways no longer looked like a maze. She could now walk from her classroom to the laboratories without asking for directions. One morning, a lost new student asked her the way to the library. Eva smiled and led her there, one hallway at a time.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v2",
+    "storyUnderstanding": {
+      "centralSituation": {
+        "statement": "高一新生 Eva 开学第一周有两个难处：方向感差，找不到路，于是只记教室位置、假装楼里其他地方不存在；第一节体育课又被要求跑一英里，而这正是她最怕的事。跑步时她靠“只盯下一个小目标”的心理小把戏坚持下来。",
+        "evidence": [
+          {"source": "material", "excerpt": "One of the major headaches for her was finding her way in the huge school building."},
+          {"source": "material", "excerpt": "There was nothing she feared more than having to run a whole mile."},
+          {"source": "material", "excerpt": "Feeling desperate, Eva started using a mind trick on herself."}
+        ]
+      },
+      "sourceEndState": {
+        "statement": "原文停在 Eva 已跑完第四圈：她不再想“一英里”，而是先跑到橡树影子、再到弯道、再完成一圈，一圈接一圈。原文没有交代她是否已到终点、名次如何；教学楼的问题仍被她“假装不存在”，没有解决。",
+        "evidence": [
+          {"source": "material", "excerpt": "One lap turned into two, then three, then four."},
+          {"source": "material", "excerpt": "She decided that she would memorize where her classes were and then pretend that the rest of the place didn’t exist."}
+        ]
+      },
+      "narrativePerspective": {
+        "statement": "第三人称有限视角，紧贴 Eva 的感受和想法，用一般过去时叙述，并穿插她的内心独白。",
+        "evidence": [
+          {"source": "material", "excerpt": "“It’s just the beginning,” she thought."}
+        ]
+      },
+      "timeAndPlaceFrame": {
+        "statement": "高中开学第一周；地点是一栋六层、走廊四通八达的大教学楼，以及室外跑道。",
+        "evidence": [
+          {"source": "material", "excerpt": "Eva spent the first week of high school trying to keep her head above water."},
+          {"source": "material", "excerpt": "It was a six-story building."},
+          {"source": "material", "excerpt": "everyone had to run one mile around the track outside"}
+        ]
+      },
+      "characters": [
+        {
+          "name": "Eva",
+          "role": "主人公，高一新生",
+          "establishedTraits": [
+            {
+              "statement": "方向感差，面对复杂环境容易选择回避：她只记教室位置，把其余地方当作不存在。",
+              "evidence": [
+                {"source": "material", "excerpt": "Having a poor sense of direction, Eva found it impossible to get around in such a huge building."},
+                {"source": "material", "excerpt": "pretend that the rest of the place didn’t exist"}
+              ]
+            },
+            {
+              "statement": "容易提前往坏处想：一听要跑一英里就惊慌，刚起跑就认定自己会最后一名。",
+              "evidence": [
+                {"source": "material", "excerpt": "Eva figured she would be left in the dust"},
+                {"source": "material", "excerpt": "I’ll come in last for sure."}
+              ]
+            },
+            {
+              "statement": "在绝望中能自己想办法：把一英里拆成橡树影子、弯道、一圈这样的小目标。",
+              "evidence": [
+                {"source": "material", "excerpt": "she focused on reaching the shadow cast on the track by an oak tree up ahead"}
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "想在新学校站稳脚跟，跟上节奏，不被压垮。",
+              "evidence": [
+                {"source": "material", "excerpt": "trying to keep her head above water"}
+              ]
+            },
+            {
+              "statement": "想把这一英里坚持跑完，而不是被落下。",
+              "evidence": [
+                {"source": "material", "excerpt": "Feeling desperate, Eva started using a mind trick on herself."}
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "身体很累（喘、心跳快、腿抖），但小目标法让她一圈圈跑下去，已经完成四圈。",
+            "evidence": [
+              {"source": "material", "excerpt": "Soon Eva began to breathe hard, with her heart pounding and legs shaking."},
+              {"source": "material", "excerpt": "One lap turned into two, then three, then four."}
+            ]
+          }
+        },
+        {
+          "name": "Coach Pitt",
+          "role": "体育老师，布置一英里跑",
+          "establishedTraits": [],
+          "motivations": [],
+          "currentState": {
+            "statement": "吹哨发令，组织全班跑一英里；第一段开头语显示他在终点对 Eva 说了“Nice work!”。",
+            "evidence": [
+              {"source": "material", "excerpt": "When Coach Pitt blew his whistle (哨子) , Eva figured she would be left in the dust."},
+              {"source": "paragraph1Starter", "excerpt": "When Coach Pitt said “Nice work!” to her at the finish line"}
+            ]
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "participants": ["Eva", "Coach Pitt"],
+          "currentRelation": {
+            "statement": "师生关系：教练布置了她最害怕的任务，第一段开头语里他在终点肯定了她的表现。",
+            "evidence": [
+              {"source": "material", "excerpt": "Eva was shocked when Coach Pitt announced that everyone had to run one mile around the track outside"},
+              {"source": "paragraph1Starter", "excerpt": "When Coach Pitt said “Nice work!” to her at the finish line, Eva was surprised."}
+            ]
+          }
+        }
+      ],
+      "causalChain": [
+        {
+          "cause": {
+            "statement": "Eva 方向感差，楼太大，记不住。",
+            "evidence": [
+              {"source": "material", "excerpt": "All the different hallways and rooms were too much to think about, let alone commit to memory."}
+            ]
+          },
+          "effect": {
+            "statement": "她只记教室，对楼里其余地方采取回避态度，问题被搁置。",
+            "evidence": [
+              {"source": "material", "excerpt": "She decided that she would memorize where her classes were and then pretend that the rest of the place didn’t exist."}
+            ]
+          }
+        },
+        {
+          "cause": {
+            "statement": "跑步中体力透支、陷入绝望。",
+            "evidence": [
+              {"source": "material", "excerpt": "Soon Eva began to breathe hard, with her heart pounding and legs shaking."}
+            ]
+          },
+          "effect": {
+            "statement": "她不再想整个“一英里”，改为只盯下一个小目标，于是一圈接一圈跑了下去。",
+            "evidence": [
+              {"source": "material", "excerpt": "She stopped thinking about the word"},
+              {"source": "material", "excerpt": "One lap turned into two, then three, then four."}
+            ]
+          }
+        }
+      ],
+      "unresolvedProblem": {
+        "statement": "两件事都没收尾：这一英里跑完了没有、结果如何，原文没说；更大的问题——在大楼里找路——Eva 只是回避，并未解决。",
+        "evidence": [
+          {"source": "material", "excerpt": "One of the major headaches for her was finding her way in the huge school building."},
+          {"source": "material", "excerpt": "pretend that the rest of the place didn’t exist"}
+        ]
+      },
+      "usableClues": [
+        {
+          "statement": "“小目标”心理把戏：橡树影子→弯道→一圈，是可以迁移到找路问题上的方法。",
+          "evidence": [
+            {"source": "material", "excerpt": "Then she concentrated on jogging to the spot where the trace curved (拐弯) ."},
+            {"source": "paragraph2Starter", "excerpt": "the same trick"}
+          ]
+        },
+        {
+          "statement": "楼里有她一直回避的图书馆、食堂和体育馆，可作为逐个“攻克”的具体目标。",
+          "evidence": [
+            {"source": "material", "excerpt": "Somewhere in the building, there was also a library, a cafeteria and a gym."}
+          ]
+        },
+        {
+          "statement": "她起跑时预言自己会最后一名，而起跑后有同学其实落在她后面，可用于第一段解释她为何惊讶。",
+          "evidence": [
+            {"source": "material", "excerpt": "while some of her classmates edged ahead, others actually fell behind"},
+            {"source": "material", "excerpt": "I’ll come in last for sure."}
+          ]
+        }
+      ],
+      "meaningDirection": {
+        "statement": "把看似吓人的大任务拆成一个个小目标，就能一步步完成；Eva 从跑步中得到的方法可以用来解决找路的难题。",
+        "confidence": "stronglyInferred",
+        "evidence": [
+          {"source": "material", "excerpt": "Instead, she focused on reaching the shadow cast on the track by an oak tree up ahead."},
+          {"source": "paragraph2Starter", "excerpt": "Eva decided to use the same trick to deal with the school building."}
+        ]
+      },
+      "sourceStyle": {
+        "statement": "第三人称过去时，叙述距离近，以 Eva 的心理活动和身体感受为主；对话极少，只有一两句内心独白；句子平实，用“Then… After that…”式的递进短句表现一步步推进的节奏。",
+        "evidence": [
+          {"source": "material", "excerpt": "After that, she tried to see if she could complete her first lap."},
+          {"source": "material", "excerpt": "“It’s just the beginning,” she thought."}
+        ]
+      }
+    },
+    "continuationContract": {
+      "hardConstraints": [
+        {
+          "id": "hc-third-person-past",
+          "statement": "保持第三人称、以 Eva 为中心、一般过去时叙述。",
+          "evidence": [
+            {"source": "material", "excerpt": "Feeling desperate, Eva started using a mind trick on herself."}
+          ]
+        },
+        {
+          "id": "hc-finish-the-mile",
+          "statement": "Eva 必须跑到了终点并得到教练的“Nice work!”，且她对此感到意外。",
+          "evidence": [
+            {"source": "paragraph1Starter", "excerpt": "When Coach Pitt said “Nice work!” to her at the finish line, Eva was surprised."}
+          ]
+        },
+        {
+          "id": "hc-same-trick-for-building",
+          "statement": "第二段要把跑步时用的同一个方法用于应对教学楼找路问题。",
+          "evidence": [
+            {"source": "paragraph2Starter", "excerpt": "Eva decided to use the same trick to deal with the school building."}
+          ]
+        },
+        {
+          "id": "hc-two-paragraphs",
+          "statement": "续写两段，与原文构成完整短文。",
+          "evidence": [
+            {"source": "instruction", "excerpt": "续写两段，使之构成一篇完整的短文"}
+          ]
+        }
+      ],
+      "softAffordances": [
+        {
+          "statement": "第一段可用“并非最后一名”来解释她的惊讶，因为她起跑前就认定自己会垫底，而原文已显示有人落在后面。",
+          "evidence": [
+            {"source": "material", "excerpt": "I’ll come in last for sure."},
+            {"source": "material", "excerpt": "others actually fell behind"}
+          ]
+        },
+        {
+          "statement": "第二段可借图书馆、食堂、体育馆这些她回避过的地方作为一个个小目标。",
+          "evidence": [
+            {"source": "material", "excerpt": "Somewhere in the building, there was also a library, a cafeteria and a gym."}
+          ]
+        }
+      ],
+      "openChoices": [
+        "Eva 的具体名次与成绩",
+        "是否与教练或同学有简短对话",
+        "她用什么具体方式记路（画图、标记、逐层探索等）",
+        "掌握找路所用的时间",
+        "结尾是否出现帮助他人等后续场景"
+      ],
+      "forbiddenContradictions": [
+        {
+          "id": "fc-no-quit",
+          "statement": "不能写 Eva 中途放弃或没跑到终点，否则与终点受夸奖矛盾。",
+          "evidence": [
+            {"source": "paragraph1Starter", "excerpt": "at the finish line"}
+          ]
+        },
+        {
+          "id": "fc-no-new-method",
+          "statement": "第二段不能用与跑步无关的新办法（如完全靠别人带路）替代“同一个把戏”来解决找路问题。",
+          "evidence": [
+            {"source": "paragraph2Starter", "excerpt": "the same trick"}
+          ]
+        },
+        {
+          "id": "fc-no-instant-memory",
+          "statement": "不能写 Eva 突然一下子记住了整栋楼，这与她方向感差、整体记不住的设定相矛盾。",
+          "evidence": [
+            {"source": "material", "excerpt": "Having a poor sense of direction, Eva found it impossible to get around in such a huge building."}
+          ]
+        }
+      ],
+      "paragraphs": [
+        {
+          "paragraphIndex": 1,
+          "entryState": {
+            "statement": "Eva 已经到达终点，教练对她说“Nice work!”，她感到意外。",
+            "evidence": [
+              {"source": "paragraph1Starter", "excerpt": "When Coach Pitt said “Nice work!” to her at the finish line, Eva was surprised."}
+            ]
+          },
+          "starterFunction": {
+            "statement": "收束跑步事件，引出“意外”：本段要交代她为何意外，并让她意识到小目标法起了作用。",
+            "evidence": [
+              {"source": "paragraph1Starter", "excerpt": "Eva was surprised"}
+            ]
+          },
+          "requiredMoves": [
+            {
+              "id": "p1-move-explain-surprise",
+              "statement": "交代 Eva 惊讶的原因，与她赛前“必然垫底、跑不完”的预期形成对照。",
+              "evidence": [
+                {"source": "paragraph1Starter", "excerpt": "Eva was surprised"},
+                {"source": "material", "excerpt": "I’ll come in last for sure."}
+              ]
+            }
+          ],
+          "requiredExitState": [
+            {
+              "id": "p1-exit-trick-recognized",
+              "statement": "第一段结束时，Eva 已意识到正是这个把一英里拆成小目标的把戏帮她跑完，因为第二段开头直接称其为“the same trick”。",
+              "evidence": [
+                {"source": "paragraph2Starter", "excerpt": "the same trick"},
+                {"source": "material", "excerpt": "Eva started using a mind trick on herself"}
+              ]
+            },
+            {
+              "id": "p1-exit-building-in-mind",
+              "statement": "第一段结尾应让教学楼问题重新回到她的考虑中，第二段“决定”才有承接；但不能提前写她已经在楼里实践。",
+              "evidence": [
+                {"source": "paragraph2Starter", "excerpt": "Eva decided to use the same trick to deal with the school building."}
+              ]
+            }
+          ],
+          "supportedOptions": [
+            {
+              "statement": "可写她回头看到还有同学在后面，说明她并非最后一名。",
+              "evidence": [
+                {"source": "material", "excerpt": "others actually fell behind"}
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphIndex": 2,
+          "entryState": {
+            "statement": "Eva 决定把同一个小目标法用于教学楼。",
+            "evidence": [
+              {"source": "paragraph2Starter", "excerpt": "Eva decided to use the same trick to deal with the school building."}
+            ]
+          },
+          "starterFunction": {
+            "statement": "把方法从跑道迁移到教学楼，本段要写出她如何具体执行以及结果。",
+            "evidence": [
+              {"source": "paragraph2Starter", "excerpt": "deal with the school building"}
+            ]
+          },
+          "requiredMoves": [
+            {
+              "id": "p2-move-apply-step-by-step",
+              "statement": "写出 Eva 把大楼拆成一个个小部分、逐步熟悉的具体行动。",
+              "evidence": [
+                {"source": "paragraph2Starter", "excerpt": "the same trick"},
+                {"source": "material", "excerpt": "One lap turned into two, then three, then four."}
+              ]
+            }
+          ],
+          "requiredExitState": [
+            {
+              "id": "p2-exit-can-find-way",
+              "statement": "Eva 不再回避大楼，能在楼里找到路，开学时的找路难题得到解决。",
+              "evidence": [
+                {"source": "material", "excerpt": "One of the major headaches for her was finding her way in the huge school building."}
+              ]
+            }
+          ],
+          "supportedOptions": [
+            {
+              "statement": "可让她逐个找到原文提到的图书馆、食堂或体育馆。",
+              "evidence": [
+                {"source": "material", "excerpt": "a library, a cafeteria and a gym"}
+              ]
+            }
+          ]
+        }
+      ],
+      "closureRequirements": [
+        {
+          "id": "close-building-solved",
+          "statement": "结尾要回收找路问题，让 Eva 从“假装其余地方不存在”转为能在楼里自如行走，且这一结果来自她自己的逐步行动。",
+          "evidence": [
+            {"source": "material", "excerpt": "pretend that the rest of the place didn’t exist"},
+            {"source": "paragraph2Starter", "excerpt": "Eva decided to use the same trick"}
+          ]
+        }
+      ]
+    },
+    "developmentPlan": {
+      "selectedRoute": "本范文选择：第一段让 Eva 回头发现自己并非最后一名、而且跑完了全程，由此明白是“拆成小目标”帮了她，走回大楼时想起那些走廊；第二段让她一天探索一层、一次找一个地点并画进笔记本，两周后能自如走动，最后用为新生带路收束。",
+      "routeRationale": [
+        {
+          "statement": "她赛前认定自己会最后一名，所以“并非最后一名、还跑完了”最直接地解释了第一段的“surprised”。",
+          "evidence": [
+            {"source": "material", "excerpt": "I’ll come in last for sure."},
+            {"source": "paragraph1Starter", "excerpt": "Eva was surprised"}
+          ]
+        },
+        {
+          "statement": "因为第二段开头说“the same trick”，第一段必须先让她认出这个方法；把橡树影子和弯道再提一次，正好说明方法是什么。",
+          "evidence": [
+            {"source": "paragraph2Starter", "excerpt": "the same trick"},
+            {"source": "material", "excerpt": "she focused on reaching the shadow cast on the track by an oak tree up ahead"}
+          ]
+        },
+        {
+          "statement": "原文列出的图书馆、食堂、体育馆是她回避的地方，逐个找到它们就是把跑道上的“一个个小目标”搬进大楼。",
+          "evidence": [
+            {"source": "material", "excerpt": "Somewhere in the building, there was also a library, a cafeteria and a gym."}
+          ]
+        }
+      ],
+      "paragraphs": [
+        {
+          "paragraphIndex": 1,
+          "cause": "教练在终点夸她，而她原以为自己会垫底。",
+          "action": "她回头看到还有同学在后面跑，意识到自己不仅没垫底，还一口气跑完了一英里；她明白一英里并没有变短，是她把它拆成了橡树影子、弯道这样的小段。",
+          "result": "可怕的任务变得可以完成，她对这个方法有了信心。",
+          "sourceEvidence": [
+            {"source": "material", "excerpt": "others actually fell behind"},
+            {"source": "material", "excerpt": "Then she concentrated on jogging to the spot where the trace curved (拐弯) ."}
+          ],
+          "cluePayoffs": [
+            {
+              "clue": {"source": "material", "excerpt": "she focused on reaching the shadow cast on the track by an oak tree up ahead"},
+              "payoff": "橡树影子和弯道被重新提起，作为她总结出“拆分小目标”的具体依据。"
+            }
+          ],
+          "bridge": "走回那栋大楼时，她想起里面等着她的无数走廊，把找路问题重新带回她的视线，为第二段的决定做铺垫。",
+          "emotionChanges": [
+            {
+              "trigger": "教练的夸奖和回头看到身后的同学",
+              "from": "绝望、认定会垫底",
+              "to": "意外，并对自己的方法有了把握",
+              "visibleAction": "她喘着气转身回望，然后走回教学楼"
+            }
+          ]
+        },
+        {
+          "paragraphIndex": 2,
+          "cause": "跑步证明拆分小目标有效，而找路难题仍未解决。",
+          "action": "她不再试图一次记住六层楼，而是先沿一条走廊找到食堂、再找到体育馆，第二天去二楼找到图书馆，每找到一处就画进笔记本里的简图。",
+          "result": "两周后走廊不再像迷宫，她不用问路就能从教室走到实验室。",
+          "sourceEvidence": [
+            {"source": "material", "excerpt": "All the different hallways and rooms were too much to think about, let alone commit to memory."},
+            {"source": "material", "excerpt": "a library, a cafeteria and a gym"}
+          ],
+          "cluePayoffs": [
+            {
+              "clue": {"source": "material", "excerpt": "pretend that the rest of the place didn’t exist"},
+              "payoff": "她曾假装不存在的食堂、体育馆、图书馆被逐个找到，回避变成了主动探索。"
+            }
+          ],
+          "ending": "一名迷路的新生向她问图书馆怎么走，Eva 笑着带她过去，“one hallway at a time”呼应她一步步解决问题的方法，不另加说教。",
+          "emotionChanges": [
+            {
+              "trigger": "逐个找到原本回避的地点",
+              "from": "被大楼压得喘不过气",
+              "to": "从容自信",
+              "visibleAction": "她不用问路就能走到实验室，并笑着为新生带路"
+            }
+          ]
+        }
+      ],
+      "alternatives": [
+        "第二段也可以只写一天之内的探索过程，以她第一次独立找到图书馆收尾。"
+      ],
+      "qualityRisks": [
+        "第一段若直接写她去楼里探路，会提前占用第二段的主要内容。",
+        "结尾容易拔高成“人生道理”口号，应让行动本身体现方法。"
+      ]
+    }
+  }
+}

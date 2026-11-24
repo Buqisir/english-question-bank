@@ -98,3 +98,20 @@ Direct speech fell from 15–32% in round 1 to single figures. The advanced
 essays now run longer per sentence than the reference teacher essays (13.0–15.5
 against 8.6–12.0), likely because reported speech folds lines into longer
 sentences. Not a failure; worth watching in the Owner's read.
+
+## Round 2 result (Owner voted 2026-11-24)
+
+Outputs are in `round2/` (`key.json` holds the A/B mapping). All four pairs
+happened to draw V2 as A.
+
+| paper | source quoted | V2 new words | V3 standard new words | V2 quoted | V3 quoted | Owner's pick |
+|---|---|---|---|---|---|---|
+| paper-2022-i | 8% | 186 | 193 | 13% | 5% | V3 |
+| paper-2023-i | 8% | 205 | 208 | 9% | 2% | V3 |
+| paper-zj-2024-jan | 4% | 197 | 198 | 1% | 4% | V2 |
+| paper-mock-sz-2026-m1 | 10% | 209 | 201 | 0% | 8% | V2 |
+
+2 to 2. No dimension boxes or notes were filled in, so the reasons are not
+recorded. The advanced essay was judged worth its extra words on all five
+papers where that question was answered (2024-i and 2025-i left blank). The
+direct-speech question was not answered.

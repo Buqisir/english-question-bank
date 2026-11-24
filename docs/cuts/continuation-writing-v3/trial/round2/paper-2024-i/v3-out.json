@@ -1,0 +1,68 @@
+{
+  "taskType": "continuation",
+  "blocked": null,
+  "reading": {
+    "questions": [
+      { "question": "原文停在哪里？还有什么问题没解决？", "answer": "停在“我”跑到取款机前，发现机器坏了。车费付不了，大巴队伍越来越短，末班车快开了。没解决的是两件事：Gunter 的车费怎么办，“我”能不能赶上车。" },
+      { "question": "Gunter 是个什么样的人？从哪里看出来？", "answer": "他不认识车站也没有甩手不管，而是打电话找朋友问路；刷卡失败后，是他主动指给“我”看取款机。他一直在想办法帮一个陌生人，所以让他想出办法、先放“我”走，是合乎性格的。" },
+      { "question": "第二段首句“as promised”说明了什么？", "answer": "第一段里“我”一定对 Gunter 许下了“回到维也纳就给你打电话”的承诺，而且“我”离开维也纳去了布拉格，四天后又回来。所以第一段必须写到“我”上了车、留下了联系方式。" }
+    ],
+    "sourceLinks": [
+      { "sourceQuote": "I had zero cash in my wallet", "use": "结尾可以回到钱包：如今钱包里总放着现金，让开头的窘境在一个物件上收住。" },
+      { "sourceQuote": "rang up a friend", "use": "还钱时可以多给一点，算作那通长电话的钱，让原文的细节在续写里再起一次作用。" },
+      { "sourceQuote": "I saw the bus queue thinning out", "use": "第一段开头让 Gunter 看一眼只剩几个人的队伍，这就是他当场做决定的触发点。" }
+    ]
+  },
+  "taskCard": {
+    "taskRequires": [
+      "第一段要接住“取款机坏了”这个坏消息，解决车费问题：Gunter 必须让“我”先走、以后再付。",
+      "第一段结束时“我”必须已经许诺回维也纳后给 Gunter 打电话，并且拿到了他的号码。",
+      "第一段结束时“我”要赶上去布拉格的末班车，这样才有“四天后回到维也纳”。",
+      "第二段要兑现承诺：打电话、把车费还给 Gunter。"
+    ],
+    "thisEssayChooses": "本文选择让 Gunter 撕下一页纸写号码、说一句“以后再付”；还钱时多给一点算电话费，再带一盒布拉格巧克力；用 Gunter 转述“很多人说以后付，你是第一个真打来的”点出信任被兑现；结尾落在钱包里的那页纸和现金上。可以换的：号码写在什么纸上、在哪里见面、送什么小礼物、Gunter 回应的具体内容，只要车费被还清、信任被回应即可。"
+  },
+  "standard": {
+    "essay": "I ran back to Gunter and told him the bad news. For a moment he said nothing. He looked at the bus, where only a few people were left in the queue. Then he tore a page from a small notebook, wrote down his phone number and pushed it into my hand. \"Go,\" he said. \"You can pay me when you come back.\" I could hardly believe it. He did not even know my name. I thanked him again and again and promised to call him as soon as I returned to Vienna. Then I grabbed my bag and ran for the bus. I was the last passenger to get on.\n\nFour days later, when I was back in Vienna, I called Gunter as promised. He sounded surprised, and then he laughed. We met outside the same bus station that afternoon. I handed him the fare, plus a little extra for the long phone call to his friend, and a box of chocolates from Prague. He tried to give the extra money back, but I would not take it. He told me that many passengers had promised to pay him later, but I was the first one who had really called. I still keep the page with his number in my wallet, which now always has some cash in it.",
+    "notes": [
+      {
+        "paragraph": 1,
+        "role": "解决车费难题，让“我”赶上车，并许下第二段要兑现的承诺。",
+        "items": [
+          { "quote": "He looked at the bus, where only a few people were left in the queue.", "explain": "Gunter 的决定需要一个触发点。他看到队伍快没了，才当场决定放“我”走，因果不跳步，也接上了原文的 queue thinning out。" },
+          { "quote": "Then he tore a page from a small notebook, wrote down his phone number and pushed it into my hand.", "explain": "用三个连续的具体动作代替“他很善良”这种标签；这页纸同时是第二段打电话的前提，结尾还会再用到。" },
+          { "quote": "He did not even know my name.", "explain": "一句短句点出这份信任有多难得，不用写“我很感动”，读者自己就明白了。" },
+          { "quote": "promised to call him as soon as I returned to Vienna", "explain": "把第二段首句里的 as promised 提前埋好，两段接得上。" }
+        ]
+      },
+      {
+        "paragraph": 2,
+        "role": "兑现承诺、还清车费，让 Gunter 的信任得到回应，并收住原文的“没现金”问题。",
+        "items": [
+          { "quote": "plus a little extra for the long phone call to his friend", "explain": "借用原文里那通“像一个世纪那么长”的电话，让旧细节起新作用，比泛泛说“多给了一些钱”更有来由。" },
+          { "quote": "He told me that many passengers had promised to pay him later, but I was the first one who had really called.", "explain": "原文对话很少，这里用转述交代 Gunter 的话，口吻和原文一致；内容说明“我”的守信对他意味着什么，意义点到为止。" },
+          { "quote": "I still keep the page with his number in my wallet, which now always has some cash in it.", "explain": "结尾落在两个物件上：那页纸和钱包。钱包里有了现金，呼应原文的 zero cash，不需要再贴一句大道理。" }
+        ]
+      }
+    ],
+    "expressions": [
+      { "expression": "pushed it into my hand", "function": "写 Gunter 把号码塞给“我”，push 带出他不容推辞、催“我”快走的急迫。" },
+      { "expression": "I could hardly believe it.", "function": "用一句短话写出“我”对陌生人信任的意外，比堆砌形容词更自然。" },
+      { "expression": "plus a little extra for ...", "function": "还钱时说明多给的钱是为了什么，让感谢落到具体的事上。" }
+    ],
+    "pitfalls": [
+      { "pitfall": "让“我”从路人那里借到钱，或突然找到另一台取款机，当场付清车费。", "why": "那样第二段“回维也纳给 Gunter 打电话”就失去了理由；as promised 说明车费的事要留到四天后。" },
+      { "pitfall": "第一段大段写“我”有多绝望、多感动，或写满对话。", "why": "情绪本身不推动情节，原文也只有一两句直接引语；词数应该用在 Gunter 想办法、“我”赶车这些事上。" },
+      { "pitfall": "结尾写“This experience taught me that kindness is everywhere.”之类的话。", "why": "这句话放在任何故事后面都成立，只占词数；应落在还钱、那页纸、钱包这些具体东西上。" }
+    ]
+  },
+  "advanced": {
+    "essay": "I ran back to Gunter and told him the bad news. He drummed his fingers on the steering wheel and glanced at the bus, where only a handful of passengers were still shuffling towards the door. Then he tore a corner off an old receipt, scribbled his number on it and pressed it into my palm. \"Go,\" he said. \"Pay me when you come back.\" He knew nothing about me except that I was going to Prague and had no cash. I could have walked off with his fare and he would never have seen me again. I stammered my thanks and promised to ring him the moment I was back in Vienna. Then I grabbed my suitcase and sprinted for the bus. I was the last one up the steps. As we pulled out, I looked back through the rain-streaked window and saw him give me a little wave.\n\nFour days later, when I was back in Vienna, I called Gunter as promised. There was a pause on the line, then a burst of laughter. He admitted he had never expected to hear from me again. That afternoon he picked me up outside my hotel, and I counted the fare into his hand, along with a bit extra for the phone call that had saved my evening and a box of chocolates from Prague. He tried to push the extra notes back, but I folded his fingers over them. His friend on the phone, it turned out, had teased him about not knowing the station. When we pulled up at the airport, he reached over and switched off the meter before I could look at it. I still keep that scrap of receipt in my wallet, and there is always cash beside it now.",
+    "beyondStandard": [
+      { "quote": "He drummed his fingers on the steering wheel and glanced at the bus, where only a handful of passengers were still shuffling towards the door.", "explain": "标准版只说“他看了看大巴”；这里用 drummed his fingers 写出他在掂量，shuffling towards the door 让快开走的队伍有了画面，更具体也更紧。" },
+      { "quote": "I could have walked off with his fare and he would never have seen me again.", "explain": "用虚拟语气说清 Gunter 冒了什么风险，比 He did not even know my name 多交代了一层，又和原文第一人称的叙述口吻一致。" },
+      { "quote": "I folded his fingers over them", "explain": "标准版说 I would not take it；这里用一个动作写“坚持要他收下”，地道又不用对话。" },
+      { "quote": "he reached over and switched off the meter before I could look at it", "explain": "Gunter 的回应也落在动作上：悄悄关掉计价器，把这段关系写成双向的善意，比直接说“他没收我钱”更含蓄。" }
+    ]
+  }
+}

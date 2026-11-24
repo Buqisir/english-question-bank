@@ -1,0 +1,18 @@
+{
+ "paper-2022-i": {
+  "A": "v2",
+  "B": "v3-standard"
+ },
+ "paper-2023-i": {
+  "A": "v2",
+  "B": "v3-standard"
+ },
+ "paper-zj-2024-jan": {
+  "A": "v2",
+  "B": "v3-standard"
+ },
+ "paper-mock-sz-2026-m1": {
+  "A": "v2",
+  "B": "v3-standard"
+ }
+}

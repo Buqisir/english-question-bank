@@ -1,0 +1,480 @@
+{
+  "taskType": "continuation",
+  "modelAnswer": "We sat down next to each other, but David wouldn't look at me. He kept staring at his shoes. \"The kids from other schools might laugh at me,\" he whispered at last. I didn't argue. Instead, I reminded him of every practice he had never missed and every run he had finished, however long it took. \"You don't run to beat anyone, David. You run to finish, and you always do.\" He was silent for a long moment. Then he lifted his head. \"I want to run,\" he said quietly but firmly.\n\nI watched as David moved up to the starting line with the other runners. When the signal sounded, the crowd rushed into the forest and soon left him far behind. I waited near the finish line. One by one, the runners came out of the trees, until only David was missing. At last, a small figure appeared at the edge of the forest, his body rocking from side to side. His teammates, who had finished long before, ran back and called out his name. Children from other schools joined in. Nobody laughed. David pushed on and crossed the finish line. When he turned to me, his big toothy smile was back. He had not won, but once again, he had finished.",
+  "continuationAnalysis": {
+    "schemaVersion": "continuation-analysis-v2",
+    "storyUnderstanding": {
+      "centralSituation": {
+        "statement": "越野赛当天，一直坚持训练的David突然决定不跑了；原因是教练担心其他学校的孩子会嘲笑他，于是把跑不跑的选择交给了他。",
+        "evidence": [
+          {"source": "material", "excerpt": "He hesitated and then said he had decided not to run."},
+          {"source": "material", "excerpt": "I was afraid that kids from other schools would laugh at him"},
+          {"source": "material", "excerpt": "I gave him the choice to run or not, and let him decide."}
+        ]
+      },
+      "sourceEndState": {
+        "statement": "原文结束时，“我”已确认David仍可以参赛，转身看见David正摇晃着身体朝“我”走来；此时他还没有改变“不跑”的决定，比赛也尚未开始。两人坐下交谈属于第一段段首的入口动作，不属于原文已发生的事。",
+        "evidence": [
+          {"source": "material", "excerpt": "After making sure that David could run if he wanted, I turned to find him coming towards me, his small body rocking from side to side as he swung his feet forward."}
+        ]
+      },
+      "narrativePerspective": {
+        "statement": "第一人称“我”（学校的特殊教育老师）叙述，一般过去时；“我”既是观察者，也是能影响David决定的人。",
+        "evidence": [
+          {"source": "material", "excerpt": "As a special education teacher at the school, I was familiar with the challenges David faced and was proud of his strong determination."}
+        ]
+      },
+      "timeAndPlaceFrame": {
+        "statement": "越野赛当天赛前热身时段，小镇附近穿过茂密常绿树林的比赛路线旁。",
+        "evidence": [
+          {"source": "material", "excerpt": "It was the day of the big cross-country run."},
+          {"source": "material", "excerpt": "Students from seven different primary schools in and around the small town were warming up and walking the route"},
+          {"source": "material", "excerpt": "through thick evergreen forest"}
+        ]
+      },
+      "characters": [
+        {
+          "name": "David",
+          "role": "十岁的越野队队员，患有影响行走和跑步的脑部疾病",
+          "establishedTraits": [
+            {
+              "statement": "做事坚持：从未缺过一次训练，每次都比别人晚很久跑完，但每次都跑完。",
+              "evidence": [
+                {"source": "material", "excerpt": "David had not missed a single practice, and although he always finished his run long after the other children, he did always finish."}
+              ]
+            },
+            {
+              "statement": "习惯尽力参与集体活动，在本校同学眼里是普通孩子。",
+              "evidence": [
+                {"source": "material", "excerpt": "He always participated to the best of his ability in whatever they were doing."},
+                {"source": "material", "excerpt": "at school his classmates thought of him as a regular kid"}
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "他为这次比赛下了很大功夫，本来想参加；现在的退缩来自教练提出的“可能被外校孩子嘲笑”这一顾虑，而不是不想跑。",
+              "evidence": [
+                {"source": "material", "excerpt": "He had worked so hard for this event!"},
+                {"source": "material", "excerpt": "I was afraid that kids from other schools would laugh at him"}
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "独自站在一边，平时的大笑脸不见了，已说自己决定不跑，正朝“我”走来。",
+            "evidence": [
+              {"source": "material", "excerpt": "His usual big toothy smile was absent today."},
+              {"source": "material", "excerpt": "who was standing by himself off to the side by a fence"}
+            ]
+          }
+        },
+        {
+          "name": "我（特殊教育老师）",
+          "role": "叙述者，了解David的困难并为他的坚持骄傲",
+          "establishedTraits": [
+            {
+              "statement": "关心David且行动迅速：发现他不跑后立刻去找教练问原因，并确认他仍有参赛资格。",
+              "evidence": [
+                {"source": "material", "excerpt": "I quickly searched the crowd for the school"},
+                {"source": "material", "excerpt": "After making sure that David could run if he wanted"}
+              ]
+            },
+            {
+              "statement": "能克制情绪、体谅他人：对教练的做法懊恼，但压住了，并理解教练是好意。",
+              "evidence": [
+                {"source": "material", "excerpt": "I bit back my frustration"},
+                {"source": "material", "excerpt": "I knew the coach meant well"}
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "希望David不因别人可能的嘲笑而放弃他努力准备的比赛。",
+              "evidence": [
+                {"source": "material", "excerpt": "What was wrong? He had worked so hard for this event!"}
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "已扫清参赛障碍，正准备和David谈话。",
+            "evidence": [
+              {"source": "material", "excerpt": "I turned to find him coming towards me"}
+            ]
+          }
+        },
+        {
+          "name": "教练",
+          "role": "学校越野队教练",
+          "establishedTraits": [
+            {
+              "statement": "出于保护David的好意，却把担心传给了他；说明时显得不自在。",
+              "evidence": [
+                {"source": "material", "excerpt": "he explained uncomfortably"},
+                {"source": "material", "excerpt": "he thought he was doing the right thing"}
+              ]
+            }
+          ],
+          "motivations": [
+            {
+              "statement": "怕David被外校孩子嘲笑。",
+              "evidence": [
+                {"source": "material", "excerpt": "I was afraid that kids from other schools would laugh at him"}
+              ]
+            }
+          ],
+          "currentState": {
+            "statement": "已向“我”说明原因；原文未交代他之后的态度。",
+            "evidence": [
+              {"source": "material", "excerpt": "I gave him the choice to run or not, and let him decide."}
+            ]
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "participants": ["我", "David"],
+          "currentRelation": {
+            "statement": "“我”是了解并欣赏David的老师，是他此刻主动走向的人。",
+            "evidence": [
+              {"source": "material", "excerpt": "I was familiar with the challenges David faced and was proud of his strong determination"}
+            ]
+          }
+        },
+        {
+          "participants": ["David", "本校同学"],
+          "currentRelation": {
+            "statement": "同学把他当普通孩子，不觉得他加入越野队有什么奇怪；可能嘲笑的是“外校孩子”，原文并未写到真的有人嘲笑。",
+            "evidence": [
+              {"source": "material", "excerpt": "That was why none of the children thought it unusual that David had decided to join the cross-country team."}
+            ]
+          }
+        }
+      ],
+      "causalChain": [
+        {
+          "cause": {
+            "statement": "教练担心外校孩子嘲笑David，把跑不跑交给他决定。",
+            "evidence": [
+              {"source": "material", "excerpt": "I gave him the choice to run or not, and let him decide."}
+            ]
+          },
+          "effect": {
+            "statement": "David决定不跑，独自站在一边，不再笑。",
+            "evidence": [
+              {"source": "material", "excerpt": "He hesitated and then said he had decided not to run."}
+            ]
+          }
+        },
+        {
+          "cause": {
+            "statement": "“我”得知原因后确认David仍可参赛。",
+            "evidence": [
+              {"source": "material", "excerpt": "After making sure that David could run if he wanted"}
+            ]
+          },
+          "effect": {
+            "statement": "能否参赛只取决于David自己是否改变主意，这正是续写要处理的问题。",
+            "evidence": [
+              {"source": "material", "excerpt": "and let him decide"}
+            ]
+          }
+        }
+      ],
+      "unresolvedProblem": {
+        "statement": "David因怕被嘲笑而放弃了自己努力准备的比赛；他是否重新决定参赛、比赛结果如何，原文尚未交代。",
+        "evidence": [
+          {"source": "material", "excerpt": "He hesitated and then said he had decided not to run."},
+          {"source": "material", "excerpt": "He had worked so hard for this event!"}
+        ]
+      },
+      "usableClues": [
+        {
+          "statement": "“总是很晚跑完，但总能跑完”——可用来重新定义这场比赛对David的意义：目标是跑完，而不是赢。",
+          "evidence": [
+            {"source": "material", "excerpt": "although he always finished his run long after the other children, he did always finish"}
+          ]
+        },
+        {
+          "statement": "“平时的大笑脸今天不见了”——笑容可在结尾回来，作为问题解决的可见标志。",
+          "evidence": [
+            {"source": "material", "excerpt": "His usual big toothy smile was absent today."}
+          ]
+        },
+        {
+          "statement": "身体左右摇晃的跑姿——可在比赛中再现，表现他的困难与坚持。",
+          "evidence": [
+            {"source": "material", "excerpt": "his small body rocking from side to side as he swung his feet forward"}
+          ]
+        },
+        {
+          "statement": "路线穿过茂密树林——落后的跑者会长时间看不见，适合安排等待与出现的场面。",
+          "evidence": [
+            {"source": "material", "excerpt": "through thick evergreen forest"}
+          ]
+        }
+      ],
+      "meaningDirection": {
+        "statement": "较强推断：David的价值在于坚持完成，而不是和别人比快；别人可能的嘲笑不应让他放弃。具体以何种方式体现，原文留给续写。",
+        "confidence": "stronglyInferred",
+        "evidence": [
+          {"source": "material", "excerpt": "It just took him longer"},
+          {"source": "material", "excerpt": "was proud of his strong determination"}
+        ]
+      },
+      "sourceStyle": {
+        "statement": "第一人称回忆，句子平实，叙述为主，偶有一句短对话和一句内心反问（What was wrong?），动作描写具体（身体左右摇晃），情感克制。",
+        "evidence": [
+          {"source": "material", "excerpt": "What was wrong?"},
+          {"source": "material", "excerpt": "I bit back my frustration"}
+        ]
+      }
+    },
+    "continuationContract": {
+      "hardConstraints": [
+        {
+          "id": "hc-first-person-past",
+          "statement": "保持“我”（特殊教育老师）的第一人称和一般过去时叙述。",
+          "evidence": [
+            {"source": "paragraph1Starter", "excerpt": "We sat down next to each other"},
+            {"source": "paragraph2Starter", "excerpt": "I watched as David moved up to the starting line"}
+          ]
+        },
+        {
+          "id": "hc-david-runs",
+          "statement": "David最终参加了这场比赛（第二段段首他已走上起跑线）。",
+          "evidence": [
+            {"source": "paragraph2Starter", "excerpt": "I watched as David moved up to the starting line with the other runners."}
+          ]
+        },
+        {
+          "id": "hc-condition",
+          "statement": "David的身体状况不变：他跑得慢、跑姿不同于其他孩子。",
+          "evidence": [
+            {"source": "material", "excerpt": "David had a brain disease which prevented him from walking or running like other children"}
+          ]
+        }
+      ],
+      "softAffordances": [
+        {
+          "statement": "原文支持他会落后很多但能跑完，可写他最后完成比赛。",
+          "evidence": [
+            {"source": "material", "excerpt": "he did always finish"}
+          ]
+        },
+        {
+          "statement": "本校同学把他当普通孩子，可让他们在比赛中支持他。",
+          "evidence": [
+            {"source": "material", "excerpt": "at school his classmates thought of him as a regular kid"}
+          ]
+        },
+        {
+          "statement": "笑容消失可在结尾回来，呼应问题解决。",
+          "evidence": [
+            {"source": "material", "excerpt": "His usual big toothy smile was absent today."}
+          ]
+        }
+      ],
+      "openChoices": [
+        "“我”用什么话或方式让David改变主意",
+        "David是否把害怕说出口、怎么说",
+        "比赛过程细节：何时落后、在哪里出现、有无人加油",
+        "教练、同学、外校孩子在比赛中的具体反应",
+        "结尾是否写到名次之外的其他场面"
+      ],
+      "forbiddenContradictions": [
+        {
+          "id": "fc-no-sudden-speed",
+          "statement": "不得让David突然跑得和别人一样快或赢得比赛，这与他的疾病和一贯“晚很久才跑完”相矛盾。",
+          "evidence": [
+            {"source": "material", "excerpt": "although he always finished his run long after the other children"}
+          ]
+        },
+        {
+          "id": "fc-coach-not-villain",
+          "statement": "不得把教练写成恶意阻拦者；原文明确他是好意。",
+          "evidence": [
+            {"source": "material", "excerpt": "I knew the coach meant well"}
+          ]
+        },
+        {
+          "id": "fc-no-entry-ban",
+          "statement": "不得再设置“不允许他参赛”的障碍；“我”已确认他可以跑。",
+          "evidence": [
+            {"source": "material", "excerpt": "After making sure that David could run if he wanted"}
+          ]
+        }
+      ],
+      "paragraphs": [
+        {
+          "paragraphIndex": 1,
+          "entryState": {
+            "statement": "“我”和David并排坐下，David不肯看“我”，仍处在决定不跑的退缩状态。",
+            "evidence": [
+              {"source": "paragraph1Starter", "excerpt": "We sat down next to each other, but David wouldn't look at me."}
+            ]
+          },
+          "starterFunction": {
+            "statement": "段首用“不肯看我”表明David的情绪障碍还在，本段要完成的是让他从回避到改变主意。",
+            "evidence": [
+              {"source": "paragraph1Starter", "excerpt": "but David wouldn't look at me"}
+            ]
+          },
+          "requiredMoves": [
+            {
+              "id": "p1-move-address-refusal",
+              "statement": "通过“我”与David之间的某种交流，处理他决定不跑这件事。",
+              "evidence": [
+                {"source": "paragraph1Starter", "excerpt": "We sat down next to each other"},
+                {"source": "material", "excerpt": "he had decided not to run"}
+              ]
+            }
+          ],
+          "requiredExitState": [
+            {
+              "id": "p1-exit-decides-to-run",
+              "statement": "因为第二段开头David已走上起跑线，第一段结束时他必须已决定参加比赛，且比赛尚未开始。",
+              "evidence": [
+                {"source": "paragraph2Starter", "excerpt": "I watched as David moved up to the starting line with the other runners."}
+              ]
+            }
+          ],
+          "supportedOptions": [
+            {
+              "statement": "可由David说出怕被外校孩子嘲笑，再由“我”回应。",
+              "evidence": [
+                {"source": "material", "excerpt": "I was afraid that kids from other schools would laugh at him"}
+              ]
+            },
+            {
+              "statement": "可借他“从未缺训、每次都跑完”的经历来鼓励他。",
+              "evidence": [
+                {"source": "material", "excerpt": "David had not missed a single practice"}
+              ]
+            }
+          ]
+        },
+        {
+          "paragraphIndex": 2,
+          "entryState": {
+            "statement": "David已和其他选手一起走到起跑线，“我”在旁观看。",
+            "evidence": [
+              {"source": "paragraph2Starter", "excerpt": "I watched as David moved up to the starting line with the other runners."}
+            ]
+          },
+          "starterFunction": {
+            "statement": "段首把场景推进到比赛开始前一刻，本段的任务是写比赛本身及其结果。",
+            "evidence": [
+              {"source": "paragraph2Starter", "excerpt": "moved up to the starting line"}
+            ]
+          },
+          "requiredMoves": [
+            {
+              "id": "p2-move-race",
+              "statement": "叙述David参加这场比赛的过程。",
+              "evidence": [
+                {"source": "paragraph2Starter", "excerpt": "with the other runners"}
+              ]
+            }
+          ],
+          "requiredExitState": [
+            {
+              "id": "p2-exit-outcome",
+              "statement": "交代David这次参赛的结果，回应他是否被“怕嘲笑”打败的问题。",
+              "evidence": [
+                {"source": "material", "excerpt": "He had worked so hard for this event!"}
+              ]
+            }
+          ],
+          "supportedOptions": [
+            {
+              "statement": "可写他远远落后但最终跑完。",
+              "evidence": [
+                {"source": "material", "excerpt": "he did always finish"}
+              ]
+            }
+          ]
+        }
+      ],
+      "closureRequirements": [
+        {
+          "id": "close-fear-resolved",
+          "statement": "结尾要让“因怕被嘲笑而放弃”的问题得到回应，而不是停在比赛开始。",
+          "evidence": [
+            {"source": "material", "excerpt": "I was afraid that kids from other schools would laugh at him"}
+          ]
+        }
+      ]
+    },
+    "developmentPlan": {
+      "selectedRoute": "本范文选择：第一段由David说出怕被外校孩子嘲笑，“我”用他从不缺训、每次都跑完的经历把比赛目标从“赢”改为“跑完”，他抬头说要跑；第二段写他被远远甩在后面，最后从树林里摇晃着出现，同学跑回来喊他的名字，他跑完全程，笑容回来。",
+      "routeRationale": [
+        {
+          "statement": "说服理由直接取自原文已证实的事实——他总是晚很久，但总能跑完——不需要外来帮助或新道具。",
+          "evidence": [
+            {"source": "material", "excerpt": "although he always finished his run long after the other children, he did always finish"}
+          ]
+        },
+        {
+          "statement": "同学的支持有原文依据：本校孩子把他当普通孩子；这让“被嘲笑”的担心在比赛中被事实回答。",
+          "evidence": [
+            {"source": "material", "excerpt": "at school his classmates thought of him as a regular kid"}
+          ]
+        }
+      ],
+      "paragraphs": [
+        {
+          "paragraphIndex": 1,
+          "cause": "David不肯看“我”，因为他怕外校孩子嘲笑而决定不跑。",
+          "action": "本范文选择让David低声说出担心；“我”不争辩，而是提起他从没缺过的训练和每次都跑完的经历，告诉他跑步不是为了赢，而是为了跑完。",
+          "result": "David沉默片刻后抬起头，平静而坚定地说他要跑。",
+          "sourceEvidence": [
+            {"source": "material", "excerpt": "David had not missed a single practice"},
+            {"source": "paragraph1Starter", "excerpt": "but David wouldn't look at me"}
+          ],
+          "cluePayoffs": [
+            {
+              "clue": {"source": "material", "excerpt": "he did always finish"},
+              "payoff": "把“总能跑完”变成说服David的理由，改变他对这场比赛目标的理解。"
+            }
+          ],
+          "bridge": "他说出“我要跑”就停住，比赛还没开始，正好接上第二段他走向起跑线。",
+          "emotionChanges": [
+            {
+              "trigger": "“我”提醒他每次都跑完，并说跑步是为了跑完而非打败别人",
+              "from": "害怕、回避",
+              "to": "重新下定决心",
+              "visibleAction": "从盯着鞋子到抬起头，说出“I want to run”"
+            }
+          ]
+        },
+        {
+          "paragraphIndex": 2,
+          "cause": "David已决定参赛并站上起跑线，但他的身体决定了他会远远落后。",
+          "action": "比赛开始后他很快被甩开；其他人陆续跑出树林，最后他摇晃着身子出现，先跑完的队友跑回来喊他的名字，外校孩子也跟着加油，他坚持冲过终点。",
+          "result": "没人嘲笑他；他没有赢，但又一次跑完了，平时的大笑脸回来了。",
+          "sourceEvidence": [
+            {"source": "material", "excerpt": "his small body rocking from side to side"},
+            {"source": "material", "excerpt": "His usual big toothy smile was absent today."}
+          ],
+          "cluePayoffs": [
+            {
+              "clue": {"source": "material", "excerpt": "I was afraid that kids from other schools would laugh at him"},
+              "payoff": "外校孩子不是嘲笑而是加油，用事实回应了引起退缩的担心。"
+            },
+            {
+              "clue": {"source": "material", "excerpt": "His usual big toothy smile was absent today."},
+              "payoff": "笑容在终点回来，表明他的退缩已经解决。"
+            }
+          ],
+          "ending": "He had not won, but once again, he had finished. 结尾落在“跑完”而非“获胜”，与原文的“总能跑完”首尾呼应，不额外喊口号。"
+        }
+      ],
+      "alternatives": [
+        "也可让教练或本校同学过来一起劝David，只要第一段结束时他已决定参赛。"
+      ],
+      "qualityRisks": [
+        "不要让David突然跑得很快甚至获胜；也不要让全场突然起立、流泪拥抱等过度煽情的场面压过事件本身。"
+      ]
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "taskType": "continuation",
+  "blocked": null,
+  "reading": {
+    "questions": [
+      {
+        "question": "原文停在哪里？还有什么问题没解决？",
+        "answer": "原文停在第二天早上：Megan 问 Liam 想不想做件很酷的事，Liam 没开口，但眼睛已经亮了。项目还只是一个想法，花园还堆着旧桌椅，Liam 在安静的阅览室里坐不住、弄出声响的问题也还没解决。"
+      },
+      {
+        "question": "Liam 是个什么样的孩子？他想要什么？",
+        "answer": "他不是捣乱，而是精力多、好奇心强：看恐龙书会忍不住喊“Whoa!”，看几分钟又换去看火山、火箭。他真心喜欢图书馆，被提醒时会脸红道歉。所以续写要让他的精力“有地方用”，而不是把他变成另一个人。"
+      },
+      {
+        "question": "Megan 的办法到底要解决什么？",
+        "answer": "原文已经说清：不是让 Liam 安静，而是给他的精力和对书的热爱一个正面的舞台，同时用上后花园。结尾要同时落到两件事上：Liam 在花园里发光，阅览室也恢复了安静。"
+      }
+    ],
+    "sourceLinks": [
+      {
+        "sourceQuote": "some old chairs, folding tables, all piled up gathering dust under a large tree",
+        "use": "第一段“忙项目”最自然的具体内容就是把这些旧桌椅搬出来、擦掉灰，让原文的伏笔真正派上用场，也让 Liam 的精力第一次被用在正事上。"
+      },
+      {
+        "sourceQuote": "More Lively Reading Activities? Book sharing? Acting?",
+        "use": "这张便条直接给出活动内容：图书分享和表演。续写里让 Liam 选书、问能不能演出来，活动就有了来历，不是凭空编的。"
+      },
+      {
+        "sourceQuote": "he let out a loud “Whoa!” when he saw a giant dinosaur filled the page",
+        "use": "原文里惹麻烦的“恐龙书”和“大声喊”，在花园里正好变成优点：让 Liam 拿恐龙书开场、演恐龙，前后呼应，问题变成了解决办法。"
+      }
+    ]
+  },
+  "taskCard": {
+    "taskRequires": [
+      "第一段写准备过程：第二段首句说开幕当天他们已经在花园里等，所以第一段结束时花园必须已经收拾好、活动已经定好、开幕的消息已经发出去。",
+      "第一段不能写开幕当天的事，孩子来没来、活动成不成功都留给第二段。",
+      "必须接上原文事实：花园里堆着旧椅子和折叠桌，活动是面向小读者的“Garden Reading Corner”，便条提到图书分享和表演，Liam 精力旺盛、爱恐龙书。",
+      "第二段首句里的 nervously 要有着落：先写担心没人来，再写转机，最后收住原文的问题。"
+    ],
+    "thisEssayChooses": "本文选的路线是：第一段两人清理花园、挂牌子、定下由 Liam 用恐龙书开场并表演，再贴海报；第二段先冷场、再有孩子来，Liam 演恐龙带动全场，最后回到馆内，他能安静坐一小时为下周做准备。可以换的部分很多：开幕日期、海报还是口头邀请、来几个孩子、Liam 演的是恐龙还是火山喷发、管理员是否出场，都只是本文的选择；换成别的同样合理的细节也可以，只要因果连得上、结尾回到“Liam 和安静的图书馆”。"
+  },
+  "standard": {
+    "essay": "For the next week, Megan and Liam busied themselves with the project. They pulled the old chairs and folding tables out from under the large tree and wiped off the dust. Liam, who could never sit still, was perfect for the job. He carried chairs, swept up leaves and hung up a sign: “Garden Reading Corner.” For the first meeting, Liam chose his favorite dinosaur book. “Can I act it out?” he asked. Megan laughed and said yes. Out here, a loud “Whoa!” would bother no one. Then they put up posters by the front desk, inviting young readers to come on Saturday morning.\n\nOn the opening day of the project, they waited nervously in the garden. Ten o’clock came, but the chairs were still empty. Liam kept walking to the gate and back. Then a little girl appeared, holding her mother’s hand, and three more children followed. Liam took a deep breath and opened his book. After the first page, he jumped up and stamped across the grass like a dinosaur. The children screamed with laughter and were soon roaring and stamping with him. Inside, the readers turned their pages in peace. That afternoon, Liam came back into the library, chose a book about volcanoes and sat still at a table for a whole hour. “I need to get ready for next week,” he whispered.",
+    "notes": [
+      {
+        "paragraph": 1,
+        "role": "把“忙项目”写成看得见的几件事：收拾花园、定活动、发通知；到段末，第二段“开幕当天在花园等”所需的条件全部成立。",
+        "items": [
+          {
+            "quote": "They pulled the old chairs and folding tables out from under the large tree and wiped off the dust.",
+            "explain": "直接用回原文埋下的旧桌椅和大树。学生最容易把“忙”写成一句 they worked hard；这里换成具体动作，读者一眼看到他们在忙什么。"
+          },
+          {
+            "quote": "Liam, who could never sit still, was perfect for the job.",
+            "explain": "这是全文的关键一转：原文的缺点“坐不住”在搬椅子时成了优点。用定语从句点回原文，不贴“他很勤劳”之类的标签。"
+          },
+          {
+            "quote": "Out here, a loud “Whoa!” would bother no one.",
+            "explain": "借原文那声“Whoa!”说明为什么花园能解决问题：同样的声音，换了地方就不再打扰人。一句话交代了因果。"
+          },
+          {
+            "quote": "Then they put up posters by the front desk, inviting young readers to come on Saturday morning.",
+            "explain": "第一段的收尾动作：通知发出去了，日期定了。这样第二段一开头就可以直接进入开幕日，不跳步。"
+          }
+        ]
+      },
+      {
+        "paragraph": 2,
+        "role": "先写紧张和冷场，再由孩子到来触发转机，让 Liam 用他的精力带动大家；最后回到馆内，收住原文“Liam 打扰别人”的问题。",
+        "items": [
+          {
+            "quote": "Ten o’clock came, but the chairs were still empty.",
+            "explain": "用空椅子这个看得见的东西写出 nervously 的原因，比写 they felt very worried 更具体，也给后面的转机留出落差。"
+          },
+          {
+            "quote": "After the first page, he jumped up and stamped across the grass like a dinosaur.",
+            "explain": "把便条上的 Acting 和原文的恐龙书合在一起，Liam 坐不住的特点在这里变成了表演天赋。人物还是原来那个人，只是用对了地方。"
+          },
+          {
+            "quote": "Inside, the readers turned their pages in peace.",
+            "explain": "一句话把镜头拉回阅览室，呼应开头 quiet whispers and turning pages，说明 Megan 守护安静的责任也完成了。"
+          },
+          {
+            "quote": "chose a book about volcanoes and sat still at a table for a whole hour",
+            "explain": "结尾落在一个具体动作上：曾经坐不住的 Liam 安静地坐了一小时，因为他有了要准备的事。问题收住了，不用再加一句空泛的道理。"
+          }
+        ]
+      }
+    ],
+    "expressions": [
+      {
+        "expression": "wipe off the dust / pull ... out from under the large tree",
+        "function": "把原文“堆着落灰的旧桌椅”变成动作，写出第一段“忙项目”的具体内容。"
+      },
+      {
+        "expression": "stamp across the grass like a dinosaur",
+        "function": "写 Liam 表演恐龙，stamp 比 walk 或 move 更有力量感，也合他精力旺盛的性格。"
+      },
+      {
+        "expression": "turn their pages in peace",
+        "function": "从原文 turning pages 化用而来，用一个画面说明阅览室重新安静了。"
+      }
+    ],
+    "pitfalls": [
+      {
+        "pitfall": "第一段直接写到开幕当天孩子们来了、活动很成功。",
+        "why": "第二段首句才进入开幕日，第一段提前写掉，第二段就只能重复，而且“nervously”也没了着落。"
+      },
+      {
+        "pitfall": "让 Liam 在花园里突然学会安静守规矩，或者让别的读者突然不在乎噪音。",
+        "why": "原文明确说办法“不是让他安静”，而是给他的精力一个舞台。改变人物性格或改变环境，都绕开了原文要解决的问题。"
+      },
+      {
+        "pitfall": "结尾写一句 Everyone has his own strengths 之类的感悟。",
+        "why": "这种话放在任何故事后面都成立，只占词数。用 Liam 安静读书或为下周做准备的具体动作收尾，意思已经到了。"
+      }
+    ]
+  },
+  "advanced": {
+    "essay": "For the next week, Megan and Liam busied themselves with the project. Each morning they dragged the old chairs out from under the large tree, knocked the dust off them and wiped down the folding tables. Liam, who had never managed to sit still for ten minutes, turned out to be the perfect helper. He raked up dead leaves, carried chairs two at a time and painted “Garden Reading Corner” on a board in bright green letters. Megan wanted book sharing; Liam wanted acting. They settled on both. He would open with his dinosaur book, and this time nobody would tell him to keep his voice down. By Friday, their homemade posters hung beside the front desk, inviting young readers to the garden on Saturday morning.\n\nOn the opening day of the project, they waited nervously in the garden. Ten o’clock came and went, and the chairs stayed empty. Liam paced from the tree to the gate and back, the dinosaur book pressed against his chest. Megan straightened the same pile of picture books three times. Then the gate creaked. A small girl peeped in, holding her mother’s hand, and behind them came a boy with his little brother. Liam swallowed hard and opened his book. His voice shook at first, but when he reached the giant dinosaur, he leaped up and stamped across the grass, roaring. The children shrieked with laughter, and within minutes they were all stamping and roaring after him. Inside, behind the closed windows, the readers turned their pages in peace. Late that afternoon, Megan found Liam back inside, bent over a book about volcanoes. He hadn’t left his chair for nearly an hour. As she passed, he looked up and whispered, “Next week, I’m doing an eruption.”",
+    "beyondStandard": [
+      {
+        "quote": "Ten o’clock came and went, and the chairs stayed empty.",
+        "explain": "came and went 是母语里写“时间过了还没动静”的地道说法，比 came, but ... were still empty 更紧，也更有等待的焦躁感。"
+      },
+      {
+        "quote": "Megan straightened the same pile of picture books three times.",
+        "explain": "标准版只写了 Liam 紧张；这里给 Megan 一个无意义的重复动作，把 they waited nervously 里的“they”两个人都写到了，紧张感靠动作而不是情绪词传出来。"
+      },
+      {
+        "quote": "“Next week, I’m doing an eruption.”",
+        "explain": "接上原文他从恐龙看到火山的阅读习惯，用孩子口气的一句短话收尾：既说明他会继续来，也暗示下一次表演，比标准版的 I need to get ready 更像真人说的话。"
+      }
+    ]
+  }
+}
