@@ -76,6 +76,17 @@ function measureEssay(label, essay, range, failures, warnings) {
       break
     }
   }
+  // Principle 4: no named new characters. Capitalised words mid-sentence that
+  // the source and starters never use; days and months are not names.
+  const known = new Set(words([material, ...starters].join(' ')).map((w) => w.toLowerCase()))
+  const calendar = /^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|January|February|March|April|May|June|July|August|September|October|November|December|English|Chinese)$/
+  const names = new Set()
+  for (const m of essay.matchAll(/(?<![.!?"“]\s)(?<!^)\b([A-Z][a-z]+)\b(?!\s*\d)/gm)) {
+    const before = essay.slice(0, m.index).trimEnd()
+    if (!before || /[.!?:"“”]$/.test(before)) continue
+    if (!known.has(m[1].toLowerCase()) && !calendar.test(m[1])) names.add(m[1])
+  }
+  if (names.size) warnings.push(`${label}: possible new named character: ${[...names].join(', ')}`)
   const share = quoteShare(essay)
   // Principle 3: direct speech follows the source. A warning, not a failure.
   if (share > 2 * sourceQuoteShare + 10) {
@@ -115,7 +126,7 @@ if (flag === '--v2') {
     ['standard.expressions', output.standard.expressions], ['standard.pitfalls', output.standard.pitfalls],
     ['advanced.beyondStandard', output.advanced.beyondStandard], ['taskCard.taskRequires', output.taskCard.taskRequires],
   ]) {
-    const [lo, hi] = name === 'taskCard.taskRequires' ? [2, 4] : [2, 3]
+    const [lo, hi] = name === 'taskCard.taskRequires' ? [2, 4] : name === 'reading.questions' ? [3, 3] : [2, 3]
     if (!Array.isArray(list) || list.length < lo || list.length > hi) warnings.push(`${name} has ${list?.length} entries`)
   }
   if (report.standard.fk > sourceLevel.fk + 1.5) warnings.push(`standard FK ${report.standard.fk} is more than 1.5 above source ${sourceLevel.fk}`)
